@@ -1,0 +1,22 @@
+{
+  "review_id": "1342",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/arc-boot-from-por-recovery-1323/001",
+  "candidate_receipt_sha256": "aff208a9a024f75137604782fd5a611edc3c4881b559bc6ae89d1669507e21ed",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "source_record_sha256": "0de6e945a56ec886a92e44d4eaefe02fbca6db11f8747876e30bffb45cffce03",
+  "body_sha256": "332f4d2c825b31af327294825fa8a868ce45590f70cc53ad16989b7a9b804267",
+  "body_bytes": 74,
+  "instructions": 23,
+  "output_hashes_verified": 16,
+  "checks": [
+    "All pinned output hashes match and verify.py passes authenticated slice, caller edge, contiguous instruction decode, mapped callees, J_S delay classification and output pin checks.",
+    "Reviewed decoded delay slots for both BL.D calls, byte read/modify/write instruction order, CLRI/SYNC/SETI sequencing, exits and adjacent seam boundaries. Static fixtures remain synthetic and do not claim hardware execution.",
+    "The candidate explicitly leaves both in-record callees, raw addresses, control-register semantics and the following NOP seam unresolved; symbol label is not used as semantic proof."
+  ],
+  "limitations": [
+    "No ARC dynamic emulation or hardware observations are claimed; helper contracts, physical register meanings, runtime mapping and global code/data ownership remain unresolved.",
+    "Private candidate only; no canonical admission or C implementation."
+  ]
+}

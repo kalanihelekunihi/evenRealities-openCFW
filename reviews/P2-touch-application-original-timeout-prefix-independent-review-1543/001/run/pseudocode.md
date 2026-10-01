@@ -1,0 +1,5 @@
+# Startup with original timeout scaling
+
+The cumulative startup replay executes original 5FA4 and A6C0 for all three calibration timeout calculations. Their arguments are (0,48,5), so each budget is zero. Original 6980 returns zero even when the synthetic completion bit is ready; original 7BC0 returns status 4. This follows the calibration error path and skips the previously controlled activation-success helpers. The complete remaining controlled call order and inherited startup assertions pass, ending at 3D50. Final context byte 85 is 5 and state byte 118 is 0. Eight original 6AC0 entries occur, compared with nine in the earlier controlled-budget fixture.
+
+Original delay chain still executes 315 A324 calls and 318 total 4480 entries. Acquisition 7288 and other storage, state-two and later application boundaries remain controlled. Synthetic MMIO, controlled acquisition and external clock tables do not establish physical startup behavior. The earlier controlled-budget fixture remains distinct evidence. No canonical admission or C implementation.

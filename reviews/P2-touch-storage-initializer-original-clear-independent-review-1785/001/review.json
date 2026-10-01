@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-storage-initializer-original-clear-independent-review-1785",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "scope": {
+    "candidate": "analysis/touch-storage-initializer-original-clear-1780/001",
+    "code_span": [
+      "0x898c",
+      "0x8a34"
+    ],
+    "reviewed": "The same 168-byte / 79-instruction outer body is exercised in 48 fixtures. Its first call now executes original A9D4. Independent objdump confirms A9D4..A9E4 is eight instructions: it forms wrapped end=base+length, stores the low byte of R1 at each cursor, increments by one until cursor equals end, then BX LR. In this composition the actual arguments are context, zero, and 32, so the result is exactly a 32-byte zero fill. The isolated replay reproduces all fixture rows, context bytes, call sequence, return, SP and stop PC."
+  },
+  "pins": {
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "candidate_receipt_sha256": "abbb87f3c27618d15bb49e199df96f0445493e8144db056488df9fd1f03bc070",
+    "body_sha256": "6f8973b6e856d54bda4d0d5b5bec1aed8368285eb4fef5f3db0ff5731e386f51",
+    "candidate_replays_sha256": "885a6d8f163481164027555ce27ee76ed06db927b70de8ea1e0baaa5d03133c7"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "The same 168-byte / 79-instruction outer body is exercised in 48 fixtures. Its first call now executes original A9D4. Independent objdump confirms A9D4..A9E4 is eight instructions: it forms wrapped end=base+length, stores the low byte of R1 at each cursor, increments by one until cursor equals end, then BX LR. In this composition the actual arguments are context, zero, and 32, so the result is exactly a 32-byte zero fill. The isolated replay reproduces all fixture rows, context bytes, call sequence, return, SP and stop PC."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "All candidate receipt file hashes and the source image hash match. An isolated replay was run from a uniquely named temporary copy; its generated replay JSON is byte-identical to the candidate's replays.json."
+    }
+  ],
+  "limitations": [
+    "Only the three provider callbacks remain controlled; the fill helper is proved here only for zero byte over 32 bytes. Other values, wraparound destinations, physical storage and concurrent behavior remain untested.",
+    "No canonical acceptance or coverage promotion is made."
+  ],
+  "checks": [
+    {
+      "command": "candidate receipt and source/input pin verification",
+      "result": "PASS"
+    },
+    {
+      "command": "independent instruction review and decode geometry",
+      "result": "PASS"
+    },
+    {
+      "command": "isolated replay of all fixtures",
+      "result": "PASS; exact replay JSON match",
+      "artifact": "isolated-replays.json"
+    }
+  ],
+  "review_artifacts": {
+    "isolated_replays_sha256": "885a6d8f163481164027555ce27ee76ed06db927b70de8ea1e0baaa5d03133c7"
+  },
+  "canonical_or_coverage_change": false
+}

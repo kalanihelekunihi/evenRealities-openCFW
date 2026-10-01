@@ -1,0 +1,21 @@
+{
+  "decoder": "GNU Binutils ARC tools 2.45.1",
+  "release": "arc-2026.03-release",
+  "source_revision": "033866bd92cfd6d45d0651da2086da14b1a0fd2a",
+  "assembler": "arc-elf32-as -mcpu=em -EL",
+  "assembler_sha256": "389ff0858265b113a07567fcfcffc50831d85fd275bc7fffba90f2cfdf2e7a0a",
+  "decoder_command": "arc-elf32-objdump -D -j .firmware -M cpu=em",
+  "objdump_sha256": "72e6b6472976159e135ea363dee4a1580b0921699ead22357e24503eddb0fdf3",
+  "body_decode": {
+    "bytes": 68,
+    "instructions": 21,
+    "contiguous": true
+  },
+  "context_decode": {
+    "start": "0x003068c8",
+    "end_exclusive": "0x00306930",
+    "bytes": 104,
+    "instructions": 32
+  },
+  "source_mapping": "record3 runtime base 0x00302400; source/package pins included"
+}

@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-single-sample-cap-independent-review-2185",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "accepted": false,
+  "scope": {
+    "candidate": "analysis/touch-single-sample-cap-5c1e-2182/002",
+    "reviewed": "cap leaf and wrapper, exact row/item addressing, valid/split cap selection, type-7 bypass and returns"
+  },
+  "pins": {
+    "candidate_receipt_sha256": "aca5faf1f6fac6bb2dd7e612c53f38c7177dfa1734b8dc85ebd58ccb17fc0596",
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "ranges": [
+      {
+        "start": 23582,
+        "end": 23638,
+        "sha256": "126f969a8e8081fcd3c50ce1a79199a64f1691488c9fbd65172ae1133264bb9c"
+      },
+      {
+        "start": 23638,
+        "end": 23666,
+        "sha256": "bf3b2e7e2107a00105fe08681502e160870253262eb82e49eafb99f1b22ad350"
+      }
+    ],
+    "candidate_replays_sha256": "8c440cf1d11b5066d5ad462790bf2d451fb406c5fe261ed8d8f76ff5bf7faf9f",
+    "candidate_files": {
+      "replays.json": "8c440cf1d11b5066d5ad462790bf2d451fb406c5fe261ed8d8f76ff5bf7faf9f",
+      "replay.py": "3de4b6b968d76820b35386e44a5461bc47216287ae1b1fab2e8cbef3693f7b62",
+      "pseudocode.md": "9d3a830dc440ef4bd5dfa2646c2ba015cc4bb2f9bac368f11fca94c4f67aafdb",
+      "disassembly.txt": "18b4818397d87eddece3ebb3bc64edd4274038749db973e8df2cefd7e5055661"
+    }
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "Independent decode and address extraction confirm leaf [5C1E,5C56) derives row from context+12 plus index*144 and item from row+4 plus slot*10. It loads validity byte row+122 and split byte row+58; only validity==1 and slot>=split select cap halfword6, otherwise cap halfword4. Unsigned comparison stores selected cap only if item halfword0 is greater. Leaf R0 returns selected cap; R4/R5/SP restore."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "Wrapper [5C56,5C72) skips the leaf for row byte123==7 and returns incoming index. Otherwise it forwards index, slot and context to the leaf. The corrected candidate and isolated 324 fixtures agree on offset58 (not the separate bulk-cap field offset), return values, complete item bytes, R4 and SP."
+    },
+    {
+      "id": "F3",
+      "severity": "none",
+      "result": "All source/body/file pins passed; isolated replay JSON is byte-identical and both complete Thumb extents independently decode."
+    }
+  ],
+  "limitations": [
+    "No index or slot validation is present; fixtures cover only indices0..2 and slots0,1,3.",
+    "The split byte at +58 is instruction-backed but its allocation/record role is not established; it lies beyond the nominal 144-byte stride.",
+    "Aliasing, concurrent mutation, physical meaning, canonical admission and C implementation remain unresolved."
+  ],
+  "checks": [
+    {
+      "command": "verify source, exact spans and receipt artifacts",
+      "result": "PASS",
+      "artifact": "source-checks.json"
+    },
+    {
+      "command": "complete independent Thumb decode and isolated replay",
+      "result": "PASS; 324 fixtures, JSON byte-identical",
+      "artifact": "replay.txt"
+    }
+  ],
+  "review_artifacts": {
+    "source_checks_sha256": "5095901bc9c94e59dc039f90092aade5bbec485132bc727876ec119206259b28",
+    "disassembly_sha256": "18b4818397d87eddece3ebb3bc64edd4274038749db973e8df2cefd7e5055661",
+    "replay_sha256": "3677c258e93febae62c90ba9ce8fb5029d46421b78b32ec77e517f95c4418ec3"
+  },
+  "canonical_or_coverage_change": false
+}

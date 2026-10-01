@@ -1,0 +1,1552 @@
+{
+  "schema": "csky-command-byte-receiver-mask8-fixtures-v1",
+  "method": "Instruction-derived bounded traces over original bytes; input data-register words and MMIO samples are controlled values, not physical hardware execution.",
+  "body_sha256": "3709c9c3439611f8c906ee506ceebc69d1003a92765424e5f4e294503ab289ea",
+  "cases": [
+    {
+      "name": "three-byte receive: exercise fresh polls and mask-8 readiness",
+      "inputs": {
+        "name": "three-byte receive: exercise fresh polls and mask-8 readiness",
+        "mode": 3,
+        "pointer": "0x20000004",
+        "count": 3,
+        "data_words": [
+          305419794,
+          2882400052,
+          4276944982
+        ],
+        "pre_words": [
+          1,
+          0
+        ],
+        "ready_per_byte": [
+          [
+            0,
+            2,
+            4,
+            8
+          ],
+          [
+            4294967287,
+            4294967288
+          ],
+          [
+            7,
+            4294967295
+          ]
+        ],
+        "completion_words": [
+          1,
+          0
+        ],
+        "post_words": [
+          0
+        ]
+      },
+      "expected": {
+        "events": [
+          {
+            "kind": "call",
+            "target": "0x10000B4C",
+            "phase": "before setup"
+          },
+          {
+            "kind": "bit0-pre",
+            "address": "0xA2000028",
+            "word": "0x00000001",
+            "mask": 1,
+            "predicate": true
+          },
+          {
+            "kind": "bit0-pre",
+            "address": "0xA2000028",
+            "word": "0x00000000",
+            "mask": 1,
+            "predicate": false
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000008",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA200004C",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000000",
+            "value": "0x00000C07"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000004",
+            "value": "0x00000002"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000010",
+            "value": "0x00000001"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000018",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA20000F4",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000008",
+            "value": "0x00000001"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000060",
+            "value": "0x00000003"
+          },
+          {
+            "kind": "bit3-ready",
+            "address": "0xA2000028",
+            "word": "0x00000000",
+            "mask": 8,
+            "predicate": false
+          },
+          {
+            "kind": "bit3-ready",
+            "address": "0xA2000028",
+            "word": "0x00000002",
+            "mask": 8,
+            "predicate": false
+          },
+          {
+            "kind": "bit3-ready",
+            "address": "0xA2000028",
+            "word": "0x00000004",
+            "mask": 8,
+            "predicate": false
+          },
+          {
+            "kind": "bit3-ready",
+            "address": "0xA2000028",
+            "word": "0x00000008",
+            "mask": 8,
+            "predicate": true
+          },
+          {
+            "kind": "read32",
+            "address": "0xA2000060",
+            "word": "0x12345612"
+          },
+          {
+            "kind": "store8",
+            "address": "0x20000004",
+            "value": "0x12"
+          },
+          {
+            "kind": "bit3-ready",
+            "address": "0xA2000028",
+            "word": "0xFFFFFFF7",
+            "mask": 8,
+            "predicate": false
+          },
+          {
+            "kind": "bit3-ready",
+            "address": "0xA2000028",
+            "word": "0xFFFFFFF8",
+            "mask": 8,
+            "predicate": true
+          },
+          {
+            "kind": "read32",
+            "address": "0xA2000060",
+            "word": "0xABCDEF34"
+          },
+          {
+            "kind": "store8",
+            "address": "0x20000005",
+            "value": "0x34"
+          },
+          {
+            "kind": "bit3-ready",
+            "address": "0xA2000028",
+            "word": "0x00000007",
+            "mask": 8,
+            "predicate": false
+          },
+          {
+            "kind": "bit3-ready",
+            "address": "0xA2000028",
+            "word": "0xFFFFFFFF",
+            "mask": 8,
+            "predicate": true
+          },
+          {
+            "kind": "read32",
+            "address": "0xA2000060",
+            "word": "0xFEED0056"
+          },
+          {
+            "kind": "store8",
+            "address": "0x20000006",
+            "value": "0x56"
+          },
+          {
+            "kind": "completion",
+            "address": "0xA2000020",
+            "word": "0x00000001",
+            "mask": 0,
+            "predicate": false
+          },
+          {
+            "kind": "completion",
+            "address": "0xA2000020",
+            "word": "0x00000000",
+            "mask": 0,
+            "predicate": true
+          },
+          {
+            "kind": "call",
+            "target": "0x10000B4C",
+            "phase": "after completion"
+          },
+          {
+            "kind": "bit0-post",
+            "address": "0xA2000028",
+            "word": "0x00000000",
+            "mask": 1,
+            "predicate": false
+          },
+          {
+            "kind": "return",
+            "R0": "0x00000000"
+          }
+        ],
+        "writes": [
+          [
+            2717909000,
+            0
+          ],
+          [
+            2717909068,
+            0
+          ],
+          [
+            2717908992,
+            3079
+          ],
+          [
+            2717908996,
+            2
+          ],
+          [
+            2717909008,
+            1
+          ],
+          [
+            2717909016,
+            0
+          ],
+          [
+            2717909236,
+            0
+          ],
+          [
+            2717909000,
+            1
+          ],
+          [
+            2717909088,
+            3
+          ]
+        ],
+        "bytes_stored": [
+          {
+            "address": "0x20000004",
+            "byte": 18,
+            "source_word": "0x12345612"
+          },
+          {
+            "address": "0x20000005",
+            "byte": 52,
+            "source_word": "0xABCDEF34"
+          },
+          {
+            "address": "0x20000006",
+            "byte": 86,
+            "source_word": "0xFEED0056"
+          }
+        ],
+        "final_R1": "0x20000007",
+        "result": "returns R0=0"
+      }
+    },
+    {
+      "name": "zero count configures but skips ready and data accesses",
+      "inputs": {
+        "name": "zero count configures but skips ready and data accesses",
+        "mode": 53,
+        "pointer": "0x20000004",
+        "count": 0,
+        "data_words": [],
+        "pre_words": [
+          0
+        ],
+        "ready_per_byte": [],
+        "completion_words": [
+          0
+        ],
+        "post_words": [
+          0
+        ]
+      },
+      "expected": {
+        "events": [
+          {
+            "kind": "call",
+            "target": "0x10000B4C",
+            "phase": "before setup"
+          },
+          {
+            "kind": "bit0-pre",
+            "address": "0xA2000028",
+            "word": "0x00000000",
+            "mask": 1,
+            "predicate": false
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000008",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA200004C",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000000",
+            "value": "0x00000C07"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000004",
+            "value": "0xFFFFFFFF"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000010",
+            "value": "0x00000001"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000018",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA20000F4",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000008",
+            "value": "0x00000001"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000060",
+            "value": "0x00000035"
+          },
+          {
+            "kind": "completion",
+            "address": "0xA2000020",
+            "word": "0x00000000",
+            "mask": 0,
+            "predicate": true
+          },
+          {
+            "kind": "call",
+            "target": "0x10000B4C",
+            "phase": "after completion"
+          },
+          {
+            "kind": "bit0-post",
+            "address": "0xA2000028",
+            "word": "0x00000000",
+            "mask": 1,
+            "predicate": false
+          },
+          {
+            "kind": "return",
+            "R0": "0x00000000"
+          }
+        ],
+        "writes": [
+          [
+            2717909000,
+            0
+          ],
+          [
+            2717909068,
+            0
+          ],
+          [
+            2717908992,
+            3079
+          ],
+          [
+            2717908996,
+            4294967295
+          ],
+          [
+            2717909008,
+            1
+          ],
+          [
+            2717909016,
+            0
+          ],
+          [
+            2717909236,
+            0
+          ],
+          [
+            2717909000,
+            1
+          ],
+          [
+            2717909088,
+            53
+          ]
+        ],
+        "bytes_stored": [],
+        "final_R1": "0x20000004",
+        "result": "returns R0=0"
+      }
+    },
+    {
+      "name": "bit 1 alone does not satisfy ready predicate bit 3",
+      "inputs": {
+        "name": "bit 1 alone does not satisfy ready predicate bit 3",
+        "mode": 5,
+        "pointer": "0x20000003",
+        "count": 1,
+        "data_words": [
+          85
+        ],
+        "pre_words": [
+          0
+        ],
+        "ready_per_byte": [
+          [
+            2,
+            18
+          ]
+        ],
+        "completion_words": [
+          0
+        ],
+        "post_words": [
+          0
+        ]
+      },
+      "expected": {
+        "events": [
+          {
+            "kind": "call",
+            "target": "0x10000B4C",
+            "phase": "before setup"
+          },
+          {
+            "kind": "bit0-pre",
+            "address": "0xA2000028",
+            "word": "0x00000000",
+            "mask": 1,
+            "predicate": false
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000008",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA200004C",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000000",
+            "value": "0x00000C07"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000004",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000010",
+            "value": "0x00000001"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000018",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA20000F4",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000008",
+            "value": "0x00000001"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000060",
+            "value": "0x00000005"
+          },
+          {
+            "kind": "bit3-ready",
+            "address": "0xA2000028",
+            "word": "0x00000002",
+            "mask": 8,
+            "predicate": false
+          },
+          {
+            "kind": "bit3-ready",
+            "address": "0xA2000028",
+            "word": "0x00000012",
+            "mask": 8,
+            "predicate": false
+          }
+        ],
+        "writes": [
+          [
+            2717909000,
+            0
+          ],
+          [
+            2717909068,
+            0
+          ],
+          [
+            2717908992,
+            3079
+          ],
+          [
+            2717908996,
+            0
+          ],
+          [
+            2717909008,
+            1
+          ],
+          [
+            2717909016,
+            0
+          ],
+          [
+            2717909236,
+            0
+          ],
+          [
+            2717909000,
+            1
+          ],
+          [
+            2717909088,
+            5
+          ]
+        ],
+        "bytes_stored": [],
+        "result": "still polling for ready before byte 0"
+      }
+    },
+    {
+      "name": "bit 2 alone does not satisfy ready predicate bit 3",
+      "inputs": {
+        "name": "bit 2 alone does not satisfy ready predicate bit 3",
+        "mode": 5,
+        "pointer": "0x20000003",
+        "count": 1,
+        "data_words": [
+          85
+        ],
+        "pre_words": [
+          0
+        ],
+        "ready_per_byte": [
+          [
+            4,
+            36
+          ]
+        ],
+        "completion_words": [
+          0
+        ],
+        "post_words": [
+          0
+        ]
+      },
+      "expected": {
+        "events": [
+          {
+            "kind": "call",
+            "target": "0x10000B4C",
+            "phase": "before setup"
+          },
+          {
+            "kind": "bit0-pre",
+            "address": "0xA2000028",
+            "word": "0x00000000",
+            "mask": 1,
+            "predicate": false
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000008",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA200004C",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000000",
+            "value": "0x00000C07"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000004",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000010",
+            "value": "0x00000001"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000018",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA20000F4",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000008",
+            "value": "0x00000001"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000060",
+            "value": "0x00000005"
+          },
+          {
+            "kind": "bit3-ready",
+            "address": "0xA2000028",
+            "word": "0x00000004",
+            "mask": 8,
+            "predicate": false
+          },
+          {
+            "kind": "bit3-ready",
+            "address": "0xA2000028",
+            "word": "0x00000024",
+            "mask": 8,
+            "predicate": false
+          }
+        ],
+        "writes": [
+          [
+            2717909000,
+            0
+          ],
+          [
+            2717909068,
+            0
+          ],
+          [
+            2717908992,
+            3079
+          ],
+          [
+            2717908996,
+            0
+          ],
+          [
+            2717909008,
+            1
+          ],
+          [
+            2717909016,
+            0
+          ],
+          [
+            2717909236,
+            0
+          ],
+          [
+            2717909000,
+            1
+          ],
+          [
+            2717909088,
+            5
+          ]
+        ],
+        "bytes_stored": [],
+        "result": "still polling for ready before byte 0"
+      }
+    },
+    {
+      "name": "bit 3 set transfers low byte of data word",
+      "inputs": {
+        "name": "bit 3 set transfers low byte of data word",
+        "mode": 53,
+        "pointer": "0x20000000",
+        "count": 1,
+        "data_words": [
+          2309737967
+        ],
+        "pre_words": [
+          0
+        ],
+        "ready_per_byte": [
+          [
+            4294967287,
+            4294967288
+          ]
+        ],
+        "completion_words": [
+          0
+        ],
+        "post_words": [
+          0
+        ]
+      },
+      "expected": {
+        "events": [
+          {
+            "kind": "call",
+            "target": "0x10000B4C",
+            "phase": "before setup"
+          },
+          {
+            "kind": "bit0-pre",
+            "address": "0xA2000028",
+            "word": "0x00000000",
+            "mask": 1,
+            "predicate": false
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000008",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA200004C",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000000",
+            "value": "0x00000C07"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000004",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000010",
+            "value": "0x00000001"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000018",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA20000F4",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000008",
+            "value": "0x00000001"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000060",
+            "value": "0x00000035"
+          },
+          {
+            "kind": "bit3-ready",
+            "address": "0xA2000028",
+            "word": "0xFFFFFFF7",
+            "mask": 8,
+            "predicate": false
+          },
+          {
+            "kind": "bit3-ready",
+            "address": "0xA2000028",
+            "word": "0xFFFFFFF8",
+            "mask": 8,
+            "predicate": true
+          },
+          {
+            "kind": "read32",
+            "address": "0xA2000060",
+            "word": "0x89ABCDEF"
+          },
+          {
+            "kind": "store8",
+            "address": "0x20000000",
+            "value": "0xEF"
+          },
+          {
+            "kind": "completion",
+            "address": "0xA2000020",
+            "word": "0x00000000",
+            "mask": 0,
+            "predicate": true
+          },
+          {
+            "kind": "call",
+            "target": "0x10000B4C",
+            "phase": "after completion"
+          },
+          {
+            "kind": "bit0-post",
+            "address": "0xA2000028",
+            "word": "0x00000000",
+            "mask": 1,
+            "predicate": false
+          },
+          {
+            "kind": "return",
+            "R0": "0x00000000"
+          }
+        ],
+        "writes": [
+          [
+            2717909000,
+            0
+          ],
+          [
+            2717909068,
+            0
+          ],
+          [
+            2717908992,
+            3079
+          ],
+          [
+            2717908996,
+            0
+          ],
+          [
+            2717909008,
+            1
+          ],
+          [
+            2717909016,
+            0
+          ],
+          [
+            2717909236,
+            0
+          ],
+          [
+            2717909000,
+            1
+          ],
+          [
+            2717909088,
+            53
+          ]
+        ],
+        "bytes_stored": [
+          {
+            "address": "0x20000000",
+            "byte": 239,
+            "source_word": "0x89ABCDEF"
+          }
+        ],
+        "final_R1": "0x20000001",
+        "result": "returns R0=0"
+      }
+    },
+    {
+      "name": "pointer wraps modulo 32 bits",
+      "inputs": {
+        "name": "pointer wraps modulo 32 bits",
+        "mode": 3,
+        "pointer": "0xFFFFFFFE",
+        "count": 3,
+        "data_words": [
+          17,
+          34,
+          51
+        ],
+        "pre_words": [
+          0
+        ],
+        "ready_per_byte": [
+          [
+            8
+          ],
+          [
+            8
+          ],
+          [
+            8
+          ]
+        ],
+        "completion_words": [
+          0
+        ],
+        "post_words": [
+          0
+        ]
+      },
+      "expected": {
+        "events": [
+          {
+            "kind": "call",
+            "target": "0x10000B4C",
+            "phase": "before setup"
+          },
+          {
+            "kind": "bit0-pre",
+            "address": "0xA2000028",
+            "word": "0x00000000",
+            "mask": 1,
+            "predicate": false
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000008",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA200004C",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000000",
+            "value": "0x00000C07"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000004",
+            "value": "0x00000002"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000010",
+            "value": "0x00000001"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000018",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA20000F4",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000008",
+            "value": "0x00000001"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000060",
+            "value": "0x00000003"
+          },
+          {
+            "kind": "bit3-ready",
+            "address": "0xA2000028",
+            "word": "0x00000008",
+            "mask": 8,
+            "predicate": true
+          },
+          {
+            "kind": "read32",
+            "address": "0xA2000060",
+            "word": "0x00000011"
+          },
+          {
+            "kind": "store8",
+            "address": "0xFFFFFFFE",
+            "value": "0x11"
+          },
+          {
+            "kind": "bit3-ready",
+            "address": "0xA2000028",
+            "word": "0x00000008",
+            "mask": 8,
+            "predicate": true
+          },
+          {
+            "kind": "read32",
+            "address": "0xA2000060",
+            "word": "0x00000022"
+          },
+          {
+            "kind": "store8",
+            "address": "0xFFFFFFFF",
+            "value": "0x22"
+          },
+          {
+            "kind": "bit3-ready",
+            "address": "0xA2000028",
+            "word": "0x00000008",
+            "mask": 8,
+            "predicate": true
+          },
+          {
+            "kind": "read32",
+            "address": "0xA2000060",
+            "word": "0x00000033"
+          },
+          {
+            "kind": "store8",
+            "address": "0x00000000",
+            "value": "0x33"
+          },
+          {
+            "kind": "completion",
+            "address": "0xA2000020",
+            "word": "0x00000000",
+            "mask": 0,
+            "predicate": true
+          },
+          {
+            "kind": "call",
+            "target": "0x10000B4C",
+            "phase": "after completion"
+          },
+          {
+            "kind": "bit0-post",
+            "address": "0xA2000028",
+            "word": "0x00000000",
+            "mask": 1,
+            "predicate": false
+          },
+          {
+            "kind": "return",
+            "R0": "0x00000000"
+          }
+        ],
+        "writes": [
+          [
+            2717909000,
+            0
+          ],
+          [
+            2717909068,
+            0
+          ],
+          [
+            2717908992,
+            3079
+          ],
+          [
+            2717908996,
+            2
+          ],
+          [
+            2717909008,
+            1
+          ],
+          [
+            2717909016,
+            0
+          ],
+          [
+            2717909236,
+            0
+          ],
+          [
+            2717909000,
+            1
+          ],
+          [
+            2717909088,
+            3
+          ]
+        ],
+        "bytes_stored": [
+          {
+            "address": "0xFFFFFFFE",
+            "byte": 17,
+            "source_word": "0x00000011"
+          },
+          {
+            "address": "0xFFFFFFFF",
+            "byte": 34,
+            "source_word": "0x00000022"
+          },
+          {
+            "address": "0x00000000",
+            "byte": 51,
+            "source_word": "0x00000033"
+          }
+        ],
+        "final_R1": "0x00000001",
+        "result": "returns R0=0"
+      }
+    },
+    {
+      "name": "initial helper bit 0 remains set in finite prefix",
+      "inputs": {
+        "name": "initial helper bit 0 remains set in finite prefix",
+        "mode": 2,
+        "pointer": "0x20000000",
+        "count": 1,
+        "data_words": [
+          1
+        ],
+        "pre_words": [
+          1,
+          3,
+          5
+        ],
+        "ready_per_byte": [
+          [
+            8
+          ]
+        ],
+        "completion_words": [
+          0
+        ],
+        "post_words": [
+          0
+        ]
+      },
+      "expected": {
+        "events": [
+          {
+            "kind": "call",
+            "target": "0x10000B4C",
+            "phase": "before setup"
+          },
+          {
+            "kind": "bit0-pre",
+            "address": "0xA2000028",
+            "word": "0x00000001",
+            "mask": 1,
+            "predicate": true
+          },
+          {
+            "kind": "bit0-pre",
+            "address": "0xA2000028",
+            "word": "0x00000003",
+            "mask": 1,
+            "predicate": true
+          },
+          {
+            "kind": "bit0-pre",
+            "address": "0xA2000028",
+            "word": "0x00000005",
+            "mask": 1,
+            "predicate": true
+          }
+        ],
+        "writes": [],
+        "bytes_stored": [],
+        "result": "still polling in initial B4C"
+      }
+    },
+    {
+      "name": "completion remains nonzero in finite prefix",
+      "inputs": {
+        "name": "completion remains nonzero in finite prefix",
+        "mode": 2,
+        "pointer": "0x20000000",
+        "count": 1,
+        "data_words": [
+          119
+        ],
+        "pre_words": [
+          0
+        ],
+        "ready_per_byte": [
+          [
+            8
+          ]
+        ],
+        "completion_words": [
+          1,
+          3,
+          4294967295
+        ],
+        "post_words": [
+          0
+        ]
+      },
+      "expected": {
+        "events": [
+          {
+            "kind": "call",
+            "target": "0x10000B4C",
+            "phase": "before setup"
+          },
+          {
+            "kind": "bit0-pre",
+            "address": "0xA2000028",
+            "word": "0x00000000",
+            "mask": 1,
+            "predicate": false
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000008",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA200004C",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000000",
+            "value": "0x00000C07"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000004",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000010",
+            "value": "0x00000001"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000018",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA20000F4",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000008",
+            "value": "0x00000001"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000060",
+            "value": "0x00000002"
+          },
+          {
+            "kind": "bit3-ready",
+            "address": "0xA2000028",
+            "word": "0x00000008",
+            "mask": 8,
+            "predicate": true
+          },
+          {
+            "kind": "read32",
+            "address": "0xA2000060",
+            "word": "0x00000077"
+          },
+          {
+            "kind": "store8",
+            "address": "0x20000000",
+            "value": "0x77"
+          },
+          {
+            "kind": "completion",
+            "address": "0xA2000020",
+            "word": "0x00000001",
+            "mask": 0,
+            "predicate": false
+          },
+          {
+            "kind": "completion",
+            "address": "0xA2000020",
+            "word": "0x00000003",
+            "mask": 0,
+            "predicate": false
+          },
+          {
+            "kind": "completion",
+            "address": "0xA2000020",
+            "word": "0xFFFFFFFF",
+            "mask": 0,
+            "predicate": false
+          }
+        ],
+        "writes": [
+          [
+            2717909000,
+            0
+          ],
+          [
+            2717909068,
+            0
+          ],
+          [
+            2717908992,
+            3079
+          ],
+          [
+            2717908996,
+            0
+          ],
+          [
+            2717909008,
+            1
+          ],
+          [
+            2717909016,
+            0
+          ],
+          [
+            2717909236,
+            0
+          ],
+          [
+            2717909000,
+            1
+          ],
+          [
+            2717909088,
+            2
+          ]
+        ],
+        "bytes_stored": [
+          {
+            "address": "0x20000000",
+            "byte": 119,
+            "source_word": "0x00000077"
+          }
+        ],
+        "result": "still polling for full completion word zero"
+      }
+    },
+    {
+      "name": "final helper bit 0 remains set in finite prefix",
+      "inputs": {
+        "name": "final helper bit 0 remains set in finite prefix",
+        "mode": 2,
+        "pointer": "0x20000000",
+        "count": 1,
+        "data_words": [
+          34
+        ],
+        "pre_words": [
+          0
+        ],
+        "ready_per_byte": [
+          [
+            8
+          ]
+        ],
+        "completion_words": [
+          0
+        ],
+        "post_words": [
+          1,
+          3,
+          5
+        ]
+      },
+      "expected": {
+        "events": [
+          {
+            "kind": "call",
+            "target": "0x10000B4C",
+            "phase": "before setup"
+          },
+          {
+            "kind": "bit0-pre",
+            "address": "0xA2000028",
+            "word": "0x00000000",
+            "mask": 1,
+            "predicate": false
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000008",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA200004C",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000000",
+            "value": "0x00000C07"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000004",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000010",
+            "value": "0x00000001"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000018",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA20000F4",
+            "value": "0x00000000"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000008",
+            "value": "0x00000001"
+          },
+          {
+            "kind": "write32",
+            "address": "0xA2000060",
+            "value": "0x00000002"
+          },
+          {
+            "kind": "bit3-ready",
+            "address": "0xA2000028",
+            "word": "0x00000008",
+            "mask": 8,
+            "predicate": true
+          },
+          {
+            "kind": "read32",
+            "address": "0xA2000060",
+            "word": "0x00000022"
+          },
+          {
+            "kind": "store8",
+            "address": "0x20000000",
+            "value": "0x22"
+          },
+          {
+            "kind": "completion",
+            "address": "0xA2000020",
+            "word": "0x00000000",
+            "mask": 0,
+            "predicate": true
+          },
+          {
+            "kind": "call",
+            "target": "0x10000B4C",
+            "phase": "after completion"
+          },
+          {
+            "kind": "bit0-post",
+            "address": "0xA2000028",
+            "word": "0x00000001",
+            "mask": 1,
+            "predicate": true
+          },
+          {
+            "kind": "bit0-post",
+            "address": "0xA2000028",
+            "word": "0x00000003",
+            "mask": 1,
+            "predicate": true
+          },
+          {
+            "kind": "bit0-post",
+            "address": "0xA2000028",
+            "word": "0x00000005",
+            "mask": 1,
+            "predicate": true
+          }
+        ],
+        "writes": [
+          [
+            2717909000,
+            0
+          ],
+          [
+            2717909068,
+            0
+          ],
+          [
+            2717908992,
+            3079
+          ],
+          [
+            2717908996,
+            0
+          ],
+          [
+            2717909008,
+            1
+          ],
+          [
+            2717909016,
+            0
+          ],
+          [
+            2717909236,
+            0
+          ],
+          [
+            2717909000,
+            1
+          ],
+          [
+            2717909088,
+            2
+          ]
+        ],
+        "bytes_stored": [
+          {
+            "address": "0x20000000",
+            "byte": 34,
+            "source_word": "0x00000022"
+          }
+        ],
+        "result": "still polling in final B4C"
+      }
+    }
+  ],
+  "assertions": [
+    "The ready loop executes ANDI R2,R2,8 and BEZ back to C0A; it waits while bit 3 is clear.",
+    "Words with only bit 1 or bit 2 set do not satisfy the byte-ready predicate.",
+    "When ready, each 32-bit word read from A2000060 contributes only its low byte to the caller output buffer.",
+    "Count zero skips all per-byte readiness polls and data-register loads.",
+    "Finite poll prefixes that never satisfy a condition prove continued polling only; no timeout or return is inferred."
+  ]
+}

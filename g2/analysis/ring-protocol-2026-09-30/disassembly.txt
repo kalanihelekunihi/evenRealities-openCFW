@@ -1,0 +1,1648 @@
+
+unnamed 00472244..004722cc sha256=ab5edc901c7263a3db6b6b917d48681827bf31706d1d3db2e06e9cdebccb2844
+00472244 10b5       push     {r4, lr}
+00472246 c2b0       sub      sp, #0x108
+00472248 fe21       movs     r1, #0xfe
+0047224a 0022       movs     r2, #0
+0047224c 02ac       add      r4, sp, #8
+0047224e 2000       movs     r0, r4
+00472250 c9f748ff   bl       #0x43c0e4 ; 
+00472254 0020       movs     r0, #0
+00472256 8df80800   strb.w   r0, [sp, #8]
+0047225a 1a20       movs     r0, #0x1a
+0047225c 8df80900   strb.w   r0, [sp, #9]
+00472260 9420       movs     r0, #0x94
+00472262 8df80a00   strb.w   r0, [sp, #0xa]
+00472266 0120       movs     r0, #1
+00472268 8df80b00   strb.w   r0, [sp, #0xb]
+0047226c caf72fff   bl       #0x43d0ce ; 
+00472270 8007       lsls     r0, r0, #0x1e
+00472272 0ed5       bpl      #0x472292
+00472274 dff83809   ldr.w    r0, [pc, #0x938]
+00472278 0190       str      r0, [sp, #4]
+0047227a 4ff49070   mov.w    r0, #0x120
+0047227e 0090       str      r0, [sp]
+00472280 dff83039   ldr.w    r3, [pc, #0x930]
+00472284 dff83029   ldr.w    r2, [pc, #0x930]
+00472288 dff83019   ldr.w    r1, [pc, #0x930]
+0047228c 0420       movs     r0, #4
+0047228e cbf771f9   bl       #0x43d574 ; FUN_0043d574
+00472292 caf71cff   bl       #0x43d0ce ; 
+00472296 c007       lsls     r0, r0, #0x1f
+00472298 03d4       bmi      #0x4722a2
+0047229a caf718ff   bl       #0x43d0ce ; 
+0047229e 4007       lsls     r0, r0, #0x1d
+004722a0 06d5       bpl      #0x4722b0
+004722a2 dff81c29   ldr.w    r2, [pc, #0x91c]
+004722a6 1100       movs     r1, r2
+004722a8 5ff08050   movs.w   r0, #0x10000000
+004722ac caf7f7fd   bl       #0x43ce9e ; compress_log_output
+004722b0 0423       movs     r3, #4
+004722b2 02aa       add      r2, sp, #8
+004722b4 1021       movs     r1, #0x10
+004722b6 dff80c09   ldr.w    r0, [pc, #0x90c]
+004722ba cbf707fc   bl       #0x43dacc ; 
+004722be 0421       movs     r1, #4
+004722c0 02a8       add      r0, sp, #8
+004722c2 52f05cfc   bl       #0x4c4b7e ; APP_BleRingSendDataMsg
+004722c6 0020       movs     r0, #0
+004722c8 42b0       add      sp, #0x108
+004722ca 10bd       pop      {r4, pc}
+
+unnamed 004722d8..00472362 sha256=5ba18fef45c46c9c5fe82252edfae7e6d5ec429a5a6f1915cbb87dba4bdfd006
+004722d8 38b5       push     {r3, r4, r5, lr}
+004722da c2b0       sub      sp, #0x108
+004722dc 0400       movs     r4, r0
+004722de fe21       movs     r1, #0xfe
+004722e0 0022       movs     r2, #0
+004722e2 02ad       add      r5, sp, #8
+004722e4 2800       movs     r0, r5
+004722e6 c9f7fdfe   bl       #0x43c0e4 ; 
+004722ea 0020       movs     r0, #0
+004722ec 8df80800   strb.w   r0, [sp, #8]
+004722f0 1a20       movs     r0, #0x1a
+004722f2 8df80900   strb.w   r0, [sp, #9]
+004722f6 8a20       movs     r0, #0x8a
+004722f8 8df80a00   strb.w   r0, [sp, #0xa]
+004722fc 0120       movs     r0, #1
+004722fe 8df80b00   strb.w   r0, [sp, #0xb]
+00472302 2000       movs     r0, r4
+00472304 8df80c00   strb.w   r0, [sp, #0xc]
+00472308 a4b2       uxth     r4, r4
+0047230a 240a       lsrs     r4, r4, #8
+0047230c 8df80d40   strb.w   r4, [sp, #0xd]
+00472310 caf7ddfe   bl       #0x43d0ce ; 
+00472314 8007       lsls     r0, r0, #0x1e
+00472316 0ed5       bpl      #0x472336
+00472318 dff8ac08   ldr.w    r0, [pc, #0x8ac]
+0047231c 0190       str      r0, [sp, #4]
+0047231e 4ff49c70   mov.w    r0, #0x138
+00472322 0090       str      r0, [sp]
+00472324 dff8a438   ldr.w    r3, [pc, #0x8a4]
+00472328 dff88c28   ldr.w    r2, [pc, #0x88c]
+0047232c dff88c18   ldr.w    r1, [pc, #0x88c]
+00472330 0420       movs     r0, #4
+00472332 cbf71ff9   bl       #0x43d574 ; FUN_0043d574
+00472336 caf7cafe   bl       #0x43d0ce ; 
+0047233a c007       lsls     r0, r0, #0x1f
+0047233c 03d4       bmi      #0x472346
+0047233e caf7c6fe   bl       #0x43d0ce ; 
+00472342 4007       lsls     r0, r0, #0x1d
+00472344 06d5       bpl      #0x472354
+00472346 dff88818   ldr.w    r1, [pc, #0x888]
+0047234a 0a00       movs     r2, r1
+0047234c 5ff08050   movs.w   r0, #0x10000000
+00472350 caf7a5fd   bl       #0x43ce9e ; compress_log_output
+00472354 0621       movs     r1, #6
+00472356 02a8       add      r0, sp, #8
+00472358 52f011fc   bl       #0x4c4b7e ; APP_BleRingSendDataMsg
+0047235c 0020       movs     r0, #0
+0047235e 43b0       add      sp, #0x10c
+00472360 30bd       pop      {r4, r5, pc}
+
+unnamed 00472362..00472378 sha256=147ef454d5e220e9f1ee6b1a582854dad8a85fffa57ae2fc9570dd2b4ceef0f7
+00472362 80b5       push     {r7, lr}
+00472364 adf80000   strh.w   r0, [sp]
+00472368 0222       movs     r2, #2
+0047236a 6946       mov      r1, sp
+0047236c 4ff48050   mov.w    r0, #0x1000
+00472370 53f094f8   bl       #0x4c549c ; ring_task_msg_send
+00472374 40b2       sxtb     r0, r0
+00472376 02bd       pop      {r1, pc}
+
+unnamed 00472378..004723d6 sha256=21c2e01389ece8209114d08012c3d797069d70cf015bbf45500615eb350051cf
+00472378 38b5       push     {r3, r4, r5, lr}
+0047237a c0b0       sub      sp, #0x100
+0047237c 0400       movs     r4, r0
+0047237e fe21       movs     r1, #0xfe
+00472380 0022       movs     r2, #0
+00472382 6d46       mov      r5, sp
+00472384 2800       movs     r0, r5
+00472386 c9f7adfe   bl       #0x43c0e4 ; 
+0047238a 0020       movs     r0, #0
+0047238c 8df80000   strb.w   r0, [sp]
+00472390 1a20       movs     r0, #0x1a
+00472392 8df80100   strb.w   r0, [sp, #1]
+00472396 8520       movs     r0, #0x85
+00472398 8df80200   strb.w   r0, [sp, #2]
+0047239c 0120       movs     r0, #1
+0047239e 8df80300   strb.w   r0, [sp, #3]
+004723a2 aa20       movs     r0, #0xaa
+004723a4 8df80500   strb.w   r0, [sp, #5]
+004723a8 aa20       movs     r0, #0xaa
+004723aa 8df80600   strb.w   r0, [sp, #6]
+004723ae aa20       movs     r0, #0xaa
+004723b0 8df80700   strb.w   r0, [sp, #7]
+004723b4 e4b2       uxtb     r4, r4
+004723b6 002c       cmp      r4, #0
+004723b8 03d0       beq      #0x4723c2
+004723ba 0020       movs     r0, #0
+004723bc 8df80400   strb.w   r0, [sp, #4]
+004723c0 02e0       b        #0x4723c8
+004723c2 ff20       movs     r0, #0xff
+004723c4 8df80400   strb.w   r0, [sp, #4]
+004723c8 0821       movs     r1, #8
+004723ca 6846       mov      r0, sp
+004723cc 52f0d7fb   bl       #0x4c4b7e ; APP_BleRingSendDataMsg
+004723d0 0020       movs     r0, #0
+004723d2 41b0       add      sp, #0x104
+004723d4 30bd       pop      {r4, r5, pc}
+
+unnamed 004723d6..00472426 sha256=93404c8db0c0aaeab661e3e4a210a3649826316552bda4a3c4a0a7c72739e6ef
+004723d6 70b5       push     {r4, r5, r6, lr}
+004723d8 c0b0       sub      sp, #0x100
+004723da 0400       movs     r4, r0
+004723dc 0d00       movs     r5, r1
+004723de fe21       movs     r1, #0xfe
+004723e0 0022       movs     r2, #0
+004723e2 6e46       mov      r6, sp
+004723e4 3000       movs     r0, r6
+004723e6 c9f77dfe   bl       #0x43c0e4 ; 
+004723ea 0020       movs     r0, #0
+004723ec 8df80000   strb.w   r0, [sp]
+004723f0 1a20       movs     r0, #0x1a
+004723f2 8df80100   strb.w   r0, [sp, #1]
+004723f6 8920       movs     r0, #0x89
+004723f8 8df80200   strb.w   r0, [sp, #2]
+004723fc 0120       movs     r0, #1
+004723fe 8df80300   strb.w   r0, [sp, #3]
+00472402 0421       movs     r1, #4
+00472404 0022       movs     r2, #0
+00472406 01ae       add      r6, sp, #4
+00472408 3000       movs     r0, r6
+0047240a c9f76bfe   bl       #0x43c0e4 ; 
+0047240e ad01       lsls     r5, r5, #6
+00472410 55eac415   orrs.w   r5, r5, r4, lsl #7
+00472414 8df80450   strb.w   r5, [sp, #4]
+00472418 0821       movs     r1, #8
+0047241a 6846       mov      r0, sp
+0047241c 52f0affb   bl       #0x4c4b7e ; APP_BleRingSendDataMsg
+00472420 0020       movs     r0, #0
+00472422 40b0       add      sp, #0x100
+00472424 70bd       pop      {r4, r5, r6, pc}
+
+unnamed 00472426..0047243a sha256=16de133b3e38d08b1862bfd9b20ab50bcb1a4ae6575976323a479c87a6bb8015
+00472426 80b5       push     {r7, lr}
+00472428 8df80000   strb.w   r0, [sp]
+0047242c 0122       movs     r2, #1
+0047242e 6946       mov      r1, sp
+00472430 8020       movs     r0, #0x80
+00472432 53f033f8   bl       #0x4c549c ; ring_task_msg_send
+00472436 40b2       sxtb     r0, r0
+00472438 02bd       pop      {r1, pc}
+
+unnamed 00472546..0047257c sha256=9cd61a6920a7e1d8581a7cb849a1635a3cc77376f46375ce7e5b6fd8b0e45057
+00472546 10b5       push     {r4, lr}
+00472548 c0b0       sub      sp, #0x100
+0047254a fe21       movs     r1, #0xfe
+0047254c 0022       movs     r2, #0
+0047254e 6c46       mov      r4, sp
+00472550 2000       movs     r0, r4
+00472552 c9f7c7fd   bl       #0x43c0e4 ; 
+00472556 0020       movs     r0, #0
+00472558 8df80000   strb.w   r0, [sp]
+0047255c 3520       movs     r0, #0x35
+0047255e 8df80100   strb.w   r0, [sp, #1]
+00472562 8820       movs     r0, #0x88
+00472564 8df80200   strb.w   r0, [sp, #2]
+00472568 0020       movs     r0, #0
+0047256a 8df80300   strb.w   r0, [sp, #3]
+0047256e 0421       movs     r1, #4
+00472570 6846       mov      r0, sp
+00472572 52f004fb   bl       #0x4c4b7e ; APP_BleRingSendDataMsg
+00472576 0020       movs     r0, #0
+00472578 40b0       add      sp, #0x100
+0047257a 10bd       pop      {r4, pc}
+
+unnamed 0047263c..0047269e sha256=25c6b1703f02d9ef0f201f3a38fe2434752540988a9496fdb19249374aa92d1f
+0047263c e0b5       push     {r5, r6, r7, lr}
+0047263e 0028       cmp      r0, #0
+00472640 02d1       bne      #0x472648
+00472642 5ff0ff30   movs.w   r0, #-1
+00472646 29e0       b        #0x47269c
+00472648 c178       ldrb     r1, [r0, #3]
+0047264a 0129       cmp      r1, #1
+0047264c 25d1       bne      #0x47269a
+0047264e 0079       ldrb     r0, [r0, #4]
+00472650 0128       cmp      r0, #1
+00472652 21d1       bne      #0x472698
+00472654 caf73bfd   bl       #0x43d0ce ; 
+00472658 8007       lsls     r0, r0, #0x1e
+0047265a 0ed5       bpl      #0x47267a
+0047265c dff88c05   ldr.w    r0, [pc, #0x58c]
+00472660 0190       str      r0, [sp, #4]
+00472662 40f2d510   movw     r0, #0x1d5
+00472666 0090       str      r0, [sp]
+00472668 dff88435   ldr.w    r3, [pc, #0x584]
+0047266c dff84825   ldr.w    r2, [pc, #0x548]
+00472670 dff84815   ldr.w    r1, [pc, #0x548]
+00472674 0420       movs     r0, #4
+00472676 caf77dff   bl       #0x43d574 ; FUN_0043d574
+0047267a caf728fd   bl       #0x43d0ce ; 
+0047267e c007       lsls     r0, r0, #0x1f
+00472680 03d4       bmi      #0x47268a
+00472682 caf724fd   bl       #0x43d0ce ; 
+00472686 4007       lsls     r0, r0, #0x1d
+00472688 06d5       bpl      #0x472698
+0047268a dff86815   ldr.w    r1, [pc, #0x568]
+0047268e 0a00       movs     r2, r1
+00472690 5ff08050   movs.w   r0, #0x10000000
+00472694 caf703fc   bl       #0x43ce9e ; compress_log_output
+00472698 ffe7       b        #0x47269a
+0047269a 0020       movs     r0, #0
+0047269c 0ebd       pop      {r1, r2, r3, pc}
+
+unnamed 0047269e..004727aa sha256=4b590e1611b9fba0e09dd8934361cc852fd8993e3e83c1be002b849f32271829
+0047269e 38b5       push     {r3, r4, r5, lr}
+004726a0 84b0       sub      sp, #0x10
+004726a2 0400       movs     r4, r0
+004726a4 002c       cmp      r4, #0
+004726a6 02d1       bne      #0x4726ae
+004726a8 5ff0ff30   movs.w   r0, #-1
+004726ac 7be0       b        #0x4727a6
+004726ae 89b2       uxth     r1, r1
+004726b0 0829       cmp      r1, #8
+004726b2 3cdb       blt      #0x47272e
+004726b4 e51d       adds     r5, r4, #7
+004726b6 2079       ldrb     r0, [r4, #4]
+004726b8 0828       cmp      r0, #8
+004726ba 0bd0       beq      #0x4726d4
+004726bc dff83815   ldr.w    r1, [pc, #0x538]
+004726c0 0868       ldr      r0, [r1]
+004726c2 0028       cmp      r0, #0
+004726c4 06d0       beq      #0x4726d4
+004726c6 2a68       ldr      r2, [r5]
+004726c8 0868       ldr      r0, [r1]
+004726ca 121a       subs     r2, r2, r0
+004726cc 642a       cmp      r2, #0x64
+004726ce 01d2       bhs      #0x4726d4
+004726d0 0020       movs     r0, #0
+004726d2 68e0       b        #0x4727a6
+004726d4 2868       ldr      r0, [r5]
+004726d6 dff82015   ldr.w    r1, [pc, #0x520]
+004726da 0860       str      r0, [r1]
+004726dc caf7f7fc   bl       #0x43d0ce ; 
+004726e0 8007       lsls     r0, r0, #0x1e
+004726e2 12d5       bpl      #0x47270a
+004726e4 2079       ldrb     r0, [r4, #4]
+004726e6 0390       str      r0, [sp, #0xc]
+004726e8 2868       ldr      r0, [r5]
+004726ea 0290       str      r0, [sp, #8]
+004726ec dff80c05   ldr.w    r0, [pc, #0x50c]
+004726f0 0190       str      r0, [sp, #4]
+004726f2 4ff4fa70   mov.w    r0, #0x1f4
+004726f6 0090       str      r0, [sp]
+004726f8 dff80435   ldr.w    r3, [pc, #0x504]
+004726fc dff8b824   ldr.w    r2, [pc, #0x4b8]
+00472700 dff8b814   ldr.w    r1, [pc, #0x4b8]
+00472704 0420       movs     r0, #4
+00472706 caf735ff   bl       #0x43d574 ; FUN_0043d574
+0047270a caf7e0fc   bl       #0x43d0ce ; 
+0047270e c007       lsls     r0, r0, #0x1f
+00472710 03d4       bmi      #0x47271a
+00472712 caf7dcfc   bl       #0x43d0ce ; 
+00472716 4007       lsls     r0, r0, #0x1d
+00472718 09d5       bpl      #0x47272e
+0047271a dff8e824   ldr.w    r2, [pc, #0x4e8]
+0047271e 2079       ldrb     r0, [r4, #4]
+00472720 0090       str      r0, [sp]
+00472722 2b68       ldr      r3, [r5]
+00472724 1100       movs     r1, r2
+00472726 5ff08450   movs.w   r0, #0x10800000
+0047272a caf7b8fb   bl       #0x43ce9e ; compress_log_output
+0047272e e078       ldrb     r0, [r4, #3]
+00472730 0028       cmp      r0, #0
+00472732 37d1       bne      #0x4727a4
+00472734 2079       ldrb     r0, [r4, #4]
+00472736 0028       cmp      r0, #0
+00472738 0ad0       beq      #0x472750
+0047273a 0128       cmp      r0, #1
+0047273c 0fd0       beq      #0x47275e
+0047273e 0228       cmp      r0, #2
+00472740 14d0       beq      #0x47276c
+00472742 0428       cmp      r0, #4
+00472744 19d0       beq      #0x47277a
+00472746 0528       cmp      r0, #5
+00472748 1ed0       beq      #0x472788
+0047274a 0828       cmp      r0, #8
+0047274c 23d0       beq      #0x472796
+0047274e 29e0       b        #0x4727a4
+00472750 0023       movs     r3, #0
+00472752 0022       movs     r2, #0
+00472754 0321       movs     r1, #3
+00472756 0420       movs     r0, #4
+00472758 53f0ddf8   bl       #0x4c5916 ; 
+0047275c 22e0       b        #0x4727a4
+0047275e 0023       movs     r3, #0
+00472760 0022       movs     r2, #0
+00472762 0021       movs     r1, #0
+00472764 0420       movs     r0, #4
+00472766 53f0d6f8   bl       #0x4c5916 ; 
+0047276a 1be0       b        #0x4727a4
+0047276c 0023       movs     r3, #0
+0047276e 0022       movs     r2, #0
+00472770 0121       movs     r1, #1
+00472772 0420       movs     r0, #4
+00472774 53f0cff8   bl       #0x4c5916 ; 
+00472778 14e0       b        #0x4727a4
+0047277a a379       ldrb     r3, [r4, #6]
+0047277c 6279       ldrb     r2, [r4, #5]
+0047277e 0521       movs     r1, #5
+00472780 0420       movs     r0, #4
+00472782 53f0c8f8   bl       #0x4c5916 ; 
+00472786 0de0       b        #0x4727a4
+00472788 a379       ldrb     r3, [r4, #6]
+0047278a 6279       ldrb     r2, [r4, #5]
+0047278c 0421       movs     r1, #4
+0047278e 0420       movs     r0, #4
+00472790 53f0c1f8   bl       #0x4c5916 ; 
+00472794 06e0       b        #0x4727a4
+00472796 0023       movs     r3, #0
+00472798 0022       movs     r2, #0
+0047279a 0e21       movs     r1, #0xe
+0047279c 0420       movs     r0, #4
+0047279e 53f0baf8   bl       #0x4c5916 ; 
+004727a2 ffe7       b        #0x4727a4
+004727a4 0020       movs     r0, #0
+004727a6 05b0       add      sp, #0x14
+004727a8 30bd       pop      {r4, r5, pc}
+
+unnamed 004727aa..004728a0 sha256=ddfa8c5d769c5e59c0bd70acb8143616492ee05283cc33d35a9d2cf24fb386a4
+004727aa 10b5       push     {r4, lr}
+004727ac 86b0       sub      sp, #0x18
+004727ae 0c00       movs     r4, r1
+004727b0 0028       cmp      r0, #0
+004727b2 02d1       bne      #0x4727ba
+004727b4 5ff0ff30   movs.w   r0, #-1
+004727b8 70e0       b        #0x47289c
+004727ba 2100       movs     r1, r4
+004727bc 89b2       uxth     r1, r1
+004727be 0629       cmp      r1, #6
+004727c0 29d2       bhs      #0x472816
+004727c2 caf784fc   bl       #0x43d0ce ; 
+004727c6 8007       lsls     r0, r0, #0x1e
+004727c8 11d5       bpl      #0x4727ee
+004727ca 2000       movs     r0, r4
+004727cc 80b2       uxth     r0, r0
+004727ce 0290       str      r0, [sp, #8]
+004727d0 dff83404   ldr.w    r0, [pc, #0x434]
+004727d4 0190       str      r0, [sp, #4]
+004727d6 40f22b20   movw     r0, #0x22b
+004727da 0090       str      r0, [sp]
+004727dc dff82c34   ldr.w    r3, [pc, #0x42c]
+004727e0 dff8d423   ldr.w    r2, [pc, #0x3d4]
+004727e4 dff8d413   ldr.w    r1, [pc, #0x3d4]
+004727e8 0220       movs     r0, #2
+004727ea caf7c3fe   bl       #0x43d574 ; FUN_0043d574
+004727ee caf76efc   bl       #0x43d0ce ; 
+004727f2 c007       lsls     r0, r0, #0x1f
+004727f4 03d4       bmi      #0x4727fe
+004727f6 caf76afc   bl       #0x43d0ce ; 
+004727fa 4007       lsls     r0, r0, #0x1d
+004727fc 08d5       bpl      #0x472810
+004727fe dff81024   ldr.w    r2, [pc, #0x410]
+00472802 a4b2       uxth     r4, r4
+00472804 2300       movs     r3, r4
+00472806 1100       movs     r1, r2
+00472808 5ff00460   movs.w   r0, #0x8400000
+0047280c caf747fb   bl       #0x43ce9e ; compress_log_output
+00472810 5ff0ff30   movs.w   r0, #-1
+00472814 42e0       b        #0x47289c
+00472816 dff8fc13   ldr.w    r1, [pc, #0x3fc]
+0047281a d1e90023   ldrd     r2, r3, [r1]
+0047281e cde90423   strd     r2, r3, [sp, #0x10]
+00472822 0421       movs     r1, #4
+00472824 adf81010   strh.w   r1, [sp, #0x10]
+00472828 0221       movs     r1, #2
+0047282a adf81210   strh.w   r1, [sp, #0x12]
+0047282e 0179       ldrb     r1, [r0, #4]
+00472830 8df81410   strb.w   r1, [sp, #0x14]
+00472834 4079       ldrb     r0, [r0, #5]
+00472836 8df81500   strb.w   r0, [sp, #0x15]
+0047283a 04a8       add      r0, sp, #0x10
+0047283c 53f0adfe   bl       #0x4c659a ; device_mgr_fn_004c659a
+00472840 caf745fc   bl       #0x43d0ce ; 
+00472844 8007       lsls     r0, r0, #0x1e
+00472846 14d5       bpl      #0x472872
+00472848 9df81500   ldrb.w   r0, [sp, #0x15]
+0047284c 0390       str      r0, [sp, #0xc]
+0047284e 9df81400   ldrb.w   r0, [sp, #0x14]
+00472852 0290       str      r0, [sp, #8]
+00472854 dff8c003   ldr.w    r0, [pc, #0x3c0]
+00472858 0190       str      r0, [sp, #4]
+0047285a 40f23720   movw     r0, #0x237
+0047285e 0090       str      r0, [sp]
+00472860 dff8a833   ldr.w    r3, [pc, #0x3a8]
+00472864 dff85023   ldr.w    r2, [pc, #0x350]
+00472868 dff85013   ldr.w    r1, [pc, #0x350]
+0047286c 0320       movs     r0, #3
+0047286e caf781fe   bl       #0x43d574 ; FUN_0043d574
+00472872 caf72cfc   bl       #0x43d0ce ; 
+00472876 c007       lsls     r0, r0, #0x1f
+00472878 03d4       bmi      #0x472882
+0047287a caf728fc   bl       #0x43d0ce ; 
+0047287e 4007       lsls     r0, r0, #0x1d
+00472880 0bd5       bpl      #0x47289a
+00472882 dff89813   ldr.w    r1, [pc, #0x398]
+00472886 9df81500   ldrb.w   r0, [sp, #0x15]
+0047288a 0090       str      r0, [sp]
+0047288c 9df81430   ldrb.w   r3, [sp, #0x14]
+00472890 0a00       movs     r2, r1
+00472892 5ff04860   movs.w   r0, #0xc800000
+00472896 caf702fb   bl       #0x43ce9e ; compress_log_output
+0047289a 0020       movs     r0, #0
+0047289c 06b0       add      sp, #0x18
+0047289e 10bd       pop      {r4, pc}
+
+unnamed 004728a0..004728b2 sha256=fdb0ded340e27d122dfe86a2b26036cffd025c17114772473a592eabfd5f6cf8
+004728a0 0020       movs     r0, #0
+004728a2 dff87c13   ldr.w    r1, [pc, #0x37c]
+004728a6 0870       strb     r0, [r1]
+004728a8 0020       movs     r0, #0
+004728aa dff87813   ldr.w    r1, [pc, #0x378]
+004728ae 0860       str      r0, [r1]
+004728b0 7047       bx       lr
+
+unnamed 004728b2..00472988 sha256=6e844176a37830b4187c08df6281352689bfce8cab64033205c981c2f256b140
+004728b2 38b5       push     {r3, r4, r5, lr}
+004728b4 84b0       sub      sp, #0x10
+004728b6 0079       ldrb     r0, [r0, #4]
+004728b8 0028       cmp      r0, #0
+004728ba 01d0       beq      #0x4728c0
+004728bc 0120       movs     r0, #1
+004728be 00e0       b        #0x4728c2
+004728c0 0020       movs     r0, #0
+004728c2 dff85c13   ldr.w    r1, [pc, #0x35c]
+004728c6 0200       movs     r2, r0
+004728c8 0b78       ldrb     r3, [r1]
+004728ca d2b2       uxtb     r2, r2
+004728cc 9a42       cmp      r2, r3
+004728ce 59d0       beq      #0x472984
+004728d0 0870       strb     r0, [r1]
+004728d2 c0b2       uxtb     r0, r0
+004728d4 0028       cmp      r0, #0
+004728d6 25d0       beq      #0x472924
+004728d8 d6f7f8fb   bl       #0x4490cc ; osKernelGetTickCount
+004728dc dff84413   ldr.w    r1, [pc, #0x344]
+004728e0 0860       str      r0, [r1]
+004728e2 caf7f4fb   bl       #0x43d0ce ; 
+004728e6 8007       lsls     r0, r0, #0x1e
+004728e8 0cd5       bpl      #0x472904
+004728ea dff83c03   ldr.w    r0, [pc, #0x33c]
+004728ee 0190       str      r0, [sp, #4]
+004728f0 40f24f20   movw     r0, #0x24f
+004728f4 0090       str      r0, [sp]
+004728f6 dff83433   ldr.w    r3, [pc, #0x334]
+004728fa af4a       ldr      r2, [pc, #0x2bc]
+004728fc af49       ldr      r1, [pc, #0x2bc]
+004728fe 0320       movs     r0, #3
+00472900 caf738fe   bl       #0x43d574 ; FUN_0043d574
+00472904 caf7e3fb   bl       #0x43d0ce ; 
+00472908 c007       lsls     r0, r0, #0x1f
+0047290a 03d4       bmi      #0x472914
+0047290c caf7dffb   bl       #0x43d0ce ; 
+00472910 4007       lsls     r0, r0, #0x1d
+00472912 06d5       bpl      #0x472922
+00472914 dff81813   ldr.w    r1, [pc, #0x318]
+00472918 0a00       movs     r2, r1
+0047291a 5ff04060   movs.w   r0, #0xc000000
+0047291e caf7befa   bl       #0x43ce9e ; compress_log_output
+00472922 2fe0       b        #0x472984
+00472924 bf4c       ldr      r4, [pc, #0x2fc]
+00472926 2068       ldr      r0, [r4]
+00472928 0028       cmp      r0, #0
+0047292a 2bd0       beq      #0x472984
+0047292c d6f7cefb   bl       #0x4490cc ; osKernelGetTickCount
+00472930 0500       movs     r5, r0
+00472932 2068       ldr      r0, [r4]
+00472934 2d1a       subs     r5, r5, r0
+00472936 0395       str      r5, [sp, #0xc]
+00472938 03aa       add      r2, sp, #0xc
+0047293a 0121       movs     r1, #1
+0047293c bd48       ldr      r0, [pc, #0x2f4]
+0047293e 1cf0f8f8   bl       #0x48eb32 ; 
+00472942 caf7c4fb   bl       #0x43d0ce ; 
+00472946 8007       lsls     r0, r0, #0x1e
+00472948 0bd5       bpl      #0x472962
+0047294a 0295       str      r5, [sp, #8]
+0047294c ba48       ldr      r0, [pc, #0x2e8]
+0047294e 0190       str      r0, [sp, #4]
+00472950 40f25320   movw     r0, #0x253
+00472954 0090       str      r0, [sp]
+00472956 b54b       ldr      r3, [pc, #0x2d4]
+00472958 974a       ldr      r2, [pc, #0x25c]
+0047295a 9849       ldr      r1, [pc, #0x260]
+0047295c 0320       movs     r0, #3
+0047295e caf709fe   bl       #0x43d574 ; FUN_0043d574
+00472962 caf7b4fb   bl       #0x43d0ce ; 
+00472966 c007       lsls     r0, r0, #0x1f
+00472968 03d4       bmi      #0x472972
+0047296a caf7b0fb   bl       #0x43d0ce ; 
+0047296e 4007       lsls     r0, r0, #0x1d
+00472970 06d5       bpl      #0x472980
+00472972 b24a       ldr      r2, [pc, #0x2c8]
+00472974 2b00       movs     r3, r5
+00472976 1100       movs     r1, r2
+00472978 5ff04460   movs.w   r0, #0xc400000
+0047297c caf78ffa   bl       #0x43ce9e ; compress_log_output
+00472980 0020       movs     r0, #0
+00472982 2060       str      r0, [r4]
+00472984 05b0       add      sp, #0x14
+00472986 30bd       pop      {r4, r5, pc}
+
+unnamed 00472988..00472bb0 sha256=90112e803eeaabcdd6dc57cdcbd4675dd90786898efd86be8fc052b488b8bce2
+00472988 10b5       push     {r4, lr}
+0047298a 8ab0       sub      sp, #0x28
+0047298c 0400       movs     r4, r0
+0047298e a078       ldrb     r0, [r4, #2]
+00472990 6128       cmp      r0, #0x61
+00472992 41d0       beq      #0x472a18
+00472994 8528       cmp      r0, #0x85
+00472996 0dd0       beq      #0x4729b4
+00472998 8a28       cmp      r0, #0x8a
+0047299a 1fd0       beq      #0x4729dc
+0047299c 8b28       cmp      r0, #0x8b
+0047299e 00f0b680   beq.w    #0x472b0e
+004729a2 8c28       cmp      r0, #0x8c
+004729a4 00f0b880   beq.w    #0x472b18
+004729a8 9428       cmp      r0, #0x94
+004729aa 3ad0       beq      #0x472a22
+004729ac 9628       cmp      r0, #0x96
+004729ae 00f0b780   beq.w    #0x472b20
+004729b2 fbe0       b        #0x472bac
+004729b4 a248       ldr      r0, [pc, #0x288]
+004729b6 04f08af8   bl       #0x476ace ; fw_event_loop_remove_delayed
+004729ba a248       ldr      r0, [pc, #0x288]
+004729bc 04f087f8   bl       #0x476ace ; fw_event_loop_remove_delayed
+004729c0 2ff0a8ff   bl       #0x4a2914 ; central_is_ring_owner_side_004a2914
+004729c4 0028       cmp      r0, #0
+004729c6 02d0       beq      #0x4729ce
+004729c8 2ff0a9fe   bl       #0x4a271e ; APP_MasterPublishRingLinkReady
+004729cc 02e0       b        #0x4729d4
+004729ce 0020       movs     r0, #0
+004729d0 49f022fd   bl       #0x4bc418 ; PB_TxEncodeNotifyRingConnectInfo
+004729d4 2000       movs     r0, r4
+004729d6 fff731fe   bl       #0x47263c ; 
+004729da e7e0       b        #0x472bac
+004729dc caf777fb   bl       #0x43d0ce ; 
+004729e0 8007       lsls     r0, r0, #0x1e
+004729e2 0ad5       bpl      #0x4729fa
+004729e4 9848       ldr      r0, [pc, #0x260]
+004729e6 0190       str      r0, [sp, #4]
+004729e8 40f27220   movw     r0, #0x272
+004729ec 0090       str      r0, [sp]
+004729ee 974b       ldr      r3, [pc, #0x25c]
+004729f0 714a       ldr      r2, [pc, #0x1c4]
+004729f2 7249       ldr      r1, [pc, #0x1c8]
+004729f4 0320       movs     r0, #3
+004729f6 caf7bdfd   bl       #0x43d574 ; FUN_0043d574
+004729fa caf768fb   bl       #0x43d0ce ; 
+004729fe c007       lsls     r0, r0, #0x1f
+00472a00 03d4       bmi      #0x472a0a
+00472a02 caf764fb   bl       #0x43d0ce ; 
+00472a06 4007       lsls     r0, r0, #0x1d
+00472a08 05d5       bpl      #0x472a16
+00472a0a 9149       ldr      r1, [pc, #0x244]
+00472a0c 0a00       movs     r2, r1
+00472a0e 5ff04060   movs.w   r0, #0xc000000
+00472a12 caf744fa   bl       #0x43ce9e ; compress_log_output
+00472a16 c9e0       b        #0x472bac
+00472a18 89b2       uxth     r1, r1
+00472a1a 2000       movs     r0, r4
+00472a1c fff73ffe   bl       #0x47269e ; 
+00472a20 c4e0       b        #0x472bac
+00472a22 2079       ldrb     r0, [r4, #4]
+00472a24 2028       cmp      r0, #0x20
+00472a26 02d0       beq      #0x472a2e
+00472a28 2079       ldrb     r0, [r4, #4]
+00472a2a 4028       cmp      r0, #0x40
+00472a2c 51d1       bne      #0x472ad2
+00472a2e 2079       ldrb     r0, [r4, #4]
+00472a30 2028       cmp      r0, #0x20
+00472a32 1dd1       bne      #0x472a70
+00472a34 caf74bfb   bl       #0x43d0ce ; 
+00472a38 8007       lsls     r0, r0, #0x1e
+00472a3a 0ad5       bpl      #0x472a52
+00472a3c 8548       ldr      r0, [pc, #0x214]
+00472a3e 0190       str      r0, [sp, #4]
+00472a40 40f28220   movw     r0, #0x282
+00472a44 0090       str      r0, [sp]
+00472a46 814b       ldr      r3, [pc, #0x204]
+00472a48 5b4a       ldr      r2, [pc, #0x16c]
+00472a4a 5c49       ldr      r1, [pc, #0x170]
+00472a4c 0120       movs     r0, #1
+00472a4e caf791fd   bl       #0x43d574 ; FUN_0043d574
+00472a52 caf73cfb   bl       #0x43d0ce ; 
+00472a56 c007       lsls     r0, r0, #0x1f
+00472a58 03d4       bmi      #0x472a62
+00472a5a caf738fb   bl       #0x43d0ce ; 
+00472a5e 4007       lsls     r0, r0, #0x1d
+00472a60 05d5       bpl      #0x472a6e
+00472a62 7d49       ldr      r1, [pc, #0x1f4]
+00472a64 0a00       movs     r2, r1
+00472a66 5ff08060   movs.w   r0, #0x4000000
+00472a6a caf718fa   bl       #0x43ce9e ; compress_log_output
+00472a6e 1ce0       b        #0x472aaa
+00472a70 caf72dfb   bl       #0x43d0ce ; 
+00472a74 8007       lsls     r0, r0, #0x1e
+00472a76 0ad5       bpl      #0x472a8e
+00472a78 7848       ldr      r0, [pc, #0x1e0]
+00472a7a 0190       str      r0, [sp, #4]
+00472a7c 40f28620   movw     r0, #0x286
+00472a80 0090       str      r0, [sp]
+00472a82 724b       ldr      r3, [pc, #0x1c8]
+00472a84 4c4a       ldr      r2, [pc, #0x130]
+00472a86 4d49       ldr      r1, [pc, #0x134]
+00472a88 0120       movs     r0, #1
+00472a8a caf773fd   bl       #0x43d574 ; FUN_0043d574
+00472a8e caf71efb   bl       #0x43d0ce ; 
+00472a92 c007       lsls     r0, r0, #0x1f
+00472a94 03d4       bmi      #0x472a9e
+00472a96 caf71afb   bl       #0x43d0ce ; 
+00472a9a 4007       lsls     r0, r0, #0x1d
+00472a9c 05d5       bpl      #0x472aaa
+00472a9e 7049       ldr      r1, [pc, #0x1c0]
+00472aa0 0a00       movs     r2, r1
+00472aa2 5ff08060   movs.w   r0, #0x4000000
+00472aa6 caf7faf9   bl       #0x43ce9e ; compress_log_output
+00472aaa 6e4c       ldr      r4, [pc, #0x1b8]
+00472aac 2000       movs     r0, r4
+00472aae 04f00ef8   bl       #0x476ace ; fw_event_loop_remove_delayed
+00472ab2 6422       movs     r2, #0x64
+00472ab4 0021       movs     r1, #0
+00472ab6 2000       movs     r0, r4
+00472ab8 03f061ff   bl       #0x47697e ; fw_event_loop_push_delayed
+00472abc 6a4c       ldr      r4, [pc, #0x1a8]
+00472abe 2000       movs     r0, r4
+00472ac0 04f005f8   bl       #0x476ace ; fw_event_loop_remove_delayed
+00472ac4 4ff4fa72   mov.w    r2, #0x1f4
+00472ac8 0021       movs     r1, #0
+00472aca 2000       movs     r0, r4
+00472acc 03f057ff   bl       #0x47697e ; fw_event_loop_push_delayed
+00472ad0 1ce0       b        #0x472b0c
+00472ad2 caf7fcfa   bl       #0x43d0ce ; 
+00472ad6 8007       lsls     r0, r0, #0x1e
+00472ad8 0ad5       bpl      #0x472af0
+00472ada 6448       ldr      r0, [pc, #0x190]
+00472adc 0190       str      r0, [sp, #4]
+00472ade 40f28f20   movw     r0, #0x28f
+00472ae2 0090       str      r0, [sp]
+00472ae4 594b       ldr      r3, [pc, #0x164]
+00472ae6 344a       ldr      r2, [pc, #0xd0]
+00472ae8 3449       ldr      r1, [pc, #0xd0]
+00472aea 0420       movs     r0, #4
+00472aec caf742fd   bl       #0x43d574 ; FUN_0043d574
+00472af0 caf7edfa   bl       #0x43d0ce ; 
+00472af4 c007       lsls     r0, r0, #0x1f
+00472af6 03d4       bmi      #0x472b00
+00472af8 caf7e9fa   bl       #0x43d0ce ; 
+00472afc 4007       lsls     r0, r0, #0x1d
+00472afe 05d5       bpl      #0x472b0c
+00472b00 5b49       ldr      r1, [pc, #0x16c]
+00472b02 0a00       movs     r2, r1
+00472b04 5ff08050   movs.w   r0, #0x10000000
+00472b08 caf7c9f9   bl       #0x43ce9e ; compress_log_output
+00472b0c 4ee0       b        #0x472bac
+00472b0e 89b2       uxth     r1, r1
+00472b10 2000       movs     r0, r4
+00472b12 fff74afe   bl       #0x4727aa ; 
+00472b16 49e0       b        #0x472bac
+00472b18 2000       movs     r0, r4
+00472b1a fff7cafe   bl       #0x4728b2 ; 
+00472b1e 45e0       b        #0x472bac
+00472b20 0621       movs     r1, #6
+00472b22 0022       movs     r2, #0
+00472b24 08ac       add      r4, sp, #0x20
+00472b26 2000       movs     r0, r4
+00472b28 c9f7dcfa   bl       #0x43c0e4 ; 
+00472b2c 0021       movs     r1, #0
+00472b2e 08a8       add      r0, sp, #0x20
+00472b30 2ff02efb   bl       #0x4a2190 ; target_addr_name_copy_004a2190
+00472b34 caf7cbfa   bl       #0x43d0ce ; 
+00472b38 8007       lsls     r0, r0, #0x1e
+00472b3a 18d5       bpl      #0x472b6e
+00472b3c 08a8       add      r0, sp, #0x20
+00472b3e 9df82010   ldrb.w   r1, [sp, #0x20]
+00472b42 0791       str      r1, [sp, #0x1c]
+00472b44 4178       ldrb     r1, [r0, #1]
+00472b46 0691       str      r1, [sp, #0x18]
+00472b48 8178       ldrb     r1, [r0, #2]
+00472b4a 0591       str      r1, [sp, #0x14]
+00472b4c c178       ldrb     r1, [r0, #3]
+00472b4e 0491       str      r1, [sp, #0x10]
+00472b50 0179       ldrb     r1, [r0, #4]
+00472b52 0391       str      r1, [sp, #0xc]
+00472b54 4079       ldrb     r0, [r0, #5]
+00472b56 0290       str      r0, [sp, #8]
+00472b58 4648       ldr      r0, [pc, #0x118]
+00472b5a 0190       str      r0, [sp, #4]
+00472b5c 40f2aa20   movw     r0, #0x2aa
+00472b60 0090       str      r0, [sp]
+00472b62 3a4b       ldr      r3, [pc, #0xe8]
+00472b64 144a       ldr      r2, [pc, #0x50]
+00472b66 1549       ldr      r1, [pc, #0x54]
+00472b68 0220       movs     r0, #2
+00472b6a caf703fd   bl       #0x43d574 ; FUN_0043d574
+00472b6e caf7aefa   bl       #0x43d0ce ; 
+00472b72 c007       lsls     r0, r0, #0x1f
+00472b74 03d4       bmi      #0x472b7e
+00472b76 caf7aafa   bl       #0x43d0ce ; 
+00472b7a 4007       lsls     r0, r0, #0x1d
+00472b7c 12d5       bpl      #0x472ba4
+00472b7e 3e49       ldr      r1, [pc, #0xf8]
+00472b80 08a8       add      r0, sp, #0x20
+00472b82 9df82020   ldrb.w   r2, [sp, #0x20]
+00472b86 0492       str      r2, [sp, #0x10]
+00472b88 4278       ldrb     r2, [r0, #1]
+00472b8a 0392       str      r2, [sp, #0xc]
+00472b8c 8278       ldrb     r2, [r0, #2]
+00472b8e 0292       str      r2, [sp, #8]
+00472b90 c278       ldrb     r2, [r0, #3]
+00472b92 0192       str      r2, [sp, #4]
+00472b94 0279       ldrb     r2, [r0, #4]
+00472b96 0092       str      r2, [sp]
+00472b98 4379       ldrb     r3, [r0, #5]
+00472b9a 0a00       movs     r2, r1
+00472b9c 5ff01860   movs.w   r0, #0x9800000
+00472ba0 caf77df9   bl       #0x43ce9e ; compress_log_output
+00472ba4 08a8       add      r0, sp, #0x20
+00472ba6 30f079f8   bl       #0x4a2c9c ; APP_MasterCleanupRingUnpair
+00472baa ffe7       b        #0x472bac
+00472bac 0ab0       add      sp, #0x28
+00472bae 10bd       pop      {r4, pc}
+
+_thread_msg_handler 004c4de8..004c4ee4 sha256=e3c3ee5f9cd1bb2eccbdfecf46d1e5b7817e9d48759bd1ff9cf95cb35140f241
+004c4de8 00b5       push     {lr}
+004c4dea 85b0       sub      sp, #0x14
+004c4dec 0020       movs     r0, #0
+004c4dee 0490       str      r0, [sp, #0x10]
+004c4df0 10e0       b        #0x4c4e14
+004c4df2 0498       ldr      r0, [sp, #0x10]
+004c4df4 0068       ldr      r0, [r0]
+004c4df6 0228       cmp      r0, #2
+004c4df8 1bd0       beq      #0x4c4e32
+004c4dfa 8028       cmp      r0, #0x80
+004c4dfc 4dd0       beq      #0x4c4e9a
+004c4dfe b0f5806f   cmp.w    r0, #0x400
+004c4e02 62d0       beq      #0x4c4eca
+004c4e04 b0f5805f   cmp.w    r0, #0x1000
+004c4e08 51d0       beq      #0x4c4eae
+004c4e0a 0498       ldr      r0, [sp, #0x10]
+004c4e0c aff783ff   bl       #0x474d16 ; file_heap_free
+004c4e10 0020       movs     r0, #0
+004c4e12 0490       str      r0, [sp, #0x10]
+004c4e14 0023       movs     r3, #0
+004c4e16 0022       movs     r2, #0
+004c4e18 04a9       add      r1, sp, #0x10
+004c4e1a dff82c08   ldr.w    r0, [pc, #0x82c]
+004c4e1e c068       ldr      r0, [r0, #0xc]
+004c4e20 84f78cfe   bl       #0x449b3c ; osMessageQueueGet
+004c4e24 0028       cmp      r0, #0
+004c4e26 02d1       bne      #0x4c4e2e
+004c4e28 0498       ldr      r0, [sp, #0x10]
+004c4e2a 0028       cmp      r0, #0
+004c4e2c e1d1       bne      #0x4c4df2
+004c4e2e 05b0       add      sp, #0x14
+004c4e30 00bd       pop      {pc}
+004c4e32 78f74cf9   bl       #0x43d0ce ; 
+004c4e36 8007       lsls     r0, r0, #0x1e
+004c4e38 13d5       bpl      #0x4c4e62
+004c4e3a 0498       ldr      r0, [sp, #0x10]
+004c4e3c 4068       ldr      r0, [r0, #4]
+004c4e3e 0390       str      r0, [sp, #0xc]
+004c4e40 0498       ldr      r0, [sp, #0x10]
+004c4e42 0068       ldr      r0, [r0]
+004c4e44 0290       str      r0, [sp, #8]
+004c4e46 dff80c08   ldr.w    r0, [pc, #0x80c]
+004c4e4a 0190       str      r0, [sp, #4]
+004c4e4c c020       movs     r0, #0xc0
+004c4e4e 0090       str      r0, [sp]
+004c4e50 dff80438   ldr.w    r3, [pc, #0x804]
+004c4e54 dff8e427   ldr.w    r2, [pc, #0x7e4]
+004c4e58 dff8e417   ldr.w    r1, [pc, #0x7e4]
+004c4e5c 0420       movs     r0, #4
+004c4e5e 78f789fb   bl       #0x43d574 ; FUN_0043d574
+004c4e62 78f734f9   bl       #0x43d0ce ; 
+004c4e66 c007       lsls     r0, r0, #0x1f
+004c4e68 03d4       bmi      #0x4c4e72
+004c4e6a 78f730f9   bl       #0x43d0ce ; 
+004c4e6e 4007       lsls     r0, r0, #0x1d
+004c4e70 0bd5       bpl      #0x4c4e8a
+004c4e72 dff8e817   ldr.w    r1, [pc, #0x7e8]
+004c4e76 0498       ldr      r0, [sp, #0x10]
+004c4e78 4068       ldr      r0, [r0, #4]
+004c4e7a 0090       str      r0, [sp]
+004c4e7c 0498       ldr      r0, [sp, #0x10]
+004c4e7e 0368       ldr      r3, [r0]
+004c4e80 0a00       movs     r2, r1
+004c4e82 5ff08450   movs.w   r0, #0x10800000
+004c4e86 78f70af8   bl       #0x43ce9e ; compress_log_output
+004c4e8a 0498       ldr      r0, [sp, #0x10]
+004c4e8c 4168       ldr      r1, [r0, #4]
+004c4e8e 89b2       uxth     r1, r1
+004c4e90 0498       ldr      r0, [sp, #0x10]
+004c4e92 0830       adds     r0, #8
+004c4e94 adf778fd   bl       #0x472988 ; 
+004c4e98 b7e7       b        #0x4c4e0a
+004c4e9a 0498       ldr      r0, [sp, #0x10]
+004c4e9c 4068       ldr      r0, [r0, #4]
+004c4e9e 0028       cmp      r0, #0
+004c4ea0 04d0       beq      #0x4c4eac
+004c4ea2 0498       ldr      r0, [sp, #0x10]
+004c4ea4 007a       ldrb     r0, [r0, #8]
+004c4ea6 c0b2       uxtb     r0, r0
+004c4ea8 adf766fa   bl       #0x472378 ; 
+004c4eac ade7       b        #0x4c4e0a
+004c4eae 0498       ldr      r0, [sp, #0x10]
+004c4eb0 4068       ldr      r0, [r0, #4]
+004c4eb2 0228       cmp      r0, #2
+004c4eb4 08d3       blo      #0x4c4ec8
+004c4eb6 0498       ldr      r0, [sp, #0x10]
+004c4eb8 017a       ldrb     r1, [r0, #8]
+004c4eba 0498       ldr      r0, [sp, #0x10]
+004c4ebc 407a       ldrb     r0, [r0, #9]
+004c4ebe 50ea0120   orrs.w   r0, r0, r1, lsl #8
+004c4ec2 80b2       uxth     r0, r0
+004c4ec4 adf708fa   bl       #0x4722d8 ; 
+004c4ec8 9fe7       b        #0x4c4e0a
+004c4eca 0498       ldr      r0, [sp, #0x10]
+004c4ecc 4068       ldr      r0, [r0, #4]
+004c4ece 0028       cmp      r0, #0
+004c4ed0 07d0       beq      #0x4c4ee2
+004c4ed2 0498       ldr      r0, [sp, #0x10]
+004c4ed4 007a       ldrb     r0, [r0, #8]
+004c4ed6 0499       ldr      r1, [sp, #0x10]
+004c4ed8 497a       ldrb     r1, [r1, #9]
+004c4eda c9b2       uxtb     r1, r1
+004c4edc c0b2       uxtb     r0, r0
+004c4ede adf77afa   bl       #0x4723d6 ; 
+004c4ee2 92e7       b        #0x4c4e0a
+
+_thread_notify_event_handler 004c507e..004c53a6 sha256=cd265433e939f0e0a5026f7ca537066f5213f18d7fcf277c6dc3dd9d45eec9b7
+004c507e 3eb5       push     {r1, r2, r3, r4, r5, lr}
+004c5080 0400       movs     r4, r0
+004c5082 78f724f8   bl       #0x43d0ce ; 
+004c5086 8007       lsls     r0, r0, #0x1e
+004c5088 0fd5       bpl      #0x4c50aa
+004c508a 0294       str      r4, [sp, #8]
+004c508c dff80806   ldr.w    r0, [pc, #0x608]
+004c5090 0190       str      r0, [sp, #4]
+004c5092 40f20f10   movw     r0, #0x10f
+004c5096 0090       str      r0, [sp]
+004c5098 dff80036   ldr.w    r3, [pc, #0x600]
+004c509c dff89c25   ldr.w    r2, [pc, #0x59c]
+004c50a0 dff89c15   ldr.w    r1, [pc, #0x59c]
+004c50a4 0420       movs     r0, #4
+004c50a6 78f765fa   bl       #0x43d574 ; FUN_0043d574
+004c50aa 78f710f8   bl       #0x43d0ce ; 
+004c50ae c007       lsls     r0, r0, #0x1f
+004c50b0 03d4       bmi      #0x4c50ba
+004c50b2 78f70cf8   bl       #0x43d0ce ; 
+004c50b6 4007       lsls     r0, r0, #0x1d
+004c50b8 07d5       bpl      #0x4c50ca
+004c50ba dff8e415   ldr.w    r1, [pc, #0x5e4]
+004c50be 2300       movs     r3, r4
+004c50c0 0a00       movs     r2, r1
+004c50c2 5ff08250   movs.w   r0, #0x10400000
+004c50c6 77f7eafe   bl       #0x43ce9e ; compress_log_output
+004c50ca 6002       lsls     r0, r4, #9
+004c50cc 01d5       bpl      #0x4c50d2
+004c50ce fff78bfe   bl       #0x4c4de8 ; _thread_msg_handler
+004c50d2 6007       lsls     r0, r4, #0x1d
+004c50d4 41d5       bpl      #0x4c515a
+004c50d6 77f7faff   bl       #0x43d0ce ; 
+004c50da 8007       lsls     r0, r0, #0x1e
+004c50dc 0ed5       bpl      #0x4c50fc
+004c50de dff8c405   ldr.w    r0, [pc, #0x5c4]
+004c50e2 0190       str      r0, [sp, #4]
+004c50e4 40f21910   movw     r0, #0x119
+004c50e8 0090       str      r0, [sp]
+004c50ea dff8b035   ldr.w    r3, [pc, #0x5b0]
+004c50ee dff84c25   ldr.w    r2, [pc, #0x54c]
+004c50f2 dff84c15   ldr.w    r1, [pc, #0x54c]
+004c50f6 0420       movs     r0, #4
+004c50f8 78f73cfa   bl       #0x43d574 ; FUN_0043d574
+004c50fc 77f7e7ff   bl       #0x43d0ce ; 
+004c5100 c007       lsls     r0, r0, #0x1f
+004c5102 03d4       bmi      #0x4c510c
+004c5104 77f7e3ff   bl       #0x43d0ce ; 
+004c5108 4007       lsls     r0, r0, #0x1d
+004c510a 06d5       bpl      #0x4c511a
+004c510c dff89825   ldr.w    r2, [pc, #0x598]
+004c5110 1100       movs     r1, r2
+004c5112 5ff08050   movs.w   r0, #0x10000000
+004c5116 77f7c2fe   bl       #0x43ce9e ; compress_log_output
+004c511a dff89055   ldr.w    r5, [pc, #0x590]
+004c511e 2800       movs     r0, r5
+004c5120 b1f7d5fc   bl       #0x476ace ; fw_event_loop_remove_delayed
+004c5124 c822       movs     r2, #0xc8
+004c5126 0021       movs     r1, #0
+004c5128 2800       movs     r0, r5
+004c512a b1f728fc   bl       #0x47697e ; fw_event_loop_push_delayed
+004c512e dff88055   ldr.w    r5, [pc, #0x580]
+004c5132 2800       movs     r0, r5
+004c5134 b1f7cbfc   bl       #0x476ace ; fw_event_loop_remove_delayed
+004c5138 4ff4fa72   mov.w    r2, #0x1f4
+004c513c 0021       movs     r1, #0
+004c513e 2800       movs     r0, r5
+004c5140 b1f71dfc   bl       #0x47697e ; fw_event_loop_push_delayed
+004c5144 dff86c55   ldr.w    r5, [pc, #0x56c]
+004c5148 2800       movs     r0, r5
+004c514a b1f7c0fc   bl       #0x476ace ; fw_event_loop_remove_delayed
+004c514e 40f6b832   movw     r2, #0xbb8
+004c5152 0021       movs     r1, #0
+004c5154 2800       movs     r0, r5
+004c5156 b1f712fc   bl       #0x47697e ; fw_event_loop_push_delayed
+004c515a 2007       lsls     r0, r4, #0x1c
+004c515c 21d5       bpl      #0x4c51a2
+004c515e 77f7b6ff   bl       #0x43d0ce ; 
+004c5162 8007       lsls     r0, r0, #0x1e
+004c5164 0ed5       bpl      #0x4c5184
+004c5166 dff85005   ldr.w    r0, [pc, #0x550]
+004c516a 0190       str      r0, [sp, #4]
+004c516c 40f22510   movw     r0, #0x125
+004c5170 0090       str      r0, [sp]
+004c5172 dff82835   ldr.w    r3, [pc, #0x528]
+004c5176 dff8c424   ldr.w    r2, [pc, #0x4c4]
+004c517a dff8c414   ldr.w    r1, [pc, #0x4c4]
+004c517e 0420       movs     r0, #4
+004c5180 78f7f8f9   bl       #0x43d574 ; FUN_0043d574
+004c5184 77f7a3ff   bl       #0x43d0ce ; 
+004c5188 c007       lsls     r0, r0, #0x1f
+004c518a 03d4       bmi      #0x4c5194
+004c518c 77f79fff   bl       #0x43d0ce ; 
+004c5190 4007       lsls     r0, r0, #0x1d
+004c5192 06d5       bpl      #0x4c51a2
+004c5194 dff82415   ldr.w    r1, [pc, #0x524]
+004c5198 0a00       movs     r2, r1
+004c519a 5ff08050   movs.w   r0, #0x10000000
+004c519e 77f77efe   bl       #0x43ce9e ; compress_log_output
+004c51a2 e006       lsls     r0, r4, #0x1b
+004c51a4 44d5       bpl      #0x4c5230
+004c51a6 77f792ff   bl       #0x43d0ce ; 
+004c51aa 8007       lsls     r0, r0, #0x1e
+004c51ac 0ed5       bpl      #0x4c51cc
+004c51ae dff81005   ldr.w    r0, [pc, #0x510]
+004c51b2 0190       str      r0, [sp, #4]
+004c51b4 4ff49670   mov.w    r0, #0x12c
+004c51b8 0090       str      r0, [sp]
+004c51ba dff8e034   ldr.w    r3, [pc, #0x4e0]
+004c51be dff87c24   ldr.w    r2, [pc, #0x47c]
+004c51c2 dff87c14   ldr.w    r1, [pc, #0x47c]
+004c51c6 0420       movs     r0, #4
+004c51c8 78f7d4f9   bl       #0x43d574 ; FUN_0043d574
+004c51cc 77f77fff   bl       #0x43d0ce ; 
+004c51d0 c007       lsls     r0, r0, #0x1f
+004c51d2 03d4       bmi      #0x4c51dc
+004c51d4 77f77bff   bl       #0x43d0ce ; 
+004c51d8 4007       lsls     r0, r0, #0x1d
+004c51da 06d5       bpl      #0x4c51ea
+004c51dc dff8e414   ldr.w    r1, [pc, #0x4e4]
+004c51e0 0a00       movs     r2, r1
+004c51e2 5ff08050   movs.w   r0, #0x10000000
+004c51e6 77f75afe   bl       #0x43ce9e ; compress_log_output
+004c51ea dff8c454   ldr.w    r5, [pc, #0x4c4]
+004c51ee 2800       movs     r0, r5
+004c51f0 b1f76dfc   bl       #0x476ace ; fw_event_loop_remove_delayed
+004c51f4 c822       movs     r2, #0xc8
+004c51f6 0021       movs     r1, #0
+004c51f8 2800       movs     r0, r5
+004c51fa b1f7c0fb   bl       #0x47697e ; fw_event_loop_push_delayed
+004c51fe dff8b454   ldr.w    r5, [pc, #0x4b4]
+004c5202 2800       movs     r0, r5
+004c5204 b1f763fc   bl       #0x476ace ; fw_event_loop_remove_delayed
+004c5208 40f6b832   movw     r2, #0xbb8
+004c520c 0021       movs     r1, #0
+004c520e 2800       movs     r0, r5
+004c5210 b1f7b5fb   bl       #0x47697e ; fw_event_loop_push_delayed
+004c5214 adf711f9   bl       #0x47243a ; 
+004c5218 a7f70afa   bl       #0x46c630 ; settings_get_terminal_mode
+004c521c 0028       cmp      r0, #0
+004c521e 02d0       beq      #0x4c5226
+004c5220 4ff4fa70   mov.w    r0, #0x1f4
+004c5224 01e0       b        #0x4c522a
+004c5226 4ff47a70   mov.w    r0, #0x3e8
+004c522a 80b2       uxth     r0, r0
+004c522c adf799f8   bl       #0x472362 ; 
+004c5230 a006       lsls     r0, r4, #0x1a
+004c5232 23d5       bpl      #0x4c527c
+004c5234 77f74bff   bl       #0x43d0ce ; 
+004c5238 8007       lsls     r0, r0, #0x1e
+004c523a 0ed5       bpl      #0x4c525a
+004c523c dff88804   ldr.w    r0, [pc, #0x488]
+004c5240 0190       str      r0, [sp, #4]
+004c5242 40f23d10   movw     r0, #0x13d
+004c5246 0090       str      r0, [sp]
+004c5248 dff85034   ldr.w    r3, [pc, #0x450]
+004c524c dff8ec23   ldr.w    r2, [pc, #0x3ec]
+004c5250 dff8ec13   ldr.w    r1, [pc, #0x3ec]
+004c5254 0420       movs     r0, #4
+004c5256 78f78df9   bl       #0x43d574 ; FUN_0043d574
+004c525a 77f738ff   bl       #0x43d0ce ; 
+004c525e c007       lsls     r0, r0, #0x1f
+004c5260 03d4       bmi      #0x4c526a
+004c5262 77f734ff   bl       #0x43d0ce ; 
+004c5266 4007       lsls     r0, r0, #0x1d
+004c5268 06d5       bpl      #0x4c5278
+004c526a dff86014   ldr.w    r1, [pc, #0x460]
+004c526e 0a00       movs     r2, r1
+004c5270 5ff08050   movs.w   r0, #0x10000000
+004c5274 77f713fe   bl       #0x43ce9e ; compress_log_output
+004c5278 acf7e4ff   bl       #0x472244 ; 
+004c527c 6006       lsls     r0, r4, #0x19
+004c527e 39d5       bpl      #0x4c52f4
+004c5280 77f725ff   bl       #0x43d0ce ; 
+004c5284 8007       lsls     r0, r0, #0x1e
+004c5286 0ed5       bpl      #0x4c52a6
+004c5288 dff84404   ldr.w    r0, [pc, #0x444]
+004c528c 0190       str      r0, [sp, #4]
+004c528e 40f24310   movw     r0, #0x143
+004c5292 0090       str      r0, [sp]
+004c5294 dff80434   ldr.w    r3, [pc, #0x404]
+004c5298 dff8a023   ldr.w    r2, [pc, #0x3a0]
+004c529c dff8a013   ldr.w    r1, [pc, #0x3a0]
+004c52a0 0420       movs     r0, #4
+004c52a2 78f767f9   bl       #0x43d574 ; FUN_0043d574
+004c52a6 77f712ff   bl       #0x43d0ce ; 
+004c52aa c007       lsls     r0, r0, #0x1f
+004c52ac 03d4       bmi      #0x4c52b6
+004c52ae 77f70eff   bl       #0x43d0ce ; 
+004c52b2 4007       lsls     r0, r0, #0x1d
+004c52b4 06d5       bpl      #0x4c52c4
+004c52b6 dff81c14   ldr.w    r1, [pc, #0x41c]
+004c52ba 0a00       movs     r2, r1
+004c52bc 5ff08050   movs.w   r0, #0x10000000
+004c52c0 77f7edfd   bl       #0x43ce9e ; compress_log_output
+004c52c4 adf73ff9   bl       #0x472546 ; 
+004c52c8 dff80c54   ldr.w    r5, [pc, #0x40c]
+004c52cc 2800       movs     r0, r5
+004c52ce b1f7fefb   bl       #0x476ace ; fw_event_loop_remove_delayed
+004c52d2 4ff4fa72   mov.w    r2, #0x1f4
+004c52d6 0021       movs     r1, #0
+004c52d8 2800       movs     r0, r5
+004c52da b1f750fb   bl       #0x47697e ; fw_event_loop_push_delayed
+004c52de dff8fc53   ldr.w    r5, [pc, #0x3fc]
+004c52e2 2800       movs     r0, r5
+004c52e4 b1f7f3fb   bl       #0x476ace ; fw_event_loop_remove_delayed
+004c52e8 4ff42f72   mov.w    r2, #0x2bc
+004c52ec 0021       movs     r1, #0
+004c52ee 2800       movs     r0, r5
+004c52f0 b1f745fb   bl       #0x47697e ; fw_event_loop_push_delayed
+004c52f4 2005       lsls     r0, r4, #0x14
+004c52f6 2fd5       bpl      #0x4c5358
+004c52f8 77f7e9fe   bl       #0x43d0ce ; 
+004c52fc 8007       lsls     r0, r0, #0x1e
+004c52fe 0ed5       bpl      #0x4c531e
+004c5300 dff8dc03   ldr.w    r0, [pc, #0x3dc]
+004c5304 0190       str      r0, [sp, #4]
+004c5306 4ff4a770   mov.w    r0, #0x14e
+004c530a 0090       str      r0, [sp]
+004c530c dff88c33   ldr.w    r3, [pc, #0x38c]
+004c5310 dff82823   ldr.w    r2, [pc, #0x328]
+004c5314 dff82813   ldr.w    r1, [pc, #0x328]
+004c5318 0420       movs     r0, #4
+004c531a 78f72bf9   bl       #0x43d574 ; FUN_0043d574
+004c531e 77f7d6fe   bl       #0x43d0ce ; 
+004c5322 c007       lsls     r0, r0, #0x1f
+004c5324 03d4       bmi      #0x4c532e
+004c5326 77f7d2fe   bl       #0x43d0ce ; 
+004c532a 4007       lsls     r0, r0, #0x1d
+004c532c 06d5       bpl      #0x4c533c
+004c532e dff8b413   ldr.w    r1, [pc, #0x3b4]
+004c5332 0a00       movs     r2, r1
+004c5334 5ff08050   movs.w   r0, #0x10000000
+004c5338 77f7b1fd   bl       #0x43ce9e ; compress_log_output
+004c533c adf77df8   bl       #0x47243a ; 
+004c5340 a7f776f9   bl       #0x46c630 ; settings_get_terminal_mode
+004c5344 0028       cmp      r0, #0
+004c5346 02d0       beq      #0x4c534e
+004c5348 4ff4fa70   mov.w    r0, #0x1f4
+004c534c 01e0       b        #0x4c5352
+004c534e 4ff47a70   mov.w    r0, #0x3e8
+004c5352 80b2       uxth     r0, r0
+004c5354 adf705f8   bl       #0x472362 ; 
+004c5358 e005       lsls     r0, r4, #0x17
+004c535a 1fd5       bpl      #0x4c539c
+004c535c 77f7b7fe   bl       #0x43d0ce ; 
+004c5360 8007       lsls     r0, r0, #0x1e
+004c5362 0cd5       bpl      #0x4c537e
+004c5364 dff88003   ldr.w    r0, [pc, #0x380]
+004c5368 0190       str      r0, [sp, #4]
+004c536a 40f25710   movw     r0, #0x157
+004c536e 0090       str      r0, [sp]
+004c5370 dff82833   ldr.w    r3, [pc, #0x328]
+004c5374 b14a       ldr      r2, [pc, #0x2c4]
+004c5376 b249       ldr      r1, [pc, #0x2c8]
+004c5378 0420       movs     r0, #4
+004c537a 78f7fbf8   bl       #0x43d574 ; FUN_0043d574
+004c537e 77f7a6fe   bl       #0x43d0ce ; 
+004c5382 c007       lsls     r0, r0, #0x1f
+004c5384 03d4       bmi      #0x4c538e
+004c5386 77f7a2fe   bl       #0x43d0ce ; 
+004c538a 4007       lsls     r0, r0, #0x1d
+004c538c 06d5       bpl      #0x4c539c
+004c538e dff85c13   ldr.w    r1, [pc, #0x35c]
+004c5392 0a00       movs     r2, r1
+004c5394 5ff08050   movs.w   r0, #0x10000000
+004c5398 77f781fd   bl       #0x43ce9e ; compress_log_output
+004c539c 2002       lsls     r0, r4, #8
+004c539e 01d5       bpl      #0x4c53a4
+004c53a0 00f001f8   bl       #0x4c53a6 ; _thread_exit
+004c53a4 37bd       pop      {r0, r1, r2, r4, r5, pc}
+
+Thread_SendMsgToRingTaskWithId 004c548c..004c549c sha256=ca041a24cffbcb08b27531154b822d996c893d63e557a9dfeca0a85836b9f12b
+004c548c 80b5       push     {r7, lr}
+004c548e 0a00       movs     r2, r1
+004c5490 92b2       uxth     r2, r2
+004c5492 0100       movs     r1, r0
+004c5494 0220       movs     r0, #2
+004c5496 00f001f8   bl       #0x4c549c ; ring_task_msg_send
+004c549a 02bd       pop      {r1, pc}
+
+ring_task_msg_send 004c549c..004c5632 sha256=c23c0935aca13135749964807817be43bd93bc445b3a36fc7a894fa1d3681953
+004c549c 2de9fe43   push.w   {r1, r2, r3, r4, r5, r6, r7, r8, sb, lr}
+004c54a0 0500       movs     r5, r0
+004c54a2 0c00       movs     r4, r1
+004c54a4 1600       movs     r6, r2
+004c54a6 002c       cmp      r4, #0
+004c54a8 23d1       bne      #0x4c54f2
+004c54aa 3000       movs     r0, r6
+004c54ac 80b2       uxth     r0, r0
+004c54ae 0028       cmp      r0, #0
+004c54b0 1fd0       beq      #0x4c54f2
+004c54b2 77f70cfe   bl       #0x43d0ce ; 
+004c54b6 8007       lsls     r0, r0, #0x1e
+004c54b8 0ad5       bpl      #0x4c54d0
+004c54ba 9548       ldr      r0, [pc, #0x254]
+004c54bc 0190       str      r0, [sp, #4]
+004c54be 4ff4c170   mov.w    r0, #0x182
+004c54c2 0090       str      r0, [sp]
+004c54c4 934b       ldr      r3, [pc, #0x24c]
+004c54c6 5d4a       ldr      r2, [pc, #0x174]
+004c54c8 5d49       ldr      r1, [pc, #0x174]
+004c54ca 0120       movs     r0, #1
+004c54cc 78f752f8   bl       #0x43d574 ; FUN_0043d574
+004c54d0 77f7fdfd   bl       #0x43d0ce ; 
+004c54d4 c007       lsls     r0, r0, #0x1f
+004c54d6 03d4       bmi      #0x4c54e0
+004c54d8 77f7f9fd   bl       #0x43d0ce ; 
+004c54dc 4007       lsls     r0, r0, #0x1d
+004c54de 05d5       bpl      #0x4c54ec
+004c54e0 8d49       ldr      r1, [pc, #0x234]
+004c54e2 0a00       movs     r2, r1
+004c54e4 5ff08060   movs.w   r0, #0x4000000
+004c54e8 77f7d9fc   bl       #0x43ce9e ; compress_log_output
+004c54ec 5ff0ff30   movs.w   r0, #-1
+004c54f0 9de0       b        #0x4c562e
+004c54f2 554f       ldr      r7, [pc, #0x154]
+004c54f4 f868       ldr      r0, [r7, #0xc]
+004c54f6 0028       cmp      r0, #0
+004c54f8 1fd1       bne      #0x4c553a
+004c54fa 77f7e8fd   bl       #0x43d0ce ; 
+004c54fe 8007       lsls     r0, r0, #0x1e
+004c5500 0ad5       bpl      #0x4c5518
+004c5502 8648       ldr      r0, [pc, #0x218]
+004c5504 0190       str      r0, [sp, #4]
+004c5506 40f28710   movw     r0, #0x187
+004c550a 0090       str      r0, [sp]
+004c550c 814b       ldr      r3, [pc, #0x204]
+004c550e 4b4a       ldr      r2, [pc, #0x12c]
+004c5510 4b49       ldr      r1, [pc, #0x12c]
+004c5512 0120       movs     r0, #1
+004c5514 78f72ef8   bl       #0x43d574 ; FUN_0043d574
+004c5518 77f7d9fd   bl       #0x43d0ce ; 
+004c551c c007       lsls     r0, r0, #0x1f
+004c551e 03d4       bmi      #0x4c5528
+004c5520 77f7d5fd   bl       #0x43d0ce ; 
+004c5524 4007       lsls     r0, r0, #0x1d
+004c5526 05d5       bpl      #0x4c5534
+004c5528 7d49       ldr      r1, [pc, #0x1f4]
+004c552a 0a00       movs     r2, r1
+004c552c 5ff08060   movs.w   r0, #0x4000000
+004c5530 77f7b5fc   bl       #0x43ce9e ; compress_log_output
+004c5534 5ff0ff30   movs.w   r0, #-1
+004c5538 79e0       b        #0x4c562e
+004c553a 0020       movs     r0, #0
+004c553c 0290       str      r0, [sp, #8]
+004c553e 3000       movs     r0, r6
+004c5540 80b2       uxth     r0, r0
+004c5542 0830       adds     r0, #8
+004c5544 aff7c5fb   bl       #0x474cd2 ; file_heap_allocate
+004c5548 0290       str      r0, [sp, #8]
+004c554a 0298       ldr      r0, [sp, #8]
+004c554c 0028       cmp      r0, #0
+004c554e 1fd1       bne      #0x4c5590
+004c5550 77f7bdfd   bl       #0x43d0ce ; 
+004c5554 8007       lsls     r0, r0, #0x1e
+004c5556 0ad5       bpl      #0x4c556e
+004c5558 7248       ldr      r0, [pc, #0x1c8]
+004c555a 0190       str      r0, [sp, #4]
+004c555c 40f28f10   movw     r0, #0x18f
+004c5560 0090       str      r0, [sp]
+004c5562 6c4b       ldr      r3, [pc, #0x1b0]
+004c5564 354a       ldr      r2, [pc, #0xd4]
+004c5566 3649       ldr      r1, [pc, #0xd8]
+004c5568 0120       movs     r0, #1
+004c556a 78f703f8   bl       #0x43d574 ; FUN_0043d574
+004c556e 77f7aefd   bl       #0x43d0ce ; 
+004c5572 c007       lsls     r0, r0, #0x1f
+004c5574 03d4       bmi      #0x4c557e
+004c5576 77f7aafd   bl       #0x43d0ce ; 
+004c557a 4007       lsls     r0, r0, #0x1d
+004c557c 05d5       bpl      #0x4c558a
+004c557e 6a49       ldr      r1, [pc, #0x1a8]
+004c5580 0a00       movs     r2, r1
+004c5582 5ff08060   movs.w   r0, #0x4000000
+004c5586 77f78afc   bl       #0x43ce9e ; compress_log_output
+004c558a 5ff0ff30   movs.w   r0, #-1
+004c558e 4ee0       b        #0x4c562e
+004c5590 5ff00008   movs.w   r8, #0
+004c5594 0821       movs     r1, #8
+004c5596 0022       movs     r2, #0
+004c5598 ddf80890   ldr.w    sb, [sp, #8]
+004c559c 4846       mov      r0, sb
+004c559e 76f7a1fd   bl       #0x43c0e4 ; 
+004c55a2 0298       ldr      r0, [sp, #8]
+004c55a4 0560       str      r5, [r0]
+004c55a6 3000       movs     r0, r6
+004c55a8 80b2       uxth     r0, r0
+004c55aa 0299       ldr      r1, [sp, #8]
+004c55ac 4860       str      r0, [r1, #4]
+004c55ae 3000       movs     r0, r6
+004c55b0 80b2       uxth     r0, r0
+004c55b2 0028       cmp      r0, #0
+004c55b4 0ad0       beq      #0x4c55cc
+004c55b6 002c       cmp      r4, #0
+004c55b8 08d0       beq      #0x4c55cc
+004c55ba b6b2       uxth     r6, r6
+004c55bc 0298       ldr      r0, [sp, #8]
+004c55be 10f10805   adds.w   r5, r0, #8
+004c55c2 3200       movs     r2, r6
+004c55c4 2100       movs     r1, r4
+004c55c6 2800       movs     r0, r5
+004c55c8 74f70cfb   bl       #0x439be4 ; 
+004c55cc 0023       movs     r3, #0
+004c55ce 0022       movs     r2, #0
+004c55d0 02a9       add      r1, sp, #8
+004c55d2 f868       ldr      r0, [r7, #0xc]
+004c55d4 84f773fa   bl       #0x449abe ; osMessageQueuePut
+004c55d8 0028       cmp      r0, #0
+004c55da 22d0       beq      #0x4c5622
+004c55dc 77f777fd   bl       #0x43d0ce ; 
+004c55e0 8007       lsls     r0, r0, #0x1e
+004c55e2 0ad5       bpl      #0x4c55fa
+004c55e4 5148       ldr      r0, [pc, #0x144]
+004c55e6 0190       str      r0, [sp, #4]
+004c55e8 4ff4ce70   mov.w    r0, #0x19c
+004c55ec 0090       str      r0, [sp]
+004c55ee 494b       ldr      r3, [pc, #0x124]
+004c55f0 124a       ldr      r2, [pc, #0x48]
+004c55f2 1349       ldr      r1, [pc, #0x4c]
+004c55f4 0120       movs     r0, #1
+004c55f6 77f7bdff   bl       #0x43d574 ; FUN_0043d574
+004c55fa 77f768fd   bl       #0x43d0ce ; 
+004c55fe c007       lsls     r0, r0, #0x1f
+004c5600 03d4       bmi      #0x4c560a
+004c5602 77f764fd   bl       #0x43d0ce ; 
+004c5606 4007       lsls     r0, r0, #0x1d
+004c5608 05d5       bpl      #0x4c5616
+004c560a 4949       ldr      r1, [pc, #0x124]
+004c560c 0a00       movs     r2, r1
+004c560e 5ff08060   movs.w   r0, #0x4000000
+004c5612 77f744fc   bl       #0x43ce9e ; compress_log_output
+004c5616 0298       ldr      r0, [sp, #8]
+004c5618 aff77dfb   bl       #0x474d16 ; file_heap_free
+004c561c 5ff0ff38   movs.w   r8, #-1
+004c5620 04e0       b        #0x4c562c
+004c5622 5ff48001   movs.w   r1, #0x400000
+004c5626 b868       ldr      r0, [r7, #8]
+004c5628 83f706fe   bl       #0x449238 ; osThreadFlagsSet
+004c562c 4046       mov      r0, r8
+004c562e bde8fe83   pop.w    {r1, r2, r3, r4, r5, r6, r7, r8, sb, pc}
+
+threadBleWsfTakeTxReady 004d0b36..004d0b64 sha256=bebc400de5be8b2d37039b6ed7e9a2d3a02739541f98f1f2a5046f5a21869c98
+004d0b36 80b5       push     {r7, lr}
+004d0b38 0100       movs     r1, r0
+004d0b3a 684a       ldr      r2, [pc, #0x1a0]
+004d0b3c 5069       ldr      r0, [r2, #0x14]
+004d0b3e 0028       cmp      r0, #0
+004d0b40 0ed0       beq      #0x4d0b60
+004d0b42 89b2       uxth     r1, r1
+004d0b44 5069       ldr      r0, [r2, #0x14]
+004d0b46 78f702ff   bl       #0x44994e ; osSemaphoreAcquire
+004d0b4a 0028       cmp      r0, #0
+004d0b4c 01d1       bne      #0x4d0b52
+004d0b4e 0120       movs     r0, #1
+004d0b50 07e0       b        #0x4d0b62
+004d0b52 10f1020f   cmn.w    r0, #2
+004d0b56 01d1       bne      #0x4d0b5c
+004d0b58 0020       movs     r0, #0
+004d0b5a 02e0       b        #0x4d0b62
+004d0b5c 0020       movs     r0, #0
+004d0b5e 00e0       b        #0x4d0b62
+004d0b60 0020       movs     r0, #0
+004d0b62 02bd       pop      {r1, pc}
+
+thread_ble_wsf_wait_tx_ready 004d0b64..004d0c2c sha256=3a213ff23a1f6a470149f8aca60d7fccd5af2ffb27bf11e388ea6646c19f344e
+004d0b64 7fb5       push     {r0, r1, r2, r3, r4, r5, r6, lr}
+004d0b66 78f7b1fa   bl       #0x4490cc ; osKernelGetTickCount
+004d0b6a 0400       movs     r4, r0
+004d0b6c 0020       movs     r0, #0
+004d0b6e 0025       movs     r5, #0
+004d0b70 0020       movs     r0, #0
+004d0b72 fff7e0ff   bl       #0x4d0b36 ; threadBleWsfTakeTxReady
+004d0b76 0600       movs     r6, r0
+004d0b78 3000       movs     r0, r6
+004d0b7a c0b2       uxtb     r0, r0
+004d0b7c 0028       cmp      r0, #0
+004d0b7e 2ed1       bne      #0x4d0bde
+004d0b80 f6b2       uxtb     r6, r6
+004d0b82 002e       cmp      r6, #0
+004d0b84 2bd1       bne      #0x4d0bde
+004d0b86 0a20       movs     r0, #0xa
+004d0b88 fff7d5ff   bl       #0x4d0b36 ; threadBleWsfTakeTxReady
+004d0b8c 0600       movs     r6, r0
+004d0b8e 3000       movs     r0, r6
+004d0b90 c0b2       uxtb     r0, r0
+004d0b92 0028       cmp      r0, #0
+004d0b94 02d1       bne      #0x4d0b9c
+004d0b96 0a20       movs     r0, #0xa
+004d0b98 78f7edfb   bl       #0x449376 ; osDelay
+004d0b9c 6d1c       adds     r5, r5, #1
+004d0b9e 2800       movs     r0, r5
+004d0ba0 c0b2       uxtb     r0, r0
+004d0ba2 1428       cmp      r0, #0x14
+004d0ba4 ecdb       blt      #0x4d0b80
+004d0ba6 6cf792fa   bl       #0x43d0ce ; 
+004d0baa 8007       lsls     r0, r0, #0x1e
+004d0bac 09d5       bpl      #0x4d0bc2
+004d0bae 5348       ldr      r0, [pc, #0x14c]
+004d0bb0 0190       str      r0, [sp, #4]
+004d0bb2 d320       movs     r0, #0xd3
+004d0bb4 0090       str      r0, [sp]
+004d0bb6 524b       ldr      r3, [pc, #0x148]
+004d0bb8 4b4a       ldr      r2, [pc, #0x12c]
+004d0bba 4c49       ldr      r1, [pc, #0x130]
+004d0bbc 0220       movs     r0, #2
+004d0bbe 6cf7d9fc   bl       #0x43d574 ; FUN_0043d574
+004d0bc2 6cf784fa   bl       #0x43d0ce ; 
+004d0bc6 c007       lsls     r0, r0, #0x1f
+004d0bc8 03d4       bmi      #0x4d0bd2
+004d0bca 6cf780fa   bl       #0x43d0ce ; 
+004d0bce 4007       lsls     r0, r0, #0x1d
+004d0bd0 05d5       bpl      #0x4d0bde
+004d0bd2 4c49       ldr      r1, [pc, #0x130]
+004d0bd4 0a00       movs     r2, r1
+004d0bd6 5ff00060   movs.w   r0, #0x8000000
+004d0bda 6cf760f9   bl       #0x43ce9e ; compress_log_output
+004d0bde 78f775fa   bl       #0x4490cc ; osKernelGetTickCount
+004d0be2 041b       subs     r4, r0, r4
+004d0be4 6cf773fa   bl       #0x43d0ce ; 
+004d0be8 8007       lsls     r0, r0, #0x1e
+004d0bea 0dd5       bpl      #0x4d0c08
+004d0bec 2800       movs     r0, r5
+004d0bee c0b2       uxtb     r0, r0
+004d0bf0 0390       str      r0, [sp, #0xc]
+004d0bf2 0294       str      r4, [sp, #8]
+004d0bf4 4448       ldr      r0, [pc, #0x110]
+004d0bf6 0190       str      r0, [sp, #4]
+004d0bf8 d920       movs     r0, #0xd9
+004d0bfa 0090       str      r0, [sp]
+004d0bfc 404b       ldr      r3, [pc, #0x100]
+004d0bfe 3a4a       ldr      r2, [pc, #0xe8]
+004d0c00 3a49       ldr      r1, [pc, #0xe8]
+004d0c02 0420       movs     r0, #4
+004d0c04 6cf7b6fc   bl       #0x43d574 ; FUN_0043d574
+004d0c08 6cf761fa   bl       #0x43d0ce ; 
+004d0c0c c007       lsls     r0, r0, #0x1f
+004d0c0e 03d4       bmi      #0x4d0c18
+004d0c10 6cf75dfa   bl       #0x43d0ce ; 
+004d0c14 4007       lsls     r0, r0, #0x1d
+004d0c16 08d5       bpl      #0x4d0c2a
+004d0c18 3c4a       ldr      r2, [pc, #0xf0]
+004d0c1a edb2       uxtb     r5, r5
+004d0c1c 0095       str      r5, [sp]
+004d0c1e 2300       movs     r3, r4
+004d0c20 1100       movs     r1, r2
+004d0c22 5ff08450   movs.w   r0, #0x10800000
+004d0c26 6cf73af9   bl       #0x43ce9e ; compress_log_output
+004d0c2a 7fbd       pop      {r0, r1, r2, r3, r4, r5, r6, pc}
+
+thread_ble_wsf_tx_complete_notify 004d0c36..004d0cdc sha256=ccc45829df3264820dc0de6fb1fdbe1e3cb1119cd6706313323e8a5818075fe3
+004d0c36 38b5       push     {r3, r4, r5, lr}
+004d0c38 84b0       sub      sp, #0x10
+004d0c3a 284d       ldr      r5, [pc, #0xa0]
+004d0c3c 6869       ldr      r0, [r5, #0x14]
+004d0c3e 0028       cmp      r0, #0
+004d0c40 4ad0       beq      #0x4d0cd8
+004d0c42 6869       ldr      r0, [r5, #0x14]
+004d0c44 78f7e3fe   bl       #0x449a0e ; osSemaphoreGetCount
+004d0c48 0400       movs     r4, r0
+004d0c4a 002c       cmp      r4, #0
+004d0c4c 26d1       bne      #0x4d0c9c
+004d0c4e 6869       ldr      r0, [r5, #0x14]
+004d0c50 78f7b2fe   bl       #0x4499b8 ; osSemaphoreRelease
+004d0c54 0500       movs     r5, r0
+004d0c56 002d       cmp      r5, #0
+004d0c58 3ed0       beq      #0x4d0cd8
+004d0c5a 6cf738fa   bl       #0x43d0ce ; 
+004d0c5e 8007       lsls     r0, r0, #0x1e
+004d0c60 0bd5       bpl      #0x4d0c7a
+004d0c62 0394       str      r4, [sp, #0xc]
+004d0c64 0295       str      r5, [sp, #8]
+004d0c66 2a48       ldr      r0, [pc, #0xa8]
+004d0c68 0190       str      r0, [sp, #4]
+004d0c6a f220       movs     r0, #0xf2
+004d0c6c 0090       str      r0, [sp]
+004d0c6e 294b       ldr      r3, [pc, #0xa4]
+004d0c70 1d4a       ldr      r2, [pc, #0x74]
+004d0c72 1e49       ldr      r1, [pc, #0x78]
+004d0c74 0220       movs     r0, #2
+004d0c76 6cf77dfc   bl       #0x43d574 ; FUN_0043d574
+004d0c7a 6cf728fa   bl       #0x43d0ce ; 
+004d0c7e c007       lsls     r0, r0, #0x1f
+004d0c80 03d4       bmi      #0x4d0c8a
+004d0c82 6cf724fa   bl       #0x43d0ce ; 
+004d0c86 4007       lsls     r0, r0, #0x1d
+004d0c88 07d5       bpl      #0x4d0c9a
+004d0c8a 2349       ldr      r1, [pc, #0x8c]
+004d0c8c 0094       str      r4, [sp]
+004d0c8e 2b00       movs     r3, r5
+004d0c90 0a00       movs     r2, r1
+004d0c92 5ff00860   movs.w   r0, #0x8800000
+004d0c96 6cf702f9   bl       #0x43ce9e ; compress_log_output
+004d0c9a 1de0       b        #0x4d0cd8
+004d0c9c 6cf717fa   bl       #0x43d0ce ; 
+004d0ca0 8007       lsls     r0, r0, #0x1e
+004d0ca2 0ad5       bpl      #0x4d0cba
+004d0ca4 0294       str      r4, [sp, #8]
+004d0ca6 1d48       ldr      r0, [pc, #0x74]
+004d0ca8 0190       str      r0, [sp, #4]
+004d0caa f520       movs     r0, #0xf5
+004d0cac 0090       str      r0, [sp]
+004d0cae 194b       ldr      r3, [pc, #0x64]
+004d0cb0 0d4a       ldr      r2, [pc, #0x34]
+004d0cb2 0e49       ldr      r1, [pc, #0x38]
+004d0cb4 0420       movs     r0, #4
+004d0cb6 6cf75dfc   bl       #0x43d574 ; FUN_0043d574
+004d0cba 6cf708fa   bl       #0x43d0ce ; 
+004d0cbe c007       lsls     r0, r0, #0x1f
+004d0cc0 03d4       bmi      #0x4d0cca
+004d0cc2 6cf704fa   bl       #0x43d0ce ; 
+004d0cc6 4007       lsls     r0, r0, #0x1d
+004d0cc8 06d5       bpl      #0x4d0cd8
+004d0cca 154a       ldr      r2, [pc, #0x54]
+004d0ccc 2300       movs     r3, r4
+004d0cce 1100       movs     r1, r2
+004d0cd0 5ff08250   movs.w   r0, #0x10400000
+004d0cd4 6cf7e3f8   bl       #0x43ce9e ; compress_log_output
+004d0cd8 05b0       add      sp, #0x14
+004d0cda 30bd       pop      {r4, r5, pc}
+
+WsfMsgSend 004bf9ba..004bf9de sha256=a568f74c2634f63f8b146dd3f0cbecf09d2caa1300b5877a0ec9cab892ac7c70
+004bf9ba 38b5       push     {r3, r4, r5, lr}
+004bf9bc 0400       movs     r4, r0
+004bf9be 0d00       movs     r5, r1
+004bf9c0 2000       movs     r0, r4
+004bf9c2 c0b2       uxtb     r0, r0
+004bf9c4 6bf0daff   bl       #0x52b97c ; WsfTaskMsgQueue
+004bf9c8 2a00       movs     r2, r5
+004bf9ca 2100       movs     r1, r4
+004bf9cc c9b2       uxtb     r1, r1
+004bf9ce 00f006f8   bl       #0x4bf9de ; WsfMsgEnq
+004bf9d2 0121       movs     r1, #1
+004bf9d4 2000       movs     r0, r4
+004bf9d6 c0b2       uxtb     r0, r0
+004bf9d8 6bf0c1ff   bl       #0x52b95e ; WsfTaskSetReady
+004bf9dc 31bd       pop      {r0, r4, r5, pc}
+
+fw_event_loop_push_delayed 0047697e..00476ace sha256=496f1779e410338cac437436bd548d4e38f48a23764f7134f6a1100e5da81048
+0047697e 2de9fc47   push.w   {r2, r3, r4, r5, r6, r7, r8, sb, sl, lr}
+00476982 8046       mov      r8, r0
+00476984 8946       mov      sb, r1
+00476986 1500       movs     r5, r2
+00476988 0020       movs     r0, #0
+0047698a a84e       ldr      r6, [pc, #0x2a0]
+0047698c 3068       ldr      r0, [r6]
+0047698e 0028       cmp      r0, #0
+00476990 21d1       bne      #0x4769d6
+00476992 c6f79cfb   bl       #0x43d0ce ; 
+00476996 8007       lsls     r0, r0, #0x1e
+00476998 09d5       bpl      #0x4769ae
+0047699a ba48       ldr      r0, [pc, #0x2e8]
+0047699c 0190       str      r0, [sp, #4]
+0047699e ef20       movs     r0, #0xef
+004769a0 0090       str      r0, [sp]
+004769a2 b94b       ldr      r3, [pc, #0x2e4]
+004769a4 964a       ldr      r2, [pc, #0x258]
+004769a6 9749       ldr      r1, [pc, #0x25c]
+004769a8 0120       movs     r0, #1
+004769aa c6f7e3fd   bl       #0x43d574 ; FUN_0043d574
+004769ae c6f78efb   bl       #0x43d0ce ; 
+004769b2 c007       lsls     r0, r0, #0x1f
+004769b4 03d4       bmi      #0x4769be
+004769b6 c6f78afb   bl       #0x43d0ce ; 
+004769ba 4007       lsls     r0, r0, #0x1d
+004769bc 05d5       bpl      #0x4769ca
+004769be b349       ldr      r1, [pc, #0x2cc]
+004769c0 0a00       movs     r2, r1
+004769c2 5ff08060   movs.w   r0, #0x4000000
+004769c6 c6f76afa   bl       #0x43ce9e ; compress_log_output
+004769ca 0a20       movs     r0, #0xa
+004769cc d2f7d3fc   bl       #0x449376 ; osDelay
+004769d0 3068       ldr      r0, [r6]
+004769d2 0028       cmp      r0, #0
+004769d4 f9d0       beq      #0x4769ca
+004769d6 022d       cmp      r5, #2
+004769d8 06d2       bhs      #0x4769e8
+004769da 5ff0ff32   movs.w   r2, #-1
+004769de 4946       mov      r1, sb
+004769e0 4046       mov      r0, r8
+004769e2 fff783fe   bl       #0x4766ec ; fw_event_loop_push
+004769e6 70e0       b        #0x476aca
+004769e8 8c4e       ldr      r6, [pc, #0x230]
+004769ea 5ff0ff31   movs.w   r1, #-1
+004769ee 3068       ldr      r0, [r6]
+004769f0 d2f7e1fe   bl       #0x4497b6 ; osMutexAcquire
+004769f4 0028       cmp      r0, #0
+004769f6 1cd0       beq      #0x476a32
+004769f8 c6f769fb   bl       #0x43d0ce ; 
+004769fc 8007       lsls     r0, r0, #0x1e
+004769fe 0ad5       bpl      #0x476a16
+00476a00 a348       ldr      r0, [pc, #0x28c]
+00476a02 0190       str      r0, [sp, #4]
+00476a04 4ff48070   mov.w    r0, #0x100
+00476a08 0090       str      r0, [sp]
+00476a0a 9f4b       ldr      r3, [pc, #0x27c]
+00476a0c 7c4a       ldr      r2, [pc, #0x1f0]
+00476a0e 7d49       ldr      r1, [pc, #0x1f4]
+00476a10 0120       movs     r0, #1
+00476a12 c6f7affd   bl       #0x43d574 ; FUN_0043d574
+00476a16 c6f75afb   bl       #0x43d0ce ; 
+00476a1a c007       lsls     r0, r0, #0x1f
+00476a1c 03d4       bmi      #0x476a26
+00476a1e c6f756fb   bl       #0x43d0ce ; 
+00476a22 4007       lsls     r0, r0, #0x1d
+00476a24 05d5       bpl      #0x476a32
+00476a26 9b49       ldr      r1, [pc, #0x26c]
+00476a28 0a00       movs     r2, r1
+00476a2a 5ff08060   movs.w   r0, #0x4000000
+00476a2e c6f736fa   bl       #0x43ce9e ; compress_log_output
+00476a32 0027       movs     r7, #0
+00476a34 00e0       b        #0x476a38
+00476a36 7f1c       adds     r7, r7, #1
+00476a38 402f       cmp      r7, #0x40
+00476a3a 04da       bge      #0x476a46
+00476a3c 8b48       ldr      r0, [pc, #0x22c]
+00476a3e 50f82700   ldr.w    r0, [r0, r7, lsl #2]
+00476a42 0028       cmp      r0, #0
+00476a44 f7d1       bne      #0x476a36
+00476a46 402f       cmp      r7, #0x40
+00476a48 12da       bge      #0x476a70
+00476a4a dff820a2   ldr.w    sl, [pc, #0x220]
+00476a4e 4af82780   str.w    r8, [sl, r7, lsl #2]
+00476a52 0aeb8700   add.w    r0, sl, r7, lsl #2
+00476a56 c0f80091   str.w    sb, [r0, #0x100]
+00476a5a d2f737fb   bl       #0x4490cc ; osKernelGetTickCount
+00476a5e 0400       movs     r4, r0
+00476a60 8748       ldr      r0, [pc, #0x21c]
+00476a62 0068       ldr      r0, [r0]
+00476a64 241a       subs     r4, r4, r0
+00476a66 6519       adds     r5, r4, r5
+00476a68 0aeb8700   add.w    r0, sl, r7, lsl #2
+00476a6c c0f80052   str.w    r5, [r0, #0x200]
+00476a70 3068       ldr      r0, [r6]
+00476a72 d2f7d3fe   bl       #0x44981c ; osMutexRelease
+00476a76 0028       cmp      r0, #0
+00476a78 1cd0       beq      #0x476ab4
+00476a7a c6f728fb   bl       #0x43d0ce ; 
+00476a7e 8007       lsls     r0, r0, #0x1e
+00476a80 0ad5       bpl      #0x476a98
+00476a82 8548       ldr      r0, [pc, #0x214]
+00476a84 0190       str      r0, [sp, #4]
+00476a86 4ff48870   mov.w    r0, #0x110
+00476a8a 0090       str      r0, [sp]
+00476a8c 7e4b       ldr      r3, [pc, #0x1f8]
+00476a8e 5c4a       ldr      r2, [pc, #0x170]
+00476a90 5c49       ldr      r1, [pc, #0x170]
+00476a92 0120       movs     r0, #1
+00476a94 c6f76efd   bl       #0x43d574 ; FUN_0043d574
+00476a98 c6f719fb   bl       #0x43d0ce ; 
+00476a9c c007       lsls     r0, r0, #0x1f
+00476a9e 03d4       bmi      #0x476aa8
+00476aa0 c6f715fb   bl       #0x43d0ce ; 
+00476aa4 4007       lsls     r0, r0, #0x1d
+00476aa6 05d5       bpl      #0x476ab4
+00476aa8 7c49       ldr      r1, [pc, #0x1f0]
+00476aaa 0a00       movs     r2, r1
+00476aac 5ff08060   movs.w   r0, #0x4000000
+00476ab0 c6f7f5f9   bl       #0x43ce9e ; compress_log_output
+00476ab4 402f       cmp      r7, #0x40
+00476ab6 08da       bge      #0x476aca
+00476ab8 5448       ldr      r0, [pc, #0x150]
+00476aba 0068       ldr      r0, [r0]
+00476abc d2f70cfd   bl       #0x4494d8 ; osTimerStop
+00476ac0 54f07f44   orrs     r4, r4, #0xff000000
+00476ac4 2000       movs     r0, r4
+00476ac6 fff76ffe   bl       #0x4767a8 ; fw_event_loop_timer_callback
+00476aca bde8f387   pop.w    {r0, r1, r4, r5, r6, r7, r8, sb, sl, pc}

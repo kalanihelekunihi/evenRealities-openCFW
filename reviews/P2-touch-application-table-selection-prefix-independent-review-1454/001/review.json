@@ -1,0 +1,17 @@
+{
+  "review_id": "1454",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-table-selection-prefix-1453/001",
+  "candidate_receipt_sha256": "e3ba9f6f161b089a31b35eb95b75ce157ee67c0228ec0e23a057b198129cd68f",
+  "candidate_pseudocode_sha256": "5f5f01d0ba1b13f9d76a32b461367559116642e4d55054f4c4899f3e93898987",
+  "candidate_replay_sha256": "15bdc098fb46ecad373deaada383c255f32409bad2b173ba46a9e5c1e6238702",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independently replayed startup through 0x3D50; original 5378, A9D4 and 52BC execute, and all inherited assertions pass. The configured context selects the alternate first row and the exact 28 bytes at output +144 agree with the pinned source table.",
+    "Confirmed the remaining builder boundary 0x50E4 is the sole controlled 5378 call. The receipt literals, initialized context/output pointers, row-validator reach and startup state assertions agree with the source and replay."
+  ],
+  "limitations": [
+    "The rest of 52BC table-selection branches are validated in its separate 1452 review, not by this one selected first-row path. Other downstream application/configuration/storage boundaries remain controlled; MMIO/clock tables are synthetic. No physical or canonical claim."
+  ]
+}

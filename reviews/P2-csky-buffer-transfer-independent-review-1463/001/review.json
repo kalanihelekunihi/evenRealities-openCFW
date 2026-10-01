@@ -1,0 +1,19 @@
+{
+  "review_id": "1463",
+  "status": "PASS_STATIC_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-buffer-transfer-1428/001",
+  "candidate_receipt_sha256": "4d39487ae1a4491d6470cbfb52aa26e049399aec0655959d37219ed94e6beaa8",
+  "candidate_pseudocode_sha256": "f8c82f9546132e13615f1ba5259cc66c6101dcc2906bcb205b1495655e5971bb",
+  "candidate_candidate_bin_sha256": "9ed72da41ace63e5fb5652efbde04b0f88de0efa9e271fd9d2f64d6267554c13",
+  "candidate_code_bin_sha256": "021f60c44ddee05e752d2f5fa5382501b60cd714579da3bc8f166d1ae2ea10d0",
+  "source_sha256": "9546164f32680de47fa99ba85ba08a3c538822260957de6c1baee772638da464",
+  "checks": [
+    "Independently re-ran the read-only verifier, then independently recomputed every one of the 16 receipt artifact-manifest file hashes and sizes. Exact source candidate is 536 bytes: 516-byte code span [0x10000C40,0x10000E44) followed by five literals [0x10000E44,0x10000E58); all 188 decoded instructions are contiguous and match the pinned image/tool output.",
+    "Reviewed the 0x1000088C caller evidence and transfer body: R0 source 0x000FF000, R1 destination local buffer, R2 length 64; body programs the source into a candidate controller register and uses controller data reads plus post-increment byte stores into destination. Static bounded cases cover one 64-byte chunk, zero length, and two held-poll nonreturn profiles.",
+    "Checked nested 0x10000C1C and exact 0x10000BBC helper bytes. BBC saves R1 as destination, loads the controller data word at +0x60, then STBI.B stores through R1; for a normally completing R2=1 call at SP+3, this produces the byte C1C tests. The uninitialized-byte concern does not apply to that normal-return path."
+  ],
+  "limitations": [
+    "The four transfer/status cases are static trace models, not live original-instruction Unicorn executions of this C-SKY routine. BBC/B5C/B4C/AF8 contracts beyond the cited byte path, controller poll completion, physical device identity, conditional loading and inherited R18/BKPT issues remain unresolved. No canonical admission."
+  ]
+}

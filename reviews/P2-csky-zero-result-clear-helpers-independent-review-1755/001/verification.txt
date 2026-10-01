@@ -1,0 +1,5 @@
+Review 1755 — PASS_SCOPED
+
+Bound to csky-zero-result-clear-helpers-1744/001, receipt SHA-256 31cb2bb9b2da992158c03da848aaaf108c3f09cccbb3d91287f257e7a83c7820. Candidate verify.py passed its exact source, body, gap, literal, parent-callsite and objdump checks.
+
+The literal pairs produce aligned start/end values. Inclusive-high comparison skips when cursor >= end; otherwise the loop stores zero then advances by four, covering each half-open interval exactly once. R0 is untouched and the pushed r4-r6 values are restored before `jmp r15`. The 0x140..0x144 halfwords remain decoder-identified BKPT gaps, not asserted padding. These facts do not demonstrate that the conditional runtime coordinates are loaded or physically writable.

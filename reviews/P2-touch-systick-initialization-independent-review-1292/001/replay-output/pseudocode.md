@@ -1,0 +1,7 @@
+# Touch SysTick initialization hierarchy
+
+A650..A696 is 70 instruction bytes, excluding NOP and four literal words. Save R4..R6 and LR. Unsigned reload must be below 2^24; otherwise reach BKPT A65C before data writes. Clear five callback words at 20000F40..20000F54, then store literal A5F5 to 2000043C. Actual A638 freshly reads E000E010, replaces bit two with incoming R0 bit zero, stores once and preserves incoming R0 shifted left two. A638 body A638..A64A is 18 bytes, excluding NOP and literal.
+
+Check retained reload below 2^24 again at A67E, with BKPT A682 on failure. Mask to 24 bits, store at E000E014, clear E000E018. Actual A620 freshly reads E000E010, sets bit one and stores; freshly reads it again, sets bit zero and stores. A620..A634 is 20 instruction bytes excluding literal. Restore saved frame and return. Fresh read order matters under concurrent hardware changes; fixtures use stable synthetic registers.
+
+Receipt-derived fixtures cover four clock inputs, six reloads and three initial control patterns. Valid paths execute both helpers without substitution and check every non-stack write and frame restoration. Invalid reload stops before the first breakpoint; breakpoint continuation and between-check register mutation remain unresolved. These code-derived addresses identify standard system register accesses; physical timing and interrupt dispatch are not tested. No canonical admission or C implementation.

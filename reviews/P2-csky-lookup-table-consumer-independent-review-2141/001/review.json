@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-csky-lookup-table-consumer-independent-review-2141",
+  "status": "PASS_STATIC_SCOPED",
+  "decision": "PASS_STATIC_SCOPED",
+  "accepted": false,
+  "scope": {
+    "candidate": "analysis/csky-lookup-table-consumer-2074/001",
+    "reviewed": "exact source and conditional child mapping, body/code/literal geometry, disassembly/control-flow/caller evidence, static translated fixtures and claims/limitations"
+  },
+  "pins": {
+    "candidate_receipt_sha256": "5a073fd27032eb53649320a925ae4249a50b232172753a024e67094ac2a7841c",
+    "source_image_sha256": "53860d6974097ad494c6697df52f95b796360131fab63cd8bfd7efc9c5596de8",
+    "body_sha256": "cf4ba169713b50cb4649125379797a1fcb7d91ea61a35c7d5eff349aac34058b",
+    "pseudocode_sha256": "b492f5bcedd5697b138be56eef119af56b74b153617eb7598e09359a25236ad6",
+    "verify_sha256": "6082fb268a6be0f980a6adb280e2b14759f4a07f58372e09788d4c1b17d82067",
+    "manifest_sha256": "41d1c03ee0b215d3c221594c2ec8f98a7e0730e507a8183054f034c433b262bd"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "Independent coordinate arithmetic confirms runtime 0x10024BE0 minus conditional base 0x10023400 is child offset 0x17E0. The exact 400-byte extent maps to child [0x17E0,0x1970); the code is 396 bytes and the final four bytes are literal 0x200266E0. The historical 0x18E0 hint maps to runtime 0x10024CE0 inside this body and is inconsistent with the entry start."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "Reran the frozen verifier successfully. It byte-checks the candidate source, contiguous instruction decode, local branch targets, four direct calls, 20 direct incoming BSR sites and windows, literal references, dependency pins and artifact manifest/receipt. The included pseudocode matches those documented branches, 32-bit arithmetic, fresh configuration read/modify/write behavior, and helper-output stores. The static fixtures are translated decision/arithmetic checks, not emulation."
+    },
+    {
+      "id": "F3",
+      "severity": "none",
+      "result": "The receipt and prose correctly retain conditional mapping and candidate-unreviewed status; live table contents/writer, computed incoming edges, physical load, hardware effects, aliases/concurrency and whole-image coverage remain unresolved."
+    }
+  ],
+  "limitations": [
+    "No actual C-SKY instruction execution was performed; the verifier checks disassembly and a translated fixture model.",
+    "The conditional child mapping does not prove physical loading.",
+    "The live table at 0x200266E0, runtime RAM state, surrounding caller semantics, indirect callers, and hardware behavior are outside this evidence.",
+    "No canonical admission or coverage change is made."
+  ],
+  "checks": [
+    {
+      "command": "python3 verify.py in frozen candidate directory",
+      "result": "PASS",
+      "artifact": "replay.txt"
+    },
+    {
+      "command": "independent source-offset, extent, and literal calculation",
+      "result": "PASS",
+      "artifact": "source-checks.json"
+    }
+  ],
+  "review_artifacts": {
+    "source_checks_sha256": "6cee0afdd8da7a92a2d0cd66ce138d979660397c163c880d695e9bc034ff82eb",
+    "replay_sha256": "82c1a68dd3d633112fc33c55b258f4c683e0ead7e798234068c611848fc98cda"
+  },
+  "canonical_or_coverage_change": false
+}

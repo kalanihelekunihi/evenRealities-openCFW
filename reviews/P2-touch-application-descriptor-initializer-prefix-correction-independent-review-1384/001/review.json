@@ -1,0 +1,15 @@
+{
+  "review_id": "1384",
+  "status": "PASS_SCOPED_CORRECTION",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-descriptor-initializer-prefix-1362/002",
+  "supersedes_candidate_text": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-descriptor-initializer-prefix-1362/001",
+  "candidate_receipt_sha256": "ee912b5c8402d8fea4d2f0bf5bbc3f689f26546721e05c2abe7cbe53cd8b1709",
+  "checks": [
+    "The correction changes the 4C72 adapter length statement from six to eight bytes. Independent decode confirms PUSH at 4C72 (2 bytes), BL at 4C74 (4 bytes), and POP at 4C78 (2 bytes), so [4C72,4C7A) is 8 bytes; the adjacent zero halfword remains outside the body.",
+    "The corrected candidate replay was isolated and reaches 3D50 with the same successful prefix, actual 4C7C/4C72 execution, and the previously reviewed register/vector/enable and application-state assertions. The replay content is unchanged from 001."
+  ],
+  "limitations": [
+    "This is an append-only geometry correction to the successful-prefix packet, not a broader branch or physical-behavior review. The downstream controls and synthetic clock-table limits remain as previously scoped."
+  ]
+}

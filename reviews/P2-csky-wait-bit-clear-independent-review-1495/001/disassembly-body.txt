@@ -1,0 +1,13 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/csky-wait-bit-clear-1482/001/body.bin:     file format binary
+
+
+Disassembly of section .data:
+
+10000b4c <.data>:
+10000b4c:	33a2      	movi      	r3, 162
+10000b4e:	4378      	lsli      	r3, r3, 24
+10000b50:	930a      	ld.w      	r0, (r3, 0x28)
+10000b52:	e4002001 	andi      	r0, r0, 1
+10000b56:	e920fffd 	bnez      	r0, 0x10000b50	// 0x10000b50
+10000b5a:	783c      	jmp      	r15

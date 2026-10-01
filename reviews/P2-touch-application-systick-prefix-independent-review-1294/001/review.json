@@ -1,0 +1,23 @@
+{
+  "review_id": "1294",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-systick-prefix-1293/001",
+  "candidate_receipt_sha256": "e11ffbaf38e1230c095f4539dfa857a02e71172743e44b5dfcceae73600d2dec",
+  "candidate_pseudocode_sha256": "6861610512a41489f09bc5e3f15dbf6103e29ae1a6ec446ac9d4ae5654d07df9",
+  "candidate_replay_sha256": "fd17c0e1c9ae42eefb97fcf638c2491c9eda0f798c123f3b1b0e795b99a2bdae",
+  "candidate_replays_sha256": "088cab9853582493b463ca1fd482536583460330511a07f12112bd7664669e82",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "independent_checks": [
+    "Replayed the candidate script from a private copy with a unique output directory; it passed its one actual-instruction success-prefix fixture and reproduced the pinned replays.json exactly.",
+    "Independently decoded original Thumb/M-class bytes for caller 0x3638..0x364E, A650..A696, A620..A632, A638..A648, and A6A8..A6B8. Caller passes zero and reload 40 to A650, then zero and 0x35E5 to A6A8; helper instruction sequences match the stated slot clear, vector store, control-register read/modify/write, reload/current writes, enable, and exchange behavior.",
+    "Receipt hashes match candidate files and locked source. Final replay reaches 0x3D50 with SP 0x2000EFF8 and PRIMASK 0; asserted RAM callback slot 0 is 0x35E5, slots 1\u20134 are zero, vector word is 0xA5F5, reload is 40, current is zero, control is 3, and caller state at 0x200008E8 is zero.",
+    "The replay uses eight controlled downstream application dependencies after actual SysTick setup; its single success fixture establishes only this supplied-state prefix."
+  ],
+  "limitations": [
+    "External clock-table memory is synthetic.",
+    "No physical SysTick interrupt, exception dispatch, callback execution, or later application behavior is established.",
+    "This is private pseudocode evidence only; no canonical admission or C implementation."
+  ]
+}

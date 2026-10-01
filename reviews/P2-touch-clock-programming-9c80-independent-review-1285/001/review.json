@@ -1,0 +1,20 @@
+{
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-clock-programming-9c80-1283/003",
+  "candidate_source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "candidate_files": {
+    "pseudocode.md": "97c17a08c2d1cd7c2565b58a0e404a424cfc819f1373eeac0f120643c28bae5f",
+    "replay.py": "e09d9fc1d2185b17e95c84bb52e1d9d1553784c5bb6e1f0f9e2a5da17240ae68",
+    "replays.json": "a6723b62a2cf42573b12591664bcab12089f01bb5869838b76131c72e61a5eaf"
+  },
+  "review_result": "PASS_SCOPED",
+  "checks": {
+    "original_bytes": "Independent Thumb+MCLASS decoding of 9C80..9D4C confirms the seven exact accepted constants, readiness guard, source-frequency equality fast path, actual A6C0 index calculation, PRIMASK helper calls, four table-derived peripheral writes, 50-unit delay calls, and conditional trim sequence. Literal words resolve to 0x0FFFF1E5 and 0x0FFFF1CC for the two byte tables.",
+    "replay": "All 288 isolated original-instruction fixtures pass and regenerate candidate rows exactly. All helpers execute from source bytes without call substitution. The fixtures verify output writes, external-table reads, return value, restored frame and PRIMASK, across valid/invalid requests, trim indices, enable state and incoming masks.",
+    "table_model": "The two supplied 32-byte synthetic tables overlap in address space. The harness reads expected bytes from final memory after both table writes, so the overlap is modeled explicitly instead of assuming independent buffers."
+  },
+  "limits": [
+    "The table contents are synthetic supplied inputs; external ROM identity and contents are unresolved.",
+    "Instruction-count delays do not establish physical timing, and no hardware clock behavior or canonical admission is claimed."
+  ],
+  "accepted": false
+}

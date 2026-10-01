@@ -1,0 +1,5 @@
+Review 1765 — PASS_SCOPED
+
+Bound to touch-storage-validation-original-size-1764/001, receipt SHA-256 7ade1facd1a18300a971f06fe1e0a20509602a7727a6e59038407b75344ce931. I independently replayed all 1,296 fixture profiles to /tmp/review1765-independent and confirmed an exact replays.json match.
+
+Original 8220 calls original 8200 and forwards its result in the callback's third argument. The asserted formula is exact for context halfwords 7 and 128, with wrapping inherited from 8200. All malformed field combinations skip the callback. Only the provider callback is controlled in this packet; no provider or storage semantics are inferred.

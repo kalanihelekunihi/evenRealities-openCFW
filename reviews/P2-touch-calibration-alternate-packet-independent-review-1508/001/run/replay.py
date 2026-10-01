@@ -1,0 +1,19 @@
+from pathlib import Path
+import json,hashlib,struct,itertools
+from unicorn import *
+from unicorn.arm_const import *
+b=Path('g2/build/pseudocode-first/20260930T190500Z');o=Path('/Users/kalani/Repo/evenRealities-openCFW/reviews/P2-touch-calibration-alternate-packet-independent-review-1508/001/run');o.mkdir(parents=True,exist_ok=True);src=b/'attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin';d=src.read_bytes();h=lambda x:hashlib.sha256(x).hexdigest();rows=[];L={a:struct.unpack_from('<I',d,a-0x3300)[0] for a in [0x7cf0,0x7cf4]}
+for status,raw,n,flags,mode,mult,helper_index in itertools.product([1,4],[0,1,65535],[0,1,15],[0,2],[0,1,10],[0,1,255],[0,1]):
+ u=Uc(UC_ARCH_ARM,UC_MODE_THUMB|UC_MODE_MCLASS);u.mem_map(0,0x10000);u.mem_write(0x3300,d);u.mem_map(0x20000000,0x10000);u.mem_map(0x40000000,0x10000);u.mem_map(0x09000000,0x1000);D=0x20002000;F=0x20002100;X=0x20002200;T=0x20002300;R=0x20002500;O=0x20002700;OUT=0x20002900;sp=0x2000f000
+ for a,v in [(D,F),(F+8,X),(X,0x40000000),(D+12,T),(D+16,R),(D+40,O),(D+44,O)]:u.mem_write(a,v.to_bytes(4,'little'))
+ u.mem_write(T+123,bytes([7]));u.mem_write(T+122,bytes([mode]));u.mem_write(T+132,bytes([mult]));u.mem_write(R+33,bytes([flags]));u.mem_write(O+40+44*helper_index,(n<<16).to_bytes(4,'little'));u.mem_write(0x40003200,raw.to_bytes(4,'little'));u.mem_write(0x40000000,(0x87654321).to_bytes(4,'little'));u.mem_write(sp,D.to_bytes(4,'little'));u.reg_write(UC_ARM_REG_R0,OUT);u.reg_write(UC_ARM_REG_R1,0);u.reg_write(UC_ARM_REG_R2,helper_index);u.reg_write(UC_ARM_REG_R3,0);u.reg_write(UC_ARM_REG_SP,sp);u.reg_write(UC_ARM_REG_LR,0x09000001);calls=[]
+ def code(u,p,s,x):
+  if p==0x09000000:u.emu_stop()
+  elif p==0x6ac0:calls.append([p,u.reg_read(UC_ARM_REG_R0),u.reg_read(UC_ARM_REG_R1)]);u.reg_write(UC_ARM_REG_R0,status);u.reg_write(UC_ARM_REG_R1,helper_index);u.reg_write(UC_ARM_REG_PC,u.reg_read(UC_ARM_REG_LR))
+ u.hook_add(UC_HOOK_CODE,code);u.emu_start(0x7bc1,0,count=300)
+ adjustment=((n+4)>>2)*(96 if flags&3==2 else 2)
+ if flags&3==2 and mode in [1,10] or (n+1)&1==0:adjustment=(adjustment-1)&0xffffffff
+ product=((raw-adjustment)*mult)&0xffffffff;result=product if product<65536 else L[0x7cf4];result=result or 1
+ assert int.from_bytes(u.mem_read(OUT,4),'little')==result and int.from_bytes(u.mem_read(0x40000000,4),'little')==0x07654321 and calls==[[0x6ac0,5,D]] and u.reg_read(UC_ARM_REG_R0)==status and u.reg_read(UC_ARM_REG_SP)==sp and u.reg_read(UC_ARM_REG_PC)==0x09000000
+ rows.append(dict(status=status,helper_r1=helper_index,raw=raw,n=n,flags=flags,mode=mode,mult=mult,result=result))
+(o/'replays.json').write_text(json.dumps(rows,indent=2)+'\n');(o/'pseudocode.md').write_text('# Alternate calibration packet selection\n\nFor record byte123 equal7, original7BC0 selects descriptor word44 plus20 plus44 times the saved input packet index. Instructions7BFE..7C04 restore that index toR1 before the alternate branch, so this selection does not rely on6AC0 R1 preservation. These648 fixtures vary saved packet indices0/1 and also control6AC0 R1 to the same values, supplying distinct packet offsets while retaining the nonzero state path and arithmetic checks from1503.\n\nThe independent model checks output arithmetic against the selected packet word20, state status, hardware control clear and frame restoration. Arbitrary pointer safety remains unresolved. Other record modes select descriptor word40 plus28 times the saved input packet index. Physical behavior and helper clobbers remain unresolved. No canonical admission or C implementation.\n');(o/'replay.py').write_bytes(Path(__file__).read_bytes());(o/'receipt.json').write_text(json.dumps(dict(source=dict(path=str(src),sha256=h(d)),fixtures=len(rows),literals=L,files={p.name:h(p.read_bytes()) for p in sorted(o.iterdir())},accepted=False),indent=2)+'\n');print('PASS',len(rows))

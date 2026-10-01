@@ -1,0 +1,21 @@
+{
+  "review_id": "2115",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-loop-shipped-deep-sleep-2114/001",
+  "candidate_receipt_sha256": "0e1b850f62c68c10825b764e022e92aa5caaa94b3b07368784b624261b4b8e0e",
+  "candidate_pseudocode_sha256": "c193aed16c648cacc07ce35cd1f79e621bb7d1ed321667bd1c5dea7ff78a9fcf",
+  "candidate_replay_sha256": "7f38c9003728577096804c8ede11466035f79c5a9b16d9c79f752c52835d0c99",
+  "candidate_replays_sha256": "33a0c2f01ba8500df9279076ce685de8559863b3b4e5e8d209b1f63be103f6b8",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "All pins match. Isolated replay passed the 32 cases over states 2/3, predicates 0/1, counters 0/1, initial masks 0/1, and one/three modeled readiness waits.",
+    "The original registration callers 3CA4/4634 and original dispatcher, callback nodes, readiness check, event drain, clear, and mask helpers execute without function interception in the fixture. The callback nodes are seeded from the pinned startup copy range; their verified ordering and shipped-node evidence are consistent with prior evidence.",
+    "At each modeled WFI continuation the trace asserts PRIMASK=1; at the loop boundary it checks the expected state/counter, original SP and initial mask. The wait hook clears the synthetic readiness word at the configured wait count; the harness stops at the second 3D50 boundary.",
+    "Only the documented sensor/predicate/timing/post-state helpers are intercepted. The candidate's WFI continuation and readiness mutation are explicit simulation hooks, not claims of hardware wake behavior."
+  ],
+  "limitations": [
+    "The callback list and busy-producer state are supplied fixture premises. Arbitrary list mutations, busy measurements, real interrupt delivery, physical WFI wake, and general concurrency are not proven.",
+    "The evidence covers bounded loop compositions only. It is not complete application recovery or canonical admission."
+  ]
+}

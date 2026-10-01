@@ -1,0 +1,19 @@
+{
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-two-field-prefix-1223/001",
+  "candidate_source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "candidate_files": {
+    "pseudocode.md": "e641005d0d759f39af042f5698f269fe437e009d6c29b95e479898e23cda4cb6",
+    "replay.py": "c4dbce025ecd33cbb6be85b3f6b26b6d98b4541f31c7d351c3ac60d0ba72be3c",
+    "replays.json": "4353eb6e686a3aaaae2e7f97015bc0f07a58e063b82e9d40c5954d9b2c1a1e6d"
+  },
+  "review_result": "PASS_SCOPED",
+  "checks": {
+    "replay": "An isolated original-byte rerun reaches 0x3D50 and matches the candidate replay row exactly. The source and all candidate artifact hashes match the receipt.",
+    "targeted_change": "The prefix executes actual A01C twice and records its writes to both field words. It also executes actual A148, A104, and 9FD4; the prior review of A01C's direct field behavior remains consistent with the two supplied startup calls. Controlled deeper drivers are explicitly limited to 45D0, A0BC, 8EE4, and 45A4, with other downstream dependencies still noted as controlled."
+  },
+  "limits": [
+    "The synthetic run does not establish physical device register meaning or hardware startup.",
+    "Deeper driver behavior, interrupt delivery, and application-loop semantics remain outside this packet."
+  ],
+  "accepted": false
+}

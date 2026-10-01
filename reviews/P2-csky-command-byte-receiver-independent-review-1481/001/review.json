@@ -1,0 +1,20 @@
+{
+  "review_id": "1481",
+  "status": "REVISE",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-command-byte-sender-1465/002",
+  "candidate_receipt_sha256": "c55608292b21b1c79d5a3113b1cb7575a02084d3b666b3e5709af603f22b4cf5",
+  "candidate_pseudocode_sha256": "df8fa3cb9e70e10f1b4e84b5545d0d8259a01ab3537b6199f99cf7d0a35bef95",
+  "candidate_body_sha256": "3709c9c3439611f8c906ee506ceebc69d1003a92765424e5f4e294503ab289ea",
+  "source_sha256": "9546164f32680de47fa99ba85ba08a3c538822260957de6c1baee772638da464",
+  "checks": [
+    "Confirmed /002 is the complete candidate (distinct from partial /001), bound to receipt c55608292b21b1c79d5a3113b1cb7575a02084d3b666b3e5709af603f22b4cf5. The candidate verifier passes on an isolated snapshot; I also independently checked every receipt manifest file size and SHA256.",
+    "The mapped body is exactly 96 contiguous bytes at runtime [0x10000BBC,0x10000C1C), child [0xBD4,0xC34), with 39 contiguous decoded C-SKY instructions and no pool/gap. Caller evidence identifies the listed actual BSR sites and buffer/count arguments.",
+    "Instruction flow confirms setup, modular count-minus-one, end-pointer calculation, byte loop, completion polling and return. Nested C1C consumes the byte written at SP+3 after BBC returns, in the normally completing one-byte path."
+  ],
+  "required_correction": "The byte-ready predicate is inconsistent with the original instruction. At 0x10000C0C the body has `andi r2, r2, 8`, and the zero branch at 0x10000C10 repeats the poll while that masked value is zero. Thus the loop waits for mask 0x8 (bit 3), not mask 0x2 (bit 1). The pseudocode and all ready-bit fixture descriptions/assertions currently use `&2`/bit 1; correct these to `&8`/bit 3 and rerun the fixtures. Preserve /002 and publish a corrected attempt before semantic approval.",
+  "limitations": [
+    "The five traces are hand-authored static traces, not live execution of this C-SKY routine.",
+    "B4C semantics, physical controller identity/timing and inherited mapping/table/BKPT/ownership issues remain unresolved. No canonical admission or physical-delivery claim."
+  ]
+}

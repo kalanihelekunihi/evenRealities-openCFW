@@ -1,0 +1,18 @@
+{
+  "review_id": "1523",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-state-five-6a80-1522/001",
+  "candidate_receipt_sha256": "b3cacd9ac1184a15a9f4afba1f676a965c8a92951c5dc2b8e35ab0227edd8cba",
+  "candidate_pseudocode_sha256": "3f263d8485b13fc38439ef5d88a6104bd78c1819fe7f5abeb8fd304e04952d9f",
+  "candidate_replay_sha256": "3d9632f5b17b0bff402ab347a35de12ea95bb7ae70bcdd52d67aecd40971dda9",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independently verified the 56-byte body at 0x6A80..0x6AB8: descriptor/config pointer resolution, 0x685C(descriptor), zero store at peripheral+0x400, and three rows of stores at +0x608 and +0x60C with 64-byte stride.",
+    "Confirmed the literals at 0x6AB8/0x6ABC are 0x60C and 0x00101000; helper R0 is overwritten and return is incidental 0x03000000; frame is 8 bytes.",
+    "An isolated original-instruction replay passed all 9 fixtures, checking ordered MMIO writes, controlled helper argument/status, returned R0 and SP."
+  ],
+  "limitations": [
+    "Helper 0x685C is controlled and MMIO is synthetic. Physical behavior is not established. No canonical admission."
+  ]
+}

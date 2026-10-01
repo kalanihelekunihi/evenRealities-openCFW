@@ -1,0 +1,17 @@
+{
+  "review_id": "1540",
+  "status": "PASS_STATIC_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-9cc-zero-arg-wrapper-1525/001",
+  "candidate_receipt_sha256": "fda5ee6b9cfd59ced7b2da485c1884e5e7537b1a3a7c6f329cc6c3c68171638d",
+  "candidate_pseudocode_sha256": "f7e231b509b9bc22bfc9ce3fe79db11498bece86337e4ab82b000d18621b6f0e",
+  "candidate_body_sha256": "38fc300b5abb347843f68fc859adcac4597d982672b4546907e43ac57875408e",
+  "checks": [
+    "Reproduced the verifier in an isolated review copy. Source/tool/dependency pins, exact conditional-mapping byte extraction, disassembly, four caller sites/contexts, AF4 literal, B02 seam and output manifests all passed.",
+    "Confirmed the 10-byte wrapper is PUSH R15; MOVI R2,0; BSR 0x100009CC; POP R15. It passes R0/R1 unchanged, forces child R2 zero, and otherwise preserves the child post-call register state.",
+    "All four static caller/opaque-child traces passed."
+  ],
+  "limitations": [
+    "9CC semantics/return range are unresolved; source mapping is conditional; adjacent B02 BKPT ownership is unresolved; symbol label is provisional. No physical runtime or canonical admission claim."
+  ]
+}

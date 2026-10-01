@@ -1,0 +1,17 @@
+{
+  "review_id": "2031",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-shipped-power-original-chain-2030/001",
+  "candidate_receipt_sha256": "f4a540109a4f283aea967175de25bd8c04414cf5d7ee081a012f5a82bcaa941d",
+  "candidate_pseudocode_sha256": "da969692a2c94342d91c50b5d6d1f26dde7a2880241ac4a95f3735ec5fce2fd7",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "The source and all replay artifacts match their receipt pins. Isolated replay reproduced all 12 fixtures.",
+    "The chain initializes the declared data span, executes both registration callers and the original A3B0 registration, A58C/A444 dispatch, callbacks, mask helpers and A388 leaf without function interception. Observed callback order and modes match the node priorities: busy rejection rolls back the earlier callback without WFI; clear-busy path executes forward pre-wait and reverse after-wait callbacks, reaches WFI, clears the flag, and restores SP/PRIMASK. Node links and list head assertions are consistent with the two registered records."
+  ],
+  "limitations": [
+    "Only WFI continuation is synthesized at the instruction boundary. Physical wake/events, hardware side effects, arbitrary callback mutation and complete indirect caller closure are not established. No canonical admission."
+  ],
+  "candidate_replay_sha256": "9290ff53d01f2a7a455a5f72d72737c79803c943f746d8ac541a443cefe59e3c"
+}

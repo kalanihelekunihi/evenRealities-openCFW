@@ -1,0 +1,9 @@
+Independent review of touch-state-reset-685c-1527/001
+
+Candidate receipt SHA-256 91b09ed0b94a75a9369df58be5e0a38c6a4be8ef7ce8c4842d40fe9e288e5038; pseudocode 5c56c686e9e8809ea99f9f84fce950e0e058ec376d7e59fa47e8026ef486ca86; replay cc098a711d6c614b1ad6e574416d31da1ae299727f50b7ed6615ba24485606bc; source 371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87.
+
+Independent decode of 0x685C..0x68DE confirms pointer resolution, clearing control bit 31 and writing zero at +0x80. A fresh read of config+0x180 gates the helper: if bit 0 is set, skip 0x6608; otherwise write 1 at peripheral+0x144 and call 0x6608(315,0,descriptor). Both paths then set control bit 31, clear +0x74 and +0x100, write/read back literals at +0x120 and +0x100, clear descriptor-context byte +0x71, mask control with 0xFFFCFFFF, OR bit 28 into word +8, and return descriptor or raw helper status. Frame is 16 bytes. Literal pool begins 0x68E0.
+
+Isolated replay passed 18 fixtures, checking ordered writes, both gate branches, call arguments/status, return and SP.
+
+PASS_SCOPED. 0x6608 is controlled without MMIO effects; MMIO is synthetic. Hardware behavior and pointer validity remain unresolved. No canonical admission.

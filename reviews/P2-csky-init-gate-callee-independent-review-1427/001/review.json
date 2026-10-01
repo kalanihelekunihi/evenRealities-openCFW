@@ -1,0 +1,20 @@
+{
+  "review_id": "1427",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-init-gate-callee-1408/001",
+  "candidate_receipt_sha256": "4ee4b9fde73963dd4cafe69c724b72cb7b35b8a3ae77ae047d562163fa5245c5",
+  "candidate_pseudocode_sha256": "81fcdb563284949a33251f465322839364119ad98b48c8794368ead5699831ba",
+  "candidate_body_sha256": "8f40ae2e92733c8f25e2ccec0d983416e77ce39ae7e3c2ce0cfcbc6fe9db2397",
+  "source_image_sha256": "9546164f32680de47fa99ba85ba08a3c538822260957de6c1baee772638da464",
+  "checks": [
+    "Independently reran verify.py successfully. It binds the source, tool, manual/SLEIGH references, direct dependencies, exact 204-byte extent and code/literal/BKPT partition, disassembly, call/branch edges, three checksum/control fixtures, and immutable packet manifest.",
+    "The body has 182 contiguous instruction bytes, an unowned BKPT halfword at F46, and five little-endian literals at F18..F2C. The 64-byte buffer alignment and 80-byte local reservation are consistent with the prologue. BNEZAD decrements before branch: starting at 62 executes 62 XOR reads at offsets 1..62, then compares byte 63. The error gate is bad magic or bad checksum; both skip later field loads and success calls.",
+    "Caller evidence shows F34 receives the final 5A4 status with no intervening R0 setup, so the concrete incoming value remains dependent. The success fixture's four 14C calls, three 414 calls, final 5A4 call, and ordered stores match the decoded success sequence.",
+    "The legacy codec.tsv overlap is identified as conflicting historical metadata and is not silently adopted. The candidate preserves adjacent 1352 table and 1401 BKPT findings."
+  ],
+  "limitations": [
+    "C40 is controlled and supplies the tested 64-byte buffer; helper 5A4/414/14C calls are statically recorded rather than dynamically executed. Their full transitive behavior and physical effects remain open.",
+    "The conditional source mapping and descriptor/register meanings are not validated as runtime facts. The BKPT at F46 remains unowned, the legacy symbol extent remains unreconciled, and no canonical mapping or coverage admission is implied."
+  ]
+}

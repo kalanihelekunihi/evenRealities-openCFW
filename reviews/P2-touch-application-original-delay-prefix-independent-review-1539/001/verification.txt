@@ -1,0 +1,7 @@
+Independent review of touch-application-original-delay-prefix-1538/002
+
+Candidate receipt SHA-256 70e6795bcae9f24fa39ba1b98736f5f725967fc7c78764c68ced66b6c47d4ced; pseudocode dfb5e82c72ba84c78a71440d474a2a6e8ed4934d97e980704e0cb15a47943907; replay e7ec0498d11917a44713cb6dd1fbe5f2b373bcb107e3fc8e18bb9305a8eb0cad; source 371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87.
+
+Isolated cumulative original-instruction replay passed and reached 0x3D50. The observed frequency byte at 0x20000870 is 48. Original 0x6608 executes through 315 actual A324 entries; the full replay observes 318 original 0x4480 entries, counting the three inherited prior entries. Assertions verify no A324/4480 substitutions, status-wait call counts, inherited startup call order and final startup state.
+
+PASS_SCOPED. The status path uses synthetic zero MMIO and remains a bounded emulator path; later 0x7288 acquisition, 0x5FA4 budget and other application boundaries remain controlled. Execution does not establish physical elapsed time or whole-firmware behavior. No canonical admission.

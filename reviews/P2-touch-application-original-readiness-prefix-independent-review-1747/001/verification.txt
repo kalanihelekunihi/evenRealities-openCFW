@@ -1,0 +1,5 @@
+Review 1747 — PASS_SCOPED
+
+Bound to touch-application-original-readiness-prefix-1746/001, receipt SHA-256 f0e879a47e18c6e88a889b1c988bc86c6dca5f12d0267ef10b6e993e0e15ff02. I reran the original script in /tmp/review1747-independent. Its replays, budgets and progress outputs are byte-identical to the candidate.
+
+Inspection confirms the read hook activates only on a read of 0x4003001C after the initialized state byte becomes one, writes the modeled counter and measurement, and permits the original 9E18 body to continue. The first entry starts the measurement; the second reads the scripted ready value and computes/stores its result. Original 9D90/9DDC and 5DD8/5D90 paths execute. The candidate correctly limits this to synthetic readiness and four controlled storage calls.

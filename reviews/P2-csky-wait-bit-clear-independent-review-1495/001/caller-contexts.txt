@@ -1,0 +1,47 @@
+--- context around 10000B64 ---
+10000b5a:	783c      	jmp      	r15
+10000b5c:	14d3      	push      	r4-r6, r15
+10000b5e:	6d4b      	mov      	r5, r2
+10000b60:	6d07      	mov      	r4, r1
+10000b62:	6d83      	mov      	r6, r0
+10000b64:	e3fffff4 	bsr      	0x10000b4c	// 0x10000b4c
+10000b68:	33a2      	movi      	r3, 162
+--- context around 10000BA2 ---
+10000b96:	080a      	bt      	0x10000baa	// 0x10000baa
+10000b98:	33a2      	movi      	r3, 162
+10000b9a:	4378      	lsli      	r3, r3, 24
+10000b9c:	9388      	ld.w      	r4, (r3, 0x20)
+10000b9e:	e924ffff 	bnez      	r4, 0x10000b9c	// 0x10000b9c
+10000ba2:	e3ffffd5 	bsr      	0x10000b4c	// 0x10000b4c
+10000ba6:	6c13      	mov      	r0, r4
+--- context around 10000BC4 ---
+10000bb8:	b358      	st.w      	r2, (r3, 0x60)
+10000bba:	07ed      	br      	0x10000b94	// 0x10000b94
+10000bbc:	14d3      	push      	r4-r6, r15
+10000bbe:	6d07      	mov      	r4, r1
+10000bc0:	6d4b      	mov      	r5, r2
+10000bc2:	6d83      	mov      	r6, r0
+10000bc4:	e3ffffc4 	bsr      	0x10000b4c	// 0x10000b4c
+10000bc8:	33a2      	movi      	r3, 162
+--- context around 10000C02 ---
+10000bf6:	080a      	bt      	0x10000c0a	// 0x10000c0a
+10000bf8:	33a2      	movi      	r3, 162
+10000bfa:	4378      	lsli      	r3, r3, 24
+10000bfc:	9389      	ld.w      	r4, (r3, 0x24)
+10000bfe:	e924ffff 	bnez      	r4, 0x10000bfc	// 0x10000bfc
+10000c02:	e3ffffa5 	bsr      	0x10000b4c	// 0x10000b4c
+10000c06:	6c13      	mov      	r0, r4
+--- context around 10000DC4 ---
+10000db8:	fa25cda9 	min.s32      	r9, r5, r17
+10000dbc:	c528002b 	addu      	r11, r8, r9
+10000dc0:	e909002e 	bez      	r9, 0x10000e1c	// 0x10000e1c
+10000dc4:	e3fffec4 	bsr      	0x10000b4c	// 0x10000b4c
+10000dc8:	e4691000 	subi      	r3, r9, 1
+--- context around 10000E18 ---
+10000e0c:	b464      	st.w      	r3, (r4, 0x10)
+10000e0e:	662e      	cmpne      	r11, r8
+10000e10:	0811      	bt      	0x10000e32	// 0x10000e32
+10000e12:	9469      	ld.w      	r3, (r4, 0x24)
+10000e14:	e923ffff 	bnez      	r3, 0x10000e12	// 0x10000e12
+10000e18:	e3fffe9a 	bsr      	0x10000b4c	// 0x10000b4c
+10000e1c:	6166      	subu      	r5, r9

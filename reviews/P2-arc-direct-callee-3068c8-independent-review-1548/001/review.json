@@ -1,0 +1,17 @@
+{
+  "review_id": "1548",
+  "status": "PASS_STATIC_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/arc-direct-callee-3068c8-1531/001",
+  "candidate_receipt_sha256": "e189b808593af4639a1be936bfb19bf433927bff6be22f967e213826e78aea6b",
+  "candidate_pseudocode_sha256": "e5094fd64adf6172c8b4333b7925f3797798b3200000ecf507a03ac069dd987a",
+  "candidate_body_sha256": "00e23deb878b09fb920d569158424d10cfdd8655021e2acb4a0630287882230a",
+  "checks": [
+    "Isolated verifier passed source/package/caller pins, exact body extraction, ARC carrier rebuild, 21-instruction contiguous decode and receipt outputs.",
+    "Independently checked LP_COUNT=18, LP endpoint, delayed terminal branch, ADD2 address formation, three store classes, SYNC order, row/index increments, final non-delayed return and 53 statically implied stores.",
+    "Confirmed the 0x00302B20 caller is ordinary BL with no delay slot and that incoming R0 is replaced before this body uses it."
+  ],
+  "limitations": [
+    "Loop/store evidence is static, not ARC CPU execution or MMIO observation. LP_COUNT behavior uses the cited ARC convention; no physical IRQ/timing effects, global entry census or canonical admission. Symbol label remains provisional."
+  ]
+}

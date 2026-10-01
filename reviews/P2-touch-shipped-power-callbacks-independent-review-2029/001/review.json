@@ -1,0 +1,17 @@
+{
+  "review_id": "2029",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-shipped-power-callbacks-2028/002",
+  "candidate_receipt_sha256": "36215613164be1b8244b09a37dfe700a56e6d316e9d545ee5a11e11f71107340",
+  "candidate_pseudocode_sha256": "17fa7b20faf6e4efa176d267f32825e8998872ec1472173a7b31aa2b66f3aa69",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "The receipt source and all three artifact hashes match. Isolated Unicorn replay reproduced all 96 original-byte fixtures.",
+    "Independent instruction review confirms 0x3620..0x3624 sets R0=0 and returns, and 0xA1C0..0xA208 is a 72-byte body with the three pinned literals. The mode-1 busy path returns the sentinel without changing the flag; mode 1 when clear sets the flag, modes 2/8 clear it, mode 4 succeeds without writes, and other tested full-width values return the sentinel. R1 and SP are preserved as claimed."
+  ],
+  "limitations": [
+    "Busy-byte producer meaning/concurrency and other indirect callers remain outside these callback fixtures; mode values are sampled rather than exhaustive. The pseudocode keeps names provisional. No physical behavior or canonical admission."
+  ],
+  "candidate_replay_sha256": "86b3e5d73085684cdc09ed8d744b0f890a7f24035d2dce4a966fe140f8b17a5d"
+}

@@ -1,0 +1,5 @@
+# Touch object initialization chain 3658
+
+3658..366E is a 22-byte caller excluding NOP/pool. Allocate a 16-byte frame, load settings halfword at literal base+6, put it at SP+4 and call 404C with literal destination and pointer to that halfword; restore frame. Actual 404C..406E is 34 instruction bytes excluding adjacent zero seam. If either pointer is null, return without data access. Otherwise actual A9D4 clears 80 bytes at destination, copy source halfword to destination offset zero, call actual 3EE8 and restore saved frame. Actual 3EE8..3EFA is 18 bytes: null pointer returns; nonzero first halfword stays unchanged; zero becomes 1000. Following zero halfword is unassigned.
+
+Fifteen original-instruction chain fixtures cover five timeout values and three initial fills. All helpers execute directly. Verify complete 80-byte object, unchanged neighboring bytes and restored caller SP. Direct null-pointer entry branches are decoded but not executed by these chain fixtures; aliases, invalid pointers and concurrent writes remain unresolved. No canonical admission or C implementation.

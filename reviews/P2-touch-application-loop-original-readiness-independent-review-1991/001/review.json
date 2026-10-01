@@ -1,0 +1,19 @@
+{
+  "review_id": "1991",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-loop-original-readiness-1982/001",
+  "candidate_receipt_sha256": "7a2d778de4a175ecdc780e498fc0df68fff346f65576bd778d9b01bbe82a82b9",
+  "candidate_pseudocode_sha256": "d3e17e5ff06d71c9f9b7106762b385c464e3650f903611a57e35ee1aaf0952e4",
+  "candidate_replay_sha256": "1f34e6d13d2387d3d9b30115bfd95cf2e61e88156c780003b419fcc73131ff48",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Source and artifact pins match the receipt.",
+    "Isolated replay reproduced all 32 rows exactly. Original 5C8E receives the expected descriptor+4 pointer, reads the pointed word and byte+8 bit 128; the controlled A58C wait clears that bit after the fixture-selected one or three waits.",
+    "The state/predicate/counter transitions and original PRIMASK restoration match the earlier loop traces. Busy calls occur under mask, and status reads gate return from the wait as documented."
+  ],
+  "limitations": [
+    "A58C completion, predicates, sensor/state helpers and timing callback are modeled or controlled. This only covers states 2/3 and selected bounded waits; no physical readiness, state-1 or full-loop behavior is established.",
+    "No canonical admission."
+  ]
+}

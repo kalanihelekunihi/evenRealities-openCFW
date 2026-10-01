@@ -1,0 +1,69 @@
+00005a0a push {r4, r5, r6, r7, lr}
+00005a0c ldr r1, [r0, #0x28]
+00005a0e ldr r3, [r0, #4]
+00005a10 ldr r5, [r0]
+00005a12 movs r4, #0x23
+00005a14 ldrb r2, [r5, r4]
+00005a16 movs r6, #1
+00005a18 bics r2, r6
+00005a1a strb r2, [r5, r4]
+00005a1c movs r2, #0
+00005a1e b #0x5a2e
+00005a20 movs r6, #2
+00005a22 b #0x5a46
+00005a24 ldrh r7, [r5, #0x1e]
+00005a26 subs r4, r4, r7
+00005a28 b #0x5a50
+00005a2a adds r1, #1
+00005a2c adds r2, #1
+00005a2e ldrh r4, [r0, #0x38]
+00005a30 lsls r4, r4, #1
+00005a32 cmp r4, r2
+00005a34 bls #0x5a92
+00005a36 ldrh r4, [r5, #8]
+00005a38 movs r6, #1
+00005a3a movs r7, r6
+00005a3c ands r7, r2
+00005a3e mov ip, r7
+00005a40 tst r6, r2
+00005a42 bne #0x5a20
+00005a44 ldrh r4, [r5, #0xa]
+00005a46 ldrb r7, [r3, #6]
+00005a48 tst r6, r7
+00005a4a bne #0x5a24
+00005a4c ldrh r7, [r5, #0x1e]
+00005a4e adds r4, r7, r4
+00005a50 ldrb r7, [r1]
+00005a52 cmp r7, #0
+00005a54 beq #0x5a5a
+00005a56 subs r7, #1
+00005a58 strb r7, [r1]
+00005a5a ldrh r7, [r3, #4]
+00005a5c cmp r7, r4
+00005a5e bhi #0x5a6c
+00005a60 movs r4, #0x20
+00005a62 ldrb r4, [r5, r4]
+00005a64 strb r4, [r1]
+00005a66 ldrb r4, [r3, #6]
+00005a68 bics r4, r6
+00005a6a strb r4, [r3, #6]
+00005a6c ldrb r4, [r1]
+00005a6e cmp r4, #0
+00005a70 bne #0x5a78
+00005a72 ldrb r4, [r3, #6]
+00005a74 orrs r4, r6
+00005a76 strb r4, [r3, #6]
+00005a78 ldrb r4, [r3, #6]
+00005a7a tst r6, r4
+00005a7c beq #0x5a88
+00005a7e movs r6, #0x23
+00005a80 ldrb r4, [r5, r6]
+00005a82 movs r7, #1
+00005a84 orrs r4, r7
+00005a86 strb r4, [r5, r6]
+00005a88 mov r4, ip
+00005a8a cmp r4, #0
+00005a8c beq #0x5a2a
+00005a8e adds r3, #0xa
+00005a90 b #0x5a2a
+00005a92 pop {r4, r5, r6, r7, pc}

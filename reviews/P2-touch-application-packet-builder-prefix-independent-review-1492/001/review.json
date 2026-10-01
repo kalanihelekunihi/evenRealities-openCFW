@@ -1,0 +1,18 @@
+{
+  "review_id": "1492",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-packet-builder-prefix-1491/001",
+  "candidate_receipt_sha256": "1afbcca89c4b5225a77230f543a42c44edde83d554b5b629bfb85dd3b7b49990",
+  "candidate_pseudocode_sha256": "46f29cff650a0a84b42a1eac97214418b2df2362e1ea4d59ce468acdc07e0934",
+  "candidate_replay_sha256": "31ce1edf002eeba3bf2301f00b7f81d0bac36a176e2a62b21f76645d720eb87d",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Replayed the copied startup harness with the original packet helper chain enabled. It reaches the exact stop at 0x3D50, with both 0x56A4 calls and 0x5548, 0x51BC, and 0x5188 observed as actual instruction PCs. The expected initialized pointers, vector/config values, packet fields, output bytes and prior startup checks pass.",
+    "Verified the eight literal words at 0x3EA4..0x3EC4 against the pinned image; the output-map marker and packet bytes are corroborated against the source bytes.",
+    "Remaining controlled boundaries are outside the packet-builder chain (storage/peripheral/activation and later application dependencies); synthetic MMIO and supplied external clock tables are explicit."
+  ],
+  "limitations": [
+    "This is a bounded initialized-startup prefix with synthetic memory/peripheral state. Reaching 0x3D50 does not establish physical correctness, arbitrary index validity, full startup/application behavior, or canonical admission."
+  ]
+}

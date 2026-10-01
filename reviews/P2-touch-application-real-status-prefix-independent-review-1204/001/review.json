@@ -1,0 +1,31 @@
+{
+  "review_id": "1204/001",
+  "decision": "PASS_SCOPED",
+  "scope": "Independent review of the supplied-data application prefix in 1203/001. This is not a full boot replay, hardware initialization proof, or canonical admission.",
+  "candidate": {
+    "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-real-status-prefix-1203/001",
+    "receipt_sha256": "e5d4e4796de120fcdb05f615b62fa79d2b14d626b68d57f0ecc05eb1f6befa67",
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "files": {
+      "pseudocode.md": "ad6bd841b5066e7896e6e0de142bed9c2bf6d4ac3f9112944c51a2c1498ce840",
+      "replay.py": "c73da798aba8f4deaf216428e9eb3bfef576d6bad8c0ecdac78d5c096d3be69b",
+      "replays.json": "6d36a57aa2b1edb228aece6932a4019b193e605c8796ff4056693a29cc098e08"
+    }
+  },
+  "independent_artifacts": {
+    "isolated_replay": "reviews/P2-touch-application-real-status-prefix-independent-review-1204/001/replay_isolated.py",
+    "regenerated_rows": "reviews/P2-touch-application-real-status-prefix-independent-review-1204/001/regenerated/replays.json",
+    "regenerated_rows_sha256": "6d36a57aa2b1edb228aece6932a4019b193e605c8796ff4056693a29cc098e08"
+  },
+  "checks": [
+    "Verified the candidate receipt and file hashes against the source image pin.",
+    "Independently reran the original-byte fixture from a review-owned output directory; the regenerated replay row exactly matches the candidate row.",
+    "The harness preloads the 964-byte span at source offsets 0x828C..0x8650 (flash B58C..B950) into RAM 0x200004C0..0x20000884, placing the descriptor at 0x20000850 under the stated supplied-memory precondition.",
+    "The actual call trace includes A3B0 and observes its actual successful insertion into head slot 0x20000F38; the descriptor and head-pointer assertions are consistent. The subsequent actual 4634 returns zero and execution reaches 0x3D50 rather than the breakpoint at 0x3CC6.",
+    "Only the 0x44C4 hardware-initialization dependency is replaced; the other listed prefix call sites are explicitly controlled. The run restores the expected stack and exits with PRIMASK zero."
+  ],
+  "limitations": [
+    "Initialized RAM is supplied to the replay rather than produced by a full reset-to-application run. Physical device initialization, list concurrency, the application loop, and interrupt delivery remain unresolved.",
+    "The successful A3B0 path is one fixture under its supplied valid descriptor/list state; this does not establish malformed-list safety or general caller reachability."
+  ]
+}

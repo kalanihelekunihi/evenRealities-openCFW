@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-storage-provider-descriptor-independent-review-1787",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "scope": {
+    "candidate": "analysis/touch-storage-provider-descriptor-486c-1782/002",
+    "code_span": [
+      "0x486c",
+      "0x48a4"
+    ],
+    "reviewed": "The exact body is 486C..48A4 (56 bytes, 28 instructions); the literal pool starts at 48A4 and is excluded. Independent operand-based literal extraction agrees with the candidate. Original instructions first branch on null R0, otherwise emit 12 word stores in the listed order, zero fields at +32,+36,+0, return zero, and preserve SP. The three fixtures reproduce in isolation, including the null error literal and two aligned destinations."
+  },
+  "pins": {
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "candidate_receipt_sha256": "dbde6f226122a8ab876ebcf9e5675ff685aa3c31fd69865dca113bcb75206cc0",
+    "body_sha256": "adcb972ac38160b851adade4e98998e931e36bb120b86bf3f55b6cf4b795a200",
+    "candidate_replays_sha256": "12bd65e05a7e671b29939fdf99e5224fb18102aa02455b03944b7ada35ab5742"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "The exact body is 486C..48A4 (56 bytes, 28 instructions); the literal pool starts at 48A4 and is excluded. Independent operand-based literal extraction agrees with the candidate. Original instructions first branch on null R0, otherwise emit 12 word stores in the listed order, zero fields at +32,+36,+0, return zero, and preserve SP. The three fixtures reproduce in isolation, including the null error literal and two aligned destinations."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "All candidate file hashes and source image hash match. The isolated replay JSON is byte-identical to the candidate replay output."
+    }
+  ],
+  "limitations": [
+    "The descriptor function pointers are future targets only; their behavior is not established here. Invalid non-null pointers, concurrent access and physical storage effects are untested.",
+    "No canonical admission or coverage promotion."
+  ],
+  "checks": [
+    {
+      "command": "verify source, receipt, and file hashes",
+      "result": "PASS"
+    },
+    {
+      "command": "independent literal/load and store-order review",
+      "result": "PASS"
+    },
+    {
+      "command": "isolated original-instruction replay",
+      "result": "PASS; exact replay JSON match",
+      "artifact": "isolated-replays.json"
+    }
+  ],
+  "review_artifacts": {
+    "isolated_replays_sha256": "12bd65e05a7e671b29939fdf99e5224fb18102aa02455b03944b7ada35ab5742"
+  },
+  "canonical_or_coverage_change": false
+}

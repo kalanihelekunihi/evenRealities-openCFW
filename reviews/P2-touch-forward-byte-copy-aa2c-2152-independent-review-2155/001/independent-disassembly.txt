@@ -1,0 +1,9 @@
+0000aa2c movs r3, #0
+0000aa2e push {r4, lr}
+0000aa30 cmp r2, r3
+0000aa32 bne #0xaa36
+0000aa34 pop {r4, pc}
+0000aa36 ldrb r4, [r1, r3]
+0000aa38 strb r4, [r0, r3]
+0000aa3a adds r3, #1
+0000aa3c b #0xaa30

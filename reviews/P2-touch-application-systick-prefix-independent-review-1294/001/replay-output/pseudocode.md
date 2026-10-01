@@ -1,0 +1,5 @@
+# Application prefix with actual SysTick caller and callback exchange
+
+Actual 3638 receives zero, stores it at 200008E8, calls actual A650(0,40), then calls actual A6A8(0,35E5). The complete recovered SysTick helpers execute original instructions: clear five callback slots, set vector word 2000043C to A5F5, select control bit two zero, program reload 40 and clear current value, enable control bits one and zero. Exchange installs 35E5 in callback slot zero; the other four slots remain zero. The caller restores its frame.
+
+The prefix retains original clock and pin initialization, descriptor insertion and frequency derivation, with explicit synthetic external clock tables. Eight later application dependencies remain controlled; the path reaches 3D50 with PRIMASK zero and expected frame. Assertions verify final SysTick registers, vector and callback words, supplied caller state and previous prefix checks. Physical timer interrupts, callback dispatch and later application semantics remain unresolved. No canonical admission or C implementation.

@@ -1,0 +1,22 @@
+{
+  "review_id": "1765",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-storage-validation-original-size-1764/001",
+  "candidate_receipt_sha256": "7ade1facd1a18300a971f06fe1e0a20509602a7727a6e59038407b75344ce931",
+  "candidate_pseudocode_sha256": "038fe1c65afa16f09c7e78efd5d50c3a73a7acdcfc2993e8cc66767b7b2f444f",
+  "candidate_replay_sha256": "c2bdf6aa5f2e77158ab443bb29c704a0fec21cb5da24d829aa5de4b706c11fa1",
+  "candidate_replays_sha256": "3fafd5aa1b717fb571d54b24dca8204f3eb97d3b928d6d6a1498690bdc3b9593",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Candidate/source hashes match. The composition executes original 8220 and original 8200 for valid records; the provider callback is the only controlled callback in the covered success cases.",
+    "All 1,296 fixtures replayed in isolation and replays.json matched byte-for-byte. Invalid fields reach no callback. The context halfwords 7 and 128 produce the stated 32-bit wrapped size argument to the provider callback.",
+    "Independent disassembly and dataflow review confirm original 8200's full-word modular arithmetic is forwarded as R2 to the provider callback, with provider word zero and the originally captured record word+8 in R0/R1.",
+    "The 8220 field-rejection path, raw callback-result-to-zero/error mapping, stack restoration and output assertions agree with the candidate."
+  ],
+  "limitations": [
+    "Provider callback, pointer validity, provider mutation, concurrent reads and physical storage effects remain unresolved.",
+    "No canonical admission or C implementation."
+  ]
+}

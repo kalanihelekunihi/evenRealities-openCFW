@@ -1,0 +1,18 @@
+{
+  "review_id": "1510",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-calibration-setup-6928-1509/001",
+  "candidate_receipt_sha256": "9e27541a59dd10f1dde1148107f224f798b240de4994d6521b1990e8f26c2575",
+  "candidate_pseudocode_sha256": "09b733b0c6ce22f4aa3d4a4c27f09b2513436076df3c3ced5594eaefdafce424",
+  "candidate_replay_sha256": "ac664927cf4a93bf6f8573caf8007900de6489608b8d5d4a3817c3cbb3d8ff7a",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independently decoded the 74-byte body at 0x6928..0x6972 and verified base resolution, control bit-31 OR, literal writes/readbacks at offsets 0x120 and 0x100, helper argument flow, read-modify-write at literal offset 0x3034, final write at 0x3800, raw helper return and frame restoration.",
+    "Verified the three literal locations are outside the body at 0x6974, 0x6978 and 0x697C.",
+    "An isolated replay of the original-instruction harness passed all 9 fixtures, checking ordered MMIO writes, helper args/status, scratch behavior under a no-write helper control, and SP."
+  ],
+  "limitations": [
+    "The 0x9178 helper is controlled and MMIO is synthetic. Physical peripheral effects and helper behavior remain unresolved. No canonical admission."
+  ]
+}

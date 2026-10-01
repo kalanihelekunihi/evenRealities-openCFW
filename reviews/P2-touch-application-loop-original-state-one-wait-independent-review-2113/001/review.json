@@ -1,0 +1,20 @@
+{
+  "review_id": "2113",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-loop-original-state-one-wait-2112/001",
+  "candidate_receipt_sha256": "9fd24d50e5ec759b78cf28a7cad73e78b9c417ce1ee5a0858bf3f81518bc5526",
+  "candidate_pseudocode_sha256": "ca6bea7b652fd2e49d82382bf782b38c28bb4d96e795f7d49e08cc17b9ac15b1",
+  "candidate_replay_sha256": "30db3503e4f4878d7167bda5fe2453980160eb3cdf717d2af6c0b887c30f99be",
+  "candidate_replays_sha256": "be30f4632a02b1ef4ce3824004b2d7cac1494df0ceacfaf7c4f1ce3fbaf08321",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "All candidate pins match. Isolated replay passed all 24 bounded state-one loop cases.",
+    "The fixture set covers predicate 0/1, counter 0/1/2, initial PRIMASK 0/1, and one/three synthetic readiness waits. Traces verify original A528 dispatch to the empty index-0 callback head, original A374 mask/WFI instruction path, event drain and clear behavior, counter/state transition and restored SP/mask.",
+    "Original helper execution is preserved; the harness models only WFI continuation and selected readiness completion. The bounded assertions are consistent with the supplied empty-head and synthetic readiness premises."
+  ],
+  "limitations": [
+    "This does not establish hardware wake behavior, the runtime callback-list configuration for all runs, general concurrency, or all loop states. Sensor/predicate/timing/state-post helpers remain controlled as documented.",
+    "This is bounded composition evidence only; no canonical admission or whole-application completeness is claimed."
+  ]
+}

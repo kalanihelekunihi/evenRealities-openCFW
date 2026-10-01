@@ -1,0 +1,30 @@
+{
+  "review_id": "1208/001",
+  "decision": "PASS_SCOPED",
+  "scope": "Independent review of the application startup prefix with actual wrapper/configuration code. Deeper driver behavior, hardware operation, and application-wide semantics are not admitted.",
+  "candidate": {
+    "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-driver-prefix-1207/001",
+    "receipt_sha256": "0e1b15168e73e169a8159ca87fb0de24c60682876d2851189b3374ddd4d2f805",
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "files": {
+      "pseudocode.md": "f5d805f040433aa3dd35296e43d1fdfc4fdf559a4f6790d598c5cc894cc710b9",
+      "replay.py": "9bef07ce835393ef1328c9440d67babae45099c7e3291b84f87a65849642506e",
+      "replays.json": "2813f09d8f78c0eacf824de29db4ade01f3f697ce9dec0e247365b771ecc55f6"
+    }
+  },
+  "independent_artifacts": {
+    "isolated_replay": "reviews/P2-touch-application-driver-prefix-independent-review-1208/001/replay_isolated.py",
+    "regenerated_rows": "reviews/P2-touch-application-driver-prefix-independent-review-1208/001/regenerated/replays.json",
+    "regenerated_rows_sha256": "2813f09d8f78c0eacf824de29db4ade01f3f697ce9dec0e247365b771ecc55f6"
+  },
+  "checks": [
+    "Reran the original-byte Unicorn M-class case in a review-owned output directory; replay JSON matches the candidate exactly.",
+    "The recorded trace has 18 ordered controlled deeper-driver calls, followed by the expected prefix calls. The ordered driver PC sequence matches the harness's fixed sequence, and all raw arguments are captured; the candidate asserts key configuration arguments, descriptor/head relation, stack, PRIMASK, and application breakpoint bypass.",
+    "The wrapper/configuration/return-leaf code in the named actual call path runs from original bytes, including 44C4 and its 44A0/44B4/44D0/4528/4538 hierarchy and the 4526/4536 leaves. A3B0 remains actual and establishes the descriptor insertion used by the later status decision.",
+    "The supplied 964-byte reset-data initialization is reused as an explicit RAM precondition. The run reaches 0x3D50, restores SP to 0x2000EFF8, and clears PRIMASK as recorded."
+  ],
+  "limitations": [
+    "Deeper driver calls 45D0, A148, 9FD4, A104, A01C, A0BC, 8EE4, and 45A4 are controlled; captured arguments do not establish their behavior.",
+    "This does not establish physical hardware configuration, reset-to-application boot, application-loop behavior, or interrupt delivery. The supplied memory setup and other prefix controls remain assumptions."
+  ]
+}

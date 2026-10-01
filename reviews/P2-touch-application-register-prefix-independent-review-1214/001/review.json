@@ -1,0 +1,30 @@
+{
+  "review_id": "1214/001",
+  "decision": "PASS_SCOPED",
+  "scope": "Independent review of the register-command application prefix using actual A148/A104 instructions. This remains a supplied-RAM fixture with controlled deeper drivers, not hardware or full-boot evidence.",
+  "candidate": {
+    "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-register-prefix-1213/001",
+    "receipt_sha256": "fe3aa366d375ae8db03b23646be4c9f0b8c56a04150a32e4df4a1255f68852cf",
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "files": {
+      "pseudocode.md": "d0b12e0105120297e4d25445cd6728013c3f4f3354335d58cb994f01abd9a0b0",
+      "replay.py": "fc9c7435b1e69afd3e70cd640596f1315c8ae506813a5ed4633b9c7c75bf6702",
+      "replays.json": "2faf76b7adc230dd80719bfc85c00e3a182cc58c048878427778f83f2774cf9c"
+    }
+  },
+  "independent_artifacts": {
+    "isolated_replay": "reviews/P2-touch-application-register-prefix-independent-review-1214/001/replay_isolated.py",
+    "regenerated_rows": "reviews/P2-touch-application-register-prefix-independent-review-1214/001/regenerated/replays.json",
+    "regenerated_rows_sha256": "2faf76b7adc230dd80719bfc85c00e3a182cc58c048878427778f83f2774cf9c"
+  },
+  "checks": [
+    "Reran the application-prefix original-byte fixture in isolation; the regenerated replay JSON matches exactly.",
+    "The wrapper/configuration code, including A148 and A104, executes directly from the pinned image. Their six writes at 0x40010000 are ordered as [0x40000041, 0x8000FF01, 0x40000080, 0x8000FF40, 0x400000C0, 0x8000FF80], consistent with three accepted mode/selector call pairs.",
+    "The trace has 12 ordered controlled deeper-driver calls and nine later controlled prefix callees. The listed raw register arguments are captured. A3B0 insertion remains actual; the copied descriptor/head relation and later success path are checked.",
+    "The run reaches 0x3D50, returns with the expected SP and PRIMASK, and avoids the breakpoint through the actual descriptor/status path."
+  ],
+  "limitations": [
+    "The 12 deeper driver calls and nine later application-prefix callees remain controlled; observed arguments and call order do not close those callees' behavior.",
+    "The initialized RAM region is preloaded from the pinned reset image. No physical register semantics, hardware setup, boot reachability, application-loop behavior, or interrupt delivery is established."
+  ]
+}

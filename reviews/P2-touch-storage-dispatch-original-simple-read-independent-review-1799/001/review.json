@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-storage-dispatch-original-simple-read-independent-review-1799",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "scope": {
+    "candidate": "analysis/touch-storage-dispatch-original-simple-read-1794/001",
+    "reviewed_span": "original 8A78 dispatch path and 7E44..7E62 adapter with actual 4860/AA2C chain; 82E0 extended-mode path excluded",
+    "reviewed": "The 36 isolated fixtures execute the original 8A78 mode-1 path into 7E44\u21924860\u2192AA2C with no helper interceptions. Exact valid output bytes and unchanged rejected destinations, no provider call on zero-size/out-of-limit paths, normalized return, SP and stop PC all match. I independently decoded 8A78..8AAC from the pinned source: it checks zero size, adds offset+size and unsigned-compares against context+8, checks output pointer, dispatches on byte +13 to 7E44 or 82E0, and returns the literal at 8AA8 on the tested rejection branches."
+  },
+  "pins": {
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "candidate_receipt_sha256": "cc6ab733a150adfd74049e76e7f3e0ce53caca19bf9859e3a717b1ec77904b46",
+    "candidate_adapter_body_sha256": "20c9accd7d921966473072090de14214d3895534c01bf3582599a042c1945563",
+    "candidate_replays_sha256": "b6cce370a9070964b7bf9ec3c96695dce3c603e5aaf53dd27aa3fba96219ea44",
+    "independent_dispatch_sha256": "5dd0ac2d70fa376f5b3c1ac80407a99c80627bfc0f91e09a5a5d9a5ca0e86a5a"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "The 36 isolated fixtures execute the original 8A78 mode-1 path into 7E44\u21924860\u2192AA2C with no helper interceptions. Exact valid output bytes and unchanged rejected destinations, no provider call on zero-size/out-of-limit paths, normalized return, SP and stop PC all match. I independently decoded 8A78..8AAC from the pinned source: it checks zero size, adds offset+size and unsigned-compares against context+8, checks output pointer, dispatches on byte +13 to 7E44 or 82E0, and returns the literal at 8AA8 on the tested rejection branches."
+    },
+    {
+      "id": "F2",
+      "severity": "low",
+      "result": "The candidate receipt body field hashes only 7E44..7E62; the 8A78 dispatcher is covered by the authenticated whole-source hash, not a separate declared body span. This review independently extracts and decodes 8A78..8AAC, including the literal at 8AA8, and includes that disassembly as a review artifact."
+    },
+    {
+      "id": "F3",
+      "severity": "none",
+      "result": "All source/candidate artifact hashes match and isolated replay JSON is byte-identical."
+    }
+  ],
+  "limitations": [
+    "Mode 1 only is exercised; the extended-mode 82E0 branch is not executed. RAM is synthetic; no physical storage mapping is established.",
+    "Address arithmetic overflow, invalid pointers and concurrency are outside this packet\u2019s fixture scope. No canonical admission."
+  ],
+  "checks": [
+    {
+      "command": "source/candidate pins and isolated replay",
+      "result": "PASS; all 36 fixtures match",
+      "artifact": "isolated-replays.json"
+    },
+    {
+      "command": "independent disassembly of pinned 8A78 dispatch and error literal",
+      "result": "PASS",
+      "artifact": "independent-dispatch-disassembly.txt"
+    }
+  ],
+  "canonical_or_coverage_change": false
+}

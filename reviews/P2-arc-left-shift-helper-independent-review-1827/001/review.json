@@ -1,0 +1,19 @@
+{
+  "review_id": "1827",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/arc-left-shift-helper-1826/001",
+  "candidate_receipt_sha256": "9ca57afd0ce7c1dfb37c9714f4540cd398066580499ceea4e96a4d8f8b53bcb8",
+  "body_sha256": "d1580f73b26654ff70bf808bbc627cc6c62a5eeaa10a25e6e2f67119b81a95c2",
+  "pseudocode_sha256": "66c14f1d74a884fb68b3cc2c52b0caf8e7036fe15883b58021639a5328abb729",
+  "evidence_pins_sha256": "145c0e936c2fda4589a3a1426f3934de3e9b866b0e6ca0a4355e3c190f39ee40",
+  "checks": [
+    "Candidate verifier passed exact package/record mapping, ELF carrier address, fresh GNU ARC decode, local branch/delay-slot checks and seven arithmetic fixtures.",
+    "Independently checked the 42-byte owned span: BMSK immediate 5 retains count bits 0..5; count zero returns unchanged; counts 1..31 merge low-word carry in the delayed OR slot; counts 32..63 shift the original low word into high and clear low in the delayed slot.",
+    "Fixture edge cases 0,1,31,32,33,63,64 are consistent with modulo-64 count and 32-bit shifts. The two delayed instructions are included in the owned bytes; following NOP and subsequent code are excluded."
+  ],
+  "limitations": [
+    "No CPU execution, caller/ABI identification, global function boundary, or whole-image ownership is established.",
+    "No canonical admission or C implementation."
+  ]
+}

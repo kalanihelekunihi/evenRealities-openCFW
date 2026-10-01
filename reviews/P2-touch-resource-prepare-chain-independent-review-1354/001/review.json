@@ -1,0 +1,19 @@
+{
+  "review_id": "1354",
+  "status": "REVISE_GEOMETRY",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-resource-prepare-chain-1364/001",
+  "candidate_receipt_sha256": "2b3230130401a6518ca90125c52eb887605d74f0f7d78308440c533b9dbd1d81",
+  "candidate_pseudocode_sha256": "d11b512bd4a7fe777a58c8ffc0e45b1c06bef2a1152f133bd86871c595cd6ba0",
+  "candidate_replay_sha256": "203675fdca2069b0ae73e77f102cfa9ad0c98270137ef7afd19ef8666a9b6b43",
+  "candidate_replays_sha256": "ed6ac9b61cd84f8ffd611a6ebff7e2dcaeb5907d5309cc070b87d03a7104c1b0",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independent decode confirms 4C44..4C72 is 46 bytes and confirms the flag test, status conversion, resource call, setup call arguments, and raw-result path. The isolated replay passes all 54 combinations across both entries, flags, and controlled helper statuses.",
+    "Concrete geometry defect: pseudocode describes 4C72..4C7A as a six-byte adapter, but the actual instructions occupy eight bytes: PUSH at 4C72 (2 bytes), BL at 4C74 (4 bytes), and POP at 4C78 (2 bytes). The adapter's exclusive end is 4C7A; its code range is [4C72,4C7A), length 8. Correct this body-length statement and any dependent geometry before treating the packet as reviewed."
+  ],
+  "limitations": [
+    "Pointer validity, deeper helper effects, and concurrency are not established by the controlled fixtures."
+  ]
+}

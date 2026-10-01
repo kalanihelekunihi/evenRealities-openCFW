@@ -1,0 +1,11 @@
+# Independent review 1941 — extended-write publication traces
+
+**Result: PASS_SCOPED.** Candidate `touch-extended-write-publication-traces-1930/001`; receipt SHA-256 `480b232be3bdbe177685f84a1c59ad57410cdc546ca53f30a644eaa77a228a4f`.
+
+Source/artifact pins match. Isolated replay passes all 48 fixtures and reproduces replays.json exactly. Original pointer, clear, copy and CRC helpers execute, while sequence helper 8058, row-copy 814C, overlay 8680, and publication 8554 are controlled as declared.
+
+The model checks positive-size chunking at sizes 1, 64, 65, and 129: ceil(size/64) primary rows, optional mirror write after each successful primary, sequence 11+iteration, offset+64*iteration, final short amount, and copied payload bytes. Publication addresses and metadata are asserted. Failure injection confirms first publication error stops the sequence and is returned instead of overlay status; otherwise the controlled overlay status 9 is returned. SP and terminal PC are checked.
+
+The controlled setup deliberately returns nonzero values from 8058 and 814C, which the original caller ignores; 8058 writes the sequence field. Mirror toggling changes publication count/order as described. Each completed iteration updates context+24.
+
+This is bounded composition evidence with publication, row-copy and overlay behavior controlled. It does not establish their implementations, hardware effects, zero-size behavior, general geometry, mutable callbacks, or canonical admission.

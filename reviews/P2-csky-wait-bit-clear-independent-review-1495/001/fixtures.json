@@ -1,0 +1,163 @@
+{
+  "schema": "csky-wait-bit-clear-static-fixtures-v1",
+  "method": "Instruction-driven finite traces over exact original 16-byte body. MMIO words are controlled fixture inputs; no hardware execution is claimed. Each loop iteration reloads a fresh 32-bit word.",
+  "body_sha256": "4c69925f75f82a665d3f637a6b5e93397488e1ae4279ebb5716c9349bc6c0319",
+  "cases": [
+    {
+      "name": "already_clear",
+      "controlled_words": [
+        "0x00000000"
+      ],
+      "steps": [
+        {
+          "read_index": 0,
+          "read_address": "0xA2000028",
+          "read_width_bits": 32,
+          "word": "0x00000000",
+          "masked_bit0": 0,
+          "branch": "return"
+        }
+      ],
+      "result": "returns R0=0",
+      "reads": 1,
+      "writes": []
+    },
+    {
+      "name": "preserve_other_bits_until_bit0_clears",
+      "controlled_words": [
+        "0xFFFFFFFF",
+        "0x00000003",
+        "0xFFFFFFFE"
+      ],
+      "steps": [
+        {
+          "read_index": 0,
+          "read_address": "0xA2000028",
+          "read_width_bits": 32,
+          "word": "0xFFFFFFFF",
+          "masked_bit0": 1,
+          "branch": "repeat"
+        },
+        {
+          "read_index": 1,
+          "read_address": "0xA2000028",
+          "read_width_bits": 32,
+          "word": "0x00000003",
+          "masked_bit0": 1,
+          "branch": "repeat"
+        },
+        {
+          "read_index": 2,
+          "read_address": "0xA2000028",
+          "read_width_bits": 32,
+          "word": "0xFFFFFFFE",
+          "masked_bit0": 0,
+          "branch": "return"
+        }
+      ],
+      "result": "returns R0=0",
+      "reads": 3,
+      "writes": []
+    },
+    {
+      "name": "nonzero_even_word_returns_immediately",
+      "controlled_words": [
+        "0x12345678"
+      ],
+      "steps": [
+        {
+          "read_index": 0,
+          "read_address": "0xA2000028",
+          "read_width_bits": 32,
+          "word": "0x12345678",
+          "masked_bit0": 0,
+          "branch": "return"
+        }
+      ],
+      "result": "returns R0=0",
+      "reads": 1,
+      "writes": []
+    },
+    {
+      "name": "single_set_bit_then_clear",
+      "controlled_words": [
+        "0x00000001",
+        "0x00000000"
+      ],
+      "steps": [
+        {
+          "read_index": 0,
+          "read_address": "0xA2000028",
+          "read_width_bits": 32,
+          "word": "0x00000001",
+          "masked_bit0": 1,
+          "branch": "repeat"
+        },
+        {
+          "read_index": 1,
+          "read_address": "0xA2000028",
+          "read_width_bits": 32,
+          "word": "0x00000000",
+          "masked_bit0": 0,
+          "branch": "return"
+        }
+      ],
+      "result": "returns R0=0",
+      "reads": 2,
+      "writes": []
+    },
+    {
+      "name": "finite_all_odd_prefix",
+      "controlled_words": [
+        "0x00000001",
+        "0x00000003",
+        "0x00000005",
+        "0x00000007"
+      ],
+      "steps": [
+        {
+          "read_index": 0,
+          "read_address": "0xA2000028",
+          "read_width_bits": 32,
+          "word": "0x00000001",
+          "masked_bit0": 1,
+          "branch": "repeat"
+        },
+        {
+          "read_index": 1,
+          "read_address": "0xA2000028",
+          "read_width_bits": 32,
+          "word": "0x00000003",
+          "masked_bit0": 1,
+          "branch": "repeat"
+        },
+        {
+          "read_index": 2,
+          "read_address": "0xA2000028",
+          "read_width_bits": 32,
+          "word": "0x00000005",
+          "masked_bit0": 1,
+          "branch": "repeat"
+        },
+        {
+          "read_index": 3,
+          "read_address": "0xA2000028",
+          "read_width_bits": 32,
+          "word": "0x00000007",
+          "masked_bit0": 1,
+          "branch": "repeat"
+        }
+      ],
+      "result": "still polling after supplied finite trace; no timeout/return inferred",
+      "reads": 4,
+      "writes": []
+    }
+  ],
+  "assertions": [
+    "One 32-bit read occurs per loop iteration at 0xA2000028.",
+    "Only bit 0 controls the backedge; all other bits are ignored.",
+    "A read with bit 0 clear exits and R0 is zero.",
+    "A finite trace containing only odd values proves only that execution is still polling at its end; it does not claim a timeout.",
+    "No memory write occurs."
+  ]
+}

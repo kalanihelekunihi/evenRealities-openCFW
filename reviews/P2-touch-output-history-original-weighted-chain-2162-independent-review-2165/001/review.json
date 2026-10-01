@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-output-history-original-weighted-chain-2162-independent-review-2165",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "accepted": false,
+  "scope": {
+    "candidate": "analysis/touch-output-history-original-weighted-chain-2162/001",
+    "reviewed": "Original output history chain exact source/body binding, instruction behavior and isolated composition replay"
+  },
+  "pins": {
+    "candidate_receipt_sha256": "3d5053de383adf17d54bf4ea12b85e16bb632bef7e5d397b0692770adf062ad5",
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "candidate_replays_sha256": "432ebbc4d3535b832f73c7ae4074e47196cc589d4b264eca119846c5df3e18e0",
+    "candidate_files": {
+      "replays.json": "432ebbc4d3535b832f73c7ae4074e47196cc589d4b264eca119846c5df3e18e0",
+      "replay.py": "9ff43bb20f79bcc2567e12b5282419dafaa7c71966183a46e85e3d10ef0ddbd6",
+      "pseudocode.md": "a42fd518ef13566289111fd5d276c503b145e25475ea5b4e71d7483a02282fec",
+      "disassembly.txt": "92f2cb744bbe63b0c0f13d313e4dc3baee7a3502a3b1717fc0a0b443933c17b8"
+    }
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "The isolated 120-case replay matches byte for byte. Original 4A2A, 49E6, 4FDE, 49D4, and AA2C execute without child interception. The config weight byte is zero in all these composition fixtures, so enabled reuse copies history halfword pairs into current; the remaining-entry path performs the original gated eight-byte copy."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "Assertions check both full 64-byte buffers, reused-entry call arguments, saved count and sentinel behavior, stride values 0/1/2, preserved R8-R11, and SP. The retained allocation tails and disabled paths are also compared."
+    }
+  ],
+  "limitations": [
+    "Composition uses weight byte 0 and a finite set of counts/history counts/strides; it does not extend the all-weight coverage of standalone 2163 to composed callers.",
+    "Buffers are separate and synthetic; aliasing, concurrent mutation, and physical meaning remain open.",
+    "No canonical admission or C implementation."
+  ],
+  "checks": [
+    {
+      "command": "source/body/receipt-listed artifact hash verification",
+      "result": "PASS",
+      "artifact": "source-checks.json"
+    },
+    {
+      "command": "isolated original-byte replay",
+      "result": "PASS; 120 cases, JSON byte-identical",
+      "artifact": "replay.txt"
+    },
+    {
+      "command": "complete Thumb-M-class decode compared with candidate listing",
+      "result": "PASS; independent Capstone listing byte-for-byte equal",
+      "artifact": "independent-disassembly.txt"
+    }
+  ],
+  "review_artifacts": {
+    "source_checks_sha256": "e1ed41dd8fd34a0c08651ab74eb95c098bcf026b14f62dc06b1a68b263048939",
+    "replay_sha256": "c05fcd2f9d3cca97f87af6b0c1ab4d6fb35b9ad58a1a2d1ae147c72bb4bad056",
+    "disassembly_sha256": "92f2cb744bbe63b0c0f13d313e4dc3baee7a3502a3b1717fc0a0b443933c17b8"
+  },
+  "canonical_or_coverage_change": false
+}

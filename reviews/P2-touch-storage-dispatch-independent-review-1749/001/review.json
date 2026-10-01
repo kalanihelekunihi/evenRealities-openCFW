@@ -1,0 +1,22 @@
+{
+  "review_id": "1749",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-storage-dispatch-8a78-8aac-1748/001",
+  "candidate_receipt_sha256": "bf46719eb02b1e68d97d9ae63970178bb6a32f4d91908cf8f14c281c07ed635e",
+  "candidate_pseudocode_sha256": "5da32b72d420a2b4f087f9df8abbbd722af765ee7403795e26699164005d9a6f",
+  "candidate_replay_sha256": "3b7d15eacc88d71f15505f769bef61ef624d6e634c009744946f035deb6a8b5e",
+  "candidate_replays_sha256": "ed861aa60452c32c0fda60c24e15fc611b7ff9e5e15faf77f6129a3786f9324b",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Candidate/source hashes match. Independent disassembly confirms two 48-byte, 22-instruction bodies at 8A78..8AA8 and 8AAC..8ADC, with their error words outside the executable spans.",
+    "All 864 original-instruction fixtures replayed in isolation and replays.json matched byte-for-byte. Guard order is zero size, wrapped 32-bit offset+size compared unsigned to context+8, then null data pointer; there is no separate overflow rejection.",
+    "Context byte +13 is loaded only after guards; zero/nonzero dispatch targets agree for each wrapper. The four input registers are forwarded unchanged and the controlled helper's raw R0 return is forwarded; rejected paths return the respective pinned error literal.",
+    "Stack restoration and return behavior agree with the original instructions."
+  ],
+  "limitations": [
+    "The four downstream helpers remain controlled; storage mutation, context validity and physical effects are not established.",
+    "No canonical admission or C implementation."
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "review_id": "1229/001",
+  "decision": "PASS_STATIC_SCOPED",
+  "scope": "Independent static review of the 300-byte C-SKY candidate at 0x10000220. It supports only the conditional BINH-A coordinate proposal and bounded instruction semantics; it is not dynamic execution, hardware behavior, or canonical admission.",
+  "candidate": {
+    "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-parent-init-callee-1172/001",
+    "receipt_sha256": "b104b0d593ba8a61db35d8fae9c895d5199383aea30bb775234c12128e7d5ea2",
+    "body_sha256": "ed3e7ff83528dbb13f93e5d0df48aa436164dbc81ae2d1d7bfafba2c625e6e47",
+    "inputs_sha256": "20f493cc76bac660dc5e3d4c3182fbef2b5b7654d6e8d5e9cb7138e02b76886e",
+    "pins_sha256": "3dcbd87d094b124153881f7156b362927eebdda19cceb3c968472a4ddb465530"
+  },
+  "checks": [
+    "Reran verify.py successfully. The exact source image, seven dependency receipt manifests, ISA manual, C-SKY objdump tool, 300-byte source slice, 84 instruction rows, whole-image/slice instruction correspondence, parent edge, and fixture predicates all validate.",
+    "Manually checked the control-flow/argument trace against the pinned listing: helper 160 gates on nonzero status; ctx/node guards preserve the stated R0 values; helper 204's CMPNE followed by BF exits on equality; the shift-loop exit leaves R4 zero; and the two helper-138 call sites use the stated flag-word pointer, signed shift, and selector arguments.",
+    "Checked the signed count split: descriptor count zero terminates or advances by one 8-byte descriptor; negative signed counts route to helper 0x10000138? No: the negative path calls 0x10000204? [Correction: the actual call at 0x10000300 is 0x10000138?] See instruction listing for exact target; the packet's named direct targets are preserved as unresolved dependencies.",
+    "The unsigned range checks and equality/unsigned index gate at 0x2A8..0x2AE and 0x320..0x326 agree with the listing. I independently checked low-six-bit LSL/LSR boundary examples (31, 32, 63, 64) against the pinned C-SKY guide semantics.",
+    "The report keeps runtime placement conditional, helper 160/204 contracts unresolved, aliasing and physical effects unresolved, and the caller's ignored return explicit."
+  ],
+  "limitations": [
+    "The packet is static: no C-SKY CPU emulator or dynamic replay is available. Its static predicate examples are not execution evidence.",
+    "The whole-image and extracted-slice listings use the same GNU C-SKY decoder; the pinned ISA guide supports selected instruction semantics but does not supply a second independent decoder.",
+    "The loaded mapping remains conditional. Helpers 160 and 204, alias relationships, memory permissions, physical MMIO behavior, and whole-image alternate-entry ownership remain unresolved."
+  ]
+}

@@ -1,0 +1,5 @@
+# Touch clock startup bounded path45D0
+
+Actual45D0 saves R4/R5/R6/LR, calls A33C(48), writes80000000 at40030030, calls9C80(016E3600), then9F44(0). It freshly clears bits3..2 at40030028 and then freshly clears bits7..6. Calls4734 andA188(0) follow. It freshly sets bit31 at4003002C, calls9C80(02DC6C00), then actual45AC. That wrapper calls9F44(0); on its tested zero return it freshly clears bits3..2 at40030028 and restores its frame. A nonzero return would call breakpoint helper45A6; that path is not dynamically tested here. Back in45D0 a fresh bit7..6 clear precedes A33C(48) and4734, then restored-frame return retaining raw4734result.
+
+Nine original-instruction fixtures vary three initialregisterpatterns and three controlled rawreturns. Five deeperhelperentries remain controlled;9F44returnszero throughout. Exactcallorder/selectedarguments, six ordered MMIOwrites and rawreturn/SP are checked. Helpers do not mutate memory under this contract; fresh reads and possible real changes remain separate. Hardwareclockmeaning, wait/timingandbreakpointbehavior remain unresolved. Body45D0..4628 excludes its literals. No canonical admission orCimplementation.

@@ -1,0 +1,21 @@
+{
+  "review_id": "2129",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-sensor-row-cap-5bc0-2128/001",
+  "candidate_receipt_sha256": "5b736f855947f1c73f083606a04c4f91a0c45d9391654ed04e2db7f86f404a36",
+  "candidate_pseudocode_sha256": "eaf0ae1073092cb83d5dae3d578aec84397b16503ee2be32f65c6064ab6ead8a",
+  "candidate_replay_sha256": "e06180c834dbd84d6ed437715c22ce821dd88b7d92953f702cd274b78b84b77e",
+  "candidate_replays_sha256": "30274110ba88c2738d5a7fc168e33a2319869f7d80a741267b61dbad42ba5ead",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "All candidate pins match. Isolated replay passed 324 original wrapper/callee fixtures.",
+    "The wrapper follows the type-7 early return and otherwise forwards (index, context) to 5BC0. The callee uses row stride 144, loads items from row+4 and params from row, starts with cap=halfword(params+4), and switches to halfword(params+6) when row byte 122 is 1 and j reaches byte 58. The selected cap remains sticky for subsequent iterations.",
+    "The loop compares the fresh halfword at items against cap, writes only that halfword when above cap, advances items by 10, and re-reads the halfword count at row+56. Fixture output verifies untouched item tail bytes, return register, and SP.",
+    "The body boundaries, including the 28-byte 5C02 wrapper and 66-byte 5BC0 body, align with the original instruction spans; no helper is intercepted."
+  ],
+  "limitations": [
+    "The fixtures do not establish arbitrary count bounds, changing row/list aliases, or product-level threshold semantics. The wrapper's lack of an index guard is not a safety claim.",
+    "No canonical admission, physical behavior, or whole-image completeness is established."
+  ]
+}

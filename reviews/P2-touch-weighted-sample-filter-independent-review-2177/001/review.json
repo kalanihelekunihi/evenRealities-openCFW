@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-weighted-sample-filter-independent-review-2177",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "accepted": false,
+  "scope": {
+    "candidate": "analysis/touch-weighted-sample-filter-5054-2174/001",
+    "reviewed": "76-byte filter body, four mask values, original weighted leaf calls, ordered sample/group/auxiliary writes, saved registers and frame"
+  },
+  "pins": {
+    "candidate_receipt_sha256": "f95a7b6abefed5917ab147194344667fdc718a13ac6c5afbc9818c50e3f36ed9",
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "body_sha256": "3fed765386547234f734f1293a8f9926078c5e62e3a2ba357b4bd1d1836c374d",
+    "candidate_replays_sha256": "e6a198b02b1fec6303f603abdf569e258c16cfdd25fc9940efac7fb9126acdd2",
+    "candidate_files": {
+      "replays.json": "e6a198b02b1fec6303f603abdf569e258c16cfdd25fc9940efac7fb9126acdd2",
+      "replay.py": "36f55eef164a6c8b7a37ba75f0dea626db25ce2885d5d305cfb08e9e00198e0b",
+      "pseudocode.md": "1cdef32c3fb66c66ec4bd99f3ab016b8ab15c782635b88c42f3976450029a9c6",
+      "disassembly.txt": "af291f6ed1d35267fa280d07f2dcc49de03cbb85ebaa5251b588bc18f3bf29ce"
+    }
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "Independent decode confirms the 76-byte body selects fractional handling exactly when (flags & 0x300)==0x200. That path forms sample<<8 and (group<<8)|auxiliary, passes row word36 as full 32-bit weight to original 4FDE, stores the returned high halfword to group, low byte to auxiliary, and the same halfword to sample. Other masks call 4FDE with unscaled halfwords and do not access auxiliary."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "The original leaf performs 32-bit wrapped multiply/add operations before logical shift 8. R4-R7 and SP restore. All 768 isolated cases pass with byte-identical output and exact full-buffer/ordered-store checks; the matrix includes six full-width weights including 0xFFFFFFFF and all four mask combinations."
+    },
+    {
+      "id": "F3",
+      "severity": "none",
+      "result": "Source, body, receipt-listed files and full Thumb decode match the candidate pins. No child interception occurs."
+    }
+  ],
+  "limitations": [
+    "Fixtures cover only the listed halfword values, fractions, modes, and six weights; arbitrary full-word weights remain unexhausted.",
+    "Buffers are separate and static; aliasing, concurrency and physical field meaning are not established.",
+    "No canonical admission or C implementation."
+  ],
+  "checks": [
+    {
+      "command": "source/body/artifact hash checks",
+      "result": "PASS",
+      "artifact": "source-checks.json"
+    },
+    {
+      "command": "independent Thumb decode and isolated replay",
+      "result": "PASS; 768 fixtures, replay JSON byte-identical",
+      "artifact": "replay.txt"
+    }
+  ],
+  "review_artifacts": {
+    "source_checks_sha256": "6100c263cc7f6f277ac599b9092331e79f328ab5ce24db8f581944e8ac15884d",
+    "disassembly_sha256": "af291f6ed1d35267fa280d07f2dcc49de03cbb85ebaa5251b588bc18f3bf29ce",
+    "replay_sha256": "3b9f3bc4dc01ebb9102c0391aa7229c349d8628f973ed51998fc066b7fa68d91"
+  },
+  "canonical_or_coverage_change": false
+}

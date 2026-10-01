@@ -1,0 +1,32 @@
+{
+  "review_id": "1202/001",
+  "decision": "PASS_SCOPED",
+  "scope": "Independent review of the six rejection-path supplement to the 1199 priority-list insertion candidate. This does not admit canonical coverage or establish malformed-list safety.",
+  "candidate": {
+    "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-priority-list-rejections-1201/001",
+    "receipt_sha256": "7bcda7fc243ee663c93af0c7badfadc0c17bf4c82e591e1abf06b40e98d75432",
+    "input_source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "predecessor_1199_receipt_sha256": "2bcb58d66526a2a6d0fe16b0e8cf4e13a36ce20751fc0f48c32edaaf2efbf3c0",
+    "candidate_files": {
+      "notes.md": "3ef27dcdb18223c340e4fdd30ae494f1b94a735cf801a8340012e451eb38ab81",
+      "replay.py": "2d3bde05f711f49d3f99bc0772b3701349ecba4341bd8dcc921bd0d10d5ebe14",
+      "replays.json": "11daea14d0edf12182f70fc2034ca3149fb723a357c3eb59c738aa4e6d7e8f73"
+    }
+  },
+  "independent_artifacts": {
+    "isolated_replay": "reviews/P2-touch-priority-list-rejections-independent-review-1202/001/replay_isolated.py",
+    "regenerated_rows": "reviews/P2-touch-priority-list-rejections-independent-review-1202/001/regenerated/replays.json",
+    "regenerated_rows_sha256": "11daea14d0edf12182f70fc2034ca3149fb723a357c3eb59c738aa4e6d7e8f73"
+  },
+  "checks": [
+    "Verified candidate and predecessor receipt pins, firmware source hash, and all three candidate file hashes.",
+    "Independently decoded the 0xA3B0..0xA440 routine from the pinned firmware bytes using Thumb-MCLASS Capstone: the three early rejection branches test null, [input+12]==0, and [input]==0; the traversal checks node identity before comparing priority; the duplicate path returns zero via the common epilogue.",
+    "Reran all six fixtures from an isolated script/output directory. Regenerated replay rows match the candidate byte-for-byte as parsed JSON: null, missing12, missing0, duplicate_head, duplicate_middle, duplicate_tail.",
+    "Each replay returns R0=0 and restores SP=0x2000F000. Snapshotted non-stack RAM is unchanged, and observed writes are only the three saved-frame stores at 0x2000E034..0x2000E03C.",
+    "Head/middle/tail duplicate fixtures construct finite doubly-linked lists with the target at the stated location and verify no reinsertion or list mutation. The initial conditions distinguish the two missing-field guards."
+  ],
+  "limitations": [
+    "The supplied finite-list cases do not establish termination for a cycle that does not contain the input, safe memory access, valid head index bounds, or concurrent access behavior.",
+    "The 1199 insertion success fixtures and this rejection supplement are private original-byte evidence only; neither is canonical admission or proof of caller reachability."
+  ]
+}

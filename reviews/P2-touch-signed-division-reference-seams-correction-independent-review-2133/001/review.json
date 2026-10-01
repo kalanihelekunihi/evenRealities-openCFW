@@ -1,0 +1,19 @@
+{
+  "review_id": "2133",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-signed-division-reference-seams-2132/001",
+  "candidate_receipt_sha256": "838fa88782f58ad8b7d2285c718eeb8ec96bd48c9d1e8440e6bedbc6693070ce",
+  "candidate_readme_sha256": "6541e035c5f68402021b2dbd319bf62d50f7af87d5db7603703c6d6ecf54ec7a",
+  "candidate_references_sha256": "e061fa3ea92a6e7eb5710a22dd22524e99cc7592696dc48750bb609da10ca504",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "All corrected-artifact and full source pins match. Independent halfword-aligned Thumb/M-class decoding of the pinned image reproduces all eleven listed direct-branch candidates, including the internal BLO at A992 to shared tail A996. Address, file offset, mnemonic, encoded bytes and target agree row by row.",
+    "An independent four-byte-aligned scan of the source image found zero pointer words (after masking bit 0) for A7D4, A996, A9A0 and A9A8, consistent with the corrected list.",
+    "The correction explicitly supersedes the earlier 10-edge statement and retains the scope caveat that these are syntactic candidates rather than proven code ownership or a closed caller set."
+  ],
+  "limitations": [
+    "The decoder scan includes arbitrary bytes, data and second-half interpretations; it is not an executable ownership proof or proof of dynamic reachability.",
+    "No indirect dispatch closure, whole-image denominator, canonical admission or byte-role classification is established."
+  ]
+}

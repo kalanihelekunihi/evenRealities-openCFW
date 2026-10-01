@@ -1,0 +1,21 @@
+{
+  "schema": "csky-bounded-function-geometry-v1",
+  "entry": "0x10000AF8",
+  "runtime_range": [
+    "0x10000AF8",
+    "0x10000B02"
+  ],
+  "child_file_range": [
+    "0xB10",
+    "0xB1A"
+  ],
+  "bytes": 10,
+  "code_bytes": 10,
+  "instructions": [
+    "0x10000AF8",
+    "0x10000B02"
+  ],
+  "literal_ranges": [],
+  "body_sha256": "38fc300b5abb347843f68fc859adcac4597d982672b4546907e43ac57875408e",
+  "boundary_basis": "push r15 at entry; forced-zero setup; one BSR; pop r15; following BKPT at B02 is excluded and explicitly unowned. The preceding referenced word AF4..AF8 is separately recorded as literal."
+}

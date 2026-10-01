@@ -1,0 +1,5 @@
+Review 1767 — PASS_SCOPED
+
+Bound to touch-storage-last-row-7fa4-1766/004, receipt SHA-256 454d21597fbc750463fddf102943017b42a680093d90a3cb065e10d76fbcf125. I independently reran all 192 fixtures in /tmp/review1767-independent; replays.json matched exactly. Thumb disassembly confirms 176 bytes/84 instructions, with the warning literal outside the body.
+
+The second scan resets the logical row counter but does not restore the pointer to the original start. It begins at the end of the first scan and keeps the previous best/selected pointer. Candidate score comparison is unsigned and strictly greater; the selected row changes only when 7F7C returns zero. A successful improving row in scan two sets the warning status. Both row helpers remain controls, and the fixtures do not establish mutation between passes.

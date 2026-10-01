@@ -1,0 +1,19 @@
+{
+  "review_id": "2023",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-power-original-chain-2022/001",
+  "candidate_receipt_sha256": "98e80febe5c30220a99d01e34b80403b6d213a42c4dc6d324287a41c8a3cae53",
+  "candidate_pseudocode_sha256": "a7ab51e57befd4cc8edd7959e0331c946769148c8ec4bffd589ae9bcd496ce4c",
+  "candidate_replay_sha256": "505fa56794ede051120b40ff4554706a1919b90a1c1290515bc3d215bdc43179",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Source and receipt artifact hashes match; isolated replay reproduced all 16 fixtures exactly.",
+    "Each success case invokes mode 1 with the entry mask, optional mode 4 under mask 1, observes the original WFI leaf under mask 1, then invokes mode 8 after mask restoration. The mode-4 skip bit suppresses only that pass.",
+    "In failure cases the sentinel probe is retained, no WFI occurs, and one-node mode-2 rollback has a null predecessor and therefore no callback. Stack and incoming PRIMASK are restored."
+  ],
+  "limitations": [
+    "The synthetic callback and WFI continuation are controlled. These one-node cases do not exercise nonempty rollback predecessors, callback effects, physical wake, or hardware side effects.",
+    "No canonical admission."
+  ]
+}

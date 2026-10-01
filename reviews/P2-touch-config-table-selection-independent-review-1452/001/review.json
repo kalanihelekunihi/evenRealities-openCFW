@@ -1,0 +1,18 @@
+{
+  "review_id": "1452",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-config-table-selection-52bc-1451/002",
+  "candidate_receipt_sha256": "d4e7ca409bdb581b31dad2a8ef6008d8925921a0894d1a6dc7ad0be345cb3926",
+  "candidate_pseudocode_sha256": "65b95561930be79c4b6a7c6ba00ad5fa2abb0e7b87df7929757b7331b5bd0abd",
+  "candidate_replay_sha256": "84c2765647f564b7cf4679d63af242d01c50fceaada64c25e4dcac3b81159aeb",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independently replayed all 81 original-instruction fixtures; all 256-byte destination comparisons, return-register values, SP and stop-PC checks pass with no helper controls.",
+    "Verified body/data geometry: 0x52BC..0x5368 is 172 bytes, followed by four pointer literals through 0x5378. The code copies the 84-byte base table, replaces each 28-byte row only when its corresponding context byte equals exactly 1, and applies the special context-byte +117 OR 256 to the second-row word at output +188.",
+    "The return behavior is input descriptor except when the third row is replaced, where the final R0 is the fourth copied table word; fixture oracle reads this from output +212. Literal pointer values and table data bytes match the pinned source image."
+  ],
+  "limitations": [
+    "Inputs cover flags {0,1,2} and special values {0,5,255}, not the full byte domain; table meanings and broader global ownership remain unresolved. No canonical admission."
+  ]
+}

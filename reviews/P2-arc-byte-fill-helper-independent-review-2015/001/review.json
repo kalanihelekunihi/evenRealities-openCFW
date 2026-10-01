@@ -1,0 +1,17 @@
+{
+  "review_id": "2015",
+  "status": "PASS_STATIC_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/arc-byte-fill-helper-1998/001",
+  "candidate_receipt_sha256": "88a098637c0b6d811e07fef99f021391ae53cb68fee4397bc586a5159ee2f326",
+  "source_sha256": "cd8bdb5a62a29bb1d8c3bbab2f174082e1a67ca679eed5ce18bbbb413461bf94",
+  "checks": [
+    "The frozen verifier passes, validating the exact 36-byte body, 15 decoded ARC instructions, mappings, source/caller pins and installed decoder replay.",
+    "Manual-backed LP semantics and the byte-loop arithmetic support 16 ascending stores at base+0..15; subsequent masked writes produce 0x47 at +7 and 0x88 at +8. The caller BL.D delay slot supplies the pointer, and caller control flow does not consume the helper return.",
+    "The candidate\u2019s synthetic-memory fixtures and explicit no-concurrent-writer assumption are retained; they do not establish physical memory effects."
+  ],
+  "limitations": [
+    "The input pointer\u2019s meaning, caller\u2019s enclosing function boundary, hardware execution and whole-image closure remain unproven; neighboring callee targets remain unresolved.",
+    "No canonical admission."
+  ]
+}

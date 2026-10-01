@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "entry": "0x003068c8",
+  "direct_calls": [],
+  "indirect_calls": [],
+  "conditional_branches": [
+    {
+      "site": "0x003068e4",
+      "condition": "r1 == 0x11",
+      "target": "0x003068f0",
+      "delay_slot": "mov_s r0,0x99",
+      "otherwise": "fall through to mov_s r0,r2 then store at [r3]"
+    }
+  ],
+  "zero_overhead_loop": {
+    "setup": "lp_count = 0x12 (18)",
+    "site": "0x003068e0",
+    "end_instruction": "0x0030690a",
+    "loop_end_register": "first instruction after end, under ARC LP semantics"
+  },
+  "special_registers": [
+    "CLRI 0 at 0x003068c8",
+    "SYNC at 0x003068cc, 0x003068f8, 0x00306900"
+  ],
+  "memory_writes": [
+    "M32[r3] = -1 for each iteration except r1==0x11",
+    "M32[ADD2(0x00f00808,r0)+12] = -1",
+    "M32[ADD2(0x00f00808,r0)+24] = -1"
+  ],
+  "interpretation_limits": "ADD2 expression retained as ISA operation in edge inventory; MMIO/register-array meanings and global function ownership remain unresolved."
+}

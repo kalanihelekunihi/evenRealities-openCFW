@@ -1,0 +1,19 @@
+{
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-range-prefix-1262/001",
+  "candidate_source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "candidate_files": {
+    "pseudocode.md": "79457116341c13298478ffcb2ab68e41cc3291e307892d4664f42c24aa607305",
+    "replay.py": "0cd012f646025b4c2b6a59d8b72fc2e808d524a40cceda8ba179a459f6137229",
+    "replays.json": "c85d9704219f2989dddec3c871e0dfd090e3c0a006216e401f2e5229ae3c8518"
+  },
+  "review_result": "PASS_SCOPED",
+  "checks": {
+    "replay": "Isolated original-byte startup replay passes, reaches 0x3D50, and regenerates a row identical to the candidate. Actual A33C executes twice; its two writes per invocation are visible in the full memory-write trace. The seven deeper clock calls are controlled. Source and candidate file hashes match the receipt.",
+    "scope": "The trace retains the reset/startup RAM setup and pin helper hierarchy, with actual A33C and the 45A4 leaf. It records 16 intercepted deeper calls, preserves the documented controlled clock and later-prefix limits, and does not claim physical clock behavior."
+  },
+  "limits": [
+    "The prefix replay is a bounded synthetic startup path, not hardware boot or proof of physical MMIO semantics.",
+    "Later application dependencies remain controlled; no application-loop completion is claimed."
+  ],
+  "accepted": false
+}

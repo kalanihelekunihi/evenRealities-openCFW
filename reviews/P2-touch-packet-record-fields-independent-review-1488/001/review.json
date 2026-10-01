@@ -1,0 +1,17 @@
+{
+  "review_id": "1488",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-packet-record-fields-51bc-1487/001",
+  "candidate_receipt_sha256": "147a35b749134c88bda59326bb763f282b5f203ab09b7d63fc4720cb3a3f5779",
+  "candidate_pseudocode_sha256": "13fc07fc1a9413e6550120a3de583620fd683d43a8a56f89145e60db0ef4ff84",
+  "candidate_replay_sha256": "4dee9503d700a4c6677f57ac75dffe56a0bf84021d26c61daa07fb6ca5e2f30c",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independently decoded the exact 250-byte 0x51BC..0x52B6 body. The record stride is 144 bytes and item stride 10; row +54 is decremented only when nonzero before its masked contribution to output word +12. The word +16 base, mode-specific enable-byte selection, bit-12 bypass, threshold/subindex comparison, alternate config bytes, and item byte +9 contribution match the instruction sequence.",
+    "Replayed the copied original-instruction harness against a review-owned source image: all 192 fixtures passed with no helper controls. Tests vary modes 0/1/2/10, enables, bypass, subindex/threshold and uniform source fill; output words, R0 and SP are checked."
+  ],
+  "limitations": [
+    "All fixture bytes within each source region are uniform, so individual field independence is not exhaustively established. The index pair is zero in these fixtures. Pointer validity, global ownership and physical meaning remain open. No canonical admission."
+  ]
+}

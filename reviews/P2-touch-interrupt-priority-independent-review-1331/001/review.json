@@ -1,0 +1,21 @@
+{
+  "review_id": "1331",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-interrupt-priority-a214-1330/001",
+  "candidate_receipt_sha256": "50f65409ff63026cf0179e32bf5067a4b6ebeb653cb7a8213e21f708e3b373a6",
+  "candidate_pseudocode_sha256": "091fb6858be12be2121f47feb50045712827b03e057b9ddadca312b7de757cbc",
+  "candidate_replay_sha256": "bb5d8db1f287e7793d74fc83ae9c6ddef69845d77b3bac971d5e1507afcadcf7",
+  "candidate_replays_sha256": "d5f49dbf06a7e478af5e1cc95bc0241a944c22c96cd3cdcbb15887378779f304",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Source and candidate pins verify. Independently decoded all 88 body bytes and verified separate nonnegative and signed-negative address paths, byte-lane selection, clear/replace masks, low-byte truncation of priority<<6, store, and four-register frame restoration.",
+    "The negative path uses index&15, subtracts 8 modulo 32 bits, logical shifts by 2, adds 6, scales by four, then adds 4 to the system base. The positive path uses index>>2 + 192, scaled by four from external base. No local index/priority guard is present.",
+    "Isolated replay passes 480 combinations (32 indices x five priorities x three old words), and address/value/store/frame outcomes match the instruction-derived model."
+  ],
+  "limitations": [
+    "Negative values outside valid architectural interrupt ranges are arithmetic probes only; hardware priority semantics and address validity are not established.",
+    "No canonical admission or C implementation."
+  ]
+}

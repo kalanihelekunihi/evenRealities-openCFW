@@ -1,0 +1,19 @@
+{
+  "review_id": "2189",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-setup-dispatch-6bd4-2186/001",
+  "candidate_receipt_sha256": "51a81cd8994a43e4ba514f64a5fbed6e152bd9120579c14ad4fe5b446fedcb5c",
+  "candidate_pseudocode_sha256": "262293b5a72b8292b7ccde22bf6f7106d42e7a243cfb46ad35823d798c578dc2",
+  "candidate_replay_sha256": "aa57cd892397c70d33400ff041e0bf735bb98b1d76b0da96a947e9d46f5ac6ca",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "The source and all four receipt-bound files match their declared SHA-256 hashes. Recomputed source slices match code [0x6BD4,0x6D6A) (406 bytes) and literal pool [0x6D6C,0x6D74) (8 bytes); the two pool words decode to 0xFFFF0FFF and 0xC000FFFF. Independent Capstone Thumb/M-class disassembly is byte-for-byte identical to the candidate listing and contains 199 instructions.",
+    "An isolated run regenerated all 144 replay fixtures exactly. The product covers null/zero and start/end guard cases, 5C8E return 0/128, mode 0/2 fast-reuse behavior, and 6AC0 return 0/2. Assertions verify selected helper order/arguments, fast-path register writes, successful setup fields/register writes, and R8-R10/SP preservation.",
+    "Instruction decoding agrees with the pseudocode's bounded paths: invalid arguments return 1; 5C8E result 128 returns 64; 6140's result is ignored; fast reuse requires mode 2 or 4, matching saved start/length, length at most 21 and descriptor bits 13 clear/4 set; otherwise 6AC0's nonzero status returns directly, and its zero path performs the listed writes before 664C, whose return is ignored. The mask operations and distinct descriptor/register reloads match the decoded instructions."
+  ],
+  "limitations": [
+    "The replay controls 5C8E, 6140, 6AC0 and 664C and uses RAM for the register block. The optional callback path is not exercised; mode 4, predicate-failure variants, arbitrary wrapping arguments and helper side effects are not covered.",
+    "No physical peripheral behavior, whole-firmware completeness, or canonical admission is established."
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "review_id": "2057",
+  "status": "REVISE",
+  "accepted": false,
+  "scope": "Admission-readiness audit of the private unsigned/signed division function proposals and their current preflight evidence; not a corpus or G3 review.",
+  "evidence_inputs": [
+    {"path": "g2/workflow/CONTRACTS.md", "sha256": "7d49db8323bace121bb8153e5e73cd3e7577ad45cfdb8857e265f683c2bee275"},
+    {"path": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-division-contract-review-links-2088/001/functions.jsonl", "sha256": "9a505556a3820efed8270cbfa45c6a29ed126a7586d93a061ac57beb2e2f1fa5"},
+    {"path": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-division-record-preflight-2106/001/receipt.json", "sha256": "2b63f47eb9d659dcb74de0b728316967698f941891f1b1115d38b2ac3e0d1a47"},
+    {"path": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-signed-division-contract-reconciliation-2098/001/functions.jsonl", "sha256": "f32f051efe219d857407ebc4a05bcf3684788a4810f9122f03d937ff5c7f0d37"},
+    {"path": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-signed-division-record-preflight-2100/001/report.json", "sha256": "17cd7d3aed20eb813b3ff76d4a6f1e49a8bb6e654d85adecd0dcde0569823128"},
+    {"path": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-division-family-abi-records-2110/001/functions.jsonl", "sha256": "a8e02692729ac81bcdeffa063780909c3ed2ef6ae8eb18dc439559ab41c165ea"},
+    {"path": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-division-family-abi-records-2110/001/receipt.json", "sha256": "a3cbb2260922e0fcaac29773a4553d36c5e6691ad472be250da361eeffb841bd"},
+    {"path": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-division-family-seam-preflight-2102/001/report.json", "sha256": "f1b36a9da5aaa23618f0d92bfea91bfe793ce43d31771a1c031f00c8bdf2ae74"},
+    {"path": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-division-adjacent-return-stubs-2104/001/replays.json", "sha256": "85488fbcab90b5c8dad67011e817246139a0e1f596cd77ea8873a95dc29fb33e"},
+    {"path": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-division-abi-traces-2108/001/receipt.json", "sha256": "24cbe47de435187f7016bbe301254bd9f6786d437458e3491498deb10e620fd8"}
+  ],
+  "checks": [
+    "Corrected unsigned mapping audit: 2106 derives loaded ranges through the hash-pinned P1 touch:flash mapping (loaded_start 0x3300, image_start 0), verifies source_ranges against body plus owned shared ranges, and passes for three unsigned proposals totaling 274 unique bytes. The earlier 2090 report has identical JSON bytes but its verifier did not derive that mapping; use 2106's verifier/receipt as the authoritative check.",
+    "The unsigned 2088 records have exact links to reviews 2053/2055 for A6C0, 2065 for the A9A8 hook, and 2061 for A7CC. Their stable IDs, target/image identity, body/source hashes, operation and flag evidence, prototypes, callee/shared-tail relations, and review artifact pins are present. The unsigned preflight's decision remains not_admitted; this audit found no remaining local field or semantic blocker for those three bounded records, conditional on coordinator review-ledger integration.",
+    "The signed 2098 proposal correctly separates A7D4 own bytes from shared A996..A9A0, and A9A0's six owned bytes from that shared tail. Its current 2100 preflight still reports missing exact review links for both signed records. The currently linked-ID lists in the later 2110 ABI proposal do not include report-path/hash links for 2085, 2087, or 2093; review 2093 is now present, while 2085/2087 remain pending. The new ABI trace evidence 2108 also has no independent review link yet (review 2109 pending). Add exact review paths and hashes in a new reconciliation attempt and rerun the preflight.",
+    "The independent loaded/file mapping is 0x3300 + file_offset for touch:flash. Current source ranges agree with that mapping for the unsigned and signed bodies. The signed 2100 verifier, however, only bounds ranges and checks source bytes; it does not independently derive their correspondence through the pinned image mapping, unlike 2106. Strengthen the signed preflight before relying on its 'hash_and_mapping_checks' label.",
+    "The family preflight 2102 counts 740 uniquely owned bytes across five proposals but explicitly leaves [0xA7CA,0xA7CC), [0xA7D2,0xA7D4), and [0xA9A6,0xA9A8) unowned. The 2104 trace packet characterizes the two BX LR spans at A7D2 and A9A6; review 2105 is pending. A7CA..A7CC remains to be resolved with byte-role/ownership evidence. Do not label any of these gaps padding solely from the neighboring entry or a convenient decode.",
+    "The 2110 ABI supplement records R4-R11/SP and LR effects, including internal LR clobber on zero paths with normal saved-PC return. This addresses an omission in older 2088 calling-convention text. The 2110 supplement itself still needs independent review of its ABI evidence and links; review 2109 is pending."
+  ],
+  "required_next_actions": [
+    "Complete and pin independent reviews 2085, 2087, 2095, and 2109; link them by exact report path and SHA-256 to the corresponding signed/family proposal records. Review 2093 is already available and must be linked as well.",
+    "Create a signed preflight that verifies the mapping equation against the pinned touch:flash image row, not only range bounds and byte hashes.",
+    "Resolve A7CA..A7CC as code/data/padding/unknown with evidence and represent the result in the appropriate private records; review the two return-stub traces before assigning their roles.",
+    "Have the coordinator add durable review-ledger entries with distinct author and reviewer identities, exact input hashes, checks, and decisions as required by CONTRACTS.md. Do not promote proposals from worker-local preflight alone."
+  ],
+  "limitations": [
+    "This is a per-family proposal audit only. It does not establish caller closure, byte-role completeness outside these spans, the discovered-function denominator, whole-image G3, or source/build byte equality.",
+    "All reviewed records remain private proposals. No canonical admission or inventory mutation is authorized by this audit."
+  ]
+}

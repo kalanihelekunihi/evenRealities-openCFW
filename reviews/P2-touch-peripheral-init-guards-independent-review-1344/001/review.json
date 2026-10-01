@@ -1,0 +1,20 @@
+{
+  "review_id": "1344",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-peripheral-init-guards-1343/001",
+  "candidate_receipt_sha256": "9e0e67c579c997da896667da12afdf90951750c604dfe82e64ff9341ab722914",
+  "candidate_pseudocode_sha256": "6d307f71da938b10fd74781c703531030c52fb3ae3133683978086af8b0a5e71",
+  "candidate_replay_sha256": "9e4b5835dc56d2c575a5e35eb1aa81cd2be485740d40d7f6c3cf12e9e9acbb9c",
+  "candidate_replays_sha256": "e0f4a1f018557b266ce8b23bbd98b48014abb693727231ff31ae44b1c691581e",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Source and candidate pins verify; isolated replay passes all 11 guard-prefix fixtures. Independent decode confirms null guards branch to shared error-return epilogue, byte0 mode must be 1..3, byte1+byte5 conflict reaches BKPT 9920, signed byte3 <0 reaches BKPT 999A, bit0 of byte4 reaches BKPT 9930, and words at +16/+12 above 16 reach BKPT 9938/9940.",
+    "The valid fixture stops at 9942 before configuration-dependent programming. The tested guard cases stop before local configuration/peripheral writes; null returns verify the pinned error literal AA2001 and restored frame.",
+    "Full 98F4 pseudocode, later programming branches and breakpoint continuation remain outside this guard-only scope."
+  ],
+  "limitations": [
+    "No physical behavior or canonical admission is claimed."
+  ]
+}

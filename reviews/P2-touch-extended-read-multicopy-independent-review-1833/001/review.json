@@ -1,0 +1,16 @@
+{
+  "review_id": "1833",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-extended-read-multicopy-traces-1818/001",
+  "candidate_receipt_sha256": "32dd3697ac7e9a36b6bf0f7811dba1282d6d016cfb9e7ba23af389d6164097a8",
+  "body_sha256": "10dc591b37adac5c114142464a4ad4324af575b483f655ca6cb66ac0503c7ec7",
+  "candidate_replays_sha256": "ecc57d9dc6f81c5c156c4e952d471c083d97f041235aec1f2e6c3a7d26c3c62f",
+  "checks": [
+    "Candidate receipt file hashes and common source/body binding verified. Isolated replay passed all 15 traces and its JSON matches the candidate byte-for-byte.",
+    "Original execution reaches multi-copy search 8352, advances through 810C, and performs quotient/remainder mapping at 838A. Outputs, zero status, suffix preservation and SP assertions reproduce."
+  ],
+  "limitations": [
+    "Both copies intentionally use identical payloads; output does not identify which copy supplied bytes. Divergent copies, search exhaustion, mirrors, overlays and physical storage remain unresolved. Trace-only; no canonical admission."
+  ]
+}

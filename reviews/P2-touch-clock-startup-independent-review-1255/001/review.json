@@ -1,0 +1,24 @@
+{
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-clock-startup-45d0-1254/001",
+  "candidate_source": {
+    "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+    "sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87"
+  },
+  "candidate_files": {
+    "pseudocode.md": "a7740090440085584fb56c29cd87da94b1ba85b3567e62cd3df63e7953ef6ead",
+    "replay.py": "3d5c6fadb547de57c59cbc05caa70e23e0d6ece73d4293e6b5e6657c8884a686",
+    "replays.json": "72ffcf66a7490e0a25ad8d1548c4628692ab896db4a063bdf8031e422df7534e"
+  },
+  "review_result": "PASS_SCOPED",
+  "independent_checks": {
+    "original_byte_disassembly": "Capstone Thumb+MCLASS independently decoded the full 0x45D0..0x4628 body and 0x45AC wrapper from the pinned flash bytes. The body has the described saved frame, call sequence, ordered fresh read/modify/write operations, and pop-to-PC return. The wrapper's zero branch clears bits 3..2 and returns; nonzero branches to 0x45C4, calls 0x45A6, and is outside the dynamic fixtures.",
+    "replay": "Ran a copy of the candidate replay in this review directory with only its output directory redirected. All 9 original-byte fixtures passed, and the regenerated replay rows exactly equal the candidate replays.json.",
+    "fixture_oracle": "Verified each fixture records 9 ordered call entries and 6 ordered MMIO writes; the argument assertions and write expressions agree with the decoded instructions. The test varies three initial register patterns and three raw returns for the 4734 result while keeping 9F44 at zero."
+  },
+  "limits": [
+    "Five deeper helper entries are controlled by the harness, so their implementation and real clobbers are not proved.",
+    "The nonzero 9F44 breakpoint path is statically decoded but not dynamically exercised.",
+    "Clock hardware meaning, physical timing, and breakpoint behavior remain unverified; no canonical admission is claimed."
+  ],
+  "accepted": false
+}

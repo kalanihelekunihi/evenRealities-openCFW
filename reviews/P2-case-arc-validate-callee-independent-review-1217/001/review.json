@@ -1,0 +1,22 @@
+{
+  "review_id": "1217/001",
+  "decision": "PASS_STATIC_SCOPED",
+  "scope": "Independent bounded static review of the ARCv2 EM 0x00333C24 callee. No dynamic replay, global ownership, hardware/ROM contract, or canonical admission is claimed.",
+  "candidate": {
+    "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/arc-validate-callee-1198/001",
+    "receipt_sha256": "f32333fb3d5551414d5c80fb070ecb895e6d1491e5f27f5ddfd9b19f0b5f8cda",
+    "body_sha256": "c96914378534140bbbfd1bc5f9cdf04d672671b411159d5cbc2ed0d942deaa3f",
+    "inputs_sha256": "1a64ba29b5691a0f85b8ee14abd0d39188c47176aa62fbdd535c864c76306295",
+    "pins_sha256": "43fcaa90d7c0f10d5966e110d56c02db4f2eaa3251c42d5a436f37571d5591ec"
+  },
+  "checks": [
+    "Reran the candidate verifier successfully: authenticated package/image extraction, 32-byte source slice, 15 contiguous instruction records, caller target, delay-slot positions and all frozen output pins validate.",
+    "Manually checked the bounded listing: each of the first three mismatches sets R0=1 before the non-delayed JNE.S return; matching bytes continue to the next byte. The fourth-byte SETHS predicate yields zero for values below 4 and one otherwise.",
+    "The final J.S.D [blink] at 0x00333C40 executes ASL.S R0,R0 from 0x00333C42 before return. For the values produced by SETHS, this preserves zero and converts one to two, matching the documented result ranges.",
+    "The direct caller at 0x0030EF5A targets the callee; the candidate appropriately describes the four-byte readable input as a precondition rather than claiming null or length checking."
+  ],
+  "limitations": [
+    "No alternate ARCv2 EM decoder or dynamic replay is available in this packet; pinned GNU ARC objdump and cited ISA facts are the basis for the opcode interpretation.",
+    "No global alternate-entry audit, caller-side input-length contract, external ROM/device behavior, or interpretation of return values is established."
+  ]
+}

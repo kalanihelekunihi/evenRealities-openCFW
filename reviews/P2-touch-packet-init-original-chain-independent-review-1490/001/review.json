@@ -1,0 +1,18 @@
+{
+  "review_id": "1490",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-packet-init-original-chain-1489/001",
+  "candidate_receipt_sha256": "8a4a9b744eb04dca54d41a502a712cb38f1205d337c7e55b6abb64b9a0fa9397",
+  "candidate_pseudocode_sha256": "d3dd33594eb0b21caa6d5dc06b91b7312a0bc344370364b098f00d0d7cd040a4",
+  "candidate_replay_sha256": "45cc60bb628ece43c59abf236d5c24e657c717b4b150dfa34ce3ac8af1c413d7",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Replayed all 32 whole-body fixtures from a review-owned copy of the pinned image. The harness executes original 5548, 51BC, and mode-1 zero-result 5528; no callees are substituted. All 48 output bytes, final result, SP, and stop state are checked.",
+    "The combined output model agrees with the prior local 5548 and record-field findings: descriptor index pair selects record/item zero; zeroed config/item structures and zero descriptor flag make the stated group/mode paths; row-halfword +54 contributes only when nonzero; mode-specific output control word and zero-tail packing are consistent.",
+    "Fixture setup explicitly zeroes descriptor/config/item buffers and supplies uniform record/row fills. The 51BC result is naturally zero on this setup; non-mode-1 returns 1, while mode 1 executes 5528 and returns 0."
+  ],
+  "limitations": [
+    "Only record/item index zero and zeroed config/item contents are covered; source fills are uniform. General indexing, independent fields, physical meanings and canonical admission remain unresolved."
+  ]
+}

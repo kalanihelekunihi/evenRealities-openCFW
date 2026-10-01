@@ -1,0 +1,22 @@
+{
+  "review_id": "2095",
+  "status": "REVISE",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-signed-division-reference-seams-2094/001",
+  "candidate_receipt_sha256": "7eaf9930e1fc231298bfa7dbb43cd8e112574289ef29049562040ad4cb166f28",
+  "candidate_readme_sha256": "2b0b48b2066abbb08d27ac12ac46327bc913542a018921d7a7e2050feddc7970",
+  "candidate_references_sha256": "1a1780a72bf227030f87574eea054ef709c1e8f3d84f15cffb876219da46d677",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Receipt, README, references JSON and full source-image hash match. All ten listed rows independently decode as direct Thumb branch/call candidates to the selected signed-division seam addresses, with the listed source offsets and instruction bytes.",
+    "An independent halfword-aligned Capstone M-class decode over the full pinned image reproduces the ten listed external/seam candidates and additionally finds a direct internal branch at loaded 0xA992 (source offset 0x7692), bytes 00 D3, BLO 0xA996. That instruction lies inside A7D4..A996 and targets the separately shared zero tail A996..A9A0.",
+    "An independent four-byte-aligned word scan, masking Thumb bit 0, found zero pointer-word candidates to A7D4, A996, A9A0 or A9A8, consistent with the artifact."
+  ],
+  "findings": [
+    "The README calls the inventory ten syntactic direct branch/call candidates but does not state that internal CFG edges are excluded. The sweep produces eleven if all halfword-aligned decoded direct branches to the listed targets are counted; the extra is the internal BLO at A992 to shared tail A996. Either include that row or explicitly scope the ten-row total to external/seam references and record the omitted internal edge. This does not resolve ownership or indirect callers."
+  ],
+  "limitations": [
+    "Halfword-aligned decoding intentionally admits bytes, data and second halves as syntactic leads. The list is not proof of executable ownership, a complete caller set, indirect-target closure, or runtime reachability.",
+    "No canonical admission, padding classification, or whole-image denominator is established."
+  ]
+}

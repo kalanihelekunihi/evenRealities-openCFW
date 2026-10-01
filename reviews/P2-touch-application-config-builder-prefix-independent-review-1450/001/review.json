@@ -1,0 +1,18 @@
+{
+  "review_id": "1450",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-config-builder-prefix-1449/001",
+  "candidate_receipt_sha256": "96a0580a3ecf8fd32c186902af6556924972dd9c4558bae7dcdfbc7bbb105e2b",
+  "candidate_pseudocode_sha256": "abd9cbaa4a1be8bc92ab27ae04e372da3676bbd83b61be9334b872b04e6758ea",
+  "candidate_replay_sha256": "29999cabe557c62316018b5a951519b07dfc41c934808722e1e08f9a6e9b0f4e",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independently replayed the startup path with original 5378 and A9D4 executing. The authenticated descriptor/context pointers reach the builder, its output buffer is checked, and execution arrives at 0x3D50; the run passes all inherited assertions.",
+    "Confirmed the remaining controlled call sequence includes exactly the downstream 0x52BC and 0x50E4 boundaries at the builder, both returning the fixture zero. The replay checks final startup state and prior source-derived configuration, table-selection, peripheral, interrupt, storage, and activation assertions.",
+    "Receipt literals agree with the pinned image. The builder output/scratch checks are consistent with the separately reviewed 1445 and 1447 evidence."
+  ],
+  "limitations": [
+    "Downstream calls beyond 5378, later application calls, synthetic MMIO and external clock-table contents remain controlled or modeled. Reaching 0x3D50 does not prove physical effects or full application completion. No canonical admission."
+  ]
+}

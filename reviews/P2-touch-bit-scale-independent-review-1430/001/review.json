@@ -1,0 +1,17 @@
+{
+  "review_id": "1430",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-bit-scale-6220-1429/001",
+  "candidate_receipt_sha256": "7381d23635202e86deeb70fce41340a37c7c9ed98253c3457f7a8d5cb9a701be",
+  "candidate_pseudocode_sha256": "ccaa32975207ee99f00ac38df3a6125ffe49dc5e16daf2aba13b98677e8e29bf",
+  "candidate_result_vector_sha256": "ae3bb88dc988cc02c398b8dd928e76c588ed2bb12910c9e424961ecdc400dbb2",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independently decoded 0x6220..0x6238: R2 captures input, R3 begins at 0x8000, R0 loads the 0x0000FFFF literal, and the loop shifts result/mask right until the first set input bit or result reaches one. BX LR returns; no calls, stores, or stack updates occur. The literal begins at 0x6238 and is outside the 24-byte code span.",
+    "Copied and ran the immutable Unicorn test in an isolated review directory. All 65,536 halfword inputs passed against the independent bit_length model; results were written to a review-owned compact vector."
+  ],
+  "limitations": [
+    "Coverage is exhaustive only for 16-bit inputs. The algorithm observes bits 15 down to 0 and does not establish any broader semantic type or physical meaning. No canonical admission or C implementation is implied."
+  ]
+}

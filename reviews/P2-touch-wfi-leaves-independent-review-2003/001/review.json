@@ -1,0 +1,19 @@
+{
+  "review_id": "2003",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-wfi-leaves-2002/002",
+  "candidate_receipt_sha256": "b48a80f55601d93bf63480e9bb21ce305c5c66f8faa94f04f13035e2f5fa04bc",
+  "candidate_pseudocode_sha256": "84fdb89ced7cd04c546e7dccde8e03e26e8d0ba1ee8189e2ec09a3a90a183fd7",
+  "candidate_replay_sha256": "18d78b68909b428ce97f6d4d2e530822d78e7eac39e1cf5cb46c0bd736127b32",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "The original source hash and candidate artifact pins match the receipt. The owned spans are A374..A382 and A388..A3A4; alignment and literal data remain outside the code spans.",
+    "Isolated replay reproduced all 48 fixtures exactly. Each fixture executes the original memory/register operations and stops at the WFI instruction to observe register/peripheral state; the harness then models continuation at (PC+2)|1.",
+    "A374 clears bit 2 at literal[A384]+16 before WFI. A388 zero-extends the halfword at literal[A3A4]+338, stores it at literal[A3A8]+4, then sets bit 2 at literal[A3AC]+16. Both preserve R0/SP/PRIMASK as stated."
+  ],
+  "limitations": [
+    "Wake continuation is synthetic. The fixtures do not demonstrate physical WFI sleep/wake, interrupt arrival, timing, or hardware register effects.",
+    "No canonical admission."
+  ]
+}

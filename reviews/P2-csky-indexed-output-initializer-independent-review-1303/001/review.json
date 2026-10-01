@@ -1,0 +1,18 @@
+{
+  "review_id": "1303",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-parent-init-callee-1272/001",
+  "candidate_receipt_sha256": "2f4e6eadf3f3cc55bb56009e385b51cfbc779503134243a73c399199b6a39fa5",
+  "verified_source_image_sha256": "9546164f32680de47fa99ba85ba08a3c538822260957de6c1baee772638da464",
+  "artifact_count": 14,
+  "checks": [
+    "Verified all 14 receipt manifest entries by exact size and SHA-256; independently reran verify.py, which confirms the conditional source mapping, exact 200-byte body, matching whole-image/slice disassemblies, branch/caller evidence, tool/manual pins and static fixture checks.",
+    "Reviewed the instruction-grounded pseudocode for the six-word helper output, descriptor and early-return guards, signed byte shifts, low-six-bit shift behavior, seven ordered target writes, and helper-138 clear/set calls. Address values are treated as written data, not physical hardware semantics.",
+    "The eight fixtures are explicitly static controlled-helper models; no C-SKY execution is claimed. Conditional BINH-A mapping and actual loading remain unresolved."
+  ],
+  "limitations": [
+    "No runtime/table/descriptor contents, pointer validity, concurrent mutation, hardware address meaning, or physical aliasing is proven.",
+    "Private evidence only; not canonical admission."
+  ]
+}

@@ -1,0 +1,5 @@
+# Packet initialization local writes at 5548
+
+The code body [5548,569E) is 342 bytes, followed by alignment and a mask literal. Select index table descriptor word +48 for group zero, +52 otherwise. Its first halfword selects the stride-144 record and stride-60 row configuration. Group1 packs context/row fields into five leading output words, then advances output20 bytes. Group0 writes record byte +140 into output word +24 high byte. Both pack decremented record byte +132 and decremented row halfword +44 into output word +12. When row byte +52 equals1 and record halfword +128 differs from index, OR32768 into that word.
+
+Call51BC(indexPair,adjustedOutput,descriptor). A nonzero result returns immediately. The 48 fixtures cover both groups, indices, record modes and source fills with nonzero controlled helper statuses, checking all48 outputbytes and frame. The zero-result branch and 5528 dependency remain unresolved; physical meanings and independent-field variation remain open. No canonical admission or C implementation.

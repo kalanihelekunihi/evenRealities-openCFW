@@ -1,0 +1,7 @@
+Independent review of touch-application-state-five-prefix-1529/001
+
+Candidate receipt SHA-256 15b5206a6d1c609ecf3af338631674c8e88d2f09e6be3d6a7248b9deab00bb9b; pseudocode 9168023a9af68d522c2fe5b6a1f087f3748f2e464b7bc98cde224ce279927a3b; replay 679f2fa62d22014b31b01c55c9f9bdcc6158d85832f1d79ec969240a7cbbccdc; source image 371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87.
+
+The isolated cumulative startup replay passed and reached 0x3D50. Original 0x6A80 and 0x685C execute; the exact reset-helper call is 0x6608(315,0,descriptor), and the resulting three-row preparation stores are observed. Inherited startup checks and the complete remaining boundary-call sequence pass. The later calibration controls include 0x7288 and 0x5FA4; the replay explicitly limits this evidence to the modeled synthetic status/MMIO path.
+
+PASS_SCOPED. 0x6608 remains controlled with no MMIO effects, 0x7288/0x5FA4 remain controlled, and physical behavior is unproven. No canonical admission.

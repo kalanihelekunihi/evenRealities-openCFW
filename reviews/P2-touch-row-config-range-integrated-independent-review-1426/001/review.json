@@ -1,0 +1,18 @@
+{
+  "review_id": "1426",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-config-range-integrated-1425/001",
+  "candidate_receipt_sha256": "8b20a01409f7df1260da6b915df4bcb9562ba8f2bdaf0d38d09b72ad623daeeb",
+  "candidate_pseudocode_sha256": "19616cffb8e5ec0ed29385349badbbe73aaca3e0adf870c9eaede5f9b9c960e1",
+  "candidate_replay_sha256": "909c0d3202f379d55030722d44097aaeddb66f977fc242de75ed005995b58e85",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independently replayed all 216 fixtures with isolated output; all passed. Original 6352, 6330, 6270, and 6262 execute. Only A6C0 division and helper boundaries 623C/6294 are controlled.",
+    "Decoded the negative-byte path: 6352 loads row width, context byte+0x4E, record percentage byte+0x87, and row mode; 6270 calculates a scaled quantity via A6C0(input,100), shifts/limits it, and 6330 buckets the result. With percentage byte zero, the fixture's controlled A6C0(0,100)=0 leads to 6352 returning/storing 0x80. The subsequent 6262 path consumes that stored byte with bit 7 cleared, consistent with the candidate's modeled shift factor.",
+    "The fixture oracle checks the expected sequence of controlled calls, row stores, early range statuses and stack restoration. It keeps percentage byte zero as an explicit precondition and does not claim the general percentage/division behavior here."
+  ],
+  "limitations": [
+    "A6C0 division is controlled; the percentage-zero path is the only range-chain composition asserted. Helpers 623C/6294 are also controlled. Broader percentage/shift behavior is delegated to separate packets; arbitrary row mixtures, physical meaning, pointer validity, and canonical admission are not established."
+  ]
+}

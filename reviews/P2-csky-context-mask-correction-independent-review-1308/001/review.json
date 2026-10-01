@@ -1,0 +1,17 @@
+{
+  "review_id": "1308",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-context-mask-value-1237/002",
+  "candidate_receipt_sha256": "79df2ba65bf64ce8d6abe3f6f436c1622cd1b55e13ce9ed16da8756bbddaa766",
+  "predecessor_receipt_sha256": "c078ae79f9526108ca5c45d9b7b9476fc0bd93db7b19bcecd0c0326384ba6281",
+  "checks": [
+    "Verified all corrected-attempt manifest sizes and hashes, and reran verify.py successfully.",
+    "The corrected fixtures now give all eight non-null routine cases the ordered five-read sequence (ctx+8, node+0, node+1, base+offset, node+2); the null-node routine reads only ctx+8. The two caller-only comparison fixtures properly have no routine loads.",
+    "verify.py enforces these lists and rejects missing/wrong read order, directly addressing the 1271 finding. The recovered pseudocode and byte interpretation are unchanged."
+  ],
+  "limitations": [
+    "Static fixture modeling only; no C-SKY dynamic execution, runtime table contents, actual mapping/loading, or physical aliases are established.",
+    "Predecessor 001 remains historical and its read-array gap is not repaired in place."
+  ]
+}

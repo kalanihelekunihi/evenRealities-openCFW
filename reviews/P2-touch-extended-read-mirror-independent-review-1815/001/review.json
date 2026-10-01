@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-extended-read-mirror-independent-review-1815",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "scope": {
+    "candidate": "analysis/touch-extended-read-mirror-traces-1810/005",
+    "code_span": [
+      "0x82e0",
+      "0x854c"
+    ],
+    "reviewed": "The exact body is 82E0..854C (620 bytes/291 decoded instructions). All 15 isolated traces execute original instructions and reached helpers without interception. The candidate recomputes CRC values after writing all row payload/sequence data, then corrupts only primary row zero; its corresponding mirror is valid. The traces reproduce requested bytes, A5 destination suffix, SP and returns: 0x093E0004 when the request includes recovery from primary row zero, otherwise zero. At primary-limit crossing after fallback, original 810C/812A pointer helpers wrap to primary base, so the model correctly repeats row-zero payload rather than advancing into primary row one. This is a bounded trace observation, not complete pseudocode recovery."
+  },
+  "pins": {
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "candidate_receipt_sha256": "7aea0333407207735226f0bc814f58f6eb468ccfa95f0eef625ff2c0e8e36d54",
+    "body_sha256": "10dc591b37adac5c114142464a4ad4324af575b483f655ca6cb66ac0503c7ec7",
+    "candidate_replays_sha256": "6b11c75c5078055272dd26fd3f6665573c73195ffc8b9ab27290bb3c1fdd6d77"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "The exact body is 82E0..854C (620 bytes/291 decoded instructions). All 15 isolated traces execute original instructions and reached helpers without interception. The candidate recomputes CRC values after writing all row payload/sequence data, then corrupts only primary row zero; its corresponding mirror is valid. The traces reproduce requested bytes, A5 destination suffix, SP and returns: 0x093E0004 when the request includes recovery from primary row zero, otherwise zero. At primary-limit crossing after fallback, original 810C/812A pointer helpers wrap to primary base, so the model correctly repeats row-zero payload rather than advancing into primary row one. This is a bounded trace observation, not complete pseudocode recovery."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "Candidate source and files match receipt pins. The isolated trace output is byte-identical to candidate replays.json."
+    }
+  ],
+  "limitations": [
+    "Only the specified four primary and four mirror rows, with one corrupted primary row zero and a valid mirror, are exercised. Multiple primary failures, invalid mirrors, multi-copy search, overlays and physical storage remain unresolved.",
+    "Trace evidence only; no complete pseudocode recovery or canonical admission."
+  ],
+  "checks": [
+    {
+      "command": "source/body/artifact pin validation",
+      "result": "PASS"
+    },
+    {
+      "command": "mirror CRC setup and wrapped-pointer trace review",
+      "result": "PASS_SCOPED"
+    },
+    {
+      "command": "isolated replay of all 15 traces",
+      "result": "PASS; exact replay JSON match",
+      "artifact": "isolated-replays.json"
+    }
+  ],
+  "canonical_or_coverage_change": false
+}

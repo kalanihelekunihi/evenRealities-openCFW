@@ -1,0 +1,5 @@
+Review 1753 — PASS_SCOPED
+
+Bound to touch-storage-initializer-898c-1752/001, receipt SHA-256 358e7272ba3ad5a0458d701c944680664ac5e4a5916e54dc27ed95ac7c05ed4a. I independently disassembled the exact source range and reran the 48 fixtures to /tmp/review1753-independent; the result file matches exactly.
+
+The record offsets and context destinations match the body. The provider call is an indirect BLX through provider+12 with arguments loaded from provider+0 and record+8; then A6C0 divides wrapped context+8 minus one by the computed halfword. The mode test compares byte+13 to exactly one, not merely nonzero. Validator and finalizer results follow the branches described. Null guards and unusual/zero geometry remain outside the fixture proof.

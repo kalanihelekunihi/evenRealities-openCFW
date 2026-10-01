@@ -1,0 +1,18 @@
+{
+  "review_id": "1476",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-packet-builder-nonempty-masks-1475/003",
+  "candidate_receipt_sha256": "f27f7083e0b86fd43c99161e708fd4703d4de31dfb3c6e36e13fd8c30a0c64b2",
+  "candidate_pseudocode_sha256": "853a9b1350575f06b0aa52ba696928909c6554db87b8bca3d5b3de7a2763b5ec",
+  "candidate_replay_sha256": "dbb7bfefa7d7ea7e3dfbc3d17d8026e86e4d4033ca6ed6f84d547f0d9004cea9",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independently replayed all 486 original-instruction fixtures; full ordered 5548/5188 calls, independently modeled masks, selected mappings, group output pointers/strides, final helper return and SP/PC assertions pass.",
+    "Decoded the two-list mask union and the extra paths: descriptor list pointers +20/+24 use configuration counts +12/+44 and stride-8 entries; each pin contributes 1<<pin with ARM register-shift semantics. Nonzero second-list count produces the extra 5188 call; record mode 1 selects context +107 for that call, otherwise the prior mapping is retained. Row mode 1 computes a subrecord mask from the selected subrecord list and invokes 5188 with context +104.",
+    "The fixtures deliberately share one bounded pin array for both top-level lists and supplied subrecords; counts vary 0/1/2 and pin starts include 0,31,32. Those choices match the tested calculation and expose the >=32 zero contribution."
+  ],
+  "limitations": [
+    "Index halfwords and nested references are fixed to the supplied simple cases; arbitrary nested indexing/list topology is not exercised. 5548/5188 remain controlled and real helper contracts/physical effects remain unresolved. No canonical admission."
+  ]
+}

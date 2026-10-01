@@ -1,0 +1,955 @@
+{
+  "input": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+  "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "mapping_base": "0x437fe0",
+  "capstone_version": "5.0.7",
+  "unicorn_version": "2.1.4",
+  "scope": "Original seven function bodies; external calls stubbed; no radio/RTOS/timing model.",
+  "functions": [
+    {
+      "name": "ringPackCccdEpochValue",
+      "start": "0x4c46c0",
+      "end": "0x4c46d0",
+      "sha256": "5253485c728919595e5a0b78b2354dbb964f271d59b7e1832be3765298a982ce",
+      "direct_callees": [],
+      "verified_direct_callers_nonexhaustive": [
+        {
+          "function": "0x4c4910",
+          "name": "APP_BleRingProcMsg",
+          "callsite": "0x4c4afe"
+        },
+        {
+          "function": "0x4c4910",
+          "name": "APP_BleRingProcMsg",
+          "callsite": "0x4c4b14"
+        },
+        {
+          "function": "0x4c4910",
+          "name": "APP_BleRingProcMsg",
+          "callsite": "0x4c4b2a"
+        }
+      ]
+    },
+    {
+      "name": "_ringEnableCccd",
+      "start": "0x4c46d0",
+      "end": "0x4c4810",
+      "sha256": "a3e14ecb2f6781258903eaea1a0a7872ee00b3b1f0ebcd9fc34705018ffc86cd",
+      "direct_callees": [
+        {
+          "address": "0x4b6ec6",
+          "name": "DmConnInUse"
+        },
+        {
+          "address": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "address": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "address": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "address": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "address": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "address": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "address": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "address": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "address": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "address": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "address": "0x4b579c",
+          "name": "AttcWriteReq"
+        },
+        {
+          "address": "0x4c543e",
+          "name": "Thread_SendEvtToRingTask"
+        }
+      ],
+      "verified_direct_callers_nonexhaustive": []
+    },
+    {
+      "name": "APP_BleRingHandlerInit",
+      "start": "0x4c4810",
+      "end": "0x4c487c",
+      "sha256": "9f15317589791c3c6e74f5d2aad0267f08b558f790b0cc90e943941dbb721149",
+      "direct_callees": [
+        {
+          "address": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "address": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "address": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "address": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "address": "0x43ce9e",
+          "name": "compress_log_output"
+        }
+      ],
+      "verified_direct_callers_nonexhaustive": [
+        {
+          "function": "0x4a19f4",
+          "name": "APP_MasterHanderInit",
+          "callsite": "0x4a1a2e"
+        }
+      ]
+    },
+    {
+      "name": "APP_BleRingSvcDiscover",
+      "start": "0x4c487c",
+      "end": "0x4c48ac",
+      "sha256": "7dbb9605a5f4b57c1f9d0d21e9e2b574a1b4f6de40e429236084463082e0c38c",
+      "direct_callees": [
+        {
+          "address": "0x43dacc",
+          "name": ""
+        },
+        {
+          "address": "0x5332b4",
+          "name": "FUN_005332b4"
+        }
+      ],
+      "verified_direct_callers_nonexhaustive": [
+        {
+          "function": "0x5355e0",
+          "name": "APP_BleServerDiscCback",
+          "callsite": "0x535b52"
+        }
+      ]
+    },
+    {
+      "name": "_bleRingReceiveData",
+      "start": "0x4c48ac",
+      "end": "0x4c4910",
+      "sha256": "cacb10192efbe04e97f00e27fe61f1bb08cbc504cf80809977b27f81ca0646cf",
+      "direct_callees": [
+        {
+          "address": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "address": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "address": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "address": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "address": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "address": "0x4c548c",
+          "name": "Thread_SendMsgToRingTaskWithId"
+        }
+      ],
+      "verified_direct_callers_nonexhaustive": [
+        {
+          "function": "0x4c4910",
+          "name": "APP_BleRingProcMsg",
+          "callsite": "0x4c4a74"
+        }
+      ]
+    },
+    {
+      "name": "APP_BleRingProcMsg",
+      "start": "0x4c4910",
+      "end": "0x4c4b7e",
+      "sha256": "6698734dc25fe37714846d077d9e2ca32f02f1b877b09089126e726eb053ff6d",
+      "direct_callees": [
+        {
+          "address": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "address": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "address": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "address": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "address": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "address": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "address": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "address": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "address": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "address": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "address": "0x4d0c36",
+          "name": "thread_ble_wsf_tx_complete_notify"
+        },
+        {
+          "address": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "address": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "address": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "address": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "address": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "address": "0x539dea",
+          "name": "AttcWriteCmd"
+        },
+        {
+          "address": "0x4b73c4",
+          "name": "DmConnRole"
+        },
+        {
+          "address": "0x4c48ac",
+          "name": "_bleRingReceiveData"
+        },
+        {
+          "address": "0x4b73c4",
+          "name": "DmConnRole"
+        },
+        {
+          "address": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "address": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "address": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "address": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "address": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "address": "0x476ace",
+          "name": "fw_event_loop_remove_delayed"
+        },
+        {
+          "address": "0x4c46c0",
+          "name": "ringPackCccdEpochValue"
+        },
+        {
+          "address": "0x47697e",
+          "name": "fw_event_loop_push_delayed"
+        },
+        {
+          "address": "0x4c46c0",
+          "name": "ringPackCccdEpochValue"
+        },
+        {
+          "address": "0x47697e",
+          "name": "fw_event_loop_push_delayed"
+        },
+        {
+          "address": "0x4c46c0",
+          "name": "ringPackCccdEpochValue"
+        },
+        {
+          "address": "0x47697e",
+          "name": "fw_event_loop_push_delayed"
+        },
+        {
+          "address": "0x4b73c4",
+          "name": "DmConnRole"
+        },
+        {
+          "address": "0x476ace",
+          "name": "fw_event_loop_remove_delayed"
+        },
+        {
+          "address": "0x4c543e",
+          "name": "Thread_SendEvtToRingTask"
+        }
+      ],
+      "verified_direct_callers_nonexhaustive": [
+        {
+          "function": "0x4a19c0",
+          "name": "ring_dm_event_dispatch",
+          "callsite": "0x4a19d6"
+        }
+      ]
+    },
+    {
+      "name": "APP_BleRingSendDataMsg",
+      "start": "0x4c4b7e",
+      "end": "0x4c4c66",
+      "sha256": "5f1a198a786cf239b377aa90c9b2d345a76d86fc5bf2d8d2549106e121ebf827",
+      "direct_callees": [
+        {
+          "address": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "address": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "address": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "address": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "address": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "address": "0x4d0b64",
+          "name": "thread_ble_wsf_wait_tx_ready"
+        },
+        {
+          "address": "0x4bf99e",
+          "name": "WsfMsgAlloc"
+        },
+        {
+          "address": "0x4bf9ba",
+          "name": "WsfMsgSend"
+        },
+        {
+          "address": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "address": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "address": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "address": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "address": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "address": "0x4d0c36",
+          "name": "thread_ble_wsf_tx_complete_notify"
+        }
+      ],
+      "verified_direct_callers_nonexhaustive": [
+        {
+          "function": "0x472546",
+          "name": "",
+          "callsite": "0x472572"
+        },
+        {
+          "function": "0x472378",
+          "name": "",
+          "callsite": "0x4723cc"
+        },
+        {
+          "function": "0x4723d6",
+          "name": "",
+          "callsite": "0x47241c"
+        },
+        {
+          "function": "0x4722d8",
+          "name": "",
+          "callsite": "0x472358"
+        },
+        {
+          "function": "0x472244",
+          "name": "",
+          "callsite": "0x4722c2"
+        },
+        {
+          "function": "0x5814d4",
+          "name": "",
+          "callsite": "0x581534"
+        }
+      ]
+    }
+  ],
+  "uuid_constants": [
+    {
+      "address": "0x7880b0",
+      "wire_hex": "1f9d32f7f13a658e0345054f0100e8ba",
+      "uuid": "bae80001-4f05-4503-8e65-3af1f7329d1f"
+    },
+    {
+      "address": "0x7880c0",
+      "wire_hex": "1f9d32f7f13a658e0345054f1000e8ba",
+      "uuid": "bae80010-4f05-4503-8e65-3af1f7329d1f"
+    },
+    {
+      "address": "0x7880d0",
+      "wire_hex": "1f9d32f7f13a658e0345054f1100e8ba",
+      "uuid": "bae80011-4f05-4503-8e65-3af1f7329d1f"
+    }
+  ],
+  "discovery_descriptor_addresses": [
+    "0x78dfcc",
+    "0x78dfd4",
+    "0x78dfdc"
+  ],
+  "cases": [
+    {
+      "case": "pack_epoch",
+      "calls": []
+    },
+    {
+      "case": "initialize_defaults",
+      "calls": []
+    },
+    {
+      "case": "discovery_six_arguments",
+      "calls": [
+        {
+          "call": "discover",
+          "args": [
+            1,
+            16,
+            7897264,
+            3
+          ],
+          "stack_args": [
+            536883416,
+            537358336
+          ],
+          "uuid_hex": "1f9d32f7f13a658e0345054f0100e8ba"
+        }
+      ]
+    },
+    {
+      "case": "valid_initial",
+      "calls": [
+        {
+          "call": "conn_in_use",
+          "args": [
+            1,
+            7,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "write_req",
+          "args": [
+            1,
+            19,
+            2,
+            537915364
+          ],
+          "value_hex": "0100"
+        }
+      ]
+    },
+    {
+      "case": "valid_final",
+      "calls": [
+        {
+          "call": "conn_in_use",
+          "args": [
+            1,
+            7,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "write_req",
+          "args": [
+            1,
+            19,
+            2,
+            537915364
+          ],
+          "value_hex": "0100"
+        },
+        {
+          "call": "ring_event",
+          "args": [
+            4,
+            19,
+            2,
+            537915364
+          ]
+        }
+      ]
+    },
+    {
+      "case": "stale_epoch",
+      "calls": []
+    },
+    {
+      "case": "wrong_connection",
+      "calls": []
+    },
+    {
+      "case": "zero_connection",
+      "calls": []
+    },
+    {
+      "case": "closed_connection",
+      "calls": [
+        {
+          "call": "conn_in_use",
+          "args": [
+            1,
+            7,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "missing_cccd",
+      "calls": [
+        {
+          "call": "conn_in_use",
+          "args": [
+            1,
+            7,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "open",
+      "calls": [
+        {
+          "call": "conn_role",
+          "args": [
+            1,
+            537358592,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "remove_delayed",
+          "args": [
+            4998865,
+            537358336,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "push_delayed",
+          "args": [
+            4998865,
+            524289,
+            500,
+            0
+          ]
+        },
+        {
+          "call": "push_delayed",
+          "args": [
+            4998865,
+            524289,
+            700,
+            0
+          ]
+        },
+        {
+          "call": "push_delayed",
+          "args": [
+            4998865,
+            524545,
+            900,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "close",
+      "calls": [
+        {
+          "call": "conn_role",
+          "args": [
+            1,
+            537358592,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "remove_delayed",
+          "args": [
+            4998865,
+            537358336,
+            537358336,
+            0
+          ]
+        },
+        {
+          "call": "ring_event",
+          "args": [
+            8,
+            537358336,
+            537358336,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "epoch_wrap",
+      "calls": [
+        {
+          "call": "conn_role",
+          "args": [
+            1,
+            537358592,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "remove_delayed",
+          "args": [
+            4998865,
+            537358336,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "push_delayed",
+          "args": [
+            4998865,
+            1,
+            500,
+            0
+          ]
+        },
+        {
+          "call": "push_delayed",
+          "args": [
+            4998865,
+            1,
+            700,
+            0
+          ]
+        },
+        {
+          "call": "push_delayed",
+          "args": [
+            4998865,
+            257,
+            900,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "peripheral_open_ignored",
+      "calls": [
+        {
+          "call": "conn_role",
+          "args": [
+            1,
+            537358592,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "rx_05_status0_handle12",
+      "calls": [
+        {
+          "call": "conn_role",
+          "args": [
+            1,
+            537358592,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "ring_rx",
+          "args": [
+            537358848,
+            4,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "rx_0d_status0_handle12",
+      "calls": [
+        {
+          "call": "conn_role",
+          "args": [
+            1,
+            537358592,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "ring_rx",
+          "args": [
+            537358848,
+            4,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "rx_0e_status0_handle12",
+      "calls": [
+        {
+          "call": "conn_role",
+          "args": [
+            1,
+            537358592,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "ring_rx",
+          "args": [
+            537358848,
+            4,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "rx_05_status1_handle12",
+      "calls": [
+        {
+          "call": "conn_role",
+          "args": [
+            1,
+            537358592,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "rx_05_status0_handle10",
+      "calls": [
+        {
+          "call": "conn_role",
+          "args": [
+            1,
+            537358592,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "rx_other_conn_reaches_local_handler",
+      "calls": [
+        {
+          "call": "conn_role",
+          "args": [
+            1,
+            537358592,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "ring_rx",
+          "args": [
+            537358848,
+            4,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "tx_event_conn1",
+      "calls": [
+        {
+          "call": "write_cmd",
+          "args": [
+            1,
+            16,
+            4,
+            537358848
+          ]
+        }
+      ]
+    },
+    {
+      "case": "tx_event_conn2",
+      "calls": [
+        {
+          "call": "tx_complete",
+          "args": [
+            0,
+            1,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "send_queued",
+      "calls": [
+        {
+          "call": "tx_wait",
+          "args": [
+            16,
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "alloc",
+          "args": [
+            12,
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "msg_send",
+          "args": [
+            9,
+            537359104,
+            0,
+            0
+          ],
+          "message_hex": "0100ac000072072004000000"
+        }
+      ]
+    },
+    {
+      "case": "send_no_connection",
+      "calls": []
+    },
+    {
+      "case": "send_alloc_failure",
+      "calls": [
+        {
+          "call": "tx_wait",
+          "args": [
+            16,
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "alloc",
+          "args": [
+            12,
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "tx_complete",
+          "args": [
+            0,
+            4,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "case_count": 25
+}

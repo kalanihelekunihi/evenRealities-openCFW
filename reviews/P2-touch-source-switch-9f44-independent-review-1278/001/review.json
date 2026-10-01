@@ -1,0 +1,19 @@
+{
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-source-switch-9f44-1277/001",
+  "candidate_source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "candidate_files": {
+    "pseudocode.md": "67685ccd22eac42d590c343adbd8fd8b94dc4fb0d3b64d65d8b5b4d860629c8f",
+    "replay.py": "837770c8dee1ac2ea9d1aea84a4fa40e8317882cb04c26a199a20c5067a90913",
+    "replays.json": "79727ecfae8fe64ad5033d8f29fc0720f0c012c5d151eda80de19f0c25df318e"
+  },
+  "review_result": "PASS_SCOPED",
+  "checks": {
+    "original_bytes": "The body span 9F44..9F8E is 74 bytes. Its branches match the pseudocode: unsigned requested selector >1 returns literal 0x004A0001; otherwise it calls actual 9F34, skips readiness when already selected, and conditionally tests bit 31 at 0x40030030 for selector 0 or nonzero RAM word 0x20000F20 for selector 1. Success rereads 0x40030028, updates only bits 1..0, stores and returns zero. The literals decode to base 0x40030000, invalid 0x004A0001, disabled 0x004A0003.",
+    "replay": "All 360 isolated original-byte fixtures pass and regenerate the candidate replays exactly. Fixtures cover all five requested values, four current selectors, three frequency values, both enabled states and three upper-register patterns. Reads, writes, result and frame restoration match the instruction sequence."
+  },
+  "limits": [
+    "Readiness values and RAM frequency are synthetic; physical clock state, concurrent reads, and actual device behavior are not established.",
+    "No canonical admission is claimed."
+  ],
+  "accepted": false
+}

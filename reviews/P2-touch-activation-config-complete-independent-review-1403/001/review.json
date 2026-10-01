@@ -1,0 +1,21 @@
+{
+  "review_id": "1403",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-activation-config-complete-1402/001",
+  "candidate_receipt_sha256": "4e6d32c913f4a6d47b20348f7b8d0446f6d9de07ef4c5ec37f9178c0f9755230",
+  "candidate_pseudocode_sha256": "296ff102947bbad00fbc904f7395ee254b42d4e054c1fb87545adaa0de1d6842",
+  "candidate_replay_sha256": "388bd4ac0a40f8bccaa0a233c7cc8f207f851ccc717728c9bcb1b7586b3ded65",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Verified the candidate receipt binds the pseudocode, replay script, replay listing, and source image. Independently decoded the 0x71C8..0x7284 body from the pinned image: 188 bytes of Thumb instructions followed by the word literal at 0x7284. The prologue saves R4-R6/LR and the epilogue returns the accumulated R6 status while restoring the frame.",
+    "The early-status flow matches the branch structure: the initial 0x6384 and 0x5378 results are ORed; only zero reaches 0x6AC0 with indices 1 then 2; only a still-zero result reaches 0x7064, whose return replaces R6. Then indices 0..2 pass through 0x7DDE, and a nonzero result reaches 0x5CAC and is ORed into R6. Tail helpers receive the descriptor in R1 and the documented index/value in R0; the 0x7064 call receives the descriptor in R0 and R1. The copy/config stores and optional callback check are also consistent with the decoded sequence.",
+    "Copied the immutable replay script into the review directory, redirected output to a review-owned path, and ran it independently. All 216 combinations passed, including first/second initial statuses {0,1,FFFFFFFF}, state-call statuses {0,2,FFFFFFFF}, all-row-enabled values, fill patterns, and the expected early-path call sequences, writes, return values, and restored SP.",
+    "The replay controls the reached helper entries, including 0x6384, 0x5378, 0x56A4, 0x5D70, 0x6AC0, 0x7064, 0x7DDE, and 0x5CAC. The callback pointer is null in these fixtures. These are bounded original-instruction fixtures, not proof of real helper or callback effects."
+  ],
+  "limitations": [
+    "The candidate pseudocode is compact and defers the initial copy/callback prefix to candidate 1398. The nonnull callback path and actual behavior of controlled deeper helpers remain unresolved; the replay establishes only the listed synthetic return cases.",
+    "This review establishes the supplied execution paths only. Physical activation, hardware effects, helper clobber behavior outside asserted state, concurrency, and canonical admission are not established."
+  ]
+}

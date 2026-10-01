@@ -1,0 +1,5 @@
+Review 1749 — PASS_SCOPED
+
+Bound to touch-storage-dispatch-8a78-8aac-1748/001, receipt SHA-256 bf46719eb02b1e68d97d9ae63970178bb6a32f4d91908cf8f14c281c07ed635e. I checked body extents against independent Thumb disassembly and reran all fixture combinations to /tmp/review1749-independent; replays.json matched exactly.
+
+The ADD instruction computes a wrapped word before the unsigned HI comparison. Therefore overflow is accepted or rejected only according to the wrapped sum's comparison to context+8, matching the pseudocode. The size, bound, and null checks precede the +13 mode-byte read. Distinct target tables in the fixtures correctly encode both wrappers' opposite zero/nonzero mappings, and helper returns are modeled as controls rather than storage behavior.

@@ -1,0 +1,5 @@
+# Application prefix with actual frequency derivation
+
+This bounded fixture executes the original clock source, divider and frequency-state chain within the application initialization prefix. Both calls to 4734 execute 46F8, 9F9C, 9F34, the selected 9C44 source and A6C0 unsigned division. With synthetic trim zero, source selector zero and enabled bit 31, the original code derives 24,000,000; final RAM frequency is 24,000,000, ceiling MHz is 24, ceiling kHz is 24,000, and scaled kHz is 24,000 shifted left 15 modulo 2^32.
+
+Only five clock calls remain controlled: 9C80, 9F44, A188, 9C80, 9F44. Later application dependencies remain controlled. All previously checked register writes, descriptor insertion, interrupt enabling and arrival at 3D50 are retained. RAM initialized data is copied from the authenticated source. Synthetic peripheral state establishes bounded instruction behavior; physical timing, concurrent register changes and the application loop remain unresolved. No canonical admission or C implementation.

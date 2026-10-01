@@ -1,0 +1,31 @@
+{
+  "review_id": "1210/001",
+  "decision": "PASS_SCOPED",
+  "scope": "Independent review of A148 original-byte predicate/write behavior under synthetic MMIO. The observed register store does not establish physical command meaning.",
+  "candidate": {
+    "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-register-config-a148-1209/001",
+    "receipt_sha256": "821171a54ad5de5fe433e76fbd4f25bb1d874c35d030f1d974b7b69e30a805f3",
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "body_sha256": "49b586757598204be557441c32c6fc0af882a5142ea6e5db87ae75afb80fd14e",
+    "files": {
+      "pseudocode.md": "e7de44bc3a387e2c13e4787474b2c9f63ed98c9c05926d8ff5d565cbb72b7b94",
+      "replay.py": "f98c16fadba5eb73f3bc97f6a4faed3501868a5d6077e323bc631daf172b67d4",
+      "replays.json": "e515883a44b88c104bc46b724e5dba3b070c2022be6923dbcb520378176374fe"
+    }
+  },
+  "independent_artifacts": {
+    "isolated_replay": "reviews/P2-touch-register-config-a148-independent-review-1210/001/replay_isolated.py",
+    "regenerated_rows": "reviews/P2-touch-register-config-a148-independent-review-1210/001/regenerated/replays.json",
+    "regenerated_rows_sha256": "e515883a44b88c104bc46b724e5dba3b070c2022be6923dbcb520378176374fe"
+  },
+  "checks": [
+    "Independently decoded the exact 56-byte body A148..A180 from the pinned firmware with Thumb-MCLASS Capstone. The code confirms R0==1 with unsigned R1<=1, else UXTB(R0-2)<=1 and R1==0; the UXTB makes the second acceptance depend on the low byte of the subtraction.",
+    "The write expression follows LSL R0,6 then AND 0xFF, OR R1&0x3F, OR 0x40000000, and a single STR to literal 0x40010000. Rejections load 0x004A0001 or 0x004A0002 and return through BX LR; accepted calls return zero. No helper or stack frame appears in the body.",
+    "Reran all 54 original-byte inputs from an isolated output directory; regenerated rows match the candidate exactly. This includes 258/259 aliases with R1=0 and rejection boundaries including 257, 0xFFFFFFFF, R1=64, and invalid mode/selector pairs.",
+    "Accepted cases produce one 32-bit write; rejected cases produce none and preserve the synthetic MMIO word. SP remains unchanged."
+  ],
+  "limitations": [
+    "The test maps a synthetic register region and observes instruction-level writes only; it cannot establish hardware command semantics, timing, or peripheral response.",
+    "Only fixture-selected inputs were replayed. This is private P2 evidence, not canonical admission or proof that callers reach the routine."
+  ]
+}

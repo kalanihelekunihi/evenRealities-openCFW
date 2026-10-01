@@ -1,0 +1,68 @@
+{
+  "schema": "csky-wait-bit-clear-edges-v1",
+  "direct_callers": [
+    {
+      "site": "0x10000B64",
+      "caller": "0x10000B5C",
+      "argument_state": "callee input R0/R1/R2 are forwarded unchanged to B4C; B4C consumes none",
+      "context": "initial helper call before controller configuration"
+    },
+    {
+      "site": "0x10000BA2",
+      "caller": "0x10000B5C",
+      "argument_state": "no argument registers consumed; caller has just observed controller+0x20 become zero",
+      "context": "second helper call before return"
+    },
+    {
+      "site": "0x10000BC4",
+      "caller": "0x10000BBC",
+      "argument_state": "R0/R1/R2 inputs have been saved in R6/R4/R5; B4C consumes none",
+      "context": "initial helper call before controller configuration"
+    },
+    {
+      "site": "0x10000C02",
+      "caller": "0x10000BBC",
+      "argument_state": "no argument registers consumed; caller has just completed its controller+0x20 zero poll",
+      "context": "second helper call before caller return"
+    },
+    {
+      "site": "0x10000DC4",
+      "caller": "enclosing routine entry unresolved in this packet",
+      "argument_state": "current register values are not inputs to B4C; no setup is performed for B4C",
+      "context": "only reached on nonzero R9 path; after B4C caller continues setup"
+    },
+    {
+      "site": "0x10000E18",
+      "caller": "same enclosing routine as 0x10000DC4",
+      "argument_state": "current register values are not inputs to B4C; no setup is performed for B4C",
+      "context": "after caller waits for its controller+0x24 word to reach zero"
+    }
+  ],
+  "inputs": [],
+  "outputs": [
+    "R0=0 on normal return"
+  ],
+  "global_reads": [
+    {
+      "address": "0xA2000028",
+      "width_bits": 32,
+      "use": "reloaded each poll iteration; bit 0 controls loop"
+    }
+  ],
+  "global_writes": [],
+  "other_effects": [
+    "R3 ends as 0xA2000000",
+    "R0 ends as 0",
+    "no stack adjustment",
+    "no calls or pointer writes"
+  ],
+  "outgoing_edges": [
+    "0x10000B56 conditional branch back to 0x10000B50 when masked status != 0",
+    "0x10000B5A indirect return through R15"
+  ],
+  "open": [
+    "Whether address 0xA2000028 is a physical peripheral and its protocol meaning is not established by this body",
+    "No timeout, so if every observed word has bit0=1 this routine does not return",
+    "Caller-side behavior outside the six pinned call sites is not analyzed"
+  ]
+}

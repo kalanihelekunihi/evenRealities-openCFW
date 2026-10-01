@@ -1,0 +1,5 @@
+Review 1761 — PASS_SCOPED
+
+Bound to touch-storage-validation-8220-1760/001, receipt SHA-256 0cc8a134fc138322f88ab7d581dd35ae7659d93f6e426a0a9295c20551be330a. I independently reran 1,296 combinations to /tmp/review1761-independent; the replay output matched the candidate byte-for-byte. Independent disassembly confirms the body and literal boundary.
+
+Manual review confirms exact field-check order and the callback dataflow. The record address at +8 is saved before the validator call, while the validator result becomes the callback's third argument. A nonzero callback status produces zero; zero takes the literal error return. The helpers remain controls, so this does not assert their underlying validation or storage effects.

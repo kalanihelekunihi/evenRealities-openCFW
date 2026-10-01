@@ -1,0 +1,19 @@
+{
+  "review_id": "2191",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-setup-reuse-predicates-callback-2188/002",
+  "candidate_receipt_sha256": "4dee57c5e178a03bed3768f73ba2b8ecb1d3832ac29ab167dd3ab6465de0284a",
+  "candidate_pseudocode_sha256": "c651d6489ab3520551c0f84344dff81d982df4c8e56bd3366991c5963eddbb6f",
+  "candidate_replay_sha256": "d2de6c6575621cb51e991027ef0f20eba6427a4c696f1ca49371d100c473b049",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "All source, code, literal and receipt file hashes match. The candidate's code [0x6BD4,0x6D6A) and literals [0x6D6C,0x6D74) are the same verified body and pool as review 2189; the disassembly listing is byte-for-byte the independently regenerated Thumb/M-class listing.",
+    "Isolated replay reproduced all 48 fixtures exactly. Across modes 2/4, saved start/length matches and mismatches, descriptor values 0x10/0/0x2010, and callback null/non-null, the call sequence and fast-path writes agree with the decoded predicates. When fast reuse succeeds with callback non-null, the original BLX reaches 0x09000010 and receives the word from context+28 (0x13579BDF). Predicate-failure cases take the setup path instead.",
+    "The predicate checks in the instructions are mode byte 85 equal to 2 or 4, halfword 72 equal to start, halfword 70 equal to length, length <= 21, descriptor bit 13 clear and bit 4 set. The callback is loaded from config word 0 and called only after all fast-reuse checks pass; fast-path register operations follow it. The callback fixture is a controlled returning stub, so only invocation and argument forwarding are verified."
+  ],
+  "limitations": [
+    "5C8E, 6140, 6AC0 and 664C remain controlled. Callback side effects, concurrent mutation and helper effects are untested; physical hardware behavior is not established.",
+    "No canonical admission."
+  ]
+}

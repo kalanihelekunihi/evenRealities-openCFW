@@ -1,0 +1,18 @@
+{
+  "review_id": "1853",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-extended-read-first-phase-correction-1832/001",
+  "candidate_receipt_sha256": "64180aa71e780e8af4e9590932f181a2b4ec97542bf8105dd4255625a9794c88",
+  "parent_receipt_sha256": "76086b54d79d06a2a518d65cc5f6f0e93f05dafa858609f00a321fc7d579ca52",
+  "corrected_pseudocode_sha256": "624a7aa3e3c5455f0df5945b34823a48552940a047c777f21eb9406c1d54e525",
+  "checks": [
+    "Verified the correction receipt binds to original first-phase candidate 1814/001 and checked correction.md plus replacement pseudocode hashes.",
+    "Compared the changed mirror-stride wording to original instructions 8420\u20138430: count and copies are multiplied first, then physical width is shifted right two, multiplied, and shifted left two. Correct formula is count * copies * (floor(physical_width/4)*4).",
+    "The previously reported count wording remains correct: the 836A comparison is before each 810C step; rejected candidates increment at 8368, and an N-row search can perform N candidate checks. Separate count audit 1834 supports this with original traces."
+  ],
+  "limitations": [
+    "Correction clarifies only the stride description; it adds no behavioral fixtures and preserves the partial, non-callable scope. Multi-copy no-match behavior is evidenced separately by trace packet 1836, not by this correction.",
+    "No complete-function, physical-storage, C implementation, or canonical admission claim."
+  ]
+}

@@ -1,0 +1,3 @@
+# Touch storage initialization wrapper 34D8
+
+Body 34D8..350A is 50 instruction bytes, excluding NOP and five literal words. Freshly read the initialized flag byte; nonzero returns zero without calling the deeper helper. Otherwise store a literal at context+8, call 8A38(context, other literal). Status zero or the accepted-status literal sets flag one and returns zero. Other statuses leave the flag unchanged and return one. Restore the two-word frame. Twelve original-instruction fixtures cover three flag values and four helper statuses; the deeper helper is explicitly controlled without memory effects. Exact calls, writes, return and SP are checked. Storage behavior and concurrent initialization remain unresolved. No canonical admission or C implementation.

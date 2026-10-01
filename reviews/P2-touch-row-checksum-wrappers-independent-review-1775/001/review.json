@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-row-checksum-wrappers-independent-review-1775",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "scope": {
+    "candidate": "analysis/touch-row-checksum-wrappers-1770/001",
+    "bodies": {
+      "0x7f6c": {
+        "end": 32632,
+        "bytes": 12,
+        "instructions": 5,
+        "sha256": "2ba000540258b6a9a9ba82ebb49ca0b88bd3bd0949cdafd72a75a9081450034f"
+      },
+      "0x7f78": {
+        "end": 32636,
+        "bytes": 4,
+        "instructions": 2,
+        "sha256": "a89b85f8bccd76763270edbe8d4a9000e557118189ef0a663b750b93593d16da"
+      },
+      "0x7f7c": {
+        "end": 32668,
+        "bytes": 32,
+        "instructions": 14,
+        "sha256": "fc923a97b449cfde8ec692d25b3a16f5d6e15a11db87ad7f54f6b745667c4145"
+      }
+    },
+    "reviewed": "The three pinned bodies are 7F6C..7F78 (12 bytes/5 instructions), 7F78..7F7C (4/2), and 7F7C..7F9C (32/14); the following 7F9C literal is excluded. Independent replay reproduces all 80 equality/mismatch cases, including width wrap, full-word comparisons, SP restoration and return values. The instruction flow confirms 7F78 loads the word at R0; 7F6C passes R0+1 and (R1\u22124) modulo 2^32 to 7E68 and returns its result; 7F7C compares full 32-bit stored and computed values."
+  },
+  "pins": {
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "candidate_receipt_sha256": "c533416d97bfc61b12568d52d2b870cab4ef8a554811df725b01c41b1c842831",
+    "candidate_replays_sha256": "b2daec31b6c2a1eee771f9dba5830c2cf778e71eb7a9df159473ae79efd8be35"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "The three pinned bodies are 7F6C..7F78 (12 bytes/5 instructions), 7F78..7F7C (4/2), and 7F7C..7F9C (32/14); the following 7F9C literal is excluded. Independent replay reproduces all 80 equality/mismatch cases, including width wrap, full-word comparisons, SP restoration and return values. The instruction flow confirms 7F78 loads the word at R0; 7F6C passes R0+1 and (R1\u22124) modulo 2^32 to 7E68 and returns its result; 7F7C compares full 32-bit stored and computed values."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "Receipt artifacts/source match their declared hashes. Isolated replay output is byte-identical to candidate replays.json."
+    }
+  ],
+  "limitations": [
+    "7E68 remains controlled, so checksum computation is not established in this review. Invalid pointers/lengths, physical storage and concurrent mutation remain outside fixture coverage.",
+    "No canonical admission."
+  ],
+  "checks": [
+    {
+      "command": "candidate source, artifact and body pin verification",
+      "result": "PASS"
+    },
+    {
+      "command": "instruction-derived wrapper review",
+      "result": "PASS"
+    },
+    {
+      "command": "isolated replay of all 80 fixtures",
+      "result": "PASS; exact replay JSON match",
+      "artifact": "isolated-replays.json"
+    }
+  ],
+  "canonical_or_coverage_change": false
+}

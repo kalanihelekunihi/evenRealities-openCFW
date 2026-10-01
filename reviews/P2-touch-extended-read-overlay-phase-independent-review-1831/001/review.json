@@ -1,0 +1,18 @@
+{
+  "review_id": "1831",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-extended-read-overlay-phase-1816/001",
+  "candidate_receipt_sha256": "cc79f9ca9a55b1aca1d8c63093f5301b67047ee7577eededca38fd3d06ed5420",
+  "region_sha256": "d34f9c951489817bab12d7dfdeb1b5fbec4c70262a55b94bab551560dec289cc",
+  "pseudocode_sha256": "45d1795691e4af0bd9fb3c6b3be9180d44ed441d4ced434d1af803198e01bdbe",
+  "checks": [
+    "Verified exact continuation span [0x847C,0x854C), 208 bytes/100 instructions, its parent/source pins, and predecessor trace receipt bindings.",
+    "Decoded the loop to confirm it advances 810C before validating each candidate; it checks primary, optionally checks a computed mirror, and only overlays validated rows. Overlay bounds are unsigned and wrapped; the intersection and source/destination deltas match the instruction sequence.",
+    "The mirror adjustment here multiplies count, copies and full physical width, then uses signed rounding toward zero to a four-byte boundary. It is a distinct instruction sequence from first-phase 842x and should not be conflated with that stride."
+  ],
+  "limitations": [
+    "This is a partial non-callable continuation; no standalone fixture replay was supplied. Supporting traces cover only valid/one-overlay/fixed-overlap layouts.",
+    "Multiple copies, mirror warning accumulation, signed-overflow geometries, callback failure/mutation, and physical storage are unresolved. No complete-function or canonical claim."
+  ]
+}

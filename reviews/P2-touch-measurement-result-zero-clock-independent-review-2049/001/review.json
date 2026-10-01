@@ -1,0 +1,18 @@
+{
+  "review_id": "2049",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-measurement-result-zero-clock-2048/001",
+  "candidate_receipt_sha256": "8b861ac8e4225129a163d06a2787c2123afb1bb9fb4cc5853bc8cd201015206f",
+  "candidate_pseudocode_sha256": "44608788c34535e31b576c4f86afa4fa02296ef1d87a1f2b56c455dbd62c8c5b",
+  "candidate_replay_sha256": "1abcbad45df00b918cc6dcfb37b61ceeb69f81ee87cd4684eee23059f5488e5d",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Receipt SHA-256 8b861ac8e4225129a163d06a2787c2123afb1bb9fb4cc5853bc8cd201015206f; source SHA-256 371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87. All declared artifact pins match.",
+    "Isolated replay reproduced all 48 fixtures. Full original 9E18 calls original division helper and exercises F values below 1024, so F>>10 is zero; the original helper returns zero quotient, resulting output remains zero and completion byte clears."
+  ],
+  "limitations": [
+    "This is the specific zero-clock-derived denominator slice; physical readiness/register effects are modeled. General division semantics and canonical admission remain separate.",
+    "No canonical admission."
+  ]
+}

@@ -1,0 +1,36 @@
+10000d4e:	c7084828 	lsli      	r8, r8, 24
+10000d52:	ea090000 	movi      	r9, 0
+10000d56:	3104      	movi      	r1, 4
+10000d58:	dd282002 	st.w      	r9, (r8, 0x8)
+10000d5c:	3018      	movi      	r0, 24
+10000d5e:	e3fffecd 	bsr      	0x10000af8	// 0x10000af8
+10000d62:	4004      	lsli      	r0, r0, 4
+10000d64:	117c      	lrw      	r3, 0x8c09406	// 0x10000e54
+10000e94:	e921002c 	bnez      	r1, 0x10000eec	// 0x10000eec
+10000e98:	45a4      	lsli      	r5, r5, 4
+10000e9a:	3011      	movi      	r0, 17
+10000e9c:	e3fffc04 	bsr      	0x100006a4	// 0x100006a4
+10000ea0:	6c57      	mov      	r1, r5
+10000ea2:	6dc3      	mov      	r7, r0
+10000ea4:	e3fffe2a 	bsr      	0x10000af8	// 0x10000af8
+10000ea8:	6d83      	mov      	r6, r0
+10000eaa:	6c57      	mov      	r1, r5
+10000ea8:	6d83      	mov      	r6, r0
+10000eaa:	6c57      	mov      	r1, r5
+10000eac:	6c1f      	mov      	r0, r7
+10000eae:	e3fffe2b 	bsr      	0x10000b04	// 0x10000b04
+10000eb2:	3764      	movi      	r7, 100
+10000eb4:	6c57      	mov      	r1, r5
+10000eb6:	7c1c      	mult      	r0, r7
+10000eb8:	e3fffe20 	bsr      	0x10000af8	// 0x10000af8
+10000ebc:	4004      	lsli      	r0, r0, 4
+10000ebe:	6c5f      	mov      	r1, r7
+10000eb2:	3764      	movi      	r7, 100
+10000eb4:	6c57      	mov      	r1, r5
+10000eb6:	7c1c      	mult      	r0, r7
+10000eb8:	e3fffe20 	bsr      	0x10000af8	// 0x10000af8
+10000ebc:	4004      	lsli      	r0, r0, 4
+10000ebe:	6c5f      	mov      	r1, r7
+10000ec0:	e3fffe1c 	bsr      	0x10000af8	// 0x10000af8
+10000ec4:	6cd3      	mov      	r3, r4
+10000ec6:	935f      	ld.w      	r2, (r3, 0x7c)

@@ -1,0 +1,18 @@
+{
+  "review_id": "1484",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-packet-init-local-5548-1483/002",
+  "candidate_receipt_sha256": "d1d6510fa426b8f51793cc60041a64f79955e19c000046954c85d8a0d002e125",
+  "candidate_pseudocode_sha256": "62b64803416df8a2e22c7a83973715cf261144a51bbaf9f8dd607b7c3bc57dd6",
+  "candidate_replay_sha256": "08089722e920a08b73adfc271b497a9345875f6d7d17e9573326e33cae8e74e8",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Reviewed the 342-byte body boundary and the local record/row field computations. The group selector uses descriptor +48 or +52 and passes the selected index-pair address, adjusted output pointer, and descriptor to 51BC in the asserted order.",
+    "Replayed the copied original-instruction harness against a review-owned copy of the pinned image: all 48 cases pass. Each compares all 48 output bytes and call arguments, and verifies controlled nonzero status forwarding plus SP/return state.",
+    "The group-specific stores and common packed word at output +12 match the instruction-derived formulas for tested inputs. The special 0x8000 bit is applied when the row byte equals 1 and record halfword differs from the index."
+  ],
+  "limitations": [
+    "51BC is controlled to nonzero statuses; the zero-result path and 5528 remain unresolved. Fill values are uniform within each source region, so independent field variation is outside this packet. No physical meaning or canonical admission."
+  ]
+}

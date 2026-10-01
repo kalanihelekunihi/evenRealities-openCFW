@@ -1,0 +1,18 @@
+{
+  "review_id": "1462",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-output-ordering-prefix-1461/002",
+  "candidate_receipt_sha256": "5bfb001cbccf55717558d4a77e763dc44cec07db92ac4a5e200b844dc58acdf2",
+  "candidate_pseudocode_sha256": "8dd4fe9c4e4f538577f0f516260720fef874f1b6bfa08432a09e21f9843340f5",
+  "candidate_replay_sha256": "f6145d62effc53e095a7e747a1a3d3407fc31eeff7efdf572dc3a93212275c36",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independently replayed the application startup prefix; original 5378, 52BC, 50E4 and AA2C all execute with no builder calls substituted. The prefix reaches 0x3D50 and all inherited startup state assertions pass.",
+    "Confirmed the selected context mode yields two active output mappings, with bytes +99=0xFF, +104=0, +107=1 and count +98=2. The full run checks these values and the output/table state after actual 50E4 processing.",
+    "The only controlled boundaries at the builder have been removed; remaining controlled calls are downstream application/configuration/storage dependencies stated in the candidate."
+  ],
+  "limitations": [
+    "Downstream calls, synthetic MMIO and external clock tables remain modeled; reaching 0x3D50 is a bounded prefix observation, not physical or whole-application proof. No canonical admission."
+  ]
+}

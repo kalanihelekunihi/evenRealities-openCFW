@@ -1,0 +1,19 @@
+{
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-clock-prefix-1256/001",
+  "candidate_source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "candidate_files": {
+    "pseudocode.md": "a0bc4d2b7700ca3cfd246e54aa81219b23751db43193a7632ef17a8ca9b9e094",
+    "replay.py": "b4969fb72a94ffad9b6e148c060b268a1afc4a3325f2654d104e05c54bdbfde8",
+    "replays.json": "5fad6410580a47c6f5ff9dfe7300c8cd14be76c572a1cd175e2a77f48bf10516"
+  },
+  "review_result": "PASS_SCOPED",
+  "checks": {
+    "replay": "An isolated copy of the replay completed the path to 0x3D50. Its sole regenerated replay exactly matches the candidate output. Source and all candidate file hashes match the receipt.",
+    "scope": "The trace executes the previously bounded initialization/pin path and actual 45D0/45AC, 45A4, and 45D0's two A33C calls. The nine clock calls are controlled. Later startup dependencies also remain controlled. Exact call order, selected arguments, output writes, stop PC, and PRIMASK are represented in the replay."
+  },
+  "limits": [
+    "A successful synthetic prefix is not physical boot or proof of clock/peripheral behavior.",
+    "The controlled clock and later application-prefix callees are outside this evidence; no application-loop completion is claimed."
+  ],
+  "accepted": false
+}

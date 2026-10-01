@@ -1,0 +1,92 @@
+{
+  "schema": "csky-command-byte-receiver-edges-v1",
+  "observed_callers": [
+    {
+      "site": "0x10000C8E",
+      "target": "0x10000BBC",
+      "args": [
+        "R0=3",
+        "R1=SP+4",
+        "R2=3"
+      ],
+      "caller": "0x10000C40",
+      "use": "R0 tested; nonzero branches around response preamble, but continues transfer engine"
+    },
+    {
+      "site": "0x10000CC6",
+      "target": "0x10000BBC",
+      "args": [
+        "R0=53",
+        "R1=SP+4",
+        "R2=1"
+      ],
+      "caller": "0x10000C40",
+      "use": "return ignored; caller reads the received byte after call"
+    },
+    {
+      "site": "0x10000D06",
+      "target": "0x10000BBC",
+      "args": [
+        "R0=5",
+        "R1=SP+4",
+        "R2=1"
+      ],
+      "caller": "0x10000C40",
+      "use": "return ignored"
+    },
+    {
+      "site": "0x10000D12",
+      "target": "0x10000BBC",
+      "args": [
+        "R0=53",
+        "R1=SP+3",
+        "R2=1"
+      ],
+      "caller": "0x10000C40",
+      "use": "return ignored; caller reads received output byte after call"
+    },
+    {
+      "site": "0x10000C28",
+      "target": "0x10000BBC",
+      "args": [
+        "R0=5",
+        "R1=callee-local SP+3",
+        "R2=1"
+      ],
+      "caller": "0x10000C1C nested poll routine",
+      "use": "callee stores received byte into SP+3; caller loops while that byte bit0 is set"
+    }
+  ],
+  "internal_calls": [
+    {
+      "site": "0x10000BC4",
+      "target": "0x10000B4C",
+      "args": "no explicit setup; caller does not use return"
+    },
+    {
+      "site": "0x10000C02",
+      "target": "0x10000B4C",
+      "args": "no explicit setup; after final status-zero poll; return ignored"
+    }
+  ],
+  "operation_inputs": {
+    "R0": "32-bit operation/mode word copied to controller+0x60 before byte loop",
+    "R1": "32-bit pointer to caller-owned output byte buffer; incremented once per controller data word",
+    "R2": "32-bit byte count; controller receives R2-1 modulo 2^32; end pointer is u32(R1_initial+R2)"
+  },
+  "ordered_effects": [
+    "call B4C",
+    "configure controller at 0xA2000000",
+    "write operation word to +0x60",
+    "while output pointer != end: poll +0x28 bit1; read word from +0x60; store low byte to output and increment pointer",
+    "poll +0x20 until zero",
+    "call B4C",
+    "return last +0x20 read (zero)"
+  ],
+  "unresolved": [
+    "B4C wait/service contract",
+    "physical identity of A2000000 register block",
+    "timeout behavior (no timeout in caller routine)",
+    "descriptor semantics beyond exact bytes"
+  ]
+}

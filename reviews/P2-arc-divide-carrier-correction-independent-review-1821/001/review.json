@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-arc-divide-carrier-correction-independent-review-1821",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "scope": {
+    "candidate": "analysis/arc-divide-carrier-correction-1820/001",
+    "reviewed": "The appended correction packet is bound to the same authenticated record-3 slice and package as 1704. Its verifier passes all pins and reproduces the absent cluster-context.s and .elf with the expected hashes from the frozen 1704 receipt; ELF VMA and bytes equal the extracted context, and decoder output matches the old listing after only path-header normalization. The original 1704 directory remains unchanged with those two files absent; this packet supplies reproducibility evidence without repairing or replacing it."
+  },
+  "pins": {
+    "source_record_sha256": "0de6e945a56ec886a92e44d4eaefe02fbca6db11f8747876e30bffb45cffce03",
+    "official_package_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+    "source_packet_receipt_sha256": "e71089cd80f47db66b2e41b12632b7f05ffb64de0d5fcf656510990f46bccf0a",
+    "candidate_receipt_sha256": "2b4fcb46281b0eeec53352659b37ee7cc611d130a90c4a9c8e7adc7c89c444d7"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "The appended correction packet is bound to the same authenticated record-3 slice and package as 1704. Its verifier passes all pins and reproduces the absent cluster-context.s and .elf with the expected hashes from the frozen 1704 receipt; ELF VMA and bytes equal the extracted context, and decoder output matches the old listing after only path-header normalization. The original 1704 directory remains unchanged with those two files absent; this packet supplies reproducibility evidence without repairing or replacing it."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "Independent run of verify.py passed; declared outputs and direct-input pins match."
+    }
+  ],
+  "limitations": [
+    "This is only a reproducibility supplement for missing carrier outputs. It does not edit/restore packet 1704 or change its semantic content.",
+    "No canonical admission or coverage change."
+  ],
+  "checks": [
+    {
+      "command": "pinned verifier for source extraction, artifact reconstruction, ELF VMA, decoder listing, and receipt hashes",
+      "result": "PASS"
+    },
+    {
+      "command": "original 1704 missing-file state check",
+      "result": "PASS; original files remain absent"
+    }
+  ],
+  "canonical_or_coverage_change": false
+}

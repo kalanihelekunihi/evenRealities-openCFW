@@ -1,0 +1,20 @@
+{
+  "review_id": "1307",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-storage-init-wrapper-34d8-1306/001",
+  "candidate_receipt_sha256": "24a179e3ef338067b3330ef9765e7d8384800cac1f6b4bef892ea30fbc4279ee",
+  "candidate_pseudocode_sha256": "7ffdf38f186f060bfdd774e57f59af3ed51fce07646a74af2cc663aaba1ec857",
+  "candidate_replay_sha256": "7b4d1a1532b2d4592e464a90c7fd388c7b23a2b620ad7b76fa0608af7c011f02",
+  "candidate_replays_sha256": "b611bdea93f1c1a1c08f4a3a108788476dff6317894f788f2a483fb0b2bf8a1f",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Pinned source and candidate files verify; independently decoded 34D8..350A and checked the five literal values against their pool. The code tests the flag byte before calling 8A38, stores 0xE400 at context+8, calls 8A38(context, 0x200008C8), accepts status 0 or 0x093E0004, and otherwise returns one without updating the flag.",
+    "Isolated replay passes all 12 combinations of three initial flag bytes and four helper return statuses. Call arguments, flag stores, result and two-word frame restoration are checked. The deeper helper is controlled with no memory effects."
+  ],
+  "limitations": [
+    "No storage behavior or concurrent initialization is established.",
+    "Private evidence only; no canonical admission or C implementation."
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-row-checksum-original-crc-independent-review-1779",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "scope": {
+    "candidate": "analysis/touch-row-checksum-original-crc-1774/002",
+    "bodies": {
+      "0x7f6c": {
+        "end": 32632,
+        "bytes": 12,
+        "instructions": 5,
+        "sha256": "2ba000540258b6a9a9ba82ebb49ca0b88bd3bd0949cdafd72a75a9081450034f"
+      },
+      "0x7f78": {
+        "end": 32636,
+        "bytes": 4,
+        "instructions": 2,
+        "sha256": "a89b85f8bccd76763270edbe8d4a9000e557118189ef0a663b750b93593d16da"
+      },
+      "0x7f7c": {
+        "end": 32668,
+        "bytes": 32,
+        "instructions": 14,
+        "sha256": "fc923a97b449cfde8ec692d25b3a16f5d6e15a11db87ad7f54f6b745667c4145"
+      }
+    },
+    "reviewed": "The three original bodies match their pinned extents: 7F6C (12 bytes/5 instructions), 7F78 (4/2), 7F7C (32/14), with 7F9C data excluded. All 30 isolated fixtures reproduce the full-word equality/error result and preserved SP. The fixture generator independently computes the 0x31 CRC over row+1 through row+width\u22124; it sets the stored word\u2019s upper bytes to zero before computing because bytes +1..+3 are inside that CRC window, then stores the resulting checksum in the low byte. This is consistent with the reader/adapter/wrapper instruction path."
+  },
+  "pins": {
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "candidate_receipt_sha256": "a12fad5fe7dbaa1fcb946abbc7f03ae43feffac4676c28fd4d91cc01741689c1",
+    "candidate_replays_sha256": "eaa56e848da9c48e4deaab45232a175577608bbedd9416d972b699b9a641f480"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "The three original bodies match their pinned extents: 7F6C (12 bytes/5 instructions), 7F78 (4/2), 7F7C (32/14), with 7F9C data excluded. All 30 isolated fixtures reproduce the full-word equality/error result and preserved SP. The fixture generator independently computes the 0x31 CRC over row+1 through row+width\u22124; it sets the stored word\u2019s upper bytes to zero before computing because bytes +1..+3 are inside that CRC window, then stores the resulting checksum in the low byte. This is consistent with the reader/adapter/wrapper instruction path."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "Candidate artifact/source pins match and isolated replay output equals candidate replays.json byte-for-byte."
+    }
+  ],
+  "limitations": [
+    "Widths 4 through 128 and synthetic readable rows are covered. Invalid lengths/pointers, large CRC lengths, physical storage and concurrent mutation remain outside scope.",
+    "No canonical admission."
+  ],
+  "checks": [
+    {
+      "command": "source, body, receipt and artifact hashes",
+      "result": "PASS"
+    },
+    {
+      "command": "independent data-range and checksum-generation inspection",
+      "result": "PASS"
+    },
+    {
+      "command": "isolated replay of all 30 fixtures",
+      "result": "PASS; exact replay JSON match",
+      "artifact": "isolated-replays.json"
+    }
+  ],
+  "canonical_or_coverage_change": false
+}

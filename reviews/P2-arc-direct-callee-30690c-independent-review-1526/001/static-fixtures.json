@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "kind": "symbolic instruction-level checks, not CPU execution",
+  "fixtures": [
+    {
+      "name": "incoming-r0-ignored",
+      "setup": "Hold M32[0x0080fb70] and its byte at pointer+0xba fixed; vary incoming r0 across 0..0xffffffff.",
+      "result": "The first instruction overwrites r0 with 0x0080fb70; all remaining operations derive SETI operand from memory, so incoming r0 does not affect the instruction path or written value."
+    },
+    {
+      "name": "low-nibble-transform",
+      "setup": "For a controlled byte x at pointer+0xba, track only the decoded data operations.",
+      "result": "After BMSK_S r0,r0,3 and BSET_S r0,r0,4, operand to SETI is (x & 0x0f) | 0x10."
+    }
+  ],
+  "limits": [
+    "No physical pointer/global memory is read.",
+    "No interrupt delivery or STATUS32 hardware state is observed.",
+    "No null-pointer behavior is claimed; body contains no null check."
+  ]
+}

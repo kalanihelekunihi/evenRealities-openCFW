@@ -1,0 +1,19 @@
+{
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-frequency-derived-state-4734-1260/002",
+  "candidate_source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "candidate_files": {
+    "pseudocode.md": "abfd9c63812f22df738fd5e195aa7e67ddcdd2b478642fc9b779401faeab0e16",
+    "replay.py": "f4293c41ee18c3cb70c44fda21263a38b64d6535505659290fe68ff91a0e32c5",
+    "replays.json": "4d5b0549339a87387af038cd046b7d7966042372de784b1fc4905c613565721a"
+  },
+  "review_result": "PASS_SCOPED",
+  "checks": {
+    "original_bytes": "Independent Thumb+MCLASS decoding of 4734..476A confirms the zero-return bypass, raw frequency store, two calls to A6C0 with denominators 1,000,000 and 1,000, additions of one, byte then word stores, 15-bit shift, and saved-frame return. The pinned A6C0 body is executed directly by the replay, not replaced.",
+    "replay_and_oracle": "All 10 isolated original-byte fixtures pass and match the candidate replay output exactly. Independently checked ceil(F/1,000,000), ceil(F/1,000), low-byte truncation, and u32 shift behavior for the recorded values, including zero and 0xFFFFFFFF."
+  },
+  "limits": [
+    "Only 46F8's frequency result is controlled. Synthetic RAM does not establish the physical frequency source or hardware timing.",
+    "The observations establish these two division use cases, not all A6C0 behavior."
+  ],
+  "accepted": false
+}

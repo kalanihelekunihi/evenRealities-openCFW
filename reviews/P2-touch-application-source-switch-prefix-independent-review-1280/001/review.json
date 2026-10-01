@@ -1,0 +1,19 @@
+{
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-source-switch-prefix-1279/001",
+  "candidate_source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "candidate_files": {
+    "pseudocode.md": "7246c9743848e7e9542cbb21db132df42d3123b9fc717ece9ceca04c0783bc63",
+    "replay.py": "3360d7f8f1a75ff8b1b3ddadc10c5540b97eb0bb6032e0603681bd814d9d69ee",
+    "replays.json": "01770f0790e262b9914b661b5d3c75b51cee8b1c83818dc5216e2a6f2b320bc1"
+  },
+  "review_result": "PASS_SCOPED",
+  "checks": {
+    "replay": "The isolated original-byte startup fixture reaches 0x3D50 and regenerates the candidate row exactly. Source and candidate hashes match the receipt. Actual frequency-state derivation and the source-switch bodies execute; the two 9F44 calls use selector zero, which is already current in 0x40030028. A33C writes the distinct 0x40100030 register, resolving the apparent mode/selector collision.",
+    "controlled_calls": "Exactly two 9C80 clock-wrapper entries remain controlled, followed by the stated later application dependencies. The candidate retains the prior descriptor, interrupt, register-write and derived-frequency assertions."
+  },
+  "limits": [
+    "This is a bounded synthetic startup prefix, not proof of physical clock programming, timing, or concurrent peripheral behavior.",
+    "Later application dependencies and application-loop behavior remain unresolved."
+  ],
+  "accepted": false
+}

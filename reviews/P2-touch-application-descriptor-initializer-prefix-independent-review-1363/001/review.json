@@ -1,0 +1,20 @@
+{
+  "review_id": "1363",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-descriptor-initializer-prefix-1362/001",
+  "candidate_receipt_sha256": "153242f9090a2280023c802ae8136e16fb82927b6d7239676bf51820f2ffa699",
+  "candidate_pseudocode_sha256": "9b2f7780c03e52bb2244b7124a09f3b0acc84f4d3d1738151e94419e4f9baef7",
+  "candidate_replay_sha256": "daaa01518661f97693f08202341a7b5b32d4ac8cceb7843e9215ff545a2e5612",
+  "candidate_replays_sha256": "db8a756c0f3ce1ec6eac2987a0f1fc023b6a791c1328e36abbbe1a56a07446a6",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Candidate/source hashes verify. The isolated replay reaches 0x3D50 with the actual 4C7C body and actual six-byte 4C72 adapter executing. The adapter preserves its incoming registers across 4C44 and returns the raw controlled result; only the two named deeper initialization calls, storage calls, and later app boundaries remain controlled.",
+    "The one successful-prefix fixture asserts the copied descriptor pointer, calls into registration, vector slot and callback, ordered enable writes 128 then 256, settings/object/buffer/SysTick and peripheral state, and final SP/PRIMASK-related prefix conditions. Literal addresses and values in the candidate receipt agree with source bytes."
+  ],
+  "limitations": [
+    "This packet contains one successful run; it is not branch coverage. Breakpoint/failure paths and controlled downstream calls are not established as normal behavior.",
+    "External clock tables are synthetic; physical interrupt dispatch, deeper setup, and application-loop behavior remain unresolved. No canonical admission or C implementation."
+  ]
+}

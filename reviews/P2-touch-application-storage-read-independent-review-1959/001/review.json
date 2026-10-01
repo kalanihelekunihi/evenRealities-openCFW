@@ -1,0 +1,15 @@
+{
+  "review_id": "1959",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-original-storage-read-1950/001",
+  "candidate_receipt_sha256": "d25d353691860ce99c28051339e9cd0bdb6bb6ef3c38e9574041c5fbbc26ed6e",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "All source/artifact pins match. Isolated cumulative replay passes and exactly matches the recorded replay JSON. Original storage initializer 8A38 and read dispatcher/selected read chain 8A78 execute; only 8AE0 and 8AAC remain controlled. The recorded call list captures 8A38/8A78 as observed original entries.",
+    "The packet retains the synthetic readiness counter/read hook and modeled CPU-context IRQ delivery. The original startup checks and storage read composition reach 3D50; captured progress and call counts match the asserted trace. This is one bounded startup replay, not full application closure."
+  ],
+  "limitations": [
+    "Clock/status MMIO and interrupt delivery are synthetic/modelled. Storage read effects beyond this recovered chain remain controlled, and no physical hardware/storage behavior or canonical admission is established."
+  ]
+}

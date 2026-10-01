@@ -1,0 +1,21 @@
+{
+  "review_id": "1318",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-object-initialize-chain-1317/001",
+  "candidate_receipt_sha256": "c474a0998c528a521ea1f097d51c9fbc9558a5563abfc5d802c2fbd9c49ff7da",
+  "candidate_pseudocode_sha256": "216211f9467915ef94c11e9e35de6d322321b477ae0c4f26dea3433bdeb11758",
+  "candidate_replay_sha256": "f7f7818127d48f174d614232168f4329ff79e05869c67bc888c9200406120dc6",
+  "candidate_replays_sha256": "06e1f93403c7ca939a46b05cfa861eff4ebf9506be7861dfe26fe57e0e56f144",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Pinned source and files verify. Independent decode confirms exact boundaries for caller 3658..366E, object wrapper 404C..406E, byte fill A9D4..A9E4, and halfword default helper 3EE8..3EFA.",
+    "Caller loads settings halfword at literal-base+6, stores it at SP+4, and passes destination 20000940 to 404C. The wrapper null-checks both pointers, calls actual fill with (destination,0,80), copies source halfword to object start, and calls actual 3EE8. The initializer only replaces a zero first halfword with 1000.",
+    "Isolated replay passes 15 actual-instruction chain cases; 80-byte zeroing, supplied timeout copy/defaulting, neighboring sentinels and SP restoration are checked. Direct null-pointer entries are not represented in those chain fixtures."
+  ],
+  "limitations": [
+    "Pointer validity, aliasing, concurrent mutation, physical storage, and caller behavior beyond the bounded chain remain unresolved.",
+    "No canonical admission or C implementation."
+  ]
+}

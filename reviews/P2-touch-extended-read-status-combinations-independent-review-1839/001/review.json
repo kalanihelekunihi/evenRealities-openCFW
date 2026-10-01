@@ -1,0 +1,16 @@
+{
+  "review_id": "1839",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-extended-read-status-combinations-1838/001",
+  "candidate_receipt_sha256": "b66e999bf9b11159efa5c5c6abbb859e3f35a12b7b544ae3040d2eb21ed95af2",
+  "body_sha256": "10dc591b37adac5c114142464a4ad4324af575b483f655ca6cb66ac0503c7ec7",
+  "candidate_replays_sha256": "97daecb3101326f2620636f409201d2a830f924a364c4e0dfb6df3abbce8b1af",
+  "checks": [
+    "Receipt/source/body and candidate-file pins verified. Isolated replay passed all nine original-instruction traces; replay JSON matched byte-for-byte.",
+    "For the tested adjacent rows, valid chunks copy, blank/corrupt chunks zero-fill, and any corrupt nonblank chunk leaves status 0x093E0001 even if later chunks are valid or blank. With no corrupt nonblank chunk status remains zero. Output, callback presence and SP assertions match."
+  ],
+  "limitations": [
+    "Only two chunks, mirroring disabled, and the enumerated synthetic row states are exercised. Mirror warning precedence, provider failure, multi-copy errors, concurrency and physical storage remain unresolved. Trace-only; no canonical admission."
+  ]
+}

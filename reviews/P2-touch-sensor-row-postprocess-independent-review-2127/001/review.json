@@ -1,0 +1,20 @@
+{
+  "review_id": "2127",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-sensor-row-postprocess-4ba8-2126/001",
+  "candidate_receipt_sha256": "218e64e531179de2de8c7364758f2d3803ab910d4c108473d830e8bfff054373",
+  "candidate_pseudocode_sha256": "29e091fb6e3b2704e9e8fbbc2b07d9e1bad35b4048fddc351a84e71de09ab8ae",
+  "candidate_replay_sha256": "3c7d30c52f96dd81fd6c2fc6a19250ac03be7486ec57c5f4b57b4c5fd7bc611a",
+  "candidate_replays_sha256": "359d5a015aa0918f35d62211fc1c9753208d7191aa2c25079bcb2088aeb5219f",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "All candidate pins match. Isolated replay passed all 120 fixtures.",
+    "The fixtures cover valid/invalid indices, row type, predicate result, post-callee byte 122 values, and distinct status patterns. The trace order matches the body: reject index >2 before context access; derive row at context+12+index*144; type-7 return; original 7DDE enable predicate; controlled 5C02/5938 calls; fresh byte-122 read; then optional 5BA2 call or status OR with 1.",
+    "The controlled 5938 mutation changes byte 122 from the opposite starting value and the later branch follows the post-call read, supporting the documented freshness point. Frame and raw retained status checks pass."
+  ],
+  "limitations": [
+    "5C02, 5938 and 5BA2 remain controlled; this packet does not recover their semantics or physical effects. Descriptor/record field meanings and product-level sensor behavior remain provisional.",
+    "No canonical admission, caller closure, or whole-image completeness is established."
+  ]
+}

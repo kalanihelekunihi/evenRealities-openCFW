@@ -1,0 +1,17 @@
+{
+  "review_id": "1837",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-extended-read-copy-search-model-1830/001",
+  "candidate_receipt_sha256": "1ce18c83f7a6b87560e17bae1bdb4817a40c7674ce773d44e3171c52efbb9992",
+  "body_sha256": "10dc591b37adac5c114142464a4ad4324af575b483f655ca6cb66ac0503c7ec7",
+  "candidate_replays_sha256": "bcba67df1a792614a9960ed86be11058ad976eca2916f28b749045014219934c",
+  "checks": [
+    "Receipt pins verified. Independent isolated replay passed all 120 cases and candidate replay JSON matched byte-for-byte.",
+    "Reviewed the four-row candidate model against original loop: begin from current row\u2019s opposite group boundary, advance through the next four physical rows, and choose the first matching logical half-row interval. Distinct payload generation makes all eight current positions observable; output slices, zero status, suffix and SP assertions pass.",
+    "Count-audit packet 1834 independently counts advances/checks in each actual 8352..83F2 trace segment and confirms the range from one through four, including four."
+  ],
+  "limitations": [
+    "Valid uniform geometry only; exhaustion, invalid candidates, concurrent mutation, mirrors and physical storage unresolved. Trace evidence does not establish public bounds or canonical admission."
+  ]
+}

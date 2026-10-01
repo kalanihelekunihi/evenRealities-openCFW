@@ -1,0 +1,19 @@
+{
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-delay-interrupt-helpers-1281/001",
+  "candidate_source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "candidate_files": {
+    "pseudocode.md": "da4e1e0361272f160f0f5bfaf74f4d1beac54efc065183619bb3f21844a7d1cb",
+    "replay.py": "613b8f1e31ed72ac86eba3555eb942c81bc370f1b92f7c14c7b5381088886c44",
+    "replays.json": "db6c8ed445699d0400b943b4106b3bd0bb487a04e44298d6b9f3ef9e5e393f3d"
+  },
+  "review_result": "PASS_SCOPED",
+  "checks": {
+    "original_bytes": "Independent Thumb+MCLASS decoding of 4480..44A0 confirms the rounded-up input count, loop body at 4486/4488 with one net decrement, PRIMASK read-and-disable helper, and bit-zero PRIMASK restore helper. The three declared bodies are contiguous, with their stated 18/8/6-byte extents.",
+    "replay": "All 226 isolated original-instruction fixtures pass and regenerate the candidate rows exactly. Delay counts include both input-addition wrap cases; return value, exact loop instruction counts, and mask effects match the opcodes."
+  },
+  "limits": [
+    "Iteration counts do not establish physical elapsed time or interrupt-dispatch behavior.",
+    "No canonical admission is claimed."
+  ],
+  "accepted": false
+}

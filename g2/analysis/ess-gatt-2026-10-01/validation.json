@@ -1,0 +1,571 @@
+{
+  "image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "load_base": "0x437fe0",
+  "initializer_sha256": "df1a1fdf7b2792a7c4ef7a2c5cc6d1423bc7833b556fdfcedb8d6d927fbbb743",
+  "functions": [
+    {
+      "entry": "0x4b503c",
+      "end_exclusive": "0x4b5074",
+      "sha256": "22a9af0645faac9bb326fc8e9e6d6c4c3a87aa15214557df24f45c4ccc48194c"
+    },
+    {
+      "entry": "0x4b5204",
+      "end_exclusive": "0x4b5210",
+      "sha256": "7662e7e48ade1931fd01f00faa5361c0866049bbd744de8f636aa75961796309"
+    },
+    {
+      "entry": "0x56c6fc",
+      "end_exclusive": "0x56c924",
+      "sha256": "04dad7963212e23ac2c53c1022a90f7f92cab9197ff11f35d954d59fd70de9ec"
+    },
+    {
+      "entry": "0x5361ec",
+      "end_exclusive": "0x5361f6",
+      "sha256": "6e11ef465c9d78a74282c9152403710d2d74d929379f485536a25f407a7e2928"
+    },
+    {
+      "entry": "0x5361f6",
+      "end_exclusive": "0x5361fe",
+      "sha256": "d6617c707853b18c2e2140fa0cfcb8b233e386693675219f0a5b0d1c082a9f4a"
+    }
+  ],
+  "static_evidence": [
+    {
+      "start": "0x4b7ec2",
+      "end_exclusive": "0x4b7f5e",
+      "sha256": "8144beef1f6329ae2b67117d2ce3ecc81e09a9764a7770fa7b5f8a19e3896c0d"
+    },
+    {
+      "start": "0x6de9d4",
+      "end_exclusive": "0x6dea34",
+      "sha256": "ed4c5d84947a8e88e16d0141f0a7919b7e8f55c5860c583d07ab81d195994a25"
+    },
+    {
+      "start": "0x7894d0",
+      "end_exclusive": "0x789500",
+      "sha256": "9c46184a42492a238ba1a68d5f887aa379a00ac5ecf7a170e98ef3b171e15d98"
+    },
+    {
+      "start": "0x783adc",
+      "end_exclusive": "0x783b03",
+      "sha256": "dc109db5ef39ae154683a89b6df232c7273643ac7bc9f2de595bb6361f28b0f7"
+    },
+    {
+      "start": "0x7518c0",
+      "end_exclusive": "0x7518e4",
+      "sha256": "6ea4cf0a89f78d69bd90943924a583fc5faffa80caf21ece63aa114a35e2cbce"
+    }
+  ],
+  "cases": [
+    {
+      "case": "ESS_callbacks_and_group_registration",
+      "calls": [
+        {
+          "call": "add_group",
+          "args": [
+            536886072,
+            4973237,
+            536886072,
+            7947022
+          ]
+        }
+      ],
+      "group": "0x20003b38"
+    },
+    {
+      "case": "decoded_GATT_tables",
+      "calls": [],
+      "attributes": [
+        {
+          "handle": "0x860",
+          "uuid_bytes": "0028",
+          "value_hex": "50642ec78a0e7390e111c20860270000",
+          "length": 16,
+          "max_length": 16,
+          "settings": "0x0",
+          "permissions": "0x1"
+        },
+        {
+          "handle": "0x861",
+          "uuid_bytes": "0328",
+          "value_hex": "04620801642ec78a0e7390e111c20860270000",
+          "length": 19,
+          "max_length": 19,
+          "settings": "0x0",
+          "permissions": "0x1"
+        },
+        {
+          "handle": "0x862",
+          "uuid_bytes": "01642ec78a0e7390e111c20860270000",
+          "value_hex": "00",
+          "length": 1,
+          "max_length": 512,
+          "settings": "0xb",
+          "permissions": "0x10"
+        },
+        {
+          "handle": "0x863",
+          "uuid_bytes": "0328",
+          "value_hex": "10640802642ec78a0e7390e111c20860270000",
+          "length": 19,
+          "max_length": 19,
+          "settings": "0x0",
+          "permissions": "0x1"
+        },
+        {
+          "handle": "0x864",
+          "uuid_bytes": "02642ec78a0e7390e111c20860270000",
+          "value_hex": "00",
+          "length": 1,
+          "max_length": 512,
+          "settings": "0x9",
+          "permissions": "0x1"
+        },
+        {
+          "handle": "0x865",
+          "uuid_bytes": "0229",
+          "value_hex": null,
+          "length": 2,
+          "max_length": 2,
+          "settings": "0x20",
+          "permissions": "0x11"
+        }
+      ],
+      "ccc_table": [
+        [
+          19,
+          2,
+          0
+        ],
+        [
+          2085,
+          1,
+          0
+        ],
+        [
+          2117,
+          1,
+          0
+        ],
+        [
+          2149,
+          1,
+          0
+        ],
+        [
+          2181,
+          1,
+          0
+        ],
+        [
+          2213,
+          1,
+          0
+        ]
+      ]
+    },
+    {
+      "case": "setter_23_247_bearer0",
+      "calls": [
+        {
+          "call": "callback",
+          "args": [
+            9,
+            22,
+            0,
+            0
+          ]
+        }
+      ],
+      "stored": 23
+    },
+    {
+      "case": "setter_208_247_bearer0",
+      "calls": [
+        {
+          "call": "callback",
+          "args": [
+            9,
+            22,
+            0,
+            0
+          ]
+        }
+      ],
+      "stored": 208
+    },
+    {
+      "case": "setter_517_247_bearer0",
+      "calls": [
+        {
+          "call": "callback",
+          "args": [
+            9,
+            22,
+            0,
+            0
+          ]
+        }
+      ],
+      "stored": 247
+    },
+    {
+      "case": "setter_247_208_bearer1",
+      "calls": [
+        {
+          "call": "callback",
+          "args": [
+            9,
+            22,
+            0,
+            0
+          ]
+        }
+      ],
+      "stored": 208
+    },
+    {
+      "case": "AttGetMtu_returns_unadjusted_u16",
+      "calls": [
+        {
+          "call": "core_by_conn",
+          "args": [
+            9,
+            22,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "incoming_MTU_23",
+      "calls": [
+        {
+          "call": "features",
+          "args": [
+            9,
+            541061096,
+            1,
+            0
+          ]
+        },
+        {
+          "call": "acl_rx_max",
+          "args": [
+            23,
+            23,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "acl_rx_max",
+          "args": [
+            247,
+            536872116,
+            480,
+            0
+          ]
+        },
+        {
+          "call": "allocate",
+          "args": [
+            11,
+            536872116,
+            480,
+            0
+          ]
+        },
+        {
+          "call": "l2cap",
+          "args": [
+            537362432,
+            0,
+            3,
+            537363200
+          ]
+        },
+        {
+          "call": "callback",
+          "args": [
+            0,
+            22,
+            0,
+            0
+          ]
+        }
+      ],
+      "stored": 247,
+      "response": "03f700"
+    },
+    {
+      "case": "incoming_MTU_207",
+      "calls": [
+        {
+          "call": "features",
+          "args": [
+            9,
+            541061096,
+            1,
+            0
+          ]
+        },
+        {
+          "call": "acl_rx_max",
+          "args": [
+            207,
+            207,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "acl_rx_max",
+          "args": [
+            247,
+            536872116,
+            480,
+            0
+          ]
+        },
+        {
+          "call": "allocate",
+          "args": [
+            11,
+            536872116,
+            480,
+            0
+          ]
+        },
+        {
+          "call": "l2cap",
+          "args": [
+            537362432,
+            0,
+            3,
+            537363200
+          ]
+        },
+        {
+          "call": "callback",
+          "args": [
+            0,
+            22,
+            0,
+            0
+          ]
+        }
+      ],
+      "stored": 247,
+      "response": "03f700"
+    },
+    {
+      "case": "incoming_MTU_208",
+      "calls": [
+        {
+          "call": "features",
+          "args": [
+            9,
+            541061096,
+            1,
+            0
+          ]
+        },
+        {
+          "call": "acl_rx_max",
+          "args": [
+            208,
+            208,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "acl_rx_max",
+          "args": [
+            247,
+            536872116,
+            480,
+            0
+          ]
+        },
+        {
+          "call": "allocate",
+          "args": [
+            11,
+            536872116,
+            480,
+            0
+          ]
+        },
+        {
+          "call": "l2cap",
+          "args": [
+            537362432,
+            0,
+            3,
+            537363200
+          ]
+        },
+        {
+          "call": "callback",
+          "args": [
+            0,
+            22,
+            0,
+            0
+          ]
+        }
+      ],
+      "stored": 247,
+      "response": "03f700"
+    },
+    {
+      "case": "incoming_MTU_247",
+      "calls": [
+        {
+          "call": "features",
+          "args": [
+            9,
+            541061096,
+            1,
+            0
+          ]
+        },
+        {
+          "call": "acl_rx_max",
+          "args": [
+            247,
+            247,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "acl_rx_max",
+          "args": [
+            247,
+            536872116,
+            480,
+            0
+          ]
+        },
+        {
+          "call": "allocate",
+          "args": [
+            11,
+            536872116,
+            480,
+            0
+          ]
+        },
+        {
+          "call": "l2cap",
+          "args": [
+            537362432,
+            0,
+            3,
+            537363200
+          ]
+        },
+        {
+          "call": "callback",
+          "args": [
+            0,
+            22,
+            0,
+            0
+          ]
+        }
+      ],
+      "stored": 247,
+      "response": "03f700"
+    },
+    {
+      "case": "incoming_MTU_517",
+      "calls": [
+        {
+          "call": "features",
+          "args": [
+            9,
+            541061096,
+            1,
+            0
+          ]
+        },
+        {
+          "call": "acl_rx_max",
+          "args": [
+            517,
+            5,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "acl_rx_max",
+          "args": [
+            247,
+            536872116,
+            480,
+            0
+          ]
+        },
+        {
+          "call": "allocate",
+          "args": [
+            11,
+            536872116,
+            480,
+            0
+          ]
+        },
+        {
+          "call": "l2cap",
+          "args": [
+            537362432,
+            0,
+            3,
+            537363200
+          ]
+        },
+        {
+          "call": "callback",
+          "args": [
+            0,
+            22,
+            0,
+            0
+          ]
+        }
+      ],
+      "stored": 247,
+      "response": "03f700"
+    },
+    {
+      "case": "feature_bit_reject_leaves_MTU",
+      "calls": [
+        {
+          "call": "features",
+          "args": [
+            9,
+            541061096,
+            1,
+            0
+          ]
+        },
+        {
+          "call": "error",
+          "args": [
+            537362432,
+            0,
+            2,
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "limits": "Original instructions with synthetic connection state; logging, feature provider, allocator, callback, GATT insertion and L2CAP transport are stubs. No live GATT discovery, peer negotiation, scheduler or radio trace."
+}

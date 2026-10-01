@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-sensor-row-unintercepted-chain-independent-review-2181",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "accepted": false,
+  "scope": {
+    "candidate": "analysis/touch-sensor-row-unintercepted-chain-2178/001",
+    "reviewed": "bounded original RAM-only cap/query/difference/type-6 execution and validity preservation"
+  },
+  "pins": {
+    "candidate_receipt_sha256": "d7fb7754663968984b4b7a20e5ec0cc59272a9a6c58e048f802f151261a54054",
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "candidate_replays_sha256": "4f3565c318436031637f81c421ed1732df6288dfd38a541576e4c1a6575775cb",
+    "candidate_files": {
+      "replays.json": "4f3565c318436031637f81c421ed1732df6288dfd38a541576e4c1a6575775cb",
+      "replay.py": "74aefd8df2cb2cbe29e020ed7cd93c2e35912521a0650e3b8947720dadb2adbe",
+      "pseudocode.md": "8ec987f7bc046eeaa9a3afab6870c9e587c43f284e0b547f3aed3e6925dccd0c"
+    }
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "The 40 cases execute the described original chain with no helper interception. Flags 116=1 disable the sample-filter dispatcher; the original constant-zero helper retains query status zero, the 5920 path computes capped-sample minus zero baseline, and valid initial rows reach original 5BA2/5A0A. Invalid rows retain their item/aggregate state and return the expected status bit. Cap/difference writes, type-6 flags, call sequence, R0 and SP assertions pass."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "The isolated replay matches candidate JSON byte for byte. I also added an independent assertion on the unchanged validity byte row+122; it passed for all applicable fixtures. Original source and receipt-listed artifact hashes match."
+    }
+  ],
+  "limitations": [
+    "Only the listed indices, enable/type/validity values and zero status are covered.",
+    "This is a bounded RAM-only chain, not physical acquisition or hardware behavior. Arbitrary configurations, aliasing, concurrency, callers and whole-image coverage remain unresolved.",
+    "No canonical admission or C implementation."
+  ],
+  "checks": [
+    {
+      "command": "verify source and receipt-listed artifacts",
+      "result": "PASS",
+      "artifact": "source-checks.json"
+    },
+    {
+      "command": "isolated original-byte replay with explicit validity-preservation check",
+      "result": "PASS; 40 fixtures",
+      "artifact": "replay.txt"
+    }
+  ],
+  "review_artifacts": {
+    "source_checks_sha256": "9d734939c4423237e660fadc0f10a5ae7b0780958bfe10d6e9591138d6637fdc",
+    "replay_sha256": "229d6f5bb03628455786122ef572717f606e0fae25d3c70b57f1e3caacc7ecf2"
+  },
+  "canonical_or_coverage_change": false
+}

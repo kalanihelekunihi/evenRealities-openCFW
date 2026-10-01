@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-extended-read-overlap-independent-review-1813",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "scope": {
+    "candidate": "analysis/touch-extended-read-overlap-traces-1808/001",
+    "code_span": [
+      "0x82e0",
+      "0x854c"
+    ],
+    "reviewed": "The exact body is 82E0..854C (620 bytes/291 instructions). All 24 isolated traces execute original instructions with no interceptions. With current row zero, row-one overlay [24,36) is traversed first, then row-zero overlay [20,32) overwrites their intersection [24,32); requested slices, A5 suffix, zero return and SP match the generated traces. This establishes precedence only for this fixed two-overlay arrangement and current-row position, not complete pseudocode recovery."
+  },
+  "pins": {
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "candidate_receipt_sha256": "3c084a62c772af15af24176df6aed380cb82682d85c14e8dd9bb2968b3c4b690",
+    "body_sha256": "10dc591b37adac5c114142464a4ad4324af575b483f655ca6cb66ac0503c7ec7",
+    "candidate_replays_sha256": "6df2d3ee0ee572248c7240478b65f1130bb146f7af05bc078cd46aefd2ce876f"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "The exact body is 82E0..854C (620 bytes/291 instructions). All 24 isolated traces execute original instructions with no interceptions. With current row zero, row-one overlay [24,36) is traversed first, then row-zero overlay [20,32) overwrites their intersection [24,32); requested slices, A5 suffix, zero return and SP match the generated traces. This establishes precedence only for this fixed two-overlay arrangement and current-row position, not complete pseudocode recovery."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "Candidate file and source hashes match their receipt. Isolated replay is byte-identical to candidate replay JSON."
+    }
+  ],
+  "limitations": [
+    "Only two fixed overlays, one-copy/no-mirror and a fixed row ordering are covered; arbitrary ordering, multi-copy, mirror/error paths and physical storage remain unproved.",
+    "No canonical admission or coverage promotion."
+  ],
+  "checks": [
+    {
+      "command": "source/body/artifact pin checks",
+      "result": "PASS"
+    },
+    {
+      "command": "trace-scope and bounded code-flow review",
+      "result": "PASS_SCOPED"
+    },
+    {
+      "command": "isolated replay of 24 traces",
+      "result": "PASS; exact replay JSON match",
+      "artifact": "isolated-replays.json"
+    }
+  ],
+  "canonical_or_coverage_change": false
+}

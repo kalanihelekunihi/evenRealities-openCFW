@@ -1,0 +1,15 @@
+{
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/arc-control-bit-callee-1246/001",
+  "candidate_receipt_sha256": "fe4c06dc3a7ac9c90c0f13bb31e71a715ae8b7d3f1fb75f750bb5c112329f54d",
+  "review_result": "PASS_SCOPED",
+  "checks": {
+    "authenticated_geometry": "The candidate verifier passes mapping and pin checks. Original record-3 bytes agree with the 14-byte core [0x0030F720,0x0030F72E) and 16-byte neighboring window through 0x0030F730. The core is five instructions; the window contains the additional two-byte NOP before the separately seeded entry.",
+    "semantics": "The pinned ARC disassembly is `mov_s r0,0xF00430; ld_s r1,[r0,0]; bset_s r1,r1,23; j_s.d [blink]; st_s r1,[r0,0]`. The ARC ISA evidence identifies the store as the `j_s.d` delay slot, so it completes before transfer. `r0` retains the address. The adjacent NOP's ownership remains unresolved.",
+    "caller_edge": "The direct non-delayed BL edge from 310 at 0x0030EE5A targets 0x0030F720 and is independently pinned."
+  },
+  "limits": [
+    "This is instruction-grounded pseudocode, not dynamic execution or proof of physical address semantics.",
+    "Return meaning, external address behavior, full caller prototype, and the adjacent NOP classification remain unresolved."
+  ],
+  "accepted": false
+}

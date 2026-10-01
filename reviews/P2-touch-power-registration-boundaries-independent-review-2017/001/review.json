@@ -1,0 +1,19 @@
+{
+  "review_id": "2017",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-power-registration-boundaries-2016/001",
+  "candidate_receipt_sha256": "2a022c6c1da423f5f7d58ef2335b1fafedda8dd2049d703f678486f40f2edaf2",
+  "candidate_pseudocode_sha256": "37aa03cdb38e48aa697d706bc4c32a578b3e11123cbaac70dd97162a795924e6",
+  "candidate_replay_sha256": "41cac8b722ccd500aeb13df1156a6b77ac827102c58babda116f52b14418e0f5",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Source and artifact pins match the receipt; the candidate binds the same immutable image as 2012/001.",
+    "Isolated replay reproduced all 14 rows exactly: for both indices it covers empty head, each null guard, and duplicate presence at head, middle, and tail. Empty-list insertion returns one and initializes links; invalid and duplicate paths return zero without non-stack-memory changes, with SP restored.",
+    "These boundary fixtures complement but do not overwrite or expand the insertion-order cases in 2012/001."
+  ],
+  "limitations": [
+    "Cycles, out-of-range index bytes and concurrent mutation remain unresolved. The evidence is limited to these boundary scenarios.",
+    "No canonical admission."
+  ]
+}

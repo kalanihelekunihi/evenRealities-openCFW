@@ -1,0 +1,5 @@
+Review 1745 — PASS_SCOPED
+
+Bound to csky-stage2-entry-callees-1738/001, receipt SHA-256 a52ddcaa619f9459b9da56f113327d5d575232e612b656b34b364902fa7b1e97. I ran the candidate's read-only verify.py; it passed source identities, parent binding, exact body/literal extraction, every manifest hash, fixtures, and regenerated disassembly.
+
+Manual review of both csky objdump listings confirms the separate A/B extents and the decoded pseudocode. The A zero-result call is conditional and rejoins before the common 0x25CBC call. In B, zero from 0x3FFC takes the call at 0x3128 and direct branch to 0x31A0, then both result paths execute 0x34D4. CR field updates and ordered NVIC stores agree with bytes. The A trailing zero halfword is still explicitly unresolved; no runtime mapping or physical side-effect conclusion is drawn.

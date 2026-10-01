@@ -1,0 +1,21 @@
+{
+  "review_id": "1745",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-stage2-entry-callees-1738/001",
+  "candidate_receipt_sha256": "a52ddcaa619f9459b9da56f113327d5d575232e612b656b34b364902fa7b1e97",
+  "candidate_manifest_sha256": "df636cd94033208bd9b92c5991e41862b89a44ce379c01c3365608776d7cb694",
+  "candidate_pseudocode_sha256": "90b0830b662e4c4a6c308147268deca09cad12dab31baf37b3a0557f7d3810c6",
+  "candidate_fixtures_sha256": "5c77b11f7269eb9ff15c64412496245541b7b4480ae00bc17cb5da98ae5736f2",
+  "candidate_verifier_sha256": "b50296a39051c39ae2fb644a5af09492caf1952b04e0dd58819cada0e52be1a0",
+  "checks": [
+    "The candidate's verify.py passes, checking both authenticated source images, exact body/literal slices, image-binding parent pins, static fixtures and reproducible csky objdump output. All manifest-pinned artifacts match.",
+    "Independent instruction review confirms distinct 150-byte A and 152-byte B routines at child offset 0x14C, with separate runtime coordinates and literal pools. The A 0x1E2..0x1E4 zero halfword remains an unowned BKPT gap; B's branch tail ends at 0x1E4 before its literals.",
+    "The CR19 mask-and-set, CR20/CR21 field operations, CR18 OR, direct call order, conditional result branches, shared continuation, NVIC write order and final PSRSET match the disassembly. The B zero-result path calls 0x10003128 and branches to 0x100031A0 before the shared call at 0x100034D4.",
+    "The parent binding's two A2C call targets correspond to conditional image coordinates, and the review preserves that coordinate distinction rather than asserting runtime loading or physical aliasing."
+  ],
+  "limitations": [
+    "Callee behavior, privileged-register and NVIC effects, interrupt timing, image selection/loading and runtime mapping remain unresolved. B DRAM-to-IRAM fetch visibility is unverified.",
+    "This is private source-byte evidence only; it does not establish whole-stage2 closure, canonical ownership, or physical execution."
+  ]
+}

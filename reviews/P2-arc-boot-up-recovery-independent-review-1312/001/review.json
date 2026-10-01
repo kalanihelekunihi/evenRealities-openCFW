@@ -1,0 +1,20 @@
+{
+  "review_id": "1312",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/arc-boot-up-recovery-1288/001",
+  "candidate_receipt_sha256": "52a92b24f6d9b9bcb8118455972cf51f173f14fff1bc137dee6750a5c3ede211",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "body_sha256": "78505282f29dd1a098e09a07e904f4fea480238393fa46c45a07ad5f7d566426",
+  "outputs_verified": 15,
+  "checks": [
+    "Verified every receipt output hash and reran verify.py successfully; it confirms the authenticated source slice, 71 contiguous decoded instructions, caller evidence pins, and output pins.",
+    "Independently examined the recovered control-flow narrative: local branch/delay-slot cases, count save/clear, status-conditioned external calls, polling rereads, recovery path, shared finalization, and frame exits are consistently scoped to the decoded body. Static fixtures are explicitly not dynamic machine or hardware execution.",
+    "Direct in-record callees and external targets remain outside this candidate contract. The task does not assume the symbol name is semantic evidence, ROM identity, or global entry ownership."
+  ],
+  "limitations": [
+    "No ARC execution was independently reproduced; static traces remain controlled witnesses.",
+    "All seven in-record callees, external package service behavior, physical register semantics, and runtime reachability remain unresolved.",
+    "No global code/data ownership, incoming reference census, or canonical admission is claimed."
+  ]
+}

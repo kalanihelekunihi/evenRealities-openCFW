@@ -1,0 +1,19 @@
+{
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-enable-prefix-1227/001",
+  "candidate_source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "candidate_files": {
+    "pseudocode.md": "a9af50cd0dc5467028050bca6c9160b62b0be9399402a3399c725be4a0562510",
+    "replay.py": "a8e26b075ebb4db72362fdd1a45a672004d0b1326a197e2582aceaf92fb81f40",
+    "replays.json": "15bd02f453c64d7c7a1680c7f792931e0e6a9323f8f2dd5fb1d855e365985318"
+  },
+  "review_result": "PASS_SCOPED",
+  "checks": {
+    "replay": "The isolated original-byte prefix reaches 0x3D50 and regenerates the single candidate replay row exactly. Hash pins match the candidate receipt.",
+    "targeted_change": "Actual A0BC runs with (1,1,1) and writes 0x65 at 0x40010104 in the recorded trace. The real wrapper/configuration chain and prior A148/A104/9FD4/A01C behavior remain present; 45D0, 8EE4, 45A4, and later prefix dependencies are still explicitly controlled."
+  },
+  "limits": [
+    "This bounded synthetic startup prefix is not physical boot or proof of MMIO behavior.",
+    "Deeper driver and application-loop semantics remain unresolved."
+  ],
+  "accepted": false
+}

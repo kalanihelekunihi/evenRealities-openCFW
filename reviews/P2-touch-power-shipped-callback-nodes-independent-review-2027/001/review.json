@@ -1,0 +1,17 @@
+{
+  "review_id": "2027",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-power-shipped-callback-nodes-2026/001",
+  "candidate_receipt_sha256": "3ed5e2a209d9a364b946007db7b7a8a789ebd730241c7091913814fd0b5e0b5d",
+  "candidate_pseudocode_sha256": "3d033e59b3d280d96959ff9834c0fb10de0dfdd1a86763ec6685b85c344c6348",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "The source hash and both candidate-file pins match the receipt. The two stored direct-call candidates map to the decoded call sites 0x3CA8 and 0x4638; surrounding instructions load node pointers from literals 0x3CB0 and 0x4648, and the latter caller also loads the false-result literal 0x464C.",
+    "Independently decoded the node records at source offsets 0x8298 and 0x861C as six-word records. They match the recorded callback pointers 0x3621/0xA1C1, index 1, skip 0, params 0x200009C0/0x20000CCC, zero links, priorities 2/255, and per-record hashes.",
+    "The records lie in the stated initialized-data source span [0x828C,0x8650), mapped to RAM 0x200004C0 by the separately reviewed startup evidence. This confirms the static correspondence and is consistent with the startup composition that preloads these bytes."
+  ],
+  "limitations": [
+    "This is a static candidate scan and record mapping; scanning halfword-aligned BL encodings can include data/second instruction halves, and it does not establish all callers or indirect closure. The startup composition supplies the data span as a fixture precondition rather than proving every copied byte in this packet. Callback bodies/parameters and runtime mutation remain separate. No canonical admission."
+  ]
+}

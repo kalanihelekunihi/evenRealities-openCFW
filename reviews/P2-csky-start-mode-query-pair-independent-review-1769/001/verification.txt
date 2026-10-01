@@ -1,0 +1,5 @@
+Review 1769 — PASS_SCOPED
+
+Bound to csky-start-mode-query-pair-1754/001, receipt SHA-256 7dd99fbd5f9836a73b0aea5f8b430335fe658296e02298f47faad4d0d8f3f7a1. Its verifier passed exact source/body/gap checks and regenerated C-SKY disassembly.
+
+The wrapped unsigned filter is correct: (status - 2) mod 2^32 < 4 only for status 2, 3, 4, or 5. Those paths perform both volatile loads; the first word determines R0 bit zero and the second load is retained in R3. The invalid path returns zero. A and B return layouts differ as described. No hardware MMIO or conditional-image execution is inferred.

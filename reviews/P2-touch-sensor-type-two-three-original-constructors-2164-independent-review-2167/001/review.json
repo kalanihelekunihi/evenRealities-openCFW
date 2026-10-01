@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-sensor-type-two-three-original-constructors-2164-independent-review-2167",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "accepted": false,
+  "scope": {
+    "candidate": "analysis/touch-sensor-type-two-three-original-constructors-2164/001",
+    "reviewed": "Original type-2/3 constructors exact source/body binding, instruction behavior and isolated composition replay"
+  },
+  "pins": {
+    "candidate_receipt_sha256": "3b1c07f3e86ae18c1d049f1f274d0b9bfb9b6a9ed7a5bc76e8a1a8f48224dd1f",
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "candidate_replays_sha256": "f9bbbefa5b5fa08ed3b04b32f315e65ed3f7f2e5d7c4a09114404c0799fe4f97",
+    "candidate_files": {
+      "replays.json": "f9bbbefa5b5fa08ed3b04b32f315e65ed3f7f2e5d7c4a09114404c0799fe4f97",
+      "replay.py": "a9834b8ede7e7a5e3bb9b45d0a79e690dd21de3a7e486776f48e059dbb94b3d8",
+      "pseudocode.md": "a9472fbb465c2a327d4589d5483c5677ec1d2fe8767c7c15da68158bf189cf1d",
+      "disassembly.txt": "babf8782875c762ced44f45c425421d7f6ea26be3a265685c893754caadc9314"
+    }
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "Independent Thumb decode confirms the exact 270-byte original 5A94 body and its boundaries; receipt, body and all artifact hashes match the pinned image. The 864-case isolated replay is byte-identical and runs original 5A94, 48CC, 4A2A, 49D4, AA2C and signed/unsigned division with no function interception."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "The bounded cases assert full output buffer/count propagation, constructor gating by type/configuration, history count update, item and aggregate effects, copy ordering/arguments, R8 and SP. Type 2 with the tested equal nonzero items produces center position 50; zero-valued cases produce no entries. Type 3 bypasses the peak constructor as described."
+    }
+  ],
+  "limitations": [
+    "The evidence is limited to the listed count/flag/timer/reload/delta/value/type/config combinations and initialized synthetic rows.",
+    "No physical sensor interpretation, arbitrary configurations, aliasing, concurrency, caller closure, canonical admission, or C implementation is claimed."
+  ],
+  "checks": [
+    {
+      "command": "source/body/receipt-listed artifact hash verification",
+      "result": "PASS",
+      "artifact": "source-checks.json"
+    },
+    {
+      "command": "isolated original-byte replay",
+      "result": "PASS; 864 cases, JSON byte-identical",
+      "artifact": "replay.txt"
+    },
+    {
+      "command": "complete Thumb-M-class decode compared with candidate listing",
+      "result": "PASS; independent Capstone listing byte-for-byte equal",
+      "artifact": "independent-disassembly.txt"
+    }
+  ],
+  "review_artifacts": {
+    "source_checks_sha256": "7f1c94878f37da8e65f73c6882c96645972de3c6a840faebff4d711d9630f20e",
+    "replay_sha256": "44568294ba72d84c069570cc1caba63414fdb9717e3363212234e928df506674",
+    "disassembly_sha256": "babf8782875c762ced44f45c425421d7f6ea26be3a265685c893754caadc9314"
+  },
+  "canonical_or_coverage_change": false
+}

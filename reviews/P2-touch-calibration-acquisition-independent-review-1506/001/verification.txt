@@ -1,0 +1,7 @@
+Independent review of touch-calibration-acquisition-7bc0-1505/001
+
+Candidate receipt SHA-256: 2f1350ca9bd0051c78d330bd1f26681bdc38b55081b8bce08dcf30aae7ca9e5e. Pseudocode SHA-256: 6d1c4c898d2f7e84774bf82f16af0e68d96539167d2aa2890d785dfc0dd63300. Replay SHA-256: 0343e187388e0fa079601ef57b979656cde5ebe3d7fa7348281f9d2ce91953fc. Source image SHA-256: 371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87.
+
+I followed the original 0x7BC0 body and checked the zero-state path’s ordered calls: 0x6928 receives scratch and descriptor; its controlled nonzero result is discarded before 0x7288; the latter result flows as the first argument to 0x6980 with the descriptor. The 0x6980 result controls whether status remains zero or error bit 4 is added. Both branches continue through the later hardware-read/output path and cleanup. The 486-case isolated original-instruction replay passed. It checks call order/arguments, status, output, control-bit clear and SP restoration.
+
+PASS_SCOPED. All four helpers are controlled and MMIO is synthetic. The packet does not establish helper side effects, mode-123==7 behavior, or physical behavior; no canonical admission.

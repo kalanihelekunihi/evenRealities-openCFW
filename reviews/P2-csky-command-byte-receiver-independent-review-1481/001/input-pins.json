@@ -1,0 +1,51 @@
+{
+  "schema": "csky-command-byte-receiver-input-pins-v1",
+  "image": {
+    "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage1.bin",
+    "bytes": 12288,
+    "sha256": "9546164f32680de47fa99ba85ba08a3c538822260957de6c1baee772638da464"
+  },
+  "tool": {
+    "path": "g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-objdump",
+    "version": "GNU objdump (GNU Binutils) 2.27",
+    "sha256": "7150f7ffc2ac163f3d2d465620e5dac96df4b29411e5d0944419c41657cc2382"
+  },
+  "mapping": {
+    "status": "conditional BINH-A source-coordinate proposal only",
+    "formula": "child file offset = runtime - 0x10000000 + 0x18",
+    "warning": "does not establish physical loading or canonical admission"
+  },
+  "dependencies": {
+    "analysis/csky-buffer-transfer-1428/001/receipt.json": "4d39487ae1a4491d6470cbfb52aa26e049399aec0655959d37219ed94e6beaa8",
+    "analysis/csky-init-gate-callee-1408/001/receipt.json": "4ee4b9fde73963dd4cafe69c724b72cb7b35b8a3ae77ae047d562163fa5245c5",
+    "analysis/csky-parent-init-callee-1401/001/receipt.json": "0c178c510964fa8649766e516d84093b9a707f760e934cda56ac66f757178999",
+    "analysis/csky-parent-init-callee-1352/001/receipt.json": "4cafc2c618b98646def39398126b57483fc58f4391afe2e6526d30f087a4bac7",
+    "analysis/csky-parent-init-callee-1309/001/receipt.json": "fec10d6ca44243722e983f8d39e3dcc2252ae8e4215debdfd06b5f7d21cd9e25",
+    "analysis/csky-image-ownership-1108/001/receipt.json": "785ffd50190d9b7ec73bc48b944f09f7710b5ba4b2ccc3d5107ad2d6abd2f244",
+    "analysis/csky-freeze-correction-1133/001/receipt.json": "1c1d1c3f8a4c709295ccf1a9cbb645d29b8d9da7538317272d7560dd0383b1c5"
+  },
+  "instruction_semantics": {
+    "manual_path": "third-party/tools/ghidra-csky/C-SKY_ISA_Reference_Guides/C-SKY ISA User Guide 1.15.12 (2014).pdf",
+    "manual_sha256": "3d4bb9978e40eb9ee3741fcb21c8c319702925068672a6fa7280cda96b05a2be",
+    "data_sleigh_path": "third-party/tools/ghidra-csky/C-SKY/data/languages/32b_data.sinc",
+    "data_sleigh_sha256": "3dde82aa3bc3bfbb70dc8950705cd0c2a59173e924ee6f92f9005ed880d5210b",
+    "memory_sleigh_path": "third-party/tools/ghidra-csky/C-SKY/data/languages/32b_memory.sinc",
+    "memory_sleigh_sha256": "101a0635c46e76ee1a7579522d1598897ce77779f5b04efde3c6a51dd6108899",
+    "branch_sleigh_path": "third-party/tools/ghidra-csky/C-SKY/data/languages/32b_branch.sinc",
+    "branch_sleigh_sha256": "0dfe9d60290555f94f2cc1496ad07d7ddf2f7c2d96bf6e145ea86906c80df49b",
+    "dsp_sleigh_path": "third-party/tools/ghidra-csky/C-SKY/data/languages/32b_dsp.sinc",
+    "dsp_sleigh_sha256": "be0cd035c6574e0fddcac4d0740367b67bd4921e0033bea21e580f5e9484e490",
+    "used_semantics": [
+      "STBI.B stores the low byte of a register at pointer and increments pointer by one",
+      "BNEZ branches on nonzero",
+      "word load/store width is 32 bits"
+    ]
+  },
+  "inherited_open_findings": [
+    "1309/001 R18 route at 0x100004F6 unresolved",
+    "1309/001 index-25 external table loads at ordinals 26/27 outstrip helper160 scan extent",
+    "1352/001 BKPT gaps 0x100005BA..5BC and 0x10000646..648 unowned",
+    "1401/001 BKPT 0x10000F46 unowned",
+    "1408/001 legacy codec.tsv extent conflict remains unreconciled"
+  ]
+}

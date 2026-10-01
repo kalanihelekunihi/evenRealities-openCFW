@@ -1,0 +1,16 @@
+{
+  "review_id": "1857",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-storage-row-merge-original-write-adapter-1846/001",
+  "candidate_receipt_sha256": "0a2cb728f7724f09f980af77270808289e12c83fa206e06fcc2eb38ba1c901ff",
+  "body_sha256": "5efa45534f738184ed2af12e316d028cb3d458d54b1227884b64b4f66c33c050",
+  "candidate_replays_sha256": "02c9f91928619721af97df0a5309b07a98c9162a7a1d518270cf3267fc538f94",
+  "checks": [
+    "All 24 isolated fixtures passed and matched candidate replay JSON. Original 8554/7EA4 instructions run; query returns zero, so erase is skipped; exact merged data and write arguments are asserted.",
+    "Confirmed provider write amount is max(width,capacity), status is normalized, and 8554 forwards its result. Only read and write callback boundaries remain controlled."
+  ],
+  "limitations": [
+    "Synthetic callback outputs and memory only; no physical writes, callback mutation, erase path, capacity>512 or invalid-pointer behavior. No canonical admission."
+  ]
+}

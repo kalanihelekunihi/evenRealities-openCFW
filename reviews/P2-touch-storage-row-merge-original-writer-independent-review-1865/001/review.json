@@ -1,0 +1,16 @@
+{
+  "review_id": "1865",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-storage-row-merge-original-row-writer-1856/001",
+  "candidate_receipt_sha256": "aff970c08ee1131b561605d20b4a296d60b36d8a6ab92df26568d6651133de06",
+  "body_sha256": "5efa45534f738184ed2af12e316d028cb3d458d54b1227884b64b4f66c33c050",
+  "candidate_replays_sha256": "7bee52698d2fab185661cb73e9a5ec63b094245b8bf94b2ed32640990555c2aa",
+  "checks": [
+    "Receipt pins match; isolated replay passed all 24 fixtures and matched candidate JSON byte-for-byte. Original 8554 calls 7EA4, which executes original row writer 4810, provider query, read, readiness and copy paths.",
+    "The checked 128-byte command buffer, destination, length-rejection path, ignored 8D50 result and restored SP match the bounded fixtures. Only 8D50 is intercepted."
+  ],
+  "limitations": [
+    "Synthetic source and callbacks; no physical flash mutation, invalid memory, concurrency or capacities above512 are established. No canonical admission."
+  ]
+}

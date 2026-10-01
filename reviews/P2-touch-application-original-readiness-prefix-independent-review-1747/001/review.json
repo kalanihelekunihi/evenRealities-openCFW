@@ -1,0 +1,23 @@
+{
+  "review_id": "1747",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-original-readiness-prefix-1746/001",
+  "candidate_receipt_sha256": "f0e879a47e18c6e88a889b1c988bc86c6dca5f12d0267ef10b6e993e0e15ff02",
+  "candidate_pseudocode_sha256": "d83b2dd7d53fb8d1218d805e94cd565614a4531b4ab64d84135dbc902d2885d6",
+  "candidate_replay_sha256": "6e9287be717b8c05ae1452aa867653eebc88151ee6c42ebf92b854459d124d20",
+  "candidate_replays_sha256": "c0bf7a3bfd4d9cd7f7c8b804867a8214c259e5e2237bd1cc8744235d025f3bbd",
+  "candidate_progress_sha256": "b206ff0f0ef21df3f11816c8f920299d1bdb04a9aa6a3de173e7ea6534b7678f",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Candidate and source hashes match. Isolated replay matched replays.json, budgets.json, and progress.json exactly and reached the stated 0x3D50 stop with inherited startup assertions intact.",
+    "Original 9E18 executes twice. The first call takes the measurement-start path; after its state byte becomes one, the explicitly hooked read of 0x4003001C supplies counter 0x80000000 and measurement 17. The next original call completes the calculated-output path and clears the state byte.",
+    "Original clock division, result storage and finalization execute. The exact remaining function controls are the four storage calls [8A38, 8A78, 8AE0, 8AAC]; no 9E18 replacement is present.",
+    "The peripheral hook's single mutation is bounded to its documented read condition and is recorded in progress.json. It does not establish a real counter transition or physical readiness."
+  ],
+  "limitations": [
+    "Readiness completion is modeled through a synthetic memory-read hook. Physical timing, hardware IRQ delivery, and peripheral progression are unproven.",
+    "Four storage helpers remain controlled; only the observed startup path is covered. Private evidence only; no canonical admission or C implementation."
+  ]
+}

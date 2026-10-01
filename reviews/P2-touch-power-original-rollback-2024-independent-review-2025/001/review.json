@@ -1,0 +1,19 @@
+{
+  "review_id": "2025",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-power-original-rollback-2024/002",
+  "candidate_receipt_sha256": "027b795232838ccf8395291c8ecd130217d2210bfb4141321e42a9bd5b853938",
+  "candidate_pseudocode_sha256": "e7206dee3b698854b0729365fc487e9a6143a113247296dd0fe8924d7b8e406c",
+  "candidate_replay_sha256": "4591a2087c28e2c0ec6b2be4387739364a45d27503e1c4f7aeb333c84ad5bcd7",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Source and artifact pins match; isolated replay reproduced all 32 rows exactly.",
+    "On successful probes, all three callbacks run in mode 1, the optional mode-4 pass runs under PRIMASK 1 unless skipped, the original WFI leaf executes under PRIMASK 1, and mode 8 traverses 2,1,0 after mask restoration.",
+    "For a sentinel at node k, probing stops at k; mode-2 rollback walks only predecessors in reverse order (k-1..0), WFI is not reached, and the wrapper retains the sentinel result even when controlled rollback callbacks return zero. Frame and entry PRIMASK restore."
+  ],
+  "limitations": [
+    "Synthetic callbacks and WFI continuation are controlled; this does not establish physical wake, callback behavior or concurrency.",
+    "No canonical admission."
+  ]
+}

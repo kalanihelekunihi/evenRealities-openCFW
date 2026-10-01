@@ -1,0 +1,9 @@
+Independent review of touch-calibration-completion-6980-1513/001
+
+Receipt SHA-256 eb5220f8a7895520d5a3435b168f5783ddd39933274ced68ad55f75f4f9f5606; pseudocode d8b788d6c85b7af71de7326307659cd1dfb5f677a9f8b7d9b7c2ff27d994b698; replay 1f319442cc1f38e7667ec6ba6ae6a6b71337d337686c8c29c4d0dd9dae9b364c; image 371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87.
+
+Independent disassembly confirms body 0x6980..0x69BA: resolve peripheral through descriptor/configuration pointers; call original A6C0 with configuration word0 and literal 1,000,000; call 5FA4 with incoming R0, quotient and 5; poll peripheral +0x100 for bit 8, decrementing only after an unsuccessful nonzero-budget poll; always write and reread cleanup value 0xC1011111; return remaining budget and restore 16-byte frame. The first read occurs even with budget zero, and readiness on the last poll leaves a zero countdown. Literal data starts at 0x69BC.
+
+Isolated original-instruction replay passed 72 fixtures. It checks actual divide execution, exact controlled 5FA4 arguments, poll read count/readiness model, cleanup write/readback and frame.
+
+PASS_SCOPED. 5FA4 is controlled, readiness is modeled, and MMIO/timing are synthetic. No hardware timing or register behavior is established; no canonical admission.

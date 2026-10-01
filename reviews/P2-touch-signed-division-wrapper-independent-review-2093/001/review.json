@@ -1,0 +1,21 @@
+{
+  "review_id": "2093",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-signed-division-wrapper-2092/001",
+  "candidate_receipt_sha256": "0f6c89749eb6001a3f0551aece538409ec64b2a41a452d56bce290ab95b0d829",
+  "candidate_pseudocode_sha256": "5dc831e8984b88ff0e6a64007958231c80419c565b3561fb080f6bcaf7838aba",
+  "candidate_replay_sha256": "8c49112ff52fb6995522b4b5bb64738e6af60e559d5ec5db15518b3f14010810",
+  "replays_sha256": "095b6754b22206344e3a8c3f66c5c6b379b75b59948be1e79e128cf2dc4175da",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Candidate receipt and all three declared file hashes match. The full pinned touch.flash.bin hash also matches the receipt source hash.",
+    "Independent byte inspection at file offset 0x76A0 (runtime 0xA9A0 under the supplied 0x3300 mapping) gives 00 29 F8 D0 16 E7 70 47. The owned six bytes decode as CMP R1,#0; BEQ 0xA996; B 0xA7D4. The conditional branch uses PC+4 plus sign-extended -8 halfwords; the unconditional branch uses PC+4 plus sign-extended -234 halfwords. The adjacent 0xA9A6 BX LR is outside the declared span.",
+    "The isolated replay regenerated 320 cases and passed the numerator/denominator result, stack, terminal-PC and zero-hook assertions. It covered the stated 64 boundary pairs and 256 deterministic random pairs, including INT_MIN / -1 and denominator zero.",
+    "The candidate keeps the shared zero-denominator body at 0xA996 and its 0xA9A8 hook separate from this wrapper's ownership. That is consistent with the wrapper's branch target and avoids recounting shared instructions."
+  ],
+  "limitations": [
+    "The replay reaches the nonzero signed-division body and the zero hook boundary; it does not prove arbitrary caller coverage, atypical LR or exception behavior, or all outcomes of the shared implementation beyond its separately reviewed evidence.",
+    "This is scoped private evidence only. No canonical function admission or surrounding image completeness is established."
+  ]
+}

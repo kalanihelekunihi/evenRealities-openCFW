@@ -1,0 +1,20 @@
+{
+  "review_id": "2117",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-sensor-postprocess-4c04-2116/001",
+  "candidate_receipt_sha256": "d70984b9c7bb7aa4d88c3efc29da7ba7f4a99f9731347bf5f0e2815fef8beb6f",
+  "candidate_pseudocode_sha256": "751ca2368b1f8e8e20b3600676dd32c754d2b20e7ee1e98a7429e89bb4456e93",
+  "candidate_replay_sha256": "c32525950c8b41e869f243ca9b8d3e16135a4c02507065636551433ba8d7c6d2",
+  "candidate_replays_sha256": "d4b3ac39618cb6c6fcc93b839bd0cd7fa05e288b868f3239195385ceed17ad1f",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "All candidate pins match. Isolated replay passed all 192 original-body cases.",
+    "The cases cover all three-bit enabled masks, all three-bit type-7 skip masks and three status patterns. Traces verify descending index order, exact 7DDE call gating, fresh row-base reads at context+12, byte field 123 selection, 4BA8 calls only on enabled non-type-7 rows, and the bitwise-OR accumulator including the high-bit status case.",
+    "The 64-byte body is 4C04..4C44; the adjacent 4C44 entry is excluded. Only 7DDE/4BA8 effects are controlled, consistent with the documented boundary."
+  ],
+  "limitations": [
+    "Controlled 7DDE/4BA8 effects do not establish their actual semantics, row-type meaning, or physical sensor behavior. Mutation is described by fresh loads but no adversarial helper-mutation guarantee is established here.",
+    "No caller closure, whole-image completeness, or canonical admission is established."
+  ]
+}

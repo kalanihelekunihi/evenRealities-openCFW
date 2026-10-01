@@ -1,0 +1,30 @@
+{
+  "review_id": "1867",
+  "status": "BINDING_CLARIFICATION",
+  "accepted": false,
+  "reason": "Correct review-task numbering after independent report content was written under mismatched review IDs. All original reports are preserved; this audit does not change their conclusions or candidate artifacts.",
+  "assignments": [
+    {
+      "queued_review_id": "1839",
+      "expected_candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-extended-read-first-phase-correction-1832/001",
+      "candidate_receipt_sha256": "64180aa71e780e8af4e9590932f181a2b4ec97542bf8105dd4255625a9794c88",
+      "existing_content_report": "reviews/P2-touch-extended-read-first-phase-correction-independent-review-1853/001/review.json",
+      "note": "The report content is correctly bound to 1832/001 but uses report identifier 1853 rather than the queued review ID 1839."
+    },
+    {
+      "queued_review_id": "1845",
+      "expected_candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-extended-read-status-combinations-1838/001",
+      "candidate_receipt_sha256": "b66e999bf9b11159efa5c5c6abbb859e3f35a12b7b544ae3040d2eb21ed95af2",
+      "existing_content_report": "reviews/P2-touch-extended-read-status-combinations-independent-review-1839/001/review.json",
+      "note": "The report content is correctly bound to 1838/001 but uses report identifier 1839 rather than the queued review ID 1845."
+    },
+    {
+      "queued_review_id": "1847",
+      "expected_candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-storage-dispatch-original-extended-read-1840/001",
+      "candidate_receipt_sha256": "01ce09910d09824df112999a39a344c5ec710659582dddee113b13367f680c7f",
+      "existing_content_report": "reviews/P2-touch-storage-dispatch-original-extended-read-independent-review-1845/001/review.json",
+      "note": "The report content is correctly bound to 1840/001 but uses report identifier 1845 rather than the queued review ID 1847."
+    }
+  ],
+  "conclusion": "Candidate-to-content bindings were checked directly from each report path and receipt. This is an ID-label correction only; preserve all prior report files and their review findings. No semantic acceptance or canonical state change."
+}

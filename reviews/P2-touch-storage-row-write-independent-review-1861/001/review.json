@@ -1,0 +1,16 @@
+{
+  "review_id": "1861",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-storage-row-write-4810-1854/001",
+  "candidate_receipt_sha256": "624de09e72aad1941110a6ca70743a34547bee9a3f880a45d9661c761c0c6fc5",
+  "body_sha256": "e94e5268d58135c25e47aaa134d9d82858e6f6547f1622f1677903a1626324b4",
+  "candidate_replays_sha256": "a2c211ed639145ba4afad68f8081e1e9d2efe75db0cac565fa4f3c2bf2e65ebc",
+  "checks": [
+    "Receipt pins match and 72 isolated fixtures reproduce exactly. Body boundaries exclude alignment and literal; original geometry helper establishes 128-byte rows.",
+    "Original A7CC rejects nonmultiples of 128 with the pinned error; otherwise original 8D50 is called for each 128-byte segment, its result ignored, pointers advance, and an unsigned wrapped end comparison controls loop entry. Misaligned destination is accepted; a wrapped end below start skips the loop."
+  ],
+  "limitations": [
+    "Only 8D50 is controlled, so command effects are unknown. No physical flash, malformed memory or canonical claim."
+  ]
+}

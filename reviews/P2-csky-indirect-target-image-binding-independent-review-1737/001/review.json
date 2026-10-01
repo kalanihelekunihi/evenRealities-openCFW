@@ -1,0 +1,20 @@
+{
+  "review_id": "1737",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-indirect-target-image-binding-1722/001",
+  "candidate_receipt_sha256": "0a33a4809d5348a34084b693a3e472b583a6dfe07ae181e1138cb648da9a65fe",
+  "candidate_manifest_sha256": "3105c304a1f517bb229efa80685ad6de8e102a9b4268125c97a59a366900289c",
+  "candidate_source_identity_sha256": "1bee1b60d928e30dd0fda14b28f73681f33ebeda0e8096fd2f1287776c055499",
+  "candidate_pseudocode_sha256": "878e33567a52f387cf04ba9ef1dae6169c0c41db36c58c143d63c7d4654ec183",
+  "candidate_verifier_sha256": "4303c3cd1d7e596ef8f78fd7f45556ab8a99ddeb2676925558c98c5cb9572cc0",
+  "checks": [
+    "The candidate verifier passes, reproducing nested image identity, exact child slices, literal/gap bytes, disassembly and source-coordinate fixtures. Receipt and manifest pins agree.",
+    "The two indirect target values bind to offset 0x100 in distinct authenticated stage2 children: A SRAM at conditional runtime 0x10023500 and B stage2 at 0x10003100. Each bounded 30-byte entry stub has the stated stack setup, CR31 bit clear, direct callees and terminal self-branch; following BKPT halfwords remain unowned.",
+    "The A2C route/value distinction is accurately documented: B's target coordinate is in IRAM although the equal-sentinel route writes the B payload to DRAM. The packet leaves physical visibility and actual route selection unresolved."
+  ],
+  "limitations": [
+    "Image loading, helper success, live route selection, DRAM-to-IRAM visibility and physical fetch are not established.",
+    "This evidence covers two source-backed entry stubs only, not whole-stage2 closure, canonical mapping or coverage."
+  ]
+}

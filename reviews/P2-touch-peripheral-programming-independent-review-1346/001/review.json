@@ -1,0 +1,21 @@
+{
+  "review_id": "1346",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-peripheral-programming-98f4-1345/001",
+  "candidate_receipt_sha256": "4f8db441356d454bf0e79fdf80776f03550975790449fc1ec1817347abdea514",
+  "candidate_pseudocode_sha256": "b710e43f13b45481b8a1a8b345c2a2534c4b5159be943437b0094357af76676c",
+  "candidate_replay_sha256": "a1e4e054e6042f2518dd376d68f4399ea4523073047db842f2cccf3bd46946d4",
+  "candidate_replays_sha256": "32ea6fe6fcab103c3ceeb979ab2eef9865ee9512b77d31df660116dc5932c0e1",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Source and all candidate artifact hashes verify. Independent M-class decoding confirms the 0x98F4..0x9AAA span, guard entries and return blocks, source byte offsets, and literal pool. The control mask is 0xFFFF3FFF; literal values for mode-dependent registers are 0x307, 0x2A0003, 0x2A1013, 0xEC8, 0xE88, 0xFC8, 0xF88, 0xF08, and 0xF48.",
+    "The instruction flow matches the described successful-path derivation: control bits 16/8 from config bytes 5/8; width fields from words at +0x10 and +0x0C with low-field masks; bit 11 when byte 6 is zero; mode in bits 31:30; reread and mask at base+0; byte-7 bit-31 value at base+0x80; conditional mode/byte-9 register values; conditional base+0x304 store only when byte 1 is nonzero; +0x310 field pack; +0x200/+0x204 values; five clears; and the two +0xF48 writes with fresh read. Context byte/halfword/word stores and ten clears match the code. In particular, byte 1 == 0 skips the +0x304 store rather than writing zero.",
+    "The immutable replay was copied to a unique review path and all 864 M-class fixtures passed. It checks ordered peripheral and context writes, return zero, and restored SP without helper substitutions. Its width coverage uses the same selected width at both config offsets, and skips the invalid simultaneous byte-1/byte-5 case."
+  ],
+  "limitations": [
+    "Fixture coverage does not include other signed byte values, different widths at the two width fields, invalid-config continuation through BKPT, or concurrent mutation. Guard coverage is supplied separately by candidate 1343.",
+    "The review establishes instruction behavior under synthetic memory only; physical peripheral effects, concurrency, and global ownership remain unresolved. No canonical admission or C implementation is claimed."
+  ]
+}

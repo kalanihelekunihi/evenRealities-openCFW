@@ -1,0 +1,17 @@
+{
+  "review_id": "1965",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-startup-storage-trace-audit-1956/001",
+  "candidate_receipt_sha256": "8c031cd5e8424262d8973d743c92c69e40159ec897f3c94659e23f628e52959b",
+  "parent": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-original-storage-chain-1954/001",
+  "parent_receipt_sha256": "ca57fc7a6ab73390cf5265a8149dc6511696714f6420ae5999369a7bf5e409eb",
+  "checks": [
+    "Parent receipt and all pinned files match the audit\u2019s recorded hashes; the audit JSON pin matches. Independently recounted every listed PC from the parent replay\u2019s full 7,384,880-entry trace, and all 25 address counts match exactly. The parent\u2019s four observed public-call records and arguments match the audit.",
+    "The decoded calls correspond to 8A38, 8A78, 8AE0, and 8AAC in that order. Stop PC is 3D50 and PRIMASK is zero. Counts include 18 entries at 4810 and 90 entries at 8BF4; these are trace-derived totals for this one fixture, not whole-image totals.",
+    "This audit is an independently reproducible trace summary and does not add instruction ownership or coverage claims."
+  ],
+  "limitations": [
+    "The parent run uses synthetic clock/status reads and explicit modeled interrupt delivery; storage status and flash are synthetic. No physical effects or whole-image coverage are established, and canonical admission remains false."
+  ]
+}

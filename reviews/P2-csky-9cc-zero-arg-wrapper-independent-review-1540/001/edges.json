@@ -1,0 +1,84 @@
+{
+  "schema": "csky-zero-mode-wrapper-edges-v1",
+  "inputs_consumed_by_wrapper": [
+    "R0 forwarded unchanged to 0x100009CC",
+    "R1 forwarded unchanged to 0x100009CC"
+  ],
+  "wrapper_writes_before_call": [
+    "u32 R2=0"
+  ],
+  "wrapper_stack_effects": [
+    "push R15",
+    "pop R15; return via restored R15"
+  ],
+  "memory_effects_in_wrapper": [],
+  "direct_call_target": "0x100009CC",
+  "direct_callers": [
+    {
+      "site": "0x10000D5E",
+      "caller": "C40 transfer/setup path",
+      "callsite_args": [
+        "R0=24",
+        "R1=4",
+        "R2=unknown incoming value (overwritten to 0 before child 9CC)"
+      ],
+      "callee_9cc_args": [
+        "R0=24",
+        "R1=4",
+        "R2=0"
+      ],
+      "return_use": "R0 shifted left 4 then ORed with 0x08C09406"
+    },
+    {
+      "site": "0x10000EA4",
+      "caller": "0x10000E84",
+      "callsite_args": [
+        "R0=return from 0x100006A4 (called with R0=17)",
+        "R1=R5=(entry R0<<4)",
+        "R2=unknown incoming value (overwritten to 0)"
+      ],
+      "callee_9cc_args": [
+        "R0=caller-derived",
+        "R1=R5",
+        "R2=0"
+      ],
+      "return_use": "saved to R6 and later written into peripheral fields"
+    },
+    {
+      "site": "0x10000EB8",
+      "caller": "0x10000E84",
+      "callsite_args": [
+        "R0=(return from 0x10000B04 * 100) modulo 2^32",
+        "R1=R5",
+        "R2=unknown incoming value (overwritten to 0)"
+      ],
+      "callee_9cc_args": [
+        "R0=caller-derived",
+        "R1=R5",
+        "R2=0"
+      ],
+      "return_use": "shifted left 4 and passed as R0 to next AF8 call"
+    },
+    {
+      "site": "0x10000EC0",
+      "caller": "0x10000E84",
+      "callsite_args": [
+        "R0=(previous AF8 return << 4) modulo 2^32",
+        "R1=100",
+        "R2=unknown incoming value (overwritten to 0)"
+      ],
+      "callee_9cc_args": [
+        "R0=caller-derived",
+        "R1=100",
+        "R2=0"
+      ],
+      "return_use": "low byte later stored to controller+0x40"
+    }
+  ],
+  "return_behavior": "R0 and other caller-visible register results are whatever 0x100009CC leaves on return; AF8 itself makes no post-call changes except restoring R15",
+  "outgoing_unresolved": [
+    "Full semantics/return contract of 0x100009CC are outside this bounded packet",
+    "Adjacent BKPT at 0x10000B02 is not classified as padding/data/code owner",
+    "Physical meaning of downstream caller MMIO remains outside this packet"
+  ]
+}

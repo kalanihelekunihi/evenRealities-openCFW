@@ -1,0 +1,9 @@
+Independent review of touch-calibration-nonzero-state-7bc0-1503/002
+
+Binding: candidate receipt SHA-256 7124e9adc2319d2f690cea6b32a483d059dfc95eb2c7d419e821a74c80d4875d; pseudocode SHA-256 792eb57723b45cc2dc5b2069bab0e59f05dc2fa39492fcd9aa13100fe97b98e3; candidate replay SHA-256 481126d16d4726442042f1b12341b46ef558f8347403bdb3f9bad147843961e6. Image SHA-256 371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87.
+
+Manual check: independently followed the 0x7BC0..0x7CEE body and verified its fifth stack argument access, stride selection, peripheral pointer reads and writes, mode-dependent packet pointer, wrapped arithmetic, 16-bit saturation, zero-to-one adjustment, return status and frame restoration. Literal 0x7CF0 is 0xFFFFEFFF (control-bit clear mask); 0x7CF4 is 0x0000FFFF. The arithmetic agrees with the candidate's model, including precedence of the record-mode correction and the low-16-bit output store.
+
+Replay: ran an isolated copy of the candidate's original-instruction replay against the pinned source image. Result: PASS, 324/324 fixtures. Each fixture supplies nonzero 6AC0 status, so the acquisition path is skipped; call arguments/status, output, control write and restored stack are checked.
+
+Scope: PASS_SCOPED. The 6AC0 result is controlled, memory/MMIO are synthetic, and zero-state acquisition, mode-123==7, helper clobbering and physical effects are outside this packet. No canonical admission.

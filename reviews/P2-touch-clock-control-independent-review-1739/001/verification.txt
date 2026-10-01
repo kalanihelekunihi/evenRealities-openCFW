@@ -1,0 +1,5 @@
+Review 1739 — PASS_SCOPED
+
+Candidate receipt SHA-256 is 666a29bd763bebccd25bb43946584124fc7420b3535ee37c6acf4c8888269abb. I independently decoded both spans from the pinned source with arm-none-eabi-objdump, then reran the original fixtures with outputs redirected to /tmp/review1739-independent. All 36 pass and replays.json matches exactly.
+
+The guard precedes all writes. On 9D90's active path the 0x40030034 transform uses FFFFF0FF plus OR 0x100; 0x40030018 uses FFFFF0F0 plus OR 0x908. On 9DDC the mask at 0x40030018 is the literal 00000F0F AND, so high bits clear while masked low bits remain. Body boundaries leave alignment and referenced literal pools outside the code spans. Physical register effects and concurrent mutation are not demonstrated.

@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-storage-last-row-original-sequence-independent-review-1773",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "scope": {
+    "candidate": "analysis/touch-storage-last-row-original-sequence-1768/001",
+    "code_span": [
+      "0x7fa4",
+      "0x8054"
+    ],
+    "reviewed": "The candidate body is 7FA4..8054 (176 bytes, 84 instructions), with the separate 7FA0 leaf independently decoded as LDR word [R0+4]; BX LR. The 192 isolated fixtures reproduce exact selected pointers, validation calls, status returns, SP and stop PC. The fixture model includes first-pass/second-pass scanning; the pointer continues after the first scan rather than restarting at the base. Only 7F7C validation is substituted."
+  },
+  "pins": {
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "candidate_receipt_sha256": "024efb061d93faa5229b4a33b13e3c592f915b6daed6aff6774d33f90b4cfea7",
+    "body_sha256": "aac740b8b0653e35c15ed9a9fe72dfc490889b095910c96990c5d45ed6673498",
+    "candidate_replays_sha256": "d98ef18f8a6dd2dba8e930d81e4963b19747e3af3aed1ec11a3faf3fc4234d2c"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "The candidate body is 7FA4..8054 (176 bytes, 84 instructions), with the separate 7FA0 leaf independently decoded as LDR word [R0+4]; BX LR. The 192 isolated fixtures reproduce exact selected pointers, validation calls, status returns, SP and stop PC. The fixture model includes first-pass/second-pass scanning; the pointer continues after the first scan rather than restarting at the base. Only 7F7C validation is substituted."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "All candidate file and source hashes match. Isolated replay output is byte-identical to candidate replays.json."
+    }
+  ],
+  "limitations": [
+    "The synthetic rows use repeating sequence values; physical row access, concurrent mutation and larger scans remain outside the evidence.",
+    "7F7C remains controlled; validation behavior is not established here. No canonical admission."
+  ],
+  "checks": [
+    {
+      "command": "candidate pin and artifact hash checks",
+      "result": "PASS"
+    },
+    {
+      "command": "independent reader and body boundary review",
+      "result": "PASS"
+    },
+    {
+      "command": "isolated replay of all 192 fixtures",
+      "result": "PASS; exact replay JSON match",
+      "artifact": "isolated-replays.json"
+    }
+  ],
+  "canonical_or_coverage_change": false
+}

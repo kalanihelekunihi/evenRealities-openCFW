@@ -1,0 +1,15 @@
+{
+  "review_id": "1909",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-storage-reset-original-pointer-checksum-1902/003",
+  "candidate_receipt_sha256": "9bb841ea5f50a3bda8f6fac5dd19ba89505829cc68c802e822b5f80ed3e94327",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Candidate receipt binds the supplied source image; the 20-fixture count and all listed artifact hashes match. Isolated replay passes and its JSON is byte-identical to the stored traces. The 001/002 attempts remain untouched.",
+    "Traces execute original 810C pointer selection and 7F6C/7E68 checksum instructions, with only sequence helper 8058 and publication calls controlled. For the exercised width-128/count-2-or-3/copies-1 cases, observed pointer transitions and primary/mirror destinations agree with trace prose. The checksum input begins at row byte offset one. The traces also show initial primary/mirror publication and later row writes/error handling as described for these inputs."
+  ],
+  "limitations": [
+    "Trace evidence only: it does not establish complete extended-mode pseudocode or path coverage. Sequence and write helpers are controlled; other dimensions, callback mutation, wrap cases, physical storage/hardware, and canonical admission remain unresolved."
+  ]
+}

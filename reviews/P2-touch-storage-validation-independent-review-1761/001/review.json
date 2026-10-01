@@ -1,0 +1,22 @@
+{
+  "review_id": "1761",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-storage-validation-8220-1760/001",
+  "candidate_receipt_sha256": "0cc8a134fc138322f88ab7d581dd35ae7659d93f6e426a0a9295c20551be330a",
+  "candidate_pseudocode_sha256": "d573ba6d7a2c22f13bb42957c350e6a35c717c07faa9879bc9726a4172558a2c",
+  "candidate_replay_sha256": "cb1de7964e58184691c62fd6e0b4cea40c75e724b5da5a30677245e0ecf40b23",
+  "candidate_replays_sha256": "3913c3fdd4285aef32954424f765a0cbdd32a5ed044e2d3bba9c21ca174beaf3",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Candidate/source hashes match. Independent Thumb disassembly confirms the 104-byte, 51-instruction body 8220..8288; its error literal starts at 8288 outside the code span.",
+    "All 1,296 original-instruction fixtures replayed in isolation and replays.json matched byte-for-byte. Rejection order is record word+8 zero, record word+0 zero, byte+4 >1, byte+7 >1, byte+6 >1, then byte+5 outside 1..10.",
+    "On valid records, 8200 receives [context, record]; its controlled R0 is forwarded as callback R2. The callback is loaded from provider+40 with provider=context+28; its other arguments are provider word+0 and the initially captured record word+8.",
+    "The callback's nonzero result maps to success zero; zero maps to the pinned 0x093E0002 error. The fixture models both dependencies as controls and restores stack/register state."
+  ],
+  "limitations": [
+    "8200 and provider callback semantics/mutations are controlled. Pointer validity, concurrent mutation and physical storage behavior are not established.",
+    "No canonical admission or C implementation."
+  ]
+}

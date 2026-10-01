@@ -1,0 +1,19 @@
+{
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-frequency-divider-chain-1264/001",
+  "candidate_source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "candidate_files": {
+    "pseudocode.md": "e1bd6914e71a634453b9a04bc09d1ee5876bec36de7cbb4bf9eb865e260d1892",
+    "replay.py": "d9e3730b698aab7e0668dd8dc387c88e3416db561bc7078e11267a4f02cedd14",
+    "replays.json": "5fd7926543987fae5cb67ff1615c21cf5a91262e2933210d06774ac1ea62ba1a"
+  },
+  "review_result": "PASS_SCOPED",
+  "checks": {
+    "original_bytes": "Independent Thumb+MCLASS decoding confirms 46F8's fresh outer-field read, call to 9F9C, add-half-then-shift calculation, and restored frame. 9F9C independently rereads the inner field, dispatches selector 0 to 9C44, 1 to 9C38, otherwise zero, then applies its own rounded shift. Both exact executable spans exclude following pools/NOPs.",
+    "replay_and_oracle": "All 192 isolated original-byte combinations pass and regenerate candidate rows exactly. Independent arithmetic checks the modulo-u32 add-half rule over all four shift values at each stage; two ordered reads, selector calls, returned result, and SP are checked."
+  },
+  "limits": [
+    "The test holds the synthetic selector register constant across both fresh reads; simultaneous hardware changes are not tested.",
+    "Selector/source helpers are controlled, and physical frequency/register meaning is not proved."
+  ],
+  "accepted": false
+}

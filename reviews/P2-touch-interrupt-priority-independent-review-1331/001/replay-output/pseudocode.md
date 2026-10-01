@@ -1,0 +1,5 @@
+# Touch interrupt priority A214
+
+Body A214..A26C is 88 instruction bytes, followed by two literal words. Signed nonnegative interrupt index selects word at external base + 4*(unsigned(index)>>2 + 192). Signed negative index selects system base + 4*(unsigned(u32((index&15)-8))>>2 + 6) + 4, with 32-bit modular arithmetic throughout. Both paths freshly load that word, select byte lane (index&3)*8, clear that byte, replace it with low byte of priority<<6, store and restore four-word frame. No index or priority guard occurs locally; caller supplies its guard.
+
+Receipt-derived original-instruction fixtures cover indices minus16 through15, five priority inputs and three old words. Exact write address/value and frame restoration match the separate instruction-derived model. Negative indices outside architectural interrupt validity are included as arithmetic evidence, not valid interrupt claims. Physical priority semantics, invalid mappings and concurrent register changes remain unresolved. No canonical admission or C implementation.

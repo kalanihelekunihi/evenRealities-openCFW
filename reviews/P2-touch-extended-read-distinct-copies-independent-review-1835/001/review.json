@@ -1,0 +1,16 @@
+{
+  "review_id": "1835",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-extended-read-distinct-copies-1828/001",
+  "candidate_receipt_sha256": "e795ab5d54e6442cc770f7197871a30db8dd7b2c1769cbea1ff0bde3c4f27fc5",
+  "body_sha256": "10dc591b37adac5c114142464a4ad4324af575b483f655ca6cb66ac0503c7ec7",
+  "candidate_replays_sha256": "9f7afb8d1ff40d58b201f080cd755306ac0f3627f5fb4ea451da5b15df9aa5b6",
+  "checks": [
+    "Receipt pins verified. Isolated replay passed 15 original-instruction traces and exactly reproduced candidate replay JSON.",
+    "Distinct row payloads make the observed mapping discriminating: with current pointer at primary row zero, logical row zero resolves to primary row zero after wrap, while logical rows one through three resolve to alternate rows five through seven. Requested slices, suffix, status and SP match."
+  ],
+  "limitations": [
+    "Mapping is specific to tested current pointer and valid rows. Other current positions, invalid candidates, exhaustion, mirrors and physical storage are outside this candidate. Trace-only; no canonical admission."
+  ]
+}

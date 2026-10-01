@@ -1,0 +1,31 @@
+{
+  "schema": "csky-adjacent-range-evidence-v1",
+  "before_candidate": {
+    "runtime_range": [
+      "0x10000AF4",
+      "0x10000AF8"
+    ],
+    "file_range": [
+      "0xB0C",
+      "0xB10"
+    ],
+    "bytes": 4,
+    "classification": "referenced literal word, outside AF8 body",
+    "raw_hex": "80120020",
+    "little_endian_value": "0x20001280",
+    "reference_instruction": "0x10000AE6 LRW R3 -> 0x10000AF4"
+  },
+  "after_candidate": {
+    "runtime_range": [
+      "0x10000B02",
+      "0x10000B04"
+    ],
+    "file_range": [
+      "0xB1A",
+      "0xB1C"
+    ],
+    "classification": "BKPT halfword/code-like gap, ownership unresolved",
+    "raw_hex": "0000",
+    "not_in_candidate": true
+  }
+}

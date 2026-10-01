@@ -1,0 +1,16 @@
+{
+  "review_id": "1849",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-storage-write-provider-adapters-1842/001",
+  "candidate_receipt_sha256": "af878b290d26874573facfe3d6c5adc3ba72d69cbbecb46728214af21fc73d5a",
+  "shared_body_sha256": "4d7cce66f8a0cdcc41f454fd23cadbb17ba7310de9e474fd99a1c7b14c614cbf",
+  "source_sha256": "371d8a61b659a33b4cad9a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "All receipt file pins match. Isolated replay passed 288 fixtures for both entries; output JSON exactly matched the candidate. Both original 96-byte bodies decode to identical instruction bytes/control flow.",
+    "Verified query always precedes enable-byte gate; amount is unsigned max(width,capacity). Disabled returns zero after query. Enabled nonzero query calls erase; erase failure returns error, otherwise write follows; write status maps zero to success and nonzero to the pinned error literal."
+  ],
+  "limitations": [
+    "Query/erase/write callbacks are controlled without mutation. Readiness meaning, physical erase/write effects, and hardware storage are unresolved. No canonical admission."
+  ]
+}

@@ -1,0 +1,5 @@
+Replayed the candidate verifier from the isolated review snapshot. The snapshot uses the exact candidate files and a review-local wrapper that resolves the repository root and feeds the authenticated original body path to objdump; verify-original.py preserves the candidate verifier byte-for-byte. The verifier passed all source/tool/dependency hashes, the complete body disassembly, caller bindings, and five static traces.
+
+Independent instruction finding requiring revision: 0x10000C0C is `andi r2, r2, 8`; 0x10000C10 branches back while the result is zero. The implemented ready gate is therefore mask 0x8 (bit 3). Pseudocode and fixture text currently claim mask 0x2 (bit 1). The candidate fixture validator does not compare the mask literal, so its PASS does not resolve this mismatch. Keep the candidate private pending a corrected packet and replay.
+
+Scope remains conditional BINH-A mapping only. No physical controller or delivery behavior is established.

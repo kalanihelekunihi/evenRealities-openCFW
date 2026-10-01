@@ -1,0 +1,47 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage1.bin:     file format binary
+
+
+Disassembly of section .data:
+
+10000e84 <.data+0xe9c>:
+10000e84:	14d4      	push      	r4-r7, r15
+10000e86:	ea24a010 	movih      	r4, 40976
+10000e8a:	3300      	movi      	r3, 0
+10000e8c:	b461      	st.w      	r3, (r4, 0x4)
+10000e8e:	3303      	movi      	r3, 3
+10000e90:	6d43      	mov      	r5, r0
+10000e92:	b464      	st.w      	r3, (r4, 0x10)
+10000e94:	e921002c 	bnez      	r1, 0x10000eec	// 0x10000eec
+10000e98:	45a4      	lsli      	r5, r5, 4
+10000e9a:	3011      	movi      	r0, 17
+10000e9c:	e3fffc04 	bsr      	0x100006a4	// 0x100006a4
+10000ea0:	6c57      	mov      	r1, r5
+10000ea2:	6dc3      	mov      	r7, r0
+10000ea4:	e3fffe2a 	bsr      	0x10000af8	// 0x10000af8
+10000ea8:	6d83      	mov      	r6, r0
+10000eaa:	6c57      	mov      	r1, r5
+10000eac:	6c1f      	mov      	r0, r7
+10000eae:	e3fffe2b 	bsr      	0x10000b04	// 0x10000b04
+10000eb2:	3764      	movi      	r7, 100
+10000eb4:	6c57      	mov      	r1, r5
+10000eb6:	7c1c      	mult      	r0, r7
+10000eb8:	e3fffe20 	bsr      	0x10000af8	// 0x10000af8
+10000ebc:	4004      	lsli      	r0, r0, 4
+10000ebe:	6c5f      	mov      	r1, r7
+10000ec0:	e3fffe1c 	bsr      	0x10000af8	// 0x10000af8
+10000ec4:	6cd3      	mov      	r3, r4
+10000ec6:	935f      	ld.w      	r2, (r3, 0x7c)
+10000ec8:	e4422001 	andi      	r2, r2, 1
+10000ecc:	e922fffd 	bnez      	r2, 0x10000ec6	// 0x10000ec6
+10000ed0:	3280      	movi      	r2, 128
+10000ed2:	b343      	st.w      	r2, (r3, 0xc)
+10000ed4:	e44620ff 	andi      	r2, r6, 255
+10000ed8:	c50655e6 	zext      	r6, r6, 15, 8
+10000edc:	b340      	st.w      	r2, (r3, 0x0)
+10000ede:	b3c1      	st.w      	r6, (r3, 0x4)
+10000ee0:	ea23a010 	movih      	r3, 40976
+10000ee4:	3ba7      	bseti      	r3, 7
+10000ee6:	e40020ff 	andi      	r0, r0, 255
+10000eea:	b310      	st.w      	r0, (r3, 0x40)
+10000eec:	ea23a010 	movih      	r3, 40976

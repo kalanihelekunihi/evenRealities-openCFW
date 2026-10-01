@@ -1,0 +1,192 @@
+{
+  "schema": "csky-bounded-callee-recovery-receipt-v1",
+  "status": "ready_for_review",
+  "component": "codec",
+  "image": "BINH-A conditional source-coordinate proposal",
+  "entry": "0x10000AF8",
+  "scope": {
+    "runtime_range": [
+      "0x10000AF8",
+      "0x10000B02"
+    ],
+    "child_file_range": [
+      "0xB10",
+      "0xB1A"
+    ],
+    "bytes": 10,
+    "code_bytes": 10,
+    "literals": []
+  },
+  "candidate_sha256": "38fc300b5abb347843f68fc859adcac4597d982672b4546907e43ac57875408e",
+  "caller_arguments": [
+    {
+      "site": "0x10000D5E",
+      "caller": "C40 transfer/setup path",
+      "callsite_args": [
+        "R0=24",
+        "R1=4",
+        "R2=unknown incoming value (overwritten to 0 before child 9CC)"
+      ],
+      "callee_9cc_args": [
+        "R0=24",
+        "R1=4",
+        "R2=0"
+      ],
+      "return_use": "R0 shifted left 4 then ORed with 0x08C09406"
+    },
+    {
+      "site": "0x10000EA4",
+      "caller": "0x10000E84",
+      "callsite_args": [
+        "R0=return from 0x100006A4 (called with R0=17)",
+        "R1=R5=(entry R0<<4)",
+        "R2=unknown incoming value (overwritten to 0)"
+      ],
+      "callee_9cc_args": [
+        "R0=caller-derived",
+        "R1=R5",
+        "R2=0"
+      ],
+      "return_use": "saved to R6 and later written into peripheral fields"
+    },
+    {
+      "site": "0x10000EB8",
+      "caller": "0x10000E84",
+      "callsite_args": [
+        "R0=(return from 0x10000B04 * 100) modulo 2^32",
+        "R1=R5",
+        "R2=unknown incoming value (overwritten to 0)"
+      ],
+      "callee_9cc_args": [
+        "R0=caller-derived",
+        "R1=R5",
+        "R2=0"
+      ],
+      "return_use": "shifted left 4 and passed as R0 to next AF8 call"
+    },
+    {
+      "site": "0x10000EC0",
+      "caller": "0x10000E84",
+      "callsite_args": [
+        "R0=(previous AF8 return << 4) modulo 2^32",
+        "R1=100",
+        "R2=unknown incoming value (overwritten to 0)"
+      ],
+      "callee_9cc_args": [
+        "R0=caller-derived",
+        "R1=100",
+        "R2=0"
+      ],
+      "return_use": "low byte later stored to controller+0x40"
+    }
+  ],
+  "return": "Returns child 0x100009CC post-state after restoring incoming R15; child semantics are out of scope.",
+  "open": [
+    "9CC full behavior/return range unresolved",
+    "BKPT B02 adjacent ownership unresolved",
+    "physical runtime mapping remains conditional"
+  ],
+  "mapping": "child file offset = runtime - 0x10000000 + 0x18; conditional only; no canonical admission",
+  "artifact_manifest": [
+    {
+      "path": "README.md",
+      "bytes": 471,
+      "sha256": "4b6463aa1aed02e50522dec6824dc38b1f6d53093428250a2eb93e7eff161c1c"
+    },
+    {
+      "path": "adjacent-literal.bin",
+      "bytes": 4,
+      "sha256": "175c14f6205b14f44d6a5bdcdebcd2447730678a5c427163b17731e3b2c82c2b"
+    },
+    {
+      "path": "adjacent-ranges.json",
+      "bytes": 698,
+      "sha256": "85d4e46fc2e59bdd7913acedd0e0c113c45f37778eb8a9bfed3629494f9b1fe1"
+    },
+    {
+      "path": "body.bin",
+      "bytes": 10,
+      "sha256": "38fc300b5abb347843f68fc859adcac4597d982672b4546907e43ac57875408e"
+    },
+    {
+      "path": "caller-c40-context.txt",
+      "bytes": 841,
+      "sha256": "df1b657d66876d629c6d37869830e1df59fb850f8491e6b22e0dc61ac894ca44"
+    },
+    {
+      "path": "caller-contexts.txt",
+      "bytes": 1573,
+      "sha256": "88175f80c823d73cbc7ba2c50247315cc6cf9f183f5d2729fa392bfd8a5b31da"
+    },
+    {
+      "path": "caller-e84-context.txt",
+      "bytes": 1986,
+      "sha256": "c121b79be3b5f4a1fa6ba674a29e897a8812b73a00bc5a9825faa3d15ce28194"
+    },
+    {
+      "path": "commands.json",
+      "bytes": 978,
+      "sha256": "804305949e3e0d4fba6467dd059cd8060e5987447f913b182e0a13e9da9e858d"
+    },
+    {
+      "path": "direct-call-sites.txt",
+      "bytes": 220,
+      "sha256": "4c2726551a434c522dc47470f7a6d03e52efe26a3e52549c8f72c0da2a3427dd"
+    },
+    {
+      "path": "disassembly-body.txt",
+      "bytes": 377,
+      "sha256": "f7a78258c368e20f9f16a2f416717aaa0d687e104e952d193f5d09439fad9999"
+    },
+    {
+      "path": "disassembly-context.txt",
+      "bytes": 1026,
+      "sha256": "a8f4ffff00c9a1d29edfb5a6de6c99cb1fbdc9076b0b09f7aa0a0e8ef6873bcd"
+    },
+    {
+      "path": "edges.json",
+      "bytes": 2448,
+      "sha256": "bb4f1f57e2b7d110c91539f034c8f801d4a5c71c5567f126e301ab671348208f"
+    },
+    {
+      "path": "fixtures.json",
+      "bytes": 3911,
+      "sha256": "35ac1ffbdcac1ebda41d8240e5682a06912234b2b8edb9aed197c8d41ae3fbcd"
+    },
+    {
+      "path": "geometry.json",
+      "bytes": 607,
+      "sha256": "50dfdb9bfa26a469ca81b50536b2b19e79561a656faba3900f3051b1817a382c"
+    },
+    {
+      "path": "input-pins.json",
+      "bytes": 2367,
+      "sha256": "0cd76532afbb4de5eb2ad7d9c7f92c00ec6457cb1f17110cbd9701c564b3b3af"
+    },
+    {
+      "path": "literal-and-gap-evidence.txt",
+      "bytes": 86,
+      "sha256": "34bde51b48949205c768f38f3a2fbfc6fd7a538a63c84f77224c16e1b300b54f"
+    },
+    {
+      "path": "pseudocode.md",
+      "bytes": 2069,
+      "sha256": "f7e231b509b9bc22bfc9ce3fe79db11498bece86337e4ab82b000d18621b6f0e"
+    },
+    {
+      "path": "replay.py",
+      "bytes": 591,
+      "sha256": "7facceb585d7228fde812e55907aaac34a99c7fcedf9aa497e29dbd1426b75c2"
+    },
+    {
+      "path": "verification.txt",
+      "bytes": 176,
+      "sha256": "89d48c557e4666db7e5ae09f62d2a4a3320ed058c0b3acb86cf5070fc14f5fa4"
+    },
+    {
+      "path": "verify.py",
+      "bytes": 4096,
+      "sha256": "7ba85358a7afc2655025cd208ae73de0bd303805b9c2b09a7275ea85c5eef01f"
+    }
+  ]
+}

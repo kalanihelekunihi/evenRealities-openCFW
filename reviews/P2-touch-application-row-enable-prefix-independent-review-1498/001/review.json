@@ -1,0 +1,18 @@
+{
+  "review_id": "1498",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-row-enable-prefix-1497/001",
+  "candidate_receipt_sha256": "adab0b89b42f4b3623bfa6b4fd021679c588ab612a10f22b0fe27d27552c3308",
+  "candidate_pseudocode_sha256": "a3df90dc07bcd905098520cc0eda08391ef774531dad2165d7017a2735d9dce1",
+  "candidate_replay_sha256": "2ecf042debce99867f4367d4c4394f5e16c4cd3582421785e7e1afb34c5fb363",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Replayed the copied original startup path to the exact 0x3D50 stop. Original 7DDE executes for rows 0, 1 and 2, and all three 5CAC calls are reached with the expected row indices; each 5CAC return is explicitly controlled as zero.",
+    "Inherited startup state checks, call ordering, and remaining boundary sequence pass. The authenticated initialized row flags are supplied with bits 1 and 2 set, matching the 7DDE predicate verified in review 1494.",
+    "The test retains synthetic MMIO and external clock tables and leaves unrelated activation/storage/later-application helpers controlled."
+  ],
+  "limitations": [
+    "This proves only the bounded initialized startup prefix under stated memory/control conditions; physical meaning and whole-firmware behavior remain unresolved. No canonical admission."
+  ]
+}

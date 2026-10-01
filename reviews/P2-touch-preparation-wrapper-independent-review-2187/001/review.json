@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-preparation-wrapper-independent-review-2187",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "accepted": false,
+  "scope": {
+    "candidate": "analysis/touch-preparation-wrapper-5c7a-2184/001",
+    "reviewed": "null/non-null wrapper behavior, exact child args and fullword status propagation, frame restoration"
+  },
+  "pins": {
+    "candidate_receipt_sha256": "c80f46f0769cafbaff15e1619d0b81efabfa10627f25ee2a5af47db29c4e54fd",
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "ranges": [
+      {
+        "start": 23666,
+        "end": 23674,
+        "sha256": "7d6752dc97068c06f8f56798e8d8ac31a8c6c3bc67a184b918f1f5808a256030"
+      },
+      {
+        "start": 23674,
+        "end": 23694,
+        "sha256": "e8785aa413c206fc4186a681f340067434ee03f7b086015c7478ee3892954952"
+      }
+    ],
+    "candidate_replays_sha256": "51fd3d46adb4b0076fbf7d7c38ae3739169c10bcc6565783b33db0e0aab06210",
+    "candidate_files": {
+      "replays.json": "51fd3d46adb4b0076fbf7d7c38ae3739169c10bcc6565783b33db0e0aab06210",
+      "replay.py": "4129650de6601357f397523145ecb8ee8e71e404cfd089ad74096da78e92209f",
+      "pseudocode.md": "79ab5e249fe96a2031e59d7109fa97146ea526ac9ebfa65ec55c837e33573168",
+      "disassembly.txt": "b178f0494ea9672e3e1863fb87a1e9c0583b3a6d4a5c18dc5a304a05d330a06d"
+    }
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "Independent decoding confirms the 20-byte entry returns 1 immediately for null context. Otherwise it sets R0=0, R1=5, R2=context and calls the adjacent 8-byte bridge, which forwards these arguments to 6BD4. The controlled child\u2019s R0 status propagates through both wrappers. The exact two spans and R4/SP restoration match the candidate."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "All 15 isolated fixtures pass and replay JSON matches byte-for-byte. Null path makes no child call; each non-null context invokes the child with exact arguments and returns each of five fullword statuses unchanged. Source/body/file pins and independent decode pass."
+    }
+  ],
+  "limitations": [
+    "6BD4 is controlled and unresolved; this proves wrapper argument and return behavior only.",
+    "The 15 cases cover three context values and five statuses; no hardware setup behavior or canonical admission is claimed."
+  ],
+  "checks": [
+    {
+      "command": "verify source, exact spans, and receipt artifacts",
+      "result": "PASS",
+      "artifact": "source-checks.json"
+    },
+    {
+      "command": "independent Thumb decode and isolated replay",
+      "result": "PASS; 15 fixtures, replay byte-identical",
+      "artifact": "replay.txt"
+    }
+  ],
+  "review_artifacts": {
+    "source_checks_sha256": "3cfa94f4d1c10fd368a1ea280855c2a91ac98ede07197c01178f0fdae7550e4d",
+    "disassembly_sha256": "b178f0494ea9672e3e1863fb87a1e9c0583b3a6d4a5c18dc5a304a05d330a06d",
+    "replay_sha256": "7e8445ef3e68fd5dbe733b965ab2a64240003bc5a43351c910825a4b355dad8d"
+  },
+  "canonical_or_coverage_change": false
+}

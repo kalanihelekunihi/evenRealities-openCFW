@@ -1,0 +1,15 @@
+{
+  "review_id": "1877",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-flash-status-decoder-1866/001",
+  "candidate_receipt_sha256": "0744ee40a4797e9fe59d10bb677b2de160c3e71c578df33041987997a0988ca4",
+  "checks": [
+    "Independent isolated replay passes all 40 fixtures and emits byte-identical replay JSON; body and table hashes match the source slices and receipt.",
+    "The 82-byte body ends at 8C46 and decodes to 41 instructions; the 20-entry table at B51C is separately data. Top-nibble dispatch, wrapped F-status index, unsigned >19 rejection, mapped table outcomes, and default errors agree with the instructions and fixtures. No helper, poll, MMIO write, or stack adjustment is introduced by the modeled body."
+  ],
+  "limitations": [
+    "The status register value is injected synthetically, so hardware production/meaning and live execution remain unknown. No canonical admission or C implementation."
+  ],
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87"
+}

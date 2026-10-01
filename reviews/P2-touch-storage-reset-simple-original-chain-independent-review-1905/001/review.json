@@ -1,0 +1,16 @@
+{
+  "review_id": "1905",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-storage-reset-simple-original-chain-1898/001",
+  "candidate_receipt_sha256": "f6568b9e9bdf98e775c922d3f6f492125d57355a7c8b8d2516fe04c7eaeaf444",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "body_sha256": "a2a0e7f5e1520bb7158550ba028219eb5c5a0da41b711eb59d9f9b368b322549",
+  "checks": [
+    "Candidate receipt binds the source and exact prefix [0x8AE0,0x8B3E), 94 bytes/44 instructions, with the same source body hash as the prior prefix packet. Isolated replay passes all 24 fixtures and byte-matches candidate output.",
+    "The original nonzero-mode reset prefix, 890C provider, write adapter and flash-helper chain execute without helper interception. The recorded argument sequence, zero buffer, loop count/address stepping, result zero and restored SP match the trace. Hardware status reads alone are modeled. Because the original provider discards flash-command errors, the composed fixtures return zero; they do not exercise a nonzero 890C status. First-nonzero retention is instruction-derived from the prefix and separately tested in the controlled-890C packet, not demonstrated by this composition."
+  ],
+  "limitations": [
+    "Mode-zero and zero dimensions/capacity are excluded; shared epilogue bytes are executed but not part of this prefix ownership. Physical storage remains unverified; no canonical admission."
+  ]
+}

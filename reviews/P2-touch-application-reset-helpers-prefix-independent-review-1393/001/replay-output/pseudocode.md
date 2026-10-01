@@ -1,0 +1,5 @@
+# Application prefix with original activation reset helpers
+
+Actual58F8 executesitsmaskedwordupdate andthree5868calls withindices2,1,0; those deepercalls remaincontrolled. Actual7E04 performsitsfourclears fromoriginaldescriptorpointer. Bothhelperreturns flowthroughactual4ABE/4AF4. Allpriorstartupchecks andarrival3D50 remain.
+
+Otheractivationhelpers,fourstoragecalls andtwo laterapplicationdependencies remaincontrolled. Externalclocktables are synthetic. Physicalactivation,5868functionality,concurrency andapplicationloop remainunresolved. No canonicaladmission orCimplementation.

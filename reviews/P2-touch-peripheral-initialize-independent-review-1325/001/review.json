@@ -1,0 +1,21 @@
+{
+  "review_id": "1325",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-peripheral-initialize-3678-1324/002",
+  "candidate_receipt_sha256": "73504991ba8bdcb630cc3a662fa16d3013bb35daf21aaa902669973ded41939c",
+  "candidate_pseudocode_sha256": "22cdb8424b2f980490b3df910b7cdf570c6dc6c2c0eca3710ee78a7041228d02",
+  "candidate_replay_sha256": "0a2864408e316157560a39cdbe705edb6e57796537681d1a1fa18b48595ef6fa",
+  "candidate_replays_sha256": "4817d50aab0dc814d213a5165f6a93d0d42fab7000cbf41f36da63fd2be2f688",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Candidate and source pins verify; isolated replay passes all nine original-byte cases.",
+    "Independent decode confirms the exact 98-byte body and four helper calls/arguments in order. Literal values match the source pool. The code stores callback value at context+44, writes 0x80 to interrupt base+0x180 and base, freshly reads peripheral base then sets bit31, and freshly reads base+0x6C plus context byte+2. Nonzero context flag ORs bit8; zero ORs zero, so it does not clear an existing bit8.",
+    "Three input flags and three peripheral starting words are covered; helper returns are controlled and ignored. Local memory writes and SP are checked."
+  ],
+  "limitations": [
+    "No physical peripheral/IRQ semantics, helper behavior, concurrency or hardware timing is established.",
+    "Private evidence only; no canonical admission or C implementation."
+  ]
+}

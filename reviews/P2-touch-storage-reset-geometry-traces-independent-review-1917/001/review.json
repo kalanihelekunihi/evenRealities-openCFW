@@ -1,0 +1,16 @@
+{
+  "review_id": "1917",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-storage-reset-geometry-traces-1910/003",
+  "candidate_receipt_sha256": "70172b67b9b3b623bfaba3148b94f599f878da9e7a0da49f0930f21158862242",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Receipt source pin matches; the corrected candidate records 120 fixtures and its artifact hashes agree. Isolated replay passes all 120 traces and byte-matches candidate output. Review binds to 1910/003, not the superseded 002 wording.",
+    "Traces vary count 1/2/3, copies 1/2, width 64/128, mirror disabled/enabled, and write-failure position. Original sequence, checksum, and 810C pointer helpers execute; writes alone are controlled. Observed call count follows count\u00d7copies, initial-row successor selection and later pointer wrap agree with the modeled geometry, and optional mirror destinations use the captured row count and width. Status precedence and continued later writes match the bounded traces.",
+    "The corrected description says remaining iterations are captured product(count\u00d7copies) minus one, which matches the 003 fixtures with copies=2. It does not rely on the earlier copies=1-only prose in 002."
+  ],
+  "limitations": [
+    "Trace-only fixture ranges; no full extended-mode pseudocode or completeness claim. Write helpers are controlled, and dimensions outside the tested sets, callback mutation, physical storage/hardware and canonical admission remain unresolved."
+  ]
+}

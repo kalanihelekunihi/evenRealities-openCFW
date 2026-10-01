@@ -1,0 +1,18 @@
+{
+  "review_id": "1524",
+  "status": "PASS_STATIC_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-command-byte-sender-1465/003",
+  "candidate_receipt_sha256": "f83a66e89aa6311604cec12a11da7840b7f75ad28c7e8baee98811bf7c7cfaaf",
+  "candidate_pseudocode_sha256": "630b5a53d69c9d81d38722e1b9f97ae6612f67bd4531cd65f81e8523b47aff9f",
+  "candidate_body_sha256": "3709c9c3439611f8c906ee506ceebc69d1003a92765424e5f4e294503ab289ea",
+  "source_sha256": "9546164f32680de47fa99ba85ba08a3c538822260957de6c1baee772638da464",
+  "checks": [
+    "The corrected verifier passes the original source/tool/dependency pins, exact 96-byte body and caller set, and all nine updated trace cases. It explicitly checks C0C `ANDI R2, R2, 8` and C10 `BEZ` back to C0A.",
+    "The corrected ready gate is bit 3/mask 8. Fixtures with only bit 1 or only bit 2 set remain in the poll; bit 3 allows the data read and low-byte store. Zero-count and modulo pointer-wrap cases are consistent with the body.",
+    "The preserved /002 predecessor\u2019s mask claim is explicitly listed as superseded; no edits were made to it. The nested C1C caller reloads its SP+3 output byte only after BBC stores it on a normally completing receive path."
+  ],
+  "limitations": [
+    "Fixtures are bounded static traces with controlled data/status words, not C-SKY routine execution against a physical peripheral. B4C and controller behavior remain separate/open; no timeout or argument validation. Mapping is conditional and no canonical admission."
+  ]
+}

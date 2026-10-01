@@ -1,0 +1,18 @@
+{
+  "review_id": "1448",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-config-image-independent-fields-1447/001",
+  "candidate_receipt_sha256": "ad259ae9bc139687046bba0e4d60a975aaf972bea6b83020771a207ba6225f9d",
+  "candidate_pseudocode_sha256": "2fb6213a6ed92c75366b7461a7a9281d416a09d9a4344929ede12383c0eed2b9",
+  "candidate_replay_sha256": "232e741943ac213dcc5b10a40de1149a2149102ac46635f694e4ab80cfeb4d63",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independently replayed all 128 seeded fixtures with the original 0x5378 body and A9D4 scratch clear executing; every output byte, call argument/order, raw final status, SP and return PC assertion passed.",
+    "Compared the explicit source-offset model to the disassembly: descriptor config pointer at +0 and context pointer at +8; byte/halfword loads feed output words 0/4/8/12/20/24/32/40/44/68 with the stated shifts/masks/default branches. Default words are initialized before field updates. Output +52 has no store and is checked against its sentinel.",
+    "The seeded inputs independently vary all 128 bytes of both context and configuration, so the supplement tests noncorrelated source fields across 128 deterministic combinations rather than relying on uniform fill. The four code-adjacent literals remain separately identified at 0x5518..0x5528."
+  ],
+  "limitations": [
+    "This is 128 seeded combinations, not exhaustive input coverage. 0x52BC and 0x50E4 remain controlled; physical field meanings and downstream effects are not proven. No canonical admission."
+  ]
+}

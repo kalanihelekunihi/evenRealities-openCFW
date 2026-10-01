@@ -1,0 +1,22 @@
+{
+  "review_id": "1767",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-storage-last-row-7fa4-1766/004",
+  "candidate_receipt_sha256": "454d21597fbc750463fddf102943017b42a680093d90a3cb065e10d76fbcf125",
+  "candidate_pseudocode_sha256": "70716b3d3f1bce5a91ec77acddf480a6fac46e2b577a61ec7029a69658bfa86b",
+  "candidate_replay_sha256": "e47d07885bd933577e79a5c7952bdeb599ad9855ecc7a3f87d1cbd07455f9323",
+  "candidate_replays_sha256": "e42ab84974ddf492ce7d6aa617220dacad600d15e7dddaffbdf6904c57dbcc4e",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Candidate/source hashes match. Independent Thumb disassembly confirms body 7FA4..8054 (176 bytes/84 instructions) and literal 8054 outside the body.",
+    "All 192 fixtures replayed in isolation and replays.json matched byte-for-byte. The first pass advances the row pointer by halfword width rounded down to a four-byte boundary; width 131 therefore advances by 128 while the validation helper receives the unrounded halfword.",
+    "Only unsigned strictly greater scores call 7F7C; a zero validation result commits best and selected pointer. The second scan resets its logical count but starts from the pointer remaining after the first scan, retaining prior best and selection.",
+    "A successful strictly-greater candidate during the second scan sets the warning literal; a failed validation leaves best/selection unchanged. SP and preserved registers follow the frame/epilogue."
+  ],
+  "limitations": [
+    "7FA0 and 7F7C are controlled; fresh row values between scans are not mutated in these fixtures. Large-loop behavior and physical row accessibility remain open.",
+    "No canonical admission or C implementation."
+  ]
+}

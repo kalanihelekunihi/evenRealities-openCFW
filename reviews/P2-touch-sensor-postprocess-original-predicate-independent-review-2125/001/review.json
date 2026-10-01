@@ -1,0 +1,20 @@
+{
+  "review_id": "2125",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-sensor-postprocess-original-predicate-2124/001",
+  "candidate_receipt_sha256": "d555c4758d99f0637edcdef2da98149f08a21c67bd8091404bc6ed67b4fb33ea",
+  "candidate_pseudocode_sha256": "0bc3a6d1e403d8b3cb3810502e32d6739d0c8a92417345cde20d11bc3aab5959",
+  "candidate_replay_sha256": "db01eb1d1a5dccde61c5018968db80e8c21bd7dcb9d722695496fdb9fbbc56c6",
+  "candidate_replays_sha256": "d4b3ac39618cb6c6fcc93b839bd0cd7fa05e288b868f3239195385ceed17ad1f",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "All candidate pins match. Isolated replay passed all 192 cases with original 4C04 and original 7DDE instructions executing; only 4BA8 is controlled.",
+    "The recorded fixture model is consistent with the two original gates: context+16 descriptor base with stride 60 and byte offset 35 checked by 7DDE; context+12 record base with stride 144 and byte offset 123 checked by 4C04. Call order is descending 2,1,0; status accumulation is bitwise OR.",
+    "The integration inherits the 4C04..4C44 body and stack/return checks from 2116 and the predicate implementation from 2122. The controlled 4BA8 boundary is isolated explicitly."
+  ],
+  "limitations": [
+    "The meaning of descriptor and record fields remains provisional, and the 4BA8 status/helper effects are not recovered here. Synthetic fixture values do not prove physical sensor behavior.",
+    "No canonical admission or caller/whole-image completeness is established."
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-storage-init-original-provider-independent-review-1791",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "scope": {
+    "candidate": "analysis/touch-storage-init-original-provider-1786/003",
+    "reviewed": "All 16 fixtures reproduce in isolated execution without function or return overrides. Original 486C builds the descriptor used by 898C; original A9D4 clears the 32-byte context, original capacity/geometry leaves return 128, original 4790 validates the synthetic numeric range, and original geometry/size/validation/row-selection code runs. Context bytes, return value, SP, stop PC and required PC-entry presence assertions match. Disabled initialization returns the pinned 0x093E0000 error; validation error remains the distinct 0x093E0002."
+  },
+  "pins": {
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "candidate_receipt_sha256": "de3ca476fdaf07e2c25737bffd4f3d2a7609289efcc0e67bea6ae357f162664d",
+    "candidate_replays_sha256": "f5f736c587f4098ae8a22fb846d7d1c763f2aeaababffab0673d0ab72120423a"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "All 16 fixtures reproduce in isolated execution without function or return overrides. Original 486C builds the descriptor used by 898C; original A9D4 clears the 32-byte context, original capacity/geometry leaves return 128, original 4790 validates the synthetic numeric range, and original geometry/size/validation/row-selection code runs. Context bytes, return value, SP, stop PC and required PC-entry presence assertions match. Disabled initialization returns the pinned 0x093E0000 error; validation error remains the distinct 0x093E0002."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "The receipt and all declared files/source hashes match. The isolated 16-case execution generated replay JSON byte-identical to the candidate."
+    }
+  ],
+  "limitations": [
+    "Synthetic blank RAM region only; zero sequence words bypass checksum. The run does not establish physical flash behavior/accessibility, nonblank-row scans or concurrent mutation.",
+    "No canonical admission or coverage promotion."
+  ],
+  "checks": [
+    {
+      "command": "source and artifact pin checks",
+      "result": "PASS"
+    },
+    {
+      "command": "manual call-target/dataflow and error-literal check",
+      "result": "PASS"
+    },
+    {
+      "command": "isolated replay of all 16 fixtures",
+      "result": "PASS; exact replay JSON match",
+      "artifact": "isolated-replays.json"
+    }
+  ],
+  "canonical_or_coverage_change": false
+}

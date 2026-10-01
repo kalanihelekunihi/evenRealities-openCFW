@@ -1,0 +1,5 @@
+# Touch frequency register chain with actual source helpers
+
+Actual9F34 freshly reads40030028 and returns bits1..0. Actual9C38 reads the frequencyword at RAM20000F20. Actual9C44 freshly reads40030030 and returnszero if bit31 is clear. If set, it reads40030F08 and uses only bits2..0, computing24000000+4000000*index. Its exact arithmetic sequence agrees with this polynomial over the eight possibleindices. Rawregisterfrequency is a code-derived value, not independently measuredhardwarefrequency.
+
+1024 original-instruction fixtures execute46F8,9F9C,9F34 and the selected source helper without any helper replacement. They cover all shiftpairs, all four selectors, eight trimindices and both bit31states. Exactfreshreadorder, independently calculated sourcedivision/rounding andSP are checked. Syntheticregistervalues andRAMword are supplied; physicalclockmeaning and concurrentchanges remain unresolved. Actual9C44 body9C44..9C72,9C38..9C3E and9F34..9F3E exclude adjacentNOP/pools. No canonical admission or C implementation.

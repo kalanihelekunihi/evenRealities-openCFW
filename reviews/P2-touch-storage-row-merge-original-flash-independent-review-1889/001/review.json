@@ -1,0 +1,15 @@
+{
+  "review_id": "1889",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-storage-row-merge-original-flash-1878/001",
+  "candidate_receipt_sha256": "cdb6d3d805b9dc130f10057b719bdd56ae2daf63b718b24e7f5e6d37ada39a89",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Isolated replay passes all 24 cases and byte-matches candidate output; exact 8554 body is 124 bytes/57 instructions and source-pinned.",
+    "The original row merge/provider/read/remainder/copy and 8D50 command path execute without helper interception. The trace verifies 128-byte command buffers/destinations, aligned merge writes at the modeled E011 address, direct-write rejection where alignment rules fail, and normalization/propagation of statuses as described. The provider\u2019s handling of flash status follows the actual instruction path."
+  ],
+  "limitations": [
+    "The destination and hardware statuses are synthetic; this does not establish physical flash mutation, behavior beyond capacity 512, invalid-memory behavior, or concurrency. No canonical admission."
+  ]
+}

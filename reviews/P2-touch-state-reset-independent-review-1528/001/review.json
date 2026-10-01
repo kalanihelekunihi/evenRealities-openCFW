@@ -1,0 +1,17 @@
+{
+  "review_id": "1528",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-state-reset-685c-1527/001",
+  "candidate_receipt_sha256": "91b09ed0b94a75a9369df58be5e0a38c6a4be8ef7ce8c4842d40fe9e288e5038",
+  "candidate_pseudocode_sha256": "5c56c686e9e8809ea99f9f84fce950e0e058ec376d7e59fa47e8026ef486ca86",
+  "candidate_replay_sha256": "cc098a711d6c614b1ad6e574416d31da1ae299727f50b7ed6615ba24485606bc",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Verified the body 0x685C..0x68DE and literal separation. Independently followed pointer resolution, fresh config+0x180 bit-0 gate, conditional 0x6608(315,0,descriptor), ordered cleanup/configuration writes and readbacks, context byte clear, masked control update, bit-28 OR, return paths and 16-byte frame.",
+    "An isolated original-instruction replay passed all 18 fixtures, covering both gate paths, controlled helper results, exact ordered writes, return and SP."
+  ],
+  "limitations": [
+    "0x6608 is controlled with no MMIO effects and memory/MMIO are synthetic. Hardware behavior and pointer validity remain unresolved. No canonical admission."
+  ]
+}

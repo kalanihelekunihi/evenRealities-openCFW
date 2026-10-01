@@ -1,0 +1,9 @@
+# Independent review 1931 — provider overlay interval traces
+
+**Result: PASS_SCOPED.** Candidate `touch-row-overlay-provider-interval-traces-1922/001`; receipt SHA-256 `1ebeba52e1089a6ee715a9235a31662106dd5a60585113dc041c5a9d3c0254c8`.
+
+Receipt file hashes and source image pin match. Isolated regeneration passes all 36 fixtures and reproduces replays.json exactly. The runs execute original mapping, CRC, provider 4860 and AA2C paths without helper interception.
+
+Each case has width 128, logical output interval [0,64), count 2, one copy, no mirror, and a current overlay at [256,257) that cannot overlap the requested output. The mapped prior row at base+128 has a valid CRC. Varying prior-row overlay starts and lengths exercises clipping at the left edge, both interval boundaries, and non-overlapping offsets; whole-buffer output, zero status, and SP are checked.
+
+This trace slice uses valid prior-row content and fixed immutable geometry. It does not establish mirror, invalid-row, general interval, mutable context, physical storage, concurrency, or canonical behavior.

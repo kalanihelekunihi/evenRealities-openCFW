@@ -1,0 +1,20 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage1.bin:     file format binary
+
+
+Disassembly of section .data:
+
+10000c1c <.data+0xc34>:
+10000c1c:	14d0      	push      	r15
+10000c1e:	1421      	subi      	r14, r14, 4
+10000c20:	3201      	movi      	r2, 1
+10000c22:	e42e0002 	addi      	r1, r14, 3
+10000c26:	3005      	movi      	r0, 5
+10000c28:	e3ffffca 	bsr      	0x10000bbc	// 0x10000bbc
+10000c2c:	d86e0003 	ld.b      	r3, (r14, 0x3)
+10000c30:	e4632001 	andi      	r3, r3, 1
+10000c34:	e923fff6 	bnez      	r3, 0x10000c20	// 0x10000c20
+10000c38:	3001      	movi      	r0, 1
+10000c3a:	1401      	addi      	r14, r14, 4
+10000c3c:	1490      	pop      	r15
+10000c3e:	0000      	bkpt

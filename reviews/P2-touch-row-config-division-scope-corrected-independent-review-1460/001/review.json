@@ -1,0 +1,17 @@
+{
+  "review_id": "1460",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-config-division-scope-corrected-1459/001",
+  "candidate_receipt_sha256": "7e9a880cdbe2dffa96ddf1841402a98d0c6942116f38e76b33199a8e40e28573",
+  "candidate_pseudocode_sha256": "c52f9a4de950398c0634e7b5422d8c1c522373ec1e77475511eab5f94750f2a7",
+  "candidate_replay_sha256": "67c0d655df8b27ed2316af4033b9300630f2ac56abacba0a08d2ffa304178abe",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independently replayed all 216 fixtures with original 6384 and A6C0/A7CC divider bodies executing and no helper substitutions; all assertions pass.",
+    "Verified corrected scope wording against setup: named percentage/decision fields and scale/offset fields are zero, while context byte +78 is seeded to 5. The constrained reached division inputs are zero dividends with divisors 100 or 1."
+  ],
+  "limitations": [
+    "The fixtures validate only these reached divider paths and profiles; they do not recover the whole divider or prove mixed flags, pointer validity, physical behavior, or canonical admission."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "review_id": "1444",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-row-validator-prefix-1443/001",
+  "candidate_receipt_sha256": "f004e07f91b0488e1067fea520a1acfe3b9c6bb9ea9714f27b88bbdc4b96e20c",
+  "candidate_pseudocode_sha256": "7ded25be8b0d121a515cca6672f95830739d560606f2c34e20ae2546f3d147aa",
+  "candidate_replay_sha256": "58bff502b7397f719f1622d95d3548c46e92362ad5a23250dd6a307014b2a116",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independently replayed the original 71C8 startup prefix; it reached 0x3D50 with the original 6384 validator, its recovered local helpers, and original A6C0/A7CC division entries executing. The scoped replay passed all assertions.",
+    "Verified ordered remaining controlled calls and the inherited startup state: initialized descriptor/context, copied/list state, scaled count, vector/SysTick, peripheral and interrupt writes, and the storage/activation prefix asserted by the script. Exact literal words in the receipt agree with the pinned image bytes.",
+    "The replay checks the original initialized row/descriptor state and checks the row validator at 0x6384 was reached. Division outcomes are only exercised for the fixture inputs; this does not establish general divider behavior."
+  ],
+  "limitations": [
+    "The listed downstream configuration/storage/application calls remain controlled and return the fixture values; synthetic MMIO and external clock-table contents are modeled inputs. Arrival at 0x3D50 does not prove physical device behavior, full application completion, or canonical admission."
+  ]
+}

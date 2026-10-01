@@ -1,0 +1,21 @@
+{
+  "review_id": "1361",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-descriptor-init-complete-1360/001",
+  "candidate_receipt_sha256": "82e1b754bbd15d672870552b490782c45221b4449b17f5370aedfadf810bc4a2",
+  "candidate_pseudocode_sha256": "849440f8171ad5f55154aad2ea25b5023dcc093c2ddc1f6bca1b4a4e924652c6",
+  "candidate_replay_sha256": "5e5e2797bd706e32a321a53508342b870e1d215c914d12d1d24faf45adf7ffe9",
+  "candidate_replays_sha256": "e5cbb2c57a13f4b922e792a2f5848433faee0ee8abc9232da3fc179ed746433f",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Candidate/source hashes verify. Independent M-class disassembly covers all 300 bytes of 0x4C7C..0x4DA8 (148 instructions). The tail confirms the config-halfword copies and byte stores, literal loads, 6AC0(descriptor) call, nonzero-status epilogue return, zero-status 4C72(descriptor) call, raw second return, and shared restore path.",
+    "Literal/data reads used by the tail match the replay's expected values, including the word at 0x4DB0 copied to context+0x24 and the earlier literal-based context field. The copied row flags are ORed with 6 and then 24 in order. The status/helper sequence and final SP/R0 assertions agree with the decoded instructions.",
+    "The replay was isolated under the review directory and all 324 original-byte runs passed, varying the three row flag bytes, context fill, and both controlled helper statuses; every asserted store, call argument/order, returned value, and restored SP matched."
+  ],
+  "limitations": [
+    "The fixtures supply zero row halfwords, so nonzero-row branches and the null-entry path are not covered by this packet. The two deeper calls are controlled; their behavior is not reviewed here.",
+    "Invalid pointers and physical meaning remain unresolved. Private scoped evidence only; no canonical admission or C implementation."
+  ]
+}

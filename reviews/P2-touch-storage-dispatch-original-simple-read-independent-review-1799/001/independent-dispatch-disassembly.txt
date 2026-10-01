@@ -1,0 +1,31 @@
+
+source-image-extract.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00008a78 <.data>:
+    8a78:	b570      	push	{r4, r5, r6, lr}
+    8a7a:	2a00      	cmp	r2, #0
+    8a7c:	d00e      	beq.n	0x8a9c
+    8a7e:	1814      	adds	r4, r2, r0
+    8a80:	689d      	ldr	r5, [r3, #8]
+    8a82:	42ac      	cmp	r4, r5
+    8a84:	d80c      	bhi.n	0x8aa0
+    8a86:	2900      	cmp	r1, #0
+    8a88:	d00c      	beq.n	0x8aa4
+    8a8a:	7b5c      	ldrb	r4, [r3, #13]
+    8a8c:	2c00      	cmp	r4, #0
+    8a8e:	d002      	beq.n	0x8a96
+    8a90:	f7ff f9d8 	bl	0x7e44
+    8a94:	e003      	b.n	0x8a9e
+    8a96:	f7ff fc23 	bl	0x82e0
+    8a9a:	e000      	b.n	0x8a9e
+    8a9c:	4802      	ldr	r0, [pc, #8]	@ (0x8aa8)
+    8a9e:	bd70      	pop	{r4, r5, r6, pc}
+    8aa0:	4801      	ldr	r0, [pc, #4]	@ (0x8aa8)
+    8aa2:	e7fc      	b.n	0x8a9e
+    8aa4:	4800      	ldr	r0, [pc, #0]	@ (0x8aa8)
+    8aa6:	e7fa      	b.n	0x8a9e
+    8aa8:	0000      	movs	r0, r0
+    8aaa:	093e      	lsrs	r6, r7, #4

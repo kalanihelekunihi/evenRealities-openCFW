@@ -1,0 +1,19 @@
+{
+  "review_id": "1993",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-loop-state-one-1984/002",
+  "candidate_receipt_sha256": "4f36a27d05f3aeba0d5f59b870fbcf457b1848cc8d7f9c228c8c6d4fb84f50e8",
+  "candidate_pseudocode_sha256": "5b8cb98a57bc71e0174c7f0d481cb6bf798af78ccfaedf6e03b580eb3847cfc8",
+  "candidate_replay_sha256": "2ba7cf208e8edac5da038d22521286224c783ba60f2a375fa4c814aabf0736dd",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "All candidate and source pins match the receipt; the failed /001 attempt remains untouched.",
+    "An isolated replay reproduces all 24 rows exactly. The busy state-one branch calls A528 (not A58C), its modeled completion clears the readiness bit after the selected waits, and the original readiness/mask/event code executes.",
+    "Recorded transitions match modulo-2^32 decrement: zero counter with zero predicate wraps to 0xFFFFFFFF and remains state 1; a decrement to zero selects state 2/counter 160; nonzero predicate reloads 640 and remains state 1. SP and initial PRIMASK are preserved."
+  ],
+  "limitations": [
+    "A528 completion and sensor/predicate/timing helpers are controlled; only the specified bounded waits are exercised. This does not establish physical event delivery, unbounded-wait behavior, state transitions outside these fixtures, or whole-loop completeness.",
+    "No canonical admission."
+  ]
+}

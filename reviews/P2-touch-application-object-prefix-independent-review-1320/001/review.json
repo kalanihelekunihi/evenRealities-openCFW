@@ -1,0 +1,20 @@
+{
+  "review_id": "1320",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-object-prefix-1319/001",
+  "candidate_receipt_sha256": "d2dabc55d0fdf083fe3df6f9eae93c50f0f47ca324d865f85774be892cd9ca75",
+  "candidate_pseudocode_sha256": "0cf69bfae761e1bde0982782e9137f670e18bf4def61c92493fb4d6f07ee2de9",
+  "candidate_replay_sha256": "1abc2473ed94bc8b4db7430de67d41bc98697ef6691e2ee2d022a58980a18b32",
+  "candidate_replays_sha256": "dcfacf813ea02a736361ea8064c392da7fd3442254610dbd85174156571741cf",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Pins match and isolated prefix replay passes through 3D50 with prior checks intact. The actual 3658\u2192404C\u2192A9D4\u21923EE8 path executes, and the output object at 20000940 is asserted to equal halfword 1000 followed by 78 zero bytes.",
+    "Four deeper storage calls remain controlled, as do five later application dependencies. The candidate explicitly states object result depends on supplied storage-control outcomes and prior 395C settings initialization."
+  ],
+  "limitations": [
+    "No physical storage success, SysTick dispatch or application-loop completion is established. External clock tables are synthetic.",
+    "Private evidence only; no canonical admission or C implementation."
+  ]
+}

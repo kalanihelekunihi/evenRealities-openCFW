@@ -1,0 +1,18 @@
+{
+  "review_id": "1468",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-packet-pin-mask-prefix-1467/001",
+  "candidate_receipt_sha256": "933f1d53e6f8b250a1d5bf3e9344194091b324d2577551966988490947577ea0",
+  "candidate_pseudocode_sha256": "4e52c68de74f673c250817389f5f28a821b4b99c63412aa468f80f8cb3966783",
+  "candidate_replay_sha256": "9852f4c146a1a12cf454e20c5f8a44660964a7a20cd537663d13c89e32afae0a",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independently replayed all 45 original-instruction fixtures; each computes the union mask and stops at 0x56F4 with SP=entrySP-72, as asserted.",
+    "Decoded 0x56A4..0x56F4: the first list pointer is descriptor +20, count is config halfword +12, records advance by 8, and pin byte +5 drives LSLS/ORR. The second list pointer is descriptor +24, count is config byte +44, with the same stride and bit operation. ARM register-shift semantics make counts >=32 contribute zero.",
+    "The prefix saves a nine-word register frame and allocates 36 bytes, stores the context pointer in a local slot, and does not include suffix/epilogue behavior; candidate stops exactly at 0x56F4."
+  ],
+  "limitations": [
+    "Counts/list contents are the supplied bounded fixture arrays; the packet suffix, complete return behavior, arbitrary pointer validity and broader input space remain unresolved. No canonical admission."
+  ]
+}

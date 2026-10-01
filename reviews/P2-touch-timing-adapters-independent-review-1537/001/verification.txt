@@ -1,0 +1,9 @@
+Independent review of touch-timing-adapters-1536/001
+
+Candidate receipt SHA-256 27a57442cfbf833144f58cd54f1bb9f97126d99f3e0b0c0933af793de6d6cbf3; pseudocode 26ec59e5478d2978eb6c755b906b1ba8243a4b87bd888f7ad1554418076c5c2c; replay 84c884b4daff2a19d6a0ea749dec6ba94369702a8715cd60958c563f28f9853b; source 371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87.
+
+GNU ARM objdump independently confirms 5FA4 is 22 bytes/10 instructions and A324 is 14 bytes/6 instructions. At 5FA4, zero divisor returns 0xFFFFFFFF; otherwise R0 is multiplied by R1 modulo 2^32 before original A6C0 receives quotient operands R0/R2, with helper quotient returned. A324 loads the literal at A334 (0x20000870), reads one byte, multiplies the full incoming R0 modulo 2^32, calls 4480 and returns its incidental R0. Both restore their 8-byte frames; no uint16 truncation instruction exists.
+
+The isolated Unicorn replay passed 84 fixtures (64 division-adapter and 20 delay-adapter). Capstone is unavailable in the runtime, so only the copied replay's redundant Capstone disassembly-generation block was omitted; original Unicorn execution and assertions were retained, and GNU objdump independently checked both body disassemblies and literal. Exact candidate replay is preserved as replay-original.py.
+
+PASS_SCOPED. A6C0 executes for nonzero divisors; 4480 is controlled. Physical timing and the separate delay-loop behavior are not established. No canonical admission.

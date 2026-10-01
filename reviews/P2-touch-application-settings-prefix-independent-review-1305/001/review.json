@@ -1,0 +1,21 @@
+{
+  "review_id": "1305",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-settings-prefix-1304/002",
+  "candidate_receipt_sha256": "a1eed052e9f0707ebab3387ae5c60ee22c8c6fdfc7114aaf40bb351186c04c6f",
+  "candidate_pseudocode_sha256": "899c31171cfab81c619cad95edd5e2c3931a645336acb6e08f86a1015a0f32a2",
+  "candidate_replay_sha256": "56805c4747ee7f7d8c5534d6115678679d38af9710e74bdc988fbd6e3f9f4438",
+  "candidate_replays_sha256": "3b9c808ebe538549ad271c4ffe839767e8b085419fd87af18705a2ffd47ee9ad",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Candidate and source hashes match the receipt. The isolated actual-instruction prefix replay passes and reaches 0x3D50 with prior prefix checks retained.",
+    "Observed 3EE0 arguments are captured without changing execution; candidate asserts the initial zeroed settings object becomes 55 4E 56 45 00 00 E8 03 at 0x200009D0.",
+    "Five deeper settings/storage/delay boundaries (34D8,3520,35B0,A2F0,3568) are controlled, as are six later application dependencies. The candidate correctly scopes the object result to their zero-return/no-mutation model."
+  ],
+  "limitations": [
+    "No real storage, delay, external clock-table, physical timer dispatch or complete application-loop behavior is proven.",
+    "Private evidence only; no canonical admission or C implementation."
+  ]
+}

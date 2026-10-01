@@ -1,0 +1,19 @@
+{
+  "review_id": "2197",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-mode-dispatch-6ac0-2194/001",
+  "candidate_receipt_sha256": "12de1d63c77bc10f8237efecadedf2616bb610e499c67f528f29adc1cf83587e",
+  "candidate_pseudocode_sha256": "ac14f697fae3d64a65b9af59917227d08ad073d9adf8cd12462e1356c747a5cc",
+  "candidate_replay_sha256": "675d835d79511f96578e992d9e8792907c2a14b3af60d5ecb7636ff45e2e60d1",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "The source and all receipt-bound files match their hashes. The three independently sliced ranges—code [0x6AC0,0x6BCA), literals [0x6BCC,0x6BD4), and jump table [0xB4FC,0xB51C)—match the candidate's SHA-256 values. Independent Thumb/M-class disassembly matches the stored code listing.",
+    "An isolated replay regenerated all 5,632 fixtures exactly. It covers every saved-mode byte, eleven requested full-word values and both controlled 8FD0 outcomes. Assertions verify equality-before-clear, permitted saved modes, requested-mode dispatch, helper call order/arguments including the 6078 stack argument, mode-2 descriptor/config effects, 8FD0 status behavior, selected register writes and R4/R8/SP preservation.",
+    "Decoded dispatch confirms the saved byte is compared against full incoming R0 before byte 115 is cleared. Saved modes 0–2 and 5–7 proceed; other saved bytes return 1. For accepted prior modes the flag is cleared before the requested-mode >7 check. The jump-table paths and mode-2 failure return 64 match the pseudocode; the success path performs writes at register-base offsets 264 and 288 before storing the requested byte."
+  ],
+  "limitations": [
+    "Children 6078, 60EA, 6044, 8FD0, 6A80, 685C and 68EC are controlled. The replay uses RAM-backed register and parameter blocks; physical MMIO/helper effects, aliasing, concurrency and caller closure are not established.",
+    "Context pointers are dereferenced before equality handling and the body has no null guard. No canonical admission."
+  ]
+}

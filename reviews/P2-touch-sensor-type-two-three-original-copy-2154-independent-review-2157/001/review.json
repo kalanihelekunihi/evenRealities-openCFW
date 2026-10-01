@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-sensor-type-two-three-original-copy-2154-independent-review-2157",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "accepted": false,
+  "scope": {
+    "candidate": "analysis/touch-sensor-type-two-three-original-copy-2154/001",
+    "reviewed": "Original copy in type-2/3 postprocessing original-byte behavior, exact source and artifact binding, isolated replay and explicit limits"
+  },
+  "pins": {
+    "candidate_receipt_sha256": "ad3455fbec7e65ade7d06a23455a36efb50358f54d5dea06378fdae1d607b544",
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "candidate_replays_sha256": "47be7ec7571a9f00eaab60d37d8eacf86c2b7dd676035dc33a77e26fcb638f70",
+    "candidate_files": {
+      "replays.json": "47be7ec7571a9f00eaab60d37d8eacf86c2b7dd676035dc33a77e26fcb638f70",
+      "replay.py": "9f70c36c2d581d8f7b0cc722ea941b6677545e8b4efd9c1c6c6bf4e07cd9824a",
+      "pseudocode.md": "e7a20d6b42f5e51111ebd58287b2a35ccfed723ee5d7819c5f6f389980171a62",
+      "disassembly.txt": "babf8782875c762ced44f45c425421d7f6ea26be3a265685c893754caadc9314"
+    }
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "The isolated 864-case composition replay matches the candidate byte for byte. Original 5A94 and AA2C execute; the 48CC/4A2A constructors are controlled to write two known eight-byte entries. The caller passes the observed scratch/destination arguments and the original copy helper writes both payloads in order."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "Assertions cover the resulting 16 bytes, threshold/countdown/item/aggregate behavior, constructor order, copy arguments, and R8/SP. When no constructor runs the output/count remain zero in the tested cases. This is a controlled-child composition, not a recovery of constructor behavior."
+    }
+  ],
+  "limitations": [
+    "Constructors 48CC/4A2A remain controlled; arbitrary constructor output/count, aliasing, concurrency and physical sensor meaning remain unresolved.",
+    "No canonical admission or C implementation."
+  ],
+  "checks": [
+    {
+      "command": "verify receipt artifact and original source hashes",
+      "result": "PASS",
+      "artifact": "source-checks.json"
+    },
+    {
+      "command": "isolated replay with redirected output",
+      "result": "PASS; 864 fixtures, replay JSON byte-identical",
+      "artifact": "replays.json"
+    }
+  ],
+  "review_artifacts": {
+    "source_checks_sha256": "283616091212d9efb77afed0088546c1468f15f0edcce9d3d66079f95cb87d89",
+    "replay_sha256": "4bf7e4de54820f39f10ab683304576eadc25f979426c0bdb2e5fc13433529700"
+  },
+  "canonical_or_coverage_change": false
+}

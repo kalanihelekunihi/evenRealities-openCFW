@@ -1,0 +1,21 @@
+{
+  "review_id": "1359",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-descriptor-init-middle-1358/004",
+  "candidate_receipt_sha256": "747fc562b0495cc2856e1fe63a7e517da3ce30f19816d044e9340f5665b9634b",
+  "candidate_pseudocode_sha256": "d86d697b62441e8549b58a62823647135428b341a5202ccca28c14500cb99154",
+  "candidate_replay_sha256": "32b6a27629bca68edd76e6c20df54dae7c9dbc958e3600631a4b53eb75958552",
+  "candidate_replays_sha256": "b8b93754d94b1cfba1f83a282914b468ceaa0b638ee26a94d02587e5f162ece8",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independent decode confirms 70 instructions over 0x4CB2..0x4D3E (140 bytes). The config byte offsets follow the instruction arithmetic: starting from 0x4C, subtract 0x1D to read 0x2F and add 0x28 to store at context 0x57; subtract 0x2A to read 0x2D and add 0x2B to store at 0x58; subtract 0x27 to read 0x31 and add 0x28 to store at 0x59. Halfword copies and remaining byte offsets also match the decoded loads/stores.",
+    "The repeated row loop is three rows, stride 0x3C. For each row it tests halfwords +4 and +6; if zero, it freshly reads byte +0x23, ORs bit 3 or bit 4, then stores the result. This preserves the ordered read-modify-write semantics rather than assuming preexisting flag values.",
+    "The immutable replay was isolated and all 81 fixtures pass. It varies the three flag bytes and context fill, checks prior-prefix writes plus these offsets and row-bit writes, and stops at 0x4D3E before later work."
+  ],
+  "limitations": [
+    "Row-halfword inputs are supplied as zero, so nonzero conditional branches are decoded but not fixture-covered. The null path, remaining initialization, calls/return, and physical row interpretation are outside this prefix.",
+    "Private scoped evidence only; no canonical admission or C implementation."
+  ]
+}

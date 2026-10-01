@@ -1,0 +1,26 @@
+--- context around 10000CEC ---
+10000cde:	dc6e0004 	st.b      	r3, (r14, 0x4)
+10000ce2:	e3ffff9d 	bsr      	0x10000c1c	// 0x10000c1c
+10000ce6:	6ca3      	mov      	r2, r8
+10000ce8:	6c63      	mov      	r1, r8
+10000cea:	3006      	movi      	r0, 6
+10000cec:	e3ffff38 	bsr      	0x10000b5c	// 0x10000b5c
+10000cf0:	3201      	movi      	r2, 1
+--- context around 10000D38 ---
+10000d2a:	dc6e0005 	st.b      	r3, (r14, 0x5)
+10000d2e:	e3ffff77 	bsr      	0x10000c1c	// 0x10000c1c
+10000d32:	6ca3      	mov      	r2, r8
+10000d34:	6c63      	mov      	r1, r8
+10000d36:	3006      	movi      	r0, 6
+10000d38:	e3ffff12 	bsr      	0x10000b5c	// 0x10000b5c
+10000d3c:	3202      	movi      	r2, 2
+--- context around 10000D42 ---
+10000d32:	6ca3      	mov      	r2, r8
+10000d34:	6c63      	mov      	r1, r8
+10000d36:	3006      	movi      	r0, 6
+10000d38:	e3ffff12 	bsr      	0x10000b5c	// 0x10000b5c
+10000d3c:	3202      	movi      	r2, 2
+10000d3e:	1901      	addi      	r1, r14, 4
+10000d40:	3001      	movi      	r0, 1
+10000d42:	e3ffff0d 	bsr      	0x10000b5c	// 0x10000b5c
+10000d46:	e3ffff6b 	bsr      	0x10000c1c	// 0x10000c1c

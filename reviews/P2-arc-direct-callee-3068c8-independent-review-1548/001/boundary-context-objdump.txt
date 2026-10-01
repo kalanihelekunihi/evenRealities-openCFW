@@ -1,0 +1,39 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/arc-direct-callee-3068c8-1531/001/boundary-context.elf:     file format elf32-littlearc
+
+
+Disassembly of section .firmware:
+
+003068c8 <boundary_context_entry>:
+  3068c8:	276f 003f           	clri	0
+  3068cc:	236f 003f           	sync
+  3068d0:	244a 7480           	mov	lp_count,0x12
+  3068d4:	44cb 00f0 0808      	mov_s	r12,0xf00808
+  3068da:	704c                	mov_s	r2,0
+  3068dc:	702c                	mov_s	r1,0
+  3068de:	4381                	mov_s	r3,r12
+  3068e0:	20a8 0540           	lp	42	;30690a <boundary_context_entry+0x42>
+  3068e4:	090d 0470           	breq.d.nt	r1,0x11,12	;3068f0 <boundary_context_entry+0x28>
+  3068e8:	d899                	mov_s	r0,0x99
+  3068ea:	4040                	mov_s	r0,r2
+  3068ec:	1b00 0fc1           	st	-1,[r3]
+  3068f0:	2415 1000           	add2	r0,r12,r0
+  3068f4:	180c 0fc1           	st	-1,[r0,12]
+  3068f8:	236f 003f           	sync
+  3068fc:	1818 0fc1           	st	-1,[r0,24]
+  306900:	236f 003f           	sync
+  306904:	e324                	add_s	r3,r3,0x24
+  306906:	e209                	add_s	r2,r2,0x9
+  306908:	7124                	add_s	r1,r1,1
+  30690a:	7ee0                	j_s	[blink]
+  30690c:	40c3 0080 fb70      	mov_s	r0,0x80fb70
+  306912:	8000                	ld_s	r0,[r0,0]
+  306914:	10ba 0080           	ldb	r0,[r0,186]
+  306918:	b8c3                	bmsk_s	r0,r0,0x3
+  30691a:	b884                	bset_s	r0,r0,0x4
+  30691c:	262f 003f           	seti	r0
+  306920:	7ee0                	j_s	[blink]
+  306922:	78e0                	nop_s
+  306924:	244a 7c80           	mov	lp_count,0x32
+  306928:	43c3 0080 fb64      	mov_s	r3,0x80fb64
+  30692e:	700c                	mov_s	r0,0

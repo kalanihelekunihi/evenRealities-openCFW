@@ -1,0 +1,16 @@
+{
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-context-mask-value-1237/001",
+  "candidate_receipt_sha256": "c078ae79f9526108ca5c45d9b7b9476fc0bd93db7b19bcecd0c0326384ba6281",
+  "review_result": "REVISE",
+  "checks": {
+    "geometry_and_source": "The candidate verifier passes its source/tool/input manifests and the original bytes decode as a 28-byte, 12-instruction body at [0x10000204,0x10000220). The actual instruction sequence supports the described ordered loads, unsigned byte/halfword values, masked logical shift, compare, conditional increment, and return. No literal load appears. The entry-to-next-entry boundary is consistent with the conditional map.",
+    "static_model": "The arithmetic in the ten static cases is consistent with the stated 32-bit model, and the candidate explicitly labels them non-dynamic. The caller comparison is recorded without assigning a semantic name to the inputs.",
+    "artifact_inconsistency": "Six non-null operation fixture rows in fixtures.json list `reads: []` even though their contexts supply a node and the pseudocode says they perform five ordered reads: ctx+8, node+0, node+1, base+offset, node+2. The candidate verifier does not check these read arrays, so its PASS does not detect the discrepancy."
+  },
+  "required_correction": "Correct the non-null fixtures' read lists (and validate them in verify.py), or remove the misleading field and state that read order is established only from the decoded instruction sequence. Preserve the current candidate and publish a new immutable revision before treating its evidence packet as internally consistent.",
+  "limits": [
+    "No execution is claimed; pointer faults, unaligned loads, concurrent mutation, conditional runtime loading, and physical aliases remain unresolved.",
+    "No canonical admission is claimed."
+  ],
+  "accepted": false
+}

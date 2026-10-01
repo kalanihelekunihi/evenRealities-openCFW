@@ -1,0 +1,17 @@
+{
+  "review_id": "1436",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-range-decision-61f0-1435/002",
+  "candidate_receipt_sha256": "bdf737a731c0d9c76d1dd9d8df82d5b575fe58ff041dd73b9a4ceff394ff3671",
+  "candidate_pseudocode_sha256": "57bf50551100ded4f9aafc8daed8b5c30944ae5a1532d63f30de0e89a543d658",
+  "candidate_replay_sha256": "fb72bf3e7968fab642f05bc8d88216300dd0b488bc567e26dd7864b5b8cdd165",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independently decoded the 48-byte 0x61F0..0x6220 body. It compares R1 and R2 unsigned, returns a boolean in R5/R0, bypasses subsequent checks for mode 2, otherwise loads the fifth argument at incoming SP+16 and compares it unsigned with R3. Only mode 0 calls A7CC with R0=fifth argument and R1=R3; nonzero returned R1 clears the boolean. The four-register frame is restored.",
+    "Copied and replayed all 288 combinations in a review-owned output directory; all passed. The replay asserts exact A7CC arguments/call absence by mode, return value, stack pointer, and return PC."
+  ],
+  "limitations": [
+    "A7CC is controlled, including zero-divisor fixtures; no division or zero-divisor semantics are inferred. The fifth-argument value is synthetic. Physical meaning, caller reachability, and canonical admission remain unresolved."
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "review_id": "1414",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-config-validation-6384-1413/001",
+  "candidate_receipt_sha256": "a503bb2b7f81cdee0e7acc4cf25602c668e1fae3a9f6dffbe0870df91b226a13",
+  "candidate_pseudocode_sha256": "93a15b241b22599d5d9f3f9d2e926cc0e828b6e0e503b0d055a887b160460787",
+  "candidate_replay_sha256": "463465117f00a366212665f885eaca15eb0874a22eb747ffdf717122d2c20aeb",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independently decoded all 222 bytes at 0x6384..0x6462 (107 Thumb instructions) and checked the preserved-register prologue/epilogue, 144-byte record stride, flag and signed-byte conditions, calls to 6352/6294/623C/6262, sticky status/minimum updates, and immediate 2048 exits when width is below minimum or above 4096.",
+    "Copied and replayed the immutable script with output redirected to this review directory. All 216 fixtures passed, covering the candidate's uniform-row combinations, controlled helper returns, status/stack results, and ordered row/helper effects."
+  ],
+  "limitations": [
+    "Fixtures use uniform row values, so inter-row mutation interactions and mixed-row accumulation are not independently exercised by this packet. All helper boundaries are controlled; real helper effects, pointer validity, physical behavior, and concurrency remain open. No canonical admission or C implementation is implied."
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-storage-last-row-original-checksum-independent-review-1781",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "scope": {
+    "candidate": "analysis/touch-storage-last-row-original-checksum-1776/001",
+    "code_span": [
+      "0x7fa4",
+      "0x8054"
+    ],
+    "reviewed": "The exact 7FA4..8054 body is 176 bytes / 84 instructions, with original 7FA0, 7F7C, 7F78, 7F6C and 7E68 reached in the original path. All 192 isolated fixtures match candidate call order, selected pointer, return and SP. The synthetic rows contain exact CRC bytes over row+1 for width\u22124 bytes, with one deliberately corrupted checksum. Width 131 rounds stride to 128; the CRC range reaches row+127, so it stays within that stride despite the nominal final three row bytes falling beyond it."
+  },
+  "pins": {
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "candidate_receipt_sha256": "7e8934b4e87c5c277c118399f5a327633c458647d0924724aa57af958dc668b1",
+    "body_sha256": "aac740b8b0653e35c15ed9a9fe72dfc490889b095910c96990c5d45ed6673498",
+    "candidate_replays_sha256": "d98ef18f8a6dd2dba8e930d81e4963b19747e3af3aed1ec11a3faf3fc4234d2c"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "The exact 7FA4..8054 body is 176 bytes / 84 instructions, with original 7FA0, 7F7C, 7F78, 7F6C and 7E68 reached in the original path. All 192 isolated fixtures match candidate call order, selected pointer, return and SP. The synthetic rows contain exact CRC bytes over row+1 for width\u22124 bytes, with one deliberately corrupted checksum. Width 131 rounds stride to 128; the CRC range reaches row+127, so it stays within that stride despite the nominal final three row bytes falling beyond it."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "Candidate source and files match their receipt hashes. Isolated execution output exactly matches candidate replay JSON."
+    }
+  ],
+  "limitations": [
+    "Rows are synthetic RAM; no physical storage or concurrent behavior is established. Larger scans/termination are not tested.",
+    "No canonical admission."
+  ],
+  "checks": [
+    {
+      "command": "source/body/artifact pin checks",
+      "result": "PASS"
+    },
+    {
+      "command": "manual CRC range versus rounded stride review",
+      "result": "PASS"
+    },
+    {
+      "command": "isolated replay of all 192 fixtures",
+      "result": "PASS; exact replay JSON match",
+      "artifact": "isolated-replays.json"
+    }
+  ],
+  "canonical_or_coverage_change": false
+}

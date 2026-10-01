@@ -1,0 +1,16 @@
+{
+  "review_id": "1855",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-storage-row-merge-8554-1844/001",
+  "candidate_receipt_sha256": "0c11ce991170c00d9ef33453bbf7c5527b6b86046cdd505697c3f903b21e76a4",
+  "body_sha256": "5efa45534f738184ed2af12e316d028cb3d458d54b1227884b64b4f66c33c050",
+  "candidate_replays_sha256": "abd5c166cf6425d3353c9924bb73882a6e76b13cdd1792261b558a3418cfffdd",
+  "checks": [
+    "Candidate pins and 24 isolated original-instruction fixtures verified; replay JSON matched byte-for-byte.",
+    "Instruction trace confirms direct 7EA4 path when context flag is set or capacity<=physical width. Otherwise it reads capacity bytes to a 512-byte stack buffer, rereads capacity/address remainder, clears the low two remainder bits for the patch offset, copies physical width, then calls 7EA4 on the base."
+  ],
+  "limitations": [
+    "The synthetic read callback initializes the temporary buffer even while returning nonzero; 7EA4 remains controlled. Capacity above512, wrapped/zero capacity, callback mutation and physical writes are unresolved. No canonical admission."
+  ]
+}

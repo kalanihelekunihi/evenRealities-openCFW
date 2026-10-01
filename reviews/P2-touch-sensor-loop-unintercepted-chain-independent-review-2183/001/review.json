@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-sensor-loop-unintercepted-chain-independent-review-2183",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "accepted": false,
+  "scope": {
+    "candidate": "analysis/touch-sensor-loop-unintercepted-chain-2180/001",
+    "reviewed": "bounded caller loop over three rows with one selected predicate, original row helper chain, output status and SP"
+  },
+  "pins": {
+    "candidate_receipt_sha256": "6af687b32e821ed72e8bf76c8361d60e91a0bddb59bee38f71faf9de375a2dd2",
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "candidate_replays_sha256": "a299b81de8301365b3626fcb75eb6405bba521c1efd5a734fd0a2b3a8aabb686",
+    "candidate_files": {
+      "replays.json": "a299b81de8301365b3626fcb75eb6405bba521c1efd5a734fd0a2b3a8aabb686",
+      "replay.py": "0a7a1f6932d28822402e2e846c4ea2fdc6d09a39c4da8eb6ce39e5eefa839cf3",
+      "pseudocode.md": "bc1ff0a56f690a35e856c00f239d219ebf60805115eac7d75dc92ddaa1d17abd"
+    }
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "All 24 fixture combinations pass in isolation with candidate replay JSON byte-identical. Original 4C04 invokes the full cap/query/difference/type-6 chain without helper interception for the single selected enabled type-6 row. Disabled or type-7 rows are skipped. The valid initial-state path returns zero after type-6 processing; invalid initial state contributes status bit1. Cap/difference output, postprocessing flags, outer call observations, accumulated return and SP assertions pass."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "Source and all receipt-listed artifact hashes match. Fixtures vary selected row index 0..2, enable bit, type6/7 and validity state, while keeping other row predicates disabled."
+    }
+  ],
+  "limitations": [
+    "Only one row is selected/enabled in each fixture, so interactions among multiple active rows are not demonstrated.",
+    "Arbitrary row configurations, aliasing, concurrency, physical sensor behavior, and caller/firmware completeness remain unresolved.",
+    "No canonical admission or C implementation."
+  ],
+  "checks": [
+    {
+      "command": "source and receipt artifact hash verification",
+      "result": "PASS",
+      "artifact": "source-checks.json"
+    },
+    {
+      "command": "isolated original-byte replay",
+      "result": "PASS; 24 fixtures, byte-identical JSON",
+      "artifact": "replay.txt"
+    }
+  ],
+  "review_artifacts": {
+    "source_checks_sha256": "6c815b9598116899be7cb0e0465fe88cdf1662ef73e9acc5fecab839ccc3a55c",
+    "replay_sha256": "0646e8b2db3d3219eb5612117ca1c56fbceed523cc7f4fcc72421dad8fd55b66"
+  },
+  "canonical_or_coverage_change": false
+}

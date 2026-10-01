@@ -1,0 +1,22 @@
+{
+  "review_id": "1757",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-storage-geometry-828c-1756/001",
+  "candidate_receipt_sha256": "601482f4551569fbbf91f9fc66045a59967501024699c84ea0d54b703ac39adc",
+  "candidate_pseudocode_sha256": "f35824da1f409a90c31581ad5d32ab2240abb7a69238a5a5c05a60d6efaaa7a7",
+  "candidate_replay_sha256": "c4a6160d473b20c652db5e60b22324eff67e6e8ebc491202c6527a51b8d43034",
+  "candidate_replays_sha256": "b23a1b3b05daa414836e066f4379dca5f6a49e42dd4d5ce566431a67e35a3c1e",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Candidate/source hashes match. Independent Thumb disassembly confirms 828C..82E0 is 84 bytes/40 instructions.",
+    "All 540 fixtures replayed in isolation; replays.json matched byte-for-byte. Provider callback argument derivation and its return are explicitly controlled; the nonzero mode-byte return path stores only the low halfword but preserves the full callback result in R0.",
+    "For the other path, the candidate correctly applies original A6C0 division, wrapped arithmetic, low-halfword multiplication/truncation, then compares that truncated first result unsigned against the full context capacity before truncating the selected capacity. The <=127 floor to 128 and subsequent second division/multiplication/store match the instruction sequence.",
+    "The candidate fixture uses nonzero callback results, avoiding the divide-by-zero case. Its documented absence of provider/physical-geometry semantics is accurate."
+  ],
+  "limitations": [
+    "Provider callback is controlled; zero results, invalid pointers, unusual physical geometry and concurrent mutation are not validated.",
+    "No canonical admission or C implementation."
+  ]
+}

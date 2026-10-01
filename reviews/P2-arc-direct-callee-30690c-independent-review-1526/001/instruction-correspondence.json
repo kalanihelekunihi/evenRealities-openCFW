@@ -1,0 +1,77 @@
+{
+  "source": "body.bin",
+  "source_sha256": "a40f8778cf56af535b68c5ea4cd3ab23c8a4e921ed3717c6ee1095923189377a",
+  "decoder_output": "body-objdump.txt",
+  "decoded_bytes": 22,
+  "decoded_instructions": 7,
+  "gaps": [],
+  "rows": [
+    {
+      "address": 3172620,
+      "bytes": [
+        "40c3",
+        "0080",
+        "fb70"
+      ],
+      "size": 6,
+      "mnemonic": "mov_s",
+      "operands": "r0,0x80fb70"
+    },
+    {
+      "address": 3172626,
+      "bytes": [
+        "8000"
+      ],
+      "size": 2,
+      "mnemonic": "ld_s",
+      "operands": "r0,[r0,0]"
+    },
+    {
+      "address": 3172628,
+      "bytes": [
+        "10ba",
+        "0080"
+      ],
+      "size": 4,
+      "mnemonic": "ldb",
+      "operands": "r0,[r0,186]"
+    },
+    {
+      "address": 3172632,
+      "bytes": [
+        "b8c3"
+      ],
+      "size": 2,
+      "mnemonic": "bmsk_s",
+      "operands": "r0,r0,0x3"
+    },
+    {
+      "address": 3172634,
+      "bytes": [
+        "b884"
+      ],
+      "size": 2,
+      "mnemonic": "bset_s",
+      "operands": "r0,r0,0x4"
+    },
+    {
+      "address": 3172636,
+      "bytes": [
+        "262f",
+        "003f"
+      ],
+      "size": 4,
+      "mnemonic": "seti",
+      "operands": "r0"
+    },
+    {
+      "address": 3172640,
+      "bytes": [
+        "7ee0"
+      ],
+      "size": 2,
+      "mnemonic": "j_s",
+      "operands": "[blink]"
+    }
+  ]
+}

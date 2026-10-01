@@ -1,0 +1,18 @@
+{
+  "review_id": "1464",
+  "status": "PASS_STATIC_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/arc-wakeup-register-recovery-1424/002",
+  "candidate_receipt_sha256": "efabae134c206ca4f5ec65b72c7edd28e17b38b14848ef0ed3bd3101be1a21f8",
+  "candidate_body_sha256": "576f840b8eeafbdba5ce1b1af9c7b076f5d4f6078e11628a7f17eca213aeb337",
+  "source_record_sha256": "0de6e945a56ec886a92e44d4eaefe02fbca6db11f8747876e30bffb45cffce03",
+  "package_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+  "checks": [
+    "Re-ran the read-only verifier and independently checked all 32 declared output hashes. The seed body is 34 bytes from 0x0030F6EC to 0x0030F70E with 14 contiguous ARCv2 EM instructions; the adjacent NOP at 0x0030F70E remains outside. The four literal/helper and caller-delayed-branch boundaries are pinned.",
+    "Decoded the two delay-slot cases: selector zero branches to the helper path that returns its updated word; selector one executes helper(index 1) then helper(index 0) and returns the second result; other nonzero selectors take the delayed return-one path. The observed caller delay slot supplies selector 1.",
+    "The directly decoded helper bytes perform indexed word load, operation-dependent OR/clear, and delayed-slot store. This supports the stated register/memory effect conditionally, while the candidate correctly avoids claiming physical object identity or runtime reachability."
+  ],
+  "limitations": [
+    "GNU Binutils is the only decoder in this packet; no independent ARC decoder is pinned. The global name is a provisional symbol seed, and global incoming-call closure, runtime load reachability, alternate entries and physical memory semantics are unresolved. No canonical admission."
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "review_id": "1333",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-vector-exchange-a274-1332/001",
+  "candidate_receipt_sha256": "80bfa3e90177a50622229b950574d842095dd20305fc1dbdc0dfc40b97101441",
+  "candidate_pseudocode_sha256": "6b97dc1144faad417552989ce965f80882257200f04f9ed7e0f69dc8e692ab19",
+  "candidate_replay_sha256": "b81581019b216a6447bdbf6a12d0f8281e3016bbc16c62e06854a307d8c8d9ea",
+  "candidate_replays_sha256": "70463e11d9ba7b2a86caf8827f56f0bee61294fb28039cef346f05699824a66f",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Candidate/source pins verify. Independent decode confirms exact body A274..A29C and three literal words; VTOR is freshly read and compared with RAM vector base. External case loads from flash base plus four times (index+16) and ignores callback; RAM case faults on zero callback at BKPT, otherwise loads old RAM word, stores callback and returns old word.",
+    "Isolated replay passes all 30 index/callback/vector cases, including zero callback BKPT paths. Read/return/write behavior is consistent with decoded instructions; no stack frame or index guard exists."
+  ],
+  "limitations": [
+    "The BKPT continuation into the write path is not executed by these fixtures. No architectural validity for tested signed indices, physical vector activation or concurrent access is claimed.",
+    "Private evidence only; no canonical admission or C implementation."
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "review_id": "1364",
+  "status": "PASS_SCOPED_CORRECTION",
+  "accepted": false,
+  "corrects_review": "reviews/P2-touch-peripheral-programming-independent-review-1346/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-peripheral-programming-98f4-1345/001",
+  "candidate_receipt_sha256": "4f8db441356d454bf0e79fdf80776f03550975790449fc1ec1817347abdea514",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "correction": "The 98F4 path does write base+0x304 on both sides of the byte-1 test: nonzero selects value 15; zero branches to MOVS r6,#0 and rejoins at the STR. Thus the exact behavior is a conditional value (15 or 0), with a write in either case. Review 1346's statement that byte1==0 skips the store was incorrect; candidate pseudocode and all 864 replay write traces are correct. The PASS_SCOPED finding for the rest of the review is unchanged."
+}

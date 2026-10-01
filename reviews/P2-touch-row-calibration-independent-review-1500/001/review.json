@@ -1,0 +1,18 @@
+{
+  "review_id": "1500",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-calibration-5cac-1499/001",
+  "candidate_receipt_sha256": "9bec8670b47c514a87cba54506d10d8fb3ddd94b8ac9ee65f13a23303b4b0350",
+  "candidate_pseudocode_sha256": "9455e53fefce664f565ce23c34330686f69b97316bf01a081a7ccbbf145028ff",
+  "candidate_replay_sha256": "487a17c313faf9046d8bbabb97a86367a9293bfea8408c75e041dbe1ae4add35",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Replayed the original 5CAC body against the isolated copied image. All 180 fixtures passed, including flags whose bit 3 is clear/set, indices 0/1/2, result values at 65535/65536/0xFFFFFFFF and independent helper status values.",
+    "Decoded behavior matches: the descriptor word at +12 selects a 144-byte record; the row pointer comes from record word 0; flag byte +35 bit 3 gates the helper; its five arguments include result pointer SP-12, index, record halfword +128, zero, and descriptor as the stack argument. On the active path, the result is clamped to 65535 into row halfword +4 while raw helper R0 status is returned. Inactive path preserves the halfword and returns zero.",
+    "SP is restored and the exact helper call list is asserted for all cases."
+  ],
+  "limitations": [
+    "7BC0 is controlled, so its status/result relationship is modeled; pointer validity and physical meaning remain unresolved. No canonical admission."
+  ]
+}

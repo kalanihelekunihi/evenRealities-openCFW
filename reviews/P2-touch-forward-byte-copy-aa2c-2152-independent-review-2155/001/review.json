@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-forward-byte-copy-aa2c-2152-independent-review-2155",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "accepted": false,
+  "scope": {
+    "candidate": "analysis/touch-forward-byte-copy-aa2c-2152/001",
+    "reviewed": "Forward byte copy at 0xAA2C original-byte behavior, exact source and artifact binding, isolated replay and explicit limits"
+  },
+  "pins": {
+    "candidate_receipt_sha256": "1f85cdf5125a2fdb866199ddacc9c859124d81f6e089a021f71a86446ef62314",
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "candidate_replays_sha256": "f58e4575d025f7bd808535018f411cdce2db4861ef55898db44b9efd979a1855",
+    "candidate_files": {
+      "replays.json": "f58e4575d025f7bd808535018f411cdce2db4861ef55898db44b9efd979a1855",
+      "replay.py": "2a39596e5de61b87dcae9e547d65c47050588c2728379cc6f404aef50607682a",
+      "pseudocode.md": "613ebd69edf7cce49fb9f5d7da8ed6358e0fcc4b7c958cfb036a6a1d9535f833",
+      "disassembly.txt": "9928e0c828196689970e06aef6fdbb4bd5b50e476f7957619737843b8eff5014"
+    }
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "Independent Thumb decode confirms the exact 18-byte body [0xAA2C,0xAA3E): index starts at zero, source byte load and destination byte store occur in increasing index order until R2, then incoming R0 is returned. R1/R2 and saved R4/SP are restored/preserved as described."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "The isolated 70-case replay matches byte for byte and compares the whole mapped allocation plus ordered stores across zero/boundary lengths, identical buffers, overlaps in both directions, and separate buffers. It demonstrates forward-copy overlap propagation for the tested mapped addresses."
+    }
+  ],
+  "limitations": [
+    "Only mapped ranges and tested lengths are covered; address wrap, faults and malformed memory are unresolved.",
+    "No canonical admission or C implementation."
+  ],
+  "checks": [
+    {
+      "command": "verify receipt artifact and original source hashes",
+      "result": "PASS",
+      "artifact": "source-checks.json"
+    },
+    {
+      "command": "isolated replay with redirected output",
+      "result": "PASS; 70 fixtures, replay JSON byte-identical",
+      "artifact": "replays.json"
+    },
+    {
+      "command": "independent Capstone Thumb-M-class disassembly compared with candidate listing",
+      "result": "PASS; complete extent and listing byte-for-byte equal",
+      "artifact": "independent-disassembly.txt"
+    }
+  ],
+  "review_artifacts": {
+    "source_checks_sha256": "8bd58b92dcb9841559f245eaad078b888a2ee7178ccd5800db01d7b1c30c4f2a",
+    "replay_sha256": "eb6e5e7586b14533ed7043b0e9ea7a1db7ee8f7421d9b91e627e71d9877a39a1",
+    "independent_disassembly_sha256": "9928e0c828196689970e06aef6fdbb4bd5b50e476f7957619737843b8eff5014"
+  },
+  "canonical_or_coverage_change": false
+}

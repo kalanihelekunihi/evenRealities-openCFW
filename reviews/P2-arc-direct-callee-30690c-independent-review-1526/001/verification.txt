@@ -1,0 +1,7 @@
+Independent review of arc-direct-callee-30690c-1512/001
+
+Candidate receipt SHA-256 9db61e8b175ca941e54a6edbc6a3d0e68f6f032200be4755f35487c5c42bd99d; pseudocode 9edac69fa6b8355b8f5052f4b0fec0e46e73d1debd8b21144147ca58b2ee9f1d; body SHA-256 a40f8778cf56af535b68c5ea4cd3ab23c8a4e921ed3717c6ee1095923189377a.
+
+Reproduced the verifier in an isolated review-owned copy. It passed source/package and caller pins, exact body extraction, ARC carrier rebuild and disassembly, all seven contiguous instructions across [0x0030690C, 0x00306922), adjacent seam bytes, and output hashes. The decoded operations are `mov_s r0,0x80FB70; ld_s r0,[r0,0]; ldb r0,[r0,186]; bmsk_s r0,r0,3; bset_s r0,r0,4; seti r0; j_s [blink]`. This supports the bounded expression `SETI((M8(M32[0x80FB70]+0xBA)&0xF)|0x10)` and that incoming R0 is overwritten. It does not establish identity or semantics of the global pointer/byte.
+
+PASS_STATIC_SCOPED. The fixtures are symbolic checks, not CPU execution. Caller delay-slot/store binding is source-pinned, but no interrupt state transition, physical observation, null behavior, or global alternate-entry census is claimed. Catalog name remains provisional and no canonical admission is made.

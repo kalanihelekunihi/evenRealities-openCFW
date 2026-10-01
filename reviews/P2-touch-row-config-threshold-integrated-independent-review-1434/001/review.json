@@ -1,0 +1,18 @@
+{
+  "review_id": "1434",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-config-threshold-integrated-1433/001",
+  "candidate_receipt_sha256": "87b4d3ad29ab38c50e3a7b8961f871aa4deaf951c0bd9aad5dc495a2f6a5416f",
+  "candidate_pseudocode_sha256": "76cbf6dcc0b1a635eb2f02bf24f28fb0b189eb67eb7d12c386ec2cbd70fcc94e",
+  "candidate_replay_sha256": "e27ec706b2840dea103855124fb7ab6d4ed844c303c54ba89c6290cdaf440388",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Copied the immutable replay into this review directory and ran all 216 fixtures independently; all passed. Original 623C and 6220 execute, while 6294 and A6C0 remain controlled. The model checks row writes, status, SP, call args, and output flags.",
+    "The threshold path uses the original low flag bits: where the bit-3 branch applies, 623C reads row halfword+0x2C and context byte+0x4D, adds them, reads context halfword+0x3C, calls 6220, then computes (scale+1)>>2. With these fixtures' zero row halfword and zero context scale/offset, 6220 returns 1 and threshold is 0, so 623C returns 10; the parent stores that value. Later row decisions still use the original loaded flags.",
+    "The replay exercises the earlier original range/shift chain with explicit percentage-zero inputs and retains the checked return and frame behavior from 1413/1419/1425. The selected flags, controlled returns, and no-helper branch effects match the decoded instruction flow."
+  ],
+  "limitations": [
+    "Threshold inputs are fixed to the stated zeroed fields; broader threshold behavior is covered separately by 1431. Helper 6294 and division A6C0 remain controlled. Pointer validity, physical meaning, arbitrary mixed-row behavior, and canonical admission are not established."
+  ]
+}

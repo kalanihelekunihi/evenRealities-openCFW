@@ -1,0 +1,20 @@
+{
+  "review_id": "2105",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-division-adjacent-return-stubs-2104/001",
+  "candidate_receipt_sha256": "ea2e1d1a3ba0dadcdade853656665a7100a955684d7f62c494fe201423911420",
+  "candidate_pseudocode_sha256": "f283e3807d5113c0754ee9e15f4dbb0381a73bd6a49c855a77d997f3c7e015cd",
+  "candidate_replay_sha256": "48a7856094cdd2ae4128c4b8f0122fb13e79a8cb53446b65c1baa6bd8b005ad0",
+  "candidate_replays_sha256": "85488fbcab90b5c8dad67011e817246139a0e1f596cd77ea8873a95dc29fb33e",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "All candidate and source pins match. Independent byte inspection under the 0x3300 touch:flash mapping confirms both one-halfword spans, A7D2..A7D4 and A9A6..A9A8, contain 70 47 (Thumb BX LR).",
+    "The isolated replay passed all 128 supplied-entry original-instruction cases. For the ordinary Thumb LR targets used, it observed no changes to R0-R12, SP, LR, NZCV, or RAM and returned through the LR target.",
+    "The artifact keeps both spans outside the division wrapper ownership and explicitly leaves reachability and byte-role ownership unresolved. A7CA..A7CC is separate."
+  ],
+  "limitations": [
+    "Explicitly entering a BX LR halfword establishes its bounded behavior, not that either byte is a shipped standalone function, a reachable caller target, or padding/non-code.",
+    "Atypical LR, exception behavior, image-wide caller closure, canonical admission, and physical behavior are not established."
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-frequency-register-chain-1266/001",
+  "candidate_source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "candidate_files": {
+    "pseudocode.md": "d3738b3dcdb309ec755ee9a177bb754be42f86de33751c9c5276a4e1b31da8e3",
+    "replay.py": "d468791319984bcd867d2824ba691b36d1156a83a9abb70e99a9b022b0b62b13",
+    "replays.json": "20d99b14a1952c15fed6acb5bfdfcb440ec70946024f4ba60b6a1d68fde258e8"
+  },
+  "review_result": "PASS_SCOPED",
+  "checks": {
+    "original_bytes": "Independently decoded 9F34, 9C38, and 9C44 from the pinned original. 9F34 returns bits 1..0 from 0x40030028; 9C38 loads the word at 0x20000F20; 9C44 tests bit 31 of 0x40030030, then masks the index to bits 2..0 of 0x40030F08 and implements 24,000,000 + 4,000,000*index. The 46F8/9F9C stages match the separately reviewed divider code.",
+    "replay_and_matrix": "All 1,024 isolated original-instruction fixtures pass and regenerate the candidate rows exactly. The matrix spans four shift values per stage, selectors 0..3, eight trim values, and both enable-bit states; actual helper bodies run without replacement. Checked exact read order, source choice, return arithmetic, and SP."
+  },
+  "limits": [
+    "Synthetic register values do not establish physical clock meaning, timing, or concurrent changes.",
+    "No canonical admission is claimed."
+  ],
+  "accepted": false
+}

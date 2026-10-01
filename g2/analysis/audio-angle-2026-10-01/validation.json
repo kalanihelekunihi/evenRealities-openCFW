@@ -1,0 +1,162 @@
+{
+  "image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "functions": [
+    {
+      "entry": "0x59187a",
+      "sha256": "a35f5746784d3affd2f55a7a9e68323056483e2b3d738ff0fb01d256cf31e5df"
+    },
+    {
+      "entry": "0x59188e",
+      "sha256": "c5293fd63b23610d5d29beb387445a5bbf93f4f92bd72879ab193a8dd26f2d7c"
+    },
+    {
+      "entry": "0x5918b0",
+      "sha256": "3bfc72be8b8bdc7511bdae236d3bfa0a5bfa01c785522731ab2b090729a52549"
+    },
+    {
+      "entry": "0x5918cc",
+      "sha256": "60236d20621bee5d169103c082191c11bb5015491c16a288bf430f03a94d042f"
+    },
+    {
+      "entry": "0x591ba4",
+      "sha256": "58d98b85e806fac8ca6669b6b7156e6b50afab7a1caad4f9a6be02384b90c20e"
+    },
+    {
+      "entry": "0x59c7ac",
+      "sha256": "eebedaca845140b15ab5ffbe3ed94e135d303dc976ac2e5d320bcdb7e4d0b596"
+    },
+    {
+      "entry": "0x59c800",
+      "sha256": "dbb01d401deb7e25eb46eaa901dfae2231f08896ef1eb4ab488c1cc61c2a35bd"
+    }
+  ],
+  "left_buffer": "0x20375400",
+  "right_buffer": "0x20375a40",
+  "cases": [
+    {
+      "case": "impulse_lag_-10",
+      "angle": -1.5707963267948966,
+      "delay": -0.000625,
+      "quality": 21.0,
+      "rms": 35.35533905932738,
+      "wire_degrees": -90
+    },
+    {
+      "case": "impulse_lag_-3",
+      "angle": -0.47729143365334176,
+      "delay": -0.0001875,
+      "quality": 21.0,
+      "rms": 35.35533905932738,
+      "wire_degrees": -27
+    },
+    {
+      "case": "impulse_lag_-1",
+      "angle": -0.15372979712288196,
+      "delay": -6.25e-05,
+      "quality": 21.0,
+      "rms": 35.35533905932738,
+      "wire_degrees": -8
+    },
+    {
+      "case": "impulse_lag_0",
+      "angle": 0.0,
+      "delay": 0.0,
+      "quality": 21.0,
+      "rms": 35.35533905932738,
+      "wire_degrees": 0
+    },
+    {
+      "case": "impulse_lag_1",
+      "angle": 0.15372979712288196,
+      "delay": 6.25e-05,
+      "quality": 21.0,
+      "rms": 35.35533905932738,
+      "wire_degrees": 8
+    },
+    {
+      "case": "impulse_lag_3",
+      "angle": 0.47729143365334176,
+      "delay": 0.0001875,
+      "quality": 21.0,
+      "rms": 35.35533905932738,
+      "wire_degrees": 27
+    },
+    {
+      "case": "impulse_lag_10",
+      "angle": 1.5707963267948966,
+      "delay": 0.000625,
+      "quality": 21.0,
+      "rms": 35.35533905932738,
+      "wire_degrees": 90
+    },
+    {
+      "case": "silence",
+      "outputs": [
+        -1.5707963267948966,
+        -0.000625,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "case": "default_lag_limit",
+      "outputs": [
+        -1.5707963267948966,
+        -0.0005,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "case": "energy_reject",
+      "outputs": [
+        "NaN",
+        "NaN",
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "case": "quality_reject",
+      "outputs": [
+        "NaN",
+        "NaN",
+        1.0065907729179135,
+        1.0
+      ]
+    },
+    {
+      "case": "empty",
+      "outputs": [
+        "NaN",
+        "NaN",
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "case": "stock_wrapper_silence",
+      "wire_degrees": -90
+    }
+  ],
+  "asin_arguments": [
+    -1.0,
+    -1.0,
+    -0.4593749999999999,
+    -0.4593749999999999,
+    -0.153125,
+    -0.153125,
+    0.0,
+    0.0,
+    0.153125,
+    0.153125,
+    0.4593749999999999,
+    0.4593749999999999,
+    1.0,
+    1.0,
+    -1.0,
+    -1.0,
+    -1.0
+  ],
+  "limits": "Original Thumb/VFP correlation, integer-to-double, nonnegative sqrt, clamp and degree conversion. Only asin is a host math stub. Unicorn Thumb without MCLASS is used because its MCLASS model rejects double VFP. Synthetic PCM, no acoustic/hardware validation."
+}

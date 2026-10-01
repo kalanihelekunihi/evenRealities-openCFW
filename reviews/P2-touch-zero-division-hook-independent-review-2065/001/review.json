@@ -1,0 +1,18 @@
+{
+  "review_id": "2065",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-zero-division-hook-2064/001",
+  "candidate_receipt_sha256": "8e4f13e6bf359c5850e43cab94788c39c3a470eb3afa73e9742d412c09f3169e",
+  "candidate_pseudocode_sha256": "d5b4c95a9a4de2debff515eeb3b3958317ec407961a5ce66992996836d5a61db",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Candidate receipt SHA-256 8e4f13e6bf359c5850e43cab94788c39c3a470eb3afa73e9742d412c09f3169e; source SHA-256 371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87. All declared artifact pins match.",
+    "The candidate receipt, source hash, exact two-byte body hash and all artifacts match; isolated replay reproduced all 64 fixtures.",
+    "The original bytes 70 47 at A9A8 are BX LR. Across normal Thumb LR fixtures, R0..R12, SP, LR, NZCV and mapped RAM remain unchanged as asserted; adjacent A9AA is excluded."
+  ],
+  "limitations": [
+    "Only normal Thumb LR return behavior is covered. Atypical EXC_RETURN/non-Thumb LR and physical exception dispatch are explicitly outside scope. No canonical admission."
+  ],
+  "candidate_replay_sha256": "f4ea4de447eee27d2ea2f13c808b29e3291ef0b030cb1fdcf00f8af5133fe7cc"
+}

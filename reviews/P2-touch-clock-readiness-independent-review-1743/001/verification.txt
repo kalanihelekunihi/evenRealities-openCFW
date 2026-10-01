@@ -1,0 +1,5 @@
+Review 1743 — PASS_SCOPED
+
+The candidate is bound to the source SHA-256 371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87. Candidate artifact and receipt hashes were checked. I independently disassembled the source bytes with arm-none-eabi-objdump in Thumb mode: 9E18..9EF2 contains the stated 218-byte body and 103 instructions; 9EF2 is the excluded NOP and literals begin at 9EF4.
+
+I isolated the original Unicorn replay under /tmp/review1743-independent. All 1,024 fixture rows passed and the generated replays.json matched the candidate byte-for-byte. Manual branch/dataflow review confirmed that multiplication wraps at 32 bits where the instructions wrap, the division order is preserved, and the large/small paths use separate outputs. The pseudocode's freshness statement is consistent with the repeated loads in the body. The run's fixed frequency and synthetic peripheral state limit the conclusions as stated.

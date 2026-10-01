@@ -1,0 +1,18 @@
+{
+  "review_id": "1472",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-packet-builder-record-modes-1471/001",
+  "candidate_receipt_sha256": "a56292d3179079e85bfcf3b69500c3a0fb3402ef3316c02846ace8717ecfe3c0",
+  "candidate_pseudocode_sha256": "1f371097e19f4e53a7226cd0bb009ee4e55eaea117d481024beab388a44e810c",
+  "candidate_replay_sha256": "a3a0782650e8bb262b806bb6e538f175fd5100fc5b29031b0e88fbe716893f3c",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independently replayed 54 original-instruction fixtures across both groups, three +117 modes, three +116 modes and row modes 0/1/2; every controlled-helper call sequence, mapping argument, destination, R0/SP/PC check passes.",
+    "Decoded row-mode selection: 1 selects the second context mapping and performs the extra 5188 call with the context +104 value; 2 selects the first mapping; other tested mode 0 uses context +100. For the supplied selected subrecord with count zero, its derived mask is zero.",
+    "Group-specific iteration counts and output strides agree with the 1469 evidence and body: four iterations/44-byte stride for group 1, five iterations/28-byte stride otherwise; group 1\u2019s helper destination is offset +20."
+  ],
+  "limitations": [
+    "Pin lists and subrecord lists are empty; the extra mask path is only exercised with a zero derived mask. 5548/5188 remain controlled and their contracts, nonempty-list behavior, physical effects and canonical admission are not established."
+  ]
+}

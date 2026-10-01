@@ -1,0 +1,19 @@
+{
+  "review_id": "1987",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-loop-state-traces-1978/001",
+  "candidate_receipt_sha256": "2e108857c7b557d4f75eba661be115c4ed4c92f1ec8f0cfe9ea8c9f74305e34c",
+  "candidate_pseudocode_sha256": "184f686788ef135488589479b966060df999aa6d06207abb43f466c86521a39c",
+  "candidate_replay_sha256": "a7a285c207fa3c418d442c037a8af3fca43f9529fc558ca1ec5abdb2438c6678",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Receipt file hashes and source image hash match.",
+    "An isolated replay regenerated all 16 traces exactly. The fixtures cover states 2 and 3, predicate/counter values 0 and 1, and both initial PRIMASK values.",
+    "The recorded state/counter transitions and ordered calls match the bounded code path: state 2 with predicate zero changes state only when counter is zero; state 3 selects state 1/counter 640 on readiness, otherwise state 2/counter 160. Mask-save/restore helpers preserve the initial mask and SP."
+  ],
+  "limitations": [
+    "Predicate, sensor/state, readiness and timing boundaries are controlled; readiness is only sampled as specified, and state 1, invalid states, mutable events and physical behavior are outside these traces. This is bounded loop evidence, not complete loop or canonical coverage.",
+    "No canonical admission."
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "kind": "symbolic static trace derived from bounded original bytes",
+  "fixtures": [
+    {
+      "name": "loop-index-and-terminal-branch",
+      "setup": "Initialize LP_COUNT=18, r1=0, r2=0, r3=0x00f00808 as instructions do; assume standard ARC zero-overhead LP semantics.",
+      "result": "18 loop-body iterations; r1 visits 0..17. Conditional branch at 0x3068e4 is not taken for 0..16 and taken at 17. The branch delay slot provides r0=0x99 on the terminal path; nonterminal fall-through sets r0=r2. r2 visits 0,9,...,153; r3 advances by 0x24 each iteration."
+    },
+    {
+      "name": "write-address-expressions",
+      "setup": "For every loop pass, use the exact `ADD2(0x00f00808,r0)` operation at 0x3068f0.",
+      "result": "Every iteration performs word store -1 at ADD2(base,r0)+12 and +24, each followed by SYNC. Iterations 0..16 also store -1 at current r3 before the indexed stores; iteration 17 skips that store.",
+      "limits": "No MMIO side effect, peripheral identity, or actual hardware-loop execution is claimed."
+    }
+  ],
+  "bounds": "All conditional behavior and stores are within the 68-byte owned candidate; hardware loop-count behavior is architecture-dependent but statically represented from LP_COUNT and LP instruction.",
+  "derived_counts": {
+    "loop_iterations": 18,
+    "offset_zero_word_stores": 17,
+    "offset_12_word_stores": 18,
+    "offset_24_word_stores": 18,
+    "total_word_stores": 53,
+    "sync_in_loop": 36,
+    "loop_terminal_index": 17,
+    "last_selected_index": 153
+  }
+}

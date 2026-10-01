@@ -1,0 +1,19 @@
+{
+  "review_id": "2043",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-measurement-result-prefix-2042/003",
+  "candidate_receipt_sha256": "5265b71dd44fde6bcccb543c1d992a38fb2ff8178c8a5f517d5e5358869f9a20",
+  "candidate_pseudocode_sha256": "2cf7855b14afc1381aee0d01914c4e897c93b600298e6db3286d38b6e6423c22",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Candidate receipt SHA-256 is 5265b71dd44fde6bcccb543c1d992a38fb2ff8178c8a5f517d5e5358869f9a20; source/image SHA-256 is 371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87. All declared file pins match.",
+    "Isolated replay reproduced all 40 fixtures. The bounded prefix checks inclusive unsigned input bounds, pointer and configuration guards, arming, pending and zero-denominator paths, preserving output and SP in those paths.",
+    "Isolated replay was run from a copy writing only to /tmp/codex-review-2043; it completed with PASS and 40 fixtures."
+  ],
+  "limitations": [
+    "Arithmetic completion at 0x9E64 is outside scope; readiness and peripheral state are modeled rather than physical.",
+    "No canonical admission."
+  ],
+  "candidate_replay_sha256": "38e9e0bc5f5fcb7e97f70ebfac7aa1d1ae9e246b2302a78a3f6d4f23cc69afe0"
+}

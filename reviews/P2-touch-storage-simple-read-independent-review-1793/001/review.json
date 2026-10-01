@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-storage-simple-read-independent-review-1793",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "scope": {
+    "candidate": "analysis/touch-storage-simple-read-7e44-1788/001",
+    "code_span": [
+      "0x7e44",
+      "0x7e62"
+    ],
+    "reviewed": "The exact 7E44..7E62 body is 30 bytes / 15 instructions; alignment at 7E62 and the error literal at 7E64 are excluded. Disassembly confirms R3 context, provider at context+28, callback at provider+20, provider word zero, address context+16+offset with 32-bit wrap, original size and output pointer forwarding, and normalization to zero or the pinned error literal. All 81 isolated fixtures match the exact call arguments, return and stack state."
+  },
+  "pins": {
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "candidate_receipt_sha256": "b8e3450c9d9b4daf3aa2cbf2034398b4b29bbae345f92e7e8c4fef01ee0c251a",
+    "body_sha256": "20c9accd7d921966473072090de14214d3895534c01bf3582599a042c1945563",
+    "candidate_replays_sha256": "8ddecfacf56c19596c0c83b9cae921e42801ae6f4829a3df39cf25ba1bf3f546"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "The exact 7E44..7E62 body is 30 bytes / 15 instructions; alignment at 7E62 and the error literal at 7E64 are excluded. Disassembly confirms R3 context, provider at context+28, callback at provider+20, provider word zero, address context+16+offset with 32-bit wrap, original size and output pointer forwarding, and normalization to zero or the pinned error literal. All 81 isolated fixtures match the exact call arguments, return and stack state."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "Candidate receipt/source artifacts match their hashes; isolated replay JSON matches candidate output exactly."
+    }
+  ],
+  "limitations": [
+    "Callback is controlled and does not mutate output; no actual copy/read behavior, pointer validity or physical mapping is established.",
+    "No canonical admission."
+  ],
+  "checks": [
+    {
+      "command": "source/body/literal and receipt verification",
+      "result": "PASS"
+    },
+    {
+      "command": "independent argument and status-flow review",
+      "result": "PASS"
+    },
+    {
+      "command": "isolated replay of all 81 fixtures",
+      "result": "PASS; exact replay JSON match",
+      "artifact": "isolated-replays.json"
+    }
+  ],
+  "canonical_or_coverage_change": false
+}

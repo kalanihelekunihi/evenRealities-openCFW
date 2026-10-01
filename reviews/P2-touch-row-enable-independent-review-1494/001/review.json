@@ -1,0 +1,17 @@
+{
+  "review_id": "1494",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-enable-7dde-1493/001",
+  "candidate_receipt_sha256": "5a3b22416c5c85c2d737a7b54321df4514438b98348811487dd32f8b23cfca42",
+  "candidate_pseudocode_sha256": "1910b8548a3aff5b891c60544aae0cc8bbbd79c71fe955252f1884774190578c",
+  "candidate_replay_sha256": "d426843cf4d2eb3c84d1826d3aaa6ee1e255f7851e6c918202068bf0aa7a62b4",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independently decoded the 38-byte leaf at 0x7DDE..0x7E04. Unsigned R0 > 2 returns zero before dereferencing; valid indices compute 60-byte row stride and load byte +35; result is one exactly when mask 0x6 is fully set. The routine performs no stores or calls.",
+    "Replayed a copied original-instruction harness against the pinned source image. All 1,536 fixtures passed, covering every flag byte at valid indices 0/1/2 and invalid 3/255/0xFFFFFFFF. Read hooks verify invalid indices perform no memory reads; write hook remains empty. SP is restored."
+  ],
+  "limitations": [
+    "Pointer validity and physical meaning are not established. No canonical admission."
+  ]
+}

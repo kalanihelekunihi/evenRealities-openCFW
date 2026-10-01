@@ -1,0 +1,19 @@
+{
+  "review_id": "1406",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-activation-config-prefix-1405/003",
+  "candidate_receipt_sha256": "d8019939cd026e34236cee84f687d0d68fba51c570f7c8a23d07714af9bf8537",
+  "candidate_pseudocode_sha256": "5c5a2aa90f677d91bbb73e407875d5134a1cb25e6585c1df2f7de46aed7c48d3",
+  "candidate_replay_sha256": "2808de84a226a09eab7ca536c481250d5359b876dddb7e215ab943f66ea39ac2",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "The candidate binds the same pinned source image and a single success-path replay. I copied its script into this review directory, redirected all generated output to a review-owned path, and independently reran it; it passed through stop PC 0x3D50.",
+    "The run executes original 0x71C8, including its state transitions through six original 0x6AC0 entries. The state-2 deeper helpers remain controlled, as do the named configuration and later application dependencies. The replay verifies the exact reached call sequence, output descriptor/list values, startup writes, and prior-prefix assertions.",
+    "The candidate now maps the required 0x40290000 page, avoiding the earlier failed setup from attempts 001 and 002. Attempt 003 is bound as the reviewed candidate; those failures remain preserved."
+  ],
+  "limitations": [
+    "Only the supplied success path is replayed. It does not cover nonzero/error continuations through this application prefix. Four deeper state-2 helpers, configuration helpers listed in the candidate, and later application calls remain controlled. Callback is null in the initialized context.",
+    "External clock-table contents and MMIO/device behavior are synthetic. Arrival at 0x3D50 is bounded execution evidence, not full startup, application-loop, physical activation, or canonical admission."
+  ]
+}

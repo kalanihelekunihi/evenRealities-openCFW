@@ -1,0 +1,60 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage1.bin:     file format binary
+
+
+Disassembly of section .data:
+
+10000ba8 <.data+0xbc0>:
+10000ba8:	1493      	pop      	r4-r6, r15
+10000baa:	934a      	ld.w      	r2, (r3, 0x28)
+10000bac:	e4422002 	andi      	r2, r2, 2
+10000bb0:	e902fffd 	bez      	r2, 0x10000baa	// 0x10000baa
+10000bb4:	d0018002 	ldbi.b      	r2, (r1)
+10000bb8:	b358      	st.w      	r2, (r3, 0x60)
+10000bba:	07ed      	br      	0x10000b94	// 0x10000b94
+10000bbc:	14d3      	push      	r4-r6, r15
+10000bbe:	6d07      	mov      	r4, r1
+10000bc0:	6d4b      	mov      	r5, r2
+10000bc2:	6d83      	mov      	r6, r0
+10000bc4:	e3ffffc4 	bsr      	0x10000b4c	// 0x10000b4c
+10000bc8:	33a2      	movi      	r3, 162
+10000bca:	4378      	lsli      	r3, r3, 24
+10000bcc:	3200      	movi      	r2, 0
+10000bce:	ea010c07 	movi      	r1, 3079
+10000bd2:	b342      	st.w      	r2, (r3, 0x8)
+10000bd4:	ea0080a2 	movi      	r0, 32930
+10000bd8:	c7004900 	rotli      	r0, r0, 24
+10000bdc:	b353      	st.w      	r2, (r3, 0x4c)
+10000bde:	b320      	st.w      	r1, (r3, 0x0)
+10000be0:	5d23      	subi      	r1, r5, 1
+10000be2:	b321      	st.w      	r1, (r3, 0x4)
+10000be4:	3101      	movi      	r1, 1
+10000be6:	b324      	st.w      	r1, (r3, 0x10)
+10000be8:	6150      	addu      	r5, r4
+10000bea:	b346      	st.w      	r2, (r3, 0x18)
+10000bec:	b05d      	st.w      	r2, (r0, 0x74)
+10000bee:	b322      	st.w      	r1, (r3, 0x8)
+10000bf0:	b3d8      	st.w      	r6, (r3, 0x60)
+10000bf2:	6c53      	mov      	r1, r4
+10000bf4:	6546      	cmpne      	r1, r5
+10000bf6:	080a      	bt      	0x10000c0a	// 0x10000c0a
+10000bf8:	33a2      	movi      	r3, 162
+10000bfa:	4378      	lsli      	r3, r3, 24
+10000bfc:	9389      	ld.w      	r4, (r3, 0x24)
+10000bfe:	e924ffff 	bnez      	r4, 0x10000bfc	// 0x10000bfc
+10000c02:	e3ffffa5 	bsr      	0x10000b4c	// 0x10000b4c
+10000c06:	6c13      	mov      	r0, r4
+10000c08:	1493      	pop      	r4-r6, r15
+10000c0a:	934a      	ld.w      	r2, (r3, 0x28)
+10000c0c:	e4422008 	andi      	r2, r2, 8
+10000c10:	e902fffd 	bez      	r2, 0x10000c0a	// 0x10000c0a
+10000c14:	9358      	ld.w      	r2, (r3, 0x60)
+10000c16:	d4018002 	stbi.b      	r2, (r1)
+10000c1a:	07ed      	br      	0x10000bf4	// 0x10000bf4
+10000c1c:	14d0      	push      	r15
+10000c1e:	1421      	subi      	r14, r14, 4
+10000c20:	3201      	movi      	r2, 1
+10000c22:	e42e0002 	addi      	r1, r14, 3
+10000c26:	3005      	movi      	r0, 5
+10000c28:	e3ffffca 	bsr      	0x10000bbc	// 0x10000bbc
+10000c2c:	d86e0003 	ld.b      	r3, (r14, 0x3)

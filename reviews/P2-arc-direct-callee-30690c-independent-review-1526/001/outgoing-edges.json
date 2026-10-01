@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "entry": "0x0030690c",
+  "direct_calls": [],
+  "indirect_calls": [],
+  "branches": [],
+  "memory_reads": [
+    "M32[0x0080fb70] as a pointer",
+    "M8[pointer+0xBA]"
+  ],
+  "special_register_writes": [
+    "SETI r0 at 0x0030691c updates STATUS32 via ARC architectural instruction semantics"
+  ],
+  "return": "j_s [blink] at 0x00306920; no delay slot",
+  "interpretation_limits": "Pointer validity, target object identity, caller status-field meaning, and hardware effects are unresolved."
+}

@@ -1,0 +1,19 @@
+{
+  "review_id": "1440",
+  "status": "REVISE_PROSE",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-config-flags-integrated-1439/001",
+  "candidate_receipt_sha256": "6745d6d1f63ce64ee8a691b4e4a7b22391cffc40a60ecf99a88feba6064dad85",
+  "candidate_pseudocode_sha256": "cdbff8283cd8d955c8d2c277a1d9903eaaeaa1c55634d940307cb025238d74e4",
+  "candidate_replay_sha256": "179bc104b96a66853d5d320b4678a519c19f0cdec983b4db365cbce9e9c296cb",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independently replayed the 216 original-instruction fixtures in the review-owned output directory; all passed. The original 6262/6294 local helper path executes, with only A6C0 and A7CC division responses controlled as stated.",
+    "The fixture setup sets context byte C+0x4E to 5 for every case. Therefore the pseudocode statement that the initialized context fields are zero is too broad and conflicts with its own shift-helper input: the context shift byte is 5. The fixtures do initialize the listed percentage/decision-mode and row fields to zero; the prose should name those exact fields and disclose C+0x4E=5.",
+    "The 216 modeled return/status and division-call assertions are consistent with the exercised fixture matrix, including the expected flag-4 division path and the parent retaining original flags for subsequent decisions."
+  ],
+  "limitations": [
+    "The fixture matrix fixes the context shift byte at 5; it does not establish behavior across other context values or broader mixed-row inputs. A6C0/A7CC remain controlled; division behavior, pointer validity, concurrency and physical meaning remain unresolved. No canonical admission."
+  ],
+  "required_correction": "Clarify the zero-initialization sentence: identify percentage, decision-mode, and any zero row fields individually; state that context byte C+0x4E is seeded to 5 in these fixtures."
+}

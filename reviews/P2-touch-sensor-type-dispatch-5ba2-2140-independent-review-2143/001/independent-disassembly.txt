@@ -1,0 +1,13 @@
+00005ba2 push {r4, lr}
+00005ba4 movs r3, #0x7b
+00005ba6 ldrb r3, [r0, r3]
+00005ba8 cmp r3, #3
+00005baa bls #0x5bb6
+00005bac cmp r3, #6
+00005bae bne #0x5bbe
+00005bb0 bl #0x5a0a
+00005bb4 b #0x5bbe
+00005bb6 cmp r3, #2
+00005bb8 blo #0x5bbe
+00005bba bl #0x5a94
+00005bbe pop {r4, pc}

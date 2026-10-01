@@ -1,0 +1,132 @@
+00005a94 push {r4, r5, r6, r7, lr}
+00005a96 mov lr, r8
+00005a98 push {lr}
+00005a9a sub sp, #0x20
+00005a9c movs r5, r0
+00005a9e ldr r3, [r0, #0x28]
+00005aa0 mov r8, r3
+00005aa2 ldr r3, [r0, #4]
+00005aa4 ldr r2, [r0]
+00005aa6 mov ip, r2
+00005aa8 ldrh r7, [r0, #0x38]
+00005aaa add r2, sp, #8
+00005aac str r2, [sp]
+00005aae mov r2, sp
+00005ab0 movs r1, #0
+00005ab2 strb r1, [r2, #4]
+00005ab4 movs r2, #0x23
+00005ab6 mov r1, ip
+00005ab8 ldrb r2, [r1, r2]
+00005aba lsls r2, r2, #0x1f
+00005abc bmi #0x5ad8
+00005abe ldrh r6, [r1, #8]
+00005ac0 ldrh r2, [r1, #0x1e]
+00005ac2 adds r6, r6, r2
+00005ac4 mov r2, r8
+00005ac6 ldrb r2, [r2]
+00005ac8 cmp r2, #0
+00005aca beq #0x5ad2
+00005acc subs r2, #1
+00005ace mov r1, r8
+00005ad0 strb r2, [r1]
+00005ad2 movs r4, r7
+00005ad4 movs r1, #0
+00005ad6 b #0x5aea
+00005ad8 ldrh r6, [r1, #8]
+00005ada ldrh r2, [r1, #0x1e]
+00005adc subs r6, r6, r2
+00005ade b #0x5ac4
+00005ae0 movs r2, #0
+00005ae2 strb r2, [r3, #6]
+00005ae4 orrs r1, r2
+00005ae6 adds r3, #0xa
+00005ae8 movs r4, r0
+00005aea subs r0, r4, #1
+00005aec cmp r4, #0
+00005aee beq #0x5afa
+00005af0 ldrh r2, [r3, #4]
+00005af2 cmp r2, r6
+00005af4 bls #0x5ae0
+00005af6 movs r2, #1
+00005af8 b #0x5ae2
+00005afa cmp r1, #0
+00005afc bne #0x5b16
+00005afe movs r3, #0x20
+00005b00 mov r2, ip
+00005b02 ldrb r3, [r2, r3]
+00005b04 mov r2, r8
+00005b06 strb r3, [r2]
+00005b08 movs r2, #0x23
+00005b0a mov r3, ip
+00005b0c ldrb r3, [r3, r2]
+00005b0e movs r0, #1
+00005b10 bics r3, r0
+00005b12 mov r0, ip
+00005b14 strb r3, [r0, r2]
+00005b16 mov r3, r8
+00005b18 ldrb r3, [r3]
+00005b1a cmp r3, #0
+00005b1c bne #0x5b52
+00005b1e movs r2, #0x23
+00005b20 mov r3, ip
+00005b22 ldrb r3, [r3, r2]
+00005b24 movs r1, #1
+00005b26 orrs r3, r1
+00005b28 mov r1, ip
+00005b2a strb r3, [r1, r2]
+00005b2c movs r3, #0x23
+00005b2e mov r2, ip
+00005b30 ldrb r3, [r2, r3]
+00005b32 lsls r3, r3, #0x1f
+00005b34 bpl #0x5b3e
+00005b36 movs r3, #0x7b
+00005b38 ldrb r3, [r5, r3]
+00005b3a cmp r3, #2
+00005b3c beq #0x5b6a
+00005b3e ldr r3, [r5, #0x70]
+00005b40 movs r2, #0xff
+00005b42 tst r2, r3
+00005b44 bne #0x5b74
+00005b46 ldr r2, [r5]
+00005b48 mov r3, sp
+00005b4a ldrb r1, [r3, #4]
+00005b4c movs r3, #0x28
+00005b4e strb r1, [r2, r3]
+00005b50 b #0x5b92
+00005b52 cmp r1, #0
+00005b54 beq #0x5b2c
+00005b56 ldr r3, [r5, #4]
+00005b58 b #0x5b62
+00005b5a movs r1, #0
+00005b5c strb r1, [r3, #6]
+00005b5e adds r3, #0xa
+00005b60 movs r7, r2
+00005b62 subs r2, r7, #1
+00005b64 cmp r7, #0
+00005b66 bne #0x5b5a
+00005b68 b #0x5b2c
+00005b6a movs r1, r5
+00005b6c mov r0, sp
+00005b6e bl #0x48cc
+00005b72 b #0x5b3e
+00005b74 movs r1, r5
+00005b76 mov r0, sp
+00005b78 bl #0x4a2a
+00005b7c b #0x5b46
+00005b7e ldr r1, [sp]
+00005b80 lsls r3, r4, #3
+00005b82 adds r1, r1, r3
+00005b84 ldr r2, [r5]
+00005b86 ldr r0, [r2, #0x24]
+00005b88 adds r0, r0, r3
+00005b8a movs r2, #8
+00005b8c bl #0xaa2c
+00005b90 adds r4, #1
+00005b92 mov r3, sp
+00005b94 ldrb r3, [r3, #4]
+00005b96 cmp r3, r4
+00005b98 bhi #0x5b7e
+00005b9a add sp, #0x20
+00005b9c pop {r7}
+00005b9e mov r8, r7
+00005ba0 pop {r4, r5, r6, r7, pc}

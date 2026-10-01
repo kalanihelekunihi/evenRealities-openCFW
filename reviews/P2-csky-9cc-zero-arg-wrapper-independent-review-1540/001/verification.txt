@@ -1,0 +1,7 @@
+Independent review of csky-9cc-zero-arg-wrapper-1525/001
+
+Candidate receipt SHA-256 fda5ee6b9cfd59ced7b2da485c1884e5e7537b1a3a7c6f329cc6c3c68171638d; pseudocode f7e231b509b9bc22bfc9ce3fe79db11498bece86337e4ab82b000d18621b6f0e; body 38fc300b5abb347843f68fc859adcac4597d982672b4546907e43ac57875408e.
+
+Reproduced the candidate verifier in an isolated copy after normalizing only review-directory filenames. It passed source/tool/dependency pins, exact 10-byte extraction at runtime 0x10000AF8 under conditional mapping, disassembly, all four caller sites/argument contexts, the 0x20001280 adjacent literal, and B02 BKPT boundary classification. The body decodes to PUSH R15; MOVI R2,0; BSR 0x100009CC; POP R15. The wrapper preserves R0/R1 into the child, forces R2=0, restores R15 and leaves child post-call registers alone. Four static traces passed with an opaque controlled child result.
+
+PASS_STATIC_SCOPED. The child 9CC's behavior and output range remain unknown; mapping is conditional, and B02 ownership is unresolved. Catalog naming is provisional; no physical runtime or canonical admission claim.

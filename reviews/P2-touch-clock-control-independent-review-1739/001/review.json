@@ -1,0 +1,21 @@
+{
+  "review_id": "1739",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-clock-control-9d90-9ddc-1734/001",
+  "candidate_receipt_sha256": "666a29bd763bebccd25bb43946584124fc7420b3535ee37c6acf4c8888269abb",
+  "candidate_pseudocode_sha256": "c4bad8f003f2258a3e00808942bd229f1595db1d3a4ec5ff7dde798af77acc3c",
+  "candidate_replay_sha256": "fde656fce00fda971e45cf487a28a6b48b8886f743f090db0e0e8e96d3a30585",
+  "candidate_replays_sha256": "227d404a438d5bf8f76311dc5b196819ae11a61254956e3ce34875dc798a51e4",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Receipt and candidate hashes match. Independent Thumb disassembly confirms 9D90..9DBE (46 bytes, 23 instructions) and 9DDC..9E00 (36 bytes, 18 instructions), with alignment and literal pools outside both spans.",
+    "All 36 original-instruction fixtures replayed in isolation and generated replays.json matched byte-for-byte. The guard is read before any store; zero guard follows the ordered status-byte and two peripheral word updates, while nonzero returns without writes.",
+    "The 9D90 transforms match (old34 & 0xFFFFF0FF) | 0x100 and (old18 & 0xFFFFF0F0) | 0x908. The 9DDC second peripheral transform is the literal AND 0x00000F0F; it is not a complement-style clearing mask. R0 and SP behavior agree with the leaf traces."
+  ],
+  "limitations": [
+    "Fixtures do not establish concurrent read-modify-write behavior or physical clock effects.",
+    "Private evidence only; no canonical admission or C implementation."
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "review_id": "2013",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-power-callback-registration-2012/001",
+  "candidate_receipt_sha256": "317da67675e00904cc7f47eea5364ac3d1ad8f534a495c978c4e93659f781e21",
+  "candidate_pseudocode_sha256": "72b9e3cfc0150fd1b1a3927033700ba04537420b25fe221013c04ae6cf3b0a15",
+  "candidate_replay_sha256": "cc07ea828037c14a62856e44b10d17a26c41b059742197f2e66c8f17ca6226a1",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Source and artifact hashes match the receipt; 0xA3B0..0xA440 is exactly the owned 144-byte function, with literal 0x20000F34 at 0xA440 outside it. Independent Thumb disassembly agrees with the recorded extent.",
+    "Isolated replay reproduced all 42 fixture rows, including both indices, sorted/unsorted priority sequences, tie cases, head/link updates, result and stack checks.",
+    "The loop continues scanning rather than stopping at the first higher-priority item, retaining the last qualifying successor. Equal priority is passed by the <= comparison; the separate head case inserts before only for strictly lower incoming priority."
+  ],
+  "limitations": [
+    "Empty, invalid-field and duplicate insertion behavior is described from instructions but is not covered by this packet\u2019s replay; dedicated boundary replay is pending. Cycles, arbitrary indices, concurrent mutation and physical callback effects remain unresolved.",
+    "No canonical admission."
+  ]
+}

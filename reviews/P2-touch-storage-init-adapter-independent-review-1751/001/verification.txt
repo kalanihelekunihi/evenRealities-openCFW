@@ -1,0 +1,5 @@
+Review 1751 — PASS_SCOPED
+
+Bound to touch-storage-init-adapter-8a38-1750/001, receipt SHA-256 323e14d3c798dfa7c751a9fcac7e5fa2d1df5fdd7dc7a17405583767f4bc4aff. Independent original-instruction replay passed all 27 cases in /tmp/review1751-independent, with replays.json matching the candidate.
+
+The disassembly confirms the 12-byte copy is assembled from a word, four byte loads/stores, and a final word. The 20-byte local allocation plus three saved registers places the temporary at old-SP minus 28. A nonzero 486C result bypasses all record loads; on zero the 898C entry sees the exact copied bytes and arguments. This does not establish either callee's storage semantics.

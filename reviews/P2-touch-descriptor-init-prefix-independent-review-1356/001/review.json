@@ -1,0 +1,19 @@
+{
+  "review_id": "1356",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-descriptor-init-prefix-4c7c-1355/001",
+  "candidate_receipt_sha256": "2c9c9d2b9dfd30c82be2d183c8f1b1a05e9613400fe709c5488bd1c9283bfcca",
+  "candidate_pseudocode_sha256": "60a6bc823fedb64c4114e7103786b1dc658e682c7d77ecbb5091f2686cb34032",
+  "candidate_replay_sha256": "ee626d4eecfa46f124c3d2d5c55800123d2dceffbfc4c0c4241d6b81927ce900",
+  "candidate_replays_sha256": "cf23bdbae5c80e21799b9578f2d1101a1a28cac8d9d5ce161c1c701136fbf2a8",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independent decode confirms 27 Thumb instructions across 0x4C7C..0x4CB2 (54 bytes), including the null branch, descriptor-relative context and row-pointer loads, ordered context clears, and a three-iteration row loop using byte offset 0x23 and stride 0x3C.",
+    "The candidate replay was isolated and all 81 original-instruction fixtures pass. It varies each row flag and context fill over 0/A5/FF and verifies the writes in order, including OR 6 on the three bytes. The loop bound `cmp r0,#2; bls` gives exactly three rows from initial counter zero."
+  ],
+  "limitations": [
+    "Coverage stops at 0x4CB2 before subsequent initialization; no null-path, return/frame, later body, or helper behavior is established here. Physical row meaning and canonical admission remain unresolved."
+  ]
+}

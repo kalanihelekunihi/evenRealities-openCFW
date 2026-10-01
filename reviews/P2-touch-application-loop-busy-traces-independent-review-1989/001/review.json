@@ -1,0 +1,19 @@
+{
+  "review_id": "1989",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-loop-busy-traces-1980/001",
+  "candidate_receipt_sha256": "7e3b2fe09eae6f69462cc8c53183a858d1468dd67d2ff4d48364fec7a23ba0c6",
+  "candidate_pseudocode_sha256": "3aa5cfad9d1e604931d1dce75002c99e834fd38cb9cfbe1ed3233b6b8a4132de",
+  "candidate_replay_sha256": "357e0efa4a1f52b653df269fcddc35307d945b2f98a186195de3594c30e3f9d1",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Source and candidate artifact pins match the receipt.",
+    "An isolated replay reproduced all 32 bounded traces exactly. State, predicate, counter, initial PRIMASK, and busy-check counts are crossed as described.",
+    "Recorded readiness checks and controlled A58C waits occur while PRIMASK is set; original restore paths return to each fixture\u2019s initial PRIMASK. State/counter outcomes agree with the earlier no-busy trace packet."
+  ],
+  "limitations": [
+    "The sensor/state predicates, timing callback, readiness reads and A58C waits are controlled; only 1 or 3 busy checks are represented before readiness. This does not establish readiness eventuality, physical behavior, state-1 behavior or full-loop coverage.",
+    "No canonical admission."
+  ]
+}

@@ -1,0 +1,46 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/csky-controller-byte-send-1496/001/body.bin:     file format binary
+
+
+Disassembly of section .data:
+
+10000b5c <.data>:
+10000b5c:	14d3      	push      	r4-r6, r15
+10000b5e:	6d4b      	mov      	r5, r2
+10000b60:	6d07      	mov      	r4, r1
+10000b62:	6d83      	mov      	r6, r0
+10000b64:	e3fffff4 	bsr      	0x10000b4c	// 0x10000b4c
+10000b68:	33a2      	movi      	r3, 162
+10000b6a:	4378      	lsli      	r3, r3, 24
+10000b6c:	3200      	movi      	r2, 0
+10000b6e:	ea010407 	movi      	r1, 1031
+10000b72:	b342      	st.w      	r2, (r3, 0x8)
+10000b74:	4510      	lsli      	r0, r5, 16
+10000b76:	b353      	st.w      	r2, (r3, 0x4c)
+10000b78:	b320      	st.w      	r1, (r3, 0x0)
+10000b7a:	3101      	movi      	r1, 1
+10000b7c:	b3a1      	st.w      	r5, (r3, 0x4)
+10000b7e:	b324      	st.w      	r1, (r3, 0x10)
+10000b80:	b306      	st.w      	r0, (r3, 0x18)
+10000b82:	ea0080a2 	movi      	r0, 32930
+10000b86:	c7004900 	rotli      	r0, r0, 24
+10000b8a:	6150      	addu      	r5, r4
+10000b8c:	b05d      	st.w      	r2, (r0, 0x74)
+10000b8e:	b322      	st.w      	r1, (r3, 0x8)
+10000b90:	b3d8      	st.w      	r6, (r3, 0x60)
+10000b92:	6c53      	mov      	r1, r4
+10000b94:	6546      	cmpne      	r1, r5
+10000b96:	080a      	bt      	0x10000baa	// 0x10000baa
+10000b98:	33a2      	movi      	r3, 162
+10000b9a:	4378      	lsli      	r3, r3, 24
+10000b9c:	9388      	ld.w      	r4, (r3, 0x20)
+10000b9e:	e924ffff 	bnez      	r4, 0x10000b9c	// 0x10000b9c
+10000ba2:	e3ffffd5 	bsr      	0x10000b4c	// 0x10000b4c
+10000ba6:	6c13      	mov      	r0, r4
+10000ba8:	1493      	pop      	r4-r6, r15
+10000baa:	934a      	ld.w      	r2, (r3, 0x28)
+10000bac:	e4422002 	andi      	r2, r2, 2
+10000bb0:	e902fffd 	bez      	r2, 0x10000baa	// 0x10000baa
+10000bb4:	d0018002 	ldbi.b      	r2, (r1)
+10000bb8:	b358      	st.w      	r2, (r3, 0x60)
+10000bba:	07ed      	br      	0x10000b94	// 0x10000b94

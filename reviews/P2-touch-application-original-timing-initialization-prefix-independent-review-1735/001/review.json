@@ -1,0 +1,23 @@
+{
+  "review_id": "1735",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-original-timing-initialization-prefix-1732/001",
+  "candidate_receipt_sha256": "2a3b07f0f699da4227246372f7acc8cfd02e0548996ef3683975659880a84c39",
+  "candidate_pseudocode_sha256": "084bea1c870c8a06c1e1430f10ca0bd85d864e095d546796aa1dbc817acccb23",
+  "candidate_replay_sha256": "6b2423ae6d4b9ce12381f1bea22b68ee0b1a18b5677850026b22542912dc8917",
+  "candidate_replays_sha256": "e30ac8eb69dc353e72954704f2116fbff5e39504cbf29a550505bf26eba524ba",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Candidate and source hashes match receipt. Isolated replay of the immutable script reaches 0x3D50; generated replays.json, budgets.json, and pseudocode.md match the candidate byte-for-byte.",
+    "The original 5DD8 and 5D90 execute; the candidate's entry-argument checks bind 5DD8 to 0x200004EC and 5D90 to [0x1E5D, 0x200004EC]. Original A6C0 division execution is consistent with context word 44 equal to 285 and the asserted timing outputs.",
+    "The event trace confirms the exact seven controlled calls [8A38, 8A78, 8AE0, 8AAC, 9D90, 9E18, 9DDC]. In particular, the 9E18 replacement supplies sample 17 at 0x40030020 and returns zero; this is a fixture control, not evidence that readiness terminates on hardware.",
+    "The original-instruction trace and prior startup state, interrupt, count, budget, and output checks remain within the candidate's cumulative replay assertions."
+  ],
+  "limitations": [
+    "Storage helpers and clock setup/readiness/finalization helpers remain controlled; synthetic MMIO and external clock tables do not establish physical timing or polling behavior.",
+    "The replay is bounded to its observed startup path and does not prove all outcomes or whole-image coverage.",
+    "Private evidence only; no canonical admission or C implementation."
+  ]
+}

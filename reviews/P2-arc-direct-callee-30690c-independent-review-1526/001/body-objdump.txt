@@ -1,0 +1,14 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/arc-direct-callee-30690c-1512/001/body.elf:     file format elf32-littlearc
+
+
+Disassembly of section .firmware:
+
+0030690c <body_entry>:
+  30690c:	40c3 0080 fb70      	mov_s	r0,0x80fb70
+  306912:	8000                	ld_s	r0,[r0,0]
+  306914:	10ba 0080           	ldb	r0,[r0,186]
+  306918:	b8c3                	bmsk_s	r0,r0,0x3
+  30691a:	b884                	bset_s	r0,r0,0x4
+  30691c:	262f 003f           	seti	r0
+  306920:	7ee0                	j_s	[blink]

@@ -1,0 +1,21 @@
+{
+  "review_id": "1400",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-parent-init-callee-1352/001",
+  "candidate_receipt_sha256": "4cafc2c618b98646def39398126b57483fc58f4391afe2e6526d30f087a4bac7",
+  "candidate_body_sha256": "67072a3913d54f83fd76a07d8bbfd306e2e5e99534a5b27dff344355ae63b4cc",
+  "candidate_pseudocode_sha256": "eed18788676ef087f1486f7f122208ace10b1c273f7fa975ad70bea84eb64412",
+  "source_image_sha256": "9546164f32680de47fa99ba85ba08a3c538822260957de6c1baee772638da464",
+  "checks": [
+    "Independently reran the candidate verifier successfully. It authenticates image, C-SKY objdump, manual/Sleigh inputs, and all direct dependency receipts and manifested files; it also regenerates the full, isolated, and three split disassemblies from the pinned bytes.",
+    "Independent span inspection confirms the 256-byte proposed extent partitions contiguously into three decoded code ranges (22, 134, and 88 bytes), two unresolved 0000 BKPT halfwords, and two four-byte little-endian literals. No gap is silently called padding. The routine begins with PUSH at 0x100005A4, returns via the epilogues at 0x1000069C/0x1000069E, and the final two instructions at 0x100006A0..0x100006A4 rejoin the final store; the next PUSH is at 0x100006A4.",
+    "Decoded both indirect dispatch sequences and compared all 37 table words against the pinned source bytes. The bounds are unsigned (index-7 < 18 and index-6 < 19); every word target resolves inside one of the three code spans. The embedded pool words resolve to the two separately pinned table addresses.",
+    "Checked the caller excerpt and flag predicate: its call supplies indices 0..25 and sets R1 for exactly {1,5,6,10,17}. The pseudocode follows the first helper's specialized-index dispatch, status/flag-selected output pointer, second helper call with the original index, second table OR cases, and return of only the second helper's nonzero status. The seven static access fixtures are checked against decoded branch/table/call paths; they are not dynamic executions.",
+    "The candidate's own verifier exited 0 with: PASS: exact image/tool/manual/dependencies; 256-byte extent partition; 3 code spans and 2 unowned BKPT gaps; literal and 37 dispatch words authenticated; both indirect target sets internal; caller args/flag indices; 7 static access fixtures."
+  ],
+  "limitations": [
+    "The fixtures are static path/access traces, not emulated execution. Helper 0x10000160 records/status and external status words are controlled or separately modeled; hardware, pointer aliasing, concurrency, faults, and physical peripheral meaning are not established.",
+    "The source-coordinate mapping remains conditional. The two BKPT halfwords are unowned. Findings inherited from 1309/001 remain open: the separate incoming-R18 obligation at 0x100004F6 and backing extent for index-25 external-table ordinals 26/27. No canonical mapping, source implementation, or coverage admission is implied."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "review_id": "1502",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-row-calibration-prefix-1501/002",
+  "candidate_receipt_sha256": "dad4e4a4cf0269d7055cf112d430e1c091372b0a80c08625b0039abaf4b9cfc9",
+  "candidate_pseudocode_sha256": "8334f6f7b0adcd5b88097767b9ec6d040ceab511adf5407c3cb1a5e687b06a27",
+  "candidate_replay_sha256": "e4b577afbc4f47cd7203d7ce044b651c7145df9f1cf8df077ead13fcd253c242",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Replayed the initialized startup prefix from its isolated source copy; it reaches 0x3D50 with inherited state assertions intact. Original 5CAC executes three times, and original 7BC0 is reached for row indices 0, 1, and 2.",
+    "Only the three 7BC0 calls remain controlled, with zero status and no result-buffer writes. The initialized row byte+35 satisfies the reviewed bit-3 gate; 5CAC itself is not substituted.",
+    "The exact call order, count of three calls, row indices, prior boundary sequence, and state/output checks pass."
+  ],
+  "limitations": [
+    "The 7BC0 status/result behavior remains controlled; the packet does not establish physical or whole-firmware behavior. Other activation/storage/later application boundaries and synthetic MMIO/clock tables are explicit. No canonical admission."
+  ]
+}

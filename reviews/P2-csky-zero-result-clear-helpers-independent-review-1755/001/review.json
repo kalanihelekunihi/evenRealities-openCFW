@@ -1,0 +1,21 @@
+{
+  "review_id": "1755",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-zero-result-clear-helpers-1744/001",
+  "candidate_receipt_sha256": "31cb2bb9b2da992158c03da848aaaf108c3f09cccbb3d91287f257e7a83c7820",
+  "candidate_manifest_sha256": "40a079373e0ae4b10025fda2c31c41b00d0a1c17057dc7f1d7141428feef2e6d",
+  "candidate_pseudocode_sha256": "edae5e607ab49bdc0fdc746210d278cc802cb4462badb0963bce5a00181dfbb8",
+  "candidate_fixtures_sha256": "28615c02e6257f584831a14a041f7691f11f132a23a8d557d93910659f8f16cd",
+  "candidate_verifier_sha256": "48c3ed8e964de3f51c27de691fde05eaf1d43486e3bb86781bff64d032ab9a2a",
+  "checks": [
+    "Candidate verifier passes authenticated A/B image pins, exact code/gap/literal slices, reproducible csky objdump, caller conditionals and static loop fixtures. Manifest hashes agree.",
+    "Independent review confirms both loops first compare unsigned cursor against end, then perform 32-bit zero stores at four-byte increments until cursor is no longer below end. The embedded intervals yield 8,155 A stores and 22,979 B stores; each interval is aligned and half-open.",
+    "Both bodies preserve R0, save/restore R4-R6, and return through the saved R15. The source boundaries exclude the post-body zero halfwords, which remain unowned BKPTs, and separate the LRW literal spans.",
+    "The parent caller binding identifies A's conditional zero-result call and B's zero-result call followed by a branch into the caller's shared continuation."
+  ],
+  "limitations": [
+    "Loop fixtures are static source-level evidence, not execution of privileged or physical memory effects. Writable DRAM, image selection/loading, aliases/cache effects and B DRAM-to-IRAM visibility remain unverified.",
+    "Other stage2 callees and complete payload ownership/closure remain outside scope. No canonical admission."
+  ]
+}

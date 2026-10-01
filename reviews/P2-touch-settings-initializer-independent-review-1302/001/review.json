@@ -1,0 +1,21 @@
+{
+  "review_id": "1302",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-settings-initializer-395c-1301/001",
+  "candidate_receipt_sha256": "41adc96989757598b25623fb69a8e667f50cc57f18a0974082b0681c9ef68ef9",
+  "candidate_pseudocode_sha256": "e5ec246767219aabe46eaf181858e536ad0cde4f410ffffbad47a83c69163bce",
+  "candidate_replay_sha256": "78c88ec51440da633fc5bdfb482c4f568eeba3b77cca3c04c57d0c2c2d37052e",
+  "candidate_replays_sha256": "4fe33ffee7bdb1eef491aaf6fa85cff1636af466c53af50ef7c37999a1aac009",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "All pinned candidate and source hashes verify. Independent disassembly of 395C..39F8 confirms control branches for initialization status, storage read status, magic comparison, erase status, optional delay, object initialization/write, and the timeout-only default update.",
+    "The isolated replay passes 64 combinations and matches its reached-call sequence, local object writes, argument tuples, return zero and restored SP assertions. Original 3EE0 executes; five deeper storage/delay boundaries are controlled and do not mutate object memory.",
+    "Literal-pool bytes remain outside the body; candidate explicitly treats the provided object state as synthetic input."
+  ],
+  "limitations": [
+    "No physical storage or delay behavior or diagnostic output is proven. Controlled storage helpers constrain the evidence to branch/call/store behavior.",
+    "Private evidence only; no canonical admission or C implementation."
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "review_id": "1981",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-event-buffer-reset-404c-1972/001",
+  "candidate_receipt_sha256": "4615227632c9247e92d0584c9614ded6b166f592932adc88bad9ec90b95ea864",
+  "candidate_pseudocode_sha256": "740847a2a5aea4953e5055edc1d8fc73158caf90bc1a8c7ee8080e33c742a073",
+  "candidate_replay_sha256": "68d9bb71bb6461071adf575bcdbbb63e93f6a1376dda49d66b6a2fcba3a622eb",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Source and artifact receipt hashes match.",
+    "Independently checked the 34-byte body [0x404C,0x406E) and its 15 Thumb instructions. Null destination or source exits before mutation; otherwise A9D4 clears 80 bytes before the source halfword is loaded, so an aliased source within that region becomes zero.",
+    "Isolated replay passed all 10 original-instruction fixtures and exactly reproduced recorded rows, including null guards, aliased positions, unchanged trailing bytes, callback argument and returned R0."
+  ],
+  "limitations": [
+    "3EE8 is controlled; invalid-memory behavior and concurrent mutation are not covered. This establishes no callback side effects or physical logging semantics.",
+    "Private evidence only; no canonical admission."
+  ]
+}

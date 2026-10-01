@@ -1,0 +1,18 @@
+{
+  "review_id": "1407",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-parent-init-callee-1401/001",
+  "candidate_receipt_sha256": "0c178c510964fa8649766e516d84093b9a707f760e934cda56ac66f757178999",
+  "candidate_body_sha256": "cca59b85670bfebf4efc6cee45560f340e70995772a37d598dfb50f176df1960",
+  "source_image_sha256": "9546164f32680de47fa99ba85ba08a3c538822260957de6c1baee772638da464",
+  "checks": [
+    "Independently reran verify.py successfully. It authenticated the image, objdump, ISA references, dependency receipts/manifests, 18-byte body, caller excerpt, code edges, three static branch/access cases, and packet files.",
+    "The disassembly confirms the full bounded body: PUSH LR; BSR 0x10000860; BNEZ to POP PC; MOVI R0,1; BSR 0x10000B10; POP PC. Thus a nonzero helper result is returned unchanged; only exact zero reaches B10 with R0=1, and B10's result is returned. Stack save/restore is four bytes.",
+    "The conditional source mapping yields child offset 0xF4C, the exact body ends at 0xF46, and the adjacent 0000 halfword is an unowned BKPT immediately before the table start at 0xF48. This packet does not extend ownership into either neighbor."
+  ],
+  "limitations": [
+    "Helper 0x10000860 and transitive behavior remain unresolved; static cases treat its return as an input. B10 effects are based on pinned separate evidence, not physical MMIO validation.",
+    "Caller status is a dependent runtime value. The incoming-R18 and external table ordinal 26/27 findings from 1309/001 remain open, as do conditional mapping, physical loading, and BKPT ownership. No canonical mapping or source implementation is admitted."
+  ]
+}

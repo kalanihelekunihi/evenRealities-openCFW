@@ -1,0 +1,7 @@
+Independent review of touch-calibration-setup-6928-1509/001
+
+Receipt SHA-256 9e27541a59dd10f1dde1148107f224f798b240de4994d6521b1990e8f26c2575; pseudocode 09b733b0c6ce22f4aa3d4a4c27f09b2513436076df3c3ced5594eaefdafce424; replay ac664927cf4a93bf6f8573caf8007900de6489608b8d5d4a3817c3cbb3d8ff7a; source image 371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87.
+
+Decoded body 0x6928..0x6972 independently. It resolves peripheral from descriptor word0 -> config word8 -> config word0; sets control bit31; writes literals to peripheral offsets 0x120 and 0x100 and rereads each; calls 0x9178(base, 6, incoming R0 scratch); ORs 6 into base+0x3034, reloads, ORs 1, writes 1 at base+0x3800, returns helper R0, restores its 8-byte frame. Literal pool is separate at 0x6974, 0x6978 and 0x697C. The 9-case isolated original-instruction replay passed and checked ordered writes, helper arguments/return, unchanged scratch under the no-write helper control, and SP.
+
+PASS_SCOPED. Helper 0x9178 is controlled and MMIO is synthetic; hardware effects and helper behavior are not established. No canonical admission.

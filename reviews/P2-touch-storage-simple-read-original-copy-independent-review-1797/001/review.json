@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-storage-simple-read-original-copy-independent-review-1797",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "scope": {
+    "candidate": "analysis/touch-storage-simple-read-original-copy-1792/001",
+    "code_span": [
+      "0x7e44",
+      "0x7e62"
+    ],
+    "reviewed": "The original 7E44..7E62 adapter and provider callback 4860 execute without interception; 4860 calls actual AA2C. All 18 fixtures reproduce exact callback arguments, successful return, copied bytes, untouched destination suffix, SP and stop PC. Inputs vary offset 0/17/64, two source bases, and lengths 0/1/128; buffers are nonoverlapping synthetic RAM."
+  },
+  "pins": {
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "candidate_receipt_sha256": "90d6e4e5076e2ef49ab1231906093cc4ff0d3732d6b88e7d274f382d2b00fea1",
+    "body_sha256": "20c9accd7d921966473072090de14214d3895534c01bf3582599a042c1945563",
+    "candidate_replays_sha256": "0f713d986e215ffa826d45dfa1d353c7dbc8f6d0386c639115f28c18a6e6fd3a"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "The original 7E44..7E62 adapter and provider callback 4860 execute without interception; 4860 calls actual AA2C. All 18 fixtures reproduce exact callback arguments, successful return, copied bytes, untouched destination suffix, SP and stop PC. Inputs vary offset 0/17/64, two source bases, and lengths 0/1/128; buffers are nonoverlapping synthetic RAM."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "All source and candidate artifact pins match; the isolated 18-case output is byte-identical to candidate replays.json."
+    }
+  ],
+  "limitations": [
+    "Buffers and provider mappings are synthetic and nonoverlapping. Physical storage access, invalid pointers, address wrap and concurrency are not covered.",
+    "No canonical admission."
+  ],
+  "checks": [
+    {
+      "command": "source/body/artifact pin validation",
+      "result": "PASS"
+    },
+    {
+      "command": "actual adapter/copy call-chain review",
+      "result": "PASS"
+    },
+    {
+      "command": "isolated replay of all 18 fixtures",
+      "result": "PASS; exact replay JSON match",
+      "artifact": "isolated-replays.json"
+    }
+  ],
+  "canonical_or_coverage_change": false
+}

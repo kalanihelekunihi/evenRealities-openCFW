@@ -1,0 +1,19 @@
+{
+  "review_id": "1442",
+  "status": "REVISE_PROSE",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-config-original-division-1441/002",
+  "candidate_receipt_sha256": "cf6fc070f3cb4ad4a1c8802b4711df2d125fc6ff80bb0589d7f8e3a4dda8c9fe",
+  "candidate_pseudocode_sha256": "8e76ba1d40c772857fb76f8e86208e27fdade590bec142985455558ad98ca1b2",
+  "candidate_replay_sha256": "e091c8ea10cd00033a53d486cc9c739569186f71cb635d18cce431b5bbbb4a8d",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independently replayed all 216 original-instruction fixtures; all passed with the original division entries executing and no helper/result/PC substitutions. Only return from the caller LR stop hook ends each run. Assertions cover ordered stores, final status, SP and terminal PC.",
+    "The replay seeds context byte C+0x4E to 5, so the pseudocode claim that initialized context fields are zero is broader than its fixture evidence. Narrow the statement to the actual zeroed percentage/decision fields and disclose the nonzero context shift seed. This matches the prose discrepancy also reported for review 1440.",
+    "The exercised divider cases use zero dividend and divisors 100 or 1. Their successful original-code execution validates only these reached paths; it is not a complete divider recovery."
+  ],
+  "limitations": [
+    "All fixtures hold C+0x4E at 5 and cover only the listed row/flag/mode/width combinations. They do not cover arbitrary divisor/dividend behavior, mixed flags, pointer validity, concurrency, physical meaning, or canonical admission."
+  ],
+  "required_correction": "Clarify which percentage/decision fields are zero and explicitly state that C+0x4E is seeded to 5; do not describe all context fields as zero."
+}

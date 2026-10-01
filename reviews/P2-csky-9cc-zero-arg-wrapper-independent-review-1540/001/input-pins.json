@@ -1,0 +1,54 @@
+{
+  "schema": "csky-bounded-wrapper-input-pins-v1",
+  "image": {
+    "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage1.bin",
+    "bytes": 12288,
+    "sha256": "9546164f32680de47fa99ba85ba08a3c538822260957de6c1baee772638da464"
+  },
+  "tool": {
+    "path": "g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-objdump",
+    "version": "GNU objdump (GNU Binutils) 2.27",
+    "sha256": "7150f7ffc2ac163f3d2d465620e5dac96df4b29411e5d0944419c41657cc2382"
+  },
+  "mapping": {
+    "status": "conditional BINH-A source-coordinate proposal only",
+    "formula": "child file offset = runtime - 0x10000000 + 0x18",
+    "runtime_range": [
+      "0x10000AF8",
+      "0x10000B02"
+    ],
+    "child_file_range": [
+      "0xB10",
+      "0xB1A"
+    ],
+    "warning": "does not validate loading or canonical admission"
+  },
+  "dependencies": {
+    "analysis/csky-buffer-transfer-1428/001/receipt.json": "4d39487ae1a4491d6470cbfb52aa26e049399aec0655959d37219ed94e6beaa8",
+    "analysis/csky-wait-bit-clear-1482/001/receipt.json": "f09b777316ac63dae5ff251ebd3d2c033e74c615edd44f40d85f3c5a2ab3e78d"
+  },
+  "semantics_sources": {
+    "manual": {
+      "path": "third-party/tools/ghidra-csky/C-SKY_ISA_Reference_Guides/C-SKY ISA User Guide 1.15.12 (2014).pdf",
+      "sha256": "3d4bb9978e40eb9ee3741fcb21c8c319702925068672a6fa7280cda96b05a2be"
+    },
+    "dsp_sleigh": {
+      "path": "third-party/tools/ghidra-csky/C-SKY/data/languages/32b_dsp.sinc",
+      "sha256": "be0cd035c6574e0fddcac4d0740367b67bd4921e0033bea21e580f5e9484e490"
+    },
+    "branch_sleigh": {
+      "path": "third-party/tools/ghidra-csky/C-SKY/data/languages/32b_branch.sinc",
+      "sha256": "0dfe9d60290555f94f2cc1496ad07d7ddf2f7c2d96bf6e145ea86906c80df49b"
+    },
+    "memory_sleigh": {
+      "path": "third-party/tools/ghidra-csky/C-SKY/data/languages/32b_memory.sinc",
+      "sha256": "101a0635c46e76ee1a7579522d1598897ce77779f5b04efde3c6a51dd6108899"
+    },
+    "data_sleigh": {
+      "path": "third-party/tools/ghidra-csky/C-SKY/data/languages/32b_data.sinc",
+      "sha256": "3dde82aa3bc3bfbb70dc8950705cd0c2a59173e924ee6f92f9005ed880d5210b"
+    }
+  },
+  "child_target": "0x100009CC",
+  "child_contract_scope": "AF8 passes R0/R1 unchanged and forces R2=0; child behavior itself is not promoted by this packet"
+}

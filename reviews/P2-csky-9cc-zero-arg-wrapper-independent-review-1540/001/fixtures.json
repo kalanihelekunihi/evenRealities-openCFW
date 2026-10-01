@@ -1,0 +1,169 @@
+{
+  "schema": "csky-zero-mode-wrapper-static-fixtures-v1",
+  "method": "Static instruction contract replay with 0x100009CC post-state controlled; the callee arithmetic/behavior is not fabricated.",
+  "body_sha256": "38fc300b5abb347843f68fc859adcac4597d982672b4546907e43ac57875408e",
+  "cases": [
+    {
+      "name": "caller D5E forwards operands 24 and 4, replaces R2",
+      "inputs": {
+        "R0": 24,
+        "R1": 4,
+        "R2": 3735928559,
+        "LR": 268438882,
+        "callee_state": {
+          "R0": 6,
+          "R1": 4,
+          "R2": 0
+        }
+      },
+      "expected": {
+        "entry_state": {
+          "R0": 24,
+          "R1": 4,
+          "R2": 3735928559,
+          "R15": 268438882
+        },
+        "stack_events": [
+          "push R15",
+          "pop R15"
+        ],
+        "callee_entry": {
+          "R0": 24,
+          "R1": 4,
+          "R2": 0
+        },
+        "callee_return_state": {
+          "R0": 6,
+          "R1": 4,
+          "R2": 0
+        },
+        "return_pc": 268438882,
+        "wrapper_post_call_gpr_writes": []
+      }
+    },
+    {
+      "name": "E84 first AF8 result passed back unchanged",
+      "inputs": {
+        "R0": 4660,
+        "R1": 256,
+        "R2": 2271560481,
+        "LR": 268439208,
+        "callee_state": {
+          "R0": 1985229328,
+          "R1": 256,
+          "R2": 0,
+          "R3": 2717908992
+        }
+      },
+      "expected": {
+        "entry_state": {
+          "R0": 4660,
+          "R1": 256,
+          "R2": 2271560481,
+          "R15": 268439208
+        },
+        "stack_events": [
+          "push R15",
+          "pop R15"
+        ],
+        "callee_entry": {
+          "R0": 4660,
+          "R1": 256,
+          "R2": 0
+        },
+        "callee_return_state": {
+          "R0": 1985229328,
+          "R1": 256,
+          "R2": 0,
+          "R3": 2717908992
+        },
+        "return_pc": 268439208,
+        "wrapper_post_call_gpr_writes": []
+      }
+    },
+    {
+      "name": "large and zero operands are forwarded without wrapper arithmetic",
+      "inputs": {
+        "R0": 4294967295,
+        "R1": 0,
+        "R2": 2147483648,
+        "LR": 268439228,
+        "callee_state": {
+          "R0": 0,
+          "R1": 0,
+          "R2": 0
+        }
+      },
+      "expected": {
+        "entry_state": {
+          "R0": 4294967295,
+          "R1": 0,
+          "R2": 2147483648,
+          "R15": 268439228
+        },
+        "stack_events": [
+          "push R15",
+          "pop R15"
+        ],
+        "callee_entry": {
+          "R0": 4294967295,
+          "R1": 0,
+          "R2": 0
+        },
+        "callee_return_state": {
+          "R0": 0,
+          "R1": 0,
+          "R2": 0
+        },
+        "return_pc": 268439228,
+        "wrapper_post_call_gpr_writes": []
+      }
+    },
+    {
+      "name": "return register preserved while link register restored",
+      "inputs": {
+        "R0": 77,
+        "R1": 9,
+        "R2": 1,
+        "LR": 268439236,
+        "callee_state": {
+          "R0": 8,
+          "R1": 9,
+          "R2": 0,
+          "R4": 1
+        }
+      },
+      "expected": {
+        "entry_state": {
+          "R0": 77,
+          "R1": 9,
+          "R2": 1,
+          "R15": 268439236
+        },
+        "stack_events": [
+          "push R15",
+          "pop R15"
+        ],
+        "callee_entry": {
+          "R0": 77,
+          "R1": 9,
+          "R2": 0
+        },
+        "callee_return_state": {
+          "R0": 8,
+          "R1": 9,
+          "R2": 0,
+          "R4": 1
+        },
+        "return_pc": 268439236,
+        "wrapper_post_call_gpr_writes": []
+      }
+    }
+  ],
+  "assertions": [
+    "R2 is always zero at the child entry regardless of incoming R2.",
+    "R0 and R1 arrive at the child unchanged.",
+    "The wrapper restores the incoming R15 and does not alter child result registers after return.",
+    "The full 0x100009CC contract is unresolved here."
+  ]
+}

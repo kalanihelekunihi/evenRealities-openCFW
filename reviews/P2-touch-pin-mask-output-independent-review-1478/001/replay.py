@@ -1,0 +1,13 @@
+from pathlib import Path
+import json,hashlib,itertools
+from unicorn import *
+from unicorn.arm_const import *
+b=Path('g2/build/pseudocode-first/20260930T190500Z');o=Path('/Users/kalani/Repo/evenRealities-openCFW/reviews/P2-touch-pin-mask-output-independent-review-1478/001');o.mkdir(parents=True,exist_ok=True);src=o/'touch.flash.bin';d=src.read_bytes();h=lambda x:hashlib.sha256(x).hexdigest();rows=[]
+for mask,mode,old in itertools.product([0,1,0x80000000,0x55555555,0xaaaaaaaa,0xffffffff],list(range(8))+[8,255],[(0,0,0),(0xffffffff,0xffffffff,0xffffffff),(0x12345678,0x87654321,0xa5a5a5a5),(1,2,4)]):
+ u=Uc(UC_ARCH_ARM,UC_MODE_THUMB|UC_MODE_MCLASS);u.mem_map(0,0x10000);u.mem_write(0x3300,d);u.mem_map(0x20000000,0x10000);u.mem_map(0x09000000,0x1000);O=0x20002000
+ u.mem_write(O,b''.join(v.to_bytes(4,'little') for v in old));u.reg_write(UC_ARM_REG_R0,mask);u.reg_write(UC_ARM_REG_R1,mode);u.reg_write(UC_ARM_REG_R2,O);u.reg_write(UC_ARM_REG_SP,0x2000f000);u.reg_write(UC_ARM_REG_LR,0x09000001);writes=[]
+ u.hook_add(UC_HOOK_CODE,lambda u,p,s,x:u.emu_stop() if p==0x09000000 else None);u.hook_add(UC_HOOK_MEM_WRITE,lambda u,t,a,s,v,x:writes.append([a,s,v]) if a<O+12 else None);u.emu_start(0x5189,0,count=50)
+ expected=[(v|mask) if mode&(4>>i) else v&(~mask&0xffffffff) for i,v in enumerate(old)];ew=[[O+4*i,4,v&(~mask&0xffffffff)] for i,v in enumerate(old)]+[[O+4*i,4,v|mask] for i,v in enumerate(old) if mode&(4>>i)]
+ assert bytes(u.mem_read(O,12))==b''.join(v.to_bytes(4,'little') for v in expected) and writes==ew and u.reg_read(UC_ARM_REG_R0)==mask and u.reg_read(UC_ARM_REG_SP)==0x2000f000 and u.reg_read(UC_ARM_REG_PC)==0x09000000
+ rows.append(dict(mask=mask,mode=mode,old=old,result=expected,writes=writes))
+(o/'replays.json').write_text(json.dumps(rows,indent=2)+'\n');(o/'pseudocode.md').write_text('# Pin mask output helper at 5188\n\nThe 52-byte body [5188,51BC) loads three original output words and first stores each with mask bits cleared. For mode bits 2, 1 and 0 respectively, overwrite the corresponding word with its original value OR mask. Higher mode bits do not affect the branch decisions. Preserve input mask in R0 and restore the four-word frame. No calls occur.\n\nThe 240 original-instruction fixtures check final words and every ordered store, including zero/full/high-bit masks, independent original words and high mode bits. Physical interpretation and pointer validity remain unresolved. No canonical admission or C implementation.\n');(o/'replay.py').write_bytes(Path(__file__).read_bytes());(o/'receipt.json').write_text(json.dumps(dict(source=dict(path=str(src),sha256=h(d)),fixtures=len(rows),files={p.name:h(p.read_bytes()) for p in sorted(o.iterdir())},accepted=False),indent=2)+'\n');print('PASS',len(rows))

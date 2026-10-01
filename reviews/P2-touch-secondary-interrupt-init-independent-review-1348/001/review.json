@@ -1,0 +1,21 @@
+{
+  "review_id": "1348",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-secondary-interrupt-init-38e0-1347/001",
+  "candidate_receipt_sha256": "9c458060d8851b76f222d83d31c895177089504d32886fe35799b4f0e1efb821",
+  "candidate_pseudocode_sha256": "dc9d235966d2a200516a19457947656e7c8e73589b3aad24e8dc59b3905d4adb",
+  "candidate_replay_sha256": "8b6ae28eee3344403178f8bc00cd052689188b34874bf100f498c87c1ca11f0c",
+  "candidate_replays_sha256": "8adff6a82d4d33ea93b7226d81ebaebfffa84d381509ab0916f6510a2cfce12e",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Candidate and source hashes verify. Independent M-class disassembly confirms the 0x38E0..0x3936 body, 0x08-byte stack descriptor copy, early nonzero-status return, A2A8 call with the stack descriptor and Thumb pointer 0x3949, signed-halfword index check, masked bit calculation, conditional negative-index skips, and final 4AF4 call. The descriptor bytes addressed by literal 0xB0F0 are index 8 and priority 3.",
+    "Literal reads resolve to descriptor source 0xB0F0, status handle 0x200004EC, vector pointer 0x3949, and NVIC ISER base 0xE000E100. With index 8, the routine's own writes are 0xE000E280=0x100 and 0xE000E100=0x100. A2A8's actual nested path accounts for priority write 0xE000E408=0xC0 and the vector-table write at 0x20000460 when VTOR is relocated.",
+    "The candidate replay was copied to a unique review directory and rerun: all six status/VTOR fixtures pass with exact call order and arguments, write traces, return register, and restored SP. Actual A2A8/A214/A274 code runs; only the two stated deeper helpers are replaced with controlled return values."
+  ],
+  "limitations": [
+    "Signed-negative descriptor branches are decoded but the immutable descriptor has index 8, so those branches are not fixture-covered. The two deeper helper implementations and physical interrupt dispatch remain outside this review.",
+    "This is private scoped evidence only; it does not establish canonical admission or physical hardware behavior."
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-storage-sequence-selection-independent-review-1803",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "scope": {
+    "candidate": "analysis/touch-storage-sequence-selection-8058-1798/002",
+    "reviewed": "The 8058..8104 body is 172 bytes/76 instructions. All 32 isolated fixtures reproduce call order, output, status, stack and context+24 after reselection. Normal first-row success returns 0; alternate mirrored success uses 8104; after fallback through 7FA4, either selected-row validation outcome returns the literal 8108. The checker\u2019s pointer mutation is explicit, and the 7FA4 return is ignored."
+  },
+  "pins": {
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "candidate_receipt_sha256": "c378f28ec5f12e1ce1e48b9eeacb9f79a729287b03e7e2f0cdf24df34e30aefd",
+    "candidate_replays_sha256": "0bb9d877a3cf7125e523a53a019625d2114fd9ea6742b5cb5d4775b90991c4c6",
+    "body_sha256": "6dbf099a9836e5e4c9657f00059dac5d552088f64dc5d28b31fe5c57a7b6a0e1"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "The 8058..8104 body is 172 bytes/76 instructions. All 32 isolated fixtures reproduce call order, output, status, stack and context+24 after reselection. Normal first-row success returns 0; alternate mirrored success uses 8104; after fallback through 7FA4, either selected-row validation outcome returns the literal 8108. The checker\u2019s pointer mutation is explicit, and the 7FA4 return is ignored."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "All declared candidate files and source hashes match the receipt; isolated replay output is byte-identical to candidate replays.json."
+    }
+  ],
+  "limitations": [
+    "The validation/sequence/reselection callees are controlled; reselection writes context+24 in the harness. Physical storage and concurrent mutation are not established.",
+    "No canonical admission or coverage promotion."
+  ],
+  "checks": [
+    {
+      "command": "source and candidate artifact pin checks",
+      "result": "PASS"
+    },
+    {
+      "command": "independent instruction/fixture-scope review",
+      "result": "PASS_SCOPED"
+    },
+    {
+      "command": "isolated replay (32 fixtures)",
+      "result": "PASS; exact replay JSON match",
+      "artifact": "isolated-replays.json"
+    }
+  ],
+  "review_artifacts": {
+    "isolated_replays_sha256": "0bb9d877a3cf7125e523a53a019625d2114fd9ea6742b5cb5d4775b90991c4c6"
+  },
+  "canonical_or_coverage_change": false
+}

@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-sensor-type-dispatch-5ba2-2140-independent-review-2143",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "accepted": false,
+  "scope": {
+    "candidate": "analysis/touch-sensor-type-dispatch-5ba2-2140/001",
+    "reviewed": "Sensor type dispatcher at 0x5BA2 instruction semantics, exact binding, isolated original-byte replay and stated limits"
+  },
+  "pins": {
+    "candidate_receipt_sha256": "021939f2b4ecaddaaf853760b6d2ecdb339dfe5e55ed07b542d629547cfbd89e",
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "candidate_replays_sha256": "6d54edd878259b72fff55e5f0f20d72284fc0e38d2044073cdf8338c173aa749",
+    "candidate_artifacts": {
+      "replays.json": "6d54edd878259b72fff55e5f0f20d72284fc0e38d2044073cdf8338c173aa749",
+      "replay.py": "7fa6bd9a5b69f545cc87d6ed7ad3f948e13dd64fb463ebf4f1f902ace45cf1c2",
+      "pseudocode.md": "864bd24e75c39a9b66e724c6c500ab2e5d840c177b9c4b7b20e5b24d5a222a71",
+      "disassembly.txt": "c645dd8a45701589b5260b2d25cb09847a1db0dcb0c8d84f3320d061c2df589f"
+    }
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "Independent Thumb disassembly confirms [0x5BA2,0x5BC0) is 30 bytes: save R4/LR, load unsigned byte [R0+123], dispatch values 2/3 to 0x5A94 and value 6 to 0x5A0A, then restore R4 and return. Other values bypass calls."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "The isolated 512-case replay covers all 256 type bytes and both controlled child R0 results. Child entry hooks assert R0 is the incoming row and R1 is context; their controlled return value propagates unchanged. Non-dispatch values return the row pointer. R4 and SP assertions hold, and isolated JSON is byte-identical to the candidate."
+    }
+  ],
+  "limitations": [
+    "Both selected children remain controlled; their behavior is not established.",
+    "Context/row fixtures do not prove physical sensor meaning, aliases, concurrency, or caller completeness.",
+    "No canonical admission or C implementation."
+  ],
+  "checks": [
+    {
+      "command": "verify receipt-listed file hashes and original source hash",
+      "result": "PASS",
+      "artifact": "source-checks.json"
+    },
+    {
+      "command": "isolated candidate replay with output redirected outside frozen candidate",
+      "result": "PASS; 512 fixtures, byte-identical replay output",
+      "artifact": "replays.json"
+    },
+    {
+      "command": "independent Capstone Thumb-M-class disassembly compared with candidate listing",
+      "result": "PASS; complete instruction extent and listing byte-for-byte equal",
+      "artifact": "independent-disassembly.txt"
+    }
+  ],
+  "review_artifacts": {
+    "source_checks_sha256": "c0a2c99ec1558c81ece71aaea53a1d323a8487138d86952c95f99fbdd094aa08",
+    "replay_sha256": "a26b66cd04f522cf4313138143e4f29faa8e53d201851ae861adeed71b11db18",
+    "independent_disassembly_sha256": "c645dd8a45701589b5260b2d25cb09847a1db0dcb0c8d84f3320d061c2df589f"
+  },
+  "canonical_or_coverage_change": false
+}

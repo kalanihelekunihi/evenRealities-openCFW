@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "task_id": "arc-direct-callee-3068c8-1531",
+  "image_id": "ble_em9305:record-3",
+  "isa_mode": "ARCv2 EM",
+  "scope_kind": "bounded function candidate",
+  "entry": "0x003068c8",
+  "end_exclusive": "0x0030690c",
+  "body_range": {
+    "record3": [
+      17608,
+      17676
+    ],
+    "length": 68,
+    "sha256": "00e23deb878b09fb920d569158424d10cfdd8655021e2acb4a0630287882230a"
+  },
+  "extent_evidence": [
+    "The symbol catalog proposes exact range [0x003068c8,0x0030690c), length 68, name IRQ_Cleaning. Its cited SDK report does not exist in this workspace and is not treated as inspected evidence.",
+    "The authenticated range decodes into contiguous ARCv2 EM instructions and ends in j_s [blink] at 0x0030690a. The next exact catalog entry/helper begins at 0x0030690c; packet 1512 independently covers that following 22-byte body.",
+    "Context begins at the catalog boundary 0x003068c8 and continues through 0x0030692f; the 2-byte nop at 0x00306922 separates the following helper return from the next catalog function at 0x00306924.",
+    "No global incoming-reference census or alternate-entry proof was performed.",
+    "Static control trace: LP_COUNT=18; r1 begins at zero, increments once per loop pass, and the equality to 17 selects the terminal branch. The branch target skips the offset-zero store on that pass."
+  ],
+  "calling_convention": "Caller packet 1288 directly calls at 0x00302b20 with non-delayed BL; no delay slot. r0 inherits the caller\u2019s preceding STATUS32/KFLAG computation, but this body overwrites/does not read incoming r0. No input argument is established.",
+  "status": "private P2 candidate; no canonical admission; no C implementation"
+}

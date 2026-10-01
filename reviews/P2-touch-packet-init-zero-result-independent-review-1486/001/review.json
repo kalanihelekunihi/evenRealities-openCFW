@@ -1,0 +1,18 @@
+{
+  "review_id": "1486",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-packet-init-zero-result-1485/001",
+  "candidate_receipt_sha256": "3462f334021ebb2d9f56724f5cb071eace6fcf7d101fc0face2181f66b121b1d",
+  "candidate_pseudocode_sha256": "d680eb63f72a529dd1206626cc74ed21a61935fee4014cf7f0d4d3616ea1c443",
+  "candidate_replay_sha256": "eb6199ed5153650b842dc4a853c58515f2f34e001b5ab97339602827f2f6e413",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Manually traced the zero-result branch after 51BC. Non-mode-1 returns 1; mode 1 calls actual 5528 with R0=row mode, R1=the byte at row-base + (32 + rowmode), and R2=the row halfword at +14. The 5528 low-two-bit test, mode-dependent shifts, output +20 packing, and zero return are consistent with the instruction path.",
+    "Replayed the copied original-instruction harness against a review-owned source-image copy: all 96 fixtures passed. Outputs, 51BC arguments, return value and frame are checked across status 0/1/7, groups, modes, indices, and uniform fills.",
+    "The apparent +33 byte reference is correct on this path because rowmode equals 1 and the code computes 32 + rowmode before the byte load."
+  ],
+  "limitations": [
+    "51BC remains controlled. Tests use uniform source regions and index-pair zero, so they do not establish independent field behavior or broader indices. Physical meanings and canonical admission remain unresolved."
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "review_id": "1969",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-loop-record-query-3a38-1962/001",
+  "candidate_receipt_sha256": "3608853bae1bb2514d532b1b371df8ea1ad35a5f0167f371ea9f4788807b7f1a",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "body_sha256": "b4833d3c2103aa531869af5e60fb07c9472535d1689c7c8019a1df5773af8553",
+  "checks": [
+    "Source/artifact pins match. Body [0x3A38,0x3A6A) is 50 bytes/22 instructions; alignment and literal pool are separate. Isolated replay passes all three fixtures and reproduces replays.json exactly.",
+    "The body writes the query literal into the buffer before calling 3568(0,buffer,8), saves and returns that query status, and selects the success logger arguments from buffer halfwords +4/+6 or failure arguments from the status. Logger return is ignored.",
+    "Fixtures check store-before-query, exact query/log arguments and retained status for zero, 1, and 0xFFFFFFFF query outcomes. The failure-path logger\u2019s fourth argument is intentionally not asserted as a stable value."
+  ],
+  "limitations": [
+    "Query and logger are controlled, so query semantics and logging effects remain unresolved. No physical storage or canonical admission is established."
+  ]
+}

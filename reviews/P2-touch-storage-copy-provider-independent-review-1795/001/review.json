@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-storage-copy-provider-independent-review-1795",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "scope": {
+    "candidate": "analysis/touch-storage-copy-provider-1790/001",
+    "bodies": {
+      "0x4860": {
+        "end": 18540,
+        "bytes": 12,
+        "instructions": 5,
+        "sha256": "1a586e27e01bb88464842bfddca5cbffebd1eb098f9d717133855e73ce132a95"
+      },
+      "0xaa2c": {
+        "end": 43582,
+        "bytes": 18,
+        "instructions": 9,
+        "sha256": "05508cada1cce08a14d3a0b7aac6c14bab56f11f7da13eea7f4956a51fd0cfdf"
+      }
+    },
+    "reviewed": "Both instruction spans match: 4860..486C (12 bytes/5 instructions) and AA2C..AA3E (18/9); alignment at AA3E and following self-loop at AA40 are excluded. All 40 isolated fixtures reproduce exact source-byte reads, destination-byte writes, memory result, returns, SP and stop PC. AA2C copies forward one byte at a time and returns the original destination; 4860 forwards original R1/R2 with R3 as destination, ignores provider R0 and returns zero. The +3 overlap fixtures confirm forward-propagation behavior."
+  },
+  "pins": {
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "candidate_receipt_sha256": "6678896559c6d048518c5605064df95b8f842c77582f8af6680f2ac9466d02df",
+    "candidate_replays_sha256": "1a0c5a5d5fd7cd32b4edc26eb8589051e72808474c18733a93962a09fe8b25e8"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "Both instruction spans match: 4860..486C (12 bytes/5 instructions) and AA2C..AA3E (18/9); alignment at AA3E and following self-loop at AA40 are excluded. All 40 isolated fixtures reproduce exact source-byte reads, destination-byte writes, memory result, returns, SP and stop PC. AA2C copies forward one byte at a time and returns the original destination; 4860 forwards original R1/R2 with R3 as destination, ignores provider R0 and returns zero. The +3 overlap fixtures confirm forward-propagation behavior."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "Receipt source and file pins match; isolated replay JSON is byte-identical to candidate output."
+    }
+  ],
+  "limitations": [
+    "Fixtures use readable synthetic RAM and bounded nonwrapping addresses. Physical storage, invalid pointers, very large lengths and wrapped addresses are not established.",
+    "No canonical admission."
+  ],
+  "checks": [
+    {
+      "command": "source/body/artifact pin checks",
+      "result": "PASS"
+    },
+    {
+      "command": "independent forward-copy flow and wrapper review",
+      "result": "PASS"
+    },
+    {
+      "command": "isolated replay of all 40 fixtures",
+      "result": "PASS; exact replay JSON match",
+      "artifact": "isolated-replays.json"
+    }
+  ],
+  "canonical_or_coverage_change": false
+}

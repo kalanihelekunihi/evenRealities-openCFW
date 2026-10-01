@@ -1,0 +1,12 @@
+00005c72 push {r4, lr}
+00005c74 bl #0x6bd4
+00005c78 pop {r4, pc}
+00005c7a push {r4, lr}
+00005c7c subs r2, r0, #0
+00005c7e beq #0x5c8a
+00005c80 movs r1, #5
+00005c82 movs r0, #0
+00005c84 bl #0x5c72
+00005c88 pop {r4, pc}
+00005c8a movs r0, #1
+00005c8c b #0x5c88

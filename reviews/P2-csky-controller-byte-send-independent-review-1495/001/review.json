@@ -1,0 +1,18 @@
+{
+  "review_id": "1495",
+  "status": "PASS_STATIC_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-controller-byte-send-1496/001",
+  "candidate_receipt_sha256": "f6547f68dce139edefddb81669d8ebe2b17bef1ce0f290b608c776c45335074f",
+  "candidate_pseudocode_sha256": "38092578a1c300cb9a7b86c862479a5c9e817b28eb8d630dbbef6e640df9f1c6",
+  "candidate_body_sha256": "91a2da5d219be5348f3a50da658da92a87f603db816f6cd2fa3eef3e65d74bd8",
+  "source_sha256": "9546164f32680de47fa99ba85ba08a3c538822260957de6c1baee772638da464",
+  "checks": [
+    "The isolated verifier passed after checking the source/tool/semantic and B4C dependency pins, exact 96-byte body, caller sites, and nine trace-model cases. I independently inspected the exact C-SKY listing: count is stored raw at +4 and shifted left 16 at +0x18; end is computed before the subsequent MMIO writes; each byte path polls mask 2 at +0x28, LDBI.B loads and post-increments, and ST.W writes the zero-extended byte to +0x60. Completion polls the full word at +0x20 until zero, then B4C runs and R0 returns that zero.",
+    "Caller path disassembly shows CEC and D38 pass R8 to both pointer/count, with ANDI 2 followed by a branch away when nonzero; at the reached send calls those values are therefore zero, so byte loads are skipped. D42 passes SP+4 and count 2. All three return values are ignored.",
+    "The clear-register calculation yields 0xA2000080 + 0x74 = 0xA20000F4. Setup/store order and register-frame behavior match the listing."
+  ],
+  "limitations": [
+    "Nine cases are static trace models with controlled input/MMIO words, not live original-instruction C-SKY execution. B4C and physical controller behavior remain unresolved; both wait loops are unbounded. Conditional mapping only; no canonical admission."
+  ]
+}

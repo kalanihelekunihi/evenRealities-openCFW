@@ -1,0 +1,18 @@
+{
+  "review_id": "1504",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-calibration-nonzero-state-7bc0-1503/002",
+  "candidate_receipt_sha256": "7124e9adc2319d2f690cea6b32a483d059dfc95eb2c7d419e821a74c80d4875d",
+  "candidate_pseudocode_sha256": "792eb57723b45cc2dc5b2069bab0e59f05dc2fa39492fcd9aa13100fe97b98e3",
+  "candidate_replay_sha256": "481126d16d4726442042f1b12341b46ef558f8347403bdb3f9bad147843961e6",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independently checked the 302-byte body at 0x7BC0..0x7CEE, stack argument and descriptor strides, pointer reloads, mode-dependent packet selection, peripheral access order, wrapped arithmetic, saturation, output correction, return value, and frame restoration against the original instructions.",
+    "Confirmed literals at 0x7CF0 and 0x7CF4 are 0xFFFFEFFF and 0x0000FFFF. The former clears control bit 31; the latter bounds the output to 16 bits.",
+    "Replayed an isolated copy of the original-instruction harness against the pinned image. All 324 fixtures passed; each supplies nonzero controlled 6AC0 status, and checks calls, result, writes, and SP."
+  ],
+  "limitations": [
+    "The 6AC0 status is controlled and MMIO/RAM are synthetic. Zero-state acquisition, mode-123==7 pointer selection, helper clobbering, and physical behavior are outside this review. No canonical admission."
+  ]
+}

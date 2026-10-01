@@ -1,0 +1,19 @@
+{
+  "review_id": "2195",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-setup-original-descriptor-enable-2192/001",
+  "candidate_receipt_sha256": "c691d8496a6639215bcdeece6f51d19b6c80509b6be46237be503e3005598cda",
+  "candidate_pseudocode_sha256": "974d569738e22d7e5f38fae993be778578181191df24793e4838e930df5c310c",
+  "candidate_replay_sha256": "d2de6c6575621cb51e991027ef0f20eba6427a4c696f1ca49371d100c473b049",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "All receipt and source hashes match, including the 406-byte body [0x6BD4,0x6D6A), the 8-byte literal pool [0x6D6C,0x6D74), and every candidate artifact. The body/listing are identical to the independently checked dispatcher in review 2189.",
+    "Isolated replay regenerated all 48 fixtures exactly. Original 6140 executes before the dispatcher predicates; the replay checks descriptor bits 0 and 7 after both reuse and setup outcomes, plus helper order, optional callback forwarding, configuration fields, selected register writes and high-register/SP preservation.",
+    "Decoded 6140 ORs 0x81 into descriptor word+8. The following fast-reuse checks test only bit 13 clear and bit 4 set, so the added bits survive. The later setup path separately clears bits 4/5 then sets bit 4; its reload/store sequence retains bits 0/7. The tested values and observed instruction paths support the candidate's stated property."
+  ],
+  "limitations": [
+    "5C8E, 6AC0, 664C and the optional callback are controlled. This verifies bounded effects with those stubs, not helper/callback behavior or physical MMIO. Arbitrary inputs, aliasing and concurrency are unresolved.",
+    "No canonical admission."
+  ]
+}

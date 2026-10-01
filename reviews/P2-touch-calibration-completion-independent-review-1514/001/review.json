@@ -1,0 +1,18 @@
+{
+  "review_id": "1514",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-calibration-completion-6980-1513/001",
+  "candidate_receipt_sha256": "eb5220f8a7895520d5a3435b168f5783ddd39933274ced68ad55f75f4f9f5606",
+  "candidate_pseudocode_sha256": "d8b788d6c85b7af71de7326307659cd1dfb5f677a9f8b7d9b7c2ff27d994b698",
+  "candidate_replay_sha256": "1f319442cc1f38e7667ec6ba6ae6a6b71337d337686c8c29c4d0dd9dae9b364c",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independently decoded 0x6980..0x69BA and verified pointer resolution, original A6C0 call with literal divisor 1,000,000, 5FA4 argument order, initial poll before countdown decrement, bit-8 test, cleanup write/readback, raw countdown return and frame restoration.",
+    "Confirmed the initial status read occurs even for a zero budget; if readiness appears on the final poll, the returned countdown remains zero. Literal pool begins at 0x69BC.",
+    "An isolated replay passed all 72 fixtures, executing A6C0 and checking controlled 5FA4 arguments, readiness/read counts, cleanup and SP."
+  ],
+  "limitations": [
+    "5FA4 is controlled; readiness and MMIO are modeled. Physical timing and register semantics are not established. No canonical admission."
+  ]
+}

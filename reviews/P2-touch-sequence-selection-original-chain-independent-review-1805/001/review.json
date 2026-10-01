@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-sequence-selection-original-chain-independent-review-1805",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "scope": {
+    "candidate": "analysis/touch-sequence-selection-original-chain-1800/001",
+    "reviewed": "The 128 original-instruction fixtures execute 8058 with actual CRC, row selection and sequence-read code, without intercepted helpers. All 16 CRC-validity masks, both modes, mirror states and two current-row positions match output, status, selected pointer when reselection occurs and SP. Rows are synthetic 128-byte buffers with sequence words 1,3,2,4; the selection model applies strict unsigned greater-than and ignores CRC-invalid candidates."
+  },
+  "pins": {
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "candidate_receipt_sha256": "69104a8dd83029fe7958ec22541523c603630309b8e198010ee813b75eb5d124",
+    "candidate_replays_sha256": "013402a9a0c9588c5925e7df451b200212fea05193786025d61b7792b88c31bb"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "The 128 original-instruction fixtures execute 8058 with actual CRC, row selection and sequence-read code, without intercepted helpers. All 16 CRC-validity masks, both modes, mirror states and two current-row positions match output, status, selected pointer when reselection occurs and SP. Rows are synthetic 128-byte buffers with sequence words 1,3,2,4; the selection model applies strict unsigned greater-than and ignores CRC-invalid candidates."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "All declared candidate files and source hashes match the receipt; isolated replay output is byte-identical to candidate replays.json."
+    }
+  ],
+  "limitations": [
+    "This only establishes the tested synthetic four-row configurations; physical flash, concurrency and larger geometries remain unproved.",
+    "No canonical admission or coverage promotion."
+  ],
+  "checks": [
+    {
+      "command": "source and candidate artifact pin checks",
+      "result": "PASS"
+    },
+    {
+      "command": "independent instruction/fixture-scope review",
+      "result": "PASS_SCOPED"
+    },
+    {
+      "command": "isolated replay (128 fixtures)",
+      "result": "PASS; exact replay JSON match",
+      "artifact": "isolated-replays.json"
+    }
+  ],
+  "review_artifacts": {
+    "isolated_replays_sha256": "013402a9a0c9588c5925e7df451b200212fea05193786025d61b7792b88c31bb"
+  },
+  "canonical_or_coverage_change": false
+}

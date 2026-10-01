@@ -1,0 +1,18 @@
+{
+  "review_id": "1351",
+  "status": "PASS_SCOPED_WITH_OPEN_CALLER_OBLIGATION",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-parent-init-callee-1309/001",
+  "candidate_receipt_sha256": "fec10d6ca44243722e983f8d39e3dcc2252ae8e4215debdfd06b5f7d21cd9e25",
+  "candidate_input_pins_sha256": "193d93e94aabe6b9f3c8a7f9979e153909bc3c304b6091951951dedbf5e0dbae",
+  "source_image_sha256": "9546164f32680de47fa99ba85ba08a3c538822260957de6c1baee772638da464",
+  "checks": [
+    "Re-ran the candidate's independent verifier successfully. It authenticates all 14 listed outputs, seven dependency receipts, source image and objdump/manual/SLEIGH pins; reconstructs and compares the full-image and isolated-slice disassemblies; checks the exact 396-byte body and separate 4-byte literal; and validates direct branches/calls and caller arguments.",
+    "The pseudocode preserves selector-specific guards, unsigned and signed comparisons, helper call arguments, ordered context/status/table reads, helper 138 read-modify-write ordering, output-pointer writes, and common -1 exits. The index-25 route reads table records 26 and 27 although helper 160's scan contract covers 26 rows; the packet explicitly leaves backing extent and ownership unresolved.",
+    "The alternate path at runtime 0x100004F6 consumes incoming R18 at 0x100004C4 without initializing it on that path. The direct caller supplies index and selector but does not set R18. Paired static fixtures vary only this incoming value and show that it changes continuation and output-store behavior. The obligation remains open and is not replaced with an assumed value."
+  ],
+  "limitations": [
+    "The ten fixtures are static instruction-derived checks, not execution in a C-SKY emulator. Helper and external table/context/status values are controlled. They do not establish conditional physical loading, table backing, aliasing, MMIO/device behavior, or concurrency.",
+    "The conditional BINH-A source-coordinate mapping remains a proposal, not canonical address admission. This is scoped pseudocode evidence only; no C implementation or accepted coverage claim."
+  ]
+}

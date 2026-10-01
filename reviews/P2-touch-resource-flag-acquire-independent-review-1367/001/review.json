@@ -1,0 +1,19 @@
+{
+  "review_id": "1367",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-resource-flag-acquire-8fa0-1366/001",
+  "candidate_receipt_sha256": "231a17b9a3d9ec4a67d5515ab9ddaec01ceefb4463078db30299d7ac4a867be5",
+  "candidate_pseudocode_sha256": "f4c9efe2af36482039045b21e8ee619e5f28f5e2c79c741cb5ddf109eed47d19",
+  "candidate_replay_sha256": "ff0eb1e7350dfc47f5fea17fee57b8667e6d2df0c71808a8ed337d537bbb892b",
+  "candidate_replays_sha256": "b2c7c1c38423bb5c6f12a09925f5dd9c26a24dffcd6a78180a7f9a6802645b92",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independent decode confirms the complete 40-byte body at 0x8FA0..0x8FC8: sequential nonnull tests for R0/R1/R2, fresh byte read at R2, busy return, low-byte owner write, zero success, and literal-backed error returns. The resource pointer R0 is tested but never dereferenced; no frame or interrupt-mask instruction occurs.",
+    "The isolated replay passes all 36 cases. It spans null and nonnull base/owner/pointer values, prior flag 0/1/FF, and owner 0/2/256. The 256 owner case correctly passes the nonzero check and stores its low byte (zero). Writes and error/success returns match the instruction order."
+  ],
+  "limitations": [
+    "The fixtures do not establish pointer validity, resource effects, atomicity, or concurrent callers. They verify only the instruction path under synthetic memory. No canonical admission or C implementation."
+  ]
+}

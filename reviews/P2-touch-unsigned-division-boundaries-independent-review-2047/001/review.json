@@ -1,0 +1,18 @@
+{
+  "review_id": "2047",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-unsigned-division-boundaries-2046/001",
+  "candidate_receipt_sha256": "3c6bb387b9312159c9ca28824477e13c9aeb96096a8f92ebd4110660aadc4dbd",
+  "candidate_pseudocode_sha256": "9b6e5746faae37d6a881c531dc6a578a017ee870babf6f358c1eb0e4765ecf06",
+  "candidate_replay_sha256": "e50659463185f208a8a6ca8083573bc0604f6ec5c89961c8d59582e85778b001",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Receipt SHA-256 3c6bb387b9312159c9ca28824477e13c9aeb96096a8f92ebd4110660aadc4dbd; source SHA-256 371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87. All declared artifact pins match.",
+    "Isolated replay reproduced all 320 fixtures. The original A6C0/A9A8 zero path returns quotient 0 and the original numerator as remainder, restoring SP; nonzero paths match unsigned quotient/remainder for the tested boundary and seeded pairs."
+  ],
+  "limitations": [
+    "The nonzero input pairs are bounded samples, not exhaustive 32-bit coverage. This is not a complete proof of division flags/register-clobbers or exceptional behavior beyond the recovered zero branch.",
+    "No canonical admission."
+  ]
+}

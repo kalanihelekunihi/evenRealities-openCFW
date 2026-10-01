@@ -1,0 +1,7 @@
+Independent review of touch-application-status-wait-prefix-1534/001
+
+Candidate receipt SHA-256 2f6dc21da6878164f2c02e1f141853001808ab4a557fcc40fdf3782f1acf0697; pseudocode ea4a9330ea4afd23f4631b19bc5707140954a0f2a5f234f47a87c21c56290dee; replay 0c97cdc73a8aeee2e3aae3a8c181a811bc69e5db9687164845598dce8f75b510; source 371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87.
+
+Isolated startup replay passed to 0x3D50. It executes original 0x6608 within the 0x685C/0x6A80 reset chain; synthetic status remains zero for mode 0, matching all 315 budget iterations. The candidate asserts exactly 315 controlled A324(1) calls, 0x6608 result 4, continuation through caller reset writes, full inherited call ordering and final startup state.
+
+PASS_SCOPED. A324 delay calls remain controlled and status/MMIO are synthetic. The packet demonstrates the bounded instruction path for this supplied status, not physical timing, other statuses or whole-firmware behavior. No canonical admission.

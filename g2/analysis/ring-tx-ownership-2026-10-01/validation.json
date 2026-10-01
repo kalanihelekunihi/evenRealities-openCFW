@@ -1,0 +1,1408 @@
+{
+  "input_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "capstone": "5.0.7",
+  "unicorn": "2.1.4",
+  "scope": "original queue/send/dispatcher and task wrappers; ATT, master preprocessing, RTOS and callback deinit provider explicitly stubbed",
+  "functions": [
+    {
+      "entry": "0x476ace",
+      "end": "0x476bf0",
+      "sha256": "6491c4dabd2c4ad8867e7f32e46439da9a1f321dfde163a6d5f710b1a29667ec",
+      "raw_decompiled": true
+    },
+    {
+      "entry": "0x4c4910",
+      "end": "0x4c4b7e",
+      "sha256": "6698734dc25fe37714846d077d9e2ca32f02f1b877b09089126e726eb053ff6d",
+      "raw_decompiled": true
+    },
+    {
+      "entry": "0x4c4b7e",
+      "end": "0x4c4c66",
+      "sha256": "5f1a198a786cf239b377aa90c9b2d345a76d86fc5bf2d8d2549106e121ebf827",
+      "raw_decompiled": true
+    },
+    {
+      "entry": "0x4c46c0",
+      "end": "0x4c46d0",
+      "sha256": "5253485c728919595e5a0b78b2354dbb964f271d59b7e1832be3765298a982ce",
+      "raw_decompiled": true
+    },
+    {
+      "entry": "0x4a19c0",
+      "end": "0x4a19dc",
+      "sha256": "4729a01936d58af097235c65c8de94a74302e6c0a361c285c40b1651393f56c4",
+      "raw_decompiled": true
+    },
+    {
+      "entry": "0x4bf99e",
+      "end": "0x4bf9b0",
+      "sha256": "d763f42336b5406a51b4cee9fde04d292209b81813fcde9de2e63c235ec68ec5",
+      "raw_decompiled": true
+    },
+    {
+      "entry": "0x4bf9b0",
+      "end": "0x4bf9ba",
+      "sha256": "52a3c4e96bd27c58ae08a64f5ecf63cd67877de12306fbeb9245865fe9e2fead",
+      "raw_decompiled": true
+    },
+    {
+      "entry": "0x4bf9ba",
+      "end": "0x4bf9de",
+      "sha256": "a568f74c2634f63f8b146dd3f0cbecf09d2caa1300b5877a0ec9cab892ac7c70",
+      "raw_decompiled": true
+    },
+    {
+      "entry": "0x4bf9de",
+      "end": "0x4bf9ec",
+      "sha256": "a3de2489bab48b9516079809e2e30e12954e4dc76eedd2653812e046a28295ed",
+      "raw_decompiled": true
+    },
+    {
+      "entry": "0x4bf9ec",
+      "end": "0x4bfa00",
+      "sha256": "a0a7fa1b14bb01ca88fa84046451d92d37a5df0e01effffeb5c3cbe4c87a152d",
+      "raw_decompiled": true
+    },
+    {
+      "entry": "0x538c24",
+      "end": "0x538c4a",
+      "sha256": "30b8240daf336d4037b57b11a420f9adbddf40659ec964e078e736cbeeca94dd",
+      "raw_decompiled": true
+    },
+    {
+      "entry": "0x538c4a",
+      "end": "0x538c6e",
+      "sha256": "b89add9a6f39622dc9277b91669b4978b136cf95d4c09bff5a8f65d02c3a7080",
+      "raw_decompiled": true
+    },
+    {
+      "entry": "0x52b95e",
+      "end": "0x52b97c",
+      "sha256": "feaf10178e32248aebd53109fd9c1a95e1d757484102fc7a775203160e257ff7",
+      "raw_decompiled": true
+    },
+    {
+      "entry": "0x52b97c",
+      "end": "0x52b980",
+      "sha256": "c38df642688ef2e1df139d8ba9e7854fe109c68c84bfe8e97010f955fa56291b",
+      "raw_decompiled": true
+    },
+    {
+      "entry": "0x52b9d0",
+      "end": "0x52bab8",
+      "sha256": "49ba08ce0c35eb58c098babd1ad0e4d68c303c67bf8e2543be552511732474d8",
+      "raw_decompiled": true
+    },
+    {
+      "entry": "0x4c4da4",
+      "end": "0x4c4dd0",
+      "sha256": "f58c7cdd965800d3c53a1ae2ca85c4953bef103f02d57478c373ada337920a69",
+      "raw_decompiled": false
+    },
+    {
+      "entry": "0x4c4dd0",
+      "end": "0x4c4de8",
+      "sha256": "d87ee6a8c466f99f3e5c23ff1ce200a39742105adc85bb5c6ccb6c0e2a62160b",
+      "raw_decompiled": true
+    },
+    {
+      "entry": "0x4d0af6",
+      "end": "0x4d0b1c",
+      "sha256": "1e43ba9e9c0aacb205409392d2c963d6eb2d30554d96febb96b6d9cfbc685de9",
+      "raw_decompiled": false
+    },
+    {
+      "entry": "0x4d0b1c",
+      "end": "0x4d0b36",
+      "sha256": "a14fb6c1d8ad086fd051734b88bde37423c8690d4a345fe29facf89282e5552b",
+      "raw_decompiled": true
+    },
+    {
+      "entry": "0x4490e2",
+      "end": "0x4491aa",
+      "sha256": "9c6a8120325e47a0a098156f0a03d4716d0c8cb99df99144bb33f869d7b7aac6",
+      "raw_decompiled": true
+    }
+  ],
+  "task_attributes": [
+    {
+      "name": "ring",
+      "address": "0x75b8a4",
+      "bytes": "aceb780000000000902207207000000040be3620001000002e0000000100000000000000",
+      "sha256": "53c39cc541278886a1f896e32075a3effd702692791a3b85b2c2ad808f03787b",
+      "priority": 46,
+      "stack_bytes": 4096
+    },
+    {
+      "name": "ble_wsf",
+      "address": "0x75b838",
+      "bytes": "a4eb7800000000004021072070000000983a042000400000310000000100000000000000",
+      "sha256": "3de23514e8e1fec1c26809144605f5bdb8cee48f949a5a78839f756627d8d715",
+      "priority": 49,
+      "stack_bytes": 16384
+    }
+  ],
+  "case_count": 25,
+  "cases": [
+    {
+      "case": "accepted_envelope_freed_after_handler",
+      "calls": [
+        {
+          "call": "tx_wait",
+          "args": [
+            16,
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "buf_alloc",
+          "args": [
+            20,
+            4,
+            0,
+            0
+          ],
+          "result": 537395200
+        },
+        {
+          "call": "wake",
+          "args": [
+            0,
+            0,
+            537395200,
+            0
+          ]
+        },
+        {
+          "call": "master",
+          "args": [
+            537395208,
+            537395208,
+            4856257,
+            0
+          ]
+        },
+        {
+          "call": "att_copy_boundary",
+          "args": [
+            1,
+            16,
+            4,
+            537358848
+          ],
+          "payload": "001a9401"
+        },
+        {
+          "call": "buf_free",
+          "args": [
+            537395200,
+            16,
+            4,
+            537358848
+          ],
+          "queue_head": 0
+        }
+      ]
+    },
+    {
+      "case": "queued_drop_zero_connection",
+      "calls": [
+        {
+          "call": "tx_wait",
+          "args": [
+            16,
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "buf_alloc",
+          "args": [
+            20,
+            4,
+            0,
+            0
+          ],
+          "result": 537395200
+        },
+        {
+          "call": "wake",
+          "args": [
+            0,
+            0,
+            537395200,
+            0
+          ]
+        },
+        {
+          "call": "master",
+          "args": [
+            537395208,
+            537395208,
+            4856257,
+            0
+          ]
+        },
+        {
+          "call": "tx_complete",
+          "args": [
+            0,
+            0,
+            4856257,
+            0
+          ]
+        },
+        {
+          "call": "buf_free",
+          "args": [
+            537395200,
+            0,
+            4856257,
+            0
+          ],
+          "queue_head": 0
+        }
+      ]
+    },
+    {
+      "case": "queued_drop_different_connection",
+      "calls": [
+        {
+          "call": "tx_wait",
+          "args": [
+            16,
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "buf_alloc",
+          "args": [
+            20,
+            4,
+            0,
+            0
+          ],
+          "result": 537395200
+        },
+        {
+          "call": "wake",
+          "args": [
+            0,
+            0,
+            537395200,
+            0
+          ]
+        },
+        {
+          "call": "master",
+          "args": [
+            537395208,
+            537395208,
+            4856257,
+            0
+          ]
+        },
+        {
+          "call": "tx_complete",
+          "args": [
+            0,
+            2,
+            4856257,
+            0
+          ]
+        },
+        {
+          "call": "buf_free",
+          "args": [
+            537395200,
+            2,
+            4856257,
+            0
+          ],
+          "queue_head": 0
+        }
+      ]
+    },
+    {
+      "case": "queued_drop_null_handles",
+      "calls": [
+        {
+          "call": "tx_wait",
+          "args": [
+            16,
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "buf_alloc",
+          "args": [
+            20,
+            4,
+            0,
+            0
+          ],
+          "result": 537395200
+        },
+        {
+          "call": "wake",
+          "args": [
+            0,
+            0,
+            537395200,
+            0
+          ]
+        },
+        {
+          "call": "master",
+          "args": [
+            537395208,
+            537395208,
+            4856257,
+            0
+          ]
+        },
+        {
+          "call": "tx_complete",
+          "args": [
+            0,
+            1,
+            4856257,
+            0
+          ]
+        },
+        {
+          "call": "buf_free",
+          "args": [
+            537395200,
+            1,
+            4856257,
+            0
+          ],
+          "queue_head": 0
+        }
+      ]
+    },
+    {
+      "case": "queued_drop_zero_handle",
+      "calls": [
+        {
+          "call": "tx_wait",
+          "args": [
+            16,
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "buf_alloc",
+          "args": [
+            20,
+            4,
+            0,
+            0
+          ],
+          "result": 537395200
+        },
+        {
+          "call": "wake",
+          "args": [
+            0,
+            0,
+            537395200,
+            0
+          ]
+        },
+        {
+          "call": "master",
+          "args": [
+            537395208,
+            537395208,
+            4856257,
+            0
+          ]
+        },
+        {
+          "call": "tx_complete",
+          "args": [
+            0,
+            1,
+            4856257,
+            0
+          ]
+        },
+        {
+          "call": "buf_free",
+          "args": [
+            537395200,
+            1,
+            4856257,
+            0
+          ],
+          "queue_head": 0
+        }
+      ]
+    },
+    {
+      "case": "close_keeps_queued_message_then_drop",
+      "calls": [
+        {
+          "call": "tx_wait",
+          "args": [
+            16,
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "buf_alloc",
+          "args": [
+            20,
+            4,
+            0,
+            0
+          ],
+          "result": 537395200
+        },
+        {
+          "call": "wake",
+          "args": [
+            0,
+            0,
+            537395200,
+            0
+          ]
+        },
+        {
+          "call": "role",
+          "args": [
+            1,
+            537362432,
+            537395200,
+            0
+          ]
+        },
+        {
+          "call": "ring_event",
+          "args": [
+            8,
+            537358336,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "master",
+          "args": [
+            537395208,
+            537395208,
+            4856257,
+            0
+          ]
+        },
+        {
+          "call": "tx_complete",
+          "args": [
+            0,
+            0,
+            4856257,
+            0
+          ]
+        },
+        {
+          "call": "buf_free",
+          "args": [
+            537395200,
+            0,
+            4856257,
+            0
+          ],
+          "queue_head": 0
+        }
+      ]
+    },
+    {
+      "case": "same_connection_id_reopen_accepts_old_tx",
+      "calls": [
+        {
+          "call": "tx_wait",
+          "args": [
+            16,
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "buf_alloc",
+          "args": [
+            20,
+            4,
+            0,
+            0
+          ],
+          "result": 537395200
+        },
+        {
+          "call": "wake",
+          "args": [
+            0,
+            0,
+            537395200,
+            0
+          ]
+        },
+        {
+          "call": "role",
+          "args": [
+            1,
+            537362432,
+            537395200,
+            0
+          ]
+        },
+        {
+          "call": "ring_event",
+          "args": [
+            8,
+            537358336,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "role",
+          "args": [
+            1,
+            537362432,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "delay_cccd",
+          "args": [
+            4998865,
+            589825,
+            500,
+            0
+          ]
+        },
+        {
+          "call": "delay_cccd",
+          "args": [
+            4998865,
+            589825,
+            700,
+            0
+          ]
+        },
+        {
+          "call": "delay_cccd",
+          "args": [
+            4998865,
+            590081,
+            900,
+            0
+          ]
+        },
+        {
+          "call": "master",
+          "args": [
+            537395208,
+            537395208,
+            4856257,
+            0
+          ]
+        },
+        {
+          "call": "att_copy_boundary",
+          "args": [
+            1,
+            16,
+            4,
+            537358848
+          ],
+          "payload": "001a9401"
+        },
+        {
+          "call": "buf_free",
+          "args": [
+            537395200,
+            16,
+            4,
+            537358848
+          ],
+          "queue_head": 0
+        }
+      ],
+      "epoch_after": 9
+    },
+    {
+      "case": "epoch_change_alone_does_not_guard_tx",
+      "calls": [
+        {
+          "call": "tx_wait",
+          "args": [
+            16,
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "buf_alloc",
+          "args": [
+            20,
+            4,
+            0,
+            0
+          ],
+          "result": 537395200
+        },
+        {
+          "call": "wake",
+          "args": [
+            0,
+            0,
+            537395200,
+            0
+          ]
+        },
+        {
+          "call": "master",
+          "args": [
+            537395208,
+            537395208,
+            4856257,
+            0
+          ]
+        },
+        {
+          "call": "att_copy_boundary",
+          "args": [
+            1,
+            16,
+            4,
+            537358848
+          ],
+          "payload": "001a9401"
+        },
+        {
+          "call": "buf_free",
+          "args": [
+            537395200,
+            16,
+            4,
+            537358848
+          ],
+          "queue_head": 0
+        }
+      ]
+    },
+    {
+      "case": "two_fifo_envelopes_share_borrowed_payload",
+      "calls": [
+        {
+          "call": "tx_wait",
+          "args": [
+            16,
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "buf_alloc",
+          "args": [
+            20,
+            4,
+            0,
+            0
+          ],
+          "result": 537395200
+        },
+        {
+          "call": "wake",
+          "args": [
+            0,
+            0,
+            537395200,
+            0
+          ]
+        },
+        {
+          "call": "tx_wait",
+          "args": [
+            16,
+            4,
+            537395200,
+            0
+          ]
+        },
+        {
+          "call": "buf_alloc",
+          "args": [
+            20,
+            4,
+            537395200,
+            0
+          ],
+          "result": 537395456
+        },
+        {
+          "call": "wake",
+          "args": [
+            0,
+            1,
+            537395456,
+            0
+          ]
+        },
+        {
+          "call": "master",
+          "args": [
+            537395208,
+            537395208,
+            4856257,
+            0
+          ]
+        },
+        {
+          "call": "att_copy_boundary",
+          "args": [
+            1,
+            16,
+            4,
+            537358848
+          ],
+          "payload": "41424344"
+        },
+        {
+          "call": "buf_free",
+          "args": [
+            537395200,
+            16,
+            4,
+            537358848
+          ],
+          "queue_head": 537395456
+        },
+        {
+          "call": "master",
+          "args": [
+            537395464,
+            537395464,
+            4856257,
+            537358848
+          ]
+        },
+        {
+          "call": "att_copy_boundary",
+          "args": [
+            1,
+            16,
+            4,
+            537358848
+          ],
+          "payload": "41424344"
+        },
+        {
+          "call": "buf_free",
+          "args": [
+            537395456,
+            16,
+            4,
+            537358848
+          ],
+          "queue_head": 0
+        }
+      ]
+    },
+    {
+      "case": "unknown_event_envelope_still_freed",
+      "calls": [
+        {
+          "call": "tx_wait",
+          "args": [
+            16,
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "buf_alloc",
+          "args": [
+            20,
+            4,
+            0,
+            0
+          ],
+          "result": 537395200
+        },
+        {
+          "call": "wake",
+          "args": [
+            0,
+            0,
+            537395200,
+            0
+          ]
+        },
+        {
+          "call": "master",
+          "args": [
+            537395208,
+            537395208,
+            4856257,
+            0
+          ]
+        },
+        {
+          "call": "buf_free",
+          "args": [
+            537395200,
+            537395208,
+            4856257,
+            0
+          ],
+          "queue_head": 0
+        }
+      ]
+    },
+    {
+      "case": "send_disconnected",
+      "calls": []
+    },
+    {
+      "case": "send_null_handles",
+      "calls": []
+    },
+    {
+      "case": "send_zero_handle",
+      "calls": []
+    },
+    {
+      "case": "send_allocation_failure",
+      "calls": [
+        {
+          "call": "tx_wait",
+          "args": [
+            16,
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "buf_alloc",
+          "args": [
+            20,
+            4,
+            0,
+            0
+          ],
+          "result": 0
+        },
+        {
+          "call": "tx_complete",
+          "args": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "timer_callback_not_message_free",
+      "calls": [
+        {
+          "call": "timer_expired",
+          "args": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "master",
+          "args": [
+            537366536,
+            537366536,
+            4856257,
+            0
+          ]
+        },
+        {
+          "call": "timer_expired",
+          "args": [
+            0,
+            537366536,
+            4856257,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "cancel_cccd_uninitialized",
+      "calls": [
+        {
+          "call": "tx_wait",
+          "args": [
+            16,
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "buf_alloc",
+          "args": [
+            20,
+            4,
+            0,
+            0
+          ],
+          "result": 537395200
+        },
+        {
+          "call": "wake",
+          "args": [
+            0,
+            0,
+            537395200,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "cancel_cccd_no_match",
+      "calls": [
+        {
+          "call": "tx_wait",
+          "args": [
+            16,
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "buf_alloc",
+          "args": [
+            20,
+            4,
+            0,
+            0
+          ],
+          "result": 537395200
+        },
+        {
+          "call": "wake",
+          "args": [
+            0,
+            0,
+            537395200,
+            0
+          ]
+        },
+        {
+          "call": "mutex_acquire",
+          "args": [
+            0,
+            4294967295,
+            537395200,
+            0
+          ]
+        },
+        {
+          "call": "mutex_release",
+          "args": [
+            0,
+            537320148,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "cancel_cccd_matches",
+      "calls": [
+        {
+          "call": "tx_wait",
+          "args": [
+            16,
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "buf_alloc",
+          "args": [
+            20,
+            4,
+            0,
+            0
+          ],
+          "result": 537395200
+        },
+        {
+          "call": "wake",
+          "args": [
+            0,
+            0,
+            537395200,
+            0
+          ]
+        },
+        {
+          "call": "mutex_acquire",
+          "args": [
+            0,
+            4294967295,
+            537395200,
+            0
+          ]
+        },
+        {
+          "call": "mutex_release",
+          "args": [
+            0,
+            537320148,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "tick",
+          "args": [
+            1,
+            537320148,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "timer_stop",
+          "args": [
+            0,
+            537320148,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "reschedule_delays",
+          "args": [
+            4278190080,
+            537320148,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "disconnect_during_wait_enqueues_zero_connection_then_drops",
+      "calls": [
+        {
+          "call": "tx_wait",
+          "args": [
+            16,
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "buf_alloc",
+          "args": [
+            20,
+            4,
+            0,
+            0
+          ],
+          "result": 537395200
+        },
+        {
+          "call": "wake",
+          "args": [
+            0,
+            0,
+            537395200,
+            0
+          ]
+        },
+        {
+          "call": "master",
+          "args": [
+            537395208,
+            537395208,
+            4856257,
+            0
+          ]
+        },
+        {
+          "call": "tx_complete",
+          "args": [
+            0,
+            537395208,
+            4856257,
+            0
+          ]
+        },
+        {
+          "call": "buf_free",
+          "args": [
+            537395200,
+            537395208,
+            4856257,
+            0
+          ],
+          "queue_head": 0
+        }
+      ]
+    },
+    {
+      "case": "create_ring",
+      "calls": [
+        {
+          "call": "irq",
+          "args": [
+            0,
+            0,
+            7714980,
+            0
+          ]
+        },
+        {
+          "call": "create_static",
+          "args": [
+            5000429,
+            7924652,
+            1024,
+            0
+          ],
+          "stack_args": [
+            46,
+            540458560,
+            537338512
+          ]
+        }
+      ]
+    },
+    {
+      "case": "create_ble_wsf",
+      "calls": [
+        {
+          "call": "irq",
+          "args": [
+            0,
+            0,
+            7714872,
+            0
+          ]
+        },
+        {
+          "call": "create_static",
+          "args": [
+            5048909,
+            7924644,
+            4096,
+            0
+          ],
+          "stack_args": [
+            49,
+            537148056,
+            537338176
+          ]
+        }
+      ]
+    },
+    {
+      "case": "terminate_ring_False",
+      "calls": [
+        {
+          "call": "tx_wait",
+          "args": [
+            16,
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "buf_alloc",
+          "args": [
+            20,
+            4,
+            0,
+            0
+          ],
+          "result": 537395200
+        },
+        {
+          "call": "wake",
+          "args": [
+            0,
+            0,
+            537395200,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "terminate_ring_True",
+      "calls": [
+        {
+          "call": "tx_wait",
+          "args": [
+            16,
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "buf_alloc",
+          "args": [
+            20,
+            4,
+            0,
+            0
+          ],
+          "result": 537395200
+        },
+        {
+          "call": "wake",
+          "args": [
+            0,
+            0,
+            537395200,
+            0
+          ]
+        },
+        {
+          "call": "terminate",
+          "args": [
+            4660,
+            0,
+            537395200,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "terminate_ble_wsf_False",
+      "calls": [
+        {
+          "call": "tx_wait",
+          "args": [
+            16,
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "buf_alloc",
+          "args": [
+            20,
+            4,
+            0,
+            0
+          ],
+          "result": 537395200
+        },
+        {
+          "call": "wake",
+          "args": [
+            0,
+            0,
+            537395200,
+            0
+          ]
+        },
+        {
+          "call": "callback_manager_deinit",
+          "args": [
+            0,
+            0,
+            537395200,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "terminate_ble_wsf_True",
+      "calls": [
+        {
+          "call": "tx_wait",
+          "args": [
+            16,
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "buf_alloc",
+          "args": [
+            20,
+            4,
+            0,
+            0
+          ],
+          "result": 537395200
+        },
+        {
+          "call": "wake",
+          "args": [
+            0,
+            0,
+            537395200,
+            0
+          ]
+        },
+        {
+          "call": "callback_manager_deinit",
+          "args": [
+            0,
+            0,
+            537395200,
+            0
+          ]
+        },
+        {
+          "call": "terminate",
+          "args": [
+            4660,
+            0,
+            537395200,
+            0
+          ]
+        }
+      ]
+    }
+  ]
+}

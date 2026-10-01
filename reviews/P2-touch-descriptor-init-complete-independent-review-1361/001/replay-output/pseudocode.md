@@ -1,0 +1,5 @@
+# Touch descriptor initializer complete local paths
+
+The nonnull body continues the previously recovered 1355/1358 operations. Copy config halfwords 1E→context40,1C→3E,22→44,20→42. Set context bytes72=1,4D=3,5A=1,5B=0,5C=0,5D=6,5E=4,5F=10,60=1. Store literal4DB0 at context24 and halfword32 at4A. Call6AC0(0,descriptor). Nonzero status restores six-word frame and returns that status; zero calls4C72(descriptor), restores frame and returns its raw result. Null descriptor returns1 through the same epilogue.
+
+Full local body4C7C..4DA8 is300 instruction bytes, excluding literal pool. Prior header/copy/row pseudocode remains in1355/1358; this packet extends their original-instruction fixtures through return. Two deeper helpers are controlled without memory effects. Receipt-derived fixtures vary three original rowflags/contextfill and both call statuses, checking every ordered store, reachedcall, result andSP. Rowhalfwords are suppliedzero; nonzero-row branches and nullentry are decoded but not fixture-covered here. Deeper behavior, invalid pointers and physical meaning remain unresolved. No canonical admission or C implementation.

@@ -1,0 +1,21 @@
+{
+  "review_id": "1769",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-start-mode-query-pair-1754/001",
+  "candidate_receipt_sha256": "7dd99fbd5f9836a73b0aea5f8b430335fe658296e02298f47faad4d0d8f3f7a1",
+  "candidate_manifest_sha256": "314f6c0cb78bdba73900ea25715b3eb172262a3eab23f77ed3931ac3b16dde07",
+  "candidate_pseudocode_sha256": "89ed71e2d52936413820df9becd8b45e07e87463406fcb0518f17d179f9a05ec",
+  "candidate_fixtures_sha256": "d1680e87b1f85a8651240e7d76e867bdef31ef36a99f60bd48eace4a5cd01196",
+  "candidate_verifier_sha256": "869412529f9ebc0377dacc04709c895432b073816b8da12360f1ff22fada9f6a",
+  "checks": [
+    "Candidate verify.py passes authenticated A/B image pins, exact code/gap extraction, parent callsites, historical symbol hashes, fixtures and reproducible C-SKY objdump. Manifest and receipt pins agree.",
+    "Independent review confirms the two 30-byte bodies are separate A/B child spans at 0x1584 and 0x0FFC. Each forwards incoming R0 to its nested direct call, wraps status-2 in 32 bits, and only enters the MMIO path when the unsigned result is below 4; this is exactly status values 2 through 5.",
+    "Accepted paths read volatile words at 0xA0010058 then 0xA001005C in order. R0 is the first word's low bit; the later read is retained as a volatile access. Rejected paths return zero.",
+    "Both following zero halfwords are explicitly unowned BKPT gaps; historical symbol names/extents do not override the source-bound body extents."
+  ],
+  "limitations": [
+    "Nested calls at A 0x10024940 and B 0x10003FB8 remain unresolved. MMIO effects, values, faults and hardware meaning are not established.",
+    "Image loading, route selection, physical visibility/aliasing and whole-payload closure remain unresolved. No canonical admission."
+  ]
+}

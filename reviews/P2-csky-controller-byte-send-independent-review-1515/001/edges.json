@@ -1,0 +1,93 @@
+{
+  "schema": "csky-controller-byte-send-edges-v1",
+  "operation_inputs": {
+    "R0": "u32 mode/control word, written once to controller+0x60",
+    "R1": "u32 input byte pointer, incremented by LDBI.B once per transmitted byte",
+    "R2": "u32 count; stored directly at controller+4 and shifted left 16 into controller+0x18"
+  },
+  "return": "R0=0 after u32 controller+0x20 poll reaches zero; preserved R4-R6 and LR restored",
+  "direct_callers": [
+    {
+      "site": "0x10000CEC",
+      "caller": "0x10000C40",
+      "args": [
+        "R0=6",
+        "R1=R8=0 on this fallthrough",
+        "R2=R8=0 on this fallthrough"
+      ],
+      "return_use": "ignored; caller proceeds to next transfer call",
+      "observed_setup": "path proof: caller ANDs received byte with 2 and branches away when R8 is nonzero; reaching this call proves R8=0, so both pointer and count are zero"
+    },
+    {
+      "site": "0x10000D38",
+      "caller": "0x10000C40",
+      "args": [
+        "R0=6",
+        "R1=R8=0 on this fallthrough",
+        "R2=R8=0 on this fallthrough"
+      ],
+      "return_use": "ignored; caller proceeds to the following transfer call",
+      "observed_setup": "path proof: caller ANDs received byte with 2 and branches away when R8 is nonzero; reaching this call proves R8=0, so both pointer and count are zero"
+    },
+    {
+      "site": "0x10000D42",
+      "caller": "0x10000C40",
+      "args": [
+        "R0=1",
+        "R1=SP+4",
+        "R2=2"
+      ],
+      "return_use": "ignored; followed by 0x10000C1C call"
+    }
+  ],
+  "internal_calls": [
+    {
+      "site": "0x10000B64",
+      "target": "0x10000B4C",
+      "use": "poll controller+0x28 bit0 clear before setup"
+    },
+    {
+      "site": "0x10000BA2",
+      "target": "0x10000B4C",
+      "use": "poll controller+0x28 bit0 clear after final completion poll"
+    }
+  ],
+  "polls": [
+    {
+      "word": "u32[0xA2000028]",
+      "mask": 1,
+      "when": "B4C before configuration and after completion",
+      "wait_until": "masked value zero"
+    },
+    {
+      "word": "u32[0xA2000028]",
+      "mask": 2,
+      "when": "before each input-byte load",
+      "wait_until": "masked value nonzero"
+    },
+    {
+      "word": "u32[0xA2000020]",
+      "mask": null,
+      "when": "after all input bytes",
+      "wait_until": "full word zero"
+    }
+  ],
+  "register_writes_in_order": [
+    "u32[0xA2000008]=0",
+    "u32[0xA200004C]=0",
+    "u32[0xA2000000]=0x407",
+    "u32[0xA2000004]=count",
+    "u32[0xA2000010]=1",
+    "u32[0xA2000018]=u32(count<<16)",
+    "u32[0xA20000F4]=0",
+    "u32[0xA2000008]=1",
+    "u32[0xA2000060]=mode",
+    "then per byte: u32[0xA2000060]=zero_extend(next input byte)"
+  ],
+  "unresolved": [
+    "Physical role and protocol meaning of the 0xA2000000 register block",
+    "Physical runtime loading and peripheral protocol semantics remain unvalidated",
+    "No timeout on any poll",
+    "No null-pointer or length validation"
+  ]
+}

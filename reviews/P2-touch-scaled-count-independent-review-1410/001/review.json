@@ -1,0 +1,17 @@
+{
+  "review_id": "1410",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-scaled-count-5d70-1409/001",
+  "candidate_receipt_sha256": "803a9e9bb46149f752747bc95b26cf6b56e24e398c1b603df8af7bbcb56bf0b2",
+  "candidate_pseudocode_sha256": "637f596ac389e634cab88c8b843bf75e475d5fbd2da17d7661de9f25e9e8839b",
+  "candidate_replay_sha256": "a964af36b6ca23c40ba93da877f4ae7549dc95a061e2df91185aa4bfdba52e37",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independently decoded the 0x5D70 body from the pinned source: LDR descriptor+8; LDR context+0x2C; 32-bit MULS; logical shift right 14; zero return; decrement; compare with 65535; saturating literal load and return. The code span ends at 0x5D8A; the following 0xC046 is NOP and the literal at 0x5D8C is 0x0000FFFF.",
+    "Independently copied and ran the immutable replay script with output redirected to this review directory. All 121 input/factor pairs passed against a modulo-2^32 multiplication model, including overflow, scaled zero, decrement and saturation. The replay observes no stores and checks R0, SP, and return PC."
+  ],
+  "limitations": [
+    "The replay supplies synthetic descriptor/context memory. Pointer validity, physical meaning, and the enclosing caller's reachability are not established. No canonical admission or C implementation is implied."
+  ]
+}

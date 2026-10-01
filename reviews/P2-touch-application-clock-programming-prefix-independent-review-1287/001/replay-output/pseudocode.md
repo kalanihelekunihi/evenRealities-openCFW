@@ -1,0 +1,5 @@
+# Application prefix with original clock programming
+
+The bounded application prefix executes the entire recovered clock initialization hierarchy without helper substitutions inside 44C4. Both 9C80 calls and all source, divider, arithmetic delay and interrupt-mask helpers execute original instructions. The first 24-million request takes its already-current path. The second 48-million request reads two explicit synthetic external table bytes, performs programming writes, delays, and sets low three bits of 40030F08 to six. Actual frequency derivation then produces final RAM frequency 48,000,000, MHz ceiling 48, kHz ceiling 48,000 and shifted kHz modulo 2^32.
+
+Only nine later application dependencies remain controlled. Previous descriptor insertion, register writes, interrupt enabling and arrival at 3D50 are checked. External table memory at 0FFFF1CC onward is explicitly synthetic; its authenticated contents and identity are unresolved. This proves the bounded supplied-state instruction chain, not physical boot or clock timing. No canonical admission or C implementation.

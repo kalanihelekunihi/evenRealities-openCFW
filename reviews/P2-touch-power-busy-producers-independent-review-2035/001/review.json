@@ -1,0 +1,19 @@
+{
+  "review_id": "2035",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-power-busy-producers-2034/002",
+  "candidate_receipt_sha256": "92f9928e8f742bc7345c5bf8d8bf6e0e3e96e04c843e00ce8a55134d7bc73bc8",
+  "candidate_pseudocode_sha256": "f4c6b43bc26c46f894ecb2090ba0adb8151525149f9c44316c6bfc6bea6f6109",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Candidate receipt SHA-256 is 92f9928e8f742bc7345c5bf8d8bf6e0e3e96e04c843e00ce8a55134d7bc73bc8; source/image SHA-256 is 371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87. All declared file pins match.",
+    "Isolated replay reproduced all 24 fixtures. The two original spans implement flag-gated busy-byte updates followed by ordered masked 32-bit peripheral writes; literals, exact write order, R0 and SP match the model.",
+    "Isolated replay was run from a copy writing only to /tmp/codex-review-2035; it completed with PASS and 24 fixtures."
+  ],
+  "limitations": [
+    "Modeled memory does not establish physical clock effects, atomicity, concurrency or all indirect writers.",
+    "No canonical admission."
+  ],
+  "candidate_replay_sha256": "994f219f21e4189edd5c826c291892945548a53b8a58b257a44915813ad753e6"
+}

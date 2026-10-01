@@ -1,0 +1,19 @@
+{
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-callback-exchange-a6a8-1289/001",
+  "candidate_source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "candidate_files": {
+    "pseudocode.md": "998b1a65a3e4f675f844aa9cb19eb4387741513c415dbc73a78a7b9505b441a2",
+    "replay.py": "3da8c503cd08c68fbd4faf18578581d22fafe810373f643bb031ee6e138310ad",
+    "replays.json": "16161cdf1ffb33db58bd167245f1fc3f20ac6d0b98c1609bc8d8e92c17c75cea"
+  },
+  "review_result": "PASS_SCOPED",
+  "checks": {
+    "original_bytes": "Independent Thumb+MCLASS decoding confirms the A6A8..A6BA 18-byte body, unsigned `index > 4` early return, base literal 0x20000F40, four-byte slot stride, old-value load, incoming R1 store, and old value returned in R0. The adjacent NOP and literal are excluded from the body.",
+    "replay": "All 63 isolated original-instruction fixtures pass and match the candidate rows exactly. Valid indices 0..4 check one exact read and write; indices 5 and 0xFFFFFFFF check no data access and return zero. Old/new words span three values each."
+  },
+  "limits": [
+    "The candidate establishes exchange sequence, not atomicity under concurrent access or callback-target validity.",
+    "No canonical admission is claimed."
+  ],
+  "accepted": false
+}

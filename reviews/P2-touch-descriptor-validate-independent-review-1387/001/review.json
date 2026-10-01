@@ -1,0 +1,19 @@
+{
+  "review_id": "1387",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-descriptor-validate-7d92-1386/001",
+  "candidate_receipt_sha256": "b7d180e39febec305c9faf8f22b1b4539987a29cd4279b02a934b00dff59da9b",
+  "candidate_pseudocode_sha256": "ded38905dbeb6a59bc0c54f072d4edd068576ca7b9def7339e9c2140a2850a2e",
+  "candidate_replay_sha256": "84db7ee832a90327acd2c9908dac867e06c2c508bd158954a26fb777f69cb4f4",
+  "candidate_replays_sha256": "78db70a625ff1f0c24545154967b42b97c087c3d5583241e0fa6df2255049390",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independent decode confirms 38 instructions / 76 bytes at 0x7D92..0x7DDE. Seven word loads occur first, in order at descriptor offsets 0, 4, 8, 0xC, 0x10, 0x14, and 0x1C. Only then do the sequential null checks run; each failed check sets R0=2 and branches onward, while all nonzero words leave R0=0. Loaded pointers are not dereferenced. The five-register frame is restored by the common POP.",
+    "The isolated replay passes all 128 combinations of the seven present/zero flags. It records the exact seven full-word reads and verifies zero iff all are nonzero, otherwise two, with return PC and SP correct."
+  ],
+  "limitations": [
+    "A null descriptor is unguarded and not replayed. The tests establish no semantic meaning or validity for nonzero pointer words, nor concurrency behavior. Private scoped evidence only; no canonical admission or implementation."
+  ]
+}

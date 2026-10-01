@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-median-average-filters-independent-review-2175",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "accepted": false,
+  "scope": {
+    "candidate": "analysis/touch-median-average-filters-2172/001",
+    "reviewed": "three separated spans for average, unsigned median and median wrapper; ordered halfword updates and tested input space"
+  },
+  "pins": {
+    "candidate_receipt_sha256": "64aab815c9f10225dd612e2f7e3c74a989496c5d284894eaec21c25594542d30",
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "ranges": [
+      {
+        "start": 20334,
+        "end": 20392,
+        "sha256": "1a41a2667ddf75bb68880c076f5079354c7df12636a4ebaab14366215eb0ead5"
+      },
+      {
+        "start": 20392,
+        "end": 20418,
+        "sha256": "6b329f4b1437293361b1b5aae3668a1e8fe1853cae3279dfce6166eded90498c"
+      },
+      {
+        "start": 20418,
+        "end": 20446,
+        "sha256": "0b260bbd9e7ad8da32317ffc06f5b7d9c54ea6eb2adba8cffb6669d9cb858c42"
+      }
+    ],
+    "candidate_replays_sha256": "22237188d18c586585654aacb484026533b979eb4e5d06b74a0920318e87e1c2",
+    "candidate_files": {
+      "replays.json": "22237188d18c586585654aacb484026533b979eb4e5d06b74a0920318e87e1c2",
+      "replay.py": "e16504cf1c52e6a556d64bd3dfdf037a7d97b1ff72797f2470d763de07939e0c",
+      "pseudocode.md": "06576e0150b55a6c76d464a3149bd3a7509c006e188401be09ff48468bbc9d6a",
+      "disassembly.txt": "8ba956dff39bd5eb7d636403ee24e465758c8ec7a9fac4ff44c85aa132508ddc"
+    }
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "The 26-byte median leaf uses unsigned comparisons over full 32-bit inputs and returns the middle value. The 28-byte wrapper reads sample/history halfwords, invokes that original leaf, then writes old history[0] to history[2], original sample to history[0], and the median to sample[0]. The exact sequence is asserted."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "The 58-byte average helper tests (flags & 0x1800)==0x1000. In the four-sample path it sums original sample plus history[0], [2], and [4], shifts right two, then moves old history[2] to history[4] and old history[0] to history[2]. The two-sample path sums sample plus history[0] and shifts right one. Both paths store original sample to history[0], then output to sample[0]. The body preserves the described high registers/frame."
+    },
+    {
+      "id": "F3",
+      "severity": "none",
+      "result": "All 1,154 original-instruction fixtures pass in isolated execution with byte-identical replay output. Exact source/range and artifact hashes pass; independent Capstone decoding is complete and matches candidate disassembly. Whole buffers, ordered writes, R4-R6/SP or R4/R5/SP, and R0 median outputs are checked."
+    }
+  ],
+  "limitations": [
+    "Average fourth input is fixed at 12345 and only mode masks 0 and 0x1000 are tested.",
+    "The fixtures use separate buffers; aliasing, concurrent mutation, and physical field meanings are not established.",
+    "No canonical admission or C implementation."
+  ],
+  "checks": [
+    {
+      "command": "verify source, spans, and receipt artifact hashes",
+      "result": "PASS",
+      "artifact": "source-checks.json"
+    },
+    {
+      "command": "independent full-span Thumb decode and isolated replay",
+      "result": "PASS; 1,154 fixtures and byte-identical output",
+      "artifact": "replay.txt"
+    }
+  ],
+  "review_artifacts": {
+    "source_checks_sha256": "646d85755ad544ab16790bb95823622871f237c7ae993de27ff08183791b604f",
+    "disassembly_sha256": "8ba956dff39bd5eb7d636403ee24e465758c8ec7a9fac4ff44c85aa132508ddc",
+    "replay_sha256": "7bc3accdfdaec3c89320cd315118b09fc0d54228b935079a56d21cd7e70a736d"
+  },
+  "canonical_or_coverage_change": false
+}

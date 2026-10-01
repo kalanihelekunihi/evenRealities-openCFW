@@ -1,0 +1,9 @@
+Independent review of touch-status-wait-6608-1532/001
+
+Candidate receipt SHA-256 33d9707ffac36e45e314d2303407442279741bc959a04293b61b7986d7d923a9; pseudocode c353448cf9abc8fb189e071e94beacf1019d662dcf8c0de0ac6e1343afa2a9e0; replay 37e097d31b3500431bdd0ddc6bd4687652d822de44a86243a8d09cdee92325a4; disassembly 7e386873ddc8247872e6effa412501bc3d0f4532f666e2ac613d647474162c10; source 371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87.
+
+The exact body is [0x6608,0x664A), 66 bytes. GNU ARM objdump independently confirms 32 Thumb instructions. The model matches the instructions: modes 2/3 use mask 0x01000000 and expected `(mode << 24) & mask`; other modes use mask 1 with the unmodified mode as expected value. Each loop iteration freshly resolves descriptor -> word at +8 -> peripheral, reads status at +0x180, returns 0 on mismatch, returns 4 when matching with zero remaining budget, otherwise calls A324(1), decrements and polls again. Helper return is ignored; saved-register frame is restored.
+
+Isolated Unicorn replay passed all 54 fixtures. The candidate imports Capstone, unavailable in the replay runtime here; the review-owned replay copy therefore removed only Capstone's redundant instruction-count/disassembly generation, retained the exact original source bytes and Unicorn execution/hooks/assertions, and used GNU objdump separately for independent decode. `replay-original.py` preserves the exact candidate replay. The candidate's committed disassembly was also checked against objdump.
+
+PASS_SCOPED. A324 is controlled; status transitions and MMIO are synthetic. Physical polling/time units are not established. No canonical admission.

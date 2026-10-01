@@ -1,0 +1,5 @@
+Review 1735 — PASS_SCOPED
+
+Bound to touch-application-original-timing-initialization-prefix-1732/001, receipt SHA-256 2a3b07f0f699da4227246372f7acc8cfd02e0548996ef3683975659880a84c39. Candidate artifact hashes and locked source hash were checked. The replay was copied to a unique temporary path and its output redirected to /tmp/review1735-independent; replay, budgets, and pseudocode outputs matched exactly.
+
+Manual call/flow review confirms the original 5DD8 body reaches its 5D90 update and that the fixture overrides only the listed callees. The readiness replacement at 9E18 writes sample 17 to 0x40030020 and returns immediately. Assertions bind its parent call sequence and actual calculations, including context+44 = 285. The candidate's stated synthetic-readiness and physical timing limits are accurate.

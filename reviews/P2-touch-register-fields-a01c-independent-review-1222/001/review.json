@@ -1,0 +1,31 @@
+{
+  "review_id": "1222/001",
+  "decision": "PASS_SCOPED",
+  "scope": "Independent review of the corrected A01C/002 candidate and its 288 original-byte cases. MMIO is synthetic; no hardware behavior is inferred.",
+  "candidate": {
+    "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-register-fields-a01c-1221/002",
+    "receipt_sha256": "e163ffacc3c38c865d05955d4f4a9cd76d3686a7fbcff8f8026883a74c50ae94",
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "body_sha256": "898711d12d0ffc463489b177b8909ba9704fbe38352325db7bce89299bb6dc52",
+    "files": {
+      "pseudocode.md": "b089e3e6d57f886f7cacc2a881e70473ae848de1c968c699f7654d9415f7656d",
+      "replay.py": "5f41b10bff281fc7f224b60bdddd1a7f5eb4b0f25a3555e20853d9f0f820fb9b",
+      "replays.json": "b46538410c177b0adfe5e50fac147c46d64c2bb116c8ed77df06b3a17d5cc35f"
+    }
+  },
+  "independent_artifacts": {
+    "isolated_replay": "reviews/P2-touch-register-fields-a01c-independent-review-1222/001/replay_isolated.py",
+    "regenerated_rows": "reviews/P2-touch-register-fields-a01c-independent-review-1222/001/regenerated/replays.json",
+    "regenerated_rows_sha256": "b46538410c177b0adfe5e50fac147c46d64c2bb116c8ed77df06b3a17d5cc35f"
+  },
+  "checks": [
+    "Decoded the 142-byte body A01C..A0AA from pinned firmware bytes; the trailing NOP at A0AA and literal pool remain outside the body.",
+    "The body enforces exact mode 2/3, R1==0 and R3<=31. Mode 2 bounds R2 below 65536 and forms target 0x40010400; mode 3 bounds R2 below 16777216 and forms 0x40010500.",
+    "Mode 2 masks with 0xFF0000FF then inserts R2 in bits 23..8; mode 3 retains the low byte and inserts R2 in bits 31..8. Both paths perform a fresh second read before replacing bits 7..3 with R3, then return zero. Rejection branches return the pinned error literal.",
+    "Reran all 288 cases in an isolated directory; rows match exactly. Valid rows show exactly two reads and two ordered word writes at the selected address. Rejected rows have no MMIO access. R4/R5/R6 and SP are restored as recorded."
+  ],
+  "limitations": [
+    "The second read observes the preceding write in these emulator fixtures. Real peripheral changes between accesses, bus semantics and concurrent updates are not modeled.",
+    "No caller reachability or canonical admission is implied."
+  ]
+}

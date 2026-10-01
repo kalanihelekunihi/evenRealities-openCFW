@@ -1,0 +1,18 @@
+{
+  "review_id": "2041",
+  "status": "PASS_STATIC_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/arc-scratch-record-builder-2018/001",
+  "candidate_receipt_sha256": "36656dcf4d6fa663404708ab743901df886b0c633415d40ebeaa3a82f81908e2",
+  "candidate_pseudocode_sha256": "87897ce3d5d158a5f0a4624408bfe43df9f0ea3fb0b906a814e867037aae35a1",
+  "source_sha256": null,
+  "checks": [
+    "Candidate receipt SHA-256 is 36656dcf4d6fa663404708ab743901df886b0c633415d40ebeaa3a82f81908e2; source/image SHA-256 is None. All declared file pins match.",
+    "The pinned candidate verifier passes exact source/package mapping, 56-byte span and decode, caller/delay-slot contract, ordered byte model and fixture checks.",
+    "The candidate\u2019s own independent verifier completed successfully against the pinned files."
+  ],
+  "limitations": [
+    "Nested callee remains unresolved/controlled; no ARC CPU execution or canonical admission.",
+    "No canonical admission."
+  ]
+}

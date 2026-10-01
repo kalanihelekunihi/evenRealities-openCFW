@@ -1,0 +1,16 @@
+{
+  "review_id": "1841",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-copy-search-count-audit-1834/001",
+  "candidate_receipt_sha256": "b5363e6beabb5ec983acdc40bc3bf5ec55e07a8689d357897a5dd19aabf88381",
+  "parent_receipt_sha256": "1ce18c83f7a6b87560e17bae1bdb4817a40c7674ce773d44e3171c52efbb9992",
+  "parent_replay_sha256": "bcba67df1a792614a9960ed86be11058ad976eca2916f28b749045014219934c",
+  "checks": [
+    "Audit hashes and its exact parent receipt/replay pins verified. An isolated run counted original 810C calls and 8394 candidate comparisons in each of 120 delimited 8352..83F2 segments; generated audit JSON matched byte-for-byte.",
+    "Maximum observed advances/checks is four for context count four. The instruction order confirms count check before stepping, with index increment only after candidate rejection. This refutes count-minus-one for these traces."
+  ],
+  "limitations": [
+    "Every audited search found a candidate; no-match exhaustion is unexercised here (separate trace packet covers it). Audit only answers bounded search-count behavior; no global recovery or physical storage claim."
+  ]
+}

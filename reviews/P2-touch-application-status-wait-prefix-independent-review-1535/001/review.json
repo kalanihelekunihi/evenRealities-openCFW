@@ -1,0 +1,18 @@
+{
+  "review_id": "1535",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-status-wait-prefix-1534/001",
+  "candidate_receipt_sha256": "2f6dc21da6878164f2c02e1f141853001808ab4a557fcc40fdf3782f1acf0697",
+  "candidate_pseudocode_sha256": "ea4a9330ea4afd23f4631b19bc5707140954a0f2a5f234f47a87c21c56290dee",
+  "candidate_replay_sha256": "0c97cdc73a8aeee2e3aae3a8c181a811bc69e5db9687164845598dce8f75b510",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "An isolated cumulative startup replay passed and reached 0x3D50 with original 0x6608 executing within 0x685C/0x6A80.",
+    "Verified the synthetic mode-0 zero-status path makes exactly 315 controlled A324(1) calls, returns 4 from the wait helper, then continues through the reset caller and the asserted remaining call sequence.",
+    "All inherited startup state, call-order, and final-state assertions passed."
+  ],
+  "limitations": [
+    "A324 is controlled; status/MMIO are synthetic. This is one bounded status-path fixture, not physical timing, alternate-status behavior or whole-firmware proof. No canonical admission."
+  ]
+}

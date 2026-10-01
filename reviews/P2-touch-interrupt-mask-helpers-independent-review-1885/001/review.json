@@ -1,0 +1,15 @@
+{
+  "review_id": "1885",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-interrupt-mask-helpers-1874/001",
+  "candidate_receipt_sha256": "2e508efe2b30cb8214d6d176dcb809237af67f44e0549191f6b7f0717aecabfe",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Isolated replay covers 16 original-instruction cases and byte-matches candidate output; both body spans and instruction counts match source bytes.",
+    "4492 reads PRIMASK into R0, then CPSID i sets its implemented mask bit; 449A writes R0 back to PRIMASK and preserves R0. Both paths retain SP and return through LR. Alternating initial masks and restore values including high bits support the documented Cortex-M architectural behavior."
+  ],
+  "limitations": [
+    "This is emulator-level architectural evidence only; physical interrupt delivery, privilege configuration and timing remain unverified. No canonical admission."
+  ]
+}

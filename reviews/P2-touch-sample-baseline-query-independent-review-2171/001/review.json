@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-sample-baseline-query-independent-review-2171",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "accepted": false,
+  "scope": {
+    "candidate": "analysis/touch-sample-baseline-query-4fee-2168/001",
+    "reviewed": "main body and two leaves, threshold/counter/reset/blend control flow, exact data accesses, return and frame preservation"
+  },
+  "pins": {
+    "candidate_receipt_sha256": "6f6d9d48dce9e8c49762c5161a58300cf58fd71f14ab48ae37356cb06c3cb2d3",
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "ranges": [
+      {
+        "start": 20462,
+        "end": 20564,
+        "sha256": "043d2c2c789b1eafb9d1b3d8ce1681558c62d52de64134a84bb78515de762309"
+      },
+      {
+        "start": 19892,
+        "end": 19896,
+        "sha256": "a7ddd513d149ea16fdd4db3f82267f83087aeaddd06b5dde5468adb704205fc4"
+      },
+      {
+        "start": 19896,
+        "end": 19908,
+        "sha256": "586c755653739ad9e7065ef32b056ca24f4f894b2d8e054d63203113928454c6"
+      }
+    ],
+    "candidate_replays_sha256": "c9a1c7022e66aa485b96448d99e79f3f6d159ac1ad21d332648d707f74d58f1f",
+    "candidate_files": {
+      "replays.json": "c9a1c7022e66aa485b96448d99e79f3f6d159ac1ad21d332648d707f74d58f1f",
+      "replay.py": "3996701610083d483d1524674beb61fa9c34adb360cc208f1b69c724e6d69c3c",
+      "pseudocode.md": "b0f3c62d528c9340581453a6be22d1944736bb7dc5641dc91628c17dccaec19e",
+      "disassembly.txt": "4882c89f33280b5203ca93d5f800a70b978ef2bee9787f453f93067e7e3e888f"
+    }
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "Independent decode confirms all three exact spans: main [4FEE,5054), zero leaf [4DB4,4DB8), and reset leaf [4DB8,4DC4). The zero leaf returns 0; the main retains that status and returns it. Sample>=baseline clears byte7. The 32-bit baseline+parameter28 comparison selects byte-counter increment or reset; reset clears fraction byte8, copies sample into baseline, then clears counter."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "The other branch freshly reads context word0/header byte40. With header zero and sample strictly above baseline+parameter26 it skips blending; otherwise it calls 4FDE with sample<<8, (baseline<<8)|fraction, and byte34 weight, then stores the returned high portion to baseline and low byte to fraction. Item halfword4 and remaining item bytes are untouched. R4-R7/SP restore."
+    },
+    {
+      "id": "F3",
+      "severity": "none",
+      "result": "All 5,184 original-instruction fixtures passed in isolated execution and replay JSON is byte-identical. The source, all three exact code spans and receipt-listed artifacts hash-check. The fixture matrix uses equal parameter values at offsets 26 and 28, so it does not independently test those two thresholds diverging."
+    }
+  ],
+  "limitations": [
+    "Threshold parameters at offsets 26 and 28 are equal in all fixtures; their independent relationship is not tested.",
+    "Fixtures use separate static synthetic allocations; physical meaning, aliasing, concurrent mutation and caller closure remain unresolved.",
+    "No canonical admission or C implementation."
+  ],
+  "checks": [
+    {
+      "command": "independent source/range/artifact hash verification",
+      "result": "PASS",
+      "artifact": "source-checks.json"
+    },
+    {
+      "command": "complete Thumb decode and isolated replay",
+      "result": "PASS; 5,184 fixtures, byte-identical replay JSON",
+      "artifact": "replay.txt"
+    }
+  ],
+  "review_artifacts": {
+    "source_checks_sha256": "82f714aad2e75c0128f2ad198c24def0505272b82dcbe73caab74d01419e8423",
+    "disassembly_sha256": "4882c89f33280b5203ca93d5f800a70b978ef2bee9787f453f93067e7e3e888f",
+    "replay_sha256": "0de3253b264fff43961f9ba02a2ccb58872016fa4bfafbcacf47e812d145b2af"
+  },
+  "canonical_or_coverage_change": false
+}

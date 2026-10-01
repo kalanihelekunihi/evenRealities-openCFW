@@ -1,0 +1,602 @@
+
+ringPackCccdEpochValue [004c46c0,004c46d0) sha256=5253485c728919595e5a0b78b2354dbb964f271d59b7e1832be3765298a982ce
+004c46c0  c0b2       uxtb     r0, r0
+004c46c2  c9b2       uxtb     r1, r1
+004c46c4  50ea0120   orrs.w   r0, r0, r1, lsl #8
+004c46c8  92b2       uxth     r2, r2
+004c46ca  50ea0240   orrs.w   r0, r0, r2, lsl #16
+004c46ce  7047       bx       lr
+
+_ringEnableCccd [004c46d0,004c4810) sha256=a3e14ecb2f6781258903eaea1a0a7872ee00b3b1f0ebcd9fc34705018ffc86cd
+004c46d0  f8b5       push     {r3, r4, r5, r6, r7, lr}
+004c46d2  86b0       sub      sp, #0x18
+004c46d4  0500       movs     r5, r0
+004c46d6  2c00       movs     r4, r5
+004c46d8  2e00       movs     r6, r5
+004c46da  360a       lsrs     r6, r6, #8
+004c46dc  2d0c       lsrs     r5, r5, #0x10
+004c46de  2000       movs     r0, r4
+004c46e0  c0b2       uxtb     r0, r0
+004c46e2  0028       cmp      r0, #0
+004c46e4  15d0       beq      #0x4c4712
+004c46e6  dff88075   ldr.w    r7, [pc, #0x580]
+004c46ea  2000       movs     r0, r4
+004c46ec  3978       ldrb     r1, [r7]
+004c46ee  c0b2       uxtb     r0, r0
+004c46f0  8842       cmp      r0, r1
+004c46f2  0ed1       bne      #0x4c4712
+004c46f4  2800       movs     r0, r5
+004c46f6  3989       ldrh     r1, [r7, #8]
+004c46f8  80b2       uxth     r0, r0
+004c46fa  8842       cmp      r0, r1
+004c46fc  09d1       bne      #0x4c4712
+004c46fe  2000       movs     r0, r4
+004c4700  c0b2       uxtb     r0, r0
+004c4702  f2f7e0fb   bl       #0x4b6ec6 ; DmConnInUse
+004c4706  0028       cmp      r0, #0
+004c4708  03d0       beq      #0x4c4712
+004c470a  7868       ldr      r0, [r7, #4]
+004c470c  8088       ldrh     r0, [r0, #4]
+004c470e  0028       cmp      r0, #0
+004c4710  37d1       bne      #0x4c4782
+004c4712  78f7dcfc   bl       #0x43d0ce ; 
+004c4716  8007       lsls     r0, r0, #0x1e
+004c4718  19d5       bpl      #0x4c474e
+004c471a  dff84c05   ldr.w    r0, [pc, #0x54c]
+004c471e  0189       ldrh     r1, [r0, #8]
+004c4720  0591       str      r1, [sp, #0x14]
+004c4722  0078       ldrb     r0, [r0]
+004c4724  0490       str      r0, [sp, #0x10]
+004c4726  2800       movs     r0, r5
+004c4728  80b2       uxth     r0, r0
+004c472a  0390       str      r0, [sp, #0xc]
+004c472c  2000       movs     r0, r4
+004c472e  c0b2       uxtb     r0, r0
+004c4730  0290       str      r0, [sp, #8]
+004c4732  dff83805   ldr.w    r0, [pc, #0x538]
+004c4736  0190       str      r0, [sp, #4]
+004c4738  7620       movs     r0, #0x76
+004c473a  0090       str      r0, [sp]
+004c473c  dff83035   ldr.w    r3, [pc, #0x530]
+004c4740  dff83025   ldr.w    r2, [pc, #0x530]
+004c4744  dff83015   ldr.w    r1, [pc, #0x530]
+004c4748  0220       movs     r0, #2
+004c474a  78f713ff   bl       #0x43d574 ; FUN_0043d574
+004c474e  78f7befc   bl       #0x43d0ce ; 
+004c4752  c007       lsls     r0, r0, #0x1f
+004c4754  03d4       bmi      #0x4c475e
+004c4756  78f7bafc   bl       #0x43d0ce ; 
+004c475a  4007       lsls     r0, r0, #0x1d
+004c475c  10d5       bpl      #0x4c4780
+004c475e  dff81c15   ldr.w    r1, [pc, #0x51c]
+004c4762  dff80405   ldr.w    r0, [pc, #0x504]
+004c4766  0289       ldrh     r2, [r0, #8]
+004c4768  0292       str      r2, [sp, #8]
+004c476a  0078       ldrb     r0, [r0]
+004c476c  0190       str      r0, [sp, #4]
+004c476e  adb2       uxth     r5, r5
+004c4770  0095       str      r5, [sp]
+004c4772  e4b2       uxtb     r4, r4
+004c4774  2300       movs     r3, r4
+004c4776  0a00       movs     r2, r1
+004c4778  5ff01060   movs.w   r0, #0x9000000
+004c477c  78f78ffb   bl       #0x43ce9e ; compress_log_output
+004c4780  44e0       b        #0x4c480c
+004c4782  dff8fc04   ldr.w    r0, [pc, #0x4fc]
+004c4786  0088       ldrh     r0, [r0]
+004c4788  adf81400   strh.w   r0, [sp, #0x14]
+004c478c  78f79ffc   bl       #0x43d0ce ; 
+004c4790  8007       lsls     r0, r0, #0x1e
+004c4792  16d5       bpl      #0x4c47c2
+004c4794  3000       movs     r0, r6
+004c4796  c0b2       uxtb     r0, r0
+004c4798  0490       str      r0, [sp, #0x10]
+004c479a  7868       ldr      r0, [r7, #4]
+004c479c  8088       ldrh     r0, [r0, #4]
+004c479e  0390       str      r0, [sp, #0xc]
+004c47a0  2000       movs     r0, r4
+004c47a2  c0b2       uxtb     r0, r0
+004c47a4  0290       str      r0, [sp, #8]
+004c47a6  dff8dc04   ldr.w    r0, [pc, #0x4dc]
+004c47aa  0190       str      r0, [sp, #4]
+004c47ac  7e20       movs     r0, #0x7e
+004c47ae  0090       str      r0, [sp]
+004c47b0  dff8bc34   ldr.w    r3, [pc, #0x4bc]
+004c47b4  dff8bc24   ldr.w    r2, [pc, #0x4bc]
+004c47b8  dff8bc14   ldr.w    r1, [pc, #0x4bc]
+004c47bc  0320       movs     r0, #3
+004c47be  78f7d9fe   bl       #0x43d574 ; FUN_0043d574
+004c47c2  78f784fc   bl       #0x43d0ce ; 
+004c47c6  c007       lsls     r0, r0, #0x1f
+004c47c8  03d4       bmi      #0x4c47d2
+004c47ca  78f780fc   bl       #0x43d0ce ; 
+004c47ce  4007       lsls     r0, r0, #0x1d
+004c47d0  0ed5       bpl      #0x4c47f0
+004c47d2  dff8b424   ldr.w    r2, [pc, #0x4b4]
+004c47d6  3000       movs     r0, r6
+004c47d8  c0b2       uxtb     r0, r0
+004c47da  0190       str      r0, [sp, #4]
+004c47dc  7868       ldr      r0, [r7, #4]
+004c47de  8088       ldrh     r0, [r0, #4]
+004c47e0  0090       str      r0, [sp]
+004c47e2  2300       movs     r3, r4
+004c47e4  dbb2       uxtb     r3, r3
+004c47e6  1100       movs     r1, r2
+004c47e8  5ff04c60   movs.w   r0, #0xcc00000
+004c47ec  78f757fb   bl       #0x43ce9e ; compress_log_output
+004c47f0  05ab       add      r3, sp, #0x14
+004c47f2  0222       movs     r2, #2
+004c47f4  7868       ldr      r0, [r7, #4]
+004c47f6  8188       ldrh     r1, [r0, #4]
+004c47f8  2000       movs     r0, r4
+004c47fa  c0b2       uxtb     r0, r0
+004c47fc  f0f7ceff   bl       #0x4b579c ; AttcWriteReq
+004c4800  f6b2       uxtb     r6, r6
+004c4802  012e       cmp      r6, #1
+004c4804  02d1       bne      #0x4c480c
+004c4806  0420       movs     r0, #4
+004c4808  00f019fe   bl       #0x4c543e ; Thread_SendEvtToRingTask
+004c480c  07b0       add      sp, #0x1c
+004c480e  f0bd       pop      {r4, r5, r6, r7, pc}
+
+APP_BleRingHandlerInit [004c4810,004c487c) sha256=9f15317589791c3c6e74f5d2aad0267f08b558f790b0cc90e943941dbb721149
+004c4810  3eb5       push     {r1, r2, r3, r4, r5, lr}
+004c4812  0500       movs     r5, r0
+004c4814  0c00       movs     r4, r1
+004c4816  78f75afc   bl       #0x43d0ce ; 
+004c481a  8007       lsls     r0, r0, #0x1e
+004c481c  0dd5       bpl      #0x4c483a
+004c481e  dff86c04   ldr.w    r0, [pc, #0x46c]
+004c4822  0190       str      r0, [sp, #4]
+004c4824  9820       movs     r0, #0x98
+004c4826  0090       str      r0, [sp]
+004c4828  dff86434   ldr.w    r3, [pc, #0x464]
+004c482c  dff84424   ldr.w    r2, [pc, #0x444]
+004c4830  dff84414   ldr.w    r1, [pc, #0x444]
+004c4834  0420       movs     r0, #4
+004c4836  78f79dfe   bl       #0x43d574 ; FUN_0043d574
+004c483a  78f748fc   bl       #0x43d0ce ; 
+004c483e  c007       lsls     r0, r0, #0x1f
+004c4840  03d4       bmi      #0x4c484a
+004c4842  78f744fc   bl       #0x43d0ce ; 
+004c4846  4007       lsls     r0, r0, #0x1d
+004c4848  06d5       bpl      #0x4c4858
+004c484a  dff84824   ldr.w    r2, [pc, #0x448]
+004c484e  1100       movs     r1, r2
+004c4850  5ff08050   movs.w   r0, #0x10000000
+004c4854  78f723fb   bl       #0x43ce9e ; compress_log_output
+004c4858  dff80c04   ldr.w    r0, [pc, #0x40c]
+004c485c  4570       strb     r5, [r0, #1]
+004c485e  0021       movs     r1, #0
+004c4860  0170       strb     r1, [r0]
+004c4862  0121       movs     r1, #1
+004c4864  0181       strh     r1, [r0, #8]
+004c4866  4460       str      r4, [r0, #4]
+004c4868  1021       movs     r1, #0x10
+004c486a  4268       ldr      r2, [r0, #4]
+004c486c  1180       strh     r1, [r2]
+004c486e  1221       movs     r1, #0x12
+004c4870  4268       ldr      r2, [r0, #4]
+004c4872  5180       strh     r1, [r2, #2]
+004c4874  1321       movs     r1, #0x13
+004c4876  4068       ldr      r0, [r0, #4]
+004c4878  8180       strh     r1, [r0, #4]
+004c487a  37bd       pop      {r0, r1, r2, r4, r5, pc}
+
+APP_BleRingSvcDiscover [004c487c,004c48ac) sha256=7dbb9605a5f4b57c1f9d0d21e9e2b574a1b4f6de40e429236084463082e0c38c
+004c487c  7cb5       push     {r2, r3, r4, r5, r6, lr}
+004c487e  0400       movs     r4, r0
+004c4880  0d00       movs     r5, r1
+004c4882  dff81464   ldr.w    r6, [pc, #0x414]
+004c4886  1023       movs     r3, #0x10
+004c4888  3200       movs     r2, r6
+004c488a  1021       movs     r1, #0x10
+004c488c  dff80c04   ldr.w    r0, [pc, #0x40c]
+004c4890  79f71cf9   bl       #0x43dacc ; 
+004c4894  0195       str      r5, [sp, #4]
+004c4896  dff80804   ldr.w    r0, [pc, #0x408]
+004c489a  0090       str      r0, [sp]
+004c489c  0323       movs     r3, #3
+004c489e  3200       movs     r2, r6
+004c48a0  1021       movs     r1, #0x10
+004c48a2  2000       movs     r0, r4
+004c48a4  c0b2       uxtb     r0, r0
+004c48a6  6ef005fd   bl       #0x5332b4 ; FUN_005332b4
+004c48aa  73bd       pop      {r0, r1, r4, r5, r6, pc}
+
+_bleRingReceiveData [004c48ac,004c4910) sha256=cacb10192efbe04e97f00e27fe61f1bb08cbc504cf80809977b27f81ca0646cf
+004c48ac  1cb5       push     {r2, r3, r4, lr}
+004c48ae  0400       movs     r4, r0
+004c48b0  e078       ldrb     r0, [r4, #3]
+004c48b2  0028       cmp      r0, #0
+004c48b4  2bd1       bne      #0x4c490e
+004c48b6  6089       ldrh     r0, [r4, #0xa]
+004c48b8  dff8ac13   ldr.w    r1, [pc, #0x3ac]
+004c48bc  4968       ldr      r1, [r1, #4]
+004c48be  4988       ldrh     r1, [r1, #2]
+004c48c0  8842       cmp      r0, r1
+004c48c2  24d1       bne      #0x4c490e
+004c48c4  78f703fc   bl       #0x43d0ce ; 
+004c48c8  8007       lsls     r0, r0, #0x1e
+004c48ca  0dd5       bpl      #0x4c48e8
+004c48cc  dff8d403   ldr.w    r0, [pc, #0x3d4]
+004c48d0  0190       str      r0, [sp, #4]
+004c48d2  cc20       movs     r0, #0xcc
+004c48d4  0090       str      r0, [sp]
+004c48d6  dff8d033   ldr.w    r3, [pc, #0x3d0]
+004c48da  dff89823   ldr.w    r2, [pc, #0x398]
+004c48de  dff89813   ldr.w    r1, [pc, #0x398]
+004c48e2  0320       movs     r0, #3
+004c48e4  78f746fe   bl       #0x43d574 ; FUN_0043d574
+004c48e8  78f7f1fb   bl       #0x43d0ce ; 
+004c48ec  c007       lsls     r0, r0, #0x1f
+004c48ee  03d4       bmi      #0x4c48f8
+004c48f0  78f7edfb   bl       #0x43d0ce ; 
+004c48f4  4007       lsls     r0, r0, #0x1d
+004c48f6  06d5       bpl      #0x4c4906
+004c48f8  dff8b013   ldr.w    r1, [pc, #0x3b0]
+004c48fc  0a00       movs     r2, r1
+004c48fe  5ff04060   movs.w   r0, #0xc000000
+004c4902  78f7ccfa   bl       #0x43ce9e ; compress_log_output
+004c4906  2189       ldrh     r1, [r4, #8]
+004c4908  6068       ldr      r0, [r4, #4]
+004c490a  00f0bffd   bl       #0x4c548c ; Thread_SendMsgToRingTaskWithId
+004c490e  13bd       pop      {r0, r1, r4, pc}
+
+APP_BleRingProcMsg [004c4910,004c4b7e) sha256=6698734dc25fe37714846d077d9e2ca32f02f1b877b09089126e726eb053ff6d
+004c4910  f0b5       push     {r4, r5, r6, r7, lr}
+004c4912  85b0       sub      sp, #0x14
+004c4914  0c00       movs     r4, r1
+004c4916  002c       cmp      r4, #0
+004c4918  00f02f81   beq.w    #0x4c4b7a
+004c491c  a078       ldrb     r0, [r4, #2]
+004c491e  0528       cmp      r0, #5
+004c4920  00f0a180   beq.w    #0x4c4a66
+004c4924  0d28       cmp      r0, #0xd
+004c4926  00f09e80   beq.w    #0x4c4a66
+004c492a  0e28       cmp      r0, #0xe
+004c492c  00f09b80   beq.w    #0x4c4a66
+004c4930  2728       cmp      r0, #0x27
+004c4932  00f0a280   beq.w    #0x4c4a7a
+004c4936  2828       cmp      r0, #0x28
+004c4938  00f00081   beq.w    #0x4c4b3c
+004c493c  ac28       cmp      r0, #0xac
+004c493e  40f01c81   bne.w    #0x4c4b7a
+004c4942  78f7c4fb   bl       #0x43d0ce ; 
+004c4946  8007       lsls     r0, r0, #0x1e
+004c4948  0dd5       bpl      #0x4c4966
+004c494a  dff86403   ldr.w    r0, [pc, #0x364]
+004c494e  0190       str      r0, [sp, #4]
+004c4950  e720       movs     r0, #0xe7
+004c4952  0090       str      r0, [sp]
+004c4954  dff85c33   ldr.w    r3, [pc, #0x35c]
+004c4958  dff81823   ldr.w    r2, [pc, #0x318]
+004c495c  dff81813   ldr.w    r1, [pc, #0x318]
+004c4960  0420       movs     r0, #4
+004c4962  78f707fe   bl       #0x43d574 ; FUN_0043d574
+004c4966  78f7b2fb   bl       #0x43d0ce ; 
+004c496a  c007       lsls     r0, r0, #0x1f
+004c496c  03d4       bmi      #0x4c4976
+004c496e  78f7aefb   bl       #0x43d0ce ; 
+004c4972  4007       lsls     r0, r0, #0x1d
+004c4974  06d5       bpl      #0x4c4984
+004c4976  dff84023   ldr.w    r2, [pc, #0x340]
+004c497a  1100       movs     r1, r2
+004c497c  5ff08050   movs.w   r0, #0x10000000
+004c4980  78f78dfa   bl       #0x43ce9e ; compress_log_output
+004c4984  2588       ldrh     r5, [r4]
+004c4986  b84e       ldr      r6, [pc, #0x2e0]
+004c4988  7068       ldr      r0, [r6, #4]
+004c498a  0028       cmp      r0, #0
+004c498c  02d0       beq      #0x4c4994
+004c498e  7068       ldr      r0, [r6, #4]
+004c4990  0788       ldrh     r7, [r0]
+004c4992  00e0       b        #0x4c4996
+004c4994  0027       movs     r7, #0
+004c4996  2800       movs     r0, r5
+004c4998  c0b2       uxtb     r0, r0
+004c499a  0028       cmp      r0, #0
+004c499c  08d0       beq      #0x4c49b0
+004c499e  2800       movs     r0, r5
+004c49a0  3178       ldrb     r1, [r6]
+004c49a2  c0b2       uxtb     r0, r0
+004c49a4  8842       cmp      r0, r1
+004c49a6  03d1       bne      #0x4c49b0
+004c49a8  3800       movs     r0, r7
+004c49aa  80b2       uxth     r0, r0
+004c49ac  0028       cmp      r0, #0
+004c49ae  2cd1       bne      #0x4c4a0a
+004c49b0  78f78dfb   bl       #0x43d0ce ; 
+004c49b4  8007       lsls     r0, r0, #0x1e
+004c49b6  11d5       bpl      #0x4c49dc
+004c49b8  3800       movs     r0, r7
+004c49ba  80b2       uxth     r0, r0
+004c49bc  0490       str      r0, [sp, #0x10]
+004c49be  3078       ldrb     r0, [r6]
+004c49c0  0390       str      r0, [sp, #0xc]
+004c49c2  2800       movs     r0, r5
+004c49c4  c0b2       uxtb     r0, r0
+004c49c6  0290       str      r0, [sp, #8]
+004c49c8  bc48       ldr      r0, [pc, #0x2f0]
+004c49ca  0190       str      r0, [sp, #4]
+004c49cc  f620       movs     r0, #0xf6
+004c49ce  0090       str      r0, [sp]
+004c49d0  b84b       ldr      r3, [pc, #0x2e0]
+004c49d2  a84a       ldr      r2, [pc, #0x2a0]
+004c49d4  a849       ldr      r1, [pc, #0x2a0]
+004c49d6  0220       movs     r0, #2
+004c49d8  78f7ccfd   bl       #0x43d574 ; FUN_0043d574
+004c49dc  78f777fb   bl       #0x43d0ce ; 
+004c49e0  c007       lsls     r0, r0, #0x1f
+004c49e2  03d4       bmi      #0x4c49ec
+004c49e4  78f773fb   bl       #0x43d0ce ; 
+004c49e8  4007       lsls     r0, r0, #0x1d
+004c49ea  0bd5       bpl      #0x4c4a04
+004c49ec  b449       ldr      r1, [pc, #0x2d0]
+004c49ee  bfb2       uxth     r7, r7
+004c49f0  0197       str      r7, [sp, #4]
+004c49f2  3078       ldrb     r0, [r6]
+004c49f4  0090       str      r0, [sp]
+004c49f6  edb2       uxtb     r5, r5
+004c49f8  2b00       movs     r3, r5
+004c49fa  0a00       movs     r2, r1
+004c49fc  5ff00c60   movs.w   r0, #0x8c00000
+004c4a00  78f74dfa   bl       #0x43ce9e ; compress_log_output
+004c4a04  0cf017f9   bl       #0x4d0c36 ; thread_ble_wsf_tx_complete_notify
+004c4a08  b7e0       b        #0x4c4b7a
+004c4a0a  78f760fb   bl       #0x43d0ce ; 
+004c4a0e  8007       lsls     r0, r0, #0x1e
+004c4a10  0ed5       bpl      #0x4c4a30
+004c4a12  3800       movs     r0, r7
+004c4a14  80b2       uxth     r0, r0
+004c4a16  0390       str      r0, [sp, #0xc]
+004c4a18  0020       movs     r0, #0
+004c4a1a  0290       str      r0, [sp, #8]
+004c4a1c  a948       ldr      r0, [pc, #0x2a4]
+004c4a1e  0190       str      r0, [sp, #4]
+004c4a20  fa20       movs     r0, #0xfa
+004c4a22  0090       str      r0, [sp]
+004c4a24  a34b       ldr      r3, [pc, #0x28c]
+004c4a26  934a       ldr      r2, [pc, #0x24c]
+004c4a28  9349       ldr      r1, [pc, #0x24c]
+004c4a2a  0420       movs     r0, #4
+004c4a2c  78f7a2fd   bl       #0x43d574 ; FUN_0043d574
+004c4a30  78f74dfb   bl       #0x43d0ce ; 
+004c4a34  c007       lsls     r0, r0, #0x1f
+004c4a36  03d4       bmi      #0x4c4a40
+004c4a38  78f749fb   bl       #0x43d0ce ; 
+004c4a3c  4007       lsls     r0, r0, #0x1d
+004c4a3e  09d5       bpl      #0x4c4a54
+004c4a40  a149       ldr      r1, [pc, #0x284]
+004c4a42  3800       movs     r0, r7
+004c4a44  80b2       uxth     r0, r0
+004c4a46  0090       str      r0, [sp]
+004c4a48  0023       movs     r3, #0
+004c4a4a  0a00       movs     r2, r1
+004c4a4c  5ff08450   movs.w   r0, #0x10800000
+004c4a50  78f725fa   bl       #0x43ce9e ; compress_log_output
+004c4a54  6368       ldr      r3, [r4, #4]
+004c4a56  2289       ldrh     r2, [r4, #8]
+004c4a58  3900       movs     r1, r7
+004c4a5a  89b2       uxth     r1, r1
+004c4a5c  2800       movs     r0, r5
+004c4a5e  c0b2       uxtb     r0, r0
+004c4a60  75f0c3f9   bl       #0x539dea ; AttcWriteCmd
+004c4a64  89e0       b        #0x4c4b7a
+004c4a66  8048       ldr      r0, [pc, #0x200]
+004c4a68  0078       ldrb     r0, [r0]
+004c4a6a  f2f7abfc   bl       #0x4b73c4 ; DmConnRole
+004c4a6e  0028       cmp      r0, #0
+004c4a70  02d1       bne      #0x4c4a78
+004c4a72  2000       movs     r0, r4
+004c4a74  fff71aff   bl       #0x4c48ac ; _bleRingReceiveData
+004c4a78  7fe0       b        #0x4c4b7a
+004c4a7a  2088       ldrh     r0, [r4]
+004c4a7c  c0b2       uxtb     r0, r0
+004c4a7e  f2f7a1fc   bl       #0x4b73c4 ; DmConnRole
+004c4a82  0028       cmp      r0, #0
+004c4a84  59d1       bne      #0x4c4b3a
+004c4a86  784d       ldr      r5, [pc, #0x1e0]
+004c4a88  2088       ldrh     r0, [r4]
+004c4a8a  2870       strb     r0, [r5]
+004c4a8c  2889       ldrh     r0, [r5, #8]
+004c4a8e  401c       adds     r0, r0, #1
+004c4a90  2881       strh     r0, [r5, #8]
+004c4a92  1020       movs     r0, #0x10
+004c4a94  6968       ldr      r1, [r5, #4]
+004c4a96  0880       strh     r0, [r1]
+004c4a98  1220       movs     r0, #0x12
+004c4a9a  6968       ldr      r1, [r5, #4]
+004c4a9c  4880       strh     r0, [r1, #2]
+004c4a9e  1320       movs     r0, #0x13
+004c4aa0  6968       ldr      r1, [r5, #4]
+004c4aa2  8880       strh     r0, [r1, #4]
+004c4aa4  78f713fb   bl       #0x43d0ce ; 
+004c4aa8  8007       lsls     r0, r0, #0x1e
+004c4aaa  0dd5       bpl      #0x4c4ac8
+004c4aac  6868       ldr      r0, [r5, #4]
+004c4aae  8088       ldrh     r0, [r0, #4]
+004c4ab0  0290       str      r0, [sp, #8]
+004c4ab2  8648       ldr      r0, [pc, #0x218]
+004c4ab4  0190       str      r0, [sp, #4]
+004c4ab6  4ff48870   mov.w    r0, #0x110
+004c4aba  0090       str      r0, [sp]
+004c4abc  7d4b       ldr      r3, [pc, #0x1f4]
+004c4abe  6d4a       ldr      r2, [pc, #0x1b4]
+004c4ac0  6d49       ldr      r1, [pc, #0x1b4]
+004c4ac2  0320       movs     r0, #3
+004c4ac4  78f756fd   bl       #0x43d574 ; FUN_0043d574
+004c4ac8  78f701fb   bl       #0x43d0ce ; 
+004c4acc  c007       lsls     r0, r0, #0x1f
+004c4ace  03d4       bmi      #0x4c4ad8
+004c4ad0  78f7fdfa   bl       #0x43d0ce ; 
+004c4ad4  4007       lsls     r0, r0, #0x1d
+004c4ad6  07d5       bpl      #0x4c4ae8
+004c4ad8  7d49       ldr      r1, [pc, #0x1f4]
+004c4ada  6868       ldr      r0, [r5, #4]
+004c4adc  8388       ldrh     r3, [r0, #4]
+004c4ade  0a00       movs     r2, r1
+004c4ae0  5ff04460   movs.w   r0, #0xc400000
+004c4ae4  78f7dbf9   bl       #0x43ce9e ; compress_log_output
+004c4ae8  6868       ldr      r0, [r5, #4]
+004c4aea  8088       ldrh     r0, [r0, #4]
+004c4aec  0028       cmp      r0, #0
+004c4aee  24d0       beq      #0x4c4b3a
+004c4af0  784c       ldr      r4, [pc, #0x1e0]
+004c4af2  2000       movs     r0, r4
+004c4af4  b1f7ebff   bl       #0x476ace ; fw_event_loop_remove_delayed
+004c4af8  2a89       ldrh     r2, [r5, #8]
+004c4afa  0021       movs     r1, #0
+004c4afc  2878       ldrb     r0, [r5]
+004c4afe  fff7dffd   bl       #0x4c46c0 ; ringPackCccdEpochValue
+004c4b02  4ff4fa72   mov.w    r2, #0x1f4
+004c4b06  0100       movs     r1, r0
+004c4b08  2000       movs     r0, r4
+004c4b0a  b1f738ff   bl       #0x47697e ; fw_event_loop_push_delayed
+004c4b0e  2a89       ldrh     r2, [r5, #8]
+004c4b10  0021       movs     r1, #0
+004c4b12  2878       ldrb     r0, [r5]
+004c4b14  fff7d4fd   bl       #0x4c46c0 ; ringPackCccdEpochValue
+004c4b18  4ff42f72   mov.w    r2, #0x2bc
+004c4b1c  0100       movs     r1, r0
+004c4b1e  2000       movs     r0, r4
+004c4b20  b1f72dff   bl       #0x47697e ; fw_event_loop_push_delayed
+004c4b24  2a89       ldrh     r2, [r5, #8]
+004c4b26  0121       movs     r1, #1
+004c4b28  2878       ldrb     r0, [r5]
+004c4b2a  fff7c9fd   bl       #0x4c46c0 ; ringPackCccdEpochValue
+004c4b2e  4ff46172   mov.w    r2, #0x384
+004c4b32  0100       movs     r1, r0
+004c4b34  2000       movs     r0, r4
+004c4b36  b1f722ff   bl       #0x47697e ; fw_event_loop_push_delayed
+004c4b3a  1ee0       b        #0x4c4b7a
+004c4b3c  2088       ldrh     r0, [r4]
+004c4b3e  c0b2       uxtb     r0, r0
+004c4b40  f2f740fc   bl       #0x4b73c4 ; DmConnRole
+004c4b44  0028       cmp      r0, #0
+004c4b46  17d1       bne      #0x4c4b78
+004c4b48  4749       ldr      r1, [pc, #0x11c]
+004c4b4a  0020       movs     r0, #0
+004c4b4c  0870       strb     r0, [r1]
+004c4b4e  0889       ldrh     r0, [r1, #8]
+004c4b50  401c       adds     r0, r0, #1
+004c4b52  0881       strh     r0, [r1, #8]
+004c4b54  4868       ldr      r0, [r1, #4]
+004c4b56  0028       cmp      r0, #0
+004c4b58  08d0       beq      #0x4c4b6c
+004c4b5a  0020       movs     r0, #0
+004c4b5c  4a68       ldr      r2, [r1, #4]
+004c4b5e  1080       strh     r0, [r2]
+004c4b60  0020       movs     r0, #0
+004c4b62  4a68       ldr      r2, [r1, #4]
+004c4b64  5080       strh     r0, [r2, #2]
+004c4b66  0020       movs     r0, #0
+004c4b68  4968       ldr      r1, [r1, #4]
+004c4b6a  8880       strh     r0, [r1, #4]
+004c4b6c  5948       ldr      r0, [pc, #0x164]
+004c4b6e  b1f7aeff   bl       #0x476ace ; fw_event_loop_remove_delayed
+004c4b72  0820       movs     r0, #8
+004c4b74  00f063fc   bl       #0x4c543e ; Thread_SendEvtToRingTask
+004c4b78  ffe7       b        #0x4c4b7a
+004c4b7a  05b0       add      sp, #0x14
+004c4b7c  f0bd       pop      {r4, r5, r6, r7, pc}
+
+APP_BleRingSendDataMsg [004c4b7e,004c4c66) sha256=5f1a198a786cf239b377aa90c9b2d345a76d86fc5bf2d8d2549106e121ebf827
+004c4b7e  7fb5       push     {r0, r1, r2, r3, r4, r5, r6, lr}
+004c4b80  0500       movs     r5, r0
+004c4b82  0e00       movs     r6, r1
+004c4b84  384c       ldr      r4, [pc, #0xe0]
+004c4b86  2078       ldrb     r0, [r4]
+004c4b88  0028       cmp      r0, #0
+004c4b8a  06d0       beq      #0x4c4b9a
+004c4b8c  6068       ldr      r0, [r4, #4]
+004c4b8e  0028       cmp      r0, #0
+004c4b90  03d0       beq      #0x4c4b9a
+004c4b92  6068       ldr      r0, [r4, #4]
+004c4b94  0088       ldrh     r0, [r0]
+004c4b96  0028       cmp      r0, #0
+004c4b98  31d1       bne      #0x4c4bfe
+004c4b9a  78f798fa   bl       #0x43d0ce ; 
+004c4b9e  8007       lsls     r0, r0, #0x1e
+004c4ba0  14d5       bpl      #0x4c4bcc
+004c4ba2  6068       ldr      r0, [r4, #4]
+004c4ba4  0028       cmp      r0, #0
+004c4ba6  02d0       beq      #0x4c4bae
+004c4ba8  6068       ldr      r0, [r4, #4]
+004c4baa  0088       ldrh     r0, [r0]
+004c4bac  00e0       b        #0x4c4bb0
+004c4bae  0020       movs     r0, #0
+004c4bb0  0390       str      r0, [sp, #0xc]
+004c4bb2  2078       ldrb     r0, [r4]
+004c4bb4  0290       str      r0, [sp, #8]
+004c4bb6  4848       ldr      r0, [pc, #0x120]
+004c4bb8  0190       str      r0, [sp, #4]
+004c4bba  40f24710   movw     r0, #0x147
+004c4bbe  0090       str      r0, [sp]
+004c4bc0  464b       ldr      r3, [pc, #0x118]
+004c4bc2  2c4a       ldr      r2, [pc, #0xb0]
+004c4bc4  2c49       ldr      r1, [pc, #0xb0]
+004c4bc6  0220       movs     r0, #2
+004c4bc8  78f7d4fc   bl       #0x43d574 ; FUN_0043d574
+004c4bcc  78f77ffa   bl       #0x43d0ce ; 
+004c4bd0  c007       lsls     r0, r0, #0x1f
+004c4bd2  03d4       bmi      #0x4c4bdc
+004c4bd4  78f77bfa   bl       #0x43d0ce ; 
+004c4bd8  4007       lsls     r0, r0, #0x1d
+004c4bda  0ed5       bpl      #0x4c4bfa
+004c4bdc  6068       ldr      r0, [r4, #4]
+004c4bde  0028       cmp      r0, #0
+004c4be0  02d0       beq      #0x4c4be8
+004c4be2  6068       ldr      r0, [r4, #4]
+004c4be4  0088       ldrh     r0, [r0]
+004c4be6  00e0       b        #0x4c4bea
+004c4be8  0020       movs     r0, #0
+004c4bea  3d4a       ldr      r2, [pc, #0xf4]
+004c4bec  0090       str      r0, [sp]
+004c4bee  2378       ldrb     r3, [r4]
+004c4bf0  1100       movs     r1, r2
+004c4bf2  5ff00860   movs.w   r0, #0x8800000
+004c4bf6  78f752f9   bl       #0x43ce9e ; compress_log_output
+004c4bfa  0020       movs     r0, #0
+004c4bfc  31e0       b        #0x4c4c62
+004c4bfe  0bf0b1ff   bl       #0x4d0b64 ; thread_ble_wsf_wait_tx_ready
+004c4c02  0c20       movs     r0, #0xc
+004c4c04  faf7cbfe   bl       #0x4bf99e ; WsfMsgAlloc
+004c4c08  0028       cmp      r0, #0
+004c4c0a  0ad0       beq      #0x4c4c22
+004c4c0c  ac21       movs     r1, #0xac
+004c4c0e  8170       strb     r1, [r0, #2]
+004c4c10  2178       ldrb     r1, [r4]
+004c4c12  0180       strh     r1, [r0]
+004c4c14  4560       str      r5, [r0, #4]
+004c4c16  0681       strh     r6, [r0, #8]
+004c4c18  0100       movs     r1, r0
+004c4c1a  6078       ldrb     r0, [r4, #1]
+004c4c1c  faf7cdfe   bl       #0x4bf9ba ; WsfMsgSend
+004c4c20  1ee0       b        #0x4c4c60
+004c4c22  78f754fa   bl       #0x43d0ce ; 
+004c4c26  8007       lsls     r0, r0, #0x1e
+004c4c28  0ad5       bpl      #0x4c4c40
+004c4c2a  2e48       ldr      r0, [pc, #0xb8]
+004c4c2c  0190       str      r0, [sp, #4]
+004c4c2e  40f25310   movw     r0, #0x153
+004c4c32  0090       str      r0, [sp]
+004c4c34  294b       ldr      r3, [pc, #0xa4]
+004c4c36  0f4a       ldr      r2, [pc, #0x3c]
+004c4c38  0f49       ldr      r1, [pc, #0x3c]
+004c4c3a  0120       movs     r0, #1
+004c4c3c  78f79afc   bl       #0x43d574 ; FUN_0043d574
+004c4c40  78f745fa   bl       #0x43d0ce ; 
+004c4c44  c007       lsls     r0, r0, #0x1f
+004c4c46  03d4       bmi      #0x4c4c50
+004c4c48  78f741fa   bl       #0x43d0ce ; 
+004c4c4c  4007       lsls     r0, r0, #0x1d
+004c4c4e  05d5       bpl      #0x4c4c5c
+004c4c50  2549       ldr      r1, [pc, #0x94]
+004c4c52  0a00       movs     r2, r1
+004c4c54  5ff08060   movs.w   r0, #0x4000000
+004c4c58  78f721f9   bl       #0x43ce9e ; compress_log_output
+004c4c5c  0bf0ebff   bl       #0x4d0c36 ; thread_ble_wsf_tx_complete_notify
+004c4c60  0020       movs     r0, #0
+004c4c62  04b0       add      sp, #0x10
+004c4c64  70bd       pop      {r4, r5, r6, pc}

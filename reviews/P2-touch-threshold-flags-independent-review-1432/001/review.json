@@ -1,0 +1,17 @@
+{
+  "review_id": "1432",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-threshold-flags-623c-1431/001",
+  "candidate_receipt_sha256": "75d323e3f2f24e542aa3d27d380f2a52a2f263db352427687069a91ca3d1c6ea",
+  "candidate_pseudocode_sha256": "d36dbdac2819ee4b9dd481e9a8c1306905b27699d92f8b8ad4d0d7f67d003554",
+  "candidate_replay_sha256": "3eb304eeaae8a8e5f7c4d12ce9d4f7243af455321302f78411dda4840a2761d9",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independently decoded all 38 bytes at 0x623C..0x6262. The routine reads row halfword+0x2C and descriptor->context byte+0x4D, adds them as zero-extended values, reads context halfword+0x3C, calls original 0x6220, computes (scale+1)>>2, and returns exactly 10 when the sum is greater than or equal to that threshold, otherwise 8. It restores its saved frame and performs no persistent stores.",
+    "Copied and replayed the candidate against all 312 fixture combinations in a review-owned directory; all passed. The replay executes original 0x6220 and checks R0, SP, return PC, and the bit-scale helper's presence in the executed instruction trace."
+  ],
+  "limitations": [
+    "Coverage is over the listed synthetic context/row values. Pointer validity, physical field meaning, and callers' use of the returned flags are not established. No canonical admission or C implementation is implied."
+  ]
+}

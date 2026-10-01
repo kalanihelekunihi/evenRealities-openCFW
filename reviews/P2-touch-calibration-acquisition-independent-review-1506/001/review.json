@@ -1,0 +1,18 @@
+{
+  "review_id": "1506",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-calibration-acquisition-7bc0-1505/001",
+  "candidate_receipt_sha256": "2f1350ca9bd0051c78d330bd1f26681bdc38b55081b8bce08dcf30aae7ca9e5e",
+  "candidate_pseudocode_sha256": "6d1c4c898d2f7e84774bf82f16af0e68d96539167d2aa2890d785dfc0dd63300",
+  "candidate_replay_sha256": "0343e187388e0fa079601ef57b979656cde5ebe3d7fa7348281f9d2ce91953fc",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Manually checked the zero-state branch and its call-dataflow: 0x6928(scratch, descriptor), 0x7288(rowIndex, packetIndex, descriptor), then 0x6980(previous R0, descriptor). The first helper's controlled return is discarded before the second call; the second result reaches the third helper.",
+    "Confirmed the 0x6980 zero/nonzero result selects error bit 4 versus retained status 0, and both branches continue through output calculation and cleanup.",
+    "An isolated replay of the candidate's original-instruction harness passed all 486 fixtures, checking ordered calls/arguments, status, output, control-bit clear and SP restoration."
+  ],
+  "limitations": [
+    "Helpers 0x6AC0, 0x6928, 0x7288 and 0x6980 are controlled; MMIO is synthetic. Helper side effects, mode-123==7 behavior and physical behavior remain unresolved. No canonical admission."
+  ]
+}

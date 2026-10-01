@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-sample-filter-dispatch-independent-review-2173",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "accepted": false,
+  "scope": {
+    "candidate": "analysis/touch-sample-filter-dispatch-50a0-2170/002",
+    "reviewed": "saved-flag gating and ordering, cursor increments, saved argument restoration, three callee interfaces, frame preservation"
+  },
+  "pins": {
+    "candidate_receipt_sha256": "571f333bcffcba79c44a9e7b2ea9eb9eb4a6c015b314a0e8fb05f5aecb36f42e",
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "body_sha256": "0754e98ec92ce9296eae7b80e730faa8219d2c9779119fec4612296e3586a36f",
+    "candidate_replays_sha256": "2a87d07b448e8e78d129486d05423f4e08f2ef0982dcbb59d86b1564e268fbb0",
+    "candidate_files": {
+      "replays.json": "2a87d07b448e8e78d129486d05423f4e08f2ef0982dcbb59d86b1564e268fbb0",
+      "replay.py": "3d6ab2225c1c644b644ba42465cf410c0765e7218245011b60f53ee7e5470e97",
+      "pseudocode.md": "aa3a3cbc660391b5e8e87c36b76d9b956e421a332cac506bca99b23997e5f68a",
+      "disassembly.txt": "344d67772ef4948fb35f28d6ed64274b61cccaa0705baf249770e14303e6e6c7"
+    }
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "Independent decode confirms a 68-byte body that saves row/item/group/auxiliary/flags in registers/stack and tests the original saved halfword flags: bit4 calls 4FC2 then advances the cursor by 4; bit7 reloads auxiliary and row/item/current cursor before calling 5054 then advances by 2; bit10 reloads row/item/cursor before calling 4F6E. Later gates use saved R5, not child-clobbered state. The 4FC2 call\u2019s recovered interface is the three arguments R0-R2; the stored auxiliary R3 is not part of that contract and R3 may be scratch."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "All 2,048 flag values 0..2047 pass isolated execution with each controlled child deliberately clobbering R0-R3. Ordered calls and cursor offsets match; R4/SP are preserved, and output replay JSON is byte-identical to the frozen candidate."
+    },
+    {
+      "id": "F3",
+      "severity": "none",
+      "result": "Source, exact body, and all receipt-listed artifacts match their pinned hashes. The corrected 002 packet avoids the earlier unsupported claim that 4FC2 receives a meaningful fourth argument."
+    }
+  ],
+  "limitations": [
+    "All three callees are controlled; their behavior is not established.",
+    "Only flag values 0..2047 are enumerated; upper flag-bit behavior is not covered.",
+    "Physical field meaning, aliasing, concurrency, caller closure, and canonical admission remain unresolved."
+  ],
+  "checks": [
+    {
+      "command": "verify original source/body and receipt artifact hashes",
+      "result": "PASS",
+      "artifact": "source-checks.json"
+    },
+    {
+      "command": "independent Thumb decode and isolated original-byte replay",
+      "result": "PASS; 2,048 cases, replay byte-identical",
+      "artifact": "replay.txt"
+    }
+  ],
+  "review_artifacts": {
+    "source_checks_sha256": "64cec2b694403ff2e9e91b16e8068252df7f1a01c0587305235da3a5ca640bdd",
+    "disassembly_sha256": "344d67772ef4948fb35f28d6ed64274b61cccaa0705baf249770e14303e6e6c7",
+    "replay_sha256": "c90ec3d41c5a890f5925cc29d5ebfb999b7ef24df0ae89ef12ec948518922590"
+  },
+  "canonical_or_coverage_change": false
+}

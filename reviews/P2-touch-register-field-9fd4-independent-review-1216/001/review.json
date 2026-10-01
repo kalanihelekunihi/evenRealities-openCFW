@@ -1,0 +1,30 @@
+{
+  "review_id": "1216/001",
+  "decision": "PASS_SCOPED",
+  "scope": "Independent review of 9FD4's guarded 16-bit field update against original bytes and synthetic register memory. No physical device semantics are claimed.",
+  "candidate": {
+    "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-register-field-9fd4-1215/001",
+    "receipt_sha256": "9d8c0787a102d0f854500ba7aee146a8af1b3d36d13b954ddb1f064206fb4b48",
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "files": {
+      "pseudocode.md": "50e0d7d82250cea19ec7f0ba13c407d4d61390b1a5cef15f7ae171d96b3f25fa",
+      "replay.py": "84ab8b1d6e13f36148bc003c1da01eabf0cbf85c4de75fadcdbba3bd5395f53e",
+      "replays.json": "caf139f642d04105203f38173cf93cd0749ab29ba56fe08a2e4bfef30f414fa7"
+    }
+  },
+  "independent_artifacts": {
+    "isolated_replay": "reviews/P2-touch-register-field-9fd4-independent-review-1216/001/replay_isolated.py",
+    "regenerated_rows": "reviews/P2-touch-register-field-9fd4-independent-review-1216/001/regenerated/replays.json",
+    "regenerated_rows_sha256": "caf139f642d04105203f38173cf93cd0749ab29ba56fe08a2e4bfef30f414fa7"
+  },
+  "checks": [
+    "Reran all 240 original-byte cases in an isolated output directory; parsed replay rows match exactly.",
+    "The predicate is R0==1, unsigned R1<=1, and unsigned R2<65536. Valid rows read and write one word at 0x40010300+4*R1; invalid rows have no MMIO access and return 0x004A0001.",
+    "The pinned mask words at 0xA014 support preservation of bits 31..24 and 7..0 with R2 placed in bits 23..8. Fixtures cross boundary values and initial words 0, 0xA5A5A5A5 and 0xFFFFFFFF.",
+    "Every case preserves R4, restores SP, and has the expected raw return; accepted cases perform exactly one fresh read followed by one same-address word store."
+  ],
+  "limitations": [
+    "The register window is synthetic. The trace does not establish physical peripheral meaning or concurrent update behavior.",
+    "The candidate is private P2 evidence only; caller reachability and canonical admission are outside scope."
+  ]
+}

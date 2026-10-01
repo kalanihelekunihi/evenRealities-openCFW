@@ -1,0 +1,7 @@
+# Touch clock programming 9C80 with explicit external tables
+
+Body 9C80..9D4C is 204 instruction bytes. Require bit 31 of fresh 40030030 or return 004A0003. Accept only seven frequencies 24 through 48 million in steps of four million; other inputs return 004A0001. Actual 9C44 calculates current frequency; equality returns zero without programming.
+
+Otherwise actual A6C0 computes index = unsigned(requested - 24000000) / 1000000. Actual 4492 saves and disables PRIMASK. Store zero to 40030F08, table1[index] to 40030F0C, zero to 40030F10, and table2[index] to 40030F18, using unsigned byte reads. Execute actual 4480 delay input 50. Set q = index >> 2. If q nonzero, freshly replace low three bits at 40030F08 with q-1, delay 50 again, then freshly replace them with q. Actual 449A restores saved PRIMASK; return zero with the six-word frame restored.
+
+Table bases are literal addresses 0FFFF1E5 and 0FFFF1CC, outside this authenticated touch image. Fixtures supply explicit overlapping synthetic byte tables and derive expected bytes from their final supplied memory; original table contents and identity remain external obligations. All helpers execute their original instructions without substitution. Receipt-derived fixture count covers all supported requests, two invalid requests, eight trim values, both enable states and both masks. Exact writes, table read addresses, returns and frame/mask restoration are checked. Physical timing and external table identity remain unresolved. No canonical admission or C implementation.

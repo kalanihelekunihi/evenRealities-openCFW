@@ -1,0 +1,7 @@
+Independent review of touch-application-config-writer-prefix-1520/001
+
+Candidate receipt SHA-256 7a1fde1e045c056d067767da05996da9ec3a06f066874058873ba84a9cdb185e; pseudocode 7c1e0a04a22685d0d140ca7dc652c54cd1d03ed6ebfccbc249a15c6aa4ff4d0c; replay 8c64892c3a6b8f09f0e8f39de5e112bb45f533a61c7d9c7c1c16a59a1990c37e; source SHA-256 371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87.
+
+Isolated replay passed to 0x3D50 with original 0x9178 executing inside each of three 0x6928 calls. It checked the real scratch input and peripheral writes, 0x9178 pointer return propagation through setup, complete ordered remaining call list, and inherited startup checks. The 0x9178 return is ignored by the subsequent controlled 0x7288 acquisition boundary. The three explicit remaining calibration controls are 0x6A80, 0x7288 and 0x5FA4; 5FA4 returns 1. This agrees with the observed startup state and calibrated setup paths.
+
+PASS_SCOPED. Configuration/authenticated inputs are supplied, MMIO and external tables are synthetic, and later activation/storage boundaries remain controlled. This does not establish physical acquisition or whole-firmware behavior. No canonical admission.

@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-history-weighted-update-independent-review-2163",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "accepted": false,
+  "scope": {
+    "candidate": "analysis/touch-history-weighted-update-49e6-2160/001",
+    "reviewed": "two separate original code spans, wrapped arithmetic leaf and caller update ordering, including distinct buffers and tested weights"
+  },
+  "pins": {
+    "candidate_receipt_sha256": "195d04cfaa8326141af7f712bbc1fc262605f5578c65b499e09f37472362cf0c",
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "ranges": [
+      {
+        "start": 20446,
+        "end": 20462,
+        "sha256": "8d04d1554038e11a05f1f51845cc106bb27eb6a73a1af0ca0bf16b5ace4bb0b8"
+      },
+      {
+        "start": 18918,
+        "end": 18986,
+        "sha256": "8b50573446b065196b3fde09b622f91d1694af4cda40b71054fa058b1009770d"
+      }
+    ],
+    "candidate_replays_sha256": "096b8310d4cad5a7d49dad5a2bd24e713a5a25d042e32160ee85c07324920e16",
+    "candidate_files": {
+      "replays.json": "096b8310d4cad5a7d49dad5a2bd24e713a5a25d042e32160ee85c07324920e16",
+      "replay.py": "5573590fdb139e46b100ceadcfbd7ed8eb342cebc436a495e57ca482b89785e9",
+      "pseudocode.md": "d83c0ce3f025ecefff9b286dd00b97ed5023a0bdb98de2f1ea7078d02ebe4fd1",
+      "disassembly.txt": "2f6dc4d27a536b724739d0a5795ec4b5adeb62ac349be281978957997acae36d"
+    }
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "Independent decode confirms the 16-byte 4FDE leaf computes two 32-bit MULS products, adds with 32-bit wrap, then logical-shifts right 8; the caller supplies weight as R2, and the leaf returns R0 with R2 preserved."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "The 68-byte 49E6 caller saves current halfwords before reading config word112, extracts weight bits 16..23, and gates history updates on config bit1. When enabled it calls 4FDE separately for each current/history halfword pair, stores each result to history before updating current; otherwise it copies the saved pair to current without touching history. Other entry bytes remain unchanged. R4-R8 and SP restore; R0 is incidental."
+    },
+    {
+      "id": "F3",
+      "severity": "none",
+      "result": "Receipt/source/body/artifact hashes match, and an isolated run of all 2,813 cases produced replay JSON byte-identical to the candidate. It covers 253 full-width arithmetic triples and 2,560 caller cases over every byte weight, both gates, and five halfword pairs."
+    }
+  ],
+  "limitations": [
+    "Fixtures keep current and history in separate buffers; aliasing and concurrent mutation remain untested.",
+    "Only the listed operands/weights are covered; no physical field meaning or wider caller contract is established.",
+    "No canonical admission or C implementation."
+  ],
+  "checks": [
+    {
+      "command": "verify source, both code ranges, and receipt artifacts",
+      "result": "PASS",
+      "artifact": "source-checks.json"
+    },
+    {
+      "command": "independent Thumb decode and isolated execution replay",
+      "result": "PASS; 2,813 fixtures, replay JSON identical",
+      "artifact": "replay.txt"
+    }
+  ],
+  "review_artifacts": {
+    "source_checks_sha256": "6b6b5040b279a53056888de6533755cbe9cd2b6c4e35f5f13084c95c1f56dd64",
+    "disassembly_sha256": "2f6dc4d27a536b724739d0a5795ec4b5adeb62ac349be281978957997acae36d",
+    "replay_sha256": "3fcd40105c91dbd24bd737a282185092a92fb14d4194a6b12f60719a2ea81a80"
+  },
+  "canonical_or_coverage_change": false
+}

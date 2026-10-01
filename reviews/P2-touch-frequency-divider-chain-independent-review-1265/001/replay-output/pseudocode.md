@@ -1,0 +1,5 @@
+# Touch frequency divider chain
+
+Actual46F8 freshly reads40030028, captures bits7..6 as outer shift, calls actual9F9C, adds half of1<<outer modulo2^32 and right shifts. Actual9F9C freshly reads the same address again, capturing bits3..2 as inner shift. It calls9F34; result0 selects9C44, result1 selects9C38, other results selectzero without a source call. It adds half of1<<inner modulo2^32 and right shifts. Both16-byteframes restore. Captured shifts can derive from different fresh register values; the test uses one unchanged synthetic word.
+
+192 original-instruction fixtures cover all sixteen shiftpairs, three selectorresults and four frequencyvalues including overflow. Only selector andsource routines arecontrolled. Independent modular rounding calculations, exact two reads, helperselection, rawreturnandSP are checked. Physicalfrequency, actualselector/sourcebehavior and simultaneousregisterchanges remain unresolved. Bodies46F8..4714 and9F9C..9FCE exclude pools/NOP. No canonical admission orCimplementation.

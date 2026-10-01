@@ -1,0 +1,18 @@
+{
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/arc-call-frontier-1245/001",
+  "candidate_outputs": {
+    "frontier.json": "4b7b4de8ceb66bc189faa1b69c1729956c3b829bed7dcaf187bd57a2997cacb9",
+    "inputs.json": "1526917180173a8bbcd70a0d98b319c0e27b44f5437b84d112b78b27c982876e",
+    "pins.json": "2aad52c1961d11bb53ee20c27f02d8db05b82f1bd635dad9873c7a6a7608f33b"
+  },
+  "review_result": "PASS_SCOPED",
+  "checks": {
+    "reproduction": "The candidate verifier passes. Independently checked its four input edge artifacts and pinned record-3 image against their exact hashes; the declared loaded range is [0x00302400,0x00335BC8), consistent with the authenticated record-3 candidate.",
+    "frontier": "The 24 transfer rows collapse into 18 target keys: 21 direct control-transfer edges and three indirect call edges. In-range versus out-of-range target classifications are consistent with the declared loaded interval. The `0x001030DC` direct call remains outside with identity unresolved; callback pointers at 0x0080FDFC/FE00 and delayed `r14` remain unresolved obligations."
+  },
+  "limits": [
+    "This is only the union of edges reported by four bounded candidates, not a whole-image caller census or coverage denominator.",
+    "Outside targets are not assigned ROM/service identities, and indirect target sets are not closed."
+  ],
+  "accepted": false
+}

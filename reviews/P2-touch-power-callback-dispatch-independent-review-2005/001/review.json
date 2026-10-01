@@ -1,0 +1,19 @@
+{
+  "review_id": "2005",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-power-callback-dispatch-2004/001",
+  "candidate_receipt_sha256": "a84b05eeb1bfa8ce64bf1255549765473162b4a622d69b0f02c065f923cd860c",
+  "candidate_pseudocode_sha256": "3ff7e9e805b8bd1df53c022bc5131ac86faeefe4467f862b523ad7776a3b676a",
+  "candidate_replay_sha256": "b490b1120891dccf53e463695c511a3a4b9dd740108135102435b9b5311cc78d",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "The immutable source hash and all receipt artifact hashes match. Directly extracted bytes [0xA444,0xA516) are exactly 210 bytes with the recorded SHA; the literal words at 0xA518/0xA51C/0xA520/0xA524 are 0x20000F34/0x004200FF/0x20000F24/0x20000F28, outside body ownership.",
+    "Isolated execution reproduced all 256 fixture rows exactly. The fixtures cover two indices, four valid modes, all three-node skip masks and the sentinel at each node or absent. Callback argument copies, callback order, retained result, last-invoked global and mode-1 failure pointer match the recorded model.",
+    "Fixture outcomes support forward traversal for modes 1/4, reverse predecessor traversal for mode 2, and tail-then-predecessor traversal for mode 8; mode 1 stops when a callback yields the sentinel."
+  ],
+  "limitations": [
+    "Callbacks are controlled, so callback semantics and arbitrary topology mutation are not established. Null head in mode 8, cycles, invalid indices/modes, and wide mode aliases remain unresolved.",
+    "No canonical admission."
+  ]
+}

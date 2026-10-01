@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-sensor-sample-difference-5920-2142-independent-review-2145",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "accepted": false,
+  "scope": {
+    "candidate": "analysis/touch-sensor-sample-difference-5920-2142/001",
+    "reviewed": "Sample difference helper at 0x5920 instruction semantics, exact binding, isolated original-byte replay and stated limits"
+  },
+  "pins": {
+    "candidate_receipt_sha256": "ed361d9c8d6ff0d2548308ddcc92deccafaf643147c215f7560eb3008177eea7",
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "candidate_replays_sha256": "72a77863e26a1090ed0ead87d8703dcfa1632c92e2468e7671e4f37c75b9506c",
+    "candidate_artifacts": {
+      "replays.json": "72a77863e26a1090ed0ead87d8703dcfa1632c92e2468e7671e4f37c75b9506c",
+      "replay.py": "665076d07a1e43eeb9a2e817d3059094240e1b4d2cf0b3b94e9c30d6075e1ba3",
+      "pseudocode.md": "ab82c3418e927b0f708d9ca8655915a773c981fc143c69f9ddccf2a8e4d28a6b",
+      "disassembly.txt": "060a72b744a9891b59bdd6abe129096ea606f0d8b2319849e7ddbddd7d874ca2"
+    }
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "Independent Thumb disassembly confirms the 24-byte body clears item+4 first, loads unsigned halfwords from item+0, item+2 and params+0x1A, adds baseline and margin in a 32-bit register, uses an unsigned <= branch, and stores sample-baseline only on strict greater-than."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "The isolated 599-case boundary/random replay checks exact ordered halfword writes, surrounding item bytes, preserved R0/R1/R4/SP, and byte-identical replay JSON. The comparison uses the full-width sum; given both inputs are halfwords, the sum cannot overflow 32 bits, and on the store branch sample exceeds baseline so the result fits a halfword."
+    }
+  ],
+  "limitations": [
+    "Sample/baseline/margin are descriptive labels; physical meaning is not established.",
+    "Fixtures use separate allocations and static inputs; aliasing, concurrent mutation, and broader callers are outside scope.",
+    "No canonical admission or C implementation."
+  ],
+  "checks": [
+    {
+      "command": "verify receipt-listed file hashes and original source hash",
+      "result": "PASS",
+      "artifact": "source-checks.json"
+    },
+    {
+      "command": "isolated candidate replay with output redirected outside frozen candidate",
+      "result": "PASS; 599 fixtures, byte-identical replay output",
+      "artifact": "replays.json"
+    },
+    {
+      "command": "independent Capstone Thumb-M-class disassembly compared with candidate listing",
+      "result": "PASS; complete instruction extent and listing byte-for-byte equal",
+      "artifact": "independent-disassembly.txt"
+    }
+  ],
+  "review_artifacts": {
+    "source_checks_sha256": "51577a648e9572c069c10f7a5e62845792360fe0fad2dda209540404a2295299",
+    "replay_sha256": "fdb310f653723a3c55d603c3d0152dd841a9ef70165a9ef6269b544e866a91db",
+    "independent_disassembly_sha256": "060a72b744a9891b59bdd6abe129096ea606f0d8b2319849e7ddbddd7d874ca2"
+  },
+  "canonical_or_coverage_change": false
+}

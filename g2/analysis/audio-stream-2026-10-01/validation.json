@@ -1,0 +1,977 @@
+{
+  "input_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "initializer": {
+    "descriptor": "0x75d404",
+    "output_sha256": "a5be949c41cf1e9a7d4a6b4aa6e3a6cb2f9c9bcb3a04a866d15e49e3976a7d0c",
+    "output_bytes": 769646
+  },
+  "config": {
+    "address": "0x20108948",
+    "words": [
+      0,
+      10000,
+      16000,
+      1,
+      0,
+      32000,
+      0
+    ]
+  },
+  "functions": [
+    {
+      "entry": "0x43a11e",
+      "end": "0x43a19c",
+      "sha256": "41e4a34428bb2c09774785d474f5209201f6551c823f0286eb66063dedc74a9d"
+    },
+    {
+      "entry": "0x57a900",
+      "end": "0x57a926",
+      "sha256": "5bbff3fde30dd7e091d8d496ab401b1036e0dc5f158c071b57a0404ed0ace8f0"
+    },
+    {
+      "entry": "0x57a940",
+      "end": "0x57ab78",
+      "sha256": "a21f5d12546cd8b00b113b5234e004ca2d6c7deccd2040c3c1d019e81cc5d594"
+    },
+    {
+      "entry": "0x57ab78",
+      "end": "0x57acd0",
+      "sha256": "09ea2ab75a6e9f9abea6a66acac8f3c97f7fab136cafb0c59a90419f8f3ab568"
+    },
+    {
+      "entry": "0x57acd0",
+      "end": "0x57adf8",
+      "sha256": "4a3f9c70b094e63095691ff42147a67a9cd2b6dca66318f9ca98e8da0c7fa247"
+    },
+    {
+      "entry": "0x57adf8",
+      "end": "0x57af8c",
+      "sha256": "1f459dfffdba978147e9076b06d7baa99bd3f347ab99a3ccbaea43a65da252ae"
+    },
+    {
+      "entry": "0x5915dc",
+      "end": "0x5915ea",
+      "sha256": "6aa985f206ed66407c01d418140abe786bd7a8d326fe2c76ab70c545dfb9d9e0"
+    },
+    {
+      "entry": "0x590e64",
+      "end": "0x590e6c",
+      "sha256": "6f8aba4edef91203bc4f251f3e1ecf6e2196abde09a46d4cf894a2990fc66835"
+    },
+    {
+      "entry": "0x590dc8",
+      "end": "0x590e64",
+      "sha256": "3b31e1ecb129fe9eecd99ad855943c2a2cde9709deec9f50dfd939fee949e831"
+    },
+    {
+      "entry": "0x590d3c",
+      "end": "0x590d74",
+      "sha256": "c935379348bfe40e7c97c86c8b8004881dfbe71790a3d83b00f8312cada9872b"
+    },
+    {
+      "entry": "0x590d74",
+      "end": "0x590dc8",
+      "sha256": "267642e07b087fa4af2fbe97fc81915c602ad9b1e3cd581a3a78818a63e21398"
+    },
+    {
+      "entry": "0x590e6c",
+      "end": "0x590f68",
+      "sha256": "5f8864aa6772a189c59cf858ce3833bc22189c18face7ef4ab539d556ec54c44"
+    },
+    {
+      "entry": "0x590f68",
+      "end": "0x590f78",
+      "sha256": "a2db2db9cc9c5dcda45b014636d0fa11e1d8eea70e08a472be2c05c53a61a479"
+    },
+    {
+      "entry": "0x590f78",
+      "end": "0x590f84",
+      "sha256": "0745963f64e8d60f90130f9d1752bff1690d0bec429c5832ada57270dc8b304c"
+    },
+    {
+      "entry": "0x475d78",
+      "end": "0x475dd8",
+      "sha256": "9738625dffe90aab90f320c3d4765b892f8824d513695ffb588570ed05cabbd1"
+    },
+    {
+      "entry": "0x53c6f2",
+      "end": "0x53c776",
+      "sha256": "0a28cd8dd5357296c4190a852c9dfab681687f4f511dda6757eee7d6e1fa3ce7"
+    }
+  ],
+  "case_count": 26,
+  "cases": [
+    {
+      "case": "sample_bytes_0",
+      "calls": [],
+      "result": 2
+    },
+    {
+      "case": "sample_bytes_1",
+      "calls": [],
+      "result": 4
+    },
+    {
+      "case": "sample_bytes_2",
+      "calls": [],
+      "result": 3
+    },
+    {
+      "case": "sample_bytes_3",
+      "calls": [],
+      "result": 4
+    },
+    {
+      "case": "sample_bytes_4",
+      "calls": [],
+      "result": 0
+    },
+    {
+      "case": "default_geometry_160_samples_40_bytes",
+      "calls": []
+    },
+    {
+      "case": "encode_1_channels",
+      "calls": [
+        {
+          "call": "lc3_setup",
+          "args": [
+            10000,
+            16000,
+            0,
+            537954660
+          ]
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            537362432,
+            1
+          ],
+          "size": 40,
+          "output": "0x2007a000",
+          "frame_index": 0
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            537362752,
+            1
+          ],
+          "size": 40,
+          "output": "0x2007a028",
+          "frame_index": 1
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            537363072,
+            1
+          ],
+          "size": 40,
+          "output": "0x2007a050",
+          "frame_index": 2
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            537363392,
+            1
+          ],
+          "size": 40,
+          "output": "0x2007a078",
+          "frame_index": 3
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            537363712,
+            1
+          ],
+          "size": 40,
+          "output": "0x2007a0a0",
+          "frame_index": 4
+        }
+      ]
+    },
+    {
+      "case": "encode_2_channels",
+      "calls": [
+        {
+          "call": "lc3_setup",
+          "args": [
+            10000,
+            16000,
+            0,
+            537954660
+          ]
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            537362434,
+            2
+          ],
+          "size": 40,
+          "output": "0x2007a000",
+          "frame_index": 0
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            537363074,
+            2
+          ],
+          "size": 40,
+          "output": "0x2007a028",
+          "frame_index": 1
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            537363714,
+            2
+          ],
+          "size": 40,
+          "output": "0x2007a050",
+          "frame_index": 2
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            537364354,
+            2
+          ],
+          "size": 40,
+          "output": "0x2007a078",
+          "frame_index": 3
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            537364994,
+            2
+          ],
+          "size": 40,
+          "output": "0x2007a0a0",
+          "frame_index": 4
+        }
+      ]
+    },
+    {
+      "case": "encode_unaligned",
+      "calls": [
+        {
+          "call": "lc3_setup",
+          "args": [
+            10000,
+            16000,
+            0,
+            537954660
+          ]
+        }
+      ],
+      "output_length": 99
+    },
+    {
+      "case": "encode_zero",
+      "calls": [
+        {
+          "call": "lc3_setup",
+          "args": [
+            10000,
+            16000,
+            0,
+            537954660
+          ]
+        }
+      ],
+      "output_length": 0
+    },
+    {
+      "case": "encode_first_error",
+      "calls": [
+        {
+          "call": "lc3_setup",
+          "args": [
+            10000,
+            16000,
+            0,
+            537954660
+          ]
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            537362432,
+            1
+          ],
+          "size": 40,
+          "output": "0x2007a000",
+          "frame_index": 0
+        }
+      ],
+      "output_length": 0
+    },
+    {
+      "case": "encode_second_error",
+      "calls": [
+        {
+          "call": "lc3_setup",
+          "args": [
+            10000,
+            16000,
+            0,
+            537954660
+          ]
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            537362432,
+            1
+          ],
+          "size": 40,
+          "output": "0x2007a000",
+          "frame_index": 0
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            537362752,
+            1
+          ],
+          "size": 40,
+          "output": "0x2007a028",
+          "frame_index": 1
+        }
+      ],
+      "output_length": 40
+    },
+    {
+      "case": "registered_source0_callback_and_owner_check",
+      "calls": [
+        {
+          "call": "pcm_callback",
+          "args": [
+            0,
+            537362432,
+            3200,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "registered_source1_callback_and_owner_check",
+      "calls": [
+        {
+          "call": "pcm_callback",
+          "args": [
+            1,
+            537362432,
+            3200,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "case": "registration_replaces_previous_owner",
+      "calls": []
+    },
+    {
+      "case": "source1_no_callback",
+      "calls": []
+    },
+    {
+      "case": "source2",
+      "calls": []
+    },
+    {
+      "case": "null_pcm",
+      "calls": []
+    },
+    {
+      "case": "zero_length",
+      "calls": []
+    },
+    {
+      "case": "fallback_normal",
+      "calls": [
+        {
+          "call": "algorithm",
+          "args": [
+            537362432,
+            3200,
+            541060874,
+            541060872
+          ]
+        },
+        {
+          "call": "lc3_setup",
+          "args": [
+            10000,
+            16000,
+            0,
+            537954660
+          ]
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            540500096,
+            1
+          ],
+          "size": 40,
+          "output": "0x203fef18",
+          "frame_index": 0
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            540500416,
+            1
+          ],
+          "size": 40,
+          "output": "0x203fef40",
+          "frame_index": 1
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            540500736,
+            1
+          ],
+          "size": 40,
+          "output": "0x203fef68",
+          "frame_index": 2
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            540501056,
+            1
+          ],
+          "size": 40,
+          "output": "0x203fef90",
+          "frame_index": 3
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            540501376,
+            1
+          ],
+          "size": 40,
+          "output": "0x203fefb8",
+          "frame_index": 4
+        },
+        {
+          "call": "ota_active",
+          "args": [
+            541060888,
+            205,
+            0,
+            200
+          ]
+        },
+        {
+          "call": "transport_enqueue",
+          "args": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "payload": "a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4341285ff01",
+          "length": 205,
+          "pointer": "0x203fef18"
+        }
+      ]
+    },
+    {
+      "case": "fallback_sequence_wrap",
+      "calls": [
+        {
+          "call": "algorithm",
+          "args": [
+            537362432,
+            3200,
+            541060874,
+            541060872
+          ]
+        },
+        {
+          "call": "lc3_setup",
+          "args": [
+            10000,
+            16000,
+            0,
+            537954660
+          ]
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            540500096,
+            1
+          ],
+          "size": 40,
+          "output": "0x203fef18",
+          "frame_index": 0
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            540500416,
+            1
+          ],
+          "size": 40,
+          "output": "0x203fef40",
+          "frame_index": 1
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            540500736,
+            1
+          ],
+          "size": 40,
+          "output": "0x203fef68",
+          "frame_index": 2
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            540501056,
+            1
+          ],
+          "size": 40,
+          "output": "0x203fef90",
+          "frame_index": 3
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            540501376,
+            1
+          ],
+          "size": 40,
+          "output": "0x203fefb8",
+          "frame_index": 4
+        },
+        {
+          "call": "ota_active",
+          "args": [
+            541060888,
+            205,
+            0,
+            200
+          ]
+        },
+        {
+          "call": "transport_enqueue",
+          "args": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "payload": "a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4341285ffff",
+          "length": 205,
+          "pointer": "0x203fef18"
+        }
+      ]
+    },
+    {
+      "case": "fallback_encoder_first_error",
+      "calls": [
+        {
+          "call": "algorithm",
+          "args": [
+            537362432,
+            3200,
+            541060874,
+            541060872
+          ]
+        },
+        {
+          "call": "lc3_setup",
+          "args": [
+            10000,
+            16000,
+            0,
+            537954660
+          ]
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            540500096,
+            1
+          ],
+          "size": 40,
+          "output": "0x203fef18",
+          "frame_index": 0
+        },
+        {
+          "call": "ota_active",
+          "args": [
+            541060888,
+            205,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "transport_enqueue",
+          "args": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "payload": "341285ff000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001",
+          "length": 205,
+          "pointer": "0x203fef18"
+        }
+      ]
+    },
+    {
+      "case": "fallback_encoder_second_error",
+      "calls": [
+        {
+          "call": "algorithm",
+          "args": [
+            537362432,
+            3200,
+            541060874,
+            541060872
+          ]
+        },
+        {
+          "call": "lc3_setup",
+          "args": [
+            10000,
+            16000,
+            0,
+            537954660
+          ]
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            540500096,
+            1
+          ],
+          "size": 40,
+          "output": "0x203fef18",
+          "frame_index": 0
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            540500416,
+            1
+          ],
+          "size": 40,
+          "output": "0x203fef40",
+          "frame_index": 1
+        },
+        {
+          "call": "ota_active",
+          "args": [
+            541060888,
+            205,
+            0,
+            40
+          ]
+        },
+        {
+          "call": "transport_enqueue",
+          "args": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "payload": "a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0341285ff0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001",
+          "length": 205,
+          "pointer": "0x203fef18"
+        }
+      ]
+    },
+    {
+      "case": "fallback_ota_suppressed",
+      "calls": [
+        {
+          "call": "algorithm",
+          "args": [
+            537362432,
+            3200,
+            541060874,
+            541060872
+          ]
+        },
+        {
+          "call": "lc3_setup",
+          "args": [
+            10000,
+            16000,
+            0,
+            537954660
+          ]
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            540500096,
+            1
+          ],
+          "size": 40,
+          "output": "0x203fef18",
+          "frame_index": 0
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            540500416,
+            1
+          ],
+          "size": 40,
+          "output": "0x203fef40",
+          "frame_index": 1
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            540500736,
+            1
+          ],
+          "size": 40,
+          "output": "0x203fef68",
+          "frame_index": 2
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            540501056,
+            1
+          ],
+          "size": 40,
+          "output": "0x203fef90",
+          "frame_index": 3
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            540501376,
+            1
+          ],
+          "size": 40,
+          "output": "0x203fefb8",
+          "frame_index": 4
+        },
+        {
+          "call": "ota_active",
+          "args": [
+            541060888,
+            205,
+            0,
+            200
+          ]
+        }
+      ]
+    },
+    {
+      "case": "dma_age40_ticks",
+      "calls": [
+        {
+          "call": "i2s_buffer",
+          "args": [
+            541061104,
+            541061100,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "algorithm",
+          "args": [
+            537362432,
+            3200,
+            541060842,
+            541060840
+          ]
+        },
+        {
+          "call": "lc3_setup",
+          "args": [
+            10000,
+            16000,
+            0,
+            537954660
+          ]
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            540500096,
+            1
+          ],
+          "size": 40,
+          "output": "0x203feef8",
+          "frame_index": 0
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            540500416,
+            1
+          ],
+          "size": 40,
+          "output": "0x203fef20",
+          "frame_index": 1
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            540500736,
+            1
+          ],
+          "size": 40,
+          "output": "0x203fef48",
+          "frame_index": 2
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            540501056,
+            1
+          ],
+          "size": 40,
+          "output": "0x203fef70",
+          "frame_index": 3
+        },
+        {
+          "call": "lc3_encode",
+          "args": [
+            537378816,
+            0,
+            540501376,
+            1
+          ],
+          "size": 40,
+          "output": "0x203fef98",
+          "frame_index": 4
+        },
+        {
+          "call": "hexdump",
+          "args": [
+            7913000,
+            8,
+            541060856,
+            8
+          ]
+        },
+        {
+          "call": "ota_active",
+          "args": [
+            541060856,
+            205,
+            541060856,
+            8
+          ]
+        },
+        {
+          "call": "transport_enqueue",
+          "args": [
+            1,
+            1,
+            0,
+            0
+          ],
+          "payload": "a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a2a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a3a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4a4341285ff00",
+          "length": 205,
+          "pointer": "0x203feef8"
+        }
+      ]
+    },
+    {
+      "case": "dma_age41_ticks",
+      "calls": []
+    }
+  ],
+  "scope": "original routing/frame geometry/packet assembly; actual DSP, LC3 bitstream encoder, I2S acquisition and transport enqueue are stubs"
+}

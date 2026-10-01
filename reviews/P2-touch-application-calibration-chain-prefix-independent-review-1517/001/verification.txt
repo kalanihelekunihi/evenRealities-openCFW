@@ -1,0 +1,7 @@
+Independent review of touch-application-calibration-chain-prefix-1516/003
+
+Receipt SHA-256 cff0cf0ade2d8cc04397eab031cc06c0907d1dab45015b26c288a43fd9481ada; pseudocode 1c59ee650da854d05de16794127a137b5ba623a01e851fccd750906b2f6931cd; replay 2277ae2aaa273f8c1bc29c0f76b29b5b21096fea0457f5b915b05a628a92103f; source image 371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87.
+
+Isolated replay passed and reached 0x3D50. It executes original 0x7BC0, 0x6AC0 state handling, 0x6928 setup and 0x6980 completion for three calibration rows. The trace asserts nine state-helper entries, three setup/completion sequences, and the remaining ordered startup call list. It verifies the initialized descriptor/configuration bindings, context and calibration state, control-register effects, and preserved inherited startup checks. The exact remaining controlled boundaries include 0x6A80, 0x9178, 0x7288 and 0x5FA4; 0x5FA4 returns 1 to support the modeled ready-bit path.
+
+PASS_SCOPED. RAM/MMIO and external clock tables are synthetic; remaining helpers are controlled. This establishes only the replayed startup path, not physical acquisition or whole-firmware coverage. No canonical admission.

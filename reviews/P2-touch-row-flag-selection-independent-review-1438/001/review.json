@@ -1,0 +1,18 @@
+{
+  "review_id": "1438",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-flag-selection-6294-1437/002",
+  "candidate_receipt_sha256": "fa229442a4ff432fa9dfe0558ed0e4f138049ab1b155c9fe9dda95f1d8bbb889",
+  "candidate_pseudocode_sha256": "0a9e18264ca292c3617962f020ddd34e19577dc10c6acdc0fc9ed25a06510d24",
+  "candidate_replay_sha256": "9443383cf5cbb142c2b6957c9f693445ef88a382e0843e7d7c1729b6256a5106",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independently decoded 0x6294..0x632A and replayed all 1,152 combinations in an isolated directory; all passed. The routine saturates row halfword+44 plus context byte+77 at 65535, clears bit 7 from row byte+56, reads context byte+78 and record decision mode+136/percentage+135, then executes 6220, 6262, 6270, and 61F0 in the stated order.",
+    "Checked the decoded arguments: 6270 receives row width, base 8 for mode 1 or 10 (otherwise 4), percentage, and shift; 61F0 receives decision mode, factor, budget result, scale, and saturated total as stack argument. The final return ORs the boolean with 4. Division calls are intercepted only at A6C0/A7CC and their exact arguments/results are asserted.",
+    "The literal at 632C is 65535 and is distinct from the 150-byte code span ending 632A plus alignment NOP at 632A. The candidate's explicit limitation that zero scale divisor is not exercised is consistent with 6220 returning at least 1."
+  ],
+  "limitations": [
+    "Only A6C0/A7CC division helpers are controlled here; their full implementation is not established by these fixtures. Input values are a finite matrix, not all-width exhaustive. Pointer validity, physical field meaning, and canonical admission remain unresolved."
+  ]
+}

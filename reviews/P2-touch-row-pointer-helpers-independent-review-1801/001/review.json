@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-row-pointer-helpers-independent-review-1801",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "scope": {
+    "candidate": "analysis/touch-row-pointer-helpers-1796/001",
+    "reviewed": "The exact helper spans are 810C..812A (30 bytes/15 instructions) and 812A..814C (34/17). The 864 isolated fixtures match wrapped context-derived limits, width rounded down to a multiple of four, unsigned pointer comparison, copies<=1 passthrough, and wrapped alternate-group pointer arithmetic. No calls are made; SP and return behavior match."
+  },
+  "pins": {
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "candidate_receipt_sha256": "ce982b6c6b47014ee6200e9e80973ab4c7b1cd641132f2c6f1a2208e45300df4",
+    "candidate_replays_sha256": "5ea9be3f4eeb4f615fc71ab525efbdd0e83f14852f4465c47637c67c18078e26",
+    "body_hashes": {
+      "0x810c": "00fc76e2fad394e1198eef32b50b40daf7bdade26f76e741737ad0a423dca912",
+      "0x812a": "d64fbb674f6948beae83020c28b3e983d4766f4f055f2f87b5ca48d29ba20f8f"
+    }
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "The exact helper spans are 810C..812A (30 bytes/15 instructions) and 812A..814C (34/17). The 864 isolated fixtures match wrapped context-derived limits, width rounded down to a multiple of four, unsigned pointer comparison, copies<=1 passthrough, and wrapped alternate-group pointer arithmetic. No calls are made; SP and return behavior match."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "All declared candidate files and source hashes match the receipt; isolated replay output is byte-identical to candidate replays.json."
+    }
+  ],
+  "limitations": [
+    "All address behavior is numeric arithmetic over synthetic state; no physical row mapping, pointer validity or concurrency behavior is established.",
+    "No canonical admission or coverage promotion."
+  ],
+  "checks": [
+    {
+      "command": "source and candidate artifact pin checks",
+      "result": "PASS"
+    },
+    {
+      "command": "independent instruction/fixture-scope review",
+      "result": "PASS_SCOPED"
+    },
+    {
+      "command": "isolated replay (864 fixtures)",
+      "result": "PASS; exact replay JSON match",
+      "artifact": "isolated-replays.json"
+    }
+  ],
+  "review_artifacts": {
+    "isolated_replays_sha256": "5ea9be3f4eeb4f615fc71ab525efbdd0e83f14852f4465c47637c67c18078e26"
+  },
+  "canonical_or_coverage_change": false
+}

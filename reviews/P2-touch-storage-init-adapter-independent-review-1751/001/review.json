@@ -1,0 +1,22 @@
+{
+  "review_id": "1751",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-storage-init-adapter-8a38-1750/001",
+  "candidate_receipt_sha256": "323e14d3c798dfa7c751a9fcac7e5fa2d1df5fdd7dc7a17405583767f4bc4aff",
+  "candidate_pseudocode_sha256": "ed9a6b11bef855570aa4aad02c13ca246049763822040408a644ba950573750f",
+  "candidate_replay_sha256": "1bb54e7e635df08bd3a8492a702e0475ff8e63d2e2b3541f050f13f350048830",
+  "candidate_replays_sha256": "bbf37a52f123b2db71863a27a5261597be9eb2aec6a4d88b955ba42caf124881",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Candidate and source hashes match. Independent Thumb disassembly confirms the 60-byte body 8A38..8A74 and excludes the literal word at 8A74.",
+    "All 27 original-instruction fixtures replayed in isolation; generated replays.json matches exactly. The guard helper is called first with 0x20000ED4, and any nonzero result returns zero before dereferencing the record.",
+    "For the zero guard path, the original instructions copy a word at source+0, bytes at +4..+7, and a word at +8 into the 12-byte temporary at SP+4 (old SP-28), then call 898C with [temporary, caller context, 0x20000ED4]. The result is returned unchanged and the stack is restored.",
+    "Controlled helper behavior is limited to the explicit call results; the fixture checks the record contents observed at 898C and full-width call arguments."
+  ],
+  "limitations": [
+    "Both 486C and 898C are controlled. Initializer mutation, retention of the stack temporary, pointer validity, and physical storage behavior are not established.",
+    "No canonical admission or C implementation."
+  ]
+}

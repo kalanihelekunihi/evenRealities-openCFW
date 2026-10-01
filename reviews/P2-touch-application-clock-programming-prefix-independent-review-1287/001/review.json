@@ -1,0 +1,19 @@
+{
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-clock-programming-prefix-1286/001",
+  "candidate_source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "candidate_files": {
+    "pseudocode.md": "8ed64a74c2f5fed40b9aa55c0ec89644e905defe5288e35b45bb05fc76c7a21e",
+    "replay.py": "f8dcb1ae981363b1179bce332c686e15198da27995ebffc07ced9f6519e7992b",
+    "replays.json": "820fd975cdfc164ab2910a1b5c9cc7909e7f397c2049ff4766cc77273c91e18a"
+  },
+  "review_result": "PASS_SCOPED",
+  "checks": {
+    "replay": "The isolated original-byte prefix reaches 0x3D50 and regenerates the candidate row exactly. Source and artifact hashes match the receipt.",
+    "clock_hierarchy": "All helper instructions reached within the clock initialization hierarchy execute from the original image. The first 9C80(24,000,000) follows the current-frequency path; the second 9C80(48,000,000) programs using the supplied synthetic external table memory. The subsequent actual 4734 chain derives 48,000,000, 48 MHz ceiling, 48,000 kHz ceiling, and the scaled value modulo 2^32. The exact nine later controlled application dependencies remain visible in the captured call sequence."
+  },
+  "limits": [
+    "External table contents are synthetic, and their ROM identity remains unresolved.",
+    "This proves a bounded instruction chain under supplied state, not physical boot, clock timing, or application-loop completion."
+  ],
+  "accepted": false
+}

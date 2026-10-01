@@ -1,0 +1,21 @@
+{
+  "review_id": "1298",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-zero-return-3ee0-1297/001",
+  "candidate_receipt_sha256": "4b4d509a9e22fe983474b0472cb986fadfde0020ff3ac0e189b610881474bc4e",
+  "candidate_pseudocode_sha256": "b77c63d7df96805f3eddcada4361d97d5fbf00861ee0cbf99ed13489aa34d932",
+  "candidate_replay_sha256": "af193f50aa19b17f1df5a53e3d3990acf56201c9110e1c531c8979afc31c5bbf",
+  "candidate_replays_sha256": "4132b8fbc31c73b2f18b6c15e7207f47dca6bcf7ea91f9f211d56fb1a870f9f4",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independent M-class decode of 3EE0..3EE8 confirms PUSH {R0-R3}, MOVS R0,#0, ADD SP,#16, BX LR.",
+    "All candidate artifact pins verify. Isolated replay passes 16 combinations of all-zero/all-ones incoming arguments, confirming R0=0, preserved R1-R3, restored SP and pushed words left below the restored stack pointer.",
+    "Caller literals and caller meaning are not interpreted beyond the pinned source."
+  ],
+  "limitations": [
+    "Only the supplied function entry is exercised; return value meaning is unspecified.",
+    "Private evidence only; no canonical admission or C implementation."
+  ]
+}

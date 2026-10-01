@@ -1,0 +1,2888 @@
+{
+  "input_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "capstone": "5.0.7",
+  "unicorn": "2.1.4",
+  "scope": "Original code, stubbed provider state and scheduling; no radio/UI hardware; logging disabled",
+  "functions": [
+    {
+      "entry": "0x4c5886",
+      "end": "0x4c5892",
+      "sha256": "862d0c199dff5aba512dcddc481e92959c040ea4d90949c724f3f7d86fa9fa0a",
+      "raw_decompiler_succeeded": true,
+      "direct_calls": []
+    },
+    {
+      "entry": "0x4c5892",
+      "end": "0x4c58ee",
+      "sha256": "3f35d5747c349e315b012fa873405c9a279be129a8a55239c0abdab96ead4203",
+      "raw_decompiler_succeeded": true,
+      "direct_calls": []
+    },
+    {
+      "entry": "0x4c5916",
+      "end": "0x4c59aa",
+      "sha256": "4de3ec78f70e874e7af16725a96c4da33b6f9bee491dbbeaa32765c6c46c4364",
+      "raw_decompiler_succeeded": true,
+      "direct_calls": [
+        {
+          "site": "0x4c5922",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4c5956",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x4c595a",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4c5962",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4c5986",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x4c59a2",
+          "target": "0x464d1c"
+        }
+      ]
+    },
+    {
+      "entry": "0x4c5dbc",
+      "end": "0x4c6148",
+      "sha256": "a86429cfe3a7056e889207986bac93ed3cc41154302581fbf28aca475018d042",
+      "raw_decompiler_succeeded": true,
+      "direct_calls": [
+        {
+          "site": "0x4c5dc4",
+          "target": "0x45a568"
+        },
+        {
+          "site": "0x4c5dd8",
+          "target": "0x43c0e4"
+        },
+        {
+          "site": "0x4c5de4",
+          "target": "0x439be4"
+        },
+        {
+          "site": "0x4c5df4",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4c5dfe",
+          "target": "0x4c5892"
+        },
+        {
+          "site": "0x4c5e08",
+          "target": "0x4c58ee"
+        },
+        {
+          "site": "0x4c5e40",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x4c5e44",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4c5e4c",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4c5e56",
+          "target": "0x4c5892"
+        },
+        {
+          "site": "0x4c5e60",
+          "target": "0x4c58ee"
+        },
+        {
+          "site": "0x4c5e88",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x4c5e8e",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4c5e98",
+          "target": "0x4c5892"
+        },
+        {
+          "site": "0x4c5ea2",
+          "target": "0x4c58ee"
+        },
+        {
+          "site": "0x4c5eca",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x4c5ece",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4c5ed6",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4c5ee0",
+          "target": "0x4c5892"
+        },
+        {
+          "site": "0x4c5eea",
+          "target": "0x4c58ee"
+        },
+        {
+          "site": "0x4c5f04",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x4c5f08",
+          "target": "0x4490cc"
+        },
+        {
+          "site": "0x4c5f16",
+          "target": "0x4c5a58"
+        },
+        {
+          "site": "0x4c5f22",
+          "target": "0x4c5c6e"
+        },
+        {
+          "site": "0x4c5f3c",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4c5f5a",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x4c5f5e",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4c5f66",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4c5f78",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x4c5f98",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4c5fb2",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x4c5fb6",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4c5fbe",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4c5fce",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x4c5fd4",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4c5fee",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x4c5ff2",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4c5ffa",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4c600a",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x4c6018",
+          "target": "0x4c5c30"
+        },
+        {
+          "site": "0x4c6020",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4c603a",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x4c603e",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4c6046",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4c6056",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x4c605e",
+          "target": "0x46b0ec"
+        },
+        {
+          "site": "0x4c6066",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4c6080",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x4c6084",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4c608c",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4c609c",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x4c60b8",
+          "target": "0x464b2e"
+        },
+        {
+          "site": "0x4c60c0",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4c60d0",
+          "target": "0x4c5886"
+        },
+        {
+          "site": "0x4c60f2",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x4c60f6",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4c60fe",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4c610e",
+          "target": "0x4c5886"
+        },
+        {
+          "site": "0x4c6124",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x4c6130",
+          "target": "0x4c5886"
+        },
+        {
+          "site": "0x4c613e",
+          "target": "0x465748"
+        }
+      ]
+    },
+    {
+      "entry": "0x465748",
+      "end": "0x465b0a",
+      "sha256": "d5b9d4f08e694a1bdf791a1b898fc09bbb2997bc5b5343a27e32d81f68f8c9f9",
+      "raw_decompiler_succeeded": false,
+      "direct_calls": [
+        {
+          "site": "0x465760",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x465782",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x465786",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x46578e",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4657a0",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x4657b0",
+          "target": "0x4646f0"
+        },
+        {
+          "site": "0x4657bc",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4657de",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x4657e2",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4657ea",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4657fc",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x465810",
+          "target": "0x43c0e4"
+        },
+        {
+          "site": "0x465816",
+          "target": "0x4646f0"
+        },
+        {
+          "site": "0x465826",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x465848",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x46584c",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x465854",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x465866",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x46586c",
+          "target": "0x474d16"
+        },
+        {
+          "site": "0x4658ec",
+          "target": "0x45a568"
+        },
+        {
+          "site": "0x4658fe",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x46592e",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x465932",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x46593a",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x465956",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x465968",
+          "target": "0x449abe"
+        },
+        {
+          "site": "0x465974",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x465998",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x46599c",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4659a4",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4659b8",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x4659c0",
+          "target": "0x474d16"
+        },
+        {
+          "site": "0x4659c6",
+          "target": "0x474d16"
+        },
+        {
+          "site": "0x4659ca",
+          "target": "0x5fa0a4"
+        },
+        {
+          "site": "0x4659e4",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x465a0a",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x465a0e",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x465a16",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x465a2a",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x465a38",
+          "target": "0x449abe"
+        },
+        {
+          "site": "0x465a42",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x465a62",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x465a66",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x465a6e",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x465a82",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x465a8a",
+          "target": "0x474d16"
+        },
+        {
+          "site": "0x465a90",
+          "target": "0x474d16"
+        },
+        {
+          "site": "0x465a94",
+          "target": "0x5fa0a4"
+        },
+        {
+          "site": "0x465aaa",
+          "target": "0x4495e4"
+        },
+        {
+          "site": "0x465ab6",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x465ad4",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x465ad8",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x465ae0",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x465af2",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x465afa",
+          "target": "0x474d16"
+        },
+        {
+          "site": "0x465b00",
+          "target": "0x474d16"
+        }
+      ]
+    },
+    {
+      "entry": "0x442d86",
+      "end": "0x44347a",
+      "sha256": "7ae646b7a7a909729091db6925d1c638ab175baf59c9f6638c5aa9cfd197424c",
+      "raw_decompiler_succeeded": true,
+      "direct_calls": [
+        {
+          "site": "0x442dc6",
+          "target": "0x45f8e6"
+        },
+        {
+          "site": "0x442dd0",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x442df2",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x442df6",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x442dfe",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x442e10",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x442e70",
+          "target": "0x442d64"
+        },
+        {
+          "site": "0x442e7a",
+          "target": "0x45bbf4"
+        },
+        {
+          "site": "0x442e92",
+          "target": "0x46ae9c"
+        },
+        {
+          "site": "0x442e98",
+          "target": "0x45a568"
+        },
+        {
+          "site": "0x442eaa",
+          "target": "0x464b2e"
+        },
+        {
+          "site": "0x442ec2",
+          "target": "0x45f840"
+        },
+        {
+          "site": "0x442eca",
+          "target": "0x45f706"
+        },
+        {
+          "site": "0x442eda",
+          "target": "0x44228a"
+        },
+        {
+          "site": "0x442ee4",
+          "target": "0x45faa8"
+        },
+        {
+          "site": "0x442ef4",
+          "target": "0x45f840"
+        },
+        {
+          "site": "0x442efc",
+          "target": "0x45f706"
+        },
+        {
+          "site": "0x442f18",
+          "target": "0x460374"
+        },
+        {
+          "site": "0x442f22",
+          "target": "0x45faa8"
+        },
+        {
+          "site": "0x442f3e",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x442f60",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x442f64",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x442f6c",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x442f7e",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x442f88",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x442faa",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x442fae",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x442fb6",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x442fc8",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x442fd2",
+          "target": "0x45f8fc"
+        },
+        {
+          "site": "0x442fd8",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x442ffa",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x442ffe",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x443006",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x443018",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x443022",
+          "target": "0x45f8fc"
+        },
+        {
+          "site": "0x44302e",
+          "target": "0x45f8fc"
+        },
+        {
+          "site": "0x44303a",
+          "target": "0x45f8fc"
+        },
+        {
+          "site": "0x443046",
+          "target": "0x45f8fc"
+        },
+        {
+          "site": "0x44305c",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x44308a",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x44308e",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x443096",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4430b2",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x4430c4",
+          "target": "0x45f8fc"
+        },
+        {
+          "site": "0x4430da",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x443108",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x44310c",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x443114",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x443130",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x443142",
+          "target": "0x45f8fc"
+        },
+        {
+          "site": "0x44315a",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x443188",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x44318c",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x443194",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4431b0",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x4431c2",
+          "target": "0x45f8fc"
+        },
+        {
+          "site": "0x4431c8",
+          "target": "0x442d64"
+        },
+        {
+          "site": "0x4431d0",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4431f2",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x4431f6",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4431fe",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x443210",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x44321a",
+          "target": "0x45f8fc"
+        },
+        {
+          "site": "0x443226",
+          "target": "0x45f8fc"
+        },
+        {
+          "site": "0x443232",
+          "target": "0x45f8fc"
+        },
+        {
+          "site": "0x443238",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x44325e",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x443262",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x44326a",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x44327e",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x443288",
+          "target": "0x45f8fc"
+        },
+        {
+          "site": "0x44328e",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4432b4",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x4432b8",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4432c0",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4432d4",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x4432de",
+          "target": "0x45f8fc"
+        },
+        {
+          "site": "0x4432e4",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x443306",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x44330a",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x443312",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x443324",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x44332a",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x443350",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x443354",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x44335c",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x443370",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x44337a",
+          "target": "0x45f8fc"
+        },
+        {
+          "site": "0x443380",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4433a6",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x4433aa",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4433b2",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4433c6",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x4433cc",
+          "target": "0x46c622"
+        },
+        {
+          "site": "0x4433d0",
+          "target": "0x46c984"
+        },
+        {
+          "site": "0x4433d6",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4433fc",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x443400",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x443408",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x44341c",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x443422",
+          "target": "0x46c600"
+        },
+        {
+          "site": "0x443426",
+          "target": "0x46c9aa"
+        },
+        {
+          "site": "0x44342c",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x443450",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x443454",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x44345c",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x443470",
+          "target": "0x43ce9e"
+        }
+      ]
+    },
+    {
+      "entry": "0x539dea",
+      "end": "0x539e48",
+      "sha256": "251b7bde1f1b8fc98a743ab843b9cd64313c6f03c6338a7dbcde4bfa0b0f4649",
+      "raw_decompiler_succeeded": true,
+      "direct_calls": [
+        {
+          "site": "0x539dfc",
+          "target": "0x4b50ae"
+        },
+        {
+          "site": "0x539e2c",
+          "target": "0x439be4"
+        },
+        {
+          "site": "0x539e40",
+          "target": "0x4b5640"
+        }
+      ]
+    },
+    {
+      "entry": "0x4b50ae",
+      "end": "0x4b50ba",
+      "sha256": "ec586584b19d0f893f16cc374f5b88d5433dc758526adb391f3052fe32113bcf",
+      "raw_decompiler_succeeded": true,
+      "direct_calls": [
+        {
+          "site": "0x4b50b4",
+          "target": "0x4bf990"
+        }
+      ]
+    },
+    {
+      "entry": "0x4b5640",
+      "end": "0x4b571e",
+      "sha256": "f16d89c0212bf9fad520bd6254882286f373b538d9e7232e09b75e17fbce13cf",
+      "raw_decompiler_succeeded": true,
+      "direct_calls": [
+        {
+          "site": "0x4b564c",
+          "target": "0x52b8c8"
+        },
+        {
+          "site": "0x4b5656",
+          "target": "0x531820"
+        },
+        {
+          "site": "0x4b567c",
+          "target": "0x52b8d0"
+        },
+        {
+          "site": "0x4b56c2",
+          "target": "0x4bf99e"
+        },
+        {
+          "site": "0x4b56e4",
+          "target": "0x4bf9ba"
+        },
+        {
+          "site": "0x4b56f8",
+          "target": "0x531ad6"
+        },
+        {
+          "site": "0x4b570c",
+          "target": "0x531ad6"
+        },
+        {
+          "site": "0x4b5716",
+          "target": "0x4bf9b0"
+        }
+      ]
+    },
+    {
+      "entry": "0x530e30",
+      "end": "0x530e64",
+      "sha256": "7129d69bb916056d1ea3f55d3768ba6b63521518b25b3d0c6e99128a826f51ae",
+      "raw_decompiler_succeeded": true,
+      "direct_calls": [
+        {
+          "site": "0x530e52",
+          "target": "0x52a4b8"
+        },
+        {
+          "site": "0x530e5e",
+          "target": "0x4b50ba"
+        }
+      ]
+    },
+    {
+      "entry": "0x531ac0",
+      "end": "0x531ad6",
+      "sha256": "739d07bf0a8969eb5c7edab38f91d349eb9a4666961d867f9e979bc21a0ba34d",
+      "raw_decompiler_succeeded": true,
+      "direct_calls": [
+        {
+          "site": "0x531acc",
+          "target": "0x4bf9b0"
+        }
+      ]
+    },
+    {
+      "entry": "0x4e8bcc",
+      "end": "0x4e8da6",
+      "sha256": "60d27716f22643d8428ae53d063cf35eb284db1146854b837060807f330f50d9",
+      "raw_decompiler_succeeded": true,
+      "direct_calls": [
+        {
+          "site": "0x4e8c0a",
+          "target": "0x4e7d20"
+        },
+        {
+          "site": "0x4e8c1e",
+          "target": "0x4e7d20"
+        },
+        {
+          "site": "0x4e8c24",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4e8c5e",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x4e8c62",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4e8c6a",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4e8c92",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x4e8ca4",
+          "target": "0x4e7dfa"
+        },
+        {
+          "site": "0x4e8cd8",
+          "target": "0x43dfa4"
+        },
+        {
+          "site": "0x4e8cde",
+          "target": "0x4503d6"
+        },
+        {
+          "site": "0x4e8cf4",
+          "target": "0x4506ce"
+        },
+        {
+          "site": "0x4e8d30",
+          "target": "0x450408"
+        },
+        {
+          "site": "0x4e8d4e",
+          "target": "0x4e8a90"
+        },
+        {
+          "site": "0x4e8d54",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4e8d7c",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x4e8d80",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4e8d88",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4e8d9e",
+          "target": "0x43ce9e"
+        }
+      ]
+    },
+    {
+      "entry": "0x4e7d20",
+      "end": "0x4e7dfa",
+      "sha256": "5bd4074446773af0211edec8fbac6939dd59cfca74394205414f5c45ee0ec3c2",
+      "raw_decompiler_succeeded": true,
+      "direct_calls": [
+        {
+          "site": "0x4e7d30",
+          "target": "0x43e2ea"
+        },
+        {
+          "site": "0x4e7d44",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4e7d66",
+          "target": "0x43d574"
+        },
+        {
+          "site": "0x4e7d6a",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4e7d72",
+          "target": "0x43d0ce"
+        },
+        {
+          "site": "0x4e7d86",
+          "target": "0x43ce9e"
+        },
+        {
+          "site": "0x4e7d8e",
+          "target": "0x44e498"
+        },
+        {
+          "site": "0x4e7dbc",
+          "target": "0x4e7cc0"
+        },
+        {
+          "site": "0x4e7dc2",
+          "target": "0x4e772c"
+        },
+        {
+          "site": "0x4e7de6",
+          "target": "0x4e7cc0"
+        },
+        {
+          "site": "0x4e7dec",
+          "target": "0x4e772c"
+        },
+        {
+          "site": "0x4e7df4",
+          "target": "0x4e7b16"
+        }
+      ]
+    }
+  ],
+  "case_count": 46,
+  "cases": [
+    {
+      "case": "event_name_0",
+      "calls": [],
+      "gesture_name": "SINGLE_CLICK",
+      "address": "0x788990"
+    },
+    {
+      "case": "event_name_1",
+      "calls": [],
+      "gesture_name": "DOUBLE_CLICK",
+      "address": "0x7889a0"
+    },
+    {
+      "case": "event_name_3",
+      "calls": [],
+      "gesture_name": "LONG_PRESS",
+      "address": "0x78bf3c"
+    },
+    {
+      "case": "event_name_4",
+      "calls": [],
+      "gesture_name": "UPROLL",
+      "address": "0x78e564"
+    },
+    {
+      "case": "event_name_5",
+      "calls": [],
+      "gesture_name": "DOWNROLL",
+      "address": "0x78bf48"
+    },
+    {
+      "case": "event_name_14",
+      "calls": [],
+      "gesture_name": "RELEASE",
+      "address": "0x78e55c"
+    },
+    {
+      "case": "input_pack_0",
+      "calls": [
+        {
+          "call": "sync108",
+          "args": [
+            264,
+            537915344,
+            12,
+            0
+          ],
+          "record": "040000000000000007090000"
+        }
+      ]
+    },
+    {
+      "case": "input_pack_1",
+      "calls": [
+        {
+          "call": "sync108",
+          "args": [
+            264,
+            537915344,
+            12,
+            0
+          ],
+          "record": "040000000100000007090000"
+        }
+      ]
+    },
+    {
+      "case": "input_pack_3",
+      "calls": [
+        {
+          "call": "sync108",
+          "args": [
+            264,
+            537915344,
+            12,
+            0
+          ],
+          "record": "040000000300000007090000"
+        }
+      ]
+    },
+    {
+      "case": "input_pack_4",
+      "calls": [
+        {
+          "call": "sync108",
+          "args": [
+            264,
+            537915344,
+            12,
+            0
+          ],
+          "record": "040000000400000007090000"
+        }
+      ]
+    },
+    {
+      "case": "input_pack_5",
+      "calls": [
+        {
+          "call": "sync108",
+          "args": [
+            264,
+            537915344,
+            12,
+            0
+          ],
+          "record": "040000000500000007090000"
+        }
+      ]
+    },
+    {
+      "case": "input_pack_14",
+      "calls": [
+        {
+          "call": "sync108",
+          "args": [
+            264,
+            537915344,
+            12,
+            0
+          ],
+          "record": "040000000e00000007090000"
+        }
+      ]
+    },
+    {
+      "case": "manager_to_app_packet_0",
+      "calls": [
+        {
+          "call": "role",
+          "args": [
+            0,
+            537358336,
+            12,
+            0
+          ]
+        },
+        {
+          "call": "tick",
+          "args": [
+            0,
+            537358336,
+            12,
+            0
+          ]
+        },
+        {
+          "call": "dual_hold_track",
+          "args": [
+            4,
+            0,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "usage_track",
+          "args": [
+            4,
+            0,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "dual_hold_active",
+          "args": [
+            4,
+            0,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "input_allowed",
+          "args": [
+            0,
+            0,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "heap_alloc",
+          "args": [
+            12,
+            0,
+            458761,
+            0
+          ]
+        },
+        {
+          "call": "heap_alloc",
+          "args": [
+            12,
+            12,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "role",
+          "args": [
+            537395216,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "queue_put",
+          "args": [
+            0,
+            537915296,
+            0,
+            2000
+          ],
+          "envelope": "0000000003000c0010000820",
+          "body": "030704000000000009000700"
+        }
+      ]
+    },
+    {
+      "case": "manager_to_app_packet_1",
+      "calls": [
+        {
+          "call": "role",
+          "args": [
+            0,
+            537358336,
+            12,
+            0
+          ]
+        },
+        {
+          "call": "tick",
+          "args": [
+            0,
+            537358336,
+            12,
+            0
+          ]
+        },
+        {
+          "call": "dual_hold_track",
+          "args": [
+            4,
+            1,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "usage_track",
+          "args": [
+            4,
+            1,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "dual_hold_active",
+          "args": [
+            4,
+            1,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "input_allowed",
+          "args": [
+            0,
+            1,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "heap_alloc",
+          "args": [
+            12,
+            1,
+            458761,
+            0
+          ]
+        },
+        {
+          "call": "heap_alloc",
+          "args": [
+            12,
+            12,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "role",
+          "args": [
+            537395216,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "queue_put",
+          "args": [
+            0,
+            537915296,
+            0,
+            2000
+          ],
+          "envelope": "0000000003000c0010000820",
+          "body": "030704000100000009000700"
+        }
+      ]
+    },
+    {
+      "case": "manager_to_app_packet_3",
+      "calls": [
+        {
+          "call": "role",
+          "args": [
+            0,
+            537358336,
+            12,
+            0
+          ]
+        },
+        {
+          "call": "tick",
+          "args": [
+            0,
+            537358336,
+            12,
+            0
+          ]
+        },
+        {
+          "call": "dual_hold_track",
+          "args": [
+            4,
+            3,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "usage_track",
+          "args": [
+            4,
+            3,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "dual_hold_active",
+          "args": [
+            4,
+            3,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "input_allowed",
+          "args": [
+            0,
+            3,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "heap_alloc",
+          "args": [
+            12,
+            3,
+            458761,
+            0
+          ]
+        },
+        {
+          "call": "heap_alloc",
+          "args": [
+            12,
+            12,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "role",
+          "args": [
+            537395216,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "queue_put",
+          "args": [
+            0,
+            537915296,
+            0,
+            2000
+          ],
+          "envelope": "0000000003000c0010000820",
+          "body": "030704000300000009000700"
+        }
+      ]
+    },
+    {
+      "case": "manager_to_app_packet_4",
+      "calls": [
+        {
+          "call": "role",
+          "args": [
+            0,
+            537358336,
+            12,
+            0
+          ]
+        },
+        {
+          "call": "tick",
+          "args": [
+            0,
+            537358336,
+            12,
+            0
+          ]
+        },
+        {
+          "call": "dual_hold_track",
+          "args": [
+            4,
+            4,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "usage_track",
+          "args": [
+            4,
+            4,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "dual_hold_active",
+          "args": [
+            4,
+            4,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "input_allowed",
+          "args": [
+            0,
+            4,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "heap_alloc",
+          "args": [
+            12,
+            4,
+            458761,
+            0
+          ]
+        },
+        {
+          "call": "heap_alloc",
+          "args": [
+            12,
+            12,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "role",
+          "args": [
+            537395216,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "queue_put",
+          "args": [
+            0,
+            537915296,
+            0,
+            2000
+          ],
+          "envelope": "0000000003000c0010000820",
+          "body": "030704000400000009000700"
+        }
+      ]
+    },
+    {
+      "case": "manager_to_app_packet_5",
+      "calls": [
+        {
+          "call": "role",
+          "args": [
+            0,
+            537358336,
+            12,
+            0
+          ]
+        },
+        {
+          "call": "tick",
+          "args": [
+            0,
+            537358336,
+            12,
+            0
+          ]
+        },
+        {
+          "call": "dual_hold_track",
+          "args": [
+            4,
+            5,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "usage_track",
+          "args": [
+            4,
+            5,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "dual_hold_active",
+          "args": [
+            4,
+            5,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "input_allowed",
+          "args": [
+            0,
+            5,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "heap_alloc",
+          "args": [
+            12,
+            5,
+            458761,
+            0
+          ]
+        },
+        {
+          "call": "heap_alloc",
+          "args": [
+            12,
+            12,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "role",
+          "args": [
+            537395216,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "queue_put",
+          "args": [
+            0,
+            537915296,
+            0,
+            2000
+          ],
+          "envelope": "0000000003000c0010000820",
+          "body": "030704000500000009000700"
+        }
+      ]
+    },
+    {
+      "case": "manager_to_app_packet_14",
+      "calls": [
+        {
+          "call": "role",
+          "args": [
+            0,
+            537358336,
+            12,
+            0
+          ]
+        },
+        {
+          "call": "tick",
+          "args": [
+            0,
+            537358336,
+            12,
+            0
+          ]
+        },
+        {
+          "call": "dual_hold_track",
+          "args": [
+            4,
+            14,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "usage_track",
+          "args": [
+            4,
+            14,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "dual_hold_active",
+          "args": [
+            14,
+            14,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "input_allowed",
+          "args": [
+            0,
+            14,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "heap_alloc",
+          "args": [
+            12,
+            14,
+            458761,
+            0
+          ]
+        },
+        {
+          "call": "heap_alloc",
+          "args": [
+            12,
+            12,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "role",
+          "args": [
+            537395216,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "queue_put",
+          "args": [
+            0,
+            537915296,
+            0,
+            2000
+          ],
+          "envelope": "0000000003000c0010000820",
+          "body": "030704000e00000009000700"
+        }
+      ]
+    },
+    {
+      "case": "role2",
+      "calls": [
+        {
+          "call": "role",
+          "args": [
+            0,
+            537358336,
+            12,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "settings_block",
+      "calls": [
+        {
+          "call": "role",
+          "args": [
+            0,
+            537358336,
+            12,
+            0
+          ]
+        },
+        {
+          "call": "tick",
+          "args": [
+            0,
+            537358336,
+            12,
+            0
+          ]
+        },
+        {
+          "call": "dual_hold_track",
+          "args": [
+            4,
+            0,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "usage_track",
+          "args": [
+            4,
+            0,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "dual_hold_active",
+          "args": [
+            4,
+            0,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "input_allowed",
+          "args": [
+            0,
+            0,
+            2000,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "dual_hold",
+      "calls": [
+        {
+          "call": "role",
+          "args": [
+            0,
+            537358336,
+            12,
+            0
+          ]
+        },
+        {
+          "call": "tick",
+          "args": [
+            0,
+            537358336,
+            12,
+            0
+          ]
+        },
+        {
+          "call": "dual_hold_track",
+          "args": [
+            4,
+            0,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "usage_track",
+          "args": [
+            4,
+            0,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "dual_hold_active",
+          "args": [
+            4,
+            0,
+            2000,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "source_arbitration_1000",
+      "calls": [
+        {
+          "call": "role",
+          "args": [
+            0,
+            537358336,
+            12,
+            0
+          ]
+        },
+        {
+          "call": "tick",
+          "args": [
+            0,
+            537358336,
+            12,
+            0
+          ]
+        },
+        {
+          "call": "dual_hold_track",
+          "args": [
+            4,
+            0,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "usage_track",
+          "args": [
+            4,
+            0,
+            2000,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "source_arbitration_1001",
+      "calls": [
+        {
+          "call": "role",
+          "args": [
+            0,
+            537358336,
+            12,
+            0
+          ]
+        },
+        {
+          "call": "tick",
+          "args": [
+            0,
+            537358336,
+            12,
+            0
+          ]
+        },
+        {
+          "call": "dual_hold_track",
+          "args": [
+            4,
+            0,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "usage_track",
+          "args": [
+            4,
+            0,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "dual_hold_active",
+          "args": [
+            4,
+            1001,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "input_allowed",
+          "args": [
+            0,
+            1001,
+            2000,
+            0
+          ]
+        },
+        {
+          "call": "heap_alloc",
+          "args": [
+            12,
+            0,
+            458761,
+            0
+          ]
+        },
+        {
+          "call": "heap_alloc",
+          "args": [
+            12,
+            12,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "role",
+          "args": [
+            537395216,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "queue_put",
+          "args": [
+            0,
+            537915296,
+            0,
+            2000
+          ],
+          "envelope": "0000000003000c0010000820",
+          "body": "030704000000000009000700"
+        }
+      ]
+    },
+    {
+      "case": "app_packet_alloc_failure_1",
+      "calls": [
+        {
+          "call": "heap_alloc",
+          "args": [
+            12,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "app_packet_alloc_failure_2",
+      "calls": [
+        {
+          "call": "heap_alloc",
+          "args": [
+            12,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "heap_alloc",
+          "args": [
+            12,
+            12,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "heap_free",
+          "args": [
+            537395200,
+            537395200,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "forward_role2_local_queue",
+      "calls": [
+        {
+          "call": "heap_alloc",
+          "args": [
+            12,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "heap_alloc",
+          "args": [
+            12,
+            12,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "role",
+          "args": [
+            537395216,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "queue_put",
+          "args": [
+            4369,
+            537915360,
+            0,
+            2000
+          ],
+          "envelope": "0000000000000c0010000820",
+          "body": "030704000000000000000000"
+        },
+        {
+          "call": "flags",
+          "args": [
+            0,
+            2,
+            0,
+            2000
+          ]
+        }
+      ]
+    },
+    {
+      "case": "display_event_0",
+      "calls": [
+        {
+          "call": "active_page",
+          "args": [
+            537359616,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "ui_event",
+          "args": [
+            537359616,
+            10,
+            537915348,
+            0
+          ],
+          "data": "0400000000000000"
+        }
+      ]
+    },
+    {
+      "case": "display_event_1",
+      "calls": [
+        {
+          "call": "active_page",
+          "args": [
+            537359616,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "ui_event",
+          "args": [
+            537359616,
+            72,
+            537915348,
+            0
+          ],
+          "data": "0400000000000000"
+        }
+      ]
+    },
+    {
+      "case": "display_event_3",
+      "calls": [
+        {
+          "call": "active_page",
+          "args": [
+            537359616,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "page_longpress_mode",
+          "args": [
+            537359360,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "ui_event",
+          "args": [
+            537359616,
+            8,
+            537915344,
+            0
+          ],
+          "data": "0900070004000000"
+        }
+      ]
+    },
+    {
+      "case": "display_event_4",
+      "calls": [
+        {
+          "call": "active_page",
+          "args": [
+            537359616,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "ui_event",
+          "args": [
+            537359616,
+            68,
+            537915328,
+            0
+          ],
+          "data": "0900000007000000"
+        }
+      ]
+    },
+    {
+      "case": "display_event_5",
+      "calls": [
+        {
+          "call": "active_page",
+          "args": [
+            537359616,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "ui_event",
+          "args": [
+            537359616,
+            69,
+            537915360,
+            0
+          ],
+          "data": "0900000007000000"
+        }
+      ]
+    },
+    {
+      "case": "display_event_14",
+      "calls": [
+        {
+          "call": "active_page",
+          "args": [
+            537359616,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "ui_event",
+          "args": [
+            537359616,
+            74,
+            537915352,
+            0
+          ],
+          "data": "0900000007000000"
+        }
+      ]
+    },
+    {
+      "case": "longpress_normal_page_system_command3",
+      "calls": [
+        {
+          "call": "active_page",
+          "args": [
+            537359616,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "page_longpress_mode",
+          "args": [
+            537359360,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "transition_busy",
+          "args": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "role",
+          "args": [
+            66,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "system_command",
+          "args": [
+            3,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "att_accepted",
+      "calls": [
+        {
+          "call": "att_alloc",
+          "args": [
+            17,
+            0,
+            6,
+            537358336
+          ]
+        },
+        {
+          "call": "ccb",
+          "args": [
+            1,
+            0,
+            10,
+            537395200
+          ]
+        },
+        {
+          "call": "wsf_alloc",
+          "args": [
+            12,
+            10,
+            10,
+            537395200
+          ]
+        },
+        {
+          "call": "wsf_send",
+          "args": [
+            9,
+            537395232,
+            10,
+            537395200
+          ],
+          "envelope": "01000a000000082010000000",
+          "packet_pointer": "0x20080000",
+          "att_wire": "521000001a8a011234"
+        }
+      ],
+      "copy_survives_caller_overwrite": true
+    },
+    {
+      "case": "att_no_connection",
+      "calls": [
+        {
+          "call": "att_alloc",
+          "args": [
+            17,
+            0,
+            6,
+            537358336
+          ]
+        },
+        {
+          "call": "ccb",
+          "args": [
+            1,
+            0,
+            10,
+            537395200
+          ]
+        },
+        {
+          "call": "wsf_free",
+          "args": [
+            537395200,
+            0,
+            10,
+            537395200
+          ]
+        }
+      ]
+    },
+    {
+      "case": "att_mtu_too_small",
+      "calls": [
+        {
+          "call": "att_alloc",
+          "args": [
+            17,
+            0,
+            6,
+            537358336
+          ]
+        },
+        {
+          "call": "ccb",
+          "args": [
+            1,
+            0,
+            10,
+            537395200
+          ]
+        },
+        {
+          "call": "att_callback",
+          "args": [
+            1,
+            10,
+            16,
+            119
+          ]
+        },
+        {
+          "call": "wsf_free",
+          "args": [
+            537395200,
+            10,
+            16,
+            119
+          ]
+        }
+      ]
+    },
+    {
+      "case": "att_blocked",
+      "calls": [
+        {
+          "call": "att_alloc",
+          "args": [
+            17,
+            0,
+            6,
+            537358336
+          ]
+        },
+        {
+          "call": "ccb",
+          "args": [
+            1,
+            0,
+            10,
+            537395200
+          ]
+        },
+        {
+          "call": "att_callback",
+          "args": [
+            1,
+            10,
+            16,
+            113
+          ]
+        },
+        {
+          "call": "wsf_free",
+          "args": [
+            537395200,
+            10,
+            16,
+            113
+          ]
+        }
+      ]
+    },
+    {
+      "case": "att_packet_alloc_failure",
+      "calls": [
+        {
+          "call": "att_alloc",
+          "args": [
+            17,
+            0,
+            6,
+            537358336
+          ]
+        }
+      ]
+    },
+    {
+      "case": "att_envelope_alloc_failure",
+      "calls": [
+        {
+          "call": "att_alloc",
+          "args": [
+            17,
+            0,
+            6,
+            537358336
+          ]
+        },
+        {
+          "call": "ccb",
+          "args": [
+            1,
+            0,
+            10,
+            537395200
+          ]
+        },
+        {
+          "call": "wsf_alloc",
+          "args": [
+            12,
+            10,
+            10,
+            537395200
+          ]
+        },
+        {
+          "call": "wsf_free",
+          "args": [
+            537395200,
+            10,
+            10,
+            537395200
+          ]
+        }
+      ]
+    },
+    {
+      "case": "att_transfers_copy_to_l2cap",
+      "calls": [
+        {
+          "call": "l2cap_transfer",
+          "args": [
+            537359104,
+            0,
+            9,
+            537366528
+          ],
+          "att_wire": "521000001a8a011234"
+        }
+      ]
+    },
+    {
+      "case": "att_free_packet_clears_pointer",
+      "calls": [
+        {
+          "call": "wsf_free",
+          "args": [
+            537366528,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "dashboard_44_index1",
+      "calls": [
+        {
+          "call": "object_valid",
+          "args": [
+            537359872,
+            537358336,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "scroll_position",
+          "args": [
+            537359872,
+            537358336,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "animate_scroll",
+          "args": [
+            537359872,
+            304,
+            0,
+            2
+          ]
+        },
+        {
+          "call": "index_changed",
+          "args": [
+            2,
+            304,
+            0,
+            2
+          ]
+        }
+      ],
+      "index_before": 1,
+      "index_after": 2
+    },
+    {
+      "case": "dashboard_45_index1",
+      "calls": [
+        {
+          "call": "object_valid",
+          "args": [
+            537359872,
+            537358336,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "scroll_position",
+          "args": [
+            537359872,
+            537358336,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "animate_scroll",
+          "args": [
+            537359872,
+            4294966992,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "index_changed",
+          "args": [
+            0,
+            4294966992,
+            0,
+            0
+          ]
+        }
+      ],
+      "index_before": 1,
+      "index_after": 0
+    },
+    {
+      "case": "dashboard_44_index2",
+      "calls": [
+        {
+          "call": "object_valid",
+          "args": [
+            537359872,
+            537358336,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "scroll_position",
+          "args": [
+            537359872,
+            537358336,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "scroll_boundary",
+          "args": [
+            1,
+            0,
+            2,
+            2
+          ]
+        }
+      ],
+      "index_before": 2,
+      "index_after": 2
+    },
+    {
+      "case": "dashboard_45_index0",
+      "calls": [
+        {
+          "call": "object_valid",
+          "args": [
+            537359872,
+            537358336,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "scroll_position",
+          "args": [
+            537359872,
+            537358336,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "scroll_boundary",
+          "args": [
+            4294967295,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "index_before": 0,
+      "index_after": 0
+    },
+    {
+      "case": "dashboard_roll_blocked_by_state",
+      "calls": []
+    }
+  ]
+}

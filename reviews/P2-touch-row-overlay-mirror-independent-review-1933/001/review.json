@@ -1,0 +1,16 @@
+{
+  "review_id": "1933",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-overlay-mirror-interval-traces-1924/001",
+  "candidate_receipt_sha256": "37574281ff9157917bd6a72a01e6b0a73989fb590c21f3f92661ab3b2aa0f8bb",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Source and all receipt file hashes match. Isolated replay reproduces the stored 72 fixture traces exactly. Original 8680, CRC, and provider/copy instructions execute without helper interception.",
+    "Fixtures set current row at E000; mapping reaches primary prior row E080, and the decoded mirror displacement is +0x100, reaching E180. The primary prior row has bad CRC. Mirror cases vary valid versus bad CRC and overlay intervals around [0,64), while scratch overlay [256,257) does not overlap. Output buffer, status, and SP assertions match the trace model.",
+    "A valid mirror provides the clipped bytes and returns zero. A bad mirror leaves output unchanged, returns 0x093E0001, and that failure remains at the final current candidate. The candidate confines this to the specified prior-row path and fixed geometry."
+  ],
+  "limitations": [
+    "Trace-only evidence for fixed rows and context. No generalized mirror/interval algorithm, mutable callback behavior, physical storage, concurrency, or canonical admission is established."
+  ]
+}

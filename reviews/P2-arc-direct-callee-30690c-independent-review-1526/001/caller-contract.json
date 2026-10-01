@@ -1,0 +1,10 @@
+{
+  "caller_packet": "arc-boot-from-sleep-recovery-1474/001",
+  "call_site": "0x00302cc0",
+  "instruction": "bl.d -> 0x0030690c",
+  "delay_slot": "0x00302cc4: st.as r0,[r1,72]",
+  "argument_at_call": "r0 is XBfu(M32[0x00f0383c],88), from caller instruction at 0x00302cb6",
+  "delay_store_effect": "r1 was advanced by prior st.ab from 0x00f00840 by 0x90 to 0x00f008d0; .AS word-scaled offset 72 stores that r0 value at 0x00f009f0 before the helper executes.",
+  "helper_input_use": "The callee first replaces r0 with 0x0080fb70, so the prior r0 value is not read by the helper instructions.",
+  "caller_effect_limit": "The computed caller field and store are byte-level observations; their hardware or API meaning is not assigned."
+}

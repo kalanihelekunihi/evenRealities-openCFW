@@ -1,0 +1,19 @@
+{
+  "review_id": "1533",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-status-wait-6608-1532/001",
+  "candidate_receipt_sha256": "33d9707ffac36e45e314d2303407442279741bc959a04293b61b7986d7d923a9",
+  "candidate_pseudocode_sha256": "c353448cf9abc8fb189e071e94beacf1019d662dcf8c0de0ac6e1343afa2a9e0",
+  "candidate_replay_sha256": "37e097d31b3500431bdd0ddc6bd4687652d822de44a86243a8d09cdee92325a4",
+  "candidate_disassembly_sha256": "7e386873ddc8247872e6effa412501bc3d0f4532f666e2ac613d647474162c10",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Verified exact 66-byte body and 32-instruction extent with GNU ARM objdump; candidate's instruction listing agrees.",
+    "Confirmed mode 2/3 mask and expected-value derivation, other-mode full expected value, fresh descriptor/config/peripheral pointer loads, status read and mismatch/zero-budget/delay branches, ignored helper return, and 24-byte saved-register frame.",
+    "Isolated Unicorn replay passed all 54 original-instruction fixtures, asserting status reads, delay calls, return value and SP. Only the unavailable Capstone count/list-generation portion was removed from the copied harness; the exact candidate replay is preserved as replay-original.py."
+  ],
+  "limitations": [
+    "A324 is controlled; status transitions/MMIO are synthetic. Physical polling and time units are not established. No canonical admission."
+  ]
+}

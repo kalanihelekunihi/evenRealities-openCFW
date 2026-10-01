@@ -1,0 +1,18 @@
+{
+  "review_id": "1470",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-packet-builder-base-flow-1469/001",
+  "candidate_receipt_sha256": "0c5b5b541ac359baedb49a5cf3b4d465e680c4cb0cd8e3f80cf331e569794471",
+  "candidate_pseudocode_sha256": "b956bcf8aad8fe418d12058646a6ef599f56b235ffbb8bed43937d7222966b08",
+  "candidate_replay_sha256": "e9d7e74210a3bfa4dd977635176253064b5fac41acac60fc04f45ffff8bfc17d",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independently replayed all 18 original-instruction fixtures; the 5548/5188 call order and arguments, iteration counts/strides, incidental final R0, SP and return PC assertions all pass.",
+    "Decoded the full [0x56A4,0x5868) body and confirmed mode+117 mapping selection (2=>+100, 5=>+109, default=>+99), second mapping selection from mode+116, group-dependent output/index fields and iteration count. Mode-zero fixture records use context+100 as mapping.",
+    "Confirmed group 1 adds 20 before the 5188 call then advances by 24; group 0 uses its 28-byte stride. The index table halfword loads select a stride-144 record/subrecord, while the empty-list fixtures keep extra mask loops inactive as claimed."
+  ],
+  "limitations": [
+    "Fixtures use empty lists and record mode zero, so extra-list/subrecord masks and nonzero record-mode mappings are not exercised here. 5548/5188 are controlled; full contracts and canonical admission remain open."
+  ]
+}

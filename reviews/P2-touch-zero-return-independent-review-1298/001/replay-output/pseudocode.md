@@ -1,0 +1,3 @@
+# Touch 3EE0 zero-return routine
+
+The eight-byte body 3EE0..3EE8 pushes R0..R3, sets R0 zero, adds 16 to SP and returns through LR. It preserves R1..R3 and restores SP, leaving the four incoming argument words below the restored stack pointer. There is no helper call or pointer dereference. Sixteen original-instruction fixtures cover all combinations of zero and all-ones arguments, verifying registers, frame restoration and discarded stack contents. Original application caller passes three flash literals. No meaning is inferred from the routine's zero return; no canonical admission or C implementation.

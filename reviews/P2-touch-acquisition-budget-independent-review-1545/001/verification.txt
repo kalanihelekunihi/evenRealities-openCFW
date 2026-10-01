@@ -1,0 +1,9 @@
+Independent review of touch-acquisition-budget-7288-1544/001
+
+Candidate receipt SHA-256 d07ef0c2e9ac7bcad3bd23d8d508691c791d011344a3b20110c0b2520e2770f1; pseudocode 53dc83a2a885e05c2949cd9f4b545830fadf1819ec67065cba6849faa5fe354c; replay 901da2c390277ad2a5029030e8b4e89b67b44c9005a649706bec01cb93777f30; source 371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87.
+
+GNU ARM objdump independently confirms the 112-byte body 0x7288..0x72F8 (55 instructions). R0 selects a 144-byte record from descriptor+12; R1 is not used as an input; R2 is the descriptor. The function loads row halfword +14 and mode byte +33 & 3, forms wrapped base from context halfwords +48/+50 and byte +83, adds `(width>>2)` times the mode-specific pair at +62/+66 or +64/+68, then adds `width*(context byte +77 + row halfword +44)`. Mode 2 doubles the result. It multiplies by record byte +132, calls original A6C0 with divisor 46, multiplies quotient by 5 modulo 2^32, returns it and restores its 24-byte frame. It makes no acquisition call and no non-stack stores.
+
+Isolated Unicorn replay passed 108 fixtures across three record indices, four modes, three patterned seeds and three factors; original A6C0 executes. Capstone is absent in the replay runtime; only Capstone decode/list generation was removed from the copied harness. Original Unicorn execution/assertions were retained, and objdump independently verified the full instruction listing. The exact original replay is preserved.
+
+PASS_SCOPED. Pointer/index validity is a caller obligation and physical time units remain unknown. No canonical admission.

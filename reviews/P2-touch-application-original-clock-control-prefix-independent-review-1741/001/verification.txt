@@ -1,0 +1,5 @@
+Review 1741 — PASS_SCOPED
+
+Bound to touch-application-original-clock-control-prefix-1740/001, receipt SHA-256 66e14d89564a7b221ed218d34915bd725f2c3885a7fbcad0be7b954165c4cb46. I reran the script in /tmp/review1741-independent; its replays.json and budgets.json are exact matches.
+
+Observed entries confirm original 9D90/9DDC execute once each. The finalizer snapshots 0x40030034 and 0x40030018 immediately on entry, then checks the resulting words using FFFFF0FF and 00000F0F. The latter is an AND literal, not a complement mask. Only 9E18 is controlled in the clock sequence, with a synthetic sample of 17 and immediate zero return. This does not demonstrate readiness or physical clock behavior.

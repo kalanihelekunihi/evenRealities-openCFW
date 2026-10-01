@@ -1,0 +1,20 @@
+{
+  "review_id": "2087",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-signed-division-flag-traces-2086/001",
+  "candidate_receipt_sha256": "81507e478bf6f6325468a70285fd04bbbf7edbed325d67b6bccede865dcc538c",
+  "candidate_pseudocode_sha256": "d48e5d10d4489a8564f2eeebb67e82399a4efcc04bc2f22f45fd06461c23d8b2",
+  "candidate_replay_sha256": "1cce91309deba82ed7b54ebf0cf5be40490c5fea47b41ed463ec8240d19899bc",
+  "candidate_replays_sha256": "594194f7c5a319fa6c7b0c35de92bdf362dfc6c3d31d0d404f30135ebe57f43d",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "All receipt pins match. Isolated replay reproduced 49 boundary-pair executions, 1,773 checked original ALU transitions, and the reported 172 distinct instruction addresses.",
+    "The replay decodes the original Thumb instructions and computes expected destination values and NZCV from pre-instruction state for the represented MOV/MOVS, CMP, SUBS, ADCS, shifts, REV, RSB, EOR and OR operations. The comparison occurs at the next original instruction hook, after the instruction executed.",
+    "The checked span is within the separately byte-verified A7D4..A9A0 body. The zero path and shared A996 tail are represented as their own bounded path; no helper or PC substitution is used in these flag fixtures."
+  ],
+  "limitations": [
+    "This covers only ALU transitions reached by the 49 boundary pairs, not every instruction or all possible flag inputs. Static operation-ledger review 2085 and functional signed-boundary evidence 2079 are separate dependencies.",
+    "Emulator transition agreement does not establish hardware execution, caller closure, whole-image coverage, or canonical admission."
+  ]
+}

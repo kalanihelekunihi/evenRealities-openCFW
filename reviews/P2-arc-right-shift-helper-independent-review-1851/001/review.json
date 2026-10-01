@@ -1,0 +1,17 @@
+{
+  "review_id": "1851",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/arc-right-shift-helper-1850/001",
+  "candidate_receipt_sha256": "24df35f26c9d4c919918f959431462d854effa701b1fbea9c95c0272d049c145",
+  "body_sha256": "6966275da9c6155dca79967a2a3d767572b8583992f7f9f1f803410de0a04a6f",
+  "pseudocode_sha256": "961d39ec219871926b690c2dabfd1f046a4b856481e86d976292b8d7accb18ed",
+  "checks": [
+    "Candidate verifier passed exact package/record mapping, ELF carrier range, GNU ARC disassembly, branch/delay-slot checks and seven arithmetic fixtures.",
+    "Independently checked the 42-byte range: BMSK immediate 5 applies count modulo 64; zero returns unchanged; counts 1\u201331 shift each half and merge high-word spill in the delayed OR slot; counts 32\u201363 shift the original high word into low and clear high in the delayed slot.",
+    "Boundary fixtures 0,1,31,32,33,63,64 agree with the six-bit mask and split 32-bit shifts. The owned range ends after the clear-high delay instruction; following NOP and stack-check sequence are excluded."
+  ],
+  "limitations": [
+    "No CPU execution, caller/ABI identity, global boundary or whole-record ownership claim. No canonical admission or C implementation."
+  ]
+}

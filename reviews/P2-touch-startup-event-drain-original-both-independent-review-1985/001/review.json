@@ -1,0 +1,19 @@
+{
+  "review_id": "1985",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-startup-event-drain-original-both-1976/001",
+  "candidate_receipt_sha256": "5f69927773e394a3d32ce16b88d172c1cbfceebdd321905c4d639ff74fe3f70e",
+  "candidate_pseudocode_sha256": "4846cae9b29158b465426af138dee4bec5d384cf9195a9e98a11236d1a238acc",
+  "candidate_replay_sha256": "767d32213d7fbb505e6141704854ddc3a46050feea95a1906a93e76fdb993f84",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "All listed artifact hashes and the immutable touch.flash.bin source hash match the receipt.",
+    "An isolated replay regenerated the candidate evidence exactly; the inherited startup trace still reaches 0x3D50 under the documented fixture.",
+    "The original 3A80 both-flags path, 3A38/3568 storage write path, 404C reset, 3EE8 default halfword handling and 3EE0 stubs execute without helper interception in this composition. Recorded logs, cleared flags, PRIMASK 0 and SP 0x2000EFD8 agree with event.json."
+  ],
+  "limitations": [
+    "The clock read hook, flash/status MMIO, and interrupt-context delivery are modeled. This composition does not establish physical timing, storage effects, hardware interrupt delivery, or complete startup behavior.",
+    "No canonical admission."
+  ]
+}

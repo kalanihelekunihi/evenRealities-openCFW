@@ -1,0 +1,23 @@
+{
+  "review_id": "1743",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-clock-readiness-9e18-1742/001",
+  "candidate_receipt_sha256": "86ca080e71781315d379b0d99aa1fbaa7d1032bc0ff715ec8aa7262525948919",
+  "candidate_pseudocode_sha256": "2e4407a3710b3e9555dfc35a82305cf0631727e916490112dd6a4bb6b3c1b626",
+  "candidate_replay_sha256": "d0478661483a0cf44e590370aea2cde19602a39201e5f489d3a92ba1acb0fb32",
+  "candidate_replays_sha256": "d757eb05cbd333fa98eae22ea59ce770b392a6ec0e4a12a4e6f895e6c5c355c1",
+  "candidate_disassembly_sha256": "a6ab609f0139349f78150f8da2aab5b6e3b7c8500b752d17278f2548413aa780",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Receipt and all candidate file hashes match. The exact body is 0x9E18..0x9EF2 (218 bytes); an independent Thumb M-class objdump agrees with the candidate's 103-instruction extent and control flow, with alignment and literal pool excluded.",
+    "An isolated rerun of all 1,024 original-byte fixtures reproduced replays.json byte-for-byte and covered invalid, configuration, start, busy, zero, small, and large paths.",
+    "Independent instruction review confirms unsigned range gate [100, 2,000,000], null-output guard, exact configuration comparison (0x908 and mode masked by 0xF0F equals 0x100), fresh state/counter/measurement reads, start-state writes, signed busy check, both wrapped-product branches, output store and state-byte clear.",
+    "Literal addresses and values, exact access widths, and the non-complemented 0x00000F0F mode mask agree with the original source bytes. The A6C0 division calls receive the operands implied by the pseudocode."
+  ],
+  "limitations": [
+    "Frequency is fixed at 48 MHz and fixture MMIO values are static; physical clock measurement progress, polling termination, concurrent peripheral mutation, alternate frequencies, and invalid mapped pointers are not established.",
+    "Private evidence only; no canonical admission or C implementation."
+  ]
+}

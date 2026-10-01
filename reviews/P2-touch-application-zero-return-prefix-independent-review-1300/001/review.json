@@ -1,0 +1,21 @@
+{
+  "review_id": "1300",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-zero-return-prefix-1299/001",
+  "candidate_receipt_sha256": "763d23f866ff1df41cbce37c715460e030768067c6106901b20125eae9aeb92a",
+  "candidate_pseudocode_sha256": "362479847faf53904ca56ae6ed3e4950fbe5d25edadfc2caf6f3a870178a8088",
+  "candidate_replay_sha256": "2bdb99b189d527833b3ceb48548b486183708ff3f9c2813c8c2800fe8ddc782b",
+  "candidate_replays_sha256": "05a2bf2ae68f19050d5d9f13bd6add318a0324c5f025c7d4c80afcaa83bd3361",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Candidate artifacts and source match their receipt. Isolated original-byte replay reaches 0x3D50, preserving the prior prefix checks and SP/PRIMASK assertions.",
+    "An observation-only hook records the three arguments when execution reaches 0x3EE0; it does not alter registers or PC. The actual routine executes and its zero return continues the caller.",
+    "Observed arguments match the three pinned flash literals in order; actual 3EE0 spill/return semantics are corroborated by the independent 1298 body review. Seven downstream application dependencies are controlled."
+  ],
+  "limitations": [
+    "External clock tables are synthetic; physical SysTick dispatch and full application-loop behavior are not established.",
+    "Private evidence only; no canonical admission or C implementation."
+  ]
+}

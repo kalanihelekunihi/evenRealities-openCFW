@@ -1,0 +1,21 @@
+{
+  "review_id": "2109",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-division-abi-traces-2108/001",
+  "candidate_receipt_sha256": "24cbe47de435187f7016bbe301254bd9f6786d437458e3491498deb10e620fd8",
+  "candidate_pseudocode_sha256": "535e04e4d1169a48d5f1675a2ad9ebce675e3bd3ac9f6022709fabe8cb765051",
+  "candidate_replay_sha256": "897708d42b51ac3ccf05f2f7466e5a31b8370116e68a51a627103aabf4b3b81b",
+  "candidate_replays_sha256": "77bfc2f192690335b8fc1ee8b730d9f64df86b3eecae71a483a810af94f01eb6",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "All candidate pins match. Isolated replay passed 640 original executions: 320 per entry, with the 64 boundary pairs and 256 deterministic random pairs for each signedness mode.",
+    "Every case checked quotient/remainder, R4-R11 sentinels, SP restoration, stop/return PC, and LR. Unsigned A6C0 preserved the seeded R12 in every case. Signed A7D4 changed R12 in some cases, consistent with its IP sign-state use.",
+    "For nonzero denominators LR remained the seeded caller value 0x09000001. For zero denominators the body reached the A9A8 observation hook and returned through its saved PC while LR retained the BL return address: 0xA7C9 for the unsigned path and 0xA99F for signed. These values agree with the BL locations and pushed-LR/POP-PC instruction flow.",
+    "The unsigned and signed source spans use the pinned touch:flash image and the established 0x3300 loaded base. The trace records normal Thumb execution; no function interception substitutes for either division body."
+  ],
+  "limitations": [
+    "Register evidence is bounded to seeded values and the tested input set. R2/R3 and NZCV are covered by separate operation/flag evidence; this packet does not independently prove all values for those registers or flags.",
+    "Atypical LR values, exception entry, physical execution, caller closure, image-wide completeness and canonical admission are excluded."
+  ]
+}

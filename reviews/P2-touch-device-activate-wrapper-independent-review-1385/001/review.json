@@ -1,0 +1,19 @@
+{
+  "review_id": "1385",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-device-activate-wrapper-4abe-1353/001",
+  "candidate_receipt_sha256": "c29a78a5762a7a9e88f1ca2c669fc2706745f870023e246f6017840dec4ba44e",
+  "candidate_pseudocode_sha256": "a2816eeb95ad43b38a6eaf566d00bd6c8872c6b8392e17430553cdfc9d8fae78",
+  "candidate_replay_sha256": "098c050c69e8c2afe24f8ff92bd480215926acec5270156703679595e8c9eddf",
+  "candidate_replays_sha256": "286b3d07106fc9aa8f9111994d2b8e3ebc776a18673b3ef604313993a16c63eb",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independent decode confirms 22 instructions over 0x4ABE..0x4AF2 (52 bytes), excluding the adjacent halfword. The wrapper saves four registers, returns nonzero 7D92 status early, otherwise calls 58F8 then 71C8 and retains the latter status with ORRS R4,R0; it freshly reads descriptor+4 and byte+7, conditionally calls 7E04, reloads descriptor+4, stores one, and returns the retained status with restored SP.",
+    "The immutable replay was isolated and all 27 combinations pass. It varies first and second helper status values and initial flag bytes; exact reached-call order, flag store, result, and SP match. The 58F8/7E04 returns are ignored, as decoded."
+  ],
+  "limitations": [
+    "Four deeper helpers are controlled without memory effects. The tests do not exercise helper-induced pointer mutation, pointer validity, actual activation, or concurrency. No canonical admission or C implementation."
+  ]
+}

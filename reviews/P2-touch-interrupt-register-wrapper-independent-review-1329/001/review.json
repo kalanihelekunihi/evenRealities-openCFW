@@ -1,0 +1,20 @@
+{
+  "review_id": "1329",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-interrupt-register-wrapper-a2a8-1328/002",
+  "candidate_receipt_sha256": "77c543614030fba8902843901f252017765a100047374a9792976e3a58b55ac1",
+  "candidate_pseudocode_sha256": "58600c3c80af930c0539a6be183d793d441a6e3c4aa5337b41481e0d97e73618",
+  "candidate_replay_sha256": "e1a0cb2fe40438257aae1f8095ccd742926947f291b1c00600e1f2c539fe8e91",
+  "candidate_replays_sha256": "8a56e30d0e78ef9ee1c5753b7c0c7c0acc60ed94c38c2b67467f3015337fe465",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Candidate/source pins verify. Independent decode confirms A2A8..A2E4 and literal words A2E4=E000ED00, A2E8=20000400, A2EC=00560001. Null descriptor returns the literal; priority >3 reaches BKPT; valid priority sign-extends descriptor halfword, calls A214, compares fresh VTOR against RAM vector base, conditionally calls A274, then returns zero.",
+    "Isolated replay passes all 36 combinations and verifies helper calls/arguments, priority guard, VTOR branch, result and restored SP. The two deeper helpers return controlled all-ones values."
+  ],
+  "limitations": [
+    "Deeper priority/vector writes, invalid pointers and physical interrupt dispatch are unresolved.",
+    "Private evidence only; no canonical admission or C implementation."
+  ]
+}

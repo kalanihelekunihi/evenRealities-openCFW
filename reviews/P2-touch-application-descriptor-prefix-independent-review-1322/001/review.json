@@ -1,0 +1,21 @@
+{
+  "review_id": "1322",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-descriptor-prefix-1321/001",
+  "candidate_receipt_sha256": "814f1a56b41024c516fe16198ded4379d35e4f51413934f6a556bba8a0c37889",
+  "candidate_pseudocode_sha256": "40389e3e65ceef91fb6572eeee314ad240b537f7c2fcb8e6d46b5f867413d532",
+  "candidate_replay_sha256": "9e411bdfe654370f16c477da53b50632780787a728a1ba73203ad7cfea23b7fa",
+  "candidate_replays_sha256": "94d1890559879c78d9ab4d7523c7aaec99283faae6e9b9694c7835a9b8f0c613",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Candidate/source pins verify; isolated prefix replay reaches 3D50 with prior startup checks intact. Independent caller disassembly confirms 3CA4 loads descriptor pointer literal and calls actual A3B0.",
+    "Descriptor is loaded from the pinned image copy at 200004CC with expected entry/index/data/priority bytes; no injected descriptor is used. A3B0 executes against prior node 20000850. Given new priority 2 versus old priority 255, observed head and four link fields match insertion at head.",
+    "Four deeper storage calls and four later app dependencies remain controlled; external clock tables are synthetic. Physical scheduling/dispatch and timing are not established."
+  ],
+  "limitations": [
+    "This fixture verifies one concrete list insertion state, not all priority-list cases or physical event dispatch.",
+    "No canonical admission or C implementation."
+  ]
+}

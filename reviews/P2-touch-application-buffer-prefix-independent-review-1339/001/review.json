@@ -1,0 +1,21 @@
+{
+  "review_id": "1339",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-buffer-prefix-1338/001",
+  "candidate_receipt_sha256": "a6cb761c4368bcd9fa69bb1606f6bbe7fff627b650e9dc64e88b5ced11c09f23",
+  "candidate_pseudocode_sha256": "e316c6730c85586300f3c3011cde45ff89d5b22f99598c6d40f8a0215e264c16",
+  "candidate_replay_sha256": "68c0f6da7e39fff970835439935a210c5a4150050314015d0c756840a5b5882c",
+  "candidate_replays_sha256": "8b2a49352358d06df4ead079dddb8b3148d961b3c930507dbcc71f10b91587e9",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Candidate/source pins verify and isolated prefix replay reaches 3D50 with all prior assertions. The actual 9AD8 and 9AF0 adapters execute through the actual interrupt registration path.",
+    "The seven context fields at offsets 0x28..0x40 are asserted as 200009B0, 16, 0, 0, 200009A0, 16, 0, matching wrapper field offsets and the caller-supplied buffers.",
+    "Only 98F4 is controlled inside 3678; four deeper storage helpers and three later app boundaries remain controlled."
+  ],
+  "limitations": [
+    "Peripheral buffer consumption, storage behavior, physical timing/interrupt dispatch and complete app-loop behavior are not established. External clock tables are synthetic.",
+    "Private evidence only; no canonical admission or C implementation."
+  ]
+}

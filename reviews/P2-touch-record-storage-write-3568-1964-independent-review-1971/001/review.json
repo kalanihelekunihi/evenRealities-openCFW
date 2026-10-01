@@ -1,0 +1,20 @@
+{
+  "review_id": "1971",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-record-storage-write-3568-1964/001",
+  "candidate_receipt_sha256": "32979738664df23e6ac4f731a64035387ff677c607f25d41f9c76bca26a29ecb",
+  "candidate_pseudocode_sha256": "e206e416682b48d5c852122543619f4e98ba43c5fcc4e27d4feb66bc56429770",
+  "candidate_replay_sha256": "049585a9f271b4581a6316873cdc902dfc58a87803a0ae94881e186e6170d1ae",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Recomputed every receipt file hash and source hash; all match.",
+    "Independently decoded [0x3568,0x35A4): 60 bytes / 29 Thumb instructions, with the three literal words outside the body.",
+    "Isolated replay executed 108 original-instruction fixtures; generated replay rows match the candidate exactly.",
+    "The instruction order supports null-data rejection, wrapped unsigned end check, enable-byte gate, 8AAC dispatch, and the two accepted status values returning zero; remaining dispatch statuses normalize to 3."
+  ],
+  "limitations": [
+    "8AAC is controlled, so downstream write/physical-storage behavior is not established.",
+    "Private evidence only; no canonical admission."
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "review_id": "1919",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-storage-reset-unaligned-width-traces-1912/001",
+  "candidate_receipt_sha256": "36bf33d256843890328ef96c88f68eb47f7e6d7bc2b48af215632b87a994532b",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Receipt/source binding and 240-fixture artifact hashes agree. Isolated replay passes all fixtures and byte-matches candidate replays.json.",
+    "Traces execute original sequence/checksum/pointer routines with only 8554/890C write calls controlled. Across widths 64, 127, 128, and 129, pointers advance by width rounded down to a multiple of four, while the wrap limit is based on total captured width (N\u00d7width). Mirror offset uses N times the rounded step. Fixture-derived addresses match these formulas for count\u00d7copies totals and show wrap behavior; write failure order and current-row/result observations match the recorded bounded traces."
+  ],
+  "limitations": [
+    "This remains trace evidence for the finite tested combinations, not full extended-mode pseudocode or coverage. Helpers for writes are controlled; dimensions beyond listed widths/counts/copies, callback mutation, physical storage/hardware and canonical admission remain unresolved."
+  ]
+}

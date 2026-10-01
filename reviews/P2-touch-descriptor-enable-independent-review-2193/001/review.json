@@ -1,0 +1,19 @@
+{
+  "review_id": "2193",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-descriptor-enable-6140-2190/001",
+  "candidate_receipt_sha256": "739d12fa309543df5febabcd0b0b46e11afcee0f7ce14e31b7d2df79b0ebe054",
+  "candidate_pseudocode_sha256": "18b58218ca55bf16fd5b55ebbd10fafa3f072609be841c89b54d879e47854dea",
+  "candidate_replay_sha256": "0b502bfb65690d4df41e45d1e10d2bc9ee38b38a98b26b3b2c8ab8f90c512fee",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "The source and every receipt file hash match. The independently sliced body [0x6140,0x614C) is 12 bytes and matches the declared hash; independent Thumb/M-class decoding matches the stored listing.",
+    "An isolated replay regenerated all 70 fixtures exactly. It verifies full surrounding descriptor bytes, exactly one 32-bit store at descriptor+8 with old_word OR 0x81, R0 retaining the incoming context pointer, and unchanged SP across boundary values and 64 deterministic random words.",
+    "Decoded instructions agree with the pseudocode: load descriptor from context+4, load its word at +8, OR bits 0 and 7, store the full word, and return without calls or a stack frame."
+  ],
+  "limitations": [
+    "The fixtures use separate mapped context and descriptor buffers. Null/fault behavior, aliasing, concurrency and physical meaning of the set bits are not established.",
+    "No canonical admission."
+  ]
+}

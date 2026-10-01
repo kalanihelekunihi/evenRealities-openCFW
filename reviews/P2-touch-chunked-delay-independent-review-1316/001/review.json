@@ -1,0 +1,21 @@
+{
+  "review_id": "1316",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-chunked-delay-a2f0-1315/001",
+  "candidate_receipt_sha256": "7b51116f0e8ef14c5ca9286c4c87c9044cc5d4cdf4f7a39695dd8aa5cd163593",
+  "candidate_pseudocode_sha256": "6a85a38cb030e0e5ad86fa638acb366d829bef87811c715c6c8be02a030c759a",
+  "candidate_replay_sha256": "3c520615930d190cde336a9257870d19191297742aeff3948da4368210dbfab1",
+  "candidate_replays_sha256": "eed643827ba54f458a9f7925f852b24cd73d91590f52b4aab6d069d17072170e",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Source and candidate pins verify. Independent decoding confirms the 40-byte body A2F0..A318; literals at A318/A31C/A320 are respectively 0x2000086C, 0xFFFF8000, and 0x20000874.",
+    "The loop compares unsigned remaining against 32768, calls 4480 with the freshly loaded chunk value, subtracts 32768 modulo 2^32, then multiplies remaining by freshly loaded scale modulo 2^32 and calls 4480 once. The frame restores and the last helper return is zero in tested fixtures.",
+    "Isolated original-instruction replay passes all 18 cases and matches the separate loop-count/argument model; hook only observes 4480 arguments. RAM-derived inputs are synthetic."
+  ],
+  "limitations": [
+    "Unicorn call-loop timing is not physical elapsed time; async RAM changes are untested.",
+    "No canonical admission or C implementation."
+  ]
+}

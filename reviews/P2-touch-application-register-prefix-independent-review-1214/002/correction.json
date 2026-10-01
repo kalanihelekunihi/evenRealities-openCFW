@@ -1,0 +1,15 @@
+{
+  "review_id": "1214/002",
+  "decision": "CORRECTION_TO_1214_001",
+  "predecessor_review": {
+    "path": "reviews/P2-touch-application-register-prefix-independent-review-1214/001/review.json",
+    "sha256": "0ba5ca8579a695cc1ed181fd5d49459cff51e6f3db9f30e5f572906cb7a3ebe9"
+  },
+  "candidate": {
+    "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-register-prefix-1213/001",
+    "receipt_sha256": "fe3aa366d375ae8db03b23646be4c9f0b8c56a04150a32e4df4a1255f68852cf",
+    "replays_sha256": "2faf76b7adc230dd80719bfc85c00e3a182cc58c048878427778f83f2774cf9c"
+  },
+  "correction": "The A104 write values in 1214/001 and its completion message omitted the packed low-byte mode field. Correct ordered writes at 0x40010000 are [0x40000041, 0x8000FF41, 0x40000080, 0x8000FF80, 0x400000C0, 0x8000FFC0]. A148 contributes 0x40000041, 0x40000080, 0x400000C0; A104 contributes 0x8000FF41, 0x8000FF80, 0x8000FFC0. The candidate replay and its six stores were correct; only the review's written A104 values were wrong. The PASS_SCOPED decision and all other scope/limitations remain unchanged.",
+  "verification": "Converted all six candidate replay write values from decimal to hexadecimal and confirmed they match the expressions for the three actual A148/A104 call pairs. The isolated replay JSON remains exactly equal to the candidate rows."
+}

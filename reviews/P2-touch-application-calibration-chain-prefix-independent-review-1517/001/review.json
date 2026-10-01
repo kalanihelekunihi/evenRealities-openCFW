@@ -1,0 +1,18 @@
+{
+  "review_id": "1517",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-calibration-chain-prefix-1516/003",
+  "candidate_receipt_sha256": "cff0cf0ade2d8cc04397eab031cc06c0907d1dab45015b26c288a43fd9481ada",
+  "candidate_pseudocode_sha256": "1c59ee650da854d05de16794127a137b5ba623a01e851fccd750906b2f6931cd",
+  "candidate_replay_sha256": "2277ae2aaa273f8c1bc29c0f76b29b5b21096fea0457f5b915b05a628a92103f",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Replayed the exact cumulative startup harness in isolation; it reached 0x3D50 and passed inherited assertions.",
+    "Confirmed original 0x7BC0, 0x6AC0, 0x6928 and 0x6980 execute for three rows, with nine state-helper entries and the asserted setup/completion sequences and call order.",
+    "Verified the exact remaining controlled boundaries, including 0x6A80, 0x9178, 0x7288 and 0x5FA4, and confirmed 0x5FA4's controlled return 1 feeds the modeled-ready completion path."
+  ],
+  "limitations": [
+    "RAM/MMIO and external clock tables are synthetic; listed helper boundaries remain controlled. This is bounded startup-path evidence, not physical acquisition or whole-firmware coverage. No canonical admission."
+  ]
+}

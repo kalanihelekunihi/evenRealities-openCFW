@@ -1,0 +1,20 @@
+{
+  "review_id": "1341",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-original-peripheral-prefix-1340/002",
+  "candidate_receipt_sha256": "1d6760c8e09431ebe8a51a17e39b3ae9a75d9748028ae11b49c68ebeaffda079",
+  "candidate_pseudocode_sha256": "7a3aca96a7d055e385cb758eff5c3edad71bf6ca92417d3c99d7c328c85b4a6e",
+  "candidate_replay_sha256": "d0eadd8397be40fa8f55f170a64a0fa7e51d5aca0c4f9cb97f7fdef787ea788f",
+  "candidate_replays_sha256": "3143f1fde1731af2a954f958d05d61169db6f585ce8921fbfdf165e930e77963",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Pins verify; isolated prefix replay passes to 3D50 while preserving prior checks. The actual 98F4 body executes from configuration address B374 with base 40250000 and context 200008EC; the original configuration bytes are supplied from flash, not synthesized.",
+    "Observed original PCs and final peripheral writes match the fixture. The initial high bit at 40250000 is augmented to 0x80000100 because configuration byte at B374+8 is one; this matches the corrected assertion. No substitution occurs inside 3678."
+  ],
+  "limitations": [
+    "This is a single supplied configuration path trace; standalone 98F4 pseudocode, full guards, and alternate branches remain outstanding. Four deeper storage and three later application calls remain controlled.",
+    "No physical peripheral effect, timer/interrupt dispatch, external table behavior, or complete application loop is established. No canonical admission."
+  ]
+}

@@ -1,0 +1,5 @@
+Review 1759 — PASS_SCOPED
+
+Bound to touch-storage-initializer-original-geometry-1758/001, receipt SHA-256 53e69038b5781808f7871e9c55fc74142b065a2ba4c861790b52872c7695458a. I reran the 48 original-instruction compositions at /tmp/review1759-independent; replays.json matched exactly.
+
+The subtle mode relationship checks out across both original bodies: 828C treats any nonzero mode byte as its direct-width path, but 898C uses equality to one for retaining the width. Thus mode 2 and 255 return a full width from 828C and then halve it in 898C. Zero mode with length 1000 and widths 64/128 rounds geometry to 1024 before that halving. The remaining named callees are explicit controls, not inferred contracts.

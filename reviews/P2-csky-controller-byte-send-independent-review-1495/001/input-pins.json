@@ -1,0 +1,59 @@
+{
+  "schema": "csky-controller-byte-send-input-pins-v1",
+  "image": {
+    "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage1.bin",
+    "bytes": 12288,
+    "sha256": "9546164f32680de47fa99ba85ba08a3c538822260957de6c1baee772638da464"
+  },
+  "tool": {
+    "path": "g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-objdump",
+    "version": "GNU objdump (GNU Binutils) 2.27",
+    "sha256": "7150f7ffc2ac163f3d2d465620e5dac96df4b29411e5d0944419c41657cc2382"
+  },
+  "mapping": {
+    "status": "conditional BINH-A source-coordinate proposal only",
+    "formula": "child file offset = runtime - 0x10000000 + 0x18",
+    "runtime_range": [
+      "0x10000B5C",
+      "0x10000BBC"
+    ],
+    "child_file_range": [
+      "0xB74",
+      "0xBD4"
+    ],
+    "warning": "does not establish physical loading or canonical admission"
+  },
+  "dependency_receipts": {
+    "analysis/csky-wait-bit-clear-1482/001/receipt.json": "f09b777316ac63dae5ff251ebd3d2c033e74c615edd44f40d85f3c5a2ab3e78d",
+    "analysis/csky-command-byte-sender-1465/002/receipt.json": "c55608292b21b1c79d5a3113b1cb7575a02084d3b666b3e5709af603f22b4cf5"
+  },
+  "isa_semantics_sources": {
+    "manual": {
+      "path": "third-party/tools/ghidra-csky/C-SKY_ISA_Reference_Guides/C-SKY ISA User Guide 1.15.12 (2014).pdf",
+      "sha256": "3d4bb9978e40eb9ee3741fcb21c8c319702925068672a6fa7280cda96b05a2be"
+    },
+    "dsp_sleigh": {
+      "path": "third-party/tools/ghidra-csky/C-SKY/data/languages/32b_dsp.sinc",
+      "sha256": "be0cd035c6574e0fddcac4d0740367b67bd4921e0033bea21e580f5e9484e490"
+    },
+    "branch_sleigh": {
+      "path": "third-party/tools/ghidra-csky/C-SKY/data/languages/32b_branch.sinc",
+      "sha256": "0dfe9d60290555f94f2cc1496ad07d7ddf2f7c2d96bf6e145ea86906c80df49b"
+    },
+    "memory_sleigh": {
+      "path": "third-party/tools/ghidra-csky/C-SKY/data/languages/32b_memory.sinc",
+      "sha256": "101a0635c46e76ee1a7579522d1598897ce77779f5b04efde3c6a51dd6108899"
+    },
+    "data_sleigh": {
+      "path": "third-party/tools/ghidra-csky/C-SKY/data/languages/32b_data.sinc",
+      "sha256": "3dde82aa3bc3bfbb70dc8950705cd0c2a59173e924ee6f92f9005ed880d5210b"
+    }
+  },
+  "used_semantics": [
+    "LDBI.B loads one byte through R1 and increments R1 by one; unsuffixed form zero-extends the byte",
+    "LSLI is 32-bit left shift; count<<16 is modulo 2^32",
+    "BEZ repeats while bit1-masked word equals zero",
+    "BNEZ repeats while completion word is nonzero",
+    "word loads/stores are 32-bit; byte load is one byte"
+  ]
+}

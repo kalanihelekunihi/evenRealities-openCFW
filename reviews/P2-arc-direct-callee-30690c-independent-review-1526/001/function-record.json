@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "task_id": "arc-direct-callee-30690c-1512",
+  "image_id": "ble_em9305:record-3",
+  "isa_mode": "ARCv2 EM",
+  "scope_kind": "bounded function candidate",
+  "entry": "0x0030690c",
+  "end_exclusive": "0x00306922",
+  "body_range": {
+    "record3": [
+      17676,
+      17698
+    ],
+    "length": 22,
+    "sha256": "a40f8778cf56af535b68c5ea4cd3ab23c8a4e921ed3717c6ee1095923189377a"
+  },
+  "extent_evidence": [
+    "The symbol catalog seed proposes exact range 0x0030690c..0x00306922 (22 bytes), naming IRQ_EnableAfterRestore; its cited SDK report path is absent in this workspace and is not treated as inspected evidence.",
+    "Authenticated bytes decode contiguously from mov_s at 0x0030690c through j_s [blink] at 0x00306920. The return transfer is non-delayed in the ARC opcode decode.",
+    "Adjacent catalog entries end at 0x0030690c and start at 0x00306924. The 2-byte seam 0x00306922..0x00306924 is retained as unassigned; context disassembly and bytes are pinned. No global alternate-entry census performed."
+  ],
+  "caller": "Candidate 1474 direct BL.D at 0x00302cc0 targets 0x0030690c; delay slot 0x00302cc4 stores r0 before helper execution. r0 contains XBfu(status_word,88) from 0x00302cb6. The helper overwrites r0 at its first instruction, so incoming argument is unused by observed body.",
+  "status": "private P2 candidate; no canonical admission; no C implementation"
+}

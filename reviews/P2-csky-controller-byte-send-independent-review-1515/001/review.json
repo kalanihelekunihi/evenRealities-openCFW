@@ -1,0 +1,18 @@
+{
+  "review_id": "1515",
+  "status": "PASS_STATIC_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-controller-byte-send-1496/001",
+  "candidate_receipt_sha256": "f6547f68dce139edefddb81669d8ebe2b17bef1ce0f290b608c776c45335074f",
+  "candidate_pseudocode_sha256": "38092578a1c300cb9a7b86c862479a5c9e817b28eb8d630dbbef6e640df9f1c6",
+  "candidate_body_sha256": "91a2da5d219be5348f3a50da658da92a87f603db816f6cd2fa3eef3e65d74bd8",
+  "source_sha256": "9546164f32680de47fa99ba85ba08a3c538822260957de6c1baee772638da464",
+  "checks": [
+    "The isolated verifier passes source/tool/dependency pins, complete 96-byte body and 39-instruction geometry, three full-image direct callers, and all nine static MMIO/input traces.",
+    "Instruction-by-instruction review confirms raw count and shifted count writes, end-pointer order, bit-1 ready gate at +0x28, byte load with post-increment, zero-extended word write to +0x60, full completion-word zero polling, B4C before/after waits, and return zero.",
+    "Caller paths prove CEC and D38 pass zero pointer/count on the fallthrough reaching these calls. D42 supplies SP+4 and count 2. All return values are ignored. The MMIO clear address computes as A2000080+74=A20000F4."
+  ],
+  "limitations": [
+    "Trace cases are controlled/static rather than live C-SKY routine execution. B4C has its own scoped review 1495; controller identity/timing and physical effects are not established. Wait loops are unbounded. Mapping remains conditional and no canonical admission is made."
+  ]
+}

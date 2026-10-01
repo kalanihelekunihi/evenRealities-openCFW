@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-storage-initializer-original-chain-independent-review-1783",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "scope": {
+    "candidate": "analysis/touch-storage-initializer-original-chain-1778/003",
+    "code_span": [
+      "0x898c",
+      "0x8a34"
+    ],
+    "reviewed": "The outer 898C..8A34 body is 168 bytes / 79 Thumb instructions. The replay covers four mode bytes, three enable values, two validation responses and two provider widths. It reproduces all 48 recorded call sequences, 32-byte contexts, return values, SP and stop-PC checks. Disassembly confirms the actual A9D4 call is followed by the provider clear/copy, geometry, size calculation, validation and conditional row-selection call. Zero sequence in the synthetic row buffer means this packet does not test checksum-selected rows."
+  },
+  "pins": {
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "candidate_receipt_sha256": "79b24a52ba714c1292dc85ca68b239c3c8b18fd7420edc55f7c1bdc9129d850d",
+    "body_sha256": "6f8973b6e856d54bda4d0d5b5bec1aed8368285eb4fef5f3db0ff5731e386f51",
+    "candidate_replays_sha256": "7f1183db73313af0d9290a16d48a2d204d4e0e1dc155baebd619f5d0f2736246"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "The outer 898C..8A34 body is 168 bytes / 79 Thumb instructions. The replay covers four mode bytes, three enable values, two validation responses and two provider widths. It reproduces all 48 recorded call sequences, 32-byte contexts, return values, SP and stop-PC checks. Disassembly confirms the actual A9D4 call is followed by the provider clear/copy, geometry, size calculation, validation and conditional row-selection call. Zero sequence in the synthetic row buffer means this packet does not test checksum-selected rows."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "All candidate receipt file hashes and the source image hash match. An isolated replay was run from a uniquely named temporary copy; its generated replay JSON is byte-identical to the candidate's replays.json."
+    }
+  ],
+  "limitations": [
+    "The three provider callbacks and A9D4 are controlled in this candidate. Physical storage, nonblank row scans and concurrent mutation are out of scope.",
+    "No canonical acceptance or coverage promotion is made."
+  ],
+  "checks": [
+    {
+      "command": "candidate receipt and source/input pin verification",
+      "result": "PASS"
+    },
+    {
+      "command": "independent instruction review and decode geometry",
+      "result": "PASS"
+    },
+    {
+      "command": "isolated replay of all fixtures",
+      "result": "PASS; exact replay JSON match",
+      "artifact": "isolated-replays.json"
+    }
+  ],
+  "review_artifacts": {
+    "isolated_replays_sha256": "7f1183db73313af0d9290a16d48a2d204d4e0e1dc155baebd619f5d0f2736246"
+  },
+  "canonical_or_coverage_change": false
+}

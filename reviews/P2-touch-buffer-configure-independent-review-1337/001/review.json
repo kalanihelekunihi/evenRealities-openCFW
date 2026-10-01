@@ -1,0 +1,20 @@
+{
+  "review_id": "1337",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-buffer-configure-1336/001",
+  "candidate_receipt_sha256": "8009fa5ef2e872163a687b53eac2280b5db4a112e58f685454ff27f7b489782b",
+  "candidate_pseudocode_sha256": "7d8e72a7654fa1f18cbf0cde336598e2dfbe3caf05394fd39dd3922e40232d0a",
+  "candidate_replay_sha256": "a7a6c2a20c19c036889246d8ae956ac36dcbf0cbe0524a839ae7122a9be9b17c",
+  "candidate_replays_sha256": "5f665ec3d1e2b88a3962e913655f08aaefeca8f6a1e8e91b0942309762140a10",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Source/candidate pins verify. Independent decoding confirms the two exact spans, compare order and nonzero-length/null-buffer BKPT guards. Both wrappers store buffer and length at their respective context offsets, zero their additional fields, and return through LR without changing R0.",
+    "Isolated replay passes all 16 fixtures; zero-length null-buffer inputs are accepted, nonzero-length null-buffer inputs stop at the breakpoint, and exact stores/R0/SP are checked. The adjacent 9B06 routine is excluded."
+  ],
+  "limitations": [
+    "No context-pointer guard, invalid-pointer handling, breakpoint continuation, buffer use or concurrent access behavior is claimed.",
+    "Private evidence only; no canonical admission or C implementation."
+  ]
+}

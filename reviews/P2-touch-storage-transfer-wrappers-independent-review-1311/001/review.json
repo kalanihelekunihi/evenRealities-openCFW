@@ -1,0 +1,21 @@
+{
+  "review_id": "1311",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-storage-transfer-wrappers-1310/001",
+  "candidate_receipt_sha256": "f7980abcdd3aaac28eff88e9aac134e2cc616fcfec780c94049553bd0fb6ee32",
+  "candidate_pseudocode_sha256": "789e7b09705faae8d6967715cc7f6885d4bb7f0097c5c5843dbdd8112cbe087d",
+  "candidate_replay_sha256": "9e4a5380110c63d4ea90101c4f653ec97b1166c38376c853e2d603593e6c9249",
+  "candidate_replays_sha256": "6fa3a7750041183d562dad5b255c51c7d9b155c02c080bfefdd825aa856a9dbd",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Candidate and source pins verify. Independently decoded all three bodies and confirmed their exact end addresses, two-word frames, null/readiness branches, storage helper calls, accepted-status comparisons and return conversion.",
+    "For read/write, the assembly uses 32-bit addition of offset and length before unsigned comparison against 256; overflow can wrap, so the candidate correctly avoids claiming a stronger logical-range test. Literal context/status values are pinned outside the instruction bodies.",
+    "Isolated replay passes all 576 fixtures. The three deeper helpers are controlled; when reached, call arguments, result, return path and SP are asserted. Read/write callers pass offset, buffer, length, and context; erase passes context."
+  ],
+  "limitations": [
+    "Pointer validity, deeper storage effects and actual storage success are not established.",
+    "Private evidence only; no canonical admission or C implementation."
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "review_id": "2085",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-signed-division-instruction-semantics-2084/002",
+  "candidate_receipt_sha256": "ac2c5c83e1e56f2c32b7c30a96ed4818989350a11de288f73c542a69aaafbf74",
+  "candidate_pseudocode_sha256": "f76b5ea09a4d047e8e50b310d5d84b7ad6a05625c9ac1fe9446736f671f301ee",
+  "candidate_operations_sha256": "8da2b85cc79a10f7c45d51bc91240c2dae75753163843e9259ce8f7930a3e41f",
+  "candidate_replay_sha256": "e37808de58ade7da973b02a8f96d6bf985a01f66dadb40ad81505a3b664c4e32",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "dependency_receipt_sha256": "e2e2778111825d2bfe7597a4cd9cb6651eb45f5ed2cdb60bff0c829f94e11c5e",
+  "checks": [
+    "All receipt file hashes and the source image pin match. Each of the 229 operation rows matches the original instruction bytes at its mapped source offset. The rows are contiguous from loaded address 0xA7D4 through 0xA9A0 and cover exactly 460 bytes.",
+    "Independent GNU Thumb disassembly of the extracted source span yields the same 229 instruction addresses as the candidate operation ledger. The body begins at 0xA7D4 and ends immediately before the six-byte wrapper at 0xA9A0; shared zero tail A996..A9A0 is not double-owned, and the neighboring A9A6 BX LR is excluded.",
+    "The isolated replay regenerated the candidate artifacts and passed all 229 operation-byte checks and body-geometry checks. Its 320 functional dependency fixtures remain separately pinned to signed-division-boundaries-2078/001, whose independent review is pinned as well.",
+    "The described sign flow is consistent with the byte-backed instruction sequence: denominator sign normalization, original numerator sign handling, quotient-sign XOR in IP, quotient/remainder sign restoration, and the zero-denominator shared tail. The functional dependency includes INT_MIN/-1 and signed-zero boundary cases."
+  ],
+  "limitations": [
+    "This review validates the static instruction ledger, boundaries and the candidate's bounded replay. The separate exhaustive/boundary NZCV trace audit 2087 remains pending; no claim is made that all flags on every possible path have already received independent review.",
+    "The shared A996..A9A0 body, adjacent wrapper and return stub remain separately scoped. No caller closure, canonical admission, physical behavior or whole-image completeness is established."
+  ]
+}

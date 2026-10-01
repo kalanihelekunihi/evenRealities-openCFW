@@ -1,0 +1,5 @@
+Review 1763 — PASS_SCOPED
+
+Bound to touch-storage-size-arithmetic-8200-1762/001, receipt SHA-256 3d9de59b8392a5073b48ce7bbf771b9256746ca34ebaa29273cb7e45c76967f8. The isolated 432-fixture replay at /tmp/review1763-independent produced an exact replays.json match. Thumb disassembly confirms 30 bytes ending before alignment at 821E.
+
+The dataflow implements halfword0*halfword2*(m+(1-m)*n*(f+1)) modulo 2^32. The `1-m` subtraction is word arithmetic and remains non-Boolean for malformed m; no range guard appears in this helper. R4 is preserved and the two-register stack frame is restored.

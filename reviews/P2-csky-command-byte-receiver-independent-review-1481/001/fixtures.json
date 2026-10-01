@@ -1,0 +1,201 @@
+{
+  "schema": "csky-command-byte-receiver-fixtures-v1",
+  "method": "Manual trace against exact original bytes; returned data words and B4C/MMIO status are controlled fixture values, not hardware execution.",
+  "body_sha256": "3709c9c3439611f8c906ee506ceebc69d1003a92765424e5f4e294503ab289ea",
+  "cases": [
+    {
+      "name": "mode 3 receives exactly three bytes",
+      "inputs": {
+        "R0": 3,
+        "R1": "0x20000004",
+        "R2": 3,
+        "data_words": [
+          18,
+          52,
+          86
+        ],
+        "ready_bit2": true,
+        "completion_word": 0
+      },
+      "expected": {
+        "events": [
+          "call B4C()",
+          "u32[0xa2000008]=0",
+          "u32[0xa200004c]=0",
+          "u32[0xa2000000]=3079",
+          "u32[0xa2000004]=0x00000002",
+          "u32[0xa2000010]=1",
+          "u32[0xa2000018]=0",
+          "u32[0xA20000F4]=0",
+          "u32[0xa2000008]=1",
+          "u32[0xa2000060]=0x00000003",
+          "poll u32[0xA2000028]&2 until nonzero",
+          "u32[0xA2000060] -> 0x00000012",
+          "u8[0x20000004]=0x12",
+          "poll u32[0xA2000028]&2 until nonzero",
+          "u32[0xA2000060] -> 0x00000034",
+          "u8[0x20000005]=0x34",
+          "poll u32[0xA2000028]&2 until nonzero",
+          "u32[0xA2000060] -> 0x00000056",
+          "u8[0x20000006]=0x56",
+          "poll u32[0xA2000020] until zero",
+          "call B4C()",
+          "return R0=0"
+        ],
+        "bytes_stored": [
+          "u8[0x20000004]=0x12",
+          "u8[0x20000005]=0x34",
+          "u8[0x20000006]=0x56"
+        ],
+        "final_R1": "0x20000007",
+        "return": "0x00000000"
+      }
+    },
+    {
+      "name": "zero count still initializes then completes without byte poll",
+      "inputs": {
+        "R0": 53,
+        "R1": "0x20000004",
+        "R2": 0,
+        "ready_bit2": false,
+        "completion_word": 0
+      },
+      "expected": {
+        "events": [
+          "call B4C()",
+          "u32[0xa2000008]=0",
+          "u32[0xa200004c]=0",
+          "u32[0xa2000000]=3079",
+          "u32[0xa2000004]=0xffffffff",
+          "u32[0xa2000010]=1",
+          "u32[0xa2000018]=0",
+          "u32[0xA20000F4]=0",
+          "u32[0xa2000008]=1",
+          "u32[0xa2000060]=0x00000035",
+          "poll u32[0xA2000020] until zero",
+          "call B4C()",
+          "return R0=0"
+        ],
+        "bytes_stored": [],
+        "final_R1": "0x20000004",
+        "return": "0x00000000"
+      }
+    },
+    {
+      "name": "ready bit remains clear",
+      "inputs": {
+        "R0": 5,
+        "R1": "0x20000003",
+        "R2": 1,
+        "ready_bit2": false
+      },
+      "expected": {
+        "events": [
+          "call B4C()",
+          "u32[0xa2000008]=0",
+          "u32[0xa200004c]=0",
+          "u32[0xa2000000]=3079",
+          "u32[0xa2000004]=0x00000000",
+          "u32[0xa2000010]=1",
+          "u32[0xa2000018]=0",
+          "u32[0xA20000F4]=0",
+          "u32[0xa2000008]=1",
+          "u32[0xa2000060]=0x00000005",
+          "poll u32[0xA2000028]&2 forever"
+        ],
+        "bytes_stored": [],
+        "return": "does not return"
+      }
+    },
+    {
+      "name": "completion word remains nonzero after receiving final byte",
+      "inputs": {
+        "R0": 53,
+        "R1": "0x20000000",
+        "R2": 1,
+        "data_words": [
+          127
+        ],
+        "ready_bit2": true,
+        "completion_word": 1
+      },
+      "expected": {
+        "events": [
+          "call B4C()",
+          "u32[0xa2000008]=0",
+          "u32[0xa200004c]=0",
+          "u32[0xa2000000]=3079",
+          "u32[0xa2000004]=0x00000000",
+          "u32[0xa2000010]=1",
+          "u32[0xa2000018]=0",
+          "u32[0xA20000F4]=0",
+          "u32[0xa2000008]=1",
+          "u32[0xa2000060]=0x00000035",
+          "poll u32[0xA2000028]&2 until nonzero",
+          "u32[0xA2000060] -> 0x0000007f",
+          "u8[0x20000000]=0x7f",
+          "poll u32[0xA2000020] forever"
+        ],
+        "bytes_stored": [
+          "u8[0x20000000]=0x7f"
+        ],
+        "return": "does not return"
+      }
+    },
+    {
+      "name": "three bytes across 32-bit pointer wrap",
+      "inputs": {
+        "R0": 3,
+        "R1": "0xFFFFFFFE",
+        "R2": 3,
+        "data_words": [
+          170,
+          187,
+          204
+        ],
+        "ready_bit2": true,
+        "completion_word": 0
+      },
+      "expected": {
+        "events": [
+          "call B4C()",
+          "u32[0xa2000008]=0",
+          "u32[0xa200004c]=0",
+          "u32[0xa2000000]=3079",
+          "u32[0xa2000004]=0x00000002",
+          "u32[0xa2000010]=1",
+          "u32[0xa2000018]=0",
+          "u32[0xA20000F4]=0",
+          "u32[0xa2000008]=1",
+          "u32[0xa2000060]=0x00000003",
+          "poll u32[0xA2000028]&2 until nonzero",
+          "u32[0xA2000060] -> 0x000000aa",
+          "u8[0xfffffffe]=0xaa",
+          "poll u32[0xA2000028]&2 until nonzero",
+          "u32[0xA2000060] -> 0x000000bb",
+          "u8[0xffffffff]=0xbb",
+          "poll u32[0xA2000028]&2 until nonzero",
+          "u32[0xA2000060] -> 0x000000cc",
+          "u8[0x00000000]=0xcc",
+          "poll u32[0xA2000020] until zero",
+          "call B4C()",
+          "return R0=0"
+        ],
+        "bytes_stored": [
+          "u8[0xfffffffe]=0xaa",
+          "u8[0xffffffff]=0xbb",
+          "u8[0x00000000]=0xcc"
+        ],
+        "final_R1": "0x00000001",
+        "return": "0x00000000"
+      }
+    }
+  ],
+  "assertions": [
+    "The length register receives (count-1) modulo 2^32; count zero stores 0xFFFFFFFF.",
+    "Each byte iteration waits for ready, reads a 32-bit data-register word, stores its low byte to [R1], and increments R1 by one.",
+    "The byte-ready wait checks bit 1 of controller+0x28 before each data-register read and output-byte store.",
+    "Completion uses repeated 32-bit reads of controller+0x20; a nonzero value prevents return.",
+    "The returned R0 is the final zero status word, not the initial mode selector."
+  ]
+}

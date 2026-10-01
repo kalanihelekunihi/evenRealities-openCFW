@@ -1,0 +1,17 @@
+{
+  "review_id": "1458",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-output-ordering-50e4-1457/001",
+  "candidate_receipt_sha256": "2efccd77d2ed820abba28eb762791ae5ad02b4ea1f057f3f18c6b25278f3813b",
+  "candidate_pseudocode_sha256": "dff8193d56c9196c7d652c31184b50d7ffb858cdfbb0223367d9be2dfb1075bd",
+  "candidate_replay_sha256": "af978302355b3fb06a451d7786657798ecb81f263d4c881a89826a146ce46ff7",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independently replayed all 15 original-instruction fixtures; all pass with actual AA2C executing and table bytes copied from the pinned 0x5184 pointer. The full context and output buffers, return R0=0, SP and stop PC are checked.",
+    "Decoded 0x50E4..0x5182 as 158 bytes; alignment NOP at 0x5182 and table pointer at 0x5184 are separate. The code initializes mapping bytes +99..+112 to 0xFF, clears +104, applies exact mode 1/2 mapping edits, sets count +98, iterates the 14 mapping bytes, and copies selected words from the 56-byte stack table to output +112+4*index. The fixture modes 0/1/2/3/255 and fills 0/0xA5/0xFF agree with the decoded order."
+  ],
+  "limitations": [
+    "The fixture map leaves only the mode-selected indices and the fixed +104 index active; arbitrary preexisting mapping, concurrent mutation, table semantics and global ownership remain outside scope. No canonical admission."
+  ]
+}

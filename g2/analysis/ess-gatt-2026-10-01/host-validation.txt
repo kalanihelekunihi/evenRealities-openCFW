@@ -1,0 +1,12 @@
+2026-10-01, after parent released quiet window at00:45:24UTC.
+PASS clang -std=c11 -Wall -Wextra -Werror -fsyntax-only:
+  ../audio-stream-2026-10-01/pcm_stream.pseudocode.c
+  ../audio-ble-metadata-2026-10-01/ess_metadata.pseudocode.c
+  ess_gatt.pseudocode.c
+PASS clang -std=c11 -Wall -Wextra -Werror build and execute assertions:
+  ../audio-ble-metadata-2026-10-01/test_header.c
+  test_header.c
+Executables written under /tmp, not firmware or repository sources.
+PASS prior ESS original-instruction verifier:30 cases,13 body hashes.
+PASS this batch original-instruction verifier:13 cases,5 code hashes.
+Host checks establish syntax and parser/constant assertions; not firmware builds.

@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-arc-signed-divide-wrapper-independent-review-1823",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "scope": {
+    "candidate": "analysis/arc-signed-divide-wrapper-1822/001",
+    "owned_runtime_range": [
+      "0x00302760",
+      "0x003027C8"
+    ],
+    "reviewed": "The bounded wrapper is exactly 0x00302760..0x003027C8 (104 authenticated bytes, 38 ARC instructions). The pinned verifier passes source/package/body and decoder checks, local branch and delay-slot checks, external target bindings, and four register-routing/sign-control fixtures. Independent reading confirms two-word magnitude conversion, divisor-high fast/general path selection, the BRHS comparison, delayed r3 setup for the general helper, saved sign comparison and quotient negation; the zero-divisor guard preserves the lower helper result. The .NT annotations are prediction hints and do not annul delay slots."
+  },
+  "pins": {
+    "record3_sha256": "0de6e945a56ec886a92e44d4eaefe02fbca6db11f8747876e30bffb45cffce03",
+    "official_package_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+    "owned_bytes_sha256": "6c1e8edb6e03a5431b451ef4dbcbd3e0161fae6759aa838edfc06384d983f148",
+    "candidate_receipt_sha256": "1aa7fff09677b6a858766b15a2a2f7ec3595588a0275ad85bd93a5fee6d93245"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "The bounded wrapper is exactly 0x00302760..0x003027C8 (104 authenticated bytes, 38 ARC instructions). The pinned verifier passes source/package/body and decoder checks, local branch and delay-slot checks, external target bindings, and four register-routing/sign-control fixtures. Independent reading confirms two-word magnitude conversion, divisor-high fast/general path selection, the BRHS comparison, delayed r3 setup for the general helper, saved sign comparison and quotient negation; the zero-divisor guard preserves the lower helper result. The .NT annotations are prediction hints and do not annul delay slots."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "Candidate verify.py succeeds and checks receipt outputs/input pins. The wrapper-level fixtures abstract both callees and correctly leave their numerical divide semantics outside this packet."
+    }
+  ],
+  "limitations": [
+    "No ARC CPU execution, enclosing-function boundary, ABI proof, caller census or whole-image coverage. Callee 0x003026A8 zero-divisor behavior remains subject to its separate STATUS32.DZ question; 0x00302844/core behavior is separate evidence.",
+    "No canonical admission or implementation."
+  ],
+  "checks": [
+    {
+      "command": "pinned source/package/body/decoder/edge verifier",
+      "result": "PASS"
+    },
+    {
+      "command": "manual review of instruction-level signedness, helper arguments and delayed branches",
+      "result": "PASS_SCOPED"
+    }
+  ],
+  "canonical_or_coverage_change": false
+}

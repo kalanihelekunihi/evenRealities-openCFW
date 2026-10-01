@@ -1,0 +1,5 @@
+# Touch activation wrapper 4ABE
+
+Body 4ABE..4AF2 is 52 instruction bytes, excluding adjacent zero halfword. Retain incoming descriptor and call 7D92(descriptor). Nonzero returns that status immediately. On zero call 58F8(descriptor), ignore its return, then call 71C8(descriptor) and retain its status. Freshly load descriptor+4 pointer, then its byte+7. If zero call 7E04(descriptor), freshly reload descriptor+4 pointer and set its byte+7 to one. Return retained 71C8 status regardless of 58F8/7E04 results. Restore four-word frame. No null-pointer guards occur locally.
+
+Twenty-seven original-instruction fixtures cover three first statuses, three second statuses and three initial flags. Four deeper helpers are controlled without memory effects. Exact reached calls, flag writes, result and SP are checked. Fresh pointer reload permits helper-induced pointer changes, which these fixtures do not exercise. Real activation, pointer validity and concurrency remain unresolved. No canonical admission or C implementation.

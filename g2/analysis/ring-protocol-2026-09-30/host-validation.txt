@@ -1,0 +1,11 @@
+C11 -Wall -Wextra -Werror; parser bounds assertions passed.
+Compared compiled C header output to original-code validation.json:
+encode_472244_[] 001a9401 MATCH
+public_interval_path_big_endian 001a8a011234 MATCH
+encode_472378_[0] 001a8501ffaaaaaa MATCH
+encode_472378_[1] 001a850100aaaaaa MATCH
+encode_4723d6_[0, 0] 001a890100000000 MATCH
+encode_4723d6_[1, 0] 001a890180000000 MATCH
+encode_4723d6_[0, 1] 001a890140000000 MATCH
+encode_4723d6_[1, 1] 001a8901c0000000 MATCH
+encode_472546_[] 00358800 MATCH

@@ -1,0 +1,17 @@
+{
+  "review_id": "1967",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-loop-event-drain-3a80-1960/001",
+  "candidate_receipt_sha256": "8a77754f975c11e3bcf792ab9bf3189838413a5afead1b435a04ef3023a07de7",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "body_sha256": "0dc11e3139c82a93c37a5d9907ad6716ee5c3bbce931d29fb0162fc351ec0fb8",
+  "checks": [
+    "Source/artifact pins match. Body [0x3A80,0x3ADC) is 92 bytes/40 instructions; literal pool starts at 3ADC. Isolated replay passes all 36 combinations and exactly matches replays.json.",
+    "Disassembly verifies PRIMASK save/disable through 4492, snapshots two byte flags and a halfword, clears both bytes before restoring PRIMASK via 449A, then calls 404C only when first snapshot is nonzero and 3A38 only when second snapshot is nonzero. The 404C result is ignored. The 3A38 return selects either logger call and its corresponding literal/temporary arguments.",
+    "Fixtures vary each flag over 0/1/255 and second-helper return over 0/7, asserting snapshot and ordered side effects, halfword stack argument, call order/arguments, frame and restored PRIMASK. R0 is correctly described as incidental, not a defined result."
+  ],
+  "limitations": [
+    "The logger and both callbacks are controlled; callback mutation and concurrent flag changes are not exercised. No physical event semantics or canonical admission is established."
+  ]
+}

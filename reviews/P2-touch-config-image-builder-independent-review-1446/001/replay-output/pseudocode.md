@@ -1,0 +1,5 @@
+# Configuration image builder at 5378
+
+The instruction body [5378,5518) is 416 bytes, followed by four literal words through 5528. Save the nine-word register frame and allocate 260 stack bytes. Original A9D4 clears 256 scratch bytes. Populate the output at descriptor word +36 with defaults, then combine fields from configuration descriptor word 0 and context descriptor word +8. The retained fixture word map gives exact independently computed outputs and masks; output word +52 is not written and retains its prior value.
+
+Zero context halfword +68 substitutes 256 for its shifted field; zero halfword +66 substitutes 1 for its low byte. Other fields use explicit shift masks. Call 52BC(descriptor), ignore its return, then 50E4(descriptor) and return that status after restoring the frame. Both are controlled boundaries; original A9D4 executes. Twelve original-instruction fixtures vary uniform source fill and final status, checking all 112 output bytes and exact calls. Independent source-field variation, real downstream effects and physical meaning remain open. No canonical admission or C implementation.

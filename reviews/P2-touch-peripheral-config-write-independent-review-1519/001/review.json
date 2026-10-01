@@ -1,0 +1,18 @@
+{
+  "review_id": "1519",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-peripheral-config-write-9178-1518/001",
+  "candidate_receipt_sha256": "646d341d446baa713d7bed912db5c8ee488f0835411ef33b5ba4b186351398c9",
+  "candidate_pseudocode_sha256": "b9792cbce8d676a061747cd0e54acf765dac405612453d0fb6abe51c72db7b2b",
+  "candidate_replay_sha256": "499e7815469fbef1b10493e7f7b17e9347f1ebac621b3c3112a2c4bb9f264d4e",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Verified the 120-byte body at 0x9178..0x91F0 and the ten offset literals through 0x9218. Independently decoded mode 5, mode 11 and fallback store sequences and confirmed their input word indices and peripheral offsets.",
+    "Confirmed no calls or input-buffer writes, raw R0 peripheral-pointer return, and 12-byte frame restoration.",
+    "An isolated replay passed all 48 fixtures, checking exact ordered stores for distinct source words, unchanged input buffer, return and SP."
+  ],
+  "limitations": [
+    "MMIO is synthetic. Pointer validity and physical peripheral effects are not established. No canonical admission."
+  ]
+}

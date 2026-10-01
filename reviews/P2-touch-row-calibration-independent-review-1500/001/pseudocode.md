@@ -1,0 +1,5 @@
+# Row calibration at 5CAC
+
+The72-byte body[5CAC,5CF4) isfollowed by65535literal. Selectstride144record throughdescriptorword12 andreadrecordword0 rowpointer. Initialize stackresultwordzero. Ifrowbyte35bit3clear,return0withoutchangingrowhalfword4. Otherwisecall7BC0(resultPointer,index,recordhalfword128,0,descriptor asfifthstackargument). Clampreturnedresultwordto65535 andstoreitslowhalfwordatrow+4. ReturnhelperR0status unchanged,independentofresultword. Restore24-byteframe.
+
+The180original-instructionfixtures checkbitgate,threeindices,clampboundary,independentstatus/result,exactfivearguments andframe.7BC0remainscontrolled.Pointervalidity andphysicalmeaningremainunresolved.No canonicaladmission orCimplementation.

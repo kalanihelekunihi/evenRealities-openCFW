@@ -1,0 +1,17 @@
+{
+  "review_id": "1537",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-timing-adapters-1536/001",
+  "candidate_receipt_sha256": "27a57442cfbf833144f58cd54f1bb9f97126d99f3e0b0c0933af793de6d6cbf3",
+  "candidate_pseudocode_sha256": "26ec59e5478d2978eb6c755b906b1ba8243a4b87bd888f7ad1554418076c5c2c",
+  "candidate_replay_sha256": "84c884b4daff2a19d6a0ea749dec6ba94369702a8715cd60958c563f28f9853b",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independently decoded the exact 5FA4..5FBA and A324..A332 bodies (10 and 6 instructions), confirming zero-divisor all-ones return, unsigned modulo-2^32 multiplication before A6C0 division, full-width A324 input multiplication, literal A334=0x20000870, incidental 4480 result and both 8-byte frames.",
+    "An isolated Unicorn replay passed all 84 fixtures. Only Capstone listing generation was removed from the copied harness because Capstone is unavailable; original execution/assertions were retained and GNU objdump independently verified the disassembly. Original candidate replay is preserved."
+  ],
+  "limitations": [
+    "A6C0 is actual for nonzero divisors; 4480 is controlled. Physical timing and separate delay-loop semantics remain unresolved. No canonical admission."
+  ]
+}

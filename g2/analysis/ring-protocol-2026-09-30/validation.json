@@ -1,0 +1,3667 @@
+{
+  "firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "input_path": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+  "runtime_base": "0x437fe0",
+  "capstone": "5.0.7",
+  "unicorn": "2.1.4",
+  "scope": "Original bytes, external call stubs, synthetic scheduler. No radio/hardware. Logging disabled. No whole-program safety claim.",
+  "functions": [
+    {
+      "entry": "0x472244",
+      "end": "0x4722cc",
+      "stock_name": "",
+      "sha256": "ab5edc901c7263a3db6b6b917d48681827bf31706d1d3db2e06e9cdebccb2844",
+      "calls": [
+        {
+          "site": "0x472250",
+          "target": "0x43c0e4",
+          "name": ""
+        },
+        {
+          "site": "0x47226c",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x47228e",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x472292",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x47229a",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4722ac",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "site": "0x4722ba",
+          "target": "0x43dacc",
+          "name": ""
+        },
+        {
+          "site": "0x4722c2",
+          "target": "0x4c4b7e",
+          "name": "APP_BleRingSendDataMsg"
+        }
+      ]
+    },
+    {
+      "entry": "0x4722d8",
+      "end": "0x472362",
+      "stock_name": "",
+      "sha256": "5ba18fef45c46c9c5fe82252edfae7e6d5ec429a5a6f1915cbb87dba4bdfd006",
+      "calls": [
+        {
+          "site": "0x4722e6",
+          "target": "0x43c0e4",
+          "name": ""
+        },
+        {
+          "site": "0x472310",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x472332",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x472336",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x47233e",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x472350",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "site": "0x472358",
+          "target": "0x4c4b7e",
+          "name": "APP_BleRingSendDataMsg"
+        }
+      ]
+    },
+    {
+      "entry": "0x472362",
+      "end": "0x472378",
+      "stock_name": "",
+      "sha256": "147ef454d5e220e9f1ee6b1a582854dad8a85fffa57ae2fc9570dd2b4ceef0f7",
+      "calls": [
+        {
+          "site": "0x472370",
+          "target": "0x4c549c",
+          "name": "ring_task_msg_send"
+        }
+      ]
+    },
+    {
+      "entry": "0x472378",
+      "end": "0x4723d6",
+      "stock_name": "",
+      "sha256": "21c2e01389ece8209114d08012c3d797069d70cf015bbf45500615eb350051cf",
+      "calls": [
+        {
+          "site": "0x472386",
+          "target": "0x43c0e4",
+          "name": ""
+        },
+        {
+          "site": "0x4723cc",
+          "target": "0x4c4b7e",
+          "name": "APP_BleRingSendDataMsg"
+        }
+      ]
+    },
+    {
+      "entry": "0x4723d6",
+      "end": "0x472426",
+      "stock_name": "",
+      "sha256": "93404c8db0c0aaeab661e3e4a210a3649826316552bda4a3c4a0a7c72739e6ef",
+      "calls": [
+        {
+          "site": "0x4723e6",
+          "target": "0x43c0e4",
+          "name": ""
+        },
+        {
+          "site": "0x47240a",
+          "target": "0x43c0e4",
+          "name": ""
+        },
+        {
+          "site": "0x47241c",
+          "target": "0x4c4b7e",
+          "name": "APP_BleRingSendDataMsg"
+        }
+      ]
+    },
+    {
+      "entry": "0x472426",
+      "end": "0x47243a",
+      "stock_name": "",
+      "sha256": "16de133b3e38d08b1862bfd9b20ab50bcb1a4ae6575976323a479c87a6bb8015",
+      "calls": [
+        {
+          "site": "0x472432",
+          "target": "0x4c549c",
+          "name": "ring_task_msg_send"
+        }
+      ]
+    },
+    {
+      "entry": "0x472546",
+      "end": "0x47257c",
+      "stock_name": "",
+      "sha256": "9cd61a6920a7e1d8581a7cb849a1635a3cc77376f46375ce7e5b6fd8b0e45057",
+      "calls": [
+        {
+          "site": "0x472552",
+          "target": "0x43c0e4",
+          "name": ""
+        },
+        {
+          "site": "0x472572",
+          "target": "0x4c4b7e",
+          "name": "APP_BleRingSendDataMsg"
+        }
+      ]
+    },
+    {
+      "entry": "0x47263c",
+      "end": "0x47269e",
+      "stock_name": "",
+      "sha256": "25c6b1703f02d9ef0f201f3a38fe2434752540988a9496fdb19249374aa92d1f",
+      "calls": [
+        {
+          "site": "0x472654",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x472676",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x47267a",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x472682",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x472694",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        }
+      ]
+    },
+    {
+      "entry": "0x47269e",
+      "end": "0x4727aa",
+      "stock_name": "",
+      "sha256": "4b590e1611b9fba0e09dd8934361cc852fd8993e3e83c1be002b849f32271829",
+      "calls": [
+        {
+          "site": "0x4726dc",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x472706",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x47270a",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x472712",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x47272a",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "site": "0x472758",
+          "target": "0x4c5916",
+          "name": ""
+        },
+        {
+          "site": "0x472766",
+          "target": "0x4c5916",
+          "name": ""
+        },
+        {
+          "site": "0x472774",
+          "target": "0x4c5916",
+          "name": ""
+        },
+        {
+          "site": "0x472782",
+          "target": "0x4c5916",
+          "name": ""
+        },
+        {
+          "site": "0x472790",
+          "target": "0x4c5916",
+          "name": ""
+        },
+        {
+          "site": "0x47279e",
+          "target": "0x4c5916",
+          "name": ""
+        }
+      ]
+    },
+    {
+      "entry": "0x4727aa",
+      "end": "0x4728a0",
+      "stock_name": "",
+      "sha256": "ddfa8c5d769c5e59c0bd70acb8143616492ee05283cc33d35a9d2cf24fb386a4",
+      "calls": [
+        {
+          "site": "0x4727c2",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4727ea",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x4727ee",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4727f6",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x47280c",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "site": "0x47283c",
+          "target": "0x4c659a",
+          "name": "device_mgr_fn_004c659a"
+        },
+        {
+          "site": "0x472840",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x47286e",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x472872",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x47287a",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x472896",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        }
+      ]
+    },
+    {
+      "entry": "0x4728a0",
+      "end": "0x4728b2",
+      "stock_name": "",
+      "sha256": "fdb0ded340e27d122dfe86a2b26036cffd025c17114772473a592eabfd5f6cf8",
+      "calls": []
+    },
+    {
+      "entry": "0x4728b2",
+      "end": "0x472988",
+      "stock_name": "",
+      "sha256": "6e844176a37830b4187c08df6281352689bfce8cab64033205c981c2f256b140",
+      "calls": [
+        {
+          "site": "0x4728d8",
+          "target": "0x4490cc",
+          "name": "osKernelGetTickCount"
+        },
+        {
+          "site": "0x4728e2",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x472900",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x472904",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x47290c",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x47291e",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "site": "0x47292c",
+          "target": "0x4490cc",
+          "name": "osKernelGetTickCount"
+        },
+        {
+          "site": "0x47293e",
+          "target": "0x48eb32",
+          "name": ""
+        },
+        {
+          "site": "0x472942",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x47295e",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x472962",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x47296a",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x47297c",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        }
+      ]
+    },
+    {
+      "entry": "0x472988",
+      "end": "0x472bb0",
+      "stock_name": "",
+      "sha256": "90112e803eeaabcdd6dc57cdcbd4675dd90786898efd86be8fc052b488b8bce2",
+      "calls": [
+        {
+          "site": "0x4729b6",
+          "target": "0x476ace",
+          "name": "fw_event_loop_remove_delayed"
+        },
+        {
+          "site": "0x4729bc",
+          "target": "0x476ace",
+          "name": "fw_event_loop_remove_delayed"
+        },
+        {
+          "site": "0x4729c0",
+          "target": "0x4a2914",
+          "name": "central_is_ring_owner_side_004a2914"
+        },
+        {
+          "site": "0x4729c8",
+          "target": "0x4a271e",
+          "name": "APP_MasterPublishRingLinkReady"
+        },
+        {
+          "site": "0x4729d0",
+          "target": "0x4bc418",
+          "name": "PB_TxEncodeNotifyRingConnectInfo"
+        },
+        {
+          "site": "0x4729d6",
+          "target": "0x47263c",
+          "name": ""
+        },
+        {
+          "site": "0x4729dc",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4729f6",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x4729fa",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x472a02",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x472a12",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "site": "0x472a1c",
+          "target": "0x47269e",
+          "name": ""
+        },
+        {
+          "site": "0x472a34",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x472a4e",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x472a52",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x472a5a",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x472a6a",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "site": "0x472a70",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x472a8a",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x472a8e",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x472a96",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x472aa6",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "site": "0x472aae",
+          "target": "0x476ace",
+          "name": "fw_event_loop_remove_delayed"
+        },
+        {
+          "site": "0x472ab8",
+          "target": "0x47697e",
+          "name": "fw_event_loop_push_delayed"
+        },
+        {
+          "site": "0x472ac0",
+          "target": "0x476ace",
+          "name": "fw_event_loop_remove_delayed"
+        },
+        {
+          "site": "0x472acc",
+          "target": "0x47697e",
+          "name": "fw_event_loop_push_delayed"
+        },
+        {
+          "site": "0x472ad2",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x472aec",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x472af0",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x472af8",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x472b08",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "site": "0x472b12",
+          "target": "0x4727aa",
+          "name": ""
+        },
+        {
+          "site": "0x472b1a",
+          "target": "0x4728b2",
+          "name": ""
+        },
+        {
+          "site": "0x472b28",
+          "target": "0x43c0e4",
+          "name": ""
+        },
+        {
+          "site": "0x472b30",
+          "target": "0x4a2190",
+          "name": "target_addr_name_copy_004a2190"
+        },
+        {
+          "site": "0x472b34",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x472b6a",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x472b6e",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x472b76",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x472ba0",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "site": "0x472ba6",
+          "target": "0x4a2c9c",
+          "name": "APP_MasterCleanupRingUnpair"
+        }
+      ]
+    },
+    {
+      "entry": "0x4c4de8",
+      "end": "0x4c4ee4",
+      "stock_name": "_thread_msg_handler",
+      "sha256": "e3c3ee5f9cd1bb2eccbdfecf46d1e5b7817e9d48759bd1ff9cf95cb35140f241",
+      "calls": [
+        {
+          "site": "0x4c4e0c",
+          "target": "0x474d16",
+          "name": "file_heap_free"
+        },
+        {
+          "site": "0x4c4e20",
+          "target": "0x449b3c",
+          "name": "osMessageQueueGet"
+        },
+        {
+          "site": "0x4c4e32",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c4e5e",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x4c4e62",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c4e6a",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c4e86",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "site": "0x4c4e94",
+          "target": "0x472988",
+          "name": ""
+        },
+        {
+          "site": "0x4c4ea8",
+          "target": "0x472378",
+          "name": ""
+        },
+        {
+          "site": "0x4c4ec4",
+          "target": "0x4722d8",
+          "name": ""
+        },
+        {
+          "site": "0x4c4ede",
+          "target": "0x4723d6",
+          "name": ""
+        }
+      ]
+    },
+    {
+      "entry": "0x4c507e",
+      "end": "0x4c53a6",
+      "stock_name": "_thread_notify_event_handler",
+      "sha256": "cd265433e939f0e0a5026f7ca537066f5213f18d7fcf277c6dc3dd9d45eec9b7",
+      "calls": [
+        {
+          "site": "0x4c5082",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c50a6",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x4c50aa",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c50b2",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c50c6",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "site": "0x4c50ce",
+          "target": "0x4c4de8",
+          "name": "_thread_msg_handler"
+        },
+        {
+          "site": "0x4c50d6",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c50f8",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x4c50fc",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c5104",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c5116",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "site": "0x4c5120",
+          "target": "0x476ace",
+          "name": "fw_event_loop_remove_delayed"
+        },
+        {
+          "site": "0x4c512a",
+          "target": "0x47697e",
+          "name": "fw_event_loop_push_delayed"
+        },
+        {
+          "site": "0x4c5134",
+          "target": "0x476ace",
+          "name": "fw_event_loop_remove_delayed"
+        },
+        {
+          "site": "0x4c5140",
+          "target": "0x47697e",
+          "name": "fw_event_loop_push_delayed"
+        },
+        {
+          "site": "0x4c514a",
+          "target": "0x476ace",
+          "name": "fw_event_loop_remove_delayed"
+        },
+        {
+          "site": "0x4c5156",
+          "target": "0x47697e",
+          "name": "fw_event_loop_push_delayed"
+        },
+        {
+          "site": "0x4c515e",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c5180",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x4c5184",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c518c",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c519e",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "site": "0x4c51a6",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c51c8",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x4c51cc",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c51d4",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c51e6",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "site": "0x4c51f0",
+          "target": "0x476ace",
+          "name": "fw_event_loop_remove_delayed"
+        },
+        {
+          "site": "0x4c51fa",
+          "target": "0x47697e",
+          "name": "fw_event_loop_push_delayed"
+        },
+        {
+          "site": "0x4c5204",
+          "target": "0x476ace",
+          "name": "fw_event_loop_remove_delayed"
+        },
+        {
+          "site": "0x4c5210",
+          "target": "0x47697e",
+          "name": "fw_event_loop_push_delayed"
+        },
+        {
+          "site": "0x4c5214",
+          "target": "0x47243a",
+          "name": ""
+        },
+        {
+          "site": "0x4c5218",
+          "target": "0x46c630",
+          "name": "settings_get_terminal_mode"
+        },
+        {
+          "site": "0x4c522c",
+          "target": "0x472362",
+          "name": ""
+        },
+        {
+          "site": "0x4c5234",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c5256",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x4c525a",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c5262",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c5274",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "site": "0x4c5278",
+          "target": "0x472244",
+          "name": ""
+        },
+        {
+          "site": "0x4c5280",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c52a2",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x4c52a6",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c52ae",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c52c0",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "site": "0x4c52c4",
+          "target": "0x472546",
+          "name": ""
+        },
+        {
+          "site": "0x4c52ce",
+          "target": "0x476ace",
+          "name": "fw_event_loop_remove_delayed"
+        },
+        {
+          "site": "0x4c52da",
+          "target": "0x47697e",
+          "name": "fw_event_loop_push_delayed"
+        },
+        {
+          "site": "0x4c52e4",
+          "target": "0x476ace",
+          "name": "fw_event_loop_remove_delayed"
+        },
+        {
+          "site": "0x4c52f0",
+          "target": "0x47697e",
+          "name": "fw_event_loop_push_delayed"
+        },
+        {
+          "site": "0x4c52f8",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c531a",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x4c531e",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c5326",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c5338",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "site": "0x4c533c",
+          "target": "0x47243a",
+          "name": ""
+        },
+        {
+          "site": "0x4c5340",
+          "target": "0x46c630",
+          "name": "settings_get_terminal_mode"
+        },
+        {
+          "site": "0x4c5354",
+          "target": "0x472362",
+          "name": ""
+        },
+        {
+          "site": "0x4c535c",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c537a",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x4c537e",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c5386",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c5398",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "site": "0x4c53a0",
+          "target": "0x4c53a6",
+          "name": "_thread_exit"
+        }
+      ]
+    },
+    {
+      "entry": "0x4c548c",
+      "end": "0x4c549c",
+      "stock_name": "Thread_SendMsgToRingTaskWithId",
+      "sha256": "ca041a24cffbcb08b27531154b822d996c893d63e557a9dfeca0a85836b9f12b",
+      "calls": [
+        {
+          "site": "0x4c5496",
+          "target": "0x4c549c",
+          "name": "ring_task_msg_send"
+        }
+      ]
+    },
+    {
+      "entry": "0x4c549c",
+      "end": "0x4c5632",
+      "stock_name": "ring_task_msg_send",
+      "sha256": "c23c0935aca13135749964807817be43bd93bc445b3a36fc7a894fa1d3681953",
+      "calls": [
+        {
+          "site": "0x4c54b2",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c54cc",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x4c54d0",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c54d8",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c54e8",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "site": "0x4c54fa",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c5514",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x4c5518",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c5520",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c5530",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "site": "0x4c5544",
+          "target": "0x474cd2",
+          "name": "file_heap_allocate"
+        },
+        {
+          "site": "0x4c5550",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c556a",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x4c556e",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c5576",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c5586",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "site": "0x4c559e",
+          "target": "0x43c0e4",
+          "name": ""
+        },
+        {
+          "site": "0x4c55c8",
+          "target": "0x439be4",
+          "name": ""
+        },
+        {
+          "site": "0x4c55d4",
+          "target": "0x449abe",
+          "name": "osMessageQueuePut"
+        },
+        {
+          "site": "0x4c55dc",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c55f6",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x4c55fa",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c5602",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4c5612",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "site": "0x4c5618",
+          "target": "0x474d16",
+          "name": "file_heap_free"
+        },
+        {
+          "site": "0x4c5628",
+          "target": "0x449238",
+          "name": "osThreadFlagsSet"
+        }
+      ]
+    },
+    {
+      "entry": "0x4d0b36",
+      "end": "0x4d0b64",
+      "stock_name": "threadBleWsfTakeTxReady",
+      "sha256": "bebc400de5be8b2d37039b6ed7e9a2d3a02739541f98f1f2a5046f5a21869c98",
+      "calls": [
+        {
+          "site": "0x4d0b46",
+          "target": "0x44994e",
+          "name": "osSemaphoreAcquire"
+        }
+      ]
+    },
+    {
+      "entry": "0x4d0b64",
+      "end": "0x4d0c2c",
+      "stock_name": "thread_ble_wsf_wait_tx_ready",
+      "sha256": "3a213ff23a1f6a470149f8aca60d7fccd5af2ffb27bf11e388ea6646c19f344e",
+      "calls": [
+        {
+          "site": "0x4d0b66",
+          "target": "0x4490cc",
+          "name": "osKernelGetTickCount"
+        },
+        {
+          "site": "0x4d0b72",
+          "target": "0x4d0b36",
+          "name": "threadBleWsfTakeTxReady"
+        },
+        {
+          "site": "0x4d0b88",
+          "target": "0x4d0b36",
+          "name": "threadBleWsfTakeTxReady"
+        },
+        {
+          "site": "0x4d0b98",
+          "target": "0x449376",
+          "name": "osDelay"
+        },
+        {
+          "site": "0x4d0ba6",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4d0bbe",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x4d0bc2",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4d0bca",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4d0bda",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "site": "0x4d0bde",
+          "target": "0x4490cc",
+          "name": "osKernelGetTickCount"
+        },
+        {
+          "site": "0x4d0be4",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4d0c04",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x4d0c08",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4d0c10",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4d0c26",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        }
+      ]
+    },
+    {
+      "entry": "0x4d0c36",
+      "end": "0x4d0cdc",
+      "stock_name": "thread_ble_wsf_tx_complete_notify",
+      "sha256": "ccc45829df3264820dc0de6fb1fdbe1e3cb1119cd6706313323e8a5818075fe3",
+      "calls": [
+        {
+          "site": "0x4d0c44",
+          "target": "0x449a0e",
+          "name": "osSemaphoreGetCount"
+        },
+        {
+          "site": "0x4d0c50",
+          "target": "0x4499b8",
+          "name": "osSemaphoreRelease"
+        },
+        {
+          "site": "0x4d0c5a",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4d0c76",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x4d0c7a",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4d0c82",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4d0c96",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "site": "0x4d0c9c",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4d0cb6",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x4d0cba",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4d0cc2",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4d0cd4",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        }
+      ]
+    },
+    {
+      "entry": "0x4bf9ba",
+      "end": "0x4bf9de",
+      "stock_name": "WsfMsgSend",
+      "sha256": "a568f74c2634f63f8b146dd3f0cbecf09d2caa1300b5877a0ec9cab892ac7c70",
+      "calls": [
+        {
+          "site": "0x4bf9c4",
+          "target": "0x52b97c",
+          "name": "WsfTaskMsgQueue"
+        },
+        {
+          "site": "0x4bf9ce",
+          "target": "0x4bf9de",
+          "name": "WsfMsgEnq"
+        },
+        {
+          "site": "0x4bf9d8",
+          "target": "0x52b95e",
+          "name": "WsfTaskSetReady"
+        }
+      ]
+    },
+    {
+      "entry": "0x47697e",
+      "end": "0x476ace",
+      "stock_name": "fw_event_loop_push_delayed",
+      "sha256": "496f1779e410338cac437436bd548d4e38f48a23764f7134f6a1100e5da81048",
+      "calls": [
+        {
+          "site": "0x476992",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4769aa",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x4769ae",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4769b6",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x4769c6",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "site": "0x4769cc",
+          "target": "0x449376",
+          "name": "osDelay"
+        },
+        {
+          "site": "0x4769e2",
+          "target": "0x4766ec",
+          "name": "fw_event_loop_push"
+        },
+        {
+          "site": "0x4769f0",
+          "target": "0x4497b6",
+          "name": "osMutexAcquire"
+        },
+        {
+          "site": "0x4769f8",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x476a12",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x476a16",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x476a1e",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x476a2e",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "site": "0x476a5a",
+          "target": "0x4490cc",
+          "name": "osKernelGetTickCount"
+        },
+        {
+          "site": "0x476a72",
+          "target": "0x44981c",
+          "name": "osMutexRelease"
+        },
+        {
+          "site": "0x476a7a",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x476a94",
+          "target": "0x43d574",
+          "name": "FUN_0043d574"
+        },
+        {
+          "site": "0x476a98",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x476aa0",
+          "target": "0x43d0ce",
+          "name": ""
+        },
+        {
+          "site": "0x476ab0",
+          "target": "0x43ce9e",
+          "name": "compress_log_output"
+        },
+        {
+          "site": "0x476abc",
+          "target": "0x4494d8",
+          "name": "osTimerStop"
+        },
+        {
+          "site": "0x476ac6",
+          "target": "0x4767a8",
+          "name": "fw_event_loop_timer_callback"
+        }
+      ]
+    }
+  ],
+  "case_count": 42,
+  "cases": [
+    {
+      "case": "encode_472244_[]",
+      "calls": [
+        {
+          "call": "send",
+          "args": [
+            537915128,
+            4,
+            537915128,
+            4
+          ],
+          "packet": "001a9401"
+        }
+      ]
+    },
+    {
+      "case": "encode_4722d8_[4660]",
+      "calls": [
+        {
+          "call": "send",
+          "args": [
+            537915120,
+            6,
+            0,
+            0
+          ],
+          "packet": "001a8a013412"
+        }
+      ]
+    },
+    {
+      "case": "encode_472378_[0]",
+      "calls": [
+        {
+          "call": "send",
+          "args": [
+            537915120,
+            8,
+            0,
+            0
+          ],
+          "packet": "001a8501ffaaaaaa"
+        }
+      ]
+    },
+    {
+      "case": "encode_472378_[1]",
+      "calls": [
+        {
+          "call": "send",
+          "args": [
+            537915120,
+            8,
+            0,
+            0
+          ],
+          "packet": "001a850100aaaaaa"
+        }
+      ]
+    },
+    {
+      "case": "encode_4723d6_[0, 0]",
+      "calls": [
+        {
+          "call": "send",
+          "args": [
+            537915120,
+            8,
+            0,
+            0
+          ],
+          "packet": "001a890100000000"
+        }
+      ]
+    },
+    {
+      "case": "encode_4723d6_[1, 0]",
+      "calls": [
+        {
+          "call": "send",
+          "args": [
+            537915120,
+            8,
+            0,
+            0
+          ],
+          "packet": "001a890180000000"
+        }
+      ]
+    },
+    {
+      "case": "encode_4723d6_[0, 1]",
+      "calls": [
+        {
+          "call": "send",
+          "args": [
+            537915120,
+            8,
+            0,
+            0
+          ],
+          "packet": "001a890140000000"
+        }
+      ]
+    },
+    {
+      "case": "encode_4723d6_[1, 1]",
+      "calls": [
+        {
+          "call": "send",
+          "args": [
+            537915120,
+            8,
+            0,
+            0
+          ],
+          "packet": "001a8901c0000000"
+        }
+      ]
+    },
+    {
+      "case": "encode_472546_[]",
+      "calls": [
+        {
+          "call": "send",
+          "args": [
+            537915128,
+            4,
+            0,
+            0
+          ],
+          "packet": "00358800"
+        }
+      ]
+    },
+    {
+      "case": "rx_owns_copy_and_frees_after_parse",
+      "calls": [
+        {
+          "call": "heap_alloc",
+          "args": [
+            14,
+            537358336,
+            6,
+            0
+          ]
+        },
+        {
+          "call": "queue_put",
+          "args": [
+            4660,
+            537915352,
+            0,
+            0
+          ],
+          "record": "0200000006000000001a8b004901"
+        },
+        {
+          "call": "thread_flags",
+          "args": [
+            17185,
+            4194304,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "queue_get",
+          "args": [
+            4660,
+            537915384,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "battery",
+          "args": [
+            537915304,
+            73,
+            0,
+            0
+          ],
+          "record": "0400020049010000"
+        },
+        {
+          "call": "heap_free",
+          "args": [
+            537395200,
+            73,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "queue_get",
+          "args": [
+            4660,
+            537915384,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "queue_failure",
+      "calls": [
+        {
+          "call": "heap_alloc",
+          "args": [
+            12,
+            537358336,
+            4,
+            0
+          ]
+        },
+        {
+          "call": "queue_put",
+          "args": [
+            4660,
+            537915360,
+            0,
+            0
+          ],
+          "record": "020000000400000000000000"
+        },
+        {
+          "call": "heap_free",
+          "args": [
+            537395200,
+            537915360,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "alloc_failure",
+      "calls": [
+        {
+          "call": "heap_alloc",
+          "args": [
+            12,
+            537358336,
+            4,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "null_data",
+      "calls": []
+    },
+    {
+      "case": "public_interval_path_big_endian",
+      "calls": [
+        {
+          "call": "heap_alloc",
+          "args": [
+            10,
+            537915384,
+            2,
+            0
+          ]
+        },
+        {
+          "call": "queue_put",
+          "args": [
+            4660,
+            537915352,
+            0,
+            0
+          ],
+          "record": "00100000020000003412"
+        },
+        {
+          "call": "thread_flags",
+          "args": [
+            17185,
+            4194304,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "queue_get",
+          "args": [
+            4660,
+            537915384,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "send",
+          "args": [
+            537915096,
+            6,
+            0,
+            0
+          ],
+          "packet": "001a8a011234"
+        },
+        {
+          "call": "heap_free",
+          "args": [
+            537395200,
+            6,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "queue_get",
+          "args": [
+            4660,
+            537915384,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "public_touch_enable",
+      "calls": [
+        {
+          "call": "heap_alloc",
+          "args": [
+            9,
+            537915384,
+            1,
+            0
+          ]
+        },
+        {
+          "call": "queue_put",
+          "args": [
+            4660,
+            537915352,
+            0,
+            0
+          ],
+          "record": "800000000100000001"
+        },
+        {
+          "call": "thread_flags",
+          "args": [
+            17185,
+            4194304,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "queue_get",
+          "args": [
+            4660,
+            537915384,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "send",
+          "args": [
+            537915096,
+            8,
+            0,
+            0
+          ],
+          "packet": "001a850100aaaaaa"
+        },
+        {
+          "call": "heap_free",
+          "args": [
+            537395200,
+            8,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "queue_get",
+          "args": [
+            4660,
+            537915384,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "touch_type_0",
+      "calls": [
+        {
+          "call": "input_event",
+          "args": [
+            4,
+            3,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "touch_type_1",
+      "calls": [
+        {
+          "call": "input_event",
+          "args": [
+            4,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "touch_type_2",
+      "calls": [
+        {
+          "call": "input_event",
+          "args": [
+            4,
+            1,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "touch_type_4",
+      "calls": [
+        {
+          "call": "input_event",
+          "args": [
+            4,
+            5,
+            9,
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "case": "touch_type_5",
+      "calls": [
+        {
+          "call": "input_event",
+          "args": [
+            4,
+            4,
+            9,
+            10
+          ]
+        }
+      ]
+    },
+    {
+      "case": "touch_type_8",
+      "calls": [
+        {
+          "call": "input_event",
+          "args": [
+            4,
+            14,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "touch_type_3",
+      "calls": []
+    },
+    {
+      "case": "suppress_delta99",
+      "calls": []
+    },
+    {
+      "case": "allow_delta100",
+      "calls": [
+        {
+          "call": "input_event",
+          "args": [
+            4,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "type8_bypasses",
+      "calls": [
+        {
+          "call": "input_event",
+          "args": [
+            4,
+            14,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "wrap_delta",
+      "calls": []
+    },
+    {
+      "case": "nonzero_status_still_updates_tick",
+      "calls": []
+    },
+    {
+      "case": "length8_reads_through_offset10_in_padded_buffer",
+      "calls": [
+        {
+          "call": "input_event",
+          "args": [
+            4,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "battery_short_rejected",
+      "calls": []
+    },
+    {
+      "case": "hid_ack_owner0",
+      "calls": [
+        {
+          "call": "remove_delayed",
+          "args": [
+            4965401,
+            5,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "remove_delayed",
+          "args": [
+            4859997,
+            5,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "owner",
+          "args": [
+            0,
+            5,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "phone_ring_info",
+          "args": [
+            0,
+            5,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "hid_ack_owner1",
+      "calls": [
+        {
+          "call": "remove_delayed",
+          "args": [
+            4965401,
+            5,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "remove_delayed",
+          "args": [
+            4859997,
+            5,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "owner",
+          "args": [
+            0,
+            5,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "link_ready",
+          "args": [
+            1,
+            5,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "heartbeat_reply_0",
+      "calls": []
+    },
+    {
+      "case": "heartbeat_reply_20",
+      "calls": [
+        {
+          "call": "remove_delayed",
+          "args": [
+            5001189,
+            5,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "delayed",
+          "args": [
+            5001189,
+            0,
+            100,
+            0
+          ]
+        },
+        {
+          "call": "remove_delayed",
+          "args": [
+            5000933,
+            0,
+            100,
+            0
+          ]
+        },
+        {
+          "call": "delayed",
+          "args": [
+            5000933,
+            0,
+            500,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "heartbeat_reply_40",
+      "calls": [
+        {
+          "call": "remove_delayed",
+          "args": [
+            5001189,
+            5,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "delayed",
+          "args": [
+            5001189,
+            0,
+            100,
+            0
+          ]
+        },
+        {
+          "call": "remove_delayed",
+          "args": [
+            5000933,
+            0,
+            100,
+            0
+          ]
+        },
+        {
+          "call": "delayed",
+          "args": [
+            5000933,
+            0,
+            500,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "invalid_glasses_mac_cleans_current_ring",
+      "calls": [
+        {
+          "call": "ring_mac",
+          "args": [
+            537915376,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "unpair",
+          "args": [
+            537915376,
+            0,
+            0,
+            0
+          ],
+          "mac": "010203040506"
+        }
+      ]
+    },
+    {
+      "case": "wear_duration_in_kernel_ticks",
+      "calls": [
+        {
+          "call": "ticks",
+          "args": [
+            1,
+            537350156,
+            1,
+            0
+          ]
+        },
+        {
+          "call": "ticks",
+          "args": [
+            1000,
+            537350156,
+            0,
+            1
+          ]
+        },
+        {
+          "call": "telemetry",
+          "args": [
+            393474,
+            1,
+            537915324,
+            1
+          ],
+          "duration_ticks": 256
+        }
+      ]
+    },
+    {
+      "case": "tx_wait_timeout_returns",
+      "calls": [
+        {
+          "call": "ticks",
+          "args": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "ticks",
+          "args": [
+            0,
+            0,
+            536887400,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "tx_notify_count0",
+      "calls": [
+        {
+          "call": "sem_count",
+          "args": [
+            22136,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "sem_release",
+          "args": [
+            22136,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "tx_notify_count1",
+      "calls": [
+        {
+          "call": "sem_count",
+          "args": [
+            22136,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "case": "delayed_consumer_reads_reused_stack_payload",
+      "calls": [
+        {
+          "call": "ticks",
+          "args": [
+            16,
+            6,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "ticks",
+          "args": [
+            0,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "wsf_alloc",
+          "args": [
+            12,
+            6,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "wsf_queue",
+          "args": [
+            9,
+            537395200,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "wsf_enq",
+          "args": [
+            537362432,
+            9,
+            537395200,
+            0
+          ],
+          "message": "0100ac00f0ee0f2006000000",
+          "packet_at_enqueue": "001a8a013412"
+        },
+        {
+          "call": "wsf_ready",
+          "args": [
+            9,
+            1,
+            537395200,
+            0
+          ]
+        },
+        {
+          "call": "ticks",
+          "args": [
+            16,
+            6,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "sem_acquire",
+          "args": [
+            22136,
+            10,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "delay",
+          "args": [
+            10,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "ticks",
+          "args": [
+            0,
+            0,
+            536887400,
+            0
+          ]
+        },
+        {
+          "call": "wsf_alloc",
+          "args": [
+            12,
+            6,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "wsf_queue",
+          "args": [
+            9,
+            537395216,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "wsf_enq",
+          "args": [
+            537362432,
+            9,
+            537395216,
+            0
+          ],
+          "message": "0100ac00f0ee0f2006000000",
+          "packet_at_enqueue": "001a8a017856"
+        },
+        {
+          "call": "wsf_ready",
+          "args": [
+            9,
+            1,
+            537395216,
+            0
+          ]
+        },
+        {
+          "call": "write_cmd",
+          "args": [
+            1,
+            16,
+            6,
+            537915120
+          ],
+          "packet": "001a8a017856"
+        }
+      ],
+      "first_enqueued_packet": "001a8a013412",
+      "after_first_return": "001a8a013412",
+      "after_second_return": "001a8a017856",
+      "payload_pointer": "0x200feef0",
+      "schedule": "Both encoders return before first WSF message is dispatched; semaphore acquisition fails."
+    },
+    {
+      "case": "delayed_argument_added_to_kernel_ticks",
+      "calls": [
+        {
+          "call": "mutex_take",
+          "args": [
+            1,
+            4294967295,
+            500,
+            0
+          ]
+        },
+        {
+          "call": "ticks",
+          "args": [
+            537320148,
+            4294967295,
+            500,
+            0
+          ]
+        },
+        {
+          "call": "mutex_release",
+          "args": [
+            1,
+            4294967295,
+            500,
+            0
+          ]
+        },
+        {
+          "call": "timer_stop",
+          "args": [
+            1,
+            4294967295,
+            500,
+            0
+          ]
+        },
+        {
+          "call": "timer_callback",
+          "args": [
+            4278190980,
+            4294967295,
+            500,
+            0
+          ]
+        }
+      ],
+      "deadline": 1400,
+      "tick_now": 1000,
+      "epoch_base": 100,
+      "delay_argument": 500
+    },
+    {
+      "case": "event4_setup_schedule",
+      "calls": [
+        {
+          "call": "remove_delayed",
+          "args": [
+            5001267,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "delayed",
+          "args": [
+            5001267,
+            0,
+            200,
+            0
+          ]
+        },
+        {
+          "call": "remove_delayed",
+          "args": [
+            5000933,
+            0,
+            200,
+            0
+          ]
+        },
+        {
+          "call": "delayed",
+          "args": [
+            5000933,
+            0,
+            500,
+            0
+          ]
+        },
+        {
+          "call": "remove_delayed",
+          "args": [
+            4859997,
+            0,
+            500,
+            0
+          ]
+        },
+        {
+          "call": "delayed",
+          "args": [
+            4859997,
+            0,
+            3000,
+            0
+          ]
+        }
+      ]
+    }
+  ]
+}

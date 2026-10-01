@@ -1,0 +1,21 @@
+{
+  "review_id": "1296",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-tick-callback-35e4-1295/001",
+  "candidate_receipt_sha256": "4aced1e08716ce3b7dafb3f64b49b8c1518d613143bc280aeb9fdab3cfe48362",
+  "candidate_pseudocode_sha256": "26b46c8076faa46e6321202003f522cd4d66c063a8a3799e8452e6310663f171",
+  "candidate_replay_sha256": "59ed4b0871eed6abcedc398ce5685c57bfb2caacca64e3aac16faf04986ea32d",
+  "candidate_replays_sha256": "a9d60fa24ab43617a6f4e4999429b11edf7ae1425cf4cebcdfdf51c45cf83eb2",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "independent_checks": [
+    "Verified the ten-byte code range 0x35E4..0x35EE with an independent Thumb/M-class disassembly: LDR literal pointer, word load, increment, word store, BX LR. 0x35EE is the adjacent NOP; 0x35F0 begins literal/data and is excluded from the body.",
+    "Confirmed the literal at 0x35F0 is 0x200008E8. The caller at 0x3638 loads and stores the incoming zero state, calls A650 with reload 40, then loads the callback pointer 0x35E5 and calls A6A8 for slot zero. A6A8 bounds the slot index to 0..4 and stores the supplied odd Thumb pointer.",
+    "Candidate file hashes and source hash match their receipt. Replayed all five fixtures from an isolated copy; every row confirms exactly one 4-byte read and incremented write at 0x200008E8, modulo-2^32 overflow, preserved R0, and return to the supplied LR stop."
+  ],
+  "limitations": [
+    "Supplied-entry execution verifies only local callback behavior. Timer dispatch, interrupt timing, concurrency/atomicity, and physical hardware behavior remain unresolved.",
+    "Private pseudocode evidence only; no canonical admission or C implementation."
+  ]
+}

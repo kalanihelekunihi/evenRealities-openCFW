@@ -1,0 +1,19 @@
+{
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-enable-control-a0bc-1225/001",
+  "candidate_source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "candidate_files": {
+    "pseudocode.md": "d5873d5f9888daedbf4f857cb5034276de14a6278eb703f6caa7c502bf98d364",
+    "replay.py": "a377cf58b4ef4ba1bea03b04397f1f08d91c23e6eddccffcb316e882143c87e0",
+    "replays.json": "144738e0fc8f72314080cfe8332e3495265f02dc06ca00d5447beb98b5b26833"
+  },
+  "review_result": "PASS_SCOPED",
+  "checks": {
+    "original_bytes": "Independent Thumb+MCLASS decoding of A0BC..A0FA confirms unsigned selector bound <=3; the R1==1/R2<=1 branch; the uxtb(R1-2)<=1/R2==0 branch; the word address 0x40010100+4*selector; packed value ((R1<<6)&255)|(R2&63); and the three rejection loads. Pool value at A100 is 0x004A0001, consistent with the stated rejection result.",
+    "replay": "All 168 isolated original-byte fixtures pass and regenerate candidate rows exactly. The fixture matrix checks valid aliases 258/259, thresholds, address/value writes, no-write rejection, return values, and SP."
+  },
+  "limits": [
+    "RAM/MMIO are synthetic; no physical enable-register interpretation is established.",
+    "No canonical admission is claimed."
+  ],
+  "accepted": false
+}

@@ -1,0 +1,7 @@
+Independent review of touch-application-original-budget-prefix-1546/001
+
+Candidate receipt SHA-256 abafe43b45bc22e7961b5259477934ecbf39e31d7c1c224a11d34378738a10e7; pseudocode 3a3691b0bb19917b7a681adca2a073e3ff7f19a001003b6fb92bff6aa07e8b35; replay 8f3fb3e983e8401f16263b4ccdc8ad445d0862dc9f901118f874437a13862557; budgets adf4bea82246bd9982fb5dc0b10a955cede46ff632a36a6186ea923a79672bf2; source 371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87.
+
+Isolated cumulative original-instruction replay passed to 0x3D50. The three original 0x7288 rows produce budgets 3310, 3310 and 2475. All four 0x5FA4 calls execute with original A6C0: recorded arguments are (3310,48,5), (3310,48,5), (2475,48,5), and (1,000,000,48,5), with results 31,776, 31,776, 23,760, and 9,600,000. The original calibration chain takes the ready/success path under the synthetic status. Nine state-helper entries, context byte +85=1, state byte +0x73=1 and inherited startup assertions pass.
+
+PASS_SCOPED. Remaining state/activation/storage helpers are controlled; RAM/MMIO and external clock tables are synthetic. This does not establish physical behavior or whole-firmware coverage. No canonical admission.

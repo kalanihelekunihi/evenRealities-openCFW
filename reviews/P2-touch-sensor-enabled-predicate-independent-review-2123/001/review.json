@@ -1,0 +1,20 @@
+{
+  "review_id": "2123",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-sensor-enabled-predicate-7dde-2122/001",
+  "candidate_receipt_sha256": "07d7ff5ae58920c42aa013f2c203ef541c7ca7718630ac16e8714ac9955d350c",
+  "candidate_pseudocode_sha256": "38628e630855923fbcbf182b7880126e97e7ca283027afc531a0524fc1d4fda9",
+  "candidate_replay_sha256": "ceb5610ec1b4f932bbf2a59f07c689916b5c232bd4002702c2237daa642897d9",
+  "candidate_replays_sha256": "5c66aef7cef92d3ea0b7be760bca85728a3210e396319097ca3b1a8d52d83bdd",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "All candidate pins match. Isolated replay passed all 1,280 original-instruction cases across 256 flag-byte values and indices 0, 1, 2, 3, and 0xFFFFFFFF.",
+    "The invalid-index cases with null context returned zero without context reads, supporting the unsigned index guard before dereference. Valid-index cases support base load from context+16, byte load at base+index*60+35, and result 1 exactly when (byte & 6)==6.",
+    "The 38-byte body boundary [0x7DDE,0x7E04) and exclusion of adjacent 0x7E04 are consistent with the pinned original body. No helper or function interception is present."
+  ],
+  "limitations": [
+    "The two-bit predicate's hardware or product-level meaning is provisional. Invalid indices beyond the tested sentinels, pointer validity, concurrency, and caller behavior are not established.",
+    "No canonical admission or whole-image completeness is claimed."
+  ]
+}

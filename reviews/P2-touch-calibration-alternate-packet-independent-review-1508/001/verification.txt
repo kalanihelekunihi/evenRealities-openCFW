@@ -1,0 +1,9 @@
+Independent review of touch-calibration-alternate-packet-1507/002
+
+Candidate receipt SHA-256 d276baa50702415600078469f0b3960c61486f2f1ee7eba2711fc13633ce9881; pseudocode 4570003c7caf05bdec1e4ed5bb8ecb8eef26235d397c9306b8dc0d312543c09f; replay b12cee61bbfae5fee276db183952f1e9820fc2ab7a5d60ca490f0fde3fc81b95. Source image SHA-256 371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87.
+
+The original-instruction disassembly confirms the alternate branch: after comparing record byte +123 with 7, it loads descriptor word +44, computes 44 times the saved entry R2 index, adds 20, and uses that packet address. The index is saved in FP at entry; 0x7BFE..0x7C04 reconstructs the separate normal-path offset, while the alternate path uses the still-preserved saved index. This does not depend on the controlled 0x6AC0 helper preserving R1. Verified code extent 0x7BC0..0x7CEE, with literals at 0x7CF0 and 0x7CF4.
+
+An isolated original-instruction replay passed all 648 fixtures. It varies state, arithmetic inputs, and saved packet index 0/1, and checks output, status, control word, helper call and SP. PASS_SCOPED.
+
+The 0x6AC0 helper is controlled, and RAM/MMIO are synthetic. Only alternate mode 7 and packet indices 0/1 are exercised; pointer validity, other mode paths, helper clobbers and physical behavior remain outside scope. No canonical admission.

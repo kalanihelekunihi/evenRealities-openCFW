@@ -1,0 +1,9 @@
+Independent review of arc-direct-callee-3068c8-1531/001
+
+Candidate receipt SHA-256 e189b808593af4639a1be936bfb19bf433927bff6be22f967e213826e78aea6b; pseudocode e5094fd64adf6172c8b4333b7925f3797798b3200000ecf507a03ac069dd987a; body 00e23deb878b09fb920d569158424d10cfdd8655021e2acb4a0630287882230a.
+
+The isolated verifier passed authenticated source/package/caller pins, exact 68-byte extraction, carrier rebuild, ARCv2 EM decoding, and output hashes. Independently checked 21 contiguous instructions from 0x003068C8 through 0x0030690A. The body clears interrupts and syncs, sets LP_COUNT=18 and enters the LP loop. The delayed branch at 0x3068E4 selects terminal R0=0x99 when R1==17; otherwise fallthrough selects R2 and performs the offset-zero store. ADD2 forms row+4*R0; each pass stores -1 at row+12/+24 with SYNC, then increments R3 by 0x24, R2 by 9 and R1 by 1. Under the documented ARC LP_COUNT convention this yields 18 iterations, 17 offset-zero stores, and 53 total stores. The final `j_s [blink]` is non-delayed.
+
+The exact caller 0x00302B20 is ordinary BL with no delay slot; it passes a value derived from STATUS32/KFLAG, but this callee overwrites incoming R0 before its loop use. PASS_STATIC_SCOPED.
+
+Static fixtures derive loop/store facts from instructions; they do not execute ARC CPU or prove MMIO semantics. The SDK symbol name is provisional, no global entry census was performed, and no physical interrupt/timing or canonical admission is claimed.

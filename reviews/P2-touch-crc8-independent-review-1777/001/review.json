@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-crc8-independent-review-1777",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "scope": {
+    "candidate": "analysis/touch-crc8-7e68-1772/001",
+    "code_span": [
+      "0x7e68",
+      "0x7ea4"
+    ],
+    "reviewed": "The exact body is 7E68..7EA4 (60 bytes, 30 instructions). The 21 isolated fixtures reproduce the returned CRC and each byte-read address for lengths through 257. Instruction flow initializes 0xFF and a 16-bit index, XORs each input byte, performs eight high-bit-conditioned shift/XOR rounds with polynomial 0x31, increments the index modulo 65536, compares that index against the full incoming R1, and returns without a final XOR. The pseudocode matches the instruction sequence."
+  },
+  "pins": {
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "candidate_receipt_sha256": "b5bc2627305fa57a4cb5cb6beb5f46ce5c509ead83ced521136043b3219bf90e",
+    "body_sha256": "7d97e84c7b28750fd51177cdb4d88e36e5c23e53a0d1e1d8dc1be57f488371b7",
+    "candidate_replays_sha256": "cca839b480f44ceb2f55798158df4addf8362db1bcb4eb4e9fb72067958b8515"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "The exact body is 7E68..7EA4 (60 bytes, 30 instructions). The 21 isolated fixtures reproduce the returned CRC and each byte-read address for lengths through 257. Instruction flow initializes 0xFF and a 16-bit index, XORs each input byte, performs eight high-bit-conditioned shift/XOR rounds with polynomial 0x31, increments the index modulo 65536, compares that index against the full incoming R1, and returns without a final XOR. The pseudocode matches the instruction sequence."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "Candidate files and source match the pinned hashes; isolated replay is byte-identical to the candidate replay JSON."
+    },
+    {
+      "id": "F3",
+      "severity": "none",
+      "result": "The 16-bit index wraps while comparison uses full-width R5. Thus lengths above 65535 cannot be reached by the index; this is a decoded termination limitation, not dynamically tested here."
+    }
+  ],
+  "limitations": [
+    "Only input lengths through 257, accessible synthetic memory and nonconcurrent reads are exercised. Lengths above 65535 may not terminate in ordinary memory as documented.",
+    "No canonical admission."
+  ],
+  "checks": [
+    {
+      "command": "candidate source/body/artifact pin checks",
+      "result": "PASS"
+    },
+    {
+      "command": "independent instruction-flow review",
+      "result": "PASS"
+    },
+    {
+      "command": "isolated replay of all 21 fixtures",
+      "result": "PASS; exact replay JSON match",
+      "artifact": "isolated-replays.json"
+    }
+  ],
+  "canonical_or_coverage_change": false
+}

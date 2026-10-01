@@ -1,0 +1,17 @@
+{
+  "review_id": "1539",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-original-delay-prefix-1538/002",
+  "candidate_receipt_sha256": "70e6795bcae9f24fa39ba1b98736f5f725967fc7c78764c68ced66b6c47d4ced",
+  "candidate_pseudocode_sha256": "dfb5e82c72ba84c78a71440d474a2a6e8ed4934d97e980704e0cb15a47943907",
+  "candidate_replay_sha256": "e7ec0498d11917a44713cb6dd1fbe5f2b373bcb107e3fc8e18bb9305a8eb0cad",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Isolated cumulative replay passed to 0x3D50 with actual original 0x6608, all 315 A324 calls and all 318 A324/earlier 0x4480 entries executing; no A324/4480 call substitution is present.",
+    "Confirmed the initialized frequency byte is 48 and inherited startup call order, state and final assertions pass."
+  ],
+  "limitations": [
+    "Status/MMIO and external clock tables are synthetic. Later 0x7288, 0x5FA4 and application boundaries remain controlled; no physical elapsed-time or whole-firmware claim. No canonical admission."
+  ]
+}

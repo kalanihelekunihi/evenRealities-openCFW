@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-gated-entry-copy-independent-review-2169",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "accepted": false,
+  "scope": {
+    "candidate": "analysis/touch-gated-entry-copy-49d4-2166/001",
+    "reviewed": "18-byte gate/copy wrapper, shift/test behavior, child arguments, buffer effects, registers and SP"
+  },
+  "pins": {
+    "candidate_receipt_sha256": "2d976095997d03f652e463ad0aa9804c3d1b7c804f13608e839de979a3c66678",
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "body_sha256": "ed87531e7414a254e0b1f489b3906154e2c4217a2142de821812545f95ab257a",
+    "candidate_replays_sha256": "6c71756a2e4e50f5f047690a9bfef731cc386335ff3fe0585e3879eeac3219a9",
+    "candidate_files": {
+      "replays.json": "6c71756a2e4e50f5f047690a9bfef731cc386335ff3fe0585e3879eeac3219a9",
+      "replay.py": "e9e8d0aae9ada60f6466325fee6824d57f292d8b442ecb371b18e2d2eeeb19bc",
+      "pseudocode.md": "f4f80dcd7b923e56868806c2743512a64e2504dc4db7944077546cf1cdc4116a",
+      "disassembly.txt": "0207908d246cd3886f0fbf66aac30766236eced03d762b220216e2005be8dcc6"
+    }
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "Independent decode confirms 49D4..49E6 is exactly 18 bytes. The wrapper saves R4/LR, copies incoming R2 destination to R3, shifts R0 left 30 and tests sign (the original bit1 gate). On the enabled path it sets R2=8, restores destination to R0 and calls AA2C(destination,source,8); on the other path no buffer access occurs and shifted R0 is returned. After copying, AA2C returns destination in R0. R4 and SP restore."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "All 2,048 original-byte fixtures pass in isolation, with byte-identical replay output. They cover all low-byte modes, two upper-bit patterns, and source/destination relations at shifts -1,0,1,128. Complete allocation contents and child arguments are checked; original AA2C executes without interception."
+    },
+    {
+      "id": "F3",
+      "severity": "low",
+      "result": "The replay does not explicitly assert the incidental R0 value on each branch, although the decoded register flow establishes the values described in pseudocode. Candidate claims are supported statically, while fixture-based return-value confirmation is absent."
+    }
+  ],
+  "limitations": [
+    "Only the tested 256 low-byte modes, two upper-bit patterns and four offsets are covered.",
+    "Address wrap/fault behavior, concurrency, and physical buffer meaning are unresolved.",
+    "No canonical admission or C implementation."
+  ],
+  "checks": [
+    {
+      "command": "source/body/receipt artifact hash verification",
+      "result": "PASS",
+      "artifact": "source-checks.json"
+    },
+    {
+      "command": "independent Thumb decode and isolated replay",
+      "result": "PASS; 2,048 fixtures, replay JSON identical",
+      "artifact": "replay.txt"
+    }
+  ],
+  "review_artifacts": {
+    "source_checks_sha256": "083e1e5e6dbfc06acd5f0e3459ab94b3e8ba3786096f95e64ae29ea88fc1a054",
+    "disassembly_sha256": "0207908d246cd3886f0fbf66aac30766236eced03d762b220216e2005be8dcc6",
+    "replay_sha256": "6ff6c6d16643a7967354006c4c37a375d1a83fdd7d444da5e4b4722dde8db332"
+  },
+  "canonical_or_coverage_change": false
+}

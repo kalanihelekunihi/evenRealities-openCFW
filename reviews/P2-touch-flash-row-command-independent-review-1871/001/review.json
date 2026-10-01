@@ -1,0 +1,20 @@
+{
+  "review_id": "1871",
+  "status": "REVISE_PROSE",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-flash-row-command-1860/002",
+  "candidate_receipt_sha256": "31cc02627c97429f9616f8e83db1e951f2d05e1833ff5415f0ef0fcf2e24f4c3",
+  "source_sha256": "371d8a61b659a33b4cad9a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "body_sha256": "39fce21dfafb0c7897186835dda1c574712fcc73672c9ed3aec53c20a6686303",
+  "checks": [
+    "Candidate source and all file hashes match its receipt. Isolated replay passed 60 cases and generated a byte-identical replay JSON.",
+    "Original body is exactly 8D50..8E04 (180 bytes, 80 instructions); literal data begins at 8E04. The 8CA8 address-index helper executes first at 8D58, followed by 8C74 validation at 8D60. AA2C then copies 128 bytes to frame+8.",
+    "Pseudocode otherwise matches the frame words, initial MMIO writes, first command status gate, interrupt save/restore, conditional 8CC4\u21928D00 sequence, unsigned destination threshold, second command buffer/command value, unconditional 8D20 cleanup after second command, and command-status precedence over cleanup status.",
+    "Corrected fixtures cover all five fallible calls: initial 8BF4; 8CC4; 8D00; second 8BF4; 8D20. Nonzero second-command status still runs cleanup and takes precedence; otherwise cleanup status is returned. Stack balance and saved interrupt restoration are asserted."
+  ],
+  "required_correction": "Clarify call order in the opening pseudocode: derive the row index via 8CA8 first, then validate the destination via 8C74. This corrects the presented order without changing fixture or hardware claims.",
+  "limitations": [
+    "The six hardware/ROM helper entries are controlled; their physical effects and resident implementation are unknown. Register observations are synthetic boundary fixtures, not physical flash verification.",
+    "No canonical admission or C implementation."
+  ]
+}

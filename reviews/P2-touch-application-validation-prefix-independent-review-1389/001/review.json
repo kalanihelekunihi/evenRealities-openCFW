@@ -1,0 +1,19 @@
+{
+  "review_id": "1389",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-validation-prefix-1388/001",
+  "candidate_receipt_sha256": "84f2e4f748cd20e80f2c5b0b40cfa5cea12dda628f4f3786f4ce0090fac380f1",
+  "candidate_pseudocode_sha256": "7531608ff26add46271d98a2846099a3ae7605081efdbfa7d7850848e20782bd",
+  "candidate_replay_sha256": "f88be07dbff5c6a31e8d409b53ce65753d23580ac2df629aa635ef31780bed05",
+  "candidate_replays_sha256": "369b368e00eae6aaf98d28e7211e187f21e290a8806eb5448eb9d21b3be15765",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "The isolated startup replay reaches 0x3D50 with actual 7D92 code executed on the initialized descriptor pointer. Its seven descriptor words are not fixture-injected; the candidate confirms the validator executes and returns zero before the previously scoped activation path continues.",
+    "The candidate preserves the earlier ordered state, flag, vector, register, and frame assertions. The validator result is a successful-path precondition in this single prefix run, not broad validation coverage."
+  ],
+  "limitations": [
+    "This packet contains one successful original-descriptor prefix fixture and does not establish semantic validity for pointer fields. Other activation/storage/application dependencies remain controlled, external clock tables are synthetic, and physical interrupt/application behavior is unresolved. No canonical admission or C implementation."
+  ]
+}

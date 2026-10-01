@@ -1,0 +1,19 @@
+{
+  "review_id": "2009",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-power-callback-wide-modes-2008/001",
+  "candidate_receipt_sha256": "8cdcca192d372e6b2dbcffb957e9d5490c1de01acf69bf365406053472d1e5e0",
+  "candidate_pseudocode_sha256": "a8e641733cbd2ec79403d27eb5f97f112bb47d8749917878019ea397f34d0316",
+  "candidate_replay_sha256": "46a4c5d92a5235b217855a05f1a1d1d6efab1237c5254c4cd06fb8fc03001a55",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "The immutable source pin and all receipt file hashes match.",
+    "Isolated replay reproduced all 384 fixture rows exactly across both indices, six wide aliases, all skip masks and four callback-return placements.",
+    "Results show the low-byte validation accepts these aliases, while later full-word mode comparisons send them to reverse traversal. Callback R1 and skip matching use the full 32-bit alias; sentinel returns do not trigger exact-mode-1 stopping. Last-invoked and per-index failure globals remain unchanged, and argument-copy/stack assertions pass."
+  ],
+  "limitations": [
+    "The result applies to the six fixture aliases and supplied acyclic lists only. Null heads, assertion continuation, cycles and arbitrary callback effects remain unresolved.",
+    "No canonical admission."
+  ]
+}

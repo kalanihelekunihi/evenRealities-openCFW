@@ -1,0 +1,20 @@
+{
+  "review_id": "1350",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-secondary-interrupt-prefix-1349/002",
+  "candidate_receipt_sha256": "7280456b70955f68a65753badd96606ff8e748289ae41cd92ab5c5e8db0c8eb2",
+  "candidate_pseudocode_sha256": "d8a23e445f58e05e23308aeef4fc2384fa926c4784434846d57bc00a47d2e09b",
+  "candidate_replay_sha256": "d38072fd120654a5bd9508752552a3c97d449e265fa2f099932e8928691f5c75",
+  "candidate_replays_sha256": "d68079052d8d0acd97185aefe46da82e3b5e36e91f75c37e042c7fcba8ba5959",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "The candidate rebinds the original image and literal values, including the copied descriptor/vector pointer. Independent inspection confirms callback 0x3949 corresponds to vector word 24 at 0x20000460, and the actual nested path runs 0x38E0/A2A8/A214/A274; only the listed deeper calls are controlled.",
+    "The isolated replay succeeds through 0x3D50. It asserts the vector word, callback address, ordered IRQ enable writes 0x80 then 0x100 to 0xE000E100, pending clear and priority writes, and retained earlier application-state checks. The corrected 002 expected final enable value is 256, consistent with the actual bit-8 write after the earlier bit-7 write."
+  ],
+  "limitations": [
+    "This is one successful-prefix fixture, not broad branch coverage. Four storage calls, two deeper secondary-initialization calls, and two later app calls are controlled; supplied external clock table bytes remain synthetic.",
+    "Physical interrupt dispatch, deeper initialization, and later application behavior remain unresolved. No canonical admission or implementation claim."
+  ]
+}

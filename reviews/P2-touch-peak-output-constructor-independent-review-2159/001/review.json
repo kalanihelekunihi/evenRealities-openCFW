@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-peak-output-constructor-independent-review-2159",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "accepted": false,
+  "scope": {
+    "candidate": "analysis/touch-peak-output-constructor-48cc-2156/002",
+    "reviewed": "body/literal ownership, peak scan, mode/count/scale arithmetic, division calls and output effects on the tested configurations"
+  },
+  "pins": {
+    "candidate_receipt_sha256": "904533add9ebf67cb90b9647e05bf96a539cd6788018f0007f61c5c7ba575a3c",
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "body_sha256": "8c75635fda809a3e1e93276cacc12fde908a9e5e03a65fa4728069ad2c1c3ee1",
+    "literal_sha256": "08efea1c0957a5a1fe019e6edb21fdc9fbe5de2213487eab7a05e06eca1c9784",
+    "candidate_replays_sha256": "f486970fedc15e53e4a12f5b096688a39303db87b5509bf3d06fc69ec6d0b483",
+    "candidate_files": {
+      "replays.json": "f486970fedc15e53e4a12f5b096688a39303db87b5509bf3d06fc69ec6d0b483",
+      "replay.py": "945e9a425641b95e610f35697f79160970cea27fdad6f1d986f2154b4299e07a",
+      "pseudocode.md": "37a88b5bf4e7d6a1770801c2de655d5c2a10cb2d03fe7a611cc91034aa30067a",
+      "disassembly.txt": "f7e6cca64ea0f2049f498930f577b7a12c6dae4404bd4daefebac850211c8184"
+    }
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "Independent extraction confirms code [0x48CC,0x49CE) is 258 bytes and referenced literal [0x49D0,0x49D4) is little-endian 0x0000FFFF. The adjacent instruction at 0x49CE is outside the owned code range."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "The disassembly agrees with the pseudocode: effective count is at least 3; mode low bits gate the scan; a first maximum item is selected only when center plus available neighbors strictly improves the prior sum; spacing bit 8 changes the divisor and center offset; right-minus-left is multiplied with 32-bit wrap and passed to the original signed divider; final value is rounded by +127 then shifted and stored, with scratch count set. R4-R11 and SP are restored; R0 is not treated as a status contract."
+    },
+    {
+      "id": "F3",
+      "severity": "none",
+      "result": "An isolated rerun passed all 600 cases and produced replay JSON byte-identical to the frozen candidate. Candidate receipt-listed files and source image hash verified. Fixtures include the stated count/mode/span/value pattern combinations and check output count/value, trailing destination sentinels, saved registers and SP."
+    }
+  ],
+  "limitations": [
+    "Fixtures use separate mapped buffers and bounded input layouts; aliasing, concurrency, caller reachability, and item allocation guarantees are unresolved.",
+    "Only the tested mode, count, span, and value families are covered; this is not all-input proof.",
+    "No physical sensor meaning, canonical admission, or C implementation is claimed."
+  ],
+  "checks": [
+    {
+      "command": "independent source/body/literal extraction and receipt file hash checks",
+      "result": "PASS",
+      "artifact": "source-checks.json"
+    },
+    {
+      "command": "isolated replay with output redirected",
+      "result": "PASS; 600 fixtures and byte-identical replay output",
+      "artifact": "replays.json"
+    }
+  ],
+  "review_artifacts": {
+    "source_checks_sha256": "a18fe9407a88c6a7f25d3d1cfe6f977d2ae56f9f52f7397cce06a8618e9ef6a3",
+    "replay_sha256": "07c192652618e24231606b941cf704007731cfc42f40e1548d22217f0c899630"
+  },
+  "canonical_or_coverage_change": false
+}

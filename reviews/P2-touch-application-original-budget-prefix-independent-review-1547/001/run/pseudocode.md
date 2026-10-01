@@ -1,0 +1,5 @@
+# Startup with original calibration budgets
+
+Original 7288 executes for all three rows and computes positive budgets. All four 5FA4 scaling calls and their original A6C0 division execute; the first three completion budgets are positive. The original completion and calibration chain therefore follows the success path under the synthetic ready status. The cumulative startup reaches 3D50 with all inherited assertions: nine 6AC0 entries, context byte85=1 and state118=1. Exact budget inputs and results are recorded in budgets.json and checked against wrapped arithmetic.
+
+This explains the prior zero-budget fixture: its controlled 7288 returned zero, causing the error path after original scaling was enabled. Both fixtures remain distinct evidence. 7288 performs a calculation, so there is no remaining acquisition control at that boundary. Other state-two, activation, storage and later application helpers remain controlled; MMIO and external clock tables are synthetic. Physical behavior and whole-firmware coverage remain unresolved. No canonical admission or C implementation.

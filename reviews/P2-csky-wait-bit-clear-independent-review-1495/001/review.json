@@ -1,0 +1,18 @@
+{
+  "review_id": "1495",
+  "status": "PASS_STATIC_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-wait-bit-clear-1482/001",
+  "candidate_receipt_sha256": "f09b777316ac63dae5ff251ebd3d2c033e74c615edd44f40d85f3c5a2ab3e78d",
+  "candidate_pseudocode_sha256": "588cfcb962e2315f4c82cb0634d84a40cbefa5f0f6c6ae745ae42a77b65ede86",
+  "candidate_body_sha256": "4c69925f75f82a665d3f637a6b5e93397488e1ae4279ebb5716c9349bc6c0319",
+  "source_sha256": "9546164f32680de47fa99ba85ba08a3c538822260957de6c1baee772638da464",
+  "checks": [
+    "The isolated verifier confirms the exact 16-byte body [0x10000B4C,0x10000B5C), six contiguous decoded instructions, source/tool/semantics/dependency pins, and six full-image call sites.",
+    "Independent decode confirms a fresh 32-bit read from 0xA2000028, AND 1, and BNEZ back to the load. The leaf returns R0=0 on an even read and has no stores, stack operations, or calls.",
+    "Five controlled read-sequence traces cover immediate clear, odd/even values, changing sequences, and repeated set-bit reads; their return/nonreturn classifications agree with the instruction loop."
+  ],
+  "limitations": [
+    "These are controlled static poll traces, not peripheral execution. The leaf has no timeout; physical meaning and caller-level behavior remain unresolved. Mapping is conditional, no canonical admission."
+  ]
+}

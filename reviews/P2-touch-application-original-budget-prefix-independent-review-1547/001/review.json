@@ -1,0 +1,19 @@
+{
+  "review_id": "1547",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-original-budget-prefix-1546/001",
+  "candidate_receipt_sha256": "abafe43b45bc22e7961b5259477934ecbf39e31d7c1c224a11d34378738a10e7",
+  "candidate_pseudocode_sha256": "3a3691b0bb19917b7a681adca2a073e3ff7f19a001003b6fb92bff6aa07e8b35",
+  "candidate_replay_sha256": "8f3fb3e983e8401f16263b4ccdc8ad445d0862dc9f901118f874437a13862557",
+  "budgets_sha256": "adf4bea82246bd9982fb5dc0b10a955cede46ff632a36a6186ea923a79672bf2",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Isolated cumulative replay passed to 0x3D50 with all three original 0x7288 executions and original 0x5FA4/A6C0 scaling calls.",
+    "Recomputed and checked recorded budget/scaling values: row budgets 3310, 3310, 2475; four scale call triples (3310,48,5), (3310,48,5), (2475,48,5), (1000000,48,5); quotient results 31776, 31776, 23760, 9600000.",
+    "Confirmed the success path under synthetic ready status, nine 6AC0 entries, context +0x55=1, state +0x73=1 and inherited startup assertions."
+  ],
+  "limitations": [
+    "Remaining state/activation/storage helpers are controlled; memory/MMIO and external clock tables are synthetic. No physical or whole-firmware claim and no canonical admission."
+  ]
+}

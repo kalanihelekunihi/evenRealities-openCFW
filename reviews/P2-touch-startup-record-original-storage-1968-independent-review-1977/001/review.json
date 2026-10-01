@@ -1,0 +1,20 @@
+{
+  "review_id": "1977",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-startup-record-original-storage-1968/001",
+  "candidate_receipt_sha256": "578fe3f69326d16b51ffb4957d8e201ca8f6eee175b382467707dd85c876315c",
+  "candidate_pseudocode_sha256": "df6f5883946e45ae2420607add099fccb5a5d6bc9dcab30fc734ccbae3c0257c",
+  "candidate_replay_sha256": "0216589bdc273ab00d6644cdb0911cd19ed855d841bb4030fd6d959b293300eb",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Recomputed receipt file hashes and source hash; all match.",
+    "Ran an isolated replay copy; its replays.json matches the candidate byte-for-byte.",
+    "Separately checked record.json: result 0, one expected log record, stop PC 0x09000000 and restored SP 0x2000EFD8.",
+    "The packet\u2019s own description and artifacts distinguish the startup replay snapshot from the later follow-up write call."
+  ],
+  "limitations": [
+    "The clock completion hook, flash status reads, prior IRQ delivery/context, and logging are modeled. This is a bounded composition, not physical startup or full application proof.",
+    "Private evidence only; no canonical admission."
+  ]
+}

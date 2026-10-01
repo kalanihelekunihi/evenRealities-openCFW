@@ -1,0 +1,31 @@
+{
+  "review_id": "1212/001",
+  "decision": "PASS_SCOPED",
+  "scope": "Independent review of A104 original-byte predicate, write and subsequent read under synthetic MMIO; physical register semantics remain unproven.",
+  "candidate": {
+    "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-register-config-a104-1211/001",
+    "receipt_sha256": "e11f2ed3566d17df048a6eff22dd5866ce11e6e633bf7c24cab8766c1f18dfcb",
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "body_sha256": "9fc9768cae104554d2fca1cde869fe364ca00cb5712305407815697b857b1cf4",
+    "files": {
+      "pseudocode.md": "4fc20313ad9f7cdd4b033bdbb825c880eeb4990d9013780f2a4ef7137d331694",
+      "replay.py": "415c1c96533791a957f4dc9d6ce0f42735a1b79021196157109ba3380dfe475d",
+      "replays.json": "414203258727d8bb420194639b8f29b988e166dba95f8bb05a8421907eeb5c85"
+    }
+  },
+  "independent_artifacts": {
+    "isolated_replay": "reviews/P2-touch-register-config-a104-independent-review-1212/001/replay_isolated.py",
+    "regenerated_rows": "reviews/P2-touch-register-config-a104-independent-review-1212/001/regenerated/replays.json",
+    "regenerated_rows_sha256": "414203258727d8bb420194639b8f29b988e166dba95f8bb05a8421907eeb5c85"
+  },
+  "checks": [
+    "Independently decoded the exact 56-byte A104..A13C body from the pinned firmware. Its predicate matches A148: R0==1 and unsigned R1<=1, or UXTB(R0-2)<=1 and R1==0.",
+    "The accepted path builds 0x8000FF00 | ((R0<<6)&0xFF) | (R1&0x3F), stores one word at 0x40010000, performs one later fresh word load from the address register, ignores that loaded value, and returns zero. Rejection returns literal 0x004A0001 or 0x004A0002 without a store.",
+    "Reran all 54 original-byte fixtures in an isolated output directory; regenerated rows match exactly, including accepted low-byte aliases 258/259 only with R1 zero and rejection boundaries.",
+    "Accepted fixtures log exactly one 32-bit write and one following read at the same register; rejected fixtures have neither. The function has no helper calls or stack frame, and SP is unchanged."
+  ],
+  "limitations": [
+    "The memory-mapped register is synthetic. The instruction trace does not establish command meaning, peripheral side effects, or actual hardware readback behavior.",
+    "Only the supplied finite test matrix is covered; no broader runtime reachability or canonical coverage is implied."
+  ]
+}

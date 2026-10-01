@@ -1,0 +1,17 @@
+{
+  "review_id": "1937",
+  "status": "REVISE_PROSE",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-overlay-whole-routine-1928/001",
+  "candidate_receipt_sha256": "90d577ec596e00671c0722cc5641543262f98800cf8b19194acb73e50a3b467d",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "body_sha256": "bc17e537a95f85a8537369b7468149e9647e69b7453214c9cb61d188e04836f4",
+  "checks": [
+    "Receipt binds to the pinned source. Independent Capstone M-class decode reproduces all 183 instructions across [0x8680,0x8804), exactly matching the 388-byte body and saved disassembly. All five parent trace receipt hashes and each listed file hash match. This packet contains pseudocode/disassembly but no replay harness, so no fixture regeneration was possible for this whole-body candidate.",
+    "Most control-flow/dataflow claims agree with the decode: the sequence/count branch chooses a bounded candidate count; the final iteration uses scratch and does not reset the previous checksum status; candidate failures can therefore persist; the provider call result is not subsequently tested.",
+    "The left-starting overlap pseudocode is incorrect. At 0x87C6\u20130x87D4, code compares windowEnd with overlayEnd. If windowEnd is below overlayEnd, it sets copy amount to windowEnd\u2212windowStart; otherwise it retains overlayEnd\u2212windowStart. The decoded amount is therefore min(windowEnd, overlayEnd)\u2212windowStart, not unconditionally overlayEnd\u2212windowStart. This is a right-edge clamp in that branch. The related 1926 trace\u2019s offset=60,length=128 case does not distinguish these models: bytes beyond the logical window are zero in both synthetic source backing and destination, so its whole-buffer equality cannot evidence writes beyond that window."
+  ],
+  "limitations": [
+    "This is an append-only pseudocode correction request; no candidate files were changed. Other geometry and all external provider/physical storage behavior remain subject to the packet\u2019s stated limits. Parent trace fixtures do not close the full whole-body semantic model. Canonical admission remains false."
+  ]
+}

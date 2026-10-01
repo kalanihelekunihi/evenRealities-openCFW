@@ -1,0 +1,20 @@
+{
+  "review_id": "1863",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-a-board-init-wrapper-1852/001",
+  "candidate_receipt_sha256": "e38580ab243c127f6358876bad4a7414846db8b31a5768bdf60d26af7d31e76d",
+  "source_sram_sha256": "53860d6974097ad494c6697df52f95b796360131fab63cd8bfd7efc9c5596de8",
+  "source_xip_sha256": "49c9aed0126493220a3e48827c267d5e94f64d51d9ede0ccc3e84b8946744584",
+  "body_sha256": "f4d9e98b7ce4ca2ab12c33fca6d9b6da5d5e1e96fe7c28b9e50f3b34b5c3202f",
+  "checks": [
+    "Candidate verifier passes, confirming all manifest artifacts, extracted SRAM/XIP source slices, installed C-SKY objdump output, and pinned parent artifacts. Receipt, manifest and input-pin hashes match the stated candidate binding.",
+    "The owned SRAM body is exactly child [0x28BC,0x28D0), 20 bytes/seven instructions at conditional runtime base 0x10023400. Disassembly and pseudocode agree: push r15; call 0x10024940; unsigned compare R0 with 2; branch around 0x100245F0 for values below 2; call that helper for values >=2; branch to candidate XIP coordinate 0x10203C74; local pop r15 on source fallthrough.",
+    "The status decoder call replaces incoming R0 before comparison. The linked status-decoder evidence supports returned values 0..5, so static fixture cases 0/1 skip the optional helper and 2..5 call it. The pseudocode correctly leaves helper effects and result unresolved.",
+    "The conditional XIP base is explicitly parameterized by the hardware-gated flash boot address. The source-backed fragment at child [0x3C74,0x3C76) is exactly 90 14 and decodes as pop r15. Conditional stack composition is described carefully: if fetched, it could consume the wrapper-saved return and bypass the local pop; this is not a claim that XIP is mapped or executed."
+  ],
+  "limitations": [
+    "No hardware execution, physical XIP mapping/fetch, image-selection proof, or MMIO interpretation is established. The XIP target ownership ends at the two-byte fragment; surrounding target/function ownership remains open.",
+    "The 0x100245F0 helper body/effects and whole-image executable/data inventory remain unresolved. This private review does not grant canonical ownership, coverage, or admission."
+  ]
+}

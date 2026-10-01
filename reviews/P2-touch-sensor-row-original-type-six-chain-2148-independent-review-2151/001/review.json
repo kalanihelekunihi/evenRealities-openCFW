@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-sensor-row-original-type-six-chain-2148-independent-review-2151",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "accepted": false,
+  "scope": {
+    "candidate": "analysis/touch-sensor-row-original-type-six-chain-2148/001",
+    "reviewed": "Original type-6 sensor chain original-byte behavior, exact source and artifact binding, isolated replay and explicit limits"
+  },
+  "pins": {
+    "candidate_receipt_sha256": "96dfde7459729050ee707ba4fa707d419b71a193181a66c22c6f42d83577cf86",
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "candidate_replays_sha256": "359d5a015aa0918f35d62211fc1c9753208d7191aa2c25079bcb2088aeb5219f",
+    "candidate_files": {
+      "replays.json": "359d5a015aa0918f35d62211fc1c9753208d7191aa2c25079bcb2088aeb5219f",
+      "replay.py": "c399cedbf4e118c424d9130d34225147bdffd6890dd3eccd67a8bff52e3b4872",
+      "pseudocode.md": "5c07038f6fded7ab37e6c8b4504ac14684e63ab609b176a213a88efbf63fe486"
+    }
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "The isolated 120-fixture replay matches the frozen candidate byte for byte. Original 4BA8 through 5BA2 and 5A0A execute; only 50A0 and 4FEE are intercepted. In valid active type-6 cases, the original type dispatcher reaches the original type-6 body, following the original cap and difference operations."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "The trace assertions check capped/difference values, item flags and aggregate bit, guarded call order, R0 result, and SP restoration. The query controller changes row validity and supplies query status; assertions are limited to those controlled inputs and tested configuration."
+    }
+  ],
+  "limitations": [
+    "Acquisition/query behavior at 50A0 and 4FEE remains controlled; type-2/3 paths, arbitrary configurations, aliases, concurrency and physical behavior are not established.",
+    "Bounded composition evidence only; no canonical admission or C implementation."
+  ],
+  "checks": [
+    {
+      "command": "verify receipt artifact and original source hashes",
+      "result": "PASS",
+      "artifact": "source-checks.json"
+    },
+    {
+      "command": "isolated replay with redirected output",
+      "result": "PASS; 120 fixtures, replay JSON byte-identical",
+      "artifact": "replays.json"
+    }
+  ],
+  "review_artifacts": {
+    "source_checks_sha256": "cd2250b99490d8df4c50a8cf65c8e4737109ca166cdb35bb185d837cf14b0a51",
+    "replay_sha256": "7c5a303f34b343ef4c153d7c50867680bcdfc586328f7c44a0a8b70b78091c7c"
+  },
+  "canonical_or_coverage_change": false
+}

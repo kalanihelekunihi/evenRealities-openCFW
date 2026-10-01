@@ -1,0 +1,17 @@
+{
+  "review_id": "1939",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-flash-init-helper-1880/001",
+  "candidate_receipt_sha256": "0275b04905a3846aaefe688aca625cd02da82df72f92c193462caa1605521e1a",
+  "source_sha256": "53860d6974097ad494c6697df52f95b796360131fab63cd8bfd7efc9c5596de8",
+  "body_sha256": "56c9a53d68f4dd76dae42a062248c461b8ffc49c0bd5e62cb3806c25fd3e6ab2",
+  "checks": [
+    "Ran the packet verifier successfully. The 182-byte child span [0x11F0,0x12A6) maps conditionally to runtime [0x100245F0,0x100246A6); installed-tool C-SKY disassembly and body/literal/gap hashes agree. The parent receipt and caller disassembly pins validate, as do the manifest and referenced manual/tool inputs.",
+    "The first instruction word 0x142614D1 is also loaded as a predecessor literal at 0x100245EA. The separate [0x12A6,0x12A8) halfword is 0000/BKPT and remains unowned; literal pool [0x12A8,0x12C0) and separately referenced data word [0x12C0,0x12C4) are correctly distinguished.",
+    "Manual comparison confirms the caller status is conditionally routed at 0x10025CC6, while the helper overwrites R0 with 9 before subsequent work. The body\u2019s BNEZ error gate, signed comparison and wrapped unsigned-adjusted threshold branches match the recovered pseudocode. Two pointer-chain reads are fresh and ordered; the success path stores both globals and prepares its outgoing register/stack arguments as listed. Static boundary fixtures and verifier replay pass."
+  ],
+  "limitations": [
+    "All nine direct callees remain unresolved; helper register/memory effects, physical MMIO meanings, actual runtime mapping/loading, predecessor semantics, unowned BKPT ownership and whole-image coverage remain open. Static fixtures are not hardware execution or proof of callees. No canonical admission."
+  ]
+}

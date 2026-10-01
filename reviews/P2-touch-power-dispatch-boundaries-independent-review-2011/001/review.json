@@ -1,0 +1,19 @@
+{
+  "review_id": "2011",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-power-dispatch-boundaries-2010/001",
+  "candidate_receipt_sha256": "8eae610249494ecea9f41a2ac8ae0cdf0fe41122cb7c590617a77f322d544365",
+  "candidate_pseudocode_sha256": "d44492963fa0bec9d5912b49418915817698e8ffe316b7e1d425ceba5847923c",
+  "candidate_replay_sha256": "f934a2afc8b92310da0fd46a413dbd61ac538dcaff208644410b243baba33a41",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Source and artifact receipt pins match.",
+    "Isolated replay reproduced all 32 boundary rows exactly. Invalid index reaches the original BKPT at A450; valid indices with mode 0/3 reach the BKPT at A462; the harness stops before assertion continuation.",
+    "Null heads in modes 1/2/4 return zero. Mode 8 and aliases 0x101/0x102 reach the word read at A47C using null-head + 20; the harness stops at that read rather than assigning fault or safe-return semantics."
+  ],
+  "limitations": [
+    "This is only the listed boundary set. BKPT continuation, memory-fault behavior, cycles, and arbitrary callback effects are unresolved.",
+    "No canonical admission."
+  ]
+}

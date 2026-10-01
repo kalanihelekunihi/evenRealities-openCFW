@@ -1,0 +1,5 @@
+# Application prefix with actual status/list insertion
+
+This supplied application-entry fixture preloads the exact964-byte initialized-data span from originalflash B58C..B950 into RAM200004C0..20000884, matching separately verified reset. It executes actual4650,4634 andA3B0, replacing only44C4's hardware initialization dependency. The original descriptor at20000850 has callbackA1C1, classbyte1, requiredword20000CCC andpriorityFF; actualA3B0 inserts it into initially zero headslot20000F38 and returns1. Actual4634 consequently returnszero and the application bypasses its breakpoint.
+
+Remaining prefix calls are controlled as in1193. The original instruction sequence reaches3D50, stores its startupvalues and enablesinterrupts. The copied descriptor and head relation are asserted, rather than supplying A3B0's return. Physical initialization, listconcurrency, applicationloop and activeinterruptdelivery remain unresolved. This is a supplied RAMprecondition matchingreset, not a full boot replay. No canonicaladmission orCimplementation.

@@ -1,0 +1,19 @@
+{
+  "review_id": "2001",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-wait-wrappers-2000/001",
+  "candidate_receipt_sha256": "ea29b7b47b9741d156db78c6f04802d265cb92fd6c7a5bb81ed4ef0e225b9b43",
+  "candidate_pseudocode_sha256": "4023c0e1fa58e6d42fce5e30e93c5714ca9a0c388f90eaf56b5286fc97d45741",
+  "candidate_replay_sha256": "1450545e79925d38534ecdd805563de1695df40f940be71e89c0b82ab4eb2d8a",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "The exact source hash and every receipt file hash match. The two owned bodies are [0xA528,0xA582) and [0xA58C,0xA5F0); the 0xA582 alignment and literal words at 0xA584, 0xA588 and 0xA5F0 are outside ownership.",
+    "Isolated replay regenerated all 64 original-instruction fixtures exactly. It covers both wrappers, initial selected flag, post-probe and post-leaf flag mutation, status 0/7, and initial PRIMASK 0/1.",
+    "Decoded control flow supports the asymmetric failure paths: A528 notifies A444(index,2) on nonzero probe status regardless of the later flag, while A58C re-reads its selected word and only sends that notification if it remains nonzero. Success paths save/disable via original 4492, re-read the selected word, call the index-specific leaf, restore via original 449A, and conditionally notify again."
+  ],
+  "limitations": [
+    "A444 and leaf effects are controlled; wrapper meaning, physical sleep behavior, mutation/concurrency outside these fixtures and callee semantics remain unresolved.",
+    "No canonical admission."
+  ]
+}

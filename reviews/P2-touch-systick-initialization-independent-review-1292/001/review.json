@@ -1,0 +1,21 @@
+{
+  "review_id": "1292",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-systick-initialization-1291/001",
+  "candidate_receipt_sha256": "b941aed2c49c6a1849a2efb11a6246ab7e09b08089f7bdb322d0ae3a15c06163",
+  "candidate_pseudocode_sha256": "4b4b1e9d764794718c6486ffd04f49f6e0dc4d1c5d4af05b5155ee07b6a564e6",
+  "candidate_replay_sha256": "4cd9e32b2172348cb448bc770a1da939a5f81429acd4c1c07b16d0f865bbc553",
+  "candidate_replays_sha256": "0506c0c5f0d1f79e9b4d10a3ab029c041994bc8c90bcb01c5a1f63b318f81623",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "independent_checks": [
+    "Candidate file and source hashes match the pinned receipt.",
+    "Independently decoded A650..A696: four-register frame, reload bound check and breakpoint path, five callback-slot clears, vector store A5F5, control-bit-2 clear, 24-bit reload store, current-value clear, A620 call and frame restore. Literal values and table addresses are source-bound in candidate receipt.",
+    "Replayed 72 original-instruction fixtures in a private output directory; all passed, including valid reload boundaries and the invalid breakpoint-reaching cases."
+  ],
+  "limitations": [
+    "The replay confirms software register accesses in Unicorn with synthetic memory; it does not demonstrate physical SysTick operation or interrupt dispatch.",
+    "Private evidence only; no canonical admission or C implementation."
+  ]
+}

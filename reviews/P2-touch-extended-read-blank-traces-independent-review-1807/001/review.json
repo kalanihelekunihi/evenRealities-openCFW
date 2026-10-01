@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-extended-read-blank-traces-independent-review-1807",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "scope": {
+    "candidate": "analysis/touch-extended-read-blank-traces-1802/001",
+    "reviewed": "The candidate covers the exact 82E0..854C body (620 bytes/291 decoded instructions). All 15 isolated traces execute the original body and its reached helpers with no interceptions. For one-copy/no-mirror blank rows, requested output bytes become zero, destination suffix remains A5, status is zero, SP is restored, and provider-copy 4860 is not reached. Recorded PC traces include blank-row CRC rejection and the relevant helper chain. This is trace evidence only, not complete pseudocode recovery."
+  },
+  "pins": {
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "candidate_receipt_sha256": "677a9ff92bda9f69420bb5c37c9dc4cc9f2c58314c0634acdb24d17328120cd1",
+    "candidate_replays_sha256": "ac3f778dd5f946b6e3e7990208774f05a5a92297c0cb04a74252cab4d4909b7e",
+    "body_sha256": "10dc591b37adac5c114142464a4ad4324af575b483f655ca6cb66ac0503c7ec7"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "The candidate covers the exact 82E0..854C body (620 bytes/291 decoded instructions). All 15 isolated traces execute the original body and its reached helpers with no interceptions. For one-copy/no-mirror blank rows, requested output bytes become zero, destination suffix remains A5, status is zero, SP is restored, and provider-copy 4860 is not reached. Recorded PC traces include blank-row CRC rejection and the relevant helper chain. This is trace evidence only, not complete pseudocode recovery."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "All declared candidate files and source hashes match the receipt; isolated replay output is byte-identical to candidate replays.json."
+    }
+  ],
+  "limitations": [
+    "Only one-copy/no-mirror blank rows are traced. Nonblank rows, multi-copy search, mirror recovery, overlay copying, error accumulation and physical/peripheral behavior are not established. No canonical admission.",
+    "No canonical admission or coverage promotion."
+  ],
+  "checks": [
+    {
+      "command": "source and candidate artifact pin checks",
+      "result": "PASS"
+    },
+    {
+      "command": "independent instruction/fixture-scope review",
+      "result": "PASS_SCOPED"
+    },
+    {
+      "command": "isolated replay (15 fixtures)",
+      "result": "PASS; exact replay JSON match",
+      "artifact": "isolated-replays.json"
+    }
+  ],
+  "review_artifacts": {
+    "isolated_replays_sha256": "ac3f778dd5f946b6e3e7990208774f05a5a92297c0cb04a74252cab4d4909b7e"
+  },
+  "canonical_or_coverage_change": false
+}

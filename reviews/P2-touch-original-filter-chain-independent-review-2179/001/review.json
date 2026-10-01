@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-original-filter-chain-independent-review-2179",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "accepted": false,
+  "scope": {
+    "candidate": "analysis/touch-original-filter-chain-2176/001",
+    "reviewed": "bounded composition of original dispatcher, median, weighted and average filters with original arithmetic leaf; call order and buffers"
+  },
+  "pins": {
+    "candidate_receipt_sha256": "f37219d05791dbc84315610e4e934e814fb02691938e0a7c08c4e5d28ddb6c3b",
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "candidate_replays_sha256": "0665f9028c8876c3f6785a065132b6eaa61e4ee06341ec50d798c05967235597",
+    "candidate_files": {
+      "replays.json": "0665f9028c8876c3f6785a065132b6eaa61e4ee06341ec50d798c05967235597",
+      "replay.py": "33a40f3f0cd2887f8c86a6c5342891795df99403a231bcf0ba0586e9d2223de8",
+      "pseudocode.md": "f27f2eb04601e8cf256d33fc720fbd46695ef04b600ee7075b89d4d344174316"
+    }
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "The 288-case replay executes the original 50A0 dispatcher and the original 4FC2/4FA8 median path, 5054/4FDE weighted path, and 4F6E averaging path without intercepting these entries. The candidate\u2019s expected order applies median first, then weighted filtering, then averaging, with the dispatcher\u2019s cursor advancement reflected in each path."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "All full sample, history, and auxiliary buffers, observed child entry order, R4 and SP assertions pass in isolation. The replay JSON is byte-identical to the frozen candidate. Independent decode confirms 130 instructions over the six exact helper spans."
+    },
+    {
+      "id": "F3",
+      "severity": "none",
+      "result": "The fixture grid covers all eight gate combinations, both fractional modes, average modes, three sample values and three weights. History content is fixed; assertions do not establish behavior for arbitrary histories or broader caller state."
+    }
+  ],
+  "limitations": [
+    "History starts with one fixed nonuniform pattern; arbitrary histories and full input spaces remain untested.",
+    "Buffers are separate/static; aliasing, concurrent mutation, physical field meaning and caller closure remain unresolved.",
+    "No canonical admission or C implementation."
+  ],
+  "checks": [
+    {
+      "command": "verify candidate source and receipt-listed artifacts",
+      "result": "PASS",
+      "artifact": "source-checks.json"
+    },
+    {
+      "command": "independent decode and isolated original-byte replay",
+      "result": "PASS; 288 cases, byte-identical JSON",
+      "artifact": "replay.txt"
+    }
+  ],
+  "review_artifacts": {
+    "source_checks_sha256": "7924242483bf633d639073d79537a2006f603b34a9610463f564e9f2bd7b211b",
+    "disassembly_sha256": "dd7195c0afbce37a1a4c0525d660cfd6362796f9627ab6455fbce6bd77886d65",
+    "replay_sha256": "983fc553fcb4a0204dcb724158e47e2a78d16a3df543518a974c02fcb12cb4bd"
+  },
+  "canonical_or_coverage_change": false
+}

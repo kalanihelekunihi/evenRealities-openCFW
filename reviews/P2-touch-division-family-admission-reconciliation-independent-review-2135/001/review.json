@@ -1,0 +1,23 @@
+{
+  "review_id": "2135",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-division-family-review-reconciliation-2130/001",
+  "candidate_receipt_sha256": "affab0a3168d7ece7310dd6d6ff3e4410016cede4390150fc83e5ca18dc0251f9",
+  "candidate_functions_sha256": "4e58eb491c8bbb80a3c3cd82f68fde1dc06e889daaa70730fa37e1a2d475fb20",
+  "preflight": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-division-record-family-preflight-2134/001",
+  "preflight_report_sha256": "7383850903c24ec7e713b267f737351f26c41d845ec046fce90bd75cc357ade3",
+  "preflight_verifier_sha256": "2e5cae9f3c7d0e8af36921ea3c9f7cac20d0c6c7efc5d790661cb386e5137ea2",
+  "preflight_receipt_sha256": "0f798853519316c3069519d7213e2850dbb47b312a6118f7d38a80572f5ffa58",
+  "checks": [
+    "The reconciliation binds five stable touch:flash loaded Thumb IDs. Every review/evidence/input path hash in the records validates, including the completed 2085, 2087, 2093 and 2109 reports and the corrected signed-reference artifact.",
+    "The isolated 2134 preflight regenerated the reported result: five records, 740 unique owned bytes, mapping/hash/shared-ownership checks pass, and no enumerated metadata gaps. Independently verified mapping derives source offsets from the pinned touch:flash image row (loaded base 0x3300, image offset 0); body and owned shared-tail spans map exactly to each record's source_ranges.",
+    "The record set assigns each shared tail once: A7C0..A7CA to A6C0 and A996..A9A0 to A7D4. A7CC and A9A0 refer to those tails without double-counting. The three function bodies and their source-byte ranges are mutually non-overlapping.",
+    "The report's `not_admitted` decision and scope are accurate: this preflight validates metadata for the five listed proposals, not unexplained adjacent bytes, direct/indirect caller closure, the image denominator, or G3."
+  ],
+  "limitations": [
+    "The separate family seam report still leaves A7CA..A7CC, A7D2..A7D4, and A9A6..A9A8 outside the five function records. Review 2105 characterizes the two BX LR stubs only; it does not establish standalone ownership or padding. A7CA..A7CC remains unresolved.",
+    "The signed reference scan correction 2132 is pinned as raw reference evidence but this reconciliation does not bind independent review 2133. Its eleven edges remain syntactic leads rather than a caller-closure proof.",
+    "This is a private-record consistency review only. No canonical admission, complete denominator, G3, physical behavior, or source/build byte equality is established."
+  ]
+}

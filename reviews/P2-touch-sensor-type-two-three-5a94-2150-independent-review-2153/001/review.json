@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-sensor-type-two-three-5a94-2150-independent-review-2153",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "accepted": false,
+  "scope": {
+    "candidate": "analysis/touch-sensor-type-two-three-5a94-2150/001",
+    "reviewed": "Type-2/3 postprocessor at 0x5A94 original-byte behavior, exact source and artifact binding, isolated replay and explicit limits"
+  },
+  "pins": {
+    "candidate_receipt_sha256": "1b7cd21ee307e81396c9a34c29469b41f90c6073ec4e5827c1451c1b7d4ac740",
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "candidate_replays_sha256": "47be7ec7571a9f00eaab60d37d8eacf86c2b7dd676035dc33a77e26fcb638f70",
+    "candidate_files": {
+      "replays.json": "47be7ec7571a9f00eaab60d37d8eacf86c2b7dd676035dc33a77e26fcb638f70",
+      "replay.py": "b6995d319968198cc92e9025c686ac9e2f39db8c133152a752b896f7020dc7b4",
+      "pseudocode.md": "e711c1542cd4f5bbce00b6a9c548936f9e8b17e272f8fe61d583232c9890877e",
+      "disassembly.txt": "babf8782875c762ced44f45c425421d7f6ea26be3a265685c893754caadc9314"
+    }
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "Independent Thumb decode confirms exact [0x5A94,0x5BA2) 270-byte body and continuous instruction extent. The listing and pseudocode agree on threshold arithmetic and item scanning, countdown/aggregate ordering, the two distinct constructor gates, scratch count consumption, ordered 8-byte copy calls, and restored saved registers/SP."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "The isolated 864-fixture replay is byte-identical to the candidate. Fixture controls for 48CC/4A2A construct two entries and AA2C copy is intercepted; the checker does not establish those children\u2019s general semantics. R0 is explicitly incidental, not a status contract."
+    }
+  ],
+  "limitations": [
+    "Output construction and copy children are controlled; arbitrary scratch count, aliasing, concurrent mutation and physical sensor meaning remain open.",
+    "No canonical admission or C implementation."
+  ],
+  "checks": [
+    {
+      "command": "verify receipt artifact and original source hashes",
+      "result": "PASS",
+      "artifact": "source-checks.json"
+    },
+    {
+      "command": "isolated replay with redirected output",
+      "result": "PASS; 864 fixtures, replay JSON byte-identical",
+      "artifact": "replays.json"
+    },
+    {
+      "command": "independent Capstone Thumb-M-class disassembly compared with candidate listing",
+      "result": "PASS; complete extent and listing byte-for-byte equal",
+      "artifact": "independent-disassembly.txt"
+    }
+  ],
+  "review_artifacts": {
+    "source_checks_sha256": "1e610359231df355ff1db7a724700fdc7e92feef065e7b1f35ffe919cdc5cd37",
+    "replay_sha256": "4bf7e4de54820f39f10ab683304576eadc25f979426c0bdb2e5fc13433529700",
+    "independent_disassembly_sha256": "babf8782875c762ced44f45c425421d7f6ea26be3a265685c893754caadc9314"
+  },
+  "canonical_or_coverage_change": false
+}

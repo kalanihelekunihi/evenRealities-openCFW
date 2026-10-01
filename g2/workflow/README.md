@@ -1,10 +1,12 @@
 # G2: whole-firmware pseudocode, then source reconstruction
 
-Status: **P1 inventory executing** in campaign `20260926T223240Z`. The G1
-target-and-inventory gate remains blocked pending component evidence and
-independent reviews. Current receipts and blockers are recorded in
-`g2/build/pseudocode-first/20260926T223240Z/inventory/status.json` and
-`blockers.json`. This directory is the active G2 procedure as of 2026-09-26;
+Status: **G1 passed; P2 pseudocode recovery executing** in campaign
+`20260930T190500Z`. The target-and-inventory gate has primary and independent
+validator receipts in `g2/build/pseudocode-first/20260930T190500Z/receipts/G1-target-and-inventory-107/receipt.json`.
+All six payloads, 33 images, 70 initial coverage rows and 125 reviews are bound
+to authenticated inputs. Code/data and behavioral completeness remain P2 work.
+The earlier campaign's gates are not inherited. This directory is the active
+G2 procedure as of 2026-09-26;
 it replaces the incremental reconstruction workflow. Existing firmware
 sources and historical evidence are preserved.
 
@@ -20,7 +22,7 @@ The sequence is fixed:
    equality to the original artifact.
 
 P1 inventory and independent-review tasks have been dispatched using bounded
-contracts and hash-pinned evidence. P2 remains gated on G1; no C implementation
+contracts and hash-pinned evidence. P2 is authorized by the passed G1 receipt; no C implementation
 task may start before G3/G4. The prepared prompt pack is guidance, not a general
 job launcher.
 

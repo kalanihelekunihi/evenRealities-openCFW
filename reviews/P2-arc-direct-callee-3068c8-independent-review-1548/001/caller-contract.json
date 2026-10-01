@@ -1,0 +1,10 @@
+{
+  "caller_packet": "arc-boot-up-recovery-1288/001",
+  "call_site": "0x00302b20",
+  "instruction": "bl -> 0x003068c8",
+  "delay_slot": null,
+  "register_state": "r0 was most recently prepared from LR[STATUS32], bit-set at 13, then passed to KFLAG at 0x00302b1c; no callee-specific argument setup follows.",
+  "callee_input_use": "The body does not read incoming r0 before overwriting it with immediate-derived values in its loop; no argument is observed.",
+  "continuation": "Caller continues at 0x00302b24 to read COUNT0; return target is the BL link address.",
+  "limits": "Does not infer meaning of STATUS32 bit or target memory region."
+}

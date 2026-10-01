@@ -1,0 +1,18 @@
+{
+  "review_id": "1480",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-packet-builder-original-mask-helper-1479/001",
+  "candidate_receipt_sha256": "39ca05f3b3e6011f1aae36a8189df727bd9e02338dcdaa81adce35c8434f0801",
+  "candidate_pseudocode_sha256": "a8078d312f35461951c636b11302a642bfbe42aabad3ef4e03fec606b778990c",
+  "candidate_replay_sha256": "ef81e00c3528205cfc06094f1e6ce3d4789efcc2f0f1ef05a3d6b37a7b627398",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Verified that original 56A4 calls 5188 for base rows, second-list rows, and mode-1 subrecords; the replay asserts the actual helper-entry argument sequence, including the differing row strides and repeated writes to the same destination where applicable.",
+    "Replayed the copied original-instruction harness against a review-owned copy of the pinned image. All 486 fixtures passed; masks and output bytes are independently recomputed from the helper semantics reviewed in 1478.",
+    "The only controlled call is 5548, modeled with no output writes. Register R0 after return is the last 5188 mask."
+  ],
+  "limitations": [
+    "Shared pin arrays, zero index halfwords, and the controlled 5548 behavior bound the tested cases. Arbitrary nested indices, remaining helper contracts, and physical behavior remain unresolved. No canonical admission."
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "review_id": "1220/001",
+  "decision": "PASS_SCOPED",
+  "scope": "Independent review of the application prefix with A148/A104 and 9FD4 register-field routines executing from original bytes. Hardware meaning and full boot behavior remain outside scope.",
+  "candidate": {
+    "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-field-prefix-1219/001",
+    "receipt_sha256": "842bb837e60870566bc4f23b8ffa001cb72749bcccf77193feda73735a17d6e8",
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "files": {
+      "pseudocode.md": "54d3aa25a99627f7a6dd7a603a3493b891e4d5d4202e7e4226688ce6697026dc",
+      "replay.py": "0732d5a3c192e8f57881a865e735b3a99cc2d67da617e01897fc19a651ee559b",
+      "replays.json": "a235ecc706942e54cdfc21cce6432f0f883596dce1225796e07d9b5a1fe9ae0d"
+    }
+  },
+  "independent_artifacts": {
+    "isolated_replay": "reviews/P2-touch-application-field-prefix-independent-review-1220/001/replay_isolated.py",
+    "regenerated_rows": "reviews/P2-touch-application-field-prefix-independent-review-1220/001/regenerated/replays.json",
+    "regenerated_rows_sha256": "a235ecc706942e54cdfc21cce6432f0f883596dce1225796e07d9b5a1fe9ae0d"
+  },
+  "checks": [
+    "The isolated original-byte replay regenerates the candidate row exactly.",
+    "A148/A104 execute three pairs and the six asserted command writes match the corrected register-prefix values: 0x40000041, 0x8000FF41, 0x40000080, 0x8000FF80, 0x400000C0, 0x8000FFC0.",
+    "Actual 9FD4 executes with (1,1,3), reads the initial word at 0x40010304, and writes 0x00000300 to that same address. The write is consistent with preserving the outer bytes and inserting the 16-bit value at bits 23..8.",
+    "The trace includes 11 ordered controlled deeper-driver calls plus later prefix controls. It reaches 0x3D50 through actual A3B0 list insertion and the status path; the copied descriptor/head assertion, final PRIMASK and stack state match the candidate."
+  ],
+  "limitations": [
+    "Eleven deeper driver calls and later prefix callees remain controlled. Their raw observed arguments do not establish their behavior.",
+    "Reset-derived RAM is supplied as an initial condition. MMIO is synthetic; physical device semantics, interrupt delivery, boot reachability, and application-loop behavior remain unresolved."
+  ]
+}

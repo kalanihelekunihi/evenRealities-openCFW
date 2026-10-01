@@ -1,0 +1,19 @@
+{
+  "review_id": "2055",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-division-flag-traces-2054/001",
+  "candidate_receipt_sha256": "d132ecf07d3386931de9747655526c833392efe9af626a1edddf0791212b53c3",
+  "candidate_pseudocode_sha256": "0f6baf5714a058da38cc4a0afff4e1e728f24db588305cb8d690b4161a092f90",
+  "candidate_replay_sha256": "c42e226b19ebba235826e39101b454f743d572aaa76dc07586641665240a51c1",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Receipt SHA-256 d132ecf07d3386931de9747655526c833392efe9af626a1edddf0791212b53c3; source SHA-256 and three artifact pins match.",
+    "Isolated replay reproduced 49 cases and all 1,487 transition checks across 101 ALU instruction addresses.",
+    "The replay checks each executed original ALU result and APSR NZCV against formulas computed from pre-instruction register values; the listed formulas for CMP/SUB, ADC-with-carry, immediate shifts, MOVS and REV are consistent with the decoded operation classes. No function interception occurs."
+  ],
+  "limitations": [
+    "These are boundary-pair executions of the reachable ALU transitions, not exhaustive operands or all original instructions. Branch predicates, memory effects, zero-wrapper paths and unexecuted ALU sites remain statically grounded in the separate 2052 ledger. Emulator results are not hardware proof.",
+    "No canonical admission."
+  ]
+}

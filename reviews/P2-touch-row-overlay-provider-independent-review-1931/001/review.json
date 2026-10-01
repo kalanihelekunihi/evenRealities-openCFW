@@ -1,0 +1,15 @@
+{
+  "review_id": "1931",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-overlay-provider-interval-traces-1922/001",
+  "candidate_receipt_sha256": "1ebeba52e1089a6ee715a9235a31662106dd5a60585113dc041c5a9d3c0254c8",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Receipt file hashes and source image pin match. Isolated regeneration passes all 36 fixtures and reproduces replays.json exactly. The runs execute original mapping, CRC, provider 4860 and AA2C paths without helper interception.",
+    "Each case has width 128, logical output interval [0,64), count 2, one copy, no mirror, and a current overlay at [256,257) that cannot overlap the requested output. The mapped prior row at base+128 has a valid CRC. Varying prior-row overlay starts and lengths exercises clipping at the left edge, both interval boundaries, and non-overlapping offsets; whole-buffer output, zero status, and SP are checked."
+  ],
+  "limitations": [
+    "This trace slice uses valid prior-row content and fixed immutable geometry. It does not establish mirror, invalid-row, general interval, mutable context, physical storage, concurrency, or canonical behavior."
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-frequency-prefix-1273/001",
+  "candidate_source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "candidate_files": {
+    "pseudocode.md": "a6a682ac4a331a4e2c36e6bec8d978920a264efb5910c62d65b2598a68784d66",
+    "replay.py": "0cdd7f19217c65d1598611c9c02187c1b88195a7763c0ab700a9e2d0bc7fdab0",
+    "replays.json": "4267dad82c32b8a516531b571be9045ad1358a3c6f02e311063134d41e4b89ae"
+  },
+  "review_result": "PASS_SCOPED",
+  "checks": {
+    "replay": "The isolated original-byte application-prefix replay passes and matches the sole candidate row. It reaches 0x3D50 with PRIMASK restored to zero and the expected frame state. Source and candidate file hashes match the receipt.",
+    "frequency_chain": "The candidate executes 4734, 46F8, 9F9C, 9F34, selected 9C44, and A6C0 from original bytes. Independent decoding and the separate 1261/1265 reviews agree with the resulting RAM values: 0x20000878=24,000,000; 0x20000870 byte=24; 0x20000874=24,000; and 0x2000086C=(24,000<<15) mod 2^32.",
+    "controlled_calls": "The five controlled clock-call entries are 9C80, 9F44, A188, 9C80, and 9F44. Their exact arguments and order are captured. Later application dependencies remain controlled as stated."
+  },
+  "limits": [
+    "Synthetic register values establish instruction behavior only; they do not prove physical frequency, timing, or clock hardware semantics.",
+    "No application-loop completion or canonical admission is claimed."
+  ],
+  "accepted": false
+}

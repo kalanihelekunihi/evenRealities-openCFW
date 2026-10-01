@@ -1,0 +1,18 @@
+{
+  "review_id": "1521",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-config-writer-prefix-1520/001",
+  "candidate_receipt_sha256": "7a1fde1e045c056d067767da05996da9ec3a06f066874058873ba84a9cdb185e",
+  "candidate_pseudocode_sha256": "7c1e0a04a22685d0d140ca7dc652c54cd1d03ed6ebfccbc249a15c6aa4ff4d0c",
+  "candidate_replay_sha256": "8c64892c3a6b8f09f0e8f39de5e112bb45f533a61c7d9c7c1c16a59a1990c37e",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "An isolated replay passed to 0x3D50, with original 0x9178 and 0x6928 instructions executing for all three calibration rows.",
+    "Verified the real scratch/peripheral writes and raw 0x9178 pointer return through 0x6928; the subsequent 0x7288 boundary is controlled and receives the setup result path as recorded.",
+    "Checked exact remaining call order, calibration state and inherited startup assertions. Remaining calibration controls are 0x6A80, 0x7288 and 0x5FA4; the latter returns 1."
+  ],
+  "limitations": [
+    "MMIO/external tables are synthetic, and stated helper/storage/application boundaries remain controlled. No physical acquisition or whole-firmware claim; no canonical admission."
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "review_id": "1378",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-activation-success-path-4af4-1377/001",
+  "candidate_receipt_sha256": "9ceef3c494bfc41e23582c5265756544330487f53101a8b69c2350899473c7e2",
+  "candidate_pseudocode_sha256": "d9cc4072c18cec9ff3542021d0f0bf1463ac83f5d79464684689554178a86bb2",
+  "candidate_replay_sha256": "3b0f4825c9992cc2bdfff5d2da35b7ae325987613d663900a693d19de8e5fcb6",
+  "candidate_replays_sha256": "8ccff314bfe036525e468010fcd278c78b174beb740dd771ff5d3ee1244c989c",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independent M-class decode confirms the 172-byte body 0x4AF4..0x4BA0 and the described branch after 4ABE. Conditional on 4ABE returning zero, calls 5CA2/7BB8/5C7A OR their results; A6C0 performs the divide; 5FA4 receives (1000000, quotient, 5); the 5C8E retry loop permits counter+1 polls, overwrites accumulated result with 4 on exhausted nonzero status, then sets context byte 0x76, calls 6AC0, iterates 5C02 for indices 0..2, runs cleanup, clears bit 15 from a freshly loaded context word, and returns the accumulated value.",
+    "The immutable replay was isolated and all 18 fixtures pass. It varies retry budget, consecutive nonzero poll prefix, and old peripheral word; actual A6C0 division executes, while the named deeper helpers are controlled. Ordered calls/arguments, peripheral and context writes, result and SP assertions pass."
+  ],
+  "limitations": [
+    "The pseudocode is scoped to the 4ABE-zero success branch; the entry setup and nonzero-4ABE cleanup path are not independently specified as a complete function contract in this candidate. Replay does exercise its setup with controlled helper effects.",
+    "Physical poll timing, deeper helper behavior, pointer/concurrent mutation, and hardware effects remain unresolved. No canonical admission or C implementation."
+  ]
+}

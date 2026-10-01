@@ -1,0 +1,18 @@
+{
+  "review_id": "1478",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-pin-mask-output-5188-1477/001",
+  "candidate_receipt_sha256": "94400527c8c7d3aca3c4aceafdd1b22522e0b57b7fa73a7cf527ac0c740b835f",
+  "candidate_pseudocode_sha256": "471506b1f3ab1060678210a8506e9e4f34b6ad7dc61ed50048349f024cfc470a",
+  "candidate_replay_sha256": "877358721445a9410117ef2704b62965a27cedb81824fb98a701d82386cd82f8",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independently extracted source bytes [0x1E88,0x1EBC) under the candidate\u2019s 0x3300 image base and decoded the exact 52-byte body at 0x5188..0x51BC. The Thumb trace confirms three ordered initial BIC/store writes, then mode-bit-gated OR/store writes in word order; R0 is unchanged and the four-register frame is restored.",
+    "Replayed the copied original-instruction harness from a review-owned directory against a byte-identical copy of the pinned image: all 240 fixtures passed. Receipt hashes for candidate pseudocode, harness, replay outputs, and the source image match.",
+    "The initial clears write each prior word with mask bits removed. For each mode bit 2/1/0, the corresponding output becomes its original word OR mask; higher mode bits do not affect those predicates. Zero/full/high-bit masks and varied prior words are exercised."
+  ],
+  "limitations": [
+    "Memory is synthetic, and the pointer is supplied; pointer validity and physical peripheral meaning are not established. No canonical admission."
+  ]
+}

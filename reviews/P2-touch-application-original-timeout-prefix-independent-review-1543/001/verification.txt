@@ -1,0 +1,7 @@
+Independent review of touch-application-original-timeout-prefix-1542/002
+
+Candidate receipt SHA-256 3d79fe3581ee7c2a252622167ed91860ae3f9f6d81596c02e274c85def72271a; pseudocode 4e56f58a300ca6948764025218329e1789789117d98fb6bd2a7aba8ac2e308ad; replay 342108f27b0829c9d868b1b7c3996d74ec590717b07dca34f00560e7b15110c1; image 371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87.
+
+Isolated cumulative original-instruction replay passed to 0x3D50. It executes 5FA4/A6C0 for all three completion-budget calculations with (0,48,5), yielding zero budgets. The synthetic completion bit is set, but original 6980's first status read is followed by zero-budget return; 7BC0 takes the error status path. The observed final context byte +0x55 is 5 and state byte +0x73 is 0; the activation success helpers are skipped. Original 6608, 315 A324 entries, and 318 4480 entries execute; eight 6AC0 entries are observed. Call order, startup state, output buffers and final SP checks pass.
+
+PASS_SCOPED. Acquisition 7288 and other downstream helpers remain controlled; MMIO/external tables are synthetic. This is not physical startup or hardware evidence. No canonical admission.

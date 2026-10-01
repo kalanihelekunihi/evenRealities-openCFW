@@ -1,0 +1,5 @@
+# Touch peripheral initialization 3678
+
+Body 3678..36DA is 98 instruction bytes, excluding NOP and literal pool. Four deeper helpers are called in order: 98F4(base,configuration,context), A2A8(literal,literal), 9AD8(base,buffer1,16,context), 9AF0(base,buffer2,16,context). Their results are ignored. Store callback literal to context+44, write bit seven to interrupt base+180 then interrupt base, freshly read peripheral base and set bit31. Freshly read base+6C and context byte+2; if the byte is nonzero OR bit8, otherwise leave the read word unchanged. Store that word to base+6C and restore four-word frame. The zero-byte path does not clear bit8.
+
+Nine original-instruction fixtures cover three context flags and three register patterns. Four deeper helpers are controlled with all-ones return and no memory effects. Literal-derived call arguments and all local writes/SP are checked; helper functionality, physical peripheral effects and concurrent access remain unresolved. No canonical admission or C implementation.

@@ -1,0 +1,19 @@
+{
+  "review_id": "2007",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-power-callback-topology-2006/001",
+  "candidate_receipt_sha256": "91e37ecb12d69999b5ba6542024e1ebc79725c484297af62d495d6091f132ce1",
+  "candidate_pseudocode_sha256": "85a0f0ec3b13fb02649738149ddc95eaa64d9f7118d136cb660e638d14e42c4a",
+  "candidate_replay_sha256": "1d612b2d8b7566215ba5629c9c29c1b194d92631d853681dfcd136f843447e02",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Source and file pins match the receipt.",
+    "Isolated replay regenerated the 64 fixture rows exactly. The cases cover termination/redirection after the first invoked node in both forward and reverse modes, with all four sentinel placements.",
+    "The fixture mutations change live node successor/predecessor links, and subsequent calls follow the changed links: forward jumps bypass node 1; reverse jumps continue at node 0. Mode 1 still stops before a subsequent callback when the prior return is the sentinel. Global/result assertions match the recorded bounded cases."
+  ],
+  "limitations": [
+    "This establishes only the two mutation patterns on bounded acyclic three-node lists. Arbitrary callback mutation, cycles, invalid inputs and wide mode aliases remain unresolved.",
+    "No canonical admission."
+  ]
+}

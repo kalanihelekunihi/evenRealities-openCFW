@@ -1,0 +1,19 @@
+{
+  "review_id": "1979",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-startup-event-drain-original-record-1970/001",
+  "candidate_receipt_sha256": "3c4b8b9e2c088e7cc34afd17624ec837f3b2e3b5c1c21ccb230302697ca90c98",
+  "candidate_pseudocode_sha256": "d87dbc2e738127498ccc4e219eea0f8b92ed74872bab0cafa9743f9231c46b0d",
+  "candidate_replay_sha256": "ce2fcb4e3c8818c8e9910b4ea080568d36c9b1714a9816020db8b6b65d992664",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Recomputed receipt file hashes and source hash; all match.",
+    "Ran an isolated replay copy; its replays.json matches the candidate exactly.",
+    "Checked saved record.json and event.json independently: event path clears the second flag, preserves PRIMASK 0 and SP 0x2000EFD8, and records the second log call."
+  ],
+  "limitations": [
+    "Only the post-startup 3EE0 logging calls are controlled in the event follow-up. Clock/MMIO reads and IRQ context delivery are modeled, so no physical event or interrupt claim follows.",
+    "Private evidence only; no canonical admission."
+  ]
+}

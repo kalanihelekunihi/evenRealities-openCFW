@@ -1,0 +1,9 @@
+Independent review of touch-state-five-6a80-1522/001
+
+Candidate receipt SHA-256 b3cacd9ac1184a15a9f4afba1f676a965c8a92951c5dc2b8e35ab0227edd8cba; pseudocode 3f263d8485b13fc38439ef5d88a6104bd78c1819fe7f5abeb8fd304e04952d9f; replay 3d9632f5b17b0bff402ab347a35de12ea95bb7ae70bcdd52d67aecd40971dda9; image 371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87.
+
+Decoded 0x6A80..0x6AB8: resolve peripheral using descriptor/config pointers, call 0x685C(descriptor), then write zero at peripheral+0x400. Loop indices 0 through 2 at 64-byte stride; each writes 0x03000000 at row+0x608 and literal 0x00101000 at row+0x60C. The helper result is overwritten, so return is the incidental 0x03000000 in R0. Frame is 8 bytes. Literal pool begins at 0x6AB8 with values 0x60C and 0x00101000.
+
+Isolated replay passed all 9 fixtures, checking ordered writes, call argument, helper-status independence, incidental return and SP.
+
+PASS_SCOPED. Helper 0x685C is controlled, MMIO synthetic, and physical behavior unresolved. No canonical admission.

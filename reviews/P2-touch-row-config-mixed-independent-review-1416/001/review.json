@@ -1,0 +1,17 @@
+{
+  "review_id": "1416",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-config-mixed-6384-1415/001",
+  "candidate_receipt_sha256": "b436b757d7a9640c55de458de6bed082950587953f6476b10773a04c6c928e91",
+  "candidate_pseudocode_sha256": "9b21e38b0d69b998cb6468499be48df1f7b7ee8c8715aa9c195bf47a517c48d1",
+  "candidate_replay_sha256": "00a1f4b33c8b8ad22033ecc87347d384593c728996fb781da5789d7444663631",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Copied and ran the 729-case original-instruction replay with output in this review directory; all combinations passed. It varies mode and width independently across three records with helper-trigger flags and signed bytes cleared, checking sticky minimum/status, the 2048 immediate error, no helper calls, no row writes, and restored stack.",
+    "This supplement is consistent with the parent 6384 decode: modes 1 and 10 set minimum 8; invalid modes set status 1 without clearing a previously accumulated minimum; out-of-range widths replace status with 2048 and return immediately."
+  ],
+  "limitations": [
+    "The supplement intentionally excludes helper paths and mixed flag/helper effects. It does not establish hardware behavior, pointer validity, or canonical admission."
+  ]
+}

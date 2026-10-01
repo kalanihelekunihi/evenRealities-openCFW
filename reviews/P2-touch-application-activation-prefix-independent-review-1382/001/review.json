@@ -1,0 +1,20 @@
+{
+  "review_id": "1382",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-activation-prefix-1381/001",
+  "candidate_receipt_sha256": "fcac17f156ce1492ddd41fe6fb577bdda700bca9a99cb7bb81f175cac426a6e7",
+  "candidate_pseudocode_sha256": "57a814b5ed28cbb887bb2e276b0261925319d700036cc467f2f723441245a0c2",
+  "candidate_replay_sha256": "192e14396233e2f2a1bda7d7ffb8010de47d91e6a6e9efc64049928ff3af854c",
+  "candidate_replays_sha256": "f2de839e7c98e790dd07193b63a15ad53c7ee375593691814a07c323ae2bcc5e",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Candidate/source hashes verify. The isolated successful-prefix run reaches 0x3D50 with original 4AF4 code executing. The 4ABE success path and listed activation helpers are controlled; 6AC0 executes in the image at four call sites, and 4C7C/4C72 descriptor initialization plus interrupt registration remain actual code in the prefix.",
+    "The prefix asserts descriptor/context state, activation call counts, reset and cleanup effects, clear of peripheral bit 15, prior startup state, vector and SysTick assertions, and final SP/PRIMASK-related state. Receipt literals and candidate call controls agree with the replay."
+  ],
+  "limitations": [
+    "This is one successful prefix scenario with a zero retry budget and first-poll success; it does not cover alternative activation statuses, timeout, or failure cleanup. Deeper activation/storage dependencies are controlled as listed.",
+    "The external clock table is synthetic. Physical activation, interrupt dispatch, helper behavior, and application loop completion are unresolved. No canonical admission or C implementation."
+  ]
+}

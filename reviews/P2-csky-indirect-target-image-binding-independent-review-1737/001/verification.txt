@@ -1,0 +1,5 @@
+Review 1737 — PASS_SCOPED
+
+Bound to csky-indirect-target-image-binding-1722/001, receipt SHA-256 0a33a4809d5348a34084b693a3e472b583a6dfe07ae181e1138cb648da9a65fe. The read-only verifier passed exact nested-child hashes, image slices, instruction listings and manifest pins.
+
+The two targets are correctly represented as distinct conditional image coordinates. The 30-byte stubs clear CR31 bit 3, install their own stack values, call the listed A/B helpers, and branch to local self-loops after normal return. The following BKPT and literal bytes remain separate. The route note does not infer B payload visibility at IRAM from its DRAM destination.

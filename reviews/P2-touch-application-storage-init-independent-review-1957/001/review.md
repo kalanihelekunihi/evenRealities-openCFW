@@ -1,0 +1,11 @@
+# Independent review 1957 — startup with original storage initialization
+
+**Result: PASS_SCOPED.** Candidate `touch-application-original-storage-init-1948/001`; receipt SHA-256 `27b12a5bb2bdfbe44ce2ec03953101f16c5b5a7aa9ecb1d3e6a4c35fe4f439d9`.
+
+Source and all five artifact pins match. Isolated cumulative replay passes and matches replays.json exactly. Original 8A38 executes; 8A78, 8AE0, and 8AAC are the remaining controlled storage boundaries. Recorded call entries include original 8A38 as observation, not interception.
+
+The replay retains the synthetic readiness read behavior and explicit simulated CPU-context IRQ delivery. Startup reaches 3D50 with inherited state and hardware-write checks; storage initialization follows the recovered provider/geometry/validation/row-selection chain before the controlled downstream boundaries. Recomputed call/PC counts in the captured replay agree with its asserted counts.
+
+The candidate does not claim full startup closure. The incoming vector, synthetic clock/status model and explicit exception-context restoration are fixture conditions, not physical interrupt or device timing evidence.
+
+Synthetic MMIO and modeled interrupt delivery only. Downstream storage operations remain controlled; physical storage, full startup, and canonical admission are not established.

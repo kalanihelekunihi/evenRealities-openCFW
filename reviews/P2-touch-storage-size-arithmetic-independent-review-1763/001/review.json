@@ -1,0 +1,21 @@
+{
+  "review_id": "1763",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-storage-size-arithmetic-8200-1762/001",
+  "candidate_receipt_sha256": "3d9de59b8392a5073b48ce7bbf771b9256746ca34ebaa29273cb7e45c76967f8",
+  "candidate_pseudocode_sha256": "527ffa10b18914cd02909dad4f911c6da7f01d714ee3e1dfbab218979d714e8b",
+  "candidate_replay_sha256": "690637f7d6620ad8b5aadcd2f214075f9a42ed1b1323891dae3e26350ae45707",
+  "candidate_replays_sha256": "efd795d1c7f2a3de07a20f29cabef47dacb15fed1f586af021cdb54e24457e16",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Candidate/source hashes match. Independent disassembly confirms the 30-byte 8200..821E leaf and excluded alignment halfword.",
+    "All 432 fixtures replayed in isolation and replays.json matched byte-for-byte. The formula preserves the exact instruction order and 32-bit modular arithmetic: halfword product, m, (1-m), n multiplication, (f+1) multiplication, add m, final multiply.",
+    "Malformed m values are not Boolean-normalized: subtraction from one wraps as a full word, matching the pseudocode and fixtures. R4 is preserved and SP restored."
+  ],
+  "limitations": [
+    "The helper performs no validation, and pointer validity or concurrent mutation are not established.",
+    "No canonical admission or C implementation."
+  ]
+}

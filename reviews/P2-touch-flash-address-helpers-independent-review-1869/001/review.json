@@ -1,0 +1,21 @@
+{
+  "review_id": "1869",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-flash-address-helpers-1858/001",
+  "candidate_receipt_sha256": "ad153a91c6c8dd13c3099bce74120a5871e55014a3b3c989da040b53303faf97",
+  "source_sha256": "371d8a61b659a33b4cad9a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "bodies": {
+    "8C74": "cbd3a9c41a0cf160f7a5b575f7d39cfd0e50a6acbc5f680a318b5a155240c08a",
+    "8CA8": "aadf0c1f880872ec675b3b2ef2cf8c5949bf577678585f172e7f3225c86f64af"
+  },
+  "checks": [
+    "Source and all candidate artifact hashes match the receipt. Isolated replay passed 36 fixtures and produced byte-identical replays.json.",
+    "Manually decoded 8C74: compare unsigned against 0x10000; below it, LSL #25 tests 128-byte alignment. Otherwise add 0xF0000E00 modulo 2^32, reject if result >=512, then apply the same alignment test. Thus accepted aligned upper range is [0x0FFFF200,0x0FFFF400); zero is accepted.",
+    "Manually decoded 8CA8: return input >>7 for unsigned input <0x10000; otherwise return ((input+0xF0000E00) mod 2^32)>>7, without alignment/range validation.",
+    "PC-relative constants are outside the body at 8CA4 and 8CC0; both source words decode to 0xF0000E00. Adjacent alignment at 8CBE is excluded."
+  ],
+  "limitations": [
+    "No calls or memory accesses are made by these bodies. The routines do not establish physical flash addressability or resident ROM semantics. No caller-wide contract, canonical admission, or C implementation is claimed."
+  ]
+}

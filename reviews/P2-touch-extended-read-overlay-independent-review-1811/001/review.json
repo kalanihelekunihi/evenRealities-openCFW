@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-touch-extended-read-overlay-independent-review-1811",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "scope": {
+    "candidate": "analysis/touch-extended-read-overlay-traces-1806/001",
+    "code_span": [
+      "0x82e0",
+      "0x854c"
+    ],
+    "reviewed": "The exact body is 82E0..854C (620 bytes/291 instructions). All 18 isolated traces execute the original body and reached helpers with no interceptions. The one row-zero overlay is [20,32) with payload 200..211; output slices before, inside and across both boundaries match the base logical stream with that range replaced. Return is zero, suffix remains A5 and SP is restored. This is bounded trace evidence, not complete pseudocode recovery."
+  },
+  "pins": {
+    "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+    "candidate_receipt_sha256": "c2b2ed4342ad063654755ebe352bda1809519d8799c66bb663e7398fe73feab1",
+    "body_sha256": "10dc591b37adac5c114142464a4ad4324af575b483f655ca6cb66ac0503c7ec7",
+    "candidate_replays_sha256": "2a29091842c6717a38ffac91a4be39a4852560ab456b0b1260cceb34820a0279"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "The exact body is 82E0..854C (620 bytes/291 instructions). All 18 isolated traces execute the original body and reached helpers with no interceptions. The one row-zero overlay is [20,32) with payload 200..211; output slices before, inside and across both boundaries match the base logical stream with that range replaced. Return is zero, suffix remains A5 and SP is restored. This is bounded trace evidence, not complete pseudocode recovery."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "Candidate file and source hashes match their receipt. Isolated replay is byte-identical to candidate replay JSON."
+    }
+  ],
+  "limitations": [
+    "One overlay record and one-copy/no-mirror synthetic rows only; overlap precedence, multiple overlays, multi-copy, mirror/error paths and physical storage remain open.",
+    "No canonical admission or coverage promotion."
+  ],
+  "checks": [
+    {
+      "command": "source/body/artifact pin checks",
+      "result": "PASS"
+    },
+    {
+      "command": "trace-scope and bounded code-flow review",
+      "result": "PASS_SCOPED"
+    },
+    {
+      "command": "isolated replay of 18 traces",
+      "result": "PASS; exact replay JSON match",
+      "artifact": "isolated-replays.json"
+    }
+  ],
+  "canonical_or_coverage_change": false
+}

@@ -1,0 +1,5 @@
+# State reset at 685C
+
+The130-byte body [685C,68DE) is followed byalignment andthree literals. Resolveperipheralthroughdescriptor/configurationpointers. Clearcontrolbit31 andwrite0 at80. If freshlyreadword180 bit0clear,write1 at144 andcall6608(315,0,descriptor). Then setcontrolbit31,zero74 and128,write/readbackliteralvaluesat120 and100,clearcontextbyte113,andmaskcontrolwithFFFCFFFF. ORbit28intoword8. ReturnpreservedR0:descriptoronthefastpath,controlledhelperstatusonthecallpath. Restore16-byteframe.
+
+Eighteenoriginal-instructionfixtures checkeveryorderedwrite,branch/helperarguments,returnandframe.6608remainscontrolledwithnoMMIOeffects;hardwarebehaviorissynthetic. Pointervalidityandphysicalmeaningremainopen. No canonicaladmission orCimplementation.

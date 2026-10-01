@@ -1,0 +1,17 @@
+{
+  "review_id": "1545",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-acquisition-budget-7288-1544/001",
+  "candidate_receipt_sha256": "d07ef0c2e9ac7bcad3bd23d8d508691c791d011344a3b20110c0b2520e2770f1",
+  "candidate_pseudocode_sha256": "53dc83a2a885e05c2949cd9f4b545830fadf1819ec67065cba6849faa5fe354c",
+  "candidate_replay_sha256": "901da2c390277ad2a5029030e8b4e89b67b44c9005a649706bec01cb93777f30",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independently decoded the 112-byte, 55-instruction body and checked record/row/context offsets, mode-specific halfword pairs, wraparound arithmetic, mode-2 doubling, record factor, original A6C0 division by 46, quotient times five, no acquisition/non-stack store, return and frame.",
+    "Isolated Unicorn replay passed all 108 fixtures, including actual A6C0 execution. Only the copied replay's Capstone instruction-list generation was removed because Capstone is unavailable; original emulator assertions remain and GNU objdump independently verified instruction coverage. Exact candidate replay is preserved."
+  ],
+  "limitations": [
+    "Pointer/index validity remains a caller obligation; physical timing units and behavior are unresolved. No canonical admission."
+  ]
+}

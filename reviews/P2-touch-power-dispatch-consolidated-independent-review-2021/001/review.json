@@ -1,0 +1,18 @@
+{
+  "review_id": "2021",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-power-dispatch-consolidated-2020/001",
+  "candidate_receipt_sha256": "9b6889cbdfac41b05a73bcf8def35d0e6c6cba8c16ef7ef03cccab057fc634cb",
+  "candidate_pseudocode_sha256": "b0ab96a277a16118ced62bece24bedfe6d38d36a31f0e02b60b613a6724a382e",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "The immutable source pin and both consolidated output hashes match. Independently extracted [0xA444,0xA516) is 210 bytes with the recorded SHA; its 105-line listing is contiguous and each encoded instruction byte matches the source span.",
+    "All four dependency receipt hashes and every dependency artifact hash match their exact paths. Their fixture counts sum to 736 (256 + 64 + 384 + 32), as stated.",
+    "The merged pseudocode is consistent with the original branch structure: index/mode BKPT boundaries, exact modes 1/2/4/8, low-byte validation followed by full-width comparisons, callback argument copying, post-callback link reloads, mode-1 sentinel stop/failure pointer, reverse traversal and unchanged globals for wide modes.",
+    "The null-head reverse path is accurately bounded at the word read from address 20; no null-head safe return or hardware fault behavior is claimed."
+  ],
+  "limitations": [
+    "The six wide aliases are representative, not exhaustive. BKPT continuation, null-head memory-fault outcome, callbacks, arbitrary/cyclic topology, and external behavior remain unresolved. This is a private evidence consolidation, not canonical admission or a claim of full firmware coverage."
+  ]
+}

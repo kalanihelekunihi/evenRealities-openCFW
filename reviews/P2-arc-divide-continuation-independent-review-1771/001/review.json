@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "task_id": "P2-arc-divide-continuation-independent-review-1771",
+  "status": "PASS_SCOPED",
+  "decision": "PASS_SCOPED",
+  "scope": {
+    "candidate": "analysis/arc-divide-continuation-1736/001",
+    "owned_runtime_range": [
+      "0x00302874",
+      "0x0030299A"
+    ],
+    "reviewed": "The packet binds the 294-byte record-3 slice at 0x00302874..0x0030299A. Its pinned verifier passes: exact source/package mapping, 88 decoded instructions, local direct and LP edges, predecessor context, tool replay, and 308 static arithmetic/sign fixtures. I checked the register pair roles, explicit zero-divisor output, restoring shift/subtract carry/borrow flow, LP_COUNT derivation, and signed return fixups against the supplied ISA semantics and disassembly. The stated preceding unsigned path sets r4=0; the neighboring signed setup is contextual only."
+  },
+  "pins": {
+    "source_record_sha256": "0de6e945a56ec886a92e44d4eaefe02fbca6db11f8747876e30bffb45cffce03",
+    "official_package_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+    "owned_bytes_sha256": "a58ff3cd8ebbf2ff7d988a5d7427d56e5172fb47d3a0a1c1a85e33febcb9ddd4",
+    "candidate_receipt_sha256": "5e1694266b88c5451b4923ad7963ef12eca96c0e534932b6e55118dabeb71cba",
+    "manual_sha256": "b5bd662cc6af5b7ae3d7718e86922a4072eeefde0aa917be32549d9346d027ab",
+    "semantics_sha256": "b5bd662cc6af5b7ae3d7718e86922a4072eeefde0aa917be32549d9346d027ab"
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "none",
+      "result": "The packet binds the 294-byte record-3 slice at 0x00302874..0x0030299A. Its pinned verifier passes: exact source/package mapping, 88 decoded instructions, local direct and LP edges, predecessor context, tool replay, and 308 static arithmetic/sign fixtures. I checked the register pair roles, explicit zero-divisor output, restoring shift/subtract carry/borrow flow, LP_COUNT derivation, and signed return fixups against the supplied ISA semantics and disassembly. The stated preceding unsigned path sets r4=0; the neighboring signed setup is contextual only."
+    },
+    {
+      "id": "F2",
+      "severity": "none",
+      "result": "Running candidate verify.py succeeds and checks receipt outputs, tool replay and exact record/package slices. The manual distinguishes the relevant ADC/SBC carry and subtraction borrow behavior; the zero-divisor branch is an explicit software path."
+    }
+  ],
+  "limitations": [
+    "Static integer model, not ARC hardware execution; device configuration is not established.",
+    "The BLINK destination, enclosing routine boundary, global caller census, external CPU context and whole-record coverage remain unresolved. The alternate LP loop is retained as owned code but no global interior-entry exclusion is claimed.",
+    "No canonical admission or coverage promotion."
+  ],
+  "checks": [
+    {
+      "command": "candidate pinned verification (source/package/body/tool receipts/static fixtures)",
+      "result": "PASS"
+    },
+    {
+      "command": "manual cross-check of branch flags, LP and arithmetic dataflow",
+      "result": "PASS_SCOPED"
+    }
+  ],
+  "canonical_or_coverage_change": false
+}

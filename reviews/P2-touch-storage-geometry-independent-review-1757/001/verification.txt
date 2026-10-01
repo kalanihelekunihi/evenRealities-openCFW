@@ -1,0 +1,5 @@
+Review 1757 — PASS_SCOPED
+
+Bound to touch-storage-geometry-828c-1756/001, receipt SHA-256 601482f4551569fbbf91f9fc66045a59967501024699c84ea0d54b703ac39adc. The candidate's 540 original-instruction fixtures were replayed in /tmp/review1757-independent and replays.json matched exactly. Independent disassembly confirms 84 bytes / 40 instructions.
+
+The critical widths are handled correctly: the first computed geometry is truncated to 16 bits before the unsigned capacity comparison; the chosen capacity is then truncated again. The 127 boundary is inclusive for replacement with 128. In mode nonzero, only the halfword store truncates; the full callback result remains in R0. The callback is controlled, and zero divisor behavior is not established.

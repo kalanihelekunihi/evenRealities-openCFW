@@ -1,0 +1,16 @@
+{
+  "review_id": "1903",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-storage-reset-simple-prefix-1896/002",
+  "candidate_receipt_sha256": "a5afec8059fac78d638df54ecd0fd2412bff4df7d166c71f8013929dc2caca8a",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "body_sha256": "a2a0e7f5e1520bb7158550ba028219eb5c5a0da41b711eb59d9f9b368b322549",
+  "checks": [
+    "Candidate receipt binds source hash and exact prefix [0x8AE0,0x8B3E), 94 bytes/44 instructions, body hash a2a0e7f5e1520bb7158550ba028219eb5c5a0da41b711eb59d9f9b368b322549. Isolated replay passes all 24 fixtures and byte-matches candidate output.",
+    "The decoded prefix multiplies the count and copy byte, clears the requested scratch span with original A9D4, then tests mode. The tested nonzero-mode path computes wrapped product\u00d7span minus one, divides by fresh context capacity, adds one, and iterates from context+16 using a fresh capacity load rounded down to a multiple of four for stepping. Controlled 890C return values are examined after every call; the first nonzero is retained while the loop continues. The body branches to 8BE6 for the shared epilogue, outside the owned prefix."
+  ],
+  "limitations": [
+    "Mode zero, zero dimensions/capacity, callback mutation, and physical storage are outside the fixture scope; 890C is controlled. Shared epilogue execution does not expand the prefix ownership span. No canonical admission."
+  ]
+}

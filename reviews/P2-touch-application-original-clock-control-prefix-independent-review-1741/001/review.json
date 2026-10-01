@@ -1,0 +1,21 @@
+{
+  "review_id": "1741",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-original-clock-control-prefix-1740/001",
+  "candidate_receipt_sha256": "66e14d89564a7b221ed218d34915bd725f2c3885a7fbcad0be7b954165c4cb46",
+  "candidate_pseudocode_sha256": "5f5b337b370ba4faeb8cd72c45b0d34e9905a711c528d1a59b14fea3e5e83f7e",
+  "candidate_replay_sha256": "b4a4b24d90a731d232e61f9a05d93425a4fcc958f0f9ddbae76e42a94485e067",
+  "candidate_replays_sha256": "e6b837b1c516307bd46c895384093438083bc4385ac0be1aee1b0077d3f545a0",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "The candidate's cumulative original-instruction replay was independently rerun in an isolated directory. Replays and budgets match byte-for-byte; startup reaches 0x3D50 with the exact remaining helper-call sequence [8A38, 8A78, 8AE0, 8AAC, 9E18].",
+    "Original 9D90 and 9DDC each execute once, not as controlled calls. The harness captures the two peripheral words on entry to 9DDC and checks its final values against the exact 0xFFFFF0FF and 0x00000F0F masks. This preserves the important literal AND behavior of the second mask.",
+    "The original 5DD8/5D90 timing path and inherited startup assertions remain intact. The sole clock-readiness control writes sample 17 to 0x40030020 and returns immediately; the finalization helper's hardware semantics are not inferred."
+  ],
+  "limitations": [
+    "Four storage calls and 9E18 readiness remain controlled; MMIO, readiness progress, physical clock effects, and hardware IRQ behavior are synthetic/unproven.",
+    "This is evidence for the observed startup path only, not all outcomes or whole-touch coverage; no canonical admission or C implementation."
+  ]
+}

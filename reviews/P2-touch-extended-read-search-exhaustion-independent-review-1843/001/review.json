@@ -1,0 +1,16 @@
+{
+  "review_id": "1843",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-extended-read-search-exhaustion-1836/001",
+  "candidate_receipt_sha256": "d945a2335358d83c391b1c99ac718726547a8ae657f1dc2351887502854f898b",
+  "body_sha256": "10dc591b37adac5c114142464a4ad4324af575b483f655ca6cb66ac0503c7ec7",
+  "candidate_replays_sha256": "7533965df217840d2c5ee98401bdf0df9ab098fc9173e58b53b55171a3afd9dc",
+  "checks": [
+    "Receipt pins verified; isolated replay passed 48 original-instruction traces and output JSON matched byte-for-byte.",
+    "For deliberately out-of-public-range offsets and all eight current rows, search visits four candidates with no matching logical interval and proceeds with the final stepped pointer. Modeled output slicing, zero status, suffix preservation and SP match."
+  ],
+  "limitations": [
+    "This is internal malformed-input behavior after bypassing public dispatcher bounds, not a valid public read. Uniform geometry only; wrap, inaccessible rows, concurrency and physical storage remain unresolved. Trace-only, no canonical admission."
+  ]
+}

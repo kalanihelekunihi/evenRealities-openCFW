@@ -1,0 +1,19 @@
+{
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-range-register-a33c-1258/001",
+  "candidate_source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "candidate_files": {
+    "pseudocode.md": "3fc9a0f603ab1bcbf7538cd0b9cd7ee87d42a93af3e1e95022222c139be1f73b",
+    "replay.py": "5c8e9473c9af35820734a9e5deca92e1fcd0feca454dad948c14bea73ac51a62",
+    "replays.json": "41cfc95a0bed04357a59f5b3d18378ae1a96e884246f3f8e0d59762e839e1463"
+  },
+  "review_result": "PASS_SCOPED",
+  "checks": {
+    "original_bytes": "Independent Thumb+MCLASS decoding of A33C..A36E confirms unsigned comparisons against 16 and 32, mode selection 0/1/2, fresh word read and low-two-bit replacement, a second fresh read and bit-4 update, and raw return value 3. The body ends before the following NOP/pool.",
+    "replay": "All 21 isolated original-byte fixtures pass and regenerated rows exactly equal the candidate replays.json. Thresholds, two ordered reads/writes, return value, and SP are checked."
+  },
+  "limits": [
+    "The register address and reads are synthetic; physical register meaning or read changes are not established.",
+    "No canonical admission is claimed."
+  ],
+  "accepted": false
+}

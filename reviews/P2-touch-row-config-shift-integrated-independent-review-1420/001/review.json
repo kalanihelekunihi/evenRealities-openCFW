@@ -1,0 +1,18 @@
+{
+  "review_id": "1420",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-config-shift-integrated-1419/001",
+  "candidate_receipt_sha256": "8b20a01409f7df1260da6b915df4bcb9562ba8f2bdaf0d38d09b72ad623daeeb",
+  "candidate_pseudocode_sha256": "edb052c4d94bf71ec879a9fbb9e55d1c7ce05720da4443cb9f5bfd218ad05917",
+  "candidate_replay_sha256": "f2ed977ce561487d5dc24d083b42adc2543d32317bf56c9773442b588b8150b0",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Independently replayed all 216 original-instruction fixtures in an isolated output directory; the runs passed with original 0x6262 executing and the stated 0x623C/0x6352/0x6294 boundaries controlled.",
+    "Decoded the 6384 flag flow and the 6262 arithmetic. When original low flag bits equal 1, the caller forms R0 from row byte+56 with bit 7 cleared and passes context byte+0x4E in R1; 6262 computes 1 << (((R0 & 3) + R1 + 1) & 0xFF), with ARM register-shift behavior. For negative row byte, the preceding controlled 6352 return updates byte+56 before this load, which the fixture model accounts for.",
+    "The parent-model fixtures include immediate width errors from the actual shift result, preserve status/minimum behavior, and check helper calls, writes, return status, and SP. The separately reviewed 1415 mixed mode/width supplement remains a no-helper path and is not conflated with these controlled-helper fixtures."
+  ],
+  "limitations": [
+    "The 623C, 6352, and 6294 helper effects are controlled; the replay does not establish their real behavior or physical effects. It is limited to the specified row profiles and does not prove arbitrary mixed-row behavior, pointer validity, concurrency, or canonical admission."
+  ]
+}

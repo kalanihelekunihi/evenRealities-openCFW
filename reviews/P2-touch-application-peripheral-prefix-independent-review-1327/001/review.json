@@ -1,0 +1,21 @@
+{
+  "review_id": "1327",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-application-peripheral-prefix-1326/001",
+  "candidate_receipt_sha256": "9b4c64b8994b43200588ba05acb23de0e6a25cbd4cf4e3e2be0d9f3c88cdac22",
+  "candidate_pseudocode_sha256": "4e429da3ae0f1d84bfea085eec841391f72078ea2a160a0e13d9abe3a16f0efe",
+  "candidate_replay_sha256": "967be9ae417ea26b47a6aa3727b3d9bb674e6b79bc697303d1ffa7259c495c93",
+  "candidate_replays_sha256": "6e9ea997c84f1d0155d524b068232bc6c938c4a42d59a77102808e1584afe2b5",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P2-touch-reset-pseudocode-108/001/touch.flash.bin",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Candidate and source pins verify; isolated success-prefix replay reaches 3D50 while retaining prior register, clock, settings, descriptor, callback and SysTick assertions.",
+    "Actual 3678 executes; the four deeper peripheral calls and four deeper storage calls are intercepted with explicit return-only controls, then three later app calls are controlled. Context flag byte is input-derived.",
+    "Assertions verify callback 3701 at 20000930, bit-7 writes at E000E280/E000E100, bit31 at 40250000 and conditional bit8 OR at 4025006C. The implementation follows the 1325 reviewed body, including zero flag not clearing bit8."
+  ],
+  "limitations": [
+    "No peripheral physical effect, interrupt dispatch, real storage behavior, external clock table content, or complete app loop is established.",
+    "Private evidence only; no canonical admission or C implementation."
+  ]
+}
