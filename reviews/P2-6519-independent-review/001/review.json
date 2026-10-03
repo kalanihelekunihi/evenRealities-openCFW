@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6519",
+  "packet": "analysis/apollo-boot-u64-division-signed-index-mask-leaf-thousand-retry-wrapper-map-6518/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "source_and_body_hashes": "pass",
+    "signed_index_leaf": "pass",
+    "conditional_mode4_setup_calls": "pass",
+    "retry_call_and_delay_order": "pass",
+    "1000_attempt_and_return_paths": "pass",
+    "frame_and_return_aliases": "pass"
+  },
+  "limitations": [
+    "local leaf and wrapper only",
+    "no input bounds or hardware timing claim",
+    "external child semantics unresolved"
+  ]
+}

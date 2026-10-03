@@ -1,0 +1,29 @@
+{
+  "review_id": "P2-6095",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-u64-division-fifteenth-packed-channel-entry-map-6094/001",
+  "source_receipt_sha256": "70a43cc5cba4d4aa34dd74f2471cc50785563199e6cabfdf86cdfe421de9d543",
+  "source_artifacts": {
+    "instructions.json": "ea705bee8ad757859699628bfcf1a307aac8826cf0f0120395ab912ea18e1d9e",
+    "references.json": "7580b59070ab298a47a688b114c032225b076c23133c895c5b3f487751cb342c",
+    "pseudocode.md": "59caa4b4c6bc1e02ad263e8b232af85dd4328892b1c31ee41188013f08c58272",
+    "replay.py": "80ace970d3c7d3fbad006e0c16032682c3261ba5035a1f0a2143bdfab047fa37"
+  },
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "range": {
+    "start": "0x429a30",
+    "end": "0x429aac",
+    "bytes": 124,
+    "body_sha256": "3b66d472eade0b9d53b062d8e6518c27767c255831a64cd83a1eb320b097a506"
+  },
+  "instruction_count": 42,
+  "checks": [
+    "hash verification",
+    "source-byte equality",
+    "exact tiling",
+    "GNU Thumb disassembly"
+  ],
+  "execution_rerun": false,
+  "scope": "Private scoped static review; no canonical/gate change."
+}

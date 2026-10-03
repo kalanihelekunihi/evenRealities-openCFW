@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6563",
+  "packet": "analysis/apollo-boot-u64-division-alignment-aware-byte-word-compare-leaf-map-6562/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "source_hash_and_exact_extent": "pass",
+    "GNU_Thumb_decode": "pass",
+    "alignment_and_unsigned_count_branches": "pass",
+    "word_mismatch_normalization": "pass",
+    "byte_tail_raw_result_and_zero_count": "pass"
+  },
+  "limitations": [
+    "input bounds and pointer validity are not proven",
+    "candidate-purpose/review scope only",
+    "no canonical admission claim"
+  ]
+}

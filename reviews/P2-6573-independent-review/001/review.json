@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6573",
+  "packet": "analysis/apollo-boot-shift-add-divide-ten-execution-6572/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "locked_source_hash": "pass",
+    "case_count_and_input_classes": "pass",
+    "unsigned_divmod10_oracle": "pass",
+    "preservation_fields_in_fixture": "pass"
+  },
+  "limitations": [
+    "no independent Unicorn rerun; runtime unavailable",
+    "not exhaustive over all 64-bit inputs",
+    "no canonical admission claim"
+  ]
+}

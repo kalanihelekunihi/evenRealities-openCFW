@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6569",
+  "revision": "002",
+  "packet": "analysis/apollo-boot-u64-division-two-set-span-leaves-word-publication-map-6568/002",
+  "supersedes_packet_revision": "001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "corrected_packet_and_source_hashes": "pass",
+    "two_span_loop_polarities_and_results": "pass",
+    "fresh_set_byte_reads": "pass",
+    "separate_word_publication_leaf": "pass"
+  },
+  "limitations": [
+    "source bytes may change between loads",
+    "no pointer bounds or synchronization claim",
+    "no canonical admission claim"
+  ]
+}

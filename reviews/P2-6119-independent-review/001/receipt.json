@@ -1,0 +1,34 @@
+{
+  "review_id": "P2-6119",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-nineteen-packed-channel-instruction-audit-6118/001",
+  "source_receipt_sha256": "9cf7303d3f643a0f75cb77cc62b013a7458f3106f158834698c1917f67a7478b",
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "range": {
+    "start": "0x42863e",
+    "end": "0x42a04a",
+    "extent_bytes": 6668
+  },
+  "independent_counts": {
+    "latest_maps": 49,
+    "candidate_rows": 2321,
+    "unique_candidate_bytes": 6512,
+    "gnu_linear_rows": 2398,
+    "gnu_linear_bytes": 6668
+  },
+  "gaps": [
+    "0x42891e..0x428920",
+    "0x428a78..0x428a94",
+    "0x428ba8..0x428bb0",
+    "0x428c84..0x428ca4",
+    "0x4291e0..0x4291ec",
+    "0x42951c..0x429524",
+    "0x429624..0x42962c",
+    "0x429700..0x429718",
+    "0x429a1e..0x429a30",
+    "0x429d9e..0x429da4",
+    "0x429df6..0x429e00"
+  ],
+  "scope": "Candidate instruction-byte accounting only; no admission or semantic coverage claim."
+}

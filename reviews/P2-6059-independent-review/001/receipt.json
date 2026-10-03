@@ -1,0 +1,29 @@
+{
+  "review_id": "P2-6059",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-u64-division-tenth-packed-channel-publication-return-map-6058/001",
+  "source_receipt_sha256": "2ffd016841432342035cebcd540397f55a58e50e874ee33cc6d44a1cdb9ac670",
+  "source_artifacts": {
+    "instructions.json": "326fb8600eb054857cc2f440972a9a891d5f968ae240aabc920ad009e164297a",
+    "references.json": "d0ea20809cd0780644bd5717fef33ff1e2387290b5fb19da34d3933695c3024f",
+    "pseudocode.md": "e9f6bd83d21901fbe1af02d535fb5e1044fd0c5b9fe51819c014c73fc570abf3",
+    "replay.py": "3e792cc5e9010be93712384eee09335019ac51cfac4ede29f40cbd5788e5206f"
+  },
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checked_range": {
+    "start": "0x4294be",
+    "end": "0x42951c",
+    "bytes": 94,
+    "body_sha256": "34f86f4b70a168f72ade3564f0c03ce2033bb1cd28b832c12907908c5b0f93dd"
+  },
+  "checks": [
+    "receipt dependency hashes",
+    "every recorded instruction byte equals locked image",
+    "exact contiguous instruction tiling",
+    "independent GNU Thumb disassembly: 35 instructions",
+    "control flow, register/stack effects, and range boundary reviewed"
+  ],
+  "execution_rerun": false,
+  "scope": "Private scoped static review; no canonical/gate change."
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6559",
+  "packet": "analysis/apollo-boot-formatter-wrapper-shared-literal-pool-classification-6558/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "locked_source_and_packet_hashes": "pass",
+    "six_words_and_source_bytes": "pass",
+    "PC_relative_effective_addresses": "pass",
+    "duplicate_consumer_observations_preserved": "pass"
+  },
+  "limitations": [
+    "consumer-local data classification only",
+    "no global data/code boundary or admission claim",
+    "numeric pointer purposes not inferred"
+  ]
+}

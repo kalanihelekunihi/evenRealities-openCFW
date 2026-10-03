@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6483",
+  "packet": "analysis/apollo-boot-u64-division-record-base-literal-consumer-local-evidence-6482/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "source_hashes_and_body_hashes": "pass",
+    "literal_pc_calculation": "pass",
+    "literal_word_value": "pass",
+    "child_call_target_and_register_input": "pass",
+    "child_frame_and_initial_guard": "pass"
+  },
+  "limitations": [
+    "static review only",
+    "caller boundary and complete record semantics unresolved",
+    "no full-region data classification or admission claim"
+  ]
+}

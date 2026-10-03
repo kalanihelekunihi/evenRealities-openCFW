@@ -1,0 +1,29 @@
+{
+  "review_id": "P2-6121",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-u64-division-packed-channel-interrupt-mask-dispatch-map-6120/001",
+  "source_receipt_sha256": "b5af9ba5949839a0b128b314150eb2c3f33a87879f3d31c71ee6d3e09d2d355d",
+  "source_artifacts": {
+    "instructions.json": "331fe34587f5a0269da9045f51dd4529effd11d226ce3a2eb726dd57e839709e",
+    "references.json": "a4949cd537f15879a9bfe5ce56636438458a566720bef863d08ecf78de1b3589",
+    "pseudocode.md": "3ccbfd1793fba3c059dc602e82759b8849eede4e4bf457df128b4de530c97988",
+    "replay.py": "7312c068d4fdf25e8844b3508dc0f3d6244058a9a6473565b56a976b898ad728"
+  },
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "range": {
+    "start": "0x42a04a",
+    "end": "0x42a078",
+    "bytes": 46,
+    "body_sha256": "2ce0019a9c986275a9d5c9ea8d04c05e055c163e2802417c4ee68be2fd2b7fd4"
+  },
+  "instruction_count": 17,
+  "checks": [
+    "dependency hashes",
+    "exact image bytes",
+    "contiguous tiling",
+    "GNU Thumb boundaries"
+  ],
+  "execution_rerun": false,
+  "scope": "Private scoped static review; no canonical/gate change."
+}

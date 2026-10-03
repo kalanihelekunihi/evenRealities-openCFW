@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6481",
+  "packet": "analysis/apollo-boot-pointer-survey-hypothesis-limits-6480/001",
+  "disposition": "REVISE",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "source_hash_and_observation_bytes": "pass",
+    "41E5CC_local_preceding_instruction": "pass",
+    "4301D0_linear_decode_claim": "fail",
+    "43023C_consumer_status": "fail",
+    "no_function_pointer_or_region_admission_claim": "pass"
+  },
+  "limitations": [
+    "static source review only",
+    "consumer evidence is local and does not prove complete record semantics",
+    "no code/data admission or coverage-completion claim"
+  ]
+}

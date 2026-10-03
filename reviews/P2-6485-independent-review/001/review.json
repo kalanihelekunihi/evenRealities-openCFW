@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6485",
+  "packet": "analysis/apollo-boot-u64-division-twelve-byte-record-loop-type-one-return-map-6484/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "source_hash_and_packet_hashes": "pass",
+    "Thumb_decode_and_unsigned_loop_exit": "pass",
+    "type_gate_and_record_stride": "pass",
+    "ordered_child_arguments_and_ignored_results": "pass",
+    "zero_return_and_epilogue": "pass"
+  },
+  "limitations": [
+    "continuation span only",
+    "other type handlers and full table boundaries unresolved",
+    "external child semantics unverified"
+  ]
+}

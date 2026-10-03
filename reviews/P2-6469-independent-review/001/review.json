@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6469",
+  "packet": "analysis/apollo-boot-u64-division-six-byte-field-capture-fallback-leaf-map-6468/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "hashes": "pass",
+    "Thumb tiling": "pass",
+    "short-circuit gates": "pass",
+    "six capture mappings and rereads": "pass",
+    "fallback values and destinations": "pass",
+    "return": "pass"
+  },
+  "limitations": [
+    "static review only",
+    "no snapshot/atomicity or field-purpose claim",
+    "no canonical/admission change"
+  ]
+}

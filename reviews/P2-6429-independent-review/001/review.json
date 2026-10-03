@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6429",
+  "packet": "analysis/apollo-boot-u64-division-float-mode-one-lazy-offset-publication-map-6428/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "hashes": "pass",
+    "Thumb tiling": "pass",
+    "PC float references": "pass",
+    "unordered compare branch polarity": "pass",
+    "lazy offset fresh reads and ordered VFP ops": "pass",
+    "descriptor publication and return": "pass"
+  },
+  "limitations": [
+    "static review only",
+    "floating point runtime/FPSCR behavior not independently executed",
+    "no API or admission claim"
+  ]
+}

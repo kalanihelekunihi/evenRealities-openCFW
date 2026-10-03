@@ -1,0 +1,29 @@
+{
+  "review_id": "P2-6127",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-u64-division-two-byte-condition-flag-set-map-6126/001",
+  "source_receipt_sha256": "fc27c668ac5b7edd98671c25e241f6712d3a28100f2f1c50c53098c4a2cd1568",
+  "source_artifacts": {
+    "instructions.json": "4507f0f3bf05448dcebe6608975e82e5958cfd364536fc8df1066f1ba11dfbde",
+    "references.json": "c0761da82e7017f9b35a99049b9ea560f2b0207b6b9ebae26982466c8e3f7bc7",
+    "pseudocode.md": "8c471e861af50bf146088ab393d6baba611bbd5023129e031e5f582fcba5282f",
+    "replay.py": "d3dba4e98c7e0a2130748b9346e84aea592c3f68f8f190851abd4060dc148e49"
+  },
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "range": {
+    "start": "0x42a19c",
+    "end": "0x42a1b2",
+    "bytes": 22,
+    "body_sha256": "34664d76a6022980a70a926ac4c1108f43d33974584a9cb854f8faa59a8ebacf"
+  },
+  "instruction_count": 10,
+  "checks": [
+    "hashes",
+    "source-byte agreement",
+    "tiling",
+    "GNU Thumb instruction boundaries"
+  ],
+  "execution_rerun": false,
+  "scope": "Private scoped static review; no canonical/gate change."
+}

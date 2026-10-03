@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6577",
+  "packet": "analysis/apollo-boot-u64-division-top-bit-inverted-byte-publication-leaf-map-6576/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "source_hash_and_body_extent": "pass",
+    "GNU_Thumb_decode": "pass",
+    "literal_target_and_fresh_load": "pass",
+    "MSB_inversion_byte_store_return": "pass"
+  },
+  "limitations": [
+    "pointer validity not checked",
+    "no hardware or field-purpose inference",
+    "no canonical admission claim"
+  ]
+}

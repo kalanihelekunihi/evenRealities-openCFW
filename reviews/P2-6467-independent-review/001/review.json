@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6467",
+  "packet": "analysis/apollo-boot-u64-division-low-six-and-two-bit-initialization-leaf-map-6466/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "hashes": "pass",
+    "Thumb tiling": "pass",
+    "fresh read/modify/write order": "pass",
+    "BFI field and value": "pass",
+    "return": "pass"
+  },
+  "limitations": [
+    "static review only",
+    "no hardware-purpose or atomicity claim"
+  ]
+}

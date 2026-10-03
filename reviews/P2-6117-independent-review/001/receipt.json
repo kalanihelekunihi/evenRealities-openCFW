@@ -1,0 +1,28 @@
+{
+  "review_id": "P2-6117",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-u64-division-packed-channel-empty-leaves-restore-wrapper-map-6116/001",
+  "source_receipt_sha256": "8d9aa4216078545fec3f1aa12dd2f2efd939a30fa8a27d058cfb87b99873fdbb",
+  "source_artifacts": {
+    "instructions.json": "df5053948ef5177de4a3538b224c0a383820b667591876fdbd88d9db002fa1fb",
+    "references.json": "9368b1bb88f10319010eada0a2eb5543785e8716a84a541857422eb5fbe2a224",
+    "pseudocode.md": "1665c7bb2f339d5b27bf6ebbbf0452554e096382c8b3231a735fb07aae581cdf",
+    "replay.py": "3acafcbb56e43117a70c9958f1ea14fdb4695e60b11aa13c343515d2e636c4a8"
+  },
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "range": {
+    "start": "0x42a030",
+    "end": "0x42a04a",
+    "bytes": 26
+  },
+  "instruction_count": 11,
+  "checks": [
+    "dependency/artifact hashes",
+    "locked image byte match",
+    "body tiling",
+    "independent GNU Thumb boundaries"
+  ],
+  "execution_rerun": false,
+  "scope": "Private scoped static review; no canonical/gate change."
+}

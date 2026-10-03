@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6587",
+  "packet": "analysis/apollo-boot-u64-division-interrupt-context-global-state-wrappers-map-6586/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "locked_source_packet_and_body_hashes": "pass",
+    "instruction_extent_and_GNU_Thumb_decode": "pass",
+    "context_and_mask_predicate_order": "pass",
+    "status_wrapper_branches_and_POP_aliases": "pass",
+    "global_state_write_and_ignored_child_result": "pass"
+  },
+  "limitations": [
+    "global and child purpose not established",
+    "global read/write not atomic",
+    "no canonical admission claim"
+  ]
+}

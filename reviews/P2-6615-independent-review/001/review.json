@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6615",
+  "packet": "analysis/apollo-boot-u64-division-littlefs-popcount-endian-buffer-reset-leaves-map-6614/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "locked_source_packet_and_body_hashes": "pass",
+    "GNU_Thumb_decode": "pass",
+    "popcount_and_endian_stack_reconstruction": "pass",
+    "wrapper_return_aliases": "pass",
+    "buffer_reset_arguments_and_final_store": "pass"
+  },
+  "limitations": [
+    "ordinary stack alias assumption is scoped",
+    "called helper purposes are not generalized",
+    "no canonical admission claim"
+  ]
+}

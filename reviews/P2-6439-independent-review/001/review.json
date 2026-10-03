@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6439",
+  "packet": "analysis/apollo-boot-u64-division-eight-flag-array-read-loop-return-map-6438/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "hashes": "pass",
+    "Thumb tiling": "pass",
+    "eight flag loads": "pass",
+    "fresh array reads and EE00 arguments": "pass",
+    "output/count loop behavior": "pass",
+    "epilogue alias and error status": "pass"
+  },
+  "limitations": [
+    "static review only",
+    "no array-purpose inference",
+    "no canonical/admission claim"
+  ]
+}

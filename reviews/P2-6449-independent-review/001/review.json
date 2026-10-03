@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6449",
+  "packet": "analysis/apollo-boot-u64-division-three-mode-record-restore-entry-map-6448/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "hashes": "pass",
+    "Thumb tiling": "pass",
+    "pre-null read and magic guard": "pass",
+    "mode dispatch": "pass",
+    "mode0 record guard and child sequence": "pass",
+    "frame and continuation branches": "pass"
+  },
+  "limitations": [
+    "static review only",
+    "alternate modes and external epilogues outside packet",
+    "no API-purpose or admission claim"
+  ]
+}

@@ -1,0 +1,7 @@
+# Independent review 6623/001
+
+Disposition: **PASS_SCOPED**; `accepted:false`. The 246-byte body and all packet/input hashes match the locked image; GNU Thumb decode confirms both complete 64-byte-frame wrappers. The compare wrapper captures block, offset, length, and expected pointer from caller stack arguments. It processes at most eight bytes per direct-read child call, advances by the returned chunk only on status zero, and passes each completed chunk to the compare leaf. Negative compare becomes status 1, positive becomes 2, equality continues; direct-read nonzero status is propagated. The compare epilogue discards 28 local bytes and restores the saved registers.
+
+The CRC wrapper captures block, offset, length, and state pointer. It uses the same eight-byte read loop, then loads the current CRC state, folds each chunk through the 16-entry nibble table, stores the updated state, and continues. Direct-read failure returns immediately while preserving any earlier state updates. The CRC epilogue's 28-byte adjustment discards its 24-byte local area plus the saved incoming R0 before restoring R4-R11/PC. Zero length returns zero without loading/storing the state. The two wrappers' stack layouts and hint subtraction match the decoded calls.
+
+This review does not establish the lower-level read callback, comparison helper, CRC concurrency behavior, or physical storage. No canonical files or gates changed.

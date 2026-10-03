@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6437",
+  "packet": "analysis/apollo-boot-u64-division-counted-record-read-unguarded-loop-entry-map-6436/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "hashes": "pass",
+    "Thumb tiling": "pass",
+    "prevalidation read ordering": "pass",
+    "fifth argument guard and zero-count path": "pass",
+    "loop dispatch, field extraction, and count update": "pass"
+  },
+  "limitations": [
+    "static review only",
+    "alternate path and epilogue outside packet",
+    "no API-purpose or admission claim"
+  ]
+}

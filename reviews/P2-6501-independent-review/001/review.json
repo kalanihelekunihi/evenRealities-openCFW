@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6501",
+  "packet": "analysis/apollo-boot-u64-division-initialization-wrapper-local-record-entry-map-6500/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "source_and_body_hashes": "pass",
+    "wrapper_arguments_and_POP_alias": "pass",
+    "80_byte_frame": "pass",
+    "ordered_initial_child_calls": "pass",
+    "status_branch_and_diagnostic_call": "pass"
+  },
+  "limitations": [
+    "mapped spans only",
+    "SP+8 output-area initial value unresolved",
+    "child semantics and following continuation unresolved"
+  ]
+}

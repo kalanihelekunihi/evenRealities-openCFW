@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6547",
+  "packet": "analysis/apollo-boot-u64-division-formatter-entry-width-precision-modifier-dispatch-map-6546/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "packet_and_source_hashes": "pass",
+    "frame_and_register_setup": "pass",
+    "ordinary_byte_LF_CR_and_null_output_paths": "pass",
+    "width_precision_parser_call_order": "pass",
+    "modifier_cursor_and_long_long_flag": "pass",
+    "specifier_dispatch_targets": "pass"
+  },
+  "limitations": [
+    "width-star handling unresolved in this span",
+    "parser and target continuation semantics unresolved",
+    "partial formatter only",
+    "no canonical admission claim"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6575",
+  "packet": "analysis/apollo-boot-whole-image-instruction-evidence-availability-6574/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "all_1069_input_hashes": "pass",
+    "source_byte_matches": "pass",
+    "observation_and_union_counts": "pass",
+    "all_367_interval_hashes_and_classifications": "pass"
+  },
+  "limitations": [
+    "selected list-schema instruction evidence only",
+    "missing bytes may include data or unmapped code",
+    "no completeness, code-only denominator, or admission claim"
+  ]
+}

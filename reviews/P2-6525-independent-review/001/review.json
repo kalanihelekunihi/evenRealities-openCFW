@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6525",
+  "packet": "analysis/apollo-boot-u64-division-stack-status-conditional-two-child-wrapper-map-6524/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "source_and_packet_hashes": "pass",
+    "frame_and_first_child_arguments": "pass",
+    "status_and_output_guards": "pass",
+    "fresh_second_and_third_child_arguments": "pass",
+    "ignored_results_and_POP_aliases": "pass"
+  },
+  "limitations": [
+    "body span only",
+    "external child semantics unresolved",
+    "no canonical admission claim"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6407",
+  "packet": "analysis/apollo-boot-u64-division-sixty-four-slot-countdown-callback-scan-map-6406/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "hashes": "pass",
+    "Thumb tiling": "pass",
+    "64-slot loop bounds and unsigned conditions": "pass",
+    "diagnostic stack aliases": "pass"
+  },
+  "limitations": [
+    "static review only",
+    "callee/hardware semantics unresolved",
+    "no canonical or coverage claim"
+  ]
+}

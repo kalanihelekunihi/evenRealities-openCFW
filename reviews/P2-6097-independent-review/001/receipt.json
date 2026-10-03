@@ -1,0 +1,29 @@
+{
+  "review_id": "P2-6097",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-u64-division-fifteenth-packed-channel-adjustment-return-map-6096/001",
+  "source_receipt_sha256": "4a8d5784dd2b98161fbfed13d27213cd04b42d410560d48ec8b3fee59989099a",
+  "source_artifacts": {
+    "instructions.json": "4b175ad063fe4d79af57ab93cfa6be9cc736b8c7fae7e8c55608877f0dcbc207",
+    "references.json": "1713a0cd1f5ce3460faf1fce03854edf1456eae1c4128194082777643c0f9063",
+    "pseudocode.md": "98f83d81983e178289e2b5c96d94b24954e67ab158437b01ab509ea1234e4331",
+    "replay.py": "f3b85649e9106f049d6d410028e43eff19099e00adb978a6f5af5f42e5e7e3ca"
+  },
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "range": {
+    "start": "0x429aac",
+    "end": "0x429b4c",
+    "bytes": 160,
+    "body_sha256": "c9dc0afb155b03208a1dfedc9fb63cf6589516249fd00b019ccb541b882c6f08"
+  },
+  "instruction_count": 54,
+  "checks": [
+    "hash verification",
+    "source-byte equality",
+    "exact tiling",
+    "GNU Thumb disassembly"
+  ],
+  "execution_rerun": false,
+  "scope": "Private scoped static review; no canonical/gate change."
+}

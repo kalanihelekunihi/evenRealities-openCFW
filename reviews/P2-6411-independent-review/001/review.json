@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6411",
+  "packet": "analysis/apollo-boot-u64-division-indirect-fifth-argument-three-store-wrapper-map-6410/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "hashes": "pass",
+    "Thumb tiling": "pass",
+    "fifth argument and stack alias": "pass",
+    "ordered stores and return registers": "pass"
+  },
+  "limitations": [
+    "static review only",
+    "callee/store purposes unresolved",
+    "no canonical or admission claim"
+  ]
+}

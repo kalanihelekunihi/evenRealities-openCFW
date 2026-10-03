@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6601",
+  "packet": "analysis/apollo-boot-backward-byte-fill-execution-6600/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "locked_image_and_fixture_hashes": "pass",
+    "2064_unique_matrix_cases": "pass",
+    "byte_fill_and_sentinel_oracle": "pass",
+    "register_stack_pc_assertions_in_fixture": "pass"
+  },
+  "limitations": [
+    "no independent Unicorn rerun; runtime unavailable",
+    "no pointer wrap, alias, fault, concurrency or hardware claim",
+    "no canonical admission claim"
+  ]
+}

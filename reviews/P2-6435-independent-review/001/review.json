@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6435",
+  "packet": "analysis/apollo-boot-u64-division-gated-float-fourteen-bit-field-replacement-map-6434/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "hashes": "pass",
+    "Thumb tiling": "pass",
+    "enable guard and early return": "pass",
+    "VFP operation order": "pass",
+    "integer field mask and preserved bits": "pass"
+  },
+  "limitations": [
+    "static review only",
+    "VFP conversion/FPSCR edge behavior untested",
+    "no purpose or admission claim"
+  ]
+}

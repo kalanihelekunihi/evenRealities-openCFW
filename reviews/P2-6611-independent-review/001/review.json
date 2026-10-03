@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6611",
+  "packet": "analysis/apollo-boot-layered-evidence-gap-prioritization-6610/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "pinned_inputs_and_source_bytes": "pass",
+    "four_layer_mask_counts": "pass",
+    "unrepresented_and_no_instruction_literal_overlap": "pass",
+    "935_interval_records": "pass"
+  },
+  "limitations": [
+    "evidence availability only",
+    "unrepresented ranges may include code or other evidence classes",
+    "no semantic completeness or admission claim"
+  ]
+}

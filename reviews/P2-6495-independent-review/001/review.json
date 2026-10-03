@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6495",
+  "packet": "analysis/apollo-boot-signed-index-leaves-exhaustive-execution-6494/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "source_and_replay_hashes": "pass",
+    "case_generation_scope": "pass",
+    "integer_oracle_alignment_with_reviewed_leaves": "pass",
+    "131072_declared_case_count": "pass",
+    "independent_runtime_replay": "not_run_unicorn_unavailable"
+  },
+  "limitations": [
+    "fixture runtime results not independently rerun",
+    "static review of oracle and source only",
+    "no hardware or broader firmware behavior claim"
+  ]
+}

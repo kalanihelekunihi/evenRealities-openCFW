@@ -1,0 +1,28 @@
+{
+  "review_id": "P2-6089",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-u64-division-fourteenth-packed-channel-restoration-return-map-6088/001",
+  "source_receipt_sha256": "3eaf0ad3da8eecaa0632f7d997b43c09f3d574563ab6cad2e1f741a0a4f19a15",
+  "source_artifacts": {
+    "instructions.json": "1a7cf9eefada57b7b4e44b0b11cf1db8423865e004e0b8bbaee5f549e7530a92",
+    "references.json": "734d3cc0aa36895271ba100a4ee0cf76c7070952ae9a5e2f1272653253cd351b",
+    "pseudocode.md": "9921fd44d8b6512a09a5f0e5391240b1c1a4dabcf9d818c7501123c8dc27cb22",
+    "replay.py": "f0040f8adfd11cb9f6dcffa3d0ccd53d688e4d6e7bdb0571a350dd674d78cb3e"
+  },
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "range": {
+    "start": "0x4299fc",
+    "end": "0x429a1e",
+    "bytes": 34,
+    "body_sha256": "133d354ddbbaad64bf0f5b6042590f7a9cfc649f042b749b2a7c2fb3739aa0f2"
+  },
+  "checks": [
+    "dependency/artifact hashes",
+    "source-byte equality",
+    "instruction tiling and GNU disassembly",
+    "register-load target equality across 6084 and 6088"
+  ],
+  "execution_rerun": false,
+  "scope": "Private scoped static review; no canonical/gate change."
+}

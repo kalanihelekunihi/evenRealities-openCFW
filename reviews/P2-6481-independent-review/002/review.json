@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6481",
+  "packet": "analysis/apollo-boot-pointer-survey-hypothesis-limits-6480/002",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "supersedes_review": "001",
+  "checks": {
+    "source_hash_and_observation_bytes": "pass",
+    "corrected_consumer_claim": "pass",
+    "record_extent_arithmetic": "pass",
+    "function_pointer_caution": "pass"
+  },
+  "limitations": [
+    "consumer-defined extent only",
+    "numeric target values are not thereby proven function pointers",
+    "no full semantic or global admission claim"
+  ]
+}

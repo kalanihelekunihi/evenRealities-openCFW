@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6523",
+  "packet": "analysis/apollo-boot-u64-division-eight-entry-handle-filter-final-create-return-map-6522/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "source_and_packet_hashes": "pass",
+    "unsigned_index_guard_and_stride": "pass",
+    "fresh_handle_reads_and_create_status": "pass",
+    "failure_and_diagnostic_paths": "pass",
+    "R6_return_provenance_and_stack_aliases": "pass"
+  },
+  "limitations": [
+    "body span only",
+    "external child semantics unresolved",
+    "no canonical admission or coverage claim"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6533",
+  "packet": "analysis/apollo-boot-u64-division-cached-limit-guard-three-wrappers-mask-child-map-6532/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "packet_and_source_range_hashes": "pass",
+    "dead_wrapped_sum_and_cache_initialization": "pass",
+    "unsigned_guard_predicate": "pass",
+    "three_guarded_wrapper_arguments_and_returns": "pass",
+    "rounded_length_wrap_and_child_arguments": "pass",
+    "PRIMASK_restore_and_POP_R0_alias": "pass"
+  },
+  "limitations": [
+    "only the listed disjoint bodies reviewed",
+    "external child semantics and hardware purpose unresolved",
+    "no canonical admission or coverage claim"
+  ]
+}

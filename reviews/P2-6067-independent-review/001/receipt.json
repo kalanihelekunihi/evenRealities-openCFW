@@ -1,0 +1,29 @@
+{
+  "review_id": "P2-6067",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-eleven-packed-channel-instruction-audit-6066/001",
+  "source_receipt_sha256": "9ed75e7a5677fcdd526a9def484e87beb0ab1a5846cd84c2a6d6c686af6794b6",
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "range": {
+    "start": "0x42863e",
+    "end": "0x429624",
+    "extent_bytes": 4070
+  },
+  "independent_counts": {
+    "latest_maps": 29,
+    "candidate_rows": 1420,
+    "unique_candidate_bytes": 3980,
+    "gnu_linear_instruction_rows": 1464,
+    "gnu_linear_bytes": 4070
+  },
+  "gaps": [
+    "0x42891e..0x428920",
+    "0x428a78..0x428a94",
+    "0x428ba8..0x428bb0",
+    "0x428c84..0x428ca4",
+    "0x4291e0..0x4291ec",
+    "0x42951c..0x429524"
+  ],
+  "scope": "Candidate-byte union and linear decoder accounting only; no admission/gate change."
+}

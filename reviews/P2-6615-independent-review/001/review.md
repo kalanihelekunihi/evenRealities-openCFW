@@ -1,0 +1,5 @@
+# Independent review 6615/001
+
+Disposition: **PASS_SCOPED**; `accepted:false`. Packet/source/body hashes match and GNU Thumb decoding agrees over 0x410492..0x410544. The first leaf is the SWAR population count with multiplier 0x01010101 and high-byte extraction; the next is a frameless subtract leaf. The endian routines push R0 and reconstruct four bytes from that stack slot in little-endian or big-endian order. Their wrappers return the child value through R0 while restoring the caller's incoming R7 into R1. Another wrapper's POP into R0 overwrites the child return with incoming R7. The final leaf stores 0xFFFFFFFF through unchecked R1; the final wrapper loads configuration pointer at input+0x68, reads length at config+0x28, obtains buffer at record+0xC, calls the backward fill helper with byte 0xFF, ignores its return, stores 0xFFFFFFFF into the record's first word, and restores saved R3 into R0.
+
+The ordinary-stack alias assumption and helper purposes are not generalized beyond these instructions. No canonical files or gates changed.

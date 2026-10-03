@@ -1,0 +1,28 @@
+{
+  "review_id": "P2-6111",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-current-row-restore-literal-pool-classification-6110/001",
+  "source_receipt_sha256": "62241364d8e448726ef67ec0195cee77f3c19dcdc056c9e8164fdaf0b7320d5a",
+  "source_artifacts": {
+    "words.json": "76f13cb09770a27b8c7bff0ce23876afc47a06a3a88549bd771665a1f06d2289",
+    "pseudocode.md": "6c8c495a80b404a25da2f7685bcc6124ef53fb6c584466234a8f19ac65a4c822",
+    "replay.py": "6ea4335a1501ef70c6910bbf61f057ebfe844f9daf0845bb115c5514781a0293"
+  },
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "range": {
+    "start": "0x429df8",
+    "end": "0x429e00",
+    "bytes": 8,
+    "sha256": "478f87430bcfbf7796b6e2262a5f8300ad708887caa32cb51d5057038b497264"
+  },
+  "word_count": 2,
+  "consumer_count": 2,
+  "checks": [
+    "source/dependency hashes",
+    "word bytes/values",
+    "consumer ledger provenance",
+    "GNU effective PC targets"
+  ],
+  "scope": "Local consumer-backed data classification only; no canonical/gate change."
+}

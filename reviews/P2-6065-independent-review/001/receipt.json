@@ -1,0 +1,28 @@
+{
+  "review_id": "P2-6065",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-u64-division-eleventh-packed-channel-metadata-write-return-map-6064/001",
+  "source_receipt_sha256": "2311488428af0b4f2b199bcd6ea996eb67555a47d8b2a8475f4c516a95043ff2",
+  "source_artifacts": {
+    "instructions.json": "7eb3a6cbe9f0dac3741f289a8141dc03016e6d682ad45ec84a061b51192c4921",
+    "references.json": "0ef26bd181ef1dcff7ca7d40f1fba28425c8bd3d697cbebed9daa1884c86f7b8",
+    "pseudocode.md": "56752a44769f25a36567463ebe69d3b2a1cdcd59f00ec54daf97336d57370c02",
+    "replay.py": "989f86211a79eca5e6fcdc49bd4808dd77e3c8ca597ce9030251f8906dcf1fff"
+  },
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "range": {
+    "start": "0x42959a",
+    "end": "0x429624",
+    "bytes": 138,
+    "body_sha256": "257043657a3e09b6315176529de2e687288569f76d5dde8c351dbd7b0e3040de"
+  },
+  "checks": [
+    "dependency and artifact hashes",
+    "recorded bytes match locked image",
+    "exact contiguous instruction tiling",
+    "independent GNU Thumb disassembly"
+  ],
+  "execution_rerun": false,
+  "scope": "Private scoped static review; no canonical/gate change."
+}

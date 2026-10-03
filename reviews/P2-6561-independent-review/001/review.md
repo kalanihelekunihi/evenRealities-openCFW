@@ -1,0 +1,5 @@
+# Independent review 6561/001
+
+Disposition: **PASS_SCOPED**; `accepted:false`. The 36 fixture rows cover nine format cases across null/non-null output and both CR settings. Fixture hashes and the locked image hash match. I checked each row's count against its expected byte sequence, and the nonnull output against expected bytes plus the terminating NUL; null-output rows correctly omit output memory. The `%-5s` case intentionally expects `abc` followed by five spaces, consistent with the prior source review's remaining-width behavior. CR expansion applies to the emitted newline only when output is nonnull; the null-output count remains the unexpanded count.
+
+The recorded replay uses Unicorn, which is unavailable in this review environment, so I did not independently rerun machine execution. This is static fixture/oracle consistency review, not independent runtime confirmation. Scope remains character/string paths; numeric, float, callback, hardware, and whole-formatter claims are excluded. No canonical files or gates changed.

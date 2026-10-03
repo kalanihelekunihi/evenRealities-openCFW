@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6489",
+  "packet": "analysis/apollo-boot-ninety-seven-record-consumer-extent-6488/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "locked_source_hash": "pass",
+    "97_record_byte_and_field_extractions": "pass",
+    "span_hash_and_extent_arithmetic": "pass",
+    "caller_instruction_decode_and_literal_target": "pass",
+    "zero_return_and_POP_alias": "pass"
+  },
+  "limitations": [
+    "consumer-defined extent only",
+    "no comprehensive record semantic claim",
+    "no absence-of-other-consumers or global admission claim"
+  ]
+}

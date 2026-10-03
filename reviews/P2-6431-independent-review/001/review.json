@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6431",
+  "packet": "analysis/apollo-boot-u64-division-float-gated-configuration-copy-modes-map-6430/002",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "hashes": "pass",
+    "Thumb tiling": "pass",
+    "VFP literal and unordered branch": "pass",
+    "mode 2 field copy order": "pass",
+    "mode 3 field copy/zero order": "pass",
+    "default mode status": "pass"
+  },
+  "limitations": [
+    "static review only",
+    "alias-dependent copy behavior preserved but not executed",
+    "no API-purpose or admission claim"
+  ]
+}

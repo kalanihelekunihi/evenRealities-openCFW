@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6497",
+  "packet": "analysis/apollo-boot-u64-division-eight-case-byte-mode-child-dispatch-entry-map-6496/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "source_hash_and_packet_hashes": "pass",
+    "mode_low_byte_dispatch": "pass",
+    "mode_1_to_4_child_arguments": "pass",
+    "second_argument_boolean": "pass",
+    "direct_default_register_state": "pass"
+  },
+  "limitations": [
+    "entry span only",
+    "continuation targets and callee semantics unresolved",
+    "no canonical or global coverage claim"
+  ]
+}

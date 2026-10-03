@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6571",
+  "packet": "analysis/apollo-boot-u64-division-two-word-constant-ten-quotient-shift-add-leaf-map-6570/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "source_and_packet_hashes": "pass",
+    "high_and_low_word_paths": "pass",
+    "wrapped_shift_add_and_residual_correction": "pass",
+    "register_restore_and_return": "pass"
+  },
+  "limitations": [
+    "division-by-ten identity is a separate tested claim",
+    "not an all-input proof",
+    "no canonical admission claim"
+  ]
+}

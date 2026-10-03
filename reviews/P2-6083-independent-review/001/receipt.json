@@ -1,0 +1,29 @@
+{
+  "review_id": "P2-6083",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-u64-division-fourteenth-packed-channel-entry-map-6082/001",
+  "source_receipt_sha256": "d63a41cd83324741f9db4ee651d0bc735f3efe0df111f7cbb0eac169eede7b5e",
+  "source_artifacts": {
+    "instructions.json": "a093e05d8f6f75fb7b67df389d308cb2f04aa2436576c7b15febad7feaf66152",
+    "references.json": "1daf8a51605d7ddb309438ae1795de739e3961605fdef20d72754c81ad7b9322",
+    "pseudocode.md": "ca022c1cf79d2bde28642bfce2d3e24eecce13dd2deda8e2ea9027faab095774",
+    "replay.py": "52622e221b4810de2938bbf32a2dbc5bbd53b645a7916fe3dbecc334ae65e62e"
+  },
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "range": {
+    "start": "0x42984e",
+    "end": "0x4298d0",
+    "bytes": 130,
+    "body_sha256": "68f22825fe53ad1e0feb89df108eb1a4577e1f77031ed3484a3576762e64e46b"
+  },
+  "instruction_count": 46,
+  "checks": [
+    "dependency/artifact hashes",
+    "source-byte match",
+    "body tiling",
+    "GNU Thumb boundaries"
+  ],
+  "execution_rerun": false,
+  "scope": "Private scoped static review; no canonical/gate changes."
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6443",
+  "packet": "analysis/apollo-boot-float-comparison-scale-literal-pair-classification-6442/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "source and ledger hashes": "pass",
+    "literal bytes and effective targets": "pass",
+    "consumer provenance": "pass"
+  },
+  "limitations": [
+    "consumer-bound classification only",
+    "duplicate observations not unique instructions",
+    "no global boundary or admission claim"
+  ]
+}

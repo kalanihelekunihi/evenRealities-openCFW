@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6527",
+  "revision": "002",
+  "packet": "analysis/apollo-boot-eight-entry-setup-shared-literal-pool-classification-6526/002",
+  "supersedes_review": "reviews/P2-6527-independent-review/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "corrected_packet_hashes": "pass",
+    "source_interval_hash": "pass",
+    "all_13_consumer_effective_addresses": "pass",
+    "nine_words_consumer_backed": "pass",
+    "adjacent_halfword_0x430660_unclassified": "pass"
+  },
+  "limitations": [
+    "consumer-backed data evidence only",
+    "no global code-data ownership claim",
+    "no canonical admission or coverage claim"
+  ]
+}

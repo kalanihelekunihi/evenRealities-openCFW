@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6461",
+  "packet": "analysis/apollo-boot-u64-division-control-alternate-two-seven-bit-return-map-6460/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "hashes": "pass",
+    "Thumb tiling": "pass",
+    "byte gate and child calls": "pass",
+    "full-word threshold and fresh reread behavior": "pass",
+    "field BFI and OR sequence": "pass",
+    "low-field path and epilogue alias": "pass"
+  },
+  "limitations": [
+    "static review only",
+    "hardware meaning and atomicity unverified",
+    "no canonical/admission claim"
+  ]
+}

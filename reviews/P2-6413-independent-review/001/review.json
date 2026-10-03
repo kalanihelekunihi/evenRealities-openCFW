@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6413",
+  "packet": "analysis/apollo-boot-u64-division-single-record-acquire-magic-publication-entry-map-6412/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "hashes": "pass",
+    "Thumb tiling": "pass",
+    "validation order": "pass",
+    "fresh record reads and stores": "pass",
+    "output publication": "pass"
+  },
+  "limitations": [
+    "static review only",
+    "continuation outside packet",
+    "no concurrency or child-semantics claim"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6535",
+  "packet": "analysis/apollo-boot-cached-limit-guard-execution-6534/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "source_and_fixture_hashes": "pass",
+    "40_case_cross_product": "pass",
+    "guard_result_oracle": "pass",
+    "initializer_call_and_cache_expectations": "pass",
+    "stack_pointer_claim_scope": "pass"
+  },
+  "limitations": [
+    "recorded Unicorn execution was not independently rerun because Unicorn is unavailable",
+    "initializer behavior is a stub writing SP+0x2C=0x100",
+    "does not establish child behavior, asynchronous updates, aliasing, or MMIO",
+    "no canonical admission claim"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6553",
+  "packet": "analysis/apollo-boot-u64-division-formatter-signed-magnitude-sign-padding-map-6552/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "packet_and_source_hashes": "pass",
+    "signed_word_capture_and_wrapped_magnitude": "pass",
+    "padding_length_and_sign_placement_branches": "pass",
+    "helper_arguments_and_stack_slots": "pass",
+    "output_count_alias_paths": "pass"
+  },
+  "limitations": [
+    "integer helper behavior unresolved",
+    "formatting expectations not inferred",
+    "partial formatter only",
+    "no canonical admission claim"
+  ]
+}

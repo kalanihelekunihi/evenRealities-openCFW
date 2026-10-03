@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6423",
+  "packet": "analysis/apollo-boot-u64-division-eight-slot-descriptor-field-counter-publication-map-6422/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "hashes": "pass",
+    "Thumb tiling": "pass",
+    "pre-null read and validation order": "pass",
+    "fresh bounds reads": "pass",
+    "packed word and overlap": "pass",
+    "indexed write and counter increment": "pass"
+  },
+  "limitations": [
+    "static review only",
+    "descriptor accesses unchecked",
+    "no structure-purpose or admission claim"
+  ]
+}

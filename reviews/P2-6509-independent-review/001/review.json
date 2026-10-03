@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6509",
+  "packet": "analysis/apollo-boot-u64-division-third-sample-float-range-flag-cleanup-return-map-6508/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "source_and_packet_hashes": "pass",
+    "sample_scaling_and_unsigned_float_conversion": "pass",
+    "VFP_comparison_flag_branches": "pass",
+    "record_updates_and_diagnostic_arguments": "pass",
+    "iteration_bound_and_cleanup_call_order": "pass",
+    "frame_epilogue": "pass"
+  },
+  "limitations": [
+    "continuation span only",
+    "child semantics and external diagnostic effects unverified",
+    "no assumption of successful sample acquisition"
+  ]
+}

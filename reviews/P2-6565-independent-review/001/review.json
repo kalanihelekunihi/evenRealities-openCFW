@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6565",
+  "packet": "analysis/apollo-boot-u64-division-two-nibble-table-state-fold-leaf-map-6564/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "source_and_packet_hashes": "pass",
+    "exact_instruction_extent": "pass",
+    "two_fresh_byte_loads_and_nibble_flow": "pass",
+    "unsigned_loop_and_zero_count": "pass",
+    "literal_target_and_register_restore": "pass"
+  },
+  "limitations": [
+    "input mutation between byte loads is not modeled",
+    "table-purpose conclusions require separate evidence",
+    "no canonical admission claim"
+  ]
+}

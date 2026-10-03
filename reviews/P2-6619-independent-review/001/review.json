@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6619",
+  "packet": "analysis/apollo-boot-u64-division-littlefs-cache-overlay-direct-read-refill-map-6618/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "locked_source_packet_and_body_hashes": "pass",
+    "GNU_Thumb_decode_and_extent": "pass",
+    "frame_stack_argument_aliases": "pass",
+    "cache_overlay_and_readcache_paths": "pass",
+    "direct_callback_arguments_and_return": "pass",
+    "refill_field_publication_and_callback_status": "pass",
+    "wrapped_bounds_and_error_status": "pass"
+  },
+  "limitations": [
+    "read-unit division by zero behavior not assumed",
+    "child and callback semantics unresolved",
+    "no physical storage, concurrency, or whole-firmware claim",
+    "no canonical admission claim"
+  ]
+}

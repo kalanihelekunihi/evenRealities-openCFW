@@ -1,0 +1,31 @@
+{
+  "review_id": "P2-6093",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-fourteen-packed-channel-instruction-audit-6092/001",
+  "source_receipt_sha256": "01d169e95548cee1e3265737454c656aa037322d78c98184e01ccc375c111e47",
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "range": {
+    "start": "0x42863e",
+    "end": "0x429a1e",
+    "extent_bytes": 5088
+  },
+  "independent_counts": {
+    "maps": 38,
+    "candidate_rows": 1771,
+    "unique_candidate_bytes": 4966,
+    "linear_gnu_rows": 1831,
+    "linear_gnu_bytes": 5088
+  },
+  "gaps": [
+    "0x42891e..0x428920",
+    "0x428a78..0x428a94",
+    "0x428ba8..0x428bb0",
+    "0x428c84..0x428ca4",
+    "0x4291e0..0x4291ec",
+    "0x42951c..0x429524",
+    "0x429624..0x42962c",
+    "0x429700..0x429718"
+  ],
+  "scope": "Instruction-candidate union only; no semantic/admission/gate claim."
+}

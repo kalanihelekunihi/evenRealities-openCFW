@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6499",
+  "packet": "analysis/apollo-boot-u64-division-masked-mode-bitfield-child-return-map-6498/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "source_and_packet_hashes": "pass",
+    "mask_path_fresh_reads_and_updates": "pass",
+    "mode8_child_arguments": "pass",
+    "PRIMASK_restore_order": "pass",
+    "shared_POP_R0_alias": "pass"
+  },
+  "limitations": [
+    "continuation span only",
+    "hardware purpose and child semantics unverified",
+    "no global or canonical admission claim"
+  ]
+}

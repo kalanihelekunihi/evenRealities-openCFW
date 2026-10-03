@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6453",
+  "packet": "analysis/apollo-boot-u64-division-register-to-record-snapshot-disable-return-map-6452/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "hashes": "pass",
+    "Thumb tiling": "pass",
+    "u8 flag branch": "pass",
+    "fresh snapshot ordering": "pass",
+    "ignored child results and common return": "pass"
+  },
+  "limitations": [
+    "static review only",
+    "snapshot alias behavior not executed",
+    "no record-purpose or admission claim"
+  ]
+}

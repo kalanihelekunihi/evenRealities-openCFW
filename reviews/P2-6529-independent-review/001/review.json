@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6529",
+  "packet": "analysis/apollo-boot-thirty-four-sixteen-byte-copy-table-extent-6528/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "packet_and_locked_source_hashes": "pass",
+    "41B906_literal_target_41C310": "pass",
+    "unsigned_index_bound_and_stride_from_5598": "pass",
+    "34_records_reconcile_to_exact_544_byte_slice": "pass",
+    "exclusive_extent_0x430880": "pass"
+  },
+  "limitations": [
+    "conditional table extent only",
+    "record field purpose and copy-child behavior unresolved",
+    "no canonical admission claim"
+  ]
+}

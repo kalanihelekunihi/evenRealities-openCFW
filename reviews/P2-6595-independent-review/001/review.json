@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6595",
+  "packet": "analysis/apollo-boot-u64-division-backward-repeated-byte-fill-leaf-map-6594/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "source_and_body_hashes": "pass",
+    "alignment_and_underflow_paths": "pass",
+    "backward_bulk_and_tail_stores": "pass",
+    "zero_count_and_register_restore": "pass"
+  },
+  "limitations": [
+    "no address wrap or invalid memory claims",
+    "no alias/concurrency proof",
+    "no canonical admission claim"
+  ]
+}

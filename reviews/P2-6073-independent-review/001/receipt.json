@@ -1,0 +1,29 @@
+{
+  "review_id": "P2-6073",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-u64-division-twelfth-packed-channel-metadata-return-map-6072/001",
+  "source_receipt_sha256": "651c9e2e58822899ff94ec39701305d878072d2e0b3a5d7e97ff08a90f488649",
+  "source_artifacts": {
+    "instructions.json": "ea3316c2ae6d18f326e5f0032b0585a43435f63f2eead60062ea6e644b53a24f",
+    "references.json": "852a492b00848f546eacde29648f47bd43093de9a360521eaf9e7a736065296e",
+    "pseudocode.md": "ad2c1cd4dc0688559af159aa397dd5e01d4c33e84d98efea8fa3755376af7495",
+    "replay.py": "18dacb9ec8c061e6097fa620884790cb7fc6149fcf851bd29d609031a36f4180"
+  },
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "range": {
+    "start": "0x4296a6",
+    "end": "0x429700",
+    "bytes": 90,
+    "body_sha256": "220991e23ef6f81bca2dc297f9794f4f5415bc37587df33a78dc1a477955c7ce"
+  },
+  "instruction_count": 33,
+  "checks": [
+    "dependency/artifact hashes",
+    "listed instruction bytes match locked image",
+    "contiguous body tiling",
+    "independent GNU Thumb disassembly"
+  ],
+  "execution_rerun": false,
+  "scope": "Private scoped static review only; no canonical/gate change."
+}

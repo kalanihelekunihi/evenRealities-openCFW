@@ -1,0 +1,30 @@
+{
+  "review_id": "P2-6113",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-u64-division-eighteenth-packed-channel-complete-map-6112/001",
+  "source_receipt_sha256": "a153934162e9386b23b19f159d3628b7d730639dc5a48fa6e297ad8878f710b9",
+  "source_artifacts": {
+    "instructions.json": "0dc9e6d6a86aac37cae0f777b66cbf73f4f3704805b835327797b3e42bcf1640",
+    "references.json": "bee5a2a43bdc9c64755352ba4755465343ab60b8fe6ff13d96bcf93273ac2c09",
+    "pseudocode.md": "f7f8df3bf36f4f64a9be3cce5391e4585de49bd57f328bfd034c92a081742786",
+    "replay.py": "7062c704fa64c0c2f7db1b096a75bf1f99f423cf8eea3632f9f4f692bd8f3700"
+  },
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "range": {
+    "start": "0x429e00",
+    "end": "0x429f68",
+    "bytes": 360,
+    "body_sha256": "c8da6d473cfbd8edb11a14c65ce9d532da1371e58c86d06343d58ddd0a18a4c2"
+  },
+  "instruction_count": 129,
+  "checks": [
+    "dependency/artifact hashes",
+    "source bytes match",
+    "full extent tiling",
+    "independent GNU Thumb boundaries",
+    "poll/bitfield/call/stack aliases checked"
+  ],
+  "execution_rerun": false,
+  "scope": "Private scoped static review only; no C/canonical admission/gate mutation."
+}

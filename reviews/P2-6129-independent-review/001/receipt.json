@@ -1,0 +1,29 @@
+{
+  "review_id": "P2-6129",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-u64-division-selector-five-bit-pair-publication-map-6128/001",
+  "source_receipt_sha256": "ef15972531ca2e679987ea39ce1831e122db2ce4459df954de124d9fdc8a4177",
+  "source_artifacts": {
+    "instructions.json": "e489c2555350e44f35f5e6e555ae3d15da33dcb17791ab6d8b91225715675c8e",
+    "references.json": "98d847300ea5016293744a2e8d719e207f7e6db7391f274744424cdcc5e60b6e",
+    "pseudocode.md": "ed5d2a2f1dfd0475e40ccc89925520c31dbf98a820bf4a49a6d8363f53af0c43",
+    "replay.py": "de84ccf532715a3f3b247f88d5748c916640224c8b8f97fee53254a4818fcb55"
+  },
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "range": {
+    "start": "0x42a1bc",
+    "end": "0x42a2a4",
+    "bytes": 232,
+    "body_sha256": "8964efd235151acf974a0248acac460c57de14ed8effbb879293a54d97f6dfd0"
+  },
+  "instruction_count": 80,
+  "checks": [
+    "hashes",
+    "source bytes",
+    "instruction tiling",
+    "GNU Thumb decode"
+  ],
+  "execution_rerun": false,
+  "scope": "Private scoped static review; no canonical/gate change."
+}

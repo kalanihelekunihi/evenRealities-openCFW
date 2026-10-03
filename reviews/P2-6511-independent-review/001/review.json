@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6511",
+  "packet": "analysis/apollo-boot-initialization-record-shared-literal-pool-classification-6510/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "source_and_packet_hashes": "pass",
+    "eight_consumer_ledger_hashes": "pass",
+    "19_source_words": "pass",
+    "23_consumer_observations_pc_recomputed": "pass",
+    "18_referenced_words_and_one_unclassified": "pass"
+  },
+  "limitations": [
+    "consumer-bound literal classification only",
+    "duplicate observations are not unique consumer instructions",
+    "no interval-wide classification or admission claim"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6463",
+  "packet": "analysis/apollo-boot-u64-division-control-captured-field-restore-cleanup-map-6462/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "hashes": "pass",
+    "Thumb tiling": "pass",
+    "gate branch and flag read": "pass",
+    "captured field and fresh destination ordering": "pass",
+    "cleanup calls and epilogue alias": "pass"
+  },
+  "limitations": [
+    "static review only",
+    "hardware field purposes and atomicity unresolved",
+    "no canonical/admission claim"
+  ]
+}

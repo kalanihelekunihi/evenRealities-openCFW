@@ -1,0 +1,29 @@
+{
+  "review_id": "P2-6123",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-packed-channel-common-literal-pool-classification-6122/001",
+  "source_receipt_sha256": "64a25cbf6034b22ae13e9c2ba82d33e7c8bfba535344d1e36f0f16619b3c41a4",
+  "source_artifacts": {
+    "words.json": "0a541bb86daa80f72c60a012da36684d69df274b9e7917d0056df972493bfe9b",
+    "pseudocode.md": "13e9188bb90ac191ffde95ead1d529ba85647d042cd7eb6ed86d0ad7b420e553",
+    "replay.py": "6249fc9e08cf7f8a363dea85d1d3b86bbcc7350068f2a02f41fffbb3ea4b9146"
+  },
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "range": {
+    "start": "0x42a078",
+    "end": "0x42a08c",
+    "bytes": 20,
+    "sha256": "7f9ce4de190313e49009663f32ac139d22bbc3d971bd18ac085848192217cccc"
+  },
+  "word_count": 5,
+  "consumer_observations": 39,
+  "referenced_words": 5,
+  "checks": [
+    "dependency hashes",
+    "source words",
+    "ledger provenance",
+    "GNU effective-PC targets"
+  ],
+  "scope": "Local literal classification only; no canonical/gate change."
+}

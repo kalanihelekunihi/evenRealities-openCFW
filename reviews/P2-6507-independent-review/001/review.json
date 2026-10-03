@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6507",
+  "packet": "analysis/apollo-boot-u64-division-initialization-three-read-poll-loop-entry-map-6506/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "source_and_packet_hashes": "pass",
+    "status_diagnostic_branches_continue": "pass",
+    "three_fresh_handle_calls": "pass",
+    "fallback_stores": "pass",
+    "poll_field_and_loop_condition": "pass",
+    "fifth_argument_and_child_call": "pass"
+  },
+  "limitations": [
+    "continuation span only",
+    "bound and following processing are outside the packet",
+    "no successful-read or initialized-output assumption"
+  ]
+}

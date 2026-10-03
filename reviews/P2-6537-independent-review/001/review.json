@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6537",
+  "packet": "analysis/apollo-boot-trailing-string-candidate-consumer-survey-6536/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "locked_source_and_packet_hashes": "pass",
+    "candidate_scanner_count_and_byte_total": "pass",
+    "interval_tiling_and_gap_accounting": "pass",
+    "latest_ledger_selection_and_observation_provenance": "pass",
+    "per_candidate_observation_counts": "pass"
+  },
+  "limitations": [
+    "printable NUL-terminated candidates are not proof of strings",
+    "pointer values do not establish consumer interpretation",
+    "gaps remain unclassified",
+    "no canonical admission or coverage claim"
+  ]
+}

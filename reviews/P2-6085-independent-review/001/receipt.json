@@ -1,0 +1,29 @@
+{
+  "review_id": "P2-6085",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-u64-division-fourteenth-packed-channel-metadata-adjustment-map-6084/001",
+  "source_receipt_sha256": "fb7d09878f54e22f1d84f433d3a9ffbb684b897910297f6e3792ed58f2db2d34",
+  "source_artifacts": {
+    "instructions.json": "3f8d1f3b4f336b9ef5a7de5bebc3e471fe1904c3c3eb26b3d784ca8d6169013b",
+    "references.json": "e71005df8653a0e568047a1b22c8e22e6eaf9c4c87ab48c406cd634e5288cb36",
+    "pseudocode.md": "71d2db77c1996c959716f2043abbcde10fe8d2deb112bf36550b630f11267862",
+    "replay.py": "02e38631e1df34abf2312e2d0447d7c36e3df713c5a9bafb2c6837b6f7de6882"
+  },
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "range": {
+    "start": "0x4298d0",
+    "end": "0x429962",
+    "bytes": 146,
+    "body_sha256": "50d482ebc29975b266a4f06c44e15d476d9b4a0fc6735774c4baca7c2e6915d3"
+  },
+  "instruction_count": 50,
+  "checks": [
+    "dependency/artifact hashes",
+    "source-byte match",
+    "body tiling",
+    "GNU Thumb boundaries"
+  ],
+  "execution_rerun": false,
+  "scope": "Private scoped static review; no canonical/gate changes."
+}

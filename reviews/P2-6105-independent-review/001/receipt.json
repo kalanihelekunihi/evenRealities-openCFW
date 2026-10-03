@@ -1,0 +1,29 @@
+{
+  "review_id": "P2-6105",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-u64-division-seventeenth-packed-channel-adjustment-map-6104/001",
+  "source_receipt_sha256": "5f8a6d1c39ab71d7f882d3e96092b9902140af841aba9bb723b587aed067fff1",
+  "source_artifacts": {
+    "instructions.json": "adeb18b113450a2cd975347def43f8e862b6f148dee3f74973c7eb69f3fc19e8",
+    "references.json": "db34cf49f547957bf7721ca47f2b534fe0ae6796281ebccc0baf4a9c79e4f04c",
+    "pseudocode.md": "b07535ae3384276d06f419166f4445d6c7c6c5c42bbfddea3be1b0a637860d8e",
+    "replay.py": "50605e079b2b8664d1bbc4892d42c49a3a1ba4a3e8d3d0e7630d9ab61207152e"
+  },
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "range": {
+    "start": "0x429cbe",
+    "end": "0x429d56",
+    "bytes": 152,
+    "body_sha256": "11f2d7ebe8e7bb14fc88ce8892f73c099a03c8ddc5470b5eae3197a1dee6635e"
+  },
+  "instruction_count": 55,
+  "checks": [
+    "dependency/artifact hashes",
+    "source bytes",
+    "contiguous tiling",
+    "GNU Thumb disassembly"
+  ],
+  "execution_rerun": false,
+  "scope": "Private scoped static review; no canonical/gate change."
+}

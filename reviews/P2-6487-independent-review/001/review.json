@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6487",
+  "packet": "analysis/apollo-boot-u64-division-twelve-byte-record-type-two-four-child-map-6486/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "source_hash_and_body_hash": "pass",
+    "Thumb_decode_and_type_dispatch": "pass",
+    "field6_mask_and_BFI": "pass",
+    "fresh_record_loads_and_early_guards": "pass",
+    "child_call_order_and_arguments": "pass",
+    "signed_halfword_lookups_and_stride_reuse": "pass"
+  },
+  "limitations": [
+    "continuation span only",
+    "stack-indexed store has no demonstrated bound in this span",
+    "external child semantics and full record interpretation unresolved"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6625",
+  "packet": "analysis/apollo-boot-littlefs-compare-crc-cache-hit-execution-6624/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "locked_source_and_fixture_hashes": "pass",
+    "45_case_matrix": "pass",
+    "compare_ordering_and_zero_length": "pass",
+    "CRC_zlib_state_oracle": "pass",
+    "SP_and_PC_assertions_in_fixture": "pass"
+  },
+  "limitations": [
+    "no independent Unicorn rerun; runtime unavailable",
+    "cache-hit paths only",
+    "no callback failure, refill, aliasing, concurrency, or hardware claim",
+    "no canonical admission claim"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6539",
+  "packet": "analysis/apollo-boot-string-candidate-existing-code-overlap-audit-6538/002",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "packet_artifact_hashes": "pass",
+    "all_1059_input_pins": "pass",
+    "latest_map_snapshot_count_1058": "pass",
+    "candidate_interval_byte_overlap_recomputation": "pass_zero_overlaps"
+  },
+  "limitations": [
+    "only pinned list-schema instructions.json maps inspected",
+    "maps are candidate evidence, not authoritative code admission",
+    "zero overlap does not prove data or string semantics",
+    "no canonical admission or coverage claim"
+  ]
+}

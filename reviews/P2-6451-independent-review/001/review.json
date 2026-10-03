@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6451",
+  "packet": "analysis/apollo-boot-u64-division-record-to-register-restore-low-bit-return-map-6450/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "hashes": "pass",
+    "Thumb tiling": "pass",
+    "ordered record-to-register copy": "pass",
+    "fresh low-bit operations": "pass",
+    "epilogue and error-status path": "pass"
+  },
+  "limitations": [
+    "static review only",
+    "alias/concurrency effects not executed",
+    "no purpose or admission claim"
+  ]
+}

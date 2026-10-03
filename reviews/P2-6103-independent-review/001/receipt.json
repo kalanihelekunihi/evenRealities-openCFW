@@ -1,0 +1,29 @@
+{
+  "review_id": "P2-6103",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-u64-division-seventeenth-packed-channel-entry-map-6102/001",
+  "source_receipt_sha256": "77728076b42a431a561cb4f4b08a0e16c9e78d3716ddb0ed79b1190bd999fda3",
+  "source_artifacts": {
+    "instructions.json": "2b54936ff57855bec22420fda3464c151703e1f6d4990b3fdc177b1861e3530c",
+    "references.json": "5d5d46b4b2baed9eeb932c80075491e8a4fa7b43780e748a1649404881a2c387",
+    "pseudocode.md": "32f727331c1fa3867df61184e06d35bb9fa6987c8f32a907b03b4147bbe13043",
+    "replay.py": "03200de1da0c3e962b726112360e7554cccd96fe8f45fbbb7499093b87f716ff"
+  },
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "range": {
+    "start": "0x429c46",
+    "end": "0x429cbe",
+    "bytes": 120,
+    "body_sha256": "a9bb506a66519ba7daec7e1457763ff780bba800bbe4202cf6a0e652f97b9296"
+  },
+  "instruction_count": 42,
+  "checks": [
+    "hashes",
+    "source bytes",
+    "exact tiling",
+    "GNU Thumb boundaries"
+  ],
+  "execution_rerun": false,
+  "scope": "Private scoped static review; no canonical/gate change."
+}

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6527",
+  "packet": "analysis/apollo-boot-eight-entry-setup-shared-literal-pool-classification-6526/001",
+  "disposition": "REVISE",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "source_hash_and_interval_bytes": "pass",
+    "all_13_consumer_effective_addresses": "pass",
+    "nine_words_consumer_backed": "pass",
+    "preceding_POP_boundary": "pass",
+    "following_PUSH_boundary_claim": "fail"
+  },
+  "defects": [
+    "0x430660 is described as a candidate PUSH entry, but its first halfword is 0x1004, not a PUSH. Correct or remove that boundary label."
+  ],
+  "limitations": [
+    "consumer-backed interval only",
+    "forced-Thumb decoding does not establish global code/data ownership",
+    "no canonical admission claim"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6399",
+  "packet": "analysis/apollo-boot-u64-division-alignment-guarded-mask-child-status-map-6398/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "hashes": "pass",
+    "Thumb tiling": "pass",
+    "alignment and branch order": "pass",
+    "stack aliases and child arguments": "pass"
+  },
+  "limitations": [
+    "static review only",
+    "child and hardware semantics unresolved",
+    "nonreturning store paths not runtime-tested"
+  ]
+}

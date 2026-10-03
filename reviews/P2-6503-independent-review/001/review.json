@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6503",
+  "packet": "analysis/apollo-boot-u64-division-local-float-record-copy-diagnostic-sequence-map-6502/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "source_hash_and_packet_hashes": "pass",
+    "local_float_and_word_store_order": "pass",
+    "child_argument_registers": "pass",
+    "VFP_conversion_and_stack_store_order": "pass",
+    "diagnostic_and_status_branch_order": "pass"
+  },
+  "limitations": [
+    "continuation span only",
+    "SP+8 prior state and external child effects unresolved",
+    "no diagnostic/API purpose claim"
+  ]
+}

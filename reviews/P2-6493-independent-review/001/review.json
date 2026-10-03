@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6493",
+  "packet": "analysis/apollo-boot-u64-division-signed-halfword-index-mask-byte-publication-leaves-map-6492/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "source_and_packet_hashes": "pass",
+    "signed_halfword_branching": "pass",
+    "mask_word_store_and_return": "pass",
+    "positive_byte_store": "pass",
+    "negative_offset_store_and_return_address": "pass"
+  },
+  "limitations": [
+    "two leaf spans only",
+    "no index bounds or hardware-purpose claim",
+    "no caller behavior or global admission claim"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6561",
+  "packet": "analysis/apollo-boot-formatter-character-string-execution-6560/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "locked_image_and_fixture_hashes": "pass",
+    "36_case_matrix": "pass",
+    "expected_counts_and_nul_outputs": "pass",
+    "null_output_and_CR_expectations": "pass",
+    "minus_width_case_matches_prior_source_review": "pass"
+  },
+  "limitations": [
+    "no independent Unicorn rerun; runtime unavailable",
+    "character/string cases only",
+    "no full formatter or hardware claim"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6551",
+  "packet": "analysis/apollo-boot-u64-division-formatter-hex-unsigned-child-padding-map-6550/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "packet_and_source_hashes": "pass",
+    "X_case_flag_and_shared_dispatch": "pass",
+    "aligned_argument_loads_and_cursor_advance": "pass",
+    "width_child_and_padding_order": "pass",
+    "output_pointer_and_count_updates": "pass"
+  },
+  "limitations": [
+    "child semantics unresolved",
+    "precision unused in mapped spans",
+    "partial formatter only",
+    "no canonical admission claim"
+  ]
+}

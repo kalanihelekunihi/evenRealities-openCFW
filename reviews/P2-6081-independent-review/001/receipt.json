@@ -1,0 +1,29 @@
+{
+  "review_id": "P2-6081",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-u64-division-thirteenth-packed-channel-restoration-return-map-6080/001",
+  "source_receipt_sha256": "ca4c9657b8459dcb937511c47e345f13a207d3999e832029c16d7fe0939da00a",
+  "source_artifacts": {
+    "instructions.json": "73d18d6b8d8320ef5c06d2513c97eceff6925362109a37ac828a369e370c2d1a",
+    "references.json": "dfca674363ad1e38d8400b67c914c5f3dc886327a94166bcfa80a06735a5abbe",
+    "pseudocode.md": "39f51a16935441f4aa7723bb79fd4c766d408aa91d6c6ba3b09a1fc6917fc81e",
+    "replay.py": "6330d788e64c8d94940a8f851b15e379cc50b485516e627ccbc88cc418b542b1"
+  },
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "range": {
+    "start": "0x42981e",
+    "end": "0x42984e",
+    "bytes": 48,
+    "body_sha256": "e983add14e257dafff0af0e9b03afed2be5d98ad505274cb440e59e9b767a0b2"
+  },
+  "instruction_count": 18,
+  "checks": [
+    "dependency/artifact hashes",
+    "listed instruction bytes match locked image",
+    "contiguous body tiling",
+    "independent GNU Thumb disassembly"
+  ],
+  "execution_rerun": false,
+  "scope": "Private scoped static review only; no canonical/gate change."
+}

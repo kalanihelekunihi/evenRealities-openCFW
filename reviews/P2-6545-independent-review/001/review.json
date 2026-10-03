@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6545",
+  "packet": "analysis/apollo-boot-u64-division-float-fixed-decimal-buffer-conversion-map-6544/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "source_and_packet_hashes": "pass",
+    "instruction_boundaries_and_full_span": "pass",
+    "signed_capacity_precision_and_exponent_paths": "pass",
+    "fixed_point_and_rounding_control_flow": "pass",
+    "zero_literal_ledger_and_target": "pass",
+    "SP0_float_save_and_POP_R1_alias": "pass"
+  },
+  "limitations": [
+    "external integer helper behavior unresolved",
+    "unbounded scan and buffer alias effects unresolved",
+    "static source map only; no IEEE-generic claim",
+    "no canonical admission claim"
+  ]
+}

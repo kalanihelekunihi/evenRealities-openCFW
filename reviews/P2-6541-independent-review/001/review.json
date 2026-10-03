@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6541",
+  "packet": "analysis/apollo-boot-allocator-tail-constant-indirection-evidence-6540/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "packet_and_source_hashes": "pass",
+    "three_literal_values": "pass",
+    "ten_consumer_observations": "pass",
+    "header_overhead_and_adjusted_length_roles": "pass"
+  },
+  "limitations": [
+    "consumer-backed constant roles only",
+    "no neighboring data or full allocator coverage claim",
+    "no hardware-purpose or canonical admission claim"
+  ]
+}

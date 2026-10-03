@@ -1,0 +1,29 @@
+{
+  "review_id": "P2-6087",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-u64-division-fourteenth-packed-channel-row-adjustments-map-6086/001",
+  "source_receipt_sha256": "702a8a37347daf27100137a42716d6af662d5dd54602df2bcfadb67ea6373167",
+  "source_artifacts": {
+    "instructions.json": "4503328eda729711c84326b4c69854f1b636125d0c27516cfc4fb08143d85da4",
+    "references.json": "0282292db45b271b6fc8550038db4b0de3c140e7fdf2c9485290540fafa98c86",
+    "pseudocode.md": "431d41121a4c153eac340c189ce706f1e9717249499dc11c351082e0d23ca0d4",
+    "replay.py": "f3fa4622faeb3f4c340d94330759d7813426482ab1253a64128606de3cb6c28b"
+  },
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "range": {
+    "start": "0x429962",
+    "end": "0x4299fc",
+    "bytes": 154,
+    "body_sha256": "a7536f236a31efed95fb74851deea9f5a01753aa4afda06ce1c6afbe3fa33c5a"
+  },
+  "instruction_count": 61,
+  "checks": [
+    "dependency/artifact hashes",
+    "source-byte match",
+    "body tiling",
+    "GNU Thumb boundaries"
+  ],
+  "execution_rerun": false,
+  "scope": "Private scoped static review; no canonical/gate changes."
+}

@@ -1,0 +1,29 @@
+{
+  "review_id": "P2-6125",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-u64-division-descriptor-channel-range-decision-map-6124/001",
+  "source_receipt_sha256": "4d4e66fa111e9d85cad6a0ec824dab2d157a36f20a5a132c02f71c5a28df5338",
+  "source_artifacts": {
+    "instructions.json": "7a647e75a1322b3bab7197703930436f44b977e9226b1d07447ed5eb84ba2a91",
+    "references.json": "3e83f4b0503e3152cea4c0c72bf644142695e39139bf9ce960f1089069db988c",
+    "pseudocode.md": "39c506d80c01ef6e55162b2db9d2b93a04fd56dc9d88c25a93407e4142934908",
+    "replay.py": "5d9bf28c0fb66687e5193e8ed0fceee9f3290eefa6faa65bd1b342f2a4721541"
+  },
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "range": {
+    "start": "0x42a08c",
+    "end": "0x42a19c",
+    "bytes": 272,
+    "body_sha256": "d6be1f893c0f78437db76208bb71ae7bf478411acb3ec307430709cd3dfe2e67"
+  },
+  "instruction_count": 102,
+  "checks": [
+    "hashes",
+    "source-byte agreement",
+    "tiling",
+    "GNU Thumb instruction boundaries"
+  ],
+  "execution_rerun": false,
+  "scope": "Private scoped static review; no canonical/gate change."
+}

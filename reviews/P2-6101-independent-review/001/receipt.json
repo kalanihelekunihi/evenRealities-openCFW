@@ -1,0 +1,29 @@
+{
+  "review_id": "P2-6101",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-u64-division-sixteenth-packed-channel-field-return-map-6100/001",
+  "source_receipt_sha256": "80fe600925bd0a3ab87271069cbaab809a62718bff73eb189c0b45c7f0841ac1",
+  "source_artifacts": {
+    "instructions.json": "6f8702c3eb2107f722e1490d502921c49b93c3a4538214603004f26a8c7b8c51",
+    "references.json": "aed5539ba8bfc57b8ae07061c2ac8e925e3326380952f63bb3b9aa9e3a689039",
+    "pseudocode.md": "d1fc077d782cecacaac03575106a9ecfae28db590dbc32789fb63fea228e36b7",
+    "replay.py": "4ba82658da330dbf1345a0e0aa198442e79a82740513ef69b80b7d9e412889d0"
+  },
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "range": {
+    "start": "0x429bc4",
+    "end": "0x429c46",
+    "bytes": 130,
+    "body_sha256": "837d06d1afe1862b92d5546ee3d7c88e48ae1ccb6ff6c9126bdb7694cffe74a7"
+  },
+  "instruction_count": 44,
+  "checks": [
+    "dependency/artifact hashes",
+    "image bytes",
+    "exact tiling",
+    "GNU Thumb decode"
+  ],
+  "execution_rerun": false,
+  "scope": "Private scoped static review only; no canonical/gate change."
+}

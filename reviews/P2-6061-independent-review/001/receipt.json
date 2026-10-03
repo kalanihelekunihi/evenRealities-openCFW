@@ -1,0 +1,29 @@
+{
+  "review_id": "P2-6061",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-float-adjustment-literal-pool-classification-6060/001",
+  "source_receipt_sha256": "11af13dff88e3fdc2d184dd2a1210beb5043c9fddc4e782ececc0bd2c5c334a3",
+  "source_artifacts": {
+    "words.json": "86afbdf5c334e1d1cba657761fb4d7948dad4a92739aaf357e92a49499e48837",
+    "pseudocode.md": "df4730d94fffc4661e756cd4a11bc5d0aea3adeececb8c236341f737f343879d",
+    "replay.py": "0c9acffc939ec5d319eaee4dd88725736ebad3334d993fa8c300634f2ee4b3ec"
+  },
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checked_range": {
+    "start": "0x42951c",
+    "end": "0x429524",
+    "bytes": 8,
+    "sha256": "ae92ed03a30f40c3180aa9755ac1e4388de785fde475723bc36d0547d3c7a744"
+  },
+  "word_count": 2,
+  "consumer_observations": 9,
+  "referenced_words": 2,
+  "checks": [
+    "all input/dependency hashes",
+    "word bytes and little-endian values",
+    "cited reference-ledger membership",
+    "GNU Thumb effective-PC-relative targets for all nine observations"
+  ],
+  "scope": "Consumer-backed local literal classification only; no canonical/gate change."
+}

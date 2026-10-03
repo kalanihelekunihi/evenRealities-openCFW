@@ -1,0 +1,29 @@
+{
+  "review_id": "P2-6133",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-selector-publication-literal-pool-classification-6132/001",
+  "source_receipt_sha256": "8693be5d1a5145918b86fb6ed5a81029fc13a9852ee2267093470ca8571fe6b6",
+  "source_artifacts": {
+    "words.json": "caf276d9faa5093f26b62095a96916eeea321a1ed5c497868cd5ac3772d727b6",
+    "pseudocode.md": "b477609905a232a7e0a2433490a0190463b8b414d116e6b04594d59efb1d78a6",
+    "replay.py": "325586664fc7c09ced930382c94593962b4b30a70e735fad8486c144de1ba323"
+  },
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "range": {
+    "start": "0x42a2a4",
+    "end": "0x42a2b4",
+    "bytes": 16,
+    "sha256": "d833a8ae3f8f94a5e2f0f1dd617413d76b4af2410819b8986d6f74387a1a95e1"
+  },
+  "word_count": 4,
+  "consumer_observations": 28,
+  "referenced_words": 4,
+  "checks": [
+    "input hashes",
+    "source word values",
+    "ledger provenance",
+    "GNU effective-PC calculation"
+  ],
+  "scope": "Local consumer-backed classification only; no canonical/gate change."
+}

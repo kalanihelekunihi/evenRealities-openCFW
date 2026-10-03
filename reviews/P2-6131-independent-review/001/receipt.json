@@ -1,0 +1,29 @@
+{
+  "review_id": "P2-6131",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-condition-setter-literal-pool-classification-6130/001",
+  "source_receipt_sha256": "864ad49b46b717135d6bf744a8d5920955f7d32d07c072f349576090cc79a3ad",
+  "source_artifacts": {
+    "words.json": "5a7d7a152c82e4a7fb82fcfeed9b74727f2948ab8647f379521be30f3cdcfddd",
+    "pseudocode.md": "0c053b5e40e52c5ff25abc2695751a62c7ddef60d6abe772209aa9567eeae37e",
+    "replay.py": "1827a4dd645284e7e37fdcedf2275c59a1a0b54fa33e4873b0739bf97a46b7b3"
+  },
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "range": {
+    "start": "0x42a1b4",
+    "end": "0x42a1bc",
+    "bytes": 8,
+    "sha256": "801298fd82d5075a7cffce05d90bb74b00b6eebf0956fd1c84306b2e3cb4acb8"
+  },
+  "word_count": 2,
+  "consumer_observations": 14,
+  "referenced_words": 2,
+  "checks": [
+    "input hashes",
+    "source word values",
+    "ledger provenance",
+    "GNU effective-PC calculation"
+  ],
+  "scope": "Local consumer-backed classification only; no canonical/gate change."
+}

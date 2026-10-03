@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6471",
+  "packet": "analysis/apollo-boot-u64-division-two-byte-three-row-control-selection-entry-map-6470/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "hashes": "pass",
+    "Thumb tiling": "pass",
+    "captured bit and child sequence": "pass",
+    "u8 row selection": "pass",
+    "table byte tests": "pass",
+    "fresh control word update": "pass"
+  },
+  "limitations": [
+    "static review only",
+    "continuation outside packet",
+    "no table-purpose or hardware semantics claim"
+  ]
+}

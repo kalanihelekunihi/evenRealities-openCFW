@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6567",
+  "packet": "analysis/apollo-boot-nibble-crc-table-and-execution-verification-6566/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "locked_source_and_artifact_hashes": "pass",
+    "16_table_words_match_reflected_recurrence": "pass",
+    "64_fixture_cases_and_zlib_state_oracle": "pass",
+    "table_address_in_leaf": "pass"
+  },
+  "limitations": [
+    "no independent Unicorn rerun; runtime unavailable",
+    "sampled cases only, not exhaustive",
+    "no asynchronous or hardware claim",
+    "no canonical admission claim"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6593",
+  "packet": "analysis/apollo-boot-clock-selection-shared-literal-pool-classification-6592/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "pinned_source_and_ledger_hashes": "pass",
+    "42_source_words": "pass",
+    "115_observations_all_words_referenced": "pass",
+    "interval_bounds": "pass"
+  },
+  "limitations": [
+    "consumer-local classification only",
+    "duplicate observations may occur",
+    "no pointer-purpose or admission claim"
+  ]
+}

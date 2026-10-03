@@ -1,0 +1,5 @@
+# Independent review 6565/001
+
+Disposition: **PASS_SCOPED**; `accepted:false`. The exact 52-byte Thumb body at 0x4157C0..0x4157F4 matches the pinned source and packet hashes. The loop uses unsigned `index < count`; each iteration loads the input byte twice from the same address. First it indexes the 16-word table by `(byte XOR state) & 15`, then XORs the table word with `state >> 4`. The second byte load is sign-extended before arithmetic shift by four; because LDRB zero-extends, this is equivalent to a logical shift for that loaded value. The resulting low nibble selects a second table entry, then the result is XORed with the intermediate state shifted right four. Count zero returns the incoming state. R4/R5 are restored; there is no initialization/final XOR or state pointer in this routine.
+
+Independent GNU decoding confirms the literal load at 0x4157C6 resolves to 0x4157F4. Mutation of the byte between the two loads is possible and not modeled. No CRC API or global-purpose inference is made here.

@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6505",
+  "packet": "analysis/apollo-boot-u64-division-local-byte-descriptor-child-setup-map-6504/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "source_and_packet_hashes": "pass",
+    "template_LDRD_copy": "pass",
+    "ordered_local_byte_initialization": "pass",
+    "status_diagnostic_continues": "pass",
+    "descriptor_fields_and_child_arguments": "pass"
+  },
+  "limitations": [
+    "continuation span only",
+    "unwritten padding prior contents unresolved",
+    "child behavior and descriptor purpose unresolved"
+  ]
+}

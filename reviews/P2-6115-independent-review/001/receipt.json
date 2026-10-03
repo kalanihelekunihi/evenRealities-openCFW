@@ -1,0 +1,28 @@
+{
+  "review_id": "P2-6115",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-u64-division-nineteenth-packed-channel-complete-map-6114/001",
+  "source_receipt_sha256": "a7ebc6b2c545dbd841ce0cb985a137a377da0dec83041e293e824adc827d2cd0",
+  "source_artifacts": {
+    "instructions.json": "b6c4d6fafe096a453833ecd82e001a17860ef18a29b46dbc7ea0fea7f72f9cb2",
+    "references.json": "6d6c80b1411abe8dfc47f515aed222d9c6fca8392969ef1639287393c942ca7e",
+    "pseudocode.md": "2d3b1e53d5e7db438da6eb0f5951185a4625d6694dfeebf7adc4cd2608f847a1",
+    "replay.py": "2b80e4dd13fc77ab72bb430d433b2fcdc826f2ad823001e5fe1b5e419f35bf1d"
+  },
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "range": {
+    "start": "0x429f68",
+    "end": "0x42a030",
+    "bytes": 200
+  },
+  "instruction_count": 74,
+  "checks": [
+    "dependency/artifact hashes",
+    "locked image byte match",
+    "body tiling",
+    "independent GNU Thumb boundaries"
+  ],
+  "execution_rerun": false,
+  "scope": "Private scoped static review; no canonical/gate change."
+}

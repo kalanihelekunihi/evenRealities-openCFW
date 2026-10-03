@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6557",
+  "revision": "002",
+  "packet": "analysis/apollo-boot-u64-division-variadic-formatter-fresh-callback-wrapper-map-6556/002",
+  "supersedes_packet_revision": "001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "packet_files_and_locked_source_hash": "pass",
+    "Thumb_instruction_extent": "pass",
+    "frame_and_argument_layout": "pass",
+    "callback_guard_reload_and_call": "pass",
+    "return_and_POP_aliases": "pass"
+  },
+  "limitations": [
+    "formatter and callback semantics unresolved",
+    "partial wrapper only",
+    "no canonical admission claim"
+  ]
+}

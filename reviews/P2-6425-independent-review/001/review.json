@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6425",
+  "packet": "analysis/apollo-boot-u64-division-descriptor-low-field-and-top-bit-leaves-map-6424/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "hashes": "pass",
+    "Thumb tiling": "pass",
+    "pre-null read and magic guards": "pass",
+    "field publication": "pass",
+    "bit0 branch polarity": "pass",
+    "bit31 set/clear stores": "pass"
+  },
+  "limitations": [
+    "static review only",
+    "no atomicity or fault-runtime claim",
+    "no canonical/admission change"
+  ]
+}

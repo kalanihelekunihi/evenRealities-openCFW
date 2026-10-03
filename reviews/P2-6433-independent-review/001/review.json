@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6433",
+  "packet": "analysis/apollo-boot-u64-division-record-bit25-enable-disable-register-sequence-map-6432/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "hashes": "pass",
+    "Thumb tiling": "pass",
+    "pre-null read and magic guard": "pass",
+    "enable bit order and fresh reads": "pass",
+    "disable clear/check/child order": "pass",
+    "epilogue": "pass"
+  },
+  "limitations": [
+    "static review only",
+    "separate stores do not prove atomicity",
+    "child semantics unresolved"
+  ]
+}

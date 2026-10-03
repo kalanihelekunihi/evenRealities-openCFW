@@ -1,0 +1,29 @@
+{
+  "review_id": "P2-6075",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-packed-channel-publication-literal-pool-classification-6074/001",
+  "source_receipt_sha256": "f88f393319de0d3964c2c30544d1d3da4d856ea6df52b1a91aae67894effcc10",
+  "source_artifacts": {
+    "words.json": "d0fe50aaf17eb5bd0c42b62924c121d48eb2bc199f07a25daa9646991211decd",
+    "pseudocode.md": "849bebe5596802db31d031d9b010263c3d81c24a2e9ce4c8c9e813fdd114c837",
+    "replay.py": "1eef352892fa968c808fda328651d28386439e8a333f072e9ed50078328c577d"
+  },
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "range": {
+    "start": "0x429700",
+    "end": "0x429718",
+    "bytes": 24,
+    "sha256": "726c0ef16448807662e3a565efd0649e2ae5d114e4faad5a343f258e069bedf1"
+  },
+  "word_count": 6,
+  "consumer_observations": 51,
+  "referenced_words": 6,
+  "checks": [
+    "dependency hashes",
+    "source word bytes and endian values",
+    "cited-ledger provenance",
+    "GNU effective PC-relative targets"
+  ],
+  "scope": "Local consumer-backed classification only; no canonical/gate change."
+}

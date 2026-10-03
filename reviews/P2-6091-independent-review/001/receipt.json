@@ -1,0 +1,29 @@
+{
+  "review_id": "P2-6091",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-row-adjustment-literal-pool-classification-6090/001",
+  "source_receipt_sha256": "3f6957ea3113918beeced13a80a0d75abf0ce43bf5f954df76c7fad4dedc0cf4",
+  "source_artifacts": {
+    "words.json": "4960918587f9d0224bcf276ecdf4d0b90a338fbe0249c797565ce4ed651f65d9",
+    "pseudocode.md": "348441904f286f43de3595c30b01f101256422870cbb9753832c5542bf2af43b",
+    "replay.py": "d967cd338473ec61e6ce7577b55624db272ce8b0cf1c4406d1dab7af8439caca"
+  },
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "range": {
+    "start": "0x429a20",
+    "end": "0x429a30",
+    "bytes": 16,
+    "sha256": "fb2b949a0bfd56d008a1948672918ecab5bf754146f9dbe902aedb190f222fe4"
+  },
+  "word_count": 4,
+  "consumer_observations": 23,
+  "referenced_words": 4,
+  "checks": [
+    "dependency hashes",
+    "source bytes/word values",
+    "ledger provenance",
+    "GNU effective PC-relative targets"
+  ],
+  "scope": "Local consumer-backed data classification only; no canonical/gate change."
+}

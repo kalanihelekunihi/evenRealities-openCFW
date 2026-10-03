@@ -1,0 +1,29 @@
+{
+  "review_id": "P2-6109",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-u64-division-packed-channel-current-row-restore-map-6108/001",
+  "source_receipt_sha256": "c963282ea8cb2cf84897274b0d45149485c30166abc836bda5cec93c14832d11",
+  "source_artifacts": {
+    "instructions.json": "50473e674924bcbddbe17fb37c1d53f66076c454a2dd67d05d796a106572ff97",
+    "references.json": "c5f5c3bb78202850d43ae896b0971c01b18062d41e3cf6fb08ed43bab5a654bd",
+    "pseudocode.md": "89f6e8744802d8a3c91f864601d128b50b67ae03f9eb55d79077f37277cec6ac",
+    "replay.py": "b494384caae44a2de4c9aa886270c2a307a2440d96500f231efff5b28005fe43"
+  },
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "range": {
+    "start": "0x429da4",
+    "end": "0x429df6",
+    "bytes": 82,
+    "body_sha256": "a69ea6c52f959eba65684feebd9651d2068cdd0d91caf8eb45d74e52969c61a4"
+  },
+  "instruction_count": 31,
+  "checks": [
+    "dependency/artifact hashes",
+    "source-byte match",
+    "exact instruction tiling",
+    "GNU Thumb decode"
+  ],
+  "execution_rerun": false,
+  "scope": "Private scoped static review; no canonical/gate change."
+}

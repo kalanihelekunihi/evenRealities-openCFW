@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6531",
+  "packet": "analysis/apollo-boot-twelve-forty-byte-descriptor-table-extent-6530/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "packet_and_locked_source_hashes": "pass",
+    "low_byte_unsigned_domain_bound": "pass",
+    "literal_0x427C84_and_consumer_target": "pass",
+    "40_byte_stride_and_12_record_extent": "pass",
+    "raw_record_reconciliation": "pass",
+    "field_access_roles_are_source_backed": "pass"
+  },
+  "limitations": [
+    "selected extent only",
+    "field and hardware purpose unclaimed",
+    "no canonical admission or coverage claim"
+  ]
+}

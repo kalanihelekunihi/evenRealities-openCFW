@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6517",
+  "packet": "analysis/apollo-boot-record-walker-index-shared-literal-pool-classification-6516/002",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "source_and_packet_hashes": "pass",
+    "six_input_reference_hashes": "pass",
+    "seven_source_words": "pass",
+    "ten_pc_relative_consumer_observations": "pass",
+    "16_bit_and_32_bit_literal_calculations": "pass"
+  },
+  "limitations": [
+    "consumer-bound classification only",
+    "duplicate observations are not unique instruction counts",
+    "no semantic admission or interval-wide coverage claim"
+  ]
+}

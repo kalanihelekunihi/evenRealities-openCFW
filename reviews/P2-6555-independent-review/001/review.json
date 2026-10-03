@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6555",
+  "revision": "002",
+  "packet": "analysis/apollo-boot-u64-division-formatter-float-default-return-continuation-map-6554/002",
+  "supersedes_packet_revision": "001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "corrected_packet_and_source_hashes": "pass",
+    "null_output_float_argument_skip": "pass",
+    "double_load_and_float_conversion": "pass",
+    "child_result_and_fallback_paths": "pass",
+    "three_literal_effective_addresses": "pass",
+    "default_and_final_return_paths": "pass"
+  },
+  "limitations": [
+    "child formatter semantics unresolved",
+    "fallback string meanings not inferred",
+    "partial formatter only",
+    "no canonical admission claim"
+  ]
+}

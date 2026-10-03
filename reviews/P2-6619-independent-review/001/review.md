@@ -1,0 +1,7 @@
+# Independent review 6619/001
+
+Disposition: **PASS_SCOPED**; `accepted:false`. The packet's source, reference, and instruction artifacts match the locked image hashes, and GNU Thumb decoding tiles the complete 0x410544..0x41070C body. The 48-byte frame captures the block, offset, destination, and length from the caller stack; SP+4 receives the input hint and later SP+0 receives a computed direct-read chunk, overwriting saved argument slots. The initial unsigned wrapped `offset+length` versus block-size guard and nonzero block-count guard return 0xFFFFFFAC on failure.
+
+The two cache paths repeatedly reload block/offset/size and copy matching spans through 0x41568C. The direct path checks remaining length against the hint and fresh configured read-unit alignment/size, computes an aligned chunk, passes context/block/offset/destination plus that fifth stack argument to a freshly loaded callback, returns its nonzero status, and advances/retries on zero. The refill path publishes cache fields before callback invocation; assertion calls on invalid block or callback status >=1 are followed by NOP and continuation if those calls return. Zero callback status repeats; other status is returned. The epilogue's R1 value comes from current SP+0, R2 from current SP+4, and R3 is restored from its saved slot.
+
+This is instruction-local control/data flow only. Read-unit division by zero, child behavior, callback termination, cache synchronization, physical storage, and broader purpose are not established. No canonical files or gates changed.

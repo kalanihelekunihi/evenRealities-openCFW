@@ -1,0 +1,29 @@
+{
+  "review_id": "P2-6079",
+  "result": "PASS_SCOPED",
+  "accepted": false,
+  "subject": "analysis/apollo-boot-u64-division-thirteenth-packed-channel-metadata-adjustment-map-6078/001",
+  "source_receipt_sha256": "f330e211b9593776372fca0b133762b77eb840faf999aa529191a3b3f621644d",
+  "source_artifacts": {
+    "instructions.json": "9bb7bc2ede3c53bc074a44032c10f115c8928000760905760cb7c2af39960c4e",
+    "references.json": "6ff8723eee4015e3ee56b070f15ef3888238ad1859246d4133aa982675f05b05",
+    "pseudocode.md": "c292f88d6023c26f7ea5a63f40a89017b5c12dc9e5e02932af76c52d3bbd876b",
+    "replay.py": "fba60bb44bdddaf41d608f898738d4aa994d1119cc9bbafd4211b3d679fc3ae1"
+  },
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "range": {
+    "start": "0x429794",
+    "end": "0x42981e",
+    "bytes": 138,
+    "body_sha256": "52823e253a5acfa64bd594701a88427400a6ae73204c04168bade3b88b0710e9"
+  },
+  "instruction_count": 47,
+  "checks": [
+    "dependency/artifact hashes",
+    "listed instruction bytes match locked image",
+    "contiguous body tiling",
+    "independent GNU Thumb disassembly"
+  ],
+  "execution_rerun": false,
+  "scope": "Private scoped static review only; no canonical/gate change."
+}

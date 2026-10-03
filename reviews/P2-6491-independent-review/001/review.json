@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6491",
+  "packet": "analysis/apollo-boot-locked-record-branch-stack-bound-survey-6490/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "input_and_packet_hashes": "pass",
+    "97_record_type_counts": "pass",
+    "type_two_static_predicate_recomputation": "pass",
+    "empty_matching_record_set": "pass"
+  },
+  "limitations": [
+    "static immutable-table query only",
+    "no dynamic reachability or mutation/aliasing proof",
+    "no general stack safety or child behavior claim"
+  ]
+}

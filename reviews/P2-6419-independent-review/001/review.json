@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6419",
+  "packet": "analysis/apollo-boot-u64-division-record-release-magic-clear-leaf-map-6418/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "hashes": "pass",
+    "Thumb tiling": "pass",
+    "magic mask and branch": "pass",
+    "fresh mutation reads and store order": "pass",
+    "return registers": "pass"
+  },
+  "limitations": [
+    "static review only",
+    "no atomicity or API-purpose claim",
+    "no canonical/admission change"
+  ]
+}

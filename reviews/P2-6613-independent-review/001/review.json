@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "review_id": "P2-6613",
+  "packet": "analysis/apollo-boot-u64-division-littlefs-scalar-alignment-bit-width-leaves-map-6612/001",
+  "disposition": "PASS_SCOPED",
+  "accepted": false,
+  "canonical_or_coverage_change": false,
+  "checks": {
+    "locked_source_and_body_hashes": "pass",
+    "GNU_Thumb_decode": "pass",
+    "unsigned_min_max_and_alignment": "pass",
+    "staged_bit_width_thresholds": "pass",
+    "zero_count_and_trailing_zero_examples": "pass"
+  },
+  "limitations": [
+    "division-by-zero behavior not generalized",
+    "historical symbols are context only",
+    "no semantic library attribution or canonical admission claim"
+  ]
+}
