@@ -1,0 +1,27 @@
+{
+  "review_id": "2679",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-cache-control-helpers-2678/002",
+  "candidate_receipt_sha256": "e90e0e2082273104b88056a8e22ee40448864d6f3b4f203a564c479a0d285b1f",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_hashes": {
+    "41e1e8-41e22e": "4f10536463c4fd13679ef30c2fabc9876f052bcc90cb6100837d849e19fc09dd",
+    "41e22e-41e266": "0e250a57f88ce12c21f0691cc8de447aa6a9808529c3668c6e54d653fe6dec45"
+  },
+  "instruction_listing_sha256": "829a0fb71034e6214a267ff45097c718ff138cf74129537fbda5665ca0fe8827",
+  "fixture_sha256": "4eb5ff71f5a07abda4b1a5a55ea36820e86cb455df46418c395eda7061372594",
+  "replay_sha256": "6b0c8c1bdce69a133a9f8a2dc46cd710281bd6f202679364f733fa231e20ec37",
+  "isolated_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2679-independent/replays.json",
+  "fixture_count": 64,
+  "checks": [
+    "Candidate source, two body hashes, instruction listing, replay, pseudocode, and receipt pins match. An isolated replay passed all 64 cases.",
+    "Independent inspection of the exact Thumb listing confirms the bit8/bit9 protection guard precedes other accesses; helper 0 then tests bit17, performs DSB/ISB, writes zero to the invalidate register, performs DSB/ISB, rereads and sets bit17, and performs a final DSB/ISB. The second helper performs DSB/ISB, fresh control-register read/clear-bit17 write, invalidate-zero write, and final DSB/ISB.",
+    "Read ledgers, ordered writes, barrier sequences, R0 status, SP, PRIMASK, and R4 preservation match the fixtures. Protected paths return1 without the later control/invalidate accesses; helper-0 bit17-already-set path returns0 without writes or barriers."
+  ],
+  "limitations": [
+    "Original instruction execution establishes only the modeled register accesses and barrier opcodes in this emulator. It does not establish physical cache maintenance, synchronization, privilege behavior, or peripheral meaning.",
+    "Unmodeled concurrent state changes, aliases, and broader call-context ownership remain unresolved.",
+    "Private evidence only; accepted:false; no canonical admission."
+  ]
+}

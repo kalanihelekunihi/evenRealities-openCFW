@@ -1,0 +1,19 @@
+{
+  "review_id": "2619",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-alternate-profile-field-callbacks-2618/001",
+  "candidate_receipt_sha256": "699b314dfa072d61944654eb09ddd7a1700878ae00df2a89ffaeded9fa6eef2a",
+  "candidate_pseudocode_sha256": "6561af8100327624842803d92f972624ebd7208b24ebb0e1b21b816e50905891",
+  "candidate_replay_sha256": "419246f7c59abc178e6cdef2fd47ca23ddb8b0825b6f81a802ec0db6ca67271a",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Candidate artifacts, source image, body spans [0x42F3DA,0x42F400) and [0x42F400,0x42F41A), and all listed literal pointers match their pins.",
+    "A replay copy redirected to a fresh isolated output directory passes all 108 fixtures. Independent disassembly confirms the first body gates on the active byte, uses an unsigned saved-word comparison against 7, subtracts 6 when eligible (otherwise selects zero), and inserts the selected low 10 bits while preserving the remaining control word.",
+    "The second body clears timing bits 0..5, then inserts 1 into auxiliary bits 15..16. Both routines return zero; write widths/order, final R0, PC and SP assertions pass."
+  ],
+  "limitations": [
+    "Stable fixture memory only; fresh saved-word reread effects under concurrent mutation are not tested.",
+    "Physical register meaning and callback ownership/reachability remain unresolved. Private evidence only; accepted:false and no canonical admission."
+  ]
+}

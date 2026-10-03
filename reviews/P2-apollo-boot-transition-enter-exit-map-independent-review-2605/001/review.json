@@ -1,0 +1,21 @@
+{
+  "review_id": "2605",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-transition-enter-exit-map-2604/001",
+  "candidate_receipt_sha256": "6d4835855162daf8a30cec0db3eeb809e6d08298f2c2f731da6f694180a7564a",
+  "candidate_pseudocode_sha256": "2c7b7de42a6ef6e77e7bf097ac9a49926edca184b28bd1848af7fc66c7d7a9f4",
+  "candidate_replay_sha256": "20922704ed0a2e0cc37993e7ccf9f44dbcd1d834bc5b94e850f44a93f372c213",
+  "instructions_sha256": "14a73cd4b9cafa3cc483e74bd804e76dacdfc9000f09506b7dd2df9425269229",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Receipt source/artifact hashes and both body digests match. The two spans are contiguous and independently checked for gap-free instruction coverage: [0x42D104,0x42D3BC) is 696 bytes/250 instructions, [0x42D3BC,0x42D562) is 422 bytes/162 instructions; combined total is 1,118 bytes/412 instructions.",
+    "An isolated rerun of the static verifier passes all 412 decoded instructions. Separately, I independently decoded each PC-relative literal instruction form and confirmed all 45 computed aligned-PC targets and loaded words against source bytes.",
+    "Review of the original Thumb listing found the summarized branches, RMW ordering, field positions, saturation/underflow guards, delay calls and common return behavior consistent with the code. There are exactly five direct BLs to 0x41D1C0: three in enter and two in exit. No material pseudocode error was found."
+  ],
+  "limitations": [
+    "This is static instruction mapping, not dynamic validation of register/MMIO values, arithmetic boundary outcomes, changing flags, delays, or stack/register preservation.",
+    "The spans do not by themselves prove enclosing function ownership or whole-region coverage. The direct delay routine is an external dependency and is not composed in this packet.",
+    "Private scoped evidence only; accepted:false, no canonical admission."
+  ]
+}

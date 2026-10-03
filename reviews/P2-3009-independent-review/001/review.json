@@ -1,0 +1,22 @@
+{
+  "review_id": 3009,
+  "candidate": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-command-queue-lifecycle-map-3008/001",
+  "receipt_sha256": "c97204cd03689fae45d21bb27fe691c143a98a8caf6f132cbd4b1ddb745f7578",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_hashes": {
+    "427794-427878": "ad7e3d6257b791855a8cd7fe90389313dfb9496262724777900d6a4193c09b52",
+    "427878-4278c8": "7564cbb55095105d158e045e602b9765e60c6c976503911d40b4155aac0fd425",
+    "4278c8-42790a": "e551b7b0af10daaeae0056297928d36e9754c6cb212984e37afc0d3bb7354651"
+  },
+  "candidate_hashes_match_receipt": true,
+  "instruction_count": 164,
+  "isolated_replay": "PASS 164; fresh destination /tmp/review-3008-isolated",
+  "assessment": "PASS_SCOPED",
+  "accepted": false,
+  "findings": [],
+  "scope_limits": [
+    "This is a static map; it does not dynamically validate initialization, enable, or disable behavior.",
+    "Referenced child routines and asynchronous/alias effects remain unresolved.",
+    "No physical hardware behavior, global ownership, or canonical admission is claimed."
+  ]
+}

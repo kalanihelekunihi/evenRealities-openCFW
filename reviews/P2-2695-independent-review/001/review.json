@@ -1,0 +1,23 @@
+{
+  "review_id": "2695",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-indexed-enable-operation4-map-2694/001",
+  "candidate_receipt_sha256": "5e8e91c573ed65402f5abeea8207179e439450e4e657cf44c2d21236b7af5090",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_sha256": "680cf0628b0c3ed785836da7faeb3fcecf7ab51a02c90ed91c2c5b18442ef899",
+  "listing_sha256": "fd463eb6117fe8920f225fd0539e2289385c24d59ad01f068ad8b45d4fba5295",
+  "replay_sha256": "8c895f015845b3739994aac3b1d2750af4a2f4fb451fb84c02d5417332c26c13",
+  "isolated_static_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2695-independent/instructions.json",
+  "instruction_count": 95,
+  "checks": [
+    "Candidate receipt/source/body and listing/replay/pseudocode hashes match. The isolated static verifier replay reproduced all 95 Thumb instructions over [0x421D5E,0x421E4A).",
+    "The instruction trace supports the mode query, critical-section entry, saved-mask storage, existing-local-word load, temporary-stack pointer publication, enable/status child gates, conditional bit-set, second publication gate, mask restore, and final 0x421D28 handoff. The \u201calready active\u201d branch publishes the pointer unconditionally; the inactive branch does so only when its fresh byte gate is nonzero.",
+    "The epilogue restores local stack word in R1, saved PRIMASK in R2, R4-R6/SP, and returns status in R0. Child functions remain unresolved or are referenced as separately bounded evidence, not dynamically composed here."
+  ],
+  "limitations": [
+    "This is static instruction-map evidence; no execution of the complex branches or child lifecycle is claimed.",
+    "The input index query is unguarded here, the published pointer targets a temporary stack location, and validity/lifetime/concurrency/caller ownership are not established.",
+    "Private evidence only; accepted:false; no canonical admission."
+  ]
+}

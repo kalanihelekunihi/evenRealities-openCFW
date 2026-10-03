@@ -1,0 +1,56 @@
+{
+  "review_id": 2891,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/restore-helper-consolidated-record-candidate-2890/001",
+  "candidate_receipt_sha256": "5368950032f3d2fe2085520a029ab525391072e1395bf8d8500b0f063ce336d1",
+  "candidate_artifact_hashes_verified": true,
+  "isolated_replay": {
+    "result": "PASS",
+    "function_records": 1,
+    "data_records": 5,
+    "interface_records": 5,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2891-independent"
+  },
+  "review_binding": {
+    "review_path": "reviews/P2-2835-independent-review/002/review.json",
+    "review_sha256": "90599fe22eabd297445cb23c9d3deb4e6ef152f3625e7cdb830e4aaf2272440b",
+    "candidate_path_matches": true,
+    "candidate_function_json_hash_matches": true,
+    "candidate_receipt_hash_matches": true,
+    "function_input_hashes_verified": true
+  },
+  "literal_values_verified": [
+    {
+      "address": "0x42A548",
+      "value": "0x40020080",
+      "instruction": "0x429DA6"
+    },
+    {
+      "address": "0x42A868",
+      "value": "0x20000150",
+      "instruction": "0x429DAA"
+    },
+    {
+      "address": "0x42A084",
+      "value": "0x20026BA0",
+      "instruction": "0x429DAE"
+    },
+    {
+      "address": "0x42A86C",
+      "value": "0x40020044",
+      "instruction": "0x429DD4"
+    },
+    {
+      "address": "0x42A54C",
+      "value": "0x200271BC",
+      "instruction": "0x429DEC"
+    }
+  ],
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "The function proposal binds exactly to review 2835/002; data and analysis-memory rows link to that function and pin their source bytes or pseudocode/evidence, but are private proposal records rather than separately admitted canonical records.",
+    "The RAM/MMIO interface rows are analysis-only memory contracts, not C interface declarations. Physical peripheral behavior and global ownership of literal ranges are unresolved.",
+    "No canonical record mutation, whole-image ownership/completeness, or admission is claimed."
+  ],
+  "accepted": false
+}

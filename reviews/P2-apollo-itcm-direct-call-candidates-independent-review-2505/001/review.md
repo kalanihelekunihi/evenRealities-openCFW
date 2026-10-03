@@ -1,0 +1,11 @@
+# Independent review 2505
+
+**Result:** PASS_SCOPED.
+
+Reviewed `g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-itcm-direct-call-candidates-2504/001`. Candidate receipt SHA-256 is `ca0d715e05c89084bd2832484c2cee8950c8414ea5268a444aad2cc7ff792923`; all declared artifact hashes match: `candidates.json` `b4afa366379b1d32a8682513bb9d8ac849fa63bc4f033b941467ef379ac111c7`, `verify.py` `c186c59db4b982ccdf2dc9efd8a13ed6f562071d7a3108faf3e19a021f3cf782`, and `notes.md` `b386afd1e859c243ef689eeb89b24897d4531e14d3043958000979f0f2629660`.
+
+The inventory digest is `f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa`. The two pinned source images match their hashes: Apollo main flash `19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701` and bootloader flash `f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5`. Their inventory mappings were preserved in the output and used to convert file offsets to loaded addresses.
+
+I independently reran `verify.py` with its output directed to a fresh replay directory. It reproduced four halfword-aligned Thumb BL candidates, with exact decoded bytes/coordinates: main offsets 296938 (`7ff729f4`, loaded `0x4807ea`, target `0x40`) and 297068 (`7ff7ecf3`, loaded `0x48086c`, target `0x48`); bootloader offsets 53770 (`e2f719f7`, loaded `0x41d20a`, target `0x40`) and 53900 (`e2f7dcf6`, loaded `0x41d28c`, target `0x48`). The target distribution is therefore `0x40: 2`, `0x46: 0`, `0x48: 2`, `0x56: 0`. The halfword prefilter and Capstone single-instruction decode agree with the candidate records.
+
+**Limits:** These are syntactic call-encoding candidates only. `caller_ownership_verified` is false for every hit. The scan does not establish executable ownership, reachability, preceding instruction boundaries, runtime ITCM installation, or call behavior. It searches only the two authenticated flash images with the stated direct-BL prefilter; indirect calls, veneers, and other mappings are outside scope. In particular, zero candidates to `0x46` and `0x56` do not imply those locations are unused. The notes’ compact phrase “4 candidate calls target40/46/48/56” is best read as four hits across the searched target set; spelling out the per-target counts above avoids implying every listed target had hits. Private evidence only; accepted:false and no canonical admission.

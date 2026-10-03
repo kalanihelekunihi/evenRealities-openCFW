@@ -1,0 +1,25 @@
+{
+  "review_id": "2413",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-processing-byte-search-original-minimum-2410/001",
+  "candidate_receipt_sha256": "79fca62b5a4fd311e3aa20827f935cea0ddb28c6c7093cfee7d986e5719cf014",
+  "candidate_pseudocode_sha256": "3cbc7e51f86e547bdfe2f455e18f993ad8a0cd108666f59b568ee2ec4c790a1b",
+  "candidate_replay_sha256": "9790050e6d9208b767b34c1505836719440263954ba488be364c102e2d45e00d",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "isolated_replay_output_sha256": "639df292bccf96454f1548554167ec4c316a949279b2156a364955a699edf497",
+  "fixture_count": 640,
+  "pinned_body_ranges": [
+    30080,
+    30328
+  ],
+  "checks": [
+    "Candidate source and artifact hashes match the receipt. The pinned body ranges and instruction bytes are retained as specified in touch-processing-byte-search-original-minimum-2410/001.",
+    "Independent isolated replay passes 640 cases; output hash matches pinned replays.json.",
+    "Original search, threshold/division, minimum and distance execute. Controlled producer supplies two values (or zero captured items for FFFFFFFF case); original minimum lookup changes resulting decisions as modeled."
+  ],
+  "limitations": [
+    "Producer, cache/clamp and other helpers remain controlled; not physical sampling evidence.",
+    "Private bounded evidence only; accepted:false."
+  ]
+}

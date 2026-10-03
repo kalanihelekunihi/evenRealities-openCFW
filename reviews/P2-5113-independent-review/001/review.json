@@ -1,0 +1,15 @@
+{
+  "review_id": "5113",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-region-allocation-composition-5112/001",
+  "candidate_receipt_sha256": "489a55e3a0449a2b9392d06e8a215613d0694fe10dcc3cc0e2546602636516f8",
+  "candidate_replay_sha256": "63278095cd402536cb8e179d06317f0ec3460ab658466ed035a22b654d112fba",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Composition replay passes against the locked source and verifies all 11 packet file/receipt pins, exact instruction-byte matches, and no conflicting overlap. The union is 2,318 instruction bytes across 877 instructions with 117 direct BL sites; the only external targets are 0x415734 and 0x415FAE as declared."
+  ],
+  "limitations": [
+    "This is structural union evidence only. It does not prove behavior completeness, close external logger/assertion semantics, classify all firmware bytes, or admit coverage. Private evidence; accepted:false."
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "review_id": "2935",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-transition-descending-distinct-profile-2934/001",
+  "candidate_receipt_sha256": "2c668a5b8c11839668106fb72ebae0d9300ae2542fbc42c443fd6adab31eda96",
+  "candidate_replay_sha256": "92aed04b8204607251f798e9a4a8b23b71ed700b5f4d0e3e95f353112e8d44c2",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "source_body_and_itcm_pins": "PASS",
+    "artifact_hashes": "PASS",
+    "isolated_replay": "PASS (720 fixtures)"
+  },
+  "summary": "Source and decoded ITCM hashes match inventory; declared flash bodies and candidate artifact hashes match. Isolated replay passed all 720 fixtures. Original descending transition and rearm/delay/ITCM path execute without interception. The current-index profile is varied between the old/new profile value and its bitwise complement; the recorded extrapolation/saturation and flag-dependent timer model matches the exact 14-write ledger and rearm argument (50 for bounded extrapolation, 200 for saturation with flag clear, 2000 when flag set). 625 ITCM iterations, incoming R3 return, R4\u2013R11/SP/PRIMASK are asserted. Rank/current-index direction, profiles at old/new indices, special indices, aliases/volatile mutation, full flags/register clobbers and physical hardware remain outside scope."
+}

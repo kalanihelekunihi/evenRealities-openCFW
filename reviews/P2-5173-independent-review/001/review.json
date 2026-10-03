@@ -1,0 +1,16 @@
+{
+  "review_id": "5173",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-logger-adapter-original-fixtures-5172/001",
+  "candidate_receipt_sha256": "76036b266957c875f2c6db49db7a48ec6dcd8915c6a645f823708da27cae2585",
+  "candidate_replay_sha256": "f8bd986b26cefd2f9d4436353739f3e087880238f6e80e0e851164873382d086",
+  "candidate_results_sha256": "6b04fc7bbb6b27880d758100d2e10a54ed1c52cb1b42f00a9c9991fb8b2cba01",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Receipt pins adapter map 5170 and the source; isolated replay passes all 56 original cases. Seven entries cover zero/nonzero handles, initialization/publication and call arguments, with four downstream children controlled. R0/saved-R7 return behavior, R4/R7 and SP/PC checks match."
+  ],
+  "limitations": [
+    "Context/time formatting adapters are excluded, and controlled child semantics and hardware behavior remain unresolved. Private scoped evidence; accepted:false."
+  ]
+}

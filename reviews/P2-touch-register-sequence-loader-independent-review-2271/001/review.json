@@ -1,0 +1,16 @@
+{
+  "review_id": "2271",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-register-sequence-loader-9178-2268/001",
+  "candidate_receipt_sha256": "e9eec91ca4a732378c75918903a16f5fb29e8dca32d6cccd6686e3fa78aa1eb4",
+  "candidate_pseudocode_sha256": "7d0b2749717bc5a195072c15617d7fe7d6de7c70b964c4f32c4e1fa54dc33e1a",
+  "candidate_replay_sha256": "4637dd5215dff5f6a95439e97e97fb8607049ab0bc10c81b76f5970865baf809",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Isolated replay regenerated all 514 fixtures. Source, body [0x9178,0x91F0), literal [0x91F0,0x9218), and listed artifact hashes match. Decoding confirms exact full-width comparisons against 5 and 11; the generic path and special paths write the listed words in order. Mode 5 zeroes 0x3020 then copies source words 0\u20134; mode 11 copies 0\u20135 to the first six locations then 6\u201310 to the tail; other tested modes use the generic mapping. R0/R4/R5/SP checks pass."
+  ],
+  "limitations": [
+    "Fixture modes cover all low-byte values plus 0xFFFFFFFF and two source patterns, but do not exhaust high-word aliases. Independent nonaliasing buffers only; memory faults, physical register effects, and out-of-range pointers remain untested. No canonical admission."
+  ]
+}

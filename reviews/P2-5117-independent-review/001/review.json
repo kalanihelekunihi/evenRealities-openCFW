@@ -1,0 +1,16 @@
+{
+  "review_id": "5117",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-assertion-modeled-resume-fixtures-5116/002",
+  "candidate_receipt_sha256": "e5ed08f22c68020f4dfb420dceeafc62241a36b775b246b035524f7b27575962",
+  "candidate_replay_sha256": "c8ef7252c590293a32e708c6294661850dadb6dae43775b69bb0ab0c00379252",
+  "candidate_results_sha256": "4d5b3a7231aac6ae50140b5d3dfba5c0067913a8f956072f4d82840dfe8dcd46",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Corrected 002 pins the assertion map and locked image; isolated replay passes all 12 cases. Original code reaches a hook immediately before BKPT, then the harness explicitly resumes at 0x5746; the controlled 0x41B298 child returns as modeled. Stack arguments, conditional call, tail LR, R0, SP and PC checks match."
+  ],
+  "limitations": [
+    "The BKPT itself is not executed; this does not establish any real debug/fault/monitor behavior or trap resume policy. Child behavior is controlled. Failed 001 is preserved. Private scoped evidence; accepted:false."
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "review_id": "2591",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-power-disable-original-transition-callbacks-2590/001",
+  "candidate_receipt_sha256": "3953eab0dfcbff34a6d442570801abbe61c038db0beee98fe933922378b64c59",
+  "candidate_pseudocode_sha256": "f1a5adbe6aa5930884d9378ec5b8a8ecff17580d95d04d936222dbd2b8a49324",
+  "candidate_replay_sha256": "6603015058be83fd0f39bf4c4ce3ae6abfcdd23ba94be1ecd71b580a08fdd60a",
+  "source_sha256s": {
+    "apollo_bootloader:flash": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+    "apollo_bootloader:decoded:00000040": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+    "inventory/images.jsonl": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa"
+  },
+  "checks": [
+    "Candidate artifact, source-image, decoded-image, and inventory hashes match the receipt. The replay derives the callback flag/pending/index locations from the authenticated flash image; callback table entries at slots 4, 12, and 16 are explicit fixture-installed Thumb pointers, not attributed to a running initializer.",
+    "An isolated copy of replay.py, redirected to a fresh destination, passes all 24 cases: readiness on read 1, read 2, or timeout; PRIMASK 0/1; two MMIO patterns; and pending 0/1. The poll-read mutation hook models readiness; all other firmware instructions in this path run without function interception.",
+    "The observed sequence is pre callback, successful-only operation-3 transition callback (no-op return), post callback and conditional pending helper, then the disable-path epilogue. On success, post invokes 0x42CDF8 only for nonzero pending; the helper's gate-zero fixture returns without a field write. On timeout, transition callback is skipped but pre/post still run. Exact flag/pending writes and PRIMASK, poll reads/delays, MMIO writes, callback order, return status, R4-R11 and SP assertions pass.",
+    "The modeled disable branch returns 0 on readiness and 4 on timeout; timeout uses six reads and five delays. Flag and pending writes in the nested callback path occur with PRIMASK set, and the original incoming mask is restored."
+  ],
+  "limitations": [
+    "The callback table is manually installed in fixture RAM. This does not establish compatibility with an actually selected profile or runtime installation ownership.",
+    "Only transition operation 3's no-op path is covered. The pending child is gated off; other callback operations, active pending-field writes, and other transition operations are outside this packet.",
+    "Peripheral readiness and MMIO values are modeled. Physical hardware behavior, concurrency, startup composition, and broader transition-operation semantics are not established. Private evidence only; accepted:false."
+  ]
+}

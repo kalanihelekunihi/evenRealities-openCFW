@@ -1,0 +1,16 @@
+{
+  "review_id": "2287",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-sequence-budget-7288-2284/001",
+  "candidate_receipt_sha256": "6f396b98b5b6a3370d9e3c9131216d5272a3220723fa07b0e19b1bfee6b213be",
+  "candidate_pseudocode_sha256": "fd0acdd2d984a3e9f7beddec692b83fd13d39b4b88fa982380d3042a8770a5ba",
+  "candidate_replay_sha256": "fd7b690b9aaef52543fea2dee6f9c472e723dad6d3e1e5cd45e85c1c8fa6b385",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Isolated replay regenerated all 324 fixtures. Source, body [0x7288,0x72F8), and candidate file hashes match. Decode confirms 144-byte row selection and parameter/config pointers; the mode-2 branch uses halfwords 62+66, others 64+68. It adds the shifted-count product and count-times-(byte77+parameter halfword44) product with 32-bit wrap, doubles mode2, multiplies by row byte132, calls original A6C0 with divisor46, and multiplies quotient by five. Exact division inputs/result and R3-R7/SP preservation assertions pass; R1 is not used."
+  ],
+  "limitations": [
+    "Fixtures cover row indices 0/2, mode bytes 0/2/255, selected counts, multipliers and data patterns; mode byte1 and other high-bit patterns are not directly exercised. Division is original but limited inputs; physical units, aliasing and pointer faults remain unresolved. No canonical admission."
+  ]
+}

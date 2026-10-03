@@ -1,0 +1,19 @@
+{
+  "review_id": "2227",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-full-original-setup-chain-2224/001",
+  "candidate_receipt_sha256": "a2664f5cd88149d7b7149c1e8af0e87181562c827ac46dbc43f02b552de1c7aa",
+  "candidate_pseudocode_sha256": "909c2c77afb8f0ba0fd202d4391f5e550c4ad2a965d4debc27a51ebd9713ccaa",
+  "candidate_replay_sha256": "61545647403dbad24c026d1338dface4d6491c0f2c4fe57cdd950ed7a239a4fb",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "The source and all receipt files match their hashes. A fresh isolated replay regenerated all 20 fixtures exactly without helper interceptions.",
+    "The observed path ordering agrees with the instructions: 6BD4 readiness check and 6140 descriptor update precede 6AC0 mode handling; transitions from saved modes 0/5 run original port helpers, then 8FD0. Version 1 mismatches return 64 and stop before range setup. Version 2 proceeds through original 664C, 6608, A324 and 4480; the modeled clear-bit status reaches the 441-delay timeout, which 664C ignores before continuing its setup writes. Saved modes 2/4 reuse the fast path, while 255 returns 1 after readiness/descriptor enable.",
+    "The replay checks factory words 0x55/0xAA, configuration mode/count, register-block start and first record, delay count/arguments, call order and R4/R8/PRIMASK/SP. An additional isolated assertion on the same original-code runs confirmed final descriptor word+8 is 0x91 after the 6140 OR and 6AC0 bit-4/5 updates."
+  ],
+  "limitations": [
+    "Factory bytes, scale byte 2, source records, register block and status are supplied model data. No physical readiness, elapsed-time behavior, MMIO effects, arbitrary configuration, callback or concurrency behavior is established.",
+    "No canonical admission."
+  ]
+}

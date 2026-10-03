@@ -1,0 +1,21 @@
+{
+  "review_id": 3001,
+  "candidate": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-clock-encode-map-3000/001",
+  "receipt_sha256": "2054df223a0741952231f8b1e7c0c6c73a560242b27cea981e74c46673a84c8e",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_hashes": {
+    "42c256-42c26a": "c7c013df5ce01fcc66215af1337fed966a975393591a7bc7e17ebcf71bde8213",
+    "42c26a-42c3e2": "23796b78366978bda2ee2db94e309c4f1cae4e92f5ffbc2072f75becca3ae9e8"
+  },
+  "file_hashes_match_receipt": true,
+  "instruction_count": 148,
+  "isolated_static_replay": "PASS 148; fresh destination /tmp/review-3000-isolated",
+  "assessment": "PASS_SCOPED",
+  "accepted": false,
+  "findings": [],
+  "scope_limits": [
+    "Static disassembly/pseudocode review only; dynamic branch behavior is not claimed.",
+    "The referenced divider callee is separately supported evidence, not composed here.",
+    "No exception configuration, NZCV completeness, aliasing, global ownership, physical clock, or admission claim."
+  ]
+}

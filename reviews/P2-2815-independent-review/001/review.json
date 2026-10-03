@@ -1,0 +1,23 @@
+{
+  "review_id": 2815,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-profile-slot40-original-chain-2814/001",
+  "candidate_receipt_sha256": "bc03cab13511cde89929988777850de99a4363d057def888f7f8c793ff2d79c9",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "candidate_artifact_hashes_verified": true,
+  "body_hashes_verified": {
+    "429da4-429df6": "a69ea6c52f959eba65684feebd9651d2068cdd0d91caf8eb45d74e52969c61a4",
+    "42a036-42a04a": "9c901638e2c0e882e9f92662df44aa585a49a2e160eb4f2a4c7b32b374ae7a06",
+    "41cdfa-41ce10": "217ac111afb20339d761a7da1c03f04036ce8e07b2eb2165581a78a4bba087b5"
+  },
+  "isolated_replay": {
+    "result": "PASS",
+    "fixtures": 54,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2815-independent"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Slot installation selection is not executed; target wrapper is explicitly installed in the fixture. Flag/index/pattern/mask dimensions are bounded to packet cases. Concurrency, physical effects and caller ownership remain unresolved."
+  ],
+  "accepted": false
+}

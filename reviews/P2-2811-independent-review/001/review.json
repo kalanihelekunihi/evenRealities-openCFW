@@ -1,0 +1,20 @@
+{
+  "review_id": 2811,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-restore-wrapper-reference-candidates-2810/001",
+  "candidate_receipt_sha256": "ad65e3b03d420d6fc7c3081dd4bfbce97e07f547d2bc293aed7138ee805aa5fe",
+  "source_sha256": null,
+  "candidate_artifact_hashes_verified": true,
+  "body_hashes_verified": {},
+  "isolated_replay": {
+    "result": "PASS",
+    "images": 33,
+    "candidates": 1,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2811-independent"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Navigation-only reference scan. Candidate references do not prove executable ownership; indirect/computed references and other instruction sets are not excluded. No global completeness claim."
+  ],
+  "accepted": false
+}

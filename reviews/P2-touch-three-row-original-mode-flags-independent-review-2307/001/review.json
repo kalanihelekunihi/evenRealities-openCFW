@@ -1,0 +1,16 @@
+{
+  "review_id": "2307",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-three-row-original-mode-flags-2304/001",
+  "candidate_receipt_sha256": "7e62504173307a5eb5ccd03569d0ff8464122895ad93bb830fd896f579a1300e",
+  "candidate_pseudocode_sha256": "d361d7263d03961dce1339796faa553878e015e29731a68bb381658d7a18af09",
+  "candidate_replay_sha256": "dd7e3a13225cec6ab3df485015cb8a3d592475982654495e50857cb937185fbd",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Isolated replay regenerated all 576 fixtures. Source, body [0x6384,0x6462), and candidate file hashes match. The original checker runs 623C/6220 and 6262 with no interception; zero config/parameter threshold inputs make 6220(0)=1 and the caller\u2019s threshold zero, so 623C returns 10. The checker\u2019s cached original flags still govern the controlled 6352/6294 branches. Exact calls, parameter writes, immediate 2048 failures and R4-R11/SP assertions pass."
+  ],
+  "limitations": [
+    "Only 6352 and 6294 are controlled children, and the original 623C input is the zero-field fixture; broader leaf inputs are separate evidence. Aliasing, helper mutation and physical field meaning remain unresolved. No canonical admission."
+  ]
+}

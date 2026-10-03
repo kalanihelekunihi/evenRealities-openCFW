@@ -1,0 +1,13 @@
+{
+  "review_id": "2645-correction-1",
+  "status": "CORRECTED_PROSE",
+  "accepted": false,
+  "supersedes": "reviews/P2-apollo-boot-spot-profile-apply-routing-independent-review-2645/001/review.json",
+  "prior_review_sha256": "68880183aa7045b8d366801f02d38217c11f088084779c5ac63e1eaacbbc6007",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-profile-apply-routing-2644/003",
+  "candidate_receipt_sha256": "c605dd98d979b8a2854d5517511a3b05e21e109d7e81b8c85e9c859500adfc21",
+  "candidate_replay_sha256": "a6d353f4030785fb006540e188bc7f03069a8d7d6f583a6b69170aa543791aea",
+  "correction": "The prior review rendered receipt.table=536871256 as 0x20000098. Correct conversion is 0x20000158. The locked literal at 0x42ACBC and candidate replay both use that correct address. The replay writes the controlled entries into slots 0 and 26 at the literal-resolved RAM table. This is a reviewer hexadecimal-conversion typo; candidate, replay, and fixture bindings were correct.",
+  "corrected_scope": "The 256-fixture routing result remains PASS_SCOPED for controlled entries at slots 0 and 26 at 0x20000158. Actual table contents are independently enumerated in candidate 2654/001, but this candidate still does not establish handler semantics, full extents, reachable indices, or ownership.",
+  "status_effect": "No change to accepted:false; no canonical admission."
+}

@@ -1,0 +1,18 @@
+{
+  "review_id": "2237",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-three-word-mask-5188-2234/001",
+  "candidate_receipt_sha256": "c1a2381282df2c878b009ec6a54f33de4a914bef32ade6968052534cec19fffd",
+  "candidate_pseudocode_sha256": "21d1a88f4858388f21c55df996a416f808e9db1759c9fb3dec227bccfc1af6b8",
+  "candidate_replay_sha256": "ea2ff7c36d049a82fb8eb67d9c4f81ee60555b14ce3cde7d4393c51bafe5d6c4",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Receipt, artifacts, source and [0x5188,0x51BC) body hashes match; decoded instructions agree with the documented cached-word behavior and mode bits.",
+    "Isolated replay regenerates all 288 fixtures and asserts the ordered write ledger, all three results, untouched tail bytes, R0/R2/R4/SP, and independence from upper mode bits."
+  ],
+  "limitations": [
+    "Separate-buffer synthetic RAM fixtures do not establish aliasing, concurrent modification, physical register meaning, or hardware effects.",
+    "No canonical admission."
+  ]
+}

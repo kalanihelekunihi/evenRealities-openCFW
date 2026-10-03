@@ -1,0 +1,18 @@
+{
+  "review_id": "2973/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-state-compose-original-provider-2972/002",
+  "candidate_receipt_sha256": "3d1777441469795a58e77ba33791dbc77b2a45c85edbb619cf5c246b213eaed7",
+  "candidate_replay_sha256": "b0b2a9f6da666d052deafc1c2831e37088d7313dcada01a41c5031c2fe07c747",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "flash_and_ITCM_pins": "PASS",
+    "profile_body": "PASS (original 42BDF0..42BF4E body digest)",
+    "fixture_grid": "PASS (24 = config bit3 0/8 \u00d7 readiness 0/1 \u00d7 3 source patterns \u00d7 2 masks)",
+    "bank_gate": "PASS (shared-word bit3/not-ready failure returns7 before provider; other bounded combinations succeed)",
+    "provider_and_copy": "PASS (three exact provider calls, 39 ordered profile writes, 21 ITCM copy iterations)",
+    "commit_callback": "PASS (controlled return value ignored by parent; status remains third provider status)",
+    "frame_and_replay": "PASS (R4/R5/SP/PRIMASK; outputs hash-match isolated receipt)"
+  },
+  "summary": "All 24 bounded compositions pass isolated replay. The exact config/readiness gate returns 7 only for alternate-bank bit3 set with readiness false, before provider/copy/callback work; the other fixture combinations succeed. Successful cases execute the original three provider calls and ITCM copy wrapper, assert all 39 ordered profile writes and 21 copy iterations, then call only the final 41CC04 callback under controlled return DEADBEEF. The parent ignores that callback return and returns the third provider status. Flash/ITCM pins, R4/R5/SP and PRIMASK checks pass. Later provider failure/partial writes, concurrency, physical effects, and broader profile/callback installation remain unresolved."
+}

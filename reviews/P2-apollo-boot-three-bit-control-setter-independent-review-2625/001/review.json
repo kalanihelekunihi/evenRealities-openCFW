@@ -1,0 +1,21 @@
+{
+  "review_id": "2625",
+  "status": "REVISE_REPLAY_UNAVAILABLE",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-three-bit-control-setter-2624/001",
+  "candidate_receipt_sha256": "bc11394fd06747739bc113cf204905384ba45cb3d1f033c99167c2e9f90f3790",
+  "candidate_pseudocode_sha256": "6bc9e7aa98009c76b2e6c98da1c0e970ceac7825e4df8074ee7f97c4c96915b5",
+  "candidate_replay_sha256": "5c9a8dd1a1dd96c31d3e9784c541e4ac5092404f99c2dfc26fdf8c327fcdfbd3",
+  "fixtures_sha256": "cfb746f0c0391d355be39c17223bca4793d44e79f94d83de1f585383b20684a6",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Candidate receipt and source hashes match. The original body [0x41C838, 0x41C860) hashes to 0bb2abd960f298e17e1f2669bbdd96bc4b5f98ad4a4404d776fe8aeeb1370a96; objdump decodes the three ordered fresh-read/bitfield-insert/write groups and BX LR exactly as described.",
+    "The aligned PC-relative literal at 0x41CBD4 resolves to 0x40020060. Independent arithmetic over all 24 recorded input/register-pattern fixtures reproduces the three expected writes for bits 16, 0, and 5, and the claimed low-byte final R0.",
+    "The candidate replay could not be executed in this environment: system Python and the bundled workspace Python both lack the Unicorn module. Thus final R1/R2/R3, SP, and return-state fixture assertions have not been independently replayed."
+  ],
+  "limitations": [
+    "No independent emulator replay; do not treat the fixture file as independently executed evidence. Install/provide Unicorn or rerun in the prescribed environment before upgrading this review result.",
+    "Concurrent register mutation and physical meaning of 0x40020060 are unresolved.",
+    "Private scoped evidence only; accepted:false; no canonical admission."
+  ]
+}

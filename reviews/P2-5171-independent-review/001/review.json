@@ -1,0 +1,15 @@
+{
+  "review_id": "5171",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-u64-division-logger-service-adapters-map-5170/001",
+  "candidate_receipt_sha256": "9954643fe134d7dc20caa0027a56abe46e3b2bc2b9adb90b0a1b6b830b4c3ae9",
+  "candidate_replay_sha256": "28bd66046cf1c8c5edb8ee2ab8906b9301132386e7b20db03d682c13d48d62c2",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Source-pinned isolated replay and literal calculations pass for both extents. The map tracks global handle loads/reloads, initialization and take/release adapter call order, status-zero helper path, time/context callbacks, and distinct return aliases (including POP R0 incoming R7 and POP R1 incoming R7). ADR consumers are resolved from their aligned PC bases."
+  ],
+  "limitations": [
+    "Child semantics are not inferred; global handle meaning, synchronization/hardware behavior and logger formatting remain outside scope. Gap bytes A6DA..A6F0 are excluded. Private partial map; accepted:false."
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "review_id": "5155",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-logger-early-exit-fixtures-5154/001",
+  "candidate_receipt_sha256": "059523f3dd235f2c94299cffc19f8ff7bbe05e46bb3a0bb62ff2e27a9ed9661e",
+  "candidate_replay_sha256": "018ba665d9897941b176543264fd250fab285830079390b99f14819fd271a0e2",
+  "candidate_results_sha256": "fea3fe057b38e52c64471b8c4482248687a770ecf53f1fb300c04afe4d8edcd0",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Receipt pins logger guard map 5152 and source; isolated replay passes all 49 original early-exit cases. IPSR-zero, valid low-byte levels, enable/threshold/query gates, controlled query behavior, full 256-byte state image, R0/callee-saved registers/SP/PC match."
+  ],
+  "limitations": [
+    "Invalid levels, nonzero IPSR, filtering/formatting continuation, faults and hardware behavior are excluded. The query child is controlled. Private scoped evidence; accepted:false."
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "review_id": "5165",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-u64-division-logger-option-predicates-map-5164/001",
+  "candidate_receipt_sha256": "0d707e665c9794777e50dc4f708744b3b867613eecdd3bab77c1c41a3d8ef447",
+  "candidate_replay_sha256": "463d05f48d1ebc819337ee4b55a80816123d222efa6e38dab89869b496e47612",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Source-pinned isolated replay passes for all three entries and literal consumers. The primary predicate validates the truncated level, loads callback pointer on the invalid path, conditionally enters the callback or logger loop, and otherwise reads the level-selected state word and returns the masked-byte boolean. Two wrappers return byte booleans and preserve the stated incoming-R7 stack alias."
+  ],
+  "limitations": [
+    "Invalid-level post-callback indexing and callback/logger behavior remain unresolved; no hardware or admission claim. Private partial, accepted:false."
+  ]
+}

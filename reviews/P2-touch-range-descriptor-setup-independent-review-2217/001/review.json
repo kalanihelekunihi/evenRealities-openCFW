@@ -1,0 +1,19 @@
+{
+  "review_id": "2217",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-range-descriptor-setup-664c-2214/002",
+  "candidate_receipt_sha256": "97f3c92b720d8c2f9f9b01c2410f8cbd01c690eebd7e7b054f56a59eb9c43585",
+  "candidate_pseudocode_sha256": "57b2a9f20170ec55f6c9fde43cc52cbea8a222e08fd8e0202c6d6b2e342cf028",
+  "candidate_replay_sha256": "97125060ab7069acfc9d6c15e496c6e1a2b4f6f01797b94cb1b1b82bc6a41ace",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "The source and all receipt files/ranges match their hashes. Code [0x664C,0x6772) is 294 bytes; the separate literal range is [0x6774,0x6780), 12 bytes. The candidate listing matches independent Thumb/M-class decoding.",
+    "An isolated replay regenerated all 160 fixtures exactly. It checks count clamp through 21, zero length, source record stride 28 and destination stride 44, the complete ordered register-write ledger, 6608 arguments, callback context+28 argument, base/config state and R4/R8/SP. The callback and 6608 remain controlled.",
+    "The corrected armed-status path is confirmed by the instructions: after callback and config-byte reload, a true armed test plus base+384 bit-24 test stores 256 at base+324, then branches to 0x673C. That common path ORs bit 31 into base word 0, stores 1 at base+320 and returns. The replay's expected ledger includes those common writes after the 256 store, so the failed /001 return assumption is corrected."
+  ],
+  "limitations": [
+    "The replay uses a RAM-backed register block, synthetic source words, and controlled 6608/callback stubs. Their effects, aliasing/concurrency, arbitrary pointer behavior and physical MMIO are not established.",
+    "No canonical admission."
+  ]
+}

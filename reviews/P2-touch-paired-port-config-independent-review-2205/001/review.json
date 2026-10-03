@@ -1,0 +1,19 @@
+{
+  "review_id": "2205",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-paired-port-config-6044-2202/001",
+  "candidate_receipt_sha256": "22fdc6b39a5147c56bd9ed484e53162f394ac909b24ac43babc0de076e5e7fb8",
+  "candidate_pseudocode_sha256": "5e702d1dee3df54e55a32a4ecd8de201e19c77fc3977b6d1c0ea8254f7decd7d",
+  "candidate_replay_sha256": "faba9987567889477dea8294667ff98ad80a51e213b3894f2433065bcb227ef2",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Source and all receipt files match their hashes. The independently sliced wrapper [0x6044,0x6078) is 52 bytes and matches its body hash; independent Thumb/M-class disassembly matches the stored listing.",
+    "An isolated replay regenerated all 192 fixtures exactly. Original 6044, 5FC6, both leaf bodies and 4492/449A execute without interception. The replay checks both ordered calls, port/pin/function/mode and fifth stack argument, all four affected words per port, PRIMASK restoration, R4 and SP.",
+    "Decoded wrapper reloads the root/table before each child call, obtains the first port/pin at table+8/+12 and the second at +16/+20, and passes the saved function, mode and stack enable. The second child's incidental R0 is retained. Tests include same-port aliasing and separate ports, including pin 0/7 boundaries."
+  ],
+  "limitations": [
+    "Root/table contents remain static during these fixtures; mutation and null/fault behavior are untested. Only supplied RAM-backed port mappings are covered; physical MMIO semantics, arbitrary buffers and concurrency remain unresolved.",
+    "No canonical admission."
+  ]
+}

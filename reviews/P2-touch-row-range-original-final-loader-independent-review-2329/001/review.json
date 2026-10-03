@@ -1,0 +1,20 @@
+{
+  "review_id": "2329",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-range-original-final-loader-2326/001",
+  "candidate_receipt_sha256": "d31e1b8727de2939413ff198ec361f99d4516752c8e1b7ab43901bb775638265",
+  "candidate_pseudocode_sha256": "bdc7cffa52ab810d310c01ab01486f4630b9c0d4aae29e0579665c8682b79bb0",
+  "candidate_replay_sha256": "7bb19847bd398b0201de6df2638e0951064d76ed2c9a33a45cc896f0c008be21",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Receipt d31e1b8727de2939413ff198ec361f99d4516752c8e1b7ab43901bb775638265 pins the source, body [0x7064,0x71C6) (4ebcd0692bfe49269bab288edd14e2b25ce8eb6b99c68914169f511244088101) and evidence hashes. Independent isolated replay regenerated all 672 fixtures.",
+    "Original classifier, predicate, measurement chain and final 8FD0 loader execute. The pinned disassembly and instruction flow support the documented final-loader call after row writes; controlled mode transition and two builder calls remain as declared. The modeled configuration/factory bytes select the version-2 success path or version-1 mismatch. The mismatch becomes loader error, and 7064 replaces the accumulated status with 64 after earlier classification writes.",
+    "Across ready/timeout, class-boundary, predicate/type and mode-result cases, exact outer call order/arguments, parameter writes, final status, and R4-R9/SP assertions match. Original loader register/MMIO effects are not fully asserted in this packet."
+  ],
+  "limitations": [
+    "Factory data and peripheral/status accesses are synthetic modeled inputs; this does not establish physical MMIO behavior.",
+    "Mode transition and descriptor builders are controlled; their effects are not established. Separate loader-ledger evidence is referenced by the candidate.",
+    "Fixture coverage is bounded and aliasing remains unproven. Private review only; no canonical admission."
+  ]
+}

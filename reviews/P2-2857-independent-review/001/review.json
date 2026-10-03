@@ -1,0 +1,29 @@
+{
+  "review_id": 2857,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-profile-field-apply-map-2856/001",
+  "candidate_receipt_sha256": "fdf926343a684eb0ffad2805b00008c8cbb46710406ae91301d5ccca06dbb879",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_sha256": "686b1225442297793c2d963c1903f0d2fa5dde214abdae1352ad5ade61c326f3",
+  "candidate_artifact_hashes_verified": true,
+  "instructions": 24,
+  "isolated_static_replay": {
+    "result": "PASS",
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2857-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "independent_execution": {
+    "result": "PASS",
+    "cases": [
+      "magic match",
+      "magic mismatch"
+    ],
+    "checks": "Observed match and early mismatch register/flag effects consistent with decoded pseudocode."
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Static instruction mapping only; dynamic profile/table changes, aliasing, caller ownership, and physical peripheral meaning remain unresolved.",
+    "The independent spot execution checks representative match/mismatch flag behavior, not all possible register values. No canonical admission."
+  ],
+  "accepted": false
+}

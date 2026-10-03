@@ -1,0 +1,24 @@
+{
+  "review_id": 2753,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-handler13-original-normal-chain-2752/001",
+  "candidate_receipt_sha256": "55e39f1a62cc41ceaf6bcd8eb85cb8a73ba27b7d458899f90a250fadd92bfd9d",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "itcm_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+  "candidate_artifact_hashes_verified": true,
+  "body_hashes_verified": "70d1c64d8b91f5e1d95f0b898d33f85faf45b83b7b61529f9d700bd2682b7a92",
+  "isolated_replay": {
+    "result": "PASS",
+    "instructions_or_fixtures": 128,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2753-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "scope": "dynamic",
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Wait/service and other indices/categories are not covered.",
+    "The finite fixture set does not establish all floating-point corner cases, hardware effects, or concurrency.",
+    "Private evidence only; no canonical admission."
+  ],
+  "accepted": false
+}

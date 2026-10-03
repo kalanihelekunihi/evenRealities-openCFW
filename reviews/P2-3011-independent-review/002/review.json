@@ -1,0 +1,19 @@
+{
+  "review_id": 3011,
+  "candidate": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-command-queue-init-original-3010/003",
+  "receipt_sha256": "db4d3bbd78ea310e98ec7c647e9f1687bf59203e8c9e28f6b0f4aba00e76b357",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_sha256": "ad7e3d6257b791855a8cd7fe90389313dfb9496262724777900d6a4193c09b52",
+  "table_sha256": "1ed1fa3682f9c16c403ee0e6cee7761b70ca610656a2b6e56de3f0b05cee7fea",
+  "candidate_file_hashes_match": true,
+  "fixture_count": 3264,
+  "isolated_replay": "PASS 3264; /tmp/review-3010-003-isolated",
+  "success_write_count": 18,
+  "assessment": "PASS_SCOPED",
+  "accepted": false,
+  "correction_to_001": "003 fixes both source-relative range hashes and explicitly asserts 18 successful writes, including final output-handle publication. 001 remains preserved as REVISE_PINS.",
+  "scope_limits": [
+    "Actual immutable descriptor table is used; child calls are absent from this body.",
+    "Stable, nonalias memory only; no physical hardware, asynchronous exception, arbitrary alias, full-register, or global ownership claims."
+  ]
+}

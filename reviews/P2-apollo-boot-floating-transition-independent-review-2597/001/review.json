@@ -1,0 +1,21 @@
+{
+  "review_id": "2597",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-floating-transition-2596/002",
+  "candidate_receipt_sha256": "1b50672d050b16909007e942d2cbd77a01d7853a61d35bc7204d0b3baded4889",
+  "candidate_pseudocode_sha256": "1a4e522019761b01a8c7867b44d185ecb0a593a8aeb15ffc2ba8e8677889ce79",
+  "candidate_replay_sha256": "d487b1fa98a2de138d2c930dd60178253fadb4c66a6e02b5bfae434f59605509",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Receipt artifacts and source image hashes match. Original body [0x42CED8,0x42CFE0) matches the receipt body hash.",
+    "An isolated replay copy with its output path redirected passes all 152 fixtures. It covers all four classifications, sensor/transition flags, PRIMASK 0/1, exact and adjacent threshold encodings, signed zero, infinities, and quiet/signaling NaN encodings.",
+    "The original path classifies category 0 for [-273,35), 1 for [35,50), 2 for [50,1000), and 3 otherwise; unordered NaN comparisons reach category 3. For valid categories, sensor output is conditionally updated, original 0x42CEA4 is called, and the bound words are written. Stored category-1/2 lower bounds are 33/48 although their classification boundaries are 35/50. Invalid input skips the child and flag update, writes zero bounds, and returns 1. The replay independently computes expected binary32 fields and checks write order, child arguments/calls, final memory, result, R4, D8, SP and PRIMASK.",
+    "The integrated child path uses original 0x42CEA4 and its original pending helper without interception. Its gate/mode/boost are fixed to enabled/3/15; the transition-blocked fixture controls whether this subpath performs pending adjustment."
+  ],
+  "limitations": [
+    "Stable input memory is assumed; repeated-read mutation, concurrent changes, and physical semantics are not established.",
+    "The child helper's gate, mode, boost, and related state are fixed. Other helper branches and callback ownership are not proven here.",
+    "Private scoped evidence only; accepted:false, with no canonical admission."
+  ]
+}

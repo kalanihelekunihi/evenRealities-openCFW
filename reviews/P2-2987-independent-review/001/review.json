@@ -1,0 +1,31 @@
+{
+  "review_id": 2987,
+  "candidate": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-event-apply-map-2986/001",
+  "candidate_receipt_sha256": "aa14cbffba79e38c4615e455e6a20b8f7cbabb4cba2e5520053e3b16c609f962",
+  "source_pin": {
+    "id": "apollo_bootloader:flash",
+    "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-fixed-images-005/002/apollo_bootloader-flash.bin",
+    "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5"
+  },
+  "body_pins": {
+    "42c0b2-42c222": "a3d5075b7f480a21b071c587bb343466ca39d411ed426927e82b22168591937e"
+  },
+  "candidate_file_hashes_match_receipt": {
+    "instructions.json": true,
+    "replay.py": true,
+    "pseudocode.md": true
+  },
+  "fixture_count_or_static_extent": "static-114-instruction map",
+  "isolated_replay": {
+    "result": "PASS static replay",
+    "destination": "/tmp/review-apollo-boot-event-apply-map-2986"
+  },
+  "assessment": "PASS_SCOPED",
+  "accepted": false,
+  "summary": "Static event-apply control-flow map; decoded drain/poll/delay paths, dynamic termination not claimed.",
+  "scope_limits": [
+    "The packet remains private scoped evidence; no canonical admission is made.",
+    "Only the exact fixture dimensions and controlled/modelled hardware described by the candidate are supported.",
+    "No whole-firmware completeness, physical hardware, untested paths, or global ownership claim is inferred."
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "review_id": "2901",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-trim-restore-original-2900/001",
+  "candidate_receipt_sha256": "aba07b7ca14ecb28a1896c49bbc222cd68082985a61038dd174c1e1ae872368f",
+  "candidate_replay_sha256": "e3483d853648cfbf94fd0e1b8faa0eb2a7381b58e094da46ea8479937ed59d02",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_sha256": "fbc7ca52270345ca6b251d1c8c805a06e33af456500f9b17e05cfa7743af79f8",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "source_matches_inventory": true,
+    "body_hash_matches_receipt": true,
+    "artifact_hashes_match_receipt": true,
+    "isolated_replay": "PASS"
+  },
+  "summary": "The pinned image hash matches inventory. Body [42AE6C,42AE9C) SHA-256 matches the receipt; candidate artifact hashes were checked. Isolated replay into a fresh output directory passed all 108 cases. For nonzero flag byte (1 or 255), the original routine reads only 200271AE, skips source/target reads and writes, and returns the byte in R0 with incoming R1/R2 intact. For flag zero, it reads source0 then target0 and writes target0 with source0 low7 inserted; then reads source1 then target1 and writes target1 likewise. It returns R0=4002004C, R1=raw source1, R2=updated target1; R3\u2013R12, SP, LR and PRIMASK assertions pass. The fixture set covers source/target low7 boundaries and two initial target patterns. It does not establish behavior under aliasing or changing reads, flags/caller ownership, physical hardware meaning, or behavior outside these values. Accepted remains false; no canonical admission."
+}

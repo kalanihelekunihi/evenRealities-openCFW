@@ -1,0 +1,18 @@
+{
+  "review_id": "2953/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-hardware-state-decode-byte-bit-boundaries-2952/001",
+  "candidate_receipt_sha256": "82850d8a7189e6f47d7f9370f62c066f5531fef39c8be04c86b0820a46a2b332",
+  "candidate_replay_sha256": "a7bc323bae2889586bfa17ec1d0594a1883fc7789d1a8e6a735f8f8b48924c03",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "source_body_and_parent_pins": "PASS (same original decoder body hash as 2940/001)",
+    "fixture_count": "PASS (9,216 = 6\u00d73\u00d74\u00d74\u00d72\u00d74\u00d72\u00d72)",
+    "original_instruction_execution": "PASS (all cases replay original decoder; no child interception)",
+    "independent_oracle": "PASS (byte bit 0 controls selector; flag bytes 0/1 and 128/129 distinguish bit-0 cases from bit-7-only cases)",
+    "outputs_and_frame": "PASS (ordered writes/status/R1/R2/R4/R5/SP/PRIMASK/stop assertions)",
+    "isolated_replay_output_integrity": "PASS (all replay output hashes match receipt)"
+  },
+  "summary": "The 9,216-case replay executes the original decoder with stable input buffers and no helper interception. The flag-byte dimension includes 0, 1, 128, and 129, independently distinguishing low-bit gating from bit-7 gating: 1 and 129 take the set-bit path, while 0 and 128 take the clear-bit path. This matches LDRB zero-extension, LSLS #31, and BPL. The independent oracle\u2019s ordered first/second output writes and statuses, preserved output pointers/registers, SP, PRIMASK, and stop state pass. This is bounded emulator evidence only; aliasing, volatile changes, flags/high-register contract, physical MMIO behavior and global ownership remain unresolved."
+}

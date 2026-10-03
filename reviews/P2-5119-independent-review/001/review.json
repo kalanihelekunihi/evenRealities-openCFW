@@ -1,0 +1,15 @@
+{
+  "review_id": "5119",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-u64-division-assertion-fallback-loop-map-5118/001",
+  "candidate_receipt_sha256": "ebce25cf9eb3cb81e6bd4b0c801d8c6697cf6e9bdd62c859d64ba2c7ee2a7908",
+  "candidate_replay_sha256": "02cc5dcbadf4d19ff0da1726b4899488cf2280f4488e9fa404c7f3974d364ab2",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Source-pinned isolated replay passes. The fallback body saves R7/LR, loads the literal into R2 once, then repeatedly sets R1=R2 and R0=24, executes BKPT 171, and branches back if execution resumes. There is no ordinary software return or stack unwind in the loop. The literal consumer is confirmed."
+  ],
+  "limitations": [
+    "Behavior after BKPT is external and unresolved; no physical trap, return, halt or fault policy is inferred. Literal pool bytes are outside the body. Private scoped evidence; accepted:false."
+  ]
+}

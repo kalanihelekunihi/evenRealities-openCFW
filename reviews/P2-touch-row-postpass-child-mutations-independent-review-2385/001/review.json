@@ -1,0 +1,58 @@
+{
+  "review_id": "2385",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-postpass-child-mutations-2382/001",
+  "candidate_receipt_sha256": "401afb376097d304ba0c37cbd0ded32470e0e628c77544eab87d5c0e394927d1",
+  "candidate_pseudocode_sha256": "0f81c7e39dbefafff03c2b4e23a57ca4494d73cb418bf001f6cb82cb41ee4abf",
+  "candidate_replay_sha256": "335a4c0f4485f1981a339df581ab6c69ea0b94bf86e4643998a9186b737d3d01",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "isolated_replay_output_sha256": "3e63074311dba129ca0ec7b45cdf58d0907c0af93b3bf66e88d18d13b7a9fa77",
+  "fixture_count": 4096,
+  "pinned_body_ranges": [
+    {
+      "range": [
+        23714,
+        23722
+      ],
+      "sha256": "6f8a68c8297071c8f8bbc92299e9558d82f7ece8429362fb3bba396a919a513a"
+    },
+    {
+      "range": [
+        31508,
+        31586
+      ],
+      "sha256": "306f3541a2977a9b4b879e8022a325affac06fd9a1f66c9db00d03dd683821dd"
+    },
+    {
+      "range": [
+        31586,
+        31594
+      ],
+      "sha256": "015f5632595b47df572676b6fa9b6d764ba21bf9e279ee9a51d0efb786f7a34a"
+    },
+    {
+      "range": [
+        31594,
+        31672
+      ],
+      "sha256": "ced67683db8de388bd41b1d5472366f15f40ca321a9a77d0c92a8fa95d2b5873"
+    },
+    {
+      "range": [
+        31672,
+        31680
+      ],
+      "sha256": "015f5632595b47df572676b6fa9b6d764ba21bf9e279ee9a51d0efb786f7a34a"
+    }
+  ],
+  "checks": [
+    "Candidate source and artifact hashes match the receipt. The pinned body ranges and instruction bytes are retained as specified in touch-row-postpass-child-mutations-2382/001.",
+    "Independent isolated replay passes 4096 cases; output hash matches pinned replays.json.",
+    "The original complementary postpass wrappers/traversals execute while controlled 7984 mutates root byte36 and/or replaces context config/descriptor pointers. The trace confirms traversal rechecks the root count and the epilogue reloads final cfg/descriptor pointers; status OR and ordered writes match."
+  ],
+  "limitations": [
+    "Only the controlled mutations, exercised flags/type masks and fixture allocations are covered; this does not establish actual 7984 mutation behavior or aliases/physical meaning.",
+    "Private bounded evidence only; accepted:false."
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "review_id": "2615",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-packed-profile-field-callbacks-2614/001",
+  "candidate_receipt_sha256": "1d83776eb5d3e4609e65298f3f1a0c93030817fdf70741d9ed865c2aee7d171c",
+  "candidate_pseudocode_sha256": "b0c4cd29c5e51a00f56ff355759a84e181b021017c9c47195ab885d8ad85b346",
+  "candidate_replay_sha256": "560938b2b2b56f68dacc657e9e4a173e56105c6832c0d33e43075101a46fde03",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Source, receipt artifact, and all three body hashes match. The body spans are [0x42BD8C,0x42BD9C), [0x42BDA0,0x42BDBC), and [0x42BDBC,0x42BDE4); adjacent alignment/data at 0x42BD9C..0x42BDA0 and literal data at 0x42BDE4 are excluded.",
+    "A fresh isolated replay passes all 36 fixtures. Original Thumb disassembly confirms the first body inserts 6 in bits 25..29; the second compares state word 0 with the dispatch literal and on match inserts state+32 bits 7..16 into control bits 0..9; the third uses the same gate, inserts state+104 bits 2..7 into timing bits 0..5, then performs a fresh state+104 load and inserts source bits 0..1 into auxiliary bits 15..16.",
+    "The ordered write oracle matches actual execution for matched and mismatched gates, three source patterns, and zero/all-one targets. Return R0=0 and SP assertions pass; calls are not intercepted."
+  ],
+  "limitations": [
+    "Fixtures use separate stable RAM regions; aliasing, state mutation between fresh reads, and concurrent changes are not covered.",
+    "No physical meaning, callback installation ownership, or enclosing-call reachability is established. Private scoped evidence only; accepted:false."
+  ]
+}

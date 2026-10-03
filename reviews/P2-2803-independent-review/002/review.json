@@ -1,0 +1,26 @@
+{
+  "review_id": 2803,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-handler0-original-normal-chain-2802/002",
+  "candidate_receipt_sha256": "a3de139ecb95100d809d12c0f06334dae9d6619198bb600de9cda8b998bd7a49",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "candidate_artifact_hashes_verified": true,
+  "body_hashes_verified": {
+    "427e84-42805a": "1a259e009f8dfe9641a5c1062b41e1cc32eab8b34c6f919a19485e7897a37310"
+  },
+  "decoded_instructions": 160,
+  "body_bytes": 470,
+  "isolated_replay": {
+    "result": "PASS",
+    "fixtures": 64,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2803b-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Only control bit 0 clear and indices 0/1 with candidate endpoint/pattern/mask fixtures are covered.",
+    "Equal-index, wait/service, other input states, hardware effects, concurrency, and incoming ownership remain unresolved.",
+    "No canonical admission."
+  ],
+  "accepted": false
+}

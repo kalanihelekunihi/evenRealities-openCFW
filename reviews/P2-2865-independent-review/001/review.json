@@ -1,0 +1,27 @@
+{
+  "review_id": 2865,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-profile-init-partial-provider-failures-2864/001",
+  "candidate_receipt_sha256": "ba41686ff074346a6e42e94cfcc25719f82d0d06e590ee5c7f45e4bcc09b20a5",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-fixed-images-005/002/apollo_bootloader-flash.bin",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_range": [
+    "0x42ABBC",
+    "0x42AC4E"
+  ],
+  "body_sha256": "1f0bfec6f59efe752ea106db7f7b7144fcd9b0df306919a7e03a7f2d550bca2d",
+  "candidate_artifact_hashes_verified": true,
+  "isolated_replay": {
+    "result": "PASS",
+    "fixtures": 48,
+    "command": "/Users/kalani/.local/share/opencfw/venv/bin/python /tmp/replay2865.py",
+    "output": "isolated candidate output path changed to replay-2865-independent"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "The provider at 0x421548 is controlled and its prefix writes/statuses are fixture inputs; this review does not establish provider implementation or hardware behavior.",
+    "Fixtures cover gate failure and provider failures at stages 1, 2, and 3 with the specified statuses, partial/full prefix patterns, and PRIMASK values. They do not establish the complete successful initializer path or behavior under aliasing, concurrency, or arbitrary provider results.",
+    "No startup/caller ownership, whole-image completeness, or canonical admission is claimed."
+  ],
+  "accepted": false
+}

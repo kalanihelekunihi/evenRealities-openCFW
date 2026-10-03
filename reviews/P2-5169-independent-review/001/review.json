@@ -1,0 +1,15 @@
+{
+  "review_id": "5169",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-logger-service-composition-5168/001",
+  "candidate_receipt_sha256": "ecbdd2615af64b9ad56cc48e07890e04958edec9530290212b82c9b1b68dfb27",
+  "candidate_replay_sha256": "20180a2ac7da937ed105770dcc61939a0eae3fcfdce86a1e4adbd7ee863329b4",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Composition replay passes against the locked source and verifies the 11 packet pins, exact instruction-byte union, and no conflicting overlap: 2,194 bytes / 824 instructions with 85 BL sites. All 14 listed external targets remain explicit."
+  ],
+  "limitations": [
+    "Structural coverage only. This is not behavioral completeness, helper closure, global firmware coverage or admission; hardware semantics unresolved. Private evidence; accepted:false."
+  ]
+}

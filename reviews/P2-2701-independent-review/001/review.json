@@ -1,0 +1,25 @@
+{
+  "review_id": 2701,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-operation4-enable-config-leaves-2700/001",
+  "candidate_receipt_sha256": "f579d0ef0ad5a4f7c4cb57d6b2c1a5815102764989e1d964c9375d3e9af38c6b",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "candidate_artifact_hashes_verified": true,
+  "body_hashes_verified": {
+    "426c58-426c72": "92fca357b06260aa313efd81bb3c38360a6730eab3b08ae30034113f558e4036",
+    "426c72-426c7e": "2d973a6679b7557ee0db61ece3b5e87083256d7f60d653509001616459a23d5f",
+    "426c7e-426c8c": "f71be3e40ad49d191903a723ecf4416161e4f3be2aac50d1ee559eb19b73579e"
+  },
+  "isolated_replay": {
+    "result": "PASS",
+    "fixtures": 90,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2701-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "These are RAM-backed peripheral fixtures; physical register meaning and peripheral side effects are not established.",
+    "Concurrent register modification between load and store is not tested."
+  ],
+  "accepted": false
+}

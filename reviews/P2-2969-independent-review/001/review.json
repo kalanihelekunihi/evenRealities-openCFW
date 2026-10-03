@@ -1,0 +1,18 @@
+{
+  "review_id": "2969/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-control-operation-original-secondary-transition-2968/001",
+  "candidate_receipt_sha256": "1dcf6ff675eaef5bf43369a81400c8c4926cd1c8f2e151d664ee62fdb2681922",
+  "candidate_replay_sha256": "e4850056cf5f291e0e2e950ad2676b9daa8d85c30f754d377afd1444cf90f7c5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "source_flash_and_itcm_pins": "PASS",
+    "body_hashes": "PASS (caller, decoder, save helper, transition/trim chain, ITCM delay)",
+    "fixture_grid": "PASS (576 bounded cases)",
+    "original_call_sequence": "PASS (save\u2192decoder\u2192transition\u2192trim/delay chain; no child interception)",
+    "writes_delays_and_counts": "PASS (ordered hardware write ledger; two 20-cycle delays and 1,250 ITCM iterations per fixture)",
+    "register_frame": "PASS (R4\u2013R11, SP, PRIMASK asserted; R12 explicitly clobbered/allowed)",
+    "isolated_replay": "PASS (output hashes and fixture count)"
+  },
+  "summary": "All 576 original-instruction fixtures pass in isolated replay. The original caller, decoder, transition helper, trim path, and ITCM delay code execute without function interception; the second stored state is seeded one bit away so the secondary transition occurs. Ordered 13-write effects, two 20-unit delay calls, 1,250 ITCM iterations, zero return, PRIMASK restoration, R4\u2013R11 and SP match. R12 is explicitly allowed to clobber. This is a bounded stable-input path, not general transition coverage or hardware behavior."
+}

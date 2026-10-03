@@ -1,0 +1,20 @@
+{
+  "review_id": "2325",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-range-original-measurement-2322/001",
+  "candidate_receipt_sha256": "9ed27b47e97d0bb7a5a934eb6f176b6b18358af731f093c005cb101aff91d61b",
+  "candidate_pseudocode_sha256": "1e7ac8e1cf64fc65d31ec3908ec3c12230d66d57bfb4ac4971b22efda26cb149",
+  "candidate_replay_sha256": "70cfb89095c988043f8164c91f9f06fa2d7977b2fd8b73acb6629a5afb8fe8ed",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Receipt 9ed27b47e97d0bb7a5a934eb6f176b6b18358af731f093c005cb101aff91d61b pins the expected source, body [0x7064,0x71C6), and candidate artifacts; hashes recompute. An isolated run regenerated all 672 fixtures.",
+    "The full classifier and original eligibility/measurement chain execute without interception: 7DDE, 69C4, 6928, 9178, 6980, 5FA4 and A6C0. Code-derived normal/type-7 source formulas, strides, classification thresholds, per-row output writes and status composition agree with the replay records. The ready path supplies the documented synthetic status/sample reads; timeout yields measurement status 4 and zero maximum, which classifies as 6.",
+    "The test harness confirms exact outer child arguments/order, classifier write ledger, final loader override, and R4-R9/SP. All 672 candidate cases pass; decoded helper instruction writes run but this packet does not fully assert each helper's MMIO ledger."
+  ],
+  "limitations": [
+    "Hardware status and sample RAM are modeled; timing and physical peripheral behavior are not shown.",
+    "Mode transition, builders and final loader remain controlled; their effects are not established here.",
+    "Bounded fixture configurations and no alias/concurrency guarantee. Private evidence only; no canonical admission."
+  ]
+}

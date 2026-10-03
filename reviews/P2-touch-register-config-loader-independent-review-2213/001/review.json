@@ -1,0 +1,19 @@
+{
+  "review_id": "2213",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-register-config-loader-8fd0-2210/001",
+  "candidate_receipt_sha256": "56fcb6dff16e64cc949666e0052500f7e63a2a232cfe37d9ea4892fee05ce524",
+  "candidate_pseudocode_sha256": "3266e1fd18341c182fd55abb2306765188157be13c86a2d9f616792a8bc75cd3",
+  "candidate_replay_sha256": "b0ea8bbc86ab284705985a336b30b466bf7ba26d836574bfc4de62dc78f8729f",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Source and all receipt files match their declared hashes. Code [0x8FD0,0x915C) and pool [0x915C,0x9178) independently match the declared range hashes and boundaries; the disassembly agrees with Thumb/M-class decoding.",
+    "An isolated replay regenerated all 480 fixtures exactly. It checks zero request before version read, full-word version equality/mismatch statuses, every selector 0–7, three source/factory patterns, all 28 sparse copies, the 8-word block and three 7-word blocks in order, and selected widened factory-byte stores. Destination write ledgers, return values, R4 and SP match.",
+    "Instruction decoding supports the listed sparse destination offsets and block copy strides. Selector is source word 68 low 3 bits; 0/3/6 select factory-byte pairs at offsets 158/160, 149/151, and 140/142 from 0x0FFFF000 and store them as words at base+0xFF04/+0xFF0C. Unsupported selector returns 0x01260001 after prior copies; version mismatch returns 0x01260003; zero request returns 0x01260001 before reading version."
+  ],
+  "limitations": [
+    "Factory bytes are synthetic fixture values, not authenticated recovered contents. Source and destination are separate RAM allocations; aliasing, faults and concurrency are not covered.",
+    "No physical MMIO behavior or canonical admission is established."
+  ]
+}

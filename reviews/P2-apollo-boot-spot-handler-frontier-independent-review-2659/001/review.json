@@ -1,0 +1,25 @@
+{
+  "review_id": "2659",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-handler-frontier-2658/001",
+  "candidate_receipt_sha256": "91a4c18a162d3edc3d83c44f7694152f972929cdcff2c547687cee9f83a09542",
+  "candidate_frontier_sha256": "a2a0cb9eea81aea9933b73ee2d50cfb2c2462e1dd96008c6f74d87f1076da5c3",
+  "candidate_verify_sha256": "3250cfe400ec55a95725334cae58c89d694a603cbae0288a3f5fd6d713abbf16",
+  "flash_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "table_sha256": "dd708b6489e4e71ddf0587710a65befe64a2c703134e5db0438dc406cd1cb258",
+  "symbols_sha256": "3200520ecefa911d6eac45c9d631125af94c63dc60904b882c3e6b17ff76eebc",
+  "isolated_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2659-independent/frontier.json",
+  "isolated_entry_count": 24,
+  "isolated_historical_match_count": 0,
+  "checks": [
+    "Pinned boot flash, authenticated 27-entry table artifact, symbol TSV, and packet files match their hashes. The verifier joins the first 24 table entries against historical symbol ranges by exact start address and validates each matching stock hash before counting it.",
+    "Isolated verifier replay passed: 24 targets were examined, zero had a historical exact-start match, and no direct-call targets were emitted from those historical matches. This reproduces the candidate\u2019s conservative frontier; it does not mean the entries lack callers or are unreachable.",
+    "The generated rows retain semantic_recovery_complete=false and canonical_admission=false. Historical names/ranges remain navigation evidence, not current ownership."
+  ],
+  "limitations": [
+    "The static scan does not infer function extents for unmatched or matched table entries, establish entry reachability/ownership, or prove indirect-call closure. It is not a semantic recovery or completeness result.",
+    "The table\u2019s last three BX LR entries are separately bounded in packet 2656; that does not alter this packet\u2019s exact-start historical match count.",
+    "Private evidence only; accepted:false; no canonical admission."
+  ]
+}

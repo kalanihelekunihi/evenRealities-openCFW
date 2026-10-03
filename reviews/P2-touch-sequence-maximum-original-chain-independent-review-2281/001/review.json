@@ -1,0 +1,16 @@
+{
+  "review_id": "2281",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-sequence-maximum-original-chain-2278/001",
+  "candidate_receipt_sha256": "0ecb963aa97908cdff6062a5039a5ee800b8a8914a28d0336c904a3512d002ac",
+  "candidate_pseudocode_sha256": "4d98b31bc30f0972531d8418e85465c9e8274cbe8ea24415cbbcc9971162897c",
+  "candidate_replay_sha256": "daf2d9bed743fedb3f3b5d15e022521698b8780608e5657498b1b2e8a76b4859",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Isolated replay regenerated all 36 fixtures. Source, body [0x69C4,0x6A6C), literal span [0x6A6C,0x6A80), and artifact hashes match. All sequence and arithmetic children execute original instructions without interception. The base clock value 1,000,000 produces initial poll budget 350; the modeled-ready path reads status once, and the modeled timeout path reads 351 times. Exact setup scratch and poll arguments, maximum updates, sticky timeout result, and R4\u2013R11/SP assertions pass. The maximum helper rereads row count and continues traversing after timeout as decoded."
+  ],
+  "limitations": [
+    "The status/readiness behavior is supplied by RAM hooks, not hardware. The composition captures original child writes but does not fully assert those ledgers here; component packets carry that evidence. Only selected row counts, strides, patterns, and outcomes are tested. Physical timing, aliasing, and concurrent mutation remain unresolved; no canonical admission."
+  ]
+}

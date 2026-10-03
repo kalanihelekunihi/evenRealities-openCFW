@@ -1,0 +1,17 @@
+{
+  "review_id": "5019/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-selector-register-dispatch-composition-5018/001",
+  "candidate_receipt_sha256": "612996a390560adc2decee12652d54eae606aac99f1dea2bfcf7321c3e70ba7d",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "map_receipt_and_file_pins": "PASS (three map receipts and all their file hashes)",
+    "source_byte_and_instruction_check": "PASS (decoded instructions match locked image bytes)",
+    "tiling_and_overlap": "PASS (six extents tile 0x41D3E4..0x41D676 without gap or overlap)",
+    "summary_counts": "PASS (658 bytes, 267 instructions)",
+    "direct_BL_targets": "PASS (three edges to 0x41D1C0, 0x4222F0, 0x422364; all external to composed ranges)",
+    "isolated_replay": "PASS (composition reproduced from pinned maps)"
+  },
+  "summary": "The three pinned maps compose into six contiguous nonoverlapping extents spanning 658 bytes and 267 instructions. Independent decoding agrees with the locked image, and the three BL edges target the declared external helpers. This is structural composition only; helper behavior is not closed."
+}

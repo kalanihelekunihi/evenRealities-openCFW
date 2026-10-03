@@ -1,0 +1,18 @@
+{
+  "review_id": "5063/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-u64-division-block-metadata-primitives-map-5062/001",
+  "candidate_receipt_sha256": "6c046c4ec3ed8dbaa8b12ef25a4f7d1134d8d810b58bfb02270b004b3a8d03b5",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "pins": "PASS",
+    "instruction_decode": "PASS (two extents, 57 instructions, source bytes match)",
+    "literal_references": "PASS (10 pointer dereferences resolved to expected words)",
+    "isolation_replay": "PASS",
+    "block_flag_primitives": "PASS_SCOPED (fresh loads, AND/OR/AND-NOT order, return block pointer)",
+    "size_helpers": "PASS_SCOPED (wrapped subtract/add and add paths match decoded instructions)",
+    "scope": "PASS_SCOPED (A2C wrapper excluded; no allocator/hardware meaning inferred)"
+  },
+  "summary": "The two extents decode exactly from the locked image and all ten literal references resolve. The flag primitives preserve the decoded pointer-based mask dereferences and exact load/modify/store order; the size helpers implement the stated wrapping arithmetic. The block pointer remains in R0 on the flag operations as described. This does not infer allocator or hardware semantics."
+}

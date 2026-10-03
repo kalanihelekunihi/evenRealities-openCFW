@@ -1,0 +1,20 @@
+{
+  "review_id": "2249",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-descriptor-builder-original-chain-2246/001",
+  "candidate_receipt_sha256": "d091a27e8244cd5657b820cdca6b9bec17e3dcd289f6335ff9e3e553e239c4b4",
+  "candidate_pseudocode_sha256": "a4d7481ce2dc56496b7abb93758ed222f3e33ccc323f69a3f7f4d92d5db138db",
+  "candidate_replay_sha256": "ddaa108c6cffea01ce205542089bb2b8e095ddddcdd4e0ecf81358f6fd175d6e",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Source, body, and all artifact hashes match the receipt.",
+    "Isolated replay regenerates all 648 fixtures with original 5548/51BC/5528/5188 and no function interception. Constructor arguments, ordered writes, full destination, and R4-R11/SP are asserted.",
+    "Kind-dependent 44-byte versus 28-byte record stepping, mask/selector paths, and count shifts at 31/32/255 agree with the decoded code and fixture model."
+  ],
+  "limitations": [
+    "Constructor fields are zero-initialized; all map entries share one row; list counts are limited to zero or two.",
+    "Mutation during traversal, arbitrary constructor field combinations, aliasing, and physical register meaning are not established.",
+    "No canonical admission."
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "review_id": "2609",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-transition-mode3-register-sequence-2608/002",
+  "candidate_receipt_sha256": "d51d26e253dec2672c0b2742b9e0cbef40dcab7b7e90aecb7d991e51aa33878f",
+  "candidate_pseudocode_sha256": "6c265e5e9e99eebb9315aec89cc5d8084a05ae4e71536f64e4d5ab09fb42c21d",
+  "candidate_replay_sha256": "b2a366df40c6c63e6857e110e267d38449a1e2a0429e9e89328b50e5b1680ac2",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "itcm_source_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+  "pointer_map_sha256": "14a73cd4b9cafa3cc483e74bd804e76dacdfc9000f09506b7dd2df9425269229",
+  "checks": [
+    "Candidate artifact, flash source, ITCM source, static pointer-map, and both body hashes match. The input static map's file hash is exactly the receipt's pointer_map_sha256.",
+    "An isolated replay copy with a fresh output path passes all 192 fixtures, 96 per entry. The matrix crosses boost/final flags, input low-byte choices, low-10-bit values at saturation boundaries, and zero/all-one register patterns.",
+    "The independent ordered-field oracle agrees with original enter/exit execution for all hooked writes. The original delay routine and ITCM code run without interception; delay arguments are [5,10] and total loop iterations are 450 (145 plus 305 at the fixed clock fixture). Child/frame assertions cover R4-R11, SP, result and return.",
+    "The checked behaviors include low-10 saturation/restoration, optional low-7 saturation/subtraction, gate bit order, paired and input-selected fields, saved-mode restoration, auxiliary bit handling, and final timing selection."
+  ],
+  "limitations": [
+    "Mode-3 paths only; other-mode entry/exit paths are outside these fixtures and have the separate static description in 2604.",
+    "Clock/MMIO are fixed fixture values, including clock zero. Dynamic flag/MMIO changes, physical timing, concurrency, and ownership are unresolved.",
+    "Private scoped evidence only; accepted:false, no canonical admission."
+  ]
+}

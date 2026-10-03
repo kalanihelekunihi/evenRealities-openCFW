@@ -1,0 +1,25 @@
+{
+  "review_id": "2393",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-sequence-byte-cache-5e64-2390/001",
+  "candidate_receipt_sha256": "d7055743e7b77713b3c88c9528c9b8a09fba466484701f3b12415b29dc13adcb",
+  "candidate_pseudocode_sha256": "ed99397033517b2072e50809374b38610a2d40f7a744a5de3a25762e5d35837d",
+  "candidate_replay_sha256": "5d82688a95df06c9a43c75384a8c6711870b952820ec7293d2fa40034e2b91a2",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "isolated_replay_output_sha256": "ce3a8fd57b793b986576c51b2b810b20eaadd87e426635adcf2597fba6f33f1b",
+  "fixture_count": 648,
+  "pinned_body_ranges": [
+    24164,
+    24262
+  ],
+  "checks": [
+    "Candidate source and artifact hashes match the receipt. The pinned body ranges and instruction bytes are retained as specified in touch-row-sequence-byte-cache-5e64-2390/001.",
+    "Independent isolated replay passes 648 cases; output hash matches pinned replays.json.",
+    "The 98-byte 5E64 body and FFE0FF00 literal match the pinned source; adjacent seam bytes are excluded. Original fixtures confirm row-kind-dependent base/stride selection, fresh count and three ordered mask/OR stores."
+  ],
+  "limitations": [
+    "Stable separate buffers and tested row fields only; aliases, mutation and physical semantics remain open.",
+    "Private bounded evidence only; accepted:false."
+  ]
+}

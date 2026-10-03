@@ -1,0 +1,18 @@
+{
+  "review_id": "5097",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-recovery-5096/001",
+  "task_contract_sha256": "fc50cbfc7a9dad5ba9fe9d4edf6ce288feea37f4c26578bdf1713a5fb6c4aa29",
+  "artifact_manifest_sha256": "3295ad7388a683efb8ae3dfb359539c1ebd9242658453bec41e8fe8d22da9447",
+  "candidate_verify_sha256": "1f988055b92ce6d58954d25fbe61382319664e438f2b9b631fe328d16ec7a22e",
+  "body_sha256": "8dec1bf46029af3ad700a7622a3df93829fa87e5070a4cb894bffd84df83fa3b",
+  "conditional_image_sha256": "49c9aed0126493220a3e48827c267d5e94f64d51d9ede0ccc3e84b8946744584",
+  "checks": [
+    "Independent scoped verifier passes: current parseable extents, exact 88-byte body and 29-instruction tiling, decoder replay, one direct caller, and helper bytes.",
+    "The five conditional selector tests invoke the pinned bit helper at base+8 with bit indices 0,4,8,12,16; bits 0x10/0x20 do not invoke a helper in this body. Caller at 0x10205BF0 supplies stack-local mask and base pointer; bounded following instructions reload/test the mask rather than consume returned R0."
+  ],
+  "limitations": [
+    "XIP mapping is conditional; device/interrupt semantics, physical memory attributes, fault/order/runtime behavior and indirect callers remain unresolved. Inherited dynamic owner-check failures for 4382/4536 remain failures; helper packet 4606 remains partial. No full dependency PASS. accepted:false."
+  ]
+}

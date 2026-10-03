@@ -1,0 +1,28 @@
+{
+  "review_id": "2691",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-runtime-timer-start-rearm-2690/001",
+  "candidate_receipt_sha256": "b5128c9a85e99f7550611d78d8704ad7198e2fdc1aca6d8f1cda407dca0cbae9",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_hashes": {
+    "41cc48-41cc92": "aef74a1657eee6d89e50c7452789a0aff1c7e25bb9dd81f3a1db74ed173d5e49",
+    "41cc92-41ccd6": "bcbc39a968d90e534a70b68e4dcda7a2bf30bcd02725a4a4ecf539b8d50cfbc6"
+  },
+  "fixture_sha256": "de2ceb10a2d3a3749e006a890f1b61342fb42414b37fec6e64d7684bb6b02d1a",
+  "replay_sha256": "7e4907ce671957aa2e6775cd4513977dc80327101e85ff7153d2dfd27f0170e1",
+  "listing_sha256": "6088d2154bbc3e277028fdb78f0135c46e0f05f8b86c4314c49cf6f77033d25e",
+  "isolated_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2691-independent/replays.json",
+  "fixture_count": 120,
+  "isolated_fixture_sha256": "de2ceb10a2d3a3749e006a890f1b61342fb42414b37fec6e64d7684bb6b02d1a",
+  "checks": [
+    "Candidate receipt, flash source, both body hashes, instruction listing, replay, and pseudocode pins match. All 120 isolated fixtures pass; isolated replay output is byte-identical to the candidate.",
+    "Original 0x41CC48 start leaf calls controlled 0x4222F0(4,49), writes the 32-bit wrapped input\u00d76 product, freshly sets enable bit15 and control bit1, clears bit1, writes 0x40000 to the IRQ-enable register, and freshly sets control bit0. It returns the control-register pointer.",
+    "Original 0x41CC92 rearm leaf freshly clears control bit0, sets then clears bit1, writes the wrapped product and timer status/IRQ-pending constants, freshly sets bit0, and returns the final control word. Ordered read/modify/write results, return values, R4/SP/PRIMASK are asserted."
+  ],
+  "limitations": [
+    "Only 0x4222F0 is controlled; its behavior remains unresolved.",
+    "Register values and IRQ/timer behavior are emulator fixtures. The replay does not establish physical timer or interrupt behavior, nor privilege or concurrency effects.",
+    "Private evidence only; accepted:false; no canonical admission."
+  ]
+}

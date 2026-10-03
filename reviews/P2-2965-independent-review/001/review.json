@@ -1,0 +1,17 @@
+{
+  "review_id": "2965/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-control-operation-equal-state-original-2964/001",
+  "candidate_receipt_sha256": "bef39ee3a3ddca4114d54ef8b3d395694f62357d02de582cd0e579d3a9b513cd",
+  "candidate_replay_sha256": "778549ca510a1a14e89fb4b30abbd928d17b4a81f5b6eacc2db08f3668cf08a4",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "source_and_body_pins": "PASS (caller, decoder, interrupt-save)",
+    "fixture_product": "PASS (640 = 2 operation aliases \u00d7 4 types \u00d7 5 equal bytes \u00d7 4 flags \u00d7 2 clocks \u00d7 2 masks)",
+    "equal-state_branch": "PASS (all requested state bytes equal current byte; update helper not called)",
+    "decoder_publication": "PASS (original decoder called; exact two global writes/status0)",
+    "frame": "PASS (R4\u2013R12/SP/PRIMASK asserted)",
+    "isolated_replay": "PASS (640 cases, receipt hashes match)"
+  },
+  "summary": "The 640 equal-state cases pass in isolated original-instruction replay. Two operation aliases, four categories, five current/requested byte values, four flag values, two clock inputs, and two PRIMASK states are covered. Since current and requested state bytes are equal, the state-transition helper is not called, but the original decoder and two state-publication writes still execute. Status zero, PRIMASK restoration, R4\u2013R12 and SP are asserted. Unequal-state transitions, other snapshots, aliasing/volatile changes and hardware effects are untested."
+}

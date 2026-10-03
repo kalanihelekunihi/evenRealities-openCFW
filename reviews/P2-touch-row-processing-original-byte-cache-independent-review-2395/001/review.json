@@ -1,0 +1,22 @@
+{
+  "review_id": "2395",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-processing-original-byte-cache-2392/001",
+  "candidate_receipt_sha256": "1b12699c53fc1a0e080a0094913cc47538f1b2f91e859dbf6886f8a6db93e535",
+  "candidate_pseudocode_sha256": "35ea16db9996fe1eb010c4fb9a4a05a812ef36a7c0c0e214af0cc3006b433ef6",
+  "candidate_replay_sha256": "a692af2d0ff631801a4c1e03efaf8f8ac94f0d1ee9ec8d0956c0093e352175e8",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "isolated_replay_output_sha256": "59389d53921594b05f24f493f64fc48d358e545022ce78376d93ef8c77730fbb",
+  "fixture_count": 4096,
+  "pinned_body_ranges": null,
+  "checks": [
+    "Candidate source and artifact hashes match the receipt. The pinned body ranges and instruction bytes are retained as specified in touch-row-processing-original-byte-cache-2392/001.",
+    "Independent isolated replay passes 4096 cases; output hash matches pinned replays.json.",
+    "Original 7984/predicate/division and 5E64 execute. Processing parameter pointer (row word0) is kept distinct from cache parameter base (context word16); tested writes interleave correctly for normal/type7 layouts and repeated visits."
+  ],
+  "limitations": [
+    "5ECC and mode/deeper processing remain controlled; stable fields and distinct fixture regions only.",
+    "Private bounded evidence only; accepted:false."
+  ]
+}

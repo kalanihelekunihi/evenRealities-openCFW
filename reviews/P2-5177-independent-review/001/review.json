@@ -1,0 +1,15 @@
+{
+  "review_id": "5177",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-u64-division-logger-format-adapters-map-5176/001",
+  "candidate_receipt_sha256": "242d769ed70f45235feeaff8615a6466b3498d28c697cf471ebfdeb5748cee91",
+  "candidate_replay_sha256": "dbf6843047622a11bf136482df41dd3ce1ccc0d54da18256be468091658c00e1",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Source-pinned isolated replay and literal checks pass for both format adapters. The 40-byte and 24-byte frame layouts, descriptor/vararg stack slots, PC-relative callback constants, post-callback zero stores, and nonnegative-result replacement with the local count match the decoded instruction order."
+  ],
+  "limitations": [
+    "Formatter child owns descriptor/cursor semantics; no formatting result semantics, hardware behavior, or broader completeness claim. Private partial; accepted:false."
+  ]
+}

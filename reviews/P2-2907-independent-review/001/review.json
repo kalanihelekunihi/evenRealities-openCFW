@@ -1,0 +1,26 @@
+{
+  "review_id": "2907",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-trim-commit-original-runtime-chain-2906/002",
+  "candidate_receipt_sha256": "97f459e0d22805f65cfdd9e1ccd653d126c3d4ac0b7d44021fbadc53ccda8da2",
+  "candidate_replay_sha256": "596df44eacf567c1f414c2af362863b6a7a97b5072f5cf358c7267bcd4063d73",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_hashes": {
+    "42ae9c-42aeec": "62add64b9d5850045f7f332907406c01dc5f2ac1fbe500326b99a62d84a02904",
+    "42ae6c-42ae9c": "fbc7ca52270345ca6b251d1c8c805a06e33af456500f9b17e05cfa7743af79f8",
+    "42ae24-42ae6c": "73da1f0b69f23d583009d5dfbc2f46007ee0f8b9f56a5c8a3b4fccd58136f538",
+    "41b8ec-41b8f8": "ffa4fbced304ddcec51600dd4362845368791da5d726d03d9e23fb57e743f7cc",
+    "41ccd6-41cd1a": "53ecf1cc50f77949e880de53ecfed6a2d18c3ea803c457a13e77d1b2ac548a3a",
+    "422364-4223d8": "6a131868a276083764d4714178857124ccb4209a5f3e7552d874aba7f7c1a54e",
+    "421e4a-421e8c": "f4f21abad8199cfea2524c7335d809b7f624100c1e34b693c08025ae1fb40a2a",
+    "4215dc-4215fe": "8dc0a88874cc74f9148e7ae8b6e70f50b7cd1f732db5b74982a8abcccb1bd6f5"
+  },
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "source_matches_inventory": true,
+    "body_hashes_match_source": true,
+    "artifact_hashes_match_receipt": true,
+    "isolated_replay": "PASS"
+  },
+  "summary": "The authenticated image hash matches inventory. All eight declared body intervals match their source-byte hashes, and candidate artifact hashes match the receipt. Isolated replay into a fresh destination passed all 48 fixtures. The original commit routine, PRIMASK save helper, restore/profile helpers, runtime/indexed dispatch path, and inactive-state operation execute without function interception; the test state remains inactive/zeroed. Assertions cover call sequence/masks, flag and register writes under the script\u2019s watchpoints, final control low10=493, restore target, return mask, PRIMASK, SP and R7. The write observation is intentionally limited to the watched flag/register addresses; it is not a full write ledger. These stable fixtures do not establish active-state behavior, dynamic reads/aliasing, all flags/register clobbers, physical MMIO, or caller ownership. accepted:false; no admission."
+}

@@ -1,0 +1,21 @@
+{
+  "review_id": "2355",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-activation-wrapper-original-local-chain-2352/001",
+  "candidate_receipt_sha256": "79baa1db6ef916f944154347667e9908572ab24ad32f7f9ef0f42ea40b773140",
+  "candidate_pseudocode_sha256": "6d998c1e6b2030af40306f32298fc6e5406cee7282614332c79137e67586e779",
+  "candidate_replay_sha256": "10092d9226981243d43371bf5db12729eb99c24d24ca232ea97a8a47f031a065",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Receipt 79baa1db6ef916f944154347667e9908572ab24ad32f7f9ef0f42ea40b773140 pins source and wrapper body [0x4ABE,0x4AF2); isolated replay regenerates all 1536 fixtures and all candidate artifact hashes match.",
+    "Original wrapper order is validator 7D92, row reset 58F8 (including original 5868/A9D4), controlled 71C8, then conditional original 7E04. A nonzero validator result returns immediately. Otherwise 58F8 runs before coordinator; coordinator status is retained in R4 and remains the return even if 7E04 clears descriptor fields and sets byte7. A preexisting nonzero latch skips 7E04. Descending row call order 2,1,0, row effects, masked descriptor status, call ledger, sentinel, and R4-R6/SP checks pass.",
+    "The 52-byte wrapper body fully decodes. The receipt's auxiliary literal range [0x591C,0x5920) is separate from the wrapper body and belongs to the 58F8 child: its LDR at 0x5900 resolves to 0x591C, value 0xFFFFFBFF. It is not a wrapper-local literal pool.",
+    "Distinct supplied allocations show cfg.word20 remains 0x6781 during these cases, and finalizer field writes do not overlap it. This is an observed bounded trace, not a no-alias/persistence guarantee."
+  ],
+  "limitations": [
+    "Coordinator 71C8 is the sole controlled function; its broader effects are not established.",
+    "Fixture pointers are distinct and stable; aliasing, asynchronous mutation and untested inputs remain open. R0 from row reset is incidental and not a contract.",
+    "No callback-target closure, physical behavior, corpus completeness, or canonical admission is claimed."
+  ]
+}

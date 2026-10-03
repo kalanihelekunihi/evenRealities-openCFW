@@ -1,0 +1,20 @@
+{
+  "review_id": "2263",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-config-initializer-original-chain-2260/001",
+  "candidate_receipt_sha256": "56418eff92a726564335b6d7baceaab055ad61e1cb1758cbf82b0fa83932a1c6",
+  "candidate_pseudocode_sha256": "7b042801a1ba255b70026760ee7f2f309e135860c3f503eb18096e4f0fcd38a9",
+  "candidate_replay_sha256": "2abaeb62efe66d44140c020064b9c5e523ac88d01e3010c2565c377f7bdef015",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Source, body, literal pool, and artifact hashes match the receipt.",
+    "Isolated replay regenerates all 27 cases with original 5378/A9D4/52BC/50E4/AA2C and no interception. Full ordered destination/configuration writes, output buffers, child order/context arguments, zero status, and R4-R11/SP pass.",
+    "Combined defaults, packed fields, table overlays, slot writes, and stack fill align with the independently reviewed component packets."
+  ],
+  "limitations": [
+    "Composition uses uniform byte patterns and only independently varies halfwords 66/68; not every source-field or selector combination is exercised here.",
+    "Aliasing, pointer mutation, physical meaning, and whole-firmware completeness remain unresolved.",
+    "No canonical admission."
+  ]
+}

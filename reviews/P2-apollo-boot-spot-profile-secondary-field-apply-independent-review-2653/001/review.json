@@ -1,0 +1,24 @@
+{
+  "review_id": "2653",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-profile-secondary-field-apply-2652/001",
+  "candidate_receipt_sha256": "7095111a4a8ab46fac6c4b7760dd1caa848b164234eefe0058adf073a37097e0",
+  "candidate_pseudocode_sha256": "905e61a4502e5d61af25aa1ee2edd02d999787fb803637222008d382bcc6b33f",
+  "candidate_replay_sha256": "5de381ee9289a48bba622f0c7f3e7fd1165403b19915c16a4417d4a7bc206a2c",
+  "fixture_sha256": "c7d3a6496055847c359a997e3dcf9bdb478099d86d1a271f0c220a29a1764018",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_sha256": "8964efd235151acf974a0248acac460c57de14ed8effbb879293a54d97f6dfd0",
+  "isolated_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2653-independent/replays.json",
+  "isolated_replay_count": 90,
+  "checks": [
+    "Candidate, source, body, pseudocode, replay, and fixture hashes match. Literal-derived pointers match the source image.",
+    "Reran the candidate replay in a fresh isolated directory; all 90 original-code fixtures pass without interception.",
+    "The R1==8 override selects category 7; otherwise full R0 selects the category, with the default path used for other values. Field-source offsets and five-bit extracts match each original branch.",
+    "Two fresh read-modify-write operations update target0 bits25..29 and target1 bits8..12, preserving other bits. R0 returns target1 address; R1, R2, R3, and SP match the stated values."
+  ],
+  "limitations": [
+    "Fixtures use stable, separately allocated RAM/register patterns; aliasing, mutation between byte/word rereads, concurrent changes, ownership, and physical register meaning are unresolved.",
+    "Private scoped evidence only; accepted:false; no canonical admission."
+  ]
+}

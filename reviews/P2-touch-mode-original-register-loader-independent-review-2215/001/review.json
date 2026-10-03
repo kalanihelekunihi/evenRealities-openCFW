@@ -1,0 +1,19 @@
+{
+  "review_id": "2215",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-mode-original-register-loader-2212/002",
+  "candidate_receipt_sha256": "d26a2e45afde5093369c33cfe2bcf3d787e27449cd78a025e099568a31cd847b",
+  "candidate_pseudocode_sha256": "8863416409325f09f2feff5974b357e1434a39d53f0fc108914c3932816b5c16",
+  "candidate_replay_sha256": "2cba2ecb544e85e01db7789f3de2e3e2ae287dff41701017cf9150099a8d941b",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Source and all receipt files/ranges match their hashes: dispatcher [0x6AC0,0x6BCA), literal pool [0x6BCC,0x6BD4), and table [0xB4FC,0xB51C). The disassembly matches Thumb/M-class decoding.",
+    "An isolated replay regenerated all 20 fixtures exactly. Original 6AC0, both port lists, paired wrapper, port leaves, interrupt helpers and 8FD0 execute without helper interception. In mode-2 transitions, the loader's 59-write ledger is independently consistent with 28 sparse zero-word stores, eight zero-word stores at base+1024, three groups of seven zero-word stores at the stated 64-byte stride, and factory words 0x55/0xAA at base+0xFF04/+0xFF0C. Both successful prior-mode cases match this sequence. Version mismatch yields no loader copies and propagates mode-dispatch return 64; earlier port effects remain.",
+    "The run also verifies four original port calls, final port register words, saved mode/flag, mode-2 register writes, helper arguments and R4/R8/SP/PRIMASK preservation. Mode 3 transitions bypass the loader as decoded."
+  ],
+  "limitations": [
+    "Factory bytes 0x55/0xAA and the register block are modeled. Arbitrary configuration contents, physical MMIO effects, aliasing/concurrency and external factory-byte authentication are not established.",
+    "No canonical admission."
+  ]
+}

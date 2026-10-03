@@ -1,0 +1,27 @@
+{
+  "review_id": 2801,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-handler-gap-accounting-2800/001",
+  "candidate_receipt_sha256": "85dcf65cbc549eb4acfc1108aefd91a8a4b48a7d10eff6ad1a14567ed21680b7",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "audit_receipt_sha256": "269d3fb19205cab9bd2d8d10ba51ec790e5152f55d23dc04a48d49c667624dac",
+  "candidate_artifact_hashes_verified": true,
+  "segment_source_hashes_verified": true,
+  "segment_count": 48,
+  "segment_bytes": 634,
+  "audit_gap_count": 11,
+  "audit_gap_bytes": 634,
+  "audit_gaps_tiled_exactly": true,
+  "isolated_replay": {
+    "result": "PASS",
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2801b-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Evidence-location partition only: code vs candidate padding/literal classifications do not establish global code/data ownership or reachability.",
+    "Literal references include mapped direct PC-relative users only; no global reference or indirect-target absence claim.",
+    "No whole-image pseudocode coverage or canonical admission claim."
+  ],
+  "accepted": false
+}

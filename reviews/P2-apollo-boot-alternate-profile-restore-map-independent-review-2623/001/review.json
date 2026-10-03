@@ -1,0 +1,21 @@
+{
+  "review_id": "2623",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-alternate-profile-restore-map-2622/001",
+  "candidate_receipt_sha256": "1435cd972d0341ff227778a985a4ad2be32ad1cce89a355f8362efc0bb1651a8",
+  "candidate_pseudocode_sha256": "7ed84e2cabe1931e25535f8b9e491d66b28a8bd65ca6b6c3eb35662714c8d379",
+  "candidate_replay_sha256": "03c573faf1aac68d55ec753151d49c8cdb34f80c54aaf265e4f1b2e867c15316",
+  "candidate_instruction_listing_sha256": "9bde82e8926bcd9d3b20e6d616c83e8d34aadccd994667a5afbbdf9fc4162686",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_sha256": "9e68669010b7015aebdcdbccca4c9905d7d494f2ec1999d3160ce886302bdf6a",
+  "checks": [
+    "Candidate receipt, pseudocode, replay, instruction rows, and authenticated source image hashes match. All 140 instruction rows are contiguous over [0x42F4B2, 0x42F5F0), and each recorded instruction byte sequence and all 19 literal word values match the original image.",
+    "Independent arm-none-eabi-objdump decoding confirms the control flow, six ordered BFI field insertions, cached control-bit branch, conditional call sequences, final zero return, and restored callee-saved frame. PC-relative literal references resolve to aligned source words.",
+    "The pseudocode matches the bounded static body. It distinguishes the first cached control-bit test from later fresh read-modify-writes and states that 41C838 behavior, saved-byte provenance, table contents, and complete dynamic behavior are outside scope."
+  ],
+  "limitations": [
+    "This is static decode and source-pin review only; no dynamic execution or 41C838 child semantics are claimed. Delay composition and external register behavior are not inferred from this body.",
+    "Private scoped evidence; accepted:false; no canonical admission."
+  ]
+}

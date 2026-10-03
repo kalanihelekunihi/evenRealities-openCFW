@@ -1,0 +1,20 @@
+{
+  "review_id": "2363",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-cleanup-dispatch-original-empty-rows-2360/001",
+  "candidate_receipt_sha256": "9c68899ff5fe9fe0feeddd28652d78c0b7044300a8006814ee6ccfa27ef27194",
+  "candidate_pseudocode_sha256": "5193cc5fe729e1014b6793737bda6d6d9059b59529f48d4648fe20a6f1ed61db",
+  "candidate_replay_sha256": "806e669cf435db07d7156b7d73d337e442002ad1dde14351294c94cf5920e69f",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Receipt 9c68899ff5fe9fe0feeddd28652d78c0b7044300a8006814ee6ccfa27ef27194 pins the expected source and body [0x4F54,0x4F6E); artifact hashes match. Independent replay passes all 72 fixtures.",
+    "The complete 26-byte dispatcher decodes as a descending loop invoking original 4E6C with indices 2,1,0 and ctx, retaining the final incidental R0. Original 4E6C executes for every fixture. Zero-initialized row count halfwords and rotated types0..8 take type7's skip or other types' zero-count paths; no deeper processing helper is entered.",
+    "The replay's full monitored ctx-through-config/row region has no writes and matches its initial snapshot. The callback sentinel remains as part of that retained memory. R4-R11/SP and call order checks pass."
+  ],
+  "limitations": [
+    "Only the empty-row branch is covered; nonempty processing remains unresolved.",
+    "Pointers and buffers are distinct supplied RAM. Invalid pointers, aliasing, mutation/concurrency and physical effects are not established.",
+    "R0 is the final child's incidental return, not an assigned status contract. Private evidence only; accepted:false."
+  ]
+}

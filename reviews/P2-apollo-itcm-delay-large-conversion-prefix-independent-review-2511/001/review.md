@@ -1,0 +1,9 @@
+# Independent review 2511
+
+**Result:** PASS_SCOPED.
+
+Reviewed `g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-itcm-delay-large-conversion-prefix-2510/001`. Receipt SHA-256 is `739b5514f24be737b6a38db0261e84831ccf345aff8080e8b50f007562cc8c54`; declared artifact hashes match (`replays.json` `e136bfce7fb74c985287465bd5b9ce150b3cc77bf999310b3596fe38d784190c`, `replay.py` `b1eb0fbe50037091b2a780c8347513036b0df92ca3affb1f85bebfc8f7b17376`, `pseudocode.md` `7e8befa9770c7d1054d5c6b301cd0b3fb6be28a3c1c45c8ef068b1dfd6959bd3`). Inventory and both Apollo flash source hashes match the preceding independently reviewed wrapper packet. The body and literal ranges in this candidate also match the authenticated main and bootloader bytes and their recorded digests.
+
+I reran the verifier from a copy directed to a fresh replay directory. All 40 prefix fixtures pass: both images, five large input values (`0x07FFFFE0`, `0x07FFFFFF`, `0x08000000`, `0x7FFFFFFF`, `0xFFFFFFFF`), and all four clock fields. The original VFP instructions reach the explicit stop at entry+0x44 before the comparison branch can enter the ITCM delay loop. The observed R0 conversion, R1 overhead, PC stop, active 8-byte stack frame, and R4–R11 sentinels match the packet’s fixture-state arithmetic. No ITCM loop calls are observed in these bounded prefixes, and FPSCR is recorded.
+
+**Limits:** This evidence supports the tested conversions under the configured fixture FPU state only. It does not establish a general floating-point rounding, saturation, overflow, or exception contract. Because execution stops before the branch and loop, it makes no loop-completion, function-return, or restored-SP claim. The fixture enables the FPU; startup FPU state, physical delay calibration, ITCM installation, and caller ownership remain unresolved. Private evidence only; accepted:false and no canonical admission.

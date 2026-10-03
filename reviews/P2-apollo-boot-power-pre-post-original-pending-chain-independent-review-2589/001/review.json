@@ -1,0 +1,20 @@
+{
+  "review_id": "2589",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-power-pre-post-original-pending-chain-2588/001",
+  "candidate_receipt_sha256": "395a4a4efa175a70c178822da1ad922cf142f8c72e0e7b1a19b1285186aec4c3",
+  "candidate_pseudocode_sha256": "5dc4e3b5c32112e0e8380e6181d5660de2eff875d8883cc0b2e543cc87de1e5a",
+  "candidate_replay_sha256": "55ab0cf70910e688d260ccf459aa3f291314071c26e3b0f3abbd1c15951d0853",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "The candidate receipt, pseudocode, replay, replay rows, and source image hashes match their recorded pins. Runtime mapping base 0x410000 maps the reported body slices to their original source bytes; both [0x42D5C2,0x42D5CC) and [0x42D5CC,0x42D5F8) digests match the receipt.",
+    "I replayed a copy of replay.py with only its output path redirected to a fresh isolated directory. All 72 cases pass. The Cartesian set covers pre/post entry, pending 0/1/255, index 0/28/255, PRIMASK 0/1, and helper base 0/0xABCDEF. The 24 nonzero-pending post cases enter original 0x42CDF8; the remaining cases do not.",
+    "The pre path writes flag=1 and returns 0. The post path clears a nonzero pending byte before clearing the flag, and restores the incoming PRIMASK; child invocation observes PRIMASK=1. The modeled child-field writes match the fixture arithmetic and destination word, while the post callback returns 0 regardless of the child's incidental R0. The replay asserts write order/PRIMASK, child index argument, final memory values, R1/R2 epilogue, R4-R11, SP and PC."
+  ],
+  "limitations": [
+    "The child fixture holds gate=1, mode=3 and boost=15, with fixed descriptor/destination setup; other child guard and arithmetic paths are not integrated in this packet.",
+    "Memory is stable fixture RAM. Concurrent mutation, physical peripheral meaning, runtime installation/ownership and broader callback reachability are not established.",
+    "This is private scoped evidence only; accepted:false."
+  ]
+}

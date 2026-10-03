@@ -1,0 +1,19 @@
+{
+  "review_id": "2247",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-descriptor-constructor-explicit-fields-2244/001",
+  "candidate_receipt_sha256": "9d6e80901a7e3483cf4345cfa84138204f1485112b81fb0411768f9fec8c7f5b",
+  "candidate_pseudocode_sha256": "86a42b6ce63660347bf82d272f845d590c18891f3ca17994773c61689b32b039",
+  "candidate_replay_sha256": "40c1eb497586ab031b214580650851627ee9e8c68614241f43ef37857e1999ec",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Source, body, literal, and artifact hashes match. The corrected first-word expression agrees with the decoded byte/nibble placements and parameter halfword mask.",
+    "Isolated replay regenerates all 144 fixtures, retaining distinct parameter byte 32/33 inputs and the full destination, write-order, status, child-argument, and register assertions.",
+    "The correction closes the explicit packed-word pseudocode gap identified in review 2241."
+  ],
+  "limitations": [
+    "Child 0x51BC remains controlled; fixture dimensions and source patterns are bounded as recorded in review 2241.",
+    "No physical field meaning or canonical admission is established."
+  ]
+}

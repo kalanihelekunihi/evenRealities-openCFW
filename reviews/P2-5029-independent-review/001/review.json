@@ -1,0 +1,16 @@
+{
+  "review_id": "5029/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-startup-callback-table-evidence-5028/001",
+  "candidate_receipt_sha256": "f9720c4adfe5a74b883bdc278153387ad41fb7b1288dbccaf1c5ccf0cf5f2aa2",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "source_and_dependency_pins": "PASS",
+    "raw_table_extraction": "PASS (32 bytes, four 8-byte records exactly match locked image and candidate records)",
+    "literal_reference_consistency": "PASS (start/end/destination/comparator resolve through pinned consumer references)",
+    "isolated_replay": "PASS (fresh replay regenerated same raw records)",
+    "scope": "PASS_SCOPED (record keys and callback entries are raw data; no callback behavior or global closure inferred)"
+  },
+  "summary": "The evidence packet\u2019s four 8-byte records reproduce exactly from the locked flash image at the pinned table extent. The start/end, destination, and comparator values match their pinned literal consumers; candidate file hashes and dependencies also verify. An isolated replay regenerated the records. This establishes the table bytes and references only. Callback behavior and semantic meanings of the keys remain unresolved, and no firmware-wide closure or admission is claimed."
+}

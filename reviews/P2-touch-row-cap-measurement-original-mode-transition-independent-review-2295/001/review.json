@@ -1,0 +1,16 @@
+{
+  "review_id": "2295",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-cap-measurement-original-mode-transition-2292/001",
+  "candidate_receipt_sha256": "16e5da63f06ccf160bc881f5e07b58ebc84a54ff748d8a6db9d426ce762edac4",
+  "candidate_pseudocode_sha256": "554e32c05fc0c3047ba1649c4f40ad1e6392464bfdff05a0922a489a2ad99326",
+  "candidate_replay_sha256": "bfa83b2e7b8746fe9d16399f4167f030bbc51e6bfb8410f52a4ab2636ed98faa",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Isolated replay regenerated all 648 fixtures. Source, body [0x7BC0,0x7CEE), literal span [0x7CF0,0x7CF8), and candidate file hashes match. The composition executes the original 6AC0 path from configuration byte 85 = 0, through 6A80/685C/6608/A324/4480 and mode-5 storage; setup status-bit polling remains clear for the 315-delay timeout, which the caller ignores. The parent\u2019s base control-word clear to 0x7FFCFFFF is asserted, along with subsequent sequence/budget/poll arguments, result/output/status, high registers and SP. All fixture replays pass."
+  ],
+  "limitations": [
+    "Only the old-mode-zero transition is composed. Setup status and measurement status are modeled, and child register ledgers are not fully asserted by this parent composition. Other old modes, physical timing/MMIO, aliasing and concurrent changes remain unproven; no canonical admission."
+  ]
+}

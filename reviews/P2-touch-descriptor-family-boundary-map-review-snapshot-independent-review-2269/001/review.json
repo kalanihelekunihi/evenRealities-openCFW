@@ -1,0 +1,16 @@
+{
+  "review_id": "2269",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-descriptor-family-boundary-map-review-snapshot-2266/001",
+  "candidate_receipt_sha256": "eb76f36a85dc1b2835352b007f7965ae85d1103612943b2cb78583faebc2f32b",
+  "candidate_pseudocode_sha256": null,
+  "candidate_replay_sha256": "1e21905ecb28ecaf6581eb902b88ddc274c0d37e4f0ddf8c8bbaa2bc0d0f52e8",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "The isolated verifier passes with 8 body rows, 15 unfiltered incoming branch candidates, and the exact 1458 code / 28 literal / 438 unknown partition. The source and all artifact pins match. Each row has contiguous Thumb M-class decoding and direct BL targets match the candidate list. All eight fixed independent-review links resolve to the exact hashes declared."
+  ],
+  "limitations": [
+    "The 5378 initializer and three two-byte gaps remain unknown. Incoming halfword branch decodes are candidates, not reachability. Table literal classifications rely on referenced-body evidence. This remains an admission-preparation snapshot, not canonical ownership or whole-image coverage."
+  ]
+}

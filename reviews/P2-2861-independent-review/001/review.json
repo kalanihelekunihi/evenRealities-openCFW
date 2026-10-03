@@ -1,0 +1,20 @@
+{
+  "review_id": 2861,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-profile-initializer-map-2860/001",
+  "candidate_receipt_sha256": "abb61257f9cb70ca391f6e4f60a43c7467024f60933f4548160e6a51678e1de7",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_sha256": "1f0bfec6f59efe752ea106db7f7b7144fcd9b0df306919a7e03a7f2d550bca2d",
+  "candidate_artifact_hashes_verified": true,
+  "isolated_replay": {
+    "result": "PASS",
+    "instructions": 62,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2861-independent"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Static map only. Provider/runtime callees and their effects are unresolved and not dynamically verified.",
+    "Changing gate words, partial provider writes, aliasing, caller ownership and physical behavior remain outside scope. No canonical admission."
+  ],
+  "accepted": false
+}

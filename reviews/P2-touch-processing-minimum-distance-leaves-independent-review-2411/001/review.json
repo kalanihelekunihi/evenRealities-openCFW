@@ -1,0 +1,37 @@
+{
+  "review_id": "2411",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-processing-minimum-distance-leaves-5f34-2408/001",
+  "candidate_receipt_sha256": "6dd946031ce863fc678a8357c136fed0795b63dc07a9cb0ad469bf099cd8382c",
+  "candidate_pseudocode_sha256": "4b0e7d37338b00b0118f922705e5dbcb3b73edc125f2ba4ccc1d0e532d636bf5",
+  "candidate_replay_sha256": "2e674ebb44f8d8d3591c2743bb1761feafc0e928cf103fa64864e2a1f7a63a27",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "isolated_replay_output_sha256": "fbbb3c685689dfc42923344a91c2c841be1cdf25358ff8ea708158dd8026da0f",
+  "fixture_count": 289,
+  "pinned_body_ranges": [
+    {
+      "range": [
+        24372,
+        24414
+      ],
+      "sha256": "bc68abc2591b4bcdfe85f0b0df81354f2c09fa05df09ccd87da310eeb30340cb"
+    },
+    {
+      "range": [
+        24414,
+        24426
+      ],
+      "sha256": "6721f053029f5811f026624cfcc433421951358eaab64b3c6977b840b6415833"
+    }
+  ],
+  "checks": [
+    "Candidate source and artifact hashes match the receipt. The pinned body ranges and instruction bytes are retained as specified in touch-processing-minimum-distance-leaves-5f34-2408/001.",
+    "Independent isolated replay passes 289 cases; output hash matches pinned replays.json.",
+    "Original 5F34 and 5F5E bodies match pinned ranges. Fixtures confirm unsigned minimum over captured item count, FFFFFFFF empty result, unsigned absolute difference, no writes/calls, and register/SP preservation."
+  ],
+  "limitations": [
+    "Stable list geometry and tested values only; no pointer safety or caller contract beyond observed behavior.",
+    "Private bounded evidence only; accepted:false."
+  ]
+}

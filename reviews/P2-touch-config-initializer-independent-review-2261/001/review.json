@@ -1,0 +1,19 @@
+{
+  "review_id": "2261",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-config-initializer-5378-2258/001",
+  "candidate_receipt_sha256": "817da69926f350fe9e6342bfb34b6b3f0d7d10ccad5925f8ba6e1b6504a40681",
+  "candidate_pseudocode_sha256": "047ba38650f1cb17a2d74e4f6b50b66653953a83ee82002d90e915d848af63bb",
+  "candidate_replay_sha256": "8cd4d7e97d2861759d09abf4d9962dc1a0be1841c955a850c7ab7389cc8023af",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Source, body, literal pool and artifact hashes match. Decoded constants, offsets, masks, fallbacks, and repeated store ordering agree with pseudocode.",
+    "Isolated replay regenerates all 27 fixtures. Original initializer/A9D4 execute; only 52BC/50E4 are controlled. Full destination ledger/output, child order/arguments, and R4-R11/SP pass."
+  ],
+  "limitations": [
+    "Uniform configuration/root byte patterns correlate most source fields; only halfword 66/68 fallback values vary independently.",
+    "Child effects, scratch postconditions, aliasing, pointer mutation, and physical field meaning are unresolved.",
+    "No canonical admission."
+  ]
+}

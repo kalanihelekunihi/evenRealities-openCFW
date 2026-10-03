@@ -1,0 +1,16 @@
+{
+  "review_id": "2305",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-mode-flags-623c-2302/001",
+  "candidate_receipt_sha256": "79d784b51223ba79e081958222b22941e299e6a3240d53b7b788e93c1e3d6291",
+  "candidate_pseudocode_sha256": "4fd3f0069da9386271010d292863cddd510e6d03ad141a0b88b7dd1438a91e2b",
+  "candidate_replay_sha256": "4729dab7f5d1cf285a7e974781a4cbebb680c0b1b62aeb71c2e1e68eab747611",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Isolated replay regenerated all 2,385 fixtures. Source and both disjoint code spans [0x6220,0x6238) and [0x623C,0x6262), plus the 0xFFFF literal and all artifact hashes, match. Decode confirms the helper scans only the low 16 input bits from the top bit, shifting its result/test mask until a hit or result 1; the caller computes (helper+1)>>2 and returns 10 when the full-width sum of parameter halfword 44 and config byte 77 reaches the threshold, otherwise 8. All original helper/caller executions and tested results pass."
+  ],
+  "limitations": [
+    "Coverage uses selected count and offset values with every low-byte mask, high single-bit masks and 0xFFFF, not all low-16 patterns. The replay asserts helper input and caller result/R4/SP, but does not separately assert helper R1/R2/R3 outputs; those register details are supported by the instruction listing. Physical field meaning remains unknown; no canonical admission."
+  ]
+}

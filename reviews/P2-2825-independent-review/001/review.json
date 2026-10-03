@@ -1,0 +1,25 @@
+{
+  "review_id": 2825,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-handler5-original-early-chain-2824/001",
+  "candidate_receipt_sha256": "af1dab866ddc25c32245785c1df32d1eaa881061e171dce35daa36561b542cbb",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "itcm_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+  "candidate_artifact_hashes_verified": true,
+  "body_hashes_verified": {
+    "42863e-428840": "1ca4dc237d5a62982dd4361eb54a7b76308d0a822e5e26c9ce78ed0ef5120547"
+  },
+  "isolated_replay": {
+    "result": "PASS",
+    "fixtures": 16,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2825-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Only the same-index early path, runtime control bit 0 set, and inactive zeroed op4 state are covered.",
+    "Other indices and secondary categories, active op4 behavior, hardware effects, concurrency, and enclosing caller semantics remain unresolved.",
+    "No canonical admission."
+  ],
+  "accepted": false
+}

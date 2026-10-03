@@ -1,0 +1,21 @@
+{
+  "review_id": 2883,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-temperature-init-original-idempotent-power-chain-2882/001",
+  "candidate_receipt_sha256": "efd6fb26c929e59ca6ef08a64777732d4501bed525cbe6402489a6a4221a7cdf",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "itcm_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+  "body_hashes_verified": true,
+  "isolated_replay": {
+    "result": "PASS",
+    "fixtures": 12,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2883-independent"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "The slot-4 table pointer is manually installed by the fixture. This does not establish the actual table installation or caller/startup reachability.",
+    "Fixtures use a single profile/mode/state, auxiliary and snapshot configuration, and temperature input. The power-control bit is initialized to the already-enabled state; active power-enable behavior and other configurations are not exercised.",
+    "No physical hardware, changing inputs, general apply path, whole-image completeness, or canonical admission is claimed."
+  ],
+  "accepted": false
+}

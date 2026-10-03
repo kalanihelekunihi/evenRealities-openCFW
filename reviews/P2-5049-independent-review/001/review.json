@@ -1,0 +1,19 @@
+{
+  "review_id": "5049/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-u64-division-region-registration-entry-map-5048/001",
+  "candidate_receipt_sha256": "cf8dc66b302215b69a4bba9ee0e1d34e609e596bde6644f5f1a37d0265f7e9d7",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "input_and_file_pins": "PASS",
+    "instruction_decode": "PASS (two extents; 30 instructions, exact source bytes)",
+    "literal": "PASS (alignment-call literal resolves to 0x4315D4)",
+    "isolated_replay": "PASS",
+    "alignment_wrapper": "PASS_SCOPED (low-two-bit test; child return ignored; unaligned path returns zero, aligned path returns original base)",
+    "registration_entry": "PASS_SCOPED (wrapped length subtract/add 3188 and child arg order; no zero-base/underflow guard)",
+    "ABI": "PASS (R0 and saved-register aliases follow POP)",
+    "scope": "PASS_SCOPED (allocator/registry child semantics unresolved)"
+  },
+  "summary": "The two mapped extents match the locked image and all pins. The alignment wrapper tests the low two address bits, ignores the child result on the unaligned path and returns zero there; aligned inputs call the other child and return the original base. The registration entry uses wrapped length subtraction and base-plus-3188, then calls the registration helper without guarding a zero base or short length. The return aliases match the epilogue."
+}

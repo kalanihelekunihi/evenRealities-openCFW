@@ -1,0 +1,25 @@
+{
+  "review_id": "2397",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-sequence-item-state-5ecc-2394/001",
+  "candidate_receipt_sha256": "def32cd441f4b7a050428987f7906aac657218ea67a529583ff7302d0775bf76",
+  "candidate_pseudocode_sha256": "b25eed7928822b10a2450f900158640e9646b15ea3635f6dd463f62e1f30cdc6",
+  "candidate_replay_sha256": "a1fe7f7e3c8b530652334a5880e04c2642db0390d85aeda11eb7bf749157677f",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "isolated_replay_output_sha256": "1661c7f27156ab0dffcd4b654fad583ae224ae04060816c3b823a61a1281d04b",
+  "fixture_count": 3240,
+  "pinned_body_ranges": [
+    24268,
+    24368
+  ],
+  "checks": [
+    "Candidate source and artifact hashes match the receipt. The pinned body ranges and instruction bytes are retained as specified in touch-row-sequence-item-state-5ecc-2394/001.",
+    "Independent isolated replay passes 3240 cases; output hash matches pinned replays.json.",
+    "The 5ECC body and FFFF00FF literal match source. Fixtures verify captured count, 28/44-byte layout selection, ordered masking, mode1 use of original word|FF00, mode2 use of masked word plus item byte9, and masked-only behavior for other 32-bit modes."
+  ],
+  "limitations": [
+    "Pointers/counts and buffers are stable and separate; no aliasing or caller-wide effects are claimed.",
+    "Private bounded evidence only; accepted:false."
+  ]
+}

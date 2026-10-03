@@ -1,0 +1,16 @@
+{
+  "review_id": "5151",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-service-record-query-original-compare-fixtures-5150/001",
+  "candidate_receipt_sha256": "63e6b750485a33cb9f3a86eb5937b68fd2c3a9ed33b7e55fe98b71faf2fa37e6",
+  "candidate_replay_sha256": "3447cfc9fe5bc3e47debd329e5282ae66e9812a3e163b25e4bb2eac910256594",
+  "candidate_results_sha256": "5e1f22fc407493c99942a204ad07ccbe02504ecb8118111589086ee795bbdc54",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Receipt pins the query/compare maps and locked source; isolated replay passes 96 original cases. The 30-byte string inputs, active guards, masks, match/exhaustion outcomes, compare-entry arguments, full 256-byte state image and R0/SP/PC checks match. Only the two external toggle children are controlled."
+  ],
+  "limitations": [
+    "The comparison body is original, but the external toggle effects are modeled. Invalid-input callback, faults, hardware and volatile behavior are excluded. Private scoped evidence; accepted:false."
+  ]
+}

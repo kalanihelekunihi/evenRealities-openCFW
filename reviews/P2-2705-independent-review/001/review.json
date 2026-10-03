@@ -1,0 +1,34 @@
+{
+  "review_id": 2705,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-indexed-enable4-new-pending-chain-2704/001",
+  "candidate_receipt_sha256": "b91b5156dccd01e98d5c111c82c7555f6c3f4f1beaf8495afe5e148542505226",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "itcm_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+  "candidate_artifact_hashes_verified": true,
+  "body_hashes_verified": {
+    "421d5e-421e4a": "680cf0628b0c3ed785836da7faeb3fcecf7ab51a02c90ed91c2c5b18442ef899",
+    "4222f0-422364": "53cfb358989e68ae979d2814964a3e779ae0f0eba76836f99d409393d0e78d51",
+    "421584-4215ae": "3e1aafd1c98933503de46a42099c9e0ea5b6af861f1edda36f8df25079ce834d",
+    "4215fe-421632": "2c98fb87af946ccd169b0e0f8225c9455b682478941053f2a25da7ac6e23c689",
+    "4215dc-4215fe": "8dc0a88874cc74f9148e7ae8b6e70f50b7cd1f732db5b74982a8abcccb1bd6f5",
+    "421632-4216b2": "bc7fc361719841b4cd3b48adad0bb774fe817371892b0a9cbe4e8744c5ec2a8e",
+    "4216b2-4216d4": "eb69fa2933ef30723f342fbc330927d681c6ca5d2ac077b77bf5e7ed1689a795",
+    "421d28-421d5e": "4b8c76a46e4a846d4c3320718698134d79310d3b4c6a4dc3cb5b0602ab00ba20",
+    "426c58-426c7e": "e3f45a1d590e9c712d46746926bc31dfa36bb6796228ec9a52fc9441b360ee23"
+  },
+  "isolated_replay": {
+    "result": "PASS",
+    "fixtures": 512,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2705-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Other done/pending combinations and asynchronous state changes are not covered.",
+    "The long delay executes in emulated ITCM and does not establish physical timing or hardware behavior.",
+    "Temporary pointer publication is an observed memory effect, not a durability or validity guarantee.",
+    "Private accepted:false evidence; no canonical admission or reachability claim."
+  ],
+  "accepted": false
+}

@@ -1,0 +1,20 @@
+{
+  "review_id": "2231",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-mode-seven-child-68ec-2228/001",
+  "candidate_receipt_sha256": "85460167105fa52779bfd71c98dc150b076701c458a1028cd62205d7896acbb8",
+  "candidate_pseudocode_sha256": "bbd2b7e62cd866fd1564a8171de54f97b1b7ce089d835df4bb95909472e2046b",
+  "candidate_replay_sha256": "4f10f1c7c4020f158c061181c6d39f87391eff1755ec41715c978ead832e25a6",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Receipt, artifact, source, and [0x68EC,0x6928) body hashes match. Independent Thumb/M-class decoding agrees with the listing and pseudocode call arguments/return path.",
+    "Isolated replay regenerates all 16 fixture rows. Only 56A4 is intercepted; original 8FD0, 685C, 6608, A324, and 4480 execute. Assertions cover ordered child calls, loader status mapping, unconditional 685C, config+113 clear, register/SP preservation, and 315 A324(1) calls when status bit 0 is clear.",
+    "The write ledger is captured but not fully compared to the candidate's expected ledger, so complete combined write-order validation is not claimed."
+  ],
+  "limitations": [
+    "Configuration, factory/status RAM, and peripheral status are modeled; actual 56A4 effects and physical MMIO/timing are not established.",
+    "Aliasing and concurrency are not covered.",
+    "No canonical admission."
+  ]
+}

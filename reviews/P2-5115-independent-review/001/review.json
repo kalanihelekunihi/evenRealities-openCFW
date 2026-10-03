@@ -1,0 +1,15 @@
+{
+  "review_id": "5115",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-u64-division-assertion-trap-map-5114/001",
+  "candidate_receipt_sha256": "84d65306ce737d9d2c182055d7d2fa5adca49f1c41aa4926e4596df80da5b72b",
+  "candidate_replay_sha256": "dc5484865035eaca8c75ade5f6ba14ccd19a53372712da50d863ed11990993a5",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Source-pinned isolated replay passes. The mapped routine saves LR and allocates 12 bytes, stores R1/R2/R0 to SP+0/+4/+8, then executes BKPT 171 with the expected call arguments. The separate 0x7C28 tail branch loads R0=1 and branches to 0x41B298. Conditional post-BKPT flow is described only under the explicit resume assumption."
+  ],
+  "limitations": [
+    "Whether the breakpoint/fault handler returns, resumes, or transfers elsewhere is unresolved. No handler semantics, trap liveness, hardware behavior, or admission claim is made; accepted:false."
+  ]
+}

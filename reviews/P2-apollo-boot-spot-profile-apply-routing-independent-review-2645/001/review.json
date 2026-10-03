@@ -1,0 +1,24 @@
+{
+  "review_id": "2645",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-profile-apply-routing-2644/003",
+  "candidate_receipt_sha256": "c605dd98d979b8a2854d5517511a3b05e21e109d7e81b8c85e9c859500adfc21",
+  "candidate_pseudocode_sha256": "36bf56722808abe8c8fe3c63cfd0cd21da442b0b6373da35a034349a18200502f",
+  "candidate_replay_sha256": "a6d353f4030785fb006540e188bc7f03069a8d7d6f583a6b69170aa543791aea",
+  "fixture_sha256": "41eb2830507b48876ffc5bf2bf30784cf040505318640acd9a8054fc6ac889bb",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_sha256": "7bc6936adbff287072bfdcdac3b453214f98f9604c11239abef5a15f63b5e9bb",
+  "isolated_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2645-independent/replays.json",
+  "isolated_replay_count": 256,
+  "checks": [
+    "Candidate/source/body and artifact hashes match. Independent objdump decode confirms the body [0x42A4BC,0x42A546), including conditional A1BC/A43A calls, mixed-low-bit construction, A2B4 route decision, table-indexed BLX, and saved-register epilogue.",
+    "The table pointer literal resolves to 0x20000098. The isolated replay uses only synthetic slots 0 and 26, with controlled route-helper returns; all 256 fixtures pass.",
+    "Call arguments and ordering match each branch. The route helper receives the saved-stack byte address; a zero return dispatches through the controlled table slot, while nonzero skips the indirect call. Final R0 takes the saved newsecond word with the low byte replaced by 26 or the route-written index; R1 is saved oldsecond. R4-R8/SP and sentinel return are checked."
+  ],
+  "limitations": [
+    "All child routines and indirect destinations are controlled; their semantics and actual table contents are not established.",
+    "Table bounds, caller ownership, concurrency, aliases, and physical effects remain unresolved.",
+    "Private scoped evidence only; accepted:false; no canonical admission."
+  ]
+}

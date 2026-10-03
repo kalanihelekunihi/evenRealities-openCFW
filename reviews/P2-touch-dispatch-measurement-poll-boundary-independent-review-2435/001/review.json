@@ -1,0 +1,21 @@
+{
+  "review_id": "2435",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-dispatch-measurement-poll-boundary-2434/001",
+  "candidate_receipt_sha256": "3628455967c5b8f4af5f84a373a7f74aca7998acff60378287f10eea60490428",
+  "candidate_pseudocode_sha256": "d15dd3eb0bbcdd39fc9d7386e99012ec970845a5a59145534e36c555a2b37783",
+  "candidate_replay_sha256": "9ed3d18010b33771cd1a6a8f3251ad225a957752e257ca8e0ce93699e5f96a53",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "isolated_replay_output_sha256": "b074d5f5d64b7ec58645b3e938258a67aec618f7337a35625b6455973c728541",
+  "checks": [
+    "Receipt SHA-256 3628455967c5b8f4af5f84a373a7f74aca7998acff60378287f10eea60490428; source hash 371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87 matches its pin. Five original ranges [0x752E,0x757E), [0x72F8,0x73F6), [0x7288,0x72F8), [0x6980,0x69BA), [0x5FA4,0x5FBA) match the listed hashes and candidate files match their receipt.",
+    "Independent replay passes 64 cases; output matches the pinned replays.json hash. The original dispatcher, measurement, budget, poll, scaler and divider execute without interception. The three deeper helpers 6AC0, 685C and 6928 are controlled.",
+    "With the supplied parameters, budget is 15 and the modeled clock yields countdown 3. Readiness transitions absent/on read 1/3/4 produce observed countdown sequences [3,2,1,0], [3], [3,2,1], [3,2,1,0]. The fourth-read transition coincides with zero remaining budget; measurement returns status 256 and suppresses sample stores. Poll/control/config writes, division args, aggregate status and R4-R11/SP checks pass."
+  ],
+  "limitations": [
+    "Readiness and sample values are modeled. Only the specified bounded completion points/countdown are exercised; no physical timing or long-timeout behavior is inferred.",
+    "Three deeper helpers remain controlled, and prior literal/seam ownership limits remain in force.",
+    "Private evidence only; accepted:false."
+  ]
+}

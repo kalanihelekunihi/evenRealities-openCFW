@@ -1,0 +1,20 @@
+{
+  "review_id": "2371",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-cleanup-item-finalizer-chain-4db8-2368/001",
+  "candidate_receipt_sha256": "01f90816e8c0704c6a7b137e1d01176b5cb37e5d6ea52d066ec4063ee2b2a727",
+  "candidate_pseudocode_sha256": "c362c7c613ef15a48048ce27803e81192e060ab2f27287d5db0885ec9aa2d903",
+  "candidate_replay_sha256": "be6bfdc566da607107445816b8cdea1d447a2bf779d4e5482accc46ed7642dab",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Receipt 01f90816e8c0704c6a7b137e1d01176b5cb37e5d6ea52d066ec4063ee2b2a727 pins the source and four contiguous bodies [0x4DB8,0x4DC4), [0x4DC4,0x4DEC), [0x4DEC,0x4E1C), [0x4E1C,0x4E36); combined code hash and evidence pins match. Isolated replay passes 324 cases.",
+    "All four bodies execute original instructions with no function interception. The top-level dispatch descends 2,1,0. Type7 skips its row; other rows capture count and dispatch items descending, while 4DC4 executes exactly one 4DB8 leaf for each item. The leaf store order is byte+8 zero, halfword0 copied to halfword+2, byte+7 zero. The oracle agrees with the complete ordered write ledger and full supplied memory.",
+    "The fixtures cover rotated types/counts, four halfword values and three byte fills; exact row/item arguments, R4-R11/SP and dispatch order pass. No mismatches were found."
+  ],
+  "limitations": [
+    "Counts and pointers are stable in the fixtures; changing-count/pointer behavior and aliasing are unresolved.",
+    "All allocations are distinct synthetic memory; no physical meaning is inferred.",
+    "R0 is incidental, not a general return contract. Private evidence only; accepted:false."
+  ]
+}

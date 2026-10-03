@@ -1,0 +1,24 @@
+{
+  "review_id": 2745,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-handler11-original-normal-chain-2744/001",
+  "candidate_receipt_sha256": "5cd505a2db44492bf1ce1c3707eb7b71c7223160e4fc241409a25d688a493a1f",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "itcm_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+  "candidate_artifact_hashes_verified": true,
+  "body_hashes_verified": "727a2c0543d59142084a0dbc59c05a25d7228f811cc09c9018fee2297bce78d4",
+  "isolated_replay": {
+    "result": "PASS",
+    "instructions_or_fixtures": 128,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2745-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "scope": "dynamic",
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Wait/service and other indices/categories are not covered.",
+    "Emulated timing and peripheral effects do not prove physical behavior; concurrency is untested.",
+    "Private evidence only; no canonical admission."
+  ],
+  "accepted": false
+}

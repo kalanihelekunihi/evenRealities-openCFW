@@ -1,0 +1,25 @@
+{
+  "review_id": 2981,
+  "candidate": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-readiness-original-control-callback-2980/001",
+  "candidate_receipt_sha256": "d2ea9b6ea275e9780395a225ff50456fd0e4be21881844f32527b476428c230f",
+  "source_pin": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_pins": null,
+  "candidate_file_hashes_match_receipt": {
+    "replays.json": true,
+    "replay.py": true,
+    "pseudocode.md": true
+  },
+  "fixture_count_or_static_extent": "12",
+  "isolated_replay": {
+    "result": "PASS 12",
+    "destination": "/tmp/review-apollo-boot-readiness-original-control-callback-2980"
+  },
+  "assessment": "PASS_SCOPED",
+  "accepted": false,
+  "summary": "Readiness/control callback chain; manually installed callback, no interception. Original instructions run for the bounded fixture.",
+  "scope_limits": [
+    "The packet remains private scoped evidence; no canonical admission is made.",
+    "Only the exact fixture dimensions and controlled/modelled hardware described by the candidate are supported.",
+    "No whole-firmware completeness, physical hardware, untested paths, or global ownership claim is inferred."
+  ]
+}

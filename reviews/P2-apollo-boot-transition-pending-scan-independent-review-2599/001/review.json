@@ -1,0 +1,21 @@
+{
+  "review_id": "2599",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-transition-pending-scan-2598/003",
+  "candidate_receipt_sha256": "0bd9106d5ab71530b55ee64c905134ea0512879945def5aa5571c8d890efa82f",
+  "candidate_pseudocode_sha256": "0de0db3c5c7b3b790266936fe982ac6b600187851021d98b2d0782f151bdd0ad",
+  "candidate_replay_sha256": "686fd1b98fa216fdcd300b44e480d5a6858fce794a4db1cd69d09ba8c0f7da62",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "The candidate receipt and artifact hashes match, and the original image hash and body [0x42CFE0,0x42D0F2) digest are correct. The six pointer values are sourced from the image's PC-relative literal loads.",
+    "An isolated replay redirected to a fresh output directory passes all 1536 fixtures. The matrix covers gate and index shortcuts, helper returns, mode low nibbles, all listed field boundaries, first/last table slots, and selected/unselected mask bits.",
+    "Independent Thumb disassembly confirms: gate-byte zero exits without output write; index byte 2 stores 1; otherwise 0x41F3F0 is called, and a nonzero return with low mode nibble 1/2 stores 1. The scan tests 16 entries at table+512+32*i, requiring entry bit 0 and the corresponding mask bit, then extracts bits 8..16 and accepts [0,6), [19,25), or [256,480). It stores 1 on the first match or 0 at exhaustion. The pop restores PC and returns saved R7 in R0.",
+    "All replay assertions pass for output-write values, helper call gating, final R0, PC, and SP. Each fixture activates at most one table entry; all others have bit 0 clear."
+  ],
+  "limitations": [
+    "Only 0x41F3F0 is controlled; its behavior is unresolved. Multiple active entries, dynamic mutation/concurrency, and pointer aliasing are not tested.",
+    "The table and mask are fixture-backed memory; physical meaning and enclosing ownership/reachability are not established.",
+    "Private scoped evidence only; accepted:false and no canonical admission."
+  ]
+}

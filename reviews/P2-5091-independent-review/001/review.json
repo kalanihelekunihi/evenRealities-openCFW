@@ -1,0 +1,17 @@
+{
+  "review_id": "5091",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-metadata-list-original-fixtures-5090/002",
+  "candidate_receipt_sha256": "0a8ceb3fa1ecfe7d72818fa65e6269ceecb3398d24b19bfa5dee5158115bb57a",
+  "candidate_replay_sha256": "f01d11e76c5eb30050fcbdba162d770ee36ebe99d36b91f3f79c4807ec0c267d",
+  "candidate_results_sha256": "e12c9b874144b266e2da694b42c8df47edc3d946a4b06bf2f703220bacffd925",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Receipt pins locked source and corrected map 5086/002 plus metadata primitives/alignment maps; hashes match. Isolated replay passes all 108 original executions with no controlled child redirection.",
+    "Full 8,960-byte metadata window oracle, node/sentinel links, list-head and bitmap updates, saved registers, SP/PC and R0 return match. Corrected return is the store base metadata + class*4; zero-size and alias effects follow actual write order."
+  ],
+  "limitations": [
+    "Only the listed valid-pointer, aligned-node cases are covered. Assertions/faults, volatile mutation and hardware meaning are excluded. Private scoped evidence; accepted:false."
+  ]
+}

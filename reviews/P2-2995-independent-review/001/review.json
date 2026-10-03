@@ -1,0 +1,30 @@
+{
+  "review_id": 2995,
+  "candidate": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-event-apply-original-transmit-drain-2994/001",
+  "candidate_receipt_sha256": "28fb3d5bbdf90ee0385ca11aea0b2e07281c23799cc5513f8354cb273099d199",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "leaf_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+  "body_sha256": {
+    "42c0b2-42c222": "a3d5075b7f480a21b071c587bb343466ca39d411ed426927e82b22168591937e",
+    "41d1c0-41d210": "c336d5c93475c6521bab00509a8ad8aaa1078b3bdc313ae43107777520af1895"
+  },
+  "candidate_files_sha256": {
+    "replays.json": "816da3cbd912f6be0038215aaf6b9b4a1817ae4df5a470d29debcf6897d34e16",
+    "replay.py": "f3597fef54a1721128c02c61818bdb58eeff16a11bc73795395919a6d20fc5d6",
+    "pseudocode.md": "ab56b8015d61e0b6aa9224634da76a44eec0a3cfce863cfe2cd48a77a8ef17a4"
+  },
+  "isolated_replay": {
+    "command": "/Users/kalani/.local/share/opencfw/venv/bin/python /tmp/review2995-replay.py",
+    "result": "PASS 320",
+    "destination": "/tmp/review2995-isolated"
+  },
+  "assessment": "PASS_SCOPED",
+  "accepted": false,
+  "findings": [],
+  "scope_limits": [
+    "No firmware function interception in the replay.",
+    "Tx occupancy is fixed at four and receive occupancy/status are fixtures, not a physical FIFO model.",
+    "The literal transmit-drain writes do not establish real payload contents or hardware FIFO semantics.",
+    "Unmodeled volatile reads, unrelated registers, NZCV effects, physical behavior, and caller ownership remain outside this evidence."
+  ]
+}

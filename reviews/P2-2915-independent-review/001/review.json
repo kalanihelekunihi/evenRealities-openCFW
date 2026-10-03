@@ -1,0 +1,15 @@
+{
+  "review_id": "2915",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-state-effect-original-fresh-reads-2914/001",
+  "candidate_receipt_sha256": "054afa3f9dc1be448d4e6253d87118b9653826633a99f9a61dd23216754352f8",
+  "candidate_replay_sha256": "a255e359add4ee6622b6a6c6be47938487f0cc3d8b9f284f64132a0d5cee2de5",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "source_and_body_pins": "PASS",
+    "candidate_artifact_hashes": "PASS",
+    "isolated_replay": "PASS (864 fixtures)"
+  },
+  "summary": "The source image hash matches inventory; body [42B014,42B068) digest and candidate output hashes match the receipt. Isolated replay passed all 864 fixtures (8 R0 values \u00d7 6 R1 values \u00d7 3 initial marker bytes \u00d7 3 independently injected successive MMIO words \u00d7 2 PRIMASK values). Original instructions execute without function interception. The read hook supplies three distinct possible words at each target read; exact ordered reads/writes and R0\u2013R3 values are checked, along with PC, SP, LR and PRIMASK. Marker and MMIO effects match the decoded gates, including conditional flag store and ordered bit16/bit3/bit6 clears. High-registers, NZCV, actual peripheral behavior, arbitrary aliasing, and physical hardware are explicitly outside the fixture scope."
+}

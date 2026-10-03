@@ -1,0 +1,19 @@
+{
+  "review_id": "2245",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-descriptor-original-child-2242/001",
+  "candidate_receipt_sha256": "30d200b4c38fb64e8c6221b70a32bc3a96ec8c308029f6a5089a8f7e40194faa",
+  "candidate_pseudocode_sha256": "78effb5d60e27003cc86c1560356807f7b5ab4aa88e5b9b9431cfd43aeb4718a",
+  "candidate_replay_sha256": "4571e54cc6f71b1cb2196f8af74b11afc1429883ac1e24c0c6fbafe051fac92d",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Source, constructor body, literal, and artifact hashes match the receipt.",
+    "Isolated replay regenerates all 72 fixtures with original constructor, field helper, and count-scaling helper and no function interception. Ordered writes, output buffer, child arguments, return, and R4-R11/SP are asserted.",
+    "The fixture setup and observed zero-configuration child path agree with the documented destination-word updates and constructor status behavior."
+  ],
+  "limitations": [
+    "Zeroed child configuration does not exercise alternate configuration-prefix and secondary-field branches; arbitrary field configurations and aliasing are not covered.",
+    "Physical behavior and whole-firmware completeness are not established; no canonical admission."
+  ]
+}

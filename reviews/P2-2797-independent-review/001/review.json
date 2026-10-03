@@ -1,0 +1,31 @@
+{
+  "review_id": 2797,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-profile-current-restore-map-2796/001",
+  "candidate_receipt_sha256": "71e50831945ffe564ca2466f26dda5512599f284e89e634e5247ddf3749ae5be",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "candidate_artifact_hashes_verified": true,
+  "body_hashes_verified": {
+    "429da4-429df6": "a69ea6c52f959eba65684feebd9651d2068cdd0d91caf8eb45d74e52969c61a4"
+  },
+  "literal_targets": {
+    "0x429DA6": "0x40020080",
+    "0x429DAA": "0x20000150",
+    "0x429DAE": "0x20026BA0",
+    "0x429DD4": "0x40020044",
+    "0x429DEC": "0x200271BC"
+  },
+  "isolated_static_replay": {
+    "result": "PASS",
+    "instructions": 31,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2797-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Static mapping only; the three independently reloaded indices are decoded, but changing-read behavior is not dynamically exercised by this packet.",
+    "No bounds check appears in this body; caller-provided index validity and ownership are unresolved.",
+    "Private evidence only; no canonical admission."
+  ],
+  "accepted": false
+}

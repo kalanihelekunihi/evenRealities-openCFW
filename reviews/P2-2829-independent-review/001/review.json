@@ -1,0 +1,30 @@
+{
+  "review_id": 2829,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-all-handler-wait-service-prefix-2828/001",
+  "candidate_receipt_sha256": "97e5baea833b277f673d7e8ca5694dbd104139f05ef07340254777f2fe1e4e94",
+  "source_hashes": [
+    {
+      "id": "apollo_bootloader:flash",
+      "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5"
+    },
+    {
+      "id": "apollo_bootloader:decoded:00000040",
+      "sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83"
+    }
+  ],
+  "candidate_artifact_hashes_verified": true,
+  "isolated_replay": {
+    "result": "PASS",
+    "fixtures": 192,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2829-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "All 24 nontrivial handlers are tested only on the stated common prefix state (runtime bit 0, indices 0/1/1/0, service flag 0, inactive op4). Execution intentionally stops before each first publish literal; handler completion/frame behavior is not asserted.",
+    "Ready/timeout is modeled; only the two selected readiness states and fixed delays are covered. Flag2/7, active op4, other input paths, dynamic hardware behavior, caller ownership and physical effects remain unresolved.",
+    "No whole-handler completeness or canonical admission."
+  ],
+  "accepted": false
+}

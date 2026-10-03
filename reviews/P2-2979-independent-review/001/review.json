@@ -1,0 +1,25 @@
+{
+  "review_id": 2979,
+  "candidate": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-readiness-original-idempotent-power-chain-2978/001",
+  "candidate_receipt_sha256": "91e405c0e2d59475bb3a968c3e97dca0b31b1695afa3d3bf25b50e47b27dbf01",
+  "source_pin": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_pins": null,
+  "candidate_file_hashes_match_receipt": {
+    "replays.json": true,
+    "replay.py": true,
+    "pseudocode.md": true
+  },
+  "fixture_count_or_static_extent": "12",
+  "isolated_replay": {
+    "result": "PASS 12",
+    "destination": "/tmp/review-apollo-boot-readiness-original-idempotent-power-chain-2978"
+  },
+  "assessment": "PASS_SCOPED",
+  "accepted": false,
+  "summary": "Readiness + idempotent power path + output/derivation/poll chain; callback slot manually installed, actual profile selection not exercised.",
+  "scope_limits": [
+    "The packet remains private scoped evidence; no canonical admission is made.",
+    "Only the exact fixture dimensions and controlled/modelled hardware described by the candidate are supported.",
+    "No whole-firmware completeness, physical hardware, untested paths, or global ownership claim is inferred."
+  ]
+}

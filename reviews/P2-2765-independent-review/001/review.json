@@ -1,0 +1,24 @@
+{
+  "review_id": 2765,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-handler16-original-normal-chain-2764/001",
+  "candidate_receipt_sha256": "ad4d175a23bc7736d733c40ed71e0cb9afa9f3a44ad666f5784ad7a817671007",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "itcm_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+  "candidate_artifact_hashes_verified": true,
+  "body_hashes_verified": "2b4c090e8bf6f3a2913292d2a4c7b9e1c8ef90ea746d0575bdca6c8153cdca17",
+  "isolated_replay": {
+    "result": "PASS",
+    "instructions_or_fixtures": 64,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2765-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "scope": "dynamic",
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Wait/service and other indices are outside the fixture set.",
+    "Physical hardware behavior, concurrency, and caller ownership are not established.",
+    "Private evidence only; no canonical admission."
+  ],
+  "accepted": false
+}

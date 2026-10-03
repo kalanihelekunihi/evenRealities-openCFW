@@ -1,0 +1,25 @@
+{
+  "review_id": "2643",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-profile-derivation-execution-2642/002",
+  "candidate_receipt_sha256": "63782ff442246ebe708a73d1cc306365a69cedeb722475e7f1eaab0d4a451498",
+  "candidate_pseudocode_sha256": "b535568f21c3e143ff50b91ac932b06e84e5fa0047d041152b05fce2e4bdf0a5",
+  "candidate_replay_sha256": "7e961ca15d19bd53ea2dd2e30a0c1bf7431479789e60741e3405ef61a5978c14",
+  "fixture_sha256": "b388c454223a1a4fd039f574457c2b6b68d94ec5d65763005db9a7f04b7fcb2d",
+  "output_maps_sha256": "be6ba56ec4cc9d98d8d44150f40c5f39c3a5bd1bad010d549b6b7b6b63f0c036",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_sha256": "73e2c284f4c3efc45c0cb02ad3d2d5c520c56ce136e4c185a4fbd56b815a0d87",
+  "isolated_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2643-independent/replays.json",
+  "isolated_replay_count": 1600,
+  "checks": [
+    "Candidate/source/body and all artifact hashes match. The source seed word at 0x434168 is zero; the two literal masks are 0x00F00FFF and 0x000FF00F.",
+    "Reran the candidate emulator in a fresh isolated directory; all 1,600 original-code fixtures pass with no function interception. The independent matrix spans five categories, four state bytes, four auxiliary bytes, five input-word pairs, external low bits 0/2, and external bit0 values 0/1.",
+    "The fixture write/status outcomes agree with the original code: 1,280 successful cases write both outputs and return 0; 320 unmatched-key cases return 5 with zero writes. Partial first-output writes are not produced in this particular matrix.",
+    "Nibble construction, both mask keys, first and second output maps, low external-bit increment, preserved R4/R5/SP, and sentinel return all match replay assertions."
+  ],
+  "limitations": [
+    "The external word, external flag, and seed are controlled to the bounded fixture setup; concurrent changes and aliasing are not covered.",
+    "This operation-specific chain does not establish other parent operations or caller ownership. Private evidence only; accepted:false; no canonical admission."
+  ]
+}

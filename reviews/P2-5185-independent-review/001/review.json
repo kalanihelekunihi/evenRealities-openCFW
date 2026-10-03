@@ -1,0 +1,16 @@
+{
+  "review_id": "5185",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-format-character-original-fixtures-5184/001",
+  "candidate_receipt_sha256": "ad4de3065d69c93cb44c0f8d22fa641630133b7e1078b67d1087e016fdc78420",
+  "candidate_replay_sha256": "0de2945eb7eadb975865d0aeabfe82da998c28571f528cbf667de427a677b26f",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Receipt pins callback map 5182 and source; isolated replay passes all 60 original cases with no children. Count wrap, remaining-zero/FFFFFFFF, character truncation, full descriptor/destination memory and R0/R1/SP/PC checks match."
+  ],
+  "limitations": [
+    "Aliased descriptor/destination, volatile mutation and fault cases are excluded. Finite original execution evidence only; accepted:false."
+  ],
+  "candidate_results_sha256": "8cdb84d5aff1322de695471ed555c213f309e52a34326f6e8b7b15c144d17869"
+}

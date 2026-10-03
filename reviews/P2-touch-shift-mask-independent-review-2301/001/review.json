@@ -1,0 +1,16 @@
+{
+  "review_id": "2301",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-shift-mask-6262-2298/001",
+  "candidate_receipt_sha256": "83027f38315ced4bb831265216d51912696071aed3d3c3a6069b1019bab0256d",
+  "candidate_pseudocode_sha256": "cf79e9206f28177bdaaad3284f1d6004e6343bc2ce8369937ff7e98c2cc14558",
+  "candidate_replay_sha256": "f4563eff34ed8cbc62345ef158827e31da7dce7b8429a556e336d0d8883cc52b",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Isolated replay regenerated all 4,160 fixtures. Source, 14-byte body [0x6262,0x6270), and candidate file hashes match. Decode confirms the shift amount is the wrapped 32-bit sum of (R0 & 3), R1, and 1; LSLS uses register-shift low-eight-bit semantics: zero returns one, 1\u201331 returns the corresponding single bit, and counts of at least 32 return zero. R1/R2/R4/SP preservation assertions pass."
+  ],
+  "limitations": [
+    "Inputs cover each offset byte and selected overflow offsets with all sixteen low-two-bit source patterns, not all possible 32-bit pairs. Physical meaning of the mask and memory/fault behavior are outside this leaf. No canonical admission."
+  ]
+}

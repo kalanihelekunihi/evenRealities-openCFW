@@ -1,0 +1,15 @@
+{
+  "review_id": "5159",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-u64-division-logger-optional-fields-map-5158/001",
+  "candidate_receipt_sha256": "6f908f48c24f42ff03c1cb20af3c2d59c3a9508b30f15375af86b37db7f44edd",
+  "candidate_replay_sha256": "6a6ea6311da7951c424751b24c7866a6aea4c4bc5b46463355a3e0657eb814d3",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Source-pinned isolated replay passes for the optional-field region. Fresh helper predicates gate individual append calls; offset updates remain wrapped and child returns are used as lengths without status checks. ADR literal targets and the outer option-mask gate match the instructions."
+  ],
+  "limitations": [
+    "Continuation at 0x7920 is excluded. Append-helper and option-query effects, buffer safety, and hardware behavior remain unresolved; private partial, accepted:false."
+  ]
+}

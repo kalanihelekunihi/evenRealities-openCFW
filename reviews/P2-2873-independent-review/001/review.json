@@ -1,0 +1,28 @@
+{
+  "review_id": 2873,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-information-read-provider-original-copy-2872/001",
+  "candidate_receipt_sha256": "8c5aef285503adcdb0d76a790d234a9ea4374a09eab6aa0528c65c43438dc50c",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-fixed-images-005/002/apollo_bootloader-flash.bin",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_range": [
+    "0x4213D8",
+    "0x421548"
+  ],
+  "body_sha256": "939456c29a3886c03fc42a0afa642f92550897c9fa2892fb6c2d5089419fe7ab",
+  "itcm_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-boot-canonical-replay-015/001/decoded-00000040.bin",
+  "itcm_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+  "candidate_artifact_hashes_verified": true,
+  "isolated_replay": {
+    "result": "PASS",
+    "fixtures": 8640,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2873-independent"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "The fixture uses deterministic synthetic source words and RAM destinations; it does not establish physical storage contents or hardware accessibility.",
+    "Only positive counts 1, 2, and 20 are exercised. Actual copy behavior for zero count, wrapped limits, overlaps, faults, or invalid ranges is not covered by this packet.",
+    "No provider child interception is used, but caller reachability, startup installation, arbitrary aliasing, concurrency, whole-image completeness, and canonical admission are not claimed."
+  ],
+  "accepted": false
+}

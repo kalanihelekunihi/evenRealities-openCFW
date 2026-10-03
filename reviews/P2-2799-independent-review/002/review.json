@@ -1,0 +1,23 @@
+{
+  "review_id": 2799,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-profile-current-restore-original-2798/002",
+  "candidate_receipt_sha256": "dff22b190041a91444753298dfec7511bbfb804c2874edafb613ba3a5f3384e6",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "candidate_artifact_hashes_verified": true,
+  "body_hashes_verified": {
+    "429da4-429df6": "a69ea6c52f959eba65684feebd9651d2068cdd0d91caf8eb45d74e52969c61a4"
+  },
+  "isolated_replay": {
+    "result": "PASS",
+    "fixtures": 18,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2799-v2-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Only 18 bounded injected-state fixtures are exercised; general concurrent behavior, caller ownership, and physical effects are not established.",
+    "Private evidence only; no canonical admission."
+  ],
+  "accepted": false
+}

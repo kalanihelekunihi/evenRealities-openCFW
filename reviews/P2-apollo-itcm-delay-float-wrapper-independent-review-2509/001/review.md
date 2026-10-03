@@ -1,0 +1,11 @@
+# Independent review 2509
+
+**Result:** PASS_SCOPED.
+
+Reviewed `g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-itcm-delay-float-wrapper-2508/001`. Receipt SHA-256 is `af19ac44fe8d260d23a78ee1e604e11aed122b758b7a4c391cfad32dfc81aba5`; all declared replay, pseudocode, and receipt file hashes match. The pinned inventory digest is `f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa`. Both pinned flash source hashes match: main `19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701`, bootloader `f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5`.
+
+I checked the two 80-byte spans and adjacent literal pools against the pinned flash data. Main code is `[0x4807A0,0x4807F0)`, literals `[0x4807F0,0x4807FC)`; boot code is `[0x41D1C0,0x41D210)`, literals `[0x41D210,0x41D21C)`. Capstone decodes matching instruction sequences. The literal bytes `00007a43`, `0000c042`, `00100240` are little-endian 250.0f, 96.0f, and `0x40021000`. The mode field comes from bits 3–4 of the word at that address; mode 2 selects the single-precision multiply/divide conversion and overhead 24, while the other tested fields use overhead 15. The comparison skips the ITCM call when the computed count is no greater than the overhead; otherwise it subtracts overhead and calls target `0x40`. The saved R7 is restored into R0 by `pop {r0,pc}`.
+
+I reran the verifier from a copy with output sent to a fresh directory. All 40 original-instruction cases pass across both images, input values 0/1/2/16/100, and all four clock-field values. The fixture’s explicit single-precision arithmetic agrees with the observed scaled count, mode-2 cycles, overhead, leaf input and descending ITCM iteration values. It also confirms the return sentinel, SP, and R4–R11. The expected decoded spans and literal digests match the receipt.
+
+**Limits:** Only the listed bounded inputs and field values are exercised. Large unsigned conversions, overflow/saturation, alternate FPSCR rounding or exception states, physical timing calibration, and target startup FPU/ITCM setup are not established. CPACR/FPEXC are enabled by the fixture. The fixtures call these wrapper addresses directly, so caller ownership and production reachability are not demonstrated. Private evidence only; accepted:false and no canonical admission.

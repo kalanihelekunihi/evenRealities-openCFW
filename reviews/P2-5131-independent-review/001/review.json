@@ -1,0 +1,16 @@
+{
+  "review_id": "5131",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-service-setters-null-callback-fixtures-5130/001",
+  "candidate_receipt_sha256": "932c0df5c031b74e204cac543c9e57448c52cc9dccacd5ed189ac5fcc30c9707",
+  "candidate_replay_sha256": "cfb1b08762c4332dd406079364760511eee8dc0fbc14686d5c08e109f798ef56",
+  "candidate_results_sha256": "ce63c3a30f131f4f106ee19e79b2598364efe5d3416536be8930aaf062a78d81",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Receipt pins the setter map and locked image; isolated replay passes 24 cases. The original invalid-input/null-callback paths reach the modeled logger and wait child; replay is explicitly bounded at the third wait entry. Logger register/stack arguments, persistent 32-byte frame, full 1,536-byte unchanged state image and ABI observations match."
+  ],
+  "limitations": [
+    "Logger and wait returns are controlled; the third-entry stop does not prove loop termination or real wait/logger behavior. No hardware claim. Private scoped evidence; accepted:false."
+  ]
+}

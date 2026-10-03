@@ -1,0 +1,19 @@
+{
+  "review_id": "2909",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-buck-scan-map-2908/001",
+  "candidate_receipt_sha256": "d89f98901c50e3ed306b2ef351e65937d38fdfcd7f655534a2847df1999f759a",
+  "candidate_replay_sha256": "0a29c5a68919fdd27320ee65605c5d89bdc58380e78bb632eb14da31e8cea7e4",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_hashes": {
+    "42aef0-42b010": "7a54959ea8247c505df0f3139ce607b4d1fabb5d0015054b89bd44b5d79cc31b"
+  },
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "source_matches_inventory": true,
+    "body_hashes_match_source": true,
+    "artifact_hashes_match_receipt": true,
+    "isolated_replay": "PASS"
+  },
+  "summary": "The authenticated image hash, body [42AEF0,42B010) digest, and candidate artifact hashes match. Isolated Capstone decode replay into a fresh directory passed, accounting for all 107 instructions in the 288-byte body. PC-relative literals resolve to the recorded MMIO, entry-array, selection-mask, and output-flag addresses. The instruction flow supports the stated early guards, query call and two separate low-nibble reads; the row loop checks entry active bit and selected mask, then performs fresh UBFX kind reads for its threshold tests. UBFX zero-extends the 9-bit kind, so the subsequent signed-negative branch is unreachable for that value. The stated compact kind intervals (0\u20135, 19\u201324, 256\u2013479) describe stable values, not a substitute for the distinct volatile reads. This is static pseudocode only; no dynamic read/alias/concurrency or physical-hardware claim. accepted:false."
+}

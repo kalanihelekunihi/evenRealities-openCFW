@@ -1,0 +1,21 @@
+{
+  "review_id": "2617",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-transition-field-timer-callbacks-2616/001",
+  "candidate_receipt_sha256": "795ceff0f62796d5ee422f88e81191abf6df341ee31b8be8a7a12452273f0d2a",
+  "candidate_pseudocode_sha256": "2956531a3214853cf48bd5c8a89ae38a331bd61e038f2f1094a7c414d5df9b68",
+  "candidate_replay_sha256": "fa005b9e1b384f8a70f1705f217a4247dc02762075057c0377f1b6c46d33a31b",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Candidate artifacts, source image and five body hashes match. The literal values resolve to the expected gate/saved/control/timing/aux/timer/active pointers.",
+    "An isolated replay copy redirected to a fresh destination passes all 270 fixtures. It covers five entry bodies, active/gate values 0/1/255, saved values 0/7/8/1023/1024/0xFFFFFFFF, and three target patterns.",
+    "Original disassembly agrees with the ordered field operations and widths: 42D5F8 conditionally inserts selected saved low-10 value; 42D61E writes timing then auxiliary; 42D63A clears timer bits 8..12, inserts 1000 at bits16..31, performs the five specified word writes, then clears bit1 and bit0 through fresh reads; 42D692 sets timer bits0..1 and active byte1; 42D6A6 conditionally clears them and writes active byte0. All return zero without a stack frame.",
+    "Write-ledger assertions, output register, PC and SP pass. The replay does not assert load/read traces, consistent with its stated limit."
+  ],
+  "limitations": [
+    "The five source-register reads in 42D63A are executed but not individually asserted; write behavior is checked.",
+    "Physical timer/register meaning, concurrent mutation, and callback initialization ownership are unresolved.",
+    "Private scoped evidence only; accepted:false and no canonical admission."
+  ]
+}

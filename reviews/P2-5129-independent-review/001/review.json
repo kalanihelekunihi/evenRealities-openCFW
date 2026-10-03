@@ -1,0 +1,16 @@
+{
+  "review_id": "5129",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-service-setters-original-fixtures-5128/001",
+  "candidate_receipt_sha256": "3b3e3c0096c17ffddd5c9ebae2d5d4ea49d4324826b2055aa87965c517f3a8a5",
+  "candidate_replay_sha256": "89792265047278f16af3b711ec6b37aa09e8ed53cf1d8f9f739fe2d16f0dcdfc",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Receipt pins setter map 5126 and the locked image; isolated replay passes all 64 original-parent cases with controlled nonnull callbacks. Full 1,536-byte state image, callback arguments, valid/invalid input handling, publication, R0/R4/R5/SP/PC checks match."
+  ],
+  "limitations": [
+    "Null-callback looping path is excluded; callback effects are modeled. No hardware or broader setter completeness claim. Private scoped evidence; accepted:false."
+  ],
+  "candidate_results_sha256": "9835ae9377c0c6ef9f0fa037350354d4bc65e5fd46fd383c1523c868d4b22f26"
+}

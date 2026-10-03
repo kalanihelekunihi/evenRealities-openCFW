@@ -1,0 +1,18 @@
+{
+  "review_id": "5033/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-startup-copy-sort-chain-fixtures-5032/001",
+  "candidate_receipt_sha256": "65b46bbce9ee636af1a4165b0a48181d91c713378e0873b519850713928ad6c6",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "candidate_source_dependency_and_file_pins": "PASS",
+    "isolated_original_execution": "PASS (3 fixtures regenerated in fresh output directory)",
+    "copy_helper": "PASS (original helper reached, one call with pinned destination/source and 32-byte length)",
+    "sort_and_comparator": "PASS (original code runs; four records sorted by ascending key, correct destination/count/stride/comparator)",
+    "callbacks": "PASS_SCOPED (four callback entries intercepted; order equals sorted record order)",
+    "ABI_and_results": "PASS (SP, PC and final callback R0 result match assertions)",
+    "scope": "PASS_SCOPED (callback behavior and equal-key stability not established)"
+  },
+  "summary": "All three fixtures pass with original startup, byte-copy helper, sort helper, and comparator. The locked four-record table is preserved and appears in ascending key order; each controlled callback is invoked in the corresponding order. Copy/sort arguments and return-state assertions also hold. Callback effects and equal-key stability remain untested."
+}

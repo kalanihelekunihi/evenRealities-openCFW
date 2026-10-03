@@ -1,0 +1,15 @@
+{
+  "review_id": "2923",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-transition-map-2922/001",
+  "candidate_receipt_sha256": "958db42e79082a53a43c2b2b3d18968bb7723631f593da186adeeb5408e73955",
+  "candidate_replay_sha256": "32580fb5b3855f6829320d0e328ded454d085dede4d51495bdec2f2f62bfb6f6",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "source_and_body_pins": "PASS",
+    "artifact_hashes": "PASS",
+    "isolated_execution": "PASS (381 instructions)"
+  },
+  "summary": "The authenticated flash image matches inventory. Body [42B294,42B69C) SHA-256 and all candidate artifacts match. Isolated decode replay passed and covers the full 1,032-byte interval with 381 original Thumb instructions. I checked the 40-byte frame/save order, full-width input retention, equal-index branch, unsigned two-table rank comparisons and short-circuit flow, category/mode selection, current-index and active-state branches, modulo arithmetic, and restore/return path against the disassembly. This static candidate explicitly preserves fresh reads and conditional child calls; it does not establish dynamic behavior across non-equal indices, alias/concurrent mutation, NZCV, physical MMIO, or complete code/data ownership."
+}

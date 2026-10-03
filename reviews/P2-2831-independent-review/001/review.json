@@ -1,0 +1,35 @@
+{
+  "review_id": 2831,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-all-handler-wait-readiness-boundaries-2830/001",
+  "candidate_receipt_sha256": "f0c8b9927b518b9f9fbc8be45d12f03d994a097c02501ff72fba5ce2b095a011",
+  "source_hashes": [
+    {
+      "id": "apollo_bootloader:flash",
+      "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5"
+    },
+    {
+      "id": "apollo_bootloader:decoded:00000040",
+      "sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83"
+    }
+  ],
+  "candidate_artifact_hashes_verified": true,
+  "status_read_site_check": {
+    "maps": 24,
+    "result": "PASS",
+    "method": "For each mapped body, literal load resolving to 0x40008064 is immediately followed by original LDR r0,[r0]; hook address is that actual peripheral-read instruction."
+  },
+  "isolated_replay": {
+    "result": "PASS",
+    "fixtures": 384,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2831-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "All 24 handlers are tested only through the prefix before first publish literal and under the fixed common input state documented by the candidate; no complete return/frame claim.",
+    "Readiness changes are injected at the original status-read instruction; this models boundary timing and is not physical peripheral evidence. At the 60-delay limit, no extra status read observes a later-ready transition.",
+    "Other flags, active op4, broader inputs, hardware/concurrency, ownership, and whole-handler coverage remain unresolved."
+  ],
+  "accepted": false
+}

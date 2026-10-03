@@ -1,0 +1,15 @@
+{
+  "review_id": "5025/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-dispatch-refinement-overlap-evidence-5024/001",
+  "candidate_receipt_sha256": "c31c8256cf92a078d28f230e5e033feba3d713eac58c6b7929ddf935683d5f14",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "snapshot_file_pins": "PASS",
+    "address_set_recomputation": "PASS (per-map counts match independently computed instruction-address intersections)",
+    "comparison_scope": "PASS_SCOPED (only prior 4278 listing versus three 5012/5014/5016 listings)",
+    "limits": "PASS (does not claim pseudocode equivalence, global unique bytes, or new 658-byte coverage)"
+  },
+  "summary": "The pinned comparison is correct: entry map 64 instructions with 17 prior addresses, middle map 122 with 64, final map 81 with 35. I recomputed these intersections from the two sides\u2019 instruction listings and verified the listed file hashes. This is an address-accounting comparison only, not behavioral equivalence or a global coverage claim."
+}

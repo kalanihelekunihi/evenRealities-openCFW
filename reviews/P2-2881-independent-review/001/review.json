@@ -1,0 +1,17 @@
+{
+  "review_id": "2881",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-temperature-init-original-derivation-chain-2880/002",
+  "candidate_receipt_sha256": "65e7a08a036d5028f51bf28304e356169bbab146746f16bb89e829d7eb0a5ee3",
+  "candidate_replay_sha256": "17518dbb83d1ca6719c7de9bb4d7d638cd83734725ec2728b71ddfac01e1d07e",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "itcm_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "source_and_itcm_match_inventory": true,
+    "body_hashes_match_source": true,
+    "artifact_hashes_match_receipt": true,
+    "isolated_replay": "PASS (24 fixtures)"
+  },
+  "summary": "Authenticated flash and decoded-ITCM image hashes match inventory; all eight declared code-body hashes and candidate artifact hashes match. Isolated replay into a fresh destination passed 24 fixtures. The original initializer, output wrapper/dispatcher, operation-2 path, classifier, derivation, poll, delay and ITCM leaf execute without interception; only the power call is controlled. Derivation outputs 3/0, matching initialized stored values to avoid apply. Assertions cover gates, child order/args, bounds/status, 2,500 poll iterations when selected, delay/ITCM count, popped outputs, frame and PRIMASK. Scope is the stated gate/power/poll/mask fixture matrix with manually installed table slot and modeled peripheral readiness. It does not establish physical hardware, changing input state, apply behavior, dynamic caller/slot ownership, or general initializer behavior. accepted:false."
+}

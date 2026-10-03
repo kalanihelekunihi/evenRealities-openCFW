@@ -1,0 +1,36 @@
+{
+  "review_id": 2803,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-handler0-original-normal-chain-2802/001",
+  "candidate_receipt_sha256": "2e6dbe779299fab4522b51d4f0d22794afa6582c4b15c8f1e32fcc979204d0e1",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "candidate_artifact_hashes_verified": true,
+  "actual_instruction_range": {
+    "start": "0x427E84",
+    "end": "0x42805A",
+    "bytes": 470,
+    "instructions": 160,
+    "sha256": "1a259e009f8dfe9641a5c1062b41e1cc32eab8b34c6f919a19485e7897a37310"
+  },
+  "declared_body_sha256": "846627b1f8b071b4cc86024dfedbe1e5e1e585a0b2f9891186d3d2b84d94f3be",
+  "body_hash_matches_instruction_range": false,
+  "isolated_replay": {
+    "result": "PASS",
+    "fixtures": 64,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2803-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "status": "REVISE_METADATA",
+  "findings": [
+    {
+      "severity": "blocking-for-this-review",
+      "issue": "Receipt body_sha256 does not bind the listed handler0 instructions. It is 846627b1\u2026 and matches the unrelated 0x429C46..0x429D9E range, while the listed/disassembled handler0 body 0x427E84..0x42805A hashes to 1a259e009f8dfe9641a5c1062b41e1cc32eab8b34c6f919a19485e7897a37310. The candidate replay\u2019s receipt-generation expression also hashes 0x429C46..0x429D9E. Correct the range and refresh receipt/artifact hashes append-only."
+    }
+  ],
+  "limitations": [
+    "The 64-fixture emulator replay passes, but does not cure the receipt/body identity mismatch.",
+    "The fixture only exercises control bit 0 clear and indices 0/1 with the stated endpoint/pattern/mask combinations.",
+    "Wait/service and equal-index branches, other inputs, hardware effects, concurrency, and incoming ownership remain unresolved.",
+    "Private evidence only; accepted remains false."
+  ],
+  "accepted": false
+}

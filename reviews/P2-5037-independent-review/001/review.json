@@ -1,0 +1,16 @@
+{
+  "review_id": "5037/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-startup-dual-resource-original-fixtures-5036/001",
+  "candidate_receipt_sha256": "263c29fc756b0be81bc4520012b0c9ddd07b198f09f270e770ffacaad85cac46",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "pins": "PASS (source, map receipt/references, candidate files)",
+    "isolated_replay": "PASS (8 original cases)",
+    "child_calls_and_globals": "PASS_SCOPED (both resource children called; publications and branch args checked)",
+    "ABI_and_logger": "PASS (stack arguments, register aliases, logger return ignored, SP/PC)",
+    "scope": "PASS_SCOPED (resource children and logger controlled; no semantics/hardware claim)"
+  },
+  "summary": "Eight original callback cases pass. The parent calls both resource children, publishes results, and selects the expected branch. The logger result is ignored. Child arguments, saved-register aliases, SP, PC, and final state match assertions. The child implementations are controlled, so their semantics and effects remain outside scope."
+}

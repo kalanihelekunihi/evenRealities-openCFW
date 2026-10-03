@@ -1,0 +1,17 @@
+{
+  "review_id": "2949/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-control-operation-map-2948/001",
+  "candidate_receipt_sha256": "ce0a259d164e9e8e4ec38dd42c2ef185c93343527a6268571b7de4404f55cf81",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "source_body_and_image_mapping": "PASS",
+    "instruction_tiling": "PASS (368 instructions exactly tile 908-byte body)",
+    "literal_extraction": "PASS (all recorded PC-relative literal bytes agree with original image)",
+    "isolated_replay": "PASS (static decode regenerated into isolated directory)",
+    "control_flow_and_prose": "PASS_SCOPED (gate/magic early returns, operation aliases, deferred current-state transition, decode gating and epilogue match static instruction flow)",
+    "dynamic_behavior": "NOT CLAIMED"
+  },
+  "summary": "The 368-instruction listing matches every source byte in the pinned 908-byte body, and all recorded PC-relative literal words match the original image. Isolated static replay regenerates the same decoded artifact. I checked the described early gate/magic returns, option/operation dispatch, current-state shortcut and deferred transition, decoder publication gate, and final PRIMASK/frame restoration against the original control flow. This remains static pseudocode evidence; it does not dynamically validate the full caller or changing/aliased inputs, external helper semantics, physical hardware effects, or global ownership."
+}

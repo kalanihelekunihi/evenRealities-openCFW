@@ -1,0 +1,20 @@
+{
+  "review_id": "2339",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-coordinator-original-check-and-scale-2336/001",
+  "candidate_receipt_sha256": "9f8ea00e4b2bde77201da0eb1b040b068acd0a3883bd746f9e164f5a83bdf7bf",
+  "candidate_pseudocode_sha256": "cb8ce78357a14548805dd7174ac0237901268b88ccd309c291e534f1eb820983",
+  "candidate_replay_sha256": "a9ffd86e52cfd8f30ac41a860026cc49fde2a9dfa63d6c5bc57a4d488f1f9e0f",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Receipt 9f8ea00e4b2bde77201da0eb1b040b068acd0a3883bd746f9e164f5a83bdf7bf pins the expected locked source, body [0x71C8,0x7284), literal [0x7284,0x7288), and all evidence files; hashes match. Independent replay regenerated all 2048 fixtures.",
+    "Original coordinator 71C8, checker 6384 and scaler 5D70 execute without function interception. The decoded 5D70 path multiplies value and factor modulo 2^32, shifts right 14, returns zero for zero, otherwise subtracts one and saturates at 65535. Cases include zero, ordinary values, saturation and wrapped multiplication; computed values and config+40 stores agree.",
+    "The 6384 success and immediate-2048 paths, coordinator ordered writes, scaler/checker/callee order, status accumulation and short circuits, later row traversal, and R4-R6/SP assertions match across 2,048 fixtures. Other direct children and callback remain controlled."
+  ],
+  "limitations": [
+    "Only the checker/scaler/coordinator portion is original; initializer, builders, modes, classifier, predicates, row caps and callback remain controlled.",
+    "Hardware effects, aliasing and callback side effects are not established; fixture branches are bounded.",
+    "Private evidence only; no canonical admission."
+  ]
+}

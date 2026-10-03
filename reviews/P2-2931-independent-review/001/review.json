@@ -1,0 +1,15 @@
+{
+  "review_id": "2931",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-transition-descending-active-rearm-2930/002",
+  "candidate_receipt_sha256": "3dabbb9cb9a4500d6ca60a48abe3daeec98398986ee8fc9a3c1b2fb8ccb12a93",
+  "candidate_replay_sha256": "4222907a29cb52ae26a226c4d1a3d2f1566ddc324f92a2cb690ccd9e816dccf5",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "source_body_and_itcm_pins": "PASS",
+    "artifact_hashes": "PASS",
+    "isolated_replay": "PASS (360 fixtures)"
+  },
+  "summary": "The source and decoded ITCM images match inventory; transition body and candidate artifact hashes match. Isolated replay passed all 360 fixtures. Original descending active transition and original delay/ITCM execute without interception; rearm helper 41CC92 alone is controlled to return a sentinel, and its incoming timer argument is checked (50 when flag byte is 0, 2000 otherwise). The fixtures use increasing synthetic rank tables with current index zero, active word set, category/comparison 3 and non-special old/new indices. The asserted seven-write chain, 625 ITCM entries, incoming R3 return, R4\u2013R11/SP/PRIMASK and stop state match. This does not validate real rearm semantics, other ranks/current indices/special indices, aliases/volatile mutations, full flags/register effects, or physical hardware."
+}

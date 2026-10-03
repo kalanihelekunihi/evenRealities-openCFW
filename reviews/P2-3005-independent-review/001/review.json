@@ -1,0 +1,22 @@
+{
+  "review_id": 3005,
+  "candidate": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-queue-adapters-map-3004/002",
+  "receipt_sha256": "d06c134a2aad6ea44daf5d7d8f6c9c1a9f5c54f082db694766a7476a96963159",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_hashes": {
+    "42c3e2-42c420": "1aa65df1cc920ea6fc753560e93e4967b36d8f0d49b1c37f9dd0b26295f84f02",
+    "42c420-42c44e": "1714c962c633337cdcde5ef6b032ac0bb3f10324ac0320e57fa8120c368bd4d3",
+    "42c44e-42c45a": "d967623a77aff3dfbddc473422f508342a52aae0fa9b3e79c0215f3b62434157"
+  },
+  "artifact_hashes_match_receipt": true,
+  "decoded_instructions": 45,
+  "isolated_replay": "PASS 45; destination /tmp/review-3004-isolated",
+  "assessment": "PASS_SCOPED",
+  "accepted": false,
+  "findings": [],
+  "scope_limits": [
+    "All three bodies are static maps; child functions are not semantically resolved by this packet.",
+    "No dynamic side effects, invalid node/index behavior, aliasing, exception behavior, physical MMIO behavior, or global ownership is claimed.",
+    "No canonical admission."
+  ]
+}

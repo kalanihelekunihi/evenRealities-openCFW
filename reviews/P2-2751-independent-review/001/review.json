@@ -1,0 +1,26 @@
+{
+  "review_id": 2751,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-handler13-map-2750/001",
+  "candidate_receipt_sha256": "8a4d4a1f21826a97e3d24dd7991789b34e3f5ebfc359d5b9ed10c214c73b994e",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "itcm_sha256": null,
+  "candidate_artifact_hashes_verified": true,
+  "body_hashes_verified": {
+    "4291ec-42944a": "70d1c64d8b91f5e1d95f0b898d33f85faf45b83b7b61529f9d700bd2682b7a92"
+  },
+  "isolated_replay": {
+    "result": "PASS",
+    "instructions_or_fixtures": 215,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2751-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "scope": "static",
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "This is a static map, not dynamic evidence of FP rounding or branch behavior.",
+    "Wait/service, callers, hardware timing, and peripheral effects remain unverified.",
+    "Private evidence only; no canonical admission."
+  ],
+  "accepted": false
+}

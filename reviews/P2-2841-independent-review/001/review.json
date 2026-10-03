@@ -1,0 +1,22 @@
+{
+  "review_id": 2841,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-sleep-state-predicate-map-2840/001",
+  "candidate_receipt_sha256": "994497a53dbe1f1ba67dce1de3d140f317526ad7db6196385b6605f08c3ce45f",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_sha256": "d6be1f893c0f78437db76208bb71ae7bf478411acb3ec307430709cd3dfe2e67",
+  "candidate_artifact_hashes_verified": true,
+  "isolated_replay": {
+    "result": "PASS",
+    "fixtures": null,
+    "instructions": 102,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2841-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "This is static body recovery; child 0x41F3F0 behavior, callback topology, and dynamic changing-read/alias cases remain outside this packet.",
+    "No physical peripheral or caller-ownership claim; no canonical admission."
+  ],
+  "accepted": false
+}

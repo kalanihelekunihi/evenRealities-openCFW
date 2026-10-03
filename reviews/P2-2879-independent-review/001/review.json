@@ -1,0 +1,32 @@
+{
+  "review_id": 2879,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-temperature-init-original-operation-classifier-2878/001",
+  "candidate_receipt_sha256": "1e7cae5b705b9a1b5b66d1533466cf5239bfc97d57838d4c1f4788cda2a680ae",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "initializer_range": [
+    "0x42AC54",
+    "0x42ACA4"
+  ],
+  "initializer_sha256": "4c910800d808fd71ce61551e88a4bbe388e62974b65a756a73913bdf27482ea4",
+  "itcm_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+  "candidate_artifact_hashes_verified": true,
+  "isolated_replay": {
+    "result": "PASS",
+    "fixtures": 48,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2879-independent"
+  },
+  "status": "REVISE_PROSE",
+  "findings": [
+    {
+      "severity": "prose precision",
+      "location": "pseudocode.md: no-apply rationale",
+      "detail": "The statement that there is no apply 'because matches stored zero' describes only the controlled derive-status-0 cases. For derive status 4, the original operation returns before comparing derived words or reaching 0x42A4BC; apply is skipped due to the failed derive status, not because the outputs match stored zeros. State the two paths separately."
+    }
+  ],
+  "limitations": [
+    "Power helper 0x41BF84 and derive helper 0x42A550 are controlled; their implementations are not established. The operation table slot is manually installed by the fixture, not installed by a proven initializer path.",
+    "The fixtures cover the stated -40 category and gate/status/poll/PRIMASK matrix. Other temperatures, operation indices, derived data, active apply behavior, and changing state are not covered.",
+    "Physical hardware behavior, caller ownership, whole-image completeness, and canonical admission are not claimed."
+  ],
+  "accepted": false
+}

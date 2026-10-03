@@ -1,0 +1,16 @@
+{
+  "review_id": "2315",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-signed-byte-repair-6352-2312/001",
+  "candidate_receipt_sha256": "570393f07478273a27fa39bc4509ae861db4f850ab0d0009be0a9445c014e9a1",
+  "candidate_pseudocode_sha256": "e9171759829516d190dd0da99350d822d30e56c0009a2f4bc8e74875e289784f",
+  "candidate_replay_sha256": "be5c9ac48c079b763fd2dfa417108b5790052c7e0f5d1d8ee87c10a6fa4fd65c",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Isolated replay regenerated all 480 fixtures. Source and both bodies [0x6330,0x6352) and [0x6352,0x6384), plus candidate file hashes, match. Decode confirms 6330 forwards the four registers to 6270 and maps budget thresholds (>3, >7, >15) to categories 1/2/3, otherwise 0. 6352 reads row halfword14, row byte135, context config byte78, and row byte122; validity 1/10 selects deduction8, otherwise0. It calls 6330 and ORs 0x80 into the result. Exact division arguments, result, bit7 and R4-R6/SP preservation pass."
+  ],
+  "limitations": [
+    "Cases use selected counts/percentages/shifts and validity values; arbitrary inputs and physical field meaning remain open. This packet verifies the signed-bit-setting behavior despite its provisional \u201crepair\u201d label, not semantic validity of that naming. No canonical admission."
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "review_id": "2225",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-range-setup-original-poll-2222/001",
+  "candidate_receipt_sha256": "b39f18bec6707920e33910414c91d4925c337a0447302f61777edc74be096eb0",
+  "candidate_pseudocode_sha256": "96579df1a7dfcf0351c7f91239794fb3818553b270704996129cf4c6fb7d7075",
+  "candidate_replay_sha256": "a340b94c8c1e86328d9bf0bb8fc043f5f0d654556b1d472d93782b9657341184",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Source, code [0x664C,0x6772), literal pool [0x6774,0x6780), and all receipt files match their hashes; independent Thumb/M-class decoding agrees with the listing.",
+    "An isolated replay regenerated all 160 fixtures exactly. Original 664C, 6608, A324 and 4480 execute without helper interception; only the optional callback is controlled. The complete ordered descriptor/register write ledger, effective count, callback argument, high-register/SP state, and 441 delay entries when bit 24 is clear all match the assertions.",
+    "With scale byte 2 and mode 2, a clear status bit yields 441 calls to original A324(1), each taking the one-iteration original leaf, then 6608 returns its exhausted-budget status 4. The 664C caller proceeds through common register-block start writes rather than returning at that status. A set bit bypasses polling."
+  ],
+  "limitations": [
+    "The status word is static/modelled and scale is supplied as 2; this does not establish physical readiness or elapsed-time behavior. The callback is controlled. Factory scale provenance, pointer mutation, concurrency and physical MMIO effects remain unresolved.",
+    "No canonical admission."
+  ]
+}

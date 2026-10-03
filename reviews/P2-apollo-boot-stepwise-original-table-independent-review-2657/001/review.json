@@ -1,0 +1,27 @@
+{
+  "review_id": "2657",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-profile-spot-profile-stepwise-original-table-2656/001",
+  "candidate_receipt_sha256": "c4f5e410e6630de875d7111d4630cea3b2cc768c871707cc1fa8a944ea7e580e",
+  "candidate_replay_sha256": "da4c40e0beffb7ae8bdd21af1fd1bfd86a3ebf332d66bb37cc583d23e63e6290",
+  "candidate_fixture_sha256": "d2115158088894ac1d314055249271d34564d3190c1d5ff7a0e3387332608f3f",
+  "candidate_pseudocode_sha256": "ff25f931107f1aee12958ce32e00e3723a4d1c257fe98eed760d0fcf1ad27ffa",
+  "flash_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "decoded_ram_sha256": "e3bea7ccd46bc324829152b5b5a9069aecce5db243876273084d29bd7d47b843",
+  "lookup_sha256": "d83c73b1f5370cc6063489aedc4f0701bdec2ca34a492233caa521c0cf2ea5e8",
+  "table_address_hex": "0x20000158",
+  "fixture_count": 1600,
+  "isolated_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2657-independent/replays.json",
+  "isolated_fixture_sha256": "d2115158088894ac1d314055249271d34564d3190c1d5ff7a0e3387332608f3f",
+  "checks": [
+    "Candidate receipt, replay, fixture JSON, pseudocode, locked flash, decoded RAM image, and lookup-data hashes match their pins. The table field is decimal 536871256 = 0x20000158; replay derives all 27 targets from authenticated decoded RAM rather than a synthetic table.",
+    "Independent Thumb disassembly of [0x42A43A,0x42A4BC) confirms the ascending/descending one-step loops, route call at 0x42A2B4, status-gated indirect call, full final (newfirst,oldfirst,newsecond,oldsecond) argument reload, and saved-stack epilogue. For equal endpoints, neither loop executes.",
+    "Isolated replay passed all 1,600 cases (new/old 0..19 and two second-word patterns). Its replays.json is byte-identical to the candidate fixture file. Route helper and entries 0..23 are controlled; table entries 24..26 execute original BX LR instructions at 0x42A030/32/34. Calls, arguments, skip-and-continue behavior, last index, return words, R4-R8, SP, and sentinel return are asserted."
+  ],
+  "limitations": [
+    "Controlled route helper and target entries 0..23 provide routing evidence only; no semantics are claimed for those handlers. Original BX LR behavior for entries 24..26 does not establish enclosing function ownership.",
+    "The authenticated initialized-RAM table does not prove startup installation, runtime immutability, which indices are reachable in deployed operation, caller ownership, handler extents, or physical hardware behavior. Large walks and malformed/out-of-range indexing are outside these fixtures.",
+    "Private scoped evidence only; accepted:false; no canonical admission."
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "review_id": 2707,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-runtime-timer-start-rearm-original-enable-2706/001",
+  "candidate_receipt_sha256": "8a8b325e0fa40721c5981a1e090a1810cc77f153bfebb02e900f277e40852989",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "itcm_sha256": null,
+  "candidate_artifact_hashes_verified": true,
+  "body_hashes_verified": {
+    "41cc48-41cc92": "aef74a1657eee6d89e50c7452789a0aff1c7e25bb9dd81f3a1db74ed173d5e49",
+    "41cc92-41ccd6": "bcbc39a968d90e534a70b68e4dcda7a2bf30bcd02725a4a4ecf539b8d50cfbc6"
+  },
+  "isolated_replay": {
+    "result": "PASS",
+    "fixtures": 180,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2707-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "The fixtures use pending clear and done initial state that bypass the countdown/cleanup branch; separate packet 2704 covers the new-pending path.",
+    "RAM-backed register effects do not prove physical peripheral behavior or runtime reachability.",
+    "The local pointer published in the active path is not claimed to remain valid after return.",
+    "Private accepted:false evidence; no canonical admission."
+  ],
+  "accepted": false
+}

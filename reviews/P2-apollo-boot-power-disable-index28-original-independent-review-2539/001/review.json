@@ -1,0 +1,27 @@
+{
+  "review_id": 2539,
+  "result": "PASS_SCOPED",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-power-disable-index28-original-2538/001",
+  "candidate_receipt_sha256": "25dda590aac4995b86ee87c99493092f83ec14fab653070893d48c77ad08a88d",
+  "candidate_files": {
+    "receipt.json": "25dda590aac4995b86ee87c99493092f83ec14fab653070893d48c77ad08a88d",
+    "pseudocode.md": "62027b3221f700c3e1ee1273d5c4b40c6dcc9ae1fc4743a53a99df0de56e1c7e",
+    "replay.py": "1da6174f826f25cda00c117ff7f2cb96525bcf732c08154755f54213c6e5baa5",
+    "replays.json": "11552573ea16976836ff221a6d5621075e5bc54a900f2a84d2bc36a0fbde6bcd"
+  },
+  "inventory_sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa",
+  "sources": [
+    {
+      "id": "apollo_bootloader:flash",
+      "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5"
+    },
+    {
+      "id": "apollo_bootloader:decoded:00000040",
+      "sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83"
+    }
+  ],
+  "isolated_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-power-index28-original-2538/replay-2539-independent",
+  "isolated_cases": 12,
+  "accepted": false,
+  "canonical_admission": false
+}

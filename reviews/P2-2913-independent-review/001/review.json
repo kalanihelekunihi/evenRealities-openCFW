@@ -1,0 +1,15 @@
+{
+  "review_id": "2913",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-state-effect-map-2912/002",
+  "candidate_receipt_sha256": "ad0a4931cc2a69aefe3c5b38ac1182a953a4960170e50cf02bfd72119ecab9e8",
+  "candidate_replay_sha256": "267c3cad08952733606d6c1cb3d816c5ec5348df08f0888c2aeb5bd41d2ef388",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "source_and_body_pins": "PASS",
+    "candidate_artifact_hashes": "PASS",
+    "isolated_replay": "PASS (35 instructions)"
+  },
+  "summary": "The authenticated flash image hash matches inventory. The body [42B014,42B068) digest and output artifact hashes match the receipt. Isolated Capstone decode replay into a fresh destination passed and tiled the 84-byte body with 35 instructions. The PC-relative LDRs resolve to literals 42B9C8=200271B2, 42B9E8=200271B0, and 42B9D0=4002037C. Original instructions support the two-byte-argument gates, conditional flag marker read/write, low-byte tests, and the three separate fresh MMIO read/clear/write operations (bits16,3,6), followed by flag-byte clear and BX LR. Static map only; NZCV path details and physical hardware remain unresolved."
+}

@@ -1,0 +1,17 @@
+{
+  "review_id": "2887",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-temperature-init-original-active-power-chain-2886/001",
+  "candidate_receipt_sha256": "0708af4d8ff165934960a02d5dc6cb2fd29f0d3d9c117f8d9a859514b3f39f24",
+  "candidate_replay_sha256": "92ae3172bfaf072a472af5f539f026565e64f6c5e344bc887f1009de37d65798",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "itcm_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "source_and_itcm_match_inventory": true,
+    "body_hashes_match_source": true,
+    "artifact_hashes_match_receipt": true,
+    "isolated_replay": "PASS (36 fixtures)"
+  },
+  "summary": "Authenticated flash and decoded-ITCM image hashes match inventory; all eight declared code-body hashes and candidate artifact hashes match. Isolated replay into a fresh destination passed 36 fixtures. The original initializer, active power-index29 path, lookup/copy, operation-3 and derivation path, temperature output/operation-2/classifier/derivation, poll/delay and ITCM execute without function interception. Power-ready register reads are modeled to become ready on read 1, read 2, or never; temperature poll bit and gate/PRIMASK vary. A manually installed table slot and current outputs 7/6 avoid applying the derived result. Assertions cover ordered calls, status/bounds, power and temperature delays/iterations, registers/frame/PRIMASK. This does not prove non-null callback behavior, actual apply, hardware effects, caller/table installation ownership, or behavior beyond the fixture configuration. accepted:false."
+}

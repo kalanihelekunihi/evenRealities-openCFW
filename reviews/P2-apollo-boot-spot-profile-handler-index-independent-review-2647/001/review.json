@@ -1,0 +1,27 @@
+{
+  "review_id": "2647",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-profile-handler-index-2646/001",
+  "candidate_receipt_sha256": "bde8612ce9f4973c400d38cf0a1c29eeac6ae59aaa8d5c60518be6a32f2ce385",
+  "candidate_pseudocode_sha256": "568c64d89be9959ae7428a9086121985cebba717c87a91b0f41c76d6ef1f45a3",
+  "candidate_replay_sha256": "8b14e3c6f77bc3733a5e20f89c8d3eb21a50b9b0cd91e1a86a0904fa6e94701f",
+  "fixture_sha256": "669c460f93cb01e9a9647b12cda9ecfab5479d2e1376c2fbe8fbe3a73f04ab56",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_sha256": "c02ca4144181ebe16c3dffc47e1bec89a89fbb832fa8bb134b38dd8bf287444f",
+  "table_address": "0x433498",
+  "table_bytes": "1900011a0002191a0303041a19051a1a0607190802091a0a19000000",
+  "isolated_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2647-independent/replays.json",
+  "isolated_replay_count": 400,
+  "checks": [
+    "Candidate, source, code-body, and artifact hashes match; the 28-byte table at 0x433498 matches the exact recorded bytes.",
+    "Reran a candidate replay copy into a fresh isolated directory; all 400 original-code fixtures pass with original 0x4156AC table copy and no function interception.",
+    "The decoded index is (old>>2)*5+(new>>2). The selected byte is written first; value 26 returns status 7 immediately. The 0/8, 8/0, and 8/12 or 12/8 overrides and byte-25 transition categories match the branch conditions and ordered writes.",
+    "The four transition-category paths include upper-word bounds: both old>>2 and new>>2 must be below 5. This bound is satisfied by the tested 0..19 input domain. R4-R6/SP and sentinel return are asserted."
+  ],
+  "limitations": [
+    "Index bounds are not checked by the original helper; values outside the tested 0..19 domain are not covered and may read beyond the table.",
+    "Table overlap, null destination, concurrent mutation, caller ownership, and physical effects remain unresolved.",
+    "Private scoped evidence only; accepted:false; no canonical admission."
+  ]
+}

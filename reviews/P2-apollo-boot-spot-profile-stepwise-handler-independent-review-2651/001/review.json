@@ -1,0 +1,26 @@
+{
+  "review_id": "2651",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-profile-spot-profile-stepwise-handler-2650/001",
+  "candidate_receipt_sha256": "47f4f14eb1837fc183a56ae6259a36d3739120ebbbabc7203729529e34e65533",
+  "candidate_pseudocode_sha256": "72a37390373105adccfa55a37c4958e36460dc5b2fe422c589d296621c996cfd",
+  "candidate_replay_sha256": "fdc62cab02dc1d1db199bd980c98154a3443eb5c3735f8b396ead1793e8f801a",
+  "fixture_sha256": "57e66644c9b43e9c9076f0d519b7f68522e0139440683700f8c9bb1e10e9381f",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "lookup_address": "0x433498",
+  "lookup_sha256": "d83c73b1f5370cc6063489aedc4f0701bdec2ca34a492233caa521c0cf2ea5e8",
+  "isolated_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2651-independent/replays.json",
+  "isolated_replay_count": 1600,
+  "checks": [
+    "Source, both body spans, lookup table, receipt, pseudocode, replay, and fixture hashes match.",
+    "Reran a candidate replay copy into a fresh isolated directory; all 1,600 fixtures pass. Original stepwise handler, original index selector, and original lookup-table copy execute; only indirect handler destinations are synthetic.",
+    "The original code walks one unsigned integer step from old toward new, calls the selector with each adjacent pair, skips an indirect handler only when selector returns nonzero, and continues walking. Handler calls use original final values (new, old, newsecond, oldsecond), not the adjacent pair; handler return values do not alter traversal.",
+    "The stack byte begins at 26 and is replaced by the last selector write. On equal endpoints it remains 26. The final R0/R1 values, callee-saved registers, SP, and sentinel return match assertions."
+  ],
+  "limitations": [
+    "Indirect handler semantics and real handler table contents are not established; fixture targets are synthetic.",
+    "Only old/new values 0..19 are covered. Large unsigned walks and out-of-range table indices, concurrency, and ownership remain unresolved.",
+    "Private scoped evidence only; accepted:false; no canonical admission."
+  ]
+}

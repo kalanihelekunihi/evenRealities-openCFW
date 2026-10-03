@@ -1,0 +1,16 @@
+{
+  "review_id": "5083",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-size-classification-original-fixtures-5082/001",
+  "candidate_receipt_sha256": "97decfec4289b63ac1771151b6ec5405a10bd5e10cb46059f19f6a226af339f6",
+  "candidate_replay_sha256": "6e4fe74c6f672061b7ecd66973e182bc5313c37284d80b24f4fb66b9b949ca32",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Receipt pins the locked image and size-classification map 5078; local artifact hashes match. Independent isolated replay passes all 2,220 cases. Five original entries run without child redirection over boundaries and deterministic random inputs, including distinct and aliased output slots; the 8-byte output window and R0/R1 aliases match the replay oracle."
+  ],
+  "limitations": [
+    "Bounded alignment entry BCE is excluded. Inputs use supplied stable memory; invalid pointers, flags and hardware effects are not established. Private scoped evidence; accepted:false."
+  ],
+  "candidate_results_sha256": "16b95ed4dea7e17718332fdcccdaee5c5affe9523ac828a7bf2e8113d5ef87c2"
+}

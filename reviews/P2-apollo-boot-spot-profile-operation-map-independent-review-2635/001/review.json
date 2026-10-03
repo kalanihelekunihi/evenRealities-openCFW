@@ -1,0 +1,23 @@
+{
+  "review_id": "2635",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-profile-operation-map-2634/001",
+  "candidate_receipt_sha256": "a12c195396a4bed9ace1a9112084bedb7fd909f058be8b4920552bfa734474ab",
+  "candidate_pseudocode_sha256": "0b03b10848790957d909690d2c3ded261389121664b7276fc1b8f448c9bbaba5",
+  "candidate_replay_sha256": "62954f29383281fa1753a044e7bea3ac3fe6fb244e38042a0e6769725d7e35e7",
+  "candidate_instruction_listing_sha256": "eaee34cbd4bfd6f4f9b24d19b8293d41e4235756fd5d58625ae347f61fd1b504",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_sha256": "83deb1cccedcf7dab0c986deaacc2f94baea6d1f74b7e7e387fbdb9f77527079",
+  "isolated_static_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2635-independent/",
+  "checks": [
+    "Candidate receipt and all candidate file hashes match. The exact original body [0x42A878,0x42AB6E) is 309 contiguous decoded instructions; every instruction byte sequence and all 27 PC-relative literal word values match the source image.",
+    "The isolated static verifier passes with 309 instructions. Independent objdump decode confirms mode/dispatch guards, PRIMASK critical-section entry/exit, operation routing and child argument order, classifier branch/bounds stores, recomputation and final status/epilogue flow.",
+    "The `CMP r0,#3` followed by signed BGE operates on the zero-extended LDRB result; it correctly treats every byte value 3..255 as at least 3. The class<3 global-flag description is accurate for the byte domain.",
+    "The pseudocode is explicit that five child behaviors, dynamic execution, changing flags/bounds, caller ownership and physical meanings are outside this static map."
+  ],
+  "limitations": [
+    "Static instruction/literal analysis only; no dynamic operation matrix or child behavior is established.",
+    "Private scoped evidence; accepted:false; no canonical admission."
+  ]
+}

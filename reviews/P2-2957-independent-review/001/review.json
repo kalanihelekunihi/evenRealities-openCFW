@@ -1,0 +1,17 @@
+{
+  "review_id": "2957/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-control-operation-original-condition-input-2956/001",
+  "candidate_receipt_sha256": "202b0a9d095eb40d203a9890e0c28c792bd12afa7e4f540aba1796f0190f2cef",
+  "candidate_replay_sha256": "ee6976997fbff6c572cf5f0961e6572714a0e59799f7f99c0bb44a9159aa68d8",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "source_and_body_pins": "PASS (operation caller, decoder, interrupt save)",
+    "fixture_grid": "PASS (768 = 4 input-condition bytes \u00d7 operation1 \u00d7 4 types \u00d7 3 choice bytes \u00d7 4 flag bytes \u00d7 2 clock values \u00d7 2 masks)",
+    "condition_input_read": "PASS (operation1 original path reads the supplied byte and places it in decoder record)",
+    "decoder_and_state_outputs": "PASS (oracle matches exact ordered output writes and status0)",
+    "calls/mask/frame": "PASS (save then decoder, PRIMASK restored, high registers/SP checked)",
+    "isolated_replay": "PASS (all 768 fixtures and receipt outputs hash-match)"
+  },
+  "summary": "All 768 operation-1 original caller/decoder fixtures pass in isolated replay. The original path reads each supplied condition byte into the decoder record; the independent expected outputs account for condition values 0\u20133, choice, type, bit-0 flag, clock low bits, and seeded matching state. Ordered two-word publication, save\u2192decoder call order, status zero, PRIMASK restoration, high-register sentinels and SP pass. This does not prove other operations/snapshots, transition branches, alias/volatile behavior, physical effects or whole-caller behavior."
+}

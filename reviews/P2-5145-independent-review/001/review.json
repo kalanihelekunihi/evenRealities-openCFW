@@ -1,0 +1,16 @@
+{
+  "review_id": "5145",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-service-record-query-chain-fixtures-5144/001",
+  "candidate_receipt_sha256": "e5a97fb22c7b8334944445035602c5846079c2a8758923989dfe60e7f02c9611",
+  "candidate_replay_sha256": "49bdf75155a0dc5ac6f241b49c437d1fe5267871b0d4c79497fe43fe282c4664",
+  "candidate_results_sha256": "54a7a33510d928b25a8abf14861e1c09c08a83ebc0603699994775c8559c6c46",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Receipt pins source and query/toggle dependencies; isolated replay passes all 96 original-chain cases. Active-state values, record mask, first-match/exhaustion behavior, toggle and comparison arguments, full 256-byte state image, and R0/SP/PC checks match."
+  ],
+  "limitations": [
+    "Comparison and two external toggle children are controlled, so their semantics are not proved. Input is nonzero; invalid input, faults, hardware and broader behavior are excluded. Private scoped evidence; accepted:false."
+  ]
+}

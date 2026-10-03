@@ -1,0 +1,23 @@
+{
+  "review_id": "2689",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-handler2-map-2688/001",
+  "candidate_receipt_sha256": "082abf1038511f2b8702ff821021ec15daa3cc34f55737e188e13ae10f40a7bb",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_sha256": "aed159d19382e0b72478d67e5204326070f9f6f27e1f426a3716cd97cbf41289",
+  "instruction_listing_sha256": "f19df6fe72756a4639ad8d81fb73f8e45e8c399d728a5ef26fe9f804b6a7be7c",
+  "replay_sha256": "53cf76b8b68e11f22e33f84d6731e5688ff08743ecbbbb97b463295ab20ac6f9",
+  "isolated_static_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2689-independent/instructions.json",
+  "instruction_count": 105,
+  "checks": [
+    "Candidate receipt, source, exact body hash, instruction listing, replay, and pseudocode file hashes match. Isolated static replay reproduced all 105 Thumb instructions across [0x428240,0x428378).",
+    "Independent listing confirms a 40-byte frame, packed profileword100 bytes at stack word0, the control-bit/readiness path, new-profile stores, secondary-field call, low7 update derived from profilebase+0x50 (profileword80), saturated old/new high7 interpolation, then newfirst store through the literal at 0x428360. The literal at 0x428360 resolves to 0x20000154; the final flag-byte literal resolves to 0x2000055A.",
+    "The body calls 0x41CC48 with argument 50, ignores its return, writes flag byte2, and returns the packed word in R0 while restoring R4-R11/SP. The final low7 restoration is not performed by this body; it is deferred to the separately recovered flag2 service."
+  ],
+  "limitations": [
+    "This is a static map only; no dynamic execution of this body or its child calls is claimed. The 0x41CC48 routine remains unresolved in this packet.",
+    "Profile/index bounds, caller ownership, changing memory, execution reachability, and physical behavior are not established.",
+    "Private evidence only; accepted:false; no canonical admission."
+  ]
+}

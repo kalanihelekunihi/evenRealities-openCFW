@@ -1,0 +1,28 @@
+{
+  "review_id": 2877,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-temperature-init-original-output-poll-2876/001",
+  "candidate_receipt_sha256": "672f897fa7cfdfd9ada9e0bffb6b95488a992f027ee58c8933dcb1c5b25398a6",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-fixed-images-005/002/apollo_bootloader-flash.bin",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_range": [
+    "0x42AC54",
+    "0x42ACA4"
+  ],
+  "body_sha256": "4c910800d808fd71ce61551e88a4bbe388e62974b65a756a73913bdf27482ea4",
+  "itcm_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-boot-canonical-replay-015/001/decoded-00000040.bin",
+  "itcm_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+  "candidate_artifact_hashes_verified": true,
+  "isolated_replay": {
+    "result": "PASS",
+    "fixtures": 48,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2877-independent"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Power helper 0x41BF84 and the installed slot-4 callback are controlled; their implementations and hardware effects are not established.",
+    "The poll status memory is modeled, and only the listed gate, child-status, poll-bit, and PRIMASK cases are exercised. Changing status during polling and other caller/startup paths remain unresolved.",
+    "No physical device behavior, whole-image completeness, or canonical admission is claimed."
+  ],
+  "accepted": false
+}

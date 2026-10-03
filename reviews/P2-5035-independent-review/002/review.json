@@ -1,0 +1,17 @@
+{
+  "review_id": "5035/002",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-u64-division-startup-dual-resource-map-5034/001",
+  "candidate_receipt_sha256": "787f28583fa347d53bc933fcb649a8bbf799ef7d2f2d71ca37c6cad6ec0be528",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "pins": "PASS (source/map dependencies and all packet file hashes)",
+    "instruction_decode": "PASS (37 instructions exactly tile 88 bytes)",
+    "literal_references": "PASS (10 consumer words independently reproduced)",
+    "control_flow_and_abi": "PASS_SCOPED (two allocator calls before branch selection; 4176CE args/stack layouts and ignored status; R0/R1/R2/R3 return aliases agree)",
+    "isolated_replay": "PASS",
+    "scope": "PASS_SCOPED (resource/logger child behavior remains provisional)"
+  },
+  "summary": "The 88-byte parent map matches the locked image and all ten literal consumers. The flow calls both allocators, checks the two result words, and then makes the conditional resource/logger call with branch-specific arguments and stack words; that child status is ignored. The decoded epilogue returns the stated aliases. Child roles and semantics remain unresolved."
+}

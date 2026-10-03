@@ -1,0 +1,22 @@
+{
+  "review_id": "2665",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-indexed-operation-dispatch-2664/001",
+  "candidate_receipt_sha256": "b07abefa79fcf76de1e2eeb8fd131181402bb5eb3a9650801fc44d8a7c8039b6",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_sha256": "6a131868a276083764d4714178857124ccb4209a5f3e7552d874aba7f7c1a54e",
+  "fixture_sha256": "e3036e30bc6559973fbdc51c960497794a617f3640c25fe08330f8c39fce3780",
+  "replay_sha256": "275b69d6695542b4d68bd8307ee8a0998b0999931c32506dd6d2b474032075dc",
+  "isolated_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2665-independent/replays.json",
+  "fixture_count": 180,
+  "checks": [
+    "Candidate/source/body and artifact hashes match. Isolated replay passed all 180 fixtures.",
+    "Decoded branch order checks the zero-extended low byte of the index against 57 before the operation selector; the low byte of the operation selects one of seven child entries for selectors 0\u20136. Other selectors return 6. The child receives the truncated index; its R0 return propagates.",
+    "The epilogue restores incoming R7 into R1, preserves R7 and SP, and returns to the sentinel. All seven child entries are controlled, so the result is dispatch/ABI evidence only."
+  ],
+  "limitations": [
+    "No child semantics, physical behavior, dynamic caller coverage, or ownership is established. Inputs beyond the explicit byte-selector/boundary fixtures are not generalized.",
+    "Private evidence only; accepted:false; no canonical admission."
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "review_id": 2853,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-sleep-predicate-reference-candidates-2852/001",
+  "candidate_receipt_sha256": "ff9fe858d80914cf86f89520ea18dab09e4c998e595cde81120212438e982311",
+  "source_sha256": null,
+  "body_sha256": null,
+  "candidate_artifact_hashes_verified": true,
+  "isolated_replay": {
+    "result": "PASS",
+    "images": 33,
+    "candidates": 1,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2853-independent"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Navigation-only scan; one direct branch candidate does not prove caller ownership or executable reachability. Indirect/computed references and other instruction sets are not excluded.",
+    "No global completeness or canonical admission claim."
+  ],
+  "accepted": false
+}

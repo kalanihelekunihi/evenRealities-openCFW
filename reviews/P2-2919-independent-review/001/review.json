@@ -1,0 +1,15 @@
+{
+  "review_id": "2919",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-power-transition-trims-map-2918/001",
+  "candidate_receipt_sha256": "ccf978d88f8542562c926d2c5f84f6f7d9a76b8fb06f23ca7d907d9108abe558",
+  "candidate_replay_sha256": "4f11ee7dac816ba3daecc1be97ed0d9c7e739bdfd6a0b7ae818db9941a448fa8",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "source_and_body_pins": "PASS",
+    "artifact_hashes": "PASS",
+    "isolated_static_decode": "PASS (198 instructions)"
+  },
+  "summary": "The authenticated flash image hash matches inventory. Body [42B06C,42B294) and all output artifacts match receipt hashes. Isolated Capstone replay into a fresh directory decoded 198 instructions covering the exact 552-byte interval. I checked the ordered branches and PC-relative literals against original instructions: low10 and low6 delta bounds; separate category field selections including byte and word loads; full-width category dispatch; mode-specific field override/saturation; ordered MMIO bit set/clear RMWs; final low-field subtraction; and saved-register epilogue. This is static pseudocode with fresh volatile reads retained. No dynamic child composition, concurrent mutation/alias contract, NZCV/R0\u2013R3 path contract, physical MMIO behavior, or whole-image ownership is established."
+}

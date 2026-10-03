@@ -1,0 +1,16 @@
+{
+  "review_id": "5125",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-startup-service-initializer-fixtures-5124/001",
+  "candidate_receipt_sha256": "2920c058d0defb4420be2abd0421c99d8ebba655c81a1bc55a6c38cc62f13872",
+  "candidate_replay_sha256": "812de28fc97318c4b37d2fabf111c7f547c779a1e227ac16f0ae522d83d0f1c0",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Receipt pins map 5122 and source; isolated replay passes all 40 original parent cases. The five controlled children, exact guard and low-byte status routing, ordered call arguments, 256-byte state oracle, and R0/R1/SP/PC assertions match."
+  ],
+  "limitations": [
+    "Child return behavior is modeled; real hardware/service behavior and unlisted paths are not established. Private scoped evidence; accepted:false."
+  ],
+  "candidate_results_sha256": "092271b54653ee8e36725a5c01a9d3e2bd81e5b8f10156b2885f6378e3511ab0"
+}

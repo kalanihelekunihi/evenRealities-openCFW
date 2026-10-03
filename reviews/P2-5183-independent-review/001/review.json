@@ -1,0 +1,15 @@
+{
+  "review_id": "5183",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-u64-division-format-character-callback-map-5182/001",
+  "candidate_receipt_sha256": "c4633ee7b67595cf6de850d35fc68a3bba440a27afbba29287d9ae1552d2b746",
+  "candidate_replay_sha256": "96e84d6b86e50582ff97015e48be9f401ced320e5d796e36dd7ae524d4b3501f",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Source-pinned isolated replay passes for the stackless character callback. Descriptor offset 8 update, remaining-count guard, cursor increment/store order, decrement/store, and path-dependent R1 are consistent. Computed callback address 0x415673 is Thumb-tagged for entry 0x415672."
+  ],
+  "limitations": [
+    "Null/overflow/alias behavior is not generalized; no hardware or formatter semantics claim. Private partial; accepted:false."
+  ]
+}

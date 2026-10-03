@@ -1,0 +1,20 @@
+{
+  "review_id": "2613",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-transition-operation2-original-chain-2612/001",
+  "candidate_receipt_sha256": "7ee97d6fb30964cbb3ff0b4735ac741306bda373b40c3b262582c50cde62ce0e",
+  "candidate_pseudocode_sha256": "8d0700e161daefdedbb0bf4149a2f7d6bb7fbc588b772fea604839103874ec8f",
+  "candidate_replay_sha256": "98d03fdc8e297f26bffc6e016768995fa7eebceb26dbcb3ca21ba0ee149847d3",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Candidate artifacts and authenticated flash image match their hashes; dispatcher [0x42D562,0x42D5C2) and float helper [0x42CED8,0x42CFE0) body hashes match the receipt.",
+    "A replay copy redirected to a fresh output directory passes all 152 cases. The original dispatcher routes operation 2's R2 argument into the original floating helper; no function is intercepted. The resulting 88 valid-category paths invoke original 0x42CEA4 and the original pending-adjust chain under the stated fixed gate/mode/boost fixture.",
+    "The replay checks category and float-bound outputs, sensor flag behavior, transition/pending/destination writes, helper calls, return status, R4, D8, SP and PRIMASK. The classification boundaries and stored lower bounds remain distinct at 35/33 and 50/48. Invalid category skips the downstream child and returns 1."
+  ],
+  "limitations": [
+    "Float fixtures are stable; repeated-read mutation, concurrency, physical meaning, and callback ownership are not proven.",
+    "The pending helper is constrained to enabled gate/mode3/boost15 and fixed backing words; other child branches are out of scope.",
+    "Private scoped evidence only; accepted:false and no canonical admission."
+  ]
+}

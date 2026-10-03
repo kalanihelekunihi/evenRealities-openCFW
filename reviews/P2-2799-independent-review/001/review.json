@@ -1,0 +1,32 @@
+{
+  "review_id": 2799,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-profile-current-restore-original-2798/001",
+  "candidate_receipt_sha256": "06b92ced7968647becf9c355c8ef29ad3f0970a7ebf5b10ebc71a76545c3a729",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "candidate_artifact_hashes_verified": true,
+  "body_hashes_verified": {
+    "429da4-429df6": "a69ea6c52f959eba65684feebd9651d2068cdd0d91caf8eb45d74e52969c61a4"
+  },
+  "isolated_replay": {
+    "result": "PASS",
+    "actual_fixtures": 18,
+    "receipt_fixtures": 18,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2799-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "status": "REVISE_PROSE",
+  "findings": [
+    {
+      "severity": "prose/count mismatch",
+      "detail": "The receipt and replays.json each contain 18 fixtures, and the replay loops over 3 index sequences \u00d7 3 target patterns \u00d7 2 PRIMASK values = 18. The pseudocode states 27 fixtures. Correct the prose count to 18 or expand the fixture set and receipt if 27 was intended."
+    }
+  ],
+  "behavioral_observations": [
+    "Isolated replay passed all 18 actual cases. The three distinct index reads, ordered field writes, clear-byte write, R0\u2013R3, R4/SP/PRIMASK assertions match the decoded instructions."
+  ],
+  "limitations": [
+    "The three selected index sequences and target patterns are bounded; this does not establish arbitrary mutation, caller ownership, physical hardware effects, or complete ownership.",
+    "Private evidence only; no canonical admission."
+  ],
+  "accepted": false
+}

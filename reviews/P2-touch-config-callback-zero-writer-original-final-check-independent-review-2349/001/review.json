@@ -1,0 +1,20 @@
+{
+  "review_id": "2349",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-config-callback-zero-writer-original-final-check-2346/001",
+  "candidate_receipt_sha256": "96c4d2cd607e51c7800a7c1b4b88ad580930abb5155c73185981cf77fbb71a96",
+  "candidate_pseudocode_sha256": "f30ac3c8a2d7e4cf515194d1ff2a4ee783f852146c7e97041a87e52436d9295d",
+  "candidate_replay_sha256": "a30e4d93f719d68193e12e4c03286ac2d38b66eae1e2b3a07accda05bacbac9b",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Receipt 96c4d2cd607e51c7800a7c1b4b88ad580930abb5155c73185981cf77fbb71a96 pins the source and body [0x4C7C,0x4DA8), with evidence hashes matching. Independent execution passes all 288 fixtures.",
+    "Original 4C7C runs through 6AC0(0,ctx), 4C72 and 4C44 with no function interception. For allowed modes 0/1/2/5/6/7, a nonzero supplied version byte reaches the final helper and actual 4C44 returns 128; unsupported modes 3/255 return 1 and skip 4C72. All test cases observe exactly one zero store to cfg.word20, final zero, parameter flags, helper call sequence, final status, R4-R7 and SP.",
+    "The corrected literal is independently confirmed: LDR at 0x4CB6 resolves to 0x4DA8, containing 0x0000028F; that value is stored in cfg.word44. This corrects the preserved 2342 prose error."
+  ],
+  "limitations": [
+    "Zero-version success path is not covered; only rejection bytes 1, 2 and 255 are tested.",
+    "This does not prove callback persistence against other callers, intervening writers, changing pointers or aliasing, and does not close dynamic target resolution.",
+    "Physical behavior and canonical admission are not claimed; accepted:false."
+  ]
+}

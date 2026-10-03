@@ -1,0 +1,19 @@
+{
+  "review_id": "2265",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-config-initializer-distinct-fields-2262/001",
+  "candidate_receipt_sha256": "80d167a6bb703030e6ec55ab35b90662239af3c88c9732e4f3c20af5c84ced66",
+  "candidate_pseudocode_sha256": "e6faa22e30f8e63348ea7b2395bc994f72c5bdb65e91dbbaa6f20cc35db4cf02",
+  "candidate_replay_sha256": "69fbc7775b459635d30db25eb7efc03597715867fc4181fe1e77ecf659981ee6",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Source, body, literal pool, and artifact hashes match; decoded packed-field masks and fallback paths agree with the pseudocode.",
+    "Isolated replay regenerates all 45 fixtures. Original initializer/A9D4 execute; only 52BC/50E4 are controlled. Distinct config/root arithmetic patterns and independent halfword 66/68 values are checked against the ordered full destination ledger/output, child arguments/order, and R4-R11/SP."
+  ],
+  "limitations": [
+    "Only two arithmetic byte patterns supplement uniform patterns; exhaustive field interactions are not covered.",
+    "Final incidental R0 and stack-scratch contents are not asserted; original child effects, aliasing, pointer mutation, and physical field meaning remain unresolved.",
+    "No canonical admission."
+  ]
+}

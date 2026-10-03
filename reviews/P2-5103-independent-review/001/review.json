@@ -1,0 +1,17 @@
+{
+  "review_id": "5103",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-block-split-merge-original-fixtures-5102/001",
+  "candidate_receipt_sha256": "4305f6c0b4ded14c227b397935514ce76df831f4bf8761f396d17b72afd3576f",
+  "candidate_replay_sha256": "72fe44c70ace04704d51b963b09010017ca8b3989059ab0441cd3746042afd9c",
+  "candidate_results_sha256": "99c9e13fc8ebecd0a8c11f7e9edb970601f19d9968d84b701efa1ce0dd343f54",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Receipt pins locked image and split/merge, metadata, next-pointer and alignment maps; hashes match. Independent isolated replay passes all 48 original executions with no controlled callees.",
+    "The 1,024-byte memory oracle, R0/R1/SP/PC and four flag patterns match. Merge uses the raw flag-bearing size word where specified; split preserves the new block flag state."
+  ],
+  "limitations": [
+    "Only valid enumerated cases are covered. Assertion/fault, volatile mutation and hardware effects are excluded. Private scoped evidence; accepted:false."
+  ]
+}

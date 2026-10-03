@@ -1,0 +1,29 @@
+{
+  "review_id": 2727,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-handler7-map-2726/001",
+  "candidate_receipt_sha256": "bf5c9ed0eb0a5afb84e874fc8024e1d9eda55576f6d11d372919997b23802ad4",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "candidate_artifact_hashes_verified": true,
+  "body_hashes_verified": {
+    "428920-428a78": "852a295b0650321492f6fbb7b9b503c6d20fdb12a19186bb2b04b1d1322fb0ee"
+  },
+  "isolated_static_replay": {
+    "result": "PASS",
+    "decoded_instructions": 124,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2727-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "literal_check": {
+    "address": "0x428C8C",
+    "value": "0x3F666666",
+    "meaning": "binary32 0.9"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "This is static decode/literal evidence only; no execution or dynamic float-rounding results are claimed.",
+    "Caller ownership, input bounds, physical timing/peripheral effects, and dynamic control paths remain unverified.",
+    "Private evidence only; no canonical admission."
+  ],
+  "accepted": false
+}

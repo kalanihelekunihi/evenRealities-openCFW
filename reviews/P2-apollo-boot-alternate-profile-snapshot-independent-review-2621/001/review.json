@@ -1,0 +1,20 @@
+{
+  "review_id": "2621",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-alternate-profile-snapshot-2620/001",
+  "candidate_receipt_sha256": "b492063425492daf5515f58b76bda1eed39c99222c94e9ef29e577555e40c45d",
+  "candidate_pseudocode_sha256": "dd6ee526dfaa4107ced666483dd2a9c11fa1c0951532336c91e174452aa5f320",
+  "candidate_replay_sha256": "5e97eacbd777d8fe0243eda1de71708c474b3d11eb0d528274c0a53633c8cc89",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Candidate artifacts, source, body [0x42F41A,0x42F4B2), and PC-relative literal pointers match their pins.",
+    "A replay copy redirected to a fresh destination passes all 45 cases. The bytecode branches on revision low byte 33 plus nonzero full subrevision, or rereads revision and accepts low byte >=34. This includes the 0x121 fixture, whose low byte is 33.",
+    "For the snapshot branch, disassembly confirms six byte stores in the stated order from source fields [25:29], [11:15], [8:12], [17:21], then a fresh load for [25:29] and [11:15]. The fallback bytes are 14/31/21/31/11/11. All returns are zero and the replay asserts write bytes/order, R0 and SP."
+  ],
+  "limitations": [
+    "Source words use the same repeated pattern per fixture; independent per-register variation and aliasing are not covered.",
+    "Fresh reread behavior is present in code but fixture memory is stable. Physical meaning, concurrent changes, and ownership remain unresolved.",
+    "Private scoped evidence only; accepted:false and no canonical admission."
+  ]
+}

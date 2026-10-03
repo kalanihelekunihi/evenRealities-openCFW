@@ -1,0 +1,15 @@
+{
+  "review_id": "5107",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-u64-division-allocation-release-entry-map-5106/001",
+  "candidate_receipt_sha256": "c4b9f26022ff66dcd82be4847c55fe75668f3cfb67e7c7c445b4e670842fe73e",
+  "candidate_replay_sha256": "6c90c6095db5267143e0c58bae26fd80ae214dc3becde70cdcd34754f0d07e6b",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "The two mapped entries at 0x726A and 0x7290 decode/replay with the stated frames and call order. Allocation routes through bounded alignment, lookup and release; release skips on null input and otherwise follows block validation, merge, next merge and list update. Return POP aliases are consistent with saved R3/R0. Excluded literal gaps remain outside the mapped extents."
+  ],
+  "limitations": [
+    "Assertion children may return; helper semantics are only those separately mapped. No allocator-wide, hardware, C or admission claim. Private partial evidence; accepted:false."
+  ]
+}

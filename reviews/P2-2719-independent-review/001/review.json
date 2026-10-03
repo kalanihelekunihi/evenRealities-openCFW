@@ -1,0 +1,26 @@
+{
+  "review_id": 2719,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-handler5-map-2718/001",
+  "candidate_receipt_sha256": "c86bdb279dd919f0863640b03e076fbba44bb9dec9f918d4c33b870d2de4a41d",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "itcm_sha256": null,
+  "candidate_artifact_hashes_verified": true,
+  "body_hashes_verified": {
+    "42863e-428840": "1ca4dc237d5a62982dd4361eb54a7b76308d0a822e5e26c9ce78ed0ef5120547"
+  },
+  "isolated_replay": {
+    "result": "PASS",
+    "instructions_or_fixtures": 183,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2719-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "scope": "static",
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Early-return and wait/service paths are not dynamically exercised by this packet.",
+    "Caller ownership, changing reads, physical peripheral/timing effects, and behavior outside the decoded body are not established.",
+    "Private evidence only; no canonical admission."
+  ],
+  "accepted": false
+}

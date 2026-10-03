@@ -1,0 +1,16 @@
+{
+  "review_id": "2963/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-control-operation-state-shortcut-2962/001",
+  "candidate_receipt_sha256": "6906985abd0e7b4d6d620d3f1dc82cba977f10598dae5b05a6e8de7ff43af03e",
+  "candidate_replay_sha256": "232fe52f50bedc803adce504ad3719c9979d5ba85e7e4b65fa5d10a93d9d173d",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "source_and_body_hashes": "PASS (caller and interrupt-save helper)",
+    "fixture_product": "PASS (48 = 2 full-width operation aliases \u00d7 3 prior byte values \u00d7 2 requested bytes \u00d7 2 option values \u00d7 2 masks)",
+    "shortcut_behavior": "PASS (current-state byte is replaced by requested 0/1; no decoder/state-transition helpers)",
+    "writes_status_and_frame": "PASS (one current-state byte write, status0, PRIMASK restored, high registers/SP checked)",
+    "isolated_replay": "PASS (all 48 cases and output hashes)"
+  },
+  "summary": "The 48 original shortcut-path fixtures pass in isolated replay. Both full-width operation words 0 and 256 take the low-byte-zero path. For prior current-state bytes 2/3/4 and requested byte 0/1, the caller invokes original interrupt-save, performs exactly one current-state byte store, skips decoder/transition helpers, returns zero, restores PRIMASK, and preserves checked high registers/SP. Other state pairs, volatile changes, aliasing and physical effects remain outside scope."
+}

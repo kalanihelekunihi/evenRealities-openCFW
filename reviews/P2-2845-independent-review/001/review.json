@@ -1,0 +1,22 @@
+{
+  "review_id": 2845,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-sleep-query-leaf-map-2844/001",
+  "candidate_receipt_sha256": "4f40958139f601b979e7dd0e2159f46cfa51bb78ab9524bd609c7b69e455b9f2",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_sha256": "2629a71d82c78f7602d8f37273ae02bcf42f237cdaab9da0d4db6d57a1045692",
+  "candidate_artifact_hashes_verified": true,
+  "isolated_replay": {
+    "result": "PASS",
+    "fixtures": null,
+    "instructions": 20,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2845-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Static decode only; changing-read behavior and external caller ownership remain unresolved.",
+    "Peripheral meaning and physical hardware behavior are not claimed. No canonical admission."
+  ],
+  "accepted": false
+}

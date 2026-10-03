@@ -1,0 +1,16 @@
+{
+  "review_id": "2317",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-three-row-all-original-check-2314/001",
+  "candidate_receipt_sha256": "7bc867615611d06c35f15ea6ba4d1801fa0be5e6f4d575bb753f996413db569a",
+  "candidate_pseudocode_sha256": "674b9a485aa0e952aee2054c2ee6cf08dfe321e53a23d1f319cecc9e670af149",
+  "candidate_replay_sha256": "6a9795a77ae8be95d18dff85aa475c5438e6d47e548ca38b4a2a66f964554538",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Isolated replay regenerated all 576 fixtures. Source, body [0x6384,0x6462), and all candidate file hashes match. Every child and division path executes original code without function interception. For the zero-field configuration, 6352 returns 128 (category zero OR 0x80), 6294 returns 4, and 623C returns 10; the checker stores these returns and uses the original cached flags. In the low-flags-equal-one case, 128 masked with 0x7F supplies raw zero to 6262. Full parameter write/call ledger, early count-failure/status results and R4-R11/SP assertions pass."
+  ],
+  "limitations": [
+    "The composition uses bounded zero-field and flag/validity/count patterns; broad leaf fields are covered in separate evidence. Pointer mutation, aliasing, physical meaning and whole firmware coverage remain unproven. No canonical admission."
+  ]
+}

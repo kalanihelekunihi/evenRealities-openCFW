@@ -1,0 +1,15 @@
+{
+  "review_id": "5101",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-u64-division-block-allocation-routing-map-5100/001",
+  "candidate_receipt_sha256": "641c3d3641d08ee93f460be5d2192931ba25d0d9ed0452fe6e5b5cd67240b99f",
+  "candidate_replay_sha256": "ce7ffbfd890578a96af0d43e0f209ec07e2946012833b70544553d8db5003fd5",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Source hash and isolated replay pass. Guards, classification/allocation routing, metadata and block helper call order, and the documented path-dependent return registers agree with the exact instruction body and literal references. The map does not claim successful allocator semantics beyond the decoded caller/callee boundaries."
+  ],
+  "limitations": [
+    "Assertions can return and child effects remain separately scoped. No allocator-wide behavior, hardware, C implementation, or admission claim. Private partial evidence; accepted:false."
+  ]
+}

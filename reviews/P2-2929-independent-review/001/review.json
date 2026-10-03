@@ -1,0 +1,15 @@
+{
+  "review_id": "2929",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-transition-ascending-active-original-2928/001",
+  "candidate_receipt_sha256": "1979bd9a340eca9ccf452fc61e20eb6cc9258a584ac90954fa45e0eec91667f4",
+  "candidate_replay_sha256": "9c4afe661abc85de86167e85971d3a74337907dbb6210d5c60ab9f72966d320e",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "source_and_body_pins": "PASS",
+    "artifact_hashes": "PASS",
+    "isolated_execution": "PASS (216 fixtures)"
+  },
+  "summary": "The source image and body [42B294,42B69C) hashes match; candidate output hashes match. Isolated replay passed all 216 cases. Original transition instructions run without function interception. Fixtures cover unequal ascending rank pairs with active word set, current index at its default zero and lower than the old rank, non-special indices, equal category/comparison 3, three profile patterns, two target patterns, flag values 0/1/255 and PRIMASK 0/1. Assertions verify the capped delta path, ordered stores (including saved high fields when flag is clear), absence of child calls, incoming R3 returned in R0, and R4\u2013R11/SP/PRIMASK. Other current ranks, rank relationships, special-index/callback cases, dynamic aliases/flags, full caller clobbers and physical MMIO are unresolved."
+}

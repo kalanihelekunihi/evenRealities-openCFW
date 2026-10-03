@@ -1,0 +1,15 @@
+{
+  "review_id": "5127",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-u64-division-startup-service-setters-map-5126/001",
+  "candidate_receipt_sha256": "95e54d01aaa5daccc2c333f377bd8b53134e9a2574e65fa35c410728452bf460",
+  "candidate_replay_sha256": "afa446594ce49b6006c185ceb939e4089692a129e18cfec0c8db06f6dfacec42",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Source-pinned isolated replay passes, with exact bodies, branch/literal references and the documented four 32-byte frames. Valid and invalid callback paths, callback arguments, post-callback publication, and output/stack aliases follow the decoded code. Null callback reaches logger arguments then the repeated 0x41AC8A loop; no ordinary return is claimed for that path."
+  ],
+  "limitations": [
+    "Indirect callback target and loop-child behavior are unresolved; hardware, C, and admission claims are excluded. Private partial evidence; accepted:false."
+  ]
+}

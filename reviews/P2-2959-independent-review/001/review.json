@@ -1,0 +1,17 @@
+{
+  "review_id": "2959/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-control-operation-original-temperature-2958/001",
+  "candidate_receipt_sha256": "a8ad030f7549364f050c16ff3d64eb7e7310eb2e46add6088bcf4164b1d61bce",
+  "candidate_replay_sha256": "069098c93625a1e89bc42fdb469287e1aace748bd50e542f513348d7ec90f451",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "source_and_four_body_pins": "PASS (caller, classifier, decoder, interrupt-save)",
+    "fixture_grid": "PASS (192 = 4 finite temperatures \u00d7 3 choices \u00d7 4 flag bytes \u00d7 2 clock settings \u00d7 2 masks)",
+    "float/category_oracle": "PASS (\u221240/\u221210/10/100 encodings and category-specific bound words checked)",
+    "original_call_order": "PASS (save\u2192classifier\u2192decoder, no interception)",
+    "write_ledger_and_status": "PASS (six ordered state/category/bounds/publication writes, success status0)",
+    "frame_and_replay": "PASS (R4\u2013R12, SP, PRIMASK and stop; isolated replay hashes)"
+  },
+  "summary": "The 192 original-instruction temperature operation fixtures pass. The finite inputs decode to \u221240, \u221210, 10, and 100; the classifier\u2019s expected categories, threshold byte, and exact bound words match the branch/literal behavior. Each full chain runs interrupt-save, original classifier, and decoder without interception, then checks the six ordered writes, status zero, R4\u2013R12/SP, PRIMASK restoration, and stop. Non-finite/boundary temperatures, alternative snapshots/transitions, volatile aliasing, and physical hardware effects remain untested."
+}

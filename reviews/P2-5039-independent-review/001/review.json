@@ -1,0 +1,17 @@
+{
+  "review_id": "5039/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-u64-division-startup-region-registration-map-5038/001",
+  "candidate_receipt_sha256": "cb03182f78a2bbccbaa845b49129d124afcc44d50b3a4bd0ebaaea808ef60290",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "input_and_candidate_pins": "PASS",
+    "body_decode": "PASS (22 instructions exactly cover 56 bytes)",
+    "literal_calculations": "PASS (six independently resolved words: 0x20081000, 0x2002718C, 0x434010, 0x433CA4, 0x4315C8, 0x434144)",
+    "call_and_stack_dataflow": "PASS (41560C and 417240 args; result stored; 4176CE five-argument stack layout)",
+    "return": "PASS (helper statuses discarded, R0 reset to zero, saved R1/R2 aliases and incoming R3 restored)",
+    "scope": "PASS_SCOPED (child roles and external effects not attributed)"
+  },
+  "summary": "The 56-byte body decodes and tiles exactly, with all six literal consumers matching. The two setup helpers receive the shown base and length values; the second result is stored without a status guard. The final child receives its register and stack arguments, and its status is ignored before R0 is set to zero. The map does not establish child semantics or physical meaning."
+}

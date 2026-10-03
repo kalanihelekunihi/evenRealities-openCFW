@@ -1,0 +1,32 @@
+{
+  "review_id": 2821,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-slot44-complete-service-original-chain-2820/001",
+  "candidate_receipt_sha256": "d5d36bac2525a80f5a597442ece5d240ed46b9012e31dc796f32232d08bec14a",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "itcm_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+  "candidate_artifact_hashes_verified": true,
+  "body_hashes_verified": {
+    "41cdb8-41cdca": "b405c11003ff1656393c4e633f1abe60b6b885bdcca918533ff48603da010124",
+    "428a94-428ba8": "1e0e7ddb0036670d692a97a50f6cc821d2a2358e741b72d502e943d31bb0b351",
+    "428378-4283e2": "051e40c208a75b89a9826c46a5fcea7b9933f1de7c90f4acc01777ba1ed16866",
+    "41ccd6-41cd1a": "53ecf1cc50f77949e880de53ecfed6a2d18c3ea803c457a13e77d1b2ac548a3a",
+    "42a04a-42a078": "2ce0019a9c986275a9d5c9ea8d04c05e055c163e2802417c4ee68be2fd2b7fd4",
+    "422364-4223d8": "6a131868a276083764d4714178857124ccb4209a5f3e7552d874aba7f7c1a54e",
+    "421e4a-421e8c": "f4f21abad8199cfea2524c7335d809b7f624100c1e34b693c08025ae1fb40a2a",
+    "4215dc-4215fe": "8dc0a88874cc74f9148e7ae8b6e70f50b7cd1f732db5b74982a8abcccb1bd6f5"
+  },
+  "isolated_replay": {
+    "result": "PASS",
+    "fixtures": 384,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2821-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "The callback literal is manually installed in the fixture; initializer selection and actual runtime table installation are not exercised.",
+    "Operation-4 indexed state is deliberately inactive/zeroed; active state behavior is not established here.",
+    "Hardware effects, concurrent mutation, dynamic caller reachability, and physical behavior are not claimed."
+  ],
+  "accepted": false
+}

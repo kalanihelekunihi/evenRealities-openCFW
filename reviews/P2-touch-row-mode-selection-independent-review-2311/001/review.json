@@ -1,0 +1,16 @@
+{
+  "review_id": "2311",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-mode-selection-6294-2308/002",
+  "candidate_receipt_sha256": "8c7d477ab41f8c02258617ddee0dae9ceb769c2e6b875a3f2471b6cf603669dc",
+  "candidate_pseudocode_sha256": "dad4be191501e8390566e059315690c5829250be400c4eff6ac3346afd80e20c",
+  "candidate_replay_sha256": "fe34a9b87b40245139b192c0699edddabf49da2f7fa4dd351383fd2c692b1017",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Isolated replay regenerated all 2,916 fixtures. Source, body [0x6294,0x632A), literal 65535 [0x632C,0x6330), and candidate artifact hashes match. Decode confirms saturated sum, raw parameter byte 56 masked by 0x7F, configuration shift byte 78, mode row byte 136, percentage row byte 135, and validity-dependent deduction 8 or 4. Child order is 6220\u21926262\u21926270\u219261F0, with the saturated sum supplied as the fifth stack argument; result is ORed with 4. All tested calls/results and R4-R11/SP checks pass."
+  ],
+  "limitations": [
+    "Fixtures exercise modes 0,1,2 (not mode3) and selected field combinations. Child arguments are decoded but not individually captured/asserted in this candidate; broad component evidence is separate. Aliasing, faults and physical field meaning remain unresolved. No canonical admission."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "review_id": "5057/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-u64-division-region-metadata-initialization-map-5056/001",
+  "candidate_receipt_sha256": "e176effbd555433cb296efb301b6b57f0b08d03493d4f93ea50710496f35ce64",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "pins": "PASS (source, dependencies, packet files)",
+    "instruction_decode": "PASS (three extents; 91 instructions exactly match source bytes)",
+    "literal_references": "PASS (seven references resolved and matched)",
+    "base_table_initializer": "PASS_SCOPED (initial fields and 24/32 loops follow byte map; stackless helper computes wrapped twice-word)",
+    "registration_flow": "PASS_SCOPED (alignment, unsigned min/max guards, failure args, success child order/status discards, return aliases match)",
+    "isolated_replay": "PASS",
+    "scope": "PASS_SCOPED (called helpers and physical metadata meaning unresolved)"
+  },
+  "summary": "The three mapped extents decode exactly to the locked source. Seven literal references match. Static control flow supports the described base/table initialization and registration path, including unsigned size bounds, error path, ordered helper calls, ignored child results, and POP aliases. This is pseudocode verification only; child and hardware semantics remain open."
+}

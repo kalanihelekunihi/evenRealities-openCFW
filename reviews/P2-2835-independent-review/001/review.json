@@ -1,0 +1,55 @@
+{
+  "review_id": 2835,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-current-restore-contract-candidate-2834/001",
+  "candidate_receipt_sha256": "2b114c9afc9240a94126221fcfabf9197fcf8ccb29375a5b014a55aa2692c201",
+  "function_json_sha256": "3d6f8f96c24386329c75cb2064fd0af351404a4a4dd030edebe3baf111518e3c",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_body_sha256": "a69ea6c52f959eba65684feebd9651d2068cdd0d91caf8eb45d74e52969c61a4",
+  "source_range": "0x429DA4..0x429DF6",
+  "body_bytes": 82,
+  "decoded_instructions": 31,
+  "identity_checks": {
+    "target_hash_matches_campaign_identity": true,
+    "component_image_address_space_entry_mode_present": true,
+    "function_id": "apollo_bootloader:flash:flash:00429da4:thumb",
+    "body_range_matches_entry": true
+  },
+  "input_hashes_verified": {
+    "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-profile-current-restore-map-2796/001/receipt.json": true,
+    "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-profile-current-restore-original-2798/002/receipt.json": true,
+    "reviews/P2-2797-independent-review/001/review.json": true,
+    "reviews/P2-2799-independent-review/002/review.json": true
+  },
+  "candidate_artifact_hashes_verified": true,
+  "isolated_replay": {
+    "result": "PASS",
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2835-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "independent_instruction_execution": {
+    "result": "PASS",
+    "patterns": [
+      "0x00000000",
+      "0xFFFFFFFF",
+      "0xA5C3E17B"
+    ],
+    "checked": "R0-R12, LR, SP, PRIMASK, NZCV, ordered target/status effects"
+  },
+  "status": "REVISE_METADATA",
+  "findings": [
+    {
+      "severity": "metadata-readiness",
+      "issue": "The candidate is a sound private contract draft, but is not yet sufficient as the G2 function record described in CONTRACTS.md: it omits an explicit file-offset-to-loaded-address mapping, prototype/calling-convention field, and structured references/data contracts; source.path is absolute rather than repository-relative. The source and instruction evidence are indirectly pinned through receipts, but direct evidence-file paths would make the function record self-contained."
+    }
+  ],
+  "semantic_notes": [
+    "Decoded access/order/arithmetic matches the 31 original instructions. The independently executed cases support stated R0-R12/LR/SP/PRIMASK and final NZCV behavior. LSRS#21 supplies C from original profile-word bit20; final MOVS zero supplies N=0,Z=1 while leaving C and V unchanged.",
+    "Aliases/fault cases are not dynamically exhausted; this review verifies the operation sequence, not all address alias/fault outcomes."
+  ],
+  "limitations": [
+    "Physical meaning of peripheral addresses remains inferred; only numeric register-level behavior is supported.",
+    "Whole-image code ownership/denominator and architectural exception details remain unresolved.",
+    "No canonical admission; accepted remains false."
+  ],
+  "accepted": false
+}

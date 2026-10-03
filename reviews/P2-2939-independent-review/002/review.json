@@ -1,0 +1,19 @@
+{
+  "review_id": "2939/002",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/trim-transition-structured-candidates-2938/002",
+  "candidate_receipt_sha256": "3d392452fc9a98dc4fc17d208d4a59db9e384a8910da04627ad2d86f173a0056",
+  "candidate_replay_sha256": "3564ff4c75cf34eb0b1815040f9f9ca1c4070d9ea88cfcf4c24e0d3a1be9414a",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED_WITH_RECORD_SCHEMA_FINDINGS",
+  "accepted": false,
+  "checks": {
+    "candidate_output_hashes": "PASS",
+    "source_body_and_mapping_pins": "PASS (8 bodies, 2,264 bytes; exact source digests and file/load mappings match the pinned static packets)",
+    "review_reference_bindings": "PASS (8 function references resolve to PASS_SCOPED reviews with matching review hashes and candidate receipt hashes)",
+    "record_inputs": "PASS (all declared function/data input paths resolve and hash-match)",
+    "deduplicated_literal_records": "PASS (29 unique addresses; values and byte hashes match original source; references resolve to listed function IDs and instruction addresses)",
+    "isolated_replay": "PASS (8 function records, 29 data records; replay was run with output redirected to a fresh isolated directory)",
+    "minimum_function_and_data_contract": "REVISE (still lacks required calling convention/prototype on function rows; data rows lack type/layout/encoding and generation requirements/unknowns as structured fields)"
+  },
+  "summary": "Reviewed corrected candidate 2938/002. It replays independently and the eight function records cover eight separately pinned bodies totaling 2,264 source bytes; the 29 deduplicated literal words match original bytes. Function review links resolve to the exact PASS_SCOPED review files and candidate receipt hashes, and every declared input hash resolves. The correction adds target/component/image/address-space/ISA and direct input hashes, but these remain partial analysis records: function rows omit prototype and calling convention; data rows omit structured type/layout/encoding and generation requirements/unknowns required by the campaign contract. Keep accepted:false. This is record preparation/evidence linkage only, not semantic completeness or canonical admission."
+}

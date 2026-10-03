@@ -1,0 +1,24 @@
+{
+  "review_id": 2885,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-power-enable-index29-original-2884/002",
+  "candidate_receipt_sha256": "f64a6186f1ba4212185ccf15e5a7da4514a3595cc8a940c9a7a667543ca9756a",
+  "inventory_sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa",
+  "source_hashes_verified": {
+    "apollo_bootloader:flash": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+    "apollo_bootloader:decoded:00000040": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83"
+  },
+  "candidate_artifact_hashes_verified": true,
+  "isolated_replay": {
+    "result": "PASS",
+    "fixtures": 12,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2885-independent"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Status-register readiness is modeled. The successful-poll final status read is stable in these fixtures; mutation between poll completion and that read is not covered.",
+    "Callback wrappers have null installed targets in the fixture. Callback implementation and nonnull callback effects are not established.",
+    "The test covers index 29 only, synthetic register patterns, and PRIMASK 0/1. Physical hardware behavior, startup/FPU/ITCM setup, other indices, and canonical admission are not claimed."
+  ],
+  "accepted": false
+}

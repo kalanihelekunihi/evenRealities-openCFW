@@ -1,0 +1,21 @@
+{
+  "review_id": 2819,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-remaining-callback-dispatch-map-2818/001",
+  "candidate_receipt_sha256": "61690f26f4aa18aa3ca992f162ce92188ec375aa85e8123258a1f852395e9314",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "candidate_artifact_hashes_verified": true,
+  "body_hashes_verified": {
+    "41cd60-41ce52": "babdaf0879b0db9056ebd34b770cb4ca467f21508b7855ec47f81db2b9140cb5"
+  },
+  "isolated_replay": {
+    "result": "PASS",
+    "instructions": 110,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2819-independent"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Static mapping of eleven wrapper bodies and literal; does not prove child semantics, installed-target reachability, enclosing caller ownership, or global coverage."
+  ],
+  "accepted": false
+}

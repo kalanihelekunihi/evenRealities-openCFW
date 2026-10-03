@@ -1,0 +1,16 @@
+{
+  "review_id": "2291",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-cap-measurement-original-sequence-2288/001",
+  "candidate_receipt_sha256": "64cd4dd6611ae56ebaa3abf8f2d4880198baecbfcbb1c70c5c1d50185622ed8e",
+  "candidate_pseudocode_sha256": "001135937af7472de5cf9ad1302ee86e46a238ba1903c09b75e0bbaa3fee72a6",
+  "candidate_replay_sha256": "2e667d40381a577a9e8e9856eed0488e1f5f98ddfef879be9fa286e337821f62",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Isolated replay regenerated all 2,592 fixtures. Source/body/literal and listed artifact hashes match. 6928/9178, 7288/A6C0 and 6980/5FA4/A6C0 execute original instructions without interception; only 6AC0 is controlled. Captured mode call arguments and R1 clobber, sequence scratch arguments, budget/poll arguments, parent-only writes, final output/status and R4-R11/SP assertions pass. With the chosen clock and config, budget is multiplier\u00d75 or \u00d710 for mode2; multiplier zero yields poll return zero even with modeled ready status, hence parent status OR 4."
+  ],
+  "limitations": [
+    "The candidate asserts parent-level writes while child MMIO writes execute but are not fully asserted in this composition. Only selected mode/status/field patterns are used; 6AC0 transition behavior and hardware status remain modeled. No canonical admission or physical claim."
+  ]
+}

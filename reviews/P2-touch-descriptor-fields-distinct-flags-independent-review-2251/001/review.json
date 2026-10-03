@@ -1,0 +1,18 @@
+{
+  "review_id": "2251",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-descriptor-fields-distinct-flags-2248/001",
+  "candidate_receipt_sha256": "111e74beb7ab1e83b3c07d0ead6268693415c2f4155206e564af0e6038e102c5",
+  "candidate_pseudocode_sha256": "c019dbc5716acd8dd3033f501ba75ee84f19debe006096ca73e6ffe2c9d2c965",
+  "candidate_replay_sha256": "3ebae99cc82fdf785c16985e859c7232cbe032b5bd9b8a8edb10428bd4e20d3a",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Receipt, source, body, literal, and artifact hashes match; decoded conditional selection and packed-field logic are consistent.",
+    "Isolated replay regenerates all 5,832 fixtures. Configuration bytes 90/91/92 independently vary across all 27 combinations, distinguishing the validity-specific read. Destination writes, output words, return, and preserved registers are asserted."
+  ],
+  "limitations": [
+    "Invalid pointers, aliasing, concurrent mutation, and physical field meanings remain unresolved.",
+    "No canonical admission."
+  ]
+}

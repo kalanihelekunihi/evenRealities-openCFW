@@ -1,0 +1,17 @@
+{
+  "review_id": "2943/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-hardware-state-decode-original-2942/001",
+  "candidate_receipt_sha256": "78c9a0bee98c016fa32073cb59049c660914349298d566d404d8fea3213c0024",
+  "candidate_replay_sha256": "f05dcb80f2467aec8c744c2ce22c646f072a1ea5a73ca02a9f800f039ed8371e",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "source_body_artifacts": "PASS (source and original decoder body match 2940/001)",
+    "isolated_replay": "PASS (4,608 original-instruction fixtures; replay outputs hash-match)",
+    "oracle_independence": "PASS (boolean bit-0 flag dimension and fixed output table; same decoder family as prior review, but independently executed and input fixture assertions confirmed)",
+    "ordered_writes_status_frame": "PASS (both outputs/status/R1/R2/R4/R5/SP/PRIMASK/stop asserted)",
+    "scope": "PASS (stable source/target inputs, no child interception; unresolved limits stated)"
+  },
+  "summary": "The 4,608 original-instruction cases pass an isolated rerun. The locked source and decoder body hash match the earlier static map; replay outputs match the candidate receipt. The fixture grid independently exercises type, choice, condition, word guards, flag byte 0/1, clock low bits, and PRIMASK. The oracle selects the same output table and status from decoded fields, and checks ordered writes, output pointers, R4/R5, SP, PRIMASK, and stop state. The low-bit path is tested with a boolean 0/1 dimension, consistent with the LDRB/LSLS #31/BPL decode. This does not establish volatile mutation, aliasing, physical MMIO, or global ownership."
+}

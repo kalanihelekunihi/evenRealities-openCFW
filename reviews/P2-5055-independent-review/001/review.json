@@ -1,0 +1,17 @@
+{
+  "review_id": "5055/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-region-registration-original-fixtures-5054/001",
+  "candidate_receipt_sha256": "64581ebe563199353503ad94110151fc6698b462cb96784a08b86be476e2ec71",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "pins": "PASS (image, parent map and references, packet files)",
+    "isolated_replay": "PASS (60 original executions)",
+    "alignment_paths": "PASS_SCOPED (zero/aligned/misaligned/wrapped bases; controlled child return ignored)",
+    "registration_args": "PASS (wrapped base+3188 and length-3188 passed in correct order, including short/zero lengths)",
+    "ABI": "PASS (R0 path result, R1 incoming alias, SP and PC)",
+    "scope": "PASS_SCOPED (all three helper children controlled; no physical meaning claimed)"
+  },
+  "summary": "All 60 cases pass across five base values, six lengths, and two helper return values. The original wrapper always proceeds into region registration: aligned inputs pass the original base, misaligned inputs pass zero, and arithmetic arguments wrap at 32 bits. Child returns are ignored; R0, R1, SP, and PC match. This does not establish the child operations\u2019 semantics or real metadata/hardware effects."
+}

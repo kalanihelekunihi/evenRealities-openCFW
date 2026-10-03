@@ -1,0 +1,63 @@
+{
+  "review_id": "2681",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-service-complete-service-original-chain-2680/001",
+  "candidate_receipt_sha256": "881a731266b8e754f2f5356e52c51721c407d17bd0e7919c19b0839b7c04c8e9",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "itcm_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+  "body_hashes": {
+    "428a94-428ba8": "1e0e7ddb0036670d692a97a50f6cc821d2a2358e741b72d502e943d31bb0b351",
+    "428378-4283e2": "051e40c208a75b89a9826c46a5fcea7b9933f1de7c90f4acc01777ba1ed16866",
+    "41ccd6-41cd1a": "53ecf1cc50f77949e880de53ecfed6a2d18c3ea803c457a13e77d1b2ac548a3a",
+    "42a04a-42a078": "2ce0019a9c986275a9d5c9ea8d04c05e055c163e2802417c4ee68be2fd2b7fd4",
+    "422364-4223d8": "6a131868a276083764d4714178857124ccb4209a5f3e7552d874aba7f7c1a54e",
+    "421e4a-421e8c": "f4f21abad8199cfea2524c7335d809b7f624100c1e34b693c08025ae1fb40a2a",
+    "4215dc-4215fe": "8dc0a88874cc74f9148e7ae8b6e70f50b7cd1f732db5b74982a8abcccb1bd6f5"
+  },
+  "literal_pointers": {
+    "0x428a98": 1073872964,
+    "0x428a9a": 537030832,
+    "0x428aa6": 1073873024,
+    "0x428aa8": 537030844,
+    "0x428ab4": 537030840,
+    "0x428ac6": 1073872972,
+    "0x428ac8": 537030836,
+    "0x428ad6": 1073876992,
+    "0x428b0e": 1073873788,
+    "0x428b30": 1073758276,
+    "0x428b54": 1073758256,
+    "0x428b60": 1073758256,
+    "0x428ba2": 536872282,
+    "0x42837a": 1073872964,
+    "0x42837e": 537030832,
+    "0x42838c": 1073873024,
+    "0x428390": 537030844,
+    "0x42839e": 537030840,
+    "0x4283b2": 1073873788,
+    "0x4283c6": 1073872972,
+    "0x4283ca": 537030836,
+    "0x4283da": 536872282,
+    "0x41ccd8": 1073775584,
+    "0x41cce4": 1073774608,
+    "0x41ccfc": 3758154120,
+    "0x41cd06": 1073774696,
+    "0x41cd0c": 1207894016,
+    "0x41cd12": 3758154376,
+    "0x42a052": 536872282
+  },
+  "fixture_sha256": "c061dc837715e2f025d24359a7165f6bdcd4c12b14e319c86266f8b0dbfccfe5",
+  "replay_sha256": "3c4b808b555ecf38c5b6fcba1e52a28a15de1854783361eb42035742837bf58f",
+  "isolated_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2681-independent/replays.json",
+  "fixture_count": 384,
+  "checks": [
+    "Candidate source and ITCM hashes, seven body hashes, literal targets, and artifact hashes match. The isolated 384-case replay passes and reproduces the candidate replay JSON byte-for-byte.",
+    "The composition runs the original flag-2/flag-7 service, common stop routine, indexed operation dispatcher, operation-4 query, floating delay, and ITCM loop without call interception. The operation-4 state table is zeroed, so this composition exercises its inactive path only.",
+    "The recorder asserts exact combined writes and confirms all observed writes occur with PRIMASK=1. Flag dispatch, original dispatcher arguments (4,49), delay arguments/loop counts, return mask, R4-R7, SP, and final PRIMASK match the assertions."
+  ],
+  "limitations": [
+    "Active operation-4 state paths are covered separately, not in this composition. Other operation indices and state contents are not generalized.",
+    "Status/clock/MMIO and source/target memories are synthetic stable fixture inputs. The replay does not prove physical peripheral/cache effects, asynchronous behavior, or hardware timing.",
+    "Private evidence only; accepted:false; no canonical admission."
+  ]
+}

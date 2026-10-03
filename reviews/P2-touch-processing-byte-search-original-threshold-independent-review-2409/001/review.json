@@ -1,0 +1,25 @@
+{
+  "review_id": "2409",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-processing-byte-search-original-threshold-2406/001",
+  "candidate_receipt_sha256": "d416ea8c07985c5bd787c4f8a2c71b96635184075c16f9e17d26ee57fe58cb89",
+  "candidate_pseudocode_sha256": "3e975b3177a29e97abdcd6a80e25b2753a5cd4b0253a15a11c40c2eb49109f4c",
+  "candidate_replay_sha256": "706885f359e6c3052e255d7411772f3294dfdaafccab8b04c6f3fc046d7ef843",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "isolated_replay_output_sha256": "639df292bccf96454f1548554167ec4c316a949279b2156a364955a699edf497",
+  "fixture_count": 640,
+  "pinned_body_ranges": [
+    30080,
+    30328
+  ],
+  "checks": [
+    "Candidate source and artifact hashes match the receipt. The pinned body ranges and instruction bytes are retained as specified in touch-processing-byte-search-original-threshold-2406/001.",
+    "Independent isolated replay passes 640 cases; output hash matches pinned replays.json.",
+    "Original 7580, 5F6A, A6C0 and 5F5E execute. Threshold values derive from cfg byte87 and requested parameter halfword; the independent search oracle uses the resulting threshold for candidate decisions."
+  ],
+  "limitations": [
+    "Other search helpers are controlled; tested parameter/status patterns only.",
+    "Private bounded evidence only; accepted:false."
+  ]
+}

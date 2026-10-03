@@ -1,0 +1,15 @@
+{
+  "review_id": "5153",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-u64-division-logger-entry-guards-map-5152/001",
+  "candidate_receipt_sha256": "486670b77c50a74f940f36c060e1bf60b5bf52cf56d9fa114c2f34c99075c788",
+  "candidate_replay_sha256": "5395c86f047706e140c28d0d5fa28dd307905f841c3a398ecaa874f8d1a091b3",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Source-pinned isolated replay passes for both mapped extents. The 72-byte frame and IPSR low-byte guard are consistent; callback-index and recursive logger paths preserve their distinct arguments and conditional continuations. State threshold/query/filter ordering, exact literal consumers, stack aliases, and early-return R0 path agree with the decoded bytes."
+  ],
+  "limitations": [
+    "Continuation at 0x7780 is excluded; callback and recursive logger behavior remain unresolved. IPSR/device meaning and runtime effects are not established. Private partial map; accepted:false."
+  ]
+}

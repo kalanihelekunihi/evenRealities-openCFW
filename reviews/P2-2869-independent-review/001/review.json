@@ -1,0 +1,37 @@
+{
+  "review_id": 2869,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-information-read-provider-map-2868/001",
+  "candidate_source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "candidate_artifact_hashes_verified": true,
+  "body_ranges": [
+    {
+      "range": [
+        "0x4213D8",
+        "0x4213E6"
+      ],
+      "sha256": "48f55c18a187332fea1c9c0fe4bb14ba07fb35e5946f15c5f505ce6b61a7ca50"
+    },
+    {
+      "range": [
+        "0x4213E6",
+        "0x421548"
+      ],
+      "sha256": "989242545e69349bd0ff976d0bdd47f5800523263ad0f2c35fa06c0a68ea5127"
+    }
+  ],
+  "isolated_replay": {
+    "result": "PASS",
+    "instructions": 144,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2869-independent"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "The replay verifies source hashing, literal resolution, and complete Thumb instruction tiling of the two declared ranges; it is a static decode check, not dynamic execution of the provider routine.",
+    "Provider 0x41D28A behavior is not established here; the text's ignored-return claim is based on the caller instructions in this body. No provider storage semantics or hardware effects are claimed.",
+    "Unvalidated inputs, source/destination aliasing, volatile changes to configuration, faults, concurrency, and full caller/startup ownership remain outside scope.",
+    "No whole-image completeness or canonical admission is claimed."
+  ],
+  "accepted": false,
+  "candidate_receipt_sha256": "a11477a681defc6380d4ffc3ab08014167ce9bc6bb7bb213f6c1fec8ef18ac2e"
+}

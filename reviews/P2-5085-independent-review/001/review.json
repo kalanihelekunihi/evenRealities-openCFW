@@ -1,0 +1,15 @@
+{
+  "review_id": "5085",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-u64-division-metadata-bitmap-lookup-map-5084/001",
+  "candidate_receipt_sha256": "17639b6e01521eae2623dfa1df9b30272de5b528ef61a9bc0c698a215a851b72",
+  "candidate_replay_sha256": "dbb216a4be1c7ab42991918c616879ec425952c61fa6243cc3c93d8ae98d91eb",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "The 69E2/69FC bit helpers and C4E bitmap lookup decode/replay match the pinned image and literal consumers. Replay is isolated and passes. I checked initial class/bit capture versus later fresh bitmap reads, wrapped low-byte register shifts, next-class scan, assertion-child call arguments, and the output address calculation."
+  ],
+  "limitations": [
+    "Null, out-of-range pointers/indices, alias/fault behavior and physical bitmap semantics are outside scope; private partial evidence, accepted:false."
+  ]
+}

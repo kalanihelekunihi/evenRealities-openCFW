@@ -1,0 +1,16 @@
+{
+  "review_id": "5089",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-metadata-bitmap-original-fixtures-5088/001",
+  "candidate_receipt_sha256": "69ad8aa17c154ada90ec0da2353194eafd58c246aa677d4cce6c75e8a0f8e1db",
+  "candidate_replay_sha256": "4019f9f22cec46cc55fb1f31558890e364292a81852046d91c5f1c1653ec0708",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Receipt pins the locked image plus bitmap lookup map 5084 and size-classification map 5078; hashes match. Isolated replay passes all 84 original executions without controlled children. Same-class, next-class, and exhausted paths cover the stated shift-count aliases and preserve the full metadata image, slots, frame and registers."
+  ],
+  "limitations": [
+    "Zero selected bitmap/assertion, aliases and fault behavior are excluded. This finite private fixture set does not establish hardware semantics or global completeness; accepted:false."
+  ],
+  "candidate_results_sha256": "318d1f4bc1b732105d0fcae03d5dc0ef55c3a092290a64879860dc51ae9f470f"
+}

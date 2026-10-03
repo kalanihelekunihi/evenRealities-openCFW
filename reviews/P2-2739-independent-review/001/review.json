@@ -1,0 +1,26 @@
+{
+  "review_id": 2739,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-handler10-map-2738/001",
+  "candidate_receipt_sha256": "915314344f69d12dfa437daf28e362212fdf1e10bb7f7ffc4e9bac93caef03e5",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "itcm_sha256": null,
+  "candidate_artifact_hashes_verified": true,
+  "body_hashes_verified": {
+    "428d90-428e6a": "00a1d0224d3cb171a89c20dd937ebbd2a6cacdc82f63ce4472ada18801dd2ca0"
+  },
+  "isolated_replay": {
+    "result": "PASS",
+    "instructions_or_fixtures": 74,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2739-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "scope": "static",
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Wait/service and dynamic paths are not exercised.",
+    "Bounds, caller ownership, changing reads, and physical hardware behavior remain unresolved.",
+    "Private evidence only; no canonical admission."
+  ],
+  "accepted": false
+}

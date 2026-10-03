@@ -1,0 +1,17 @@
+{
+  "review_id": "5031/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-startup-callback-sort-original-fixtures-5030/001",
+  "candidate_receipt_sha256": "87892538fc90406dcc6ac7450c8f00befbf1897c28c4ba436fb1cc3c26fee788",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "candidate_source_and_dependency_pins": "PASS",
+    "isolated_original_execution": "PASS (3 fixtures regenerated in fresh output directory)",
+    "copy_and_sort_calls": "PASS (single 32-byte copy; original sort invoked with destination, 4 entries, stride 8, pinned comparator)",
+    "table_order_and_callbacks": "PASS (all records retained; keys ascend 1,1,25,26; callback order follows resulting records)",
+    "ABI": "PASS (SP and exit PC; controlled callback R0 return observed at parent return)",
+    "scope": "PASS_SCOPED (memcpy and four callbacks controlled; no equal-key stability or callback semantics claimed)"
+  },
+  "summary": "All three original startup traversal runs reproduce the four locked records in ascending key order, invoke callbacks in the resulting order, and satisfy the recorded copy/sort arguments and return checks. The original sort and comparator execute; memcpy and the four callbacks are controlled. Equal-key stability and callback effects are not established."
+}

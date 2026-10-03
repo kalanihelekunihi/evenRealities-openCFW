@@ -1,0 +1,18 @@
+{
+  "review_id": "2917/002",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/state-effect-structured-candidate-2916/003",
+  "candidate_receipt_sha256": "cf29eca4f07629e20b22f40c40182069ecac0d0aa41a36ae49ff9af257c2cfa4",
+  "candidate_replay_sha256": "01e90bb6f813d082bc568394a5b7841966d1504f3cbcf5f70383e14e690d1eae",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_byte_sha256": "b3da01a94a3c08eb7eb0d7d344b6760d929296878e2dfbf9c4770373aedd3d88",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "source_body_mapping_and_pseudocode_pins": "PASS",
+    "parent_instruction_artifact_pins": "PASS",
+    "original_ldr_literal_targets": "PASS (4 uses)",
+    "data_record_function_links": "PASS",
+    "isolated_replay": "PASS (1 function, 4 literal uses)"
+  },
+  "summary": "Reviewed corrected candidate analysis/state-effect-structured-candidate-2916/003; the earlier `/002` linkage finding is preserved in review 2917/001. The corrected packet replays successfully in an isolated destination and emits one function record plus four literal-use records. Candidate output hashes match its receipt; the source image, body-byte digest, mapping (file offset 0x1B014, loaded entry 0x42B014, length 0x54), pseudocode hash and parent evidence pins were checked. The parent receipts hash-pin the instruction listing; I also verified each LDR.W encoding against the original bytes and recomputed aligned-PC-relative targets: 42B024\u219242B9C8 (200271B2), 42B030\u219242B9E8 (200271B0), 42B042\u219242B9D0 (4002037C), and 42B060\u219242B9C8 (200271B2). Values, literal byte hashes, file offsets, and all four data-record `referencing_functions` links match the single function ID. Scope remains private candidate metadata: local pointer-use classification only, not global data ownership, complete code ownership, NZCV contract, hardware semantics, or canonical admission. accepted:false."
+}

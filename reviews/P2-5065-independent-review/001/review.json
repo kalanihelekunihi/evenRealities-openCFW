@@ -1,0 +1,17 @@
+{
+  "review_id": "5065/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-block-metadata-original-fixtures-5064/001",
+  "candidate_receipt_sha256": "1b4de69a991b4ef48563a067c59aec876bb65a5632724b673b9a03879956bca6",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "pins": "PASS (locked source, map receipt/references, candidate files)",
+    "isolated_replay": "PASS (150 executions)",
+    "constant_derivation": "PASS (mask/offset words read from pinned literal targets in image)",
+    "memory_oracle": "PASS (16-byte block window for all ten entry points)",
+    "outputs_and_abi": "PASS (R0, R4, SP and PC)",
+    "scope": "PASS_SCOPED (no status flags, volatile mutation, aliasing or hardware claim)"
+  },
+  "summary": "All 150 original helper executions pass with masks and offset derived from pinned source words. The exact 16-byte block window, returned R0, saved R4, SP, and PC assertions hold for the ten listed entry points. This is bounded stable-memory testing, not proof for changing or aliased inputs."
+}

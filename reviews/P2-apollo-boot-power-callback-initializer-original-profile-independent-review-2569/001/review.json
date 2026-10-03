@@ -1,0 +1,36 @@
+{
+  "review_id": 2569,
+  "result": "PASS_SCOPED",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-power-callback-initializer-original-profile-2568/001",
+  "candidate_receipt_sha256": "60a16a92778822cb6b4f51f103ea442831ca3f0cf4d03965209c5cc928660408",
+  "candidate_files": {
+    "receipt.json": "60a16a92778822cb6b4f51f103ea442831ca3f0cf4d03965209c5cc928660408",
+    "pseudocode.md": "2652870753467b043ad581a64bb52ed9f9c5a6b21a455894a925a501a1cf9ee2",
+    "replay.py": "5138d2c24ca96f2f357fd67b725b7a06b11c9901447311a03e1deaff01e710ef",
+    "replays.json": "699c71b2351307965b48a01aed8a4830e7d24d4e0ebfbbedf999d1ff4f9cf6a4"
+  },
+  "sources": [
+    {
+      "id": "apollo_bootloader:flash",
+      "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5"
+    },
+    {
+      "id": "apollo_bootloader:decoded:00000040",
+      "sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83"
+    }
+  ],
+  "body_span": {
+    "start": "0x41CE52",
+    "end": "0x41D0EE",
+    "sha256": "3fe7c1c3d4d664da3041d42f4006205587105037609aca12f41925a666ee78b5"
+  },
+  "literal_pool": {
+    "start": "0x41D11C",
+    "end": "0x41D1C0",
+    "sha256": "96b11b7620e413c3e32bda863685e8c1411fe1af08e834d1b63dd873acac9d92"
+  },
+  "isolated_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-power-callback-initializer-original-profile-2568/replay-2569-independent",
+  "cases": 16,
+  "accepted": false,
+  "canonical_admission": false
+}

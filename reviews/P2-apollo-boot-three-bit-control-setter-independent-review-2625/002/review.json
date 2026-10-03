@@ -1,0 +1,23 @@
+{
+  "review_id": "2625",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "supersedes": "../001/review.json",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-three-bit-control-setter-2624/001",
+  "candidate_receipt_sha256": "bc11394fd06747739bc113cf204905384ba45cb3d1f033c99167c2e9f90f3790",
+  "candidate_pseudocode_sha256": "6bc9e7aa98009c76b2e6c98da1c0e970ceac7825e4df8074ee7f97c4c96915b5",
+  "candidate_replay_sha256": "5c9a8dd1a1dd96c31d3e9784c541e4ac5092404f99c2dfc26fdf8c327fcdfbd3",
+  "fixtures_sha256": "cfb746f0c0391d355be39c17223bca4793d44e79f94d83de1f585383b20684a6",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "isolated_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2625-independent-002/replays.json",
+  "isolated_replay_count": 24,
+  "checks": [
+    "Reran the candidate replay from a temporary copy redirected to a fresh isolated output directory using the repository OpenCFW virtualenv; all 24 fixtures pass.",
+    "Original body [0x41C838,0x41C860) and source pins match. Literal 0x41CBD4 resolves to 0x40020060. Independent objdump decode confirms the three ordered fresh-read/bitfield-insert/write groups for bits16,0,5 and BX LR.",
+    "The replay confirms each write, final R0 low byte, R1 register pointer, R2 final word, R3 second word, SP preservation, and return to the sentinel for all eight inputs and three initial-register patterns."
+  ],
+  "limitations": [
+    "Register concurrency and the physical meaning of 0x40020060 are not established.",
+    "Private scoped evidence only; accepted:false; no canonical admission."
+  ]
+}

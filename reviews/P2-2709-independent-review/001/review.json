@@ -1,0 +1,24 @@
+{
+  "review_id": 2709,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-handler2-deferred-original-roundtrip-2708/003",
+  "candidate_receipt_sha256": "415481c9b82a7f167ec473b627c3430a197b5d08f82a0edb014a7d90f51fe638",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "itcm_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+  "candidate_artifact_hashes_verified": true,
+  "body_sha256_verified": "aed159d19382e0b72478d67e5204326070f9f6f27e1f426a3716cd97cbf41289",
+  "isolated_replay": {
+    "result": "PASS",
+    "fixtures": 64,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2709-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "The external service invocation is explicitly simulated; its timing and caller reachability are not established.",
+    "Hardware interrupt and peripheral effects are not established by these emulated fixtures.",
+    "When the original enable path is active, the observed shared pointer is a temporary frame address; its post-return validity is not claimed.",
+    "Private evidence only; no canonical admission."
+  ],
+  "accepted": false
+}

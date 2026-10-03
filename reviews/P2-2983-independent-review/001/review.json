@@ -1,0 +1,32 @@
+{
+  "review_id": 2983,
+  "candidate": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-register-status-map-2982/001",
+  "candidate_receipt_sha256": "34e72f7c9665c0b5c261aa6cefb4f0566c45da53759ac43a39a20fc64f4224a7",
+  "source_pin": {
+    "id": "apollo_bootloader:flash",
+    "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-fixed-images-005/002/apollo_bootloader-flash.bin",
+    "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5"
+  },
+  "body_pins": {
+    "42c034-42c076": "4748ace7dc077c4c00e8b22fb267ba5d64a0d28286c6b2d30868907e5ffa2005",
+    "42c076-42c0b2": "ccdc2830f8d713ac41be3ffae702c125009eed11fc8b89d5f430e8c3a794af19"
+  },
+  "candidate_file_hashes_match_receipt": {
+    "instructions.json": true,
+    "replay.py": true,
+    "pseudocode.md": true
+  },
+  "fixture_count_or_static_extent": "static-44-instruction map",
+  "isolated_replay": {
+    "result": "PASS static replay",
+    "destination": "/tmp/review-apollo-boot-register-status-map-2982"
+  },
+  "assessment": "PASS_SCOPED",
+  "accepted": false,
+  "summary": "Static decode of two register-status leaves, including fresh read ordering and branch outputs.",
+  "scope_limits": [
+    "The packet remains private scoped evidence; no canonical admission is made.",
+    "Only the exact fixture dimensions and controlled/modelled hardware described by the candidate are supported.",
+    "No whole-firmware completeness, physical hardware, untested paths, or global ownership claim is inferred."
+  ]
+}

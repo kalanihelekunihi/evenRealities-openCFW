@@ -1,0 +1,23 @@
+{
+  "review_id": "2683",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-handler1-map-2682/001",
+  "candidate_receipt_sha256": "77b515988de86c3dada7abd71386a9ebb7cee9f2ea91a6593770a275d4121b01",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_sha256": "7828372b3a4b3704f7d9202a325edc738dcf1af81ad60af87d11495e284388ad",
+  "listing_sha256": "1a3b0cb42f9fb1f2d6c1bfe20be31e3050e299ec06dc92e233eac18befaaf89c",
+  "replay_sha256": "53d7eb1a68e3170b273605ddc30d9c4d4ffe300ff629425ee78bc1d980b61eae",
+  "isolated_static_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2683-independent/instructions.json",
+  "instruction_count": 170,
+  "checks": [
+    "Candidate receipt, source image, body hash, instruction listing, replay, and pseudocode artifact hashes match. Isolated static verifier replay reproduced all 170 decoded instructions byte-for-byte across [0x428068,0x428240).",
+    "Independent inspection of the instruction sequence supports the 48-byte saved frame, replacement of stack word0 with the new-profile pointer and word4 with packed four seven-bit values, old/new profile field loads, preserved-but-overwritten indexed reads, conditional bounded readiness loop, field publication, saturated interpolation, and ordered later field/control writes.",
+    "The epilogue restores R0 from stack word0 (new-profile pointer), R1 from stack word4 (packed profile word), and R2 from the saved incoming R3; callee-saved registers and SP are restored. Child calls are references only in this static map."
+  ],
+  "limitations": [
+    "This is static disassembly and pseudocode evidence only; no dynamic execution or child behavior is claimed.",
+    "Profile bounds, changing reads, runtime reachability, caller ownership, peripheral interpretation, and physical effects remain unresolved.",
+    "Private evidence only; accepted:false; no canonical admission."
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "review_id": "5163",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-u64-division-logger-final-output-map-5162/001",
+  "candidate_receipt_sha256": "457510e57a433927c29716182156a16bf6f285195769ee508e7a92195868a00d",
+  "candidate_replay_sha256": "578b7cd1cca824507c2395e24e59a50637012c606cef0c3056787dd1ed5b9694",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Source-pinned isolated replay passes for the final-output region. It reads the second caller stack word at SP+76, uses the output helper with 1024-offset bounds logic, preserves signed/unsigned checks and ordered termination/publication calls, and records the child-dependent final R0."
+  ],
+  "limitations": [
+    "The child/helper return semantics and buffer safety remain unresolved; final R0 is path-dependent. No complete logger behavior or hardware claim; private partial, accepted:false."
+  ]
+}

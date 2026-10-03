@@ -1,0 +1,24 @@
+{
+  "review_id": 2773,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-handler18-original-normal-chain-2772/001",
+  "candidate_receipt_sha256": "69306f46b3753d822849ae4ffd44ae0f7177a337baba2081807a69bb663683e7",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "itcm_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+  "candidate_artifact_hashes_verified": true,
+  "body_hashes_verified": "ebb8217a646d3261e01b47fa26f9ca9195377c11a6eefe3e47970b5b0dc77651",
+  "isolated_replay": {
+    "result": "PASS",
+    "instructions_or_fixtures": 256,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2773-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "scope": "dynamic",
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Wait/service and other indices are outside the fixture set.",
+    "The finite fixture set does not prove all wrapped arithmetic cases, physical timing, hardware behavior, or concurrency.",
+    "Private evidence only; no canonical admission."
+  ],
+  "accepted": false
+}

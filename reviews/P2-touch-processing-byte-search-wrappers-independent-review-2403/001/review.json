@@ -1,0 +1,31 @@
+{
+  "review_id": "2403",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-processing-byte-search-wrappers-767c-2400/001",
+  "candidate_receipt_sha256": "34a4ffdb99775ddfa911ab9b4fe87b528b2f46356cfac0ff7deb26a930b61564",
+  "candidate_pseudocode_sha256": "a0b04c9bbabd9fee13caee4cd994754b396d5b7a2c9059b8d586d80ebaf911e7",
+  "candidate_replay_sha256": "489ea46b3d8e755dc64c992a08b591d45ed10af82f79c722f86df99c91e88daf",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "isolated_replay_output_sha256": "4a8bf9e13cb5638490c48a7a402707179fbd235797e0628c2abd8cc110be3401",
+  "fixture_count": 108,
+  "pinned_body_ranges": [
+    [
+      30332,
+      30362
+    ],
+    [
+      30362,
+      30392
+    ]
+  ],
+  "checks": [
+    "Candidate source and artifact hashes match the receipt. The pinned body ranges and instruction bytes are retained as specified in touch-processing-byte-search-wrappers-767c-2400/001.",
+    "Independent isolated replay passes 108 cases; output hash matches pinned replays.json.",
+    "Both 30-byte wrappers execute original instructions. Five child arguments, 16-byte frame/fifth stack argument, output offsets 46/48 and forwarded incidental child status match."
+  ],
+  "limitations": [
+    "7580 is controlled; index validation/search semantics and physical meaning are not established.",
+    "Private bounded evidence only; accepted:false."
+  ]
+}

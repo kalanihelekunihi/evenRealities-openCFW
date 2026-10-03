@@ -1,0 +1,19 @@
+{
+  "review_id": "2257",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-config-slot-initializer-50e4-2254/001",
+  "candidate_receipt_sha256": "e5765127b079b30c72caef95418a39c08a41888ab682ee0ba07ba91cf8819931",
+  "candidate_pseudocode_sha256": "e0c27750f268be03aee59f4cd115bd848490c60ba80b595cae791832e738c070",
+  "candidate_replay_sha256": "e7bef7fb83e6cc80499733466091fd3759964ec20037db707f7d9b26fde29947",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Source, code, literal, referenced table, and artifact hashes match the receipt.",
+    "Isolated replay regenerates all 512 selector/initial-state fixtures with original AA2C. Exact child source/count, ordered writes, full buffers, zero return, and R4-R7/SP are asserted.",
+    "Decoded selector/slot scan and table-word writes agree with the pseudocode and exported 56-byte table."
+  ],
+  "limitations": [
+    "Configuration and destination are separate; pointer aliasing, changing context pointers, and physical meaning are not established.",
+    "No canonical admission."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "review_id": "5077",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-block-pointer-original-chain-fixtures-5076/002",
+  "candidate_receipt_sha256": "98aa019e5a6206c532dde77928af48e8ce9f7d72be2707efabcd6e803e3af3e2",
+  "candidate_replay_sha256": "8bfa9699c744bd4e055e5a6bdcaf0b2f3765241436a18a34c9bd1a63730bccec",
+  "candidate_results_sha256": "3b05007abe6348396af28f47c7e05536728942b3f03c3d96243bbbbfb7f29386",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Receipt pins the locked image plus block-next-pointer map 5066 and metadata primitives 5062; local artifact hashes match. Independent isolated replay passes all 224 cases.",
+    "The corrected oracle uses the literal consumed at 0x6AE2 as 4, so next is block + size + 4. Cases exercise the seven original entries and mapped children with only 415734 controlled. The 512-byte memory oracle, including zero-size pointer alias writes, matches; return aliases and saved registers also match.",
+    "The zero-size case preserves the expected aliasing: fields can target the same block-relative locations, and writes are checked in actual order/final memory rather than assumed distinct. The superseded 001 report is preserved; this review covers corrected 002."
+  ],
+  "limitations": [
+    "Only listed cases with supplied stable RAM and the controlled assertion are covered. No flags, hardware/volatile behavior, invalid-pointer behavior, or broader completeness is established. Private scoped evidence; accepted:false."
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "review_id": 3011,
+  "candidate": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-command-queue-init-original-3010/001",
+  "receipt_sha256": "67e9c86e94dfa476f3a0dcf279a3eb8c4b315dbea64a658b54e93f12dae8456f",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "reported_body_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "reported_table_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "actual_body_sha256": "ad7e3d6257b791855a8cd7fe90389313dfb9496262724777900d6a4193c09b52",
+  "actual_table_sha256": "1ed1fa3682f9c16c403ee0e6cee7761b70ca610656a2b6e56de3f0b05cee7fea",
+  "candidate_file_hashes_match_receipt": {
+    "replays.json": true,
+    "replay.py": true,
+    "pseudocode.md": true
+  },
+  "isolated_replay": "PASS 3264; /tmp/review-3010-isolated",
+  "observed_success_write_count": 18,
+  "assessment": "REVISE_PINS",
+  "accepted": false,
+  "findings": [
+    "The receipt reports SHA256(empty) for both body and descriptor table because it hashes absolute runtime addresses as file offsets. Given loaded base 0x410000, body offset is 0x17794..0x17878 and table offset is 0x20880..0x20A60.",
+    "The successful write oracle emits 18 writes including the final output-handle publication; task summary\u2019s 17-write count is inaccurate unless that last store is expressly excluded."
+  ],
+  "scope_limits": [
+    "The execution model uses the real immutable descriptor bytes and no child interception; this validates bounded replay behavior but does not repair the receipt pin defect.",
+    "Stable nonalias fixture pointers only; no physical hardware, asynchronous exceptions, other-register completeness, global ownership, or canonical admission."
+  ]
+}

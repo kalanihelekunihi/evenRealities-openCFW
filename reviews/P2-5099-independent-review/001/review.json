@@ -1,0 +1,15 @@
+{
+  "review_id": "5099",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-u64-division-block-split-merge-map-5098/001",
+  "candidate_receipt_sha256": "80bb615b921bf7d8177aca9a5a1ffeb27c2f516749d77e38963ad41249e08fb5",
+  "candidate_replay_sha256": "11388fee50bbebefde26cc6fc6ae83b26d4b5ed1708ceb33c711de673a845d93",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Source hash and independently generated instruction/reference artifacts match the locked image. Isolated replay passes; the E60/F20 split/merge paths preserve the captured versus fresh block fields and ordered assertion/helper calls. Literal consumers and the mapped child arguments are consistent with the decoded body."
+  ],
+  "limitations": [
+    "Assertion children may return; no null/overflow/hardware or allocator-wide claim is established. Private partial evidence; accepted:false."
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "review_id": "2927",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-transition-ascending-inactive-original-2926/001",
+  "candidate_receipt_sha256": "c68a77ad5270fcc8a58b9798081d3f0936747cb7c25365df73fa933d013ab0bc",
+  "candidate_replay_sha256": "95314764c44a8bbe1d9d4db3260973c1a75b5361c1cdda6b9227f336251398c4",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "source_and_body_pins": "PASS",
+    "artifact_hashes": "PASS",
+    "isolated_execution": "PASS (360 fixtures)"
+  },
+  "summary": "The source image and body [42B294,42B69C) hashes match; candidate output hashes match. Isolated replay passed all 360 cases. Original transition instructions run with no call interception. The fixtures use ten unequal ordered pairs with new rank greater than old rank, inactive word zero, equal category/comparison 3, and non-special indices; therefore the observed branch has exactly four ordered target writes, no child calls, and returns incoming R3 in R0. R4\u2013R11, SP, PRIMASK and stop state are checked. Profile words are identical across indices in each fixture, so this does not test distinct profile payloads, alternate current ranks, active/descending paths, special indices, volatility/aliasing, flags, full register effects, or hardware semantics."
+}

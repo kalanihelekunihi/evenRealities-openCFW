@@ -1,0 +1,20 @@
+{
+  "review_id": "2233",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-reset-5868-2230/001",
+  "candidate_receipt_sha256": "b0f86ebfb0d18d0209e0150dd63e535614784662360dc3e5381f071c66ef58d0",
+  "candidate_pseudocode_sha256": "f54baa4fbb1acdb9019aafba15427811afdb2e8e98226d5226bedf37bec0fb94",
+  "candidate_replay_sha256": "00c91efc3bc90d49ae09b85899140831b6e911af3d343fefa32c4f440f02f1c0",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Receipt, artifacts, source, and [0x5868,0x58F6) body hashes match. Decoded instructions agree with the documented fields, row stride, gates, calls, and epilogue.",
+    "Isolated replay regenerates all 486 fixture rows. Only A9D4 is intercepted; arguments, type/count/validity/config outcomes, item and timer bytes, parameter/history writes, and R4/SP are asserted.",
+    "Count cases 0, 1, and 3 exercise empty, singleton, and multi-item cleanup loops."
+  ],
+  "limitations": [
+    "A9D4 fill effects are modeled, not independently recovered here.",
+    "Index validity, dynamic type/pointer mutation, aliasing, concurrency, and physical meaning are not established.",
+    "No canonical admission."
+  ]
+}

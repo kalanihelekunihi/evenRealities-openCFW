@@ -1,0 +1,16 @@
+{
+  "review_id": "2313",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-three-row-original-mode-selection-2310/001",
+  "candidate_receipt_sha256": "f5cdf698ff3785ea3d26528fb9e6dcf6b12d0873f3e8ab514065ad8c6216eafc",
+  "candidate_pseudocode_sha256": "66270a9938698a53c5bf2588d239ee7bbee6a5d2346ea570009008523908a23a",
+  "candidate_replay_sha256": "e4b86115a9ba9cc20990ff91d96c12812dce2db344da244dd03cdb1eea7a7deb",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Isolated replay regenerated all 576 fixtures. Source, body [0x6384,0x6462), and candidate artifact hashes match. Original 6294 and its arithmetic/division chain, plus original 623C/6220/6262, execute without interception; only signed-byte repair 6352 is controlled. With zero configuration budget and row decision/percentage fields, 6294 returns 4 (mask exceeds zero budget or the zero sum fails the leading threshold), while 623C returns 10. The checker\u2019s expected helper order, parameter write ledger, early 2048 path, final status and high-register/SP checks pass."
+  ],
+  "limitations": [
+    "This composition uses zero fields for the selector and bounded flags/validity/counts; broad selector inputs are separately reviewed. The 6352 child, pointer changes, aliasing and physical interpretation remain unresolved. No canonical admission."
+  ]
+}

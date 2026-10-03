@@ -1,0 +1,20 @@
+{
+  "review_id": "2235",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-reset-original-fill-2232/001",
+  "candidate_receipt_sha256": "20eac7bc6ead21383e87aec3efae57735af1c3ab677e8b891daa7991f439914e",
+  "candidate_pseudocode_sha256": "1a5fde094a95ef70a48c2614229d2e96b67fb553fcffa3cd34f7ceeabcc7a7dc",
+  "candidate_replay_sha256": "228fdcf8a5bc958c3e58c18c93341503f9b0402bd59c32ac457980c615352ccd",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Receipt, artifacts, source, row-reset body [0x5868,0x58F6), and fill body [0xA9D4,0xA9E4) hashes match.",
+    "Independent fill decode confirms cursor=R0, endpoint=R0+R2 modulo 32 bits, store low byte of R1 while cursor differs from endpoint, and return with R0 preserved and R2 holding endpoint.",
+    "Isolated replay regenerates all 486 fixtures with original 5868 and A9D4 instructions. Recorded fill arguments, tested timer bytes for lengths 0/2/6, row-reset field checks, and R4/SP preservation pass."
+  ],
+  "limitations": [
+    "Only lengths 0, 2, and 6 and the tested row configurations are exercised; arbitrary fill lengths and address wrap/fault behavior are not established.",
+    "Aliasing, concurrency, and physical meaning are not established.",
+    "No canonical admission."
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "review_id": 3003,
+  "candidate": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-clock-encode-original-boundaries-3002/002",
+  "receipt_sha256": "0ec4783c2322eac9a1b2c91a4bd71a7b124059b56dc26cf188c41030d93865bc",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_hashes": {
+    "42c26a-42c3e2": "23796b78366978bda2ee2db94e309c4f1cae4e92f5ffbc2072f75becca3ae9e8",
+    "42c222-42c256": "84a7909276921edf87861325fa09f547e536659109a2de4eeb1fd171f7f57411",
+    "42c256-42c26a": "c7c013df5ce01fcc66215af1337fed966a975393591a7bc7e17ebcf71bde8213"
+  },
+  "candidate_artifact_hashes_match": true,
+  "fixture_count": 656,
+  "isolated_replay": "PASS 656 96000000 250000; destination /tmp/review-3002-isolated",
+  "assessment": "PASS_SCOPED",
+  "accepted": false,
+  "findings": [],
+  "scope_limits": [
+    "Bounded frequencies/options only; the random seed is fixed by the replay.",
+    "Default divide-by-zero exception configuration only; alternate CCR/NZCV and unrelated high-register effects are not established.",
+    "No physical clock behavior, ownership, or canonical admission claim."
+  ]
+}

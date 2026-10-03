@@ -1,0 +1,17 @@
+{
+  "review_id": "5059/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-region-metadata-original-fixtures-5058/001",
+  "candidate_receipt_sha256": "f01a053e2d970be3a7ab38219d54207eb15a1466d3d00b920538c262c07f34ac",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "pins": "PASS (source, initializer map receipt, candidate files)",
+    "isolated_replay": "PASS (9 executions)",
+    "complete_memory_oracle": "PASS (3 aligned bases x 3 initial patterns; 3220-byte window exact)",
+    "structure": "PASS (2 self-pointers, 25 zero words, 768 pointer-table words, untouched bytes retained)",
+    "ABI": "PASS (R0-R3/SP/PC)",
+    "scope": "PASS_SCOPED (stable modeled RAM only, no hardware/concurrency or alias claim)"
+  },
+  "summary": "Nine original initializer executions match the complete 3220-byte window oracle across three aligned bases and three initial patterns. The expected two self-pointers, 25-word cleared header area, 768 repeated base-pointer entries, untouched surrounding bytes, and R0-R3/SP/PC state all match."
+}

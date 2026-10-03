@@ -1,0 +1,20 @@
+{
+  "review_id": "2253",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-mode-seven-original-builder-2250/002",
+  "candidate_receipt_sha256": "e8c750971d88fce00ef946c9116d5ed004d4c1d20c6dd803a7a05c54bad96aec",
+  "candidate_pseudocode_sha256": "035c4d335eb2f162a8c1e7355c08186f0111e68398cbf1151f40d223e4e69331",
+  "candidate_replay_sha256": "6068e194ae131884a8f461063802d81954cb7607d740b0e61b6fba4a01e39cf1",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Source, body and artifact hashes match. Isolated replay regenerates all 16 fixtures with the corrected instruction cap.",
+    "Outer call order and 56A4 arguments are asserted; original 8FD0/685C and all builder, poll, and delay children execute without interception.",
+    "Both descriptor buffers have asserted ordered write ledgers and full final contents. Loader status mapping, unconditional 685C, 315-versus-zero A324 calls, config+113 clear, and R4/SP preservation match."
+  ],
+  "limitations": [
+    "The register/MMIO write trace is captured but not fully asserted; factory/status values are modeled, with no physical peripheral/timing claim.",
+    "Builder fields are zero initialized and lists empty; alternate builder paths rely on separate bounded evidence.",
+    "No canonical admission."
+  ]
+}

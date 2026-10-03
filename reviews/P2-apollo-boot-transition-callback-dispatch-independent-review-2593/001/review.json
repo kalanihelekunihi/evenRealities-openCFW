@@ -1,0 +1,20 @@
+{
+  "review_id": "2593",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-transition-callback-dispatch-2592/001",
+  "candidate_receipt_sha256": "c647bd31b26a5b04364d5cff6ab48ef8efc2cf7e08fa565bfc45b9ae522580ac",
+  "candidate_pseudocode_sha256": "0ee386a2b376996e9701b92e3af28b96544a763bdf573781d4e7a142fb85007d",
+  "candidate_replay_sha256": "08a2f68152b0d94155ee42fb409dcc967c0cfc79c0af6afc8ad8f7458bb0aab6",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Candidate artifact hashes and the authenticated flash image hash match the receipt. The body digest for [0x42D562,0x42D5C2) matches the source bytes.",
+    "An isolated replay with only the output destination changed passes all 126 fixtures. It spans operation values 0-7 and 256-259, pointed bytes 0/2/255, child returns 0/3/0x12345678, and null pointer only for operation 0.",
+    "Observed dispatch matches the code paths: operation 0 invokes 0x42CFE0 only for a nonnull pointer to byte 2, passes R0=2, and ignores the child's return; operation 1 dereferences the pointer and chooses 0x42D3BC for byte 0 or 0x42D104 otherwise, forwarding the byte in R0/R1 and returning child R0; operation 2 calls 0x42CED8 with the raw pointer in R0 and returns child R0. Other covered low-byte operations return zero. Child targets and arguments, final result, R4-R11 and SP are asserted."
+  ],
+  "limitations": [
+    "All four child functions are controlled return stubs. Their side effects and semantics are not verified by this packet.",
+    "Null pointer cases for operations 1 and 2 are excluded; operation 1 has no demonstrated null guard. Arbitrary aliasing and physical meaning are untested.",
+    "The packet does not establish enclosing callback ownership or reachability. Private scoped evidence only; accepted:false."
+  ]
+}

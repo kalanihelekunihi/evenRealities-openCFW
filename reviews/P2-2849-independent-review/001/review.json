@@ -1,0 +1,29 @@
+{
+  "review_id": 2849,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-sleep-predicate-original-query-chain-2848/001",
+  "candidate_receipt_sha256": "42c378d3589f2c9bf9ab6bfd369f136c38cbc76f5e8fd0c51bac6b4d7e0ef01a",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_hashes_verified": {
+    "42a08c-42a19c": true,
+    "41f3f0-41f424": true
+  },
+  "candidate_artifact_hashes_verified": true,
+  "isolated_replay": {
+    "result": "PASS",
+    "fixtures": 1580,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2849-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "independent_oracle_check": {
+    "result": "PASS",
+    "rule": "Stable-record branch outcomes reduce to kind<6 OR 19<=kind<25 OR 256<=kind<480, conjunctive with the active entry and selected-slot gates."
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Fixtures use stable record words; the boolean-kind oracle is not evidence for dynamic changes across repeated reads, and the retained read trace is not asserted as an exact read oracle.",
+    "Only the listed 16 slot values, boundary kind set, modes, guards, masks and flags are covered. Child query is original in this packet, but broader memory aliases, volatile changes, hardware behavior, caller ownership, and flags remain unresolved.",
+    "No canonical admission."
+  ],
+  "accepted": false
+}

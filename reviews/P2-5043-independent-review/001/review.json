@@ -1,0 +1,17 @@
+{
+  "review_id": "5043/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-u64-division-startup-other-callbacks-map-5042/001",
+  "candidate_receipt_sha256": "0e71d08bd338172932311ccb2bcf518175081dd00349a06d166bd6361f8f3477",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "pins": "PASS (image/input pins and candidate packet hashes)",
+    "instruction_tiling": "PASS (33 instructions across two exact extents totaling 92 bytes)",
+    "literal": "PASS (consumer 0x4301DA resolves to 0x4301F4)",
+    "isolated_replay": "PASS",
+    "calls_and_returns": "PASS_SCOPED (sequence, immediate args, ignored results and POP R1 alias match decoded body)",
+    "scope": "PASS_SCOPED (child/callback semantics remain unresolved)"
+  },
+  "summary": "Both callback bodies match the locked image and recorded instruction listings. The first performs the constant-argument setup call followed by five sequential calls, then returns zero; the second performs the initial helper call, five registration calls with 0/1/2/3/4/5 and 255/215 argument pairs, then a final helper and zero return. Child results are not consumed as statuses; saved R1 is incoming R7."
+}

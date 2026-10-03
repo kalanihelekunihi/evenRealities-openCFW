@@ -1,0 +1,19 @@
+{
+  "review_id": "5009/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/arc-recovery-5008/001",
+  "candidate_receipt_sha256": "373f13c3aab0b51a996d9d9d30e429d941a0fd30a1011769f08d7cfd1655ace1",
+  "source_sha256": "ae445ac0459f143e4a4de4d4992b5e1c02a8d8c5b383240a7c81244e23b6a6e0",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "task_contract_and_input_pins": "PASS (contract hash and all 21 task input pins checked)",
+    "artifact_hashes": "PASS (all receipt artifacts match)",
+    "source_mapping": "PASS (record-3 and official payload bytes agree at the mapped offsets)",
+    "decoder_and_instruction_tiling": "PASS (pinned ARC decoder reports three instructions covering all 16 bytes)",
+    "caller_and_return": "PASS (one caller BL at 0x30ECFA, ordinary/non-delayed; J_S [blink] at 0x311EEE non-delayed)",
+    "memory_effect": "PASS (word store to 0x80FB0C of immediate 0x80FD38)",
+    "dynamic_ownership": "PASS (candidate verifier rerun finds no current overlap)",
+    "scope": "PASS_SCOPED (physical address meaning, formal name/prototype, other indirect callers unresolved)"
+  },
+  "summary": "The ARC packet verifies against its contract and all input/artifact pins. Independent source mapping confirms the 16-byte body in record-3 and official payload; the pinned verifier passes exact instruction tiling, the unique direct no-delay caller, non-delayed indirect return, and current overlap scan. The decoded body stores 0x80FD38 at 0x80FB0C and returns that value in R0. Physical meaning and formal identity remain unknown."
+}

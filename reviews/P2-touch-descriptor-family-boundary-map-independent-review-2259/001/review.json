@@ -1,0 +1,26 @@
+{
+  "review_id": "2259",
+  "status": "REVISE_METADATA",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-descriptor-family-boundary-map-2256/001",
+  "candidate_receipt_sha256": "3d9ed27c7a0f3b784934db6ecd881c86450cb8121de74410ddd2c70168431013",
+  "candidate_verify_sha256": "918cb62466d4732fb22354ebf776763cf9a6e8de0aa47583a31a387e850bc57c",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "All frozen receipt artifact hashes and source hash match.",
+    "Independent interval recomputation confirms exact partition [0x50E4,0x5868): 1,458 code bytes, 28 literal bytes, 438 unknown bytes; span hashes match.",
+    "Isolated verifier reproduces boundary-map.json and references.json, counts 8 bodies and 15 unfiltered incoming candidates, verifies contiguous body decode and direct BL target sets. These branch candidates do not imply reachability.",
+    "Unknown spans remain explicitly unknown, including three 2-byte seams and [0x5378,0x5528); the separate 0x68EC body is outside the window."
+  ],
+  "findings": [
+    {
+      "severity": "metadata_refresh",
+      "detail": "Frozen functions.jsonl has review=null for 0x50E4, while review 2257 now exists for that exact entry. Re-running the verifier finds the review and changes functions.jsonl; the other generated artifacts match. Create a new append-only snapshot to bind the newly available review."
+    }
+  ],
+  "limitations": [
+    "Incoming branch sites remain unfiltered decode candidates; caller closure and whole-image coverage are not established.",
+    "Unknown spans are not classified as code, data, or padding.",
+    "This is private boundary evidence only; no canonical admission."
+  ]
+}

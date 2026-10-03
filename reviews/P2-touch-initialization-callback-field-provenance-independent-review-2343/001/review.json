@@ -1,0 +1,20 @@
+{
+  "review_id": "2343",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-initialization-callback-field-provenance-2340/001",
+  "candidate_receipt_sha256": "97f3038e891a471fd9c2451f8429255ff6867860de541356f72b99db4fc82f1d",
+  "candidate_verifier_sha256": "fc323e70997a0a07dcfa5b9dde0f70896315e72e0d4254381d0fe98292c6f637",
+  "candidate_evidence_sha256": "cc6c280ddf512a18c79ae7d041693f18f3ae1441637fa654d1a0d82422e94d8e",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Receipt 97f3038e891a471fd9c2451f8429255ff6867860de541356f72b99db4fc82f1d and all artifact pins match the source hash. The independently run verifier returns PASS; the literal and addressed instruction operands reproduce exactly.",
+    "The literal at 0x7284 is 0x00006781. At 0x721A the coordinator stores it at [r3,#0x10] after loading cfg from ctx.word8; at 0x722A it freshly loads [cfg,#0x14], and 0x7232 performs BLX R3 with ctx in R0. Thus these are distinct word offsets (16 versus 20) along the decoded ordinary-pointer path; the installed word16 is not itself the target loaded by that BLX.",
+    "The pinned 6780 source pseudocode and independent review hash match the referenced files. Evidence is scoped to the distinction of these fields and the decoded entry, not resolution of the dynamic target."
+  ],
+  "limitations": [
+    "No dynamic target closure, writer/provenance of cfg.word20, or runtime consumer of word16 is established.",
+    "Aliasing/mutation could change field relationships; physical interrupt/status behavior remains unresolved.",
+    "No new executable ownership, caller closure, or canonical admission is claimed; accepted:false."
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "review_id": "2333",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-range-all-original-mode-reuse-2330/001",
+  "candidate_receipt_sha256": "bad178d3df2d80e230e2bd4d2bf4891f06555a7219fd38678b4da3952fff07d7",
+  "candidate_pseudocode_sha256": "52c62cfb61a4dfc1a5446b2087ba14d8d0910b4ec06d717515642a5e7034dc7d",
+  "candidate_replay_sha256": "acc97f9bdb1c1393caa3b6e0c8d2df08a07270b8512e81c83f3384e8c1d61d34",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Receipt bad178d3df2d80e230e2bd4d2bf4891f06555a7219fd38678b4da3952fff07d7 pins the locked source and classifier body [0x7064,0x71C6); artifact hashes match. Independent execution regenerated all 336 fixtures.",
+    "No helper function is intercepted: original 6AC0, predicate/measurement chain, both builders and their children, and final 8FD0 loader execute. The tested configuration byte 85=7 takes the decoded exact-mode reuse path. Original row-classification boundaries, nine constructor calls, outer argument/order ledger, output byte writes, final status and R4-R9/SP checks pass for the recorded ready/timeout and loader outcome matrix.",
+    "No mismatches found. The byte-specific fast path is supported by the decoded dispatcher; the packet tests this reuse mode only."
+  ],
+  "limitations": [
+    "Peripheral status/sample and version/factory data are RAM-modeled, not physical behavior.",
+    "Descriptor/MMIO write ledgers execute but are not fully asserted in this composition; other dispatcher modes and mode transitions are outside its scope.",
+    "Aliasing and arbitrary inputs remain unproven. Private evidence only; accepted:false."
+  ]
+}

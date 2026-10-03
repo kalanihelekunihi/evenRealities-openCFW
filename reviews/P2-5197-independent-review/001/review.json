@@ -1,0 +1,15 @@
+{
+  "review_id": "5197",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-u64-division-byte-search-filter-map-5196/001",
+  "candidate_receipt_sha256": "31dc9f8fc19689fa545bb204b316008d2b3158f92250dbe83b61f59f4505a782",
+  "candidate_replay_sha256": "0448e51115295cf3ff0cf062278cf7deed91ab3569fb53dd38ffa9f8ef3b25b9",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Source-pinned isolated replay passes for substring and byte-search bodies. The substring path loads the first needle byte, searches candidate bytes, advances the needle before its next load, and restarts from the next candidate on mismatch. The character helper skips zero hay bytes and returns the matching pointer or zero; load/comparison ordering is preserved."
+  ],
+  "limitations": [
+    "Null/bounds/volatile/fault behavior and direct character-zero cases are not established. Stable-memory algorithm interpretation only; private partial, accepted:false."
+  ]
+}

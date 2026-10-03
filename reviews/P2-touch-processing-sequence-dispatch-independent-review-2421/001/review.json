@@ -1,0 +1,25 @@
+{
+  "review_id": "2421",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-processing-sequence-dispatch-752e-2418/001",
+  "candidate_receipt_sha256": "831cbc6706c0bb088f4bd1035369e5927ec78cbe6b00e09c4d76f9cb66b2a9e6",
+  "candidate_pseudocode_sha256": "c00ab53c4f0bf2d4e9b4765abb576d4ed06147d19277ee52f28c79010c1af04e",
+  "candidate_replay_sha256": "bd577345cc180d74b9260f05b2e39273499c5ad825a247962e474cf4821be1a3",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "isolated_replay_output_sha256": "657b17bc0a2727a102135b3de94f6b98f5a487ae7d58a3654f2b91b194fdc8e9",
+  "fixture_count": 216,
+  "pinned_body_ranges": [
+    29998,
+    30078
+  ],
+  "checks": [
+    "Candidate source and artifact hashes match the receipt. The pinned body ranges and instruction bytes are retained as specified in touch-processing-sequence-dispatch-752e-2418/001.",
+    "Independent isolated replay passes 216 cases; output hash matches pinned replays.json.",
+    "The 80-byte dispatcher and excluded 757E seam are correctly bounded. Original instruction replay verifies cached kind/start, fresh 128/130 bound reads, full-width slot progression, ORed child status, exact args and preserved registers."
+  ],
+  "limitations": [
+    "72F8 and later processing are controlled; only tested bounds/counts are covered; no child semantics or physical claim.",
+    "Private bounded evidence only; accepted:false."
+  ]
+}

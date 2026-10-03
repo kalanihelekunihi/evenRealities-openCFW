@@ -1,0 +1,30 @@
+{
+  "review_id": "2669",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-indexed-operation4-original-state-chain-2668/001",
+  "candidate_receipt_sha256": "4096fb03648e09c5aa94b77049d953e33d87532655d3433343cbd3b40ebcd40d",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "table_pointer_hex": "0x20026e74",
+  "body_hashes": {
+    "421e4a-421e8c": "f4f21abad8199cfea2524c7335d809b7f624100c1e34b693c08025ae1fb40a2a",
+    "422364-4223d8": "6a131868a276083764d4714178857124ccb4209a5f3e7552d874aba7f7c1a54e",
+    "4215ae-4215dc": "11a6cf814c1a66760a988880dac541c55419e26aa1f4c7ef2de27b9a0d7e019f",
+    "4215dc-4215fe": "8dc0a88874cc74f9148e7ae8b6e70f50b7cd1f732db5b74982a8abcccb1bd6f5",
+    "421632-4216b2": "bc7fc361719841b4cd3b48adad0bb774fe817371892b0a9cbe4e8744c5ec2a8e"
+  },
+  "fixture_sha256": "2f9de482204ef9a881e321b0c3c391164a2eae0c8228e8d2162a61e4c99ed2ae",
+  "replay_sha256": "f45303089b6d683e18f3cd21e2b7b8c2999136a831dbdee0139160e9c4f979a0",
+  "isolated_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2669-independent/replays.json",
+  "fixture_count": 96,
+  "checks": [
+    "Candidate receipt, source, five body hashes, and replay/file pins match. The literal resolves the indexed state table to 0x20026E74. Isolated replay passed all 96 direct-entry and dispatcher-entry fixtures.",
+    "Original 0x421E4A queries operation 4 and the index low byte. Inactive state returns zero without the critical section. Active state saves/disables PRIMASK, clears the selected bit with the original setter, checks the aggregate words, conditionally calls controlled 0x426C58(0), restores the saved mask, and returns zero. Ordered state writes and conditional calls match.",
+    "The 0x422364 operation-4 path composes the original dispatcher and returns the asserted R1/R2 register values and preserved R4/R7/SP. The only intercepted target is 0x426C58; its semantics are not inferred."
+  ],
+  "limitations": [
+    "The fixtures cover bounded low-byte indices and selected state patterns only. Unguarded out-of-range direct queries, concurrent state changes, and aliases are not established.",
+    "The controlled 0x426C58 child, physical meaning of the table/registers, deployed caller ownership and broader behavior remain unresolved.",
+    "Private evidence only; accepted:false; no canonical admission."
+  ]
+}

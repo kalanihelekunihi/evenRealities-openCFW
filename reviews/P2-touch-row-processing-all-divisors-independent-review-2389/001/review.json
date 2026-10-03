@@ -1,0 +1,22 @@
+{
+  "review_id": "2389",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-processing-all-divisors-2386/004",
+  "candidate_receipt_sha256": "e6f6fe56b9f6d25fa71f103be90ad5844034e6972f03b35530639fcda30cd2f3",
+  "candidate_pseudocode_sha256": "68391a01189ed491c2a9a4230338e9fba089c59aa7d2c9f38be9aff73ebb5755",
+  "candidate_replay_sha256": "b6779f09e36f31e03eb7616fa8a17a588ddec588555b575e2c023fbf9244f2cd",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "isolated_replay_output_sha256": "095aea989421ef76e482f37f30f3c21349495623489b0be60b253f8f65161429",
+  "fixture_count": 18432,
+  "pinned_body_ranges": null,
+  "checks": [
+    "Candidate source and artifact hashes match the receipt. The pinned body ranges and instruction bytes are retained as specified in touch-row-processing-all-divisors-2386/004.",
+    "Independent isolated replay passes 18432 cases; output hash matches pinned replays.json.",
+    "Original 7984, 7DDE and A6C0 execute across all low flag bytes, indices, divisor fields 0\u20137 and the tested status seeds. The observed zero-divisor division path returns zero for the supplied numerators; nonzero cases match unsigned quotient behavior and ordered effects."
+  ],
+  "limitations": [
+    "Deeper processing and mode helpers remain controlled. Zero-divisor observations are scoped to these original instructions and fixtures; no broader division contract or firmware completeness is inferred.",
+    "Private bounded evidence only; accepted:false."
+  ]
+}

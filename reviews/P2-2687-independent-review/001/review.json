@@ -1,0 +1,26 @@
+{
+  "review_id": "2687",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-handler1-original-wait-service-chain-2686/001",
+  "candidate_receipt_sha256": "437696634438a63b5ecb901841b8c34bed3082894976fd6c17c578752d806499",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "itcm_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+  "body_sha256": "7828372b3a4b3704f7d9202a325edc738dcf1af81ad60af87d11495e284388ad",
+  "listing_sha256": "1a3b0cb42f9fb1f2d6c1bfe20be31e3050e299ec06dc92e233eac18befaaf89c",
+  "fixture_sha256": "68fabe99d0b2a66aa8c6cfbcd06c3c00229cb1db2bf683521be616010ef865e8",
+  "replay_sha256": "609bdb01428bcddff889ef0dea52cd3f8b88e76957f87cdd21b83d9ef4064054",
+  "isolated_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2687-independent/replays.json",
+  "fixture_count": 384,
+  "isolated_fixture_sha256": "68fabe99d0b2a66aa8c6cfbcd06c3c00229cb1db2bf683521be616010ef865e8",
+  "checks": [
+    "Candidate receipt, source and ITCM hashes, body/listing and replay pins match. All 384 isolated cases pass, and the isolated replay JSON is byte-identical to the candidate output.",
+    "The original handler1 wait path exercises readiness bit30 as either ready or a full 60-call delay timeout, then runs the original 42A04A service path. Flag values0/2/7 select the expected original callback path; the full path also runs original 41CCD6, dispatcher 422364, operation4/query inactive state, original secondary-field helper, cache helpers, FP delay, and ITCM loop without interception.",
+    "The combined write ledger evolves in execution order; the service portion is asserted under PRIMASK=1, then subsequent handler writes use the restored incoming mask. Delay arguments/iteration totals, call sequence, R0/R1/R2 result, R4-R11, SP, and PRIMASK match."
+  ],
+  "limitations": [
+    "Flag7 uses mode low2=0 here, so the mode2 branch is not covered; separate packet 2676 covers its bounded branch. The operation4 table is inactive/zero, so active indexed state behavior is not exercised in this composition.",
+    "Stable synthetic readiness, status, profile and peripheral inputs do not establish hardware timing, asynchronous behavior, or physical register effects. Other handler indices/categories and caller reachability remain unproven.",
+    "Private evidence only; accepted:false; no canonical admission."
+  ]
+}

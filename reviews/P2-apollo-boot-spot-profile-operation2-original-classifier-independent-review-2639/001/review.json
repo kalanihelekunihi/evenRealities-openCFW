@@ -1,0 +1,25 @@
+{
+  "review_id": "2639",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-profile-operation2-original-classifier-2638/001",
+  "candidate_receipt_sha256": "4665c29758726899af5900eca7b09e9658d561a12501e0ab7130c8ba5f5aa428",
+  "candidate_pseudocode_sha256": "b9c1c29e5f0f6c65726fec4863377efbdccf6d817d785deafcf9d8c02b18e422",
+  "candidate_replay_sha256": "d67ede64da6e54f88c48485e28b4ec87f75086f97d0fe37048558a0410518abc",
+  "fixture_sha256": "c84b55c2a458a2adde3e928eb14db61d918fa3a605052cfe31a6d44d5b51b1d7",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "pointer_map_sha256": "eaee34cbd4bfd6f4f9b24d19b8293d41e4235756fd5d58625ae347f61fd1b504",
+  "isolated_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2639-independent/replays.json",
+  "isolated_replay_count": 84,
+  "checks": [
+    "Candidate files, source, pointer-map artifact, and both original body digests match their receipts.",
+    "All 84 isolated fixtures pass. Original parent and classifier execute without interception; only derivation returns 0/4 are controlled. The matrix spans 21 float encodings, both incoming PRIMASK values, and both derivation returns.",
+    "The five categories, flag/category stores, literal bounds, operation status, PRIMASK restoration, input preservation, and register/frame assertions match original execution. The zero-output fixture keeps both global output words initially zero, so the original apply helper is not entered; the replay asserts unexpected entry would fail.",
+    "This review is specific to operation 2 and does not extend to other operation modes or the semantics of derivation/application helpers."
+  ],
+  "limitations": [
+    "Derivation helper 0x42A550 is controlled to returns 0/4; its actual computation is not established. Apply helper 0x42A4BC is not called in these fixtures.",
+    "Profile initialization, concurrent memory changes, and physical meaning are not established.",
+    "Private scoped evidence only; accepted:false; no canonical admission."
+  ]
+}

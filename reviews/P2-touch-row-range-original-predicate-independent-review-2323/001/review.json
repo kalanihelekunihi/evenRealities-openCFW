@@ -1,0 +1,20 @@
+{
+  "review_id": "2323",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-range-original-predicate-2320/001",
+  "candidate_receipt_sha256": "5d0cfb21ef347f8ce8adff0a27ac941e42e6066384bcfbb9d12d25f7f87829c7",
+  "candidate_pseudocode_sha256": "7b07c44b2496d6f3baecb9d9352cc4220f8082935e494ce7f18526037b64bcfa",
+  "candidate_replay_sha256": "69d862122326c66be9709aa35ab35268f83fe49079e9fb0d61ebafc4435d79c2",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Candidate receipt 5d0cfb21ef347f8ce8adff0a27ac941e42e6066384bcfbb9d12d25f7f87829c7 pins source 371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87, body [0x7064,0x71C6) (4ebcd0692bfe49269bab288edd14e2b25ce8eb6b99c68914169f511244088101), and the four evidence-file hashes; all recompute. Isolated replay regenerated all 7168 fixtures.",
+    "The original 7DDE call executes on parameter byte 35: 6 selects and 0 rejects, consistent with the decoded (flags & 6) == 6 predicate. The full 7064 body follows the previously reviewed classifier behavior: row gates, type-dependent source/stride, classification writes, status accumulation and final loader override all match the pinned bytes and replay assertions.",
+    "No fixture or assertion mismatch was found. The original predicate is the sole newly original child relative to packet 2318; other helper boundaries remain controlled."
+  ],
+  "limitations": [
+    "Other helper effects remain unverified; predicate input field values are bounded to 0 or 6.",
+    "Physical meanings, aliasing, pointer mutation and broader caller reachability remain open.",
+    "Private review only; no canonical admission."
+  ]
+}

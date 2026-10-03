@@ -1,0 +1,20 @@
+{
+  "review_id": "2595",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-transition-index-setter-2594/002",
+  "candidate_receipt_sha256": "6642f2822c5a2d4fd5ae6194653ebf4a0db85e70706ec9abd952175a49b6cfa3",
+  "candidate_pseudocode_sha256": "4df214f36a34e1faa4c7e8cbaf54679373ef4194108bed56d8ed8eb6a9cd9c97",
+  "candidate_replay_sha256": "44fcd24c0ae8d9fb1d0f82304af054bad61fdd324d69cfc12878afa1bd98da4b",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Candidate receipt, pseudocode, replay, replay rows, and authenticated source image hashes match. The digest of original body [0x42CEA4,0x42CED8) matches the receipt.",
+    "I reran a replay.py copy redirected to a fresh isolated destination; all 144 fixtures pass. The fixtures cover six index inputs (including low-byte truncation), three flag values, two incoming PRIMASK values, and four base words; the child runs in 48 clear-flag cases.",
+    "Observed writes are ordered: low-byte index is stored first; a nonzero flag sets pending to 1, while a zero flag calls original 0x42CDF8 with the truncated index. The child field write matches the bounded gate=1/mode=3/boost=15 arithmetic and destination fixture. Child return is ignored. Saved PRIMASK is returned in R0, incoming R3 in R1, and R4/SP are preserved."
+  ],
+  "limitations": [
+    "The pending-helper fixture fixes gate, mode, boost and destination; other helper branches are not covered by this composition.",
+    "Stable fixture memory only. Physical meaning, concurrent changes, and caller/installation ownership are unresolved.",
+    "Private scoped evidence; accepted:false."
+  ]
+}

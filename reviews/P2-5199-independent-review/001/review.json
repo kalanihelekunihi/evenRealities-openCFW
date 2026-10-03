@@ -1,0 +1,16 @@
+{
+  "review_id": "5199",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-byte-search-original-fixtures-5198/001",
+  "candidate_receipt_sha256": "f36b69261aae17e3e8e9df044f38d0446a5604fb75c2e4aca8ce8a8f857465f5",
+  "candidate_replay_sha256": "45bf8596bca641656a7f65cb749902412288d0510eab8a0ad7ebff1a31379e80",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Receipt pins search map 5196 and source; isolated replay passes all 256 original cases with no controlled children. Empty inputs, overlapping candidates, misses, high bytes and alignments match the oracle; RAM remains unchanged and R0/saved-register/SP/PC outputs match."
+  ],
+  "limitations": [
+    "Direct char-zero, read trace, volatile and fault behavior are excluded. Finite original fixture evidence only; accepted:false."
+  ],
+  "candidate_results_sha256": "037a3cdf1c75ab2219d427bd3c63a66d3c3182a2191c15916059d9032963f0a4"
+}

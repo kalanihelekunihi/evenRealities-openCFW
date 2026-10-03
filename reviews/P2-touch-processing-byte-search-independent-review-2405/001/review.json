@@ -1,0 +1,25 @@
+{
+  "review_id": "2405",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-processing-byte-search-7580-2402/001",
+  "candidate_receipt_sha256": "f2b2dd34031fdcad50707331dcf6f0c11ef0edae6cc3d7550e81fe6b01a23062",
+  "candidate_pseudocode_sha256": "0866e027fbf8e8a9b2c79124afc74024e71807bb1a1772909b6c4d8b2efef220",
+  "candidate_replay_sha256": "ffbfa45934b0b75ca0fa58824fb4a26356dc4014128aabafc84a2d23a0eda9d3",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "isolated_replay_output_sha256": "bae0da8166dc692af7dd0960a7aa27e4f957f3842d98c56b86a7f7486c8c0a52",
+  "fixture_count": 640,
+  "pinned_body_ranges": [
+    30080,
+    30328
+  ],
+  "checks": [
+    "Candidate source and artifact hashes match the receipt. The pinned body ranges and instruction bytes are retained as specified in touch-processing-byte-search-7580-2402/001.",
+    "Independent isolated replay passes 640 cases; output hash matches pinned replays.json.",
+    "The 248-byte 7580 body and FFFF literal match. Original search executes with controlled helper boundaries; fixtures validate cached flags/validity, greedy low-byte mask iteration, threshold comparisons, byte outputs, helper args/order, status and frame/register assertions."
+  ],
+  "limitations": [
+    "Measurement/cache/clamp helpers remain controlled; no actual measurement source, pointer aliasing, or physical semantics claimed.",
+    "Private bounded evidence only; accepted:false."
+  ]
+}

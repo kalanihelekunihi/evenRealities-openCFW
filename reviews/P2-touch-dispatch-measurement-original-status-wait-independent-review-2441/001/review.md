@@ -1,0 +1,11 @@
+# Independent review 2441
+
+**Result:** PASS_SCOPED.
+
+Candidate receipt SHA-256 fcf799ef168e276791989f6fe68048e2a08511d503a46219c6e12568a10801c1; source SHA-256 371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87 matches its pin. All nine body spans, including original reset 685C and status wait 6608, match the recorded hashes; evidence files match.
+
+Independent isolated replay passes all 64 cases and output matches pinned replays.json. Original dispatcher, measurement, budget/poll/scaler/divider, start/reset/loader and 6608 execute; only 6AC0 and A324 are controlled.
+
+When reset sees status bit0 clear, 6608 receives (315,0,ctx), repeatedly reloads the peripheral chain, and waits while the bit remains clear. Modeled transition after one delay returns zero; persistent clear consumes 315 delays and returns 4. Set status skips the wait. Reset proceeds on either return, which measurement ignores. Exact wait/delay args/counts, ordered writes, arithmetic/poll samples, sample/status behavior, dispatcher aggregation and R4-R11/SP pass.
+
+**Limits:** Status and samples are modeled. No physical readiness or delay timing is established; only the bounded 0/1/315 delay patterns are tested. Mode helper 6AC0 and unit delay A324 remain controlled; their effects are unresolved. Existing literal/seam ownership limitations remain. Private bounded evidence only; accepted:false.

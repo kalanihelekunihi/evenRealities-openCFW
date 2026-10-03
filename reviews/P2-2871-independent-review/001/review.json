@@ -1,0 +1,26 @@
+{
+  "review_id": 2871,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-information-read-provider-decisions-2870/002",
+  "candidate_receipt_sha256": "626b0d4cdf8a008483fefed5e4b6eb402ec7bceee2952c49d246a7e15e60c791",
+  "source_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-fixed-images-005/002/apollo_bootloader-flash.bin",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_range": [
+    "0x4213D8",
+    "0x421548"
+  ],
+  "body_sha256": "939456c29a3886c03fc42a0afa642f92550897c9fa2892fb6c2d5089419fe7ab",
+  "candidate_artifact_hashes_verified": true,
+  "isolated_replay": {
+    "result": "PASS",
+    "fixtures": 8640,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2871-independent"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Copy target 0x41D28A is controlled to return 0xDEADBEEF; no memory copy is performed or claimed. The wrapper's ignored child return is supported by its original instructions.",
+    "The fixtures cover the enumerated selectors, offsets, counts, configuration bits, enable states, destination values, and PRIMASK states. They do not establish provider storage behavior, physical accessibility, arbitrary invalid pointers, aliasing, concurrency, or changing configuration during execution.",
+    "No caller reachability, whole-image completeness, or canonical admission is claimed."
+  ],
+  "accepted": false
+}

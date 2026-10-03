@@ -1,0 +1,26 @@
+{
+  "review_id": 2875,
+  "review_revision": 2,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-temperature-initializer-map-2874/003",
+  "candidate_receipt_sha256": "4467f57461ccc983912b00ffff4ceb0bd58c4db181670eb854c501c64f448634",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_range": [
+    "0x42AC54",
+    "0x42ACA4"
+  ],
+  "body_sha256": "4c910800d808fd71ce61551e88a4bbe388e62974b65a756a73913bdf27482ea4",
+  "candidate_artifact_hashes_verified": true,
+  "isolated_replay": {
+    "result": "PASS",
+    "instructions": 35,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2875-correction-independent"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "correction_verified": "The poll literal pool address is now stated as 0x42AD3C; its loaded argument value is 0x400083E0. This resolves the 2875/001 prose finding. The pool address 0x42AD40 is not the poll pointer.",
+  "limitations": [
+    "Static decode/replay only; initializer and callees were not dynamically validated in this packet.",
+    "No broader callee behavior, physical hardware, startup ownership, whole-image completeness, or canonical admission is established."
+  ],
+  "accepted": false
+}

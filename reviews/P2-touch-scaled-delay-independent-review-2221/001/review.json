@@ -1,0 +1,19 @@
+{
+  "review_id": "2221",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-scaled-delay-a324-2218/001",
+  "candidate_receipt_sha256": "32c72532a6902f97c64d62352feb9f7a3a257197cfc5281565ab1f8ef30fbd7d",
+  "candidate_pseudocode_sha256": "0e25a4c9310e9ce63d72f262251438b49353f365d1ca82ead0746bfce270b62a",
+  "candidate_replay_sha256": "888c80c2b22fa3094fb4618b858c52eca9fda91829a6b02822315eb2692175e6",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Source and all receipt files/ranges match their hashes. Wrapper [0xA324,0xA332), its literal [0xA334,0xA338), and leaf [0x4480,0x4492) have the declared extents and hashes; independent Thumb/M-class decoding agrees with the stored listing.",
+    "An isolated replay regenerated all 807 records exactly: 39 complete executions and 768 wrapper-prefix stops. The complete cases match the wrapped 32-bit multiplication, derived loop count, exact iteration count, zero return and R4/SP restoration. Prefix fixtures stop at 0x4480 and assert the multiplied argument without claiming loop completion.",
+    "Decoded leaf logic computes W(input+2)>>2, exits immediately when the count is zero, and otherwise repeats ADD +1 / SUB -2 / BNE, reducing the counter by one per pass. The wrapper loads the unsigned scale byte at 0x20000870, performs Thumb low-word multiplication into R0 and calls the leaf."
+  ],
+  "limitations": [
+    "Large positive loop counts are not completed. Scale provenance, elapsed-time calibration, physical timing, interrupt/concurrency effects and hardware behavior remain unresolved.",
+    "No canonical admission."
+  ]
+}

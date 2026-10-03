@@ -1,0 +1,16 @@
+{
+  "review_id": "2279",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-sequence-maximum-69c4-2276/001",
+  "candidate_receipt_sha256": "1ebc35e8c4c9f13f8acb43f9ae38e00c27c46fa855f943aac153a2c1a15a7d48",
+  "candidate_pseudocode_sha256": "e2092bf260c103ded9bb49fe8c589ae78b941be43a956c63a512fa5d26398d1e",
+  "candidate_replay_sha256": "383f87eb0eca05b539218ed9a9d4759400b67ab67fa4bde37799981ed4badc45",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Isolated replay regenerated all 36 fixtures. Body [0x69C4,0x6A6C), literals [0x6A6C,0x6A80), source and all listed artifact hashes match. Decode confirms the fifth entry-SP argument is loaded at entry SP, row count is reread each iteration, six source words are copied to scratch before the specified edits, and the poll call receives 1753 plus context. Successful polls compare the fresh register-base halfword strictly against the maximum; timeout sets sticky status 4 but traversal continues. Call/writes and R4-R11/SP checks pass."
+  ],
+  "limitations": [
+    "The poll/setup children are controlled in this packet, and fixture counts/strides/source patterns are bounded. Physical status behavior, aliasing, mutation and other row layouts remain open. Literal interpretation and whole firmware coverage are not claimed; no canonical admission."
+  ]
+}

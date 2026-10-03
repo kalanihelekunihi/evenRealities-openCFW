@@ -1,0 +1,24 @@
+{
+  "review_id": 2699,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-indexed-pending-countdown-cleanup-2698/001",
+  "candidate_receipt_sha256": "2db7a63356d9e93837ec78b3ed47608896b7b7027a85c725c6d7be5b9f99b20c",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "candidate_artifact_hashes_verified": true,
+  "body_hashes_verified": {
+    "4216b2-4216d4": "eb69fa2933ef30723f342fbc330927d681c6ca5d2ac077b77bf5e7ed1689a795",
+    "421d28-421d5e": "4b8c76a46e4a846d4c3320718698134d79310d3b4c6a4dc3cb5b0602ab00ba20"
+  },
+  "isolated_replay": {
+    "result": "PASS",
+    "fixtures": 24,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2699-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "The countdown uses modeled delay readiness and stable synthetic memory; asynchronous flag/count changes and physical timing are not covered.",
+    "Pointer validity and real hardware effects are outside this evidence."
+  ],
+  "accepted": false
+}

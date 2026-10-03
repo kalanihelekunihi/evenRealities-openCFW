@@ -1,0 +1,16 @@
+{
+  "review_id": "2275",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-product-quotient-5fa4-2272/001",
+  "candidate_receipt_sha256": "5f1e3e8b66481dd16cdf1375640b1f33f8780f00167c8f8973d08d5bf6847e85",
+  "candidate_pseudocode_sha256": "e056b4ff11468b0ba2db94ee492b6196a24ad1e4dcc21631fbe34fe6bd1c5dd8",
+  "candidate_replay_sha256": "fcc6e1c82e32d6ad67c20224576cc91d709f408564d103abc546cefcb3e09e41",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Isolated replay regenerated all 392 fixtures. Source, 22-byte body [0x5FA4,0x5FBA), and candidate file hashes match. Decode confirms the 32-bit MULS product is passed to original A6C0 when divisor is nonzero; the zero-divisor branch returns 0xFFFFFFFF without calling division. Quotient and R4/SP assertions pass."
+  ],
+  "limitations": [
+    "The fixtures test bounded operand/divisor values including wrap cases, not every input combination. Other clobbered registers and unusual stack/LR states are outside assertions; physical behavior and canonical admission are not claimed."
+  ]
+}

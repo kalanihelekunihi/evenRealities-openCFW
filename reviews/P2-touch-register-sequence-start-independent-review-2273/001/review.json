@@ -1,0 +1,16 @@
+{
+  "review_id": "2273",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-register-sequence-start-6928-2270/001",
+  "candidate_receipt_sha256": "cee3ee4bca019ea651c81562a570b75ee8d10bb8063268a2506ae03178e48b6d",
+  "candidate_pseudocode_sha256": "5cf605f9045688e75ae0bd3e5263af5d24986b37aa0c73124ccd13cc955250cc",
+  "candidate_replay_sha256": "59ec464cf271e2d07053fd976a37ed485303bf28d271cd051f55d824c8436da1",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Isolated replay regenerated all 42 fixtures. Source/body/literal and candidate file hashes match. The decoded chain computes base through context\u2192root+8\u2192table word, sets bit 31 with a fresh read, writes/readbacks both setup constants, and calls original 9178(base,6,source). It then rereads 0x3034 for OR 6, rereads for OR 1, and stores 1 at base+0x3800. The ordered-write and call traces, R0=base, R4 and SP checks pass."
+  ],
+  "limitations": [
+    "Fixtures use modeled RAM and a bounded set of initial words/last source values. They do not establish hardware MMIO readback behavior, pointer aliasing, physical names, or concurrent mutation. No canonical admission."
+  ]
+}

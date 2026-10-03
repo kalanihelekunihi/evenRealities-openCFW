@@ -1,0 +1,23 @@
+{
+  "review_id": "2655",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-handler-table-2654/001",
+  "candidate_receipt_sha256": "221f8958855a49be74daef36bca8e6d9ba8d15f99c53baf0e27d1f230e040d3a",
+  "table_sha256": "dd708b6489e4e71ddf0587710a65befe64a2c703134e5db0438dc406cd1cb258",
+  "verify_sha256": "4a4f49caafa376328ce833fab634a2adaf3079fc3a53190eedb4bd15bbdc2659",
+  "flash_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "decoded_ram_sha256": "e3bea7ccd46bc324829152b5b5a9069aecce5db243876273084d29bd7d47b843",
+  "isolated_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2655-independent/table.json",
+  "isolated_entries": 27,
+  "checks": [
+    "Candidate receipt, pinned flash image, decoded RAM image, table.json, verify.py, and notes hashes match their declared values.",
+    "Isolated replay of verify.py passed: the literal at flash address 0x42ACBC resolves to 0x20000158; exactly 27 four-byte slots (108 bytes) are extracted from authenticated decoded RAM and all 27 pointers are distinct, Thumb-tagged targets inside the pinned boot flash image.",
+    "The ordered target list is 0x427E84, 0x428068, 0x428240, 0x4283E2, 0x428506, 0x42863E, 0x428840, 0x428920, 0x428BB0, 0x428CA4, 0x428D90, 0x428E6A, 0x4290A2, 0x4291EC, 0x42944A, 0x429524, 0x42962C, 0x429718, 0x42984E, 0x429A30, 0x429B4C, 0x429C46, 0x429E00, 0x429F68, 0x42A030, 0x42A032, and 0x42A034."
+  ],
+  "limitations": [
+    "First-16-byte hashes are navigation fingerprints, not function extents or semantic recovery; the final three entries are closely spaced and are not thereby proven to be complete routines.",
+    "The packet establishes decoded initialized-RAM table contents only. It does not establish who installs the table, runtime mutation, reachability, caller ownership, handler behavior, or indirect-call closure.",
+    "Private evidence only; accepted:false; no canonical admission."
+  ]
+}

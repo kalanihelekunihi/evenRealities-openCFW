@@ -1,0 +1,23 @@
+{
+  "review_id": "2661",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-handler0-map-2660/001",
+  "candidate_receipt_sha256": "7714a7c1632a26cb8f4f6ec59761de19efa4c7fa2ac018b4e3abaa43bd0a214b",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_sha256": "1a259e009f8dfe9641a5c1062b41e1cc32eab8b34c6f919a19485e7897a37310",
+  "instruction_listing_sha256": "3940d7ece275e7c5e5f5ec2cf62440398c1ae8d86a9a88daac21d2adc2b5eb3e",
+  "replay_sha256": "3b1b8523b7e0e1293bc90a81600cb363472ca2921edfa270ba94c23d6ee6bca3",
+  "instruction_count": 160,
+  "isolated_static_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2661-independent/instructions.json",
+  "checks": [
+    "Candidate/source/body and listing/replay/pseudocode hashes match. Isolated static verifier replay regenerated 160 Thumb instructions spanning exactly [0x427E84,0x42805A); its instruction-list hash matches the candidate listing.",
+    "Independent review of the decoded control flow supports the documented early equality path, one-step ascending/descending loop, up-to-60 delay-and-readiness checks, ordinary field publication, bounded low-seven-bit interpolation, optional bit-17 helper, later control-bit RMWs, and stack-packed R0 epilogue. PC-relative literals resolve inside the pinned image; literal data is kept separate from code.",
+    "The prose correctly preserves indexed reads and an extraction that are overwritten, describes child calls only as unresolved dependencies, and explicitly labels this a static map rather than execution evidence."
+  ],
+  "limitations": [
+    "No dynamic execution was performed by this packet or by this review. Child behavior for 41CCD6, 42A04A, 41E22E and 41E1E8 remains unverified here; other helper and hardware effects are not inferred.",
+    "The input values, profile/MMIO stability, bounds, runtime reachability/ownership, concurrency, and physical behavior are not established.",
+    "Private evidence only; accepted:false; no canonical admission."
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "review_id": "5067/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-u64-division-block-next-pointer-map-5066/001",
+  "candidate_receipt_sha256": "29dc8dadaac22849330b5b0bf263873d49f3acaa005beaed8b88a9db38ac8cbd",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "input_and_file_pins": "PASS",
+    "instruction_decode": "PASS (three extents, 76 instructions match source)",
+    "literal_references": "PASS (seven pointer dereferences agree)",
+    "isolated_replay": "PASS",
+    "control_flow": "PASS_SCOPED (flag ops, wrapped arithmetic, next-pointer and size-zero branch match; assertions are returning-possible)",
+    "scope": "PASS_SCOPED (no null/overflow guard or allocator/hardware semantics inferred)"
+  },
+  "summary": "The three extents decode from the locked image and all seven literal dereferences match. The code applies the pinned word masks to block flags; size helpers use wrapped add/subtract; next-pointer calculation advances by adjusted size and reads the original block\u2019s zero-size predicate before returning the computed next pointer. Assertion calls remain returning-possible in the pseudocode, and no nonreturning behavior is assumed."
+}

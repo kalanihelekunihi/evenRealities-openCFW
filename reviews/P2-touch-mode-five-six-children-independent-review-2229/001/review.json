@@ -1,0 +1,19 @@
+{
+  "review_id": "2229",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-mode-five-six-children-2226/001",
+  "candidate_receipt_sha256": "d7cf548cd7d0ee9660a3b4694e992cbbeefd96d5c665f53167cc5955a27042ea",
+  "candidate_pseudocode_sha256": "0ca339e1b2a6456d66a8029b56dd9e621c1c99161c384f9ef86a039cc846c8d1",
+  "candidate_replay_sha256": "a01d7fb09ad66c0894e633d8053e28e26293cb59622e52a862b6e2757e480e0a",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Source, both code bodies [0x685C,0x68DE) and [0x6A80,0x6AB8), and both literal pools [0x68E0,0x68EC) and [0x6AB8,0x6AC0) match their declared range hashes; all receipt files match. Independent Thumb/M-class disassembly agrees with the candidate listing.",
+    "An isolated replay regenerated all 16 fixtures exactly. Original 685C, 6A80, 6608, A324 and 4480 execute without interceptions. The full ordered register-write ledger, config byte 113 clear, R4/SP and 6A80 tail writes match the assertions.",
+    "With modeled scale 2, a clear status bit causes 315 original A324(1) calls; 6608 reaches budget exhaustion and returns 4, which 685C ignores before its subsequent writes. A set status bit mismatches the requested bit and skips polling. 6A80 then performs its three pairs of writes after calling 685C."
+  ],
+  "limitations": [
+    "Scale and status are modeled in RAM. The test establishes software polling and call flow, not physical timing, readiness, MMIO effects, or hardware meaning. Alias/concurrency behavior is not covered.",
+    "No canonical admission."
+  ]
+}

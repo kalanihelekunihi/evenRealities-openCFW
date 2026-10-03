@@ -1,0 +1,16 @@
+{
+  "review_id": "5121",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-assertion-fallback-loop-fixtures-5120/001",
+  "candidate_receipt_sha256": "45eff96c82419c51920784a3b66a8e20bafff4ec5435a8555d5f7e263daf679f",
+  "candidate_replay_sha256": "d693034d82fee4f6febe4a906e65223ffe5d4d8f1c90969f3212c0288af7c5a8",
+  "candidate_results_sha256": "c43282e419c0636e5e8c2a0e08296f2b0f02ce418d3863db664c415350e4a52e",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Receipt pins the fallback map and locked image; isolated replay passes all four cases. The harness explicitly stops before BKPT and resumes after it, bounds execution to three fallback iterations, and compares stable versus handler-mutated R2. The one-time R2 literal load, repeated R1/R0 setup, persistent 24-byte frame and LR are verified."
+  ],
+  "limitations": [
+    "BKPT is not executed and no fallback return is controlled. The bounded replay does not establish infinite-loop termination or physical trap/hardware behavior. Private scoped evidence; accepted:false."
+  ]
+}

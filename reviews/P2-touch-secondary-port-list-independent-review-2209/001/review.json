@@ -1,0 +1,19 @@
+{
+  "review_id": "2209",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-secondary-port-list-60ea-2206/001",
+  "candidate_receipt_sha256": "d9c8a4fe2cf1d8076942761f27861458be709aab7c5856dde783818b44f4722a",
+  "candidate_pseudocode_sha256": "3872035da33cc81bb469e090d1d4055e6b3ffd5bfeb7a08e4a83b6f3b542ae6a",
+  "candidate_replay_sha256": "425ef6ba13c5e7f2a3ffbfa93bc451d5849b878fbfb5663d678675efb9caf224",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "The source, body [0x60EA,0x6140) and all receipt files match their declared hashes. Independent Thumb/M-class disassembly agrees with the candidate listing.",
+    "An isolated replay regenerated all 48 fixtures exactly. Original 60EA, 5FC6 and the port configuration leaves execute without interception. Count 0/1/3, mode, enable and PRIMASK combinations verify child tuples including stack enable, ordered unconditional port+68 writes, all four resulting port words, R4/R8-R11, SP and mask restoration.",
+    "Decoded code loads entries from context+24, reloads root and byte count at root+44 for the loop test, calls 5FC6 with port/pin/function/mode and the fifth stack argument, then stores 1<<pin at port+68 before advancing by eight bytes."
+  ],
+  "limitations": [
+    "Count and pointers do not mutate in the fixtures. Invalid-pin BKPT continuation, pointer mutation, physical port effects, aliasing and concurrency remain unverified.",
+    "No canonical admission."
+  ]
+}

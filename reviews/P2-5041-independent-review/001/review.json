@@ -1,0 +1,17 @@
+{
+  "review_id": "5041/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-startup-dual-resource-chain-fixtures-5040/001",
+  "candidate_receipt_sha256": "83bf7dec511ba019076da57d07d9d2f4650547b591227f529264bd5b32dd4d58",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "pins": "PASS (locked source, table/map/comparator/resource dependencies, candidate files)",
+    "isolated_execution": "PASS (3 integrated original-code cases)",
+    "prior_table_and_sort_assertions": "PASS (record order/multiset, copy/sort arguments, callbacks)",
+    "resource_chain": "PASS_SCOPED (both resources called; branch-specific args, stack values and publications checked)",
+    "ABI": "PASS (final R0, SP, PC)",
+    "scope": "PASS_SCOPED (resource/logger and other callbacks controlled)"
+  },
+  "summary": "The integrated original startup, copy, sort, comparator, and dual-resource parent executes successfully in all three cases. The prior record/order/copy/sort assertions hold; both resource calls, publications, branch-specific arguments, stack slots, and final ABI state match. Child implementations and hardware effects are modeled rather than independently validated."
+}

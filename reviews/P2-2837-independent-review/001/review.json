@@ -1,0 +1,24 @@
+{
+  "review_id": 2837,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-profile-current-restore-flags-2836/001",
+  "candidate_receipt_sha256": "fec3e67cef79f79c4c845156cf82230569384ef73f139a34784c430e9e1253ed",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_hashes_verified": {
+    "429da4-429df6": "a69ea6c52f959eba65684feebd9651d2068cdd0d91caf8eb45d74e52969c61a4"
+  },
+  "candidate_artifact_hashes_verified": true,
+  "isolated_replay": {
+    "result": "PASS",
+    "fixtures": 72,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2837-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Four incoming NZCV patterns are exercised across the listed three index sequences, three profile-word patterns, and two masks; this does not cover all machine states.",
+    "Injected index updates model changing state; real concurrency/peripheral semantics and caller ownership remain unresolved.",
+    "No canonical admission."
+  ],
+  "accepted": false
+}

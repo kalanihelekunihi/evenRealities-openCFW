@@ -1,0 +1,15 @@
+{
+  "review_id": "5157",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-u64-division-logger-prefix-formatting-map-5156/001",
+  "candidate_receipt_sha256": "1f9237784f67a34beff391bde97db6724b281ea2f5e01c47532edb58fade4221",
+  "candidate_replay_sha256": "a522b04cddcb4b396b13534b2b7d2793a26dca6abaac01f5235c1eabeb6c1054",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Source-pinned isolated replay and literal checks pass for 0x7780..0x785A. The map correctly tracks inherited logger frame inputs, two 41560C initializations, fresh state/table reads, helper append arguments and offset accumulation, including the conditional 15-prior-length padding path and its SP+16 scratch reuse. ADR literal targets are calculated from aligned PC sites."
+  ],
+  "limitations": [
+    "Continuation at 0x785A is excluded. Formatter/append helper semantics, buffer bounds, faults, physical and hardware behavior are not established. Private partial evidence; accepted:false."
+  ]
+}

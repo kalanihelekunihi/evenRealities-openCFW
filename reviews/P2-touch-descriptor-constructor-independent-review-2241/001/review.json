@@ -1,0 +1,29 @@
+{
+  "review_id": "2241",
+  "status": "REVISE_PROSE",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-descriptor-constructor-5548-2238/004",
+  "candidate_receipt_sha256": "42ab41826a37d1a22e0236c153c985b6786c229e0d16f04c5135ab4d4b01730f",
+  "candidate_pseudocode_sha256": "82a72562d8497be7cecf024b3cc5d1ccd7211974ead3d986b5af6a4485bd3ced",
+  "candidate_replay_sha256": "0e0618e467b002da7cec126a54b6079b008aabb92e8b22f8a3e73fc6c3b45633",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Source, body [0x5548,0x569E), literal [0x56A0,0x56A4), and all candidate artifact hashes match. Literal value is 0x0FFF0000.",
+    "Isolated replay regenerates all 144 fixtures. Corrected fixtures distinguish parameter byte 32 and byte 33; full output, ordered writes, child arguments/status, and preserved registers are asserted. Only child 0x51BC is intercepted.",
+    "Decoded body agrees with map selection, row/parameter strides, destination offsets, optional bit-15 update, child/status flow, and the count-scaled +20 field."
+  ],
+  "findings": [
+    {
+      "severity": "prose_gap",
+      "detail": "The kind-1 first-word packing formula is delegated to the replay instead of specified. State the masks/shifts explicitly: (config[96]&0x0F) | ((config[93]<<4)&0xF0) | ((config[94]<<8)&0x0F00) | ((parameter.half12<<16)&0x003F0000) | (config[95]<<24)."
+    },
+    {
+      "severity": "coverage_limit",
+      "detail": "Fixtures use only indices 0/2, kinds 0/1/2, and two source-field patterns; child status is limited to 0/3. This does not falsify the model, but limits independent variation."
+    }
+  ],
+  "limitations": [
+    "Child 0x51BC effects, aliasing, concurrency, and physical field meanings remain unresolved.",
+    "No canonical admission."
+  ]
+}

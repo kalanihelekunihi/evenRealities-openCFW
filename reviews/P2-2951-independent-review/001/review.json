@@ -1,0 +1,19 @@
+{
+  "review_id": "2951/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-control-operation-original-errors-2950/001",
+  "candidate_receipt_sha256": "12a25b79fed57fd8e4ed243852d0f53d42167637a5b88995d41b921dacb69225",
+  "candidate_replay_sha256": "26e55086c58817f08ea16fed05d3ff5fb67a3604a53411735daa7c6d8e6370d1",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "source_and_body_hashes": "PASS",
+    "coverage": "PASS (100 fixtures = 10 operation words \u00d7 5 gates \u00d7 2 initial PRIMASK values)",
+    "result_mapping": "PASS (gates 0\u20132\u21920, invalid-magic gate3\u21921, valid-magic gate4 with null option/input\u21926)",
+    "interrupt_save": "PASS (only valid-magic gate invokes original 41B8EC; incoming PRIMASK restored)",
+    "observed_writes": "PASS (no watched data/MMIO writes on these error paths)",
+    "register_frame_and_stop": "PASS (R4\u2013R12, SP, PRIMASK and stop state asserted)",
+    "isolated_replay": "PASS (100 fixtures)"
+  },
+  "summary": "The candidate\u2019s original-instruction error-path replay passes 100 bounded fixtures. Modes 0\u20132 return zero before the interrupt-save helper; mode 3 with invalid magic returns one; mode 3 with valid magic, null input/option and low-byte operation values 0\u20137, 255, or 0 (from full word 256) returns six. The original interrupt-save helper runs only in the valid-magic cases, with PRIMASK restored. No watched writes occur on these error paths, and R4\u2013R12/SP are preserved. This does not establish successful operations, changing/aliased reads, exceptional behavior, or physical hardware effects."
+}

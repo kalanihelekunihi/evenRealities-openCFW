@@ -1,0 +1,26 @@
+{
+  "review_id": "2685",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-handler1-original-normal-chain-2684/001",
+  "candidate_receipt_sha256": "83126e894b3b0ca0fa2adff6f8d9b91fe0053b850d8cc0c3bcc433f2294c53a0",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "itcm_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+  "body_sha256": "7828372b3a4b3704f7d9202a325edc738dcf1af81ad60af87d11495e284388ad",
+  "fixture_sha256": "287ab52447a5ab0bffe904529140ec18e7c1b08cab0c9d18b5c427fcd1cf042e",
+  "replay_sha256": "33672dca959671a69db3401c3a64dc08e4bff0670981560d18bd7a772ccb3404",
+  "listing_sha256": "1a3b0cb42f9fb1f2d6c1bfe20be31e3050e299ec06dc92e233eac18befaaf89c",
+  "isolated_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2685-independent/replays.json",
+  "fixture_count": 64,
+  "isolated_fixture_sha256": "287ab52447a5ab0bffe904529140ec18e7c1b08cab0c9d18b5c427fcd1cf042e",
+  "checks": [
+    "Candidate, original flash and ITCM pins, body hash, instruction listing, replay, and fixture hashes match. All 64 isolated fixtures pass and their replay JSON is byte-identical to the candidate output.",
+    "The original normal path is reached with control bit0 clear and inputs newfirst=0, oldfirst=1, newsecond=0. The original secondary-field helper, cache-control helpers, FP delay, and ITCM loop execute without interception. The ordered write ledger and conditional cache-helper calls match the fixture model.",
+    "Delay arguments are 50, 5, and 20; under the pinned ITCM fixture these account for 2355 loop iterations. The unusual epilogue R0=new-profile pointer, R1=packed profile word, R2=incoming R3, R4-R11, SP, and PRIMASK all match assertions."
+  ],
+  "limitations": [
+    "This tests only the stated normal-path indices/category; it does not cover handler1 wait/service branch, other index/category combinations, or broader dispatcher behavior.",
+    "Cache/protection/MMIO and clock values are synthetic stable fixtures. Emulator execution does not establish physical cache, privilege, synchronization, or timing effects.",
+    "Private evidence only; accepted:false; no canonical admission."
+  ]
+}

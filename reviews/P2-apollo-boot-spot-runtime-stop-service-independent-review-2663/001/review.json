@@ -1,0 +1,26 @@
+{
+  "review_id": "2663",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-runtime-stop-service-2662/001",
+  "candidate_receipt_sha256": "81a183707b48e592b81e6064045063e9204f0e3ffae7cd79fc64b08b1d753d8a",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_hashes": {
+    "41ccd6-41cd1a": "53ecf1cc50f77949e880de53ecfed6a2d18c3ea803c457a13e77d1b2ac548a3a",
+    "42a04a-42a078": "2ce0019a9c986275a9d5c9ea8d04c05e055c163e2802417c4ee68be2fd2b7fd4"
+  },
+  "fixture_sha256": "0d50e8e2963435d1374233b669a5526b68de5ed2fed98205113682e316c9657d",
+  "replay_sha256": "561fa6899fc0be4f1677d015aa08367fcabd2144c4101c1005f0fe27bcf75488",
+  "isolated_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2663-independent/replays.json",
+  "fixture_count": 48,
+  "checks": [
+    "Candidate receipt, flash source, both body hashes, fixture file, replay, and pseudocode pins match. Isolated replay passed all 48 combinations of the two entries, four flag values, three register patterns, and PRIMASK 0/1.",
+    "The ordered write ledger matches the disassembly: first register bit0 clear, second bit15 clear, child call 0x422364(4,49), writes 0x40000 and 0xC0000000, fifth-register read, then sixth-register write 0x40000. The fifth read is not asserted in the fixture, as the packet acknowledges.",
+    "For 0x42A04A, original save/disable and restore of PRIMASK execute; flag byte2 selects 0x428378, otherwise a fresh flag-byte read equal to7 selects 0x428A94; then 0x41CCD6 always runs. Controlled children and original epilogues produce the asserted call order, mask, R0/R7, and SP."
+  ],
+  "limitations": [
+    "The three child entries are controlled, so their semantics are not established. The unasserted fifth-register read value and physical peripheral effects remain open.",
+    "The packet does not establish behavior under concurrent flag changes, callback ownership, or deployment context.",
+    "Private evidence only; accepted:false; no canonical admission."
+  ]
+}

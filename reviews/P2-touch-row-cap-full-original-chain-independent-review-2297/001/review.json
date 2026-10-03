@@ -1,0 +1,16 @@
+{
+  "review_id": "2297",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-cap-full-original-chain-2294/001",
+  "candidate_receipt_sha256": "e04db72c15c5f6cf956f8919a61fbd1857b485ec7e40a3e7f68eae7b25c27232",
+  "candidate_pseudocode_sha256": "5602b2ea6baf8db9224feabb4a258d0e164db68e5e18ed4413ff72293fd93c8a",
+  "candidate_replay_sha256": "4935c714ac07bc5162f8d22bf723e28400146324990e3b42bcfa320735c6ec3c",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Isolated replay regenerated all 648 fixtures. Source, shared 7BC0 body/literal pins and candidate files match. The entry at 5CAC passes an actual stack output pointer (entry SP\u221212) to 7BC0; execution confirms the child measurement result and final halfword store at parameter+4. The entire 6AC0 mode0\u21925 setup, 6928/9178 sequence, 7288/A6C0 budget, 6980/5FA4/A6C0 polling and 7BC0 calculation execute without interception. The parent ledger, output, retained status, child arguments, R4\u2013R11 and SP assertions pass."
+  ],
+  "limitations": [
+    "All fixtures set the wrapper enable bit and exercise only old mode 0; disabled gate and other modes are supported by separate evidence, not this replay. Hardware sample/status and MMIO are modeled RAM. Composition does not assert all child writes, and physical behavior, aliasing and full firmware coverage remain unresolved. No canonical admission."
+  ]
+}

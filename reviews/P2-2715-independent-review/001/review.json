@@ -1,0 +1,25 @@
+{
+  "review_id": 2715,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-handler4-map-2714/001",
+  "candidate_receipt_sha256": "81e2f69c1e040e16eb513973711d355c92f3c4001316e650a109cd64b6a15224",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "itcm_sha256": null,
+  "candidate_artifact_hashes_verified": true,
+  "body_hashes_verified": {
+    "428506-42863e": "cd801faef0531043621aeddbdfc3ab7659b492bdab75fe384a6ebfd81ca71a9d"
+  },
+  "isolated_replay": {
+    "result": "PASS",
+    "instructions_or_fixtures": 109,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2715-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "scope": "static",
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Child semantics, input bounds, changing reads, caller ownership, and hardware effects remain unresolved.",
+    "Private evidence only; no canonical admission."
+  ],
+  "accepted": false
+}

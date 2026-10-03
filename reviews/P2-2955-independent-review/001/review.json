@@ -1,0 +1,17 @@
+{
+  "review_id": "2955/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-control-operation-original-idempotent-decode-2954/001",
+  "candidate_receipt_sha256": "7a448dca80b54e476135c8edb3ab674b1f76baa71ae23cac828efb44c4292cbd",
+  "candidate_replay_sha256": "d498dd6fc75b06348e68604a5496de4a80216b9a0f8d0e2a6394e636869097a8",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "source_and_body_pins": "PASS (caller, decoder and interrupt-save helper)",
+    "fixture_product": "PASS (576 = 3\u00d74\u00d73\u00d74\u00d72\u00d72)",
+    "original_execution": "PASS (caller, save helper and decoder original)",
+    "ordered_writes": "PASS (two state-publication words written under masked PRIMASK)",
+    "status_and_frame": "PASS (zero status, R4\u2013R12, SP and incoming PRIMASK restoration)",
+    "isolated_replay": "PASS (576 cases; receipts hash outputs)"
+  },
+  "summary": "All 576 bounded original-instruction compositions pass. For operations 3/4/6 with option zero and null input, the test seeds state words to match the independent decoder oracle. The original caller invokes interrupt save and decoder in order; it publishes exactly the two expected words while PRIMASK is masked, returns zero, restores PRIMASK and preserves the checked frame/registers. The isolated replay and all source/body/output hashes match. Option-enabled mutation, other snapshot states, transition branches, aliases/volatile changes, physical hardware and caller coverage outside this bounded path remain unresolved."
+}

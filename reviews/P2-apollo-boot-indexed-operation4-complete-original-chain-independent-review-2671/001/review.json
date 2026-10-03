@@ -1,0 +1,31 @@
+{
+  "review_id": "2671",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-indexed-operation4-complete-original-chain-2670/001",
+  "candidate_receipt_sha256": "79ffeb4f2ef901ca33613e1d8f7a2ca73e5157ee2d6050997c36da6f2c129227",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "table_pointer_hex": "0x20026e74",
+  "body_hashes": {
+    "426c58-426c72": "92fca357b06260aa313efd81bb3c38360a6730eab3b08ae30034113f558e4036",
+    "421e4a-421e8c": "f4f21abad8199cfea2524c7335d809b7f624100c1e34b693c08025ae1fb40a2a",
+    "422364-4223d8": "6a131868a276083764d4714178857124ccb4209a5f3e7552d874aba7f7c1a54e",
+    "4215ae-4215dc": "11a6cf814c1a66760a988880dac541c55419e26aa1f4c7ef2de27b9a0d7e019f",
+    "4215dc-4215fe": "8dc0a88874cc74f9148e7ae8b6e70f50b7cd1f732db5b74982a8abcccb1bd6f5",
+    "421632-4216b2": "bc7fc361719841b4cd3b48adad0bb774fe817371892b0a9cbe4e8744c5ec2a8e"
+  },
+  "fixture_sha256": "ccaa84707826ed3b6630556c0d5484a95aec46018ccd060a346a38dbd378f09b",
+  "replay_sha256": "a637f2b588280cd0ae78e4e6b2083d2ca91beea6acf00d9a903c30ec15ed0326",
+  "isolated_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2671-independent/replays.json",
+  "fixture_count": 192,
+  "checks": [
+    "Candidate/source and six body/artifact pins match. The control literal resolves to 0x20026D30. Isolated replay passed all 192 direct and dispatcher fixtures.",
+    "The composition runs the original dispatcher, operation-4 state query, setter, aggregate test, critical-section wrapper, and 0x426C58 leaf without interception. Active cases clear the selected state bit; when no other state remains, the leaf clears control bit0 through an ordered read-modify-write. Inactive cases do not change PRIMASK or state.",
+    "Exact conditional call count, ordered writes to table/control words, saved PRIMASK restoration, R1/R2 result behavior, R4/R7/SP preservation, and sentinel return are asserted."
+  ],
+  "limitations": [
+    "This fixture scope covers only operation4 and listed low-byte indices/state patterns; direct query guards and other operations/indices are not closed by this packet.",
+    "Control register physical meaning, concurrent mutation, runtime ownership/reachability and hardware behavior remain unresolved.",
+    "Private evidence only; accepted:false; no canonical admission."
+  ]
+}

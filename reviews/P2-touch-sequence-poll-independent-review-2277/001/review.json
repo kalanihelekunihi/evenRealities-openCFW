@@ -1,0 +1,16 @@
+{
+  "review_id": "2277",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-sequence-poll-6980-2274/001",
+  "candidate_receipt_sha256": "a911abaee9acb97aa636e2703be437cbe0d17cd4efd26cf84dc5db005acfbc28",
+  "candidate_pseudocode_sha256": "4740397610b126bbc13ed777646fd1ced05076439bed6158312ad5daeecccfbd",
+  "candidate_replay_sha256": "63ecba4a31d61d99f529f655145f838dd5d668baab0ce2b88ae683676d5a8067",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Isolated replay regenerated all 75 fixtures. Body [0x6980,0x69BA), literal [0x69BC,0x69C4), source and artifact pins match. Decode confirms root/context loads, original A6C0 then 5FA4 arguments, status bit 8 test before zero/countdown handling, decrement only on clear status with nonzero count, and the final 0xC1011111 write/readback. Countdown observations, arithmetic call arguments, return count and R4-R6/SP checks pass."
+  ],
+  "limitations": [
+    "Modeled status transitions cover early-ready and selected clear cases; large timeout budgets are deliberately not exhausted. Hardware timing/readback, physical field meaning and pointer mutation are unresolved. Seam 0x69BA remains excluded. No canonical admission."
+  ]
+}

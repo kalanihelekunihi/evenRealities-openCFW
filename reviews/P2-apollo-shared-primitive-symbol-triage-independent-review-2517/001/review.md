@@ -1,0 +1,11 @@
+# Independent review 2517
+
+**Result:** PASS_SCOPED.
+
+Reviewed `g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-shared-primitive-symbol-triage-2516/001`. Candidate receipt SHA-256 is `ec81f8caa31c89938f374de92c535ea71a8aa4efac2b679b9f140ad5a6396fb3`; its declared hashes match: `triage.json` `73f3f4c436f0e9ad12f0592fe1de485b830a4de96352db4fad54d20082eeb746`, `verify.py` `35796622058197ad0d0c0e79d2e24468ef8296d80d22765273029bb339954b90`, and `notes.md` `4f4d346138d2145b4e77c8ab55ce16b57b6c24ac0dbc8a68bcf26cab1e48f13e`.
+
+The triage input is pinned to `apollo-shared-primitive-call-candidates-2514/001/candidates.json` at SHA-256 `3d841c9049f5ed847528814ed952772bce07e685bf42543ea305bcc3a21d46f3`. Symbol-table inputs match their recorded hashes: `g2/symbols/apollo_main.tsv` `647539b78f5524c24714db425ceb12ccba9b92903f4b3c8a92c4a01841b91253` and `g2/symbols/bootloader.tsv` `3200520ecefa911d6eac45c9d631125af94c63dc60904b882c3e6b17ff76eebc`.
+
+I reran the verifier from a copy directed to a fresh output directory. The candidate list remains 293 records. I independently recomputed, for each call, every symbol-table range that fully contains its four-byte instruction and is within the corresponding locked image, then hashed the exact loaded-address range and compared it to the row’s historical `stock_sha256` when present. Every generated containing-range record matched, including overlaps retained as separate entries. The aggregate counts reproduce: 195 candidates have at least one containing historical range, and 184 have at least one matching historical body hash. All original call-record fields match the pinned source list; every candidate still has `caller_ownership_verified: false` and `entry_reachability_verified: false`.
+
+**Limits:** This is historical-symbol prioritization metadata. Range containment and a hash match do not prove that a range is current owned code, instruction-aligned as a function, reachable, or represented by complete pseudocode. The historical names/confidence are not ownership evidence. Missing ranges or mismatches do not establish absence or unused code. No admission or firmware change is supported. Private evidence only; accepted:false and no canonical admission.

@@ -1,0 +1,15 @@
+{
+  "review_id": "2941/002",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-hardware-state-decode-map-2940/001",
+  "candidate_receipt_sha256": "78a7254c7bd025889d90f1af707c22c0f2a8d1cd24bcdbf9317a7cc2f80eb065",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "supersedes": "reviews/P2-2941-independent-review/001/review.json",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "source_body_instruction_literal_dispatch_and_replay": "PASS (as established in 2941/001)",
+    "bit_test_recheck": "PASS (LDRB zero-extends; LSLS #31 makes N equal to the original byte bit 0; BPL therefore takes when bit 0 is clear)",
+    "prior_review_finding": "WITHDRAWN (the phrase low bit is accurate)"
+  },
+  "summary": "This append-only correction supersedes the false prose finding in 2941/001. For a zero-extended byte, shifting left by 31 maps its original bit 0 to bit 31/N; bit 7 is shifted out. Therefore BPL tests whether the original low bit is clear, and \u201cfreshflaglowbit\u201d accurately describes the gate. The prior review\u2019s source, body, literal, dispatch-map, and isolated-replay checks remain valid. Static scope only; accepted remains false."
+}

@@ -1,0 +1,19 @@
+{
+  "review_id": "2601",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-transition-state-predicate-2600/001",
+  "candidate_receipt_sha256": "d27fb41701452cc950fcabe2473c43283d86b595c645015e8b3c2d672bc36975",
+  "candidate_pseudocode_sha256": "d4305414f8d2683230467f0a4cdfbb16ab455f7a62f87892ca34bb3a80c839bb",
+  "candidate_replay_sha256": "4251c6631f24212fce7e2b769e16d21a6b939540b679617d4994edc852e488ce",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Receipt artifacts and source image match their pins; body [0x41F3F0,0x41F424) matches its digest.",
+    "A redirected isolated replay passes all 36 cases. Independent Thumb disassembly confirms gate-byte test, fresh word reads for low-nibble, bit31, then bit30, and return of inverse bit30 only after earlier guards pass.",
+    "The fixture's exact read-count oracle matches the code: gate zero reads only gate; gate nonzero reads the register once for nibble, twice if bit31 terminates, and three times when bit30 is also evaluated. Result, PC, SP and read sequence assertions pass; no writes occur."
+  ],
+  "limitations": [
+    "Only stable fixture memory is used; concurrent changes between the fresh word reads are not tested, though the read order is preserved.",
+    "Hardware meaning and runtime ownership/reachability remain unresolved. Private evidence only; accepted:false."
+  ]
+}

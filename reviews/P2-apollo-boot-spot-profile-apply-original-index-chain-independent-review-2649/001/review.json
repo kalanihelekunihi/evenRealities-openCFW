@@ -1,0 +1,27 @@
+{
+  "review_id": "2649",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-profile-apply-original-index-chain-2648/002",
+  "candidate_receipt_sha256": "6169a21b316d8ae5e6fcb57654c0eb7da2ed91428ab5aaef3bbe544b0f208463",
+  "candidate_pseudocode_sha256": "b22c58df63f3e60d0938c2f4eb8cad474b78ef9974fe7c3e42adf487c542f9ee",
+  "candidate_replay_sha256": "cff7d2ce7acf0b30c30c27e83f09447938fead37bbfc36b0b0e053df25deb676",
+  "fixture_sha256": "1a30749c87b34c26db25a31d5e9f44fc98545bd2c383b4e7d1798ad816552285",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_sha256": "7bc6936adbff287072bfdcdac3b453214f98f9604c11239abef5a15f63b5e9bb",
+  "lookup_address": "0x433498",
+  "lookup_sha256": "d83c73b1f5370cc6063489aedc4f0701bdec2ca34a492233caa521c0cf2ea5e8",
+  "isolated_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2649-independent/replays.json",
+  "isolated_replay_count": 1600,
+  "checks": [
+    "Candidate, source, body, fixture, and lookup hashes match. The 28-byte original lookup data begins at 0x433498.",
+    "Reran a candidate replay copy in a fresh isolated directory; all 1,600 fixtures pass. Original 0x42A2B4 and original 0x4156AC execute; only 0x42A1BC/0x42A43A and synthetic indirect destinations are controlled.",
+    "The combined calls, branch-specific arguments, mixed low bits, route-helper status/index behavior, indirect dispatch, epilogue R0/R1 words, R4-R8, SP, and sentinel return match the replay assertions. Table byte 26 returns 7 and skips the indirect call; all other selected routes use synthetic table entries 0..25.",
+    "The fixture domain covers all old/new values 0..19 and both second-word pairs; out-of-range table access is deliberately not generalized."
+  ],
+  "limitations": [
+    "Synthetic table targets do not establish installed handler behavior or actual table contents. A1BC and A43A are controlled; their semantics remain open.",
+    "Out-of-range inputs/table indices, ownership, concurrency, aliases, and physical effects remain unresolved.",
+    "Private scoped evidence only; accepted:false; no canonical admission."
+  ]
+}

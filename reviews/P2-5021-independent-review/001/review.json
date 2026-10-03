@@ -1,0 +1,17 @@
+{
+  "review_id": "5021/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-selector-register-dispatch-original-fixtures-5020/002",
+  "candidate_receipt_sha256": "c7e10ccee0a45d6f486b323755ec78d2c7431879f6ec3544ded65b6b33309127",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "pins": "PASS (locked image, three dispatcher maps/references, candidate files)",
+    "isolated_replay": "PASS (768 cases regenerated in fresh output)",
+    "selector_grid": "PASS (all 256 low-byte selectors, three initial register patterns, high input bits present)",
+    "register_oracle": "PASS (three output register words, status, path-dependent R1, SP and PC)",
+    "child_calls": "PASS_SCOPED (expected child selection and arguments under controlled zero status)",
+    "scope": "PASS_SCOPED (null config, zero source fields and controlled child result; no nonzero-child or alias claim)"
+  },
+  "summary": "All 768 original dispatcher runs pass for the full low-byte selector domain and three register patterns. The register-word, return-status, path-dependent R1, child-call, SP, and PC assertions agree. This packet uses null configuration, zero source fields, and controlled child status zero, so it does not cover the other child-result paths or changing/aliased memory."
+}

@@ -1,0 +1,17 @@
+{
+  "review_id": "5023/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-selector-register-dispatch-original-config-error-fixtures-5022/001",
+  "candidate_receipt_sha256": "4390b3991f2e2cd1334df51cdd20f53a9b1489ee370766068812eeadf376000a",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "pins": "PASS (locked source, three parent map receipts/references, candidate files)",
+    "isolated_replay": "PASS (84 cases in fresh output)",
+    "selector_dispatch": "PASS_SCOPED (selector 5 routes through child 0x4222F0; selector 6 through 0x422364; both observed with args 2,52)",
+    "config_gate": "PASS_SCOPED (selector-5 child success accepts config 0 or 3..7; invalid config returns 6; child status propagation is asserted)",
+    "register_and_abi_oracles": "PASS (register-word effects, R0 status, R1 aliases, SP and PC)",
+    "scope": "PASS_SCOPED (children controlled; stable config and nonaliased modeled memory only)"
+  },
+  "summary": "The 84 original-instruction executions reproduce the selector-5/6 dispatch paths with the specified controlled child results. Selector 5 applies the configured register update only after child success and accepts config 0 or 3 through 7; other tested values yield status 6. Selector 6 applies its independent bit updates. Register effects, child arguments, R0/R1, SP, and PC assertions pass. This does not establish the controlled children\u2019s behavior or changing/aliased configuration behavior."
+}

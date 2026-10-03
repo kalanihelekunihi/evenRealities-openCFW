@@ -1,0 +1,20 @@
+{
+  "review_id": "2911",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-buck-scan-original-query-chain-2910/001",
+  "candidate_receipt_sha256": "d08392eb3e753e68b863d1bae2ed9c2bcc5f0db7aed010e51e02936ded8ef268",
+  "candidate_replay_sha256": "fa2c7bbcb057df061842b0a38dec3c026d1eb8a887b009809b7cf157ca9f351c",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_hashes": {
+    "42aef0-42b010": "7a54959ea8247c505df0f3139ce607b4d1fabb5d0015054b89bd44b5d79cc31b",
+    "41f3f0-41f424": "2629a71d82c78f7602d8f37273ae02bcf42f237cdaab9da0d4db6d57a1045692"
+  },
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "source_matches_inventory": true,
+    "body_hashes_match_source": true,
+    "artifact_hashes_match_receipt": true,
+    "isolated_replay": "PASS"
+  },
+  "summary": "The source image hash and both body digests (predicate plus query leaf) match inventory/receipt; artifact hashes match. Independent isolated original-instruction replay passed all 1,580 fixtures. The corpus covers all 16 scan slots crossed with 12 kind values, active/selected bits and PRIMASK; 28 query-enabled/mode cases; and 16 early-input guard cases, including top-two-bits-only input that does not satisfy the low-30-bit guard. The assertion oracle and execution agree on output flag byte, query call selection, incoming-R7 return, preserved high-register set, SP, PRIMASK and stop PC. MMIO read events are retained as traces, not asserted against a complete read oracle; the scan\u2019s expected predicate uses stable fixture values. No interception is used. Changing reads, arbitrary aliasing, exception behavior, physical hardware, full flags, and caller ownership remain unresolved. accepted:false."
+}

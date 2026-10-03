@@ -1,0 +1,24 @@
+{
+  "review_id": 2729,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-handler7-original-normal-chain-2728/001",
+  "candidate_receipt_sha256": "e3e1701bc02eadc537b9a30e3385bcd47b1a29a9dc21a2663583594188413149",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "itcm_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+  "candidate_artifact_hashes_verified": true,
+  "body_hashes_verified": "852a295b0650321492f6fbb7b9b503c6d20fdb12a19186bb2b04b1d1322fb0ee",
+  "isolated_replay": {
+    "result": "PASS",
+    "instructions_or_fixtures": 192,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2729-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Wait/service, other profile indices, and other operation categories are not covered.",
+    "The fixture does not prove generalized float rounding or aliasing outside its bounded patterns; hardware behavior and caller ownership are not established.",
+    "Temporary active-path pointer validity after return is not claimed.",
+    "Private evidence only; no canonical admission."
+  ],
+  "accepted": false
+}

@@ -1,0 +1,16 @@
+{
+  "review_id": "2285",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-cap-initialization-5cac-2282/002",
+  "candidate_receipt_sha256": "23d5b30306717e3cf5f462109704be51d455c8d74cc4bdb7061f6daa46c2ecaa",
+  "candidate_pseudocode_sha256": "f60ff83637cb76c572b7c10e630f2c63f2a532d4d0603437b4935bd963d60188",
+  "candidate_replay_sha256": "4bf4fd7e14d0afc696cde06111c520f45ef854074cf28d5b048db573f1dc0c00",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Isolated replay regenerated all 144 fixtures. Source, body [0x5CAC,0x5CF4), literal 65535 at [0x5CF4,0x5CF8), and candidate artifact hashes match. Decode confirms the bit-3 gate on the pointed row parameter, zero initialization of the stack output, child arguments (row index, halfword at row+128, zero, context as fifth stack argument), unsigned saturation to 65535, fresh pointer reload and halfword store at parameter+4. The child status remains in R0 through the tail and is asserted on the enabled path; disabled paths return zero. R4/SP checks pass."
+  ],
+  "limitations": [
+    "All 144 cases use a controlled 7BC0 child and indices 0\u20132 with selected flags/slot/output/status values. No index validation exists in this body. Child semantics, aliasing, pointer faults, concurrency and physical meaning remain unresolved; no canonical admission."
+  ]
+}

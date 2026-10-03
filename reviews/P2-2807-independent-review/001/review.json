@@ -1,0 +1,21 @@
+{
+  "review_id": 2807,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-profile-restore-flag-wrapper-map-2806/001",
+  "candidate_receipt_sha256": "8e667946e2aba3a6c7c7c83f5e9d4de752680a7d76e4c3ce393c161072ab3c79",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "candidate_artifact_hashes_verified": true,
+  "body_hashes_verified": {
+    "42a036-42a04a": "9c901638e2c0e882e9f92662df44aa585a49a2e160eb4f2a4c7b32b374ae7a06"
+  },
+  "isolated_replay": {
+    "result": "PASS",
+    "instructions": 8,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2807-independent"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Static wrapper decode only; dynamic child and caller ownership are not established. No physical hardware or canonical admission claim."
+  ],
+  "accepted": false
+}

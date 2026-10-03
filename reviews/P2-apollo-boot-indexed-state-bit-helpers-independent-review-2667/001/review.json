@@ -1,0 +1,28 @@
+{
+  "review_id": "2667",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-indexed-state-bit-helpers-2666/001",
+  "candidate_receipt_sha256": "096cf0defbb27882e20f6ebd677498a54e13f333470b607b23c69d3110760aae",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "table_address_hex": "0x20026e74",
+  "body_hashes": {
+    "4215ae-4215dc": "11a6cf814c1a66760a988880dac541c55419e26aa1f4c7ef2de27b9a0d7e019f",
+    "4215dc-4215fe": "8dc0a88874cc74f9148e7ae8b6e70f50b7cd1f732db5b74982a8abcccb1bd6f5",
+    "421632-4216b2": "bc7fc361719841b4cd3b48adad0bb774fe817371892b0a9cbe4e8744c5ec2a8e"
+  },
+  "fixture_sha256": "bae0b406c4d8b62892d11e4f08aecc6b3b572fecfe35eab3035a9fe0b0394e0b",
+  "replay_sha256": "8d229171f98e0a9edf5c619f154ae17fef2cbd15ed716905cb16d68f336d8347",
+  "isolated_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2667-independent/replays.json",
+  "fixture_count": 672,
+  "checks": [
+    "Candidate receipt, source, three body hashes, and artifact hashes match. Literal 0x422210 resolves to table address 0x20026E74. Isolated replay passed all 672 cases.",
+    "Setter 0x421632 checks operation low byte <7 and index low byte <57 before writing. It selects word index=(index&255)>>5, bit=(index&255)&31, uses value low byte to set or clear the bit through an original read-modify-write, returns 0 on valid input and 6 on rejection, and preserves R4/R5/SP. Ordered target/value writes match the fixture oracle.",
+    "For valid cases, original query 0x4215DC observes the updated selected bit; original aggregate helper 0x4215AE scans the two words for that operation and returns the expected nonzero indicator. No helper is intercepted in these composed fixtures."
+  ],
+  "limitations": [
+    "The query helper is unguarded; the fixtures only call it with valid operation/index values. Out-of-range query behavior, aliasing, concurrency, and physical meaning of the RAM table remain unverified.",
+    "The table location and local bit operations do not prove call ownership or deployed runtime behavior.",
+    "Private evidence only; accepted:false; no canonical admission."
+  ]
+}

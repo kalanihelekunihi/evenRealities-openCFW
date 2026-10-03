@@ -1,0 +1,24 @@
+{
+  "review_id": 2879,
+  "review_revision": 2,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-temperature-init-original-operation-classifier-2878/002",
+  "candidate_receipt_sha256": "9817c0d1d37680179b453ad917a323446f284e492bc7164c6d80b3befacd7339",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "initializer_sha256": "4c910800d808fd71ce61510588a4bbe388e62974b65a756a73913bdf27482ea4",
+  "itcm_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+  "candidate_artifact_hashes_verified": true,
+  "isolated_replay": {
+    "result": "PASS",
+    "fixtures": 48,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2879-correction-independent"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "correction_verified": "The prose now distinguishes derive status 0, where zero outputs match stored zeros and apply is skipped, from derive status 4, which returns before output comparison/apply decision.",
+  "limitations": [
+    "The power and derive helpers are controlled, and the slot-4 operation pointer is manually installed. Their implementations and actual table installation are not established.",
+    "The bounded -40/category-0 state and listed gate/status/poll matrix do not establish other temperature/profile paths, physical hardware behavior, or caller ownership.",
+    "No canonical admission is claimed."
+  ],
+  "accepted": false
+}

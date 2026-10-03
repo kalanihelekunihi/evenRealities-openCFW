@@ -1,0 +1,16 @@
+{
+  "review_id": "2945/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-state-decode-reference-candidates-2944/001",
+  "candidate_receipt_sha256": "0effc1510c04b43afbecf4dfc8d4edc6e33ae1cf0e722e2b8e9eb882dc6c33d0",
+  "candidate_replay_sha256": "738b92ade7b94bdb7a2f7a274e3acb4b945aab833622edf9429a3ca10c38f1b4",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "33_image_pins": "PASS (every current image hash agrees with inventory)",
+    "raw_pointer_search": "PASS (candidate output retained as raw-word search evidence)",
+    "direct_branch_decode": "PASS (single boot-flash BL at 0x42BCEC targets 0x42B6B8)",
+    "isolated_replay": "PASS (same result and output hashes match receipt)",
+    "scope": "PASS (navigation only; no ownership or global completeness inference)"
+  },
+  "summary": "Isolated replay reproduces the candidate output. All 33 image pins agree with the inventory, and direct decoding of the reported boot-flash instruction confirms BL at 0x42BCEC targets 0x42B6B8. Raw-word occurrences are only search candidates. This scan does not prove caller ownership or exclude indirect/computed references, other instruction sets, or unscanned sources."
+}

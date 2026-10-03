@@ -1,0 +1,22 @@
+{
+  "review_id": "2399",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-processing-original-sequence-helpers-2396/001",
+  "candidate_receipt_sha256": "253b7728052efe42cf2076e9938f68ec9311f15a4c3d5d63648502e2e3300ffe",
+  "candidate_pseudocode_sha256": "93b9c59d5b9e931f1f341fd9914f66a0c494f7e1c3f3ee581ff8b8b8a9b6dcaa",
+  "candidate_replay_sha256": "3bec75b82721688cdc7d931f8b11135dbdfb91fd753b15f16b7c960d97c7dc9c",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "isolated_replay_output_sha256": "2cf2ec2a07501cb56678fce3474260d61a48a8857bbdb57e8b8838ed278dfc88",
+  "fixture_count": 4096,
+  "pinned_body_ranges": null,
+  "checks": [
+    "Candidate source and artifact hashes match the receipt. The pinned body ranges and instruction bytes are retained as specified in touch-row-processing-original-sequence-helpers-2396/001.",
+    "Independent isolated replay passes 4096 cases; output hash matches pinned replays.json.",
+    "Original processing, predicate/division and both sequence helpers execute. Stateful oracle verifies 5ECC calls before/after processing and interleaved 5E64 writes, including the item-byte 9 clear/set gate and distinct cache parameter bytes."
+  ],
+  "limitations": [
+    "Only the specified flags/layouts are covered; deeper processing/mode helpers remain controlled.",
+    "Private bounded evidence only; accepted:false."
+  ]
+}

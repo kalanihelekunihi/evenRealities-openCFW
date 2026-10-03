@@ -1,0 +1,11 @@
+# Independent review 2529
+
+**Result:** PASS_SCOPED.
+
+Reviewed `g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-debug-reference-original-query-2528/001`. Receipt SHA-256 is `7721b8f698ec00c21755823465e280f48cd999e61e2219fe85edf066b563f62d`; declared hashes match: `replays.json` `28c4d1e88d0a51647cfec375db382cb9012ccc6c9eb14998a100c7661ecb5209`, `replay.py` `ca92b0775064a21c38618db8067e100440d5a04ca073e12866d029b2808e077b`, and `pseudocode.md` `2ce568940f68aee37d5b0584f3adced965b62aa4f0a75587fc3e0630f2cfcaad`. The inventory hash and bootloader image hash match the receipt (`f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa`, `f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5`). The exact `[0x4224B2,0x42252E)` body digest is `b7b01e46563d81bfb3fc99e96b55564bde5536b1fc5fa05f181d968b66b3d6c1`, matching the previously pinned original bytes.
+
+I reran the replay from a copy directed to a fresh directory. All 162 cases pass across mode values 1/257/255, counts 0/1/255, flags 0/1/3, query register values 0/`0x04000000`/`0xFFFFFFFF`, and PRIMASK 0/1. The query, lookup, and 16-byte copy execute original instructions; only `41BF84` is controlled. Counter 255 wraps to zero. If the flag byte begins nonzero, query is skipped; otherwise it is set to one, the query writes the result into the low byte of the saved incoming R1 slot, and the caller inspects that byte. A set query result rereads the flag and ORs bit 1; a clear result invokes the controlled enable child. The latter’s return is ignored. The verified final R1 is `(incoming R1 & 0xFFFFFF00) | result_byte` after query, and unchanged when query is skipped; final status is zero, PRIMASK/SP/high-register checks pass.
+
+This correctly narrows the earlier 2524 output-width fixture: the actual query path stores only one byte, so the upper 24 bits in that saved R1 stack word remain from its original value. It does not support a full-word overwrite claim.
+
+**Limits:** The enable child is controlled; hardware-enable effects and physical power-state changes remain unknown. Register memory is fixture-backed. Concurrent changes, startup, arbitrary callers, and wider query/copy aliases are not established. The generic copy routine is exercised only for this 16-byte record. Private evidence only; accepted:false and no canonical admission.

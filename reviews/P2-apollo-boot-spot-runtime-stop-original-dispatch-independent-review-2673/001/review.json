@@ -1,0 +1,38 @@
+{
+  "review_id": "2673",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-runtime-stop-original-dispatch-2672/001",
+  "candidate_receipt_sha256": "61b17d48a2510a6610fc54558a271161ebddadc26e2d320814d8294c8fecbc04",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_hashes": {
+    "41ccd6-41cd1a": "53ecf1cc50f77949e880de53ecfed6a2d18c3ea803c457a13e77d1b2ac548a3a",
+    "42a04a-42a078": "2ce0019a9c986275a9d5c9ea8d04c05e055c163e2802417c4ee68be2fd2b7fd4",
+    "422364-4223d8": "6a131868a276083764d4714178857124ccb4209a5f3e7552d874aba7f7c1a54e",
+    "421e4a-421e8c": "f4f21abad8199cfea2524c7335d809b7f624100c1e34b693c08025ae1fb40a2a",
+    "4215dc-4215fe": "8dc0a88874cc74f9148e7ae8b6e70f50b7cd1f732db5b74982a8abcccb1bd6f5"
+  },
+  "literal_pointers": {
+    "0x41ccd8": 1073775584,
+    "0x41cce4": 1073774608,
+    "0x41ccfc": 3758154120,
+    "0x41cd06": 1073774696,
+    "0x41cd0c": 1207894016,
+    "0x41cd12": 3758154376,
+    "0x42a052": 536872282
+  },
+  "fixture_sha256": "0d50e8e2963435d1374233b669a5526b68de5ed2fed98205113682e316c9657d",
+  "replay_sha256": "5395e2a37b10ea4807ca87d442944cbb1143ee3acdfdb17274a1c8d29b0a4f03",
+  "isolated_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2673-independent/replays.json",
+  "fixture_count": 48,
+  "checks": [
+    "Candidate/source hashes, five exact body hashes, literal resolutions, fixture hash, and replay hash match. Isolated replay passed all 48 cases.",
+    "The original operation-4 dispatcher, query path, service body, and interrupt save/restore path execute with the zeroed state table. The operation wrapper reaches its original child and the query sees inactive state, so the indexed clear path is not exercised.",
+    "The flag byte selects controlled 0x428378 for value2 and controlled 0x428A94 for value7; the common original 0x41CCD6 service then executes. Write order, PRIMASK observation/restoration, service arguments, and return frame match assertions. The fifth-register read remains unasserted."
+  ],
+  "limitations": [
+    "This is the inactive-state fixture path only; active indexed state paths are covered separately, not compositionally here.",
+    "The two flag-selected callbacks are controlled, and peripheral meanings/physical effects, concurrent state changes, and ownership are unresolved.",
+    "Private evidence only; accepted:false; no canonical admission."
+  ]
+}

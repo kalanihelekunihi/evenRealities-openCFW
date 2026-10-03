@@ -1,0 +1,16 @@
+{
+  "review_id": "5149",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-byte-compare-length-original-fixtures-5148/001",
+  "candidate_receipt_sha256": "7dfbd6e0e7af789b71ebcc2425ae1390c3afe11493c306c4afe91b265d45b2a3",
+  "candidate_replay_sha256": "bd71c42428f41842632e395314c8db50b0d8472a7b3ff0e8528d24ff155ff8b0",
+  "candidate_results_sha256": "033d1c121329f9b12d24db043e023e6627688e35ed0655f3e9f8d8e667cc19d2",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Receipt pins compare/length map 5146 and the source; isolated replay passes all 1,152 original cases with no controlled children. Count-zero, boundaries, NUL/equality, unsigned byte ordering, deterministic random pairs, all alignments and length-word boundary cases match the expected R0, unchanged RAM and SP/PC outputs."
+  ],
+  "limitations": [
+    "Mapped padding allows the word-scan overreads; the packet does not establish read traces, fault behavior or volatile semantics. Private scoped evidence; accepted:false."
+  ]
+}

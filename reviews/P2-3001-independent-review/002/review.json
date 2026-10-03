@@ -1,0 +1,21 @@
+{
+  "review_id": 3001,
+  "candidate": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-clock-encode-map-3000/002",
+  "receipt_sha256": "c3ff5c71f2bda3486772e5a191dc1d28ed218aa30a5c0372fc664b1e35a65d70",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_hashes": {
+    "42c256-42c26a": "c7c013df5ce01fcc66215af1337fed966a975393591a7bc7e17ebcf71bde8213",
+    "42c26a-42c3e2": "23796b78366978bda2ee2db94e309c4f1cae4e92f5ffbc2072f75becca3ae9e8"
+  },
+  "file_hashes_match_receipt": true,
+  "instruction_count": 148,
+  "isolated_static_replay": "PASS 148; fresh destination /tmp/review-3000-002-isolated",
+  "assessment": "PASS_SCOPED_WITH_CORRECTION",
+  "accepted": false,
+  "correction_to_001": "Withdraw statement that R2/R3 are both restored on normal return. The 32-byte frame allocates the saved-R2 stack slot as the fifth stack argument; on the normal path POP R2 therefore returns R12\u22121. Early exits before writing that argument retain incoming R2; the special second-call path stores zero. R3 remains restored. 002 states this correctly.",
+  "scope_limits": [
+    "Static disassembly/pseudocode review only; dynamic branch behavior is not claimed.",
+    "The referenced divider callee is separately supported evidence, not composed here.",
+    "No exception configuration, NZCV completeness, aliasing, global ownership, physical clock, or admission claim."
+  ]
+}

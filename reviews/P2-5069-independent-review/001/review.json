@@ -1,0 +1,17 @@
+{
+  "review_id": "5069/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-u64-division-block-alignment-map-5068/001",
+  "candidate_receipt_sha256": "86dc8ae0178d70cb7fed8ef23c9e8a61da11375f4e9c8c9a197a0e19095b1a42",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "input_and_file_pins": "PASS",
+    "instruction_decode": "PASS (64-byte body, 49 instructions match source)",
+    "literal_references": "PASS (six consumers agree)",
+    "isolated_replay": "PASS",
+    "alignment_dataflow": "PASS_SCOPED (three formulas/guards and saved-register aliases match)",
+    "scope": "PASS_SCOPED (no power-of-two or nonreturning-assertion assumption)"
+  },
+  "summary": "The extent decodes exactly and all six literal references match. Each entry performs the recorded low-bit alignment test, uses its specific alignment formula, and may call the returning-possible assertion helper; the body still returns the computed value. Alignment zero is not rejected by the tests and yields zero as the instruction-level calculation dictates."
+}

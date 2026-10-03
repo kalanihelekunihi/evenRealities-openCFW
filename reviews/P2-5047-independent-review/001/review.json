@@ -1,0 +1,18 @@
+{
+  "review_id": "5047/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-startup-callback-composition-5046/001",
+  "candidate_receipt_sha256": "17a46df6c867ccfc7d7dfb2a475d9cf6627e5a34ed0684c92d5a9dc9b4d56898",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "five_map_dependency_receipts": "PASS",
+    "instruction_bytes_and_hashes": "PASS (130 decoded instructions agree with locked image)",
+    "extent_structure": "PASS (seven exact nonoverlapping extents; 324 code bytes)",
+    "direct_calls": "PASS (23 BL sites accounted; external targets retained)",
+    "callback_table_targets": "PASS (four locked callback words resolve into mapped bodies; comparator pointer maps to comparator body)",
+    "isolated_replay": "PASS",
+    "scope": "PASS_SCOPED (structural coverage, no callee semantic closure)"
+  },
+  "summary": "The five map packets compose into seven nonoverlapping code extents totaling 324 bytes and 130 instructions. Independent source-byte decoding confirms the map listings; all 23 direct BL edges are accounted as external dependencies, and the four callback targets plus comparator entry map into the composed set. This is structural evidence only, not semantic closure."
+}

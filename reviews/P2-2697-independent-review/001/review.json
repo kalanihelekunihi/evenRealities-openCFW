@@ -1,0 +1,25 @@
+{
+  "review_id": 2697,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-indexed-state-popcount-2696/001",
+  "candidate_receipt_sha256": "1cf92adb9e2da880310ef5bb693b3bd1b3e6dc65c894537b109a878cdb1957d8",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "candidate_file_hashes_verified": true,
+  "body_hashes_verified": {
+    "0x421584-0x4215ae": "3e1aafd1c98933503de46a42099c9e0ea5b6af861f1edda36f8df25079ce834d",
+    "0x4215fe-0x421632": "2c98fb87af946ccd169b0e0f8225c9455b682478941053f2a25da7ac6e23c689"
+  },
+  "isolated_replay": {
+    "result": "PASS",
+    "fixtures": 712,
+    "replay_output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2697-independent",
+    "command": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "findings": [],
+  "limitations": [
+    "The aggregate helper is tested against a synthetic table; table validity and caller-selected operation bounds are not established.",
+    "Fixtures are finite, separate RAM allocations; aliasing, concurrent mutation, and hardware behavior are not covered.",
+    "This private review does not admit a canonical function record or establish whole-image completeness."
+  ],
+  "status": "PASS_SCOPED",
+  "accepted": false
+}

@@ -1,0 +1,16 @@
+{
+  "review_id": "2267",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-config-initializer-distinct-original-chain-2264/001",
+  "candidate_receipt_sha256": "0ed8aac1b8f04879d7d8425b067223735ff6226cfeb504ebc18cbd7ff53e9007",
+  "candidate_pseudocode_sha256": "667763ed8b75c4fe41100123c4f6d178da310aafa6819d4dd731f2f204a41804",
+  "candidate_replay_sha256": "1e2371a19980d539a21575c54c5b8dd2fb1858c857dc600a7c59fefbfbc3afe8",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Original composition replay regenerated all 45 fixtures. Receipt source/body/literal and all file hashes match. The 5378/A9D4/52BC/50E4/AA2C paths execute without interception; independent checks assert combined ordered writes, both complete buffers, child order/arguments, R0=0, R4-R11 and SP. Distinct arithmetic config/root bytes and independent halfwords exercise selected packed and fallback behavior."
+  ],
+  "limitations": [
+    "Limited to the explicit 45 fixtures: two arithmetic byte patterns plus uniform patterns, one bounded initialization, and fixed child states. Not exhaustive for selectors, aliasing or pointer mutation; physical field meanings and firmware-wide completeness remain open."
+  ]
+}

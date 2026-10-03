@@ -1,0 +1,22 @@
+{
+  "review_id": "2629",
+  "status": "PASS_STATIC_ONLY_REPLAY_UNAVAILABLE",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-temperature-callback-routing-2628/001",
+  "candidate_receipt_sha256": "RECORD_HASH_PENDING",
+  "candidate_pseudocode_sha256": "8c5b8a10859bc5a1afeec034341a58823730b21c7a25d44d0f0a9073c8bc8d4d",
+  "candidate_replay_sha256": "0665feac3439ff5907361f938081ddde9913ca1a65c108280223011392b449b3",
+  "fixture_sha256": "5079e40308bbae85935c2b287b77aa955de671c9d7cf3be24ccb271352d5c3b9",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Candidate file and source hashes match its receipt. Original bodies [0x42AC54,0x42ACA4) and [0x42D848,0x42D84C) match the recorded digests.",
+    "Independent objdump decode confirms guard reads at 0x40021008/0x40021010 and short-circuit behavior; child calls occur in order at 0x41BF84(29), 0x41CA2C with S0=0xC2200000 and R0=entry SP, then 0x41D21C(2500,0x400083E0,1,0). Return mappings and R5-R7 pop epilogue agree with the prose. The separate four-byte leaf returns zero via MOVS/BX LR.",
+    "Fixture file contains 108 unique combinations over two guards and three controlled-child return values. Its recorded calls/results are consistent with the decoded branch structure.",
+    "The replay itself was not independently executed: Unicorn is unavailable in both system and bundled Python environments."
+  ],
+  "limitations": [
+    "Status denotes static and fixture-consistency review only; final emulator assertions for arguments, SP, and register results have not been independently rerun.",
+    "All three callees are controlled, so their behavior and stack effects are not established. Physical polling, concurrent guard changes, and hardware meaning are unresolved.",
+    "Private scoped evidence only; accepted:false; no canonical admission."
+  ]
+}

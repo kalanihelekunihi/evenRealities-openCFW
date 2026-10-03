@@ -1,0 +1,17 @@
+{
+  "review_id": "5027/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-u64-division-startup-callback-table-map-5026/001",
+  "candidate_receipt_sha256": "620caa39f00bcf2bd857bc46808b8e45ed862c6a5e9ef05d4edfe86dafbcbc95",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "source_body_pin": "PASS (72 bytes at 0x41F9F8..0x41FA40)",
+    "instruction_tiling_and_bytes": "PASS (16 instructions cover the body exactly; each encoding matches locked bytes)",
+    "literal_consumers": "PASS (four PC-relative words independently resolve to 0x433440, 0x433460, 0x20022E00, and Thumb pointer 0x41F9F1)",
+    "isolated_replay": "PASS (fresh static replay regenerated instruction and reference listings)",
+    "control_flow_prose": "PASS_SCOPED (unsigned clamp, copy/sort calls, separate callback-pointer reload, loop and path-dependent final R0 agree with decoded body)",
+    "scope": "PASS_SCOPED (callback behavior and external callees remain unresolved)"
+  },
+  "summary": "Independent byte comparison confirms the 72-byte listing and four literal consumers. The decoded path computes count from the wrapped end-start difference shifted arithmetically by three, clamps values at least 257 to 256, copies and sorts entries, then calls each nonnull callback after a separate pointer reload. The final R0 is path-dependent. External callees and callback semantics remain open."
+}

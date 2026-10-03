@@ -1,0 +1,35 @@
+{
+  "review_id": "2675",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-service-flag2-original-delay-2674/001",
+  "candidate_receipt_sha256": "854a46aaebb440739fc5fead747aa4e2d5d3def190c0d88b9079065b71c09dd4",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "itcm_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+  "body_sha256": "051e40c208a75b89a9826c46a5fcea7b9933f1de7c90f4acc01777ba1ed16866",
+  "literal_pointers": {
+    "0x42837a": 1073872964,
+    "0x42837e": 537030832,
+    "0x42838c": 1073873024,
+    "0x428390": 537030844,
+    "0x42839e": 537030840,
+    "0x4283b2": 1073873788,
+    "0x4283c6": 1073872972,
+    "0x4283ca": 537030836,
+    "0x4283da": 536872282
+  },
+  "fixture_sha256": "a95849ebde711034daff8ea3cb09cce6f64eb7adac42061451fda0aa29b5f392",
+  "replay_sha256": "6fc4a5515063859a122070110f71b62a0e0af5f544ede6506aa4d02312fafdb1",
+  "isolated_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2675-independent/replays.json",
+  "fixture_count": 18,
+  "checks": [
+    "Candidate/source and ITCM-image pins, body hash, literal map, and artifact hashes match. Isolated replay passed all 18 cases.",
+    "The original 0x428378 body decodes and executes as specified: four source fields are inserted into target fields using fresh read-modify-write operations; gate bits16 and25 are cleared with separate accesses; flag byte26 is written last. The seven ordered writes and widths match the recorder.",
+    "The composed delay path uses original FP conversion and the original ITCM delay loop. Input 5 yields 145 loop iterations under the fixture clock and returns through the incoming R7/SP frame with PRIMASK unchanged."
+  ],
+  "limitations": [
+    "Clock/FP state and memory contents are fixtures; this is not physical timing evidence. Large conversions and other FP modes are not covered.",
+    "Target field meanings, concurrent memory changes, hardware effects and caller ownership remain unverified.",
+    "Private evidence only; accepted:false; no canonical admission."
+  ]
+}

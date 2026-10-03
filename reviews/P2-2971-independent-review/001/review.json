@@ -1,0 +1,16 @@
+{
+  "review_id": "2971/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-state-compose-map-2970/001",
+  "candidate_receipt_sha256": "d26d4b69870e2722fedb83999390a9382bd2e741a8b07301f08506494c5361f7",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "body_and_instruction_decode": "PASS (140 original Thumb instructions tile 350 bytes exactly)",
+    "literal_addresses_values": "PASS (PC-aligned targets and words independently recomputed)",
+    "ordered_provider_and_profile_fields": "PASS_SCOPED (gate, three provider calls/error exits, copies, packed field updates, magic store, callback and return flow match instructions)",
+    "isolated_static_replay": "PASS (replay regenerated listing at fresh path)",
+    "dynamic_or_child_semantics": "NOT CLAIMED"
+  },
+  "summary": "The static candidate matches the original 350-byte body and all 140 instruction encodings. I independently recomputed its PC-aligned literal targets and values. The pseudocode\u2019s gate/magic early exit, provider call arguments and immediate error exits, ordered profile copies and packed-field updates, magic store/callback call, ignored callback return, and saved provider status return are consistent with the decoded instructions. This is static mapping only: provider/callback semantics, dynamic aliasing, exception behavior, hardware meaning, and global ownership remain unresolved."
+}

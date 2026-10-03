@@ -1,0 +1,20 @@
+{
+  "review_id": "2243",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-descriptor-fields-51bc-2240/001",
+  "candidate_receipt_sha256": "e119f6659228fbe59b0a9a7cc8a07865d93c9a077713ce8bfdfbad93ea735792",
+  "candidate_pseudocode_sha256": "891b13c2c2bd3f8d28022d442f8b5f4be27f6590d696bd20abb062fdf16b01ef",
+  "candidate_replay_sha256": "bb82c10f45a08b3f2a0f93b5968b6cbb5c392046d4bf3779b0ba0c718902cb08",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "Receipt, source, body [0x51BC,0x52B6), literal [0x52B8,0x52BC), and artifact hashes match; the literal is 0x0FFF0000.",
+    "Decoded control flow agrees with the row/parameter arithmetic, count field mask, bit-12 bypass, validity/group threshold, packed fields, ordered stores, return, and register restoration.",
+    "Isolated replay regenerates all 648 fixtures and asserts exact ordered writes, output words, zero return, and R4-R8/SP preservation."
+  ],
+  "limitations": [
+    "Configuration bytes 90/91/92 all receive the same value, so replay does not behaviorally distinguish the validity-specific byte selection, though the decoded instructions do.",
+    "Only two correlated source-field patterns are used; broad independent field variation is not covered.",
+    "Invalid pointers, aliasing, and physical field meaning are unresolved; no canonical admission."
+  ]
+}

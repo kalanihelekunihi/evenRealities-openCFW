@@ -1,0 +1,15 @@
+{
+  "review_id": "5123",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-u64-division-startup-service-initializer-map-5122/001",
+  "candidate_receipt_sha256": "f1409ee69bd3fb895412e602f998519d0d30aebe62a8dec45ffcc4101e41c256",
+  "candidate_replay_sha256": "05bf1d74238976ebd83e1d12e8e36609e5a80985c60e0107c8b6d6f23374cf8a",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Source-pinned isolated replay passes; instruction tiling and seven literal consumers agree. The map distinguishes the initial state==1 guard from the service child path, preserves ordered state-byte clears/calls/final state publication, and records 7392 logger arguments and path-dependent R0/R1/R2 stack aliases. Child statuses are not used to infer success."
+  ],
+  "limitations": [
+    "Called child meanings and hardware effects remain unresolved; no startup-wide or C claim. Private partial evidence; accepted:false."
+  ]
+}

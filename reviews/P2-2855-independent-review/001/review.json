@@ -1,0 +1,27 @@
+{
+  "review_id": 2855,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-operation0-original-transition-chain-2854/002",
+  "candidate_receipt_sha256": "f12210f3ee7b7c274e81c1ec71de0309f303fdc71c4ad36da5ea192cfb33f151",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_hashes_verified": {
+    "42a878-42ab6e": "83deb1cccedcf7dab0c986deaacc2f94baea6d1f74b7e7e387fbdb9f77527079",
+    "42a08c-42a19c": "d6be1f893c0f78437db76208bb71ae7bf478411acb3ec307430709cd3dfe2e67",
+    "41f3f0-41f424": "2629a71d82c78f7602d8f37273ae02bcf42f237cdaab9da0d4db6d57a1045692",
+    "42a19c-42a1b2": "34664d76a6022980a70a926ac4c1108f43d33974584a9cb854f8faa59a8ebacf"
+  },
+  "candidate_artifact_hashes_verified": true,
+  "isolated_replay": {
+    "result": "PASS",
+    "fixtures": 192,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2855-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Only the documented mode3, matching-profile old-state 1\u2192requested state 2 path is exercised, with bounded slot/kind/current-index/timer/mask fixtures. Snapshot and query inputs are fixed to the described values.",
+    "Predicate kind records are stable; concurrent/volatile changes, other operation transitions, hardware effects and caller ownership remain unresolved.",
+    "No canonical admission."
+  ],
+  "accepted": false
+}

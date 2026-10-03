@@ -1,0 +1,25 @@
+{
+  "review_id": 2501,
+  "result": "PASS_SCOPED",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/whole-campaign-gate-ledger-audit-2500/001",
+  "candidate_receipt_sha256": "95def7f0dd32564fffe68f6c43f3cc88cfd601e173f20e70daf27b547fca32ac",
+  "candidate_files": {
+    "audit.json": "4110e1ea2394ce99f984f42f79039e914dfaf193f10f9acf34919559d5c83f38",
+    "verify.py": "1ce7323df0b173f2b63162595a14f8d5244c6ef743d606f8a1825d84cebf7d85",
+    "notes.md": "f2141057dea76fce475c46242e76bb54f0dd11a6e125119041c587c03e0fdc82"
+  },
+  "isolated_replay": {
+    "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/whole-campaign-gate-ledger-audit-2500-replay",
+    "matches_frozen_audit": true,
+    "images": 33,
+    "payloads": 6,
+    "coverage_rows": 70,
+    "scopes": 40,
+    "kind_counts": {"container": 27, "unknown": 43}
+  },
+  "workflow_phase": "P2_EXECUTING",
+  "G1": "passed",
+  "G2_G6": "not_run",
+  "accepted": false,
+  "canonical_admission": false
+}

@@ -1,0 +1,31 @@
+{
+  "review_id": 2875,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-temperature-initializer-map-2874/002",
+  "candidate_receipt_sha256": "75d38a6989c801c724a4e977fe5bfc1d966ea133f44589e2f711208f46e7a486",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_range": [
+    "0x42AC54",
+    "0x42ACA4"
+  ],
+  "body_sha256": "4c910800d808fd71ea106db7f7b7144fcd9b0df306919a7e03a7f2d550bca2d",
+  "candidate_artifact_hashes_verified": true,
+  "isolated_replay": {
+    "result": "PASS",
+    "instructions": 35,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2875-independent"
+  },
+  "status": "REVISE_PROSE",
+  "findings": [
+    {
+      "severity": "prose address correction",
+      "location": "pseudocode.md: poll call description",
+      "detail": "The instruction at 0x42AC86 loads R1 using an LDR literal whose aligned PC-relative pool address is 0x42AD3C. The word there is 0x400083E0. The prose says 'literal42AD40'; the word at 0x42AD40 is 0x0A04EEFB and is not the poll pointer. Identify 0x42AD3C as the literal location and 0x400083E0 as the argument value."
+    }
+  ],
+  "limitations": [
+    "This is a static decode/replay packet; it does not dynamically validate the initializer or its callees.",
+    "The stack-output alias description depends on the callee behavior and only supports the stated output-buffer overlap; broader caller/callee and startup behavior remains outside scope.",
+    "No hardware behavior, whole-image completeness, or canonical admission is claimed."
+  ],
+  "accepted": false
+}

@@ -1,0 +1,24 @@
+{
+  "review_id": "2633",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-temperature-output-original-float-chain-2632/002",
+  "candidate_receipt_sha256": "d3e362d3eb8bf9f265509be795068ad8af49f2c3143c0e8eeeebb5f28c8be87a",
+  "candidate_pseudocode_sha256": "48c48393350a4c51e2b79df842bc4ec366bfc5240d01b57e86b296172b3532d2",
+  "candidate_replay_sha256": "1f4eea84c7543d4751679c4dac6ad8b2846b0bbfd9776681536c787763444c96",
+  "fixtures_sha256": "5a809848b1ebcb0ea47a9f9c5dea04d7b9a6f67e0784112792aca7a3edfff5a7",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "isolated_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2633-independent/replays.json",
+  "isolated_replay_count": 152,
+  "checks": [
+    "All candidate and source hashes match. Each of the four original code spans has the recorded digest.",
+    "Reran a candidate replay copy into a fresh isolated directory; all 152 fixtures pass with no function interception. The wrapper, dispatcher, classifier, interrupt-save helper, and adjustment child execute original instructions.",
+    "Fixture categories and output words match the original comparisons: class0 bounds (-273,35), class1 (33,50), class2 (48,1000); class3 zeros both outputs and returns1. Classification thresholds remain -273/35/50/1000, so class1 and class2 stored lower bounds differ from their classification thresholds.",
+    "The controlled hardware state and masks produce the asserted sensor-flag update, child order/status, output memory, PRIMASK restoration, SP, R4, and D8 preservation. NaN and infinity cases follow the branch outcomes in the recorded matrix."
+  ],
+  "limitations": [
+    "Slot4 is manually set to 0x42D563; no revision-specific initializer or caller installation chain is proven.",
+    "Child hardware fields are fixed to enabled/mode3/boost15. Physical sensor meaning, asynchronous changes, and other hardware configurations are not established.",
+    "Private scoped evidence only; accepted:false; no canonical admission."
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "review_id": "2641",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-profile-derivation-map-2640/001",
+  "candidate_receipt_sha256": "8c90e197ea30de0d7c5d6fa00308859fa93cdcdb45d71d3040fe52584cdfb8bf",
+  "candidate_pseudocode_sha256": "2d81bb02c7199ba96b33406ba6267d4854378e0161721872a8d952b4700a9f42",
+  "candidate_replay_sha256": "21640b68a2d08b4981ae7a24b8444f607993e32d19282f1fccbaacd4f34352fd",
+  "candidate_instruction_listing_sha256": "e16f27b7012682857a046bb6e6ba1fc49b6eff2fec2c47189b3087d207f05658",
+  "first_switch_sha256": "f677a6751623cfd0a8c4ca4b4f51a4b8870ba0e826509481489e24c99ae51d06",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_sha256": "73e2c284f4c3efc45c0cb02ad3d2d5c520c56ce136e4c185a4fbd56b815a0d87",
+  "isolated_static_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2641-independent/",
+  "checks": [
+    "All candidate artifact and source hashes match. Body [0x42A550,0x42A85E) comprises 317 contiguous instructions; each recorded instruction byte sequence and all 16 literal words match the original image.",
+    "The isolated static verifier passes with 317 instructions and reconstructs 24 first-switch keys. Independent objdump review confirms the six nibble updates, equality ladder, first-output branch targets, second-key map, error paths, and R4/R5/SP epilogue.",
+    "Default first-switch target 0x42A81C sets R0=5 and branches to the POP at 0x42A736, skipping the second-output store. Default second-switch target 0x42A85A likewise sets R0=5 and branches to that POP after the first output was written. The prose correctly distinguishes these paths.",
+    "The scope is explicitly static; first-output arithmetic for each target and dynamic behavior remain unclaimed."
+  ],
+  "limitations": [
+    "No dynamic execution or per-target first-output arithmetic validation is included.",
+    "Concurrent external changes, output aliasing, and ownership are unresolved.",
+    "Private scoped evidence only; accepted:false; no canonical admission."
+  ]
+}

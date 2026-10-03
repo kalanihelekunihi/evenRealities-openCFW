@@ -1,0 +1,25 @@
+{
+  "review_id": "2407",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-processing-threshold-5f6a-2404/001",
+  "candidate_receipt_sha256": "516a4e12fdca026521d9745bc0193c9fb365526bd7d51e8e0ae6dfe24aedf8e9",
+  "candidate_pseudocode_sha256": "f306a021fa8f352778cbfefb267c333509ca199985ea2ccb175325440e724885",
+  "candidate_replay_sha256": "df75e034682f5d1b110188ff5136e14de873b5cffcceecd0c83ad44cbb921963",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "isolated_replay_output_sha256": "3f533f2082b078d99826a83eff01797988260320bf0ac3c2dcaf68a6f8372beb",
+  "fixture_count": 576,
+  "pinned_body_ranges": [
+    24426,
+    24484
+  ],
+  "checks": [
+    "Candidate source and artifact hashes match the receipt. The pinned body ranges and instruction bytes are retained as specified in touch-processing-threshold-5f6a-2404/001.",
+    "Independent isolated replay passes 576 cases; output hash matches pinned replays.json.",
+    "Original 5F6A/A6C0 fixtures verify row validity gate, cfg byte87 percentage, selector-zero parameter-halfword multiplication with 32-bit wrap, nonzero-selector bypass, and unsigned division by 100."
+  ],
+  "limitations": [
+    "Stable valid fixture pointers; no index validation or broader configuration/physical claim.",
+    "Private bounded evidence only; accepted:false."
+  ]
+}

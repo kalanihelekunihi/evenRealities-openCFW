@@ -1,0 +1,21 @@
+{
+  "review_id": 2859,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-profile-field-apply-original-changing-2858/001",
+  "candidate_receipt_sha256": "53735854e0ab947b8fa486b56879eb2e375b0058b2e8d954ce5490a55e65f87f",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_sha256": "686b1225442297793c2d963c1903f0d2fa5dde214abdae1352ad5ade61c326f3",
+  "candidate_artifact_hashes_verified": true,
+  "isolated_replay": {
+    "result": "PASS",
+    "fixtures": 216,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2859-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Only the enumerated guard, profile-word, target-pattern and mask values are tested. Injected values at the two original profile-word loads model changing reads; they do not establish physical concurrency or peripheral behavior.",
+    "NZCV behavior, general aliasing and caller ownership remain unresolved. No canonical admission."
+  ],
+  "accepted": false
+}

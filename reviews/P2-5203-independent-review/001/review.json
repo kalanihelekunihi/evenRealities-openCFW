@@ -1,0 +1,15 @@
+{
+  "review_id": "5203",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-u64-division-logger-output-dispatch-map-5202/001",
+  "candidate_receipt_sha256": "8c74f72faa8cac5e82024fe586db4ba64d41802cf5232b1e60921ae373682ca9",
+  "candidate_replay_sha256": "ad6aa7c5da64a4f6fbfc0e0c099929d7603053a5f4d0a7df7d5634d29164329d",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Source-pinned isolated replay and literal consumer checks pass. The wrapper drops the submit result and returns its saved R7 alias. The 80-byte-frame submit path checks low-byte channel and enabled==1, clears the descriptor, submits using the captured handle, then polls fresh completion state for at most 1000 delay calls; its return is based on submit status, not completion."
+  ],
+  "limitations": [
+    "Child operations and hardware/channel semantics remain unresolved; completion/poll behavior is only instruction-level. Private partial evidence; accepted:false."
+  ]
+}

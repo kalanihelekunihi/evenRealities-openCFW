@@ -1,0 +1,40 @@
+{
+  "review_id": "2677",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-service-flag7-original-poll-2676/002",
+  "candidate_receipt_sha256": "652af8f127a5bdb831ebc38334c3a80d8a432d1e0ae982d4cf1d9403a2475c0a",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "itcm_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+  "body_sha256": "1e0e7ddb0036670d692a97a50f6cc821d2a2358e741b72d502e943d31bb0b351",
+  "literal_pointers": {
+    "0x428a98": 1073872964,
+    "0x428a9a": 537030832,
+    "0x428aa6": 1073873024,
+    "0x428aa8": 537030844,
+    "0x428ab4": 537030840,
+    "0x428ac6": 1073872972,
+    "0x428ac8": 537030836,
+    "0x428ad6": 1073876992,
+    "0x428b0e": 1073873788,
+    "0x428b30": 1073758276,
+    "0x428b54": 1073758256,
+    "0x428b60": 1073758256,
+    "0x428ba2": 536872282
+  },
+  "fixture_sha256": "940d3735d83865dd4eb69d2c54fa85192ef6739b45f843c8a0394e8e7c898f97",
+  "replay_sha256": "f4b053bce80bc5d052b587c2a1838c37af29f37a91c714ac96d9f85e04227c59",
+  "isolated_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2677-independent/replays.json",
+  "isolated_fixture_count": 96,
+  "isolated_fixture_sha256": "940d3735d83865dd4eb69d2c54fa85192ef6739b45f843c8a0394e8e7c898f97",
+  "checks": [
+    "Candidate receipt, flash and ITCM image hashes, body hash, PC-relative literals, and artifact hashes match. The corrected packet declares and contains 96 fixtures.",
+    "Isolated replay passed all 96 cases and reproduced the candidate replay JSON byte-for-byte. Original 0x428A94 service body, floating delay routine, ITCM decrement loop, and equality poll execute with no function interception.",
+    "The recorder confirms the four field restorations, low-mode transition behavior, ordered gate bit updates, auxiliary set/delay/poll/restore path, and flag byte write. Delay arguments and observed loop iterations match the oracle; R3 is returned in R0 with R4-R7, SP, and PRIMASK preserved. Mode2 exercises bounded waits; mode6 enters the same branch with bit2 already set."
+  ],
+  "limitations": [
+    "This uses stable synthetic RAM/MMIO and FP inputs; it does not establish hardware timing, asynchronous readiness changes, or peripheral semantics.",
+    "Only the listed mode, auxiliary, and ready-state combinations are covered; deployment reachability and caller ownership remain unresolved.",
+    "Private evidence only; accepted:false; no canonical admission."
+  ]
+}

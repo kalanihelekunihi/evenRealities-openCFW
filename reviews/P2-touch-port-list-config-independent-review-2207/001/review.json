@@ -1,0 +1,19 @@
+{
+  "review_id": "2207",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-port-list-config-6078-2204/001",
+  "candidate_receipt_sha256": "53078c33fe3652399169290eec928aad1e3265e802e9bb44ebeca593805aff98",
+  "candidate_pseudocode_sha256": "d2cc82ef2bae8e28b688e910e46e45fa8c144c685bd69070b6c5be19db14e45c",
+  "candidate_replay_sha256": "f17984e1ffb5c087fd907bb424fecb3f8992077c27aca4b69cbe89dc2d0f2f54",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "checks": [
+    "The source, body [0x6078,0x60EA) and all receipt files match their declared hashes. Independent Thumb/M-class disassembly agrees with the stored listing.",
+    "An isolated replay regenerated all 96 fixtures exactly. It covers count 0/1/3; both direction, mode, enable and PRIMASK values; and alternating pin 0/7 and port choices. Assertions check child 5FC6 tuples including its fifth stack argument, ordered port+64/+68 writes, all four resulting configuration words per port, R4/R8-R11, SP and PRIMASK.",
+    "The decoded loop obtains the entry pointer from context+20, reloads the context root and halfword count, uses an unsigned index-versus-count exit, passes entry port/pin and saved function/mode plus stack enable to 5FC6, then writes one pin bit to the direction-selected register and advances by eight bytes."
+  ],
+  "limitations": [
+    "Count and pointers are static in the fixtures; dynamic mutation/reload behavior is not tested. Invalid-pin BKPT continuation, physical register effects, aliasing and concurrency remain unresolved.",
+    "No canonical admission."
+  ]
+}

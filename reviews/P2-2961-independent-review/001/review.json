@@ -1,0 +1,18 @@
+{
+  "review_id": "2961/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-control-operation-temperature-errors-2960/001",
+  "candidate_receipt_sha256": "4bb7be4dd93928eb96725010d8168f914a23fe2b17b60a1d8982e7069d2dddd4",
+  "candidate_replay_sha256": "f263bfe0dc9a34396bed43d6f0040f5ae02607779a7f2c6c0b20bbca808f1767",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "source_four_body_hashes": "PASS",
+    "fixture_product": "PASS (192 = 4 temperature words \u00d7 3 choices \u00d7 4 flag bytes \u00d7 2 clocks \u00d7 2 masks)",
+    "temperature_categories": "PASS (\u2212274, 1000, +infinity, quiet NaN reach category 4 in original classifier)",
+    "error_sequence": "PASS (save\u2192classifier, no decoder/helper interception)",
+    "error_writes": "PASS (category, threshold flag, and zero bound words; no state publication)",
+    "status_and_frame": "PASS (status6, high registers/SP/PRIMASK asserted)",
+    "isolated_replay": "PASS (all 192 cases and output hashes)"
+  },
+  "summary": "All 192 operation-2 out-of-range/non-finite cases pass in isolated replay. The original chain calls save then classifier, which yields category 4 for float32 \u2212274, 1000, +infinity, and quiet NaN; it writes the threshold/category fields and zero bounds, returns status 6, and does not call the decoder or publish state. R4\u2013R12, SP and PRIMASK restoration are checked. Boundary values, other snapshot/transition paths, aliasing and physical hardware effects are not covered."
+}

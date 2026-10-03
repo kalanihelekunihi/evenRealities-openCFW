@@ -1,0 +1,28 @@
+{
+  "review_id": 2989,
+  "candidate": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-event-apply-original-empty-fifo-2988/001",
+  "candidate_receipt_sha256": "141a42c0ff16666f243bb5a012b6565f6b5f1f997ac0fe9a0f6fea3bce1fa454",
+  "source_pin": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_pins": {
+    "42c0b2-42c222": "a3d5075b7f480a21b071c587bb343466ca39d411ed426927e82b22168591937e",
+    "41d1c0-41d210": "c336d5c93475c6521bab00509a8ad8aaa1078b3bdc313ae43107777520af1895"
+  },
+  "candidate_file_hashes_match_receipt": {
+    "replays.json": true,
+    "replay.py": true,
+    "pseudocode.md": true
+  },
+  "fixture_count_or_static_extent": "384",
+  "isolated_replay": {
+    "result": "PASS 384",
+    "destination": "/tmp/review-apollo-boot-event-apply-original-empty-fifo-2988"
+  },
+  "assessment": "PASS_SCOPED",
+  "accepted": false,
+  "summary": "Original event apply with empty FIFO fixture, status/occupancy and delay helper behavior bounded.",
+  "scope_limits": [
+    "The packet remains private scoped evidence; no canonical admission is made.",
+    "Only the exact fixture dimensions and controlled/modelled hardware described by the candidate are supported.",
+    "No whole-firmware completeness, physical hardware, untested paths, or global ownership claim is inferred."
+  ]
+}

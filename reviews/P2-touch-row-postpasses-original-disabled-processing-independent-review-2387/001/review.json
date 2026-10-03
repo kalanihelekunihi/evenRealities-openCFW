@@ -1,0 +1,58 @@
+{
+  "review_id": "2387",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-row-postpasses-original-disabled-processing-2384/001",
+  "candidate_receipt_sha256": "796347787e709e4d4d3b9791d419ae7667d94edf5c7640d84e7c361ae728c846",
+  "candidate_pseudocode_sha256": "bad942915472bcf21488568d353e9fb6fdd8807fd372fa935ad7c956a4c9dbdd",
+  "candidate_replay_sha256": "f7527bb4f88d168b03f0e07d8beb51474e50bcc53e2a81654ca95b5d7cc8c424",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "isolated_replay_output_sha256": "5ad3896fcf150d50507e106a2af6c9ed1195fc4c0089019ad0d1b026387fd29c",
+  "fixture_count": 512,
+  "pinned_body_ranges": [
+    {
+      "range": [
+        23714,
+        23722
+      ],
+      "sha256": "6f8a68c8297071c8f8bbc92299e9558d82f7ece8429362fb3bba396a919a513a"
+    },
+    {
+      "range": [
+        31508,
+        31586
+      ],
+      "sha256": "306f3541a2977a9b4b879e8022a325affac06fd9a1f66c9db00d03dd683821dd"
+    },
+    {
+      "range": [
+        31586,
+        31594
+      ],
+      "sha256": "015f5632595b47df572676b6fa9b6d764ba21bf9e279ee9a51d0efb786f7a34a"
+    },
+    {
+      "range": [
+        31594,
+        31672
+      ],
+      "sha256": "ced67683db8de388bd41b1d5472366f15f40ca321a9a77d0c92a8fa95d2b5873"
+    },
+    {
+      "range": [
+        31672,
+        31680
+      ],
+      "sha256": "015f5632595b47df572676b6fa9b6d764ba21bf9e279ee9a51d0efb786f7a34a"
+    }
+  ],
+  "checks": [
+    "Candidate source and artifact hashes match the receipt. The pinned body ranges and instruction bytes are retained as specified in touch-row-postpasses-original-disabled-processing-2384/001.",
+    "Independent isolated replay passes 512 cases; output hash matches pinned replays.json.",
+    "Original postpasses, 7984 and 7DDE execute without interception. With parameter byte35 values 0, 2, 4, or 128, the 7DDE predicate is disabled; 7984 returns its early status without deeper processing. Complementary selection, final cfg/descriptor stores, status, and saved registers match."
+  ],
+  "limitations": [
+    "The enabled predicate/processing path is not covered; fixture layouts and values are bounded and synthetic.",
+    "Private bounded evidence only; accepted:false."
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "review_id": 2893,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-temperature-classifier-map-2892/001",
+  "candidate_receipt_sha256": "5cd90de0a62e7fe40a1166251b237a4185084ebbb60a6bab8163f99254bfc4af",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_range": [
+    "0x42AD40",
+    "0x42ADB8"
+  ],
+  "body_sha256": "89f71050cf7850205a7a5ef9ccfb09dfadaadd5a6046355844d800589b65607d",
+  "candidate_artifact_hashes_verified": true,
+  "isolated_replay": {
+    "result": "PASS",
+    "instructions": 39,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2893-independent"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Static instruction and literal review only; this packet does not dynamically exercise boundary values, NaNs, infinities, or FPSCR exception modes.",
+    "The pseudocode records path-dependent VFP scratch registers and flags; it does not claim a stable full-register or flag contract.",
+    "No equivalent-function shortcut, whole-image completeness, or canonical admission is claimed."
+  ],
+  "accepted": false
+}

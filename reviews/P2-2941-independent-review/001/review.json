@@ -1,0 +1,19 @@
+{
+  "review_id": "2941/001",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-hardware-state-decode-map-2940/001",
+  "candidate_receipt_sha256": "78a7254c7bd025889d90f1af707c22c0f2a8d1cd24bcdbf9317a7cc2f80eb065",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_sha256": "74f4304f6e3aa59022a29eb5e5f5479c77072b33355825b7c9409897001bb9d1",
+  "status": "REVISE_PROSE",
+  "accepted": false,
+  "checks": {
+    "receipt_output_hashes": "PASS",
+    "source_and_mapping": "PASS (locked image, flash load base 0x410000)",
+    "body_and_instruction_tiling": "PASS (311 original instructions tile [0x42B6B8,0x42B9BA), 770 bytes)",
+    "literal_words": "PASS (all PC-relative literal values agree with original bytes)",
+    "dispatch_map": "PASS (24 cumulative subtract-chain keys and branch targets independently reconstructed)",
+    "isolated_replay": "PASS (311 decoded instructions; fresh output directory)",
+    "pseudocode_gate_bit": "REVISE (both selector gates use bit 7 of the freshly loaded byte at 0x2002708C, not its low bit)"
+  },
+  "summary": "Source, body, instruction, literal, mapping, and output pins check out; isolated static replay passes. I independently reconstructed the 24 subtract-chain keys and targets from the original Thumb instructions and matched dispatch.json. The pseudocode needs one precise correction: both selector sites load a byte, shift left by 31, and branch on sign, so they test bit 7 (mask 0x80). Any wording that calls this the low bit is wrong. Static map only; no dynamic behavior, hardware effect, global ownership, or canonical admission is established."
+}

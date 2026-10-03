@@ -1,0 +1,25 @@
+{
+  "review_id": 2827,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-handler0-original-wait-service-chain-2826/001",
+  "candidate_receipt_sha256": "15ad3cb4d02c24d54f48f05374a09f078b08cb11858e99c418131026de78f679",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "itcm_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+  "candidate_artifact_hashes_verified": true,
+  "body_hashes_verified": {
+    "427e84-42805a": "1a259e009f8dfe9641a5c1062b41e1cc32eab8b34c6f919a19485e7897a37310"
+  },
+  "isolated_replay": {
+    "result": "PASS",
+    "fixtures": 128,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2827-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Path is constrained to runtime bit 0 set, newfirst=0, pending index=oldfirst=1, newsecond=0, and service flag 0.",
+    "Ready and timeout branches are fixture-modeled; broader readiness/polling, flag2/7 behavior, alternate indices/categories, active op4 state, and changing hardware reads remain untested.",
+    "No physical hardware, concurrency, enclosing caller ownership, or canonical admission claim."
+  ],
+  "accepted": false
+}

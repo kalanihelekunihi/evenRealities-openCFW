@@ -1,0 +1,24 @@
+{
+  "review_id": 2725,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-handler6-original-normal-chain-2724/001",
+  "candidate_receipt_sha256": "a60e58a03393e14876a3670a0e5148cea678f6163b06c7c82f10b8c84fbf86d7",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "itcm_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+  "candidate_artifact_hashes_verified": true,
+  "body_hashes_verified": "fc89fc0dea111bfc856d5bfc6768e1366ce28ec23119b3612d003cfc993e92f5",
+  "isolated_replay": {
+    "result": "PASS",
+    "instructions_or_fixtures": 16,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2725-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "scope": "dynamic",
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Wait/service and other indices/categories are not covered by this composition.",
+    "Emulated register effects do not establish physical hardware behavior or concurrency properties.",
+    "Private evidence only; no canonical admission."
+  ],
+  "accepted": false
+}

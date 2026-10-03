@@ -1,0 +1,21 @@
+{
+  "review_id": "2603",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-transition-pending-scan-original-predicate-2602/002",
+  "candidate_receipt_sha256": "47574ea470568e086b0cef1096ba986273d653d84a6baa2bad7270634188c628",
+  "candidate_pseudocode_sha256": "e9d4b13a2a9e66b29270064cc0de1558ae94af41e5ba79476e599df05b2aa1c8",
+  "candidate_replay_sha256": "bc2402a67c138c9f798d8cd6d9996bc5de33301ee96b0a83cfa2ffe1ea21ce76",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Candidate artifact and source hashes match. The original scan body [0x42CFE0,0x42D0F2) matches its pinned digest.",
+    "A replay copy redirected to a fresh destination passes all 1536 fixtures. The model correctly preserves the alias: the original scan's mode word and original 0x41F3F0 predicate's register pointer resolve to the same address, so helper register low-nibble inputs are the caller's 0..3 mode cases.",
+    "The integrated path has no firmware-function interception. It tests gate/index shortcuts, the original state predicate, mode low nibble, field-range edges, slot 0/15, and selected/unselected mask. Expected output and call/no-call decisions agree with the original predicate behavior and scan body; R7 return and SP are checked.",
+    "Independent disassembly confirms each loop tests entry-valid bit 0 and the per-slot mask bit, extracts bits 8..16, and applies the three documented half-open ranges."
+  ],
+  "limitations": [
+    "Only one table entry is active in a fixture; multi-match precedence is not dynamically demonstrated.",
+    "The state predicate's behavior is covered separately by 2600; this composition uses low nibbles 0..3 and stable shared memory. Broader dynamic mutation, physical meaning, and ownership are unresolved.",
+    "Private scoped evidence only; accepted:false and no canonical admission."
+  ]
+}

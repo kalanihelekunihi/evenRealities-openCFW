@@ -1,0 +1,49 @@
+{
+  "review_id": 2835,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-current-restore-contract-candidate-2834/002",
+  "candidate_receipt_sha256": "48609b37ae1c447bd0d8752820c321b3a9e4f197b6876cf1e64a02faa2a17abe",
+  "function_json_sha256": "2efc651ff7b5397ef5ec4e33a8a719ba756fd6d0d03923c12f29d10037f64659",
+  "candidate_artifact_hashes_verified": true,
+  "target_campaign_hash_matches": true,
+  "source_and_body_hashes_verified": true,
+  "input_hashes_verified": true,
+  "mapping_check": {
+    "file_offset_start": 105892,
+    "loaded_start": 4365732,
+    "image_load_base": 4259840,
+    "equation": "loaded_start - image_load_base == file_offset_start",
+    "result": "PASS"
+  },
+  "stable_identity_tuple": {
+    "component": "apollo_bootloader",
+    "image": "apollo_bootloader:flash",
+    "address_space": "flash",
+    "entry": "0x429da4",
+    "isa": "ARMv7-M Thumb",
+    "function_id": "apollo_bootloader:flash:flash:00429da4:thumb"
+  },
+  "prototype_and_calling_convention_present": true,
+  "structured_memory_references_present": true,
+  "isolated_replay": {
+    "result": "PASS",
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2835b-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "independent_instruction_execution": {
+    "result": "PASS",
+    "patterns": [
+      "0x00000000",
+      "0xFFFFFFFF",
+      "0xA5C3E17B"
+    ],
+    "checked": "R0-R12, LR, SP, PRIMASK, NZCV, ordered target/status effects"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "The replay verifies this record and its evidence bindings; it does not establish whole-image ownership/denominator or physical MMIO meaning.",
+    "Fault/exception behavior and exhaustive aliasing are not dynamically validated; the ordered operation sequence and modular arithmetic are decoded facts.",
+    "No canonical admission."
+  ],
+  "accepted": false
+}

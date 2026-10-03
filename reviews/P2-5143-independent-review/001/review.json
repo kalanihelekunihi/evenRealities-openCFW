@@ -1,0 +1,16 @@
+{
+  "review_id": "5143",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-service-record-original-initializer-fixtures-5142/001",
+  "candidate_receipt_sha256": "2bb796863b0258c64dcf019cdc65dea8b93dc7cb3f5ae2d3527fe1c3dcf2c386",
+  "candidate_replay_sha256": "a4e398a4b2d538a6e0ffe54c128225f02c77b4ec68e334c3853832109f2dc9c9",
+  "candidate_results_sha256": "ef8d973c43bebe6eb077ada108eccdaa923b7564665c08e3abc334723303e0a5",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Receipt pins the locked source and service-record map 5136; isolated replay passes all three original executions without child redirection. The full 256-byte state oracle verifies writes to bytes 49 through 213 and untouched neighbors, along with R0=5, saved registers, SP and PC."
+  ],
+  "limitations": [
+    "The 41560C helper executes as original code, but its separate semantic map is not pinned here; no helper semantic closure or hardware claim is made. Private scoped evidence; accepted:false."
+  ]
+}

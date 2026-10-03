@@ -1,0 +1,22 @@
+{
+  "review_id": 2843,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-internal-domain-byte-setter-map-2842/001",
+  "candidate_receipt_sha256": "622c91ab1b50d403190d57cd144c5a3f41be8f98fc16c6235e6921cfb9011286",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_sha256": "34664d76a6022980a70a926ac4c1108f43d33974584a9cb854f8faa59a8ebacf",
+  "candidate_artifact_hashes_verified": true,
+  "isolated_replay": {
+    "result": "PASS",
+    "fixtures": null,
+    "instructions": 10,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2843-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "Static decode only; no dynamic caller or state transition is established.",
+    "No physical MMIO, caller-ownership, or canonical admission claim."
+  ],
+  "accepted": false
+}

@@ -1,0 +1,17 @@
+{
+  "review_id": "2899",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-trim-enable-profile-roundtrip-2898/001",
+  "candidate_receipt_sha256": "c97f3f39d5a113e3e79dba0c3bd9d4bdaf9f5f76b5402acf3bd14ad171ee6b5a",
+  "candidate_replay_sha256": "36653df816d6d0ed63d6fc4d84c319b0c4af7590c148ebf1a4dec4ed3745af79",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "body_sha256": "bd1034fc29321b4ca66d344cbde9c4f01c8e2b949c5420ae181360327be3fd47",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "checks": {
+    "source_matches_inventory": true,
+    "body_hash_matches_receipt": true,
+    "artifact_hashes_match_receipt": true,
+    "isolated_replay": "PASS"
+  },
+  "summary": "The pinned image hash matches inventory. Body [42ADB8,42AE6C) SHA-256 matches the receipt; candidate artifact hashes were checked. Isolated replay of the script into a fresh output directory passed all 192 cases. The cases cross four R0 inputs (low byte 0/1, plus 256/257), four control low-10-bit boundaries, two upper-word patterns, three profile words, and PRIMASK 0/1. The original ADB8 path conditionally sets bits 15\u201316 at 400201B0, loads profile word104 to update 40020088, chooses delta min(7,1023-control_low10), then updates control low10 while retaining upper bits. The original AE24 call performs its two profile RMWs, then nonzero input subtracts delta from control low10; the combined call sequence returns the observed final control and delta registers, preserves the asserted high registers/SP/PRIMASK, and matches the ordered write ledger. Fixture-controlled state is stable across each helper call; changing volatile reads, aliasing, flags beyond checked outputs, restore-helper behavior, physical MMIO, and caller ownership remain outside this packet. Accepted remains false; no canonical admission."
+}

@@ -1,0 +1,16 @@
+{
+  "review_id": "5111",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-allocation-release-original-chain-fixtures-5110/001",
+  "candidate_receipt_sha256": "b316a42f87de6c7b57f5b5a4889a8bea58d271d3c8b25f503318c3a037988405",
+  "candidate_replay_sha256": "616284afbc50e79680218f436a274ab36d58a3e45d57919dfd601fa2224abca6",
+  "candidate_results_sha256": "2cd73c6b079b998bbf87ba658614282501dafd08d8ef266788c55b1e82a5b3b0",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Receipt pins the allocation/release chain dependencies. Isolated replay passes all 96 cases with no controlled callees. The 8,704-byte oracle covers null release, split/no-split, next-block coalescing, metadata reinsertion and residual internal node bytes, along with R0 saved-R3 alias and SP/PC."
+  ],
+  "limitations": [
+    "Previous-block coalescing, assertions/faults, volatile/hardware behavior and unlisted paths are excluded. Private scoped evidence; accepted:false."
+  ]
+}

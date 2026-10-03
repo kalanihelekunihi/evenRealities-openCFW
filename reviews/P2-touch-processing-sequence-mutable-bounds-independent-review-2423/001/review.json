@@ -1,0 +1,22 @@
+{
+  "review_id": "2423",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-processing-sequence-mutable-bounds-2420/002",
+  "candidate_receipt_sha256": "9e1d52d3914d8893db6ac86824d5af1042940e954154cce890c021814735f077",
+  "candidate_pseudocode_sha256": "9151e40a4a39945f3c049027a466fbfb57505adb299ddc0092055deb34c26b12",
+  "candidate_replay_sha256": "161a0da82cae93cfd6703aba8b5c7979aa5bacbac163420db96f1fd27a2f629d",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "isolated_replay_output_sha256": "3ef22decfddf25b2fc7f8bb0de880c3b6afc24ff48cd2ea00df6d29b2945a6a4",
+  "checks": [
+    "Candidate 002 receipt hash 9e1d52d3914d8893db6ac86824d5af1042940e954154cce890c021814735f077; source SHA-256 371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87 matches the pinned value. Original body [0x752E,0x757E) hashes to the receipt value; disassembly and candidate artifacts match their file hashes.",
+    "Isolated replay of 002 passes 108 fixtures; the replay output exactly matches pinned replays.json. The corrected prose accurately states 108 cases. Earlier attempt 001 is preserved and its 216-case prose count was inaccurate.",
+    "Instruction trace supports the mutable-bound behavior: R4 is initialized from original halfword 128 and is incremented after each child; after every child the code reloads halfwords 128 and 130, adds them, and compares the sum against R4. It therefore continues from the original slot after mutation, while R8 retains the kind-derived selector captured before the loop. The controlled child mutates both bounds and the row kind on the first call; exact subsequent args, call count/status and R4-R11/SP pass."
+  ],
+  "limitations": [
+    "Only the supplied two initial kinds, three start values, three replacement starts, four replacement counts and two replacement kinds are covered; child behavior is controlled.",
+    "Row pointer replacement, actual measurement behavior, aliasing and broader caller interaction remain unresolved.",
+    "Private evidence only; accepted:false."
+  ],
+  "prior_attempt_note": "001 retained; 002 is the reviewed count-corrected attempt."
+}

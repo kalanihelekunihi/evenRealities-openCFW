@@ -1,0 +1,15 @@
+{
+  "review_id": "5079",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-u64-division-block-size-classification-map-5078/001",
+  "candidate_receipt_sha256": "793d980ced72a8c38aca62b2a6323956f4fa82d7af6d54712d151085fc2bfbd0",
+  "candidate_replay_sha256": "08ef44ad983190cd392130b76a53bac1f953f73206da8da32d919ded0f91bc18",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Stackless bit-length and bit-index helpers, bounded-alignment helper, and two output classifiers. Independently checked body extents and references against the locked image; isolated replay passed. The size-classifier stores class then index, so output aliasing is observable; the C26 result is POP R0 from saved incoming R3. Low-byte ARM register-shift behavior and the stated zero/threshold branches agree with the code."
+  ],
+  "limitations": [
+    "Referenced assertion/alignment child behavior and broader allocator interpretation remain outside this map. Private scoped evidence; accepted:false."
+  ]
+}

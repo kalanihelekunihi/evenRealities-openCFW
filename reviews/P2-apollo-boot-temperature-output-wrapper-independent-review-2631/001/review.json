@@ -1,0 +1,22 @@
+{
+  "review_id": "2631",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-temperature-output-wrapper-2630/001",
+  "candidate_receipt_sha256": "6d88437d31525bb82a9b86812916a4842f5bb96fe978e4b2b51d56b9c24cc949",
+  "candidate_pseudocode_sha256": "8523a422a90a94a48f05ecb990e21d791609f6d24e47eebbf837b9fd50c5fa23",
+  "candidate_replay_sha256": "2201f7dcdd3fc9cb1cad8b8176daf384bb03e1f938e351bef98aef541774b97a",
+  "fixture_sha256": "767780d2ed148858bf456a86405ac2f2bb550d16098de5fb2a4d4b37a765419f",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "isolated_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2631-independent/replays.json",
+  "isolated_replay_count": 36,
+  "checks": [
+    "Receipt, source, pseudocode, replay, and fixture hashes match. The original wrapper and dispatcher bodies match the recorded digests.",
+    "Isolated replay of all 36 combinations passes. Original wrapper invokes the dispatcher with mode 2, selector 0, and its stack output buffer; S0 bits are saved there. The manually installed callback is invoked only for a nonempty slot and receives the expected arguments.",
+    "The replay confirms empty-slot copying of incoming saved R1/R2 words, nonzero callback-result zeroing of both outputs and wrapper return 1, zero callback-result copying the controlled payload/complement and return 0, along with SP/R4 preservation."
+  ],
+  "limitations": [
+    "Callback behavior is synthetic and controlled; no installed callback semantics are claimed. Table mutation, null output behavior, aliases, and physical register meaning remain unresolved.",
+    "Private scoped evidence only; accepted:false; no canonical admission."
+  ]
+}

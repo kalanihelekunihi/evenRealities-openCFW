@@ -1,0 +1,28 @@
+{
+  "review_id": 2795,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-spot-handler-table-private-audit-2794/001",
+  "candidate_receipt_sha256": "269d3fb19205cab9bd2d8d10ba51ec790e5152f55d23dc04a48d49c667624dac",
+  "flash_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "ram_sha256": "e3bea7ccd46bc324829152b5b5a9069aecce5db243876273084d29bd7d47b843",
+  "candidate_artifact_hashes_verified": true,
+  "isolated_replay": {
+    "result": "PASS",
+    "entries": 27,
+    "static_maps": 24,
+    "bx_lr_leaves": 3,
+    "mapped_bytes": 7992,
+    "mapped_instructions": 2817,
+    "gaps": 11,
+    "gap_bytes": 634,
+    "output": "g2/build/pseudocode-first/20260930T190500Z/analysis/replay-2795-independent",
+    "python": "/Users/kalani/.local/share/opencfw/venv/bin/python"
+  },
+  "status": "PASS_SCOPED",
+  "findings": [],
+  "limitations": [
+    "This is table-target and evidence-integrity accounting only; it does not prove full pseudocode semantics, incoming-edge closure, or ownership of the 11 intervening gaps.",
+    "Entry table and decoded RAM are authenticated artifacts, but initialization/caller behavior and physical hardware/concurrency behavior remain outside scope.",
+    "This does not establish whole-image completeness, canonical admission, or freeze readiness."
+  ],
+  "accepted": false
+}

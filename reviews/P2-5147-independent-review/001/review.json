@@ -1,0 +1,15 @@
+{
+  "review_id": "5147",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-u64-division-bounded-byte-compare-length-map-5146/001",
+  "candidate_receipt_sha256": "809aa076138ea97580a585c3509d6ad1387c3b85bedc6081842c28f2b77094f6",
+  "candidate_replay_sha256": "76d396041b68ce679e998b0f9ad309103a5251327be11569765a576b205bef84",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "The two bounded compare/length bodies pass source-pinned isolated replay and exact instruction/reference checks. Compare performs second-string then first-string loads; equality triggers a fresh first-byte reload before NUL handling. Length scans bytes to alignment, then uses word marker/REV/CLZ logic and returns the terminator-relative length."
+  ],
+  "limitations": [
+    "Aligned word reads can include bytes after a terminator, as explicitly noted; no null/bounds/volatile or memory-safety guarantee is established. Private partial map; accepted:false."
+  ]
+}

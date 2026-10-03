@@ -1,0 +1,37 @@
+{
+  "review_id": 2567,
+  "result": "PASS_SCOPED",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-power-profile-init-full-original-chain-2566/001",
+  "candidate_receipt_sha256": "23ab1c2b73e546ec2afc0b660fcf36dd48eb44360c066ca231e82ac7320696b5",
+  "candidate_files": {
+    "receipt.json": "23ab1c2b73e546ec2afc0b660fcf36dd48eb44360c066ca231e82ac7320696b5",
+    "pseudocode.md": "5a12e8969af195d7b3766eed2bcd3da14313991319ddbb35132c42b5d018db66",
+    "replay.py": "5b0af7dffd50c52975b9444a8046b8bf5b2caac0bee4bc270668c0b601022333",
+    "replays.json": "00dae794afe67f46078d83fddf3dca05560a070e0a1cd1eb19050a24dd359766"
+  },
+  "sources": [
+    {
+      "id": "apollo_bootloader:flash",
+      "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5"
+    },
+    {
+      "id": "apollo_bootloader:decoded:00000040",
+      "sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83"
+    }
+  ],
+  "body_span": {
+    "start": "0x42ABBC",
+    "end": "0x42AC4E",
+    "sha256": "1f0bfec6f59efe752ea106db7f7b7144fcd9b0df306919a7e03a7f2d550bca2d"
+  },
+  "literal_words": {
+    "guard1": 1073873340,
+    "guard2": 1073877000,
+    "state": 537029536,
+    "dispatch": 520183821
+  },
+  "isolated_replay": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-power-profile-init-full-original-chain-2566/replay-2567-independent",
+  "cases": 6,
+  "accepted": false,
+  "canonical_admission": false
+}

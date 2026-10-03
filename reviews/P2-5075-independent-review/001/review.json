@@ -1,0 +1,17 @@
+{
+  "review_id": "5075",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-boot-block-alignment-original-fixtures-5074/001",
+  "candidate_receipt_sha256": "48fcdd903c9a99b49dbd0fe3138b4e8f977b073efedfe46d8a534f304db6d673",
+  "candidate_replay_sha256": "108ac8d06e8288219459d60507fb76860b3aa99f601faef756ab994c9696ef0e",
+  "candidate_results_sha256": "c962ce2ef1db782f540d028b3f81a0fcdb32ceb5607d72e8ca19c013db2c4556",
+  "source_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "checks": [
+    "Receipt pins the locked image and alignment-map 5068 inputs; local artifact hashes match. Independent isolated replay passes all 270 cases.",
+    "Three original alignment entries were exercised across the stated boundary values and masks, with only the assertion target controlled. Arguments, return/frame checks, and preserved registers match the packet scope."
+  ],
+  "limitations": [
+    "Only the enumerated mapped entries and modeled assertions are covered; this is private scoped evidence, not hardware behavior or global completeness. accepted:false."
+  ]
+}

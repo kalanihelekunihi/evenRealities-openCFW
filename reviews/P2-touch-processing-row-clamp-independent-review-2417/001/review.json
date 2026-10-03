@@ -1,0 +1,37 @@
+{
+  "review_id": "2417",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/touch-processing-row-clamp-5bc0-2414/001",
+  "candidate_receipt_sha256": "db95d7ff038d5e89612b55ff2b2265a6e6826a0e167216027f49ab1f17666fb3",
+  "candidate_pseudocode_sha256": "8949c701753149be486de53663540a5b6b084ecfa9d295214d30077b90d4c00f",
+  "candidate_replay_sha256": "12885071e8e817c66cb8de640053196a4e6494eb33a8cf7d3c7c80a0910475de",
+  "source_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "isolated_replay_output_sha256": "eb6e6686b74f5d0828ee1f6ae571bd67adb9accc998b128bb3e3188da01d2f6a",
+  "fixture_count": 648,
+  "pinned_body_ranges": [
+    {
+      "range": [
+        23488,
+        23554
+      ],
+      "sha256": "579982044fd40866091ff3fb450aa68b35570ecf15f471a2ff588c03de9cb0a7"
+    },
+    {
+      "range": [
+        23554,
+        23582
+      ],
+      "sha256": "3bc5ecfd4603fc037688ec466e5bbdff4ed365058d58ea1e6aeec6536c2552ab"
+    }
+  ],
+  "checks": [
+    "Candidate source and artifact hashes match the receipt. The pinned body ranges and instruction bytes are retained as specified in touch-processing-row-clamp-5bc0-2414/001.",
+    "Independent isolated replay passes 648 cases; output hash matches pinned replays.json.",
+    "Original 5C02/5BC0 verify type7 bypass, primary limit and fresh valid/count fields, secondary-limit reload at the split, sticky cap behavior, ordered conditional writes and status/register assertions."
+  ],
+  "limitations": [
+    "Stable fields during iteration; mutable-pointer/count behavior and actual producer output remain unresolved.",
+    "Private bounded evidence only; accepted:false."
+  ]
+}
