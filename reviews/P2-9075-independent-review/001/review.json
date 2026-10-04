@@ -1,0 +1,21 @@
+{
+  "review_id": "9075",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-parser-entry-partial-header-fixture-9068/001",
+  "candidate_receipt_sha256": "0e68889f73f8bae1a847d119739b3066c31a64cd1302d0e959fe7e97b8887f07",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "independent_replay_receipt_sha256": "e88b20c819e2eb58ca0b35ffa7b13852f2fc823f2ecb9113e7f3d9ca17da4beb",
+  "independent_replay_output": "/tmp/independent-P2-9075",
+  "independent_python": "/Users/kalani/.local/share/opencfw/venv/bin/python",
+  "checks": [
+    "Fresh isolated replay passed all 14 original parser-entry and partial-header byte-stream cases with allocation and dispatch paths kept unreachable.",
+    "Full parser state and ring memory, header count/type/busy fields, modified saved-R3 return slot, preserved registers, PRIMASK/SP/PC matched the independent seeded-memory expectations."
+  ],
+  "limitations": [
+    "Only entry/partial-header paths are covered. Allocation, completed-header, payload, dispatch, malformed pointers, and physical transport remain outside scope."
+  ],
+  "candidate_scope_md_sha256": "91fa03a1f584a1ecab8c928f0350e7a7106b0f065c130cb2644e306f858c0cfb",
+  "candidate_results_json_sha256": "4b434426a1b119c245bfc594125c807a15fb921994558d58395d2e3cd0c8530c",
+  "candidate_replay_py_sha256": "696c50cdb95932831434424210c182e1cf60707571ab47e71e56e806e7ee24e7"
+}

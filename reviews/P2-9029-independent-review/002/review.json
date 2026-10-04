@@ -1,0 +1,21 @@
+{
+  "review_id": "9029",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-index-decoder-exhaustive-fixture-9022/001",
+  "candidate_receipt_sha256": "773fdb0a8396f413f5ec0f232bca1f8689ad492be74090724e09938e0a1e498e",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "independent_replay_receipt_sha256": "1bbe63b8f4157b6053d26140bb5d984561e8c5ba2830fbe50082218a7340217b",
+  "independent_replay_output": "/tmp/independent-P2-9029-r2",
+  "independent_python": "/Users/kalani/.local/share/opencfw/venv/bin/python",
+  "checks": [
+    "The independent replay passed all 131,072 original-byte cases: every low-16-bit input with distinct and aliased output pointers.",
+    "Independent divmod expectations matched remainder-first and low-byte quotient stores; full quotient in R0 and R4/R5/SP/PC assertions passed."
+  ],
+  "limitations": [
+    "Synthetic SRAM only; no unrestricted caller-domain or whole-firmware claim."
+  ],
+  "candidate_scope_md_sha256": "0b1b52b20a2c11be7763bd48fa6f19aaa615029cfec74e0ed1f2ccc6c5430cb1",
+  "candidate_results_json_sha256": "d95fae244d3c91aeb039207ec0b9943f6348a75a87da03b4fa7c827190745ba0",
+  "candidate_replay_py_sha256": "11a8a80717a2688541d71a876e5ab80d80f493d6aa61c70b6c3fcb4b35879a41"
+}

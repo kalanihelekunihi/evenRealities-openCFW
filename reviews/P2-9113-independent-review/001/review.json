@@ -1,0 +1,20 @@
+{
+  "review_id": "9113",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-command2001-2005-200c-builders-map-9106/001",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_receipt_sha256": "1b55891c3a3ab37ce8bff6e11d1dd2f9041b1bbb63076abe5869a0570044a5bb",
+  "candidate_instructions_json_sha256": "107589dc92d9521a4f0cb752dbdea1da8567e1f57edd13c10ac1f3a4756f2d61",
+  "candidate_references_json_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "candidate_replay_py_sha256": "cafbb86b90867d3bb3264f13b011c06cf57469658bd08073f91e4f3da3782f2e",
+  "candidate_pseudocode_md_sha256": "a9a99c463528e381196832e4c34d4e7a46eb209e284bcfa81d5c92c319016429",
+  "checks": [
+    "All 120 mapped instruction bytes match the pinned image.",
+    "The 0x2001 builder requests eight bytes and copies them to payload+3; the 0x2005 builder requests six bytes and uses the six-byte copy helper. Both null paths skip source reads and dispatch; successful paths return child R0.",
+    "The 0x200C builder requests two bytes, writes low8 of both scalar inputs at offsets 3 and 4, dispatches if nonnull, and returns saved entry R3 rather than child status."
+  ],
+  "limitations": [
+    "Copy and dispatch child contracts and source validity are unresolved. No physical delivery, concurrency, whole-artifact completeness, or C claim."
+  ]
+}

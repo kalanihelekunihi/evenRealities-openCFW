@@ -1,0 +1,20 @@
+{
+  "review_id": "9097",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-command202f-2017-201b-builders-map-9090/001",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_receipt_sha256": "e6f00b2a2ebc4b458476fa9a23f9fb5cccd8bf85f3e203afec346b5c2db4efb7",
+  "candidate_instructions_json_sha256": "0315e9232929d55e0b71bdb6100f71e28d8964da044256ce75ad265a7ba23c21",
+  "candidate_references_json_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "candidate_replay_py_sha256": "58df963072ca1de07d86639eb3cca577bdae3309fb64567e72651585314b603a",
+  "candidate_pseudocode_md_sha256": "f6206e7a8c5cfdd3cf724ecf4b119cba6d73e24223c9db6287d9ecafa630da3e",
+  "checks": [
+    "All 130 instructions match the pinned image.",
+    "The first builder creates a zero-payload 0x202F packet, dispatches if nonnull, and returns saved entry R7. The 0x2017 builder copies two sequential 16-byte spans to offsets 3 and 19, dispatches and returns child R0; null returns zero before source reads.",
+    "The 0x201B builder requests two payload bytes and stores low16(field) little-endian at packet+3/+4; dispatch occurs only for nonnull allocation, and null returns zero."
+  ],
+  "limitations": [
+    "Copy overlap and pointer validity are unresolved; allocation/header and dispatch child contracts are out of range. No semantic packet type, concurrency, physical, or whole-firmware claim."
+  ]
+}

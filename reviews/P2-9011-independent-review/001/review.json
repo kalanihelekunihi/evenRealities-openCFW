@@ -1,0 +1,20 @@
+{
+  "review_id": "9011",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-descriptor-table-initialization-map-9004/001",
+  "candidate_receipt_sha256": "268f1af7e66b53c59acdd3387c643f5fefd23579a26f718641f456968241d315",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "checks": [
+    "The initializer map\u2019s 51 Thumb instructions match the pinned image byte-for-byte; its literal references also match. The loop stores nine 44-byte descriptors in 3-by-3 traversal, preserving bytes it does not explicitly write.",
+    "The final word store publishes 0x785250 at global 0x200610AC+60. The 16 bytes there decode as four odd Thumb table entries (0x53119D, 0x531331, 0x5315B5, 0x53135B); the callback slot at +88 is distinct.",
+    "At 0x785250, the bytes begin ASCII \u201cAttcIndConfirm\u201d; this supports the flash-table interpretation without assigning table-entry semantics."
+  ],
+  "limitations": [
+    "No concurrency, full firmware behavior, or callback contract is established; this remains private partial evidence."
+  ],
+  "candidate_instructions_json_sha256": "d08f20467a19b27d09fea7539bf98bec2f1997bb0b434553b324f90bd00fc049",
+  "candidate_references_json_sha256": "afe5030fa8526597a26d783cd729e9340e21f0b6feabc7f16db779810130f956",
+  "candidate_replay_py_sha256": "149e7230b71ec9f46604f232b4904101140634f945f61f04e2425f4309b70321",
+  "candidate_pseudocode_md_sha256": "0820724edc69af8c5552a492015e9d0d450730c90090c8b9c77f6706b3e26d4b"
+}

@@ -1,0 +1,21 @@
+{
+  "review_id": "9127",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-command-queue-drain-original-fixture-9120/001",
+  "candidate_receipt_sha256": "d70a4d06f7d98061d245144038b3d6aaa12c5aadc04d49bfef50136a888c92fb",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "independent_replay_receipt_sha256": "590aa026fee447c52bbe6f6f59d4db2963bc41447f0f5a2f73ef8b6a7d051f1c",
+  "independent_replay_output": "/tmp/independent-P2-9127",
+  "independent_python": "/Users/kalani/.local/share/opencfw/venv/bin/python",
+  "checks": [
+    "Fresh isolated replay passed all 12 original-byte queue-drain cases over empty, one-node, and three-node queues, executing original pop/release/pool/gate instructions.",
+    "The independent reverse-pool/tag oracle matched queue links and tags, returned dequeue ID, pool state, and register/SP/PC checks. The gate ran even on empty-pop paths; with initial nesting zero the tested helper behavior cleared the mask as specified."
+  ],
+  "limitations": [
+    "Synthetic queues, pools, and mask state only; no concurrent queue operations, physical preemption, or lifecycle guarantee."
+  ],
+  "candidate_scope_md_sha256": "5e2e257c2512f41da67cf5b71f7779529fd67c4536a6c8e979e94324b1ef36ae",
+  "candidate_results_json_sha256": "a9b035ca1ab12e735339330ba40e93dee656daddc045c4c5a575dee1c9ec2395",
+  "candidate_replay_py_sha256": "581a6eb1f6ab09ffe80e89775b8374d52f6aa8eb4af6278d60ea9b3c1ee50d34"
+}

@@ -1,0 +1,20 @@
+{
+  "review_id": "9053",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-transport-ring-write-map-9046/001",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_receipt_sha256": "1f2f4123bfbc364e4276ffa595972f6f9143117fca6231d13a8bc1eca0d33ba3",
+  "candidate_instructions_json_sha256": "9b1067a2ebeb634b8e3d2e1c70560af8bc15531eae6ad504bf49f7d576abe94b",
+  "candidate_references_json_sha256": "ac2c81389d137e556bd229c3e57c17ebf916d99e3d1b81dcce8bd32ecc8002df",
+  "candidate_replay_py_sha256": "a4990cff9014f3ae9560b7afbba907c500385634db3ede5a08a202bcfcbdd464",
+  "candidate_pseudocode_md_sha256": "d45f570751a8460a676350f602ff856f823a769eb5f221d48dce328b7c3ecc20",
+  "checks": [
+    "All 122 instruction bytes match the pinned image and the listed literal references resolve exactly.",
+    "The equal-index and length-at-least-259 rejection branches call the error child but still return requested length truncated to low16; neither writes the output record. The normal branch writes length+1, type byte, and copies source bytes one at a time.",
+    "The normal path then invokes ring-advance and signal helpers, returning low16 input length while placing saved entry R3 in R1 via POP. Zero length still writes the two header fields and publishes/signals."
+  ],
+  "limitations": [
+    "Input/output validity, overlapping copy behavior, ring capacity, and child helper contracts remain unresolved. This does not establish physical delivery or concurrency semantics."
+  ]
+}

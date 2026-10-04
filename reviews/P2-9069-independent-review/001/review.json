@@ -1,0 +1,20 @@
+{
+  "review_id": "9069",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-ring-state-initialization-map-9062/001",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_receipt_sha256": "4ea267aa857991cfda53fdd47dddad0d1712d5d05b8acdf1b2879ad9b99c63ab",
+  "candidate_instructions_json_sha256": "2b61438077625e431b7ea0d9f6d6055fc7df60215e8dfea9dfe0c6e456c66ac1",
+  "candidate_references_json_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "candidate_replay_py_sha256": "13b7f0414f500d60c265ecff6e1e39ffe7f83615d454de955d8b329de677b7bf",
+  "candidate_pseudocode_md_sha256": "bd9adfed29da4d01716496fb032426c9d9372a26786de791c8a4ffabd76b9be5",
+  "checks": [
+    "All 24 Thumb instruction bytes at 0x53006C..0x530084 match the locked image.",
+    "The routine performs six ordered word stores: zero write/read/used fields, then verbatim capacity, stride, and storage pointer from R3/R2/R1. It restores R4 and returns with R0-R3 preserved.",
+    "There is no validation, size computation, storage initialization, allocation, or gate in this range."
+  ],
+  "limitations": [
+    "Caller validity and compatibility with produce/consume are not established beyond field offsets. No concurrency, physical behavior, or whole-firmware claim."
+  ]
+}

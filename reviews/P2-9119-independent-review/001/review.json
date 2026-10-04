@@ -1,0 +1,20 @@
+{
+  "review_id": "9119",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-command2019-paired-field-copy-builder-map-9112/001",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_receipt_sha256": "8c8571607eff1a27270498eccdedb11c60885cd477f0a62c2b8fe5babddd6819",
+  "candidate_instructions_json_sha256": "cd0a66568174a884f9e8557c7a49fa67005725642aee9807b0f443655696cbd7",
+  "candidate_references_json_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "candidate_replay_py_sha256": "29284863181c3dc4fa04fe94db77163a14ea9d29a87ba06f94a323eebc0e39dc",
+  "candidate_pseudocode_md_sha256": "798986147512b3d649db6e680e350e71bc97d9f4e36886914c2455cae0547a4d",
+  "checks": [
+    "All 100 instructions in 0x52B5A2..0x52B606 match the locked image.",
+    "The 0x2019 builder requests 28 payload bytes, stores the first low16 field at +3/+4, copies eight source bytes to +5, stores the second low16 field at +13/+14, then copies 16 bytes to +15 before dispatch.",
+    "Null allocation skips source reads and writes; success returns saved entry R3 (source16 pointer) in R0, not child status. Sequential calls preserve aliasing effects."
+  ],
+  "limitations": [
+    "Source pointers and allocation/dispatch contracts are unchecked or unresolved. No independent snapshot, concurrency, physical, or full-firmware claim."
+  ]
+}

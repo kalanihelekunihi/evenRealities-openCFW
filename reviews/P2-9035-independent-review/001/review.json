@@ -1,0 +1,21 @@
+{
+  "review_id": "9035",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-default-category-dispatch-fixture-9028/001",
+  "candidate_receipt_sha256": "0ec557b0e250308f15f7e458bd7d505db72981f5deda6b45d8597ab22045793d",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "independent_replay_receipt_sha256": "320cd6dc86974209faa2d0e5c6313f87264a3bd59121217a6894340c069e2e26",
+  "independent_replay_output": "/tmp/independent-P2-9035",
+  "independent_python": "/Users/kalani/.local/share/opencfw/venv/bin/python",
+  "checks": [
+    "Fresh original-byte replay passed all 512 categories x two PRIMASK values using original default flash tables and no-op target stubs; high-category callback slot was null.",
+    "The replay verified full packet preservation, return of saved entry R7, preserved registers, PRIMASK, SP, and stop PC."
+  ],
+  "limitations": [
+    "The registration calls are not executed; callback-present, concurrency, and physical behavior remain outside scope."
+  ],
+  "candidate_scope_md_sha256": "9cd5abb19477c04fd5fb5e8b9e968cfd0b84c1c7bb4e9bd5289df9edb9f5873e",
+  "candidate_results_json_sha256": "44f5f2478e8111fb1112e938a75030e40dc2f9f394777e40ca42471456b3b5fb",
+  "candidate_replay_py_sha256": "3ef48f3b017f83c2785f21560ac2571b375b1f70b8fc82cfbe63cd51677c5f33"
+}

@@ -1,0 +1,19 @@
+{
+  "review_id": "9061",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-transport-error-record-callback-map-9054/001",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_receipt_sha256": "bb1b5ddb20c73291b7eb0e9783aa2febab0a27da5a266875119597bb070b9726",
+  "candidate_instructions_json_sha256": "cf9c5cb4f4b81b983afffbaceaafb3c31cc88bec16cd651a9dc905189de53f25",
+  "candidate_references_json_sha256": "edd1a6451e8ca151a3d7ae7863a16a9173e584afb536e99e64823bca2200b4e0",
+  "candidate_replay_py_sha256": "54da0917e0e3e681d7526d5d9b7428dc3b6d07999cecd1e1a5a1ed7413be9071",
+  "candidate_pseudocode_md_sha256": "826e0db4ef64baf4d498beea60a655caa3e1aa99bfbd9b03fe627055fc13356e",
+  "checks": [
+    "All 30 instruction bytes match the locked image, and both literal addresses resolve to the recorded error-word and callback slots.",
+    "Input error zero bypasses all global accesses. Nonzero stores the input error, checks callback slot, then reloads both error value and callback pointer before indirect call. Return is saved entry R7 via POP, so child result is discarded."
+  ],
+  "limitations": [
+    "Callback code and error-word semantics are unresolved; slot is unchecked after the null test and can change before reload. No physical transport, concurrency, or whole-firmware claim."
+  ]
+}

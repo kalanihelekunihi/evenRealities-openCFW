@@ -1,0 +1,21 @@
+{
+  "review_id": "9031",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-handler-registration-category-dispatch-map-9024/001",
+  "candidate_receipt_sha256": "ff12cea5df71907d37e466940f545c9e4f36c441097eb181161bca9a688c46f3",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "checks": [
+    "All 176 mapped Thumb instruction bytes across the three ranges match the pinned image; all listed literal words match their source addresses.",
+    "The category dispatcher rereads packet+2 for ordered thresholds 128, 96, 64, 32, then uses the corresponding callback/table slot; only the >=128 callback path checks null and reloads the callback before BLX. Callback return is discarded through saved-entry R7.",
+    "The registration path stores the event id and performs ordered external registration calls; the callback installer stores global+88, obtains candidate through 530D4C, truncates to low16 then subtracts four, compares signed against the fresh threshold, and calls reporter only on the less-than branch. The setter at 51C8 stores global+92 and returns with R0 unchanged."
+  ],
+  "limitations": [
+    "Meaning of external helpers and callback arguments is not established by this map. Table entries other than explicitly guarded callbacks are dereferenced without null checks.",
+    "Private partial evidence only; no concurrency, physical behavior, or whole-firmware completeness/admission claim."
+  ],
+  "candidate_instructions_json_sha256": "77e7d0a0b6ea558b45df3f9abbdc32f6b5a134e2d855e95a27fb1319e5f1ae6e",
+  "candidate_references_json_sha256": "7683c88fcdaf3d9d7395aa376ad324c14dbb6412a6cac3960acff5f543a24934",
+  "candidate_replay_py_sha256": "e7f1eb9b133f1a9eba760aeedfbf94f104579cd6cdfb0ec010ca69eeb99d1c5f",
+  "candidate_pseudocode_md_sha256": "63b9fcab141b3cfda64e90b65c3f8f8421f7ae6c198c39451e8ab13d5019ae38"
+}

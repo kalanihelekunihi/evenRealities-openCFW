@@ -1,0 +1,21 @@
+{
+  "review_id": "9059",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-ring-produce-consume-original-fixture-9052/001",
+  "candidate_receipt_sha256": "2fb84e498ab798a1a169a943ad7c2b81ad2c04f3358447f6accc6cbfd8f2f112",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "independent_replay_receipt_sha256": "d3189ef555d6901c79eb97467d52981037bf0f55b6cb2ff81a5d06cbdb81cde1",
+  "independent_replay_output": "/tmp/independent-P2-9059",
+  "independent_python": "/Users/kalani/.local/share/opencfw/venv/bin/python",
+  "checks": [
+    "Fresh isolated replay passed all 576 original producer/consumer cases using original PRIMASK gate instructions and an independent state/buffer oracle.",
+    "The checks cover copied bytes and ring indices/counts, null-buffer advancement, capacity/rejection paths, preserved record state, returns, and PRIMASK/SP/PC assertions across the supplied case set."
+  ],
+  "limitations": [
+    "Synthetic ring state and SRAM only. No concurrent producer/consumer, malformed layout, physical interrupt timing, or transport delivery claim."
+  ],
+  "candidate_scope_md_sha256": "371f74f5a8ab145b80dd0d77678289a102f2fbe4a7120069f2477c281fc0a990",
+  "candidate_results_json_sha256": "5722681f14d4e5a0c35b541d82e8cf51ddce780c1dfdfa4936cdcd7ea24c5539",
+  "candidate_replay_py_sha256": "f564be731ffe6df64f1e726ad6728467e61f38556bc388b30a51e4dba4b0bf62"
+}

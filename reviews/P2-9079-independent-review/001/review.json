@@ -1,0 +1,19 @@
+{
+  "review_id": "9079",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-direct-packet-command-wrappers-map-9072/001",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_receipt_sha256": "0029fc539c396fe52cb1c8b684321e3258f9c6a3027f79f0d354d4c16eff801b",
+  "candidate_instructions_json_sha256": "af7587727b48bb8e721262bd5f0aa8e56dc86dd736d6a07c825d9371ce1cfa43",
+  "candidate_references_json_sha256": "288cd355b9f89209a6a04a7d5dd317fc3d2eb9f644603d86e9dc76801890d654",
+  "candidate_replay_py_sha256": "8bbf92b32306eac13a39448c66f6c3d4c40bbb27442ae3393b4ad0057eb227a7",
+  "candidate_pseudocode_md_sha256": "1d1b7ab0699b7c6c6bf9ba486fd01929e9972f90450e4c839652070b5cab3925",
+  "checks": [
+    "All 90 instructions across the three wrapper extents match the pinned image; all literal references are exact.",
+    "The first wrapper calls three child addresses in order then returns saved entry R7. The second uses a record pointer and sets byte+26 before a child call, returning that child R0. The third requests a 0x406-byte object with size 3, conditionally writes payload bytes +3..+5, invokes the child, and returns saved entry R3 in R0."
+  ],
+  "limitations": [
+    "Child function contracts, allocation behavior, release/reset semantics, and packet ownership are not inferred. No pointer validation, concurrency, physical, or whole-firmware claim."
+  ]
+}

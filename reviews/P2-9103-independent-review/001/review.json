@@ -1,0 +1,21 @@
+{
+  "review_id": "9103",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-expanded-command-family-contiguous-audit-9096/001",
+  "candidate_receipt_sha256": "5f2b12b9c5e19636aec10faa6da2e8c6da420af67d62819a5391661c7dfc23d5",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "independent_replay_receipt_sha256": "38da1e3a20c9529579460b309517202c2f028aeded03fe06caf9749758c2cdf6",
+  "independent_replay_output": "/tmp/independent-P2-9103",
+  "independent_python": "/Users/kalani/.local/share/opencfw/venv/bin/python",
+  "checks": [
+    "Fresh isolated audit replay verifies exact contiguous tiling of 0x52AE38..0x52B3D2: 1,434 locked instruction bytes across ten maps, no gaps/overlaps.",
+    "Each instruction byte, source identity, and map hash was checked; the separately mapped copy helper at 0x4D293C remains outside the audited interval."
+  ],
+  "limitations": [
+    "Byte tiling alone does not establish semantic completeness, external-child behavior, global coverage, C completeness, or admission."
+  ],
+  "candidate_audit_json_sha256": "2cea5f3d0fbdf6c901030be57315364feff7e3b4983454232aea0bdeb9d4efca",
+  "candidate_scope_md_sha256": "f676da467854890a8da7f5cd476725f35ed5633ff701d23aa4c7bc6b87dc510a",
+  "candidate_replay_py_sha256": "332be9581a5b7681f3c633b7dc23ca967ee25851279e98dc1d584320a456f871"
+}

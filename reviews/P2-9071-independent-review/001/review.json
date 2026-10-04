@@ -1,0 +1,21 @@
+{
+  "review_id": "9071",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-ring-family-contiguous-audit-9064/001",
+  "candidate_receipt_sha256": "2c7470689536ac44e2f2f1b8bbec8d381a0f432f29d13b2a5e8aef62a8d38625",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "independent_replay_receipt_sha256": "985aa23fe98e91a663cd177af2d3503d59d6d113c6634ea837995aa3c203467c",
+  "independent_replay_output": "/tmp/independent-P2-9071",
+  "independent_python": "/Users/kalani/.local/share/opencfw/venv/bin/python",
+  "checks": [
+    "Fresh isolated audit replay confirms three pinned maps tile exactly 0x53006C..0x530186: 282 instruction bytes, no gaps or overlaps. Every instruction address/byte and per-map hash was checked against the locked input.",
+    "The audit is limited to the selected initializer, ring producer/consumer, and transport-result wrappers; its accounting distinguishes byte coverage from semantic completeness."
+  ],
+  "limitations": [
+    "Contiguous tiling does not establish external helper closure, CFG completeness, whole-firmware coverage, C completeness, or admission."
+  ],
+  "candidate_audit_json_sha256": "a3f74b377cfc82bbc7def2cfe98e3bc37c59db0a37183ab388f575b4667843f4",
+  "candidate_scope_md_sha256": "21cb4efea03a42d1a279781e1ebb501da8559a76d054fc16e3d29fe6a203c9ba",
+  "candidate_replay_py_sha256": "da7622031c62c5d58e472d58f3f47b175b3d830ead88f4638a77883a50b21d4e"
+}

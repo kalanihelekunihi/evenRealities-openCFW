@@ -1,0 +1,19 @@
+{
+  "review_id": "9057",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-saved-mask-interrupt-gate-map-9050/001",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_receipt_sha256": "c3ed4877610fd5f692dbe18f309b95f8690a034e4ea6f0eac63296801f10e1cf",
+  "candidate_instructions_json_sha256": "727ac3db63a75b94f5d756cea82ff21f9d911a5ae23f2034f7e72bce35ffeab6",
+  "candidate_references_json_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "candidate_replay_py_sha256": "6a8cc8ae73b4bdb37562554ada0e8d256d4f1713e6c0be8749bf56803ae72a86",
+  "candidate_pseudocode_md_sha256": "2fc5b01288ede7a24f7d8a80d4d19bc5e4342fe1474f69b835a735db893ef56c",
+  "checks": [
+    "The four instructions in 0x473940..0x47394A match the pinned image: MRS PRIMASK to R0, CPSID i, BX LR, followed by a separate BX LR leaf.",
+    "The first leaf returns the observed prior PRIMASK in R0 while interrupts remain masked; the second leaf returns incoming R0 unchanged. Ring callers restore PRIMASK from the saved first-leaf result."
+  ],
+  "limitations": [
+    "This describes architectural instruction/register effects only; it does not prove physical interrupt delivery or concurrency behavior. This helper is distinct from the nesting-byte gate."
+  ]
+}

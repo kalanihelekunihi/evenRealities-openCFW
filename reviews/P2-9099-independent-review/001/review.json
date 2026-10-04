@@ -1,0 +1,20 @@
+{
+  "review_id": "9099",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-command201a-2018-2002-2003-builders-map-9092/001",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_receipt_sha256": "0a191f2b8cafc5c45484aaf20d08f2a1a18f56add6b31d844131aa96cb40598b",
+  "candidate_instructions_json_sha256": "f4faadad6b1a0ead5b2fb65cf369f597b0beb76f325bc81bceea5dd7ff481632",
+  "candidate_references_json_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "candidate_replay_py_sha256": "d54ca3c7583bfeae4b4a9e1480e08834ad26b633cb73f9cd4a4af5da107ef965",
+  "candidate_pseudocode_md_sha256": "d26a6597b6f3702877d4f69020bdf54ddd76bd987d4623b9856dd4bc75d8d932",
+  "checks": [
+    "All mapped instructions match the pinned source.",
+    "The 0x201A builder writes a little-endian low16 field at payload+3/+4 then copies 16 bytes at +5; null allocation skips source read and returns zero, while success returns dispatch-child R0.",
+    "The three zero-payload wrappers call allocation with commands 0x2018, 0x2002, and 0x2003, conditionally dispatch on nonnull pointer, and return saved entry R7 regardless of child status."
+  ],
+  "limitations": [
+    "Allocation, copy, dispatch, and ownership contracts remain unresolved. No source validation, concurrency, physical transport, or whole-firmware claim."
+  ]
+}

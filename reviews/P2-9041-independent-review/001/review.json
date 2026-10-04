@@ -1,0 +1,20 @@
+{
+  "review_id": "9041",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-destination-lookup-queue-count-accessors-map-9034/001",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_receipt_sha256": "a6b187e2b8744bd9cfb240b5c11961aa3a29a9e54a1d4b1fc8af32b9a3e8fc53",
+  "candidate_instructions_json_sha256": "af6466072813c9147c539e621503979ca18e9d4aba24abc95f30214ef6eb2f95",
+  "candidate_references_json_sha256": "17055f79c6255c52b55a830294a968681e4e19f26c4bd5f0b533ad284d63293d",
+  "candidate_replay_py_sha256": "0862fa3a5d2175832dcede8245750ad449ae94f9980e03fddd875e5582bbebd3",
+  "candidate_pseudocode_md_sha256": "ba96de30e6ec6bcd889ae557f6d1c095a7daa23dafc0161b742673236d5d44ee",
+  "checks": [
+    "All 126 instruction bytes in the three mapped extents match the locked image, and five literal references resolve to the recorded common global base.",
+    "The lookup scans at most three records of stride 28, compares low-16-bit keys, returns the first matching record even for key 0xFFFF, and tests no validity/active flag. High input bits are ignored.",
+    "Accessors read the specified halfwords/byte; LDRD returns two words after clearing bit 1 only from the first. Queue count traverses fresh node links under the mapped lock calls, returns low16 count via R0, and restores entry R3 into R1 on return."
+  ],
+  "limitations": [
+    "No malformed/cyclic list or pointer validity checks are established; queue traversal has no count bound and can fail to terminate for cycles. Lock/preemption semantics and field meanings are not inferred."
+  ]
+}

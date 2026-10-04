@@ -1,0 +1,21 @@
+{
+  "review_id": "9109",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-backward-byte-fill-boundary-fixture-9102/001",
+  "candidate_receipt_sha256": "38bb3ab134cec07e0d3b289fd6653842e0ab5013838daca20ca40c41d2ab9d15",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "independent_replay_receipt_sha256": "0401f53580948aad65fe454dbf4e12ff08f75f90bc7e68d71b29b14e2effca07",
+  "independent_replay_output": "/tmp/independent-P2-9109",
+  "independent_python": "/Users/kalani/.local/share/opencfw/venv/bin/python",
+  "checks": [
+    "Fresh isolated replay passed all 800 original-byte fill cases spanning four destination alignments, 40 lengths, and five fill values.",
+    "The independent full-buffer model and sentinels matched the backward fill extent for each case; returned pointer/value, preserved registers, SP, and PC checks passed."
+  ],
+  "limitations": [
+    "Only the selected bounded test lengths/values and valid synthetic memory are covered. Huge-length wrap, invalid pointers, MMIO, concurrency, and generic forward-fill equivalence are not established."
+  ],
+  "candidate_scope_md_sha256": "0645614351b5319666c86189a271cc5a2dd32294dcbf61712bff9df953363c18",
+  "candidate_results_json_sha256": "3e8869727d15fc512f50d92917c22472d45221abaa74755344c99f7ac68b5f9a",
+  "candidate_replay_py_sha256": "057bff2de0fb75607d2aa5d90f0e1d5fd72a9078c49e67386f461e2504970e9f"
+}

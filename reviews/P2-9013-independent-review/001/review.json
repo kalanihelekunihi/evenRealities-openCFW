@@ -1,0 +1,19 @@
+{
+  "review_id": "9013",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-descriptor-table-initialization-fixture-9006/001",
+  "candidate_receipt_sha256": "198347a4c7a53556fa1f805569d2ad8985bc9f05b318ea727a6ef5495d66803d",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "checks": [
+    "The packet receipt pins the expected firmware and current scope, replay, and result hashes; its recorded 24 original-instruction cases cover three fill patterns, four event-byte values, and both mask inputs.",
+    "The expected memory model records 0x785250 at other+60 as the published flash-table pointer; the callback slot at other+88 is distinct. The four table words at 0x785250 match the pinned image bytes."
+  ],
+  "limitations": [
+    "I could not independently rerun the fixture because Unicorn is unavailable in this environment. I checked the recorded results and replay logic, so this does not claim a fresh emulator replay.",
+    "Synthetic SRAM only; no concurrency, physical behavior, or broader initializer semantics."
+  ],
+  "candidate_scope_md_sha256": "be866626967a589edc681d7e945c085aace774a6bf3960c3b15c8ed4491c07e9",
+  "candidate_results_json_sha256": "f881e786692e2b6304b527acd56bdf86303fe7bcd7a2e019e0cad63a3557ef78",
+  "candidate_replay_py_sha256": "298c72a17c367546ca138ec2e8035f6cbeae13cb94084c2bdb6677f1b367cd9d"
+}

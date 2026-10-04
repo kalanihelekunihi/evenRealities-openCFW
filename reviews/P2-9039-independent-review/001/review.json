@@ -1,0 +1,19 @@
+{
+  "review_id": "9039",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-response-queue-flow-accounting-map-9032/001",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_receipt_sha256": "76f9164d3f47ce9a8241e976b29705ea2c2ca381a2c3f6278e03798b89a53e00",
+  "candidate_instructions_json_sha256": "6031e7ab3f81d43520f8fbe0f03ad6530249a3385da7a6126def3e1c07099850",
+  "candidate_references_json_sha256": "2c5239d6986675e2de884c5d5d82a175f1d8cfea6f5eb949c40b6a8b1b3db5c0",
+  "candidate_replay_py_sha256": "8e9b2ab505dca5f495cb8e8447bf23df95d567fae6e325e79268cd6c1eb6feba",
+  "candidate_pseudocode_md_sha256": "0b9605b1797189114ece17902933b23921b871463acd4bc3ff70d1cc22041ac1",
+  "checks": [
+    "All 152 instruction bytes at 0x52AD04..0x52AD9C match the pinned image byte-for-byte.",
+    "The helper enqueues before updating accounting; the signed comparison uses low16(length)-1 and low16 unit size. Threshold and callback inputs are freshly read, and the function returns saved entry R3 through POP-to-R0."
+  ],
+  "limitations": [
+    "Queue child, threshold policy, and callback contracts remain unresolved. Signed/truncated arithmetic is preserved as instruction behavior, not generalized to arbitrary input sizes."
+  ]
+}

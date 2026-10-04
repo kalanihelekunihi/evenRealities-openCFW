@@ -1,0 +1,21 @@
+{
+  "review_id": "9083",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-command-state-initialization-fixture-9076/001",
+  "candidate_receipt_sha256": "81f6ec590e5cd6c289d5d0ddde0bd968d7779d0123b343c4874da4a69f7e39f9",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "independent_replay_receipt_sha256": "be64e6b7883b271bf1cce333834ec46f87f2bc3c18f925b270d6496406afa09f",
+  "independent_replay_output": "/tmp/independent-P2-9083",
+  "independent_python": "/Users/kalani/.local/share/opencfw/venv/bin/python",
+  "checks": [
+    "Fresh isolated replay passed all 12 original initialization cases, comparing the full 32-byte record and all returned fields.",
+    "The test confirms fresh event-byte reads populate the expected record fields and the helper returns the record pointer while preserving register, SP, and stop-PC expectations."
+  ],
+  "limitations": [
+    "Only supplied stable synthetic inputs are tested. No concurrent event mutation, record lifetime, or physical behavior is established."
+  ],
+  "candidate_scope_md_sha256": "59ba3e01cdc6f60fc5805bdfe6fc8957a6f1a4b2bf55e5d6fd5fde3ab0594d3b",
+  "candidate_results_json_sha256": "d534b8e621ca8fbc96723d02afb489f83fa254e65d404d172f3192b073814157",
+  "candidate_replay_py_sha256": "8a60da2ee0467a55c72d7fec763f793194af60364c0d69ee06f0ef198605fe5b"
+}

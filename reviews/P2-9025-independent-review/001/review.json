@@ -1,0 +1,20 @@
+{
+  "review_id": "9025",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-buffer-copy-format-response-map-9018/001",
+  "candidate_receipt_sha256": "d5b19b8f690b86d51a81198e2957f93b3b6ace5225ce5235d640ea34de9871ca",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "checks": [
+    "All instructions across 0x530E64..0x530F08 match the pinned image byte-for-byte; the pool literal reference matches its locked word.",
+    "The copy path truncates allocation size (fresh length+8) to 16 bits, then separately reloads and passes untruncated length+8 to the copy helper. These values can differ at high lengths.",
+    "Type 6 writes output halfword at offset 18; non-6 writes at offsets 16 and 18 using separately reloaded record bytes. Transfer mode clears record+8 before formatting and downstream calls. The function returns the final child R0."
+  ],
+  "limitations": [
+    "Allocation, copy, scheduling, dispatch, pointer validity, ownership, and concurrent mutation behavior are unresolved. No generic buffer/API contract is claimed."
+  ],
+  "candidate_instructions_json_sha256": "f1b3899476d4e62b2339391a99da31c73f774ad46f508d3415fbffd5d0a88fa3",
+  "candidate_references_json_sha256": "6fa67353d41352236a5e5e98f8ac5c0fb3c179c7eafe8e3fdcedbf5f3f1860a0",
+  "candidate_replay_py_sha256": "6b3d491d629515cbc7e0eaa5f0ac5042d5a81a77b0c15fdebd3d491eeb7d03bb",
+  "candidate_pseudocode_md_sha256": "ae31d035a2e2bbb5ce43b1290dc96b746bf063f8218b2f01842ea9649944774f"
+}

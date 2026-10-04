@@ -1,0 +1,20 @@
+{
+  "review_id": "9095",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-command2024-2025-2026-builders-map-9088/001",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_receipt_sha256": "81a3dccad016f5eddf3ac99ac60d94aa69e712b2c6331ae925b5001d8360fb49",
+  "candidate_instructions_json_sha256": "20f1306e6bb5ff1f0c8fe0fee2ef7e4bc67bd4db97af3187faaab7c657581c10",
+  "candidate_references_json_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "candidate_replay_py_sha256": "06fe539e44dfa723f6744373aa0e8a3132c5aa4fbc04329dcd9e2081bd59c2ca",
+  "candidate_pseudocode_md_sha256": "d18b1d2a3ce262c26f6193eaa60bd6531cc7562b66559bc10e9b8c739bab51a0",
+  "checks": [
+    "All 144 instructions across the three builders match the locked image.",
+    "Builder 0x2024 writes two low16 fields into a four-byte payload and returns saved entry R3; builder 0x2025 creates a zero-payload packet and returns saved entry R7. Both dispatch only after successful allocation.",
+    "Builder 0x2026 requests 64 bytes, returns zero on null allocation before reading either source, otherwise copies two consecutive 32-byte spans to payload offsets 3 and 35 in order, dispatches, and returns child R0. The order preserves possible source/output overlap effects."
+  ],
+  "limitations": [
+    "No source validation, snapshot behavior, or copy-helper contract beyond the mapped calls. Overlap, concurrency, allocation, ownership, and physical transport semantics are unresolved."
+  ]
+}

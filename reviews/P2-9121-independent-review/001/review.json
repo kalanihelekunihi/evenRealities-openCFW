@@ -1,0 +1,20 @@
+{
+  "review_id": "9121",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-command1009-1001-1405-builders-map-9114/001",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_receipt_sha256": "706646ad8b128e14802f00eaf86c652bec98c35450ab2fe2069d27a0497807e5",
+  "candidate_instructions_json_sha256": "0f8d4a5f9310443ad7d4b120450e7d915477aa1be7a9bf96071474e9caa89d67",
+  "candidate_references_json_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "candidate_replay_py_sha256": "d3774d80c4bdf9812a073c09732ec494eb988073254b92b47bc965f678e8bf49",
+  "candidate_pseudocode_md_sha256": "13c26d0626be7515e633937917c526a17e19243bea0f1bbde3f042d93fc5f291",
+  "checks": [
+    "All 94 instructions match the pinned image.",
+    "The two zero-payload wrappers use commands 0x1009 and 0x1001, conditionally dispatch on nonnull allocation, and return saved entry R7.",
+    "The command 0x1405 builder requests two payload bytes, writes low16(field) little-endian at offsets 3 and 4, dispatches when nonnull, returns child R0, and returns zero on null."
+  ],
+  "limitations": [
+    "No pointer or copy behavior occurs in the mapped builders. Allocation and dispatch contracts remain unresolved; no concurrency, physical, or whole-firmware claims."
+  ]
+}

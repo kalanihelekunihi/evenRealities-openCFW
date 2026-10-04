@@ -1,0 +1,21 @@
+{
+  "review_id": "9129",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-command-family-literal-data-9122/001",
+  "candidate_receipt_sha256": "704dc7b285f2bb5b598223ebdf59e17463ce405db614f11bff4629f1f4a13d52",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "independent_replay_receipt_sha256": "59840b692dd9aeda2d1237b96cf59d7846bd3336f5a7efd9a6023b91c8cbe3dd",
+  "independent_replay_output": "/tmp/independent-P2-9129",
+  "independent_python": "/Users/kalani/.local/share/opencfw/venv/bin/python",
+  "checks": [
+    "Fresh isolated replay confirmed all 12 bytes at 0x52B6B0..0x52B6BC and their three little-endian words through direct PC-relative consumers from maps 9074, 9072, and 9116.",
+    "The two preceding bytes 0x52B6AE..0x52B6B0 remain explicitly unclassified; they are not promoted to padding or no-op code."
+  ],
+  "limitations": [
+    "This is local literal/data evidence only. It does not resolve broader literal pools, code coverage, whole-firmware semantics, or admission."
+  ],
+  "candidate_scope_md_sha256": "51f9052ba6105855a479ec0c8d67e7a57620668ebf637945198f725d76dc4b87",
+  "candidate_data_json_sha256": "713217bc4821fb9c88248d266ccf17e4be5f3bd29e844d7063151b4311e92336",
+  "candidate_replay_py_sha256": "7134ddfd300c985fee92e47bfbef3bbf4be9f9528f5ae5751793a0841bddc87f"
+}

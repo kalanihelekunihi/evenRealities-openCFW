@@ -1,0 +1,20 @@
+{
+  "review_id": "9055",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-ring-produce-consume-map-9048/001",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_receipt_sha256": "30538579872cb33a3666c4150d62636fba05c4902b95e63607bdf9f9c26f9b8b",
+  "candidate_instructions_json_sha256": "583809a0f3070387e13ce6a998322dcfeff72ee16502a9f377aa8c6fcec5fefe",
+  "candidate_references_json_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "candidate_replay_py_sha256": "26330e2a95fda68a922c5410bcbac6f0cbd63f8a0aca632bb6c628041fbb9c6c",
+  "candidate_pseudocode_md_sha256": "78263f23e797a8723657ecf22afef207f4d94387686b7e4c8f7bef2db6830d26",
+  "checks": [
+    "All 184 instructions match the pinned image byte-for-byte.",
+    "Producer and consumer compute bytecount as low8(count*32), gate around the operation, and compare available/used bytes before modifying state. Producer\u2019s null-buffer path still advances write index and used count; consumer\u2019s null-buffer path similarly advances read index and reduces used count.",
+    "Each copied byte is handled with fresh state/index/storage reads. Index updates wrap to 32 bits then reduce modulo capacity using UDIV/MLS. Both paths restore PRIMASK from the saved gate result, return low-byte success, and leave the saved prior mask in R1."
+  ],
+  "limitations": [
+    "Malformed state, capacity zero, storage validity, aliasing and concurrent producer/consumer effects are not resolved; arithmetic wrap behavior is preserved from the code. Gate semantics and physical transport are not claimed."
+  ]
+}

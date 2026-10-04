@@ -1,0 +1,19 @@
+{
+  "review_id": "9033",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-default-handler-tables-noop-map-9026/001",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_receipt_sha256": "9a5b32991b854b5b9984acca6c8dd6c0c6d72ddefed11494f190547fad732575",
+  "candidate_instructions_json_sha256": "2af8f5d3d8b5ed7fd77d3ea9cd8aff79119e20729f066fd7194ab6115a748df6",
+  "candidate_tables_json_sha256": "9d171e376ef984e17a9853d7f2af40416611b357bdea60f81379e413c2159a64",
+  "candidate_replay_py_sha256": "c4ace7ae6ac22478bb86fc9c0f4c27af5dd6d43ab983123396699c301924e92b",
+  "candidate_pseudocode_md_sha256": "a84ea1e6cf3eff150d7fec46075851bcd6acefa86264df55b13c990d5e1b0e76",
+  "checks": [
+    "The two four-pointer tables and eight BX LR bytes match the pinned image; each default table entry points to a two-byte no-op return stub.",
+    "The packet separates 32 table-data bytes from eight code bytes and distinguishes the high-category direct callback slot (+76) from the category tables."
+  ],
+  "limitations": [
+    "Only the currently published default targets are classified. Replacement behavior, concurrency, and whole-firmware coverage are not established."
+  ]
+}

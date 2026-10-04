@@ -1,0 +1,20 @@
+{
+  "review_id": "9027",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-response-dispatch-index-codec-map-9020/001",
+  "candidate_receipt_sha256": "c6becd1027cb31f1e6e6dd4da4a9505fe12cfe6715e47d90ebf877b10cdab9ee",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "checks": [
+    "The disjoint dispatcher and codec instruction ranges match the pinned image byte-for-byte; the dispatcher literal reference resolves to the recorded global.",
+    "Dispatch index zero calls the external zero-index route; nonzero reads callback global+84, tests it, then reloads the slot for BLX. It returns saved entry R3 regardless of child status.",
+    "The pair encoder computes low16(3*low8(a)+low8(b)); decoder uses signed division by 3 on low16 input, writes remainder byte before quotient byte, and returns the full quotient. Aliased outputs therefore retain the quotient byte."
+  ],
+  "limitations": [
+    "External zero-index route and callback contracts are unresolved. The byte codec is not shown to be a universal inverse for unrestricted inputs; output pointers are unchecked."
+  ],
+  "candidate_instructions_json_sha256": "e73b6eeead2a2849701368e2d8621b7065b38e59b8f048d893a249ac265ce076",
+  "candidate_references_json_sha256": "567e8643dda5cd0bc37ac7f7057047d1cc7b3eeefe06d3b86303c92a0d19421d",
+  "candidate_replay_py_sha256": "9a7e42bb866a8ff22fa24900b472cd815cf39c39ceab043b4c6e1851aff6a7e9",
+  "candidate_pseudocode_md_sha256": "507343849f3134f62ea73f5f9e1478c1e30fe607b715c5b7bdb04ff73ab5893d"
+}

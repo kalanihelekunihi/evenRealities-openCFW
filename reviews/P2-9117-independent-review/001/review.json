@@ -1,0 +1,21 @@
+{
+  "review_id": "9117",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-expanded-command-family-contiguous-audit-9110/001",
+  "candidate_receipt_sha256": "14f7c317615292304a14596c290aac5951bbaf709b98ca1eb73847a18b2da2a3",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "independent_replay_receipt_sha256": "d247c5cfe55ce0c3bb7de5de5b563f3c01626855e6f4e16b7493589b6e347508",
+  "independent_replay_output": "/tmp/independent-P2-9117",
+  "independent_python": "/Users/kalani/.local/share/opencfw/venv/bin/python",
+  "checks": [
+    "Fresh isolated audit replay confirms exact 1,898-byte instruction tiling of 0x52AE38..0x52B5A2 across 14 maps, with no overlap or gap. Instruction bytes and packet hashes match the locked image.",
+    "The audit explicitly excludes the external copy/fill helpers at 0x4D293C..0x4D2974 and keeps byte tiling separate from semantics."
+  ],
+  "limitations": [
+    "No helper closure, whole-firmware coverage, C completeness, or admission is inferred from this span audit."
+  ],
+  "candidate_audit_json_sha256": "2a4a44378c75038e326fde6867293f52ac3a5fad339bfdbae8b8c478732444c6",
+  "candidate_scope_md_sha256": "d1b9e024a3de7f575baab872dbcfa785e1cfcbd9e4107d6100b88809bdc46204",
+  "candidate_replay_py_sha256": "f291cd53566a59a606b33d6e78fffd177dc28715449ef90770ff7592ae91fb3d"
+}

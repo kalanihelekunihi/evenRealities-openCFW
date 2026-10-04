@@ -1,0 +1,20 @@
+{
+  "review_id": "9077",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-packet-completion-queue-consumer-map-9070/001",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_receipt_sha256": "1d23d611c97e74c659b1c097e4a88aa459528917a1c8c2390e2c6e0c263f5d05",
+  "candidate_instructions_json_sha256": "c80a64756360d3fa78f1d02e4571e194ba54142dc393e720fdd501898ebce2a9",
+  "candidate_references_json_sha256": "a8ec2b8478f3d430836c0dbc097844541a1ab1b0d79be6694924c9985623be88",
+  "candidate_replay_py_sha256": "60fe32e36f3d122115be4e67c7a1585dd6dad5d8a50b4ab32103ff7822e8dce9",
+  "candidate_pseudocode_md_sha256": "c336f0e03aeee43f2c112c1ecfdae096b5fd8290cc0f5eb31f7a7bfaee6e98a6",
+  "checks": [
+    "All 172 instructions across 0x530C88..0x530D34 match the pinned image; all literal references resolve to locked words.",
+    "Enqueue compares low-byte type against 4 and 2 but both branches join the enqueue call, so no type is rejected in this range. It reads event id afterward and invokes signal; return is the latest child R0.",
+    "The consumer routes dequeued packets according to packet/eventmask and queue fields. The stack slot seeded from entry R3 is reused as the queue-pop ID output, so its low byte may be overwritten; address getter at 0x530D30 is a separate function."
+  ],
+  "limitations": [
+    "Queue child ownership, release semantics, and unknown IDs remain unresolved; not every branch establishes deallocation. No queue validity, concurrency, physical signal delivery, or whole-firmware behavior is claimed."
+  ]
+}

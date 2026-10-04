@@ -1,0 +1,21 @@
+{
+  "review_id": "9013",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-descriptor-table-initialization-fixture-9006/001",
+  "candidate_receipt_sha256": "198347a4c7a53556fa1f805569d2ad8985bc9f05b318ea727a6ef5495d66803d",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "independent_replay_receipt_sha256": "0a25c30cb315134d9e66512247120dafca05418b1b022e063698a6a1d9410573",
+  "independent_replay_output": "/tmp/independent-P2-9013-r3",
+  "independent_python": "/Users/kalani/.local/share/opencfw/venv/bin/python",
+  "checks": [
+    "The corrected independent replay ran 24 original-instruction cases and passed exact 440-byte descriptor and 100-byte adjacent-area comparisons, including untouched bytes.",
+    "The fresh replay explicitly treats other+60 as a published flash-table pointer and keeps callback slot +88 distinct. Final R0/R1/R2/R3, R4-R6, SP, PC, and PRIMASK assertions passed."
+  ],
+  "limitations": [
+    "Synthetic SRAM only; no concurrency or physical claim."
+  ],
+  "candidate_scope_md_sha256": "be866626967a589edc681d7e945c085aace774a6bf3960c3b15c8ed4491c07e9",
+  "candidate_results_json_sha256": "f881e786692e2b6304b527acd56bdf86303fe7bcd7a2e019e0cad63a3557ef78",
+  "candidate_replay_py_sha256": "298c72a17c367546ca138ec2e8035f6cbeae13cb94084c2bdb6677f1b367cd9d"
+}

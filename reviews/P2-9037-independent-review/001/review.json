@@ -1,0 +1,19 @@
+{
+  "review_id": "9037",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-zero-index-response-header-map-9030/001",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_receipt_sha256": "af66150afcf8dc1bf6c43a46c7abd65694ce0fd0be11ab91c73775bce9ee8acc",
+  "candidate_instructions_json_sha256": "6b038c1293cc92933e7e10abbb1e590d95d41709a42575e95a0811854533ccf4",
+  "candidate_references_json_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "candidate_replay_py_sha256": "7ef3a2bcb5d8bc8d85f4fd7e61988c451bd7b75624b28f8b83ec086a170fb3a2",
+  "candidate_pseudocode_md_sha256": "2599784313d9111d14022255a5bb149e21bd07141aa4af4a72e40a0ea1b2067e",
+  "checks": [
+    "All 74 instruction bytes in 0x530BBC..0x530C08 match the pinned image; mapped literal words match their source locations.",
+    "The header formatter writes eight bytes in the shown order, including low-16 length+4 split across bytes 2\u20133, then original low-16 length, then type. It calls 52AD04 and returns that child R0. The wrapper calls 52AEC6 and returns saved entry R7 through POP-to-R0."
+  ],
+  "limitations": [
+    "No length/pointer validity checks are shown; bytes after the eight-byte prefix are not directly changed by this helper. The downstream helper contract and wrapper meaning remain unresolved."
+  ]
+}

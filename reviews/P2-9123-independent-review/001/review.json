@@ -1,0 +1,20 @@
+{
+  "review_id": "9123",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-command-queue-drain-reset-map-9116/001",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_receipt_sha256": "1855e184767bc05ff40156ad49ae05a219145f2f0be609ee9c0a4b94eea5bce4",
+  "candidate_instructions_json_sha256": "65541d66d809483fd07aac7ae380125aff0b84b4898b889685e20d78a4ec04c5",
+  "candidate_references_json_sha256": "0a31262bc8f41f0f1b6e44bbd96a5049f3e6df5502d0c8861072a956d071c898",
+  "candidate_replay_py_sha256": "d6f022d98f4c767293afef73bf91c342f4b15aa87d44b04fb42006763f9aeb65",
+  "candidate_pseudocode_md_sha256": "057bf59b3c386197728e246c9cf2b87b8294ece714f53e74633af5f958b135ac",
+  "checks": [
+    "All 74 instruction bytes match the pinned image.",
+    "The drain loop dequeues until null, releasing nonnull packets, then sets record+26=1. Its return restores saved entry R2 into R0, with its low byte potentially overwritten by the queue-pop ID output; empty dequeue preserves that byte under the separately reviewed child behavior.",
+    "The wrapper overwrites byte SP+2 within the saved R5 slot with 20, calls the callback with the stack pointer and callback word, drains, then creates/dispatches command 0x0C03. Its unusual POP returns stack words to R0-R2 rather than restoring R5-R7; callback stack mutation can alter those returned values."
+  ],
+  "limitations": [
+    "Callback is not null-checked, and its stack effects/ABI are not proven here. Command meaning and reset/error semantics are not inferred; no concurrency, physical, or whole-firmware claim."
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "review_id": "9021",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-pending-field-original-fixture-9014/001",
+  "candidate_receipt_sha256": "e57d7589a37584894fab534c4ef8e3fd7b0aef20634e8240b089c4c235439db9",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "independent_replay_receipt_sha256": "1f08edba4908142f919a11a76d8d8b41380d511935d58ca5be68d12bc954e0e4",
+  "independent_replay_output": "/tmp/independent-P2-9021-r2",
+  "independent_python": "/Users/kalani/.local/share/opencfw/venv/bin/python",
+  "checks": [
+    "The independent replay ran 96 original-byte cases and passed full 64-byte descriptor comparisons; only halfword+42 is cleared when initially nonzero, while adjacent +44 and all other seeded bytes match expectations.",
+    "Entry R3 return, preserved R4-R7, PRIMASK, SP, and stop-PC assertions passed for both masks."
+  ],
+  "limitations": [
+    "Callback slot was null in all cases. Callback-present behavior, concurrent mutation, and physical effects remain outside scope."
+  ],
+  "candidate_scope_md_sha256": "947b4a8afb90784343a51fcbb8ae7883b2ea4aa36f51ec9ddb54beb0f19cc0e0",
+  "candidate_results_json_sha256": "826309e21fbed8a6ee877b1a40d0983d741ee3e48c1747294cfdca504d34f4b0",
+  "candidate_replay_py_sha256": "0aac68f034d1c3c8d4468e5eeec8f844c0f003c1576dd1586818165f410117bc"
+}

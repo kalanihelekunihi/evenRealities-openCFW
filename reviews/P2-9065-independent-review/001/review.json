@@ -1,0 +1,19 @@
+{
+  "review_id": "9065",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-indexed-event-signal-map-9058/001",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_receipt_sha256": "42ab8ef354a2608fd68858313e84c2b1c44b634dbbbb9e0dc6a0f1156f0b214d",
+  "candidate_instructions_json_sha256": "21595bfdd2f6fd4b73fb7a981862716539484202d6d0c16a028eacbe5831fdb8",
+  "candidate_references_json_sha256": "b47a1a5162548dfa4271aa2fe8a43fe0e9c5ada4e0f4f129c05d2ff9bf716e9a",
+  "candidate_replay_py_sha256": "0b61410254bcf9520d4c6bcdbccea42af18d206a92b5ba068024f656954df334",
+  "candidate_pseudocode_md_sha256": "8f23388e198766f6412925dd65f57dc72fad0117b58be8d6f270e88bd7cdcf2d",
+  "checks": [
+    "All 64 mapped instruction bytes and the literal global reference match the pinned image.",
+    "The routine computes the slot from low8(index)&15, ORs the full input mask into the selected byte (stored low8), ORs 4 into global byte+60, then unlocks and invokes the wake helper. It returns saved entry R3 through POP-to-R0."
+  ],
+  "limitations": [
+    "No slot bounds issue is implied by the low-nibble mask, but index and mask truncation are part of the observed behavior. Gate and wake child contracts/physical delivery are not proven."
+  ]
+}

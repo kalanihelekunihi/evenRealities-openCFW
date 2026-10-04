@@ -1,0 +1,21 @@
+{
+  "review_id": "9125",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-complete-local-command-family-contiguous-audit-9118/001",
+  "candidate_receipt_sha256": "1c28c53cbad98c5226ed3f9048fe6b86a22792c3873e8e98af6a1b4ab5c41852",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "independent_replay_receipt_sha256": "8e023d649b68b4cce83d0443ab7ab3f87662813accc90bee1bf34889e03f6891",
+  "independent_replay_output": "/tmp/independent-P2-9125",
+  "independent_python": "/Users/kalani/.local/share/opencfw/venv/bin/python",
+  "checks": [
+    "Fresh isolated audit replay confirms exact contiguous 2,166-byte instruction tiling of 0x52AE38..0x52B6AE across 17 maps with zero gaps or overlaps; bytes and pinned hashes were rechecked.",
+    "The audit is explicitly local to the selected command-family interval; the word \u201ccomplete\u201d does not assert whole-firmware, semantic, or implementation completeness."
+  ],
+  "limitations": [
+    "This is a byte-span audit only. External helper closure, CFG completeness, whole-artifact coverage, C completeness, freeze, and admission remain unproven."
+  ],
+  "candidate_audit_json_sha256": "817babeb7720b5f02e6eed62bd8a3f71e34eff52a17473ba2d2cc7cdc4eb3075",
+  "candidate_scope_md_sha256": "005fee518630222a8d5788489bf5ffcaccc5ce27963bb5338429e6deea5b2544",
+  "candidate_replay_py_sha256": "f101d01eb052fba709d1c567c9e7186c99301e1a5c1de430a36783bc2a861743"
+}

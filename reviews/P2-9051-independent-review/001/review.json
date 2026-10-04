@@ -1,0 +1,20 @@
+{
+  "review_id": "9051",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-transport-write-length-result-map-9044/001",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_receipt_sha256": "0e24fa7f83b5954ac5f2dd8f74a5e84b716f6fb424a8c5db001879fd788cc004",
+  "candidate_instructions_json_sha256": "b53325b7ecb18a5dccfe9353b74a1d762ce17955f0854712a2456a6e93c853da",
+  "candidate_references_json_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "candidate_replay_py_sha256": "e4008b89f8f8a26a73aadf1f581642fb6f2cc8725883d17f2cf0de0c2f118dbe",
+  "candidate_pseudocode_md_sha256": "4d03a5e1050f8137bf2a7bf1bd00f42dbea9eff08b443f1400da868aa14b8711",
+  "checks": [
+    "All 74 instructions at 0x53013C..0x530186 match the pinned image byte-for-byte.",
+    "53013C uses entry R1 as the buffer and ignores entry R0; it freshly reads bytes +2/+3, passes low16(length+4) to the child, then compares the child\u2019s full R0 to that low16 expected value. If length+4 wraps to zero (length 65532), matching child result zero returns zero.",
+    "530166 likewise passes its entry R0 buffer as R2 and returns 1 only when the full child result equals the byte-derived count; otherwise returns zero. R4/SP/PC restoration matches the epilogues."
+  ],
+  "limitations": [
+    "The transport child 4B4A02 behavior is not established here; the map records only observed argument setup and result comparison. No pointer guard, concurrency, or physical claim."
+  ]
+}

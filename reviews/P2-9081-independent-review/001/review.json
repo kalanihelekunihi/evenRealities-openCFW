@@ -1,0 +1,20 @@
+{
+  "review_id": "9081",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-command-allocation-queue-dispatch-map-9074/001",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_receipt_sha256": "365b00e4aafbc17092f109f33cc448434a5cb15ed5197d60511e3ef56ab5c9b2",
+  "candidate_instructions_json_sha256": "c98ff59f72c5c696cd454ab8a0de292fb237d3f633ccec39f64c11aed143ffc9",
+  "candidate_references_json_sha256": "fe21da3c602f604b4d01d6c7049c87202d5e9c89bd9a66ca060570aad054cea0",
+  "candidate_replay_py_sha256": "7a887f7261212dea889d288ea3910aa19425cc52b51ed727ed2f5f7ab3c23a84",
+  "candidate_pseudocode_md_sha256": "396f324338ec28e7b47ab4b066b3ce68f21c92e3536f720c16453f0be52cd83a",
+  "checks": [
+    "All 174 mapped instruction bytes and literal references match the locked image.",
+    "The command allocator passes low16(length+3) to allocation, writes only the three-byte header, returns packet in R0 and the saved entry R3 low byte in R1.",
+    "Queue dispatch enqueues only for nonnull packet, then checks record+26, peeks, copies header fields, calls writer and requires exact result 1 before popping and decrementing record+26. Reset clears queue head/tail fields directly without first releasing existing nodes."
+  ],
+  "limitations": [
+    "Queue and child helper semantics are only known where separately evidenced; peek/pop may observe different nodes after child calls. No atomicity, ownership, physical delivery, or queue lifecycle safety is claimed."
+  ]
+}

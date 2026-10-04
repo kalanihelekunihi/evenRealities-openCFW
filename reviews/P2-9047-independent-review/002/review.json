@@ -1,0 +1,20 @@
+{
+  "review_id": "9047",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-destination-active-selection-accounting-map-9040/001",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_receipt_sha256": "8347e42a3829a174bf9d678c14ff1cba8b085023dbc1d65665c5538d4b5bb642",
+  "candidate_instructions_json_sha256": "4a6a5d062818759bdefedd339795b80fa58c2f65347809d93bc7a7aa491b9361",
+  "candidate_references_json_sha256": "47bb6c28759702a210c12fa928973d956c596c447fb8e8672835676d7a0ac2af",
+  "candidate_replay_py_sha256": "fde20b4cf56a61aac99c6a6357e1ce65de08a1b21bca7266a0fabdc41bc0b34a",
+  "candidate_pseudocode_md_sha256": "b5191a843e0ed8c81fa8ba79b45968b3040133b10b6d40e71beefa282da7adb7",
+  "checks": [
+    "The current packet instructions and literal references match the locked source bytes; the receipt and file hashes were refreshed after the packet correction.",
+    "The active-record lookup, wrappers, and accounting branches retain the reviewed behavior. Crucially, the accounting call is 53013C(R0=record, R1=unchanged entry R1): the child reads its buffer through R1, not R0.",
+    "The accounting helper preserves the separate fresh reads and child-conditioned record/global updates; it returns 0 or 1 per its own branches."
+  ],
+  "limitations": [
+    "The incoming R1 buffer dependency must be valid for the call; child 53013C meaning beyond its observed access is unresolved. No concurrency or ownership claim."
+  ]
+}

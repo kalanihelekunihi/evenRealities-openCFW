@@ -1,0 +1,20 @@
+{
+  "review_id": "9111",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-command2006-optional-sixbyte-builder-map-9104/001",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_receipt_sha256": "09845b82aee5c79223a96079f250047caee5ceb76dc0f2071b70ce17d05b699c",
+  "candidate_instructions_json_sha256": "aff51f744a52e8a1ec8c65b3ea88f5c6be32242c83c79ae0aff2e934875c161c",
+  "candidate_references_json_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "candidate_replay_py_sha256": "9bfab91b16940515bd1d74bd37700177cbba205abd45ac8f2213d34bea676999",
+  "candidate_pseudocode_md_sha256": "e3aee97533a980d6d610cd9bde9ed4a4dd0eaa00965ae5a479fb48851f786a41",
+  "checks": [
+    "All 134 instructions across builder and fill helper match the pinned image; literal references are exact.",
+    "The eight-argument builder requests type 0x2006/payload 15 and defers stack argument reads until allocation succeeds. It serializes the first five values to offsets 3..9, then uses an optional source pointer to choose a six-byte copy or six-byte zero fill at offset 10, and writes final scalar bytes at offsets 16/17.",
+    "The zero-fill helper calls backward fill for six bytes, returns destination+6 in R0, and restores saved entry R3 into R1; builder returns dispatch-child R0."
+  ],
+  "limitations": [
+    "Input source pointer and allocation/dispatch contracts remain unresolved. Sequential copy/fill is preserved; no initialization, concurrency, ownership, physical, or whole-firmware claims."
+  ]
+}

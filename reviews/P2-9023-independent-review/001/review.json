@@ -1,0 +1,19 @@
+{
+  "review_id": "9023",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-buffer-detach-response-map-9016/001",
+  "candidate_receipt_sha256": "5a2fdcbbcccff9305670aa5fc31abda41caf5339ce51fa4bf6e622141c7d1211",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "checks": [
+    "All 26 Thumb instructions match the pinned image byte-for-byte for 0x530E30..0x530E64; the literal reference matches its source word.",
+    "The routine saves record+8 and clears it before conditional scheduling or dispatch. On the non-skip path it reloads pointer and record fields separately, calls scheduling then dispatch, and returns saved entry R3 through POP-to-R0."
+  ],
+  "limitations": [
+    "There is no null-buffer guard or local critical section. Scheduling, dispatch, and detached-buffer ownership semantics remain unresolved; a later fault can follow the clear."
+  ],
+  "candidate_instructions_json_sha256": "d6e67db74a4e5abc020001d7290eba672a45ee91af0a76388ae57b8c5f471d8c",
+  "candidate_references_json_sha256": "5cdad8fba0c274e200c899776cfbe6c24e74c0589343e4748b32af29d8a48c01",
+  "candidate_replay_py_sha256": "0e4d641e37ff8a6949d5ff56dfa35656ef7263760a3e44b5585eeba0550c2d99",
+  "candidate_pseudocode_md_sha256": "e7f7a4624c8655233249161c6ffb8a891f8914f004a23848fb25126473104d95"
+}

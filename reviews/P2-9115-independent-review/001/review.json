@@ -1,0 +1,20 @@
+{
+  "review_id": "9115",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-command200b-2009-builders-map-9108/001",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_receipt_sha256": "df401b7c80af43f0410c7536fa408be10779e9d25fef682a4bc4e5548faa73cb",
+  "candidate_instructions_json_sha256": "ae80dc5c0eab903ce0fd473a01d38f24c23dd55ce3b09e34b8ccee7fb408d8ea",
+  "candidate_references_json_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "candidate_replay_py_sha256": "1f1c71584d2baa11835222e2c038bbda1b2bc452db59c836411827a476e047bb",
+  "candidate_pseudocode_md_sha256": "71b9ca0a2abcf103804f9301c6df6789dd9c96157af2dc6d8349880f4a6d3a7b",
+  "checks": [
+    "All 152 instructions match the pinned image.",
+    "The 0x200B builder reads its fifth stack argument only after nonnull allocation, writes five payload bytes, and returns full saved entry R3.",
+    "The 0x2009 length/fill builder copies low8(count) bytes and computes fill size as modulo-32-bit 31-low8(count) without a <=31 guard, then dispatches; null skips source reads and returns zero."
+  ],
+  "limitations": [
+    "Counts above 31 cause the literal observed overcopy/wrapped fill behavior; memory safety is not established. Source, allocator, copy/fill and dispatch contracts remain unresolved."
+  ]
+}

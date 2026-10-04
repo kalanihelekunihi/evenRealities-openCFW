@@ -1,0 +1,20 @@
+{
+  "review_id": "9047",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-destination-active-selection-accounting-map-9040/001",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_receipt_sha256": "277121a64a9596ce94015387afd8b5adbb676dbe59c6d882f8e07c6fbfd20bc8",
+  "candidate_instructions_json_sha256": "4a6a5d062818759bdefedd339795b80fa58c2f65347809d93bc7a7aa491b9361",
+  "candidate_references_json_sha256": "47bb6c28759702a210c12fa928973d956c596c447fb8e8672835676d7a0ac2af",
+  "candidate_replay_py_sha256": "3d9f3d89b225a0c1a467b11e52328f478e8d9fef53f3a41f49d582d3b859a356",
+  "candidate_pseudocode_md_sha256": "139c6a1312de79f2ce72d9c13d0da1d1d2ff6dcd2bd609cfb32e4b8a87544973",
+  "checks": [
+    "All mapped instruction bytes match the pinned image and all literal references resolve exactly.",
+    "The active-record lookup checks the halfword key against 0xFFFF and a separate fresh activity byte at +22, returning the first qualifying record among up to three stride-28 candidates. The wrappers truncate their input to low16 and return saved entry R7 rather than the child result.",
+    "The accounting routine first calls 53013C; on nonzero child result it increments record+25, then conditionally decrements global+130 using a separate fresh reload. It returns 1 on this path and 0 on child-zero path."
+  ],
+  "limitations": [
+    "Child 53013C purpose and side effects are unresolved. Fresh reloads mean observed values may differ under mutation; no atomic/concurrency or ownership claim is supported."
+  ]
+}

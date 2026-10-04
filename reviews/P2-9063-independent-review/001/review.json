@@ -1,0 +1,21 @@
+{
+  "review_id": "9063",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-transport-no-write-error-fixture-9056/001",
+  "candidate_receipt_sha256": "efc5cc8a7502a6e275d1c95a62b317280f599e76e58fee78b868ebfc2f61a480",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "independent_replay_receipt_sha256": "cfe64fc74e57c92724f679e07c42532369aa789193e82867fa3fe1506a57e188",
+  "independent_replay_output": "/tmp/independent-P2-9063",
+  "independent_python": "/Users/kalani/.local/share/opencfw/venv/bin/python",
+  "checks": [
+    "Fresh isolated replay passed all 18 original-byte error-path cases with the original error helper and null callback slot.",
+    "The independent full-memory comparison confirms no writes to supplied source/storage, the exact error word follows the input code, and return length/register/SP/PC assertions match the packet oracle."
+  ],
+  "limitations": [
+    "Cases are limited to no-write/error paths; callback-present and successful buffer-copy paths are not covered. Synthetic memory only; no physical transport or concurrency claim."
+  ],
+  "candidate_scope_md_sha256": "c31f47bb9aa9db287244dbc228a2342b4d2cc8910ed010e02d6969b0a26160f1",
+  "candidate_results_json_sha256": "eaef14f6b1a9ca88958ba70e638cae28a42c19211f1d287dd9ef2bd5f0c1fd28",
+  "candidate_replay_py_sha256": "8c96265af394fd5732fe029d11077dfd7267f575ce82324e83b88d91ca429f86"
+}

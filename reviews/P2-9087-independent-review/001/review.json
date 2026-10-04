@@ -1,0 +1,20 @@
+{
+  "review_id": "9087",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-command200d-descriptor-builder-map-9080/001",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_receipt_sha256": "10ae57a454042332424e42302d206c68f7483e99e3a4f7a56abf270e10b8c016",
+  "candidate_instructions_json_sha256": "0d20f91f6d38b6c833698ad9a5a14eaf6957a8d302fdc9e78cf8e52d16aedde0",
+  "candidate_references_json_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "candidate_replay_py_sha256": "6f6895005c7a1ee4d0fb87f463bab302fd1ae1a864f725b23d0648f7c0a8ed8b",
+  "candidate_pseudocode_md_sha256": "1da29c9a85cb0cbd92d4d6f2ae275c4c7d72f57cc224ad8c65104da24d38bb20",
+  "checks": [
+    "All 230 instruction bytes across builder and copy helper match the pinned image.",
+    "The builder requests type 0x200D/payload 25, exits before stack argument loads on null allocation, and otherwise reads stack arguments at entry SP+0,+4,+8 after its 32-byte frame. It writes fields at packet+3..8, copies six bytes to +9, stores the next byte at +15, then serializes six halfwords via separate low/high source loads at +16..27.",
+    "The final dispatch child result is returned in R0; this is distinct from wrappers that pop a saved register to R0. The copy helper passes size 6 to the underlying copy child."
+  ],
+  "limitations": [
+    "Stack/source pointers are unchecked. Allocation and dispatch contracts, source mutation between repeated halfword reads, and ownership/lifetime are unresolved; no physical or concurrency claims."
+  ]
+}

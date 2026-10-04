@@ -1,0 +1,22 @@
+{
+  "review_id": "9067",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-transport-publication-original-fixture-9060/001",
+  "candidate_receipt_sha256": "77180aa17132877037f95bcf2fd9ddca0c6894632f9004e94eb56afceaf63f4b",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "independent_replay_receipt_sha256": "06298a6fb5a99d3e03d119eedb0c84528f98508ff07bdf548a460336a4715f3a",
+  "independent_replay_output": "/tmp/independent-P2-9067",
+  "independent_python": "/Users/kalani/.local/share/opencfw/venv/bin/python",
+  "checks": [
+    "Fresh isolated replay passed all 128 original-byte writer/ring/signal cases with the original gate and null wake path, comparing full buffers and state.",
+    "The oracle preserves the observed behavior where a ring advance may reject after output bytes were written, yet signal and return-length behavior still occur; it also checks copy bytes beyond logical capacity where the code does so.",
+    "Registers, output/state memory, signal fields, PRIMASK, SP, and PC assertions passed."
+  ],
+  "limitations": [
+    "Synthetic buffers/MMIO only. No physical transport delivery, capacity safety, concurrency, or application-level message interpretation is established."
+  ],
+  "candidate_scope_md_sha256": "68d9a78a31fb8233bc4bbb7c45cda7a94a512d77d741b87205b8de1dafc441e5",
+  "candidate_results_json_sha256": "ac51a6f8fd1ec11bfe5f049f5d42ac4421b1de9e381a8919d4e98017e9aa4239",
+  "candidate_replay_py_sha256": "78e8a831657329534aaad29dba6373b9a8c2b2b31662c0d9c71ff44d787f40ba"
+}

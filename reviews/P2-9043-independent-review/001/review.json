@@ -1,0 +1,22 @@
+{
+  "review_id": "9043",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-destination-lookup-exhaustive-fixture-9036/001",
+  "candidate_receipt_sha256": "1f57aaa00373e2ce8b1f14efafc0e4b119c550ee9b6551783910c532b259c566",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "independent_replay_receipt_sha256": "3a35b8634b0db466d4e193f0adb0532b55f517af9cb2d81d749c901bb87a5eb9",
+  "independent_replay_output": "/tmp/independent-P2-9043",
+  "independent_python": "/Users/kalani/.local/share/opencfw/venv/bin/python",
+  "checks": [
+    "Fresh isolated replay passed all 262,144 original-byte lookup cases: every 16-bit ID under four table patterns and nonzero high-word aliases, including duplicate keys and 0xFFFF.",
+    "The independent first-match oracle agrees with returned record pointers or null; preserved register and stack/stop-PC checks passed."
+  ],
+  "limitations": [
+    "Synthetic records and SRAM only; malformed pointers, concurrent table mutation, and physical behavior are outside scope.",
+    "No global table bound, active-state semantics, or firmware-wide behavior is inferred."
+  ],
+  "candidate_scope_md_sha256": "a6bdc146b5c60280839d6ad873acc94431d14868902f9229d7b67fb81f98222f",
+  "candidate_results_json_sha256": "bb8dde83489d8482a101342fe6ef5a72714fbeafa434f19fc358230dfb235a5b",
+  "candidate_replay_py_sha256": "56529e2c13889137a1ad15132ada48cb0786a949fa9aff4a6f1f8fa26f9b9358"
+}

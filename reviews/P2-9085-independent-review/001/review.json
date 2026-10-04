@@ -1,0 +1,20 @@
+{
+  "review_id": "9085",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-command2013-six-halfword-builder-map-9078/001",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_receipt_sha256": "1662fcb3f4090560f695f7c59cd0ce07a304a2ed92538b1f7eec80cec2c4ffae",
+  "candidate_instructions_json_sha256": "53a043b8ed4359ffef66b34f5fae374bfb8e93bcd0d538da0a243cd36c855568",
+  "candidate_references_json_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "candidate_replay_py_sha256": "9122a15561bf6d46313225eb6eba55df20c1c92663f646ce61912da77917efe0",
+  "candidate_pseudocode_md_sha256": "e5328ecb65454d71a638eaebca249146cb947388c4349b8846d8c21fb7e11e6b",
+  "checks": [
+    "All 140 instructions match the pinned image byte-for-byte.",
+    "The builder requests command 0x2013 with payload length 14. On nonnull allocation, it stores the low-byte field plus its high byte and copies six halfwords through twelve separate fresh loads into payload offsets 5..16, then dispatches.",
+    "Null allocation skips source reads and payload writes; both branches return saved entry R3 through POP-to-R0 and restore R4/R5."
+  ],
+  "limitations": [
+    "Source pointer validity and allocation/dispatch contracts remain unresolved. Separate source reads preserve possible mutation/overlap behavior; no snapshot, concurrency, or physical claim."
+  ]
+}

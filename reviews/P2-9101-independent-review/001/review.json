@@ -1,0 +1,20 @@
+{
+  "review_id": "9101",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-command2016-201c-200f-200a-builders-map-9094/001",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_receipt_sha256": "f3f7dc61888d9ae452c3cd38513e90f548ce5904201ca2b1e78ce1d4cfd726cf",
+  "candidate_instructions_json_sha256": "5375e0419b22b06238207364e40463591fd0eb41cbeee6f65e1d5c3023ce7248",
+  "candidate_references_json_sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "candidate_replay_py_sha256": "34dc8e0eee978d9066924326467db74b457317e0e2b1f73e8633e4da5c5320f6",
+  "candidate_pseudocode_md_sha256": "39694761e4e260355b697e4e64672d5acbc7685947eb119f3fcc8bdbbc44ab61",
+  "checks": [
+    "All 128 mapped instruction bytes match the pinned image.",
+    "The 0x2016 builder writes a two-byte low16 field and returns zero on null allocation or child R0 on successful dispatch. Zero-payload 0x201C/0x200F wrappers return saved R7, not child status.",
+    "The 0x200A builder writes one low-byte argument to payload+3; null returns zero and success returns the dispatch-child result."
+  ],
+  "limitations": [
+    "No input pointers are dereferenced in these functions; allocation and dispatch contracts remain unresolved. No physical, concurrency, or whole-firmware claim."
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "review_id": "9073",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-power-group3-byte-stream-packet-state-machine-map-9066/001",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_receipt_sha256": "740948b9db9bc112812f435ca714f4104751b6e3aa4ad09db314790257a7caf9",
+  "candidate_instructions_json_sha256": "f2632d2442671427923e463fd45ca306be45d721ab03c0889abc1c870fd6e452",
+  "candidate_references_json_sha256": "3f0814c53cca7f31633500c89130716749b642b5bd6d85c5ded768b714b5c6ff",
+  "candidate_replay_py_sha256": "85bf0fd72d581b05c78352223af489e70ace707d909323ebdcceabeaafdb7170",
+  "candidate_pseudocode_md_sha256": "f3c58c7b98ccaefa6411a797ab0a9d2abe0349c2fdfdcdefca78ba75171a1eda",
+  "checks": [
+    "All 192 Thumb instructions covering 450 bytes at 0x530186..0x530348 and all 19 literal references match the locked image.",
+    "The pseudocode retains the state-dependent branch order: state 0 starts a packet; state 1 chooses width and gathers header bytes before considering allocation; state 2 consumes payload and decrements remaining; state 3 clears busy and dispatches only when the packet pointer is nonnull.",
+    "Allocation branches are width/type-specific, and branches that do not allocate leave prior P intact. Length/header arithmetic is explicitly low16 where the instructions truncate. Return values distinguish early abort/original length from exhaustion/consumed count; POP returns modified saved R3 as R1 with original high half preserved."
+  ],
+  "limitations": [
+    "Child allocator, capacity check and dispatch contracts are outside this extent. Old-pointer reuse, unvalidated pointers and callback mutation are retained as observed paths; no cleanup, atomicity, full parser protocol, or physical transport claim."
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "review_id": "9021",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-pending-field-original-fixture-9014/001",
+  "candidate_receipt_sha256": "e57d7589a37584894fab534c4ef8e3fd7b0aef20634e8240b089c4c235439db9",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_scope_md_sha256": "947b4a8afb90784343a51fcbb8ae7883b2ea4aa36f51ec9ddb54beb0f19cc0e0",
+  "candidate_results_json_sha256": "826309e21fbed8a6ee877b1a40d0983d741ee3e48c1747294cfdca504d34f4b0",
+  "candidate_replay_py_sha256": "0aac68f034d1c3c8d4468e5eeec8f844c0f003c1576dd1586818165f410117bc",
+  "checks": [
+    "The fixture receipt pins the locked image and its current scope, results, and replay script; the recorded case set contains 96 rows across four field values, four index values, three error values, and both PRIMASK values.",
+    "The test script\u2019s independent expected-byte model changes only descriptor halfword+42, checks the full 64-byte descriptor including adjacent halfword+44, and checks saved entry R3, preserved callee registers, PRIMASK, SP, and stop PC."
+  ],
+  "limitations": [
+    "Unicorn is unavailable in this environment, so I could not independently rerun original instructions. The review checks the recorded result artifact and replay/oracle structure only.",
+    "Only callback-absent synthetic SRAM cases are represented; callback-present, concurrent mutation, and physical behavior are outside scope."
+  ]
+}

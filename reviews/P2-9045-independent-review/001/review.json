@@ -1,0 +1,21 @@
+{
+  "review_id": "9045",
+  "status": "PASS_SCOPED",
+  "accepted": false,
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-queue-count-boundary-fixture-9038/001",
+  "candidate_receipt_sha256": "594a5ee10bc9c26bc091db9385c97ecbea650b1b27e7149cc98668b8fe479b04",
+  "source_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "independent_replay_receipt_sha256": "9c280d29167b179f8e75151ba2d768da926368fea54475bf67b48cfafbe15c63",
+  "independent_replay_output": "/tmp/independent-P2-9045",
+  "independent_python": "/Users/kalani/.local/share/opencfw/venv/bin/python",
+  "checks": [
+    "Fresh isolated replay passed all 36 original-byte cases over lengths 0, 1, 65535, 65536, and 65537, nesting/mask variants, and disjoint queue/node regions.",
+    "Independent low-16-bit count expectations matched; list state, preserved registers, return residue, mask, SP, and PC checks passed."
+  ],
+  "limitations": [
+    "The replay uses short acyclic synthetic queues; it does not test cycles, malformed pointers, concurrent mutation, or physical lock/preemption semantics."
+  ],
+  "candidate_scope_md_sha256": "9b42d09265b104eb5b1a2774859f4ec4acb2b7ddd12ed513d3d67ae6419c5168",
+  "candidate_results_json_sha256": "437c8762bd33d371798da4119400d01aa2b7c00db09d5e573338cf66fd65c6cb",
+  "candidate_replay_py_sha256": "5a2a6233979c9a5dbe13ff7f6803fb60d9bbe831cc9ac05932c6252fce03d4a6"
+}
