@@ -1,0 +1,76 @@
+{
+  "scope": "local bounded recommendations only; no shared campaign edits",
+  "ranking_basis": "available evidence, hardware leverage, verification cost; P0 scheduler ownership remains first foundation priority even though inexpensive touch test runs first",
+  "tasks": [
+    {
+      "id": "touch-scb",
+      "foundation_priority": "P1",
+      "action": "Source compile held-out30B wrapper, verified preamble mapping; original behavior tests first",
+      "required_inputs": "Pinned PDL/common/core headers; existing Arm GNU GCC -Og",
+      "why": "small bounded family; one prior exact leaf",
+      "limits": "new upstream bytes unknown until source compile",
+      "expected_new_verified_bytes": null,
+      "status": "proposed"
+    },
+    {
+      "id": "rtos",
+      "foundation_priority": "P0",
+      "action": "Confirm current owner, reuse FreeRTOS10.5.1/TCB/IAR port and test multi-task boundaries",
+      "required_inputs": "kernel source/IAR configuration and scheduling state",
+      "why": "foundational high leverage",
+      "limits": "no synthetic global scheduling inference",
+      "expected_new_verified_bytes": null,
+      "status": "proposed"
+    },
+    {
+      "id": "ambiq-hal",
+      "foundation_priority": "P1",
+      "action": "Match MSPI/GPIO leaf then isolate board IRQ/DMA/cache glue",
+      "required_inputs": "5.1.0 source and compatible compiler baseline",
+      "why": "high hardware leverage",
+      "limits": "selected pin not private producer",
+      "expected_new_verified_bytes": null,
+      "status": "proposed"
+    },
+    {
+      "id": "codec-i2s",
+      "foundation_priority": "P1",
+      "action": "Relocation-aware comparison of11relocations; original caller/API identification",
+      "required_inputs": "C-SKY object relocation/disassembly; source implementation missing",
+      "why": "available archive but raw no-hit",
+      "limits": "no-hit not evidence absent",
+      "expected_new_verified_bytes": null,
+      "status": "proposed"
+    },
+    {
+      "id": "em-controller",
+      "foundation_priority": "P1",
+      "action": "Authenticate matched body ranges and focus on modified/HCI recovery boundaries",
+      "required_inputs": "legitimate SDK/archive rights and relocation evidence",
+      "why": "large historicalbinarymatch",
+      "limits": "not public-source share",
+      "expected_new_verified_bytes": null,
+      "status": "proposed"
+    },
+    {
+      "id": "display-assets",
+      "foundation_priority": "P1",
+      "action": "Independently trace one new consumer, decode format; keep six existing exports intact",
+      "required_inputs": "constructor/decoder boundary and missing NOR fonts if relevant",
+      "why": "tested extraction reuse",
+      "limits": "no422candidate blanketpromotion",
+      "expected_new_verified_bytes": null,
+      "status": "proposed"
+    },
+    {
+      "id": "evenhub",
+      "foundation_priority": "LAST",
+      "action": "Defer feature logic until foundation/bus/driver contracts reviewed",
+      "required_inputs": "corpus freeze before firmwareC",
+      "why": "userpriority",
+      "limits": "module names not authorship",
+      "expected_new_verified_bytes": null,
+      "status": "proposed"
+    }
+  ]
+}

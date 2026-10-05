@@ -1,0 +1,17 @@
+{
+  "classification": "reconstructed C from authenticated instructions; not public SDK body",
+  "license": "MIT for new reconstruction; reused Ambiq GPIO providers retain BSD-3-Clause notices and pinned source provenance",
+  "original_evidence": "g2/analysis/radio-transport-pads-2026-10-05/original-provenance.json",
+  "source_hashes": {
+    "g2/components/foundation/radio_transport_pads/transport_pads.h": "f9e58dd3d4040ed6591ec8e0acc04502b0f7de6d080e27871751aa33c5ac6ff7",
+    "g2/components/foundation/radio_transport_pads/transport_pads.c": "8607b23d5c0f5fa1eb00b229670d7efc0929a5d91dc89b7574f1dacd0b97df3b"
+  },
+  "providers": [
+    "g2/components/foundation/ambiq_gpio_config/SOURCE_PROVENANCE.json",
+    "g2/components/foundation/ambiq_mspi/INTERRUPT_MASK_PROVENANCE.json"
+  ],
+  "limits": [
+    "volatile config word outside ELF is data, not retained executable code",
+    "callable semantic profile; not production source completeness/byte equality"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "snapshot_cutoff_utc": "2026-10-05T15:33:22.080691+00:00",
+  "snapshot_finished_utc": "2026-10-05T15:33:40.094519+00:00",
+  "assembly_verification_utc": "2026-10-05T15:35:02.830840+00:00",
+  "bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "bundle_bytes": 4301227,
+  "same_definition_metrics": {
+    "candidate_body_bytes": 1912325,
+    "raw_pseudocode_bytes": 1902397,
+    "assembly_export_bytes": 490200,
+    "authenticated_scoped_review_bytes": 197000
+  },
+  "baseline_metrics": {
+    "recognized_candidate_body_bytes": 1912325,
+    "byte_matched_instruction_export_bytes": 488326,
+    "raw_pseudocode_addressed_bytes": 1902397,
+    "authenticated_scoped_review_linked_bytes": 197000
+  },
+  "delta": {
+    "assembly_export_bytes": 1874,
+    "authenticated_scoped_review_bytes": 0
+  },
+  "class_map_reauthentication": "Prior bounded typed map reused after all fresh inventory images/root payload hashes authenticate unchanged official inputs; no new classification evidence generated in this assessment.",
+  "build": {
+    "fully_blob_free_payloads": "0/6",
+    "source_identical_bundles": "0/1",
+    "source_C_byte_percentage": null,
+    "whole_firmware_behavioral_equivalence": null
+  },
+  "methodology": "Same measure and review-repair counting functions; instruction matcher reused with baseline changed to frozen00:13audit, sameARC and app-text formats. New classification/subsystem/upstream views are separate, not methodology progress."
+}

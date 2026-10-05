@@ -1,0 +1,13 @@
+# FreeRTOS event-group provider in the radio/WSF handoff
+
+Four unchanged API function texts from MIT-licensed FreeRTOS V10.5.1, pinned commit def7d2df2b0506d3d249334974f51e427c17a41c, replace the two WSF notification fixtures in the callable event-group target. Source: g2/components/foundation/freertos_event_group/. The locked Apollo image remains unchanged.
+
+RAM cell 0x20074ef0 is an EventGroupHandle_t, not a task-notification handle. The task setter ORs low24 bits, captures each waiter's next pointer before unblocking, supplies every matching waiter with pre-clear bits plus 0x02000000, applies the clear-on-exit union after traversal, resumes scheduling, and returns final bits. Zero is a possible successful-consumption return. The dispatcher uses [handle,1,clearOnExit=1,waitForAll=0,timeout=FFFFFFFF].
+
+The ISR wrapper creates a16-byte command {-2, callback, borrowed group pointer, bits}. The timer queue handle cell is 0x20074ab0. Enqueue returns queue status, performs no immediate group/mask validation, and the callback applies task-context validation later. The group's lifetime must extend through callback execution.
+
+Fresh resumed comparison-resume-fresh.json passes218cases/1222distinct traced original bytes against the current linked ELF. The independent review at review/report.md covers the same sources and ELF, including saved-next poisoning, clear-union behavior, post-resume return, and deferred invalid arguments. The disjoint increment is206bytes:148/168setter at47ed76,8callback at47ee1e,16ISRwrapper at47ee4a,34timerpend at47eb4a. Twenty bytes after assertion-helper calls are excluded. Cumulative evidence at this batch is2570bytes, not firmware completeness. Original/results-final.json supersedes earlier worker packets; waitForAll is0.
+
+Correction to historical verifier terminology: the boundary0x5fa0a4 is ulSetInterruptMask, a BASEPRI helper, NOT a diagnostic function. Invalid tests terminated at this helper's entry; the following fault store toFFFFFFFF and endless branch were not executed. Their source-equivalence claim is limited to validation reaching that boundary. The next timer-queue batch executes the helper normally and documents this correction.
+
+This batch's queue copy, manual daemon delivery, scheduler suspend/resume/unblock, wait/context/ticks and app handlers are fixtures. The succeeding timer-queue batch replaces the producer/copy/mask fixtures; actual scheduler, receive/daemon runtime, object destruction/quiescence and physical interrupts remain unresolved. No byte-equal compiler output, complete kernel, bootable source firmware or hardware safety claim is made.

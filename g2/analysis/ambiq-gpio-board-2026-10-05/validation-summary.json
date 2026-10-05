@@ -1,0 +1,47 @@
+{
+  "comparison": {
+    "status": "PASS",
+    "cases": 16108,
+    "case_counts": {
+      "get": 912,
+      "set": 8392,
+      "state": 6708,
+      "board": 96
+    },
+    "unique_original_trace_bytes": 406,
+    "new_function_body_bytes": 242,
+    "shared_prior_bytes": 164,
+    "external_call_stubs": 0
+  },
+  "aggregate": {
+    "modules": 42,
+    "completed": 42,
+    "totals": {
+      "tests_run": 221,
+      "passed": 215,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 7,
+      "method_skips": 6,
+      "setup_skips": 1
+    }
+  },
+  "new_unique_ledger_bytes": 242,
+  "cumulative_unique_trace_bytes": 4564,
+  "fully_source_complete_payloads": 0,
+  "source_built_byte_identical_bundle": false,
+  "optimized_tick_status": "BLOCKED: prior independently reproduced memory-hook execution limitation; not cleared by GPIO",
+  "affected_ambiq_tests": {
+    "passed": 21,
+    "failed": 0,
+    "errors": 0,
+    "log": "g2/build/foundation/ambiq-gpio-board-simulator/affected.log"
+  },
+  "independent_review": {
+    "status": "PASS",
+    "representative_cases": 208,
+    "representative_unique_original_bytes": 344,
+    "report": "g2/analysis/ambiq-gpio-board-2026-10-05/review/report.md",
+    "remaining_implementation_blockers": 0
+  }
+}

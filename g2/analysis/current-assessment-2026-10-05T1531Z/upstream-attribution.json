@@ -1,0 +1,180 @@
+{
+  "schema_version": 1,
+  "task": "Read-only upstream attribution current-state assessment for the six official G2 payloads.",
+  "target": {
+    "version": "s200_v2.2.6.10",
+    "bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "payload_pins": "g2/workflow/target.json and g2/docs/reference/firmware-formats.md \u00a71"
+  },
+  "assessment_rules": [
+    "Separate observed exact body/archive match from compatible-family or signature attribution.",
+    "The selected submodule commit in libraries.md is usually a reproducible baseline, not the private producing checkout; the document says historical_generating_commit is null for all 26 listed families.",
+    "No source checkout being present in the workspace proves that it built the locked firmware.",
+    "No image-wide share is reported without an image-level byte/function denominator and accepted attribution coverage."
+  ],
+  "payloads": {
+    "apollo_main": {
+      "locked_artifact": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+      "attribution": "Rich third-party foundation attribution exists, but it is not a source map for the complete application. FreeRTOS-Kernel v10.5.1 is strong at kernel level and its IAR CM55 port is proven, with a recovered vendor TCB patch; CMSIS-FreeRTOS v10.5.1 has 43 linked wrapper functions; Ambiq HAL is 5.1.0 lineage (private pre-release checkout unavailable); Cordio host semantics fit public r20.05\u2013r20.05c with Ambiq downstream/proprietary port changes; LVGL is a hybrid 9.3-development fork; FreeType 2.9.1, littlefs 2.10.1, FlashDB 2.1.1/config, TinyFrame post-2.3, and several utility families have recorded identities. The seven retained __FILE__ path families anchor 530 functions, but paths alone are not exact body attribution or a denominator. The commits in libraries.md are selected compatible baselines, not the historical product checkout; closure metadata says the historical generating commit is null. Even-authored services and proprietary GoMore/Goodix algorithms and NemaGFX objects remain separate source/rebuild gaps.",
+      "stronger_scoped_counts": [
+        {
+          "count": 43,
+          "unit": "linked CMSIS-FreeRTOS wrapper functions",
+          "meaning": "specific wrapper subset only; not main firmware coverage",
+          "evidence": "g2/docs/reference/libraries.md:46-48"
+        },
+        {
+          "count": 21,
+          "unit": "cJSON parser functions",
+          "meaning": "bounded parser subset only",
+          "evidence": "g2/docs/reference/libraries.md:69-72"
+        },
+        {
+          "count": 530,
+          "unit": "functions anchored by seven third-party __FILE__ families",
+          "meaning": "path-family anchors, not byte-identical source matches and not a whole-image percentage",
+          "evidence": "g2/docs/reference/libraries.md:78-81"
+        }
+      ],
+      "remaining_unique_or_closed_code": "Even application/service behavior has no complete upstream mapping or supported image-wide denominator. GoMore and Goodix algorithms are proprietary/binary-only; NemaGFX/NemaVG stock objects are IAR-built and public GCC archives are not direct substitutes.",
+      "evidence": [
+        "g2/docs/reference/libraries.md:40-229",
+        "g2/docs/reference/toolchains.md:21-138",
+        "g2/docs/reference/capabilities.md",
+        "third-party/upstream submodule pins"
+      ]
+    },
+    "apollo_bootloader": {
+      "locked_artifact": "g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin",
+      "attribution": "IAR/DLIB compiler-runtime family is strong; exact compiler release is unknown. Identified carried libraries are littlefs 2.10.1, EasyLogger 2.2.99, TLSF v3.1 family, AmbiqSuite MSPI HAL 5.1.0, and a FreeRTOS/CMSIS-RTOS2-style family. The references explicitly warn that these are bootloader-local copies and that the FreeRTOS revision is not inherited from main. A few public subset/leaf identities are bounded, but there is no supported full-image upstream/source count. Even bootloader-specific update/service logic remains without full product-source attribution.",
+      "stronger_scoped_counts": [],
+      "remaining_unique_or_closed_code": "No denominator for upstream-attributed functions/bytes. Do not infer source coverage from 903 Ghidra functions or 849 decompilations; those are raw-analysis counts, not attribution.",
+      "evidence": [
+        "g2/docs/reference/libraries.md:230-240",
+        "g2/docs/reference/toolchains.md:139-165",
+        "g2/docs/reference/decompilation-status.md:12-15"
+      ]
+    },
+    "ble_em9305": {
+      "locked_artifact": "g2/blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin",
+      "attribution": "This payload has the strongest archive-level byte provenance. QP/C QEP/QF/QK is identified as v6.5.1 with an exact SDK archive-body match. EM SDK v4.2 libraries and proprietary Packetcraft/EM Bleu controller objects are matched to a third-party mirror/oracle; the controller firmware advertises LL_VER_NUM 28992, unlike public Packetcraft r20.05c. The matched mirror is not an authoritative/licensed upstream source, and the public Cordio submodule is only an older host comparator. MetaWare ARC compiler T-2022.09 build 004 / LLVM 14.0.6 / -Os is proven for matched SDK archive objects; attribution of vendor-produced objects/runtime is weaker.",
+      "denominator_backed_counts": [
+        {
+          "numerator_functions": 1494,
+          "numerator_bytes": 157122,
+          "denominator_bytes": 210888,
+          "share_percent": 74.5,
+          "meaning": "relocation-normalized exact bodies from 48 archives; function-level exact matching only"
+        },
+        {
+          "numerator_bytes": 167684,
+          "denominator_bytes": 210888,
+          "share_percent": 79.51,
+          "meaning": "byte extent with function provenance included; not all exact archive-body bytes"
+        }
+      ],
+      "other_bounded_count": {
+        "count": 98,
+        "unit": "exact functions in first six EM SDK archives",
+        "meaning": "archive subset, separate from the 48-archive totals above"
+      },
+      "remaining_unique_or_closed_code": "The 20.49% outside the 79.51% function-provenance measure is not proven to be unique application code; it can include unmatched/vendor-modified functions and non-function bytes. The audit separately records 51 vendor-modified same-size or size-delta functions and 202 placement records, only 50 exact placements. Exact source for the full proprietary controller release is unavailable.",
+      "evidence": [
+        "g2/docs/reference/toolchains.md:166-226",
+        "g2/docs/reference/libraries.md:241-275",
+        "g2/research/corpus/em9305/ghidra/round16-authoritative/",
+        "g2/research/corpus/em9305/ghidra/residual-round4/"
+      ]
+    },
+    "codec": {
+      "locked_artifact": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+      "attribution": "Public NationalChip lvp_kws SDK commit 8bf9ee5c\u2026 is a strong candidate for a subset of GX8002 firmware: object comparison found 102 stock occurrence matches across 151 eligible SDK object sections, 68 distinct symbols, and 5,374 bytes. The denominator is eligible SDK object sections only, not the firmware payload. Public SDK build settings/compiler release do not prove the private producer checkout. Proprietary driver/speech/decoder/DSP libraries and trained KWS weights have no source. Tinyprintf, newlib libm, libgcc helpers, and the stage-1 U-Boot-derived CLI are bounded lineage findings of varying strength, not a complete source replacement.",
+      "bounded_counts": [
+        {
+          "matches": 102,
+          "denominator": 151,
+          "unit": "eligible upstream object sections",
+          "distinct_symbols": 68,
+          "matched_bytes": 5374,
+          "share_of_firmware": null
+        }
+      ],
+      "remaining_unique_or_closed_code": "The bulk of stage and application code lacks full function-to-upstream attribution; trained NPU model command/weight content and closed vendor libraries cannot be generated from the public SDK source alone. Image-wide coverage percentage is unsupported.",
+      "evidence": [
+        "g2/docs/reference/toolchains.md:227-322",
+        "g2/docs/reference/libraries.md:276-330",
+        "g2/tools/manifests/g2-codec-fwpk-segment-map.tsv",
+        "g2/tools/manifests/g2-codec-stage2-section-map.tsv"
+      ]
+    },
+    "touch": {
+      "locked_artifact": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+      "attribution": "A newer 2026-09-29 comparison supersedes older libraries.md wording: Infineon PDL release-v2.21.0 `Cy_SCB_ReadArrayNoCheck` compiles to an exact 56-byte match at payload +0x5F18 under Arm GNU GCC 10.3, 11.3, 12.2, and 13.3 at -Og. This proves one PDL function and compiler/optimization constraints, not that the full touch program was built from PDL or ModusToolbox. Exact GCC release remains between 10.3 and 13.3. PSoC identity, CapSense class, strings, tuning/config tables, and peripheral addresses are strongly/structurally recorded; broad PDL/CapSense source attribution remains unknown.",
+      "scoped_count": {
+        "count": 1,
+        "unit": "exact PDL function",
+        "bytes": 56,
+        "payload_offset": "0x5F18",
+        "meaning": "one matched body only; no firmware-wide denominator"
+      },
+      "conflicting_records": [
+        "g2/docs/reference/toolchains.md:29; g2/docs/reference/decompilation-status.md:53-56; tools/matching/experiments.md:39-65 (later exact one-function evidence)",
+        "g2/docs/reference/libraries.md:331-338 (older statement that no library is positively identified; too broad after the later exact one-function match)"
+      ],
+      "remaining_unique_or_closed_code": "Other PDL routines, CapSense algorithms/application behavior, and total source-backed byte share are unresolved.",
+      "evidence": [
+        "tools/matching/experiments.md:39-65",
+        "g2/docs/reference/toolchains.md:323-335",
+        "g2/tools/manifests/g2-touch-identity-memory-map.json",
+        "g2/tools/analyze_g2_touch_identity.py"
+      ]
+    },
+    "case": {
+      "locked_artifact": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+      "attribution": "Current compiler evidence supersedes earlier GCC/newlib attribution: Keil MDK Arm Compiler 6 (armclang/LLVM), armlink, and Arm C library are strongly supported. FreeRTOS with the GCC ARM_CM0 port is identified as a family; an upstream `xPortPendSVHandler` body is instruction-identical, while version is only bounded to V10.0.0\u2013V10.6.x (likely 10.3.1\u201310.5.1). `uxListRemove` compiler experiments support armclang identity but do not identify the vendor FreeRTOS version. STM32CubeG0 HAL/LL and CMSIS device-header families are strong, with exact HAL version unknown.",
+      "scoped_matches": [
+        {
+          "unit": "xPortPendSVHandler",
+          "evidence": "instruction-identical to upstream port.c; no exact kernel release established"
+        },
+        {
+          "unit": "uxListRemove",
+          "bytes": 38,
+          "evidence": "GCC matrix did not match; LLVM 11\u201320 had one leading-load scheduling difference; compiler signal, not exact upstream body attribution"
+        }
+      ],
+      "remaining_unique_or_closed_code": "Application task/product logic has no source map or supported whole-image upstream-attributed denominator. The historical open-Ghidra 435-function count is analysis inventory, not provenance coverage.",
+      "evidence": [
+        "tools/matching/experiments.md:1-37",
+        "g2/docs/reference/toolchains.md:336-357",
+        "g2/docs/reference/libraries.md:339-346",
+        "g2/tools/manifests/g2-case-final-function-frontier.tsv"
+      ]
+    }
+  },
+  "global_limits": {
+    "historical_citations": "Many libraries.md/toolchains.md rows cite g2/docs/research/* and the dependency-closure manifest described by the docs, but those paths are absent after repository consolidation. Treat their detailed assertions as recorded prior evidence, not independently reauthenticated in this bounded read-only pass. The remaining g2/research/corpus README explicitly says the raw decompilation evidence is not reviewed pseudocode and must be revalidated against identity/scope before reuse.",
+    "checkout_presence": "At the current checkout, key submodules freertos-kernel, cordio, lvgl, ambiqsuite-sdk, qpc, infineon-mtb-pdl-cat2, and stm32g0xx-hal-driver are pinned but uninitialized/empty. nationalchip-lvp-kws is initialized at the documented commit. A pin is not a local source snapshot and is not a production-build receipt.",
+    "source_reconstruction": "No source build was run and no attribution claim implies byte-identical compiled replacement. EvenHub was outside this pass as requested.",
+    "no_total": "No total percentage of all six payloads is supportable from these records; only EM9305 has a published application-byte denominator, while codec has an upstream-object-section denominator and touch has one exact-function span."
+  },
+  "files_reviewed": [
+    "g2/docs/reference/libraries.md",
+    "g2/docs/reference/toolchains.md",
+    "g2/docs/reference/decompilation-status.md",
+    "g2/docs/reference/capabilities.md",
+    "g2/docs/reference/firmware-formats.md",
+    "tools/matching/experiments.md",
+    "g2/research/README.md",
+    "g2/workflow/target.json",
+    "g2/manifests/g2-2.2.6.10.json",
+    "g2/manifests/g2-2.2.6.10-core-source.json",
+    "g2/tools/manifests/g2-codec-fwpk-segment-map.tsv",
+    "g2/tools/manifests/g2-codec-stage2-section-map.tsv",
+    "g2/tools/manifests/g2-touch-identity-memory-map.json",
+    "g2/research/corpus/em9305/",
+    "g2/research/corpus/case/",
+    "g2/research/corpus/touch/",
+    "g2/research/corpus/codec/"
+  ]
+}

@@ -1,0 +1,138 @@
+OTA 36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863 (3523396 bytes); decoded image 19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701 (3523364 bytes), base 0x00438000; file payload starts +32.
+
+004bfd62 FUN_004bfd62 [004bfd62,004bfd6e) 12B sha256=102a9805750570707a8280660f1f121ad5073cf0a86058ff2409986dba84da65
+004bfd62 80b5     push       {r7, lr}
+004bfd64 d0f82808 ldr.w      r0, [r0, #0x828]
+004bfd68 79f090f8 bl         #0x538e8c
+004bfd6c 02bd     pop        {r1, pc}
+
+00538e8c FUN_00538e8c [00538e8c,00538ece) 66B sha256=e551b7b0af10daaeae0056297928d36e9754c6cb212984e37afc0d3bb7354651
+00538e8c 0100     movs       r1, r0
+00538e8e 0028     cmp        r0, #0
+00538e90 06d0     beq        #0x538ea0
+00538e92 0068     ldr        r0, [r0]
+00538e94 20f07e40 bic        r0, r0, #0xfe000000
+00538e98 dff8b023 ldr.w      r2, [pc, #0x3b0] ; literal [0x0053924c]=0x01cdcdcd
+00538e9c 9042     cmp        r0, r2
+00538e9e 01d0     beq        #0x538ea4
+00538ea0 0220     movs       r0, #2
+00538ea2 13e0     b          #0x538ecc
+00538ea4 0868     ldr        r0, [r1]
+00538ea6 c0f34060 ubfx       r0, r0, #0x19, #1
+00538eaa 0028     cmp        r0, #0
+00538eac 01d1     bne        #0x538eb2
+00538eae 0020     movs       r0, #0
+00538eb0 0ce0     b          #0x538ecc
+00538eb2 486a     ldr        r0, [r1, #0x24]
+00538eb4 0068     ldr        r0, [r0]
+00538eb6 0068     ldr        r0, [r0]
+00538eb8 4008     lsrs       r0, r0, #1
+00538eba 4000     lsls       r0, r0, #1
+00538ebc 4a6a     ldr        r2, [r1, #0x24]
+00538ebe 1268     ldr        r2, [r2]
+00538ec0 1060     str        r0, [r2]
+00538ec2 0868     ldr        r0, [r1]
+00538ec4 30f00070 bics       r0, r0, #0x2000000
+00538ec8 0860     str        r0, [r1]
+00538eca 0020     movs       r0, #0
+00538ecc 7047     bx         lr
+
+004bfc86 FUN_004bfc86 [004bfc86,004bfcc0) 58B sha256=69478f026f1d9f7c23279db04edcfaaf1218e1b5da69e33f9cc3cb0771562865
+004bfc86 70b5     push       {r4, r5, r6, lr}
+004bfc88 4468     ldr        r4, [r0, #4]
+004bfc8a 4ff40d65 mov.w      r5, #0x8d0
+004bfc8e dff8146c ldr.w      r6, [pc, #0xc14] ; literal [0x004c08a4]=0x200523d8
+004bfc92 05fb04f0 mul        r0, r5, r4
+004bfc96 3044     add        r0, r6
+004bfc98 d0f82808 ldr.w      r0, [r0, #0x828]
+004bfc9c 0028     cmp        r0, #0
+004bfc9e 0dd0     beq        #0x4bfcbc
+004bfca0 0121     movs       r1, #1
+004bfca2 05fb04f0 mul        r0, r5, r4
+004bfca6 3044     add        r0, r6
+004bfca8 d0f82808 ldr.w      r0, [r0, #0x828]
+004bfcac 79f0f5f9 bl         #0x53909a
+004bfcb0 0020     movs       r0, #0
+004bfcb2 6c43     muls       r4, r5, r4
+004bfcb4 06eb0401 add.w      r1, r6, r4
+004bfcb8 c1f82808 str.w      r0, [r1, #0x828]
+004bfcbc 0020     movs       r0, #0
+004bfcbe 70bd     pop        {r4, r5, r6, pc}
+
+0053909a FUN_0053909a [0053909a,005390fc) 98B sha256=7b9043e48ae0dd5f4e067a1f0884e7696abcc0bbd570b345a76391a8de201bad
+0053909a 38b5     push       {r3, r4, r5, lr}
+0053909c 0d00     movs       r5, r1
+0053909e 0400     movs       r4, r0
+005390a0 0028     cmp        r0, #0
+005390a2 05d0     beq        #0x5390b0
+005390a4 0068     ldr        r0, [r0]
+005390a6 20f07e40 bic        r0, r0, #0xfe000000
+005390aa 6849     ldr        r1, [pc, #0x1a0] ; literal [0x0053924c]=0x01cdcdcd
+005390ac 8842     cmp        r0, r1
+005390ae 01d0     beq        #0x5390b4
+005390b0 0220     movs       r0, #2
+005390b2 22e0     b          #0x5390fa
+005390b4 2000     movs       r0, r4
+005390b6 fff72ffe bl         #0x538d18
+005390ba edb2     uxtb       r5, r5
+005390bc 002d     cmp        r5, #0
+005390be 05d1     bne        #0x5390cc
+005390c0 e069     ldr        r0, [r4, #0x1c]
+005390c2 216a     ldr        r1, [r4, #0x20]
+005390c4 8842     cmp        r0, r1
+005390c6 01d0     beq        #0x5390cc
+005390c8 0320     movs       r0, #3
+005390ca 16e0     b          #0x5390fa
+005390cc 2000     movs       r0, r4
+005390ce 0168     ldr        r1, [r0]
+005390d0 31f08071 bics       r1, r1, #0x1000000
+005390d4 0160     str        r1, [r0]
+005390d6 606a     ldr        r0, [r4, #0x24]
+005390d8 0068     ldr        r0, [r0]
+005390da 0068     ldr        r0, [r0]
+005390dc 4008     lsrs       r0, r0, #1
+005390de 4000     lsls       r0, r0, #1
+005390e0 616a     ldr        r1, [r4, #0x24]
+005390e2 0968     ldr        r1, [r1]
+005390e4 0860     str        r0, [r1]
+005390e6 606a     ldr        r0, [r4, #0x24]
+005390e8 0069     ldr        r0, [r0, #0x10]
+005390ea 0168     ldr        r1, [r0]
+005390ec 606a     ldr        r0, [r4, #0x24]
+005390ee 4069     ldr        r0, [r0, #0x14]
+005390f0 8143     bics       r1, r0
+005390f2 606a     ldr        r0, [r4, #0x24]
+005390f4 0069     ldr        r0, [r0, #0x10]
+005390f6 0160     str        r1, [r0]
+005390f8 0020     movs       r0, #0
+005390fa 32bd     pop        {r1, r4, r5, pc}
+
+00538d18 FUN_00538d18 [00538d18,00538d58) 64B sha256=b509adac0c08c9239aabb77c270b559aa76cd2b797bc473f2d0d01a22e3c2837
+00538d18 1cb5     push       {r2, r3, r4, lr}
+00538d1a 0400     movs       r4, r0
+00538d1c 3af710fe bl         #0x473940
+00538d20 0090     str        r0, [sp]
+00538d22 606a     ldr        r0, [r4, #0x24]
+00538d24 8068     ldr        r0, [r0, #8]
+00538d26 0068     ldr        r0, [r0]
+00538d28 00f0ff00 and        r0, r0, #0xff
+00538d2c 216a     ldr        r1, [r4, #0x20]
+00538d2e 090a     lsrs       r1, r1, #8
+00538d30 0902     lsls       r1, r1, #8
+00538d32 0843     orrs       r0, r1
+00538d34 e061     str        r0, [r4, #0x1c]
+00538d36 216a     ldr        r1, [r4, #0x20]
+00538d38 e069     ldr        r0, [r4, #0x1c]
+00538d3a 091a     subs       r1, r1, r0
+00538d3c 0029     cmp        r1, #0
+00538d3e 03d5     bpl        #0x538d48
+00538d40 e069     ldr        r0, [r4, #0x1c]
+00538d42 b0f58070 subs.w     r0, r0, #0x100
+00538d46 e061     str        r0, [r4, #0x1c]
+00538d48 606a     ldr        r0, [r4, #0x24]
+00538d4a 4068     ldr        r0, [r0, #4]
+00538d4c 0068     ldr        r0, [r0]
+00538d4e e060     str        r0, [r4, #0xc]
+00538d50 0098     ldr        r0, [sp]
+00538d52 80f31088 msr        primask, r0
+00538d56 13bd     pop        {r0, r1, r4, pc}

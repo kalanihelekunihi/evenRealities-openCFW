@@ -1,0 +1,43 @@
+{
+  "implemented_source": [
+    "Pinned Ambiq GPIO full interrupt-control",
+    "Pinned pin-index helper",
+    "Reconstructed radio pin117 enable/disable",
+    "Reconstructed pin136 byte-truth output command",
+    "Reconstructed contiguous GPIO-only shutdown consumer slice"
+  ],
+  "linked_prior_source": [
+    "GPIO state-write and configuration setter",
+    "Actual PRIMASK helper"
+  ],
+  "immutable_data": [
+    "Pinned GPIO drive/pull capability tables",
+    "Authenticated pin138 raw configuration3"
+  ],
+  "fixture_resources": [
+    "Mapped synchronous GPIO register cells",
+    "Synthetic WTS/WTC and ENS/ENC side effects",
+    "External output-active mask",
+    "Stable nonaliasing borrowed input RAM"
+  ],
+  "external_executable_call_stubs": [],
+  "unimplemented_lifecycle_dependencies": [
+    "Preceding WsfTimerStop",
+    "Following caller state clearing",
+    "Transport release0x52df12 and subordinate HAL disable/power/uninitialize bodies",
+    "Transport startup0x52dd94 and subordinate HAL initialize/configure/enable bodies",
+    "Controller boot/protocol/data-transfer state machine"
+  ],
+  "physical_observations_required_for": [
+    "Pinmux/output-active/electrical signal identity",
+    "Controller reset/ready/settling timing",
+    "Actual asynchronous IRQ/controller/transport shutdown races"
+  ],
+  "software_next_inputs": [
+    "Pinned public Ambiq transport/IOM candidate source and exact firmware mappings; physical SPI attribution remains separate and offline analysis can continue"
+  ],
+  "fully_source_complete_payloads": 0,
+  "source_built_byte_identical_bundle": false,
+  "optimized_tick": "Prior blocker retained; this profile does not clear it",
+  "transport_bus_identification": "Existing references infer SPI; subordinate HAL family needs a source/body cross-check before an IOM identity is claimed."
+}

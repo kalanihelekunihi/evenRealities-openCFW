@@ -1,0 +1,602 @@
+{
+  "status": "PASS",
+  "cases": 24,
+  "firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "elf_sha256": "d00c9e431ad44425e1d036c2b27447d2382e5f55d9e3110c9a695b0c2c3cbae8",
+  "verifier_sha256": "83f2d1e254a296fa62b1212599b03f4eaecd7af9872800f6659edf6aa4006367",
+  "sample_union_stock_instruction_bytes": 160,
+  "vectors": [
+    {
+      "inputs": {
+        "op": "get",
+        "pin": 223,
+        "prior": 0,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "output": 1953628448,
+      "mmio": [
+        [
+          "read",
+          1073808252,
+          1953628448,
+          0
+        ]
+      ],
+      "primask": 0,
+      "trace_bytes": 22
+    },
+    {
+      "inputs": {
+        "op": "get",
+        "pin": 103,
+        "prior": 0,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "output": 3435837848,
+      "mmio": [
+        [
+          "read",
+          1073807772,
+          3435837848,
+          0
+        ]
+      ],
+      "primask": 0,
+      "trace_bytes": 22
+    },
+    {
+      "inputs": {
+        "op": "get",
+        "pin": 224,
+        "prior": 0,
+        "null": false,
+        "config": 0
+      },
+      "status": 5,
+      "output": 2880293630,
+      "mmio": [],
+      "primask": 0,
+      "trace_bytes": 14
+    },
+    {
+      "inputs": {
+        "op": "get",
+        "pin": 103,
+        "prior": 0,
+        "null": true,
+        "config": 0
+      },
+      "status": 6,
+      "output": 2880293630,
+      "mmio": [],
+      "primask": 0,
+      "trace_bytes": 18
+    },
+    {
+      "inputs": {
+        "op": "set",
+        "pin": 0,
+        "prior": 0,
+        "null": false,
+        "config": 3040872329
+      },
+      "status": 0,
+      "output": 2880293630,
+      "mmio": [
+        [
+          "write",
+          1073808384,
+          115,
+          1
+        ],
+        [
+          "write",
+          1073807360,
+          3040872329,
+          1
+        ],
+        [
+          "write",
+          1073808384,
+          0,
+          1
+        ]
+      ],
+      "primask": 0,
+      "trace_bytes": 86
+    },
+    {
+      "inputs": {
+        "op": "set",
+        "pin": 0,
+        "prior": 0,
+        "null": false,
+        "config": 3040873353
+      },
+      "status": 7,
+      "output": 2880293630,
+      "mmio": [],
+      "primask": 0,
+      "trace_bytes": 64
+    },
+    {
+      "inputs": {
+        "op": "set",
+        "pin": 142,
+        "prior": 0,
+        "null": false,
+        "config": 387
+      },
+      "status": 0,
+      "output": 2880293630,
+      "mmio": [
+        [
+          "write",
+          1073808384,
+          115,
+          1
+        ],
+        [
+          "write",
+          1073807928,
+          387,
+          1
+        ],
+        [
+          "write",
+          1073808384,
+          0,
+          1
+        ]
+      ],
+      "primask": 0,
+      "trace_bytes": 86
+    },
+    {
+      "inputs": {
+        "op": "set",
+        "pin": 138,
+        "prior": 0,
+        "null": false,
+        "config": 3
+      },
+      "status": 0,
+      "output": 2880293630,
+      "mmio": [
+        [
+          "write",
+          1073808384,
+          115,
+          1
+        ],
+        [
+          "write",
+          1073807912,
+          3,
+          1
+        ],
+        [
+          "write",
+          1073808384,
+          0,
+          1
+        ]
+      ],
+      "primask": 0,
+      "trace_bytes": 86
+    },
+    {
+      "inputs": {
+        "op": "set",
+        "pin": 142,
+        "prior": 0,
+        "null": false,
+        "config": 3040871305
+      },
+      "status": 0,
+      "output": 2880293630,
+      "mmio": [
+        [
+          "write",
+          1073808384,
+          115,
+          1
+        ],
+        [
+          "write",
+          1073807928,
+          3040871305,
+          1
+        ],
+        [
+          "write",
+          1073808384,
+          0,
+          1
+        ]
+      ],
+      "primask": 0,
+      "trace_bytes": 86
+    },
+    {
+      "inputs": {
+        "op": "set",
+        "pin": 142,
+        "prior": 0,
+        "null": false,
+        "config": 3040879497
+      },
+      "status": 0,
+      "output": 2880293630,
+      "mmio": [
+        [
+          "write",
+          1073808384,
+          115,
+          1
+        ],
+        [
+          "write",
+          1073807928,
+          3040879497,
+          1
+        ],
+        [
+          "write",
+          1073808384,
+          0,
+          1
+        ]
+      ],
+      "primask": 0,
+      "trace_bytes": 102
+    },
+    {
+      "inputs": {
+        "op": "set",
+        "pin": 142,
+        "prior": 0,
+        "null": false,
+        "config": 3040920457
+      },
+      "status": 0,
+      "output": 2880293630,
+      "mmio": [
+        [
+          "write",
+          1073808384,
+          115,
+          1
+        ],
+        [
+          "write",
+          1073807928,
+          3040920457,
+          1
+        ],
+        [
+          "write",
+          1073808384,
+          0,
+          1
+        ]
+      ],
+      "primask": 0,
+      "trace_bytes": 94
+    },
+    {
+      "inputs": {
+        "op": "set",
+        "pin": 142,
+        "prior": 0,
+        "null": false,
+        "config": 3040928649
+      },
+      "status": 7,
+      "output": 2880293630,
+      "mmio": [],
+      "primask": 0,
+      "trace_bytes": 68
+    },
+    {
+      "inputs": {
+        "op": "get",
+        "pin": 223,
+        "prior": 1,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "output": 1953628448,
+      "mmio": [
+        [
+          "read",
+          1073808252,
+          1953628448,
+          1
+        ]
+      ],
+      "primask": 1,
+      "trace_bytes": 22
+    },
+    {
+      "inputs": {
+        "op": "get",
+        "pin": 103,
+        "prior": 1,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "output": 3435837848,
+      "mmio": [
+        [
+          "read",
+          1073807772,
+          3435837848,
+          1
+        ]
+      ],
+      "primask": 1,
+      "trace_bytes": 22
+    },
+    {
+      "inputs": {
+        "op": "get",
+        "pin": 224,
+        "prior": 1,
+        "null": false,
+        "config": 0
+      },
+      "status": 5,
+      "output": 2880293630,
+      "mmio": [],
+      "primask": 1,
+      "trace_bytes": 14
+    },
+    {
+      "inputs": {
+        "op": "get",
+        "pin": 103,
+        "prior": 1,
+        "null": true,
+        "config": 0
+      },
+      "status": 6,
+      "output": 2880293630,
+      "mmio": [],
+      "primask": 1,
+      "trace_bytes": 18
+    },
+    {
+      "inputs": {
+        "op": "set",
+        "pin": 0,
+        "prior": 1,
+        "null": false,
+        "config": 3040872329
+      },
+      "status": 0,
+      "output": 2880293630,
+      "mmio": [
+        [
+          "write",
+          1073808384,
+          115,
+          1
+        ],
+        [
+          "write",
+          1073807360,
+          3040872329,
+          1
+        ],
+        [
+          "write",
+          1073808384,
+          0,
+          1
+        ]
+      ],
+      "primask": 1,
+      "trace_bytes": 86
+    },
+    {
+      "inputs": {
+        "op": "set",
+        "pin": 0,
+        "prior": 1,
+        "null": false,
+        "config": 3040873353
+      },
+      "status": 7,
+      "output": 2880293630,
+      "mmio": [],
+      "primask": 1,
+      "trace_bytes": 64
+    },
+    {
+      "inputs": {
+        "op": "set",
+        "pin": 142,
+        "prior": 1,
+        "null": false,
+        "config": 387
+      },
+      "status": 0,
+      "output": 2880293630,
+      "mmio": [
+        [
+          "write",
+          1073808384,
+          115,
+          1
+        ],
+        [
+          "write",
+          1073807928,
+          387,
+          1
+        ],
+        [
+          "write",
+          1073808384,
+          0,
+          1
+        ]
+      ],
+      "primask": 1,
+      "trace_bytes": 86
+    },
+    {
+      "inputs": {
+        "op": "set",
+        "pin": 138,
+        "prior": 1,
+        "null": false,
+        "config": 3
+      },
+      "status": 0,
+      "output": 2880293630,
+      "mmio": [
+        [
+          "write",
+          1073808384,
+          115,
+          1
+        ],
+        [
+          "write",
+          1073807912,
+          3,
+          1
+        ],
+        [
+          "write",
+          1073808384,
+          0,
+          1
+        ]
+      ],
+      "primask": 1,
+      "trace_bytes": 86
+    },
+    {
+      "inputs": {
+        "op": "set",
+        "pin": 142,
+        "prior": 1,
+        "null": false,
+        "config": 3040871305
+      },
+      "status": 0,
+      "output": 2880293630,
+      "mmio": [
+        [
+          "write",
+          1073808384,
+          115,
+          1
+        ],
+        [
+          "write",
+          1073807928,
+          3040871305,
+          1
+        ],
+        [
+          "write",
+          1073808384,
+          0,
+          1
+        ]
+      ],
+      "primask": 1,
+      "trace_bytes": 86
+    },
+    {
+      "inputs": {
+        "op": "set",
+        "pin": 142,
+        "prior": 1,
+        "null": false,
+        "config": 3040879497
+      },
+      "status": 0,
+      "output": 2880293630,
+      "mmio": [
+        [
+          "write",
+          1073808384,
+          115,
+          1
+        ],
+        [
+          "write",
+          1073807928,
+          3040879497,
+          1
+        ],
+        [
+          "write",
+          1073808384,
+          0,
+          1
+        ]
+      ],
+      "primask": 1,
+      "trace_bytes": 102
+    },
+    {
+      "inputs": {
+        "op": "set",
+        "pin": 142,
+        "prior": 1,
+        "null": false,
+        "config": 3040920457
+      },
+      "status": 0,
+      "output": 2880293630,
+      "mmio": [
+        [
+          "write",
+          1073808384,
+          115,
+          1
+        ],
+        [
+          "write",
+          1073807928,
+          3040920457,
+          1
+        ],
+        [
+          "write",
+          1073808384,
+          0,
+          1
+        ]
+      ],
+      "primask": 1,
+      "trace_bytes": 94
+    },
+    {
+      "inputs": {
+        "op": "set",
+        "pin": 142,
+        "prior": 1,
+        "null": false,
+        "config": 3040928649
+      },
+      "status": 7,
+      "output": 2880293630,
+      "mmio": [],
+      "primask": 1,
+      "trace_bytes": 68
+    }
+  ]
+}

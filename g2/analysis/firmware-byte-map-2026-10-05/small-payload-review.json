@@ -1,0 +1,646 @@
+{
+  "components": [
+    {
+      "component": "touch",
+      "limits": "Inner [0xC0,0x775C) mixes Thumb code and literal pools. Tuning/config claims are inferred; fill-pattern candidates remain unproved.",
+      "outer_evenota_payload_offset": "0x837E8",
+      "payload_path": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+      "payload_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+      "payload_size": 34464,
+      "regions": [
+        {
+          "classification_status": "definite_non_code_container",
+          "details": {
+            "field_0x04_le": "0x02020001 (meaning unresolved)",
+            "magic": "FWPK",
+            "record": {
+              "crc32c_reflected": "0x48674BC7",
+              "offset": 32,
+              "size": 34432,
+              "type": 3
+            },
+            "record_count": 1,
+            "record_crc_verified": true,
+            "reserved": 0,
+            "version": 1
+          },
+          "end_exclusive": 32,
+          "evidence": [
+            "g2/manifests/g2-2.2.6.10.json:55-116",
+            "g2/blobs/official/g2-2.2.6.10/PROVENANCE.md:18-25",
+            "g2/docs/reference/firmware-formats.md",
+            "g2/tools/analyze_g2_touch_identity.py:24-81,201-270",
+            "g2/tools/manifests/g2-touch-identity-memory-map.json",
+            "g2/tools/manifests/g2-touch-identity-regions.tsv",
+            "g2/docs/reference/memory-map.md:249-276"
+          ],
+          "sha256": "4e382d4f8342b367424774e314e10e30a7b568251e0f27f1192289e2bd327773",
+          "size": 32,
+          "start": 0,
+          "subtype": "FWPK header and single type-3 descriptor"
+        },
+        {
+          "address_mapping": {
+            "flash": "[0x3300,0x33C0)"
+          },
+          "classification_status": "definite_non_code_vector_data",
+          "details": {
+            "external_default": "0x0000465D",
+            "external_irq_count": 13,
+            "initial_sp": "0x20002000",
+            "nested_image": "[0,0xC0)",
+            "reset": "0x00004675",
+            "sha256": "62575e83fb7b4718742d51d7b5e007ef00a51604b7ed801f4e59a748956e8261",
+            "slots": 48
+          },
+          "end_exclusive": 224,
+          "evidence": [
+            "g2/manifests/g2-2.2.6.10.json:55-116",
+            "g2/blobs/official/g2-2.2.6.10/PROVENANCE.md:18-25",
+            "g2/docs/reference/firmware-formats.md",
+            "g2/tools/analyze_g2_touch_identity.py:24-81,201-270",
+            "g2/tools/manifests/g2-touch-identity-memory-map.json",
+            "g2/tools/manifests/g2-touch-identity-regions.tsv",
+            "g2/docs/reference/memory-map.md:249-276"
+          ],
+          "sha256": "62575e83fb7b4718742d51d7b5e007ef00a51604b7ed801f4e59a748956e8261",
+          "size": 192,
+          "start": 32,
+          "subtype": "PSoC 4000T Cortex-M0+ vector table"
+        },
+        {
+          "address_mapping": {
+            "flash": "[0x33C0,0xAA5C)"
+          },
+          "classification_status": "mixed; not admitted as non-code",
+          "details": {
+            "nested_image": "[0xC0,0x775C)",
+            "newlib_init_array_at": "0xC0"
+          },
+          "end_exclusive": 30588,
+          "evidence": [
+            "g2/manifests/g2-2.2.6.10.json:55-116",
+            "g2/blobs/official/g2-2.2.6.10/PROVENANCE.md:18-25",
+            "g2/docs/reference/firmware-formats.md",
+            "g2/tools/analyze_g2_touch_identity.py:24-81,201-270",
+            "g2/tools/manifests/g2-touch-identity-memory-map.json",
+            "g2/tools/manifests/g2-touch-identity-regions.tsv",
+            "g2/docs/reference/memory-map.md:249-276"
+          ],
+          "sha256": "fe450d33b3e8e3b8d657ea33f4624fba832f2064a3eadb85c287d7fcd2fa67e0",
+          "size": 30364,
+          "start": 224,
+          "subtype": "Thumb code and embedded literal pools"
+        },
+        {
+          "classification_status": "strong_typed_non_code",
+          "details": {
+            "examples": [
+              "TP VER:%s",
+              "ACT->ALR",
+              "ALR->WOT",
+              "LEFT",
+              "RIGHT"
+            ],
+            "nested_image": "[0x775C,0x7DC4)",
+            "version": "2.2.0.1"
+          },
+          "end_exclusive": 32228,
+          "evidence": [
+            "g2/manifests/g2-2.2.6.10.json:55-116",
+            "g2/blobs/official/g2-2.2.6.10/PROVENANCE.md:18-25",
+            "g2/docs/reference/firmware-formats.md",
+            "g2/tools/analyze_g2_touch_identity.py:24-81,201-270",
+            "g2/tools/manifests/g2-touch-identity-memory-map.json",
+            "g2/tools/manifests/g2-touch-identity-regions.tsv",
+            "g2/docs/reference/memory-map.md:249-276"
+          ],
+          "sha256": "73fc960cd33e4d9ef33451d5d835c35fcb7e169804e9ee672014e138c599a941",
+          "size": 1640,
+          "start": 30588,
+          "subtype": "constant log strings and firmware version"
+        },
+        {
+          "classification_status": "inferred_non_code",
+          "details": {
+            "detail": "nine uint32 tuning constants and descriptors",
+            "nested_image": "[0x7DC4,0x8110)"
+          },
+          "end_exclusive": 33072,
+          "evidence": [
+            "g2/manifests/g2-2.2.6.10.json:55-116",
+            "g2/blobs/official/g2-2.2.6.10/PROVENANCE.md:18-25",
+            "g2/docs/reference/firmware-formats.md",
+            "g2/tools/analyze_g2_touch_identity.py:24-81,201-270",
+            "g2/tools/manifests/g2-touch-identity-memory-map.json",
+            "g2/tools/manifests/g2-touch-identity-regions.tsv",
+            "g2/docs/reference/memory-map.md:249-276"
+          ],
+          "sha256": "f65e342c33de6c249321e27b1029f717b78e719ca7866e0b2535671b85d9d224",
+          "size": 844,
+          "start": 32228,
+          "subtype": "tuning constants and runtime descriptors"
+        },
+        {
+          "classification_status": "candidate only; zero alone insufficient",
+          "details": {
+            "all_zero": true,
+            "nested_image": "[0x8110,0x8120)"
+          },
+          "end_exclusive": 33088,
+          "evidence": [
+            "g2/manifests/g2-2.2.6.10.json:55-116",
+            "g2/blobs/official/g2-2.2.6.10/PROVENANCE.md:18-25",
+            "g2/docs/reference/firmware-formats.md",
+            "g2/tools/analyze_g2_touch_identity.py:24-81,201-270",
+            "g2/tools/manifests/g2-touch-identity-memory-map.json",
+            "g2/tools/manifests/g2-touch-identity-regions.tsv",
+            "g2/docs/reference/memory-map.md:249-276"
+          ],
+          "sha256": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb",
+          "size": 16,
+          "start": 33072,
+          "subtype": "zero-filled gap candidate"
+        },
+        {
+          "classification_status": "inferred_non_code",
+          "details": {
+            "likely": "CapSense/MSC tuning",
+            "nested_image": "[0x8120,0x8430)"
+          },
+          "end_exclusive": 33872,
+          "evidence": [
+            "g2/manifests/g2-2.2.6.10.json:55-116",
+            "g2/blobs/official/g2-2.2.6.10/PROVENANCE.md:18-25",
+            "g2/docs/reference/firmware-formats.md",
+            "g2/tools/analyze_g2_touch_identity.py:24-81,201-270",
+            "g2/tools/manifests/g2-touch-identity-memory-map.json",
+            "g2/tools/manifests/g2-touch-identity-regions.tsv",
+            "g2/docs/reference/memory-map.md:249-276"
+          ],
+          "sha256": "02c6e186eca0ae9038a8c52c34026c23658104af3354bce067a47939accf0419",
+          "size": 784,
+          "start": 33088,
+          "subtype": "configuration tables with SRAM descriptors"
+        },
+        {
+          "classification_status": "candidate only; zero alone insufficient",
+          "details": {
+            "all_zero": true,
+            "nested_image": "[0x8430,0x85D0)"
+          },
+          "end_exclusive": 34288,
+          "evidence": [
+            "g2/manifests/g2-2.2.6.10.json:55-116",
+            "g2/blobs/official/g2-2.2.6.10/PROVENANCE.md:18-25",
+            "g2/docs/reference/firmware-formats.md",
+            "g2/tools/analyze_g2_touch_identity.py:24-81,201-270",
+            "g2/tools/manifests/g2-touch-identity-memory-map.json",
+            "g2/tools/manifests/g2-touch-identity-regions.tsv",
+            "g2/docs/reference/memory-map.md:249-276"
+          ],
+          "sha256": "4cc7e6272db6b1ad7581f76c63c694e926e20698e9b02223d5041a55960463f2",
+          "size": 416,
+          "start": 33872,
+          "subtype": "zero-filled gap candidate"
+        },
+        {
+          "classification_status": "inferred_non_code",
+          "details": {
+            "nested_image": "[0x85D0,0x8650)",
+            "references": [
+              "MSCLP0 0x40290000",
+              "GPIO PRT4 0x40040400"
+            ],
+            "size": 128
+          },
+          "end_exclusive": 34416,
+          "evidence": [
+            "g2/manifests/g2-2.2.6.10.json:55-116",
+            "g2/blobs/official/g2-2.2.6.10/PROVENANCE.md:18-25",
+            "g2/docs/reference/firmware-formats.md",
+            "g2/tools/analyze_g2_touch_identity.py:24-81,201-270",
+            "g2/tools/manifests/g2-touch-identity-memory-map.json",
+            "g2/tools/manifests/g2-touch-identity-regions.tsv",
+            "g2/docs/reference/memory-map.md:249-276"
+          ],
+          "sha256": "269eea7cd1cf52a8818b95b756ae17ec776ff6a2f231be58dc8ff0da7f2c6c17",
+          "size": 128,
+          "start": 34288,
+          "subtype": "peripheral configuration descriptor"
+        },
+        {
+          "classification_status": "candidate padding; fill alone insufficient",
+          "details": {
+            "all_ff": true,
+            "context": "after row-sized configuration block and before CRC",
+            "nested_image": "[0x8650,0x867C)"
+          },
+          "end_exclusive": 34460,
+          "evidence": [
+            "g2/manifests/g2-2.2.6.10.json:55-116",
+            "g2/blobs/official/g2-2.2.6.10/PROVENANCE.md:18-25",
+            "g2/docs/reference/firmware-formats.md",
+            "g2/tools/analyze_g2_touch_identity.py:24-81,201-270",
+            "g2/tools/manifests/g2-touch-identity-memory-map.json",
+            "g2/tools/manifests/g2-touch-identity-regions.tsv",
+            "g2/docs/reference/memory-map.md:249-276"
+          ],
+          "sha256": "463d5921a6bfd5c98f6047f561495800372e627c07ce458c23b7ac164a22be51",
+          "size": 44,
+          "start": 34416,
+          "subtype": "0xFF fill before checksum"
+        },
+        {
+          "classification_status": "definite_non_code_checksum",
+          "details": {
+            "covers": "[0,0x867C)",
+            "nested_image": "[0x867C,0x8680)",
+            "value": "0xF75CF6F4",
+            "verified": true
+          },
+          "end_exclusive": 34464,
+          "evidence": [
+            "g2/manifests/g2-2.2.6.10.json:55-116",
+            "g2/blobs/official/g2-2.2.6.10/PROVENANCE.md:18-25",
+            "g2/docs/reference/firmware-formats.md",
+            "g2/tools/analyze_g2_touch_identity.py:24-81,201-270",
+            "g2/tools/manifests/g2-touch-identity-memory-map.json",
+            "g2/tools/manifests/g2-touch-identity-regions.tsv",
+            "g2/docs/reference/memory-map.md:249-276"
+          ],
+          "sha256": "589f84e105896025c0a2a6c20d780e4e9618cb26072abc6b062630692812b52f",
+          "size": 4,
+          "start": 34460,
+          "subtype": "reflected CRC-32C checksum word"
+        }
+      ]
+    },
+    {
+      "component": "case",
+      "limits": "Only first 16 Cortex-M vector words are admitted. External IRQ-table extent and remaining code/data/table/padding are unresolved.",
+      "outer_evenota_payload_offset": "0x8BF08",
+      "payload_path": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+      "payload_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+      "payload_size": 55784,
+      "regions": [
+        {
+          "classification_status": "definite_non_code_container",
+          "details": {
+            "checksum_be": "0x7367642F",
+            "magic": "EVEN",
+            "raw_length_be": 55752,
+            "verified": true,
+            "version": "1.2.57",
+            "version_bytes": "01 02 39 00"
+          },
+          "end_exclusive": 32,
+          "evidence": [
+            "g2/manifests/g2-2.2.6.10.json:55-116",
+            "g2/blobs/official/g2-2.2.6.10/PROVENANCE.md:18-25",
+            "g2/docs/reference/firmware-formats.md",
+            "g2/docs/reference/firmware-formats.md:153-184",
+            "g2/tools/merge_case_backup.py:72-91",
+            "g2/docs/reference/memory-map.md:300-320",
+            "g2/research/corpus/case/ghidra/open-2026-09-29/RUN.json"
+          ],
+          "sha256": "50e3b01beaf60791c3b918f8d00e296460b427121dac04a06ed9ecec6e644840",
+          "size": 32,
+          "start": 0,
+          "subtype": "EVEN wrapper header and additive checksum"
+        },
+        {
+          "address_mapping": {
+            "bank_alias": "[0x08040000,0x08040040)",
+            "flash": "[0x08000000,0x08000040)"
+          },
+          "classification_status": "definite_non_code_vector_data",
+          "details": {
+            "initial_sp": "0x20002C88",
+            "little_endian_words": [
+              "0x20002C88",
+              "0x08000145",
+              "0x08006D71",
+              "0x08006779",
+              "0x00000000",
+              "0x00000000",
+              "0x00000000",
+              "0x00000000",
+              "0x00000000",
+              "0x00000000",
+              "0x00000000",
+              "0x08006E19",
+              "0x00000000",
+              "0x00000000",
+              "0x08000103",
+              "0x08008421"
+            ],
+            "raw_image": "[0,0x40)",
+            "reset_vector": "0x08000145",
+            "scope": "first 16 architectural words only",
+            "words": 16
+          },
+          "end_exclusive": 96,
+          "evidence": [
+            "g2/manifests/g2-2.2.6.10.json:55-116",
+            "g2/blobs/official/g2-2.2.6.10/PROVENANCE.md:18-25",
+            "g2/docs/reference/firmware-formats.md",
+            "g2/docs/reference/firmware-formats.md:153-184",
+            "g2/tools/merge_case_backup.py:72-91",
+            "g2/docs/reference/memory-map.md:300-320",
+            "g2/research/corpus/case/ghidra/open-2026-09-29/RUN.json"
+          ],
+          "sha256": "7dcb456005b780ee303f22bdbf04787cb25482795a133e4627804608ff1cb180",
+          "size": 64,
+          "start": 32,
+          "subtype": "Cortex-M0+ core exception vector words"
+        },
+        {
+          "address_mapping": {
+            "bank_alias": "[0x08040040,0x0804D9C8)",
+            "flash": "[0x08000040,0x0800D9C8)"
+          },
+          "classification_status": "unresolved; not admitted as non-code",
+          "details": {
+            "note": "full external vector-table extent and non-code spans are not established",
+            "raw_image": "[0x40,0xD9C8)"
+          },
+          "end_exclusive": 55784,
+          "evidence": [
+            "g2/manifests/g2-2.2.6.10.json:55-116",
+            "g2/blobs/official/g2-2.2.6.10/PROVENANCE.md:18-25",
+            "g2/docs/reference/firmware-formats.md",
+            "g2/docs/reference/firmware-formats.md:153-184",
+            "g2/tools/merge_case_backup.py:72-91",
+            "g2/docs/reference/memory-map.md:300-320",
+            "g2/research/corpus/case/ghidra/open-2026-09-29/RUN.json"
+          ],
+          "sha256": "9c0f750b2549849609a68fef5417024a3012443c9314af3d44a0c7b685566097",
+          "size": 55688,
+          "start": 96,
+          "subtype": "remaining case image; code/data/vector tail unresolved"
+        }
+      ]
+    },
+    {
+      "component": "ble_em9305",
+      "limits": "Only record metadata and FHDR prefix are definite non-code. Record payloads and FHDR entry bytes remain unresolved. ROM/absent flash and RAM/BSS excluded.",
+      "outer_evenota_payload_offset": "0x4FB7C",
+      "payload_path": "g2/blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin",
+      "payload_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+      "payload_size": 211948,
+      "record_package_roundtrip_byte_exact": true,
+      "regions": [
+        {
+          "classification_status": "definite_non_code_container",
+          "details": {
+            "alignment": "[0x7A,0x7C)",
+            "alignment_hex": "0000",
+            "descriptor_area": "[0x10,0x40): four <offset,size,target> tuples",
+            "erase_sector_count": 29,
+            "magic_hex": "00020404",
+            "metadata_size": 124,
+            "parser_checks": "bounds, canonical contiguous records, total consumption, zero alignment, target non-overlap/non-wrap",
+            "payload_bytes": 211824,
+            "records": 4,
+            "roundtrip_exact": true,
+            "sector_ids": "[0x40,0x7A)"
+          },
+          "end_exclusive": 124,
+          "evidence": [
+            "g2/manifests/g2-2.2.6.10.json:55-116",
+            "g2/blobs/official/g2-2.2.6.10/PROVENANCE.md:18-25",
+            "g2/docs/reference/firmware-formats.md",
+            "g2/components/em9305/source_image/record_package.py:12-141",
+            "g2/tools/analyze_em9305_record_package.py:18-67",
+            "g2/tools/manifests/em9305-record-package-summary.json",
+            "g2/manifests/g2-2.2.6.10.json:55-116",
+            "g2/docs/reference/memory-map.md:200-217",
+            "g2/workflow/tasks/P1-em9305-record0-inventory-003/evidence.md:7-25"
+          ],
+          "sha256": "407de41f30523b0ded9824c8a25749164bdb39c5ec2893a976ec808b1b40957a",
+          "size": 124,
+          "start": 0,
+          "subtype": "record header, descriptors, erase-sector IDs and alignment"
+        },
+        {
+          "address_mapping": {
+            "target": "[0x00300000,0x003000E0)"
+          },
+          "classification_status": "unresolved code or data",
+          "details": {
+            "record": 0,
+            "target": "0x00300000",
+            "target_end": "0x003000E0"
+          },
+          "end_exclusive": 348,
+          "evidence": [
+            "g2/manifests/g2-2.2.6.10.json:55-116",
+            "g2/blobs/official/g2-2.2.6.10/PROVENANCE.md:18-25",
+            "g2/docs/reference/firmware-formats.md",
+            "g2/components/em9305/source_image/record_package.py:12-141",
+            "g2/tools/analyze_em9305_record_package.py:18-67",
+            "g2/tools/manifests/em9305-record-package-summary.json",
+            "g2/manifests/g2-2.2.6.10.json:55-116",
+            "g2/docs/reference/memory-map.md:200-217",
+            "g2/workflow/tasks/P1-em9305-record0-inventory-003/evidence.md:7-25"
+          ],
+          "sha256": "137944c2c57f7114638d16c3be1c95a54afb9a4be600bc42a2b543add11571ee",
+          "size": 224,
+          "start": 124,
+          "subtype": "record payload; content untyped"
+        },
+        {
+          "address_mapping": {
+            "target": "[0x00300400,0x00300690)"
+          },
+          "classification_status": "unresolved code or data",
+          "details": {
+            "record": 1,
+            "target": "0x00300400",
+            "target_end": "0x00300690"
+          },
+          "end_exclusive": 1004,
+          "evidence": [
+            "g2/manifests/g2-2.2.6.10.json:55-116",
+            "g2/blobs/official/g2-2.2.6.10/PROVENANCE.md:18-25",
+            "g2/docs/reference/firmware-formats.md",
+            "g2/components/em9305/source_image/record_package.py:12-141",
+            "g2/tools/analyze_em9305_record_package.py:18-67",
+            "g2/tools/manifests/em9305-record-package-summary.json",
+            "g2/manifests/g2-2.2.6.10.json:55-116",
+            "g2/docs/reference/memory-map.md:200-217",
+            "g2/workflow/tasks/P1-em9305-record0-inventory-003/evidence.md:7-25"
+          ],
+          "sha256": "e3fdf1874d05d7687aeda3b60061dd0f3814fdc0b246d7bfbe2291fa457d645b",
+          "size": 656,
+          "start": 348,
+          "subtype": "record payload; content untyped"
+        },
+        {
+          "address_mapping": {
+            "target": "[0x00302000,0x00302028)"
+          },
+          "classification_status": "definite_non_code_descriptor",
+          "details": {
+            "descriptor_prefix_size": 40,
+            "entry_point": "0x00302028",
+            "fields": [
+              {
+                "offset": "+0x00",
+                "raw_le_u32": "0x52444846",
+                "semantic_status": "magic"
+              },
+              {
+                "offset": "+0x04",
+                "raw_le_u32": "0x00032800",
+                "semantic_status": "unresolved"
+              },
+              {
+                "offset": "+0x08",
+                "raw_le_u32": "0x00302028",
+                "semantic_status": "documented entry point"
+              },
+              {
+                "offset": "+0x0C",
+                "raw_le_u32": "0x00033BA0",
+                "semantic_status": "unresolved"
+              },
+              {
+                "offset": "+0x10",
+                "raw_le_u32": "0xCEB7F4F3",
+                "semantic_status": "unresolved"
+              },
+              {
+                "offset": "+0x14",
+                "raw_le_u32": "0xFFFFFFFF",
+                "semantic_status": "unresolved"
+              },
+              {
+                "offset": "+0x18",
+                "raw_le_u32": "0x00000000",
+                "semantic_status": "unresolved"
+              },
+              {
+                "offset": "+0x1C",
+                "raw_le_u32": "0x20280000",
+                "semantic_status": "unresolved"
+              },
+              {
+                "offset": "+0x20",
+                "raw_le_u32": "0x3B940030",
+                "semantic_status": "unresolved"
+              },
+              {
+                "offset": "+0x24",
+                "raw_le_u32": "0x00008730",
+                "semantic_status": "unresolved"
+              }
+            ],
+            "limit": "Only FHDR magic and entry address at +0x08 are semantically corroborated; other fields are raw.",
+            "magic": "FHDR",
+            "record": 2,
+            "target": "0x00302000"
+          },
+          "end_exclusive": 1044,
+          "evidence": [
+            "g2/manifests/g2-2.2.6.10.json:55-116",
+            "g2/blobs/official/g2-2.2.6.10/PROVENANCE.md:18-25",
+            "g2/docs/reference/firmware-formats.md",
+            "g2/components/em9305/source_image/record_package.py:12-141",
+            "g2/tools/analyze_em9305_record_package.py:18-67",
+            "g2/tools/manifests/em9305-record-package-summary.json",
+            "g2/manifests/g2-2.2.6.10.json:55-116",
+            "g2/docs/reference/memory-map.md:200-217",
+            "g2/workflow/tasks/P1-em9305-record0-inventory-003/evidence.md:7-25"
+          ],
+          "sha256": "d6285323fe15311ed8e0ac1c8201eb43ea310d25a9cc780dc57f79bc3712a756",
+          "size": 40,
+          "start": 1004,
+          "subtype": "FHDR descriptor header fields"
+        },
+        {
+          "address_mapping": {
+            "target": "[0x00302028,0x00302038)"
+          },
+          "classification_status": "unresolved; excluded from definite non-code",
+          "details": {
+            "reason": "documented entry point begins at this offset; instruction/data contents not classified",
+            "record": 2,
+            "target": "[0x00302028,0x00302038)"
+          },
+          "end_exclusive": 1060,
+          "evidence": [
+            "g2/manifests/g2-2.2.6.10.json:55-116",
+            "g2/blobs/official/g2-2.2.6.10/PROVENANCE.md:18-25",
+            "g2/docs/reference/firmware-formats.md",
+            "g2/components/em9305/source_image/record_package.py:12-141",
+            "g2/tools/analyze_em9305_record_package.py:18-67",
+            "g2/tools/manifests/em9305-record-package-summary.json",
+            "g2/manifests/g2-2.2.6.10.json:55-116",
+            "g2/docs/reference/memory-map.md:200-217",
+            "g2/workflow/tasks/P1-em9305-record0-inventory-003/evidence.md:7-25"
+          ],
+          "sha256": "522ba84584972a56a454b65c8dc4f27a988ef57a3374e55cbffa2938c7494268",
+          "size": 16,
+          "start": 1044,
+          "subtype": "FHDR entry-address bytes; possible executable entry code"
+        },
+        {
+          "address_mapping": {
+            "target": "[0x00302400,0x00335BC8)"
+          },
+          "classification_status": "unresolved mixed code/data",
+          "details": {
+            "known": "ARC IRQ structures begin at vector word 16; code and tail tables coexist",
+            "limit": "No exact non-code table endpoints established; linear ARC objdump is not treated as decisive code/data evidence.",
+            "record": 3,
+            "size": 210888,
+            "target": "0x00302400",
+            "target_end": "0x00335BC8"
+          },
+          "end_exclusive": 211948,
+          "evidence": [
+            "g2/manifests/g2-2.2.6.10.json:55-116",
+            "g2/blobs/official/g2-2.2.6.10/PROVENANCE.md:18-25",
+            "g2/docs/reference/firmware-formats.md",
+            "g2/components/em9305/source_image/record_package.py:12-141",
+            "g2/tools/analyze_em9305_record_package.py:18-67",
+            "g2/tools/manifests/em9305-record-package-summary.json",
+            "g2/manifests/g2-2.2.6.10.json:55-116",
+            "g2/docs/reference/memory-map.md:200-217",
+            "g2/workflow/tasks/P1-em9305-record0-inventory-003/evidence.md:7-25"
+          ],
+          "sha256": "0de6e945a56ec886a92e44d4eaefe02fbca6db11f8747876e30bffb45cffce03",
+          "size": 210888,
+          "start": 1060,
+          "subtype": "application record with code and tables; contents untyped"
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Bounded map only; not the whole six-payload ledger or pseudocode-completeness evidence.",
+    "No decompilation, reconstruction, build, flash, or device operations.",
+    "Only stored payload bytes are mapped; absent ROM/flash and runtime RAM/BSS excluded."
+  ],
+  "schema_version": 1,
+  "scope": {
+    "bundle": "s200_v2.2.6.10",
+    "bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "components": [
+      "touch",
+      "case",
+      "ble_em9305"
+    ],
+    "offset_convention": "payload-local, start inclusive/end exclusive",
+    "policy": "definite non-code only; mixed and uncertain spans stay unresolved"
+  },
+  "verification": {
+    "case_wrapper_length_and_additive_checksum": "recomputed and passed",
+    "em9305_existing_parser_roundtrip": "passed exact byte comparison",
+    "payload_sizes_hashes_match_manifest": true,
+    "repository_mutations": false,
+    "touch_existing_read_only_audit": "all checks passed"
+  }
+}

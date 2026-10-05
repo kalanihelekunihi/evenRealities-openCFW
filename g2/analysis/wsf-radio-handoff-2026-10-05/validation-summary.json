@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "fresh_original_source_comparisons": 180,
+  "observed_original_instruction_bytes_including_prior": 1110,
+  "new_unique_original_instruction_bytes": 470,
+  "cumulative_unique_trace_bytes": 2364,
+  "fresh_foundation_test_methods": 40,
+  "full_original_bodies": 8,
+  "protected_unchanged": {
+    "g2/tools/open_cfw.py": true,
+    "g2/manifests/g2-2.2.6.10.json": true,
+    "g2/workflow/state.json": true,
+    "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin": true
+  },
+  "limits": "Actual WSF critical/event/wake/dispatcher and linked radio/GPIO execute. Synthetic context classification, RTOS notifications/wait, timers/queue providers and app handlers intercepted. Message/timer buffer fixtures prove dispatcher call/release order, not real allocator/queue ownership or OS scheduling. MMIO W1C synthetic. Invalid handler/depth cases preserve stock behavior and do not claim safe use.",
+  "fresh_aggregate": {
+    "module_count": 35,
+    "tests_run": 196,
+    "passed": 190,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 7
+  }
+}

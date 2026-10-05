@@ -1,0 +1,196 @@
+{
+  "task": "Apollo bootloader metadata/vector/scatter/copy table and Apollo main asset corroboration",
+  "read_only": true,
+  "authenticated_payloads": [
+    {
+      "name": "apollo_main OTA payload",
+      "path": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+      "size": 3523396,
+      "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "manifest": "g2/manifests/g2-2.2.6.10.json entry_id 6 provider; hash and size verified locally"
+    },
+    {
+      "name": "apollo_bootloader",
+      "path": "g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin",
+      "size": 148599,
+      "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+      "manifest": "g2/manifests/g2-2.2.6.10.json entry_id 5; hash pinned, not recomputed in this pass"
+    }
+  ],
+  "address_conversion": {
+    "main_payload_link_base": "0x00438000",
+    "ota_preamble_bytes": 32,
+    "formula": "OTA file offset = runtime address - 0x00438000 + 0x20",
+    "evidence": "g2/manifests/g2-2.2.6.10.json entry_id 6 regions; g2/docs/reference/memory-map.md:44"
+  },
+  "definite_noncode_intervals": [
+    {
+      "descriptor_runtime": "0x007682B0",
+      "descriptor_file_offset": "0x3302D0",
+      "data_runtime_start": "0x0067B770",
+      "data_runtime_end_exclusive": "0x0067C1C0",
+      "data_file_start": "0x243790",
+      "data_file_end_exclusive": "0x2441E0",
+      "width": 55,
+      "height": 48,
+      "stride": 55,
+      "size": 2640,
+      "format": "LVGL v9 L8 (descriptor header word 0x619, flags 0)",
+      "confidence": "strong descriptor-structure proof; consumer xref not independently located"
+    },
+    {
+      "descriptor_runtime": "0x007682CC",
+      "descriptor_file_offset": "0x3302EC",
+      "data_runtime_start": "0x00681978",
+      "data_runtime_end_exclusive": "0x006820E8",
+      "data_file_start": "0x249998",
+      "data_file_end_exclusive": "0x24A108",
+      "width": 68,
+      "height": 28,
+      "stride": 68,
+      "size": 1904,
+      "format": "LVGL v9 L8 (descriptor header word 0x619, flags 0)",
+      "confidence": "strong descriptor-structure proof; consumer xref not independently located"
+    },
+    {
+      "descriptor_runtime": "0x007682E8",
+      "descriptor_file_offset": "0x330308",
+      "data_runtime_start": "0x00631E70",
+      "data_runtime_end_exclusive": "0x00633F8C",
+      "data_file_start": "0x1F9E90",
+      "data_file_end_exclusive": "0x1FBFAC",
+      "width": 163,
+      "height": 52,
+      "stride": 163,
+      "size": 8476,
+      "format": "LVGL v9 L8 (descriptor header word 0x619, flags 0)",
+      "confidence": "strong descriptor-structure proof; consumer xref not independently located"
+    },
+    {
+      "descriptor_runtime": "0x00768304",
+      "descriptor_file_offset": "0x330324",
+      "data_runtime_start": "0x00684E08",
+      "data_runtime_end_exclusive": "0x00685408",
+      "data_file_start": "0x24CE28",
+      "data_file_end_exclusive": "0x24D428",
+      "width": 32,
+      "height": 48,
+      "stride": 32,
+      "size": 1536,
+      "format": "LVGL v9 L8 (descriptor header word 0x619, flags 0)",
+      "confidence": "strong descriptor-structure proof; consumer xref not independently located"
+    },
+    {
+      "descriptor_runtime": "0x00768320",
+      "descriptor_file_offset": "0x330340",
+      "data_runtime_start": "0x006859A8",
+      "data_runtime_end_exclusive": "0x00685F28",
+      "data_file_start": "0x24D9C8",
+      "data_file_end_exclusive": "0x24DF48",
+      "width": 44,
+      "height": 32,
+      "stride": 44,
+      "size": 1408,
+      "format": "LVGL v9 L8 (descriptor header word 0x619, flags 0)",
+      "confidence": "strong descriptor-structure proof; consumer xref not independently located"
+    },
+    {
+      "descriptor_runtime": "0x0076833C",
+      "descriptor_file_offset": "0x33035C",
+      "data_runtime_start": "0x0064E228",
+      "data_runtime_end_exclusive": "0x0064F2F4",
+      "data_file_start": "0x216248",
+      "data_file_end_exclusive": "0x217314",
+      "width": 86,
+      "height": 50,
+      "stride": 86,
+      "size": 4300,
+      "format": "LVGL v9 L8 (descriptor header word 0x619, flags 0)",
+      "confidence": "strong descriptor-structure proof; consumer xref not independently located"
+    },
+    {
+      "descriptor_runtime": "0x00768358",
+      "descriptor_file_offset": "0x330378",
+      "data_runtime_start": "0x0062CD30",
+      "data_runtime_end_exclusive": "0x0062FBF0",
+      "data_file_start": "0x1F4D50",
+      "data_file_end_exclusive": "0x1F7C10",
+      "width": 187,
+      "height": 64,
+      "stride": 187,
+      "size": 11968,
+      "format": "LVGL v9 L8 (descriptor header word 0x619, flags 0)",
+      "confidence": "strong descriptor-structure proof; consumer xref not independently located"
+    },
+    {
+      "descriptor_runtime": "0x00768374",
+      "descriptor_file_offset": "0x330394",
+      "data_runtime_start": "0x006A3088",
+      "data_runtime_end_exclusive": "0x006A33B8",
+      "data_file_start": "0x26B0A8",
+      "data_file_end_exclusive": "0x26B3D8",
+      "width": 34,
+      "height": 24,
+      "stride": 34,
+      "size": 816,
+      "format": "LVGL v9 L8 (descriptor header word 0x619, flags 0)",
+      "confidence": "strong descriptor-structure proof; consumer xref not independently located"
+    }
+  ],
+  "boundaries_and_exclusions": [
+    {
+      "runtime": "0x00600FAA onward",
+      "status": "candidate data/resources only, not a complete definite data interval",
+      "reason": "function-entry census stops in this area (strong heuristic), but suffix may include compressed initializer/code or mixed content; do not label entire suffix data"
+    },
+    {
+      "runtime": "ITCM 0x00000040 onward",
+      "status": "runtime copied/decompressed image content; not direct payload file interval",
+      "evidence": "scatter entry above"
+    },
+    {
+      "runtime": "SRAM/BSS and zero-initialized state",
+      "status": "RAM-only; exclude from stored payload data byte ranges unless an explicit copy/initializer source is identified",
+      "evidence": "main SP and SRAM map in g2/docs/reference/memory-map.md:82-88"
+    }
+  ],
+  "assets_review": {
+    "status": "8 directly contiguous structured LVGL image descriptors parsed and individually bounded; broader 428 claim not validated as contiguous and consumer-xref closure remains open",
+    "descriptor_table_run": {
+      "runtime_start": "0x007682B0",
+      "runtime_end_exclusive": "0x00768390",
+      "stride": 28,
+      "count": 8,
+      "termination": "next 28-byte record at 0x00768390 is non-descriptor ASCII/string data",
+      "source_payload_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
+    },
+    "checks": [
+      "header magic/format 0x619 = L8, zero flags",
+      "size equals stride*height",
+      "each data pointer+size lies within linked main application payload",
+      "each range converted to OTA file offsets using manifest preamble and link base"
+    ],
+    "evidence": [
+      "g2/tools/assetgen_lvgl_image.py: pack_header; COLOR_FORMATS layout",
+      "g2/config-recovered/lvgl/g2-config/lv_conf_recovered.h",
+      "g2/docs/reference/memory-map.md:44",
+      "official payload verified against manifest SHA256"
+    ],
+    "limitation": "No consumer function/call-site xref independently established in this scout; classify as strongly structured LVGL image data, retain consumer-closure requirement."
+  },
+  "bootloader_review": {
+    "linked_range_start": "0x00410000",
+    "linked_range_end_exclusive": "0x00434477",
+    "size": 148599,
+    "status": "whole component proven, internal metadata/data boundaries not independently decoded in this pass",
+    "evidence": [
+      "g2/manifests/g2-2.2.6.10.json entry_id 5",
+      "g2/docs/reference/memory-map.md:41"
+    ]
+  },
+  "limitations": [
+    "Scatter table exact terminating record and padding not independently parsed here.",
+    "No per-font/image consumer-pointer interval verified.",
+    "This scouting result is partial; do not infer whole code/data coverage from it."
+  ]
+}

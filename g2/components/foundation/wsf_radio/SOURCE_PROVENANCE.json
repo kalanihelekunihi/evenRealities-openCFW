@@ -1,0 +1,47 @@
+{
+  "classification": "Stock-adapted Apache public-source semantics plus independently reconstructed proprietary port behavior; not unchanged public WSF/private port source",
+  "public_repository": "https://github.com/packetcraft-inc/cordio",
+  "public_commit": "3656312d6b73e2a2c1c8b33ee0385bc199dd97e6",
+  "public_version": "r20.05c selected by repository reference library table",
+  "upstream_files": [
+    {
+      "path": "wsf/include/wsf_os.h",
+      "git_blob": "2f526954f7dbab2fc630821c68ac3796e95bcad1",
+      "sha256": "661e334690d27f74b5e74a5f76ede37199d3fff0b94d96126b73fe12c8ed2075",
+      "url": "https://github.com/packetcraft-inc/cordio/blob/3656312d6b73e2a2c1c8b33ee0385bc199dd97e6/wsf/include/wsf_os.h"
+    },
+    {
+      "path": "wsf/include/wsf_cs.h",
+      "git_blob": "dff5b4ac8362744a2746fc2b011216ebb7967dcd",
+      "sha256": "bde58eb2efda2c39b071ae371f7a1b0d30c2b9cd13c7614915ba87520b75f0e4",
+      "url": "https://github.com/packetcraft-inc/cordio/blob/3656312d6b73e2a2c1c8b33ee0385bc199dd97e6/wsf/include/wsf_cs.h"
+    },
+    {
+      "path": "wsf/sources/targets/baremetal/wsf_os.c",
+      "git_blob": "84f1d0f4b1fc12825d6a9ab6f2216ee26ffb608e",
+      "sha256": "109239384d56e61a741b788ca7d6d18b19f83dec37f7b81c207d4c497ea199b7",
+      "url": "https://github.com/packetcraft-inc/cordio/blob/3656312d6b73e2a2c1c8b33ee0385bc199dd97e6/wsf/sources/targets/baremetal/wsf_os.c"
+    },
+    {
+      "path": "wsf/sources/targets/baremetal/wsf_cs.c",
+      "git_blob": "0152f93bc3cb6458f45e6bb7fbafed9e0010500d",
+      "sha256": "0f9964b3a1c1c192d6eaa8fb4a077c98313b26d34e723750ebedaa2b2b97cc21",
+      "url": "https://github.com/packetcraft-inc/cordio/blob/3656312d6b73e2a2c1c8b33ee0385bc199dd97e6/wsf/sources/targets/baremetal/wsf_cs.c"
+    },
+    {
+      "path": "LICENSE.md",
+      "git_blob": "5fe50d5491f1166292380f46c8beae44ca83cadb",
+      "sha256": "682ae5978019e4ee9d439b300efb125525b2e4cc4181ebd1e676dd60dc69d7cd",
+      "url": "https://github.com/packetcraft-inc/cordio/blob/3656312d6b73e2a2c1c8b33ee0385bc199dd97e6/LICENSE.md"
+    }
+  ],
+  "stock_port_family": "AmbiqSuite2.5.1 family, proprietary archive identity prefix87b03680 per existing reference/toolchains; no full private archive/hash or source fetched",
+  "differences": [
+    "Stock10handlers vs publicdefault16",
+    "Stock8-bit handler event storage vs public16-bit wsfEventMask_t",
+    "Stock assertions/traces absent in selected machine-code functions",
+    "Stockexplicit FreeRTOS-style wake/dispatcherwait and two timer updates/outerdrain loop"
+  ],
+  "license": "Apache-2.0, Arm2009-2019 and Packetcraft2019-2020 notices retained",
+  "original_firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
+}

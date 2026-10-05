@@ -1,0 +1,48 @@
+{
+  "control_comparison": {
+    "status": "PASS",
+    "cases": 6648,
+    "unique_original_trace_bytes": 854,
+    "statically_unreachable_control_bytes": 6,
+    "source_manifest_current": true,
+    "executable_call_stubs": 0,
+    "result_path": "g2/build/foundation/radio-gpio-control-simulator/control-comparison-reviewed.json",
+    "literal_wrapper_return": 117
+  },
+  "prior_gpio_regression": {
+    "status": "PASS",
+    "cases": 16108,
+    "unique_original_trace_bytes": 406,
+    "source_manifest_current": true,
+    "result_path": "g2/build/foundation/radio-gpio-control-simulator/config-state-comparison-reviewed.json"
+  },
+  "affected_ambiq_tests": {
+    "passed": 22,
+    "failures": 0,
+    "errors": 0
+  },
+  "aggregate": {
+    "modules": 42,
+    "completed": 42,
+    "totals": {
+      "tests_run": 222,
+      "passed": 216,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 7,
+      "method_skips": 6,
+      "setup_skips": 1
+    }
+  },
+  "new_unique_executed_bytes": 480,
+  "cumulative_unique_executed_bytes": 5044,
+  "fully_source_complete_payloads": 0,
+  "source_built_byte_identical_bundle": false,
+  "optimized_tick": "BLOCKED; unchanged prior instrumentation-sensitive execution limitation",
+  "independent_review": {
+    "status": "PASS",
+    "representative_cases": 28,
+    "report": "g2/analysis/radio-gpio-control-2026-10-05/review/report.md",
+    "remaining_correctness_blockers": 0
+  }
+}

@@ -1,0 +1,28 @@
+# Real ordered waiter removal in the radio/WSF queue path
+
+The linked simulator now executes a source-defined ordered event-list removal provider rather than a synthetic higher-priority return. Pinned MIT FreeRTOS function texts implement removal, ready/pending insertion, next-unblock recalculation, task-count access and list helpers. The exact unchanged text identities and ABI adaptations are in `g2/components/foundation/freertos_ready/SOURCE_PROVENANCE.json`.
+
+Original `0x455370` is authenticated as 246 bytes. Queue ISR send calls it at `0x4419f4`; nonblocking queue receive calls it at `0x441c10`. Both callers establish BASEPRI 0x30. The selected TCB owns state/event items at +4/+24 and priority at +44. The list ABI is 20 bytes; only these accessed fields are supplied, not a complete private kernel ABI.
+
+| Condition | Event item after removal | State item after removal | Result |
+| --- | --- | --- | --- |
+| Scheduler running | Unlinked, container zero | Priority ready list | Return 1/set yield-pending only when priority exceeds current |
+| Scheduler suspended | Pending-ready list | Remains in original blocked list | Same priority comparison; task readiness is deferred |
+
+List insertion is before the current index, leaving that index unchanged. Removal repairs an index pointing at the removed item. Existing yield-pending is preserved when priority is equal/lower. Current delayed-list head tick, or 0xffffffff for an empty list, is written by `0x455876`; no millisecond conversion is inferred. Task-count access is at `0x454f10`.
+
+Fresh `comparison-final.json` passes 301 stock/source comparisons, observing 1,984 distinct original instruction bytes across this linked path. Independent expectations check every modeled list edge, head/tail/count/index, owner/container, index-relative insertion order, delayed/ready/pending memberships, priorities, yield flag, next-unblock tick, task guards and direct return values. Cases cover scheduler suspended 0/1/3, equal/lower/higher priorities, blocked-list alternatives, remaining delayed tasks, existing ready/pending nodes with changed indices, repeated removals, ISR higher-pointer/null-pointer behavior, locked queues/task counts, sender wake on receive, WSF IDs/mask truncation and integrated radio callbacks. Null owner stops at assert-provider entry before the stock fault store/loop; it is not an executed diagnostic routine.
+
+The first failure was a verifier expectation that omitted WSF's queued wake bit1. It was corrected without changing firmware/source semantics. A separate repeated-call experiment observed Unicorn skipping a compiled helper's first instruction while its list index memory remained intact. Restricting Thumb IT compilation did not resolve it. Invalidating executable translation caches on both sides before each synthetic top-level call resolved that observation with the normal Makefile compiler flags. The saved final result records this policy; no instruction bytes or function bodies are substituted. This is emulator-policy evidence, not a proven general emulator root cause or hardware scheduler trace. Failed/diagnostic runs contribute no coverage.
+
+New disjoint instruction evidence is 280 bytes: ordered removal 236/246, reset-next-unblock 38/38, task-count getter 6/6. Generic list helpers are executed by the new source, while stock removal inlines their equivalent operations. Cumulative deduplicated original evidence becomes 3,530 bytes (touch 234, Apollo 3,296). Source semantic agreement is distinct from compiler byte equality.
+
+Synthetic input establishes a coherent accessed TCB/list graph, not complete boot state. Selected task-count extremes and initial next-unblock scalars are probes, not a globally recovered scheduler snapshot. EventGroup unordered unblock, suspend/resume, scheduler-state/context/wait/ticks, app callbacks and positive timer processing remain boundaries. Pending-ready drain, actual task selection/context switch, object creation/deletion and hardware scheduling remain unproven. The queued command owns copied bytes; its EventGroup pointer remains borrowed through callback completion. This batch supplies no new cancellation or lifetime safety guarantee.
+
+Source, static original evidence, tests, independent review and hash-bound build/results are retained. The source is Git-visible; build outputs remain ignored. No firmware, protected manifest/workflow state or current index was changed by this batch. No source-complete payload or source-built byte-identical bundle is established.
+
+## Fresh review and regression results
+
+Independent review (`review/report.md`, `review/review.json`) found no blocker and verified the exact final ELF/source/result hashes. Affected foundation suite: 53 passing tests. Full aggregate: 39 modules, 209 tests run, 203 passing methods, zero failures/errors, seven recorded skips (including class-level skips). The installed OpenCFW Python supplies Capstone; bounded npm retry/timeout environment settings preserve the unchanged font tests’ documented offline skip policy. Wrong-Python and interrupted npm-wait runs are retained as incomplete evidence and excluded from success claims. Fresh protected hashes match prior identities.
+
+Reproduce the fresh comparison with the installed OpenCFW Python and a new output filename; outputs are exclusive-create. Build uses the existing Cortex-M4-compatible Thumb2 subset for Unicorn, while the locked firmware target remains Cortex-M55. No compiler-byte equality is claimed. `build-provenance.json` binds the current source inputs, exact compiler flags, ELF, comparison, aggregate, evidence ledger, validation summary and independent review.

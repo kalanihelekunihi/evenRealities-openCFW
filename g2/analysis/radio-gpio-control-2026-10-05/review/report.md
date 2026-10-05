@@ -1,0 +1,11 @@
+# Independent review: GPIO interrupt and radio-control slice
+
+The bounded GPIO control implementation matches the authenticated original in the refreshed 6,648-case comparison, and I independently reran 28 selected stock/source/model cases against the refreshed ELF. The spot-check includes ordinary and both-channel individual operations, mask operations, high-byte operation/channel inputs, invalid pin/control and null-pointer precedence, pin136 truth-gate values, wrapper return values, and the shutdown call slice. All reruns matched. The comparison records 854 unique original instruction bytes.
+
+The implementation retains exact pinned SDK 5.1.0 function text for `gpionum_intreg_index_get` and `am_hal_gpio_interrupt_control`, with source hashes in `CONTROL_PROVENANCE.json`. The volatile mask access order and synchronous input reads are compared; the harness also checks saved PRIMASK around protected MMIO and verifies borrowed input memory remains unchanged. The radio consumer constants match the stock call sites: pin117/channel0 enable or disable, and pin136 set when the incoming byte is nonzero, clear otherwise. The enable and disable wrappers now return `uint32_t` 117, matching the stock return value; the refreshed verifier checks R0.
+
+Six instructions are intentionally absent from executed-byte credit. The helper that precedes the first branch always returns success, making `0x4810EE..0x4810F2` unreachable. Validation rejects operation bytes above 3, so the default-switch path at `0x481126..0x481128` is also unreachable. These exclusions match the source and observed control flow.
+
+The shutdown evidence covers exactly the 14-byte slice `0x4B49D8..0x4B49E6`: disable pin117, clear pin136, then call the existing idle helper, which clears pin93 and configures pin138 with raw value 3. The slice does not include the broader shutdown lifecycle, timer stop, transport release, or later state clearing. W1 command-cell effects and output-active masks are simulator inputs; this proves no physical pad, NVIC, concurrent-access, or complete shutdown behavior.
+
+Review evidence and hashes are recorded in `review.json`; the independent sample rerun is `representative-rerun.json`.

@@ -1,0 +1,11 @@
+# Nested scheduler resume and pending-ready drain
+
+This bounded provider replaces `vTaskSuspendAll`/`xTaskResumeAll` fixtures in the radio → WSF → EventGroup → timer-command queue simulator. Three unchanged MIT-licensed function texts come from FreeRTOS V10.5.1 commit `def7d2df2b0506d3d249334974f51e427c17a41c`; compatibility macros map authenticated global cells and the previously reconstructed task critical port. The PendSV request helper is a bounded reconstruction, not a context-switch implementation.
+
+Suspend increments `uxSchedulerSuspended` at 0x20074a58 without masking interrupts. Resume asserts a nonzero count, enters task critical, decrements it, and processes deferred work only when it reaches zero and task count is nonzero. It drains event items from pending-ready, removes the same TCBs' blocked state items, inserts those state items into priority ready lists before each current list index, and recalculates the next delayed-list head tick when any task was moved.
+
+Resume sets yield-pending for moved priority **greater than or equal to** current priority. Ordered event removal uses strictly greater priority. Deferred ticks at 0x20074a40 are copied to a local count, replayed through `xTaskIncrementTick`, and cleared after replay. Any nonzero tick result sets yield-pending. Under this build's preemption configuration, yield-pending requests PendSV and makes resume return 1. That return means a request was made, not that a task has switched. Resume does not clear yield-pending itself.
+
+`xTaskIncrementTick` is an explicit intercepted simulator boundary: its return values are supplied to test replay bookkeeping. It is not a production provider and deliberately cannot return when invoked without the harness. Tick advancement, delayed-task expiry, actual scheduler selection and context switching remain outside this module. Creation/deletion, borrowed EventGroup lifetime and hardware behavior remain unproven.
+
+Build with `make -C g2 rtos-resume-wsf-simulator`. Run `simulator/verify.py` using the installed OpenCFW Python, the built ELF, and a fresh output filename. The verifier applies the same executable-cache invalidation policy to stock/source as the ready-list batch. See `g2/analysis/rtos-resume-wsf-2026-10-05/REPORT.md` for evidence and limits.

@@ -1,0 +1,81 @@
+{
+  "verified_utc": "2026-10-05T15:36:10.094967+00:00",
+  "providers": [
+    {
+      "payload": "codec",
+      "kind": "official_blob",
+      "path": "blobs/official/g2-2.2.6.10/firmware_codec.bin",
+      "size": 326092,
+      "sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0"
+    },
+    {
+      "payload": "ble_em9305",
+      "kind": "official_blob",
+      "path": "blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin",
+      "size": 211948,
+      "sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9"
+    },
+    {
+      "payload": "touch",
+      "kind": "official_blob",
+      "path": "blobs/official/g2-2.2.6.10/firmware_touch.bin",
+      "size": 34464,
+      "sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d"
+    },
+    {
+      "payload": "case",
+      "kind": "official_blob",
+      "path": "blobs/official/g2-2.2.6.10/firmware_box.bin",
+      "size": 55784,
+      "sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374"
+    },
+    {
+      "payload": "apollo_bootloader",
+      "kind": "official_blob",
+      "path": "blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin",
+      "size": 148599,
+      "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5"
+    },
+    {
+      "payload": "apollo_main",
+      "kind": "official_blob",
+      "path": "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+      "size": 3523396,
+      "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
+    }
+  ],
+  "component_c_files": [],
+  "c_assignments": [],
+  "gates": {
+    "G1_TARGET_AND_INVENTORY": {
+      "status": "passed",
+      "receipt": "g2/build/pseudocode-first/20260930T190500Z/receipts/G1-target-and-inventory-107/receipt.json",
+      "receipt_sha256": "fe17aa5a4e7456a81f342c3ca6d67233b065c42dd5c5a09917bb8e603e4d6610"
+    },
+    "G2_PSEUDOCODE_COMPLETE": {
+      "status": "not_run",
+      "receipt": null
+    },
+    "G3_CORPUS_FROZEN": {
+      "status": "not_run",
+      "receipt": null
+    },
+    "G4_IMPLEMENTATION_READY": {
+      "status": "not_run",
+      "receipt": null
+    },
+    "G5_SOURCE_COMPLETE": {
+      "status": "not_run",
+      "receipt": null
+    },
+    "G6_IDENTICAL_SOURCE_BUILD": {
+      "status": "not_run",
+      "receipt": null
+    }
+  },
+  "source_gate_receipt_candidates": [],
+  "completed_blob_free_payloads": 0,
+  "payload_denominator": 6,
+  "partial_C_percent": null,
+  "build_independence": "Active Makefile reference invokes open_cfw.py build, whose read_providers reads each provider path. All6 active providers point to official binaries. EM9305 build_image.py packages caller-supplied records; it does not implement controller/vendor record programs."
+}

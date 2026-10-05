@@ -1,0 +1,49 @@
+00480f0c: 7cb5     push       {r2, r3, r4, r5, r6, lr}
+00480f0e: 0400     movs       r4, r0
+00480f10: 0e00     movs       r6, r1
+00480f12: dff82858 ldr.w      r5, [pc, #0x828]
+00480f16: e02c     cmp        r4, #0xe0
+00480f18: 01d3     blo        #0x480f1e
+00480f1a: 0520     movs       r0, #5
+00480f1c: 34e0     b          #0x480f88
+00480f1e: 2100     movs       r1, r4
+00480f20: 4909     lsrs       r1, r1, #5
+00480f22: 0122     movs       r2, #1
+00480f24: 14f01f00 ands       r0, r4, #0x1f
+00480f28: 8240     lsls       r2, r0
+00480f2a: dff81408 ldr.w      r0, [pc, #0x814]
+00480f2e: 50f82100 ldr.w      r0, [r0, r1, lsl #2]
+00480f32: 1042     tst        r0, r2
+00480f34: 0bd1     bne        #0x480f4e
+00480f36: c6f38120 ubfx       r0, r6, #0xa, #2
+00480f3a: 0228     cmp        r0, #2
+00480f3c: 15db     blt        #0x480f6a
+00480f3e: dff80408 ldr.w      r0, [pc, #0x804]
+00480f42: 50f82100 ldr.w      r0, [r0, r1, lsl #2]
+00480f46: 1042     tst        r0, r2
+00480f48: 0fd1     bne        #0x480f6a
+00480f4a: 0720     movs       r0, #7
+00480f4c: 1ce0     b          #0x480f88
+00480f4e: c6f34230 ubfx       r0, r6, #0xd, #3
+00480f52: 0028     cmp        r0, #0
+00480f54: 09d0     beq        #0x480f6a
+00480f56: c6f34230 ubfx       r0, r6, #0xd, #3
+00480f5a: 0628     cmp        r0, #6
+00480f5c: 05d0     beq        #0x480f6a
+00480f5e: c6f34230 ubfx       r0, r6, #0xd, #3
+00480f62: 0128     cmp        r0, #1
+00480f64: 01d0     beq        #0x480f6a
+00480f66: 0720     movs       r0, #7
+00480f68: 0ee0     b          #0x480f88
+00480f6a: f2f7e9fc bl         #0x473940
+00480f6e: 0090     str        r0, [sp]
+00480f70: dff8d407 ldr.w      r0, [pc, #0x7d4]
+00480f74: 7321     movs       r1, #0x73
+00480f76: 0160     str        r1, [r0]
+00480f78: 45f82460 str.w      r6, [r5, r4, lsl #2]
+00480f7c: 0021     movs       r1, #0
+00480f7e: 0160     str        r1, [r0]
+00480f80: 0098     ldr        r0, [sp]
+00480f82: 80f31088 msr        primask, r0
+00480f86: 0020     movs       r0, #0
+00480f88: 76bd     pop        {r1, r2, r4, r5, r6, pc}

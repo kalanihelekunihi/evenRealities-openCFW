@@ -1,0 +1,42 @@
+{
+  "review_status": "pass_with_privilege_and_emulation_limits",
+  "critical_findings": [],
+  "tests": {
+    "command": "python3 -m unittest g2.tests.test_ambiq_mspi g2.tests.test_ambiq_mspi_lifecycle g2.tests.test_ambiq_mspi_cmdq -v",
+    "passed": 11
+  },
+  "comparison": {
+    "path": "g2/build/foundation/ambiq-critical-simulator/comparison-interface-final.json",
+    "status": "PASS",
+    "real_critical": true,
+    "case_count": 435,
+    "exact_compiled_critical_match_bytes": 8,
+    "sha256": "5a37a92ca0d9d3805f49182b757c923581b24dfc87bc480d314f2cebfc9a3595",
+    "verifier_sha256": "99875b33236aa7b62387c744d4f898b99979320fb937a6ab2cb383660c186093",
+    "elf_sha256": "d2a2d858daac6bf54d6d3acf526cbb4931fb739469c1c0df88c3a5bb5fd7680c",
+    "source_manifest_fresh": true,
+    "protected_reads_observed_with_primask": 1
+  },
+  "provider": {
+    "function": "am_hal_interrupt_master_disable",
+    "sequence": ["MRS PRIMASK", "CPSID i", "BX LR"],
+    "alias": "opencfw_cmdq_critical_enter",
+    "stock_address": "0x473940",
+    "stock_byte_match": "eff3108072b67047",
+    "pinned_excerpt_sha256": "bf3b6be1ea16857f54df0d258d726886ea68d24bc0c429cb33e7fe0bd029c38e"
+  },
+  "scope_limits": [
+    "Privileged execution is required for effective PRIMASK masking.",
+    "No real interrupt delivery, pending-event scheduling, concurrency interleaving, or unprivileged-enforcement test.",
+    "Delay remains synthetic; no elapsed-time or ROM timing proof.",
+    "Standalone offline profile, not board startup or firmware integration."
+  ],
+  "reviewed_hashes": {
+    "ambiq_interrupt_mask.c": "27a574d24f61bf1bec7a13d16bc3e1f0816c35045f384b5ad85d808871f6a9eb",
+    "ambiq_interrupt_mask.h": "76e92c27af92ed403326c65acdbb890dccfb4f00788f06c6c99f09e4ec0de98a",
+    "INTERRUPT_MASK_PROVENANCE.json": "1394f2c876b276aa536f9b008e7e0a688cb5311b1f2e85fb9a4c6d332dbf9210",
+    "simulator/verify_cmdq.py": "99875b33236aa7b62387c744d4f898b99979320fb937a6ab2cb383660c186093",
+    "Makefile": "e5646284e96e137b3d67c54877991eb609213fcc4f9fe9dec2da3c9e197a9e27",
+    "README.md": "ea6d336538094a4d00850d47d38de2f3f8720d37853f79eeaf046aeb51ae88ee"
+  }
+}

@@ -1,0 +1,36 @@
+
+g2/build/foundation/rtos-tick-wsf-diagnostic-o2/rtos_tick_wsf.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00010290 <vListInsertEnd>:
+   10290:	6842      	ldr	r2, [r0, #4]
+   10292:	f8d0 c000 	ldr.w	ip, [r0]
+   10296:	6893      	ldr	r3, [r2, #8]
+   10298:	604a      	str	r2, [r1, #4]
+   1029a:	608b      	str	r3, [r1, #8]
+   1029c:	6059      	str	r1, [r3, #4]
+   1029e:	6091      	str	r1, [r2, #8]
+   102a0:	6108      	str	r0, [r1, #16]
+   102a2:	f10c 0101 	add.w	r1, ip, #1
+   102a6:	6001      	str	r1, [r0, #0]
+   102a8:	4770      	bx	lr
+   102aa:	bf00      	nop
+
+000102ac <uxListRemove>:
+   102ac:	6901      	ldr	r1, [r0, #16]
+   102ae:	6843      	ldr	r3, [r0, #4]
+   102b0:	f8d1 c004 	ldr.w	ip, [r1, #4]
+   102b4:	6882      	ldr	r2, [r0, #8]
+   102b6:	4584      	cmp	ip, r0
+   102b8:	609a      	str	r2, [r3, #8]
+   102ba:	6053      	str	r3, [r2, #4]
+   102bc:	bf08      	it	eq
+   102be:	604a      	streq	r2, [r1, #4]
+   102c0:	680b      	ldr	r3, [r1, #0]
+   102c2:	2200      	movs	r2, #0
+   102c4:	6102      	str	r2, [r0, #16]
+   102c6:	1e58      	subs	r0, r3, #1
+   102c8:	6008      	str	r0, [r1, #0]
+   102ca:	4770      	bx	lr

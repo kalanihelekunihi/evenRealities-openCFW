@@ -1,0 +1,34 @@
+{
+  "source_manifest": {
+    "g2/components/foundation/ambiq_mspi/ambiq_cmdq.c": "39dfd4515413e88e66b07f8eea47664a6d666943069e65768f1a284435583a24",
+    "g2/components/foundation/ambiq_mspi/ambiq_cmdq.h": "8f4dffc5e3cf2b33cf877dab9ba5b2841b74451a379b9ab49ab4ec0d2869ce7d",
+    "g2/components/foundation/ambiq_mspi/ambiq_interrupt_mask.c": "27a574d24f61bf1bec7a13d16bc3e1f0816c35045f384b5ad85d808871f6a9eb",
+    "g2/components/foundation/ambiq_mspi/ambiq_interrupt_mask.h": "76e92c27af92ed403326c65acdbb890dccfb4f00788f06c6c99f09e4ec0de98a",
+    "g2/components/foundation/ambiq_mspi/ambiq_mspi_compat.h": "fe6af8d10f857eb6bfb2758907073bd5ab75691a6818c03c94f0124a0f285299",
+    "g2/components/foundation/ambiq_mspi/ambiq_mspi_interrupts.c": "032087d41fe463a36c6a119b8fd2a7beb1256356e2f6d8d9d7f4ca75e02e5ba3",
+    "g2/components/foundation/ambiq_mspi/ambiq_mspi_interrupts.h": "89f04627e3270417130428894d6523b66e1191842dfd5baba01ca0256be51337",
+    "g2/components/foundation/ambiq_mspi/ambiq_mspi_lifecycle.c": "c55c3e163097e0112b11eb9fc4192b6a25de8cdaf28da41b1e3a6c8f2272ad0d",
+    "g2/components/foundation/ambiq_mspi/simulator/entry.c": "762eab9e3d49371055ba5e9941f62540f6538348b23d9f5990e01e7340850b28",
+    "g2/components/foundation/ambiq_mspi/simulator/lifecycle_seams.c": "6b3e74175d61d32ef8c416a72f795ec7b722d6ab0442dd7409e6b7fb1d34e644",
+    "g2/components/foundation/ambiq_mspi/simulator/module.ld": "de37d00a5c0dfa28c3630bae181df5f6b8383ea2e17e1cb371e39f4f00f6185f"
+  },
+  "elf": "g2/build/foundation/ambiq-critical-simulator/ambiq_mspi.elf",
+  "elf_sha256": "d2a2d858daac6bf54d6d3acf526cbb4931fb739469c1c0df88c3a5bb5fd7680c",
+  "comparison": "g2/build/foundation/ambiq-critical-simulator/comparison-interface-final.json",
+  "comparison_sha256": "5a37a92ca0d9d3805f49182b757c923581b24dfc87bc480d314f2cebfc9a3595",
+  "verifier_sha256": "99875b33236aa7b62387c744d4f898b99979320fb937a6ab2cb383660c186093",
+  "makefile_sha256": "e5646284e96e137b3d67c54877991eb609213fcc4f9fe9dec2da3c9e197a9e27",
+  "upstream_provenance": "g2/components/foundation/ambiq_mspi/INTERRUPT_MASK_PROVENANCE.json",
+  "upstream_provenance_sha256": "1394f2c876b276aa536f9b008e7e0a688cb5311b1f2e85fb9a4c6d332dbf9210",
+  "limits": "Only delay0x4807a0 intercepted on BOTH sides; actual MRS/CPSID and PRIMASK restore execute in privileged serialized Unicorn state. Protected CQ index/address reads occur with PRIMASK1, prior mask restored. No actual interrupt delivery, scheduler interleavings, unprivileged enforcement, wall-clock or ROM timing proof.",
+  "static_delay_packet": {
+    "path": "g2/analysis/ambiq-critical-2026-10-05/original/results.json",
+    "sha256": "1921a34f9362f70e98773ed06891c550c19d24ad0fe4d60f82d915074db2dca1",
+    "classification": "static mirrored decode only"
+  },
+  "inconclusive_decoder_run": {
+    "path": "g2/build/foundation/ambiq-critical-simulator/scatter-decoder-inconclusive.json",
+    "sha256": "14973c3e69ada430d3a78bfcc239699d2ec7a16e34e194f046e0e02411c9a376",
+    "status": "INCONCLUSIVE"
+  }
+}

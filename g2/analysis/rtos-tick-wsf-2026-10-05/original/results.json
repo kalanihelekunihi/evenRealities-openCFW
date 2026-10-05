@@ -1,0 +1,169 @@
+{
+  "image": {
+    "ota_path": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+    "ota_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+    "base": "0x438000",
+    "bytes": 3523364
+  },
+  "ghidra_run": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/RUN.json",
+  "authenticated_functions": {
+    "0x45504c": {
+      "bytes": 338,
+      "sha256": "438ad4e9e1a7b439671463b2bbfd13616ebb6de32bd2aad53b802d31f11cc050",
+      "end_exclusive": "0x45519e",
+      "callees": [
+        "00455876",
+        "005fa0a4"
+      ],
+      "callers": [
+        "0x442114",
+        "0x454dcc",
+        "0x4563b4"
+      ]
+    },
+    "0x442114": {
+      "bytes": 32,
+      "sha256": "2999c107f0c2c7a14aa1dffb07531b0b9389af39295a4ae606201faf02675a6f",
+      "end_exclusive": "0x442134",
+      "callees": [
+        "0045504c",
+        "005fa0a4",
+        "005fa0ba"
+      ],
+      "callers": []
+    },
+    "0x4563b4": {
+      "bytes": 114,
+      "sha256": "43a3151849cd96e46d45ad12bb338ea09f586e9fe734b01d485fb9b21c6775fa",
+      "end_exclusive": "0x456426",
+      "callees": [
+        "0045504c",
+        "0048d654",
+        "0048d670",
+        "005fa0a4",
+        "005fa0ba"
+      ],
+      "callers": [
+        "0x456426"
+      ]
+    },
+    "0x455876": {
+      "bytes": 38,
+      "sha256": "a789916ee424c824c5c5f2302e62e4a861f0fa1289917d9c0e095947bce82598",
+      "end_exclusive": "0x45589c",
+      "callees": [],
+      "callers": [
+        "0x454aae",
+        "0x454dcc",
+        "0x45504c",
+        "0x455370",
+        "0x45547c",
+        "0x455c48"
+      ]
+    }
+  },
+  "systick_vector": {
+    "slot": 15,
+    "address": "0x43803c",
+    "raw_word": "0x442115",
+    "thumb_target": "0x442114"
+  },
+  "literal_references": [
+    {
+      "load_pc": "0x455050",
+      "literal_address": "0x455468",
+      "value": "0x20074a58"
+    },
+    {
+      "load_pc": "0x45505c",
+      "literal_address": "0x45546c",
+      "value": "0x20074a34"
+    },
+    {
+      "load_pc": "0x45506a",
+      "literal_address": "0x455470",
+      "value": "0x20074a24"
+    },
+    {
+      "load_pc": "0x455086",
+      "literal_address": "0x455474",
+      "value": "0x20074a28"
+    },
+    {
+      "load_pc": "0x455090",
+      "literal_address": "0x455af8",
+      "value": "0x20074a48"
+    },
+    {
+      "load_pc": "0x45509e",
+      "literal_address": "0x455724",
+      "value": "0x20074a50"
+    },
+    {
+      "load_pc": "0x455106",
+      "literal_address": "0x4551ac",
+      "value": "0x20074a38"
+    },
+    {
+      "load_pc": "0x455114",
+      "literal_address": "0x4551b0",
+      "value": "0x2006a49c"
+    },
+    {
+      "load_pc": "0x45514c",
+      "literal_address": "0x4551a4",
+      "value": "0x20074a20"
+    },
+    {
+      "load_pc": "0x45515a",
+      "literal_address": "0x455470",
+      "value": "0x20074a24"
+    },
+    {
+      "load_pc": "0x45516e",
+      "literal_address": "0x4551a4",
+      "value": "0x20074a20"
+    },
+    {
+      "load_pc": "0x455172",
+      "literal_address": "0x4551b0",
+      "value": "0x2006a49c"
+    },
+    {
+      "load_pc": "0x455182",
+      "literal_address": "0x455a14",
+      "value": "0x20074a44"
+    },
+    {
+      "load_pc": "0x455190",
+      "literal_address": "0x455a18",
+      "value": "0x20074a40"
+    }
+  ],
+  "upstream_tasks_c": {
+    "path": "g2/build/foundation/freertos-upstream/tasks.c",
+    "commit": "def7d2df2b0506d3d249334974f51e427c17a41c",
+    "git_blob_sha1": "d97085d8736905c1eeb9d9e871c81e5970ee70ed",
+    "sha256": "14020d617b96dd2814e1211f6e3b645bcf5e2bd3179c23fe7dd16bc666fe9463"
+  },
+  "prior_original_fixture_evidence": {
+    "due_task_fixture": {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-rtos-tick-original-due-task-fixture-12028/001",
+      "cases": 168,
+      "replay_sha256": "31edad17ac3ff413cf5a64e90dac4b27f8f15c554abe1290eb99d3960be06571",
+      "scope_sha256": "d33d11c2b2a41e7ab900c6681ccb0ad63c48a49e8978be347ee678487ffa738b",
+      "receipt_sha256": "fa6f79afb9d21d41b5e387f0f585f7dcfdcc8d5b5a0fbb61ecb4a37f55c35e0c"
+    },
+    "tick_drain_map": {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-scheduler-tick-drain-map-10726/002",
+      "accepted": false,
+      "status": "partial",
+      "pseudocode_sha256": "3d52612a8aa8d82810159a67d7004eb2024e0b7209ffe75988e1a2044f5bc484",
+      "replay_sha256": "572d5bf83f8001c96ca8e3e2a6ef132a615f0322dda691b2b98b81215c078110",
+      "receipt_sha256": "5dab04dcff3b2d3de773c322fda70227b1476de9a14b4a1f4add869e88d34065"
+    }
+  },
+  "verifier_sha256": "95ce39df6cdf24fe619fe816ab142f472675b475a8b2f0a9c5256e00a794e089",
+  "disassembly": "disassembly.txt"
+}

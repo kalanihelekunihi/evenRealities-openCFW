@@ -1,0 +1,76 @@
+{
+  "aggregate_completed": true,
+  "aggregate_success": true,
+  "modules_completed": 25,
+  "modules_unrun": 0,
+  "test_method_invocations": 165,
+  "passed_methods": 159,
+  "failed_methods": 0,
+  "errored_methods": 0,
+  "skipped_methods": 6,
+  "additional_class_setup_skips": 1,
+  "failed_subtest_assertions": 0,
+  "unrun_modules": [],
+  "failure_details": [],
+  "font_interruption": {
+    "prior_interruption": "KeyboardInterrupt inside subprocess.communicate waiting for npm view lv_font_conv@1.5.3 dist.integrity; no subprocess timeout",
+    "current_prerequisite_failure": "ENOTFOUND registry.npmjs.org",
+    "rerun_config": {
+      "npm_fetch_timeout_ms": 5000,
+      "npm_fetch_retries": 0,
+      "npm_cache": "/tmp/opencfw-npm-validation-cache"
+    },
+    "end_to_end_result": "existing skip: pin not reachable",
+    "negative_test_limit": "Two negative tests pass on earlier npm dependency error; their intended local branches remain unverified."
+  },
+  "skips": [
+    {
+      "module": "test_thumb_branch_audit",
+      "test": "test_even_ai_hook_is_installed_over_the_stock_prologue (tests.test_thumb_branch_audit.ShippedImageAuditTests.test_even_ai_hook_is_installed_over_the_stock_prologue)",
+      "reason": "set SYBILSIGHT_G2_CFW_IMAGE to the reviewed CFW bundle to audit it whole"
+    },
+    {
+      "module": "test_thumb_branch_audit",
+      "test": "test_image_is_the_pinned_reviewed_build (tests.test_thumb_branch_audit.ShippedImageAuditTests.test_image_is_the_pinned_reviewed_build)",
+      "reason": "set SYBILSIGHT_G2_CFW_IMAGE to the reviewed CFW bundle to audit it whole"
+    },
+    {
+      "module": "test_thumb_branch_audit",
+      "test": "test_only_the_even_ai_trampoline_is_defective (tests.test_thumb_branch_audit.ShippedImageAuditTests.test_only_the_even_ai_trampoline_is_defective)",
+      "reason": "set SYBILSIGHT_G2_CFW_IMAGE to the reviewed CFW bundle to audit it whole"
+    },
+    {
+      "module": "test_thumb_branch_audit",
+      "test": "test_trampoline_fixture_matches_the_image (tests.test_thumb_branch_audit.ShippedImageAuditTests.test_trampoline_fixture_matches_the_image)",
+      "reason": "set SYBILSIGHT_G2_CFW_IMAGE to the reviewed CFW bundle to audit it whole"
+    },
+    {
+      "module": "test_recover_apollo_embedded_source_paths",
+      "test": "setUpClass (tests.test_recover_apollo_embedded_source_paths.ApolloEmbeddedSourcePathRecoveryTests)",
+      "reason": "authenticated Apollo Ghidra corpus unavailable"
+    },
+    {
+      "module": "test_assetgen_lvgl_font",
+      "test": "test_end_to_end_generate_and_compile (tests.test_assetgen_lvgl_font.AssetgenLvglFontTests.test_end_to_end_generate_and_compile)",
+      "reason": "lv_font_conv pin not reachable (offline or npm unavailable)"
+    },
+    {
+      "module": "test_assetgen_nanopb_descriptor",
+      "test": "test_end_to_end_generate_and_compile (tests.test_assetgen_nanopb_descriptor.AssetgenNanopbDescriptorTests.test_end_to_end_generate_and_compile)",
+      "reason": "protoc not available on this host"
+    }
+  ],
+  "new_foundation_tests": {
+    "passed": 9,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "raw_results": "g2/build/implementation-validation-close/results.json",
+  "log": "g2/build/implementation-validation-close/aggregate-after-lvgl.log",
+  "lvgl_pin": "344c7c318047b7348e1be8572a9fd4260c251cfa",
+  "dependency_installation_or_test_changes": "Only official pinned LVGL initialized; tests unchanged",
+  "resource_contract": "The six unchanged .l8 pixel slices are written back into a bytearray of the authenticated original official Apollo payload template; full payload identity must remain equal. Not a source-built Apollo image.",
+  "previous_results": "aggregate-validation-before-lvgl.json",
+  "lvgl_initialized": true
+}

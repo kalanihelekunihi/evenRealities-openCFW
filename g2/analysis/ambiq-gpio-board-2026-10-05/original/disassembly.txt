@@ -1,0 +1,88 @@
+state_write
+00480fd6  1cb5        push {r2, r3, r4, lr}
+00480fd8  0400        movs r4, r0
+00480fda  c9b2        uxtb r1, r1
+00480fdc  0029        cmp r1, #0
+00480fde  08d0        beq #0x480ff2
+00480fe0  0229        cmp r1, #2
+00480fe2  1ed0        beq #0x481022
+00480fe4  11d3        blo #0x48100a
+00480fe6  0429        cmp r1, #4
+00480fe8  3ed0        beq #0x481068
+00480fea  31d3        blo #0x481050
+00480fec  0529        cmp r1, #5
+00480fee  47d0        beq #0x481080
+00480ff0  5ce0        b #0x4810ac
+00480ff2  dff86407    ldr.w r0, [pc, #0x764]
+00480ff6  c4f34211    ubfx r1, r4, #5, #3
+00480ffa  0122        movs r2, #1
+00480ffc  14f01f04    ands r4, r4, #0x1f
+00481000  12fa04f4    lsls.w r4, r2, r4
+00481004  40f82140    str.w r4, [r0, r1, lsl #2]
+00481008  50e0        b #0x4810ac
+0048100a  dff85007    ldr.w r0, [pc, #0x750]
+0048100e  c4f34211    ubfx r1, r4, #5, #3
+00481012  0122        movs r2, #1
+00481014  14f01f04    ands r4, r4, #0x1f
+00481018  12fa04f4    lsls.w r4, r2, r4
+0048101c  40f82140    str.w r4, [r0, r1, lsl #2]
+00481020  44e0        b #0x4810ac
+00481022  f2f78dfc    bl #0x473940
+00481026  0090        str r0, [sp]
+00481028  dff82407    ldr.w r0, [pc, #0x724]
+0048102c  c4f34211    ubfx r1, r4, #5, #3
+00481030  c4f34212    ubfx r2, r4, #5, #3
+00481034  50f82220    ldr.w r2, [r0, r2, lsl #2]
+00481038  0123        movs r3, #1
+0048103a  14f01f04    ands r4, r4, #0x1f
+0048103e  13fa04f4    lsls.w r4, r3, r4
+00481042  5440        eors r4, r2
+00481044  40f82140    str.w r4, [r0, r1, lsl #2]
+00481048  0098        ldr r0, [sp]
+0048104a  80f31088    msr primask, r0
+0048104e  2de0        b #0x4810ac
+00481050  dff80c07    ldr.w r0, [pc, #0x70c]
+00481054  c4f34211    ubfx r1, r4, #5, #3
+00481058  0122        movs r2, #1
+0048105a  14f01f04    ands r4, r4, #0x1f
+0048105e  12fa04f4    lsls.w r4, r2, r4
+00481062  40f82140    str.w r4, [r0, r1, lsl #2]
+00481066  21e0        b #0x4810ac
+00481068  dff8f806    ldr.w r0, [pc, #0x6f8]
+0048106c  c4f34211    ubfx r1, r4, #5, #3
+00481070  0122        movs r2, #1
+00481072  14f01f04    ands r4, r4, #0x1f
+00481076  12fa04f4    lsls.w r4, r2, r4
+0048107a  40f82140    str.w r4, [r0, r1, lsl #2]
+0048107e  15e0        b #0x4810ac
+00481080  f2f75efc    bl #0x473940
+00481084  0090        str r0, [sp]
+00481086  dff8cc06    ldr.w r0, [pc, #0x6cc]
+0048108a  c4f34211    ubfx r1, r4, #5, #3
+0048108e  c4f34212    ubfx r2, r4, #5, #3
+00481092  50f82220    ldr.w r2, [r0, r2, lsl #2]
+00481096  0123        movs r3, #1
+00481098  14f01f04    ands r4, r4, #0x1f
+0048109c  13fa04f4    lsls.w r4, r3, r4
+004810a0  5440        eors r4, r2
+004810a2  40f82140    str.w r4, [r0, r1, lsl #2]
+004810a6  0098        ldr r0, [sp]
+004810a8  80f31088    msr primask, r0
+004810ac  0020        movs r0, #0
+004810ae  16bd        pop {r1, r2, r4, pc}
+
+radio_idle_pins
+0052dd7c  80b5        push {r7, lr}
+0052dd7e  0021        movs r1, #0
+0052dd80  5d20        movs r0, #0x5d
+0052dd82  53f728f9    bl #0x480fd6
+0052dd86  dff8b40b    ldr.w r0, [pc, #0xbb4]
+0052dd8a  0168        ldr r1, [r0]
+0052dd8c  8a20        movs r0, #0x8a
+0052dd8e  53f7bdf8    bl #0x480f0c
+0052dd92  01bd        pop {r0, pc}
+
+critical_shared
+00473940  eff31080    mrs r0, primask
+00473944  72b6        cpsid i
+00473946  7047        bx lr

@@ -1,0 +1,16 @@
+{
+  "upstream_commit": "5efc0228528a8adce5eae0d226fac85d2551eb3b",
+  "upstream_repository": "https://github.com/AmbiqMicro/ambiqhal_ambiq",
+  "upstream_source_sha256": "93aa1e6eb28fabea5f0a41c0288451fb381b64070f59638b3d250da6a7430ccf",
+  "unchanged_function_text_sha256": {
+    "am_hal_gpio_pinconfig_get": "36d249234fce5493b163d090f7ab46a0d423b62f1b512d1daa31df32710911a0",
+    "am_hal_gpio_pinconfig": "c8491645fb5f5680ee2989624365a8cd88b1d910d87896b17d075c78b43133ab"
+  },
+  "type_text_sha256": "b5862f754bff60f8a7a5a4a1b280ea5eeb6dfce1cba679e281b2780e4a563fe9",
+  "license": "BSD-3-Clause, notices retained",
+  "adaptations": [
+    "Seven-word capability-table array bounds made explicit; values unchanged and authenticated against stock.",
+    "Sparse fixed-address register view, stock224logical index bound and status constants.",
+    "Actual shared PRIMASK provider; Thumb2 Cortex-M4 semantic simulator profile, not production compiler."
+  ]
+}

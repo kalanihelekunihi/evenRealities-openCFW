@@ -1,0 +1,9 @@
+{
+  "upstream_commit": "def7d2df2b0506d3d249334974f51e427c17a41c",
+  "upstream_tasks_sha256": "14020d617b96dd2814e1211f6e3b645bcf5e2bd3179c23fe7dd16bc666fe9463",
+  "unchanged_function_text_sha256": {
+    "xTaskIncrementTick": "243e10a6f586cbc8ac86104f9ad2c4bf7def000a14a73b94715ea337311b435e",
+    "prvResetNextTaskUnblockTime": "2ae476e73828c0d57b9a6b55f86494b0158eb052e840646ab7fbafe769b64b8f"
+  },
+  "adaptations": "Recovered globals/config macros, no tick hook, preemption/time slicing enabled as stock. Private reset helper duplicated unchanged. No tick ISR/masking/startup/context switch implementation."
+}

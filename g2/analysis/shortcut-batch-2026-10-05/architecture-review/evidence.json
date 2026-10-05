@@ -1,0 +1,34 @@
+{
+  "scope": "bounded read-only Apollo architecture, product-module attribution, and resource-extractor review",
+  "firmware_edits": false,
+  "architecture_layers": [
+    {"layer": "boot and startup", "evidence": ["g2/docs/reference/memory-map.md#2.1", "g2/docs/reference/memory-map.md#3", "g2/docs/reference/toolchains.md#2"], "limits": "secure ROM/SBL details are documented only as far as available; protected 64 KiB region excluded from EVENOTA"},
+    {"layer": "RTOS and runtime", "evidence": ["g2/docs/reference/libraries.md#1.1", "g2/docs/reference/libraries.md#1.2", "g2/docs/reference/toolchains.md#1"], "limits": "FreeRTOS plus CMSIS wrapper and IAR runtime; not a process/userland model"},
+    {"layer": "HAL and device transport", "evidence": ["g2/docs/reference/libraries.md#1.1", "g2/docs/reference/capabilities.md#Storage", "g2/docs/reference/memory-map.md#2.4"], "limits": "Conceptual layer; not a universal call graph"},
+    {"layer": "vendor middleware", "evidence": ["g2/docs/reference/libraries.md#1.1"], "examples": ["Cordio", "LVGL/FreeType/Nema", "littlefs/FlashDB", "nanopb", "LZ4"]},
+    {"layer": "product glue and policy", "evidence": ["g2/docs/reference/capabilities.md#Protocol", "g2/docs/reference/capabilities.md#Sensors"], "limits": "Module/behavior attribution may be stronger than authorship evidence"},
+    {"layer": "EvenHub and user-facing product", "evidence": ["g2/docs/reference/capabilities.md#Sensors", "g2/symbols/apollo_main.tsv:3802"], "limits": "No broad decompilation; held-out function authorship unproven"}
+  ],
+  "authorship_spot_check": {
+    "function_runtime_range_exclusive": ["0x004E1406", "0x004E1442"],
+    "catalogued_sha256": "64a0a79c510feaa74402441e449740665efb281ee55080f76d596c54aeeb44fa",
+    "catalog_claim": "EvenHub IMU enable policy; first-party; Strong",
+    "evidence_reality": "symbol row cites closed-module census and function-map manifest; no retained source path or source/object comparison; referenced manifests absent in current checkout",
+    "finding": "supports functional/product-module attribution but does not prove individual authorship"
+  },
+  "resource_shortcut": {
+    "script": "g2/analysis/shortcut-batch-2026-10-05/resources/extract.py",
+    "authenticated_payload_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "runtime_to_payload_conversion": "payload_offset = runtime_address - 0x437FE0",
+    "checked": ["payload digest", "prior-proof firmware digest", "descriptor magic/color/flags/shape", "pointer and exact bounded pixel range", "pixel digest", "PNG CRC/shape/L8 roundtrip", "wrong-color rejection", "non-overlap of selected pixel ranges"],
+    "saved_result": {"status": "PASS", "assets": 6, "held_out": 1, "unique_pixel_bytes": 28872, "newly_classified_bytes": 0},
+    "limits": ["no live display/render fidelity", "no semantic icon naming or artwork author attribution", "not a global resource census", "fonts/compressed resources/422 other candidates/external NOR out of scope", "consumer evidence has explicit stubs"],
+    "review_action": "logic and saved report inspected; script not rerun because it writes generated outputs/report"
+  },
+  "coordinate_caution": {
+    "apollo": "extract.py uses payload offset = runtime - 0x437FE0 for its official OTA payload with a 32-byte preamble before link base 0x438000",
+    "touch": "FWPK32B wrapper prefix changes official-file coordinates; parent-reported corrected mapping: decoded offset 0x5F18 -> official offset 0x5F38 (hash prefix 07627776); wrapper offset 0x9250 -> official offset 0x5F70 (hash prefix c7729e5d)",
+    "independent_validation": false,
+    "implication": "Do not transfer payload/runtime/file offsets across wrapper formats; authenticate exact slices before using them for source attribution."
+  }
+}

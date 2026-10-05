@@ -1,0 +1,71 @@
+{
+  "firmware": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+  "firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "payload_header_bytes": 32,
+  "load_base": "0x438000",
+  "functions": [
+    {
+      "name": "control",
+      "address": "0x4810b0",
+      "bytes": 582,
+      "sha256": "be21713c06a339f82b208a72294f0c9d573a7822128b69e06ae5a4fe2770f5a6",
+      "whole_function": true
+    },
+    {
+      "name": "pin_index",
+      "address": "0x480ed8",
+      "bytes": 22,
+      "sha256": "033b92d3d80163bb9f11f57cce771340b43bdfda7e49f6518daab87d6be56150",
+      "whole_function": true
+    },
+    {
+      "name": "radio_irq_enable",
+      "address": "0x52dd58",
+      "bytes": 18,
+      "sha256": "aedb4ffba6805e45177f09ff5349fd999e30f76fa040aef376aeeb76c55e8f54",
+      "whole_function": true
+    },
+    {
+      "name": "radio_irq_disable",
+      "address": "0x52dd6a",
+      "bytes": 18,
+      "sha256": "cf43eac442b7bf5ad96666ee22a31ebcb70eb5e547de39644e18d115abbb681a",
+      "whole_function": true
+    },
+    {
+      "name": "pin136_command",
+      "address": "0x52eece",
+      "bytes": 28,
+      "sha256": "ee26c2cca0a7362da83662ad2507d0d9fa4def42552c2ca80387e74a42dbc4c5",
+      "whole_function": true
+    },
+    {
+      "name": "shutdown_gpio_slice",
+      "address": "0x4b49d8",
+      "bytes": 14,
+      "sha256": "b412292de6272da6807951e67f14b74f9b86dbd27bda63676d21968e074c724e",
+      "whole_function": false
+    }
+  ],
+  "unreachable": [
+    {
+      "start": "0x4810ee",
+      "end": "0x4810f2",
+      "bytes": 4,
+      "reason": "Immutable pin-index helper always returns0; preceding BEQ always takes success path."
+    },
+    {
+      "start": "0x481126",
+      "end": "0x481128",
+      "bytes": 2,
+      "reason": "Validation limits truncated operation byte to0..3, all handled by preceding comparisons."
+    }
+  ],
+  "caller_boundaries": {
+    "boot": "0x4b48a6..0x4b49ce",
+    "shutdown": "0x4b49ce..0x4b4a02",
+    "gpio_slice": "0x4b49d8..0x4b49e6",
+    "excluded_before": "WsfTimerStop0x52a4d2",
+    "excluded_after": "caller global clearing and transport release0x52df12"
+  }
+}

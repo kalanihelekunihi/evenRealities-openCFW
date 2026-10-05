@@ -1,0 +1,36 @@
+{
+  "review_status": "pass_with_documentation_followup",
+  "critical_findings": [],
+  "documentation_followup": "Component README still says four-function interrupt-only scope and should be updated for the lifecycle functions and validation.",
+  "tests": {
+    "command": "python3 -m unittest g2.tests.test_ambiq_mspi g2.tests.test_ambiq_mspi_lifecycle -v",
+    "passed": 6
+  },
+  "comparison": {
+    "path": "g2/build/foundation/ambiq-mspi-lifecycle-final/lifecycle-comparison-reviewed.json",
+    "status": "PASS",
+    "case_count": 102,
+    "original_unique_instruction_bytes": 174,
+    "sha256": "9ae5b2768715682ab3e7e6cf6c89fa5a4650f42853db87a23cde88e74483144e",
+    "verifier_sha256": "636837d152dc69b797b89626d1d85d18b79482cf2e1679a8e0682e7753d437f9",
+    "elf_sha256": "3d18250fde6831cbc2c8a4b0715330643c48d2daed330b27cc81b69b504f447d"
+  },
+  "lifecycle_semantics": [
+    "Disable returns IN_USE when queue counts are nonzero.",
+    "Disable propagates CQ-disable failure and skips term/state-clear/XIP-delay afterward.",
+    "Deinitialize ignores disable's busy/error return, clears initialized bit and module, and returns success; actual queue shutdown is not established."
+  ],
+  "scope_limits": [
+    "CQ disable/term and delay providers are synthetic recorders on both sides.",
+    "No hardware power, delay completion, queue drain/free, IRQ timing, concurrency, or safe shutdown validation.",
+    "Pinned public upstream identity does not establish the unavailable private producing build or compiler settings.",
+    "No byte-identical firmware claim."
+  ],
+  "reviewed_hashes": {
+    "ambiq_mspi_lifecycle.c": "c55c3e163097e0112b11eb9fc4192b6a25de8cdaf28da41b1e3a6c8f2272ad0d",
+    "simulator/verify_lifecycle.py": "636837d152dc69b797b89626d1d85d18b79482cf2e1679a8e0682e7753d437f9",
+    "simulator/lifecycle_seams.c": "ab0a32d4c7868181351d6e727dd1e032d264da49711d7848150699818d149db9",
+    "test_ambiq_mspi_lifecycle.py": "12618871c31ebf10b2752e15498881687c79889edd52d7d1ce3b04d3e4a7e2d8",
+    "Makefile": "9681a00c504c76770b1320c1a3e711cc99719f695d820ff198f3936e77e553d6"
+  }
+}

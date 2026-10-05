@@ -1,0 +1,51 @@
+{
+  "source_snapshot": "g2/analysis/current-assessment-2026-10-05T1531Z/recent-write-snapshot.json",
+  "latest_family_file_counts_not_progress": {
+    "apollo-main-rtos-tick-original-due-task-fixture-12028": 14,
+    "apollo-main-rtos-tick-wrap-empty-fixture-12026": 14,
+    "apollo-main-rtos-tick-delayed-task-body-map-12024": 11,
+    "apollo-main-rtos-tick-deferred-no-due-fixture-12022": 10,
+    "apollo-main-rtos-tick-entry-tail-map-12020": 11,
+    "apollo-main-formatter-local-decode-coverage-audit-12018": 10,
+    "apollo-main-formatted-log-original-formatter-contract-fixture-12016": 10
+  },
+  "recent_review_examples": [
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-rtos-tick-original-due-task-fixture-12028/001/reviews/P2-12037-independent-review/001/review.json",
+      "sha256": "1f2e3945055a343ef34a62891a6908d904fc5ce75b180ced922c04444e5dc996",
+      "status": "partial",
+      "accepted": false,
+      "scope": "The 168-call fixture replays the original tick path without stand-ins for one task exactly at its deadline. It varies task/current priorities, optional event membership, cursor positions, and ready-row counts. Task/event unlink, ready insertion, count/highest-priority updates, next-wakeup sentinel, strict priority comparison, row timeslice, result, and 512-byte/table guards match the fixture oracle. Multi-task due batches, future deadlines, inter-read mutation, and physical tick delivery are not established."
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-rtos-tick-wrap-empty-fixture-12026/001/reviews/P2-12035-independent-review/001/review.json",
+      "sha256": "bc38890697f276eb9bb3af5f4d1c2bd430f8c4507a4c9d17ba023d6f88c28839",
+      "status": "partial",
+      "accepted": false,
+      "scope": "The 48-call fixture replays original tick and next-wakeup code without stand-ins. With both delay lists host-initialized empty, it checks tick wrap, pointer swap, overflow-counter wrap, next-wakeup sentinel, timeslice priority row counts, yield flags, and full backing/table guards. This does not cover due tasks, nonempty old lists, fatal wrap handling, or physical tick behavior."
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-rtos-tick-delayed-task-body-map-12024/001/reviews/P2-12033-independent-review/001/review.json",
+      "sha256": "eb57e4d28c6fdb8cc94f602ae8fb6951c8d6c0a7e1c43ade62c8e7e278459413",
+      "status": "partial",
+      "accepted": false,
+      "scope": "The 196-byte due-task continuation replays and decodes completely. It compares tick/deadline unsigned, removes the task node and optional event node with sentinel-sensitive cursor repair and count decrements, updates the highest-priority word when needed, and inserts the task into the priority row using the loaded cursor links. Its current-versus-owner priority check is strict: only current priority below the owner sets the yield result; equality does not in this block. The loop rereads the delayed-list global and count. Pointer validity, concurrency, timing, and surrounding scheduler behavior remain unproven."
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-rtos-tick-deferred-no-due-fixture-12022/001/reviews/P2-12031-independent-review/001/review.json",
+      "sha256": "159139cb49f309b503b72849c80b2a044b98bc5c18b5eb06fe486fbed2f62b4b",
+      "status": "partial",
+      "accepted": false,
+      "scope": "The 135-case fixture replays original tick processing with no stand-ins. Its suspended cases verify deferred count wrapping without ordinary tick advancement. Normal not-due cases verify tick increments, timeslice row count and priority logic, yield flag, unsigned deadline comparison, return value, and backing/table guards. Host-initialized globals define the scenarios; wrap, due-task handling, fatal behavior, physical ticks, and whole scheduler behavior remain outside scope."
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-rtos-tick-entry-tail-map-12020/001/reviews/P2-12029-independent-review/001/review.json",
+      "sha256": "408ebff9eb4c89a36eaee498a0828d71344dfe80e3a8632c496fda796e10c688",
+      "status": "partial",
+      "accepted": false,
+      "scope": "The two mapped ranges replay and decode completely (142 bytes total). A nonzero suspension count increments the deferred-tick word and returns without the ordinary tick update. On the ordinary path the tick increments; wrap checks the current delayed-list count, with a nonempty list entering the mask/fault-store/self-loop path. Empty-list wrap swaps current and overflow list pointers, increments the overflow counter, and calls the next-wakeup helper. The captured tick is compared unsigned against that helper result before branching to the delayed-task body. The tail derives the return flag from priority-row count and the fresh yield word, and restores the documented register set. Tick timing and the mapped body are outside scope."
+    }
+  ],
+  "state_assignment_warning": "state.json registers old108-110P2 assignments, while files now show120xxRTOSfixtures. These observations prove file activity but cannot identify every live process/owner.",
+  "method_limit": "Unchanged coverage scanner includes top-level reviews and supported receipt scopes, not every nested fixture review or manifest-indirected schema. Counts do not measure all new knowledge."
+}

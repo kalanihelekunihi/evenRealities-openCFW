@@ -1,0 +1,165 @@
+{
+  "scan_started_utc": "2026-10-05T15:33:22.080691+00:00",
+  "scan_finished_utc": "2026-10-05T15:33:40.094519+00:00",
+  "supplement_verified_utc": "2026-10-05T15:33:40.704788+00:00",
+  "bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "bundle_bytes": 4301227,
+  "payload_checks": [
+    {
+      "payload": "codec",
+      "sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "size": 326092,
+      "verified": true
+    },
+    {
+      "payload": "ble_em9305",
+      "sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+      "size": 211948,
+      "verified": true
+    },
+    {
+      "payload": "touch",
+      "sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+      "size": 34464,
+      "verified": true
+    },
+    {
+      "payload": "case",
+      "sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+      "size": 55784,
+      "verified": true
+    },
+    {
+      "payload": "apollo_bootloader",
+      "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+      "size": 148599,
+      "verified": true
+    },
+    {
+      "payload": "apollo_main",
+      "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "size": 3523396,
+      "verified": true
+    }
+  ],
+  "per_payload": {
+    "codec": {
+      "payload_bytes": 326092,
+      "catalogued_candidate_body_bytes": 92560,
+      "raw_pseudocode_addressed_bytes": 92560,
+      "scoped_review_linked_bytes": 2170
+    },
+    "ble_em9305": {
+      "payload_bytes": 211948,
+      "catalogued_candidate_body_bytes": 0,
+      "raw_pseudocode_addressed_bytes": 0,
+      "scoped_review_linked_bytes": 1530
+    },
+    "touch": {
+      "payload_bytes": 34464,
+      "catalogued_candidate_body_bytes": 27879,
+      "raw_pseudocode_addressed_bytes": 27879,
+      "scoped_review_linked_bytes": 15926
+    },
+    "case": {
+      "payload_bytes": 55784,
+      "catalogued_candidate_body_bytes": 43072,
+      "raw_pseudocode_addressed_bytes": 43072,
+      "scoped_review_linked_bytes": 22814
+    },
+    "apollo_bootloader": {
+      "payload_bytes": 148599,
+      "catalogued_candidate_body_bytes": 120432,
+      "raw_pseudocode_addressed_bytes": 112506,
+      "scoped_review_linked_bytes": 76446
+    },
+    "apollo_main": {
+      "payload_bytes": 3523396,
+      "catalogued_candidate_body_bytes": 1628382,
+      "raw_pseudocode_addressed_bytes": 1626380,
+      "scoped_review_linked_bytes": 50304
+    }
+  },
+  "whole_bundle_byte_representation": {
+    "catalogued_candidate_body_bytes": {
+      "numerator": 1912325,
+      "denominator": 4301227,
+      "percent": 44.459987812779936
+    },
+    "raw_pseudocode_addressed_bytes": {
+      "numerator": 1902397,
+      "denominator": 4301227,
+      "percent": 44.229169955456896
+    },
+    "scoped_review_linked_bytes": {
+      "numerator": 169190,
+      "denominator": 4301227,
+      "percent": 3.933528734940053
+    }
+  },
+  "delta_from_oct3_1957": {
+    "apollo-bootloader/ghidra/open-2026-09-29": {
+      "previous": 76446,
+      "current": 76446,
+      "change": 0
+    },
+    "apollo-main/ghidra/open-2026-09-29": {
+      "previous": 0,
+      "current": 50304,
+      "change": 50304
+    },
+    "case/ghidra/open-2026-09-29": {
+      "previous": 22814,
+      "current": 22814,
+      "change": 0
+    },
+    "codec/ghidra/open-2026-09-29/image_a_sram": {
+      "previous": 0,
+      "current": 0,
+      "change": 0
+    },
+    "codec/ghidra/open-2026-09-29/image_a_xip": {
+      "previous": 0,
+      "current": 0,
+      "change": 0
+    },
+    "codec/ghidra/open-2026-09-29/image_b_sram": {
+      "previous": 0,
+      "current": 0,
+      "change": 0
+    },
+    "codec/ghidra/open-2026-09-29/uart_boot_stage1": {
+      "previous": 0,
+      "current": 0,
+      "change": 0
+    },
+    "codec/ghidra/open-2026-09-29/uart_boot_stage2": {
+      "previous": 0,
+      "current": 0,
+      "change": 0
+    },
+    "touch/ghidra/open-2026-09-29": {
+      "previous": 15926,
+      "current": 15926,
+      "change": 0
+    }
+  },
+  "raw_audit_0538_baseline": {
+    "provenance": "prior recorded audit, not a filesystem snapshot",
+    "pseudocode_artifacts": 1328,
+    "receipts": 1820
+  },
+  "fresh_artifact_counts": {
+    "pseudocode_md": 4216,
+    "receipts": 6586
+  },
+  "limits": [
+    "These byte-weighted figures describe stored bundle bytes addressed by candidate function or pseudocode evidence, NOT percentages of completed firmware decompilation.",
+    "Catalogued bodies are not validated exhaustive executable-code classification. EM9305 has no complete function catalogue here.",
+    "All source projections use identity transforms to payload offsets, unioned within payloads. No decoded RAM expansion is added to its compressed source bytes.",
+    "Packaging/resources/weights/padding and unclassified regions remain in the whole-bundle denominator, not declared missing C code.",
+    "Review-linked bytes retain scoped/static/controlled-callee limitations; exact semantic completion not inferred.",
+    "All six active providers are official_blob. No standalone source-build receipt found; partial C fraction is unmeasured, not asserted zero."
+  ],
+  "method_sha256": "0fa21100ac382a03001ee54d10667739ca9a986d7ef4ee45272b49e4576a15f3"
+}

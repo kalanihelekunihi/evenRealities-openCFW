@@ -1,0 +1,27 @@
+{
+  "upstream_commit": "5efc0228528a8adce5eae0d226fac85d2551eb3b",
+  "upstream_repository": "https://github.com/AmbiqMicro/ambiqhal_ambiq",
+  "upstream_files": {
+    "am_hal_gpio.c": {
+      "git_blob_sha1": "6cd2b65fe67f26ba14df0a7ee4ec56100c46a6ba",
+      "sha256": "93aa1e6eb28fabea5f0a41c0288451fb381b64070f59638b3d250da6a7430ccf"
+    },
+    "am_hal_gpio.h": {
+      "git_blob_sha1": "9cbc5ea43722c16ede6f577457db5da2c11ddad6",
+      "sha256": "6c8d3cf841feab4df2c4ab79bd7d62cf4afe3a98b7bdf1035ea9a2aa98430ec7"
+    }
+  },
+  "unchanged_function_text_sha256": {
+    "am_hal_gpio_interrupt_irq_status_get": "76d9c962af290d3d5a297d964cc5ce89f233218faa9161e9b5dc6290117a8ec5",
+    "am_hal_gpio_interrupt_irq_clear": "ec8ac4bbca22a27e0596d7072c58e9c6ffb1aeacb839199f1c6e89f6f65f7084",
+    "am_hal_gpio_interrupt_register": "a51c7e0de39a1826f7362c0790c94252a065ee05d4b13a3882fb6f53c2d2b470",
+    "am_hal_gpio_interrupt_service": "6b52e8b693a64e356a8939fd9e570bf3b2ea1c1124ec4fa007fac2a4fa290e5f"
+  },
+  "license": "BSD-3-Clause Ambiq2025; original notice retained",
+  "adaptations": [
+    "ARM32 sparse GPIO view/fixed stock callback tables",
+    "Recovered IRQ enum/bank strides, actual PRIMASK entry/restore",
+    "Compile-fwrapv defines upstream signed negation wrapping including bit31"
+  ],
+  "limits": "Not a full GPIO/init/board driver; pins/callback publication/physical interrupts/scheduling unproven"
+}

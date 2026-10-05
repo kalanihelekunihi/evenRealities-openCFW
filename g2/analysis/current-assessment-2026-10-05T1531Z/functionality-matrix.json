@@ -1,0 +1,253 @@
+[
+  {
+    "priority": "P0",
+    "functionality": "Boot chain / reset / vectors",
+    "payloads_consumers": "Apollo bootloader + main; EM9305; GX8002; touch; case",
+    "interfaces": "ROM/SBL \u2192 image entry \u2192 scatter/copy/zero \u2192 vector/IRQ registration",
+    "current_evidence": "Startup streams and maps exist; compressed ITCM/code and absent resident ROM must remain explicit",
+    "evidence_paths": [
+      "g2/docs/reference/memory-map.md",
+      "g2/workflow/target.json"
+    ],
+    "next_bounded_gap": "Reset reachability and initialization ownership for every image; constructor/ISR scheduling contracts",
+    "actual_executable_denominator_bytes": null,
+    "assembly_complete_percent": null,
+    "pseudocode_semantic_complete_percent": null,
+    "compilable_firmware_source_percent": null,
+    "source_identical_complete_percent": 0,
+    "attribution_limit": "Consolidated references include historical citations; module-wide source equivalence not inferred."
+  },
+  {
+    "priority": "P0",
+    "functionality": "Memory / allocator / DMA / MPU-cache",
+    "payloads_consumers": "Apollo main + all secondary processors",
+    "interfaces": "NOR/XIP, SRAM/TCM, heap/pools, buffers and DMA",
+    "current_evidence": "Bounded allocator/ownership models and decoded initializers; no whole-system quiescence proof",
+    "evidence_paths": [
+      "g2/analysis/ring-allocator-lifecycle-2026-10-01/README.md",
+      "g2/docs/reference/memory-map.md"
+    ],
+    "next_bounded_gap": "Pool/heap lifetime, DMA/copy boundaries, allocation failures, IRQ/cache coherence",
+    "actual_executable_denominator_bytes": null,
+    "assembly_complete_percent": null,
+    "pseudocode_semantic_complete_percent": null,
+    "compilable_firmware_source_percent": null,
+    "source_identical_complete_percent": 0,
+    "attribution_limit": "Consolidated references include historical citations; module-wide source equivalence not inferred."
+  },
+  {
+    "priority": "P0",
+    "functionality": "RTOS / tick / task / queues / ISR",
+    "payloads_consumers": "Apollo main; case; codec RTOS lineage",
+    "interfaces": "Scheduler, tick/tickless, task/event lists, mutexes and queues",
+    "current_evidence": "Current15:31RTOS due/wrap fixtures are partial; no complete scheduler acceptance",
+    "evidence_paths": [
+      "g2/docs/reference/capabilities.md",
+      "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-rtos-tick-original-due-task-fixture-12028/001/reviews/P2-12037-independent-review/001/review.json"
+    ],
+    "next_bounded_gap": "Multi-task due batches, future deadlines, critical section/inter-read mutation, actual interrupt delivery",
+    "actual_executable_denominator_bytes": null,
+    "assembly_complete_percent": null,
+    "pseudocode_semantic_complete_percent": null,
+    "compilable_firmware_source_percent": null,
+    "source_identical_complete_percent": 0,
+    "attribution_limit": "Consolidated references include historical citations; module-wide source equivalence not inferred."
+  },
+  {
+    "priority": "P1",
+    "functionality": "Apollo \u2194 EM9305 / BLE host-controller",
+    "payloads_consumers": "Apollo main + EM9305 ARC",
+    "interfaces": "HCI packet driver, controller LL/BB/PAL and vendor reset/NVDS",
+    "current_evidence": "Controller assembly exports and SDK provenance strong; physical carrier/pins not fully established",
+    "evidence_paths": [
+      "g2/docs/reference/protocols.md",
+      "docs/hardware/components/em9305.md"
+    ],
+    "next_bounded_gap": "HCI enqueue/copy/ownership, controller records, RF sequencing and host\u2194controller failure recovery",
+    "actual_executable_denominator_bytes": null,
+    "assembly_complete_percent": null,
+    "pseudocode_semantic_complete_percent": null,
+    "compilable_firmware_source_percent": null,
+    "source_identical_complete_percent": 0,
+    "attribution_limit": "Consolidated references include historical citations; module-wide source equivalence not inferred."
+  },
+  {
+    "priority": "P1",
+    "functionality": "Apollo \u2194 codec / audio hardware",
+    "payloads_consumers": "Apollo main + GX8002 C-SKY/NPU",
+    "interfaces": "UART3 BUXX control/DFU; I2S/DMA PCM input",
+    "current_evidence": "Control/audio lifecycles bounded; proprietary DSP/NPU semantics unresolved",
+    "evidence_paths": [
+      "g2/analysis/audio-stream-2026-10-01/README.md",
+      "g2/docs/reference/protocols.md"
+    ],
+    "next_bounded_gap": "Reset/start/stop/DFU handshakes, PCM timing/metadata producer, frame faults and DMA buffer ownership",
+    "actual_executable_denominator_bytes": null,
+    "assembly_complete_percent": null,
+    "pseudocode_semantic_complete_percent": null,
+    "compilable_firmware_source_percent": null,
+    "source_identical_complete_percent": 0,
+    "attribution_limit": "Consolidated references include historical citations; module-wide source equivalence not inferred."
+  },
+  {
+    "priority": "P1",
+    "functionality": "Apollo \u2194 touch",
+    "payloads_consumers": "Apollo main + PSoC Cortex-M0+",
+    "interfaces": "I2C bus5 slave0x0C; attention GPIO; reports/DFU mailbox",
+    "current_evidence": "308catalogue candidates; sensing/protocol partial; resident DFU not in payload",
+    "evidence_paths": [
+      "docs/hardware/components/cy8c4046fni.md",
+      "g2/docs/reference/protocols.md"
+    ],
+    "next_bounded_gap": "Command/report layout, IRQ/attention ordering, power transitions, calibration and resident-loader boundary",
+    "actual_executable_denominator_bytes": null,
+    "assembly_complete_percent": null,
+    "pseudocode_semantic_complete_percent": null,
+    "compilable_firmware_source_percent": null,
+    "source_identical_complete_percent": 0,
+    "attribution_limit": "Consolidated references include historical citations; module-wide source equivalence not inferred."
+  },
+  {
+    "priority": "P1",
+    "functionality": "Apollo \u2194 charging case",
+    "payloads_consumers": "Apollo main + STM32G0 Cortex-M0+",
+    "interfaces": "Pogo UART 5A A5 FF; charging/thermal/watchdog; dual-bank OTA",
+    "current_evidence": "435catalogue candidates; UART/update and policy partially explained",
+    "evidence_paths": [
+      "docs/hardware/g2-case.md",
+      "g2/docs/reference/protocols.md"
+    ],
+    "next_bounded_gap": "Frame/resync/checksum, bank swap, charger/watchdog buses and disconnect behavior",
+    "actual_executable_denominator_bytes": null,
+    "assembly_complete_percent": null,
+    "pseudocode_semantic_complete_percent": null,
+    "compilable_firmware_source_percent": null,
+    "source_identical_complete_percent": 0,
+    "attribution_limit": "Consolidated references include historical citations; module-wide source equivalence not inferred."
+  },
+  {
+    "priority": "P1",
+    "functionality": "Temples \u2194 each other",
+    "payloads_consumers": "Apollo main per temple",
+    "interfaces": "UART/TinyFrame and sync framework",
+    "current_evidence": "Static transport lineage known; physical wiring, timing/state consistency not fully established",
+    "evidence_paths": [
+      "g2/docs/reference/protocols.md",
+      "docs/hardware/g2-glasses.md"
+    ],
+    "next_bounded_gap": "Synchronization state ownership, framing/CRC, retransmission and device-role boot configuration",
+    "actual_executable_denominator_bytes": null,
+    "assembly_complete_percent": null,
+    "pseudocode_semantic_complete_percent": null,
+    "compilable_firmware_source_percent": null,
+    "source_identical_complete_percent": 0,
+    "attribution_limit": "Consolidated references include historical citations; module-wide source equivalence not inferred."
+  },
+  {
+    "priority": "P1",
+    "functionality": "Display hardware / draw buffers",
+    "payloads_consumers": "Apollo main; JBD4010/A6N-G + NemaGFX",
+    "interfaces": "MSPI0 QSPI, panel command variants, DMA/render buffer handoffs",
+    "current_evidence": "SixL8storage admissions proved; 422otherdescriptor candidates unresolved; renderer/global decoder activation untraced",
+    "evidence_paths": [
+      "g2/analysis/firmware-byte-map-2026-10-05/display-proof/pseudocode.md",
+      "docs/hardware/g2-glasses.md"
+    ],
+    "next_bounded_gap": "Panel command/register sequences, framebuffer stride/format, GPU ownership/cache/DMA and scanout lifecycle",
+    "actual_executable_denominator_bytes": null,
+    "assembly_complete_percent": null,
+    "pseudocode_semantic_complete_percent": null,
+    "compilable_firmware_source_percent": null,
+    "source_identical_complete_percent": 0,
+    "attribution_limit": "Consolidated references include historical citations; module-wide source equivalence not inferred."
+  },
+  {
+    "priority": "P1",
+    "functionality": "NOR / filesystem / persistent update",
+    "payloads_consumers": "Apollo bootloader + main; MX25U25643G",
+    "interfaces": "MSPI1 quad/XIP; littlefs/FlashDB; OTA flash backends",
+    "current_evidence": "Known library lineage/config; external NOR contents absent",
+    "evidence_paths": [
+      "g2/docs/reference/libraries.md",
+      "docs/hardware/components/mx25u25643g.md"
+    ],
+    "next_bounded_gap": "Flash transaction state, erase/program safety, filesystem recovery, authenticated image install boundaries",
+    "actual_executable_denominator_bytes": null,
+    "assembly_complete_percent": null,
+    "pseudocode_semantic_complete_percent": null,
+    "compilable_firmware_source_percent": null,
+    "source_identical_complete_percent": 0,
+    "attribution_limit": "Consolidated references include historical citations; module-wide source equivalence not inferred."
+  },
+  {
+    "priority": "P1",
+    "functionality": "Sensors / power / board configuration",
+    "payloads_consumers": "Apollo main; ICM45608 + mag, OPT3007, nPM1300/BQ25180/BQ27427",
+    "interfaces": "I2C/IOM, GPIO/ADC/interrupts; battery/brightness/sleep policy",
+    "current_evidence": "Drivers/part variants recorded; some bus/pin identity inferred; no per-driver completeness census",
+    "evidence_paths": [
+      "docs/hardware/g2-glasses.md",
+      "g2/docs/reference/capabilities.md"
+    ],
+    "next_bounded_gap": "Board variant dispatch, register transactions, IRQ/power timing, sensing\u2194scheduler interactions",
+    "actual_executable_denominator_bytes": null,
+    "assembly_complete_percent": null,
+    "pseudocode_semantic_complete_percent": null,
+    "compilable_firmware_source_percent": null,
+    "source_identical_complete_percent": 0,
+    "attribution_limit": "Consolidated references include historical citations; module-wide source equivalence not inferred."
+  },
+  {
+    "priority": "P1",
+    "functionality": "Security / crypto / update trust",
+    "payloads_consumers": "Apollo bootloader + main; EM9305",
+    "interfaces": "Image checks, BLE SMP/security, compiler/runtime and hardware AES interfaces",
+    "current_evidence": "Source/version/behavior partial; ROM and licensed runtime dependencies external",
+    "evidence_paths": [
+      "g2/docs/reference/toolchains.md",
+      "g2/docs/reference/capabilities.md"
+    ],
+    "next_bounded_gap": "Trust boundary and recovery paths using synthetic inputs; no credential/device access",
+    "actual_executable_denominator_bytes": null,
+    "assembly_complete_percent": null,
+    "pseudocode_semantic_complete_percent": null,
+    "compilable_firmware_source_percent": null,
+    "source_identical_complete_percent": 0,
+    "attribution_limit": "Consolidated references include historical citations; module-wide source equivalence not inferred."
+  },
+  {
+    "priority": "P2",
+    "functionality": "G2 \u2194 R1 ring transport",
+    "payloads_consumers": "Apollo main; external nRF52840 R1",
+    "interfaces": "BLE central discovery, notifications/write, queue/ATT ownership",
+    "current_evidence": "Bounded protocol/action/ownership batches; no physical scheduling/lifetime trace",
+    "evidence_paths": [
+      "g2/analysis/ring-actions-att-2026-09-30/README.md",
+      "g2/analysis/ring-tx-ownership-2026-10-01/README.md"
+    ],
+    "next_bounded_gap": "Finish transport/lifecycle contracts before app actions; R1firmware is a separate locked artifact, not these six payloads",
+    "actual_executable_denominator_bytes": null,
+    "assembly_complete_percent": null,
+    "pseudocode_semantic_complete_percent": null,
+    "compilable_firmware_source_percent": null,
+    "source_identical_complete_percent": 0,
+    "attribution_limit": "Consolidated references include historical citations; module-wide source equivalence not inferred."
+  },
+  {
+    "priority": "LAST",
+    "functionality": "EvenHub / SDK / product feature services",
+    "payloads_consumers": "Apollo main application layer",
+    "interfaces": "Protobuf/RPC service logic, custom screens, UI features and app semantics",
+    "current_evidence": "Rawcatalogue/legacy names exist; semantic/module completeness unknown",
+    "evidence_paths": [
+      "g2/docs/reference/capabilities.md"
+    ],
+    "next_bounded_gap": "Defer new work until foundations/buses/drivers/IPC contracts reviewed; retain interfaces needed to explain hardware consumers",
+    "actual_executable_denominator_bytes": null,
+    "assembly_complete_percent": null,
+    "pseudocode_semantic_complete_percent": null,
+    "compilable_firmware_source_percent": null,
+    "source_identical_complete_percent": 0,
+    "attribution_limit": "Consolidated references include historical citations; module-wide source equivalence not inferred."
+  }
+]

@@ -1,0 +1,115 @@
+{
+  "review_scope": "Apollo GPIO IRQ subset, source provenance, build/test integration and original/source verifier",
+  "result": "pass_with_limits",
+  "blocking_findings": [],
+  "comparison": {
+    "path": "g2/build/foundation/ambiq-gpio-simulator/comparison-final.json",
+    "status": "PASS",
+    "cases": 773,
+    "ranges": {
+      "status": {
+        "address": "0x481574",
+        "declared_bytes": 126,
+        "executed_bytes": 126
+      },
+      "clear": {
+        "address": "0x4815f2",
+        "declared_bytes": 58,
+        "executed_bytes": 58
+      },
+      "register": {
+        "address": "0x48162c",
+        "declared_bytes": 154,
+        "executed_bytes": 154
+      },
+      "service": {
+        "address": "0x4816c6",
+        "declared_bytes": 116,
+        "executed_bytes": 110
+      }
+    },
+    "unreachable_service_ranges": [
+      "[0x4816ea,0x4816ee)",
+      "[0x4816fa,0x4816fc)"
+    ],
+    "unreachable_bytes": 6,
+    "elf_sha256": "4cbf1ed94c35932b4dcd495c517c19223cee87d82cee7f169ebf33a4850941df",
+    "verifier_sha256": "70d6c7d04df083cde85b5d173236a3772a932cb6440d04fe3eb6f905a890e3fa",
+    "source_manifest_matches_current": true
+  },
+  "test": {
+    "path": "g2/tests/test_ambiq_gpio.py",
+    "methods_passed": 4
+  },
+  "pinned_excerpt_hashes_match": true,
+  "license_notice_retained": true,
+  "real_primask_provider_linked": true,
+  "material_limits": [
+    "No GPIO initialization, board/pad validation, physical IRQ/electrical behavior, callback concurrency/scheduling, or hardware W1C proof.",
+    "Callbacks and W1C behavior are fixtures; functionality exercised is bounded to selected stock bodies and serialized test inputs.",
+    "A repeat using an existing default simulator report path may fail from exclusive-create behavior; set GPIO_SIM_REPORT to a fresh path."
+  ],
+  "current_file_sha256": {
+    "g2/components/foundation/ambiq_gpio/ambiq_gpio_irq.c": "7a713514c4b185b5aa811fed32e1fd4ac7c596f70c13543eb1a0884b75ac1ba2",
+    "g2/components/foundation/ambiq_gpio/ambiq_gpio.h": "fa08cb47b7bd451f77c4c06bd442c6bcd3297a431019ad0d0a2a5cabed5c2496",
+    "g2/components/foundation/ambiq_gpio/ambiq_gpio_compat.h": "3d610896f61f927d2579c4bbfb50ff45abfedbdd488bc478b3cec719dd57c601",
+    "g2/components/foundation/ambiq_gpio/simulator/verify.py": "70d6c7d04df083cde85b5d173236a3772a932cb6440d04fe3eb6f905a890e3fa",
+    "g2/components/foundation/ambiq_gpio/SOURCE_PROVENANCE.json": "37bbffea08f0920989a8e0b1e35bcdba28468f2a40f8ddea81c48e396a6fae9f",
+    "g2/tests/test_ambiq_gpio.py": "43b8da4c31b16fad61ef900f1dd7037994e7a5c8d07b1a2daee314ad9ab6d7e2",
+    "Makefile": "18fcf495812b028997da184ad65d260d2875f5467cd714211f6a8280a190c1a4",
+    "g2/build/foundation/ambiq-gpio-simulator/ambiq_gpio.elf": "4cbf1ed94c35932b4dcd495c517c19223cee87d82cee7f169ebf33a4850941df"
+  },
+  "accounting_followup": {
+    "inventory_path": "g2/analysis/ambiq-gpio-irq-2026-10-05/cumulative-inventory.json",
+    "status": "reconciles_with_snapshot_limits",
+    "unique_trace_bytes": {
+      "touch": 234,
+      "apollo_main": 1158,
+      "total": 1392,
+      "verified_sum": true
+    },
+    "evidence_increments": {
+      "touch": [
+        232,
+        2
+      ],
+      "apollo_main": [
+        230,
+        480,
+        448
+      ],
+      "verified_by_payload": true
+    },
+    "gpio_increment": {
+      "executed_trace_bytes": 448,
+      "static_unreachable_excluded": 6,
+      "shared_critical_bytes": 8,
+      "new_unique_shared_critical_bytes": 0
+    },
+    "source_inventory": {
+      "files": 22,
+      "implementation_c": 9,
+      "headers": 10,
+      "simulator_c": 3,
+      "hashes_match": true,
+      "ignored_files": 0
+    },
+    "callable_profiles": {
+      "count": 5,
+      "elf_hashes_match": true,
+      "symbol_lists_are_per_profile_not_additive": true
+    },
+    "aggregate": {
+      "modules": 33,
+      "tests": 189,
+      "passed": 183,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 7,
+      "gpio_test_methods_passed": 4
+    },
+    "historical_receipt_scope_retained": true,
+    "no_blob_free_payload_or_byte_identical_bundle_claimed": true,
+    "material_accounting_contradictions": []
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "case_count": 372,
+  "original_body_bytes": 472,
+  "new_nonoverlapping_cmdq_body_bytes": 298,
+  "prior_bounded_body_bytes": 638,
+  "cumulative_bounded_body_bytes": 936,
+  "new_exact_compiled_match_bytes": 0,
+  "removed_stubs": [
+    "0x4bfd62",
+    "0x4bfc86"
+  ],
+  "remaining_stubs": [
+    "critical-enter0x473940",
+    "delay0x4807a0"
+  ],
+  "limits": "Only critical-enter 0x473940 and delay 0x4807a0 intercepted on BOTH sides; no CQ function stub. Synthetic MMIO and serialized states, no concurrency/elapsed delay/real interrupt masking proof. Local caller and separate global slot fixtures, no stock handle-initialization proof.",
+  "aggregate": {
+    "total_modules": 32,
+    "completed_modules": 32,
+    "totals": {
+      "tests_run": 183,
+      "passed": 177,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 7
+    },
+    "unrun_modules": []
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "classification": "Unchanged selected public function text with stock cancellation layout/fixed queue and trace/assert compatibility; existing reconstructed proprietary WSF port reused unchanged.",
+  "public_commit": "3656312d6b73e2a2c1c8b33ee0385bc199dd97e6",
+  "upstream_files": [
+    {
+      "path": "wsf/sources/targets/baremetal/wsf_timer.c",
+      "sha256": "35fd98d54047480071df7c8475a822bceec2f27e13c2960b063991e4100d673b"
+    },
+    {
+      "path": "wsf/sources/targets/baremetal/wsf_queue.c",
+      "sha256": "fd61409f72d30958269b8a6e2080ce2249b8a01dd5370db189a4db55523f7762"
+    }
+  ],
+  "unchanged_function_text_sha256": {
+    "WsfQueueRemove": "f79047e9c1ff4ac68ca5ca5c43d0ebfe89f70f669c222513b2148396479b465f",
+    "wsfTimerRemove": "2bca7c76098a1cec06ce8bbcf072a49cfb659043d34e786e3cbf3768d7a1a92b",
+    "WsfTimerStop": "f3d52bb74448798e017eec0de348842ea9e8866f02ff1207ea129b3beca2a26a"
+  },
+  "port_source": "g2/components/foundation/wsf_radio/wsf_radio.c",
+  "port_sha256": "8b487a7bfd6dd091bbdc422bcafa448500740b9f160f8ec31e9db6aab26be4cb",
+  "limits": [
+    "Public struct message/tick order differs from stock; middle cancellation words remain opaque.",
+    "Tracing/assertion macros absent in selected original functions, disabled by compatibility header.",
+    "WSF nesting counter masks/unmasks rather than saving incoming PRIMASK; overflow behavior diagnosed, not certified safe.",
+    "No timer allocation/free, expiry callback drain, transport release or whole shutdown safety claim."
+  ]
+}

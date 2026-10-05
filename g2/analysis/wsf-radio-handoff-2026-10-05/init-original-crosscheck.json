@@ -1,0 +1,7 @@
+{
+  "status": "INCONCLUSIVE",
+  "entry": "0x52b9b2",
+  "attempt": "Native original WsfOsInit, with guarded64-byte seededRAM; not part of passing WSF target comparisons",
+  "failure": "Assertion in UC_HOOK_MEM_WRITE guard; failing address not captured in this diagnostic",
+  "limits": "No passing initialization execution claim. Static disassembly includes shared memset fallthrough43c0e4..43c148; the8-byte censusentry is not an entire stand-alone fill function. Do not infer that missing census stores mean no initialization. Whole boot/constructor side effects remain outside current comparator."
+}

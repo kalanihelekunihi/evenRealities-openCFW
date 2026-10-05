@@ -1,0 +1,10 @@
+{
+  "upstream_commit": "def7d2df2b0506d3d249334974f51e427c17a41c",
+  "upstream_tasks_sha256": "14020d617b96dd2814e1211f6e3b645bcf5e2bd3179c23fe7dd16bc666fe9463",
+  "unchanged_function_text_sha256": {
+    "vTaskSuspendAll": "73b9db4e290148a56c7869ee90a205fa6b88d18fa780d0496542dd475e3bb40e",
+    "xTaskResumeAll": "7966749db112822908eb63985b707dabfffce3d380316f3327efc8776ce9669f",
+    "prvResetNextTaskUnblockTime": "2ae476e73828c0d57b9a6b55f86494b0158eb052e840646ab7fbafe769b64b8f"
+  },
+  "adaptations": "Recovered global cells/macros; copied reset helper is private to this module. xTaskIncrementTick remains an explicit intercepted external boundary, not a production implementation."
+}

@@ -1,0 +1,87 @@
+{
+  "bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "bundle_bytes": 4301227,
+  "payloads": {
+    "codec": {
+      "bundle_start": 304,
+      "size": 326092,
+      "sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin"
+    },
+    "ble_em9305": {
+      "bundle_start": 326524,
+      "size": 211948,
+      "sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin"
+    },
+    "touch": {
+      "bundle_start": 538600,
+      "size": 34464,
+      "sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin"
+    },
+    "case": {
+      "bundle_start": 573192,
+      "size": 55784,
+      "sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin"
+    },
+    "apollo_bootloader": {
+      "bundle_start": 629104,
+      "size": 148599,
+      "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+      "path": "g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin"
+    },
+    "apollo_main": {
+      "bundle_start": 777831,
+      "size": 3523396,
+      "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "path": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin"
+    }
+  },
+  "classified_bytes": {
+    "metadata": 1280,
+    "noncode": 151707,
+    "unresolved": 4146670,
+    "code": 1570
+  },
+  "confirmed_cpu_executable_lower_bound_bytes": 1570,
+  "possible_executable_upper_bound_bytes": 4148240,
+  "executable_completion_percent": null,
+  "asset_candidate_count": 428,
+  "referenced_asset_candidates": 214,
+  "tests": {
+    "bundle_validation": "PASS",
+    "six_payload_hashes": "PASS",
+    "no_gaps_overlaps_doublecount": "PASS",
+    "bounded_asset_replays": [
+      {
+        "descriptor_runtime": 7766704,
+        "pixel_sha256": "4dd38f91cc1baedbaa1454f873f02d8931148b185d32c27dcb7d347d9f63b429",
+        "header_and_pixel_roundtrip": "PASS",
+        "limit": "host format replay, not firmware decoder execution"
+      },
+      {
+        "descriptor_runtime": 7766732,
+        "pixel_sha256": "fd5715afa84e6cf382e1f687b3334cd6a1a28a9753f5ca1fb56e82dafee82fdf",
+        "header_and_pixel_roundtrip": "PASS",
+        "limit": "host format replay, not firmware decoder execution"
+      },
+      {
+        "descriptor_runtime": 7766760,
+        "pixel_sha256": "b64b6ce31f460823e03ed47fdadcf9d21cefc8aa1d331ae5172a30770ddf88b9",
+        "header_and_pixel_roundtrip": "PASS",
+        "limit": "host format replay, not firmware decoder execution"
+      }
+    ]
+  },
+  "limits": [
+    "Only byte-matched actually observed PCs from successful synthetic execution are admitted as CPU code; full bodies are not.",
+    "Existing byte-matched instruction exports are candidates, not independently proven executable classification.",
+    "Accelerator command stream remains code-bearing unresolved, never weight data.",
+    "Unresolved includes obvious code candidates, image candidates and compressed initializers.",
+    "Runtime RAM/BSS sizes are not stored bytes and are excluded from this partition.",
+    "Code-only metric intersections are recorded separately; no semantic completion implied."
+  ],
+  "consumer_attributed_asset_count": 6
+}

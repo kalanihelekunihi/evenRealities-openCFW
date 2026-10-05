@@ -1,0 +1,143 @@
+{
+  "functions": {
+    "0x004c2328": {
+      "bytes_hex": "0200002806d0006820f07e40dff8a437984201d002200ce05068dff8982312eb0033d3f80032194312eb0032c2f8001200207047",
+      "image_range": [
+        "0x8a328",
+        "0x8a35c"
+      ],
+      "name": "FUN_004c2328",
+      "ota_file_range": [
+        "0x8a348",
+        "0x8a37c"
+      ],
+      "sha256": "ff601938062e67c168148c01471475c081038eb87938f8344c93afbf89f673e4",
+      "size": 52
+    },
+    "0x004c235c": {
+      "bytes_hex": "0200002806d0006820f07e40dff87037984201d002200de05068dff8642312eb0033d3f8003233ea010112eb0032c2f8001200207047",
+      "image_range": [
+        "0x8a35c",
+        "0x8a392"
+      ],
+      "name": "FUN_004c235c",
+      "ota_file_range": [
+        "0x8a37c",
+        "0x8a3b2"
+      ],
+      "sha256": "046eba05f4da245735e178e179220a0c666e75c2c377bf05f08fab8815900a40",
+      "size": 54
+    },
+    "0x004c2392": {
+      "bytes_hex": "10b40300002806d0006820f07e40dff83847a04201d0022016e05868d2b2002a0bd0c94b13eb0032d2f8042213eb0033d3f8000202400a6005e0c34a12eb0032d2f804020860002010bc7047",
+      "image_range": [
+        "0x8a392",
+        "0x8a3de"
+      ],
+      "name": "FUN_004c2392",
+      "ota_file_range": [
+        "0x8a3b2",
+        "0x8a3fe"
+      ],
+      "sha256": "af49be2bc2098b45d294afc6ca8cc5f9f48eee343a0245cea95a9d832973c1c5",
+      "size": 76
+    },
+    "0x004c23de": {
+      "bytes_hex": "0200002806d0006820f07e40dff8f036984201d002200ae05068b84a12eb0033c3f8081212eb0032d2f8040200207047",
+      "image_range": [
+        "0x8a3de",
+        "0x8a40e"
+      ],
+      "name": "am_hal_mspi_interrupt_clear",
+      "ota_file_range": [
+        "0x8a3fe",
+        "0x8a42e"
+      ],
+      "sha256": "4b01a25a8075cf158eb59da277f8730e36c751ee01c67bae86bc172ec877bd48",
+      "size": 48
+    },
+    "caller_0x0046f4ea": {
+      "mspi_callsites": [
+        {
+          "bytes": "52f04cff",
+          "pc": "0x0046f4f6",
+          "target": "0x004c2392"
+        },
+        {
+          "bytes": "52f06eff",
+          "pc": "0x0046f4fe",
+          "target": "0x004c23de"
+        }
+      ],
+      "name": "FUN_0046f4ea",
+      "sha256": "00ad0d74b025ddc1046a39d548b0fafe33057997233902fbabb91aa172aed3df",
+      "size": 34
+    },
+    "caller_0x00592658": {
+      "mspi_callsites": [
+        {
+          "bytes": "2ff792fe",
+          "pc": "0x0059266a",
+          "target": "0x004c2392"
+        },
+        {
+          "bytes": "2ff7b4fe",
+          "pc": "0x00592672",
+          "target": "0x004c23de"
+        }
+      ],
+      "name": "am_devices_mspi_jbd4010_term",
+      "sha256": "586421a4952b1605231e3342bf64b6ea804b209b79d4a5a279726d5aa79b0cf7",
+      "size": 40
+    },
+    "caller_0x0059ce1e": {
+      "mspi_callsites": [
+        {
+          "bytes": "25f7c7fa",
+          "pc": "0x0059ce4c",
+          "target": "0x004c23de"
+        },
+        {
+          "bytes": "25f767fa",
+          "pc": "0x0059ce56",
+          "target": "0x004c2328"
+        }
+      ],
+      "name": "am_devices_mspi_qspi_write_async",
+      "sha256": "595ccf477285d6c3a250615da2e36a4700d3c7999dac8363bc8669ec1d2a1c8f",
+      "size": 252
+    }
+  },
+  "limits": [
+    "Source-level behavioral correspondence is supported; this does not establish compiler/version/options or byte-for-byte source reproduction.",
+    "Caller semantics are bounded to authenticated static callsite/decomp evidence; no runtime behavior was exercised."
+  ],
+  "literals": {
+    "0x004c26dc": "0x40060000",
+    "0x004c2adc": "0x01bebebe"
+  },
+  "mapping": {
+    "decoded_image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+    "decoded_size": 3523364,
+    "offset_rule": "decoded offset = runtime address - 0x438000; OTA file offset = decoded offset + 32",
+    "ota_preamble_bytes": 32,
+    "ota_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "ota_size": 3523396,
+    "runtime_base": "0x00438000"
+  },
+  "source": {
+    "am_hal_mspi.c": {
+      "path": "g2/build/foundation/ambiq-upstream/am_hal_mspi.c",
+      "sha256": "5a91ab0c67bda4bd61c7d436b94b5a7c81693b948a331d282ae10e88cc5bf85f"
+    },
+    "am_hal_mspi.h": {
+      "path": "g2/build/foundation/ambiq-upstream/am_hal_mspi.h",
+      "sha256": "2a682bb7c1618982d6a802f3220a38696cd594c89d90e64b1a698d226b0a557b"
+    },
+    "apollo510.h": {
+      "path": "g2/build/foundation/ambiq-upstream/apollo510.h",
+      "sha256": "b6ca35dc828ef95825c0a22f06e6ca5ed558a6542dc74310515fdc350051a797"
+    }
+  },
+  "verification": "PASS"
+}

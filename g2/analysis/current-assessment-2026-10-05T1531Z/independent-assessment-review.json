@@ -1,0 +1,73 @@
+{
+  "snapshot": "g2/build/audits/2026-10-05T1531Z-current",
+  "comparison_cutoff_utc": "2026-10-05T15:33:22.080691+00:00",
+  "method_review": {
+    "definitions": "The snapshot uses the prior measure.py and review_repair.py definitions; comparison explicitly says unchanged. Bundle SHA remains the locked f4df... bundle.",
+    "reviewed_bytes_previous_current": 197000,
+    "reviewed_bytes_delta": 0,
+    "review_definition": "Unique union of review-linked scoped evidence ranges (not all review files, not canonical accepted pseudocode, not semantic completeness).",
+    "instruction_json_bytes_baseline_current": {
+      "baseline": 273686,
+      "current": 275560,
+      "delta": 1874
+    },
+    "full_combined_instruction_exports": {
+      "baseline": 488326,
+      "current": 490200,
+      "delta": 1874,
+      "components": "receipt-pinned JSON plus authenticated EM9305 ARC text and application text exports; same current/baseline total reproduces delta"
+    },
+    "warning": "Instruction export bytes are instruction-shaped source matches, not code/data adjudication or pseudocode completeness."
+  },
+  "late_rtos": {
+    "main_tick_function": "0x0045504C\u20130x0045519E, 338 B. Current partial maps split the body into 142 B entry/tail and 196 B delayed-task continuation; fixture-only cases include original due task (168 cases), future deadline, multiple due tasks, wrap-empty and deferred/no-due.",
+    "queue_copy_send": "0x00441ED8\u20130x00441F5E, 134 B partial map. Earlier P2-8209 scoped review spans [0x00441ED8,0x00441F88) = 176 B, enclosing the entire 134 B queue body; do not use the erroneous end 0x00441F20.",
+    "receipt_states": "Primary and reviewer receipts are accepted:false/status partial. Snapshot immutable manifest shows selected late tick and queue files as verified against their receipt hashes. New paths are first-observed vs baseline; mtime is evidence but not provenance proof.",
+    "review_discovery_ambiguity": "Independent reports are nested under analysis/<packet>/.../reviews/...; measure.py only globs global pseudocode-first/reviews/** and pseudocode-first/<campaign>/reviews/**. Those nested reports therefore do not enter review-ledger/review-path delta. Their JSON records packet path/source and PASS_SCOPED-like content but not standard candidate_receipts/range_specs bindings; status should not be mistaken for a canonical coverage promotion.",
+    "why_reviewed_union_stays_flat": "Earlier P2-8247 scoped-pass covers tick [0x0045504C,0x0045519E) = 338 B. P2-8209 covers queue [0x00441ED8,0x00441F88) = 176 B, enclosing the 134 B body. Thus detailed late fixtures add evidence but no new unique reviewed source-byte union. Fixture-only receipts have results/scope but no pseudocode/range records, so they correctly add no pseudocode bytes.",
+    "canonical_ownership_status": "No accepted/canonical source mapping or task-owner change is shown. g2/symbols/apollo_main.tsv still labels the tick and queue entries investigation-required/no-evidence with generic names; appropriate to preserve this status because new artifacts remain partial/private.",
+    "foundation_priority": "Next source-completeness work should connect list-node unlink/insert and delayed/current/overflow list invariants, next-wakeup and scheduler suspend/resume/task-selection, critical-section helpers, plus queue copy/zero and lock dependencies. Current packets explicitly leave multi-task/future/inter-read mutation or child/copy/mutex semantics and physical scheduling unresolved."
+  },
+  "instruction_metric_limits": {
+    "current_receipt_pinned_json_per_payload": {
+      "apollo_bootloader": 123960,
+      "apollo_main": 110518,
+      "case": 41082
+    },
+    "missing_machine-readable_counts": [
+      "codec C-SKY",
+      "touch Cortex-M0+"
+    ],
+    "codec_reason": "P2-csky-recovery-5316 uses manifest/artifact-manifest fields and does not provide a files dict; instruction_measure.py only consumes hash-listed .json/.jsonl instruction/disassembly entries in receipt.files. It counts this as unsupported schema.",
+    "touch_reason": "Touch disassembly artifacts are usually .txt and/or instruction lines lack a bytes field; parser only consumes receipt-pinned .json/.jsonl rows with address, byte hex, and mnemonic.",
+    "interpretation": "A zero/missing per-payload assembly count for codec or touch is a parser/schema coverage gap, not evidence of zero actual assembly."
+  },
+  "evidence_paths": [
+    "g2/build/audits/2026-10-05T1531Z-current/comparison.json",
+    "g2/build/audits/2026-10-05T1531Z-current/instruction-metrics.json",
+    "g2/build/audits/2026-10-05T1531Z-current/function-ledger.jsonl (0x45504c and 0x441ed8)",
+    "g2/build/audits/2026-10-05T1531Z-current/artifact-ledger.jsonl (tick/queue packet outcomes; review_status not_reviewed for nested reviews)",
+    "g2/build/audits/2026-10-05T1531Z-current/immutable-artifact-manifest.jsonl",
+    "g2/build/audits/2026-10-05T1531Z-current/measure.py:101-107",
+    "g2/build/audits/2026-10-05T1531Z-current/instruction_measure.py (receipt.files schema and JSON row parser)",
+    "g2/symbols/apollo_main.tsv entries 0x00441ED8 and 0x0045504C",
+    "g2/build/pseudocode-first/20260930T190500Z/reviews/P2-8209-independent-review/001/review.json",
+    "g2/build/pseudocode-first/20260930T190500Z/reviews/P2-8247-independent-review/001/review.json"
+  ],
+  "remaining_ambiguities": [
+    "The unchanged 197,000 number cannot summarize semantic learning; it is spatial union coverage only. New nested review evidence needs canonical range/candidate binding to become discoverable under current review metric.",
+    "Current comparison says 710 new receipt paths but those do not represent 710 new code or independently reviewed units.",
+    "Machine-readable code instruction totals omit C-SKY and touch; combined count needs this limitation beside the number."
+  ],
+  "assessment_files_review": {
+    "paths": [
+      "g2/analysis/current-assessment-2026-10-05T1531Z/assessment-summary.json",
+      "g2/analysis/current-assessment-2026-10-05T1531Z/component-phase-matrix.json",
+      "g2/analysis/current-assessment-2026-10-05T1531Z/priority-plan.json"
+    ],
+    "crosscheck": "All per-component values sum exactly to summary and frozen baseline. Candidate=1,912,325, raw pseudocode=1,902,397, scoped review=197,000 both snapshots; assembly=488,326\u2192490,200 (+1,874). Source/byte-identical completions remain 0/6 and 0/1; behavioral/semantic completion null. Build provider manifest points at six official blobs.",
+    "matrix_notes": "Codec/touch assembly is null and caveated, correctly avoiding a false zero. Candidate/raw pseudocode footprints are byte-addressed evidence, not semantic completion. Assembly-export footprint is not executable census.",
+    "priority_plan_caveat": "The plan itself says task owners are unidentified, but line recommending the current RTOS writer continue assumes an active writer; snapshot proves recent verified artifacts only. Make continuation conditional on coordinator confirmation.",
+    "ownership_status": "0x45504C tick and 0x441ED8 queue symbols remain generic investigation-required/no-evidence; correct for canonical/source promotion because all recent maps/reviews are accepted:false partial. Preserve private evidence as separate current activity."
+  }
+}

@@ -1,0 +1,309 @@
+{
+  "locked_bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "basis": "fresh15:33:22UTC assessment and local consolidated references; historical match results explicitly labelled",
+  "records": [
+    {
+      "id": "freertos",
+      "consumer": "Apollo main",
+      "role": "hardware-essential RTOS",
+      "evidence_grade": "strong lineage/config; not full source-byte match",
+      "source": "third-party/upstream/freertos-kernel",
+      "version": "V10.5.1 gitlink def7d2df2b0506d3d249334974f51e427c17a41c",
+      "license_status": "MIT per dependency registry",
+      "interfaces": [
+        "pxCurrentTCB 0x20074A20",
+        "tick 0x45504C",
+        "task/list/queue",
+        "IAR CM55 NTZ port"
+      ],
+      "reuse_recipe": "Compare public kernel plus recovered TCB patch; use original-instruction fixtures to test ABI, not assume unpatched source fits",
+      "unresolved": [
+        "producing compiler/version",
+        "TCB112-byte patch/config",
+        "multi-task scheduling trace"
+      ],
+      "new_verified_bytes": null,
+      "firmware_source_build_proven": false
+    },
+    {
+      "id": "ambiq-hal",
+      "consumer": "Apollo boot/main",
+      "role": "hardware-essential HAL/board",
+      "evidence_grade": "strong lineage; selected compatibility pin",
+      "source": "third-party/upstream/ambiqhal-apollo510",
+      "version": "AmbiqSuite5.1.0 baseline5efc0228",
+      "license_status": "BSD-3-Clause per registry",
+      "interfaces": [
+        "MSPI0 display",
+        "MSPI1 NOR",
+        "GPIO callbacks0x20068228",
+        "UART/IOM/DMA"
+      ],
+      "reuse_recipe": "Match leaf HALs then recover board/init/callback glue separately",
+      "unresolved": [
+        "private pre-release checkout",
+        "board variant/pins",
+        "IRQ DMA/cache lifecycle"
+      ],
+      "new_verified_bytes": null,
+      "firmware_source_build_proven": false
+    },
+    {
+      "id": "cordio",
+      "consumer": "Apollo main",
+      "role": "communications middleware",
+      "evidence_grade": "compatible host family with downstream ABI changes",
+      "source": "third-party/upstream/cordio",
+      "version": "r20.05c3656312d comparator",
+      "license_status": "Apache-2.0 per registry",
+      "interfaces": [
+        "WSF pool/timer",
+        "HCI->EM9305",
+        "ATT copy boundary"
+      ],
+      "reuse_recipe": "Apply recovered Ambiq config/ABI/AES cleanup as comparison inputs; validate boundary before source reuse",
+      "unresolved": [
+        "timer/layout fork",
+        "controller is different private firmware",
+        "port and scheduler semantics"
+      ],
+      "new_verified_bytes": null,
+      "firmware_source_build_proven": false
+    },
+    {
+      "id": "em-sdk",
+      "consumer": "EM9305",
+      "role": "hardware-essential BLE controller/vendor runtime",
+      "evidence_grade": "documented relocation-normalized archive-body matches",
+      "source": "EM9305 SDKv4.2 mirror oracle",
+      "version": "1494functions157122B/210888B app record",
+      "license_status": "proprietary/controller confidential; mirror does not grant redistribution",
+      "interfaces": [
+        "HCI",
+        "RF/PAL/LL",
+        "QP/C6.5.1 RTEF"
+      ],
+      "reuse_recipe": "Authenticate and relocation-normalize individual archive bodies; preserve legitimate local vendor image only in practical blob route",
+      "unresolved": [
+        "authoritative licensed SDK/source",
+        "MetaWare linker placement",
+        "51vendor-modified functions",
+        "unmatched ownership unknown"
+      ],
+      "new_verified_bytes": null,
+      "firmware_source_build_proven": false
+    },
+    {
+      "id": "nationalchip",
+      "consumer": "GX8002",
+      "role": "hardware/DSP middleware",
+      "evidence_grade": "documented102eligible-section matches; new batch separate",
+      "source": "third-party/upstream/nationalchip-lvp-kws",
+      "version": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "license_status": "MIT source; bundled prebuilts separate/unresolved",
+      "interfaces": [
+        "UART boot/DFU",
+        "I2S/DMA",
+        "NPU dispatch"
+      ],
+      "reuse_recipe": "Use source/object matcher on held-out SPL/control function; retain weights separately from executable commands",
+      "unresolved": [
+        "closed DSP/driver objects",
+        "toolchain options",
+        "private integration"
+      ],
+      "new_verified_bytes": null,
+      "firmware_source_build_proven": false
+    },
+    {
+      "id": "pdl",
+      "consumer": "PSoC touch",
+      "role": "hardware-essential SCB driver",
+      "evidence_grade": "prior one exact56-byte source compilation match",
+      "source": "third-party/upstream/infineon-mtb-pdl-cat2",
+      "version": "release-v2.21.0 35f1714623cfea682d5e285af80d50416b4c7bbc",
+      "license_status": "Apache-2.0 PDL; CapSense/EEPROM terms separate",
+      "interfaces": [
+        "SCB1 0x40250000",
+        "host I2C0x0C"
+      ],
+      "reuse_recipe": "Compile held-out SCB leaf with proven -Og profile; keep version alternatives if identical",
+      "unresolved": [
+        "GCC10.3-13.3 unresolved",
+        "CapSense middleware version/terms",
+        "board config"
+      ],
+      "new_verified_bytes": null,
+      "firmware_source_build_proven": false
+    },
+    {
+      "id": "stm32-hal",
+      "consumer": "STM32 case",
+      "role": "hardware-essential HAL/RTOS",
+      "evidence_grade": "family strong; release candidate only",
+      "source": "third-party/upstream/stm32g0xx-hal-driver",
+      "version": "v1.4.7 a0cf8a8b candidate",
+      "license_status": "BSD-3-Clause per registry",
+      "interfaces": [
+        "UART/pogo",
+        "FLASH/OB dual bank",
+        "charger/power tasks"
+      ],
+      "reuse_recipe": "Match one HAL leaf and port handler with armclang profile before selecting revision",
+      "unresolved": [
+        "HAL/kernel actual release",
+        "Arm compiler/linker/runtime",
+        "charging board configuration"
+      ],
+      "new_verified_bytes": null,
+      "firmware_source_build_proven": false
+    },
+    {
+      "id": "lvgl",
+      "consumer": "Apollo main",
+      "role": "shared graphics middleware, not exclusively EvenHub",
+      "evidence_grade": "hybrid9.3-dev lineage and bounded ABI behavior",
+      "source": "third-party/upstream/lvgl + ambiq-lvgl",
+      "version": "344c7c31 +5be8e0ae compatibility baselines",
+      "license_status": "MIT sources; Nema implementation separate",
+      "interfaces": [
+        "descriptor28B",
+        "setter0x498680",
+        "decoder registration0x4C794C",
+        "drawbuf0x48AEF8"
+      ],
+      "reuse_recipe": "Compare recovered Ambiq draw-buffer extension; reuse L8 resource exporter for proven family",
+      "unresolved": [
+        "hybrid exact revisions",
+        "allocator/cache providers",
+        "panel/GPU lifecycle"
+      ],
+      "new_verified_bytes": null,
+      "firmware_source_build_proven": false
+    },
+    {
+      "id": "nema",
+      "consumer": "Apollo main GPU",
+      "role": "hardware-critical vendor acceleration",
+      "evidence_grade": "IAR-generated vendor object lineage",
+      "source": "third-party/upstream/ambiqhal-nema headers",
+      "version": "NemaGFX>=1.4.12 / NemaVG1.1.8 header baseline",
+      "license_status": "headers and binary terms separate; source unavailable",
+      "interfaces": [
+        "command lists",
+        "GPU/DMA/cache",
+        "A4 output"
+      ],
+      "reuse_recipe": "Preserve licensed compatible vendor implementation in practical build; do not substitute GCC archive as byte-equivalent",
+      "unresolved": [
+        "exact IAR archive/config",
+        "redistribution grant",
+        "binary-free implementation"
+      ],
+      "new_verified_bytes": null,
+      "firmware_source_build_proven": false
+    },
+    {
+      "id": "storage-fonts",
+      "consumer": "Apollo boot/main",
+      "role": "shared storage/font middleware",
+      "evidence_grade": "documented version/config lineage",
+      "source": "littlefs / FlashDB / FreeType pins",
+      "version": "littlefs2.10.1; FlashDB2.1.1; FreeType2.9.1",
+      "license_status": "BSD-3-Clause / Apache-2.0 / FTL per registry",
+      "interfaces": [
+        "MSPI NOR",
+        "filesystem callbacks",
+        "ft_default_modules0x73EEF8"
+      ],
+      "reuse_recipe": "Recover FS/allocator adapter and use public algorithms rather than redecompile each library leaf",
+      "unresolved": [
+        "external NOR font files absent",
+        "producing toolchain",
+        "adapter/power failure contracts"
+      ],
+      "new_verified_bytes": null,
+      "firmware_source_build_proven": false
+    },
+    {
+      "id": "product-glue",
+      "consumer": "Apollo main",
+      "role": "product-specific integration; hardware and app boundaries overlap",
+      "evidence_grade": "behavior/module association; authorship not absolute",
+      "source": "local original-instruction ring/audio evidence",
+      "version": "locked s200_v2.2.6.10",
+      "license_status": "official firmware proprietary; reconstructed tooling root terms do not relicense input",
+      "interfaces": [
+        "ring service->input_event",
+        "PCM callbacks->encoder->BLE",
+        "board lens-side0x20075024"
+      ],
+      "reuse_recipe": "Analyze integration state/ownership after known vendor primitives; retain source-path evidence separately from authorship",
+      "unresolved": [
+        "vendor contractors/reused code possible",
+        "global ownership/scheduling",
+        "historical missing manifests"
+      ],
+      "new_verified_bytes": null,
+      "firmware_source_build_proven": false
+    },
+    {
+      "id": "evenhub",
+      "consumer": "Apollo main",
+      "role": "higher product feature services, last priority",
+      "evidence_grade": "historical module association, not authorship proof",
+      "source": "g2/docs/reference/capabilities.md",
+      "version": "parser0x4D9B34..0x4DC5AE; main0x4E0CCE..0x4E1956 (module envelopes)",
+      "license_status": "official proprietary; authored-source provenance unknown",
+      "interfaces": [
+        "protobuf/RPC",
+        "UI/screens",
+        "IMU policy0x4E1406..0x4E1442"
+      ],
+      "reuse_recipe": "Defer feature implementation; trace only boundaries needed by hardware contracts",
+      "unresolved": [
+        "envelopes are not contiguous proven coverage",
+        "SDK logic can call hardware",
+        "missing detailed manifests"
+      ],
+      "new_verified_bytes": null,
+      "firmware_source_build_proven": false
+    }
+  ],
+  "limits": [
+    "No combined upstream byte union from heterogeneous historical measures",
+    "No absolute Even-authored byte claim",
+    "No desktop OS/userland partition",
+    "ROM/external NOR dependencies absent from locked artifact"
+  ],
+  "source_evidence": [
+    {
+      "path": "g2/docs/reference/libraries.md",
+      "sha256": "519d198fad79bcae5cb1f3f5da7da93133f94198bff3c8765a75d84bba640289"
+    },
+    {
+      "path": "g2/docs/reference/toolchains.md",
+      "sha256": "25d44321ad2f932f40c22847734efb663f0d0328a26f5fb890edde29032b41f1"
+    },
+    {
+      "path": "g2/docs/reference/memory-map.md",
+      "sha256": "3779e487c2bd94985dd8a4b053a610902b2a8b326e9c9c893f7f4f5612dab94a"
+    },
+    {
+      "path": "g2/docs/reference/capabilities.md",
+      "sha256": "0e053f90de9aaf3296bbc2d64ac88115dea9d57c6dd67202a41cad7c4f636f66"
+    },
+    {
+      "path": "third-party/README.md",
+      "sha256": "bea6590dcefbf3ab7cd0c212581ae41c2cd59b9d2a04bac8a74927038e5258ee"
+    },
+    {
+      "path": "NOTICE",
+      "sha256": "c7262908fce6913833108b0fc04c27a6ac5c9a49f658e084f5afade020705e8c"
+    },
+    {
+      "path": "g2/analysis/current-assessment-2026-10-05T1531Z/upstream-attribution.json",
+      "sha256": "3b176c40ab1b00a09278c4d0525675fc06c3268ab628f4512eac254f6ead19c5"
+    }
+  ]
+}

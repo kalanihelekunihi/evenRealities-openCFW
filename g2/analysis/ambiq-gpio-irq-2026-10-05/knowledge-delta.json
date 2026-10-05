@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "fresh_original_source_cases": 773,
+  "new_family_declared_code_bytes": 454,
+  "new_executed_original_bytes": 448,
+  "new_static_unreachable_bytes": 6,
+  "new_exact_compiled_match_bytes": 0,
+  "shared_critical_bytes": 8,
+  "shared_critical_new_bytes": 0,
+  "cumulative_unique_original_trace_bytes": 1392,
+  "aggregate": {
+    "tests_run": 189,
+    "passed": 183,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 7
+  },
+  "limits": "All reachable paths across four original GPIO bodies and actual PRIMASK entry/restore execute;6 service bytes are statically unreachable after the validated IRQ guard. Only fixture callback functions intercepted; MMIO W1C is synthetic. Serialized fixtures prove bank mapping, status/clear accesses, live callback table behavior and return codes, not GPIO setup/physical pins/IRQ delivery/callback concurrency. Compile-fwrapv retained for stock signed-negation behavior; no full compiler byte equality claim."
+}

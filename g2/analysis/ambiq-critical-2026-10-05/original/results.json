@@ -1,0 +1,312 @@
+{
+  "caller_index_counts": {
+    "0x00473934_direct_callers": 3,
+    "0x00473940_direct_callers": 72,
+    "0x0047394c_direct_callers": 3,
+    "0x004807a0_direct_callers": 57
+  },
+  "functions": {
+    "0x0043a11e": {
+      "bytes_hex": "f0b40246106895681318506803eb5004c00748bf4d44a3422dd013f8016b16f0030004bf13f8010bc01c31090f2907d113f8011b0f3103e013f8017b05f8017b401ef9d10029e6d013f8010bc6f38106032e08bf13f8016b00eb0620404228440026b71e8f421ebf10f8017b05f8017b761cf6d1cfe7f0bc02f10c007047",
+      "image_range": [
+        "0x211e",
+        "0x219c"
+      ],
+      "name": "FUN_0043a11e",
+      "ota_file_range": [
+        "0x213e",
+        "0x21bc"
+      ],
+      "sha256": "41e4a34428bb2c09774785d474f5209201f6551c823f0286eb66063dedc74a9d",
+      "size": 126
+    },
+    "0x00473934": {
+      "bytes_hex": "eff3108062b67047",
+      "image_range": [
+        "0x3b934",
+        "0x3b93c"
+      ],
+      "name": "FUN_00473934",
+      "ota_file_range": [
+        "0x3b954",
+        "0x3b95c"
+      ],
+      "sha256": "6c169e0f7b32e9f34f42114fdbd5292b812805d62399aabd65f2299c040bd120",
+      "size": 8
+    },
+    "0x00473940": {
+      "bytes_hex": "eff3108072b67047",
+      "image_range": [
+        "0x3b940",
+        "0x3b948"
+      ],
+      "name": "FUN_00473940",
+      "ota_file_range": [
+        "0x3b960",
+        "0x3b968"
+      ],
+      "sha256": "720733fcf19a5635fcab0791fcc2b007294712bb27536443ff79490821c168cf",
+      "size": 8
+    },
+    "0x0047394c": {
+      "bytes_hex": "dff8240b7047",
+      "image_range": [
+        "0x3b94c",
+        "0x3b952"
+      ],
+      "name": "FUN_0047394c",
+      "ota_file_range": [
+        "0x3b96c",
+        "0x3b972"
+      ],
+      "sha256": "081c18c20c2470ed4c2a8de4ac105253647b86c92fad5b1dbe03b841d4a843e7",
+      "size": 6
+    },
+    "0x004807a0": {
+      "bytes_hex": "80b500ee100ab8ee400abfeeed0a10ee100a11490968c1f3c101022901d00f2110e000ee100ab8ee400adfed090a20ee200adfed080a80ee200abceec00a10ee100a1821814202d2401a7ff729f401bd",
+      "image_range": [
+        "0x487a0",
+        "0x487f0"
+      ],
+      "name": "FUN_004807a0",
+      "ota_file_range": [
+        "0x487c0",
+        "0x48810"
+      ],
+      "sha256": "f95193c502160b469e1579e13223f1cdf488a2d8fab9ec07f686c9101fbed753",
+      "size": 80
+    },
+    "0x005e42b4": {
+      "bytes_hex": "10b5074979441831064c7c44163404e00a68081d114488470146a142f8d110bd",
+      "image_range": [
+        "0x1ac2b4",
+        "0x1ac2d4"
+      ],
+      "name": "FUN_005e42b4",
+      "ota_file_range": [
+        "0x1ac2d4",
+        "0x1ac2f4"
+      ],
+      "sha256": "c18f6c848dedbb42dc53582eb239f9f59017656fafad4cc4c948827bb6c342bd",
+      "size": 32
+    },
+    "0x005fa01e": {
+      "bytes_hex": "30b4002512e050f8042bd30744bf4a44521e091f042942f8045bfad213468c0744bf15809b1cc90748bf1d7050f8041b0029e8d130bc7047",
+      "image_range": [
+        "0x1c201e",
+        "0x1c2056"
+      ],
+      "name": "FUN_005fa01e",
+      "ota_file_range": [
+        "0x1c203e",
+        "0x1c2076"
+      ],
+      "sha256": "8b74bda81d1262930007b87bd980ccaebc6028472d7dd7413c20cc1f281b1b67",
+      "size": 56
+    },
+    "caller_0x004446b4": {
+      "helper_callsites": [
+        {
+          "bytes": "2ff01ff9",
+          "pc": "0x004446f2",
+          "target": "0x00473934"
+        }
+      ],
+      "name": "FUN_004446b4",
+      "sha256": "d86b42c32df5568ab3d2eb0f492a24000573ff39a8ae11f23d74611ae5b3e7bd",
+      "size": 74
+    },
+    "caller_0x0044ab42": {
+      "helper_callsites": [
+        {
+          "bytes": "28f0ebfe",
+          "pc": "0x0044ab66",
+          "target": "0x00473940"
+        },
+        {
+          "bytes": "35f076fd",
+          "pc": "0x0044acb0",
+          "target": "0x004807a0"
+        },
+        {
+          "bytes": "35f075fc",
+          "pc": "0x0044aeb2",
+          "target": "0x004807a0"
+        }
+      ],
+      "name": "FUN_0044ab42",
+      "sha256": "012c052f6ab7e829129ed966a94cfb1541605b2d05185115c1dfd06cbb9d2898",
+      "size": 1318
+    },
+    "caller_0x0044b0b6": {
+      "helper_callsites": [
+        {
+          "bytes": "28f041fc",
+          "pc": "0x0044b0ba",
+          "target": "0x00473940"
+        }
+      ],
+      "name": "FUN_0044b0b6",
+      "sha256": "0ea726bb021d4f4f5fd228701e2911434c9c181155d4390d0f25be39a15259f9",
+      "size": 32
+    },
+    "caller_0x0044b0d6": {
+      "helper_callsites": [
+        {
+          "bytes": "28f02ffc",
+          "pc": "0x0044b0de",
+          "target": "0x00473940"
+        }
+      ],
+      "name": "FUN_0044b0d6",
+      "sha256": "78bb04a6f49c50c1dd0ab74ac70e8dab14b69fa88f7fea4693ff7533cd03aac3",
+      "size": 130
+    },
+    "caller_0x0046fb0c": {
+      "helper_callsites": [
+        {
+          "bytes": "03f0bcfd",
+          "pc": "0x0046fdb8",
+          "target": "0x00473934"
+        }
+      ],
+      "name": "FUN_0046fb0c",
+      "sha256": "68c702cca39cea94a9650b5c456229c1fd46b884490bb97f04879c8b56326c21",
+      "size": 812
+    },
+    "caller_0x004bfe60": {
+      "helper_callsites": [
+        {
+          "bytes": "b3f76afd",
+          "pc": "0x004bfe68",
+          "target": "0x00473940"
+        }
+      ],
+      "name": "FUN_004bfe60",
+      "sha256": "b785510f3c3af451e03f6a6f76bfbe5508b9cf6f0246a9e608fccb10b65feb47",
+      "size": 118
+    },
+    "caller_0x004c0ea8": {
+      "helper_callsites": [
+        {
+          "bytes": "bff743fc",
+          "pc": "0x004c0f16",
+          "target": "0x004807a0"
+        }
+      ],
+      "name": "FUN_004c0ea8",
+      "sha256": "ed26e7d54404bbf50b8edbe0b10fd5f264caef39b8aed9fe466f3d41233f794d",
+      "size": 118
+    },
+    "caller_0x00538d18": {
+      "helper_callsites": [
+        {
+          "bytes": "3af710fe",
+          "pc": "0x00538d1c",
+          "target": "0x00473940"
+        }
+      ],
+      "name": "FUN_00538d18",
+      "sha256": "b509adac0c08c9239aabb77c270b559aa76cd2b797bc473f2d0d01a22e3c2837",
+      "size": 64
+    },
+    "caller_0x0057a65c": {
+      "helper_callsites": [
+        {
+          "bytes": "f9f621f9",
+          "pc": "0x0057a6ee",
+          "target": "0x00473934"
+        }
+      ],
+      "name": "DRV_Gx8002_I2SInit",
+      "sha256": "1d8b81348af10ad6b18ebb670b86af5881325f1fa65b3004c75968214e5ff6a0",
+      "size": 216
+    }
+  },
+  "limits": [
+    "The caller index counts are Ghidra direct-callee metadata counts; selected caller bodies/call instructions are separately hash-verified above.",
+    "The delay loop prefix and complete 24-byte decoder output are recovered; no physical cycle timing was measured.",
+    "The stored image includes the scatter record and compressed loop input; execution at 0x40 depends on startup scatter initialization into ITCM.",
+    "Delay wrapper floating-point scaling is disassembled but not reimplemented or claimed as complete source behavior."
+  ],
+  "mapping": {
+    "base": "0x00438000",
+    "decoded_image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+    "decoded_size": 3523364,
+    "ota_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "ota_size": 3523396,
+    "payload_preamble_bytes": 32,
+    "runtime_image_range": [
+      "0x00438000",
+      "0x00794324"
+    ]
+  },
+  "startup_scatter": {
+    "decoded_loop_first6_hex": "0138fdd17047",
+    "decoded_output_bytes": 24,
+    "decoded_output_hex": "0138fdd17047704750f8043b41f8043b013af9d170477047",
+    "decoder_behavior": "source start is record base + field0; source bound is field1 >> 1 bytes; field1 bit0 enables destination relocation; destination is field2",
+    "decoder_entry": "0x0043a11e",
+    "decoder_sha256": "41e4a34428bb2c09774785d474f5209201f6551c823f0286eb66063dedc74a9d",
+    "decoder_trace": [
+      {
+        "backref_bytes_copied": 3,
+        "backref_distance": 4,
+        "literal_bytes_copied": 13,
+        "literal_count_field": 14,
+        "literal_source_indices": [
+          2,
+          15
+        ],
+        "token": "0x10"
+      },
+      {
+        "backref_bytes_copied": 5,
+        "backref_distance": 16,
+        "literal_bytes_copied": 3,
+        "literal_count_field": 4,
+        "literal_source_indices": [
+          18,
+          21
+        ],
+        "token": "0x30"
+      }
+    ],
+    "full_extent_status": "24-byte output is completely decoded from the 22-byte input; no input read is made at the exclusive image end",
+    "loader_entry": "0x005e42b4",
+    "loader_sha256": "c18f6c848dedbb42dc53582eb239f9f59017656fafad4cc4c948827bb6c342bd",
+    "loop_instructions": [
+      "0x40: subs r0, #1",
+      "0x42: bne 0x40",
+      "0x44: bx lr"
+    ],
+    "record_address": "0x0075d3e0",
+    "record_fields": {
+      "destination": "0x00000040",
+      "packed_length": "0x2c",
+      "packed_source_bytes": 22,
+      "record_base": "0x0075d3e4",
+      "source_offset": "0x36f2a",
+      "source_ota_file_range": [
+        "0x35c32e",
+        "0x35c344"
+      ],
+      "source_runtime_range": [
+        "0x79430e",
+        "0x794324"
+      ]
+    },
+    "record_handler_relative_word": "0xffcdcd3f",
+    "record_handler_thumb_target": "0x43a11f",
+    "relative_table_bounds": {
+      "computed_end": "0x75d410",
+      "computed_start": "0x75d3c8",
+      "end_anchor": "0x005e42d8",
+      "end_displacement": "0x179138",
+      "start_anchor": "0x005e42d4",
+      "start_displacement": "0x1790f4"
+    },
+    "stored_stream_hex": "100b0138fdd17047704750f8043b41043001013af910"
+  },
+  "verification": "PASS"
+}

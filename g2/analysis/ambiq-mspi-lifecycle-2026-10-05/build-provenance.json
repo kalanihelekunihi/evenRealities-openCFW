@@ -1,0 +1,29 @@
+{
+  "source_sha256": {
+    "g2/components/foundation/ambiq_mspi/ambiq_mspi_compat.h": "fe6af8d10f857eb6bfb2758907073bd5ab75691a6818c03c94f0124a0f285299",
+    "g2/components/foundation/ambiq_mspi/ambiq_mspi_interrupts.c": "032087d41fe463a36c6a119b8fd2a7beb1256356e2f6d8d9d7f4ca75e02e5ba3",
+    "g2/components/foundation/ambiq_mspi/ambiq_mspi_interrupts.h": "89f04627e3270417130428894d6523b66e1191842dfd5baba01ca0256be51337",
+    "g2/components/foundation/ambiq_mspi/ambiq_mspi_lifecycle.c": "c55c3e163097e0112b11eb9fc4192b6a25de8cdaf28da41b1e3a6c8f2272ad0d",
+    "g2/components/foundation/ambiq_mspi/simulator/entry.c": "762eab9e3d49371055ba5e9941f62540f6538348b23d9f5990e01e7340850b28",
+    "g2/components/foundation/ambiq_mspi/simulator/lifecycle_seams.c": "ab0a32d4c7868181351d6e727dd1e032d264da49711d7848150699818d149db9",
+    "g2/components/foundation/ambiq_mspi/simulator/module.ld": "de37d00a5c0dfa28c3630bae181df5f6b8383ea2e17e1cb371e39f4f00f6185f",
+    "g2/Makefile": "9681a00c504c76770b1320c1a3e711cc99719f695d820ff198f3936e77e553d6",
+    "g2/tests/test_ambiq_mspi.py": "4e3452725387e64b13938010b40d9197059738932c7bd8e62842a76d4c3583ae",
+    "g2/tests/test_ambiq_mspi_lifecycle.py": "12618871c31ebf10b2752e15498881687c79889edd52d7d1ce3b04d3e4a7e2d8",
+    "g2/components/foundation/ambiq_mspi/SOURCE_PROVENANCE.json": "0c632810ccf3032389ff1f0fe9e021ec03ce8df8ff2a32e7c1d8a3b0c4c906b7"
+  },
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.2.0\nThread model: posix\nInstalledDir: /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin\n",
+  "linker": "GNU ld (GNU Binutils) 2.47.20260726\nCopyright (C) 2026 Free Software Foundation, Inc.\nThis program is free software; you may redistribute it under the terms of\nthe GNU General Public License version 3 or (at your option) a later version.\nThis program has absolutely no warranty.\n",
+  "elf": "g2/build/foundation/ambiq-mspi-lifecycle-final/ambiq_mspi.elf",
+  "elf_sha256": "3d18250fde6831cbc2c8a4b0715330643c48d2daed330b27cc81b69b504f447d",
+  "comparison": "g2/build/foundation/ambiq-mspi-lifecycle-final/lifecycle-comparison-reviewed.json",
+  "comparison_sha256": "9ae5b2768715682ab3e7e6cf6c89fa5a4650f42853db87a23cde88e74483144e",
+  "stubbed_original_entries": [
+    "0x4bfd62",
+    "0x4bfc86",
+    "0x4807a0"
+  ],
+  "actual_source_link_provider": "components/foundation/ambiq_mspi/simulator/lifecycle_seams.c; synthetic",
+  "compile_flags": "--target=arm-none-eabi -mcpu=cortex-m55 -mthumb -mfloat-abi=soft -ffreestanding -fno-builtin -std=c11 -Wall -Wextra -Werror -O2",
+  "limits": "Source-only callable module. External CQ/delay implementations are simulator seam bodies. Compiler/store agreement under serialized tests does not establish concurrency or hardware timing."
+}

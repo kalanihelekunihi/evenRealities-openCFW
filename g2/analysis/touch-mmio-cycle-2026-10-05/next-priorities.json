@@ -1,0 +1,52 @@
+{
+  "ranking": [
+    {
+      "rank": 1,
+      "family": "SCB RX FIFO trigger level",
+      "type": "hardware-critical upstream interface",
+      "reason": "44-byte adjacent original leaf and pinned public source; immediate bounded implementation",
+      "new_binary_attribution": "44-byte identified original leaf; 0 new exact compiled-upstream-match bytes",
+      "status": "completed bounded helper and original/source tests"
+    },
+    {
+      "rank": 2,
+      "family": "Ambiq HAL GPIO/MSPI",
+      "type": "hardware-critical upstream reuse",
+      "reason": "reuse pinned source before reconstructing board-specific glue",
+      "boundary": "compatible compiler and held-out leaf attribution required"
+    },
+    {
+      "rank": 3,
+      "family": "LVGL image resources",
+      "type": "typed application data",
+      "reason": "reuse six validated L8 consumers; admit another only after format/consumer validation",
+      "new_bytes": 0,
+      "license": "vendor pixels retain vendor rights; no new public redistribution assumption"
+    },
+    {
+      "rank": 4,
+      "family": "FreeRTOS services and port",
+      "type": "RTOS/OS interface",
+      "reason": "high impact but scheduler/port state missing; coordinate current ownership"
+    },
+    {
+      "rank": 5,
+      "family": "codec I2S and EM controller",
+      "type": "binary-library dependency",
+      "reason": "relocation evidence and legitimate SDK needed; binary match is not source reuse"
+    },
+    {
+      "rank": 6,
+      "family": "EvenHub",
+      "type": "application/integration glue",
+      "reason": "last after foundational interfaces"
+    }
+  ],
+  "attribution_rules": [
+    "Available upstream source is not an exact binary match.",
+    "Binary library match is not source completeness.",
+    "Module naming is not positive product authorship.",
+    "Unknown remains unknown."
+  ],
+  "next_unimplemented_priority": "Ambiq GPIO/MSPI held-out source-backed leaf; isolate IRQ/DMA/board glue"
+}

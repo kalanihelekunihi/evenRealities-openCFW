@@ -1,0 +1,336 @@
+{
+  "source_files": [
+    {
+      "path": "g2/components/foundation/ambiq_gpio/ambiq_gpio.h",
+      "sha256": "fa08cb47b7bd451f77c4c06bd442c6bcd3297a431019ad0d0a2a5cabed5c2496",
+      "bytes": 1137,
+      "role": "interface-or-compatibility",
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio/ambiq_gpio_compat.h",
+      "sha256": "3d610896f61f927d2579c4bbfb50ff45abfedbdd488bc478b3cec719dd57c601",
+      "bytes": 1586,
+      "role": "interface-or-compatibility",
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio/ambiq_gpio_irq.c",
+      "sha256": "7a713514c4b185b5aa811fed32e1fd4ac7c596f70c13543eb1a0884b75ac1ba2",
+      "bytes": 10004,
+      "role": "implementation",
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/ambiq_cmdq.c",
+      "sha256": "39dfd4515413e88e66b07f8eea47664a6d666943069e65768f1a284435583a24",
+      "bytes": 6226,
+      "role": "implementation",
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/ambiq_cmdq.h",
+      "sha256": "8f4dffc5e3cf2b33cf877dab9ba5b2841b74451a379b9ab49ab4ec0d2869ce7d",
+      "bytes": 4580,
+      "role": "interface-or-compatibility",
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/ambiq_interrupt_mask.c",
+      "sha256": "27a574d24f61bf1bec7a13d16bc3e1f0816c35045f384b5ad85d808871f6a9eb",
+      "bytes": 4625,
+      "role": "implementation",
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/ambiq_interrupt_mask.h",
+      "sha256": "76e92c27af92ed403326c65acdbb890dccfb4f00788f06c6c99f09e4ec0de98a",
+      "bytes": 450,
+      "role": "interface-or-compatibility",
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/ambiq_mspi_compat.h",
+      "sha256": "fe6af8d10f857eb6bfb2758907073bd5ab75691a6818c03c94f0124a0f285299",
+      "bytes": 4625,
+      "role": "interface-or-compatibility",
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/ambiq_mspi_interrupts.c",
+      "sha256": "032087d41fe463a36c6a119b8fd2a7beb1256356e2f6d8d9d7f4ca75e02e5ba3",
+      "bytes": 4780,
+      "role": "implementation",
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/ambiq_mspi_interrupts.h",
+      "sha256": "89f04627e3270417130428894d6523b66e1191842dfd5baba01ca0256be51337",
+      "bytes": 1765,
+      "role": "interface-or-compatibility",
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/ambiq_mspi_lifecycle.c",
+      "sha256": "c55c3e163097e0112b11eb9fc4192b6a25de8cdaf28da41b1e3a6c8f2272ad0d",
+      "bytes": 3862,
+      "role": "implementation",
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/simulator/entry.c",
+      "sha256": "762eab9e3d49371055ba5e9941f62540f6538348b23d9f5990e01e7340850b28",
+      "bytes": 691,
+      "role": "simulator-entry-or-seam",
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/simulator/lifecycle_seams.c",
+      "sha256": "6b3e74175d61d32ef8c416a72f795ec7b722d6ab0442dd7409e6b7fb1d34e644",
+      "bytes": 1165,
+      "role": "simulator-entry-or-seam",
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/simulator/entry.c",
+      "sha256": "cd61baf25d6cf38db1a631c0e5db5d194e87a3953536c5213135cc3498be813a",
+      "bytes": 1347,
+      "role": "simulator-entry-or-seam",
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb.c",
+      "sha256": "ef593088ec3c20985ae8c4b51cf932d9ccc9a98627b43dbe08e8befa412d8afd",
+      "bytes": 1881,
+      "role": "implementation",
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb.h",
+      "sha256": "92e7b7a09807209efba8b0372e615dd3b5ab32dd0459bc4c25675392e29b525d",
+      "bytes": 2157,
+      "role": "interface-or-compatibility",
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb_fifo.c",
+      "sha256": "f6c5439760848024e1bb297d3ab413aa4644f69e42c61c2b4ec692d2da94caca",
+      "bytes": 1231,
+      "role": "implementation",
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb_fifo.h",
+      "sha256": "b0cc52cc1f2c60ffb3da0c4a3931159b44c252f8343237f044db6ce7a600efbd",
+      "bytes": 1476,
+      "role": "interface-or-compatibility",
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb_mmio.c",
+      "sha256": "783266dd5cadfdb30c1d3fd52f94425f01e5dda86dc33e92f3ba7105f47516bd",
+      "bytes": 3724,
+      "role": "implementation",
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb_mmio.h",
+      "sha256": "246a8d858507f86efca279f1bcc3f2acf832b728db77d5a81163812fc1cf9c6f",
+      "bytes": 2582,
+      "role": "interface-or-compatibility",
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb_tx.c",
+      "sha256": "26c4c1d6cce94e42d5d7c2a117c6c592e297d9f8bb3b692add121430c904403c",
+      "bytes": 3213,
+      "role": "implementation",
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb_tx.h",
+      "sha256": "70d8e9f60fd9c67ccdd0217f036265f9b4f213c9dfae58af2a490ea4cb427829",
+      "bytes": 2216,
+      "role": "interface-or-compatibility",
+      "ignored": false
+    }
+  ],
+  "source_file_count": 22,
+  "implementation_c_count": 9,
+  "interface_header_count": 10,
+  "simulator_c_count": 3,
+  "callable_targets": [
+    {
+      "target": "touch-scb-simulator",
+      "elf": "g2/build/foundation/touch-scb-trigger-final/touch_scb.elf",
+      "sha256": "309692dec3686e957f4c39d01e52ba5cbd399639b90273e5f16235c5ffa01a8a",
+      "global_text_symbols": [
+        "touch_scb_fifo_set_rx_level",
+        "touch_scb_mmio_bind",
+        "touch_scb_mmio_read_array",
+        "touch_scb_mmio_read_array_checked",
+        "touch_scb_mmio_write_array",
+        "touch_scb_mmio_write_array_checked",
+        "touch_scb_read_array",
+        "touch_scb_read_array_checked",
+        "touch_scb_sim_checked",
+        "touch_scb_sim_read",
+        "touch_scb_sim_set_rx_level",
+        "touch_scb_sim_write",
+        "touch_scb_sim_write_checked"
+      ],
+      "provider_limits": "Touch RX/TX/trigger + callable entry; synthetic MMIO",
+      "production_firmware": false
+    },
+    {
+      "target": "ambiq-mspi-simulator",
+      "elf": "g2/build/foundation/ambiq-cmdq-regression/ambiq_mspi.elf",
+      "sha256": "3d18250fde6831cbc2c8a4b0715330643c48d2daed330b27cc81b69b504f447d",
+      "global_text_symbols": [
+        "am_hal_delay_us",
+        "am_hal_mspi_deinitialize",
+        "am_hal_mspi_disable",
+        "am_hal_mspi_interrupt_clear",
+        "am_hal_mspi_interrupt_disable",
+        "am_hal_mspi_interrupt_enable",
+        "am_hal_mspi_interrupt_status_get",
+        "ambiq_sim_clear",
+        "ambiq_sim_controller_disable",
+        "ambiq_sim_deinitialize",
+        "ambiq_sim_disable",
+        "ambiq_sim_enable",
+        "ambiq_sim_status",
+        "mspi_cq_disable",
+        "mspi_cq_term"
+      ],
+      "provider_limits": "MSPI interrupt/lifecycle; synthetic CQ and delay",
+      "production_firmware": false
+    },
+    {
+      "target": "ambiq-cmdq-simulator",
+      "elf": "g2/build/foundation/ambiq-critical-cq-regression/ambiq_mspi.elf",
+      "sha256": "e6b50621a7ba5fc87deeb54f228d1b824145817625316f3154692fb6a41051c8",
+      "global_text_symbols": [
+        "am_hal_cmdq_disable",
+        "am_hal_cmdq_term",
+        "am_hal_delay_us",
+        "am_hal_mspi_deinitialize",
+        "am_hal_mspi_disable",
+        "am_hal_mspi_interrupt_clear",
+        "am_hal_mspi_interrupt_disable",
+        "am_hal_mspi_interrupt_enable",
+        "am_hal_mspi_interrupt_status_get",
+        "ambiq_sim_clear",
+        "ambiq_sim_controller_disable",
+        "ambiq_sim_deinitialize",
+        "ambiq_sim_disable",
+        "ambiq_sim_enable",
+        "ambiq_sim_status",
+        "mspi_cq_disable",
+        "mspi_cq_term",
+        "opencfw_cmdq_critical_enter"
+      ],
+      "provider_limits": "Real MSPI/CMDQ, synthetic critical-enter/delay",
+      "production_firmware": false
+    },
+    {
+      "target": "ambiq-critical-simulator",
+      "elf": "g2/build/foundation/ambiq-critical-simulator/ambiq_mspi.elf",
+      "sha256": "d2a2d858daac6bf54d6d3acf526cbb4931fb739469c1c0df88c3a5bb5fd7680c",
+      "global_text_symbols": [
+        "am_hal_cmdq_disable",
+        "am_hal_cmdq_term",
+        "am_hal_delay_us",
+        "am_hal_interrupt_master_disable",
+        "am_hal_mspi_deinitialize",
+        "am_hal_mspi_disable",
+        "am_hal_mspi_interrupt_clear",
+        "am_hal_mspi_interrupt_disable",
+        "am_hal_mspi_interrupt_enable",
+        "am_hal_mspi_interrupt_status_get",
+        "ambiq_sim_clear",
+        "ambiq_sim_controller_disable",
+        "ambiq_sim_deinitialize",
+        "ambiq_sim_disable",
+        "ambiq_sim_enable",
+        "ambiq_sim_status",
+        "mspi_cq_disable",
+        "mspi_cq_term",
+        "opencfw_cmdq_critical_enter"
+      ],
+      "provider_limits": "Real MSPI/CMDQ/PRIMASK, synthetic delay",
+      "production_firmware": false
+    },
+    {
+      "target": "ambiq-gpio-simulator",
+      "elf": "g2/build/foundation/ambiq-gpio-simulator/ambiq_gpio.elf",
+      "sha256": "4cbf1ed94c35932b4dcd495c517c19223cee87d82cee7f169ebf33a4850941df",
+      "global_text_symbols": [
+        "am_hal_gpio_interrupt_irq_clear",
+        "am_hal_gpio_interrupt_irq_status_get",
+        "am_hal_gpio_interrupt_register",
+        "am_hal_gpio_interrupt_service",
+        "am_hal_interrupt_master_disable",
+        "opencfw_cmdq_critical_enter"
+      ],
+      "provider_limits": "Real GPIO IRQ/register/service/PRIMASK, synthetic callbacks and W1C",
+      "production_firmware": false
+    }
+  ],
+  "unique_original_trace_bytes": {
+    "touch": 234,
+    "apollo_main": 1158
+  },
+  "unique_original_trace_total": 1392,
+  "evidence_inputs": [
+    {
+      "path": "g2/build/foundation/touch-scb-trigger-final/comparison-reviewed.json",
+      "sha256": "1af62f000a4a400b1781726fbbf57b00b554203ea3700249bf30a11722a9a65e",
+      "new_unique_trace_bytes": 232,
+      "payload": "touch",
+      "status": "PASS"
+    },
+    {
+      "path": "g2/analysis/touch-mmio-cycle-2026-10-05/next-fifo/results.json",
+      "sha256": "77579d34d385f9c019ee7771fafd04ee61b885707a588c2558edec189608daa6",
+      "new_unique_trace_bytes": 2,
+      "payload": "touch",
+      "status": "PASS"
+    },
+    {
+      "path": "g2/build/foundation/ambiq-mspi-simulator/comparison-heldout.json",
+      "sha256": "71c795d4b481273c924cf26745f804b82c0ac71f02713d85056f037ddf68dcff",
+      "new_unique_trace_bytes": 230,
+      "payload": "apollo_main",
+      "status": "PASS"
+    },
+    {
+      "path": "g2/build/foundation/ambiq-critical-simulator/comparison-interface-final.json",
+      "sha256": "5a37a92ca0d9d3805f49182b757c923581b24dfc87bc480d314f2cebfc9a3595",
+      "new_unique_trace_bytes": 480,
+      "payload": "apollo_main",
+      "status": "PASS"
+    },
+    {
+      "path": "g2/build/foundation/ambiq-gpio-simulator/comparison-final.json",
+      "sha256": "5f84b45b7e0dad1a62a9b71ec88b720b188f7a5290e110e0cffda102c7baa8f2",
+      "new_unique_trace_bytes": 448,
+      "payload": "apollo_main",
+      "status": "PASS"
+    }
+  ],
+  "new_gpio_executed_bytes": 448,
+  "additional_gpio_static_unreachable_bytes": 6,
+  "new_exact_compiled_match_bytes_this_cycle": 0,
+  "prior_critical_exact_compiled_match_bytes": 8,
+  "fully_blob_free_firmware_payloads": 0,
+  "source_built_byte_identical_bundle_proven": false,
+  "limits": [
+    "Source/target counts do not measure firmware completeness; variants share many source functions.",
+    "Counts use unique payload identity+runtime byte address and verify identical overlapping byte values; shared critical/lifecycle/CMDQ bodies counted once.",
+    "Touch standalone trace includes trapped BKPT observation; this is not completed-path/hardware proof.",
+    "GPIO6 unreachable bytes are static evidence, excluded from trace counts.",
+    "Failed scatter decoder diagnostic excluded; static decoded ITCM24 bytes excluded from stored original execution count.",
+    "Snapshot only; historical evidence retains its own compiler/source hash limits."
+  ]
+}

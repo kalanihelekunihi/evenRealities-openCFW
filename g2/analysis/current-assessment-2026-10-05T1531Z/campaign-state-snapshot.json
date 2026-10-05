@@ -1,0 +1,246 @@
+{
+  "schema_version": 1,
+  "workflow": "g2-pseudocode-first",
+  "prepared_on": "2026-09-26",
+  "phase": "P2_EXECUTING",
+  "execution_started": true,
+  "worker_profile": {
+    "model": "gpt-6-luna",
+    "reasoning_effort": "low"
+  },
+  "target_path": "g2/workflow/target.json",
+  "target_lock_sha256": "7312f4b855ff41ec823cc977485a8cc5e59a7235f834880b2217bf1f3ab138ff",
+  "campaign_id": "20260930T190500Z",
+  "gates": {
+    "G1_TARGET_AND_INVENTORY": {
+      "status": "passed",
+      "receipt": "g2/build/pseudocode-first/20260930T190500Z/receipts/G1-target-and-inventory-107/receipt.json",
+      "receipt_sha256": "fe17aa5a4e7456a81f342c3ca6d67233b065c42dd5c5a09917bb8e603e4d6610"
+    },
+    "G2_PSEUDOCODE_COMPLETE": {
+      "status": "not_run",
+      "receipt": null
+    },
+    "G3_CORPUS_FROZEN": {
+      "status": "not_run",
+      "receipt": null
+    },
+    "G4_IMPLEMENTATION_READY": {
+      "status": "not_run",
+      "receipt": null
+    },
+    "G5_SOURCE_COMPLETE": {
+      "status": "not_run",
+      "receipt": null
+    },
+    "G6_IDENTICAL_SOURCE_BUILD": {
+      "status": "not_run",
+      "receipt": null
+    }
+  },
+  "freeze_receipt": null,
+  "analysis_assignments": [
+    {
+      "task_id": "P1-apollo-bootloader-inventory-001",
+      "phase": "P1_INVENTORY",
+      "contract": "g2/build/pseudocode-first/20260930T190500Z/tasks/P1-apollo-bootloader-inventory-001.json",
+      "contract_sha256": "e82f7ae0e93780ca63c3ad4166874d1e8bb625b8a7f5afecb79916d7d79f2ace",
+      "status": "partial",
+      "result": {
+        "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-apollo-bootloader-inventory-001/001/result.json",
+        "sha256": "cb68106dc374cd59474a5461f9110d9e255b213ecfa0b53ff1235a4f38ef7548"
+      },
+      "model": "gpt-6-luna",
+      "reasoning_effort": "low"
+    },
+    {
+      "task_id": "P1-case-inventory-001",
+      "phase": "P1_INVENTORY",
+      "contract": "g2/build/pseudocode-first/20260930T190500Z/tasks/P1-case-inventory-001.json",
+      "contract_sha256": "bb3918a0a5f992b1726bb44ea97503af470391869656f2cc2cb36585e1214f4d",
+      "status": "partial",
+      "result": {
+        "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-case-inventory-001/001/result.json",
+        "sha256": "ecaeda77ab8169acaa22ab71975b0aef9d7e8c2c3d32461378f68978379e2dd9"
+      },
+      "model": "gpt-6-luna",
+      "reasoning_effort": "low"
+    },
+    {
+      "task_id": "P1-case-startup-mappings-002",
+      "phase": "P1_INVENTORY",
+      "contract": "g2/build/pseudocode-first/20260930T190500Z/tasks/P1-case-startup-mappings-002.json",
+      "contract_sha256": "8f1cc6f3b62a6ae2081d2debd33c5665860a29d13ad3c3e9d7884e996ecd8312",
+      "status": "partial",
+      "result": {
+        "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-case-startup-mappings-002/002/result.json",
+        "sha256": "d2499aef9f5bbe2f37742621e5ff2022fd0b3aaca43e15185e82369a6c91665a"
+      },
+      "model": "gpt-6-luna",
+      "reasoning_effort": "low"
+    },
+    {
+      "task_id": "P1-em9305-inventory-001",
+      "phase": "P1_INVENTORY",
+      "contract": "g2/build/pseudocode-first/20260930T190500Z/tasks/P1-em9305-inventory-001.json",
+      "contract_sha256": "066c159beb744d2f31ff5d32153f9901385c37e904481b0da9a6480f93f2fa96",
+      "status": "ready_for_review",
+      "result": {
+        "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-em9305-inventory-001/001/result.json",
+        "sha256": "8c264367c29465fb3c582af192429e9e1def88489d4c095fe26a7403df64f448"
+      },
+      "model": "gpt-6-luna",
+      "reasoning_effort": "low"
+    },
+    {
+      "task_id": "P1-touch-case-discovery-003",
+      "phase": "P1_INVENTORY",
+      "contract": "g2/build/pseudocode-first/20260930T190500Z/tasks/P1-touch-case-discovery-003.json",
+      "contract_sha256": "ffa6583ccdfb6a440973119e4f1850c0facabaaf221f9c5043ebb583e6fea2a0",
+      "status": "partial",
+      "result": {
+        "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-touch-case-discovery-003/001/result.json",
+        "sha256": "f0e0f0ce9c71935ba48b6799067b09b78bd34928b5bc1b585c6ce55f7071e019"
+      },
+      "model": "gpt-6-luna",
+      "reasoning_effort": "low"
+    },
+    {
+      "task_id": "P1-touch-inventory-001",
+      "phase": "P1_INVENTORY",
+      "contract": "g2/build/pseudocode-first/20260930T190500Z/tasks/P1-touch-inventory-001.json",
+      "contract_sha256": "0bfaab51ea1447f0b7346c7dd8ef4894605b7fbb95f3fffb1633ec0eda921788",
+      "status": "partial",
+      "result": {
+        "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-touch-inventory-001/001/result.json",
+        "sha256": "b8cf81fb093c9b677a8ddda35d69ccab9c36f17a382fc4a3eaf127d99aa5670d"
+      },
+      "model": "gpt-6-luna",
+      "reasoning_effort": "low"
+    },
+    {
+      "task_id": "P1-touch-startup-mappings-002",
+      "phase": "P1_INVENTORY",
+      "contract": "g2/build/pseudocode-first/20260930T190500Z/tasks/P1-touch-startup-mappings-002.json",
+      "contract_sha256": "04d5d2cd69d36ce74f8e8618d062a51e70a66571b0380dc0ae23032185d90156",
+      "status": "ready_for_review",
+      "result": {
+        "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-touch-inventory-001/002/result.json",
+        "sha256": "473d9c4a049e1667ec497ef99201a29dada8ab121a27440d1eef3a4d286aef3e"
+      },
+      "model": "gpt-6-luna",
+      "reasoning_effort": "low"
+    },
+    {
+      "task_id": "P1-touch-case-ram-roots-004",
+      "phase": "P1_INVENTORY",
+      "contract": "g2/build/pseudocode-first/20260930T190500Z/tasks/P1-touch-case-ram-roots-004.json",
+      "contract_sha256": "cc124e588dfa5d5dad7dee73db3f229a2e64446dda15de6a1b0843d90470da55",
+      "status": "partial",
+      "result": {
+        "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-touch-case-ram-roots-004/001/result.json",
+        "sha256": "9d5c9184113b1ce899b67bd8a7313744886afe71c602b8a3af66cc5e69eaa63d"
+      },
+      "model": "gpt-6-luna",
+      "reasoning_effort": "low"
+    },
+    {
+      "task_id": "P1-touch-case-cfg-roots-008",
+      "phase": "P1_INVENTORY",
+      "contract": "g2/build/pseudocode-first/20260930T190500Z/tasks/P1-touch-case-cfg-roots-008.json",
+      "contract_sha256": "7e5b14470edd59b04a734eaadc2eb46acc4c145591fe2912b6183c9c9d01a114",
+      "status": "dispatched",
+      "result": null,
+      "model": "gpt-6-luna",
+      "reasoning_effort": "low"
+    },
+    {
+      "task_id": "P1-touch-case-cfg-roots-013",
+      "phase": "P1_INVENTORY",
+      "contract": "g2/build/pseudocode-first/20260930T190500Z/tasks/P1-touch-case-cfg-roots-013.json",
+      "contract_sha256": "afa43513771f63e335a72fb3423ef2290d5ad5523af9404a573fa1de8f837c3c",
+      "status": "partial",
+      "result": {
+        "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-touch-case-cfg-roots-013/001/result.json",
+        "sha256": "da6bfaf0ca215721b95ebe9f93bdf9ad33cc6385db4d2df0a51edb4d089dd0d1"
+      },
+      "model": "gpt-6-luna",
+      "reasoning_effort": "low"
+    },
+    {
+      "task_id": "P1-touch-case-indirect-roots-019",
+      "phase": "P1_INVENTORY",
+      "contract": "g2/build/pseudocode-first/20260930T190500Z/tasks/P1-touch-case-indirect-roots-019.json",
+      "contract_sha256": "a1b39427407ef395a29aa99bc4ce3a5a19299766f4edc3f6b1220779a807e9cd",
+      "status": "partial",
+      "result": {
+        "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-touch-case-indirect-roots-019/001/result.json",
+        "sha256": "16015229cadb6c8eeec59060357755c4945d3e39d5bed743676b5c1a2d3374a2"
+      },
+      "model": "gpt-6-luna",
+      "reasoning_effort": "low"
+    },
+    {
+      "task_id": "P1-case-computed-dispatch-023",
+      "phase": "P1_INVENTORY",
+      "contract": "g2/build/pseudocode-first/20260930T190500Z/tasks/P1-case-computed-dispatch-023.json",
+      "contract_sha256": "2ec35399bd0b5d075ba09b1bb6c40e02715e2ab1c593f950018160b3ec3661bf",
+      "status": "reviewed_partial",
+      "result": null,
+      "model": "gpt-6-luna",
+      "reasoning_effort": "low",
+      "result_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-case-computed-dispatch-023/001/result.json",
+      "result_sha256": "52576d4a447e174d5028a18bcbd6b8c43f56cef00ea6f77f489a13c4f525fa68"
+    },
+    {
+      "task_id": "P1-case-timer-callback-provenance-024",
+      "status": "reviewed_partial",
+      "contract_path": "g2/build/pseudocode-first/20260930T190500Z/tasks/P1-case-timer-callback-provenance-024.json",
+      "owner": "/root/validator",
+      "output_root": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-case-timer-callback-provenance-024/001",
+      "result_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-case-timer-callback-provenance-024/002/result.json",
+      "result_sha256": "29126da33dc207a10197f0e89f9db6e229024cd997ae378164118df4a5b5228b"
+    },
+    {
+      "task_id": "P1-fixed-image-record-review-027",
+      "status": "reviewed_proposals_pending_admission",
+      "contract_path": "g2/build/pseudocode-first/20260930T190500Z/tasks/P1-fixed-image-record-review-027.json",
+      "owner": "/root/csky_binutils",
+      "output_root": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-fixed-image-record-review-027/001",
+      "result_path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-fixed-image-record-review-027/001/result.json",
+      "result_sha256": "2dd55d79b7074f06bf67ec4f3ec81cbed374a4714a9c1e6f5b88e3dcdcb546da"
+    }
+  ],
+  "c_implementation_assignments": [],
+  "next_step": "Recover and independently review bounded ARM/C-SKY/ARC startup evidence; create pinned private analysis projects and extend coverage across all33images/sixpayloads. G2/G3remainnotrun; noCimplementation.",
+  "enforcement": "G1 passed with primary and independent full validator checks of six payloads, 33 images, 70 coverage rows and 125 exact-hash reviews. P2 code/data and ISA semantics remain unresolved; G2-G6 not run.",
+  "pseudocode_assignments": [
+    {
+      "task_id": "P2-touch-reset-pseudocode-108",
+      "owner": "/root/validator",
+      "contract": "g2/build/pseudocode-first/20260930T190500Z/tasks/P2-touch-reset-pseudocode-108.json",
+      "contract_sha256": "01492039bb5eaad869e2f967b8205918dbea6290829396273d4e5df35e58d44c",
+      "status": "dispatched",
+      "model": "gpt-6-luna",
+      "reasoning_effort": "low"
+    },
+    {
+      "task_id": "P2-csky-reset-pseudocode-109",
+      "owner": "/root/csky_binutils",
+      "contract": "g2/build/pseudocode-first/20260930T190500Z/tasks/P2-csky-reset-pseudocode-109.json",
+      "contract_sha256": "4a5c67df3ac73939dd4f5836c9bf6fc57e42b5ce7e09949d1a1068d12b29fd2f",
+      "status": "dispatched",
+      "model": "gpt-6-luna",
+      "reasoning_effort": "low"
+    },
+    {
+      "task_id": "P2-arc-fhdr-entry-pseudocode-110",
+      "owner": "/root/validator_review",
+      "contract": "g2/build/pseudocode-first/20260930T190500Z/tasks/P2-arc-fhdr-entry-pseudocode-110.json",
+      "contract_sha256": "84bd41cbeb895c2571a7fd876788e91c9bead1e392dbbf38ba80cbc2bc965580",
+      "status": "dispatched",
+      "model": "gpt-6-luna",
+      "reasoning_effort": "low"
+    }
+  ]
+}

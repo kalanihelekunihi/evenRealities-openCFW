@@ -1,0 +1,23 @@
+{
+  "upstream_commit": "def7d2df2b0506d3d249334974f51e427c17a41c",
+  "upstream_files": [
+    {
+      "path": "tasks.c",
+      "sha256": "14020d617b96dd2814e1211f6e3b645bcf5e2bd3179c23fe7dd16bc666fe9463",
+      "git_blob": "d97085d8736905c1eeb9d9e871c81e5970ee70ed"
+    },
+    {
+      "path": "list.c",
+      "sha256": "db5c169cf3efd68da1c6a923ac84eebc724d602c940bde0b9b5f01f05028fde4",
+      "git_blob": "afcae87f11413a14a5a95138fb9bffb6787826c4"
+    }
+  ],
+  "unchanged_function_text_sha256": {
+    "xTaskRemoveFromEventList": "8eec2dadf27c8b2324b0e6adf370c46c30642230b8072a7aadb8ccef44f55b05",
+    "prvResetNextTaskUnblockTime": "2ae476e73828c0d57b9a6b55f86494b0158eb052e840646ab7fbafe769b64b8f",
+    "uxTaskGetNumberOfTasks": "ed2769a49efb40c4bf8a9101d49e2e90f54d490669ee71cde8ffb7935a89f73b",
+    "vListInsertEnd": "799e47099120d704b2afeb54d059e9db3738aa841d9a9e925e4cc287703fb19d",
+    "uxListRemove": "e5d778834634d2297532a464dbc255d46cb0e49c1b979527daf7153f7108918b"
+  },
+  "adaptations": "Sparse TCB prefix, recovered global cells and non-optimized ready-priority/list macros. Upstream xTaskRemoveFromEventList symbol renamed by preprocessor to owned opencfw_ready_remove_event_list; unchanged function text, thin existing ABI adapter. Complete TCB/scheduler not supplied."
+}

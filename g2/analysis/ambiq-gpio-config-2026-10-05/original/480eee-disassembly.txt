@@ -1,0 +1,13 @@
+00480eee: dff84c28 ldr.w      r2, [pc, #0x84c]
+00480ef2: e028     cmp        r0, #0xe0
+00480ef4: 01d3     blo        #0x480efa
+00480ef6: 0520     movs       r0, #5
+00480ef8: 07e0     b          #0x480f0a
+00480efa: 0029     cmp        r1, #0
+00480efc: 01d1     bne        #0x480f02
+00480efe: 0620     movs       r0, #6
+00480f00: 03e0     b          #0x480f0a
+00480f02: 52f82000 ldr.w      r0, [r2, r0, lsl #2]
+00480f06: 0860     str        r0, [r1]
+00480f08: 0020     movs       r0, #0
+00480f0a: 7047     bx         lr

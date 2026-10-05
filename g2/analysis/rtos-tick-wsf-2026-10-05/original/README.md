@@ -1,0 +1,23 @@
+# Apollo G2 tick increment and expiry evidence
+
+This bounded packet authenticates the tick increment function at `0x45504c`, its SysTick entry wrapper, the delayed-list overflow state literal, and direct callers. It deliberately reuses the previously reviewed one-due-task and tick-drain artifacts instead of expanding their emulator scenarios. `verify.py` checks the official OTA and decoded image hashes, Ghidra body bounds and body hashes, the vector word, all listed PC-relative globals, and pinned upstream `tasks.c`. Run it with `~/.local/share/opencfw/venv/bin/python verify.py`; outputs are `results.json` and `disassembly.txt`.
+
+## Original image findings
+
+The locked image is the OTA body (preamble removed), base `0x438000`, 3,523,364 bytes, SHA256 `19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701`. `xTaskIncrementTick`'s body at `0x45504c` is 338 bytes, SHA256 `438ad4e9e1a7b439671463b2bbfd13616ebb6de32bd2aad53b802d31f11cc050`. The function row names it `FUN_0045504c`; attribution to FreeRTOS is supported by exact behavior and the pinned source correspondence, not a Ghidra symbol.
+
+Vector slot 15, at `0x43803c`, is `0x442115` (Thumb target `0x442114`). That 32-byte wrapper masks interrupts, calls `0x45504c`, writes `0x10000000` to SCB ICSR when the helper returns nonzero, then restores the mask. Thus the source has a real SysTick-vector caller. Other direct callers are `xTaskResumeAll` at `0x454dcc` and a loop in `0x4563b4`; the latter has periodic/catch-up-shaped arithmetic and an interrupt-mask window, but this packet leaves its higher-level identity unresolved.
+
+The tick body checks `uxSchedulerSuspended` at RAM `0x20074a58`. When nonzero it increments `xPendedTicks` at `0x20074a40` and returns zero without incrementing `xTickCount`. `xTaskResumeAll` calls it after outermost resume has decremented that count to zero, draining the accumulated pended ticks one at a time. In its normal branch it increments `xTickCount` at `0x20074a34`. On wrap to zero it checks the current delayed list, exchanges the current and overflow delayed-list pointer cells (`0x20074a24` and `0x20074a28`), increments `xNumOfOverflows` at `0x20074a48`, and calls `0x455876` to refresh the next unblock threshold at `0x20074a50`.
+
+The body includes both the strict higher-priority test and the equal-priority ready-list count check (`length >= 2`) that requests a time slice. This confirms that preemption and time-slicing behavior are present in the compiled function. The authenticated body contains no application tick-hook call; its Ghidra call list is exactly assert `0x5fa0a4` and reset helper `0x455876`. This is object-level evidence that no nonempty tick-hook call is compiled into this function, consistent with `configUSE_TICK_HOOK == 0`. Firmware build configuration headers were not available, so an empty hook optimized away cannot be ruled out independently.
+
+The helper returns a switch-needed flag; it does not itself save or restore task context. SysTick wrapper's PendSV write requests a context switch, but actual exception dispatch, context save/restore, and task handoff are outside this packet.
+
+## Source correspondence and prior fixtures
+
+Pinned `g2/build/foundation/freertos-upstream/tasks.c` is FreeRTOS Kernel tree commit `def7d2df2b0506d3d249334974f51e427c17a41c`, MIT, Git blob SHA1 `d97085d8736905c1eeb9d9e871c81e5970ee70ed`, file SHA256 `14020d617b96dd2814e1211f6e3b645bcf5e2bd3179c23fe7dd16bc666fe9463`. Its `taskSWITCH_DELAYED_LISTS` macro is lines 201–213, `xNumOfOverflows` declaration line 368, `xTaskIncrementTick` lines 2720–2898. The source conditions for preemption, time slicing, and the optional hook are at lines 2839–2886; comparison against the original instructions establishes which branch behavior is present in the image.
+
+The earlier due-task fixture is at `g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-rtos-tick-original-due-task-fixture-12028/001`. It recorded 168 bounded original-instruction cases for one equal-deadline due task, optional event-list removal, list cursors/ready-row counts, guards, and stack behavior; its receipt marks the result partial and not accepted. The tick-drain pseudocode packet is at `g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-scheduler-tick-drain-map-10726/002`; its receipt is also partial and not accepted. Exact file hashes for both references are recorded in `results.json`. These artifacts do not prove multiple due tasks, future-deadline exits, concurrent mutation, physical tick timing, complete source coverage, or byte-identical source compilation.
+
+No firmware source, shared interface, or build input was changed for this evidence packet. No new emulation or runtime execution was performed.

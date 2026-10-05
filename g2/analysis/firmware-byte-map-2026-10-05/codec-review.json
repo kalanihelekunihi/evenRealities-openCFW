@@ -1,0 +1,375 @@
+{
+  "schema_version": 1,
+  "scope": "Read-only codec payload classification suggestions. Listed non-code spans are disjoint, high-confidence leaves; this is not complete code/data coverage or P2 accounting approval.",
+  "target": {
+    "payload_path": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+    "size": 326092,
+    "sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "authenticated_target_pin": "g2/workflow/target.json codec SHA-256 b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0"
+  },
+  "verification": {
+    "open_cfw.validate_codec": "PASS",
+    "analyze_g2_codec_fwpk_segments.py": "PASS",
+    "analyze_g2_codec_stage2_sections.py": "PASS",
+    "listed hashes": "computed from exact byte slices in authenticated payload",
+    "repo writes": "none"
+  },
+  "definitely_non_code_disjoint_spans": [
+    {
+      "name": "fwpk_header",
+      "start": 0,
+      "end_exclusive": 16,
+      "size": 16,
+      "sha256": "d43727af93245c0c6f88d780b4553ba97d976d4e296d74778c1f91a27b2917ae",
+      "classification": "container metadata",
+      "confidence": "high",
+      "basis": "FWPK magic/version/count/reserved header.",
+      "evidence": [
+        "g2/docs/reference/firmware-formats.md \u00a77/\u00a77.1/\u00a77.2",
+        "g2/tools/analyze_g2_codec_fwpk_segments.py (re-run PASS)",
+        "g2/tools/open_cfw.py:validate_codec (re-run PASS)"
+      ]
+    },
+    {
+      "name": "fwpk_record_table",
+      "start": 16,
+      "end_exclusive": 48,
+      "size": 32,
+      "sha256": "5239fba85a06b9525512f34f075325028bde659ed078daec25a7022b8afc2d29",
+      "classification": "container record table",
+      "confidence": "high",
+      "basis": "Two fixed-width records; contiguous segment ranges and zlib CRCs validate.",
+      "evidence": [
+        "g2/docs/reference/firmware-formats.md \u00a77/\u00a77.1/\u00a77.2",
+        "g2/tools/analyze_g2_codec_fwpk_segments.py (re-run PASS)",
+        "g2/tools/open_cfw.py:validate_codec (re-run PASS)"
+      ]
+    },
+    {
+      "name": "uart_boot_header",
+      "start": 48,
+      "end_exclusive": 80,
+      "size": 32,
+      "sha256": "bb0c1a457c4aa90766a38709a1eeef622cf382c1bb1a16f4b058186e2011ad76",
+      "classification": "boot protocol metadata",
+      "confidence": "high",
+      "basis": "32-byte GX8002 UART boot header holds stage sizes, baud, checksum.",
+      "evidence": [
+        "g2/docs/reference/firmware-formats.md \u00a77/\u00a77.1/\u00a77.2",
+        "g2/tools/analyze_g2_codec_fwpk_segments.py (re-run PASS)",
+        "g2/tools/open_cfw.py:validate_codec (re-run PASS)"
+      ]
+    },
+    {
+      "name": "uart_stage1_vector_table",
+      "start": 80,
+      "end_exclusive": 336,
+      "size": 256,
+      "sha256": "8e67dcb95424b8f428a4b3e065ba7c2bbac73a4fd47c7b8d20b9bb1f9636104d",
+      "classification": "control/vector table",
+      "confidence": "high",
+      "basis": "64-word table; reset 0x10000100 and trap vectors validated.",
+      "evidence": [
+        "g2/docs/reference/firmware-formats.md \u00a77/\u00a77.1/\u00a77.2",
+        "g2/tools/analyze_g2_codec_fwpk_segments.py (re-run PASS)",
+        "g2/tools/open_cfw.py:validate_codec (re-run PASS)"
+      ]
+    },
+    {
+      "name": "uart_stage2_vector_table",
+      "start": 10320,
+      "end_exclusive": 10576,
+      "size": 256,
+      "sha256": "0bc2a36d265918d3d298df18664cfb165108ad885247608ce924f023ee7fca9e",
+      "classification": "control/vector table",
+      "confidence": "high",
+      "basis": "64-word table; reset 0x10002900 and handler set validated.",
+      "evidence": [
+        "g2/docs/reference/firmware-formats.md \u00a77/\u00a77.1/\u00a77.2",
+        "g2/tools/analyze_g2_codec_fwpk_segments.py (re-run PASS)",
+        "g2/tools/open_cfw.py:validate_codec (re-run PASS)"
+      ]
+    },
+    {
+      "name": "binh_image_a_header",
+      "start": 38284,
+      "end_exclusive": 38308,
+      "size": 24,
+      "sha256": "e44eac6e731ecb2e42dcdd08716bc8bd3c6bafe088e25339399e90417c8e226f",
+      "classification": "flash image metadata",
+      "confidence": "high",
+      "basis": "24-byte BINH header identifies medium, version, stage sizes/load field.",
+      "evidence": [
+        "g2/docs/reference/firmware-formats.md \u00a77/\u00a77.1/\u00a77.2",
+        "g2/tools/analyze_g2_codec_fwpk_segments.py (re-run PASS)",
+        "g2/tools/open_cfw.py:validate_codec (re-run PASS)"
+      ]
+    },
+    {
+      "name": "binh_image_a_stage1_vector_table",
+      "start": 38308,
+      "end_exclusive": 38564,
+      "size": 256,
+      "sha256": "328d3b985051f93c8159432d043fbcbedc07bf903169996aa7ee625f2dbe9494",
+      "classification": "control/vector table",
+      "confidence": "high",
+      "basis": "64-word vector table; reset/trap pattern verified.",
+      "evidence": [
+        "g2/docs/reference/firmware-formats.md \u00a77/\u00a77.1/\u00a77.2",
+        "g2/tools/analyze_g2_codec_fwpk_segments.py (re-run PASS)",
+        "g2/tools/open_cfw.py:validate_codec (re-run PASS)"
+      ]
+    },
+    {
+      "name": "binh_image_a_stage1_crc",
+      "start": 50568,
+      "end_exclusive": 50572,
+      "size": 4,
+      "sha256": "72538ec8d1787889dcd0f0788408f745d94f5e7a97bbd3a20a9a950a6138fc1e",
+      "classification": "integrity metadata",
+      "confidence": "high",
+      "basis": "Stored CRC-32/MPEG-2 word concluding image A stage-1 block; verified 0x21C58EDB.",
+      "evidence": [
+        "g2/docs/reference/firmware-formats.md \u00a77/\u00a77.1/\u00a77.2",
+        "g2/tools/analyze_g2_codec_fwpk_segments.py (re-run PASS)",
+        "g2/tools/open_cfw.py:validate_codec (re-run PASS)"
+      ]
+    },
+    {
+      "name": "binh_image_a_xip_length",
+      "start": 50572,
+      "end_exclusive": 50576,
+      "size": 4,
+      "sha256": "19ab17fa73759005b3ec472b838d282ff7e1768c493088663ce8f74be0384f54",
+      "classification": "flash image metadata",
+      "confidence": "high",
+      "basis": "u32 stage2_xip_len=0x8E84 controls loader split.",
+      "evidence": [
+        "g2/docs/reference/firmware-formats.md \u00a77/\u00a77.1/\u00a77.2",
+        "g2/tools/analyze_g2_codec_fwpk_segments.py (re-run PASS)",
+        "g2/tools/open_cfw.py:validate_codec (re-run PASS)"
+      ]
+    },
+    {
+      "name": "codec_version_string",
+      "start": 76864,
+      "end_exclusive": 76871,
+      "size": 7,
+      "sha256": "f7a10d39d63310e95b0966622981fc3a0f2f67e8948146ac66f8b3860269677b",
+      "classification": "referenced string literal",
+      "confidence": "high",
+      "basis": "ASCII 0.0.2.3 at type-2 offset 0x96B4; not an instruction encoding.",
+      "evidence": "g2/tools/analyze_g2_codec_fwpk_segments.py:parse_main_image version_offset; g2/docs/reference/firmware-formats.md \u00a77"
+    },
+    {
+      "name": "image_a_stage2_vector_table",
+      "start": 87060,
+      "end_exclusive": 87316,
+      "size": 256,
+      "sha256": "d0d1997111e51a07aa63535beffd7d3a0de741c39cd9915aed1ac87b6b978f1a",
+      "classification": "control/vector table",
+      "confidence": "high",
+      "basis": "64-word application vector table at SRAM-copy base; reset 0x10023500, handlers and CRT0 verified.",
+      "evidence": "g2/tools/analyze_g2_codec_stage2_sections.py:_check_app/analyze; g2/build/pseudocode-first/20260930T190500Z/inventory/codec-section-facts-001.json"
+    },
+    {
+      "name": "image_a_alignment_word",
+      "start": 99576,
+      "end_exclusive": 99580,
+      "size": 4,
+      "sha256": "ad95131bc0b799c0b1af477fb14fcf26a6a9f76079e48bf090acb7e8367bfd0e",
+      "classification": "proven alignment padding",
+      "confidence": "high",
+      "basis": "Four 0xFF bytes between SRAM text and SRAM data; exact fill verified.",
+      "evidence": "g2/tools/analyze_g2_codec_stage2_sections.py:analyze/check_manifest; g2/docs/reference/firmware-formats.md \u00a77.2"
+    },
+    {
+      "name": "kws_model_weights",
+      "start": 110940,
+      "end_exclusive": 231740,
+      "size": 120800,
+      "sha256": "397971427d7097180d07eb63f9822904a555e51f7643d946ebb38d71a967f8cf",
+      "classification": "typed model data",
+      "confidence": "high",
+      "basis": "120,800-byte KWS weight block; size getter, staged destination, exact fit, and hash pinned; separate from executable NPU commands.",
+      "evidence": "g2/tools/analyze_g2_codec_stage2_sections.py:KWS_WEIGHT_SIZE/analyze; g2/build/pseudocode-first/20260930T190500Z/reviews/codec-npu-staging-review-053/review.json"
+    },
+    {
+      "name": "binh_image_b_header",
+      "start": 231740,
+      "end_exclusive": 231764,
+      "size": 24,
+      "sha256": "b35fd904f5617c87fac9457c9c8ef9b4aa5c24cf51efde5899f4619348ffbb50",
+      "classification": "flash image metadata",
+      "confidence": "high",
+      "basis": "24-byte BINH header identifies backup image/version/stage sizes/load field.",
+      "evidence": [
+        "g2/docs/reference/firmware-formats.md \u00a77/\u00a77.1/\u00a77.2",
+        "g2/tools/analyze_g2_codec_fwpk_segments.py (re-run PASS)",
+        "g2/tools/open_cfw.py:validate_codec (re-run PASS)"
+      ]
+    },
+    {
+      "name": "binh_image_b_stage1_vector_table",
+      "start": 231764,
+      "end_exclusive": 232020,
+      "size": 256,
+      "sha256": "328d3b985051f93c8159432d043fbcbedc07bf903169996aa7ee625f2dbe9494",
+      "classification": "control/vector table",
+      "confidence": "high",
+      "basis": "64-word vector table; reset/trap pattern verified.",
+      "evidence": [
+        "g2/docs/reference/firmware-formats.md \u00a77/\u00a77.1/\u00a77.2",
+        "g2/tools/analyze_g2_codec_fwpk_segments.py (re-run PASS)",
+        "g2/tools/open_cfw.py:validate_codec (re-run PASS)"
+      ]
+    },
+    {
+      "name": "binh_image_b_stage1_crc",
+      "start": 244024,
+      "end_exclusive": 244028,
+      "size": 4,
+      "sha256": "d0d916c6414c635cac7e3ebb6149ad213daebc4be28749f2f1e26cc9dff141ec",
+      "classification": "integrity metadata",
+      "confidence": "high",
+      "basis": "Stored CRC-32/MPEG-2 word concluding image B stage-1 block; verified 0xA582510C.",
+      "evidence": [
+        "g2/docs/reference/firmware-formats.md \u00a77/\u00a77.1/\u00a77.2",
+        "g2/tools/analyze_g2_codec_fwpk_segments.py (re-run PASS)",
+        "g2/tools/open_cfw.py:validate_codec (re-run PASS)"
+      ]
+    },
+    {
+      "name": "binh_image_b_xip_length",
+      "start": 244028,
+      "end_exclusive": 244032,
+      "size": 4,
+      "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+      "classification": "flash image metadata",
+      "confidence": "high",
+      "basis": "u32 stage2_xip_len=0; parser verifies image B is SRAM-only.",
+      "evidence": [
+        "g2/docs/reference/firmware-formats.md \u00a77/\u00a77.1/\u00a77.2",
+        "g2/tools/analyze_g2_codec_fwpk_segments.py (re-run PASS)",
+        "g2/tools/open_cfw.py:validate_codec (re-run PASS)"
+      ]
+    },
+    {
+      "name": "image_b_stage2_vector_table",
+      "start": 244032,
+      "end_exclusive": 244288,
+      "size": 256,
+      "sha256": "f906c362db925f70573447fcf56dbc9c0881828a1bc737d91671ed49eccb6c89",
+      "classification": "control/vector table",
+      "confidence": "high",
+      "basis": "64-word stage2 vector table; reset 0x10003100, handlers and CRT0 verified.",
+      "evidence": "g2/tools/analyze_g2_codec_stage2_sections.py:_check_app/analyze; g2/build/pseudocode-first/20260930T190500Z/inventory/codec-section-facts-001.json"
+    }
+  ],
+  "known_payload_types_excluded_from_noncode_list": [
+    {
+      "name": "kws_npu_command_stream",
+      "start": 101776,
+      "end_exclusive": 110940,
+      "size": 9164,
+      "sha256": "c38ed6d22c7c0b6178288678364acd10bd5730aa382c1e19a32f6cf2bd1430b9",
+      "classification": "executable accelerator command stream; not non-code",
+      "confidence": "strong role / internal semantics unresolved",
+      "basis": "Load-offset literal 0xF804, 9,164-byte size getter, candidate DRAM staging at 0x20003304, and adjacent separately measured weights. Independent review confirms bounds/hash and expressly leaves NPU ISA semantics unresolved.",
+      "evidence": [
+        "g2/tools/analyze_g2_codec_stage2_sections.py:KWS_CMD_SIZE/analyze",
+        "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-npu-staging-review-053/review.json",
+        "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-codec-npu-consumer-mapping-061/001/consumer-proposal.json"
+      ]
+    }
+  ],
+  "unresolved_or_mixed_payload_spans": [
+    {
+      "start": 336,
+      "end_exclusive": 10320,
+      "reason": "UART stage1 remainder lacks whole-stage code/data classification."
+    },
+    {
+      "start": 10576,
+      "end_exclusive": 38284,
+      "reason": "UART stage2 remainder lacks whole-stage code/data classification."
+    },
+    {
+      "start": 38564,
+      "end_exclusive": 50568,
+      "reason": "Image A BINH stage1 block remainder is loaded but its internal code/data split is not established."
+    },
+    {
+      "start": 50576,
+      "end_exclusive": 76864,
+      "reason": "Image A XIP executable region; only a referenced version string is separately typed."
+    },
+    {
+      "start": 76871,
+      "end_exclusive": 87060,
+      "reason": "Image A XIP executable region; literals/data interleaving not fully mapped."
+    },
+    {
+      "start": 87316,
+      "end_exclusive": 99576,
+      "reason": "Image A SRAM text remainder is executable with possible literals; no broader non-code claim."
+    },
+    {
+      "start": 99580,
+      "end_exclusive": 101776,
+      "reason": "Image A SRAM data; retain unresolved because compressed initializers can contain code."
+    },
+    {
+      "start": 101776,
+      "end_exclusive": 110940,
+      "reason": "NPU command stream excluded from non-code as executable accelerator commands; proprietary command semantics unresolved."
+    },
+    {
+      "start": 232020,
+      "end_exclusive": 244024,
+      "reason": "Image B BINH stage1 block remainder internal code/data split not established."
+    },
+    {
+      "start": 244288,
+      "end_exclusive": 323164,
+      "reason": "Image B SRAM text/data boundary is heuristic; unresolved remainder."
+    },
+    {
+      "start": 323164,
+      "end_exclusive": 326092,
+      "reason": "Image B SRAM data tail may contain packed/compressed initializer content; retain unresolved."
+    }
+  ],
+  "runtime_only_memory_not_payload_offsets": [
+    {
+      "space": "GX8002 DRAM",
+      "start": 536909116,
+      "end_exclusive": 536912380,
+      "size": 3264,
+      "kind": "BSS",
+      "serialized_payload_span": null,
+      "evidence": "g2/docs/reference/memory-map.md \u00a75 GX8002; existing reference copy in reviews/P2-case-02d6-independent-review-1048/001/rerun/reference-memory-map.md:239"
+    },
+    {
+      "space": "GX8002 IRAM",
+      "start": 268435456,
+      "end_exclusive": 268579840,
+      "size": 144384,
+      "kind": "NPU SRAM reservation/runtime workspace",
+      "serialized_payload_span": null,
+      "evidence": "g2/tools/analyze_g2_codec_stage2_sections.py output; inventory/codec-section-facts-001.json"
+    }
+  ],
+  "important_boundary_note": "KWS model weights [0x1B15C,0x3893C) are typed model data; KWS command stream [0x18D90,0x1B15C) is accelerator-executable and excluded from non-code. DRAM staging destinations do not change payload offsets.",
+  "evidence_paths": [
+    "g2/docs/reference/firmware-formats.md \u00a77\u20137.2",
+    "g2/docs/reference/memory-map.md \u00a75 GX8002",
+    "g2/tools/analyze_g2_codec_fwpk_segments.py",
+    "g2/tools/analyze_g2_codec_stage2_sections.py",
+    "g2/tools/open_cfw.py:validate_codec",
+    "g2/build/pseudocode-first/20260930T190500Z/inventory/codec-section-facts-001.json",
+    "g2/build/pseudocode-first/20260930T190500Z/inventory/codec-nesting.json",
+    "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/receipt.json",
+    "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-npu-staging-review-053/review.json"
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "task": "bounded Ambiq Apollo510 MSPI upstream provenance and source-contract check",
+  "source_repository": "https://github.com/AmbiqMicro/ambiqhal_ambiq",
+  "commit": "5efc0228528a8adce5eae0d226fac85d2551eb3b",
+  "api_tree_metadata": "/tmp/opencfw-ambiq-tree.json",
+  "files": [
+    {
+      "local_path": "g2/build/foundation/ambiq-upstream/am_hal_mspi.c",
+      "upstream_path": "mcu/apollo510/hal/mcu/am_hal_mspi.c",
+      "api_blob_sha1": "c12ef914660227aba3ebef3a0fb3ec749510c1bc",
+      "local_git_blob_sha1": "c12ef914660227aba3ebef3a0fb3ec749510c1bc",
+      "bytes": 168473,
+      "sha256": "5a91ab0c67bda4bd61c7d436b94b5a7c81693b948a331d282ae10e88cc5bf85f",
+      "identity_check": "exact Git blob SHA-1 and size match",
+      "version_string": "release_sdk5p1p0-366b80e084",
+      "copyright": "Copyright (c) 2025, Ambiq Micro, Inc.",
+      "license_notice": "three-condition permissive redistribution notice embedded in file; no SPDX identifier",
+      "API_tree_blob_url": "https://api.github.com/repos/AmbiqMicro/ambiqhal_ambiq/git/blobs/c12ef914660227aba3ebef3a0fb3ec749510c1bc"
+    },
+    {
+      "local_path": "g2/build/foundation/ambiq-upstream/am_hal_mspi.h",
+      "upstream_path": "mcu/apollo510/hal/mcu/am_hal_mspi.h",
+      "api_blob_sha1": "738ae35ffbe8ca3158df18d3b28794bf0c7b2589",
+      "local_git_blob_sha1": "738ae35ffbe8ca3158df18d3b28794bf0c7b2589",
+      "bytes": 36982,
+      "sha256": "2a682bb7c1618982d6a802f3220a38696cd594c89d90e64b1a698d226b0a557b",
+      "identity_check": "exact Git blob SHA-1 and size match",
+      "version_string": "release_sdk5p1p0-366b80e084",
+      "copyright": "Copyright (c) 2025, Ambiq Micro, Inc.",
+      "license_notice": "three-condition permissive redistribution notice embedded in file; no SPDX identifier",
+      "API_tree_blob_url": "https://api.github.com/repos/AmbiqMicro/ambiqhal_ambiq/git/blobs/738ae35ffbe8ca3158df18d3b28794bf0c7b2589"
+    },
+    {
+      "local_path": "g2/build/foundation/ambiq-upstream/apollo510.h",
+      "upstream_path": "CMSIS/AmbiqMicro/Include/apollo510.h",
+      "api_blob_sha1": "a63686ff4feb43e97a33fcc0787e76b748a783e6",
+      "local_git_blob_sha1": "a63686ff4feb43e97a33fcc0787e76b748a783e6",
+      "bytes": 10449123,
+      "sha256": "b6ca35dc828ef95825c0a22f06e6ca5ed558a6542dc74310515fdc350051a797",
+      "identity_check": "exact Git blob SHA-1 and size match",
+      "version_string": "header @version 1.0; SVDConv V3.3.47; generated from apollo510.svd last modified 2025-08-25",
+      "copyright": "Copyright (c) 2025, Ambiq Micro, Inc.",
+      "license_notice": "three-condition permissive redistribution notice embedded in file; no SPDX identifier",
+      "API_tree_blob_url": "https://api.github.com/repos/AmbiqMicro/ambiqhal_ambiq/git/blobs/a63686ff4feb43e97a33fcc0787e76b748a783e6"
+    }
+  ],
+  "source_contracts": {
+    "am_hal_mspi_status_get": {
+      "source_lines": [3990, 4018],
+      "returns": ["bErr from DMASTAT.DMAERR", "bCmp from DMASTAT.DMACPL", "bTIP from DMASTAT.DMATIP", "software-tracked ui32NumCQEntries"],
+      "handle_check": "conditional on AM_HAL_DISABLE_API_VALIDATION being unset",
+      "stock_symbol_row": "none in g2/symbols/bootloader.tsv",
+      "claim": "upstream source API behavior only; stock firmware attribution unresolved"
+    },
+    "am_hal_mspi_interrupt_enable": {
+      "source_lines": [4025, 4053],
+      "register_effect": "INTEN |= ui32IntMask",
+      "stock_symbol": "g2/symbols/bootloader.tsv at [0x00426450,0x0042647C), Inferred"
+    },
+    "am_hal_mspi_interrupt_disable": {
+      "source_lines": [4060, 4087],
+      "register_effect": "INTEN &= ~ui32IntMask",
+      "stock_symbol": "g2/symbols/bootloader.tsv at [0x00426484,0x004264B0), Inferred"
+    },
+    "am_hal_mspi_interrupt_status_get": {
+      "source_lines": [4094, 4127],
+      "register_effect": "write raw INTSTAT to output or INTSTAT & INTEN when enabled-only",
+      "stock_symbol": "g2/symbols/bootloader.tsv at [0x004264BA,0x004264F6), Inferred"
+    },
+    "am_hal_mspi_interrupt_clear": {
+      "source_lines": [4134, 4161],
+      "register_effect": "write INTCLR = mask; perform volatile read of INTSTAT; return success",
+      "stock_symbols": [
+        "g2/symbols/bootloader.tsv at [0x00426506,0x00426536), Strong AmbiqSuite 5.1.0 attribution",
+        "g2/symbols/apollo_main.tsv at [0x004C23DE,0x004C240E), Strong attribution, stock SHA-256 recorded"
+      ]
+    }
+  },
+  "module_mapping": {
+    "source_expression": "MSPIn(ui32Module)",
+    "macro_source": "am_hal_mspi.h:60",
+    "macro": "((MSPI0_Type*)(MSPI0_BASE + (n * (MSPI1_BASE - MSPI0_BASE))))",
+    "device_header_source": "apollo510.h:29558-29560",
+    "base_addresses": {"0": "0x40060000", "1": "0x40061000", "2": "0x40062000"},
+    "stride": "0x1000",
+    "module_to_base_expansion_verified": true,
+    "scope_limit": "Verified indices 0-2 from the PDL macro and header definitions only; broader runtime input validation not assessed."
+  },
+  "coverage_delta": {
+    "new_firmware_ranges": 0,
+    "new_compiled_byte_matches": 0,
+    "new_source_attributions": 0
+  },
+  "limits": [
+    "Exact source-file identity in a public API commit is not proof that this source compiled into the firmware.",
+    "No target compilation or function-wide firmware comparison was run.",
+    "The named source-function behaviors above are bounded to the API implementation; surrounding ISR concurrency and callsite usage were not analyzed.",
+    "No separate LICENSE blob appears in the supplied API tree metadata; licensing is reported from each source file's embedded notice."
+  ]
+}

@@ -1,0 +1,131 @@
+{
+  "decoded_field_accesses": {
+    "deinitialize": {
+      "clears_prefix_mask": "0x01000000 (bInit bit per pinned SDK prefix definition)",
+      "handle_prefix_word": "+0x00",
+      "module_index": "+0x04"
+    },
+    "disable": {
+      "enabled_test": "bit25 (negative after LSL #6)",
+      "handle_prefix_word": "+0x00",
+      "module_index": "+0x04",
+      "pTCB": "+0x18 (element 6)",
+      "pending_cq_count": "+0x20 (element 8)",
+      "pending_hp_count": "+0x840 (element 0x210)",
+      "xip_off_min_delay": "+0x8cc (element 0x233)"
+    }
+  },
+  "functions": {
+    "0x004c0ea8": {
+      "bytes_hex": "38b504002500002c05d0206820f07e402b49884201d002202ce02868c0f34060002801d1002025e0d5f84008002802d1286a002801d003201ce0a869002807d02000fef73aff002814d12000fef7c7fe2800016831f0007101606868154911eb0031d1f89000c00703d5d5f8cc08bff743fc002032bd",
+      "image_range": [
+        "0x88ea8",
+        "0x88f1e"
+      ],
+      "name": "FUN_004c0ea8",
+      "ota_file_range": [
+        "0x88ec8",
+        "0x88f3e"
+      ],
+      "sha256": "ed26e7d54404bbf50b8edbe0b10fd5f264caef39b8aed9fe466f3d41233f794d",
+      "size": 118
+    },
+    "0x004c0f24": {
+      "bytes_hex": "10b50400002805d0016821f07e410d4a914201d002200ee02168c1f34061002901d0fff7afff2000016831f08071016000206060002010bd",
+      "image_range": [
+        "0x88f24",
+        "0x88f5c"
+      ],
+      "name": "FUN_004c0f24",
+      "ota_file_range": [
+        "0x88f44",
+        "0x88f7c"
+      ],
+      "sha256": "17e2e38a57e5a1669a591cf61ad92ff4b5ca8a1747673512410737ac452d689b",
+      "size": 56
+    },
+    "caller_0x0046fb0c": {
+      "lifecycle_callsites": [
+        {
+          "bytes": "51f080f9",
+          "pc": "0x0046fc20",
+          "target": "0x004c0f24"
+        },
+        {
+          "bytes": "51f045f9",
+          "pc": "0x0046fc96",
+          "target": "0x004c0f24"
+        },
+        {
+          "bytes": "51f015f9",
+          "pc": "0x0046fcf6",
+          "target": "0x004c0f24"
+        }
+      ],
+      "name": "FUN_0046fb0c",
+      "sha256": "68c702cca39cea94a9650b5c456229c1fd46b884490bb97f04879c8b56326c21",
+      "size": 812
+    },
+    "caller_0x00470d7c": {
+      "lifecycle_callsites": [
+        {
+          "bytes": "50f08ff8",
+          "pc": "0x00470d86",
+          "target": "0x004c0ea8"
+        }
+      ],
+      "name": "FUN_00470d7c",
+      "sha256": "f892a262286d481a8a0eeec05aefc68475eb47f3e39bdecd97e75d1b1f9a14af",
+      "size": 258
+    },
+    "caller_0x00593200": {
+      "lifecycle_callsites": [
+        {
+          "bytes": "2df71dfe",
+          "pc": "0x0059326a",
+          "target": "0x004c0ea8"
+        }
+      ],
+      "name": "jbd4010_power_off_sequence",
+      "sha256": "c6bf824363ffff362ae0a571e41a4d6e381679282365e4f3f2281340675e280c",
+      "size": 136
+    },
+    "caller_0x0059c876": {
+      "lifecycle_callsites": [
+        {
+          "bytes": "24f713fb",
+          "pc": "0x0059c87e",
+          "target": "0x004c0ea8"
+        }
+      ],
+      "name": "am_devices_mspi_device_reconfigure",
+      "sha256": "5e8785ffb95aadc3c3d35d60b19deb17c8e88bc3c4370d0097258ccec38d4d4b",
+      "size": 266
+    }
+  },
+  "limits": [
+    "Offsets are byte offsets inferred directly from authenticated word accesses; no complete private-structure layout is asserted.",
+    "Caller interpretations are static and limited to authenticated instructions/decompilation; no runtime state transition is tested.",
+    "Pinned-source behavioral correspondence is not compiler byte reproduction."
+  ],
+  "literals": {
+    "0x004c0f5c": "0x40060000",
+    "0x004c0f68": "0x01bebebe"
+  },
+  "mapping": {
+    "base": "0x00438000",
+    "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+    "image_size": 3523364,
+    "ota_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "ota_size": 3523396,
+    "preamble_bytes": 32,
+    "rule": "decoded offset=runtime-0x438000; OTA file offset=decoded offset+32"
+  },
+  "source_files": {
+    "am_hal_global.h": "05218d399ad4bb1338aa76d84f76bcc9e8f8585cf8c1530e262316cfddc6b075",
+    "am_hal_mspi.c": "5a91ab0c67bda4bd61c7d436b94b5a7c81693b948a331d282ae10e88cc5bf85f",
+    "am_hal_mspi.h": "2a682bb7c1618982d6a802f3220a38696cd594c89d90e64b1a698d226b0a557b",
+    "apollo510.h": "b6ca35dc828ef95825c0a22f06e6ca5ed558a6542dc74310515fdc350051a797"
+  },
+  "verification": "PASS"
+}

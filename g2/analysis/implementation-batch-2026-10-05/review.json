@@ -1,0 +1,57 @@
+{
+  "scope": [
+    "g2/tools/preserve_l8_resources.py",
+    "g2/tools/manifests/g2-l8-resource-map.json",
+    "g2/tests/test_preserve_l8_resources.py",
+    "g2/components/foundation/touch_scb/*",
+    "g2/tests/test_touch_scb.py",
+    "g2/Makefile"
+  ],
+  "implementation_edits": false,
+  "critical_findings": [],
+  "findings": [
+    {
+      "severity": "low",
+      "area": "resource export failure recovery",
+      "detail": "After staging, export creates destination before moving files. A mid-move filesystem failure can leave a partial destination that blocks retry. Existing content is not overwritten.",
+      "suggestion": "Rollback the just-created destination on failure, or publish a fully populated staged directory atomically where supported."
+    },
+    {
+      "severity": "informational",
+      "area": "checked touch adapter contract",
+      "detail": "Status is read before capacity validation; a real status callback may have device effects. README documents this, so callers need to account for it."
+    }
+  ],
+  "resource_path": {
+    "reviewed_safeguards": [
+      "map SHA-256 pinned",
+      "payload length and SHA-256 pinned",
+      "descriptor hash/layout and pixel hash validated",
+      "geometry, pointer conversion, payload bounds, and region non-overlap validated",
+      "local L8 hash and PGM exact-byte roundtrip validated",
+      "repack writes with exclusive creation and verifies whole-payload byte identity"
+    ],
+    "claim_limit": "Six selected resource regions only; does not replace the official provider or prove a complete source rebuild."
+  },
+  "touch_path": {
+    "behavior": "status & 0x1ff; min(requested, available); invoke transfer once including zero; return actual count",
+    "original_instruction_cases": 8,
+    "trace_events": 119,
+    "heldout_cases_equal_count_and_max_request": true,
+    "test_harness_updates": ["uses direct void* SCB handle", "uses eight-byte destination for width-2 path", "checks zero-capacity empty success", "checks missing callbacks", "checks actual_out unchanged on error"],
+    "callee": "entry stubbed; does not verify FIFO/MMIO or callee behavior",
+    "claim_limit": "bounded wrapper reconstruction only; no hardware provider/device build"
+  },
+  "resource_failure_recovery_documented": "g2/tools/RESOURCE_PRESERVATION.md",
+  "current_sha256": {
+    "g2/tools/preserve_l8_resources.py": "79cd528d9490bef6ca8d56fe5bd34d6a87bc26e7aee3dfda8f095ec6b29eaf7d",
+    "g2/tools/manifests/g2-l8-resource-map.json": "33115d16c9917b0908943c4f2c91b0f8955b3b255bf5a06fe10adf736841595d",
+    "g2/components/foundation/touch_scb/touch_scb.c": "ef593088ec3c20985ae8c4b51cf932d9ccc9a98627b43dbe08e8befa412d8afd",
+    "g2/components/foundation/touch_scb/touch_scb.h": "92e7b7a09807209efba8b0372e615dd3b5ab32dd0459bc4c25675392e29b525d",
+    "g2/tests/test_touch_scb.py": "59b4695de6483dd2ec081ba6468be82d0f2e3a806a2793ee2760876560435e6b",
+    "g2/tests/test_preserve_l8_resources.py": "c4fb21e73ba188b8d900e0643fc81801c286977c9809e99a300dd2217433004a",
+    "g2/Makefile": "cbf22795e495f2dae520868c668b71372f4090f77953a4f7fa042ef9b4d00aeb"
+  },
+  "make_integration": "foundation-object compiles the wrapper for arm-none-eabi Cortex-M0+ as freestanding C11 with warnings-as-errors; parent reports target passed; no firmware link/provider is added.",
+  "verification": "Static review; parent agent reports final resource path/tests and foundation-object target passed."
+}

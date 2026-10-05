@@ -1,0 +1,77 @@
+{
+  "scope": "bounded user-authorized foundational implementation; no firmware provider or gate changes",
+  "source_files": [
+    "g2/components/foundation/touch_scb/touch_scb.c",
+    "g2/components/foundation/touch_scb/touch_scb.h"
+  ],
+  "resource_tool": "g2/tools/preserve_l8_resources.py",
+  "integration": [
+    "g2/Makefile foundation-test/core-test registration",
+    "g2/Makefile foundation-object CortexM0plus freestanding object",
+    "resource-export/verify/repack optional targets"
+  ],
+  "foundation_tests": {
+    "passed": 9,
+    "failed": 0
+  },
+  "existing_packaging_tests": {
+    "passed": 7,
+    "failed": 0
+  },
+  "host_compile": "clang C11-Wall-Wextra-Werror passed",
+  "target_compile": "clang arm-none-eabi CortexM0plus freestanding object passed; not target-linked",
+  "original_instruction_comparison": {
+    "cases": 8,
+    "trace_events": 119,
+    "callee": "entry stub; no FIFO/MMIO/hardware proof"
+  },
+  "resource_run": {
+    "assets": 6,
+    "unique_pixel_bytes": 28872,
+    "repacked_payload_bytes": 3523396,
+    "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "original_equal": true,
+    "output": "g2/build/resources/implementation-20261005T1620.bin",
+    "contract": "The six unchanged .l8 pixel slices are written back into a bytearray of the authenticated original official Apollo payload template; full payload identity must remain equal. Not a source-built Apollo image."
+  },
+  "broad_suite": {
+    "completed": true,
+    "success": true,
+    "summary": "aggregate-validation.json",
+    "counts": {
+      "test_method_invocations": 165,
+      "passed_methods": 159,
+      "failed_methods": 0,
+      "errored_methods": 0,
+      "skipped_methods": 6,
+      "additional_class_setup_skips": 1,
+      "failed_subtest_assertions": 0,
+      "modules_completed": 25,
+      "modules_unrun": 0
+    },
+    "blockers": [
+      "npm registry DNS unavailable; legacy font E2E skipped",
+      "protoc unavailable; nanopb E2E skipped",
+      "authenticated source-path corpus unavailable; class skipped",
+      "reviewed CFW image unset; four shipped-image audits skipped"
+    ],
+    "tests_changed_to_pass": false
+  },
+  "review": "review.json no critical findings; documented partial-export recovery edge",
+  "protected_inputs_unchanged": {
+    "g2/tools/open_cfw.py": "5721966cb09b6a0833fe5a018750fffcef6c850f4aad8acdb4e31c8d3864101b",
+    "g2/manifests/g2-2.2.6.10.json": "1e6f7da11f63cf063098de2213a304e0a15fe99e9a932cdef9fedf32d2856c61",
+    "g2/workflow/state.json": "4362dd4098292cf59ea2e4b45e056987f531392a0d2cb3b455549ba7699a1cc5",
+    "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
+  },
+  "remaining": [
+    "hardware FIFO provider/configuration/serialization",
+    "target linker/startup/IRQ integration",
+    "register-level and timing/error behavior",
+    "exact source-byte match/production compiler",
+    "complete firmware reconstruction"
+  ],
+  "index": "No staging/reset/commit commands issued; concurrent staged files preserved",
+  "licenses": "tool/new callback reconstruction MIT; vendorpixels retain original rights; upstream source not copied",
+  "dependency_validation": "dependency-validation.json"
+}

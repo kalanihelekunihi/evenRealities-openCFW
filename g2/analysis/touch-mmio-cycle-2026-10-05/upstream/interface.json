@@ -1,0 +1,107 @@
+{
+  "record_type": "source-backed dependency/interface evidence",
+  "upstream": {
+    "project": "Infineon mtb-pdl-cat2",
+    "repository": "https://github.com/Infineon/mtb-pdl-cat2",
+    "commit": "35f1714623cfea682d5e285af80d50416b4c7bbc",
+    "release_label": "release-v2.21.0",
+    "driver_version_in_source": "4.70",
+    "license": "Apache-2.0",
+    "local_checkout": "third-party/upstream/infineon-mtb-pdl-cat2 (empty in this workspace; references read from official raw URLs)"
+  },
+  "source_urls": {
+    "common_c": "https://raw.githubusercontent.com/Infineon/mtb-pdl-cat2/35f1714623cfea682d5e285af80d50416b4c7bbc/drivers/source/cy_scb_common.c",
+    "common_h": "https://raw.githubusercontent.com/Infineon/mtb-pdl-cat2/35f1714623cfea682d5e285af80d50416b4c7bbc/drivers/include/cy_scb_common.h",
+    "device_h": "https://raw.githubusercontent.com/Infineon/mtb-pdl-cat2/35f1714623cfea682d5e285af80d50416b4c7bbc/drivers/include/cy_device.h",
+    "svd": "https://raw.githubusercontent.com/Infineon/mtb-pdl-cat2/35f1714623cfea682d5e285af80d50416b4c7bbc/devices/svd/psoc4000t.svd",
+    "device_header": "https://raw.githubusercontent.com/Infineon/mtb-pdl-cat2/35f1714623cfea682d5e285af80d50416b4c7bbc/devices/include/cy8c4046fni_t412.h"
+  },
+  "contract": {
+    "Cy_SCB_ReadArrayNoCheck": {
+      "signature": "void Cy_SCB_ReadArrayNoCheck(CySCB_Type const *base, void *buffer, uint32_t size)",
+      "source": "drivers/source/cy_scb_common.c:51-74",
+      "operations": [
+        "select element width using Cy_SCB_IsRxDataWidthByte(base)",
+        "for idx from 0 to size-1, read one RX FIFO data element via Cy_SCB_ReadRxFifo(base)",
+        "store each as uint8_t in byte mode or uint16_t otherwise"
+      ],
+      "precondition": "RX FIFO contains at least size elements",
+      "checks_fifo_occupancy": false
+    },
+    "Cy_SCB_ReadArray": {
+      "signature": "uint32_t Cy_SCB_ReadArray(CySCB_Type const *base, void *buffer, uint32_t size)",
+      "source": "drivers/source/cy_scb_common.c:99-113",
+      "operations": [
+        "snapshot numToCopy from Cy_SCB_GetNumInRxFifo(base)",
+        "clamp numToCopy to requested size",
+        "call Cy_SCB_ReadArrayNoCheck exactly once",
+        "return numToCopy"
+      ],
+      "count_unit": "FIFO data elements",
+      "zero_count_call": true,
+      "blocking": false
+    },
+    "Cy_SCB_IsRxDataWidthByte": {
+      "signature": "bool Cy_SCB_IsRxDataWidthByte(CySCB_Type const *base)",
+      "source": "drivers/include/cy_scb_common.h:1831-1846",
+      "expression": "_FLD2VAL(SCB_RX_CTRL_DATA_WIDTH, SCB_RX_CTRL(base)) < CY_SCB_BYTE_WIDTH",
+      "byte_width_bits": 8,
+      "byte_width_definition": "drivers/include/cy_scb_common.h:721-722 defines CY_SCB_BYTE_WIDTH as (8UL)",
+      "literal_mask_0x18_in_helper": false,
+      "SVD_field": "SCB RX_CTRL.DATA_WIDTH [4:0] at offset 0x300; complete field mask 0x1f"
+    },
+    "Cy_SCB_GetNumInRxFifo": {
+      "signature": "uint32_t Cy_SCB_GetNumInRxFifo(CySCB_Type const *base)",
+      "source": "drivers/include/cy_scb_common.h:831-846",
+      "expression": "_FLD2VAL(SCB_RX_FIFO_STATUS_USED, SCB_RX_FIFO_STATUS(base))",
+      "SVD_field": "SCB RX_FIFO_STATUS.USED [8:0] at offset 0x308",
+      "field_mask": "0x1ff",
+      "return_unit": "FIFO data elements (entries)"
+    },
+    "Cy_SCB_ReadRxFifo": {
+      "signature": "uint32_t Cy_SCB_ReadRxFifo(CySCB_Type const *base)",
+      "source": "drivers/include/cy_scb_common.h:791-808",
+      "expression": "return SCB_RX_FIFO_RD(base)",
+      "register": "SCB RX_FIFO_RD at offset 0x340",
+      "hardware_semantics": "read removes/pops one data frame; empty read sets RX underflow",
+      "availability_check": false
+    }
+  },
+  "device": {
+    "part_header": "CY8C4046FNI-T412",
+    "scb_instances": {
+      "SCB0": "0x40240000",
+      "SCB1": "0x40250000"
+    },
+    "source": "devices/include/cy8c4046fni_t412.h"
+  },
+  "concurrency": {
+    "atomic_fifo_transaction_guaranteed_by_these_functions": false,
+    "reason": "ReadArray samples USED once and then consumes that many items; no lock, interrupt masking, or competing-reader coordination appears in the source.",
+    "risk_if_other_consumer_interleaves": "snapshot can become stale and an ensuing direct FIFO read may underflow",
+    "hardware_timing_or_concurrency_validated": false
+  },
+  "existing_firmware_coverage": {
+    "new_ranges_claimed": 0,
+    "caller": {
+      "symbol": "Cy_SCB_ReadArray",
+      "range_half_open": [37456, 37486],
+      "range_hex": "[0x9250,0x926e)",
+      "size": 30,
+      "sha256": "c7729e5dfb38b7391112b5eeeb9e0a8b0fc0d2ad0bc2e1e9b53b353b401e5e49",
+      "existing_record": "g2/symbols/touch.tsv"
+    },
+    "callee": {
+      "symbol": "Cy_SCB_ReadArrayNoCheck",
+      "range_half_open": [37400, 37456],
+      "range_hex": "[0x9218,0x9250)",
+      "size": 56,
+      "sha256": "07627776d2bc275029e974a40d0944d6b87502cfea118880b8d60d6c3fa97cc7",
+      "existing_record": "g2/symbols/touch.tsv"
+    },
+    "firmware_payload_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+    "existing_oracle": "g2/analysis/shortcut-batch-2026-10-05/touch-upstream/results.json",
+    "oracle_limit": "callee was stubbed at entry; prior harness tested the caller only"
+  },
+  "claim_boundary": "PDL source and SVD support source-level/interface correspondence only; no compiled-byte identity or live hardware behavior is asserted."
+}

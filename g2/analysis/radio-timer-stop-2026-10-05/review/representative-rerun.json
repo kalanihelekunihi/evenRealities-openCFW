@@ -1,0 +1,226 @@
+{
+  "status": "PASS",
+  "cases": 13,
+  "cases_detail": [
+    {
+      "case": {
+        "op": "stop",
+        "chain": [],
+        "target": 0,
+        "prev": -1,
+        "started": 1,
+        "depth": 255,
+        "prior": 1,
+        "model": "raw"
+      },
+      "pass": true
+    },
+    {
+      "case": {
+        "op": "stop",
+        "chain": [
+          0,
+          1,
+          2
+        ],
+        "target": 0,
+        "prev": -1,
+        "started": 1,
+        "depth": 0,
+        "prior": 0,
+        "model": "raw"
+      },
+      "pass": true
+    },
+    {
+      "case": {
+        "op": "stop",
+        "chain": [
+          0,
+          1,
+          2
+        ],
+        "target": 1,
+        "prev": -1,
+        "started": 1,
+        "depth": 1,
+        "prior": 1,
+        "model": "raw"
+      },
+      "pass": true
+    },
+    {
+      "case": {
+        "op": "stop",
+        "chain": [
+          0,
+          1,
+          2
+        ],
+        "target": 2,
+        "prev": -1,
+        "started": 0,
+        "depth": 2,
+        "prior": 0,
+        "model": "raw"
+      },
+      "pass": true
+    },
+    {
+      "case": {
+        "op": "stop",
+        "chain": [
+          0,
+          1,
+          2
+        ],
+        "target": 4,
+        "prev": -1,
+        "started": 1,
+        "depth": 2,
+        "prior": 1,
+        "model": "raw"
+      },
+      "pass": true
+    },
+    {
+      "case": {
+        "op": "remove",
+        "chain": [
+          0,
+          1,
+          2
+        ],
+        "target": 1,
+        "prev": -1,
+        "started": 1,
+        "depth": 0,
+        "prior": 1,
+        "model": "raw"
+      },
+      "pass": true
+    },
+    {
+      "case": {
+        "op": "remove",
+        "chain": [
+          0,
+          1,
+          2
+        ],
+        "target": 4,
+        "prev": -1,
+        "started": 1,
+        "depth": 1,
+        "prior": 0,
+        "model": "raw"
+      },
+      "pass": true
+    },
+    {
+      "case": {
+        "op": "queue",
+        "chain": [
+          0,
+          1,
+          2
+        ],
+        "target": 0,
+        "prev": -1,
+        "started": 1,
+        "depth": 0,
+        "prior": 0,
+        "model": "raw"
+      },
+      "pass": true
+    },
+    {
+      "case": {
+        "op": "queue",
+        "chain": [
+          0,
+          1,
+          2
+        ],
+        "target": 1,
+        "prev": 0,
+        "started": 1,
+        "depth": 1,
+        "prior": 1,
+        "model": "raw"
+      },
+      "pass": true
+    },
+    {
+      "case": {
+        "op": "queue",
+        "chain": [
+          0,
+          1,
+          2
+        ],
+        "target": 2,
+        "prev": 1,
+        "started": 1,
+        "depth": 2,
+        "prior": 0,
+        "model": "raw"
+      },
+      "pass": true
+    },
+    {
+      "case": {
+        "op": "phase",
+        "chain": [
+          5,
+          0,
+          1
+        ],
+        "target": 5,
+        "prev": -1,
+        "started": 1,
+        "depth": 0,
+        "prior": 0,
+        "model": "raw"
+      },
+      "pass": true
+    },
+    {
+      "case": {
+        "op": "phase",
+        "chain": [
+          0,
+          1,
+          5
+        ],
+        "target": 5,
+        "prev": -1,
+        "started": 1,
+        "depth": 1,
+        "prior": 1,
+        "model": "side_effects"
+      },
+      "pass": true
+    },
+    {
+      "case": {
+        "op": "phase",
+        "chain": [
+          0,
+          1,
+          2
+        ],
+        "target": 5,
+        "prev": -1,
+        "started": 0,
+        "depth": 2,
+        "prior": 0,
+        "model": "raw"
+      },
+      "pass": true
+    }
+  ],
+  "elf_sha256": "0bfb36085b4facd31781c2e1790d4fa41d64acba263e0d8a3f79e363cbe78d6a",
+  "script_sha256": "597ac0d9c964d686a4c2a061c19edcc57a54636c7d41a5035a11e51607ffe7fd",
+  "first_full_result_sha256": "5ce12ae95b98cfaa8d99c858265600f0dca71803169be6544bbb7de85d1fbdfb"
+}

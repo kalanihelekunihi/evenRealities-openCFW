@@ -1,0 +1,50 @@
+{
+  "baseline_snapshot": "/Users/kalani/Documents/Codex/OpenCFW/audits/2026-10-05T0013Z-status",
+  "baseline_corrected_metrics": "/Users/kalani/Documents/Codex/OpenCFW/audits/2026-10-05T0013Z-status/repaired/summary.json",
+  "current_cutoff_utc": "2026-10-05T15:33:22.080691+00:00",
+  "current_scan_finished_utc": "2026-10-05T15:33:40.094519+00:00",
+  "method": "Unchanged measure.py and unchanged review_repair.py; new supplemental instruction metric applied equally to both frozen snapshots.",
+  "reviewed_bytes_previous": 197000,
+  "reviewed_bytes_current": 197000,
+  "reviewed_bytes_progress": 0,
+  "per_cohort_progress": {
+    "apollo-bootloader/ghidra/open-2026-09-29": 0,
+    "apollo-main/ghidra/open-2026-09-29": 0,
+    "case/ghidra/open-2026-09-29": 0,
+    "codec/ghidra/open-2026-09-29/image_a_sram": 0,
+    "codec/ghidra/open-2026-09-29/image_a_xip": 0,
+    "codec/ghidra/open-2026-09-29/image_b_sram": 0,
+    "codec/ghidra/open-2026-09-29/uart_boot_stage1": 0,
+    "codec/ghidra/open-2026-09-29/uart_boot_stage2": 0,
+    "touch/ghidra/open-2026-09-29": 0
+  },
+  "instruction_json_delta_bytes": 1874,
+  "artifact_deltas": {
+    "new_receipt_paths": 710,
+    "changed_receipt_hashes": 0,
+    "new_review_paths": 0,
+    "changed_review_hashes": 0
+  },
+  "new_vs_stale": "New paths are first observed relative to baseline, not proof of generation time. Previously seen unchanged hashes are reverified stale evidence. mtime retained but not treated as provenance proof.",
+  "immutable_manifest_outcomes": {
+    "verified": 45187,
+    "missing": 56,
+    "hash_mismatch": 5
+  },
+  "repaired_unresolved_counts": {
+    "no_supported_reference": 509,
+    "bound_scoped_evidence": 521,
+    "revision_review": 8,
+    "no_hash_bound_pseudocode": 67,
+    "no_authenticated_ranges": 39,
+    "candidate_not_in_snapshot": 5,
+    "unresolved_review_scope": 51,
+    "nonpassing_review": 21,
+    "bound_candidate_blocked_by_revision": 2
+  },
+  "instruction_unmatched_counts": {
+    "matched_instruction_rows": 235629,
+    "wrong_or_ambiguous_instruction_bytes": 1058,
+    "unsupported_file_manifest_schema": 9
+  }
+}

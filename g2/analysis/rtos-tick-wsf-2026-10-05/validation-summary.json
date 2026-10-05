@@ -1,0 +1,24 @@
+{
+  "status": "PASS_WITH_BOUNDED_SCOPE",
+  "comparison": "g2/build/foundation/rtos-tick-wsf-simulator/comparison-verified.json",
+  "cases": 271,
+  "unique_original_trace_bytes": 2404,
+  "new_foundation_disjoint_bytes": 328,
+  "cumulative_foundation_disjoint_bytes": 4166,
+  "prior_stock_fixture_note": "Prior partial168 original-only cases retained/referenced;328bytes new to foundation ledger, not newly discovered whole-corpus code.",
+  "focused_passing_tests": 59,
+  "aggregate_modules": 41,
+  "aggregate": {
+    "tests_run": 215,
+    "passed": 209,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 7,
+    "method_skips": 6,
+    "setup_skips": 1
+  },
+  "accounting": "215 executed method tests =209passing+6method skips;1 setupskip separately;7skip records total.",
+  "compiler_profile": "Existing Cortex-M4 Thumb2 soft-float freestanding C11 flags with fwrapv; -O0 final override for tick/resume/list/new simulator-provider objects. Semantic test profile only, not intended firmware optimization or byte-match.",
+  "unsupported": "Optimized simulator divergence root cause; physical tick ISR/startup/frequency/task selection/context switch/full kernel/lifetime/hardware.",
+  "aggregate_environment": "Installed OpenCFW Python; PYTHONDONTWRITEBYTECODE=1 npm_config_fetch_retries=0 npm_config_fetch_timeout=5000."
+}

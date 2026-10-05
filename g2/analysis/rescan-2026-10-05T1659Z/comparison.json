@@ -1,0 +1,74 @@
+{
+  "scan_utc": "2026-10-05T16:59:54.802949+00:00",
+  "previous_scan": "2026-10-05T15:33:22.080691+00:00",
+  "raw_snapshot": "g2/build/audits/2026-10-05-rescan-01",
+  "metrics": {
+    "reviewed_bytes": 197000,
+    "reviewed_delta": 0,
+    "instruction_export_bytes": 490200,
+    "instruction_export_delta": 0,
+    "complete_blob_free_payloads": 0,
+    "payload_count": 6
+  },
+  "source_files": [
+    {
+      "path": "g2/components/foundation/touch_scb/simulator/entry.c",
+      "bytes": 710,
+      "sha256": "3db94486f00ee71c83163e97908177c5094696dba4bd3d4422594142901fb199",
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb.c",
+      "bytes": 1881,
+      "sha256": "ef593088ec3c20985ae8c4b51cf932d9ccc9a98627b43dbe08e8befa412d8afd",
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb.h",
+      "bytes": 2157,
+      "sha256": "92e7b7a09807209efba8b0372e615dd3b5ab32dd0459bc4c25675392e29b525d",
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb_mmio.c",
+      "bytes": 3724,
+      "sha256": "783266dd5cadfdb30c1d3fd52f94425f01e5dda86dc33e92f3ba7105f47516bd",
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb_mmio.h",
+      "bytes": 2526,
+      "sha256": "6e721710034dfc7ffb8aa92286ea6dd11c7d24892e7260b572a21a5046517ef1",
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb_tx.c",
+      "bytes": 3213,
+      "sha256": "26c4c1d6cce94e42d5d7c2a117c6c592e297d9f8bb3b692add121430c904403c",
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb_tx.h",
+      "bytes": 2216,
+      "sha256": "70d8e9f60fd9c67ccdd0217f036265f9b4f213c9dfae58af2a490ea4cb427829",
+      "ignored": false
+    }
+  ],
+  "protected_hashes_unchanged": {
+    "g2/tools/open_cfw.py": true,
+    "g2/manifests/g2-2.2.6.10.json": true,
+    "g2/workflow/state.json": true,
+    "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin": true
+  },
+  "fresh_tests": {
+    "command": "cd g2 && python3 -m unittest discover -s tests -t . -p 'test_touch_scb*.py' -v",
+    "passed": 9,
+    "failed": 0
+  },
+  "limits": [
+    "Saved RX execution comparison predates current verifier; not rerun in this scan.",
+    "TX is not in linked simulator Makefile target or CORE_TESTS list.",
+    "Whole-suite 159 passing methods and 6 method skips are prior results, not freshly rerun.",
+    "No hardware behavior or full source-built firmware validated."
+  ]
+}

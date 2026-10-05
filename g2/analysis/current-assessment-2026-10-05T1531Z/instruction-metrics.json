@@ -1,0 +1,101 @@
+{
+  "baseline_receipt_pinned_json": {
+    "snapshot": "/Users/kalani/Documents/Codex/OpenCFW/audits/2026-10-05T0013Z-status",
+    "measured_utc": "2026-10-05T00:15:18.619564+00:00",
+    "receipt_pinned_json_instruction_bytes": 273686,
+    "per_payload": {
+      "apollo_bootloader": 123960,
+      "apollo_main": 108644,
+      "case": 41082
+    },
+    "outcomes": {
+      "matched_instruction_rows": 217493,
+      "unsupported_file_manifest_schema": 9,
+      "wrong_or_ambiguous_instruction_bytes": 1055
+    },
+    "artifact_count": 2450,
+    "percent": 6.362975030148374,
+    "limits": [
+      "Existing instruction exports only; no new disassembly generated.",
+      "Source-byte matching authenticates instruction rows, not code/data classification or decoder semantics.",
+      "Includes ignored generated campaign paths, independent of git status.",
+      "Only receipt-pinned instruction/disassembly JSON formats counted; unpinned/text exports have separate limits."
+    ]
+  },
+  "current_receipt_pinned_json": {
+    "snapshot": "g2/build/audits/2026-10-05T1531Z-current",
+    "measured_utc": "2026-10-05T15:35:02.830840+00:00",
+    "receipt_pinned_json_instruction_bytes": 275560,
+    "per_payload": {
+      "apollo_bootloader": 123960,
+      "apollo_main": 110518,
+      "case": 41082
+    },
+    "outcomes": {
+      "matched_instruction_rows": 235629,
+      "wrong_or_ambiguous_instruction_bytes": 1058,
+      "unsupported_file_manifest_schema": 9
+    },
+    "artifact_count": 2715,
+    "percent": 6.406543993144282,
+    "limits": [
+      "Existing instruction exports only; no new disassembly generated.",
+      "Source-byte matching authenticates instruction rows, not code/data classification or decoder semantics.",
+      "Includes ignored generated campaign paths, independent of git status.",
+      "Only receipt-pinned instruction/disassembly JSON formats counted; unpinned/text exports have separate limits."
+    ]
+  },
+  "comparable_json_delta_bytes": 1874,
+  "current_arc_text_export": {
+    "path": "g2/research/corpus/em9305/objdump/open-2026-09-29/em9305-0x302400-0x335BC8.s",
+    "sha256": "ddb5f97e1159d8448992dd856a0bee397873017891028a036cf2ff1c367493df",
+    "source_sha256": "0de6e945a56ec886a92e44d4eaefe02fbca6db11f8747876e30bffb45cffce03",
+    "matched_bytes": 208840,
+    "outcomes": {
+      "matched_rows": 70880,
+      "data_or_invalid_decode": 54
+    },
+    "baseline_comparison": "Unavailable: prior audit did not capture standalone text export hash; not counted as newly generated."
+  },
+  "current_combined_instruction_export_bytes": 490200,
+  "per_payload_current_combined": {
+    "apollo_bootloader": 123960,
+    "apollo_main": 116318,
+    "case": 41082,
+    "ble_em9305": 208840
+  },
+  "bundle_bytes": 4301227,
+  "current_combined_percent": 11.396747951224151,
+  "fixtures_passed": 5,
+  "current_app_text_exports": [
+    {
+      "path": "g2/analysis/audio-angle-2026-10-01/disassembly.txt",
+      "sha256": "6239a987e32860d73a24dd9b3aa81b523d7eb5457344559ea9af949f7ceb0cb3",
+      "validation_path": "g2/analysis/audio-angle-2026-10-01/validation.json",
+      "validation_sha256": "3903a577d340c5aba0713aa39b23e7fb15fa7b1fbf8f777eab08d4f528ac4173",
+      "source_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "matched_rows": 326,
+      "baseline_limit": "No saved text-file hash in13:41 audit; current-only supplementary evidence, not newly-generated delta."
+    },
+    {
+      "path": "g2/analysis/ess-gatt-2026-10-01/disassembly.txt",
+      "sha256": "b42aba9f49095529075e7cb5f00182d08e68412c0d82b3f5acabc5cf8ffb91f4",
+      "validation_path": "g2/analysis/ess-gatt-2026-10-01/validation.json",
+      "validation_sha256": "25f7eb97a27f5e4d559c33dca95f110ab64c691f1e9404d09daf8a91dd5496c1",
+      "source_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "matched_rows": 245,
+      "baseline_limit": "No saved text-file hash in13:41 audit; current-only supplementary evidence, not newly-generated delta."
+    },
+    {
+      "path": "g2/analysis/ring-protocol-2026-09-30/disassembly.txt",
+      "sha256": "61158828ef8970ea8137fa464da3ad15805468028878d4376cbd21669323e20d",
+      "validation_path": "g2/analysis/ring-protocol-2026-09-30/validation.json",
+      "validation_sha256": "516650a853c9bcddfb5dc97bbf995349fc3e911ef3503aff66888da3b1ae5eae",
+      "source_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "matched_rows": 1604,
+      "baseline_limit": "No saved text-file hash in13:41 audit; current-only supplementary evidence, not newly-generated delta."
+    }
+  ],
+  "current_app_text_outcomes": {},
+  "current_app_text_incremental_bytes": 5800
+}

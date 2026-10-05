@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "fresh_comparison": "g2/build/foundation/timer-daemon-wsf-simulator/comparison-final.json",
+  "fresh_cases": 204,
+  "original_trace_bytes_including_prior": 1714,
+  "new_disjoint_original_bytes": 276,
+  "cumulative_unique_original_bytes": 3250,
+  "focused_passed": 50,
+  "aggregate": {
+    "tests_run": 206,
+    "passed": 201,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 6
+  },
+  "aggregate_modules": 38,
+  "limits": "Real nonblocking receive/copy, task-critical BASEPRI/nesting helpers, negative-command daemon loop and callback, plus ISR queue/event-group/WSF/radio/GPIO execute. Scheduler state/receiver removal/taskcount/unblock/suspend/resume, context/wait/ticks/app handlers remain fixtures. Blocking receive and positive timer commands are external boundaries. Invalid branches stop before fault tail; daemon activation is explicit harness invocation, not actual scheduling. Borrowed event-group validity/destruction and physical IRQ behavior unproven.",
+  "independent_review": "g2/analysis/timer-daemon-wsf-2026-10-05/review/report.md"
+}

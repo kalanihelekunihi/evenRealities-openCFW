@@ -1,0 +1,85 @@
+{
+  "files": [
+    {
+      "path": "g2/Makefile",
+      "sha256": "8106940e8ceda0951cd0bca407058f920b93b23d7ca9ff4d686fb23fc2b48d96",
+      "bytes": 27536
+    },
+    {
+      "path": "g2/build/foundation/ambiq-gpio-config-simulator/config.o",
+      "sha256": "62dfae67c05449be4a008d34630793921f7d431c4de5c2bc3a8b97104259880e",
+      "bytes": 1340
+    },
+    {
+      "path": "g2/build/foundation/ambiq-gpio-config-simulator/critical.o",
+      "sha256": "2addec12eaf2ee85a148df1564e6a6fcfcc8363748775bc6d0c5e646b9e0fe65",
+      "bytes": 868
+    },
+    {
+      "path": "g2/build/foundation/ambiq-gpio-config-simulator/gpio_config.elf",
+      "sha256": "d00c9e431ad44425e1d036c2b27447d2382e5f55d9e3110c9a695b0c2c3cbae8",
+      "bytes": 5192
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/README.md",
+      "sha256": "f1f6708ac14aece51f0dc684d91143957f203ece4da72a4dba8e366dda904a13",
+      "bytes": 3238
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/SOURCE_PROVENANCE.json",
+      "sha256": "59bab20351512dbf78b32bfe99f061e3470059c6321e02dc01d6558e36559635",
+      "bytes": 952
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/ambiq_gpio_config.c",
+      "sha256": "4f73b343fc2907a359ce757e7fe934d587aefe55504b1abbe87c89675668e892",
+      "bytes": 4770
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/gpio_config.h",
+      "sha256": "882d9ce1ff78e34c17d2dfa0969c4ef3328262bb5f7f531c3678e824cfab4201",
+      "bytes": 3426
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/gpio_config_compat.h",
+      "sha256": "2f3e7e5c8e22501f88081c3ca1fd85e0e9406b7f1a72943582046ae8d6b82549",
+      "bytes": 1200
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/simulator/module.ld",
+      "sha256": "34dc9cd95b6c71c3d2eac0f2dafea432d719275592798818fb0c99d07e86e53b",
+      "bytes": 475
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/simulator/verify.py",
+      "sha256": "83f2d1e254a296fa62b1212599b03f4eaecd7af9872800f6659edf6aa4006367",
+      "bytes": 8002
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/ambiq_interrupt_mask.c",
+      "sha256": "27a574d24f61bf1bec7a13d16bc3e1f0816c35045f384b5ad85d808871f6a9eb",
+      "bytes": 4625
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/ambiq_interrupt_mask.h",
+      "sha256": "76e92c27af92ed403326c65acdbb890dccfb4f00788f06c6c99f09e4ec0de98a",
+      "bytes": 450
+    },
+    {
+      "path": "g2/tests/test_ambiq_gpio_config.py",
+      "sha256": "0db7e003bb8ef1e64bcf58b94aedad02235ffe4dadee6cb69c8bf93da893382e",
+      "bytes": 2532
+    }
+  ],
+  "comparison_path": "g2/build/foundation/ambiq-gpio-config-simulator/comparison-reviewed.json",
+  "comparison_sha256": "5d845c06e37f6a6e1d39f6ccc7d770a0615743fe9895890cbfa8155d51c5b307",
+  "source_manifest_matches": true,
+  "previous59foundation_source_hashes_unchanged": true,
+  "tools": {
+    "clang": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+    "arm-none-eabi-ld": "GNU ld (GNU Binutils) 2.47.20260726",
+    "arm-none-eabi-objdump": "GNU objdump (GNU Binutils) 2.47.20260726"
+  },
+  "compiler_flags": "--target=arm-none-eabi -mcpu=cortex-m4 -mthumb -mfloat-abi=soft -ffreestanding -fno-builtin -std=c11 -Wall -Wextra -Werror -O2 -fwrapv",
+  "compiler_scope": "semantic callable test module only, no production linker/compiler claim"
+}

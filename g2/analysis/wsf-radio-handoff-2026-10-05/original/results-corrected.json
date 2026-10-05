@@ -1,0 +1,222 @@
+{
+  "ota_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "image_size": 3523364,
+  "image_base": 4423680,
+  "file_runtime_base": 4423648,
+  "authenticated_functions": [
+    {
+      "address": "0x0043c0e4",
+      "name": "FUN_0043c0e4",
+      "size": 8,
+      "sha256": "d228ee6e554e7763e9cd764cd9f07d3074feac13e9fd05250611ffa1079041fc",
+      "image_offset": 16612,
+      "corpus_name": "FUN_0043c0e4",
+      "callees": []
+    },
+    {
+      "address": "0x0052b8a4",
+      "name": "WsfCsEnter",
+      "size": 18,
+      "sha256": "e0ff3f4fa338e939616823c70ae7fc13df075b7de32178db2810cf9eb39edb87",
+      "image_offset": 997540,
+      "corpus_name": "WsfCsEnter",
+      "callees": []
+    },
+    {
+      "address": "0x0052b8b6",
+      "name": "WsfCsExit",
+      "size": 18,
+      "sha256": "8685a9a54cba4040bb297f58f5bc9e0d5beed1f46a7159363edc8f80648e824c",
+      "image_offset": 997558,
+      "corpus_name": "WsfCsExit",
+      "callees": []
+    },
+    {
+      "address": "0x0052b8d8",
+      "name": "WsfSetOsSpecificEvent",
+      "size": 70,
+      "sha256": "a7a1285078ac515a4fea7ad18a50ab44ec84ba9f1c39e07df875dfa0f8681465",
+      "image_offset": 997592,
+      "corpus_name": "WsfSetOsSpecificEvent",
+      "callees": [
+        "004420bc",
+        "00442228",
+        "0047ed76",
+        "0047ee4a"
+      ]
+    },
+    {
+      "address": "0x0052b91e",
+      "name": "WsfSetEvent",
+      "size": 64,
+      "sha256": "62fda22da8f5aec6255e52e820a4570a593fa4637a710ce93ebfbdca428f7db8",
+      "image_offset": 997662,
+      "corpus_name": "WsfSetEvent",
+      "callees": [
+        "0052b8a4",
+        "0052b8b6",
+        "0052b8d8"
+      ]
+    },
+    {
+      "address": "0x0052b95e",
+      "name": "WsfTaskSetReady",
+      "size": 30,
+      "sha256": "feaf10178e32248aebd53109fd9c1a95e1d757484102fc7a775203160e257ff7",
+      "image_offset": 997726,
+      "corpus_name": "WsfTaskSetReady",
+      "callees": [
+        "0052b8a4",
+        "0052b8b6",
+        "0052b8d8"
+      ]
+    },
+    {
+      "address": "0x0052b980",
+      "name": "WsfOsSetNextHandler",
+      "size": 30,
+      "sha256": "614f7f6c030d12ac7cb0ace224d26318a3089bc47a0d1fc24a17cf51cb7a396b",
+      "image_offset": 997760,
+      "corpus_name": "WsfOsSetNextHandler",
+      "callees": []
+    },
+    {
+      "address": "0x0052b9b2",
+      "name": "WsfOsInit",
+      "size": 30,
+      "sha256": "f9c905e97f08e91afc84d8c6df9ed24e71e26accbea503f8f423f98e8e8ff6bb",
+      "image_offset": 997810,
+      "corpus_name": "WsfOsInit",
+      "callees": [
+        "0043c0e4",
+        "0047ebd8"
+      ]
+    },
+    {
+      "address": "0x0052b9d0",
+      "name": "wsfOsDispatcher",
+      "size": 232,
+      "sha256": "49ba08ce0c35eb58c098babd1ad0e4d68c303c67bf8e2543be552511732474d8",
+      "image_offset": 997840,
+      "corpus_name": "wsfOsDispatcher",
+      "callees": [
+        "0047ebf8",
+        "004bf9b0",
+        "004bf9ec",
+        "0052a542",
+        "0052a574",
+        "0052b8a4",
+        "0052b8b6",
+        "0052b99e"
+      ]
+    },
+    {
+      "address": "0x004b4a7c",
+      "name": "HciDrvHandlerInit",
+      "size": 28,
+      "sha256": "bf48e7e49fa879179ba8fba858ab918d2966384cae9b3cdf511f9189dd7a0cb1",
+      "image_offset": 510588,
+      "corpus_name": "HciDrvHandlerInit",
+      "callees": []
+    },
+    {
+      "address": "0x004b4a98",
+      "name": "HciDrvIntService",
+      "size": 26,
+      "sha256": "8aaad9561f503147d8dab516f5dcbed5b36fdef2ad0dc7965c8e1dc2a136ca28",
+      "image_offset": 510616,
+      "corpus_name": "HciDrvIntService",
+      "callees": [
+        "0052b91e"
+      ]
+    },
+    {
+      "address": "0x004b7f64",
+      "name": "_bleExactleStackInit",
+      "size": 346,
+      "sha256": "74c187e6005693748a5b71bea5ec6f2e53a5e10d11a6eb01c3b880a8f384e5de",
+      "image_offset": 524132,
+      "corpus_name": "_bleExactleStackInit",
+      "callees": [
+        "0043ce9e",
+        "0043d0ce",
+        "0043d574",
+        "004b308c",
+        "004b4a7c",
+        "004b511e",
+        "004b6c28",
+        "004b7e74",
+        "004bac2c",
+        "004c584a",
+        "004d250c",
+        "004d27e0",
+        "004d2a46",
+        "0052a474",
+        "0052acce",
+        "0052b980",
+        "0052b9b2",
+        "00530364",
+        "00530b34",
+        "00531b1c",
+        "00533e40",
+        "0053496a",
+        "005351dc",
+        "00536a98",
+        "00536b18",
+        "00536e78",
+        "00536f6a",
+        "00537200",
+        "00537cb2",
+        "00537eec",
+        "00537f14",
+        "005380dc",
+        "00538104"
+      ]
+    }
+  ],
+  "literals": {
+    "0x0052bab8": {
+      "value": "0x20075045",
+      "image_offset": 998072
+    },
+    "0x0052babc": {
+      "value": "0x20074ef0",
+      "image_offset": 998076
+    },
+    "0x0052bac0": {
+      "value": "0xe000ed04",
+      "image_offset": 998080
+    },
+    "0x0052bac4": {
+      "value": "0x20073230",
+      "image_offset": 998084
+    },
+    "0x004b4da4": {
+      "value": "0x20074fcb",
+      "image_offset": 511396
+    },
+    "0x004b4d94": {
+      "value": "0x20074640",
+      "image_offset": 511380
+    }
+  },
+  "pass": true,
+  "wsf_state_clear_sequence": {
+    "entry": "0x0043c0e4",
+    "size": 102,
+    "sha256": "34da1a99d5cb56ca41cfaff98190ced2a7767f53cd95c53c504009566e9ca10a",
+    "description": "8-byte Ghidra function entry falls through into aligned byte/halfword and word-fill body ending at 0x43c148; WsfOsInit calls it with state base, length 0x40, fill 0."
+  },
+  "stack_init_registration_calls": [
+    "0x004b7ff4",
+    "0x004b8002",
+    "0x004b803e",
+    "0x004b8058",
+    "0x004b8072",
+    "0x004b8096",
+    "0x004b80a4",
+    "0x004b80b2"
+  ],
+  "radio_registration": "WsfOsInit clears the 0x40-byte state object via the 0x43c0e4 fallthrough fill path, so the next-handler counter at +0x3d is zero before registration. The eighth WsfOsSetNextHandler call returns 7; HciDrvHandlerInit stores that returned byte to 0x20074fcb."
+}

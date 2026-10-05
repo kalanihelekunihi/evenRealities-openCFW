@@ -1,0 +1,104 @@
+
+g2/build/foundation/rtos-tick-wsf-diagnostic-o2/rtos_tick_wsf.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00010000 <xTaskIncrementTick>:
+   10000:	e92d 43f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, lr}
+   10004:	b081      	sub	sp, #4
+   10006:	f644 2624 	movw	r6, #18980	@ 0x4a24
+   1000a:	f2c2 0607 	movt	r6, #8199	@ 0x2007
+   1000e:	6b70      	ldr	r0, [r6, #52]	@ 0x34
+   10010:	b120      	cbz	r0, 1001c <xTaskIncrementTick+0x1c>
+   10012:	69f0      	ldr	r0, [r6, #28]
+   10014:	2400      	movs	r4, #0
+   10016:	3001      	adds	r0, #1
+   10018:	61f0      	str	r0, [r6, #28]
+   1001a:	e062      	b.n	100e2 <xTaskIncrementTick+0xe2>
+   1001c:	6930      	ldr	r0, [r6, #16]
+   1001e:	f110 0901 	adds.w	r9, r0, #1
+   10022:	f8c6 9010 	str.w	r9, [r6, #16]
+   10026:	d314      	bcc.n	10052 <xTaskIncrementTick+0x52>
+   10028:	6830      	ldr	r0, [r6, #0]
+   1002a:	6800      	ldr	r0, [r0, #0]
+   1002c:	2800      	cmp	r0, #0
+   1002e:	d15c      	bne.n	100ea <xTaskIncrementTick+0xea>
+   10030:	6830      	ldr	r0, [r6, #0]
+   10032:	6871      	ldr	r1, [r6, #4]
+   10034:	6031      	str	r1, [r6, #0]
+   10036:	6070      	str	r0, [r6, #4]
+   10038:	6a70      	ldr	r0, [r6, #36]	@ 0x24
+   1003a:	3001      	adds	r0, #1
+   1003c:	6270      	str	r0, [r6, #36]	@ 0x24
+   1003e:	6830      	ldr	r0, [r6, #0]
+   10040:	6800      	ldr	r0, [r0, #0]
+   10042:	b118      	cbz	r0, 1004c <xTaskIncrementTick+0x4c>
+   10044:	6830      	ldr	r0, [r6, #0]
+   10046:	68c0      	ldr	r0, [r0, #12]
+   10048:	6800      	ldr	r0, [r0, #0]
+   1004a:	e001      	b.n	10050 <xTaskIncrementTick+0x50>
+   1004c:	f04f 30ff 	mov.w	r0, #4294967295	@ 0xffffffff
+   10050:	62f0      	str	r0, [r6, #44]	@ 0x2c
+   10052:	6af0      	ldr	r0, [r6, #44]	@ 0x2c
+   10054:	f24a 489c 	movw	r8, #42140	@ 0xa49c
+   10058:	4581      	cmp	r9, r0
+   1005a:	f2c2 0806 	movt	r8, #8198	@ 0x2006
+   1005e:	d201      	bcs.n	10064 <xTaskIncrementTick+0x64>
+   10060:	2400      	movs	r4, #0
+   10062:	e030      	b.n	100c6 <xTaskIncrementTick+0xc6>
+   10064:	6830      	ldr	r0, [r6, #0]
+   10066:	2400      	movs	r4, #0
+   10068:	6800      	ldr	r0, [r0, #0]
+   1006a:	e015      	b.n	10098 <xTaskIncrementTick+0x98>
+   1006c:	6af8      	ldr	r0, [r7, #44]	@ 0x2c
+   1006e:	6971      	ldr	r1, [r6, #20]
+   10070:	4288      	cmp	r0, r1
+   10072:	bf84      	itt	hi
+   10074:	6170      	strhi	r0, [r6, #20]
+   10076:	6af8      	ldrhi	r0, [r7, #44]	@ 0x2c
+   10078:	eb00 0080 	add.w	r0, r0, r0, lsl #2
+   1007c:	eb08 0080 	add.w	r0, r8, r0, lsl #2
+   10080:	4629      	mov	r1, r5
+   10082:	f000 f905 	bl	10290 <vListInsertEnd>
+   10086:	6af8      	ldr	r0, [r7, #44]	@ 0x2c
+   10088:	f856 1c04 	ldr.w	r1, [r6, #-4]
+   1008c:	6ac9      	ldr	r1, [r1, #44]	@ 0x2c
+   1008e:	6832      	ldr	r2, [r6, #0]
+   10090:	4288      	cmp	r0, r1
+   10092:	bf88      	it	hi
+   10094:	2401      	movhi	r4, #1
+   10096:	6810      	ldr	r0, [r2, #0]
+   10098:	b190      	cbz	r0, 100c0 <xTaskIncrementTick+0xc0>
+   1009a:	6830      	ldr	r0, [r6, #0]
+   1009c:	68c0      	ldr	r0, [r0, #12]
+   1009e:	68c7      	ldr	r7, [r0, #12]
+   100a0:	463d      	mov	r5, r7
+   100a2:	f855 0f04 	ldr.w	r0, [r5, #4]!
+   100a6:	4581      	cmp	r9, r0
+   100a8:	d30c      	bcc.n	100c4 <xTaskIncrementTick+0xc4>
+   100aa:	4628      	mov	r0, r5
+   100ac:	f000 f8fe 	bl	102ac <uxListRemove>
+   100b0:	6ab8      	ldr	r0, [r7, #40]	@ 0x28
+   100b2:	2800      	cmp	r0, #0
+   100b4:	d0da      	beq.n	1006c <xTaskIncrementTick+0x6c>
+   100b6:	f107 0018 	add.w	r0, r7, #24
+   100ba:	f000 f8f7 	bl	102ac <uxListRemove>
+   100be:	e7d5      	b.n	1006c <xTaskIncrementTick+0x6c>
+   100c0:	f04f 30ff 	mov.w	r0, #4294967295	@ 0xffffffff
+   100c4:	62f0      	str	r0, [r6, #44]	@ 0x2c
+   100c6:	f856 0c04 	ldr.w	r0, [r6, #-4]
+   100ca:	6ac0      	ldr	r0, [r0, #44]	@ 0x2c
+   100cc:	eb00 0080 	add.w	r0, r0, r0, lsl #2
+   100d0:	f858 0020 	ldr.w	r0, [r8, r0, lsl #2]
+   100d4:	2801      	cmp	r0, #1
+   100d6:	bf88      	it	hi
+   100d8:	2401      	movhi	r4, #1
+   100da:	6a30      	ldr	r0, [r6, #32]
+   100dc:	2800      	cmp	r0, #0
+   100de:	bf18      	it	ne
+   100e0:	2401      	movne	r4, #1
+   100e2:	4620      	mov	r0, r4
+   100e4:	b001      	add	sp, #4
+   100e6:	e8bd 83f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, pc}
+   100ea:	f000 f8ff 	bl	102ec <opencfw_event_group_assert_failure>

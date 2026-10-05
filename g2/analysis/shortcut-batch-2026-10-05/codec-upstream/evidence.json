@@ -1,0 +1,67 @@
+{
+  "task": "bounded held-out codec upstream comparison",
+  "target": {
+    "path": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+    "size_bytes": 326092,
+    "sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0"
+  },
+  "upstream": {
+    "repository": "third-party/upstream/nationalchip-lvp-kws",
+    "commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+    "license_file": "third-party/upstream/nationalchip-lvp-kws/LICENSE",
+    "license": "MIT"
+  },
+  "selected_candidate": {
+    "symbol": "gx_i2s_set_five_wire_mode",
+    "object": "third-party/upstream/nationalchip-lvp-kws/drivers_lib/i2s/v2.0/i2s.o",
+    "object_sha256": "97706af775b19c9f71715545ba0ee5df924fb8b90bd0b59e21c786cdf945902c",
+    "elf_identity": "ELF32 little-endian, C-SKY relocatable object",
+    "text_section": ".text.gx_i2s_set_five_wire_mode",
+    "text_section_size": 830,
+    "text_section_sha256": "1ea213d3973418cb1210fe2113b89b5dca1de001779cd0533217c9c0f9c0bb81",
+    "relocation_section": ".rela.text.gx_i2s_set_five_wire_mode",
+    "relocation_section_size": 132,
+    "relocation_entries": 11,
+    "raw_exact_occurrences_in_full_payload": 0,
+    "firmware_address": null,
+    "firmware_interval": null,
+    "classification": "no exact stored-byte match; unresolved attribution",
+    "limits": [
+      "No relocation normalization was performed.",
+      "No driver implementation C source is present in the checkout; only the public API header and compiled object are available.",
+      "A no-hit raw-byte test does not prove the routine is absent or behaviorally different."
+    ]
+  },
+  "source_interface": {
+    "path": "third-party/upstream/nationalchip-lvp-kws/include/driver/gx_i2s/gx_i2s_v2.h",
+    "sha256": "72d6d76166f4b98c9a20976ac9fba94fb167501df193f4b2200bed5d5a21aece",
+    "declaration": "int gx_i2s_set_five_wire_mode(GX_I2S_FIVE_WIRE_MODE mode);",
+    "documented_return": "0 on success; -1 on failure",
+    "mode_count": 12,
+    "interpretation_limit": "interface only; no proof of callsites or implementation identity in stock firmware"
+  },
+  "prior_matches_reproduced_but_excluded": [
+    {"symbol":"dw_uart_putc","payload_offset":"0x0C7D8","size":20,"sha256":"1f4ed6b18e87573e69112e1d7fc0b8378b84800af4d996e1ecc65548a2f901e4","already_in":"g2/symbols/codec.tsv"},
+    {"symbol":"dw_uart_getc","payload_offset":"0x02F1E","size":22,"sha256":"c5d6c54401661b9f6d125e908d924fd0ece45aabcfe561b4f6f3e7d70ab32fd5","already_in":"g2/symbols/codec.tsv"},
+    {"symbol":"dw_uart_getc","payload_offset":"0x0C7EC","size":22,"sha256":"c5d6c54401661b9f6d125e908d924fd0ece45aabcfe561b4f6f3e7d70ab32fd5","already_in":"g2/symbols/codec.tsv"},
+    {"symbol":"dw_uart_isr","payload_offset":"0x0C804","size":230,"sha256":"209f9a30c999412f1851036eeb88714b1d92d480b582afe7d26f6ca734fe765d","already_in":"g2/symbols/codec.tsv"},
+    {"symbol":"dw_uart_get_fifo_depth","payload_offset":"0x0C8EC","size":102,"sha256":"4ccb093045f731e97bc6cd205845b906dde4220acb76ddc552789b03e5a5ed72","already_in":"g2/symbols/codec.tsv"},
+    {"symbol":"dw_uart_get_dma_burst_size","payload_offset":"0x0C5DC","size":114,"sha256":"847674217ed0b989467a09bfb4e51ede4f8cb1f650ee76a01fab85204b8d2114","already_in":"g2/symbols/codec.tsv"}
+  ],
+  "increment": {
+    "new_verified_ranges": 0,
+    "new_verified_bytes": 0,
+    "baseline_reference": "g2/docs/reference/toolchains.md:242-244",
+    "baseline_matches": 102,
+    "baseline_distinct_symbols": 68,
+    "baseline_bytes": 5374,
+    "baseline_eligible_sections": 151,
+    "baseline_changed": false
+  },
+  "gxdnn_license": {
+    "repository": "third-party/upstream/nationalchip-gxdnn",
+    "commit": "0637b47c8fa0031f8f5651a903cd7d14716382fd",
+    "status": "no licence declared in third-party/README.md",
+    "claim": "no licensed-source attribution or byte match from gxdnn is asserted"
+  }
+}

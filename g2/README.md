@@ -48,6 +48,15 @@ Upstream libraries are pinned as submodules in
 
 ## Commands
 
+The user-authorized bounded foundation implementation adds
+[`components/foundation/touch_scb/`](components/foundation/touch_scb/README.md)
+and [optional resource preservation](tools/RESOURCE_PRESERVATION.md).
+`make foundation-test` compiles/tests the callback-based C component and the
+lossless local resource path; `make foundation-object` builds a freestanding
+Cortex-M0+ object. These are reusable components and tools; they are
+not target-linked firmware providers or evidence that the corpus freeze/source
+build gates passed. The locked reference providers remain unchanged.
+
 ```sh
 make -C g2 test              # kept tool tests; payload-dependent ones skip if absent
 make -C g2 reference         # byte-identical repack of the official payloads
@@ -65,3 +74,9 @@ references above, and the files are in Git history (commit `832137ec`).
 
 The history contains official-derived firmware under `g2/.tmp-*` paths. Do not
 publish or mirror it as-is.
+
+The source-backed [Ambiq MSPI interrupt subset](components/foundation/ambiq_mspi/README.md)
+has a standalone Cortex-M55 callable simulator target:
+`make ambiq-mspi-simulator` / `make ambiq-mspi-simulator-test`. It is not a
+bootable production provider; clocks, IRQ/DMA and board initialization remain
+external to its synthetic tests.

@@ -1,0 +1,28 @@
+{
+  "status": "PASS_WITH_BOUNDED_SCOPE",
+  "reviewed": {
+    "verifier": "g2/components/foundation/freertos_tick/simulator/verify.py",
+    "result": "g2/build/foundation/rtos-tick-wsf-simulator/comparison-verified.json",
+    "result_case_count": 271,
+    "unique_original_trace_bytes": 2404,
+    "firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "elf_sha256": "035f8480636e0152f664ee16cd247145f97fd3165ac9feb21e95d6f2f7d302b7",
+    "focused_test": "python3 -m unittest g2.tests.test_freertos_tick",
+    "focused_test_result": "3 tests passed"
+  },
+  "checks": {
+    "pinned_source_function_text": "tick and reset-helper hashes match pinned V10.5.1 source; tests retain MIT notice",
+    "case_model": "multi-due and mixed-priority expiry, future deadlines, active/overflow rollover, event unlink, time slicing, deferred tick replay, list graph and yields checked independently",
+    "source_manifest": "all five tick-component hashes match current files",
+    "build_provenance": "all 110 listed input/evidence paths and SHA256 values match current files; includes Makefile, linked C/H inputs, build/link log, tool versions, profiles, ELF, final result, and aggregate",
+    "profile": "new tick/resume/list/provider objects use the documented O0 semantic-test profile; existing linked objects retain O2; no firmware optimization or byte-equality claim",
+    "emulator_policy": "symmetric top-level executable-cache invalidation only; no call restart or instruction/register substitution; O2 diagnostics excluded from PASS"
+  },
+  "limits": [
+    "Task, list, and global state are synthetic inputs.",
+    "Physical SysTick startup/interrupt/frequency, task selection/context switching, full kernel/object lifecycle, and hardware remain unverified.",
+    "EventGroup unordered-unblock and selected scheduler/WSF/application providers remain fixtures.",
+    "The O0 profile is a bounded simulator semantic check, not a production build profile or byte-identical bundle proof."
+  ],
+  "blockers": []
+}

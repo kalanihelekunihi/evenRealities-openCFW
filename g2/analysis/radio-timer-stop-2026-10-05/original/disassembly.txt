@@ -1,0 +1,92 @@
+timer_stop
+0052a4d2 10b5       push {r4, lr}
+0052a4d4 0400       movs r4, r0
+0052a4d6 01f0f7f9   bl #0x52b8c8
+0052a4da 2000       movs r0, r4
+0052a4dc fff78eff   bl #0x52a3fc
+0052a4e0 01f0f6f9   bl #0x52b8d0
+0052a4e4 10bd       pop {r4, pc}
+
+timer_remove
+0052a3fc 10b5       push {r4, lr}
+0052a3fe 0400       movs r4, r0
+0052a400 0022       movs r2, #0
+0052a402 8448       ldr r0, [pc, #0x210]
+0052a404 0168       ldr r1, [r0]
+0052a406 01e0       b #0x52a40c
+0052a408 0a00       movs r2, r1
+0052a40a 0968       ldr r1, [r1]
+0052a40c 0029       cmp r1, #0
+0052a40e 01d0       beq #0x52a414
+0052a410 a142       cmp r1, r4
+0052a412 f9d1       bne #0x52a408
+0052a414 0029       cmp r1, #0
+0052a416 04d0       beq #0x52a422
+0052a418 2100       movs r1, r4
+0052a41a 0ef055fc   bl #0x538cc8
+0052a41e 0020       movs r0, #0
+0052a420 6073       strb r0, [r4, #0xd]
+0052a422 10bd       pop {r4, pc}
+
+queue_remove
+00538cc8 70b5       push {r4, r5, r6, lr}
+00538cca 0500       movs r5, r0
+00538ccc 0e00       movs r6, r1
+00538cce 1400       movs r4, r2
+00538cd0 f2f7e8fd   bl #0x52b8a4
+00538cd4 2868       ldr r0, [r5]
+00538cd6 8642       cmp r6, r0
+00538cd8 02d1       bne #0x538ce0
+00538cda 3068       ldr r0, [r6]
+00538cdc 2860       str r0, [r5]
+00538cde 03e0       b #0x538ce8
+00538ce0 002c       cmp r4, #0
+00538ce2 01d0       beq #0x538ce8
+00538ce4 3068       ldr r0, [r6]
+00538ce6 2060       str r0, [r4]
+00538ce8 6868       ldr r0, [r5, #4]
+00538cea 8642       cmp r6, r0
+00538cec 00d1       bne #0x538cf0
+00538cee 6c60       str r4, [r5, #4]
+00538cf0 f2f7e1fd   bl #0x52b8b6
+00538cf4 70bd       pop {r4, r5, r6, pc}
+
+task_lock
+0052b8c8 80b5       push {r7, lr}
+0052b8ca fff7ebff   bl #0x52b8a4
+0052b8ce 01bd       pop {r0, pc}
+
+task_unlock
+0052b8d0 80b5       push {r7, lr}
+0052b8d2 fff7f0ff   bl #0x52b8b6
+0052b8d6 01bd       pop {r0, pc}
+
+cs_enter
+0052b8a4 8449       ldr r1, [pc, #0x210]
+0052b8a6 0878       ldrb r0, [r1]
+0052b8a8 0028       cmp r0, #0
+0052b8aa 00d1       bne #0x52b8ae
+0052b8ac 72b6       cpsid i
+0052b8ae 0878       ldrb r0, [r1]
+0052b8b0 401c       adds r0, r0, #1
+0052b8b2 0870       strb r0, [r1]
+0052b8b4 7047       bx lr
+
+cs_exit
+0052b8b6 8048       ldr r0, [pc, #0x200]
+0052b8b8 0178       ldrb r1, [r0]
+0052b8ba 491e       subs r1, r1, #1
+0052b8bc 0170       strb r1, [r0]
+0052b8be 0078       ldrb r0, [r0]
+0052b8c0 0028       cmp r0, #0
+0052b8c2 00d1       bne #0x52b8c6
+0052b8c4 62b6       cpsie i
+0052b8c6 7047       bx lr
+
+timer_gpio_shutdown_slice
+004b49d0 dff8c803   ldr.w r0, [pc, #0x3c8]
+004b49d4 75f07dfd   bl #0x52a4d2
+004b49d8 79f0c7f9   bl #0x52dd6a
+004b49dc 0020       movs r0, #0
+004b49de 7af076fa   bl #0x52eece
+004b49e2 79f0cbf9   bl #0x52dd7c

@@ -1,0 +1,82 @@
+{
+  "reconstructed_consumer": "g2/components/foundation/radio_gpio/radio_gpio.c",
+  "classification": "reconstruction, not upstream source or byte-identical compiler output",
+  "upstream_gpio_dependency": {
+    "upstream_commit": "5efc0228528a8adce5eae0d226fac85d2551eb3b",
+    "upstream_repository": "https://github.com/AmbiqMicro/ambiqhal_ambiq",
+    "upstream_files": {
+      "am_hal_gpio.c": {
+        "git_blob_sha1": "6cd2b65fe67f26ba14df0a7ee4ec56100c46a6ba",
+        "sha256": "93aa1e6eb28fabea5f0a41c0288451fb381b64070f59638b3d250da6a7430ccf"
+      },
+      "am_hal_gpio.h": {
+        "git_blob_sha1": "9cbc5ea43722c16ede6f577457db5da2c11ddad6",
+        "sha256": "6c8d3cf841feab4df2c4ab79bd7d62cf4afe3a98b7bdf1035ea9a2aa98430ec7"
+      }
+    },
+    "unchanged_function_text_sha256": {
+      "am_hal_gpio_interrupt_irq_status_get": "76d9c962af290d3d5a297d964cc5ce89f233218faa9161e9b5dc6290117a8ec5",
+      "am_hal_gpio_interrupt_irq_clear": "ec8ac4bbca22a27e0596d7072c58e9c6ffb1aeacb839199f1c6e89f6f65f7084",
+      "am_hal_gpio_interrupt_register": "a51c7e0de39a1826f7362c0790c94252a065ee05d4b13a3882fb6f53c2d2b470",
+      "am_hal_gpio_interrupt_service": "6b52e8b693a64e356a8939fd9e570bf3b2ea1c1124ec4fa007fac2a4fa290e5f"
+    },
+    "license": "BSD-3-Clause Ambiq2025; original notice retained",
+    "adaptations": [
+      "ARM32 sparse GPIO view/fixed stock callback tables",
+      "Recovered IRQ enum/bank strides, actual PRIMASK entry/restore",
+      "Compile-fwrapv defines upstream signed negation wrapping including bit31"
+    ],
+    "limits": "Not a full GPIO/init/board driver; pins/callback publication/physical interrupts/scheduling unproven"
+  },
+  "stock_image": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+  "stock_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "base": "0x438000",
+  "preamble_bytes": 32,
+  "ranges": [
+    {
+      "start": "0x4b4a98",
+      "bytes": 26,
+      "sha256": "8aaad9561f503147d8dab516f5dcbed5b36fdef2ad0dc7965c8e1dc2a136ca28"
+    },
+    {
+      "start": "0x4b49a8",
+      "bytes": 14,
+      "sha256": "b5c04487554fd46730be05e7ef5bc3f658a2fd428d98e1b0295cd827098e4831"
+    },
+    {
+      "start": "0x4b80be",
+      "bytes": 44,
+      "sha256": "853386f3b04b6575390704f2a8a5defabe043bcf472e4dc6487b83ca973ae685"
+    },
+    {
+      "start": "0x52dd58",
+      "bytes": 18,
+      "sha256": "aedb4ffba6805e45177f09ff5349fd999e30f76fa040aef376aeeb76c55e8f54"
+    },
+    {
+      "start": "0x52dd6a",
+      "bytes": 18,
+      "sha256": "cf43eac442b7bf5ad96666ee22a31ebcb70eb5e547de39644e18d115abbb681a"
+    },
+    {
+      "start": "0x4b49b6",
+      "bytes": 18,
+      "sha256": "eb79be882eebd5db7503a7f06c7cacb343e90288510076678c4ba93c2dddb82d"
+    },
+    {
+      "start": "0x4810b0",
+      "bytes": 582,
+      "sha256": "be21713c06a339f82b208a72294f0c9d573a7822128b69e06ae5a4fe2770f5a6"
+    },
+    {
+      "start": "0x4b4768",
+      "bytes": 30,
+      "sha256": "1035348ab98d999ddd9ad2f9a2f77fb3cd32ac1ea0d27ba67e9add9babec3208"
+    },
+    {
+      "start": "0x4b4786",
+      "bytes": 40,
+      "sha256": "750578da18c9e9167c290dedf7885699f8350b18ff6f52fe1c09a1a171882c8a"
+    }
+  ]
+}

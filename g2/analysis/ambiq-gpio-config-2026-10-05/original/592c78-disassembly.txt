@@ -1,0 +1,23 @@
+00592c78: 10b5     push       {r4, lr}
+00592c7a: 0120     movs       r0, #1
+00592c7c: 76f787fb bl         #0x50938e
+00592c80: 0400     movs       r4, r0
+00592c82: 2078     ldrb       r0, [r4]
+00592c84: 0328     cmp        r0, #3
+00592c86: 05da     bge        #0x592c94
+00592c88: dff8440c ldr.w      r0, [pc, #0xc44]
+00592c8c: 0168     ldr        r1, [r0]
+00592c8e: 8f20     movs       r0, #0x8f
+00592c90: eef63cf9 bl         #0x480f0c
+00592c94: 2078     ldrb       r0, [r4]
+00592c96: 0428     cmp        r0, #4
+00592c98: 05da     bge        #0x592ca6
+00592c9a: dff8340c ldr.w      r0, [pc, #0xc34]
+00592c9e: 0168     ldr        r1, [r0]
+00592ca0: 8020     movs       r0, #0x80
+00592ca2: eef633f9 bl         #0x480f0c
+00592ca6: dff8280c ldr.w      r0, [pc, #0xc28]
+00592caa: 0168     ldr        r1, [r0]
+00592cac: 8e20     movs       r0, #0x8e
+00592cae: eef62df9 bl         #0x480f0c
+00592cb2: 10bd     pop        {r4, pc}

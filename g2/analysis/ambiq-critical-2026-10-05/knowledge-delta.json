@@ -1,0 +1,17 @@
+{
+  "real_critical_cases": 435,
+  "new_original_execution_bytes": 8,
+  "new_exact_compiled_match_bytes": 8,
+  "previous_bounded_execution_bytes": 936,
+  "cumulative_bounded_execution_bytes": 944,
+  "removed_stub": "0x473940",
+  "remaining_stub": "delay0x4807a0",
+  "aggregate": {
+    "tests_run": 185,
+    "passed": 179,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 7
+  },
+  "limits": "Only delay0x4807a0 intercepted on BOTH sides; actual MRS/CPSID and PRIMASK restore execute in privileged serialized Unicorn state. Protected CQ index/address reads occur with PRIMASK1, prior mask restored. No actual interrupt delivery, scheduler interleavings, unprivileged enforcement, wall-clock or ROM timing proof."
+}

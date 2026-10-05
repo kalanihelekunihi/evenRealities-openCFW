@@ -1,0 +1,82 @@
+{
+  "status": "PASS",
+  "case_count": 102,
+  "original_unique_instruction_bytes": 174,
+  "new_nonoverlapping_bytes_vs_old_partition": 174,
+  "prior_bounded_touch_mspi_bytes": 464,
+  "cumulative_bounded_bytes": 638,
+  "new_exact_compiled_upstream_match_bytes": 0,
+  "new_typed_resource_bytes": 0,
+  "aggregate": {
+    "total_modules": 31,
+    "completed_modules": 31,
+    "totals": {
+      "tests_run": 180,
+      "passed": 174,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 7
+    },
+    "unrun_modules": []
+  },
+  "previous_byte_map_code_bytes": 1570,
+  "code_bytes_with_three_nonoverlapping_cycle_overlays": 2208,
+  "overlay_only": "Older map unchanged; this cumulative sum is observed execution evidence, not whole-code coverage or reviewed receipt coverage.",
+  "state_offsets": {
+    "prefix": 0,
+    "module": 4,
+    "tcb_slot": 24,
+    "cq_pending": 32,
+    "hp_pending": 2112,
+    "xip_delay_argument": 2252
+  },
+  "new_ranges": [
+    {
+      "classification": "code",
+      "subtype": "executed-original-with-explicit-external-call-stubs",
+      "payload": "apollo_main",
+      "payload_range": [
+        560840,
+        560958
+      ],
+      "bundle_start": 1338671,
+      "bundle_end_exclusive": 1338789,
+      "bytes": 118,
+      "sha256": "ed26e7d54404bbf50b8edbe0b10fd5f264caef39b8aed9fe466f3d41233f794d",
+      "runtime": [
+        4984488,
+        4984606
+      ],
+      "name": "am_hal_mspi_disable",
+      "evidence": "g2/build/foundation/ambiq-mspi-lifecycle-final/lifecycle-comparison-reviewed.json",
+      "previous_classification": "unresolved",
+      "attribution": "bounded source/behavior correspondence, exact compiler-byte match unproven"
+    },
+    {
+      "classification": "code",
+      "subtype": "executed-original-with-explicit-external-call-stubs",
+      "payload": "apollo_main",
+      "payload_range": [
+        560964,
+        561020
+      ],
+      "bundle_start": 1338795,
+      "bundle_end_exclusive": 1338851,
+      "bytes": 56,
+      "sha256": "17e2e38a57e5a1669a591cf61ad92ff4b5ca8a1747673512410737ac452d689b",
+      "runtime": [
+        4984612,
+        4984668
+      ],
+      "name": "am_hal_mspi_deinitialize",
+      "evidence": "g2/build/foundation/ambiq-mspi-lifecycle-final/lifecycle-comparison-reviewed.json",
+      "previous_classification": "unresolved",
+      "attribution": "bounded source/behavior correspondence, exact compiler-byte match unproven"
+    }
+  ],
+  "remaining_provider_boundaries": [
+    "0x4bfd62",
+    "0x4bfc86",
+    "0x4807a0"
+  ]
+}

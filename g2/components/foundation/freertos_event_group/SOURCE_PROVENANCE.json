@@ -1,0 +1,63 @@
+{
+  "upstream_repository": "https://github.com/FreeRTOS/FreeRTOS-Kernel",
+  "upstream_commit": "def7d2df2b0506d3d249334974f51e427c17a41c",
+  "version": "V10.5.1",
+  "license": "MIT; full Amazon notice retained in copied files",
+  "upstream_files": [
+    {
+      "path": "event_groups.c",
+      "git_blob": "9313455a96a52c0d5e44cd0acd96a9248f2aee7f",
+      "sha256": "76e967b14d231e4f31f014f1564f359a7bfd36bfa263ee6f437afa8c056df657",
+      "url": "https://github.com/FreeRTOS/FreeRTOS-Kernel/blob/def7d2df2b0506d3d249334974f51e427c17a41c/event_groups.c"
+    },
+    {
+      "path": "timers.c",
+      "git_blob": "6b7be77c24b3233ca730278bda9451b8e4f99613",
+      "sha256": "24962ef361f396aaa5e6e33776eeeddaf2fb251c87b6fe50602acc56c537b093",
+      "url": "https://github.com/FreeRTOS/FreeRTOS-Kernel/blob/def7d2df2b0506d3d249334974f51e427c17a41c/timers.c"
+    }
+  ],
+  "unchanged_function_text_sha256": {
+    "xEventGroupSetBits": "ae9e13484fbdac75458636bfe94b7638c64bb3b22154df3425635a081c45181e",
+    "vEventGroupSetBitsCallback": "9619dd0e031d83339f30d1090f130289c72a5b39b28bf45c6527727ba580ec28",
+    "xEventGroupSetBitsFromISR": "f03378f95407b7b5b674b23b86e64b4b84dbaca4f8a0f8093c8056ac556c2b0b",
+    "xTimerPendFunctionCallFromISR": "46ade151004293ea744455b5f40dbe40c5efc1cab08d7bb9740126a103ce77ea"
+  },
+  "adaptations": [
+    "Sparse stock ARM32EventGroup/List ABI,32-bit ticks,event control flags highbyte",
+    "Timerqueue pointer read from stockglobal20074ab0",
+    "Trace/coverage macros compileout,API configASSERT routes noreturndiagnosticprovider",
+    "WSFadapters replace prior genericnotificationfixtures; scheduler/listunblock/queue-send actualproviders stillrequired"
+  ],
+  "limits": "Function texts unchanged but private compiler/config/source completeness and scheduler execution not claimed",
+  "original_ranges": [
+    {
+      "name": "xEventGroupSetBits",
+      "start": "0x47ed76",
+      "bytes": 168,
+      "sha256": "38b05fcf35bc59fd639e8a540e0e211d5d2a7026d1ad5fce97cd27f573084133",
+      "census_note": "Originalcensus hash matches; identity corrected from formerfirst-partyunverified by pinned source/caller evidence"
+    },
+    {
+      "name": "vEventGroupSetBitsCallback",
+      "start": "0x47ee1e",
+      "bytes": 8,
+      "sha256": "3497dc0fa15f3c8bf59fea82f558007401ba0b03fc81a0fb1c3087ce1a9b6a73",
+      "census_note": "Omitted from prior symbol census; authenticated direct callback literal and original execution"
+    },
+    {
+      "name": "xEventGroupSetBitsFromISR",
+      "start": "0x47ee4a",
+      "bytes": 16,
+      "sha256": "449cf0bddf14c2b354d9a5d9a5610794c6087b1ef0ce99ab1c078e775877f996",
+      "census_note": "Originalcensus hash matches; identity corrected from formerfirst-partyunverified by pinned source/caller evidence"
+    },
+    {
+      "name": "xTimerPendFunctionCallFromISR",
+      "start": "0x47eb4a",
+      "bytes": 34,
+      "sha256": "0f7e8ec569481e5d0a1df6d44f8290da903768e0f31f129e19aa51429f203460",
+      "census_note": "Originalcensus hash matches; identity corrected from formerfirst-partyunverified by pinned source/caller evidence"
+    }
+  ]
+}

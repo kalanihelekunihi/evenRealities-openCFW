@@ -1,0 +1,3431 @@
+{
+  "status": "PASS",
+  "cases": [
+    {
+      "operation": "disable",
+      "name": "disabled",
+      "inputs": {
+        "prefix": 29277886,
+        "module": 0,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 29277886,
+      "final_module": 0
+    },
+    {
+      "operation": "disable",
+      "name": "disabled_busy",
+      "inputs": {
+        "prefix": 29277886,
+        "module": 0,
+        "tcb": 0,
+        "cq": 3,
+        "hp": 4,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 29277886,
+      "final_module": 0
+    },
+    {
+      "operation": "disable",
+      "name": "no_tcb",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 0,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 0
+        }
+      ],
+      "final_prefix": 29277886,
+      "final_module": 0
+    },
+    {
+      "operation": "disable",
+      "name": "xip_delay",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 0,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 1,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [
+        [
+          3,
+          17,
+          0
+        ]
+      ],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 1
+        },
+        {
+          "call": [
+            3,
+            17,
+            0
+          ]
+        }
+      ],
+      "final_prefix": 29277886,
+      "final_module": 0
+    },
+    {
+      "operation": "disable",
+      "name": "xip_reserved",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 0,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 2147483648,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 2147483648
+        }
+      ],
+      "final_prefix": 29277886,
+      "final_module": 0
+    },
+    {
+      "operation": "disable",
+      "name": "cq_busy",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 0,
+        "tcb": 0,
+        "cq": 1,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 3,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 62832318,
+      "final_module": 0
+    },
+    {
+      "operation": "disable",
+      "name": "hp_busy",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 0,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 1,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 3,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 62832318,
+      "final_module": 0
+    },
+    {
+      "operation": "disable",
+      "name": "both_busy",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 0,
+        "tcb": 0,
+        "cq": 4294967295,
+        "hp": 4294967295,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 3,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 62832318,
+      "final_module": 0
+    },
+    {
+      "operation": "disable",
+      "name": "cq_success",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 0,
+        "tcb": 536903680,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [
+        [
+          1,
+          536875008,
+          62832318
+        ],
+        [
+          2,
+          536875008,
+          62832318
+        ]
+      ],
+      "timeline": [
+        {
+          "call": [
+            1,
+            536875008,
+            62832318
+          ]
+        },
+        {
+          "call": [
+            2,
+            536875008,
+            62832318
+          ]
+        },
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 0
+        }
+      ],
+      "final_prefix": 29277886,
+      "final_module": 0
+    },
+    {
+      "operation": "disable",
+      "name": "cq_failure",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 0,
+        "tcb": 536903680,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 13,
+        "null": false
+      },
+      "return": 13,
+      "calls": [
+        [
+          1,
+          536875008,
+          62832318
+        ]
+      ],
+      "timeline": [
+        {
+          "call": [
+            1,
+            536875008,
+            62832318
+          ]
+        }
+      ],
+      "final_prefix": 62832318,
+      "final_module": 0
+    },
+    {
+      "operation": "disable",
+      "name": "cq_failure_xip",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 0,
+        "tcb": 536903680,
+        "cq": 0,
+        "hp": 0,
+        "xip": 1,
+        "delay": 17,
+        "cq_status": 13,
+        "null": false
+      },
+      "return": 13,
+      "calls": [
+        [
+          1,
+          536875008,
+          62832318
+        ]
+      ],
+      "timeline": [
+        {
+          "call": [
+            1,
+            536875008,
+            62832318
+          ]
+        }
+      ],
+      "final_prefix": 62832318,
+      "final_module": 0
+    },
+    {
+      "operation": "disable",
+      "name": "xip_max_delay",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 0,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 1,
+        "delay": 4294967295,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [
+        [
+          3,
+          4294967295,
+          0
+        ]
+      ],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 1
+        },
+        {
+          "call": [
+            3,
+            4294967295,
+            0
+          ]
+        }
+      ],
+      "final_prefix": 29277886,
+      "final_module": 0
+    },
+    {
+      "operation": "disable",
+      "name": "cq_xip",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 0,
+        "tcb": 536903680,
+        "cq": 0,
+        "hp": 0,
+        "xip": 2147483649,
+        "delay": 0,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [
+        [
+          1,
+          536875008,
+          62832318
+        ],
+        [
+          2,
+          536875008,
+          62832318
+        ],
+        [
+          3,
+          0,
+          0
+        ]
+      ],
+      "timeline": [
+        {
+          "call": [
+            1,
+            536875008,
+            62832318
+          ]
+        },
+        {
+          "call": [
+            2,
+            536875008,
+            62832318
+          ]
+        },
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 2147483649
+        },
+        {
+          "call": [
+            3,
+            0,
+            0
+          ]
+        }
+      ],
+      "final_prefix": 29277886,
+      "final_module": 0
+    },
+    {
+      "operation": "disable",
+      "name": "null",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 0,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": true
+      },
+      "return": 2,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 62832318,
+      "final_module": 0
+    },
+    {
+      "operation": "disable",
+      "name": "bad_magic",
+      "inputs": {
+        "prefix": 62832319,
+        "module": 0,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 2,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 62832319,
+      "final_module": 0
+    },
+    {
+      "operation": "disable",
+      "name": "not_initialized",
+      "inputs": {
+        "prefix": 46055102,
+        "module": 0,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 2,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 46055102,
+      "final_module": 0
+    },
+    {
+      "operation": "disable",
+      "name": "reserved_flags",
+      "inputs": {
+        "prefix": 4290690750,
+        "module": 0,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 4257136318
+        },
+        {
+          "xip_read": 0
+        }
+      ],
+      "final_prefix": 4257136318,
+      "final_module": 0
+    },
+    {
+      "operation": "disable",
+      "name": "disabled",
+      "inputs": {
+        "prefix": 29277886,
+        "module": 1,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 29277886,
+      "final_module": 1
+    },
+    {
+      "operation": "disable",
+      "name": "disabled_busy",
+      "inputs": {
+        "prefix": 29277886,
+        "module": 1,
+        "tcb": 0,
+        "cq": 3,
+        "hp": 4,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 29277886,
+      "final_module": 1
+    },
+    {
+      "operation": "disable",
+      "name": "no_tcb",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 1,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 0
+        }
+      ],
+      "final_prefix": 29277886,
+      "final_module": 1
+    },
+    {
+      "operation": "disable",
+      "name": "xip_delay",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 1,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 1,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [
+        [
+          3,
+          17,
+          0
+        ]
+      ],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 1
+        },
+        {
+          "call": [
+            3,
+            17,
+            0
+          ]
+        }
+      ],
+      "final_prefix": 29277886,
+      "final_module": 1
+    },
+    {
+      "operation": "disable",
+      "name": "xip_reserved",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 1,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 2147483648,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 2147483648
+        }
+      ],
+      "final_prefix": 29277886,
+      "final_module": 1
+    },
+    {
+      "operation": "disable",
+      "name": "cq_busy",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 1,
+        "tcb": 0,
+        "cq": 1,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 3,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 62832318,
+      "final_module": 1
+    },
+    {
+      "operation": "disable",
+      "name": "hp_busy",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 1,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 1,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 3,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 62832318,
+      "final_module": 1
+    },
+    {
+      "operation": "disable",
+      "name": "both_busy",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 1,
+        "tcb": 0,
+        "cq": 4294967295,
+        "hp": 4294967295,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 3,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 62832318,
+      "final_module": 1
+    },
+    {
+      "operation": "disable",
+      "name": "cq_success",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 1,
+        "tcb": 536903680,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [
+        [
+          1,
+          536875008,
+          62832318
+        ],
+        [
+          2,
+          536875008,
+          62832318
+        ]
+      ],
+      "timeline": [
+        {
+          "call": [
+            1,
+            536875008,
+            62832318
+          ]
+        },
+        {
+          "call": [
+            2,
+            536875008,
+            62832318
+          ]
+        },
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 0
+        }
+      ],
+      "final_prefix": 29277886,
+      "final_module": 1
+    },
+    {
+      "operation": "disable",
+      "name": "cq_failure",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 1,
+        "tcb": 536903680,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 13,
+        "null": false
+      },
+      "return": 13,
+      "calls": [
+        [
+          1,
+          536875008,
+          62832318
+        ]
+      ],
+      "timeline": [
+        {
+          "call": [
+            1,
+            536875008,
+            62832318
+          ]
+        }
+      ],
+      "final_prefix": 62832318,
+      "final_module": 1
+    },
+    {
+      "operation": "disable",
+      "name": "cq_failure_xip",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 1,
+        "tcb": 536903680,
+        "cq": 0,
+        "hp": 0,
+        "xip": 1,
+        "delay": 17,
+        "cq_status": 13,
+        "null": false
+      },
+      "return": 13,
+      "calls": [
+        [
+          1,
+          536875008,
+          62832318
+        ]
+      ],
+      "timeline": [
+        {
+          "call": [
+            1,
+            536875008,
+            62832318
+          ]
+        }
+      ],
+      "final_prefix": 62832318,
+      "final_module": 1
+    },
+    {
+      "operation": "disable",
+      "name": "xip_max_delay",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 1,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 1,
+        "delay": 4294967295,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [
+        [
+          3,
+          4294967295,
+          0
+        ]
+      ],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 1
+        },
+        {
+          "call": [
+            3,
+            4294967295,
+            0
+          ]
+        }
+      ],
+      "final_prefix": 29277886,
+      "final_module": 1
+    },
+    {
+      "operation": "disable",
+      "name": "cq_xip",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 1,
+        "tcb": 536903680,
+        "cq": 0,
+        "hp": 0,
+        "xip": 2147483649,
+        "delay": 0,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [
+        [
+          1,
+          536875008,
+          62832318
+        ],
+        [
+          2,
+          536875008,
+          62832318
+        ],
+        [
+          3,
+          0,
+          0
+        ]
+      ],
+      "timeline": [
+        {
+          "call": [
+            1,
+            536875008,
+            62832318
+          ]
+        },
+        {
+          "call": [
+            2,
+            536875008,
+            62832318
+          ]
+        },
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 2147483649
+        },
+        {
+          "call": [
+            3,
+            0,
+            0
+          ]
+        }
+      ],
+      "final_prefix": 29277886,
+      "final_module": 1
+    },
+    {
+      "operation": "disable",
+      "name": "null",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 1,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": true
+      },
+      "return": 2,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 62832318,
+      "final_module": 1
+    },
+    {
+      "operation": "disable",
+      "name": "bad_magic",
+      "inputs": {
+        "prefix": 62832319,
+        "module": 1,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 2,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 62832319,
+      "final_module": 1
+    },
+    {
+      "operation": "disable",
+      "name": "not_initialized",
+      "inputs": {
+        "prefix": 46055102,
+        "module": 1,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 2,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 46055102,
+      "final_module": 1
+    },
+    {
+      "operation": "disable",
+      "name": "reserved_flags",
+      "inputs": {
+        "prefix": 4290690750,
+        "module": 1,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 4257136318
+        },
+        {
+          "xip_read": 0
+        }
+      ],
+      "final_prefix": 4257136318,
+      "final_module": 1
+    },
+    {
+      "operation": "disable",
+      "name": "disabled",
+      "inputs": {
+        "prefix": 29277886,
+        "module": 2,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 29277886,
+      "final_module": 2
+    },
+    {
+      "operation": "disable",
+      "name": "disabled_busy",
+      "inputs": {
+        "prefix": 29277886,
+        "module": 2,
+        "tcb": 0,
+        "cq": 3,
+        "hp": 4,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 29277886,
+      "final_module": 2
+    },
+    {
+      "operation": "disable",
+      "name": "no_tcb",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 2,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 0
+        }
+      ],
+      "final_prefix": 29277886,
+      "final_module": 2
+    },
+    {
+      "operation": "disable",
+      "name": "xip_delay",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 2,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 1,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [
+        [
+          3,
+          17,
+          0
+        ]
+      ],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 1
+        },
+        {
+          "call": [
+            3,
+            17,
+            0
+          ]
+        }
+      ],
+      "final_prefix": 29277886,
+      "final_module": 2
+    },
+    {
+      "operation": "disable",
+      "name": "xip_reserved",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 2,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 2147483648,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 2147483648
+        }
+      ],
+      "final_prefix": 29277886,
+      "final_module": 2
+    },
+    {
+      "operation": "disable",
+      "name": "cq_busy",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 2,
+        "tcb": 0,
+        "cq": 1,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 3,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 62832318,
+      "final_module": 2
+    },
+    {
+      "operation": "disable",
+      "name": "hp_busy",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 2,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 1,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 3,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 62832318,
+      "final_module": 2
+    },
+    {
+      "operation": "disable",
+      "name": "both_busy",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 2,
+        "tcb": 0,
+        "cq": 4294967295,
+        "hp": 4294967295,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 3,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 62832318,
+      "final_module": 2
+    },
+    {
+      "operation": "disable",
+      "name": "cq_success",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 2,
+        "tcb": 536903680,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [
+        [
+          1,
+          536875008,
+          62832318
+        ],
+        [
+          2,
+          536875008,
+          62832318
+        ]
+      ],
+      "timeline": [
+        {
+          "call": [
+            1,
+            536875008,
+            62832318
+          ]
+        },
+        {
+          "call": [
+            2,
+            536875008,
+            62832318
+          ]
+        },
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 0
+        }
+      ],
+      "final_prefix": 29277886,
+      "final_module": 2
+    },
+    {
+      "operation": "disable",
+      "name": "cq_failure",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 2,
+        "tcb": 536903680,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 13,
+        "null": false
+      },
+      "return": 13,
+      "calls": [
+        [
+          1,
+          536875008,
+          62832318
+        ]
+      ],
+      "timeline": [
+        {
+          "call": [
+            1,
+            536875008,
+            62832318
+          ]
+        }
+      ],
+      "final_prefix": 62832318,
+      "final_module": 2
+    },
+    {
+      "operation": "disable",
+      "name": "cq_failure_xip",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 2,
+        "tcb": 536903680,
+        "cq": 0,
+        "hp": 0,
+        "xip": 1,
+        "delay": 17,
+        "cq_status": 13,
+        "null": false
+      },
+      "return": 13,
+      "calls": [
+        [
+          1,
+          536875008,
+          62832318
+        ]
+      ],
+      "timeline": [
+        {
+          "call": [
+            1,
+            536875008,
+            62832318
+          ]
+        }
+      ],
+      "final_prefix": 62832318,
+      "final_module": 2
+    },
+    {
+      "operation": "disable",
+      "name": "xip_max_delay",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 2,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 1,
+        "delay": 4294967295,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [
+        [
+          3,
+          4294967295,
+          0
+        ]
+      ],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 1
+        },
+        {
+          "call": [
+            3,
+            4294967295,
+            0
+          ]
+        }
+      ],
+      "final_prefix": 29277886,
+      "final_module": 2
+    },
+    {
+      "operation": "disable",
+      "name": "cq_xip",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 2,
+        "tcb": 536903680,
+        "cq": 0,
+        "hp": 0,
+        "xip": 2147483649,
+        "delay": 0,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [
+        [
+          1,
+          536875008,
+          62832318
+        ],
+        [
+          2,
+          536875008,
+          62832318
+        ],
+        [
+          3,
+          0,
+          0
+        ]
+      ],
+      "timeline": [
+        {
+          "call": [
+            1,
+            536875008,
+            62832318
+          ]
+        },
+        {
+          "call": [
+            2,
+            536875008,
+            62832318
+          ]
+        },
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 2147483649
+        },
+        {
+          "call": [
+            3,
+            0,
+            0
+          ]
+        }
+      ],
+      "final_prefix": 29277886,
+      "final_module": 2
+    },
+    {
+      "operation": "disable",
+      "name": "null",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 2,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": true
+      },
+      "return": 2,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 62832318,
+      "final_module": 2
+    },
+    {
+      "operation": "disable",
+      "name": "bad_magic",
+      "inputs": {
+        "prefix": 62832319,
+        "module": 2,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 2,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 62832319,
+      "final_module": 2
+    },
+    {
+      "operation": "disable",
+      "name": "not_initialized",
+      "inputs": {
+        "prefix": 46055102,
+        "module": 2,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 2,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 46055102,
+      "final_module": 2
+    },
+    {
+      "operation": "disable",
+      "name": "reserved_flags",
+      "inputs": {
+        "prefix": 4290690750,
+        "module": 2,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 4257136318
+        },
+        {
+          "xip_read": 0
+        }
+      ],
+      "final_prefix": 4257136318,
+      "final_module": 2
+    },
+    {
+      "operation": "deinitialize",
+      "name": "disabled",
+      "inputs": {
+        "prefix": 29277886,
+        "module": 0,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 12500670
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 12500670,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "disabled_busy",
+      "inputs": {
+        "prefix": 29277886,
+        "module": 0,
+        "tcb": 0,
+        "cq": 3,
+        "hp": 4,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 12500670
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 12500670,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "no_tcb",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 0,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 0
+        },
+        {
+          "state_word_offset": 0,
+          "result": 12500670
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 12500670,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "xip_delay",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 0,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 1,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [
+        [
+          3,
+          17,
+          0
+        ]
+      ],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 1
+        },
+        {
+          "call": [
+            3,
+            17,
+            0
+          ]
+        },
+        {
+          "state_word_offset": 0,
+          "result": 12500670
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 12500670,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "xip_reserved",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 0,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 2147483648,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 2147483648
+        },
+        {
+          "state_word_offset": 0,
+          "result": 12500670
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 12500670,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "cq_busy",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 0,
+        "tcb": 0,
+        "cq": 1,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 46055102
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 46055102,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "hp_busy",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 0,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 1,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 46055102
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 46055102,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "both_busy",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 0,
+        "tcb": 0,
+        "cq": 4294967295,
+        "hp": 4294967295,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 46055102
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 46055102,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "cq_success",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 0,
+        "tcb": 536903680,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [
+        [
+          1,
+          536875008,
+          62832318
+        ],
+        [
+          2,
+          536875008,
+          62832318
+        ]
+      ],
+      "timeline": [
+        {
+          "call": [
+            1,
+            536875008,
+            62832318
+          ]
+        },
+        {
+          "call": [
+            2,
+            536875008,
+            62832318
+          ]
+        },
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 0
+        },
+        {
+          "state_word_offset": 0,
+          "result": 12500670
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 12500670,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "cq_failure",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 0,
+        "tcb": 536903680,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 13,
+        "null": false
+      },
+      "return": 0,
+      "calls": [
+        [
+          1,
+          536875008,
+          62832318
+        ]
+      ],
+      "timeline": [
+        {
+          "call": [
+            1,
+            536875008,
+            62832318
+          ]
+        },
+        {
+          "state_word_offset": 0,
+          "result": 46055102
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 46055102,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "cq_failure_xip",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 0,
+        "tcb": 536903680,
+        "cq": 0,
+        "hp": 0,
+        "xip": 1,
+        "delay": 17,
+        "cq_status": 13,
+        "null": false
+      },
+      "return": 0,
+      "calls": [
+        [
+          1,
+          536875008,
+          62832318
+        ]
+      ],
+      "timeline": [
+        {
+          "call": [
+            1,
+            536875008,
+            62832318
+          ]
+        },
+        {
+          "state_word_offset": 0,
+          "result": 46055102
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 46055102,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "xip_max_delay",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 0,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 1,
+        "delay": 4294967295,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [
+        [
+          3,
+          4294967295,
+          0
+        ]
+      ],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 1
+        },
+        {
+          "call": [
+            3,
+            4294967295,
+            0
+          ]
+        },
+        {
+          "state_word_offset": 0,
+          "result": 12500670
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 12500670,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "cq_xip",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 0,
+        "tcb": 536903680,
+        "cq": 0,
+        "hp": 0,
+        "xip": 2147483649,
+        "delay": 0,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [
+        [
+          1,
+          536875008,
+          62832318
+        ],
+        [
+          2,
+          536875008,
+          62832318
+        ],
+        [
+          3,
+          0,
+          0
+        ]
+      ],
+      "timeline": [
+        {
+          "call": [
+            1,
+            536875008,
+            62832318
+          ]
+        },
+        {
+          "call": [
+            2,
+            536875008,
+            62832318
+          ]
+        },
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 2147483649
+        },
+        {
+          "call": [
+            3,
+            0,
+            0
+          ]
+        },
+        {
+          "state_word_offset": 0,
+          "result": 12500670
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 12500670,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "null",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 0,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": true
+      },
+      "return": 2,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 62832318,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "bad_magic",
+      "inputs": {
+        "prefix": 62832319,
+        "module": 0,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 2,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 62832319,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "not_initialized",
+      "inputs": {
+        "prefix": 46055102,
+        "module": 0,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 2,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 46055102,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "reserved_flags",
+      "inputs": {
+        "prefix": 4290690750,
+        "module": 0,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 4257136318
+        },
+        {
+          "xip_read": 0
+        },
+        {
+          "state_word_offset": 0,
+          "result": 4240359102
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 4240359102,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "disabled",
+      "inputs": {
+        "prefix": 29277886,
+        "module": 1,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 12500670
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 12500670,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "disabled_busy",
+      "inputs": {
+        "prefix": 29277886,
+        "module": 1,
+        "tcb": 0,
+        "cq": 3,
+        "hp": 4,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 12500670
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 12500670,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "no_tcb",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 1,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 0
+        },
+        {
+          "state_word_offset": 0,
+          "result": 12500670
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 12500670,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "xip_delay",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 1,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 1,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [
+        [
+          3,
+          17,
+          0
+        ]
+      ],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 1
+        },
+        {
+          "call": [
+            3,
+            17,
+            0
+          ]
+        },
+        {
+          "state_word_offset": 0,
+          "result": 12500670
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 12500670,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "xip_reserved",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 1,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 2147483648,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 2147483648
+        },
+        {
+          "state_word_offset": 0,
+          "result": 12500670
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 12500670,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "cq_busy",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 1,
+        "tcb": 0,
+        "cq": 1,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 46055102
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 46055102,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "hp_busy",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 1,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 1,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 46055102
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 46055102,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "both_busy",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 1,
+        "tcb": 0,
+        "cq": 4294967295,
+        "hp": 4294967295,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 46055102
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 46055102,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "cq_success",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 1,
+        "tcb": 536903680,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [
+        [
+          1,
+          536875008,
+          62832318
+        ],
+        [
+          2,
+          536875008,
+          62832318
+        ]
+      ],
+      "timeline": [
+        {
+          "call": [
+            1,
+            536875008,
+            62832318
+          ]
+        },
+        {
+          "call": [
+            2,
+            536875008,
+            62832318
+          ]
+        },
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 0
+        },
+        {
+          "state_word_offset": 0,
+          "result": 12500670
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 12500670,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "cq_failure",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 1,
+        "tcb": 536903680,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 13,
+        "null": false
+      },
+      "return": 0,
+      "calls": [
+        [
+          1,
+          536875008,
+          62832318
+        ]
+      ],
+      "timeline": [
+        {
+          "call": [
+            1,
+            536875008,
+            62832318
+          ]
+        },
+        {
+          "state_word_offset": 0,
+          "result": 46055102
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 46055102,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "cq_failure_xip",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 1,
+        "tcb": 536903680,
+        "cq": 0,
+        "hp": 0,
+        "xip": 1,
+        "delay": 17,
+        "cq_status": 13,
+        "null": false
+      },
+      "return": 0,
+      "calls": [
+        [
+          1,
+          536875008,
+          62832318
+        ]
+      ],
+      "timeline": [
+        {
+          "call": [
+            1,
+            536875008,
+            62832318
+          ]
+        },
+        {
+          "state_word_offset": 0,
+          "result": 46055102
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 46055102,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "xip_max_delay",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 1,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 1,
+        "delay": 4294967295,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [
+        [
+          3,
+          4294967295,
+          0
+        ]
+      ],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 1
+        },
+        {
+          "call": [
+            3,
+            4294967295,
+            0
+          ]
+        },
+        {
+          "state_word_offset": 0,
+          "result": 12500670
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 12500670,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "cq_xip",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 1,
+        "tcb": 536903680,
+        "cq": 0,
+        "hp": 0,
+        "xip": 2147483649,
+        "delay": 0,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [
+        [
+          1,
+          536875008,
+          62832318
+        ],
+        [
+          2,
+          536875008,
+          62832318
+        ],
+        [
+          3,
+          0,
+          0
+        ]
+      ],
+      "timeline": [
+        {
+          "call": [
+            1,
+            536875008,
+            62832318
+          ]
+        },
+        {
+          "call": [
+            2,
+            536875008,
+            62832318
+          ]
+        },
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 2147483649
+        },
+        {
+          "call": [
+            3,
+            0,
+            0
+          ]
+        },
+        {
+          "state_word_offset": 0,
+          "result": 12500670
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 12500670,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "null",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 1,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": true
+      },
+      "return": 2,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 62832318,
+      "final_module": 1
+    },
+    {
+      "operation": "deinitialize",
+      "name": "bad_magic",
+      "inputs": {
+        "prefix": 62832319,
+        "module": 1,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 2,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 62832319,
+      "final_module": 1
+    },
+    {
+      "operation": "deinitialize",
+      "name": "not_initialized",
+      "inputs": {
+        "prefix": 46055102,
+        "module": 1,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 2,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 46055102,
+      "final_module": 1
+    },
+    {
+      "operation": "deinitialize",
+      "name": "reserved_flags",
+      "inputs": {
+        "prefix": 4290690750,
+        "module": 1,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 4257136318
+        },
+        {
+          "xip_read": 0
+        },
+        {
+          "state_word_offset": 0,
+          "result": 4240359102
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 4240359102,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "disabled",
+      "inputs": {
+        "prefix": 29277886,
+        "module": 2,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 12500670
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 12500670,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "disabled_busy",
+      "inputs": {
+        "prefix": 29277886,
+        "module": 2,
+        "tcb": 0,
+        "cq": 3,
+        "hp": 4,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 12500670
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 12500670,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "no_tcb",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 2,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 0
+        },
+        {
+          "state_word_offset": 0,
+          "result": 12500670
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 12500670,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "xip_delay",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 2,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 1,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [
+        [
+          3,
+          17,
+          0
+        ]
+      ],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 1
+        },
+        {
+          "call": [
+            3,
+            17,
+            0
+          ]
+        },
+        {
+          "state_word_offset": 0,
+          "result": 12500670
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 12500670,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "xip_reserved",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 2,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 2147483648,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 2147483648
+        },
+        {
+          "state_word_offset": 0,
+          "result": 12500670
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 12500670,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "cq_busy",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 2,
+        "tcb": 0,
+        "cq": 1,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 46055102
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 46055102,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "hp_busy",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 2,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 1,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 46055102
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 46055102,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "both_busy",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 2,
+        "tcb": 0,
+        "cq": 4294967295,
+        "hp": 4294967295,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 46055102
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 46055102,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "cq_success",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 2,
+        "tcb": 536903680,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [
+        [
+          1,
+          536875008,
+          62832318
+        ],
+        [
+          2,
+          536875008,
+          62832318
+        ]
+      ],
+      "timeline": [
+        {
+          "call": [
+            1,
+            536875008,
+            62832318
+          ]
+        },
+        {
+          "call": [
+            2,
+            536875008,
+            62832318
+          ]
+        },
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 0
+        },
+        {
+          "state_word_offset": 0,
+          "result": 12500670
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 12500670,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "cq_failure",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 2,
+        "tcb": 536903680,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 13,
+        "null": false
+      },
+      "return": 0,
+      "calls": [
+        [
+          1,
+          536875008,
+          62832318
+        ]
+      ],
+      "timeline": [
+        {
+          "call": [
+            1,
+            536875008,
+            62832318
+          ]
+        },
+        {
+          "state_word_offset": 0,
+          "result": 46055102
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 46055102,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "cq_failure_xip",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 2,
+        "tcb": 536903680,
+        "cq": 0,
+        "hp": 0,
+        "xip": 1,
+        "delay": 17,
+        "cq_status": 13,
+        "null": false
+      },
+      "return": 0,
+      "calls": [
+        [
+          1,
+          536875008,
+          62832318
+        ]
+      ],
+      "timeline": [
+        {
+          "call": [
+            1,
+            536875008,
+            62832318
+          ]
+        },
+        {
+          "state_word_offset": 0,
+          "result": 46055102
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 46055102,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "xip_max_delay",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 2,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 1,
+        "delay": 4294967295,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [
+        [
+          3,
+          4294967295,
+          0
+        ]
+      ],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 1
+        },
+        {
+          "call": [
+            3,
+            4294967295,
+            0
+          ]
+        },
+        {
+          "state_word_offset": 0,
+          "result": 12500670
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 12500670,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "cq_xip",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 2,
+        "tcb": 536903680,
+        "cq": 0,
+        "hp": 0,
+        "xip": 2147483649,
+        "delay": 0,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [
+        [
+          1,
+          536875008,
+          62832318
+        ],
+        [
+          2,
+          536875008,
+          62832318
+        ],
+        [
+          3,
+          0,
+          0
+        ]
+      ],
+      "timeline": [
+        {
+          "call": [
+            1,
+            536875008,
+            62832318
+          ]
+        },
+        {
+          "call": [
+            2,
+            536875008,
+            62832318
+          ]
+        },
+        {
+          "state_word_offset": 0,
+          "result": 29277886
+        },
+        {
+          "xip_read": 2147483649
+        },
+        {
+          "call": [
+            3,
+            0,
+            0
+          ]
+        },
+        {
+          "state_word_offset": 0,
+          "result": 12500670
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 12500670,
+      "final_module": 0
+    },
+    {
+      "operation": "deinitialize",
+      "name": "null",
+      "inputs": {
+        "prefix": 62832318,
+        "module": 2,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": true
+      },
+      "return": 2,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 62832318,
+      "final_module": 2
+    },
+    {
+      "operation": "deinitialize",
+      "name": "bad_magic",
+      "inputs": {
+        "prefix": 62832319,
+        "module": 2,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 2,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 62832319,
+      "final_module": 2
+    },
+    {
+      "operation": "deinitialize",
+      "name": "not_initialized",
+      "inputs": {
+        "prefix": 46055102,
+        "module": 2,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 2,
+      "calls": [],
+      "timeline": [],
+      "final_prefix": 46055102,
+      "final_module": 2
+    },
+    {
+      "operation": "deinitialize",
+      "name": "reserved_flags",
+      "inputs": {
+        "prefix": 4290690750,
+        "module": 2,
+        "tcb": 0,
+        "cq": 0,
+        "hp": 0,
+        "xip": 0,
+        "delay": 17,
+        "cq_status": 0,
+        "null": false
+      },
+      "return": 0,
+      "calls": [],
+      "timeline": [
+        {
+          "state_word_offset": 0,
+          "result": 4257136318
+        },
+        {
+          "xip_read": 0
+        },
+        {
+          "state_word_offset": 0,
+          "result": 4240359102
+        },
+        {
+          "state_word_offset": 4,
+          "result": 0
+        }
+      ],
+      "final_prefix": 4240359102,
+      "final_module": 0
+    }
+  ],
+  "full_traces": "g2/build/foundation/ambiq-mspi-lifecycle-final/lifecycle-comparison-reviewed.json",
+  "full_traces_sha256": "9ae5b2768715682ab3e7e6cf6c89fa5a4650f42853db87a23cde88e74483144e",
+  "limits": "Original disable/deinitialize bodies execute; external CQ disable/term and delay are stubbed on BOTH sides. Tests prove call order, argument/return propagation and serialized state transformations, not queue drain, free, hardware delay or shutdown safety. Raw prefix/module store widths, offsets, values and order match this compiled target and are recorded. No concurrent RMW/atomic-equivalence claim."
+}

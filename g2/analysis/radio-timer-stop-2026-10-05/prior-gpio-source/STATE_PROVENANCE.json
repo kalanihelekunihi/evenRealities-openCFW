@@ -1,0 +1,20 @@
+{
+  "upstream_commit": "5efc0228528a8adce5eae0d226fac85d2551eb3b",
+  "upstream_source_sha256": "93aa1e6eb28fabea5f0a41c0288451fb381b64070f59638b3d250da6a7430ccf",
+  "upstream_header_sha256": "6c8d3cf841feab4df2c4ab79bd7d62cf4afe3a98b7bdf1035ea9a2aa98430ec7",
+  "register_documentation_sha256": "b6ca35dc828ef95825c0a22f06e6ca5ed558a6542dc74310515fdc350051a797",
+  "unchanged_state_function_text_sha256": "e58571bd75f66209ff3b0eb6971af98b322f4ebf57d202986eb5c2a9afb5db4e",
+  "unchanged_index_macros_sha256": "d0c7424dfe3ac0488b78bd6ddc1fd9746f6dd167cfa220e746024691a4342429",
+  "unchanged_output_macros_sha256": "a66ba4e0db92e2d76062d264707cedd7aa56472daa8f48e115c089b88f449543",
+  "stock_function": {
+    "address": "0x480fd6",
+    "bytes": 218,
+    "sha256": "e768e90540355f1c1e9fcd7477765c5bacf0c91e8b2fc3daa6d4794cbd0fc9ef"
+  },
+  "adaptations": [
+    "uint8_t operation ABI with raw-u32 adapter models stock UXTB; enum constant values/order unchanged.",
+    "Sparse GPIO register view expanded through seven-word read/output/enable/set/clear register families.",
+    "Radio helper is reconstruction, not upstream HAL; raw pin138 configuration3 retained as source data."
+  ],
+  "limits": "No physical output-active condition derived; key enforcement/electrical behavior not certified."
+}

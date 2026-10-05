@@ -1,0 +1,1258 @@
+{
+  "status": "PASS",
+  "firmware_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "decoded_image_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "function": {
+    "name": "Cy_SCB_SetRxFifoLevel",
+    "runtime": "0x9316",
+    "size": 44,
+    "image_range": [
+      "0x6016",
+      "0x6042"
+    ],
+    "sha256": "1fdc6e20657ebf1efbbf7423c354904526f55af9f31d09ad5cd700d69ecdb993",
+    "bytes": "10b50a000168c0231b0219420cd008239a4200d301bec124a4000159ff23994313401943015110bd1023f1e7"
+  },
+  "tool_versions": {
+    "python": "3.13.15",
+    "unicorn": "2.1.4",
+    "capstone": "5.0.7"
+  },
+  "script_sha256": "1a044423935f586a81ec0ff92905cf408147b4a835fdf32bae9cae24f14d8dcc",
+  "disassembly": [
+    {
+      "pc": "0x9316",
+      "bytes": "10b5",
+      "mnemonic": "push",
+      "operands": "{r4, lr}"
+    },
+    {
+      "pc": "0x9318",
+      "bytes": "0a00",
+      "mnemonic": "movs",
+      "operands": "r2, r1"
+    },
+    {
+      "pc": "0x931a",
+      "bytes": "0168",
+      "mnemonic": "ldr",
+      "operands": "r1, [r0]"
+    },
+    {
+      "pc": "0x931c",
+      "bytes": "c023",
+      "mnemonic": "movs",
+      "operands": "r3, #0xc0"
+    },
+    {
+      "pc": "0x931e",
+      "bytes": "1b02",
+      "mnemonic": "lsls",
+      "operands": "r3, r3, #8"
+    },
+    {
+      "pc": "0x9320",
+      "bytes": "1942",
+      "mnemonic": "tst",
+      "operands": "r1, r3"
+    },
+    {
+      "pc": "0x9322",
+      "bytes": "0cd0",
+      "mnemonic": "beq",
+      "operands": "#0x933e"
+    },
+    {
+      "pc": "0x9324",
+      "bytes": "0823",
+      "mnemonic": "movs",
+      "operands": "r3, #8"
+    },
+    {
+      "pc": "0x9326",
+      "bytes": "9a42",
+      "mnemonic": "cmp",
+      "operands": "r2, r3"
+    },
+    {
+      "pc": "0x9328",
+      "bytes": "00d3",
+      "mnemonic": "blo",
+      "operands": "#0x932c"
+    },
+    {
+      "pc": "0x932a",
+      "bytes": "01be",
+      "mnemonic": "bkpt",
+      "operands": "#1"
+    },
+    {
+      "pc": "0x932c",
+      "bytes": "c124",
+      "mnemonic": "movs",
+      "operands": "r4, #0xc1"
+    },
+    {
+      "pc": "0x932e",
+      "bytes": "a400",
+      "mnemonic": "lsls",
+      "operands": "r4, r4, #2"
+    },
+    {
+      "pc": "0x9330",
+      "bytes": "0159",
+      "mnemonic": "ldr",
+      "operands": "r1, [r0, r4]"
+    },
+    {
+      "pc": "0x9332",
+      "bytes": "ff23",
+      "mnemonic": "movs",
+      "operands": "r3, #0xff"
+    },
+    {
+      "pc": "0x9334",
+      "bytes": "9943",
+      "mnemonic": "bics",
+      "operands": "r1, r3"
+    },
+    {
+      "pc": "0x9336",
+      "bytes": "1340",
+      "mnemonic": "ands",
+      "operands": "r3, r2"
+    },
+    {
+      "pc": "0x9338",
+      "bytes": "1943",
+      "mnemonic": "orrs",
+      "operands": "r1, r3"
+    },
+    {
+      "pc": "0x933a",
+      "bytes": "0151",
+      "mnemonic": "str",
+      "operands": "r1, [r0, r4]"
+    },
+    {
+      "pc": "0x933c",
+      "bytes": "10bd",
+      "mnemonic": "pop",
+      "operands": "{r4, pc}"
+    },
+    {
+      "pc": "0x933e",
+      "bytes": "1023",
+      "mnemonic": "movs",
+      "operands": "r3, #0x10"
+    },
+    {
+      "pc": "0x9340",
+      "bytes": "f1e7",
+      "mnemonic": "b",
+      "operands": "#0x9326"
+    }
+  ],
+  "case_count": 9,
+  "cases": [
+    {
+      "index": 0,
+      "config": "0x0",
+      "depth": 16,
+      "level": 0,
+      "initial_rx_fifo_ctrl": "0xa5c312e7",
+      "final_rx_fifo_ctrl": "0xa5c31200",
+      "memory_accesses": [
+        {
+          "kind": "read",
+          "offset": "0x0",
+          "size": 4,
+          "value": null
+        },
+        {
+          "kind": "read",
+          "offset": "0x304",
+          "size": 4,
+          "value": null
+        },
+        {
+          "kind": "write",
+          "offset": "0x304",
+          "size": 4,
+          "value": 2781024768
+        }
+      ],
+      "executed_original_trace": [
+        {
+          "pc": "0x9316",
+          "bytes": "10b5",
+          "mnemonic": "push",
+          "operands": "{r4, lr}"
+        },
+        {
+          "pc": "0x9318",
+          "bytes": "0a00",
+          "mnemonic": "movs",
+          "operands": "r2, r1"
+        },
+        {
+          "pc": "0x931a",
+          "bytes": "0168",
+          "mnemonic": "ldr",
+          "operands": "r1, [r0]"
+        },
+        {
+          "pc": "0x931c",
+          "bytes": "c023",
+          "mnemonic": "movs",
+          "operands": "r3, #0xc0"
+        },
+        {
+          "pc": "0x931e",
+          "bytes": "1b02",
+          "mnemonic": "lsls",
+          "operands": "r3, r3, #8"
+        },
+        {
+          "pc": "0x9320",
+          "bytes": "1942",
+          "mnemonic": "tst",
+          "operands": "r1, r3"
+        },
+        {
+          "pc": "0x9322",
+          "bytes": "0cd0",
+          "mnemonic": "beq",
+          "operands": "#0x933e"
+        },
+        {
+          "pc": "0x933e",
+          "bytes": "1023",
+          "mnemonic": "movs",
+          "operands": "r3, #0x10"
+        },
+        {
+          "pc": "0x9340",
+          "bytes": "f1e7",
+          "mnemonic": "b",
+          "operands": "#0x9326"
+        },
+        {
+          "pc": "0x9326",
+          "bytes": "9a42",
+          "mnemonic": "cmp",
+          "operands": "r2, r3"
+        },
+        {
+          "pc": "0x9328",
+          "bytes": "00d3",
+          "mnemonic": "blo",
+          "operands": "#0x932c"
+        },
+        {
+          "pc": "0x932c",
+          "bytes": "c124",
+          "mnemonic": "movs",
+          "operands": "r4, #0xc1"
+        },
+        {
+          "pc": "0x932e",
+          "bytes": "a400",
+          "mnemonic": "lsls",
+          "operands": "r4, r4, #2"
+        },
+        {
+          "pc": "0x9330",
+          "bytes": "0159",
+          "mnemonic": "ldr",
+          "operands": "r1, [r0, r4]"
+        },
+        {
+          "pc": "0x9332",
+          "bytes": "ff23",
+          "mnemonic": "movs",
+          "operands": "r3, #0xff"
+        },
+        {
+          "pc": "0x9334",
+          "bytes": "9943",
+          "mnemonic": "bics",
+          "operands": "r1, r3"
+        },
+        {
+          "pc": "0x9336",
+          "bytes": "1340",
+          "mnemonic": "ands",
+          "operands": "r3, r2"
+        },
+        {
+          "pc": "0x9338",
+          "bytes": "1943",
+          "mnemonic": "orrs",
+          "operands": "r1, r3"
+        },
+        {
+          "pc": "0x933a",
+          "bytes": "0151",
+          "mnemonic": "str",
+          "operands": "r1, [r0, r4]"
+        },
+        {
+          "pc": "0x933c",
+          "bytes": "10bd",
+          "mnemonic": "pop",
+          "operands": "{r4, pc}"
+        }
+      ],
+      "pc_after_run": "0x10000000",
+      "exception": null
+    },
+    {
+      "index": 1,
+      "config": "0x0",
+      "depth": 16,
+      "level": 15,
+      "initial_rx_fifo_ctrl": "0xa5c312e7",
+      "final_rx_fifo_ctrl": "0xa5c3120f",
+      "memory_accesses": [
+        {
+          "kind": "read",
+          "offset": "0x0",
+          "size": 4,
+          "value": null
+        },
+        {
+          "kind": "read",
+          "offset": "0x304",
+          "size": 4,
+          "value": null
+        },
+        {
+          "kind": "write",
+          "offset": "0x304",
+          "size": 4,
+          "value": 2781024783
+        }
+      ],
+      "executed_original_trace": [
+        {
+          "pc": "0x9316",
+          "bytes": "10b5",
+          "mnemonic": "push",
+          "operands": "{r4, lr}"
+        },
+        {
+          "pc": "0x9318",
+          "bytes": "0a00",
+          "mnemonic": "movs",
+          "operands": "r2, r1"
+        },
+        {
+          "pc": "0x931a",
+          "bytes": "0168",
+          "mnemonic": "ldr",
+          "operands": "r1, [r0]"
+        },
+        {
+          "pc": "0x931c",
+          "bytes": "c023",
+          "mnemonic": "movs",
+          "operands": "r3, #0xc0"
+        },
+        {
+          "pc": "0x931e",
+          "bytes": "1b02",
+          "mnemonic": "lsls",
+          "operands": "r3, r3, #8"
+        },
+        {
+          "pc": "0x9320",
+          "bytes": "1942",
+          "mnemonic": "tst",
+          "operands": "r1, r3"
+        },
+        {
+          "pc": "0x9322",
+          "bytes": "0cd0",
+          "mnemonic": "beq",
+          "operands": "#0x933e"
+        },
+        {
+          "pc": "0x933e",
+          "bytes": "1023",
+          "mnemonic": "movs",
+          "operands": "r3, #0x10"
+        },
+        {
+          "pc": "0x9340",
+          "bytes": "f1e7",
+          "mnemonic": "b",
+          "operands": "#0x9326"
+        },
+        {
+          "pc": "0x9326",
+          "bytes": "9a42",
+          "mnemonic": "cmp",
+          "operands": "r2, r3"
+        },
+        {
+          "pc": "0x9328",
+          "bytes": "00d3",
+          "mnemonic": "blo",
+          "operands": "#0x932c"
+        },
+        {
+          "pc": "0x932c",
+          "bytes": "c124",
+          "mnemonic": "movs",
+          "operands": "r4, #0xc1"
+        },
+        {
+          "pc": "0x932e",
+          "bytes": "a400",
+          "mnemonic": "lsls",
+          "operands": "r4, r4, #2"
+        },
+        {
+          "pc": "0x9330",
+          "bytes": "0159",
+          "mnemonic": "ldr",
+          "operands": "r1, [r0, r4]"
+        },
+        {
+          "pc": "0x9332",
+          "bytes": "ff23",
+          "mnemonic": "movs",
+          "operands": "r3, #0xff"
+        },
+        {
+          "pc": "0x9334",
+          "bytes": "9943",
+          "mnemonic": "bics",
+          "operands": "r1, r3"
+        },
+        {
+          "pc": "0x9336",
+          "bytes": "1340",
+          "mnemonic": "ands",
+          "operands": "r3, r2"
+        },
+        {
+          "pc": "0x9338",
+          "bytes": "1943",
+          "mnemonic": "orrs",
+          "operands": "r1, r3"
+        },
+        {
+          "pc": "0x933a",
+          "bytes": "0151",
+          "mnemonic": "str",
+          "operands": "r1, [r0, r4]"
+        },
+        {
+          "pc": "0x933c",
+          "bytes": "10bd",
+          "mnemonic": "pop",
+          "operands": "{r4, pc}"
+        }
+      ],
+      "pc_after_run": "0x10000000",
+      "exception": null
+    },
+    {
+      "index": 2,
+      "config": "0x4000",
+      "depth": 8,
+      "level": 0,
+      "initial_rx_fifo_ctrl": "0xa5c312e7",
+      "final_rx_fifo_ctrl": "0xa5c31200",
+      "memory_accesses": [
+        {
+          "kind": "read",
+          "offset": "0x0",
+          "size": 4,
+          "value": null
+        },
+        {
+          "kind": "read",
+          "offset": "0x304",
+          "size": 4,
+          "value": null
+        },
+        {
+          "kind": "write",
+          "offset": "0x304",
+          "size": 4,
+          "value": 2781024768
+        }
+      ],
+      "executed_original_trace": [
+        {
+          "pc": "0x9316",
+          "bytes": "10b5",
+          "mnemonic": "push",
+          "operands": "{r4, lr}"
+        },
+        {
+          "pc": "0x9318",
+          "bytes": "0a00",
+          "mnemonic": "movs",
+          "operands": "r2, r1"
+        },
+        {
+          "pc": "0x931a",
+          "bytes": "0168",
+          "mnemonic": "ldr",
+          "operands": "r1, [r0]"
+        },
+        {
+          "pc": "0x931c",
+          "bytes": "c023",
+          "mnemonic": "movs",
+          "operands": "r3, #0xc0"
+        },
+        {
+          "pc": "0x931e",
+          "bytes": "1b02",
+          "mnemonic": "lsls",
+          "operands": "r3, r3, #8"
+        },
+        {
+          "pc": "0x9320",
+          "bytes": "1942",
+          "mnemonic": "tst",
+          "operands": "r1, r3"
+        },
+        {
+          "pc": "0x9322",
+          "bytes": "0cd0",
+          "mnemonic": "beq",
+          "operands": "#0x933e"
+        },
+        {
+          "pc": "0x9324",
+          "bytes": "0823",
+          "mnemonic": "movs",
+          "operands": "r3, #8"
+        },
+        {
+          "pc": "0x9326",
+          "bytes": "9a42",
+          "mnemonic": "cmp",
+          "operands": "r2, r3"
+        },
+        {
+          "pc": "0x9328",
+          "bytes": "00d3",
+          "mnemonic": "blo",
+          "operands": "#0x932c"
+        },
+        {
+          "pc": "0x932c",
+          "bytes": "c124",
+          "mnemonic": "movs",
+          "operands": "r4, #0xc1"
+        },
+        {
+          "pc": "0x932e",
+          "bytes": "a400",
+          "mnemonic": "lsls",
+          "operands": "r4, r4, #2"
+        },
+        {
+          "pc": "0x9330",
+          "bytes": "0159",
+          "mnemonic": "ldr",
+          "operands": "r1, [r0, r4]"
+        },
+        {
+          "pc": "0x9332",
+          "bytes": "ff23",
+          "mnemonic": "movs",
+          "operands": "r3, #0xff"
+        },
+        {
+          "pc": "0x9334",
+          "bytes": "9943",
+          "mnemonic": "bics",
+          "operands": "r1, r3"
+        },
+        {
+          "pc": "0x9336",
+          "bytes": "1340",
+          "mnemonic": "ands",
+          "operands": "r3, r2"
+        },
+        {
+          "pc": "0x9338",
+          "bytes": "1943",
+          "mnemonic": "orrs",
+          "operands": "r1, r3"
+        },
+        {
+          "pc": "0x933a",
+          "bytes": "0151",
+          "mnemonic": "str",
+          "operands": "r1, [r0, r4]"
+        },
+        {
+          "pc": "0x933c",
+          "bytes": "10bd",
+          "mnemonic": "pop",
+          "operands": "{r4, pc}"
+        }
+      ],
+      "pc_after_run": "0x10000000",
+      "exception": null
+    },
+    {
+      "index": 3,
+      "config": "0xc000",
+      "depth": 8,
+      "level": 7,
+      "initial_rx_fifo_ctrl": "0xa5c312e7",
+      "final_rx_fifo_ctrl": "0xa5c31207",
+      "memory_accesses": [
+        {
+          "kind": "read",
+          "offset": "0x0",
+          "size": 4,
+          "value": null
+        },
+        {
+          "kind": "read",
+          "offset": "0x304",
+          "size": 4,
+          "value": null
+        },
+        {
+          "kind": "write",
+          "offset": "0x304",
+          "size": 4,
+          "value": 2781024775
+        }
+      ],
+      "executed_original_trace": [
+        {
+          "pc": "0x9316",
+          "bytes": "10b5",
+          "mnemonic": "push",
+          "operands": "{r4, lr}"
+        },
+        {
+          "pc": "0x9318",
+          "bytes": "0a00",
+          "mnemonic": "movs",
+          "operands": "r2, r1"
+        },
+        {
+          "pc": "0x931a",
+          "bytes": "0168",
+          "mnemonic": "ldr",
+          "operands": "r1, [r0]"
+        },
+        {
+          "pc": "0x931c",
+          "bytes": "c023",
+          "mnemonic": "movs",
+          "operands": "r3, #0xc0"
+        },
+        {
+          "pc": "0x931e",
+          "bytes": "1b02",
+          "mnemonic": "lsls",
+          "operands": "r3, r3, #8"
+        },
+        {
+          "pc": "0x9320",
+          "bytes": "1942",
+          "mnemonic": "tst",
+          "operands": "r1, r3"
+        },
+        {
+          "pc": "0x9322",
+          "bytes": "0cd0",
+          "mnemonic": "beq",
+          "operands": "#0x933e"
+        },
+        {
+          "pc": "0x9324",
+          "bytes": "0823",
+          "mnemonic": "movs",
+          "operands": "r3, #8"
+        },
+        {
+          "pc": "0x9326",
+          "bytes": "9a42",
+          "mnemonic": "cmp",
+          "operands": "r2, r3"
+        },
+        {
+          "pc": "0x9328",
+          "bytes": "00d3",
+          "mnemonic": "blo",
+          "operands": "#0x932c"
+        },
+        {
+          "pc": "0x932c",
+          "bytes": "c124",
+          "mnemonic": "movs",
+          "operands": "r4, #0xc1"
+        },
+        {
+          "pc": "0x932e",
+          "bytes": "a400",
+          "mnemonic": "lsls",
+          "operands": "r4, r4, #2"
+        },
+        {
+          "pc": "0x9330",
+          "bytes": "0159",
+          "mnemonic": "ldr",
+          "operands": "r1, [r0, r4]"
+        },
+        {
+          "pc": "0x9332",
+          "bytes": "ff23",
+          "mnemonic": "movs",
+          "operands": "r3, #0xff"
+        },
+        {
+          "pc": "0x9334",
+          "bytes": "9943",
+          "mnemonic": "bics",
+          "operands": "r1, r3"
+        },
+        {
+          "pc": "0x9336",
+          "bytes": "1340",
+          "mnemonic": "ands",
+          "operands": "r3, r2"
+        },
+        {
+          "pc": "0x9338",
+          "bytes": "1943",
+          "mnemonic": "orrs",
+          "operands": "r1, r3"
+        },
+        {
+          "pc": "0x933a",
+          "bytes": "0151",
+          "mnemonic": "str",
+          "operands": "r1, [r0, r4]"
+        },
+        {
+          "pc": "0x933c",
+          "bytes": "10bd",
+          "mnemonic": "pop",
+          "operands": "{r4, pc}"
+        }
+      ],
+      "pc_after_run": "0x10000000",
+      "exception": null
+    },
+    {
+      "index": 7,
+      "config": "0x8000",
+      "depth": 8,
+      "level": 7,
+      "initial_rx_fifo_ctrl": "0xa5c312e7",
+      "final_rx_fifo_ctrl": "0xa5c31207",
+      "memory_accesses": [
+        {
+          "kind": "read",
+          "offset": "0x0",
+          "size": 4,
+          "value": null
+        },
+        {
+          "kind": "read",
+          "offset": "0x304",
+          "size": 4,
+          "value": null
+        },
+        {
+          "kind": "write",
+          "offset": "0x304",
+          "size": 4,
+          "value": 2781024775
+        }
+      ],
+      "executed_original_trace": [
+        {
+          "pc": "0x9316",
+          "bytes": "10b5",
+          "mnemonic": "push",
+          "operands": "{r4, lr}"
+        },
+        {
+          "pc": "0x9318",
+          "bytes": "0a00",
+          "mnemonic": "movs",
+          "operands": "r2, r1"
+        },
+        {
+          "pc": "0x931a",
+          "bytes": "0168",
+          "mnemonic": "ldr",
+          "operands": "r1, [r0]"
+        },
+        {
+          "pc": "0x931c",
+          "bytes": "c023",
+          "mnemonic": "movs",
+          "operands": "r3, #0xc0"
+        },
+        {
+          "pc": "0x931e",
+          "bytes": "1b02",
+          "mnemonic": "lsls",
+          "operands": "r3, r3, #8"
+        },
+        {
+          "pc": "0x9320",
+          "bytes": "1942",
+          "mnemonic": "tst",
+          "operands": "r1, r3"
+        },
+        {
+          "pc": "0x9322",
+          "bytes": "0cd0",
+          "mnemonic": "beq",
+          "operands": "#0x933e"
+        },
+        {
+          "pc": "0x9324",
+          "bytes": "0823",
+          "mnemonic": "movs",
+          "operands": "r3, #8"
+        },
+        {
+          "pc": "0x9326",
+          "bytes": "9a42",
+          "mnemonic": "cmp",
+          "operands": "r2, r3"
+        },
+        {
+          "pc": "0x9328",
+          "bytes": "00d3",
+          "mnemonic": "blo",
+          "operands": "#0x932c"
+        },
+        {
+          "pc": "0x932c",
+          "bytes": "c124",
+          "mnemonic": "movs",
+          "operands": "r4, #0xc1"
+        },
+        {
+          "pc": "0x932e",
+          "bytes": "a400",
+          "mnemonic": "lsls",
+          "operands": "r4, r4, #2"
+        },
+        {
+          "pc": "0x9330",
+          "bytes": "0159",
+          "mnemonic": "ldr",
+          "operands": "r1, [r0, r4]"
+        },
+        {
+          "pc": "0x9332",
+          "bytes": "ff23",
+          "mnemonic": "movs",
+          "operands": "r3, #0xff"
+        },
+        {
+          "pc": "0x9334",
+          "bytes": "9943",
+          "mnemonic": "bics",
+          "operands": "r1, r3"
+        },
+        {
+          "pc": "0x9336",
+          "bytes": "1340",
+          "mnemonic": "ands",
+          "operands": "r3, r2"
+        },
+        {
+          "pc": "0x9338",
+          "bytes": "1943",
+          "mnemonic": "orrs",
+          "operands": "r1, r3"
+        },
+        {
+          "pc": "0x933a",
+          "bytes": "0151",
+          "mnemonic": "str",
+          "operands": "r1, [r0, r4]"
+        },
+        {
+          "pc": "0x933c",
+          "bytes": "10bd",
+          "mnemonic": "pop",
+          "operands": "{r4, pc}"
+        }
+      ],
+      "pc_after_run": "0x10000000",
+      "exception": null
+    },
+    {
+      "index": 4,
+      "config": "0x0",
+      "depth": 16,
+      "level": 16,
+      "initial_rx_fifo_ctrl": "0x87654321",
+      "final_rx_fifo_ctrl": "0x87654321",
+      "memory_accesses": [
+        {
+          "kind": "read",
+          "offset": "0x0",
+          "size": 4,
+          "value": null
+        }
+      ],
+      "executed_original_trace": [
+        {
+          "pc": "0x9316",
+          "bytes": "10b5",
+          "mnemonic": "push",
+          "operands": "{r4, lr}"
+        },
+        {
+          "pc": "0x9318",
+          "bytes": "0a00",
+          "mnemonic": "movs",
+          "operands": "r2, r1"
+        },
+        {
+          "pc": "0x931a",
+          "bytes": "0168",
+          "mnemonic": "ldr",
+          "operands": "r1, [r0]"
+        },
+        {
+          "pc": "0x931c",
+          "bytes": "c023",
+          "mnemonic": "movs",
+          "operands": "r3, #0xc0"
+        },
+        {
+          "pc": "0x931e",
+          "bytes": "1b02",
+          "mnemonic": "lsls",
+          "operands": "r3, r3, #8"
+        },
+        {
+          "pc": "0x9320",
+          "bytes": "1942",
+          "mnemonic": "tst",
+          "operands": "r1, r3"
+        },
+        {
+          "pc": "0x9322",
+          "bytes": "0cd0",
+          "mnemonic": "beq",
+          "operands": "#0x933e"
+        },
+        {
+          "pc": "0x933e",
+          "bytes": "1023",
+          "mnemonic": "movs",
+          "operands": "r3, #0x10"
+        },
+        {
+          "pc": "0x9340",
+          "bytes": "f1e7",
+          "mnemonic": "b",
+          "operands": "#0x9326"
+        },
+        {
+          "pc": "0x9326",
+          "bytes": "9a42",
+          "mnemonic": "cmp",
+          "operands": "r2, r3"
+        },
+        {
+          "pc": "0x9328",
+          "bytes": "00d3",
+          "mnemonic": "blo",
+          "operands": "#0x932c"
+        },
+        {
+          "pc": "0x932a",
+          "bytes": "01be",
+          "mnemonic": "bkpt",
+          "operands": "#1"
+        }
+      ],
+      "pc_after_run": "0x932a",
+      "exception": "Unhandled CPU exception (UC_ERR_EXCEPTION)"
+    },
+    {
+      "index": 5,
+      "config": "0x4000",
+      "depth": 8,
+      "level": 8,
+      "initial_rx_fifo_ctrl": "0x87654321",
+      "final_rx_fifo_ctrl": "0x87654321",
+      "memory_accesses": [
+        {
+          "kind": "read",
+          "offset": "0x0",
+          "size": 4,
+          "value": null
+        }
+      ],
+      "executed_original_trace": [
+        {
+          "pc": "0x9316",
+          "bytes": "10b5",
+          "mnemonic": "push",
+          "operands": "{r4, lr}"
+        },
+        {
+          "pc": "0x9318",
+          "bytes": "0a00",
+          "mnemonic": "movs",
+          "operands": "r2, r1"
+        },
+        {
+          "pc": "0x931a",
+          "bytes": "0168",
+          "mnemonic": "ldr",
+          "operands": "r1, [r0]"
+        },
+        {
+          "pc": "0x931c",
+          "bytes": "c023",
+          "mnemonic": "movs",
+          "operands": "r3, #0xc0"
+        },
+        {
+          "pc": "0x931e",
+          "bytes": "1b02",
+          "mnemonic": "lsls",
+          "operands": "r3, r3, #8"
+        },
+        {
+          "pc": "0x9320",
+          "bytes": "1942",
+          "mnemonic": "tst",
+          "operands": "r1, r3"
+        },
+        {
+          "pc": "0x9322",
+          "bytes": "0cd0",
+          "mnemonic": "beq",
+          "operands": "#0x933e"
+        },
+        {
+          "pc": "0x9324",
+          "bytes": "0823",
+          "mnemonic": "movs",
+          "operands": "r3, #8"
+        },
+        {
+          "pc": "0x9326",
+          "bytes": "9a42",
+          "mnemonic": "cmp",
+          "operands": "r2, r3"
+        },
+        {
+          "pc": "0x9328",
+          "bytes": "00d3",
+          "mnemonic": "blo",
+          "operands": "#0x932c"
+        },
+        {
+          "pc": "0x932a",
+          "bytes": "01be",
+          "mnemonic": "bkpt",
+          "operands": "#1"
+        }
+      ],
+      "pc_after_run": "0x932a",
+      "exception": "Unhandled CPU exception (UC_ERR_EXCEPTION)"
+    },
+    {
+      "index": 6,
+      "config": "0xc000",
+      "depth": 8,
+      "level": 257,
+      "initial_rx_fifo_ctrl": "0x87654321",
+      "final_rx_fifo_ctrl": "0x87654321",
+      "memory_accesses": [
+        {
+          "kind": "read",
+          "offset": "0x0",
+          "size": 4,
+          "value": null
+        }
+      ],
+      "executed_original_trace": [
+        {
+          "pc": "0x9316",
+          "bytes": "10b5",
+          "mnemonic": "push",
+          "operands": "{r4, lr}"
+        },
+        {
+          "pc": "0x9318",
+          "bytes": "0a00",
+          "mnemonic": "movs",
+          "operands": "r2, r1"
+        },
+        {
+          "pc": "0x931a",
+          "bytes": "0168",
+          "mnemonic": "ldr",
+          "operands": "r1, [r0]"
+        },
+        {
+          "pc": "0x931c",
+          "bytes": "c023",
+          "mnemonic": "movs",
+          "operands": "r3, #0xc0"
+        },
+        {
+          "pc": "0x931e",
+          "bytes": "1b02",
+          "mnemonic": "lsls",
+          "operands": "r3, r3, #8"
+        },
+        {
+          "pc": "0x9320",
+          "bytes": "1942",
+          "mnemonic": "tst",
+          "operands": "r1, r3"
+        },
+        {
+          "pc": "0x9322",
+          "bytes": "0cd0",
+          "mnemonic": "beq",
+          "operands": "#0x933e"
+        },
+        {
+          "pc": "0x9324",
+          "bytes": "0823",
+          "mnemonic": "movs",
+          "operands": "r3, #8"
+        },
+        {
+          "pc": "0x9326",
+          "bytes": "9a42",
+          "mnemonic": "cmp",
+          "operands": "r2, r3"
+        },
+        {
+          "pc": "0x9328",
+          "bytes": "00d3",
+          "mnemonic": "blo",
+          "operands": "#0x932c"
+        },
+        {
+          "pc": "0x932a",
+          "bytes": "01be",
+          "mnemonic": "bkpt",
+          "operands": "#1"
+        }
+      ],
+      "pc_after_run": "0x932a",
+      "exception": "Unhandled CPU exception (UC_ERR_EXCEPTION)"
+    },
+    {
+      "index": 8,
+      "config": "0x0",
+      "depth": 16,
+      "level": 4294967295,
+      "initial_rx_fifo_ctrl": "0x87654321",
+      "final_rx_fifo_ctrl": "0x87654321",
+      "memory_accesses": [
+        {
+          "kind": "read",
+          "offset": "0x0",
+          "size": 4,
+          "value": null
+        }
+      ],
+      "executed_original_trace": [
+        {
+          "pc": "0x9316",
+          "bytes": "10b5",
+          "mnemonic": "push",
+          "operands": "{r4, lr}"
+        },
+        {
+          "pc": "0x9318",
+          "bytes": "0a00",
+          "mnemonic": "movs",
+          "operands": "r2, r1"
+        },
+        {
+          "pc": "0x931a",
+          "bytes": "0168",
+          "mnemonic": "ldr",
+          "operands": "r1, [r0]"
+        },
+        {
+          "pc": "0x931c",
+          "bytes": "c023",
+          "mnemonic": "movs",
+          "operands": "r3, #0xc0"
+        },
+        {
+          "pc": "0x931e",
+          "bytes": "1b02",
+          "mnemonic": "lsls",
+          "operands": "r3, r3, #8"
+        },
+        {
+          "pc": "0x9320",
+          "bytes": "1942",
+          "mnemonic": "tst",
+          "operands": "r1, r3"
+        },
+        {
+          "pc": "0x9322",
+          "bytes": "0cd0",
+          "mnemonic": "beq",
+          "operands": "#0x933e"
+        },
+        {
+          "pc": "0x933e",
+          "bytes": "1023",
+          "mnemonic": "movs",
+          "operands": "r3, #0x10"
+        },
+        {
+          "pc": "0x9340",
+          "bytes": "f1e7",
+          "mnemonic": "b",
+          "operands": "#0x9326"
+        },
+        {
+          "pc": "0x9326",
+          "bytes": "9a42",
+          "mnemonic": "cmp",
+          "operands": "r2, r3"
+        },
+        {
+          "pc": "0x9328",
+          "bytes": "00d3",
+          "mnemonic": "blo",
+          "operands": "#0x932c"
+        },
+        {
+          "pc": "0x932a",
+          "bytes": "01be",
+          "mnemonic": "bkpt",
+          "operands": "#1"
+        }
+      ],
+      "pc_after_run": "0x932a",
+      "exception": "Unhandled CPU exception (UC_ERR_EXCEPTION)"
+    }
+  ],
+  "limits": "Original 44-byte function executed against synthetic RAM-backed register words. Read/write order and original PCs/bytes were traced. Invalid-level BKPT is observed as an emulator exception; no physical peripheral, interrupt behavior, timing, or FIFO data movement was tested."
+}

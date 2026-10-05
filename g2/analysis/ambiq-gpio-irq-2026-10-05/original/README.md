@@ -1,0 +1,24 @@
+# Apollo GPIO IRQ bodies and dispatch evidence
+
+This packet authenticates four GPIO IRQ helpers, their use by `GPIO0_607F_IRQHandler`, the IRQ register literals, and one callback-registration site. The authoritative complete outputs are [results-final.json](results-final.json) and [disassembly-final.txt](disassembly-final.txt). Run `~/.local/share/opencfw/venv/bin/python verify.py` to recheck image mapping, body hashes, Ghidra function records, selected call order, literal words, and callback setup. The initial `results.json` and `disassembly.txt` from the first pass are retained; use the `*-final` files for the extended evidence.
+
+The source artifact is the official `g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin` (SHA-256 `36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863`). The 32-byte OTA preamble is excluded for Ghidra's decoded main image at `0x438000` (SHA-256 `19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701`). Each listed body range and hash is independently checked against both image bytes and `functions-000.jsonl`.
+
+| Runtime range | Size | SHA-256 | Identified behavior |
+| --- | ---: | --- | --- |
+| `[0x481574, 0x4815f2)` | 126 B | `44ef85302249c0f2479542c1367427676b4d28807779c83655a65c17504f88e5` | IRQ status getter |
+| `[0x4815f2, 0x48162c)` | 58 B | `e1a650a0b76b4b7d1a07f3f8f895e6c6daf2f058afe4498d97ac1b7c2c7da29c` | IRQ clear |
+| `[0x48162c, 0x4816c6)` | 154 B | `1e72c952159ac238606b02497a87e287fb939f7dacba6225669c8976b529ca5b` | Callback and argument registration |
+| `[0x4816c6, 0x48173a)` | 116 B | `8cd8748a19317a5bbc241ec3cfd761d57060af842509910b05b8e42e3b4601b1` | IRQ callback service |
+
+The cached Ambiq source is `g2/build/foundation/ambiq-upstream/am_hal_gpio.c`, marked `release_sdk5p1p0-366b80e084`, SHA-256 `93aa1e6eb28fabea5f0a41c0288451fb381b64070f59638b3d250da6a7430ccf`. Its matching functions are `am_hal_gpio_interrupt_irq_status_get` (source lines 774–814), `am_hal_gpio_interrupt_irq_clear` (822–853), `am_hal_gpio_interrupt_register` (861–902), and `am_hal_gpio_interrupt_service` (916–994). `am_hal_gpio.h` provides `GPIO_IRQ2N` and `GPIO_IRQ2IDX`; `apollo510.h` assigns `GPIO0_607F_IRQn` value 59. Source and headers carry Ambiq's redistribution terms and notices; the hashes are recorded in the final JSON. This is source-semantic correspondence, not proof of a compiler or build match.
+
+The status getter accepts IRQ values `0x38..0x3e` and `0x7d..0x83`. It rejects a null output or an out-of-range IRQ with status 6, maps the IRQ to an enable/status register pair, optionally reads the enable word, masks the status word, writes the output, and restores the saved PRIMASK. Its valid return is 0. The clear helper accepts the same IRQ ranges, writes the supplied mask to the corresponding CLR word, returns 0, and returns 6 for invalid input. The service helper returns 5 for an out-of-range IRQ, then iterates set bits from least to greatest. For each bit it removes the bit from its local mask, loads the callback and argument from parallel 32-word row tables, and calls a non-null callback. Missing callbacks set return status 7 while processing continues; an empty mask returns 0.
+
+`GPIO0_607F_IRQHandler` is the authenticated 44-byte body at `[0x4b80be, 0x4b80ea)`, SHA-256 `853386f3b04b6575390704f2a8a5defabe043bcf472e4dc6487b83ca973ae685`. Its calls run in this order: seven-word channel-0 status snapshot to a local stack buffer, status getter for IRQ `0x3b` with enabled-only false, clear with the returned mask, then callback service with that mask. The first local snapshot is not read later in this body; all four call results are ignored.
+
+For IRQ `0x3b` (IRQ number 59, `GPIO0_607F_IRQn`), the register index is 3. The authenticated literals resolve to EN `0x40010530`, STAT `0x40010534`, and CLR `0x40010538`; therefore the selected word addresses are respectively `0x40010560`, `0x40010564`, and `0x40010568`. Service selects callback row 3 and argument row 3 from RAM bases `0x20068228` and `0x20068928`, with four bytes per pin bit.
+
+The registration function validates channel values 0, 1, or 2 (both), calculates `row = pin >> 5` and `bit = pin & 31`, then writes the callback and argument tables. It does not validate pin range or physical-pad availability, so no such guarantee is inferred here. The authenticated caller `HciDrvRadioBoot` (`0x4b48a6`, 296 bytes, SHA-256 `6521b6ef083e2d005e890c922bcd93b2271e7d256b0543e2471f5e797cda09bd`) calls registration at `0x4b49b2` with channel 0, pin 117, handler pointer `0x4b4a99`, and argument 0. This lands at row 3, bit 21 (`0x200683fc` callback and `0x20068afc` argument). It authenticates a publication site, not runtime table contents.
+
+No GPIO hardware access or callback execution was tested. Runtime callback registrations, GPIO state, and pad availability remain external state.

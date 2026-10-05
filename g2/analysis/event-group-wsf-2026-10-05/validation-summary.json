@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "fresh_original_source_comparisons": 218,
+  "original_trace_bytes_including_prior": 1222,
+  "new_disjoint_original_bytes": 206,
+  "cumulative_unique_original_bytes": 2570,
+  "ranges": [
+    {
+      "name": "task_setbits",
+      "start": "0x47ed76",
+      "declared_bytes": 168,
+      "executed_bytes": 148
+    },
+    {
+      "name": "callback",
+      "start": "0x47ee1e",
+      "declared_bytes": 8,
+      "executed_bytes": 8
+    },
+    {
+      "name": "ISRwrapper",
+      "start": "0x47ee4a",
+      "declared_bytes": 16,
+      "executed_bytes": 16
+    },
+    {
+      "name": "timerpend",
+      "start": "0x47eb4a",
+      "declared_bytes": 34,
+      "executed_bytes": 34
+    }
+  ],
+  "limits": "Real pinned EventGroupSetBits/ISRwrapper/timerpend/callback plus WSF/radio/GPIO execute. Scheduler suspend/resume/unblock, queue-send-copy, context/wait/ticks/app handlers remain fixtures. Manual daemon delivery and copy/stackreuse prove fixture contract only, not actual queue/daemon behavior. Invalid asserts checked to interrupt-mask helper entry in the invalid branch, not full fatal hardware path. No TCB ready insertion, actual scheduling, group destruction/quiescence or physical ISR claim.",
+  "protected_unchanged": {
+    "g2/tools/open_cfw.py": true,
+    "g2/manifests/g2-2.2.6.10.json": true,
+    "g2/workflow/state.json": true,
+    "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin": true
+  },
+  "fresh_resume_comparison": "g2/build/foundation/event-group-wsf-simulator/comparison-resume-fresh.json",
+  "correction": "0x5fa0a4 is BASEPRI mask helper; invalid paths stop at entry before helper execution/fault store/loop, not terminal diagnostic equivalence."
+}

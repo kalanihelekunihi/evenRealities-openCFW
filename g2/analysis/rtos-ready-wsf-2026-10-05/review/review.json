@@ -1,0 +1,26 @@
+{
+  "status": "PASS_WITH_BOUNDED_SCOPE",
+  "reviewed": {
+    "verifier": "g2/components/foundation/freertos_ready/simulator/verify.py",
+    "result": "g2/build/foundation/rtos-ready-wsf-simulator/comparison-final.json",
+    "result_case_count": 301,
+    "unique_original_trace_bytes": 1984,
+    "firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "elf_sha256": "11731e3275bda9993562d9727b450a7920eb8080907402949fedd9dd5eba9c95",
+    "focused_test": "python3 -m unittest g2.tests.test_freertos_ready",
+    "focused_test_result": "3 tests passed"
+  },
+  "checks": {
+    "pinned_source_function_text": "all five recorded hashes recomputed against raw CRLF-preserving source; all match",
+    "sparse_abi": "TCB field offsets and 20-byte list/item sizes are asserted",
+    "independent_list_model": "checks counts, sentinel/index pointers, link graph, owner/container, membership, insertion order, top priority, yield, and next-unblock state",
+    "source_and_elf_freshness": "all seven source-manifest hashes and linked ELF SHA256 match current files",
+    "translation_cache_policy": "cache invalidated on stock and source before each top-level call; documented in result; no general emulator-root-cause claim"
+  },
+  "limits": [
+    "TCBs, list contents, globals, and scheduler state are synthetic inputs.",
+    "Pending-ready drain, ready-task selection/context switching, full suspend/resume and scheduler lifecycle, and hardware behavior remain unverified.",
+    "This simulator target is not a production firmware build or byte-identical bundle proof."
+  ],
+  "blockers": []
+}

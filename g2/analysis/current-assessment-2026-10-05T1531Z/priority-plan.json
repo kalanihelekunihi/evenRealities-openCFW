@@ -1,0 +1,88 @@
+{
+  "updated_utc": "2026-10-05T15:42:10.191166+00:00",
+  "owner": "current assessment task only",
+  "shared_campaign_state_modified": false,
+  "priority_instruction": "Hold EvenHub SDK and similar higher-level application logic until last. Prioritize foundations, every hardware-level component, buses/protocols, drivers and inter-processor interactions.",
+  "ordered_work": [
+    {
+      "priority": "P0",
+      "scope": "Boot chain / reset / vectors",
+      "next_gap": "Reset reachability and initialization ownership for every image; constructor/ISR scheduling contracts"
+    },
+    {
+      "priority": "P0",
+      "scope": "Memory / allocator / DMA / MPU-cache",
+      "next_gap": "Pool/heap lifetime, DMA/copy boundaries, allocation failures, IRQ/cache coherence"
+    },
+    {
+      "priority": "P0",
+      "scope": "RTOS / tick / task / queues / ISR",
+      "next_gap": "Multi-task due batches, future deadlines, critical section/inter-read mutation, actual interrupt delivery"
+    },
+    {
+      "priority": "P1",
+      "scope": "Apollo \u2194 EM9305 / BLE host-controller",
+      "next_gap": "HCI enqueue/copy/ownership, controller records, RF sequencing and host\u2194controller failure recovery"
+    },
+    {
+      "priority": "P1",
+      "scope": "Apollo \u2194 codec / audio hardware",
+      "next_gap": "Reset/start/stop/DFU handshakes, PCM timing/metadata producer, frame faults and DMA buffer ownership"
+    },
+    {
+      "priority": "P1",
+      "scope": "Apollo \u2194 touch",
+      "next_gap": "Command/report layout, IRQ/attention ordering, power transitions, calibration and resident-loader boundary"
+    },
+    {
+      "priority": "P1",
+      "scope": "Apollo \u2194 charging case",
+      "next_gap": "Frame/resync/checksum, bank swap, charger/watchdog buses and disconnect behavior"
+    },
+    {
+      "priority": "P1",
+      "scope": "Temples \u2194 each other",
+      "next_gap": "Synchronization state ownership, framing/CRC, retransmission and device-role boot configuration"
+    },
+    {
+      "priority": "P1",
+      "scope": "Display hardware / draw buffers",
+      "next_gap": "Panel command/register sequences, framebuffer stride/format, GPU ownership/cache/DMA and scanout lifecycle"
+    },
+    {
+      "priority": "P1",
+      "scope": "NOR / filesystem / persistent update",
+      "next_gap": "Flash transaction state, erase/program safety, filesystem recovery, authenticated image install boundaries"
+    },
+    {
+      "priority": "P1",
+      "scope": "Sensors / power / board configuration",
+      "next_gap": "Board variant dispatch, register transactions, IRQ/power timing, sensing\u2194scheduler interactions"
+    },
+    {
+      "priority": "P1",
+      "scope": "Security / crypto / update trust",
+      "next_gap": "Trust boundary and recovery paths using synthetic inputs; no credential/device access"
+    },
+    {
+      "priority": "P2",
+      "scope": "G2 \u2194 R1 ring transport",
+      "next_gap": "Finish transport/lifecycle contracts before app actions; R1firmware is a separate locked artifact, not these six payloads"
+    },
+    {
+      "priority": "LAST",
+      "scope": "EvenHub / SDK / product feature services",
+      "next_gap": "Defer new work until foundations/buses/drivers/IPC contracts reviewed; retain interfaces needed to explain hardware consumers"
+    }
+  ],
+  "coordination_required": [
+    "State lists only old startup assignments while fresh120xxRTOS fixture activity is present; identify current parent/worker owners before redirecting or reserving overlapping functions.",
+    "If the coordinator confirms an active RTOS owner, preserve its bounded work and notify that parent of this priority plan; do not mutate shared state/gates or cancel unidentified workers.",
+    "Reserve nonoverlapping ownership through the active coordinator for HCI/codec/touch/case/display driver ranges. Do not dispatch new implementation tasks before pseudocode freeze."
+  ],
+  "scope_limits": [
+    "Assessment/prioritization only; no new decompilation or firmware patch.",
+    "Library identity and upstream availability are separate from verified compiled source replacement.",
+    "Each proposed task must deliver original-byte-bound pseudocode, interfaces/ownership and scoped validation rather than repetitive metadata or gate loops."
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "status": "REVIEWED_WITH_LIMITS",
+  "scope": "Independent read-only review of optimized tick/Unicorn memory-hook divergence, C aliasing/alignment/volatile/sparse ABI concerns, and emitted O2 list-insertion contract.",
+  "artifacts": {
+    "hook_matrix": {
+      "path": "g2/build/foundation/unicorn-it-divergence/hook-access-matrix.json",
+      "sha256": "b59b3ccfcefee44af06144875794641d65239cf2335701d50c7566ef27736b57",
+      "diagnostic_only": true
+    },
+    "o2_replica": {
+      "path": "g2/build/foundation/rtos-tick-wsf-diagnostic-o2/rtos_tick_wsf.elf",
+      "sha256": "a04b6f3c7fd1c47d71ccd31615b95ebf44e793382e845cf3bd2c7452d165c478",
+      "qualification": "reconstructed diagnostic replica; not retained authenticated firmware object"
+    },
+    "o2_no_strict_aliasing": {
+      "path": "g2/build/foundation/rtos-tick-wsf-diagnostic-o2-noalias/rtos_tick_wsf.elf",
+      "sha256": "efb33a1e5779f55e4bd82bd3acb7fe053f5bc6c62510119d6fe659fdf84b1202"
+    },
+    "o0_semantic_test": {
+      "path": "g2/build/foundation/rtos-tick-wsf-simulator/rtos_tick_wsf.elf",
+      "sha256": "035f8480636e0152f664ee16cd247145f97fd3165ac9feb21e95d6f2f7d302b7"
+    },
+    "machine_fixture": {
+      "path": "g2/analysis/unicorn-it-divergence-2026-10-05/machine-fixture.json",
+      "sha256": "3ff092b94a5d68132db46d7df1bb1957e453be99fe6c248a51a679c084bc91fc",
+      "machine_code_bytes": [
+        238,
+        26,
+        32
+      ]
+    },
+    "machine_reproduction": {
+      "path": "g2/build/foundation/unicorn-it-divergence/machine-repro.json",
+      "sha256": "d1a226a517b68b591178fc15e9515a585472cd57c891c8d05f9f4c08842337f1",
+      "unicorn_version": "2.1.4",
+      "run": "/Users/kalani/.local/share/opencfw/venv/bin/python g2/analysis/unicorn-it-divergence-2026-10-05/reproduce_machine.py",
+      "independently_rerun": true
+    },
+    "bounded_stock_comparison": {
+      "path": "g2/build/foundation/unicorn-it-divergence/bounded-stock-comparison.json",
+      "sha256": "b851e1f3db1679a3512b4cc49f2854a23c495c8f0ecb16f0c276ae50dc21b9ab",
+      "firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "scope": "one valid two-expiry case; no source memory-hook invariants"
+    },
+    "hook_range_matrix": {
+      "path": "g2/build/foundation/unicorn-it-divergence/hook-range-matrix.json",
+      "sha256": "a262ba6432d1e8b405dc4efaa770cc58c2a8dcaf8778b5a98d2889c4c3b8d31c",
+      "observation": "unused address range succeeds; a range covering accessed RAM reproduces the missing unconditional load"
+    }
+  },
+  "observations": [
+    "I reran the standalone 32-case machine reproduction under Unicorn 2.1.4. It uses three unchanged optimized machine-code bodies totaling 296 bytes, synthetic aligned RAM, and an empty memory-hook callback.",
+    "One due task completes under every tested memory-hook mode. Two due tasks complete with no memory hook or a code hook only; READ, WRITE, and combined memory hooks each fault at 0x10296, with or without the code hook.",
+    "On the second list insertion, the code trace proceeds from 0x10292 to 0x10296 without visiting 0x10290. Disassembly shows 0x10290 is unconditional encoding 0x6842 (LDR r2,[r0,#4]). The corresponding ready-list pxIndex cell at 0x2006a4dc still holds 0x2006a4e0, but r2 is zero at the fault.",
+    "The empty callback rules out project callback logic as a necessary cause; code-hook-only reads of R2/XPSR do not reproduce the fault. The hook-range matrix reports success for an unused address range and failure when hooked range covers accessed RAM. This supports a bounded memory-hook-sensitive Unicorn execution diagnosis but does not establish the emulator internal root cause.",
+    "A separate one-input comparison reports stock final-state equality and independent graph-model pass for O2, O2-noalias, and O0 with source memory hooks omitted. It is observational diagnostic evidence only; source memory invariants are absent and it receives no passing coverage credit."
+  ],
+  "source_review": {
+    "alignment_and_sparse_abi": "No concrete misalignment or field-width defect identified in the reviewed 32-bit List_t/ListItem_t compatibility layouts or O2 insertion accesses; ABI assertions cover structure size and accessed TCB offsets, not a complete recovered TCB.",
+    "volatile": "Recovered global kernel cells use volatile lvalues where required; list/TCB object fields are ordinary accesses under the kernel critical/scheduler preconditions.",
+    "aliasing_caveat": "Pinned FreeRTOS deliberately casts the MiniListItem sentinel address to ListItem_t* and accesses the shared prefix through ListItem_t; potential effective-type/strict-aliasing concern under ISO C. Original G2 compiler flags are unknown. Same memory-hook failure occurs in the no-strict-aliasing diagnostic, so aliasing is not established as cause.",
+    "o2_contract": "At vListInsertEnd, 0x10290 is unconditional encoding 0x6842 (LDR r2,[r0,#4]); following 0x10292 loads the item count and 0x10296 dereferences r2. For the failing second insertion, 0x10290 is skipped in the Unicorn trace even though pxIndex remains valid. This is a machine-execution observation, not evidence of an invalid source pointer or hardware behavior."
+  },
+  "disposition": "The specific memory-hooked O2 failure is reproduced as a bounded Unicorn execution limitation, with its exact internal root cause unresolved. Keep the full O2 validation gate blocked: its unchanged verifier still exits 1 and no optimized PASS exists. The one-case no-memory-hook stock/model agreement receives no coverage credit; the O0 full 271-case result is separate.",
+  "changes_made": "Only this owned review directory; no firmware source, verifier, gates, or shared campaign state modified.",
+  "project_validation": {
+    "path": "g2/analysis/unicorn-it-divergence-2026-10-05/VALIDATION.json",
+    "sha256": "a5e1214c29f2649958cac3dd836510423ed2aedfd5c872fae4de854581029742",
+    "optimized_full_validation": "BLOCKED; current O2 full verifier exits 1; no PASS result created",
+    "o0_full_validation": "PASS, 271 cases, previously accepted result SHA-256 e49a44d29a6fb10443e06082ee19d4eaa4fde790603824ea302b452d744d0b63",
+    "new_validated_firmware_bytes": 0
+  }
+}

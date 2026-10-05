@@ -1,0 +1,53 @@
+{
+  "firmware": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+  "firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "payload_offset": 32,
+  "load_base": "0x438000",
+  "functions": [
+    {
+      "name": "state_write",
+      "address": "0x480fd6",
+      "bytes": 218,
+      "sha256": "e768e90540355f1c1e9fcd7477765c5bacf0c91e8b2fc3daa6d4794cbd0fc9ef"
+    },
+    {
+      "name": "radio_idle_pins",
+      "address": "0x52dd7c",
+      "bytes": 24,
+      "sha256": "305a68c45e61102444d5ccab1fad6ed41903a05985e2323223acc1c92c92f9bc"
+    },
+    {
+      "name": "critical_shared",
+      "address": "0x473940",
+      "bytes": 8,
+      "sha256": "720733fcf19a5635fcab0791fcc2b007294712bb27536443ff79490821c168cf"
+    }
+  ],
+  "pointer_pool": {
+    "0x48174c": "0x40010404",
+    "0x481750": "0x40010420",
+    "0x481754": "0x40010474",
+    "0x481758": "0x40010458",
+    "0x48175c": "0x4001043c",
+    "0x481760": "0x400104ac",
+    "0x481764": "0x40010490"
+  },
+  "radio_config_literal_pointer": {
+    "address": "0x52e93c",
+    "value": "0x78ee48"
+  },
+  "radio_config_word": {
+    "address": "0x78ee48",
+    "value": "0x3"
+  },
+  "correct_register_offsets": {
+    "RD": "0x404",
+    "WT": "0x420",
+    "WTS": "0x43c",
+    "WTC": "0x458",
+    "EN": "0x474",
+    "ENS": "0x490",
+    "ENC": "0x4ac"
+  },
+  "limits": "Static pointers/body identity; caller shutdown not counted as executed source coverage; register behavior from pinned primary device documentation."
+}

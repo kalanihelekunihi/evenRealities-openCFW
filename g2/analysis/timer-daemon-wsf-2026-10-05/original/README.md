@@ -1,0 +1,21 @@
+# Timer daemon receive and callback path
+
+This packet authenticates the timer-daemon queue receive and negative-command callback path from the locked image. The daemon code is present in original code intervals that the Ghidra census did not list as function rows, so the packet records raw interval hashes rather than inventing function-row identities.
+
+`verify.py` checks the pinned OTA and decoded image hashes, the authenticated queue/critical helper function rows, four raw daemon intervals, call targets and literals, and the local FreeRTOS source files against their pinned tree blobs. It writes `results.json` and `disassembly.txt`; run it with `~/.local/share/opencfw/venv/bin/python g2/analysis/timer-daemon-wsf-2026-10-05/original/verify.py`.
+
+The task loop is the raw interval `0x47e878..0x47e88b` (20 bytes, SHA256 `9a7fd60775e97786baeb1ea1871423c63c5d744b5b8e1ce0c8176e8bb80d377a`). It calls the timer-block helper at `0x47e88c`, then the command processor at `0x47e97a`, and branches back to `0x47e87a`. The raw block helper `0x47e88c..0x47e8f1` calls scheduler suspend/resume helpers `0x454d7c` and `0x454dcc`; those operations are distinct from the BASEPRI critical-section helpers described below.
+
+The command processor receives queue entries at `0x47e992`: it sets `r2=0` (no wait), passes `SP` as the destination in `r1`, loads the timer queue handle through the literal at `0x47eb6c` (`0x20074ab0`), and calls authenticated queue-receive body `0x441b0a` at `0x47e99a`. A zero return branches to the epilogue `0x47ea8c..0x47ea8f`. Otherwise the code tests the signed command ID at `[SP]`. Negative IDs call the function pointer `[SP+4]` with arguments `[SP+8]` and `[SP+12]` at `0x47e9b0`, then return to the receive loop. The loop prefix `0x47e97a..0x47e9b7` is 62 bytes with SHA256 `f6384185b419e8db5a51eaef08dce3ec905b81ab65079f0da6c924d66899e1cf`. Positive command handling starts at `0x47e9b8` and is outside this bounded analysis.
+
+The callback command constructed by the adjacent producer `0x47eb4a` is the same timer-queue message traced in [the producer packet](../../timer-queue-wsf-2026-10-05/original/README.md). There the caller fills four words: negative command ID, callback, parameter 1 and parameter 2. This packet independently confirms the daemon’s receives and dispatches the callback fields. The callback itself is indirect; this evidence does not execute it or guarantee a particular callback's effects.
+
+## Critical-section boundary
+
+The original queue-receive body `0x441b0a` calls critical-entry helper `0x4420d0` and critical-exit helper `0x4420e8`. Entry calls `0x5fa0a4`, whose instructions read BASEPRI, write `0x30`, then execute DSB/ISB. It increments the nesting word at `0x2000309c` (literal at `0x442210`) and executes DSB/ISB. Exit decrements that same word and, only when the nesting depth reaches zero, passes `0` to `0x5fa0ba`; that helper writes BASEPRI=0 and executes DSB/ISB. The helpers do not save and restore an arbitrary prior BASEPRI value: the outer exit clears BASEPRI to zero. `0x441b0a` reaches these helpers on its receive paths; instruction locations and function hashes are retained in `results.json`.
+
+## Pinned source and limits
+
+The local FreeRTOS/FreeRTOS-Kernel source snapshot matches tree commit `def7d2df2b0506d3d249334974f51e427c17a41c`, version V10.5.1, MIT license. The exact `queue.c` and `timers.c` hashes and Git blob identities are in `results.json`. Pinned `timers.c` identifies `prvTimerTask` and `prvProcessReceivedCommands`: its daemon loop calls the command processor, which receives `xQueueReceive(xTimerQueue, &xMessage, tmrNO_DELAY)`, dispatches callback fields when the signed command ID is negative, then continues to the next queue receive. Pinned `queue.c` shows `xQueueReceive` uses the generic receive path and task critical sections. This correspondence is semantic and version-pinned; it does not claim that these sources compile byte-identically to the firmware.
+
+No positive timer-command behavior, timer expiry processing, queue contents at runtime, scheduler execution, callback execution, or hardware behavior is claimed. The raw daemon intervals have no Ghidra function census row; their identity rests on the locked image bytes, direct control flow, caller relationship, and source-consistent behavior.

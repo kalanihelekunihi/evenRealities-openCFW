@@ -1,0 +1,151 @@
+OTA sha256=36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863 size=3523396; decoded image sha256=19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701 size=3523364, base=0x00438000; OTA preamble=32 bytes.
+
+00473934 FUN_00473934 [00473934,0047393c) 8B sha256=6c169e0f7b32e9f34f42114fdbd5292b812805d62399aabd65f2299c040bd120
+00473934 eff31080 mrs        r0, primask
+00473938 62b6     cpsie      i
+0047393a 7047     bx         lr
+
+00473940 FUN_00473940 [00473940,00473948) 8B sha256=720733fcf19a5635fcab0791fcc2b007294712bb27536443ff79490821c168cf
+00473940 eff31080 mrs        r0, primask
+00473944 72b6     cpsid      i
+00473946 7047     bx         lr
+
+0047394c FUN_0047394c [0047394c,00473952) 6B sha256=081c18c20c2470ed4c2a8de4ac105253647b86c92fad5b1dbe03b841d4a843e7
+0047394c dff8240b ldr.w      r0, [pc, #0xb24] ; literal [0x00474474]=0x00776a3c
+00473950 7047     bx         lr
+
+004807a0 FUN_004807a0 [004807a0,004807f0) 80B sha256=f95193c502160b469e1579e13223f1cdf488a2d8fab9ec07f686c9101fbed753
+004807a0 80b5     push       {r7, lr}
+004807a2 00ee100a vmov       s0, r0
+004807a6 b8ee400a vcvt.f32.u32 s0, s0
+004807aa bfeeed0a vcvt.u32.f32 s0, s0, #5
+004807ae 10ee100a vmov       r0, s0
+004807b2 1149     ldr        r1, [pc, #0x44] ; literal [0x004807f8]=0x40021000
+004807b4 0968     ldr        r1, [r1]
+004807b6 c1f3c101 ubfx       r1, r1, #3, #2
+004807ba 0229     cmp        r1, #2
+004807bc 01d0     beq        #0x4807c2
+004807be 0f21     movs       r1, #0xf
+004807c0 10e0     b          #0x4807e4
+004807c2 00ee100a vmov       s0, r0
+004807c6 b8ee400a vcvt.f32.u32 s0, s0
+004807ca dfed090a vldr       s1, [pc, #0x24] ; literal [0x004807f0]=0x437a0000
+004807ce 20ee200a vmul.f32   s0, s0, s1
+004807d2 dfed080a vldr       s1, [pc, #0x20] ; literal [0x004807f4]=0x42c00000
+004807d6 80ee200a vdiv.f32   s0, s0, s1
+004807da bceec00a vcvt.u32.f32 s0, s0
+004807de 10ee100a vmov       r0, s0
+004807e2 1821     movs       r1, #0x18
+004807e4 8142     cmp        r1, r0
+004807e6 02d2     bhs        #0x4807ee
+004807e8 401a     subs       r0, r0, r1
+004807ea 7ff729f4 bl         #0x40 ; target is ITCM address 0x40 outside main-image mapping
+004807ee 01bd     pop        {r0, pc}
+
+0043a11e FUN_0043a11e [0043a11e,0043a19c) 126B sha256=41e4a34428bb2c09774785d474f5209201f6551c823f0286eb66063dedc74a9d
+0043a11e f0b4     push       {r4, r5, r6, r7}
+0043a120 0246     mov        r2, r0
+0043a122 1068     ldr        r0, [r2]
+0043a124 9568     ldr        r5, [r2, #8]
+0043a126 1318     adds       r3, r2, r0
+0043a128 5068     ldr        r0, [r2, #4]
+0043a12a 03eb5004 add.w      r4, r3, r0, lsr #1
+0043a12e c007     lsls       r0, r0, #0x1f
+0043a130 48bf     it         mi
+0043a132 4d44     addmi      r5, sb
+0043a134 a342     cmp        r3, r4
+0043a136 2dd0     beq        #0x43a194
+0043a138 13f8016b ldrb       r6, [r3], #1
+0043a13c 16f00300 ands       r0, r6, #3
+0043a140 04bf     itt        eq
+0043a142 13f8010b ldrbeq     r0, [r3], #1
+0043a146 c01c     addeq      r0, r0, #3
+0043a148 3109     lsrs       r1, r6, #4
+0043a14a 0f29     cmp        r1, #0xf
+0043a14c 07d1     bne        #0x43a15e
+0043a14e 13f8011b ldrb       r1, [r3], #1
+0043a152 0f31     adds       r1, #0xf
+0043a154 03e0     b          #0x43a15e
+0043a156 13f8017b ldrb       r7, [r3], #1
+0043a15a 05f8017b strb       r7, [r5], #1
+0043a15e 401e     subs       r0, r0, #1
+0043a160 f9d1     bne        #0x43a156
+0043a162 0029     cmp        r1, #0
+0043a164 e6d0     beq        #0x43a134
+0043a166 13f8010b ldrb       r0, [r3], #1
+0043a16a c6f38106 ubfx       r6, r6, #2, #2
+0043a16e 032e     cmp        r6, #3
+0043a170 08bf     it         eq
+0043a172 13f8016b ldrbeq     r6, [r3], #1
+0043a176 00eb0620 add.w      r0, r0, r6, lsl #8
+0043a17a 4042     rsbs       r0, r0, #0
+0043a17c 2844     add        r0, r5
+0043a17e 0026     movs       r6, #0
+0043a180 b71e     subs       r7, r6, #2
+0043a182 8f42     cmp        r7, r1
+0043a184 1ebf     ittt       ne
+0043a186 10f8017b ldrbne     r7, [r0], #1
+0043a18a 05f8017b strbne     r7, [r5], #1
+0043a18e 761c     addne      r6, r6, #1
+0043a190 f6d1     bne        #0x43a180
+0043a192 cfe7     b          #0x43a134
+0043a194 f0bc     pop        {r4, r5, r6, r7}
+0043a196 02f10c00 add.w      r0, r2, #0xc
+0043a19a 7047     bx         lr
+
+005e42b4 FUN_005e42b4 [005e42b4,005e42d4) 32B sha256=c18f6c848dedbb42dc53582eb239f9f59017656fafad4cc4c948827bb6c342bd
+005e42b4 10b5     push       {r4, lr}
+005e42b6 0749     ldr        r1, [pc, #0x1c] ; literal [0x005e42d4]=0x001790f4
+005e42b8 7944     add        r1, pc
+005e42ba 1831     adds       r1, #0x18
+005e42bc 064c     ldr        r4, [pc, #0x18] ; literal [0x005e42d8]=0x00179138
+005e42be 7c44     add        r4, pc
+005e42c0 1634     adds       r4, #0x16
+005e42c2 04e0     b          #0x5e42ce
+005e42c4 0a68     ldr        r2, [r1]
+005e42c6 081d     adds       r0, r1, #4
+005e42c8 1144     add        r1, r2
+005e42ca 8847     blx        r1
+005e42cc 0146     mov        r1, r0
+005e42ce a142     cmp        r1, r4
+005e42d0 f8d1     bne        #0x5e42c4
+005e42d2 10bd     pop        {r4, pc}
+
+005fa01e FUN_005fa01e [005fa01e,005fa056) 56B sha256=8b74bda81d1262930007b87bd980ccaebc6028472d7dd7413c20cc1f281b1b67
+005fa01e 30b4     push       {r4, r5}
+005fa020 0025     movs       r5, #0
+005fa022 12e0     b          #0x5fa04a
+005fa024 50f8042b ldr        r2, [r0], #4
+005fa028 d307     lsls       r3, r2, #0x1f
+005fa02a 44bf     itt        mi
+005fa02c 4a44     addmi      r2, sb
+005fa02e 521e     submi      r2, r2, #1
+005fa030 091f     subs       r1, r1, #4
+005fa032 0429     cmp        r1, #4
+005fa034 42f8045b str        r5, [r2], #4
+005fa038 fad2     bhs        #0x5fa030
+005fa03a 1346     mov        r3, r2
+005fa03c 8c07     lsls       r4, r1, #0x1e
+005fa03e 44bf     itt        mi
+005fa040 1580     strhmi     r5, [r2]
+005fa042 9b1c     addmi      r3, r3, #2
+005fa044 c907     lsls       r1, r1, #0x1f
+005fa046 48bf     it         mi
+005fa048 1d70     strbmi     r5, [r3]
+005fa04a 50f8041b ldr        r1, [r0], #4
+005fa04e 0029     cmp        r1, #0
+005fa050 e8d1     bne        #0x5fa024
+005fa052 30bc     pop        {r4, r5}
+005fa054 7047     bx         lr
+
+Scatter-decoded ITCM[0x40:0x58] from source 0x0079430e (22 input bytes): 0138fdd17047704750f8043b41f8043b013af9d170477047
+00000040 0138     subs       r0, #1
+00000042 fdd1     bne        #0x40
+00000044 7047     bx         lr
+00000046 7047     bx         lr
+00000048 50f8043b ldr        r3, [r0], #4
+0000004c 41f8043b str        r3, [r1], #4
+00000050 013a     subs       r2, #1
+00000052 f9d1     bne        #0x48
+00000054 7047     bx         lr
+00000056 7047     bx         lr

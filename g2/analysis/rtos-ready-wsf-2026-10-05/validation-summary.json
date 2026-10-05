@@ -1,0 +1,20 @@
+{
+  "status": "PASS_WITH_BOUNDED_SCOPE",
+  "comparison_cases": 301,
+  "unique_original_trace_bytes": 1984,
+  "new_disjoint_bytes": 280,
+  "cumulative_disjoint_bytes": 3530,
+  "focused_passing_tests": 53,
+  "independent_review": "review/report.md",
+  "cache_policy": "Invalidate executable translation caches before each synthetic top-level call, both stock/source.",
+  "limits": "No pending drain/task selection/context switch/full scheduler or object lifetime proof.",
+  "aggregate_modules": 39,
+  "aggregate": {
+    "tests_run": 209,
+    "passed": 203,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 7
+  },
+  "aggregate_environment": "Installed OpenCFW Python; PYTHONDONTWRITEBYTECODE=1 npm_config_fetch_retries=0 npm_config_fetch_timeout=5000. Wrong-Python/import-error and interrupted npm-wait attempts preserved and excluded from final success."
+}

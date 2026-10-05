@@ -1,0 +1,29 @@
+# WSF radio event handoff
+
+This is a bounded static trace of the authenticated Apollo main image. The corrected reproducible outputs are [results-corrected.json](results-corrected.json) and [disassembly-corrected.txt](disassembly-corrected.txt); rerun `~/.local/share/opencfw/venv/bin/python g2/analysis/wsf-radio-handoff-2026-10-05/original/verify.py` from the repository root to recheck the image identity, 12 function-entry hashes, the 102-byte WsfOsInit fill path, six literal words, and the eight direct registration call sites.
+
+The source image is `g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin`, SHA-256 `36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863`. Its 32-byte OTA preamble is excluded from the 3,523,364-byte image at `0x438000`, SHA-256 `19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701`. Function addresses, sizes, names, and hashes are cross-checked against `g2/research/corpus/apollo-main/ghidra/open-2026-09-29/functions-000.jsonl` and `RUN.json`.
+
+## Event state and registration
+
+The literal at `0x52bac4` resolves to `0x20073230`, the event-state base. The code treats offsets `0x00..0x27` as ten 32-bit handler slots, `0x28..0x31` as ten event bytes, `0x32..0x33` as unused by the examined paths, `0x34..` as the message-queue object passed to `WsfMsgDeq`, `0x3c` as task-work flags, and `0x3d` as the next-handler byte counter. The Ghidra census marks only eight bytes at `0x43c0e4`, but those instructions fall through into a shared fill routine through `0x43c148`. The 102 authenticated bytes perform backward byte/halfword/word stores and return; `_bleExactleStackInit` calls `WsfOsInit` first, and `WsfOsInit` passes `(state, 0x40, 0)` to that path. The state base plus 0x40 is aligned, so the executed path stores zero throughout the state object, including the counter.
+
+`_bleExactleStackInit` calls `WsfOsInit`, then invokes `WsfOsSetNextHandler` eight times at `0x4b7ff4`, `0x4b8002`, `0x4b803e`, `0x4b8058`, `0x4b8072`, `0x4b8096`, `0x4b80a4`, and `0x4b80b2`. `WsfOsSetNextHandler` returns the previous counter byte and increments it; `HciDrvHandlerInit` receives the eighth return and stores that byte at `0x20074fcb`. Since `WsfOsInit` has just filled the state with zero, the stored radio event ID is 7. `HciDrvIntService` later loads the byte at `0x20074fcb` and calls `WsfSetEvent(id, 1)`.
+
+## Event behavior supported by instructions
+
+`WsfSetEvent` truncates the supplied ID to a byte, masks it with `0x0f`, ORs the supplied event bits into `state[0x28 + id]`, ORs `4` into `state[0x3c]`, exits its critical section, and calls `WsfSetOsSpecificEvent`. It has no check that the masked ID is below ten. IDs 10 and 11 address bytes `state+0x32` and `state+0x33`, which the dispatcher does not scan. IDs 12 through 15 address the first four bytes of the object passed as the message queue at `state+0x34`; the exact affected queue fields are not named here. In all these cases the normal event scan is limited to IDs 0 through 9. Values 16 and above alias by the low four bits.
+
+The dispatcher snapshots and clears the task-work byte under the WSF critical section. Work flags are tested from bit 0 upward: bit 0 drains queued messages, bit 1 services expired timers, and bit 2 scans event IDs in ascending order from 0 through 9. For an event ID it requires both a nonzero event byte and a nonzero handler pointer; it then snapshots and clears that event byte under the critical section and calls the handler with `(event_bits, 0)` after leaving the critical section. A null handler leaves the event byte untouched in that pass.
+
+Because the event byte is cleared before calling the handler and the task-work byte is cleared before work dispatch, a callback that calls `WsfSetEvent` again republishes the event and event-work flag. A lower or same ID is reached in a later outer pass; a greater ID can still be reached in the current ascending scan if reposted before the scan reaches it. Identical pending bits coalesce by OR in one byte rather than forming a counted queue. These are control-flow consequences of the body; no scheduler or firmware execution was performed.
+
+The critical-section leaves use the byte at `0x20075045`: enter issues `CPSID i` only when the byte is zero, then increments it; exit decrements it and issues `CPSIE i` when it becomes zero. They do not save or restore a previous PRIMASK value and do not check for counter underflow. The description is limited to those instructions and does not claim the nesting byte's initial runtime value.
+
+`WsfSetOsSpecificEvent` uses event-group handle cell `0x20074ef0` and, depending on a context helper result, calls one of two FreeRTOS event-group APIs: task-context set-bits or the ISR set-bits wrapper. The ISR wrapper's deferred callback/queue path is documented in the companion [FreeRTOS event-group evidence packet](../../event-group-wsf-2026-10-05/original/README.md). One path may write `0x10000000` to `0xe000ed04`; the other conditionally calls `0x4420bc`. The wrappers' scheduler semantics are outside this packet. `wsfOsDispatcher` also calls timer-update, message queue, timer-service, and ready-to-sleep routines whose deeper contracts are not inferred here.
+
+## Limits
+
+This packet authenticates and disassembles bytes and proves the static call/data flow described above. The zero initialization and radio event ID 7 follow from the call order and fill instructions; no firmware execution was performed. Scheduler timing, interrupt delivery, and behavior of out-of-scope OS and queue callees remain untested.
+
+The provisional `results.json`/`disassembly.txt` and mistaken `results-final.json`/`disassembly-final.txt` are retained as an audit trail; they predate recognition that the short census entry at `0x43c0e4` falls through into its shared fill body. Use only the `*-corrected` outputs.

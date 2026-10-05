@@ -1,0 +1,364 @@
+{
+  "image": {
+    "path": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+    "ota_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+    "base": "0x438000",
+    "bytes": 3523364
+  },
+  "ghidra_run": "g2/research/corpus/apollo-main/ghidra/open-2026-09-29/RUN.json",
+  "targets": {
+    "0x454d7c": {
+      "bytes": 12,
+      "sha256": "3651c872be8fd55503df57fb49f5d0b7b94b0e784237141389a4b965b8edb6e2",
+      "body_end_exclusive": "0x454d88",
+      "callees": [],
+      "callers": [
+        "0x4417ee",
+        "0x441b0a",
+        "0x441c44",
+        "0x454b4c",
+        "0x454f38",
+        "0x455728",
+        "0x456110",
+        "0x456210",
+        "0x47ebf8",
+        "0x47ed76",
+        "0x57e136"
+      ]
+    },
+    "0x454dcc": {
+      "bytes": 306,
+      "sha256": "548e05e1f8a2f498372dd1f4eb7c6536e093dbbfdb82fbe8f9b54231cedc8a09",
+      "body_end_exclusive": "0x454efe",
+      "callees": [
+        "004420bc",
+        "004420d0",
+        "004420e8",
+        "0045504c",
+        "00455876",
+        "005fa0a4"
+      ],
+      "callers": [
+        "0x4417ee",
+        "0x441b0a",
+        "0x441c44",
+        "0x454b4c",
+        "0x454f38",
+        "0x455728",
+        "0x456110",
+        "0x456210",
+        "0x47ebf8",
+        "0x47ed76",
+        "0x57e136"
+      ]
+    },
+    "0x45504c": {
+      "bytes": 338,
+      "sha256": "438ad4e9e1a7b439671463b2bbfd13616ebb6de32bd2aad53b802d31f11cc050",
+      "body_end_exclusive": "0x45519e",
+      "callees": [
+        "00455876",
+        "005fa0a4"
+      ],
+      "callers": [
+        "0x442114",
+        "0x454dcc",
+        "0x4563b4"
+      ]
+    },
+    "0x455876": {
+      "bytes": 38,
+      "sha256": "a789916ee424c824c5c5f2302e62e4a861f0fa1289917d9c0e095947bce82598",
+      "body_end_exclusive": "0x45589c",
+      "callees": [],
+      "callers": [
+        "0x454aae",
+        "0x454dcc",
+        "0x45504c",
+        "0x455370",
+        "0x45547c",
+        "0x455c48"
+      ]
+    },
+    "0x4420bc": {
+      "bytes": 18,
+      "sha256": "2f99a4f1a4c654feb8c6d0b89bd975cf7c2acee3ad5b18ddf086097ed3f100da",
+      "body_end_exclusive": "0x4420ce",
+      "callees": [],
+      "callers": [
+        "0x441516",
+        "0x4417ee",
+        "0x441b0a",
+        "0x441c44",
+        "0x4491e4",
+        "0x4549fc",
+        "0x454aae",
+        "0x454b4c",
+        "0x454c12",
+        "0x454dcc",
+        "0x455afc",
+        "0x455b84",
+        "0x455c48",
+        "0x47ebf8",
+        "0x52b8d8"
+      ]
+    },
+    "0x4420d0": {
+      "bytes": 24,
+      "sha256": "5809638c22f928d2b32cd21cc9b92a292fad24cd8b8008de4ad92b9faeaba0d4",
+      "body_end_exclusive": "0x4420e8",
+      "callees": [
+        "005fa0a4"
+      ],
+      "callers": [
+        "0x43c8d2",
+        "0x441516",
+        "0x4417ee",
+        "0x441b0a",
+        "0x441c44",
+        "0x441e66",
+        "0x441f88",
+        "0x441ff6",
+        "0x442012",
+        "0x442030",
+        "0x449d3e",
+        "0x449dd4",
+        "0x4549fc",
+        "0x454aae",
+        "0x454b88",
+        "0x454c12",
+        "0x454dcc",
+        "0x454fd8",
+        "0x455566",
+        "0x4556e0",
+        "0x455afc",
+        "0x455b84",
+        "0x455c48",
+        "0x455f5e",
+        "0x4767a8",
+        "0x47eab8",
+        "0x47eaf6",
+        "0x47eb26",
+        "0x47ebf8",
+        "0x47ed10",
+        "0x4d46e8",
+        "0x4d4724",
+        "0x4d47cc",
+        "0x4d47fa",
+        "0x57e136",
+        "0x5847ac"
+      ]
+    },
+    "0x4420e8": {
+      "bytes": 44,
+      "sha256": "bfd3ddb76c61ad634a3f58ed203260da3834895b646c9dffada546f9dc9d2a31",
+      "body_end_exclusive": "0x442114",
+      "callees": [
+        "005fa0a4",
+        "005fa0ba"
+      ],
+      "callers": [
+        "0x43c8d2",
+        "0x441516",
+        "0x4417ee",
+        "0x441b0a",
+        "0x441c44",
+        "0x441e66",
+        "0x441f88",
+        "0x441ff6",
+        "0x442012",
+        "0x442030",
+        "0x449d3e",
+        "0x449dd4",
+        "0x4549fc",
+        "0x454aae",
+        "0x454b88",
+        "0x454c12",
+        "0x454dcc",
+        "0x454fd8",
+        "0x455566",
+        "0x4556e0",
+        "0x455afc",
+        "0x455b84",
+        "0x455c48",
+        "0x455f5e",
+        "0x4767a8",
+        "0x47eab8",
+        "0x47eaf6",
+        "0x47eb26",
+        "0x47ebf8",
+        "0x47ed10",
+        "0x4d46e8",
+        "0x4d4724",
+        "0x4d47cc",
+        "0x4d47fa",
+        "0x57e136",
+        "0x5847ac"
+      ]
+    }
+  },
+  "resolved_literals": [
+    {
+      "load_pc": "0x454d7c",
+      "literal_address": "0x455468",
+      "value": "0x20074a58"
+    },
+    {
+      "load_pc": "0x454dd2",
+      "literal_address": "0x455468",
+      "value": "0x20074a58"
+    },
+    {
+      "load_pc": "0x454dfa",
+      "literal_address": "0x4551a0",
+      "value": "0x20074a30"
+    },
+    {
+      "load_pc": "0x454e54",
+      "literal_address": "0x4551ac",
+      "value": "0x20074a38"
+    },
+    {
+      "load_pc": "0x454e64",
+      "literal_address": "0x4551b0",
+      "value": "0x2006a49c"
+    },
+    {
+      "load_pc": "0x454e9c",
+      "literal_address": "0x4551a4",
+      "value": "0x20074a20"
+    },
+    {
+      "load_pc": "0x454eaa",
+      "literal_address": "0x455a14",
+      "value": "0x20074a44"
+    },
+    {
+      "load_pc": "0x454eb0",
+      "literal_address": "0x4557a8",
+      "value": "0x20073d24"
+    },
+    {
+      "load_pc": "0x454ec2",
+      "literal_address": "0x455a18",
+      "value": "0x20074a40"
+    },
+    {
+      "load_pc": "0x455050",
+      "literal_address": "0x455468",
+      "value": "0x20074a58"
+    },
+    {
+      "load_pc": "0x45505c",
+      "literal_address": "0x45546c",
+      "value": "0x20074a34"
+    },
+    {
+      "load_pc": "0x45506a",
+      "literal_address": "0x455470",
+      "value": "0x20074a24"
+    },
+    {
+      "load_pc": "0x455086",
+      "literal_address": "0x455474",
+      "value": "0x20074a28"
+    },
+    {
+      "load_pc": "0x455090",
+      "literal_address": "0x455af8",
+      "value": "0x20074a48"
+    },
+    {
+      "load_pc": "0x45509e",
+      "literal_address": "0x455724",
+      "value": "0x20074a50"
+    },
+    {
+      "load_pc": "0x455106",
+      "literal_address": "0x4551ac",
+      "value": "0x20074a38"
+    },
+    {
+      "load_pc": "0x455114",
+      "literal_address": "0x4551b0",
+      "value": "0x2006a49c"
+    },
+    {
+      "load_pc": "0x45514c",
+      "literal_address": "0x4551a4",
+      "value": "0x20074a20"
+    },
+    {
+      "load_pc": "0x45515a",
+      "literal_address": "0x455470",
+      "value": "0x20074a24"
+    },
+    {
+      "load_pc": "0x45516e",
+      "literal_address": "0x4551a4",
+      "value": "0x20074a20"
+    },
+    {
+      "load_pc": "0x455172",
+      "literal_address": "0x4551b0",
+      "value": "0x2006a49c"
+    },
+    {
+      "load_pc": "0x455182",
+      "literal_address": "0x455a14",
+      "value": "0x20074a44"
+    },
+    {
+      "load_pc": "0x455190",
+      "literal_address": "0x455a18",
+      "value": "0x20074a40"
+    },
+    {
+      "load_pc": "0x455876",
+      "literal_address": "0x456050",
+      "value": "0x20074a24"
+    },
+    {
+      "load_pc": "0x455886",
+      "literal_address": "0x456060",
+      "value": "0x20074a50"
+    }
+  ],
+  "direct_callers": {
+    "0x454d7c": [
+      "0x4417ee",
+      "0x441b0a",
+      "0x441c44",
+      "0x454b4c",
+      "0x454f38",
+      "0x455728",
+      "0x456110",
+      "0x456210",
+      "0x47ebf8",
+      "0x47ed76",
+      "0x57e136"
+    ],
+    "0x454dcc": [
+      "0x4417ee",
+      "0x441b0a",
+      "0x441c44",
+      "0x454b4c",
+      "0x454f38",
+      "0x455728",
+      "0x456110",
+      "0x456210",
+      "0x47ebf8",
+      "0x47ed76",
+      "0x57e136"
+    ]
+  },
+  "upstream_tasks_c": {
+    "path": "g2/build/foundation/freertos-upstream/tasks.c",
+    "git_blob_sha1": "d97085d8736905c1eeb9d9e871c81e5970ee70ed",
+    "sha256": "14020d617b96dd2814e1211f6e3b645bcf5e2bd3179c23fe7dd16bc666fe9463",
+    "commit": "def7d2df2b0506d3d249334974f51e427c17a41c"
+  },
+  "verifier_sha256": "8d19edb2633e857302aa8f722c372789370bf71dedf05fb50669cff13de27e4b",
+  "disassembly_file": "disassembly.txt"
+}

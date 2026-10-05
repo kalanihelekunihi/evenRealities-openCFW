@@ -1,0 +1,84 @@
+{
+  "firmware": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+  "firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "load_base": "0x438000",
+  "ota_header_bytes": 32,
+  "functions": [
+    {
+      "name": "timer_stop",
+      "address": "0x52a4d2",
+      "bytes": 20,
+      "sha256": "d30de33bdcea30247f1929d761140365da810af3d442225570eb510034fdc184",
+      "whole_function": true
+    },
+    {
+      "name": "timer_remove",
+      "address": "0x52a3fc",
+      "bytes": 40,
+      "sha256": "1e9937d03fdee4825c1892be2e2c3e827958c7b59cba5b003119a847ff44ff24",
+      "whole_function": true
+    },
+    {
+      "name": "queue_remove",
+      "address": "0x538cc8",
+      "bytes": 46,
+      "sha256": "b550d2696c6f4516dd4c4bcb2b3af6c5b79a51092103ddc667cd886042ba5033",
+      "whole_function": true
+    },
+    {
+      "name": "task_lock",
+      "address": "0x52b8c8",
+      "bytes": 8,
+      "sha256": "4ae68a8cc15e75c482171f6fdd1e56d9bf7a9a787f56a9761e89af9833911f02",
+      "whole_function": true
+    },
+    {
+      "name": "task_unlock",
+      "address": "0x52b8d0",
+      "bytes": 8,
+      "sha256": "19785a8c5eb6c2e10cd274c554a5d7d1b649a94433f558511c02cdb5405397a1",
+      "whole_function": true
+    },
+    {
+      "name": "cs_enter",
+      "address": "0x52b8a4",
+      "bytes": 18,
+      "sha256": "e0ff3f4fa338e939616823c70ae7fc13df075b7de32178db2810cf9eb39edb87",
+      "whole_function": true
+    },
+    {
+      "name": "cs_exit",
+      "address": "0x52b8b6",
+      "bytes": 18,
+      "sha256": "8685a9a54cba4040bb297f58f5bc9e0d5beed1f46a7159363edc8f80648e824c",
+      "whole_function": true
+    },
+    {
+      "name": "timer_gpio_shutdown_slice",
+      "address": "0x4b49d0",
+      "bytes": 22,
+      "sha256": "b9ef31615e0b0b7b3191250262efdb93c12d3e78437a5fe7d531bcf0e4ba4901",
+      "whole_function": false
+    }
+  ],
+  "authenticated_literals": [
+    {
+      "address": "0x52a614",
+      "value": "0x200741b0"
+    },
+    {
+      "address": "0x4b4d9c",
+      "value": "0x20073e64"
+    },
+    {
+      "address": "0x52bab8",
+      "value": "0x20075045"
+    }
+  ],
+  "caller_boundaries": {
+    "start": "0x4b49d0",
+    "end": "0x4b49e6",
+    "excludes": "Following global state clearing and transport release0x52df12"
+  },
+  "limits": "Whole timer/unlink/lock bodies; selected caller slice only. No expiry dispatch, active callback drain, physical IRQ or full shutdown proof."
+}

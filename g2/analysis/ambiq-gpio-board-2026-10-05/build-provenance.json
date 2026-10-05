@@ -1,0 +1,129 @@
+{
+  "files": [
+    {
+      "path": "g2/Makefile",
+      "sha256": "741a97379415bbed7756b68206bd49e9c7bd63769c0e34a63125042df96a3b05",
+      "bytes": 27830
+    },
+    {
+      "path": "g2/build/foundation/ambiq-gpio-board-simulator/board.o",
+      "sha256": "cca161dc399f1d4e834110392322a0f44e64e0f4bd3b8db878fcb4eaf55a7e68",
+      "bytes": 1096
+    },
+    {
+      "path": "g2/build/foundation/ambiq-gpio-board-simulator/config.o",
+      "sha256": "62dfae67c05449be4a008d34630793921f7d431c4de5c2bc3a8b97104259880e",
+      "bytes": 1340
+    },
+    {
+      "path": "g2/build/foundation/ambiq-gpio-board-simulator/critical.o",
+      "sha256": "2addec12eaf2ee85a148df1564e6a6fcfcc8363748775bc6d0c5e646b9e0fe65",
+      "bytes": 868
+    },
+    {
+      "path": "g2/build/foundation/ambiq-gpio-board-simulator/gpio_config.elf",
+      "sha256": "2c4c13b093d754749c7ece7285ac0b01d0ff7288ffc3410535f1c057ddf75e87",
+      "bytes": 5796
+    },
+    {
+      "path": "g2/build/foundation/ambiq-gpio-board-simulator/state.o",
+      "sha256": "9b46b6245538198d8a8b81aa04b084d73bc1abb0f4d18fdcd145df2f6df5d883",
+      "bytes": 1256
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/README.md",
+      "sha256": "e8c49c0ebe28253fc57ae183c3ef40cfe52d31f60a00effe5d0d7f99818304ca",
+      "bytes": 2375
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/SOURCE_PROVENANCE.json",
+      "sha256": "59bab20351512dbf78b32bfe99f061e3470059c6321e02dc01d6558e36559635",
+      "bytes": 952
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/STATE_PROVENANCE.json",
+      "sha256": "b99829d1bc473c15c1493b993c2e6f58e487f18baeb7764b0fa355a6eb921b4d",
+      "bytes": 1291
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/ambiq_gpio_config.c",
+      "sha256": "4f73b343fc2907a359ce757e7fe934d587aefe55504b1abbe87c89675668e892",
+      "bytes": 4770
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/gpio_config.h",
+      "sha256": "503f5e3d346bd89f6b1b27952c49d789913da3857b136d55a50c5b4bae1738f6",
+      "bytes": 4401
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/gpio_config_compat.h",
+      "sha256": "ba89102247448477729eec370549255488b450cfe6441e54dbbb11d6559681d1",
+      "bytes": 4104
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/gpio_state.c",
+      "sha256": "e913d52ab6820e1d9314c47cdab7dd7a1ab4493da57d6d42c9f87ed43468563e",
+      "bytes": 3373
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/radio_board.c",
+      "sha256": "250858d0afcc7a9554d4d91766e998afe942f2cb6f49a495856fd307f87ed941",
+      "bytes": 633
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/simulator/module.ld",
+      "sha256": "34dc9cd95b6c71c3d2eac0f2dafea432d719275592798818fb0c99d07e86e53b",
+      "bytes": 475
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/simulator/verify.py",
+      "sha256": "f93da8ce88ae72b0ad949b8929ae4a7b32d74ce7740c51ade5e8d8f5081f01fe",
+      "bytes": 13391
+    },
+    {
+      "path": "g2/tests/test_ambiq_gpio_config.py",
+      "sha256": "1462170aa5deb26c060575099322da7434b7f09cccbc3d75ec7f1a09b45d873e",
+      "bytes": 4094
+    }
+  ],
+  "comparison_path": "g2/build/foundation/ambiq-gpio-board-simulator/comparison-first.json",
+  "comparison_sha256": "1502cc3464ff4af001e6574267916207b19254c4503ad059122909e6c941a0b6",
+  "source_manifest_matches": true,
+  "compiler_flags": "--target=arm-none-eabi -mcpu=cortex-m4 -mthumb -mfloat-abi=soft -ffreestanding -fno-builtin -std=c11 -Wall -Wextra -Werror -O2 -fwrapv",
+  "compiler_scope": "Callable Thumb2 semantic profile; not original compiler/link addresses or whole Apollo build",
+  "failed_first_elf_sha256": "4c7bf9160a603ae71c501f1a0f1390f1ca4202ef0441f6a6ba0729477377013d",
+  "old_config_elf_sha256": "d00c9e431ad44425e1d036c2b27447d2382e5f55d9e3110c9a695b0c2c3cbae8",
+  "validation_artifacts": [
+    {
+      "path": "g2/build/foundation/ambiq-gpio-board-simulator/comparison-first.json",
+      "sha256": "1502cc3464ff4af001e6574267916207b19254c4503ad059122909e6c941a0b6",
+      "bytes": 63392350
+    },
+    {
+      "path": "g2/build/foundation/ambiq-gpio-board-simulator/aggregate.json",
+      "sha256": "abe81ce3364bfd86e5e70d81ec7e08641ab3033be79f98b94e2db177a7e776e8",
+      "bytes": 12007
+    },
+    {
+      "path": "g2/build/foundation/ambiq-gpio-board-simulator/aggregate.log",
+      "sha256": "5e0fea8d961536127fba3712b14d65f6cdb36697bc20deacb0cd1fb32e20d871",
+      "bytes": 37137
+    },
+    {
+      "path": "g2/build/foundation/ambiq-gpio-board-simulator/affected.log",
+      "sha256": "388cfba3344b18d840c2cfc9c40fedff40fff3c969c563f8da4a89636961e2cd",
+      "bytes": 120
+    }
+  ],
+  "previous59foundation_source_hashes_unchanged": true,
+  "independent_review_artifacts": [
+    {
+      "path": "g2/analysis/ambiq-gpio-board-2026-10-05/review/report.md",
+      "sha256": "658ebb6bc35ac8508523d92a7222833518bc795da100abe2da5c4f1dc7d88a20"
+    },
+    {
+      "path": "g2/analysis/ambiq-gpio-board-2026-10-05/review/representative-rerun.json",
+      "sha256": "1984a3de98b9516d0e11948cb3ff7bfeeee74521ad097e2753eba524aee4e225"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+0052dd7c: 80b5     push       {r7, lr}
+0052dd7e: 0021     movs       r1, #0
+0052dd80: 5d20     movs       r0, #0x5d
+0052dd82: 53f728f9 bl         #0x480fd6
+0052dd86: dff8b40b ldr.w      r0, [pc, #0xbb4]
+0052dd8a: 0168     ldr        r1, [r0]
+0052dd8c: 8a20     movs       r0, #0x8a
+0052dd8e: 53f7bdf8 bl         #0x480f0c
+0052dd92: 01bd     pop        {r0, pc}

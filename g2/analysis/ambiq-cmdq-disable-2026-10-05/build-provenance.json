@@ -1,0 +1,41 @@
+{
+  "upstream_commit": "5efc0228528a8adce5eae0d226fac85d2551eb3b",
+  "upstream_files": {
+    "g2/build/foundation/ambiq-upstream/am_hal_cmdq.c": "60aa2126ca01cd72f746a92d6f34a13e909fdab24ebfab6d6b0a70b026d8fa83",
+    "g2/build/foundation/ambiq-upstream/am_hal_cmdq.h": "0113aed2f109c5f022d38055b83a75c2cf141e8621177296757fc8315926762f"
+  },
+  "source": {
+    "g2/components/foundation/ambiq_mspi/ambiq_cmdq.c": "39dfd4515413e88e66b07f8eea47664a6d666943069e65768f1a284435583a24",
+    "g2/components/foundation/ambiq_mspi/ambiq_cmdq.h": "8f4dffc5e3cf2b33cf877dab9ba5b2841b74451a379b9ab49ab4ec0d2869ce7d",
+    "g2/components/foundation/ambiq_mspi/ambiq_mspi_compat.h": "fe6af8d10f857eb6bfb2758907073bd5ab75691a6818c03c94f0124a0f285299",
+    "g2/components/foundation/ambiq_mspi/ambiq_mspi_interrupts.c": "032087d41fe463a36c6a119b8fd2a7beb1256356e2f6d8d9d7f4ca75e02e5ba3",
+    "g2/components/foundation/ambiq_mspi/ambiq_mspi_interrupts.h": "89f04627e3270417130428894d6523b66e1191842dfd5baba01ca0256be51337",
+    "g2/components/foundation/ambiq_mspi/ambiq_mspi_lifecycle.c": "c55c3e163097e0112b11eb9fc4192b6a25de8cdaf28da41b1e3a6c8f2272ad0d",
+    "g2/components/foundation/ambiq_mspi/simulator/entry.c": "762eab9e3d49371055ba5e9941f62540f6538348b23d9f5990e01e7340850b28",
+    "g2/components/foundation/ambiq_mspi/simulator/lifecycle_seams.c": "442b7eb6cc4d9c24b854353f8e4337cae8e0f9c684f7595c401cfd6daadf5a68",
+    "g2/components/foundation/ambiq_mspi/simulator/module.ld": "de37d00a5c0dfa28c3630bae181df5f6b8383ea2e17e1cb371e39f4f00f6185f"
+  },
+  "elf_sha256": "58a408255d1f4e5974c443c0513e7a4b908ad1570fff3976dd04c5bc5846e1f6",
+  "comparison_sha256": "90abec0eaa8aeb600586ac7b89c4743aeb2b74ebcaf18621ea6f24ff4e28928a",
+  "verifier_sha256": "a0c432bfec979587256443d87e6d3c6a1e632a434614180a34d93ced4eb8dcd9",
+  "makefile_sha256": "66d3ac2fb0e77e21fa6cd40c6d1febdba198e0889fa68429ada2a9528ad30076",
+  "adaptations": [
+    "CMDQ disable/term function text retained unchanged from pinned upstream, compatibility macros supply only proven stock fields",
+    "update_indices reconstructed from stock 0x538d18; critical-enter external, PRIMASK restore actual ARM instruction",
+    "Sparse +0x828 local/global wrapper behavior reconstructed; global slot base0x200523d8 fixed for this stock artifact",
+    "Separate real-CMDQ link profile retains old synthetic profile for regressions"
+  ],
+  "limits": "Only critical-enter 0x473940 and delay 0x4807a0 intercepted on BOTH sides; no CQ function stub. Synthetic MMIO and serialized states, no concurrency/elapsed delay/real interrupt masking proof. Local caller and separate global slot fixtures, no stock handle-initialization proof.",
+  "comparison": "g2/build/foundation/ambiq-cmdq-simulator/comparison-reviewed.json",
+  "cmdq_provenance_sha256": "de3ade604a704200d9b86ead4b8d28764e913cb80882c8c05ea8a755a6591430",
+  "pinned_tree_git_blob_verification": {
+    "am_hal_cmdq.c": {
+      "git_blob_sha1": "0a286e565cad27cef801c389b5dedae826a2669a",
+      "matched": true
+    },
+    "am_hal_cmdq.h": {
+      "git_blob_sha1": "9baaf36c6c4e906602b76abf45f5d90e33451ce0",
+      "matched": true
+    }
+  }
+}

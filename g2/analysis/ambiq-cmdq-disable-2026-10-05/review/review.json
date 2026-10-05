@@ -1,0 +1,38 @@
+{
+  "review_status": "pass_with_explicit_integration_limits",
+  "critical_findings": [],
+  "tests": {
+    "command": "python3 -m unittest g2.tests.test_ambiq_mspi g2.tests.test_ambiq_mspi_lifecycle g2.tests.test_ambiq_mspi_cmdq -v",
+    "passed": 9
+  },
+  "comparison": {
+    "path": "g2/build/foundation/ambiq-cmdq-simulator/comparison-reviewed.json",
+    "status": "PASS",
+    "case_count": 372,
+    "unique_original_instruction_bytes": 472,
+    "sha256": "90abec0eaa8aeb600586ac7b89c4743aeb2b74ebcaf18621ea6f24ff4e28928a",
+    "verifier_sha256": "a0c432bfec979587256443d87e6d3c6a1e632a434614180a34d93ced4eb8dcd9",
+    "elf_sha256": "58a408255d1f4e5974c443c0513e7a4b908ad1570fff3976dd04c5bc5846e1f6",
+    "source_manifest_fresh": true,
+    "executable_segment_enforced": true
+  },
+  "provenance": {
+    "unchanged_functions": ["am_hal_cmdq_disable", "am_hal_cmdq_term"],
+    "reconstructed": ["update_indices", "mspi_cq_disable", "mspi_cq_term"],
+    "license": "Ambiq BSD-3-Clause notice preserved"
+  },
+  "scope_limits": [
+    "Critical-enter and delay are synthetic on both sides; no real interrupt masking or elapsed delay proof.",
+    "No real queue drain/free, hardware completion, power/IRQ timing, or concurrency validation.",
+    "Caller must supply valid initialized handles, CMDQ register pointers, a valid module index, and the expected fixed stock global-state mapping.",
+    "No byte-identical firmware or complete HAL claim."
+  ],
+  "reviewed_hashes": {
+    "ambiq_cmdq.c": "39dfd4515413e88e66b07f8eea47664a6d666943069e65768f1a284435583a24",
+    "ambiq_cmdq.h": "8f4dffc5e3cf2b33cf877dab9ba5b2841b74451a379b9ab49ab4ec0d2869ce7d",
+    "simulator/verify_cmdq.py": "a0c432bfec979587256443d87e6d3c6a1e632a434614180a34d93ced4eb8dcd9",
+    "CMDQ_PROVENANCE.json": "de3ade604a704200d9b86ead4b8d28764e913cb80882c8c05ea8a755a6591430",
+    "test_ambiq_mspi_cmdq.py": "79fcdfdb57da792fb300514bab0effd2aca62a52dc6184772bf9ab1c9a1e1aff",
+    "Makefile": "66d3ac2fb0e77e21fa6cd40c6d1febdba198e0889fa68429ada2a9528ad30076"
+  }
+}

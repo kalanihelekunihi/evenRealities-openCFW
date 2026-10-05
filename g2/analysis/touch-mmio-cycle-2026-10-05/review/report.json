@@ -1,0 +1,77 @@
+{
+  "scope": [
+    "g2/components/foundation/touch_scb/touch_scb_mmio.c",
+    "g2/components/foundation/touch_scb/touch_scb_mmio.h",
+    "g2/components/foundation/touch_scb/simulator/entry.c",
+    "g2/components/foundation/touch_scb/simulator/module.ld",
+    "g2/components/foundation/touch_scb/simulator/verify.py",
+    "g2/tests/test_touch_scb_mmio.py",
+    "g2/Makefile"
+  ],
+  "implementation_edits": false,
+  "critical_findings": [],
+  "cycle1_critical_findings_resolved_in_cycle2": [
+    {
+      "area": "verifier gates",
+      "detail": "The verifier still uses assert internally but now checks __debug__ and raises before processing when optimization is enabled. The new unit test covers -O rejection. An optimized trial against the prior version had exited with SIGILL and no report; no false PASS was observed.",
+      "resolution": "optimized verifier execution is explicitly rejected"
+    },
+    {
+      "area": "output clobber",
+      "detail": "Previous version overwrote caller output.",
+      "resolution": "current version opens output with exclusive mode x"
+    }
+  ],
+  "mmio_review": {
+    "recovered_semantics": "RX_FIFO_STATUS +0x308, RX_CTRL +0x300, RX_FIFO_RD +0x340; (CTRL & 0x18)==0 selects byte else halfword; one volatile 32-bit FIFO read per element; store low 8/16 bits",
+    "reviewed": ["volatile access per element", "status count clamp", "single width sample during raw transfer", "checked alignment/capacity handling", "no FIFO read on checked failures", "caller serialization documented"],
+    "physical_vs_synthetic": "Synthetic register block/FIFO sequence only; no physical bus, IRQ, clock, concurrent-consumer, or hardware initialization claim.",
+    "hardening": [
+      "Checked API documents a valid live mapped SCB requirement and rejects uintptr_t bases above UINTPTR_MAX-0x340.",
+      "Raw API documents the same live-mapped/non-overflowing precondition."
+    ]
+  },
+  "simulator_review": {
+    "result_artifact": "g2/build/foundation/touch-scb-trigger-final/comparison-reviewed.json",
+    "saved_report_counts": {"rx_original_linked_comparisons": 8, "rx_checked": 6, "tx_original_linked_comparisons": 12, "tx_checked": 9, "fifo_valid_original_linked": 5, "fifo_invalid_checked": 4, "original_unique_instruction_bytes": 232},
+    "limits": [
+      "Verifier authenticates original firmware bytes and records linked ELF hash; separate build provenance binds source and toolchain inputs.",
+      "Callable isolated module, not a stock firmware link or hardware provider."
+    ],
+    "saved_comparison_freshness": "The older cycle-2 comparison was stale; the current comparison-reviewed.json matches the current verifier, ELF, source manifest, and separate build provenance.",
+    "cycle2_hardening": "2 MiB ELF input cap; bounded program/section/symbol tables and PT_LOAD file/address ranges; segment mappings limited to simulator code/RAM ranges.",
+    "build_reported_by_parent": "source-defined ARM ELF linked and compared against original callee+wrapper bytes; no original callee stubs"
+  },
+  "make_test_note": "test_touch_scb_simulator.py is now present; it links the source module, checks symbol placement, rejects malformed ELF and tests optimized-mode rejection. Separate touch-scb-simulator-test target runs the original/link execution comparison.",
+  "optimized_attempt": {"command_mode": "PYTHONOPTIMIZE=1 with configured Unicorn venv", "exit": "SIGILL (132)", "report_written": false},
+  "fifo_trigger_leaf_review": {
+    "function_runtime_range": ["0x9316", "0x9342"],
+    "payload_decoded_image_range": ["0x6016", "0x6042"],
+    "official_instruction_sha256": "1fdc6e20657ebf1efbbf7423c354904526f55af9f31d09ad5cd700d69ecdb993",
+    "decoded_behavior": "Read FIFO_CONFIG, derive depth 16 when (config&0xc000)==0 else 8, BKPT#1 if level>=depth; otherwise read RX_FIFO_CTRL, replace low byte with level, write back, preserving upper 24 bits.",
+    "linked_comparison": {"status": "PASS", "valid_original_vs_linked": 5, "checked_invalid_linked_only": 4, "other_rx_comparisons": 8, "rx_checked_adapter_cases": 6, "tx_comparisons": 12, "tx_checked_adapter_cases": 9, "unique_original_instruction_bytes": 232},
+    "freshness": {"current_verifier_hash_matches": true, "current_elf_hash_matches": true, "source_manifest_files": 10, "source_manifest_mismatches": 0},
+    "invalid_behavior": "Intentional API divergence: stock original BKPTs and raises emulator exception; reconstructed checked API returns INVALID_LEVEL. Invalid original traces read only config and do not write the control register.",
+    "limits": ["No electrical bus trace or measured IRQ/trigger firing behavior.", "Header explicitly requires caller serialization of FIFO_CONFIG and RX_FIFO_CTRL updates around validation/RMW.", "Comparison executes linked isolated callable module, not stock-byte-equivalent firmware or a hardware build."]
+  },
+  "current_trigger_snapshot_sha256": {
+    "g2/components/foundation/touch_scb/touch_scb_fifo.c": "f6c5439760848024e1bb297d3ab413aa4644f69e42c61c2b4ec692d2da94caca",
+    "g2/components/foundation/touch_scb/touch_scb_fifo.h": "b0cc52cc1f2c60ffb3da0c4a3931159b44c252f8343237f044db6ce7a600efbd",
+    "g2/components/foundation/touch_scb/simulator/verify.py": "fc9da59d148a30f48d1301d2ee67e6f673dd8896b53e95464d06e1a668c14e43",
+    "g2/components/foundation/touch_scb/simulator/entry.c": "cd61baf25d6cf38db1a631c0e5db5d194e87a3953536c5213135cc3498be813a",
+    "g2/tests/test_touch_scb_fifo.py": "33aef673113f7661536f38d0116f84e2b2719d170b0d7dc11b0255a7d0e2916c",
+    "g2/Makefile": "01c8cb1ded390866757d6317cca9bfa00cf25b76f7b8047e96d30ef69e8edad9"
+  },
+  "build_provenance": {"path": "g2/analysis/touch-mmio-cycle-2026-10-05/build-provenance.json", "sha256": "d6aebc567540f512c3b933cbd3b70abd119f092a56eb3fa551ccb75b6b17dd0a", "source_hash_mismatches": 0, "compiler_linker_versions_and_elf_hash_recorded": true},
+  "current_comparison": {"path": "g2/build/foundation/touch-scb-trigger-final/comparison-reviewed.json", "sha256": "1af62f000a4a400b1781726fbbf57b00b554203ea3700249bf30a11722a9a65e", "current_verifier_and_elf_hashes_match": true, "source_manifest_mismatches": 0},
+  "current_sha256": {
+    "g2/components/foundation/touch_scb/touch_scb_mmio.c": "783266dd5cadfdb30c1d3fd52f94425f01e5dda86dc33e92f3ba7105f47516bd",
+    "g2/components/foundation/touch_scb/touch_scb_mmio.h": "6e721710034dfc7ffb8aa92286ea6dd11c7d24892e7260b572a21a5046517ef1",
+    "g2/components/foundation/touch_scb/simulator/entry.c": "3db94486f00ee71c83163e97908177c5094696dba4bd3d4422594142901fb199",
+    "g2/components/foundation/touch_scb/simulator/module.ld": "35197fc939bca0ac513fac9d05196110c2b93803ab3efcbc2cfa9af19b88fa37",
+    "g2/components/foundation/touch_scb/simulator/verify.py": "f6406ae39531066fbb2a4defad968bb048605908b95ac1c65b02825530e17966",
+    "g2/tests/test_touch_scb_simulator.py": "3e17cc1b3451de469aad5a3e9e526f12c209ea40d26cb508898ac25bac303f2f",
+    "g2/tests/test_touch_scb_mmio.py": "7e9d45db3b6ac54fc8574d29554dbd255a0b169b7ffb4e05e58abc18b315f1d5",
+    "g2/Makefile": "d8145becfc61c418130fe0f67efca7479b3c61d7ed3a16d7b5f47be60ed119ec"
+  }
+}

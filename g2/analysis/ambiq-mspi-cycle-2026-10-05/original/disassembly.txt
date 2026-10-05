@@ -1,0 +1,95 @@
+Official OTA sha256=36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863 size=3523396; decoded image is OTA[32:], base=0x00438000, sha256=19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701 size=3523364.
+
+004c23de am_hal_mspi_interrupt_clear [004c23de,004c240e) size=48 sha256=4b01a25a8075cf158eb59da277f8730e36c751ee01c67bae86bc172ec877bd48
+004c23de  0200     movs       r2, r0
+004c23e0  0028     cmp        r0, #0
+004c23e2  06d0     beq        #0x4c23f2
+004c23e4  0068     ldr        r0, [r0]
+004c23e6  20f07e40 bic        r0, r0, #0xfe000000
+004c23ea  dff8f036 ldr.w      r3, [pc, #0x6f0] ; literal [0x004c2adc]=0x01bebebe
+004c23ee  9842     cmp        r0, r3
+004c23f0  01d0     beq        #0x4c23f6
+004c23f2  0220     movs       r0, #2
+004c23f4  0ae0     b          #0x4c240c
+004c23f6  5068     ldr        r0, [r2, #4]
+004c23f8  b84a     ldr        r2, [pc, #0x2e0] ; literal [0x004c26dc]=0x40060000
+004c23fa  12eb0033 adds.w     r3, r2, r0, lsl #12
+004c23fe  c3f80812 str.w      r1, [r3, #0x208]
+004c2402  12eb0032 adds.w     r2, r2, r0, lsl #12
+004c2406  d2f80402 ldr.w      r0, [r2, #0x204]
+004c240a  0020     movs       r0, #0
+004c240c  7047     bx         lr
+
+004c2328 FUN_004c2328 [004c2328,004c235c) size=52 sha256=ff601938062e67c168148c01471475c081038eb87938f8344c93afbf89f673e4
+004c2328  0200     movs       r2, r0
+004c232a  0028     cmp        r0, #0
+004c232c  06d0     beq        #0x4c233c
+004c232e  0068     ldr        r0, [r0]
+004c2330  20f07e40 bic        r0, r0, #0xfe000000
+004c2334  dff8a437 ldr.w      r3, [pc, #0x7a4] ; literal [0x004c2adc]=0x01bebebe
+004c2338  9842     cmp        r0, r3
+004c233a  01d0     beq        #0x4c2340
+004c233c  0220     movs       r0, #2
+004c233e  0ce0     b          #0x4c235a
+004c2340  5068     ldr        r0, [r2, #4]
+004c2342  dff89823 ldr.w      r2, [pc, #0x398] ; literal [0x004c26dc]=0x40060000
+004c2346  12eb0033 adds.w     r3, r2, r0, lsl #12
+004c234a  d3f80032 ldr.w      r3, [r3, #0x200]
+004c234e  1943     orrs       r1, r3
+004c2350  12eb0032 adds.w     r2, r2, r0, lsl #12
+004c2354  c2f80012 str.w      r1, [r2, #0x200]
+004c2358  0020     movs       r0, #0
+004c235a  7047     bx         lr
+
+004c235c FUN_004c235c [004c235c,004c2392) size=54 sha256=046eba05f4da245735e178e179220a0c666e75c2c377bf05f08fab8815900a40
+004c235c  0200     movs       r2, r0
+004c235e  0028     cmp        r0, #0
+004c2360  06d0     beq        #0x4c2370
+004c2362  0068     ldr        r0, [r0]
+004c2364  20f07e40 bic        r0, r0, #0xfe000000
+004c2368  dff87037 ldr.w      r3, [pc, #0x770] ; literal [0x004c2adc]=0x01bebebe
+004c236c  9842     cmp        r0, r3
+004c236e  01d0     beq        #0x4c2374
+004c2370  0220     movs       r0, #2
+004c2372  0de0     b          #0x4c2390
+004c2374  5068     ldr        r0, [r2, #4]
+004c2376  dff86423 ldr.w      r2, [pc, #0x364] ; literal [0x004c26dc]=0x40060000
+004c237a  12eb0033 adds.w     r3, r2, r0, lsl #12
+004c237e  d3f80032 ldr.w      r3, [r3, #0x200]
+004c2382  33ea0101 bics.w     r1, r3, r1
+004c2386  12eb0032 adds.w     r2, r2, r0, lsl #12
+004c238a  c2f80012 str.w      r1, [r2, #0x200]
+004c238e  0020     movs       r0, #0
+004c2390  7047     bx         lr
+
+004c2392 FUN_004c2392 [004c2392,004c23de) size=76 sha256=af49be2bc2098b45d294afc6ca8cc5f9f48eee343a0245cea95a9d832973c1c5
+004c2392  10b4     push       {r4}
+004c2394  0300     movs       r3, r0
+004c2396  0028     cmp        r0, #0
+004c2398  06d0     beq        #0x4c23a8
+004c239a  0068     ldr        r0, [r0]
+004c239c  20f07e40 bic        r0, r0, #0xfe000000
+004c23a0  dff83847 ldr.w      r4, [pc, #0x738] ; literal [0x004c2adc]=0x01bebebe
+004c23a4  a042     cmp        r0, r4
+004c23a6  01d0     beq        #0x4c23ac
+004c23a8  0220     movs       r0, #2
+004c23aa  16e0     b          #0x4c23da
+004c23ac  5868     ldr        r0, [r3, #4]
+004c23ae  d2b2     uxtb       r2, r2
+004c23b0  002a     cmp        r2, #0
+004c23b2  0bd0     beq        #0x4c23cc
+004c23b4  c94b     ldr        r3, [pc, #0x324] ; literal [0x004c26dc]=0x40060000
+004c23b6  13eb0032 adds.w     r2, r3, r0, lsl #12
+004c23ba  d2f80422 ldr.w      r2, [r2, #0x204]
+004c23be  13eb0033 adds.w     r3, r3, r0, lsl #12
+004c23c2  d3f80002 ldr.w      r0, [r3, #0x200]
+004c23c6  0240     ands       r2, r0
+004c23c8  0a60     str        r2, [r1]
+004c23ca  05e0     b          #0x4c23d8
+004c23cc  c34a     ldr        r2, [pc, #0x30c] ; literal [0x004c26dc]=0x40060000
+004c23ce  12eb0032 adds.w     r2, r2, r0, lsl #12
+004c23d2  d2f80402 ldr.w      r0, [r2, #0x204]
+004c23d6  0860     str        r0, [r1]
+004c23d8  0020     movs       r0, #0
+004c23da  10bc     pop        {r4}
+004c23dc  7047     bx         lr

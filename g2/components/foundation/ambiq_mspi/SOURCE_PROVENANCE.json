@@ -1,0 +1,38 @@
+{
+  "repository": "https://github.com/AmbiqMicro/ambiqhal_ambiq",
+  "commit": "5efc0228528a8adce5eae0d226fac85d2551eb3b",
+  "source_path": "mcu/apollo510/hal/mcu/am_hal_mspi.c",
+  "source_sha256": "5a91ab0c67bda4bd61c7d436b94b5a7c81693b948a331d282ae10e88cc5bf85f",
+  "function_text_sha256": {
+    "am_hal_mspi_interrupt_enable": "909959bb57d9522e7322a3558f7175ea836d71441fb911398922b53221b6b0df",
+    "am_hal_mspi_interrupt_disable": "b08206a3de37e3413963ce626711347dc645cc3d93fb40726550b364c1113817",
+    "am_hal_mspi_interrupt_status_get": "e866571366d719851ece30934b5c1854089b7805eee969a12c24d8c3fab852de",
+    "am_hal_mspi_interrupt_clear": "14c4ba81584097a076b44bae465f7377c5dafd856ab8ddb0cf403335b50a4cb6",
+    "am_hal_mspi_disable": "fb0ccbefeb32e24c7027a11eeef18fa20df85dd74b43ddea5c48ef793e6575e9",
+    "am_hal_mspi_deinitialize": "7ed3002692921f7ef56f66cf422fd8bbfafd75681f7c947b4d57ddef0b68c533"
+  },
+  "license": "BSD-3-Clause; original 2025 Ambiq copyright/conditions/disclaimer retained in derived source and compatibility header",
+  "adaptation": "Six unchanged upstream function texts. Sparse STOCK compatibility view includes proven lifecycle offsets through8cc, explicitly opaque padding and32-bit TCB address slot; it does not use the full public SDK state layout. Register window adds DEV0XIP. Simulator CQ/delay provider bodies are synthetic.",
+  "limits": "Public SDK 5.1.0 compatibility replay, private producing checkout unverified. Behavioral agreement is not compiled byte identity.",
+  "source_git_blob_sha1": "c12ef914660227aba3ebef3a0fb3ec749510c1bc",
+  "additional_contract_headers": {
+    "mcu/apollo510/hal/am_hal_global.h": {
+      "sha256": "05218d399ad4bb1338aa76d84f76bcc9e8f8585cf8c1530e262316cfddc6b075",
+      "git_blob_sha1": "864573031f74d9ef56ba6f58b6e3ef04d7dbc9b3",
+      "bytes": 11520
+    },
+    "mcu/apollo510/hal/am_hal_status.h": {
+      "sha256": "7ffa44277fab4731bdcb742c807c9f026aadfe8456545d8f04f5053621661ee2",
+      "git_blob_sha1": "00be99527c29f02d481b9a835a2d3e567729f6e8",
+      "bytes": 4903
+    }
+  },
+  "function_source_paths": {
+    "am_hal_mspi_interrupt_enable": "ambiq_mspi_interrupts.c",
+    "am_hal_mspi_interrupt_disable": "ambiq_mspi_interrupts.c",
+    "am_hal_mspi_interrupt_status_get": "ambiq_mspi_interrupts.c",
+    "am_hal_mspi_interrupt_clear": "ambiq_mspi_interrupts.c",
+    "am_hal_mspi_disable": "ambiq_mspi_lifecycle.c",
+    "am_hal_mspi_deinitialize": "ambiq_mspi_lifecycle.c"
+  }
+}

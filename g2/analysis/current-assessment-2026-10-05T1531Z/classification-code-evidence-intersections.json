@@ -1,0 +1,32 @@
+{
+  "known_observed_CPU_code_bytes": 1570,
+  "code_only_intersections": {
+    "catalogued_candidate_body": {
+      "bytes": 1312,
+      "percent_of_observed_CPU_code": 83.56687898089172
+    },
+    "raw_pseudocode_body": {
+      "bytes": 1312,
+      "percent_of_observed_CPU_code": 83.56687898089172
+    },
+    "prior_receipt_pinned_instruction_export": {
+      "bytes": 48,
+      "percent_of_observed_CPU_code": 3.0573248407643314
+    },
+    "authenticated_scoped_review": {
+      "bytes": 34,
+      "percent_of_observed_CPU_code": 2.1656050955414012
+    }
+  },
+  "limits": [
+    "Saved evidence intersection only. Fractions describe this selected 1570-byte observed set, not all firmware executable content or semantic completion.",
+    "Only main payload has confirmed execution in this refinement; other payload CPU code remains unclassified.",
+    "New display/angle trace exports are evidence introduced by this refinement and would cover observed set by construction; excluded from prior export intersection."
+  ],
+  "evidence_hashes": {
+    "g2/analysis/firmware-byte-map-2026-10-05/interval-map.jsonl": "dd483a82b514d4d1066e850f3750f837b2b0ecc12c332fd9ae16282b2a4d4c25",
+    "g2/build/audits/2026-10-05T0534Z-byte-map/repaired/nonoverlapping-intervals.jsonl": "a119632e34b171b4651382d05451a5d2bea294f068527affeb5d430298827a90",
+    "g2/build/audits/2026-10-05T0534Z-byte-map/instructions-current/instruction-ledger.jsonl": "e709d4311b83505678dcac6d3808fa0d7e7bc727976915e91006be6d885c5725",
+    "g2/build/audits/2026-10-05T0534Z-byte-map/bundle-byte-ledger.jsonl": "5e29a85e25868f8ffe66b9e5421069b5abb415dd388f08c1c108e1d2813a2350"
+  }
+}

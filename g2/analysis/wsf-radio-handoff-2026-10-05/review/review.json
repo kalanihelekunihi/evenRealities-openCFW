@@ -1,0 +1,92 @@
+{
+  "scope": "Stock-adapted WSF event, critical, wake, dispatch and Apollo radio callback handoff",
+  "result": "pass_with_bounded_limits",
+  "blocking_findings": [],
+  "comparison": {
+    "path": "g2/build/foundation/wsf-radio-simulator/comparison-final.json",
+    "status": "PASS",
+    "cases": 180,
+    "unique_original_trace_bytes": 1110,
+    "elf_sha256": "3a4a888899fd943611610ba3f4333ffa8377994df8d0fdddaadd27e8d56cb9d2",
+    "elf_hash_matches_current": true,
+    "source_manifest_matches_current": true
+  },
+  "tests": {
+    "focused_methods_passed": 4
+  },
+  "provenance": {
+    "public_repository": "Packetcraft Cordio",
+    "public_commit": "3656312d6b73e2a2c1c8b33ee0385bc199dd97e6",
+    "public_version": "r20.05c",
+    "stock_port_family": "AmbiqSuite 2.5.1 proprietary family",
+    "classification": "reconstruction/adaptation; not unchanged public source or private stock port",
+    "pinned_public_source_files_match": true,
+    "Apache_license_notice_present": true
+  },
+  "verified_stock_effects": [
+    "Outer-depth critical entry CPSID and final-depth exit CPSIE without saved PRIMASK restoration.",
+    "8-bit event coalescing by OR, low-four-bit handler indexing, and task-ready bit publication.",
+    "Dispatcher message, timer, then handler ordering; clears event before callback; drains newly posted work.",
+    "Message callback followed by message free; timer callback message is not freed by dispatcher.",
+    "Task/ISR wake notification branch and PendSV conditions at the external-provider boundary.",
+    "Radio GPIO callback set-event handoff through the actual WSF implementation."
+  ],
+  "material_limits": [
+    "Context, RTOS notify/wait, queue/message, timer, and app handlers are fixtures; real provider effects and scheduling are unproven.",
+    "WSF handler IDs 10\u201315 alias bytes beyond the ten valid event slots, including queue-control storage; the stock path does not validate them.",
+    "Critical enter/exit require balanced nesting and the documented bound; final exit enables IRQs regardless of prior PRIMASK.",
+    "Message/timer providers must return valid registered handler IDs; dispatch does not null-check those handlers.",
+    "No physical GPIO delivery, RTOS initialization, complete BLE stack boot, or full firmware bundle is established."
+  ],
+  "current_sha256": {
+    "g2/components/foundation/wsf_radio/wsf_radio.c": "8b487a7bfd6dd091bbdc422bcafa448500740b9f160f8ec31e9db6aab26be4cb",
+    "g2/components/foundation/wsf_radio/wsf_radio.h": "a5747d4739a8bf88694736b571430f1b30ff8067fb3a4c1968d5ab7410156256",
+    "g2/components/foundation/wsf_radio/SOURCE_PROVENANCE.json": "6427942dbf845d0fcc7870b6e1056061c1f83c9328dfc34a19ef4158466bbf28",
+    "g2/components/foundation/wsf_radio/simulator/verify.py": "da1ea686cb4bc993abe1172e16d434b49c5e7e689a81aa3ade0f9e63f21c9de2",
+    "g2/components/foundation/wsf_radio/simulator/providers.c": "9573c153fdf64a01797fd8d56e802c70d7f00553ddaebd8334a8120eecac631f",
+    "g2/tests/test_wsf_radio.py": "da1cfee4f106fa9c0ad7d5d07195bee9b017ab10adbbecc48b9684e9793198e1",
+    "g2/Makefile": "1ecd0d2efe28b5dce1ffc5d46f12bf355e60a093e4814a84c3ad4890e5ec05c5"
+  },
+  "accounting_followup": {
+    "status": "reconciled_current_snapshot",
+    "final_comparison": "g2/build/foundation/wsf-radio-simulator/comparison-final.json",
+    "comparison_cases": 180,
+    "comparison_observed_original_instruction_bytes_including_prior": 1110,
+    "new_unique_radio_wsf_trace_bytes": 470,
+    "interval_overlay_path": "g2/analysis/wsf-radio-handoff-2026-10-05/new-code-evidence.jsonl",
+    "overlay_intervals": 5,
+    "overlay_bytes": 470,
+    "overlay_sha_matches_final_original_trace": true,
+    "all_overlay_bytes_were_initially_unresolved": true,
+    "cumulative_payload_bytes": {
+      "touch": 234,
+      "apollo_main": 2130,
+      "total": 2364
+    },
+    "source_inventory": {
+      "files": 28,
+      "implementation_c": 11,
+      "headers": 12,
+      "simulator_c": 5,
+      "hashes_current": true,
+      "ignored_files": 0
+    },
+    "callable_profiles": {
+      "count": 7,
+      "elf_hashes_current": true
+    },
+    "evidence_input_hashes_current": true,
+    "aggregate": {
+      "modules": 35,
+      "tests": 196,
+      "passed": 190,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 7,
+      "fresh_foundation_methods_passed": 40
+    },
+    "wsf_os_init_native_attempt": "INCONCLUSIVE and excluded from pass/execution coverage; corrected static fill/call chain only supports conditional normal initialization path; no runtime boot claim",
+    "build_provenance_review_hash_requires_rebind": true,
+    "accounting_contradictions": []
+  }
+}

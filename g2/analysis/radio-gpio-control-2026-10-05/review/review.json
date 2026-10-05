@@ -1,0 +1,70 @@
+{
+  "review_scope": "Independent bounded review of GPIO interrupt-control SDK subset, radio pin117 enable/disable, pin136 truth gate, and shutdown call slice 0x4b49d8..0x4b49e6.",
+  "disposition": "PASS",
+  "comparison": {
+    "path": "g2/build/foundation/radio-gpio-control-simulator/control-comparison-reviewed.json",
+    "sha256": "6d90e5e3a56ea61d8b3037c8fe9db734bfbac3383544853c99388285d0ebd42d",
+    "status": "PASS",
+    "cases": 6648,
+    "unique_original_trace_bytes": 854,
+    "six_static_unreachable_bytes": [
+      "0x4810ee",
+      "0x4810ef",
+      "0x4810f0",
+      "0x4810f1",
+      "0x481126",
+      "0x481127"
+    ]
+  },
+  "independent_rerun": {
+    "path": "g2/analysis/radio-gpio-control-2026-10-05/review/representative-rerun.json",
+    "sha256": "f7136f2cbc63a65c6ce5c0c60cdf28020f17d2005ee0b122fb58e3c3a65b527a",
+    "status": "PASS",
+    "cases": 28,
+    "elf_sha256": "131ce13edb467699675d7580ca4049592b9051a9d30002f361b6da4ef0a6470a",
+    "result_sha256": "6d90e5e3a56ea61d8b3037c8fe9db734bfbac3383544853c99388285d0ebd42d"
+  },
+  "provenance": {
+    "path": "g2/components/foundation/ambiq_gpio_config/CONTROL_PROVENANCE.json",
+    "sha256": "0d4efe85ca527fde6a41fc57472a7ec2eea2733b190ec02c29089c0dce31b04f",
+    "upstream_commit": "5efc0228528a8adce5eae0d226fac85d2551eb3b",
+    "upstream_file_sha256": "93aa1e6eb28fabea5f0a41c0288451fb381b64070f59638b3d250da6a7430ccf",
+    "function_text_hashes": {
+      "gpionum_intreg_index_get": "104f9b54e91e9b10607f8436f0c1939551d2667d01d3e683628e49ea479d8fe0",
+      "am_hal_gpio_interrupt_control": "bfc9fa70f498c1541becac4f692484093b35067a3f3620fa2d99233474bc72ea"
+    }
+  },
+  "source_sha256": {
+    "g2/components/foundation/ambiq_gpio_config/ambiq_gpio_config.c": "4f73b343fc2907a359ce757e7fe934d587aefe55504b1abbe87c89675668e892",
+    "g2/components/foundation/ambiq_gpio_config/gpio_config.h": "503f5e3d346bd89f6b1b27952c49d789913da3857b136d55a50c5b4bae1738f6",
+    "g2/components/foundation/ambiq_gpio_config/gpio_config_compat.h": "d5364aaadfdb25682685edddbe70f016660c4f69bfc98270e248d365c623527d",
+    "g2/components/foundation/ambiq_gpio_config/gpio_control_compat.h": "1662d7626dd77102d7560cc249052db65428abd3d84b3cc032c77ed25e9f6502",
+    "g2/components/foundation/ambiq_gpio_config/gpio_interrupt_control.c": "d23f207c25c84744f76918884a66a32c9ebc92b41a4cdf160c107409343ec1a2",
+    "g2/components/foundation/ambiq_gpio_config/gpio_interrupt_control.h": "e3277f16f9c7956402575c66557f9c1b3eac81aad30a39037fa95ef33f2711ef",
+    "g2/components/foundation/ambiq_gpio_config/gpio_state.c": "e913d52ab6820e1d9314c47cdab7dd7a1ab4493da57d6d42c9f87ed43468563e",
+    "g2/components/foundation/ambiq_gpio_config/radio_board.c": "250858d0afcc7a9554d4d91766e998afe942f2cb6f49a495856fd307f87ed941",
+    "g2/components/foundation/ambiq_gpio_config/radio_control.c": "2d229817eddb89988213273246eafee36f5c0a644c73a8c98bcfa6cecee743d4",
+    "g2/components/foundation/ambiq_gpio_config/simulator/module.ld": "34dc9cd95b6c71c3d2eac0f2dafea432d719275592798818fb0c99d07e86e53b",
+    "g2/components/foundation/ambiq_gpio_config/simulator/verify.py": "f93da8ce88ae72b0ad949b8929ae4a7b32d74ce7740c51ade5e8d8f5081f01fe",
+    "g2/components/foundation/ambiq_gpio_config/simulator/verify_control.py": "bba2502e5ea4de7a7747a18346a48d194a34577049584a74f6163fc382796a15"
+  },
+  "findings": [
+    {
+      "severity": "informational",
+      "finding": "Stock radio wrappers at 0x52DD58 and 0x52DD6A return 0x75 (117). The refreshed helpers now return uint32_t 117 after making the HAL call, matching the stock return value; the comparator checks R0. Their callers discard it, but return behavior is now preserved as well."
+    },
+    {
+      "severity": "informational",
+      "finding": "The six unexecuted control-body bytes are explicitly omitted from trace credit. Helper gpionum_intreg_index_get always returns success, so its error branch 0x4810EE..0x4810F2 cannot occur. The accepted input control byte is constrained to 0..3 before switch dispatch, so the default switch jump at 0x481126..0x481128 cannot execute."
+    },
+    {
+      "severity": "informational",
+      "finding": "The shutdown comparison covers only the 14-byte caller slice 0x4B49D8..0x4B49E6: disable pin117, clear pin136, then invoke the existing idle helper (pin93 clear and pin138 raw config 3). Timer stop, transport release, subsequent caller state clearing, physical interrupt delivery, and full shutdown safety are outside this proof."
+    }
+  ],
+  "limits": [
+    "This verifies source/stock behavior for tested call paths, not a complete firmware rebuild, hardware behavior, concurrency safety, or byte-identical bundle.",
+    "The mask register fixture models W1 command effects and input/output-active conditions; it does not establish physical pad/NVIC behavior.",
+    "The independent spot-check is representative, while broad coverage comes from the pinned full comparison artifact."
+  ]
+}

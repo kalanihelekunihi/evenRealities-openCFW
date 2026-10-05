@@ -1,0 +1,7424 @@
+{
+  "status": "PASS",
+  "cases": 208,
+  "firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "elf_sha256": "2c4c13b093d754749c7ece7285ac0b01d0ff7288ffc3410535f1c057ddf75e87",
+  "verifier_sha256": "f93da8ce88ae72b0ad949b8929ae4a7b32d74ce7740c51ade5e8d8f5081f01fe",
+  "sample_unique_original_instruction_bytes": 344,
+  "vectors": [
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 0,
+        "operation": 0,
+        "prior": 0,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808472,
+          1,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          0,
+          0,
+          0
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 0,
+        "operation": 0,
+        "prior": 0,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808472,
+          1,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          0,
+          0,
+          0
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 0,
+        "operation": 0,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808472,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          0,
+          0,
+          1
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 0,
+        "operation": 0,
+        "prior": 1,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808472,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          0,
+          0,
+          1
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 0,
+        "operation": 1,
+        "prior": 0,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808444,
+          1,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          0,
+          1,
+          0
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 0,
+        "operation": 1,
+        "prior": 0,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808444,
+          1,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          0,
+          1,
+          0
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 0,
+        "operation": 1,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808444,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          0,
+          1,
+          1
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 0,
+        "operation": 1,
+        "prior": 1,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808444,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          0,
+          1,
+          1
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 0,
+        "operation": 2,
+        "prior": 0,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808416,
+          2779077210,
+          1
+        ],
+        [
+          "write",
+          1073808416,
+          2779077211,
+          1
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          0,
+          2,
+          0
+        ]
+      ],
+      "stock_bytes": 72
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 0,
+        "operation": 2,
+        "prior": 0,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808416,
+          2779077210,
+          1
+        ],
+        [
+          "write",
+          1073808416,
+          2779077211,
+          1
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          0,
+          2,
+          0
+        ]
+      ],
+      "stock_bytes": 72
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 0,
+        "operation": 2,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808416,
+          2779077210,
+          1
+        ],
+        [
+          "write",
+          1073808416,
+          2779077211,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          0,
+          2,
+          1
+        ]
+      ],
+      "stock_bytes": 72
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 0,
+        "operation": 2,
+        "prior": 1,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808416,
+          2779077210,
+          1
+        ],
+        [
+          "write",
+          1073808416,
+          2779077211,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          0,
+          2,
+          1
+        ]
+      ],
+      "stock_bytes": 72
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 0,
+        "operation": 3,
+        "prior": 0,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808556,
+          1,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          0,
+          3,
+          0
+        ]
+      ],
+      "stock_bytes": 50
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 0,
+        "operation": 3,
+        "prior": 0,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808556,
+          1,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          0,
+          3,
+          0
+        ]
+      ],
+      "stock_bytes": 50
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 0,
+        "operation": 3,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808556,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          0,
+          3,
+          1
+        ]
+      ],
+      "stock_bytes": 50
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 0,
+        "operation": 3,
+        "prior": 1,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808556,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          0,
+          3,
+          1
+        ]
+      ],
+      "stock_bytes": 50
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 0,
+        "operation": 4,
+        "prior": 0,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808528,
+          1,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          0,
+          4,
+          0
+        ]
+      ],
+      "stock_bytes": 48
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 0,
+        "operation": 4,
+        "prior": 0,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808528,
+          1,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          0,
+          4,
+          0
+        ]
+      ],
+      "stock_bytes": 48
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 0,
+        "operation": 4,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808528,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          0,
+          4,
+          1
+        ]
+      ],
+      "stock_bytes": 48
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 0,
+        "operation": 4,
+        "prior": 1,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808528,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          0,
+          4,
+          1
+        ]
+      ],
+      "stock_bytes": 48
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 0,
+        "operation": 5,
+        "prior": 0,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808500,
+          1515890085,
+          1
+        ],
+        [
+          "write",
+          1073808500,
+          1515890084,
+          1
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          0,
+          5,
+          0
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 0,
+        "operation": 5,
+        "prior": 0,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808500,
+          1515890085,
+          1
+        ],
+        [
+          "write",
+          1073808500,
+          1515890084,
+          1
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          0,
+          5,
+          0
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 0,
+        "operation": 5,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808500,
+          1515890085,
+          1
+        ],
+        [
+          "write",
+          1073808500,
+          1515890084,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          0,
+          5,
+          1
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 0,
+        "operation": 5,
+        "prior": 1,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808500,
+          1515890085,
+          1
+        ],
+        [
+          "write",
+          1073808500,
+          1515890084,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          0,
+          5,
+          1
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 31,
+        "operation": 0,
+        "prior": 0,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808472,
+          2147483648,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          31,
+          0,
+          0
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 31,
+        "operation": 0,
+        "prior": 0,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808472,
+          2147483648,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          31,
+          0,
+          0
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 31,
+        "operation": 0,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808472,
+          2147483648,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          31,
+          0,
+          1
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 31,
+        "operation": 0,
+        "prior": 1,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808472,
+          2147483648,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          31,
+          0,
+          1
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 31,
+        "operation": 1,
+        "prior": 0,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808444,
+          2147483648,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          31,
+          1,
+          0
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 31,
+        "operation": 1,
+        "prior": 0,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808444,
+          2147483648,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          31,
+          1,
+          0
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 31,
+        "operation": 1,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808444,
+          2147483648,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          31,
+          1,
+          1
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 31,
+        "operation": 1,
+        "prior": 1,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808444,
+          2147483648,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          31,
+          1,
+          1
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 31,
+        "operation": 2,
+        "prior": 0,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808416,
+          2779077210,
+          1
+        ],
+        [
+          "write",
+          1073808416,
+          631593562,
+          1
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          31,
+          2,
+          0
+        ]
+      ],
+      "stock_bytes": 72
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 31,
+        "operation": 2,
+        "prior": 0,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808416,
+          2779077210,
+          1
+        ],
+        [
+          "write",
+          1073808416,
+          631593562,
+          1
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          31,
+          2,
+          0
+        ]
+      ],
+      "stock_bytes": 72
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 31,
+        "operation": 2,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808416,
+          2779077210,
+          1
+        ],
+        [
+          "write",
+          1073808416,
+          631593562,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          31,
+          2,
+          1
+        ]
+      ],
+      "stock_bytes": 72
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 31,
+        "operation": 2,
+        "prior": 1,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808416,
+          2779077210,
+          1
+        ],
+        [
+          "write",
+          1073808416,
+          631593562,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          31,
+          2,
+          1
+        ]
+      ],
+      "stock_bytes": 72
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 31,
+        "operation": 3,
+        "prior": 0,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808556,
+          2147483648,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          31,
+          3,
+          0
+        ]
+      ],
+      "stock_bytes": 50
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 31,
+        "operation": 3,
+        "prior": 0,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808556,
+          2147483648,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          31,
+          3,
+          0
+        ]
+      ],
+      "stock_bytes": 50
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 31,
+        "operation": 3,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808556,
+          2147483648,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          31,
+          3,
+          1
+        ]
+      ],
+      "stock_bytes": 50
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 31,
+        "operation": 3,
+        "prior": 1,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808556,
+          2147483648,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          31,
+          3,
+          1
+        ]
+      ],
+      "stock_bytes": 50
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 31,
+        "operation": 4,
+        "prior": 0,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808528,
+          2147483648,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          31,
+          4,
+          0
+        ]
+      ],
+      "stock_bytes": 48
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 31,
+        "operation": 4,
+        "prior": 0,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808528,
+          2147483648,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          31,
+          4,
+          0
+        ]
+      ],
+      "stock_bytes": 48
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 31,
+        "operation": 4,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808528,
+          2147483648,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          31,
+          4,
+          1
+        ]
+      ],
+      "stock_bytes": 48
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 31,
+        "operation": 4,
+        "prior": 1,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808528,
+          2147483648,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          31,
+          4,
+          1
+        ]
+      ],
+      "stock_bytes": 48
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 31,
+        "operation": 5,
+        "prior": 0,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808500,
+          1515890085,
+          1
+        ],
+        [
+          "write",
+          1073808500,
+          3663373733,
+          1
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          31,
+          5,
+          0
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 31,
+        "operation": 5,
+        "prior": 0,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808500,
+          1515890085,
+          1
+        ],
+        [
+          "write",
+          1073808500,
+          3663373733,
+          1
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          31,
+          5,
+          0
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 31,
+        "operation": 5,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808500,
+          1515890085,
+          1
+        ],
+        [
+          "write",
+          1073808500,
+          3663373733,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          31,
+          5,
+          1
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 31,
+        "operation": 5,
+        "prior": 1,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808500,
+          1515890085,
+          1
+        ],
+        [
+          "write",
+          1073808500,
+          3663373733,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          31,
+          5,
+          1
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 32,
+        "operation": 0,
+        "prior": 0,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808476,
+          1,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          32,
+          0,
+          0
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 32,
+        "operation": 0,
+        "prior": 0,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808476,
+          1,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          32,
+          0,
+          0
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 32,
+        "operation": 0,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808476,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          32,
+          0,
+          1
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 32,
+        "operation": 0,
+        "prior": 1,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808476,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          32,
+          0,
+          1
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 32,
+        "operation": 1,
+        "prior": 0,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808448,
+          1,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          32,
+          1,
+          0
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 32,
+        "operation": 1,
+        "prior": 0,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808448,
+          1,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          32,
+          1,
+          0
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 32,
+        "operation": 1,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808448,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          32,
+          1,
+          1
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 32,
+        "operation": 1,
+        "prior": 1,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808448,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          32,
+          1,
+          1
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 32,
+        "operation": 2,
+        "prior": 0,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808420,
+          2779077210,
+          1
+        ],
+        [
+          "write",
+          1073808420,
+          2779077211,
+          1
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          32,
+          2,
+          0
+        ]
+      ],
+      "stock_bytes": 72
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 32,
+        "operation": 2,
+        "prior": 0,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808420,
+          2779077210,
+          1
+        ],
+        [
+          "write",
+          1073808420,
+          2779077211,
+          1
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          32,
+          2,
+          0
+        ]
+      ],
+      "stock_bytes": 72
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 32,
+        "operation": 2,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808420,
+          2779077210,
+          1
+        ],
+        [
+          "write",
+          1073808420,
+          2779077211,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          32,
+          2,
+          1
+        ]
+      ],
+      "stock_bytes": 72
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 32,
+        "operation": 2,
+        "prior": 1,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808420,
+          2779077210,
+          1
+        ],
+        [
+          "write",
+          1073808420,
+          2779077211,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          32,
+          2,
+          1
+        ]
+      ],
+      "stock_bytes": 72
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 32,
+        "operation": 3,
+        "prior": 0,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808560,
+          1,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          32,
+          3,
+          0
+        ]
+      ],
+      "stock_bytes": 50
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 32,
+        "operation": 3,
+        "prior": 0,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808560,
+          1,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          32,
+          3,
+          0
+        ]
+      ],
+      "stock_bytes": 50
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 32,
+        "operation": 3,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808560,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          32,
+          3,
+          1
+        ]
+      ],
+      "stock_bytes": 50
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 32,
+        "operation": 3,
+        "prior": 1,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808560,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          32,
+          3,
+          1
+        ]
+      ],
+      "stock_bytes": 50
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 32,
+        "operation": 4,
+        "prior": 0,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808532,
+          1,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          32,
+          4,
+          0
+        ]
+      ],
+      "stock_bytes": 48
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 32,
+        "operation": 4,
+        "prior": 0,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808532,
+          1,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          32,
+          4,
+          0
+        ]
+      ],
+      "stock_bytes": 48
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 32,
+        "operation": 4,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808532,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          32,
+          4,
+          1
+        ]
+      ],
+      "stock_bytes": 48
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 32,
+        "operation": 4,
+        "prior": 1,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808532,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          32,
+          4,
+          1
+        ]
+      ],
+      "stock_bytes": 48
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 32,
+        "operation": 5,
+        "prior": 0,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808504,
+          1515890085,
+          1
+        ],
+        [
+          "write",
+          1073808504,
+          1515890084,
+          1
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          32,
+          5,
+          0
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 32,
+        "operation": 5,
+        "prior": 0,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808504,
+          1515890085,
+          1
+        ],
+        [
+          "write",
+          1073808504,
+          1515890084,
+          1
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          32,
+          5,
+          0
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 32,
+        "operation": 5,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808504,
+          1515890085,
+          1
+        ],
+        [
+          "write",
+          1073808504,
+          1515890084,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          32,
+          5,
+          1
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 32,
+        "operation": 5,
+        "prior": 1,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808504,
+          1515890085,
+          1
+        ],
+        [
+          "write",
+          1073808504,
+          1515890084,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          32,
+          5,
+          1
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 93,
+        "operation": 0,
+        "prior": 0,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808480,
+          536870912,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          0,
+          0
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 93,
+        "operation": 0,
+        "prior": 0,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808480,
+          536870912,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          0,
+          0
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 93,
+        "operation": 0,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808480,
+          536870912,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          0,
+          1
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 93,
+        "operation": 0,
+        "prior": 1,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808480,
+          536870912,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          0,
+          1
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 93,
+        "operation": 1,
+        "prior": 0,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808452,
+          536870912,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          1,
+          0
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 93,
+        "operation": 1,
+        "prior": 0,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808452,
+          536870912,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          1,
+          0
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 93,
+        "operation": 1,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808452,
+          536870912,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          1,
+          1
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 93,
+        "operation": 1,
+        "prior": 1,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808452,
+          536870912,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          1,
+          1
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 93,
+        "operation": 2,
+        "prior": 0,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808424,
+          2779077210,
+          1
+        ],
+        [
+          "write",
+          1073808424,
+          2242206298,
+          1
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          2,
+          0
+        ]
+      ],
+      "stock_bytes": 72
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 93,
+        "operation": 2,
+        "prior": 0,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808424,
+          2779077210,
+          1
+        ],
+        [
+          "write",
+          1073808424,
+          2242206298,
+          1
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          2,
+          0
+        ]
+      ],
+      "stock_bytes": 72
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 93,
+        "operation": 2,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808424,
+          2779077210,
+          1
+        ],
+        [
+          "write",
+          1073808424,
+          2242206298,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          2,
+          1
+        ]
+      ],
+      "stock_bytes": 72
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 93,
+        "operation": 2,
+        "prior": 1,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808424,
+          2779077210,
+          1
+        ],
+        [
+          "write",
+          1073808424,
+          2242206298,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          2,
+          1
+        ]
+      ],
+      "stock_bytes": 72
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 93,
+        "operation": 3,
+        "prior": 0,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808564,
+          536870912,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          3,
+          0
+        ]
+      ],
+      "stock_bytes": 50
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 93,
+        "operation": 3,
+        "prior": 0,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808564,
+          536870912,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          3,
+          0
+        ]
+      ],
+      "stock_bytes": 50
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 93,
+        "operation": 3,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808564,
+          536870912,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          3,
+          1
+        ]
+      ],
+      "stock_bytes": 50
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 93,
+        "operation": 3,
+        "prior": 1,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808564,
+          536870912,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          3,
+          1
+        ]
+      ],
+      "stock_bytes": 50
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 93,
+        "operation": 4,
+        "prior": 0,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808536,
+          536870912,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          4,
+          0
+        ]
+      ],
+      "stock_bytes": 48
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 93,
+        "operation": 4,
+        "prior": 0,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808536,
+          536870912,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          4,
+          0
+        ]
+      ],
+      "stock_bytes": 48
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 93,
+        "operation": 4,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808536,
+          536870912,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          4,
+          1
+        ]
+      ],
+      "stock_bytes": 48
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 93,
+        "operation": 4,
+        "prior": 1,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808536,
+          536870912,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          4,
+          1
+        ]
+      ],
+      "stock_bytes": 48
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 93,
+        "operation": 5,
+        "prior": 0,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808508,
+          1515890085,
+          1
+        ],
+        [
+          "write",
+          1073808508,
+          2052760997,
+          1
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          5,
+          0
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 93,
+        "operation": 5,
+        "prior": 0,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808508,
+          1515890085,
+          1
+        ],
+        [
+          "write",
+          1073808508,
+          2052760997,
+          1
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          5,
+          0
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 93,
+        "operation": 5,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808508,
+          1515890085,
+          1
+        ],
+        [
+          "write",
+          1073808508,
+          2052760997,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          5,
+          1
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 93,
+        "operation": 5,
+        "prior": 1,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808508,
+          1515890085,
+          1
+        ],
+        [
+          "write",
+          1073808508,
+          2052760997,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          5,
+          1
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 223,
+        "operation": 0,
+        "prior": 0,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808496,
+          2147483648,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          223,
+          0,
+          0
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 223,
+        "operation": 0,
+        "prior": 0,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808496,
+          2147483648,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          223,
+          0,
+          0
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 223,
+        "operation": 0,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808496,
+          2147483648,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          223,
+          0,
+          1
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 223,
+        "operation": 0,
+        "prior": 1,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808496,
+          2147483648,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          223,
+          0,
+          1
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 223,
+        "operation": 1,
+        "prior": 0,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808468,
+          2147483648,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          223,
+          1,
+          0
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 223,
+        "operation": 1,
+        "prior": 0,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808468,
+          2147483648,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          223,
+          1,
+          0
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 223,
+        "operation": 1,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808468,
+          2147483648,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          223,
+          1,
+          1
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 223,
+        "operation": 1,
+        "prior": 1,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808468,
+          2147483648,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          223,
+          1,
+          1
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 223,
+        "operation": 2,
+        "prior": 0,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808440,
+          2779077210,
+          1
+        ],
+        [
+          "write",
+          1073808440,
+          631593562,
+          1
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          223,
+          2,
+          0
+        ]
+      ],
+      "stock_bytes": 72
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 223,
+        "operation": 2,
+        "prior": 0,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808440,
+          2779077210,
+          1
+        ],
+        [
+          "write",
+          1073808440,
+          631593562,
+          1
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          223,
+          2,
+          0
+        ]
+      ],
+      "stock_bytes": 72
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 223,
+        "operation": 2,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808440,
+          2779077210,
+          1
+        ],
+        [
+          "write",
+          1073808440,
+          631593562,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          223,
+          2,
+          1
+        ]
+      ],
+      "stock_bytes": 72
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 223,
+        "operation": 2,
+        "prior": 1,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808440,
+          2779077210,
+          1
+        ],
+        [
+          "write",
+          1073808440,
+          631593562,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          223,
+          2,
+          1
+        ]
+      ],
+      "stock_bytes": 72
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 223,
+        "operation": 3,
+        "prior": 0,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808580,
+          2147483648,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          223,
+          3,
+          0
+        ]
+      ],
+      "stock_bytes": 50
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 223,
+        "operation": 3,
+        "prior": 0,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808580,
+          2147483648,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          223,
+          3,
+          0
+        ]
+      ],
+      "stock_bytes": 50
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 223,
+        "operation": 3,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808580,
+          2147483648,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          223,
+          3,
+          1
+        ]
+      ],
+      "stock_bytes": 50
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 223,
+        "operation": 3,
+        "prior": 1,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808580,
+          2147483648,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          223,
+          3,
+          1
+        ]
+      ],
+      "stock_bytes": 50
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 223,
+        "operation": 4,
+        "prior": 0,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808552,
+          2147483648,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          223,
+          4,
+          0
+        ]
+      ],
+      "stock_bytes": 48
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 223,
+        "operation": 4,
+        "prior": 0,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808552,
+          2147483648,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          223,
+          4,
+          0
+        ]
+      ],
+      "stock_bytes": 48
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 223,
+        "operation": 4,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808552,
+          2147483648,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          223,
+          4,
+          1
+        ]
+      ],
+      "stock_bytes": 48
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 223,
+        "operation": 4,
+        "prior": 1,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808552,
+          2147483648,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          223,
+          4,
+          1
+        ]
+      ],
+      "stock_bytes": 48
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 223,
+        "operation": 5,
+        "prior": 0,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808524,
+          1515890085,
+          1
+        ],
+        [
+          "write",
+          1073808524,
+          3663373733,
+          1
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          223,
+          5,
+          0
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 223,
+        "operation": 5,
+        "prior": 0,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808524,
+          1515890085,
+          1
+        ],
+        [
+          "write",
+          1073808524,
+          3663373733,
+          1
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          223,
+          5,
+          0
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 223,
+        "operation": 5,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808524,
+          1515890085,
+          1
+        ],
+        [
+          "write",
+          1073808524,
+          3663373733,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          223,
+          5,
+          1
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 223,
+        "operation": 5,
+        "prior": 1,
+        "model": "side_effects",
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808524,
+          1515890085,
+          1
+        ],
+        [
+          "write",
+          1073808524,
+          3663373733,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          223,
+          5,
+          1
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 224,
+        "operation": 0,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808500,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          224,
+          0,
+          1
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 224,
+        "operation": 1,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808472,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          224,
+          1,
+          1
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 224,
+        "operation": 2,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808444,
+          2779096485,
+          1
+        ],
+        [
+          "write",
+          1073808444,
+          2779096484,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          224,
+          2,
+          1
+        ]
+      ],
+      "stock_bytes": 72
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 224,
+        "operation": 3,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808584,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          224,
+          3,
+          1
+        ]
+      ],
+      "stock_bytes": 50
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 224,
+        "operation": 4,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808556,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          224,
+          4,
+          1
+        ]
+      ],
+      "stock_bytes": 48
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 224,
+        "operation": 5,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808528,
+          2779096485,
+          1
+        ],
+        [
+          "write",
+          1073808528,
+          2779096484,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          224,
+          5,
+          1
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 224,
+        "operation": 6,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          224,
+          6,
+          1
+        ]
+      ],
+      "stock_bytes": 32
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 224,
+        "operation": 256,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808500,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          224,
+          0,
+          1
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 224,
+        "operation": 257,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808472,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          224,
+          1,
+          1
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 224,
+        "operation": 261,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808528,
+          2779096485,
+          1
+        ],
+        [
+          "write",
+          1073808528,
+          2779096484,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          224,
+          5,
+          1
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 224,
+        "operation": 262,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          224,
+          6,
+          1
+        ]
+      ],
+      "stock_bytes": 32
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 224,
+        "operation": 4294967295,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          224,
+          255,
+          1
+        ]
+      ],
+      "stock_bytes": 32
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 255,
+        "operation": 0,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808500,
+          2147483648,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          255,
+          0,
+          1
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 255,
+        "operation": 1,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808472,
+          2147483648,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          255,
+          1,
+          1
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 255,
+        "operation": 2,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808444,
+          2779096485,
+          1
+        ],
+        [
+          "write",
+          1073808444,
+          631612837,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          255,
+          2,
+          1
+        ]
+      ],
+      "stock_bytes": 72
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 255,
+        "operation": 3,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808584,
+          2147483648,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          255,
+          3,
+          1
+        ]
+      ],
+      "stock_bytes": 50
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 255,
+        "operation": 4,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808556,
+          2147483648,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          255,
+          4,
+          1
+        ]
+      ],
+      "stock_bytes": 48
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 255,
+        "operation": 5,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808528,
+          2779096485,
+          1
+        ],
+        [
+          "write",
+          1073808528,
+          631612837,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          255,
+          5,
+          1
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 255,
+        "operation": 6,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          255,
+          6,
+          1
+        ]
+      ],
+      "stock_bytes": 32
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 255,
+        "operation": 256,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808500,
+          2147483648,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          255,
+          0,
+          1
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 255,
+        "operation": 257,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808472,
+          2147483648,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          255,
+          1,
+          1
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 255,
+        "operation": 261,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808528,
+          2779096485,
+          1
+        ],
+        [
+          "write",
+          1073808528,
+          631612837,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          255,
+          5,
+          1
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 255,
+        "operation": 262,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          255,
+          6,
+          1
+        ]
+      ],
+      "stock_bytes": 32
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 255,
+        "operation": 4294967295,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          255,
+          255,
+          1
+        ]
+      ],
+      "stock_bytes": 32
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 256,
+        "operation": 0,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808472,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          256,
+          0,
+          1
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 256,
+        "operation": 1,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808444,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          256,
+          1,
+          1
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 256,
+        "operation": 2,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808416,
+          2147483649,
+          1
+        ],
+        [
+          "write",
+          1073808416,
+          2147483648,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          256,
+          2,
+          1
+        ]
+      ],
+      "stock_bytes": 72
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 256,
+        "operation": 3,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808556,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          256,
+          3,
+          1
+        ]
+      ],
+      "stock_bytes": 50
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 256,
+        "operation": 4,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808528,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          256,
+          4,
+          1
+        ]
+      ],
+      "stock_bytes": 48
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 256,
+        "operation": 5,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808500,
+          2779077210,
+          1
+        ],
+        [
+          "write",
+          1073808500,
+          2779077211,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          256,
+          5,
+          1
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 256,
+        "operation": 6,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          256,
+          6,
+          1
+        ]
+      ],
+      "stock_bytes": 32
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 256,
+        "operation": 256,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808472,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          256,
+          0,
+          1
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 256,
+        "operation": 257,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808444,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          256,
+          1,
+          1
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 256,
+        "operation": 261,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808500,
+          2779077210,
+          1
+        ],
+        [
+          "write",
+          1073808500,
+          2779077211,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          256,
+          5,
+          1
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 256,
+        "operation": 262,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          256,
+          6,
+          1
+        ]
+      ],
+      "stock_bytes": 32
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 256,
+        "operation": 4294967295,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          256,
+          255,
+          1
+        ]
+      ],
+      "stock_bytes": 32
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 257,
+        "operation": 0,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808472,
+          2,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          257,
+          0,
+          1
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 257,
+        "operation": 1,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808444,
+          2,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          257,
+          1,
+          1
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 257,
+        "operation": 2,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808416,
+          2147483649,
+          1
+        ],
+        [
+          "write",
+          1073808416,
+          2147483651,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          257,
+          2,
+          1
+        ]
+      ],
+      "stock_bytes": 72
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 257,
+        "operation": 3,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808556,
+          2,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          257,
+          3,
+          1
+        ]
+      ],
+      "stock_bytes": 50
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 257,
+        "operation": 4,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808528,
+          2,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          257,
+          4,
+          1
+        ]
+      ],
+      "stock_bytes": 48
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 257,
+        "operation": 5,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808500,
+          2779077210,
+          1
+        ],
+        [
+          "write",
+          1073808500,
+          2779077208,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          257,
+          5,
+          1
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 257,
+        "operation": 6,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          257,
+          6,
+          1
+        ]
+      ],
+      "stock_bytes": 32
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 257,
+        "operation": 256,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808472,
+          2,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          257,
+          0,
+          1
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 257,
+        "operation": 257,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808444,
+          2,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          257,
+          1,
+          1
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 257,
+        "operation": 261,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808500,
+          2779077210,
+          1
+        ],
+        [
+          "write",
+          1073808500,
+          2779077208,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          257,
+          5,
+          1
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 257,
+        "operation": 262,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          257,
+          6,
+          1
+        ]
+      ],
+      "stock_bytes": 32
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 257,
+        "operation": 4294967295,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          257,
+          255,
+          1
+        ]
+      ],
+      "stock_bytes": 32
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 65536,
+        "operation": 0,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808472,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          65536,
+          0,
+          1
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 65536,
+        "operation": 1,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808444,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          65536,
+          1,
+          1
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 65536,
+        "operation": 2,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808416,
+          2147483649,
+          1
+        ],
+        [
+          "write",
+          1073808416,
+          2147483648,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          65536,
+          2,
+          1
+        ]
+      ],
+      "stock_bytes": 72
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 65536,
+        "operation": 3,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808556,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          65536,
+          3,
+          1
+        ]
+      ],
+      "stock_bytes": 50
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 65536,
+        "operation": 4,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808528,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          65536,
+          4,
+          1
+        ]
+      ],
+      "stock_bytes": 48
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 65536,
+        "operation": 5,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808500,
+          2779077210,
+          1
+        ],
+        [
+          "write",
+          1073808500,
+          2779077211,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          65536,
+          5,
+          1
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 65536,
+        "operation": 6,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          65536,
+          6,
+          1
+        ]
+      ],
+      "stock_bytes": 32
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 65536,
+        "operation": 256,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808472,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          65536,
+          0,
+          1
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 65536,
+        "operation": 257,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808444,
+          1,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          65536,
+          1,
+          1
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 65536,
+        "operation": 261,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808500,
+          2779077210,
+          1
+        ],
+        [
+          "write",
+          1073808500,
+          2779077211,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          65536,
+          5,
+          1
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 65536,
+        "operation": 262,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          65536,
+          6,
+          1
+        ]
+      ],
+      "stock_bytes": 32
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 65536,
+        "operation": 4294967295,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          65536,
+          255,
+          1
+        ]
+      ],
+      "stock_bytes": 32
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 4294967295,
+        "operation": 0,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808500,
+          2147483648,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          4294967295,
+          0,
+          1
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 4294967295,
+        "operation": 1,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808472,
+          2147483648,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          4294967295,
+          1,
+          1
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 4294967295,
+        "operation": 2,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808444,
+          2779096485,
+          1
+        ],
+        [
+          "write",
+          1073808444,
+          631612837,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          4294967295,
+          2,
+          1
+        ]
+      ],
+      "stock_bytes": 72
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 4294967295,
+        "operation": 3,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808584,
+          2147483648,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          4294967295,
+          3,
+          1
+        ]
+      ],
+      "stock_bytes": 50
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 4294967295,
+        "operation": 4,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808556,
+          2147483648,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          4294967295,
+          4,
+          1
+        ]
+      ],
+      "stock_bytes": 48
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 4294967295,
+        "operation": 5,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808528,
+          2779096485,
+          1
+        ],
+        [
+          "write",
+          1073808528,
+          631612837,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          4294967295,
+          5,
+          1
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 4294967295,
+        "operation": 6,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          4294967295,
+          6,
+          1
+        ]
+      ],
+      "stock_bytes": 32
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 4294967295,
+        "operation": 256,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808500,
+          2147483648,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          4294967295,
+          0,
+          1
+        ]
+      ],
+      "stock_bytes": 38
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 4294967295,
+        "operation": 257,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "write",
+          1073808472,
+          2147483648,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          4294967295,
+          1,
+          1
+        ]
+      ],
+      "stock_bytes": 44
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 4294967295,
+        "operation": 261,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [
+        [
+          "read",
+          1073808528,
+          2779096485,
+          1
+        ],
+        [
+          "write",
+          1073808528,
+          631612837,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          4294967295,
+          5,
+          1
+        ]
+      ],
+      "stock_bytes": 82
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 4294967295,
+        "operation": 262,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          4294967295,
+          6,
+          1
+        ]
+      ],
+      "stock_bytes": 32
+    },
+    {
+      "inputs": {
+        "op": "state",
+        "pin": 4294967295,
+        "operation": 4294967295,
+        "prior": 1,
+        "model": "raw",
+        "wt": 2147483649,
+        "en": 2779077210,
+        "output_active_mask": 4294967295,
+        "diagnostic": "alias/truncation",
+        "null": false,
+        "config": 0
+      },
+      "status": 0,
+      "mmio": [],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          4294967295,
+          255,
+          1
+        ]
+      ],
+      "stock_bytes": 32
+    },
+    {
+      "inputs": {
+        "op": "board",
+        "pin": 0,
+        "prior": 0,
+        "null": false,
+        "config": 0,
+        "operation": 0,
+        "board_config": 3,
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "model": "raw"
+      },
+      "status": null,
+      "mmio": [
+        [
+          "write",
+          1073808480,
+          536870912,
+          0
+        ],
+        [
+          "write",
+          1073808384,
+          115,
+          1
+        ],
+        [
+          "write",
+          1073807912,
+          3,
+          1
+        ],
+        [
+          "write",
+          1073808384,
+          0,
+          1
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          0,
+          0
+        ],
+        [
+          "config",
+          138,
+          3,
+          0
+        ]
+      ],
+      "stock_bytes": 148
+    },
+    {
+      "inputs": {
+        "op": "board",
+        "pin": 0,
+        "prior": 0,
+        "null": false,
+        "config": 0,
+        "operation": 0,
+        "board_config": 3,
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "model": "side_effects"
+      },
+      "status": null,
+      "mmio": [
+        [
+          "write",
+          1073808480,
+          536870912,
+          0
+        ],
+        [
+          "write",
+          1073808384,
+          115,
+          1
+        ],
+        [
+          "write",
+          1073807912,
+          3,
+          1
+        ],
+        [
+          "write",
+          1073808384,
+          0,
+          1
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          0,
+          0
+        ],
+        [
+          "config",
+          138,
+          3,
+          0
+        ]
+      ],
+      "stock_bytes": 148
+    },
+    {
+      "inputs": {
+        "op": "board",
+        "pin": 0,
+        "prior": 1,
+        "null": false,
+        "config": 0,
+        "operation": 0,
+        "board_config": 3,
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "model": "raw"
+      },
+      "status": null,
+      "mmio": [
+        [
+          "write",
+          1073808480,
+          536870912,
+          1
+        ],
+        [
+          "write",
+          1073808384,
+          115,
+          1
+        ],
+        [
+          "write",
+          1073807912,
+          3,
+          1
+        ],
+        [
+          "write",
+          1073808384,
+          0,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          0,
+          1
+        ],
+        [
+          "config",
+          138,
+          3,
+          1
+        ]
+      ],
+      "stock_bytes": 148
+    },
+    {
+      "inputs": {
+        "op": "board",
+        "pin": 0,
+        "prior": 1,
+        "null": false,
+        "config": 0,
+        "operation": 0,
+        "board_config": 3,
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "model": "side_effects"
+      },
+      "status": null,
+      "mmio": [
+        [
+          "write",
+          1073808480,
+          536870912,
+          1
+        ],
+        [
+          "write",
+          1073808384,
+          115,
+          1
+        ],
+        [
+          "write",
+          1073807912,
+          3,
+          1
+        ],
+        [
+          "write",
+          1073808384,
+          0,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          0,
+          1
+        ],
+        [
+          "config",
+          138,
+          3,
+          1
+        ]
+      ],
+      "stock_bytes": 148
+    },
+    {
+      "inputs": {
+        "op": "board",
+        "pin": 0,
+        "prior": 0,
+        "null": false,
+        "config": 0,
+        "operation": 0,
+        "board_config": 387,
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "model": "raw"
+      },
+      "status": null,
+      "mmio": [
+        [
+          "write",
+          1073808480,
+          536870912,
+          0
+        ],
+        [
+          "write",
+          1073808384,
+          115,
+          1
+        ],
+        [
+          "write",
+          1073807912,
+          387,
+          1
+        ],
+        [
+          "write",
+          1073808384,
+          0,
+          1
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          0,
+          0
+        ],
+        [
+          "config",
+          138,
+          387,
+          0
+        ]
+      ],
+      "stock_bytes": 148
+    },
+    {
+      "inputs": {
+        "op": "board",
+        "pin": 0,
+        "prior": 0,
+        "null": false,
+        "config": 0,
+        "operation": 0,
+        "board_config": 387,
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "model": "side_effects"
+      },
+      "status": null,
+      "mmio": [
+        [
+          "write",
+          1073808480,
+          536870912,
+          0
+        ],
+        [
+          "write",
+          1073808384,
+          115,
+          1
+        ],
+        [
+          "write",
+          1073807912,
+          387,
+          1
+        ],
+        [
+          "write",
+          1073808384,
+          0,
+          1
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          0,
+          0
+        ],
+        [
+          "config",
+          138,
+          387,
+          0
+        ]
+      ],
+      "stock_bytes": 148
+    },
+    {
+      "inputs": {
+        "op": "board",
+        "pin": 0,
+        "prior": 1,
+        "null": false,
+        "config": 0,
+        "operation": 0,
+        "board_config": 387,
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "model": "raw"
+      },
+      "status": null,
+      "mmio": [
+        [
+          "write",
+          1073808480,
+          536870912,
+          1
+        ],
+        [
+          "write",
+          1073808384,
+          115,
+          1
+        ],
+        [
+          "write",
+          1073807912,
+          387,
+          1
+        ],
+        [
+          "write",
+          1073808384,
+          0,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          0,
+          1
+        ],
+        [
+          "config",
+          138,
+          387,
+          1
+        ]
+      ],
+      "stock_bytes": 148
+    },
+    {
+      "inputs": {
+        "op": "board",
+        "pin": 0,
+        "prior": 1,
+        "null": false,
+        "config": 0,
+        "operation": 0,
+        "board_config": 387,
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "model": "side_effects"
+      },
+      "status": null,
+      "mmio": [
+        [
+          "write",
+          1073808480,
+          536870912,
+          1
+        ],
+        [
+          "write",
+          1073808384,
+          115,
+          1
+        ],
+        [
+          "write",
+          1073807912,
+          387,
+          1
+        ],
+        [
+          "write",
+          1073808384,
+          0,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          0,
+          1
+        ],
+        [
+          "config",
+          138,
+          387,
+          1
+        ]
+      ],
+      "stock_bytes": 148
+    },
+    {
+      "inputs": {
+        "op": "board",
+        "pin": 0,
+        "prior": 0,
+        "null": false,
+        "config": 0,
+        "operation": 0,
+        "board_config": 2048,
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "model": "raw"
+      },
+      "status": null,
+      "mmio": [
+        [
+          "write",
+          1073808480,
+          536870912,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          0,
+          0
+        ],
+        [
+          "config",
+          138,
+          2048,
+          0
+        ]
+      ],
+      "stock_bytes": 126
+    },
+    {
+      "inputs": {
+        "op": "board",
+        "pin": 0,
+        "prior": 0,
+        "null": false,
+        "config": 0,
+        "operation": 0,
+        "board_config": 2048,
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "model": "side_effects"
+      },
+      "status": null,
+      "mmio": [
+        [
+          "write",
+          1073808480,
+          536870912,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          0,
+          0
+        ],
+        [
+          "config",
+          138,
+          2048,
+          0
+        ]
+      ],
+      "stock_bytes": 126
+    },
+    {
+      "inputs": {
+        "op": "board",
+        "pin": 0,
+        "prior": 1,
+        "null": false,
+        "config": 0,
+        "operation": 0,
+        "board_config": 2048,
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "model": "raw"
+      },
+      "status": null,
+      "mmio": [
+        [
+          "write",
+          1073808480,
+          536870912,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          0,
+          1
+        ],
+        [
+          "config",
+          138,
+          2048,
+          1
+        ]
+      ],
+      "stock_bytes": 126
+    },
+    {
+      "inputs": {
+        "op": "board",
+        "pin": 0,
+        "prior": 1,
+        "null": false,
+        "config": 0,
+        "operation": 0,
+        "board_config": 2048,
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "model": "side_effects"
+      },
+      "status": null,
+      "mmio": [
+        [
+          "write",
+          1073808480,
+          536870912,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          0,
+          1
+        ],
+        [
+          "config",
+          138,
+          2048,
+          1
+        ]
+      ],
+      "stock_bytes": 126
+    },
+    {
+      "inputs": {
+        "op": "board",
+        "pin": 0,
+        "prior": 0,
+        "null": false,
+        "config": 0,
+        "operation": 0,
+        "board_config": 4294967295,
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "model": "raw"
+      },
+      "status": null,
+      "mmio": [
+        [
+          "write",
+          1073808480,
+          536870912,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          0,
+          0
+        ],
+        [
+          "config",
+          138,
+          4294967295,
+          0
+        ]
+      ],
+      "stock_bytes": 126
+    },
+    {
+      "inputs": {
+        "op": "board",
+        "pin": 0,
+        "prior": 0,
+        "null": false,
+        "config": 0,
+        "operation": 0,
+        "board_config": 4294967295,
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "model": "side_effects"
+      },
+      "status": null,
+      "mmio": [
+        [
+          "write",
+          1073808480,
+          536870912,
+          0
+        ]
+      ],
+      "primask": 0,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          0,
+          0
+        ],
+        [
+          "config",
+          138,
+          4294967295,
+          0
+        ]
+      ],
+      "stock_bytes": 126
+    },
+    {
+      "inputs": {
+        "op": "board",
+        "pin": 0,
+        "prior": 1,
+        "null": false,
+        "config": 0,
+        "operation": 0,
+        "board_config": 4294967295,
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "model": "raw"
+      },
+      "status": null,
+      "mmio": [
+        [
+          "write",
+          1073808480,
+          536870912,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          0,
+          1
+        ],
+        [
+          "config",
+          138,
+          4294967295,
+          1
+        ]
+      ],
+      "stock_bytes": 126
+    },
+    {
+      "inputs": {
+        "op": "board",
+        "pin": 0,
+        "prior": 1,
+        "null": false,
+        "config": 0,
+        "operation": 0,
+        "board_config": 4294967295,
+        "wt": 2779077210,
+        "en": 1515890085,
+        "output_active_mask": 4294967295,
+        "model": "side_effects"
+      },
+      "status": null,
+      "mmio": [
+        [
+          "write",
+          1073808480,
+          536870912,
+          1
+        ]
+      ],
+      "primask": 1,
+      "call_sequence": [
+        [
+          "state",
+          93,
+          0,
+          1
+        ],
+        [
+          "config",
+          138,
+          4294967295,
+          1
+        ]
+      ],
+      "stock_bytes": 126
+    }
+  ]
+}

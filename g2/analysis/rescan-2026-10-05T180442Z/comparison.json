@@ -1,0 +1,179 @@
+{
+  "scan_utc": "2026-10-05T18:04:42.292982+00:00",
+  "previous_scan": "2026-10-05T16:59:54.802949+00:00",
+  "source_files": [
+    {
+      "path": "g2/components/foundation/ambiq_mspi/ambiq_mspi_compat.h",
+      "bytes": 4625,
+      "sha256": "fe6af8d10f857eb6bfb2758907073bd5ab75691a6818c03c94f0124a0f285299",
+      "ignored": false,
+      "change": "added"
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/ambiq_mspi_interrupts.c",
+      "bytes": 4780,
+      "sha256": "032087d41fe463a36c6a119b8fd2a7beb1256356e2f6d8d9d7f4ca75e02e5ba3",
+      "ignored": false,
+      "change": "added"
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/ambiq_mspi_interrupts.h",
+      "bytes": 1765,
+      "sha256": "89f04627e3270417130428894d6523b66e1191842dfd5baba01ca0256be51337",
+      "ignored": false,
+      "change": "added"
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/ambiq_mspi_lifecycle.c",
+      "bytes": 3862,
+      "sha256": "c55c3e163097e0112b11eb9fc4192b6a25de8cdaf28da41b1e3a6c8f2272ad0d",
+      "ignored": false,
+      "change": "added"
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/simulator/entry.c",
+      "bytes": 691,
+      "sha256": "762eab9e3d49371055ba5e9941f62540f6538348b23d9f5990e01e7340850b28",
+      "ignored": false,
+      "change": "added"
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/simulator/lifecycle_seams.c",
+      "bytes": 926,
+      "sha256": "ab0a32d4c7868181351d6e727dd1e032d264da49711d7848150699818d149db9",
+      "ignored": false,
+      "change": "added"
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/simulator/entry.c",
+      "bytes": 1347,
+      "sha256": "cd61baf25d6cf38db1a631c0e5db5d194e87a3953536c5213135cc3498be813a",
+      "ignored": false,
+      "change": "changed"
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb.c",
+      "bytes": 1881,
+      "sha256": "ef593088ec3c20985ae8c4b51cf932d9ccc9a98627b43dbe08e8befa412d8afd",
+      "ignored": false,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb.h",
+      "bytes": 2157,
+      "sha256": "92e7b7a09807209efba8b0372e615dd3b5ab32dd0459bc4c25675392e29b525d",
+      "ignored": false,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb_fifo.c",
+      "bytes": 1231,
+      "sha256": "f6c5439760848024e1bb297d3ab413aa4644f69e42c61c2b4ec692d2da94caca",
+      "ignored": false,
+      "change": "added"
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb_fifo.h",
+      "bytes": 1476,
+      "sha256": "b0cc52cc1f2c60ffb3da0c4a3931159b44c252f8343237f044db6ce7a600efbd",
+      "ignored": false,
+      "change": "added"
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb_mmio.c",
+      "bytes": 3724,
+      "sha256": "783266dd5cadfdb30c1d3fd52f94425f01e5dda86dc33e92f3ba7105f47516bd",
+      "ignored": false,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb_mmio.h",
+      "bytes": 2582,
+      "sha256": "246a8d858507f86efca279f1bcc3f2acf832b728db77d5a81163812fc1cf9c6f",
+      "ignored": false,
+      "change": "changed"
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb_tx.c",
+      "bytes": 3213,
+      "sha256": "26c4c1d6cce94e42d5d7c2a117c6c592e297d9f8bb3b692add121430c904403c",
+      "ignored": false,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb_tx.h",
+      "bytes": 2216,
+      "sha256": "70d8e9f60fd9c67ccdd0217f036265f9b4f213c9dfae58af2a490ea4cb427829",
+      "ignored": false,
+      "change": "unchanged"
+    }
+  ],
+  "source_count": 15,
+  "previous_source_count": 7,
+  "protected_hashes_unchanged": {
+    "g2/tools/open_cfw.py": true,
+    "g2/manifests/g2-2.2.6.10.json": true,
+    "g2/workflow/state.json": true,
+    "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin": true
+  },
+  "saved_evidence_authentication": {
+    "touch-mmio-cycle-2026-10-05": {
+      "comparison": {
+        "path": "g2/build/foundation/touch-scb-trigger-final/comparison-reviewed.json",
+        "hash_matches": true
+      },
+      "input_hashes": {
+        "g2/Makefile": false,
+        "g2/components/foundation/touch_scb/simulator/entry.c": true,
+        "g2/components/foundation/touch_scb/simulator/module.ld": true,
+        "g2/components/foundation/touch_scb/touch_scb.c": true,
+        "g2/components/foundation/touch_scb/touch_scb.h": true,
+        "g2/components/foundation/touch_scb/touch_scb_fifo.c": true,
+        "g2/components/foundation/touch_scb/touch_scb_fifo.h": true,
+        "g2/components/foundation/touch_scb/touch_scb_mmio.c": true,
+        "g2/components/foundation/touch_scb/touch_scb_mmio.h": true,
+        "g2/components/foundation/touch_scb/touch_scb_tx.c": true,
+        "g2/components/foundation/touch_scb/touch_scb_tx.h": true
+      }
+    },
+    "ambiq-mspi-cycle-2026-10-05": {
+      "comparison": {
+        "path": "g2/build/foundation/ambiq-mspi-simulator/comparison-heldout.json",
+        "hash_matches": true
+      }
+    },
+    "ambiq-mspi-lifecycle-2026-10-05": {
+      "elf": {
+        "path": "g2/build/foundation/ambiq-mspi-lifecycle-final/ambiq_mspi.elf",
+        "hash_matches": true
+      },
+      "comparison": {
+        "path": "g2/build/foundation/ambiq-mspi-lifecycle-final/lifecycle-comparison-reviewed.json",
+        "hash_matches": true
+      },
+      "input_hashes": {
+        "g2/components/foundation/ambiq_mspi/ambiq_mspi_compat.h": true,
+        "g2/components/foundation/ambiq_mspi/ambiq_mspi_interrupts.c": true,
+        "g2/components/foundation/ambiq_mspi/ambiq_mspi_interrupts.h": true,
+        "g2/components/foundation/ambiq_mspi/ambiq_mspi_lifecycle.c": true,
+        "g2/components/foundation/ambiq_mspi/simulator/entry.c": true,
+        "g2/components/foundation/ambiq_mspi/simulator/lifecycle_seams.c": true,
+        "g2/components/foundation/ambiq_mspi/simulator/module.ld": true,
+        "g2/Makefile": true,
+        "g2/tests/test_ambiq_mspi.py": true,
+        "g2/tests/test_ambiq_mspi_lifecycle.py": true,
+        "g2/components/foundation/ambiq_mspi/SOURCE_PROVENANCE.json": true
+      }
+    }
+  },
+  "fresh_focused_tests": {
+    "touch": 11,
+    "ambiq": 6,
+    "resources": 7,
+    "total": 24,
+    "failures": 0
+  },
+  "whole_suite": "Saved latest result: 174 passing, 6 method skips and 1 class setup skip; not rerun in this scan.",
+  "coverage": "Whole campaign coverage not freshly recomputed; last measurements 197000 reviewed bytes and 490200 instruction-export bytes.",
+  "cmdq_status": "Static evidence packet exists; no CMDQ source implementation or linked comparison yet."
+}

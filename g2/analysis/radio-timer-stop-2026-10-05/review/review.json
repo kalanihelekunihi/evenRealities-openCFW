@@ -1,0 +1,50 @@
+{
+  "scope": "Independent review of pinned WSF timer removal/queue unlink, existing nested WSF critical-section provider, and timer-to-GPIO shutdown prefix.",
+  "disposition": "PASS_WITH_CRITICAL_SECTION_LIMIT",
+  "full_comparison": {
+    "path": "g2/build/foundation/radio-timer-stop-simulator/timer-comparison-first.json",
+    "sha256": "5ce12ae95b98cfaa8d99c858265600f0dca71803169be6544bbb7de85d1fbdfb",
+    "status": "PASS",
+    "cases": 2624,
+    "unique_original_trace_bytes": 500,
+    "elf_sha256": "0bfb36085b4facd31781c2e1790d4fa41d64acba263e0d8a3f79e363cbe78d6a"
+  },
+  "representative_rerun": {
+    "path": "g2/analysis/radio-timer-stop-2026-10-05/review/representative-rerun.json",
+    "sha256": "66bb5a7f0ae69987f8aa2b33c487d4e1f7da933fe4159df14ef7d176836816b0",
+    "status": "PASS",
+    "cases": 13,
+    "elf_sha256": "0bfb36085b4facd31781c2e1790d4fa41d64acba263e0d8a3f79e363cbe78d6a"
+  },
+  "source_provenance": {
+    "path": "g2/components/foundation/wsf_timer/SOURCE_PROVENANCE.json",
+    "sha256": "46711e3d4abae02e966487ded5c77939e5e1ea5645d439d6d11e7cecec9026c2",
+    "public_commit": "3656312d6b73e2a2c1c8b33ee0385bc199dd97e6",
+    "unchanged_function_text_sha256": {
+      "WsfQueueRemove": "f79047e9c1ff4ac68ca5ca5c43d0ebfe89f70f669c222513b2148396479b465f",
+      "wsfTimerRemove": "2bca7c76098a1cec06ce8bbcf072a49cfb659043d34e786e3cbf3768d7a1a92b",
+      "WsfTimerStop": "f3d52bb74448798e017eec0de348842ea9e8866f02ff1207ea129b3beca2a26a"
+    }
+  },
+  "source_sha256": {
+    "g2/components/foundation/wsf_timer/wsf_timer_stop.c": "3617e50ecfb9f999df723ed996b008db997d9402a9b317c7bf603b78bf298264",
+    "g2/components/foundation/wsf_timer/wsf_timer_compat.h": "3ee9a2f9cd849df597d155739d6dac7583a142df131e6dde298f2fe898953f2f",
+    "g2/components/foundation/wsf_timer/wsf_timer_stop.h": "ca20886609a5f19cb0352a2f726f65bfb39f6916eb7d129c19525eb54fee29e5",
+    "g2/components/foundation/wsf_timer/verify.py": "597ac0d9c964d686a4c2a061c19edcc57a54636c7d41a5035a11e51607ffe7fd"
+  },
+  "findings": [
+    {
+      "severity": "scope",
+      "finding": "Sparse timer compatibility view models only next pointer offset0 and started byte13; middle message/tick/handler fields remain opaque."
+    },
+    {
+      "severity": "caveat",
+      "finding": "The existing WSF byte-depth critical section does not preserve incoming PRIMASK and byte depth wraps. Valid nested behavior was compared; overflow is diagnostic and not certified safe."
+    },
+    {
+      "severity": "scope",
+      "finding": "The removal logic leaves stale next links in removed timers and clears started only when found, matching source. No expiry handoff, allocation/free, asynchronous lifetime, or full shutdown safety proof."
+    }
+  ],
+  "limits": "Actual nested WSF port, queue unlink, timer stop and timer\u2192GPIO shutdown slice; no executable call stubs. Caller-owned timer remains allocated, stale next retained, absent flag unchanged. Serialized acyclic mapped queues only; overflow depths/malformed predecessor are diagnostics. WSF byte-depth port may unmask unrelated incoming PRIMASK. No expiry handoff/queued-message drain, pending IRQ/NVIC cleanup, transport release, asynchronous lifetime or complete shutdown-safety proof. Synthetic GPIO register side effects; optimized tick blocker unchanged."
+}

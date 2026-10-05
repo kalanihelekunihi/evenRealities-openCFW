@@ -1,0 +1,35 @@
+{
+  "status": "PASS_WITH_BOUNDED_SCOPE",
+  "blockers": [],
+  "review_report": "g2/analysis/ambiq-gpio-board-2026-10-05/review/report.md",
+  "independent_rerun": {
+    "artifact": "g2/analysis/ambiq-gpio-board-2026-10-05/review/representative-rerun.json",
+    "status": "PASS",
+    "cases": 208,
+    "unique_original_instruction_bytes_in_sample": 344,
+    "firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "elf_sha256": "2c4c13b093d754749c7ece7285ac0b01d0ff7288ffc3410535f1c057ddf75e87",
+    "verifier_sha256": "f93da8ce88ae72b0ad949b8929ae4a7b32d74ce7740c51ade5e8d8f5081f01fe"
+  },
+  "verified_stock_bounds": {
+    "am_hal_gpio_state_write": {"start": "0x480FD6", "end_exclusive": "0x4810B0", "bytes": 218},
+    "radio_pin_helper": {"start": "0x52DD7C", "end_exclusive": "0x52DD94", "bytes": 24}
+  },
+  "register_offsets_relative_to_gpio_base": {
+    "RD": "0x404",
+    "WT": "0x420",
+    "WTS": "0x43C",
+    "WTC": "0x458",
+    "EN": "0x474",
+    "ENS": "0x490",
+    "ENC": "0x4AC"
+  },
+  "method_and_model_limits": [
+    "No pin-range check exists in the stock state-write body; bank-7 and upper-pin alias vectors are address diagnostics only.",
+    "The raw-u32 adapter is required for modeling arbitrary stock R1 values because the stock entry performs UXTB; the byte-typed C entry is intended for valid API callers.",
+    "GPIO command effects and output-active mask are synthetic; no physical pad/electrical, clock, mux or complete radio lifecycle evidence is claimed.",
+    "The radio helper is reconstructed; raw board config 3 and caller flow are authenticated, but no end-to-end shutdown safety claim is made."
+  ],
+  "validated_current_artifact": "g2/build/foundation/ambiq-gpio-board-simulator/comparison-first.json",
+  "full_comparison_summary": {"status": "PASS", "cases": 16108, "unique_original_trace_bytes": 406, "new_unique_bytes": 242}
+}

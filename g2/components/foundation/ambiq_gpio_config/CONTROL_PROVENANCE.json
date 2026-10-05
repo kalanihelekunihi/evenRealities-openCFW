@@ -1,0 +1,15 @@
+{
+  "upstream_commit": "5efc0228528a8adce5eae0d226fac85d2551eb3b",
+  "upstream_source_sha256": "93aa1e6eb28fabea5f0a41c0288451fb381b64070f59638b3d250da6a7430ccf",
+  "unchanged_function_text_sha256": {
+    "gpionum_intreg_index_get": "104f9b54e91e9b10607f8436f0c1939551d2667d01d3e683628e49ea479d8fe0",
+    "am_hal_gpio_interrupt_control": "bfc9fa70f498c1541becac4f692484093b35067a3f3620fa2d99233474bc72ea"
+  },
+  "adaptations": [
+    "Compatible volatile seven-word mask view omits unused per-bit names.",
+    "Raw adapter byte-converts both stock enums; public channel uses existing shared enum type.",
+    "Sparse physical register layout adds both seven-bank interrupt channels.",
+    "Radio wrappers and GPIO-only shutdown slice are reconstructed; larger lifecycle not implemented.",
+    "Radio pin117 enable/disable return literal117, matching stock stack-local pop; HAL status ignored. Pin136 gate and GPIO-only phase retain void scope."
+  ]
+}

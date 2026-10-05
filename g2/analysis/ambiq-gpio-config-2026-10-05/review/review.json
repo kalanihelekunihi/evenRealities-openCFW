@@ -1,0 +1,41 @@
+{
+  "status": "PASS_WITH_BOUNDED_SCOPE",
+  "blockers": [],
+  "findings": [
+    {
+      "severity": "informational",
+      "finding": "The module preserves the exact selected Ambiq SDK 5.1.0 getter/setter bodies, their four-byte by-value ABI, capability bitmaps, and saved-PRIMASK key/config/lock sequence. This review does not establish whole-driver or firmware byte identity."
+    },
+    {
+      "severity": "scope_limit",
+      "finding": "The emulator checks raw register memory and write ordering only. It does not model pad electrical behavior, enforcement of the lock key, mux routing, clocks, or board power sequencing."
+    },
+    {
+      "severity": "scope_limit",
+      "finding": "The 224 entries are a logical register/API bound, not a physical pad inventory. Consumer wrappers are static evidence and are excluded from executed source-comparison coverage."
+    },
+    {
+      "severity": "portability_note",
+      "finding": "The unchanged upstream signed shift expression `1 << (pin % 32)` and C bitfield representation are validated only under the tested ARM target compiler profile; generic host portability is not claimed."
+    }
+  ],
+  "selected_stock_bounds": {
+    "am_hal_gpio_pinconfig_get": {"start": "0x480EEE", "end_exclusive": "0x480F0C", "bytes": 30},
+    "am_hal_gpio_pinconfig": {"start": "0x480F0C", "end_exclusive": "0x480F8A", "bytes": 126}
+  },
+  "consumer_evidence": [
+    {"address": "0x52DD7C", "confidence": "unverified symbol record; call/data flow inspected", "relationship": "radio shutdown helper configures pin 138 with raw word 0x3; pin-93 state write is separate and outside this implementation"},
+    {"address": "0x592C78", "confidence": "inferred semantic label", "relationship": "display helper configures pins 143/128/142 with raw word 0x183; wrappers not executed"},
+    {"address": "0x46FB0C", "confidence": "unverified module association", "relationship": "flash-associated caller invokes getter for pin 103 at 0x46FD10"}
+  ],
+  "independent_rerun": {
+    "artifact": "g2/analysis/ambiq-gpio-config-2026-10-05/review/representative-rerun.json",
+    "status": "PASS",
+    "cases": 24,
+    "unique_original_instruction_bytes_in_selected_vectors": 160,
+    "firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "elf_sha256": "d00c9e431ad44425e1d036c2b27447d2382e5f55d9e3110c9a695b0c2c3cbae8",
+    "verifier_sha256": "83f2d1e254a296fa62b1212599b03f4eaecd7af9872800f6659edf6aa4006367"
+  },
+  "review_report": "g2/analysis/ambiq-gpio-config-2026-10-05/review/report.md"
+}

@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "fresh_cmdq_cases": 372,
+  "all_original_bodies_fully_executed": true,
+  "original_unique_bytes": 472,
+  "fresh_interrupt_regression_cases": 68,
+  "fresh_preserved_synthetic_lifecycle_cases": 102,
+  "focused_ambiq_unittest_methods": 9,
+  "aggregate": {
+    "tests_run": 183,
+    "passed": 177,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 7
+  },
+  "independent_review": "review/report.md",
+  "limits": "Only critical-enter 0x473940 and delay 0x4807a0 intercepted on BOTH sides; no CQ function stub. Synthetic MMIO and serialized states, no concurrency/elapsed delay/real interrupt masking proof. Local caller and separate global slot fixtures, no stock handle-initialization proof."
+}

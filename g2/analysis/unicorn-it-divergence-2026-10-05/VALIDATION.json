@@ -1,0 +1,110 @@
+{
+  "status": "REPRODUCIBLE_UNICORN_MEMORY_HOOK_EXECUTION_LIMITATION",
+  "optimized_full_validation": "BLOCKED; expected failure retained; no replacement PASS",
+  "machine_cases": 32,
+  "machine_expected_faults": 12,
+  "machine_successes": 20,
+  "bounded_stock_model": {
+    "cases": 1,
+    "profiles": [
+      "o2",
+      "o2-noalias",
+      "o0"
+    ],
+    "full_observable_final_state_equal": true,
+    "source_memory_assertions": "Not installed in bounded diagnostic; not counted as optimized full validation"
+  },
+  "full_verifier_reruns": [
+    {
+      "profile": "o2",
+      "returncode": 1,
+      "log": "g2/build/foundation/unicorn-it-divergence/o2-full-rerun.log",
+      "log_sha256": "b465b6a0b8839e33140019e87a581f3316fb8f7026fe01e7e28869b437151205",
+      "elf_sha256": "a04b6f3c7fd1c47d71ccd31615b95ebf44e793382e845cf3bd2c7452d165c478",
+      "passing_comparison_created": false
+    },
+    {
+      "profile": "o0",
+      "returncode": 0,
+      "log": "g2/build/foundation/unicorn-it-divergence/o0-full-rerun.log",
+      "log_sha256": "47e52f7aeff02515c90f39a96d20f98f3c42008cbfb4b28b9705c0b573b7e86f",
+      "elf_sha256": "035f8480636e0152f664ee16cd247145f97fd3165ac9feb21e95d6f2f7d302b7",
+      "passing_comparison_created": true,
+      "cases": 271,
+      "status": "PASS",
+      "result_sha256": "e49a44d29a6fb10443e06082ee19d4eaa4fde790603824ea302b452d744d0b63"
+    }
+  ],
+  "source_inventory_baseline": "g2/analysis/rescan-2026-10-05T215048Z/snapshot.json",
+  "foundation_source_changes": [],
+  "protected": [
+    {
+      "path": "g2/tools/open_cfw.py",
+      "sha256": "5721966cb09b6a0833fe5a018750fffcef6c850f4aad8acdb4e31c8d3864101b",
+      "unchanged": true,
+      "current_sha256": "5721966cb09b6a0833fe5a018750fffcef6c850f4aad8acdb4e31c8d3864101b"
+    },
+    {
+      "path": "g2/manifests/g2-2.2.6.10.json",
+      "sha256": "1e6f7da11f63cf063098de2213a304e0a15fe99e9a932cdef9fedf32d2856c61",
+      "unchanged": true,
+      "current_sha256": "1e6f7da11f63cf063098de2213a304e0a15fe99e9a932cdef9fedf32d2856c61"
+    },
+    {
+      "path": "g2/workflow/state.json",
+      "sha256": "4362dd4098292cf59ea2e4b45e056987f531392a0d2cb3b455549ba7699a1cc5",
+      "unchanged": true,
+      "current_sha256": "4362dd4098292cf59ea2e4b45e056987f531392a0d2cb3b455549ba7699a1cc5"
+    }
+  ],
+  "artifact_bindings": [
+    {
+      "path": "g2/build/foundation/unicorn-it-divergence/machine-repro.json",
+      "sha256": "d1a226a517b68b591178fc15e9515a585472cd57c891c8d05f9f4c08842337f1"
+    },
+    {
+      "path": "g2/build/foundation/unicorn-it-divergence/hook-access-matrix.json",
+      "sha256": "b59b3ccfcefee44af06144875794641d65239cf2335701d50c7566ef27736b57"
+    },
+    {
+      "path": "g2/build/foundation/unicorn-it-divergence/memory-hook-actions.json",
+      "sha256": "8da5e209a0e764dd280a41a975dbe21b693a6bb2bf35f077be419166c9c17cf9"
+    },
+    {
+      "path": "g2/build/foundation/unicorn-it-divergence/hook-range-matrix.json",
+      "sha256": "a262ba6432d1e8b405dc4efaa770cc58c2a8dcaf8778b5a98d2889c4c3b8d31c"
+    },
+    {
+      "path": "g2/build/foundation/unicorn-it-divergence/bounded-stock-comparison.json",
+      "sha256": "b851e1f3db1679a3512b4cc49f2854a23c495c8f0ecb16f0c276ae50dc21b9ab"
+    },
+    {
+      "path": "g2/build/foundation/unicorn-it-divergence/full-reruns.json",
+      "sha256": "1e9652af1a3df481139577b3538b80387c414526a978265a0473fa42cc040079"
+    },
+    {
+      "path": "g2/build/foundation/unicorn-it-divergence/o2-full-rerun.log",
+      "sha256": "b465b6a0b8839e33140019e87a581f3316fb8f7026fe01e7e28869b437151205"
+    },
+    {
+      "path": "g2/build/foundation/unicorn-it-divergence/o0-full-rerun.log",
+      "sha256": "47e52f7aeff02515c90f39a96d20f98f3c42008cbfb4b28b9705c0b573b7e86f"
+    }
+  ],
+  "new_validated_firmware_bytes": 0,
+  "limitations": [
+    "No claim of full optimized correctness, hardware equivalence, or original compiler settings.",
+    "Exact internal Unicorn defect not identified; installation and invocation of a no-op memory hook suffices to change machine execution.",
+    "32-machine matrix uses explicit Cortex-M4 simulation model; locked Apollo firmware is Cortex-M55.",
+    "No weakened production/verifier assertions or new scheduler implementation."
+  ],
+  "self_contained_repro": {
+    "g2/analysis/unicorn-it-divergence-2026-10-05/reproduce_machine.py": "2c8e843e07bf141c35214805e2600aaef36b74ff6413134f59806bdca7328c97",
+    "g2/analysis/unicorn-it-divergence-2026-10-05/machine-fixture.json": "3ff092b94a5d68132db46d7df1bb1957e453be99fe6c248a51a679c084bc91fc",
+    "g2/analysis/unicorn-it-divergence-2026-10-05/machine-results.json": "8c20704687a8c96547a4298763b07a137d8561995bab27437c3b2ccabbb6e195",
+    "g2/analysis/unicorn-it-divergence-2026-10-05/compare_bounded.py": "e0cf16cd8356344c0fae66909926cb38708c0ecedd32603c601faf7fed2ac0e8",
+    "g2/analysis/unicorn-it-divergence-2026-10-05/tick-disassembly.txt": "80ffb46ebb6468eabeca2323a7f8580c071456c20aa57c6b94173e0225439cee",
+    "g2/analysis/unicorn-it-divergence-2026-10-05/list-disassembly.txt": "b933ed529e10b201e90539eb70f3a54713498fa59a31b1f0f9e5e38e824a60d2"
+  },
+  "independent_review": "review/report.md and review/review.json; reviewer freshly executed32-case standalone matrix with installed Unicorn2.1.4"
+}

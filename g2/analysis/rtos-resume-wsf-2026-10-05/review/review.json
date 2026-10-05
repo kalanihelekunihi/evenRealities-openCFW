@@ -1,0 +1,28 @@
+{
+  "status": "PASS_WITH_BOUNDED_SCOPE",
+  "reviewed": {
+    "verifier": "g2/components/foundation/freertos_resume/simulator/verify.py",
+    "result": "g2/build/foundation/rtos-resume-wsf-simulator/comparison-final.json",
+    "result_case_count": 267,
+    "unique_original_trace_bytes": 2106,
+    "firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "elf_sha256": "4555f14076b4be3cf0a6022f490045b803ae184e132fa64a02f147b30f84e162",
+    "focused_test": "python3 -m unittest g2.tests.test_freertos_resume",
+    "focused_test_result": "3 tests passed"
+  },
+  "checks": {
+    "pinned_source_function_text": "vTaskSuspendAll, xTaskResumeAll, and prvResetNextTaskUnblockTime match recorded hashes from raw CRLF-preserving text",
+    "recovered_pended_tick_global": "0x20074a40",
+    "linked_boundaries": "task critical provider and PendSV request linked; tick increment intercepted explicitly",
+    "source_and_elf_freshness": "all six source-manifest hashes and linked ELF SHA256 match current files",
+    "translation_cache_policy": "cache invalidated symmetrically on stock and source before each top-level call; documented with no general emulator-root-cause claim"
+  },
+  "limits": [
+    "TCBs, lists, globals, and scheduler state are synthetic inputs.",
+    "xTaskIncrementTick supplies synthetic return values; tick advancement, expiry, and consequent delayed-task transitions are not implemented.",
+    "PendSV is requested but context switching and task selection are not executed.",
+    "Remaining EventGroup unblock, scheduler-state/context/wait/tick callbacks and application providers are fixtures.",
+    "This simulator target is not a production firmware build or byte-identical bundle proof."
+  ],
+  "blockers": []
+}

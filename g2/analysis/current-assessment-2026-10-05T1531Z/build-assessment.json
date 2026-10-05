@@ -1,0 +1,461 @@
+{
+  "assessment_date": "2026-10-05",
+  "current_campaign": {
+    "authoritative_receipt_path": "g2/build/pseudocode-first/20260930T190500Z/receipts/G1-target-and-inventory-107/receipt.json",
+    "c_implementation_assignments": [],
+    "campaign_id": "20260930T190500Z",
+    "execution_started": true,
+    "g1_receipt": "g2/build/pseudocode-first/20260930T190500Z/receipts/G1-target-and-inventory-107/receipt.json",
+    "g1_receipt_summary": {
+      "coverage_rows": 70,
+      "images": 33,
+      "meaning": "identity/container/nested-image inventory gate only; code/data and behavior completeness remain P2",
+      "payloads": 6,
+      "reviews": 125,
+      "status": "passed"
+    },
+    "gate_statuses": {
+      "G1_TARGET_AND_INVENTORY": "passed",
+      "G2_PSEUDOCODE_COMPLETE": "not_run",
+      "G3_CORPUS_FROZEN": "not_run",
+      "G4_IMPLEMENTATION_READY": "not_run",
+      "G5_SOURCE_COMPLETE": "not_run",
+      "G6_IDENTICAL_SOURCE_BUILD": "not_run"
+    },
+    "phase": "P2_EXECUTING"
+  },
+  "evidence_paths": [
+    "g2/workflow/target.json",
+    "g2/manifests/g2-2.2.6.10.json",
+    "g2/workflow/state.json",
+    "g2/build/pseudocode-first/20260930T190500Z/receipts/G1-target-and-inventory-107/receipt.json",
+    "g2/manifests/g2-2.2.6.10-core-source.json",
+    "g2/docs/reference/toolchains.md",
+    "g2/docs/reference/decompilation-status.md",
+    "g2/docs/reference/memory-map.md",
+    "g2/analysis/README.md",
+    "g2/components/em9305/source_image/README.md",
+    "g2/components/em9305/source_image/build_image.py",
+    "g2/tools/README.md",
+    "g2/Makefile",
+    "g2/workflow/PROCEDURE.md"
+  ],
+  "headline": "No blob-free production firmware build or source-identical payload/bundle reproduction is evidenced. The active target manifest still takes all six payloads from official_blob. The workflow is in P2 pseudocode recovery; G2\u2013G6 have not passed and no C implementation assignments exist.",
+  "legacy_core_source_assessment": {
+    "conclusion": "This manifest describes mixed overlays, not a blob-free whole-firmware build. For Apollo bootloader, Apollo main, and EM9305, region ledgers explicitly retain official_blob spans. Declared output sizes/hashes differ from all three locked official payloads and from the official bundle target. Touch and case are not source-build overrides; codec remains official payload-backed despite region segmentation.",
+    "manifest": "g2/manifests/g2-2.2.6.10-core-source.json",
+    "package_claim": {
+      "expected_sha256": "fe6a110ec790059b28304b44903aa4fd2a963bd0490cc60194c38fd8ce2a42ac",
+      "expected_size": 4750780,
+      "output_name": "g2-openCFW-s200_v2.2.6.10-core-source.evenota.bin",
+      "profiles": {
+        "linux-clang": {
+          "expected_sha256": "def1e3eb1cad740346beb78bad3d5f7e193af76d641f742aee15e8f934555c09",
+          "expected_size": 4750764
+        }
+      }
+    },
+    "source_build_outputs": [
+      {
+        "component": "apollo_bootloader",
+        "declared_path": "g2/components/bootloader/core_overlay/build/ota_s200_bootloader.bin",
+        "declared_sha256": "696a6bafaea197c8a6237a626bdee3b2742a1b83a39b2bd0a2f12c01c6c6b4f3",
+        "declared_size": 163840,
+        "kind": "source_build",
+        "official_blob_bytes_retained_by_region_map": 81187,
+        "other_region_bytes_by_status": {
+          "generated_alignment": 16,
+          "generated_source_entry_replacement": 16830,
+          "official_blob": 81187,
+          "source_compiled": 65807
+        },
+        "path_exists": false,
+        "source_compiled_bytes_by_region_map": 65807
+      },
+      {
+        "component": "apollo_main",
+        "declared_path": "g2/components/apollo_main/core_overlay/build/ota_s200_firmware_ota.bin",
+        "declared_sha256": "97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9",
+        "declared_size": 3956672,
+        "kind": "source_build",
+        "official_blob_bytes_retained_by_region_map": 3028096,
+        "other_region_bytes_by_status": {
+          "container_only": 32,
+          "generated_alignment": 4314,
+          "generated_padding": 12828,
+          "generated_source_data_replacement": 130886,
+          "generated_source_entry_replacement": 384624,
+          "generated_source_exact_load_image": 6,
+          "generated_source_exact_replacement": 134,
+          "official_blob": 3028096,
+          "source_compiled": 394152,
+          "source_compiled_rodata": 1600
+        },
+        "path_exists": false,
+        "source_compiled_bytes_by_region_map": 395752
+      },
+      {
+        "component": "ble_em9305",
+        "declared_path": "g2/components/em9305/source_overlay/build/firmware_ble_em9305.bin",
+        "declared_sha256": "56694060c0d2761c2004581d0cec97cdb8642c1ff44675194d05d605bf8dd9c7",
+        "declared_size": 212984,
+        "kind": "source_build",
+        "official_blob_bytes_retained_by_region_map": 210584,
+        "other_region_bytes_by_status": {
+          "container_only": 124,
+          "generated_padding": 1102,
+          "official_blob": 210584,
+          "source_compiled": 1174
+        },
+        "path_exists": false,
+        "source_compiled_bytes_by_region_map": 1174
+      }
+    ],
+    "status": "historical overlay manifest; referenced source/build outputs are absent"
+  },
+  "offline_c_models": {
+    "batches": [
+      {
+        "artifact_type": "manual pseudocode + host helper header/tests + original-instruction harness evidence",
+        "batch": "ring-client-2026-09-30",
+        "documented_instruction_scenarios": 25,
+        "payload": "apollo_main",
+        "scope": "7 recovered BLE client functions, 1,446 B; UUID/lifecycle/receive/TX queue helpers"
+      },
+      {
+        "artifact_type": "manual pseudocode + host helper header/tests + original-instruction harness evidence",
+        "batch": "ring-protocol-2026-09-30",
+        "documented_instruction_scenarios": 42,
+        "payload": "apollo_main",
+        "scope": "19 function recoveries plus support excerpts; command encoding and RX dispatch"
+      },
+      {
+        "artifact_type": "manual pseudocode + host helper header/tests + original-instruction harness evidence",
+        "batch": "ring-actions-att-2026-09-30",
+        "documented_instruction_scenarios": 46,
+        "payload": "apollo_main",
+        "scope": "gesture/action dispatch, app record serialization, ATT copy boundary"
+      },
+      {
+        "artifact_type": "manual pseudocode + host helper header/tests + original-instruction harness evidence",
+        "batch": "ring-tx-ownership-2026-10-01",
+        "documented_instruction_scenarios": 25,
+        "payload": "apollo_main",
+        "scope": "TX queue ownership and caller-buffer lifetime"
+      },
+      {
+        "artifact_type": "manual pseudocode + host helper header/tests + original-instruction harness evidence",
+        "batch": "ring-allocator-lifecycle-2026-10-01",
+        "documented_instruction_scenarios": 49,
+        "payload": "apollo_main",
+        "scope": "WSF allocator and cooperative lifecycle limits"
+      },
+      {
+        "artifact_type": "manual pseudocode + host helper header/tests + original-instruction harness evidence",
+        "batch": "audio-stream-2026-10-01",
+        "documented_instruction_scenarios": 26,
+        "payload": "apollo_main",
+        "scope": "PCM/LC3 stream body and callbacks"
+      },
+      {
+        "artifact_type": "manual pseudocode + host helper header/tests + original-instruction harness evidence",
+        "batch": "audio-ble-metadata-2026-10-01",
+        "documented_instruction_scenarios": 30,
+        "payload": "apollo_main",
+        "scope": "BLE ESS/ATT transport, metadata and queue behavior"
+      },
+      {
+        "artifact_type": "manual pseudocode + host helper header/tests + original-instruction harness evidence",
+        "batch": "ess-gatt-2026-10-01",
+        "documented_instruction_scenarios": 13,
+        "payload": "apollo_main",
+        "scope": "ESS service registration, UUIDs and MTU paths"
+      },
+      {
+        "artifact_type": "manual pseudocode + host helper header/tests + original-instruction harness evidence",
+        "batch": "audio-angle-2026-10-01",
+        "documented_instruction_scenarios": 13,
+        "payload": "apollo_main",
+        "scope": "PCM cross-correlation and angle wrapper"
+      }
+    ],
+    "consumer_boundary": "Useful for apps/simulators and behavioral evidence; not CFW production images, not six-payload source completion, and not byte-equality evidence.",
+    "count": 9,
+    "documented_instruction_scenario_sum": 269,
+    "scenario_count_note": "Sum across the nine batch READMEs; batches overlap and scenario counts are not unique function/image coverage. The READMEs state these are host helpers/manual pseudocode and harnesses that execute original stock instructions with explicit stubs; the handwritten C is not linked as firmware source. All identified batches exercise apollo_main."
+  },
+  "per_payload": [
+    {
+      "architecture_consumer_function_evidence": {
+        "architecture": "NationalChip GX8002, C-SKY CK804EF ABIv2 hard-float plus gxNPU",
+        "consumer": "Audio codec/DSP and keyword spotting; FWPK includes boot stages and A/B firmware images",
+        "evidence": [
+          "g2/docs/reference/memory-map.md:13-19,1896-1907",
+          "g2/docs/reference/decompilation-status.md:17-21,36-39"
+        ],
+        "raw_export": "Ghidra open C-SKY exports: UART stage 1 32/32; UART stage 2 96/96; image A XIP 362/362; image A SRAM 151/151; image B SRAM 288/288; sum 929 exported entries. This is not a source link or full semantics review."
+      },
+      "current_provider": "official_blob",
+      "current_provider_file_present_and_hash_verified": true,
+      "current_provider_path": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+      "entry_id": 1,
+      "legacy_core_source_manifest": {
+        "override_present": true,
+        "profile_outputs": [],
+        "provider_kind": "inherited/unspecified",
+        "provider_path": null,
+        "provider_path_present": false,
+        "provider_sha256": null,
+        "provider_size": null,
+        "region_bytes_by_address_status": {
+          "confirmed_from_binh_headers_and_apollo_dfu_command": 287808,
+          "confirmed_from_uart_boot_header_and_vectors": 38204,
+          "container_only": 48,
+          "controller_protocol_metadata": 32
+        },
+        "target_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+        "target_size": 326092
+      },
+      "package_filename": "firmware/codec.bin",
+      "payload_id": "codec",
+      "sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "size": 326092
+    },
+    {
+      "architecture_consumer_function_evidence": {
+        "architecture": "EM Microelectronic EM9305 ARCv2 EM / EM7D",
+        "consumer": "BLE controller (Packetcraft Link Layer/Baseband/PAL and EM HAL) behind Apollo HCI; package has four records",
+        "evidence": [
+          "g2/docs/reference/memory-map.md:200-217",
+          "g2/docs/reference/decompilation-status.md:22-23",
+          "g2/docs/reference/toolchains.md:120-160"
+        ],
+        "raw_export": "ARCv2 EM objdump covers app record 0x302400..0x335BC8 (71,924 lines in the export table), no pseudocode export. Upstream SDK archive body matching: 1,494 functions / 157,122 of 210,888 application bytes across 48 archives (provenance/matching evidence, not current source)."
+      },
+      "current_provider": "official_blob",
+      "current_provider_file_present_and_hash_verified": true,
+      "current_provider_path": "g2/blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin",
+      "entry_id": 2,
+      "legacy_core_source_manifest": {
+        "override_present": true,
+        "profile_outputs": [
+          {
+            "name": "linux-clang",
+            "path": null,
+            "present": false,
+            "sha256": "56694060c0d2761c2004581d0cec97cdb8642c1ff44675194d05d605bf8dd9c7",
+            "size": 212984
+          }
+        ],
+        "provider_kind": "source_build",
+        "provider_path": "components/em9305/source_overlay/build/firmware_ble_em9305.bin",
+        "provider_path_present": false,
+        "provider_sha256": "56694060c0d2761c2004581d0cec97cdb8642c1ff44675194d05d605bf8dd9c7",
+        "provider_size": 212984,
+        "region_bytes_by_address_status": {
+          "container_only": 124,
+          "generated_padding": 1102,
+          "official_blob": 210584,
+          "source_compiled": 1174
+        },
+        "target_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+        "target_size": 211948
+      },
+      "package_filename": "firmware/ble_em9305.bin",
+      "payload_id": "ble_em9305",
+      "sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+      "size": 211948
+    },
+    {
+      "architecture_consumer_function_evidence": {
+        "architecture": "Infineon PSoC 4000T CY8C4046FNI family, Arm Cortex-M0+ / ARMv6-M",
+        "consumer": "CapSense touch controller, I2C slave to Apollo",
+        "evidence": [
+          "g2/docs/reference/memory-map.md:249-276",
+          "g2/docs/reference/decompilation-status.md:13-18"
+        ],
+        "raw_export": "Ghidra 12.1.4 at base 0x3300: 308 discovered/decompiled entries in the open-tool export."
+      },
+      "current_provider": "official_blob",
+      "current_provider_file_present_and_hash_verified": true,
+      "current_provider_path": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+      "entry_id": 3,
+      "legacy_core_source_manifest": null,
+      "package_filename": "firmware/touch.bin",
+      "payload_id": "touch",
+      "sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+      "size": 34464
+    },
+    {
+      "architecture_consumer_function_evidence": {
+        "architecture": "STM32G0B1-class (G0B0/G0B1/G0C1 not separable), Arm Cortex-M0+",
+        "consumer": "Charging case controller; UART link to glasses and case-to-glasses updater",
+        "evidence": [
+          "g2/docs/reference/memory-map.md:13-19,300-320",
+          "g2/docs/reference/decompilation-status.md:13-18"
+        ],
+        "raw_export": "Ghidra 12.1.4 at base 0x08000000: 435 discovered/decompiled entries in the open-tool export."
+      },
+      "current_provider": "official_blob",
+      "current_provider_file_present_and_hash_verified": true,
+      "current_provider_path": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+      "entry_id": 4,
+      "legacy_core_source_manifest": null,
+      "package_filename": "firmware/box.bin",
+      "payload_id": "case",
+      "sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+      "size": 55784
+    },
+    {
+      "architecture_consumer_function_evidence": {
+        "architecture": "Ambiq Apollo510B, Arm Cortex-M55, Thumb little-endian",
+        "consumer": "Per-temple Even boot/update loader: staged image validation, filesystem recovery, DFU and application handoff",
+        "evidence": [
+          "g2/docs/reference/memory-map.md:222-250",
+          "g2/docs/reference/decompilation-status.md:13-19,41-43"
+        ],
+        "raw_export": "Ghidra 12.1.4 at 0x00410000: 903 discovered; 849 decompiled; 54 failed in the open-tool export."
+      },
+      "current_provider": "official_blob",
+      "current_provider_file_present_and_hash_verified": true,
+      "current_provider_path": "g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin",
+      "entry_id": 5,
+      "legacy_core_source_manifest": {
+        "override_present": true,
+        "profile_outputs": [
+          {
+            "name": "apple-font-manager-record",
+            "path": null,
+            "present": false,
+            "sha256": "696a6bafaea197c8a6237a626bdee3b2742a1b83a39b2bd0a2f12c01c6c6b4f3",
+            "size": 163840
+          },
+          {
+            "name": "apple-product-rtos-record",
+            "path": null,
+            "present": false,
+            "sha256": "696a6bafaea197c8a6237a626bdee3b2742a1b83a39b2bd0a2f12c01c6c6b4f3",
+            "size": 163840
+          },
+          {
+            "name": "linux-clang",
+            "path": "build/canonical-provider/linux-clang/apollo_bootloader/ota_s200_bootloader.bin",
+            "present": false,
+            "sha256": "11f12f80ce187fce53f37b2d27bf9326a8374e1b62a061394e39c511a21b1875",
+            "size": 163824
+          }
+        ],
+        "provider_kind": "source_build",
+        "provider_path": "components/bootloader/core_overlay/build/ota_s200_bootloader.bin",
+        "provider_path_present": false,
+        "provider_sha256": "696a6bafaea197c8a6237a626bdee3b2742a1b83a39b2bd0a2f12c01c6c6b4f3",
+        "provider_size": 163840,
+        "region_bytes_by_address_status": {
+          "generated_alignment": 16,
+          "generated_source_entry_replacement": 16830,
+          "official_blob": 81187,
+          "source_compiled": 65807
+        },
+        "target_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+        "target_size": 148599
+      },
+      "package_filename": "ota/s200_bootloader.bin",
+      "payload_id": "apollo_bootloader",
+      "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+      "size": 148599
+    },
+    {
+      "architecture_consumer_function_evidence": {
+        "architecture": "Ambiq Apollo510B, Arm Cortex-M55, Thumb little-endian; dual temple application",
+        "consumer": "Primary glasses application: UI, BLE host/RingLink, filesystem, sensors and app services",
+        "evidence": [
+          "g2/docs/reference/memory-map.md:13-19,33-66",
+          "g2/docs/reference/decompilation-status.md:13-19,69-71"
+        ],
+        "raw_export": "Ghidra 12.1.4 at 0x00438000: 8,853 discovered; 8,475 decompiled; 378 entries failed or remain partial in that export. Raw output is not reviewed whole-image pseudocode."
+      },
+      "current_provider": "official_blob",
+      "current_provider_file_present_and_hash_verified": true,
+      "current_provider_path": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+      "entry_id": 6,
+      "legacy_core_source_manifest": {
+        "override_present": true,
+        "profile_outputs": [
+          {
+            "name": "linux-clang",
+            "path": "build/canonical-provider/linux-clang/apollo_main-final81/ota_s200_firmware_ota.bin",
+            "present": false,
+            "sha256": "dbfc7bbf1462166b04fb962e9e639ba2296c84a6e0b4f6f22d7ae5e321efc0e6",
+            "size": 3956672
+          }
+        ],
+        "provider_kind": "source_build",
+        "provider_path": "components/apollo_main/core_overlay/build/ota_s200_firmware_ota.bin",
+        "provider_path_present": false,
+        "provider_sha256": "97c0f4191de23eb9a46ea25c963a53dff57f8084c422c33ee7f07e486eebd8c9",
+        "provider_size": 3956672,
+        "region_bytes_by_address_status": {
+          "container_only": 32,
+          "generated_alignment": 4314,
+          "generated_padding": 12828,
+          "generated_source_data_replacement": 130886,
+          "generated_source_entry_replacement": 384624,
+          "generated_source_exact_load_image": 6,
+          "generated_source_exact_replacement": 134,
+          "official_blob": 3028096,
+          "source_compiled": 394152,
+          "source_compiled_rodata": 1600
+        },
+        "target_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+        "target_size": 3523396
+      },
+      "package_filename": "ota/s200_firmware_ota.bin",
+      "payload_id": "apollo_main",
+      "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "size": 3523396
+    }
+  ],
+  "remaining_blockers": [
+    "P2 must finish and independently review pseudocode/non-code accounting for all 33 images before G2/G3 can pass.",
+    "The official bundle cache path is absent now; current G1 receipt records past authentication, while a fresh target authentication requires the original whole bundle.",
+    "Every active target component still selects official_blob; the historical core-source outputs are hybrid, missing on disk, and hash/size divergent.",
+    "Exact compiler/linker/runtime profiles and reproducible link layouts remain unresolved; ROM/device-specific external dependencies and proprietary or prebuilt libraries need source/qualification treatment.",
+    "There is no source-complete six-payload build, no two-clean-build comparison, and no G6 byte equality evidence."
+  ],
+  "reproduction_and_artifact_checks": {
+    "all_six_extracted_official_payloads_exist_and_match_target_hashes": true,
+    "clean_source_build_runs": 0,
+    "legacy_core_source_evenota": "declared size/hash do not equal the locked official bundle; declared component output sizes/hashes also differ from target. Source-built profile files are absent.",
+    "locked_bundle_byte_equality_from_source": "not demonstrated",
+    "reference_bundle_repack": "g2/tools/README.md and g2/Makefile document `make reference` as repacking official payloads; it is a container repack, not a source build. The target file path is absent at assessment time and target.json records only a prior size/hash identity check with no package build performed.",
+    "six_payload_byte_comparisons_from_source": 0
+  },
+  "schema_version": 1,
+  "scope": "Read-only current source/build/link/reproduction assessment for all six locked s200_v2.2.6.10 payloads. No builds or device operations were run.",
+  "target": {
+    "bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "bundle_size": 4301227,
+    "official_bundle_cached_path": "g2/build/reference/package/g2-openCFW-s200_v2.2.6.10.evenota.bin",
+    "official_bundle_cached_path_exists_now": false,
+    "target_note": "size_and_sha256_match_existing_cached_reference_package; no_package_build_performed",
+    "version": "s200_v2.2.6.10"
+  },
+  "toolchain_and_link_evidence": {
+    "firmware_toolchain_summary": "g2/docs/reference/toolchains.md records compiler families but unresolved releases/configurations: IAR exact releases for both Apollo images; MetaWare identity based on SDK object evidence for EM9305; C-SKY compiler release and libc/libgcc qualification unresolved; touch GCC range 10.3\u201313.3; case Arm Compiler 6/armlink exact versions unresolved. No full target linker map/relink receipt for the six official payloads was found in the current build products examined.",
+    "linkmaps": "No production link-map artifact or source-relinked target image receipt is identified by the current G5/G6 state; legacy region ledgers are address-accounting manifests, not linker maps.",
+    "tool_builds": [
+      {
+        "receipt": "g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/receipt.md",
+        "what_it_proves": "C-SKY binutils/GAS 2.27 installed for inspection/disassembly. Receipt explicitly says no firmware compilation or decoder execution."
+      },
+      {
+        "receipt": "g2/build/pseudocode-first/20260930T190500Z/tools/arc-binutils-001/build-receipt.json",
+        "what_it_proves": "ARC GNU binutils/objdump/GAS built for inventory and calibration; receipt scope excludes firmware source, C code and decoder firmware."
+      },
+      {
+        "instructions": "g2/tools/build_g2_csky_macos.py",
+        "what_it_proves": "Recipe can build C-SKY binutils plus a freestanding GCC driver; it states libc/libgcc qualification is separate. No C-SKY GCC firmware-build receipt/output is recorded here."
+      }
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "fresh_cases": 569,
+  "unique_original_trace_bytes_including_prior": 1554,
+  "new_disjoint_original_bytes": 404,
+  "cumulative_unique_original_bytes": 2974,
+  "focused_tests_passed": 47,
+  "aggregate": {
+    "tests_run": 203,
+    "passed": 198,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 6
+  },
+  "aggregate_modules": 37,
+  "limits": "Real queue ISR producer, data copy helper, original memcpy and BASEPRI helpers plus event-group/WSF/radio/GPIO execute. Scheduler suspend/resume/unblock/receiver removal/task count, context/wait/ticks/app handlers remain fixtures. Explicit synthetic dequeue/daemon invokes real callback; production receive/daemon scheduling is not executed. Invalid assertions stop at interrupt-mask helper entry, before fault store/loop. No actual scheduling, destruction/quiescence or physical IRQ claim.",
+  "fresh_comparison": "g2/build/foundation/timer-queue-wsf-simulator/comparison-reviewed.json"
+}

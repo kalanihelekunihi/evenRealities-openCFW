@@ -1,0 +1,13 @@
+{
+  "upstream_commit": "5efc0228528a8adce5eae0d226fac85d2551eb3b",
+  "upstream_path": "mcu/apollo510/hal/mcu/am_hal_interrupt.c",
+  "git_blob_sha1": "2992ea7c387300aa6e2e81848fe4a8809a68cdf5",
+  "source_sha256": "8489dc9de29097b24793d199d1d41b9d91fdff7959e82a90ed732388b232fb18",
+  "function": "am_hal_interrupt_master_disable",
+  "unchanged_gcc_function_text_sha256": "bf3b6be1ea16857f54df0d258d726886ea68d24bc0c429cb33e7fe0bd029c38e",
+  "original_address": "0x473940",
+  "original_bytes": "eff3108072b67047",
+  "stock_preconditions": "privileged processor context; configurable interrupt mask only",
+  "adaptation": "GNU alias opencfw_cmdq_critical_enter, real profile compilation conditional",
+  "limits": "No scheduler interleaving, actual IRQ delivery or unprivileged-enforcement proof"
+}

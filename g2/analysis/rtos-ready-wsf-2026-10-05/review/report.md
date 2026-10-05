@@ -1,0 +1,11 @@
+# Independent review: bounded FreeRTOS ready transition
+
+Reviewed the final linked verifier and `comparison-final.json` for the ready-list addition. I found no blocking implementation or evidence issue in this bounded target.
+
+The copied `xTaskRemoveFromEventList`, `prvResetNextTaskUnblockTime`, `uxTaskGetNumberOfTasks`, `vListInsertEnd`, and `uxListRemove` function text matches the pinned FreeRTOS V10.5.1 source at commit `def7d2df2b0506d3d249334974f51e427c17a41c`. I independently recomputed the recorded hashes from the CRLF-preserving source text; the reset helper requires selecting its definition after the forward declaration. The 32-bit ABI asserts match the used TCB prefix offsets (state item +4, event item +24, priority +44) and 20-byte list/item structures.
+
+The final comparison binds the exact firmware SHA, linked ELF SHA, and current source-manifest hashes. It reports 301 cases and 1,984 unique original instruction bytes. The stock and source sides compare full observable state; the independent list model checks list counts, sentinel/index pointers, node links, owner/container fields, membership, insertion order, ready priority, yield state, and next-unblock value. I also ran `python3 -m unittest g2.tests.test_freertos_ready`; all three focused provenance, original-byte identity, linked-symbol, and optimized-verifier checks passed.
+
+The repeated two-waiter case initially exposed a Unicorn translation-cache artifact: the source run could skip a helper’s first load after a prior call. The final verifier invalidates executable-segment translation caches before every top-level call on both stock and source sides, preserves and checks instruction bytes, and describes the observation without claiming a general emulator cause. This policy is visible in the result’s `execution_policy` and is an appropriate bounded harness correction.
+
+Scope remains limited to actual ordered event-list removal, state-list removal, ready/pending insertion, next-unblock reset, task-count getter, and the already linked queue/daemon/WSF/radio path. Initial TCBs, lists, globals, and scheduler state are synthetic fixtures. Pending-ready draining, selection/context switching, suspend/resume internals, full scheduler lifecycle, real hardware scheduling, and production firmware completeness are not established by this result.

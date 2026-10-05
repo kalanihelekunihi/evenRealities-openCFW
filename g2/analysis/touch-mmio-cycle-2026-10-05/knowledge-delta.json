@@ -1,0 +1,43 @@
+{
+  "rx_original_linked_cases": 8,
+  "tx_original_linked_cases": 12,
+  "added_adapter_cases": 15,
+  "original_unique_bytes": 234,
+  "new_original_execution_vs_wrapper_baseline": 204,
+  "new_code_observation_vs_firmware_byte_map": 234,
+  "new_exact_upstream_compiled_match_bytes": 0,
+  "new_typed_resource_bytes": 0,
+  "aggregate": {
+    "total_modules": 29,
+    "completed_modules": 29,
+    "totals": {
+      "tests_run": 174,
+      "passed": 168,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 7
+    },
+    "unrun_modules": []
+  },
+  "saved_comparison": "g2/build/foundation/touch-scb-trigger-final/comparison-reviewed.json",
+  "saved_comparison_sha256": "1af62f000a4a400b1781726fbbf57b00b554203ea3700249bf30a11722a9a65e",
+  "limits": "Synthetic MMIO, no board startup/IRQ/DMA/concurrency or bootable firmware proof",
+  "linked_comparison_original_unique_bytes": 232,
+  "standalone_original_BKPT_bytes_additional": 2,
+  "fifo_original_linked_cases": 5,
+  "fifo_checked_invalid_cases": 4,
+  "fifo_standalone_original_cases": 9,
+  "final_sources": {
+    "g2/Makefile": "01c8cb1ded390866757d6317cca9bfa00cf25b76f7b8047e96d30ef69e8edad9",
+    "g2/components/foundation/touch_scb/simulator/entry.c": "cd61baf25d6cf38db1a631c0e5db5d194e87a3953536c5213135cc3498be813a",
+    "g2/components/foundation/touch_scb/simulator/module.ld": "35197fc939bca0ac513fac9d05196110c2b93803ab3efcbc2cfa9af19b88fa37",
+    "g2/components/foundation/touch_scb/touch_scb.c": "ef593088ec3c20985ae8c4b51cf932d9ccc9a98627b43dbe08e8befa412d8afd",
+    "g2/components/foundation/touch_scb/touch_scb.h": "92e7b7a09807209efba8b0372e615dd3b5ab32dd0459bc4c25675392e29b525d",
+    "g2/components/foundation/touch_scb/touch_scb_fifo.c": "f6c5439760848024e1bb297d3ab413aa4644f69e42c61c2b4ec692d2da94caca",
+    "g2/components/foundation/touch_scb/touch_scb_fifo.h": "b0cc52cc1f2c60ffb3da0c4a3931159b44c252f8343237f044db6ce7a600efbd",
+    "g2/components/foundation/touch_scb/touch_scb_mmio.c": "783266dd5cadfdb30c1d3fd52f94425f01e5dda86dc33e92f3ba7105f47516bd",
+    "g2/components/foundation/touch_scb/touch_scb_mmio.h": "246a8d858507f86efca279f1bcc3f2acf832b728db77d5a81163812fc1cf9c6f",
+    "g2/components/foundation/touch_scb/touch_scb_tx.c": "26c4c1d6cce94e42d5d7c2a117c6c592e297d9f8bb3b692add121430c904403c",
+    "g2/components/foundation/touch_scb/touch_scb_tx.h": "70d8e9f60fd9c67ccdd0217f036265f9b4f213c9dfae58af2a490ea4cb427829"
+  }
+}

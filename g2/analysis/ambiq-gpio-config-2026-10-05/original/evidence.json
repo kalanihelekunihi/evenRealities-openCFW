@@ -1,0 +1,171 @@
+{
+  "firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "decoded_payload_base": "0x438000",
+  "code": [
+    {
+      "address": "0x480eee",
+      "end": "0x480f0c",
+      "bytes": 30,
+      "sha256": "f76f64c0dd07b5e162bd23d4cdc87a1e70735b0db5b61da9fa1c3dd7f6ec942e",
+      "role": "stock pin configuration getter",
+      "symbol_record_confidence": "Unverified",
+      "gpio_calls": []
+    },
+    {
+      "address": "0x480f0c",
+      "end": "0x480f8a",
+      "bytes": 126,
+      "sha256": "a43394486c7d8da946cf692d6f33ddf66f1ebe63683d3a3fd408afb0fdf5e9e2",
+      "role": "stock pin configuration setter",
+      "symbol_record_confidence": "Unverified",
+      "gpio_calls": []
+    },
+    {
+      "address": "0x473940",
+      "end": "0x473948",
+      "bytes": 8,
+      "sha256": "720733fcf19a5635fcab0791fcc2b007294712bb27536443ff79490821c168cf",
+      "role": "shared original PRIMASK entry",
+      "symbol_record_confidence": "Unverified",
+      "gpio_calls": []
+    },
+    {
+      "address": "0x52dd7c",
+      "end": "0x52dd94",
+      "bytes": 24,
+      "sha256": "305a68c45e61102444d5ccab1fad6ed41903a05985e2323223acc1c92c92f9bc",
+      "role": "radio shutdown pin138 configuration helper; descriptive relationship",
+      "symbol_record_confidence": "Unverified",
+      "gpio_calls": [
+        {
+          "site": "0x52dd8e",
+          "target": "0x480f0c"
+        }
+      ]
+    },
+    {
+      "address": "0x592c78",
+      "end": "0x592cb4",
+      "bytes": 60,
+      "sha256": "809abce206c1ccbaec57ee922ee4fc7ca0b7767a067d5419a8feec12d91c29ef",
+      "role": "display power pin helper; existing inferred semantic label",
+      "symbol_record_confidence": "Inferred",
+      "gpio_calls": [
+        {
+          "site": "0x592c90",
+          "target": "0x480f0c"
+        },
+        {
+          "site": "0x592ca2",
+          "target": "0x480f0c"
+        },
+        {
+          "site": "0x592cae",
+          "target": "0x480f0c"
+        }
+      ]
+    },
+    {
+      "address": "0x46fb0c",
+      "end": "0x46fe38",
+      "bytes": 812,
+      "sha256": "68c702cca39cea94a9650b5c456229c1fd46b884490bb97f04879c8b56326c21",
+      "role": "flash MSPI setup consumer; module association unverified",
+      "symbol_record_confidence": "Unverified",
+      "gpio_calls": [
+        {
+          "site": "0x46fd10",
+          "target": "0x480eee"
+        }
+      ]
+    }
+  ],
+  "data": [
+    {
+      "address": "0x768ba8",
+      "bytes": 28,
+      "sha256": "b735c04032541cece197c93699f0753d37d7af5937bb6cdff15def90dbfe30fc",
+      "hex": "00000000e03f0000ff03000000fefb1f00c007000000000000000000",
+      "words": [
+        "0x0",
+        "0x3fe0",
+        "0x3ff",
+        "0x1ffbfe00",
+        "0x7c000",
+        "0x0",
+        "0x0"
+      ],
+      "role": "extended-drive pad bitmap"
+    },
+    {
+      "address": "0x768bc4",
+      "bytes": 28,
+      "sha256": "cc26c6f666de586a513054c9c0ccc99f0d76e213cd5f8a4638264390cb245804",
+      "hex": "e607c08ffffff3e3ffffff81ffffffff7fc00ff00100000089010000",
+      "words": [
+        "0x8fc007e6",
+        "0xe3f3ffff",
+        "0x81ffffff",
+        "0xffffffff",
+        "0xf00fc07f",
+        "0x1",
+        "0x189"
+      ],
+      "role": "normal-pad additional-drive bitmap"
+    },
+    {
+      "address": "0x48173c",
+      "bytes": 16,
+      "sha256": "16bb25186214e944557954f16d0f9c1d9fe4d4a0c386afc92ea50606ee36c555",
+      "hex": "00000140a88b7600c48b760000040140",
+      "words": [
+        "0x40010000",
+        "0x768ba8",
+        "0x768bc4",
+        "0x40010400"
+      ],
+      "role": "MMIO base and validation table pointers/PADKEY address"
+    },
+    {
+      "address": "0x5938d0",
+      "bytes": 4,
+      "sha256": "f2fdfdbb646b998338001de3627b23de1a95b51feadfa1d97c555902b46c763f",
+      "hex": "40ee7800",
+      "words": [
+        "0x78ee40"
+      ],
+      "role": "display raw configuration pointer"
+    },
+    {
+      "address": "0x78ee40",
+      "bytes": 4,
+      "sha256": "154978af80daa247766a53c36853d9c83352faa865ef396874d708ce7d2ee384",
+      "hex": "83010000",
+      "words": [
+        "0x183"
+      ],
+      "role": "display raw configuration word"
+    },
+    {
+      "address": "0x52e93c",
+      "bytes": 4,
+      "sha256": "b2475684f530ac6b955c0fddcd8c322094572c9785148b213e94be2a75b6dff2",
+      "hex": "48ee7800",
+      "words": [
+        "0x78ee48"
+      ],
+      "role": "radio raw configuration pointer"
+    },
+    {
+      "address": "0x78ee48",
+      "bytes": 4,
+      "sha256": "9d9f290527a6be626a8f5985b26e19b237b44872b03631811df4416fc1713178",
+      "hex": "03000000",
+      "words": [
+        "0x3"
+      ],
+      "role": "radio pin138 configuration word"
+    }
+  ],
+  "limits": "Static consumer context only; power/configuration wrappers not executed by this packet and their bytes are excluded from new source-comparison coverage."
+}
