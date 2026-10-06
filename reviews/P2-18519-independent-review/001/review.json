@@ -1,0 +1,19 @@
+{
+  "review_id": "P2-18519-independent-review",
+  "status": "partial",
+  "accepted": false,
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-pre-body-mask-gated-lookups-stride-reset-and-local-diagnostic-18920-map/001",
+  "pinned_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "checks": [
+    "fresh 86-byte GNU replay",
+    "instruction/reference manifests match",
+    "mask-gated R8 reset/offset replacement checked",
+    "repeated lookups and fresh field reads checked",
+    "local diagnostic args and shared join verified"
+  ],
+  "limitations": [
+    "next body/join behavior incomplete",
+    "child semantics unresolved",
+    "no global coverage claim"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "review_id": "P2-18507-independent-review",
+  "status": "partial",
+  "accepted": false,
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-header-zero-kind-three-halfword-word-mismatch-diagnostic-18908-map/001",
+  "pinned_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "checks": [
+    "fresh 120-byte GNU replay",
+    "instruction/reference manifests match",
+    "inherited header and exact kind-3 branch checked",
+    "comparison order vs diagnostic reload order checked",
+    "fresh masks and local writes checked"
+  ],
+  "limitations": [
+    "continuations outside span",
+    "child contracts unresolved",
+    "no global coverage claim"
+  ]
+}

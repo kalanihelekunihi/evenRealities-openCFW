@@ -7,6 +7,15 @@ host-test:
 	mkdir -p $(OUT)
 	$(CC) $(HOSTFLAGS) -fsanitize=address,undefined -fno-omit-frame-pointer filesystem.c file_services.c upstream/lfs.c upstream/lfs_util.c host_test.c -o $(OUT)/host-test
 	$(OUT)/host-test
+
+# Isolated focused fixture for the exact 0x421210 source provider. Keep its
+# output outside the shared ARM integration build directory.
+BOOT_MOUNT_TEST_OUT ?= /tmp/opencfw-boot-mount-test
+.PHONY: host-boot-mount-test
+host-boot-mount-test:
+	mkdir -p $(BOOT_MOUNT_TEST_OUT)
+	$(CC) $(HOSTFLAGS) -fsanitize=address,undefined -fno-omit-frame-pointer filesystem.c boot_mount.c runtime_memory.c upstream/lfs.c upstream/lfs_util.c boot_mount_test.c -o $(BOOT_MOUNT_TEST_OUT)/boot-mount-test
+	$(BOOT_MOUNT_TEST_OUT)/boot-mount-test
 LD = arm-none-eabi-ld
 CPU ?= cortex-m55
 ARMFLAGS = --target=arm-none-eabi -mcpu=$(CPU) -mthumb -mfloat-abi=soft -ffreestanding -fno-builtin -std=c11 -O2 -fwrapv -Wall -Wextra -Werror -I. -Ifreestanding_include -DLFS_NO_DEBUG -DLFS_NO_WARN -DLFS_NO_ERROR -DLFS_NO_ASSERT -DLFS_NO_INTRINSICS -DLFS_DEFINES=boot_lfs_defines.h

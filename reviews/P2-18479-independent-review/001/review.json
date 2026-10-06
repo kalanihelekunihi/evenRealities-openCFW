@@ -1,0 +1,18 @@
+{
+  "review_id": "P2-18479-independent-review",
+  "status": "partial",
+  "accepted": false,
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-diagnostic-two-hundred-fifty-state-word-and-key-three-lookup-prefix-18880-map/001",
+  "pinned_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "checks": [
+    "fresh 106-byte GNU replay",
+    "instruction/reference manifests match",
+    "frame and diagnostic stack writes checked",
+    "fresh mask calls, global store/reload, key-3 call, external exits checked"
+  ],
+  "limitations": [
+    "continuation/epilogue outside span",
+    "child contracts unresolved",
+    "no global coverage claim"
+  ]
+}

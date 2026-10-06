@@ -1,0 +1,3 @@
+# Wrapper literal pool46061A..460638
+Partial;unaccepted.30 non-code bytes:twozeroalignmentbytes46061A..61C thensevenalignedlittle-endianwords46061C..638. Preceding460618POPPC excludesfallthrough;next460638functionexcluded. References18866/18868/18870 corroborate46061Cglobaladdress0x200746E4,460620/624firstwrapperdiagnostics,460630/634secondwrapperdiagnostics. 460628/62Ccommonarguments referencedalso18880/18882/18888/18890/18892/18894. words.json exactbytes/values. Forceddisassemblymnemonicsnotexecutableevidence;no pointercontract inferred.
+No C,gate/source admission,whole coverage or hardware/simulator proof.

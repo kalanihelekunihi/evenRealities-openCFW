@@ -1,0 +1,19 @@
+{
+  "review_id": "P2-18517-independent-review",
+  "status": "partial",
+  "accepted": false,
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-alternative-repeat-lookup-diagnostic-and-signed-fresh-count-loop-test-18918-map/001",
+  "pinned_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "checks": [
+    "fresh 100-byte GNU replay",
+    "instruction/reference manifests match",
+    "repeat lookup and selector retention checked",
+    "fresh byte40 then word48 loads and R8 replacement checked",
+    "loop increment, initial skip, fresh halfword and signed full counter compare checked"
+  ],
+  "limitations": [
+    "diagnostic/loop continuation outside span",
+    "no stride restoration assumption",
+    "child contracts unresolved"
+  ]
+}

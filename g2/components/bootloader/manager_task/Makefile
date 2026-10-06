@@ -40,3 +40,10 @@ dispatch-compatible:
 	$(CC) $(CFLAGS) -c ../queue/runtime_mode.c -o ../../../build/bootloader-completion/manager-dispatch-compatible/runtime_mode.o
 	$(LD) -T dispatch_module.ld -o ../../../build/bootloader-completion/manager-dispatch-compatible/event-dispatch.elf ../../../build/bootloader-completion/manager-dispatch-compatible/*.o
 	$(PYTHON) verify_dispatch.py --elf ../../../build/bootloader-completion/manager-dispatch-compatible/event-dispatch.elf --output ../../../build/bootloader-completion/manager-dispatch-compatible/comparison.json
+
+.PHONY: handshake-compatible
+handshake-compatible:
+	mkdir -p ../../../build/bootloader-completion/manager-handshake-compatible
+	$(CC) $(CFLAGS) -c manager_handshake.c -o ../../../build/bootloader-completion/manager-handshake-compatible/manager_handshake.o
+	$(LD) -T handshake_module.ld -o ../../../build/bootloader-completion/manager-handshake-compatible/handshake.elf ../../../build/bootloader-completion/manager-handshake-compatible/manager_handshake.o
+	$(PYTHON) verify_handshake.py --elf ../../../build/bootloader-completion/manager-handshake-compatible/handshake.elf --output ../../../build/bootloader-completion/manager-handshake-compatible/comparison.json

@@ -1,0 +1,19 @@
+{
+  "review_id": "P2-18509-independent-review",
+  "status": "partial",
+  "accepted": false,
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-mismatch-response-negative-exit-and-matching-record-default-prefix-18910-map/001",
+  "pinned_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "checks": [
+    "fresh 96-byte GNU replay",
+    "instruction/reference manifests match",
+    "mismatch child and negative exit verified",
+    "match live wrapper args and buffer setup checked",
+    "ordered record reads/writes and unresolved stride noted"
+  ],
+  "limitations": [
+    "external test/body entry condition unresolved",
+    "R9 stride origin unresolved",
+    "child semantics unresolved"
+  ]
+}

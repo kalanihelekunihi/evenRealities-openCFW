@@ -1,0 +1,19 @@
+{
+  "review_id": "P2-18515-independent-review",
+  "status": "partial",
+  "accepted": false,
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-alternative-record-key-update-and-mask-gated-lookup-diagnostic-18916-map/001",
+  "pinned_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "checks": [
+    "fresh 106-byte GNU replay",
+    "instruction/reference manifests match",
+    "R9 stride-to-offset and key48 store checked",
+    "fresh bit1 gate and repeated lookups checked",
+    "fresh byte40/word48 reads and local diagnostic writes checked"
+  ],
+  "limitations": [
+    "external entry selection and later loop tests unresolved",
+    "child semantics unresolved",
+    "no global coverage claim"
+  ]
+}

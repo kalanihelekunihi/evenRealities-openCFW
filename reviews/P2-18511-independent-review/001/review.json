@@ -1,0 +1,19 @@
+{
+  "review_id": "P2-18511-independent-review",
+  "status": "partial",
+  "accepted": false,
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-record-field-child-copy-and-conditional-table-lookup-diagnostic-prefix-18912-map/001",
+  "pinned_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "checks": [
+    "fresh 110-byte GNU replay",
+    "instruction/reference manifests match",
+    "source/destination offset replacements checked",
+    "child argument ordering/full returns checked",
+    "fresh bit1 gate, table lookup args, field reload/store order verified"
+  ],
+  "limitations": [
+    "child semantics unresolved",
+    "loop continuation outside span",
+    "no global coverage claim"
+  ]
+}

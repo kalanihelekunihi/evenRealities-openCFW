@@ -1,0 +1,293 @@
+{
+  "utc": "2026-10-06T20:26:57.003211+00:00",
+  "linker": "g2/components/bootloader/thread_creation/startup_dfu_storage.ld",
+  "sha256": "56ba1d27f8ce9210a1480fbe9888e5a660e2861fe174926bec0736c087ed9416",
+  "scope": "Numeric aliases in source-linked reset/storage test. Includes fixture providers and unexecuted alternatives; source does not load stock executable code. This is not a whole-payload closure list.",
+  "boundaries": [
+    {
+      "symbol": "opencfw_boot_platform_terminal",
+      "thumb_address": "0x4329c5",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_provider_41f9d8",
+      "thumb_address": "0x41f9d9",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_provider_41f9f8",
+      "thumb_address": "0x41f9f9",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_provider_41f846",
+      "thumb_address": "0x41f847",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_provider_41ac44",
+      "thumb_address": "0x41ac45",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_provider_41ac5a",
+      "thumb_address": "0x41ac5b",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_provider_41fa50",
+      "thumb_address": "0x41fa51",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_provider_41e1e8",
+      "thumb_address": "0x41e1e9",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_provider_41e266",
+      "thumb_address": "0x41e267",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_provider_41ba80",
+      "thumb_address": "0x41ba81",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_provider_415fae",
+      "thumb_address": "0x415faf",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_fs_mutex_acquire",
+      "thumb_address": "0x4166ab",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_fs_mutex_release",
+      "thumb_address": "0x416711",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_allocator_log",
+      "thumb_address": "0x08002101",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "printf",
+      "thumb_address": "0x08002111",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_provider_4176ce",
+      "thumb_address": "0x4176cf",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_bl_task_return",
+      "thumb_address": "0x41b391",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_bl_stack_overflow",
+      "thumb_address": "0x41b601",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_provider_4201ba",
+      "thumb_address": "0x4201bb",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_provider_420890",
+      "thumb_address": "0x420891",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_provider_420c5c",
+      "thumb_address": "0x420c5d",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_bl_status_transfer_error",
+      "thumb_address": "0x415faf",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_hal_power_control",
+      "thumb_address": "0x426809",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_hal_mspi_device_configure",
+      "thumb_address": "0x424be5",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_hal_mspi_control_latency",
+      "thumb_address": "0x41ff35",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_publish_mspi_mode",
+      "thumb_address": "0x41fadd",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_read_mspi_register_id",
+      "thumb_address": "0x41d90f",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_bl_log",
+      "thumb_address": "0x4176cf",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_bl_transfer_error",
+      "thumb_address": "0x415faf",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_bl_delay",
+      "thumb_address": "0x41f9d9",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_hal_mspi_control",
+      "thumb_address": "0x4251c1",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_publish_device_mode",
+      "thumb_address": "0x41fadd",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_provider_416200",
+      "thumb_address": "0x416201",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_dfu_log",
+      "thumb_address": "0x08002121",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_bl_kernel_queue_put_from_isr",
+      "thumb_address": "0x41a025",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_bl_kernel_queue_get_from_isr",
+      "thumb_address": "0x41a3b1",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_bl_malloc_failed",
+      "thumb_address": "0x41b5f7",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_dfu_terminal",
+      "thumb_address": "0x42e1db",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_dfu_error_transaction",
+      "thumb_address": "0x42de0f",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_runtime_call",
+      "thumb_address": "0x41e349",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_log",
+      "thumb_address": "0x4176cf",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_isr_thread_notify",
+      "thumb_address": "0x418fe9",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_bl_event_flags_set_isr",
+      "thumb_address": "0x419bd3",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_control_guard_begin",
+      "thumb_address": "0x41bd93",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_control_guard_end",
+      "thumb_address": "0x41bde5",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_control_mram",
+      "thumb_address": "0x42e8a5",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_control_log",
+      "thumb_address": "0x08002131",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_hal_mspi_cq_init",
+      "thumb_address": "0x423f29",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_hal_mspi_cq_disable",
+      "thumb_address": "0x423fad",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_hal_mspi_cq_term",
+      "thumb_address": "0x423f55",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_hal_delay_us",
+      "thumb_address": "0x41d1c1",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_control_power_apply_configure",
+      "thumb_address": "0x08002211",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_nor_prog",
+      "thumb_address": "0x420b0d",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_nor_erase",
+      "thumb_address": "0x420a09",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_fs_error",
+      "thumb_address": "0x415faf",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_control_delay_us",
+      "thumb_address": "0x41d1c1",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_nor_read",
+      "thumb_address": "0x420f71",
+      "boundary": "test-provider-or-unexecuted-stock-alias"
+    }
+  ]
+}

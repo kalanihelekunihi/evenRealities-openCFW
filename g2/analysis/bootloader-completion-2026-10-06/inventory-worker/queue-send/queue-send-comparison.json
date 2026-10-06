@@ -1,0 +1,814 @@
+{
+  "status": "PASS",
+  "cases": 16,
+  "distinct_original_trace_bytes": 514,
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "elf_sha256": "1b4162b0a84ecec2e56a104352047084583ffdbb326788ac2c6fc5c9d8a514b6",
+  "source_sha256": {
+    "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/queue-send/verify_queue_send.py": "4c4a88c822cc18b68ac0022480274e0b811b63270a0de98154c431878085f788",
+    "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/queue-send/queue_send_module.ld": "c816e90f3ba308ede0a791e150cd83f5a173ca5079d7fde0d9daf4470e8f5fb4",
+    "g2/components/bootloader/thread_creation/queue_send.c": "d16a784f3fed5a1593a34f20b49a89e8aa45c37bd61b5634d9f82bf8fa966663",
+    "g2/components/bootloader/thread_creation/queue_send.h": "527612c2bc54c11ac867d07b96f77599149cf091526bdd8e0c4893dbab262129"
+  },
+  "original_trace": {
+    "0x419ec0": "f7b5",
+    "0x419ec2": "0500",
+    "0x419ec4": "0e00",
+    "0x419ec6": "1f00",
+    "0x419ec8": "0024",
+    "0x419eca": "002d",
+    "0x419ecc": "06d1",
+    "0x419edc": "002e",
+    "0x419ede": "02d1",
+    "0x419ee6": "0120",
+    "0x419ee8": "00e0",
+    "0x419eec": "c0b2",
+    "0x419eee": "0028",
+    "0x419ef0": "06d1",
+    "0x419f00": "022f",
+    "0x419f02": "02d1",
+    "0x419f0a": "0120",
+    "0x419f0c": "00e0",
+    "0x419f10": "c0b2",
+    "0x419f12": "0028",
+    "0x419f14": "06d1",
+    "0x419f24": "fef717fe",
+    "0x419f28": "0028",
+    "0x419f2a": "02d1",
+    "0x419f32": "0120",
+    "0x419f34": "00e0",
+    "0x419f38": "c0b2",
+    "0x419f3a": "0028",
+    "0x419f3c": "37d1",
+    "0x419fae": "01f019fa",
+    "0x419fb2": "a86b",
+    "0x419fb4": "e96b",
+    "0x419fb6": "8842",
+    "0x419fb8": "01d3",
+    "0x419fbe": "3a00",
+    "0x419fc0": "3100",
+    "0x419fc2": "2800",
+    "0x419fc4": "00f06ffa",
+    "0x41a4a6": "2de9f041",
+    "0x41a4aa": "0600",
+    "0x41a4ac": "1500",
+    "0x41a4ae": "0027",
+    "0x41a4b0": "b46b",
+    "0x41a4b2": "306c",
+    "0x41a4b4": "0028",
+    "0x41a4b6": "09d1",
+    "0x41a4cc": "002d",
+    "0x41a4ce": "0fd1",
+    "0x41a4d0": "326c",
+    "0x41a4d2": "7568",
+    "0x41a4d4": "2800",
+    "0x41a4d6": "fbf7d9f8",
+    "0x41568c": "62b3",
+    "0x41568e": "8b07",
+    "0x415690": "08d0",
+    "0x4156a4": "8307",
+    "0x4156a6": "40f02080",
+    "0x4156aa": "00bf",
+    "0x4156ac": "103a",
+    "0x4156ae": "07d3",
+    "0x4156c0": "5307",
+    "0x4156c2": "24bf",
+    "0x4156c4": "b1e80810",
+    "0x4156c8": "a0e80810",
+    "0x4156cc": "44bf",
+    "0x4156d6": "d207",
+    "0x4156d8": "24bf",
+    "0x4156e2": "44bf",
+    "0x4156e8": "7047",
+    "0x41a4da": "7068",
+    "0x41a4dc": "316c",
+    "0x41a4de": "0844",
+    "0x41a4e0": "7060",
+    "0x41a4e2": "7068",
+    "0x41a4e4": "b168",
+    "0x41a4e6": "8842",
+    "0x41a4e8": "1bd3",
+    "0x41a522": "641c",
+    "0x41a524": "b463",
+    "0x41a526": "3800",
+    "0x41a528": "bde8f081",
+    "0x419fc8": "696a",
+    "0x419fca": "0029",
+    "0x419fcc": "08d0",
+    "0x419fe0": "0028",
+    "0x419fe2": "01d0",
+    "0x419fe8": "01f008fa",
+    "0x419fec": "0120",
+    "0x419fee": "18e0",
+    "0x41a022": "febd",
+    "0x41a4f0": "326c",
+    "0x41a4f2": "d6f80c80",
+    "0x41a4f6": "4046",
+    "0x41a4f8": "fbf7c8f8",
+    "0x41a4fc": "f068",
+    "0x41a4fe": "316c",
+    "0x41a500": "4942",
+    "0x41a502": "0844",
+    "0x41a504": "f060",
+    "0x41a506": "f068",
+    "0x41a508": "3168",
+    "0x41a50a": "8842",
+    "0x41a50c": "04d2",
+    "0x41a518": "022d",
+    "0x41a51a": "02d1",
+    "0x419fce": "15f12400",
+    "0x419fd2": "fef7abfb",
+    "0x419fd6": "0028",
+    "0x419fd8": "06d0",
+    "0x419fda": "01f0f9f9",
+    "0x419fde": "03e0",
+    "0x419fba": "022f",
+    "0x419fbc": "c6d1",
+    "0x419f4c": "0298",
+    "0x419f4e": "0028",
+    "0x419f50": "4ed0",
+    "0x419ff0": "01f004fa",
+    "0x419ff4": "0020",
+    "0x419ff6": "14e0",
+    "0x419f04": "e86b",
+    "0x419f06": "0128",
+    "0x419f08": "01d1",
+    "0x41a51c": "002c",
+    "0x41a51e": "00d0",
+    "0x41a520": "641e",
+    "0x419f52": "002c",
+    "0x419f54": "03d1",
+    "0x419f56": "6846",
+    "0x419f58": "fef7dbfc",
+    "0x419f5c": "0124",
+    "0x419f5e": "01f04dfa",
+    "0x419f62": "fef739f9",
+    "0x419f66": "01f03dfa",
+    "0x419f6a": "95f94400",
+    "0x419f6e": "10f1010f",
+    "0x419f72": "02d1",
+    "0x419f74": "0020",
+    "0x419f76": "85f84400",
+    "0x419f7a": "95f94500",
+    "0x419f7e": "10f1010f",
+    "0x419f82": "02d1",
+    "0x419f84": "0020",
+    "0x419f86": "85f84500",
+    "0x419f8a": "01f037fa",
+    "0x419f8e": "02a9",
+    "0x419f90": "6846",
+    "0x419f92": "fef7c6fc",
+    "0x419f96": "0028",
+    "0x419f98": "3dd1",
+    "0x419f9a": "2800",
+    "0x419f9c": "00f020fb",
+    "0x41a5e0": "10b5",
+    "0x41a5e2": "0400",
+    "0x41a5e4": "00f0fefe",
+    "0x41a5e8": "a06b",
+    "0x41a5ea": "e16b",
+    "0x41a5ec": "8842",
+    "0x41a5ee": "01d1",
+    "0x41a5f0": "0124",
+    "0x41a5f2": "00e0",
+    "0x41a5f6": "00f001ff",
+    "0x41a5fa": "2000",
+    "0x41a5fc": "10bd",
+    "0x419fa0": "0028",
+    "0x419fa2": "29d1",
+    "0x419ff8": "0299",
+    "0x419ffa": "15f11000",
+    "0x419ffe": "fef71efb",
+    "0x41a002": "2800",
+    "0x41a004": "00f0a7fa",
+    "0x41a008": "fef70ef9",
+    "0x41a00c": "0028",
+    "0x41a00e": "ced1",
+    "0x41a010": "01f0def9",
+    "0x41a016": "2800",
+    "0x41a018": "00f09dfa",
+    "0x41a01c": "fef704f9",
+    "0x41a020": "0020",
+    "0x419ece": "01f013fa",
+    "0x419ed2": "0020",
+    "0x419ed4": "5ff0ff31",
+    "0x419ed8": "0860",
+    "0x419ee0": "286c",
+    "0x419ee2": "0028",
+    "0x419ee4": "01d1",
+    "0x419eea": "0020",
+    "0x419ef2": "01f001fa",
+    "0x419ef6": "0020",
+    "0x419ef8": "5ff0ff31",
+    "0x419efc": "0860",
+    "0x419f0e": "0020",
+    "0x419f16": "01f0eff9",
+    "0x419f1a": "0020",
+    "0x419f1c": "5ff0ff31",
+    "0x419f20": "0860",
+    "0x419f2c": "0298",
+    "0x419f2e": "0028",
+    "0x419f30": "01d1",
+    "0x419f36": "0020",
+    "0x419f3e": "01f0dbf9",
+    "0x419f42": "0020",
+    "0x419f44": "5ff0ff31",
+    "0x419f48": "0860",
+    "0x41a4ea": "3068",
+    "0x41a4ec": "7060",
+    "0x41a4ee": "18e0",
+    "0x41a50e": "b068",
+    "0x41a510": "316c",
+    "0x41a512": "4942",
+    "0x41a514": "0844",
+    "0x41a516": "f060"
+  },
+  "comparisons": [
+    {
+      "entry": "queue_put",
+      "arguments": [
+        537071616,
+        537079808,
+        0,
+        0
+      ],
+      "fixture": {
+        "count": 0,
+        "capacity": 1,
+        "item_size": 8,
+        "write": 537075712,
+        "reverse": 537075728
+      },
+      "observation": {
+        "return": 1,
+        "stopped": false,
+        "invalid": null,
+        "events": [
+          [
+            "runtime",
+            1
+          ],
+          [
+            "kernel_enter"
+          ],
+          [
+            "kernel_exit"
+          ]
+        ],
+        "queue": "0020032008200320182003201020032000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000100000008000000ffff00000000000000000000",
+        "storage": "0102030405060708a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5"
+      }
+    },
+    {
+      "entry": "queue_put",
+      "arguments": [
+        537071616,
+        537079808,
+        0,
+        0
+      ],
+      "fixture": {
+        "count": 0,
+        "capacity": 50,
+        "item_size": 8,
+        "write": 537075712,
+        "reverse": 537075728
+      },
+      "observation": {
+        "return": 1,
+        "stopped": false,
+        "invalid": null,
+        "events": [
+          [
+            "runtime",
+            1
+          ],
+          [
+            "kernel_enter"
+          ],
+          [
+            "kernel_exit"
+          ]
+        ],
+        "queue": "0020032008200320182003201020032000000000000000000000000000000000000000000000000000000000000000000000000000000000010000003200000008000000ffff00000000000000000000",
+        "storage": "0102030405060708a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5"
+      }
+    },
+    {
+      "entry": "queue_put",
+      "arguments": [
+        537071616,
+        537079808,
+        0,
+        1
+      ],
+      "fixture": {
+        "count": 0,
+        "capacity": 50,
+        "item_size": 8,
+        "write": 537075712,
+        "reverse": 537075728
+      },
+      "observation": {
+        "return": 1,
+        "stopped": false,
+        "invalid": null,
+        "events": [
+          [
+            "runtime",
+            1
+          ],
+          [
+            "kernel_enter"
+          ],
+          [
+            "kernel_exit"
+          ]
+        ],
+        "queue": "0020032000200320182003200820032000000000000000000000000000000000000000000000000000000000000000000000000000000000010000003200000008000000ffff00000000000000000000",
+        "storage": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a50102030405060708"
+      }
+    },
+    {
+      "entry": "queue_put",
+      "arguments": [
+        537071616,
+        537079808,
+        0,
+        0
+      ],
+      "fixture": {
+        "count": 0,
+        "capacity": 1,
+        "item_size": 8,
+        "event_anchor": 537071872,
+        "remove_waiter": 1,
+        "write": 537075712,
+        "reverse": 537075728
+      },
+      "observation": {
+        "return": 1,
+        "stopped": false,
+        "invalid": null,
+        "events": [
+          [
+            "runtime",
+            1
+          ],
+          [
+            "kernel_enter"
+          ],
+          [
+            "remove_event_waiter",
+            537071652,
+            1
+          ],
+          [
+            "reschedule"
+          ],
+          [
+            "kernel_exit"
+          ]
+        ],
+        "queue": "0020032008200320182003201020032000000000000000000000000000000000000000000011032000000000000000000000000000000000010000000100000008000000ffff00000000000000000000",
+        "storage": "0102030405060708a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5"
+      }
+    },
+    {
+      "entry": "queue_put",
+      "arguments": [
+        537071616,
+        537079808,
+        0,
+        0
+      ],
+      "fixture": {
+        "count": 1,
+        "capacity": 1,
+        "item_size": 8,
+        "write": 537075712,
+        "reverse": 537075728
+      },
+      "observation": {
+        "return": 0,
+        "stopped": false,
+        "invalid": null,
+        "events": [
+          [
+            "runtime",
+            1
+          ],
+          [
+            "kernel_enter"
+          ],
+          [
+            "kernel_exit"
+          ]
+        ],
+        "queue": "0020032000200320182003201020032000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000100000008000000ffff00000000000000000000",
+        "storage": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5"
+      }
+    },
+    {
+      "entry": "queue_put",
+      "arguments": [
+        537071616,
+        537079808,
+        0,
+        2
+      ],
+      "fixture": {
+        "count": 1,
+        "capacity": 1,
+        "item_size": 8,
+        "write": 537075712,
+        "reverse": 537075728
+      },
+      "observation": {
+        "return": 1,
+        "stopped": false,
+        "invalid": null,
+        "events": [
+          [
+            "runtime",
+            1
+          ],
+          [
+            "kernel_enter"
+          ],
+          [
+            "kernel_exit"
+          ]
+        ],
+        "queue": "0020032000200320182003200820032000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000100000008000000ffff00000000000000000000",
+        "storage": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a50102030405060708"
+      }
+    },
+    {
+      "entry": "queue_put",
+      "arguments": [
+        537071616,
+        537079808,
+        9,
+        0
+      ],
+      "fixture": {
+        "count": 1,
+        "capacity": 1,
+        "item_size": 8,
+        "runtime": 1,
+        "start": 100,
+        "over": 0,
+        "expired": 0,
+        "remaining": 8,
+        "write": 537075712,
+        "reverse": 537075728,
+        "stop_reschedule": true,
+        "resume": 0
+      },
+      "observation": {
+        "return": "reschedule-boundary",
+        "stopped": true,
+        "invalid": null,
+        "events": [
+          [
+            "runtime",
+            1
+          ],
+          [
+            "kernel_enter"
+          ],
+          [
+            "timeout_capture",
+            "stack-local"
+          ],
+          [
+            "kernel_exit"
+          ],
+          [
+            "scheduler_suspend"
+          ],
+          [
+            "kernel_enter"
+          ],
+          [
+            "kernel_exit"
+          ],
+          [
+            "timeout_check",
+            "stack-local",
+            "stack-local",
+            0
+          ],
+          [
+            "kernel_enter"
+          ],
+          [
+            "kernel_exit"
+          ],
+          [
+            "wait_list",
+            537071632,
+            8
+          ],
+          [
+            "queue_unlock",
+            537071616
+          ],
+          [
+            "scheduler_resume",
+            0
+          ],
+          [
+            "reschedule"
+          ]
+        ],
+        "queue": "0020032000200320182003201020032000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000100000008000000000000000000000000000000",
+        "storage": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5"
+      }
+    },
+    {
+      "entry": "queue_put",
+      "arguments": [
+        537071616,
+        537079808,
+        9,
+        0
+      ],
+      "fixture": {
+        "count": 1,
+        "capacity": 1,
+        "item_size": 8,
+        "runtime": 1,
+        "start": 100,
+        "over": 0,
+        "expired": 1,
+        "remaining": 0,
+        "write": 537075712,
+        "reverse": 537075728
+      },
+      "observation": {
+        "return": 0,
+        "stopped": false,
+        "invalid": null,
+        "events": [
+          [
+            "runtime",
+            1
+          ],
+          [
+            "kernel_enter"
+          ],
+          [
+            "timeout_capture",
+            "stack-local"
+          ],
+          [
+            "kernel_exit"
+          ],
+          [
+            "scheduler_suspend"
+          ],
+          [
+            "kernel_enter"
+          ],
+          [
+            "kernel_exit"
+          ],
+          [
+            "timeout_check",
+            "stack-local",
+            "stack-local",
+            1
+          ],
+          [
+            "queue_unlock",
+            537071616
+          ],
+          [
+            "scheduler_resume",
+            1
+          ]
+        ],
+        "queue": "0020032000200320182003201020032000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000100000008000000000000000000000000000000",
+        "storage": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5"
+      }
+    },
+    {
+      "entry": "queue_put",
+      "arguments": [
+        0,
+        537079808,
+        0,
+        0
+      ],
+      "fixture": {
+        "fatal": true
+      },
+      "observation": {
+        "return": "fatal-store",
+        "stopped": false,
+        "invalid": {
+          "access": 20,
+          "address": 4294967295,
+          "size": 4,
+          "value": 0
+        },
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "queue": "0020032000200320182003201020032000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000300000008000000ffff00000000000000000000",
+        "storage": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5"
+      }
+    },
+    {
+      "entry": "queue_put",
+      "arguments": [
+        537071616,
+        0,
+        0,
+        0
+      ],
+      "fixture": {
+        "fatal": true
+      },
+      "observation": {
+        "return": "fatal-store",
+        "stopped": false,
+        "invalid": {
+          "access": 20,
+          "address": 4294967295,
+          "size": 4,
+          "value": 0
+        },
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "queue": "0020032000200320182003201020032000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000300000008000000ffff00000000000000000000",
+        "storage": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5"
+      }
+    },
+    {
+      "entry": "queue_put",
+      "arguments": [
+        537071616,
+        537079808,
+        0,
+        2
+      ],
+      "fixture": {
+        "capacity": 3,
+        "fatal": true
+      },
+      "observation": {
+        "return": "fatal-store",
+        "stopped": false,
+        "invalid": {
+          "access": 20,
+          "address": 4294967295,
+          "size": 4,
+          "value": 0
+        },
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "queue": "0020032000200320182003201020032000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000300000008000000ffff00000000000000000000",
+        "storage": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5"
+      }
+    },
+    {
+      "entry": "queue_put",
+      "arguments": [
+        537071616,
+        537079808,
+        9,
+        0
+      ],
+      "fixture": {
+        "runtime": 0,
+        "fatal": true
+      },
+      "observation": {
+        "return": "fatal-store",
+        "stopped": false,
+        "invalid": {
+          "access": 20,
+          "address": 4294967295,
+          "size": 4,
+          "value": 0
+        },
+        "events": [
+          [
+            "runtime",
+            0
+          ],
+          [
+            "mask"
+          ]
+        ],
+        "queue": "0020032000200320182003201020032000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000300000008000000ffff00000000000000000000",
+        "storage": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5"
+      }
+    },
+    {
+      "entry": "queue_copy_in",
+      "arguments": [
+        537071616,
+        537079808,
+        0
+      ],
+      "fixture": {
+        "count": 0,
+        "item_size": 8,
+        "write": 537075712,
+        "reverse": 537075728
+      },
+      "observation": {
+        "return": 0,
+        "stopped": false,
+        "invalid": null,
+        "events": [],
+        "queue": "0020032008200320182003201020032000000000000000000000000000000000000000000000000000000000000000000000000000000000010000000300000008000000ffff00000000000000000000",
+        "storage": "0102030405060708a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5"
+      }
+    },
+    {
+      "entry": "queue_copy_in",
+      "arguments": [
+        537071616,
+        537079808,
+        0
+      ],
+      "fixture": {
+        "count": 1,
+        "item_size": 8,
+        "write": 537075728,
+        "reverse": 537075728
+      },
+      "observation": {
+        "return": 0,
+        "stopped": false,
+        "invalid": null,
+        "events": [],
+        "queue": "0020032000200320182003201020032000000000000000000000000000000000000000000000000000000000000000000000000000000000020000000300000008000000ffff00000000000000000000",
+        "storage": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a50102030405060708"
+      }
+    },
+    {
+      "entry": "queue_copy_in",
+      "arguments": [
+        537071616,
+        537079808,
+        2
+      ],
+      "fixture": {
+        "count": 3,
+        "item_size": 8,
+        "write": 537075712,
+        "reverse": 537075712,
+        "capacity": 3
+      },
+      "observation": {
+        "return": 0,
+        "stopped": false,
+        "invalid": null,
+        "events": [],
+        "queue": "0020032000200320182003201020032000000000000000000000000000000000000000000000000000000000000000000000000000000000030000000300000008000000ffff00000000000000000000",
+        "storage": "0102030405060708a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5"
+      }
+    },
+    {
+      "entry": "queue_copy_in",
+      "arguments": [
+        537071616,
+        537079808,
+        2
+      ],
+      "fixture": {
+        "count": 3,
+        "item_size": 8,
+        "write": 537075712,
+        "reverse": 537075728,
+        "capacity": 3
+      },
+      "observation": {
+        "return": 0,
+        "stopped": false,
+        "invalid": null,
+        "events": [],
+        "queue": "0020032000200320182003200820032000000000000000000000000000000000000000000000000000000000000000000000000000000000030000000300000008000000ffff00000000000000000000",
+        "storage": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a50102030405060708"
+      }
+    }
+  ],
+  "limits": [
+    "Queue timeout capture/check, scheduler suspend/resume, wait-list insertion, lock wake/unlock and event-waiter removal are explicit provider cuts in these standalone fixtures; their call ABI and surrounding state path are compared.",
+    "The original 0x41a4a6 helper and its actual memcpy41568c run as instructions; source uses a forward byte loop. Item size, pointers, queue state and timeout values are synthetic. No tick unit or hardware queue behavior is inferred."
+  ]
+}

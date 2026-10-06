@@ -1,0 +1,51 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpsjqdb3ya/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00460898 <.text>:
+  460898:	f05f 5086 	movs.w	r0, #281018368	@ 0x10c00000
+  46089c:	f7dc faff 	bl	43ce9e <.text-0x239fa>
+  4608a0:	0028      	movs	r0, r5
+  4608a2:	b2c0      	uxtb	r0, r0
+  4608a4:	2800      	cmp	r0, #0
+  4608a6:	f040 822e 	bne.w	460d06 <.text+0x46e>
+  4608aa:	0030      	movs	r0, r6
+  4608ac:	b280      	uxth	r0, r0
+  4608ae:	2803      	cmp	r0, #3
+  4608b0:	f040 81fa 	bne.w	460ca8 <.text+0x410>
+  4608b4:	1d3d      	adds	r5, r7, #4
+  4608b6:	88a8      	ldrh	r0, [r5, #4]
+  4608b8:	6829      	ldr	r1, [r5, #0]
+  4608ba:	4288      	cmp	r0, r1
+  4608bc:	d030      	beq.n	460920 <.text+0x88>
+  4608be:	f7dc fc06 	bl	43d0ce <.text-0x237ca>
+  4608c2:	0780      	lsls	r0, r0, #30
+  4608c4:	d512      	bpl.n	4608ec <.text+0x54>
+  4608c6:	6828      	ldr	r0, [r5, #0]
+  4608c8:	9003      	str	r0, [sp, #12]
+  4608ca:	88a8      	ldrh	r0, [r5, #4]
+  4608cc:	9002      	str	r0, [sp, #8]
+  4608ce:	f8df 0a94 	ldr.w	r0, [pc, #2708]	@ 461364 <.text+0xacc>
+  4608d2:	9001      	str	r0, [sp, #4]
+  4608d4:	f44f 70d3 	mov.w	r0, #422	@ 0x1a6
+  4608d8:	9000      	str	r0, [sp, #0]
+  4608da:	f8df 38dc 	ldr.w	r3, [pc, #2268]	@ 4611b8 <.text+0x920>
+  4608de:	f8df 28dc 	ldr.w	r2, [pc, #2268]	@ 4611bc <.text+0x924>
+  4608e2:	f8df 18dc 	ldr.w	r1, [pc, #2268]	@ 4611c0 <.text+0x928>
+  4608e6:	2001      	movs	r0, #1
+  4608e8:	f7dc fe44 	bl	43d574 <.text-0x23324>
+  4608ec:	f7dc fbef 	bl	43d0ce <.text-0x237ca>
+  4608f0:	07c0      	lsls	r0, r0, #31
+  4608f2:	d403      	bmi.n	4608fc <.text+0x64>
+  4608f4:	f7dc fbeb 	bl	43d0ce <.text-0x237ca>
+  4608f8:	0740      	lsls	r0, r0, #29
+  4608fa:	d509      	bpl.n	460910 <.text+0x78>
+  4608fc:	f8df 1a68 	ldr.w	r1, [pc, #2664]	@ 461368 <.text+0xad0>
+  460900:	6828      	ldr	r0, [r5, #0]
+  460902:	9000      	str	r0, [sp, #0]
+  460904:	88ab      	ldrh	r3, [r5, #4]
+  460906:	000a      	movs	r2, r1
+  460908:	f05f 6090 	movs.w	r0, #75497472	@ 0x4800000
+  46090c:	f7dc fac7 	bl	43ce9e <.text-0x239fa>

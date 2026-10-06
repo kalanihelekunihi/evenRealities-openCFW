@@ -21,11 +21,20 @@ $(OUT)/clock_manager.o: $(COMPONENT)/clock_manager.c $(COMPONENT)/clock_manager.
 $(OUT)/clock_class_providers.o: $(PROVIDER_COMPONENT)/clock_class_providers.c $(PROVIDER_COMPONENT)/clock_class_providers.h | $(OUT)
 	$(CC) $(CFLAGS) -I$(COMPONENT) -c $(PROVIDER_COMPONENT)/clock_class_providers.c -o $@
 
-$(OUT)/provider_stubs.o: provider_test_stubs.c | $(OUT)
-	$(CC) $(CFLAGS) -c $< -o $@
+$(OUT)/clock_class_provider4.o: $(PROVIDER_COMPONENT)/clock_class_provider4.c $(PROVIDER_COMPONENT)/clock_class_provider4.h | $(OUT)
+	$(CC) $(CFLAGS) -mfpu=fpv5-sp-d16 -mfloat-abi=softfp -I$(COMPONENT) -c $(PROVIDER_COMPONENT)/clock_class_provider4.c -o $@
 
-$(OUT)/clock_manager.elf: $(OUT)/clock_manager.o $(OUT)/clock_class_providers.o $(OUT)/provider_stubs.o clock_manager_test.ld
-	$(LD) -T clock_manager_test.ld -o $@ $(OUT)/clock_manager.o $(OUT)/clock_class_providers.o $(OUT)/provider_stubs.o
+$(OUT)/clock_class_provider2.o: $(PROVIDER_COMPONENT)/clock_class_provider2.c $(PROVIDER_COMPONENT)/clock_class_provider2.h $(PROVIDER_COMPONENT)/clock_class_provider4.h | $(OUT)
+	$(CC) $(CFLAGS) -mfpu=fpv5-sp-d16 -mfloat-abi=softfp -I$(COMPONENT) -c $(PROVIDER_COMPONENT)/clock_class_provider2.c -o $@
+
+$(OUT)/clock_class_provider5.o: $(PROVIDER_COMPONENT)/clock_class_provider5.c $(PROVIDER_COMPONENT)/clock_class_provider5.h $(PROVIDER_COMPONENT)/clock_class_provider2.h $(PROVIDER_COMPONENT)/clock_class_provider4.h $(PROVIDER_COMPONENT)/clock_class_providers.h | $(OUT)
+	$(CC) $(CFLAGS) -mfpu=fpv5-sp-d16 -mfloat-abi=softfp -I$(COMPONENT) -c $(PROVIDER_COMPONENT)/clock_class_provider5.c -o $@
+
+$(OUT)/clock_class_provider6.o: $(PROVIDER_COMPONENT)/clock_class_provider6.c $(PROVIDER_COMPONENT)/clock_class_provider6.h $(PROVIDER_COMPONENT)/clock_class_provider2.h $(PROVIDER_COMPONENT)/clock_class_provider4.h $(PROVIDER_COMPONENT)/clock_class_providers.h | $(OUT)
+	$(CC) $(CFLAGS) -mfpu=fpv5-sp-d16 -mfloat-abi=softfp -I$(COMPONENT) -c $(PROVIDER_COMPONENT)/clock_class_provider6.c -o $@
+
+$(OUT)/clock_manager.elf: $(OUT)/clock_manager.o $(OUT)/clock_class_providers.o $(OUT)/clock_class_provider4.o $(OUT)/clock_class_provider2.o $(OUT)/clock_class_provider5.o $(OUT)/clock_class_provider6.o clock_manager_test.ld
+	$(LD) -T clock_manager_test.ld -o $@ $(OUT)/clock_manager.o $(OUT)/clock_class_providers.o $(OUT)/clock_class_provider4.o $(OUT)/clock_class_provider2.o $(OUT)/clock_class_provider5.o $(OUT)/clock_class_provider6.o
 
 test: $(OUT)/clock_manager.elf
 	$(PYTHON) verify_clock_manager.py --elf $< --output $(OUT)/comparison.json

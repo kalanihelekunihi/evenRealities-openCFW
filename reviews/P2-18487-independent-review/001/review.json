@@ -1,0 +1,18 @@
+{
+  "review_id": "P2-18487-independent-review",
+  "status": "partial",
+  "accepted": false,
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-two-global-buffers-header-and-stack-transform-prefix-18888-map/001",
+  "pinned_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "checks": [
+    "fresh 98-byte GNU replay",
+    "instruction/reference manifests match",
+    "frame offsets and stack arguments verified",
+    "buffer setup/header stores/child order and nonzero branch checked"
+  ],
+  "limitations": [
+    "child effects unresolved",
+    "buffer contents beyond explicit stores unknown",
+    "continuation/epilogue outside span"
+  ]
+}

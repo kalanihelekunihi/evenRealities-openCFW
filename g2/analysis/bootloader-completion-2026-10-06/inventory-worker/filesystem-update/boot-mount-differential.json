@@ -1,0 +1,127 @@
+{
+  "status": "PASS",
+  "cases": 4,
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_elf_sha256": "60682897b6aaa1f9f848f5c68d48574a5a22197e90815d5e6589082971265ac2",
+  "stock_function_sha256": "07d8267cfa9725c9ac0ee613334d09968b780b890c4680f612546239bff1adf8",
+  "source_sha256": {
+    "boot_mount.c": "25b15e8b001385a6b4e813e73dab32511f5e92a6d53736a48e309ae591fc4a2c",
+    "boot_mount.h": "19566733da47e0966488d03fb28d30f8f4dd1cfc043f552a8aa824d6b40e69c9",
+    "filesystem.c": "a316029904feb6c62671d501e6b6a5699168b6cd23c52a06ac390e9b6709ea57",
+    "upstream/lfs.c": "81a209e8551754d13b24fc0a2b6707fb3b2475e14feba00bf0df722b98a31398",
+    "upstream/lfs_util.c": "f2fbde533670560434bd9f5a547174cc7c5a4670a02c47b4bd85180dced8b2ec"
+  },
+  "runs": [
+    {
+      "run": 1,
+      "return": 0,
+      "ready": 1,
+      "nor_sha256": "43f6c2a01efd6086c9d34b324b7e1c66f992de848d2f6f5336e4c0b85a2dae6a",
+      "boot_count_object_sha256": "5b43be49492043d96c702e22abc502c331ce9305718cd820b71e2215357f2a5b",
+      "original_nor_reads_programs_erases": [
+        63,
+        12,
+        6
+      ],
+      "source_nor_reads_programs_erases": [
+        63,
+        12,
+        6
+      ],
+      "original_logger_calls": 5,
+      "source_logger_adapter_calls": 5,
+      "original_logger_program_counts": [
+        0,
+        4,
+        6,
+        8,
+        10,
+        12,
+        12,
+        12,
+        12,
+        12,
+        13
+      ],
+      "source_logger_program_counts": [
+        4,
+        6,
+        8,
+        10,
+        12,
+        12,
+        12,
+        12,
+        12,
+        13
+      ]
+    },
+    {
+      "run": 2,
+      "return": 0,
+      "ready": 1,
+      "nor_sha256": "2b0f5ec1e4eef90ba05e2a29c32c0b730012a4126d717ecef567876f8fcf6381",
+      "boot_count_object_sha256": "2b10c562dc84ea3d8d54ebf20bf3e9d352fe17202cb6c9f58aa506af63144f78",
+      "original_nor_reads_programs_erases": [
+        107,
+        13,
+        6
+      ],
+      "source_nor_reads_programs_erases": [
+        107,
+        13,
+        6
+      ],
+      "original_logger_calls": 10,
+      "source_logger_adapter_calls": 10,
+      "original_logger_program_counts": [
+        0,
+        4,
+        6,
+        8,
+        10,
+        12,
+        12,
+        12,
+        12,
+        12,
+        13
+      ],
+      "source_logger_program_counts": [
+        4,
+        6,
+        8,
+        10,
+        12,
+        12,
+        12,
+        12,
+        12,
+        13
+      ]
+    },
+    {
+      "scenario": "existing regular file at /firmware triggers 4211b0 recovery",
+      "return": 0,
+      "ready": 1,
+      "nor_sha256": "1ea87932ab74c0c3a9f29e2088568063c4561ca6593332bffe37de00286039ad",
+      "original_logger_calls": 7,
+      "source_logger_adapter_calls": 7
+    },
+    {
+      "scenario": "first mkdir program provider fails once; helper logs and continues",
+      "return": 0,
+      "ready": 1,
+      "nor_sha256": "b01a2e4e503378d7e9d0001036cae6e5ffcfa2a825e372cca40af6c25842d27f",
+      "original_logger_calls": 5,
+      "source_logger_adapter_calls": 6,
+      "original_program_attempts": 9,
+      "source_program_attempts": 9
+    }
+  ],
+  "limits": [
+    "Original instructions and ARM-compiled candidate execute against separate but byte-identical synthetic NOR models; callbacks directly model low-level read/program/erase.",
+    "The comparison covers blank-media format/mount, directory open/create/close, a non-ENOENT directory error with 0x4211b0 recovery, one synthetic mkdir program failure that logs and continues, static boot_count read/seek/write/close, ready flag, and final NOR bytes. Logger payload/ABI is intercepted and not compared.",
+    "No physical filesystem image/device, hardware, or flash was used. This does not establish exact toolchain/object identity or bootability."
+  ]
+}

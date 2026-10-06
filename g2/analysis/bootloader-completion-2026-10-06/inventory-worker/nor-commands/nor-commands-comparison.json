@@ -823,11 +823,11 @@
   "limits": [
     "MSPI blocking transfer, transfer error formatting, delays, HAL configure/control, device publication, logger, and scan algorithm are explicit synthetic providers.",
     "Reset delay arguments are observed as raw values 1 and 50; units are not inferred.",
-    "The timing success path copies eight bytes from a six-byte cleared scan result in stock instructions; synthetic RAM begins zeroed, so this run does not resolve the two trailing stack bytes.",
+    "The timing success path copies eight bytes from a six-byte cleared scan result in stock instructions; the fixtures explicitly seed the two untouched caller-stack bytes with a55a and3cc3 and compare the full eight-byte copy. Their hardware values and their equivalence across differently compiled callers remain unverified.",
     "No physical hardware, flash, MSPI registers, timing scan, or logging sink is exercised."
   ],
   "source_sha256": {
-    "verify_nor_commands.py": "092765b3dab1579ce695f65a73fbc2acd662ddfaf48b4c7eb0f02dab4541b230",
+    "verify_nor_commands.py": "e62c17f6810c12bb101c6f6f68131e7d04b236a21fb945a8eb15ee918d4e5ef8",
     "nor_commands.c": "afa8dde882e2b8487205131a31860ea86ea9f7b212ca2db28c7c28fa6fdf6762",
     "nor_commands.h": "c9ca5bd2cec4fcfe318aefa4b636224b8f4b046d641cf6b3e3755ebf39897e13",
     "module.ld": "3079c23598ca55e94744f292bf75908277826c7e0e9fb5759fdcb3194a291dd4",

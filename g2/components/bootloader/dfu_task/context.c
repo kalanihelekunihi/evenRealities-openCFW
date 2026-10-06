@@ -12,7 +12,7 @@ extern uint32_t opencfw_boot_dfu_queue_put(uint32_t,const void *,uint32_t,uint32
 extern uint32_t opencfw_boot_dfu_thread_new(uintptr_t,uintptr_t,const void *);
 extern void opencfw_boot_dfu_thread_terminate(uint32_t);
 extern uint32_t opencfw_boot_dfu_flags_set(uint32_t,uint32_t);
-extern uint32_t opencfw_boot_dfu_flags_wait(uint32_t,uint32_t,uint32_t);
+extern uint64_t opencfw_boot_dfu_flags_wait(uint32_t,uint32_t,uint32_t,uint32_t);
 extern void opencfw_boot_dfu_panic(void);
 extern void opencfw_boot_dfu_control_one(void);
 extern void opencfw_boot_dfu_control_two(void);
@@ -52,6 +52,9 @@ void opencfw_boot_dfu_dispatch(uint32_t flags) {
     if(flags&(1u<<22))opencfw_boot_dfu_task();
     if(flags&(1u<<23))opencfw_boot_dfu_terminal();
 }
+#ifdef OPENCFW_DFU_TASK_AT_STOCK_ADDRESS
+__attribute__((section(".boot_dfu_orchestrator"),used))
+#endif
 void opencfw_boot_dfu_orchestrator(void) {
     opencfw_boot_dfu_control_one();
     opencfw_boot_dfu_queue_init();
@@ -59,7 +62,7 @@ void opencfw_boot_dfu_orchestrator(void) {
     /* Stock noop callback42dd98 has no state or return value. */
     opencfw_boot_dfu_control_two();
     for(;;) {
-        uint32_t flags=opencfw_boot_dfu_flags_wait(0xffffffu,0,UINT32_MAX);
+        uint32_t flags=(uint32_t)opencfw_boot_dfu_flags_wait(0xffffffu,0,UINT32_MAX,0);
         if(flags && !(flags&(1u<<31)))opencfw_boot_dfu_dispatch(flags);
         else opencfw_boot_dfu_log(1,0x199u);
     }

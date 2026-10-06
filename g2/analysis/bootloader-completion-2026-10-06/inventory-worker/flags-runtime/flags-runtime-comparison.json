@@ -1,0 +1,851 @@
+{
+  "status": "PASS",
+  "cases": 21,
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "elf_sha256": "1b041b361b58222b5dd1dffb2712227b11ec0a897e82c9276a6fc2ba2b4a289e",
+  "distinct_original_instruction_bytes": 484,
+  "original_trace": {
+    "0x41866a": "38b5",
+    "0x41866c": "0028",
+    "0x41866e": "06d1",
+    "0x41867e": "694b",
+    "0x418680": "1b68",
+    "0x418682": "002b",
+    "0x418684": "06d1",
+    "0x418694": "dff8c437",
+    "0x418698": "51f00041",
+    "0x41869c": "1c68",
+    "0x41869e": "a161",
+    "0x4186a0": "4168",
+    "0x4186a2": "1c68",
+    "0x4186a4": "e161",
+    "0x4186a6": "8c68",
+    "0x4186a8": "1d68",
+    "0x4186aa": "2c62",
+    "0x4186ac": "1c68",
+    "0x4186ae": "1834",
+    "0x4186b0": "8d68",
+    "0x4186b2": "6c60",
+    "0x4186b4": "1c68",
+    "0x4186b6": "1834",
+    "0x4186b8": "8c60",
+    "0x4186ba": "1968",
+    "0x4186bc": "8862",
+    "0x4186be": "0168",
+    "0x4186c0": "491c",
+    "0x4186c2": "0160",
+    "0x4186c4": "0121",
+    "0x4186c6": "1000",
+    "0x4186c8": "00f05dfd",
+    "0x4186cc": "31bd",
+    "0x416590": "f8b5",
+    "0x416592": "0500",
+    "0x416594": "0e00",
+    "0x416596": "1700",
+    "0x416598": "1c00",
+    "0x41659a": "002d",
+    "0x41659c": "02d0",
+    "0x41659e": "16f07f4f",
+    "0x4165a2": "02d0",
+    "0x4165aa": "fff73efd",
+    "0x4165ae": "0028",
+    "0x4165b0": "07d0",
+    "0x4165c2": "f807",
+    "0x4165c4": "01d5",
+    "0x4165ca": "0023",
+    "0x4165cc": "b807",
+    "0x4165ce": "01d5",
+    "0x4165d4": "0122",
+    "0x4165d6": "0094",
+    "0x4165d8": "3100",
+    "0x4165da": "2800",
+    "0x4165dc": "03f0fef9",
+    "0x4199dc": "2de9f047",
+    "0x4199e0": "1400",
+    "0x4199e2": "1f00",
+    "0x4199e4": "8046",
+    "0x4199e6": "5ff00009",
+    "0x4199ea": "0022",
+    "0x4199ec": "0028",
+    "0x4199ee": "06d1",
+    "0x4199fe": "0e00",
+    "0x419a00": "16f07f4f",
+    "0x419a04": "06d0",
+    "0x419a14": "002e",
+    "0x419a16": "06d1",
+    "0x419a26": "089d",
+    "0x419a28": "fff795f8",
+    "0x419a2c": "0028",
+    "0x419a2e": "01d1",
+    "0x419a34": "0120",
+    "0x419a36": "00e0",
+    "0x419a3a": "c0b2",
+    "0x419a3c": "0028",
+    "0x419a3e": "06d1",
+    "0x419a4e": "fef7c3fb",
+    "0x419a52": "d8f800a0",
+    "0x419a56": "3a00",
+    "0x419a58": "3100",
+    "0x419a5a": "5046",
+    "0x419a5c": "00f0acf8",
+    "0x419bb8": "0300",
+    "0x419bba": "0020",
+    "0x419bbc": "002a",
+    "0x419bbe": "03d1",
+    "0x419bc0": "0b42",
+    "0x419bc2": "05d0",
+    "0x419bc4": "0120",
+    "0x419bc6": "03e0",
+    "0x419bd0": "7047",
+    "0x419a60": "0028",
+    "0x419a62": "08d0",
+    "0x419a64": "0025",
+    "0x419a66": "002c",
+    "0x419a68": "1bd0",
+    "0x419a6a": "d8f80000",
+    "0x419a6e": "b043",
+    "0x419a70": "c8f80000",
+    "0x419a74": "15e0",
+    "0x419aa2": "fef7c1fb",
+    "0x419aa6": "002d",
+    "0x419aa8": "21d0",
+    "0x419aee": "5046",
+    "0x419af0": "bde8f087",
+    "0x4165e0": "f907",
+    "0x4165e2": "0bd5",
+    "0x4165fc": "0642",
+    "0x4165fe": "06d1",
+    "0x41660e": "f2bd",
+    "0x4165d0": "0022",
+    "0x4165d2": "00e0",
+    "0x419a76": "002d",
+    "0x419a78": "01d1",
+    "0x419a7a": "0120",
+    "0x419a7c": "11e0",
+    "0x416600": "002c",
+    "0x416602": "02d0",
+    "0x41660a": "7ff00200",
+    "0x4165c6": "0123",
+    "0x4165c8": "00e0",
+    "0x419bc8": "0b40",
+    "0x419bca": "8b42",
+    "0x419bcc": "00d1",
+    "0x419bce": "0120",
+    "0x4165e4": "10ea0601",
+    "0x4165e8": "b142",
+    "0x4165ea": "10d0",
+    "0x419a7e": "002c",
+    "0x419a80": "01d0",
+    "0x419a82": "59f08079",
+    "0x419a86": "002f",
+    "0x419a88": "01d0",
+    "0x419a8a": "59f08069",
+    "0x419a8e": "2a00",
+    "0x419a90": "59ea0609",
+    "0x419a94": "4946",
+    "0x419a96": "18f10400",
+    "0x419a9a": "fef7e6fd",
+    "0x419a9e": "5ff0000a",
+    "0x419aaa": "0028",
+    "0x419aac": "01d1",
+    "0x419ab2": "fff762f9",
+    "0x418d7a": "dff8a414",
+    "0x418d7e": "0868",
+    "0x418d80": "8069",
+    "0x418d82": "0a68",
+    "0x418d84": "0968",
+    "0x418d86": "c96a",
+    "0x418d88": "d1f13801",
+    "0x418d8c": "9161",
+    "0x418d8e": "7047",
+    "0x419ab6": "8246",
+    "0x419ab8": "5fea8a10",
+    "0x419abc": "15d4",
+    "0x419abe": "01f091fc",
+    "0x419ac2": "d8f800a0",
+    "0x419ac6": "3a00",
+    "0x419ac8": "3100",
+    "0x419aca": "5046",
+    "0x419acc": "00f074f8",
+    "0x419ad0": "0028",
+    "0x419ad2": "07d0",
+    "0x419ae4": "0120",
+    "0x419ae6": "01f089fc",
+    "0x419aea": "2af07f4a",
+    "0x4165ec": "002c",
+    "0x4165ee": "02d0",
+    "0x4165f0": "7ff00100",
+    "0x4165f4": "0be0",
+    "0x4165a4": "7ff00300",
+    "0x4165a8": "31e0",
+    "0x4165b2": "002c",
+    "0x4165b4": "02d1",
+    "0x4165b6": "7ff00500",
+    "0x4165ba": "28e0",
+    "0x4165bc": "7ff00300",
+    "0x4165c0": "25e0",
+    "0x419ad4": "002c",
+    "0x419ad6": "05d0",
+    "0x419ad8": "d8f80000",
+    "0x419adc": "30ea0606",
+    "0x419ae0": "c8f80060",
+    "0x419aae": "01f08ffc",
+    "0x4199f0": "01f082fc",
+    "0x4199f4": "0020",
+    "0x4199f6": "5ff0ff31",
+    "0x4199fa": "0860",
+    "0x419a30": "002d",
+    "0x419a32": "01d1",
+    "0x419a38": "0020",
+    "0x419a40": "01f05afc",
+    "0x419a44": "0020",
+    "0x419a46": "5ff0ff31",
+    "0x419a4a": "0860"
+  },
+  "comparisons": [
+    {
+      "existing_waiter": false,
+      "flags": 1,
+      "timeout_argument_raw": 0,
+      "state": {
+        "wait_count": 8,
+        "tcb_flags": 2147483649,
+        "tcb_prev": 536908032,
+        "tcb_next": 536908032,
+        "tcb_wait_object": 536907780,
+        "anchor_prev": 536903704,
+        "anchor_next": 536903704,
+        "existing_prev": 0,
+        "existing_next": 0
+      },
+      "providers": [
+        [
+          "task_block",
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "existing_waiter": false,
+      "flags": 4194304,
+      "timeout_argument_raw": 13,
+      "state": {
+        "wait_count": 8,
+        "tcb_flags": 2151677952,
+        "tcb_prev": 536908032,
+        "tcb_next": 536908032,
+        "tcb_wait_object": 536907780,
+        "anchor_prev": 536903704,
+        "anchor_next": 536903704,
+        "existing_prev": 0,
+        "existing_next": 0
+      },
+      "providers": [
+        [
+          "task_block",
+          13,
+          1
+        ]
+      ]
+    },
+    {
+      "existing_waiter": true,
+      "flags": 8388608,
+      "timeout_argument_raw": 0,
+      "state": {
+        "wait_count": 8,
+        "tcb_flags": 2155872256,
+        "tcb_prev": 536908032,
+        "tcb_next": 536908288,
+        "tcb_wait_object": 536907780,
+        "anchor_prev": 536908288,
+        "anchor_next": 536903704,
+        "existing_prev": 536903704,
+        "existing_next": 536908032
+      },
+      "providers": [
+        [
+          "task_block",
+          0,
+          1
+        ]
+      ]
+    },
+    {
+      "existing_waiter": true,
+      "flags": 1048576,
+      "timeout_argument_raw": 4294967295,
+      "state": {
+        "wait_count": 8,
+        "tcb_flags": 2148532224,
+        "tcb_prev": 536908032,
+        "tcb_next": 536908288,
+        "tcb_wait_object": 536907780,
+        "anchor_prev": 536908288,
+        "anchor_next": 536903704,
+        "existing_prev": 536903704,
+        "existing_next": 536908032
+      },
+      "providers": [
+        [
+          "task_block",
+          4294967295,
+          1
+        ]
+      ]
+    },
+    {
+      "function": "flags_wait",
+      "arguments": [
+        536907776,
+        3,
+        0,
+        50
+      ],
+      "fixture": {
+        "initial_flags": 2
+      },
+      "return": 2,
+      "providers": [
+        [
+          "privilege_check",
+          0
+        ],
+        [
+          "runtime_mode",
+          1
+        ],
+        [
+          "scheduler_suspend"
+        ],
+        [
+          "scheduler_resume",
+          1
+        ]
+      ]
+    },
+    {
+      "function": "flags_wait",
+      "arguments": [
+        536907776,
+        3,
+        2,
+        50
+      ],
+      "fixture": {
+        "initial_flags": 2
+      },
+      "return": 2,
+      "providers": [
+        [
+          "privilege_check",
+          0
+        ],
+        [
+          "runtime_mode",
+          1
+        ],
+        [
+          "scheduler_suspend"
+        ],
+        [
+          "scheduler_resume",
+          1
+        ]
+      ]
+    },
+    {
+      "function": "flags_wait",
+      "arguments": [
+        536907776,
+        3,
+        0,
+        0
+      ],
+      "fixture": {
+        "initial_flags": 0
+      },
+      "return": 4294967293,
+      "providers": [
+        [
+          "privilege_check",
+          0
+        ],
+        [
+          "runtime_mode",
+          1
+        ],
+        [
+          "scheduler_suspend"
+        ],
+        [
+          "scheduler_resume",
+          1
+        ]
+      ]
+    },
+    {
+      "function": "flags_wait",
+      "arguments": [
+        536907776,
+        3,
+        3,
+        20000
+      ],
+      "fixture": {
+        "initial_flags": 3
+      },
+      "return": 3,
+      "providers": [
+        [
+          "privilege_check",
+          0
+        ],
+        [
+          "runtime_mode",
+          1
+        ],
+        [
+          "scheduler_suspend"
+        ],
+        [
+          "scheduler_resume",
+          1
+        ]
+      ]
+    },
+    {
+      "function": "flags_wait",
+      "arguments": [
+        536907776,
+        3,
+        1,
+        20000
+      ],
+      "fixture": {
+        "initial_flags": 1
+      },
+      "return": 4294967294,
+      "providers": [
+        [
+          "privilege_check",
+          0
+        ],
+        [
+          "runtime_mode",
+          1
+        ],
+        [
+          "scheduler_suspend"
+        ],
+        [
+          "task_block",
+          20000,
+          1
+        ],
+        [
+          "scheduler_resume",
+          1
+        ],
+        [
+          "kernel_enter"
+        ],
+        [
+          "kernel_exit"
+        ]
+      ]
+    },
+    {
+      "function": "flags_wait",
+      "arguments": [
+        536907776,
+        16777216,
+        0,
+        0
+      ],
+      "fixture": {},
+      "return": 4294967292,
+      "providers": []
+    },
+    {
+      "function": "flags_wait",
+      "arguments": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "fixture": {},
+      "return": 4294967292,
+      "providers": []
+    },
+    {
+      "function": "flags_wait",
+      "arguments": [
+        536907776,
+        1,
+        0,
+        0
+      ],
+      "fixture": {
+        "privileged_or_isr": 1
+      },
+      "return": 4294967290,
+      "providers": [
+        [
+          "privilege_check",
+          1
+        ]
+      ]
+    },
+    {
+      "function": "flags_wait",
+      "arguments": [
+        536907776,
+        1,
+        0,
+        1
+      ],
+      "fixture": {
+        "privileged_or_isr": 1
+      },
+      "return": 4294967292,
+      "providers": [
+        [
+          "privilege_check",
+          1
+        ]
+      ]
+    },
+    {
+      "function": "flags_wait_core",
+      "arguments": [
+        536907776,
+        1,
+        1,
+        0,
+        0
+      ],
+      "fixture": {
+        "initial_flags": 3,
+        "runtime_mode": 1
+      },
+      "return": 3,
+      "providers": [
+        [
+          "runtime_mode",
+          1
+        ],
+        [
+          "scheduler_suspend"
+        ],
+        [
+          "scheduler_resume",
+          1
+        ]
+      ],
+      "event_flags": 2,
+      "waiter_count": 0,
+      "tcb_wait_node": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "function": "flags_wait_core",
+      "arguments": [
+        536907776,
+        3,
+        1,
+        1,
+        0
+      ],
+      "fixture": {
+        "initial_flags": 1,
+        "runtime_mode": 1
+      },
+      "return": 1,
+      "providers": [
+        [
+          "runtime_mode",
+          1
+        ],
+        [
+          "scheduler_suspend"
+        ],
+        [
+          "scheduler_resume",
+          1
+        ]
+      ],
+      "event_flags": 1,
+      "waiter_count": 0,
+      "tcb_wait_node": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "function": "flags_wait_core",
+      "arguments": [
+        536907776,
+        2,
+        1,
+        0,
+        25
+      ],
+      "fixture": {
+        "initial_flags": 0,
+        "wake_flags": 2,
+        "runtime_mode": 1
+      },
+      "return": 2,
+      "providers": [
+        [
+          "runtime_mode",
+          1
+        ],
+        [
+          "scheduler_suspend"
+        ],
+        [
+          "task_block",
+          25,
+          1
+        ],
+        [
+          "scheduler_resume",
+          1
+        ],
+        [
+          "kernel_enter"
+        ],
+        [
+          "kernel_exit"
+        ]
+      ],
+      "event_flags": 0,
+      "waiter_count": 1,
+      "tcb_wait_node": [
+        48,
+        536908032,
+        536908032,
+        536907780
+      ]
+    },
+    {
+      "function": "flags_wait_core",
+      "arguments": [
+        536907776,
+        2,
+        0,
+        0,
+        25
+      ],
+      "fixture": {
+        "initial_flags": 0,
+        "wake_flags": 2,
+        "runtime_mode": 1
+      },
+      "return": 2,
+      "providers": [
+        [
+          "runtime_mode",
+          1
+        ],
+        [
+          "scheduler_suspend"
+        ],
+        [
+          "task_block",
+          25,
+          1
+        ],
+        [
+          "scheduler_resume",
+          1
+        ],
+        [
+          "kernel_enter"
+        ],
+        [
+          "kernel_exit"
+        ]
+      ],
+      "event_flags": 2,
+      "waiter_count": 1,
+      "tcb_wait_node": [
+        48,
+        536908032,
+        536908032,
+        536907780
+      ]
+    },
+    {
+      "function": "flags_wait_core",
+      "arguments": [
+        536907776,
+        3,
+        1,
+        1,
+        25
+      ],
+      "fixture": {
+        "initial_flags": 0,
+        "wake_flags": 3,
+        "runtime_mode": 1
+      },
+      "return": 3,
+      "providers": [
+        [
+          "runtime_mode",
+          1
+        ],
+        [
+          "scheduler_suspend"
+        ],
+        [
+          "task_block",
+          25,
+          1
+        ],
+        [
+          "scheduler_resume",
+          1
+        ],
+        [
+          "kernel_enter"
+        ],
+        [
+          "kernel_exit"
+        ]
+      ],
+      "event_flags": 0,
+      "waiter_count": 1,
+      "tcb_wait_node": [
+        48,
+        536908032,
+        536908032,
+        536907780
+      ]
+    },
+    {
+      "function": "flags_wait_core",
+      "arguments": [
+        536907776,
+        2,
+        1,
+        0,
+        25
+      ],
+      "fixture": {
+        "initial_flags": 0,
+        "wake_flags": 2,
+        "runtime_mode": 1,
+        "scheduler_resume": 0,
+        "thread_wait_field": 33554434
+      },
+      "return": 2,
+      "providers": [
+        [
+          "runtime_mode",
+          1
+        ],
+        [
+          "scheduler_suspend"
+        ],
+        [
+          "task_block",
+          25,
+          1
+        ],
+        [
+          "scheduler_resume",
+          0
+        ],
+        [
+          "kernel_reschedule"
+        ]
+      ],
+      "event_flags": 0,
+      "waiter_count": 1,
+      "tcb_wait_node": [
+        48,
+        536908032,
+        536908032,
+        536907780
+      ]
+    },
+    {
+      "function": "flags_wait_core_fatal",
+      "arguments": [
+        0,
+        1,
+        0
+      ],
+      "fixture": {},
+      "observation": {
+        "providers": [
+          [
+            "mask_interrupts"
+          ]
+        ],
+        "faults": [
+          [
+            20,
+            4294967295,
+            4,
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "function": "flags_wait_core_fatal",
+      "arguments": [
+        536907776,
+        1,
+        25
+      ],
+      "fixture": {
+        "runtime_mode": 0
+      },
+      "observation": {
+        "providers": [
+          [
+            "runtime_mode",
+            0
+          ],
+          [
+            "mask_interrupts"
+          ]
+        ],
+        "faults": [
+          [
+            20,
+            4294967295,
+            4,
+            0
+          ]
+        ]
+      }
+    }
+  ],
+  "source_sha256": {
+    "verify_flags_runtime.py": "ff2b53f0de6ed0d578121603de964f094db5fe9ae29dad482a8795931bfcce89",
+    "flags_runtime.c": "eaf3d2efe405fc387fb2d4486158c87fedcc9ca44794cf86f1b6cd24740bdd5c",
+    "cmsis_notifications.c": "f84d37de11bfce426ea01104cec060d3cda9a134ed190c0583d5b3560380d123",
+    "flags_runtime.h": "01cb99976d89e31a037d48db1c3afe70ec3688b3b04aa3b152943f96e961f54c",
+    "module.ld": "21eb6b946cf449f03f22aa171dc7b3e14146cfcad90b19b21af874f459824c64"
+  },
+  "limits": [
+    "Original/source execution covers 0x416590 -> 0x4199DC -> 0x41866A plus the actual 0x418d7a TCB wait-result accessor; flags, wait-node, list and fatal writes are checked against original instructions. Event/TCB RAM and task state are synthetic fixtures.",
+    "Kernel timeout registration, scheduler handoff/resume and critical-section implementations remain injected providers; tests compare calls and relevant state, not full scheduler/concurrency semantics.",
+    "Timeout values are raw; no tick rate is inferred. No device behavior is exercised."
+  ]
+}

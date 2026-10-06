@@ -1,0 +1,375 @@
+{
+  "status": "PASS",
+  "cases": 10,
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "elf_sha256": "1b041b361b58222b5dd1dffb2712227b11ec0a897e82c9276a6fc2ba2b4a289e",
+  "source_sha256": {
+    "verify_cmsis_notifications.py": "abe0eaeca69f78c29f0a80776f21c9416df917f760c162366a2c7341b126a9d5",
+    "cmsis_notifications.c": "f84d37de11bfce426ea01104cec060d3cda9a134ed190c0583d5b3560380d123",
+    "flags_runtime.h": "01cb99976d89e31a037d48db1c3afe70ec3688b3b04aa3b152943f96e961f54c",
+    "module.ld": "21eb6b946cf449f03f22aa171dc7b3e14146cfcad90b19b21af874f459824c64"
+  },
+  "comparisons": [
+    {
+      "entry": "cmsis_transfer",
+      "arguments": [
+        536903680,
+        8388608
+      ],
+      "fixture": {},
+      "result": {
+        "r0": 4660,
+        "r1": null,
+        "events": [
+          [
+            "context",
+            0
+          ],
+          [
+            "notify",
+            536903680,
+            0,
+            8388608,
+            1,
+            0
+          ],
+          [
+            "notify",
+            536903680,
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "aircr": 0
+      }
+    },
+    {
+      "entry": "cmsis_transfer",
+      "arguments": [
+        0,
+        1
+      ],
+      "fixture": {},
+      "result": {
+        "r0": 4294967292,
+        "r1": null,
+        "events": [],
+        "aircr": 0
+      }
+    },
+    {
+      "entry": "cmsis_transfer",
+      "arguments": [
+        536903680,
+        8388608
+      ],
+      "fixture": {
+        "context": 1,
+        "previous": 8388608
+      },
+      "result": {
+        "r0": 8388608,
+        "r1": null,
+        "events": [
+          [
+            "context",
+            1
+          ],
+          [
+            "isr_notify",
+            536903680,
+            0,
+            8388608,
+            1,
+            0,
+            1
+          ],
+          [
+            "isr_notify",
+            536903680,
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        ],
+        "aircr": 268435456
+      }
+    },
+    {
+      "entry": "cmsis_wait",
+      "arguments": [
+        16777215,
+        0,
+        60000,
+        0
+      ],
+      "fixture": {
+        "waits": [
+          1
+        ],
+        "outputs": [
+          16
+        ],
+        "ticks": [
+          100
+        ]
+      },
+      "result": {
+        "r0": 16,
+        "r1": 60000,
+        "events": [
+          [
+            "context",
+            0
+          ],
+          [
+            "tick",
+            100
+          ],
+          [
+            "notify_wait",
+            0,
+            0,
+            16777215,
+            1,
+            60000,
+            1,
+            16
+          ]
+        ],
+        "aircr": 0
+      }
+    },
+    {
+      "entry": "cmsis_wait",
+      "arguments": [
+        3,
+        1,
+        0,
+        0
+      ],
+      "fixture": {
+        "waits": [
+          1
+        ],
+        "outputs": [
+          1
+        ]
+      },
+      "result": {
+        "r0": 4294967293,
+        "r1": 0,
+        "events": [
+          [
+            "context",
+            0
+          ],
+          [
+            "tick",
+            100
+          ],
+          [
+            "notify_wait",
+            0,
+            0,
+            3,
+            1,
+            0,
+            1,
+            1
+          ]
+        ],
+        "aircr": 0
+      }
+    },
+    {
+      "entry": "cmsis_wait",
+      "arguments": [
+        3,
+        0,
+        0,
+        0
+      ],
+      "fixture": {
+        "waits": [
+          1
+        ],
+        "outputs": [
+          0
+        ]
+      },
+      "result": {
+        "r0": 4294967293,
+        "r1": 0,
+        "events": [
+          [
+            "context",
+            0
+          ],
+          [
+            "tick",
+            100
+          ],
+          [
+            "notify_wait",
+            0,
+            0,
+            3,
+            1,
+            0,
+            1,
+            0
+          ]
+        ],
+        "aircr": 0
+      }
+    },
+    {
+      "entry": "cmsis_wait",
+      "arguments": [
+        3,
+        0,
+        15,
+        0
+      ],
+      "fixture": {
+        "waits": [
+          0,
+          1
+        ],
+        "outputs": [
+          0,
+          2
+        ],
+        "ticks": [
+          100,
+          104,
+          115
+        ]
+      },
+      "result": {
+        "r0": 4294967294,
+        "r1": 15,
+        "events": [
+          [
+            "context",
+            0
+          ],
+          [
+            "tick",
+            100
+          ],
+          [
+            "notify_wait",
+            0,
+            0,
+            3,
+            1,
+            15,
+            0,
+            0
+          ]
+        ],
+        "aircr": 0
+      }
+    },
+    {
+      "entry": "cmsis_wait",
+      "arguments": [
+        3,
+        0,
+        15,
+        0
+      ],
+      "fixture": {
+        "waits": [
+          1
+        ],
+        "outputs": [
+          1
+        ],
+        "ticks": [
+          100
+        ]
+      },
+      "result": {
+        "r0": 1,
+        "r1": 15,
+        "events": [
+          [
+            "context",
+            0
+          ],
+          [
+            "tick",
+            100
+          ],
+          [
+            "notify_wait",
+            0,
+            0,
+            3,
+            1,
+            15,
+            1,
+            1
+          ]
+        ],
+        "aircr": 0
+      }
+    },
+    {
+      "entry": "cmsis_wait",
+      "arguments": [
+        2147483648,
+        0,
+        5,
+        0
+      ],
+      "fixture": {},
+      "result": {
+        "r0": 4294967292,
+        "r1": 0,
+        "events": [
+          [
+            "context",
+            0
+          ]
+        ],
+        "aircr": 0
+      }
+    },
+    {
+      "entry": "cmsis_wait",
+      "arguments": [
+        3,
+        0,
+        5,
+        0
+      ],
+      "fixture": {
+        "context": 1
+      },
+      "result": {
+        "r0": 4294967290,
+        "r1": 0,
+        "events": [
+          [
+            "context",
+            1
+          ]
+        ],
+        "aircr": 0
+      }
+    }
+  ],
+  "limits": [
+    "The 0x41623a ISR path is observed only through an injected 0x418fe8 provider; no ISR behavior is synthesized.",
+    "Clock samples and notification wake results are controlled fixtures; timeout values remain raw and no tick unit is inferred.",
+    "The fourth argument to 0x4162c4 is preserved in the ABI but stock body does not consume it."
+  ]
+}

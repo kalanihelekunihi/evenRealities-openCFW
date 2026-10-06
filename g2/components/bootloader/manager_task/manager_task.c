@@ -3,7 +3,7 @@
 extern void opencfw_provider_42e254(void);
 extern void opencfw_provider_42e278(void);
 extern void opencfw_provider_42e2ea(void);
-extern uint32_t opencfw_provider_4162c4(uint32_t mask,uint32_t options,uint32_t ticks);
+#include "../flags_runtime/flags_runtime.h"
 extern uint32_t opencfw_provider_4160e8(void);
 extern uint32_t opencfw_provider_42dca2(const void *message);
 extern void opencfw_provider_4176ce(uint32_t level,const char *module,const char *file,const char *function,uint32_t line,const char *format,...);
@@ -39,7 +39,7 @@ void opencfw_boot_manager_task(void *argument) {
     message[0]=needs_update?1:0;
     (void)opencfw_provider_42dca2((const void *)message);
     for (;;) {
-        uint32_t flags=opencfw_provider_4162c4(0xffffff,0,60000);
+        uint32_t flags=(uint32_t)opencfw_provider_4162c4(0xffffff,0,60000,0);
         uint32_t now=opencfw_provider_4160e8();
         if (flags!=0 && flags<0x80000000) {
             opencfw_boot_manager_flags_noop(flags);

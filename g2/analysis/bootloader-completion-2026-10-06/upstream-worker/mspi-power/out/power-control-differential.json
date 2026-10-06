@@ -1,0 +1,781 @@
+{
+  "status": "PASS",
+  "cases": 19,
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_elf_sha256": "ca36fdfb71930267f81a817f4ad6e2ce10053349391a36a7959594135fcb0c52",
+  "source_sha256": {
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/mspi-power/verify_power_control.py": "d3a70c5a1bd48b29c91488891b9ca34cae01ee03adca67dd69e9debda304b03e",
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/mspi-power/verify_device_configure.py": "fb13760bef6370d367e10bb505ab7cbd231bfa765e0dff6a7f75b37089ea0c40",
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/mspi-power/module.ld": "8add1a7d9e10dcebc4578fe6408f804deb31593019704133808a1c079c7a1a42",
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/mspi-power/device_configure_module.ld": "ee3dc02cf292270e27440922e67f6c188b1acd8e8a0114f0504ecc89628bf9f6",
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/mspi-power/test_power_control.c": "f5668c2f80345899e7e850563082d49fa5c933ceaf10669bc3f02cd93bc775e4",
+    "g2/components/bootloader/nor_mspi_power/power_control.c": "4a34124a5629c80380c44f790997d24233cd88da33efcff434f33a0523bf000a",
+    "g2/components/bootloader/nor_mspi_power/power_control.h": "e289097aaa6bec65f53fe773728eb38cde9645c286dfc264f9e1026bf264b593",
+    "g2/components/bootloader/nor_mspi_power/power_control_adapter.c": "f929eea855a6938c0a016d9711bb57deedd74a595efc7a90a93a672e32357a3f",
+    "g2/components/bootloader/nor_mspi_power/power_control_adapter.h": "b25ebef80829a70b518d17f1152c075e6879993905caa21b80248c50a98a1fad"
+  },
+  "distinct_original_instruction_bytes": 1008,
+  "original_instruction_trace": {
+    "0x426808": "70b5",
+    "0x42680a": "0400",
+    "0x42680c": "1600",
+    "0x42680e": "2500",
+    "0x426810": "002c",
+    "0x426812": "06d0",
+    "0x426814": "2068",
+    "0x426816": "20f07e40",
+    "0x42681a": "dff8e823",
+    "0x42681e": "9042",
+    "0x426820": "01d0",
+    "0x426822": "0220",
+    "0x426824": "fee0",
+    "0x426a24": "70bd",
+    "0x426826": "c9b2",
+    "0x426828": "0029",
+    "0x42682a": "05d0",
+    "0x42682c": "0229",
+    "0x42682e": "00f0fa80",
+    "0x426832": "c0f0f880",
+    "0x426836": "e0e1",
+    "0x426bfa": "0620",
+    "0x426bfc": "12e7",
+    "0x426a26": "d5f84008",
+    "0x426a2a": "0028",
+    "0x426a2c": "02d1",
+    "0x426a2e": "286a",
+    "0x426a30": "0028",
+    "0x426a32": "01d0",
+    "0x426a38": "f6b2",
+    "0x426a3a": "002e",
+    "0x426a3c": "00f0b880",
+    "0x426bb0": "41f6ff71",
+    "0x426bb4": "2000",
+    "0x426bb6": "fff765fc",
+    "0x426bba": "6868",
+    "0x426bbc": "1349",
+    "0x426bbe": "11eb0031",
+    "0x426bc2": "d1f89000",
+    "0x426bc6": "c007",
+    "0x426bc8": "03d5",
+    "0x426bd2": "6868",
+    "0x426bd4": "1030",
+    "0x426bd6": "c0b2",
+    "0x426bd8": "f5f7cffa",
+    "0x426bdc": "0023",
+    "0x426bde": "0022",
+    "0x426be0": "0021",
+    "0x426be2": "6868",
+    "0x426be4": "fdf7dcfe",
+    "0x426be8": "6868",
+    "0x426bea": "1030",
+    "0x426bec": "c0b2",
+    "0x426bee": "fbf7f3fb",
+    "0x426bf2": "0028",
+    "0x426bf4": "7ff416af",
+    "0x426bf8": "13e7",
+    "0x426a22": "0020",
+    "0x426a34": "0320",
+    "0x426a36": "f5e7",
+    "0x426838": "3000",
+    "0x42683a": "c0b2",
+    "0x42683c": "0028",
+    "0x42683e": "05d0",
+    "0x426840": "95f86008",
+    "0x426844": "0028",
+    "0x426846": "01d1",
+    "0x426848": "0720",
+    "0x42684a": "ebe0",
+    "0x42684c": "6868",
+    "0x42684e": "1030",
+    "0x426850": "c0b2",
+    "0x426852": "f5f797fb",
+    "0x426856": "f6b2",
+    "0x426858": "002e",
+    "0x42685a": "00f0d180",
+    "0x42685e": "95f8c908",
+    "0x426862": "0728",
+    "0x426864": "01d1",
+    "0x426866": "0720",
+    "0x426868": "dce0",
+    "0x426a00": "0420",
+    "0x426a02": "85f8c908",
+    "0x426a06": "6968",
+    "0x426a08": "1031",
+    "0x426a0a": "c9b2",
+    "0x426a0c": "0420",
+    "0x426a0e": "fbf76ffc",
+    "0x426a12": "0028",
+    "0x426a14": "06d1",
+    "0x42686a": "6968",
+    "0x42686c": "1031",
+    "0x42686e": "c9b2",
+    "0x426870": "95f8c908",
+    "0x426874": "fbf73cfd",
+    "0x426878": "0028",
+    "0x42687a": "40f0d380",
+    "0x426a16": "0823",
+    "0x426a18": "0122",
+    "0x426a1a": "0121",
+    "0x426a1c": "6868",
+    "0x426a1e": "fdf7bfff",
+    "0x42687e": "0023",
+    "0x426880": "0022",
+    "0x426882": "0121",
+    "0x426884": "6868",
+    "0x426886": "fef78bf8",
+    "0x42688a": "dff88003",
+    "0x42688e": "6968",
+    "0x426890": "10eb0131",
+    "0x426894": "d5f86428",
+    "0x426898": "c1f88020",
+    "0x42689c": "6968",
+    "0x42689e": "10eb0131",
+    "0x4268a2": "d5f86828",
+    "0x4268a6": "c1f88420",
+    "0x4268aa": "6968",
+    "0x4268ac": "10eb0131",
+    "0x4268b0": "d5f86c28",
+    "0x4268b4": "c1f88820",
+    "0x4268b8": "6968",
+    "0x4268ba": "10eb0131",
+    "0x4268be": "d5f87028",
+    "0x4268c2": "c1f88c20",
+    "0x4268c6": "6968",
+    "0x4268c8": "10eb0131",
+    "0x4268cc": "d5f87428",
+    "0x4268d0": "c1f89020",
+    "0x4268d4": "6968",
+    "0x4268d6": "10eb0131",
+    "0x4268da": "d5f87828",
+    "0x4268de": "c1f89420",
+    "0x4268e2": "6968",
+    "0x4268e4": "10eb0131",
+    "0x4268e8": "d5f87c28",
+    "0x4268ec": "c1f89820",
+    "0x4268f0": "6968",
+    "0x4268f2": "10eb0131",
+    "0x4268f6": "d5f88028",
+    "0x4268fa": "c1f89c20",
+    "0x4268fe": "6968",
+    "0x426900": "10eb0131",
+    "0x426904": "d5f88428",
+    "0x426908": "c1f8a020",
+    "0x42690c": "6968",
+    "0x42690e": "10eb0131",
+    "0x426912": "d5f88828",
+    "0x426916": "c1f8a420",
+    "0x42691a": "6968",
+    "0x42691c": "10eb0131",
+    "0x426920": "d5f88c28",
+    "0x426924": "c1f8a820",
+    "0x426928": "6968",
+    "0x42692a": "10eb0131",
+    "0x42692e": "d5f89028",
+    "0x426932": "0a63",
+    "0x426934": "6968",
+    "0x426936": "10eb0131",
+    "0x42693a": "d5f89428",
+    "0x42693e": "4a64",
+    "0x426940": "6968",
+    "0x426942": "10eb0131",
+    "0x426946": "d5f89828",
+    "0x42694a": "8a64",
+    "0x42694c": "6968",
+    "0x42694e": "10eb0131",
+    "0x426952": "d5f89c28",
+    "0x426956": "ca64",
+    "0x426958": "6968",
+    "0x42695a": "10eb0131",
+    "0x42695e": "d5f8a428",
+    "0x426962": "c1f8a822",
+    "0x426966": "6968",
+    "0x426968": "10eb0131",
+    "0x42696c": "d5f8a828",
+    "0x426970": "c1f8b822",
+    "0x426974": "6968",
+    "0x426976": "10eb0131",
+    "0x42697a": "d5f8ac28",
+    "0x42697e": "c1f8c022",
+    "0x426982": "6968",
+    "0x426984": "10eb0131",
+    "0x426988": "d5f8b028",
+    "0x42698c": "c1f8c422",
+    "0x426990": "6968",
+    "0x426992": "10eb0131",
+    "0x426996": "d5f8b428",
+    "0x42699a": "c1f80022",
+    "0x42699e": "6968",
+    "0x4269a0": "10eb0131",
+    "0x4269a4": "95f8b828",
+    "0x4269a8": "02f0ff02",
+    "0x4269ac": "c1f8b422",
+    "0x4269b0": "6968",
+    "0x4269b2": "10eb0131",
+    "0x4269b6": "d5f8bc28",
+    "0x4269ba": "c1f81421",
+    "0x4269be": "6968",
+    "0x4269c0": "10eb0131",
+    "0x4269c4": "d5f8c028",
+    "0x4269c8": "c1f81821",
+    "0x4269cc": "6968",
+    "0x4269ce": "10eb0131",
+    "0x4269d2": "d5f8c428",
+    "0x4269d6": "0a62",
+    "0x4269d8": "6968",
+    "0x4269da": "10eb0130",
+    "0x4269de": "d5f8a018",
+    "0x4269e2": "4908",
+    "0x4269e4": "4900",
+    "0x4269e6": "c0f8a012",
+    "0x4269ea": "95f8a008",
+    "0x4269ee": "c007",
+    "0x4269f0": "02d5",
+    "0x4269f8": "0020",
+    "0x4269fa": "85f86008",
+    "0x4269fe": "10e0",
+    "0x426a40": "7248",
+    "0x426a42": "6968",
+    "0x426a44": "10eb0131",
+    "0x426a48": "d1f88010",
+    "0x426a4c": "c5f86418",
+    "0x426a50": "6968",
+    "0x426a52": "10eb0131",
+    "0x426a56": "d1f88410",
+    "0x426a5a": "c5f86818",
+    "0x426a5e": "6968",
+    "0x426a60": "10eb0131",
+    "0x426a64": "d1f88810",
+    "0x426a68": "c5f86c18",
+    "0x426a6c": "6968",
+    "0x426a6e": "10eb0131",
+    "0x426a72": "d1f88c10",
+    "0x426a76": "c5f87018",
+    "0x426a7a": "6968",
+    "0x426a7c": "10eb0131",
+    "0x426a80": "d1f89010",
+    "0x426a84": "c5f87418",
+    "0x426a88": "6968",
+    "0x426a8a": "10eb0131",
+    "0x426a8e": "d1f89410",
+    "0x426a92": "c5f87818",
+    "0x426a96": "6968",
+    "0x426a98": "10eb0131",
+    "0x426a9c": "d1f89810",
+    "0x426aa0": "c5f87c18",
+    "0x426aa4": "6968",
+    "0x426aa6": "10eb0131",
+    "0x426aaa": "d1f89c10",
+    "0x426aae": "c5f88018",
+    "0x426ab2": "6968",
+    "0x426ab4": "10eb0131",
+    "0x426ab8": "d1f8a010",
+    "0x426abc": "c5f88418",
+    "0x426ac0": "6968",
+    "0x426ac2": "10eb0131",
+    "0x426ac6": "d1f8a410",
+    "0x426aca": "c5f88818",
+    "0x426ace": "6968",
+    "0x426ad0": "10eb0131",
+    "0x426ad4": "d1f8a810",
+    "0x426ad8": "c5f88c18",
+    "0x426adc": "6968",
+    "0x426ade": "10eb0131",
+    "0x426ae2": "096b",
+    "0x426ae4": "c5f89018",
+    "0x426ae8": "6968",
+    "0x426aea": "10eb0131",
+    "0x426aee": "496c",
+    "0x426af0": "c5f89418",
+    "0x426af4": "6968",
+    "0x426af6": "10eb0131",
+    "0x426afa": "896c",
+    "0x426afc": "c5f89818",
+    "0x426b00": "6968",
+    "0x426b02": "10eb0131",
+    "0x426b06": "c96c",
+    "0x426b08": "c5f89c18",
+    "0x426b0c": "6968",
+    "0x426b0e": "10eb0131",
+    "0x426b12": "d1f8a812",
+    "0x426b16": "c5f8a418",
+    "0x426b1a": "6968",
+    "0x426b1c": "10eb0131",
+    "0x426b20": "d1f8b812",
+    "0x426b24": "c5f8a818",
+    "0x426b28": "6968",
+    "0x426b2a": "10eb0131",
+    "0x426b2e": "d1f8c012",
+    "0x426b32": "c5f8ac18",
+    "0x426b36": "6968",
+    "0x426b38": "10eb0131",
+    "0x426b3c": "d1f8c412",
+    "0x426b40": "c5f8b018",
+    "0x426b44": "6968",
+    "0x426b46": "10eb0131",
+    "0x426b4a": "d1f80012",
+    "0x426b4e": "c5f8b418",
+    "0x426b52": "6968",
+    "0x426b54": "10eb0131",
+    "0x426b58": "d1f8b012",
+    "0x426b5c": "c5f8b818",
+    "0x426b60": "6968",
+    "0x426b62": "10eb0131",
+    "0x426b66": "d1f81411",
+    "0x426b6a": "c5f8bc18",
+    "0x426b6e": "6968",
+    "0x426b70": "10eb0131",
+    "0x426b74": "d1f81811",
+    "0x426b78": "c5f8c018",
+    "0x426b7c": "6968",
+    "0x426b7e": "10eb0131",
+    "0x426b82": "096a",
+    "0x426b84": "c5f8c418",
+    "0x426b88": "6968",
+    "0x426b8a": "10eb0131",
+    "0x426b8e": "d1f8a012",
+    "0x426b92": "c5f8a018",
+    "0x426b96": "6968",
+    "0x426b98": "10eb0130",
+    "0x426b9c": "d0f8a002",
+    "0x426ba0": "c007",
+    "0x426ba2": "02d5",
+    "0x426baa": "0120",
+    "0x426bac": "85f86008",
+    "0x426ba4": "2800",
+    "0x426ba6": "fdf701fa",
+    "0x426bca": "d5f8cc08",
+    "0x426bce": "f6f7f7fa"
+  },
+  "comparisons": [
+    {
+      "name": "bad-magic",
+      "operation": "0x1",
+      "retain": "0x0",
+      "fixture": {
+        "magic": 0
+      },
+      "return": 2,
+      "events": [],
+      "handle_sha256": "48bc55b2bdb4d616632cd822ac404d77e8608d89e6d8237b234bb73be831db8b",
+      "mmio_sha256": "d26416da3fb3d7ccb52dce582e0fb99d4ae30c23b85fc3d381a8e24efc73d9b3"
+    },
+    {
+      "name": "invalid-operation",
+      "operation": "0x3",
+      "retain": "0x0",
+      "fixture": {},
+      "return": 6,
+      "events": [],
+      "handle_sha256": "b21b205db6ef3684dcb5e9296286bfd2a1dea827be5d3a37a20a7f5823e16a56",
+      "mmio_sha256": "d26416da3fb3d7ccb52dce582e0fb99d4ae30c23b85fc3d381a8e24efc73d9b3"
+    },
+    {
+      "name": "operation-byte-truncation",
+      "operation": "0x102",
+      "retain": "0x0",
+      "fixture": {},
+      "return": 0,
+      "events": [
+        [
+          "mode_leave",
+          17
+        ],
+        [
+          "clockgen",
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          "clock_release_all",
+          17,
+          0
+        ]
+      ],
+      "handle_sha256": "b21b205db6ef3684dcb5e9296286bfd2a1dea827be5d3a37a20a7f5823e16a56",
+      "mmio_sha256": "eb70b4050291c2b9626e323a19810c1607097c7b87ab6d2a758560c0e4e14b01"
+    },
+    {
+      "name": "busy-active-count",
+      "operation": "0x1",
+      "retain": "0x0",
+      "fixture": {
+        "active": 1
+      },
+      "return": 3,
+      "events": [],
+      "handle_sha256": "ec45162a1d0a220d39a037e07309ea8d357c3c387fe589d3564b2590bcbfb88a",
+      "mmio_sha256": "d26416da3fb3d7ccb52dce582e0fb99d4ae30c23b85fc3d381a8e24efc73d9b3"
+    },
+    {
+      "name": "busy-handle-state",
+      "operation": "0x2",
+      "retain": "0x0",
+      "fixture": {
+        "handle_busy": 1
+      },
+      "return": 3,
+      "events": [],
+      "handle_sha256": "0c0bc4abb6e0487d14c25c1e2de0d67429e81bf8b2084c39af244c152637e72f",
+      "mmio_sha256": "d26416da3fb3d7ccb52dce582e0fb99d4ae30c23b85fc3d381a8e24efc73d9b3"
+    },
+    {
+      "name": "retain-without-saved-state",
+      "operation": "0x0",
+      "retain": "0x1",
+      "fixture": {},
+      "return": 7,
+      "events": [],
+      "handle_sha256": "b21b205db6ef3684dcb5e9296286bfd2a1dea827be5d3a37a20a7f5823e16a56",
+      "mmio_sha256": "d26416da3fb3d7ccb52dce582e0fb99d4ae30c23b85fc3d381a8e24efc73d9b3"
+    },
+    {
+      "name": "retain-invalid-clock-class",
+      "operation": "0x0",
+      "retain": "0x1",
+      "fixture": {
+        "save_valid": 1,
+        "clock_class": 7
+      },
+      "return": 7,
+      "events": [
+        [
+          "mode_enter",
+          17
+        ]
+      ],
+      "handle_sha256": "840f288a41b367ba05009bc7de24460cb67eafc5749259e3f8902764686ab000",
+      "mmio_sha256": "d26416da3fb3d7ccb52dce582e0fb99d4ae30c23b85fc3d381a8e24efc73d9b3"
+    },
+    {
+      "name": "clock-request-error",
+      "operation": "0x0",
+      "retain": "0x0",
+      "fixture": {},
+      "return": 9,
+      "events": [
+        [
+          "mode_enter",
+          17
+        ],
+        [
+          "clock_request",
+          4,
+          17,
+          9
+        ]
+      ],
+      "handle_sha256": "b21b205db6ef3684dcb5e9296286bfd2a1dea827be5d3a37a20a7f5823e16a56",
+      "mmio_sha256": "d26416da3fb3d7ccb52dce582e0fb99d4ae30c23b85fc3d381a8e24efc73d9b3"
+    },
+    {
+      "name": "clock-request-error-retain",
+      "operation": "0x0",
+      "retain": "0x1",
+      "fixture": {
+        "save_valid": 1,
+        "clock_class": 5
+      },
+      "return": 7,
+      "events": [
+        [
+          "mode_enter",
+          17
+        ],
+        [
+          "clock_request",
+          5,
+          17,
+          7
+        ]
+      ],
+      "handle_sha256": "4e7992b7ecd3fa82f940e4627bfed2fcf0bb08ce59ed2b79f1410e3c2fbfa265",
+      "mmio_sha256": "d26416da3fb3d7ccb52dce582e0fb99d4ae30c23b85fc3d381a8e24efc73d9b3"
+    },
+    {
+      "name": "operation-zero-enable",
+      "operation": "0x0",
+      "retain": "0x0",
+      "fixture": {},
+      "return": 0,
+      "events": [
+        [
+          "mode_enter",
+          17
+        ],
+        [
+          "clock_request",
+          4,
+          17,
+          0
+        ],
+        [
+          "clockgen",
+          1,
+          1,
+          1,
+          8
+        ]
+      ],
+      "handle_sha256": "b21b205db6ef3684dcb5e9296286bfd2a1dea827be5d3a37a20a7f5823e16a56",
+      "mmio_sha256": "d26416da3fb3d7ccb52dce582e0fb99d4ae30c23b85fc3d381a8e24efc73d9b3"
+    },
+    {
+      "name": "operation-zero-restore",
+      "operation": "0x0",
+      "retain": "0x1",
+      "fixture": {
+        "save_valid": 1,
+        "clock_class": 3
+      },
+      "return": 0,
+      "events": [
+        [
+          "mode_enter",
+          17
+        ],
+        [
+          "clock_request",
+          3,
+          17,
+          0
+        ],
+        [
+          "clockgen",
+          1,
+          1,
+          0,
+          0
+        ]
+      ],
+      "handle_sha256": "a28f830c8a5f4820e0c435cf7472cbddf8f5332660e4051d0a46aa08ad320a7b",
+      "mmio_sha256": "e0e3f024aebaf2572324ad58722fc8307780e3a0cbe222986750389b7b7097e7"
+    },
+    {
+      "name": "operation-zero-restore-cq",
+      "operation": "0x0",
+      "retain": "0x1",
+      "fixture": {
+        "save_valid": 1,
+        "clock_class": 4,
+        "cqcfg": 1
+      },
+      "return": 0,
+      "events": [
+        [
+          "mode_enter",
+          17
+        ],
+        [
+          "clock_request",
+          4,
+          17,
+          0
+        ],
+        [
+          "clockgen",
+          1,
+          1,
+          0,
+          0
+        ]
+      ],
+      "handle_sha256": "b21b205db6ef3684dcb5e9296286bfd2a1dea827be5d3a37a20a7f5823e16a56",
+      "mmio_sha256": "e0e3f024aebaf2572324ad58722fc8307780e3a0cbe222986750389b7b7097e7"
+    },
+    {
+      "name": "power-down-no-retain",
+      "operation": "0x1",
+      "retain": "0x0",
+      "fixture": {},
+      "return": 0,
+      "events": [
+        [
+          "mode_leave",
+          17
+        ],
+        [
+          "clockgen",
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          "clock_release_all",
+          17,
+          0
+        ]
+      ],
+      "handle_sha256": "b21b205db6ef3684dcb5e9296286bfd2a1dea827be5d3a37a20a7f5823e16a56",
+      "mmio_sha256": "eb70b4050291c2b9626e323a19810c1607097c7b87ab6d2a758560c0e4e14b01"
+    },
+    {
+      "name": "power-down-retain",
+      "operation": "0x2",
+      "retain": "0x1",
+      "fixture": {
+        "cqcfg": 0
+      },
+      "return": 0,
+      "events": [
+        [
+          "mode_leave",
+          17
+        ],
+        [
+          "clockgen",
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          "clock_release_all",
+          17,
+          0
+        ]
+      ],
+      "handle_sha256": "216ab6eaa83ebb82e514fdaf181264ad24340edaa9b866a21496aa281d278ecd",
+      "mmio_sha256": "eb70b4050291c2b9626e323a19810c1607097c7b87ab6d2a758560c0e4e14b01"
+    },
+    {
+      "name": "power-down-retain-cq-enabled",
+      "operation": "0x1",
+      "retain": "0x1",
+      "fixture": {
+        "cqcfg": 2147483649
+      },
+      "return": 0,
+      "events": [
+        [
+          "cq_disable",
+          536875008
+        ],
+        [
+          "cmdq_disable",
+          0
+        ],
+        [
+          "mode_leave",
+          17
+        ],
+        [
+          "clockgen",
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          "clock_release_all",
+          17,
+          0
+        ]
+      ],
+      "handle_sha256": "b51c313459ec6a48633db6063cf1289cd6275d7af02acabb0695514af25a4e59",
+      "mmio_sha256": "34098c0f50246ec245143b2cf6645ad67ce2ef481ade23e5186d1674fd6c1537"
+    },
+    {
+      "name": "xip-delay-power-down",
+      "operation": "0x1",
+      "retain": "0x0",
+      "fixture": {
+        "xip": 1,
+        "delay": 123
+      },
+      "return": 0,
+      "events": [
+        [
+          "delay_us",
+          123
+        ],
+        [
+          "mode_leave",
+          17
+        ],
+        [
+          "clockgen",
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          "clock_release_all",
+          17,
+          0
+        ]
+      ],
+      "handle_sha256": "d7a32fefe82e4b6d0c2e4aa6d386fd49d173922b5a168dfad481ff9f01a41744",
+      "mmio_sha256": "b24400f32924f4a62ed2802b515ea250512058c1b5d4eff760774889a6a2ad83"
+    },
+    {
+      "name": "release-all-error",
+      "operation": "0x2",
+      "retain": "0x0",
+      "fixture": {},
+      "return": 6,
+      "events": [
+        [
+          "mode_leave",
+          17
+        ],
+        [
+          "clockgen",
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          "clock_release_all",
+          17,
+          6
+        ]
+      ],
+      "handle_sha256": "b21b205db6ef3684dcb5e9296286bfd2a1dea827be5d3a37a20a7f5823e16a56",
+      "mmio_sha256": "eb70b4050291c2b9626e323a19810c1607097c7b87ab6d2a758560c0e4e14b01"
+    },
+    {
+      "name": "module-byte-and-user-byte",
+      "operation": "0x101",
+      "retain": "0x0",
+      "fixture": {
+        "module": 257
+      },
+      "return": 0,
+      "events": [
+        [
+          "mode_leave",
+          17
+        ],
+        [
+          "clockgen",
+          257,
+          0,
+          0,
+          0
+        ],
+        [
+          "clock_release_all",
+          17,
+          0
+        ]
+      ],
+      "handle_sha256": "afb8e41e15b72745b16ccb42fbf2aab0b39f716ba96c95f67999cc8caea90225",
+      "mmio_sha256": "eb70b4050291c2b9626e323a19810c1607097c7b87ab6d2a758560c0e4e14b01"
+    },
+    {
+      "name": "null-handle",
+      "return": 2
+    }
+  ],
+  "limits": [
+    "Original 0x426808 instruction bytes execute for each compared case; direct calls to the listed platform/CQ/interrupt/delay providers are intercepted and state-identical synthetic models are used for the source callbacks.",
+    "MSPI register addresses at 0x40060000 + module*0x1000 are synthetic Unicorn memory; no physical hardware is accessed.",
+    "Clock-generator and command-queue internals remain callback boundaries; their callback arguments and ordering are compared, not peripheral timing or physical CQ effects.",
+    "This profile is not a firmware link or byte-identical rebuild claim."
+  ]
+}

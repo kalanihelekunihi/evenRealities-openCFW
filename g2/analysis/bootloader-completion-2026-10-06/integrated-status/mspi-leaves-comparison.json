@@ -1,0 +1,6744 @@
+{
+  "status": "PASS",
+  "cases": 455,
+  "distinct_original_trace_bytes": 478,
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "elf_sha256": "0230aad64ad98ffa967b9d7f4ecc15cd7e9e7a6bfa79a6b90bc630b96bf2ccf2",
+  "source_sha256": {
+    "g2/components/bootloader/nor_mspi_init/hal_leaves.c": "6be7fda2d5180ba94d61c268deb8c0cc8410a7a95279cb21b2ec213876570886",
+    "g2/components/bootloader/nor_mspi_init/irq_guard.S": "362cb239aead9a367bbe7e2665feadc7deb85f1d2fabf2dfcfc055a35d07c6d0",
+    "g2/components/bootloader/nor_mspi_init/leaves_module.ld": "6d689c171d487e8928d6e9d2f356838d65edc0af728a1c7ce52eb8515fb286c0",
+    "g2/components/bootloader/nor_mspi_init/verify_leaves.py": "b07d54411a8e3fd7dd74cd427d6a2b08c66f8423f252526f037b805f96625ce3"
+  },
+  "original_trace": {
+    "0x426450": "0200",
+    "0x426452": "0028",
+    "0x426454": "06d0",
+    "0x426464": "0220",
+    "0x426466": "0ce0",
+    "0x426482": "7047",
+    "0x426456": "0068",
+    "0x426458": "20f07e40",
+    "0x42645c": "dff8a437",
+    "0x426460": "9842",
+    "0x426462": "01d0",
+    "0x426468": "5068",
+    "0x42646a": "dff89823",
+    "0x42646e": "12eb0033",
+    "0x426472": "d3f80032",
+    "0x426476": "1943",
+    "0x426478": "12eb0032",
+    "0x42647c": "c2f80012",
+    "0x426480": "0020",
+    "0x426506": "0200",
+    "0x426508": "0028",
+    "0x42650a": "06d0",
+    "0x42651a": "0220",
+    "0x42651c": "0ae0",
+    "0x426534": "7047",
+    "0x42650c": "0068",
+    "0x42650e": "20f07e40",
+    "0x426512": "dff8f036",
+    "0x426516": "9842",
+    "0x426518": "01d0",
+    "0x42651e": "5068",
+    "0x426520": "b84a",
+    "0x426522": "12eb0033",
+    "0x426526": "c3f80812",
+    "0x42652a": "12eb0032",
+    "0x42652e": "d2f80402",
+    "0x426532": "0020",
+    "0x42516c": "10b5",
+    "0x42516e": "0400",
+    "0x425170": "0028",
+    "0x425172": "05d0",
+    "0x425180": "0220",
+    "0x425182": "0ee0",
+    "0x4251a2": "10bd",
+    "0x425174": "0168",
+    "0x425176": "21f07e41",
+    "0x42517a": "0d4a",
+    "0x42517c": "9142",
+    "0x42517e": "01d0",
+    "0x425184": "2168",
+    "0x425186": "c1f34061",
+    "0x42518a": "0029",
+    "0x42518c": "01d0",
+    "0x425192": "2000",
+    "0x425194": "0168",
+    "0x425196": "31f08071",
+    "0x42519a": "0160",
+    "0x42519c": "0020",
+    "0x42519e": "6060",
+    "0x4251a0": "0020",
+    "0x42518e": "fff7afff",
+    "0x4250f0": "38b5",
+    "0x4250f2": "0400",
+    "0x4250f4": "2500",
+    "0x4250f6": "002c",
+    "0x4250f8": "05d0",
+    "0x4250fa": "2068",
+    "0x4250fc": "20f07e40",
+    "0x425100": "2b49",
+    "0x425102": "8842",
+    "0x425104": "01d0",
+    "0x42510a": "2868",
+    "0x42510c": "c0f34060",
+    "0x425110": "0028",
+    "0x425112": "01d1",
+    "0x425118": "d5f84008",
+    "0x42511c": "0028",
+    "0x42511e": "02d1",
+    "0x425120": "286a",
+    "0x425122": "0028",
+    "0x425124": "01d0",
+    "0x42512a": "a869",
+    "0x42512c": "0028",
+    "0x42512e": "07d0",
+    "0x425140": "2800",
+    "0x425142": "0168",
+    "0x425144": "31f00071",
+    "0x425148": "0160",
+    "0x42514a": "6868",
+    "0x42514c": "1549",
+    "0x42514e": "11eb0031",
+    "0x425152": "d1f89000",
+    "0x425156": "c007",
+    "0x425158": "03d5",
+    "0x425162": "0020",
+    "0x425164": "32bd",
+    "0x425066": "10b5",
+    "0x425068": "0400",
+    "0x42506a": "0028",
+    "0x42506c": "05d0",
+    "0x42506e": "0068",
+    "0x425070": "20f07e40",
+    "0x425074": "4e49",
+    "0x425076": "8842",
+    "0x425078": "01d0",
+    "0x42507e": "207a",
+    "0x425080": "0028",
+    "0x425082": "01d1",
+    "0x425084": "0720",
+    "0x425086": "32e0",
+    "0x4250ee": "10bd",
+    "0x425088": "a069",
+    "0x42508a": "0028",
+    "0x42508c": "2ad0",
+    "0x4250e4": "2068",
+    "0x4250e6": "50f00070",
+    "0x4250ea": "2060",
+    "0x4250ec": "0020",
+    "0x42508e": "0020",
+    "0x425090": "e061",
+    "0x425092": "0020",
+    "0x425094": "2062",
+    "0x425096": "a269",
+    "0x425098": "6169",
+    "0x42509a": "6068",
+    "0x42509c": "fef744ff",
+    "0x4250a0": "4648",
+    "0x4250a2": "6168",
+    "0x4250a4": "3f4a",
+    "0x4250a6": "12eb0132",
+    "0x4250aa": "c2f8b402",
+    "0x4250ae": "0020",
+    "0x4250b0": "c4f85408",
+    "0x4250b4": "0020",
+    "0x4250b6": "84f83c08",
+    "0x4250ba": "0020",
+    "0x4250bc": "c4f84408",
+    "0x4250c0": "0020",
+    "0x4250c2": "c4f83808",
+    "0x4250c6": "0020",
+    "0x4250c8": "c4f84008",
+    "0x4250cc": "0020",
+    "0x4250ce": "84f82c08",
+    "0x4250d2": "0020",
+    "0x4250d4": "c4f83008",
+    "0x4250d8": "0120",
+    "0x4250da": "84f82d08",
+    "0x4250de": "0020",
+    "0x4250e0": "c4f85c08",
+    "0x42515a": "d5f8cc08",
+    "0x42515e": "f8f72ff8",
+    "0x425126": "0320",
+    "0x425128": "1ce0",
+    "0x425130": "2000",
+    "0x425132": "fef73bff",
+    "0x425136": "0028",
+    "0x425138": "14d1",
+    "0x42513a": "2000",
+    "0x42513c": "fef70aff",
+    "0x41fdde": "0200",
+    "0x41fde0": "12b2",
+    "0x41fde2": "002a",
+    "0x41fde4": "05d4",
+    "0x41fde6": "0901",
+    "0x41fde8": "dff8842a",
+    "0x41fdec": "00b2",
+    "0x41fdee": "1154",
+    "0x41fdf0": "08e0",
+    "0x41fe04": "7047",
+    "0x41fdf2": "0901",
+    "0x41fdf4": "dff8082c",
+    "0x41fdf8": "00b2",
+    "0x41fdfa": "10f00f00",
+    "0x41fdfe": "1044",
+    "0x41fe00": "00f8041c",
+    "0x41fdc0": "0100",
+    "0x41fdc2": "09b2",
+    "0x41fdc4": "0029",
+    "0x41fdc6": "09d4",
+    "0x41fdc8": "0122",
+    "0x41fdca": "10f01f01",
+    "0x41fdce": "8a40",
+    "0x41fdd0": "dff8281c",
+    "0x41fdd4": "00b2",
+    "0x41fdd6": "4009",
+    "0x41fdd8": "41f82020",
+    "0x41fddc": "7047",
+    "0x41b8e0": "eff31080",
+    "0x41b8e4": "62b6",
+    "0x41b8e6": "7047"
+  },
+  "comparisons": [
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 0,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 0,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 0,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 0,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 1,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 1,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 1,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 1,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 2,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 2,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 2,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 2,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 0,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 0,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 0,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 0,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 1,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 1,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 1,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 1,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 2,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 2,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 2,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 2,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 0,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 0,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 0,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 0,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 2,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 2,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 2,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 2,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 0,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 0,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 0,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 0,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 1,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 1,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 1,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 1,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 2,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 2,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 2,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 2,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 0,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 0,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 0,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 0,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 1,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 1,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 1,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 1,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 2,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 2,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 2,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 2,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 0,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 0,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 0,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 0,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 1,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 1,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 1,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 1,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 2,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 2,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 2,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 2,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 0,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 0,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 0,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 0,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 2,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 2,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 2,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 2,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 0,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 0,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 0,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 0,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 1,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 1,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 1,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 1,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 2,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 2,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 2,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_enable",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 2,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 0,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 0,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 0,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 0,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 1,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 1,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 1,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 1,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 2,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 2,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 2,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 2,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 0,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 0,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 0,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 0,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 1,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 1,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 1,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 1,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 2,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 2,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 2,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 2,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 0,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 0,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 0,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 0,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 2,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 2,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 2,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 2,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 0,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 0,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 0,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 0,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 1,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 1,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 1,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 1,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 2,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 2,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 2,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 2,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 0,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 0,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 0,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 0,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 1,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 1,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 1,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 1,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 2,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 2,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 2,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 2,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 0,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 0,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 0,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 0,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 1,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 1,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 1,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 1,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 2,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 2,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 2,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 2,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 0,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 0,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 0,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 0,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 2,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 2,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 2,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 2,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 0,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 0,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 0,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 0,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 1,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 1,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 1,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 1,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 2,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 2,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 2,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_interrupt_clear",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 2,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 0,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 0,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 0,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 0,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 1,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 1,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 1,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 1,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 2,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 2,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 2,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 2,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 0,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 0,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 0,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 0,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 1,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 1,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 1,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 1,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 2,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 2,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 2,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 2,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 0,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 0,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 0,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 0,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 2,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 2,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 2,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 2,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 0,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 0,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 0,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 0,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 1,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 1,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 1,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 1,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 2,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 2,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 2,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        0,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 2,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 0,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 0,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 0,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 0,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 1,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 1,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 1,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 1,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 2,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 2,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 2,
+        "status": 0
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 0,
+        "module": 2,
+        "status": 7
+      },
+      "result": 2,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 0,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 0,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 0,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 0,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 1,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 1,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 1,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 1,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 2,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 2,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 2,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 29277886,
+        "module": 2,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 0,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 0,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 0,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 0,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 2,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 2,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 2,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 2,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 0,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 0,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 0,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 0,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 1,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 1,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 1,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 1,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 2,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        0
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 2,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 2,
+        "status": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_deinitialize",
+      "args": [
+        536895488,
+        42330
+      ],
+      "fixture": {
+        "magic": 4290690750,
+        "module": 2,
+        "status": 7
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 0,
+        "cq": 0,
+        "busy": 0,
+        "delayed": 0
+      },
+      "result": 7,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 0,
+        "cq": 0,
+        "busy": 0,
+        "delayed": 1
+      },
+      "result": 7,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 0,
+        "cq": 0,
+        "busy": 0,
+        "delayed": 0
+      },
+      "result": 7,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 0,
+        "cq": 0,
+        "busy": 0,
+        "delayed": 1
+      },
+      "result": 7,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 0,
+        "cq": 0,
+        "busy": 1,
+        "delayed": 0
+      },
+      "result": 7,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 0,
+        "cq": 0,
+        "busy": 1,
+        "delayed": 1
+      },
+      "result": 7,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 0,
+        "cq": 0,
+        "busy": 1,
+        "delayed": 0
+      },
+      "result": 7,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 0,
+        "cq": 0,
+        "busy": 1,
+        "delayed": 1
+      },
+      "result": 7,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 0,
+        "cq": 0,
+        "busy": 2,
+        "delayed": 0
+      },
+      "result": 7,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 0,
+        "cq": 0,
+        "busy": 2,
+        "delayed": 1
+      },
+      "result": 7,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 0,
+        "cq": 0,
+        "busy": 2,
+        "delayed": 0
+      },
+      "result": 7,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 0,
+        "cq": 0,
+        "busy": 2,
+        "delayed": 1
+      },
+      "result": 7,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 0,
+        "cq": 4,
+        "busy": 0,
+        "delayed": 0
+      },
+      "result": 7,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 0,
+        "cq": 4,
+        "busy": 0,
+        "delayed": 1
+      },
+      "result": 7,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 0,
+        "cq": 4,
+        "busy": 0,
+        "delayed": 0
+      },
+      "result": 7,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 0,
+        "cq": 4,
+        "busy": 0,
+        "delayed": 1
+      },
+      "result": 7,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 0,
+        "cq": 4,
+        "busy": 1,
+        "delayed": 0
+      },
+      "result": 7,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 0,
+        "cq": 4,
+        "busy": 1,
+        "delayed": 1
+      },
+      "result": 7,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 0,
+        "cq": 4,
+        "busy": 1,
+        "delayed": 0
+      },
+      "result": 7,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 0,
+        "cq": 4,
+        "busy": 1,
+        "delayed": 1
+      },
+      "result": 7,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 0,
+        "cq": 4,
+        "busy": 2,
+        "delayed": 0
+      },
+      "result": 7,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 0,
+        "cq": 4,
+        "busy": 2,
+        "delayed": 1
+      },
+      "result": 7,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 0,
+        "cq": 4,
+        "busy": 2,
+        "delayed": 0
+      },
+      "result": 7,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 0,
+        "cq": 4,
+        "busy": 2,
+        "delayed": 1
+      },
+      "result": 7,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 1,
+        "cq": 0,
+        "busy": 0,
+        "delayed": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 1,
+        "cq": 0,
+        "busy": 0,
+        "delayed": 1
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 1,
+        "cq": 0,
+        "busy": 0,
+        "delayed": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 1,
+        "cq": 0,
+        "busy": 0,
+        "delayed": 1
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 1,
+        "cq": 0,
+        "busy": 1,
+        "delayed": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 1,
+        "cq": 0,
+        "busy": 1,
+        "delayed": 1
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 1,
+        "cq": 0,
+        "busy": 1,
+        "delayed": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 1,
+        "cq": 0,
+        "busy": 1,
+        "delayed": 1
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 1,
+        "cq": 0,
+        "busy": 2,
+        "delayed": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 1,
+        "cq": 0,
+        "busy": 2,
+        "delayed": 1
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 1,
+        "cq": 0,
+        "busy": 2,
+        "delayed": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 1,
+        "cq": 0,
+        "busy": 2,
+        "delayed": 1
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 1,
+        "cq": 4,
+        "busy": 0,
+        "delayed": 0
+      },
+      "result": 0,
+      "events": [
+        [
+          "cq-init",
+          1,
+          536901376,
+          4
+        ]
+      ]
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 1,
+        "cq": 4,
+        "busy": 0,
+        "delayed": 1
+      },
+      "result": 0,
+      "events": [
+        [
+          "cq-init",
+          1,
+          536901376,
+          4
+        ]
+      ]
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 1,
+        "cq": 4,
+        "busy": 0,
+        "delayed": 0
+      },
+      "result": 0,
+      "events": [
+        [
+          "cq-init",
+          1,
+          536901376,
+          4
+        ]
+      ]
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 1,
+        "cq": 4,
+        "busy": 0,
+        "delayed": 1
+      },
+      "result": 0,
+      "events": [
+        [
+          "cq-init",
+          1,
+          536901376,
+          4
+        ]
+      ]
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 1,
+        "cq": 4,
+        "busy": 1,
+        "delayed": 0
+      },
+      "result": 0,
+      "events": [
+        [
+          "cq-init",
+          1,
+          536901376,
+          4
+        ]
+      ]
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 1,
+        "cq": 4,
+        "busy": 1,
+        "delayed": 1
+      },
+      "result": 0,
+      "events": [
+        [
+          "cq-init",
+          1,
+          536901376,
+          4
+        ]
+      ]
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 1,
+        "cq": 4,
+        "busy": 1,
+        "delayed": 0
+      },
+      "result": 0,
+      "events": [
+        [
+          "cq-init",
+          1,
+          536901376,
+          4
+        ]
+      ]
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 1,
+        "cq": 4,
+        "busy": 1,
+        "delayed": 1
+      },
+      "result": 0,
+      "events": [
+        [
+          "cq-init",
+          1,
+          536901376,
+          4
+        ]
+      ]
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 1,
+        "cq": 4,
+        "busy": 2,
+        "delayed": 0
+      },
+      "result": 0,
+      "events": [
+        [
+          "cq-init",
+          1,
+          536901376,
+          4
+        ]
+      ]
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 1,
+        "cq": 4,
+        "busy": 2,
+        "delayed": 1
+      },
+      "result": 0,
+      "events": [
+        [
+          "cq-init",
+          1,
+          536901376,
+          4
+        ]
+      ]
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 1,
+        "cq": 4,
+        "busy": 2,
+        "delayed": 0
+      },
+      "result": 0,
+      "events": [
+        [
+          "cq-init",
+          1,
+          536901376,
+          4
+        ]
+      ]
+    },
+    {
+      "entry": "opencfw_hal_mspi_enable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 1,
+        "cq": 4,
+        "busy": 2,
+        "delayed": 1
+      },
+      "result": 0,
+      "events": [
+        [
+          "cq-init",
+          1,
+          536901376,
+          4
+        ]
+      ]
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 0,
+        "cq": 0,
+        "busy": 0,
+        "delayed": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 0,
+        "cq": 0,
+        "busy": 0,
+        "delayed": 1
+      },
+      "result": 0,
+      "events": [
+        [
+          "delay-us-argument",
+          17
+        ]
+      ]
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 0,
+        "cq": 0,
+        "busy": 0,
+        "delayed": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 0,
+        "cq": 0,
+        "busy": 0,
+        "delayed": 1
+      },
+      "result": 0,
+      "events": [
+        [
+          "delay-us-argument",
+          17
+        ]
+      ]
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 0,
+        "cq": 0,
+        "busy": 1,
+        "delayed": 0
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 0,
+        "cq": 0,
+        "busy": 1,
+        "delayed": 1
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 0,
+        "cq": 0,
+        "busy": 1,
+        "delayed": 0
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 0,
+        "cq": 0,
+        "busy": 1,
+        "delayed": 1
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 0,
+        "cq": 0,
+        "busy": 2,
+        "delayed": 0
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 0,
+        "cq": 0,
+        "busy": 2,
+        "delayed": 1
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 0,
+        "cq": 0,
+        "busy": 2,
+        "delayed": 0
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 0,
+        "cq": 0,
+        "busy": 2,
+        "delayed": 1
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 0,
+        "cq": 4,
+        "busy": 0,
+        "delayed": 0
+      },
+      "result": 0,
+      "events": [
+        [
+          "cq-disable",
+          536895488
+        ],
+        [
+          "cq-term",
+          536895488
+        ]
+      ]
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 0,
+        "cq": 4,
+        "busy": 0,
+        "delayed": 1
+      },
+      "result": 0,
+      "events": [
+        [
+          "cq-disable",
+          536895488
+        ],
+        [
+          "cq-term",
+          536895488
+        ],
+        [
+          "delay-us-argument",
+          17
+        ]
+      ]
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 0,
+        "cq": 4,
+        "busy": 0,
+        "delayed": 0
+      },
+      "result": 7,
+      "events": [
+        [
+          "cq-disable",
+          536895488
+        ]
+      ]
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 0,
+        "cq": 4,
+        "busy": 0,
+        "delayed": 1
+      },
+      "result": 7,
+      "events": [
+        [
+          "cq-disable",
+          536895488
+        ]
+      ]
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 0,
+        "cq": 4,
+        "busy": 1,
+        "delayed": 0
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 0,
+        "cq": 4,
+        "busy": 1,
+        "delayed": 1
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 0,
+        "cq": 4,
+        "busy": 1,
+        "delayed": 0
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 0,
+        "cq": 4,
+        "busy": 1,
+        "delayed": 1
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 0,
+        "cq": 4,
+        "busy": 2,
+        "delayed": 0
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 0,
+        "cq": 4,
+        "busy": 2,
+        "delayed": 1
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 0,
+        "cq": 4,
+        "busy": 2,
+        "delayed": 0
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 0,
+        "cq": 4,
+        "busy": 2,
+        "delayed": 1
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 1,
+        "cq": 0,
+        "busy": 0,
+        "delayed": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 1,
+        "cq": 0,
+        "busy": 0,
+        "delayed": 1
+      },
+      "result": 0,
+      "events": [
+        [
+          "delay-us-argument",
+          17
+        ]
+      ]
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 1,
+        "cq": 0,
+        "busy": 0,
+        "delayed": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 1,
+        "cq": 0,
+        "busy": 0,
+        "delayed": 1
+      },
+      "result": 0,
+      "events": [
+        [
+          "delay-us-argument",
+          17
+        ]
+      ]
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 1,
+        "cq": 0,
+        "busy": 1,
+        "delayed": 0
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 1,
+        "cq": 0,
+        "busy": 1,
+        "delayed": 1
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 1,
+        "cq": 0,
+        "busy": 1,
+        "delayed": 0
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 1,
+        "cq": 0,
+        "busy": 1,
+        "delayed": 1
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 1,
+        "cq": 0,
+        "busy": 2,
+        "delayed": 0
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 1,
+        "cq": 0,
+        "busy": 2,
+        "delayed": 1
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 1,
+        "cq": 0,
+        "busy": 2,
+        "delayed": 0
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 1,
+        "cq": 0,
+        "busy": 2,
+        "delayed": 1
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 1,
+        "cq": 4,
+        "busy": 0,
+        "delayed": 0
+      },
+      "result": 0,
+      "events": [
+        [
+          "cq-disable",
+          536895488
+        ],
+        [
+          "cq-term",
+          536895488
+        ]
+      ]
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 1,
+        "cq": 4,
+        "busy": 0,
+        "delayed": 1
+      },
+      "result": 0,
+      "events": [
+        [
+          "cq-disable",
+          536895488
+        ],
+        [
+          "cq-term",
+          536895488
+        ],
+        [
+          "delay-us-argument",
+          17
+        ]
+      ]
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 1,
+        "cq": 4,
+        "busy": 0,
+        "delayed": 0
+      },
+      "result": 7,
+      "events": [
+        [
+          "cq-disable",
+          536895488
+        ]
+      ]
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 1,
+        "cq": 4,
+        "busy": 0,
+        "delayed": 1
+      },
+      "result": 7,
+      "events": [
+        [
+          "cq-disable",
+          536895488
+        ]
+      ]
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 1,
+        "cq": 4,
+        "busy": 1,
+        "delayed": 0
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 1,
+        "cq": 4,
+        "busy": 1,
+        "delayed": 1
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 1,
+        "cq": 4,
+        "busy": 1,
+        "delayed": 0
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 1,
+        "cq": 4,
+        "busy": 1,
+        "delayed": 1
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 1,
+        "cq": 4,
+        "busy": 2,
+        "delayed": 0
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 0,
+        "configured": 1,
+        "cq": 4,
+        "busy": 2,
+        "delayed": 1
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 1,
+        "cq": 4,
+        "busy": 2,
+        "delayed": 0
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_hal_mspi_disable",
+      "args": [
+        536895488
+      ],
+      "fixture": {
+        "magic": 62832318,
+        "module": 1,
+        "status": 7,
+        "configured": 1,
+        "cq": 4,
+        "busy": 2,
+        "delayed": 1
+      },
+      "result": 3,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        0,
+        0
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        0,
+        1
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        0,
+        4
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        0,
+        15
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        0,
+        16
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        0,
+        255
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        21,
+        0
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        21,
+        1
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        21,
+        4
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        21,
+        15
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        21,
+        16
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        21,
+        255
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        31,
+        0
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        31,
+        1
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        31,
+        4
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        31,
+        15
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        31,
+        16
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        31,
+        255
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        32,
+        0
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        32,
+        1
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        32,
+        4
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        32,
+        15
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        32,
+        16
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        32,
+        255
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        63,
+        0
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        63,
+        1
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        63,
+        4
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        63,
+        15
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        63,
+        16
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        63,
+        255
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        255,
+        0
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        255,
+        1
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        255,
+        4
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        255,
+        15
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        255,
+        16
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        255,
+        255
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        65535,
+        0
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        65535,
+        1
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        65535,
+        4
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        65535,
+        15
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        65535,
+        16
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        65535,
+        255
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        65532,
+        0
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        65532,
+        1
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        65532,
+        4
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        65532,
+        15
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        65532,
+        16
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        65532,
+        255
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        65557,
+        0
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        65557,
+        1
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        65557,
+        4
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        65557,
+        15
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        65557,
+        16
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        65557,
+        255
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        98304,
+        0
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        98304,
+        1
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        98304,
+        4
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        98304,
+        15
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        98304,
+        16
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_priority",
+      "args": [
+        98304,
+        255
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_enable",
+      "args": [
+        0
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_enable",
+      "args": [
+        21
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_enable",
+      "args": [
+        31
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_enable",
+      "args": [
+        32
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_enable",
+      "args": [
+        63
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_enable",
+      "args": [
+        255
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_enable",
+      "args": [
+        65535
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_enable",
+      "args": [
+        65557
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_interrupt_enable",
+      "args": [
+        98304
+      ],
+      "fixture": {},
+      "result": null,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_irq_guard_initialize",
+      "args": [],
+      "fixture": {
+        "primask": 0
+      },
+      "result": 0,
+      "events": []
+    },
+    {
+      "entry": "opencfw_bl_irq_guard_initialize",
+      "args": [],
+      "fixture": {
+        "primask": 1
+      },
+      "result": 1,
+      "events": []
+    }
+  ],
+  "limits": [
+    "MMIO/NVIC registers are ordinary synthetic RAM: writes/read addresses and results tested, no hardware W1C semantics or interrupt delivery.",
+    "Actual enable/disable/deinitialize execute. CQ init/disable/terminate and delay-us are observed external call cuts; no CQ hardware progress or delay timing proved. Deinitialize ignores actual disable failure as stock does.",
+    "Bounded valid module indices0..2 only; raw stock has no index range guard. Priority negative exception numbers use stock low nibble mapping. PRIMASK read+enable is unconditional stock assembly, no decompiler privilege checks.",
+    "No byte identity or physical boot."
+  ]
+}

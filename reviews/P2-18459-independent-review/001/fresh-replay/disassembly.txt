@@ -1,0 +1,67 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp_kaxhpmk/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00460090 <.text>:
+  460090:	2800      	cmp	r0, #0
+  460092:	d102      	bne.n	46009a <.text+0xa>
+  460094:	f05f 30ff 	movs.w	r0, #4294967295	@ 0xffffffff
+  460098:	e00b      	b.n	4600b2 <.text+0x22>
+  46009a:	6801      	ldr	r1, [r0, #0]
+  46009c:	2900      	cmp	r1, #0
+  46009e:	d102      	bne.n	4600a6 <.text+0x16>
+  4600a0:	f05f 30ff 	movs.w	r0, #4294967295	@ 0xffffffff
+  4600a4:	e005      	b.n	4600b2 <.text+0x22>
+  4600a6:	491e      	ldr	r1, [pc, #120]	@ (460120 <.text+0x90>)
+  4600a8:	6008      	str	r0, [r1, #0]
+  4600aa:	6800      	ldr	r0, [r0, #0]
+  4600ac:	491b      	ldr	r1, [pc, #108]	@ (46011c <.text+0x8c>)
+  4600ae:	6008      	str	r0, [r1, #0]
+  4600b0:	2000      	movs	r0, #0
+  4600b2:	4770      	bx	lr
+  4600b4:	b570      	push	{r4, r5, r6, lr}
+  4600b6:	0005      	movs	r5, r0
+  4600b8:	4c19      	ldr	r4, [pc, #100]	@ (460120 <.text+0x90>)
+  4600ba:	6820      	ldr	r0, [r4, #0]
+  4600bc:	2800      	cmp	r0, #0
+  4600be:	d102      	bne.n	4600c6 <.text+0x36>
+  4600c0:	f05f 30ff 	movs.w	r0, #4294967295	@ 0xffffffff
+  4600c4:	e01e      	b.n	460104 <.text+0x74>
+  4600c6:	2600      	movs	r6, #0
+  4600c8:	e000      	b.n	4600cc <.text+0x3c>
+  4600ca:	1c76      	adds	r6, r6, #1
+  4600cc:	6820      	ldr	r0, [r4, #0]
+  4600ce:	0031      	movs	r1, r6
+  4600d0:	b289      	uxth	r1, r1
+  4600d2:	f850 0021 	ldr.w	r0, [r0, r1, lsl #2]
+  4600d6:	2800      	cmp	r0, #0
+  4600d8:	d012      	beq.n	460100 <.text+0x70>
+  4600da:	0029      	movs	r1, r5
+  4600dc:	6820      	ldr	r0, [r4, #0]
+  4600de:	0032      	movs	r2, r6
+  4600e0:	b292      	uxth	r2, r2
+  4600e2:	f850 0022 	ldr.w	r0, [r0, r2, lsl #2]
+  4600e6:	6800      	ldr	r0, [r0, #0]
+  4600e8:	f00c fcf0 	bl	46cacc <.text+0xca3c>
+  4600ec:	2800      	cmp	r0, #0
+  4600ee:	d1ec      	bne.n	4600ca <.text+0x3a>
+  4600f0:	6820      	ldr	r0, [r4, #0]
+  4600f2:	b2b6      	uxth	r6, r6
+  4600f4:	f850 0026 	ldr.w	r0, [r0, r6, lsl #2]
+  4600f8:	4908      	ldr	r1, [pc, #32]	@ (46011c <.text+0x8c>)
+  4600fa:	6008      	str	r0, [r1, #0]
+  4600fc:	2000      	movs	r0, #0
+  4600fe:	e001      	b.n	460104 <.text+0x74>
+  460100:	f05f 30ff 	movs.w	r0, #4294967295	@ 0xffffffff
+  460104:	bd70      	pop	{r4, r5, r6, pc}
+  460106:	4905      	ldr	r1, [pc, #20]	@ (46011c <.text+0x8c>)
+  460108:	6808      	ldr	r0, [r1, #0]
+  46010a:	2800      	cmp	r0, #0
+  46010c:	d101      	bne.n	460112 <.text+0x82>
+  46010e:	2000      	movs	r0, #0
+  460110:	e001      	b.n	460116 <.text+0x86>
+  460112:	6808      	ldr	r0, [r1, #0]
+  460114:	6800      	ldr	r0, [r0, #0]
+  460116:	4770      	bx	lr

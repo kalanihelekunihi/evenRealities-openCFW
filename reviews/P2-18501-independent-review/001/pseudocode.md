@@ -1,0 +1,4 @@
+# Mode0 prefix460746..4607B0
+Partial;unaccepted.106 instructionbytes,inherits64frame/locals36,R4mode,R5length,R6input from460638(othermode4excludedbypriorbranch). FullR4!=0→460D54externalepilogue. Zero→fresh43D0CE bit1clear→460774;setorderedSP8=retainedR5,SP4=wordliteral4612F4,SP0=403,R3=wordliteral4611B8,R2=wordliteral4611BC,R1=wordliteral4611C0,R0=4;43D574. 460774fresh43D0CE bit0set→460784;otherwiseSEPARATE43D0CE bit2clear→460794,set460784. 460784:R1=wordliteral461348,R3=R5,R2=R1,R0=0x10400000;43CE9E.
+460794:R1=892,R2=0,R7=wordliteral46134C,R4=R7 REPLACESmode,R0=R4;43C0E4 liveR3. ThenR2=retainedR5,R1=retainedR6,R0=SP;48F49C liveR3. StackpointeratlocalsSP0,previousdiagnosticsmayhavewrittenSP0/4/8;childcontractunresolved,no assumptionsabouttransformorinitializedbytes. No inputnull/lengthguardhere. Freshmaskcallsremainseparate. Next4607B0continuation/epilogueoutside span.
+No C,gate/source admission,whole coverage or simulator/hardware proof.

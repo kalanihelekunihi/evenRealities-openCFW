@@ -91,3 +91,5 @@ DFU thread allocation at callback 42ddae, thread flags and logger. The callback
 fixture supplies its decoded pointer; context handles are synthetic. Existing
 full startup stops before exception return/task execution. No hardware timing,
 boot success, source completeness or byte identity is claimed.
+
+Event-runtime initialization42e53c is now reconstructed separately in event_runtime.c: 15x8-byte queue, one-shot timer, mutex, priority38 thread with3072-byte static stack. Allocation failures log and continue; replacing an old thread ignores termination failure. Event-loop bodies42e644/42e686/42e6f4 are in event_dispatch.c. Messages store argument then callback (two32-bit words). Expired timer callbacks are removed before enqueue; queue failure or absent thread drops them. Mutex failure logs but still processes/releases. Empty table selectsFFFFFFFF and starts the timer because the stock guard excludes7FFFFFFF and zero. Counts remain raw ticks. Current fixtures prove32 initializer cases/262 bytes and445 dispatch cases/588 bytes with synthetic queue/mutex/timer/logger/callback providers; no real scheduling or timer delivery is established.

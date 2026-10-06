@@ -1,0 +1,19 @@
+{
+  "review_id": "P2-18521-independent-review",
+  "status": "partial",
+  "accepted": false,
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-shared-pre-body-repeat-lookups-source-stride-forty-four-and-word-eight-gate-18922-map/001",
+  "pinned_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "checks": [
+    "fresh 104-byte GNU replay",
+    "instruction/reference manifests match",
+    "fresh masks, lookup calls and field read order checked",
+    "unconditional R9=44 source arithmetic and word+8 gate verified",
+    "R8 body reset cross-reference verified"
+  ],
+  "limitations": [
+    "alternative continuation outside span",
+    "child semantics unresolved",
+    "no global coverage claim"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "review_id": "P2-18493-independent-review",
+  "status": "partial",
+  "accepted": false,
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-second-diagnostic-global-clear-and-saved-slot-return-18894-map/001",
+  "pinned_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "checks": [
+    "fresh 70-byte GNU replay",
+    "instruction/reference manifests match",
+    "inherited frame and fresh masks checked",
+    "diagnostic R2/R1 argument order verified",
+    "global clear and POP saved-slot return paths verified"
+  ],
+  "limitations": [
+    "inherited entry routes remain partial",
+    "child semantics/global ownership unresolved",
+    "no global coverage claim"
+  ]
+}

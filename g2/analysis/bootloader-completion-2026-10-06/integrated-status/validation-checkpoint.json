@@ -1,0 +1,102 @@
+{
+  "utc": "2026-10-06T20:31:03.419354+00:00",
+  "combined_result": "PASS",
+  "combined_exit_code": 0,
+  "combined_command": "make -C g2/components/bootloader/thread_creation completion-regressions",
+  "combined_log": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/combined-runtime-storage-final.log",
+  "combined_log_sha256": "c1ba3393f1e4e6de94fe04bc601d3b888d47387e3dd7cfedf4f3364a5710c37a",
+  "execution_note": "Full current aggregate completed exit0, without old-target suppression. Native M55 compilation and all aggregate comparisons passed. Sources/linkers were held fixed during the run.",
+  "receipts": [
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-compatible/comparison.json",
+      "sha256": "074e055eb0d2b86c2be8f7c644279176ba3cefed82d29379e9a1e8dd6e3e42e2",
+      "status": "PASS",
+      "cases": 2,
+      "original_instruction_bytes": 24382,
+      "elf_identities": {
+        "elf_sha256": "044cfcd6ca781fb29642df80437bfb625b182e8aab804050b2ac1068a174e2e8",
+        "seed_elf_sha256": "e6ba6916ee417e9efec1f4dc90a50f8ce7777f0e2ad8f976e6d2e27856072b78"
+      },
+      "verified_current_source_bindings": 197
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-runtime-compatible/comparison.json",
+      "sha256": "1b26ae1b3c45ab1c9994e71650b28a654def4acd5fd9b9608f8145232d4302d4",
+      "status": "PASS",
+      "cases": 8,
+      "original_instruction_bytes": 11384,
+      "elf_identities": {
+        "elf_sha256": "152e639b974a7acec133052e4e73057e8fe3175eeece849b68bf385b283f9b78"
+      },
+      "verified_current_source_bindings": 244
+    },
+    {
+      "path": "g2/build/bootloader-completion/nor-runtime-compatible/comparison.json",
+      "sha256": "02720553a0317d0c0abc69d077ac39873a43c349f5a9b569e2fbcaf61e944ed0",
+      "status": "PASS",
+      "cases": 96,
+      "original_instruction_bytes": 116,
+      "elf_identities": {
+        "elf_sha256": "fe6b65a128bd1ae78e322ed0ac93e7583a5cc7c2361ec5ad1ce2401675ddd0c0"
+      },
+      "verified_current_source_bindings": 3
+    },
+    {
+      "path": "g2/build/bootloader-completion/mspi-leaves-compatible/comparison.json",
+      "sha256": "942a260e2207ce820b1951ec1bb1b97c1d92fabb67ed132fb64915270b8b14fc",
+      "status": "PASS",
+      "cases": 527,
+      "original_instruction_bytes": 704,
+      "elf_identities": {
+        "elf_sha256": "16502ac50caedc6b6451abc5d4f5cd9342b0fec8d4eacbce0f82836dbf3a2462"
+      },
+      "verified_current_source_bindings": 4
+    },
+    {
+      "path": "g2/build/bootloader-completion/mspi-blocking-compatible/comparison.json",
+      "sha256": "24aa38096fd1c4f7727e786893083e0f8b447181d505e709bf5c05c9c8e1da15",
+      "status": "PASS",
+      "cases": 722,
+      "original_instruction_bytes": 364,
+      "elf_identities": {
+        "elf_sha256": "e075fc29dfa582a17bd1d61219afd08b341ea7e8c2dbf4caa369ce21cd844dd8"
+      },
+      "verified_current_source_bindings": 3
+    },
+    {
+      "path": "g2/build/bootloader-completion/mspi-fifo-poll-compatible/comparison.json",
+      "sha256": "b9a66ee4740b51d6608111a0653c54df011b3d128c5a55f105512c64e61d6f24",
+      "status": "PASS",
+      "cases": 496,
+      "original_instruction_bytes": 300,
+      "elf_identities": {
+        "fifo_elf_sha256": "562f9e03fbceaceca54ca7acd87b50ab9f91b17068a4e00f0642714f15c4991c",
+        "poll_elf_sha256": "3a9c24be2b6b873ce297ec6dc3fd46ebb88cd3e6cc8996554f2dbc588a78e899"
+      },
+      "verified_current_source_bindings": 5
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/platform-control-runtime/out/mode-one.json",
+      "sha256": "78304c0c3f15296aa47f765b45fa400edc38325e807f9e793a7d3d0c163b5b0b",
+      "status": "PASS",
+      "cases": 171,
+      "original_instruction_bytes": 876,
+      "elf_identities": {
+        "source_elf_sha256": "40f679f1381c77bbee2b81c42120eed7f67d846c3ff4da8656cea33491b29a77"
+      },
+      "verified_current_source_bindings": 10
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/filesystem-update/boot-mount-differential.json",
+      "sha256": "9870ef19c6b26cd9bd19f8d007e4ae0d619047af8cdc9d551e28ce5d85e0eb35",
+      "status": "PASS",
+      "cases": 4,
+      "original_instruction_bytes": null,
+      "elf_identities": {
+        "source_elf_sha256": "60682897b6aaa1f9f848f5c68d48574a5a22197e90815d5e6589082971265ac2"
+      },
+      "verified_current_source_bindings": 5
+    }
+  ],
+  "scope": "Historical full-aggregate checkpoint before the native NOR/power follow-up. Source bindings were checked at that timestamp; newer source changes may differ. Focused follow-up receipts and limits are documented in nor-read-followup/REPORT.md."
+}

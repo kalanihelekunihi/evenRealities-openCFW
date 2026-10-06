@@ -1,0 +1,19 @@
+{
+  "review_id": "P2-18503-independent-review",
+  "status": "partial",
+  "accepted": false,
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-stack-transform-low-byte-result-and-fresh-error-pointer-diagnostics-18904-map/001",
+  "pinned_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "checks": [
+    "fresh 126-byte GNU replay",
+    "instruction/reference manifests match",
+    "inherited frame/stack calls verified",
+    "low-byte result gate checked",
+    "SP32 double-load/fallback and diagnostic mask routes checked"
+  ],
+  "limitations": [
+    "child semantics and stack contents unresolved",
+    "external continuations excluded",
+    "no global coverage claim"
+  ]
+}

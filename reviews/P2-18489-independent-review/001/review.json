@@ -1,0 +1,19 @@
+{
+  "review_id": "P2-18489-independent-review",
+  "status": "partial",
+  "accepted": false,
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-transform-failure-diagnostics-success-call-and-eighty-byte-frame-return-18890-map/001",
+  "pinned_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "checks": [
+    "fresh 92-byte GNU replay",
+    "instruction/reference manifests match",
+    "inherited frame and local diagnostic slots verified",
+    "fresh masks and SP20 child args/result tested",
+    "ADDSP52 and final R0 return behavior checked"
+  ],
+  "limitations": [
+    "child semantics unresolved",
+    "halfword stack content not assumed",
+    "broader routine outside span"
+  ]
+}

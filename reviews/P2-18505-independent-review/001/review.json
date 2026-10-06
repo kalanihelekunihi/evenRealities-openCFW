@@ -1,0 +1,19 @@
+{
+  "review_id": "P2-18505-independent-review",
+  "status": "partial",
+  "accepted": false,
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-negative-one-exit-header-register-replacement-and-diagnostic-stack-arguments-18906-map/001",
+  "pinned_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "checks": [
+    "fresh 106-byte GNU replay",
+    "instruction/reference manifests match",
+    "negative-one exit checked",
+    "ordered header loads/register replacements verified",
+    "fresh masks and local stack diagnostic/second logger args verified"
+  ],
+  "limitations": [
+    "subsequent child and epilogue outside span",
+    "callee semantics unresolved",
+    "no global coverage claim"
+  ]
+}

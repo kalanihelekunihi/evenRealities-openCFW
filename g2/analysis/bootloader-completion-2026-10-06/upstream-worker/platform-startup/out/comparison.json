@@ -1,0 +1,889 @@
+{
+  "status": "PASS",
+  "cases": 2,
+  "distinct_original_trace_bytes": 568,
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "elf_sha256": "54546eb708f7503091effd94a3a52a3ae42f751697f627c75954ab6ea20e7dce",
+  "source_sha256": {
+    "g2/components/bootloader/platform_startup/platform_startup.c": "45efd567e793079ba58ec1bb8704d789b51be7a136316b1284cf59abc6969622",
+    "g2/components/bootloader/platform_startup/platform_startup.h": "6807f5060e28b8ad3fc77f74940cb5811522b14ac6e47e370222bfbbd921ce71",
+    "g2/components/bootloader/platform_control/runtime.c": "dba157e3638495272106bf40da47a111cd915bcbc35300015eba2dc92ebbc458",
+    "g2/components/bootloader/clock_manager/clock_class_providers.c": "71a7210ba488db0b1e50739bd9448fe2fd82be6e4b7bf96cf2e82514fc197848",
+    "g2/components/bootloader/main_init/main_init.c": "ce3d93d0065d60ce53b5ae7ed44ebf7089fd45f502af37c928923957bac1433a",
+    "g2/components/bootloader/startup/initialize.c": "3ad0388b5d00242fab034766b763aaf062a2438ac58fb7d1976c219c67d36b86",
+    "g2/components/bootloader/startup/record_dispatch.c": "4ae73092a684d52c3cf0aa8a22342e5d447c9bb1ecf8a8947ca23e4db7ebf2fd",
+    "g2/components/bootloader/startup/record_adapters.S": "80c8715af940f0882cca10af8a888a7f558214bb840ece23c8f1102763fc844c",
+    "g2/components/bootloader/startup/system_entry.c": "611dc555059aad35d7564306d68175765708845cc43f374f32f5888d040cffde",
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/platform-startup/verify_platform_startup.py": "0873b71290f6b3b54e63956d55e0353eb4de8088764e42585d8b2c3c64bcd6b2",
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/platform-startup/platform_startup.ld": "fc74a813063a8804d5509b8c6ebb02e754567f7a0c84f48bc7d9513fb22f08a5",
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/platform-startup/provider_cuts.c": "dda789da6c926c03970c725dca3388195b7ce7b8c505efc763b40984e1ca0f8b"
+  },
+  "source_machine_exec_ranges": [
+    [
+      "0x10000",
+      "0x10414"
+    ],
+    [
+      "0x415326",
+      "0x41532c"
+    ],
+    [
+      "0x431e38",
+      "0x431e3e"
+    ]
+  ],
+  "comparisons": [
+    {
+      "mode_status": 0,
+      "scatter_row_table_address": "0x20000454",
+      "row1_before_call": [
+        "0x1",
+        "0x0",
+        "0x433d98",
+        "0x200003f4",
+        "0x20000424",
+        "0x0",
+        "0x0"
+      ],
+      "row1_after_call": [
+        "0x1",
+        "0x0",
+        "0x433d98",
+        "0x200003f4",
+        "0x20000424",
+        "0x0",
+        "0x1"
+      ],
+      "scatter_descriptor_pointer": "0x200001e8",
+      "power_object_argument": "NULL",
+      "power_apply_status": 2,
+      "power_apply_accepted_object_cut_calls": 0,
+      "register_writes": [
+        [
+          "0x40010400",
+          4,
+          115
+        ],
+        [
+          "0x40010038",
+          4,
+          5
+        ],
+        [
+          "0x40010400",
+          4,
+          0
+        ],
+        [
+          "0x40010400",
+          4,
+          115
+        ],
+        [
+          "0x40010030",
+          4,
+          5
+        ],
+        [
+          "0x40010400",
+          4,
+          0
+        ]
+      ],
+      "direct_selector_cases": [
+        {
+          "argument": "0x0",
+          "return": "0x2",
+          "register_writes": [],
+          "source_accepted_object_cut_calls": 0
+        },
+        {
+          "argument": "0x1",
+          "return": "0x2",
+          "register_writes": [
+            [
+              "0x40010400",
+              4,
+              115
+            ],
+            [
+              "0x40010038",
+              4,
+              5
+            ],
+            [
+              "0x40010400",
+              4,
+              0
+            ],
+            [
+              "0x40010400",
+              4,
+              115
+            ],
+            [
+              "0x40010030",
+              4,
+              5
+            ],
+            [
+              "0x40010400",
+              4,
+              0
+            ]
+          ],
+          "source_accepted_object_cut_calls": 0
+        },
+        {
+          "argument": "0x2",
+          "return": "0x2",
+          "register_writes": [
+            [
+              "0x40010400",
+              4,
+              115
+            ],
+            [
+              "0x400100b0",
+              4,
+              4
+            ],
+            [
+              "0x40010400",
+              4,
+              0
+            ],
+            [
+              "0x40010400",
+              4,
+              115
+            ],
+            [
+              "0x400100a8",
+              4,
+              4
+            ],
+            [
+              "0x40010400",
+              4,
+              0
+            ]
+          ],
+          "source_accepted_object_cut_calls": 0
+        },
+        {
+          "argument": "0x3",
+          "return": "0x2",
+          "register_writes": [
+            [
+              "0x40010400",
+              4,
+              115
+            ],
+            [
+              "0x40010114",
+              4,
+              5
+            ],
+            [
+              "0x40010400",
+              4,
+              0
+            ],
+            [
+              "0x40010400",
+              4,
+              115
+            ],
+            [
+              "0x40010124",
+              4,
+              5
+            ],
+            [
+              "0x40010400",
+              4,
+              0
+            ]
+          ],
+          "source_accepted_object_cut_calls": 0
+        },
+        {
+          "argument": "0x4",
+          "return": "0x1",
+          "register_writes": [],
+          "source_accepted_object_cut_calls": 0
+        },
+        {
+          "argument": "0x101",
+          "return": "0x2",
+          "register_writes": [
+            [
+              "0x40010400",
+              4,
+              115
+            ],
+            [
+              "0x40010038",
+              4,
+              5
+            ],
+            [
+              "0x40010400",
+              4,
+              0
+            ],
+            [
+              "0x40010400",
+              4,
+              115
+            ],
+            [
+              "0x40010030",
+              4,
+              5
+            ],
+            [
+              "0x40010400",
+              4,
+              0
+            ]
+          ],
+          "source_accepted_object_cut_calls": 0
+        }
+      ],
+      "downstream_main_events": [
+        [
+          "0x41f9d8",
+          200
+        ],
+        [
+          "0x41f9f8"
+        ],
+        [
+          "0x41ac44"
+        ],
+        [
+          "0x41ac5a",
+          1
+        ],
+        [
+          "0x41fa50"
+        ],
+        [
+          "0x41e1e8"
+        ],
+        [
+          "0x41e266",
+          1
+        ],
+        [
+          "0x41ba80",
+          2,
+          0
+        ],
+        [
+          "0x41fd70"
+        ],
+        [
+          "0x420476"
+        ],
+        [
+          "0x421210"
+        ],
+        [
+          "0x4176ce",
+          4,
+          4407588,
+          4395840,
+          4407580,
+          46,
+          4404064,
+          "main",
+          "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\config\\main.c",
+          "main",
+          ">>> Even Bootloader start <<<"
+        ],
+        [
+          "indirect-slot",
+          537128961
+        ],
+        [
+          "terminal-spin"
+        ]
+      ]
+    },
+    {
+      "mode_status": 7,
+      "scatter_row_table_address": "0x20000454",
+      "row1_before_call": [
+        "0x1",
+        "0x0",
+        "0x433d98",
+        "0x200003f4",
+        "0x20000424",
+        "0x0",
+        "0x0"
+      ],
+      "row1_after_call": [
+        "0x1",
+        "0x0",
+        "0x433d98",
+        "0x200003f4",
+        "0x20000424",
+        "0x0",
+        "0x1"
+      ],
+      "scatter_descriptor_pointer": "0x200001e8",
+      "power_object_argument": "NULL",
+      "power_apply_status": 2,
+      "power_apply_accepted_object_cut_calls": 0,
+      "register_writes": [
+        [
+          "0x40010400",
+          4,
+          115
+        ],
+        [
+          "0x40010038",
+          4,
+          5
+        ],
+        [
+          "0x40010400",
+          4,
+          0
+        ],
+        [
+          "0x40010400",
+          4,
+          115
+        ],
+        [
+          "0x40010030",
+          4,
+          5
+        ],
+        [
+          "0x40010400",
+          4,
+          0
+        ]
+      ],
+      "direct_selector_cases": [
+        {
+          "argument": "0x0",
+          "return": "0x2",
+          "register_writes": [],
+          "source_accepted_object_cut_calls": 0
+        },
+        {
+          "argument": "0x1",
+          "return": "0x2",
+          "register_writes": [
+            [
+              "0x40010400",
+              4,
+              115
+            ],
+            [
+              "0x40010038",
+              4,
+              5
+            ],
+            [
+              "0x40010400",
+              4,
+              0
+            ],
+            [
+              "0x40010400",
+              4,
+              115
+            ],
+            [
+              "0x40010030",
+              4,
+              5
+            ],
+            [
+              "0x40010400",
+              4,
+              0
+            ]
+          ],
+          "source_accepted_object_cut_calls": 0
+        },
+        {
+          "argument": "0x2",
+          "return": "0x2",
+          "register_writes": [
+            [
+              "0x40010400",
+              4,
+              115
+            ],
+            [
+              "0x400100b0",
+              4,
+              4
+            ],
+            [
+              "0x40010400",
+              4,
+              0
+            ],
+            [
+              "0x40010400",
+              4,
+              115
+            ],
+            [
+              "0x400100a8",
+              4,
+              4
+            ],
+            [
+              "0x40010400",
+              4,
+              0
+            ]
+          ],
+          "source_accepted_object_cut_calls": 0
+        },
+        {
+          "argument": "0x3",
+          "return": "0x2",
+          "register_writes": [
+            [
+              "0x40010400",
+              4,
+              115
+            ],
+            [
+              "0x40010114",
+              4,
+              5
+            ],
+            [
+              "0x40010400",
+              4,
+              0
+            ],
+            [
+              "0x40010400",
+              4,
+              115
+            ],
+            [
+              "0x40010124",
+              4,
+              5
+            ],
+            [
+              "0x40010400",
+              4,
+              0
+            ]
+          ],
+          "source_accepted_object_cut_calls": 0
+        },
+        {
+          "argument": "0x4",
+          "return": "0x1",
+          "register_writes": [],
+          "source_accepted_object_cut_calls": 0
+        },
+        {
+          "argument": "0x101",
+          "return": "0x2",
+          "register_writes": [
+            [
+              "0x40010400",
+              4,
+              115
+            ],
+            [
+              "0x40010038",
+              4,
+              5
+            ],
+            [
+              "0x40010400",
+              4,
+              0
+            ],
+            [
+              "0x40010400",
+              4,
+              115
+            ],
+            [
+              "0x40010030",
+              4,
+              5
+            ],
+            [
+              "0x40010400",
+              4,
+              0
+            ]
+          ],
+          "source_accepted_object_cut_calls": 0
+        }
+      ],
+      "downstream_main_events": [
+        [
+          "0x41f9d8",
+          200
+        ],
+        [
+          "0x41f9f8"
+        ],
+        [
+          "0x41ac44"
+        ],
+        [
+          "0x41ac5a",
+          1
+        ],
+        [
+          "0x41fa50"
+        ],
+        [
+          "0x41e1e8"
+        ],
+        [
+          "0x41e266",
+          1
+        ],
+        [
+          "0x41ba80",
+          2,
+          7
+        ],
+        [
+          "0x415fae",
+          4397452,
+          7,
+          "Error switching to high performance mode. error num = %d\r\n"
+        ],
+        [
+          "0x41fd70"
+        ],
+        [
+          "0x420476"
+        ],
+        [
+          "0x421210"
+        ],
+        [
+          "0x4176ce",
+          4,
+          4407588,
+          4395840,
+          4407580,
+          46,
+          4404064,
+          "main",
+          "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\config\\main.c",
+          "main",
+          ">>> Even Bootloader start <<<"
+        ],
+        [
+          "indirect-slot",
+          537128961
+        ],
+        [
+          "terminal-spin"
+        ]
+      ]
+    }
+  ],
+  "scalar_config_table": {
+    "address": "0x433d98",
+    "words": [
+      12,
+      14,
+      5,
+      5,
+      42,
+      44,
+      4,
+      4,
+      73,
+      69,
+      5,
+      5
+    ],
+    "sha256": "5edb0868c1b00a19a1b9d1bf4eeca71be0c00dd7f83fc291602cf4adfcd598bf",
+    "compiled_source_address": "0x433d98"
+  },
+  "original_trace": {
+    "0x43297c": "fff7c8ff",
+    "0x432910": "0648",
+    "0x432912": "0749",
+    "0x432914": "0860",
+    "0x432916": "0120",
+    "0x432918": "7047",
+    "0x432980": "0028",
+    "0x432982": "01d0",
+    "0x432984": "00f00af8",
+    "0x43299c": "10b5",
+    "0x43299e": "0749",
+    "0x4329a0": "7944",
+    "0x4329a2": "1831",
+    "0x4329a4": "064c",
+    "0x4329a6": "7c44",
+    "0x4329a8": "1634",
+    "0x4329aa": "04e0",
+    "0x4329b6": "a142",
+    "0x4329b8": "f8d1",
+    "0x4329ac": "0a68",
+    "0x4329ae": "081d",
+    "0x4329b0": "1144",
+    "0x4329b2": "8847",
+    "0x431e38": "30b4",
+    "0x431e3a": "0025",
+    "0x431e3c": "12e0",
+    "0x431e64": "50f8041b",
+    "0x431e68": "0029",
+    "0x431e6a": "e8d1",
+    "0x431e3e": "50f8042b",
+    "0x431e42": "d307",
+    "0x431e44": "44bf",
+    "0x431e4a": "091f",
+    "0x431e4c": "0429",
+    "0x431e4e": "42f8045b",
+    "0x431e52": "fad2",
+    "0x431e54": "1346",
+    "0x431e56": "8c07",
+    "0x431e58": "44bf",
+    "0x431e5e": "c907",
+    "0x431e60": "48bf",
+    "0x431e6c": "30bc",
+    "0x431e6e": "7047",
+    "0x4329b4": "0146",
+    "0x415326": "f0b4",
+    "0x415328": "0246",
+    "0x41532a": "1068",
+    "0x41532c": "9568",
+    "0x41532e": "1318",
+    "0x415330": "5068",
+    "0x415332": "03eb5004",
+    "0x415336": "c007",
+    "0x415338": "48bf",
+    "0x41533c": "a342",
+    "0x41533e": "2dd0",
+    "0x415340": "13f8016b",
+    "0x415344": "16f00300",
+    "0x415348": "04bf",
+    "0x41534a": "13f8010b",
+    "0x41534e": "c01c",
+    "0x415350": "3109",
+    "0x415352": "0f29",
+    "0x415354": "07d1",
+    "0x415366": "401e",
+    "0x415368": "f9d1",
+    "0x41535e": "13f8017b",
+    "0x415362": "05f8017b",
+    "0x41536a": "0029",
+    "0x41536c": "e6d0",
+    "0x41536e": "13f8010b",
+    "0x415372": "c6f38106",
+    "0x415376": "032e",
+    "0x415378": "08bf",
+    "0x41537e": "00eb0620",
+    "0x415382": "4042",
+    "0x415384": "2844",
+    "0x415386": "0026",
+    "0x415388": "b71e",
+    "0x41538a": "8f42",
+    "0x41538c": "1ebf",
+    "0x41538e": "10f8017b",
+    "0x415392": "05f8017b",
+    "0x415396": "761c",
+    "0x415398": "f6d1",
+    "0x41539a": "cfe7",
+    "0x41539c": "f0bc",
+    "0x41539e": "02f10c00",
+    "0x4153a2": "7047",
+    "0x415356": "13f8011b",
+    "0x41535a": "0f31",
+    "0x41535c": "03e0",
+    "0x41537a": "13f8016b",
+    "0x4329ba": "10bd",
+    "0x432988": "aff30080",
+    "0x43298c": "0020",
+    "0x43298e": "aff30080",
+    "0x432992": "e8f766ff",
+    "0x41b862": "e0b5",
+    "0x41b864": "c820",
+    "0x41b866": "04f0b7f8",
+    "0x41b86a": "04f0c5f8",
+    "0x41b86e": "0120",
+    "0x41b870": "03f0e9ff",
+    "0x41f846": "f8b5",
+    "0x41f848": "0400",
+    "0x41f84a": "0020",
+    "0x41f84c": "2000",
+    "0x41f84e": "c0b2",
+    "0x41f850": "0428",
+    "0x41f852": "01db",
+    "0x41f858": "1c25",
+    "0x41f85a": "dff86c61",
+    "0x41f85e": "0122",
+    "0x41f860": "0021",
+    "0x41f862": "2000",
+    "0x41f864": "c0b2",
+    "0x41f866": "6843",
+    "0x41f868": "3044",
+    "0x41f86a": "4068",
+    "0x41f86c": "03f09cf9",
+    "0x422ba8": "f8b5",
+    "0x422baa": "0400",
+    "0x422bac": "1700",
+    "0x422bae": "002c",
+    "0x422bb0": "06d0",
+    "0x422bc0": "0220",
+    "0x422bc2": "58e0",
+    "0x422c76": "f2bd",
+    "0x41f870": "0700",
+    "0x41f872": "2000",
+    "0x41f874": "c0b2",
+    "0x41f876": "6843",
+    "0x41f878": "3044",
+    "0x41f87a": "8068",
+    "0x41f87c": "c168",
+    "0x41f87e": "2000",
+    "0x41f880": "c0b2",
+    "0x41f882": "6843",
+    "0x41f884": "3044",
+    "0x41f886": "8068",
+    "0x41f888": "4068",
+    "0x41f88a": "fef74ff8",
+    "0x41d92c": "7cb5",
+    "0x41d92e": "0400",
+    "0x41d930": "0e00",
+    "0x41d932": "dff8dc57",
+    "0x41d936": "e02c",
+    "0x41d938": "01d3",
+    "0x41d93e": "2100",
+    "0x41d940": "4909",
+    "0x41d942": "0122",
+    "0x41d944": "14f01f00",
+    "0x41d948": "8240",
+    "0x41d94a": "dff8c807",
+    "0x41d94e": "50f82100",
+    "0x41d952": "1042",
+    "0x41d954": "0bd1",
+    "0x41d956": "c6f38120",
+    "0x41d95a": "0228",
+    "0x41d95c": "15db",
+    "0x41d98a": "fdf7afff",
+    "0x41b8ec": "eff31080",
+    "0x41b8f0": "72b6",
+    "0x41b8f2": "7047",
+    "0x41d98e": "0090",
+    "0x41d990": "dff88807",
+    "0x41d994": "7321",
+    "0x41d996": "0160",
+    "0x41d998": "45f82460",
+    "0x41d99c": "0021",
+    "0x41d99e": "0160",
+    "0x41d9a0": "0098",
+    "0x41d9a2": "80f31088",
+    "0x41d9a6": "0020",
+    "0x41d9a8": "76bd",
+    "0x41f88e": "2000",
+    "0x41f890": "c0b2",
+    "0x41f892": "6843",
+    "0x41f894": "3044",
+    "0x41f896": "8068",
+    "0x41f898": "8168",
+    "0x41f89a": "2000",
+    "0x41f89c": "c0b2",
+    "0x41f89e": "6843",
+    "0x41f8a0": "3044",
+    "0x41f8a2": "8068",
+    "0x41f8a4": "0068",
+    "0x41f8a6": "fef741f8",
+    "0x41f8aa": "e4b2",
+    "0x41f8ac": "6c43",
+    "0x41f8ae": "06eb0400",
+    "0x41f8b2": "0121",
+    "0x41f8b4": "0176",
+    "0x41f8b6": "3800",
+    "0x41f8b8": "f2bd",
+    "0x41b874": "fff7e6f9",
+    "0x41b878": "0120",
+    "0x41b87a": "fff7eef9",
+    "0x41b87e": "04f0e7f8",
+    "0x41b882": "02f0b1fc",
+    "0x41b886": "0120",
+    "0x41b888": "02f0edfc",
+    "0x41b88c": "0220",
+    "0x41b88e": "00f0f7f8",
+    "0x41b892": "0028",
+    "0x41b894": "03d0",
+    "0x41b89e": "04f067fa",
+    "0x41b8a2": "04f0e8fd",
+    "0x41b8a6": "05f0b3fc",
+    "0x41b8aa": "0848",
+    "0x41b8ac": "0190",
+    "0x41b8ae": "2e20",
+    "0x41b8b0": "0090",
+    "0x41b8b2": "074b",
+    "0x41b8b4": "074a",
+    "0x41b8b6": "0849",
+    "0x41b8b8": "0420",
+    "0x41b8ba": "fbf708ff",
+    "0x41b8be": "0748",
+    "0x41b8c0": "0068",
+    "0x41b8c2": "8047",
+    "0x41b8c4": "fee7",
+    "0x41d93a": "0520",
+    "0x41d93c": "34e0",
+    "0x41d96e": "c6f34230",
+    "0x41d972": "0028",
+    "0x41d974": "09d0",
+    "0x41f854": "0120",
+    "0x41f856": "2fe0",
+    "0x41b896": "0100",
+    "0x41b898": "0b48",
+    "0x41b89a": "faf788fb"
+  },
+  "constructor_array": {
+    "address": "0x433440",
+    "bytes": 32,
+    "sha256": "d6ac25efb3f6ea1ff531a3a4b8fb043176be1f14b417a32c46db7a776b01ffe8",
+    "entries": [
+      [
+        "0x4301d7",
+        "0x1"
+      ],
+      [
+        "0x43194d",
+        "0x1"
+      ],
+      [
+        "0x415591",
+        "0x19"
+      ],
+      [
+        "0x41fd71",
+        "0x1a"
+      ]
+    ],
+    "interpretation": "Four function-pointer/order records consumed by 0x41f9f8; they are distinct from the 0x20000454 scatter-initialized platform rows."
+  },
+  "limits": [
+    "The exact authenticated compressed scatter inputs initialize the source and stock RAM profile; those compressed bytes are fixtures, not rebuilt firmware source.",
+    "Only selector 1 is reached by main and compared. The provider implements selector truncation/invalid behavior from instructions, but this startup-level fixture does not exhaust all four selectors.",
+    "The authentic selector-1 row has a null power object; stock 0x422ba8 returns 2 and 0x41f846 ignores that status after performing both register updates and setting row flag +0x18.",
+    "The accepted-object continuation is a guarded test cut and is proven unreachable for the authentic scatter state; no accepted-object power setup is claimed.",
+    "MMIO is synthetic mapped memory. The compile profile is Cortex-M4 for Unicorn compatibility, not IAR or hardware validation.",
+    "The nearby 0x41f9f8 constructor runner's indirect callbacks and 0x41fa50 service chain remain separate cuts; neither produces the platform row table in the observed scatter output.",
+    "This bounded source provider does not establish whole-image source completeness or byte identity."
+  ]
+}

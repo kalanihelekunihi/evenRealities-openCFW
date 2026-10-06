@@ -1,0 +1,18 @@
+{
+  "review_id": "P2-18473-independent-review",
+  "status": "partial",
+  "accepted": false,
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-byte-ring-empty-predicate-and-removal-length-selection-prefix-18874-map/001",
+  "pinned_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "checks": [
+    "fresh 76-byte GNU replay",
+    "instruction and PC-reference manifests match",
+    "empty predicate and 12-byte prefix frame checked",
+    "three independent count reads and unsigned selection checked"
+  ],
+  "limitations": [
+    "external continuation/body/epilogue unresolved",
+    "no synchronization behavior inferred",
+    "no global coverage claim"
+  ]
+}

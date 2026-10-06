@@ -1,0 +1,5 @@
+# Removal loop460302..460344
+Partial;unaccepted.66 instructionbytes,inheritsframe12/R0outputpointer/R1selectedlength/R2counterzero/R3ringbasefrom4602CA. Initialentryfromprefixbranches460330testbeforebody.
+460302:R4=freshhalf[R3+258];R4=freshbyte[wrap32(R3+R4)];R5=low16R2;byte[wrap32(retainedoutputR0+R5)]=low8R4. SEPARATEfreshhalf[R3+258]→R4 AFTERoutputstore;R4+=1,R5=256,R6=SDIVsigned(R4,R5),R4=wrap32(R4-R5*R6)viaMLS;half[R3+258]=low16R4. Freshhalf[R3+260]→R4 AFTERindexstore;R4-=1;half[R3+260]=low16R4. R2=wrap32(R2+1).
+460330:R4=low16R2,R5=low16R1;unsignedR4<R5→460302;otherwiseR1=low16R1,R0=R1. 460340POP{R4,R5,R6},460342BXLR restoreoriginalsavedregs,returnselectedlow16length. Prefixfailurejoins460340preserveFFFFFFFD(nulloutput/low16lengthzero)or0(initialemptycount). No outputnullguard inloop;aliasescanmodifyfreshreadindex/count,recordbyteaddressusesunmaskedhalfindexbeforemodulo update. No countrecheckperiteration;selectedlengthfixedinR1. No childcallsorlock. Next460344excluded.
+No C,gate/source admission,whole coverage or simulator/hardware proof.

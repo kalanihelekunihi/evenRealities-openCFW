@@ -1,0 +1,53 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpngpyhqfo/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+004607b0 <.text>:
+  4607b0:	a805      	add	r0, sp, #20
+  4607b2:	4669      	mov	r1, sp
+  4607b4:	2210      	movs	r2, #16
+  4607b6:	f7d9 fa25 	bl	439c04 <.text-0x26bac>
+  4607ba:	003a      	movs	r2, r7
+  4607bc:	f8df 165c 	ldr.w	r1, [pc, #1628]	@ 460e1c <.text+0x66c>
+  4607c0:	a805      	add	r0, sp, #20
+  4607c2:	f02f fcad 	bl	490120 <.text+0x2f970>
+  4607c6:	b2c0      	uxtb	r0, r0
+  4607c8:	2800      	cmp	r0, #0
+  4607ca:	d133      	bne.n	460834 <.text+0x84>
+  4607cc:	f7dc fc7f 	bl	43d0ce <.text-0x236e2>
+  4607d0:	0780      	lsls	r0, r0, #30
+  4607d2:	d516      	bpl.n	460802 <.text+0x52>
+  4607d4:	9808      	ldr	r0, [sp, #32]
+  4607d6:	2800      	cmp	r0, #0
+  4607d8:	d001      	beq.n	4607de <.text+0x2e>
+  4607da:	9808      	ldr	r0, [sp, #32]
+  4607dc:	e001      	b.n	4607e2 <.text+0x32>
+  4607de:	f8df 0b70 	ldr.w	r0, [pc, #2928]	@ 461350 <.text+0xba0>
+  4607e2:	9002      	str	r0, [sp, #8]
+  4607e4:	f8df 0b6c 	ldr.w	r0, [pc, #2924]	@ 461354 <.text+0xba4>
+  4607e8:	9001      	str	r0, [sp, #4]
+  4607ea:	f44f 70cc 	mov.w	r0, #408	@ 0x198
+  4607ee:	9000      	str	r0, [sp, #0]
+  4607f0:	f8df 39c4 	ldr.w	r3, [pc, #2500]	@ 4611b8 <.text+0xa08>
+  4607f4:	f8df 29c4 	ldr.w	r2, [pc, #2500]	@ 4611bc <.text+0xa0c>
+  4607f8:	f8df 19c4 	ldr.w	r1, [pc, #2500]	@ 4611c0 <.text+0xa10>
+  4607fc:	2001      	movs	r0, #1
+  4607fe:	f7dc feb9 	bl	43d574 <.text-0x2323c>
+  460802:	f7dc fc64 	bl	43d0ce <.text-0x236e2>
+  460806:	07c0      	lsls	r0, r0, #31
+  460808:	d403      	bmi.n	460812 <.text+0x62>
+  46080a:	f7dc fc60 	bl	43d0ce <.text-0x236e2>
+  46080e:	0740      	lsls	r0, r0, #29
+  460810:	d50d      	bpl.n	46082e <.text+0x7e>
+  460812:	9808      	ldr	r0, [sp, #32]
+  460814:	2800      	cmp	r0, #0
+  460816:	d001      	beq.n	46081c <.text+0x6c>
+  460818:	9b08      	ldr	r3, [sp, #32]
+  46081a:	e001      	b.n	460820 <.text+0x70>
+  46081c:	f8df 3b30 	ldr.w	r3, [pc, #2864]	@ 461350 <.text+0xba0>
+  460820:	f8df 1b34 	ldr.w	r1, [pc, #2868]	@ 461358 <.text+0xba8>
+  460824:	000a      	movs	r2, r1
+  460826:	f05f 6088 	movs.w	r0, #71303168	@ 0x4400000
+  46082a:	f7dc fb38 	bl	43ce9e <.text-0x23912>

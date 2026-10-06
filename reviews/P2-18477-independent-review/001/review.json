@@ -1,0 +1,18 @@
+{
+  "review_id": "P2-18477-independent-review",
+  "status": "partial",
+  "accepted": false,
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-ring-index-count-reset-and-low-byte-global-word-setter-18878-map/001",
+  "pinned_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "checks": [
+    "fresh 48-byte GNU replay",
+    "instruction/reference manifests match",
+    "ordered halfword clears and child args/return checked",
+    "UXTB plus fullword store checked"
+  ],
+  "limitations": [
+    "child memory contract unresolved",
+    "global ownership unresolved",
+    "no global coverage claim"
+  ]
+}

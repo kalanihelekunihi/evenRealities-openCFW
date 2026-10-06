@@ -1,0 +1,4 @@
+# Stack message adapter460424..460450
+Partial;unaccepted.44 instructionbytes,completefunction. PUSH{R1,R2,R3,R4,R5,LR},frame24 slots0/4/8/12/16/20. R4=incomingR0;R1=2,R2=0,R5=SP+4,R0=R5;43C0E4 liveincomingR3. Childmemorycontractunresolved,butR0aliases savedincomingR2slotSP4. ThenR0=0,byte[SP4]=0;byte[SP5]=low8retainedR4. R0=4,word[SP0]=4. R3=0,R2=2,R1=SP+4,R0=3;464F76,withstackwordSP0=4and2-bytebufferSP4/5. OtherbytesofSP4wordretainpostchildcontents;SP8savedincomingR3canbealteredbychildaliasing. No inputguard.
+46044EPOP{R0,R1,R2,R4,R5,PC}:SP0→R0(4unlesslastchildmutatesit),SP4→R1fullwordincludingbufferbytes,SP8→R2;SP12/16restoreoriginalR4/R5,SP20→PC. R3notrestored. LastchildfullR0discarded. Recordreturn4underunchangedSP0,but do not claimunconditional4givenpassedstackaliasR1. Next460450excluded.
+No C,gate/source admission,whole coverage or simulator/hardware proof.

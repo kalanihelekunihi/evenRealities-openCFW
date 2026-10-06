@@ -1,0 +1,3 @@
+# Four-child adapter460128..46015A
+Partial;unaccepted.50 instructionbytes,completefunction. PUSH{R4,R5,R6,LR},frame16 slots0/4/8/12. R4=incomingR0,R5=incomingR1,R6=incomingR2. Four orderedcalls44122A,441238,44120E,44121C. Before EACH call resetR2=retainedR6 FIRST,R1=retainedR5 SECOND,R0=retainedR4 THIRD. R3liveincomingforfirstcall,livepreviouschildR3forlatercalls;neverresetbyadapter. FirstthreefullR0resultsdiscardedbyargumentreset. 460158POP{R4,R5,R6,PC}restoresoriginalregisters/LR,preservesfullfourthchildR0. No guards,conditionalbranches,localwritesormemoryreads beyondstack. Childcontractsunresolved; samechildsequence as45EC7C doesnotjustifyaddressaliasorfunctionmerging. Next46015Aexcluded.
+No C,gate/source admission,whole coverage or simulator/hardware proof.

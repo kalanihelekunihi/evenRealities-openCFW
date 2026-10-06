@@ -1,0 +1,88 @@
+{
+  "status": "PASS",
+  "getter_direct_cases": 1,
+  "wrapper_cases": [
+    {
+      "incoming_r7": "0x0",
+      "result": {
+        "r0": 0,
+        "r7": 0,
+        "sp": 537063424
+      }
+    },
+    {
+      "incoming_r7": "0x1",
+      "result": {
+        "r0": 1,
+        "r7": 1,
+        "sp": 537063424
+      }
+    },
+    {
+      "incoming_r7": "0x13579bdf",
+      "result": {
+        "r0": 324508639,
+        "r7": 324508639,
+        "sp": 537063424
+      }
+    },
+    {
+      "incoming_r7": "0xffffffff",
+      "result": {
+        "r0": 4294967295,
+        "r7": 4294967295,
+        "sp": 537063424
+      }
+    },
+    {
+      "incoming_r7": "0x604000",
+      "result": {
+        "r0": 6307840,
+        "r7": 6307840,
+        "sp": 537063424
+      }
+    }
+  ],
+  "original_instruction_bytes_reached": 14,
+  "original_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_elf_sha256": "299a832bac4925317bd88ed38669c9431e795f6641648cef02433e3ba76102e9",
+  "source_sha256": {
+    "runtime_context.c": "17c1062b2a01289a76914bbfee28217a0ab4e2ef3ef6a7c3bf2028f67fb92973",
+    "runtime_context.h": "aaa44240a3835a33b6e5314f52941130f7a6059b334e72b5c11fdbc037499235"
+  },
+  "stock_word": {
+    "address": "0x42e104",
+    "value": "0x604000",
+    "bytes": "00406000"
+  },
+  "stock_functions": {
+    "getter": {
+      "range": [
+        "0x42d88a",
+        "0x42d890"
+      ],
+      "size": 6,
+      "sha256": "a38decb7c6c890f46354bc3a4b166bd89e4dac78108f0a6eb1e6123e61ad8087"
+    },
+    "wrapper": {
+      "range": [
+        "0x42dd68",
+        "0x42dd70"
+      ],
+      "size": 8,
+      "sha256": "86bf8be3cfef3a107d8691b1fb960ba63cc40d3ef6eb8ed906638e24001e1a84"
+    }
+  },
+  "trace": {
+    "0x42d88a": "dff87808",
+    "0x42d88e": "7047",
+    "0x42dd68": "80b5",
+    "0x42dd6a": "fff78efd",
+    "0x42dd6e": "01bd"
+  },
+  "limits": [
+    "The helper returns the literal word at 0x42e104; the wrapper discards it and returns the incoming R7 value in R0.",
+    "The orchestrator call at 0x42dd1e ignores the wrapper return. No state write, queue action, or runtime initialization occurs in this closure.",
+    "Only the getter/wrapper call closure is compared; scheduler, queue creation, publication, and hardware services are outside this fixture."
+  ]
+}

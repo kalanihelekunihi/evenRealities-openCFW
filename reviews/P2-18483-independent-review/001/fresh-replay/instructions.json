@@ -1,0 +1,116 @@
+[
+  {
+    "start": 4588580,
+    "end": 4588624,
+    "instructions": [
+      {
+        "address": 4588580,
+        "bytes": "3eb5",
+        "mnemonic": "push",
+        "operands": "{r1, r2, r3, r4, r5, lr}"
+      },
+      {
+        "address": 4588582,
+        "bytes": "0400",
+        "mnemonic": "movs",
+        "operands": "r4, r0"
+      },
+      {
+        "address": 4588584,
+        "bytes": "0221",
+        "mnemonic": "movs",
+        "operands": "r1, #2"
+      },
+      {
+        "address": 4588586,
+        "bytes": "0022",
+        "mnemonic": "movs",
+        "operands": "r2, #0"
+      },
+      {
+        "address": 4588588,
+        "bytes": "01ad",
+        "mnemonic": "add",
+        "operands": "r5, sp, #4"
+      },
+      {
+        "address": 4588590,
+        "bytes": "2800",
+        "mnemonic": "movs",
+        "operands": "r0, r5"
+      },
+      {
+        "address": 4588592,
+        "bytes": "dbf758fe",
+        "mnemonic": "bl",
+        "operands": "43c0e4 <.text-0x24340>"
+      },
+      {
+        "address": 4588596,
+        "bytes": "0020",
+        "mnemonic": "movs",
+        "operands": "r0, #0"
+      },
+      {
+        "address": 4588598,
+        "bytes": "8df80400",
+        "mnemonic": "strb.w",
+        "operands": "r0, [sp, #4]"
+      },
+      {
+        "address": 4588602,
+        "bytes": "8df80540",
+        "mnemonic": "strb.w",
+        "operands": "r4, [sp, #5]"
+      },
+      {
+        "address": 4588606,
+        "bytes": "0420",
+        "mnemonic": "movs",
+        "operands": "r0, #4"
+      },
+      {
+        "address": 4588608,
+        "bytes": "0090",
+        "mnemonic": "str",
+        "operands": "r0, [sp, #0]"
+      },
+      {
+        "address": 4588610,
+        "bytes": "0023",
+        "mnemonic": "movs",
+        "operands": "r3, #0"
+      },
+      {
+        "address": 4588612,
+        "bytes": "0222",
+        "mnemonic": "movs",
+        "operands": "r2, #2"
+      },
+      {
+        "address": 4588614,
+        "bytes": "01a9",
+        "mnemonic": "add",
+        "operands": "r1, sp, #4"
+      },
+      {
+        "address": 4588616,
+        "bytes": "0320",
+        "mnemonic": "movs",
+        "operands": "r0, #3"
+      },
+      {
+        "address": 4588618,
+        "bytes": "04f094fd",
+        "mnemonic": "bl",
+        "operands": "464f76 <.text+0x4b52>"
+      },
+      {
+        "address": 4588622,
+        "bytes": "37bd",
+        "mnemonic": "pop",
+        "operands": "{r0, r1, r2, r4, r5, pc}"
+      }
+    ]
+  }
+]

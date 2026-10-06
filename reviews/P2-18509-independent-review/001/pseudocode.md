@@ -1,0 +1,5 @@
+# Mismatch exit and matched record prefix460910..460970
+Partial;unaccepted.96 instructionbytes,inherits64frame,R4headerbyte1,R5payloadbaseR7oldbuffer+4. Mismatch460910:R1=1,R0=low8retainedR4;4604C2 liveR2/R3;ignorechildresult,R0=FFFFFFFF→460D56externalepilogue.
+Match460920:46018E liveR0/R1/R2/R3 withNOargumentreset;R1=1040,R2=0,R6=wordliteral46136C,R7=R6,R0=R7;43C0E4 liveR3. R7=0 REPLACESbufferaliaswithindex;branch460B02externaltest,whichmustprovideR9source stridebeforebody.
+Bodyentry46093A:R8=52. R0=wrap32(R5+low32(R9*R7));R0=freshword[R0+48];R1=wrap32(R6+low32(R8*R7));word[R1+48]=R0. R0=4094;R1=SEPARATEcomputedR6+52*R7;word[R1+36]=4094. R0=1;R1=SEPARATEcomputedR6+52*R7;byte[R1+40]=1. R0=wordliteral461370;R1=low32(R8*R7);word[wrap32(R6+R1)]=R0. Orderedwriteskey48,defaultword36,defaultbyte40,word0. Freshsourcereadanddestinationaliasingretained;R8deststride,R9source-stridecontractunresolveduntiltestmapped. Next460970string/fieldchildcontinuationexcluded. No boundsinbody;externaltestcontrolsentry. Childcontracts unresolved.
+No C,gate/source admission,whole coverage or simulator/hardware proof.

@@ -1,0 +1,1729 @@
+{
+  "status": "PASS",
+  "cases": 96,
+  "distinct_original_trace_bytes": 116,
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "elf_sha256": "fe6b65a128bd1ae78e322ed0ac93e7583a5cc7c2361ec5ad1ce2401675ddd0c0",
+  "source_sha256": {
+    "g2/components/bootloader/nor_init/nor_runtime.c": "91523b049b2eca423f390b89ac1b1e2c495b265e596911510781c0b47ce5f7bf",
+    "g2/components/bootloader/nor_init/runtime_module.ld": "46a0073fdcadfd8d435d87271ef5a50532ecdab0d65a3c73ad666f78bcf28b6f",
+    "g2/components/bootloader/nor_init/verify_runtime.py": "c0cbda0fa88e44ead6e70154acd6916ddadb56bbb714f0026e814ef38ea6ff6d"
+  },
+  "original_trace": {
+    "0x41fe28": "10b5",
+    "0x41fe2a": "dff84c4a",
+    "0x41fe2e": "2078",
+    "0x41fe30": "0128",
+    "0x41fe32": "08d0",
+    "0x41fe34": "0122",
+    "0x41fe36": "0221",
+    "0x41fe38": "dff8380a",
+    "0x41fe3c": "0068",
+    "0x41fe3e": "06f0e3fc",
+    "0x41fe42": "0120",
+    "0x41fe44": "2070",
+    "0x41fe46": "10bd",
+    "0x41fe48": "80b5",
+    "0x41fe4a": "0122",
+    "0x41fe4c": "0021",
+    "0x41fe4e": "dff8240a",
+    "0x41fe52": "0068",
+    "0x41fe54": "06f0d8fc",
+    "0x41fe58": "0020",
+    "0x41fe5a": "dff81c1a",
+    "0x41fe5e": "0870",
+    "0x41fe60": "01bd",
+    "0x41fe62": "1cb5",
+    "0x41fe64": "dff8144a",
+    "0x41fe68": "2068",
+    "0x41fe6a": "0028",
+    "0x41fe6c": "15d1",
+    "0x41fe6e": "dff8100a",
+    "0x41fe72": "f6f7cdfb",
+    "0x41fe76": "2060",
+    "0x41fe78": "2068",
+    "0x41fe7a": "0028",
+    "0x41fe7c": "0dd1",
+    "0x41fe7e": "dff8040a",
+    "0x41fe82": "0190",
+    "0x41fe84": "ba20",
+    "0x41fe86": "0090",
+    "0x41fe88": "dff8fc39",
+    "0x41fe8c": "dff8e82a",
+    "0x41fe90": "dff8481c",
+    "0x41fe94": "0120",
+    "0x41fe96": "f7f71afc",
+    "0x41fe9a": "13bd"
+  },
+  "comparisons": [
+    {
+      "entry": "nor_power",
+      "flag": 0,
+      "status": 0,
+      "existing": 0,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            2,
+            1
+          ]
+        ],
+        "flag": 1,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_power",
+      "flag": 0,
+      "status": 0,
+      "existing": 0,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            2,
+            1
+          ]
+        ],
+        "flag": 1,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_power",
+      "flag": 0,
+      "status": 0,
+      "existing": 537029728,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            2,
+            1
+          ]
+        ],
+        "flag": 1,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_power",
+      "flag": 0,
+      "status": 0,
+      "existing": 537029728,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            2,
+            1
+          ]
+        ],
+        "flag": 1,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_power",
+      "flag": 0,
+      "status": 7,
+      "existing": 0,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            2,
+            1
+          ]
+        ],
+        "flag": 1,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_power",
+      "flag": 0,
+      "status": 7,
+      "existing": 0,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            2,
+            1
+          ]
+        ],
+        "flag": 1,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_power",
+      "flag": 0,
+      "status": 7,
+      "existing": 537029728,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            2,
+            1
+          ]
+        ],
+        "flag": 1,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_power",
+      "flag": 0,
+      "status": 7,
+      "existing": 537029728,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            2,
+            1
+          ]
+        ],
+        "flag": 1,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_power",
+      "flag": 1,
+      "status": 0,
+      "existing": 0,
+      "created": 0,
+      "result": {
+        "events": [],
+        "flag": 1,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_power",
+      "flag": 1,
+      "status": 0,
+      "existing": 0,
+      "created": 537029728,
+      "result": {
+        "events": [],
+        "flag": 1,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_power",
+      "flag": 1,
+      "status": 0,
+      "existing": 537029728,
+      "created": 0,
+      "result": {
+        "events": [],
+        "flag": 1,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_power",
+      "flag": 1,
+      "status": 0,
+      "existing": 537029728,
+      "created": 537029728,
+      "result": {
+        "events": [],
+        "flag": 1,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_power",
+      "flag": 1,
+      "status": 7,
+      "existing": 0,
+      "created": 0,
+      "result": {
+        "events": [],
+        "flag": 1,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_power",
+      "flag": 1,
+      "status": 7,
+      "existing": 0,
+      "created": 537029728,
+      "result": {
+        "events": [],
+        "flag": 1,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_power",
+      "flag": 1,
+      "status": 7,
+      "existing": 537029728,
+      "created": 0,
+      "result": {
+        "events": [],
+        "flag": 1,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_power",
+      "flag": 1,
+      "status": 7,
+      "existing": 537029728,
+      "created": 537029728,
+      "result": {
+        "events": [],
+        "flag": 1,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_power",
+      "flag": 2,
+      "status": 0,
+      "existing": 0,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            2,
+            1
+          ]
+        ],
+        "flag": 1,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_power",
+      "flag": 2,
+      "status": 0,
+      "existing": 0,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            2,
+            1
+          ]
+        ],
+        "flag": 1,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_power",
+      "flag": 2,
+      "status": 0,
+      "existing": 537029728,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            2,
+            1
+          ]
+        ],
+        "flag": 1,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_power",
+      "flag": 2,
+      "status": 0,
+      "existing": 537029728,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            2,
+            1
+          ]
+        ],
+        "flag": 1,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_power",
+      "flag": 2,
+      "status": 7,
+      "existing": 0,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            2,
+            1
+          ]
+        ],
+        "flag": 1,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_power",
+      "flag": 2,
+      "status": 7,
+      "existing": 0,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            2,
+            1
+          ]
+        ],
+        "flag": 1,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_power",
+      "flag": 2,
+      "status": 7,
+      "existing": 537029728,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            2,
+            1
+          ]
+        ],
+        "flag": 1,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_power",
+      "flag": 2,
+      "status": 7,
+      "existing": 537029728,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            2,
+            1
+          ]
+        ],
+        "flag": 1,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_power",
+      "flag": 255,
+      "status": 0,
+      "existing": 0,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            2,
+            1
+          ]
+        ],
+        "flag": 1,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_power",
+      "flag": 255,
+      "status": 0,
+      "existing": 0,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            2,
+            1
+          ]
+        ],
+        "flag": 1,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_power",
+      "flag": 255,
+      "status": 0,
+      "existing": 537029728,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            2,
+            1
+          ]
+        ],
+        "flag": 1,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_power",
+      "flag": 255,
+      "status": 0,
+      "existing": 537029728,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            2,
+            1
+          ]
+        ],
+        "flag": 1,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_power",
+      "flag": 255,
+      "status": 7,
+      "existing": 0,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            2,
+            1
+          ]
+        ],
+        "flag": 1,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_power",
+      "flag": 255,
+      "status": 7,
+      "existing": 0,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            2,
+            1
+          ]
+        ],
+        "flag": 1,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_power",
+      "flag": 255,
+      "status": 7,
+      "existing": 537029728,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            2,
+            1
+          ]
+        ],
+        "flag": 1,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_power",
+      "flag": 255,
+      "status": 7,
+      "existing": 537029728,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            2,
+            1
+          ]
+        ],
+        "flag": 1,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 0,
+      "status": 0,
+      "existing": 0,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 0,
+      "status": 0,
+      "existing": 0,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 0,
+      "status": 0,
+      "existing": 537029728,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 0,
+      "status": 0,
+      "existing": 537029728,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 0,
+      "status": 7,
+      "existing": 0,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 0,
+      "status": 7,
+      "existing": 0,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 0,
+      "status": 7,
+      "existing": 537029728,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 0,
+      "status": 7,
+      "existing": 537029728,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 1,
+      "status": 0,
+      "existing": 0,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 1,
+      "status": 0,
+      "existing": 0,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 1,
+      "status": 0,
+      "existing": 537029728,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 1,
+      "status": 0,
+      "existing": 537029728,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 1,
+      "status": 7,
+      "existing": 0,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 1,
+      "status": 7,
+      "existing": 0,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 1,
+      "status": 7,
+      "existing": 537029728,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 1,
+      "status": 7,
+      "existing": 537029728,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 2,
+      "status": 0,
+      "existing": 0,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 2,
+      "status": 0,
+      "existing": 0,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 2,
+      "status": 0,
+      "existing": 537029728,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 2,
+      "status": 0,
+      "existing": 537029728,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 2,
+      "status": 7,
+      "existing": 0,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 2,
+      "status": 7,
+      "existing": 0,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 2,
+      "status": 7,
+      "existing": 537029728,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 2,
+      "status": 7,
+      "existing": 537029728,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 255,
+      "status": 0,
+      "existing": 0,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 255,
+      "status": 0,
+      "existing": 0,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 255,
+      "status": 0,
+      "existing": 537029728,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 255,
+      "status": 0,
+      "existing": 537029728,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 255,
+      "status": 7,
+      "existing": 0,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 255,
+      "status": 7,
+      "existing": 0,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 255,
+      "status": 7,
+      "existing": 537029728,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_unpower",
+      "flag": 255,
+      "status": 7,
+      "existing": 537029728,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "power",
+            536895488,
+            0,
+            1
+          ]
+        ],
+        "flag": 0,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 0,
+      "status": 0,
+      "existing": 0,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "mutex-new",
+            "2c3f430000000000606c022050000000"
+          ],
+          [
+            "log",
+            1,
+            186
+          ]
+        ],
+        "flag": 0,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 0,
+      "status": 0,
+      "existing": 0,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "mutex-new",
+            "2c3f430000000000606c022050000000"
+          ]
+        ],
+        "flag": 0,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 0,
+      "status": 0,
+      "existing": 537029728,
+      "created": 0,
+      "result": {
+        "events": [],
+        "flag": 0,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 0,
+      "status": 0,
+      "existing": 537029728,
+      "created": 537029728,
+      "result": {
+        "events": [],
+        "flag": 0,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 0,
+      "status": 7,
+      "existing": 0,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "mutex-new",
+            "2c3f430000000000606c022050000000"
+          ],
+          [
+            "log",
+            1,
+            186
+          ]
+        ],
+        "flag": 0,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 0,
+      "status": 7,
+      "existing": 0,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "mutex-new",
+            "2c3f430000000000606c022050000000"
+          ]
+        ],
+        "flag": 0,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 0,
+      "status": 7,
+      "existing": 537029728,
+      "created": 0,
+      "result": {
+        "events": [],
+        "flag": 0,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 0,
+      "status": 7,
+      "existing": 537029728,
+      "created": 537029728,
+      "result": {
+        "events": [],
+        "flag": 0,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 1,
+      "status": 0,
+      "existing": 0,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "mutex-new",
+            "2c3f430000000000606c022050000000"
+          ],
+          [
+            "log",
+            1,
+            186
+          ]
+        ],
+        "flag": 1,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 1,
+      "status": 0,
+      "existing": 0,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "mutex-new",
+            "2c3f430000000000606c022050000000"
+          ]
+        ],
+        "flag": 1,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 1,
+      "status": 0,
+      "existing": 537029728,
+      "created": 0,
+      "result": {
+        "events": [],
+        "flag": 1,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 1,
+      "status": 0,
+      "existing": 537029728,
+      "created": 537029728,
+      "result": {
+        "events": [],
+        "flag": 1,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 1,
+      "status": 7,
+      "existing": 0,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "mutex-new",
+            "2c3f430000000000606c022050000000"
+          ],
+          [
+            "log",
+            1,
+            186
+          ]
+        ],
+        "flag": 1,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 1,
+      "status": 7,
+      "existing": 0,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "mutex-new",
+            "2c3f430000000000606c022050000000"
+          ]
+        ],
+        "flag": 1,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 1,
+      "status": 7,
+      "existing": 537029728,
+      "created": 0,
+      "result": {
+        "events": [],
+        "flag": 1,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 1,
+      "status": 7,
+      "existing": 537029728,
+      "created": 537029728,
+      "result": {
+        "events": [],
+        "flag": 1,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 2,
+      "status": 0,
+      "existing": 0,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "mutex-new",
+            "2c3f430000000000606c022050000000"
+          ],
+          [
+            "log",
+            1,
+            186
+          ]
+        ],
+        "flag": 2,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 2,
+      "status": 0,
+      "existing": 0,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "mutex-new",
+            "2c3f430000000000606c022050000000"
+          ]
+        ],
+        "flag": 2,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 2,
+      "status": 0,
+      "existing": 537029728,
+      "created": 0,
+      "result": {
+        "events": [],
+        "flag": 2,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 2,
+      "status": 0,
+      "existing": 537029728,
+      "created": 537029728,
+      "result": {
+        "events": [],
+        "flag": 2,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 2,
+      "status": 7,
+      "existing": 0,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "mutex-new",
+            "2c3f430000000000606c022050000000"
+          ],
+          [
+            "log",
+            1,
+            186
+          ]
+        ],
+        "flag": 2,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 2,
+      "status": 7,
+      "existing": 0,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "mutex-new",
+            "2c3f430000000000606c022050000000"
+          ]
+        ],
+        "flag": 2,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 2,
+      "status": 7,
+      "existing": 537029728,
+      "created": 0,
+      "result": {
+        "events": [],
+        "flag": 2,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 2,
+      "status": 7,
+      "existing": 537029728,
+      "created": 537029728,
+      "result": {
+        "events": [],
+        "flag": 2,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 255,
+      "status": 0,
+      "existing": 0,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "mutex-new",
+            "2c3f430000000000606c022050000000"
+          ],
+          [
+            "log",
+            1,
+            186
+          ]
+        ],
+        "flag": 255,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 255,
+      "status": 0,
+      "existing": 0,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "mutex-new",
+            "2c3f430000000000606c022050000000"
+          ]
+        ],
+        "flag": 255,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 255,
+      "status": 0,
+      "existing": 537029728,
+      "created": 0,
+      "result": {
+        "events": [],
+        "flag": 255,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 255,
+      "status": 0,
+      "existing": 537029728,
+      "created": 537029728,
+      "result": {
+        "events": [],
+        "flag": 255,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 255,
+      "status": 7,
+      "existing": 0,
+      "created": 0,
+      "result": {
+        "events": [
+          [
+            "mutex-new",
+            "2c3f430000000000606c022050000000"
+          ],
+          [
+            "log",
+            1,
+            186
+          ]
+        ],
+        "flag": 255,
+        "mutex": 0
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 255,
+      "status": 7,
+      "existing": 0,
+      "created": 537029728,
+      "result": {
+        "events": [
+          [
+            "mutex-new",
+            "2c3f430000000000606c022050000000"
+          ]
+        ],
+        "flag": 255,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 255,
+      "status": 7,
+      "existing": 537029728,
+      "created": 0,
+      "result": {
+        "events": [],
+        "flag": 255,
+        "mutex": 537029728
+      }
+    },
+    {
+      "entry": "nor_mutex",
+      "flag": 255,
+      "status": 7,
+      "existing": 537029728,
+      "created": 537029728,
+      "result": {
+        "events": [],
+        "flag": 255,
+        "mutex": 537029728
+      }
+    }
+  ],
+  "limits": [
+    "HAL power and mutex construction return controlled statuses/handles in this direct profile; integrated reset profile executes the actual static mutex constructor.",
+    "Power flag is software bookkeeping, updated despite HAL failure; no hardware power transition or concurrency established. Void return registers are incidental and not compared.",
+    "Logging severity/line only; no complete firmware or byte equality claim."
+  ]
+}

@@ -1,0 +1,17 @@
+from pathlib import Path
+import json,hashlib,re,subprocess,tempfile
+b=Path('g2/build/pseudocode-first/20260930T190500Z');src=b/'attempts/P1-canonical-fixed-images-005/002/apollo_main-flash.bin';d=src.read_bytes();h=lambda x:hashlib.sha256(x).hexdigest();assert h(d)=='19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701';start=0x4605d4;end=0x46061a
+with tempfile.TemporaryDirectory() as td:
+ t=Path(td);(t/'input.bin').write_bytes(d[start-0x438000:end-0x438000]);(t/'input.s').write_text('.syntax unified\n.cpu cortex-m55\n.thumb\n.text\n.incbin "'+str(t/'input.bin')+'"\n');subprocess.run(['/opt/homebrew/bin/arm-none-eabi-as',str(t/'input.s'),'-o',str(t/'input.o')],check=True);rawtext=subprocess.check_output(['/opt/homebrew/bin/arm-none-eabi-objdump','-D','-j','.text','-M','force-thumb','--adjust-vma='+hex(start),str(t/'input.o')],text=True)
+rows=[];cursor=start
+for line in rawtext.splitlines():
+ m=re.match(r'\s*([0-9a-f]+):\s+([0-9a-f]{4}(?: [0-9a-f]{4})?)\s+([^\s]+)\s*(.*)',line)
+ if not m:continue
+ a=int(m[1],16)
+ if not start<=a<end:continue
+ raw=b''.join(int(v,16).to_bytes(2,'little') for v in m[2].split());assert a==cursor and raw==d[a-0x438000:a-0x438000+len(raw)];cursor+=len(raw);rows.append(dict(address=a,bytes=raw.hex(),mnemonic=m[3],operands=m[4]))
+assert cursor==end,(hex(cursor),hex(end),rawtext)
+o=Path('/tmp/p2-18493-fresh');o.mkdir(parents=True,exist_ok=False);(o/'instructions.json').write_text(json.dumps([dict(start=start,end=end,instructions=rows)],indent=2)+'\n');(o/'disassembly.txt').write_text(rawtext);refs=sorted(set(int(m[1],16) for row in rows if (m:=re.search(r'@\s*\(?([0-9a-f]{6,8})',row['operands'])) and 'pc' in row['operands']))
+(o/'references.json').write_text(json.dumps([dict(address=a,bytes=d[a-0x438000:a-0x438000+4].hex(),value=int.from_bytes(d[a-0x438000:a-0x438000+4],'little')) for a in refs],indent=2)+'\n')
+(o/'pseudocode.md').write_text('# State gate completion4605D4..46061A\nPartial;unaccepted.70 instructionbytes,inheritsframe16savedR2/R3/R4/LR atSP0/4/8/12 andR4globaladdressfrom460580. Enternonzero49292Eresult. 43D0CE liveargs;bit1clearviaLSLS30/BPL→4605F6. Bit1setorderedR0=wordliteral461040→SP4,R0=347→SP0,R3=wordliteral461038,R2=wordliteral460628,R1=wordliteral46062C,R0=1;43D574 liveargs. 4605F6 fresh43D0CE bit0set→460606;otherwiseSEPARATE43D0CE bit2clear→460614,bit2set460606. 460606:R2=wordliteral4611B0 FIRST,R1=R2,R0=0x04000000;43CE9E liveR3.\n460614 sharedzerochild/pastdiagnostics:R0=0;word[retainedR4]=0. 460618POP{R0,R1,R4,PC}:SP0savedincomingR2→R0,SP4savedincomingR3→R1,SP8restoreoriginalR4,SP12→PC. ChildresultsandexplicitclearR0discarded;R0incomingR2or344(firstdiagnostic)or347(seconddiagnostic);R1incomingR3orfirstliteral461034orsecondliteral461040. Prefixguardword!=1direct460618skipsclear/allchildren. Zero49292Edirect460614skipsseconddiagnosticbutclears. R2/R3notrestored. Freshmaskreadsnotmerged;globalclearnotconditionalonpostchildstate. Padding46061Aexcluded.\nNo C,gate/source admission,whole coverage or simulator/hardware proof.\n')
+(o/'replay.py').write_bytes(Path(__file__).read_bytes());(o/'receipt.json').write_text(json.dumps(dict(accepted=False,status='partial',input_sha256=h(d),instruction_bytes=end-start,files={p.name:h(p.read_bytes()) for p in o.iterdir()}),indent=2)+'\n');print('PASS',end-start)

@@ -1,0 +1,4 @@
+# State gate prefix460580..4605D4
+Partial;unaccepted.84 instructionbytes,opencontinuation. PUSH{R2,R3,R4,LR},frame16 slots0/4/8/12. R4=wordliteral460FB0 globaladdress;R0=freshword[R4];fullR0!=1→460618externalepilogue. Exact1→43D0CE liveincomingR1/R2/R3;bit1clearviaLSLS30/BPL→4605AE. Bit1setorderedR0=wordliteral461034→SP4,R0=344→SP0,R3=wordliteral461038,R2=wordliteral460628,R1=wordliteral46062C,R0=3;43D574 liveargs. SP0/4alias savedincomingR2/R3. 4605AE fresh43D0CE bit0set→4605BE;otherwiseSEPARATE43D0CE bit2clear→4605CC,bit2set4605BE. 4605BE:R1=wordliteral46103C,R2=R1,R0=0x0C000000;43CE9E liveR3.
+4605CC:49292E withliveR0/R1/R2/R3,NOargumentresetafterdiagnostics. Fullzeroresult→460614externalclear;nonnullfalls4605D4excludedseconddiagnostic. R4globaladdressretained;childcontractunresolved. Firstguardbypassskipsallchildren/clear. Remainingdiagnosticandepilogueoutside span;freshmaskcallsnotmerged.
+No C,gate/source admission,whole coverage or simulator/hardware proof.

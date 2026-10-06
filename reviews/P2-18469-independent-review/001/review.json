@@ -1,0 +1,19 @@
+{
+  "review_id": "P2-18469-independent-review",
+  "status": "partial",
+  "accepted": false,
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-global-guard-child-call-and-diagnostic-eighty-six-stack-return-18870-map/001",
+  "pinned_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "checks": [
+    "fresh 88-byte GNU replay",
+    "instruction and PC-reference manifests match",
+    "global pointer/live child arguments",
+    "fresh mask reads",
+    "diagnostic stack slots and POP return alias verified"
+  ],
+  "limitations": [
+    "child contracts unresolved",
+    "no explicit status return inferred",
+    "no global coverage claim"
+  ]
+}

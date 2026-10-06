@@ -1,0 +1,19 @@
+{
+  "review_id": "P2-18485-independent-review",
+  "status": "partial",
+  "accepted": false,
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-eight-record-key-search-ordered-output-and-stack-byte-pointer-18886-map/001",
+  "pinned_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "checks": [
+    "fresh 114-byte GNU replay",
+    "instruction/reference manifests match",
+    "32-byte frame and caller stack argument checked",
+    "8-entry 52-byte search and ordered outputs checked",
+    "child args/post-child loads/R6 replacement/LDM return checked"
+  ],
+  "limitations": [
+    "callee semantics unresolved",
+    "no string/copy behavior inferred",
+    "no global coverage claim"
+  ]
+}

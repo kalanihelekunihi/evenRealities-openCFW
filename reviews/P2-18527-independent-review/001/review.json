@@ -1,0 +1,18 @@
+{
+  "review_id": "P2-18527-independent-review",
+  "status": "partial",
+  "accepted": false,
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-record-loop-completion-three-global-stores-and-ordered-response-calls-18928-map/001",
+  "pinned_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "checks": [
+    "fresh 50-byte GNU replay",
+    "instruction/reference manifests match",
+    "three ordered stores and fresh count read checked",
+    "ordered child calls/live arguments and external join verified"
+  ],
+  "limitations": [
+    "global pointee and child semantics unresolved",
+    "alternate branch outside span",
+    "no global coverage claim"
+  ]
+}

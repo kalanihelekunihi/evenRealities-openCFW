@@ -1,0 +1,19 @@
+{
+  "review_id": "P2-18525-independent-review",
+  "status": "partial",
+  "accepted": false,
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-failed-record-lookup-second-diagnostic-response-and-negative-exit-18926-map/001",
+  "pinned_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "checks": [
+    "fresh 60-byte GNU replay",
+    "instruction/reference manifests match",
+    "fresh mask branches and conditional R7 offset replacement checked",
+    "fresh source key read and child args verified",
+    "diagnostic wrappers, ignored results and negative exit checked"
+  ],
+  "limitations": [
+    "completion and epilogue outside span",
+    "child contracts unresolved",
+    "no global coverage claim"
+  ]
+}

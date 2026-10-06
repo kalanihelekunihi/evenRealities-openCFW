@@ -1,0 +1,59 @@
+{
+  "status": "PASS",
+  "cases": 1,
+  "locked_image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_elf_sha256": "e6ba6916ee417e9efec1f4dc90a50f8ce7777f0e2ad8f976e6d2e27856072b78",
+  "source_result": {
+    "mount": 0,
+    "open_nonzero": true,
+    "prepare_header": 0,
+    "header_read_count": 32,
+    "header_hex": "0b2845627f9cb9d6f3102d4a6784a1bedbf815324f6c89a6c3e0fd1a3754718e",
+    "prepare_payload": 0,
+    "payload_read_count": 9001,
+    "payload_sha256": "ecfec1533dda6cf1ffe982e30c1bf9e0ab86a755c1ca989f93461a214a218c5c",
+    "payload_matches": true,
+    "invalid_whence": 4294967295,
+    "close": 0
+  },
+  "stock_result": {
+    "mount": 0,
+    "open_nonzero": true,
+    "prepare_header": 0,
+    "header_read_count": 32,
+    "header_hex": "0b2845627f9cb9d6f3102d4a6784a1bedbf815324f6c89a6c3e0fd1a3754718e",
+    "prepare_payload": 0,
+    "payload_read_count": 9001,
+    "payload_sha256": "ecfec1533dda6cf1ffe982e30c1bf9e0ab86a755c1ca989f93461a214a218c5c",
+    "payload_matches": true,
+    "invalid_whence": 4294967295,
+    "close": 0
+  },
+  "candidate_storage_calls": {
+    "alloc": 12,
+    "free": 9,
+    "lock": 6,
+    "unlock": 6,
+    "nor_read": 52,
+    "nor_prog": 9,
+    "nor_erase": 6,
+    "error": 0,
+    "log": 0,
+    "runtime": 0,
+    "image_erase": 0,
+    "image_read": 0,
+    "image_program": 0
+  },
+  "stock_storage_calls": {
+    "read": 18,
+    "program": 0,
+    "erase": 0
+  },
+  "stock_sync_provider": "0x4213d4 returns 0; a no-op after successful synchronous NOR callbacks.",
+  "fixture_setup": "Source littlefs 2.10.1 formatted and populated an in-memory 0x01400000..0x01fbffff NOR model; the resulting bytes were independently remounted and read by original firmware and ARM-compiled source.",
+  "limits": [
+    "Stock mount entry 0x415132 executes original code against recovered lfs_config at 0x431070; NOR transactions at 0x420f70/0x420b0c/0x420a08, allocator, mutex, and logging are explicit synthetic providers.",
+    "The source side executes ARM-compiled littlefs/config/file-services; allocator/mutex and NOR read/program/erase callbacks are synthetic. Both sides share the same exact disk bytes, path 0x004336e4, and mode string 0x0042dad8 (\"r+\").",
+    "No boot initializer 0x421210 reformat/recovery or marker-update branch is executed by this comparison; mount is called directly on an already formatted test filesystem. No installed NOR filesystem image/device state is claimed. No physical flash or hardware interaction."
+  ]
+}

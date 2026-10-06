@@ -1,0 +1,19 @@
+{
+  "review_id": "P2-18459-independent-review",
+  "status": "partial",
+  "accepted": false,
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-global-table-install-name-search-select-and-double-read-getter-18860-map/001",
+  "pinned_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "fresh_replay": "fresh-replay",
+  "checks": [
+    "136-byte GNU disassembly replay",
+    "instructions.json byte-for-byte match",
+    "references.json byte-for-byte match",
+    "control flow and load/store ordering reviewed"
+  ],
+  "limitations": [
+    "callee semantics unresolved",
+    "table/global ownership unresolved",
+    "no global coverage claim"
+  ]
+}

@@ -1,0 +1,27 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp1_ca0vae/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00460c3a <.text>:
+  460c3a:	f7dc fa48 	bl	43d0ce <.text-0x23b6c>
+  460c3e:	07c0      	lsls	r0, r0, #31
+  460c40:	d403      	bmi.n	460c4a <.text+0x10>
+  460c42:	f7dc fa44 	bl	43d0ce <.text-0x23b6c>
+  460c46:	0740      	lsls	r0, r0, #29
+  460c48:	d50b      	bpl.n	460c62 <.text+0x28>
+  460c4a:	f8df 191c 	ldr.w	r1, [pc, #2332]	@ 461568 <.text+0x92e>
+  460c4e:	fb09 f707 	mul.w	r7, r9, r7
+  460c52:	eb05 0007 	add.w	r0, r5, r7
+  460c56:	6b03      	ldr	r3, [r0, #48]	@ 0x30
+  460c58:	000a      	movs	r2, r1
+  460c5a:	f05f 6088 	movs.w	r0, #71303168	@ 0x4400000
+  460c5e:	f7dc f91e 	bl	43ce9e <.text-0x23d9c>
+  460c62:	2101      	movs	r1, #1
+  460c64:	0020      	movs	r0, r4
+  460c66:	b2c0      	uxtb	r0, r0
+  460c68:	f7ff fc2b 	bl	4604c2 <.text-0x778>
+  460c6c:	f7ff fabd 	bl	4601ea <.text-0xa50>
+  460c70:	f05f 30ff 	movs.w	r0, #4294967295	@ 0xffffffff
+  460c74:	e06f      	b.n	460d56 <.text+0x11c>

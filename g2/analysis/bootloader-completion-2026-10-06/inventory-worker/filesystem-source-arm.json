@@ -1,0 +1,207 @@
+{
+  "status": "PASS",
+  "real_source_mutex_wrappers": false,
+  "mutex_kernel_calls": {
+    "take": 0,
+    "give": 0
+  },
+  "real_source_nor_read": false,
+  "nor_pio_calls": 0,
+  "real_source_queue_runtime": false,
+  "real_source_queue_wrapper": false,
+  "queue_kernel_calls": 0,
+  "real_task_observation": null,
+  "real_source_allocator": false,
+  "source_sha256": {
+    "g2/components/bootloader/filesystem/filesystem.h": "7c121607fdae349145bd07cf28094fac810a549c38a735a61d03b48f93ab37d5",
+    "g2/components/bootloader/filesystem/verify_arm.py": "94f522b5ded86a297842f538363aed648215c9ad35db8330a778115931881ef6",
+    "g2/components/bootloader/filesystem/mutex_nor_queue_runtime_task_module.ld": "c299d9d6404086fb2b39774bb3b90a2f2bbae4711a99ec5a42b9b67889e4e2b7",
+    "g2/components/bootloader/filesystem/host_test.c": "b4bfdb67beecec782daa75d672bfb38e0d1b49c79e1852734218d955a3ceec4a",
+    "g2/components/bootloader/filesystem/Makefile": "00585b89795e36786867b3b6cca2e74a21478db7e02519d7029099c97a1b7f68",
+    "g2/components/bootloader/filesystem/file_services.h": "cff43ab70749850e301b4dd7febe287b661d4a64e05ed62c683d9466aeb05cb7",
+    "g2/components/bootloader/filesystem/boot_lfs_defines.h": "e623b34026ebd5efd96254dfac3710007f2f6c57cd28e99759724fe0c4d8ee96",
+    "g2/components/bootloader/filesystem/queue_runtime_task_module.ld": "306a121370ca2f31c5f178ce3175ffbe07b1fc54543b968fb2463b7e1dbcc8cb",
+    "g2/components/bootloader/filesystem/module.ld": "812f6653384a0bfc03485d6869cfd5c9a9b1fc7193e44387f52b57f4a19c5b2f",
+    "g2/components/bootloader/filesystem/filesystem.c": "a316029904feb6c62671d501e6b6a5699168b6cd23c52a06ac390e9b6709ea57",
+    "g2/components/bootloader/filesystem/runtime_memory.c": "f147b6e4f67f5c5eb5f13f8f6835b3ce9b9f3896ec497c1a3531bbed8fa52210",
+    "g2/components/bootloader/filesystem/queue_task_module.ld": "ffb2269a646ae6ba00cbda6b8f4ac23b06af32beeef66e2ef001f73ad80bf4c7",
+    "g2/components/bootloader/filesystem/nor_queue_runtime_task_module.ld": "258e402fc5d40321ca6644d87eab7a867f21e6b7c712ca5ff3217c9f6bc3d265",
+    "g2/components/bootloader/filesystem/file_services.c": "a01329c4d096be958c9516aaaa080f9896adeb602c08c57c8005a90c599a3ce1",
+    "g2/components/bootloader/filesystem/owned_module.ld": "b0a3bf626f6606ea186d5034c51d759a3b448ca3d287f6075d8ce12bd6f7c618",
+    "g2/components/bootloader/filesystem/task_module.ld": "20a3acea4c060d2af7010e0f7537676fc1394d7c1f6eb0f19b83f2a5eaa46387",
+    "g2/components/bootloader/filesystem/freestanding_include/inttypes.h": "720aa6448b4b2976d4f56477ffcf8f981dd81200abf56bf2e231db01eb6266f7",
+    "g2/components/bootloader/filesystem/freestanding_include/stdlib.h": "b5b2d2393401d3772013399e6459f71364f2aa84e39b8f58620b595d5912d268",
+    "g2/components/bootloader/filesystem/freestanding_include/string.h": "2276666b644c8ef7ba3a262b7c7887296ae1f5aeb1e730be3387f8d412f4aa26",
+    "g2/components/bootloader/filesystem/upstream/lfs.c": "81a209e8551754d13b24fc0a2b6707fb3b2475e14feba00bf0df722b98a31398",
+    "g2/components/bootloader/filesystem/upstream/lfs_util.h": "f5d249326646c818e62af3cefefe8a57e7b484446a0f48d1050b95e60925088e",
+    "g2/components/bootloader/filesystem/upstream/lfs.h": "ee44e99d6b19119b3e577b969b80c9d5e6f96410c9593794afddf6d4b314c486",
+    "g2/components/bootloader/filesystem/upstream/lfs_util.c": "f2fbde533670560434bd9f5a547174cc7c5a4670a02c47b4bd85180dced8b2ec",
+    "g2/components/bootloader/update_core/rom_resources.c": "0fa2ad19685f924c4db99eba4f4a59aa346fca58b23e51a4b5470a77ce63efff",
+    "g2/components/bootloader/update_core/update_core.c": "7ec6576285f84829158ee19bfca53a1db113f4400f60a3697c5b00fa896fb369",
+    "g2/components/bootloader/update_core/Makefile": "c6fbc42971c72436a78f4be07ceb1ed24a3b084c5d6c97ef9c7c0905640a2588",
+    "g2/components/bootloader/update_core/elf_reader.py": "a52a20612b85593e95bf49962ef6354e2c518bd2baa13d2b85a473d66207837e",
+    "g2/components/bootloader/update_core/handoff.S": "483d9d93639b6bbbe31b081b14745a550f694b6f9581081ff9ec69d59381e6c5",
+    "g2/components/bootloader/update_core/module.ld": "d304815f6b8017d94689eb8c2babe85bda870b0529353f340561752cb24f8e80",
+    "g2/components/bootloader/update_core/update_core.h": "f8729dd2b81d2e90ca502eb014625352a64aac641a8c266c2c481ca5a650492c",
+    "g2/components/bootloader/update_core/verify.py": "80c4ae587316febbd6618f8a71cba7c79b8b5fb159bd92b0085a67a36e16c4ba"
+  },
+  "calls": [
+    [
+      "lfs_format",
+      [
+        537028728,
+        91208
+      ],
+      0
+    ],
+    [
+      "lfs_mount",
+      [
+        537028728,
+        91208
+      ],
+      0
+    ],
+    [
+      "lfs_mkdir",
+      [
+        537028728,
+        536903680
+      ],
+      0
+    ],
+    [
+      "lfs_file_open",
+      [
+        537028728,
+        536895488,
+        536903680,
+        1282
+      ],
+      0
+    ],
+    [
+      "lfs_file_write",
+      [
+        537028728,
+        536895488,
+        536936448,
+        9033
+      ],
+      9033
+    ],
+    [
+      "lfs_file_close",
+      [
+        537028728,
+        536895488
+      ],
+      0
+    ],
+    [
+      "opencfw_boot_verify",
+      [
+        536875008,
+        536879104
+      ],
+      1
+    ],
+    [
+      "lfs_unmount",
+      [
+        537028728
+      ],
+      0
+    ],
+    [
+      "lfs_mount",
+      [
+        537028728,
+        91208
+      ],
+      0
+    ],
+    [
+      "opencfw_boot_verify",
+      [
+        536875008,
+        536879104
+      ],
+      1
+    ],
+    [
+      "opencfw_boot_program",
+      [
+        536875008,
+        536879104
+      ],
+      0
+    ],
+    [
+      "opencfw_boot_file_open",
+      [
+        4404964,
+        4381400
+      ],
+      553690144
+    ],
+    [
+      "opencfw_boot_file_prepare",
+      [
+        553690144,
+        32,
+        0
+      ],
+      0
+    ],
+    [
+      "opencfw_boot_file_read",
+      [
+        536907776,
+        1,
+        9001,
+        553690144
+      ],
+      9001
+    ],
+    [
+      "opencfw_boot_file_close",
+      [
+        553690144
+      ],
+      0
+    ],
+    [
+      "lfs_unmount",
+      [
+        537028728
+      ],
+      0
+    ]
+  ],
+  "provider_counts": {
+    "alloc": 18,
+    "free": 18,
+    "lock": 22,
+    "unlock": 22,
+    "nor_read": 85,
+    "nor_prog": 9,
+    "nor_erase": 6,
+    "error": 0,
+    "log": 11,
+    "runtime": 3,
+    "image_erase": 3,
+    "image_read": 3,
+    "image_program": 3
+  },
+  "source_elf_sha256": "e6ba6916ee417e9efec1f4dc90a50f8ce7777f0e2ad8f976e6d2e27856072b78",
+  "recovered_numeric_config_64_bytes_match": true,
+  "image_bytes": 9033,
+  "limits": [
+    "Real ARM source littlefs, file wrappers, image verification and update loop execute. Heap is real pinned TLSF only when real_source_allocator is true; mutex wrappers execute when real_source_mutex_wrappers is true, with kernel take/give providers synthetic; image erase/program/readback providers remain synthetic.",
+    "NOR is an offline byte model with one-to-zero program checks; real-nor-read profile executes the stock read-command source but setup/teardown and lower HAL remain synthetic, not silicon timing/coherence/power-loss behavior.",
+    "No original end-to-end bootloader comparison, exact IAR ABI/build or hardware bootability claim.",
+    "This candidate littlefs profile disables diagnostic/assert macros; exact stock configuration beyond recovered struct is unverified.",
+    "DFU task instructions execute only in real-task profile; queue wrappers execute only in real-queue profile with kernel receive providers synthetic; runtime-mode query executes when real-source-queue-runtime is enabled. No RTOS task scheduling, IRQ/SBL/ROM/flash driver execution or firmware writes."
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "review_id": "P2-18475-independent-review",
+  "status": "partial",
+  "accepted": false,
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-byte-ring-removal-loop-and-selected-length-return-18876-map/001",
+  "pinned_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "checks": [
+    "fresh 66-byte GNU replay",
+    "instruction/reference manifests match",
+    "loop data ordering, SDIV/MLS, unsigned low16 termination, and return checked"
+  ],
+  "limitations": [
+    "body relies on prefix entry state",
+    "alias/concurrency effects not dynamically modeled",
+    "no global coverage claim"
+  ]
+}
