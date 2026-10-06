@@ -1,0 +1,52 @@
+{
+  "disposition": "accepted_with_bounded_limits",
+  "scope": "Independent review of PCM registration/unregistration source, original body evidence, direct-caller literals, observer audit, and representative native comparisons.",
+  "final_comparison": {
+    "path": "g2/build/foundation/audio-registration-simulator/comparison-first.json",
+    "sha256": "139fad0a883f25acf8f4b7f171c49ad423fa2f18de0e50f6109b5fe8bbc9ffa4",
+    "status": "PASS",
+    "calls": 103,
+    "unique_original_trace_bytes": 1736,
+    "firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "elf_sha256": "a1984f9c6e64b9af79c331e1636e6db53350925c5243138fd9b9add2f8654dc6"
+  },
+  "independent_reruns": {
+    "registration_lifecycle_and_observer_audit": {
+      "path": "g2/analysis/audio-registration-2026-10-06/review/representative-rerun.json",
+      "status": "PASS",
+      "checks": 9,
+      "observer_audit_calls_per_profile": 10,
+      "cases": [
+        "mode0 registration and replacement",
+        "wrong-owner unregister",
+        "unchecked low-byte mode2 row",
+        "queued notifications survive owner/callback replacement and removal",
+        "no-memory-hook versus scoped memory-hook stores/snapshot sequence"
+      ]
+    },
+    "logger_flag_reread": {
+      "path": "g2/analysis/audio-registration-2026-10-06/review/logger-flags-reread.json",
+      "status": "PASS",
+      "mutation": "Synthetic 0-to-1 FLAGS mutation between successive volatile reads; both sides stop at 0x43ce9e."
+    }
+  },
+  "reviewed_inputs": {
+    "g2/components/foundation/audio_pcm_registration/registration.c": "81a23abd7af68fa418f93234647133ac92e6783c01e31cc6f69a2527351a4179",
+    "g2/components/foundation/audio_pcm_registration/registration.h": "fc4d4388814a540635f9e7407ae79d7a3fefd306791edfc2f0ed20757f727d47",
+    "g2/components/foundation/audio_pcm_registration/verify.py": "922b97d72a37a94f731b0d0056ad21c29d50a682693af372f372ee0200f3ae53",
+    "g2/analysis/audio-registration-2026-10-06/REPORT.md": "9b1c7c3ff1e9be01790c399bb7e648497747dbb7ef9c9a8c22882053f9fccb0d",
+    "g2/analysis/audio-registration-2026-10-06/pseudocode.md": "eff5f6c92eb904d4bfe7d3090aa6516c40ef4eab5770bf861dcd428ba5e8c6f2",
+    "g2/analysis/audio-registration-2026-10-06/original-provenance.json": "9710faca8ae7c1c2bdaae508771a624e69a1bdfe53cec481a6cbfb251bf3fcee",
+    "g2/analysis/audio-registration-2026-10-06/original-disassembly.txt": "5a46b77494beaf8adcc4e46f90fd404e7f77b771f044d42ed599a8f0e44d5d6b"
+  },
+  "assessment": {
+    "source": "No blocking defect found in the bounded functions. FLAGS is separately volatile-read at each test; the compiled O2 code and synthetic reread test confirm this behavior.",
+    "atomicity": "The memset byte/word store order is reconstructed; scalar C stores are not claimed atomic-equivalent to the grouped stock store.",
+    "observer_audit": "No memory hooks during registration; final mapped RAM except stack/output, full I2S/SCB and normalized ordered store bytes compared. The 10-call no-hook/scoped-hook sequence matched. This is not a universal read-trace or physical-device proof.",
+    "limits": [
+      "Logger provider paths stop before 0x43d574 / 0x43ce9e.",
+      "Callbacks, DSP, file sink, task wake/routing and PCM ownership are static or boundary-only.",
+      "No multiword atomicity, concurrent registration safety, physical cache/MMIO behavior, full source completeness, or byte-identical firmware claim."
+    ]
+  }
+}

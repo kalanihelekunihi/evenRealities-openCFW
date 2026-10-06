@@ -1,0 +1,26 @@
+
+g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0041602a <.data+0x602a>:
+  41602a:	b510      	push	{r4, lr}
+  41602c:	2400      	movs	r4, #0
+  41602e:	f3ef 8005 	mrs	r0, IPSR
+  416032:	2800      	cmp	r0, #0
+  416034:	d001      	beq.n	0x41603a
+  416036:	2401      	movs	r4, #1
+  416038:	e00c      	b.n	0x416054
+  41603a:	f002 fd8c 	bl	0x418b56
+  41603e:	2801      	cmp	r0, #1
+  416040:	d008      	beq.n	0x416054
+  416042:	f3ef 8010 	mrs	r0, PRIMASK
+  416046:	2800      	cmp	r0, #0
+  416048:	d103      	bne.n	0x416052
+  41604a:	f3ef 8011 	mrs	r0, BASEPRI
+  41604e:	2800      	cmp	r0, #0
+  416050:	d000      	beq.n	0x416054
+  416052:	2401      	movs	r4, #1
+  416054:	0020      	movs	r0, r4
+  416056:	bd10      	pop	{r4, pc}

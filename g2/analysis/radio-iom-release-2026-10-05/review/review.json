@@ -1,0 +1,56 @@
+{
+  "scope": "Independent review of local IOM-like CQ term, disable and uninitialize functions using the unchanged Ambiq CMDQ provider and real PRIMASK helper.",
+  "disposition": "PASS_WITH_EXPLICIT_RAW_STORE_LIMIT",
+  "comparison": {
+    "path": "g2/build/foundation/radio-iom-release-simulator/comparison-final.json",
+    "sha256": "bc2efbada784f950d52f43362e910f44d1f3bf4c4f492cc7af3fedf9d50d6474",
+    "status": "PASS",
+    "cases": 336,
+    "unique_original_trace_bytes": 348,
+    "all_new_consumer_bytes_executed": true,
+    "new_consumer_bytes": 190,
+    "elf_sha256": "c0a7ef3f9475b4808d92fbaada7f84f636cadc11ae6819864bc365d7869523a8",
+    "source_manifest_entries": 17,
+    "source_manifest_matches_current": true
+  },
+  "representative_rerun": {
+    "path": "g2/analysis/radio-iom-release-2026-10-05/review/representative-rerun.json",
+    "sha256": "e8b974cc787bd90171165c217c6cd05ebb9d54e4571df56209cd2a5034d532c9",
+    "status": "PASS",
+    "cases": 8,
+    "elf_sha256": "c0a7ef3f9475b4808d92fbaada7f84f636cadc11ae6819864bc365d7869523a8",
+    "raw_curIdx_sequences_separately_checked": true
+  },
+  "source_sha256": {
+    "g2/components/foundation/radio_iom_release/iom_release.h": "681a4d11f3609ba515ca2c48653de4902993802e1f88d82004d506921a39780d",
+    "g2/components/foundation/radio_iom_release/verify.py": "e476b5086290a668b950fd57235edd0f074f1f8df9c48a986bb4ba649b531f9b",
+    "g2/components/foundation/radio_iom_release/iom_release.c": "dc44702b3a2592877b7f4c25d4b4d87091baae690ade389ac63929a3c03ea7b1"
+  },
+  "index_store_difference": {
+    "stock_wrap_sequence": [
+      "0x1ff",
+      "0xff"
+    ],
+    "optimized_source_wrap_sequence": [
+      "0xff"
+    ],
+    "only_canonicalized_region": "contiguous store sequence at queue+0x1c, while PRIMASK==1",
+    "other_writes_mmio_and_final_state": "strictly compared",
+    "accepted_scope": "Synchronous call-contract/final-state behavior only; no internal RAM or DMA observer identity claim."
+  },
+  "findings": [
+    {
+      "severity": "material-limit",
+      "finding": "Optimized source does not reproduce stock intermediate curIdx store during wrap. Raw per-side sequence is separately asserted and saved, and only this contiguous helper-internal index sequence is normalized for final semantic comparison."
+    },
+    {
+      "severity": "informational",
+      "finding": "No-argument critical-entry hook residual R0 differs; only that ignored no-argument register value is normalized. PRIMASK instruction behavior and final PRIMASK remain checked."
+    },
+    {
+      "severity": "scope",
+      "finding": "Local CQ handle slot is cleared despite term errors; no queue memory is freed and no callback/expiry/transport drain is established."
+    }
+  ],
+  "limits": "Actual local IOM-like consumers, existing unchanged CMDQ term/index provider and real PRIMASK, no executable stubs. Synchronous nonaliasing mapped states, synthetic MMIO, buffer sentinel unchanged. Exact original/source wrapped curIdx store sequences separately asserted and retained; only that helper-internal contiguous masked sequence normalized for final call-contract comparison. No internal RAM-store identity or DMA observer equivalence. No initializer/allocator/free/callback/interrupt/DMA scheduling/drain or complete transport-release proof; helper SDK attribution remains inferred."
+}

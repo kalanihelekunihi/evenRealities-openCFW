@@ -1,0 +1,19 @@
+{
+  "task_id": "P2-16049",
+  "accepted": false,
+  "status": "partial",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-buffer-flush-and-handle-16446-map/002",
+  "candidate_receipt_sha256": "944d027ba2c8fb4b9ca9b08c241a3f7d24dcf37cbe9b9d57f5938f56fc95ad8f",
+  "candidate_instruction_sha256": "eb787d93a543b26b351995ec8872b28606ffae905e753cd5371077225ae3d6b9",
+  "candidate_pseudocode_sha256": "c287f414ee95f180a1bfcf575a60a23a6683071dfd7123238f24f6528b247956",
+  "candidate_replay_sha256": "bb99cecdba6a7075a6dbe049a58b56f42f27b477baec24da779ea2727a7450dd",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_output_receipt_sha256": "7e67e99cb27663244dfff5bf05b8293b851b4a771ae6ee777cfd51aade15169c",
+  "fresh_replay_stdout": "",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "review": "Authoritative revision 002 corrects the terminal CMP branch. Signed remainder, fresh flag/global/handle reads, sentinel distinction, and child result propagation are retained.",
+  "limitations": [
+    "Bounded instruction-level review only; no atomicity, global concurrency, hardware behavior or child-contract closure.",
+    "No canonical admission or gate change."
+  ]
+}

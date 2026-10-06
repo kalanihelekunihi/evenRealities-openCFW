@@ -1,0 +1,18 @@
+{
+  "task_id": "P2-16059",
+  "accepted": false,
+  "status": "partial",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-backing-descriptor-allocation-16456-map/001",
+  "candidate_receipt_sha256": "60a454bca00a2437daf09fc0731bc760820928cf07229df3c0386d90648c755f",
+  "candidate_instructions_sha256": "523b6548355a43f85f3981b503854afe45869bb87fb990033ba2f5fc352a322e",
+  "candidate_pseudocode_sha256": "1b458ead00ad71480dd5a6547a9773a6998cf8a85dded116ff1b4bffe202308c",
+  "candidate_replay_sha256": "3bb3f4ad44fcc3c2032aae0f41d1d6c5fa767fa9ffcc510a915ee28ba0049c1d",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_output_receipt_sha256": "08e3b61c1f8269bfd2319e49713fcb6265adbea4b70fca603ca0b996e0cae530",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "review": "Descriptor stack layout and allocator call order match; POP returns rewritten local descriptor slots, with no allocation-NULL validation before copy.",
+  "limitations": [
+    "Child allocator/heap behavior, invalid pointers/fault behavior, concurrent mutation, physical buffer effects, and ownership remain unqualified.",
+    "No admission, C or gate change."
+  ]
+}

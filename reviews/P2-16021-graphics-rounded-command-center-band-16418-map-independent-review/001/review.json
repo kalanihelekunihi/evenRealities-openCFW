@@ -1,0 +1,18 @@
+{
+  "task_id": "P2-16021",
+  "accepted": false,
+  "status": "partial",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-rounded-command-center-band-16418-map/001",
+  "candidate_receipt_sha256": "3f71e21eba660d4085f868c3f75f5c5c823fc36dd3b479dd324621b4d4336232",
+  "candidate_instructions_sha256": "8e20ece6a694ef2fdcdcfb993e5ed95f6da6093cf6add6d7f8df44566b258e7a",
+  "candidate_pseudocode_sha256": "93ac76ebc292bf62226b241787b5b13a4d628416da7d0129208f2f793e082548",
+  "candidate_replay_sha256": "b910bb7adb91c9c092672751c01b937a3c68f0bf76749a32ce324786804e77bf",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_replay_stdout": "PASS 88",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "review": "Center path and subsequent loop-register reloads match; allocation failure skips that command and continues into loop setup.",
+  "limitations": [
+    "Only the bounded original-image span is reviewed; child behavior, function ownership/completeness, architecture-specific effects and physical rendering are unqualified.",
+    "No C implementation, admission, coverage promotion or gate change."
+  ]
+}

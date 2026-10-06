@@ -1,0 +1,114 @@
+{
+  "status": "partial",
+  "accepted": false,
+  "functions": [
+    {
+      "entry": 4918106,
+      "raw_envelope_bytes": 144,
+      "raw_instruction_body_bytes": 144,
+      "raw_instruction_ranges": [
+        [
+          4918106,
+          4918250
+        ]
+      ],
+      "maps": [
+        "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-sized-buffer-acquire-16396-map/001"
+      ],
+      "qualification": "Exact bytebody match only; raw ownership/function bounds and semantic completeness unqualified."
+    },
+    {
+      "entry": 4919960,
+      "raw_envelope_bytes": 468,
+      "raw_instruction_body_bytes": 324,
+      "raw_instruction_ranges": [
+        [
+          4919960,
+          4920076
+        ],
+        [
+          4920144,
+          4920184
+        ],
+        [
+          4920260,
+          4920428
+        ]
+      ],
+      "maps": [
+        "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-buffer-layout-stride-prefix-16398-map/002",
+        "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-buffer-layout-stride-dispatch-16400-map/001",
+        "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-buffer-layout-publish-commands-16402-map/001"
+      ],
+      "qualification": "Exact bytebody match only; raw ownership/function bounds and semantic completeness unqualified."
+    },
+    {
+      "entry": 5324334,
+      "raw_envelope_bytes": 60220,
+      "raw_instruction_body_bytes": 40,
+      "raw_instruction_ranges": [
+        [
+          5324334,
+          5324364
+        ],
+        [
+          5384544,
+          5384554
+        ]
+      ],
+      "maps": [
+        "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-alpha-conditional-command-16404-map/001",
+        "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-alpha-command-tail-16406-map/001"
+      ],
+      "qualification": "Exact bytebody match only; raw ownership/function bounds and semantic completeness unqualified."
+    },
+    {
+      "entry": 5325700,
+      "raw_envelope_bytes": 80,
+      "raw_instruction_body_bytes": 78,
+      "raw_instruction_ranges": [
+        [
+          5325700,
+          5325762
+        ],
+        [
+          5325764,
+          5325780
+        ]
+      ],
+      "maps": [
+        "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-buffer-chain-reset-prefix-16408-map/001",
+        "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-buffer-chain-reset-loop-16410-map/001"
+      ],
+      "qualification": "Exact bytebody match only; raw ownership/function bounds and semantic completeness unqualified."
+    },
+    {
+      "entry": 5385008,
+      "raw_envelope_bytes": 644,
+      "raw_instruction_body_bytes": 644,
+      "raw_instruction_ranges": [
+        [
+          5385008,
+          5385652
+        ]
+      ],
+      "maps": [
+        "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-rounded-command-radius-entry-16412-map/001",
+        "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-rounded-command-preflight-16416-map/001",
+        "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-rounded-command-center-band-16418-map/001",
+        "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-rounded-command-edge-loop-16420-map/001",
+        "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-rounded-command-loop-tail-16422-map/001"
+      ],
+      "qualification": "Exact bytebody match only; raw ownership/function bounds and semantic completeness unqualified."
+    }
+  ],
+  "instruction_body_bytes": 1230,
+  "function_count": 5,
+  "layout_tables_bytes": 143,
+  "layout_excluded_bytes": 1,
+  "limitations": [
+    "No envelope-byte denominator sum across functions; discontiguous function envelopes can contain other code.",
+    "Known TBB tables are data, singleton remains unclassified; 5143C2..5143C4 unclassified.",
+    "No semantic completeness, canonical owner admission, review binding closure, C, freeze or gates."
+  ]
+}

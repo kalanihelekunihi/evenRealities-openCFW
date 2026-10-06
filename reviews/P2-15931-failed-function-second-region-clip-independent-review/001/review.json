@@ -1,0 +1,18 @@
+{
+  "task_id": "P2-15931",
+  "accepted": false,
+  "status": "partial",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_outputs": [
+    "fresh/instructions.json",
+    "fresh/disassembly.txt",
+    "fresh/references.json"
+  ],
+  "locked_image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "review": "The 106-byte map at 0x540308..0x540372 exactly tiles the source and retains the active 224-byte frame. It performs the shown wrapped coordinate bounds and signed comparisons, including R11+1 wrap behavior, keeps post-branch reloads, then calls 0x450BCC and 0x450F28 with their respective zero/nonzero branches; success continues through 0x561810. Child effects and region interpretation are not inferred.",
+  "limitations": [
+    "This is an incomplete continuation of the larger raw candidate; it does not establish a full function ABI, completion, or ownership.",
+    "Child contracts/effects and physical rendering, fault, alias, or concurrency behavior remain unresolved. FP architectural conditions are not qualified.",
+    "Partial/unaccepted; no C or gates."
+  ]
+}

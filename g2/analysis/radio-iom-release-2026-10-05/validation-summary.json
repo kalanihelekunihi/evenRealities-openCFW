@@ -1,0 +1,35 @@
+{
+  "status": "PASS_WITH_INDEX_STORE_LIMIT",
+  "comparison_path": "g2/build/foundation/radio-iom-release-simulator/comparison-final.json",
+  "comparison_sha256": "bc2efbada784f950d52f43362e910f44d1f3bf4c4f492cc7af3fedf9d50d6474",
+  "cases": 336,
+  "original_trace_bytes": 348,
+  "new_disjoint_bytes": 190,
+  "cumulative_bytes": 5934,
+  "all_190_consumer_bytes_executed": true,
+  "executable_stubs": 0,
+  "affected_tests": 22,
+  "aggregate": {
+    "modules": 43,
+    "totals": {
+      "tests_run": 224,
+      "passed": 218,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 7,
+      "method_skips": 6,
+      "setup_skips": 1
+    }
+  },
+  "index_store_limit": "Stock wrap writes intermediate then final; unchanged O2 helper final only. Exact per-side raw sequences checked; only contiguous masked index stores canonicalized. No internal RAM/DMA observer identity.",
+  "optimized_tick": "BLOCKED unchanged",
+  "source_complete_payloads": 0,
+  "byte_identical_bundle": false,
+  "independent_review": "review/report.md",
+  "independent_review_result": {
+    "disposition": "PASS_WITH_EXPLICIT_RAW_STORE_LIMIT",
+    "representative_cases": 8,
+    "report": "review/report.md",
+    "review_sha256": "c8c1ac2993b94759e2b24b0ac94d0e1a9d81dc4c3cbc1dacbe19884d65140bb7"
+  }
+}

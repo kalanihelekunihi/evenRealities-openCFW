@@ -1,0 +1,20 @@
+{
+  "task_id": "P2-15957",
+  "accepted": false,
+  "status": "partial",
+  "source_packet": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-matrix-three-by-three-identity-16356-map/001",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_instruction_output": "fresh/decoded-output/instructions.json",
+  "locked_image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "range": {
+    "start": "0x561810",
+    "end_exclusive": "0x561830",
+    "bytes": 32
+  },
+  "original_packet_receipt_sha256": "88cc6b31837384db72b52f65d07b1543940b4109f4ca0c9b784f9163a1c9f009",
+  "review": "VMOV.F32 S0,#1.0; store diagonal at offsets 0/16/32; MOVS R1,0 and store off-diagonals. R0 preserved, R1=0, S0=1.0, APSR N=0/Z=1 with C/V retained; BX LR.",
+  "limitations": [
+    "Raw-byte replay reproduced the packet instruction rows against the pinned locked image; opcode semantics were independently checked against the decoded instruction sequence.",
+    "This is a bounded instruction/pseudocode review only. Floating-point architectural rounding/traps, memory faults and runtime reachability are not behaviorally qualified where applicable. No corpus admission, implementation, or gate change."
+  ]
+}

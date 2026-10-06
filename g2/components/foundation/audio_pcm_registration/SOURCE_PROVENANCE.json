@@ -1,0 +1,22 @@
+{
+  "kind": "Manual instruction reconstruction; exact prefix cut observationABI is new; no wholeimage/byteidentical claim",
+  "firmware": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+  "firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_bindings": {
+    "g2/components/foundation/audio_pcm_registration/registration.c": "81a23abd7af68fa418f93234647133ac92e6783c01e31cc6f69a2527351a4179",
+    "g2/components/foundation/audio_pcm_registration/registration.h": "fc4d4388814a540635f9e7407ae79d7a3fefd306791edfc2f0ed20757f727d47"
+  },
+  "original_spans": "g2/analysis/audio-registration-2026-10-06/original-provenance.json",
+  "original_register": "0x57ab78",
+  "original_unregister": "0x57acd0",
+  "log_flags_getter": "0x43d0ce (RAM20004543)",
+  "zero_fill_specialization": "43c0e4 zero byte value,length12; source scalar word order does not establish original multiword atomicity",
+  "reused_unchanged_components": [
+    "audio_pcm_consumer",
+    "audio_dma_rearm",
+    "audio_cache_handoff",
+    "cache_maintenance",
+    "freertos_queue",
+    "freertos_daemon"
+  ]
+}

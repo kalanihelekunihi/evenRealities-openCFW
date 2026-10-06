@@ -1,0 +1,42 @@
+{
+  "target": "make -C g2 cache-maintenance-simulator",
+  "compiler_profile": "clang Cortex-M4 Thumb2 soft-float freestanding C11 O2 fwrapv; isolated address map, not stock firmware link",
+  "bindings": {
+    "g2/components/foundation/cache_maintenance/cache_maintenance.c": "365496e8fc154d0b604e292ab96272f6871106a705ac7a5439a67271f6961d03",
+    "g2/components/foundation/cache_maintenance/verify.py": "448b9510a7c30607d45ce3919f45ecee304b1ecec202f067c04229020ab41198",
+    "g2/components/foundation/cache_maintenance/cache_maintenance.h": "64c437f8de20c7e0c7e4ce21a8cff58a8afecf0a46950b17dd260783e9f12c11",
+    "g2/Makefile": "23cabca2908f092e1745e710254faba418228693b3f8885cbbca01d18278a9fb",
+    "g2/build/foundation/cache-maintenance-simulator/cache.o": "f0067c2662713744ec364fd50ea7d3d3989bb954a4e691053611226624f4013d",
+    "g2/build/foundation/cache-maintenance-simulator/cache_maintenance.elf": "c35d1ef40fa4334044eba60f39d7a2bead8d4791832ecaceea2c829040b7381c",
+    "g2/build/foundation/cache-maintenance-simulator/build.log": "7d3d94e06bc7cfdac738e58b5a186bd1c0ff2768070530ec64979f2fa51c4d37",
+    "g2/components/foundation/ambiq_gpio_config/simulator/module.ld": "34dc9cd95b6c71c3d2eac0f2dafea432d719275592798818fb0c99d07e86e53b"
+  },
+  "comparison": {
+    "path": "g2/build/foundation/cache-maintenance-simulator/comparison-reviewed.json",
+    "sha256": "a19fc0581b3d3acfa36f09d4a038bb629ff380de6b6a2f432acbbe7808c8c9ef",
+    "status": "PASS",
+    "cases": 768,
+    "trace_bytes": 384
+  },
+  "undefined_symbols": "",
+  "production_byte_match": false,
+  "evidence_bindings": {
+    "g2/build/foundation/cache-maintenance-simulator/comparison-reviewed.json": "a19fc0581b3d3acfa36f09d4a038bb629ff380de6b6a2f432acbbe7808c8c9ef",
+    "g2/build/foundation/cache-maintenance-simulator/aggregate.json": "77061acef66ae62a0d6747204d4070fbe653ef523a89333d6729dd57bb1b1093",
+    "g2/build/foundation/cache-maintenance-simulator/affected.log": "dc63da3abf7a8d5b89f749028389ffc25fda5fac8ecbf5fedb8689521375ad55",
+    "g2/analysis/cache-maintenance-2026-10-06/review/review.json": "2859cb5f330d381dfc3f4aa6d628e63f52139a7a1efb975939c0c649c1899d0f",
+    "g2/analysis/cache-maintenance-2026-10-06/review/report.md": "5f505f1c65553b1e25243cc0d6dcf873c0120862beaf69a5612d9ea44f41516e",
+    "g2/analysis/cache-maintenance-2026-10-06/review/representative-rerun.json": "4233fb8df5163b4f8ad7e08cdc9775bc308a14011fc2f6dc83b7cbc1e213e870",
+    "g2/analysis/cache-maintenance-2026-10-06/validation-summary.json": "551bb4e001eb22f9210be3add59ea2ca5e867f162e151383cec6715eefee93a0",
+    "g2/analysis/cache-maintenance-2026-10-06/cumulative-inventory.json": "7e048a08fc6937a7703ea76121ec8d0d9cff2e83ce05809a8a1dc1b7c94f552a",
+    "g2/analysis/cache-maintenance-2026-10-06/original-provenance.json": "0f1278bfece280ad8fc2084ab01ea21c4f0adddb08ae702abdfb22ee7f8808cd",
+    "g2/analysis/cache-maintenance-2026-10-06/protected-identities.json": "3dccf989ccd4e64fd3fbb78e32ce97f77e27081039089264f06fd62996d3d901",
+    "g2/analysis/cache-maintenance-2026-10-06/fixture-diagnostics.md": "8e7fc4b09d5c0095ffcdac7090ee453aba9141fe5f06b9a90fd3768efa45d8b7",
+    "g2/analysis/cache-maintenance-2026-10-06/unbounded-length-first-verifier.py": "d123a1c9a2bfe2e65db606a2cb75b26cc36bc2d1ff46adabfdd317087e2d7bf6"
+  },
+  "accounting_source_bindings": {
+    "g2/tools/trace_inventory.py": "dbf6f9a04665c2fc5f097f7540ae3918e37f2094016bc21a3df73337c59074a6",
+    "g2/tests/test_trace_inventory.py": "37536def1f512096947abd8aedf61480510970c7ab1318d38096f9b7b52fe532",
+    "g2/analysis/cache-maintenance-2026-10-06/reconcile_inventory.py": "75f10cea9d02d3abe39627653b61281e68bd5cbe794e1652486cc988bca16055"
+  }
+}

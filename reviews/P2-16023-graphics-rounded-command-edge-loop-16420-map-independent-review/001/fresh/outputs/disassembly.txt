@@ -1,0 +1,110 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpmzmptjia/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00522c80 <.text>:
+  522c80:	42bc      	cmp	r4, r7
+  522c82:	d106      	bne.n	522c92 <.text+0x12>
+  522c84:	1be0      	subs	r0, r4, r7
+  522c86:	eb09 0980 	add.w	r9, r9, r0, lsl #2
+  522c8a:	f109 090a 	add.w	r9, r9, #10
+  522c8e:	1e7f      	subs	r7, r7, #1
+  522c90:	e08a      	b.n	522da8 <.text+0x128>
+  522c92:	2003      	movs	r0, #3
+  522c94:	f7f1 ff2a 	bl	514aec <.text-0xe194>
+  522c98:	b1d8      	cbz	r0, 522cd2 <.text+0x52>
+  522c9a:	f44f 7182 	mov.w	r1, #260	@ 0x104
+  522c9e:	6001      	str	r1, [r0, #0]
+  522ca0:	1b2a      	subs	r2, r5, r4
+  522ca2:	eba8 0107 	sub.w	r1, r8, r7
+  522ca6:	b292      	uxth	r2, r2
+  522ca8:	ea42 4201 	orr.w	r2, r2, r1, lsl #16
+  522cac:	f44f 7384 	mov.w	r3, #264	@ 0x108
+  522cb0:	6083      	str	r3, [r0, #8]
+  522cb2:	6042      	str	r2, [r0, #4]
+  522cb4:	eb04 020a 	add.w	r2, r4, sl
+  522cb8:	b292      	uxth	r2, r2
+  522cba:	ea42 4101 	orr.w	r1, r2, r1, lsl #16
+  522cbe:	4a96      	ldr	r2, [pc, #600]	@ (522f18 <.text+0x298>)
+  522cc0:	60c1      	str	r1, [r0, #12]
+  522cc2:	f8df 1608 	ldr.w	r1, [pc, #1544]	@ 5232cc <.text+0x64c>
+  522cc6:	6101      	str	r1, [r0, #16]
+  522cc8:	6813      	ldr	r3, [r2, #0]
+  522cca:	6999      	ldr	r1, [r3, #24]
+  522ccc:	f041 0101 	orr.w	r1, r1, #1
+  522cd0:	6141      	str	r1, [r0, #20]
+  522cd2:	2003      	movs	r0, #3
+  522cd4:	f7f1 ff0a 	bl	514aec <.text-0xe194>
+  522cd8:	2800      	cmp	r0, #0
+  522cda:	d0d3      	beq.n	522c84 <.text+0x4>
+  522cdc:	f44f 7182 	mov.w	r1, #260	@ 0x104
+  522ce0:	6001      	str	r1, [r0, #0]
+  522ce2:	1b2a      	subs	r2, r5, r4
+  522ce4:	19b9      	adds	r1, r7, r6
+  522ce6:	b292      	uxth	r2, r2
+  522ce8:	ea42 4201 	orr.w	r2, r2, r1, lsl #16
+  522cec:	f44f 7384 	mov.w	r3, #264	@ 0x108
+  522cf0:	6083      	str	r3, [r0, #8]
+  522cf2:	6042      	str	r2, [r0, #4]
+  522cf4:	eb04 020a 	add.w	r2, r4, sl
+  522cf8:	b292      	uxth	r2, r2
+  522cfa:	ea42 4101 	orr.w	r1, r2, r1, lsl #16
+  522cfe:	4a86      	ldr	r2, [pc, #536]	@ (522f18 <.text+0x298>)
+  522d00:	60c1      	str	r1, [r0, #12]
+  522d02:	f8df 15c8 	ldr.w	r1, [pc, #1480]	@ 5232cc <.text+0x64c>
+  522d06:	6101      	str	r1, [r0, #16]
+  522d08:	6813      	ldr	r3, [r2, #0]
+  522d0a:	6999      	ldr	r1, [r3, #24]
+  522d0c:	f041 0101 	orr.w	r1, r1, #1
+  522d10:	6141      	str	r1, [r0, #20]
+  522d12:	e7b7      	b.n	522c84 <.text+0x4>
+  522d14:	2c00      	cmp	r4, #0
+  522d16:	d03f      	beq.n	522d98 <.text+0x118>
+  522d18:	2003      	movs	r0, #3
+  522d1a:	f7f1 fee7 	bl	514aec <.text-0xe194>
+  522d1e:	b1d8      	cbz	r0, 522d58 <.text+0xd8>
+  522d20:	f44f 7182 	mov.w	r1, #260	@ 0x104
+  522d24:	6001      	str	r1, [r0, #0]
+  522d26:	1bea      	subs	r2, r5, r7
+  522d28:	eba8 0104 	sub.w	r1, r8, r4
+  522d2c:	b292      	uxth	r2, r2
+  522d2e:	ea42 4201 	orr.w	r2, r2, r1, lsl #16
+  522d32:	f44f 7384 	mov.w	r3, #264	@ 0x108
+  522d36:	6083      	str	r3, [r0, #8]
+  522d38:	6042      	str	r2, [r0, #4]
+  522d3a:	eb07 020a 	add.w	r2, r7, sl
+  522d3e:	b292      	uxth	r2, r2
+  522d40:	ea42 4101 	orr.w	r1, r2, r1, lsl #16
+  522d44:	4a74      	ldr	r2, [pc, #464]	@ (522f18 <.text+0x298>)
+  522d46:	60c1      	str	r1, [r0, #12]
+  522d48:	f8df 1580 	ldr.w	r1, [pc, #1408]	@ 5232cc <.text+0x64c>
+  522d4c:	6101      	str	r1, [r0, #16]
+  522d4e:	6813      	ldr	r3, [r2, #0]
+  522d50:	6999      	ldr	r1, [r3, #24]
+  522d52:	f041 0101 	orr.w	r1, r1, #1
+  522d56:	6141      	str	r1, [r0, #20]
+  522d58:	2003      	movs	r0, #3
+  522d5a:	f7f1 fec7 	bl	514aec <.text-0xe194>
+  522d5e:	b1d8      	cbz	r0, 522d98 <.text+0x118>
+  522d60:	f44f 7182 	mov.w	r1, #260	@ 0x104
+  522d64:	6001      	str	r1, [r0, #0]
+  522d66:	1bea      	subs	r2, r5, r7
+  522d68:	19a1      	adds	r1, r4, r6
+  522d6a:	b292      	uxth	r2, r2
+  522d6c:	ea42 4201 	orr.w	r2, r2, r1, lsl #16
+  522d70:	f44f 7384 	mov.w	r3, #264	@ 0x108
+  522d74:	6083      	str	r3, [r0, #8]
+  522d76:	6042      	str	r2, [r0, #4]
+  522d78:	eb07 020a 	add.w	r2, r7, sl
+  522d7c:	b292      	uxth	r2, r2
+  522d7e:	ea42 4101 	orr.w	r1, r2, r1, lsl #16
+  522d82:	4a65      	ldr	r2, [pc, #404]	@ (522f18 <.text+0x298>)
+  522d84:	60c1      	str	r1, [r0, #12]
+  522d86:	f8df 1544 	ldr.w	r1, [pc, #1348]	@ 5232cc <.text+0x64c>
+  522d8a:	6101      	str	r1, [r0, #16]
+  522d8c:	6813      	ldr	r3, [r2, #0]
+  522d8e:	6999      	ldr	r1, [r3, #24]
+  522d90:	f041 0101 	orr.w	r1, r1, #1
+  522d94:	f8c0 1014 	str.w	r1, [r0, #20]

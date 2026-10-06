@@ -1,0 +1,53 @@
+{
+  "comparison": {
+    "path": "g2/build/foundation/power-domain-simulator/comparison.json",
+    "sha256": "1d259b504f16de2e635dccc998b150ae37295ddca27e482aef712c9f63dba31a",
+    "status": "PASS",
+    "cases": 246,
+    "unique_original_trace_bytes": 92,
+    "source_manifest_matches": true,
+    "elf_sha256": "c64c4c8eb0e1f4c73f64d071bd126b7577977beef6ce27d5cd8b052d4bd36e4f"
+  },
+  "independent_review": {
+    "path": "g2/analysis/power-domain-descriptor-2026-10-06/review/review.json",
+    "sha256": "9115eb4918ef49f241c1a11c45ef3a71b34fe78afbc6be50286a6aac76b35897",
+    "disposition": "pass_bounded_scope",
+    "representative_cases": 11,
+    "report_sha256": "378f6c23d588ef954d5a32984b8682689df4f7edebee09e1ac59e05c3f9f9381",
+    "representative_rerun_sha256": "59ddd21212baf96a0e48f47ef54fb98ed97b0d4b4f1eea56ea30349ce8ada629"
+  },
+  "fresh_aggregate": {
+    "path": "g2/build/foundation/power-domain-simulator/aggregate.json",
+    "sha256": "77061acef66ae62a0d6747204d4070fbe653ef523a89333d6729dd57bb1b1093",
+    "modules": 44,
+    "totals": {
+      "tests_run": 228,
+      "passed": 222,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 7,
+      "method_skips": 6,
+      "setup_skips": 1
+    }
+  },
+  "fresh_affected_tests": {
+    "path": "g2/build/foundation/power-domain-simulator/affected-final.log",
+    "sha256": "2fe399fe2b5cc39725f7360dda2e4133f998127860beb2f36d88d70771088253",
+    "passed": 15,
+    "inventory_regressions": 4
+  },
+  "deduplicated_inventory": {
+    "path": "g2/analysis/power-domain-descriptor-2026-10-06/cumulative-inventory.json",
+    "sha256": "cbff1da7a378c7edb79ddf78093824bf1980300097d27da6c36fcde63e2d8ade",
+    "payload_bytes": {
+      "touch": 234,
+      "apollo_main": 6114
+    },
+    "total": 6348
+  },
+  "hardware_power_verified": false,
+  "asynchronous_ownership_closed": false,
+  "optimized_tick_blocker": "unchanged; preserved source/verifier/failed ELFs",
+  "fully_source_complete_payloads": 0,
+  "source_built_byte_identical_bundle": false
+}

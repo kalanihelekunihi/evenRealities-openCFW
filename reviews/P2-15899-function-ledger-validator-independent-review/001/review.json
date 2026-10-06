@@ -1,0 +1,14 @@
+{
+  "task_id": "P2-15899",
+  "accepted": false,
+  "status": "partial",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_outputs": [
+    "fresh/results.json"
+  ],
+  "review": "Fresh validator replay reproduces 20 function records over the queue and clock ledgers and rejects all 26 targeted mutations. It rechecks target and lock pins, explicit path roots and predecessor hashes, image identity/hash, stable IDs, single-range address translation, raw source bytes, instruction tiling and source bytes, pseudocode/instruction file hashes, extracted direct call references, and nonoverlap.",
+  "limitations": [
+    "This validator checks a narrow single-range Apollo-main Thumb draft schema and evidence consistency only; it is not a decoder or semantic verifier.",
+    "It does not establish independent review binding, physical contracts, complete corpus coverage, admission, or gates."
+  ]
+}

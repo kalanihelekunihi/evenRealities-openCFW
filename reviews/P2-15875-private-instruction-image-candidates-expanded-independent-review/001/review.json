@@ -1,0 +1,21 @@
+{
+  "task_id": "P2-15875",
+  "accepted": false,
+  "status": "partial",
+  "captured_input_check": {
+    "instruction_files_captured": 4908,
+    "instruction_files_current": 4908,
+    "added": 0,
+    "removed": 0,
+    "image_records": 33,
+    "image_pins_match_captured": true
+  },
+  "fresh_replay": "fresh/replay.py",
+  "fresh_outputs": ["fresh/index.jsonl", "fresh/images.json", "fresh/excluded.json", "fresh/summary.json"],
+  "review": "Fresh replay exactly reproduces the saved index, exclusions, image pins, and summary. It reports 4860 candidate files, one ambiguous file, 48 excluded files, and 33 rehashed image records. Candidate interpretations are explicitly labeled: 4844 candidate matches as_recorded and 17 under each_halfword_byte_swapped; no silent byte normalization is applied. Per-image counts are Apollo main flash 3033, bootloader flash 1797, decoded ITCM one each for main and bootloader, BLE record-3 22, and case flash 7. The ambiguous file is the 24-byte decoded ITCM map shared between main and bootloader. Exclusions are 43 no whole-file match, 4 parse errors, and 1 unsupported top level.",
+  "limitations": [
+    "Candidate file counts overlap images and revisions and cannot be summed as coverage.",
+    "Byte-order hypotheses are not ISA validation or proof of image ownership.",
+    "All revisions remain included; no canonical admission or gate changes."
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "task_id": "P2-15985",
+  "accepted": false,
+  "status": "partial",
+  "source_packet": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-value-command-tail-adapter-16382-map/001",
+  "fresh_replay": "fresh-replay.py",
+  "input_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "range": [
+    "0x4b146c",
+    "0x4b1474"
+  ],
+  "instruction_bytes": 8,
+  "source_receipt_sha256": "082e0e04efb4025950f4e7c7bb449a4da382c08fca4d2d11757ef2547d09bef6",
+  "review": "Moves entry R0 to R1, sets R0=28 (MOVS flag effect), then wide-branches to 514846 without local frame changes.",
+  "limitations": [
+    "Fresh original-byte decode replay passes; pseudocode ordering, branch conditions, and stack/register aliases were checked against disassembly.",
+    "External children and global object contracts remain unresolved; fault, alias, concurrency, and physical behavior are not qualified. No admission, gate, or source change."
+  ]
+}

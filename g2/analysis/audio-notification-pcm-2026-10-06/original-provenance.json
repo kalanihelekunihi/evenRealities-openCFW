@@ -1,0 +1,81 @@
+{
+  "firmware": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+  "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "header_bytes": 32,
+  "load_address": "0x438000",
+  "architecture": "Thumb2 little endian M-class",
+  "spans": [
+    {
+      "name": "AUD_SendMessage",
+      "start": "0x53c638",
+      "end": "0x53c6b2",
+      "sha256": "1ba20aa804d5938a30b726518252b676b3bd75b0999ee56f724b1ca20f0b689c"
+    },
+    {
+      "name": "notifier",
+      "start": "0x53c6b2",
+      "end": "0x53c6d2",
+      "sha256": "d21bd7190d87c3eb34a13dc485bf6cd8f5d4733bc5e75fa6687b43e2b6bb7e5a"
+    },
+    {
+      "name": "consumer",
+      "start": "0x53c6f2",
+      "end": "0x53c776",
+      "sha256": "0a28cd8dd5357296c4190a852c9dfab681687f4f511dda6757eee7d6e1fa3ce7"
+    },
+    {
+      "name": "PCM dispatch prefix",
+      "start": "0x57adf8",
+      "end": "0x57ae56",
+      "sha256": "4d8da48c8413de006823a1720c3da7eaac8668b5ee992d6c1d7dd9beb54927d0"
+    },
+    {
+      "name": "IRQ_Context",
+      "start": "0x44900e",
+      "end": "0x44903c",
+      "sha256": "702b19799a5ff8295597cd1b903ba5a5b6f9db91d872fdf311c9221c44660f33"
+    },
+    {
+      "name": "osKernelGetTickCount",
+      "start": "0x4490cc",
+      "end": "0x4490e2",
+      "sha256": "e71b740a75cc5b6be604febe03034833fd10def82df65b66e453bcca1402564d"
+    },
+    {
+      "name": "tick getters",
+      "start": "0x454efe",
+      "end": "0x454f10",
+      "sha256": "d0b93ff29439d26b92dcd56fd012a9dab842364f7c5f4b4f7f39a27ed8cfe077"
+    },
+    {
+      "name": "scheduler state",
+      "start": "0x4558a4",
+      "end": "0x4558c4",
+      "sha256": "619a0c1adee43616c7a6e9566fec269cd838c72d14e62358b80cb21fbe76ad53"
+    },
+    {
+      "name": "osMessageQueuePut",
+      "start": "0x449abe",
+      "end": "0x449b3c",
+      "sha256": "aba43426edc09754ce5ae6c619ba1bfe1f5ad0f0f36687b4315db9dc32a48998"
+    },
+    {
+      "name": "osMessageQueueGet",
+      "start": "0x449b3c",
+      "end": "0x449bb6",
+      "sha256": "ad94dbb5614f13d9c24827d39143d7a9bbe7f487282c7147006cb3cb9ea412a8"
+    },
+    {
+      "name": "queue drain",
+      "start": "0x53cd62",
+      "end": "0x53cd8c",
+      "sha256": "b4bb57ed3d488c76c4c076cff6855659e63eb7938bac8794caab57a39eea8e26"
+    },
+    {
+      "name": "flag dispatch",
+      "start": "0x53cdac",
+      "end": "0x53cdc2",
+      "sha256": "e14ba8c4515c276ac662673a2ed78959db832a0ee8545e1cc2047f355d68e015"
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "comparison": {
+    "path": "g2/build/foundation/audio-notification-pcm-simulator/comparison-final.json",
+    "sha256": "24888dc2e9e9b886cab64a497aa6d0e35d400d1211768195c59dc163c4b79d81",
+    "status": "PASS",
+    "calls": 328,
+    "traced_original_bytes": 1312,
+    "elf_sha256": "c99725e32fcc846498817abf6bf25d035b8850894ffc37e3b058d6694e3b1110",
+    "source_and_ELF_hashes_current": true
+  },
+  "aggregate": {
+    "path": "g2/build/foundation/audio-notification-pcm-simulator/aggregate.json",
+    "sha256": "77061acef66ae62a0d6747204d4070fbe653ef523a89333d6729dd57bb1b1093",
+    "modules": 44,
+    "totals": {
+      "tests_run": 228,
+      "passed": 222,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 7,
+      "method_skips": 6,
+      "setup_skips": 1
+    },
+    "profile": "repository PYTHONPATH; npm retries0 timeout1000ms; original longer-retry interruption and first import error retained"
+  },
+  "affected": {
+    "path": "g2/build/foundation/audio-notification-pcm-simulator/affected.log",
+    "sha256": "22c82319312e2541b2c47460fead6eed4753bdc60483be94c258e7832eaa3966",
+    "passed": 8
+  },
+  "inventory": {
+    "path": "g2/analysis/audio-notification-pcm-2026-10-06/cumulative-inventory.json",
+    "sha256": "c0cd870e58c89698317176b1566f5fa6f4ae49a8bd1ea8140db9363a886a6f96",
+    "source_files": 87,
+    "total": 7912,
+    "per_payload": {
+      "touch": 234,
+      "apollo_main": 7678
+    },
+    "new_disjoint_bytes": 486,
+    "overlap_bytes": 826
+  },
+  "independent_review": {
+    "path": "g2/analysis/audio-notification-pcm-2026-10-06/review/review.json",
+    "sha256": "10145b66c025ee31fc0cb644b8460dc09485038044ba1566277da608c9ca6673",
+    "representative": "g2/analysis/audio-notification-pcm-2026-10-06/review/representative-rerun.json",
+    "representative_sha256": "ff26a8436ba6b427dd946588c27d8d156d639af79365da976e4b880dedc49019",
+    "native_cases": 13,
+    "review_bindings_checked": [
+      {
+        "path": "g2/components/foundation/audio_pcm_consumer/consumer.c",
+        "matches": true
+      },
+      {
+        "path": "g2/components/foundation/audio_pcm_consumer/consumer.h",
+        "matches": true
+      },
+      {
+        "path": "g2/components/foundation/audio_pcm_consumer/verify.py",
+        "matches": true
+      },
+      {
+        "path": "g2/analysis/audio-notification-pcm-2026-10-06/REPORT.md",
+        "matches": true
+      },
+      {
+        "path": "g2/analysis/audio-notification-pcm-2026-10-06/pseudocode.md",
+        "matches": true
+      },
+      {
+        "path": "g2/analysis/audio-notification-pcm-2026-10-06/original-provenance.json",
+        "matches": true
+      },
+      {
+        "path": "g2/analysis/audio-notification-pcm-2026-10-06/original-disassembly.txt",
+        "matches": true
+      },
+      {
+        "path": "g2/analysis/audio-notification-pcm-2026-10-06/hook-profile-results.json",
+        "matches": true
+      }
+    ]
+  },
+  "broad_memory_hook_diagnostic": {
+    "path": "g2/analysis/audio-notification-pcm-2026-10-06/hook-profile-results.json",
+    "sha256": "c9449c447eb723a35a3aaf76f93c3e560c4dee8b09db6cf5b9f176d562c6b511",
+    "coverage_credit": false
+  },
+  "source_fixture_limits": [
+    "Queue count/pointer/item-size/lock fields used by tested paths valid; empty waitlist item counts, unused list sentinel links not initialized or traversed; no whole kernel-state validity claim.",
+    "Source notification adapter is timeout0 ISR branch only; receive adapter timeout0 task branch only.",
+    "Callback/logger/DSP/wake and scheduler unblock/disinherit/assert providers unexecuted; source cut descriptors are new interfaces, not stock ABI equivalence.",
+    "Explicit synthetic NEXTCTRL progress and borrowed-buffer/callback mutation; no actual scheduling or field hazard/ownership safety proof."
+  ],
+  "source_built_byte_identical_bundle": false,
+  "fully_source_complete_payloads": 0,
+  "index_unchanged": true,
+  "prior85_source_hashes_unchanged": true
+}

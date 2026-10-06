@@ -1,0 +1,49 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpgmoboa21/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00540144 <.text>:
+  540144:	f8d5 901c 	ldr.w	r9, [r5, #28]
+  540148:	a825      	add	r0, sp, #148	@ 0x94
+  54014a:	f711 fa25 	bl	451598 <.text-0xeebac>
+  54014e:	4682      	mov	sl, r0
+  540150:	a825      	add	r0, sp, #148	@ 0x94
+  540152:	f711 fa27 	bl	4515a4 <.text-0xeeba0>
+  540156:	4582      	cmp	sl, r0
+  540158:	da03      	bge.n	540162 <.text+0x1e>
+  54015a:	a825      	add	r0, sp, #148	@ 0x94
+  54015c:	f711 fa1c 	bl	451598 <.text-0xeebac>
+  540160:	e002      	b.n	540168 <.text+0x24>
+  540162:	a825      	add	r0, sp, #148	@ 0x94
+  540164:	f711 fa1e 	bl	4515a4 <.text-0xeeba0>
+  540168:	0001      	movs	r1, r0
+  54016a:	1049      	asrs	r1, r1, #1
+  54016c:	4549      	cmp	r1, r9
+  54016e:	da01      	bge.n	540174 <.text+0x30>
+  540170:	1040      	asrs	r0, r0, #1
+  540172:	4681      	mov	r9, r0
+  540174:	6a68      	ldr	r0, [r5, #36]	@ 0x24
+  540176:	eb19 0900 	adds.w	r9, r9, r0
+  54017a:	fb09 f009 	mul.w	r0, r9, r9
+  54017e:	f70f facb 	bl	44f718 <.text-0xf0a2c>
+  540182:	9016      	str	r0, [sp, #88]	@ 0x58
+  540184:	9816      	ldr	r0, [sp, #88]	@ 0x58
+  540186:	2800      	cmp	r0, #0
+  540188:	d115      	bne.n	5401b6 <.text+0x72>
+  54018a:	f8df 0838 	ldr.w	r0, [pc, #2104]	@ 5409c4 <.text+0x880>
+  54018e:	9002      	str	r0, [sp, #8]
+  540190:	f8df 0834 	ldr.w	r0, [pc, #2100]	@ 5409c8 <.text+0x884>
+  540194:	9001      	str	r0, [sp, #4]
+  540196:	f8df 0834 	ldr.w	r0, [pc, #2100]	@ 5409cc <.text+0x888>
+  54019a:	9000      	str	r0, [sp, #0]
+  54019c:	f8df 3830 	ldr.w	r3, [pc, #2096]	@ 5409d0 <.text+0x88c>
+  5401a0:	226f      	movs	r2, #111	@ 0x6f
+  5401a2:	f8df 1830 	ldr.w	r1, [pc, #2096]	@ 5409d4 <.text+0x890>
+  5401a6:	2003      	movs	r0, #3
+  5401a8:	f70d f858 	bl	44d25c <.text-0xf2ee8>
+  5401ac:	2000      	movs	r0, #0
+  5401ae:	f05f 31ff 	movs.w	r1, #4294967295	@ 0xffffffff
+  5401b2:	6008      	str	r0, [r1, #0]
+  5401b4:	e7fa      	b.n	5401ac <.text+0x68>

@@ -1,6 +1,6 @@
 # Transport pad dispatcher and release boundary
 
-`0x52df12` first dereferences a transport wrapper: instance u32@0, HAL handle u32@4, initialized byte@8, power byte@9. Instance>=9 returns1 immediately. Otherwise it calls `0x4c2e30(instance,0)`, HAL disable0x55c430(handle), conditional power0x55c7e8(handle,2,1) when byte9 is nonzero, clears byte9, calls uninitialize0x55c286(handle), clears byte8, and returns0. All subordinate statuses are ignored. Handle and caller's global handle pointer are not cleared. This is static call-chain evidence, not a tested release implementation.
+`0x52df12` first dereferences a transport wrapper: instance u32@0, HAL handle u32@4, tracking bytes@8/@9 (init/power roles inferred). Instance>=9 returns1 immediately. Otherwise it calls `0x4c2e30(instance,0)`, disable-like helper0x55c430(handle), conditional power-like helper0x55c7e8(handle,2,1) when byte9 is nonzero, clears byte9, calls uninitialize-like helper0x55c286(handle), clears byte8, and returns0. All subordinate statuses are ignored. Handle and caller's global handle pointer are not cleared. This is static call-chain evidence, not a tested release implementation.
 
 The implemented/tested provider is only0x4c2e30:
 
@@ -29,3 +29,5 @@ Command is not boolean: instance0/command4 selects group1; instance1/command8 se
 Each config writes PADKEY73, pad value, PADKEY0 while preserving incoming PRIMASK. Masking is per pad call, not across the dispatcher. GPIO validation failure skips that pad's MMIO but does not stop subsequent calls. Stockconfiguration3 is authenticated data; perturbations test ignored errors/ordered rereads but do not establish physical electrical behavior.
 
 No timer queue, allocation, buffer ownership, pending NVIC, command queue, callback or task state is changed by this provider. Full release needs HAL disable/power/uninitialize and command-queue release. Disable itself depends on command queue handle@0x828 and0x53909a; these are precisely outside this batch. No shutdown-safe claim.
+
+Helper names outside the tested dispatcher are behavioral inferences from disassembly, not independently authenticated SDK attribution. The consolidated symbol table still marks these helper bodies unverified; this batch does not upgrade their attribution.

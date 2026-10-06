@@ -1,0 +1,18 @@
+{
+  "task_id": "P2-16063",
+  "accepted": false,
+  "status": "partial",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-direct-ring-command-writer-16460-map/001",
+  "candidate_receipt_sha256": "e40f991da5fab3b1dad6185a4a766b9841cee130e11142d8571567840561933f",
+  "candidate_instructions_sha256": "2be9e8d095ea0202596a424965e3f845828b6ef999da2444a2dfb8692f333375",
+  "candidate_pseudocode_sha256": "36a9a75eb42a526c6ace94c247632ba2268cac258c67618c86a498d1ea7aaaf0",
+  "candidate_replay_sha256": "d4a54968f247ba12373325deb6e9fbd11cb089df4758326ad6aefa11b2102074",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_output_receipt_sha256": "d83a2b2c9ccbbf6398526a89b8c95f901d8e52fd9328d893792c156001381692",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "review": "Ring padding and command writes keep per-store cursor updates; high-byte-zero path returns cursor without tail submission.",
+  "limitations": [
+    "Child allocator/heap behavior, invalid pointers/fault behavior, concurrent mutation, physical buffer effects, and ownership remain unqualified.",
+    "No admission, C or gate change."
+  ]
+}

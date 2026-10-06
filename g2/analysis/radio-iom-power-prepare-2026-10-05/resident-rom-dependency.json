@@ -1,0 +1,50 @@
+{
+  "locked_apollo_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "required_external_provider": {
+    "entry_runtime_address": "0x00000040",
+    "instruction_state": "Thumb",
+    "identity": "Not available: require authenticated ROM for the actual Apollo device/revision, with digest and provenance; do not substitute another revision",
+    "known_required_entry_range": "[0x40,0x42) contains the first required Thumb halfword; complete routine extent is unknown without ROM",
+    "complete_required_range": "Callable body from0x40 through return, referenced data and transitive callees. No end address can be truthfully assigned from this OTA. An authenticated complete ROM mapping is acceptable.",
+    "entry_abi": "R0=delay residual scalar after clock conversion/threshold subtraction; outgoing register/barrier/timing behavior not recovered"
+  },
+  "direct_confirmed_call": {
+    "caller": "0x4807a0",
+    "call_site": "0x4807ea",
+    "call_target": "0x40",
+    "body_sha256": "f95193c502160b469e1579e13223f1cdf488a2d8fab9ec07f686c9101fbed753",
+    "clock_register_literal": "0x40021000",
+    "clock_bits": "bits3..4"
+  },
+  "confirmed_dependent_paths": [
+    {
+      "caller": "0x480826",
+      "delay_call": "0x480840",
+      "role": "register polling delay(1)"
+    },
+    {
+      "caller": "0x47f7ae",
+      "poll_call": "0x47f876",
+      "role": "general power-down status retry budget5; units not established"
+    },
+    {
+      "caller": "0x55c7e8",
+      "power_call": "0x55ca78",
+      "role": "IOM operation2 continuation after prepared cut"
+    },
+    {
+      "caller": "0x47ef74",
+      "delay_calls": [
+        "0x47efb4",
+        "0x47effc"
+      ],
+      "role": "other clock/power transition static dependency"
+    }
+  ],
+  "required_validation_inputs": [
+    "Authenticated callable ROM provider and ABI",
+    "Authoritative clock/power/register transition model or trace if physical timing is claimed"
+  ],
+  "stub_supplied": false,
+  "hardware_access_performed": false
+}

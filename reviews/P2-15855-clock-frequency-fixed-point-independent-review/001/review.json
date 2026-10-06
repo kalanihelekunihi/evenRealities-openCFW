@@ -1,0 +1,12 @@
+{
+  "task_id": "P2-15855",
+  "accepted": false,
+  "status": "partial",
+  "input_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "fresh_replay": "fresh/replay.py",
+  "review": "Fresh assembly/disassembly replay tiles the 42-byte range 0x4D38EA..0x4D3914 against the pinned image. Instruction order is VMOV R1→S0, VCVT.F32.U32, R1=1, register LSL into R2, UDIV R0/R2, VMOV+VCVT of quotient to S1, VDIV.F32 S0/S1, VCVT.U32.F32 with fractional bits 15, store through R3, return R0=0. The intermediate single-precision steps are retained; no integer-ratio simplification is claimed.",
+  "limitations": [
+    "UDIV zero divisor depends on DIV_0_TRP; exceptional FP, subnormal, overflow, FP availability and FPSCR flags are not qualified by this map review.",
+    "Partial/unaccepted; no C implementation or coverage/gate promotion."
+  ]
+}

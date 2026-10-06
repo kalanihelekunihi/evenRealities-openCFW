@@ -1,0 +1,39 @@
+{
+  "executed_complete": [
+    "interrupt_service",
+    "dma_error",
+    "ipb_service",
+    "interrupt_clear",
+    "interrupt_status"
+  ],
+  "executed_original_ISR": "all body bytes; no-notify returns, notify stops before53c6b2",
+  "new_bounded_source_seam": "irq_prefix returns captured status; actual notification outside scope",
+  "unchanged_source_providers": [
+    "audio_cache_handoff",
+    "cache_maintenance"
+  ],
+  "first_party_contracts": "Pinned Ambiq source/header; register offsetof verified, not compiled-byte identity",
+  "static_only": [
+    "notification wrapper",
+    "queue/wake calls",
+    "tick-age consumer",
+    "RAM dispatcher address"
+  ],
+  "synthetic": [
+    "raw MMIO",
+    "optional INTCLR effect",
+    "next-enable advance between calls",
+    "IPSR60/0 context"
+  ],
+  "external_missing": [
+    "initialized DMA handles/allocations",
+    "initialized64byte dispatch table at20073fbc and queue/task objects",
+    "actual queue/scheduler/consumer transfer execution",
+    "physical current/next DMA handoff and cache effects"
+  ],
+  "preserved": [
+    "huge raw cache completed-path execution budget",
+    "ROM40 timing",
+    "optimized tick Unicorn O2 blocker"
+  ]
+}

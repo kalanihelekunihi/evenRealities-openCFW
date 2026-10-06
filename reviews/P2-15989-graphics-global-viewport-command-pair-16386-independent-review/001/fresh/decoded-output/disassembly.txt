@@ -1,0 +1,31 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp66qth9_1/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+004b1548 <.text>:
+  4b1548:	f8df 0240 	ldr.w	r0, [pc, #576]	@ 4b178c <.text+0x244>
+  4b154c:	b530      	push	{r4, r5, lr}
+  4b154e:	6802      	ldr	r2, [r0, #0]
+  4b1550:	b081      	sub	sp, #4
+  4b1552:	6a91      	ldr	r1, [r2, #40]	@ 0x28
+  4b1554:	6a50      	ldr	r0, [r2, #36]	@ 0x24
+  4b1556:	6ad4      	ldr	r4, [r2, #44]	@ 0x2c
+  4b1558:	6b15      	ldr	r5, [r2, #48]	@ 0x30
+  4b155a:	1824      	adds	r4, r4, r0
+  4b155c:	186d      	adds	r5, r5, r1
+  4b155e:	2800      	cmp	r0, #0
+  4b1560:	bf48      	it	mi
+  4b1562:	2000      	movmi	r0, #0
+  4b1564:	2900      	cmp	r1, #0
+  4b1566:	bf48      	it	mi
+  4b1568:	2100      	movmi	r1, #0
+  4b156a:	eac0 4101 	pkhbt	r1, r0, r1, lsl #16
+  4b156e:	f44f 7088 	mov.w	r0, #272	@ 0x110
+  4b1572:	f063 f968 	bl	514846 <.text+0x632fe>
+  4b1576:	eac4 4105 	pkhbt	r1, r4, r5, lsl #16
+  4b157a:	b001      	add	sp, #4
+  4b157c:	f44f 708a 	mov.w	r0, #276	@ 0x114
+  4b1580:	e8bd 4030 	ldmia.w	sp!, {r4, r5, lr}
+  4b1584:	f063 b95f 	b.w	514846 <.text+0x632fe>

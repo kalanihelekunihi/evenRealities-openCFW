@@ -1,0 +1,18 @@
+{
+  "task_id": "P2-16013",
+  "accepted": false,
+  "status": "partial",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-buffer-chain-reset-loop-16410-map/001",
+  "candidate_receipt_sha256": "131990ead8be89b5bdb658fde3f1e9268c2233b9ef893eb6a084cb276905fc2b",
+  "candidate_instructions_sha256": "4d42df4e2788cb2eb5176cf73aac7f447a01fb58aa346eded34d86869cbf561a",
+  "candidate_pseudocode_sha256": "f4d9ef1cbfa26c252fb046b9f48845bb4aab4a0b61ca8a3f8563d1a356b9be40",
+  "candidate_replay_sha256": "6852670cb5b34482bb61f4ec9713440efe9082d9b9f45a89d696c771b908f7bf",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_replay_stdout": "PASS 16",
+  "source_image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "review": "Loop tail and branch boundary match; linked object traversal semantics remain conditional.",
+  "limitations": [
+    "Scoped byte/pseudocode review only; child behavior, complete ownership/function closure, runtime fault behavior and external or physical effects remain unqualified.",
+    "No canonical admission, C implementation, coverage promotion or gate change."
+  ]
+}

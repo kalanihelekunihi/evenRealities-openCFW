@@ -9,14 +9,14 @@ GROUPS=[[5,7,6,50],[8,10,9,51],[25,27,26,11],[31,33,32,13],[34,36,35,16],[47,49,
 sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
 def main():
  ap=argparse.ArgumentParser();ap.add_argument('--elf',type=Path,required=True);ap.add_argument('--output',type=Path,required=True);a=ap.parse_args()
- blob=ROOT/'g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin';raw=blob.read_bytes()[32:];stock=[dict(address=g.BASE,memory_size=len(raw),data=raw,flags=5)]
+ blob=ROOT/'g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin';raw=blob.read_bytes()[32:];spans=[(0x473000,4096,5),(0x480000,8192,5),(0x4c2000,8192,5),(0x768000,4096,4),(0x78e000,4096,4)];stock=[dict(address=p,memory_size=n,data=raw[p-g.BASE:p-g.BASE+n],flags=f) for p,n,f in spans]
  _,segments,symbols=g.parser.elf_info(a.elf)
  # Only a read-only configuration word is supplied outside source ELF; no code stub.
  observed={};results=[]
  config_word=struct.unpack_from('<I',raw,0x78ee48-g.BASE)[0];assert config_word==3
  def case(instance,operation,prior,cfg):
   c=dict(op='state',pin=instance,operation=operation,null=False,prior=prior,model='raw')
-  original=[dict(x) for x in stock];data=bytearray(raw);struct.pack_into('<I',data,0x78ee48-g.BASE,cfg);original[0]['data']=bytes(data)
+  original=[dict(x) for x in stock];data=bytearray(original[-1]['data']);struct.pack_into('<I',data,0xe48,cfg);original[-1]['data']=bytes(data)
   source=segments+[dict(address=0x78e000,memory_size=4096,data=b'\x00'*0xe48+g.w(cfg),flags=4)]
   left=g.run(original,0x4c2e30,c,entries={'set':0x480f0c});right=g.run(source,symbols['opencfw_transport_pads_raw']&~1,c,entries={'set':symbols['am_hal_gpio_pinconfig']&~1})
   fresh=left['trace'].copy()

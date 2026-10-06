@@ -1,0 +1,116 @@
+
+g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00420e08 <.data+0x10e08>:
+  420e08:	b53e      	push	{r1, r2, r3, r4, r5, lr}
+  420e0a:	0004      	movs	r4, r0
+  420e0c:	4d80      	ldr	r5, [pc, #512]	@ (0x421010)
+  420e0e:	6828      	ldr	r0, [r5, #0]
+  420e10:	f004 f96e 	bl	0x4250f0
+  420e14:	2800      	cmp	r0, #0
+  420e16:	d00c      	beq.n	0x420e32
+  420e18:	489e      	ldr	r0, [pc, #632]	@ (0x421094)
+  420e1a:	9001      	str	r0, [sp, #4]
+  420e1c:	f240 508a 	movw	r0, #1418	@ 0x58a
+  420e20:	9000      	str	r0, [sp, #0]
+  420e22:	4b9d      	ldr	r3, [pc, #628]	@ (0x421098)
+  420e24:	4a82      	ldr	r2, [pc, #520]	@ (0x421030)
+  420e26:	4983      	ldr	r1, [pc, #524]	@ (0x421034)
+  420e28:	2002      	movs	r0, #2
+  420e2a:	f7f6 fc50 	bl	0x4176ce
+  420e2e:	2001      	movs	r0, #1
+  420e30:	e02b      	b.n	0x420e8a
+  420e32:	0021      	movs	r1, r4
+  420e34:	6828      	ldr	r0, [r5, #0]
+  420e36:	f003 fed5 	bl	0x424be4
+  420e3a:	2800      	cmp	r0, #0
+  420e3c:	d00c      	beq.n	0x420e58
+  420e3e:	4897      	ldr	r0, [pc, #604]	@ (0x42109c)
+  420e40:	9001      	str	r0, [sp, #4]
+  420e42:	f240 5092 	movw	r0, #1426	@ 0x592
+  420e46:	9000      	str	r0, [sp, #0]
+  420e48:	4b93      	ldr	r3, [pc, #588]	@ (0x421098)
+  420e4a:	4a79      	ldr	r2, [pc, #484]	@ (0x421030)
+  420e4c:	4979      	ldr	r1, [pc, #484]	@ (0x421034)
+  420e4e:	2002      	movs	r0, #2
+  420e50:	f7f6 fc3d 	bl	0x4176ce
+  420e54:	2001      	movs	r0, #1
+  420e56:	e018      	b.n	0x420e8a
+  420e58:	6828      	ldr	r0, [r5, #0]
+  420e5a:	f004 f904 	bl	0x425066
+  420e5e:	2800      	cmp	r0, #0
+  420e60:	d00c      	beq.n	0x420e7c
+  420e62:	488e      	ldr	r0, [pc, #568]	@ (0x42109c)
+  420e64:	9001      	str	r0, [sp, #4]
+  420e66:	f240 509a 	movw	r0, #1434	@ 0x59a
+  420e6a:	9000      	str	r0, [sp, #0]
+  420e6c:	4b8a      	ldr	r3, [pc, #552]	@ (0x421098)
+  420e6e:	4a70      	ldr	r2, [pc, #448]	@ (0x421030)
+  420e70:	4970      	ldr	r1, [pc, #448]	@ (0x421034)
+  420e72:	2002      	movs	r0, #2
+  420e74:	f7f6 fc2b 	bl	0x4176ce
+  420e78:	2001      	movs	r0, #1
+  420e7a:	e006      	b.n	0x420e8a
+  420e7c:	7a21      	ldrb	r1, [r4, #8]
+  420e7e:	4888      	ldr	r0, [pc, #544]	@ (0x4210a0)
+  420e80:	6800      	ldr	r0, [r0, #0]
+  420e82:	6800      	ldr	r0, [r0, #0]
+  420e84:	f7fe fe2a 	bl	0x41fadc
+  420e88:	2000      	movs	r0, #0
+  420e8a:	bd3e      	pop	{r1, r2, r3, r4, r5, pc}
+  420e8c:	b500      	push	{lr}
+  420e8e:	b089      	sub	sp, #36	@ 0x24
+  420e90:	a803      	add	r0, sp, #12
+  420e92:	4984      	ldr	r1, [pc, #528]	@ (0x4210a4)
+  420e94:	2218      	movs	r2, #24
+  420e96:	f7f4 fc09 	bl	0x4156ac
+  420e9a:	2010      	movs	r0, #16
+  420e9c:	f88d 0014 	strb.w	r0, [sp, #20]
+  420ea0:	206c      	movs	r0, #108	@ 0x6c
+  420ea2:	f8ad 0010 	strh.w	r0, [sp, #16]
+  420ea6:	2008      	movs	r0, #8
+  420ea8:	f88d 000c 	strb.w	r0, [sp, #12]
+  420eac:	2001      	movs	r0, #1
+  420eae:	f88d 001b 	strb.w	r0, [sp, #27]
+  420eb2:	a803      	add	r0, sp, #12
+  420eb4:	f7ff ffa8 	bl	0x420e08
+  420eb8:	2800      	cmp	r0, #0
+  420eba:	d00b      	beq.n	0x420ed4
+  420ebc:	487a      	ldr	r0, [pc, #488]	@ (0x4210a8)
+  420ebe:	9001      	str	r0, [sp, #4]
+  420ec0:	f240 50ae 	movw	r0, #1454	@ 0x5ae
+  420ec4:	9000      	str	r0, [sp, #0]
+  420ec6:	4b79      	ldr	r3, [pc, #484]	@ (0x4210ac)
+  420ec8:	4a59      	ldr	r2, [pc, #356]	@ (0x421030)
+  420eca:	495a      	ldr	r1, [pc, #360]	@ (0x421034)
+  420ecc:	2002      	movs	r0, #2
+  420ece:	f7f6 fbfe 	bl	0x4176ce
+  420ed2:	e019      	b.n	0x420f08
+  420ed4:	2001      	movs	r0, #1
+  420ed6:	f7ff f82d 	bl	0x41ff34
+  420eda:	2010      	movs	r0, #16
+  420edc:	f88d 0008 	strb.w	r0, [sp, #8]
+  420ee0:	aa02      	add	r2, sp, #8
+  420ee2:	2118      	movs	r1, #24
+  420ee4:	484a      	ldr	r0, [pc, #296]	@ (0x421010)
+  420ee6:	6800      	ldr	r0, [r0, #0]
+  420ee8:	f004 f96a 	bl	0x4251c0
+  420eec:	2800      	cmp	r0, #0
+  420eee:	d00b      	beq.n	0x420f08
+  420ef0:	486f      	ldr	r0, [pc, #444]	@ (0x4210b0)
+  420ef2:	9001      	str	r0, [sp, #4]
+  420ef4:	f240 50b5 	movw	r0, #1461	@ 0x5b5
+  420ef8:	9000      	str	r0, [sp, #0]
+  420efa:	4b6c      	ldr	r3, [pc, #432]	@ (0x4210ac)
+  420efc:	4a4c      	ldr	r2, [pc, #304]	@ (0x421030)
+  420efe:	494d      	ldr	r1, [pc, #308]	@ (0x421034)
+  420f00:	2002      	movs	r0, #2
+  420f02:	f7f6 fbe4 	bl	0x4176ce
+  420f06:	e7ff      	b.n	0x420f08
+  420f08:	b009      	add	sp, #36	@ 0x24
+  420f0a:	bd00      	pop	{pc}
+  420f0c:	4240      	negs	r0, r0
+  420f0e:	000f      	movs	r7, r1

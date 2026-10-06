@@ -1,0 +1,54 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpj3gr7dom/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00514928 <.text>:
+  514928:	9300      	str	r3, [sp, #0]
+  51492a:	f003 0e03 	and.w	lr, r3, #3
+  51492e:	f44f 3180 	mov.w	r1, #65536	@ 0x10000
+  514932:	2400      	movs	r4, #0
+  514934:	f04e c00d 	wls	lr, lr, 514950 <.text+0x28>
+  514938:	6943      	ldr	r3, [r0, #20]
+  51493a:	6882      	ldr	r2, [r0, #8]
+  51493c:	f842 1023 	str.w	r1, [r2, r3, lsl #2]
+  514940:	6882      	ldr	r2, [r0, #8]
+  514942:	1c5b      	adds	r3, r3, #1
+  514944:	f842 4023 	str.w	r4, [r2, r3, lsl #2]
+  514948:	1c5b      	adds	r3, r3, #1
+  51494a:	6143      	str	r3, [r0, #20]
+  51494c:	f00f c00d 	le	lr, 514938 <.text+0x10>
+  514950:	f8dd e000 	ldr.w	lr, [sp]
+  514954:	ea4f 0e9e 	mov.w	lr, lr, lsr #2
+  514958:	f04e c827 	wls	lr, lr, 5149aa <.text+0x82>
+  51495c:	6942      	ldr	r2, [r0, #20]
+  51495e:	6883      	ldr	r3, [r0, #8]
+  514960:	f843 1022 	str.w	r1, [r3, r2, lsl #2]
+  514964:	6883      	ldr	r3, [r0, #8]
+  514966:	1c52      	adds	r2, r2, #1
+  514968:	f843 4022 	str.w	r4, [r3, r2, lsl #2]
+  51496c:	6883      	ldr	r3, [r0, #8]
+  51496e:	1c52      	adds	r2, r2, #1
+  514970:	6142      	str	r2, [r0, #20]
+  514972:	f843 1022 	str.w	r1, [r3, r2, lsl #2]
+  514976:	6883      	ldr	r3, [r0, #8]
+  514978:	1c52      	adds	r2, r2, #1
+  51497a:	f843 4022 	str.w	r4, [r3, r2, lsl #2]
+  51497e:	6883      	ldr	r3, [r0, #8]
+  514980:	1c52      	adds	r2, r2, #1
+  514982:	6142      	str	r2, [r0, #20]
+  514984:	f843 1022 	str.w	r1, [r3, r2, lsl #2]
+  514988:	6883      	ldr	r3, [r0, #8]
+  51498a:	1c52      	adds	r2, r2, #1
+  51498c:	f843 4022 	str.w	r4, [r3, r2, lsl #2]
+  514990:	6883      	ldr	r3, [r0, #8]
+  514992:	1c52      	adds	r2, r2, #1
+  514994:	6142      	str	r2, [r0, #20]
+  514996:	f843 1022 	str.w	r1, [r3, r2, lsl #2]
+  51499a:	6883      	ldr	r3, [r0, #8]
+  51499c:	1c52      	adds	r2, r2, #1
+  51499e:	f843 4022 	str.w	r4, [r3, r2, lsl #2]
+  5149a2:	1c52      	adds	r2, r2, #1
+  5149a4:	6142      	str	r2, [r0, #20]
+  5149a6:	f00f c827 	le	lr, 51495c <.text+0x34>

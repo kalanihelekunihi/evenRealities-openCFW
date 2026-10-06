@@ -1,0 +1,37 @@
+{
+  "origin": "MIT instruction reconstruction; not vendor SDK-attributed",
+  "firmware": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+  "firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_bindings": {
+    "g2/components/foundation/audio_cache_handoff/handoff.c": "ffbdf9c36d9e8bb3e209f900a5eaa383665fadb47029da6d0e2e81583936b323",
+    "g2/components/foundation/audio_cache_handoff/handoff.h": "b93f87f5ea7ef8f92f98393b5db24c4cb0d78f49eeee17ae3ed10984fcc5f54f",
+    "g2/components/foundation/audio_cache_handoff/verify.py": "c0d7e61f5da3d6f3926daa0fea48fce21ae8a738c61a9bdd604e88e9fec2645c"
+  },
+  "stock_functions": [
+    {
+      "name": "selected_buffer",
+      "start": "0x590b6c",
+      "end_exclusive": "0x590b92",
+      "length": 38,
+      "sha256": "45dad8e724d7e09c8a98b67932a091ba71e9f24438673cfde061485c66df5003",
+      "scope": "executed complete"
+    },
+    {
+      "name": "audio_getter",
+      "start": "0x57a7e0",
+      "end_exclusive": "0x57a80e",
+      "length": 46,
+      "sha256": "0b8d3c1ef22dfdfbed10aecaa56330d6e991d09eaccc048b6010d963921b8925",
+      "scope": "executed complete"
+    }
+  ],
+  "new_policy_not_stock": [
+    "opencfw_cache_checked",
+    "opencfw_audio_rx_buffer_get_checked"
+  ],
+  "original_provenance": "g2/analysis/audio-cache-handoff-2026-10-06/original-provenance.json",
+  "original_provenance_sha256": "d72d79419504acb89a8babd14f52e3cf3be4ca0bedd5b5021f719ad0e01cc3bc",
+  "comparison": "g2/build/foundation/audio-cache-handoff-simulator/comparison-final-policy.json",
+  "comparison_sha256": "15760d05fd73a68b69819a1630ca7f4c5aa53707793e76ac7f32dd5794b2a0b7",
+  "production_firmware": false
+}

@@ -1,0 +1,771 @@
+{
+  "status": "PASS",
+  "cases": 13,
+  "comparisons": [
+    {
+      "name": "default-device-success",
+      "stage_status": {},
+      "fixture": {},
+      "return": 0,
+      "events": [
+        [
+          "power_control",
+          536990576,
+          0,
+          0
+        ],
+        [
+          "base_configure",
+          536990576,
+          "00010000004c0f2000000000"
+        ],
+        [
+          "device_configure",
+          536990576,
+          536871460,
+          "38393a3b3c3d3e3f08090a0b0c0d0e0f"
+        ],
+        [
+          "enable",
+          536990576
+        ],
+        [
+          "control_latency",
+          0
+        ],
+        [
+          "publish_mode",
+          1,
+          16
+        ],
+        [
+          "read_register_id",
+          103
+        ],
+        [
+          "interrupt_clear",
+          536990576,
+          6784
+        ],
+        [
+          "interrupt_enable",
+          536990576,
+          6784
+        ],
+        [
+          "interrupt_priority",
+          21,
+          4
+        ],
+        [
+          "interrupt_unmask",
+          21
+        ],
+        [
+          "irq_guard_initialize"
+        ],
+        [
+          "log",
+          3,
+          "drv.norflash",
+          "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+          "am_devices_norflash_qspi_init",
+          634,
+          "MX25U25643G mSPI interface initialized."
+        ]
+      ],
+      "current_device": "0x20026fd0",
+      "handle": "0x2001d370",
+      "record": "010000002800000070d3012001000000",
+      "mspi_state_sha256": "9870e3ad9c04e362b196725f685a0bc511c3b561b1ee10a0904e1e932de172cd"
+    },
+    {
+      "name": "custom-device-success",
+      "stage_status": {},
+      "fixture": {
+        "device_config": "0x20007000"
+      },
+      "return": 0,
+      "events": [
+        [
+          "power_control",
+          536990576,
+          0,
+          0
+        ],
+        [
+          "base_configure",
+          536990576,
+          "00010000004c0f2000000000"
+        ],
+        [
+          "device_configure",
+          536990576,
+          536899584,
+          "1f1e1d1c1b1a19181716151413121110"
+        ],
+        [
+          "enable",
+          536990576
+        ],
+        [
+          "control_latency",
+          0
+        ],
+        [
+          "publish_mode",
+          1,
+          16
+        ],
+        [
+          "read_register_id",
+          103
+        ],
+        [
+          "interrupt_clear",
+          536990576,
+          6784
+        ],
+        [
+          "interrupt_enable",
+          536990576,
+          6784
+        ],
+        [
+          "interrupt_priority",
+          21,
+          4
+        ],
+        [
+          "interrupt_unmask",
+          21
+        ],
+        [
+          "irq_guard_initialize"
+        ],
+        [
+          "log",
+          3,
+          "drv.norflash",
+          "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+          "am_devices_norflash_qspi_init",
+          634,
+          "MX25U25643G mSPI interface initialized."
+        ]
+      ],
+      "current_device": "0x20026fd0",
+      "handle": "0x2001d370",
+      "record": "010000001700000070d3012001000000",
+      "mspi_state_sha256": "9870e3ad9c04e362b196725f685a0bc511c3b561b1ee10a0904e1e932de172cd"
+    },
+    {
+      "name": "occupied-device-slot",
+      "stage_status": {},
+      "fixture": {
+        "busy": "0x1"
+      },
+      "return": 4294967295,
+      "events": [],
+      "current_device": "0xc0ffee01",
+      "handle": "0x0",
+      "record": "00000000000000000000000001000000",
+      "mspi_state_sha256": "641088987f5f2c244a4a925160ff63e443cd935518f89d1526949d9d65cd953a"
+    },
+    {
+      "name": "already-initialized-module",
+      "stage_status": {},
+      "fixture": {
+        "initialized": "0x1"
+      },
+      "return": 7,
+      "events": [],
+      "current_device": "0xc0ffee01",
+      "handle": "0x0",
+      "record": "00000000000000000000000000000000",
+      "mspi_state_sha256": "404ccb5d4df604b7015d01a6ea2fb9573a6c408fbf06a6c4c1497ff8510355d9"
+    },
+    {
+      "name": "module-out-of-range",
+      "stage_status": {},
+      "fixture": {
+        "module": "0x4"
+      },
+      "return": 5,
+      "events": [],
+      "current_device": "0xc0ffee01",
+      "handle": "0x0",
+      "record": "00000000000000000000000000000000",
+      "mspi_state_sha256": "375e5b35007fe1230023636b6e67a73512675b26b0fad7df7631a795707efa13"
+    },
+    {
+      "name": "power-control-failure",
+      "stage_status": {
+        "0x426808": 7
+      },
+      "fixture": {},
+      "return": 1,
+      "events": [
+        [
+          "power_control",
+          536990576,
+          0,
+          0
+        ],
+        [
+          "log",
+          1,
+          "drv.norflash",
+          "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+          "am_devices_norflash_qspi_init",
+          554,
+          "Error - Failed to power on MSPI.\n"
+        ]
+      ],
+      "current_device": "0xc0ffee01",
+      "handle": "0x2001d370",
+      "record": "00000000000000000000000000000000",
+      "mspi_state_sha256": "9870e3ad9c04e362b196725f685a0bc511c3b561b1ee10a0904e1e932de172cd"
+    },
+    {
+      "name": "base-configure-failure",
+      "stage_status": {
+        "0x424af0": 5
+      },
+      "fixture": {},
+      "return": 5,
+      "events": [
+        [
+          "power_control",
+          536990576,
+          0,
+          0
+        ],
+        [
+          "base_configure",
+          536990576,
+          "00010000004c0f2000000000"
+        ],
+        [
+          "log",
+          1,
+          "drv.norflash",
+          "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+          "am_devices_norflash_qspi_init",
+          563,
+          "Error - Failed to configure MSPI.\n"
+        ],
+        [
+          "deinitialize",
+          536990576
+        ]
+      ],
+      "current_device": "0xc0ffee01",
+      "handle": "0x2001d370",
+      "record": "00000000000000000000000000000000",
+      "mspi_state_sha256": "9870e3ad9c04e362b196725f685a0bc511c3b561b1ee10a0904e1e932de172cd"
+    },
+    {
+      "name": "device-configure-failure",
+      "stage_status": {
+        "0x424be4": 6
+      },
+      "fixture": {},
+      "return": 6,
+      "events": [
+        [
+          "power_control",
+          536990576,
+          0,
+          0
+        ],
+        [
+          "base_configure",
+          536990576,
+          "00010000004c0f2000000000"
+        ],
+        [
+          "device_configure",
+          536990576,
+          536871460,
+          "38393a3b3c3d3e3f08090a0b0c0d0e0f"
+        ],
+        [
+          "log",
+          1,
+          "drv.norflash",
+          "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+          "am_devices_norflash_qspi_init",
+          575,
+          "Error - Failed to configure MSPI device.\n"
+        ],
+        [
+          "deinitialize",
+          536990576
+        ]
+      ],
+      "current_device": "0xc0ffee01",
+      "handle": "0x2001d370",
+      "record": "00000000000000000000000000000000",
+      "mspi_state_sha256": "9870e3ad9c04e362b196725f685a0bc511c3b561b1ee10a0904e1e932de172cd"
+    },
+    {
+      "name": "enable-failure",
+      "stage_status": {
+        "0x425066": 9
+      },
+      "fixture": {},
+      "return": 9,
+      "events": [
+        [
+          "power_control",
+          536990576,
+          0,
+          0
+        ],
+        [
+          "base_configure",
+          536990576,
+          "00010000004c0f2000000000"
+        ],
+        [
+          "device_configure",
+          536990576,
+          536871460,
+          "38393a3b3c3d3e3f08090a0b0c0d0e0f"
+        ],
+        [
+          "enable",
+          536990576
+        ],
+        [
+          "log",
+          1,
+          "drv.norflash",
+          "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+          "am_devices_norflash_qspi_init",
+          582,
+          "Error - Failed to enable MSPI.\n"
+        ],
+        [
+          "deinitialize",
+          536990576
+        ]
+      ],
+      "current_device": "0xc0ffee01",
+      "handle": "0x2001d370",
+      "record": "00000000000000000000000000000000",
+      "mspi_state_sha256": "9870e3ad9c04e362b196725f685a0bc511c3b561b1ee10a0904e1e932de172cd"
+    },
+    {
+      "name": "interrupt-clear-failure",
+      "stage_status": {
+        "0x426506": 7
+      },
+      "fixture": {},
+      "return": 1,
+      "events": [
+        [
+          "power_control",
+          536990576,
+          0,
+          0
+        ],
+        [
+          "base_configure",
+          536990576,
+          "00010000004c0f2000000000"
+        ],
+        [
+          "device_configure",
+          536990576,
+          536871460,
+          "38393a3b3c3d3e3f08090a0b0c0d0e0f"
+        ],
+        [
+          "enable",
+          536990576
+        ],
+        [
+          "control_latency",
+          0
+        ],
+        [
+          "publish_mode",
+          1,
+          16
+        ],
+        [
+          "read_register_id",
+          103
+        ],
+        [
+          "interrupt_clear",
+          536990576,
+          6784
+        ]
+      ],
+      "current_device": "0xc0ffee01",
+      "handle": "0x2001d370",
+      "record": "00000000000000000000000000000000",
+      "mspi_state_sha256": "9870e3ad9c04e362b196725f685a0bc511c3b561b1ee10a0904e1e932de172cd"
+    },
+    {
+      "name": "interrupt-enable-failure",
+      "stage_status": {
+        "0x426450": 7
+      },
+      "fixture": {},
+      "return": 1,
+      "events": [
+        [
+          "power_control",
+          536990576,
+          0,
+          0
+        ],
+        [
+          "base_configure",
+          536990576,
+          "00010000004c0f2000000000"
+        ],
+        [
+          "device_configure",
+          536990576,
+          536871460,
+          "38393a3b3c3d3e3f08090a0b0c0d0e0f"
+        ],
+        [
+          "enable",
+          536990576
+        ],
+        [
+          "control_latency",
+          0
+        ],
+        [
+          "publish_mode",
+          1,
+          16
+        ],
+        [
+          "read_register_id",
+          103
+        ],
+        [
+          "interrupt_clear",
+          536990576,
+          6784
+        ],
+        [
+          "interrupt_enable",
+          536990576,
+          6784
+        ],
+        [
+          "log",
+          1,
+          "drv.norflash",
+          "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+          "am_devices_norflash_qspi_init",
+          617,
+          "Error - Failed to enable interrupt .\n"
+        ]
+      ],
+      "current_device": "0xc0ffee01",
+      "handle": "0x2001d370",
+      "record": "00000000000000000000000000000000",
+      "mspi_state_sha256": "9870e3ad9c04e362b196725f685a0bc511c3b561b1ee10a0904e1e932de172cd"
+    },
+    {
+      "name": "handle-constructor-null-output",
+      "stage_status": {},
+      "fixture": {
+        "handle_out": "0x0"
+      },
+      "return": 6,
+      "events": [],
+      "current_device": "0xc0ffee01",
+      "handle": "0xaabbccdd",
+      "record": "00000000000000000000000000000000",
+      "mspi_state_sha256": "641088987f5f2c244a4a925160ff63e443cd935518f89d1526949d9d65cd953a"
+    },
+    {
+      "name": "handle-constructor-direct-success",
+      "stage_status": {},
+      "fixture": {
+        "handle_out": "0x20007020"
+      },
+      "return": 0,
+      "events": [],
+      "current_device": "0xc0ffee01",
+      "handle": "0x2001d370",
+      "record": "00000000000000000000000000000000",
+      "mspi_state_sha256": "9870e3ad9c04e362b196725f685a0bc511c3b561b1ee10a0904e1e932de172cd"
+    }
+  ],
+  "distinct_original_instruction_bytes": 690,
+  "original_trace": {
+    "0x420254": "2de9f843",
+    "0x420258": "86b0",
+    "0x42025a": "0300",
+    "0x42025c": "0d00",
+    "0x42025e": "1600",
+    "0x420260": "03a8",
+    "0x420262": "0021",
+    "0x420264": "0022",
+    "0x420266": "0024",
+    "0x420268": "80e81600",
+    "0x42026c": "0020",
+    "0x42026e": "0024",
+    "0x420270": "00e0",
+    "0x420274": "002c",
+    "0x420276": "06d1",
+    "0x420278": "dff88808",
+    "0x42027c": "2101",
+    "0x42027e": "0844",
+    "0x420280": "007b",
+    "0x420282": "0028",
+    "0x420284": "f5d1",
+    "0x420286": "012c",
+    "0x420288": "02d1",
+    "0x420290": "1f00",
+    "0x420292": "dff8e085",
+    "0x420296": "4146",
+    "0x420298": "3800",
+    "0x42029a": "04f0defb",
+    "0x424a5a": "30b4",
+    "0x424a5c": "0428",
+    "0x424a5e": "01d3",
+    "0x424a64": "0029",
+    "0x424a66": "01d1",
+    "0x424a6c": "4ff40d63",
+    "0x424a70": "dff83847",
+    "0x424a74": "03fb00f2",
+    "0x424a78": "a258",
+    "0x424a7a": "c2f30062",
+    "0x424a7e": "002a",
+    "0x424a80": "01d0",
+    "0x424a86": "03fb00f2",
+    "0x424a8a": "2244",
+    "0x424a8c": "1568",
+    "0x424a8e": "55f08075",
+    "0x424a92": "1560",
+    "0x424a94": "03fb00f2",
+    "0x424a98": "2244",
+    "0x424a9a": "1568",
+    "0x424a9c": "15f07f45",
+    "0x424aa0": "45f0be15",
+    "0x424aa4": "55f43e45",
+    "0x424aa8": "1560",
+    "0x424aaa": "03fb00f2",
+    "0x424aae": "2244",
+    "0x424ab0": "5060",
+    "0x424ab2": "0022",
+    "0x424ab4": "03fb00f5",
+    "0x424ab8": "2544",
+    "0x424aba": "2a73",
+    "0x424abc": "0022",
+    "0x424abe": "03fb00f5",
+    "0x424ac2": "2544",
+    "0x424ac4": "aa61",
+    "0x424ac6": "0722",
+    "0x424ac8": "03fb00f5",
+    "0x424acc": "2544",
+    "0x424ace": "85f8c928",
+    "0x424ad2": "0822",
+    "0x424ad4": "03fb00f5",
+    "0x424ad8": "2544",
+    "0x424ada": "c5f8cc28",
+    "0x424ade": "5843",
+    "0x424ae0": "2044",
+    "0x424ae2": "0860",
+    "0x424ae4": "0020",
+    "0x424ae6": "30bc",
+    "0x424ae8": "7047",
+    "0x42029e": "0028",
+    "0x4202a0": "40f0e680",
+    "0x4202a4": "0022",
+    "0x4202a6": "0021",
+    "0x4202a8": "d8f80000",
+    "0x4202ac": "06f0acfa",
+    "0x4202b0": "0028",
+    "0x4202b2": "10d0",
+    "0x4202d6": "4ff48070",
+    "0x4202da": "0390",
+    "0x4202dc": "dff84009",
+    "0x4202e0": "0490",
+    "0x4202e2": "0020",
+    "0x4202e4": "8df81400",
+    "0x4202e8": "03a9",
+    "0x4202ea": "d8f80000",
+    "0x4202ee": "04f0fffb",
+    "0x4202f2": "8146",
+    "0x4202f4": "b9f1000f",
+    "0x4202f8": "14d0",
+    "0x420324": "002d",
+    "0x420326": "06d0",
+    "0x420336": "dff8f018",
+    "0x42033a": "d8f80000",
+    "0x42033e": "04f051fc",
+    "0x420342": "8146",
+    "0x420344": "b9f1000f",
+    "0x420348": "14d0",
+    "0x420374": "d8f80000",
+    "0x420378": "04f075fe",
+    "0x42037c": "8146",
+    "0x42037e": "b9f1000f",
+    "0x420382": "14d0",
+    "0x4203ae": "0020",
+    "0x4203b0": "fff7c0fd",
+    "0x4203b4": "1021",
+    "0x4203b6": "3800",
+    "0x4203b8": "fff790fb",
+    "0x4203bc": "02a9",
+    "0x4203be": "6720",
+    "0x4203c0": "fdf7a5fa",
+    "0x4203c4": "4ff4d451",
+    "0x4203c8": "d8f80000",
+    "0x4203cc": "06f09bf8",
+    "0x4203d0": "0028",
+    "0x4203d2": "01d0",
+    "0x4203d8": "4ff4d451",
+    "0x4203dc": "d8f80000",
+    "0x4203e0": "06f036f8",
+    "0x4203e4": "0028",
+    "0x4203e6": "10d0",
+    "0x42040a": "0421",
+    "0x42040c": "1520",
+    "0x42040e": "fff7e6fc",
+    "0x420412": "1520",
+    "0x420414": "fff7d4fc",
+    "0x420418": "fbf762fa",
+    "0x42041c": "dff8e406",
+    "0x420420": "2101",
+    "0x420422": "4750",
+    "0x420424": "002d",
+    "0x420426": "01d0",
+    "0x42042c": "dff80818",
+    "0x420430": "097a",
+    "0x420432": "2201",
+    "0x420434": "0244",
+    "0x420436": "5160",
+    "0x420438": "d8f80010",
+    "0x42043c": "2201",
+    "0x42043e": "0244",
+    "0x420440": "9160",
+    "0x420442": "0121",
+    "0x420444": "2201",
+    "0x420446": "0244",
+    "0x420448": "1173",
+    "0x42044a": "2401",
+    "0x42044c": "2044",
+    "0x42044e": "3060",
+    "0x420450": "dff8e807",
+    "0x420454": "0190",
+    "0x420456": "40f27a20",
+    "0x42045a": "0090",
+    "0x42045c": "dff8bc37",
+    "0x420460": "dff81425",
+    "0x420464": "dff87416",
+    "0x420468": "0320",
+    "0x42046a": "f7f730f9",
+    "0x42046e": "0020",
+    "0x420470": "07b0",
+    "0x420472": "bde8f083",
+    "0x420328": "2900",
+    "0x42032a": "d8f80000",
+    "0x42032e": "04f059fc",
+    "0x420332": "8146",
+    "0x420334": "06e0",
+    "0x420428": "297a",
+    "0x42042a": "02e0",
+    "0x420272": "641c",
+    "0x42028a": "5ff0ff30",
+    "0x42028e": "efe0",
+    "0x424a82": "0720",
+    "0x424a84": "2fe0",
+    "0x424a60": "0520",
+    "0x424a62": "40e0",
+    "0x4202b4": "dff85008",
+    "0x4202b8": "0190",
+    "0x4202ba": "40f22a20",
+    "0x4202be": "0090",
+    "0x4202c0": "dff85839",
+    "0x4202c4": "dff8b026",
+    "0x4202c8": "dff81018",
+    "0x4202cc": "0120",
+    "0x4202ce": "f7f7fef9",
+    "0x4202d2": "0120",
+    "0x4202d4": "cce0",
+    "0x4202fa": "dff82809",
+    "0x4202fe": "0190",
+    "0x420300": "40f23320",
+    "0x420304": "0090",
+    "0x420306": "dff81439",
+    "0x42030a": "dff86c26",
+    "0x42030e": "dff8cc17",
+    "0x420312": "0120",
+    "0x420314": "f7f7dbf9",
+    "0x420318": "d8f80000",
+    "0x42031c": "04f026ff",
+    "0x420320": "4846",
+    "0x420322": "a5e0",
+    "0x42034a": "dff8e008",
+    "0x42034e": "0190",
+    "0x420350": "40f23f20",
+    "0x420354": "0090",
+    "0x420356": "dff8c438",
+    "0x42035a": "dff81c26",
+    "0x42035e": "dff87c17",
+    "0x420362": "0120",
+    "0x420364": "f7f7b3f9",
+    "0x420368": "d8f80000",
+    "0x42036c": "04f0fefe",
+    "0x420370": "4846",
+    "0x420372": "7de0",
+    "0x420384": "dff8a808",
+    "0x420388": "0190",
+    "0x42038a": "40f24620",
+    "0x42038e": "0090",
+    "0x420390": "dff88838",
+    "0x420394": "dff8e025",
+    "0x420398": "dff84017",
+    "0x42039c": "0120",
+    "0x42039e": "f7f796f9",
+    "0x4203a2": "d8f80000",
+    "0x4203a6": "04f0e1fe",
+    "0x4203aa": "4846",
+    "0x4203ac": "60e0",
+    "0x4203d4": "0120",
+    "0x4203d6": "4be0",
+    "0x4203e8": "dff84808",
+    "0x4203ec": "0190",
+    "0x4203ee": "40f26920",
+    "0x4203f2": "0090",
+    "0x4203f4": "dff82438",
+    "0x4203f8": "dff87c25",
+    "0x4203fc": "dff8dc16",
+    "0x420400": "0120",
+    "0x420402": "f7f764f9",
+    "0x420406": "0120",
+    "0x420408": "32e0",
+    "0x424a68": "0620",
+    "0x424a6a": "3ce0"
+  },
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "elf_sha256": "9956d8a2ecb936638b6271ff5d7236bff7cb238b8902ae413994bf6478886dd7",
+  "source_sha256": {
+    "nor_mspi_init.h": "25e82a1e772ed8a0761602d7e1171ffda8506bc17c23c172171f6c00e8906dcc",
+    "Makefile": "791c649cab7d5c4f9339aa54a40268398abc192b9c1dd5db9207c03f4d304b1e",
+    "verify_nor_mspi_init.py": "2c9c456e8577c0d09691c5cf0cac2dbd6eaa74e844784bfa75546b864c0792ef",
+    "nor_mspi_init.c": "e01cd5ac757a6c41ac7a846db6f63b83a8eee91c5e55a92c16908351ee7ba92e",
+    "module.ld": "8dbc64ad7cbeae67574e4257de6f027c05efeaea8cf850a071ac2f1e372cd897"
+  },
+  "limits": [
+    "Original 0x420254 and 0x424a5a instructions execute; HAL, MMIO/control, interrupt-priority, IRQ guard, and logging providers are synthetic exact-address cuts.",
+    "The 12-byte base-config structure is passed to a synthetic configure provider; its fields and target TCB address are inspected, but the TCB is not DMA-accessed.",
+    "The C source implements the fixed module-state constructor at 0x424a5a using synthetic RAM at the firmware's fixed state address; no hardware register writes are claimed.",
+    "Only the listed success and failure paths are compared; no physical MSPI device, clock, interrupts, or flash are exercised.",
+    "This slice is not a bootable image and does not claim full-source completion or byte-identical rebuild."
+  ]
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "start": 5385624,
+    "end": 5385652,
+    "instructions": [
+      {
+        "address": 5385624,
+        "bytes": "b9f1000f",
+        "mnemonic": "cmp.w",
+        "operands": "r9, #0"
+      },
+      {
+        "address": 5385628,
+        "bytes": "7ff570af",
+        "mnemonic": "bpl.w",
+        "operands": "522c80 <.text-0x118>"
+      },
+      {
+        "address": 5385632,
+        "bytes": "09eb8409",
+        "mnemonic": "add.w",
+        "operands": "r9, r9, r4, lsl #2"
+      },
+      {
+        "address": 5385636,
+        "bytes": "09f10609",
+        "mnemonic": "add.w",
+        "operands": "r9, r9, #6"
+      },
+      {
+        "address": 5385640,
+        "bytes": "641c",
+        "mnemonic": "adds",
+        "operands": "r4, r4, #1"
+      },
+      {
+        "address": 5385642,
+        "bytes": "a742",
+        "mnemonic": "cmp",
+        "operands": "r7, r4"
+      },
+      {
+        "address": 5385644,
+        "bytes": "b2da",
+        "mnemonic": "bge.n",
+        "operands": "522d14 <.text-0x84>"
+      },
+      {
+        "address": 5385646,
+        "bytes": "07b0",
+        "mnemonic": "add",
+        "operands": "sp, #28"
+      },
+      {
+        "address": 5385648,
+        "bytes": "bde8f08f",
+        "mnemonic": "ldmia.w",
+        "operands": "sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}"
+      }
+    ]
+  }
+]

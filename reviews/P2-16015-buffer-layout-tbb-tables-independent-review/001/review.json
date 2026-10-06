@@ -1,0 +1,17 @@
+{
+  "task_id": "P2-16015",
+  "accepted": false,
+  "status": "partial",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-buffer-layout-tbb-tables-16414/001",
+  "candidate_receipt_sha256": "bdab442722b3ac3f9b3045a8ff4641aa25e403e1792d22a8990505851dc13c20",
+  "candidate_tables_sha256": "3cd53e6ee00342d6895a4bbbe955324190a4bb60ae4e922089735c7c8e6a88a9",
+  "candidate_replay_sha256": "3b54fb64690d1aa13677f2974b92eac5838e69560cb33e5a92b3d14b7a60a588",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_replay_stdout": "PASS143 TBBbytes 1excludedbyte",
+  "fresh_results_sha256": "3cd53e6ee00342d6895a4bbbe955324190a4bb60ae4e922089735c7c8e6a88a9",
+  "review": "Fresh replay reconstructed the 68- and 75-byte TBB tables. TBB offsets are doubled and relative to consumer PC+4; all target addresses match decoded instruction starts in mapped code. The adjacent 0x4B13C3 byte remains excluded and unclassified.",
+  "limitations": [
+    "This checks the bounded tables and consumer targets only; it does not establish global code/data ownership or completeness.",
+    "No canonical admission or gate change."
+  ]
+}

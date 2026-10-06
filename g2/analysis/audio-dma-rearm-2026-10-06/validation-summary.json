@@ -1,0 +1,77 @@
+{
+  "comparison": {
+    "path": "g2/build/foundation/audio-dma-rearm-simulator/comparison-observable.json",
+    "sha256": "20fc38a80ebad28d469d196832793146454fe2088038e4439e2386c1d8f697eb",
+    "status": "PASS",
+    "scenarios": 899,
+    "invocations": 1019,
+    "traced_bytes": 740,
+    "new_complete_body_union_bytes": 610,
+    "new_original_bytes": 610,
+    "source_and_ELF_hashes_current": true
+  },
+  "handoff_regression": {
+    "path": "g2/build/foundation/audio-dma-rearm-simulator/handoff-comparison.json",
+    "sha256": "6722c196f51f9aef42128495af8b614d4038b8b79c21bbe1bc01479d1bca99c3",
+    "status": "PASS",
+    "original_source_cases": 282,
+    "new_checked_policy_cases": 1157
+  },
+  "aggregate": {
+    "path": "g2/build/foundation/audio-dma-rearm-simulator/aggregate.json",
+    "sha256": "77061acef66ae62a0d6747204d4070fbe653ef523a89333d6729dd57bb1b1093",
+    "modules": 44,
+    "totals": {
+      "tests_run": 228,
+      "passed": 222,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 7,
+      "method_skips": 6,
+      "setup_skips": 1
+    }
+  },
+  "affected": {
+    "path": "g2/build/foundation/audio-dma-rearm-simulator/affected-reviewed.log",
+    "sha256": "4cbbe1ee3bdd9bf4657aa4619167fb2e2997741c7ca36bce91273dcc39c54a5e",
+    "passed": 15
+  },
+  "inventory": {
+    "path": "g2/analysis/audio-dma-rearm-2026-10-06/cumulative-inventory.json",
+    "sha256": "f307d2575559297aa7e2935a19b0fe80ff578514ba7a3cf2bf4fbd0fe801d40a",
+    "source_files": 85,
+    "total": 7426,
+    "per_payload": {
+      "touch": 234,
+      "apollo_main": 7192
+    },
+    "overlap_bytes": 130,
+    "new_disjoint_bytes": 610
+  },
+  "oversized_cache": {
+    "path": "g2/analysis/audio-cache-handoff-2026-10-06/oversized-prefix-results.json",
+    "sha256": "01677c2f7b6bb977d8cf983ca1e05f1412f51335dd2178564af8a146793c0010",
+    "classification": "execution budget, not demonstrated stock/source mismatch or unsupported input",
+    "bounded_prefix_cases": 12,
+    "completed_huge_paths_verified": false,
+    "legitimate_raw_inputs_retained": true,
+    "counts_toward_completed_coverage": false
+  },
+  "original_ISR_boundary": "before actual notifier53c6b2, live stack; only no-notify paths return",
+  "source_ISR_seam": "returns captured status; not actual notifier/fullISR",
+  "register_model": "Raw synthetic MMIO; optional INTCLR effects/next advance/IPSR context are synthetic",
+  "ownership_or_cache_physics_verified": false,
+  "full_queue_delivery_or_task_dispatch_verified": false,
+  "fully_source_complete_payloads": 0,
+  "source_built_byte_identical_bundle": false,
+  "independent_review": {
+    "path": "g2/analysis/audio-dma-rearm-2026-10-06/review/review.json",
+    "sha256": "4e514676d6eb0d4ca7051d865a80646ce1d15c7cb8c1def1feb0202f8b5e5415",
+    "report_sha256": "3229f59be9b6841d7238edaed87fe4440ba6fe3912364d23a09d9ad4ad39f468",
+    "native_spot_checks": 13,
+    "irq_boundary_spot_checks": 2,
+    "disposition": "accepted_with_bounded_limits",
+    "representative_rerun_sha256": "fd895441cd9bd07e1a02ffe65f950c37c1c1448cb509429f7dcb7ce0f7c5571f",
+    "irq_boundary_rerun_sha256": "ec3f0705cd57528dd365241b466912a0f0997344ae4c856908d90cf6942bd50b"
+  }
+}

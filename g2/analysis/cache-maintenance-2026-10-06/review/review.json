@@ -1,0 +1,72 @@
+{
+  "disposition": "pass_bounded_register_barrier_contract",
+  "scope": "Stock/source behavior for two cache maintenance functions; no physical cache/DMA effects.",
+  "comparison": {
+    "path": "g2/build/foundation/cache-maintenance-simulator/comparison-reviewed.json",
+    "sha256": "a19fc0581b3d3acfa36f09d4a038bb629ff380de6b6a2f432acbbe7808c8c9ef",
+    "status": "PASS",
+    "cases": 768,
+    "unique_original_trace_bytes": 384
+  },
+  "elf": {
+    "path": "g2/build/foundation/cache-maintenance-simulator/cache_maintenance.elf",
+    "sha256": "c35d1ef40fa4334044eba60f39d7a2bead8d4791832ecaceea2c829040b7381c"
+  },
+  "functions": [
+    {
+      "entry": "0x475014",
+      "name": "cache invalidate / optional clean-invalidate",
+      "bytes": 250
+    },
+    {
+      "entry": "0x47510E",
+      "name": "cache clean",
+      "bytes": 134
+    }
+  ],
+  "consumers": [
+    {
+      "pc": "0x59CD10",
+      "caller": "am_devices_mspi_write",
+      "callee": "0x47510E"
+    },
+    {
+      "pc": "0x57A800",
+      "caller": "gx8002_i2s_rx_buffer_get",
+      "callee": "0x475014"
+    }
+  ],
+  "native_spotcheck": {
+    "path": "g2/analysis/cache-maintenance-2026-10-06/review/representative-rerun.json",
+    "status": "PASS",
+    "cases": 12,
+    "sha256": "4233fb8df5163b4f8ad7e08cdc9775bc308a14011fc2f6dc83b7cbc1e213e870"
+  },
+  "accounting": {
+    "baseline_unique_total": 6348,
+    "new_unique_trace_bytes": 384,
+    "result": {
+      "touch": 234,
+      "apollo_main": 6498,
+      "total": 6732
+    },
+    "inventory_sha256": "7e048a08fc6937a7703ea76121ec8d0d9cff2e83ce05809a8a1dc1b7c94f552a",
+    "trace_inventory_tests": "4 passed"
+  },
+  "limits": [
+    "Cache disabled behavior, descriptor loads, MMIO write order, DSB/ISB and ABI were compared; physical cache-line effects were not modeled.",
+    "DMA coherency, physical ownership, and complete display/audio transfer behavior are not established.",
+    "Huge positive length fixture did not complete under the initial bounded instruction cap; it is excluded from final PASS coverage.",
+    "Optimized tick instrumentation-sensitive blocker remains separate and unresolved."
+  ],
+  "hash_bindings": {
+    "g2/components/foundation/cache_maintenance/cache_maintenance.c": "365496e8fc154d0b604e292ab96272f6871106a705ac7a5439a67271f6961d03",
+    "g2/components/foundation/cache_maintenance/cache_maintenance.h": "64c437f8de20c7e0c7e4ce21a8cff58a8afecf0a46950b17dd260783e9f12c11",
+    "g2/components/foundation/cache_maintenance/verify.py": "448b9510a7c30607d45ce3919f45ecee304b1ecec202f067c04229020ab41198",
+    "g2/build/foundation/cache-maintenance-simulator/cache_maintenance.elf": "c35d1ef40fa4334044eba60f39d7a2bead8d4791832ecaceea2c829040b7381c",
+    "g2/build/foundation/cache-maintenance-simulator/comparison-reviewed.json": "a19fc0581b3d3acfa36f09d4a038bb629ff380de6b6a2f432acbbe7808c8c9ef",
+    "g2/analysis/cache-maintenance-2026-10-06/cumulative-inventory.json": "7e048a08fc6937a7703ea76121ec8d0d9cff2e83ce05809a8a1dc1b7c94f552a",
+    "g2/analysis/cache-maintenance-2026-10-06/build-provenance.json": "a73cec86cebc25881cd61f8242627c92fe6f75421031f4edd82075ab45d379d3"
+  },
+  "issues": []
+}

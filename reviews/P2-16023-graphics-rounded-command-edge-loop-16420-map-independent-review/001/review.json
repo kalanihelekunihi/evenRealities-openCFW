@@ -1,0 +1,18 @@
+{
+  "task_id": "P2-16023",
+  "accepted": false,
+  "status": "partial",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-rounded-command-edge-loop-16420-map/001",
+  "candidate_receipt_sha256": "97c9494f302d70e1ab5f139d7de233f7bdaf48e8806a026914facdbda4909e19",
+  "candidate_instructions_sha256": "6ee43c1f8e75930fe39aa598c8e9ebeca06fc07a8db4805fbec739b1b22b9c1e",
+  "candidate_pseudocode_sha256": "0c3cf95bf4e9fb4947dcfb9abb214ee06f330157ef9be14751d42acf8544a2a0",
+  "candidate_replay_sha256": "95a1bc37beb02f6b047e2cf8bbb3c1faccea82aab33482541f4f96929a613795",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_replay_stdout": "PASS 280",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "review": "Distinct edge-coordinate calculations and fresh allocator/global reads match; NULL allocations drop individual emissions.",
+  "limitations": [
+    "Only the bounded original-image span is reviewed; child behavior, function ownership/completeness, architecture-specific effects and physical rendering are unqualified.",
+    "No C implementation, admission, coverage promotion or gate change."
+  ]
+}

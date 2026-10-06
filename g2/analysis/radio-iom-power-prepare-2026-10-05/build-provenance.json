@@ -1,0 +1,53 @@
+{
+  "target": "make -C g2 radio-iom-power-prepare-simulator",
+  "compiler_profile": "clang Cortex-M4 Thumb2 soft-float freestanding C11 O2 fwrapv; isolated simulator linker map, not stock link map",
+  "bindings": {
+    "g2/components/foundation/radio_iom_power_prepare/power_prepare.c": "373418706fa831325ee94171284c83b6d4432fecdde71daf57a488e49eca887f",
+    "g2/components/foundation/radio_iom_power_prepare/power_prepare.h": "63c9d4dd6b118a371b0bd16ed0fa95296c5e5ef9b7a05d5b02a8ec97c159574e",
+    "g2/components/foundation/radio_iom_power_prepare/verify.py": "d654270bd5efd6f73c245e9cf3a43754689b1057fa23c49aaaf9f0e5d5cf9882",
+    "g2/components/foundation/radio_iom_release/iom_release.h": "681a4d11f3609ba515ca2c48653de4902993802e1f88d82004d506921a39780d",
+    "g2/components/foundation/radio_iom_release/verify.py": "e476b5086290a668b950fd57235edd0f074f1f8df9c48a986bb4ba649b531f9b",
+    "g2/components/foundation/radio_iom_release/iom_release.c": "dc44702b3a2592877b7f4c25d4b4d87091baae690ade389ac63929a3c03ea7b1",
+    "g2/components/foundation/ambiq_mspi/ambiq_cmdq.c": "39dfd4515413e88e66b07f8eea47664a6d666943069e65768f1a284435583a24",
+    "g2/components/foundation/ambiq_mspi/ambiq_interrupt_mask.c": "27a574d24f61bf1bec7a13d16bc3e1f0816c35045f384b5ad85d808871f6a9eb",
+    "g2/components/foundation/ambiq_mspi/ambiq_mspi_interrupts.c": "032087d41fe463a36c6a119b8fd2a7beb1256356e2f6d8d9d7f4ca75e02e5ba3",
+    "g2/components/foundation/ambiq_mspi/ambiq_mspi_lifecycle.c": "c55c3e163097e0112b11eb9fc4192b6a25de8cdaf28da41b1e3a6c8f2272ad0d",
+    "g2/components/foundation/ambiq_mspi/ambiq_mspi_compat.h": "fe6af8d10f857eb6bfb2758907073bd5ab75691a6818c03c94f0124a0f285299",
+    "g2/components/foundation/ambiq_mspi/ambiq_cmdq.h": "8f4dffc5e3cf2b33cf877dab9ba5b2841b74451a379b9ab49ab4ec0d2869ce7d",
+    "g2/components/foundation/ambiq_mspi/ambiq_mspi_interrupts.h": "89f04627e3270417130428894d6523b66e1191842dfd5baba01ca0256be51337",
+    "g2/components/foundation/ambiq_mspi/ambiq_interrupt_mask.h": "76e92c27af92ed403326c65acdbb890dccfb4f00788f06c6c99f09e4ec0de98a",
+    "g2/components/foundation/ambiq_mspi/simulator/lifecycle_seams.c": "6b3e74175d61d32ef8c416a72f795ec7b722d6ab0442dd7409e6b7fb1d34e644",
+    "g2/components/foundation/ambiq_mspi/simulator/module.ld": "de37d00a5c0dfa28c3630bae181df5f6b8383ea2e17e1cb371e39f4f00f6185f",
+    "g2/components/foundation/ambiq_mspi/simulator/verify.py": "adc66c4a1506425ca1b2c526da46a842e3ef5c0844a7dde3a76ce5a53147aa26",
+    "g2/components/foundation/ambiq_mspi/simulator/verify_cmdq.py": "99875b33236aa7b62387c744d4f898b99979320fb937a6ab2cb383660c186093",
+    "g2/components/foundation/ambiq_mspi/simulator/entry.c": "762eab9e3d49371055ba5e9941f62540f6538348b23d9f5990e01e7340850b28",
+    "g2/components/foundation/ambiq_mspi/simulator/verify_lifecycle.py": "636837d152dc69b797b89626d1d85d18b79482cf2e1679a8e0682e7753d437f9",
+    "g2/Makefile": "bd03b6448379c2465123be51c24200f3d8c73d29424394e6c7809ebc06f5457c",
+    "g2/build/foundation/radio-iom-power-prepare-simulator/power_prepare.elf": "87740bbfbc8e0e84f70e711ac1cdee160e90ab15d95610e598d65f476fba62d6",
+    "g2/build/foundation/radio-iom-power-prepare-simulator/power.o": "e827bb523eab2a28ecf26b2456595d327f5d0c02eabb20e43b9ff322ff6a5642",
+    "g2/build/foundation/radio-iom-power-prepare-simulator/critical.o": "2addec12eaf2ee85a148df1564e6a6fcfcc8363748775bc6d0c5e646b9e0fe65",
+    "g2/build/foundation/radio-iom-power-prepare-simulator/iom.o": "8c0d344f5f7b6d4628475ac7af4fcd043e6a41c007d03ebf51e397d8cd6dd067",
+    "g2/build/foundation/radio-iom-power-prepare-simulator/cmdq.o": "2c6302d2f8aad55f0083203694ed9da313d2a5ff5f7643d971ddfffd98a7b489"
+  },
+  "comparison": {
+    "path": "g2/build/foundation/radio-iom-power-prepare-simulator/comparison-refreshed.json",
+    "sha256": "2ac6fe98fab1b69590d39b960c12323409201898e40d06913688959c96ee343f",
+    "status": "PASS",
+    "cases": 812
+  },
+  "undefined_symbols": "",
+  "production_byte_match": false,
+  "additional_evidence_bindings": {
+    "g2/analysis/radio-iom-power-prepare-2026-10-05/review/review.json": "d1ce546584a286f24a227e866a837bb675cf26e40f3eae2cd6452588db19650e",
+    "g2/analysis/radio-iom-power-prepare-2026-10-05/review/report.md": "0f504b552f90e4d2938247572204f4c2ec95b518f983bb9508cadfdf8c952555",
+    "g2/analysis/radio-iom-power-prepare-2026-10-05/review/representative-rerun.json": "913182b9359f2bc34d44fd9207b079d2c41cbb009a8a1d9a4f2b0e2fd26a597b",
+    "g2/analysis/radio-iom-power-prepare-2026-10-05/validation-summary.json": "56273e668361ff1e9056ef4fae33f50ad59d07b830b1d2b86f23caf21cc96908",
+    "g2/analysis/radio-iom-power-prepare-2026-10-05/cumulative-inventory.json": "48ac83f3848e154e0f6c45039f866a47d26739cf9da5f4d53c3811c4908be28c"
+  },
+  "accounting_source_bindings": {
+    "g2/tools/trace_inventory.py": "dbf6f9a04665c2fc5f097f7540ae3918e37f2094016bc21a3df73337c59074a6",
+    "g2/tests/test_trace_inventory.py": "aaaa18cb05d72c9d86fd292e0dd34ba263b994a7ecf319fbfcf0ca516d9ff48c",
+    "g2/analysis/radio-iom-power-prepare-2026-10-05/reconcile_inventory.py": "6fb9bb5b51105a802e97812c74d012c4aaf2b4d1301c1d638074caa814694646"
+  },
+  "makefile_binding_scope": "Current Makefile snapshot; earlier build commands unchanged by added descriptor target/accounting test. Not an assertion of historical Makefile byte equality."
+}

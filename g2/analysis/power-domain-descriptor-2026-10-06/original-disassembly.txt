@@ -1,0 +1,71 @@
+
+descriptor lookup: 0047ef18..0047ef38
+0047ef18 80b5         push       {r7, lr}
+0047ef1a 0028         cmp        r0, #0
+0047ef1c 01d0         beq        #0x47ef22
+0047ef1e 2229         cmp        r1, #0x22
+0047ef20 01d3         blo        #0x47ef26
+0047ef22 0620         movs       r0, #6
+0047ef24 07e0         b          #0x47ef36
+0047ef26 dff81c2a     ldr.w      r2, [pc, #0xa1c]
+0047ef2a 0901         lsls       r1, r1, #4
+0047ef2c 1144         add        r1, r2
+0047ef2e 1022         movs       r2, #0x10
+0047ef30 baf768fe     bl         #0x439c04
+0047ef34 0020         movs       r0, #0
+0047ef36 02bd         pop        {r1, pc}
+
+original copy body; only16-byte path verified: 00439c04..00439c42
+00439c04 103a         subs       r2, #0x10
+00439c06 07d3         blo        #0x439c18
+00439c08 30b4         push       {r4, r5}
+00439c0a b1e83810     ldm.w      r1!, {r3, r4, r5, ip}
+00439c0e 103a         subs       r2, #0x10
+00439c10 a0e83810     stm.w      r0!, {r3, r4, r5, ip}
+00439c14 f9d2         bhs        #0x439c0a
+00439c16 30bc         pop        {r4, r5}
+00439c18 5307         lsls       r3, r2, #0x1d
+00439c1a 24bf         itt        hs
+00439c1c b1e80810     ldmhs.w    r1!, {r3, ip}
+00439c20 a0e80810     stmhs.w    r0!, {r3, ip}
+00439c24 44bf         itt        mi
+00439c26 51f8043b     ldrmi      r3, [r1], #4
+00439c2a 40f8043b     strmi      r3, [r0], #4
+00439c2e d207         lsls       r2, r2, #0x1f
+00439c30 24bf         itt        hs
+00439c32 31f8022b     ldrhhs     r2, [r1], #2
+00439c36 20f8022b     strhhs     r2, [r0], #2
+00439c3a 44bf         itt        mi
+00439c3c 0b78         ldrbmi     r3, [r1]
+00439c3e 0370         strbmi     r3, [r0]
+00439c40 7047         bx         lr
+
+actual IOM consumer selection and downstream calls: 0055ca72..0055ca94
+0055ca72 6068         ldr        r0, [r4, #4]
+0055ca74 c01c         adds       r0, r0, #3
+0055ca76 c0b2         uxtb       r0, r0
+0055ca78 22f799fe     bl         #0x47f7ae
+0055ca7c 6168         ldr        r1, [r4, #4]
+0055ca7e c91c         adds       r1, r1, #3
+0055ca80 c9b2         uxtb       r1, r1
+0055ca82 0420         movs       r0, #4
+0055ca84 67f754fd     bl         #0x4c4530
+0055ca88 0028         cmp        r0, #0
+0055ca8a 7ff45baf     bne.w      #0x55c944
+0055ca8e 58e7         b          #0x55c942
+0055ca90 0620         movs       r0, #6
+0055ca92 57e7         b          #0x55c944
+
+actual power-consumer lookup prefix: 0047f7ae..0047f7c8
+0047f7ae 38b5         push       {r3, r4, r5, lr}
+0047f7b0 86b0         sub        sp, #0x18
+0047f7b2 0500         movs       r5, r0
+0047f7b4 2900         movs       r1, r5
+0047f7b6 c9b2         uxtb       r1, r1
+0047f7b8 01a8         add        r0, sp, #4
+0047f7ba fff7adfb     bl         #0x47ef18
+0047f7be 0400         movs       r4, r0
+0047f7c0 002c         cmp        r4, #0
+0047f7c2 01d0         beq        #0x47f7c8
+0047f7c4 2000         movs       r0, r4
+0047f7c6 9fe0         b          #0x47f908

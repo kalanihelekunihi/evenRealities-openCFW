@@ -1,0 +1,110 @@
+{
+  "status": "PASS",
+  "cases": 11,
+  "cases_detail": [
+    {
+      "kind": "direct",
+      "value": 0,
+      "null": false,
+      "prior": 0,
+      "domain": 0,
+      "status": 0,
+      "matched": true
+    },
+    {
+      "kind": "direct",
+      "value": 33,
+      "null": false,
+      "prior": 1,
+      "domain": 33,
+      "status": 0,
+      "matched": true
+    },
+    {
+      "kind": "direct",
+      "value": 34,
+      "null": false,
+      "prior": 0,
+      "domain": 34,
+      "status": 6,
+      "matched": true
+    },
+    {
+      "kind": "direct",
+      "value": 4294967295,
+      "null": false,
+      "prior": 1,
+      "domain": 4294967295,
+      "status": 6,
+      "matched": true
+    },
+    {
+      "kind": "direct",
+      "value": 4294967295,
+      "null": true,
+      "prior": 0,
+      "domain": 4294967295,
+      "status": 6,
+      "matched": true
+    },
+    {
+      "kind": "consumer",
+      "value": 0,
+      "null": false,
+      "prior": 0,
+      "domain": 3,
+      "status": 0,
+      "matched": true
+    },
+    {
+      "kind": "consumer",
+      "value": 30,
+      "null": false,
+      "prior": 1,
+      "domain": 33,
+      "status": 0,
+      "matched": true
+    },
+    {
+      "kind": "consumer",
+      "value": 31,
+      "null": false,
+      "prior": 0,
+      "domain": 34,
+      "status": 6,
+      "matched": true
+    },
+    {
+      "kind": "consumer",
+      "value": 252,
+      "null": false,
+      "prior": 1,
+      "domain": 255,
+      "status": 6,
+      "matched": true
+    },
+    {
+      "kind": "consumer",
+      "value": 253,
+      "null": false,
+      "prior": 0,
+      "domain": 0,
+      "status": 0,
+      "matched": true
+    },
+    {
+      "kind": "consumer",
+      "value": 4294967295,
+      "null": false,
+      "prior": 1,
+      "domain": 2,
+      "status": 0,
+      "matched": true
+    }
+  ],
+  "elf_sha256": "c64c4c8eb0e1f4c73f64d071bd126b7577977beef6ce27d5cd8b052d4bd36e4f",
+  "verifier_sha256": "514cada1fee96cdcc72ce60a3306887cafe5e0ce13386277673d7fb8f25340ce",
+  "comparison_sha256": "1d259b504f16de2e635dccc998b150ae37295ddca27e482aef712c9f63dba31a",
+  "descriptor_table_sha256": "6883e99ca3d6bcc6ab1914d77fe857be7af7f67189c2bf81159b94345cede9e0",
+  "boundary_note": "Original consumer fragment ends at 0x47f7be after descriptor helper; source helper returns its descriptor status directly. No downstream power-domain operation is executed."
+}

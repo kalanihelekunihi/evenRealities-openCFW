@@ -1,0 +1,440 @@
+{
+  "accepted": false,
+  "status": "diagnostic",
+  "phase": "P2_EXECUTING",
+  "gates": {
+    "G1_TARGET_AND_INVENTORY": "passed",
+    "G2_PSEUDOCODE_COMPLETE": "not_run",
+    "G3_CORPUS_FROZEN": "not_run",
+    "G4_IMPLEMENTATION_READY": "not_run",
+    "G5_SOURCE_COMPLETE": "not_run",
+    "G6_IDENTICAL_SOURCE_BUILD": "not_run"
+  },
+  "image_records": 33,
+  "coverage_records": 70,
+  "scope_summaries": [
+    {
+      "scope_kind": "image",
+      "scope_id": "apollo_bootloader:decoded:00000040",
+      "rows": 1,
+      "extent": 24,
+      "bytes_by_kind": {
+        "unknown": 24
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "apollo_bootloader:decoded:20000000",
+      "rows": 1,
+      "extent": 1371,
+      "bytes_by_kind": {
+        "unknown": 1371
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "apollo_bootloader:decoded:20080000",
+      "rows": 1,
+      "extent": 4096,
+      "bytes_by_kind": {
+        "unknown": 4096
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "apollo_bootloader:flash",
+      "rows": 1,
+      "extent": 148599,
+      "bytes_by_kind": {
+        "unknown": 148599
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "apollo_main:decoded:00000040",
+      "rows": 1,
+      "extent": 24,
+      "bytes_by_kind": {
+        "unknown": 24
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "apollo_main:decoded:20000000",
+      "rows": 1,
+      "extent": 17752,
+      "bytes_by_kind": {
+        "unknown": 17752
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "apollo_main:decoded:20080000",
+      "rows": 1,
+      "extent": 769646,
+      "bytes_by_kind": {
+        "unknown": 769646
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "apollo_main:flash",
+      "rows": 1,
+      "extent": 3523364,
+      "bytes_by_kind": {
+        "unknown": 3523364
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "binh_a_stage1",
+      "rows": 1,
+      "extent": 12288,
+      "bytes_by_kind": {
+        "unknown": 12288
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "binh_a_stage2_container",
+      "rows": 1,
+      "extent": 51200,
+      "bytes_by_kind": {
+        "unknown": 51200
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "binh_a_stage2_sram",
+      "rows": 1,
+      "extent": 14716,
+      "bytes_by_kind": {
+        "unknown": 14716
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "binh_a_stage2_xip",
+      "rows": 1,
+      "extent": 36484,
+      "bytes_by_kind": {
+        "unknown": 36484
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "binh_b_stage1",
+      "rows": 1,
+      "extent": 12288,
+      "bytes_by_kind": {
+        "unknown": 12288
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "binh_b_stage2",
+      "rows": 1,
+      "extent": 82060,
+      "bytes_by_kind": {
+        "unknown": 82060
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "ble_em9305:ram-initialized-0",
+      "rows": 1,
+      "extent": 69,
+      "bytes_by_kind": {
+        "unknown": 69
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "ble_em9305:ram-initialized-1",
+      "rows": 1,
+      "extent": 776,
+      "bytes_by_kind": {
+        "unknown": 776
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "ble_em9305:ram-initialized-2",
+      "rows": 1,
+      "extent": 44,
+      "bytes_by_kind": {
+        "unknown": 44
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "ble_em9305:record-0",
+      "rows": 1,
+      "extent": 224,
+      "bytes_by_kind": {
+        "unknown": 224
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "ble_em9305:record-1",
+      "rows": 1,
+      "extent": 656,
+      "bytes_by_kind": {
+        "unknown": 656
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "ble_em9305:record-2",
+      "rows": 1,
+      "extent": 56,
+      "bytes_by_kind": {
+        "unknown": 56
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "ble_em9305:record-3",
+      "rows": 1,
+      "extent": 210888,
+      "bytes_by_kind": {
+        "unknown": 210888
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "case:decoded:20000000",
+      "rows": 1,
+      "extent": 420,
+      "bytes_by_kind": {
+        "unknown": 420
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "case:flash",
+      "rows": 1,
+      "extent": 55752,
+      "bytes_by_kind": {
+        "unknown": 55752
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "codec_payload",
+      "rows": 1,
+      "extent": 326092,
+      "bytes_by_kind": {
+        "unknown": 326092
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "main_type2_container",
+      "rows": 1,
+      "extent": 287808,
+      "bytes_by_kind": {
+        "unknown": 287808
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "npu_kws_command",
+      "rows": 1,
+      "extent": 9164,
+      "bytes_by_kind": {
+        "unknown": 9164
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "npu_kws_weights",
+      "rows": 1,
+      "extent": 120800,
+      "bytes_by_kind": {
+        "unknown": 120800
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "touch:flash",
+      "rows": 1,
+      "extent": 34432,
+      "bytes_by_kind": {
+        "unknown": 34432
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "touch:ram-initialized",
+      "rows": 1,
+      "extent": 964,
+      "bytes_by_kind": {
+        "unknown": 964
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "touch:ram-vectors",
+      "rows": 1,
+      "extent": 192,
+      "bytes_by_kind": {
+        "unknown": 192
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "uart_stage1",
+      "rows": 1,
+      "extent": 10240,
+      "bytes_by_kind": {
+        "unknown": 10240
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "uart_stage2",
+      "rows": 1,
+      "extent": 27964,
+      "bytes_by_kind": {
+        "unknown": 27964
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "image",
+      "scope_id": "uart_type1_container",
+      "rows": 1,
+      "extent": 38236,
+      "bytes_by_kind": {
+        "unknown": 38236
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "package",
+      "scope_id": "package",
+      "rows": 15,
+      "extent": 4301227,
+      "bytes_by_kind": {
+        "container": 4301227
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "payload",
+      "scope_id": "apollo_bootloader",
+      "rows": 1,
+      "extent": 148599,
+      "bytes_by_kind": {
+        "unknown": 148599
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "payload",
+      "scope_id": "apollo_main",
+      "rows": 2,
+      "extent": 3523396,
+      "bytes_by_kind": {
+        "container": 32,
+        "unknown": 3523364
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "payload",
+      "scope_id": "ble_em9305",
+      "rows": 2,
+      "extent": 211948,
+      "bytes_by_kind": {
+        "container": 124,
+        "unknown": 211824
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "payload",
+      "scope_id": "case",
+      "rows": 2,
+      "extent": 55784,
+      "bytes_by_kind": {
+        "container": 32,
+        "unknown": 55752
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "payload",
+      "scope_id": "codec",
+      "rows": 13,
+      "extent": 326092,
+      "bytes_by_kind": {
+        "container": 144,
+        "unknown": 325948
+      },
+      "partition_discontinuities": []
+    },
+    {
+      "scope_kind": "payload",
+      "scope_id": "touch",
+      "rows": 2,
+      "extent": 34464,
+      "bytes_by_kind": {
+        "container": 32,
+        "unknown": 34432
+      },
+      "partition_discontinuities": []
+    }
+  ],
+  "missing_canonical_records_at_campaign_or_inventory_root": [
+    "functions.jsonl",
+    "data.jsonl",
+    "interfaces.jsonl",
+    "freeze.json"
+  ],
+  "input_files": {
+    "g2/workflow/state.json": "4362dd4098292cf59ea2e4b45e056987f531392a0d2cb3b455549ba7699a1cc5",
+    "g2/build/pseudocode-first/20260930T190500Z/inventory/coverage.jsonl": "db366503c7f5cdb5ab6ee891c0a7ef24a1ea2451f3c5e7f0b2bdb2073a214b0f",
+    "g2/build/pseudocode-first/20260930T190500Z/inventory/images.jsonl": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa",
+    "g2/build/pseudocode-first/20260930T190500Z/inventory/decoded-coverage-summary-001.json": "7c88c6e17d5ed967fef8befe933940451ba64c86354a832b24d87a2cf3942794"
+  },
+  "limitations": [
+    "Inventory interval classifications do not admit private P2 maps or prove semantic completeness",
+    "Historical inventory/status.json is not current workflow gate authority",
+    "Unknown interval lengths must not be reduced using overlapping private instruction maps without reviewed ownership reconciliation",
+    "This diagnostic does not change admission/gates or supply a freeze denominator"
+  ]
+}

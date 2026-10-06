@@ -1,0 +1,41 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpoxwjmv_u/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+005148da <.text>:
+  5148da:	0789      	lsls	r1, r1, #30
+  5148dc:	d40a      	bmi.n	5148f4 <.text+0x1a>
+  5148de:	6940      	ldr	r0, [r0, #20]
+  5148e0:	6812      	ldr	r2, [r2, #0]
+  5148e2:	1c80      	adds	r0, r0, #2
+  5148e4:	4282      	cmp	r2, r0
+  5148e6:	dae9      	bge.n	5148bc <.text-0x1e>
+  5148e8:	2008      	movs	r0, #8
+  5148ea:	f79c fcc7 	bl	4b127c <.text-0x6365e>
+  5148ee:	b009      	add	sp, #36	@ 0x24
+  5148f0:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}
+  5148f4:	6941      	ldr	r1, [r0, #20]
+  5148f6:	6813      	ldr	r3, [r2, #0]
+  5148f8:	1d09      	adds	r1, r1, #4
+  5148fa:	4299      	cmp	r1, r3
+  5148fc:	dbde      	blt.n	5148bc <.text-0x1e>
+  5148fe:	7a11      	ldrb	r1, [r2, #8]
+  514900:	068b      	lsls	r3, r1, #26
+  514902:	d508      	bpl.n	514916 <.text+0x3c>
+  514904:	69d3      	ldr	r3, [r2, #28]
+  514906:	6851      	ldr	r1, [r2, #4]
+  514908:	461a      	mov	r2, r3
+  51490a:	1a5b      	subs	r3, r3, r1
+  51490c:	fb91 f1f2 	sdiv	r1, r1, r2
+  514910:	fb02 3301 	mla	r3, r2, r1, r3
+  514914:	e002      	b.n	51491c <.text+0x42>
+  514916:	6813      	ldr	r3, [r2, #0]
+  514918:	6851      	ldr	r1, [r2, #4]
+  51491a:	1a5b      	subs	r3, r3, r1
+  51491c:	eb03 73d3 	add.w	r3, r3, r3, lsr #31
+  514920:	105b      	asrs	r3, r3, #1
+  514922:	1e9b      	subs	r3, r3, #2
+  514924:	2b00      	cmp	r3, #0
+  514926:	dd40      	ble.n	5149aa <.text+0xd0>

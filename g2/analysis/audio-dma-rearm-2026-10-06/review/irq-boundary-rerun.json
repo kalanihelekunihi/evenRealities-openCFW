@@ -1,0 +1,40 @@
+{
+  "status": "PASS",
+  "cases": 2,
+  "details": [
+    {
+      "label": "rx_busy_captured_bit4_notify",
+      "input": {
+        "status": 16,
+        "enable": 16,
+        "next": 2774138881,
+        "clear_effect": true
+      },
+      "captured_status": 16,
+      "service_busy9_expected": true,
+      "endpoint": "before actual notifier, live ISR stack; ABI return not claimed",
+      "notification_boundary_event": [
+        "notify_boundary",
+        5490354
+      ],
+      "matched": true
+    },
+    {
+      "label": "combined_status25_notify",
+      "input": {
+        "status": 25,
+        "enable": 25,
+        "next": 2774138883,
+        "clear_effect": true
+      },
+      "captured_status": 25,
+      "service_busy9_expected": true,
+      "endpoint": "before actual notifier, live ISR stack; ABI return not claimed",
+      "notification_boundary_event": [
+        "notify_boundary",
+        5490354
+      ],
+      "matched": true
+    }
+  ]
+}

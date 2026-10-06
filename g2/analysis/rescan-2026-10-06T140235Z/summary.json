@@ -1,0 +1,156 @@
+{
+  "image_footprints": {
+    "apollo_bootloader:decoded:00000040": {
+      "analysis_evidence_bytes": 24,
+      "scoped_pass_evidence_bytes": 24
+    },
+    "apollo_bootloader:flash": {
+      "analysis_evidence_bytes": 130436,
+      "scoped_pass_evidence_bytes": 79214
+    },
+    "apollo_main:flash": {
+      "analysis_evidence_bytes": 240708,
+      "scoped_pass_evidence_bytes": 60550
+    },
+    "binh_a_stage1": {
+      "analysis_evidence_bytes": 2388,
+      "scoped_pass_evidence_bytes": 2170
+    },
+    "ble_em9305:record-3": {
+      "analysis_evidence_bytes": 2552,
+      "scoped_pass_evidence_bytes": 1530
+    },
+    "case:flash": {
+      "analysis_evidence_bytes": 30716,
+      "scoped_pass_evidence_bytes": 23654
+    },
+    "touch:flash": {
+      "analysis_evidence_bytes": 17930,
+      "scoped_pass_evidence_bytes": 16322
+    }
+  },
+  "scan_started_utc": "2026-10-06T14:02:36.014062+00:00",
+  "scan_finished_utc": "2026-10-06T14:03:06.718859+00:00",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "summary": {
+    "apollo-bootloader/ghidra/open-2026-09-29": {
+      "functions": 903,
+      "catalogue_unique_bytes": 120432,
+      "raw_available": 849,
+      "analysis_evidence_footprint_bytes": 120426,
+      "scoped_pass_footprint_bytes": 76446,
+      "scoped_pass_declared_body_bytes": 76186,
+      "scoped_pass_footprint_percent": 63.47648465524113,
+      "canonical_accepted": 0
+    },
+    "apollo-main/ghidra/open-2026-09-29": {
+      "functions": 8853,
+      "catalogue_unique_bytes": 1628382,
+      "raw_available": 8838,
+      "analysis_evidence_footprint_bytes": 227926,
+      "scoped_pass_footprint_bytes": 57964,
+      "scoped_pass_declared_body_bytes": 0,
+      "scoped_pass_footprint_percent": 3.559607020956999,
+      "canonical_accepted": 0
+    },
+    "case/ghidra/open-2026-09-29": {
+      "functions": 435,
+      "catalogue_unique_bytes": 43072,
+      "raw_available": 435,
+      "analysis_evidence_footprint_bytes": 29858,
+      "scoped_pass_footprint_bytes": 22814,
+      "scoped_pass_declared_body_bytes": 22814,
+      "scoped_pass_footprint_percent": 52.96712481426449,
+      "canonical_accepted": 0
+    },
+    "codec/ghidra/open-2026-09-29/image_a_sram": {
+      "functions": 151,
+      "catalogue_unique_bytes": 11313,
+      "raw_available": 151,
+      "analysis_evidence_footprint_bytes": 0,
+      "scoped_pass_footprint_bytes": 0,
+      "scoped_pass_declared_body_bytes": 0,
+      "scoped_pass_footprint_percent": 0.0,
+      "canonical_accepted": 0
+    },
+    "codec/ghidra/open-2026-09-29/image_a_xip": {
+      "functions": 362,
+      "catalogue_unique_bytes": 28962,
+      "raw_available": 362,
+      "analysis_evidence_footprint_bytes": 0,
+      "scoped_pass_footprint_bytes": 0,
+      "scoped_pass_declared_body_bytes": 0,
+      "scoped_pass_footprint_percent": 0.0,
+      "canonical_accepted": 0
+    },
+    "codec/ghidra/open-2026-09-29/image_b_sram": {
+      "functions": 288,
+      "catalogue_unique_bytes": 37645,
+      "raw_available": 288,
+      "analysis_evidence_footprint_bytes": 0,
+      "scoped_pass_footprint_bytes": 0,
+      "scoped_pass_declared_body_bytes": 0,
+      "scoped_pass_footprint_percent": 0.0,
+      "canonical_accepted": 0
+    },
+    "codec/ghidra/open-2026-09-29/uart_boot_stage1": {
+      "functions": 32,
+      "catalogue_unique_bytes": 3142,
+      "raw_available": 32,
+      "analysis_evidence_footprint_bytes": 0,
+      "scoped_pass_footprint_bytes": 0,
+      "scoped_pass_declared_body_bytes": 0,
+      "scoped_pass_footprint_percent": 0.0,
+      "canonical_accepted": 0
+    },
+    "codec/ghidra/open-2026-09-29/uart_boot_stage2": {
+      "functions": 96,
+      "catalogue_unique_bytes": 11498,
+      "raw_available": 96,
+      "analysis_evidence_footprint_bytes": 0,
+      "scoped_pass_footprint_bytes": 0,
+      "scoped_pass_declared_body_bytes": 0,
+      "scoped_pass_footprint_percent": 0.0,
+      "canonical_accepted": 0
+    },
+    "touch/ghidra/open-2026-09-29": {
+      "functions": 308,
+      "catalogue_unique_bytes": 27879,
+      "raw_available": 308,
+      "analysis_evidence_footprint_bytes": 17534,
+      "scoped_pass_footprint_bytes": 15926,
+      "scoped_pass_declared_body_bytes": 15926,
+      "scoped_pass_footprint_percent": 57.12543491516912,
+      "canonical_accepted": 0
+    }
+  },
+  "review_families": {
+    "candidate=str,pins=NoneType,records=False": 2848,
+    "candidate=NoneType,pins=NoneType,records=False": 979,
+    "candidate=NoneType,pins=dict,records=False": 561,
+    "candidate=dict,pins=NoneType,records=False": 99,
+    "candidate=str,pins=dict,records=False": 86,
+    "candidate=NoneType,pins=NoneType,records=True": 6
+  },
+  "review_count": 4579,
+  "receipt_count": 9463,
+  "receipt_outcomes": {
+    "no_hash_bound_pseudocode": 2940,
+    "hash_bound_pseudocode_but_no_supported_range_binding": 528,
+    "mapped_evidence_footprint": 5977,
+    "no_authenticated_mapped_source_binding": 9,
+    "app_batch_hash_bound_function_targets_not_independent_review": 9
+  },
+  "review_bound_count": 2829,
+  "method_sha256": "27b482d1c6a2c82512eca2ef22d860d4cbebb9a60de79ff98a4484ff8470183a",
+  "limits": [
+    "Evidence footprints are not semantic completion, full paths or all branches.",
+    "accepted:false does not erase scoped semantic review; canonical acceptance is separate.",
+    "Review footprints preserve prefix/stub/static limitations; body matching alone cannot promote them to whole-function analysis.",
+    "Only same exact candidate receipt is blocked by a rejecting/revise review; cross-version semantic supersession requires adjudication.",
+    "Case short coordinates are relocated only when exact stock bytes prove the interpretation.",
+    "Codec/ARC footprints may be authenticated but not matched to a comparable catalogue here; inspect artifact-ledger.",
+    "Catalogue denominator is not proven complete executable firmware.",
+    "This pass inventories all campaign review schema families, but nonstandard unresolved scopes are explicitly uncounted."
+  ]
+}

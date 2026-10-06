@@ -1,0 +1,93 @@
+{
+  "firmware": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+  "firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "container_header_bytes": 32,
+  "runtime_base": "0x438000",
+  "spans": [
+    {
+      "address": "0x55c7e8",
+      "end_exclusive": "0x55ca94",
+      "size": 684,
+      "sha256": "652f798cc725ea733fc5622c3dda64dffc40951f223c2cd43ccd7a08d6f67ad9",
+      "scope": "enclosing power-control span; op2 subset reconstructed"
+    },
+    {
+      "address": "0x55c168",
+      "end_exclusive": "0x55c174",
+      "size": 12,
+      "sha256": "f5e30cdb754dc1742a5c599a405af2dff0a6ec4bfc20ae8786cc15ba9663e6c6",
+      "scope": "local CQ pause wrapper"
+    },
+    {
+      "address": "0x47f7ae",
+      "end_exclusive": "0x47f90c",
+      "size": 350,
+      "sha256": "c1c638d483abb63e8caf086fc59a50b19e0564e666ab3803e8482448227ba450",
+      "scope": "downstream physical power dispatcher; not reconstructed"
+    },
+    {
+      "address": "0x480826",
+      "end_exclusive": "0x48086a",
+      "size": 68,
+      "sha256": "c6bf044dbb8f4a358cc93e10eff0b2ec7065b47f8ff08cde9f912d749fd42ef9",
+      "scope": "polling helper; static evidence only"
+    },
+    {
+      "address": "0x4807a0",
+      "end_exclusive": "0x4807f0",
+      "size": 80,
+      "sha256": "f95193c502160b469e1579e13223f1cdf488a2d8fab9ec07f686c9101fbed753",
+      "scope": "delay with external ROM call"
+    },
+    {
+      "address": "0x48032c",
+      "end_exclusive": "0x480358",
+      "size": 44,
+      "sha256": "ddd736dc2b73297224123dd1c6d467d23b9bf220c2a6b490e37f26d1684e3d4b",
+      "scope": "pre/post callback wrappers"
+    },
+    {
+      "address": "0x480434",
+      "end_exclusive": "0x4806d0",
+      "size": 668,
+      "sha256": "892f39cd717b6f7ef3218fc23730c1ac2e2d10143effd59eedb6584b412dfd83",
+      "scope": "startup callback selection"
+    },
+    {
+      "address": "0x5a07e6",
+      "end_exclusive": "0x5a081c",
+      "size": 54,
+      "sha256": "fbf251e1e8eee80b8dadb53c9809571e823d98514d4de6d0bca99de51d2f506a",
+      "scope": "one revision-selected callback pair"
+    },
+    {
+      "address": "0x538fb4",
+      "end_exclusive": "0x53901a",
+      "size": 102,
+      "sha256": "457794f4df1853b69f6e267d49376d35858cf949ea4f990881492be01e3ee359",
+      "scope": "CMDQ post descriptor target"
+    },
+    {
+      "address": "0x53901a",
+      "end_exclusive": "0x53909a",
+      "size": 128,
+      "sha256": "54f4dd9239da03fdb828d767378d1650218cb59a76e2f1cc57e628ff0bac9cd4",
+      "scope": "CMDQ status reads live curIdx"
+    }
+  ],
+  "static_spans_do_not_count_as_executed_coverage": true,
+  "interpreted_tables": [
+    {
+      "address": "0x6becb0",
+      "size": 544,
+      "sha256": "6883e99ca3d6bcc6ab1914d77fe857be7af7f67189c2bf81159b94345cede9e0",
+      "role": "34 four-word power-domain records"
+    },
+    {
+      "address": "0x6c0f40",
+      "size": 320,
+      "sha256": "6bcc9e18bc969901939a7e901c9475c8dea8cd033508aea9c879f267ec2a30a1",
+      "role": "eight ten-word IOM CQ descriptor rows"
+    }
+  ]
+}

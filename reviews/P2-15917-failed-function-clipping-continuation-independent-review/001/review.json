@@ -1,0 +1,17 @@
+{
+  "task_id": "P2-15917",
+  "accepted": false,
+  "status": "partial",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_outputs": [
+    "fresh/instructions.json",
+    "fresh/disassembly.txt",
+    "fresh/references.json"
+  ],
+  "locked_image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "review": "The 140-byte continuation at 0x5400B8..0x540144 decodes exactly and preserves the existing 224-byte frame. It loads/zero-extends a byte and saturates values >=254 to 255, then performs ordered pointer and helper calls, branches to an out-of-packet address on a zero helper result, and continues with signed comparisons and ASR #1. ASR rounds negative odd values down. Repeated helper calls and fresh structure loads are retained.",
+  "limitations": [
+    "The mapped child targets and saved register effects remain external dependencies except for the separately mapped geometry helpers; no downstream effects are inferred. This remains a partial continuation, not a complete function or rendering contract.",
+    "No implementation, admission, or freeze gates."
+  ]
+}

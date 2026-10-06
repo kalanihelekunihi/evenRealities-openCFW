@@ -1,0 +1,84 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpd3xsuwd8/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00561b38 <.text>:
+  561b38:	edd0 2a05 	vldr	s5, [r0, #20]
+  561b3c:	ed90 0a03 	vldr	s0, [r0, #12]
+  561b40:	ed90 1a07 	vldr	s2, [r0, #28]
+  561b44:	ed90 3a08 	vldr	s6, [r0, #32]
+  561b48:	edd0 5a00 	vldr	s11, [r0]
+  561b4c:	edd0 0a06 	vldr	s1, [r0, #24]
+  561b50:	ee62 3aa0 	vmul.f32	s7, s5, s1
+  561b54:	edd0 1a04 	vldr	s3, [r0, #16]
+  561b58:	ee23 4a21 	vmul.f32	s8, s6, s3
+  561b5c:	ee02 4ac1 	vmls.f32	s8, s5, s2
+  561b60:	ee21 2a00 	vmul.f32	s4, s2, s0
+  561b64:	ee43 3a40 	vmls.f32	s7, s6, s0
+  561b68:	ed90 5a01 	vldr	s10, [r0, #4]
+  561b6c:	ee24 6a25 	vmul.f32	s12, s8, s11
+  561b70:	ee01 2ae0 	vmls.f32	s4, s3, s1
+  561b74:	edd0 4a02 	vldr	s9, [r0, #8]
+  561b78:	ee03 6a85 	vmla.f32	s12, s7, s10
+  561b7c:	ee02 6a24 	vmla.f32	s12, s4, s9
+  561b80:	eef0 6ac6 	vabs.f32	s13, s12
+  561b84:	ed9f 7a37 	vldr	s14, [pc, #220]	@ 561c64 <.text+0x12c>
+  561b88:	eef4 6a47 	vcmp.f32	s13, s14
+  561b8c:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  561b90:	d502      	bpl.n	561b98 <.text+0x60>
+  561b92:	f04f 30ff 	mov.w	r0, #4294967295	@ 0xffffffff
+  561b96:	4770      	bx	lr
+  561b98:	ee61 6a24 	vmul.f32	s13, s2, s9
+  561b9c:	ee45 6a43 	vmls.f32	s13, s10, s6
+  561ba0:	ee25 7a22 	vmul.f32	s14, s10, s5
+  561ba4:	ee25 3a83 	vmul.f32	s6, s11, s6
+  561ba8:	ee01 7ae4 	vmls.f32	s14, s3, s9
+  561bac:	ee00 3ae4 	vmls.f32	s6, s1, s9
+  561bb0:	ee60 0a85 	vmul.f32	s1, s1, s10
+  561bb4:	ee45 0ac1 	vmls.f32	s1, s11, s2
+  561bb8:	ee60 4a24 	vmul.f32	s9, s0, s9
+  561bbc:	ee25 1aa1 	vmul.f32	s2, s11, s3
+  561bc0:	ee45 4ae2 	vmls.f32	s9, s11, s5
+  561bc4:	ee00 1a45 	vmls.f32	s2, s0, s10
+  561bc8:	ed80 4a00 	vstr	s8, [r0]
+  561bcc:	edc0 6a01 	vstr	s13, [r0, #4]
+  561bd0:	ed80 7a02 	vstr	s14, [r0, #8]
+  561bd4:	edc0 3a03 	vstr	s7, [r0, #12]
+  561bd8:	ed80 3a04 	vstr	s6, [r0, #16]
+  561bdc:	edc0 4a05 	vstr	s9, [r0, #20]
+  561be0:	ed80 2a06 	vstr	s4, [r0, #24]
+  561be4:	edc0 0a07 	vstr	s1, [r0, #28]
+  561be8:	ed80 1a08 	vstr	s2, [r0, #32]
+  561bec:	eeb7 0a00 	vmov.f32	s0, #112	@ 0x3f800000  1.0
+  561bf0:	ee80 0a06 	vdiv.f32	s0, s0, s12
+  561bf4:	edd0 0a00 	vldr	s1, [r0]
+  561bf8:	ee60 0a80 	vmul.f32	s1, s1, s0
+  561bfc:	edc0 0a00 	vstr	s1, [r0]
+  561c00:	ed90 1a01 	vldr	s2, [r0, #4]
+  561c04:	edd0 0a02 	vldr	s1, [r0, #8]
+  561c08:	ee21 1a00 	vmul.f32	s2, s2, s0
+  561c0c:	ee60 0a80 	vmul.f32	s1, s1, s0
+  561c10:	ed80 1a01 	vstr	s2, [r0, #4]
+  561c14:	edc0 0a02 	vstr	s1, [r0, #8]
+  561c18:	ed90 1a03 	vldr	s2, [r0, #12]
+  561c1c:	edd0 0a04 	vldr	s1, [r0, #16]
+  561c20:	ee21 1a00 	vmul.f32	s2, s2, s0
+  561c24:	ee60 0a80 	vmul.f32	s1, s1, s0
+  561c28:	ed80 1a03 	vstr	s2, [r0, #12]
+  561c2c:	edc0 0a04 	vstr	s1, [r0, #16]
+  561c30:	ed90 1a05 	vldr	s2, [r0, #20]
+  561c34:	edd0 0a06 	vldr	s1, [r0, #24]
+  561c38:	ee21 1a00 	vmul.f32	s2, s2, s0
+  561c3c:	ee60 0a80 	vmul.f32	s1, s1, s0
+  561c40:	ed80 1a05 	vstr	s2, [r0, #20]
+  561c44:	edc0 0a06 	vstr	s1, [r0, #24]
+  561c48:	ed90 1a07 	vldr	s2, [r0, #28]
+  561c4c:	edd0 0a08 	vldr	s1, [r0, #32]
+  561c50:	ee21 1a00 	vmul.f32	s2, s2, s0
+  561c54:	ee20 0a80 	vmul.f32	s0, s1, s0
+  561c58:	ed80 1a07 	vstr	s2, [r0, #28]
+  561c5c:	ed80 0a08 	vstr	s0, [r0, #32]
+  561c60:	2000      	movs	r0, #0
+  561c62:	4770      	bx	lr

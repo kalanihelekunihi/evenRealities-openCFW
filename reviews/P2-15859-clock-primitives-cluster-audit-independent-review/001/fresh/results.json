@@ -1,0 +1,24 @@
+{
+  "accepted": false,
+  "status": "partial",
+  "input_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "start": 5060842,
+  "end": 5061106,
+  "instruction_bytes": 264,
+  "instructions": 107,
+  "maps": 8,
+  "edges": 8,
+  "external_targets": [
+    4720678
+  ],
+  "checks": [
+    "Gap-free nonoverlapping byte-exact map partition",
+    "Every internal branch destination is instruction boundary",
+    "Corrected clock wait register16188 revision002 selected"
+  ],
+  "limitations": [
+    "Does not establish entry reachability all indirect edges semantics global ownership or complete firmware coverage",
+    "Adjacent padding and literal table beyond4D39F2 not part of code partition",
+    "No C admission freeze gates"
+  ]
+}

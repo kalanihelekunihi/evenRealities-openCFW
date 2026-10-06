@@ -1,0 +1,19 @@
+{
+  "task_id": "P2-15951",
+  "accepted": false,
+  "status": "partial",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_outputs": [
+    "fresh/results.json",
+    "fresh/input-pins.json"
+  ],
+  "locked_image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "instruction_rows": 959,
+  "candidate_bytes": 2446,
+  "review": "Fresh audit verifies 17 selected packet revisions form a contiguous 2,446-byte tiling from 0x540036 through 0x5409C4, with 959 instruction rows. Each instruction row matches the locked image bytes, each map input and literal reference is pinned, and the resulting suffix is zero bytes relative to the raw-discovered envelope.",
+  "limitations": [
+    "This proves only the selected packet tiling; the raw-discovered envelope is not independently proven to be a true function boundary.",
+    "No semantic closure, child contract, reachability or exclusive code/data ownership is established. FP and external effects remain unresolved.",
+    "Partial/unaccepted; no admission, C, or gates."
+  ]
+}

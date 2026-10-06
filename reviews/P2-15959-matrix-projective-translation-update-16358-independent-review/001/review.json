@@ -1,0 +1,20 @@
+{
+  "task_id": "P2-15959",
+  "accepted": false,
+  "status": "partial",
+  "source_packet": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-matrix-projective-translation-update-16358-map/001",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_instruction_output": "fresh/decoded-output/instructions.json",
+  "locked_image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "range": {
+    "start": "0x561856",
+    "end_exclusive": "0x5618b8",
+    "bytes": 98
+  },
+  "original_packet_receipt_sha256": "b7f7add95dd51791d90bff478060549ad4b657a020d4f9d2d504ee48ebe4d84b",
+  "review": "Six ordered VMLA.F32 updates to offsets 0..20 using original last-row values and entry S0/S1. S0 is reused only after first three x updates; S1 remains entry y. Last row remains read-only. BX LR; no integer writes/stack.",
+  "limitations": [
+    "Raw-byte replay reproduced the packet instruction rows against the pinned locked image; opcode semantics were independently checked against the decoded instruction sequence.",
+    "This is a bounded instruction/pseudocode review only. Floating-point architectural rounding/traps, memory faults and runtime reachability are not behaviorally qualified where applicable. No corpus admission, implementation, or gate change."
+  ]
+}

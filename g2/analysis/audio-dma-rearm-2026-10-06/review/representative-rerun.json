@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "cases": 13,
+  "details": [
+    {"label":"rx_normal_rearm","kind":"service","arg":16,"status":0,"events":10,"matched":true},
+    {"label":"rx_busy_return9","kind":"service","arg":16,"status":9,"events":5,"matched":true},
+    {"label":"tx_normal_rearm","kind":"service","arg":8,"status":0,"events":10,"matched":true},
+    {"label":"tx_busy_return9","kind":"service","arg":8,"status":9,"events":5,"matched":true},
+    {"label":"combined_rx_tx_order","kind":"service","arg":24,"status":0,"events":18,"matched":true},
+    {"label":"error_direction0","kind":"error","arg":0,"status":0,"events":2,"matched":true},
+    {"label":"error_direction257","kind":"error","arg":257,"status":0,"events":2,"matched":true},
+    {"label":"status_lowbyte_disabled","kind":"status","arg":256,"status":0,"events":1,"matched":true},
+    {"label":"status_lowbyte_enabled","kind":"status","arg":257,"status":0,"events":2,"matched":true},
+    {"label":"clear_readback","kind":"clear","arg":1,"status":0,"events":2,"matched":true},
+    {"label":"ipb_service","kind":"ipb","arg":0,"status":0,"events":9,"matched":true},
+    {"label":"rx_busy_captured_bit4_notify","kind":"irq","captured_status":16,"service_busy9_expected":true,"endpoint":"before actual notifier, live ISR stack; ABI return not claimed","matched":true},
+    {"label":"combined_status25_notify","kind":"irq","captured_status":25,"service_busy9_expected":true,"endpoint":"before actual notifier, live ISR stack; ABI return not claimed","matched":true}
+  ],
+  "bindings": {
+    "g2/components/foundation/audio_dma_rearm/rearm.c": "f5c6981d0e1a1bb63ff616b2689c32357e0aab80d1f9f5142b3a1fb279d0c6bc",
+    "g2/components/foundation/audio_dma_rearm/rearm.h": "8f257f60eff0c9c4d0ecd6c6a2a4f50a5760257239d9bc24446be5c23ce1a524",
+    "g2/components/foundation/audio_dma_rearm/verify.py": "c36ae2d409a81a6ec5c670730f72beb0b684b8744f83ca5ddfa25a8fadbe8c16",
+    "g2/build/foundation/audio-dma-rearm-simulator/rearm.elf": "3f6dbc974e400ecd64c30a17b74f0a3331e8c9e3c1ec37e267f89fb9d0722e26",
+    "g2/build/foundation/audio-dma-rearm-simulator/comparison-observable.json": "20fc38a80ebad28d469d196832793146454fe2088038e4439e2386c1d8f697eb"
+  },
+  "limits": "Independent bounded semantic spot checks against stock/source/model with synthetic mapped MMIO; final full comparison covers 899 scenarios. IRQ stop is before the actual notifier with a live stack. No device, DMA ownership, or scheduler claim."
+}

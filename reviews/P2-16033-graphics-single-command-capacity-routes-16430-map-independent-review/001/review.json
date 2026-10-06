@@ -1,0 +1,18 @@
+{
+  "task_id": "P2-16033",
+  "accepted": false,
+  "status": "partial",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-single-command-capacity-routes-16430-map/001",
+  "candidate_receipt_sha256": "554ffcd0fa78bbfb33ccc7ba26e8628aaea568e6cd38d5245251090a254f65db",
+  "candidate_instructions_sha256": "188667f6267d3bd0cb5b0624d67a274f19592dc637b91f93c4e315f49ca59bbd",
+  "candidate_pseudocode_sha256": "66f022069fcfe4cea7300cc86edd30c84376d135415fe7824d7bdfc5d5e2e8ab",
+  "candidate_replay_sha256": "6fe5b100c58b0344b3baca4b172d9b2e0bae8a95e8f022c6313c07f8ff659b09",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_stdout": true,
+  "fresh_output_receipt_sha256": "d516e312257021dcc6faef5382cf65950067e8d35f73de6a6db92ee48dd6a4a5",
+  "review": "Fixed and linked capacity routes preserve signed comparisons, wrapped index additions, and the second fresh bit-5 test.",
+  "limitations": [
+    "Opaque allocation/flush/child contracts, invalid pointers, concurrent mutation, ownership and physical effects remain unresolved.",
+    "No function-level semantic closure, C, admission, or gate change."
+  ]
+}

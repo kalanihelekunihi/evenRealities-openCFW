@@ -1,0 +1,36 @@
+{
+  "executed_stock": [
+    "590b6c full query",
+    "57a7e0 full getter",
+    "475014 selected real cache paths"
+  ],
+  "reconstructed_sources": [
+    "handoff.c raw entry points",
+    "unchanged cache_maintenance.c"
+  ],
+  "new_policy": [
+    "cache_checked",
+    "audio_rx_buffer_get_checked"
+  ],
+  "static_only": [
+    "590a24 DMA configure",
+    "5908a0 service",
+    "57a4d8 ISR",
+    "59cb42 display validator",
+    "59ccdc display write"
+  ],
+  "synthetic": [
+    "mapped handle/output/storage state",
+    "raw SCB register fixtures",
+    "post-query mutation injection"
+  ],
+  "external_missing": [
+    "authenticated initialized DMA record and allocation extents/alignment",
+    "physical DMA current/completed-buffer contract and live scheduling trace",
+    "physical cache effects/coherence"
+  ],
+  "unrelated_preserved": [
+    "resident ROM40 power timing",
+    "optimized tick Unicorn O2 blocker"
+  ]
+}

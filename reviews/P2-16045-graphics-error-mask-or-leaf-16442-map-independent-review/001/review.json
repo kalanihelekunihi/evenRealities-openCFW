@@ -1,0 +1,19 @@
+{
+  "task_id": "P2-16045",
+  "accepted": false,
+  "status": "partial",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-error-mask-or-leaf-16442-map/001",
+  "candidate_receipt_sha256": "96767e19aec35484e2aacc9d2a40d233a7cb5d3af63cef73ad1afb76b23ac4f9",
+  "candidate_instruction_sha256": "fbeb916611f94ea9abde63088817a939dd4c71a1682c27b011d62d90dd4c6cfd",
+  "candidate_pseudocode_sha256": "4fb6b134b95dd41a6d99cd4b21c9796e644e40e5b7340db2df407efa0f9f8cab",
+  "candidate_replay_sha256": "a7f526669617e9dc554c2058335fedbd8f0fd7221837a678df7e53219421a415",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_output_receipt_sha256": "d644421673b813a043b9199b169b0e235a475fb196957d79e75b12655f75889d",
+  "fresh_replay_stdout": "",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "review": "OR leaf performs ordered load/OR/store and returns the new mask; it is a non-atomic read-modify-write helper.",
+  "limitations": [
+    "Bounded instruction-level review only; no atomicity, global concurrency, hardware behavior or child-contract closure.",
+    "No canonical admission or gate change."
+  ]
+}

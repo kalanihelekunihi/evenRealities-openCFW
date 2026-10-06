@@ -1,0 +1,515 @@
+{
+  "status": "PASS",
+  "cases": 13,
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "elf_sha256": "7f40e32605975ac833b799d34ea3becef6af7ddac4d1724bc29d068503aa9f3b",
+  "source_sha256": {
+    "verify_nor_read_status.py": "7cf013b67a1aec58a806be9b41dfb7cce0ca8d9c0dd149f3b019c6727cd55ffa",
+    "nor_read_status.c": "a366ec8a843b560b8f8526c5af532ed15b282ccabd421784e19de5d5b9f34944",
+    "module.ld": "60b7b3afa0c9e9b5256a2ac5b1086b264d0f4df702567e638e7d33029e1d8a9b",
+    "nor_read_status.h": "864f309ad0f24e9e23fd823afbe88ff9dd0b583b637b8c9ca24227bc776f4c6d"
+  },
+  "distinct_original_instruction_bytes": 170,
+  "original_trace": {
+    "0x4205f4": "2de9f841",
+    "0x4205f8": "87b0",
+    "0x4205fa": "0600",
+    "0x4205fc": "0f00",
+    "0x4205fe": "9046",
+    "0x420600": "1c00",
+    "0x420602": "01a8",
+    "0x420604": "1821",
+    "0x420606": "f5f7f5fc",
+    "0x42060a": "9a4b",
+    "0x42060c": "1868",
+    "0x42060e": "0028",
+    "0x420610": "01d1",
+    "0x420616": "002c",
+    "0x420618": "02d0",
+    "0x42061a": "0e9d",
+    "0x42061c": "002d",
+    "0x42061e": "01d1",
+    "0x420624": "b7f1007f",
+    "0x420628": "01d3",
+    "0x42062e": "0020",
+    "0x420630": "8df80a00",
+    "0x420634": "5ffa88f8",
+    "0x420638": "b8f1000f",
+    "0x42063c": "04d0",
+    "0x420648": "0020",
+    "0x42064a": "8df80b00",
+    "0x42064e": "0020",
+    "0x420650": "0390",
+    "0x420652": "0120",
+    "0x420654": "8df81000",
+    "0x420658": "adf81260",
+    "0x42065c": "0120",
+    "0x42065e": "8df81400",
+    "0x420662": "0195",
+    "0x420664": "0694",
+    "0x420666": "0020",
+    "0x420668": "8df80900",
+    "0x42066c": "0020",
+    "0x42066e": "8df81500",
+    "0x420672": "dff89828",
+    "0x420676": "01a9",
+    "0x420678": "1868",
+    "0x42067a": "05f031fe",
+    "0x42067e": "0400",
+    "0x420680": "002c",
+    "0x420682": "08d0",
+    "0x420696": "2000",
+    "0x420698": "08b0",
+    "0x42069a": "bde8f081",
+    "0x42063e": "0120",
+    "0x420640": "8df80b00",
+    "0x420644": "0397",
+    "0x420646": "04e0",
+    "0x420684": "0094",
+    "0x420686": "2b00",
+    "0x420688": "3a00",
+    "0x42068a": "b6b2",
+    "0x42068c": "3100",
+    "0x42068e": "dff86409",
+    "0x420692": "f5f78cfc",
+    "0x42062a": "0520",
+    "0x42062c": "34e0",
+    "0x420620": "0620",
+    "0x420622": "39e0",
+    "0x420612": "0220",
+    "0x420614": "40e0"
+  },
+  "comparisons": [
+    {
+      "arguments": [
+        5,
+        0,
+        0,
+        536903680,
+        1
+      ],
+      "fixture": {
+        "rx_hex": "01"
+      },
+      "observed": {
+        "return": 0,
+        "providers": [
+          [
+            "transfer",
+            536895488,
+            1000000,
+            {
+              "length": 1,
+              "scrambling": 0,
+              "dcx": 0,
+              "direction": 0,
+              "send_address": 0,
+              "address": 0,
+              "send_instruction": 1,
+              "instruction": 5,
+              "turnaround": 1,
+              "write_latency": 0,
+              "continuation": 0,
+              "destination": 536903680,
+              "raw": "010000000000000000000000010005000100000000800020"
+            },
+            0
+          ]
+        ],
+        "rx": "01"
+      }
+    },
+    {
+      "arguments": [
+        159,
+        0,
+        0,
+        536903680,
+        3
+      ],
+      "fixture": {
+        "rx_hex": "102030"
+      },
+      "observed": {
+        "return": 0,
+        "providers": [
+          [
+            "transfer",
+            536895488,
+            1000000,
+            {
+              "length": 3,
+              "scrambling": 0,
+              "dcx": 0,
+              "direction": 0,
+              "send_address": 0,
+              "address": 0,
+              "send_instruction": 1,
+              "instruction": 159,
+              "turnaround": 1,
+              "write_latency": 0,
+              "continuation": 0,
+              "destination": 536903680,
+              "raw": "03000000000000000000000001009f000100000000800020"
+            },
+            0
+          ]
+        ],
+        "rx": "102030"
+      }
+    },
+    {
+      "arguments": [
+        108,
+        1193046,
+        1,
+        536903684,
+        16
+      ],
+      "fixture": {
+        "rx_hex": "1122334455667788"
+      },
+      "observed": {
+        "return": 0,
+        "providers": [
+          [
+            "transfer",
+            536895488,
+            1000000,
+            {
+              "length": 16,
+              "scrambling": 0,
+              "dcx": 0,
+              "direction": 0,
+              "send_address": 1,
+              "address": 1193046,
+              "send_instruction": 1,
+              "instruction": 108,
+              "turnaround": 1,
+              "write_latency": 0,
+              "continuation": 0,
+              "destination": 536903684,
+              "raw": "10000000000000015634120001006c000100000004800020"
+            },
+            0
+          ]
+        ],
+        "rx": "11223344556677881122334455667788"
+      }
+    },
+    {
+      "arguments": [
+        74565,
+        33554416,
+        257,
+        536903688,
+        4096
+      ],
+      "fixture": {
+        "rx_hex": "cafe"
+      },
+      "observed": {
+        "return": 0,
+        "providers": [
+          [
+            "transfer",
+            536895488,
+            1000000,
+            {
+              "length": 4096,
+              "scrambling": 0,
+              "dcx": 0,
+              "direction": 0,
+              "send_address": 1,
+              "address": 33554416,
+              "send_instruction": 1,
+              "instruction": 9029,
+              "turnaround": 1,
+              "write_latency": 0,
+              "continuation": 0,
+              "destination": 536903688,
+              "raw": "0010000000000001f0ffff01010045230100000008800020"
+            },
+            0
+          ]
+        ],
+        "rx": "cafecafecafecafecafecafecafecafecafecafecafecafecafecafecafecafecafecafecafecafecafecafecafecafecafecafecafecafecafecafecafecafe"
+      }
+    },
+    {
+      "arguments": [
+        74565,
+        2311527,
+        257,
+        536903690,
+        1
+      ],
+      "fixture": {
+        "transfer_status": 7
+      },
+      "observed": {
+        "return": 7,
+        "providers": [
+          [
+            "transfer",
+            536895488,
+            1000000,
+            {
+              "length": 1,
+              "scrambling": 0,
+              "dcx": 0,
+              "direction": 0,
+              "send_address": 1,
+              "address": 2311527,
+              "send_instruction": 1,
+              "instruction": 9029,
+              "turnaround": 1,
+              "write_latency": 0,
+              "continuation": 0,
+              "destination": 536903690,
+              "raw": "01000000000000016745230001004523010000000a800020"
+            },
+            7
+          ],
+          [
+            "error",
+            4396064,
+            9029,
+            2311527,
+            1,
+            7
+          ]
+        ],
+        "rx": "a5"
+      }
+    },
+    {
+      "arguments": [
+        5,
+        1193046,
+        256,
+        536903692,
+        4
+      ],
+      "fixture": {
+        "rx_hex": "aabbccdd"
+      },
+      "observed": {
+        "return": 0,
+        "providers": [
+          [
+            "transfer",
+            536895488,
+            1000000,
+            {
+              "length": 4,
+              "scrambling": 0,
+              "dcx": 0,
+              "direction": 0,
+              "send_address": 0,
+              "address": 0,
+              "send_instruction": 1,
+              "instruction": 5,
+              "turnaround": 1,
+              "write_latency": 0,
+              "continuation": 0,
+              "destination": 536903692,
+              "raw": "04000000000000000000000001000500010000000c800020"
+            },
+            0
+          ]
+        ],
+        "rx": "aabbccdd"
+      }
+    },
+    {
+      "arguments": [
+        5,
+        0,
+        0,
+        536903696,
+        1
+      ],
+      "fixture": {
+        "transfer_status": 2147483655
+      },
+      "observed": {
+        "return": 2147483655,
+        "providers": [
+          [
+            "transfer",
+            536895488,
+            1000000,
+            {
+              "length": 1,
+              "scrambling": 0,
+              "dcx": 0,
+              "direction": 0,
+              "send_address": 0,
+              "address": 0,
+              "send_instruction": 1,
+              "instruction": 5,
+              "turnaround": 1,
+              "write_latency": 0,
+              "continuation": 0,
+              "destination": 536903696,
+              "raw": "010000000000000000000000010005000100000010800020"
+            },
+            2147483655
+          ],
+          [
+            "error",
+            4396064,
+            5,
+            0,
+            1,
+            2147483655
+          ]
+        ],
+        "rx": "a5"
+      }
+    },
+    {
+      "arguments": [
+        5,
+        33554431,
+        1,
+        536903700,
+        1
+      ],
+      "fixture": {},
+      "observed": {
+        "return": 0,
+        "providers": [
+          [
+            "transfer",
+            536895488,
+            1000000,
+            {
+              "length": 1,
+              "scrambling": 0,
+              "dcx": 0,
+              "direction": 0,
+              "send_address": 1,
+              "address": 33554431,
+              "send_instruction": 1,
+              "instruction": 5,
+              "turnaround": 1,
+              "write_latency": 0,
+              "continuation": 0,
+              "destination": 536903700,
+              "raw": "0100000000000001ffffff01010005000100000014800020"
+            },
+            0
+          ]
+        ],
+        "rx": "a5"
+      }
+    },
+    {
+      "arguments": [
+        5,
+        33554432,
+        0,
+        536903704,
+        1
+      ],
+      "fixture": {},
+      "observed": {
+        "return": 5,
+        "providers": [],
+        "rx": "a5"
+      }
+    },
+    {
+      "arguments": [
+        5,
+        0,
+        0,
+        536903708,
+        131072
+      ],
+      "fixture": {},
+      "observed": {
+        "return": 0,
+        "providers": [
+          [
+            "transfer",
+            536895488,
+            1000000,
+            {
+              "length": 131072,
+              "scrambling": 0,
+              "dcx": 0,
+              "direction": 0,
+              "send_address": 0,
+              "address": 0,
+              "send_instruction": 1,
+              "instruction": 5,
+              "turnaround": 1,
+              "write_latency": 0,
+              "continuation": 0,
+              "destination": 536903708,
+              "raw": "00000200000000000000000001000500010000001c800020"
+            },
+            0
+          ]
+        ],
+        "rx": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5"
+      }
+    },
+    {
+      "arguments": [
+        5,
+        0,
+        0,
+        0,
+        1
+      ],
+      "fixture": {},
+      "observed": {
+        "return": 6,
+        "providers": [],
+        "rx": ""
+      }
+    },
+    {
+      "arguments": [
+        5,
+        0,
+        0,
+        536903712,
+        0
+      ],
+      "fixture": {},
+      "observed": {
+        "return": 6,
+        "providers": [],
+        "rx": ""
+      }
+    },
+    {
+      "arguments": [
+        5,
+        0,
+        0,
+        536903716,
+        1
+      ],
+      "fixture": {
+        "handle": 0
+      },
+      "observed": {
+        "return": 2,
+        "providers": [],
+        "rx": "a5"
+      }
+    }
+  ],
+  "limits": [
+    "The exact stock 0x415FF4 clear body is stubbed as byte-zeroing; source uses an aggregate initialized command.",
+    "MSPI transfer is an injected provider which records command bytes and can return a selected status or synthetic RX bytes.",
+    "The error helper 0x415FAE is intercepted; no logging/runtime internals or hardware transfer are claimed.",
+    "No length, alignment, overflow, or end-address guard is added beyond checks in this wrapper."
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "task_id": "P2-15901",
+  "accepted": false,
+  "status": "partial",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_outputs": [
+    "fresh/results.json"
+  ],
+  "source_validator_sha256": "be4f07ee6aa9c4a481130550b94260793918194e083ac10951a9a1d06843c1b0",
+  "review": "Independently replayed the data-ledger validator in a fresh directory. It reproduces seven records across the two draft data ledgers, checking 504 bytes total: the queue 12\u00d740-byte table rows against locked-image bytes and little-endian U32 values, plus six clock literal records against raw bytes and decoded values. All 13 targeted mutations were rejected (six queue cases and seven clock cases). Source data-ledger hashes matched the captured results.",
+  "limitations": [
+    "This checks exact-value evidence consistency, not global non-code ownership or semantic reachability.",
+    "Consumer references are candidate discovery leads, not proof of reachability.",
+    "No review admission, implementation, completeness, or freeze-gate status is established."
+  ]
+}

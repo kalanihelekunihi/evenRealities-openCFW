@@ -1,0 +1,49 @@
+{
+  "accepted": false,
+  "status": "raw_discovery_only",
+  "audit_path": "inventory/arm-corpus-reuse-audit-001.json",
+  "audit_sha256": "d56312f9d997f0f3abca09869c55b8e95d97c1108db5e7c7313ede97de74d668",
+  "candidate_functions": 10499,
+  "components": [
+    {
+      "image_id": "apollo_main:flash",
+      "candidate_functions": 8853,
+      "raw_decompiler_status": {
+        "decompiled_true": 8475,
+        "decompiled_false": 378
+      },
+      "manifest_files_verified": 8478
+    },
+    {
+      "image_id": "apollo_bootloader:flash",
+      "candidate_functions": 903,
+      "raw_decompiler_status": {
+        "decompiled_true": 849,
+        "decompiled_false": 54
+      },
+      "manifest_files_verified": 852
+    },
+    {
+      "image_id": "touch:flash",
+      "candidate_functions": 308,
+      "raw_decompiler_status": {
+        "decompiled_true": 308
+      },
+      "manifest_files_verified": 311
+    },
+    {
+      "image_id": "case:flash",
+      "candidate_functions": 435,
+      "raw_decompiler_status": {
+        "decompiled_true": 435
+      },
+      "manifest_files_verified": 438
+    }
+  ],
+  "limitations": [
+    "Rawdiscovery and decompiler output only not semanticadmission",
+    "Bounding hashes explicitly distinguished from actualdiscontiguous body byte hashes",
+    "Nested and nonARM images outside this corpusindex; no entirefirmware denominator claim",
+    "No C implementation freeze gates"
+  ]
+}

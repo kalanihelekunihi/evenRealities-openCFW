@@ -1,0 +1,46 @@
+{
+  "target": "make -C g2 audio-cache-handoff-simulator",
+  "compiler_profile": "clang Cortex-M4 Thumb2 soft-float freestanding C11 O2 fwrapv; isolated simulator link",
+  "bindings": {
+    "g2/components/foundation/audio_cache_handoff/handoff.c": "ffbdf9c36d9e8bb3e209f900a5eaa383665fadb47029da6d0e2e81583936b323",
+    "g2/components/foundation/audio_cache_handoff/handoff.h": "b93f87f5ea7ef8f92f98393b5db24c4cb0d78f49eeee17ae3ed10984fcc5f54f",
+    "g2/components/foundation/audio_cache_handoff/verify.py": "c0d7e61f5da3d6f3926daa0fea48fce21ae8a738c61a9bdd604e88e9fec2645c",
+    "g2/components/foundation/cache_maintenance/cache_maintenance.c": "365496e8fc154d0b604e292ab96272f6871106a705ac7a5439a67271f6961d03",
+    "g2/components/foundation/cache_maintenance/verify.py": "448b9510a7c30607d45ce3919f45ecee304b1ecec202f067c04229020ab41198",
+    "g2/components/foundation/cache_maintenance/cache_maintenance.h": "64c437f8de20c7e0c7e4ce21a8cff58a8afecf0a46950b17dd260783e9f12c11",
+    "g2/Makefile": "b214dda4a034873cf6c0d8c7333b27a7acd4c3b9d6db775c674772d1f8fe5d03",
+    "g2/components/foundation/ambiq_gpio_config/simulator/module.ld": "34dc9cd95b6c71c3d2eac0f2dafea432d719275592798818fb0c99d07e86e53b",
+    "g2/build/foundation/audio-cache-handoff-simulator/handoff.elf": "5394cbcf100e37c68871e29808f434b06845ee2b5e058f1b3686e3d2c03cdbac",
+    "g2/build/foundation/audio-cache-handoff-simulator/handoff.o": "3aefe2c85496ed43e7c7690fb4524128a6827d7561f5467047898d2e1b4fec79",
+    "g2/build/foundation/audio-cache-handoff-simulator/cache.o": "f0067c2662713744ec364fd50ea7d3d3989bb954a4e691053611226624f4013d",
+    "g2/build/foundation/audio-cache-handoff-simulator/build-final-policy.log": "1f11973cea21ebceeda50a2424e01ce6efcc6e7a0fe7b5e3fdcd55e9821db190"
+  },
+  "undefined_symbols": "",
+  "production_byte_match": false,
+  "evidence_bindings": {
+    "g2/build/foundation/audio-cache-handoff-simulator/comparison-final-policy.json": "15760d05fd73a68b69819a1630ca7f4c5aa53707793e76ac7f32dd5794b2a0b7",
+    "g2/build/foundation/audio-cache-handoff-simulator/aggregate.json": "77061acef66ae62a0d6747204d4070fbe653ef523a89333d6729dd57bb1b1093",
+    "g2/build/foundation/audio-cache-handoff-simulator/affected.log": "e4a6986298f8b4d485e842ecc496a996c657cf3698ed833e09c7fce9aa9dad82",
+    "g2/analysis/audio-cache-handoff-2026-10-06/oversized-prefix-results.json": "01677c2f7b6bb977d8cf983ca1e05f1412f51335dd2178564af8a146793c0010",
+    "g2/analysis/audio-cache-handoff-2026-10-06/review/review.json": "b5c6410f8bf2b0a2ae2cc42e2964b571df3bc9eb7668f8f25b47943f82118a23",
+    "g2/analysis/audio-cache-handoff-2026-10-06/review/report.md": "ecbc405a7451156b159fb7db9ae89d13c60a5d222a000de9bb1c73b9a98d01b8",
+    "g2/analysis/audio-cache-handoff-2026-10-06/review/representative-rerun.json": "1ec266d4b037c000a48b9a529212b3249325f86905a49aa7893228d1e152b33f",
+    "g2/analysis/audio-cache-handoff-2026-10-06/cumulative-inventory.json": "aa8c66a5cf84ee74081dca752f2e63b4b4d9c04b0a68cc442b734b35b01a5eba",
+    "g2/analysis/audio-cache-handoff-2026-10-06/validation-summary.json": "d0f05a5fb60b8f61d163114cf6f7a5f623402fd126aefa79ec0d9ede627a224a",
+    "g2/analysis/audio-cache-handoff-2026-10-06/original-provenance.json": "d72d79419504acb89a8babd14f52e3cf3be4ca0bedd5b5021f719ad0e01cc3bc",
+    "g2/analysis/audio-cache-handoff-2026-10-06/original-disassembly.txt": "06725ecb36e7eac4de8ba95ba5307d9ad8e9f3f39914447cb60f83737974c6f4",
+    "g2/analysis/audio-cache-handoff-2026-10-06/protected-identities.json": "55a93ed7b112df60bfa45f652d165813e62b43aa68dfe4c1ae8913d85439bfbb",
+    "g2/analysis/audio-cache-handoff-2026-10-06/dependency-classification.json": "5807dad05495de1b8feb793db6febd06fa20b730d6bd1bddec0ce04765101283",
+    "g2/analysis/audio-cache-handoff-2026-10-06/REPORT.md": "52758bff15dc167dc22429e81d3e071d040a01be31a3f4fcd8caf93bf4bef7be",
+    "g2/analysis/audio-cache-handoff-2026-10-06/pseudocode.md": "d42d6c3790b74ba6f82168dbe697f88341cfb73243a7ebbeb337c8040081e44f",
+    "g2/analysis/audio-cache-handoff-2026-10-06/fixture-diagnostics.md": "8d772134afe6ae35f9f253807f027bda62e152892f3af05cf4dbe9fc91559a67",
+    "g2/components/foundation/audio_cache_handoff/README.md": "9acd5af2b62f03080fe4076fa9f4a4e1857b7eacf53b22e40fcbf4abe218a41d",
+    "g2/components/foundation/audio_cache_handoff/SOURCE_PROVENANCE.json": "3744b479978443785e21da288314a50d9eed4d1aefedc9bcd3ce9c42f934d4fc",
+    "g2/build/foundation/audio-cache-handoff-simulator/affected-closeout.log": "995aaeccd6e572048c36da639879bf0aeb5a1aa86d5ac8310ebddbf402f2fed8"
+  },
+  "accounting_source_bindings": {
+    "g2/tools/trace_inventory.py": "dbf6f9a04665c2fc5f097f7540ae3918e37f2094016bc21a3df73337c59074a6",
+    "g2/tests/test_trace_inventory.py": "baf1a0ccd0329b9f3ee157d0102f8498a903b92042121e3f18a45eb4e5fbf097",
+    "g2/analysis/audio-cache-handoff-2026-10-06/reconcile_inventory.py": "a099928c18b9b51e260597d71bb4f6ea7cb930ee70d862cdd14d4d6cf4a493a6"
+  }
+}

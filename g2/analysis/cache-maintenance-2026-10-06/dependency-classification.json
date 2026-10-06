@@ -1,0 +1,35 @@
+{
+  "executed_original": [
+    "475014..47510e invalidate/clean-invalidate",
+    "47510e..475194 clean"
+  ],
+  "source": [
+    "new reconstructed MIT C methods; source attribution not promoted to SDK"
+  ],
+  "authenticated_data": [
+    "SCB address literals475198..4751c8",
+    "audio range template78d474:address0,length3200"
+  ],
+  "synthetic": [
+    "SCB CCR/CCSIDR register values and raw maintenance registers",
+    "mapped word-aligned descriptor RAM and initialized incoming mask",
+    "Cortex-M4 bounded instruction execution model for selected code; not M55 hardware",
+    "caller STOP endpoint with no executed instruction"
+  ],
+  "static_consumers": [
+    "display blocking MSPI write59ccdc calls clean at59cd10",
+    "audio inactive-DMA-buffer getter57a7e0 calls invalidate at57a800"
+  ],
+  "not_supplied": [
+    "physical cache data/dirty line/writeback effects",
+    "DMA visibility/ownership/scheduling/caller transfer completion",
+    "huge positive-length completed paths",
+    "M55 MPU/security/cache implementation semantics"
+  ],
+  "separate_boundaries": [
+    "ROM40 timing missing, not used by this module",
+    "CMDQ curIdx intermediate-store asynchronous contract unclosed",
+    "optimized tick instrumentation-sensitive Unicorn blocker unchanged"
+  ],
+  "production_byte_match": false
+}

@@ -1,0 +1,17 @@
+{
+  "task_id": "P2-15915",
+  "accepted": false,
+  "status": "partial",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_outputs": [
+    "fresh/instructions.json",
+    "fresh/disassembly.txt",
+    "fresh/references.json"
+  ],
+  "locked_image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "review": "The 64-byte continuation at 0x540078..0x5400B8 decodes exactly. Four ordered calculations each use an SDIV of the freshly loaded signed word at R5+36 by 2, which truncates toward zero; the results are combined with the earlier stack values and +/-1 into SP+44, +52, +48, +56. The denominator is fixed nonzero, and the subsequent arithmetic wraps as 32-bit register arithmetic.",
+  "limitations": [
+    "Fresh decode supports the saved read order, stores, and truncation behavior. It is only a continuation within the larger 0x540036..0x5409C4 candidate; full function ABI, bounds, and semantics remain open.",
+    "No implementation, admission, or freeze gates."
+  ]
+}

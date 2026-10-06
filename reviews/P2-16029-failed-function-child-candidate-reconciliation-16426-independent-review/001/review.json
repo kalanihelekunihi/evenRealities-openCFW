@@ -1,0 +1,16 @@
+{
+  "task_id": "P2-16029",
+  "accepted": false,
+  "status": "partial",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/failed-function-child-candidate-reconciliation-16426/001",
+  "candidate_receipt_sha256": "ef82adaea72391c6ff28169ad87a8498380e5bde7e685725145c4d185c130651",
+  "candidate_results_sha256": "c2d146518ae3561087db24c27b31080f587c23ee19c9f89ff86f13ceb5a1e9b4",
+  "candidate_replay_sha256": "c1599afd65a274cd6efde7bbe90fb8e1be279119e6429f604ed32529309abc2a",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_results_sha256": "c2d146518ae3561087db24c27b31080f587c23ee19c9f89ff86f13ceb5a1e9b4",
+  "review": "Fresh candidate reconciliation found 30 direct children with indexed byte-candidate leads and zero without; a lead means only that a map contains the entry address, not complete function ownership or semantic closure.",
+  "limitations": [
+    "Local audit/reconciliation only; it does not establish semantic completeness, global ownership, admission, or review-binding closure.",
+    "No C, canonical changes, or gates."
+  ]
+}

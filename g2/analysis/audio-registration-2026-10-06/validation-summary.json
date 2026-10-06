@@ -1,0 +1,97 @@
+{
+  "comparison": {
+    "path": "g2/build/foundation/audio-registration-simulator/comparison-first.json",
+    "sha256": "139fad0a883f25acf8f4b7f171c49ad423fa2f18de0e50f6109b5fe8bbc9ffa4",
+    "status": "PASS",
+    "calls": 103,
+    "traced_bytes": 1736,
+    "source_and_ELF_hashes_current": true
+  },
+  "observer_audit": {
+    "no_memory_hook_vs_scoped": "PASS",
+    "calls_per_profile": 10,
+    "full_RAM_except_stack_and_observation_outputs": true,
+    "code_derived_MMIO_RAM_writes": true
+  },
+  "aggregate": {
+    "path": "g2/build/foundation/audio-registration-simulator/aggregate.json",
+    "sha256": "77061acef66ae62a0d6747204d4070fbe653ef523a89333d6729dd57bb1b1093",
+    "modules": 44,
+    "totals": {
+      "tests_run": 228,
+      "passed": 222,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 7,
+      "method_skips": 6,
+      "setup_skips": 1
+    }
+  },
+  "affected": {
+    "path": "g2/build/foundation/audio-registration-simulator/affected.log",
+    "sha256": "d82da45111f6106cfc8eb75738960a76ebf6e7c45ef70b253fb0072f7f46773d",
+    "passed": 8
+  },
+  "inventory": {
+    "path": "g2/analysis/audio-registration-2026-10-06/cumulative-inventory.json",
+    "sha256": "09b09be6156790d98be98f09c2f53679488d26efd312e763efb187dfc1a6fe2a",
+    "source_files": 89,
+    "total": 8418,
+    "per_payload": {
+      "touch": 234,
+      "apollo_main": 8184
+    },
+    "new_bytes": 506,
+    "overlap_bytes": 1230
+  },
+  "independent_review": {
+    "path": "g2/analysis/audio-registration-2026-10-06/review/review.json",
+    "sha256": "571feef0768e69326cb9bad7650975a30f3c0602eede882b18cd6ba3a17b8569",
+    "representative_path": "g2/analysis/audio-registration-2026-10-06/review/representative-rerun.json",
+    "representative_sha256": "9c929d62fb46adbc746424f804eddccc3dd2ce2e5ae491af042bba3ae3b40b2d",
+    "checks": 9,
+    "logger_flags_reread_path": "g2/analysis/audio-registration-2026-10-06/review/logger-flags-reread.json",
+    "logger_flags_reread_sha256": "415a501e5abf4f90cbf74dd8f77885e26b9afff8ae132a9e9f4b27f224728a53",
+    "bindings": [
+      {
+        "path": "g2/components/foundation/audio_pcm_registration/registration.c",
+        "matches": true
+      },
+      {
+        "path": "g2/components/foundation/audio_pcm_registration/registration.h",
+        "matches": true
+      },
+      {
+        "path": "g2/components/foundation/audio_pcm_registration/verify.py",
+        "matches": true
+      },
+      {
+        "path": "g2/analysis/audio-registration-2026-10-06/REPORT.md",
+        "matches": true
+      },
+      {
+        "path": "g2/analysis/audio-registration-2026-10-06/pseudocode.md",
+        "matches": true
+      },
+      {
+        "path": "g2/analysis/audio-registration-2026-10-06/original-provenance.json",
+        "matches": true
+      },
+      {
+        "path": "g2/analysis/audio-registration-2026-10-06/original-disassembly.txt",
+        "matches": true
+      }
+    ]
+  },
+  "limits": [
+    "No-MEM code observer derives store order/values but not architectural multiword atomicity; snapshot excludes only live stack/two source observation outputs.",
+    "Ten-call no-MEM/scoped audit validates those fixture paths, not all-input equivalence/read traces/physical MMIO effects.",
+    "Logger-enabled cuts before actual providers; source observationABI new. No taskwake/taskrouting/callback/DSP/fileprovider execution.",
+    "Registration changes between top-level calls; synthetic flags-change observation not hardware concurrency proof.",
+    "No PCM copy or DMA ownership/lifetime guarantee; existing12B metadata/age0\u201340/callbackreread unchanged."
+  ],
+  "prior87_source_hashes_unchanged": true,
+  "index_preserved": true,
+  "source_built_byte_identical_bundle": false,
+  "fully_source_complete_payloads": 0
+}

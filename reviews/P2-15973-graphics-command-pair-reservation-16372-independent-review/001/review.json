@@ -1,0 +1,19 @@
+{
+  "task_id": "P2-15973",
+  "accepted": false,
+  "status": "partial",
+  "source_packet": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-command-pair-reservation-16372-map/001",
+  "input_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "range": [
+    "0x514aec",
+    "0x514b76"
+  ],
+  "instruction_bytes": 138,
+  "fresh_replay": "fresh-replay.py",
+  "source_receipt_sha256": "157d23cd33ab1c3d25a851508845953c183ea40168eb7b9623451d7a5672c36a",
+  "review": "Loads the global object, clears only bit 3 of byte +24, and selects ring mode from byte +8 bit 5. The ring branch keeps wrapped signed subtraction/division/multiply-add behavior and calls the flush child without using its result; the linear branch uses signed capacity arithmetic and the grow child. Both paths reload the object/buffer before advancing index by request*2 and publishing the updated word. The null/global and child boundaries remain opaque.",
+  "limitations": [
+    "Pinned byte replay passes; branch/arithmetic and memory operation ordering checked against decoded instructions.",
+    "Ring division-by-zero behavior, child semantics, buffer lifetime, allocator ownership, alias/fault behavior and physical behavior are unresolved. No admission or gate change."
+  ]
+}

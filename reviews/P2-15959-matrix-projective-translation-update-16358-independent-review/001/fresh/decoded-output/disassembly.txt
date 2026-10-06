@@ -1,0 +1,32 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpb5vhbhyg/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00561856 <.text>:
+  561856:	ed90 1a06 	vldr	s2, [r0, #24]
+  56185a:	edd0 1a00 	vldr	s3, [r0]
+  56185e:	ee40 1a01 	vmla.f32	s3, s0, s2
+  561862:	edc0 1a00 	vstr	s3, [r0]
+  561866:	ed90 2a07 	vldr	s4, [r0, #28]
+  56186a:	ed90 1a01 	vldr	s2, [r0, #4]
+  56186e:	ee00 1a02 	vmla.f32	s2, s0, s4
+  561872:	ed80 1a01 	vstr	s2, [r0, #4]
+  561876:	edd0 1a08 	vldr	s3, [r0, #32]
+  56187a:	ed90 1a02 	vldr	s2, [r0, #8]
+  56187e:	ee00 1a21 	vmla.f32	s2, s0, s3
+  561882:	ed80 1a02 	vstr	s2, [r0, #8]
+  561886:	ed90 0a06 	vldr	s0, [r0, #24]
+  56188a:	ed90 1a03 	vldr	s2, [r0, #12]
+  56188e:	ee00 1a80 	vmla.f32	s2, s1, s0
+  561892:	ed80 1a03 	vstr	s2, [r0, #12]
+  561896:	ed90 0a07 	vldr	s0, [r0, #28]
+  56189a:	ed90 1a04 	vldr	s2, [r0, #16]
+  56189e:	ee00 1a80 	vmla.f32	s2, s1, s0
+  5618a2:	ed80 1a04 	vstr	s2, [r0, #16]
+  5618a6:	ed90 0a08 	vldr	s0, [r0, #32]
+  5618aa:	ed90 1a05 	vldr	s2, [r0, #20]
+  5618ae:	ee00 1a80 	vmla.f32	s2, s1, s0
+  5618b2:	ed80 1a05 	vstr	s2, [r0, #20]
+  5618b6:	4770      	bx	lr

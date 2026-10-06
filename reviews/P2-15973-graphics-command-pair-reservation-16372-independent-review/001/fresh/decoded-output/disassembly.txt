@@ -1,0 +1,64 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpkmhgatq2/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00514aec <.text>:
+  514aec:	b570      	push	{r4, r5, r6, lr}
+  514aee:	f8df 52a4 	ldr.w	r5, [pc, #676]	@ 514d94 <.text+0x2a8>
+  514af2:	682a      	ldr	r2, [r5, #0]
+  514af4:	4604      	mov	r4, r0
+  514af6:	6850      	ldr	r0, [r2, #4]
+  514af8:	b920      	cbnz	r0, 514b04 <.text+0x18>
+  514afa:	2080      	movs	r0, #128	@ 0x80
+  514afc:	f79c fbbe 	bl	4b127c <.text-0x63870>
+  514b00:	2000      	movs	r0, #0
+  514b02:	bd70      	pop	{r4, r5, r6, pc}
+  514b04:	6981      	ldr	r1, [r0, #24]
+  514b06:	f021 0108 	bic.w	r1, r1, #8
+  514b0a:	6181      	str	r1, [r0, #24]
+  514b0c:	f100 0110 	add.w	r1, r0, #16
+  514b10:	7a0b      	ldrb	r3, [r1, #8]
+  514b12:	069e      	lsls	r6, r3, #26
+  514b14:	d508      	bpl.n	514b28 <.text+0x3c>
+  514b16:	69cb      	ldr	r3, [r1, #28]
+  514b18:	684e      	ldr	r6, [r1, #4]
+  514b1a:	4619      	mov	r1, r3
+  514b1c:	1b9b      	subs	r3, r3, r6
+  514b1e:	fb96 f6f1 	sdiv	r6, r6, r1
+  514b22:	fb01 3306 	mla	r3, r1, r6, r3
+  514b26:	e002      	b.n	514b2e <.text+0x42>
+  514b28:	680b      	ldr	r3, [r1, #0]
+  514b2a:	6849      	ldr	r1, [r1, #4]
+  514b2c:	1a5b      	subs	r3, r3, r1
+  514b2e:	eb03 73d3 	add.w	r3, r3, r3, lsr #31
+  514b32:	7e00      	ldrb	r0, [r0, #24]
+  514b34:	105b      	asrs	r3, r3, #1
+  514b36:	0681      	lsls	r1, r0, #26
+  514b38:	d513      	bpl.n	514b62 <.text+0x76>
+  514b3a:	1c60      	adds	r0, r4, #1
+  514b3c:	4283      	cmp	r3, r0
+  514b3e:	da06      	bge.n	514b4e <.text+0x62>
+  514b40:	2100      	movs	r1, #0
+  514b42:	f882 10f9 	strb.w	r1, [r2, #249]	@ 0xf9
+  514b46:	6828      	ldr	r0, [r5, #0]
+  514b48:	6840      	ldr	r0, [r0, #4]
+  514b4a:	f7ff fe31 	bl	5147b0 <.text-0x33c>
+  514b4e:	6828      	ldr	r0, [r5, #0]
+  514b50:	6841      	ldr	r1, [r0, #4]
+  514b52:	694a      	ldr	r2, [r1, #20]
+  514b54:	6888      	ldr	r0, [r1, #8]
+  514b56:	eb00 0082 	add.w	r0, r0, r2, lsl #2
+  514b5a:	eb02 0244 	add.w	r2, r2, r4, lsl #1
+  514b5e:	614a      	str	r2, [r1, #20]
+  514b60:	bd70      	pop	{r4, r5, r6, pc}
+  514b62:	1e9b      	subs	r3, r3, #2
+  514b64:	42a3      	cmp	r3, r4
+  514b66:	daf2      	bge.n	514b4e <.text+0x62>
+  514b68:	4620      	mov	r0, r4
+  514b6a:	f7ff fccb 	bl	514504 <.text-0x5e8>
+  514b6e:	2800      	cmp	r0, #0
+  514b70:	d5ed      	bpl.n	514b4e <.text+0x62>
+  514b72:	2000      	movs	r0, #0
+  514b74:	bd70      	pop	{r4, r5, r6, pc}

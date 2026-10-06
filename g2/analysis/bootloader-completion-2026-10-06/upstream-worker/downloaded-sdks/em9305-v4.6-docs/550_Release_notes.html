@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Release Notes &mdash; EM9305 4.6 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/custom.css?v=eea1f72d" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=f0a44209"></script>
+        <script src="../../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Software License Agreement" href="590_Software_License_Agreement.html" />
+    <link rel="prev" title="Known Limitations" href="520_Known_Limitations.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: white" >
+
+          
+          
+          <a href="../../../../index.html">
+            
+              <img src="../../../../_static/logo_h_small.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../SLA.html">Software License Agreement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ReleaseNotes.html">emb Release Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/GettingStarted.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/MigrationGuide.html">Migration guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/IDEIntegration.html">MetaWare IDE Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/CMakeBuild.html">CMake and build procedure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/rom.html">ROM Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/Bluetooth.html">Bluetooth</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../emcore/index.html">EM-Core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/FirmwareUpdate.html">Firmware Update</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/Lifecycle.html">EM9305 Lifecycle Control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../API.html">Application Programming Interface (API)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Examples.html">Sample Applications</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../MLToolKit.html">Machine learning</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">EM Machine Learning Tool Kit</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../1_Introduction/index.html">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../2_em_mltk_python/index.html">em_mltk Python API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../3_generated_c_code/index.html">Generated C model API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../4_tuto_examples/index.html">Examples and Tutorials</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Others</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="500_Frequently_Asked_Questions.html">Frequently Asked Questions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="520_Known_Limitations.html">Known Limitations</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Release Notes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="590_Software_License_Agreement.html">Software License Agreement</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/Links.html">Links</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/ApplicationNotes.html">Application Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/HowTo.html">How to</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../sections/Limitations.html">Known limitations &amp; constraints</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: white" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">EM9305</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../MLToolKit.html">Machine learning</a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">EM Machine Learning Tool Kit</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Others</a></li>
+      <li class="breadcrumb-item active">Release Notes</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="release-notes">
+<span id="id1"></span><h1>Release Notes<a class="headerlink" href="#release-notes" title="Link to this heading"></a></h1>
+<p>This section lists the new features, improvements, and major changes related
+to em_mltk.</p>
+<p>To check the current version, run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;import em_mltk; print(em_mltk.__version__)&quot;</span>
+</pre></div>
+</div>
+<section id="latest">
+<h2>Latest<a class="headerlink" href="#latest" title="Link to this heading"></a></h2>
+</section>
+<section id="v1-1-0">
+<h2>V1.1.0<a class="headerlink" href="#v1-1-0" title="Link to this heading"></a></h2>
+<p>libem_ml_em9305: 0.2.6</p>
+<p>This release introduces major updates and improvements, particularly in the area of quantization and related optimizations. As a result, it is not backward-compatible with previous versions.
+Please ensure that only files from this release are used.</p>
+<p><strong>Key Changes and Features</strong></p>
+<ul class="simple">
+<li><p>Upgraded support to TensorFlow 2.21 (previously 2.19).</p></li>
+<li><p>The generated model is now provided as a C-compiled library.</p></li>
+<li><p>All em_mltk support files are consolidated into a single static library: libem_ml_em9305.a.</p></li>
+<li><p>Added support for 8-bit integer (int8) model quantization using TensorFlow Lite post-training quantization techniques.</p></li>
+<li><p>Enhanced tensor definitions to support quantized data.</p></li>
+<li><p>Added support for input/output data types: float32, int8 (new), and uint8 (new).</p></li>
+<li><p>Refactored memory management to improve efficiency and support quantized models.</p></li>
+<li><p>Reworked profiler output to provide more detailed insights into model performance.</p></li>
+<li><p>Introduced an HTML report for profiler results.</p></li>
+<li><p>Model input and output tensors are now declared in alphabetical order.</p></li>
+<li><p>Improved logging for better readability.</p></li>
+<li><p>Updated Jupyter notebooks to reflect new features and changes.</p></li>
+<li><p>Updated the em_mltk_mnist example project to include a quantized model.</p></li>
+<li><dl class="simple">
+<dt>Added new layers:</dt><dd><ul>
+<li><p>Unstack</p></li>
+<li><p>Split</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Added a new Jupyter notebook example for gesture recognition.</p>
+</section>
+<section id="v1-0-1">
+<h2>V1.0.1<a class="headerlink" href="#v1-0-1" title="Link to this heading"></a></h2>
+<p>libem_ml_standard_em9305_main: 0.1.5</p>
+<p>First official release of em_mltk. It contains the following features:</p>
+<ul class="simple">
+<li><p>It suppports EM9305 device.</p></li>
+<li><p>It converts a TensorFlow Lite model into a C source file for embedded systems.</p></li>
+<li><p>It generates a complete model as C code for EM9305 BLE controller.</p></li>
+<li><p>It generates a ready to use EM9305 project with CMake build system and 4
+compilation targets: (None (default, Production), _TEST, _PROFILER, _EMPTY)</p></li>
+<li><dl class="simple">
+<dt>It supports these Keras Layers:</dt><dd><ul>
+<li><p>Add</p></li>
+<li><p>AveragePooling1D</p></li>
+<li><p>AveragePooling2D</p></li>
+<li><p>BatchNormalization</p></li>
+<li><p>Concatenate</p></li>
+<li><p>Conv1D</p></li>
+<li><p>Conv1DTranspose</p></li>
+<li><p>Conv2D</p></li>
+<li><p>Conv2DTranspose</p></li>
+<li><p>Dense</p></li>
+<li><p>Dropout</p></li>
+<li><p>Flatten</p></li>
+<li><p>GlobalAveragePooling1D</p></li>
+<li><p>GlobalAveragePooling2D</p></li>
+<li><p>GlobalMaxPooling1D</p></li>
+<li><p>GlobalMaxPooling2D</p></li>
+<li><p>Input</p></li>
+<li><p>MaxPooling1D</p></li>
+<li><p>MaxPooling2D</p></li>
+<li><p>Multiply</p></li>
+<li><p>Rescaling</p></li>
+<li><p>Reshape</p></li>
+<li><p>Stack</p></li>
+<li><p>Subtract</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>It supports these Keras activation functions:</dt><dd><ul>
+<li><p>ReLu</p></li>
+<li><p>Sigmoid</p></li>
+<li><p>Tanh</p></li>
+<li><p>LeakyReLU</p></li>
+<li><p>Softmax</p></li>
+<li><p>Swish (or SiLU)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="520_Known_Limitations.html" class="btn btn-neutral float-left" title="Known Limitations" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="590_Software_License_Agreement.html" class="btn btn-neutral float-right" title="Software License Agreement" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025-2026, EM Microelectronic.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

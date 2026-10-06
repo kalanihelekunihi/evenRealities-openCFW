@@ -1,0 +1,29 @@
+
+/tmp/cqinit.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00423f28 <.data>:
+  423f28:	b5e0      	push	{r5, r6, r7, lr}
+  423f2a:	9201      	str	r2, [sp, #4]
+  423f2c:	0849      	lsrs	r1, r1, #1
+  423f2e:	9100      	str	r1, [sp, #0]
+  423f30:	2101      	movs	r1, #1
+  423f32:	f88d 1008 	strb.w	r1, [sp, #8]
+  423f36:	f8df 1bb4 	ldr.w	r1, [pc, #2996]	@ 0x424aec
+  423f3a:	f44f 620d 	mov.w	r2, #2256	@ 0x8d0
+  423f3e:	fb02 f200 	mul.w	r2, r2, r0
+  423f42:	4411      	add	r1, r2
+  423f44:	f601 0228 	addw	r2, r1, #2088	@ 0x828
+  423f48:	4669      	mov	r1, sp
+  423f4a:	3008      	adds	r0, #8
+  423f4c:	b2c0      	uxtb	r0, r0
+  423f4e:	f003 fc21 	bl	0x427794
+  423f52:	bd0e      	pop	{r1, r2, r3, pc}
+
+Literal-pool value read from the authenticated image:
+  0x00424aec: a0 ca 01 20 -> 0x2001caa0 (global MSPI state-array base)
+
+Direct call target:
+  0x00427794: am_hal_cmdq_init (external lower-level provider in this probe)

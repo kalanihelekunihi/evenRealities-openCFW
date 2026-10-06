@@ -1,0 +1,28 @@
+{
+  "new_implemented": [
+    "local slot CQ termination55c11a",
+    "disable-like55c430",
+    "uninitialize-like55c286"
+  ],
+  "reused_unchanged": [
+    "am_hal_cmdq_term53909a",
+    "reconstructed update_indices538d18",
+    "real PRIMASK473940"
+  ],
+  "executable_stubs": [],
+  "fixture": [
+    "serialized RAM/nonaliasing pointers",
+    "raw MMIO registers and indices",
+    "retained command-buffer sentinel"
+  ],
+  "external": [
+    "power-control55c7e8 and subordinate power-domain helpers",
+    "physical MMIO/IRQ/NVIC/DMA completion",
+    "callback/task scheduling and allocator/object-owner graph",
+    "handle initialization/live instance identity"
+  ],
+  "shutdown_safe": false,
+  "source_complete": false,
+  "byte_identical": false,
+  "index_store_limit": true
+}

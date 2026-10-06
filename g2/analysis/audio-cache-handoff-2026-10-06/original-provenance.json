@@ -1,0 +1,116 @@
+{
+  "firmware": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+  "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "header_bytes": 32,
+  "load_address": "0x438000",
+  "architecture": "ARM Cortex-M4 Thumb2 little endian",
+  "spans": [
+    {
+      "name": "selected_buffer",
+      "start": "0x590b6c",
+      "end_exclusive": "0x590b92",
+      "length": 38,
+      "sha256": "45dad8e724d7e09c8a98b67932a091ba71e9f24438673cfde061485c66df5003",
+      "scope": "executed complete"
+    },
+    {
+      "name": "audio_getter",
+      "start": "0x57a7e0",
+      "end_exclusive": "0x57a80e",
+      "length": 46,
+      "sha256": "0b8d3c1ef22dfdfbed10aecaa56330d6e991d09eaccc048b6010d963921b8925",
+      "scope": "executed complete"
+    },
+    {
+      "name": "cache_provider",
+      "start": "0x475014",
+      "end_exclusive": "0x475194",
+      "length": 384,
+      "sha256": "4983e97e8c5ab840cb10e072fb9b9e3fd3e8ca4c9152267e790a4894592db137",
+      "scope": "selected range paths executed; complete provider coverage in preceding batch"
+    },
+    {
+      "name": "display_validate",
+      "start": "0x59cb42",
+      "end_exclusive": "0x59cc40",
+      "length": 254,
+      "sha256": "4bac8caebe04137d9c9e46c6c24455d58bb7d2eab0e3b58530e407ddcf1dde1c",
+      "scope": "static caller precondition"
+    },
+    {
+      "name": "display_write",
+      "start": "0x59ccdc",
+      "end_exclusive": "0x59cd86",
+      "length": 170,
+      "sha256": "8eb1ad4ed8226c1cbc8842010a16ed3ac42f89b5d5fcb0a9087c9fbadf2709b9",
+      "scope": "static consumer"
+    },
+    {
+      "name": "i2s_dma_configure",
+      "start": "0x590a24",
+      "end_exclusive": "0x590b6c",
+      "length": 328,
+      "sha256": "9059020841cbe57a43882cb17a592fdae57252c0f5a8294582e335df566ea438",
+      "scope": "static context producer"
+    },
+    {
+      "name": "i2s_service",
+      "start": "0x5908a0",
+      "end_exclusive": "0x5909b6",
+      "length": 278,
+      "sha256": "6694d1daf9dd9c4ab728b3f9b2e6d15198cc7980e865f68facfc72d32949306b",
+      "scope": "static lifecycle boundary; next batch"
+    },
+    {
+      "name": "audio_isr",
+      "start": "0x57a4d8",
+      "end_exclusive": "0x57a508",
+      "length": 48,
+      "sha256": "1e35307e5e636489f142be62a6f7b497283018376b3f18af19b1b45a595384bb",
+      "scope": "static notification ordering"
+    }
+  ],
+  "constants": [
+    {
+      "name": "audio descriptor template",
+      "address": "0x78d474",
+      "bytes": "00000000800c0000",
+      "words": [
+        "0x0",
+        "0xc80"
+      ]
+    },
+    {
+      "name": "global handle cell pointer",
+      "address": "0x57a880",
+      "bytes": "0c450720",
+      "words": [
+        "0x2007450c"
+      ]
+    },
+    {
+      "name": "descriptor template pointer",
+      "address": "0x57a8f0",
+      "bytes": "74d47800",
+      "words": [
+        "0x78d474"
+      ]
+    },
+    {
+      "name": "DMA record RAM pointer",
+      "address": "0x57a8cc",
+      "bytes": "40070020",
+      "words": [
+        "0x20000740"
+      ]
+    },
+    {
+      "name": "I2S peripheral base literal",
+      "address": "0x590d34",
+      "bytes": "00802040",
+      "words": [
+        "0x40208000"
+      ]
+    }
+  ]
+}

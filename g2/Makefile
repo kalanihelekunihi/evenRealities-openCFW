@@ -42,7 +42,7 @@ CORE_TESTS := test_open_cfw test_analyze_g2_codec_fwpk_segments \
 	test_run_ghidra_shard_batch test_assetgen_lvgl_font test_assetgen_lvgl_image \
 	test_assetgen_nanopb_descriptor test_assetgen_string_pool \
 	test_gxdnn_command_emitter test_gxdnn_quantize test_csky_macos_build \
-	test_preserve_l8_resources test_touch_scb test_touch_scb_mmio test_touch_scb_simulator test_touch_scb_tx test_touch_scb_fifo test_ambiq_mspi test_ambiq_mspi_lifecycle test_ambiq_mspi_cmdq test_ambiq_gpio test_radio_gpio test_wsf_radio test_freertos_event_group test_freertos_queue test_freertos_daemon test_freertos_ready test_freertos_resume test_freertos_tick test_ambiq_gpio_config test_wsf_timer_stop
+	test_preserve_l8_resources test_touch_scb test_touch_scb_mmio test_touch_scb_simulator test_touch_scb_tx test_touch_scb_fifo test_ambiq_mspi test_ambiq_mspi_lifecycle test_ambiq_mspi_cmdq test_ambiq_gpio test_radio_gpio test_wsf_radio test_freertos_event_group test_freertos_queue test_freertos_daemon test_freertos_ready test_freertos_resume test_freertos_tick test_ambiq_gpio_config test_wsf_timer_stop test_trace_inventory
 
 .PHONY: all help reference verify reference-verify test core-test research-corpus \
         em9305-record-package ghidra-harvest bootloader-ghidra-harvest \
@@ -390,3 +390,80 @@ radio-transport-pads-simulator:
 	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -c $(GPIO_CONFIG_COMPONENT)/ambiq_gpio_config.c -o "$(TRANSPORT_PADS_SIM_DIR)/config.o"
 	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -DOPENCFW_REAL_CRITICAL -c $(AMBIQ_COMPONENT)/ambiq_interrupt_mask.c -o "$(TRANSPORT_PADS_SIM_DIR)/critical.o"
 	$(SCB_SIM_LD) -T $(GPIO_CONFIG_COMPONENT)/simulator/module.ld -o "$(TRANSPORT_PADS_SIM_DIR)/transport_pads.elf" "$(TRANSPORT_PADS_SIM_DIR)/pads.o" "$(TRANSPORT_PADS_SIM_DIR)/config.o" "$(TRANSPORT_PADS_SIM_DIR)/critical.o"
+
+# Local IOM-like release consumer reuses unchanged CMDQ and real PRIMASK.
+IOM_RELEASE_SIM_DIR ?= build/foundation/radio-iom-release-simulator
+.PHONY: radio-iom-release-simulator
+radio-iom-release-simulator:
+	mkdir -p "$(IOM_RELEASE_SIM_DIR)"
+	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -c components/foundation/radio_iom_release/iom_release.c -o "$(IOM_RELEASE_SIM_DIR)/iom.o"
+	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -ffunction-sections -fdata-sections -c $(AMBIQ_COMPONENT)/ambiq_cmdq.c -o "$(IOM_RELEASE_SIM_DIR)/cmdq.o"
+	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -DOPENCFW_REAL_CRITICAL -c $(AMBIQ_COMPONENT)/ambiq_interrupt_mask.c -o "$(IOM_RELEASE_SIM_DIR)/critical.o"
+	$(SCB_SIM_LD) --gc-sections -e opencfw_iom_uninitialize --undefined=opencfw_iom_uninitialize -T $(GPIO_CONFIG_COMPONENT)/simulator/module.ld -o "$(IOM_RELEASE_SIM_DIR)/iom_release.elf" "$(IOM_RELEASE_SIM_DIR)/iom.o" "$(IOM_RELEASE_SIM_DIR)/cmdq.o" "$(IOM_RELEASE_SIM_DIR)/critical.o"
+
+# Fixed operation2 preparation prefix, ending before dynamic power providers.
+IOM_POWER_SIM_DIR ?= build/foundation/radio-iom-power-prepare-simulator
+.PHONY: radio-iom-power-prepare-simulator
+radio-iom-power-prepare-simulator:
+	mkdir -p "$(IOM_POWER_SIM_DIR)"
+	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -c components/foundation/radio_iom_power_prepare/power_prepare.c -o "$(IOM_POWER_SIM_DIR)/power.o"
+	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -ffunction-sections -fdata-sections -c $(AMBIQ_COMPONENT)/ambiq_cmdq.c -o "$(IOM_POWER_SIM_DIR)/cmdq.o"
+	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -DOPENCFW_REAL_CRITICAL -c $(AMBIQ_COMPONENT)/ambiq_interrupt_mask.c -o "$(IOM_POWER_SIM_DIR)/critical.o"
+	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -c components/foundation/radio_iom_release/iom_release.c -o "$(IOM_POWER_SIM_DIR)/iom.o"
+	$(SCB_SIM_LD) --gc-sections -e opencfw_iom_disable_then_prepare --undefined=opencfw_iom_disable_then_prepare -T $(GPIO_CONFIG_COMPONENT)/simulator/module.ld -o "$(IOM_POWER_SIM_DIR)/power_prepare.elf" "$(IOM_POWER_SIM_DIR)/power.o" "$(IOM_POWER_SIM_DIR)/iom.o" "$(IOM_POWER_SIM_DIR)/cmdq.o" "$(IOM_POWER_SIM_DIR)/critical.o"
+
+# Reconstructed descriptor selection only; no physical power operation.
+POWER_DOMAIN_SIM_DIR ?= build/foundation/power-domain-simulator
+.PHONY: power-domain-simulator
+power-domain-simulator:
+	mkdir -p "$(POWER_DOMAIN_SIM_DIR)"
+	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -c components/foundation/power_domain/power_domain.c -o "$(POWER_DOMAIN_SIM_DIR)/domain.o"
+	$(SCB_SIM_LD) --gc-sections -e opencfw_iom_domain_descriptor -T $(GPIO_CONFIG_COMPONENT)/simulator/module.ld -o "$(POWER_DOMAIN_SIM_DIR)/power_domain.elf" "$(POWER_DOMAIN_SIM_DIR)/domain.o"
+
+CACHE_MAINT_SIM_DIR ?= build/foundation/cache-maintenance-simulator
+.PHONY: cache-maintenance-simulator
+cache-maintenance-simulator:
+	mkdir -p "$(CACHE_MAINT_SIM_DIR)"
+	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -c components/foundation/cache_maintenance/cache_maintenance.c -o "$(CACHE_MAINT_SIM_DIR)/cache.o"
+	$(SCB_SIM_LD) --gc-sections -e opencfw_cache_invalidate -T $(GPIO_CONFIG_COMPONENT)/simulator/module.ld -o "$(CACHE_MAINT_SIM_DIR)/cache_maintenance.elf" "$(CACHE_MAINT_SIM_DIR)/cache.o"
+
+AUDIO_CACHE_SIM_DIR ?= build/foundation/audio-cache-handoff-simulator
+.PHONY: audio-cache-handoff-simulator
+audio-cache-handoff-simulator:
+	mkdir -p "$(AUDIO_CACHE_SIM_DIR)"
+	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -c components/foundation/audio_cache_handoff/handoff.c -o "$(AUDIO_CACHE_SIM_DIR)/handoff.o"
+	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -c components/foundation/cache_maintenance/cache_maintenance.c -o "$(AUDIO_CACHE_SIM_DIR)/cache.o"
+	$(SCB_SIM_LD) --gc-sections -e opencfw_audio_rx_buffer_get -T $(GPIO_CONFIG_COMPONENT)/simulator/module.ld -o "$(AUDIO_CACHE_SIM_DIR)/handoff.elf" "$(AUDIO_CACHE_SIM_DIR)/handoff.o" "$(AUDIO_CACHE_SIM_DIR)/cache.o"
+
+# Extend the audio handoff source in a separate ELF; preserve prior evidence.
+AUDIO_REARM_SIM_DIR ?= build/foundation/audio-dma-rearm-simulator
+.PHONY: audio-dma-rearm-simulator
+audio-dma-rearm-simulator:
+	mkdir -p "$(AUDIO_REARM_SIM_DIR)"
+	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -c components/foundation/audio_dma_rearm/rearm.c -o "$(AUDIO_REARM_SIM_DIR)/rearm.o"
+	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -c components/foundation/audio_cache_handoff/handoff.c -o "$(AUDIO_REARM_SIM_DIR)/handoff.o"
+	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -c components/foundation/cache_maintenance/cache_maintenance.c -o "$(AUDIO_REARM_SIM_DIR)/cache.o"
+	$(SCB_SIM_LD) --gc-sections -e opencfw_audio_i2s_irq_prefix -u opencfw_audio_rx_buffer_get -T $(GPIO_CONFIG_COMPONENT)/simulator/module.ld -o "$(AUDIO_REARM_SIM_DIR)/rearm.elf" "$(AUDIO_REARM_SIM_DIR)/rearm.o" "$(AUDIO_REARM_SIM_DIR)/handoff.o" "$(AUDIO_REARM_SIM_DIR)/cache.o"
+
+# Bounded notification/consumer integration; preserve older evidence ELFs.
+AUDIO_PCM_SIM_DIR ?= build/foundation/audio-notification-pcm-simulator
+.PHONY: audio-notification-pcm-simulator
+audio-notification-pcm-simulator:
+	mkdir -p "$(AUDIO_PCM_SIM_DIR)"
+	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -ffunction-sections -c components/foundation/audio_pcm_consumer/consumer.c -o "$(AUDIO_PCM_SIM_DIR)/consumer.o"
+	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -ffunction-sections -c components/foundation/audio_dma_rearm/rearm.c -o "$(AUDIO_PCM_SIM_DIR)/rearm.o"
+	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -ffunction-sections -c components/foundation/audio_cache_handoff/handoff.c -o "$(AUDIO_PCM_SIM_DIR)/handoff.o"
+	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -ffunction-sections -c components/foundation/cache_maintenance/cache_maintenance.c -o "$(AUDIO_PCM_SIM_DIR)/cache.o"
+	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -ffunction-sections -c components/foundation/freertos_queue/queue_subset.c -o "$(AUDIO_PCM_SIM_DIR)/queue.o"
+	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -ffunction-sections -c components/foundation/freertos_queue/queue_adapter.c -o "$(AUDIO_PCM_SIM_DIR)/queue_adapter.o"
+	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -ffunction-sections -c components/foundation/freertos_daemon/daemon.c -o "$(AUDIO_PCM_SIM_DIR)/receive.o"
+	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -ffunction-sections -c components/foundation/freertos_daemon/receive_copy.c -o "$(AUDIO_PCM_SIM_DIR)/receive_copy.o"
+	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -ffunction-sections -c components/foundation/freertos_daemon/task_critical.c -o "$(AUDIO_PCM_SIM_DIR)/critical.o"
+	$(SCB_SIM_LD) --gc-sections -e opencfw_audio_consume_prefix -u opencfw_audio_notify_prefix -u opencfw_pcm_dispatch_prefix -u opencfw_audio_queue_get_task_nowait -u opencfw_audio_i2s_irq_prefix -u opencfw_audio_scheduler_state -u opencfw_audio_irq_context --defsym=xTaskRemoveFromEventList=0x455371 --defsym=xTaskPriorityDisinherit=0x45596f --defsym=opencfw_event_group_assert_failure=0x08002001 -T $(GPIO_CONFIG_COMPONENT)/simulator/module.ld -o "$(AUDIO_PCM_SIM_DIR)/consumer.elf" "$(AUDIO_PCM_SIM_DIR)/consumer.o" "$(AUDIO_PCM_SIM_DIR)/rearm.o" "$(AUDIO_PCM_SIM_DIR)/handoff.o" "$(AUDIO_PCM_SIM_DIR)/cache.o" "$(AUDIO_PCM_SIM_DIR)/queue.o" "$(AUDIO_PCM_SIM_DIR)/queue_adapter.o" "$(AUDIO_PCM_SIM_DIR)/receive.o" "$(AUDIO_PCM_SIM_DIR)/receive_copy.o" "$(AUDIO_PCM_SIM_DIR)/critical.o"
+
+AUDIO_REG_SIM_DIR ?= build/foundation/audio-registration-simulator
+.PHONY: audio-registration-simulator
+audio-registration-simulator:
+	$(MAKE) audio-notification-pcm-simulator AUDIO_PCM_SIM_DIR="$(AUDIO_REG_SIM_DIR)"
+	$(FOUNDATION_CC) $(GPIO_SIM_CFLAGS) -ffunction-sections -c components/foundation/audio_pcm_registration/registration.c -o "$(AUDIO_REG_SIM_DIR)/registration.o"
+	$(SCB_SIM_LD) --gc-sections -e opencfw_pcm_register_prefix -u opencfw_pcm_unregister_prefix -u opencfw_audio_consume_prefix -u opencfw_audio_notify_prefix -u opencfw_pcm_dispatch_prefix -u opencfw_audio_queue_get_task_nowait -u opencfw_audio_i2s_irq_prefix --defsym=xTaskRemoveFromEventList=0x455371 --defsym=xTaskPriorityDisinherit=0x45596f --defsym=opencfw_event_group_assert_failure=0x08002001 -T $(GPIO_CONFIG_COMPONENT)/simulator/module.ld -o "$(AUDIO_REG_SIM_DIR)/registration.elf" "$(AUDIO_REG_SIM_DIR)/registration.o" "$(AUDIO_REG_SIM_DIR)/consumer.o" "$(AUDIO_REG_SIM_DIR)/rearm.o" "$(AUDIO_REG_SIM_DIR)/handoff.o" "$(AUDIO_REG_SIM_DIR)/cache.o" "$(AUDIO_REG_SIM_DIR)/queue.o" "$(AUDIO_REG_SIM_DIR)/queue_adapter.o" "$(AUDIO_REG_SIM_DIR)/receive.o" "$(AUDIO_REG_SIM_DIR)/receive_copy.o" "$(AUDIO_REG_SIM_DIR)/critical.o"

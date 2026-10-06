@@ -1,0 +1,178 @@
+
+g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00416816 <.data+0x6816>:
+  416816:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+  416818:	0004      	movs	r4, r0
+  41681a:	000d      	movs	r5, r1
+  41681c:	0016      	movs	r6, r2
+  41681e:	2700      	movs	r7, #0
+  416820:	f7ff fc03 	bl	0x41602a
+  416824:	2800      	cmp	r0, #0
+  416826:	d13a      	bne.n	0x41689e
+  416828:	2c00      	cmp	r4, #0
+  41682a:	d038      	beq.n	0x41689e
+  41682c:	2d00      	cmp	r5, #0
+  41682e:	d036      	beq.n	0x41689e
+  416830:	f05f 31ff 	movs.w	r1, #4294967295	@ 0xffffffff
+  416834:	2e00      	cmp	r6, #0
+  416836:	d01d      	beq.n	0x416874
+  416838:	68b0      	ldr	r0, [r6, #8]
+  41683a:	2800      	cmp	r0, #0
+  41683c:	d00c      	beq.n	0x416858
+  41683e:	68f0      	ldr	r0, [r6, #12]
+  416840:	2850      	cmp	r0, #80	@ 0x50
+  416842:	d309      	bcc.n	0x416858
+  416844:	6930      	ldr	r0, [r6, #16]
+  416846:	2800      	cmp	r0, #0
+  416848:	d006      	beq.n	0x416858
+  41684a:	6970      	ldr	r0, [r6, #20]
+  41684c:	fb05 f204 	mul.w	r2, r5, r4
+  416850:	4290      	cmp	r0, r2
+  416852:	d301      	bcc.n	0x416858
+  416854:	2101      	movs	r1, #1
+  416856:	e00e      	b.n	0x416876
+  416858:	68b0      	ldr	r0, [r6, #8]
+  41685a:	2800      	cmp	r0, #0
+  41685c:	d10b      	bne.n	0x416876
+  41685e:	68f0      	ldr	r0, [r6, #12]
+  416860:	2800      	cmp	r0, #0
+  416862:	d108      	bne.n	0x416876
+  416864:	6930      	ldr	r0, [r6, #16]
+  416866:	2800      	cmp	r0, #0
+  416868:	d105      	bne.n	0x416876
+  41686a:	6970      	ldr	r0, [r6, #20]
+  41686c:	2800      	cmp	r0, #0
+  41686e:	d102      	bne.n	0x416876
+  416870:	2100      	movs	r1, #0
+  416872:	e000      	b.n	0x416876
+  416874:	2100      	movs	r1, #0
+  416876:	2901      	cmp	r1, #1
+  416878:	d109      	bne.n	0x41688e
+  41687a:	2000      	movs	r0, #0
+  41687c:	9000      	str	r0, [sp, #0]
+  41687e:	68b3      	ldr	r3, [r6, #8]
+  416880:	6932      	ldr	r2, [r6, #16]
+  416882:	0029      	movs	r1, r5
+  416884:	0020      	movs	r0, r4
+  416886:	f003 fa09 	bl	0x419c9c
+  41688a:	0007      	movs	r7, r0
+  41688c:	e007      	b.n	0x41689e
+  41688e:	2900      	cmp	r1, #0
+  416890:	d105      	bne.n	0x41689e
+  416892:	2200      	movs	r2, #0
+  416894:	0029      	movs	r1, r5
+  416896:	0020      	movs	r0, r4
+  416898:	f003 fa36 	bl	0x419d08
+  41689c:	0007      	movs	r7, r0
+  41689e:	0038      	movs	r0, r7
+  4168a0:	bdf2      	pop	{r1, r4, r5, r6, r7, pc}
+  4168a2:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+  4168a4:	0006      	movs	r6, r0
+  4168a6:	000d      	movs	r5, r1
+  4168a8:	001c      	movs	r4, r3
+  4168aa:	2700      	movs	r7, #0
+  4168ac:	f7ff fbbd 	bl	0x41602a
+  4168b0:	2800      	cmp	r0, #0
+  4168b2:	d01d      	beq.n	0x4168f0
+  4168b4:	2e00      	cmp	r6, #0
+  4168b6:	d003      	beq.n	0x4168c0
+  4168b8:	2d00      	cmp	r5, #0
+  4168ba:	d001      	beq.n	0x4168c0
+  4168bc:	2c00      	cmp	r4, #0
+  4168be:	d002      	beq.n	0x4168c6
+  4168c0:	f07f 0703 	mvns.w	r7, #3
+  4168c4:	e02a      	b.n	0x41691c
+  4168c6:	2000      	movs	r0, #0
+  4168c8:	9000      	str	r0, [sp, #0]
+  4168ca:	2300      	movs	r3, #0
+  4168cc:	466a      	mov	r2, sp
+  4168ce:	0029      	movs	r1, r5
+  4168d0:	0030      	movs	r0, r6
+  4168d2:	f003 fba7 	bl	0x41a024
+  4168d6:	2801      	cmp	r0, #1
+  4168d8:	d002      	beq.n	0x4168e0
+  4168da:	f07f 0702 	mvns.w	r7, #2
+  4168de:	e01d      	b.n	0x41691c
+  4168e0:	9800      	ldr	r0, [sp, #0]
+  4168e2:	2800      	cmp	r0, #0
+  4168e4:	d003      	beq.n	0x4168ee
+  4168e6:	f05f 5080 	movs.w	r0, #268435456	@ 0x10000000
+  4168ea:	492c      	ldr	r1, [pc, #176]	@ (0x41699c)
+  4168ec:	6008      	str	r0, [r1, #0]
+  4168ee:	e015      	b.n	0x41691c
+  4168f0:	2e00      	cmp	r6, #0
+  4168f2:	d001      	beq.n	0x4168f8
+  4168f4:	2d00      	cmp	r5, #0
+  4168f6:	d102      	bne.n	0x4168fe
+  4168f8:	f07f 0703 	mvns.w	r7, #3
+  4168fc:	e00e      	b.n	0x41691c
+  4168fe:	2300      	movs	r3, #0
+  416900:	0022      	movs	r2, r4
+  416902:	0029      	movs	r1, r5
+  416904:	0030      	movs	r0, r6
+  416906:	f003 fadb 	bl	0x419ec0
+  41690a:	2801      	cmp	r0, #1
+  41690c:	d006      	beq.n	0x41691c
+  41690e:	2c00      	cmp	r4, #0
+  416910:	d002      	beq.n	0x416918
+  416912:	f07f 0701 	mvns.w	r7, #1
+  416916:	e001      	b.n	0x41691c
+  416918:	f07f 0702 	mvns.w	r7, #2
+  41691c:	0038      	movs	r0, r7
+  41691e:	bdf2      	pop	{r1, r4, r5, r6, r7, pc}
+  416920:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+  416922:	0006      	movs	r6, r0
+  416924:	000d      	movs	r5, r1
+  416926:	001c      	movs	r4, r3
+  416928:	2700      	movs	r7, #0
+  41692a:	f7ff fb7e 	bl	0x41602a
+  41692e:	2800      	cmp	r0, #0
+  416930:	d01c      	beq.n	0x41696c
+  416932:	2e00      	cmp	r6, #0
+  416934:	d003      	beq.n	0x41693e
+  416936:	2d00      	cmp	r5, #0
+  416938:	d001      	beq.n	0x41693e
+  41693a:	2c00      	cmp	r4, #0
+  41693c:	d002      	beq.n	0x416944
+  41693e:	f07f 0703 	mvns.w	r7, #3
+  416942:	e028      	b.n	0x416996
+  416944:	2000      	movs	r0, #0
+  416946:	9000      	str	r0, [sp, #0]
+  416948:	466a      	mov	r2, sp
+  41694a:	0029      	movs	r1, r5
+  41694c:	0030      	movs	r0, r6
+  41694e:	f003 fd2f 	bl	0x41a3b0
+  416952:	2801      	cmp	r0, #1
+  416954:	d002      	beq.n	0x41695c
+  416956:	f07f 0702 	mvns.w	r7, #2
+  41695a:	e01c      	b.n	0x416996
+  41695c:	9800      	ldr	r0, [sp, #0]
+  41695e:	2800      	cmp	r0, #0
+  416960:	d003      	beq.n	0x41696a
+  416962:	f05f 5080 	movs.w	r0, #268435456	@ 0x10000000
+  416966:	490d      	ldr	r1, [pc, #52]	@ (0x41699c)
+  416968:	6008      	str	r0, [r1, #0]
+  41696a:	e014      	b.n	0x416996
+  41696c:	2e00      	cmp	r6, #0
+  41696e:	d001      	beq.n	0x416974
+  416970:	2d00      	cmp	r5, #0
+  416972:	d102      	bne.n	0x41697a
+  416974:	f07f 0703 	mvns.w	r7, #3
+  416978:	e00d      	b.n	0x416996
+  41697a:	0022      	movs	r2, r4
+  41697c:	0029      	movs	r1, r5
+  41697e:	0030      	movs	r0, r6
+  416980:	f003 fbc8 	bl	0x41a114
+  416984:	2801      	cmp	r0, #1
+  416986:	d006      	beq.n	0x416996
+  416988:	2c00      	cmp	r4, #0
+  41698a:	d002      	beq.n	0x416992
+  41698c:	f07f 0701 	mvns.w	r7, #1
+  416990:	e001      	b.n	0x416996
+  416992:	f07f 0702 	mvns.w	r7, #2
+  416996:	0038      	movs	r0, r7
+  416998:	bdf2      	pop	{r1, r4, r5, r6, r7, pc}

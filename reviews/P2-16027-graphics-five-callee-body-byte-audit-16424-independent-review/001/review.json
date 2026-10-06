@@ -1,0 +1,16 @@
+{
+  "task_id": "P2-16027",
+  "accepted": false,
+  "status": "partial",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/graphics-five-callee-body-byte-audit-16424/001",
+  "candidate_receipt_sha256": "0fbe92ee6ebaff3627feac3316b2089dd67de9f22fe7a3949a10b5ed0f3523fb",
+  "candidate_results_sha256": "f887679d0fb31f28716d5742cb5055fdca23d27a0caa0af631d89d5180f19891",
+  "candidate_replay_sha256": "b692de1b966ef4a3042a7210e4fd4658f2439c60f5371d6f39da0a5fe5b0e3dd",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_results_sha256": "f887679d0fb31f28716d5742cb5055fdca23d27a0caa0af631d89d5180f19891",
+  "review": "Fresh audit replays five discontiguous raw function ranges and exact selected-map tilings: 1,230 instruction bytes plus 143 TBB data bytes and one separately excluded byte. No envelope denominator or global completeness claim.",
+  "limitations": [
+    "Local audit/reconciliation only; it does not establish semantic completeness, global ownership, admission, or review-binding closure.",
+    "No C, canonical changes, or gates."
+  ]
+}

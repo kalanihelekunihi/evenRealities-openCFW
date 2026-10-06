@@ -1,0 +1,26 @@
+{
+  "task_id": "P2-15911",
+  "accepted": false,
+  "status": "partial",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_outputs": [
+    "fresh/summary.json",
+    "fresh/failures.jsonl"
+  ],
+  "inputs": [
+    {
+      "path": "analysis/arm-raw-corpus-candidate-index-16308/001/candidates.jsonl",
+      "sha256": "b2b52d26edfad3da5a94e591b8daba942996c88cd9c6eb2b84d16cc7be6a986c"
+    },
+    {
+      "path": "analysis/campaign-instruction-candidate-ownership-16306/001/intervals.jsonl",
+      "sha256": "0fbf1ea7f6b3df89fb4f369c19fda11bbfa894e736f9e4048b7d2347007f28dc"
+    }
+  ],
+  "review": "Fresh cross-check reproduces 432 raw decompiler-failure candidates: 378 main-flash and 54 bootloader. It compares each discontiguous body range against the 16306 candidate-byte partitions without double-counting ranges. 121 candidates have candidate-map evidence over every body byte; 311 have no mapped candidate bytes. The byte totals reconcile within each discovered body range, and saved source-index/partition hashes match.",
+  "limitations": [
+    "121 means byte-mapped only, not semantically recovered.",
+    "Raw function discovery is not a whole-firmware semantic denominator; body extents may be incomplete or overlap data/shared tails.",
+    "No candidates were admitted or discarded, and no C/gate status changes."
+  ]
+}

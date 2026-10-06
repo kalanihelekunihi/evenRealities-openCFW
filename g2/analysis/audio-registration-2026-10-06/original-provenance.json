@@ -1,0 +1,63 @@
+{
+  "firmware": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+  "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "header_bytes": 32,
+  "load_address": "0x438000",
+  "architecture": "Thumb2 little endian M-class",
+  "spans": [
+    {
+      "name": "register",
+      "start": "0x57ab78",
+      "end": "0x57acd0",
+      "sha256": "09ea2ab75a6e9f9abea6a66acac8f3c97f7fab136cafb0c59a90419f8f3ab568"
+    },
+    {
+      "name": "unregister",
+      "start": "0x57acd0",
+      "end": "0x57adf8",
+      "sha256": "4a3f9c70b094e63095691ff42147a67a9cd2b6dca66318f9ca98e8da0c7fa247"
+    },
+    {
+      "name": "logger_flags",
+      "start": "0x43d0ce",
+      "end": "0x43d0d4",
+      "sha256": "67a7f1251b188a6b8e0f3c03b6f0c6141f47f1eb600a68648867c25253c712d5"
+    },
+    {
+      "name": "memset",
+      "start": "0x43c0e4",
+      "end": "0x43c14a",
+      "sha256": "34da1a99d5cb56ca41cfaff98190ced2a7767f53cd95c53c504009566e9ca10a"
+    },
+    {
+      "name": "production_codec_init",
+      "start": "0x58f69a",
+      "end": "0x58f74a",
+      "sha256": "5764f11e9470316f6124b9c3b5378eb5134d991d211f04755196ff912ec41d17"
+    },
+    {
+      "name": "production_pdm_init",
+      "start": "0x58f7b0",
+      "end": "0x58f806",
+      "sha256": "bccdd93729934693a809517948524ee58ff50f934173c2566b197312f3cc4f81"
+    },
+    {
+      "name": "codec_callback_two_config",
+      "start": "0x58f4e4",
+      "end": "0x58f5e0",
+      "sha256": "d9ac93e7d3e05cfb1e71dc2c448525a13a09db4c4988e65d31a0d962b353816e"
+    },
+    {
+      "name": "codec_pdm_callback",
+      "start": "0x58f5e0",
+      "end": "0x58f69a",
+      "sha256": "230223bc654b492e869493063f7d413252ad9b1e61cbf96c7a707e2c1419e665"
+    },
+    {
+      "name": "diagnostic_sink",
+      "start": "0x57b1f4",
+      "end": "0x57b312",
+      "sha256": "9bb7475e5c06ef387ee1e5db84b2d899c8254d578c1eae96f7a1d49272387a74"
+    }
+  ]
+}

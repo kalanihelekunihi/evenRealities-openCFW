@@ -1,0 +1,52 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpcpw9m9eh/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+004b06c0 <.text>:
+  4b06c0:	e92d 41f0 	stmdb	sp!, {r4, r5, r6, r7, r8, lr}
+  4b06c4:	0004      	movs	r4, r0
+  4b06c6:	000e      	movs	r6, r1
+  4b06c8:	0017      	movs	r7, r2
+  4b06ca:	4698      	mov	r8, r3
+  4b06cc:	2c00      	cmp	r4, #0
+  4b06ce:	d102      	bne.n	4b06d6 <.text+0x16>
+  4b06d0:	f017 f923 	bl	4c791a <.text+0x1725a>
+  4b06d4:	0004      	movs	r4, r0
+  4b06d6:	9807      	ldr	r0, [sp, #28]
+  4b06d8:	f99d 5018 	ldrsb.w	r5, [sp, #24]
+  4b06dc:	b2c0      	uxtb	r0, r0
+  4b06de:	2800      	cmp	r0, #0
+  4b06e0:	d114      	bne.n	4b070c <.text+0x4c>
+  4b06e2:	6d20      	ldr	r0, [r4, #80]	@ 0x50
+  4b06e4:	4286      	cmp	r6, r0
+  4b06e6:	d111      	bne.n	4b070c <.text+0x4c>
+  4b06e8:	0038      	movs	r0, r7
+  4b06ea:	f994 1054 	ldrsb.w	r1, [r4, #84]	@ 0x54
+  4b06ee:	b240      	sxtb	r0, r0
+  4b06f0:	4288      	cmp	r0, r1
+  4b06f2:	d10b      	bne.n	4b070c <.text+0x4c>
+  4b06f4:	4640      	mov	r0, r8
+  4b06f6:	f994 1055 	ldrsb.w	r1, [r4, #85]	@ 0x55
+  4b06fa:	b240      	sxtb	r0, r0
+  4b06fc:	4288      	cmp	r0, r1
+  4b06fe:	d105      	bne.n	4b070c <.text+0x4c>
+  4b0700:	0028      	movs	r0, r5
+  4b0702:	f994 1056 	ldrsb.w	r1, [r4, #86]	@ 0x56
+  4b0706:	b240      	sxtb	r0, r0
+  4b0708:	4288      	cmp	r0, r1
+  4b070a:	d00f      	beq.n	4b072c <.text+0x6c>
+  4b070c:	002b      	movs	r3, r5
+  4b070e:	b25b      	sxtb	r3, r3
+  4b0710:	4642      	mov	r2, r8
+  4b0712:	b252      	sxtb	r2, r2
+  4b0714:	0039      	movs	r1, r7
+  4b0716:	b249      	sxtb	r1, r1
+  4b0718:	0030      	movs	r0, r6
+  4b071a:	f063 f903 	bl	513924 <.text+0x63264>
+  4b071e:	6526      	str	r6, [r4, #80]	@ 0x50
+  4b0720:	f884 7054 	strb.w	r7, [r4, #84]	@ 0x54
+  4b0724:	f884 8055 	strb.w	r8, [r4, #85]	@ 0x55
+  4b0728:	f884 5056 	strb.w	r5, [r4, #86]	@ 0x56
+  4b072c:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}

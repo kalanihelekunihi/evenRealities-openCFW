@@ -1,0 +1,120 @@
+{
+  "status": "PASS",
+  "cases": 10,
+  "cases_detail": [
+    {
+      "instance": 0,
+      "operation": 0,
+      "prior": 0,
+      "config": 3,
+      "selected_pins": [
+        5,
+        7,
+        6,
+        50
+      ],
+      "mmio_writes": 12,
+      "matched": true
+    },
+    {
+      "instance": 0,
+      "operation": 1,
+      "prior": 1,
+      "config": 3,
+      "selected_pins": [
+        5,
+        6
+      ],
+      "mmio_writes": 6,
+      "matched": true
+    },
+    {
+      "instance": 0,
+      "operation": 4,
+      "prior": 0,
+      "config": 3,
+      "selected_pins": [
+        8,
+        10,
+        9,
+        51
+      ],
+      "mmio_writes": 12,
+      "matched": true
+    },
+    {
+      "instance": 0,
+      "operation": 5,
+      "prior": 1,
+      "config": 3,
+      "selected_pins": [
+        8,
+        9
+      ],
+      "mmio_writes": 6,
+      "matched": true
+    },
+    {
+      "instance": 1,
+      "operation": 7,
+      "prior": 0,
+      "config": 3,
+      "selected_pins": [],
+      "mmio_writes": 0,
+      "matched": true
+    },
+    {
+      "instance": 6,
+      "operation": 258,
+      "prior": 1,
+      "config": 3,
+      "selected_pins": [],
+      "mmio_writes": 0,
+      "matched": true
+    },
+    {
+      "instance": 8,
+      "operation": 0,
+      "prior": 0,
+      "config": 3,
+      "selected_pins": [],
+      "mmio_writes": 0,
+      "matched": true
+    },
+    {
+      "instance": 0,
+      "operation": 4294967295,
+      "prior": 1,
+      "config": 3,
+      "selected_pins": [],
+      "mmio_writes": 0,
+      "matched": true
+    },
+    {
+      "instance": 0,
+      "operation": 0,
+      "prior": 0,
+      "config": 7168,
+      "selected_pins": [
+        5,
+        7,
+        6,
+        50
+      ],
+      "mmio_writes": 9,
+      "matched": true
+    },
+    {
+      "instance": 6,
+      "operation": 2,
+      "prior": 0,
+      "config": 4294967295,
+      "selected_pins": [],
+      "mmio_writes": 0,
+      "matched": true
+    }
+  ],
+  "elf_sha256": "83e0709aaf877e476a2c371761b510668fda5f7e01b292e6bf2818d220b936ad",
+  "verifier_sha256": "9ce6d31fb891817ff1951298fe8deb9208fbecffb57a04a567abfa44a3552276",
+  "scope_note": "Undefined R0 from void dispatcher excluded; ordered calls, MMIO, complete GPIO state and PRIMASK compared."
+}

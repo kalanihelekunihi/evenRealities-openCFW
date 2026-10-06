@@ -1,0 +1,19 @@
+{
+  "task_id": "P2-15983",
+  "accepted": false,
+  "status": "partial",
+  "source_packet": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-mode-state-wrapper-16380-map/001",
+  "fresh_replay": "fresh-replay.py",
+  "input_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "range": [
+    "0x4b0748",
+    "0x4b075e"
+  ],
+  "instruction_bytes": 22,
+  "source_receipt_sha256": "630dcb8561ae86b83170303a26277fea1a90e8e506dc2cab81619ccf5742abe5",
+  "review": "Pushes R5-R7/LR, overwrites saved R5/R6 slots with FFFFFFFF and zero, calls 4B06C0 with entry R0/R1 and synthesized R2=0/R3=1, then pops those stack words into R0/R1/R2 and saved LR into PC. Child R0 is discarded; R2 comes from preserved saved R7 slot.",
+  "limitations": [
+    "Fresh original-byte decode replay passes; pseudocode ordering, branch conditions, and stack/register aliases were checked against disassembly.",
+    "External children and global object contracts remain unresolved; fault, alias, concurrency, and physical behavior are not qualified. No admission, gate, or source change."
+  ]
+}

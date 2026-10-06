@@ -1,0 +1,18 @@
+{
+  "task_id": "P2-15907",
+  "accepted": false,
+  "status": "partial",
+  "fresh_replay": "verification.stdout.txt; executed source verify.py read-only with approved Python runtime",
+  "fresh_outputs": [
+    "verification.stdout.txt",
+    "source-hashes.json"
+  ],
+  "locked_image_sha256": "0de6e945a56ec886a92e44d4eaefe02fbca6db11f8747876e30bffb45cffce03",
+  "locked_payload_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+  "review": "The pinned read-only verifier passes all 129 input pins and 557 instruction-byte bindings across 22 candidate files. It confirms the record-3 payload/image mapping, loaded-address mapping, exact byte transforms (129 as-recorded rows and 428 per-halfword-swapped rows), 1,732 candidate bytes, 1,698 unique image bytes, and 34 multiply represented bytes. All candidate instruction and pseudocode hashes are checked; the ledger preserves four current-function overlap observations, missing body/record mismatches, and existing review-reference decisions rather than normalizing them.",
+  "limitations": [
+    "This is byte reconciliation only, not independent ARC ISA decode, delay-slot/LIMM validation, ABI recovery, or hardware execution.",
+    "Shared tails, candidate ownership/function completeness, conditional image mapping, and external behavior remain unresolved. A REVISE direct review stays REVISE; no candidate is promoted.",
+    "No canonical admission, coverage gate, or C implementation change."
+  ]
+}

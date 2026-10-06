@@ -1,0 +1,18 @@
+{
+  "task_id": "P2-16009",
+  "accepted": false,
+  "status": "partial",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-alpha-command-tail-16406-map/001",
+  "candidate_receipt_sha256": "3df171c488f23d8e292b3bdac95b9b2bc583e6e6fd180a7e2dd6dd84a8c92c6b",
+  "candidate_instructions_sha256": "5d698f3d6b762b2d639e56f7b7a2145b0048045a91fd21348fc83f0273c3f26c",
+  "candidate_pseudocode_sha256": "a7ce3b7b50f473b33e93df325c6c960f4ae8d978ea8a22f3a559e6dc55b9f781",
+  "candidate_replay_sha256": "a6672f457865b055d15674243dc7b64b4254fc1abdf79869255c6c32476043e2",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_replay_stdout": "PASS 10",
+  "source_image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "review": "Tail adapter loads/stores/return alias match bytes; no child meaning inferred.",
+  "limitations": [
+    "Scoped byte/pseudocode review only; child behavior, complete ownership/function closure, runtime fault behavior and external or physical effects remain unqualified.",
+    "No canonical admission, C implementation, coverage promotion or gate change."
+  ]
+}

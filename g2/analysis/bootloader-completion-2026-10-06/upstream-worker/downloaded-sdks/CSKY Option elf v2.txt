@@ -1,0 +1,65 @@
+﻿CSKY体系结构编译器选项描述：
+  --mcache                 指定目标使用高速缓存预取指令
+  -march=                  指定目标的架构名称，包括ck801/ck802/ck803/ck807/ck810(默认为ck810)
+  -mbacktrace              指定目标生成backtrace信息（注：只有目标中携带有backtrace信息，才能使用backtrace的功能）
+  -mbig-endian             指定编译生成大端代码，与之对应的是-mlittle-endian
+  -mccrt                   指定目标使用Csky高性能运行时库
+  -mconstpool              由编译器往代码区动态插入常量池(默认,只适用于CK802/CK801)
+  -mcp                     指定目标使用协处理器指令
+  -mcpu=                   指定目标程序的CPU型号，包括ck801[t]/ck802[jt]/ck803[efht][r1]/ck807[f]/ck810[ftv](默认为 ck810)。编译器会根据该选项，自动选择相应的指令，生成目标程序
+  -mdiv                    指定目标使用除法指令，默认开启，可以使用-mno-div控制编译器不生成除法指令
+  -mdouble-float           指定目标使用 Csky FPU Version-2 双精度浮点指令，编译器在该选项和-mfloat-abi=softfp/hard同时添加的情况下，才使用FPUV2的双精度浮点指令
+  -mdsp                    指定目标使用 Csky DSP 指令
+  -medsp                   指定目标支持 Csky DSP V2.0指令（只适用于CK803）
+  -melrw                   指定目标使用扩展的lrw指令
+  -mfdivdu                 指定目标使用 frecipd/fsqrtd/fdivd指令（前提目标带有硬件浮点单元）
+  -mfloat-abi=             指定目标是否使用硬浮点指令和使用的浮点abi，包括soft（不使用硬浮点指令，-msoft-float是它的别名）、softfp（使用硬浮点指令，但用普通寄存器传递浮点类型的参数和返回值）、hard（使用硬浮点指令，并用浮点寄存器传递浮点类型的参数和返回值，-mhard-float是它的别名）
+  -mhigh-registers         指定目标使用高16寄存器 R16-R31，在CK810中默认开启，可以通过-mno-high-registers控制编译器不使用高16寄存器生成指令
+  -mistack                 开启中断服务程序属性(isr/interrupt)的识别，并为带有该属性的函数生成中断现场保护代码及恢复代码，该选项默认关闭，目前只对ck801/ck802/ck803有效
+  -mlittle-endian          指定编译生成小端代码，默认开启。与之对应的是-mbig-endian
+  -mloop-induction-speedup 指定编译器循环时归纳变量，用于提升性能，Os时默认关闭
+  -mmp                     指定目标使用多处理器指令
+  -mmultiple-stld          指定目标生成stm/ldm指令, 默认关闭，对应的选项为-mno-multiple-stld
+  -mpieces-move-speedup    指定编译器展开操作长度比较短的内存拷贝等builtin函数，用于提升性能，Os时默认关闭
+  -mpushpop                指令目标生成 push/pop 指令，默认开启。也可以通过-mno-pushpop选项控制编译器不生成pushpop指令
+  -msmall-pieces-flod      指定编译器展开短builtin函数，用于提升性能，Os时默认关闭
+  -mtrust                  指定目标支持安全模块指令
+  -mwide-bitfields         指定目标将位域设定为int型
+  -mspill-regs             指定目标使用寄存器保存溢出到内存的数据
+  -mrequired-attr-fpu-abi  指定目标自动设置浮点abi属性
+  -mrequired-printf        指定系统库printf函数族优化
+
+
+CSKY体系结构汇编器选项描述:
+  -mlittle-endian             指定编译生成小端代码，默认开启
+  -mbig-endian                指定编译生成大端代码
+  -m{no-}ljump                开启jbf,jbt,jbr转化为jmpi的功能，但是会导致汇编器估算距离的误差变大，可能导致代码密度下降
+  -m{no-}force2bsr            开启强制转化jbsr伪指令为bsr指令的功能，用于优化执行速度。该选项优先级高于jsri2bsr (默认开启）
+  -m{no-}jsri2bsr             开启jsri到bsr的转换优化（默认开启）
+  -m{no-}literals-after-func  开启汇编器强制在每个函数之后输出常量池
+  -m{no-}laf                  -mliterals-after-func选项的别名
+  -m{no-}elrw                 开启增强的lrw指令和16位的btesti指令
+  -m{no-}literals-after-br    开启汇编器强制在每个br指令之后输出常量池
+  -m{no-}labr                 -mliterals-after-br的选项的别名
+  -mmp                        指定目标支持多处理器指令
+  -mcp                        指定目标支持协处理器指令
+  -mdsp                       指定目标支持CSKY DSP 指令
+  -mcache                     指定目标支持高速缓存预取指令
+  -mtrust                     指定目标支持安全模块指令
+  -medsp                      指定目标支持 Csky DSP V2.0指令（只适用于CK803）
+  -mvdsp                      指定目标支持 Csky VDSP 指令
+  -m{no-}istack               指定目标支持中断嵌套指令，该选项在ck801、802、803下默认开启，在ck807、ck810下默认关闭
+  -mcpu=[ck810 ...]           设定 CPU 型号, ck801[t]/ck802[jt]/ck803[efht][r1]/ck807[f]/ck810[ftv](默认为 ck810)
+  -march=[ck810 ...]          指定目标架构 ck801/ck802/ck803/ck807/ck810 (默认为 ck810)
+
+
+CSKY体系结构链接器选项描述:
+  --ckmap=                    打印内存映射到指定文件，映射包括映像中每个加载区、执行区和输入节的地址和大小
+  --callgraph                 创建包含函数静态调用图的文件
+  --callgraph_file=           控制调用图的输出文件名，缺省的文件名为链接的映像的文件名加上与输出格式相对应的后缀名
+  --callgraph_output=         控制调用图的输出格式，可以设置为html和text两种格式，缺省为html格式
+  --{no-}branch-stub          开启通过跳板扩展目标地址超出限制的函数跳转指令的功能，默认开启
+  --stub-group-size=N         设置共享一个储存跳板section的输入section组的最大长度(单位byte)。负数表示跳板section只能位于输入section组的前方（输入section组的长度和最大为-N），正数表示输入section组中的输入段可以在跳板section的前方和后方。+/-1表示选择链接器默认值。默认值为66977792bytes，bsr指令的跳转范围为+/-64MB，即为“跳板”的section预留了128kb的空间。
+  --any_contingency=N         阻止链接器将具有.ANY语法的region填充至它的最大值。该选项只在--any_sort_order=cmdline时才有效，表示要预留region的N%的空间，用于存储链接时产生的代码，默认值为2
+  --any_sort_order=[cmdline|descending_size]
+                              指定.ANY语句所筛选section的分配顺序，默认为descending_size

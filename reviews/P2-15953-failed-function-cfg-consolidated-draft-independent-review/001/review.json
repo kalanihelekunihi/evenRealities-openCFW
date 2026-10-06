@@ -1,0 +1,18 @@
+{
+  "task_id": "P2-15953",
+  "accepted": false,
+  "status": "partial",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_outputs": [
+    "fresh/results.json",
+    "fresh/input-pins.json",
+    "fresh/pseudocode-draft.md"
+  ],
+  "locked_image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "review": "Fresh static CFG replay passes across the 2,446-byte metadata envelope: 959 unique instruction rows, 106 direct-call sites to 30 unique children, all encoded branch targets landing on one of the selected instruction starts, and one saved-context return. Each child fallthrough is recorded as conditional on that child returning. The replay binds the raw Ghidra candidate metadata and each selected packet instruction/pseudocode input hash, then concatenates packet prose without promoting its status.",
+  "limitations": [
+    "This verifies static direct-edge consistency, not path feasibility, alternate-entry absence, child-return behavior, or semantic completeness.",
+    "The architecture fault/self-loop path at 0x5401B2 is preserved; the Ghidra memory-range failure cause is not established.",
+    "Raw candidate function bounds are not independently proven. No admission, implementation, or gate change."
+  ]
+}

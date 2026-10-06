@@ -1,0 +1,5 @@
+# Reconstructed source and recovered data
+
+Firmware: `g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin`, SHA-256 36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863, strip32-byte container header, load438000. Lookup47ef18..47ef38; literal47f944 selects immutable data6becb0..6beed0 (34 records,16 bytes each). Exact original16-byte copy path439c04..439c42 executes during comparison. Caller55ca72..55ca78 selects the byte-truncated module+3 domain and invokes47f7ae; verified consumer cut47f7be immediately follows its lookup call.
+
+C bodies and types are MIT-licensed reconstructions, not SDK-attributed source. The table is expressed as interpreted register/mask records; no executable blob or opcode array is embedded. The consumer helper's ABI is intentionally bounded and does not claim the original physical provider's full behavior. Exact span/table/ELF/source hashes and independent review are recorded in the analysis packet. Source completeness and byte-identical bundle rebuilding remain separate and unproven.

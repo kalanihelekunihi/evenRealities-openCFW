@@ -1,0 +1,19 @@
+{
+  "task_id": "P2-15987",
+  "accepted": false,
+  "status": "partial",
+  "source_packet": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-explicit-viewport-command-pair-16384-map/001",
+  "fresh_replay": "fresh-replay.py",
+  "input_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "range": [
+    "0x4b1516",
+    "0x4b1548"
+  ],
+  "instruction_bytes": 50,
+  "source_receipt_sha256": "72a362a60153a8b847b6d6637c24bed889cd0197d5adc44837abed1a674707a3",
+  "review": "Computes wrapped end X/Y before clipping negative start X/Y to zero, packs low16 start coordinates, calls command 272, then packs the precomputed end coordinates low16 and tail-branches command 276 after restoring local frame. First child result is discarded.",
+  "limitations": [
+    "Fresh original-byte decode replay passes; pseudocode ordering, branch conditions, and stack/register aliases were checked against disassembly.",
+    "External children and global object contracts remain unresolved; fault, alias, concurrency, and physical behavior are not qualified. No admission, gate, or source change."
+  ]
+}

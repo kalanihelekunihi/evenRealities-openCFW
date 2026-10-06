@@ -1,0 +1,15 @@
+{
+  "task_id": "P2-15895",
+  "accepted": false,
+  "status": "partial",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_outputs": [
+    "fresh/results.json"
+  ],
+  "review": "The intended older validator exists at candidate-function-ledger-validator-16298/001. Fresh replay reproduces its diagnostic results over revision-001 queue and clock ledgers: 20 function records verified and 18 targeted mutation cases rejected (nine per ledger). It validates image identity/hash, stable entry IDs, single-range image mapping, source bytes, instruction and pseudocode hashes, instruction tiling and direct calls, duplicate IDs, non-overlap, and accepted:false draft status.",
+  "limitations": [
+    "This is a byte/evidence validator for a narrow Apollo-main Thumb schema, not semantic or architectural verification.",
+    "It does not bind reviews or establish image-wide coverage/admission; newer target/path-bound 16302 validator is a separate later snapshot.",
+    "No C or freeze gate changes."
+  ]
+}

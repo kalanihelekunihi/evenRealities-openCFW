@@ -1,0 +1,18 @@
+{
+  "task_id": "P2-16007",
+  "accepted": false,
+  "status": "partial",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-alpha-conditional-command-16404-map/001",
+  "candidate_receipt_sha256": "862587254aa3fa1fb009b3f6a2154436e0da3908376b66523f1850a0825fcc01",
+  "candidate_instructions_sha256": "76d8923ebd46a7d2636d6f904b20f9ab89920a6d3943fe6bb4f345117c41ce33",
+  "candidate_pseudocode_sha256": "3585b741ea019d2a1c604057432c678c3635480ed6d50cb18825f3dc98522f9f",
+  "candidate_replay_sha256": "7cee001116a967cd60659302a0e5e461666dab819fc1ff5142073771c3828038",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_replay_stdout": "PASS 30",
+  "source_image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "review": "Conditional alpha command path and shared return sequence match decode; child effects unresolved.",
+  "limitations": [
+    "Scoped byte/pseudocode review only; child behavior, complete ownership/function closure, runtime fault behavior and external or physical effects remain unqualified.",
+    "No canonical admission, C implementation, coverage promotion or gate change."
+  ]
+}

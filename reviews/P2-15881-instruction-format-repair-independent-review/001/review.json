@@ -1,0 +1,12 @@
+{
+  "task_id": "P2-15881",
+  "accepted": false,
+  "status": "partial",
+  "input_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "fresh_replay_outputs": "fresh/map-1 through fresh/map-4",
+  "review": "All four new format-repair map replays were rerun in isolated directories. Their fresh instructions.json files exactly match the saved format-repair outputs, and each decoded instruction byte sequence matches the pinned Apollo-main flash. Block lengths equal the sum of instruction lengths. Original prose in each malformed original instructions.json was preserved byte-for-byte as the new pseudocode.md. The four recovered spans total 588 bytes: 68, 96, 252 across four ranges, and 172 bytes.",
+  "limitations": [
+    "This verifies format recovery, source-byte correspondence, and prose preservation only; it does not admit semantics or make the old/new ranges canonical.",
+    "Original 001 evidence remains unchanged; no C, freeze, or gate changes."
+  ]
+}

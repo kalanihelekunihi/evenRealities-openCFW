@@ -1,0 +1,33 @@
+{
+  "target": "make -C g2 power-domain-simulator",
+  "compiler_profile": "clang Cortex-M4 Thumb2 soft-float freestanding C11 O2 fwrapv; isolated simulator linker map, not stock link map",
+  "bindings": {
+    "g2/components/foundation/power_domain/power_domain.h": "a47aaa61e248c78bd52ec2bc8ee74a5f3504eacf4f290989251eda13207e8057",
+    "g2/components/foundation/power_domain/power_domain.c": "29333d2ac5740f0b9e6657a387c23641b0361c441b0628df16aee25171b794c7",
+    "g2/components/foundation/power_domain/verify.py": "514cada1fee96cdcc72ce60a3306887cafe5e0ce13386277673d7fb8f25340ce",
+    "g2/Makefile": "bd03b6448379c2465123be51c24200f3d8c73d29424394e6c7809ebc06f5457c",
+    "g2/build/foundation/power-domain-simulator/domain.o": "75c27942a5c66bc9113e515fac1978e0ccf39cca3f1325d272c73f376b9d9cd0",
+    "g2/build/foundation/power-domain-simulator/power_domain.elf": "c64c4c8eb0e1f4c73f64d071bd126b7577977beef6ce27d5cd8b052d4bd36e4f"
+  },
+  "comparison": {
+    "path": "g2/build/foundation/power-domain-simulator/comparison.json",
+    "sha256": "1d259b504f16de2e635dccc998b150ae37295ddca27e482aef712c9f63dba31a",
+    "status": "PASS",
+    "cases": 246
+  },
+  "undefined_symbols": "",
+  "production_byte_match": false,
+  "additional_evidence_bindings": {
+    "g2/analysis/power-domain-descriptor-2026-10-06/review/review.json": "9115eb4918ef49f241c1a11c45ef3a71b34fe78afbc6be50286a6aac76b35897",
+    "g2/analysis/power-domain-descriptor-2026-10-06/review/report.md": "378f6c23d588ef954d5a32984b8682689df4f7edebee09e1ac59e05c3f9f9381",
+    "g2/analysis/power-domain-descriptor-2026-10-06/review/representative-rerun.json": "59ddd21212baf96a0e48f47ef54fb98ed97b0d4b4f1eea56ea30349ce8ada629",
+    "g2/analysis/power-domain-descriptor-2026-10-06/validation-summary.json": "9713c13e5b170facc2a14dd1170812a2f4395d6be75e7f0c0ac96691cb5d237e",
+    "g2/analysis/power-domain-descriptor-2026-10-06/cumulative-inventory.json": "cbff1da7a378c7edb79ddf78093824bf1980300097d27da6c36fcde63e2d8ade"
+  },
+  "accounting_source_bindings": {
+    "g2/tools/trace_inventory.py": "dbf6f9a04665c2fc5f097f7540ae3918e37f2094016bc21a3df73337c59074a6",
+    "g2/tests/test_trace_inventory.py": "aaaa18cb05d72c9d86fd292e0dd34ba263b994a7ecf319fbfcf0ca516d9ff48c",
+    "g2/analysis/power-domain-descriptor-2026-10-06/reconcile_inventory.py": "baaf405f2290f6c9e3c275596b80a3b7f092b775868bef3813bca060c20d88dd"
+  },
+  "makefile_binding_scope": "Current Makefile snapshot; earlier build commands unchanged by added descriptor target/accounting test. Not an assertion of historical Makefile byte equality."
+}

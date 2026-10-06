@@ -1,0 +1,104 @@
+{
+  "disposition": "pass_bounded_handoff_and_policy_scope",
+  "comparison": {
+    "path": "g2/build/foundation/audio-cache-handoff-simulator/comparison-final-policy.json",
+    "sha256": "15760d05fd73a68b69819a1630ca7f4c5aa53707793e76ac7f32dd5794b2a0b7",
+    "status": "PASS",
+    "original_source_cases": 282,
+    "checked_policy_cases": 1157,
+    "traced_original_bytes": 160
+  },
+  "elf": {
+    "path": "g2/build/foundation/audio-cache-handoff-simulator/handoff.elf",
+    "sha256": "5394cbcf100e37c68871e29808f434b06845ee2b5e058f1b3686e3d2c03cdbac"
+  },
+  "native_spotcheck": {
+    "path": "g2/analysis/audio-cache-handoff-2026-10-06/review/representative-rerun.json",
+    "status": "PASS",
+    "cases": 13,
+    "sha256": "1ec266d4b037c000a48b9a529212b3249325f86905a49aa7893228d1e152b33f"
+  },
+  "stock_boundaries": {
+    "query": "0x590B6C",
+    "getter": "0x57A7E0",
+    "query_low_byte_selection": true,
+    "getter_publishes_after_cache_call": true,
+    "getter_returns_selected_buffer_in_r0": true,
+    "cache_provider_executable_stubs": false
+  },
+  "checked_policy": {
+    "separate_from_stock": true,
+    "rejection_no_cache_activity_or_output_publication": true,
+    "same_output_pointer_rejected_in_final_source": true,
+    "bounds_prove_stock_32_byte_address_block_with_supplied_bounds_only": true
+  },
+  "accounting": {
+    "prior_total": 6732,
+    "new_disjoint_bytes": 84,
+    "overlap_bytes": 76,
+    "result": {
+      "touch": 234,
+      "apollo_main": 6582,
+      "total": 6816
+    },
+    "inventory_sha256": "aa8c66a5cf84ee74081dca752f2e63b4b4d9c04b0a68cc442b734b35b01a5eba",
+    "trace_inventory_tests": "4 passed"
+  },
+  "excluded_evidence": {
+    "oversized_prefix_cases": 12,
+    "status": "prefix-only execution-budget diagnostics; no completed-path coverage"
+  },
+  "limits": [
+    "Borrowed pointer only; no PCM copy or exclusive DMA ownership proof.",
+    "Synthetic state mutation is not hardware/interruption evidence.",
+    "Physical cache effects/coherency, allocation lifetime, and real device geometry remain unproven.",
+    "Large positive length executions did not complete and are not counted.",
+    "ROM40 and optimized tick blockers are separate and unchanged."
+  ],
+  "hash_bindings": {
+    "g2/components/foundation/audio_cache_handoff/handoff.c": "ffbdf9c36d9e8bb3e209f900a5eaa383665fadb47029da6d0e2e81583936b323",
+    "g2/components/foundation/audio_cache_handoff/handoff.h": "b93f87f5ea7ef8f92f98393b5db24c4cb0d78f49eeee17ae3ed10984fcc5f54f",
+    "g2/components/foundation/audio_cache_handoff/verify.py": "c0d7e61f5da3d6f3926daa0fea48fce21ae8a738c61a9bdd604e88e9fec2645c",
+    "g2/components/foundation/cache_maintenance/cache_maintenance.c": "365496e8fc154d0b604e292ab96272f6871106a705ac7a5439a67271f6961d03",
+    "g2/components/foundation/cache_maintenance/cache_maintenance.h": "64c437f8de20c7e0c7e4ce21a8cff58a8afecf0a46950b17dd260783e9f12c11",
+    "g2/components/foundation/cache_maintenance/verify.py": "448b9510a7c30607d45ce3919f45ecee304b1ecec202f067c04229020ab41198",
+    "g2/build/foundation/audio-cache-handoff-simulator/handoff.elf": "5394cbcf100e37c68871e29808f434b06845ee2b5e058f1b3686e3d2c03cdbac",
+    "g2/build/foundation/audio-cache-handoff-simulator/comparison-final-policy.json": "15760d05fd73a68b69819a1630ca7f4c5aa53707793e76ac7f32dd5794b2a0b7",
+    "g2/analysis/audio-cache-handoff-2026-10-06/cumulative-inventory.json": "aa8c66a5cf84ee74081dca752f2e63b4b4d9c04b0a68cc442b734b35b01a5eba",
+    "g2/analysis/audio-cache-handoff-2026-10-06/review/report.md": "ecbc405a7451156b159fb7db9ae89d13c60a5d222a000de9bb1c73b9a98d01b8"
+  },
+  "issues": [],
+  "documentation_closeout": {
+    "status": "PASS",
+    "hash_bindings": {
+      "g2/analysis/audio-cache-handoff-2026-10-06/REPORT.md": "52758bff15dc167dc22429e81d3e071d040a01be31a3f4fcd8caf93bf4bef7be",
+      "g2/analysis/audio-cache-handoff-2026-10-06/pseudocode.md": "d42d6c3790b74ba6f82168dbe697f88341cfb73243a7ebbeb337c8040081e44f",
+      "g2/analysis/audio-cache-handoff-2026-10-06/fixture-diagnostics.md": "8d772134afe6ae35f9f253807f027bda62e152892f3af05cf4dbe9fc91559a67",
+      "g2/analysis/audio-cache-handoff-2026-10-06/original-provenance.json": "d72d79419504acb89a8babd14f52e3cf3be4ca0bedd5b5021f719ad0e01cc3bc",
+      "g2/analysis/audio-cache-handoff-2026-10-06/original-disassembly.txt": "06725ecb36e7eac4de8ba95ba5307d9ad8e9f3f39914447cb60f83737974c6f4",
+      "g2/analysis/audio-cache-handoff-2026-10-06/dependency-classification.json": "5807dad05495de1b8feb793db6febd06fa20b730d6bd1bddec0ce04765101283",
+      "g2/analysis/audio-cache-handoff-2026-10-06/protected-identities.json": "55a93ed7b112df60bfa45f652d165813e62b43aa68dfe4c1ae8913d85439bfbb",
+      "g2/analysis/audio-cache-handoff-2026-10-06/cumulative-inventory.json": "aa8c66a5cf84ee74081dca752f2e63b4b4d9c04b0a68cc442b734b35b01a5eba",
+      "g2/components/foundation/audio_cache_handoff/README.md": "9acd5af2b62f03080fe4076fa9f4a4e1857b7eacf53b22e40fcbf4abe218a41d",
+      "g2/components/foundation/audio_cache_handoff/SOURCE_PROVENANCE.json": "3744b479978443785e21da288314a50d9eed4d1aefedc9bcd3ce9c42f934d4fc",
+      "g2/build/foundation/audio-cache-handoff-simulator/affected-closeout.log": "995aaeccd6e572048c36da639879bf0aeb5a1aa86d5ac8310ebddbf402f2fed8"
+    },
+    "affected_tests_passed": 15,
+    "assertions": [
+      "stock and checked policy remain separate",
+      "huge positive raw inputs are execution-budget prefixes only, not unsupported-input exclusions",
+      "getter pointer is borrowed and ownership/reuse interval unproven",
+      "nonnull pointer validity/alignment are explicit caller preconditions",
+      "next target is static service register rearm ordering, not physical ownership proof"
+    ],
+    "service_order_static": [
+      "compare handle+0x4c with handle+0x40",
+      "select +0x3c if equal else +0x40",
+      "store chosen pointer to handle+0x4c",
+      "write same address to peripheral+0x224",
+      "write length to +0x220",
+      "set enable bit0 at +0x21c",
+      "ISR invokes service before status-bit4 notification"
+    ]
+  }
+}

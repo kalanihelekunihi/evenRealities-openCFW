@@ -1,0 +1,70 @@
+{
+  "comparison": {
+    "path": "g2/build/foundation/audio-cache-handoff-simulator/comparison-final-policy.json",
+    "sha256": "15760d05fd73a68b69819a1630ca7f4c5aa53707793e76ac7f32dd5794b2a0b7",
+    "status": "PASS",
+    "original_source_cases": 282,
+    "checked_policy_cases": 1157,
+    "trace_bytes": 160,
+    "new_disjoint_bytes": 84,
+    "source_manifest_matches_current": true,
+    "elf_matches_current": true,
+    "all_new_body_addresses_verified": true
+  },
+  "independent_review": {
+    "path": "g2/analysis/audio-cache-handoff-2026-10-06/review/review.json",
+    "sha256": "b5c6410f8bf2b0a2ae2cc42e2964b571df3bc9eb7668f8f25b47943f82118a23",
+    "disposition": "pass_bounded_handoff_and_policy_scope",
+    "native_cases": 13,
+    "representative_rerun_sha256": "1ec266d4b037c000a48b9a529212b3249325f86905a49aa7893228d1e152b33f",
+    "report_sha256": "ecbc405a7451156b159fb7db9ae89d13c60a5d222a000de9bb1c73b9a98d01b8",
+    "final_documentation_provenance_review": "PASS; mutable summary/build-packet digests excluded from review to avoid mutual hash cycles"
+  },
+  "aggregate": {
+    "path": "g2/build/foundation/audio-cache-handoff-simulator/aggregate.json",
+    "sha256": "77061acef66ae62a0d6747204d4070fbe653ef523a89333d6729dd57bb1b1093",
+    "modules": 44,
+    "totals": {
+      "tests_run": 228,
+      "passed": 222,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 7,
+      "method_skips": 6,
+      "setup_skips": 1
+    }
+  },
+  "affected": {
+    "path": "g2/build/foundation/audio-cache-handoff-simulator/affected.log",
+    "sha256": "e4a6986298f8b4d485e842ecc496a996c657cf3698ed833e09c7fce9aa9dad82",
+    "passed": 15
+  },
+  "oversized": {
+    "path": "g2/analysis/audio-cache-handoff-2026-10-06/oversized-prefix-results.json",
+    "sha256": "01677c2f7b6bb977d8cf983ca1e05f1412f51335dd2178564af8a146793c0010",
+    "classification": "execution budget",
+    "bounded_prefix_cases": 12,
+    "completed_huge_paths_verified": false,
+    "legitimate_raw_inputs_retained": true,
+    "counts_toward_completed_coverage": false
+  },
+  "inventory": {
+    "path": "g2/analysis/audio-cache-handoff-2026-10-06/cumulative-inventory.json",
+    "sha256": "aa8c66a5cf84ee74081dca752f2e63b4b4d9c04b0a68cc442b734b35b01a5eba",
+    "per_payload": {
+      "touch": 234,
+      "apollo_main": 6582
+    },
+    "total": 6816
+  },
+  "physical_cache_or_dma_verified": false,
+  "exclusive_buffer_ownership_verified": false,
+  "fully_source_complete_payloads": 0,
+  "source_built_byte_identical_bundle": false,
+  "affected_closeout": {
+    "path": "g2/build/foundation/audio-cache-handoff-simulator/affected-closeout.log",
+    "sha256": "995aaeccd6e572048c36da639879bf0aeb5a1aa86d5ac8310ebddbf402f2fed8",
+    "passed": 15,
+    "source_and_verifier_unchanged_since_final_comparison": true
+  }
+}

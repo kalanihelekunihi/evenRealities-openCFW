@@ -114,11 +114,31 @@ Deliberately not pinned:
 
 ## G2 firmware emulator
 
-The project wants
+The historical upstream reference is
 [`PaulMcMillan/g2-firmware-emulator`](https://github.com/PaulMcMillan/g2-firmware-emulator)
 as a submodule for testing, debugging and validating rebuilt images before
 they go on real hardware. As of 2026-09-29 the repository could not be reached
 anonymously: `git ls-remote` asks for credentials, and it is not among the
 owner's public repositories. It is therefore not pinned yet. Once access is
-available, add it as `third-party/tools/g2-firmware-emulator` at a reviewed
-commit and record that commit here.
+available, a submodule can be pinned separately.
+
+As of 2026-10-06, the simulator is available locally at
+`~/Repo/g2-firmware-emulator`; use that checkout for interactive testing and
+verification. Its default `firmware.lock.json` targets 2.2.9.22, while this
+reconstruction campaign locks 2.2.6.10. Select the image-specific historical
+profiles documented in `docs/ota-2.2.6.10-trace-profiles.md` in that checkout
+and retain exact image hashes with each result. Its `AGENTS.md` prohibits all
+buzzer work. Availability of the checkout does not establish a simulator test
+result or firmware equivalence.
+
+## Locally downloaded vendor SDKs and compiler containers
+
+See [downloaded/README.md](downloaded/README.md) for authenticated package
+identities, ignored SDK/toolchain locations, install/check commands, licensing
+status and the container-layout decision. Vendor payloads live in
+`third-party/local-vendor/` and are ignored; setup code and manifests live in
+`third-party/downloaded/`. The Linux IAR Base archive is available through the
+verified official GitHub release, without the unavailable updates-page button.
+One existing Colima engine serves a shared pinned Ubuntu amd64 runtime and a
+separate IAR tool image; C-SKY uses a read-only toolchain mount. Installation
+is separate from activation and firmware byte-identity validation.

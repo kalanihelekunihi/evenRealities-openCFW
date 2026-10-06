@@ -1,0 +1,144 @@
+{
+  "pins_passed": 232,
+  "pins_total": 232,
+  "candidate_records": 43,
+  "receipt_and_code_pseudocode_hash_checks": 129,
+  "failures": [],
+  "manifest_findings": [
+    {
+      "record": "P2-csky-recovery-4056/002:binh_a_stage2_sram",
+      "reason": "attempt receipt points at a different attempt manifest",
+      "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-recovery-4056/001/artifact-manifest.json",
+      "receipt_sha256": "f352105b716946fc47faf1b9a75dd9ec27c8ed9f519a58d05cf9067e16129e44",
+      "resolved_sha256": "d81c8f961d200317743a93deec9f587f0e17bec020a27f2d04be815c1748ab45",
+      "receipt_binding_flag": false
+    }
+  ],
+  "verification_counts": {
+    "by_image": {
+      "binh_a_stage2_sram": 22,
+      "binh_a_stage2_xip": 21
+    },
+    "by_status": {
+      "partial": 20,
+      "ready_for_review": 23
+    },
+    "exact_instruction_hashes_verified": 43,
+    "exact_pseudocode_hashes_verified": 43,
+    "records": 43,
+    "review_binding_state": {
+      "PASS_SCOPED": 2,
+      "named-but-absent": 12,
+      "not-named": 29
+    },
+    "unique_instruction_files": 43,
+    "unique_pseudocode_files": 43
+  },
+  "routes": [
+    {
+      "image_id": "binh_a_stage2_sram",
+      "route_id": "binh-a-sram-normal-nor-read",
+      "source_image": "53860d6974097ad494c6697df52f95b796360131fab63cd8bfd7efc9c5596de8",
+      "source_size": 14716,
+      "transfer_kind": "software_copy",
+      "selection_ast": {
+        "op": "and",
+        "terms": [
+          {
+            "expected": 2,
+            "mask": 15,
+            "op": "masked_eq",
+            "value": {
+              "address": 2684420200,
+              "endianness": "little",
+              "kind": "memory_u32"
+            }
+          },
+          {
+            "left": {
+              "address": 537083900,
+              "endianness": "little",
+              "kind": "memory_u32"
+            },
+            "op": "ne",
+            "right": {
+              "kind": "constant",
+              "value": 2864434397
+            }
+          }
+        ]
+      },
+      "external_premises": [
+        "a_loader_sampled_pmu_base:external_unmeasured",
+        "a_sram_spi_helper_success:external_unverified",
+        "a_stage2_selected:external_unverified"
+      ],
+      "target": {
+        "entry_address": 268580096,
+        "entry_offset": 256,
+        "image_span": [
+          0,
+          14716
+        ],
+        "space": "IRAM",
+        "span": [
+          268579840,
+          268594556
+        ]
+      }
+    },
+    {
+      "image_id": "binh_a_stage2_xip",
+      "route_id": "binh-a-stage2-direct-xip-normal-route",
+      "source_image": "49c9aed0126493220a3e48827c267d5e94f64d51d9ede0ccc3e84b8946744584",
+      "source_size": 36484,
+      "transfer_kind": "direct_xip",
+      "selection_ast": {
+        "op": "and",
+        "terms": [
+          {
+            "expected": 2,
+            "mask": 15,
+            "op": "masked_eq",
+            "value": {
+              "address": 2684420200,
+              "endianness": "little",
+              "kind": "memory_u32"
+            }
+          },
+          {
+            "left": {
+              "address": 537083900,
+              "endianness": "little",
+              "kind": "memory_u32"
+            },
+            "op": "ne",
+            "right": {
+              "kind": "constant",
+              "value": 2864434397
+            }
+          }
+        ]
+      },
+      "external_premises": [
+        "a_loader_sampled_pmu_base:external_unmeasured",
+        "a_xip_aperture_enable:external_unverified",
+        "a_xip_selected:external_unverified"
+      ],
+      "target": {
+        "entry_address": 270548084,
+        "entry_offset": 3184,
+        "image_span": [
+          0,
+          36484
+        ],
+        "space": "IRAM",
+        "span": [
+          270544900,
+          270581384
+        ]
+      }
+    }
+  ],
+  "accepted": false
+}

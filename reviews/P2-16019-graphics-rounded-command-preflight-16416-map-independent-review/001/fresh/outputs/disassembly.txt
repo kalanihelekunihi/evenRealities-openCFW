@@ -1,0 +1,57 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpvmfvlpxv/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00522bac <.text>:
+  522bac:	ea4f 0946 	mov.w	r9, r6, lsl #1
+  522bb0:	2000      	movs	r0, #0
+  522bb2:	4632      	mov	r2, r6
+  522bb4:	f1c9 0303 	rsb	r3, r9, #3
+  522bb8:	ebaa 0909 	sub.w	r9, sl, r9
+  522bbc:	9205      	str	r2, [sp, #20]
+  522bbe:	9304      	str	r3, [sp, #16]
+  522bc0:	f1b9 0f00 	cmp.w	r9, #0
+  522bc4:	bfd9      	ittee	le
+  522bc6:	2700      	movle	r7, #0
+  522bc8:	2100      	movle	r1, #0
+  522bca:	2701      	movgt	r7, #1
+  522bcc:	2103      	movgt	r1, #3
+  522bce:	e001      	b.n	522bd4 <.text+0x28>
+  522bd0:	b100      	cbz	r0, 522bd4 <.text+0x28>
+  522bd2:	1d89      	adds	r1, r1, #6
+  522bd4:	2b00      	cmp	r3, #0
+  522bd6:	d503      	bpl.n	522be0 <.text+0x34>
+  522bd8:	eb03 0380 	add.w	r3, r3, r0, lsl #2
+  522bdc:	1d9b      	adds	r3, r3, #6
+  522bde:	e008      	b.n	522bf2 <.text+0x46>
+  522be0:	4290      	cmp	r0, r2
+  522be2:	bf18      	it	ne
+  522be4:	1d89      	addne	r1, r1, #6
+  522be6:	eba0 0c02 	sub.w	ip, r0, r2
+  522bea:	eb03 038c 	add.w	r3, r3, ip, lsl #2
+  522bee:	330a      	adds	r3, #10
+  522bf0:	1e52      	subs	r2, r2, #1
+  522bf2:	1c40      	adds	r0, r0, #1
+  522bf4:	4282      	cmp	r2, r0
+  522bf6:	daeb      	bge.n	522bd0 <.text+0x24>
+  522bf8:	4608      	mov	r0, r1
+  522bfa:	f7f2 f897 	bl	514d2c <.text-0xde80>
+  522bfe:	2800      	cmp	r0, #0
+  522c00:	f100 80d5 	bmi.w	522dae <.text+0x202>
+  522c04:	1931      	adds	r1, r6, r4
+  522c06:	9103      	str	r1, [sp, #12]
+  522c08:	eb08 0b04 	add.w	fp, r8, r4
+  522c0c:	ebab 0106 	sub.w	r1, fp, r6
+  522c10:	1970      	adds	r0, r6, r5
+  522c12:	4455      	add	r5, sl
+  522c14:	1bad      	subs	r5, r5, r6
+  522c16:	1e6d      	subs	r5, r5, #1
+  522c18:	1e49      	subs	r1, r1, #1
+  522c1a:	9500      	str	r5, [sp, #0]
+  522c1c:	9002      	str	r0, [sp, #8]
+  522c1e:	9101      	str	r1, [sp, #4]
+  522c20:	f8dd a014 	ldr.w	sl, [sp, #20]
+  522c24:	9d04      	ldr	r5, [sp, #16]
+  522c26:	b30f      	cbz	r7, 522c6c <.text+0xc0>

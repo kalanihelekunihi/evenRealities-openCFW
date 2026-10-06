@@ -1,0 +1,444 @@
+{
+  "status": "PASS",
+  "cases": 6,
+  "comparisons": [
+    {
+      "init_status": 0,
+      "read_status": 0,
+      "return": 0,
+      "events": [
+        [
+          "mspi_initialize",
+          1,
+          0,
+          537030872
+        ],
+        [
+          "delay_argument",
+          10
+        ],
+        [
+          "reset_enable_disable_commands"
+        ],
+        [
+          "configure_xip_read_mode"
+        ],
+        [
+          "read_flash_status_register"
+        ],
+        [
+          "configure_xip_read_mode"
+        ],
+        [
+          "mspi_blocking_transfer",
+          536895488,
+          1000000,
+          "03000000000000000000000001009f000100000000000000",
+          "123456"
+        ],
+        [
+          "log",
+          3,
+          "drv.norflash",
+          "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+          "DRV_Mx25u25643g_init",
+          658,
+          "Flash ID: 0x%06X\n",
+          1193046
+        ],
+        [
+          "flash_xip_setup"
+        ],
+        [
+          "flash_xip_mode",
+          1
+        ],
+        [
+          "create_flash_runtime_flags"
+        ],
+        [
+          "power_flash_mspi"
+        ]
+      ]
+    },
+    {
+      "init_status": 0,
+      "read_status": 5,
+      "return": 5,
+      "events": [
+        [
+          "mspi_initialize",
+          1,
+          0,
+          537030872
+        ],
+        [
+          "delay_argument",
+          10
+        ],
+        [
+          "reset_enable_disable_commands"
+        ],
+        [
+          "configure_xip_read_mode"
+        ],
+        [
+          "read_flash_status_register"
+        ],
+        [
+          "configure_xip_read_mode"
+        ],
+        [
+          "mspi_blocking_transfer",
+          536895488,
+          1000000,
+          "03000000000000000000000001009f000100000000000000",
+          ""
+        ],
+        [
+          "status_transfer_error",
+          4396064,
+          159,
+          0,
+          3,
+          5
+        ],
+        [
+          "log",
+          1,
+          "drv.norflash",
+          "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+          "DRV_Mx25u25643g_read_id",
+          728,
+          "command_read ERROR\n"
+        ],
+        [
+          "log",
+          1,
+          "drv.norflash",
+          "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+          "DRV_Mx25u25643g_init",
+          654,
+          "Flash ID fail: %d\n",
+          5
+        ],
+        [
+          "power_flash_mspi"
+        ]
+      ]
+    },
+    {
+      "init_status": 0,
+      "read_status": 4294967295,
+      "return": 4294967295,
+      "events": [
+        [
+          "mspi_initialize",
+          1,
+          0,
+          537030872
+        ],
+        [
+          "delay_argument",
+          10
+        ],
+        [
+          "reset_enable_disable_commands"
+        ],
+        [
+          "configure_xip_read_mode"
+        ],
+        [
+          "read_flash_status_register"
+        ],
+        [
+          "configure_xip_read_mode"
+        ],
+        [
+          "mspi_blocking_transfer",
+          536895488,
+          1000000,
+          "03000000000000000000000001009f000100000000000000",
+          ""
+        ],
+        [
+          "status_transfer_error",
+          4396064,
+          159,
+          0,
+          3,
+          4294967295
+        ],
+        [
+          "log",
+          1,
+          "drv.norflash",
+          "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+          "DRV_Mx25u25643g_read_id",
+          728,
+          "command_read ERROR\n"
+        ],
+        [
+          "log",
+          1,
+          "drv.norflash",
+          "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+          "DRV_Mx25u25643g_init",
+          654,
+          "Flash ID fail: %d\n",
+          4294967295
+        ],
+        [
+          "power_flash_mspi"
+        ]
+      ]
+    },
+    {
+      "init_status": 1,
+      "read_status": 0,
+      "return": 1,
+      "events": [
+        [
+          "mspi_initialize",
+          1,
+          0,
+          537030872
+        ],
+        [
+          "log",
+          1,
+          "drv.norflash",
+          "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+          "DRV_Mx25u25643g_init",
+          644,
+          "Flash init fail: %d\n",
+          1
+        ],
+        [
+          "power_flash_mspi"
+        ]
+      ]
+    },
+    {
+      "init_status": 7,
+      "read_status": 0,
+      "return": 7,
+      "events": [
+        [
+          "mspi_initialize",
+          1,
+          0,
+          537030872
+        ],
+        [
+          "log",
+          1,
+          "drv.norflash",
+          "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+          "DRV_Mx25u25643g_init",
+          644,
+          "Flash init fail: %d\n",
+          7
+        ],
+        [
+          "power_flash_mspi"
+        ]
+      ]
+    },
+    {
+      "init_status": 4294967295,
+      "read_status": 0,
+      "return": 4294967295,
+      "events": [
+        [
+          "mspi_initialize",
+          1,
+          0,
+          537030872
+        ],
+        [
+          "log",
+          1,
+          "drv.norflash",
+          "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+          "DRV_Mx25u25643g_init",
+          644,
+          "Flash init fail: %d\n",
+          4294967295
+        ],
+        [
+          "power_flash_mspi"
+        ]
+      ]
+    }
+  ],
+  "distinct_original_trace_bytes": 414,
+  "original_trace": {
+    "0x420476": "1fb5",
+    "0x420478": "dff8c427",
+    "0x42047c": "0021",
+    "0x42047e": "0120",
+    "0x420480": "fff7e8fe",
+    "0x420484": "0400",
+    "0x420486": "002c",
+    "0x420488": "10d0",
+    "0x4204ac": "0a20",
+    "0x4204ae": "fff793fa",
+    "0x4204b2": "00f03af8",
+    "0x4204b6": "00f02bfd",
+    "0x4204ba": "fff77efe",
+    "0x4204be": "00f027fd",
+    "0x4204c2": "03a8",
+    "0x4204c4": "00f06bf8",
+    "0x42059e": "3eb5",
+    "0x4205a0": "0500",
+    "0x4205a2": "0320",
+    "0x4205a4": "0090",
+    "0x4205a6": "02ab",
+    "0x4205a8": "0022",
+    "0x4205aa": "0021",
+    "0x4205ac": "9f20",
+    "0x4205ae": "00f021f8",
+    "0x4205f4": "2de9f841",
+    "0x4205f8": "87b0",
+    "0x4205fa": "0600",
+    "0x4205fc": "0f00",
+    "0x4205fe": "9046",
+    "0x420600": "1c00",
+    "0x420602": "01a8",
+    "0x420604": "1821",
+    "0x420606": "f5f7f5fc",
+    "0x42060a": "9a4b",
+    "0x42060c": "1868",
+    "0x42060e": "0028",
+    "0x420610": "01d1",
+    "0x420616": "002c",
+    "0x420618": "02d0",
+    "0x42061a": "0e9d",
+    "0x42061c": "002d",
+    "0x42061e": "01d1",
+    "0x420624": "b7f1007f",
+    "0x420628": "01d3",
+    "0x42062e": "0020",
+    "0x420630": "8df80a00",
+    "0x420634": "5ffa88f8",
+    "0x420638": "b8f1000f",
+    "0x42063c": "04d0",
+    "0x420648": "0020",
+    "0x42064a": "8df80b00",
+    "0x42064e": "0020",
+    "0x420650": "0390",
+    "0x420652": "0120",
+    "0x420654": "8df81000",
+    "0x420658": "adf81260",
+    "0x42065c": "0120",
+    "0x42065e": "8df81400",
+    "0x420662": "0195",
+    "0x420664": "0694",
+    "0x420666": "0020",
+    "0x420668": "8df80900",
+    "0x42066c": "0020",
+    "0x42066e": "8df81500",
+    "0x420672": "dff89828",
+    "0x420676": "01a9",
+    "0x420678": "1868",
+    "0x42067a": "05f031fe",
+    "0x42067e": "0400",
+    "0x420680": "002c",
+    "0x420682": "08d0",
+    "0x420696": "2000",
+    "0x420698": "08b0",
+    "0x42069a": "bde8f081",
+    "0x4205b2": "0400",
+    "0x4205b4": "002c",
+    "0x4205b6": "10d0",
+    "0x4205da": "9df80800",
+    "0x4205de": "9df80910",
+    "0x4205e2": "0902",
+    "0x4205e4": "51ea0041",
+    "0x4205e8": "9df80a00",
+    "0x4205ec": "0143",
+    "0x4205ee": "2960",
+    "0x4205f0": "2000",
+    "0x4205f2": "3ebd",
+    "0x4204c8": "0400",
+    "0x4204ca": "002c",
+    "0x4204cc": "10d0",
+    "0x4204f0": "0398",
+    "0x4204f2": "0290",
+    "0x4204f4": "dff85807",
+    "0x4204f8": "0190",
+    "0x4204fa": "40f29220",
+    "0x4204fe": "0090",
+    "0x420500": "dff84437",
+    "0x420504": "dff87024",
+    "0x420508": "dff8d015",
+    "0x42050c": "0320",
+    "0x42050e": "f7f7def8",
+    "0x420512": "00f0bdf9",
+    "0x420516": "0120",
+    "0x420518": "00f0a0fb",
+    "0x42051c": "fff7a1fc",
+    "0x420520": "fff782fc",
+    "0x420524": "2000",
+    "0x420526": "04b0",
+    "0x420528": "10bd",
+    "0x420684": "0094",
+    "0x420686": "2b00",
+    "0x420688": "3a00",
+    "0x42068a": "b6b2",
+    "0x42068c": "3100",
+    "0x42068e": "dff86409",
+    "0x420692": "f5f78cfc",
+    "0x4205b8": "dff84408",
+    "0x4205bc": "0190",
+    "0x4205be": "4ff43670",
+    "0x4205c2": "0090",
+    "0x4205c4": "dff83c38",
+    "0x4205c8": "dff8ac23",
+    "0x4205cc": "dff80c15",
+    "0x4205d0": "0120",
+    "0x4205d2": "f7f77cf8",
+    "0x4205d6": "2000",
+    "0x4205d8": "0be0",
+    "0x4204ce": "0294",
+    "0x4204d0": "dff87807",
+    "0x4204d4": "0190",
+    "0x4204d6": "40f28e20",
+    "0x4204da": "0090",
+    "0x4204dc": "dff86837",
+    "0x4204e0": "dff89424",
+    "0x4204e4": "dff8f415",
+    "0x4204e8": "0120",
+    "0x4204ea": "f7f7f0f8",
+    "0x4204ee": "17e0",
+    "0x42048a": "0294",
+    "0x42048c": "dff8b407",
+    "0x420490": "0190",
+    "0x420492": "4ff42170",
+    "0x420496": "0090",
+    "0x420498": "dff8ac37",
+    "0x42049c": "dff8d824",
+    "0x4204a0": "dff83816",
+    "0x4204a4": "0120",
+    "0x4204a6": "f7f712f9",
+    "0x4204aa": "39e0"
+  },
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "elf_sha256": "dc9e0aba217e7a13c4f942c8bd70aee24650d911f3875517c0dd1e11190a92de",
+  "source_sha256": {
+    "nor_init.h": "4e281e2af2d329308c0f4a829610a32f72b3a59dd2c7a207e1777c3230f64e63",
+    "Makefile": "30f4964758e851e7abb7b244b94dd757417594509182a512d316435fd0eea807",
+    "verify_nor_init.py": "e973ea3d21b4787f147119fb647baec015de2a336a04e0939dee96f007052b24",
+    "module.ld": "636fc8d951053839794235e056557fe8e98b24fe57eea9d6d8643ca727e9434d",
+    "nor_init.c": "a7bc93cab04ff52daa42264f38f8fcf7f7b41e2a74fbe5407d33bf2eb1ab4a24",
+    "reused/nor_read_status.c": "a366ec8a843b560b8f8526c5af532ed15b282ccabd421784e19de5d5b9f34944",
+    "reused/nor_read_status.h": "864f309ad0f24e9e23fd823afbe88ff9dd0b583b637b8c9ca24227bc776f4c6d"
+  },
+  "limits": [
+    "Original 0x420476, 0x42059e, and 0x4205f4 instructions execute; MSPI initialization, delay, command operations, XIP setup, runtime flag creation, power control, and logging are synthetic exact-address providers.",
+    "The lower-level blocking MSPI transfer at 0x4262e0 returns selected outcomes and supplies three synthetic JEDEC bytes; this does not exercise MSPI hardware or prove flash timing/identification on a device.",
+    "Original 0x415ff4 command-buffer clearing is modeled by zeroing synthetic RAM. This tests the initializer's error/success branches for listed statuses only; it does not reconstruct the MSPI initializer at 0x420254, command helpers, reset/XIP setup, flash status-register read, or flag-group implementation.",
+    "No physical hardware, flash access, flash modification, complete image, full boot, or byte-identical rebuild is claimed."
+  ]
+}

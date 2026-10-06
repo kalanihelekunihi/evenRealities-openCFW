@@ -1,0 +1,1453 @@
+{
+  "status": "PASS",
+  "cases": 45,
+  "per_function": {
+    "queue_context": 6,
+    "queue_create": 11,
+    "queue_put": 14,
+    "queue_get": 14
+  },
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "elf_sha256": "05f43bb31ba14a246aa36f5bbfbb896e4c301e5de7c7031fe20bb2b8682f26df",
+  "source_sha256": {
+    "queue_wrappers.h": "5ae09065df69edd0c4cc92ceb2393c2a7fe7e43912ddf14f33d63dd390cc1b42",
+    "module.ld": "3193dcbec08e79b900849be89fee5d5cfe01a6e8037f747e6780e22ea0350e59",
+    "verify_queue.py": "2918aa66038814e22ef1d240c96dd0dcd8d5c4a3414bd6933dd588c0f31e46c8",
+    "queue_wrappers.c": "e7c168579d68b36f4406c194fd460eaaf041fa2f75f328e1e01444522308d5b3"
+  },
+  "distinct_original_instruction_bytes": 418,
+  "original_trace": {
+    "0x41602a": "10b5",
+    "0x41602c": "0024",
+    "0x41602e": "eff30580",
+    "0x416032": "0028",
+    "0x416034": "01d0",
+    "0x41603a": "02f08cfd",
+    "0x41603e": "0128",
+    "0x416040": "08d0",
+    "0x416042": "eff31080",
+    "0x416046": "0028",
+    "0x416048": "03d1",
+    "0x41604a": "eff31180",
+    "0x41604e": "0028",
+    "0x416050": "00d0",
+    "0x416054": "2000",
+    "0x416056": "10bd",
+    "0x416052": "0124",
+    "0x416816": "f8b5",
+    "0x416818": "0400",
+    "0x41681a": "0d00",
+    "0x41681c": "1600",
+    "0x41681e": "0027",
+    "0x416820": "fff703fc",
+    "0x416824": "0028",
+    "0x416826": "3ad1",
+    "0x416828": "002c",
+    "0x41682a": "38d0",
+    "0x41682c": "002d",
+    "0x41682e": "36d0",
+    "0x416830": "5ff0ff31",
+    "0x416834": "002e",
+    "0x416836": "1dd0",
+    "0x416874": "0021",
+    "0x416876": "0129",
+    "0x416878": "09d1",
+    "0x41688e": "0029",
+    "0x416890": "05d1",
+    "0x416892": "0022",
+    "0x416894": "2900",
+    "0x416896": "2000",
+    "0x416898": "03f036fa",
+    "0x41689c": "0700",
+    "0x41689e": "3800",
+    "0x4168a0": "f2bd",
+    "0x416838": "b068",
+    "0x41683a": "0028",
+    "0x41683c": "0cd0",
+    "0x41683e": "f068",
+    "0x416840": "5028",
+    "0x416842": "09d3",
+    "0x416844": "3069",
+    "0x416846": "0028",
+    "0x416848": "06d0",
+    "0x41684a": "7069",
+    "0x41684c": "05fb04f2",
+    "0x416850": "9042",
+    "0x416852": "01d3",
+    "0x416854": "0121",
+    "0x416856": "0ee0",
+    "0x41687a": "0020",
+    "0x41687c": "0090",
+    "0x41687e": "b368",
+    "0x416880": "3269",
+    "0x416882": "2900",
+    "0x416884": "2000",
+    "0x416886": "03f009fa",
+    "0x41688a": "0700",
+    "0x41688c": "07e0",
+    "0x416858": "b068",
+    "0x41685a": "0028",
+    "0x41685c": "0bd1",
+    "0x41685e": "f068",
+    "0x416860": "0028",
+    "0x416862": "08d1",
+    "0x416864": "3069",
+    "0x416866": "0028",
+    "0x416868": "05d1",
+    "0x41686a": "7069",
+    "0x41686c": "0028",
+    "0x41686e": "02d1",
+    "0x416870": "0021",
+    "0x416872": "00e0",
+    "0x4168a2": "f8b5",
+    "0x4168a4": "0600",
+    "0x4168a6": "0d00",
+    "0x4168a8": "1c00",
+    "0x4168aa": "0027",
+    "0x4168ac": "fff7bdfb",
+    "0x4168b0": "0028",
+    "0x4168b2": "1dd0",
+    "0x4168f0": "002e",
+    "0x4168f2": "01d0",
+    "0x4168f4": "002d",
+    "0x4168f6": "02d1",
+    "0x4168fe": "0023",
+    "0x416900": "2200",
+    "0x416902": "2900",
+    "0x416904": "3000",
+    "0x416906": "03f0dbfa",
+    "0x41690a": "0128",
+    "0x41690c": "06d0",
+    "0x41691c": "3800",
+    "0x41691e": "f2bd",
+    "0x41690e": "002c",
+    "0x416910": "02d0",
+    "0x416918": "7ff00207",
+    "0x416912": "7ff00107",
+    "0x416916": "01e0",
+    "0x4168b4": "002e",
+    "0x4168b6": "03d0",
+    "0x4168b8": "002d",
+    "0x4168ba": "01d0",
+    "0x4168bc": "002c",
+    "0x4168be": "02d0",
+    "0x4168c6": "0020",
+    "0x4168c8": "0090",
+    "0x4168ca": "0023",
+    "0x4168cc": "6a46",
+    "0x4168ce": "2900",
+    "0x4168d0": "3000",
+    "0x4168d2": "03f0a7fb",
+    "0x4168d6": "0128",
+    "0x4168d8": "02d0",
+    "0x4168e0": "0098",
+    "0x4168e2": "0028",
+    "0x4168e4": "03d0",
+    "0x4168e6": "5ff08050",
+    "0x4168ea": "2c49",
+    "0x4168ec": "0860",
+    "0x4168ee": "15e0",
+    "0x4168da": "7ff00207",
+    "0x4168de": "1de0",
+    "0x4168f8": "7ff00307",
+    "0x4168fc": "0ee0",
+    "0x416920": "f8b5",
+    "0x416922": "0600",
+    "0x416924": "0d00",
+    "0x416926": "1c00",
+    "0x416928": "0027",
+    "0x41692a": "fff77efb",
+    "0x41692e": "0028",
+    "0x416930": "1cd0",
+    "0x41696c": "002e",
+    "0x41696e": "01d0",
+    "0x416970": "002d",
+    "0x416972": "02d1",
+    "0x41697a": "2200",
+    "0x41697c": "2900",
+    "0x41697e": "3000",
+    "0x416980": "03f0c8fb",
+    "0x416984": "0128",
+    "0x416986": "06d0",
+    "0x416996": "3800",
+    "0x416998": "f2bd",
+    "0x416988": "002c",
+    "0x41698a": "02d0",
+    "0x416992": "7ff00207",
+    "0x41698c": "7ff00107",
+    "0x416990": "01e0",
+    "0x416932": "002e",
+    "0x416934": "03d0",
+    "0x416936": "002d",
+    "0x416938": "01d0",
+    "0x41693a": "002c",
+    "0x41693c": "02d0",
+    "0x416944": "0020",
+    "0x416946": "0090",
+    "0x416948": "6a46",
+    "0x41694a": "2900",
+    "0x41694c": "3000",
+    "0x41694e": "03f02ffd",
+    "0x416952": "0128",
+    "0x416954": "02d0",
+    "0x41695c": "0098",
+    "0x41695e": "0028",
+    "0x416960": "03d0",
+    "0x416962": "5ff08050",
+    "0x416966": "0d49",
+    "0x416968": "0860",
+    "0x41696a": "14e0",
+    "0x416956": "7ff00207",
+    "0x41695a": "1ce0",
+    "0x416974": "7ff00307",
+    "0x416978": "0de0"
+  },
+  "comparisons": [
+    {
+      "function": "queue_context",
+      "arguments": [],
+      "fixture": {},
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "context_mode",
+            0
+          ]
+        ],
+        "icsr": 0
+      }
+    },
+    {
+      "function": "queue_context",
+      "arguments": [],
+      "fixture": {
+        "ctx_mode": 1
+      },
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "context_mode",
+            1
+          ]
+        ],
+        "icsr": 0
+      }
+    },
+    {
+      "function": "queue_context",
+      "arguments": [],
+      "fixture": {
+        "ctx_mode": 2
+      },
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "context_mode",
+            2
+          ]
+        ],
+        "icsr": 0
+      }
+    },
+    {
+      "function": "queue_context",
+      "arguments": [],
+      "fixture": {
+        "primask": 1
+      },
+      "observed": {
+        "return": 1,
+        "events": [
+          [
+            "context_mode",
+            0
+          ]
+        ],
+        "icsr": 0
+      }
+    },
+    {
+      "function": "queue_context",
+      "arguments": [],
+      "fixture": {
+        "basepri": 32
+      },
+      "observed": {
+        "return": 1,
+        "events": [
+          [
+            "context_mode",
+            0
+          ]
+        ],
+        "icsr": 0
+      }
+    },
+    {
+      "function": "queue_context",
+      "arguments": [],
+      "fixture": {
+        "ctx_mode": 1,
+        "primask": 1,
+        "basepri": 32
+      },
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "context_mode",
+            1
+          ]
+        ],
+        "icsr": 0
+      }
+    },
+    {
+      "function": "queue_create",
+      "arguments": [
+        3,
+        8,
+        0
+      ],
+      "fixture": {
+        "label": null
+      },
+      "observed": {
+        "return": 536895488,
+        "events": [
+          [
+            "context_mode",
+            0
+          ],
+          [
+            "create_dynamic",
+            3,
+            8,
+            0
+          ]
+        ],
+        "icsr": 0
+      }
+    },
+    {
+      "function": "queue_create",
+      "arguments": [
+        3,
+        8,
+        536892416
+      ],
+      "fixture": {
+        "attrs": [
+          536891648,
+          80,
+          536891904,
+          24
+        ],
+        "label": "static"
+      },
+      "observed": {
+        "return": 536895488,
+        "events": [
+          [
+            "context_mode",
+            0
+          ],
+          [
+            "create_static",
+            3,
+            8,
+            536891904,
+            536891648,
+            0
+          ]
+        ],
+        "icsr": 0
+      }
+    },
+    {
+      "function": "queue_create",
+      "arguments": [
+        3,
+        8,
+        536892416
+      ],
+      "fixture": {
+        "attrs": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "label": "dynamic"
+      },
+      "observed": {
+        "return": 536895488,
+        "events": [
+          [
+            "context_mode",
+            0
+          ],
+          [
+            "create_dynamic",
+            3,
+            8,
+            0
+          ]
+        ],
+        "icsr": 0
+      }
+    },
+    {
+      "function": "queue_create",
+      "arguments": [
+        3,
+        8,
+        536892416
+      ],
+      "fixture": {
+        "attrs": [
+          536891648,
+          79,
+          536891904,
+          24
+        ],
+        "label": "invalid-small-cb"
+      },
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "context_mode",
+            0
+          ]
+        ],
+        "icsr": 0
+      }
+    },
+    {
+      "function": "queue_create",
+      "arguments": [
+        3,
+        8,
+        536892416
+      ],
+      "fixture": {
+        "attrs": [
+          536891648,
+          80,
+          536891904,
+          23
+        ],
+        "label": "invalid-small-mq"
+      },
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "context_mode",
+            0
+          ]
+        ],
+        "icsr": 0
+      }
+    },
+    {
+      "function": "queue_create",
+      "arguments": [
+        3,
+        8,
+        536892416
+      ],
+      "fixture": {
+        "attrs": [
+          0,
+          80,
+          0,
+          0
+        ],
+        "label": "invalid-partial"
+      },
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "context_mode",
+            0
+          ]
+        ],
+        "icsr": 0
+      }
+    },
+    {
+      "function": "queue_create",
+      "arguments": [
+        3,
+        8,
+        536892416
+      ],
+      "fixture": {
+        "attrs": [
+          536891648,
+          80,
+          536891904,
+          0
+        ],
+        "label": "invalid-partial"
+      },
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "context_mode",
+            0
+          ]
+        ],
+        "icsr": 0
+      }
+    },
+    {
+      "function": "queue_create",
+      "arguments": [
+        65536,
+        65536,
+        536892416
+      ],
+      "fixture": {
+        "attrs": [
+          536891648,
+          80,
+          536891904,
+          0
+        ],
+        "label": "wrapped-product"
+      },
+      "observed": {
+        "return": 536895488,
+        "events": [
+          [
+            "context_mode",
+            0
+          ],
+          [
+            "create_static",
+            65536,
+            65536,
+            536891904,
+            536891648,
+            0
+          ]
+        ],
+        "icsr": 0
+      }
+    },
+    {
+      "function": "queue_create",
+      "arguments": [
+        0,
+        8,
+        0
+      ],
+      "fixture": {},
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "context_mode",
+            0
+          ]
+        ],
+        "icsr": 0
+      }
+    },
+    {
+      "function": "queue_create",
+      "arguments": [
+        3,
+        0,
+        0
+      ],
+      "fixture": {},
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "context_mode",
+            0
+          ]
+        ],
+        "icsr": 0
+      }
+    },
+    {
+      "function": "queue_create",
+      "arguments": [
+        1,
+        8,
+        0
+      ],
+      "fixture": {
+        "ctx_mode": 1
+      },
+      "observed": {
+        "return": 536895488,
+        "events": [
+          [
+            "context_mode",
+            1
+          ],
+          [
+            "create_dynamic",
+            1,
+            8,
+            0
+          ]
+        ],
+        "icsr": 0
+      }
+    },
+    {
+      "function": "queue_put",
+      "arguments": [
+        536895488,
+        536891392,
+        165,
+        0
+      ],
+      "fixture": {
+        "kernel_result": 1,
+        "woken": 1
+      },
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "context_mode",
+            0
+          ],
+          [
+            "put_blocking",
+            536895488,
+            536891392,
+            0,
+            0
+          ]
+        ],
+        "icsr": 0
+      }
+    },
+    {
+      "function": "queue_put",
+      "arguments": [
+        536895488,
+        536891392,
+        165,
+        0
+      ],
+      "fixture": {
+        "kernel_result": 0,
+        "woken": 1
+      },
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "context_mode",
+            0
+          ],
+          [
+            "put_blocking",
+            536895488,
+            536891392,
+            0,
+            0
+          ]
+        ],
+        "icsr": 0
+      }
+    },
+    {
+      "function": "queue_put",
+      "arguments": [
+        536895488,
+        536891392,
+        165,
+        9
+      ],
+      "fixture": {
+        "kernel_result": 1,
+        "woken": 1
+      },
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "context_mode",
+            0
+          ],
+          [
+            "put_blocking",
+            536895488,
+            536891392,
+            9,
+            0
+          ]
+        ],
+        "icsr": 0
+      }
+    },
+    {
+      "function": "queue_put",
+      "arguments": [
+        536895488,
+        536891392,
+        165,
+        9
+      ],
+      "fixture": {
+        "kernel_result": 0,
+        "woken": 1
+      },
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "context_mode",
+            0
+          ],
+          [
+            "put_blocking",
+            536895488,
+            536891392,
+            9,
+            0
+          ]
+        ],
+        "icsr": 0
+      }
+    },
+    {
+      "function": "queue_put",
+      "arguments": [
+        536895488,
+        536891392,
+        165,
+        4294967295
+      ],
+      "fixture": {
+        "kernel_result": 1,
+        "woken": 1
+      },
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "context_mode",
+            0
+          ],
+          [
+            "put_blocking",
+            536895488,
+            536891392,
+            4294967295,
+            0
+          ]
+        ],
+        "icsr": 0
+      }
+    },
+    {
+      "function": "queue_put",
+      "arguments": [
+        536895488,
+        536891392,
+        165,
+        4294967295
+      ],
+      "fixture": {
+        "kernel_result": 0,
+        "woken": 1
+      },
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "context_mode",
+            0
+          ],
+          [
+            "put_blocking",
+            536895488,
+            536891392,
+            4294967295,
+            0
+          ]
+        ],
+        "icsr": 0
+      }
+    },
+    {
+      "function": "queue_put",
+      "arguments": [
+        536895488,
+        536891392,
+        165,
+        0
+      ],
+      "fixture": {
+        "ctx_mode": 1,
+        "kernel_result": 1,
+        "woken": 1
+      },
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "context_mode",
+            1
+          ],
+          [
+            "put_blocking",
+            536895488,
+            536891392,
+            0,
+            0
+          ]
+        ],
+        "icsr": 0
+      }
+    },
+    {
+      "function": "queue_put",
+      "arguments": [
+        536895488,
+        536891392,
+        165,
+        0
+      ],
+      "fixture": {
+        "ctx_mode": 1,
+        "kernel_result": 0,
+        "woken": 1
+      },
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "context_mode",
+            1
+          ],
+          [
+            "put_blocking",
+            536895488,
+            536891392,
+            0,
+            0
+          ]
+        ],
+        "icsr": 0
+      }
+    },
+    {
+      "function": "queue_put",
+      "arguments": [
+        536895488,
+        536891392,
+        165,
+        0
+      ],
+      "fixture": {
+        "primask": 1,
+        "kernel_result": 1,
+        "woken": 1
+      },
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "context_mode",
+            0
+          ],
+          [
+            "put_isr",
+            536895488,
+            536891392,
+            0
+          ]
+        ],
+        "icsr": 268435456
+      }
+    },
+    {
+      "function": "queue_put",
+      "arguments": [
+        536895488,
+        536891392,
+        165,
+        0
+      ],
+      "fixture": {
+        "primask": 1,
+        "kernel_result": 0,
+        "woken": 1
+      },
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "context_mode",
+            0
+          ],
+          [
+            "put_isr",
+            536895488,
+            536891392,
+            0
+          ]
+        ],
+        "icsr": 0
+      }
+    },
+    {
+      "function": "queue_put",
+      "arguments": [
+        536895488,
+        536891392,
+        165,
+        0
+      ],
+      "fixture": {
+        "basepri": 32,
+        "kernel_result": 1,
+        "woken": 1
+      },
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "context_mode",
+            0
+          ],
+          [
+            "put_isr",
+            536895488,
+            536891392,
+            0
+          ]
+        ],
+        "icsr": 268435456
+      }
+    },
+    {
+      "function": "queue_put",
+      "arguments": [
+        536895488,
+        536891392,
+        165,
+        0
+      ],
+      "fixture": {
+        "basepri": 32,
+        "kernel_result": 0,
+        "woken": 1
+      },
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "context_mode",
+            0
+          ],
+          [
+            "put_isr",
+            536895488,
+            536891392,
+            0
+          ]
+        ],
+        "icsr": 0
+      }
+    },
+    {
+      "function": "queue_put",
+      "arguments": [
+        0,
+        536891392,
+        0,
+        0
+      ],
+      "fixture": {},
+      "observed": {
+        "return": 4294967292,
+        "events": [
+          [
+            "context_mode",
+            0
+          ]
+        ],
+        "icsr": 0
+      }
+    },
+    {
+      "function": "queue_put",
+      "arguments": [
+        536895488,
+        536891392,
+        0,
+        5
+      ],
+      "fixture": {
+        "ctx_mode": 1
+      },
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "context_mode",
+            1
+          ],
+          [
+            "put_blocking",
+            536895488,
+            536891392,
+            5,
+            0
+          ]
+        ],
+        "icsr": 0
+      }
+    },
+    {
+      "function": "queue_get",
+      "arguments": [
+        536895488,
+        536891392,
+        536892160,
+        0
+      ],
+      "fixture": {
+        "kernel_result": 1,
+        "woken": 1,
+        "priority_initial": 2779096485
+      },
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "context_mode",
+            0
+          ],
+          [
+            "get_blocking",
+            536895488,
+            536891392,
+            0
+          ]
+        ],
+        "icsr": 0,
+        "priority_out": 2779096485
+      }
+    },
+    {
+      "function": "queue_get",
+      "arguments": [
+        536895488,
+        536891392,
+        536892160,
+        0
+      ],
+      "fixture": {
+        "kernel_result": 0,
+        "woken": 1,
+        "priority_initial": 2779096485
+      },
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "context_mode",
+            0
+          ],
+          [
+            "get_blocking",
+            536895488,
+            536891392,
+            0
+          ]
+        ],
+        "icsr": 0,
+        "priority_out": 2779096485
+      }
+    },
+    {
+      "function": "queue_get",
+      "arguments": [
+        536895488,
+        536891392,
+        536892160,
+        9
+      ],
+      "fixture": {
+        "kernel_result": 1,
+        "woken": 1,
+        "priority_initial": 2779096485
+      },
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "context_mode",
+            0
+          ],
+          [
+            "get_blocking",
+            536895488,
+            536891392,
+            9
+          ]
+        ],
+        "icsr": 0,
+        "priority_out": 2779096485
+      }
+    },
+    {
+      "function": "queue_get",
+      "arguments": [
+        536895488,
+        536891392,
+        536892160,
+        9
+      ],
+      "fixture": {
+        "kernel_result": 0,
+        "woken": 1,
+        "priority_initial": 2779096485
+      },
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "context_mode",
+            0
+          ],
+          [
+            "get_blocking",
+            536895488,
+            536891392,
+            9
+          ]
+        ],
+        "icsr": 0,
+        "priority_out": 2779096485
+      }
+    },
+    {
+      "function": "queue_get",
+      "arguments": [
+        536895488,
+        536891392,
+        536892160,
+        4294967295
+      ],
+      "fixture": {
+        "kernel_result": 1,
+        "woken": 1,
+        "priority_initial": 2779096485
+      },
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "context_mode",
+            0
+          ],
+          [
+            "get_blocking",
+            536895488,
+            536891392,
+            4294967295
+          ]
+        ],
+        "icsr": 0,
+        "priority_out": 2779096485
+      }
+    },
+    {
+      "function": "queue_get",
+      "arguments": [
+        536895488,
+        536891392,
+        536892160,
+        4294967295
+      ],
+      "fixture": {
+        "kernel_result": 0,
+        "woken": 1,
+        "priority_initial": 2779096485
+      },
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "context_mode",
+            0
+          ],
+          [
+            "get_blocking",
+            536895488,
+            536891392,
+            4294967295
+          ]
+        ],
+        "icsr": 0,
+        "priority_out": 2779096485
+      }
+    },
+    {
+      "function": "queue_get",
+      "arguments": [
+        536895488,
+        536891392,
+        536892160,
+        0
+      ],
+      "fixture": {
+        "ctx_mode": 1,
+        "kernel_result": 1,
+        "woken": 1,
+        "priority_initial": 2779096485
+      },
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "context_mode",
+            1
+          ],
+          [
+            "get_blocking",
+            536895488,
+            536891392,
+            0
+          ]
+        ],
+        "icsr": 0,
+        "priority_out": 2779096485
+      }
+    },
+    {
+      "function": "queue_get",
+      "arguments": [
+        536895488,
+        536891392,
+        536892160,
+        0
+      ],
+      "fixture": {
+        "ctx_mode": 1,
+        "kernel_result": 0,
+        "woken": 1,
+        "priority_initial": 2779096485
+      },
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "context_mode",
+            1
+          ],
+          [
+            "get_blocking",
+            536895488,
+            536891392,
+            0
+          ]
+        ],
+        "icsr": 0,
+        "priority_out": 2779096485
+      }
+    },
+    {
+      "function": "queue_get",
+      "arguments": [
+        536895488,
+        536891392,
+        536892160,
+        0
+      ],
+      "fixture": {
+        "primask": 1,
+        "kernel_result": 1,
+        "woken": 1,
+        "priority_initial": 2779096485
+      },
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "context_mode",
+            0
+          ],
+          [
+            "get_isr",
+            536895488,
+            536891392
+          ]
+        ],
+        "icsr": 268435456,
+        "priority_out": 2779096485
+      }
+    },
+    {
+      "function": "queue_get",
+      "arguments": [
+        536895488,
+        536891392,
+        536892160,
+        0
+      ],
+      "fixture": {
+        "primask": 1,
+        "kernel_result": 0,
+        "woken": 1,
+        "priority_initial": 2779096485
+      },
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "context_mode",
+            0
+          ],
+          [
+            "get_isr",
+            536895488,
+            536891392
+          ]
+        ],
+        "icsr": 0,
+        "priority_out": 2779096485
+      }
+    },
+    {
+      "function": "queue_get",
+      "arguments": [
+        536895488,
+        536891392,
+        536892160,
+        0
+      ],
+      "fixture": {
+        "basepri": 32,
+        "kernel_result": 1,
+        "woken": 1,
+        "priority_initial": 2779096485
+      },
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "context_mode",
+            0
+          ],
+          [
+            "get_isr",
+            536895488,
+            536891392
+          ]
+        ],
+        "icsr": 268435456,
+        "priority_out": 2779096485
+      }
+    },
+    {
+      "function": "queue_get",
+      "arguments": [
+        536895488,
+        536891392,
+        536892160,
+        0
+      ],
+      "fixture": {
+        "basepri": 32,
+        "kernel_result": 0,
+        "woken": 1,
+        "priority_initial": 2779096485
+      },
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "context_mode",
+            0
+          ],
+          [
+            "get_isr",
+            536895488,
+            536891392
+          ]
+        ],
+        "icsr": 0,
+        "priority_out": 2779096485
+      }
+    },
+    {
+      "function": "queue_get",
+      "arguments": [
+        536895488,
+        0,
+        0,
+        0
+      ],
+      "fixture": {},
+      "observed": {
+        "return": 4294967292,
+        "events": [
+          [
+            "context_mode",
+            0
+          ]
+        ],
+        "icsr": 0
+      }
+    },
+    {
+      "function": "queue_get",
+      "arguments": [
+        536895488,
+        536891392,
+        536892160,
+        5
+      ],
+      "fixture": {
+        "ctx_mode": 1
+      },
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "context_mode",
+            1
+          ],
+          [
+            "get_blocking",
+            536895488,
+            536891392,
+            5
+          ]
+        ],
+        "icsr": 0,
+        "priority_out": 2779096485
+      }
+    }
+  ],
+  "limits": [
+    "Only original wrapper/context instructions execute; kernel queue providers and runtime-mode helper are intercepted at their exact local entries.",
+    "PRIMASK and BASEPRI paths are exercised; a nonzero IPSR was not injected by this fixture.",
+    "Timeout is forwarded unchanged. Unit conversion/kernel tick frequency are outside this wrapper evidence.",
+    "ICSR is synthetic mapped memory; no physical interrupt controller is touched.",
+    "No kernel scheduling, queue storage mutation, real ISR wakeup, or runtime behavior is claimed."
+  ]
+}

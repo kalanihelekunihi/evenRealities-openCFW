@@ -1,0 +1,46 @@
+{
+  "status": "partial",
+  "accepted": false,
+  "cases": 4096,
+  "cohorts": {
+    "copy": 1024,
+    "identity": 1024,
+    "translation": 1024,
+    "inverse_success": 870,
+    "inverse_reject": 154
+  },
+  "input_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "executed_spans": [
+    [
+      5505060,
+      5505078
+    ],
+    [
+      5642256,
+      5642288
+    ],
+    [
+      5642326,
+      5642424
+    ],
+    [
+      5643064,
+      5643364
+    ]
+  ],
+  "checks": [
+    "No hooks, complete original leaf execution",
+    "Forward/backward/self/disjoint ordered wordcopy overlap exactfullRAM and registerclobbers",
+    "Identity exactfullRAM and S0,R1",
+    "Finite integertranslation exactbinary32 outputs and S0..S4",
+    "Signed power-of-two permutationmatrix inverse independently calculated transpose reciprocal; nearthreshold and singular rejection; rejection exactfullRAM, success matrixnumeric and exactoutsideRAM",
+    "SP LR PC PRIMASK integerregisters immutableflash"
+  ],
+  "limitations": [
+    "FPSCR0 FP enabled only; no alternate rounding/traps/NaN/subnormal/infinity qualification",
+    "Inverse success compares +/-zero numerically; zero-sign bits not checked",
+    "No FPstatus/APSR verification",
+    "Ordinary alignedRAM only, no physicalfaults/concurrency",
+    "No admission C freeze gates"
+  ]
+}

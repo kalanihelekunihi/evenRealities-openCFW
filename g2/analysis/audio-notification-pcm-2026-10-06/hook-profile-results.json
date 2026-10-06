@@ -1,0 +1,75 @@
+{
+  "status": "EXPECTED_PROFILE_DIVERGENCE",
+  "firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "results": [
+    {
+      "profile": "scoped",
+      "pcWriteTo": "0x2000500c",
+      "history": [
+        {
+          "pc": "0x441f08",
+          "r0": "0x20005000",
+          "bytes": "f7f76cfe"
+        },
+        {
+          "pc": "0x441f0c",
+          "r0": "0x2000500c",
+          "bytes": "7068"
+        },
+        {
+          "pc": "0x441f0e",
+          "r0": "0x20005000",
+          "bytes": "316c"
+        },
+        {
+          "pc": "0x441f10",
+          "r0": "0x20005000",
+          "bytes": "0844"
+        },
+        {
+          "pc": "0x441f12",
+          "r0": "0x2000500c",
+          "bytes": "7060"
+        }
+      ],
+      "notification_disposition": {
+        "disposition": 4,
+        "callback": 536897024
+      },
+      "queue_control": "005000200c50002024500020185000200000000000000000000000000000000000000000000000000000000000000000000000000000000001000000030000000c000000ffff00000000000000000000"
+    },
+    {
+      "profile": "broad",
+      "pcWriteTo": "0x20005018",
+      "history": [
+        {
+          "pc": "0x441f08",
+          "r0": "0x20005000",
+          "bytes": "f7f76cfe"
+        },
+        {
+          "pc": "0x441f0e",
+          "r0": "0x2000500c",
+          "bytes": "316c"
+        },
+        {
+          "pc": "0x441f10",
+          "r0": "0x2000500c",
+          "bytes": "0844"
+        },
+        {
+          "pc": "0x441f12",
+          "r0": "0x20005018",
+          "bytes": "7060"
+        }
+      ],
+      "notification_disposition": {
+        "disposition": 4,
+        "callback": 536897024
+      },
+      "queue_control": "005000201850002024500020185000200000000000000000000000000000000000000000000000000000000000000000000000000000000001000000030000000c000000ffff00000000000000000000"
+    }
+  ],
+  "coverage_credit": false,
+  "conclusion": "Adding broad memory observation skips unconditional caller LDR441f0c after original memcpy; scoped executes it. No original/C mutation or callee replacement; native engine internal cause unproven."
+}

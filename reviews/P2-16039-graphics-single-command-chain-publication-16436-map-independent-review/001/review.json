@@ -1,0 +1,18 @@
+{
+  "task_id": "P2-16039",
+  "accepted": false,
+  "status": "partial",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-single-command-chain-publication-16436-map/001",
+  "candidate_receipt_sha256": "d60f54d30316609bbf38578541bef9a814d8429fadecd9a08b6959103d45440b",
+  "candidate_instructions_sha256": "b0e1f97003586581c08367c30b2897f13d3f4390edd158f249b12b54cae16af2",
+  "candidate_pseudocode_sha256": "78cd1583432d9dc4981bedacf1315984fece6352ccaf9dd1b3219f1bd8a608ba",
+  "candidate_replay_sha256": "0b05379fa85507f57ef74f88e0fd8d04cb6e72192d5d3b0ee4783b2d4559c36c",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_stdout": true,
+  "fresh_output_receipt_sha256": "452506e21d3c96660c09b112f0372d960d22bd53731f6d1acb007733b70ca15a",
+  "review": "Commands are linked before alignment checking; chain scan and current-buffer publication use repeated original loads, with no rollback inferred.",
+  "limitations": [
+    "Opaque allocation/flush/child contracts, invalid pointers, concurrent mutation, ownership and physical effects remain unresolved.",
+    "No function-level semantic closure, C, admission, or gate change."
+  ]
+}

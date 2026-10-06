@@ -1,0 +1,25 @@
+{
+  "implemented": [
+    "whole dispatcher4c2e30..4c306a",
+    "pinned GPIO pinconfig480f0c",
+    "actual PRIMASK critical provider"
+  ],
+  "executable_stubs": [],
+  "synthetic": [
+    "raw GPIO register latches",
+    "invalid config word perturbations",
+    "initial masks/RAM/registers"
+  ],
+  "external": [
+    "HAL disable55c430 and commandqueue release53909a",
+    "HAL power55c7e8",
+    "HAL uninitialize55c286",
+    "physical NVIC/pending interrupts/pad electrical behavior",
+    "task/callback drain and DMA/buffer ownership"
+  ],
+  "non_atomic": true,
+  "ignores_gpio_status": true,
+  "shutdown_safe_proven": false,
+  "source_complete_payloads": 0,
+  "byte_identical_bundle": false
+}

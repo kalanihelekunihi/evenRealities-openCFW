@@ -1,0 +1,15 @@
+{
+  "task_id": "P2-15857",
+  "accepted": false,
+  "status": "partial",
+  "input_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "fresh_replay": "fresh/replay.py",
+  "fresh_results": "fresh/results.json",
+  "review": "Fresh replay passed all 2048 original no-hook calls. The selected cohort uses positive nonzero quotients with exponent low-byte shifts 0..15 and finite ratios 0..100. The independent oracle rounds requested and quotient to binary32 separately, divides in binary32, then compares the fixed-point result after scaling by 2^15 and truncating. It checks output and R0-R3, callee-saved registers, full mapped RAM, SP/PC/PRIMASK and pinned flash.",
+  "limitations": [
+    "FPSCR begins at zero with FP enabled; result flags are not checked.",
+    "No zero quotient, exceptional FP, overflow/trap, alternate rounding mode, or subnormal claim.",
+    "The finite oracle uses host double division followed by binary32 rounding; scope is limited to the tested finite cohort.",
+    "Partial/unaccepted; no C implementation or coverage/gate promotion."
+  ]
+}

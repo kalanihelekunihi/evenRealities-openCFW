@@ -1,0 +1,51 @@
+{
+  "firmware": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+  "firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "container_header_bytes": 32,
+  "runtime_base": "0x438000",
+  "spans": [
+    {
+      "address": "0x47ef18",
+      "end_exclusive": "0x47ef38",
+      "size": 32,
+      "sha256": "027eb6cf5657db86677c549142fe1bb858cdb64713c812f5a36d0637f66db63c",
+      "scope": "descriptor lookup"
+    },
+    {
+      "address": "0x439c04",
+      "end_exclusive": "0x439c42",
+      "size": 62,
+      "sha256": "93fe60b21ffd21da08623ef0d387fcf0e96d3b41267cd10e4e5a487c85c26066",
+      "scope": "original copy body; only16-byte path verified"
+    },
+    {
+      "address": "0x55ca72",
+      "end_exclusive": "0x55ca94",
+      "size": 34,
+      "sha256": "3702b2dfd3a0f3792713b2e450c8625b0b4956a28905729efa5601c225f2b39b",
+      "scope": "actual IOM consumer selection and downstream calls"
+    },
+    {
+      "address": "0x47f7ae",
+      "end_exclusive": "0x47f7c8",
+      "size": 26,
+      "sha256": "2b5963c83763b1098dd768531d5babefe3dcfcbaf63c804b71bd5e543b94fb25",
+      "scope": "actual power-consumer lookup prefix"
+    }
+  ],
+  "static_spans_do_not_count_as_executed_coverage": true,
+  "interpreted_tables": [
+    {
+      "address": "0x6becb0",
+      "size": 544,
+      "sha256": "6883e99ca3d6bcc6ab1914d77fe857be7af7f67189c2bf81159b94345cede9e0",
+      "role": "34 four-word power-domain records"
+    },
+    {
+      "address": "0x6c0f40",
+      "size": 320,
+      "sha256": "6bcc9e18bc969901939a7e901c9475c8dea8cd033508aea9c879f267ec2a30a1",
+      "role": "eight ten-word IOM CQ descriptor rows"
+    }
+  ]
+}

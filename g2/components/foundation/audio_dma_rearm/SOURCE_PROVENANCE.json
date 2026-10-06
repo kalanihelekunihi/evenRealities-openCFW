@@ -1,0 +1,65 @@
+{
+  "origin": "MIT stock-instruction reconstruction; names/semantics checked against pinned upstream, not SDK C copy",
+  "firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "source_manifest": {
+    "g2/components/foundation/audio_dma_rearm/rearm.h": "8f257f60eff0c9c4d0ecd6c6a2a4f50a5760257239d9bc24446be5c23ce1a524",
+    "g2/components/foundation/audio_dma_rearm/rearm.c": "f5c6981d0e1a1bb63ff616b2689c32357e0aab80d1f9f5142b3a1fb279d0c6bc",
+    "g2/components/foundation/audio_dma_rearm/verify.py": "c36ae2d409a81a6ec5c670730f72beb0b684b8744f83ca5ddfa25a8fadbe8c16",
+    "g2/components/foundation/audio_cache_handoff/handoff.c": "ffbdf9c36d9e8bb3e209f900a5eaa383665fadb47029da6d0e2e81583936b323",
+    "g2/components/foundation/audio_cache_handoff/handoff.h": "b93f87f5ea7ef8f92f98393b5db24c4cb0d78f49eeee17ae3ed10984fcc5f54f",
+    "g2/components/foundation/audio_cache_handoff/verify.py": "c0d7e61f5da3d6f3926daa0fea48fce21ae8a738c61a9bdd604e88e9fec2645c",
+    "g2/components/foundation/cache_maintenance/cache_maintenance.c": "365496e8fc154d0b604e292ab96272f6871106a705ac7a5439a67271f6961d03",
+    "g2/components/foundation/cache_maintenance/verify.py": "448b9510a7c30607d45ce3919f45ecee304b1ecec202f067c04229020ab41198",
+    "g2/components/foundation/cache_maintenance/cache_maintenance.h": "64c437f8de20c7e0c7e4ce21a8cff58a8afecf0a46950b17dd260783e9f12c11"
+  },
+  "stock_functions": [
+    {
+      "name": "interrupt_service",
+      "start": "0x5908a0",
+      "end_exclusive": "0x5909b6",
+      "length": 278,
+      "sha256": "6694d1daf9dd9c4ab728b3f9b2e6d15198cc7980e865f68facfc72d32949306b",
+      "scope": "complete return, all body bytes executed"
+    },
+    {
+      "name": "dma_error",
+      "start": "0x590cf4",
+      "end_exclusive": "0x590d2e",
+      "length": 58,
+      "sha256": "b82466b1fe64ff2b5c70f985197a6a87c8c4a7ea819ef63988ed59ac7f8c5adf",
+      "scope": "complete return, all body bytes executed"
+    },
+    {
+      "name": "ipb_service",
+      "start": "0x5909b6",
+      "end_exclusive": "0x590a16",
+      "length": 96,
+      "sha256": "d8de3db5340ecd0f1a92f5b4ba91aadd7beda966d83856df89e3e26804f3f80e",
+      "scope": "complete return, all body bytes executed"
+    },
+    {
+      "name": "interrupt_clear",
+      "start": "0x590818",
+      "end_exclusive": "0x590848",
+      "length": 48,
+      "sha256": "a1ecf1dfd02024ec2388de00ca185831a008773f8024e3cf8cf941bd4d350fc6",
+      "scope": "complete return, all body bytes executed"
+    },
+    {
+      "name": "interrupt_status",
+      "start": "0x590848",
+      "end_exclusive": "0x59089a",
+      "length": 82,
+      "sha256": "b7ca390a4f4eb163a30148e57a81b664a8838acae35296efe7fc5ea47c18f137",
+      "scope": "complete return, all body bytes executed"
+    }
+  ],
+  "bounded_seam": "audio_i2s_irq_prefix, no actual notifier implementation",
+  "original_provenance": "g2/analysis/audio-dma-rearm-2026-10-06/original-provenance.json",
+  "original_provenance_sha256": "a6f117173e9529eafdae8b9581a1453a812982d18a465b3a1e6bdc4539f88a5a",
+  "upstream_provenance": "g2/analysis/audio-dma-rearm-2026-10-06/upstream/provenance.json",
+  "upstream_provenance_sha256": "952f4f708cbd469728dc44fadc56ecf2b11829c4129267a406eff417aa80f025",
+  "comparison": "g2/build/foundation/audio-dma-rearm-simulator/comparison-observable.json",
+  "comparison_sha256": "20fc38a80ebad28d469d196832793146454fe2088038e4439e2386c1d8f697eb",
+  "production_firmware": false
+}

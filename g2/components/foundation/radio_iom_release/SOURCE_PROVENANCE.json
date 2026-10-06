@@ -1,0 +1,16 @@
+{
+  "classification": "new consumers reconstructed from authenticated instructions; IOM names are inference, not authenticated SDK identity",
+  "license": "MIT for reconstruction; reused CMDQ/PRIMASK retain BSD-3-Clause Ambiq notices",
+  "upstream_reuse": "g2/components/foundation/ambiq_mspi/CMDQ_PROVENANCE.json",
+  "pinned_upstream_commit": "5efc0228528a8adce5eae0d226fac85d2551eb3b",
+  "unchanged_provider_hashes": {
+    "g2/components/foundation/ambiq_mspi/ambiq_cmdq.c": "39dfd4515413e88e66b07f8eea47664a6d666943069e65768f1a284435583a24",
+    "g2/components/foundation/ambiq_mspi/ambiq_cmdq.h": "8f4dffc5e3cf2b33cf877dab9ba5b2841b74451a379b9ab49ab4ec0d2869ce7d",
+    "g2/components/foundation/ambiq_mspi/ambiq_interrupt_mask.c": "27a574d24f61bf1bec7a13d16bc3e1f0816c35045f384b5ad85d808871f6a9eb"
+  },
+  "adaptations": [
+    "new consumer noinline retains observable call boundaries",
+    "existing reconstructed update_indices source O2 has one final curIdx store instead of stock intermediate+final on wrap; independently checked and disclosed"
+  ],
+  "target": "ARM32 callable semantic simulator, not firmware build"
+}

@@ -1,0 +1,19 @@
+{
+  "task_id": "P2-15969",
+  "accepted": false,
+  "status": "partial",
+  "source_packet": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-matrix-command-encoding-16368-map/001",
+  "fresh_replay": "fresh-replay.py",
+  "input_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "instruction_bytes": 352,
+  "range": [
+    "0x5226e8",
+    "0x522848"
+  ],
+  "source_receipt_sha256": "81fead66319fbd56ce35681914858240c2e4d7c141f86568a6922b5b3abc4c5d",
+  "review": "VCMP/VMRS tests m[6]/m[7] against +/-1e-7 with APSR predicates; path at 0x522740 divides matrix offsets 0..20 by a freshly loaded m[8]. Allocation 6/9 occurs after possible input mutation. Short/long records then store command words in exact order; R0 advances by four before final indexed store, then restores R4/PC. The bottom-left-minus-one operation is literal.",
+  "limitations": [
+    "Fresh pinned-byte replay passed and decoded instruction operations were checked against the pseudocode.",
+    "Allocator and external-child semantics remain unresolved; FP architectural rounding, flags, traps, faults and concurrency are outside scope. No C, admission, or gates."
+  ]
+}

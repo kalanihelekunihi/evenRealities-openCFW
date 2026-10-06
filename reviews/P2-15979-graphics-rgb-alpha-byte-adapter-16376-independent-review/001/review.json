@@ -1,0 +1,19 @@
+{
+  "task_id": "P2-15979",
+  "accepted": false,
+  "status": "partial",
+  "source_packet": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-rgb-alpha-byte-adapter-16376-map/001",
+  "fresh_replay": "fresh-replay.py",
+  "input_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "range": [
+    "0x4b06a8",
+    "0x4b06c0"
+  ],
+  "instruction_bytes": 24,
+  "source_receipt_sha256": "73198b2b1b620df17fcb7a740beb7ae3bd3cba2b6c155c83e26d8df601a07da9",
+  "review": "Saves entry R0 and LR, loads three stacked bytes into R2/R1/R0 respectively, calls 4B15A6, then pops R1 and PC. Thus R1 is restored entry R0 while R0 is child result.",
+  "limitations": [
+    "Fresh original-byte decode replay passes; pseudocode ordering, branch conditions, and stack/register aliases were checked against disassembly.",
+    "External children and global object contracts remain unresolved; fault, alias, concurrency, and physical behavior are not qualified. No admission, gate, or source change."
+  ]
+}

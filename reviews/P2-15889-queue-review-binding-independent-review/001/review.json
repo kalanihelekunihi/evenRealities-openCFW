@@ -1,0 +1,17 @@
+{
+  "task_id": "P2-15889",
+  "accepted": false,
+  "status": "partial",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_outputs": [
+    "fresh/summary.json",
+    "fresh/functions.jsonl"
+  ],
+  "input_sha256": "56c2f08545f3813d34f44e5963379c9790de2e1bd5d5d893188bb897c765ef9e",
+  "review": "Fresh binding audit reproduces 12 queue function records, with 11 exact scoped review bindings and one unbound candidate at entry 0x00538FB4. For each bound row, candidate identity, image hash, instruction hash, pseudocode hash, PASS decision, partial/unaccepted status, and the referenced review artifacts\u2019 actual file hashes are verified.",
+  "limitations": [
+    "These are exact bindings to scoped partial verdicts, not semantic admission or coverage completion.",
+    "The remaining 0x00538FB4 record is deliberately unbound; no inference is made from later map/fixture evidence.",
+    "No C or gate changes."
+  ]
+}

@@ -1,0 +1,203 @@
+{
+  "status": "PASS",
+  "cases": 8,
+  "cases_detail": [
+    {
+      "case": {
+        "op": "term",
+        "prefix": 51524694,
+        "pending": 0,
+        "qpfx": 63819213,
+        "qnull": false,
+        "end": 258,
+        "hw": 2,
+        "module": 1,
+        "prior": 0,
+        "null": false
+      },
+      "raw_curIdx_writes": {
+        "original": [
+          [
+            536883228,
+            258,
+            1
+          ]
+        ],
+        "source": [
+          [
+            536883228,
+            258,
+            1
+          ]
+        ]
+      },
+      "matched": true
+    },
+    {
+      "case": {
+        "op": "term",
+        "prefix": 51524694,
+        "pending": 0,
+        "qpfx": 63819214,
+        "qnull": false,
+        "end": 258,
+        "hw": 2,
+        "module": 1,
+        "prior": 0,
+        "null": false
+      },
+      "raw_curIdx_writes": {
+        "original": [],
+        "source": []
+      },
+      "matched": true
+    },
+    {
+      "case": {
+        "op": "disable",
+        "prefix": 51524694,
+        "pending": 0,
+        "qpfx": 63819213,
+        "qnull": false,
+        "end": 258,
+        "hw": 2,
+        "module": 1,
+        "prior": 0,
+        "null": false
+      },
+      "raw_curIdx_writes": {
+        "original": [
+          [
+            536883228,
+            258,
+            1
+          ]
+        ],
+        "source": [
+          [
+            536883228,
+            258,
+            1
+          ]
+        ]
+      },
+      "matched": true
+    },
+    {
+      "case": {
+        "op": "disable",
+        "prefix": 51524694,
+        "pending": 1,
+        "qpfx": 63819213,
+        "qnull": false,
+        "end": 258,
+        "hw": 2,
+        "module": 1,
+        "prior": 0,
+        "null": false
+      },
+      "raw_curIdx_writes": {
+        "original": [],
+        "source": []
+      },
+      "matched": true
+    },
+    {
+      "case": {
+        "op": "uninitialize",
+        "prefix": 51524694,
+        "pending": 1,
+        "qpfx": 63819213,
+        "qnull": false,
+        "end": 258,
+        "hw": 2,
+        "module": 1,
+        "prior": 0,
+        "null": false
+      },
+      "raw_curIdx_writes": {
+        "original": [],
+        "source": []
+      },
+      "matched": true
+    },
+    {
+      "case": {
+        "op": "disable",
+        "prefix": 51524695,
+        "pending": 0,
+        "qpfx": 63819213,
+        "qnull": false,
+        "end": 258,
+        "hw": 2,
+        "module": 1,
+        "prior": 0,
+        "null": false
+      },
+      "raw_curIdx_writes": {
+        "original": [],
+        "source": []
+      },
+      "matched": true
+    },
+    {
+      "case": {
+        "op": "uninitialize",
+        "prefix": 51524694,
+        "pending": 0,
+        "qpfx": 63819213,
+        "qnull": false,
+        "end": 258,
+        "hw": 2,
+        "module": 1,
+        "prior": 0,
+        "null": true
+      },
+      "raw_curIdx_writes": {
+        "original": [],
+        "source": []
+      },
+      "matched": true
+    },
+    {
+      "case": {
+        "op": "term",
+        "prefix": 51524694,
+        "pending": 0,
+        "qpfx": 63819213,
+        "qnull": false,
+        "end": 258,
+        "hw": 255,
+        "module": 1,
+        "prior": 0,
+        "null": false
+      },
+      "raw_curIdx_writes": {
+        "original": [
+          [
+            536883228,
+            511,
+            1
+          ],
+          [
+            536883228,
+            255,
+            1
+          ]
+        ],
+        "source": [
+          [
+            536883228,
+            255,
+            1
+          ]
+        ]
+      },
+      "matched": true
+    }
+  ],
+  "elf_sha256": "c0a7ef3f9475b4808d92fbaada7f84f636cadc11ae6819864bc365d7869523a8",
+  "verifier_sha256": "e476b5086290a668b950fd57235edd0f074f1f8df9c48a986bb4ba649b531f9b",
+  "comparison_sha256": "bc2efbada784f950d52f43362e910f44d1f3bf4c4f492cc7af3fedf9d50d6474",
+  "scope_note": "Top-level call hooks and no-argument critical callee residual R0 normalized; raw curIdx store sequences separately asserted; only contiguous curIdx stores semantically normalized, all other writes/MMIO/final state strict."
+}

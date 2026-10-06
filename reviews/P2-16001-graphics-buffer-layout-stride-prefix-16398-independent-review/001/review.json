@@ -1,0 +1,18 @@
+{
+  "task_id": "P2-16001",
+  "accepted": false,
+  "status": "partial",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-buffer-layout-stride-prefix-16398-map/002",
+  "candidate_receipt_sha256": "02268310d8ce026e7e4e3453ce025da0d18ca3832ff1533adcccb86f0a1c9e63",
+  "candidate_instructions_sha256": "814f6f967c2d89c4208bb78e998f6654d0b6887d6a74a810d46d8d6c89860ea8",
+  "candidate_pseudocode_sha256": "30a1895338370f7ed902cd1c600053c56039d2edf0b785931adddb84c45a4b65",
+  "candidate_replay_sha256": "1c3a574faeb24eb6d807deae0be9b2d0efa55cbfe3b9e5b67b5f2e0d0ca38519",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_replay_stdout": "PASS 116",
+  "source_image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "review": "Stride prefix guards and wrapped alignment arithmetic match ordered instruction flow; dispatch remains separate.",
+  "limitations": [
+    "Scoped byte/pseudocode review only; child behavior, complete ownership/function closure, runtime fault behavior and external or physical effects remain unqualified.",
+    "No canonical admission, C implementation, coverage promotion or gate change."
+  ]
+}

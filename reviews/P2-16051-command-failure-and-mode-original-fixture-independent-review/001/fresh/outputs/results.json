@@ -1,0 +1,23 @@
+{
+  "status": "partial",
+  "accepted": false,
+  "cases": 2048,
+  "cohorts": {
+    "fixed_overflow": 512,
+    "flush_null": 512,
+    "flush_empty": 512,
+    "mode_cached": 512
+  },
+  "input_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "checks": [
+    "Original linkedcode nohooks, writerfixedoverflowcallsactualerrorORleaf",
+    "Nullflush tailrecords8192; emptylinear/ringflush returns0",
+    "Modewrappercallsactualcachehit with overwritten savedslots and outputsFFFFFFFF,0,entryR7",
+    "ExactfullRAMincl72/8/40byteframes, unchangedglobals, calleeRegs/SP/PC/PRIMASK, pathappropriateLRcontext and immutableflash"
+  ],
+  "limitations": [
+    "No nonemptyflush/submission, backingfault/concurrentupdates or hardwarequalification",
+    "No APSR/callerR12 qualification; readclearleafnotexecuted",
+    "No C admission freeze gates"
+  ]
+}

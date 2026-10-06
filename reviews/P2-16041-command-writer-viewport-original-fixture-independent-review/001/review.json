@@ -1,0 +1,23 @@
+{
+  "task_id": "P2-16041",
+  "accepted": false,
+  "status": "partial",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-library-command-writer-viewport-original-fixture-16438/001",
+  "candidate_results_sha256": "588e7ac6f4921a8f892a743ddfd15b596b8a70d32b6825d4d91450c5c24f7e65",
+  "candidate_replay_sha256": "0ebb4eeef0dfe6784d7737b68fb474288e9a55451f72502a65cf468e5d8eafe7",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_results_sha256": "588e7ac6f4921a8f892a743ddfd15b596b8a70d32b6825d4d91450c5c24f7e65",
+  "cases": 4096,
+  "counts": {
+    "direct": 2048,
+    "viewport": 2048,
+    "ring": 1366,
+    "fixed": 1365,
+    "expand_sufficient": 1365
+  },
+  "review": "Fresh replay passed the 4096 direct-writer and viewport cases across ring, fixed, and linked-sufficient-capacity cohorts. Command bytes/cursor and RAM/register scopes match the fixture oracle.",
+  "limitations": [
+    "Low-overhead padding loops, flush/grow children, NULL-buffer/error behavior, nested viewport stack bytes, and physical effects remain unqualified.",
+    "No admission or gate change."
+  ]
+}

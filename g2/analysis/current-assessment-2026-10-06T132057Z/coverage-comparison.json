@@ -1,0 +1,216 @@
+{
+  "snapshot_utc": "2026-10-06T13:20:11.700722+00:00",
+  "bundle_bytes": 4301227,
+  "bundle_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "per_payload": [
+    {
+      "payload": "codec",
+      "stored_bytes": 326092,
+      "assembly_bytes": null,
+      "assembly_stored_percent": null,
+      "raw_pseudocode_bytes": 92560,
+      "raw_stored_percent": 28.38462765109233,
+      "scoped_review_bytes": 2170,
+      "scoped_review_stored_percent": 0.6654563742747446,
+      "partial_C_compared_trace_bytes": 0,
+      "partial_C_stored_percent": 0.0,
+      "executable_denominator": null,
+      "semantic_completion_percent": null,
+      "complete_source_payload": false
+    },
+    {
+      "payload": "ble_em9305",
+      "stored_bytes": 211948,
+      "assembly_bytes": 208840,
+      "assembly_stored_percent": 98.53360258176534,
+      "raw_pseudocode_bytes": 0,
+      "raw_stored_percent": 0.0,
+      "scoped_review_bytes": 1530,
+      "scoped_review_stored_percent": 0.7218751769301904,
+      "partial_C_compared_trace_bytes": 0,
+      "partial_C_stored_percent": 0.0,
+      "executable_denominator": null,
+      "semantic_completion_percent": null,
+      "complete_source_payload": false
+    },
+    {
+      "payload": "touch",
+      "stored_bytes": 34464,
+      "assembly_bytes": null,
+      "assembly_stored_percent": null,
+      "raw_pseudocode_bytes": 27879,
+      "raw_stored_percent": 80.89310584958217,
+      "scoped_review_bytes": 15926,
+      "scoped_review_stored_percent": 46.210538532961934,
+      "partial_C_compared_trace_bytes": 234,
+      "partial_C_stored_percent": 0.6789693593314763,
+      "executable_denominator": null,
+      "semantic_completion_percent": null,
+      "complete_source_payload": false
+    },
+    {
+      "payload": "case",
+      "stored_bytes": 55784,
+      "assembly_bytes": 41082,
+      "assembly_stored_percent": 73.64477269467947,
+      "raw_pseudocode_bytes": 43072,
+      "raw_stored_percent": 77.21210382905493,
+      "scoped_review_bytes": 22814,
+      "scoped_review_stored_percent": 40.897031406855014,
+      "partial_C_compared_trace_bytes": 0,
+      "partial_C_stored_percent": 0.0,
+      "executable_denominator": null,
+      "semantic_completion_percent": null,
+      "complete_source_payload": false
+    },
+    {
+      "payload": "apollo_bootloader",
+      "stored_bytes": 148599,
+      "assembly_bytes": 123960,
+      "assembly_stored_percent": 83.41913471826862,
+      "raw_pseudocode_bytes": 112506,
+      "raw_stored_percent": 75.7111420669049,
+      "scoped_review_bytes": 101936,
+      "scoped_review_stored_percent": 68.5980390177592,
+      "partial_C_compared_trace_bytes": 0,
+      "partial_C_stored_percent": 0.0,
+      "executable_denominator": null,
+      "semantic_completion_percent": null,
+      "complete_source_payload": false
+    },
+    {
+      "payload": "apollo_main",
+      "stored_bytes": 3523396,
+      "assembly_bytes": 225836,
+      "assembly_stored_percent": 6.409611636046587,
+      "raw_pseudocode_bytes": 1626380,
+      "raw_stored_percent": 46.159443900146336,
+      "scoped_review_bytes": 60284,
+      "scoped_review_stored_percent": 1.7109629459759845,
+      "partial_C_compared_trace_bytes": 8184,
+      "partial_C_stored_percent": 0.2322759065401675,
+      "executable_denominator": null,
+      "semantic_completion_percent": null,
+      "complete_source_payload": false
+    }
+  ],
+  "comparison": {
+    "assembly_export_bytes": {
+      "current_bytes": 599718,
+      "stored_bundle_percent": 13.94295162752396,
+      "oct5_1533_bytes": 490200,
+      "delta_bytes": 109518
+    },
+    "raw_pseudocode_bytes": {
+      "current_bytes": 1902397,
+      "stored_bundle_percent": 44.229169955456896,
+      "oct5_1533_bytes": 1902397,
+      "delta_bytes": 0
+    },
+    "authenticated_scoped_review_bytes": {
+      "current_bytes": 204660,
+      "stored_bundle_percent": 4.758177143405823,
+      "oct5_1533_bytes": 197000,
+      "delta_bytes": 7660
+    },
+    "partial_C_compared_trace_bytes": {
+      "current_bytes": 8418,
+      "stored_bundle_percent": 0.19571159578417974,
+      "oct5_1533_bytes": null,
+      "delta_bytes": null,
+      "oct6_0159_bytes": 8418,
+      "delta_from_oct6_0159": 0
+    }
+  },
+  "focus_areas": {
+    "boot": {
+      "executable_denominator": null,
+      "completion_percent": null,
+      "credited_distinct_trace_bytes": 0,
+      "evidence": [],
+      "limit": "First-credit attribution in the saved chronological trace union; cross-area helpers are credited once. Not a subsystem completion numerator or exhaustive source inventory."
+    },
+    "RTOS": {
+      "executable_denominator": null,
+      "completion_percent": null,
+      "credited_distinct_trace_bytes": 2272,
+      "evidence": [
+        "g2/build/foundation/wsf-radio-simulator/comparison-final.json",
+        "g2/build/foundation/event-group-wsf-simulator/comparison-first.json",
+        "g2/build/foundation/timer-queue-wsf-simulator/comparison-reviewed.json",
+        "g2/build/foundation/timer-daemon-wsf-simulator/comparison-final.json",
+        "g2/build/foundation/rtos-ready-wsf-simulator/comparison-final.json",
+        "g2/build/foundation/rtos-resume-wsf-simulator/comparison-final.json",
+        "g2/build/foundation/rtos-tick-wsf-simulator/comparison-verified.json"
+      ],
+      "limit": "First-credit attribution in the saved chronological trace union; cross-area helpers are credited once. Not a subsystem completion numerator or exhaustive source inventory."
+    },
+    "GPIO": {
+      "executable_denominator": null,
+      "completion_percent": null,
+      "credited_distinct_trace_bytes": 1828,
+      "evidence": [
+        "g2/build/foundation/ambiq-gpio-simulator/comparison-final.json",
+        "g2/build/foundation/radio-gpio-simulator/comparison-reviewed.json",
+        "g2/build/foundation/ambiq-gpio-config-simulator/comparison-reviewed.json",
+        "g2/build/foundation/ambiq-gpio-board-simulator/comparison-first.json",
+        "g2/build/foundation/radio-gpio-control-simulator/control-comparison-reviewed.json"
+      ],
+      "limit": "First-credit attribution in the saved chronological trace union; cross-area helpers are credited once. Not a subsystem completion numerator or exhaustive source inventory."
+    },
+    "DMA_cache_audio": {
+      "executable_denominator": null,
+      "completion_percent": null,
+      "credited_distinct_trace_bytes": 2070,
+      "evidence": [
+        "g2/build/foundation/cache-maintenance-simulator/comparison-reviewed.json",
+        "g2/build/foundation/audio-cache-handoff-simulator/comparison-final-policy.json",
+        "g2/build/foundation/audio-dma-rearm-simulator/comparison-observable.json",
+        "g2/build/foundation/audio-notification-pcm-simulator/comparison-final.json",
+        "g2/build/foundation/audio-registration-simulator/comparison-first.json"
+      ],
+      "limit": "First-credit attribution in the saved chronological trace union; cross-area helpers are credited once. Not a subsystem completion numerator or exhaustive source inventory."
+    },
+    "communications": {
+      "executable_denominator": null,
+      "completion_percent": null,
+      "credited_distinct_trace_bytes": 234,
+      "evidence": [
+        "g2/build/foundation/touch-scb-trigger-final/comparison-reviewed.json",
+        "g2/analysis/touch-mmio-cycle-2026-10-05/next-fifo/results.json"
+      ],
+      "limit": "First-credit attribution in the saved chronological trace union; cross-area helpers are credited once. Not a subsystem completion numerator or exhaustive source inventory."
+    },
+    "hardware_bus_power": {
+      "executable_denominator": null,
+      "completion_percent": null,
+      "credited_distinct_trace_bytes": 2014,
+      "evidence": [
+        "g2/build/foundation/ambiq-mspi-simulator/comparison-heldout.json",
+        "g2/build/foundation/ambiq-critical-simulator/comparison-interface-final.json",
+        "g2/build/foundation/radio-timer-stop-simulator/timer-comparison-first.json",
+        "g2/build/foundation/radio-transport-pads-simulator/comparison.json",
+        "g2/build/foundation/radio-iom-release-simulator/comparison-final.json",
+        "g2/build/foundation/radio-iom-power-prepare-simulator/comparison-aliased.json",
+        "g2/build/foundation/power-domain-simulator/comparison.json"
+      ],
+      "limit": "First-credit attribution in the saved chronological trace union; cross-area helpers are credited once. Not a subsystem completion numerator or exhaustive source inventory."
+    }
+  },
+  "source_files": 89,
+  "source_delta_from_0159": {
+    "added": [],
+    "removed": [],
+    "changed": []
+  },
+  "complete_blob_free_payloads": 0,
+  "byte_identical_source_bundles": 0,
+  "limits": [
+    "Stored-byte footprints are not firmware completion percentages.",
+    "Partial C trace footprint is saved original/source execution evidence under bounded fixtures/provider cuts and compiler profiles, not whole-function or hardware equivalence.",
+    "No builds/emulation rerun; counting methods and 12 review-normalizer regression fixtures rerun.",
+    "Codec/touch assembly formats remain outside unchanged assembly parser: unknown, not zero.",
+    "EvenHub/application SDK source is separate from firmware and excluded.",
+    "R1 has no freshly authenticated comparable denominator here; no R1 percentage inferred."
+  ]
+}

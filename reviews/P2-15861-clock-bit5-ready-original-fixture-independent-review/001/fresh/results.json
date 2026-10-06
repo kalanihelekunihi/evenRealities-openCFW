@@ -1,0 +1,16 @@
+{
+  "accepted": false,
+  "status": "partial",
+  "cases": 1536,
+  "input_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "checks": [
+    "Original control plus original readinesswait no hooks",
+    "Disable alreadyenabledshortcut and immediatelyready enable; upperflagignored",
+    "WholeperipheralRAM and localoutside32stack R1 callees SP PC mask flash"
+  ],
+  "limitations": [
+    "No delayed readiness timeout or physical MMIO qualification",
+    "No aliases faults concurrency coverage",
+    "No C admission freeze gates"
+  ]
+}

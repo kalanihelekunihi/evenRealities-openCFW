@@ -1,0 +1,101 @@
+{
+  "frozen_snapshot": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/audits/2026-10-06-current-assessment-refresh",
+  "snapshot_scan_utc": "2026-10-06T13:20:11.700722+00:00",
+  "repaired_at_utc": "2026-10-06T13:20:44.956743+00:00",
+  "review_outcomes": {
+    "no_supported_reference": 1038,
+    "bound_scoped_evidence": 521,
+    "revision_review": 8,
+    "no_hash_bound_pseudocode": 67,
+    "no_authenticated_ranges": 39,
+    "candidate_not_in_snapshot": 5,
+    "unresolved_review_scope": 51,
+    "nonpassing_review": 21,
+    "bound_candidate_blocked_by_revision": 2
+  },
+  "new_bindings": 519,
+  "per_cohort": {
+    "apollo-bootloader/ghidra/open-2026-09-29": {
+      "catalogued_bytes": 120432,
+      "old_parser_reviewed_bytes": 76446,
+      "new_parser_reviewed_bytes": 101936,
+      "method_gain": 25490,
+      "percent": 84.64195562641159
+    },
+    "apollo-main/ghidra/open-2026-09-29": {
+      "catalogued_bytes": 1628382,
+      "old_parser_reviewed_bytes": 57964,
+      "new_parser_reviewed_bytes": 60284,
+      "method_gain": 2320,
+      "percent": 3.7020797331338717
+    },
+    "case/ghidra/open-2026-09-29": {
+      "catalogued_bytes": 43072,
+      "old_parser_reviewed_bytes": 22814,
+      "new_parser_reviewed_bytes": 22814,
+      "method_gain": 0,
+      "percent": 52.96712481426449
+    },
+    "codec/ghidra/open-2026-09-29/image_a_sram": {
+      "catalogued_bytes": 11313,
+      "old_parser_reviewed_bytes": 0,
+      "new_parser_reviewed_bytes": 0,
+      "method_gain": 0,
+      "percent": 0.0
+    },
+    "codec/ghidra/open-2026-09-29/image_a_xip": {
+      "catalogued_bytes": 28962,
+      "old_parser_reviewed_bytes": 0,
+      "new_parser_reviewed_bytes": 0,
+      "method_gain": 0,
+      "percent": 0.0
+    },
+    "codec/ghidra/open-2026-09-29/image_b_sram": {
+      "catalogued_bytes": 37645,
+      "old_parser_reviewed_bytes": 0,
+      "new_parser_reviewed_bytes": 0,
+      "method_gain": 0,
+      "percent": 0.0
+    },
+    "codec/ghidra/open-2026-09-29/uart_boot_stage1": {
+      "catalogued_bytes": 3142,
+      "old_parser_reviewed_bytes": 0,
+      "new_parser_reviewed_bytes": 0,
+      "method_gain": 0,
+      "percent": 0.0
+    },
+    "codec/ghidra/open-2026-09-29/uart_boot_stage2": {
+      "catalogued_bytes": 11498,
+      "old_parser_reviewed_bytes": 0,
+      "new_parser_reviewed_bytes": 0,
+      "method_gain": 0,
+      "percent": 0.0
+    },
+    "touch/ghidra/open-2026-09-29": {
+      "catalogued_bytes": 27879,
+      "old_parser_reviewed_bytes": 15926,
+      "new_parser_reviewed_bytes": 15926,
+      "method_gain": 0,
+      "percent": 57.12543491516912
+    }
+  },
+  "bundle_reviewed_bytes": 204660,
+  "bundle_bytes": 4301227,
+  "bundle_reviewed_percent": 4.758177143405823,
+  "per_payload_reviewed_bytes": {
+    "apollo_bootloader": 101936,
+    "apollo_main": 60284,
+    "case": 22814,
+    "touch": 15926,
+    "ble_em9305": 1530,
+    "codec": 2170
+  },
+  "limits": [
+    "Path association authenticated against saved snapshot hashes, not a digest embedded in the original review.",
+    "Existing old-parser range decisions are inherited, not independently re-adjudicated.",
+    "Footprint union measures scoped review-linked evidence, not whole-function/full-path semantics.",
+    "All mapped ranges remain constrained to declared candidate evidence and source bytes; unbound or unsupported scopes excluded.",
+    "Candidate revisions block only exact same candidate; cross-version supersession remains a semantic boundary.",
+    "Live files are used only if they still match frozen snapshot digests; no current campaign discoveries added."
+  ]
+}

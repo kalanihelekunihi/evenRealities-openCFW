@@ -1,0 +1,34 @@
+{
+  "target": "make -C g2 radio-iom-release-simulator",
+  "compiler_profile": "clang Cortex-M4 Thumb2 soft-float freestanding C11 O2 fwrapv, arm-none-eabi-ld gc-sections with explicit uninitialize entry; semantic profile only",
+  "bindings": {
+    "g2/Makefile": "f078604d5ba850ebaefd5b5d1b65fbb740f0589d18d6264f5ee33a382e58e2f7",
+    "g2/components/foundation/radio_iom_release/iom_release.h": "681a4d11f3609ba515ca2c48653de4902993802e1f88d82004d506921a39780d",
+    "g2/components/foundation/radio_iom_release/verify.py": "e476b5086290a668b950fd57235edd0f074f1f8df9c48a986bb4ba649b531f9b",
+    "g2/components/foundation/radio_iom_release/iom_release.c": "dc44702b3a2592877b7f4c25d4b4d87091baae690ade389ac63929a3c03ea7b1",
+    "g2/components/foundation/ambiq_mspi/ambiq_cmdq.c": "39dfd4515413e88e66b07f8eea47664a6d666943069e65768f1a284435583a24",
+    "g2/components/foundation/ambiq_mspi/ambiq_interrupt_mask.c": "27a574d24f61bf1bec7a13d16bc3e1f0816c35045f384b5ad85d808871f6a9eb",
+    "g2/components/foundation/ambiq_mspi/ambiq_mspi_interrupts.c": "032087d41fe463a36c6a119b8fd2a7beb1256356e2f6d8d9d7f4ca75e02e5ba3",
+    "g2/components/foundation/ambiq_mspi/ambiq_mspi_lifecycle.c": "c55c3e163097e0112b11eb9fc4192b6a25de8cdaf28da41b1e3a6c8f2272ad0d",
+    "g2/components/foundation/ambiq_mspi/ambiq_mspi_compat.h": "fe6af8d10f857eb6bfb2758907073bd5ab75691a6818c03c94f0124a0f285299",
+    "g2/components/foundation/ambiq_mspi/ambiq_cmdq.h": "8f4dffc5e3cf2b33cf877dab9ba5b2841b74451a379b9ab49ab4ec0d2869ce7d",
+    "g2/components/foundation/ambiq_mspi/ambiq_mspi_interrupts.h": "89f04627e3270417130428894d6523b66e1191842dfd5baba01ca0256be51337",
+    "g2/components/foundation/ambiq_mspi/ambiq_interrupt_mask.h": "76e92c27af92ed403326c65acdbb890dccfb4f00788f06c6c99f09e4ec0de98a",
+    "g2/components/foundation/ambiq_mspi/simulator/lifecycle_seams.c": "6b3e74175d61d32ef8c416a72f795ec7b722d6ab0442dd7409e6b7fb1d34e644",
+    "g2/components/foundation/ambiq_mspi/simulator/module.ld": "de37d00a5c0dfa28c3630bae181df5f6b8383ea2e17e1cb371e39f4f00f6185f",
+    "g2/components/foundation/ambiq_mspi/simulator/verify.py": "adc66c4a1506425ca1b2c526da46a842e3ef5c0844a7dde3a76ce5a53147aa26",
+    "g2/components/foundation/ambiq_mspi/simulator/verify_cmdq.py": "99875b33236aa7b62387c744d4f898b99979320fb937a6ab2cb383660c186093",
+    "g2/components/foundation/ambiq_mspi/simulator/entry.c": "762eab9e3d49371055ba5e9941f62540f6538348b23d9f5990e01e7340850b28",
+    "g2/components/foundation/ambiq_mspi/simulator/verify_lifecycle.py": "636837d152dc69b797b89626d1d85d18b79482cf2e1679a8e0682e7753d437f9",
+    "g2/build/foundation/radio-iom-release-simulator/critical.o": "2addec12eaf2ee85a148df1564e6a6fcfcc8363748775bc6d0c5e646b9e0fe65",
+    "g2/build/foundation/radio-iom-release-simulator/iom.o": "8c0d344f5f7b6d4628475ac7af4fcd043e6a41c007d03ebf51e397d8cd6dd067",
+    "g2/build/foundation/radio-iom-release-simulator/cmdq.o": "2c6302d2f8aad55f0083203694ed9da313d2a5ff5f7643d971ddfffd98a7b489",
+    "g2/build/foundation/radio-iom-release-simulator/iom_release.elf": "c0a7ef3f9475b4808d92fbaada7f84f636cadc11ae6819864bc365d7869523a8"
+  },
+  "results": {
+    "g2/build/foundation/radio-iom-release-simulator/comparison-final.json": "bc2efbada784f950d52f43362e910f44d1f3bf4c4f492cc7af3fedf9d50d6474",
+    "g2/build/foundation/radio-iom-release-simulator/aggregate.json": "9d12780b314962a12897e7fca24f94fb7e364895be7795a0f7a4b5abcad10d5b"
+  },
+  "undefined_symbols": "",
+  "production_byte_match": false
+}

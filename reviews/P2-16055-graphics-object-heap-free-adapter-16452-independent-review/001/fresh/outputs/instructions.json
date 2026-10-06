@@ -1,0 +1,38 @@
+[
+  {
+    "start": 5325176,
+    "end": 5325188,
+    "instructions": [
+      {
+        "address": 5325176,
+        "bytes": "80b5",
+        "mnemonic": "push",
+        "operands": "{r7, lr}"
+      },
+      {
+        "address": 5325178,
+        "bytes": "0100",
+        "mnemonic": "movs",
+        "operands": "r1, r0"
+      },
+      {
+        "address": 5325180,
+        "bytes": "3c48",
+        "mnemonic": "ldr",
+        "operands": "r0, [pc, #240]\t@ (514270 <.text+0xf8>)"
+      },
+      {
+        "address": 5325182,
+        "bytes": "70f78ef8",
+        "mnemonic": "bl",
+        "operands": "48429e <.text-0x8feda>"
+      },
+      {
+        "address": 5325186,
+        "bytes": "01bd",
+        "mnemonic": "pop",
+        "operands": "{r0, pc}"
+      }
+    ]
+  }
+]

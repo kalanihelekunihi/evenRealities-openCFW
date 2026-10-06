@@ -1,0 +1,35 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmphiltf_sz/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00540036 <.text>:
+  540036:	e92d 4ff8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, r9, sl, fp, lr}
+  54003a:	b0ae      	sub	sp, #184	@ 0xb8
+  54003c:	000d      	movs	r5, r1
+  54003e:	4690      	mov	r8, r2
+  540040:	f8d8 2000 	ldr.w	r2, [r8]
+  540044:	6ae9      	ldr	r1, [r5, #44]	@ 0x2c
+  540046:	188a      	adds	r2, r1, r2
+  540048:	6aa9      	ldr	r1, [r5, #40]	@ 0x28
+  54004a:	1a52      	subs	r2, r2, r1
+  54004c:	9225      	str	r2, [sp, #148]	@ 0x94
+  54004e:	f8d8 2008 	ldr.w	r2, [r8, #8]
+  540052:	6ae9      	ldr	r1, [r5, #44]	@ 0x2c
+  540054:	188a      	adds	r2, r1, r2
+  540056:	6aa9      	ldr	r1, [r5, #40]	@ 0x28
+  540058:	188a      	adds	r2, r1, r2
+  54005a:	9227      	str	r2, [sp, #156]	@ 0x9c
+  54005c:	f8d8 2004 	ldr.w	r2, [r8, #4]
+  540060:	6b29      	ldr	r1, [r5, #48]	@ 0x30
+  540062:	188a      	adds	r2, r1, r2
+  540064:	6aa9      	ldr	r1, [r5, #40]	@ 0x28
+  540066:	1a52      	subs	r2, r2, r1
+  540068:	9226      	str	r2, [sp, #152]	@ 0x98
+  54006a:	f8d8 200c 	ldr.w	r2, [r8, #12]
+  54006e:	6b29      	ldr	r1, [r5, #48]	@ 0x30
+  540070:	188a      	adds	r2, r1, r2
+  540072:	6aa9      	ldr	r1, [r5, #40]	@ 0x28
+  540074:	188a      	adds	r2, r1, r2
+  540076:	9228      	str	r2, [sp, #160]	@ 0xa0

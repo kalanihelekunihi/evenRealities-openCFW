@@ -1,0 +1,56 @@
+[
+  {
+    "start": 4916904,
+    "end": 4916928,
+    "instructions": [
+      {
+        "address": 4916904,
+        "bytes": "01b5",
+        "mnemonic": "push",
+        "operands": "{r0, lr}"
+      },
+      {
+        "address": 4916906,
+        "bytes": "0b00",
+        "mnemonic": "movs",
+        "operands": "r3, r1"
+      },
+      {
+        "address": 4916908,
+        "bytes": "dbb2",
+        "mnemonic": "uxtb",
+        "operands": "r3, r3"
+      },
+      {
+        "address": 4916910,
+        "bytes": "9df80020",
+        "mnemonic": "ldrb.w",
+        "operands": "r2, [sp]"
+      },
+      {
+        "address": 4916914,
+        "bytes": "9df80110",
+        "mnemonic": "ldrb.w",
+        "operands": "r1, [sp, #1]"
+      },
+      {
+        "address": 4916918,
+        "bytes": "9df80200",
+        "mnemonic": "ldrb.w",
+        "operands": "r0, [sp, #2]"
+      },
+      {
+        "address": 4916922,
+        "bytes": "00f074ff",
+        "mnemonic": "bl",
+        "operands": "4b15a6 <.text+0xefe>"
+      },
+      {
+        "address": 4916926,
+        "bytes": "02bd",
+        "mnemonic": "pop",
+        "operands": "{r1, pc}"
+      }
+    ]
+  }
+]

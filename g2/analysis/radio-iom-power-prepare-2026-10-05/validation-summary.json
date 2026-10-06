@@ -1,0 +1,53 @@
+{
+  "comparison": {
+    "path": "g2/build/foundation/radio-iom-power-prepare-simulator/comparison-refreshed.json",
+    "sha256": "2ac6fe98fab1b69590d39b960c12323409201898e40d06913688959c96ee343f",
+    "status": "PASS",
+    "cases": 812,
+    "unique_original_trace_bytes": 708,
+    "source_manifest_matches": true,
+    "elf_sha256": "87740bbfbc8e0e84f70e711ac1cdee160e90ab15d95610e598d65f476fba62d6"
+  },
+  "independent_review": {
+    "path": "g2/analysis/radio-iom-power-prepare-2026-10-05/review/review.json",
+    "sha256": "d1ce546584a286f24a227e866a837bb675cf26e40f3eae2cd6452588db19650e",
+    "disposition": "PASS_WITH_PREPARED_ONLY_BOUNDARY",
+    "representative_cases": 11,
+    "report_sha256": "0f504b552f90e4d2938247572204f4c2ec95b518f983bb9508cadfdf8c952555",
+    "representative_rerun_sha256": "913182b9359f2bc34d44fd9207b079d2c41cbb009a8a1d9a4f2b0e2fd26a597b"
+  },
+  "fresh_aggregate": {
+    "path": "g2/build/foundation/power-domain-simulator/aggregate.json",
+    "sha256": "77061acef66ae62a0d6747204d4070fbe653ef523a89333d6729dd57bb1b1093",
+    "modules": 44,
+    "totals": {
+      "tests_run": 228,
+      "passed": 222,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 7,
+      "method_skips": 6,
+      "setup_skips": 1
+    }
+  },
+  "fresh_affected_tests": {
+    "path": "g2/build/foundation/power-domain-simulator/affected-final.log",
+    "sha256": "2fe399fe2b5cc39725f7360dda2e4133f998127860beb2f36d88d70771088253",
+    "passed": 15,
+    "inventory_regressions": 4
+  },
+  "deduplicated_inventory": {
+    "path": "g2/analysis/radio-iom-power-prepare-2026-10-05/cumulative-inventory.json",
+    "sha256": "48ac83f3848e154e0f6c45039f866a47d26739cf9da5f4d53c3811c4908be28c",
+    "payload_bytes": {
+      "touch": 234,
+      "apollo_main": 6056
+    },
+    "total": 6290
+  },
+  "hardware_power_verified": false,
+  "asynchronous_ownership_closed": false,
+  "optimized_tick_blocker": "unchanged; preserved source/verifier/failed ELFs",
+  "fully_source_complete_payloads": 0,
+  "source_built_byte_identical_bundle": false
+}

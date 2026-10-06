@@ -1,0 +1,5525 @@
+{
+  "status": "PASS",
+  "cases": 288,
+  "distinct_original_trace_bytes": 258,
+  "original_trace": {
+    "0x4166aa": "f8b5",
+    "0x4166ac": "0600",
+    "0x4166ae": "0c00",
+    "0x4166b0": "7508",
+    "0x4166b2": "6d00",
+    "0x4166b4": "16f00106",
+    "0x4166b8": "0027",
+    "0x4166ba": "fff7b6fc",
+    "0x41602a": "10b5",
+    "0x41602c": "0024",
+    "0x41602e": "eff30580",
+    "0x416032": "0028",
+    "0x416034": "01d0",
+    "0x41603a": "02f08cfd",
+    "0x418b56": "dff8d006",
+    "0x418b5a": "0068",
+    "0x418b5c": "0028",
+    "0x418b5e": "01d1",
+    "0x418b64": "dff8c406",
+    "0x418b68": "0068",
+    "0x418b6a": "0028",
+    "0x418b6c": "01d1",
+    "0x418b72": "0020",
+    "0x418b74": "7047",
+    "0x41603e": "0128",
+    "0x416040": "08d0",
+    "0x416042": "eff31080",
+    "0x416046": "0028",
+    "0x416048": "03d1",
+    "0x41604a": "eff31180",
+    "0x41604e": "0028",
+    "0x416050": "00d0",
+    "0x416054": "2000",
+    "0x416056": "10bd",
+    "0x4166be": "0028",
+    "0x4166c0": "02d0",
+    "0x4166c8": "002d",
+    "0x4166ca": "02d1",
+    "0x4166cc": "7ff00307",
+    "0x4166d0": "1ce0",
+    "0x41670c": "3800",
+    "0x41670e": "f2bd",
+    "0x416052": "0124",
+    "0x4166c2": "7ff00507",
+    "0x4166c6": "21e0",
+    "0x418b60": "0120",
+    "0x418b62": "07e0",
+    "0x418b6e": "0220",
+    "0x418b70": "00e0",
+    "0x4166d2": "002e",
+    "0x4166d4": "0dd0",
+    "0x4166f2": "2100",
+    "0x4166f4": "2800",
+    "0x4166f6": "03f0aafd",
+    "0x4166fa": "0128",
+    "0x4166fc": "06d0",
+    "0x4166fe": "002c",
+    "0x416700": "02d0",
+    "0x416708": "7ff00207",
+    "0x416702": "7ff00107",
+    "0x416706": "01e0",
+    "0x4166d6": "2100",
+    "0x4166d8": "2800",
+    "0x4166da": "03f0a2fb",
+    "0x4166de": "0128",
+    "0x4166e0": "14d0",
+    "0x4166e2": "002c",
+    "0x4166e4": "02d0",
+    "0x4166ec": "7ff00207",
+    "0x4166f0": "0ce0",
+    "0x4166e6": "7ff00107",
+    "0x4166ea": "0fe0",
+    "0x416710": "70b5",
+    "0x416712": "0500",
+    "0x416714": "6c08",
+    "0x416716": "6400",
+    "0x416718": "15f00105",
+    "0x41671c": "0026",
+    "0x41671e": "fff784fc",
+    "0x416722": "0028",
+    "0x416724": "02d0",
+    "0x41672c": "002c",
+    "0x41672e": "02d1",
+    "0x416730": "7ff00306",
+    "0x416734": "13e0",
+    "0x41675e": "3000",
+    "0x416760": "70bd",
+    "0x416726": "7ff00506",
+    "0x41672a": "18e0",
+    "0x416736": "002d",
+    "0x416738": "07d0",
+    "0x41674a": "0023",
+    "0x41674c": "0022",
+    "0x41674e": "0021",
+    "0x416750": "2000",
+    "0x416752": "03f0b5fb",
+    "0x416756": "0128",
+    "0x416758": "01d0",
+    "0x41675a": "7ff00206",
+    "0x41673a": "2000",
+    "0x41673c": "03f051fb",
+    "0x416740": "0128",
+    "0x416742": "0cd0",
+    "0x416744": "7ff00206",
+    "0x416748": "09e0"
+  },
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "elf_sha256": "1cfda5f5d2173b7774d08649ebd0c62f2f930c7cc37c5991abecd8c9c7c86f55",
+  "source_sha256": {
+    "g2/components/bootloader/queue/Makefile": "b1767d8da63ae9d2e0a2b2ae974f63015f20f098d74e5f20dbf5c252d78f80f6",
+    "g2/components/bootloader/queue/queue_wrappers.h": "5ae09065df69edd0c4cc92ceb2393c2a7fe7e43912ddf14f33d63dd390cc1b42",
+    "g2/components/bootloader/queue/mutex.c": "6989dfbac60611e2a4a612f030b927a375737c9da08d106d3d7697a6c5c606b7",
+    "g2/components/bootloader/queue/verify_mutex.py": "d9fb961bb5675bc2b474c7efe095d39dd711eb26ca0382bc92ac25a3af39491f",
+    "g2/components/bootloader/queue/module.ld": "3193dcbec08e79b900849be89fee5d5cfe01a6e8037f747e6780e22ea0350e59",
+    "g2/components/bootloader/queue/verify_queue.py": "1a877111f29bd6ffeb5ec20d582be56928f85c12dd7989304d5e9e2872a446cb",
+    "g2/components/bootloader/queue/runtime_module.ld": "e1d99c17cafab54d2fc59e6809a055e593a9ce90f07ac890c026bcf9f2fb3e1f",
+    "g2/components/bootloader/queue/mutex_runtime_module.ld": "93ab5fded725de08ac4a9bc9a2fe7b6535e8a79bc344fcc1ea4076c2b906586a",
+    "g2/components/bootloader/queue/runtime_mode.c": "dd97dc30a02adc443beeb3b96f1df0c4a2ea830ec5ea7e4f144603e1664ea83e",
+    "g2/components/bootloader/queue/queue_wrappers.c": "e7c168579d68b36f4406c194fd460eaaf041fa2f75f328e1e01444522308d5b3"
+  },
+  "comparisons": [
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 0,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 1,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            0
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            0
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            0
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            1000
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            1000
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            1000
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            1000
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            1000
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            1000
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            1000
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            1000
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            1000
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x41a24e",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 80,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            0
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            0
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            0
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            1000
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            1000
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            1000
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            1000
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            1000
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            1000
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            1000
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            1000
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            1000
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 1000,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967294,
+        "events": [
+          [
+            "take",
+            "0x419e22",
+            80,
+            4294967295
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_acquire",
+      "handle": 81,
+      "timeout": 4294967295,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 0,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967292,
+        "events": [],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 1,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "give_plain",
+            80,
+            0,
+            0,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "give_plain",
+            80,
+            0,
+            0,
+            0
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "give_plain",
+            80,
+            0,
+            0,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "give_plain",
+            80,
+            0,
+            0,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "give_plain",
+            80,
+            0,
+            0,
+            0
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "give_plain",
+            80,
+            0,
+            0,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "give_plain",
+            80,
+            0,
+            0,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "give_plain",
+            80,
+            0,
+            0,
+            0
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "give_plain",
+            80,
+            0,
+            0,
+            0
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 80,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "give_tagged",
+            80
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "give_tagged",
+            80
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "give_tagged",
+            80
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 0,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "give_tagged",
+            80
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "give_tagged",
+            80
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "give_tagged",
+            80
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 1,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "give_tagged",
+            80
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        0,
+        0,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 0,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        1,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "give_tagged",
+            80
+          ]
+        ],
+        "primask": 1,
+        "basepri": 32
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        0,
+        0
+      ],
+      "observed": {
+        "return": 4294967293,
+        "events": [
+          [
+            "give_tagged",
+            80
+          ]
+        ],
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "mutex_release",
+      "handle": 81,
+      "timeout": 0,
+      "kernel_result": 2,
+      "context": [
+        2,
+        1,
+        32
+      ],
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "primask": 1,
+        "basepri": 32
+      }
+    }
+  ],
+  "limits": [
+    "Stock/source mutex wrappers, context predicate and runtime-state query execute; tagged/plain kernel operations are synthetic.",
+    "Bit0 dispatch and scalar statuses proved in tested thread-mode fixtures; nonzero IPSR remains statically recovered, not injected.",
+    "Raw timeout forwarded unchanged; no scheduler, mutex priority inheritance, recursive ownership, blocking time or real kernel storage claim.",
+    "Synthetic kernel results include2 to prove exact success==1, not any nonzero; no malformed real kernel pointer safety claim."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "task_id": "P2-15941",
+  "accepted": false,
+  "status": "partial",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_outputs": [
+    "fresh/instructions.json",
+    "fresh/disassembly.txt",
+    "fresh/references.json"
+  ],
+  "locked_image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "review": "The 152-byte map at 0x54055A..0x5405F2 exactly matches the pinned image. It writes wrapped bounds from the current frame, preserves signed comparison behavior on the endpoint, and uses ordered 0x540024/0x450BCC/0x450F28 gates. On the transform path it computes wrapped differences and performs VCVT.F32.S32 conversions under architectural rounding/status controls, with child effects left unresolved.",
+  "limitations": [
+    "The larger candidate still includes opaque children and no independent proof that the raw discovery bounds equal the complete function boundary.",
+    "Architectural FP behavior, faults, aliases, concurrency, physical rendering, and external effects are not qualified.",
+    "Partial/unaccepted; no C, admission, or gates."
+  ]
+}

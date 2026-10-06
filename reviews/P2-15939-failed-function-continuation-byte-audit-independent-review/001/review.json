@@ -1,0 +1,17 @@
+{
+  "task_id": "P2-15939",
+  "accepted": false,
+  "status": "partial",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_outputs": [
+    "fresh/results.json",
+    "fresh/input-pins.json"
+  ],
+  "locked_image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "review": "Fresh audit replay verifies the 12 selected map revisions tile 1,316 original bytes continuously from 0x540036 through 0x54055A across 521 instruction rows. It separately records the remaining 1,130 bytes through the raw-discovered bound 0x5409C4 as unmapped suffix. Map instruction rows and all cited literal bytes match the pinned image.",
+  "limitations": [
+    "This establishes only local byte tiling for the selected maps, not semantic completeness or full candidate recovery.",
+    "The raw-discovered endpoint is not independently established as a true function boundary; later suffix and child behavior remain unresolved.",
+    "No review binding, code/data ownership, admission, C or gate changes."
+  ]
+}

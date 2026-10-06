@@ -1,0 +1,61 @@
+{
+  "iccarm": {
+    "exit_code": 0,
+    "stdout": "IAR ANSI C/C++ Compiler V10.10.2.628/LNX for ARM",
+    "stderr": ""
+  },
+  "ilinkarm": {
+    "exit_code": 0,
+    "stdout": "IAR ELF Linker V10.10.2.628/LNX for ARM",
+    "stderr": ""
+  },
+  "iasmarm": {
+    "exit_code": 0,
+    "stdout": "IAR Assembler V10.10.2.628/LNX for ARM",
+    "stderr": ""
+  },
+  "iarlogin_help": {
+    "exit_code": 0,
+    "stdout": "Usage: iarlogin [OPTIONS] COMMAND [ARGS]...\n\n  IAR Login v1.4.0\n\n  Copyright 1999-2026 IAR Systems AB.\n\nOptions:\n  --help  Show this message and exit.\n\nCommands:\n  checkin-offline          Check in offline capacity stored locally\n  checkout-offline         Checkout offline capacity and store them locally\n  create-standalone-token  Create a long-lived standalone token\n  diagnose                 Run connection diagnostics against LMS Cloud\n  generate-fingerprint     Generate a node fingerprint\n  login                    Initiate authentication (browser-based or...\n  login-status             Check current authentication state\n  logout                   End authentication session\n  set-environment          Set target environment\n  show-token               Retrieve the current access token\n  version                  Retrieve IAR login version information",
+    "stderr": ""
+  },
+  "owned_probe_compile": {
+    "exit_code": 2,
+    "stdout": "IAR ANSI C/C++ Compiler V10.10.2.628/LNX for ARM\n   Copyright 1999-2026 IAR Systems AB.\n   LMS Cloud License (LMSC 2.1.2)",
+    "stderr": "Fatal error[LMSC2143]: Please set IAR_LMS_BEARER_TOKEN environment variable or\n          use iarlogin\nFatal error detected, aborting.",
+    "object_exists": false
+  },
+  "image_identity": "sha256:af35f7f439b4af1827cdbfffe1f0895540b2aaf8c6a19ff5059e4250047e37d0 amd64 linux",
+  "installed_dependencies": "iar-lmsc-tools\t1.14\nlibgcc-s1:amd64\t14.2.0-4ubuntu2~24.04.1\nlibglib2.0-0t64:amd64\t2.80.0-6ubuntu3.9\nlibicu74:amd64\t74.2-1ubuntu3.1\nlibstdc++6:amd64\t14.2.0-4ubuntu2~24.04.1\nlibxml2:amd64\t2.9.14+dfsg-1.3ubuntu3.9",
+  "activation_attempted": false,
+  "license_key_accessed": false,
+  "image": "opencfw/iar-base:10.10.2-local",
+  "iarbuild": {
+    "exit_code": 0,
+    "version": "IAR Command Line Build Utility V9.5.4.2231",
+    "loader_missing_dependencies": false,
+    "licensed_project_build_verified": false
+  },
+  "docker_buildx_version": "0.37.2",
+  "build_configuration": "third-party/local-vendor/docker-build-config/config.json, credential-free, existing Colima socket",
+  "CSpyBat": {
+    "exit_code": 1,
+    "stdout": "IAR C-SPY Command Line Utility V9.5.4.2231\n     Copyright 2026 IAR Systems AB.",
+    "stderr": "Error: Problems with parsing the command line.\n***Unexpected command line argument(s):\n   --version\n\n\n\nRun with --help for usage information."
+  },
+  "icstat": {
+    "exit_code": 0,
+    "stdout": "IAR C-STAT Command Line Interface V2.11.0.945",
+    "stderr": ""
+  },
+  "CSpyBat_help": {
+    "exit_code": 0,
+    "stdout": "IAR C-SPY Command Line Utility V9.5.4.2231\n     Copyright 2026 IAR Systems AB.\n\nUsage: CSpyBat can be invoked in two different ways:\n  1.\n    Specify all options on the command line. Besides the optional named arguments,\n    there are three mandatory positional command line arguments:\n      <processor dll/so filename>\n      <driver dll/so filename>\n      <debug executable filename>\n  2.\n    Specify a launch configuration file together with a launch configuration name.\n    Any additional named optional arguments overrides what is specified in the configuration file.\n      --launch_file <launch json filename>\n      --launch_config <configuration name>\n\nExamples:\n CSpyBat <target>/bin/lib<target>proc.so <target>/bin/lib<target>sim2.so application.out --plugin=<target>/bin/lib<target>LibsupportUniversal.so <options> --backend <driver options>\n CSpyBat --launch_file launch.json --launch_config my_config <options> --backend <driver options>\n\nAvailable command line options:\n--application_args[=<space-separated arguments in single string>] \n                Passes command line arguments to the debugged application.\n--attach_to_running_target \n                Makes the debugger attach to a running application without resetting the target system.\n--code_coverage_file <code coverage file> \n                Enables the generation of code coverage information and places it in a specified file.\n--cycles <cycles> \n                Specifies the maximum number of cycles to run.\n--debug_file <file> \n                Specifies the executable to debug.\n--device_macro <macro file> \n                Specifies a C-SPY device macro file.\n--download_only Downloads a code image without starting a debug session afterwards.\n-f <file>       Extends the command line with arguments given in <file>.\n--flash_loader <flash file> \n                Specifies a flash loader specification XML file.\n--help          Shows this help message.\n--launch_config <configuration name> \n                Specifies a configuration in the launch file to use.\n--launch_file <json file> \n                Specifies a launch configuration file to use. Use \"-\" to read the launch structure from standard input.\n--leave_target_running \n                Leaves the application running on the target after the debug session is closed.\n--macro <macro file> \n                Specifies a macro file to be used.\n--macro_param <name=expression> \n                Assigns a value to a C-SPY __param macro parameter.\n--plugin <plugin file> \n                Specifies a plugin to be used.\n--print_launch_config \n                Display the launch configuration used for the session.\n--rtc_enable    Enables C-RUN runtime error checking in cspybat.\n--rtc_output <output file> \n                Specifies a file for the C-RUN message output.\n--rtc_raw_to_txt <file> \n                Makes cspybat act as a runtime checking message filter by reading a file as input.\n--rtc_rules <rtc rules file> \n                Specifies a file for the C-RUN rules to cspybat.\n--silent        Omits the sign-on message.\n--sockets       Makes cspybat use sockets instead of pipes.\n--timeout <milliseconds> \n                Limits the maximum allowed execution time.\n\nAll parameters supplied after '--backend' are passed to the back end.",
+    "stderr": ""
+  },
+  "iarlogin_login_help": {
+    "exit_code": 0,
+    "stdout": "Usage: iarlogin login [OPTIONS]\n\n  Initiate authentication (browser-based or device code)\n\nOptions:\n  --use-device-code         Use device code authentication\n  --no-open                 Do not open browser automatically\n  -t, --timeout INTEGER     Timeout in seconds  [default: 600]\n  --no-pretty-print         Disables JSON pretty-printing\n  -o, --output [json|yaml]  Output format (json or yaml, defaults to json if\n                            flag is set)\n  -v, --api-version [1]     Specifies which API version to use\n  --help                    Show this message and exit.",
+    "stderr": ""
+  }
+}

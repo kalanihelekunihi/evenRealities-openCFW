@@ -1,0 +1,20 @@
+{
+  "task_id": "P2-15909",
+  "accepted": false,
+  "status": "partial",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_outputs": [
+    "fresh/summary.json",
+    "fresh/candidates.jsonl",
+    "fresh/inputs.json"
+  ],
+  "audit_sha256": "d56312f9d997f0f3abca09869c55b8e95d97c1108db5e7c7313ede97de74d668",
+  "candidate_functions": 10499,
+  "review": "Fresh replay matches the saved raw candidate index summary and per-candidate output: 10,499 candidates across main flash, bootloader flash, touch, and case. Image, run, and manifest hashes were rechecked; each discontiguous body range is hashed independently, while envelope hashes are explicitly marked as including gaps. The captured summary has 8,853 main candidates (8,475 raw decompiler flag true,378 false),903 bootloader candidates (849/54),308 touch candidates, and435 case candidates.",
+  "limitations": [
+    "Raw discovery/decompiler output is not semantic review or admission.",
+    "Envelope hashes do not represent exact discontiguous body coverage; candidate-function completeness and overlaps remain unreviewed.",
+    "Nested and non-ARM images are outside this index; counts are not a whole-firmware denominator.",
+    "No C reconstruction or freeze gate is established."
+  ]
+}

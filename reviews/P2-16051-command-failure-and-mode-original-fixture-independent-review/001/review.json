@@ -1,0 +1,22 @@
+{
+  "task_id": "P2-16051",
+  "accepted": false,
+  "status": "partial",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-library-command-failure-and-mode-original-fixture-16448/002",
+  "candidate_results_sha256": "ec65402d087ce72cf93499538d049ff87b2da206d25b597a2366cd553949bd62",
+  "candidate_replay_sha256": "4f6cba0b92e73eecc528aece11ce1f6ad3d4edc6d1c78fd5978bd589f41cf029",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_results_sha256": "ec65402d087ce72cf93499538d049ff87b2da206d25b597a2366cd553949bd62",
+  "case_count": 2048,
+  "cohorts": {
+    "fixed_overflow": 512,
+    "flush_null": 512,
+    "flush_empty": 512,
+    "mode_cached": 512
+  },
+  "review": "Fresh no-hook replay passed the 2048 scoped cases for fixed-overflow error OR, NULL-flush tail, empty linear/ring flush, and the mode wrapper cache-hit path. The wrapper outputs FFFFFFFF, zero, and entry R7 from repurposed saved slots.",
+  "limitations": [
+    "Nonempty flush/submission, backing faults, concurrent mutation, physical hardware effects, and untested return/flag state remain unqualified.",
+    "No admission or gate change."
+  ]
+}

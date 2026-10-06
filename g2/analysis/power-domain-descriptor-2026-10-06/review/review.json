@@ -1,0 +1,71 @@
+{
+  "disposition": "pass_bounded_scope",
+  "scope": "Power-domain descriptor table/lookup and IOM module-to-domain selection only.",
+  "comparison": {
+    "path": "g2/build/foundation/power-domain-simulator/comparison.json",
+    "sha256": "1d259b504f16de2e635dccc998b150ae37295ddca27e482aef712c9f63dba31a",
+    "status": "PASS",
+    "cases": 246,
+    "trace_bytes": 92,
+    "new_unique_trace_bytes": 58,
+    "overlap_bytes": 34
+  },
+  "elf": {
+    "path": "g2/build/foundation/power-domain-simulator/power_domain.elf",
+    "sha256": "c64c4c8eb0e1f4c73f64d071bd126b7577977beef6ce27d5cd8b052d4bd36e4f"
+  },
+  "table": {
+    "pointer_literal": "0x47F944",
+    "address": "0x6BECB0",
+    "end_exclusive": "0x6BEED0",
+    "record_bytes": 16,
+    "record_count": 34,
+    "total_bytes": 544,
+    "sha256": "6883e99ca3d6bcc6ab1914d77fe857be7af7f67189c2bf81159b94345cede9e0"
+  },
+  "stock_lookup": {
+    "entry": "0x47EF18",
+    "copy": "0x439C04",
+    "invalid_return": 6,
+    "range_check": "domain >= 34",
+    "copy_bytes": 16
+  },
+  "consumer_cut": {
+    "entry": "0x55CA72",
+    "endpoint": "0x47F7BE",
+    "selection": "(uint8_t)(module+3)",
+    "claim": "Execution begins at 0x55CA72 and reaches 0x47F7BE inside the lookup helper called at 0x55CA78. The helper remainder and later 0x55CA84 call to 0x4C4530/status handling are unexecuted."
+  },
+  "independent_rerun": {
+    "path": "g2/analysis/power-domain-descriptor-2026-10-06/review/representative-rerun.json",
+    "status": "PASS",
+    "cases": 11,
+    "run_sha256": "59ddd21212baf96a0e48f47ef54fb98ed97b0d4b4f1eea56ea30349ce8ada629"
+  },
+  "accounting": {
+    "baseline_touch_bytes": 234,
+    "baseline_apollo_main_bytes": 6056,
+    "baseline_total": 6290,
+    "descriptor_new_unique_apollo_bytes": 58,
+    "result_touch_bytes": 234,
+    "result_apollo_main_bytes": 6114,
+    "result_total": 6348,
+    "trace_inventory_tests": "4 passed"
+  },
+  "limits": [
+    "No MMIO or physical power action was executed or claimed.",
+    "No downstream IOM power-control, ROM40, delay, timeout, callback, or asynchronous ownership behavior is covered.",
+    "CMDQ/IOM-release curIdx intermediate RAM-store difference remains separate; this batch adds no credit for it. The optimized tick path is a distinct Unicorn instrumentation-sensitive blocked case, unchanged by this batch.",
+    "The later status-consuming power call and the status-poll fragment are static observations only; their time units and operation semantics are not validated."
+  ],
+  "hash_bindings": {
+    "g2/components/foundation/power_domain/power_domain.c": "29333d2ac5740f0b9e6657a387c23641b0361c441b0628df16aee25171b794c7",
+    "g2/components/foundation/power_domain/power_domain.h": "a47aaa61e248c78bd52ec2bc8ee74a5f3504eacf4f290989251eda13207e8057",
+    "g2/components/foundation/power_domain/verify.py": "514cada1fee96cdcc72ce60a3306887cafe5e0ce13386277673d7fb8f25340ce",
+    "g2/build/foundation/power-domain-simulator/power_domain.elf": "c64c4c8eb0e1f4c73f64d071bd126b7577977beef6ce27d5cd8b052d4bd36e4f",
+    "g2/build/foundation/power-domain-simulator/comparison.json": "1d259b504f16de2e635dccc998b150ae37295ddca27e482aef712c9f63dba31a",
+    "g2/analysis/power-domain-descriptor-2026-10-06/cumulative-inventory.json": "cbff1da7a378c7edb79ddf78093824bf1980300097d27da6c36fcde63e2d8ade",
+    "g2/analysis/power-domain-descriptor-2026-10-06/build-provenance.json": "422d5721c0d6b23a5609da086332ea36202440a25738dd8accfe32422a371752"
+  },
+  "issues": []
+}

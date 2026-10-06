@@ -1,0 +1,79 @@
+
+g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0042074e <.data+0x1074e>:
+  42074e:	b51f      	push	{r0, r1, r2, r3, r4, lr}
+  420750:	2205      	movs	r2, #5
+  420752:	2100      	movs	r1, #0
+  420754:	a802      	add	r0, sp, #8
+  420756:	f006 fa5b 	bl	0x426c10
+  42075a:	2001      	movs	r0, #1
+  42075c:	9000      	str	r0, [sp, #0]
+  42075e:	ab02      	add	r3, sp, #8
+  420760:	2200      	movs	r2, #0
+  420762:	2100      	movs	r1, #0
+  420764:	2005      	movs	r0, #5
+  420766:	f7ff ff45 	bl	0x4205f4
+  42076a:	0004      	movs	r4, r0
+  42076c:	2c00      	cmp	r4, #0
+  42076e:	d00f      	beq.n	0x420790
+  420770:	f8df 0888 	ldr.w	r0, [pc, #2184]	@ 0x420ffc
+  420774:	9001      	str	r0, [sp, #4]
+  420776:	f240 3076 	movw	r0, #886	@ 0x376
+  42077a:	9000      	str	r0, [sp, #0]
+  42077c:	f8df 3880 	ldr.w	r3, [pc, #2176]	@ 0x421000
+  420780:	4a7d      	ldr	r2, [pc, #500]	@ (0x420978)
+  420782:	f8df 1358 	ldr.w	r1, [pc, #856]	@ 0x420adc
+  420786:	2002      	movs	r0, #2
+  420788:	f7f6 ffa1 	bl	0x4176ce
+  42078c:	0020      	movs	r0, r4
+  42078e:	e006      	b.n	0x42079e
+  420790:	f89d 0008 	ldrb.w	r0, [sp, #8]
+  420794:	07c0      	lsls	r0, r0, #31
+  420796:	d501      	bpl.n	0x42079c
+  420798:	2001      	movs	r0, #1
+  42079a:	e000      	b.n	0x42079e
+  42079c:	2000      	movs	r0, #0
+  42079e:	b004      	add	sp, #16
+  4207a0:	bd10      	pop	{r4, pc}
+  4207a2:	b538      	push	{r3, r4, r5, lr}
+  4207a4:	0004      	movs	r4, r0
+  4207a6:	2500      	movs	r5, #0
+  4207a8:	e003      	b.n	0x4207b2
+  4207aa:	2005      	movs	r0, #5
+  4207ac:	f7ff f91b 	bl	0x41f9e6
+  4207b0:	1c6d      	adds	r5, r5, #1
+  4207b2:	2dc8      	cmp	r5, #200	@ 0xc8
+  4207b4:	d205      	bcs.n	0x4207c2
+  4207b6:	f7ff ffca 	bl	0x42074e
+  4207ba:	2800      	cmp	r0, #0
+  4207bc:	d1f5      	bne.n	0x4207aa
+  4207be:	2000      	movs	r0, #0
+  4207c0:	e017      	b.n	0x4207f2
+  4207c2:	2500      	movs	r5, #0
+  4207c4:	e000      	b.n	0x4207c8
+  4207c6:	1c6d      	adds	r5, r5, #1
+  4207c8:	42a5      	cmp	r5, r4
+  4207ca:	d211      	bcs.n	0x4207f0
+  4207cc:	f7f5 fc5c 	bl	0x416088
+  4207d0:	2802      	cmp	r0, #2
+  4207d2:	d103      	bne.n	0x4207dc
+  4207d4:	2001      	movs	r0, #1
+  4207d6:	f7f5 fdcf 	bl	0x416378
+  4207da:	e003      	b.n	0x4207e4
+  4207dc:	f44f 707a 	mov.w	r0, #1000	@ 0x3e8
+  4207e0:	f7ff f901 	bl	0x41f9e6
+  4207e4:	f7ff ffb3 	bl	0x42074e
+  4207e8:	2800      	cmp	r0, #0
+  4207ea:	d1ec      	bne.n	0x4207c6
+  4207ec:	2000      	movs	r0, #0
+  4207ee:	e000      	b.n	0x4207f2
+  4207f0:	2001      	movs	r0, #1
+  4207f2:	bd32      	pop	{r1, r4, r5, pc}
+  4207f4:	b580      	push	{r7, lr}
+  4207f6:	f44f 70fa 	mov.w	r0, #500	@ 0x1f4
+  4207fa:	f7ff ffd2 	bl	0x4207a2
+  4207fe:	bd02      	pop	{r1, pc}

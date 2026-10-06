@@ -1,0 +1,18 @@
+{
+  "task_id": "P2-16017",
+  "accepted": false,
+  "status": "partial",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-rounded-command-radius-entry-16412-map/001",
+  "candidate_receipt_sha256": "359a6cadbc17f595652a22227ccae2877678c130eb654be53f4fa552837df379",
+  "candidate_instructions_sha256": "4fa2443d51e8901a3e121434d3f092020a9a82cbb271575f37b58f850ab67032",
+  "candidate_pseudocode_sha256": "f16ba8bc4355f6373f60d084d27d264bb8b68a6e8c9acdbe480ca863bdcd61cd",
+  "candidate_replay_sha256": "ca625467634f49aadf9a7992afa47358bd9d3081d488eea52993e3ea61f601ff",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_replay_stdout": "PASS 124",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "review": "Radius correction, signed comparisons, and command-store ordering match the decoded bytes; child allocator effects remain unresolved.",
+  "limitations": [
+    "Only the bounded original-image span is reviewed; child behavior, function ownership/completeness, architecture-specific effects and physical rendering are unqualified.",
+    "No C implementation, admission, coverage promotion or gate change."
+  ]
+}

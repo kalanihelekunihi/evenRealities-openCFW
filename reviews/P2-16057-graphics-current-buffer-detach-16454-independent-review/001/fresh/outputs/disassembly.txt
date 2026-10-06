@@ -1,0 +1,33 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmprz96pic2/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+005144ba <.text>:
+  5144ba:	b430      	push	{r4, r5}
+  5144bc:	f8df 06b8 	ldr.w	r0, [pc, #1720]	@ 514b78 <.text+0x6be>
+  5144c0:	6801      	ldr	r1, [r0, #0]
+  5144c2:	6848      	ldr	r0, [r1, #4]
+  5144c4:	b1a8      	cbz	r0, 5144f2 <.text+0x38>
+  5144c6:	6942      	ldr	r2, [r0, #20]
+  5144c8:	6903      	ldr	r3, [r0, #16]
+  5144ca:	1c94      	adds	r4, r2, #2
+  5144cc:	42a3      	cmp	r3, r4
+  5144ce:	db0c      	blt.n	5144ea <.text+0x30>
+  5144d0:	6883      	ldr	r3, [r0, #8]
+  5144d2:	f44f 24a0 	mov.w	r4, #327680	@ 0x50000
+  5144d6:	2500      	movs	r5, #0
+  5144d8:	f843 4022 	str.w	r4, [r3, r2, lsl #2]
+  5144dc:	1d1b      	adds	r3, r3, #4
+  5144de:	f843 5022 	str.w	r5, [r3, r2, lsl #2]
+  5144e2:	6982      	ldr	r2, [r0, #24]
+  5144e4:	f022 0208 	bic.w	r2, r2, #8
+  5144e8:	6182      	str	r2, [r0, #24]
+  5144ea:	6982      	ldr	r2, [r0, #24]
+  5144ec:	f022 0220 	bic.w	r2, r2, #32
+  5144f0:	6182      	str	r2, [r0, #24]
+  5144f2:	2000      	movs	r0, #0
+  5144f4:	6048      	str	r0, [r1, #4]
+  5144f6:	bc30      	pop	{r4, r5}
+  5144f8:	4770      	bx	lr

@@ -1,0 +1,42 @@
+{
+  "target": "make -C g2 radio-transport-pads-simulator",
+  "compiler_profile": "clang --target=arm-none-eabi -mcpu=cortex-m4 -mthumb -mfloat-abi=soft -ffreestanding -fno-builtin -std=c11 -Wall -Wextra -Werror -O2 -fwrapv; arm-none-eabi-ld existing module.ld",
+  "semantic_simulator_only": true,
+  "undefined_symbols": [],
+  "production_byte_equality": false,
+  "bindings": {
+    "g2/Makefile": "604c96847b8e8dc3f4d88e78a91818b09838e8ec2dc0f1f0ef91ce6a2b714f80",
+    "g2/components/foundation/radio_transport_pads/transport_pads.h": "f9e58dd3d4040ed6591ec8e0acc04502b0f7de6d080e27871751aa33c5ac6ff7",
+    "g2/components/foundation/radio_transport_pads/transport_pads.c": "8607b23d5c0f5fa1eb00b229670d7efc0929a5d91dc89b7574f1dacd0b97df3b",
+    "g2/components/foundation/ambiq_gpio_config/gpio_state.c": "e913d52ab6820e1d9314c47cdab7dd7a1ab4493da57d6d42c9f87ed43468563e",
+    "g2/components/foundation/ambiq_gpio_config/gpio_config_compat.h": "d5364aaadfdb25682685edddbe70f016660c4f69bfc98270e248d365c623527d",
+    "g2/components/foundation/ambiq_gpio_config/gpio_config.h": "503f5e3d346bd89f6b1b27952c49d789913da3857b136d55a50c5b4bae1738f6",
+    "g2/components/foundation/ambiq_gpio_config/radio_control.c": "2d229817eddb89988213273246eafee36f5c0a644c73a8c98bcfa6cecee743d4",
+    "g2/components/foundation/ambiq_gpio_config/ambiq_gpio_config.c": "4f73b343fc2907a359ce757e7fe934d587aefe55504b1abbe87c89675668e892",
+    "g2/components/foundation/ambiq_gpio_config/gpio_interrupt_control.h": "e3277f16f9c7956402575c66557f9c1b3eac81aad30a39037fa95ef33f2711ef",
+    "g2/components/foundation/ambiq_gpio_config/gpio_interrupt_control.c": "d23f207c25c84744f76918884a66a32c9ebc92b41a4cdf160c107409343ec1a2",
+    "g2/components/foundation/ambiq_gpio_config/gpio_control_compat.h": "1662d7626dd77102d7560cc249052db65428abd3d84b3cc032c77ed25e9f6502",
+    "g2/components/foundation/ambiq_gpio_config/radio_board.c": "250858d0afcc7a9554d4d91766e998afe942f2cb6f49a495856fd307f87ed941",
+    "g2/components/foundation/ambiq_gpio_config/simulator/module.ld": "34dc9cd95b6c71c3d2eac0f2dafea432d719275592798818fb0c99d07e86e53b",
+    "g2/components/foundation/ambiq_mspi/ambiq_cmdq.c": "39dfd4515413e88e66b07f8eea47664a6d666943069e65768f1a284435583a24",
+    "g2/components/foundation/ambiq_mspi/ambiq_interrupt_mask.c": "27a574d24f61bf1bec7a13d16bc3e1f0816c35045f384b5ad85d808871f6a9eb",
+    "g2/components/foundation/ambiq_mspi/ambiq_mspi_interrupts.c": "032087d41fe463a36c6a119b8fd2a7beb1256356e2f6d8d9d7f4ca75e02e5ba3",
+    "g2/components/foundation/ambiq_mspi/ambiq_mspi_lifecycle.c": "c55c3e163097e0112b11eb9fc4192b6a25de8cdaf28da41b1e3a6c8f2272ad0d",
+    "g2/components/foundation/ambiq_mspi/ambiq_mspi_compat.h": "fe6af8d10f857eb6bfb2758907073bd5ab75691a6818c03c94f0124a0f285299",
+    "g2/components/foundation/ambiq_mspi/ambiq_cmdq.h": "8f4dffc5e3cf2b33cf877dab9ba5b2841b74451a379b9ab49ab4ec0d2869ce7d",
+    "g2/components/foundation/ambiq_mspi/ambiq_mspi_interrupts.h": "89f04627e3270417130428894d6523b66e1191842dfd5baba01ca0256be51337",
+    "g2/components/foundation/ambiq_mspi/ambiq_interrupt_mask.h": "76e92c27af92ed403326c65acdbb890dccfb4f00788f06c6c99f09e4ec0de98a",
+    "g2/components/foundation/ambiq_mspi/simulator/lifecycle_seams.c": "6b3e74175d61d32ef8c416a72f795ec7b722d6ab0442dd7409e6b7fb1d34e644",
+    "g2/components/foundation/ambiq_mspi/simulator/module.ld": "de37d00a5c0dfa28c3630bae181df5f6b8383ea2e17e1cb371e39f4f00f6185f",
+    "g2/components/foundation/ambiq_mspi/simulator/entry.c": "762eab9e3d49371055ba5e9941f62540f6538348b23d9f5990e01e7340850b28",
+    "g2/build/foundation/radio-transport-pads-simulator/critical.o": "2addec12eaf2ee85a148df1564e6a6fcfcc8363748775bc6d0c5e646b9e0fe65",
+    "g2/build/foundation/radio-transport-pads-simulator/config.o": "62dfae67c05449be4a008d34630793921f7d431c4de5c2bc3a8b97104259880e",
+    "g2/build/foundation/radio-transport-pads-simulator/pads.o": "0f365af1de5451aefa8b7ab15b2f904730a826bfdb5aa0f1844435cb1728c9da",
+    "g2/build/foundation/radio-transport-pads-simulator/transport_pads.elf": "83e0709aaf877e476a2c371761b510668fda5f7e01b292e6bf2818d220b936ad",
+    "g2/components/foundation/radio_transport_pads/verify.py": "53cf3e6f001ca9107c6fc95e191a4c4e59f38a0c24413aaf250f4fa27cf1e17e"
+  },
+  "results": {
+    "g2/build/foundation/radio-transport-pads-simulator/comparison.json": "bca050a1587a57f8ab56aec95543072318936045a4a716303d565f31a8232244",
+    "g2/build/foundation/radio-transport-pads-simulator/aggregate.json": "9d12780b314962a12897e7fca24f94fb7e364895be7795a0f7a4b5abcad10d5b"
+  }
+}

@@ -1,0 +1,912 @@
+{
+  "status": "PASS_BOUNDED_PREFIX_ONLY",
+  "cases": [
+    {
+      "address": "0x20008000",
+      "length": 2147483647,
+      "clean": false,
+      "flag": 0,
+      "initial_adjusted_counter": "0x7fffffff",
+      "mathematical_write_count": 67108864,
+      "signed_boundary_crossed": false,
+      "unsigned_addition_overflow": false,
+      "original": {
+        "classification": "execution_budget",
+        "completed": false,
+        "instruction_budget": 30000,
+        "instructions": 30000,
+        "writes_observed": 4997,
+        "first_values": [
+          536903680,
+          536903712,
+          536903744,
+          536903776,
+          536903808,
+          536903840,
+          536903872,
+          536903904
+        ],
+        "last_values": [
+          537063328,
+          537063360,
+          537063392,
+          537063424,
+          537063456,
+          537063488,
+          537063520,
+          537063552
+        ],
+        "prefix_sha256": "8eb04f17b91202708b6372611cae81f6e55493b45431da1a6b559fd2b0e05d23",
+        "first_barrier": [
+          "dsb"
+        ],
+        "pc_at_budget": "0x4750f6"
+      },
+      "source": {
+        "classification": "execution_budget",
+        "completed": false,
+        "instruction_budget": 30000,
+        "instructions": 30000,
+        "writes_observed": 5996,
+        "first_values": [
+          536903680,
+          536903712,
+          536903744,
+          536903776,
+          536903808,
+          536903840,
+          536903872,
+          536903904
+        ],
+        "last_values": [
+          537095296,
+          537095328,
+          537095360,
+          537095392,
+          537095424,
+          537095456,
+          537095488,
+          537095520
+        ],
+        "prefix_sha256": "b90f33207d036eb3d5cba0e385065da05d23cda3bd347d6e46217ff4568f10a3",
+        "first_barrier": [
+          "dsb"
+        ],
+        "pc_at_budget": "0x10044"
+      },
+      "stock_source_prefix_mismatch": false
+    },
+    {
+      "address": "0x20008001",
+      "length": 2147483647,
+      "clean": false,
+      "flag": 0,
+      "initial_adjusted_counter": "0x80000000",
+      "mathematical_write_count": 67108864,
+      "signed_boundary_crossed": true,
+      "unsigned_addition_overflow": false,
+      "original": {
+        "classification": "execution_budget",
+        "completed": false,
+        "instruction_budget": 30000,
+        "instructions": 30000,
+        "writes_observed": 4997,
+        "first_values": [
+          536903681,
+          536903713,
+          536903745,
+          536903777,
+          536903809,
+          536903841,
+          536903873,
+          536903905
+        ],
+        "last_values": [
+          537063329,
+          537063361,
+          537063393,
+          537063425,
+          537063457,
+          537063489,
+          537063521,
+          537063553
+        ],
+        "prefix_sha256": "1e38a548f4349d8ef5dc5512ae5557087acfa272f2c7c81a23f2d52c195a9a1f",
+        "first_barrier": [
+          "dsb"
+        ],
+        "pc_at_budget": "0x4750f6"
+      },
+      "source": {
+        "classification": "execution_budget",
+        "completed": false,
+        "instruction_budget": 30000,
+        "instructions": 30000,
+        "writes_observed": 5996,
+        "first_values": [
+          536903681,
+          536903713,
+          536903745,
+          536903777,
+          536903809,
+          536903841,
+          536903873,
+          536903905
+        ],
+        "last_values": [
+          537095297,
+          537095329,
+          537095361,
+          537095393,
+          537095425,
+          537095457,
+          537095489,
+          537095521
+        ],
+        "prefix_sha256": "c0132aa344b977a8dd399594ffe4eaaab1f56af7f6fc6bae570e1ce583d978b5",
+        "first_barrier": [
+          "dsb"
+        ],
+        "pc_at_budget": "0x10044"
+      },
+      "stock_source_prefix_mismatch": false
+    },
+    {
+      "address": "0x2000800f",
+      "length": 2147483647,
+      "clean": false,
+      "flag": 0,
+      "initial_adjusted_counter": "0x8000000e",
+      "mathematical_write_count": 67108865,
+      "signed_boundary_crossed": true,
+      "unsigned_addition_overflow": false,
+      "original": {
+        "classification": "execution_budget",
+        "completed": false,
+        "instruction_budget": 30000,
+        "instructions": 30000,
+        "writes_observed": 4997,
+        "first_values": [
+          536903695,
+          536903727,
+          536903759,
+          536903791,
+          536903823,
+          536903855,
+          536903887,
+          536903919
+        ],
+        "last_values": [
+          537063343,
+          537063375,
+          537063407,
+          537063439,
+          537063471,
+          537063503,
+          537063535,
+          537063567
+        ],
+        "prefix_sha256": "bdb83b303dc31a52a61b2920642ca93b67733f2544560b018a7592e20493a903",
+        "first_barrier": [
+          "dsb"
+        ],
+        "pc_at_budget": "0x4750f6"
+      },
+      "source": {
+        "classification": "execution_budget",
+        "completed": false,
+        "instruction_budget": 30000,
+        "instructions": 30000,
+        "writes_observed": 5996,
+        "first_values": [
+          536903695,
+          536903727,
+          536903759,
+          536903791,
+          536903823,
+          536903855,
+          536903887,
+          536903919
+        ],
+        "last_values": [
+          537095311,
+          537095343,
+          537095375,
+          537095407,
+          537095439,
+          537095471,
+          537095503,
+          537095535
+        ],
+        "prefix_sha256": "b483f9deb5fba227ea7814eeccf324abcf765658578a39bada5d9d00c03a9d1f",
+        "first_barrier": [
+          "dsb"
+        ],
+        "pc_at_budget": "0x10044"
+      },
+      "stock_source_prefix_mismatch": false
+    },
+    {
+      "address": "0x2000801f",
+      "length": 2147483647,
+      "clean": false,
+      "flag": 0,
+      "initial_adjusted_counter": "0x8000001e",
+      "mathematical_write_count": 67108865,
+      "signed_boundary_crossed": true,
+      "unsigned_addition_overflow": false,
+      "original": {
+        "classification": "execution_budget",
+        "completed": false,
+        "instruction_budget": 30000,
+        "instructions": 30000,
+        "writes_observed": 4997,
+        "first_values": [
+          536903711,
+          536903743,
+          536903775,
+          536903807,
+          536903839,
+          536903871,
+          536903903,
+          536903935
+        ],
+        "last_values": [
+          537063359,
+          537063391,
+          537063423,
+          537063455,
+          537063487,
+          537063519,
+          537063551,
+          537063583
+        ],
+        "prefix_sha256": "529b32ecb8bf28c753231502c27b71e73aa9f0109268c5b754500c2bf58c2979",
+        "first_barrier": [
+          "dsb"
+        ],
+        "pc_at_budget": "0x4750f6"
+      },
+      "source": {
+        "classification": "execution_budget",
+        "completed": false,
+        "instruction_budget": 30000,
+        "instructions": 30000,
+        "writes_observed": 5996,
+        "first_values": [
+          536903711,
+          536903743,
+          536903775,
+          536903807,
+          536903839,
+          536903871,
+          536903903,
+          536903935
+        ],
+        "last_values": [
+          537095327,
+          537095359,
+          537095391,
+          537095423,
+          537095455,
+          537095487,
+          537095519,
+          537095551
+        ],
+        "prefix_sha256": "99b6fe8145299590e68048f1a226f2220c0f7a9a92c0b3bca0c5058180c47638",
+        "first_barrier": [
+          "dsb"
+        ],
+        "pc_at_budget": "0x10044"
+      },
+      "stock_source_prefix_mismatch": false
+    },
+    {
+      "address": "0x20008000",
+      "length": 2147483647,
+      "clean": false,
+      "flag": 1,
+      "initial_adjusted_counter": "0x7fffffff",
+      "mathematical_write_count": 67108864,
+      "signed_boundary_crossed": false,
+      "unsigned_addition_overflow": false,
+      "original": {
+        "classification": "execution_budget",
+        "completed": false,
+        "instruction_budget": 30000,
+        "instructions": 30000,
+        "writes_observed": 4997,
+        "first_values": [
+          536903680,
+          536903712,
+          536903744,
+          536903776,
+          536903808,
+          536903840,
+          536903872,
+          536903904
+        ],
+        "last_values": [
+          537063328,
+          537063360,
+          537063392,
+          537063424,
+          537063456,
+          537063488,
+          537063520,
+          537063552
+        ],
+        "prefix_sha256": "8eb04f17b91202708b6372611cae81f6e55493b45431da1a6b559fd2b0e05d23",
+        "first_barrier": [
+          "dsb"
+        ],
+        "pc_at_budget": "0x4750ce"
+      },
+      "source": {
+        "classification": "execution_budget",
+        "completed": false,
+        "instruction_budget": 30000,
+        "instructions": 30000,
+        "writes_observed": 5996,
+        "first_values": [
+          536903680,
+          536903712,
+          536903744,
+          536903776,
+          536903808,
+          536903840,
+          536903872,
+          536903904
+        ],
+        "last_values": [
+          537095296,
+          537095328,
+          537095360,
+          537095392,
+          537095424,
+          537095456,
+          537095488,
+          537095520
+        ],
+        "prefix_sha256": "b90f33207d036eb3d5cba0e385065da05d23cda3bd347d6e46217ff4568f10a3",
+        "first_barrier": [
+          "dsb"
+        ],
+        "pc_at_budget": "0x10046"
+      },
+      "stock_source_prefix_mismatch": false
+    },
+    {
+      "address": "0x20008001",
+      "length": 2147483647,
+      "clean": false,
+      "flag": 1,
+      "initial_adjusted_counter": "0x80000000",
+      "mathematical_write_count": 67108864,
+      "signed_boundary_crossed": true,
+      "unsigned_addition_overflow": false,
+      "original": {
+        "classification": "execution_budget",
+        "completed": false,
+        "instruction_budget": 30000,
+        "instructions": 30000,
+        "writes_observed": 4997,
+        "first_values": [
+          536903681,
+          536903713,
+          536903745,
+          536903777,
+          536903809,
+          536903841,
+          536903873,
+          536903905
+        ],
+        "last_values": [
+          537063329,
+          537063361,
+          537063393,
+          537063425,
+          537063457,
+          537063489,
+          537063521,
+          537063553
+        ],
+        "prefix_sha256": "1e38a548f4349d8ef5dc5512ae5557087acfa272f2c7c81a23f2d52c195a9a1f",
+        "first_barrier": [
+          "dsb"
+        ],
+        "pc_at_budget": "0x4750ce"
+      },
+      "source": {
+        "classification": "execution_budget",
+        "completed": false,
+        "instruction_budget": 30000,
+        "instructions": 30000,
+        "writes_observed": 5996,
+        "first_values": [
+          536903681,
+          536903713,
+          536903745,
+          536903777,
+          536903809,
+          536903841,
+          536903873,
+          536903905
+        ],
+        "last_values": [
+          537095297,
+          537095329,
+          537095361,
+          537095393,
+          537095425,
+          537095457,
+          537095489,
+          537095521
+        ],
+        "prefix_sha256": "c0132aa344b977a8dd399594ffe4eaaab1f56af7f6fc6bae570e1ce583d978b5",
+        "first_barrier": [
+          "dsb"
+        ],
+        "pc_at_budget": "0x10046"
+      },
+      "stock_source_prefix_mismatch": false
+    },
+    {
+      "address": "0x2000800f",
+      "length": 2147483647,
+      "clean": false,
+      "flag": 1,
+      "initial_adjusted_counter": "0x8000000e",
+      "mathematical_write_count": 67108865,
+      "signed_boundary_crossed": true,
+      "unsigned_addition_overflow": false,
+      "original": {
+        "classification": "execution_budget",
+        "completed": false,
+        "instruction_budget": 30000,
+        "instructions": 30000,
+        "writes_observed": 4997,
+        "first_values": [
+          536903695,
+          536903727,
+          536903759,
+          536903791,
+          536903823,
+          536903855,
+          536903887,
+          536903919
+        ],
+        "last_values": [
+          537063343,
+          537063375,
+          537063407,
+          537063439,
+          537063471,
+          537063503,
+          537063535,
+          537063567
+        ],
+        "prefix_sha256": "bdb83b303dc31a52a61b2920642ca93b67733f2544560b018a7592e20493a903",
+        "first_barrier": [
+          "dsb"
+        ],
+        "pc_at_budget": "0x4750ce"
+      },
+      "source": {
+        "classification": "execution_budget",
+        "completed": false,
+        "instruction_budget": 30000,
+        "instructions": 30000,
+        "writes_observed": 5996,
+        "first_values": [
+          536903695,
+          536903727,
+          536903759,
+          536903791,
+          536903823,
+          536903855,
+          536903887,
+          536903919
+        ],
+        "last_values": [
+          537095311,
+          537095343,
+          537095375,
+          537095407,
+          537095439,
+          537095471,
+          537095503,
+          537095535
+        ],
+        "prefix_sha256": "b483f9deb5fba227ea7814eeccf324abcf765658578a39bada5d9d00c03a9d1f",
+        "first_barrier": [
+          "dsb"
+        ],
+        "pc_at_budget": "0x10046"
+      },
+      "stock_source_prefix_mismatch": false
+    },
+    {
+      "address": "0x2000801f",
+      "length": 2147483647,
+      "clean": false,
+      "flag": 1,
+      "initial_adjusted_counter": "0x8000001e",
+      "mathematical_write_count": 67108865,
+      "signed_boundary_crossed": true,
+      "unsigned_addition_overflow": false,
+      "original": {
+        "classification": "execution_budget",
+        "completed": false,
+        "instruction_budget": 30000,
+        "instructions": 30000,
+        "writes_observed": 4997,
+        "first_values": [
+          536903711,
+          536903743,
+          536903775,
+          536903807,
+          536903839,
+          536903871,
+          536903903,
+          536903935
+        ],
+        "last_values": [
+          537063359,
+          537063391,
+          537063423,
+          537063455,
+          537063487,
+          537063519,
+          537063551,
+          537063583
+        ],
+        "prefix_sha256": "529b32ecb8bf28c753231502c27b71e73aa9f0109268c5b754500c2bf58c2979",
+        "first_barrier": [
+          "dsb"
+        ],
+        "pc_at_budget": "0x4750ce"
+      },
+      "source": {
+        "classification": "execution_budget",
+        "completed": false,
+        "instruction_budget": 30000,
+        "instructions": 30000,
+        "writes_observed": 5996,
+        "first_values": [
+          536903711,
+          536903743,
+          536903775,
+          536903807,
+          536903839,
+          536903871,
+          536903903,
+          536903935
+        ],
+        "last_values": [
+          537095327,
+          537095359,
+          537095391,
+          537095423,
+          537095455,
+          537095487,
+          537095519,
+          537095551
+        ],
+        "prefix_sha256": "99b6fe8145299590e68048f1a226f2220c0f7a9a92c0b3bca0c5058180c47638",
+        "first_barrier": [
+          "dsb"
+        ],
+        "pc_at_budget": "0x10046"
+      },
+      "stock_source_prefix_mismatch": false
+    },
+    {
+      "address": "0x20008000",
+      "length": 2147483647,
+      "clean": true,
+      "flag": 0,
+      "initial_adjusted_counter": "0x7fffffff",
+      "mathematical_write_count": 67108864,
+      "signed_boundary_crossed": false,
+      "unsigned_addition_overflow": false,
+      "original": {
+        "classification": "execution_budget",
+        "completed": false,
+        "instruction_budget": 30000,
+        "instructions": 30000,
+        "writes_observed": 4998,
+        "first_values": [
+          536903680,
+          536903712,
+          536903744,
+          536903776,
+          536903808,
+          536903840,
+          536903872,
+          536903904
+        ],
+        "last_values": [
+          537063360,
+          537063392,
+          537063424,
+          537063456,
+          537063488,
+          537063520,
+          537063552,
+          537063584
+        ],
+        "prefix_sha256": "f09c03244f632c871cc474df435d18f49d0a200c07a96c34924a3ce88434370c",
+        "first_barrier": [
+          "dsb"
+        ],
+        "pc_at_budget": "0x475182"
+      },
+      "source": {
+        "classification": "execution_budget",
+        "completed": false,
+        "instruction_budget": 30000,
+        "instructions": 30000,
+        "writes_observed": 5997,
+        "first_values": [
+          536903680,
+          536903712,
+          536903744,
+          536903776,
+          536903808,
+          536903840,
+          536903872,
+          536903904
+        ],
+        "last_values": [
+          537095328,
+          537095360,
+          537095392,
+          537095424,
+          537095456,
+          537095488,
+          537095520,
+          537095552
+        ],
+        "prefix_sha256": "2a3ad2fba0dd7d533d84e58c1d481a378ef966de268b068abdbf4971e36895d8",
+        "first_barrier": [
+          "dsb"
+        ],
+        "pc_at_budget": "0x1024a"
+      },
+      "stock_source_prefix_mismatch": false
+    },
+    {
+      "address": "0x20008001",
+      "length": 2147483647,
+      "clean": true,
+      "flag": 0,
+      "initial_adjusted_counter": "0x80000000",
+      "mathematical_write_count": 67108864,
+      "signed_boundary_crossed": true,
+      "unsigned_addition_overflow": false,
+      "original": {
+        "classification": "execution_budget",
+        "completed": false,
+        "instruction_budget": 30000,
+        "instructions": 30000,
+        "writes_observed": 4998,
+        "first_values": [
+          536903681,
+          536903713,
+          536903745,
+          536903777,
+          536903809,
+          536903841,
+          536903873,
+          536903905
+        ],
+        "last_values": [
+          537063361,
+          537063393,
+          537063425,
+          537063457,
+          537063489,
+          537063521,
+          537063553,
+          537063585
+        ],
+        "prefix_sha256": "6d32d93069f9dcdc3c5f2f0676f937c95ed782bf74845853bf89305697f41a88",
+        "first_barrier": [
+          "dsb"
+        ],
+        "pc_at_budget": "0x475182"
+      },
+      "source": {
+        "classification": "execution_budget",
+        "completed": false,
+        "instruction_budget": 30000,
+        "instructions": 30000,
+        "writes_observed": 5997,
+        "first_values": [
+          536903681,
+          536903713,
+          536903745,
+          536903777,
+          536903809,
+          536903841,
+          536903873,
+          536903905
+        ],
+        "last_values": [
+          537095329,
+          537095361,
+          537095393,
+          537095425,
+          537095457,
+          537095489,
+          537095521,
+          537095553
+        ],
+        "prefix_sha256": "9df275440552671c98be1593e26d6b217131aeec31bcf64561a8fbf9866f0a76",
+        "first_barrier": [
+          "dsb"
+        ],
+        "pc_at_budget": "0x1024a"
+      },
+      "stock_source_prefix_mismatch": false
+    },
+    {
+      "address": "0x2000800f",
+      "length": 2147483647,
+      "clean": true,
+      "flag": 0,
+      "initial_adjusted_counter": "0x8000000e",
+      "mathematical_write_count": 67108865,
+      "signed_boundary_crossed": true,
+      "unsigned_addition_overflow": false,
+      "original": {
+        "classification": "execution_budget",
+        "completed": false,
+        "instruction_budget": 30000,
+        "instructions": 30000,
+        "writes_observed": 4998,
+        "first_values": [
+          536903695,
+          536903727,
+          536903759,
+          536903791,
+          536903823,
+          536903855,
+          536903887,
+          536903919
+        ],
+        "last_values": [
+          537063375,
+          537063407,
+          537063439,
+          537063471,
+          537063503,
+          537063535,
+          537063567,
+          537063599
+        ],
+        "prefix_sha256": "5bdceec9228c84ff2c910060cf41fa42d5fa48e17acb6cbc2578a13e1dae6a57",
+        "first_barrier": [
+          "dsb"
+        ],
+        "pc_at_budget": "0x475182"
+      },
+      "source": {
+        "classification": "execution_budget",
+        "completed": false,
+        "instruction_budget": 30000,
+        "instructions": 30000,
+        "writes_observed": 5997,
+        "first_values": [
+          536903695,
+          536903727,
+          536903759,
+          536903791,
+          536903823,
+          536903855,
+          536903887,
+          536903919
+        ],
+        "last_values": [
+          537095343,
+          537095375,
+          537095407,
+          537095439,
+          537095471,
+          537095503,
+          537095535,
+          537095567
+        ],
+        "prefix_sha256": "baa349d0d2873b9a2b2a577104e153f49c71c9ebc78f55bd9c9a22bb14e02eac",
+        "first_barrier": [
+          "dsb"
+        ],
+        "pc_at_budget": "0x1024a"
+      },
+      "stock_source_prefix_mismatch": false
+    },
+    {
+      "address": "0x2000801f",
+      "length": 2147483647,
+      "clean": true,
+      "flag": 0,
+      "initial_adjusted_counter": "0x8000001e",
+      "mathematical_write_count": 67108865,
+      "signed_boundary_crossed": true,
+      "unsigned_addition_overflow": false,
+      "original": {
+        "classification": "execution_budget",
+        "completed": false,
+        "instruction_budget": 30000,
+        "instructions": 30000,
+        "writes_observed": 4998,
+        "first_values": [
+          536903711,
+          536903743,
+          536903775,
+          536903807,
+          536903839,
+          536903871,
+          536903903,
+          536903935
+        ],
+        "last_values": [
+          537063391,
+          537063423,
+          537063455,
+          537063487,
+          537063519,
+          537063551,
+          537063583,
+          537063615
+        ],
+        "prefix_sha256": "b731f83aa534dba6091aece50c77ac38b470b683f105bfd009e10daca89dc15f",
+        "first_barrier": [
+          "dsb"
+        ],
+        "pc_at_budget": "0x475182"
+      },
+      "source": {
+        "classification": "execution_budget",
+        "completed": false,
+        "instruction_budget": 30000,
+        "instructions": 30000,
+        "writes_observed": 5997,
+        "first_values": [
+          536903711,
+          536903743,
+          536903775,
+          536903807,
+          536903839,
+          536903871,
+          536903903,
+          536903935
+        ],
+        "last_values": [
+          537095359,
+          537095391,
+          537095423,
+          537095455,
+          537095487,
+          537095519,
+          537095551,
+          537095583
+        ],
+        "prefix_sha256": "ecdd53696a9f1921aabfb660611f9b097cc12d2ce31b2a057bd187ecb0cd98b0",
+        "first_barrier": [
+          "dsb"
+        ],
+        "pc_at_budget": "0x1024a"
+      },
+      "stock_source_prefix_mismatch": false
+    }
+  ],
+  "classification": "execution budget, not demonstrated stock/source mismatch or unsupported input",
+  "legitimate_raw_inputs_retained": true,
+  "completed_huge_paths_verified": false,
+  "arithmetic_contract": "For1<=length<=INT32_MAX and offset0..31, total commands ceil((length+offset)/32). Sum never overflows uint32. A signed-boundary crossing is followed by subtraction32 before the continuation comparison; it does not imply early return.",
+  "elf_sha256": "c35d1ef40fa4334044eba60f39d7a2bead8d4791832ecaceea2c829040b7381c",
+  "firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "script_sha256": "2be56ed63f96600991483e02a6fdd1c9656bab748c8789d1eec5bf1276828be2"
+}

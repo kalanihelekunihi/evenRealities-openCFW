@@ -1,0 +1,17 @@
+{
+  "accepted": false,
+  "status": "partial",
+  "cases": 2048,
+  "input_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "checks": [
+    "Original FP instructions no hooks",
+    "Positive nonzero quotient exponentlow8 0..15 random upperbits finite ratio0..100",
+    "Per-operation nearest singleprecision oracle then fixedpointtruncate15; fullRAM SP PC PRIMASK callees R1R2R3 immutableflash"
+  ],
+  "limitations": [
+    "FPSCR zero initialized FP enabled; FPSCR result flags not checked",
+    "No zero quotient NaN overflow trap alternate FP rounding or subnormal qualification",
+    "Python doubledivision followed by F32 oracle selected finite cohort only",
+    "No C admission freeze gates"
+  ]
+}

@@ -95,7 +95,7 @@ is to reach identical bytes, one function at a time.
 
 | Tool | Relevance |
 | --- | --- |
-| G2 firmware emulator (`PaulMcMillan/g2-firmware-emulator`) | The project's chosen G2 simulator/emulator for testing, debugging and validating rebuilt images before they go on a device. It is not publicly reachable from this environment, so it has not been added yet; see [`third-party/README.md`](../third-party/README.md#g2-firmware-emulator). |
+| G2 firmware emulator | Local checkout: `~/Repo/g2-firmware-emulator`, verified 2026-10-06. Use its image-specific 2.2.6.10 profiles for this campaign; its default firmware lock targets 2.2.9.22. Follow its `AGENTS.md`, which prohibits buzzer work. See [`third-party/README.md`](../third-party/README.md#g2-firmware-emulator). |
 | Unicorn 2.1.4 | Differential execution of stock and rebuilt Thumb functions. No MVE, ARC or C-SKY. |
 | Renode 1.17.0 | Has an nRF52840 platform, which suits R1 application, bootloader and SoftDevice bring-up. Ambiq support covers only Apollo4 Blue, so an Apollo510 `.repl` would have to be written. |
 | XuanTie QEMU (`3287d345c7f5d60d5c8774d90752f5f710744f85` [V]) | Candidate C-SKY semantics oracle for the GX8002. Current XuanTie QEMU builds target RISC-V, and CK804 support is unconfirmed. Otherwise rely on `csky-elfabiv2` binutils and manual trace review |
@@ -134,6 +134,18 @@ These tools are documented only; they are not pinned.
 
 | Class | Items |
 | --- | --- |
-| Git submodules (`third-party/tools/`) | asm-differ, decomp-permuter, GhidraSVD, ghidra_csky_WinnerMicro; still to add: the Ghidra ARC module (after forking) and the G2 firmware emulator |
+| Git submodules (`third-party/tools/`) | asm-differ, decomp-permuter, GhidraSVD, ghidra_csky_WinnerMicro; G2 emulator is available as a separate local checkout at `~/Repo/g2-firmware-emulator` |
 | `tools/bootstrap/` (pinned download and hash check) | Ghidra + JDK, rizin + rz-ghidra, Arm/ARC/C-SKY binutils and GCC, objdiff-cli, Renode, XuanTie QEMU, Python analysis environment (capstone, unicorn, lief, kaitaistruct, unblob, diffoscope), pyOCD, CMSIS packs |
 | Documented only (licensed or proprietary) | IAR EWARM, Synopsys MetaWare, Keil MDK / Arm Compiler 5, J-Link, IDA, Binary Ninja, nRF Sniffer, the full AmbiqSuite 5.1.0 SDK, the official EM9305 SDK v4.2 |
+
+## Downloaded SDKs and isolated Linux compiler setup
+
+The [local vendor setup guide](../third-party/downloaded/README.md) records
+Ambiq/EM SDK trees, C-SKY tools, retained Windows installers, and the official
+IAR Linux Base archive with published checksum. Payloads are ignored under
+`third-party/local-vendor/`; versioned manifests and setup scripts are in
+`third-party/downloaded/`. Use the existing Colima engine with the pinned
+Ubuntu24.04 amd64 base and separate tool environments. The IAR Base image is
+`opencfw/iar-base:10.10.2-local`; activation is a separate secure user step and
+is not performed by these setup scripts. See the guide for installed versus
+verified/activated status and volume restrictions.

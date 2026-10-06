@@ -1,0 +1,243 @@
+================================================================================
+
+Release Notes:  EM9305 DVK firmware
+
+================================================================================
+
+Release:        EM9305_DVK_v1.4.0.bin
+                2022-03-14
+
+New features:   - New DVK Meta-Command implemented:
+                    - Send RAW data
+
+Bug fix:        None
+
+Limitations:    None
+
+Known issues:   None
+
+================================================================================
+
+Release:        EM9305_DVK_v1.3.0.bin
+                2022-01-28
+
+New features:   None
+
+Bug fix:        - Glitch filter enabled on the EN pin to avoid spurious
+                  interrupts.
+
+Limitations:    None
+
+Known issues:   None
+
+================================================================================
+
+Release:        EM9305_DVK_v1.2.0.bin
+                2021-09-23
+
+New features:   None
+
+Bug fix:        - Avoid infinite retry loop in case the device does not answer.
+
+Limitations:    None
+
+Known issues:   None
+
+================================================================================
+
+Release:        EM9305_DVK_v1.1.0.bin
+                2021-08-23
+
+New features:   - HCI ISO Data packets support.
+
+Bug fix:        None
+
+Limitations:    None
+
+Known issues:   None
+
+================================================================================
+
+Release:        EM9305_DVK_v1.0.0.bin
+                2021-05-28
+
+New features:   - Initial FW release for the DVK board v002.
+
+Bug fix:        - The USB stack memory pointer was outside of the LPC1547 RAM.
+                - Number of RX/TX buffers reduced to 4+4 to fit in the RAM.
+
+Limitations:    None
+
+Known issues:   None
+
+================================================================================
+
+Release:        EM9305_DVK_v0.5.2.bin
+                2021-05-25
+
+New features:   - Linker options updated to be compatible with the MCU of the
+                  DVK board v002 (LPC1547).
+
+Bug fix:        None
+
+Limitations:    - NOT compatible with the DVK board v002!
+
+Known issues:   None
+
+================================================================================
+
+Release:        EM9305_DVK_v0.5.1.bin
+                2021-04-07
+
+New features:   None
+
+Bug fix:        - The level shifters could be in an unknown state during the
+                  first boot and each time they are enabled.
+
+Limitations:    - NOT compatible with the DVK board v002!
+
+Known issues:   None
+
+================================================================================
+
+Release:        EM9305_DVK_v0.5.0.bin
+                2021-04-05
+
+New features:   - Current measure driver implemented.
+                - Some new DVK Meta-Commands implemented:
+                    - Set Current Range
+                    - Connect Power DUT
+                    - Execute Current Calibration
+                    - Measure Current
+
+Bug fix:        None
+
+Limitations:    - NOT compatible with the DVK board v002!
+
+Known issues:   None
+
+================================================================================
+
+Release:        EM9305_DVK_v0.4.0.bin
+                2021-03-24
+
+New features:   - EM9305 states machines robustness and speed improved.
+                - Some new DVK Meta-Commands implemented:
+                    - Set Target Enable
+                    - Set Target Config Clock Enable
+                    - Set Power Mode
+                    - Set Level Shifters Enable
+                    - Set SPI Bus Enable
+                - New LEDs indicators:
+                    - The SPI LED indicates if the SPI Master Bus is enabled.
+                    - The DIO0 LED indicates if the level shifters are enabled.
+
+Bug fix:        None
+
+Limitations:    - NOT compatible with the DVK board v002!
+                - Current measurement not possible yet.
+
+Known issues:   None
+
+================================================================================
+
+Release:        EM9305_DVK_v0.3.0.bin
+                2021-03-18
+
+New features:   - MCU VCC and VREF voltages checked during the boot sequence.
+                - Power modes management:
+                    - Auto-detection (step-down / step-up).
+                    - Forcing with a jumper or with a command.
+                - Set a new power mode in the following cases:
+                    - During the boot sequence.
+                    - When a falling edge of the ENABLE pin is detected.
+                    - When the "Set Power Configuration" command is received.
+                - Checks the validity of the current power mode regulary and
+                  updates the LEDs accordingly:
+                    - PMG_OK: ON only if the current power mode is valid.
+                    - StepUp, StepDown, USB, and ExtUp: Detected power mode.
+                    - DCDCEN: DCDC is enabled.
+                - Variable power supplies management (for VIO & VBAT2).
+                - Some new DVK Meta-Commands implemented:
+                    - Set Power Configuration
+                    - Set Power Supplies
+                - HB LED no more used as a heartbeat.
+
+Bug fix:        - Issue with EM9305 RX/TX states machines synchronization fixed.
+
+Limitations:    - NOT compatible with the DVK board v002!
+                - Current measurement not possible yet.
+
+Known issues:   None
+
+================================================================================
+
+Release:        EM9305_DVK_v0.2.0.bin
+                2021-03-05
+
+New features:   - Some new DVK Meta-Commands implemented:
+                    - Get Product Name
+                    - Get Product Serial Number
+                    - Get Product Software Version
+                    - Target Hard Reset
+
+Bug fix:        None
+
+Limitations:    - NOT compatible with the DVK board v002!
+                - Current measurement not possible yet.
+                - Supports only step-down configuration (selected by default).
+                - Variable supplies management not implemented yet.
+
+Known issues:   None
+
+================================================================================
+
+Release:        EM9305_DVK_v0.1.1.bin
+                2021-03-02
+
+New features:   None
+
+Bug fix:        - USB issue with long commands (more than 64 bytes) fixed.
+                - Improved WRITE retries to avoid to lock the TX state machine.
+
+Limitations:    - NOT compatible with the DVK board v002!
+                - Current measurement not possible yet.
+                - Supports only step-down configuration (selected by default).
+                - Variable supplies management not implemented yet.
+                - DVK Meta-Commands not implemented yet.
+
+Known issues:   None
+
+================================================================================
+
+Release:        EM9305_DVK_v0.1.0.bin
+                2021-02-24
+
+New features:   - Operating system: FreeRTOS V202012.00.
+                - Tricolor LEDs used to indicate the DVK initialization status.
+                    - Start with the ORANGE LED ON.
+                    - After boot-up, the GREEN LED and the HB LED blink at 1Hz.
+                    - If the RED LED is ON, it means the initialization failed.
+                - Bidirectionnal communication PC <-USB-> DVK <-SPI-> EM9305.
+                    - The ORANGE LED is ON during SPI communication.
+                    - Basic parsing is performed by the DVK to intercept some
+                      commands and events.
+                    - Packets are managed using linked lists.
+                        - 8x TARGET to HOST packets.
+                        - 8x HOST to TARGET packets.
+                    - EM9305 Configuration Mode detection done by the DVK and
+                      indicated by the TM LED.
+                - The USR1 button initiates a hardware reset sequence of the
+                  EM9305 in Configuration Mode (with 32kHz clock on GPIO5).
+
+Bug fix:        None
+
+Limitations:    - NOT compatible with the DVK board v002!
+                - Current measurement not possible yet.
+                - Supports only step-down configuration (selected by default).
+                - Variable supplies management not implemented yet.
+                - DVK Meta-Commands not implemented yet.
+
+Known issues:   None
+
+================================================================================

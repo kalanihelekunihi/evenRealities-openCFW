@@ -1,0 +1,108 @@
+{
+  "schema": 1,
+  "tree_hash": "SHA256 of UTF-8 compact sorted-key JSON rows sorted by relative POSIX path; each row path,bytes,sha256. No symlinks.",
+  "packages": [
+    {
+      "id": "ambiq",
+      "filename": "AmbiqSuite_R3.2.0",
+      "kind": "directory",
+      "sha256": "59c7c93148730e5be4c61b77f1f00eee97d6885171d6024e732dac65e61003e5",
+      "version": "release_sdk_3_2_0-dd5f40c14b",
+      "action": "copy"
+    },
+    {
+      "id": "csky",
+      "filename": "csky\u5de5\u5177\u94fe.zip",
+      "kind": "file",
+      "sha256": "450ef1b709c0563d4a423ef8a3f28c6ee80b19d9faae73ace321dfd43c27340c",
+      "version": "C-SKY ABIv2 v3.10.15 / GCC 6.3.0",
+      "action": "copy"
+    },
+    {
+      "id": "em9305",
+      "filename": "T9305_EMB_SDK_installer.sh.zip",
+      "kind": "file",
+      "sha256": "c618dc7abaae6ea5b462b77528dceacf5c58aaee2c49eb862262b7a5b7310daa",
+      "version": "EM9305 EM BLEU SDK v4.6",
+      "action": "copy",
+      "usage_limits": "Accepted agreement; keep SDK confidential/local, no SDK binary/object reverse-engineering or redistribution.",
+      "local_setup": {
+        "status": "extracted-and-inventory-verified",
+        "path": "third-party/local-vendor/sources/em9305-v4.6",
+        "gzip_sha256": "8b987ce7d292fc86adbdf77fcae79f3ce672bd499206b81b2fa80fe46ffbb2a4",
+        "unique_archive_file_paths": 7439,
+        "receipt": "g2/analysis/bootloader-completion-2026-10-06/em-extraction-inventory.json",
+        "installer_executed": false
+      }
+    },
+    {
+      "id": "iar-windows",
+      "filename": "ewarm-10.10.2.26960.exe",
+      "kind": "file",
+      "sha256": "21d79a2df33975b7263638072a3c30b856f7adbe67d5a621c5e6644645b1fb4c",
+      "version": "EWARM 10.10.2.26960 Windows",
+      "action": "copy"
+    },
+    {
+      "id": "keil-windows",
+      "filename": "MDK543a.exe",
+      "kind": "file",
+      "sha256": "5702ed2093680932da3466134885b2141297099df106e5090c38f65a9510b7ca",
+      "version": "MDK 5.43a Windows",
+      "action": "copy"
+    },
+    {
+      "id": "iar-lmsc",
+      "filename": "iar-lmsc-tools_1.14_amd64.deb",
+      "kind": "file",
+      "sha256": "0bb55aafd8ed02400c494827279149e115fc1b3ae593a4b4841f9073baf99db1",
+      "version": "LMSC Tools 1.14 Linux amd64",
+      "action": "copy",
+      "local_setup": {
+        "status": "installed-unactivated",
+        "image": "opencfw/iar-base:10.10.2-local",
+        "package_version": "1.14",
+        "iarlogin_version": "1.4.0"
+      }
+    },
+    {
+      "id": "iar-linux-base",
+      "filename": "cxarm-10.10.2-linux-x86_64-base.tar.bz2",
+      "kind": "file",
+      "sha256": "b4fe2e43ec6e40e574f15a624e3c41f855cddf1e816ce852b1811bf10353cdb0",
+      "version": "IAR Build Tools for Arm10.10.2.27058 (archive README)",
+      "action": "copy",
+      "source_url": "https://github.com/iarsystems/arm/releases/download/10.10.2/cxarm-10.10.2-linux-x86_64-base.tar.bz2",
+      "checksum_url": "https://github.com/iarsystems/arm/releases/download/10.10.2/cxarm-10.10.2-linux-x86_64-base.tar.bz2.sha256",
+      "bytes": 382973847,
+      "license_evidence": "Bundled EULA SHA256 equals previously reviewed/accepted LMSC EULA8351c09200a37728cc60abc92a052268a6dbef32a2c8ba3a91e00504b89f8a4c; IARSourceLicense v1.1 limits vendor source use to IAR products. No activation authorization inferred.",
+      "local_setup": {
+        "status": "installed-unactivated",
+        "image": "opencfw/iar-base:10.10.2-local",
+        "image_id": "sha256:af35f7f439b4af1827cdbfffe1f0895540b2aaf8c6a19ff5059e4250047e37d0",
+        "architecture": "linux/amd64",
+        "compiler_version": "10.10.2.628/LNX",
+        "compiler_version_execution": "PASS",
+        "owned_probe_compile": "BLOCKED LMSC2143; no object",
+        "iarbuild_startup": "PASS9.5.4.2231",
+        "cspy_help": "PASS9.5.4.2231",
+        "cstat_version": "PASS2.11.0.945",
+        "iarlogin_help": "PASS1.4.0",
+        "activation_attempted": false,
+        "verification": "g2/analysis/bootloader-completion-2026-10-06/iar-container-verification.json"
+      }
+    }
+  ],
+  "pending": [
+    {
+      "filename": "cxarm-10.10.2.27058.deb",
+      "version": "CXARM 10.10.2.27058 Linux amd64",
+      "status": "awaiting completed download and checksum inspection"
+    }
+  ],
+  "acceptance_evidence": {
+    "recorded_utc": "2026-10-06T15:26:00Z",
+    "source_message": "Sentinel_d812039f749c8191891609647ad1dacc",
+    "scope": "User confirms IAR/EM agreements already accepted when downloading. This does not assert subscription entitlement or grant restricted SDK reverse-engineering/redistribution rights."
+  }
+}

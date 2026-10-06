@@ -1,0 +1,127 @@
+{
+  "status": "partial",
+  "accepted": false,
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "entry": 5505078,
+  "raw_discovered_end": 5507524,
+  "raw_discovered_envelope_bytes": 2446,
+  "candidate_tiled_start": 5505078,
+  "candidate_tiled_end": 5506394,
+  "candidate_tiled_bytes": 1316,
+  "unmapped_suffix_start": 5506394,
+  "unmapped_suffix_end": 5507524,
+  "unmapped_suffix_bytes": 1130,
+  "candidate_count": 12,
+  "instruction_rows": 521,
+  "literal_reference_addresses": [
+    5507524,
+    5507528,
+    5507532,
+    5507536,
+    5507540,
+    5507544
+  ],
+  "candidates": [
+    {
+      "candidate_id": 16312,
+      "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-failed-function-coordinate-prefix-16312-map/002",
+      "start": 5505078,
+      "end": 5505144,
+      "instruction_bytes": 66,
+      "instruction_rows": 28
+    },
+    {
+      "candidate_id": 16314,
+      "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-failed-function-expanded-bounds-16314-map/001",
+      "start": 5505144,
+      "end": 5505208,
+      "instruction_bytes": 64,
+      "instruction_rows": 28
+    },
+    {
+      "candidate_id": 16316,
+      "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-failed-function-clipping-continuation-16316-map/001",
+      "start": 5505208,
+      "end": 5505348,
+      "instruction_bytes": 140,
+      "instruction_rows": 54
+    },
+    {
+      "candidate_id": 16318,
+      "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-failed-function-size-allocation-diagnostic-16318-map/001",
+      "start": 5505348,
+      "end": 5505462,
+      "instruction_bytes": 114,
+      "instruction_rows": 42
+    },
+    {
+      "candidate_id": 16320,
+      "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-failed-function-buffer-acquire-16320-map/001",
+      "start": 5505462,
+      "end": 5505534,
+      "instruction_bytes": 72,
+      "instruction_rows": 25
+    },
+    {
+      "candidate_id": 16324,
+      "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-failed-function-buffer-configuration-16324-map/001",
+      "start": 5505534,
+      "end": 5505636,
+      "instruction_bytes": 102,
+      "instruction_rows": 44
+    },
+    {
+      "candidate_id": 16326,
+      "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-failed-function-first-region-clip-16326-map/001",
+      "start": 5505636,
+      "end": 5505736,
+      "instruction_bytes": 100,
+      "instruction_rows": 43
+    },
+    {
+      "candidate_id": 16328,
+      "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-failed-function-first-region-transform-16328-map/002",
+      "start": 5505736,
+      "end": 5505800,
+      "instruction_bytes": 64,
+      "instruction_rows": 25
+    },
+    {
+      "candidate_id": 16330,
+      "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-failed-function-second-region-clip-16330-map/002",
+      "start": 5505800,
+      "end": 5505906,
+      "instruction_bytes": 106,
+      "instruction_rows": 44
+    },
+    {
+      "candidate_id": 16332,
+      "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-failed-function-second-region-transform-16332-map/002",
+      "start": 5505906,
+      "end": 5505992,
+      "instruction_bytes": 86,
+      "instruction_rows": 32
+    },
+    {
+      "candidate_id": 16334,
+      "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-failed-function-third-region-16334-map/001",
+      "start": 5505992,
+      "end": 5506202,
+      "instruction_bytes": 210,
+      "instruction_rows": 80
+    },
+    {
+      "candidate_id": 16336,
+      "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-failed-function-fourth-region-16336-map/001",
+      "start": 5506202,
+      "end": 5506394,
+      "instruction_bytes": 192,
+      "instruction_rows": 76
+    }
+  ],
+  "limitations": [
+    "Local byte tiling only; not semantic or whole-function completeness.",
+    "Candidate children, floating architectural conditions, external effects and later suffix remain unresolved.",
+    "No independent-review binding audit, canonical admission, freeze, C or gate change."
+  ]
+}

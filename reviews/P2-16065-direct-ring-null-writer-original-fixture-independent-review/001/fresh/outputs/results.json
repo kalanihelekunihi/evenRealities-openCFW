@@ -1,0 +1,22 @@
+{
+  "status": "partial",
+  "accepted": false,
+  "cases": 2048,
+  "cohorts": {
+    "standalone": 1024,
+    "null_writer_fallback": 1024,
+    "padding_wrap": 708,
+    "exact_pair_wrap": 722
+  },
+  "input_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "checks": [
+    "Original directring or parentNULLbuffer callsactualdirectring nohooks",
+    "Validcap4..64 signednormalindices, random24bitcommands payloads, padding65536 and exactpair/endwrap",
+    "ExactfullRAMincl24or96byteframe saves, untouchedglobals, R0R1R2R3 callee regs SP LR PC mask immutableflash"
+  ],
+  "limitations": [
+    "Highcommandbytezero only; submission5140EA/514046 and invalidcapacity/indices/concurrency/fault paths unqualified",
+    "No APSR/callerR12 qualification or hardwareequivalence",
+    "No C admission freeze gates"
+  ]
+}

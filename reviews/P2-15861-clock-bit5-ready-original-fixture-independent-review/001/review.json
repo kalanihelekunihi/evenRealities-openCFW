@@ -1,0 +1,14 @@
+{
+  "task_id": "P2-15861",
+  "accepted": false,
+  "status": "partial",
+  "input_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "fresh_replay": "fresh/replay.py",
+  "fresh_results": "fresh/results.json",
+  "review": "Fresh no-hook replay passed 1536 cases through original helper 0x4D3952 and the original wait helper. The fixture checks the disable path, already-enabled path, and immediate-ready enable path using a controlled peripheral RAM image. It verifies the full peripheral page, local RAM outside the 32-byte stack exclusion, R1 behavior, preserved registers, SP/PC/PRIMASK, and unchanged flash.",
+  "limitations": [
+    "Delayed readiness and timeout paths are not tested; no physical MMIO/timing claim.",
+    "No general alias, fault, or concurrency coverage.",
+    "Partial/unaccepted; no admission or gate promotion."
+  ]
+}

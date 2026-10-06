@@ -1,0 +1,17 @@
+{
+  "accepted": false,
+  "status": "partial",
+  "cases": 2048,
+  "original_invocations": 4096,
+  "input_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "checks": [
+    "Original configuration followed by disable no hooks; disable clears only bit0 and returns newwordR1",
+    "NULL ordinary cfg and cfg aliases40004048/40004050",
+    "Sequential oracle full peripheral/localRAMoutside4stack preservedbit31 twoCwrites lowbits SP PC mask callees immutableflash"
+  ],
+  "limitations": [
+    "Two selected aliases ordinary backing only not physical clock semantics",
+    "No fault concurrency generalalias coverage",
+    "No C admission freeze gates"
+  ]
+}

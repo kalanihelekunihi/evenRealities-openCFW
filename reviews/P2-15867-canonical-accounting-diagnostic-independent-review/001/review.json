@@ -1,0 +1,14 @@
+{
+  "task_id": "P2-15867",
+  "accepted": false,
+  "status": "partial",
+  "fresh_replay": "fresh/replay.py",
+  "fresh_accounting": "fresh/accounting.json",
+  "review": "Fresh isolated replay exactly reproduces the diagnostic from the captured state and inventory inputs. Current workflow state is P2_EXECUTING: G1_TARGET_AND_INVENTORY passed; G2 through G6 are not_run. The inventory contains 33 image records and 70 coverage rows, summarized across 40 scopes with no partition discontinuities. The four canonical function/data/interface/freeze records are absent at the campaign and inventory roots checked by the script.",
+  "interpretation": "This describes canonical inventory and current workflow gate state only. The absent canonical records do not mean no analysis exists: many private partial P2 maps and fixtures are stored under the campaign analysis tree, and those are not admitted into canonical coverage by this diagnostic.",
+  "limitations": [
+    "The diagnostic reads only workflow state and the three specified inventory inputs; it does not inspect private analysis artifacts for admission or completeness.",
+    "It does not change gates, establish semantic completeness, or define a freeze denominator.",
+    "Historical inventory/status.json is not treated as current gate authority."
+  ]
+}

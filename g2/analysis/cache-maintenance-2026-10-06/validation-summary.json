@@ -1,0 +1,57 @@
+{
+  "comparison": {
+    "path": "g2/build/foundation/cache-maintenance-simulator/comparison-reviewed.json",
+    "sha256": "a19fc0581b3d3acfa36f09d4a038bb629ff380de6b6a2f432acbbe7808c8c9ef",
+    "status": "PASS",
+    "cases": 768,
+    "unique_original_trace_bytes": 384,
+    "source_manifest_matches_current": true,
+    "elf_sha256": "c35d1ef40fa4334044eba60f39d7a2bead8d4791832ecaceea2c829040b7381c",
+    "exact_original_body_address_union_verified": true
+  },
+  "independent_review": {
+    "path": "g2/analysis/cache-maintenance-2026-10-06/review/review.json",
+    "sha256": "2859cb5f330d381dfc3f4aa6d628e63f52139a7a1efb975939c0c649c1899d0f",
+    "report_sha256": "5f505f1c65553b1e25243cc0d6dcf873c0120862beaf69a5612d9ea44f41516e",
+    "representative_rerun_sha256": "4233fb8df5163b4f8ad7e08cdc9775bc308a14011fc2f6dc83b7cbc1e213e870",
+    "disposition": "pass_bounded_register_barrier_contract",
+    "native_spot_checks": 12
+  },
+  "fresh_aggregate": {
+    "path": "g2/build/foundation/cache-maintenance-simulator/aggregate.json",
+    "sha256": "77061acef66ae62a0d6747204d4070fbe653ef523a89333d6729dd57bb1b1093",
+    "modules": 44,
+    "totals": {
+      "tests_run": 228,
+      "passed": 222,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 7,
+      "method_skips": 6,
+      "setup_skips": 1
+    }
+  },
+  "fresh_affected": {
+    "path": "g2/build/foundation/cache-maintenance-simulator/affected.log",
+    "sha256": "dc63da3abf7a8d5b89f749028389ffc25fda5fac8ecbf5fedb8689521375ad55",
+    "passing_tests": 15,
+    "inventory_regressions": 4
+  },
+  "inventory": {
+    "path": "g2/analysis/cache-maintenance-2026-10-06/cumulative-inventory.json",
+    "sha256": "7e048a08fc6937a7703ea76121ec8d0d9cff2e83ce05809a8a1dc1b7c94f552a",
+    "per_payload": {
+      "touch": 234,
+      "apollo_main": 6498
+    },
+    "total": 6732,
+    "new_disjoint_bytes": 384
+  },
+  "hardware_cache_data_verified": false,
+  "dma_coherency_verified": false,
+  "full_consumer_execution_verified": false,
+  "large_positive_length_completed_paths_verified": false,
+  "optimized_tick_status": "BLOCKED unchanged; distinct from these passing O2 cache cases",
+  "fully_source_complete_payloads": 0,
+  "source_built_byte_identical_bundle": false
+}

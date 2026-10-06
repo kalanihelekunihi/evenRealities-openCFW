@@ -1,0 +1,836 @@
+{
+  "status": "PASS",
+  "cases": 13,
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "elf_sha256": "71f71b96c1babac12430841fbc85be5fbf438efcb7cf075855ff9ad964841703",
+  "distinct_original_instruction_bytes": 646,
+  "original_trace": {
+    "0x42052a": "e0b5",
+    "0x42052c": "0020",
+    "0x42052e": "0090",
+    "0x420530": "0023",
+    "0x420532": "0022",
+    "0x420534": "0021",
+    "0x420536": "6620",
+    "0x420538": "00f0b1f8",
+    "0x42069e": "2de9f043",
+    "0x4206a2": "87b0",
+    "0x4206a4": "0700",
+    "0x4206a6": "1400",
+    "0x4206a8": "1d00",
+    "0x4206aa": "dff8c881",
+    "0x4206ae": "d8f80000",
+    "0x4206b2": "0028",
+    "0x4206b4": "01d1",
+    "0x4206ba": "0e00",
+    "0x4206bc": "01a8",
+    "0x4206be": "1821",
+    "0x4206c0": "f5f798fc",
+    "0x4206c4": "b6f1007f",
+    "0x4206c8": "01d3",
+    "0x4206ce": "ddf83890",
+    "0x4206d2": "40f20110",
+    "0x4206d6": "8145",
+    "0x4206d8": "01d3",
+    "0x4206de": "0120",
+    "0x4206e0": "8df80a00",
+    "0x4206e4": "e4b2",
+    "0x4206e6": "002c",
+    "0x4206e8": "04d0",
+    "0x4206f4": "0020",
+    "0x4206f6": "8df80b00",
+    "0x4206fa": "0020",
+    "0x4206fc": "0390",
+    "0x4206fe": "0120",
+    "0x420700": "8df81000",
+    "0x420704": "adf81270",
+    "0x420708": "0020",
+    "0x42070a": "8df81400",
+    "0x42070e": "cdf80490",
+    "0x420712": "0695",
+    "0x420714": "0020",
+    "0x420716": "8df80900",
+    "0x42071a": "0020",
+    "0x42071c": "8df81500",
+    "0x420720": "dff8e827",
+    "0x420724": "01a9",
+    "0x420726": "d8f80000",
+    "0x42072a": "05f0d9fd",
+    "0x42072e": "0400",
+    "0x420730": "002c",
+    "0x420732": "08d0",
+    "0x420746": "2000",
+    "0x420748": "07b0",
+    "0x42074a": "bde8f083",
+    "0x42053c": "0028",
+    "0x42053e": "0ed0",
+    "0x42055e": "0120",
+    "0x420560": "fff73afa",
+    "0x420564": "0020",
+    "0x420566": "0090",
+    "0x420568": "0023",
+    "0x42056a": "0022",
+    "0x42056c": "0021",
+    "0x42056e": "9920",
+    "0x420570": "00f095f8",
+    "0x420574": "0028",
+    "0x420576": "0ed0",
+    "0x420596": "3220",
+    "0x420598": "fff71efa",
+    "0x42059c": "07bd",
+    "0x420734": "0094",
+    "0x420736": "4b46",
+    "0x420738": "3200",
+    "0x42073a": "bfb2",
+    "0x42073c": "3900",
+    "0x42073e": "dff8b808",
+    "0x420742": "f5f734fc",
+    "0x420540": "dff81007",
+    "0x420544": "0190",
+    "0x420546": "4ff43170",
+    "0x42054a": "0090",
+    "0x42054c": "dff80837",
+    "0x420550": "dff82424",
+    "0x420554": "dff88415",
+    "0x420558": "0120",
+    "0x42055a": "f7f7b8f8",
+    "0x420578": "dff88008",
+    "0x42057c": "0190",
+    "0x42057e": "40f2c920",
+    "0x420582": "0090",
+    "0x420584": "dff8d036",
+    "0x420588": "dff8ec23",
+    "0x42058c": "dff84c15",
+    "0x420590": "0120",
+    "0x420592": "f7f79cf8",
+    "0x420f10": "e0b5",
+    "0x420f12": "6848",
+    "0x420f14": "fff778ff",
+    "0x420e08": "3eb5",
+    "0x420e0a": "0400",
+    "0x420e0c": "804d",
+    "0x420e0e": "2868",
+    "0x420e10": "04f06ef9",
+    "0x420e14": "0028",
+    "0x420e16": "0cd0",
+    "0x420e32": "2100",
+    "0x420e34": "2868",
+    "0x420e36": "03f0d5fe",
+    "0x420e3a": "0028",
+    "0x420e3c": "0cd0",
+    "0x420e58": "2868",
+    "0x420e5a": "04f004f9",
+    "0x420e5e": "0028",
+    "0x420e60": "0cd0",
+    "0x420e7c": "217a",
+    "0x420e7e": "8848",
+    "0x420e80": "0068",
+    "0x420e82": "0068",
+    "0x420e84": "fef72afe",
+    "0x420e88": "0020",
+    "0x420e8a": "3ebd",
+    "0x420f18": "0028",
+    "0x420f1a": "0bd0",
+    "0x420f34": "0020",
+    "0x420f36": "fef7fdff",
+    "0x420f3a": "0020",
+    "0x420f3c": "8df80800",
+    "0x420f40": "02aa",
+    "0x420f42": "1821",
+    "0x420f44": "3248",
+    "0x420f46": "0068",
+    "0x420f48": "04f03af9",
+    "0x420f4c": "0028",
+    "0x420f4e": "0bd0",
+    "0x420f68": "07bd",
+    "0x420e18": "9e48",
+    "0x420e1a": "0190",
+    "0x420e1c": "40f28a50",
+    "0x420e20": "0090",
+    "0x420e22": "9d4b",
+    "0x420e24": "824a",
+    "0x420e26": "8349",
+    "0x420e28": "0220",
+    "0x420e2a": "f6f750fc",
+    "0x420e2e": "0120",
+    "0x420e30": "2be0",
+    "0x420f1c": "6648",
+    "0x420f1e": "0190",
+    "0x420f20": "4ff4b860",
+    "0x420f24": "0090",
+    "0x420f26": "654b",
+    "0x420f28": "414a",
+    "0x420f2a": "4249",
+    "0x420f2c": "0220",
+    "0x420f2e": "f6f7cefb",
+    "0x420f32": "19e0",
+    "0x420e3e": "9748",
+    "0x420e40": "0190",
+    "0x420e42": "40f29250",
+    "0x420e46": "0090",
+    "0x420e48": "934b",
+    "0x420e4a": "794a",
+    "0x420e4c": "7949",
+    "0x420e4e": "0220",
+    "0x420e50": "f6f73dfc",
+    "0x420e54": "0120",
+    "0x420e56": "18e0",
+    "0x420e62": "8e48",
+    "0x420e64": "0190",
+    "0x420e66": "40f29a50",
+    "0x420e6a": "0090",
+    "0x420e6c": "8a4b",
+    "0x420e6e": "704a",
+    "0x420e70": "7049",
+    "0x420e72": "0220",
+    "0x420e74": "f6f72bfc",
+    "0x420e78": "0120",
+    "0x420e7a": "06e0",
+    "0x420f50": "5b48",
+    "0x420f52": "0190",
+    "0x420f54": "40f2c750",
+    "0x420f58": "0090",
+    "0x420f5a": "584b",
+    "0x420f5c": "344a",
+    "0x420f5e": "3549",
+    "0x420f60": "0220",
+    "0x420f62": "f6f7b4fb",
+    "0x420f66": "ffe7",
+    "0x4201ba": "80b5",
+    "0x4201bc": "8ab0",
+    "0x4201be": "0622",
+    "0x4201c0": "0021",
+    "0x4201c2": "08a8",
+    "0x4201c4": "06f024fd",
+    "0x4201c8": "08a8",
+    "0x4201ca": "fff71aff",
+    "0x4201ce": "0028",
+    "0x4201d0": "21d1",
+    "0x4201d2": "dff83008",
+    "0x4201d6": "dde90823",
+    "0x4201da": "c0e90023",
+    "0x4201de": "4179",
+    "0x4201e0": "0791",
+    "0x4201e2": "0179",
+    "0x4201e4": "0691",
+    "0x4201e6": "c178",
+    "0x4201e8": "0591",
+    "0x4201ea": "8178",
+    "0x4201ec": "0491",
+    "0x4201ee": "4178",
+    "0x4201f0": "0391",
+    "0x4201f2": "0078",
+    "0x4201f4": "0290",
+    "0x4201f6": "dff80009",
+    "0x4201fa": "0190",
+    "0x4201fc": "40f2f310",
+    "0x420200": "0090",
+    "0x420202": "dff8f838",
+    "0x420206": "dff87027",
+    "0x42020a": "dff8d018",
+    "0x42020e": "0220",
+    "0x420210": "f7f75dfa",
+    "0x420214": "1ce0",
+    "0x420250": "0bb0",
+    "0x420252": "00bd",
+    "0x420216": "dff8ec07",
+    "0x42021a": "4179",
+    "0x42021c": "0791",
+    "0x42021e": "0179",
+    "0x420220": "0691",
+    "0x420222": "c178",
+    "0x420224": "0591",
+    "0x420226": "8178",
+    "0x420228": "0491",
+    "0x42022a": "4178",
+    "0x42022c": "0391",
+    "0x42022e": "0078",
+    "0x420230": "0290",
+    "0x420232": "dff8cc08",
+    "0x420236": "0190",
+    "0x420238": "40f2fb10",
+    "0x42023c": "0090",
+    "0x42023e": "dff8bc38",
+    "0x420242": "dff83427",
+    "0x420246": "dff89418",
+    "0x42024a": "0120",
+    "0x42024c": "f7f73ffa"
+  },
+  "comparisons": [
+    {
+      "function": "reset",
+      "fixture": {
+        "transfer_statuses": [
+          0,
+          0
+        ]
+      },
+      "observed": {
+        "events": [
+          [
+            "transfer",
+            536895488,
+            1000000,
+            "0000000000000100000000000100660000000000",
+            0
+          ],
+          [
+            "delay",
+            1
+          ],
+          [
+            "transfer",
+            536895488,
+            1000000,
+            "0000000000000100000000000100990000000000",
+            0
+          ],
+          [
+            "delay",
+            50
+          ]
+        ],
+        "timing_bytes": "aabbccddeeff1122"
+      }
+    },
+    {
+      "function": "reset",
+      "fixture": {
+        "transfer_statuses": [
+          5,
+          0
+        ]
+      },
+      "observed": {
+        "events": [
+          [
+            "transfer",
+            536895488,
+            1000000,
+            "0000000000000100000000000100660000000000",
+            5
+          ],
+          [
+            "transfer_error",
+            4396136,
+            102,
+            0,
+            0,
+            5
+          ],
+          [
+            "log",
+            1,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "DRV_Mx25u25643g_SoftReset",
+            708,
+            "mx25u25643g RSTEN error\n"
+          ],
+          [
+            "delay",
+            1
+          ],
+          [
+            "transfer",
+            536895488,
+            1000000,
+            "0000000000000100000000000100990000000000",
+            0
+          ],
+          [
+            "delay",
+            50
+          ]
+        ],
+        "timing_bytes": "aabbccddeeff1122"
+      }
+    },
+    {
+      "function": "reset",
+      "fixture": {
+        "transfer_statuses": [
+          0,
+          6
+        ]
+      },
+      "observed": {
+        "events": [
+          [
+            "transfer",
+            536895488,
+            1000000,
+            "0000000000000100000000000100660000000000",
+            0
+          ],
+          [
+            "delay",
+            1
+          ],
+          [
+            "transfer",
+            536895488,
+            1000000,
+            "0000000000000100000000000100990000000000",
+            6
+          ],
+          [
+            "transfer_error",
+            4396136,
+            153,
+            0,
+            0,
+            6
+          ],
+          [
+            "log",
+            1,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "DRV_Mx25u25643g_SoftReset",
+            713,
+            "Write enable failed before sector erase\n"
+          ],
+          [
+            "delay",
+            50
+          ]
+        ],
+        "timing_bytes": "aabbccddeeff1122"
+      }
+    },
+    {
+      "function": "reset",
+      "fixture": {
+        "transfer_statuses": [
+          5,
+          6
+        ]
+      },
+      "observed": {
+        "events": [
+          [
+            "transfer",
+            536895488,
+            1000000,
+            "0000000000000100000000000100660000000000",
+            5
+          ],
+          [
+            "transfer_error",
+            4396136,
+            102,
+            0,
+            0,
+            5
+          ],
+          [
+            "log",
+            1,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "DRV_Mx25u25643g_SoftReset",
+            708,
+            "mx25u25643g RSTEN error\n"
+          ],
+          [
+            "delay",
+            1
+          ],
+          [
+            "transfer",
+            536895488,
+            1000000,
+            "0000000000000100000000000100990000000000",
+            6
+          ],
+          [
+            "transfer_error",
+            4396136,
+            153,
+            0,
+            0,
+            6
+          ],
+          [
+            "log",
+            1,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "DRV_Mx25u25643g_SoftReset",
+            713,
+            "Write enable failed before sector erase\n"
+          ],
+          [
+            "delay",
+            50
+          ]
+        ],
+        "timing_bytes": "aabbccddeeff1122"
+      }
+    },
+    {
+      "function": "readmode",
+      "fixture": {},
+      "observed": {
+        "events": [
+          [
+            "disable",
+            536895488,
+            0
+          ],
+          [
+            "configure",
+            536895488,
+            "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+            0
+          ],
+          [
+            "enable",
+            536895488,
+            0
+          ],
+          [
+            "publish",
+            305419896,
+            8
+          ],
+          [
+            "latency",
+            0
+          ],
+          [
+            "control",
+            536895488,
+            24,
+            0,
+            0
+          ]
+        ],
+        "timing_bytes": "aabbccddeeff1122"
+      }
+    },
+    {
+      "function": "readmode",
+      "fixture": {
+        "disable_status": 2
+      },
+      "observed": {
+        "events": [
+          [
+            "disable",
+            536895488,
+            2
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "am_devices_mspi_device_reconfigure",
+            1418,
+            "Error - Failed to disable mspi.\n"
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mx25u25643g_set_serail_mode",
+            1472,
+            "Failed to reconfigure serail mode\n"
+          ]
+        ],
+        "timing_bytes": "aabbccddeeff1122"
+      }
+    },
+    {
+      "function": "readmode",
+      "fixture": {
+        "configure_status": 5
+      },
+      "observed": {
+        "events": [
+          [
+            "disable",
+            536895488,
+            0
+          ],
+          [
+            "configure",
+            536895488,
+            "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+            5
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "am_devices_mspi_device_reconfigure",
+            1426,
+            "Error - Failed to configure mspi.\n"
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mx25u25643g_set_serail_mode",
+            1472,
+            "Failed to reconfigure serail mode\n"
+          ]
+        ],
+        "timing_bytes": "aabbccddeeff1122"
+      }
+    },
+    {
+      "function": "readmode",
+      "fixture": {
+        "enable_status": 7
+      },
+      "observed": {
+        "events": [
+          [
+            "disable",
+            536895488,
+            0
+          ],
+          [
+            "configure",
+            536895488,
+            "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+            0
+          ],
+          [
+            "enable",
+            536895488,
+            7
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "am_devices_mspi_device_reconfigure",
+            1434,
+            "Error - Failed to configure mspi.\n"
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mx25u25643g_set_serail_mode",
+            1472,
+            "Failed to reconfigure serail mode\n"
+          ]
+        ],
+        "timing_bytes": "aabbccddeeff1122"
+      }
+    },
+    {
+      "function": "readmode",
+      "fixture": {
+        "control_status": 9
+      },
+      "observed": {
+        "events": [
+          [
+            "disable",
+            536895488,
+            0
+          ],
+          [
+            "configure",
+            536895488,
+            "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+            0
+          ],
+          [
+            "enable",
+            536895488,
+            0
+          ],
+          [
+            "publish",
+            305419896,
+            8
+          ],
+          [
+            "latency",
+            0
+          ],
+          [
+            "control",
+            536895488,
+            24,
+            0,
+            9
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mx25u25643g_set_serail_mode",
+            1479,
+            "Failed to control serail mode\n"
+          ]
+        ],
+        "timing_bytes": "aabbccddeeff1122"
+      }
+    },
+    {
+      "function": "timing",
+      "fixture": {
+        "scan_status": 0,
+        "scan_hex": "112233445566",
+        "caller_stack_tail": "a55a"
+      },
+      "observed": {
+        "events": [
+          [
+            "scan",
+            0,
+            "112233445566"
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mspi_timing_auto_check",
+            499,
+            "Time scan success, use scan timing parameters: TxNeg %d, RxNeg %d, RxCap %d, TxDQSDelay %d, RxDQSDelay %d, Turnaround %d",
+            [
+              17,
+              34,
+              51,
+              68,
+              85,
+              102
+            ]
+          ]
+        ],
+        "timing_bytes": "112233445566a55a"
+      }
+    },
+    {
+      "function": "timing",
+      "fixture": {
+        "scan_status": 0,
+        "scan_hex": "112233445566",
+        "caller_stack_tail": "3cc3"
+      },
+      "observed": {
+        "events": [
+          [
+            "scan",
+            0,
+            "112233445566"
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mspi_timing_auto_check",
+            499,
+            "Time scan success, use scan timing parameters: TxNeg %d, RxNeg %d, RxCap %d, TxDQSDelay %d, RxDQSDelay %d, Turnaround %d",
+            [
+              17,
+              34,
+              51,
+              68,
+              85,
+              102
+            ]
+          ]
+        ],
+        "timing_bytes": "1122334455663cc3"
+      }
+    },
+    {
+      "function": "timing",
+      "fixture": {
+        "scan_status": 1,
+        "caller_stack_tail": "a55a"
+      },
+      "observed": {
+        "events": [
+          [
+            "scan",
+            1,
+            "010203040506"
+          ],
+          [
+            "log",
+            1,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mspi_timing_auto_check",
+            507,
+            "Time scan failed, use default timing parameters: TxNeg %d, RxNeg %d, RxCap %d, TxDQSDelay %d, RxDQSDelay %d, Turnaround %d",
+            [
+              170,
+              187,
+              204,
+              221,
+              238,
+              255
+            ]
+          ]
+        ],
+        "timing_bytes": "aabbccddeeff1122"
+      }
+    },
+    {
+      "function": "timing",
+      "fixture": {
+        "scan_status": 1,
+        "caller_stack_tail": "3cc3"
+      },
+      "observed": {
+        "events": [
+          [
+            "scan",
+            1,
+            "010203040506"
+          ],
+          [
+            "log",
+            1,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mspi_timing_auto_check",
+            507,
+            "Time scan failed, use default timing parameters: TxNeg %d, RxNeg %d, RxCap %d, TxDQSDelay %d, RxDQSDelay %d, Turnaround %d",
+            [
+              170,
+              187,
+              204,
+              221,
+              238,
+              255
+            ]
+          ]
+        ],
+        "timing_bytes": "aabbccddeeff1122"
+      }
+    }
+  ],
+  "limits": [
+    "MSPI blocking transfer, transfer error formatting, delays, HAL configure/control, device publication, logger, and scan algorithm are explicit synthetic providers.",
+    "Reset delay arguments are observed as raw values 1 and 50; units are not inferred.",
+    "The timing success path copies eight bytes from a six-byte cleared scan result in stock instructions; synthetic RAM begins zeroed, so this run does not resolve the two trailing stack bytes.",
+    "No physical hardware, flash, MSPI registers, timing scan, or logging sink is exercised."
+  ],
+  "source_sha256": {
+    "verify_nor_commands.py": "092765b3dab1579ce695f65a73fbc2acd662ddfaf48b4c7eb0f02dab4541b230",
+    "nor_commands.c": "afa8dde882e2b8487205131a31860ea86ea9f7b212ca2db28c7c28fa6fdf6762",
+    "nor_commands.h": "c9ca5bd2cec4fcfe318aefa4b636224b8f4b046d641cf6b3e3755ebf39897e13",
+    "module.ld": "3079c23598ca55e94744f292bf75908277826c7e0e9fb5759fdcb3194a291dd4",
+    "nor_timing_wrapper.S": "36859385822686e86a7c53498368eb8c461e226c5b0abd6e6c69ab9eff94ef35"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "accepted": false,
+  "status": "diagnostic",
+  "results": [
+    {
+      "path": "analysis/queue-candidate-ledger-16290/002/data.jsonl",
+      "sha256": "d08364a3e1a919c008b72468a82d646fdd3ff421c194d382665124b22f3d0475",
+      "records": 1,
+      "bytes_checked": 480,
+      "negative_cases": [
+        {
+          "case": "target",
+          "rejected": "locked target"
+        },
+        {
+          "case": "spanhash",
+          "rejected": "source span hash"
+        },
+        {
+          "case": "mapping",
+          "rejected": "address mapping"
+        },
+        {
+          "case": "duplicate",
+          "rejected": "duplicate identity"
+        },
+        {
+          "case": "admission",
+          "rejected": "draft status"
+        },
+        {
+          "case": "tablepin",
+          "rejected": "value evidence hash"
+        }
+      ]
+    },
+    {
+      "path": "analysis/clock-candidate-ledger-16294/002/data.jsonl",
+      "sha256": "49fa0fa02ed65046ba41c9bd2258060f23bbc664f8ff09d9a5eb13d7e01e1307",
+      "records": 6,
+      "bytes_checked": 24,
+      "negative_cases": [
+        {
+          "case": "target",
+          "rejected": "locked target"
+        },
+        {
+          "case": "spanhash",
+          "rejected": "source span hash"
+        },
+        {
+          "case": "mapping",
+          "rejected": "address mapping"
+        },
+        {
+          "case": "duplicate",
+          "rejected": "duplicate identity"
+        },
+        {
+          "case": "admission",
+          "rejected": "draft status"
+        },
+        {
+          "case": "literalvalue",
+          "rejected": "literal value"
+        },
+        {
+          "case": "rawvalue",
+          "rejected": "literal value"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Exact-value evidence consistency only; no global noncode ownership or reviewadmission",
+    "Consumer references are discovery leads not reachability proof",
+    "No C freeze gates"
+  ]
+}

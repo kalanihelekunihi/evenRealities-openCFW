@@ -1,0 +1,43 @@
+{
+  "disposition": "accepted_with_bounded_limits",
+  "scope": "Independent source, machine-evidence, verifier, documentation and accounting review for the bounded audio DMA rearm batch.",
+  "independent_native_spotcheck": {
+    "cases": 13,
+    "status": "PASS",
+    "artifact": "g2/analysis/audio-dma-rearm-2026-10-06/review/representative-rerun.json",
+    "irq_boundary_cases": 2,
+    "irq_artifact": "g2/analysis/audio-dma-rearm-2026-10-06/review/irq-boundary-rerun.json"
+  },
+  "final_full_comparison": {
+    "path": "g2/build/foundation/audio-dma-rearm-simulator/comparison-observable.json",
+    "sha256": "20fc38a80ebad28d469d196832793146454fe2088038e4439e2386c1d8f697eb",
+    "status": "PASS",
+    "cases": 899,
+    "invocations": 1019,
+    "unique_original_trace_bytes": 740,
+    "firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "elf_sha256": "3f6dbc974e400ecd64c30a17b74f0a3331e8c9e3c1ec37e267f89fb9d0722e26"
+  },
+  "reviewed_inputs": {
+    "g2/components/foundation/audio_dma_rearm/rearm.c": "f5c6981d0e1a1bb63ff616b2689c32357e0aab80d1f9f5142b3a1fb279d0c6bc",
+    "g2/components/foundation/audio_dma_rearm/rearm.h": "8f257f60eff0c9c4d0ecd6c6a2a4f50a5760257239d9bc24446be5c23ce1a524",
+    "g2/components/foundation/audio_dma_rearm/verify.py": "c36ae2d409a81a6ec5c670730f72beb0b684b8744f83ca5ddfa25a8fadbe8c16",
+    "g2/analysis/audio-dma-rearm-2026-10-06/REPORT.md": "39366e82b72cbaa71ded5b5597aca60b5e98b45064a7c1ec5dcdd7b6bd7aa013",
+    "g2/analysis/audio-dma-rearm-2026-10-06/pseudocode.md": "2cb759764009df49fdd3c852c5d68cff161b253c3cd93903ec7c423017727fab",
+    "g2/analysis/audio-dma-rearm-2026-10-06/original-provenance.json": "a6f117173e9529eafdae8b9581a1453a812982d18a465b3a1e6bdc4539f88a5a",
+    "g2/analysis/audio-dma-rearm-2026-10-06/original-disassembly.txt": "757658dab0ca82b87fa46eb4d4631eb4238e2d8655b789cf3dd03d148242fe89",
+    "g2/analysis/audio-dma-rearm-2026-10-06/fixture-diagnostics.md": "5ec532ac956c794fe5c0b7fd59b23cab83b9d47ee542e2489e1128547b621c14",
+    "g2/build/foundation/audio-dma-rearm-simulator/aggregate.json": "77061acef66ae62a0d6747204d4070fbe653ef523a89333d6729dd57bb1b1093",
+    "g2/build/foundation/audio-dma-rearm-simulator/affected.log": "63db2110ba0e72b66c461cae0e083519e359caf4ae91a4a7688770012702c1bf"
+  },
+  "assessment": {
+    "status_output": "The verifier now observes the raw and masked direct public-output stores. `volatile` is unnecessary for the actual ISR's synchronous stack-local output; RAM reread identity and asynchronous/aliasing observers are explicitly outside the contract.",
+    "implementation": "No blocking source or evidence defect found in the reviewed bounded behavior.",
+    "limits": [
+      "No physical peripheral transition, DMA/cache coherence, IRQ scheduling, task delivery, or buffer-lifetime guarantee.",
+      "The source ISR seam stops before the actual notifier; queue and consumer evidence is static only.",
+      "Huge positive cache paths are prefix diagnostics, not completed-path coverage.",
+      "This does not prove complete firmware source coverage or byte-identical rebuild."
+    ]
+  }
+}

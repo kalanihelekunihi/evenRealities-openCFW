@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "purpose": "Independent check that volatile logger flags are reread between original tests, not snapshotted once.",
+  "synthetic_mutation": {
+    "initial_flags": 0,
+    "new_flags": 1,
+    "stock_mutation_hook_pc": "0x57ac1c",
+    "source_mutation_hook_pc": "0x10050",
+    "cut_provider_stock": "0x43ce9e",
+    "cut_provider_source": "0x43ce9e",
+    "matched": true,
+    "note": "Code-hook mutation is a synthetic observer test; it does not claim an actual concurrent writer exists."
+  },
+  "evidence": {
+    "source_macro": "FLAGS expands to a volatile uint8_t load at 0x20004543 at every use.",
+    "source_elf": "Distinct LDRB instructions at 0x10048, 0x10050, 0x10060 (replacement probe); repeated checks occur at 0x1009e, 0x100a8, 0x100b0 after publication.",
+    "stock_literal": "0x43d0ce resolves to 0x20004543."
+  },
+  "bindings": {
+    "g2/components/foundation/audio_pcm_registration/registration.c": "81a23abd7af68fa418f93234647133ac92e6783c01e31cc6f69a2527351a4179",
+    "g2/build/foundation/audio-registration-simulator/registration.elf": "a1984f9c6e64b9af79c331e1636e6db53350925c5243138fd9b9add2f8654dc6",
+    "g2/build/foundation/audio-registration-simulator/comparison-first.json": "139fad0a883f25acf8f4b7f171c49ad423fa2f18de0e50f6109b5fe8bbc9ffa4"
+  }
+}

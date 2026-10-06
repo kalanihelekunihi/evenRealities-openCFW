@@ -1,0 +1,27 @@
+{
+  "status": "partial",
+  "accepted": false,
+  "cases": 4096,
+  "cohorts": {
+    "direct": 2048,
+    "viewport": 2048,
+    "ring": 1366,
+    "fixed": 1365,
+    "expand_sufficient": 1365
+  },
+  "input_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "global_slot": 537349884,
+  "checks": [
+    "Original writer and viewport commandpair nohooks, no external children",
+    "Random packedviewport endcomputedbefore signedstartclamp, low16truncation",
+    "Ring ample space, fixed exact/enoughspace, linked sufficientspace publication",
+    "ExactdirectfullRAM saved72frame; viewport exactoutside88byteactiveframe (stackinsideunverified)",
+    "Commands cursor bit3clear globals unchanged R0R1R2 callees SP LR PC mask immutableflash"
+  ],
+  "limitations": [
+    "No lowoverheadpaddingloops flush/grow/NULLbuffer/error/chainexecution",
+    "No physicalfault/concurrent backing-pointer mutation qualification",
+    "APSR R3/R12 and viewportstackinterior unverified",
+    "No C admission freeze gates"
+  ]
+}

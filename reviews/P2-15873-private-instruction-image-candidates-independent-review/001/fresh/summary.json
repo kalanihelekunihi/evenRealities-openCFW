@@ -1,0 +1,33 @@
+{
+  "accepted": false,
+  "status": "diagnostic",
+  "inventory_sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa",
+  "images": 33,
+  "instruction_files": 4908,
+  "matched_files": 4842,
+  "ambiguous_files": 1,
+  "excluded_files": 66,
+  "candidate_file_counts_by_image": {
+    "apollo_bootloader:flash": 1797,
+    "apollo_main:flash": 3033,
+    "apollo_main:decoded:00000040": 1,
+    "apollo_bootloader:decoded:00000040": 1,
+    "ble_em9305:record-3": 5,
+    "case:flash": 6
+  },
+  "excluded_reasons": {
+    "unsupported top level": 2,
+    "Expecting value: line 1 column 1 (char 0)": 4,
+    "no whole-file candidate image byte match": 39,
+    "fromhex() argument must be str or bytes-like, not list": 7,
+    "'bytes'": 13,
+    "unsupported block shape": 1
+  },
+  "limitations": [
+    "Supported instructionJSON formats only; allrevisions retained including superseded erroneous interpretations",
+    "Byte matching candidate ownership is not authoritative ownership",
+    "Counts overlap images/revisions and cannot be summed as coverage",
+    "No pseudocode review or architectural validity proven by bytes",
+    "No canonical admission freeze gates"
+  ]
+}

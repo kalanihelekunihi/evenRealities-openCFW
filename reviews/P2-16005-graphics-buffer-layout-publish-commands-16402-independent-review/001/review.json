@@ -1,0 +1,18 @@
+{
+  "task_id": "P2-16005",
+  "accepted": false,
+  "status": "partial",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-buffer-layout-publish-commands-16402-map/001",
+  "candidate_receipt_sha256": "c1284bf34660d7833ebc0d4b9f17e965f52e132a7cb34b9d149c56db0e9a9300",
+  "candidate_instructions_sha256": "e0c26d132f32f8b8d9da508bc98090a69d682549d958a2790a82329dc315f27e",
+  "candidate_pseudocode_sha256": "3cfdf00ad251ebe7b67f554552433e260f1de5849178495507080271afe38937",
+  "candidate_replay_sha256": "fe89813b5eb3d66b6f2c039523cecd70e98d5e61772fd9580e901a500f301dfd",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_replay_stdout": "PASS 168",
+  "source_image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "review": "ITTT NE chain preserves flag updates between conditional instructions; command stores and reads retain source order.",
+  "limitations": [
+    "Scoped byte/pseudocode review only; child behavior, complete ownership/function closure, runtime fault behavior and external or physical effects remain unqualified.",
+    "No canonical admission, C implementation, coverage promotion or gate change."
+  ]
+}

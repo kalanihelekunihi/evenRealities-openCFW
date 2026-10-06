@@ -1,0 +1,14 @@
+{
+  "task_id": "P2-15853",
+  "accepted": false,
+  "status": "partial",
+  "input_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "fresh_replay": "fresh/replay.py",
+  "fresh_results": "fresh/results.json",
+  "review": "Fresh fixture replay passed all 2048 cases and 4096 original helper invocations. The independent sequential oracle applies the configuration writes and then the original disable routine; comparisons cover the peripheral page and local RAM outside the documented 4-byte stack exclusion. The disable result is R0=0 and R1 equals the final whole word with only bit 0 cleared; bit 31 and the other configuration bits are preserved. Null configuration and ordinary-memory aliases at 0x40004048 and 0x40004050 are represented.",
+  "limitations": [
+    "The selected peripheral aliases are ordinary RAM backing, not physical clock semantics.",
+    "No general fault, alias, or concurrency coverage.",
+    "Partial/unaccepted; no admission, global coverage, or gate promotion."
+  ]
+}

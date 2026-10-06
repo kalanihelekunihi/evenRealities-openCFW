@@ -1,0 +1,21 @@
+{
+  "task_id": "P2-15883",
+  "accepted": false,
+  "status": "partial",
+  "captured_input_check": {
+    "instruction_files_captured": 4912,
+    "instruction_files_current": 4912,
+    "added": 0,
+    "removed": 0,
+    "image_records": 33,
+    "image_pins_match": true
+  },
+  "fresh_replay": "fresh/replay.py",
+  "fresh_outputs": ["fresh/index.jsonl", "fresh/images.json", "fresh/excluded.json", "fresh/conditional-route-models.json", "fresh/summary.json"],
+  "review": "Fresh replay exactly matches the captured outputs. The compact BX LR record is accepted only after the explicit entries are consecutive halfword addresses, the declared range length matches the bytes, and every encoded halfword is exactly 0x4770 (`7047` little-endian). The record maps to the Apollo-main flash candidate. Four format-repair instruction records are also included. Aggregate result: 4912 files scanned, 4908 candidate files, one ambiguous file, and four malformed-JSON exclusions; main flash candidate count 3038.",
+  "limitations": [
+    "The compact record verifies byte structure, not handler semantics or architectural validity.",
+    "Conditional route models are retained but their guards are not evaluated as satisfied.",
+    "Candidate byte matches are not ownership or canonical coverage admission; no gate changes."
+  ]
+}

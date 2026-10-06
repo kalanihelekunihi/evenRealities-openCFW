@@ -1,0 +1,18 @@
+{
+  "task_id": "P2-16061",
+  "accepted": false,
+  "status": "partial",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-command-capacity-preflight-16458-map/001",
+  "candidate_receipt_sha256": "a6ff3b16e2325039f96c3e94af692fd428c4cd36783cf3b84e26e6d12737d720",
+  "candidate_instructions_sha256": "69c11f4125d455f19971a53f2644ba33d992e0b7706224efabd80eeb38d7590b",
+  "candidate_pseudocode_sha256": "5d7994fbc37d8f6de41dc658c56d38fa0a9c8fd1a95f567de7a1f0e05043f035",
+  "candidate_replay_sha256": "ef3324da3589fe6cb32ede174f838ed36b38ba72a084377fbc105a4933bcd305",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_output_receipt_sha256": "054937d6b843d065a79592a63659503b2870935803d4f1f7c9f08f28c2a03c7c",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "review": "Bit-5 early success return and subsequent BPL preserve the raw ring arithmetic arm as unreachable under prior LSLS flags; allocation-status branches remain as decoded.",
+  "limitations": [
+    "Child allocator/heap behavior, invalid pointers/fault behavior, concurrent mutation, physical buffer effects, and ownership remain unqualified.",
+    "No admission, C or gate change."
+  ]
+}

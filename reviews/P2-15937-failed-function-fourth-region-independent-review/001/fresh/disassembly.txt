@@ -1,0 +1,83 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpd1gbd4sl/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0054049a <.text>:
+  54049a:	980b      	ldr	r0, [sp, #44]	@ 0x2c
+  54049c:	9003      	str	r0, [sp, #12]
+  54049e:	980b      	ldr	r0, [sp, #44]	@ 0x2c
+  5404a0:	eb19 0000 	adds.w	r0, r9, r0
+  5404a4:	1e40      	subs	r0, r0, #1
+  5404a6:	9005      	str	r0, [sp, #20]
+  5404a8:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  5404aa:	9004      	str	r0, [sp, #16]
+  5404ac:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  5404ae:	eb19 0000 	adds.w	r0, r9, r0
+  5404b2:	1e40      	subs	r0, r0, #1
+  5404b4:	9006      	str	r0, [sp, #24]
+  5404b6:	a903      	add	r1, sp, #12
+  5404b8:	a80f      	add	r0, sp, #60	@ 0x3c
+  5404ba:	f7ff fdb3 	bl	540024 <.text-0x476>
+  5404be:	9805      	ldr	r0, [sp, #20]
+  5404c0:	f1ba 0101 	subs.w	r1, sl, #1
+  5404c4:	4288      	cmp	r0, r1
+  5404c6:	da01      	bge.n	5404cc <.text+0x32>
+  5404c8:	9805      	ldr	r0, [sp, #20]
+  5404ca:	e001      	b.n	5404d0 <.text+0x36>
+  5404cc:	f1ba 0001 	subs.w	r0, sl, #1
+  5404d0:	9011      	str	r0, [sp, #68]	@ 0x44
+  5404d2:	9806      	ldr	r0, [sp, #24]
+  5404d4:	4558      	cmp	r0, fp
+  5404d6:	da01      	bge.n	5404dc <.text+0x42>
+  5404d8:	9806      	ldr	r0, [sp, #24]
+  5404da:	e000      	b.n	5404de <.text+0x44>
+  5404dc:	4658      	mov	r0, fp
+  5404de:	9012      	str	r0, [sp, #72]	@ 0x48
+  5404e0:	f114 0238 	adds.w	r2, r4, #56	@ 0x38
+  5404e4:	a90f      	add	r1, sp, #60	@ 0x3c
+  5404e6:	a807      	add	r0, sp, #28
+  5404e8:	f710 fb70 	bl	450bcc <.text-0xef8ce>
+  5404ec:	2800      	cmp	r0, #0
+  5404ee:	d034      	beq.n	54055a <.text+0xc0>
+  5404f0:	4642      	mov	r2, r8
+  5404f2:	a917      	add	r1, sp, #92	@ 0x5c
+  5404f4:	a807      	add	r0, sp, #28
+  5404f6:	f710 fd17 	bl	450f28 <.text-0xef572>
+  5404fa:	2800      	cmp	r0, #0
+  5404fc:	d12d      	bne.n	54055a <.text+0xc0>
+  5404fe:	a81c      	add	r0, sp, #112	@ 0x70
+  540500:	f021 f986 	bl	561810 <.text+0x21376>
+  540504:	f8df 04d0 	ldr.w	r0, [pc, #1232]	@ 5409d8 <.text+0x53e>
+  540508:	901c      	str	r0, [sp, #112]	@ 0x70
+  54050a:	a81c      	add	r0, sp, #112	@ 0x70
+  54050c:	9903      	ldr	r1, [sp, #12]
+  54050e:	eb11 0109 	adds.w	r1, r1, r9
+  540512:	1e49      	subs	r1, r1, #1
+  540514:	1b89      	subs	r1, r1, r6
+  540516:	ee00 1a10 	vmov	s0, r1
+  54051a:	eeb8 0ac0 	vcvt.f32.s32	s0, s0
+  54051e:	ed80 0a02 	vstr	s0, [r0, #8]
+  540522:	9904      	ldr	r1, [sp, #16]
+  540524:	1bc9      	subs	r1, r1, r7
+  540526:	ee00 1a10 	vmov	s0, r1
+  54052a:	eeb8 0ac0 	vcvt.f32.s32	s0, s0
+  54052e:	ed80 0a05 	vstr	s0, [r0, #20]
+  540532:	a81c      	add	r0, sp, #112	@ 0x70
+  540534:	f021 fb00 	bl	561b38 <.text+0x2169e>
+  540538:	a81c      	add	r0, sp, #112	@ 0x70
+  54053a:	f7e2 f8d5 	bl	5226e8 <.text-0x1ddb2>
+  54053e:	9b0a      	ldr	r3, [sp, #40]	@ 0x28
+  540540:	9808      	ldr	r0, [sp, #32]
+  540542:	1a1b      	subs	r3, r3, r0
+  540544:	1c5b      	adds	r3, r3, #1
+  540546:	9a09      	ldr	r2, [sp, #36]	@ 0x24
+  540548:	9807      	ldr	r0, [sp, #28]
+  54054a:	1a12      	subs	r2, r2, r0
+  54054c:	1c52      	adds	r2, r2, #1
+  54054e:	9908      	ldr	r1, [sp, #32]
+  540550:	1bc9      	subs	r1, r1, r7
+  540552:	9807      	ldr	r0, [sp, #28]
+  540554:	1b80      	subs	r0, r0, r6
+  540556:	f7e2 fac3 	bl	522ae0 <.text-0x1d9ba>

@@ -1,0 +1,61 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpv6z6euta/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+005400b8 <.text>:
+  5400b8:	f895 1034 	ldrb.w	r1, [r5, #52]	@ 0x34
+  5400bc:	b2c9      	uxtb	r1, r1
+  5400be:	29fe      	cmp	r1, #254	@ 0xfe
+  5400c0:	db00      	blt.n	5400c4 <.text+0xc>
+  5400c2:	21ff      	movs	r1, #255	@ 0xff
+  5400c4:	0004      	movs	r4, r0
+  5400c6:	6ca0      	ldr	r0, [r4, #72]	@ 0x48
+  5400c8:	9015      	str	r0, [sp, #84]	@ 0x54
+  5400ca:	9815      	ldr	r0, [sp, #84]	@ 0x54
+  5400cc:	6846      	ldr	r6, [r0, #4]
+  5400ce:	9815      	ldr	r0, [sp, #84]	@ 0x54
+  5400d0:	6887      	ldr	r7, [r0, #8]
+  5400d2:	9815      	ldr	r0, [sp, #84]	@ 0x54
+  5400d4:	1d00      	adds	r0, r0, #4
+  5400d6:	f711 fa5f 	bl	451598 <.text-0xeeb20>
+  5400da:	901b      	str	r0, [sp, #108]	@ 0x6c
+  5400dc:	9815      	ldr	r0, [sp, #84]	@ 0x54
+  5400de:	1d00      	adds	r0, r0, #4
+  5400e0:	f711 fa60 	bl	4515a4 <.text-0xeeb14>
+  5400e4:	9029      	str	r0, [sp, #164]	@ 0xa4
+  5400e6:	6ce0      	ldr	r0, [r4, #76]	@ 0x4c
+  5400e8:	9013      	str	r0, [sp, #76]	@ 0x4c
+  5400ea:	f114 0238 	adds.w	r2, r4, #56	@ 0x38
+  5400ee:	a90b      	add	r1, sp, #44	@ 0x2c
+  5400f0:	a82a      	add	r0, sp, #168	@ 0xa8
+  5400f2:	f710 fd6b 	bl	450bcc <.text-0xef4ec>
+  5400f6:	2800      	cmp	r0, #0
+  5400f8:	f000 8461 	beq.w	5409be <.text+0x906>
+  5400fc:	4641      	mov	r1, r8
+  5400fe:	a817      	add	r0, sp, #92	@ 0x5c
+  540100:	f7ff ff90 	bl	540024 <.text-0x94>
+  540104:	f05f 32ff 	movs.w	r2, #4294967295	@ 0xffffffff
+  540108:	f05f 31ff 	movs.w	r1, #4294967295	@ 0xffffffff
+  54010c:	a817      	add	r0, sp, #92	@ 0x5c
+  54010e:	f710 fd43 	bl	450b98 <.text-0xef520>
+  540112:	f8d5 801c 	ldr.w	r8, [r5, #28]
+  540116:	a817      	add	r0, sp, #92	@ 0x5c
+  540118:	f711 fa3e 	bl	451598 <.text-0xeeb20>
+  54011c:	4681      	mov	r9, r0
+  54011e:	a817      	add	r0, sp, #92	@ 0x5c
+  540120:	f711 fa40 	bl	4515a4 <.text-0xeeb14>
+  540124:	4581      	cmp	r9, r0
+  540126:	da03      	bge.n	540130 <.text+0x78>
+  540128:	a817      	add	r0, sp, #92	@ 0x5c
+  54012a:	f711 fa35 	bl	451598 <.text-0xeeb20>
+  54012e:	e002      	b.n	540136 <.text+0x7e>
+  540130:	a817      	add	r0, sp, #92	@ 0x5c
+  540132:	f711 fa37 	bl	4515a4 <.text-0xeeb14>
+  540136:	0001      	movs	r1, r0
+  540138:	1049      	asrs	r1, r1, #1
+  54013a:	4541      	cmp	r1, r8
+  54013c:	da02      	bge.n	540144 <.text+0x8c>
+  54013e:	4680      	mov	r8, r0
+  540140:	ea5f 0868 	movs.w	r8, r8, asr #1

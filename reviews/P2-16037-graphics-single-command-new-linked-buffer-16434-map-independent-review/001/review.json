@@ -1,0 +1,18 @@
+{
+  "task_id": "P2-16037",
+  "accepted": false,
+  "status": "partial",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-single-command-new-linked-buffer-16434-map/001",
+  "candidate_receipt_sha256": "58f0ba0b998e31498a0ab0dbd846566736c59a113c389a3bc22a9032ac464c8f",
+  "candidate_instructions_sha256": "a9fbae67613e99dbe301021eec1976f48756f9ff913e839fdd9585ad8ee8c936",
+  "candidate_pseudocode_sha256": "97061cd25a148d072b32753d2890a969feaa7d7521d590c7a18df94e96aca60d",
+  "candidate_replay_sha256": "ffe1e790e8be82704fa8abfc7296ee049c72032393d0b13a46083fc6f467baaa",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_stdout": true,
+  "fresh_output_receipt_sha256": "fe4a10b91efa8c8c2a9ad90dc581dab6ef8be339fc56275224eb66545509fa38",
+  "review": "New object setup keeps the stack copies, capacity arithmetic, field writes, and later publication in source order; allocation/configuration children remain opaque.",
+  "limitations": [
+    "Opaque allocation/flush/child contracts, invalid pointers, concurrent mutation, ownership and physical effects remain unresolved.",
+    "No function-level semantic closure, C, admission, or gate change."
+  ]
+}

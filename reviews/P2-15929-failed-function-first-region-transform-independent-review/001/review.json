@@ -1,0 +1,18 @@
+{
+  "task_id": "P2-15929",
+  "accepted": false,
+  "status": "partial",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_outputs": [
+    "fresh/instructions.json",
+    "fresh/disassembly.txt",
+    "fresh/references.json"
+  ],
+  "locked_image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "review": "The 64-byte map at 0x5402C8..0x540308 exactly tiles the locked image. It computes wrapped R7-SP16 and R6-SP12 differences and places their raw bit patterns in S0 for signed-int to binary32 conversion, then calls two children. After the children it freshly reloads stack rectangle values, forms wrapped +1 dimensions and additional wrapped offsets, and calls 0x522AE0. The child effects and architectural FP rounding/status controls remain unresolved; revision 002 correctly avoids assuming nearest-even.",
+  "limitations": [
+    "This is an incomplete continuation of the larger raw candidate; it does not establish a full function ABI, completion, or ownership.",
+    "Child contracts/effects and physical rendering, fault, alias, or concurrency behavior remain unresolved. FP architectural conditions are not qualified.",
+    "Partial/unaccepted; no C or gates."
+  ]
+}

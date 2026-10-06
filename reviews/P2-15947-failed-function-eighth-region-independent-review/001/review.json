@@ -1,0 +1,18 @@
+{
+  "task_id": "P2-15947",
+  "accepted": false,
+  "status": "partial",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_outputs": [
+    "fresh/instructions.json",
+    "fresh/disassembly.txt",
+    "fresh/references.json"
+  ],
+  "locked_image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "review": "The 222-byte map at 0x540764..0x540842 matches original bytes. It retains signed comparisons over wrapped values, including R11+1 and R10-1, and the branch-selected updates to SP+64/SP+72 and R10. Child calls, literal 0x5409D8, fresh loads, wrapped transform values, and VCVT.F32.S32 ordering match the disassembly; FP controls remain architectural.",
+  "limitations": [
+    "The larger candidate still includes opaque children and no independent proof that the raw discovery bounds equal the complete function boundary.",
+    "Architectural FP behavior, faults, aliases, concurrency, physical rendering, and external effects are not qualified.",
+    "Partial/unaccepted; no C, admission, or gates."
+  ]
+}

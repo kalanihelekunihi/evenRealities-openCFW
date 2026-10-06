@@ -1,0 +1,36 @@
+# IAR Linux download and acceptance evidence review
+
+Date: 2026-10-06. Bounded scope: official public IAR download/licensing pages and repository-side staging metadata. No browser history, cookies, credentials, keys, or activation state were inspected. No IAR software/package was installed, activated, or executed. This is a factual evidence review, not legal advice.
+
+## Official Linux download route and prerequisites
+
+IAR Product Updates currently identifies CXARM (IAR Build Tools for ARM) 10.10, released September 1, 2026. The CXARM 10.10.2 download section marks the Windows, Ubuntu, and Red Hat installers as requiring a **valid subscription**. For Ubuntu it instructs the user to download and install LMSC Tools first (`sudo dpkg -i iar-lmsc-tools_<version>_amd64.deb`), then install the CXARM package (`sudo apt install ./cxarm-10.10.2.27058.deb`). For Red Hat it similarly says install LMSC RPM before the CXARM RPM. The public LMSC Tools page lists version 1.14, released October 5, 2026, with Ubuntu and Red Hat packages and hashes; that page does not itself state a subscription prerequisite for the LMSC package. Thus LMSC is the license-management client prerequisite, not a compiler entitlement. Downloading/installing it alone does not establish that the CXARM 10.10.2 subscription condition is met.
+
+The staged `iar-lmsc-tools_1.14_amd64.deb` hash is `0bb55aafd8ed02400c494827279149e115fc1b3ae593a4b4841f9073baf99db1`, exactly the SHA-256 shown by IAR's public LMSC page for Ubuntu. This supports file identity against IAR's published hash; it does not prove the CXARM subscription, license acceptance, or source/download account provenance. The pending CXARM DEB in `third-party/downloaded/manifest.json` is not yet staged there as a verified package.
+
+The current [IAR Software License Agreement page](https://www.iar.com/support/software-license-agreement) offers separate perpetual and subscription agreements. The linked March 2025 subscription SLA says it applies to products licensed under a subscription and becomes effective on the earlier of order confirmation or licensee download/use; the preamble also says a user binds the organization by opening a package or installing/using covered software. It describes a subscription term/type/entitlement set by the contract. The perpetual SLA has materially similar package-opening and download/use language but applies to perpetual products. Which agreement and license type govern depends on the actual order/contract; repository artifacts do not resolve that.
+
+The repository-staged `IAR_EndUserLicenseAgreement.pdf` (SHA-256 `8351c09200a37728cc60abc92a052268a6dbef32a2c8ba3a91e00504b89f8a4c`) is a September 2025 EULA copy. Its companion OCR text (SHA-256 `3e15dca719a8eb688d8a779c2c58bf35fb826f3ebb288444f48befb0e9ca6da3`) states in its preamble that the EULA applies to software products specified in a contract, that the user is bound by opening a package or installing/using the product, and that use requires a valid IAR license unless under an accepted evaluation license. The PDF has no text layer according to the repository context; OCR is imperfect and should not replace checking the page image or the applicable contract. The EULA also says it does not supersede the IAR Software License Agreement. The repository's recorded extraction command and provenance supplied by the parent establish that this exact PDF was extracted from the staged LMSC 1.14 DEB at `./opt/iar/lmsc/IAR_EndUserLicenseAgreement.pdf`. That establishes the EULA's inclusion in LMSC 1.14; it does not establish that the same EULA was packaged with CXARM or the Windows installer, nor does it resolve which IAR SLA/contract or license entitlement governs the user's use.
+
+## What repository state does and does not establish
+
+The public repository-side records show staging/copy operations, not a click-through, signed contract, subscription status, or acceptance record:
+
+- `third-party/downloaded/manifest.json` records the LMSC DEB as version 1.14, action `copy`, and its hash. It records the Windows IAR package as `copy`; it lists CXARM Linux as pending checksum inspection.
+- `third-party/downloaded/README.md` says copies are not installed or activated tools, and explicitly says to resolve agreement acceptance before installation; `install-linux.py` requires a `--license-accepted` flag before installation.
+- No signed IAR contract, order confirmation, subscription entitlement proof, license acceptance receipt, or explicit user acceptance statement was found in the scoped repository metadata. These files cannot establish whether acceptance occurred outside the repository.
+
+A download alone should not be reported as an affirmative click-through acceptance. At the same time, IAR's current public subscription SLA treats licensee download/use as an effective-date trigger for a covered subscription agreement, and its preamble includes opening a package. Therefore the safe factual conclusion is **acceptance/entitlement status unresolved**, not “no agreement applies.” Whether fetching or data-only examination of an installer constitutes a contractual trigger under the applicable agreement is a legal interpretation; this review does not decide it. Since the LMSC package is already staged, do not claim the action leaves no possible contractual consequence. For any new package acquisition, extraction, installation, or use, first establish the applicable contract and acceptance decision directly with the responsible licensee/IAR; do not infer it from a file existing locally.
+
+## Official sources
+
+- [IAR Product Updates: CXARM](https://updates.iar.com/?product=CXARM) — version/release date, Ubuntu/Red Hat setup steps, “valid subscription required” notices.
+- [IAR Product Updates: LMSC Tools](https://updates.iar.com/?product=LMSCDAEMON) — LMSC v1.14, download instructions and published Ubuntu checksum.
+- [IAR Software License Agreement page](https://www.iar.com/support/software-license-agreement) — current separate perpetual/subscription documents.
+- [IAR subscription SLA (March 2025 PDF)](https://www.iar.com/hubfs/Software%20License%20Agreement%20(SLA)_Subscription%20-%20202503.pdf) — scope, acceptance/effective-date wording, subscription/contract dependencies.
+- [IAR perpetual SLA (March 2025 PDF)](https://www.iar.com/hubfs/Software%20License%20Agreement%20(SLA)_Perpetual%20-%20202503.pdf) — separate perpetual-license agreement.
+- [IAR My Pages](https://mypages.iar.com/) — account/support portal linked by IAR; no login was attempted.
+
+## Constraints and limits
+
+No package extraction or inspection beyond the repository's existing manifest/readme and supplied license copy was performed in this follow-up. In particular, no package maintainer scripts were run and no IAR license tooling was started. The September 2025 EULA is confirmed as a file included in the staged LMSC 1.14 package; its applicability to other IAR packages or the user's particular license contract remains unresolved. This report establishes published download prerequisites and the absence of acceptance evidence in the scoped local metadata; it cannot determine the user's legal acceptance, current subscription rights, or corporate authority.

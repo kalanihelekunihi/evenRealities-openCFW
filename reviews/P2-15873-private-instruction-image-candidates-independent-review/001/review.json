@@ -1,0 +1,23 @@
+{
+  "task_id": "P2-15873",
+  "accepted": false,
+  "status": "partial",
+  "captured_input_check": {
+    "instruction_files_captured": 4908,
+    "instruction_files_current": 4908,
+    "added": 0,
+    "removed": 0,
+    "inventory_image_records": 33,
+    "image_pins_match_captured": true,
+    "inventory_sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa"
+  },
+  "fresh_replay": "fresh/replay.py",
+  "fresh_outputs": ["fresh/index.jsonl", "fresh/images.json", "fresh/excluded.json", "fresh/summary.json"],
+  "review": "Fresh isolated replay exactly matches the captured summary and index/exclusion/image-pin files. It finds 4842 files with whole-file candidate matches, one file with two candidate images, and 66 excluded files. Candidate counts are main flash 3033, bootloader flash 1797, one candidate each for main and bootloader decoded ITCM, five BLE record-3 candidates, and six case flash candidates. Counts overlap: the ambiguous ITCM file contributes once to each of the two decoded-image counts. Exclusion reasons are 39 no whole-file candidate match, 13 missing bytes key, 7 bytes value is a list, 4 JSON parse errors, 2 unsupported top level, and 1 unsupported block shape.",
+  "interpretation": "The shared 24-byte ITCM candidate is byte-identical across Apollo main and bootloader decoded images and remains ambiguous. The candidate counts are not ownership determinations and must not be summed as coverage or treated as canonical admission.",
+  "limitations": [
+    "Only the supported instructions.json schemas are scanned; all revisions remain included.",
+    "Byte matches do not prove image ownership, semantic correctness, architectural validity, or admission.",
+    "No canonical coverage, freeze, or gate changes."
+  ]
+}

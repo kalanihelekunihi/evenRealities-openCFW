@@ -1,0 +1,18 @@
+{
+  "task_id": "P2-16057",
+  "accepted": false,
+  "status": "partial",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-current-buffer-detach-16454-map/001",
+  "candidate_receipt_sha256": "57379c5a96b63811947454dcd249a4ca06242b234e0d376da2d001570e5d764c",
+  "candidate_instructions_sha256": "9c3a7c827f150462fa8078835358e84d476c9e84580fc8bd0c681ee0d62f6864",
+  "candidate_pseudocode_sha256": "d89b5ffeab1b08de548aaba80307102127d51a7fc2638382021701e7e5b59f98",
+  "candidate_replay_sha256": "78e3db5105893d216e2429a559450531f88810d352fcc5777bd05fa32f731dd9",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_output_receipt_sha256": "c75c7fea90c34ad440ef624e807506cfca3c50221c665b834ab3d9ad6f327bec",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "review": "Detach may append marker words without advancing the cursor; it clears bit 3 only on that capacity path, then clears bit 5 and current-buffer slot.",
+  "limitations": [
+    "Child allocator/heap behavior, invalid pointers/fault behavior, concurrent mutation, physical buffer effects, and ownership remain unqualified.",
+    "No admission, C or gate change."
+  ]
+}

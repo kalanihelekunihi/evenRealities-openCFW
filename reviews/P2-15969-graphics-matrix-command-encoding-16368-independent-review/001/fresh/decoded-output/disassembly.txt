@@ -1,0 +1,120 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpcya097gc/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+005226e8 <.text>:
+  5226e8:	b510      	push	{r4, lr}
+  5226ea:	4604      	mov	r4, r0
+  5226ec:	eddf 0a8a 	vldr	s1, [pc, #552]	@ 522918 <.text+0x230>
+  5226f0:	ed94 0a06 	vldr	s0, [r4, #24]
+  5226f4:	eeb4 0a60 	vcmp.f32	s0, s1
+  5226f8:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  5226fc:	d561      	bpl.n	5227c2 <.text+0xda>
+  5226fe:	ed9f 1a87 	vldr	s2, [pc, #540]	@ 52291c <.text+0x234>
+  522702:	eeb4 0a41 	vcmp.f32	s0, s2
+  522706:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  52270a:	db5a      	blt.n	5227c2 <.text+0xda>
+  52270c:	edd4 1a07 	vldr	s3, [r4, #28]
+  522710:	eef4 1a60 	vcmp.f32	s3, s1
+  522714:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  522718:	d553      	bpl.n	5227c2 <.text+0xda>
+  52271a:	eef4 1a41 	vcmp.f32	s3, s2
+  52271e:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  522722:	db4e      	blt.n	5227c2 <.text+0xda>
+  522724:	eeff 1a00 	vmov.f32	s3, #240	@ 0xbf800000 -1.0
+  522728:	ee30 0a21 	vadd.f32	s0, s0, s3
+  52272c:	eeb4 0a60 	vcmp.f32	s0, s1
+  522730:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  522734:	d504      	bpl.n	522740 <.text+0x58>
+  522736:	eeb4 0a41 	vcmp.f32	s0, s2
+  52273a:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  52273e:	da2f      	bge.n	5227a0 <.text+0xb8>
+  522740:	ed94 0a00 	vldr	s0, [r4]
+  522744:	edd4 0a08 	vldr	s1, [r4, #32]
+  522748:	eec0 0a20 	vdiv.f32	s1, s0, s1
+  52274c:	edc4 0a00 	vstr	s1, [r4]
+  522750:	ed94 0a01 	vldr	s0, [r4, #4]
+  522754:	edd4 0a08 	vldr	s1, [r4, #32]
+  522758:	eec0 0a20 	vdiv.f32	s1, s0, s1
+  52275c:	edc4 0a01 	vstr	s1, [r4, #4]
+  522760:	ed94 0a02 	vldr	s0, [r4, #8]
+  522764:	edd4 0a08 	vldr	s1, [r4, #32]
+  522768:	eec0 0a20 	vdiv.f32	s1, s0, s1
+  52276c:	edc4 0a02 	vstr	s1, [r4, #8]
+  522770:	ed94 0a03 	vldr	s0, [r4, #12]
+  522774:	edd4 0a08 	vldr	s1, [r4, #32]
+  522778:	eec0 0a20 	vdiv.f32	s1, s0, s1
+  52277c:	edc4 0a03 	vstr	s1, [r4, #12]
+  522780:	ed94 0a04 	vldr	s0, [r4, #16]
+  522784:	edd4 0a08 	vldr	s1, [r4, #32]
+  522788:	eec0 0a20 	vdiv.f32	s1, s0, s1
+  52278c:	edc4 0a04 	vstr	s1, [r4, #16]
+  522790:	ed94 0a05 	vldr	s0, [r4, #20]
+  522794:	edd4 0a08 	vldr	s1, [r4, #32]
+  522798:	eec0 0a20 	vdiv.f32	s1, s0, s1
+  52279c:	edc4 0a05 	vstr	s1, [r4, #20]
+  5227a0:	2006      	movs	r0, #6
+  5227a2:	f7f2 f9a3 	bl	514aec <.text-0xdbfc>
+  5227a6:	2800      	cmp	r0, #0
+  5227a8:	d04d      	beq.n	522846 <.text+0x15e>
+  5227aa:	f44f 71ba 	mov.w	r1, #372	@ 0x174
+  5227ae:	6001      	str	r1, [r0, #0]
+  5227b0:	6962      	ldr	r2, [r4, #20]
+  5227b2:	f44f 71b4 	mov.w	r1, #360	@ 0x168
+  5227b6:	6081      	str	r1, [r0, #8]
+  5227b8:	6042      	str	r2, [r0, #4]
+  5227ba:	68a1      	ldr	r1, [r4, #8]
+  5227bc:	60c1      	str	r1, [r0, #12]
+  5227be:	2104      	movs	r1, #4
+  5227c0:	e01e      	b.n	522800 <.text+0x118>
+  5227c2:	2009      	movs	r0, #9
+  5227c4:	f7f2 f992 	bl	514aec <.text-0xdbfc>
+  5227c8:	2800      	cmp	r0, #0
+  5227ca:	d03c      	beq.n	522846 <.text+0x15e>
+  5227cc:	f44f 71ba 	mov.w	r1, #372	@ 0x174
+  5227d0:	6001      	str	r1, [r0, #0]
+  5227d2:	6962      	ldr	r2, [r4, #20]
+  5227d4:	f44f 71b4 	mov.w	r1, #360	@ 0x168
+  5227d8:	6081      	str	r1, [r0, #8]
+  5227da:	6042      	str	r2, [r0, #4]
+  5227dc:	68a1      	ldr	r1, [r4, #8]
+  5227de:	f44f 72bc 	mov.w	r2, #376	@ 0x178
+  5227e2:	6102      	str	r2, [r0, #16]
+  5227e4:	60c1      	str	r1, [r0, #12]
+  5227e6:	69a1      	ldr	r1, [r4, #24]
+  5227e8:	f44f 72be 	mov.w	r2, #380	@ 0x17c
+  5227ec:	6182      	str	r2, [r0, #24]
+  5227ee:	6141      	str	r1, [r0, #20]
+  5227f0:	69e1      	ldr	r1, [r4, #28]
+  5227f2:	f44f 72c0 	mov.w	r2, #384	@ 0x180
+  5227f6:	6202      	str	r2, [r0, #32]
+  5227f8:	61c1      	str	r1, [r0, #28]
+  5227fa:	6a21      	ldr	r1, [r4, #32]
+  5227fc:	6241      	str	r1, [r0, #36]	@ 0x24
+  5227fe:	210a      	movs	r1, #10
+  522800:	f44f 72b0 	mov.w	r2, #352	@ 0x160
+  522804:	f840 2021 	str.w	r2, [r0, r1, lsl #2]
+  522808:	6822      	ldr	r2, [r4, #0]
+  52280a:	1c49      	adds	r1, r1, #1
+  52280c:	f44f 73b2 	mov.w	r3, #356	@ 0x164
+  522810:	f840 2021 	str.w	r2, [r0, r1, lsl #2]
+  522814:	1c49      	adds	r1, r1, #1
+  522816:	f840 3021 	str.w	r3, [r0, r1, lsl #2]
+  52281a:	6862      	ldr	r2, [r4, #4]
+  52281c:	1c49      	adds	r1, r1, #1
+  52281e:	f44f 73b6 	mov.w	r3, #364	@ 0x16c
+  522822:	f840 2021 	str.w	r2, [r0, r1, lsl #2]
+  522826:	1c49      	adds	r1, r1, #1
+  522828:	f840 3021 	str.w	r3, [r0, r1, lsl #2]
+  52282c:	68e2      	ldr	r2, [r4, #12]
+  52282e:	1c49      	adds	r1, r1, #1
+  522830:	f44f 73b8 	mov.w	r3, #368	@ 0x170
+  522834:	f840 2021 	str.w	r2, [r0, r1, lsl #2]
+  522838:	1c49      	adds	r1, r1, #1
+  52283a:	f840 3021 	str.w	r3, [r0, r1, lsl #2]
+  52283e:	6922      	ldr	r2, [r4, #16]
+  522840:	1d00      	adds	r0, r0, #4
+  522842:	f840 2021 	str.w	r2, [r0, r1, lsl #2]
+  522846:	bd10      	pop	{r4, pc}

@@ -1,0 +1,74 @@
+
+g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin:     file format binary
+
+
+Disassembly of section .data:
+
+004205f4 <.data+0x105f4>:
+  4205f4:	e92d 41f8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, lr}
+  4205f8:	b087      	sub	sp, #28
+  4205fa:	0006      	movs	r6, r0
+  4205fc:	000f      	movs	r7, r1
+  4205fe:	4690      	mov	r8, r2
+  420600:	001c      	movs	r4, r3
+  420602:	a801      	add	r0, sp, #4
+  420604:	2118      	movs	r1, #24
+  420606:	f7f5 fcf5 	bl	0x415ff4
+  42060a:	4b9a      	ldr	r3, [pc, #616]	@ (0x420874)
+  42060c:	6818      	ldr	r0, [r3, #0]
+  42060e:	2800      	cmp	r0, #0
+  420610:	d101      	bne.n	0x420616
+  420612:	2002      	movs	r0, #2
+  420614:	e040      	b.n	0x420698
+  420616:	2c00      	cmp	r4, #0
+  420618:	d002      	beq.n	0x420620
+  42061a:	9d0e      	ldr	r5, [sp, #56]	@ 0x38
+  42061c:	2d00      	cmp	r5, #0
+  42061e:	d101      	bne.n	0x420624
+  420620:	2006      	movs	r0, #6
+  420622:	e039      	b.n	0x420698
+  420624:	f1b7 7f00 	cmp.w	r7, #33554432	@ 0x2000000
+  420628:	d301      	bcc.n	0x42062e
+  42062a:	2005      	movs	r0, #5
+  42062c:	e034      	b.n	0x420698
+  42062e:	2000      	movs	r0, #0
+  420630:	f88d 000a 	strb.w	r0, [sp, #10]
+  420634:	fa5f f888 	uxtb.w	r8, r8
+  420638:	f1b8 0f00 	cmp.w	r8, #0
+  42063c:	d004      	beq.n	0x420648
+  42063e:	2001      	movs	r0, #1
+  420640:	f88d 000b 	strb.w	r0, [sp, #11]
+  420644:	9703      	str	r7, [sp, #12]
+  420646:	e004      	b.n	0x420652
+  420648:	2000      	movs	r0, #0
+  42064a:	f88d 000b 	strb.w	r0, [sp, #11]
+  42064e:	2000      	movs	r0, #0
+  420650:	9003      	str	r0, [sp, #12]
+  420652:	2001      	movs	r0, #1
+  420654:	f88d 0010 	strb.w	r0, [sp, #16]
+  420658:	f8ad 6012 	strh.w	r6, [sp, #18]
+  42065c:	2001      	movs	r0, #1
+  42065e:	f88d 0014 	strb.w	r0, [sp, #20]
+  420662:	9501      	str	r5, [sp, #4]
+  420664:	9406      	str	r4, [sp, #24]
+  420666:	2000      	movs	r0, #0
+  420668:	f88d 0009 	strb.w	r0, [sp, #9]
+  42066c:	2000      	movs	r0, #0
+  42066e:	f88d 0015 	strb.w	r0, [sp, #21]
+  420672:	f8df 2898 	ldr.w	r2, [pc, #2200]	@ 0x420f0c
+  420676:	a901      	add	r1, sp, #4
+  420678:	6818      	ldr	r0, [r3, #0]
+  42067a:	f005 fe31 	bl	0x4262e0
+  42067e:	0004      	movs	r4, r0
+  420680:	2c00      	cmp	r4, #0
+  420682:	d008      	beq.n	0x420696
+  420684:	9400      	str	r4, [sp, #0]
+  420686:	002b      	movs	r3, r5
+  420688:	003a      	movs	r2, r7
+  42068a:	b2b6      	uxth	r6, r6
+  42068c:	0031      	movs	r1, r6
+  42068e:	f8df 0964 	ldr.w	r0, [pc, #2404]	@ 0x420ff4
+  420692:	f7f5 fc8c 	bl	0x415fae
+  420696:	0020      	movs	r0, r4
+  420698:	b008      	add	sp, #32
+  42069a:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}

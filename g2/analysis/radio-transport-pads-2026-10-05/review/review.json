@@ -1,0 +1,72 @@
+{
+  "scope": "Independent bounded review of reconstructed stock transport pad dispatcher and its calls into actual linked GPIO pin configuration/PRIMASK code.",
+  "disposition": "PASS",
+  "representative_rerun": {
+    "path": "g2/analysis/radio-transport-pads-2026-10-05/review/representative-rerun.json",
+    "sha256": "b384d35b6bd575abd55921cb6174a22397aad4d96dd2044ea5799598406bd2c8",
+    "status": "PASS",
+    "cases": 10,
+    "elf_sha256": "83e0709aaf877e476a2c371761b510668fda5f7e01b292e6bf2818d220b936ad",
+    "verifier_sha256": "9ce6d31fb891817ff1951298fe8deb9208fbecffb57a04a567abfa44a3552276",
+    "fixture_note": "Independent 10-case run used the authenticated full-image fixture before the sparse-span matrix; source and ELF are unchanged. The final broad comparison uses the reviewed contiguous authenticated sparse spans."
+  },
+  "source_sha256": {
+    "g2/components/foundation/radio_transport_pads/transport_pads.c": "8607b23d5c0f5fa1eb00b229670d7efc0929a5d91dc89b7574f1dacd0b97df3b",
+    "g2/components/foundation/radio_transport_pads/transport_pads.h": "f9e58dd3d4040ed6591ec8e0acc04502b0f7de6d080e27871751aa33c5ac6ff7",
+    "g2/components/foundation/radio_transport_pads/verify.py": "53cf3e6f001ca9107c6fc95e191a4c4e59f38a0c24413aaf250f4fa27cf1e17e"
+  },
+  "stock_evidence": {
+    "dispatcher": "Apollo main 0x4C2E30, 570-byte body; authenticated trace and original provenance recorded in g2/analysis/radio-transport-pads-2026-10-05/",
+    "release_caller": "0x52DF12 invokes dispatcher(instance,0) before subsequent HAL disable/optional power-off/uninitialize calls; no release implementation claim."
+  },
+  "findings": [
+    {
+      "severity": "informational",
+      "finding": "The dispatcher is void; residual R0 is undefined and is excluded from comparison. Ordered GPIO calls, MMIO sequence, complete register state, and PRIMASK are compared."
+    },
+    {
+      "severity": "scope",
+      "finding": "The operation byte is OR-combined with instance shifted left two; it is not a boolean mode. The C switch and independent selector model retain these aliasing/no-op cases."
+    },
+    {
+      "severity": "scope",
+      "finding": "No IRQ/NVIC behavior, transport HAL release, command queue/free, or whole shutdown safety is claimed."
+    }
+  ],
+  "limits": [
+    "Full 5,760-case comparator completed on authenticated executable spans and supplied data spans; a failed full-image attempt is explicitly uncredited in fixture-diagnostics.md.",
+    "Synthetic configuration perturbations exercise SDK validation and ignored failures, not physical electrical behavior.",
+    "Residual R0 is undefined for this void dispatcher and excluded. No transport HAL release, command queue/free, pending interrupt/NVIC, scheduling, or hardware proof."
+  ],
+  "full_comparison": {
+    "path": "g2/build/foundation/radio-transport-pads-simulator/comparison.json",
+    "sha256": "bca050a1587a57f8ab56aec95543072318936045a4a716303d565f31a8232244",
+    "status": "PASS",
+    "cases": 5760,
+    "unique_original_trace_bytes": 700,
+    "elf_sha256": "83e0709aaf877e476a2c371761b510668fda5f7e01b292e6bf2818d220b936ad",
+    "firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "source_manifest_entries": 16,
+    "source_manifest_matches_current": true,
+    "all_dispatcher_bytes_executed": true,
+    "dispatcher_extent": {
+      "start": "0x4c2e30",
+      "length": 570,
+      "end_exclusive": "0x4c306a"
+    },
+    "comparison_binding_verified_against_build_provenance": true
+  },
+  "sparse_fixture_review": {
+    "path": "g2/components/foundation/radio_transport_pads/verify.py",
+    "verified_executable_spans": [
+      "0x473000..0x474000",
+      "0x480000..0x482000",
+      "0x4c2000..0x4c4000"
+    ],
+    "verified_data_spans": [
+      "0x768000..0x769000",
+      "0x78e000..0x78f000"
+    ],
+    "rationale": "Adjacent 4 KiB code pages are represented as contiguous authenticated spans so Thumb instructions crossing 0x4c3000 and 0x481000 boundaries retain exact bytes. The comparison hooks assert every fetched instruction against that span. Exact source/code is unchanged; full-image attempt and the first split-page fixture failure are documented and receive no pass credit."
+  }
+}

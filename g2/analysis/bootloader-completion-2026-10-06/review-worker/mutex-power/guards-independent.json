@@ -1,0 +1,321 @@
+{
+  "status": "PASS",
+  "cases": 14,
+  "distinct_original_trace_bytes": 164,
+  "original_trace": {
+    "0x41bd92": "1cb5",
+    "0x41bd94": "dff80407",
+    "0x41bd98": "0078",
+    "0x41bd9a": "0128",
+    "0x41bd9c": "20d1",
+    "0x41bde0": "0020",
+    "0x41bde2": "16bd",
+    "0x41bd9e": "dff80047",
+    "0x41bda2": "2068",
+    "0x41bda4": "50f08000",
+    "0x41bda8": "0090",
+    "0x41bdaa": "6a46",
+    "0x41bdac": "0121",
+    "0x41bdae": "0520",
+    "0x41bdb0": "00f0b3ff",
+    "0x41bdb4": "dff8f006",
+    "0x41bdb8": "0168",
+    "0x41bdba": "51f02001",
+    "0x41bdbe": "0160",
+    "0x41bdc0": "0021",
+    "0x41bdc2": "00e0",
+    "0x41bdc6": "42f21072",
+    "0x41bdca": "9142",
+    "0x41bdcc": "04d2",
+    "0x41bdce": "2068",
+    "0x41bdd0": "c0f3c010",
+    "0x41bdd4": "0028",
+    "0x41bdd6": "f5d0",
+    "0x41bdc4": "491c",
+    "0x41bdd8": "9142",
+    "0x41bdda": "01d1",
+    "0x41bddc": "0420",
+    "0x41bdde": "00e0",
+    "0x41bde4": "80b5",
+    "0x41bde6": "dff8b406",
+    "0x41bdea": "0078",
+    "0x41bdec": "0128",
+    "0x41bdee": "20d1",
+    "0x41be32": "0020",
+    "0x41be34": "02bd",
+    "0x41bdf0": "dff8b406",
+    "0x41bdf4": "0168",
+    "0x41bdf6": "31f02001",
+    "0x41bdfa": "0160",
+    "0x41bdfc": "0021",
+    "0x41bdfe": "00e0",
+    "0x41be02": "42f21072",
+    "0x41be06": "9142",
+    "0x41be08": "06d2",
+    "0x41be0a": "dff89406",
+    "0x41be0e": "0068",
+    "0x41be10": "c0f3c010",
+    "0x41be14": "0028",
+    "0x41be16": "f3d1",
+    "0x41be18": "9142",
+    "0x41be1a": "01d1",
+    "0x41be20": "dff87c06",
+    "0x41be24": "0068",
+    "0x41be26": "0090",
+    "0x41be28": "6a46",
+    "0x41be2a": "0021",
+    "0x41be2c": "0520",
+    "0x41be2e": "00f074ff",
+    "0x41be00": "491c",
+    "0x41be1c": "0420",
+    "0x41be1e": "09e0"
+  },
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "elf_sha256": "584995795c375db0b79ba46df8a466a8fba0baa6f4a289e3bbf5a0572ff84f1a",
+  "source_sha256": {
+    "g2/components/bootloader/platform_control/control.h": "596724724a2fb0e80d04e3abf2590616562a6f67f31b9a60c19e2c43d62c67eb",
+    "g2/components/bootloader/platform_control/power_guards.c": "73f56d843fc648b7a18e56dc9cf698f8e74279703762b4d60cc872846bab71b9",
+    "g2/components/bootloader/platform_control/rom_module.ld": "130b6138573e17b8e1da482eae95b69df77f402e00aafbedf4ccd3df756435e5",
+    "g2/components/bootloader/platform_control/Makefile": "9aa091ff91cd7a12ffb8cbbf164b7a0bff8f6c420f41d417e27d1a345e29b91a",
+    "g2/components/bootloader/platform_control/critical_save.S": "c3be3d527c34f732bd53df3bc7230c45e94637a075952e113832d627c6a2863e",
+    "g2/components/bootloader/platform_control/control.c": "8b6c54999184781870b3300e4f1b99416fc05bb89ad0577614615209e32b6f7d",
+    "g2/components/bootloader/platform_control/module.ld": "0ee42704339350eb4d37eb129f23ff5f70a266a41ce3133a1626d5f8e9a8402b",
+    "g2/components/bootloader/platform_control/critical_rom_module.ld": "f61d5529603c433a95d1f3c51d5ac7197777439352e8175b8c47863ceef736d2",
+    "g2/components/bootloader/platform_control/verify_guards.py": "22ed76738966e291426086a6a74008997895c579eb994ea2f221b5180b9d7dd9",
+    "g2/components/bootloader/platform_control/verify.py": "10aef878f48b24517e96323685a96ddd7a1e0cb4ec13438b20ea7b0f3c083762",
+    "g2/components/bootloader/platform_control/mram_rom_bridge.c": "77c556a1458f0a4d1bca76f72ab08ad8e3e311264e0112870e1eea6ab1b29d73",
+    "g2/components/bootloader/platform_control/power_critical_rom_module.ld": "87f1a48ef9fef57639fe57b6336d03d3f3e85eebc4f566c8cf281e4ca96a1229"
+  },
+  "comparisons": [
+    {
+      "function": "control_guard_begin",
+      "enabled": 0,
+      "status": 0,
+      "request": 0,
+      "power_result": 0,
+      "observed": {
+        "return": 0,
+        "events": [],
+        "status": 0,
+        "request": 0
+      }
+    },
+    {
+      "function": "control_guard_begin",
+      "enabled": 2,
+      "status": 128,
+      "request": 4294967295,
+      "power_result": 7,
+      "observed": {
+        "return": 0,
+        "events": [],
+        "status": 128,
+        "request": 4294967295
+      }
+    },
+    {
+      "function": "control_guard_begin",
+      "enabled": 255,
+      "status": 128,
+      "request": 32,
+      "power_result": 7,
+      "observed": {
+        "return": 0,
+        "events": [],
+        "status": 128,
+        "request": 32
+      }
+    },
+    {
+      "function": "control_guard_begin",
+      "enabled": 1,
+      "status": 0,
+      "request": 0,
+      "power_result": 0,
+      "observed": {
+        "return": 4,
+        "events": [
+          [
+            "power_control",
+            5,
+            1,
+            128
+          ]
+        ],
+        "status": 0,
+        "request": 32
+      }
+    },
+    {
+      "function": "control_guard_begin",
+      "enabled": 1,
+      "status": 128,
+      "request": 4294967295,
+      "power_result": 0,
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "power_control",
+            5,
+            1,
+            128
+          ]
+        ],
+        "status": 128,
+        "request": 4294967295
+      }
+    },
+    {
+      "function": "control_guard_begin",
+      "enabled": 1,
+      "status": 341,
+      "request": 23130,
+      "power_result": 7,
+      "observed": {
+        "return": 4,
+        "events": [
+          [
+            "power_control",
+            5,
+            1,
+            469
+          ]
+        ],
+        "status": 341,
+        "request": 23162
+      }
+    },
+    {
+      "function": "control_guard_begin",
+      "enabled": 1,
+      "status": 469,
+      "request": 23130,
+      "power_result": 7,
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "power_control",
+            5,
+            1,
+            469
+          ]
+        ],
+        "status": 469,
+        "request": 23162
+      }
+    },
+    {
+      "function": "control_guard_end",
+      "enabled": 0,
+      "status": 0,
+      "request": 0,
+      "power_result": 0,
+      "observed": {
+        "return": 0,
+        "events": [],
+        "status": 0,
+        "request": 0
+      }
+    },
+    {
+      "function": "control_guard_end",
+      "enabled": 2,
+      "status": 128,
+      "request": 4294967295,
+      "power_result": 7,
+      "observed": {
+        "return": 0,
+        "events": [],
+        "status": 128,
+        "request": 4294967295
+      }
+    },
+    {
+      "function": "control_guard_end",
+      "enabled": 255,
+      "status": 128,
+      "request": 32,
+      "power_result": 7,
+      "observed": {
+        "return": 0,
+        "events": [],
+        "status": 128,
+        "request": 32
+      }
+    },
+    {
+      "function": "control_guard_end",
+      "enabled": 1,
+      "status": 0,
+      "request": 0,
+      "power_result": 0,
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "power_control",
+            5,
+            0,
+            0
+          ]
+        ],
+        "status": 0,
+        "request": 0
+      }
+    },
+    {
+      "function": "control_guard_end",
+      "enabled": 1,
+      "status": 128,
+      "request": 4294967295,
+      "power_result": 0,
+      "observed": {
+        "return": 4,
+        "events": [],
+        "status": 128,
+        "request": 4294967263
+      }
+    },
+    {
+      "function": "control_guard_end",
+      "enabled": 1,
+      "status": 341,
+      "request": 23130,
+      "power_result": 7,
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "power_control",
+            5,
+            0,
+            341
+          ]
+        ],
+        "status": 341,
+        "request": 23130
+      }
+    },
+    {
+      "function": "control_guard_end",
+      "enabled": 1,
+      "status": 469,
+      "request": 23130,
+      "power_result": 7,
+      "observed": {
+        "return": 4,
+        "events": [],
+        "status": 469,
+        "request": 23130
+      }
+    }
+  ],
+  "limits": [
+    "Real stock/source guard conditions, register RMW, loops and status results execute; power-control helper at41CD1A is synthetic.",
+    "Registers remain static fixture input, testing immediate-ready and poll-exhausted paths; no elapsed-time, hardware transition or interrupt scheduling proof.",
+    "Poll bound10000 is iterations, not microseconds or milliseconds. Return from power-control helper is ignored by both guards.",
+    "No physical MRAM/power operation or firmware writes."
+  ]
+}

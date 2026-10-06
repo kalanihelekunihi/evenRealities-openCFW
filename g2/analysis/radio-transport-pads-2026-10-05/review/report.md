@@ -1,0 +1,11 @@
+# Independent review: radio transport pad dispatcher
+
+The reconstructed dispatcher matches the selected stock behavior. The final native comparison passes 5,760 cases and records 700 unique original instruction bytes; its source manifest has 16 entries, all of which match current file hashes. I independently ran 10 representative native Unicorn original/source cases, which matched as well.
+
+The source checks `instance < 8`, truncates the command to a byte, forms `(byte_command | (instance << 2))`, and dispatches the same ordered full-pad or two-pad lists. Other combined keys perform no pad calls. The stock table and C switch agree for all eight instances. This is not a boolean command API: higher operation values can alias through the OR expression, while most values remain no-ops.
+
+Each selected pin reloads the volatile word at `0x78EE48`, builds the config argument, and calls the existing pinned `am_hal_gpio_pinconfig`; the existing PRIMASK provider and actual pinconfig code execute without call stubs. Config validation failures are ignored by the dispatcher and do not stop subsequent pin calls, matching the original. The spot-check included a configuration word that rejects some pins in a group while allowing the others. The void dispatcher’s residual R0 value is undefined and intentionally excluded.
+
+The sparse fixture maps authenticated executable spans `0x473000..0x474000`, `0x480000..0x482000`, and `0x4C2000..0x4C4000`, plus data spans `0x768000..0x769000` and `0x78E000..0x78F000`. Merging adjacent code pages preserves the full 4-byte Thumb instruction crossing `0x4C3000` (and the `0x481000` boundary); each fetched instruction is checked against the mapped bytes. The failed full-image run and initial split-page fixture failure are documented and receive no validation credit.
+
+The stock release path calls the dispatcher with command zero before its HAL disable, optional power-off, and uninitialize calls. Only the dispatcher is implemented and compared here. No IRQ/NVIC operation is performed by this provider. The comparison does not prove electrical pad behavior, transport HAL release, command-queue/buffer cleanup, pending interrupt state, or complete shutdown safety. Synthetic config-word perturbations test validation and ignored-error behavior; they do not establish physical pin configuration.

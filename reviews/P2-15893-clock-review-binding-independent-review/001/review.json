@@ -1,0 +1,17 @@
+{
+  "task_id": "P2-15893",
+  "accepted": false,
+  "status": "partial",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_outputs": [
+    "fresh/summary.json",
+    "fresh/functions.jsonl"
+  ],
+  "input_sha256": "c4466d676b7cbb65c7d3ffd9887249b362429e1da756b6e02e9cf963236659cd",
+  "review": "Fresh binding replay reproduces five exact scoped review bindings among eight clock function records. It verifies candidate revision, image/instruction/pseudocode hashes, PASS decision, partial/unaccepted state, and the actual review artifact hashes. The three unbound entries are 0x4D38EA, 0x4D3914, and 0x4D39E4.",
+  "limitations": [
+    "Binding is exact only to the scoped partial review receipts and does not imply semantic or coverage admission.",
+    "Unbound records remain unbound in this snapshot; no later evidence is silently merged.",
+    "No C implementation or gates."
+  ]
+}

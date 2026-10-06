@@ -1,0 +1,17 @@
+{
+  "task_id": "P2-15891",
+  "accepted": false,
+  "status": "partial",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_outputs": [
+    "fresh/functions.jsonl",
+    "fresh/data.jsonl",
+    "fresh/summary.json"
+  ],
+  "review": "Fresh replay reproduces the clock primitive draft ledger: eight contiguous function records covering 264 code bytes, six four-byte literal records (24 bytes), and five candidate review references. Each code record binds a selected source map\u2019s instruction and pseudocode hashes to its byte span; the six data records are taken from pinned PC-relative literals in map references and carry their raw values. The output remains accepted:false/draft_partial.",
+  "limitations": [
+    "Review references are discovered by a text scan and remain leads, not exact revision-bound verdicts; a later binding pass is separate.",
+    "Literal uses are candidate consumer references, not reachability or global code/data ownership proof.",
+    "The ledger is local and does not establish completeness, semantic admission, implementation readiness, or gates."
+  ]
+}

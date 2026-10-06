@@ -1,0 +1,13 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp3puvhx1l/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+004b128a <.text>:
+  4b128a:	f8df 0500 	ldr.w	r0, [pc, #1280]	@ 4b178c <.text+0x502>
+  4b128e:	6801      	ldr	r1, [r0, #0]
+  4b1290:	2200      	movs	r2, #0
+  4b1292:	6a08      	ldr	r0, [r1, #32]
+  4b1294:	620a      	str	r2, [r1, #32]
+  4b1296:	4770      	bx	lr

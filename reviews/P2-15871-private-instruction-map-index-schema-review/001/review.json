@@ -1,0 +1,24 @@
+{
+  "task_id": "P2-15871",
+  "accepted": false,
+  "status": "partial",
+  "input_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "captured_input_check": {
+    "captured_instruction_files": 4908,
+    "current_instruction_files": 4908,
+    "added": 0,
+    "removed": 0,
+    "matched_record_changes": 0,
+    "union_changed": false
+  },
+  "fresh_replay": "fresh/replay.py",
+  "fresh_outputs": ["fresh/index.jsonl", "fresh/unindexed.json", "fresh/byte-match-union.json", "fresh/summary.json"],
+  "review": "Fresh expanded-schema replay yields 4908 files scanned, 3033 main-image byte matches, 1875 unindexed, 163008 deduplicated byte-coincidence bytes, and 368 merged intervals. Unindexed reason counts are: outside main flash mapping 1848; unsupported top level 2; parse errors 4; bytes is a list 7; missing bytes key 13; unsupported block shape 1. Compared with the earlier 16274 run, 491 files previously rejected as unsupported block/top-level now parse far enough to be classified outside the main flash mapping. Matched records and byte union are identical.",
+  "correction_to_P2_15869": "The earlier P2-15869 wording that all 1875 unindexed files were outside the supported schema was too broad. The earlier scan had 1357 outside-main-mapping, 447 unsupported-block, 67 unsupported-top-level, and 4 parse-error records. Preserve that receipt as historical and use this schema-expanded classification for the corrected breakdown.",
+  "interpretation": "Flat/single-block schema support reclassifies many records as outside the main flash mapping, consistent with most being other-image records; it does not make them main-image matches. Byte coincidence is not ownership, code classification, semantic coverage, or admission.",
+  "limitations": [
+    "Only supported instructions.json schemas are examined; unsupported formats remain outside the diagnostic.",
+    "All revisions are retained, including superseded and incorrect interpretations.",
+    "No canonical admission or gate/freeze change."
+  ]
+}

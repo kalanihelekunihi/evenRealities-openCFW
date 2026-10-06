@@ -1,0 +1,20 @@
+{
+  "task_id": "P2-15897",
+  "accepted": false,
+  "status": "partial",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_outputs": [
+    "fresh2/receipt/receipt.json",
+    "fresh2/queue-candidate-ledger-16290/functions.jsonl",
+    "fresh2/queue-candidate-ledger-16290/data.jsonl",
+    "fresh2/clock-candidate-ledger-16294/functions.jsonl",
+    "fresh2/clock-candidate-ledger-16294/data.jsonl"
+  ],
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "target_lock_sha256": "7312f4b855ff41ec823cc977485a8cc5e59a7235f834880b2217bf1f3ab138ff",
+  "review": "Fresh target-binding replay reauthenticates the official bundle and target lock, then emits revision-002 ledgers with exact target/image, lock, repository-relative campaign root, and predecessor path/hash bindings. The reported 20 function records and 7 data records are reproduced. Existing accepted:false and draft_partial states are preserved.",
+  "limitations": [
+    "Target/path provenance binding is metadata consistency, not semantic ownership or review admission.",
+    "Ledger snapshots are diagnostic and do not establish global completeness, implementation readiness, or freeze gates."
+  ]
+}

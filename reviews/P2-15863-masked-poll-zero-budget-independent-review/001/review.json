@@ -1,0 +1,14 @@
+{
+  "task_id": "P2-15863",
+  "accepted": false,
+  "status": "partial",
+  "input_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "fresh_replay": "fresh/replay.py",
+  "fresh_results": "fresh/results.json",
+  "review": "Fresh replay passed 4096 original calls with a zero budget. The independent oracle varies equality/inequality and low-byte polarity, with randomized upper argument bits, and checks the unmasked comparison behavior and status 0/4. It verifies full mapped RAM outside the 24-byte stack exclusion, preserved registers, SP/PC/PRIMASK, and unchanged flash.",
+  "limitations": [
+    "No nonzero-budget delay path or resident ROM timing qualification.",
+    "Ordinary RAM backing does not qualify MMIO aliases, faults, or concurrency.",
+    "Partial/unaccepted; no admission or gate promotion."
+  ]
+}

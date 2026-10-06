@@ -1,0 +1,48 @@
+{
+  "firmware": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+  "firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "container_header_bytes": 32,
+  "runtime_base": "0x438000",
+  "spans": [
+    {
+      "address": "0x475014",
+      "end_exclusive": "0x47510e",
+      "size": 250,
+      "sha256": "402c249b4455f1f4f28042368fad045870b23c8341af86d99c7f147b4ea6d136",
+      "scope": "invalidate/clean-invalidate provider"
+    },
+    {
+      "address": "0x47510e",
+      "end_exclusive": "0x475194",
+      "size": 134,
+      "sha256": "f3cbe072fc3ee62abc0d1d2d73fdd2abc2b53805d25ec0aa9df49e785c0dd82c",
+      "scope": "clean provider"
+    },
+    {
+      "address": "0x57a7e0",
+      "end_exclusive": "0x57a80e",
+      "size": 46,
+      "sha256": "0b8d3c1ef22dfdfbed10aecaa56330d6e991d09eaccc048b6010d963921b8925",
+      "scope": "audio DMA consumer; static only, inactive-buffer query not reconstructed"
+    },
+    {
+      "address": "0x59ccdc",
+      "end_exclusive": "0x59cd86",
+      "size": 170,
+      "sha256": "8eb1ad4ed8226c1cbc8842010a16ed3ac42f89b5d5fcb0a9087c9fbadf2709b9",
+      "scope": "display MSPI write consumer; static only, transaction providers not reconstructed"
+    }
+  ],
+  "data": [
+    {
+      "address": "0x78d474",
+      "size": 8,
+      "bytes": "00000000800c0000",
+      "sha256": "9b63202090bc0d61e063af77f479aa64caada2fc85ed5bd10efa513a1fcb6c11",
+      "meaning": "audio range template address0,length3200; caller replaces address after inactive-DMA-buffer query"
+    }
+  ],
+  "architecture": "Apollo510 Cortex-M55 per consolidated hardware references; bounded Thumb instructions tested with Unicorn Cortex-M4 model, not full M55 hardware/cache simulation",
+  "instruction_scope": "Only the two maintenance bodies are credited as executed, consumer spans static only",
+  "ownership": "New analysis/component outputs only; shared campaign gates/state unchanged"
+}

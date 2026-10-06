@@ -1,0 +1,16 @@
+{
+  "task_id": "P2-15975",
+  "accepted": false,
+  "status": "partial",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-manifest-binding-investigation-15974/001",
+  "candidate_report_sha256": "8a6e6d49cfb02ea173194779c199c41cb92d3633a7c1cb7fc80269b66ad0704a",
+  "candidate_verifier_sha256": "bf7372fbd310159753661353420ffae88703a5d922b08720e8aae234255f9fa7",
+  "candidate_superseding_receipt_sha256": "a18cdb890dfbb9bdb7bd8a35b44fba2eba36de229ec1a8b93130d49068005b7d",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_replay_stdout": "PASS_SCOPED: exact attempt-002 manifest recovered; all listed files, task, instruction, and pseudocode pins verify; superseding receipt accepted:false; old evidence untouched.",
+  "review": "The fresh verifier confirms the 4056/002 receipt path/hash discrepancy and validates the intended /002 manifest path, all 20 listed files, and the superseding path-only receipt. The historical receipt/evidence remains intact and accepted:false. This checks provenance repair only, not C-SKY semantic correctness or physical source selection.",
+  "limitations": [
+    "No semantic re-review, global ownership, or physical execution/selection claim.",
+    "No canonical admission, C implementation, or gate change."
+  ]
+}

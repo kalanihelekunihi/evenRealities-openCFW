@@ -1,0 +1,22 @@
+{
+  "task_id": "P2-15869",
+  "accepted": false,
+  "status": "partial",
+  "input_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "captured_input_check": {
+    "captured_instruction_files": 4908,
+    "current_instruction_files": 4908,
+    "added": 0,
+    "removed": 0,
+    "record_hash_drift": 0,
+    "pseudocode_hash_drift": 0
+  },
+  "fresh_replay": "fresh/replay.py",
+  "fresh_outputs": ["fresh/index.jsonl", "fresh/unindexed.json", "fresh/byte-match-union.json", "fresh/summary.json"],
+  "review": "The captured path list exactly matches the current instructions.json scan before replay. Fresh isolated replay reproduces 4908 scanned files, of which 3033 use the supported list/block schema and byte-match the locked main image; 1875 are unindexed. The deduplicated coincidence union is 163008 bytes across 368 intervals. Fresh index records, skipped records, hash values, pseudocode hashes, and interval union equal the captured outputs. The scan retains all revisions, including superseded or incorrect interpretations.",
+  "interpretation": "These are schema-indexed byte coincidences only. They do not establish image ownership, executable code classification, semantic correctness, or canonical coverage admission. The unindexed set reflects unsupported formats under this script, not absence of analysis.",
+  "limitations": [
+    "Only instructions.json list/block schemas are indexed.",
+    "No ownership reconciliation, semantic coverage, canonical admission, or gate/freeze change."
+  ]
+}

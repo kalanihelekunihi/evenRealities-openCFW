@@ -1,0 +1,15 @@
+# Independent review: cache-maintenance provider
+
+**Disposition: pass for the bounded register/barrier contract.** The review is bound to `comparison-reviewed.json` SHA-256 `a19fc0581b3d3acfa36f09d4a038bb629ff380de6b6a2f432acbbe7808c8c9ef` and ELF SHA-256 `c35d1ef40fa4334044eba60f39d7a2bead8d4791832ecaceea2c829040b7381c`.
+
+The reconstructed invalidate/clean routines match the authenticated stock entries `0x475014` (250 bytes) and `0x47510E` (134 bytes) in the 768-case original/source/model comparison. That result compares ordered SCB and descriptor reads, maintenance-register writes, DSB/ISB placement, return/stack, preserved registers, and PRIMASK. There are no executable callee stubs; SCB state is supplied as a synthetic register fixture.
+
+Source behavior checks out against the sampled cases and implementation: the D-cache enable bit is tested first. When disabled, both APIs issue DSB then ISB and return without dereferencing a range. When enabled with a nonnull range, the stock path reads length before address; signed-nonpositive length returns after those loads without maintenance writes or barriers. Range maintenance uses the raw unaligned address, adds its low-five-bit offset to the length, advances by 32 bytes, and uses the flag's low byte for the invalidate versus clean-invalidate choice. For a null range, the implementation selects whole-cache maintenance from CCSIDR set/way fields, with the recorded masks and inclusive loops. Clean uses its distinct line and whole-cache registers.
+
+I independently reran 12 native stock/source cases and compared their ordered events with the verifier model. The sample covers disabled-cache barriers, enabled clean/invalidate, length 0 and `0xFFFFFFFF`, low-byte flags 256/257, unaligned multi-line ranges, address wrap, and several bounded set/way geometries. All 12 passed; details and current hash bindings are in `representative-rerun.json`.
+
+The reported actual consumers are supported by stock disassembly: `am_devices_mspi_write` calls clean entry `0x47510E` at `0x59CD10`, and `gx8002_i2s_rx_buffer_get` calls invalidate entry `0x475014` at `0x57A800`. These call sites establish use, not cache or DMA correctness.
+
+Accounting is consistent: before this batch the unique-trace total was 6,348; this comparison adds 384 nonoverlapping Apollo main bytes, yielding 234 touch + 6,498 Apollo main = 6,732 unique bytes. The cumulative inventory's reported increment is 384. The trace inventory suite passes four tests, including saved per-payload totals and overlap/conflict checks.
+
+The first verifier's very large positive-length fixture did not complete under its instruction limit and is explicitly preserved as a failed diagnostic, with no PASS credit. The final comparison excludes that huge positive completed path. Thus large positive lengths can run for a long time and remain unvalidated. The evidence does not establish actual cache-line effects, DMA coherency, physical ownership, or the complete display/audio transfer path. The separate optimized-tick instrumentation-sensitive blocker remains unchanged.

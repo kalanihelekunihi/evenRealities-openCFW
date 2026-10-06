@@ -1,0 +1,13 @@
+{
+  "task_id": "P2-15865",
+  "accepted": false,
+  "status": "partial",
+  "input_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "fresh_replay": "fresh/replay.py",
+  "fresh_results": "fresh/results.json",
+  "review": "Fresh replay passed 2048 original calls through the class-five cleanup path, immediate wait helper, and interrupt-mask helper without hooks. Inactive cases retain the global pointer and flag. Active cases use zero counter and verify the ordered post-wait flag clear and global pointer zeroing. It checks the exact global page, local RAM outside the 32-byte nested-stack window, branch-dependent R0, R1 entry-R3 alias, preserved callee registers, SP/PC/PRIMASK, and pinned flash.",
+  "limitations": [
+    "Active path only covers counter zero; delay transitions, timeouts, faults, aliases, and concurrent mutation are excluded.",
+    "No physical clock qualification or admission/gate promotion."
+  ]
+}

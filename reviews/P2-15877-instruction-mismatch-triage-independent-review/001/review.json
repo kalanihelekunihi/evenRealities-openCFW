@@ -1,0 +1,16 @@
+{
+  "task_id": "P2-15877",
+  "accepted": false,
+  "status": "partial",
+  "input_hashes": {
+    "excluded_source_sha256": "86de441c096d8ec5b884992bc635bfdd66b41c1babfddc4b6e67ccc0a6a49f61",
+    "image_inventory_sha256": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa"
+  },
+  "fresh_replay": "fresh/replay.py",
+  "fresh_outputs": ["fresh/triage.json", "fresh/summary.json"],
+  "review": "Fresh triage replay passed for all 43 prior whole-file nonmatches. It reports zero records with any mapped partial-byte candidate and zero records with a partial match. Each has no candidate diagnostics because none of its instruction addresses maps into the tested image address spaces. The exact source and image-inventory hashes match the captured inputs.",
+  "limitations": [
+    "This classifies the records as unmapped under the captured candidate address-space mappings; it does not prove ownership or semantic meaning.",
+    "All mismatching records remain excluded. No repair, coverage promotion, or gate change."
+  ]
+}

@@ -1,0 +1,67 @@
+
+/tmp/enable.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00425066 <.data>:
+  425066:	b510      	push	{r4, lr}
+  425068:	0004      	movs	r4, r0
+  42506a:	2800      	cmp	r0, #0
+  42506c:	d005      	beq.n	0x42507a
+  42506e:	6800      	ldr	r0, [r0, #0]
+  425070:	f020 407e 	bic.w	r0, r0, #4261412864	@ 0xfe000000
+  425074:	494e      	ldr	r1, [pc, #312]	@ (0x4251b0)
+  425076:	4288      	cmp	r0, r1
+  425078:	d001      	beq.n	0x42507e
+  42507a:	2002      	movs	r0, #2
+  42507c:	e037      	b.n	0x4250ee
+  42507e:	7a20      	ldrb	r0, [r4, #8]
+  425080:	2800      	cmp	r0, #0
+  425082:	d101      	bne.n	0x425088
+  425084:	2007      	movs	r0, #7
+  425086:	e032      	b.n	0x4250ee
+  425088:	69a0      	ldr	r0, [r4, #24]
+  42508a:	2800      	cmp	r0, #0
+  42508c:	d02a      	beq.n	0x4250e4
+  42508e:	2000      	movs	r0, #0
+  425090:	61e0      	str	r0, [r4, #28]
+  425092:	2000      	movs	r0, #0
+  425094:	6220      	str	r0, [r4, #32]
+  425096:	69a2      	ldr	r2, [r4, #24]
+  425098:	6961      	ldr	r1, [r4, #20]
+  42509a:	6860      	ldr	r0, [r4, #4]
+  42509c:	f7fe ff44 	bl	0x423f28
+  4250a0:	4846      	ldr	r0, [pc, #280]	@ (0x4251bc)
+  4250a2:	6861      	ldr	r1, [r4, #4]
+  4250a4:	4a3f      	ldr	r2, [pc, #252]	@ (0x4251a4)
+  4250a6:	eb12 3201 	adds.w	r2, r2, r1, lsl #12
+  4250aa:	f8c2 02b4 	str.w	r0, [r2, #692]	@ 0x2b4
+  4250ae:	2000      	movs	r0, #0
+  4250b0:	f8c4 0854 	str.w	r0, [r4, #2132]	@ 0x854
+  4250b4:	2000      	movs	r0, #0
+  4250b6:	f884 083c 	strb.w	r0, [r4, #2108]	@ 0x83c
+  4250ba:	2000      	movs	r0, #0
+  4250bc:	f8c4 0844 	str.w	r0, [r4, #2116]	@ 0x844
+  4250c0:	2000      	movs	r0, #0
+  4250c2:	f8c4 0838 	str.w	r0, [r4, #2104]	@ 0x838
+  4250c6:	2000      	movs	r0, #0
+  4250c8:	f8c4 0840 	str.w	r0, [r4, #2112]	@ 0x840
+  4250cc:	2000      	movs	r0, #0
+  4250ce:	f884 082c 	strb.w	r0, [r4, #2092]	@ 0x82c
+  4250d2:	2000      	movs	r0, #0
+  4250d4:	f8c4 0830 	str.w	r0, [r4, #2096]	@ 0x830
+  4250d8:	2001      	movs	r0, #1
+  4250da:	f884 082d 	strb.w	r0, [r4, #2093]	@ 0x82d
+  4250de:	2000      	movs	r0, #0
+  4250e0:	f8c4 085c 	str.w	r0, [r4, #2140]	@ 0x85c
+  4250e4:	6820      	ldr	r0, [r4, #0]
+  4250e6:	f050 7000 	orrs.w	r0, r0, #33554432	@ 0x2000000
+  4250ea:	6020      	str	r0, [r4, #0]
+  4250ec:	2000      	movs	r0, #0
+  4250ee:	bd10      	pop	{r4, pc}
+
+Literal-pool values read independently from the authenticated image:
+  0x004251a4: 00 00 06 40 -> 0x40060000 (MSPI0 base)
+  0x004251b0: be be be 01 -> 0x01bebebe (masked valid prefix)
+  0x004251bc: 80 00 40 00 -> 0x00400080 (CQCFG write value)

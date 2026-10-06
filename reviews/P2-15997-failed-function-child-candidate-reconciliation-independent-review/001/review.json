@@ -1,0 +1,904 @@
+{
+  "task_id": "P2-15997",
+  "accepted": false,
+  "status": "partial",
+  "fresh_replay": "fresh-replay.py",
+  "result": {
+    "status": "partial",
+    "accepted": false,
+    "parent_entry": 5505078,
+    "children": 30,
+    "children_with_candidate_leads": 25,
+    "children_without_candidate_leads": 5,
+    "records": [
+      {
+        "entry": 4430820,
+        "call_sites": [
+          5507392
+        ],
+        "candidate_leads": [
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-alignment-copy-map-11102/001/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-alignment-copy-map-11102/001/pseudocode.md",
+            "current_instructions_sha256": "9d6af0706888ef52d171377d5c6532e6eb9db1aa0f7f2501425df1d95857c4fa",
+            "current_pseudocode_sha256": "4b16b9380f7f998a30b3f19efdda8457b6843e9d72031b72423102711a543af0",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          },
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-alignment-copy-map-11102/001/reviews/P2-11109-independent-review/001/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-alignment-copy-map-11102/001/reviews/P2-11109-independent-review/001/pseudocode.md",
+            "current_instructions_sha256": "9d6af0706888ef52d171377d5c6532e6eb9db1aa0f7f2501425df1d95857c4fa",
+            "current_pseudocode_sha256": "4b16b9380f7f998a30b3f19efdda8457b6843e9d72031b72423102711a543af0",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          },
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-allocation-copy-helper-map-10578/001/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-allocation-copy-helper-map-10578/001/pseudocode.md",
+            "current_instructions_sha256": "9d6af0706888ef52d171377d5c6532e6eb9db1aa0f7f2501425df1d95857c4fa",
+            "current_pseudocode_sha256": "2d33263be9d19a1c654d4e70c51e476e0a14bf87fda3d593766b9f1aae60c5a0",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          },
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-heap-copy-extended-survey-14140/001/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-heap-copy-extended-survey-14140/001/pseudocode.md",
+            "current_instructions_sha256": "fbf20315c1d4be6afd2507423eb03d55b417f57d08c37f913bef2acc3f2e769e",
+            "current_pseudocode_sha256": "e86f61f2cb1144043400d1b19f1cfab390b2e3e98430b6bb23076f03a22943ca",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          },
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-heap-copy-survey-14136/001/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-heap-copy-survey-14136/001/pseudocode.md",
+            "current_instructions_sha256": "9ec6e456811423b62611c933e46276ce30ef6ebb47f4f80401ec281d54c88235",
+            "current_pseudocode_sha256": "e86f61f2cb1144043400d1b19f1cfab390b2e3e98430b6bb23076f03a22943ca",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          },
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-forward-copy-alignment-core-15860-map/001/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-forward-copy-alignment-core-15860-map/001/pseudocode.md",
+            "current_instructions_sha256": "0dad67dc40c62252bae57c045a3de69f7a5c9d80a22993d13ee03aab151bc683",
+            "current_pseudocode_sha256": "e70c0c1dabb352d59ce7c021f6404908e23ceedc445ac65eeeba28ff9165e7a1",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          },
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-forward-copy-alignment-core-15860-map/002/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-forward-copy-alignment-core-15860-map/002/pseudocode.md",
+            "current_instructions_sha256": "0dad67dc40c62252bae57c045a3de69f7a5c9d80a22993d13ee03aab151bc683",
+            "current_pseudocode_sha256": "e70c0c1dabb352d59ce7c021f6404908e23ceedc445ac65eeeba28ff9165e7a1",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          },
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-memcpy-15144-map/001/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-memcpy-15144-map/001/pseudocode.md",
+            "current_instructions_sha256": "0dad67dc40c62252bae57c045a3de69f7a5c9d80a22993d13ee03aab151bc683",
+            "current_pseudocode_sha256": "7a99728f906e2e151d6e6f05039b9d557cdfc7f25e739eeb448f734d24df7a9c",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          },
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-memcpy-15144-map/003/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-memcpy-15144-map/003/pseudocode.md",
+            "current_instructions_sha256": "0dad67dc40c62252bae57c045a3de69f7a5c9d80a22993d13ee03aab151bc683",
+            "current_pseudocode_sha256": "7a99728f906e2e151d6e6f05039b9d557cdfc7f25e739eeb448f734d24df7a9c",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          },
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-memcpy-dependency-survey-14952/001/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-memcpy-dependency-survey-14952/001/pseudocode.md",
+            "current_instructions_sha256": "0dad67dc40c62252bae57c045a3de69f7a5c9d80a22993d13ee03aab151bc683",
+            "current_pseudocode_sha256": "e86f61f2cb1144043400d1b19f1cfab390b2e3e98430b6bb23076f03a22943ca",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          },
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-fallback-child-survey-13576/001/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-fallback-child-survey-13576/001/pseudocode.md",
+            "current_instructions_sha256": "30ec9d0c8c25c81f1311995010f0f28e4030cb1dcb7bc48b6f65f1854a5d03cd",
+            "current_pseudocode_sha256": "e86f61f2cb1144043400d1b19f1cfab390b2e3e98430b6bb23076f03a22943ca",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          },
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-forward-alignment-copy-map-12778/001/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-forward-alignment-copy-map-12778/001/pseudocode.md",
+            "current_instructions_sha256": "9d6af0706888ef52d171377d5c6532e6eb9db1aa0f7f2501425df1d95857c4fa",
+            "current_pseudocode_sha256": "49898aa46a7d8aa01a7f75272370aa0af36634b0582bc84ba7eef825b296a617",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          },
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-forward-alignment-copy-map-13242/001/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-forward-alignment-copy-map-13242/001/pseudocode.md",
+            "current_instructions_sha256": "9d6af0706888ef52d171377d5c6532e6eb9db1aa0f7f2501425df1d95857c4fa",
+            "current_pseudocode_sha256": "354e56abf196601af28a1cb40a579d2aa9e25d166cc6820233413b1416d57fb9",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          },
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-forward-copy-alignment-map-10440/001/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-forward-copy-alignment-map-10440/001/pseudocode.md",
+            "current_instructions_sha256": "9d6af0706888ef52d171377d5c6532e6eb9db1aa0f7f2501425df1d95857c4fa",
+            "current_pseudocode_sha256": "d252022a9a384ca84a63e43d0ce4df6c24dfb7b5aba43d5674671ba82ee3a52a",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          },
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-forward-copy-and-counted-byte-sink-map-12214/001/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-forward-copy-and-counted-byte-sink-map-12214/001/pseudocode.md",
+            "current_instructions_sha256": "b99205ef394c47ffef2fdd4480c455a4ee6d1522f253a38f104fbaaf6420c1c2",
+            "current_pseudocode_sha256": "628f8c569d98eef383724e392948e06859b999da08718b9d4bd03ed615e71f30",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          },
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-forward-copy-and-counted-byte-sink-map-12214/reviewer-12223/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-forward-copy-and-counted-byte-sink-map-12214/reviewer-12223/pseudocode.md",
+            "current_instructions_sha256": "b99205ef394c47ffef2fdd4480c455a4ee6d1522f253a38f104fbaaf6420c1c2",
+            "current_pseudocode_sha256": "628f8c569d98eef383724e392948e06859b999da08718b9d4bd03ed615e71f30",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          }
+        ],
+        "status": "partial-candidate-evidence",
+        "accepted": false
+      },
+      {
+        "entry": 4510300,
+        "call_sites": [
+          5505448
+        ],
+        "candidate_leads": [
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-log-map-13622/001/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-log-map-13622/001/pseudocode.md",
+            "current_instructions_sha256": "b451001c61d25de25105e7878c4c1b0296507a0d687c47850ecac74698ee4977",
+            "current_pseudocode_sha256": "28656e280d02c4e6bd3c0a96e58460e1d5cdfb434d556af130e4c2a18b72562b",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          },
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-log-survey-13620/001/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-log-survey-13620/001/pseudocode.md",
+            "current_instructions_sha256": "b451001c61d25de25105e7878c4c1b0296507a0d687c47850ecac74698ee4977",
+            "current_pseudocode_sha256": "e86f61f2cb1144043400d1b19f1cfab390b2e3e98430b6bb23076f03a22943ca",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          }
+        ],
+        "status": "partial-candidate-evidence",
+        "accepted": false
+      },
+      {
+        "entry": 4519704,
+        "call_sites": [
+          5505406
+        ],
+        "candidate_leads": [
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-allocation-adapter-map-11126/001/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-allocation-adapter-map-11126/001/pseudocode.md",
+            "current_instructions_sha256": "52437f6f4563fee8db54f16d4c2715bf9b3a364b55c570396d1be276d0bf0c99",
+            "current_pseudocode_sha256": "cb15f37ea60713c2f1e9a82c29266772c3a22d1a1343dc357d80303fff0e0bfe",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          },
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-allocation-adapter-map-11126/002/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-allocation-adapter-map-11126/002/pseudocode.md",
+            "current_instructions_sha256": "52437f6f4563fee8db54f16d4c2715bf9b3a364b55c570396d1be276d0bf0c99",
+            "current_pseudocode_sha256": "74781915e740e58d299712211fd954e9080a4a519a74adc7fdcb63a7e709f717",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          },
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-allocation-adapter-map-11126/002/reviews/P2-11133-independent-review/001/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-allocation-adapter-map-11126/002/reviews/P2-11133-independent-review/001/pseudocode.md",
+            "current_instructions_sha256": "52437f6f4563fee8db54f16d4c2715bf9b3a364b55c570396d1be276d0bf0c99",
+            "current_pseudocode_sha256": "74781915e740e58d299712211fd954e9080a4a519a74adc7fdcb63a7e709f717",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          },
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-allocation-sentinel-wrapper-map-10518/001/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-allocation-sentinel-wrapper-map-10518/001/pseudocode.md",
+            "current_instructions_sha256": "4a0f75f0f79b7b7adcd30d86ca38a68e754f4166f1dabc8020c54d8cebbc844f",
+            "current_pseudocode_sha256": "17f139ce188499efd721c62f8891517da2b5ac70657a84da0f58df157a2f2d83",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          },
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-allocator-entry-survey-13868/001/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-allocator-entry-survey-13868/001/pseudocode.md",
+            "current_instructions_sha256": "becba59f2b39e141362db7cfa67c65f2fafd64e0dd9c0abd8b8362d5f7ff1763",
+            "current_pseudocode_sha256": "e86f61f2cb1144043400d1b19f1cfab390b2e3e98430b6bb23076f03a22943ca",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          },
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-allocator-wrapper-map-13870/001/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-allocator-wrapper-map-13870/001/pseudocode.md",
+            "current_instructions_sha256": "3451cb1da4953d7675d634eee4dab1790ebdad616750ba4867a2e5ef4a20c552",
+            "current_pseudocode_sha256": "f605d2777295ee04fce913215d8ee011ff13cbcadb72d4b4513a9e494e3a36ee",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          },
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-allocation-sentinel-adapters-15774-map/001/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-allocation-sentinel-adapters-15774-map/001/pseudocode.md",
+            "current_instructions_sha256": "e0361aa796281cc5aa728225ffcb5b57760b9f54dfa449079fc69551fbb1334d",
+            "current_pseudocode_sha256": "2eff71464a96817923fb33b25aa14d047500fbf8453e74a282f73f45e9a61759",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          },
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-allocation-sentinel-adapters-15774-map/002/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-allocation-sentinel-adapters-15774-map/002/pseudocode.md",
+            "current_instructions_sha256": "e0361aa796281cc5aa728225ffcb5b57760b9f54dfa449079fc69551fbb1334d",
+            "current_pseudocode_sha256": "2eff71464a96817923fb33b25aa14d047500fbf8453e74a282f73f45e9a61759",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          }
+        ],
+        "status": "partial-candidate-evidence",
+        "accepted": false
+      },
+      {
+        "entry": 4519768,
+        "call_sites": [
+          5505528,
+          5507514
+        ],
+        "candidate_leads": [
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-allocation-adapter-map-11126/001/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-allocation-adapter-map-11126/001/pseudocode.md",
+            "current_instructions_sha256": "52437f6f4563fee8db54f16d4c2715bf9b3a364b55c570396d1be276d0bf0c99",
+            "current_pseudocode_sha256": "cb15f37ea60713c2f1e9a82c29266772c3a22d1a1343dc357d80303fff0e0bfe",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          },
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-allocation-adapter-map-11126/002/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-allocation-adapter-map-11126/002/pseudocode.md",
+            "current_instructions_sha256": "52437f6f4563fee8db54f16d4c2715bf9b3a364b55c570396d1be276d0bf0c99",
+            "current_pseudocode_sha256": "74781915e740e58d299712211fd954e9080a4a519a74adc7fdcb63a7e709f717",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          },
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-allocation-adapter-map-11126/002/reviews/P2-11133-independent-review/001/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-allocation-adapter-map-11126/002/reviews/P2-11133-independent-review/001/pseudocode.md",
+            "current_instructions_sha256": "52437f6f4563fee8db54f16d4c2715bf9b3a364b55c570396d1be276d0bf0c99",
+            "current_pseudocode_sha256": "74781915e740e58d299712211fd954e9080a4a519a74adc7fdcb63a7e709f717",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          },
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-allocation-sentinel-wrapper-map-10518/001/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-allocation-sentinel-wrapper-map-10518/001/pseudocode.md",
+            "current_instructions_sha256": "4a0f75f0f79b7b7adcd30d86ca38a68e754f4166f1dabc8020c54d8cebbc844f",
+            "current_pseudocode_sha256": "17f139ce188499efd721c62f8891517da2b5ac70657a84da0f58df157a2f2d83",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          },
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-allocator-entry-survey-13868/001/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-allocator-entry-survey-13868/001/pseudocode.md",
+            "current_instructions_sha256": "becba59f2b39e141362db7cfa67c65f2fafd64e0dd9c0abd8b8362d5f7ff1763",
+            "current_pseudocode_sha256": "e86f61f2cb1144043400d1b19f1cfab390b2e3e98430b6bb23076f03a22943ca",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          },
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-allocation-sentinel-adapters-15774-map/001/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-allocation-sentinel-adapters-15774-map/001/pseudocode.md",
+            "current_instructions_sha256": "e0361aa796281cc5aa728225ffcb5b57760b9f54dfa449079fc69551fbb1334d",
+            "current_pseudocode_sha256": "2eff71464a96817923fb33b25aa14d047500fbf8453e74a282f73f45e9a61759",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          },
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-allocation-sentinel-adapters-15774-map/002/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-allocation-sentinel-adapters-15774-map/002/pseudocode.md",
+            "current_instructions_sha256": "e0361aa796281cc5aa728225ffcb5b57760b9f54dfa449079fc69551fbb1334d",
+            "current_pseudocode_sha256": "2eff71464a96817923fb33b25aa14d047500fbf8453e74a282f73f45e9a61759",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          }
+        ],
+        "status": "partial-candidate-evidence",
+        "accepted": false
+      },
+      {
+        "entry": 4524952,
+        "call_sites": [
+          5505294
+        ],
+        "candidate_leads": [
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-four-word-geometry-leaves-map-10412/001/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-four-word-geometry-leaves-map-10412/001/pseudocode.md",
+            "current_instructions_sha256": "8b55740a428cf8b55c9f0a10f58a999b99dc6988558a725b65ff9f6a8fba6016",
+            "current_pseudocode_sha256": "b40252b7cd30c196c8b268ab32e7e4227c0570e80d60b4d5a72e39494438b69e",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          }
+        ],
+        "status": "partial-candidate-evidence",
+        "accepted": false
+      },
+      {
+        "entry": 4525004,
+        "call_sites": [
+          5505266,
+          5505708,
+          5505878,
+          5506076,
+          5506280,
+          5506454,
+          5506612,
+          5506818,
+          5507020,
+          5507256
+        ],
+        "candidate_leads": [
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-four-word-geometry-leaves-map-10412/001/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-four-word-geometry-leaves-map-10412/001/pseudocode.md",
+            "current_instructions_sha256": "8b55740a428cf8b55c9f0a10f58a999b99dc6988558a725b65ff9f6a8fba6016",
+            "current_pseudocode_sha256": "b40252b7cd30c196c8b268ab32e7e4227c0570e80d60b4d5a72e39494438b69e",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          }
+        ],
+        "status": "partial-candidate-evidence",
+        "accepted": false
+      },
+      {
+        "entry": 4525864,
+        "call_sites": [
+          5505722,
+          5505892,
+          5506090,
+          5506294,
+          5506468,
+          5506626,
+          5506832,
+          5507034,
+          5507270
+        ],
+        "candidate_leads": [
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-rounded-rectangle-containment-map-10428/001/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-rounded-rectangle-containment-map-10428/001/pseudocode.md",
+            "current_instructions_sha256": "b6287a1028713e14605b16989b3a5fba1500b33f620b6a20145991551551139d",
+            "current_pseudocode_sha256": "3511087cf52a55fbf036f6d15eaee9abcde59442421979297fb8376ed778b815",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          }
+        ],
+        "status": "partial-candidate-evidence",
+        "accepted": false
+      },
+      {
+        "entry": 4527512,
+        "call_sites": [
+          5505238,
+          5505304,
+          5505322,
+          5505354,
+          5505372,
+          5505476,
+          5507330,
+          5507464
+        ],
+        "candidate_leads": [
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-geometry-dimensions-circle-map-10420/001/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-geometry-dimensions-circle-map-10420/001/pseudocode.md",
+            "current_instructions_sha256": "f8b936164deda65ce48fd383093e357dcb3bb056e50508d92ec7f35a688077af",
+            "current_pseudocode_sha256": "0ebc38b07ab47a9a06fdc6506c5f04e10ff3091835e28258261f460d088a2185",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          }
+        ],
+        "status": "partial-candidate-evidence",
+        "accepted": false
+      },
+      {
+        "entry": 4527524,
+        "call_sites": [
+          5505248,
+          5505312,
+          5505330,
+          5505362,
+          5505380,
+          5505494,
+          5507322,
+          5507456
+        ],
+        "candidate_leads": [
+          {
+            "kind": "older-index-byte-candidate-lead",
+            "instructions_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-geometry-dimensions-circle-map-10420/001/instructions.json",
+            "pseudocode_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-geometry-dimensions-circle-map-10420/001/pseudocode.md",
+            "current_instructions_sha256": "f8b936164deda65ce48fd383093e357dcb3bb056e50508d92ec7f35a688077af",
+            "current_pseudocode_sha256": "0ebc38b07ab47a9a06fdc6506c5f04e10ff3091835e28258261f460d088a2185",
+            "index_instructions_pin_matches": true,
+            "index_pseudocode_pin_matches": true,
+            "qualification": "No owner/function/completeness/review binding inferred from instruction containing entry."
+          }
+        ],
+        "status": "partial-candidate-evidence",
+        "accepted": false
+      },
+      {
+        "entry": 4916904,
+        "call_sites": [
+          5507402
+        ],
+        "candidate_leads": [
+          {
+            "kind": "new-whole-raw-envelope-partial-map",
+            "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-rgb-alpha-byte-adapter-16376-map/001",
+            "start": 4916904,
+            "end": 4916928,
+            "instruction_bytes": 24,
+            "qualification": "Partial/unaccepted leaf or adapter; architecture/child effects conditional."
+          }
+        ],
+        "status": "partial-candidate-evidence",
+        "accepted": false
+      },
+      {
+        "entry": 4916928,
+        "call_sites": [
+          5505620,
+          5507158
+        ],
+        "candidate_leads": [
+          {
+            "kind": "new-whole-raw-envelope-partial-map",
+            "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-cached-state-update-16378-map/001",
+            "start": 4916928,
+            "end": 4917040,
+            "instruction_bytes": 112,
+            "qualification": "Partial/unaccepted leaf or adapter; architecture/child effects conditional."
+          }
+        ],
+        "status": "partial-candidate-evidence",
+        "accepted": false
+      },
+      {
+        "entry": 4917064,
+        "call_sites": [
+          5507420,
+          5507434
+        ],
+        "candidate_leads": [
+          {
+            "kind": "new-whole-raw-envelope-partial-map",
+            "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-mode-state-wrapper-16380-map/001",
+            "start": 4917064,
+            "end": 4917086,
+            "instruction_bytes": 22,
+            "qualification": "Partial/unaccepted leaf or adapter; architecture/child effects conditional."
+          }
+        ],
+        "status": "partial-candidate-evidence",
+        "accepted": false
+      },
+      {
+        "entry": 4918106,
+        "call_sites": [
+          5505516
+        ],
+        "candidate_leads": [],
+        "status": "no-indexed-instruction-candidate",
+        "accepted": false
+      },
+      {
+        "entry": 4919960,
+        "call_sites": [
+          5505572,
+          5505598
+        ],
+        "candidate_leads": [],
+        "status": "no-indexed-instruction-candidate",
+        "accepted": false
+      },
+      {
+        "entry": 4920428,
+        "call_sites": [
+          5507446
+        ],
+        "candidate_leads": [
+          {
+            "kind": "new-whole-raw-envelope-partial-map",
+            "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-value-command-tail-adapter-16382-map/001",
+            "start": 4920428,
+            "end": 4920436,
+            "instruction_bytes": 8,
+            "qualification": "Partial/unaccepted leaf or adapter; architecture/child effects conditional."
+          }
+        ],
+        "status": "partial-candidate-evidence",
+        "accepted": false
+      },
+      {
+        "entry": 4920598,
+        "call_sites": [
+          5505632
+        ],
+        "candidate_leads": [
+          {
+            "kind": "new-whole-raw-envelope-partial-map",
+            "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-explicit-viewport-command-pair-16384-map/001",
+            "start": 4920598,
+            "end": 4920648,
+            "instruction_bytes": 50,
+            "qualification": "Partial/unaccepted leaf or adapter; architecture/child effects conditional."
+          }
+        ],
+        "status": "partial-candidate-evidence",
+        "accepted": false
+      },
+      {
+        "entry": 4920648,
+        "call_sites": [
+          5507450
+        ],
+        "candidate_leads": [
+          {
+            "kind": "new-whole-raw-envelope-partial-map",
+            "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-global-viewport-command-pair-16386-map/001",
+            "start": 4920648,
+            "end": 4920712,
+            "instruction_bytes": 64,
+            "qualification": "Partial/unaccepted leaf or adapter; architecture/child effects conditional."
+          }
+        ],
+        "status": "partial-candidate-evidence",
+        "accepted": false
+      },
+      {
+        "entry": 5324334,
+        "call_sites": [
+          5507440
+        ],
+        "candidate_leads": [],
+        "status": "no-indexed-instruction-candidate",
+        "accepted": false
+      },
+      {
+        "entry": 5325700,
+        "call_sites": [
+          5507508
+        ],
+        "candidate_leads": [],
+        "status": "no-indexed-instruction-candidate",
+        "accepted": false
+      },
+      {
+        "entry": 5326074,
+        "call_sites": [
+          5507488
+        ],
+        "candidate_leads": [
+          {
+            "kind": "new-whole-raw-envelope-partial-map",
+            "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-active-buffer-getter-16388-map/001",
+            "start": 5326074,
+            "end": 5326084,
+            "instruction_bytes": 10,
+            "qualification": "Partial/unaccepted leaf or adapter; architecture/child effects conditional."
+          }
+        ],
+        "status": "partial-candidate-evidence",
+        "accepted": false
+      },
+      {
+        "entry": 5328114,
+        "call_sites": [
+          5507496
+        ],
+        "candidate_leads": [
+          {
+            "kind": "new-whole-raw-envelope-partial-map",
+            "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-flush-mark-tail-adapter-16390-map/001",
+            "start": 5328114,
+            "end": 5328128,
+            "instruction_bytes": 14,
+            "qualification": "Partial/unaccepted leaf or adapter; architecture/child effects conditional."
+          }
+        ],
+        "status": "partial-candidate-evidence",
+        "accepted": false
+      },
+      {
+        "entry": 5328128,
+        "call_sites": [
+          5507502
+        ],
+        "candidate_leads": [
+          {
+            "kind": "new-whole-raw-envelope-partial-map",
+            "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-buffer-handle-retirement-16392-map/001",
+            "start": 5328128,
+            "end": 5328172,
+            "instruction_bytes": 44,
+            "qualification": "Partial/unaccepted leaf or adapter; architecture/child effects conditional."
+          }
+        ],
+        "status": "partial-candidate-evidence",
+        "accepted": false
+      },
+      {
+        "entry": 5383912,
+        "call_sites": [
+          5505768,
+          5505960,
+          5506170,
+          5506362,
+          5506514,
+          5506692,
+          5506884,
+          5507106,
+          5507380
+        ],
+        "candidate_leads": [
+          {
+            "kind": "new-whole-raw-envelope-partial-map",
+            "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-matrix-command-encoding-16368-map/001",
+            "start": 5383912,
+            "end": 5384264,
+            "instruction_bytes": 352,
+            "qualification": "Partial/unaccepted leaf or adapter; architecture/child effects conditional."
+          }
+        ],
+        "status": "partial-candidate-evidence",
+        "accepted": false
+      },
+      {
+        "entry": 5384726,
+        "call_sites": [
+          5507166,
+          5507316
+        ],
+        "candidate_leads": [
+          {
+            "kind": "new-whole-raw-envelope-partial-map",
+            "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-color-command-tail-adapter-16364-map/001",
+            "start": 5384726,
+            "end": 5384736,
+            "instruction_bytes": 10,
+            "qualification": "Partial/unaccepted leaf or adapter; architecture/child effects conditional."
+          }
+        ],
+        "status": "partial-candidate-evidence",
+        "accepted": false
+      },
+      {
+        "entry": 5384928,
+        "call_sites": [
+          5505796,
+          5505988,
+          5506198,
+          5506390,
+          5506542,
+          5506720,
+          5506912,
+          5507134,
+          5507302,
+          5507484
+        ],
+        "candidate_leads": [
+          {
+            "kind": "new-whole-raw-envelope-partial-map",
+            "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-packed-rectangle-command-16366-map/001",
+            "start": 5384928,
+            "end": 5385008,
+            "instruction_bytes": 80,
+            "qualification": "Partial/unaccepted leaf or adapter; architecture/child effects conditional."
+          }
+        ],
+        "status": "partial-candidate-evidence",
+        "accepted": false
+      },
+      {
+        "entry": 5385008,
+        "call_sites": [
+          5507350
+        ],
+        "candidate_leads": [],
+        "status": "no-indexed-instruction-candidate",
+        "accepted": false
+      },
+      {
+        "entry": 5505060,
+        "call_sites": [
+          5505280,
+          5505668,
+          5505832,
+          5506024,
+          5506234,
+          5506428,
+          5506580,
+          5506758,
+          5506950,
+          5507208
+        ],
+        "candidate_leads": [
+          {
+            "kind": "new-whole-raw-envelope-partial-map",
+            "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-rectangle-ordered-four-word-copy-16354-map/001",
+            "start": 5505060,
+            "end": 5505078,
+            "instruction_bytes": 18,
+            "qualification": "Partial/unaccepted leaf or adapter; architecture/child effects conditional."
+          }
+        ],
+        "status": "partial-candidate-evidence",
+        "accepted": false
+      },
+      {
+        "entry": 5642256,
+        "call_sites": [
+          5505732,
+          5505902,
+          5506100,
+          5506304,
+          5506478,
+          5506636,
+          5506842,
+          5507044,
+          5507374
+        ],
+        "candidate_leads": [
+          {
+            "kind": "new-whole-raw-envelope-partial-map",
+            "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-matrix-three-by-three-identity-16356-map/001",
+            "start": 5642256,
+            "end": 5642288,
+            "instruction_bytes": 32,
+            "qualification": "Partial/unaccepted leaf or adapter; architecture/child effects conditional."
+          }
+        ],
+        "status": "partial-candidate-evidence",
+        "accepted": false
+      },
+      {
+        "entry": 5642326,
+        "call_sites": [
+          5505762,
+          5506508,
+          5506878
+        ],
+        "candidate_leads": [
+          {
+            "kind": "new-whole-raw-envelope-partial-map",
+            "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-matrix-projective-translation-update-16358-map/001",
+            "start": 5642326,
+            "end": 5642424,
+            "instruction_bytes": 98,
+            "qualification": "Partial/unaccepted leaf or adapter; architecture/child effects conditional."
+          }
+        ],
+        "status": "partial-candidate-evidence",
+        "accepted": false
+      },
+      {
+        "entry": 5643064,
+        "call_sites": [
+          5505954,
+          5506164,
+          5506356,
+          5506686,
+          5507100
+        ],
+        "candidate_leads": [
+          {
+            "kind": "new-whole-raw-envelope-partial-map",
+            "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-matrix-three-by-three-inverse-16360-map/001",
+            "start": 5643064,
+            "end": 5643364,
+            "instruction_bytes": 300,
+            "qualification": "Partial/unaccepted leaf or adapter; architecture/child effects conditional."
+          }
+        ],
+        "status": "partial-candidate-evidence",
+        "accepted": false
+      }
+    ],
+    "limitations": [
+      "Lead reconciliation only; containing-entry byte match is not complete child function, semantic coverage, owner or qualified interface.",
+      "Review bindings not resolved by this ledger; scoped reviews remain external evidence.",
+      "No canonical adoption, C, freeze or gate changes."
+    ]
+  },
+  "review": "Fresh child-entry reconciliation replay passed with 25 candidate leads and 5 children without indexed candidates across the updated set of direct callees. Candidate map inputs and pseudocode hashes were rechecked. The reconciliation is limited to a candidate instruction range containing each target address; it does not qualify function extent or ownership.",
+  "limitations": [
+    "No function completeness, ownership, semantics, review binding, route execution, canonical admission, or gate is established."
+  ]
+}

@@ -1,0 +1,53 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp7jh3lnbq/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00522b30 <.text>:
+  522b30:	e92d 4ff0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
+  522b34:	4690      	mov	r8, r2
+  522b36:	b087      	sub	sp, #28
+  522b38:	eb08 72d8 	add.w	r2, r8, r8, lsr #31
+  522b3c:	9e10      	ldr	r6, [sp, #64]	@ 0x40
+  522b3e:	1052      	asrs	r2, r2, #1
+  522b40:	42b2      	cmp	r2, r6
+  522b42:	bfb8      	it	lt
+  522b44:	4616      	movlt	r6, r2
+  522b46:	469a      	mov	sl, r3
+  522b48:	eb0a 72da 	add.w	r2, sl, sl, lsr #31
+  522b4c:	1052      	asrs	r2, r2, #1
+  522b4e:	42b2      	cmp	r2, r6
+  522b50:	bfb8      	it	lt
+  522b52:	4616      	movlt	r6, r2
+  522b54:	4604      	mov	r4, r0
+  522b56:	460d      	mov	r5, r1
+  522b58:	2e00      	cmp	r6, #0
+  522b5a:	dc27      	bgt.n	522bac <.text+0x7c>
+  522b5c:	f1b8 0f00 	cmp.w	r8, #0
+  522b60:	bfc8      	it	gt
+  522b62:	f1ba 0f00 	cmpgt.w	sl, #0
+  522b66:	f340 8122 	ble.w	522dae <.text+0x27e>
+  522b6a:	2003      	movs	r0, #3
+  522b6c:	f7f1 ffbe 	bl	514aec <.text-0xe044>
+  522b70:	2800      	cmp	r0, #0
+  522b72:	f000 811c 	beq.w	522dae <.text+0x27e>
+  522b76:	eac4 4205 	pkhbt	r2, r4, r5, lsl #16
+  522b7a:	f44f 7182 	mov.w	r1, #260	@ 0x104
+  522b7e:	6001      	str	r1, [r0, #0]
+  522b80:	6042      	str	r2, [r0, #4]
+  522b82:	4455      	add	r5, sl
+  522b84:	4444      	add	r4, r8
+  522b86:	eac4 4205 	pkhbt	r2, r4, r5, lsl #16
+  522b8a:	f44f 7184 	mov.w	r1, #264	@ 0x108
+  522b8e:	6081      	str	r1, [r0, #8]
+  522b90:	60c2      	str	r2, [r0, #12]
+  522b92:	f8df 1738 	ldr.w	r1, [pc, #1848]	@ 5232cc <.text+0x79c>
+  522b96:	6101      	str	r1, [r0, #16]
+  522b98:	f8df 237c 	ldr.w	r2, [pc, #892]	@ 522f18 <.text+0x3e8>
+  522b9c:	6813      	ldr	r3, [r2, #0]
+  522b9e:	6999      	ldr	r1, [r3, #24]
+  522ba0:	f041 0102 	orr.w	r1, r1, #2
+  522ba4:	6141      	str	r1, [r0, #20]
+  522ba6:	b007      	add	sp, #28
+  522ba8:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}

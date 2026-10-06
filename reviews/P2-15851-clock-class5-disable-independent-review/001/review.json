@@ -1,0 +1,11 @@
+{
+  "task_id": "P2-15851",
+  "accepted": false,
+  "status": "partial",
+  "input_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "review": "Fresh assembly/disassembly replay tiles all 14 bytes at 4D39E4..4D39F2 against the locked image. Decoded instructions load literal 4D3A18 (word 0x40004048), read the register word, perform LSRS #1 then LSLS #1 (clearing only bit 0), store the result, set R0=0, and return. R1 retains the new word; no frame or child calls.",
+  "limitations": [
+    "Map review is instruction-level only; no physical clock, timing, fault, alias, or concurrency claim.",
+    "Partial/unaccepted; no admission, global coverage, or gate promotion."
+  ]
+}

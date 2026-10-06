@@ -1,0 +1,8 @@
+# Preserved diagnostic cases
+
+1. `oversized-prefix-results.json`/`oversized_validation.py`: raw positive length 0x7fffffff, three cache modes and four alignments. Both stock/source stop at the 30,000-instruction budget, with matching common write prefixes. Classification: execution budget. No completed-path pass, unsupported-input exclusion, physical effect or new ledger credit. Original previous `cache-maintenance-2026-10-06/unbounded-length-first-verifier.py` remains unchanged.
+2. `unscoped-range-read-first-verifier.py`: harness originally captured ephemeral stack reads after the cache return as descriptor reads. Scope was corrected to the actual provider call/return. This was a fixture observation boundary error, not source behavior or a passing failure.
+3. `getter-return-first.c`, `incorrect-return-second-verifier.py`, build `handoff-first-return.elf`: source returned 3200, whereas stock epilogue restores selected pointer into R0. This was a real reconstruction mismatch, corrected in current C and tested.
+4. `checked-alias-first.c`, build `handoff-before-alias-rejection.elf`: new checked policy originally allowed equal output pointers, losing the published address. Reviewer required early rejection. Final checked policy rejects alias before cache/output effects; raw stock-equivalent alias behavior stays covered and unchanged. Historical candidates are not the final validated build.
+
+Final authoritative comparison: `g2/build/foundation/audio-cache-handoff-simulator/comparison-final-policy.json`. Earlier reviewed/current comparison names describe earlier candidates, not the final policy.

@@ -1,0 +1,18 @@
+{
+  "task_id": "P2-16035",
+  "accepted": false,
+  "status": "partial",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-single-command-padding-loops-16432-map/001",
+  "candidate_receipt_sha256": "9b4ad21577e8cf22e8bc99fe1ec2616ac912a007bcd4941f03d308404d55b0ce",
+  "candidate_instructions_sha256": "a66aae210c7377f211ccc90ee5de05e976ae1c2b758e5a8db563cfe12da538f2",
+  "candidate_pseudocode_sha256": "b412faa296fa168f5dfb62069c3f327a1a897bfdf219d60770ba3b5d54866dba",
+  "candidate_replay_sha256": "a62fe63e3acf23b2a223e11278a03a2b2e393e63f6589f90088154b1e19f4591",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_stdout": true,
+  "fresh_output_receipt_sha256": "2233cd7e890d3f3a6cef50c2d0b4242635b06620012b25235751ec1fc4b9aa7b",
+  "review": "WLS/LE loop instructions, per-pair cursor publication, and repeated backing-pointer loads are retained as architectural instructions, without emulation claims.",
+  "limitations": [
+    "Opaque allocation/flush/child contracts, invalid pointers, concurrent mutation, ownership and physical effects remain unresolved.",
+    "No function-level semantic closure, C, admission, or gate change."
+  ]
+}

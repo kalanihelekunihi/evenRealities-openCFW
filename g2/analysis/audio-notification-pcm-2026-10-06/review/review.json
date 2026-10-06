@@ -1,0 +1,46 @@
+{
+  "disposition": "accepted_with_bounded_limits",
+  "scope": "Independent source and machine-evidence review of notification construction, ISR queue send, task zero-timeout queue receive, tick-age consumer gate, and PCM dispatch through callback or DSP entry cuts.",
+  "final_comparison": {
+    "path": "g2/build/foundation/audio-notification-pcm-simulator/comparison-final.json",
+    "sha256": "24888dc2e9e9b886cab64a497aa6d0e35d400d1211768195c59dc163c4b79d81",
+    "status": "PASS",
+    "calls": 328,
+    "unique_original_trace_bytes": 1312,
+    "firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "elf_sha256": "c99725e32fcc846498817abf6bf25d035b8850894ffc37e3b058d6694e3b1110"
+  },
+  "independent_native_spotcheck": {
+    "path": "g2/analysis/audio-notification-pcm-2026-10-06/review/representative-rerun.json",
+    "status": "PASS",
+    "cases": 13,
+    "coverage": [
+      "queue accepted and queue-full boundary",
+      "registered mode-1 and mode-0 callback entry cuts",
+      "fresh consumer age 0/40 and stale age 41",
+      "unsigned tick rollover at age 40 and 41",
+      "queue FIFO fill",
+      "notification then RX partial rearm/TX busy return 9 then age-40 consumer with explicitly synthetic PCM mutation"
+    ]
+  },
+  "reviewed_inputs": {
+    "g2/components/foundation/audio_pcm_consumer/consumer.c": "aadc9b3aee7fab8629e22036e063127e98ed382b2fe424149169d22e1830c13b",
+    "g2/components/foundation/audio_pcm_consumer/consumer.h": "49688d38e304bcb098a36ea324843d5c75731fd13e42139dea41f46268605044",
+    "g2/components/foundation/audio_pcm_consumer/verify.py": "4c1c16a1393dd0469789995db9d21522f609757d0c0f0abf99958cd4db59b90c",
+    "g2/analysis/audio-notification-pcm-2026-10-06/REPORT.md": "0cb2c35cf36431b36e6b79c2ef6feeac6e11a8cd33621fe39c3810b60e9dfbfe",
+    "g2/analysis/audio-notification-pcm-2026-10-06/pseudocode.md": "4e6b27d78e541ead05db5a1184504e044cc605bcee22693f1055dc1518726f28",
+    "g2/analysis/audio-notification-pcm-2026-10-06/original-provenance.json": "75426f2d17d6183a4ae5d1b8d970d88ff113f53ea43dbc4b19122a626a657de7",
+    "g2/analysis/audio-notification-pcm-2026-10-06/original-disassembly.txt": "8309eed8e4a62b9deeb934d7d4aec25e710b46cc9554df61837f4292bb829019",
+    "g2/analysis/audio-notification-pcm-2026-10-06/hook-profile-results.json": "c9449c447eb723a35a3aaf76f93c3e560c4dee8b09db6cf5b9f176d562c6b511"
+  },
+  "assessment": {
+    "source_and_bounded_behavior": "No blocking defect found. Tick/context helpers, message fields, queue calls, consumer age subtraction, table literal, mode narrowing and callback reread align with the authenticated stock spans.",
+    "cut_label_clarification": "AUDIO_WAKE means successful queue acceptance before the 0x449238 flags provider; AUDIO_QUEUE_LOG means the failure branch before 0x43d0ce. Neither label proves a wake or an actual log.",
+    "instrumentation": "Broad memory observation diverges in Unicorn 2.1.4 after original memcpy; the scoped profile executes the skipped load and compares post-call queue bytes and pointer state. The discrepancy is retained as an engine/instrumentation limit and gets no coverage credit.",
+    "limits": [
+      "No task wake/context switch, wait-list/unblock provider, initialized dispatcher table, registered callback body, or DSP body execution.",
+      "Queue state, tick progression, peripheral progress, and mutation scenarios use explicit synthetic fixtures.",
+      "No live scheduling, PCM ownership/lifetime, cache coherence, physical DMA, full-source coverage, or byte-identical firmware claim."
+    ]
+  }
+}

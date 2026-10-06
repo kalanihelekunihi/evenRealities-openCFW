@@ -1,0 +1,107 @@
+{
+  "firmware": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+  "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "header_bytes": 32,
+  "load_address": "0x438000",
+  "instruction_architecture": "ARM Thumb2 little endian; Apollo510 device header declares Cortex-M55",
+  "emulator_profile": "Unicorn Cortex-M4 M-class compatibility profile, not M55 hardware/NVIC/security/DMA validation",
+  "spans": [
+    {
+      "name": "interrupt_service",
+      "start": "0x5908a0",
+      "end_exclusive": "0x5909b6",
+      "length": 278,
+      "sha256": "6694d1daf9dd9c4ab728b3f9b2e6d15198cc7980e865f68facfc72d32949306b",
+      "scope": "complete return, all body bytes executed"
+    },
+    {
+      "name": "dma_error",
+      "start": "0x590cf4",
+      "end_exclusive": "0x590d2e",
+      "length": 58,
+      "sha256": "b82466b1fe64ff2b5c70f985197a6a87c8c4a7ea819ef63988ed59ac7f8c5adf",
+      "scope": "complete return, all body bytes executed"
+    },
+    {
+      "name": "ipb_service",
+      "start": "0x5909b6",
+      "end_exclusive": "0x590a16",
+      "length": 96,
+      "sha256": "d8de3db5340ecd0f1a92f5b4ba91aadd7beda966d83856df89e3e26804f3f80e",
+      "scope": "complete return, all body bytes executed"
+    },
+    {
+      "name": "interrupt_clear",
+      "start": "0x590818",
+      "end_exclusive": "0x590848",
+      "length": 48,
+      "sha256": "a1ecf1dfd02024ec2388de00ca185831a008773f8024e3cf8cf941bd4d350fc6",
+      "scope": "complete return, all body bytes executed"
+    },
+    {
+      "name": "interrupt_status",
+      "start": "0x590848",
+      "end_exclusive": "0x59089a",
+      "length": 82,
+      "sha256": "b7ca390a4f4eb163a30148e57a81b664a8838acae35296efe7fc5ea47c18f137",
+      "scope": "complete return, all body bytes executed"
+    },
+    {
+      "name": "audio_isr",
+      "start": "0x57a4d8",
+      "end_exclusive": "0x57a508",
+      "length": 48,
+      "sha256": "1e35307e5e636489f142be62a6f7b497283018376b3f18af19b1b45a595384bb",
+      "scope": "no-notify return or cut before actual notifier; all ISR instruction bytes exercised"
+    },
+    {
+      "name": "notification_wrapper",
+      "start": "0x53c6b2",
+      "end_exclusive": "0x53c6d2",
+      "length": 32,
+      "sha256": "d21bd7190d87c3eb34a13dc485bf6cd8f5d4733bc5e75fa6687b43e2b6bb7e5a",
+      "scope": "static only"
+    },
+    {
+      "name": "send_message",
+      "start": "0x53c638",
+      "end_exclusive": "0x53c6b2",
+      "length": 122,
+      "sha256": "1ba20aa804d5938a30b726518252b676b3bd75b0999ee56f724b1ca20f0b689c",
+      "scope": "static only"
+    },
+    {
+      "name": "codec_dma_consumer",
+      "start": "0x53c6f2",
+      "end_exclusive": "0x53c776",
+      "length": 132,
+      "sha256": "0a28cd8dd5357296c4190a852c9dfab681687f4f511dda6757eee7d6e1fa3ce7",
+      "scope": "static only"
+    },
+    {
+      "name": "message_dispatch",
+      "start": "0x53c5ac",
+      "end_exclusive": "0x53c638",
+      "length": 140,
+      "sha256": "ae95b5851417fb1f2bd9e0507ab2f04ca8e2b2fbb9f921b9e2c2d410e78d6b65",
+      "scope": "static only; initialized RAM dispatch entries missing"
+    }
+  ],
+  "constants": {
+    "peripheral_base_literal": {
+      "address": "0x590d34",
+      "value": "0x40208000"
+    },
+    "I2S0_vector": {
+      "address": "0x4380f0",
+      "value": "0x57a4d9",
+      "IRQ_number": 44,
+      "synthetic_IPSR": 60
+    },
+    "dispatch_table_pointer_literal": {
+      "address": "0x53ceb4",
+      "value": "0x20003fbc"
+    },
+    "audio_handle_cell": "0x2007450c"
+  }
+}

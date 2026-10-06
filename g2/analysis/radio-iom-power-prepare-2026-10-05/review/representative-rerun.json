@@ -1,0 +1,315 @@
+{
+  "status": "PASS",
+  "cases": 11,
+  "cases_detail": [
+    {
+      "case": {
+        "op": "prepare",
+        "prefix": 51524694,
+        "pending": 0,
+        "qpfx": 63819213,
+        "qnull": false,
+        "retention": 1,
+        "active": 1,
+        "ready": 4,
+        "module": 1,
+        "prior": 0,
+        "null": false
+      },
+      "status": 0,
+      "calls": [
+        [
+          "pause",
+          536875008,
+          0
+        ],
+        [
+          "cq_disable",
+          536883200,
+          0
+        ]
+      ],
+      "mmio_count": 21,
+      "matched": true
+    },
+    {
+      "case": {
+        "op": "prepare",
+        "prefix": 51524694,
+        "pending": 0,
+        "qpfx": 63819213,
+        "qnull": false,
+        "retention": 0,
+        "active": 1,
+        "ready": 4,
+        "module": 1,
+        "prior": 0,
+        "null": false
+      },
+      "status": 0,
+      "calls": [],
+      "mmio_count": 5,
+      "matched": true
+    },
+    {
+      "case": {
+        "op": "prepare",
+        "prefix": 51524694,
+        "pending": 0,
+        "qpfx": 63819213,
+        "qnull": false,
+        "retention": 1,
+        "active": 1,
+        "ready": 0,
+        "module": 1,
+        "prior": 0,
+        "null": false
+      },
+      "status": 3,
+      "calls": [],
+      "mmio_count": 1,
+      "matched": true
+    },
+    {
+      "case": {
+        "op": "prepare",
+        "prefix": 51524694,
+        "pending": 1,
+        "qpfx": 63819213,
+        "qnull": false,
+        "retention": 1,
+        "active": 1,
+        "ready": 4,
+        "module": 1,
+        "prior": 0,
+        "null": false
+      },
+      "status": 3,
+      "calls": [],
+      "mmio_count": 1,
+      "matched": true
+    },
+    {
+      "case": {
+        "op": "prepare",
+        "prefix": 51524695,
+        "pending": 0,
+        "qpfx": 63819213,
+        "qnull": false,
+        "retention": 1,
+        "active": 1,
+        "ready": 4,
+        "module": 1,
+        "prior": 0,
+        "null": false
+      },
+      "status": 2,
+      "calls": [],
+      "mmio_count": 0,
+      "matched": true
+    },
+    {
+      "case": {
+        "op": "prepare",
+        "prefix": 51524694,
+        "pending": 0,
+        "qpfx": 30264781,
+        "qnull": false,
+        "retention": 1,
+        "active": 1,
+        "ready": 4,
+        "module": 1,
+        "prior": 0,
+        "null": false
+      },
+      "status": 0,
+      "calls": [
+        [
+          "pause",
+          536875008,
+          0
+        ],
+        [
+          "cq_disable",
+          536883200,
+          0
+        ]
+      ],
+      "mmio_count": 19,
+      "matched": true
+    },
+    {
+      "case": {
+        "op": "prepare",
+        "prefix": 51524694,
+        "pending": 0,
+        "qpfx": 63819213,
+        "qnull": false,
+        "retention": 257,
+        "active": 0,
+        "ready": 4,
+        "module": 1,
+        "prior": 0,
+        "null": false
+      },
+      "status": 0,
+      "calls": [],
+      "mmio_count": 19,
+      "matched": true
+    },
+    {
+      "case": {
+        "op": "prepare",
+        "prefix": 51524694,
+        "pending": 0,
+        "qpfx": 63819213,
+        "qnull": false,
+        "retention": 256,
+        "active": 1,
+        "ready": 4,
+        "module": 1,
+        "prior": 0,
+        "null": false
+      },
+      "status": 0,
+      "calls": [],
+      "mmio_count": 5,
+      "matched": true
+    },
+    {
+      "case": {
+        "op": "sequence",
+        "prefix": 51524694,
+        "pending": 1,
+        "qpfx": 63819213,
+        "qnull": false,
+        "retention": 1,
+        "active": 1,
+        "ready": 4,
+        "module": 1,
+        "prior": 0,
+        "null": false
+      },
+      "status": 3,
+      "calls": [
+        [
+          "disable",
+          536875008,
+          0
+        ]
+      ],
+      "mmio_count": 1,
+      "matched": true
+    },
+    {
+      "case": {
+        "op": "sequence",
+        "prefix": 51524694,
+        "pending": 0,
+        "qpfx": 63819213,
+        "qnull": false,
+        "retention": 1,
+        "active": 1,
+        "ready": 4,
+        "module": 1,
+        "prior": 0,
+        "null": false
+      },
+      "status": 0,
+      "calls": [
+        [
+          "disable",
+          536875008,
+          0
+        ],
+        [
+          "term",
+          536875008,
+          0
+        ],
+        [
+          "cmdq_term",
+          536883200,
+          0
+        ],
+        [
+          "critical",
+          null,
+          0
+        ]
+      ],
+      "mmio_count": 28,
+      "matched": true
+    },
+    {
+      "case": {
+        "op": "sequence",
+        "prefix": 51524694,
+        "pending": 0,
+        "qpfx": 63819213,
+        "qnull": false,
+        "retention": 256,
+        "active": 1,
+        "ready": 4,
+        "module": 1,
+        "prior": 0,
+        "null": false
+      },
+      "status": 0,
+      "calls": [
+        [
+          "disable",
+          536875008,
+          0
+        ],
+        [
+          "term",
+          536875008,
+          0
+        ],
+        [
+          "cmdq_term",
+          536883200,
+          0
+        ],
+        [
+          "critical",
+          null,
+          0
+        ]
+      ],
+      "mmio_count": 14,
+      "matched": true
+    }
+  ],
+  "elf_sha256": "87740bbfbc8e0e84f70e711ac1cdee160e90ab15d95610e598d65f476fba62d6",
+  "verifier_sha256": "d654270bd5efd6f73c245e9cf3a43754689b1057fa23c49aaaf9f0e5d5cf9882",
+  "comparison_sha256": "2ac6fe98fab1b69590d39b960c12323409201898e40d06913688959c96ee343f",
+  "descriptor_table_rows_verified": {
+    "0": [
+      1074070056,
+      1074070060,
+      1074070080,
+      1074070084,
+      1074070076,
+      32768
+    ],
+    "1": [
+      1074074152,
+      1074074156,
+      1074074176,
+      1074074180,
+      1074074172,
+      32768
+    ],
+    "7": [
+      1074098728,
+      1074098732,
+      1074098752,
+      1074098756,
+      1074098748,
+      32768
+    ]
+  },
+  "scope_note": "Stock success cut at 0x55ca72 before power-domain calls; source returns preparation status and no physical power completion is claimed. Early stock error paths execute."
+}

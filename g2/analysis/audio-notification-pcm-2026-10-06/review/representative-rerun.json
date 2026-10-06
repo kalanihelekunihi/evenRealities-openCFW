@@ -1,0 +1,266 @@
+{
+  "status": "PASS",
+  "cases": 13,
+  "details": [
+    {
+      "label": "notify_queue_accepted_before_flags_call",
+      "kind": "notify",
+      "args": [],
+      "stock_cut": {
+        "disposition": 4,
+        "callback": 536897024
+      },
+      "source_cut": {
+        "disposition": 4,
+        "mode": 0,
+        "pcm": 0,
+        "length": 0,
+        "callback": 536897024,
+        "age": 0
+      },
+      "matched": true
+    },
+    {
+      "label": "dispatch_mode1_registered_callback",
+      "kind": "dispatch",
+      "args": [
+        257,
+        536907776,
+        3200
+      ],
+      "stock_cut": {
+        "disposition": 1,
+        "mode": 1,
+        "pcm": 536907776,
+        "length": 3200,
+        "callback": 134221825
+      },
+      "source_cut": {
+        "disposition": 1,
+        "mode": 1,
+        "pcm": 536907776,
+        "length": 3200,
+        "callback": 134221825,
+        "age": 0
+      },
+      "matched": true
+    },
+    {
+      "label": "consume_fresh_age0_registered_callback",
+      "kind": "consume",
+      "args": [],
+      "stock_cut": {
+        "disposition": 1,
+        "mode": 0,
+        "pcm": 536903680,
+        "length": 3200,
+        "callback": 134221825
+      },
+      "source_cut": {
+        "disposition": 1,
+        "mode": 0,
+        "pcm": 536903680,
+        "length": 3200,
+        "callback": 134221825,
+        "age": 0
+      },
+      "matched": true
+    },
+    {
+      "label": "consume_fresh_age40_dsp_boundary",
+      "kind": "consume",
+      "args": [],
+      "stock_cut": {
+        "disposition": 2,
+        "mode": 0,
+        "pcm": 536903680,
+        "length": 3200,
+        "callback": 0
+      },
+      "source_cut": {
+        "disposition": 2,
+        "mode": 0,
+        "pcm": 536903680,
+        "length": 3200,
+        "callback": 0,
+        "age": 40
+      },
+      "matched": true
+    },
+    {
+      "label": "notify_fifo_fill_1",
+      "kind": "notify",
+      "args": [],
+      "stock_cut": {
+        "disposition": 4,
+        "callback": 536897024
+      },
+      "source_cut": {
+        "disposition": 4,
+        "mode": 0,
+        "pcm": 0,
+        "length": 0,
+        "callback": 536897024,
+        "age": 0
+      },
+      "matched": true
+    },
+    {
+      "label": "notify_fifo_fill_2",
+      "kind": "notify",
+      "args": [],
+      "stock_cut": {
+        "disposition": 4,
+        "callback": 536897024
+      },
+      "source_cut": {
+        "disposition": 4,
+        "mode": 0,
+        "pcm": 0,
+        "length": 0,
+        "callback": 536897024,
+        "age": 0
+      },
+      "matched": true
+    },
+    {
+      "label": "notify_fifo_fill_3",
+      "kind": "notify",
+      "args": [],
+      "stock_cut": {
+        "disposition": 4,
+        "callback": 536897024
+      },
+      "source_cut": {
+        "disposition": 4,
+        "mode": 0,
+        "pcm": 0,
+        "length": 0,
+        "callback": 536897024,
+        "age": 0
+      },
+      "matched": true
+    },
+    {
+      "label": "notify_fifo_fill_4",
+      "kind": "notify",
+      "args": [],
+      "stock_cut": {
+        "disposition": 5
+      },
+      "source_cut": {
+        "disposition": 5,
+        "mode": 0,
+        "pcm": 0,
+        "length": 0,
+        "callback": 0,
+        "age": 0
+      },
+      "matched": true
+    },
+    {
+      "label": "rollover_age40_fresh",
+      "kind": "consume",
+      "stock_cut": {
+        "disposition": 1,
+        "mode": 0,
+        "pcm": 536903680,
+        "length": 3200,
+        "callback": 134221825
+      },
+      "source_cut": {
+        "disposition": 1,
+        "mode": 0,
+        "pcm": 536903680,
+        "length": 3200,
+        "callback": 134221825,
+        "age": 40
+      },
+      "matched": true
+    },
+    {
+      "label": "rollover_age41_stale",
+      "kind": "consume",
+      "stock_cut": {
+        "disposition": 3
+      },
+      "source_cut": {
+        "disposition": 3,
+        "mode": 0,
+        "pcm": 0,
+        "length": 0,
+        "callback": 0,
+        "age": 41
+      },
+      "matched": true
+    },
+    {
+      "label": "sequence_enqueue_tick0",
+      "kind": "notify",
+      "stock_cut": {
+        "disposition": 4,
+        "callback": 536897024
+      },
+      "source_cut": {
+        "disposition": 4,
+        "mode": 0,
+        "pcm": 0,
+        "length": 0,
+        "callback": 536897024,
+        "age": 0
+      },
+      "matched": true
+    },
+    {
+      "label": "sequence_rx_partial_success_then_tx_busy",
+      "kind": "service",
+      "args": [
+        24
+      ],
+      "stock_cut": {
+        "status": 9
+      },
+      "source_cut": {
+        "status": 9
+      },
+      "matched": true
+    },
+    {
+      "label": "sequence_consume_at_age40_after_rearm_synthetic_pcm_change",
+      "kind": "consume",
+      "fixture": {
+        "change_pcm": true
+      },
+      "stock_cut": {
+        "disposition": 1,
+        "mode": 0,
+        "pcm": 536907776,
+        "length": 3200,
+        "callback": 134221825
+      },
+      "source_cut": {
+        "disposition": 1,
+        "mode": 0,
+        "pcm": 536907776,
+        "length": 3200,
+        "callback": 134221825,
+        "age": 40
+      },
+      "matched": true
+    }
+  ],
+  "bindings": {
+    "consumer.c": "aadc9b3aee7fab8629e22036e063127e98ed382b2fe424149169d22e1830c13b",
+    "consumer.h": "49688d38e304bcb098a36ea324843d5c75731fd13e42139dea41f46268605044",
+    "verify.py": "4c1c16a1393dd0469789995db9d21522f609757d0c0f0abf99958cd4db59b90c",
+    "consumer.elf": "c99725e32fcc846498817abf6bf25d035b8850894ffc37e3b058d6694e3b1110",
+    "comparison-final.json": "24888dc2e9e9b886cab64a497aa6d0e35d400d1211768195c59dc163c4b79d81",
+    "g2/components/foundation/audio_pcm_consumer/consumer.c": "aadc9b3aee7fab8629e22036e063127e98ed382b2fe424149169d22e1830c13b",
+    "g2/components/foundation/audio_pcm_consumer/consumer.h": "49688d38e304bcb098a36ea324843d5c75731fd13e42139dea41f46268605044",
+    "g2/components/foundation/audio_pcm_consumer/verify.py": "4c1c16a1393dd0469789995db9d21522f609757d0c0f0abf99958cd4db59b90c",
+    "g2/build/foundation/audio-notification-pcm-simulator/consumer.elf": "c99725e32fcc846498817abf6bf25d035b8850894ffc37e3b058d6694e3b1110",
+    "g2/build/foundation/audio-notification-pcm-simulator/comparison-final.json": "24888dc2e9e9b886cab64a497aa6d0e35d400d1211768195c59dc163c4b79d81"
+  },
+  "note": "Read-only stock/source Unicorn runs; mapped data and provider cuts remain synthetic; queue-full case stops before logging provider, accepted enqueue stops before thread-flags provider, callback/DSP endpoints are not executed.",
+  "details_note": "Native stock/source Unicorn comparisons. In the staged sequence, the queue timestamp is enqueued at tick 0; synthetic next-control state lets RX rearm succeed and TX return busy 9; at tick 40 a synthetic PCM mutation is injected at registration read. Neither synthetic event proves hardware timing or buffer ownership."
+}

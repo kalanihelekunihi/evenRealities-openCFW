@@ -1,0 +1,13 @@
+{
+  "task_id": "P2-15885",
+  "accepted": false,
+  "status": "partial",
+  "fresh_replay": "fresh/replay.py",
+  "fresh_outputs": ["fresh/functions.jsonl", "fresh/data.jsonl", "fresh/summary.json"],
+  "review": "Fresh replay exactly reproduces the saved ledger. It emits 12 stable function draft records totaling 1324 pinned code bytes, one 480-byte queue-table draft, and 11 candidate review references. The 12 code ranges have distinct IDs and do not overlap. Every source instruction and pseudocode file hash is checked against the pinned map inputs; the single data range is checked against the 12x10-word table rows and locked image. Callee targets are labeled as within-cluster or external candidates by address only.",
+  "limitations": [
+    "Candidate review references are leads, not admission decisions or exact review-to-source verdict bindings.",
+    "This ledger does not establish function completeness, global image ownership, semantics, or physical register contracts.",
+    "No implementation modules, C prototypes, dependency graph, G2 freeze, or gate changes."
+  ]
+}

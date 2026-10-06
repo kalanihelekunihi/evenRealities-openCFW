@@ -1,0 +1,18 @@
+{
+  "task_id": "P2-15913",
+  "accepted": false,
+  "status": "partial",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_outputs": [
+    "fresh/instructions.json",
+    "fresh/disassembly.txt",
+    "fresh/references.json"
+  ],
+  "locked_image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "review": "Fresh assembler/disassembler replay tiles the 66-byte prefix at 0x540036..0x540078 exactly against the locked main image. The prologue saves R3-R11/LR (40 bytes) and reserves 184 bytes, totaling a 224-byte frame. R5 and R8 retain entry R1 and R2; R0 is not modified in this prefix. Four coordinate-like expressions are stored in order at SP+148, +156, +152, +160. Each repeats source reads at R5+40 and R5+44/+48; ADD/SUB results are 32-bit modulo values.",
+  "limitations": [
+    "This is only a prefix of the raw discovered candidate; no complete function, return ABI, or continuation semantics are claimed.",
+    "Coordinate labeling is a structural inference from arithmetic patterns, not a hardware/UI contract.",
+    "Fault behavior and complete caller/callee effects remain unqualified. No C or gates."
+  ]
+}

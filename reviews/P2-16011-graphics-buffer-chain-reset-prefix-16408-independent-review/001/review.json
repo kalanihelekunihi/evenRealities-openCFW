@@ -1,0 +1,18 @@
+{
+  "task_id": "P2-16011",
+  "accepted": false,
+  "status": "partial",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-buffer-chain-reset-prefix-16408-map/001",
+  "candidate_receipt_sha256": "1418157a870e8177a148803059a8e6a51352056430617d7e8daab0ddc37c9242",
+  "candidate_instructions_sha256": "f46043c8b79a9ba3c0c08e57c4a1178e93f33a1e455b7f7bd697323438944f5b",
+  "candidate_pseudocode_sha256": "6a07a9c3d7b1ff5a4393bb69faed30c373b86f56225b5a95b9a6cf2372053fcf",
+  "candidate_replay_sha256": "3a00d674beb162d9383c23b1898437eef67d1ba7429547040f055afc61ca014f",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_replay_stdout": "PASS 62",
+  "source_image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "review": "Ordered zero stores occur before the later null test; no early null guard is inferred.",
+  "limitations": [
+    "Scoped byte/pseudocode review only; child behavior, complete ownership/function closure, runtime fault behavior and external or physical effects remain unqualified.",
+    "No canonical admission, C implementation, coverage promotion or gate change."
+  ]
+}

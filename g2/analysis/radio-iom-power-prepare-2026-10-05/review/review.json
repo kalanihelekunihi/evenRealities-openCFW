@@ -1,0 +1,73 @@
+{
+  "scope": "Independent review of the fixed stock IOM operation-2 preparation prefix through 0x55ca72 and bounded disable-then-prepare ordering.",
+  "disposition": "PASS_WITH_PREPARED_ONLY_BOUNDARY",
+  "comparison": {
+    "path": "g2/build/foundation/radio-iom-power-prepare-simulator/comparison-aliased.json",
+    "sha256": "2ac6fe98fab1b69590d39b960c12323409201898e40d06913688959c96ee343f",
+    "status": "PASS",
+    "cases": 812,
+    "unique_original_trace_bytes": 708,
+    "elf_sha256": "87740bbfbc8e0e84f70e711ac1cdee160e90ab15d95610e598d65f476fba62d6",
+    "firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "source_manifest_entries": 20,
+    "source_manifest_matches_current": true
+  },
+  "representative_rerun": {
+    "path": "g2/analysis/radio-iom-power-prepare-2026-10-05/review/representative-rerun.json",
+    "sha256": "913182b9359f2bc34d44fd9207b079d2c41cbb009a8a1d9a4f2b0e2fd26a597b",
+    "status": "PASS",
+    "cases": 11,
+    "elf_sha256": "87740bbfbc8e0e84f70e711ac1cdee160e90ab15d95610e598d65f476fba62d6",
+    "verifier_sha256": "d654270bd5efd6f73c245e9cf3a43754689b1057fa23c49aaaf9f0e5d5cf9882"
+  },
+  "source_sha256": {
+    "g2/components/foundation/radio_iom_power_prepare/power_prepare.c": "373418706fa831325ee94171284c83b6d4432fecdde71daf57a488e49eca887f",
+    "g2/components/foundation/radio_iom_power_prepare/power_prepare.h": "63c9d4dd6b118a371b0bd16ed0fa95296c5e5ef9b7a05d5b02a8ec97c159574e",
+    "g2/components/foundation/radio_iom_power_prepare/verify.py": "d654270bd5efd6f73c245e9cf3a43754689b1057fa23c49aaaf9f0e5d5cf9882"
+  },
+  "descriptor_rows": {
+    "0": [
+      1074070056,
+      1074070060,
+      1074070080,
+      1074070084,
+      1074070076,
+      32768
+    ],
+    "1": [
+      1074074152,
+      1074074156,
+      1074074176,
+      1074074180,
+      1074074172,
+      32768
+    ],
+    "7": [
+      1074098728,
+      1074098732,
+      1074098752,
+      1074098756,
+      1074098748,
+      32768
+    ]
+  },
+  "findings": [
+    {
+      "severity": "scope",
+      "finding": "Success is checked only through 0x55ca72, before physical power-domain callbacks. The original fragment retains a frame at the cut; the C helper returns preparation status. Do not claim full power operation or power-down success from zero status."
+    },
+    {
+      "severity": "scope",
+      "finding": "The aliased descriptor rows are authenticated values, while the compatibility table pointer is supplied by the harness. Dynamic callback table reads/calls beyond the cut remain unresolved."
+    },
+    {
+      "severity": "inherited-limit",
+      "finding": "The sequence cases use nonwrapping hardware indices; no closure of the prior stock-versus-O2 curIdx intermediate-write difference or internal-RAM/DMA observer identity is claimed."
+    },
+    {
+      "severity": "scope",
+      "finding": "No allocator/free, callback drain, NVIC cleanup, DMA quiescence, physical power transition, or full shutdown-safety proof."
+    }
+  ],
+  "limits": "Fixed power operation2 prefix only, success stops55ca72 before physical power callbacks; real early return2/3 paths execute. Source0 means prepared, not powered down. Sequence follows disable then prepare with no physical step/uninitialize. No stubs. Authenticated IOM descriptor field values/aliasing, synthetic descriptor pointer and raw MMIO/serialized states; no timeout/callback/NVIC/DMA/free/quiescence proof. No closure of prior wrapped-index asynchronous ownership limitation; sequence cases use nonwrap hardware index."
+}

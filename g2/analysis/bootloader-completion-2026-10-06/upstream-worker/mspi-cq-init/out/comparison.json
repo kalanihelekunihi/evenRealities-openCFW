@@ -1,0 +1,220 @@
+{
+  "status": "PASS",
+  "cases": 8,
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "original_function_range": [
+    "0x00423f28",
+    "0x00423f54"
+  ],
+  "original_function_sha256": "8e2e5409620c3c1b334d8c3ede2ea19b20a31471e40a0c8b0c88f6550a7e9b05",
+  "elf_sha256": "d9d24ce0eb9459db0763c1af6a30a80c4d1871d3957929d993b524f6f3125840",
+  "source_sha256": {
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/mspi-cq-init/mspi_cq_init.c": "f6c5ba4070c65172aa20ccc49feae85dfa5097c68366b4a5fcbf58bf9ceeaf55",
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/mspi-cq-init/verify_cq_init.py": "132f9c405c9ca425ae09518273a89b263cb1c8daeb25cfb51f856ff440ddade8",
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/mspi-cq-init/cmdq_stub.c": "ae32642e01d2e27087db20d7eb6fb4c7127ce194071539f2621a40ff1195a56e",
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/mspi-cq-init/module.ld": "407dd4f5b234d09149480c4df856779761a6bc76508c53eb3efda51d097cbcef"
+  },
+  "distinct_original_instruction_bytes": 44,
+  "original_trace": {
+    "0x423f28": "e0b5",
+    "0x423f2a": "0192",
+    "0x423f2c": "4908",
+    "0x423f2e": "0091",
+    "0x423f30": "0121",
+    "0x423f32": "8df80810",
+    "0x423f36": "dff8b41b",
+    "0x423f3a": "4ff40d62",
+    "0x423f3e": "02fb00f2",
+    "0x423f42": "1144",
+    "0x423f44": "01f62802",
+    "0x423f48": "6946",
+    "0x423f4a": "0830",
+    "0x423f4c": "c0b2",
+    "0x423f4e": "03f021fc",
+    "0x423f52": "0ebd"
+  },
+  "comparisons": [
+    {
+      "case": {
+        "module": 0,
+        "queue_size_input": 0,
+        "queue_buffer": 0,
+        "provider_result": 0
+      },
+      "observed": {
+        "providers": [
+          {
+            "hw_if": 8,
+            "config_size_word": 0,
+            "config_buffer_word": 0,
+            "config_option_byte": 1,
+            "handle_slot": 536990408,
+            "prior_handle_word": 3235823838
+          }
+        ],
+        "slot_after": 3235823838,
+        "expected_slot": 3235823838
+      }
+    },
+    {
+      "case": {
+        "module": 0,
+        "queue_size_input": 1,
+        "queue_buffer": 536936448,
+        "provider_result": 1
+      },
+      "observed": {
+        "providers": [
+          {
+            "hw_if": 8,
+            "config_size_word": 0,
+            "config_buffer_word": 536936448,
+            "config_option_byte": 1,
+            "handle_slot": 536990408,
+            "prior_handle_word": 3235823838
+          }
+        ],
+        "slot_after": 3235823838,
+        "expected_slot": 3235823838
+      }
+    },
+    {
+      "case": {
+        "module": 1,
+        "queue_size_input": 2,
+        "queue_buffer": 537015296,
+        "provider_result": 7
+      },
+      "observed": {
+        "providers": [
+          {
+            "hw_if": 9,
+            "config_size_word": 1,
+            "config_buffer_word": 537015296,
+            "config_option_byte": 1,
+            "handle_slot": 536992664,
+            "prior_handle_word": 3235823839
+          }
+        ],
+        "slot_after": 3235823839,
+        "expected_slot": 3235823839
+      }
+    },
+    {
+      "case": {
+        "module": 1,
+        "queue_size_input": 3,
+        "queue_buffer": 537019648,
+        "provider_result": 0
+      },
+      "observed": {
+        "providers": [
+          {
+            "hw_if": 9,
+            "config_size_word": 1,
+            "config_buffer_word": 537019648,
+            "config_option_byte": 1,
+            "handle_slot": 536992664,
+            "prior_handle_word": 3235823839
+          }
+        ],
+        "slot_after": 3235823839,
+        "expected_slot": 3235823839
+      }
+    },
+    {
+      "case": {
+        "module": 2,
+        "queue_size_input": 305419896,
+        "queue_buffer": 537089536,
+        "provider_result": 0
+      },
+      "observed": {
+        "providers": [
+          {
+            "hw_if": 10,
+            "config_size_word": 152709948,
+            "config_buffer_word": 537089536,
+            "config_option_byte": 1,
+            "handle_slot": 536994920,
+            "prior_handle_word": 3235823836
+          }
+        ],
+        "slot_after": 3235823836,
+        "expected_slot": 3235823836
+      }
+    },
+    {
+      "case": {
+        "module": 3,
+        "queue_size_input": 4294967295,
+        "queue_buffer": 4294967295,
+        "provider_result": 3
+      },
+      "observed": {
+        "providers": [
+          {
+            "hw_if": 11,
+            "config_size_word": 2147483647,
+            "config_buffer_word": 4294967295,
+            "config_option_byte": 1,
+            "handle_slot": 536997176,
+            "prior_handle_word": 3235823837
+          }
+        ],
+        "slot_after": 3235823837,
+        "expected_slot": 3235823837
+      }
+    },
+    {
+      "case": {
+        "module": 255,
+        "queue_size_input": 2147483649,
+        "queue_buffer": 537159424,
+        "provider_result": 0
+      },
+      "observed": {
+        "providers": [
+          {
+            "hw_if": 7,
+            "config_size_word": 1073741824,
+            "config_buffer_word": 537159424,
+            "config_option_byte": 1,
+            "handle_slot": 537565688,
+            "prior_handle_word": 3235823649
+          }
+        ],
+        "slot_after": 3235823649,
+        "expected_slot": 3235823649
+      }
+    },
+    {
+      "case": {
+        "module": 4294967295,
+        "queue_size_input": 2882400001,
+        "queue_buffer": 537229312,
+        "provider_result": 0
+      },
+      "observed": {
+        "providers": [
+          {
+            "hw_if": 7,
+            "config_size_word": 1441200000,
+            "config_buffer_word": 537229312,
+            "config_option_byte": 1,
+            "handle_slot": 536988152,
+            "prior_handle_word": 1059143457
+          }
+        ],
+        "slot_after": 1059143457,
+        "expected_slot": 1059143457
+      }
+    }
+  ],
+  "limits": [
+    "Only am_hal_cmdq_init is intercepted; it records selected config bytes and the output-slot pointer, then returns a fixture status without creating a queue.",
+    "Config bytes beyond offsets0..8 are not compared; the stock wrapper's stack frame overlaps saved-register slots, and this probe does not infer their meaning.",
+    "The output handle slot is seeded but not modified by the stub; no real queue handle or state is produced.",
+    "This validates the 44-byte wrapper only, not am_hal_cmdq_init, queue operation, hardware, or byte-identical compiled code."
+  ]
+}

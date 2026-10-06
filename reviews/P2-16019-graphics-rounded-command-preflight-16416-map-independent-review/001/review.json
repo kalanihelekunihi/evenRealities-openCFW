@@ -1,0 +1,18 @@
+{
+  "task_id": "P2-16019",
+  "accepted": false,
+  "status": "partial",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-rounded-command-preflight-16416-map/001",
+  "candidate_receipt_sha256": "5e986c4d0e79bb446e7e8f140a75eba224add7f23964b8bf2cf1025a67dc5f49",
+  "candidate_instructions_sha256": "a6619afe2ae450a4be411be41bbd8b8ef67aa4f6f0fc05420649cd5018727c86",
+  "candidate_pseudocode_sha256": "4759cbe2e0efd54ac6a5ff65a652fe6be555e504b69ffa51fcc04653d3344020",
+  "candidate_replay_sha256": "a2454f75a6b64ad80fb99ee92199849fd608a64f9d00bbc73ebadb0da0f051e2",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_replay_stdout": "PASS 124",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "review": "Wrapped signed decisions/count updates and post-child reloads match instruction order; no loop termination guarantee is inferred.",
+  "limitations": [
+    "Only the bounded original-image span is reviewed; child behavior, function ownership/completeness, architecture-specific effects and physical rendering are unqualified.",
+    "No C implementation, admission, coverage promotion or gate change."
+  ]
+}

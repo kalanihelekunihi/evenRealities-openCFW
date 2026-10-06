@@ -1,0 +1,27 @@
+{
+  "task_id": "P2-15879",
+  "accepted": false,
+  "status": "partial",
+  "captured_input_check": {
+    "captured_instruction_files": 4908,
+    "current_instruction_files": 4912,
+    "added_since_snapshot": 4,
+    "removed_since_snapshot": 0,
+    "added_paths": [
+      "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-masked-register-poll-budget-map-12724/format-repair-16286/instructions.json",
+      "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-mode-five-configuration-teardown-map-12732/format-repair-16286/instructions.json",
+      "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-mode-six-handle-create-release-map-12740/format-repair-16286/instructions.json",
+      "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-mode-six-handle-enable-disable-map-12736/format-repair-16286/instructions.json"
+    ]
+  },
+  "captured_snapshot_replay": "fresh-captured/replay.py",
+  "captured_snapshot_result": "fresh-captured/summary.json",
+  "current_scan_replay": "fresh/replay.py",
+  "current_scan_result": "fresh/summary.json",
+  "review": "The captured-list replay exactly reproduces the saved 16284 summary, index, exclusion list, image pins, and conditional route models: 4903 candidate files, one ambiguous file, five excluded, and candidate counts 3033 Apollo main, 1797 bootloader, decoded ITCM one each, BLE record-3 22, case flash 7, and binh-a stage2 SRAM/XIP 22/21. The current full scan has four newly created format-repair instruction records and therefore yields 4912 files scanned, 4907 candidates, and 3037 Apollo-main candidates; the captured snapshot remains unmodified. Route models retain expected spans, guard expressions, and external references, but no guard satisfaction is evaluated.",
+  "limitations": [
+    "Conditional routes are possible mappings only; no expected-execution guard is claimed satisfied.",
+    "Candidate matches do not establish ownership, ISA validity, semantic correctness, or canonical coverage.",
+    "Counts overlap across images and revisions; no admission or gate change."
+  ]
+}

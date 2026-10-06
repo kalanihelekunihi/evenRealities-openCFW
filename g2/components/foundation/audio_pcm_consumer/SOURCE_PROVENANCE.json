@@ -1,0 +1,23 @@
+{
+  "kind": "Manual instruction reconstruction with explicit new observation seams; not whole firmware source or original SDK byte-identical implementation",
+  "firmware": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+  "firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "sources": {
+    "g2/components/foundation/audio_pcm_consumer/consumer.c": "aadc9b3aee7fab8629e22036e063127e98ed382b2fe424149169d22e1830c13b",
+    "g2/components/foundation/audio_pcm_consumer/consumer.h": "49688d38e304bcb098a36ea324843d5c75731fd13e42139dea41f46268605044"
+  },
+  "contracts": "consumer.h observation struct is new; stock prefix branches preserved; no callback/DSP/wake/logger execution or new ownership checks",
+  "reused_unchanged": [
+    "audio_dma_rearm",
+    "audio_cache_handoff",
+    "cache_maintenance",
+    "freertos_queue",
+    "freertos_daemon"
+  ],
+  "external_symbols": {
+    "xTaskRemoveFromEventList": "0x455370 unexecuted",
+    "xTaskPriorityDisinherit": "0x45596e unexecuted",
+    "opencfw_event_group_assert_failure": "0x08002000 unexecuted observation boundary"
+  },
+  "evidence": "g2/analysis/audio-notification-pcm-2026-10-06/original-provenance.json"
+}

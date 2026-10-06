@@ -1,0 +1,19 @@
+{
+  "task_id": "P2-15903",
+  "accepted": false,
+  "status": "partial",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_outputs": [
+    "fresh/summary.json",
+    "fresh/owners.json",
+    "fresh/intervals.jsonl"
+  ],
+  "source_sha256": "5e7ed10ec4bbc974e2d83aa5fe982549d3d5a9cb31cf98b34b728913ae44ab9d",
+  "review": "Fresh replay exactly reproduces the captured partition: 4,908 indexed candidate files across 33 images, 3,301 merged intervals. The byte event sweep has nonnegative owner counts, respects image bounds, returns to zero at each image end, and reproduces the per-image evidence and competing-owner totals. Main flash has 163,016 candidate-evidence bytes, 80,008 with multiple candidate owners; boot flash has 123,960 and 96,702 respectively.",
+  "limitations": [
+    "This indexes candidate instruction evidence only; it does not classify all image bytes as code or data.",
+    "Overlapping map revisions and conditional route candidates are preserved as competing owners; no route guard is asserted satisfied.",
+    "No-indexed-evidence spans are not proven opaque or non-executable. Nested image sizes are separate denominators.",
+    "No semantic admission, global ownership proof, or gate changes."
+  ]
+}

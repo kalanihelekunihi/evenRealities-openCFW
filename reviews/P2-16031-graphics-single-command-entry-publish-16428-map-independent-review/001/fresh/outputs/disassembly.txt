@@ -1,0 +1,66 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp_mac1q4c/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00514846 <.text>:
+  514846:	e92d 4ff0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
+  51484a:	f8df 732c 	ldr.w	r7, [pc, #812]	@ 514b78 <.text+0x332>
+  51484e:	683b      	ldr	r3, [r7, #0]
+  514850:	b089      	sub	sp, #36	@ 0x24
+  514852:	4605      	mov	r5, r0
+  514854:	6858      	ldr	r0, [r3, #4]
+  514856:	460e      	mov	r6, r1
+  514858:	b958      	cbnz	r0, 514872 <.text+0x2c>
+  51485a:	2000      	movs	r0, #0
+  51485c:	46c0      	nop			@ (mov r8, r8)
+  51485e:	4631      	mov	r1, r6
+  514860:	4628      	mov	r0, r5
+  514862:	f00f fb16 	bl	523e92 <.text+0xf64c>
+  514866:	2000      	movs	r0, #0
+  514868:	2000      	movs	r0, #0
+  51486a:	46c0      	nop			@ (mov r8, r8)
+  51486c:	b009      	add	sp, #36	@ 0x24
+  51486e:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}
+  514872:	6981      	ldr	r1, [r0, #24]
+  514874:	f100 0210 	add.w	r2, r0, #16
+  514878:	f021 0108 	bic.w	r1, r1, #8
+  51487c:	6181      	str	r1, [r0, #24]
+  51487e:	7a11      	ldrb	r1, [r2, #8]
+  514880:	068c      	lsls	r4, r1, #26
+  514882:	d508      	bpl.n	514896 <.text+0x50>
+  514884:	69d4      	ldr	r4, [r2, #28]
+  514886:	6851      	ldr	r1, [r2, #4]
+  514888:	46a4      	mov	ip, r4
+  51488a:	1a64      	subs	r4, r4, r1
+  51488c:	fb91 f1fc 	sdiv	r1, r1, ip
+  514890:	fb0c 4401 	mla	r4, ip, r1, r4
+  514894:	e002      	b.n	51489c <.text+0x56>
+  514896:	6814      	ldr	r4, [r2, #0]
+  514898:	6851      	ldr	r1, [r2, #4]
+  51489a:	1a64      	subs	r4, r4, r1
+  51489c:	eb04 74d4 	add.w	r4, r4, r4, lsr #31
+  5148a0:	6981      	ldr	r1, [r0, #24]
+  5148a2:	1064      	asrs	r4, r4, #1
+  5148a4:	ea5f 6c81 	movs.w	ip, r1, lsl #26
+  5148a8:	d517      	bpl.n	5148da <.text+0x94>
+  5148aa:	2c01      	cmp	r4, #1
+  5148ac:	dc06      	bgt.n	5148bc <.text+0x76>
+  5148ae:	2000      	movs	r0, #0
+  5148b0:	f883 00f9 	strb.w	r0, [r3, #249]	@ 0xf9
+  5148b4:	6839      	ldr	r1, [r7, #0]
+  5148b6:	6848      	ldr	r0, [r1, #4]
+  5148b8:	f7ff ff7a 	bl	5147b0 <.text-0x96>
+  5148bc:	6838      	ldr	r0, [r7, #0]
+  5148be:	6840      	ldr	r0, [r0, #4]
+  5148c0:	6941      	ldr	r1, [r0, #20]
+  5148c2:	6882      	ldr	r2, [r0, #8]
+  5148c4:	f842 5021 	str.w	r5, [r2, r1, lsl #2]
+  5148c8:	6882      	ldr	r2, [r0, #8]
+  5148ca:	1c49      	adds	r1, r1, #1
+  5148cc:	f842 6021 	str.w	r6, [r2, r1, lsl #2]
+  5148d0:	1c49      	adds	r1, r1, #1
+  5148d2:	6141      	str	r1, [r0, #20]
+  5148d4:	b009      	add	sp, #36	@ 0x24
+  5148d6:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}

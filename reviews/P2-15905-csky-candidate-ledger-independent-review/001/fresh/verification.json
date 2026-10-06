@@ -1,0 +1,57 @@
+{
+  "accepted": false,
+  "attempt": "002",
+  "checks": {
+    "C_started": false,
+    "attempts_accepted_false_and_status_valid": true,
+    "canonical_or_coverage_admission": false,
+    "function_ownership_inferred": false,
+    "image_size_and_hashes_match": true,
+    "index_diagnostic_accepted_false": true,
+    "instruction_and_pseudocode_hashes_match": true,
+    "inventory_hash_matches_index_summary": true,
+    "receipt_bound_manifests_and_listed_artifacts_match": false,
+    "route_evidence_hashes_match": true,
+    "route_models_match_inventory_mapping_model": true,
+    "task_contracts_bind_receipts": true
+  },
+  "counts": {
+    "by_image": {
+      "binh_a_stage2_sram": 22,
+      "binh_a_stage2_xip": 21
+    },
+    "by_status": {
+      "partial": 20,
+      "ready_for_review": 23
+    },
+    "exact_instruction_hashes_verified": 43,
+    "exact_pseudocode_hashes_verified": 43,
+    "records": 43,
+    "review_binding_state": {
+      "PASS_SCOPED": 2,
+      "named-but-absent": 12,
+      "not-named": 29
+    },
+    "unique_instruction_files": 43,
+    "unique_pseudocode_files": 43
+  },
+  "limitations": [
+    "No ISA decoder replay performed by ledger author.",
+    "No independent pseudocode review by ledger author.",
+    "No complete function ownership, coverage, route execution, or gate established."
+  ],
+  "manifest_binding_issues": [
+    {
+      "attempt": "002",
+      "receipt_manifest_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-recovery-4056/001/artifact-manifest.json",
+      "receipt_manifest_sha256": "f352105b716946fc47faf1b9a75dd9ec27c8ed9f519a58d05cf9067e16129e44",
+      "resolved_manifest_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-recovery-4056/001/artifact-manifest.json",
+      "resolved_manifest_sha256": "d81c8f961d200317743a93deec9f587f0e17bec020a27f2d04be815c1748ab45",
+      "task_id": "P2-csky-recovery-4056"
+    }
+  ],
+  "schema_version": 1,
+  "status": "partial",
+  "supersedes_attempt": "001",
+  "task_id": "P2-15904"
+}

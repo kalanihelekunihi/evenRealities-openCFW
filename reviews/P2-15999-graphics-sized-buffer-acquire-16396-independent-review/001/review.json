@@ -1,0 +1,18 @@
+{
+  "task_id": "P2-15999",
+  "accepted": false,
+  "status": "partial",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-sized-buffer-acquire-16396-map/001",
+  "candidate_receipt_sha256": "f40e7a468f7f9c8f4a1ee58982b4238e58e7e497787b1d4e2e9e5293440f1464",
+  "candidate_instructions_sha256": "72e87a1a1f53208fc43b679c33515e627f3106dbac9a82ccb012bec1086b57c6",
+  "candidate_pseudocode_sha256": "e991b98237de843290e8646735533010b9a243a4e29fede0b893819a54bd8fec",
+  "candidate_replay_sha256": "833bd38cfb283187c5eddb21a8ad80c1cf6c64c8b1ef73d00af3498f2227893f",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_replay_stdout": "PASS 144",
+  "source_image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "review": "Buffer-acquire wrapper and object initialization ordering are consistent with decoded bytes; child contracts remain opaque.",
+  "limitations": [
+    "Scoped byte/pseudocode review only; child behavior, complete ownership/function closure, runtime fault behavior and external or physical effects remain unqualified.",
+    "No canonical admission, C implementation, coverage promotion or gate change."
+  ]
+}

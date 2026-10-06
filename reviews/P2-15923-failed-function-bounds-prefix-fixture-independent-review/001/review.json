@@ -1,0 +1,21 @@
+{
+  "task_id": "P2-15923",
+  "accepted": false,
+  "status": "partial",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_outputs": [
+    "fresh/results.json"
+  ],
+  "locked_image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "cases": 2048,
+  "executed_span": [
+    5505078,
+    5505208
+  ],
+  "review": "Fresh no-hook replay passes all 2,048 cases and stops exactly before 0x5400B8. The independent oracle applies signed division by two with truncation toward zero for the eight tested margin cohorts, then verifies wrapped coordinate calculations and the active 224-byte frame locals. It compares all mapped ordinary RAM, saved registers, SP/LR/PC, PRIMASK, final NZCV, and immutable firmware bytes.",
+  "limitations": [
+    "This validates only the 130-byte prefix; later children and function completion are unresolved.",
+    "Ordinary disjoint RAM is tested; faults, aliases, concurrency, and physical behavior are not qualified.",
+    "Partial/unaccepted; no implementation or gates."
+  ]
+}

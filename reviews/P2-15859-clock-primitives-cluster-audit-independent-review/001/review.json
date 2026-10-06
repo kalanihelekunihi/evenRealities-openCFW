@@ -1,0 +1,13 @@
+{
+  "task_id": "P2-15859",
+  "accepted": false,
+  "status": "partial",
+  "input_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "fresh_replay": "fresh/replay.py",
+  "fresh_results": "fresh/results.json",
+  "review": "Fresh audit replay passed. The eight selected map revisions produce a gap-free, nonoverlapping partition of 0x4D38EA..0x4D39F2 (264 bytes, 107 instructions). All eight direct branch edges were checked; seven internal edges land on decoded instruction starts, and the external BL target is outside the audited interval. Source file hashes are captured in fresh/sources.json; corrected wait map revision 16188/002 is selected.",
+  "limitations": [
+    "This is local instruction-byte accounting only; it does not establish reachability, indirect-call closure, semantics, global ownership, or whole-firmware completeness.",
+    "Padding/literal data beyond the range is excluded; no admission or gate promotion."
+  ]
+}

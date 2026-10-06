@@ -1,0 +1,32 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmplo9b_egx/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+005401b6 <.text>:
+  5401b6:	f895 0035 	ldrb.w	r0, [r5, #53]	@ 0x35
+  5401ba:	f010 0001 	ands.w	r0, r0, #1
+  5401be:	f88d 0050 	strb.w	r0, [sp, #80]	@ 0x50
+  5401c2:	a80b      	add	r0, sp, #44	@ 0x2c
+  5401c4:	f711 f9e8 	bl	451598 <.text-0xeec1e>
+  5401c8:	990b      	ldr	r1, [sp, #44]	@ 0x2c
+  5401ca:	2202      	movs	r2, #2
+  5401cc:	fb90 faf2 	sdiv	sl, r0, r2
+  5401d0:	eb1a 0a01 	adds.w	sl, sl, r1
+  5401d4:	a80b      	add	r0, sp, #44	@ 0x2c
+  5401d6:	f711 f9e5 	bl	4515a4 <.text-0xeec12>
+  5401da:	990c      	ldr	r1, [sp, #48]	@ 0x30
+  5401dc:	2202      	movs	r2, #2
+  5401de:	fb90 fbf2 	sdiv	fp, r0, r2
+  5401e2:	eb1b 0b01 	adds.w	fp, fp, r1
+  5401e6:	9a1b      	ldr	r2, [sp, #108]	@ 0x6c
+  5401e8:	991b      	ldr	r1, [sp, #108]	@ 0x6c
+  5401ea:	9813      	ldr	r0, [sp, #76]	@ 0x4c
+  5401ec:	f770 fcb5 	bl	4b0b5a <.text-0x8f65c>
+  5401f0:	b2c0      	uxtb	r0, r0
+  5401f2:	2801      	cmp	r0, #1
+  5401f4:	d003      	beq.n	5401fe <.text+0x48>
+  5401f6:	9816      	ldr	r0, [sp, #88]	@ 0x58
+  5401f8:	f70f faae 	bl	44f758 <.text-0xf0a5e>
+  5401fc:	e3df      	b.n	5409be <.text+0x808>

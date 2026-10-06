@@ -1,0 +1,18 @@
+{
+  "task_id": "P2-16031",
+  "accepted": false,
+  "status": "partial",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-single-command-entry-publish-16428-map/001",
+  "candidate_receipt_sha256": "7f7c09b95dcf92b4dcc78d71c19b771492ea59b8b66be28f7335a086fc2ee117",
+  "candidate_instructions_sha256": "4e31d940227adffa31d71632025c5df08117b8c44181dc05a25692bf4c70d269",
+  "candidate_pseudocode_sha256": "3b2783346d2c5568df54b24e7751f1b778573295b9cf328761850fb8faa4102a",
+  "candidate_replay_sha256": "837643ade5ddd89261c5e900792d20e73f267537f8096fc955aa5ded7050237f",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_stdout": true,
+  "fresh_output_receipt_sha256": "697776bbea97665a6834c578445bf8b18ebab1bdba49556a50ce4c6eeb039885",
+  "review": "Single-command entry clears bit 3 before capacity checks, reads backing pointer afresh between command stores, publishes the cursor after both words, and reloads global context after the flush path.",
+  "limitations": [
+    "Opaque allocation/flush/child contracts, invalid pointers, concurrent mutation, ownership and physical effects remain unresolved.",
+    "No function-level semantic closure, C, admission, or gate change."
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "task_id": "P2-15905",
+  "accepted": false,
+  "status": "partial",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_outputs": [
+    "fresh/results.json",
+    "fresh/4056-001-verifier.txt",
+    "fresh/4056-002-verifier.txt"
+  ],
+  "manifest_sha256": "200f0cc9b63ac0369f0cb3f66355423ff6e3ebd2b7195e41c7e1788be6a51eb6",
+  "review": "Fresh reconciliation passed all 232 declared input pins, 43 candidate records, and 129 receipt/instruction/pseudocode file hash checks. The independent check found one meaningful binding exception: P2-csky-recovery-4056/002 receipt names the /001 artifact-manifest.json path but claims the /002 artifact-manifest hash f352105b\u2026; the resolved /001 manifest is d81c8f96\u2026. The ledger correctly keeps the binding mismatch false and does not repair it. The separate 4056/002 verifier passes its copied underlying source verifier and confirms the ld.b prose correction. Route mapping remains conditional: SRAM selection requires PMU CFG nibble 2 and checksum word != AABBCCDD plus unverified helper/image-selection premises; XIP similarly requires unmeasured PMU and unverified aperture/selection premises.",
+  "checks": {
+    "declared_input_pins": "232/232 pass",
+    "candidate_records": "43",
+    "receipt_instruction_pseudocode_hashes": "129/129 pass",
+    "status_counts": {
+      "by_image": {
+        "binh_a_stage2_sram": 22,
+        "binh_a_stage2_xip": 21
+      },
+      "by_status": {
+        "partial": 20,
+        "ready_for_review": 23
+      },
+      "exact_instruction_hashes_verified": 43,
+      "exact_pseudocode_hashes_verified": 43,
+      "records": 43,
+      "review_binding_state": {
+        "PASS_SCOPED": 2,
+        "named-but-absent": 12,
+        "not-named": 29
+      },
+      "unique_instruction_files": 43,
+      "unique_pseudocode_files": 43
+    },
+    "4056_001_source_verifier": "PASS",
+    "4056_002_correction_verifier": "PASS",
+    "4056_002_manifest_path_vs_digest": "MISMATCH, preserved"
+  },
+  "manifest_binding_exception": {
+    "record": "P2-csky-recovery-4056/002",
+    "receipt_manifest_path": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-recovery-4056/001/artifact-manifest.json",
+    "actual_resolved_manifest_sha256": "d81c8f961d200317743a93deec9f587f0e17bec020a27f2d04be815c1748ab45",
+    "receipt_claimed_artifact_manifest_sha256": "f352105b716946fc47faf1b9a75dd9ec27c8ed9f519a58d05cf9067e16129e44"
+  },
+  "limitations": [
+    "Ledger reconciliation is not fresh decoding/review of all 43 pseudocode candidates.",
+    "SRAM/XIP target execution spans and selection remain conditional, with external PMU/helper/selection/aperture premises unresolved.",
+    "No canonical ownership, function completeness, coverage credit, gate, or source change."
+  ]
+}

@@ -1,0 +1,59 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmptkdkrzji/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00523e92 <.text>:
+  523e92:	b5f0      	push	{r4, r5, r6, r7, lr}
+  523e94:	4c6d      	ldr	r4, [pc, #436]	@ (52404c <.text+0x1ba>)
+  523e96:	6823      	ldr	r3, [r4, #0]
+  523e98:	b081      	sub	sp, #4
+  523e9a:	4602      	mov	r2, r0
+  523e9c:	6918      	ldr	r0, [r3, #16]
+  523e9e:	68e6      	ldr	r6, [r4, #12]
+  523ea0:	6865      	ldr	r5, [r4, #4]
+  523ea2:	1c87      	adds	r7, r0, #2
+  523ea4:	42be      	cmp	r6, r7
+  523ea6:	da0c      	bge.n	523ec2 <.text+0x30>
+  523ea8:	f44f 3780 	mov.w	r7, #65536	@ 0x10000
+  523eac:	6118      	str	r0, [r3, #16]
+  523eae:	f845 7020 	str.w	r7, [r5, r0, lsl #2]
+  523eb2:	6918      	ldr	r0, [r3, #16]
+  523eb4:	1c40      	adds	r0, r0, #1
+  523eb6:	42b0      	cmp	r0, r6
+  523eb8:	da01      	bge.n	523ebe <.text+0x2c>
+  523eba:	2800      	cmp	r0, #0
+  523ebc:	d1f6      	bne.n	523eac <.text+0x1a>
+  523ebe:	2000      	movs	r0, #0
+  523ec0:	6118      	str	r0, [r3, #16]
+  523ec2:	6918      	ldr	r0, [r3, #16]
+  523ec4:	f845 2020 	str.w	r2, [r5, r0, lsl #2]
+  523ec8:	6918      	ldr	r0, [r3, #16]
+  523eca:	1c40      	adds	r0, r0, #1
+  523ecc:	42b0      	cmp	r0, r6
+  523ece:	bfa8      	it	ge
+  523ed0:	2000      	movge	r0, #0
+  523ed2:	6118      	str	r0, [r3, #16]
+  523ed4:	f845 1020 	str.w	r1, [r5, r0, lsl #2]
+  523ed8:	6918      	ldr	r0, [r3, #16]
+  523eda:	1c40      	adds	r0, r0, #1
+  523edc:	42b0      	cmp	r0, r6
+  523ede:	bfa8      	it	ge
+  523ee0:	2000      	movge	r0, #0
+  523ee2:	6118      	str	r0, [r3, #16]
+  523ee4:	f012 4f7f 	tst.w	r2, #4278190080	@ 0xff000000
+  523ee8:	d00f      	beq.n	523f0a <.text+0x78>
+  523eea:	4618      	mov	r0, r3
+  523eec:	f7f0 f8fd 	bl	5140ea <.text-0xfda8>
+  523ef0:	6820      	ldr	r0, [r4, #0]
+  523ef2:	68a1      	ldr	r1, [r4, #8]
+  523ef4:	6902      	ldr	r2, [r0, #16]
+  523ef6:	b001      	add	sp, #4
+  523ef8:	20ec      	movs	r0, #236	@ 0xec
+  523efa:	eb01 0182 	add.w	r1, r1, r2, lsl #2
+  523efe:	f041 0104 	orr.w	r1, r1, #4
+  523f02:	e8bd 40f0 	ldmia.w	sp!, {r4, r5, r6, r7, lr}
+  523f06:	f7f0 b89e 	b.w	514046 <.text-0xfe4c>
+  523f0a:	b001      	add	sp, #4
+  523f0c:	bdf0      	pop	{r4, r5, r6, r7, pc}

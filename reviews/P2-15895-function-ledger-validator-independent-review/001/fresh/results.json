@@ -1,0 +1,98 @@
+{
+  "accepted": false,
+  "status": "diagnostic",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "results": [
+    {
+      "path": "analysis/queue-candidate-ledger-16290/001/functions.jsonl",
+      "sha256": "56c2f08545f3813d34f44e5963379c9790de2e1bd5d5d893188bb897c765ef9e",
+      "functions_verified": 12,
+      "negative_cases": [
+        {
+          "case": "image_hash",
+          "rejected": "image hash"
+        },
+        {
+          "case": "identity",
+          "rejected": "image identity"
+        },
+        {
+          "case": "entry",
+          "rejected": "stable identity"
+        },
+        {
+          "case": "mapping",
+          "rejected": "address mapping"
+        },
+        {
+          "case": "source_hash",
+          "rejected": "source span hash"
+        },
+        {
+          "case": "pseudocode_hash",
+          "rejected": "pseudocode hash"
+        },
+        {
+          "case": "instruction_hash",
+          "rejected": "instructions hash"
+        },
+        {
+          "case": "duplicate",
+          "rejected": "duplicate identity"
+        },
+        {
+          "case": "admission_flag",
+          "rejected": "draft status"
+        }
+      ]
+    },
+    {
+      "path": "analysis/clock-candidate-ledger-16294/001/functions.jsonl",
+      "sha256": "c4466d676b7cbb65c7d3ffd9887249b362429e1da756b6e02e9cf963236659cd",
+      "functions_verified": 8,
+      "negative_cases": [
+        {
+          "case": "image_hash",
+          "rejected": "image hash"
+        },
+        {
+          "case": "identity",
+          "rejected": "image identity"
+        },
+        {
+          "case": "entry",
+          "rejected": "stable identity"
+        },
+        {
+          "case": "mapping",
+          "rejected": "address mapping"
+        },
+        {
+          "case": "source_hash",
+          "rejected": "source span hash"
+        },
+        {
+          "case": "pseudocode_hash",
+          "rejected": "pseudocode hash"
+        },
+        {
+          "case": "instruction_hash",
+          "rejected": "instructions hash"
+        },
+        {
+          "case": "duplicate",
+          "rejected": "duplicate identity"
+        },
+        {
+          "case": "admission_flag",
+          "rejected": "draft status"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Single-range Apollo main Thumb draft schema only",
+    "Byte/evidence consistency not decoder or semantic correctness",
+    "No independent review binding physical contracts full corpus coverage admission or gates"
+  ]
+}

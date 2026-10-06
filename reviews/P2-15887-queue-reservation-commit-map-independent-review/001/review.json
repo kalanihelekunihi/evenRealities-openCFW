@@ -1,0 +1,23 @@
+{
+  "task_id": "P2-15887",
+  "accepted": false,
+  "status": "partial",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_outputs": [
+    "fresh2/instructions.json",
+    "fresh2/disassembly.txt",
+    "fresh2/references.json"
+  ],
+  "locked_image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes": {
+    "instructions.json": "8db039a19780cc3758c4aa38af4585b90b5e07bb14697d353ba0c64ae9d6c664",
+    "pseudocode.md": "92c50c7eb0bd0de8d5e72926f5ca1a7aa0367fd86658853e36c83e7ce1fd366b",
+    "references.json": "63c4c409ccb51ebe2ef569777c0cf1bacfc85f2f7f70176bd8dadf024dcfd53d"
+  },
+  "review": "Fresh GNU ARM disassembly reproduces a contiguous 102-byte instruction range at 0x538FB4..0x53901A, with raw bytes matching the locked image. Entry copies the queue pointer to R2; NULL or masked-signature mismatch returns 2, and q16==q20 returns 7. The success path builds an 8-byte node using a normalized one-bit input flag OR the word loaded through q36+8, writes the next word from q32, advances q20 then copies that fresh value to q16, conditionally executes DMB when q8 is at least 0x20080000, then publishes the low byte of q32 through the pointer loaded via q36+12. R2 retains the queue pointer; no producer increment occurs in this leaf.",
+  "limitations": [
+    "No child behavior, queue aliasing, physical DMA visibility, fault behavior, or concurrency is qualified.",
+    "This map review is not behavioral fixture evidence or a complete queue contract.",
+    "Partial/unaccepted; no implementation, admission, or gate changes."
+  ]
+}

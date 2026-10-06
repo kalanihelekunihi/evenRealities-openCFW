@@ -1,0 +1,18 @@
+{
+  "task_id": "P2-16025",
+  "accepted": false,
+  "status": "partial",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-rounded-command-loop-tail-16422-map/001",
+  "candidate_receipt_sha256": "2896c0b6cb50251ea5f408e6c7361d4c1be4819ec8017753e708ce750b781d62",
+  "candidate_instructions_sha256": "14d5fc3364e167ed6049b4f6ef1bee0a8f7eecf6f61c0cdc0ddd7c9c653caa2a",
+  "candidate_pseudocode_sha256": "68789acd37100213a81be9d2990409eb28150adf5bc30d7a40c6d07f388c06c2",
+  "candidate_replay_sha256": "bfd0f3a61659bb82eba0a4d9eb16f4c2727a482a1ab0005a29d68253c11506ae",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_replay_stdout": "PASS 28",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "review": "Signed loop bounds and wrapped updates match; final R0 is incidental, not a fixed status.",
+  "limitations": [
+    "Only the bounded original-image span is reviewed; child behavior, function ownership/completeness, architecture-specific effects and physical rendering are unqualified.",
+    "No C implementation, admission, coverage promotion or gate change."
+  ]
+}

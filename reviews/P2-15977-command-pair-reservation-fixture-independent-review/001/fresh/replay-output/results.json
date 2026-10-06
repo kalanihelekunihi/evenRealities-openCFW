@@ -1,0 +1,28 @@
+{
+  "status": "partial",
+  "accepted": false,
+  "cases": 2048,
+  "cohorts": {
+    "linear": 1024,
+    "ring": 1024,
+    "negative_request": 512,
+    "boundary_request": 512
+  },
+  "input_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "global_slot": 537349884,
+  "executed_span": [
+    5327596,
+    5327734
+  ],
+  "checks": [
+    "Original instructions nohooks, childfree ring/linear capacity branches",
+    "Independent ring modulo vs instructionSDIV/MLA; pairindex updates, boundary/negative/zero requests",
+    "ExactfullRAM inclsavedframe and bit3clear; unchangedglobals; R0R1R2 callee registers SP LR PC mask immutableflash"
+  ],
+  "limitations": [
+    "No childcalls (flush/grow/NULLbuffer/errorreport), concurrency or invalidring/dividezero/fault qualification",
+    "Backed ordinaryRAM only, nohardware/ownership qualification",
+    "APSR and caller R3 not checked",
+    "No admission C freeze gates"
+  ]
+}

@@ -1,0 +1,362 @@
+{
+  "status": "PASS",
+  "cases": 10,
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "elf_sha256": "95ed294ea63882281dc57167443681482a1b5e40182af4d2a1f4114d89e06e53",
+  "source_sha256": {
+    "nor_read.h": "bf3ecfeb0f4a7ec14fc5679fdec0a3d47b5479125741f470c4e3d4581532040d",
+    "nor_read.c": "d55c8d97c751b9e726fe5b6f305a21d1bdfe2d42dc64d3058afcc2398d7678a9",
+    "module.ld": "bede3afd1ccf6bcadd301ee91122c8301be5df538ee20356aa7d492f53211de6",
+    "verify_nor_read.py": "1358e828a025e1d90cea24936a2172b20560facba205a7ac62397bbb25a4ca13"
+  },
+  "distinct_original_instruction_bytes": 174,
+  "original_trace": {
+    "0x420f70": "f8b5",
+    "0x420f72": "86b0",
+    "0x420f74": "0700",
+    "0x420f76": "0c00",
+    "0x420f78": "1500",
+    "0x420f7a": "254e",
+    "0x420f7c": "3068",
+    "0x420f7e": "0028",
+    "0x420f80": "03d0",
+    "0x420f82": "002c",
+    "0x420f84": "01d0",
+    "0x420f86": "002d",
+    "0x420f88": "01d1",
+    "0x420f8e": "b7f1007f",
+    "0x420f92": "01d3",
+    "0x420f98": "fef7b6ff",
+    "0x420f9c": "fff776ff",
+    "0x420fa0": "fff728fc",
+    "0x420fa4": "6846",
+    "0x420fa6": "1821",
+    "0x420fa8": "f5f724f8",
+    "0x415ff4": "0022",
+    "0x415ff6": "01f01bbe",
+    "0x417c30": "00b5",
+    "0x417c32": "00bf",
+    "0x417c34": "1300",
+    "0x417c36": "9646",
+    "0x417c38": "9446",
+    "0x417c3a": "1039",
+    "0x417c3c": "28bf",
+    "0x417c3e": "a0e80c50",
+    "0x417c42": "fad8",
+    "0x417c44": "5fea417c",
+    "0x417c48": "28bf",
+    "0x417c4a": "0cc0",
+    "0x417c4c": "48bf",
+    "0x417c52": "c907",
+    "0x417c54": "28bf",
+    "0x417c5a": "48bf",
+    "0x417c60": "00bd",
+    "0x420fac": "0020",
+    "0x420fae": "8df80600",
+    "0x420fb2": "0120",
+    "0x420fb4": "8df80700",
+    "0x420fb8": "0297",
+    "0x420fba": "0120",
+    "0x420fbc": "8df80c00",
+    "0x420fc0": "6c20",
+    "0x420fc2": "adf80e00",
+    "0x420fc6": "0120",
+    "0x420fc8": "8df81000",
+    "0x420fcc": "0095",
+    "0x420fce": "0594",
+    "0x420fd0": "0020",
+    "0x420fd2": "8df80500",
+    "0x420fd6": "0020",
+    "0x420fd8": "8df81100",
+    "0x420fdc": "394a",
+    "0x420fde": "6946",
+    "0x420fe0": "3068",
+    "0x420fe2": "05f07df9",
+    "0x420fe6": "0400",
+    "0x420fe8": "fef799ff",
+    "0x420fec": "2000",
+    "0x420fee": "07b0",
+    "0x420ff0": "f0bd",
+    "0x420f94": "0520",
+    "0x420f96": "2ae0",
+    "0x420f8a": "0620",
+    "0x420f8c": "2fe0"
+  },
+  "comparisons": [
+    {
+      "arguments": [
+        1193046,
+        536903680,
+        16,
+        0
+      ],
+      "fixture": {},
+      "observed": {
+        "return": 0,
+        "provider_calls": [
+          "before",
+          "configure",
+          "delay",
+          {
+            "transfer": {
+              "handle": 536895488,
+              "timeout_usec": 1000000,
+              "command": "10000000000000015634120001006c000100000000800020",
+              "fields": [
+                16,
+                0,
+                0,
+                0,
+                1,
+                1193046,
+                1,
+                108,
+                1,
+                0,
+                0,
+                0,
+                536903680
+              ]
+            }
+          },
+          "after"
+        ]
+      }
+    },
+    {
+      "arguments": [
+        1193046,
+        536903680,
+        4096,
+        65261
+      ],
+      "fixture": {
+        "transfer_status": 2147483655
+      },
+      "observed": {
+        "return": 2147483655,
+        "provider_calls": [
+          "before",
+          "configure",
+          "delay",
+          {
+            "transfer": {
+              "handle": 536895488,
+              "timeout_usec": 1000000,
+              "command": "00100000000000015634120001006c000100000000800020",
+              "fields": [
+                4096,
+                0,
+                0,
+                0,
+                1,
+                1193046,
+                1,
+                108,
+                1,
+                0,
+                0,
+                0,
+                536903680
+              ]
+            }
+          },
+          "after"
+        ]
+      }
+    },
+    {
+      "arguments": [
+        33554431,
+        536903681,
+        1,
+        0
+      ],
+      "fixture": {},
+      "observed": {
+        "return": 0,
+        "provider_calls": [
+          "before",
+          "configure",
+          "delay",
+          {
+            "transfer": {
+              "handle": 536895488,
+              "timeout_usec": 1000000,
+              "command": "0100000000000001ffffff0101006c000100000001800020",
+              "fields": [
+                1,
+                0,
+                0,
+                0,
+                1,
+                33554431,
+                1,
+                108,
+                1,
+                0,
+                0,
+                0,
+                536903681
+              ]
+            }
+          },
+          "after"
+        ]
+      }
+    },
+    {
+      "arguments": [
+        33554416,
+        536903680,
+        4096,
+        0
+      ],
+      "fixture": {},
+      "observed": {
+        "return": 0,
+        "provider_calls": [
+          "before",
+          "configure",
+          "delay",
+          {
+            "transfer": {
+              "handle": 536895488,
+              "timeout_usec": 1000000,
+              "command": "0010000000000001f0ffff0101006c000100000000800020",
+              "fields": [
+                4096,
+                0,
+                0,
+                0,
+                1,
+                33554416,
+                1,
+                108,
+                1,
+                0,
+                0,
+                0,
+                536903680
+              ]
+            }
+          },
+          "after"
+        ]
+      }
+    },
+    {
+      "arguments": [
+        0,
+        536903680,
+        1,
+        0
+      ],
+      "fixture": {},
+      "observed": {
+        "return": 0,
+        "provider_calls": [
+          "before",
+          "configure",
+          "delay",
+          {
+            "transfer": {
+              "handle": 536895488,
+              "timeout_usec": 1000000,
+              "command": "01000000000000010000000001006c000100000000800020",
+              "fields": [
+                1,
+                0,
+                0,
+                0,
+                1,
+                0,
+                1,
+                108,
+                1,
+                0,
+                0,
+                0,
+                536903680
+              ]
+            }
+          },
+          "after"
+        ]
+      }
+    },
+    {
+      "arguments": [
+        33554432,
+        536903680,
+        1,
+        0
+      ],
+      "fixture": {},
+      "observed": {
+        "return": 5,
+        "provider_calls": []
+      }
+    },
+    {
+      "arguments": [
+        33554433,
+        536903680,
+        1,
+        0
+      ],
+      "fixture": {},
+      "observed": {
+        "return": 5,
+        "provider_calls": []
+      }
+    },
+    {
+      "arguments": [
+        1193046,
+        0,
+        1,
+        0
+      ],
+      "fixture": {},
+      "observed": {
+        "return": 6,
+        "provider_calls": []
+      }
+    },
+    {
+      "arguments": [
+        1193046,
+        536903680,
+        0,
+        0
+      ],
+      "fixture": {},
+      "observed": {
+        "return": 6,
+        "provider_calls": []
+      }
+    },
+    {
+      "arguments": [
+        1193046,
+        536903680,
+        1,
+        0
+      ],
+      "fixture": {
+        "handle": 0
+      },
+      "observed": {
+        "return": 6,
+        "provider_calls": []
+      }
+    }
+  ],
+  "limits": [
+    "Only the wrapper instructions execute; setup, teardown, and MSPI transfer calls are intercepted at their exact local entries.",
+    "Synthetic transfer provider records the 24-byte command and returns a selected status; no flash or hardware access occurs.",
+    "Address check is start-only: no end-of-device, overflow, pointer-alignment, or transfer-size guard is added by this wrapper.",
+    "The wrapper issues one transfer for the full length. Higher-level littlefs controls ordinary request sizes; HAL internals are outside this test."
+  ]
+}

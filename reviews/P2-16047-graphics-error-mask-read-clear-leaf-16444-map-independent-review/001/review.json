@@ -1,0 +1,19 @@
+{
+  "task_id": "P2-16047",
+  "accepted": false,
+  "status": "partial",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-error-mask-read-clear-leaf-16444-map/001",
+  "candidate_receipt_sha256": "e5b4d751af6a0430d3a1ffb323acbca2a60362aca7ac9686c72f0987b19158f0",
+  "candidate_instruction_sha256": "03c409cf091c97bd88f8dd7dd6a54167308f885b1e2aaf3863dfd86e9d8092a0",
+  "candidate_pseudocode_sha256": "e4da73b8932874e1b1e7b5cac1709ca97042760a3aa436848b81cf66788fc235",
+  "candidate_replay_sha256": "927dd010368fdd2e4b8fd4b15e2d95ff13c5ec6b9aa77c9585cff37c51a94565",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_output_receipt_sha256": "affee80ca17721554eae0c09f595768c58ec5b4adb309173545aa3b18785643d",
+  "fresh_replay_stdout": "",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "review": "Read-clear leaf returns the prior mask and zeroes the field; this load/store is not atomic.",
+  "limitations": [
+    "Bounded instruction-level review only; no atomicity, global concurrency, hardware behavior or child-contract closure.",
+    "No canonical admission or gate change."
+  ]
+}

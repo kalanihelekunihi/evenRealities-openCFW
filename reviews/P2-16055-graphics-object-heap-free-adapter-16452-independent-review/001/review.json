@@ -1,0 +1,18 @@
+{
+  "task_id": "P2-16055",
+  "accepted": false,
+  "status": "partial",
+  "candidate": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-graphics-object-heap-free-adapter-16452-map/001",
+  "candidate_receipt_sha256": "7b4e859aa6fe36565616a1996c7a6c3d111d0dc5c40aeb4fb0186d01d9d61673",
+  "candidate_instructions_sha256": "a4971002c308ca5d37f5c48ecfb364cd6fa9ccbe2d7ac69a142326481f80f8e8",
+  "candidate_pseudocode_sha256": "8f59ea3576dcc69810e04532c85238e6716e78466c672513dae5c125925f165b",
+  "candidate_replay_sha256": "97cd42ad924d2c6f3934268ad5db58eb2940cebca98894b7a8bfc6fd71f30882",
+  "fresh_replay": "fresh-replay.py",
+  "fresh_output_receipt_sha256": "506662e118bb3876757f4cadfc5b7ec0b5a5c03620513118f20d826a5a0a52b6",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "review": "Free adapter discards child status and returns entry R7 in R0.",
+  "limitations": [
+    "Child allocator/heap behavior, invalid pointers/fault behavior, concurrent mutation, physical buffer effects, and ownership remain unqualified.",
+    "No admission, C or gate change."
+  ]
+}

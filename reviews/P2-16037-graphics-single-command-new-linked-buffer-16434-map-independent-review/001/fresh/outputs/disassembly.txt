@@ -1,0 +1,71 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpxu6ve69f/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+005149aa <.text>:
+  5149aa:	6a04      	ldr	r4, [r0, #32]
+  5149ac:	2c00      	cmp	r4, #0
+  5149ae:	d14c      	bne.n	514a4a <.text+0xa0>
+  5149b0:	203c      	movs	r0, #60	@ 0x3c
+  5149b2:	f7ff fbdb 	bl	51416c <.text-0x83e>
+  5149b6:	0004      	movs	r4, r0
+  5149b8:	bf08      	it	eq
+  5149ba:	2010      	moveq	r0, #16
+  5149bc:	d095      	beq.n	5148ea <.text-0xc0>
+  5149be:	f44f 6280 	mov.w	r2, #1024	@ 0x400
+  5149c2:	2100      	movs	r1, #0
+  5149c4:	a804      	add	r0, sp, #16
+  5149c6:	f7ff fb53 	bl	514070 <.text-0x93a>
+  5149ca:	a904      	add	r1, sp, #16
+  5149cc:	e891 500c 	ldmia.w	r1, {r2, r3, ip, lr}
+  5149d0:	4668      	mov	r0, sp
+  5149d2:	f10d 0810 	add.w	r8, sp, #16
+  5149d6:	e880 500c 	stmia.w	r0, {r2, r3, ip, lr}
+  5149da:	6880      	ldr	r0, [r0, #8]
+  5149dc:	46c0      	nop			@ (mov r8, r8)
+  5149de:	4669      	mov	r1, sp
+  5149e0:	e891 500c 	ldmia.w	r1, {r2, r3, ip, lr}
+  5149e4:	a804      	add	r0, sp, #16
+  5149e6:	e880 500c 	stmia.w	r0, {r2, r3, ip, lr}
+  5149ea:	e898 0e02 	ldmia.w	r8, {r1, r9, sl, fp}
+  5149ee:	9800      	ldr	r0, [sp, #0]
+  5149f0:	1082      	asrs	r2, r0, #2
+  5149f2:	eb00 7052 	add.w	r0, r0, r2, lsr #29
+  5149f6:	e884 0e02 	stmia.w	r4, {r1, r9, sl, fp}
+  5149fa:	2102      	movs	r1, #2
+  5149fc:	10c0      	asrs	r0, r0, #3
+  5149fe:	0040      	lsls	r0, r0, #1
+  514a00:	6120      	str	r0, [r4, #16]
+  514a02:	2000      	movs	r0, #0
+  514a04:	6160      	str	r0, [r4, #20]
+  514a06:	f04f 30ff 	mov.w	r0, #4294967295	@ 0xffffffff
+  514a0a:	61e0      	str	r0, [r4, #28]
+  514a0c:	6360      	str	r0, [r4, #52]	@ 0x34
+  514a0e:	63a0      	str	r0, [r4, #56]	@ 0x38
+  514a10:	61a1      	str	r1, [r4, #24]
+  514a12:	68a0      	ldr	r0, [r4, #8]
+  514a14:	2100      	movs	r1, #0
+  514a16:	6221      	str	r1, [r4, #32]
+  514a18:	6261      	str	r1, [r4, #36]	@ 0x24
+  514a1a:	62a1      	str	r1, [r4, #40]	@ 0x28
+  514a1c:	62e1      	str	r1, [r4, #44]	@ 0x2c
+  514a1e:	6321      	str	r1, [r4, #48]	@ 0x30
+  514a20:	b940      	cbnz	r0, 514a34 <.text+0x8a>
+  514a22:	2010      	movs	r0, #16
+  514a24:	f79c fc2a 	bl	4b127c <.text-0x6372e>
+  514a28:	4620      	mov	r0, r4
+  514a2a:	f7ff fba5 	bl	514178 <.text-0x832>
+  514a2e:	b009      	add	sp, #36	@ 0x24
+  514a30:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}
+  514a34:	6839      	ldr	r1, [r7, #0]
+  514a36:	684a      	ldr	r2, [r1, #4]
+  514a38:	6a50      	ldr	r0, [r2, #36]	@ 0x24
+  514a3a:	b100      	cbz	r0, 514a3e <.text+0x94>
+  514a3c:	4602      	mov	r2, r0
+  514a3e:	6262      	str	r2, [r4, #36]	@ 0x24
+  514a40:	6848      	ldr	r0, [r1, #4]
+  514a42:	6981      	ldr	r1, [r0, #24]
+  514a44:	f021 010c 	bic.w	r1, r1, #12
+  514a48:	61a1      	str	r1, [r4, #24]

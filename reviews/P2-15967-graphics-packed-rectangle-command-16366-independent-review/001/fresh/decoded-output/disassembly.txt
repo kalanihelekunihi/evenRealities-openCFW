@@ -1,0 +1,39 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpcjchg_gm/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00522ae0 <.text>:
+  522ae0:	b5f0      	push	{r4, r5, r6, r7, lr}
+  522ae2:	4616      	mov	r6, r2
+  522ae4:	b081      	sub	sp, #4
+  522ae6:	4604      	mov	r4, r0
+  522ae8:	460d      	mov	r5, r1
+  522aea:	461f      	mov	r7, r3
+  522aec:	2e01      	cmp	r6, #1
+  522aee:	bfa8      	it	ge
+  522af0:	2f01      	cmpge	r7, #1
+  522af2:	db1b      	blt.n	522b2c <.text+0x4c>
+  522af4:	2003      	movs	r0, #3
+  522af6:	f7f1 fff9 	bl	514aec <.text-0xdff4>
+  522afa:	b1b8      	cbz	r0, 522b2c <.text+0x4c>
+  522afc:	eac4 4205 	pkhbt	r2, r4, r5, lsl #16
+  522b00:	f44f 7182 	mov.w	r1, #260	@ 0x104
+  522b04:	6001      	str	r1, [r0, #0]
+  522b06:	6042      	str	r2, [r0, #4]
+  522b08:	197d      	adds	r5, r7, r5
+  522b0a:	1934      	adds	r4, r6, r4
+  522b0c:	eac4 4205 	pkhbt	r2, r4, r5, lsl #16
+  522b10:	f44f 7184 	mov.w	r1, #264	@ 0x108
+  522b14:	6081      	str	r1, [r0, #8]
+  522b16:	60c2      	str	r2, [r0, #12]
+  522b18:	f8df 17b0 	ldr.w	r1, [pc, #1968]	@ 5232cc <.text+0x7ec>
+  522b1c:	6101      	str	r1, [r0, #16]
+  522b1e:	f8df 27b0 	ldr.w	r2, [pc, #1968]	@ 5232d0 <.text+0x7f0>
+  522b22:	6813      	ldr	r3, [r2, #0]
+  522b24:	6999      	ldr	r1, [r3, #24]
+  522b26:	f041 0102 	orr.w	r1, r1, #2
+  522b2a:	6141      	str	r1, [r0, #20]
+  522b2c:	b001      	add	sp, #4
+  522b2e:	bdf0      	pop	{r4, r5, r6, r7, pc}
