@@ -1,0 +1,83 @@
+{
+  "source_pin": "35f1714623cfea682d5e285af80d50416b4c7bbc",
+  "compiler": "arm-none-eabi-gcc (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) 13.3.1 20240614",
+  "compiler_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m0plus",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-DCY8C4046FNI_T412",
+    "-ffunction-sections"
+  ],
+  "consumed_source_hashes": {
+    "/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/drivers/source/cy_msclp.c": "2613ec6fee3ac2ca6d8a42e483bb671f9ed63a58045b125ee6fe11f6f2d60f07",
+    "/private/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/lib/gcc/arm-none-eabi/13.3.1/include/stdint.h": "86a7914ab7d6a18465a6fb9a7b54f945cad604fdbf3ca0d10e4e0254e0037911",
+    "/private/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/lib/gcc/arm-none-eabi/13.3.1/include/stdint-gcc.h": "0a2e42d37b032271a0f6328a35bdb6fc694411a7627decaf857ba75ae7e00589",
+    "/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/devices/include/cy_device_headers.h": "5d30f5a298ac34084ff8d899fdcecebee7a4170d2e634fc097ccfa664f4b64fa",
+    "/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/devices/include/cy8c4046fni_t412.h": "5e8ac6fab78847c7a667b9afd0e425e8ceefdb92390cb51a0d0fba09939d6a3b",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/dependency-followup-2026-10-08/touch-source/cmsis/core_cm0plus.h": "a09fa9c6b8b21d1920bce15b98aa56182b027e9278cca0b154812bac2aea3cfa",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/dependency-followup-2026-10-08/touch-source/cmsis/cmsis_version.h": "184c19fd3ee73632edf35a0b4d49cd48be75fbf49e6ccb19d9db05fa83bea4b3",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/dependency-followup-2026-10-08/touch-source/cmsis/cmsis_compiler.h": "b51963d271c1571ca3463654c76aa7ea50c4eac5d0a2710df10414ac64d9e0f8",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/dependency-followup-2026-10-08/touch-source/cmsis/cmsis_gcc.h": "43bfd1fe69fbbc2ca70aaf7d43cc3e20f16e0c7f66e1bdef9b51af6dc14b2617",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/dependency-followup-2026-10-08/touch-source/system_cat2.h": "2e0db2ae2f13daae26e7238c0d3f027b60a26085f4f0971e26c79a13111603aa",
+    "/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/devices/include/psoc4000t_config.h": "a83a5cfe611d261e19752a7c5ecd48a76d7f32f9296425a589b3713418f07b30",
+    "/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/devices/include/ip/cyip_sflash_psoc4000t.h": "66cb98fe5806304dba9be7a79ffd3585c060aee6caa5b735e57140006dfa67e6",
+    "/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/devices/include/ip/cyip_headers.h": "6450f87bcfb025efa312c8a23bbefa303244d38d94448b375de5abb866a493e6",
+    "/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/devices/include/ip/cyip_peri.h": "95db82fdc0293f2f18a13281c7bbfd216628707c481bf255e36caa0b568de342",
+    "/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/devices/include/ip/cyip_hsiom.h": "7638c928fa62097f82ad34b7d1cbbeaa20ac1c035f72ad827d53522dcf99409f",
+    "/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/devices/include/ip/cyip_srsslt.h": "74bf8dfb47a1839774a26e4e4dcdf5956adf1b09e20df5abc24be3fccf7a4a65",
+    "/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/devices/include/ip/cyip_gpio.h": "c48618ad2bb0a1efa656e23f5b97954b7ed1459d789cacd591877372ae73b93c",
+    "/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/devices/include/ip/cyip_cpuss_v3.h": "41d774ede5b9d7a5b3eb9bcbd41e96b35d90f0cbe63918513e78e7d1bb9f8bbd",
+    "/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/devices/include/ip/cyip_dmac_v3.h": "8266541cf8f15457b52418d8a3f2b2ab15c33bedb5a33ee58b4b4e2f9e8e5626",
+    "/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/devices/include/ip/cyip_spcif_v3.h": "1d9e33f49bfa3b0aebc5340b6903568e080d6215b44bad20f664781e93ad1639",
+    "/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/devices/include/ip/cyip_tcpwm_v2.h": "e94f9c408d8d45e21829da98b3d98eb59e95190d4d0b5ea0763c6f7df437063c",
+    "/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/devices/include/ip/cyip_scb_v3.h": "bd2ccbee6b9a580834538915d6b40356df9b9d6c1c36a1fbfcba623881e11c7c",
+    "/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/devices/include/ip/cyip_msclp.h": "777b627dadfbdddd5024b121edb0a57875c12d865db1cd245585b51944436d1f",
+    "/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/devices/include/gpio_psoc4000t_25_wlcsp.h": "96200d5a5382694a432f29607a9f2738ec6ff097ccece7ee1dbe72c58449ab62",
+    "/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/drivers/include/cy_syslib.h": "6c6e35da19d618c752c767873e89ae6144877a1a4eacafe13b31cc0c0f8e7ca4",
+    "/private/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/lib/gcc/arm-none-eabi/13.3.1/include/stdbool.h": "68b898fc39d5d2a450df9b7263d984e7d2ad4c02675f4043a62e762f169e4b85",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/dependency-followup-2026-10-08/touch-source/core-lib-ca57d1e519e08badec6891d1776c7b4f05e09561/include/cy_utils.h": "5c084c021be5aa19c667dad4975ac01dd0dafe569dbbcf64392ab9c919d2da7b",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/dependency-followup-2026-10-08/touch-source/core-lib-ca57d1e519e08badec6891d1776c7b4f05e09561/include/cy_result.h": "7bf08391ef9934c9d5678729d89c7b6db10f22fade519fae97970c6bead7b322",
+    "/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/drivers/include/cy_device.h": "9c6818390b6e68458141370690e1e4175848bb950cfc5b2aec9db7b23027f6e9",
+    "/private/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/lib/gcc/arm-none-eabi/13.3.1/include/stddef.h": "9efc696d6c7eb8bb1831b149c6a92f88a775809cd63e4007312b617915f81188",
+    "/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/drivers/include/cy_msclp.h": "8d8d7a6d2890067578c2b294ff65f819cb9d38297df8e713d30655b87d000d00",
+    "/private/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/arm-none-eabi/include/string.h": "79722fe25a7d01447fee06a0b8efe7535c1b891568730ba154a139c59c068ffc",
+    "/private/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/arm-none-eabi/include/_ansi.h": "5c6403b471ee897c9a6c12e00a58617247804eb3ee72d7baeb7c08616090dd1d",
+    "/private/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/arm-none-eabi/include/newlib.h": "f5b1f4cb2854a583795145eeb2b3f4115411bbd216a683356cdddaa208adb9ad",
+    "/private/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/arm-none-eabi/include/_newlib_version.h": "bfc4b55e8665b5c4ae407e090a6aac2fb829905f04a5a7519686631eb1633fff",
+    "/private/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/arm-none-eabi/include/sys/config.h": "583e381e7184a477bcea569149f6154ccf4f0faa0829a9d8363954adb7aecf14",
+    "/private/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/arm-none-eabi/include/machine/ieeefp.h": "a01f46795677820323740962d3bbf519a68e426556b345590778302cf8aec2e8",
+    "/private/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/arm-none-eabi/include/sys/features.h": "0f4735889b0edf8c2674a16f18d4e52f6eff4496f8878bf43aa125235f97500a",
+    "/private/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/arm-none-eabi/include/sys/reent.h": "948b8a04507fd331248a164f0dfd12443e9942d3893b0159efd0865d787405f7",
+    "/private/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/arm-none-eabi/include/sys/cdefs.h": "9dcd9f554b32c40791b8f081f34c83767c61c0bc567b4a486066edda39812f3e",
+    "/private/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/arm-none-eabi/include/machine/_default_types.h": "5d8f9f7ead7927e4b8b7ed00172e84f2ae82ea7f5f6ba3240ff813a9236771b3",
+    "/private/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/arm-none-eabi/include/sys/_types.h": "1abe39aca5104bafbde2e0219e7cdc3e96129b22ce1ef5cd58b66d8d147d3fb7",
+    "/private/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/arm-none-eabi/include/machine/_types.h": "44544ecbbc10c8aa58ca2da6d0617ffeee5af847af24515ab108c8218d6d92c8",
+    "/private/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/arm-none-eabi/include/sys/lock.h": "f5cad9196ce745967fd2673e085b5c03df7887d4d11d7544aff05ff6679be6b8",
+    "/private/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/arm-none-eabi/include/sys/_locale.h": "adc8e11513e5f83a0c73ac641c256815b0aa6cc8a09a43d2c97b1ee79db9f154",
+    "/private/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/arm-none-eabi/include/strings.h": "743121afb2f530045eb63bcfa3fdbc4ecf555131bd1cf7ce36a268f758bb4be5",
+    "/private/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/arm-none-eabi/include/sys/string.h": "b7164ee36ccb0a08bc27c7e381ea417c97d8c3fd3157de62b75d2a6bf7a0a589"
+  },
+  "exact_matches": [
+    {
+      "function": "Cy_MSCLP_Capture",
+      "address": "0x8fa0",
+      "bytes": 48,
+      "sha256": "72b50f8c37b730c97a001d6df65bd0a35c49ae3979bfa1da20bc81c7d5f99441"
+    },
+    {
+      "function": "Cy_MSCLP_ConfigureScan",
+      "address": "0x9178",
+      "bytes": 160,
+      "sha256": "aca4046f59c198244af1fd481ce56c598688f0604b35c51169c238f40dda2ce5"
+    }
+  ],
+  "object_sha256": "138354483664ed56a11ccaf2f710e52b0346e3a2df73ef028060b4bc0826ac7b",
+  "elf_sha256": "13b215605edde87e93171f1c25c788debdf6e88a2a91f1debc90d812ce739d0c",
+  "limits": [
+    "Capture/ConfigureScan exact compiled sections; Configure only bounded behavioral equivalence.",
+    "No unique producer/compiler release or whole-payload source completeness."
+  ]
+}

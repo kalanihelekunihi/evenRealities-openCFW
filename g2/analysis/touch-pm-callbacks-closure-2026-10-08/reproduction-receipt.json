@@ -1,0 +1,24 @@
+{
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "version": "arm-none-eabi-gcc (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) 13.3.1 20240614",
+  "pdl_pin": "35f1714623cfea682d5e285af80d50416b4c7bbc",
+  "pdl_source": "/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/drivers/source/cy_syspm.c",
+  "pdl_sha256": "be43e5aa704c99acca45850db68094977a274dcb1d4335fafca753269c5a93b8",
+  "public_environment": "#include <stdint.h>\n#include <stddef.h>\n#include <stdbool.h>\ntypedef uint32_t cy_en_syspm_status_t,cy_en_syspm_callback_mode_t;\ntypedef uint8_t cy_en_syspm_callback_type_t;\ntypedef struct {void *base,*context;} cy_stc_syspm_callback_params_t;\ntypedef struct cy_stc_syspm_callback cy_stc_syspm_callback_t;\nstruct cy_stc_syspm_callback {uint32_t (*callback)(cy_stc_syspm_callback_params_t *,uint32_t);uint8_t type;uint32_t skipMode;cy_stc_syspm_callback_params_t *callbackParams;cy_stc_syspm_callback_t *prevItm,*nextItm;uint8_t order;};\n_Static_assert(offsetof(cy_stc_syspm_callback_t,order)==24,\"order\");\n_Static_assert(offsetof(cy_stc_syspm_callback_t,callbackParams)==12,\"params\");\n#define CY_SYSPM_DEEPSLEEP 1u\n#define SRSS_PWR_KEY_DELAY (*(volatile uint32_t *)0x40030004u)\n#define SFLASH_DPSLP_KEY_DELAY (*(volatile const uint16_t *)0x0ffff152u)\n#define SCB_SCR (*(volatile uint32_t *)0xe000ed10u)\n#define SCB_SCR_SLEEPDEEP_Msk 4u\n#define __WFI() __asm volatile(\"wfi\")\nuint32_t Cy_SysLib_EnterCriticalSection(void);\nvoid Cy_SysLib_ExitCriticalSection(uint32_t);\nvoid Cy_SysPm_CpuEnterDeepSleepNoCallbacks(void);\nuint32_t Cy_SysPm_ExecuteCallback(uint8_t,uint32_t);\n#define CY_SYSPM_SUCCESS 0u\n#define CY_SYSPM_FAIL 0x4200ffu\n#define CY_SYSPM_CHECK_READY 1u\n#define CY_SYSPM_CHECK_FAIL 2u\n#define CY_SYSPM_BEFORE_TRANSITION 4u\n#define CY_SYSPM_AFTER_TRANSITION 8u\n/* Valid supported input contract; target BKPT assertion paths are excluded. */\n#define CY_ASSERT_L3(c) ((void)0)\nextern cy_stc_syspm_callback_t *pmCallbackRoot[],*failedCallback[];\n",
+  "public_translation_unit_sha256": "5a9cb76a775266cc48b47372a8bdf7762936e8280ba47aa25beee383094cecae",
+  "source_sha256": "4c6e61ff587608f8837661ab1cbe95e66b1bd4f5e055161f4241d3c675ebc3d6",
+  "probe_sha256": "1f1cec2e5debb63a87f97c7334ea3f23ca230a8c4bb6266a6e426729188c20bf",
+  "public_clock_source_sha256": "02201bd86476936a2570ce80e6867568bb582cb59ff05f31c8164ed81c69d714",
+  "independent_clock_source_sha256": "f287159b45440a23218394f6ff53423163fdd093bdddcd9c8e12a20daa7133c4",
+  "elf": "/tmp/opencfw-touch-pm-callbacks-reproduction/callbacks.elf",
+  "elf_sha256": "52bcd9985ffe7b503cd63893fa76a5eb8e0f0dfdcda289e9ee30bdf065ce7010",
+  "flags": [
+    "-mcpu=cortex-m0plus",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ]
+}

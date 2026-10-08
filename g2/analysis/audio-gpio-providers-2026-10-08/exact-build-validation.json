@@ -1,0 +1,55 @@
+{
+  "status": "PASS",
+  "elf_sha256": "94dcf55b752a13525e9c00ae781c01446f8efbfdc6ad7681b83d28ef2c220492",
+  "native_original_comparisons": 2432,
+  "original_only_assertions": 10,
+  "sources_verified": true,
+  "results": {
+    "gpio-results.json": {
+      "cases": 1360,
+      "sha256": "c6173889cdaeff04803dcdf8230fa6da80d9eecdf625d91faa8db00d03d94b37",
+      "limits": [
+        "Original IRQ-save executes; native and original restore PRIMASK.",
+        "Synthetic GPIO words/PADKEY; no electrical, mux-clock or real exception proof."
+      ],
+      "scope": "native/original comparisons"
+    },
+    "results.json": {
+      "cases": 120,
+      "sha256": "934a2fd097e406915eef1c78703d6d8d7138f6cb2a7b6d3bdc8c32d6e35ba1fa",
+      "limits": [
+        "Actual original providers execute; no return stubs.",
+        "Peripheral readiness is a declared write-response model; not physical clock readiness.",
+        "Incoming R5 scratch passed explicitly to native helper for stock GPIO15 configuration high bits."
+      ],
+      "scope": "native/original comparisons"
+    },
+    "prefix-results.json": {
+      "cases": 40,
+      "sha256": "3fb1bb9fd21dba68379ff4d2dfca91ee8470d678deddde491374c4e1d0987c2d",
+      "limits": [
+        "Full common initializer native control flow; original revision/INFO1/register/memory/clock providers remain.",
+        "Synthetic calibration/readiness and retained state; no real factory/physical boot proof."
+      ],
+      "scope": "native/original comparisons"
+    },
+    "request-results.json": {
+      "cases": 912,
+      "sha256": "a45ddf8801191d49e1cb897492571b9701f9dd228b7fa4ab9ca86c7b7c508e11",
+      "limits": [
+        "Synthetic per-slot clock arrays/retained state; invalid indices are deliberate malformed tests.",
+        "Gated and active reset sequences execute real original providers; active readiness write responses are synthetic, not physical clock recovery."
+      ],
+      "scope": "native/original comparisons"
+    },
+    "caller-results.json": {
+      "cases": 10,
+      "sha256": "83f6b13ce22ac42ed70edcf98af3cca6383900305407203c56f0717eed63d32d",
+      "limits": [
+        "Original instruction block0x4C2AF4..0x4C2AFC only, actual power-control provider executes with buck-already-active fixture.",
+        "Prior initializer result is injected at its continuation; not complete platform/board initialization validation."
+      ],
+      "scope": "original-only continuation assertions"
+    }
+  }
+}

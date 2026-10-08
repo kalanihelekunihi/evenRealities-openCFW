@@ -1,0 +1,36 @@
+0800a888  38b5         push {r3, r4, r5, lr}
+0800a88a  0c46         mov r4, r1
+0800a88c  0028         cmp r0, #0
+0800a88e  02d0         beq #0x800a896
+0800a890  210e         lsrs r1, r4, #0x18
+0800a892  0029         cmp r1, #0
+0800a894  02d0         beq #0x800a89c
+0800a896  0320         movs r0, #3
+0800a898  c043         mvns r0, r0
+0800a89a  38bd         pop {r3, r4, r5, pc}
+0800a89c  eff30581     mrs r1, ipsr
+0800a8a0  0029         cmp r1, #0
+0800a8a2  13d0         beq #0x800a8cc
+0800a8a4  0021         movs r1, #0
+0800a8a6  0091         str r1, [sp]
+0800a8a8  6a46         mov r2, sp
+0800a8aa  2146         mov r1, r4
+0800a8ac  01f05cfe     bl #0x800c568
+0800a8b0  0028         cmp r0, #0
+0800a8b2  08d0         beq #0x800a8c6
+0800a8b4  2046         mov r0, r4
+0800a8b6  0099         ldr r1, [sp]
+0800a8b8  0029         cmp r1, #0
+0800a8ba  eed0         beq #0x800a89a
+0800a8bc  0121         movs r1, #1
+0800a8be  054a         ldr r2, [pc, #0x14]
+0800a8c0  0907         lsls r1, r1, #0x1c
+0800a8c2  5160         str r1, [r2, #4]
+0800a8c4  38bd         pop {r3, r4, r5, pc}
+0800a8c6  0220         movs r0, #2
+0800a8c8  c043         mvns r0, r0
+0800a8ca  38bd         pop {r3, r4, r5, pc}
+0800a8cc  2146         mov r1, r4
+0800a8ce  01f006fe     bl #0x800c4de
+0800a8d2  38bd         pop {r3, r4, r5, pc}
+0800a8d4  00ed00e0     stc p0, c14, [r0, #-0]

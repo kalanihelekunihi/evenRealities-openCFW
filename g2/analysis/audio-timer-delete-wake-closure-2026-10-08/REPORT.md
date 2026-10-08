@@ -1,0 +1,11 @@
+# Timer delete publication, receiver priority and auxiliary release
+
+**48 PASS new waiter-integration comparisons** using the previously sealed independent delete source/build; no redundant source copy. [Results and reused hashes](results.json), [sealed source](../../components/audio/timer_aux_lifetime_offline/aux.c), [instructions](original-disassembly.txt), [provenance](provenance.json).
+
+Actual CMSIS delete0x44953E publishes Delete5 through the real queue provider. With a waiting receiver, actual0x455370 removes its queue event item, moves state into its ready list if unsuspended or event into pending-ready if suspended, and reports higher-priority wake when receiver priority is **strictly greater** than sender. The real queue sender then reaches port-yield0x4420BC before command enqueue returns to the delete wrapper.
+
+With constructed **sender47 / blocked receiver54**, tests stop before that yield first instruction while dynamic callback auxiliary storage is **still allocated**. No yield return or exception return is substituted with success. Lower/equal receiver priorities46/47 or absent receiver allow wrapper completion and dynamic auxiliary release after enqueue. Suspended cases can retain state in delayed/suspended list while event becomes pending-ready; a higher-priority wake still reaches the yield boundary in this selected queue path.
+
+Fixtures vary receiver46/47/54, scheduler suspension0/1, dynamic/static auxiliary, finite delayed/indefinite suspended state and receiver present/absent. They use coherent synthetic sender/waiter/queue/list/heap state with actual message copy, task unblock and free peers. Original and sealed independent delete wrappers agree on used wake calls, allocation release, queue/list/global state and boundary/result. Old zero-waiter coverage is not recounted as new source recovery.
+
+This is a material constraint on the earlier late-callback fixture: **a queued delete alone is insufficient evidence of a live lifetime defect**. The stock timer task's recovered priority54 exceeds audio47; task PC/wait state and preemption behavior determine whether auxiliary release precedes the next expiry processing. These tests neither establish nor refute a hardware defect, nor account for every delete caller's priority or all scheduling states.

@@ -1,0 +1,1 @@
+Independent offline ARM32 scan ISR, data transfer, continuation and dispatch. See g2/analysis/touch-scan-isr-closure-2026-10-08/REPORT.md and original-instruction tests. Synthetic peripherals, explicit callback boundaries; no production firmware or physical timing claim.

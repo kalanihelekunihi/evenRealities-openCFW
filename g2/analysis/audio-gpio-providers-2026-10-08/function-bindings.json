@@ -1,0 +1,82 @@
+{
+  "raw_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "functions": {
+    "gpio_get": {
+      "start": "0x480eee",
+      "end_exclusive": "0x480f0c",
+      "bytes": 30,
+      "sha256": "f76f64c0dd07b5e162bd23d4cdc87a1e70735b0db5b61da9fa1c3dd7f6ec942e",
+      "scope": "native full function"
+    },
+    "gpio_set": {
+      "start": "0x480f0c",
+      "end_exclusive": "0x480f8a",
+      "bytes": 126,
+      "sha256": "a43394486c7d8da946cf692d6f33ddf66f1ebe63683d3a3fd408afb0fdf5e9e2",
+      "scope": "native full function"
+    },
+    "clock_reference_update": {
+      "start": "0x44b0b6",
+      "end_exclusive": "0x44b0d6",
+      "bytes": 32,
+      "sha256": "0ea726bb021d4f4f5fd228701e2911434c9c181155d4390d0f25be39a15259f9",
+      "scope": "native full function"
+    },
+    "clock_requests_update": {
+      "start": "0x44b0d6",
+      "end_exclusive": "0x44b158",
+      "bytes": 130,
+      "sha256": "78bb04a6f49c50c1dd0ab74ac70e8dab14b69fa88f7fea4693ff7533cd03aac3",
+      "scope": "native full function"
+    },
+    "platform_continuation": {
+      "start": "0x4c2af4",
+      "end_exclusive": "0x4c2afc",
+      "bytes": 8,
+      "sha256": "96e209293b7cf426591070b81d786cf5a9212bfa2669db431055e8338594d992",
+      "scope": "original/static caller evidence"
+    },
+    "platform_wrapper": {
+      "start": "0x4c2ae8",
+      "end_exclusive": "0x4c2b30",
+      "bytes": 72,
+      "sha256": "7be81e6520b33942c25634fe70655be75d651fc99785a7482fcb341679f9c049",
+      "scope": "original/static caller evidence"
+    },
+    "application_init_prefix": {
+      "start": "0x5cdd14",
+      "end_exclusive": "0x5cdd30",
+      "bytes": 28,
+      "sha256": "d32cb711146ba8472e7dca486b985a16870217f0c6a421d7970d99b5abb436cc",
+      "scope": "original/static caller evidence"
+    }
+  },
+  "configuration_tables": {
+    "extended_drive": {
+      "address": "0x768ba8",
+      "values": [
+        0,
+        16352,
+        1023,
+        536608256,
+        507904,
+        0,
+        0
+      ],
+      "sha256": "b735c04032541cece197c93699f0753d37d7af5937bb6cdff15def90dbfe30fc"
+    },
+    "drive_capable": {
+      "address": "0x768bc4",
+      "values": [
+        2411726822,
+        3824418815,
+        2181038079,
+        4294967295,
+        4027564159,
+        1,
+        393
+      ],
+      "sha256": "cc26c6f666de586a513054c9c0ccc99f0d76e213cd5f8a4638264390cb245804"
+    }
+  }
+}

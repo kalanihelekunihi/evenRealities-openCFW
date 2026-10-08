@@ -1,0 +1,33 @@
+{
+  "sources": {
+    "g2/components/audio/early_pcm_pending_offline/pending.c": "501fba0cda017e9d513783ce62b90c170ee22d3c6d61c6e8d20a8f5763fd613f",
+    "g2/components/audio/early_pcm_pending_offline/pending.h": "8e1a7aab1fa17371409d25c59d16a9cf600fdcf341ee27af664b2a71dc24a805",
+    "g2/components/audio/early_pcm_gpu_offline/gpu.c": "9284898fdabafc805fa01aa0df5cbdf182abccebd288cb9e4309453f936a1014",
+    "g2/components/audio/early_pcm_gpu_offline/gpu.h": "c0704b859beb77076d1fe06d65cd0072a1c65d48680dc2d7ddb042348771b00b",
+    "g2/components/audio/platform_callbacks_offline/callbacks.c": "d632badcaf745c96c65da08aaa68791f7f713451eaea57be54d48a64ccfc095b",
+    "g2/components/audio/platform_callbacks_offline/callbacks.h": "4ee93e67d4cd48c65512fcb85be6ffc224c85dc340ba1cf87b55e8a69101f7d0"
+  },
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m33",
+    "-mfpu=fpv5-sp-d16",
+    "-mfloat-abi=hard",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib",
+    "-fshort-enums"
+  ],
+  "elf": "/tmp/opencfw-early-pcm-pending/control.elf",
+  "elf_sha256": "3ca2ac60ed5e045cfed2612188472c6cbede1912649092e6826575d7250425f1",
+  "bindings": {
+    "stock_delay": 4720545,
+    "stock_ton_update": 4719555,
+    "stock_buck_enable": 4718189,
+    "stock_save_irq": 4667713,
+    "stock_stimer_running": 4773409
+  },
+  "link_script": "stock_temperature_apply = pcm_hardware_temperature; early_zero = pcm_early_off; early_other = pcm_early_on; middle_action0 = pcm_sleep; middle_zero = pcm_middle_off; middle_other = pcm_middle_on; middle_action2 = pcm_temperature; pcm_early_control = audio_platform_early_control; pcm_middle_control = audio_platform_middle_control; stock_delay = 0x4807a1; stock_ton_update = 0x4803c3; stock_buck_enable = 0x47fe6d; stock_save_irq = 0x473941; stock_stimer_running = 0x48d621; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }"
+}

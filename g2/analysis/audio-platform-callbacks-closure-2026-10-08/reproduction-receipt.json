@@ -1,0 +1,32 @@
+{
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m33",
+    "-mfpu=fpv5-sp-d16",
+    "-mfloat-abi=hard",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "source": "g2/components/audio/platform_callbacks_offline/callbacks.c",
+  "source_sha256": "d632badcaf745c96c65da08aaa68791f7f713451eaea57be54d48a64ccfc095b",
+  "sources": {
+    "g2/components/audio/platform_callbacks_offline/callbacks.c": "d632badcaf745c96c65da08aaa68791f7f713451eaea57be54d48a64ccfc095b",
+    "g2/components/audio/platform_callbacks_offline/classify.c": "f4a51f774e0f9741a2e35c8ebe61612f78c2f4e893c31c2a4478a2f52cb69a1c",
+    "g2/components/audio/platform_callbacks_offline/itcm.c": "0adf6b1611190b44c3071d854a20bdb7678227f7da0ab9c44a91bb4628134ed6",
+    "g2/components/audio/platform_callbacks_offline/newer.c": "4dbf2826ef7f77518f423d5bea627fbd22619119b6037e7abf16583a63fffdca",
+    "g2/components/audio/platform_callbacks_offline/planner.c": "ddf6376400f03e497b070256fbe4645ea7373c7268d2e9f2368080665bc4aeb5",
+    "g2/components/audio/platform_callbacks_offline/prepare.c": "d42f6db857baa76b867e40152a012f1d62ca5daf0a12ccf7e687c83492e1b9b6",
+    "g2/components/audio/platform_callbacks_offline/read_init.c": "e39c6c0abfd8e975cedcb8ef4821a7895acc5e1eb11b742991e37fcd12c0536a",
+    "g2/components/audio/platform_callbacks_offline/route.c": "c67b8166ceeb3e18b570bb478bb50fe32d54578b307f6deb443d24ede6e2c185",
+    "g2/components/audio/platform_callbacks_offline/select.c": "aa341bdef315b5741c7c25cc064a9b364db0215b813ef60d598e263a7e6a523e",
+    "g2/components/audio/platform_callbacks_offline/timer.c": "54385094f53aa7c33458dfe45c5d88953825a8fc50a86bce8a7205e8e38664fb"
+  },
+  "header_sha256": "4ee93e67d4cd48c65512fcb85be6ffc224c85dc340ba1cf87b55e8a69101f7d0",
+  "elf": "/tmp/opencfw-audio-platform-callbacks/callbacks.elf",
+  "elf_sha256": "7c8485aee73efc4b4eeaeda089b0d2f82719d0a21a1a18ab2a320fbda346bc6b",
+  "link_script": "callback_classify = audio_platform_classify; callback_plan = audio_platform_plan; callback_change_state = audio_platform_change_state; callback_prepare_state = audio_platform_prepare_state; callback_apply = audio_platform_apply; callback_select = audio_platform_select; platform_finish_init = audio_spot_timer_initialize; early_zero = 0x59fca3; early_other = 0x59fbad; middle_action0 = 0x5a0205; middle_zero = 0x5a05e1; middle_other = 0x5a0329; middle_action2 = 0x5a00fd; callback_save_disable_irq = 0x473941; callback_voltage = 0x5a423d; platform_copy_words = 0x48086b; spot_timer_clock_request = 0x4c44bd; actual_itcm_delay = 0x41; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }"
+}

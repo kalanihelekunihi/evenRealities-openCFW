@@ -1,0 +1,71 @@
+{
+  "firmware_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "aligned_literal_references": {
+    "0x2000065e": [
+      "0xb5f0"
+    ],
+    "0x20000808": [
+      "0xb5ec"
+    ],
+    "0x20000656": [
+      "0xb674"
+    ],
+    "0x2000064c": [
+      "0xb21c"
+    ]
+  },
+  "candidate_halfword_scan": [
+    {
+      "address": "0x6546",
+      "instruction": "ldr r3, [r7, #0x38]"
+    },
+    {
+      "address": "0x7e0e",
+      "instruction": "strh r1, [r3, #0x16]"
+    },
+    {
+      "address": "0x89d8",
+      "instruction": "strh r3, [r4, #0x16]"
+    },
+    {
+      "address": "0x901c",
+      "instruction": "ldr r3, [r1, #0x38]"
+    },
+    {
+      "address": "0x9778",
+      "instruction": "ldr r2, [r4, #0x38]"
+    },
+    {
+      "address": "0x9798",
+      "instruction": "ldr r1, [r1, #0x38]"
+    },
+    {
+      "address": "0x97aa",
+      "instruction": "ldr r3, [r4, #0x38]"
+    },
+    {
+      "address": "0xb4fc",
+      "instruction": "ldr r6, [r2, #0x38]"
+    },
+    {
+      "address": "0xb500",
+      "instruction": "ldr r6, [r2, #0x38]"
+    },
+    {
+      "address": "0xb510",
+      "instruction": "ldr r6, [r3, #0x38]"
+    },
+    {
+      "address": "0xb514",
+      "instruction": "ldr r6, [r4, #0x38]"
+    },
+    {
+      "address": "0xb518",
+      "instruction": "ldr r6, [r5, #0x38]"
+    }
+  ],
+  "limits": [
+    "Not control-flow reconstruction or exhaustive alias analysis. Candidate instructions can occur in data.",
+    "Absence of direct literal/access does not exclude generic transport, indirect alias, external callbacks or hardware processing."
+  ]
+}

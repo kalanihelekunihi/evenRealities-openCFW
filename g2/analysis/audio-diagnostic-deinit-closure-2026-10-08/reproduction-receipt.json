@@ -1,0 +1,17 @@
+{
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "source": "g2/components/audio/diagnostic_deinit_offline/deinit.c",
+  "source_sha256": "0df3f677d03ae3dc732eed13a939a5fa3cbae6ccc4b9ee271f8885bb5d688676",
+  "elf": "/tmp/opencfw-audio-deinit/deinit.elf",
+  "elf_sha256": "092303fe2c16da67edbc6e052505fd3cad8a4365e49f85a26908ce1e88a5dba8",
+  "link_script": "audio_codec_control = 0x53ca11; audio_pdm_control = 0x53ca33; audio_unregister = 0x57acd1; audio_file_close = 0x4745f5; audio_encoder_setup = 0x57a927; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }"
+}

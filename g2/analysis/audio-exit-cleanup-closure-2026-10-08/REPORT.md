@@ -1,0 +1,13 @@
+# Audio thread exit: cleanup order and real rejected-context returns
+
+**20 fresh PASS original/independent selected-prefix cases**. [exit.c](../../components/audio/exit_cleanup_offline/exit.c) covers **logger-disabled** exit flow only, not complete logging/OS teardown. Actual first request4C9C3C and actual OS wrappers execute; no return stubs. Task-context live timer/queue operations stop before OS peer entry; delay stops before449376.
+
+Actual53CDC2 first calls4C9C3C(3). That helper merely invokes osEventFlagsSet on group from200040D8+1C with1<<3. **It is an event request, not demonstrated DMA stop or producer-quiescence acknowledgement.** Tests intentionally set this event groupNULL; actual parameter rejection executes and exit ignores its result. No successful request/receiver/stop is tested.
+
+Then timer handle20074A98, if nonzero, is stopped/deleted and global cleared0. Queue handle20003FA4, if nonzero, is deleted and global cleared0. Return values are not checked before clearing handles. Last step loops osDelay(FFFFFFFF), rather than a proven thread free/termination. Logging flags20004543 are0 in these tests; actual log getter executes on original. No logger formatting/callback behavior claimed.
+
+Selected task context with live object stops before TimerStop or QueueDelete, retaining handle: no fabricated success/free. Synthetic ISR-context calls execute real TimerStop/TimerDelete/QueueDelete wrappers, each returningFFFFFFFA(-6,invalid ISR context); exit nevertheless clears corresponding nonzero globals and reaches delay boundary. These are **actual instruction error paths under deliberately synthetic invocation**, not proof the audio task enters ISR context, a leaked object in hardware or safe cleanup. No queue storage/TCB is freed by tested rejection path. PRIMASK/BASEPRI preserved.
+
+This narrows the lifetime conclusion: selected exit code has no explicit producer-stop acknowledgement, queue-drain loop or checked delete status. It does not prove no other thread/event receiver quiesces producers, or that queue-delete is safe while they run. Exact remaining inputs are receiver/producer ordering, bound valid delete/free path and runtime/initialized object state. Timer command/delete can be asynchronous; that dependency remains unexecuted. Case event close/delete/drain is still separately unbound.
+
+Build/run using build_offline.py/verify.py. Image/source/tool/output hashes and20 input/return/boundary records retained. All872 prior seals,110 audit inputs and4 checkpoints preserved; no commits,index,production/device actions. Actual successful queue/timer deletion and mode-request receiver are still actionable source targets; no global exhaustion/patch-safe claim.

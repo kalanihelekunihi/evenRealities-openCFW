@@ -1,0 +1,97 @@
+Original OTA disassembly 0x5a4b88..0x5a4bb0
+005a4b88: mov        r0, sp
+005a4b8a: bl         #0x5a410c
+005a4b8e: ldr.w      r0, [pc, #0x33c]
+005a4b92: ldr        r0, [r0]
+005a4b94: subs       r0, #9
+005a4b96: cmp        r0, #3
+005a4b98: bhs        #0x5a4baa
+005a4b9a: ldr        r0, [pc, #0x334]
+005a4b9c: ldrb       r0, [r0]
+005a4b9e: cmp        r0, #7
+005a4ba0: beq        #0x5a4baa
+005a4ba2: movs       r0, #1
+005a4ba4: ldr        r1, [pc, #0x32c]
+005a4ba6: strb       r0, [r1]
+005a4ba8: b          #0x5a4bb0
+005a4baa: movs       r0, #0
+005a4bac: ldr        r1, [pc, #0x324]
+005a4bae: strb       r0, [r1]
+Original OTA disassembly 0x4801fc..0x480240
+004801fc: ldr.w      r0, [pc, #0x4d0]
+00480200: ldr        r1, [r0]
+00480202: lsrs       r1, r1, #1
+00480204: lsls       r1, r1, #1
+00480206: str        r1, [r0]
+00480208: mov.w      r1, #0x110
+0048020c: str        r1, [r0]
+0048020e: mov.w      r0, #0x100
+00480212: ldr.w      r1, [pc, #0x4c0]
+00480216: str        r0, [r1]
+00480218: movs.w     r0, #-1
+0048021c: ldr.w      r1, [pc, #0x4b8]
+00480220: str        r0, [r1]
+00480222: ldr.w      r1, [pc, #0x4b8]
+00480226: str        r0, [r1]
+00480228: movs.w     r0, #-0x40000000
+0048022c: ldr.w      r1, [pc, #0x4b0]
+00480230: str        r0, [r1]
+00480232: ldr.w      r0, [pc, #0x4b0]
+00480236: ldr        r1, [r0]
+00480238: orrs       r1, r1, #0x40000000
+0048023c: str        r1, [r0]
+0048023e: bx         lr
+Original OTA disassembly 0x480240..0x4802d0
+00480240: push       {r4, lr}
+00480242: movs       r4, r0
+00480244: movs       r1, #0x31
+00480246: movs       r0, #4
+00480248: bl         #0x4c44bc
+0048024c: movs       r0, #6
+0048024e: muls       r4, r0, r4
+00480250: ldr.w      r0, [pc, #0x484]
+00480254: str        r4, [r0]
+00480256: ldr.w      r0, [pc, #0x490]
+0048025a: ldr        r1, [r0]
+0048025c: orrs       r1, r1, #0x8000
+00480260: str        r1, [r0]
+00480262: ldr.w      r0, [pc, #0x46c]
+00480266: ldr        r1, [r0]
+00480268: orrs       r1, r1, #2
+0048026c: str        r1, [r0]
+0048026e: ldr        r1, [r0]
+00480270: bics       r1, r1, #2
+00480274: str        r1, [r0]
+00480276: movs.w     r1, #0x40000
+0048027a: ldr.w      r2, [pc, #0x470]
+0048027e: str        r1, [r2]
+00480280: ldr        r1, [r0]
+00480282: orrs       r1, r1, #1
+00480286: str        r1, [r0]
+00480288: pop        {r4, pc}
+0048028a: ldr.w      r2, [pc, #0x444]
+0048028e: ldr        r1, [r2]
+00480290: lsrs       r1, r1, #1
+00480292: lsls       r1, r1, #1
+00480294: str        r1, [r2]
+00480296: ldr        r1, [r2]
+00480298: orrs       r1, r1, #2
+0048029c: str        r1, [r2]
+0048029e: ldr        r1, [r2]
+004802a0: bics       r1, r1, #2
+004802a4: str        r1, [r2]
+004802a6: movs       r1, #6
+004802a8: muls       r0, r1, r0
+004802aa: ldr.w      r1, [pc, #0x42c]
+004802ae: str        r0, [r1]
+004802b0: movs.w     r0, #-0x40000000
+004802b4: ldr.w      r1, [pc, #0x428]
+004802b8: str        r0, [r1]
+004802ba: movs.w     r0, #0x40000
+004802be: ldr.w      r1, [pc, #0x430]
+004802c2: str        r0, [r1]
+004802c4: ldr        r0, [r2]
+004802c6: orrs       r0, r0, #1
+004802ca: str        r0, [r2]
+004802cc: bx         lr
+004802ce: push       {r7, lr}

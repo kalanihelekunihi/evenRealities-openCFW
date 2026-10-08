@@ -1,0 +1,98 @@
+0053cdc2 1cb5             push {r2, r3, r4, lr}
+0053cdc4 0320             movs r0, #3
+0053cdc6 8cf739ff         bl #0x4c9c3c
+0053cdca 2a4c             ldr r4, [pc, #0xa8]
+0053cdcc 2068             ldr r0, [r4]
+0053cdce 0028             cmp r0, #0
+0053cdd0 07d0             beq #0x53cde2
+0053cdd2 2068             ldr r0, [r4]
+0053cdd4 0cf780fb         bl #0x4494d8
+0053cdd8 2068             ldr r0, [r4]
+0053cdda 0cf7b0fb         bl #0x44953e
+0053cdde 0020             movs r0, #0
+0053cde0 2060             str r0, [r4]
+0053cde2 304c             ldr r4, [pc, #0xc0]
+0053cde4 e068             ldr r0, [r4, #0xc]
+0053cde6 0028             cmp r0, #0
+0053cde8 21d0             beq #0x53ce2e
+0053cdea e068             ldr r0, [r4, #0xc]
+0053cdec 0cf7fefe         bl #0x449bec
+0053cdf0 0020             movs r0, #0
+0053cdf2 e060             str r0, [r4, #0xc]
+0053cdf4 00f76bf9         bl #0x43d0ce
+0053cdf8 8007             lsls r0, r0, #0x1e
+0053cdfa 0ad5             bpl #0x53ce12
+0053cdfc 5748             ldr r0, [pc, #0x15c]
+0053cdfe 0190             str r0, [sp, #4]
+0053ce00 40f25a20         movw r0, #0x25a
+0053ce04 0090             str r0, [sp]
+0053ce06 564b             ldr r3, [pc, #0x158]
+0053ce08 564a             ldr r2, [pc, #0x158]
+0053ce0a 5749             ldr r1, [pc, #0x15c]
+0053ce0c 0420             movs r0, #4
+0053ce0e 00f7b1fb         bl #0x43d574
+0053ce12 00f75cf9         bl #0x43d0ce
+0053ce16 c007             lsls r0, r0, #0x1f
+0053ce18 03d4             bmi #0x53ce22
+0053ce1a 00f758f9         bl #0x43d0ce
+0053ce1e 4007             lsls r0, r0, #0x1d
+0053ce20 05d5             bpl #0x53ce2e
+0053ce22 5249             ldr r1, [pc, #0x148]
+0053ce24 0a00             movs r2, r1
+0053ce26 5ff08050         movs.w r0, #0x10000000
+0053ce2a 00f738f8         bl #0x43ce9e
+0053ce2e 00f74ef9         bl #0x43d0ce
+0053ce32 8007             lsls r0, r0, #0x1e
+0053ce34 0ad5             bpl #0x53ce4c
+0053ce36 4e48             ldr r0, [pc, #0x138]
+0053ce38 0190             str r0, [sp, #4]
+0053ce3a 40f25d20         movw r0, #0x25d
+0053ce3e 0090             str r0, [sp]
+0053ce40 474b             ldr r3, [pc, #0x11c]
+0053ce42 484a             ldr r2, [pc, #0x120]
+0053ce44 4849             ldr r1, [pc, #0x120]
+0053ce46 0420             movs r0, #4
+0053ce48 00f794fb         bl #0x43d574
+0053ce4c 00f73ff9         bl #0x43d0ce
+0053ce50 c007             lsls r0, r0, #0x1f
+0053ce52 03d4             bmi #0x53ce5c
+0053ce54 00f73bf9         bl #0x43d0ce
+0053ce58 4007             lsls r0, r0, #0x1d
+0053ce5a 05d5             bpl #0x53ce68
+0053ce5c 4549             ldr r1, [pc, #0x114]
+0053ce5e 0a00             movs r2, r1
+0053ce60 5ff08050         movs.w r0, #0x10000000
+0053ce64 00f71bf8         bl #0x43ce9e
+0053ce68 5ff0ff30         movs.w r0, #-1
+0053ce6c 0cf783fa         bl #0x449376
+0053ce70 fae7             b #0x53ce68
+004c9c3c 80b5             push {r7, lr}
+004c9c3e 0100             movs r1, r0
+004c9c40 0120             movs r0, #1
+004c9c42 10fa01f1         lsls.w r1, r0, r1
+004c9c46 0448             ldr r0, [pc, #0x10]
+004c9c48 c069             ldr r0, [r0, #0x1c]
+004c9c4a 7ff7cbfc         bl #0x4495e4
+004c9c4e 01bd             pop {r0, pc}
+004c9c50 2048             ldr r0, [pc, #0x80]
+004c9c52 0078             ldrb r0, [r0]
+004c9c54 7047             bx lr
+004c9c56 0000             movs r0, r0
+004c9c58 d840             lsrs r0, r3
+004c9c5a 0020             movs r0, #0
+00449bec 38b5             push {r3, r4, r5, lr}
+00449bee 0400             movs r4, r0
+00449bf0 fff70dfa         bl #0x44900e
+00449bf4 0028             cmp r0, #0
+00449bf6 02d0             beq #0x449bfe
+00449bf8 7ff00505         mvns r5, #5
+00449bfc 08e0             b #0x449c10
+00449bfe 002c             cmp r4, #0
+00449c00 02d1             bne #0x449c08
+00449c02 7ff00305         mvns r5, #3
+00449c06 03e0             b #0x449c10
+00449c08 0025             movs r5, #0
+00449c0a 2000             movs r0, r4
+00449c0c f8f749f9         bl #0x441ea2
+00449c10 2800             movs r0, r5
+00449c12 32bd             pop {r1, r4, r5, pc}

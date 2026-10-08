@@ -1,0 +1,80 @@
+{
+  "raw_payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "load_address": "0x438000",
+  "new_functions": {
+    "hardware_temperature": {
+      "address": "0x5a001c",
+      "end_exclusive": "0x5a00c8",
+      "sha256": "38a50cc07d40a0b1d447b195a21d977b7484f4d3151feead6e34dee388b59991"
+    },
+    "postpone": {
+      "address": "0x5a07e6",
+      "end_exclusive": "0x5a07f0",
+      "sha256": "25ecf9ae2286c9e2a088491125d73344390d883b7e889f4e480429ed557eaea5"
+    },
+    "pending_handle": {
+      "address": "0x5a07f0",
+      "end_exclusive": "0x5a081c",
+      "sha256": "aa7d2ef6ac0925218b33cc1e94af83bc9e0169664465f5a97f2e20841a9b521c"
+    },
+    "ton_initialize": {
+      "address": "0x59fdc2",
+      "end_exclusive": "0x59fe5a",
+      "sha256": "361bef1aa3174ddd82bf397b080c9acfeb49305f7d3c548da563128c6bf94955"
+    },
+    "ton_config_update": {
+      "address": "0x59fe5a",
+      "end_exclusive": "0x59ff98",
+      "sha256": "47706be217e1354ef399181dececcab69e331944c161dd80cea937d4943311ec"
+    },
+    "lp_switch_initialize": {
+      "address": "0x5a085e",
+      "end_exclusive": "0x5a08b6",
+      "sha256": "f2b1e6d2bdacbeb3917a740b15665d1c67356b5bf257bd1be8329f822d0c2acb"
+    },
+    "lp_switch_enable": {
+      "address": "0x5a08b6",
+      "end_exclusive": "0x5a08ca",
+      "sha256": "3b333cb5bf6987caae18a3c3e272c286410f2799228a448ebff2604aa4d39035"
+    },
+    "lp_switch_disable": {
+      "address": "0x5a08ca",
+      "end_exclusive": "0x5a08e4",
+      "sha256": "91ded6f9e1cf5752f96528944986774aa26f111293f66fc7fe31ac405e739f43"
+    },
+    "early_before_enable": {
+      "address": "0x59fd82",
+      "end_exclusive": "0x59fda8",
+      "sha256": "5dfef156810b50a6c8aec3b3c8963d948ced44ac875cc9ea453e13b4e66620f3"
+    },
+    "early_after_enable": {
+      "address": "0x59fda8",
+      "end_exclusive": "0x59fdc2",
+      "sha256": "c90ddfd506c8e50435c01a0e3331f9cc3da1b6b836f5d51b31956df029fb6465"
+    },
+    "middle_before_enable": {
+      "address": "0x5a081c",
+      "end_exclusive": "0x5a0842",
+      "sha256": "6d2402dae2b925c74e6376ac9e7d783aacfe6d823f8299d026202df3e30f509d"
+    },
+    "middle_after_enable": {
+      "address": "0x5a0842",
+      "end_exclusive": "0x5a085e",
+      "sha256": "8ba3e01b253aa983f4b8ccf3e8c0831be516bf2045fda2cf65a63161ffd88937"
+    }
+  },
+  "ton_configuration_data": {
+    "address": "0x789FE0",
+    "length": 9,
+    "hex": "010102010102010202",
+    "sha256": "9b94f6027d1b5964cbe1a4f7ee0fd1a9e8f560c3ace71056fb34e0911297fed5",
+    "meaning": "GPU OFF/LP/HP rows; CPU OFF/LP/HP columns. Configuration data, not executable bytes."
+  },
+  "providers": {
+    "stock_delay": 4720545,
+    "stock_ton_update": 4719555,
+    "stock_buck_enable": 4718189,
+    "stock_save_irq": 4667713,
+    "stock_stimer_running": 4773409
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "cases": {
+    "mask": 192,
+    "divider": 180,
+    "sensor": 864
+  },
+  "elf_sha256": "e3fcd3c290b3e29ea76afdc07cbb301d7a7a4c723bf116ff3433370335be426f",
+  "limits": [
+    "Mask/divider original and native leaf execution, no call stubs.",
+    "Sensor frame generator executes full body but CDAC51bc is explicitly stubbed with matched status/output on both sides.",
+    "Synthetic structures; no physical scan/frame/peripheral validation."
+  ]
+}

@@ -1,0 +1,174 @@
+gpio_get
+00480eee ldr.w r2, [pc, #0x84c] ; [0048173c]=40010000
+00480ef2 cmp r0, #0xe0
+00480ef4 blo #0x480efa
+00480ef6 movs r0, #5
+00480ef8 b #0x480f0a
+00480efa cmp r1, #0
+00480efc bne #0x480f02
+00480efe movs r0, #6
+00480f00 b #0x480f0a
+00480f02 ldr.w r0, [r2, r0, lsl #2]
+00480f06 str r0, [r1]
+00480f08 movs r0, #0
+00480f0a bx lr
+gpio_set
+00480f0c push {r2, r3, r4, r5, r6, lr}
+00480f0e movs r4, r0
+00480f10 movs r6, r1
+00480f12 ldr.w r5, [pc, #0x828] ; [0048173c]=40010000
+00480f16 cmp r4, #0xe0
+00480f18 blo #0x480f1e
+00480f1a movs r0, #5
+00480f1c b #0x480f88
+00480f1e movs r1, r4
+00480f20 lsrs r1, r1, #5
+00480f22 movs r2, #1
+00480f24 ands r0, r4, #0x1f
+00480f28 lsls r2, r0
+00480f2a ldr.w r0, [pc, #0x814] ; [00481740]=00768ba8
+00480f2e ldr.w r0, [r0, r1, lsl #2]
+00480f32 tst r0, r2
+00480f34 bne #0x480f4e
+00480f36 ubfx r0, r6, #0xa, #2
+00480f3a cmp r0, #2
+00480f3c blt #0x480f6a
+00480f3e ldr.w r0, [pc, #0x804] ; [00481744]=00768bc4
+00480f42 ldr.w r0, [r0, r1, lsl #2]
+00480f46 tst r0, r2
+00480f48 bne #0x480f6a
+00480f4a movs r0, #7
+00480f4c b #0x480f88
+00480f4e ubfx r0, r6, #0xd, #3
+00480f52 cmp r0, #0
+00480f54 beq #0x480f6a
+00480f56 ubfx r0, r6, #0xd, #3
+00480f5a cmp r0, #6
+00480f5c beq #0x480f6a
+00480f5e ubfx r0, r6, #0xd, #3
+00480f62 cmp r0, #1
+00480f64 beq #0x480f6a
+00480f66 movs r0, #7
+00480f68 b #0x480f88
+00480f6a bl #0x473940
+00480f6e str r0, [sp]
+00480f70 ldr.w r0, [pc, #0x7d4] ; [00481748]=40010400
+00480f74 movs r1, #0x73
+00480f76 str r1, [r0]
+00480f78 str.w r6, [r5, r4, lsl #2]
+00480f7c movs r1, #0
+00480f7e str r1, [r0]
+00480f80 ldr r0, [sp]
+00480f82 msr primask, r0
+00480f86 movs r0, #0
+00480f88 pop {r1, r2, r4, r5, r6, pc}
+clock_reference_update
+0044b0b6 push {r2, r3, r4, lr}
+0044b0b8 movs r4, r0
+0044b0ba bl #0x473940
+0044b0be str r0, [sp]
+0044b0c0 ldr.w r0, [pc, #0x4ac] ; [0044b570]=40008858
+0044b0c4 uxtb r4, r4
+0044b0c6 ldr r1, [r0]
+0044b0c8 bfi r1, r4, #6, #1
+0044b0cc str r1, [r0]
+0044b0ce ldr r0, [sp]
+0044b0d0 msr primask, r0
+0044b0d4 pop {r0, r1, r4, pc}
+clock_requests_update
+0044b0d6 push {r2, r3, r4, r5, r6, lr}
+0044b0d8 movs r5, r0
+0044b0da movs r6, r1
+0044b0dc movs r4, #0
+0044b0de bl #0x473940
+0044b0e2 str r0, [sp]
+0044b0e4 ldr.w r2, [pc, #0x48c] ; [0044b574]=200740ec
+0044b0e8 uxtb r5, r5
+0044b0ea strb r6, [r2, r5]
+0044b0ec movs r1, #0
+0044b0ee b #0x44b0fa
+0044b0f0 movs r0, r1
+0044b0f2 uxtb r0, r0
+0044b0f4 ldrb r0, [r2, r0]
+0044b0f6 orrs r4, r0
+0044b0f8 adds r1, r1, #1
+0044b0fa movs r0, r1
+0044b0fc uxtb r0, r0
+0044b0fe cmp r0, #6
+0044b100 blt #0x44b0f0
+0044b102 ldr.w r0, [pc, #0x46c] ; [0044b570]=40008858
+0044b106 movs r1, r4
+0044b108 uxtb r1, r1
+0044b10a ldr r2, [r0]
+0044b10c bfi r2, r1, #1, #1
+0044b110 str r2, [r0]
+0044b112 movs r1, r4
+0044b114 uxtb r1, r1
+0044b116 lsrs r1, r1, #1
+0044b118 uxtb r1, r1
+0044b11a ldr r2, [r0]
+0044b11c bfi r2, r1, #2, #1
+0044b120 str r2, [r0]
+0044b122 movs r1, r4
+0044b124 uxtb r1, r1
+0044b126 lsrs r1, r1, #2
+0044b128 uxtb r1, r1
+0044b12a ldr r2, [r0]
+0044b12c bfi r2, r1, #3, #1
+0044b130 str r2, [r0]
+0044b132 movs r1, r4
+0044b134 uxtb r1, r1
+0044b136 lsrs r1, r1, #3
+0044b138 uxtb r1, r1
+0044b13a ldr r2, [r0]
+0044b13c bfi r2, r1, #4, #1
+0044b140 str r2, [r0]
+0044b142 uxtb r4, r4
+0044b144 lsrs r4, r4, #4
+0044b146 uxtb r4, r4
+0044b148 ldr r1, [r0]
+0044b14a bfi r1, r4, #5, #1
+0044b14e str r1, [r0]
+0044b150 ldr r0, [sp]
+0044b152 msr primask, r0
+0044b156 pop {r0, r1, r4, r5, r6, pc}
+platform_continuation
+004c2af4 movs r1, #0
+004c2af6 movs r0, #0
+004c2af8 bl #0x47fea0
+platform_wrapper
+004c2ae8 push {lr}
+004c2aea sub sp, #0x1c
+004c2aec bl #0x4c2b30
+004c2af0 bl #0x47fae8
+004c2af4 movs r1, #0
+004c2af6 movs r0, #0
+004c2af8 bl #0x47fea0
+004c2afc mov r0, sp
+004c2afe vmov.f32 s0, #2.500000e+01
+004c2b02 bl #0x480028
+004c2b06 add r0, sp, #8
+004c2b08 ldr.w r1, [pc, #0x564] ; [004c3070]=0077d8f8
+004c2b0c movs r2, #0x14
+004c2b0e bl #0x439c04
+004c2b12 add r0, sp, #8
+004c2b14 bl #0x4c45e2
+004c2b18 movs r2, #0
+004c2b1a movs r1, #0
+004c2b1c movs r0, #4
+004c2b1e bl #0x4c446c
+004c2b22 movs r2, #0
+004c2b24 movs r1, #0
+004c2b26 movs r0, #5
+004c2b28 bl #0x4c446c
+004c2b2c add sp, #0x1c
+004c2b2e pop {pc}
+application_init_prefix
+005cdd14 push {r4, lr}
+005cdd16 ldr.w r0, [pc, #0x420] ; [005ce138]=20073ea4
+005cdd1a bl #0x4d3554
+005cdd1e bl #0x4b29d8
+005cdd22 bl #0x44b068
+005cdd26 movs r0, #1
+005cdd28 bl #0x44b07e
+005cdd2c bl #0x4c2ae8

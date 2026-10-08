@@ -1,0 +1,16 @@
+{
+  "existing_references": [
+    {"path":"third-party/upstream/infineon-mtb-pdl-cat2","url":"https://github.com/Infineon/mtb-pdl-cat2.git","pin":"35f1714623cfea682d5e285af80d50416b4c7bbc","use":"Exact Capture/ConfigureScan attribution and behavioral Configure comparator"},
+    {"path":"third-party/upstream/infineon-capsense","url":"https://github.com/Infineon/capsense.git","pin":"25fa1cd5abb4cc66981b04f8872d57d74e398976","release":"3.0.1","limit":"Does not contain required LP sensing family"}
+  ],
+  "additional_reference": {
+    "suggested_path":"third-party/reference/infineon-capsense-6_10",
+    "url":"https://github.com/Infineon/capsense.git",
+    "pin":"247a9a0f79eb976f144f5fbeb29488c1c2606517",
+    "release":"6.10.0",
+    "use":"Pinned semantic comparator for recovered MSCLP LP processing, mode and generator family",
+    "unique_firmware_producer_attribution":false
+  },
+  "index_or_gitlink_mutated":false,
+  "reason_not_installed":"Proper submodule registration changes the Git index, explicitly prohibited for this task. Comparator downloads and provenance receipts are usable now."
+}

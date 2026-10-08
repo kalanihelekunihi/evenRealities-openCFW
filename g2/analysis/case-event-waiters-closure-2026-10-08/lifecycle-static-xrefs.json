@@ -1,0 +1,48 @@
+{
+  "function_manifest": "g2/research/corpus/case/ghidra/open-2026-09-29/functions-000.jsonl",
+  "manifest_sha256": "5447649e214aaf10cbe916d3474dcdfbece16a0570d3d243dc9e34e64ed39ab7",
+  "method": "Capstone direct BL targets in registered function ranges only; indirect calls/unregistered regions excluded.",
+  "references": [
+    {
+      "caller": "08006968",
+      "call_address": "0x8006a06",
+      "target": "#0x800a836"
+    },
+    {
+      "caller": "0800aa48",
+      "call_address": "0x800aae2",
+      "target": "#0x800c030"
+    },
+    {
+      "caller": "0800ace4",
+      "call_address": "0x800ad10",
+      "target": "#0x800adb8"
+    },
+    {
+      "caller": "0800adb8",
+      "call_address": "0x800add2",
+      "target": "#0x800c030"
+    },
+    {
+      "caller": "0800adb8",
+      "call_address": "0x800add8",
+      "target": "#0x800c030"
+    },
+    {
+      "caller": "0800adb8",
+      "call_address": "0x800ade0",
+      "target": "#0x800c030"
+    },
+    {
+      "caller": "0800b0fc",
+      "call_address": "0x800b1da",
+      "target": "#0x800c030"
+    },
+    {
+      "caller": "0800c9a8",
+      "call_address": "0x800c9d0",
+      "target": "#0x800c030"
+    }
+  ],
+  "limits": "No bound stock event-group-delete function identified; this is not proof that deletion is globally impossible or of whole-system drain."
+}

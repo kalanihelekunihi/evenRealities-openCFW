@@ -1,0 +1,31 @@
+{
+  "raw_payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "load_address": "0x438000",
+  "functions": {
+    "reset": {
+      "address": "0x5a1da4",
+      "end_exclusive": "0x5a1df4",
+      "sha256": "13aef1e4b89b25872040a8b1ccee609f224442b5b5fc07fd2580fac72411a4c1",
+      "native": true
+    },
+    "temperature_wrapper": {
+      "address": "0x480028",
+      "end_exclusive": "0x480058",
+      "sha256": "934e3358998202b9f7978b44d142914f46c4d776c3583ff37fcbcb69b09418f5",
+      "native": false
+    },
+    "generic_control": {
+      "address": "0x480312",
+      "end_exclusive": "0x48032c",
+      "sha256": "7326c380a8adcc941d53fc273b9e504fce5ee461ecd3203ec89d8393cdf20ffb",
+      "native": false
+    }
+  },
+  "otp_descriptor": {
+    "address": "0x6BECB0+29*16",
+    "enable_register": "0x40021004",
+    "enable_mask": "0x08000000",
+    "status_register": "0x40021008",
+    "status_mask": "0x08000000"
+  }
+}

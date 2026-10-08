@@ -1,0 +1,16 @@
+{
+  "pin": "5efc0228528a8adce5eae0d226fac85d2551eb3b",
+  "files": {
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/am_hal_pwrctrl.c": "84cc1da6a01dd46f29e0465074ad92602c4dd6d7a12f7f4596aef64a9a250586",
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/am_hal_spotmgr.c": "8e266d10f7622324f786db522b48919a48ec95998ce1533f8effe36ecc2be3cc",
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/am_hal_spotmgr_pcm2_2.c": "eac14263dc23ea211b917e9c3feb69695eb511d204961fdf301c1b0fa9abbeb7",
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/mcu/am_hal_sysctrl.c": "4ad08cded5a8fb86339ea3b8d442a3dd25da721ddd7275ff580bdc765c5c6e96",
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/mcu/am_hal_sysctrl_clk_mux_reset.h": "e2aef6d0eb83cd1598f9bfba6403923915e958f3c5b8a7b5dfd1c332b9a8d5ac"
+  },
+  "new_source_findings": [
+    "Clock-mux reset source is hal/mcu/am_hal_sysctrl.c:791, not an am_hal_clkmux.c file.",
+    "Signature0x5AF0 in retained HAL state is required along with !POASTAT."
+  ],
+  "download_needed": false,
+  "source_exhausted": false
+}

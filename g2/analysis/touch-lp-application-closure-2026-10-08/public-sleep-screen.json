@@ -1,0 +1,101 @@
+{
+  "pdl_pin": "35f1714623cfea682d5e285af80d50416b4c7bbc",
+  "source_sha256": "be43e5aa704c99acca45850db68094977a274dcb1d4335fafca753269c5a93b8",
+  "environment": "#include <stdint.h>\n#include <stddef.h>\ntypedef uint32_t cy_en_syspm_status_t;\n#define CY_SYSPM_DEEPSLEEP 1u\n#define CY_SYSPM_SUCCESS 0u\n#define CY_SYSPM_CHECK_READY 1u\n#define CY_SYSPM_CHECK_FAIL 2u\n#define CY_SYSPM_BEFORE_TRANSITION 4u\n#define CY_SYSPM_AFTER_TRANSITION 8u\nextern void *pmCallbackRoot[];\nuint32_t Cy_SysPm_ExecuteCallback(uint32_t,uint32_t);\nuint32_t Cy_SysLib_EnterCriticalSection(void);\nvoid Cy_SysLib_ExitCriticalSection(uint32_t);\nvoid Cy_SysPm_CpuEnterDeepSleepNoCallbacks(void);\n#define SRSS_PWR_KEY_DELAY (*(volatile uint32_t *)0x40030004u)\n#define SFLASH_DPSLP_KEY_DELAY (*(volatile const uint16_t *)0x0ffff152u)\n#define SCB_SCR (*(volatile uint32_t *)0xe000ed10u)\n#define SCB_SCR_SLEEPDEEP_Msk 4u\n#define __WFI() __asm volatile(\"wfi\")\n",
+  "comparisons": [
+    {
+      "function": "Cy_SysPm_CpuEnterDeepSleep",
+      "stock_start": "0xa58c",
+      "optimization": "Og",
+      "stock_extent": 104,
+      "public_extent": 104,
+      "exact": true,
+      "stock_sha256": "67c1d9529de5d0ac272acc1e120f060e861cee20eb496b19a573231483668c38",
+      "public_sha256": "67c1d9529de5d0ac272acc1e120f060e861cee20eb496b19a573231483668c38",
+      "matching_addresses": [
+        "0xa58c"
+      ]
+    },
+    {
+      "function": "Cy_SysPm_CpuEnterDeepSleep",
+      "stock_start": "0xa58c",
+      "optimization": "O1",
+      "stock_extent": 104,
+      "public_extent": 100,
+      "exact": false,
+      "stock_sha256": "67c1d9529de5d0ac272acc1e120f060e861cee20eb496b19a573231483668c38",
+      "public_sha256": "69c1f11b2110c1259ac7111abf80926a477698fba7626d4835614fb7cfcfc423",
+      "matching_addresses": []
+    },
+    {
+      "function": "Cy_SysPm_CpuEnterDeepSleep",
+      "stock_start": "0xa58c",
+      "optimization": "O2",
+      "stock_extent": 104,
+      "public_extent": 92,
+      "exact": false,
+      "stock_sha256": "67c1d9529de5d0ac272acc1e120f060e861cee20eb496b19a573231483668c38",
+      "public_sha256": "b388f726f2629843ecb64dda163d99e329f18206eeb5c10017e544f664215517",
+      "matching_addresses": []
+    },
+    {
+      "function": "Cy_SysPm_CpuEnterDeepSleep",
+      "stock_start": "0xa58c",
+      "optimization": "Os",
+      "stock_extent": 104,
+      "public_extent": 96,
+      "exact": false,
+      "stock_sha256": "67c1d9529de5d0ac272acc1e120f060e861cee20eb496b19a573231483668c38",
+      "public_sha256": "b05744bd72f5c7eee7872ea8946a754d48d1f4e495c6030724bbdf825dc1457c",
+      "matching_addresses": []
+    },
+    {
+      "function": "Cy_SysPm_CpuEnterDeepSleepNoCallbacks",
+      "stock_start": "0xa388",
+      "optimization": "Og",
+      "stock_extent": 40,
+      "public_extent": 36,
+      "exact": false,
+      "stock_sha256": "0e4b4c44d64537314c82a430fd1c38800a937fd0806d8c61a6c8c8e10e00f6b8",
+      "public_sha256": "ad032409ccbc6fa566ec4b0ee587cecb1a880c92401106af968ae768a6edd576",
+      "matching_addresses": []
+    },
+    {
+      "function": "Cy_SysPm_CpuEnterDeepSleepNoCallbacks",
+      "stock_start": "0xa388",
+      "optimization": "O1",
+      "stock_extent": 40,
+      "public_extent": 36,
+      "exact": false,
+      "stock_sha256": "0e4b4c44d64537314c82a430fd1c38800a937fd0806d8c61a6c8c8e10e00f6b8",
+      "public_sha256": "ad032409ccbc6fa566ec4b0ee587cecb1a880c92401106af968ae768a6edd576",
+      "matching_addresses": []
+    },
+    {
+      "function": "Cy_SysPm_CpuEnterDeepSleepNoCallbacks",
+      "stock_start": "0xa388",
+      "optimization": "O2",
+      "stock_extent": 40,
+      "public_extent": 36,
+      "exact": false,
+      "stock_sha256": "0e4b4c44d64537314c82a430fd1c38800a937fd0806d8c61a6c8c8e10e00f6b8",
+      "public_sha256": "538819868bf1d06ae6736e5737a0127f6bc31d3f41cdb2da3cd102d91fe1add4",
+      "matching_addresses": []
+    },
+    {
+      "function": "Cy_SysPm_CpuEnterDeepSleepNoCallbacks",
+      "stock_start": "0xa388",
+      "optimization": "Os",
+      "stock_extent": 40,
+      "public_extent": 36,
+      "exact": false,
+      "stock_sha256": "0e4b4c44d64537314c82a430fd1c38800a937fd0806d8c61a6c8c8e10e00f6b8",
+      "public_sha256": "f3e5c7032d87359a5982c8af3bb33e409670336f1a7a3848bea5434d1b8ee3c9",
+      "matching_addresses": []
+    }
+  ],
+  "limits": [
+    "Verbatim selected public bodies with explicit macros and fixed resolved firmware peers/global addresses; not complete SDK rebuild.",
+    "No callback-body, physical sleep/wakeup/IRQ or uniquely identified compiler/release claim."
+  ]
+}

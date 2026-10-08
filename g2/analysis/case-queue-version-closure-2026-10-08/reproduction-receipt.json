@@ -1,0 +1,35 @@
+{
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "elf": "/tmp/opencfw-case-queue-version-final/queue.elf",
+  "elf_sha256": "67e752379d258bd31744c37469e6dcf05216efc37f23f2d15c0ae749263951d2",
+  "flags": [
+    "-mcpu=cortex-m0plus",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "sources": [
+    {
+      "version": "v1043",
+      "source": "g2/analysis/case-event-waiters-closure-2026-10-08/upstream-queue-v1043.c",
+      "sha256": "f8f25c5e814b240712ef636f437c5730b3dde8fc079cefdde85087676e1ff418",
+      "body_sha256": "00ca86d368b615a55ea498704dc5cd0e424a27124d12ae7782c09f16de2aa0be",
+      "macro": ""
+    },
+    {
+      "version": "v1051",
+      "source": "g2/analysis/case-deferred-event-closure-2026-10-08/upstream-queue.c",
+      "sha256": "5cdf4fa35fe059446effff5bf20deaf83ddffb08921bc198fda106b1d17dd894",
+      "body_sha256": "84cad92344693f9643f6ad7f0f179c5cc5541903c7ed0c0aeffbaf02dd4b28b7",
+      "macro": "#define prvIncrementQueueTxLock( pxQueue, cTxLock )                           \\\n    {                                                                         \\\n        const UBaseType_t uxNumberOfTasks = uxTaskGetNumberOfTasks();         \\\n        if( ( UBaseType_t ) ( cTxLock ) < uxNumberOfTasks )                   \\\n        {                                                                     \\\n            configASSERT( ( cTxLock ) != queueINT8_MAX );                     \\\n            ( pxQueue )->cTxLock = ( int8_t ) ( ( cTxLock ) + ( int8_t ) 1 ); \\\n        }                                                                     \\\n    }\n"
+    }
+  ],
+  "public_abi_scaffold": "#include \"deferred.h\"\n#include <stddef.h>\ntypedef int32_t BaseType_t;\ntypedef uint32_t UBaseType_t;\ntypedef case_queue Queue_t;\ntypedef case_queue *QueueHandle_t;\n#define uxItemSize item_size\n#define uxMessagesWaiting messages\n#define uxLength length\n#define cTxLock tx_lock\n#define xTasksWaitingToReceive receive_wait\n#define queueOVERWRITE 2\n#define queueUNLOCKED (-1)\n#define queueINT8_MAX ((int8_t)127)\n#define configUSE_QUEUE_SETS 0\n#define pdFALSE 0\n#define pdTRUE 1\n#define pdPASS 1\n#define errQUEUE_FULL 0\n#define listLIST_IS_EMPTY(l) ((l)->count==0)\n#define configASSERT(x) do{if(!(x)){__asm volatile(\"cpsid i\");for(;;){}}}while(0)\n#define portASSERT_IF_INTERRUPT_PRIORITY_INVALID() ((void)0)\n#define portSET_INTERRUPT_MASK_FROM_ISR() case_mask_save()\n#define portCLEAR_INTERRUPT_MASK_FROM_ISR(s) case_mask_restore(s)\n#define traceQUEUE_SEND_FROM_ISR(q) ((void)0)\n#define traceQUEUE_SEND_FROM_ISR_FAILED(q) ((void)0)\n#define mtCOVERAGE_TEST_MARKER() ((void)0)\nuint32_t case_mask_save(void);\nvoid case_mask_restore(uint32_t);\nint32_t prvCopyDataToQueue(Queue_t *,const void *,int32_t);\nint32_t xTaskRemoveFromEventList(case_list *);\n/* Explicit public fixture accessor, not a stock function attribution. */\nstatic uint32_t uxTaskGetNumberOfTasks(void){return *(volatile uint32_t *)0x20000130u;}\n",
+  "limits": [
+    "Full selected public function bodies compile, with explicit ARM32 queue aliases, queue sets disabled, task count fixture accessor.",
+    "Real original copy/critical providers are common peers. No unique complete kernel/configuration/compiler attribution."
+  ]
+}

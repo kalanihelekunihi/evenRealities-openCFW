@@ -1,0 +1,27 @@
+{
+  "status": "PASS",
+  "elf_sha256": "3ca2ac60ed5e045cfed2612188472c6cbede1912649092e6826575d7250425f1",
+  "new_cases": 1266,
+  "earlier_regressions": 5622,
+  "total_comparisons": 6888,
+  "counts": {
+    "hardware_temperature": 784,
+    "postpone": 3,
+    "pending_handle": 144,
+    "ton_initialize": 45,
+    "ton_config_update": 192,
+    "lp_switch_initialize": 12,
+    "lp_switch_enable": 12,
+    "lp_switch_disable": 18,
+    "early_before_enable": 14,
+    "early_after_enable": 14,
+    "middle_before_enable": 14,
+    "middle_after_enable": 14
+  },
+  "source_hashes_match": true,
+  "test_script_hashes": {
+    "verify.py": "4a82a20e39a7e9a0cc82c426683cae1c5222ded526b37f05a81a8f26c6cc72d8",
+    "verify_pending.py": "22ac4a11e4d169becf5945ed8d751c7229f208ddaaa04dc4f4c98823c1dbb363",
+    "machine.py": "d6134c300f176871207b8cad353f9afd22bf83f4aa89eae270dbf832f145cc48"
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "status": "PASS",
+  "comparisons": 2,
+  "compared_bytes": 17752,
+  "tokens": 2610,
+  "elf_sha256": "2c77b4bf381b9cbe804815ca9a5bbcb229e54c8988976ec67d1f2d82bc44577f",
+  "record": "0x75d3f4",
+  "decoder": "0x43a11e",
+  "source": "0x79189e",
+  "source_end": "0x79430e",
+  "compressed_bytes": 10864,
+  "destination": "0x20000000",
+  "decoded_sha256": "df1a1fdf7b2792a7c4ef7a2c5cc6d1423bc7833b556fdfcedb8d6d927fbbb743",
+  "rows": [
+    {
+      "slot": 0,
+      "type": 0,
+      "padding": 0,
+      "callback": "0x53c861"
+    },
+    {
+      "slot": 1,
+      "type": 1,
+      "padding": 0,
+      "callback": "0x53c7b1"
+    },
+    {
+      "slot": 2,
+      "type": 2,
+      "padding": 0,
+      "callback": "0x53c6f3"
+    },
+    {
+      "slot": 3,
+      "type": 3,
+      "padding": 0,
+      "callback": "0x53c777"
+    },
+    {
+      "slot": 4,
+      "type": 4,
+      "padding": 0,
+      "callback": "0x53c9fb"
+    },
+    {
+      "slot": 5,
+      "type": 5,
+      "padding": 0,
+      "callback": "0x53ca73"
+    },
+    {
+      "slot": 6,
+      "type": 6,
+      "padding": 0,
+      "callback": "0x53c92f"
+    },
+    {
+      "slot": 7,
+      "type": 8,
+      "padding": 0,
+      "callback": "0x53cca7"
+    }
+  ],
+  "firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "limits": [
+    "Actual decoder only, not reset runner, all initializer records, later writes or booted runtime.",
+    "Full authenticated RAM data record compared to independent Python decoding; no call stubs."
+  ]
+}

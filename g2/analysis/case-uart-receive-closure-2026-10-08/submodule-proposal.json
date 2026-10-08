@@ -1,0 +1,16 @@
+{
+  "existing_path": "third-party/upstream/stm32g0xx-hal-driver",
+  "existing_gitlink": "a0cf8a8b96183fdcc2e3b1cf0bcf0825f27bd0c9",
+  "candidate_url": "https://github.com/STMicroelectronics/stm32g0xx-hal-driver.git",
+  "candidate_commit": "ba4210f57d3c863d31ace271219a12f43ab59847",
+  "candidate_release": "v1.4.5",
+  "scope": [
+    "UART_RxISR_8BIT",
+    "UART_RxISR_16BIT"
+  ],
+  "status": "Pinned selected official source comparator; no global re-pin justified, no gitlink/index mutation.",
+  "remaining": [
+    "Other HAL functions/config/compiler not whole-image matched",
+    "Private patch lineage and exact byte production unproven"
+  ]
+}

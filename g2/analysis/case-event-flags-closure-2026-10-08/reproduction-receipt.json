@@ -1,0 +1,47 @@
+{
+  "sources": [
+    {
+      "version": "v1031",
+      "pin": "677bb7fcbf38f07e106735c7c947f4efb2714b0f",
+      "url": "https://raw.githubusercontent.com/ARM-software/CMSIS-FreeRTOS/677bb7fcbf38f07e106735c7c947f4efb2714b0f/CMSIS/RTOS2/FreeRTOS/Source/cmsis_os2.c",
+      "source_sha256": "8e5cdabb92f1319a5ebea0ec4fb5d021fb75ed2b2f9e62bacaabefd16198a1fe",
+      "selected_body_sha256": "af637d6598353b15dfe59d0828ba4b80c4311ad29f1391d60b6f09599d9f2466",
+      "translation_unit_sha256": "efbf1c2a52fe65d0223ad95ebbfb92708ff3c4da9dfca3b058f030958d8526f0"
+    },
+    {
+      "version": "v1046",
+      "pin": "943dc0607e28d786f9b363e5da60047c1ea755d8",
+      "url": "https://raw.githubusercontent.com/ARM-software/CMSIS-FreeRTOS/943dc0607e28d786f9b363e5da60047c1ea755d8/CMSIS/RTOS2/FreeRTOS/Source/cmsis_os2.c",
+      "source_sha256": "059b49b0fe6f73c48ef7906b9b1ac18602c582322740c66e19941dfdfd7ab563",
+      "selected_body_sha256": "457ecd156db3857970796331887b98ee430dd367f8d619472a4cf8a22a27ee2f",
+      "translation_unit_sha256": "a78e1386f0d7f3acef3fe47129fd656f800a7aa29f5850868b9adb4537e89348"
+    },
+    {
+      "version": "v1051",
+      "pin": "d213f261b5be6bb29a7cce8b84071706b72f4d53",
+      "url": "https://raw.githubusercontent.com/ARM-software/CMSIS-FreeRTOS/d213f261b5be6bb29a7cce8b84071706b72f4d53/CMSIS/RTOS2/FreeRTOS/Source/cmsis_os2.c",
+      "source_sha256": "8a0d60b56ad30c4f7957f64fa581158017b6812ec94b832d974c773ae4f2bc36",
+      "selected_body_sha256": "1c3a3ba84319cd0082c156a866114ae811177cb1d0b42451ed315e15f31f32b2",
+      "translation_unit_sha256": "5b606067b03418ff034d7a658b3e4d1bfd3b41bc0c9a0a92ad3d83fbad1912d3"
+    }
+  ],
+  "public_environment": "#include <stdint.h>\n#include <stddef.h>\ntypedef void *osEventFlagsId_t,*EventGroupHandle_t;\ntypedef int32_t BaseType_t;\ntypedef uint32_t EventBits_t;\n#define EVENT_FLAGS_INVALID_BITS 0xff000000u\n#define configUSE_OS2_EVENTFLAGS_FROM_ISR 1\n#define osErrorParameter (-4)\n#define osErrorResource (-3)\n#define pdFALSE 0\n#define pdFAIL 0\nstatic uint32_t irq(void){uint32_t x;__asm volatile(\"mrs %0, ipsr\":\"=r\"(x));return x;}\n#define IS_IRQ() irq()\n/* Explicit stock-matching callback-context environment, not full IRQ_Context implementation. */\n#define IRQ_Context() irq()\n#define portYIELD_FROM_ISR(y) do{if(y)*(volatile uint32_t *)0xe000ed04u=0x10000000u;}while(0)\nint32_t xEventGroupSetBitsFromISR(void *,uint32_t,int32_t *);\nuint32_t xEventGroupSetBits(void *,uint32_t);\nuint32_t xEventGroupGetBitsFromISR(void *);\n",
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m0plus",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "source_sha256": "0a6495a5b69b1585b49a03f7360d3d8807c98032630328b395d55da5f8bec5ac",
+  "kernel_models_sha256": "39932260a765842bd1bf74cc2b3e734c857e38d8cab424cf7a8a43490146d913",
+  "elf": "/tmp/opencfw-case-event-flags-final/events.elf",
+  "elf_sha256": "d2d0d1a979312551809326e29d95d2bd75c10b50bf3472c3b8a1384691f14710",
+  "limits": [
+    "Actual kernel child entries are replaced by compiled result models in verification; explicitly not full wrapper/kernel integration proof.",
+    "Public function bodies retained except export name; IRQ_Context scaffold is IPSR-only, not uniquely attributed source configuration."
+  ]
+}

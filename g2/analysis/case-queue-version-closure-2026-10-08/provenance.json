@@ -1,0 +1,21 @@
+{
+  "firmware": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+  "firmware_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+  "raw_sha256": "773b6d4cfdaf0a5a74a557e3babe8222a0ae813436b76a7437c1096d2c60d677",
+  "architecture": "Cortex-M0+ Thumb",
+  "load_address": "0x08000000",
+  "wrapper_bytes": 32,
+  "selected_windows": [
+    {
+      "start": "0x800c7a8",
+      "end_exclusive": "0x800c83a",
+      "sha256": "25ed2f4738dd79469436be2719114f2b02c11eed38dee49bf020f7b3f93b3633"
+    },
+    {
+      "start": "0x80000f4",
+      "end_exclusive": "0x8000102",
+      "sha256": "746ce6507d805245ecdcbdfdd2a4637d46737e19e0a0614ba248439bcd572a97"
+    }
+  ],
+  "limits": "Selected windows include unexecuted branches/data; no full-source or exact-byte coverage claim."
+}

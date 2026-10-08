@@ -1,0 +1,17 @@
+{
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "source": "g2/components/audio/encoder_setup_offline/setup.c",
+  "source_sha256": "dc0044a28b2feabe2b34b08c9c1ebc25716fac2f5240811307c3248682216dd3",
+  "elf": "/tmp/opencfw-audio-encoder-setup/setup.elf",
+  "elf_sha256": "07ab674688b55fd3da0dc5307a4bec70ce7c8b2d16ac4f67c95b7cc66767d6b9",
+  "link_script": "SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }"
+}

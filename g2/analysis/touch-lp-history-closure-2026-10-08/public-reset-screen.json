@@ -1,0 +1,61 @@
+{
+  "function": "Cy_CapSense_TuInitialize",
+  "pin": "247a9a0f79eb976f144f5fbeb29488c1c2606517",
+  "source_sha256": "d85ebbd1cd19977b8edea82589cfdf281632e08f43aadc905dd75f3dac4f928c",
+  "translation_unit_sha256": "d78f7b1ae7597304aafa754be4256c9071fbcbf8d4b179aab228d5294126d15c",
+  "environment": "#include <stdint.h>\n#include <stddef.h>\n#define CY_CAPSENSE_TU_CMD_NONE_E 0u\n#define CY_CAPSENSE_TU_FSM_RUNNING 0u\n#define CY_CAPSENSE_PLATFORM_BLOCK_FIFTH_GEN_LP 1\n/* Explicit minimal ARM32 fields; enum values checked in pinned structure.h. */\ntypedef struct { uint8_t pad0[2]; uint16_t tunerCmd; uint8_t pad1[2]; uint8_t tunerSt; uint8_t pad2[15]; uint16_t lpDataSt; uint8_t pad3[4]; uint8_t lpScanSt; } cy_stc_capsense_common_context_t;\ntypedef struct { void *ptrCommonConfig; cy_stc_capsense_common_context_t *ptrCommonContext; } cy_stc_capsense_context_t;\n_Static_assert(offsetof(cy_stc_capsense_context_t,ptrCommonContext)==4,\"common offset\");\n_Static_assert(offsetof(cy_stc_capsense_common_context_t,tunerCmd)==2,\"cmd offset\");\n_Static_assert(offsetof(cy_stc_capsense_common_context_t,tunerSt)==6,\"state offset\");\n_Static_assert(offsetof(cy_stc_capsense_common_context_t,lpDataSt)==22,\"gate offset\");\n_Static_assert(offsetof(cy_stc_capsense_common_context_t,lpScanSt)==28,\"baseline offset\");\n",
+  "comparisons": [
+    {
+      "optimization": "Og",
+      "stock_address": "0x7e04",
+      "stock_extent": 16,
+      "public_extent": 16,
+      "exact": true,
+      "relocations": 0,
+      "public_sha256": "f70ee582797134cef238fbfc65c959c65794400cb5f8a2901f64e4750ed6a61f",
+      "stock_sha256": "f70ee582797134cef238fbfc65c959c65794400cb5f8a2901f64e4750ed6a61f",
+      "matching_offsets": [
+        "0x7e04"
+      ]
+    },
+    {
+      "optimization": "O1",
+      "stock_address": "0x7e04",
+      "stock_extent": 16,
+      "public_extent": 16,
+      "exact": true,
+      "relocations": 0,
+      "public_sha256": "f70ee582797134cef238fbfc65c959c65794400cb5f8a2901f64e4750ed6a61f",
+      "stock_sha256": "f70ee582797134cef238fbfc65c959c65794400cb5f8a2901f64e4750ed6a61f",
+      "matching_offsets": [
+        "0x7e04"
+      ]
+    },
+    {
+      "optimization": "O2",
+      "stock_address": "0x7e04",
+      "stock_extent": 16,
+      "public_extent": 16,
+      "exact": false,
+      "relocations": 0,
+      "public_sha256": "52aab9e0a2f20bb4ad5f70e19d32c41a4a184b1c00f3ca5d01484cc7b7cef721",
+      "stock_sha256": "f70ee582797134cef238fbfc65c959c65794400cb5f8a2901f64e4750ed6a61f",
+      "matching_offsets": []
+    },
+    {
+      "optimization": "Os",
+      "stock_address": "0x7e04",
+      "stock_extent": 16,
+      "public_extent": 14,
+      "exact": false,
+      "relocations": 0,
+      "public_sha256": "3c72d289ec665dc20ee0d9c966684a0f1b03059ee63221c06fc1b190f5230f4c",
+      "stock_sha256": "f70ee582797134cef238fbfc65c959c65794400cb5f8a2901f64e4750ed6a61f",
+      "matching_offsets": []
+    }
+  ],
+  "limits": [
+    "Verbatim selected public function, explicit minimal ARM32 layout and macros; not a complete SDK build.",
+    "No uniquely identified producer compiler/release or callback-body claim."
+  ]
+}

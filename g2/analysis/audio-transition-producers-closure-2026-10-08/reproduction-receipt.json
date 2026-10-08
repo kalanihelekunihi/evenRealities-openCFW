@@ -1,0 +1,31 @@
+{
+  "sources": {
+    "g2/components/audio/transition_producers_offline/producers.c": "54de767f92cb156065503993621421c8df55af732223dfb021ff18835c7ce700",
+    "g2/components/audio/transition_producers_offline/producers.h": "34dadf217f2141351d0faefca037c9c12ef12afdfaad05da93a9d81bfa86a97d",
+    "g2/components/audio/transition_timer_offline/transition.c": "b6f1e2b9ddecef574b626be484459cb2e99bf0dbd356c46451ac8ba2b7e36c96",
+    "g2/components/audio/transition_timer_offline/transition.h": "b00a321b2624d8f089e941c54183ba8b7da7c47d2751f53ac55a92d4c278e1bb"
+  },
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m33",
+    "-mfpu=fpv5-sp-d16",
+    "-mfloat-abi=hard",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib",
+    "-fshort-enums"
+  ],
+  "elf": "/tmp/opencfw-transition-producers/producers.elf",
+  "elf_sha256": "32f579076bf8ecd051b76377d6678dbd1d92bc0faebd4f41cd7706df65d8b53c",
+  "bindings": {
+    "stock_delay_us": 4720545,
+    "stock_timer_start": 4719169,
+    "stock_clock_release": 4998449,
+    "stock_delay_status": 4720637,
+    "stock_save_irq": 4667713
+  },
+  "link_script": "stock_delay_us = 0x4807a1; stock_timer_start = 0x480241; stock_clock_release = 0x4c4531; stock_delay_status = 0x4807fd; stock_save_irq = 0x473941; stock_ton_adjust = pcm22_ton_adjust; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }"
+}

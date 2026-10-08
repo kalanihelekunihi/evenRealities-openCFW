@@ -1,0 +1,27 @@
+{
+  "firmware": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+  "firmware_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+  "raw_sha256": "773b6d4cfdaf0a5a74a557e3babe8222a0ae813436b76a7437c1096d2c60d677",
+  "wrapper_bytes": 32,
+  "load_address": "0x08000000",
+  "architecture": "ARM Cortex-M0+ Thumb",
+  "selected_ranges": [
+    {
+      "start": "0x8006544",
+      "end_exclusive": "0x8006698",
+      "sha256": "6950a09c561d144e1990c04fc043ecb6ac8e420020e7aac8413a40c260531ace"
+    },
+    {
+      "start": "0x800a358",
+      "end_exclusive": "0x800a376",
+      "sha256": "5893e12d31f1c2bc67b99a5105eda382bbe8cc22667c615237100fd7661d38db"
+    },
+    {
+      "start": "0x800be74",
+      "end_exclusive": "0x800be92",
+      "sha256": "95fb1fa3e069a72240dda0c561fee0a9b400109f3b3ff71d33a5235520ea1083"
+    }
+  ],
+  "receipt": "reproduction-receipt.json",
+  "validation": "results.json"
+}

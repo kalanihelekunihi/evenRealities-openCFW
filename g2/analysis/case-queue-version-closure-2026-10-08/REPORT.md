@@ -1,0 +1,11 @@
+# Case FromISR queue body: public V10.4.3 versus V10.5.1
+
+**120 fresh PASS original/public V10.4.3 comparisons; 54 V10.5.1 differences.** Selected **full public xQueueGenericSendFromISR function bodies** compile with explicit ARM32 queue aliases, configUSE_QUEUE_SETS0, no-effect tracing/priority assertion scaffold and preserved original copy/interrupt-mask providers as common peers. Empty receive-wait lists, back-send, lengths1/2, room/full, lock-1/0/1/5/126, PRIMASK0/1 and task-count fixture0/1/3. Earlier public copy/producer and native queue cases are inherited, not rerun coverage.
+
+V10.4.3 immutable pin9c048e0c71ee43630394981a86f5265bc57131e4 agrees across tested return values, queue/buffer/yield state, and restored mask. Every queue/buffer write in the invoked common path is checked PRIMASK1. Its locked queue directly increments the byte, like stock0800c814.
+
+V10.5.1 pin def7d2df2b0506d3d249334974f51e427c17a41c uses its verbatim prvIncrementQueueTxLock macro: read task count, increment only while lock<task count. The public task-count accessor is an **explicit compiled fixture read of20000130**, not attribution/execution of a bound stock function. With successful locked sends at/above configured task count, new public state differs; full/rejected and unlocked cases agree. These synthetic counts are semantic controls, not observed app task populations or proof of reachable race.
+
+Sources remain in preceding sealed official-download directories. reproduction-receipt.json records full source hashes, selected-body hashes, exact public environment and compiled macro; verify.py/results.json preserve cases. Generated translation units/ELF are reproducible scratch outputs. No whole-kernel unique version, compiler, config or exact-byte equality is established; no gitlink re-pin performed. It supports an older selected algorithm, while CMSIS wrapper revision lead remains separately scoped.
+
+Further public-source/body comparison remains possible. Actual queue sets, waiting-task removal, lock overflow and runtime unlock/producer scheduling are excluded. This is not global source exhaustion. All831 prior sealed entries,110 audit inputs and4 checkpoints checked unchanged; no commits,index,production firmware or device writes.

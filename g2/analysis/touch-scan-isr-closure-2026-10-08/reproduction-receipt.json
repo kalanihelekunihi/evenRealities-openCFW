@@ -1,0 +1,55 @@
+{
+  "isr": {
+    "elf": "/tmp/opencfw-touch-isr-reproduction/isr.elf",
+    "elf_sha256": "a519ec458f79de1c4809e9a22bda6b94d8aa0bb91c1bd1ee10e242524f59ed6c",
+    "sources": {
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/scan_isr_offline/isr.c": "f9a5b945635a99d9929866e42eb985dc90cba930a3e5efa0f562b029968bc934",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/scan_preparation_offline/prepare.c": "9ccbf77d3a15b67c83b5e127dadcb65a802fa7e9906d71861fe30089e9063656",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/clock_selection_offline/clock.c": "ae718de54e7b6a940216302676158a9f96424601d64e909c3b63d91f606bbda3",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/auto_dither_offline/dither.c": "17c409a72cae2e7db8d2fe546305929135274ea00cd9574019febe8b5e342f60",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/base_frame_offline/base.c": "8215c2798d3cca723848e12f5fd99f3726dd4eeb8195f6f6ef1d5aaed390854c",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/all_slot_offline/slots.c": "302698546e2ad9d313413720b9cb8ad95eda52976e14c19878e57226b241f202",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/frame_generation_offline/generator.c": "c398e7ad896ec0586f4b68c70db4225ae9dd78da19ad3e96f4230f26af4ca67b",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/mode_offline/mode.c": "1a4ca7945a8e2d5cb247201cc9413d1e2901cb7cce2949b6b96b9451a625f03d",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/mode_offline/cpu.c": "018f02ef024e01f67d64fdaa19c7189f8c0ecbe40173b91dc05b57ce4abcfcd6",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/pin_control_offline/pins.c": "4fc06e27b6b1903067101590010b4db5aaf156a99aa89f61c7db6bfd88a2556d",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/config_bootstrap_offline/bootstrap.c": "8c823708052d9717eda72da5836bafe3ece749ec5820161b133fc485d2cbc2c6",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/saturated_scan_offline/scan.c": "48c5b2ed1bb71221df36623458297b72d8405e4a01350a8240bf13cb69e81541",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/max_raw_offline/max_raw.c": "2b88b692762e914cf6f0714a0418e67bcb56d46c0a7317b866e899e719b1b5d9",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/scan_frame_offline/frame.c": "de80fde3341733d915ba7110806a72c9b2581a012a394b152f3614b663c77428",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/scan_watchdog_offline/watchdog.c": "416039471ed5951502206ddc6608de3a39761e54f69acf60ce9af8ac7bad724f",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-scan-isr-closure-2026-10-08/callback_probes.c": "05c7c4867fcbcfe88c6db409c1dcbd8e56e77bb061f778bdd3c009940a53ae21"
+    },
+    "flags": [
+      "-mcpu=cortex-m0plus",
+      "-mthumb",
+      "-Og",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-nostdlib",
+      "-Wl,--gc-sections",
+      "-Wl,-u,touch_interrupt_dispatch",
+      "-Wl,-u,touch_msclp_interrupt",
+      "-Wl,-u,touch_project_msclp_irq",
+      "-Wl,-u,touch_clear_busy",
+      "-Wl,-u,touch_transfer_active",
+      "-Wl,-u,touch_transfer_low_power",
+      "-Wl,-u,touch_scan_slots",
+      "-Wl,-u,touch_scan_isr",
+      "-Wl,-u,touch_prepare_scan_isr_bound",
+      "-Wl,-u,touch_test_scan_end",
+      "-Wl,-u,touch_test_scan_start"
+    ]
+  },
+  "public_object": {
+    "path": "/tmp/opencfw-touch-msclp-attribution/reproduction/public.o",
+    "sha256": "138354483664ed56a11ccaf2f710e52b0346e3a2df73ef028060b4bc0826ac7b",
+    "pdl_pin": "35f1714623cfea682d5e285af80d50416b4c7bbc"
+  },
+  "gcc": {
+    "path": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+    "sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+    "version": "arm-none-eabi-gcc (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) 13.3.1 20240614"
+  }
+}

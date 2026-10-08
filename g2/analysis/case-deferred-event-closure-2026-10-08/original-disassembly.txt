@@ -1,0 +1,230 @@
+0800ad24 10b5         push {r4, lr}
+0800ad26 0c46         mov r4, r1
+0800ad28 026c         ldr r2, [r0, #0x40]
+0800ad2a 002a         cmp r2, #0
+0800ad2c 0bd0         beq #0x800ad46
+0800ad2e c168         ldr r1, [r0, #0xc]
+0800ad30 8b18         adds r3, r1, r2
+0800ad32 c360         str r3, [r0, #0xc]
+0800ad34 8168         ldr r1, [r0, #8]
+0800ad36 8b42         cmp r3, r1
+0800ad38 01d3         blo #0x800ad3e
+0800ad3a 0168         ldr r1, [r0]
+0800ad3c c160         str r1, [r0, #0xc]
+0800ad3e c168         ldr r1, [r0, #0xc]
+0800ad40 2046         mov r0, r4
+0800ad42 f5f737fa     bl #0x80001b4
+0800ad46 10bd         pop {r4, pc}
+0800ad48 f8b5         push {r3, r4, r5, r6, r7, lr}
+0800ad4a 0446         mov r4, r0
+0800ad4c 1646         mov r6, r2
+0800ad4e 0027         movs r7, #0
+0800ad50 a56b         ldr r5, [r4, #0x38]
+0800ad52 226c         ldr r2, [r4, #0x40]
+0800ad54 002a         cmp r2, #0
+0800ad56 11d0         beq #0x800ad7c
+0800ad58 002e         cmp r6, #0
+0800ad5a 19d0         beq #0x800ad90
+0800ad5c e068         ldr r0, [r4, #0xc]
+0800ad5e f5f729fa     bl #0x80001b4
+0800ad62 216c         ldr r1, [r4, #0x40]
+0800ad64 e068         ldr r0, [r4, #0xc]
+0800ad66 401a         subs r0, r0, r1
+0800ad68 e060         str r0, [r4, #0xc]
+0800ad6a 2268         ldr r2, [r4]
+0800ad6c 9042         cmp r0, r2
+0800ad6e 02d2         bhs #0x800ad76
+0800ad70 a068         ldr r0, [r4, #8]
+0800ad72 401a         subs r0, r0, r1
+0800ad74 e060         str r0, [r4, #0xc]
+0800ad76 022e         cmp r6, #2
+0800ad78 17d0         beq #0x800adaa
+0800ad7a 19e0         b #0x800adb0
+0800ad7c 2068         ldr r0, [r4]
+0800ad7e 0028         cmp r0, #0
+0800ad80 16d1         bne #0x800adb0
+0800ad82 a068         ldr r0, [r4, #8]
+0800ad84 01f0d8fe     bl #0x800cb38
+0800ad88 0746         mov r7, r0
+0800ad8a 0020         movs r0, #0
+0800ad8c a060         str r0, [r4, #8]
+0800ad8e 0fe0         b #0x800adb0
+0800ad90 6068         ldr r0, [r4, #4]
+0800ad92 f5f70ffa     bl #0x80001b4
+0800ad96 216c         ldr r1, [r4, #0x40]
+0800ad98 6068         ldr r0, [r4, #4]
+0800ad9a 4018         adds r0, r0, r1
+0800ad9c 6060         str r0, [r4, #4]
+0800ad9e a168         ldr r1, [r4, #8]
+0800ada0 8842         cmp r0, r1
+0800ada2 05d3         blo #0x800adb0
+0800ada4 2068         ldr r0, [r4]
+0800ada6 6060         str r0, [r4, #4]
+0800ada8 02e0         b #0x800adb0
+0800adaa 002d         cmp r5, #0
+0800adac 00d0         beq #0x800adb0
+0800adae 6d1e         subs r5, r5, #1
+0800adb0 6d1c         adds r5, r5, #1
+0800adb2 a563         str r5, [r4, #0x38]
+0800adb4 3846         mov r0, r7
+0800adb6 f8bd         pop {r3, r4, r5, r6, r7, pc}
+0800c7a8 ffb5         push {r0, r1, r2, r3, r4, r5, r6, r7, lr}
+0800c7aa 83b0         sub sp, #0xc
+0800c7ac 0446         mov r4, r0
+0800c7ae 1746         mov r7, r2
+0800c7b0 1e46         mov r6, r3
+0800c7b2 002c         cmp r4, #0
+0800c7b4 03d0         beq #0x800c7be
+0800c7b6 0498         ldr r0, [sp, #0x10]
+0800c7b8 0028         cmp r0, #0
+0800c7ba 02d0         beq #0x800c7c2
+0800c7bc 06e0         b #0x800c7cc
+0800c7be 72b6         cpsid i
+0800c7c0 fee7         b #0x800c7c0
+0800c7c2 206c         ldr r0, [r4, #0x40]
+0800c7c4 0028         cmp r0, #0
+0800c7c6 01d0         beq #0x800c7cc
+0800c7c8 72b6         cpsid i
+0800c7ca fee7         b #0x800c7ca
+0800c7cc 022e         cmp r6, #2
+0800c7ce 04d1         bne #0x800c7da
+0800c7d0 e06b         ldr r0, [r4, #0x3c]
+0800c7d2 0128         cmp r0, #1
+0800c7d4 01d0         beq #0x800c7da
+0800c7d6 72b6         cpsid i
+0800c7d8 fee7         b #0x800c7d8
+0800c7da f3f78bfc     bl #0x80000f4
+0800c7de 0190         str r0, [sp, #4]
+0800c7e0 a06b         ldr r0, [r4, #0x38]
+0800c7e2 e16b         ldr r1, [r4, #0x3c]
+0800c7e4 8842         cmp r0, r1
+0800c7e6 08d3         blo #0x800c7fa
+0800c7e8 022e         cmp r6, #2
+0800c7ea 06d0         beq #0x800c7fa
+0800c7ec 0024         movs r4, #0
+0800c7ee 0198         ldr r0, [sp, #4]
+0800c7f0 f3f784fc     bl #0x80000fc
+0800c7f4 2046         mov r0, r4
+0800c7f6 07b0         add sp, #0x1c
+0800c7f8 f0bd         pop {r4, r5, r6, r7, pc}
+0800c7fa 2046         mov r0, r4
+0800c7fc 4030         adds r0, #0x40
+0800c7fe 0525         movs r5, #5
+0800c800 0290         str r0, [sp, #8]
+0800c802 4557         ldrsb r5, [r0, r5]
+0800c804 a06b         ldr r0, [r4, #0x38]
+0800c806 3246         mov r2, r6
+0800c808 2046         mov r0, r4
+0800c80a 0499         ldr r1, [sp, #0x10]
+0800c80c fef79cfa     bl #0x800ad48
+0800c810 681c         adds r0, r5, #1
+0800c812 04d0         beq #0x800c81e
+0800c814 0298         ldr r0, [sp, #8]
+0800c816 6d1c         adds r5, r5, #1
+0800c818 4571         strb r5, [r0, #5]
+0800c81a 0124         movs r4, #1
+0800c81c e7e7         b #0x800c7ee
+0800c81e 606a         ldr r0, [r4, #0x24]
+0800c820 0028         cmp r0, #0
+0800c822 fad0         beq #0x800c81a
+0800c824 2046         mov r0, r4
+0800c826 2430         adds r0, #0x24
+0800c828 00f0baf9     bl #0x800cba0
+0800c82c 0028         cmp r0, #0
+0800c82e f4d0         beq #0x800c81a
+0800c830 002f         cmp r7, #0
+0800c832 f2d0         beq #0x800c81a
+0800c834 0120         movs r0, #1
+0800c836 3860         str r0, [r7]
+0800c838 efe7         b #0x800c81a
+0800ce0c 30b5         push {r4, r5, lr}
+0800ce0e 85b0         sub sp, #0x14
+0800ce10 1d46         mov r5, r3
+0800ce12 0124         movs r4, #1
+0800ce14 e443         mvns r4, r4
+0800ce16 0094         str r4, [sp]
+0800ce18 0190         str r0, [sp, #4]
+0800ce1a 0291         str r1, [sp, #8]
+0800ce1c 0392         str r2, [sp, #0xc]
+0800ce1e 0448         ldr r0, [pc, #0x10]
+0800ce20 0023         movs r3, #0
+0800ce22 2a46         mov r2, r5
+0800ce24 6946         mov r1, sp
+0800ce26 0068         ldr r0, [r0]
+0800ce28 fff7befc     bl #0x800c7a8
+0800ce2c 05b0         add sp, #0x14
+0800ce2e 30bd         pop {r4, r5, pc}
+0800c568 10b5         push {r4, lr}
+0800c56a 1346         mov r3, r2
+0800c56c 0a46         mov r2, r1
+0800c56e 0146         mov r1, r0
+0800c570 0148         ldr r0, [pc, #4]
+0800c572 00f04bfc     bl #0x800ce0c
+0800c576 10bd         pop {r4, pc}
+0800bf8c 10b5         push {r4, lr}
+0800bf8e 00f0a6fa     bl #0x800c4de
+0800bf92 10bd         pop {r4, pc}
+080000f4 eff31080     mrs r0, primask
+080000f8 72b6         cpsid i
+080000fa 7047         bx lr
+080000fc 80f31088     msr primask, r0
+08000100 7047         bx lr
+0800ac84 38b5         push {r3, r4, r5, lr}
+0800ac86 01f0b9f9     bl #0x800bffc
+0800ac8a 0f4c         ldr r4, [pc, #0x3c]
+0800ac8c 2068         ldr r0, [r4]
+0800ac8e 0028         cmp r0, #0
+0800ac90 17d1         bne #0x800acc2
+0800ac92 0e48         ldr r0, [pc, #0x38]
+0800ac94 01f07ef9     bl #0x800bf94
+0800ac98 0d48         ldr r0, [pc, #0x34]
+0800ac9a 01f07bf9     bl #0x800bf94
+0800ac9e 0b48         ldr r0, [pc, #0x2c]
+0800aca0 e060         str r0, [r4, #0xc]
+0800aca2 1430         adds r0, #0x14
+0800aca4 2061         str r0, [r4, #0x10]
+0800aca6 0020         movs r0, #0
+0800aca8 0090         str r0, [sp]
+0800acaa 0a4b         ldr r3, [pc, #0x28]
+0800acac 0a4a         ldr r2, [pc, #0x28]
+0800acae 1021         movs r1, #0x10
+0800acb0 0a20         movs r0, #0xa
+0800acb2 01f08dfc     bl #0x800c5d0
+0800acb6 2060         str r0, [r4]
+0800acb8 0028         cmp r0, #0
+0800acba 02d0         beq #0x800acc2
+0800acbc 07a1         adr r1, #0x1c
+0800acbe 01f0fbf9     bl #0x800c0b8
+0800acc2 01f0a7f9     bl #0x800c014
+0800acc6 38bd         pop {r3, r4, r5, pc}
+0800acc8 6401         lsls r4, r4, #5
+0800acca 0020         movs r0, #0
+0800accc a815         asrs r0, r5, #0x16
+0800acce 0020         movs r0, #0
+0800acd0 bc15         asrs r4, r7, #0x16
+0800acd2 0020         movs r0, #0
+0800acd4 b814         asrs r0, r7, #0x12
+0800acd6 0020         movs r0, #0
+0800acd8 0815         asrs r0, r1, #0x14
+0800acda 0020         movs r0, #0
+0800b0fc 70b5         push {r4, r5, r6, lr}
+0800b0fe 86b0         sub sp, #0x18
+0800b100 3d4d         ldr r5, [pc, #0xf4]
+0800b102 0022         movs r2, #0
+0800b104 02a9         add r1, sp, #8
+0800b106 2868         ldr r0, [r5]
+0800b108 01f097fb     bl #0x800c83a
+0800b10c 0028         cmp r0, #0
+0800b10e 71d0         beq #0x800b1f4
+0800b110 0298         ldr r0, [sp, #8]
+0800b112 0028         cmp r0, #0
+0800b114 03da         bge #0x800b11e
+0800b116 039a         ldr r2, [sp, #0xc]
+0800b118 0599         ldr r1, [sp, #0x14]
+0800b11a 0498         ldr r0, [sp, #0x10]
+0800b11c 9047         blx r2
+0800b11e 0298         ldr r0, [sp, #8]
+0800b120 0028         cmp r0, #0
+0800b122 60db         blt #0x800b1e6
+0800b124 049c         ldr r4, [sp, #0x10]
+0800b126 6069         ldr r0, [r4, #0x14]

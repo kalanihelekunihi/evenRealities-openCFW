@@ -1,0 +1,115 @@
+{
+  "source_sha256": "777300a0129f032a507e0a222bae0f321f5d4423da2ef4778058255383db5890",
+  "source_path": "/tmp/opencfw-vendor-leads-2026-10-08/capsense-247a9a0f79eb976f144f5fbeb29488c1c2606517/cy_capsense_sensing_lp.c",
+  "pin": "247a9a0f79eb976f144f5fbeb29488c1c2606517",
+  "macro_environment": {
+    "CY_CAPSENSE_LFSR_BITS_RANGE_MASK": "0x03u"
+  },
+  "extracted_file_sha256": "3c4e03a2bebb7fafb5564afbdd0dbdafbf083af4536d6d4ffdb92ac95c1f7e99",
+  "comparisons": [
+    {
+      "function": "Cy_CapSense_GetPolySize",
+      "optimization": "Og",
+      "stock_address": "0x6220",
+      "stock_extent": 28,
+      "public_extent": 28,
+      "matching_offsets": [
+        "0x6220"
+      ],
+      "exact": true,
+      "relocations": 0,
+      "public_sha256": "5d5a8fb187665ecafea0db9b57a69902955f961aecd8bdb07cc4608849d0058c",
+      "stock_sha256": "5d5a8fb187665ecafea0db9b57a69902955f961aecd8bdb07cc4608849d0058c"
+    },
+    {
+      "function": "Cy_CapSense_GetLfsrDitherVal",
+      "optimization": "Og",
+      "stock_address": "0x6262",
+      "stock_extent": 14,
+      "public_extent": 14,
+      "matching_offsets": [
+        "0x6262"
+      ],
+      "exact": true,
+      "relocations": 0,
+      "public_sha256": "87eaba821b6d5bbb9a884c7c0d30ab2786e8f54caf32d138be77a9ee5c32516c",
+      "stock_sha256": "87eaba821b6d5bbb9a884c7c0d30ab2786e8f54caf32d138be77a9ee5c32516c"
+    },
+    {
+      "function": "Cy_CapSense_GetPolySize",
+      "optimization": "O1",
+      "stock_address": "0x6220",
+      "stock_extent": 28,
+      "public_extent": 36,
+      "matching_offsets": [],
+      "exact": false,
+      "relocations": 0,
+      "public_sha256": "b09cf6fa2342e169c193b464520870f969f308949f73ac4181243f6f69295b54",
+      "stock_sha256": "5d5a8fb187665ecafea0db9b57a69902955f961aecd8bdb07cc4608849d0058c"
+    },
+    {
+      "function": "Cy_CapSense_GetLfsrDitherVal",
+      "optimization": "O1",
+      "stock_address": "0x6262",
+      "stock_extent": 14,
+      "public_extent": 14,
+      "matching_offsets": [],
+      "exact": false,
+      "relocations": 0,
+      "public_sha256": "16d796f5ce5b2b4c0e07d1f267601f0bff166956774891b4996d7e059c350924",
+      "stock_sha256": "87eaba821b6d5bbb9a884c7c0d30ab2786e8f54caf32d138be77a9ee5c32516c"
+    },
+    {
+      "function": "Cy_CapSense_GetPolySize",
+      "optimization": "O2",
+      "stock_address": "0x6220",
+      "stock_extent": 28,
+      "public_extent": 44,
+      "matching_offsets": [],
+      "exact": false,
+      "relocations": 0,
+      "public_sha256": "570c5e62bee98923aa5d12ff465fcf03648a44fc89b048990aadfd1f88adcebb",
+      "stock_sha256": "5d5a8fb187665ecafea0db9b57a69902955f961aecd8bdb07cc4608849d0058c"
+    },
+    {
+      "function": "Cy_CapSense_GetLfsrDitherVal",
+      "optimization": "O2",
+      "stock_address": "0x6262",
+      "stock_extent": 14,
+      "public_extent": 16,
+      "matching_offsets": [],
+      "exact": false,
+      "relocations": 0,
+      "public_sha256": "376642dcd9c66196e6bf90b6353ad15b73165151d75f4edef26a80844a007a3a",
+      "stock_sha256": "87eaba821b6d5bbb9a884c7c0d30ab2786e8f54caf32d138be77a9ee5c32516c"
+    },
+    {
+      "function": "Cy_CapSense_GetPolySize",
+      "optimization": "Os",
+      "stock_address": "0x6220",
+      "stock_extent": 28,
+      "public_extent": 44,
+      "matching_offsets": [],
+      "exact": false,
+      "relocations": 0,
+      "public_sha256": "6b825c818e87d3e257496e2293dc7315284a2b40ab944aabd54afd774a11a8e4",
+      "stock_sha256": "5d5a8fb187665ecafea0db9b57a69902955f961aecd8bdb07cc4608849d0058c"
+    },
+    {
+      "function": "Cy_CapSense_GetLfsrDitherVal",
+      "optimization": "Os",
+      "stock_address": "0x6262",
+      "stock_extent": 14,
+      "public_extent": 14,
+      "matching_offsets": [],
+      "exact": false,
+      "relocations": 0,
+      "public_sha256": "8e6af8c2609aa764f86d00eed99713ef444d0c496e2f6fc852ac842c09153714",
+      "stock_sha256": "87eaba821b6d5bbb9a884c7c0d30ab2786e8f54caf32d138be77a9ee5c32516c"
+    }
+  ],
+  "limits": [
+    "Verbatim selected public function bodies, synthesized minimal translation unit; not a complete SDK build.",
+    "No claim that compiler/release is uniquely identified."
+  ]
+}

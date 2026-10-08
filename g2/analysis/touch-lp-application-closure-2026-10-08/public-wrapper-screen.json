@@ -1,0 +1,52 @@
+{
+  "function": "Cy_CapSense_ScanAllLpSlots",
+  "pin": "247a9a0f79eb976f144f5fbeb29488c1c2606517",
+  "source_sha256": "777300a0129f032a507e0a222bae0f321f5d4423da2ef4778058255383db5890",
+  "environment": "#include <stdint.h>\n#include <stddef.h>\ntypedef uint32_t cy_capsense_status_t;\ntypedef void cy_stc_capsense_context_t;\n#define CY_CAPSENSE_STATUS_BAD_PARAM 1u\n#define CY_CAPSENSE_SLOT_LP_COUNT 4u\ncy_capsense_status_t Cy_CapSense_ScanLpSlots(uint32_t,uint32_t,cy_stc_capsense_context_t *);\n",
+  "translation_unit_sha256": "b46fdc525a7bc9ab46a455fdda1accb4e8d386cdf5f04deff4d1211281c9920c",
+  "resolved_external_call": "Cy_CapSense_ScanLpSlots=0x6d75; actual firmware body, not supplied vendor rebuild",
+  "comparisons": [
+    {
+      "optimization": "Og",
+      "extent": 20,
+      "stock_extent": 20,
+      "exact": true,
+      "stock_sha256": "18bb6f6ae903a4d999fa1228fdde29a813ae8a973030763b30aebb7edbe135ae",
+      "public_sha256": "18bb6f6ae903a4d999fa1228fdde29a813ae8a973030763b30aebb7edbe135ae",
+      "matching_addresses": [
+        "0x7050"
+      ]
+    },
+    {
+      "optimization": "O1",
+      "extent": 20,
+      "stock_extent": 20,
+      "exact": false,
+      "stock_sha256": "18bb6f6ae903a4d999fa1228fdde29a813ae8a973030763b30aebb7edbe135ae",
+      "public_sha256": "154c3ce4acabaaf119f3eef47f4f212f4e62796b946385facbc1c0fb7c7719cd",
+      "matching_addresses": []
+    },
+    {
+      "optimization": "O2",
+      "extent": 20,
+      "stock_extent": 20,
+      "exact": false,
+      "stock_sha256": "18bb6f6ae903a4d999fa1228fdde29a813ae8a973030763b30aebb7edbe135ae",
+      "public_sha256": "c383bc0c1fca1a632f09763e29d17038c4a285d5598ea16d250e0683cebce29d",
+      "matching_addresses": []
+    },
+    {
+      "optimization": "Os",
+      "extent": 20,
+      "stock_extent": 20,
+      "exact": false,
+      "stock_sha256": "18bb6f6ae903a4d999fa1228fdde29a813ae8a973030763b30aebb7edbe135ae",
+      "public_sha256": "c383bc0c1fca1a632f09763e29d17038c4a285d5598ea16d250e0683cebce29d",
+      "matching_addresses": []
+    }
+  ],
+  "limits": [
+    "Selected wrapper with explicit opaque context/macro environment and fixed resolved peer address; not full SDK build.",
+    "No peer byte-attribution or unique producer/compiler identification."
+  ]
+}

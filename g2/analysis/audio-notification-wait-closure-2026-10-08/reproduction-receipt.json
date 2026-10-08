@@ -1,0 +1,23 @@
+{
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "source_sha256": "4cb784daba9a06f6eaca4df811dde79721db5310cec61df685aeb4cbdf989f1b",
+  "flags": [
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "elf": "/tmp/opencfw-audio-notification-wait-final/wait.elf",
+  "elf_sha256": "a8bb8c65f5363d55119435f450bc64ff810cfefb265866602143eb4e693d2b0b",
+  "public_source": "g2/analysis/case-event-flags-closure-2026-10-08/cmsis-os2-d213f261b5be6bb29a7cce8b84071706b72f4d53.c",
+  "public_source_sha256": "8a0d60b56ad30c4f7957f64fa581158017b6812ec94b832d974c773ae4f2bc36",
+  "public_body_sha256": "b60896fe521a547ab8843c3bad6c75f277017266db0e3ef14c44d4f8fec41398",
+  "scaffold": "#include <stdint.h>\ntypedef int32_t BaseType_t;\ntypedef uint32_t TickType_t;\n#define pdPASS 1\n#define pdFAIL 0\n#define THREAD_FLAGS_INVALID_BITS 0x80000000u\n#define osErrorISR (-6)\n#define osErrorParameter (-4)\n#define osErrorResource (-3)\n#define osErrorTimeout (-2)\n#define osFlagsNoClear 2\n#define osFlagsWaitAll 1\n#define pdTRUE 1\n#define pdFALSE 0\nint32_t audio_irq_context(void);\nuint32_t audio_tick(void);\nint32_t audio_original_notify_wait(uint32_t,uint32_t,uint32_t,uint32_t *,uint32_t);\n#define IRQ_Context() audio_irq_context()\n#define xTaskGetTickCount() audio_tick()\n#define xTaskNotifyWait(a,b,c,d) audio_original_notify_wait(0,a,b,c,d)\n",
+  "limits": [
+    "Independent index0 notify-wait subset and wrapper; original/public uses actual original kernel.",
+    "Blocking stops before actual455fa8; no yield/delay/task-return model."
+  ]
+}

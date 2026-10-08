@@ -1,0 +1,24 @@
+{
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "source_sha256": "9e656f9ff51effa3e40af088794e6756f455ea9d1f993281af3e98eaf68c4e9f",
+  "elf": "/tmp/opencfw-audio-thread-flags-final/flags.elf",
+  "elf_sha256": "cde70b97c3084bd1b116f76bc8a5c74cb5e91ef2ca2744c582491a4c8b026467",
+  "public_pin": "d213f261b5be6bb29a7cce8b84071706b72f4d53",
+  "public_source": "g2/analysis/case-event-flags-closure-2026-10-08/cmsis-os2-d213f261b5be6bb29a7cce8b84071706b72f4d53.c",
+  "public_sha256": "8a0d60b56ad30c4f7957f64fa581158017b6812ec94b832d974c773ae4f2bc36",
+  "selected_body_sha256": "5381a3a39a60d450ef4feb839d733c6a84edcc2de165906020e642ead89f4e01",
+  "scaffold": "#include <stdint.h>\n#include <stddef.h>\ntypedef void *osThreadId_t,*TaskHandle_t;\ntypedef int32_t BaseType_t;\n#define THREAD_FLAGS_INVALID_BITS 0x80000000u\n#define osErrorParameter (-4)\n#define osError (-1)\n#define pdFALSE 0\n#define eSetBits 1\n#define eNoAction 0\nint32_t audio_irq_context(void);\nint32_t audio_notify_task(void *,uint32_t,uint32_t,uint32_t,uint32_t *);\nint32_t audio_notify_isr(void *,uint32_t,uint32_t,uint32_t,uint32_t *,int32_t *);\n#define IRQ_Context() audio_irq_context()\n#define xTaskNotifyFromISR(t,v,a,y) audio_notify_isr(t,0,v,a,0,y)\n#define xTaskNotifyAndQueryFromISR(t,v,a,p,y) audio_notify_isr(t,0,v,a,p,y)\n#define xTaskNotify(t,v,a) audio_notify_task(t,0,v,a,0)\n#define xTaskNotifyAndQuery(t,v,a,p) audio_notify_task(t,0,v,a,p)\n#define portYIELD_FROM_ISR(y) do{if(y)*(volatile uint32_t *)0xe000ed04u=0x10000000u;}while(0)\n",
+  "limits": [
+    "Cortex-M4 compatible instruction profile; target Apollo510 Cortex-M55.",
+    "Real original context and notify providers on all sides; public body macro maps disclosed. No full kernel configuration/version attribution."
+  ]
+}

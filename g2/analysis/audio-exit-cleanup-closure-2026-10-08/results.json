@@ -1,0 +1,589 @@
+{
+  "status": "PASS",
+  "cases": 20,
+  "comparisons": [
+    {
+      "timer": "0x0",
+      "queue": "0x0",
+      "ipsr": 0,
+      "primask": 0,
+      "basepri": 0,
+      "calls": [
+        [
+          "request",
+          3
+        ]
+      ],
+      "peer_returns": [],
+      "boundary": [
+        "delay_before_entry",
+        "0xffffffff"
+      ]
+    },
+    {
+      "timer": "0x0",
+      "queue": "0x0",
+      "ipsr": 15,
+      "primask": 0,
+      "basepri": 0,
+      "calls": [
+        [
+          "request",
+          3
+        ]
+      ],
+      "peer_returns": [],
+      "boundary": [
+        "delay_before_entry",
+        "0xffffffff"
+      ]
+    },
+    {
+      "timer": "0x0",
+      "queue": "0x0",
+      "ipsr": 15,
+      "primask": 1,
+      "basepri": 0,
+      "calls": [
+        [
+          "request",
+          3
+        ]
+      ],
+      "peer_returns": [],
+      "boundary": [
+        "delay_before_entry",
+        "0xffffffff"
+      ]
+    },
+    {
+      "timer": "0x0",
+      "queue": "0x0",
+      "ipsr": 15,
+      "primask": 0,
+      "basepri": 48,
+      "calls": [
+        [
+          "request",
+          3
+        ]
+      ],
+      "peer_returns": [],
+      "boundary": [
+        "delay_before_entry",
+        "0xffffffff"
+      ]
+    },
+    {
+      "timer": "0x0",
+      "queue": "0x0",
+      "ipsr": 15,
+      "primask": 1,
+      "basepri": 48,
+      "calls": [
+        [
+          "request",
+          3
+        ]
+      ],
+      "peer_returns": [],
+      "boundary": [
+        "delay_before_entry",
+        "0xffffffff"
+      ]
+    },
+    {
+      "timer": "0x0",
+      "queue": "0x20006a00",
+      "ipsr": 0,
+      "primask": 0,
+      "basepri": 0,
+      "calls": [
+        [
+          "request",
+          3
+        ],
+        [
+          "queue_delete",
+          "0x20006a00"
+        ]
+      ],
+      "peer_returns": [],
+      "boundary": [
+        "queue_delete",
+        "0x20006a00"
+      ]
+    },
+    {
+      "timer": "0x0",
+      "queue": "0x20006a00",
+      "ipsr": 15,
+      "primask": 0,
+      "basepri": 0,
+      "calls": [
+        [
+          "request",
+          3
+        ],
+        [
+          "queue_delete",
+          "0x20006a00"
+        ]
+      ],
+      "peer_returns": [
+        [
+          "queue_delete",
+          "0xfffffffa"
+        ]
+      ],
+      "boundary": [
+        "delay_before_entry",
+        "0xffffffff"
+      ]
+    },
+    {
+      "timer": "0x0",
+      "queue": "0x20006a00",
+      "ipsr": 15,
+      "primask": 1,
+      "basepri": 0,
+      "calls": [
+        [
+          "request",
+          3
+        ],
+        [
+          "queue_delete",
+          "0x20006a00"
+        ]
+      ],
+      "peer_returns": [
+        [
+          "queue_delete",
+          "0xfffffffa"
+        ]
+      ],
+      "boundary": [
+        "delay_before_entry",
+        "0xffffffff"
+      ]
+    },
+    {
+      "timer": "0x0",
+      "queue": "0x20006a00",
+      "ipsr": 15,
+      "primask": 0,
+      "basepri": 48,
+      "calls": [
+        [
+          "request",
+          3
+        ],
+        [
+          "queue_delete",
+          "0x20006a00"
+        ]
+      ],
+      "peer_returns": [
+        [
+          "queue_delete",
+          "0xfffffffa"
+        ]
+      ],
+      "boundary": [
+        "delay_before_entry",
+        "0xffffffff"
+      ]
+    },
+    {
+      "timer": "0x0",
+      "queue": "0x20006a00",
+      "ipsr": 15,
+      "primask": 1,
+      "basepri": 48,
+      "calls": [
+        [
+          "request",
+          3
+        ],
+        [
+          "queue_delete",
+          "0x20006a00"
+        ]
+      ],
+      "peer_returns": [
+        [
+          "queue_delete",
+          "0xfffffffa"
+        ]
+      ],
+      "boundary": [
+        "delay_before_entry",
+        "0xffffffff"
+      ]
+    },
+    {
+      "timer": "0x20006800",
+      "queue": "0x0",
+      "ipsr": 0,
+      "primask": 0,
+      "basepri": 0,
+      "calls": [
+        [
+          "request",
+          3
+        ],
+        [
+          "timer_stop",
+          "0x20006800"
+        ]
+      ],
+      "peer_returns": [],
+      "boundary": [
+        "timer_stop",
+        "0x20006800"
+      ]
+    },
+    {
+      "timer": "0x20006800",
+      "queue": "0x0",
+      "ipsr": 15,
+      "primask": 0,
+      "basepri": 0,
+      "calls": [
+        [
+          "request",
+          3
+        ],
+        [
+          "timer_stop",
+          "0x20006800"
+        ],
+        [
+          "timer_delete",
+          "0x20006800"
+        ]
+      ],
+      "peer_returns": [
+        [
+          "timer_stop",
+          "0xfffffffa"
+        ],
+        [
+          "timer_delete",
+          "0xfffffffa"
+        ]
+      ],
+      "boundary": [
+        "delay_before_entry",
+        "0xffffffff"
+      ]
+    },
+    {
+      "timer": "0x20006800",
+      "queue": "0x0",
+      "ipsr": 15,
+      "primask": 1,
+      "basepri": 0,
+      "calls": [
+        [
+          "request",
+          3
+        ],
+        [
+          "timer_stop",
+          "0x20006800"
+        ],
+        [
+          "timer_delete",
+          "0x20006800"
+        ]
+      ],
+      "peer_returns": [
+        [
+          "timer_stop",
+          "0xfffffffa"
+        ],
+        [
+          "timer_delete",
+          "0xfffffffa"
+        ]
+      ],
+      "boundary": [
+        "delay_before_entry",
+        "0xffffffff"
+      ]
+    },
+    {
+      "timer": "0x20006800",
+      "queue": "0x0",
+      "ipsr": 15,
+      "primask": 0,
+      "basepri": 48,
+      "calls": [
+        [
+          "request",
+          3
+        ],
+        [
+          "timer_stop",
+          "0x20006800"
+        ],
+        [
+          "timer_delete",
+          "0x20006800"
+        ]
+      ],
+      "peer_returns": [
+        [
+          "timer_stop",
+          "0xfffffffa"
+        ],
+        [
+          "timer_delete",
+          "0xfffffffa"
+        ]
+      ],
+      "boundary": [
+        "delay_before_entry",
+        "0xffffffff"
+      ]
+    },
+    {
+      "timer": "0x20006800",
+      "queue": "0x0",
+      "ipsr": 15,
+      "primask": 1,
+      "basepri": 48,
+      "calls": [
+        [
+          "request",
+          3
+        ],
+        [
+          "timer_stop",
+          "0x20006800"
+        ],
+        [
+          "timer_delete",
+          "0x20006800"
+        ]
+      ],
+      "peer_returns": [
+        [
+          "timer_stop",
+          "0xfffffffa"
+        ],
+        [
+          "timer_delete",
+          "0xfffffffa"
+        ]
+      ],
+      "boundary": [
+        "delay_before_entry",
+        "0xffffffff"
+      ]
+    },
+    {
+      "timer": "0x20006800",
+      "queue": "0x20006a00",
+      "ipsr": 0,
+      "primask": 0,
+      "basepri": 0,
+      "calls": [
+        [
+          "request",
+          3
+        ],
+        [
+          "timer_stop",
+          "0x20006800"
+        ]
+      ],
+      "peer_returns": [],
+      "boundary": [
+        "timer_stop",
+        "0x20006800"
+      ]
+    },
+    {
+      "timer": "0x20006800",
+      "queue": "0x20006a00",
+      "ipsr": 15,
+      "primask": 0,
+      "basepri": 0,
+      "calls": [
+        [
+          "request",
+          3
+        ],
+        [
+          "timer_stop",
+          "0x20006800"
+        ],
+        [
+          "timer_delete",
+          "0x20006800"
+        ],
+        [
+          "queue_delete",
+          "0x20006a00"
+        ]
+      ],
+      "peer_returns": [
+        [
+          "timer_stop",
+          "0xfffffffa"
+        ],
+        [
+          "timer_delete",
+          "0xfffffffa"
+        ],
+        [
+          "queue_delete",
+          "0xfffffffa"
+        ]
+      ],
+      "boundary": [
+        "delay_before_entry",
+        "0xffffffff"
+      ]
+    },
+    {
+      "timer": "0x20006800",
+      "queue": "0x20006a00",
+      "ipsr": 15,
+      "primask": 1,
+      "basepri": 0,
+      "calls": [
+        [
+          "request",
+          3
+        ],
+        [
+          "timer_stop",
+          "0x20006800"
+        ],
+        [
+          "timer_delete",
+          "0x20006800"
+        ],
+        [
+          "queue_delete",
+          "0x20006a00"
+        ]
+      ],
+      "peer_returns": [
+        [
+          "timer_stop",
+          "0xfffffffa"
+        ],
+        [
+          "timer_delete",
+          "0xfffffffa"
+        ],
+        [
+          "queue_delete",
+          "0xfffffffa"
+        ]
+      ],
+      "boundary": [
+        "delay_before_entry",
+        "0xffffffff"
+      ]
+    },
+    {
+      "timer": "0x20006800",
+      "queue": "0x20006a00",
+      "ipsr": 15,
+      "primask": 0,
+      "basepri": 48,
+      "calls": [
+        [
+          "request",
+          3
+        ],
+        [
+          "timer_stop",
+          "0x20006800"
+        ],
+        [
+          "timer_delete",
+          "0x20006800"
+        ],
+        [
+          "queue_delete",
+          "0x20006a00"
+        ]
+      ],
+      "peer_returns": [
+        [
+          "timer_stop",
+          "0xfffffffa"
+        ],
+        [
+          "timer_delete",
+          "0xfffffffa"
+        ],
+        [
+          "queue_delete",
+          "0xfffffffa"
+        ]
+      ],
+      "boundary": [
+        "delay_before_entry",
+        "0xffffffff"
+      ]
+    },
+    {
+      "timer": "0x20006800",
+      "queue": "0x20006a00",
+      "ipsr": 15,
+      "primask": 1,
+      "basepri": 48,
+      "calls": [
+        [
+          "request",
+          3
+        ],
+        [
+          "timer_stop",
+          "0x20006800"
+        ],
+        [
+          "timer_delete",
+          "0x20006800"
+        ],
+        [
+          "queue_delete",
+          "0x20006a00"
+        ]
+      ],
+      "peer_returns": [
+        [
+          "timer_stop",
+          "0xfffffffa"
+        ],
+        [
+          "timer_delete",
+          "0xfffffffa"
+        ],
+        [
+          "queue_delete",
+          "0xfffffffa"
+        ]
+      ],
+      "boundary": [
+        "delay_before_entry",
+        "0xffffffff"
+      ]
+    }
+  ],
+  "firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "elf_sha256": "c19b37735e61e5d4fb985729f42405f6a961fd783ebe861c293a8634a35f28ed",
+  "limits": [
+    "Selected actual/native logger-disabled exit; first request uses NULL event-group fixture and actual event-flags rejection. Not a successful producer-stop request.",
+    "Task-context timer/queue live objects stop before OS peer; ISR wrapper error returns execute actually and handles are cleared. ISR invocation is synthetic, not observed/known-reachable audio thread behavior.",
+    "Delay never executes; no object free, producer quiescence or daemon drain proved."
+  ]
+}

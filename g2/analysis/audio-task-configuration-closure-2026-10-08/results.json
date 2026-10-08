@@ -1,0 +1,47 @@
+{
+  "status": "PASS",
+  "cases": 3,
+  "comparisons": [
+    {
+      "kind": "thread",
+      "calls": [
+        [
+          "0x454820",
+          [
+            5489965,
+            7924660,
+            2048,
+            0,
+            47,
+            540413464,
+            537338624
+          ]
+        ]
+      ],
+      "boundary": [],
+      "control_block": "0x20072300"
+    },
+    {
+      "kind": "queue",
+      "calls": [],
+      "boundary": [
+        "0x456110",
+        680
+      ],
+      "control_block": null
+    },
+    {
+      "kind": "terminate_other",
+      "calls": [],
+      "boundary": [],
+      "control_block": null
+    }
+  ],
+  "firmware_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "elf_sha256": "818ed1a76625d61f13911560a1684761becb87e8d9be0fa0c2279048aea79740",
+  "limits": [
+    "Authentic decompressed RAM data and zeroed BSS fixtures, one/two created static tasks in isolation, scheduler not started; noncurrent audio deletion tested. Not full boot, context switch or producer shutdown.",
+    "Actual shared static task creation kernel peers run; independent source covers first-party wrapper only.",
+    "Queue stops before allocator456110 with request680; no fabricated queue allocation return or timer initialization."
+  ]
+}

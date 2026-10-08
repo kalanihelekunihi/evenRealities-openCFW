@@ -1,0 +1,40 @@
+{
+  "sources": {
+    "g2/components/audio/pcm21_children_offline/children.c": "abcd572b8a52e26203f2dc003afd062d54facd106f64357d440d09396cf91e4d",
+    "g2/components/audio/pcm21_children_offline/children.h": "29ecec5146544224efcf1afad2998f0a6751f0fab505b82be0649d758c5cc09e",
+    "g2/components/audio/pcm21_children_offline/apply.c": "9a2d625336d1d4fae9b46472949247291e735896895bf68dd182cb8614f98620",
+    "g2/components/audio/pcm21_control_offline/control.c": "17790763f5b52305dafe5e30d27ef708cd07ba0601fe888e73d0cf8d3fd7f68a",
+    "g2/components/audio/pcm21_control_offline/control.h": "d04d67c04f76e837fa207663de4d0498206dd84c1e5766dec5f1ca3197d71408",
+    "g2/components/audio/platform_callbacks_offline/classify.c": "f4a51f774e0f9741a2e35c8ebe61612f78c2f4e893c31c2a4478a2f52cb69a1c"
+  },
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m33",
+    "-mfpu=fpv5-sp-d16",
+    "-mfloat-abi=hard",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib",
+    "-fshort-enums"
+  ],
+  "elf": "/tmp/opencfw-pcm21-children/control.elf",
+  "elf_sha256": "c1489e7172d21226ee48bd3dc4921664b2d2dcad3652c89356d2ee985c581517",
+  "bindings": {
+    "stock_save_irq": 4667713,
+    "stock_stimer_running": 4773409,
+    "stock_ton": 5901725,
+    "stock_timer_publish": 5901033,
+    "stock_timer_start": 4719169,
+    "stock_timer_restart": 4719243,
+    "stock_delay": 4720545,
+    "stock_cache_disable": 4673275,
+    "stock_cache_enable": 4673205,
+    "stock_timer_stop": 4719311,
+    "stock_completion": 5901213,
+    "stock_timer_clear": 5901141
+  },
+  "link_script": "pcm21_classify = audio_platform_classify; stock_prepare = pcm21_prepare; stock_change_state = pcm21_change_state; stock_plan = pcm21_plan; stock_apply = pcm21_apply; stock_save_irq = 0x473941; stock_stimer_running = 0x48d621; stock_ton = 0x5a0d9d; stock_timer_publish = 0x5a0ae9; stock_timer_start = 0x480241; stock_timer_restart = 0x48028b; stock_delay = 0x4807a1; stock_cache_disable = 0x474efb; stock_cache_enable = 0x474eb5; stock_timer_stop = 0x4802cf; stock_completion = 0x5a0b9d; stock_timer_clear = 0x5a0b55; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }"
+}

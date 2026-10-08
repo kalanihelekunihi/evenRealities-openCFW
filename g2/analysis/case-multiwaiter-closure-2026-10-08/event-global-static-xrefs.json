@@ -1,0 +1,1280 @@
+{
+  "method": "Registered-function PC-relative literal references to exact event global and containing app-global base; candidate windows, not complete symbolic pointer-use analysis.",
+  "references": [
+    {
+      "function": "08000928",
+      "name": "FUN_08000928",
+      "instruction": "0x8000b2e",
+      "literal": "0x8000d00",
+      "value": "0x200000f0",
+      "following": [
+        "08000b2e ldr r0, [pc, #0x1d0]",
+        "08000b30 movs r1, #0xff",
+        "08000b32 adds r1, #1",
+        "08000b34 ldr r0, [r0]",
+        "08000b36 bl #0x800a888",
+        "08000b3a b #0x80009fa",
+        "08000b3c ldrb r0, [r5, #1]",
+        "08000b3e cmp r0, #0",
+        "08000b40 beq #0x8000b44",
+        "08000b42 movs r0, #1"
+      ]
+    },
+    {
+      "function": "08000e1c",
+      "name": "FUN_08000e1c",
+      "instruction": "0x8000e2c",
+      "literal": "0x8001184",
+      "value": "0x200000f0",
+      "following": [
+        "08000e2c ldr r5, [pc, #0x354]",
+        "08000e2e ldrb r0, [r4, #2]",
+        "08000e30 ldrb r1, [r1, #1]",
+        "08000e32 ldr r2, [r5]",
+        "08000e34 cmp r0, #2",
+        "08000e36 beq #0x8000e40",
+        "08000e38 ldrb r0, [r4]",
+        "08000e3a cmp r0, #0x3d",
+        "08000e3c bne #0x8000f22",
+        "08000e3e b #0x8001108"
+      ]
+    },
+    {
+      "function": "080012e4",
+      "name": "aging_led_status_clear",
+      "instruction": "0x80012e6",
+      "literal": "0x8001314",
+      "value": "0x200000b8",
+      "following": [
+        "080012e6 ldr r4, [pc, #0x2c]",
+        "080012e8 ldr r0, [r4, #0x18]",
+        "080012ea bl #0x800ab26",
+        "080012ee movs r0, #0",
+        "080012f0 bl #0x8006b80",
+        "080012f4 movs r0, #0",
+        "080012f6 bl #0x8006b98",
+        "080012fa ldr r1, [pc, #0x1c]",
+        "080012fc movs r0, #0",
+        "080012fe strb r0, [r1, #2]"
+      ]
+    },
+    {
+      "function": "080013b8",
+      "name": "idle_mode_exit",
+      "instruction": "0x80013be",
+      "literal": "0x80013f0",
+      "value": "0x200000b8",
+      "following": [
+        "080013be ldr r4, [pc, #0x30]",
+        "080013c0 strb r5, [r0, #0x17]",
+        "080013c2 ldr r0, [r4, #0x2c]",
+        "080013c4 bl #0x800aa00",
+        "080013c8 ldr r0, [r4, #0x30]",
+        "080013ca bl #0x800aa00",
+        "080013ce ldr r0, [r4, #0x28]",
+        "080013d0 bl #0x800aa00",
+        "080013d4 strb r5, [r4, #3]",
+        "080013d6 ldrb r0, [r4, #7]"
+      ]
+    },
+    {
+      "function": "08002a5c",
+      "name": "case_read_byte3",
+      "instruction": "0x8002a5c",
+      "literal": "0x8002a64",
+      "value": "0x200000b8",
+      "following": [
+        "08002a5c ldr r0, [pc, #4]",
+        "08002a5e ldrb r0, [r0, #3]",
+        "08002a60 bx lr"
+      ]
+    },
+    {
+      "function": "08003a84",
+      "name": "FUN_08003a84",
+      "instruction": "0x8003a92",
+      "literal": "0x8003b34",
+      "value": "0x200000b8",
+      "following": [
+        "08003a92 ldr r5, [pc, #0xa0]",
+        "08003a94 ldrb r0, [r4, #3]",
+        "08003a96 cmp r0, #0",
+        "08003a98 beq #0x8003aa2",
+        "08003a9a ldrb r1, [r4, #1]",
+        "08003a9c ldr r2, [sp]",
+        "08003a9e cmp r1, r2",
+        "08003aa0 bge #0x8003b12",
+        "08003aa2 ldrb r0, [r5, #7]",
+        "08003aa4 cmp r0, #0"
+      ]
+    },
+    {
+      "function": "08003c2c",
+      "name": "FUN_08003c2c",
+      "instruction": "0x8003c56",
+      "literal": "0x8003d04",
+      "value": "0x200000f0",
+      "following": [
+        "08003c56 ldr r7, [pc, #0xac]",
+        "08003c58 cmp r0, #0",
+        "08003c5a bne #0x8003c6a",
+        "08003c5c bl #0x8003848",
+        "08003c60 strb r5, [r4, #2]",
+        "08003c62 movs r1, #2",
+        "08003c64 ldr r0, [r7]",
+        "08003c66 bl #0x800a888",
+        "08003c6a bl #0x8002a5c",
+        "08003c6e movs r5, #0"
+      ]
+    },
+    {
+      "function": "08003d24",
+      "name": "FUN_08003d24",
+      "instruction": "0x8003d48",
+      "literal": "0x8003e4c",
+      "value": "0x200000f0",
+      "following": [
+        "08003d48 ldr r6, [pc, #0x100]",
+        "08003d4a cmp r0, #0",
+        "08003d4c bne #0x8003d5e",
+        "08003d4e bl #0x8003848",
+        "08003d52 movs r0, #1",
+        "08003d54 strb r0, [r4, #2]",
+        "08003d56 movs r1, #2",
+        "08003d58 ldr r0, [r6]",
+        "08003d5a bl #0x800a888",
+        "08003d5e bl #0x8002a5c"
+      ]
+    },
+    {
+      "function": "08006544",
+      "name": "case_process_frame_byte",
+      "instruction": "0x8006556",
+      "literal": "0x80066a4",
+      "value": "0x200000f0",
+      "following": [
+        "08006556 ldr r6, [pc, #0x14c]",
+        "08006558 ldrb r0, [r0]",
+        "0800655a cmp r1, #0",
+        "0800655c beq #0x8006574",
+        "0800655e movs r2, #0x4b",
+        "08006560 lsls r2, r2, #4",
+        "08006562 cmp r1, r2",
+        "08006564 bhs #0x800656e",
+        "08006566 strb r0, [r4, r1]",
+        "08006568 adds r1, r1, #1"
+      ]
+    },
+    {
+      "function": "080067c8",
+      "name": "log_hex_buffer",
+      "instruction": "0x80067ca",
+      "literal": "0x80067fc",
+      "value": "0x200000b8",
+      "following": [
+        "080067ca ldr r5, [pc, #0x30]",
+        "080067cc mov r7, r0",
+        "080067ce ldrb r0, [r5, #7]",
+        "080067d0 mov r6, r1",
+        "080067d2 cmp r0, #0",
+        "080067d4 bne #0x80067fa",
+        "080067d6 movs r4, #0",
+        "080067d8 b #0x80067ea",
+        "080067da cmp r0, #0",
+        "080067dc bne #0x80067e6"
+      ]
+    },
+    {
+      "function": "0800680c",
+      "name": "FUN_0800680c",
+      "instruction": "0x8006898",
+      "literal": "0x80068c0",
+      "value": "0x200000b8",
+      "following": [
+        "08006898 ldr r0, [pc, #0x24]",
+        "0800689a ldrb r0, [r0, #7]",
+        "0800689c cmp r0, #0",
+        "0800689e bne #0x80068a8",
+        "080068a0 mov r1, r6",
+        "080068a2 adr r0, #0x20",
+        "080068a4 bl #0x8009170",
+        "080068a8 mov r1, r5",
+        "080068aa mov r0, r7",
+        "080068ac bl #0x80067c8"
+      ]
+    },
+    {
+      "function": "08006968",
+      "name": "app_rtos_init",
+      "instruction": "0x8006976",
+      "literal": "0x8006a18",
+      "value": "0x200000b8",
+      "following": [
+        "08006976 ldr r4, [pc, #0xa0]",
+        "08006978 ldr r3, [pc, #0x94]",
+        "0800697a str r0, [r4, #0x10]",
+        "0800697c adds r3, #0x20",
+        "0800697e movs r2, #0",
+        "08006980 movs r1, #1",
+        "08006982 ldr r0, [pc, #0x98]",
+        "08006984 bl #0x800aa48",
+        "08006988 ldr r3, [pc, #0x84]",
+        "0800698a str r0, [r4, #0x18]"
+      ]
+    },
+    {
+      "function": "08006e1c",
+      "name": "g2_thread_entry_1",
+      "instruction": "0x8006e1e",
+      "literal": "0x8007138",
+      "value": "0x200000b8",
+      "following": [
+        "08006e1e ldr r4, [pc, #0x318]",
+        "08006e20 ldr r0, [r4, #0x10]",
+        "08006e22 bl #0x800aaf0",
+        "08006e26 movs r1, #0x7d",
+        "08006e28 lsls r1, r1, #3",
+        "08006e2a ldr r0, [r4, #0x24]",
+        "08006e2c bl #0x800aaf0",
+        "08006e30 ldr r6, [pc, #0x308]",
+        "08006e32 movs r7, #0",
+        "08006e34 ldr r0, [r4, #0x38]"
+      ]
+    },
+    {
+      "function": "08006e1c",
+      "name": "g2_thread_entry_1",
+      "instruction": "0x8007024",
+      "literal": "0x8007138",
+      "value": "0x200000b8",
+      "following": [
+        "08007024 ldr r0, [pc, #0x110]",
+        "08007026 movs r5, #0",
+        "08007028 adds r0, #0x3c",
+        "0800702a strb r7, [r0]",
+        "0800702c str r7, [r0, #8]",
+        "0800702e strb r7, [r0, #1]",
+        "08007030 strb r7, [r0, #6]",
+        "08007032 ldrb r0, [r6, #0x10]",
+        "08007034 cmp r0, #0",
+        "08007036 beq #0x8007064"
+      ]
+    },
+    {
+      "function": "08006e1c",
+      "name": "g2_thread_entry_1",
+      "instruction": "0x8007038",
+      "literal": "0x8007138",
+      "value": "0x200000b8",
+      "following": [
+        "08007038 ldr r1, [pc, #0xfc]",
+        "0800703a adds r1, #0x3c",
+        "0800703c ldrb r0, [r1, #2]",
+        "0800703e cmp r0, #0",
+        "08007040 bne #0x8007054",
+        "08007042 b #0x8007064",
+        "08007044 movs r0, #0",
+        "08007046 bl #0x80023f4",
+        "0800704a ldr r0, [pc, #0xec]",
+        "0800704c adds r0, #0x3c"
+      ]
+    },
+    {
+      "function": "08006e1c",
+      "name": "g2_thread_entry_1",
+      "instruction": "0x800704a",
+      "literal": "0x8007138",
+      "value": "0x200000b8",
+      "following": [
+        "0800704a ldr r0, [pc, #0xec]",
+        "0800704c adds r0, #0x3c",
+        "0800704e ldrb r0, [r0, #2]",
+        "08007050 cmp r0, #0",
+        "08007052 beq #0x8007078",
+        "08007054 mov r0, r5",
+        "08007056 adds r5, r5, #1",
+        "08007058 uxtb r5, r5",
+        "0800705a cmp r0, #0xa",
+        "0800705c blo #0x8007044"
+      ]
+    },
+    {
+      "function": "08006e1c",
+      "name": "g2_thread_entry_1",
+      "instruction": "0x800706c",
+      "literal": "0x8007138",
+      "value": "0x200000b8",
+      "following": [
+        "0800706c ldr r1, [pc, #0xc8]",
+        "0800706e adds r1, #0x3c",
+        "08007070 ldrb r0, [r1, #3]",
+        "08007072 cmp r0, #0",
+        "08007074 bne #0x800709c",
+        "08007076 b #0x80070ac",
+        "08007078 ldrb r0, [r4, #7]",
+        "0800707a cmp r0, #0",
+        "0800707c bne #0x800705e",
+        "0800707e adr r0, #0x114"
+      ]
+    },
+    {
+      "function": "08006e1c",
+      "name": "g2_thread_entry_1",
+      "instruction": "0x8007092",
+      "literal": "0x8007138",
+      "value": "0x200000b8",
+      "following": [
+        "08007092 ldr r0, [pc, #0xa4]",
+        "08007094 adds r0, #0x3c",
+        "08007096 ldrb r0, [r0, #3]",
+        "08007098 cmp r0, #0",
+        "0800709a beq #0x80070b8",
+        "0800709c mov r0, r5",
+        "0800709e adds r5, r5, #1",
+        "080070a0 uxtb r5, r5",
+        "080070a2 cmp r0, #0xa",
+        "080070a4 blo #0x800708c"
+      ]
+    },
+    {
+      "function": "08006e1c",
+      "name": "g2_thread_entry_1",
+      "instruction": "0x80070ac",
+      "literal": "0x8007138",
+      "value": "0x200000b8",
+      "following": [
+        "080070ac ldr r0, [pc, #0x88]",
+        "080070ae adds r0, #0x3c",
+        "080070b0 ldrb r1, [r0, #2]",
+        "080070b2 cmp r1, #0",
+        "080070b4 bne #0x80070d2",
+        "080070b6 b #0x80070cc",
+        "080070b8 ldrb r0, [r4, #7]",
+        "080070ba cmp r0, #0",
+        "080070bc bne #0x80070a6",
+        "080070be adr r0, #0xf4"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x800722c",
+      "literal": "0x80075ec",
+      "value": "0x200000b8",
+      "following": [
+        "0800722c ldr r0, [pc, #0x3bc]",
+        "0800722e ldrb r0, [r0, #6]",
+        "08007230 cmp r0, #0",
+        "08007232 beq #0x8007238",
+        "08007234 bl #0x8002cb8",
+        "08007238 ldrb r0, [r4, #4]",
+        "0800723a cmp r0, #0",
+        "0800723c bne #0x8007250",
+        "0800723e ldrb r0, [r4, #3]",
+        "08007240 cmp r0, #0"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x800726a",
+      "literal": "0x80075ec",
+      "value": "0x200000b8",
+      "following": [
+        "0800726a ldr r0, [pc, #0x380]",
+        "0800726c ldrb r0, [r0, #7]",
+        "0800726e cmp r0, #0",
+        "08007270 bne #0x800727e",
+        "08007272 adr r0, #0x37c",
+        "08007274 bl #0x8009170",
+        "08007278 adr r0, #0x38c",
+        "0800727a bl #0x8009170",
+        "0800727e movs r2, #1",
+        "08007280 add r1, sp, #8"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x80072bc",
+      "literal": "0x80075ec",
+      "value": "0x200000b8",
+      "following": [
+        "080072bc ldr r0, [pc, #0x32c]",
+        "080072be adds r0, #0x3c",
+        "080072c0 ldrb r0, [r0, #1]",
+        "080072c2 cmp r0, #0",
+        "080072c4 bne #0x8007374",
+        "080072c6 ldrb r0, [r4, #0x10]",
+        "080072c8 cmp r0, #0",
+        "080072ca beq #0x8007374",
+        "080072cc ldr r0, [sp, #4]",
+        "080072ce ldrb r0, [r0, #0x11]"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x8007316",
+      "literal": "0x80075ec",
+      "value": "0x200000b8",
+      "following": [
+        "08007316 ldr r0, [pc, #0x2d4]",
+        "08007318 ldrb r0, [r0, #7]",
+        "0800731a cmp r0, #0",
+        "0800731c bne #0x800732a",
+        "0800731e adr r0, #0x2fc",
+        "08007320 bl #0x8009170",
+        "08007324 adr r0, #0x2e0",
+        "08007326 bl #0x8009170",
+        "0800732a movs r2, #1",
+        "0800732c add r1, sp, #8"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x800736a",
+      "literal": "0x80075ec",
+      "value": "0x200000b8",
+      "following": [
+        "0800736a ldr r7, [pc, #0x280]",
+        "0800736c adds r7, #0x3c",
+        "0800736e ldrb r0, [r7, #1]",
+        "08007370 cmp r0, #0",
+        "08007372 beq #0x800738a",
+        "08007374 movs r5, #0",
+        "08007376 ldrb r0, [r4, #0x19]",
+        "08007378 cmp r0, #0",
+        "0800737a beq #0x8007468",
+        "0800737c movs r7, #1"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x80073ee",
+      "literal": "0x80075ec",
+      "value": "0x200000b8",
+      "following": [
+        "080073ee ldr r0, [pc, #0x1fc]",
+        "080073f0 ldrb r0, [r0, #7]",
+        "080073f2 cmp r0, #0",
+        "080073f4 bne #0x8007402",
+        "080073f6 adr r0, #0x244",
+        "080073f8 bl #0x8009170",
+        "080073fc adr r0, #0x208",
+        "080073fe bl #0x8009170",
+        "08007402 movs r0, #0",
+        "08007404 strh r0, [r4, #0x38]"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x8007408",
+      "literal": "0x80075ec",
+      "value": "0x200000b8",
+      "following": [
+        "08007408 ldr r5, [pc, #0x1e0]",
+        "0800740a ldrb r0, [r5, #7]",
+        "0800740c cmp r0, #0",
+        "0800740e bne #0x800741c",
+        "08007410 adr r0, #0x250",
+        "08007412 bl #0x8009170",
+        "08007416 adr r0, #0x1f0",
+        "08007418 bl #0x8009170",
+        "0800741c movs r0, #1",
+        "0800741e bl #0x8003a00"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x800744a",
+      "literal": "0x80075ec",
+      "value": "0x200000b8",
+      "following": [
+        "0800744a ldr r0, [pc, #0x1a0]",
+        "0800744c ldrb r0, [r0, #7]",
+        "0800744e beq #0x800746c",
+        "08007450 cmp r0, #0",
+        "08007452 bne #0x8007460",
+        "08007454 adr r0, #0x23c",
+        "08007456 bl #0x8009170",
+        "0800745a adr r0, #0x1ac",
+        "0800745c bl #0x8009170",
+        "08007460 movs r0, #0"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x80074d0",
+      "literal": "0x80075ec",
+      "value": "0x200000b8",
+      "following": [
+        "080074d0 ldr r0, [pc, #0x118]",
+        "080074d2 ldrb r0, [r0, #7]",
+        "080074d4 cmp r0, #0",
+        "080074d6 bne #0x80074c4",
+        "080074d8 adr r0, #0x210",
+        "080074da b #0x800754c",
+        "080074dc ldrb r0, [r7]",
+        "080074de cmp r0, #0",
+        "080074e0 bne #0x8007508",
+        "080074e2 ldr r0, [sp, #4]"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x800751e",
+      "literal": "0x80075ec",
+      "value": "0x200000b8",
+      "following": [
+        "0800751e ldr r0, [pc, #0xcc]",
+        "08007520 ldrb r0, [r0, #7]",
+        "08007522 cmp r0, #0",
+        "08007524 beq #0x800754a",
+        "08007526 ldrb r0, [r4, #0x1a]",
+        "08007528 cmp r0, #0",
+        "0800752a beq #0x8007538",
+        "0800752c movs r0, #0",
+        "0800752e strb r0, [r4, #0x10]",
+        "08007530 strb r0, [r4, #0x11]"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x8007538",
+      "literal": "0x80075ec",
+      "value": "0x200000b8",
+      "following": [
+        "08007538 ldr r0, [pc, #0xb0]",
+        "0800753a adds r0, #0x3c",
+        "0800753c ldrb r0, [r0, #1]",
+        "0800753e cmp r0, #0",
+        "08007540 beq #0x80075e2",
+        "08007542 movs r0, #1",
+        "08007544 strb r0, [r4, #0x10]",
+        "08007546 strb r0, [r4, #0x11]",
+        "08007548 b #0x80077ae",
+        "0800754a adr r0, #0x1c0"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x800755e",
+      "literal": "0x80075ec",
+      "value": "0x200000b8",
+      "following": [
+        "0800755e ldr r0, [pc, #0x8c]",
+        "08007560 ldrb r0, [r0, #7]",
+        "08007562 beq #0x8007584",
+        "08007564 cmp r0, #0",
+        "08007566 beq #0x80075a2",
+        "08007568 b #0x80075ae",
+        "0800756a ldr r0, [pc, #0x80]",
+        "0800756c ldrb r0, [r0, #7]",
+        "0800756e cmp r0, #0",
+        "08007570 bne #0x800757e"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x800756a",
+      "literal": "0x80075ec",
+      "value": "0x200000b8",
+      "following": [
+        "0800756a ldr r0, [pc, #0x80]",
+        "0800756c ldrb r0, [r0, #7]",
+        "0800756e cmp r0, #0",
+        "08007570 bne #0x800757e",
+        "08007572 adr r0, #0x1bc",
+        "08007574 bl #0x8009170",
+        "08007578 adr r0, #0x8c",
+        "0800757a bl #0x8009170",
+        "0800757e bl #0x800be90",
+        "08007582 b #0x8007598"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x80075ba",
+      "literal": "0x80075ec",
+      "value": "0x200000b8",
+      "following": [
+        "080075ba ldr r0, [pc, #0x30]",
+        "080075bc ldrb r0, [r0, #7]",
+        "080075be beq #0x80075e4",
+        "080075c0 cmp r0, #0",
+        "080075c2 bne #0x80075d0",
+        "080075c4 adr r0, #0x198",
+        "080075c6 bl #0x8009170",
+        "080075ca adr r0, #0x3c",
+        "080075cc bl #0x8009170",
+        "080075d0 movs r0, #1"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x80077bc",
+      "literal": "0x8007b88",
+      "value": "0x200000b8",
+      "following": [
+        "080077bc ldr r7, [pc, #0x3c8]",
+        "080077be str r0, [sp, #0x14]",
+        "080077c0 b #0x80077d4",
+        "080077c2 movs r0, #1",
+        "080077c4 strb r0, [r4, #0x10]",
+        "080077c6 strb r0, [r4, #0x11]",
+        "080077c8 bl #0x800d154",
+        "080077cc b #0x8007eda",
+        "080077ce movs r0, #0x32",
+        "080077d0 bl #0x800a7b0"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x80077da",
+      "literal": "0x8007b88",
+      "value": "0x200000b8",
+      "following": [
+        "080077da ldr r7, [pc, #0x3ac]",
+        "080077dc movs r0, #1",
+        "080077de strb r0, [r7, #4]",
+        "080077e0 bl #0x800ce34",
+        "080077e4 movs r0, #0",
+        "080077e6 strb r0, [r7, #4]",
+        "080077e8 ldrb r0, [r4, #0x10]",
+        "080077ea cmp r0, #0",
+        "080077ec bne #0x80077f8",
+        "080077ee ldrb r1, [r4, #0x1b]"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x8007806",
+      "literal": "0x8007b88",
+      "value": "0x200000b8",
+      "following": [
+        "08007806 ldr r7, [pc, #0x380]",
+        "08007808 ldrb r0, [r7, #3]",
+        "0800780a cmp r0, #0",
+        "0800780c beq #0x8007812",
+        "0800780e bl #0x80013b8",
+        "08007812 ldrb r0, [r4, #0x10]",
+        "08007814 cmp r0, #0",
+        "08007816 beq #0x800781e",
+        "08007818 bl #0x8003a3c",
+        "0800781c b #0x800782e"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x8007850",
+      "literal": "0x8007b88",
+      "value": "0x200000b8",
+      "following": [
+        "08007850 ldr r7, [pc, #0x334]",
+        "08007852 movs r0, #1",
+        "08007854 strb r0, [r7, #4]",
+        "08007856 ldr r0, [r4, #0x3c]",
+        "08007858 cmp r0, #0xa",
+        "0800785a blo #0x8007862",
+        "0800785c ldr r0, [r4, #0x58]",
+        "0800785e cmp r0, #0xa",
+        "08007860 bhs #0x800786c",
+        "08007862 ldr r0, [pc, #0x324]"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x8007862",
+      "literal": "0x8007b88",
+      "value": "0x200000b8",
+      "following": [
+        "08007862 ldr r0, [pc, #0x324]",
+        "08007864 adds r0, #0x3c",
+        "08007866 ldrb r0, [r0, #1]",
+        "08007868 cmp r0, #0",
+        "0800786a beq #0x8007878",
+        "0800786c ldr r0, [sp, #0x10]",
+        "0800786e adds r0, r0, #1",
+        "08007870 uxtb r0, r0",
+        "08007872 str r0, [sp, #0x10]",
+        "08007874 cmp r0, #0xa"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x80078ae",
+      "literal": "0x8007b88",
+      "value": "0x200000b8",
+      "following": [
+        "080078ae ldr r0, [pc, #0x2d8]",
+        "080078b0 ldrb r0, [r0, #7]",
+        "080078b2 cmp r0, #0",
+        "080078b4 bne #0x80078c2",
+        "080078b6 adr r0, #0x2d4",
+        "080078b8 bl #0x8009170",
+        "080078bc adr r0, #0x2c4",
+        "080078be bl #0x8009170",
+        "080078c2 ldrb r0, [r4, #0x11]",
+        "080078c4 cmp r0, #0"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x80078de",
+      "literal": "0x8007b88",
+      "value": "0x200000b8",
+      "following": [
+        "080078de ldr r0, [pc, #0x2a8]",
+        "080078e0 ldrb r0, [r0, #7]",
+        "080078e2 cmp r0, #0",
+        "080078e4 bne #0x80079b0",
+        "080078e6 adr r0, #0x2c8",
+        "080078e8 b #0x8007936",
+        "080078ea ldr r7, [pc, #0x29c]",
+        "080078ec ldrb r0, [r7, #7]",
+        "080078ee cmp r0, #0",
+        "080078f0 bne #0x80078fe"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x80078ea",
+      "literal": "0x8007b88",
+      "value": "0x200000b8",
+      "following": [
+        "080078ea ldr r7, [pc, #0x29c]",
+        "080078ec ldrb r0, [r7, #7]",
+        "080078ee cmp r0, #0",
+        "080078f0 bne #0x80078fe",
+        "080078f2 adr r0, #0x2fc",
+        "080078f4 bl #0x8009170",
+        "080078f8 adr r0, #0x288",
+        "080078fa bl #0x8009170",
+        "080078fe movs r0, #8",
+        "08007900 strb r0, [r7, #1]"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x800790e",
+      "literal": "0x8007b88",
+      "value": "0x200000b8",
+      "following": [
+        "0800790e ldr r0, [pc, #0x278]",
+        "08007910 ldrb r0, [r0, #7]",
+        "08007912 cmp r0, #0",
+        "08007914 beq #0x8007928",
+        "08007916 b #0x80079b0",
+        "08007918 cmp r0, #0",
+        "0800791a bne #0x800790e",
+        "0800791c ldr r0, [pc, #0x268]",
+        "0800791e ldrb r0, [r0, #7]",
+        "08007920 cmp r0, #0"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x800791c",
+      "literal": "0x8007b88",
+      "value": "0x200000b8",
+      "following": [
+        "0800791c ldr r0, [pc, #0x268]",
+        "0800791e ldrb r0, [r0, #7]",
+        "08007920 cmp r0, #0",
+        "08007922 bne #0x80079b0",
+        "08007924 adr r0, #0x304",
+        "08007926 b #0x8007936",
+        "08007928 adr r0, #0x324",
+        "0800792a b #0x8007936",
+        "0800792c ldr r0, [pc, #0x258]",
+        "0800792e ldrb r0, [r0, #7]"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x800792c",
+      "literal": "0x8007b88",
+      "value": "0x200000b8",
+      "following": [
+        "0800792c ldr r0, [pc, #0x258]",
+        "0800792e ldrb r0, [r0, #7]",
+        "08007930 cmp r0, #0",
+        "08007932 bne #0x80079b0",
+        "08007934 adr r0, #0x33c",
+        "08007936 bl #0x8009170",
+        "0800793a adr r0, #0x248",
+        "0800793c bl #0x8009170",
+        "08007940 b #0x80079b0",
+        "08007942 ldr r0, [r4, #0xc]"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x8007974",
+      "literal": "0x8007b88",
+      "value": "0x200000b8",
+      "following": [
+        "08007974 ldr r0, [pc, #0x210]",
+        "08007976 ldrb r0, [r0, #7]",
+        "08007978 cmp r0, #0",
+        "0800797a bne #0x80079b0",
+        "0800797c adr r0, #0x318",
+        "0800797e b #0x8007936",
+        "08007980 ldr r0, [sp, #4]",
+        "08007982 ldrb r0, [r0, #0x14]",
+        "08007984 cmp r0, #0",
+        "08007986 beq #0x8007990"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x80079a8",
+      "literal": "0x8007b88",
+      "value": "0x200000b8",
+      "following": [
+        "080079a8 ldr r0, [pc, #0x1dc]",
+        "080079aa ldrb r0, [r0, #7]",
+        "080079ac cmp r0, #0",
+        "080079ae beq #0x80079c8",
+        "080079b0 bl #0x800bb74",
+        "080079b4 ldr r0, [r4, #0x40]",
+        "080079b6 cmp r0, #8",
+        "080079b8 blo #0x80079e8",
+        "080079ba movs r1, #0xf",
+        "080079bc ldr r0, [r4, #0x44]"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x80079cc",
+      "literal": "0x8007b88",
+      "value": "0x200000b8",
+      "following": [
+        "080079cc ldr r0, [pc, #0x1b8]",
+        "080079ce ldrb r0, [r0, #7]",
+        "080079d0 cmp r0, #0",
+        "080079d2 bne #0x80079e2",
+        "080079d4 movs r1, #0xf",
+        "080079d6 adr r0, #0x310",
+        "080079d8 bl #0x8009170",
+        "080079dc adr r0, #0x1a4",
+        "080079de bl #0x8009170",
+        "080079e2 ldr r0, [r4, #0x44]"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x80079fa",
+      "literal": "0x8007b88",
+      "value": "0x200000b8",
+      "following": [
+        "080079fa ldr r0, [pc, #0x18c]",
+        "080079fc ldrb r0, [r0, #7]",
+        "080079fe cmp r0, #0",
+        "08007a00 bne #0x8007a10",
+        "08007a02 movs r1, #0xf",
+        "08007a04 adr r0, #0x304",
+        "08007a06 bl #0x8009170",
+        "08007a0a adr r0, #0x178",
+        "08007a0c bl #0x8009170",
+        "08007a10 ldr r0, [r4, #0x60]"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x8007a2a",
+      "literal": "0x8007b88",
+      "value": "0x200000b8",
+      "following": [
+        "08007a2a ldr r0, [pc, #0x15c]",
+        "08007a2c ldrb r0, [r0, #8]",
+        "08007a2e cmp r0, #0",
+        "08007a30 beq #0x8007a40",
+        "08007a32 ldr r0, [pc, #0x154]",
+        "08007a34 ldrb r0, [r0, #7]",
+        "08007a36 cmp r0, #0",
+        "08007a38 bne #0x8007a5e",
+        "08007a3a mov r1, r7",
+        "08007a3c adr r0, #0x2f0"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x8007a32",
+      "literal": "0x8007b88",
+      "value": "0x200000b8",
+      "following": [
+        "08007a32 ldr r0, [pc, #0x154]",
+        "08007a34 ldrb r0, [r0, #7]",
+        "08007a36 cmp r0, #0",
+        "08007a38 bne #0x8007a5e",
+        "08007a3a mov r1, r7",
+        "08007a3c adr r0, #0x2f0",
+        "08007a3e b #0x8007a54",
+        "08007a40 movs r1, #0",
+        "08007a42 movs r0, #1",
+        "08007a44 bl #0x8009a9c"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x8007a48",
+      "literal": "0x8007b88",
+      "value": "0x200000b8",
+      "following": [
+        "08007a48 ldr r0, [pc, #0x13c]",
+        "08007a4a ldrb r0, [r0, #7]",
+        "08007a4c cmp r0, #0",
+        "08007a4e bne #0x8007a5e",
+        "08007a50 adr r0, #0x308",
+        "08007a52 ldr r1, [r4, #0x44]",
+        "08007a54 bl #0x8009170",
+        "08007a58 adr r0, #0x128",
+        "08007a5a bl #0x8009170",
+        "08007a5e ldr r0, [r4, #0x5c]"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x8007a70",
+      "literal": "0x8007b88",
+      "value": "0x200000b8",
+      "following": [
+        "08007a70 ldr r7, [pc, #0x114]",
+        "08007a72 ldrb r0, [r7, #8]",
+        "08007a74 cmp r0, #0",
+        "08007a76 beq #0x8007a84",
+        "08007a78 ldrb r0, [r7, #7]",
+        "08007a7a cmp r0, #0",
+        "08007a7c bne #0x8007aa0",
+        "08007a7e adr r0, #0x308",
+        "08007a80 ldr r1, [r4, #0x44]",
+        "08007a82 b #0x8007a96"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x8007ae2",
+      "literal": "0x8007b88",
+      "value": "0x200000b8",
+      "following": [
+        "08007ae2 ldr r7, [pc, #0xa4]",
+        "08007ae4 ldrb r0, [r7, #4]",
+        "08007ae6 cmp r0, #0",
+        "08007ae8 bne #0x8007b2e",
+        "08007aea movs r0, #1",
+        "08007aec strb r0, [r7, #4]",
+        "08007aee ldrb r0, [r7, #7]",
+        "08007af0 cmp r0, #0",
+        "08007af2 bne #0x8007b00",
+        "08007af4 adr r0, #0x2e8"
+      ]
+    },
+    {
+      "function": "08007214",
+      "name": "case_policy_iteration",
+      "instruction": "0x8007b2e",
+      "literal": "0x8007b88",
+      "value": "0x200000b8",
+      "following": [
+        "08007b2e ldr r7, [pc, #0x58]",
+        "08007b30 ldrb r0, [r7, #3]",
+        "08007b32 cmp r0, #0",
+        "08007b34 beq #0x8007b4c",
+        "08007b36 ldr r0, [r7, #0x38]",
+        "08007b38 bl #0x800a816",
+        "08007b3c str r0, [sp, #8]",
+        "08007b3e lsls r0, r0, #0x1e",
+        "08007b40 bpl #0x8007b4e",
+        "08007b42 movs r1, #2"
+      ]
+    },
+    {
+      "function": "08007f2c",
+      "name": "g2_thread_entry_2",
+      "instruction": "0x8007f3c",
+      "literal": "0x8008194",
+      "value": "0x200000b8",
+      "following": [
+        "08007f3c ldr r5, [pc, #0x254]",
+        "08007f3e str r0, [sp, #0x38]",
+        "08007f40 bl #0x8002a68",
+        "08007f44 movs r1, #5",
+        "08007f46 ldr r0, [r4, #8]",
+        "08007f48 bl #0x8000160",
+        "08007f4c cmp r1, #0",
+        "08007f4e bne #0x800804c",
+        "08007f50 add r0, sp, #0x30",
+        "08007f52 str r7, [sp, #0x30]"
+      ]
+    },
+    {
+      "function": "08007f2c",
+      "name": "g2_thread_entry_2",
+      "instruction": "0x8007fd4",
+      "literal": "0x8008194",
+      "value": "0x200000b8",
+      "following": [
+        "08007fd4 ldr r3, [pc, #0x1bc]",
+        "08007fd6 ldrb r2, [r4, #0x16]",
+        "08007fd8 adds r3, #0x3c",
+        "08007fda ldrb r3, [r3, #1]",
+        "08007fdc ldr r1, [sp, #0x30]",
+        "08007fde str r1, [sp, #0x10]",
+        "08007fe0 str r3, [sp, #0x18]",
+        "08007fe2 str r2, [sp, #0x14]",
+        "08007fe4 str r0, [sp, #0x1c]",
+        "08007fe6 ldrb r3, [r4, #0x11]"
+      ]
+    },
+    {
+      "function": "08007f2c",
+      "name": "g2_thread_entry_2",
+      "instruction": "0x8008002",
+      "literal": "0x8008194",
+      "value": "0x200000b8",
+      "following": [
+        "08008002 ldr r3, [pc, #0x190]",
+        "08008004 ldrb r2, [r4, #0x16]",
+        "08008006 adds r3, #0x3c",
+        "08008008 ldrb r3, [r3, #1]",
+        "0800800a ldr r1, [sp, #0x30]",
+        "0800800c str r1, [sp, #0x10]",
+        "0800800e str r3, [sp, #0x18]",
+        "08008010 str r2, [sp, #0x14]",
+        "08008012 str r0, [sp, #0x1c]",
+        "08008014 ldrb r3, [r4, #0x11]"
+      ]
+    },
+    {
+      "function": "08007f2c",
+      "name": "g2_thread_entry_2",
+      "instruction": "0x80080f8",
+      "literal": "0x8008194",
+      "value": "0x200000b8",
+      "following": [
+        "080080f8 ldr r0, [pc, #0x98]",
+        "080080fa adds r0, #0x3c",
+        "080080fc ldrb r1, [r0]",
+        "080080fe cmp r1, #0",
+        "08008100 beq #0x800818a",
+        "08008102 ldrb r0, [r0, #1]",
+        "08008104 cmp r0, #0",
+        "08008106 bne #0x800818a",
+        "08008108 ldrb r0, [r4, #2]",
+        "0800810a cmp r0, #4"
+      ]
+    },
+    {
+      "function": "08007f2c",
+      "name": "g2_thread_entry_2",
+      "instruction": "0x8008144",
+      "literal": "0x8008194",
+      "value": "0x200000b8",
+      "following": [
+        "08008144 ldr r3, [pc, #0x4c]",
+        "08008146 movs r1, #0xe1",
+        "08008148 adds r3, #0x3c",
+        "0800814a ldr r0, [r3, #8]",
+        "0800814c lsls r1, r1, #5",
+        "0800814e cmp r0, r1",
+        "08008150 blo #0x8008166",
+        "08008152 ldrb r0, [r5, #7]",
+        "08008154 cmp r0, #0",
+        "08008156 bne #0x800813e"
+      ]
+    },
+    {
+      "function": "080082ec",
+      "name": "g2_thread_entry_4",
+      "instruction": "0x80082fa",
+      "literal": "0x80083b8",
+      "value": "0x200000b8",
+      "following": [
+        "080082fa ldr r4, [pc, #0xbc]",
+        "080082fc movs r7, #0",
+        "080082fe str r0, [sp]",
+        "08008300 ldrb r0, [r5, #0x10]",
+        "08008302 cmp r0, #0",
+        "08008304 beq #0x80083ae",
+        "08008306 ldrb r0, [r5, #0x11]",
+        "08008308 cmp r0, #0",
+        "0800830a beq #0x80083ae",
+        "0800830c movs r0, #1"
+      ]
+    },
+    {
+      "function": "08009a9c",
+      "name": "glasses_sides_reset",
+      "instruction": "0x8009aa8",
+      "literal": "0x8009b34",
+      "value": "0x200000b8",
+      "following": [
+        "08009aa8 ldr r6, [pc, #0x88]",
+        "08009aaa ldrb r0, [r6, #4]",
+        "08009aac cmp r0, #0",
+        "08009aae beq #0x8009ac6",
+        "08009ab0 ldrb r0, [r6, #7]",
+        "08009ab2 cmp r0, #0",
+        "08009ab4 bne #0x8009ac2",
+        "08009ab6 adr r0, #0x80",
+        "08009ab8 bl #0x8009170",
+        "08009abc adr r0, #0xa0"
+      ]
+    },
+    {
+      "function": "08009cc8",
+      "name": "FUN_08009cc8",
+      "instruction": "0x8009ccc",
+      "literal": "0x8009d2c",
+      "value": "0x200000b8",
+      "following": [
+        "08009ccc ldr r4, [pc, #0x5c]",
+        "08009cce ldrb r0, [r5, #0x10]",
+        "08009cd0 cmp r0, #0",
+        "08009cd2 beq #0x8009ce0",
+        "08009cd4 ldrb r0, [r5, #0x11]",
+        "08009cd6 cmp r0, #0",
+        "08009cd8 beq #0x8009ce0",
+        "08009cda movs r0, #0",
+        "08009cdc strb r0, [r4]",
+        "08009cde pop {r4, r5, r6, pc}"
+      ]
+    },
+    {
+      "function": "08009cc8",
+      "name": "FUN_08009cc8",
+      "instruction": "0x8009d00",
+      "literal": "0x8009d2c",
+      "value": "0x200000b8",
+      "following": [
+        "08009d00 ldr r1, [pc, #0x28]",
+        "08009d02 movs r0, #2",
+        "08009d04 adds r1, #0x3c",
+        "08009d06 strb r0, [r1, #6]",
+        "08009d08 movs r0, #4",
+        "08009d0a strb r0, [r5, #2]",
+        "08009d0c mov r1, r0",
+        "08009d0e ldr r0, [r4, #0x38]",
+        "08009d10 bl #0x800a888",
+        "08009d14 ldrb r0, [r4, #7]"
+      ]
+    },
+    {
+      "function": "08009d70",
+      "name": "g2_timer_callback_1",
+      "instruction": "0x8009d74",
+      "literal": "0x8009db8",
+      "value": "0x200000b8",
+      "following": [
+        "08009d74 ldr r4, [pc, #0x40]",
+        "08009d76 ldrb r1, [r5, #2]",
+        "08009d78 cmp r1, #4",
+        "08009d7a beq #0x8009da4",
+        "08009d7c cmp r1, #3",
+        "08009d7e beq #0x8009da4",
+        "08009d80 movs r0, #0",
+        "08009d82 bl #0x8006b80",
+        "08009d86 movs r0, #0",
+        "08009d88 bl #0x8006b98"
+      ]
+    },
+    {
+      "function": "0800ab70",
+      "name": "g2_timer_callback_6",
+      "instruction": "0x800ab96",
+      "literal": "0x800abac",
+      "value": "0x200000b8",
+      "following": [
+        "0800ab96 ldr r0, [pc, #0x14]",
+        "0800ab98 ldr r1, [pc, #0xc]",
+        "0800ab9a ldr r0, [r0, #0x10]",
+        "0800ab9c bl #0x800aaf0",
+        "0800aba0 pop {r4, pc}"
+      ]
+    },
+    {
+      "function": "0800bb4c",
+      "name": "g2_timer_callback_2",
+      "instruction": "0x800bb5a",
+      "literal": "0x800bb70",
+      "value": "0x200000b8",
+      "following": [
+        "0800bb5a ldr r1, [pc, #0x14]",
+        "0800bb5c movs r2, #1",
+        "0800bb5e ldrb r0, [r1, #0xc]",
+        "0800bb60 eors r0, r2",
+        "0800bb62 strb r0, [r1, #0xc]",
+        "0800bb64 bl #0x8006b80",
+        "0800bb68 pop {r4, pc}"
+      ]
+    },
+    {
+      "function": "0800bb74",
+      "name": "periodic_timer_restart",
+      "instruction": "0x800bb76",
+      "literal": "0x800bb8c",
+      "value": "0x200000b8",
+      "following": [
+        "0800bb76 ldr r4, [pc, #0x14]",
+        "0800bb78 ldr r0, [r4, #0x14]",
+        "0800bb7a bl #0x800ab26",
+        "0800bb7e movs r1, #0x7d",
+        "0800bb80 lsls r1, r1, #3",
+        "0800bb82 ldr r0, [r4, #0x14]",
+        "0800bb84 bl #0x800aaf0",
+        "0800bb88 pop {r4, pc}"
+      ]
+    },
+    {
+      "function": "0800bb90",
+      "name": "g2_timer_callback_5",
+      "instruction": "0x800bb94",
+      "literal": "0x800bd0c",
+      "value": "0x200000b8",
+      "following": [
+        "0800bb94 ldr r5, [pc, #0x174]",
+        "0800bb96 mov r0, r4",
+        "0800bb98 ldrb r2, [r4, #0x10]",
+        "0800bb9a ldrb r1, [r0, #0x11]",
+        "0800bb9c ldrb r0, [r5, #7]",
+        "0800bb9e cmp r2, #0",
+        "0800bba0 beq #0x800bca2",
+        "0800bba2 cmp r1, #0",
+        "0800bba4 beq #0x800bc8a",
+        "0800bba6 mov r7, r4"
+      ]
+    }
+  ]
+}

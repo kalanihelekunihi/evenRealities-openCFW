@@ -1,0 +1,49 @@
+{
+  "references": [
+    {
+      "path": "third-party/upstream/ambiqhal-apollo510",
+      "url": "https://github.com/AmbiqMicro/ambiqhal_ambiq",
+      "pin": "5efc0228528a8adce5eae0d226fac85d2551eb3b",
+      "indexed_gitlink": "160000 5efc0228528a8adce5eae0d226fac85d2551eb3b 0\tthird-party/upstream/ambiqhal-apollo510",
+      "materialized": true
+    },
+    {
+      "path": "third-party/upstream/cmsis-5-590",
+      "url": "https://github.com/ARM-software/CMSIS_5",
+      "pin": "2b7495b8535bdcb306dac29b9ded4cfb679d7e5c",
+      "indexed_gitlink": "160000 2b7495b8535bdcb306dac29b9ded4cfb679d7e5c 0\tthird-party/upstream/cmsis-5-590",
+      "materialized": true
+    }
+  ],
+  "files": {
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/am_hal_spotmgr_pcm2_2.c": "eac14263dc23ea211b917e9c3feb69695eb511d204961fdf301c1b0fa9abbeb7",
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/mcu/am_hal_cachectrl.c": "43fbfe3ceb84643756419c9d2d729566bf69a6fc8eed8cd2a78c03f565fac686",
+    "third-party/upstream/cmsis-5-590/CMSIS/Core/Include/cachel1_armv7.h": "2e336a64f60a9c0eaf5a08e2c4845d94da86c3fd84d219d0d0c9f530e63bc9c3",
+    "third-party/upstream/cmsis-5-590/CMSIS/Core/Include/core_cm55.h": "5707f716cf03f7e80151108ae94601fcfdf362dd2d830876040213318f6dee3a",
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/am_hal_spotmgr.c": "8e266d10f7622324f786db522b48919a48ec95998ce1533f8effe36ecc2be3cc"
+  },
+  "upstream_comparison": "Source names/macros corroborate stock roles; SDK arithmetic/delays/error propagation differ and are not treated as exact.",
+  "drift": [
+    "Stocksequence7 unsigned float0.9 scaling, versus public integer trim expression",
+    "Stocksequence7 has no standalone10us delay between VDDF boost and VDDC boost",
+    "Stocksequence21 ignores cache-disable/enable error returns; public macros return early",
+    "Stockcompletion2b/7b settle5us vs public10us, as sealed previous batch",
+    "Stock14/15 omit public TON adjustment calls",
+    "Stock17 has no public50us settle call",
+    "Stock18 uses unsigned2*profile0_VDDF-new_VDDF saturation and omits public TON adjustment",
+    "Stock1 also omits public preboost10us delay; settle after core trim is5us",
+    "Stock12/18 omit public TON adjustment calls",
+    "Stock11 adds VDDF double boost/50us restore absent from public11 sequence"
+  ],
+  "primary_sources_downloaded": "CMSIS/Core/Include materialized sparsely at existing registered5.9 gitlink; no new root gitlink or index changes",
+  "remaining_leads": [
+    "All27 table entries now have bounded reconstructed bodies; TON/cache providers and registered/vector wrappers also recovered.",
+    "Earlier PCM0.7/2.0/2.1 source families at distinct stock addresses remain actionable.",
+    "Power-mode wrappers/callers around deferred21b and full IRQ exception delivery remain separate analysis.",
+    "Authenticated calibration words and coherent task/timer/IRQ trace are required for actual-device variant/timing/quiescence conclusions.",
+    "No project-wide source search exhaustion or firmware completeness claim."
+  ],
+  "new_additional_source": "am_hal_spotmgr.c generic callbacks and pinned CMSIS cache headers provide concrete registered/vector and cache-provider leads recovered in this batch.",
+  "practical_submodule_status": "-5efc0228528a8adce5eae0d226fac85d2551eb3b third-party/upstream/ambiqhal-apollo510\n-2b7495b8535bdcb306dac29b9ded4cfb679d7e5c third-party/upstream/cmsis-5-590",
+  "practical_status_explanation": "Both clean standalone sparse checkouts are at indexed gitlink commits and usable locally. Root git submodule status retains a minus because root configuration enrollment was deliberately untouched; this is materialization, not conventional submodule-init completion."
+}

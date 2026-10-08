@@ -1,0 +1,34 @@
+{
+  "pin": "5efc0228528a8adce5eae0d226fac85d2551eb3b",
+  "files": {
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/mcu/am_hal_sysctrl.c": "4ad08cded5a8fb86339ea3b8d442a3dd25da721ddd7275ff580bdc765c5c6e96",
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/mcu/am_hal_sysctrl_clk_mux_reset.h": "e2aef6d0eb83cd1598f9bfba6403923915e958f3c5b8a7b5dfd1c332b9a8d5ac",
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/am_hal_pwrctrl.c": "84cc1da6a01dd46f29e0465074ad92602c4dd6d7a12f7f4596aef64a9a250586",
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/am_hal_info.c": "e958f9552eb4a2b7070f410c856600c0bb56494bc112db930f3d1b4c7d0f1f6c",
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/am_hal_status.h": "7ffa44277fab4731bdcb742c807c9f026aadfe8456545d8f04f5053621661ee2"
+  },
+  "differences": [
+    "Stock has no board-info/SIP GPIO136/delay1000 calls in clock recovery.",
+    "Stock temporary GPIO15 config only replaces low nibble of incoming R5.",
+    "Stock common initializer source differences are retained rather than imported from SDK."
+  ],
+  "synthetic_regions": [
+    {
+      "address": "0x42002000",
+      "bytes": 8192,
+      "purpose": "Zero-filled MRAM INFO aliases"
+    },
+    {
+      "address": "0x42006000",
+      "bytes": 16384,
+      "purpose": "Zero-filled selected INFO1/OTP aliases"
+    },
+    {
+      "address": "0x40014000",
+      "bytes": 4096,
+      "purpose": "Synthetic OTP/crypto shutdown status including0x40014AC4"
+    }
+  ],
+  "source_exhausted": false,
+  "download_needed": false
+}

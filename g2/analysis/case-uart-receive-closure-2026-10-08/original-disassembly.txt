@@ -1,0 +1,154 @@
+CODE 0x8008758..0x8008806
+08008758 70b5         push     {r4, r5, r6, lr}
+0800875a 0146         mov      r1, r0
+0800875c 4031         adds     r1, #0x40
+0800875e 0346         mov      r3, r0
+08008760 8033         adds     r3, #0x80
+08008762 0c8c         ldrh     r4, [r1, #0x20]
+08008764 dd68         ldr      r5, [r3, #0xc]
+08008766 0268         ldr      r2, [r0]
+08008768 222d         cmp      r5, #0x22
+0800876a 04d0         beq      #0x8008776
+0800876c 9069         ldr      r0, [r2, #0x18]
+0800876e 0821         movs     r1, #8
+08008770 0843         orrs     r0, r1
+08008772 9061         str      r0, [r2, #0x18]
+08008774 70bd         pop      {r4, r5, r6, pc}
+08008776 526a         ldr      r2, [r2, #0x24]
+08008778 856d         ldr      r5, [r0, #0x58]
+0800877a 2240         ands     r2, r4
+0800877c 2a80         strh     r2, [r5]
+0800877e 826d         ldr      r2, [r0, #0x58]
+08008780 921c         adds     r2, r2, #2
+08008782 8265         str      r2, [r0, #0x58]
+08008784 ca8b         ldrh     r2, [r1, #0x1e]
+08008786 521e         subs     r2, r2, #1
+08008788 ca83         strh     r2, [r1, #0x1e]
+0800878a ca8b         ldrh     r2, [r1, #0x1e]
+0800878c 002a         cmp      r2, #0
+0800878e f1d1         bne      #0x8008774
+08008790 eff31082     mrs      r2, primask
+08008794 0124         movs     r4, #1
+08008796 84f31088     msr      primask, r4
+0800879a 0468         ldr      r4, [r0]
+0800879c 2568         ldr      r5, [r4]
+0800879e ff26         movs     r6, #0xff
+080087a0 2136         adds     r6, #0x21
+080087a2 b543         bics     r5, r6
+080087a4 2560         str      r5, [r4]
+080087a6 82f31088     msr      primask, r2
+080087aa eff31082     mrs      r2, primask
+080087ae 0124         movs     r4, #1
+080087b0 84f31088     msr      primask, r4
+080087b4 0468         ldr      r4, [r0]
+080087b6 a568         ldr      r5, [r4, #8]
+080087b8 6d08         lsrs     r5, r5, #1
+080087ba 6d00         lsls     r5, r5, #1
+080087bc a560         str      r5, [r4, #8]
+080087be 82f31088     msr      primask, r2
+080087c2 2022         movs     r2, #0x20
+080087c4 da60         str      r2, [r3, #0xc]
+080087c6 0022         movs     r2, #0
+080087c8 4267         str      r2, [r0, #0x74]
+080087ca 0267         str      r2, [r0, #0x70]
+080087cc c36e         ldr      r3, [r0, #0x6c]
+080087ce 012b         cmp      r3, #1
+080087d0 02d0         beq      #0x80087d8
+080087d2 fdf7b7fe     bl       #0x8006544
+080087d6 70bd         pop      {r4, r5, r6, pc}
+080087d8 c266         str      r2, [r0, #0x6c]
+080087da eff31082     mrs      r2, primask
+080087de 0123         movs     r3, #1
+080087e0 83f31088     msr      primask, r3
+080087e4 0468         ldr      r4, [r0]
+080087e6 2568         ldr      r5, [r4]
+080087e8 1023         movs     r3, #0x10
+080087ea 9d43         bics     r5, r3
+080087ec 2560         str      r5, [r4]
+080087ee 82f31088     msr      primask, r2
+080087f2 0268         ldr      r2, [r0]
+080087f4 d469         ldr      r4, [r2, #0x1c]
+080087f6 e443         mvns     r4, r4
+080087f8 e406         lsls     r4, r4, #0x1b
+080087fa 00d4         bmi      #0x80087fe
+080087fc 1362         str      r3, [r2, #0x20]
+080087fe 898b         ldrh     r1, [r1, #0x1c]
+08008800 fdf733fb     bl       #0x8005e6a
+08008804 70bd         pop      {r4, r5, r6, pc}
+CODE 0x8008998..0x8008a46
+08008998 70b5         push     {r4, r5, r6, lr}
+0800899a 0146         mov      r1, r0
+0800899c 4031         adds     r1, #0x40
+0800899e 0346         mov      r3, r0
+080089a0 8033         adds     r3, #0x80
+080089a2 0c8c         ldrh     r4, [r1, #0x20]
+080089a4 dd68         ldr      r5, [r3, #0xc]
+080089a6 0268         ldr      r2, [r0]
+080089a8 222d         cmp      r5, #0x22
+080089aa 04d0         beq      #0x80089b6
+080089ac 9069         ldr      r0, [r2, #0x18]
+080089ae 0821         movs     r1, #8
+080089b0 0843         orrs     r0, r1
+080089b2 9061         str      r0, [r2, #0x18]
+080089b4 70bd         pop      {r4, r5, r6, pc}
+080089b6 526a         ldr      r2, [r2, #0x24]
+080089b8 2240         ands     r2, r4
+080089ba 846d         ldr      r4, [r0, #0x58]
+080089bc 2270         strb     r2, [r4]
+080089be 826d         ldr      r2, [r0, #0x58]
+080089c0 521c         adds     r2, r2, #1
+080089c2 8265         str      r2, [r0, #0x58]
+080089c4 ca8b         ldrh     r2, [r1, #0x1e]
+080089c6 521e         subs     r2, r2, #1
+080089c8 ca83         strh     r2, [r1, #0x1e]
+080089ca ca8b         ldrh     r2, [r1, #0x1e]
+080089cc 002a         cmp      r2, #0
+080089ce f1d1         bne      #0x80089b4
+080089d0 eff31082     mrs      r2, primask
+080089d4 0124         movs     r4, #1
+080089d6 84f31088     msr      primask, r4
+080089da 0468         ldr      r4, [r0]
+080089dc 2568         ldr      r5, [r4]
+080089de ff26         movs     r6, #0xff
+080089e0 2136         adds     r6, #0x21
+080089e2 b543         bics     r5, r6
+080089e4 2560         str      r5, [r4]
+080089e6 82f31088     msr      primask, r2
+080089ea eff31082     mrs      r2, primask
+080089ee 0124         movs     r4, #1
+080089f0 84f31088     msr      primask, r4
+080089f4 0468         ldr      r4, [r0]
+080089f6 a568         ldr      r5, [r4, #8]
+080089f8 6d08         lsrs     r5, r5, #1
+080089fa 6d00         lsls     r5, r5, #1
+080089fc a560         str      r5, [r4, #8]
+080089fe 82f31088     msr      primask, r2
+08008a02 2022         movs     r2, #0x20
+08008a04 da60         str      r2, [r3, #0xc]
+08008a06 0022         movs     r2, #0
+08008a08 4267         str      r2, [r0, #0x74]
+08008a0a 0267         str      r2, [r0, #0x70]
+08008a0c c36e         ldr      r3, [r0, #0x6c]
+08008a0e 012b         cmp      r3, #1
+08008a10 02d0         beq      #0x8008a18
+08008a12 fdf797fd     bl       #0x8006544
+08008a16 70bd         pop      {r4, r5, r6, pc}
+08008a18 c266         str      r2, [r0, #0x6c]
+08008a1a eff31082     mrs      r2, primask
+08008a1e 0123         movs     r3, #1
+08008a20 83f31088     msr      primask, r3
+08008a24 0468         ldr      r4, [r0]
+08008a26 2568         ldr      r5, [r4]
+08008a28 1023         movs     r3, #0x10
+08008a2a 9d43         bics     r5, r3
+08008a2c 2560         str      r5, [r4]
+08008a2e 82f31088     msr      primask, r2
+08008a32 0268         ldr      r2, [r0]
+08008a34 d469         ldr      r4, [r2, #0x1c]
+08008a36 e443         mvns     r4, r4
+08008a38 e406         lsls     r4, r4, #0x1b
+08008a3a 00d4         bmi      #0x8008a3e
+08008a3c 1362         str      r3, [r2, #0x20]
+08008a3e 898b         ldrh     r1, [r1, #0x1c]
+08008a40 fdf713fa     bl       #0x8005e6a
+08008a44 70bd         pop      {r4, r5, r6, pc}

@@ -1,0 +1,50 @@
+{
+  "function": "Cy_CapSense_ConfigureMsclpTimer",
+  "pin": "247a9a0f79eb976f144f5fbeb29488c1c2606517",
+  "source_sha256": "777300a0129f032a507e0a222bae0f321f5d4423da2ef4778058255383db5890",
+  "environment": "#include <stdint.h>\n#include <stddef.h>\ntypedef uint32_t cy_capsense_status_t;\n#define CY_CAPSENSE_STATUS_BAD_PARAM 1u\n#define CY_CAPSENSE_STATUS_SUCCESS 0u\n#define CY_CAPSENSE_MW_STATE_ACTIVE_WD_SCAN_MASK 0x10u\n#define MSCLP_AOS_CTL_WAKEUP_TIMER_Msk 0xffffu\n#define MSCLP_AOS_CTL_WAKEUP_TIMER_Pos 0u\ntypedef struct {volatile uint32_t pad[28];volatile uint32_t AOS_CTL;} MSCLP_Type;\ntypedef struct {MSCLP_Type *ptrHwBase;} channel_config;\ntypedef struct {uint8_t pad[8];channel_config *ptrChConfig;} common_config;\ntypedef struct {uint8_t pad[8];uint32_t status;} common_context;\ntypedef struct {uint8_t pad[28];uint32_t activeWakeupTimer,activeWakeupTimerCycles;} internal_context;\ntypedef struct {common_config *ptrCommonConfig;common_context *ptrCommonContext;internal_context *ptrInternalContext;} cy_stc_capsense_context_t;\n_Static_assert(offsetof(MSCLP_Type,AOS_CTL)==0x70,\"AOS offset\");\n_Static_assert(offsetof(common_config,ptrChConfig)==8,\"channel offset\");\n_Static_assert(offsetof(common_context,status)==8,\"status offset\");\n_Static_assert(offsetof(internal_context,activeWakeupTimer)==28,\"interval offset\");\n_Static_assert(offsetof(internal_context,activeWakeupTimerCycles)==32,\"cycles offset\");\n_Static_assert(offsetof(cy_stc_capsense_context_t,ptrInternalContext)==8,\"internal offset\");\nuint32_t Cy_CapSense_MsclpTimerCalcCycles(uint32_t,const cy_stc_capsense_context_t *);\n",
+  "translation_unit_sha256": "8c985153d8b7a40da48a6d2ffc42a1ea143eff74dcda309e72498caa195dea65",
+  "resolved_external_call": "Cy_CapSense_MsclpTimerCalcCycles=0x5d71; actual firmware body, not supplied vendor rebuild",
+  "comparisons": [
+    {
+      "optimization": "Og",
+      "extent": 70,
+      "stock_extent": 70,
+      "exact": false,
+      "stock_sha256": "2b1473d6d32a1733d828e601cd2b4f1db5c59c2c3b29bac083c8730410d607c8",
+      "public_sha256": "7db14e8c654e5dadc53634d6d68b457e80e972efee25beb8d80438d233426dd9",
+      "matching_addresses": []
+    },
+    {
+      "optimization": "O1",
+      "extent": 74,
+      "stock_extent": 70,
+      "exact": false,
+      "stock_sha256": "2b1473d6d32a1733d828e601cd2b4f1db5c59c2c3b29bac083c8730410d607c8",
+      "public_sha256": "b0a749c8b0c042581ffad3041dd4e0e1563d5be5a85d2db1bf75d5d19c604de9",
+      "matching_addresses": []
+    },
+    {
+      "optimization": "O2",
+      "extent": 60,
+      "stock_extent": 70,
+      "exact": false,
+      "stock_sha256": "2b1473d6d32a1733d828e601cd2b4f1db5c59c2c3b29bac083c8730410d607c8",
+      "public_sha256": "5a811479d70139d38a1cebdc12348053fdc4f3a3a0a91034d9b4586aa7c41c03",
+      "matching_addresses": []
+    },
+    {
+      "optimization": "Os",
+      "extent": 56,
+      "stock_extent": 70,
+      "exact": false,
+      "stock_sha256": "2b1473d6d32a1733d828e601cd2b4f1db5c59c2c3b29bac083c8730410d607c8",
+      "public_sha256": "48e8835f41dbdf322f003d11d5346b3f3e3e8c70c0899c59909eb4366b150997",
+      "matching_addresses": []
+    }
+  ],
+  "limits": [
+    "Selected wrapper with explicit opaque context/macro environment and fixed resolved peer address; not full SDK build.",
+    "No peer byte-attribution or unique producer/compiler identification."
+  ]
+}

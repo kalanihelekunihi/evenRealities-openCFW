@@ -1,0 +1,15 @@
+# Audio notification wait: received marker, clearing and blocking boundary
+
+**768 PASS original/independent/public selected-wrapper comparisons**, freshly rerun using the receipt ELF; **120 stop before original block helper 0x455FA8**. No blocking completion, elapsed timeout or scheduler return is simulated. [Source](../../components/audio/notification_wait_offline/wait.c), [results](results.json), [instructions](original-disassembly.txt), [build receipt](reproduction-receipt.json).
+
+Actual CMSIS wait 0x4492C2 invokes original notify-wait 0x455B84; independent wrapper invokes independent index-0 notify-wait. Third comparison compiles the selected retained CMSIS-FreeRTOS v10.5.1 body and calls original notify-wait. IRQ-context, tick and critical providers are real original instructions on all paths. No child result stubs.
+
+Notification value is TCB+0x68; received/wait marker is byte +0x6C. A received marker (2) produces success and clears selected bits on exit unless NoClear is set. Both variants reset marker to 0. **NoClear preserves bits, not the received marker.** Wrapper returns the full observed snapshot, potentially including bits outside the requested mask. WaitAll requires complete inclusion; WaitAny requires an overlap. Requested zero is accepted: WaitAll zero is vacuously satisfied after a successful notify-wait, whereas WaitAny zero cannot match. IRQ rejection precedes invalid high-bit rejection.
+
+Without received state, notify-wait marks state 1. Positive timeout reaches actual block helper with (ticks=3, canBlockIndefinitely=1), under critical depth 1 and BASEPRI 0x30. Tests stop before the first helper instruction, with identical arguments/state; there is no fake wake/timeout. Zero timeout returns immediately and resets marker. A received notification with an unmatched requested mask can loop to the same block boundary. Completed paths restore BASEPRI 0; notification writes are checked under BASEPRI 0x30.
+
+Inputs: requests 0/0x400000/0xC00000/0x80000000, options 0..3, timeout 0/3 ticks, values 0/0x400000/0x800000/0xC00000, logical states 0/1/2, IPSR 0/15. Allocated 128-byte TCB prefix is synthetic, with remaining fields zero. This is not a complete initialized TCB or proof that a running task can hold each constructed state. Constant tick 0xFFFFFFFE is a wrap-sensitive fixture input, not measured time or frequency. Only R0 return ABI is asserted.
+
+Build: `build_offline.py --gcc <ArmGNU13.3 gcc> --output <temporary directory>`; verify: opencfw venv Python `verify.py <wait.elf>` (Unicorn JIT). Source depends on sealed `notification_wake_offline/wake.h`; selected public source is retained in the preceding case-event-flags batch. No production firmware, index, commits or device writes. Prior 904 seals, 110 audit inputs and four checkpoints are checked in preservation.json.
+
+Next actual boundary: full blocking/list insertion, pending-ready resume and timer progression, requiring coherent kernel/task state. This batch does not establish PCM lifetime or cleanup quiescence.

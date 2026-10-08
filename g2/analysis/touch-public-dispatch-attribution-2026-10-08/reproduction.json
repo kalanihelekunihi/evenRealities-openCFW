@@ -1,0 +1,19 @@
+{
+  "gcc": {
+    "path": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+    "sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f"
+  },
+  "linker_script": "SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }\n",
+  "flags": [
+    "-mcpu=cortex-m0plus",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "public_object_sha256": "63e4946e6be1fb5962fba86d7abdacde3c80037abccfbb0237fe81a161af8461",
+  "probe_sha256": "578485ba852901926825d9d45f4b6a70aab596c018f69f87e031410c422df3e8",
+  "elf_sha256": "61a26f30bd9ca19125785873ae7910012b7302554fe3396d06007bf6718c88e2",
+  "rebuild": "Run screen_public_dispatch.py with --gcc, --source (pinned LP sensing file), --output (scratch directory). Link its Og.o and callback_probe.c with flags and linker script above; run verify_public.py ELF."
+}

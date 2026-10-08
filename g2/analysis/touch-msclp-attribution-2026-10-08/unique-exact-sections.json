@@ -1,0 +1,26 @@
+{
+  "source_pin": "35f1714623cfea682d5e285af80d50416b4c7bbc",
+  "compiler": "ArmGNU13.3 -Og",
+  "matches": [
+    {
+      "function": "Cy_MSCLP_Capture",
+      "bytes": 48,
+      "matches": [
+        "0x8fa0"
+      ],
+      "sha256": "72b50f8c37b730c97a001d6df65bd0a35c49ae3979bfa1da20bc81c7d5f99441"
+    },
+    {
+      "function": "Cy_MSCLP_ConfigureScan",
+      "bytes": 160,
+      "matches": [
+        "0x9178"
+      ],
+      "sha256": "aca4046f59c198244af1fd481ce56c598688f0604b35c51169c238f40dda2ce5"
+    }
+  ],
+  "limitations": [
+    "No relocation-bearing or short sections considered; overlapping matches must not be double-counted.",
+    "Candidate unique compiled section equality; function extent/name attribution requires address/function-boundary corroboration."
+  ]
+}

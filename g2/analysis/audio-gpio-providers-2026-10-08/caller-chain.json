@@ -1,0 +1,19 @@
+{
+  "verified_direct_edges": [
+    {
+      "site": "0x5CDD2C",
+      "target": "0x4C2AE8"
+    },
+    {
+      "site": "0x4C2AF0",
+      "target": "0x47FAE8"
+    },
+    {
+      "site": "0x47FDF4",
+      "target": "0x44B158"
+    }
+  ],
+  "method": "Thumb BL encoding target scan of locked main image plus local Capstone instruction confirmation; not exhaustive indirect/cross-image call graph",
+  "incoming_r5_boundary": "Visible wrappers do not initialize R5; outer caller/transitive board-init register state is not proven. Fresh common capture sets R5=0x20074284; stored-capture path preserves incoming R5.",
+  "status_boundary": "Platform continuation0x4C2AF4 overwrites initializer R0 and calls actual power control unconditionally."
+}

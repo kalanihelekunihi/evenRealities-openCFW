@@ -1,0 +1,19 @@
+{
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "source": "g2/components/audio/timer_queue_wait_offline/wait.c",
+  "source_sha256": "2533a664b6fdedd4af43e21cedf6345f8e954da3676c844fa4e84ab8d5a8987d",
+  "sealed_delay_peer": "g2/components/audio/delayed_block_offline/block.c",
+  "sealed_delay_peer_sha256": "0ecf98f19aac0b7cf4aa81f46cbf5021b418f205e0d3e3bc05867052fe1f675a",
+  "elf": "/tmp/opencfw-audio-timer-queue-wait/wait.elf",
+  "elf_sha256": "19366c43bfb610952eda21c96f653bdc07ae16ab7310be5339366fce03cb4f25",
+  "link_script": "audio_timer_wait_enter = 0x4420d1; audio_timer_wait_exit = 0x4420e9; audio_timer_wait_unlock = 0x441f89; audio_block_remove = 0x4560e9; audio_block_sorted_insert = 0x4560b3; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }"
+}

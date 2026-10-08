@@ -1,0 +1,61 @@
+{
+  "function": "Cy_CapSense_InterruptHandler_V3Lp",
+  "pin": "247a9a0f79eb976f144f5fbeb29488c1c2606517",
+  "source_sha256": "777300a0129f032a507e0a222bae0f321f5d4423da2ef4778058255383db5890",
+  "translation_unit_sha256": "55521fd2d84a68288d737d8a0ae1aa16becc0999fadf40b35067c1b1fb0768fa",
+  "environment": "#include <stdint.h>\n#include <stddef.h>\ntypedef void MSCLP_Type;\ntypedef struct { void *callbacks[4]; void (*ptrISRCallback)(void *); } internal_context;\ntypedef struct { void *ptrCommonConfig; void *ptrCommonContext; internal_context *ptrInternalContext; } cy_stc_capsense_context_t;\n_Static_assert(offsetof(cy_stc_capsense_context_t,ptrInternalContext)==8,\"internal offset\");\n_Static_assert(offsetof(internal_context,ptrISRCallback)==16,\"ISR offset\");\n",
+  "comparisons": [
+    {
+      "optimization": "Og",
+      "stock_address": "0x5fba",
+      "stock_extent": 12,
+      "public_extent": 12,
+      "exact": true,
+      "relocations": 0,
+      "public_sha256": "093cea1446a2a041c7d4522cf907f0a8d94b34d66750a5164d39324b8175627b",
+      "stock_sha256": "093cea1446a2a041c7d4522cf907f0a8d94b34d66750a5164d39324b8175627b",
+      "matching_offsets": [
+        "0x5fba"
+      ]
+    },
+    {
+      "optimization": "O1",
+      "stock_address": "0x5fba",
+      "stock_extent": 12,
+      "public_extent": 12,
+      "exact": true,
+      "relocations": 0,
+      "public_sha256": "093cea1446a2a041c7d4522cf907f0a8d94b34d66750a5164d39324b8175627b",
+      "stock_sha256": "093cea1446a2a041c7d4522cf907f0a8d94b34d66750a5164d39324b8175627b",
+      "matching_offsets": [
+        "0x5fba"
+      ]
+    },
+    {
+      "optimization": "O2",
+      "stock_address": "0x5fba",
+      "stock_extent": 12,
+      "public_extent": 12,
+      "exact": false,
+      "relocations": 0,
+      "public_sha256": "8dca3426fd9df8c662868bd4ec82b77666db70c78b4a91083c62738b55ff7a8a",
+      "stock_sha256": "093cea1446a2a041c7d4522cf907f0a8d94b34d66750a5164d39324b8175627b",
+      "matching_offsets": []
+    },
+    {
+      "optimization": "Os",
+      "stock_address": "0x5fba",
+      "stock_extent": 12,
+      "public_extent": 12,
+      "exact": false,
+      "relocations": 0,
+      "public_sha256": "8dca3426fd9df8c662868bd4ec82b77666db70c78b4a91083c62738b55ff7a8a",
+      "stock_sha256": "093cea1446a2a041c7d4522cf907f0a8d94b34d66750a5164d39324b8175627b",
+      "matching_offsets": []
+    }
+  ],
+  "limits": [
+    "Verbatim selected public function, explicit minimal ARM32 layout and macros; not a complete SDK build.",
+    "No uniquely identified producer compiler/release or callback-body claim."
+  ]
+}

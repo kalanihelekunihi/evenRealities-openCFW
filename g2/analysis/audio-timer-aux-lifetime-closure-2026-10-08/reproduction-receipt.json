@@ -1,0 +1,20 @@
+{
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "source": "g2/components/audio/timer_aux_lifetime_offline/aux.c",
+  "source_sha256": "cc76f47beb27f965a6c972bb096553fa9494f66ae4a6fb186097a0bb265254a6",
+  "sealed_peer": "g2/components/audio/timer_commands_offline/timer.c",
+  "sealed_peer_sha256": "7a874298544556f04c0e360228a0937e2b62b845d4ae7428730a87f37372e2db",
+  "header_sha256": "b3f894ca2af122ff2623446e3375db0091aa38e74ef62fb1011166d4268d9519",
+  "elf": "/tmp/opencfw-audio-timer-aux/aux.elf",
+  "elf_sha256": "1a159dfc02fb5f32a41ffe508a44e41f47542e72bf7c268ee8a18525387395a3",
+  "link_script": "audio_aux_irq_context = 0x44900f; audio_aux_get_id = 0x47eb27; audio_aux_command = 0x47e7b1; audio_aux_free = 0x456211; audio_aux_suspend = 0x454d7d; audio_aux_resume = 0x454dcd; audio_aux_sample_time = 0x47e917; audio_aux_list_remove = 0x4560e9; audio_timer_queue_receive = 0x441b0b; audio_timer_sample_time = 0x47e917; audio_timer_list_remove = 0x4560e9; audio_timer_heap_free = 0x456211; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }"
+}

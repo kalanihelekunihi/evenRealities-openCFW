@@ -1,0 +1,72 @@
+FUNCTION reset
+005a1da4 e0b5 push {r5, r6, r7, lr}
+005a1da6 2148 ldr r0, [pc, #0x84]
+005a1da8 0068 ldr r0, [r0]
+005a1daa 0028 cmp r0, #0
+005a1dac 1cd1 bne #0x5a1de8
+005a1dae 2048 ldr r0, [pc, #0x80]
+005a1db0 0068 ldr r0, [r0]
+005a1db2 0028 cmp r0, #0
+005a1db4 18d1 bne #0x5a1de8
+005a1db6 1d20 movs r0, #0x1d
+005a1db8 ddf6fefb bl #0x47f5b8
+005a1dbc 0028 cmp r0, #0
+005a1dbe 01d0 beq #0x5a1dc4
+005a1dc0 0120 movs r0, #1
+005a1dc2 16e0 b #0x5a1df2
+005a1dc4 6846 mov r0, sp
+005a1dc6 9fed0d0a vldr s0, [pc, #0x34]
+005a1dca def62df9 bl #0x480028
+005a1dce 0028 cmp r0, #0
+005a1dd0 0cd1 bne #0x5a1dec
+005a1dd2 0023 movs r3, #0
+005a1dd4 0122 movs r2, #1
+005a1dd6 2c49 ldr r1, [pc, #0xb0]
+005a1dd8 40f6c410 movw r0, #0x9c4
+005a1ddc def60efd bl #0x4807fc
+005a1de0 0028 cmp r0, #0
+005a1de2 05d0 beq #0x5a1df0
+005a1de4 0420 movs r0, #4
+005a1de6 04e0 b #0x5a1df2
+005a1de8 0120 movs r0, #1
+005a1dea 02e0 b #0x5a1df2
+005a1dec 0120 movs r0, #1
+005a1dee 00e0 b #0x5a1df2
+005a1df0 0020 movs r0, #0
+005a1df2 0ebd pop {r1, r2, r3, pc}
+FUNCTION temperature_wrapper
+00480028 1fb5 push {r0, r1, r2, r3, r4, lr}
+0048002a 0400 movs r4, r0
+0048002c 8ded000a vstr s0, [sp]
+00480030 6a46 mov r2, sp
+00480032 0021 movs r1, #0
+00480034 0220 movs r0, #2
+00480036 00f06cf9 bl #0x480312
+0048003a 0028 cmp r0, #0
+0048003c 05d1 bne #0x48004a
+0048003e 0198 ldr r0, [sp, #4]
+00480040 2060 str r0, [r4]
+00480042 0298 ldr r0, [sp, #8]
+00480044 6060 str r0, [r4, #4]
+00480046 0020 movs r0, #0
+00480048 04e0 b #0x480054
+0048004a 0020 movs r0, #0
+0048004c 2060 str r0, [r4]
+0048004e 0020 movs r0, #0
+00480050 6060 str r0, [r4, #4]
+00480052 0120 movs r0, #1
+00480054 04b0 add sp, #0x10
+00480056 10bd pop {r4, pc}
+FUNCTION generic_control
+00480312 10b5 push {r4, lr}
+00480314 dff8e443 ldr.w r4, [pc, #0x3e4]
+00480318 6368 ldr r3, [r4, #4]
+0048031a 002b cmp r3, #0
+0048031c 04d0 beq #0x480328
+0048031e c9b2 uxtb r1, r1
+00480320 c0b2 uxtb r0, r0
+00480322 6368 ldr r3, [r4, #4]
+00480324 9847 blx r3
+00480326 00e0 b #0x48032a
+00480328 0020 movs r0, #0
+0048032a 10bd pop {r4, pc}

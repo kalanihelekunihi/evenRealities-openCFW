@@ -1,0 +1,136 @@
+
+# CODE 0x454dcc..0x454efe (end exclusive)
+00454dcc 70b5         push       {r4, r5, r6, lr}
+00454dce 0024         movs       r4, #0
+00454dd0 0025         movs       r5, #0
+00454dd2 dff89466     ldr.w      r6, [pc, #0x694]
+00454dd6 3068         ldr        r0, [r6]
+00454dd8 0028         cmp        r0, #0
+00454dda 06d1         bne        #0x454dea
+00454ddc a5f162f9     bl         #0x5fa0a4
+00454de0 0020         movs       r0, #0
+00454de2 5ff0ff31     movs.w     r1, #-1
+00454de6 0860         str        r0, [r1]
+00454de8 fee7         b          #0x454de8
+00454dea edf771f9     bl         #0x4420d0
+00454dee 3068         ldr        r0, [r6]
+00454df0 401e         subs       r0, r0, #1
+00454df2 3060         str        r0, [r6]
+00454df4 3068         ldr        r0, [r6]
+00454df6 0028         cmp        r0, #0
+00454df8 7dd1         bne        #0x454ef6
+00454dfa dff8a403     ldr.w      r0, [pc, #0x3a4]
+00454dfe 0068         ldr        r0, [r0]
+00454e00 0028         cmp        r0, #0
+00454e02 55d1         bne        #0x454eb0
+00454e04 77e0         b          #0x454ef6
+00454e06 c868         ldr        r0, [r1, #0xc]
+00454e08 c468         ldr        r4, [r0, #0xc]
+00454e0a a06a         ldr        r0, [r4, #0x28]
+00454e0c 216a         ldr        r1, [r4, #0x20]
+00454e0e e269         ldr        r2, [r4, #0x1c]
+00454e10 9160         str        r1, [r2, #8]
+00454e12 e169         ldr        r1, [r4, #0x1c]
+00454e14 226a         ldr        r2, [r4, #0x20]
+00454e16 5160         str        r1, [r2, #4]
+00454e18 4168         ldr        r1, [r0, #4]
+00454e1a 14f11802     adds.w     r2, r4, #0x18
+00454e1e 9142         cmp        r1, r2
+00454e20 01d1         bne        #0x454e26
+00454e22 216a         ldr        r1, [r4, #0x20]
+00454e24 4160         str        r1, [r0, #4]
+00454e26 0021         movs       r1, #0
+00454e28 a162         str        r1, [r4, #0x28]
+00454e2a 0168         ldr        r1, [r0]
+00454e2c 491e         subs       r1, r1, #1
+00454e2e 0160         str        r1, [r0]
+00454e30 6069         ldr        r0, [r4, #0x14]
+00454e32 e168         ldr        r1, [r4, #0xc]
+00454e34 a268         ldr        r2, [r4, #8]
+00454e36 9160         str        r1, [r2, #8]
+00454e38 a168         ldr        r1, [r4, #8]
+00454e3a e268         ldr        r2, [r4, #0xc]
+00454e3c 5160         str        r1, [r2, #4]
+00454e3e 4168         ldr        r1, [r0, #4]
+00454e40 221d         adds       r2, r4, #4
+00454e42 9142         cmp        r1, r2
+00454e44 01d1         bne        #0x454e4a
+00454e46 e168         ldr        r1, [r4, #0xc]
+00454e48 4160         str        r1, [r0, #4]
+00454e4a 0021         movs       r1, #0
+00454e4c 6161         str        r1, [r4, #0x14]
+00454e4e 0168         ldr        r1, [r0]
+00454e50 491e         subs       r1, r1, #1
+00454e52 0160         str        r1, [r0]
+00454e54 dff85403     ldr.w      r0, [pc, #0x354]
+00454e58 0168         ldr        r1, [r0]
+00454e5a e26a         ldr        r2, [r4, #0x2c]
+00454e5c 9142         cmp        r1, r2
+00454e5e 01d2         bhs        #0x454e64
+00454e60 e16a         ldr        r1, [r4, #0x2c]
+00454e62 0160         str        r1, [r0]
+00454e64 dff84803     ldr.w      r0, [pc, #0x348]
+00454e68 1421         movs       r1, #0x14
+00454e6a e26a         ldr        r2, [r4, #0x2c]
+00454e6c 4a43         muls       r2, r1, r2
+00454e6e 0244         add        r2, r0
+00454e70 5268         ldr        r2, [r2, #4]
+00454e72 a260         str        r2, [r4, #8]
+00454e74 9368         ldr        r3, [r2, #8]
+00454e76 e360         str        r3, [r4, #0xc]
+00454e78 231d         adds       r3, r4, #4
+00454e7a 9668         ldr        r6, [r2, #8]
+00454e7c 7360         str        r3, [r6, #4]
+00454e7e 231d         adds       r3, r4, #4
+00454e80 9360         str        r3, [r2, #8]
+00454e82 e26a         ldr        r2, [r4, #0x2c]
+00454e84 4a43         muls       r2, r1, r2
+00454e86 0244         add        r2, r0
+00454e88 6261         str        r2, [r4, #0x14]
+00454e8a e26a         ldr        r2, [r4, #0x2c]
+00454e8c 4a43         muls       r2, r1, r2
+00454e8e e36a         ldr        r3, [r4, #0x2c]
+00454e90 01fb03f1     mul        r1, r1, r3
+00454e94 4158         ldr        r1, [r0, r1]
+00454e96 491c         adds       r1, r1, #1
+00454e98 8150         str        r1, [r0, r2]
+00454e9a e06a         ldr        r0, [r4, #0x2c]
+00454e9c dff80413     ldr.w      r1, [pc, #0x304]
+00454ea0 0968         ldr        r1, [r1]
+00454ea2 c96a         ldr        r1, [r1, #0x2c]
+00454ea4 8842         cmp        r0, r1
+00454ea6 03d3         blo        #0x454eb0
+00454ea8 0120         movs       r0, #1
+00454eaa dff8681b     ldr.w      r1, [pc, #0xb68]
+00454eae 0860         str        r0, [r1]
+00454eb0 dff8f418     ldr.w      r1, [pc, #0x8f4]
+00454eb4 0868         ldr        r0, [r1]
+00454eb6 0028         cmp        r0, #0
+00454eb8 a5d1         bne        #0x454e06
+00454eba 002c         cmp        r4, #0
+00454ebc 01d0         beq        #0x454ec2
+00454ebe 00f0dafc     bl         #0x455876
+00454ec2 dff8546b     ldr.w      r6, [pc, #0xb54]
+00454ec6 3468         ldr        r4, [r6]
+00454ec8 002c         cmp        r4, #0
+00454eca 0cd0         beq        #0x454ee6
+00454ecc 00f0bef8     bl         #0x45504c
+00454ed0 0028         cmp        r0, #0
+00454ed2 03d0         beq        #0x454edc
+00454ed4 0120         movs       r0, #1
+00454ed6 dff83c1b     ldr.w      r1, [pc, #0xb3c]
+00454eda 0860         str        r0, [r1]
+00454edc 641e         subs       r4, r4, #1
+00454ede 002c         cmp        r4, #0
+00454ee0 f4d1         bne        #0x454ecc
+00454ee2 0020         movs       r0, #0
+00454ee4 3060         str        r0, [r6]
+00454ee6 dff82c0b     ldr.w      r0, [pc, #0xb2c]
+00454eea 0068         ldr        r0, [r0]
+00454eec 0028         cmp        r0, #0
+00454eee 02d0         beq        #0x454ef6
+00454ef0 0125         movs       r5, #1
+00454ef2 edf7e3f8     bl         #0x4420bc
+00454ef6 edf7f7f8     bl         #0x4420e8
+00454efa 2800         movs       r0, r5
+00454efc 70bd         pop        {r4, r5, r6, pc}

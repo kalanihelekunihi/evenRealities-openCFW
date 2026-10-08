@@ -1,0 +1,22 @@
+{
+  "sources": {
+    "g2/components/audio/trim_initialization_offline/initialize.c": "c8a43c953db2945a1e9dd3f934f6517440e6cfc87cdeafd16f3c535dce00760b",
+    "g2/components/audio/trim_initialization_offline/initialize.h": "94249afadb9f6a439d1b62a185b77aaea53793ec85157779c3a39a2d31455c3c"
+  },
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m33",
+    "-mfpu=fpv5-sp-d16",
+    "-mfloat-abi=hard",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib",
+    "-fshort-enums"
+  ],
+  "elf": "/tmp/opencfw-trim-initialization/control.elf",
+  "elf_sha256": "ce87967ab8242a4d04fae03434d73f737b6a987a72f6264eaf1d3515014d0385",
+  "link_script": "SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }"
+}

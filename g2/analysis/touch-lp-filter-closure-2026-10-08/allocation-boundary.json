@@ -1,0 +1,37 @@
+{
+  "history_address": "0x2000065e",
+  "next_known_object": "0x20000808",
+  "gap_bytes": 426,
+  "declared_allocation": null,
+  "searched_for_generated_declarations_or_maps": [
+    "g2/config-recovered",
+    "third-party/upstream/infineon-capsense",
+    "g2/build/pseudocode-first/20260930T190500Z (tools excluded from candidate maps)"
+  ],
+  "generated_cycfg_or_target_link_map_found": false,
+  "required_input": "Producer-generated cycfg_capsense.c/h allocation declaration or official link map/object symbol sizes identifying history and its bounds.",
+  "static_direct_call_scan": {
+    "target": "0x6d74",
+    "found": [
+      "0x705a"
+    ],
+    "caller_arguments": "wrapper0x7050 passesfirst0,count4; candidate scan is not exhaustive indirect/CFG proof"
+  },
+  "configured_result_start": {
+    "1": 11,
+    "2": 22,
+    "3": 34,
+    "4": 44
+  },
+  "nominal_complete_result_words": {
+    "1": 245,
+    "2": 234,
+    "3": 222,
+    "4": 212
+  },
+  "limits": [
+    "256-word configuration arithmetic is instruction-proven; physical FIFO wrap/saturation/occupancy is not emulated.",
+    "Four-slot424-byte history fits before next object, but this does not prove allocation size.",
+    "Partial-slot injected transfers and earlier54-frame overwrite remain synthetic; default hardware manifestation/reachability is unproven."
+  ]
+}

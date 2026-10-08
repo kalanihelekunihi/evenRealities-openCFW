@@ -1,0 +1,20 @@
+{
+  "repository": "https://github.com/AmbiqMicro/ambiqhal_ambiq",
+  "pin": "5efc0228528a8adce5eae0d226fac85d2551eb3b",
+  "files": {
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/am_hal_spotmgr_pcm2_1.c": "5646b20d8ccf59042523f0e9095f8b4a96b2231b6a53d3ef1b3994dcce67fbad",
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/am_hal_spotmgr.c": "8e266d10f7622324f786db522b48919a48ec95998ce1533f8effe36ecc2be3cc",
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/am_hal_spotmgr.h": "63fefbd897b5be0d0b29ba3b8017b10269e50f84fbeed841a98b74620a053f55"
+  },
+  "source_roles": {
+    "am_hal_spotmgr_pcm2_1.c": "Preparation, internal-power-domain set, power-state determination, trim update, timer completion and TON leads.",
+    "am_hal_spotmgr.c": "Shared timer and callback infrastructure.",
+    "am_hal_spotmgr.h": "Stimulus/CPU/GPU/temperature enum names and request layout corroboration."
+  },
+  "remaining_leads": [
+    "Native PCM2.1 TON0x5A0D9C, timer publication0x5A0AE8, completion0x5A0B9C and boost removal0x5A0B54 remain common original-instruction dependencies.",
+    "Earlier PCM0.7/2.0 source families remain actionable. No project-wide exhaustion claim."
+  ],
+  "new_downloads": false,
+  "practical_status": "Existing pinned standalone sparse checkout reused; root submodule registration/config/index untouched."
+}

@@ -1,0 +1,16 @@
+{
+  "pin": "5efc0228528a8adce5eae0d226fac85d2551eb3b",
+  "files": {
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/am_hal_pwrctrl.c": "84cc1da6a01dd46f29e0465074ad92602c4dd6d7a12f7f4596aef64a9a250586",
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/am_hal_spotmgr_pcm2_0.c": "85cf17f69d6b8eefe90ad0c1e60468a1e4183841c1cb6d579857902174cc4f4a"
+  },
+  "leads": [
+    "am_hal_pwrctrl.c low_power_init one-time trim capture",
+    "am_hal_spotmgr_pcm2_0.c initialization variant/date predicate"
+  ],
+  "differences": [
+    "Stock variant initializer has only three byte writes; public SDK analog-control writes absent.",
+    "Stock capture caches active VDDC/VDDF registers and additional TON fields; cannot substitute SDK capture wholesale."
+  ],
+  "source_exhausted": false
+}

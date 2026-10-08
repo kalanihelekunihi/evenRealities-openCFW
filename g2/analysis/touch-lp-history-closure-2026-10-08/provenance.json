@@ -1,0 +1,75 @@
+{
+  "firmware_path": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+  "firmware_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "wrapper_bytes": 32,
+  "raw_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "raw_load_address": "0x3300",
+  "architecture": "ARM Cortex-M0+ Thumb little endian",
+  "functions": {
+    "tuner_reset": "0x7e04..0x7e14",
+    "lp_transfer": "0x6530",
+    "scan_isr": "0x6780",
+    "project_irq": "0x3948",
+    "filter_init_type7_skip": "0x4e6c",
+    "preprocess_type7_skip": "0x5c02"
+  },
+  "stock_context_address": "0x200004ec",
+  "stock_msclp_address": "0x40290000",
+  "reset_table_address": "0xb578",
+  "reset_copy": {
+    "source": "0xb58c",
+    "destination": "0x200004c0",
+    "words": 241
+  },
+  "reset_zero": {
+    "destination": "0x200008a8",
+    "words": 428
+  },
+  "context_words": [
+    "0xb2a8",
+    "0x20000528",
+    "0x20000c50",
+    "0xb0f8",
+    "0x20000548",
+    "0xb34c",
+    "0xb33c",
+    "0x20000c38",
+    "0x0",
+    "0x20000b38",
+    "0x20000aac",
+    "0x200009fc",
+    "0x20000818",
+    "0x20000808",
+    "0x2000065e"
+  ],
+  "pdl_pin": "35f1714623cfea682d5e285af80d50416b4c7bbc",
+  "capsense_semantic_pin": "247a9a0f79eb976f144f5fbeb29488c1c2606517",
+  "semantic_source_sha256": "777300a0129f032a507e0a222bae0f321f5d4423da2ef4778058255383db5890",
+  "limits": "No whole-image equality, actual LP-history capacity, analog/time/IRQ-delivery or unknown external callback-body claim.",
+  "history": {
+    "pointer": "0x2000065e",
+    "next_known_object": "0x20000808",
+    "window_upper_bound_bytes": 426,
+    "declared_capacity": null,
+    "locked_slots": [
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        0,
+        2
+      ],
+      [
+        0,
+        3
+      ]
+    ]
+  },
+  "new_helper": "decoder.c is new offline/app logic; not stock reconstruction",
+  "source_receipt_sha256": "c9d57c4ac28f0090d4c1dd632dfa1d005151aafca8bba3001e6aee4d86ee464a"
+}

@@ -1,0 +1,17 @@
+{
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "source": "g2/components/audio/timer_wrap_offline/wrap.c",
+  "source_sha256": "dd8d90983258bd9953eebf5e27e2097cef2f8dcb8ab4d645407a0e85290b5876",
+  "elf": "/tmp/opencfw-audio-timer-wrap/wrap.elf",
+  "elf_sha256": "e2ffb9adb96eb93ad02e4f2dcb7e266aec91af0237baa3c69e48443d71d4d846",
+  "link_script": "audio_timer_wrap_get_tick = 0x454eff; audio_timer_wrap_expire = 0x47e83b; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }"
+}

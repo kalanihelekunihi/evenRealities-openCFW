@@ -1,0 +1,86 @@
+{
+  "status": "PASS",
+  "elf_sha256": "7c8485aee73efc4b4eeaeda089b0d2f82719d0a21a1a18ab2a320fbda346bc6b",
+  "tests": [
+    {
+      "file": "classify-results.json",
+      "cases": 41,
+      "elf_sha256": "7c8485aee73efc4b4eeaeda089b0d2f82719d0a21a1a18ab2a320fbda346bc6b",
+      "status": "PASS"
+    },
+    {
+      "file": "itcm-results.json",
+      "cases": 74,
+      "elf_sha256": "7c8485aee73efc4b4eeaeda089b0d2f82719d0a21a1a18ab2a320fbda346bc6b",
+      "status": "PASS"
+    },
+    {
+      "file": "newer-results.json",
+      "cases": 1339,
+      "elf_sha256": "7c8485aee73efc4b4eeaeda089b0d2f82719d0a21a1a18ab2a320fbda346bc6b",
+      "status": "PASS"
+    },
+    {
+      "file": "planner-results.json",
+      "cases": 2928,
+      "elf_sha256": "7c8485aee73efc4b4eeaeda089b0d2f82719d0a21a1a18ab2a320fbda346bc6b",
+      "status": "PASS"
+    },
+    {
+      "file": "prepare-results.json",
+      "cases": 363,
+      "elf_sha256": "7c8485aee73efc4b4eeaeda089b0d2f82719d0a21a1a18ab2a320fbda346bc6b",
+      "status": "PASS"
+    },
+    {
+      "file": "public-leaf-results.json",
+      "cases": 441,
+      "elf_sha256": null,
+      "status": "PASS"
+    },
+    {
+      "file": "read-init-results.json",
+      "cases": 2376,
+      "elf_sha256": "7c8485aee73efc4b4eeaeda089b0d2f82719d0a21a1a18ab2a320fbda346bc6b",
+      "status": "PASS"
+    },
+    {
+      "file": "results.json",
+      "cases": 456,
+      "elf_sha256": "7c8485aee73efc4b4eeaeda089b0d2f82719d0a21a1a18ab2a320fbda346bc6b",
+      "status": "PASS"
+    },
+    {
+      "file": "revision-results.json",
+      "cases": 40,
+      "elf_sha256": "7c8485aee73efc4b4eeaeda089b0d2f82719d0a21a1a18ab2a320fbda346bc6b",
+      "status": "PASS"
+    },
+    {
+      "file": "route-results.json",
+      "cases": 3200,
+      "elf_sha256": "7c8485aee73efc4b4eeaeda089b0d2f82719d0a21a1a18ab2a320fbda346bc6b",
+      "status": "PASS"
+    },
+    {
+      "file": "select-results.json",
+      "cases": 400,
+      "elf_sha256": "7c8485aee73efc4b4eeaeda089b0d2f82719d0a21a1a18ab2a320fbda346bc6b",
+      "status": "PASS"
+    },
+    {
+      "file": "timer-results.json",
+      "cases": 120,
+      "elf_sha256": "7c8485aee73efc4b4eeaeda089b0d2f82719d0a21a1a18ab2a320fbda346bc6b",
+      "status": "PASS"
+    }
+  ],
+  "main_cases": 11337,
+  "stale_receipt_superseded": {
+    "old_newer_elf_sha256": "ee89cc3ba58f21eb41b8beeb607926032f30f554d1bb8313128953ba71e6ddd6",
+    "old_cases": 1297,
+    "valid_for_current_build": false,
+    "successor_cases": 1339,
+    "reason": "Preparation helper integration exposed inverted profile-range predicate; corrected and revalidated."
+  }
+}

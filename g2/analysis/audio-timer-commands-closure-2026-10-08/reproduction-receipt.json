@@ -1,0 +1,19 @@
+{
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "source": "g2/components/audio/timer_commands_offline/timer.c",
+  "source_sha256": "7a874298544556f04c0e360228a0937e2b62b845d4ae7428730a87f37372e2db",
+  "header": "g2/components/audio/timer_commands_offline/timer.h",
+  "header_sha256": "b3f894ca2af122ff2623446e3375db0091aa38e74ef62fb1011166d4268d9519",
+  "elf": "/tmp/opencfw-audio-timer/timer.elf",
+  "elf_sha256": "3183a904a58a52b42335bb8a57a697745eb8d6bd953fd1a53824fa06323735aa",
+  "link_script": "audio_timer_queue_receive = 0x441b0b; audio_timer_sample_time = 0x47e917; audio_timer_list_remove = 0x4560e9; audio_timer_heap_free = 0x456211; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }"
+}

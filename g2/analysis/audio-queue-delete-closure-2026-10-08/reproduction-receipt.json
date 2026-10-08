@@ -1,0 +1,17 @@
+{
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "elf": "/tmp/opencfw-audio-delete/delete.elf",
+  "elf_sha256": "3f1fa4d26ff160501141187e0b5c2464a4d3aa87e0bbec1e838afdb0a7ff592f",
+  "flags": [
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "link_script": "audio_irq_context = 0x44900f; audio_suspend = 0x454d7d; audio_resume = 0x454dcd; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }",
+  "source": "g2/components/audio/queue_delete_offline/delete.c",
+  "source_sha256": "1aafef8bd20a51aa5d18d5bc071e50d3fc10d380be834c69d58d48e67aa61aba"
+}

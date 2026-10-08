@@ -1,0 +1,26 @@
+{
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "version": "arm-none-eabi-gcc (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) 13.3.1 20240614",
+  "official_source_url": "https://raw.githubusercontent.com/STMicroelectronics/stm32g0xx-hal-driver/a0cf8a8b96183fdcc2e3b1cf0bcf0825f27bd0c9/Src/stm32g0xx_hal_uart.c",
+  "pin": "a0cf8a8b96183fdcc2e3b1cf0bcf0825f27bd0c9",
+  "source_sha256": "9b7e0e2f5f21dc4ee86f4dfb228370ed3f19e01cbc148bfb41835096ecd3cc9a",
+  "public_environment": "#include <stdint.h>\n#include <stddef.h>\ntypedef struct {volatile uint32_t CR1,CR2,CR3,BRR,GTPR,RTOR,RQR,ISR,ICR;} USART_TypeDef;\ntypedef struct DMA_HandleTypeDef DMA_HandleTypeDef;\nstruct DMA_HandleTypeDef {uint8_t pad[56];void (*XferAbortCallback)(DMA_HandleTypeDef *);};\ntypedef struct UART_HandleTypeDef UART_HandleTypeDef;\nstruct UART_HandleTypeDef {USART_TypeDef *Instance;uint8_t pad[104];uint32_t ReceptionType,RxEventType;void (*RxISR)(UART_HandleTypeDef *);uint32_t TxISR;void *hdmatx;DMA_HandleTypeDef *hdmarx;uint32_t Lock,gState,RxState,ErrorCode;};\n_Static_assert(offsetof(UART_HandleTypeDef,RxISR)==0x74,\"RxISR\");\n_Static_assert(offsetof(UART_HandleTypeDef,ErrorCode)==0x90,\"ErrorCode\");\n#define READ_REG(x) (x)\n#define HAL_IS_BIT_SET(r,b) (((r)&(b))==(b))\n#define USART_ISR_PE 1u\n#define USART_ISR_FE 2u\n#define USART_ISR_NE 4u\n#define USART_ISR_ORE 8u\n#define USART_ISR_RTOF 0x800u\n#define USART_ISR_RXNE_RXFNE 0x20u\n#define USART_CR1_RXNEIE_RXFNEIE 0x20u\n#define USART_CR1_PEIE 0x100u\n#define USART_CR1_RTOIE 0x4000000u\n#define USART_CR1_IDLEIE 0x10u\n#define USART_CR3_RXFTIE 0x10000000u\n#define USART_CR3_EIE 1u\n#define USART_CR3_DMAR 0x40u\n#define UART_CLEAR_PEF 1u\n#define UART_CLEAR_FEF 2u\n#define UART_CLEAR_NEF 4u\n#define UART_CLEAR_OREF 8u\n#define UART_CLEAR_RTOF 0x800u\n#define HAL_UART_ERROR_PE 1u\n#define HAL_UART_ERROR_FE 4u\n#define HAL_UART_ERROR_NE 2u\n#define HAL_UART_ERROR_ORE 8u\n#define HAL_UART_ERROR_RTO 0x20u\n#define HAL_UART_ERROR_NONE 0u\n#define HAL_UART_RECEPTION_TOIDLE 1u\n#define HAL_UART_RECEPTION_STANDARD 0u\n#define HAL_UART_STATE_READY 0x20u\n#define HAL_OK 0u\n#define USE_HAL_UART_REGISTER_CALLBACKS 0\n#define __HAL_UART_CLEAR_FLAG(h,f) ((h)->Instance->ICR=(f))\nstatic void public_atomic_clear(volatile uint32_t *r,uint32_t mask) {\n uint32_t saved,one=1;__asm volatile(\"mrs %0, primask\\nmsr primask, %1\":\"=&r\"(saved):\"r\"(one):\"memory\");*r&=~mask;__asm volatile(\"msr primask, %0\"::\"r\"(saved):\"memory\");\n}\n#define ATOMIC_CLEAR_BIT(r,b) public_atomic_clear(&(r),(b))\nstatic void UART_EndRxTransfer(UART_HandleTypeDef *);\nvoid HAL_UART_ErrorCallback(UART_HandleTypeDef *);\nvoid case_uart_other_irq(UART_HandleTypeDef *);\nvoid UART_DMAAbortOnError(DMA_HandleTypeDef *);\nuint32_t HAL_DMA_Abort_IT(DMA_HandleTypeDef *);\n",
+  "public_translation_unit_sha256": "89615f34afb89678e03e3237c088a1d41a0e540bdaa8cec3af26394c75f3ad64",
+  "independent_source_sha256": "13b06b132908c9527cc8ea04919a03e64cc78114deef7ebb29e3cee521059aed",
+  "elf": "/tmp/opencfw-case-uart-error-atomic-reproduction/uart.elf",
+  "elf_sha256": "dc1a0d0668f058e97f9710223237767a80573f8e08885f56f2a54dfcf3f5b78f",
+  "flags": [
+    "-mcpu=cortex-m0plus",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "limits": [
+    "Selected verbatim IRQ prefix ends before IDLE handling; explicit boundary marker appended. Selected EndRxTransfer is full body.",
+    "DMA request must remain disabled in prefix comparison; linked actual DMA peers are not exercised.",
+    "Explicit ARM32 target ABI/macros, not full STM32 SDK or producing-version identification."
+  ]
+}

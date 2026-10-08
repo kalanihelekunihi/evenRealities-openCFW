@@ -1,0 +1,29 @@
+{
+  "sources": [
+    {
+      "path": "/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/drivers/source/cy_sysclk.c",
+      "pin": "35f1714623cfea682d5e285af80d50416b4c7bbc",
+      "sha256": "fa7d3221a4a52f4cae68d291237c57541448539db05ddf0ba653fd0a04c08594",
+      "functions": [
+        "Cy_SysClk_IloStartMeasurement",
+        "Cy_SysClk_IloStopMeasurement",
+        "Cy_SysClk_IloCompensate"
+      ]
+    },
+    {
+      "path": "/tmp/opencfw-vendor-leads-2026-10-08/capsense-247a9a0f79eb976f144f5fbeb29488c1c2606517/cy_capsense_sensing_lp.c",
+      "pin": "247a9a0f79eb976f144f5fbeb29488c1c2606517",
+      "sha256": "777300a0129f032a507e0a222bae0f321f5d4423da2ef4778058255383db5890",
+      "functions": [
+        "Cy_CapSense_IloCompensate"
+      ]
+    }
+  ],
+  "environment": "#include <stdint.h>\n#include <stddef.h>\n#include <stdbool.h>\n#define CY_IP_S8SRSSLT 1\n#define CY_SYSCLK_SUCCESS 0u\n#define CY_SYSCLK_BAD_PARAM 0x4a0001u\n#define CY_SYSCLK_INVALID_STATE 0x4a0003u\n#define CY_SYSCLK_STARTED 0x490004u\n#define MAX_DELAY_US 2000000u\n#define MIN_DELAY_US 100u\n#define COEF_PHUNDRED 100u\n#define ILO_PERIOD_PPH 2500u\n#define SYS_CLK_DIVIDER 10u\n#define ILO_FREQ_2MSB 40u\n#define ILO_FREQ_3LSB 1000u\n#define ILO_DESIRED_FREQ_HZ 40000u\n#define CY_SYSLIB_DIV_ROUND(a,b) (((a)+(b)/2u)/(b))\n#define REG(a) (*(volatile uint32_t *)(a))\n#define SRSS_CLK_DFT_SELECT REG(0x40030034u)\n#define SRSS_TST_DDFT_CTRL REG(0x40030018u)\n#define SRSSLT_TST_TRIM_CNTR1 REG(0x4003001cu)\n#define SRSSLT_TST_TRIM_CNTR2 REG(0x40030020u)\n#define SRSS_CLK_DFT_SELECT_DFT_SEL1_Pos 8u\n#define SRSS_CLK_DFT_SELECT_DFT_SEL1_Msk 0xf00u\n#define SRSS_CLK_DFT_SELECT_DFT_SEL_ILO 1u\n#define SRSS_CLK_DFT_SELECT_DFT_CHCK_MSK 0xf0fu\n#define SRSS_CLK_DFT_SELECT_DFT_CHCK_VAL 0x100u\n#define SRSS_TST_DDFT_CTRL_DFT_SEL0_Pos 0u\n#define SRSS_TST_DDFT_CTRL_DFT_SEL0_Msk 0xfu\n#define SRSS_TST_DDFT_CTRL_DFT_SEL1_Pos 8u\n#define SRSS_TST_DDFT_CTRL_DFT_SEL1_Msk 0xf00u\n#define SRSS_TST_DDFT_CTRL_DFT_SEL_Pos 0u\n#define SRSS_TST_DDFT_CTRL_DFT_SEL_Msk 0xf0fu\n#define SRSS_TST_DDFT_CTRL_DFT_SEL_CLK0 8u\n#define SRSS_TST_DDFT_CTRL_DFT_SEL_CLK1 9u\n#define SRSSLT_TST_TRIM_CNTR1_COUNTER_DONE_Msk 0x80000000u\n#define _VAL2FLD(f,v) (((uint32_t)(v)<<f##_Pos)&f##_Msk)\n#define CY_REG32_CLR_SET(r,f,v) ((r)=((r)&~f##_Msk)|_VAL2FLD(f,v))\ntypedef uint32_t cy_en_sysclk_status_t;\nextern bool preventIloMeasurment,iloMeasurment;\nextern uint32_t SystemCoreClock;\nvoid Cy_SysClk_IloStartMeasurement(void);\nvoid Cy_SysClk_IloStopMeasurement(void);\nuint32_t Cy_SysClk_IloCompensate(uint32_t,uint32_t *);\ntypedef uint32_t cy_capsense_status_t;\n#define CY_CAPSENSE_STATUS_BAD_PARAM 1u\n#define CY_CAPSENSE_STATUS_SUCCESS 0u\n#define CY_CAPSENSE_ILO_COMPENSATE_DELAY 500u\n#define CY_CAPSENSE_ILO_FACTOR_SHIFT 24u\n#define CY_CAPSENSE_1M_DIVIDER 1000000u\n#define CY_CAPSENSE_ENABLE 1u\n#define CY_CAPSENSE_LP_EN 1u\n#define CY_CAPSENSE_MW_STATE_LP_WD_SCAN_MASK 0x20u\n#define MSCLP_AOS_CTL_WAKEUP_TIMER_Msk 0xffffu\n#define MSCLP_AOS_CTL_WAKEUP_TIMER_Pos 0u\ntypedef struct {volatile uint32_t pad[28];volatile uint32_t AOS_CTL;} MSCLP_Type;\ntypedef struct {MSCLP_Type *ptrHwBase;} channel_config;\ntypedef struct {uint8_t pad[8];channel_config *ptrChConfig;} common_config;\ntypedef struct {uint8_t pad[8];uint32_t status;} common_context;\ntypedef struct {uint8_t pad[28];uint32_t activeWakeupTimer,activeWakeupTimerCycles,wotScanInterval,wotScanIntervalCycles,iloCompensationFactor;} internal_context;\ntypedef struct {common_config *ptrCommonConfig;common_context *ptrCommonContext;internal_context *ptrInternalContext;} cy_stc_capsense_context_t;\n_Static_assert(offsetof(MSCLP_Type,AOS_CTL)==0x70,\"AOS offset\");\n_Static_assert(offsetof(common_config,ptrChConfig)==8,\"channel offset\");\n_Static_assert(offsetof(common_context,status)==8,\"status offset\");\n_Static_assert(offsetof(internal_context,iloCompensationFactor)==44,\"factor offset\");\n_Static_assert(offsetof(cy_stc_capsense_context_t,ptrInternalContext)==8,\"internal offset\");\nuint32_t Cy_CapSense_MsclpTimerCalcCycles(uint32_t,const cy_stc_capsense_context_t *);\n",
+  "translation_unit_sha256": "a0688b38a2529d533b8bc9a6ca7a3b7bd5b0b1e276aaccc6fad7797994648937",
+  "globals": "Static compRunStat BSS linked at20000f1c;preventIloMeasurment20000f1d,iloMeasurment20000f1e,SystemCoreClock20000878; public calculator peer boundstock5d71.",
+  "limits": [
+    "Verbatim selected bodies plus explicit type/macro/global environment, not full SDK build or unique producer.",
+    "Status values are fixed observed ARM32 environment, not a newly authenticated full core-lib header build."
+  ]
+}

@@ -1,0 +1,25 @@
+# Deferred case event consumer: actual dequeue, dispatch and event-bit application
+
+**189 fresh PASS original/reconstructed drain comparisons**, distinct from prior1936 queue tests and336 modeled-wrapper cases. Original command-drain0800b0fc executes real nonblocking queue-receive0800c83a, copy-from0800ad24, indirect callback0800bf8c, event-set0800c4de, scheduler suspend0800c380/resume0800cc0c and critical routines0800bffc/0800c014. Reconstructed [consumer.c](../../components/case/deferred_consumer_offline/consumer.c) runs independent nonblocking receive and negative-command loop, previously validated independent copy-from, **the same actual original indirect callback/event/kernel peers**. No child entry result replacement or compiled callback stub.
+
+## Scope and state
+
+Only allocated coherent queues, empty sender/receiver/event wait lists and **negative callback messages** are tested. Length1/2/10, first slot0/1 when valid, zero/one/two/three queued messages when capacity permits. Flag sequences empty,8,40,8+40 and8+8+40; initial event bits0/100/FFFFFF; critical nesting0/1/2 with corresponding mask0/1/1. Queue read/write/count fields, frame storage/guards, event layout, scheduler globals, critical depth, callback arguments and ordered queue writes compare.
+
+Synthetic kernel base20000128: current-TCB pointer20007000, task count1, running flag1, suspended count0, pending ticks0/yield0; pending-ready list empty. These are constructed fixtures, **not observed runtime state or scheduling evidence**. No task removal/unblock/yield path is allowed; verifier fails if0800cba0,0800c1cc or0800c0a0 is entered. Event layout uses bits+0,list count+4,sentinel+12,next sentinel link+16; allocated empty list rather than a fake return value.
+
+Each message has command-2,callback0800bf8d,event pointer,flags. Original nonblocking queue receive queries scheduler state, enters nesting critical section, advances read cursor/copies16 bytes to caller stack, decrements messages, leaves critical section and returns1. Empty queue returns0 without waiting. Drain repeats until empty. Negative commands invoke callback with arg1,event handle and arg2,flags. The actual callback forwards to event-set; event-set suspends scheduler, ORs flags into existing bits, traverses an empty waiter list, resumes scheduler and returns resulting bits. All queued callbacks execute in order, queue count ends0, and final bits equal initial bits OR every queued flag.
+
+## Ownership and masking
+
+Queue bytes are copied to consumer stack before callback; no heap allocation/release is observed in this selected path. Event object and callback are borrowed pointers, **not deep-copied or refcounted**. Actual event mutation now proves accepted-message→dequeue→dispatch→bits for these fixtures; it does not settle deletion/cancellation/disconnect/drain safety or when the OS runs this drain helper.
+
+Every queue/control write is checked PRIMASK1. Critical depth returns to its input and final mask matches coherent fixture. These task-context critical providers are nesting-based: entry disables interrupts, outermost exit enables them. They do **not** generally save/restore an arbitrary initial PRIMASK like the ISR enqueue providers. Depth0/mask1 was intentionally not represented as a coherent task-context critical fixture. No firmware bug follows from that distinction. Event-bit write is protected by scheduler suspension in this path, not asserted interrupt masking; no concurrent ISR/TCB interleave tested.
+
+## Practical interface
+
+ISR success means queue acceptance, as separately demonstrated. Event bits appear later when this command-drain executes. Repeated same flags coalesce in the bit field, while each queued callback still executes; an app cannot use final flags as a count of notifications. Event40 and8 can coexist. An owned-message design can retain inline command bytes without preserving the producer stack, but must still protect referenced event/callback objects until consumption and explicitly handle queue rejection and shutdown.
+
+The helper's positive-command early return merely bounds its declared contract; it is **not** reconstruction of stock positive timer-command processing. Full blocking receive, timer commands, wait-any/all/clear behavior, ready/delayed lists, real daemon task entry/selection and deletion/drain remain unproved. Public pinned timers.c in the preceding deferred-event batch supports negative callback dispatch semantics, but no new public consumer byte/source equivalence is claimed here.
+
+Reproduce build_offline.py --gcc <ArmGNU13.3> --output <scratch>, then opencfw venv Python verify.py <scratch/consumer.elf>. Image/range/tool/source hashes and inputs/results retained. Earlier seals including original761 entries,110 audit inputs and4 checkpoints verified unchanged; no staging, commits, production firmware/device actions. Next bounded actionable work is waiter semantics or event-group deletion/drain call paths, with runtime scheduling still an explicit missing-trace boundary.

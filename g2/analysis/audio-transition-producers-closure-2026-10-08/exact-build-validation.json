@@ -1,0 +1,69 @@
+{
+  "status": "PASS",
+  "elf_sha256": "32f579076bf8ecd051b76377d6678dbd1d92bc0faebd4f41cd7706df65d8b53c",
+  "total_comparisons": 12019,
+  "receipts": [
+    {
+      "path": "results.json",
+      "cases": 10655,
+      "elf_sha256": "32f579076bf8ecd051b76377d6678dbd1d92bc0faebd4f41cd7706df65d8b53c",
+      "by_function": {
+        "cache_enable": 24,
+        "cache_disable": 24,
+        "start7": 1704,
+        "start21": 1012,
+        "start8": 336,
+        "start9": 336,
+        "start20": 336,
+        "start10": 336,
+        "start12": 336,
+        "start14": 336,
+        "start15": 384,
+        "start16": 384,
+        "start17": 384,
+        "start19": 384,
+        "start0": 440,
+        "start1": 368,
+        "start3": 336,
+        "start4": 336,
+        "start5": 360,
+        "start6": 336,
+        "start11": 360,
+        "start13": 375,
+        "start18": 336,
+        "start22": 336,
+        "start23": 336,
+        "start24": 12,
+        "start25": 12,
+        "start26": 12,
+        "irq": 36,
+        "registered_irq": 36,
+        "registered_post": 24,
+        "ton_adjust": 288
+      }
+    },
+    {
+      "path": "previous-functions-results.json",
+      "cases": 1364,
+      "elf_sha256": "32f579076bf8ecd051b76377d6678dbd1d92bc0faebd4f41cd7706df65d8b53c",
+      "by_function": {
+        "stop": 54,
+        "complete2": 18,
+        "complete7": 32,
+        "dispatch": 164,
+        "start2": 1024,
+        "complete21": 36,
+        "post": 36
+      }
+    }
+  ],
+  "header_only_final_change": "Added sealed interface include; rebuilt ELF hash is identical to the ELF used by all final tests. No functional code change or new test claim.",
+  "compact_enum_policy": "Explicit-fshort-enums; pending state remains uint8_t/volatile one-byte stores. No default host enum ABI assumption.",
+  "test_files": {
+    "verify.py": "4e9573a2c500b5888a5687161661f65ecf6fa4eb9b5e5879712baec5c3016965",
+    "verify_previous.py": "125c31442ce0ed0ec8c7577546079054fb477b31be70a031b12985e3fc47ee27",
+    "results.json": "d9694d5ae58ba3e92f5f5d6de6c04435ea4914d93a654e4f3a4211dca03d425a",
+    "previous-functions-results.json": "c58a016bf5dfe765a781d5c2402177f289d1e8a64bd1236e104ae87eee7ca1d7"
+  },
+  "format_note": "Full comparison rows retained in compact JSON; post-run formatting changed whitespace only, not comparisons or code."
+}

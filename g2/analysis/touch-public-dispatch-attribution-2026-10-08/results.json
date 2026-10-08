@@ -1,0 +1,54 @@
+{
+  "status": "PASS",
+  "cases": 6,
+  "comparisons": [
+    {
+      "ignored_base": "0x0",
+      "context": "0x200004ec",
+      "internal": "0x20000c50",
+      "calls": 1,
+      "callback_argument": "0x200004ec"
+    },
+    {
+      "ignored_base": "0x0",
+      "context": "0x20002000",
+      "internal": "0x20003500",
+      "calls": 1,
+      "callback_argument": "0x20002000"
+    },
+    {
+      "ignored_base": "0x1",
+      "context": "0x200004ec",
+      "internal": "0x20000c50",
+      "calls": 1,
+      "callback_argument": "0x200004ec"
+    },
+    {
+      "ignored_base": "0x1",
+      "context": "0x20002000",
+      "internal": "0x20003500",
+      "calls": 1,
+      "callback_argument": "0x20002000"
+    },
+    {
+      "ignored_base": "0xffffffff",
+      "context": "0x200004ec",
+      "internal": "0x20000c50",
+      "calls": 1,
+      "callback_argument": "0x200004ec"
+    },
+    {
+      "ignored_base": "0xffffffff",
+      "context": "0x20002000",
+      "internal": "0x20003500",
+      "calls": 1,
+      "callback_argument": "0x20002000"
+    }
+  ],
+  "elf_sha256": "61a26f30bd9ca19125785873ae7910012b7302554fe3396d06007bf6718c88e2",
+  "limits": [
+    "Public dispatcher and original0x5fba execute directly, no function-entry stubs.",
+    "Callback is a compiled synthetic count/argument probe, not an actual project ISR or unknown vendor implementation.",
+    "Direct calls do not test physical IRQ delivery or null callback faults."
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "source": "g2/components/audio/resume_ticks_offline/resume.c",
+  "source_sha256": "6347104574e63896120a6b490a417390ef6773aa60c5e34c9d640c42df58b9eb",
+  "tick_peer": "g2/components/audio/tick_expiry_offline/tick.c",
+  "tick_peer_sha256": "e8e3b2cc3a819784f11a3ad7782d4db706cc1d3ce198088efbbaa74b2f69169d",
+  "header_sha256": "34ffd5555001498cc6e9dd0b51b4d6f93687001e6314d4a65640575d954b22ac",
+  "elf": "/tmp/opencfw-audio-resume-ticks/resume.elf",
+  "elf_sha256": "8cef16734cb12eeceb349663a3777817ca2046ad843701e44e36fd525243e5c4",
+  "link_script": "audio_resume_enter = 0x4420d1; audio_resume_exit = 0x4420e9; audio_resume_yield = 0x4420bd; audio_resume_next_unblock = 0x455877; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }"
+}

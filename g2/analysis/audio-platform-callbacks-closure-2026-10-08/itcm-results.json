@@ -1,0 +1,968 @@
+{
+  "status": "PASS",
+  "cases": 74,
+  "record_comparisons": 1,
+  "record": {
+    "status": "PASS",
+    "record": "0x75d3e4",
+    "compressed_source": "0x79430e",
+    "compressed_bytes": 22,
+    "destination": "0x40",
+    "decoded_bytes": 24,
+    "decoded_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+    "next_record": "0x75d3f0",
+    "method": "Actual0x43A11E decoder versus independent Python token decoder and guards."
+  },
+  "delay_helper": [
+    {
+      "iterations": 1,
+      "returned_counter": 0
+    },
+    {
+      "iterations": 2,
+      "returned_counter": 0
+    },
+    {
+      "iterations": 17,
+      "returned_counter": 0
+    },
+    {
+      "iterations": 59,
+      "returned_counter": 0
+    },
+    {
+      "iterations": 100,
+      "returned_counter": 0
+    },
+    {
+      "iterations": 1000,
+      "returned_counter": 0
+    }
+  ],
+  "copy_helper": [
+    {
+      "words": 1,
+      "salt": "0x0",
+      "writes": [
+        [
+          0,
+          4,
+          0
+        ]
+      ]
+    },
+    {
+      "words": 1,
+      "salt": "0xa5a5a5a5",
+      "writes": [
+        [
+          0,
+          4,
+          2779096485
+        ]
+      ]
+    },
+    {
+      "words": 2,
+      "salt": "0x0",
+      "writes": [
+        [
+          0,
+          4,
+          0
+        ],
+        [
+          4,
+          4,
+          1
+        ]
+      ]
+    },
+    {
+      "words": 2,
+      "salt": "0xa5a5a5a5",
+      "writes": [
+        [
+          0,
+          4,
+          2779096485
+        ],
+        [
+          4,
+          4,
+          2779096486
+        ]
+      ]
+    },
+    {
+      "words": 5,
+      "salt": "0x0",
+      "writes": [
+        [
+          0,
+          4,
+          0
+        ],
+        [
+          4,
+          4,
+          1
+        ],
+        [
+          8,
+          4,
+          2
+        ],
+        [
+          12,
+          4,
+          3
+        ],
+        [
+          16,
+          4,
+          4
+        ]
+      ]
+    },
+    {
+      "words": 5,
+      "salt": "0xa5a5a5a5",
+      "writes": [
+        [
+          0,
+          4,
+          2779096485
+        ],
+        [
+          4,
+          4,
+          2779096486
+        ],
+        [
+          8,
+          4,
+          2779096487
+        ],
+        [
+          12,
+          4,
+          2779096488
+        ],
+        [
+          16,
+          4,
+          2779096489
+        ]
+      ]
+    },
+    {
+      "words": 20,
+      "salt": "0x0",
+      "writes": [
+        [
+          0,
+          4,
+          0
+        ],
+        [
+          4,
+          4,
+          1
+        ],
+        [
+          8,
+          4,
+          2
+        ],
+        [
+          12,
+          4,
+          3
+        ],
+        [
+          16,
+          4,
+          4
+        ],
+        [
+          20,
+          4,
+          5
+        ],
+        [
+          24,
+          4,
+          6
+        ],
+        [
+          28,
+          4,
+          7
+        ],
+        [
+          32,
+          4,
+          8
+        ],
+        [
+          36,
+          4,
+          9
+        ],
+        [
+          40,
+          4,
+          10
+        ],
+        [
+          44,
+          4,
+          11
+        ],
+        [
+          48,
+          4,
+          12
+        ],
+        [
+          52,
+          4,
+          13
+        ],
+        [
+          56,
+          4,
+          14
+        ],
+        [
+          60,
+          4,
+          15
+        ],
+        [
+          64,
+          4,
+          16
+        ],
+        [
+          68,
+          4,
+          17
+        ],
+        [
+          72,
+          4,
+          18
+        ],
+        [
+          76,
+          4,
+          19
+        ]
+      ]
+    },
+    {
+      "words": 20,
+      "salt": "0xa5a5a5a5",
+      "writes": [
+        [
+          0,
+          4,
+          2779096485
+        ],
+        [
+          4,
+          4,
+          2779096486
+        ],
+        [
+          8,
+          4,
+          2779096487
+        ],
+        [
+          12,
+          4,
+          2779096488
+        ],
+        [
+          16,
+          4,
+          2779096489
+        ],
+        [
+          20,
+          4,
+          2779096490
+        ],
+        [
+          24,
+          4,
+          2779096491
+        ],
+        [
+          28,
+          4,
+          2779096492
+        ],
+        [
+          32,
+          4,
+          2779096493
+        ],
+        [
+          36,
+          4,
+          2779096494
+        ],
+        [
+          40,
+          4,
+          2779096495
+        ],
+        [
+          44,
+          4,
+          2779096496
+        ],
+        [
+          48,
+          4,
+          2779096497
+        ],
+        [
+          52,
+          4,
+          2779096498
+        ],
+        [
+          56,
+          4,
+          2779096499
+        ],
+        [
+          60,
+          4,
+          2779096500
+        ],
+        [
+          64,
+          4,
+          2779096501
+        ],
+        [
+          68,
+          4,
+          2779096502
+        ],
+        [
+          72,
+          4,
+          2779096503
+        ],
+        [
+          76,
+          4,
+          2779096504
+        ]
+      ]
+    }
+  ],
+  "full_delay": [
+    {
+      "requested_us": 0,
+      "clock_selector": 0,
+      "iterations": 0,
+      "first_counter": null,
+      "status": "returned"
+    },
+    {
+      "requested_us": 0,
+      "clock_selector": 1,
+      "iterations": 0,
+      "first_counter": null,
+      "status": "returned"
+    },
+    {
+      "requested_us": 0,
+      "clock_selector": 2,
+      "iterations": 0,
+      "first_counter": null,
+      "status": "returned"
+    },
+    {
+      "requested_us": 0,
+      "clock_selector": 3,
+      "iterations": 0,
+      "first_counter": null,
+      "status": "returned"
+    },
+    {
+      "requested_us": 1,
+      "clock_selector": 0,
+      "iterations": 17,
+      "first_counter": 17,
+      "status": "returned"
+    },
+    {
+      "requested_us": 1,
+      "clock_selector": 1,
+      "iterations": 17,
+      "first_counter": 17,
+      "status": "returned"
+    },
+    {
+      "requested_us": 1,
+      "clock_selector": 2,
+      "iterations": 59,
+      "first_counter": 59,
+      "status": "returned"
+    },
+    {
+      "requested_us": 1,
+      "clock_selector": 3,
+      "iterations": 17,
+      "first_counter": 17,
+      "status": "returned"
+    },
+    {
+      "requested_us": 2,
+      "clock_selector": 0,
+      "iterations": 49,
+      "first_counter": 49,
+      "status": "returned"
+    },
+    {
+      "requested_us": 2,
+      "clock_selector": 1,
+      "iterations": 49,
+      "first_counter": 49,
+      "status": "returned"
+    },
+    {
+      "requested_us": 2,
+      "clock_selector": 2,
+      "iterations": 142,
+      "first_counter": 142,
+      "status": "returned"
+    },
+    {
+      "requested_us": 2,
+      "clock_selector": 3,
+      "iterations": 49,
+      "first_counter": 49,
+      "status": "returned"
+    },
+    {
+      "requested_us": 5,
+      "clock_selector": 0,
+      "iterations": 145,
+      "first_counter": 145,
+      "status": "returned"
+    },
+    {
+      "requested_us": 5,
+      "clock_selector": 1,
+      "iterations": 145,
+      "first_counter": 145,
+      "status": "returned"
+    },
+    {
+      "requested_us": 5,
+      "clock_selector": 2,
+      "iterations": 392,
+      "first_counter": 392,
+      "status": "returned"
+    },
+    {
+      "requested_us": 5,
+      "clock_selector": 3,
+      "iterations": 145,
+      "first_counter": 145,
+      "status": "returned"
+    },
+    {
+      "requested_us": 100,
+      "clock_selector": 0,
+      "iterations": 3185,
+      "first_counter": 3185,
+      "status": "returned"
+    },
+    {
+      "requested_us": 100,
+      "clock_selector": 1,
+      "iterations": 3185,
+      "first_counter": 3185,
+      "status": "returned"
+    },
+    {
+      "requested_us": 100,
+      "clock_selector": 2,
+      "iterations": 8309,
+      "first_counter": 8309,
+      "status": "returned"
+    },
+    {
+      "requested_us": 100,
+      "clock_selector": 3,
+      "iterations": 3185,
+      "first_counter": 3185,
+      "status": "returned"
+    }
+  ],
+  "initialize_with_synthetic_info1": [
+    {
+      "config": "0x0",
+      "otp_power": "0x0",
+      "boundary": [],
+      "return_value": 0,
+      "calibration_after": "0d60011f000000110100001102000011030000110400001105000011060000110700001108000011090000110a0000110b0000110c0000110d0000110e0000110f00001110000011110000111200001113000011000000220100002202000022030000220400002266554433",
+      "copies": [
+        {
+          "source": "0x42003370",
+          "words": 20
+        },
+        {
+          "source": "0x420033c0",
+          "words": 5
+        },
+        {
+          "source": "0x420033e0",
+          "words": 1
+        }
+      ]
+    },
+    {
+      "config": "0x0",
+      "otp_power": "0x8000000",
+      "boundary": [],
+      "return_value": 0,
+      "calibration_after": "0d60011f000000110100001102000011030000110400001105000011060000110700001108000011090000110a0000110b0000110c0000110d0000110e0000110f00001110000011110000111200001113000011000000220100002202000022030000220400002266554433",
+      "copies": [
+        {
+          "source": "0x42003370",
+          "words": 20
+        },
+        {
+          "source": "0x420033c0",
+          "words": 5
+        },
+        {
+          "source": "0x420033e0",
+          "words": 1
+        }
+      ]
+    },
+    {
+      "config": "0x8",
+      "otp_power": "0x0",
+      "boundary": [],
+      "return_value": 7,
+      "calibration_after": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+      "copies": []
+    },
+    {
+      "config": "0x8",
+      "otp_power": "0x8000000",
+      "boundary": [],
+      "return_value": 0,
+      "calibration_after": "0d60011f000000110100001102000011030000110400001105000011060000110700001108000011090000110a0000110b0000110c0000110d0000110e0000110f00001110000011110000111200001113000011000000220100002202000022030000220400002266554433",
+      "copies": [
+        {
+          "source": "0x42006970",
+          "words": 20
+        },
+        {
+          "source": "0x420069c0",
+          "words": 5
+        },
+        {
+          "source": "0x420069e0",
+          "words": 1
+        }
+      ]
+    },
+    {
+      "config": "0x10",
+      "otp_power": "0x0",
+      "boundary": [],
+      "return_value": 0,
+      "calibration_after": "0d60011f000000110100001102000011030000110400001105000011060000110700001108000011090000110a0000110b0000110c0000110d0000110e0000110f00001110000011110000111200001113000011000000220100002202000022030000220400002266554433",
+      "copies": [
+        {
+          "source": "0x42003370",
+          "words": 20
+        },
+        {
+          "source": "0x420033c0",
+          "words": 5
+        },
+        {
+          "source": "0x420033e0",
+          "words": 1
+        }
+      ]
+    },
+    {
+      "config": "0x10",
+      "otp_power": "0x8000000",
+      "boundary": [],
+      "return_value": 0,
+      "calibration_after": "0d60011f000000110100001102000011030000110400001105000011060000110700001108000011090000110a0000110b0000110c0000110d0000110e0000110f00001110000011110000111200001113000011000000220100002202000022030000220400002266554433",
+      "copies": [
+        {
+          "source": "0x42003370",
+          "words": 20
+        },
+        {
+          "source": "0x420033c0",
+          "words": 5
+        },
+        {
+          "source": "0x420033e0",
+          "words": 1
+        }
+      ]
+    },
+    {
+      "config": "0x18",
+      "otp_power": "0x0",
+      "boundary": [],
+      "return_value": 7,
+      "calibration_after": "a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5a5",
+      "copies": []
+    },
+    {
+      "config": "0x18",
+      "otp_power": "0x8000000",
+      "boundary": [],
+      "return_value": 0,
+      "calibration_after": "0d60011f000000110100001102000011030000110400001105000011060000110700001108000011090000110a0000110b0000110c0000110d0000110e0000110f00001110000011110000111200001113000011000000220100002202000022030000220400002266554433",
+      "copies": [
+        {
+          "source": "0x42006970",
+          "words": 20
+        },
+        {
+          "source": "0x420069c0",
+          "words": 5
+        },
+        {
+          "source": "0x420069e0",
+          "words": 1
+        }
+      ]
+    }
+  ],
+  "revision_with_synthetic_info1": [
+    {
+      "config": "0x0",
+      "otp_power": "0x0",
+      "null_destination": 0,
+      "synthetic_trim_word": 0,
+      "cached": 0,
+      "returned": 0,
+      "destination": "0x0"
+    },
+    {
+      "config": "0x0",
+      "otp_power": "0x0",
+      "null_destination": 0,
+      "synthetic_trim_word": 1,
+      "cached": 1,
+      "returned": 0,
+      "destination": "0x1"
+    },
+    {
+      "config": "0x0",
+      "otp_power": "0x0",
+      "null_destination": 0,
+      "synthetic_trim_word": 2,
+      "cached": 2,
+      "returned": 0,
+      "destination": "0x2"
+    },
+    {
+      "config": "0x0",
+      "otp_power": "0x0",
+      "null_destination": 0,
+      "synthetic_trim_word": 3,
+      "cached": 3,
+      "returned": 0,
+      "destination": "0x3"
+    },
+    {
+      "config": "0x0",
+      "otp_power": "0x0",
+      "null_destination": 1,
+      "synthetic_trim_word": 0,
+      "cached": 0,
+      "returned": 6,
+      "destination": "0xa5a5a5a5"
+    },
+    {
+      "config": "0x0",
+      "otp_power": "0x0",
+      "null_destination": 1,
+      "synthetic_trim_word": 1,
+      "cached": 1,
+      "returned": 6,
+      "destination": "0xa5a5a5a5"
+    },
+    {
+      "config": "0x0",
+      "otp_power": "0x0",
+      "null_destination": 1,
+      "synthetic_trim_word": 2,
+      "cached": 2,
+      "returned": 6,
+      "destination": "0xa5a5a5a5"
+    },
+    {
+      "config": "0x0",
+      "otp_power": "0x0",
+      "null_destination": 1,
+      "synthetic_trim_word": 3,
+      "cached": 3,
+      "returned": 6,
+      "destination": "0xa5a5a5a5"
+    },
+    {
+      "config": "0x0",
+      "otp_power": "0x8000000",
+      "null_destination": 0,
+      "synthetic_trim_word": 0,
+      "cached": 0,
+      "returned": 0,
+      "destination": "0x0"
+    },
+    {
+      "config": "0x0",
+      "otp_power": "0x8000000",
+      "null_destination": 0,
+      "synthetic_trim_word": 1,
+      "cached": 1,
+      "returned": 0,
+      "destination": "0x1"
+    },
+    {
+      "config": "0x0",
+      "otp_power": "0x8000000",
+      "null_destination": 0,
+      "synthetic_trim_word": 2,
+      "cached": 2,
+      "returned": 0,
+      "destination": "0x2"
+    },
+    {
+      "config": "0x0",
+      "otp_power": "0x8000000",
+      "null_destination": 0,
+      "synthetic_trim_word": 3,
+      "cached": 3,
+      "returned": 0,
+      "destination": "0x3"
+    },
+    {
+      "config": "0x0",
+      "otp_power": "0x8000000",
+      "null_destination": 1,
+      "synthetic_trim_word": 0,
+      "cached": 0,
+      "returned": 6,
+      "destination": "0xa5a5a5a5"
+    },
+    {
+      "config": "0x0",
+      "otp_power": "0x8000000",
+      "null_destination": 1,
+      "synthetic_trim_word": 1,
+      "cached": 1,
+      "returned": 6,
+      "destination": "0xa5a5a5a5"
+    },
+    {
+      "config": "0x0",
+      "otp_power": "0x8000000",
+      "null_destination": 1,
+      "synthetic_trim_word": 2,
+      "cached": 2,
+      "returned": 6,
+      "destination": "0xa5a5a5a5"
+    },
+    {
+      "config": "0x0",
+      "otp_power": "0x8000000",
+      "null_destination": 1,
+      "synthetic_trim_word": 3,
+      "cached": 3,
+      "returned": 6,
+      "destination": "0xa5a5a5a5"
+    },
+    {
+      "config": "0x8",
+      "otp_power": "0x0",
+      "null_destination": 0,
+      "synthetic_trim_word": 0,
+      "cached": 0,
+      "returned": 0,
+      "destination": "0x0"
+    },
+    {
+      "config": "0x8",
+      "otp_power": "0x0",
+      "null_destination": 0,
+      "synthetic_trim_word": 1,
+      "cached": 0,
+      "returned": 0,
+      "destination": "0x0"
+    },
+    {
+      "config": "0x8",
+      "otp_power": "0x0",
+      "null_destination": 0,
+      "synthetic_trim_word": 2,
+      "cached": 0,
+      "returned": 0,
+      "destination": "0x0"
+    },
+    {
+      "config": "0x8",
+      "otp_power": "0x0",
+      "null_destination": 0,
+      "synthetic_trim_word": 3,
+      "cached": 0,
+      "returned": 0,
+      "destination": "0x0"
+    },
+    {
+      "config": "0x8",
+      "otp_power": "0x0",
+      "null_destination": 1,
+      "synthetic_trim_word": 0,
+      "cached": 0,
+      "returned": 6,
+      "destination": "0xa5a5a5a5"
+    },
+    {
+      "config": "0x8",
+      "otp_power": "0x0",
+      "null_destination": 1,
+      "synthetic_trim_word": 1,
+      "cached": 0,
+      "returned": 6,
+      "destination": "0xa5a5a5a5"
+    },
+    {
+      "config": "0x8",
+      "otp_power": "0x0",
+      "null_destination": 1,
+      "synthetic_trim_word": 2,
+      "cached": 0,
+      "returned": 6,
+      "destination": "0xa5a5a5a5"
+    },
+    {
+      "config": "0x8",
+      "otp_power": "0x0",
+      "null_destination": 1,
+      "synthetic_trim_word": 3,
+      "cached": 0,
+      "returned": 6,
+      "destination": "0xa5a5a5a5"
+    },
+    {
+      "config": "0x8",
+      "otp_power": "0x8000000",
+      "null_destination": 0,
+      "synthetic_trim_word": 0,
+      "cached": 0,
+      "returned": 0,
+      "destination": "0x0"
+    },
+    {
+      "config": "0x8",
+      "otp_power": "0x8000000",
+      "null_destination": 0,
+      "synthetic_trim_word": 1,
+      "cached": 1,
+      "returned": 0,
+      "destination": "0x1"
+    },
+    {
+      "config": "0x8",
+      "otp_power": "0x8000000",
+      "null_destination": 0,
+      "synthetic_trim_word": 2,
+      "cached": 2,
+      "returned": 0,
+      "destination": "0x2"
+    },
+    {
+      "config": "0x8",
+      "otp_power": "0x8000000",
+      "null_destination": 0,
+      "synthetic_trim_word": 3,
+      "cached": 3,
+      "returned": 0,
+      "destination": "0x3"
+    },
+    {
+      "config": "0x8",
+      "otp_power": "0x8000000",
+      "null_destination": 1,
+      "synthetic_trim_word": 0,
+      "cached": 0,
+      "returned": 6,
+      "destination": "0xa5a5a5a5"
+    },
+    {
+      "config": "0x8",
+      "otp_power": "0x8000000",
+      "null_destination": 1,
+      "synthetic_trim_word": 1,
+      "cached": 1,
+      "returned": 6,
+      "destination": "0xa5a5a5a5"
+    },
+    {
+      "config": "0x8",
+      "otp_power": "0x8000000",
+      "null_destination": 1,
+      "synthetic_trim_word": 2,
+      "cached": 2,
+      "returned": 6,
+      "destination": "0xa5a5a5a5"
+    },
+    {
+      "config": "0x8",
+      "otp_power": "0x8000000",
+      "null_destination": 1,
+      "synthetic_trim_word": 3,
+      "cached": 3,
+      "returned": 6,
+      "destination": "0xa5a5a5a5"
+    }
+  ],
+  "zero_count_original_only": {
+    "status": "ORIGINAL_ONLY_BOUNDED_PREFIX",
+    "initial_words": 0,
+    "counters": [
+      "0x0",
+      "0xffffffff",
+      "0xfffffffe",
+      "0xfffffffd"
+    ],
+    "words_copied_before_stop": 3,
+    "limit": "Stopped before fourth iteration; no complete execution or live defect claim."
+  },
+  "elf_sha256": "7c8485aee73efc4b4eeaeda089b0d2f82719d0a21a1a18ab2a320fbda346bc6b",
+  "limits": [
+    "0x40/0x48 are authenticated OTA-initialized ITCM, not missing ROM.",
+    "Positive helper counts; zero-count original prefix demonstrates wrap, not a live failure.",
+    "Delay input is intended microseconds per corroborated public implementation; no physical timing or cycle-equivalent C claim.",
+    "Synthetic INFO1/OTP memory supplies data, not fake call returns. Complete selected initializer and timer-register writes; real calibration, physical timer effects and full boot not established.",
+    "M33-compatible selected M55 integer/FPU instruction subset; no exception return."
+  ]
+}

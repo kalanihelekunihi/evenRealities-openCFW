@@ -1,0 +1,34 @@
+{
+  "classification": "Static available source leads; not executed by stop-handshake suite",
+  "branches": [
+    {
+      "entry": "0x58f74a",
+      "mode": 0,
+      "ordered_calls": [
+        "0x53ca10(0): queued control message",
+        "0x57acd0(owner=0x10b,mode=0): unregister",
+        "if unregister success: 0x57b312(0), 0x57a926(two pointer arguments)"
+      ]
+    },
+    {
+      "entry": "0x58f806",
+      "mode": 1,
+      "ordered_calls": [
+        "0x53ca32(0): queued control message",
+        "0x57acd0(owner=0x10b,mode=1): unregister",
+        "if unregister success: 0x57b312(1), 0x57a926(one pointer argument)"
+      ]
+    }
+  ],
+  "cautions": [
+    "Queued control helpers call0x53c638; message publication is not synchronous consumer completion.",
+    "0x57b312 invokes strongly attributed file_close0x4745f4 for a nonnull recorder and clears recording state; do not call it hardware DMA stop.",
+    "0x57a926 encoder setup name is inferred by existing source map, not demonstrated peripheral quiescence.",
+    "No static call ordering here establishes which concurrent threads reach these branches before the early audio ack."
+  ],
+  "references": [
+    "g2/analysis/audio-registration-2026-10-06/REPORT.md",
+    "g2/tools/manifests/g2-service-audio-function-map.tsv",
+    "g2/tools/manifests/g2-file-runtime-function-map.tsv"
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "commit": "5efc0228528a8adce5eae0d226fac85d2551eb3b",
+  "upstream_url": "https://github.com/AmbiqMicro/ambiqhal_ambiq",
+  "files": {
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/am_hal_spotmgr_pcm2_2.c": "eac14263dc23ea211b917e9c3feb69695eb511d204961fdf301c1b0fa9abbeb7",
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/am_hal_spotmgr.h": "63fefbd897b5be0d0b29ba3b8017b10269e50f84fbeed841a98b74620a053f55",
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/am_hal_pwrctrl.h": "54ce1a2242e3d48ca14ad6f49c14e28667975314f7ef06f071f362404afb073f",
+    "g2/components/audio/platform_callbacks_offline/public_leaf.c": "c9ae25c39ab93480270cd3b9516f4b5256f51577a1b24d0011047584d2561493"
+  },
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "builds": [
+    {
+      "mode": "default",
+      "flags": [
+        "-mcpu=cortex-m33",
+        "-mfpu=fpv5-sp-d16",
+        "-mfloat-abi=hard",
+        "-mthumb",
+        "-Og",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-nostdlib"
+      ],
+      "elf": "/tmp/opencfw-audio-platform-callbacks/public-default.elf",
+      "elf_sha256": "312b72ebea18cfc781ab26b37ed1c95afbeb8a499aff9da598cb2a3b929dcf93"
+    },
+    {
+      "mode": "short",
+      "flags": [
+        "-mcpu=cortex-m33",
+        "-mfpu=fpv5-sp-d16",
+        "-mfloat-abi=hard",
+        "-mthumb",
+        "-Og",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-nostdlib",
+        "-fshort-enums"
+      ],
+      "elf": "/tmp/opencfw-audio-platform-callbacks/public-short.elf",
+      "elf_sha256": "312b72ebea18cfc781ab26b37ed1c95afbeb8a499aff9da598cb2a3b929dcf93"
+    },
+    {
+      "mode": "wide",
+      "flags": [
+        "-mcpu=cortex-m33",
+        "-mfpu=fpv5-sp-d16",
+        "-mfloat-abi=hard",
+        "-mthumb",
+        "-Og",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-nostdlib",
+        "-fno-short-enums"
+      ],
+      "elf": "/tmp/opencfw-audio-platform-callbacks/public-wide.elf",
+      "elf_sha256": "7515de37a3bf98f6d5ad37239486c252b8734853d0ce13a79f4dac11c4f94c97"
+    }
+  ],
+  "method": "Exact selected public bodies/enums/macros plus status0/7 constants; static/inline linkage removed; explicit short/wide ABI experiment and toolchain default."
+}

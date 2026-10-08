@@ -1,0 +1,10 @@
+#pragma once
+#include <stdint.h>
+uint32_t pcm22_reset(void);
+uint32_t pcm_ton_initialize_dispatch(void);
+uint32_t pcm_common_capture_retention_block(void);
+uint32_t pcm_common_capture_ton_block(void);
+uint32_t pcm_lp_initialize_dispatch(void);
+uint32_t pcm_lp_enable_dispatch(void);
+uint32_t pcm_lp_disable_dispatch(void);
+uint32_t pcm_common_capture_to_return(void);

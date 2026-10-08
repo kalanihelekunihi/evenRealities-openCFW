@@ -1,0 +1,3335 @@
+{
+  "utc": "2026-10-08T14:10:55.108301+00:00",
+  "baseline": "g2/analysis/rescan-2026-10-08T125750Z/snapshot.json",
+  "source_inventory": [
+    {
+      "path": "g2/components/bootloader/allocator/allocator.c",
+      "sha256": "b78b6903fd273b3c64938139c2c2b06f781c1b36259ce8e4503aad787b4ea1e7",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/allocator/allocator.h",
+      "sha256": "339770d10388ab70b1aafcc759922d9773377dcb6d42a06bbb9d8281b4a1957f",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/allocator/freestanding_include/assert.h",
+      "sha256": "b08fec1aad7e1c23108292964a83a37e017742c2767fa2f51200b53c72ef5b78",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/allocator/freestanding_include/stdio.h",
+      "sha256": "a10cf35ba89fe0d34efd4450e171dde3f95b791b7db00c17ffc443cfaafd80d3",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "sha256": "2a0f8cfc9cfe6114ccdc6cf22339059440b16f1149b5107bead4ae4c3a0d50e2",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/allocator/upstream/tlsf.h",
+      "sha256": "f7f73c48810ba60203095667c226e5a600a6ea0f69afba48efff6efbaa628d4f",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/application_storage/device_info.c",
+      "sha256": "3a88fc13bcf02864e1cf179219d8c08321c1d8806a8f52dea63b21f257818915",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/application_storage/device_info.h",
+      "sha256": "963bdfaf8fd5aa35a9c00a3acbfcf5d8f9ad882a9f6802a0f3929dbfcfbcdb5f",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/application_storage/device_info_dispatch.c",
+      "sha256": "d93c89c19a5cdeb860a006669f82f6e058c4c98bd9536840c3336178f44de957",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/application_storage/device_info_dispatch.h",
+      "sha256": "42868d469e09ce976f88fada30f07b044284d4ad74d40a78f518d8c0e5583d90",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/application_storage/device_info_layout.h",
+      "sha256": "5a4a489ae86b6c294a0a42df3eaa554d25c65458f7144422b7d52d4c04b63ece",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/application_storage/device_info_mode0.c",
+      "sha256": "c84d71b7fef99bcfa1244ceff9f9e5580b09600fd0cec61dbbcd1feab620f634",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/application_storage/device_info_mode0.h",
+      "sha256": "f9d56066135f120d60c36ad4916e77990a58aa5322177f153d76ff8af8b0a564",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/application_storage/device_mode_wait.c",
+      "sha256": "6c2fef007234af67faeb18de2350f5a1268436aed7ba09c5b84b683bb0bbd78f",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/application_storage/device_mode_wait.h",
+      "sha256": "5c73c1323b5f3813b7c71d1587dfaca5a680f1965315e0ad54b97cdaa99223aa",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/application_storage/device_wait_service.c",
+      "sha256": "e35256bae08034dfb917947cd440d933642268257dd61a8f5b99b0fc44747080",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/application_storage/device_wait_service.h",
+      "sha256": "692f0c66e5b0d76130a7a9d14b35138320f92953091e50d01f1ccaad565bd9bb",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/application_storage/info_read_rom_thunk.S",
+      "sha256": "071726f8476a3c9c71874bc787f460890ac901c24229c3c2835cf14c3e52f590",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/application_storage/storage_callback_veneers.S",
+      "sha256": "d5742c31b807c17ca354713dfd9ee5c4332551af19e58ce660880a31eddb239b",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/application_storage/storage_callbacks.c",
+      "sha256": "d8aac0baa9a44bf2cc08fa21cfe67fb2ec84cced97178556a79ce39e82ff1e60",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/application_storage/storage_callbacks.h",
+      "sha256": "84b9d5e4202f9fa5ab61950fbf9b1b9f6ade00739942b600f7ddd8d3e4d2ea29",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_class_provider2.c",
+      "sha256": "b50a240c481937f348c4f61ed2fc617da39ede819ae181a3dbf3cadfdb89a318",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_class_provider2.h",
+      "sha256": "00a6a4b24316afefa27518fa070535c680a2f1b11ddeabde7b468139c9c2c4b7",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_class_provider4.c",
+      "sha256": "35b9afed8d8e113ec62eb9bdff799bfdf95eeec12ab03992c1c69e406b32f252",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_class_provider4.h",
+      "sha256": "520faebee585400bc3c67acbacf2c9dc5c131f13762305a9aac2bd89dada24c9",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_class_provider5.c",
+      "sha256": "985dc1b605eb62e819f01f65349186386051118ec10182d449e70c425f7d9054",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_class_provider5.h",
+      "sha256": "20911ac9b9ab74d7ac17605573350e2ddee437c1a106e26be29fb6e3b9d65247",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_class_provider6.c",
+      "sha256": "ce4e3bf1c6a04931d35000cc6e9cec45ab191d0d6de6a2e606336f5f79b397aa",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_class_provider6.h",
+      "sha256": "6ebb0cd2c14eaa153ab298b97a4172e35462745615e5cccc3d49d268818b8fd6",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_class_providers.c",
+      "sha256": "71a7210ba488db0b1e50739bd9448fe2fd82be6e4b7bf96cf2e82514fc197848",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_class_providers.h",
+      "sha256": "42f1e264c56bad9ceb6a398c26b87873536f534162de9dad1869414f9968a7ca",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_manager.c",
+      "sha256": "f993e3a50bee98afc14d5138998fbcad8cafc78e1a72d72bad1641b9c58213bb",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_manager.h",
+      "sha256": "f459795fd12f415ba878ab335cfdc2b19da12a63ddbf3e7a42bffef642a441de",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_release_all.c",
+      "sha256": "829e07af426c5cf69a58640d58e3687dc9fd66bb67aebaacee37c4c2ba8c82a2",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/mode_publisher.c",
+      "sha256": "a9508e25bce3d731dcdf31334c0e685bd236e36427146ecc8ee41501dab3af8c",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/mode_publisher.h",
+      "sha256": "e2176f9497c6c50b7d0e7794ce91543e0efa3c3186d3e07ae52a8819606bf908",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/mode_publisher_abi.S",
+      "sha256": "e506e2a9784cdc76e15df4233d547bef3021147546a33cc5b51e07b0fa624ad1",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/dfu_task/context.c",
+      "sha256": "0fbf34013818699b3844b63dea3dd3d4c5e4505b8514b0b70865bbf6af4d66e3",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/dfu_task/context.h",
+      "sha256": "fe1e980cc2b856113a49a9adf64b2fd69a7cd3f3869dbed60d158a70b44de7b3",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/dfu_task/runtime_context.c",
+      "sha256": "17c1062b2a01289a76914bbfee28217a0ab4e2ef3ef6a7c3bf2028f67fb92973",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/dfu_task/runtime_context.h",
+      "sha256": "aaa44240a3835a33b6e5314f52941130f7a6059b334e72b5c11fdbc037499235",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/dfu_task/task.c",
+      "sha256": "5d62671c63b4cc90b60242eeef64561b958ed9204e5b756cbd44bf5ed1e54208",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/dfu_task/task.h",
+      "sha256": "bcb81f6904c9874a61843b3b53d515c7e9f541d58b1f2091037c94f91ea54d05",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/boot_lfs_defines.h",
+      "sha256": "e623b34026ebd5efd96254dfac3710007f2f6c57cd28e99759724fe0c4d8ee96",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/boot_mount.c",
+      "sha256": "25b15e8b001385a6b4e813e73dab32511f5e92a6d53736a48e309ae591fc4a2c",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/boot_mount.h",
+      "sha256": "19566733da47e0966488d03fb28d30f8f4dd1cfc043f552a8aa824d6b40e69c9",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/boot_mount_test.c",
+      "sha256": "915544cd65331f9cbd1e590ae243c61eb21452ad9ea73b9024131e081a0d6a40",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/file_services.c",
+      "sha256": "a01329c4d096be958c9516aaaa080f9896adeb602c08c57c8005a90c599a3ce1",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/file_services.h",
+      "sha256": "cff43ab70749850e301b4dd7febe287b661d4a64e05ed62c683d9466aeb05cb7",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/filesystem.c",
+      "sha256": "a316029904feb6c62671d501e6b6a5699168b6cd23c52a06ac390e9b6709ea57",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/filesystem.h",
+      "sha256": "7c121607fdae349145bd07cf28094fac810a549c38a735a61d03b48f93ab37d5",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/freestanding_include/inttypes.h",
+      "sha256": "720aa6448b4b2976d4f56477ffcf8f981dd81200abf56bf2e231db01eb6266f7",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/freestanding_include/stdlib.h",
+      "sha256": "b5b2d2393401d3772013399e6459f71364f2aa84e39b8f58620b595d5912d268",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/freestanding_include/string.h",
+      "sha256": "2276666b644c8ef7ba3a262b7c7887296ae1f5aeb1e730be3387f8d412f4aa26",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/host_test.c",
+      "sha256": "b4bfdb67beecec782daa75d672bfb38e0d1b49c79e1852734218d955a3ceec4a",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/runtime_memory.c",
+      "sha256": "f147b6e4f67f5c5eb5f13f8f6835b3ce9b9f3896ec497c1a3531bbed8fa52210",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "sha256": "81a209e8551754d13b24fc0a2b6707fb3b2475e14feba00bf0df722b98a31398",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/upstream/lfs.h",
+      "sha256": "ee44e99d6b19119b3e577b969b80c9d5e6f96410c9593794afddf6d4b314c486",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/upstream/lfs_util.c",
+      "sha256": "f2fbde533670560434bd9f5a547174cc7c5a4670a02c47b4bd85180dced8b2ec",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/upstream/lfs_util.h",
+      "sha256": "f5d249326646c818e62af3cefefe8a57e7b484446a0f48d1050b95e60925088e",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/flags_runtime/cmsis_notifications.c",
+      "sha256": "f84d37de11bfce426ea01104cec060d3cda9a134ed190c0583d5b3560380d123",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/flags_runtime/flags_runtime.c",
+      "sha256": "eaf3d2efe405fc387fb2d4486158c87fedcc9ca44794cf86f1b6cd24740bdd5c",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/flags_runtime/flags_runtime.h",
+      "sha256": "01cb99976d89e31a037d48db1c3afe70ec3688b3b04aa3b152943f96e961f54c",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/init_table/init_table.c",
+      "sha256": "82c265cd00fad23c865f65d3146dd4895c20eede00bd5961d0d1e30160e4f26c",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/init_table/init_table.h",
+      "sha256": "424f5e5a8906f53cf5f726b6fd08b386de0535cb4fede1fac1893aa437f94725",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/init_table/qsort.c",
+      "sha256": "92fffdfca98f4f8c76545ebd235e6ef94865b1eb8abfdacc72f62be3f379c047",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/adc_configuration.c",
+      "sha256": "6c129fce433b6d1f86ce6863c0b36ef5ceae15263220c3e57b9a7c47d1e8ba27",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/adc_configuration.h",
+      "sha256": "9a48cf6e40ff1902701d00ed17931a62a8883e7cab55d635fae20a66c05760bb",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/adc_context.c",
+      "sha256": "4eb80e023e049165ab8e4ff1c0e36e560989c795e1807656d5fb51ceb6bde816",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/adc_context.h",
+      "sha256": "eb483bafa67d44cfaf0f80efe299b29d6173c11e247b97c201c755eac5beefd2",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/adc_control.c",
+      "sha256": "4bfbf08084c3a2f335405b3106ce1d3be3e2c72ac40e178b417441c9072d257f",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/adc_control.h",
+      "sha256": "e213fb6517827350f620d0e79e0272529de7ffd9c0cae6123c050fbb0fd80a8e",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/adc_profile.c",
+      "sha256": "0328e83d97a358c700648fbf7b57d6f476cb6785bb3b84d1fe5105155596ff80",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/adc_profile.h",
+      "sha256": "3a6c9e6292a2a7897b783a8a85eadc2f2a91e6e793b55baee18efe67078e9a98",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/adc_samples.c",
+      "sha256": "2de032d8bd7d3c74c38deaa83e3a86ae2fb16043cb1bc84b5e0b59a67fb1fa5c",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/adc_samples.h",
+      "sha256": "b8a4d2715dd3915f487b58676c164bad4c1bbcc927af2c132fc2ff51f31b876f",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/bounded_format_native/bounded_format.c",
+      "sha256": "f3f5b2571cafd072a43680c9c63726134f846dc51f72f14c48f3fc5b582722af",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/callback_table.S",
+      "sha256": "f77a549db497b12c9ccb6a022bbfeb69d13d854464efda383359cb9cbe6a63dd",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/clock_generators.c",
+      "sha256": "db2f224396e5fcea275a78d70b39cc8a4bb4f7b8b9977ab8501b23c2b64579fb",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/clock_generators.h",
+      "sha256": "531b429ff5db4012b0d9eccea74b97531f7f66bd82ffd3435be267edc1c31fc7",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/clock_pll_math.c",
+      "sha256": "985766eae0c1f30d4b089c8f9bc3fd50c1cd0ef02f21de566c3f3d79fb5b0641",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/clock_pll_mod.c",
+      "sha256": "161293bd2344307ecbb524f9ec8e331426a6b48062858fb2b78838946236a53b",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/clock_pll_rounding.c",
+      "sha256": "297f86bcf7ab953bb08507c2097a3143065723326173e42de8f48212b40daae0",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/context_claim.c",
+      "sha256": "a9bf1993c0fa379c4a65ec65329931477035eac83cc68bb3ee1692b74f25000a",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/context_claim.h",
+      "sha256": "9fffa32354f043cf7fde6284c5817c442949d0b8a57568f20fea279d491db3db",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/context_clock.c",
+      "sha256": "45f6d4634e2b667085370cb85b69b7e4786058208e5ad19bb74954e5e41c6063",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/context_events.c",
+      "sha256": "e1c9c36c1bf0d7cc477f6ad415bbe60c8af67596fea36e27b1684531299657a8",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/context_events.h",
+      "sha256": "b328e91b60ca1ebadee6336350dedb7fc36578ac2ebe4e95cb468d2ddb8d9e54",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/context_instance.c",
+      "sha256": "73193ca9b4c1bf245adcdf3e02b191036076ab7306b6d31699a0aa5c6de214ac",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/context_interrupt.c",
+      "sha256": "9188fb33ec9ab5c9c8c32f819b030474d9b00129cb2fb8cb970b0bc57c35c355",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/context_irq.c",
+      "sha256": "b575bf206f6d735fd15c3fe6b96ec39bfe02b526c3475ebd73533368d2c44952",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/context_nvic.c",
+      "sha256": "a5b87691a794bd6bd4b83297da2852fa1ce61c34fdbe649f0400240493566bd8",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/context_queue.c",
+      "sha256": "8750919c8d87df9eeb1347d165275de4ba388b55b81d7e0131c7f76b15a9353c",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/context_retry.c",
+      "sha256": "79a38f101e88131fc859ca21039616a4451454a1e76014798591af407d9df364",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/context_transaction.c",
+      "sha256": "641476718d5a508ef4e87986bd5aa883c18595538981687e386413b758eb2d3e",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/elog_output.c",
+      "sha256": "42180c118b0d7013cf34f3815a5d77f7ac92abca25a6360d03aeb6a90eff6dc3",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/elog_setters.c",
+      "sha256": "ea7017a2d750cb23123a791fa77967c7ed146f6728b5cb61200919f9530278ba",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/elog_setters.h",
+      "sha256": "8f30aada99b2a7563126ebf0d94afa366c38d7143d8ee11c38d6ba5ccd5d1acc",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/elog_uart_tx.c",
+      "sha256": "b7ac4953b91455fdc21b6894d4097ecb4b3542c753746b48e5a95d06cebd0d13",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/gpio_descriptor_data.c",
+      "sha256": "5e458a49a486f04d2392c853d11cd22c7e86bfec3c25501908578734670bc3e0",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/gpio_descriptors.c",
+      "sha256": "0f209397b850c64a105a1dd46d5fe46beb59d95579bf7d178f33de85d5f8b280",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/gpio_descriptors.h",
+      "sha256": "ae92131f4a027b62e7e93a86b1c0a54dccb11f980c1896737707483ea93059eb",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/iar_format_native/engine.c",
+      "sha256": "b5127b99383c750f462417625d64f7310989b52f6cf5a06379f5234a523c38c0",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/iar_format_native/engine.h",
+      "sha256": "ab5af1aa509c7737818cbce322212233fb45efff834ca6ed53ef80d8e50b43e8",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/iar_format_native/entry.c",
+      "sha256": "a703521489477980cedcc0d26f1b3713f0e2392deb984f6c1792315e431a83f0",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/iar_format_native/float_render.c",
+      "sha256": "c548777ac0d4f0547dde5bf34d1eb1787655ca4b87cd7c1bb2cb710c7c5af0bb",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/iar_format_native/format_parser.c",
+      "sha256": "f9f782b6eb070a0ef9acbd5ea5c53aad69f5364b574d12b03cf904c26e1e6f23",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/iar_format_native/format_parser.h",
+      "sha256": "add37db12a0236f35a534c59cbcb047f9666137fcc3be89faf22bef253b96cbb",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/iar_format_native/fp_primitives.c",
+      "sha256": "0b3f18db7d571268ad7e2833f5b68667d30b79f818d54c44f061b343c822d57e",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/iar_format_native/integer_cursor.c",
+      "sha256": "135e1abf0ae9f9b0b267c30a90ae3eabe429faca45deb69094e63f270f832bb5",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/iar_format_native/integer_cursor.h",
+      "sha256": "1ff0a041c06a10b60b96c53030e0c3070aab604f2ad251c0be93ad6bad563fb4",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/iar_format_native/integer_render.c",
+      "sha256": "eb85bd1e64d27c8db503e9de7c3d7f1b44732d08eb81b61cca6db4f1084c9805",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/iar_format_native/record.h",
+      "sha256": "73111e0258212cde368be3c50916b97da0d857f738d8f07315fb1032d39b6eaf",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/iar_format_native/termination.c",
+      "sha256": "10aacb73b244cb9b0ea0c244f1443691bf16bdb6524ea4dda01ef5d5968596fe",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/iar_memory_native/memory.c",
+      "sha256": "bde5388fea8bf5ad4263d3f9b4e527e12ae710adf5c6923afd441fb25fb93616",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/iar_memory_native/memory.h",
+      "sha256": "fb253fb170521ce4dafe84a2bd4a9201f5380b69c90a09d615be7474da54a658",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/initializer_callbacks.c",
+      "sha256": "5dcff904e64dcb3358e6848425bd87c8c53a12a343357dc711919fcb6969c94c",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/initializer_callbacks.h",
+      "sha256": "9181b3929678cd39fff79cff73e058e6c5592ae21b688a66caaf1d961cd52be9",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/mode_register.c",
+      "sha256": "9f36b8c9cc422201bbf819ca45f4bbc7b0c5c3b1af1d6256c2f6b033d7245793",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm21_boost_service.c",
+      "sha256": "4d8853afa11c5deb55e9f80a63fc4a83ca2925bcf8473c45045104ca97b4b7a8",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm21_selector6/initialized_data.c",
+      "sha256": "b2420035f9249bfdebcdeafd0ff2b06da5b146abcdb16a259ac47f7c64b9157a",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm21_selector6/interfaces.h",
+      "sha256": "c5a18a57521d6685e04204bbb623e9014678d5e4b3608effe558099cd09cd1b1",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm21_selector6/pcm21_boost.c",
+      "sha256": "4d8853afa11c5deb55e9f80a63fc4a83ca2925bcf8473c45045104ca97b4b7a8",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm21_selector6/pcm22_sequence6.c",
+      "sha256": "7ebc3029a6b389e39b6e8d012ab999eacfe0b84f48c3bdf460e8a94f14fd30e8",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm21_selector6/startup_events_a.h",
+      "sha256": "508c3e6c67ac2857828a9f354f4df69d304b5e10e4f571c25203349269aee4d7",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm21_selector6/startup_runtime.c",
+      "sha256": "5ba7d8c04f3430cdccb1d67711385c88ea15c8a7d9a0fa3ce7c5a60322238347",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_deferred21_native/initialized_data.c",
+      "sha256": "b5cd196c88fd4fe094a781822f7474026403815f0d8fe950812c50df865834f9",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_deferred21_native/interfaces.h",
+      "sha256": "48362f5ea183d46546cb552bb935229f97e8a386e6adcbc98d88b1ff1757ed48",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_deferred21_native/pcm22_deferred21.c",
+      "sha256": "0a1bb0507da29f87f241be0d9074412bf11216bd459f91d3bc94ceb4de9fc98a",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_deferred21_native/pcm22_sequence22.c",
+      "sha256": "6db3c4bae7fae194292f44e81aa3f427308dcdc82644993fb65e84048f5dffdb",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_deferred21_native/runtime_transition.c",
+      "sha256": "8ce13c66611f8a6a15d58cb82235dc7f639ec2ec828a39538e51b7af6cde8f48",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_deferred21_native/runtime_transition.h",
+      "sha256": "8efd86cf5b310009da41ea12b431ffb4586ed337526785dbca54c8f79ce096a6",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_deferred21_native/startup_events_a.h",
+      "sha256": "de7670f1581980af12a4e9e6d37f7d55b716300cb421e5329be6a74b329bb1c6",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_deferred21_native/startup_runtime.c",
+      "sha256": "d325207c9688d808ed6a8237835f1b12d1b2de0d5661480b5a2dafe49e909d3c",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_fp_native/initialized_data.c",
+      "sha256": "bf7d05c572c5e4e8e9e82ac91f28df417a14473644946e079c2f436a7b2c87fb",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_fp_native/interfaces.h",
+      "sha256": "fa850746e7240f1b3f14e2dae633edca04de49377f8200d0c315b0a65dfd460c",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_fp_native/pcm22_sequence20.c",
+      "sha256": "11939afe1885cc7de6ae909e0129b0035963d09dbd3aedea685ac129024a8337",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_fp_native/startup_events_a.c",
+      "sha256": "7a5215eff729e9eced880bf356e904f37fc64d4147942c298d65cac42f82a2fe",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_fp_native/startup_events_a.h",
+      "sha256": "508c3e6c67ac2857828a9f354f4df69d304b5e10e4f571c25203349269aee4d7",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_hot_native/initialized_data.c",
+      "sha256": "a8fdf8e61a3c77b8f9ff291a8018348b6eb6b8263cf2f4297ead7371bdab7e4f",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_hot_native/interfaces.h",
+      "sha256": "08ec65f1152d28d7e03464b4465d4f337d63cd645d15a82d4c960857fe2c1c77",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_hot_native/pcm22_hot_transitions.c",
+      "sha256": "9282d3d3ac6ca6a61d6edd0e6404db00c94886d18acd61777b7719104f574b4a",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_hot_native/pcm22_sequence5.c",
+      "sha256": "803f24acbde95b4294a2b4884a2f26554a5aa78fd9ff48f7e09325eedd0ff531",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_hot_native/startup_events_a.c",
+      "sha256": "9b838f4cd9d29048982dd00f773a4261bee5777b275a053bb8c6fd0dcabdfddf",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_hot_native/startup_events_a.h",
+      "sha256": "de7670f1581980af12a4e9e6d37f7d55b716300cb421e5329be6a74b329bb1c6",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_power/spot_sleep_wrappers.c",
+      "sha256": "744c122309a3b8cb5b987580a6c105776c064575e0d08217923958287a9f880d",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_power/startup_events_a.c",
+      "sha256": "db914cecdc1b0a1c4cc67a65fdb9890ae2e6f62e1be38c06366404ff3e2aee1c",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_power/startup_events_a.h",
+      "sha256": "508c3e6c67ac2857828a9f354f4df69d304b5e10e4f571c25203349269aee4d7",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_power/startup_runtime.c",
+      "sha256": "a5243423cb17a1e8461af23314438aaefe8ef9269d145728b8c8b97f408ede06",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_remaining_native/initialized_data.c",
+      "sha256": "83f27b4e74e608e95991b162dbde3627866f8f5853686a39ed3ed81217a6cb56",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_remaining_native/interfaces.h",
+      "sha256": "b1e144e0ea49edf2d2d57e6a2315889d3a2f2e8932e89a0a0e926115aa47afd0",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_remaining_native/pcm22_remaining.c",
+      "sha256": "0e01bd4981005655f43fff7552e60a415d4743e55c3942731b89d5533e29181a",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_remaining_native/startup_events_a.h",
+      "sha256": "de7670f1581980af12a4e9e6d37f7d55b716300cb421e5329be6a74b329bb1c6",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_runtime_native/pcm22_runtime_hooks.c",
+      "sha256": "79c39c47a8cf04696c80969e432c48d62471c513c170d00ccdca387c6d99a983",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_runtime_native/startup_events_a.h",
+      "sha256": "de7670f1581980af12a4e9e6d37f7d55b716300cb421e5329be6a74b329bb1c6",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_runtime_native/startup_runtime.c",
+      "sha256": "ce7baff1d3b041d18ecec67159d3ed6ca30dccf3616533835b7f87044c9e9501",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_selector10_native/initialized_data.c",
+      "sha256": "e0d005204864050f9c5b440d780748e5f59ca4219af138fc037efc85038824a0",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_selector10_native/interfaces.h",
+      "sha256": "5ab586bc09dbd4e83b63a8a2af3cc7ca01e57306b690f59749050cebb908f15e",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_selector10_native/pcm22_sequence10.c",
+      "sha256": "0586e09ea1619af743cf052d2848b8c8f98f1af263aa1313ec54f33bf94c2d7d",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_selector10_native/startup_events_a.h",
+      "sha256": "de7670f1581980af12a4e9e6d37f7d55b716300cb421e5329be6a74b329bb1c6",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_selector13_native/initialized_data.c",
+      "sha256": "296d492d083e555e7e00abf314513ad00f3c771984e663cfecab9307cb55ecbf",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_selector13_native/interfaces.h",
+      "sha256": "bfd3e545a81aa21a3c5334639371f45cf554e54c134b3b25759089f47f63f83f",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_selector13_native/pcm22_sequence13.c",
+      "sha256": "d1a1c0f7ad98ee1531808d07ee495c337e2393a1e219c23a1cd336a76fb9132c",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_selector13_native/startup_events_a.h",
+      "sha256": "de7670f1581980af12a4e9e6d37f7d55b716300cb421e5329be6a74b329bb1c6",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_selector23_native/initialized_data.c",
+      "sha256": "3680be8d0c768a0ea37bdc6c292c49ea3cb74fccd5abebcc151e177439a20671",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_selector23_native/interfaces.h",
+      "sha256": "357af8fdedf71042fd00aea538b1e81ea03d05e5ae1e08626d4e4832b231c17a",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_selector23_native/pcm22_sequence23.c",
+      "sha256": "86ac45d027275797bdb323824d2adbefa2680cda230163c83b11d248e15bbf3f",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_selector23_native/startup_events_a.h",
+      "sha256": "de7670f1581980af12a4e9e6d37f7d55b716300cb421e5329be6a74b329bb1c6",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_selector9_native/initialized_data.c",
+      "sha256": "538a475db677a90d197ebb47dfcd8ee182c9dd8d2a87bd7365eb9d2b7c25b282",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_selector9_native/interfaces.h",
+      "sha256": "93bf252975344c418b8d78b9f301b19be7835e11e0096b6eb2347d72da0a840a",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_selector9_native/pcm22_sequence9.c",
+      "sha256": "9f63835b8b79b61c7fcd32a9a277b34525d4167fa14c10b97e343b81ec9117be",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_selector9_native/startup_events_a.h",
+      "sha256": "de7670f1581980af12a4e9e6d37f7d55b716300cb421e5329be6a74b329bb1c6",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/plain_printf.c",
+      "sha256": "47b073dc7cd64dff1274fc77bf7ef02f3b0bc0b730061a4009ef14ae26caed13",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/platform_bringup.c",
+      "sha256": "a0dc12ae68c5706898e40153616723ae1655eca1c7711b70d4ea70127fb7050d",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/platform_finish.c",
+      "sha256": "ccf6e73796dc04e95912331949e244dcefe2bf4c0ab2077f44350cef85277626",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/platform_log_literals/platform_literals.c",
+      "sha256": "d265695402e00a63ce7f1bca57af95e2d1ef8740ea73ec39212ed0b33514d710",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/post_bringup.c",
+      "sha256": "c2a4d1b23cb43cca774c9a94b0c45d447049f9093057b07f151b222aed781c1e",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/semaphore_create.c",
+      "sha256": "b9b47784c328259a0d7ef21c13f530305f0e77346f3d2a082cae9a9874c969d1",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/service_records.c",
+      "sha256": "71f4d3332f105f0a52643f3678d7552a3ba525134ca16fe6f7bd2902aff6036a",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/service_records.h",
+      "sha256": "6e0b94da17a0c74c586864989b6125d24db4cd296921485f52225fc5683c1e04",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/startup_alternatives.c",
+      "sha256": "5f688a327b10209a13ba512cb77b68ba3466a1e77ae5a1618891a4419b4900a8",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/startup_clock_config.c",
+      "sha256": "8ba43cd1baf78bd59e4141c4fed4e5daa173583865f82777bfcc5e8216cda35b",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/startup_clockmux.c",
+      "sha256": "4541c314385798684737a6ef37112d4740be6f5228b0956f87c99eb5b1d1c668",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/startup_clockmux.h",
+      "sha256": "e4df6900467b00f9e6c242da0e0b5fb9f6522fd08d56b2602fdb4e767e46099c",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/startup_clockmux_dependencies.c",
+      "sha256": "0e21d4eaed122ada8a111c0e13965cb122d9cb5018ef89fb5e2f9d6958702ca7",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/startup_clockmux_entry.S",
+      "sha256": "26f6c4d903ad32175069b02a2f9172090fb5b84113fc965b1c975deab929260f",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/startup_config_leaves.c",
+      "sha256": "9a85628ecf5a41c7a3cae406dda1076599d84d18e9f43db3c909a38a1291b340",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/startup_initialize_leaves.c",
+      "sha256": "4e729799b170a28886799284eba938be18093781ff83d64644a7a74992ebd046",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/startup_initialize_leaves.h",
+      "sha256": "87f48bb735f33d8e9e439be24222b9cdd709349790efcfe9c0fd63ce9af3a977",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/startup_memory_config.c",
+      "sha256": "4aff2dde13d301c16e645e606fade3813b019dfa9a2b602babd3129c05c4b303",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/startup_memory_config.h",
+      "sha256": "3b9b42c2744467db32a8e524ebc64c9b57b134b57782c70536b8a6c7212bf893",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/startup_pcm22_sequence1.c",
+      "sha256": "fa21f7447b9caa04ca1b147392f6c44564d79a04dfca9b5de170e83f82a22bd9",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/startup_pcm22_sequence17.c",
+      "sha256": "0f6ef9882b6441374db72878881081a1d2b2ed6718f3c615e7f7ca4e793e9f73",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/startup_pcm22_sequence3.c",
+      "sha256": "5fb4547a4577b5fc82f2d573a6a77e4b3e1cc06b483ba04be692c9328682b49b",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/startup_pcm22_sequences.h",
+      "sha256": "95c17e11e6b92c91757e877ba125f0475d9e3e17e1d78998b7741f507cbf6e87",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/startup_power_config.c",
+      "sha256": "af1f1e58c39c79d30a3367f71e520a59418de563444bf566f4a42277f7590cf0",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/startup_power_config.h",
+      "sha256": "7870faa9deaa59cef8a15c38a9ede3b3b59394f299127349b14231fca049c086",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/startup_power_register_read.c",
+      "sha256": "e0066524e6ba58ea07ad7e813d60feeb5c505348d05b046841b71267dfe13b84",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/startup_runtime.c",
+      "sha256": "53b734d3f1f5ac8f0841cd4093444e1e9476094d37e3cda919006395a796fc92",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/startup_runtime.h",
+      "sha256": "63213723930ab1310c8b8a756eaa0aeeede4bc279a32382b25275fc28856f96b",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/startup_shutdown.c",
+      "sha256": "61de6bf8f7d2ab747a16b4389466270ea70d8125df365e0422da69d929c6b3eb",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/startup_shutdown.h",
+      "sha256": "bbeddfafc242a77fc1e9a37b0c4dafda283f74e3d003034cd2abe7237957f58f",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/startup_spot_events.c",
+      "sha256": "05e9456dc838d2f1a62ba4a581f7069c81693b14c7be689886f5c6a96682ded3",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/startup_spot_events.h",
+      "sha256": "4a6551501354ad67f5a66920867cd651c1e66645b581216096124a6033ca9802",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/startup_spot_handlers.c",
+      "sha256": "e6d905544fffcfc8154827f58a55f8a61f3e1a5af93f3889126e5748c6a4efd8",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/startup_spot_timer.c",
+      "sha256": "91ccb0778a6e3469afb77efd9aed91c43c671f7f04953afddd56767e207d3793",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/startup_ton_gate.c",
+      "sha256": "1d8887b1cb88b3e3d2df33ea4d614a7c47d42c7f2151957008845f081f6c596f",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/startup_ton_hooks.c",
+      "sha256": "17f0c402291c8297bba74d1b41efcbfac6a34a955589737b5a0debda0b83fc64",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/startup_ton_hooks.h",
+      "sha256": "e2d9fb7f63c912aa2276710d90ebd3ba466d7149f1cc6f9f543a9a8d1e1dcc9d",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/uart_context.c",
+      "sha256": "ef546603b29f9e5b9e1646ad68526d4acbebac1c050828a618286bd33d4bb0d7",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/uart_context.h",
+      "sha256": "d3e0fc81a071c19d83656c2a406c99531f3ff05b2d5b5142622573c802d7abcf",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/uart_rx.c",
+      "sha256": "8c1ee34d885ed86836330946e74f652b329706e743359effa5f46af726ae3d5e",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/uart_rx.h",
+      "sha256": "6d4dfeba528c0c6dd7157eb9ac691b4b5abf5889637b2afa2bc0c223de68e8cb",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/log_call_adapters/log_adapters.c",
+      "sha256": "e2e6695ac5df909331ecbbe8547ea45655d63dd475cadd2f0c7b15543b1e3e0b",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/log_call_adapters/log_adapters.h",
+      "sha256": "c09588b969039290cd5a3574db9afe38794820ff3a5ab85f7335fe0453e661a1",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/log_call_adapters/task_with_log_detail.c",
+      "sha256": "ad91612f4b69ae785359f9c3f17d8071f57c086ee120c9032bad0e768acb3bf9",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/main_callback/main_callback.c",
+      "sha256": "8a139eac4a79fe6eb2f18c28f768b4d2ee08603a070f92c76a01751686af2cb4",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/main_callback/main_callback.h",
+      "sha256": "bb8eb480f7a8ca2b25adc7f930e944f7d560827eb80d8fe2a750cc38ec06fca4",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/main_init/main_init.c",
+      "sha256": "ce3d93d0065d60ce53b5ae7ed44ebf7089fd45f502af37c928923957bac1433a",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/main_init/main_init.h",
+      "sha256": "dff1e14a40f50ded0468e903150737d469b3a8654dfc4dee65c81b00ec1cde2a",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/manager_task/event_dispatch.c",
+      "sha256": "dbb075848372956682351c036dda2ce92f4608f4425f37dc228aaf20a0ec0aed",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/manager_task/event_dispatch.h",
+      "sha256": "1b871a1f2d1329e260b0760e8512fe19e78f39deecafe2a115130613daaff5ce",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/manager_task/event_runtime.c",
+      "sha256": "0020fc6f30e073e51336a6fb20e31cbf9a63b81344e73aa07d98ee5e08a19048",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/manager_task/manager_handshake.c",
+      "sha256": "acdbcf05cc74105fde1d24775629dde25fef6283352872ad7b9ceb30cb2dd647",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/manager_task/manager_setup.c",
+      "sha256": "deb2520637d097c0fdf942568938834334d141c25824f8e569dfcd4ed0e89d09",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/manager_task/manager_task.c",
+      "sha256": "368329ddbf4e5d4fed79e64fcf352b91b0ee0f0ef671a6defee9134cd2272c9a",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/manager_task/manager_task.h",
+      "sha256": "f8d306d38037d714198392035234e364baabb56d4350d916036847670f7f974f",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/mspi/interrupt.c",
+      "sha256": "595295e4c65ed84f6cb3307c64aa64b62e04ed54b94d73fc9b2d10be42c3affb",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_commands/nor_commands.c",
+      "sha256": "afa8dde882e2b8487205131a31860ea86ea9f7b212ca2db28c7c28fa6fdf6762",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_commands/nor_commands.h",
+      "sha256": "c9ca5bd2cec4fcfe318aefa4b636224b8f4b046d641cf6b3e3755ebf39897e13",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_commands/nor_timing_wrapper.S",
+      "sha256": "01deaab8874cd281ae6a20de2c1b93ae5d2bda56ba45266379ea47bbf6ecf59d",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_init/nor_init.c",
+      "sha256": "9b025d0239271b921b29fc0d68c8d6c9329782bfe04b4584da251ef6871df9ee",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_init/nor_init.h",
+      "sha256": "4e281e2af2d329308c0f4a829610a32f72b3a59dd2c7a207e1777c3230f64e63",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_init/nor_runtime.c",
+      "sha256": "91523b049b2eca423f390b89ac1b1e2c495b265e596911510781c0b47ce5f7bf",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/blocking_transfer.c",
+      "sha256": "4b311ebfe01ff2104dfbb42423780bff2ab22e0c5223a73d1008a6dd8cd1c51b",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/control_read.c",
+      "sha256": "38f31db3ffbbdcd68ac04caa03fa972c1767f68612ca5cfcbcb9c6f833393019",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/control_remaining.c",
+      "sha256": "0a552b3aeedde9dc221cda0208ffb8d77db71914b051479eb8928d8843e18d90",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/control_remaining.h",
+      "sha256": "eff219834631c9158bc1adc13f75103af771b9703aaa07a95e7e175dd86f1d44",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/control_request34.c",
+      "sha256": "418af0ad8034a219d0fe5c69b3ed0523a09b5a1f83310e7274e9f0d1886ff19e",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/control_request34.h",
+      "sha256": "d4bbb8ae47a3f35454ea25c27969f92f70b9018ffb9523b621ff24ea94d8ecff",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/control_request_clock.c",
+      "sha256": "4b3f36e0d8d940963517c220ccc2ce81680ff56db6dedf90b01ef273294a0364",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/control_request_clock.h",
+      "sha256": "189aa45871bb7ac133f46f41fcc45f32edc48278e51503e81496324b5bb06510",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/control_request_extension.c",
+      "sha256": "85cfadfc4c45fab6b7684a81f749a591ad86196ec5a7a72cde9d9b899b5fa5c5",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/control_request_extension.h",
+      "sha256": "507c0199de0bd4c346b04f7036962207a11609fedd62da00f13eff5f4a25ff3d",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/control_request_helpers.c",
+      "sha256": "e605680ef860c9505587652f56aa3642c5b1cbd42678ad8ba7f7f5a0a2b43324",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/control_request_helpers.h",
+      "sha256": "52c7b4a5d75e5a55ece3886d295f824cc4f2fb343eb024516c5c189e73ef9f2d",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/control_request_state.c",
+      "sha256": "9a6177c1377741662d6abb250781c6aef1ad40952871cf39a60ea29131e96a70",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/control_request_state.h",
+      "sha256": "f9fad03b7d0d57aeda15cd0ff0ceb114deff9160c86c7e899b638fc9d25d4ea3",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/control_request_transactions.c",
+      "sha256": "b1c84f52d887cb1eb7e2cfa7575bda749a25a020e9cee9cc5017578480379d4c",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/control_request_transactions.h",
+      "sha256": "fd6259aac80b8fe70b9343816c7fb0782141663f22ba816f1f614a3a6bbec76d",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/fifo_transfer.c",
+      "sha256": "f4b2d5a4b0cfa7e2f0ad2e167b4e114fdad1e7730bcd9565ec5718f66d062451",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/hal_leaves.c",
+      "sha256": "edaf8433793100f7c9b07e4ad29c7bd7a41112e7ee1b8a6f9c6e4ce92fb7b3c7",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/irq_guard.S",
+      "sha256": "6ed270a5221aa9984fc8df8e10244e0d0cd38cab2d6ce8c77310060ba0382cbb",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/nor_mspi_init.c",
+      "sha256": "e01cd5ac757a6c41ac7a846db6f63b83a8eee91c5e55a92c16908351ee7ba92e",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/nor_mspi_init.h",
+      "sha256": "25e82a1e772ed8a0761602d7e1171ffda8506bc17c23c172171f6c00e8906dcc",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/register_id.c",
+      "sha256": "b985d9db7767d82fa13fba6f11d3810ceae52465de3543b65e08a4faad594ac9",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/register_id.h",
+      "sha256": "fc088be8abe868030a8f2327182c4d42e90ec673c77e7c345f1e16b6146d7b97",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/status_poll.c",
+      "sha256": "210816cac79fd4286c40ad55e7c61782aff27d248232188079de4185409773c9",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_power/device_configure.c",
+      "sha256": "930649b60d2479ffa3a4bd65118652285721a17a2a13a1a60f69a5fd8de37174",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_power/device_configure.h",
+      "sha256": "aa4beadfa440bd8663456f2e96e62e1af508bf3e88ac4d8abd721ac93fd83703",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_power/mspi_clockgen_control.c",
+      "sha256": "fea3b66f9be7107c9a50034ab2cccb5b830c2462728933ea4b4deccd998b3b0d",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_power/power_control.c",
+      "sha256": "4a34124a5629c80380c44f790997d24233cd88da33efcff434f33a0523bf000a",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_power/power_control.h",
+      "sha256": "e289097aaa6bec65f53fe773728eb38cde9645c286dfc264f9e1026bf264b593",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_power/power_control_adapter.c",
+      "sha256": "f929eea855a6938c0a016d9711bb57deedd74a595efc7a90a93a672e32357a3f",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_power/power_control_adapter.h",
+      "sha256": "b25ebef80829a70b518d17f1152c075e6879993905caa21b80248c50a98a1fad",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_power/serial_mode_switch.c",
+      "sha256": "ee6f33ef2491749b7040e4a0e9d30124446a9eaa427ad8a6dbc1bc30032b7a8a",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_power/serial_mode_switch.h",
+      "sha256": "1fbc334e3375a9c517c6bf56fdcf24971f61637458e846a76c6b29f8fe1af61d",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_power/timing_scan.c",
+      "sha256": "f6aca0523841950ebcd319bd14f5ca0a2cb518e4df3197e6c59ee9425f92af34",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_power/timing_scan.h",
+      "sha256": "86363dfce00691464826d2371486409dab985e0af6813ff335d9f1e484165ee3",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_power/xip_address_mode.c",
+      "sha256": "f3a5a78f9113d2cdb8a1db9c1ab564c351eb6f1b42a64f7eef8517b1f9b51a68",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_power/xip_address_mode.h",
+      "sha256": "4c35422e824dd877551de9e24891061a6b73ac003f5903e993d7d91a27922b70",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_queue/mspi_pause_dma.c",
+      "sha256": "02ea153066ae15b45e9922233b16332f65fc7a631e38b5db6622010bb3ee2907",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_queue/mspi_pause_dma.h",
+      "sha256": "ad097ab0514115b87286e3bca300ff6a50d4eaa2ccfb453a18ca217958009d48",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_queue/nor_mspi_queue.c",
+      "sha256": "e51571ce5e8ea55a2dc90f3f04f5fd4ff06975dae13d0b154a2958d5ffc537cf",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_queue/nor_mspi_queue.h",
+      "sha256": "64aca4faef257635215cfa6f00e101818f830d8b62a836e65be5de2c73303c54",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_queue/queue_descriptors.c",
+      "sha256": "c2402468dcf87ce0b40d326bc151dc77bba7fef5ec64353b719de8003dc0471b",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_queue/queue_descriptors.h",
+      "sha256": "46907c03c2620997e8a1e3ee17487f7abd742063713dba454250c86a3bdae16b",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_queue/resources.c",
+      "sha256": "44f74d611d02dda5909983da1365d71d97d5fcfaab8dea7de7c4c7cf22afe544",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_read/nor_read.c",
+      "sha256": "d55c8d97c751b9e726fe5b6f305a21d1bdfe2d42dc64d3058afcc2398d7678a9",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_read/nor_read.h",
+      "sha256": "bf3ecfeb0f4a7ec14fc5679fdec0a3d47b5479125741f470c4e3d4581532040d",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_read/runtime_helpers.c",
+      "sha256": "0a3de22639d6d75d58c482b6f7c57cb687adac79a3b59eaf0d6bf3f46b7c952c",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_read/runtime_helpers.h",
+      "sha256": "c824342a96553c973e49440c20ba5d2e557e76f82170c1967f8490be7deee6f7",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_write/nor_write.c",
+      "sha256": "1a8bd4e22f9c16d08f2615c67951b8b821943475760cf6b1cb110423f6c11ace",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/nor_write/nor_write.h",
+      "sha256": "bf021dc7aece5f979f220e44861440beaf6d9c7e4337197156e5123b52fd36fd",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/cache_enable.c",
+      "sha256": "7ea4e7c46a98599d93ae397ab12643511988b07809dfcf786d0b0c0eac36684b",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/cache_enable.h",
+      "sha256": "68a60e1c3f391b903c1502505f8e6979104c60e7544d4cc490650714a41fabb0",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/cache_runtime.c",
+      "sha256": "45af243657b6cf5a82e5b47e7d5563c7cf0399e67b473ee6c72456ae230e8a69",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/control.c",
+      "sha256": "8b6c54999184781870b3300e4f1b99416fc05bb89ad0577614615209e32b6f7d",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/control.h",
+      "sha256": "596724724a2fb0e80d04e3abf2590616562a6f67f31b9a60c19e2c43d62c67eb",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/critical_save.S",
+      "sha256": "c3be3d527c34f732bd53df3bc7230c45e94637a075952e113832d627c6a2863e",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/mram_rom_bridge.c",
+      "sha256": "77c556a1458f0a4d1bca76f72ab08ad8e3e311264e0112870e1eea6ab1b29d73",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/power_domains.c",
+      "sha256": "0645d747f9fcc91bb8155715fc61150fab77b7d2aa31fd958500494b659120aa",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/power_domains.h",
+      "sha256": "e7ffb273d59c6a3005f89f655ef00c8903124b9f389127d4db6768507d30b276",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/power_guards.c",
+      "sha256": "73f56d843fc648b7a18e56dc9cf698f8e74279703762b4d60cc872846bab71b9",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/power_special_mode.c",
+      "sha256": "fa06e1e2f304ea9698f845471b10a1a913f50ae58321f494c1fe4319e4f0007a",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/power_special_mode.h",
+      "sha256": "24ecf4828ac72acfecf674a1460d19ff9a338f5e0f2937cd0b6159bb6f054849",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/runtime.c",
+      "sha256": "dba157e3638495272106bf40da47a111cd915bcbc35300015eba2dc92ebbc458",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/runtime.h",
+      "sha256": "882967faf7b1a8aeed7bf6c95934063430529e7fe7409a5dffc3ed9336022135",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/runtime_query.c",
+      "sha256": "3bf806de515e9e071ce92e95d6312367690e72fcc05e36a74de2787401625b6d",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/runtime_query.h",
+      "sha256": "b84fc51b524e254ae4f90e06f8fa479d50e9d2712bb270409f9bdca56d17e846",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/runtime_resources.c",
+      "sha256": "da2f414410610f596ca7bf306f28d340777b37460c66206352a7ac66b2215b9f",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/runtime_transition.c",
+      "sha256": "9748e60f599fbaf5b3d96e01b02acb04c0fe477c39a8c274ba5be9a6074f1649",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/runtime_transition.h",
+      "sha256": "8efd86cf5b310009da41ea12b431ffb4586ed337526785dbca54c8f79ce096a6",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/runtime_wait_adapter.c",
+      "sha256": "4721c73affe1064b1266ebeb65922c861e19efb3ed08e7b0151e9f9bed5239c6",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/platform_startup/delay_math.S",
+      "sha256": "f64ac8598dcb5caea1de1724300f15196841691a8256d1eb892d2726c0aed4e0",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/platform_startup/local_providers.S",
+      "sha256": "642a29c3fb27fd42874d96a255032add1d270f95bd2e4125f8b0b38285f4d338",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/platform_startup/local_providers.h",
+      "sha256": "a836eb521d5bf6fce27241fe2b429c1460d2cf6f7137521cd4281875eb02a904",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/platform_startup/platform_startup.c",
+      "sha256": "45efd567e793079ba58ec1bb8704d789b51be7a136316b1284cf59abc6969622",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/platform_startup/platform_startup.h",
+      "sha256": "6807f5060e28b8ad3fc77f74940cb5811522b14ac6e47e370222bfbbd921ce71",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/port_timer/port_timer.c",
+      "sha256": "017dd562b45b2c1cbe65490619047db00babd025c0f9cb5b5b8459d94044cb68",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/port_timer/port_timer.h",
+      "sha256": "18492792c8bc39aa6221ad0670af95dbcbde823b0b08c28516b6fb2a240c5205",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/queue/mutex.c",
+      "sha256": "6989dfbac60611e2a4a612f030b927a375737c9da08d106d3d7697a6c5c606b7",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/queue/queue_wrappers.c",
+      "sha256": "e7c168579d68b36f4406c194fd460eaaf041fa2f75f328e1e01444522308d5b3",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/queue/queue_wrappers.h",
+      "sha256": "5ae09065df69edd0c4cc92ceb2393c2a7fe7e43912ddf14f33d63dd390cc1b42",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/queue/runtime_mode.c",
+      "sha256": "dd97dc30a02adc443beeb3b96f1df0c4a2ea830ec5ea7e4f144603e1664ea83e",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/startup/fpu.S",
+      "sha256": "8a5304062febf6f5504805fc6c4508c61b40731fff331551201a991c29d22f7b",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/startup/init_records.S",
+      "sha256": "81aafaf87771afa630ff8f9ef3d9c7c953757bcd758415391ea441a5b1494505",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/startup/initialize.c",
+      "sha256": "3ad0388b5d00242fab034766b763aaf062a2438ac58fb7d1976c219c67d36b86",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/startup/initialize.h",
+      "sha256": "e260f05257ded054aaa7192676567ef1561aece6918863442731a53e00580fe4",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/startup/itcm_helpers.S",
+      "sha256": "a2fb3cdb5d43aa631d8c885758ce87fd2a3d337f6aa56b17e8153589a7ad1069",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/startup/record_adapters.S",
+      "sha256": "80c8715af940f0882cca10af8a888a7f558214bb840ece23c8f1102763fc844c",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/startup/record_dispatch.c",
+      "sha256": "4ae73092a684d52c3cf0aa8a22342e5d447c9bb1ecf8a8947ca23e4db7ebf2fd",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/startup/reset.S",
+      "sha256": "81c29f458fe82b48c6303c8f7096a6477a6c3e3954b04ae62cd75d0fcbcdb042",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/startup/system_entry.c",
+      "sha256": "611dc555059aad35d7564306d68175765708845cc43f374f32f5888d040cffde",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/event_flags_set.c",
+      "sha256": "44a56d1f817cf4e6a84f920446f2a549b0a9230cb219716d6796d3db6dd5c2ae",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/event_flags_set.h",
+      "sha256": "e4253a9a63570953cd65ac0225b1afcb10afa9c451813e6de5645294a73c10e6",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/event_waiter_wake.c",
+      "sha256": "d4612d9a8e7f84dec3bd4b1b03e9cc205e6ae650fefd49e7335bd096f93817a3",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/event_waiter_wake.h",
+      "sha256": "86ab2eabfd5dfa5b5dd92c7ae531884d024c501f3ae052d537d4a3180f976aba",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/exception_entry.S",
+      "sha256": "3a4749119084ef014b25e7dad642f9d7fdacd45e990acb100eb61e361a6175e3",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/first_task_transfer.S",
+      "sha256": "e60328e0f299d4ef866f9102fa4b1417a21856d0f30f719a60fcdd86220732a4",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/idle_cleanup.c",
+      "sha256": "4e6c3ed892567d7e55ef2285a509d29cd1d5bef235f861b0253dec6144e87be9",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/idle_sleep/idle_chain.c",
+      "sha256": "c6ffd0ec4a3a69605a816311d1a5c5797dcf48c2f771cd0a7a16edf86355ef72",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/idle_sleep/idle_sleep.h",
+      "sha256": "aa6dd0c4fc468bb14f4ee6580630cc12fdb646c85bdc8467f57ee336ef42eebf",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/idle_sleep/scheduler_bootstrap.c",
+      "sha256": "1be4c81322771e1fd75d85a87780694b36cf70f22bd6e214899e6ed457796417",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/idle_sleep/sleep_helpers.c",
+      "sha256": "035822c3773b91c04952f67a84e66b2b50fd2e184517d174550d102569ad31cc",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/idle_sleep/sleep_policy.c",
+      "sha256": "94800cb3e70113c5f416ada31619d1172242148baa641a6fa980e6c76cf361ba",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/idle_sleep/spot_sleep_wrappers.c",
+      "sha256": "744c122309a3b8cb5b987580a6c105776c064575e0d08217923958287a9f880d",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/idle_sleep/sysctrl_sleep.c",
+      "sha256": "8c9ae26ef99e45d636f43d5f3b976e4ac722e723f4f29711089d856b1b196cfe",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/idle_sleep/tickless_native.c",
+      "sha256": "cf2d057f2e0cec8e5306eca6bda21c8836974772eb1fc05d25ffc8077f20ab1d",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/isr_delivery.c",
+      "sha256": "f8199023e60695498d68565fd657458103c21059429e9dc3d095abaafaabeec8",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/isr_delivery.h",
+      "sha256": "37f14ccc13071d9b4c62ed94c42944a08fde60509e9e17894eb33c6d0b1cb10c",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/kernel_dynamic.c",
+      "sha256": "510cca2b99b9ba5e43f7311fb0788fc9d198cf8ca70d24238a40aef6f16e4045",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/kernel_runtime.c",
+      "sha256": "f936291ab3ce21f750aea5a5cda2140c7ed2fae6af1d01c7de4c727e60b43ccc",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/kernel_static.c",
+      "sha256": "03e3d500609c627d88fea12f7b468e5a2da8a20b42bbbd81f539192469191491",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/lifecycle.c",
+      "sha256": "ff291664ebac49876d349496141839aac97654d239bcf2e94ceae2ddd3d0f599",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/mutex_kernel.c",
+      "sha256": "1acf3fc7ec62ed6a107b0a6849d6e05dddb7bb461b05741b4e0d5c038486d57f",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/mutex_kernel.h",
+      "sha256": "2425c3804f22055a00debb6372268f2559132b628b025b1b4fb0323330b6f496",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/port_start.c",
+      "sha256": "751306f7e7de7d773a6ec4331baaed8e756578a193a956f912d21f488b5bf56e",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/queue_buffer_release.c",
+      "sha256": "c60b5f0a6bd0edb6632547c4e951fcc99e3c36e947a18d45c8a7b3f08ec2696d",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/queue_buffer_release.h",
+      "sha256": "0bd21fecc2cd3be0677cedc7c13ee8a8195e1150a773c22551fbe2bc6d5e64cd",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/queue_receive.c",
+      "sha256": "0b8ee96a10bc0a9957b54d446bcd174146b2673786047669a6c6b74912d2ae3c",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/queue_receive.h",
+      "sha256": "8bc78e8b93365058889d375720fb33990dac977957172db119255e6310abfcd6",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/queue_send.c",
+      "sha256": "d16a784f3fed5a1593a34f20b49a89e8aa45c37bd61b5634d9f82bf8fa966663",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/queue_send.h",
+      "sha256": "527612c2bc54c11ac867d07b96f77599149cf091526bdd8e0c4893dbab262129",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/resource_creators.c",
+      "sha256": "161750b3284b751aa9f4372a510c82b586ccd79ddebe28c8546902b0f3bb7d8d",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/resource_creators.h",
+      "sha256": "95e6025334f717a9f9f2b6f74e9b77924dec12d53c0a13e4b4327a0606675637",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/restore_probe.S",
+      "sha256": "13eebafbed3259ec82560d2f1b062c1d10bb093ac3a79cfa55a65bbeedffa662",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/rtos_heap.c",
+      "sha256": "2f2c47abefd460fab72c5ec22fe110c24141877f83dc1a0440eb4bdebb124025",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/scheduler_bootstrap.c",
+      "sha256": "2eec059b629811234b18717a7f452c349fd0db0bf882341a39d5bbbf358ad810",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/scheduler_resume.c",
+      "sha256": "8d2b445f1c50f68737aab186f92d03acfdf5c3a5e63edb0742e895843d1fbb03",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/scheduler_tick.c",
+      "sha256": "a9d354c01555e0a0dee1dd4c406ff06062db000189c7c773d2a908f28371ab15",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/task_delay_native/task_delay.c",
+      "sha256": "4b546472dcc522008c36419e253341d4d077d7da2679d7414a2a50dc6f24ae8a",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/task_delay_native/task_delay.h",
+      "sha256": "e199fca07744760a529ad59528ece307e1b1306b52d932d8db6d1bee9f694825",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/task_entry_adapters.S",
+      "sha256": "99d8c21f9f86940f5ba2f2897f521faffc7c421e8469ad15fa59ebaf1d7b1c91",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/terminal_paths_native/terminal_paths.c",
+      "sha256": "abac16bf0d1a2f6521431b5efeabf786844f76c740a1bf809f463ff93e98a915",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/thread_creation.c",
+      "sha256": "12681d96dcbb83cd0887b525c686f2d8c2094edb11164c88087a5e30490bb058",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/thread_creation.h",
+      "sha256": "bf09b1dd9847ac4772760069fe98ab0a340c4380df4a279f53f6f9e7ac76f136",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/thread_notifications.c",
+      "sha256": "77d21a7958b3fbf9f584a7f6ca5effeb34ea5e3afef886038018088419b9e693",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/thread_notifications.h",
+      "sha256": "1505c1ea37ab4ae78e798f8cf237a021ff280b23286febb4dc9856158f1bb7cf",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/thread_priority.c",
+      "sha256": "28aeb88afbacddd94aac7c8f15641b4ff2020b21e6b699a833b982e3da810541",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/thread_register.c",
+      "sha256": "638f2ee05e19054e177c3fffeba6f6dcfab85e8029cc86a1d9db850336f526bc",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/thread_select.c",
+      "sha256": "b8b2450b5e4b97eba3d386d08ce3ff750108b98d4f8223c498da3ddc967bb19a",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/thread_termination.c",
+      "sha256": "8346e35814aacff3c9b5b4928359484e12fed2fbb89183ba7f75ef9fabdcd15d",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/thread_termination.h",
+      "sha256": "825bffc6f523a57f64fd5c1ae53b770643bbd0e25b82d445600c9da56b815d1f",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/timer_commands.c",
+      "sha256": "dcb4a0b3fec989ac78046def236bf21315ca10bd5284ec209a4d86105a0018b0",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/timer_commands.h",
+      "sha256": "6a97f9a0448e3bd0c539b5be657c0ec71a8c7974bde9131cd94a4aea8569b0f6",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/timer_expiration.c",
+      "sha256": "87b5130ad93f4ea040fd03cb86305126f65a3ed2a31ac5349dbad3847a33a158",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/timer_expiration.h",
+      "sha256": "08864dc106880883c7440ea67aa56d425a9fcac1a391a7e8298af6e20190f919",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/timer_service.c",
+      "sha256": "60563d37dc03cf584068d61bb9d8946be590116d0ad3d2b65f6c59b5581fa968",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/timer_wait.c",
+      "sha256": "08abc6689d1c7e5f5269f274be38815cafd0081ff0a8605e213ea42f7149aff3",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/timer_wait.h",
+      "sha256": "5bf1fc39a271dfba768ae51becdd3ce8a44350f8cd0103b810cac3766da204a3",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/update_core/handoff.S",
+      "sha256": "483d9d93639b6bbbe31b081b14745a550f694b6f9581081ff9ec69d59381e6c5",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/update_core/log_literals/log_literals.c",
+      "sha256": "a9d4ab9704590b9d05b4b4f2975ecca06f9a2cc282135e298d7ae47eddf660fe",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/update_core/rom_resources.c",
+      "sha256": "0fa2ad19685f924c4db99eba4f4a59aa346fca58b23e51a4b5470a77ce63efff",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/update_core/update_core.c",
+      "sha256": "7ec6576285f84829158ee19bfca53a1db113f4400f60a3697c5b00fa896fb369",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/bootloader/update_core/update_core.h",
+      "sha256": "f8729dd2b81d2e90ca502eb014625352a64aac641a8c266c2c481ca5a650492c",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio/ambiq_gpio.h",
+      "sha256": "fa08cb47b7bd451f77c4c06bd442c6bcd3297a431019ad0d0a2a5cabed5c2496",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio/ambiq_gpio_compat.h",
+      "sha256": "3d610896f61f927d2579c4bbfb50ff45abfedbdd488bc478b3cec719dd57c601",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio/ambiq_gpio_irq.c",
+      "sha256": "7a713514c4b185b5aa811fed32e1fd4ac7c596f70c13543eb1a0884b75ac1ba2",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/ambiq_gpio_config.c",
+      "sha256": "4f73b343fc2907a359ce757e7fe934d587aefe55504b1abbe87c89675668e892",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/gpio_config.h",
+      "sha256": "503f5e3d346bd89f6b1b27952c49d789913da3857b136d55a50c5b4bae1738f6",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/gpio_config_compat.h",
+      "sha256": "d5364aaadfdb25682685edddbe70f016660c4f69bfc98270e248d365c623527d",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/gpio_control_compat.h",
+      "sha256": "1662d7626dd77102d7560cc249052db65428abd3d84b3cc032c77ed25e9f6502",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/gpio_interrupt_control.c",
+      "sha256": "d23f207c25c84744f76918884a66a32c9ebc92b41a4cdf160c107409343ec1a2",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/gpio_interrupt_control.h",
+      "sha256": "e3277f16f9c7956402575c66557f9c1b3eac81aad30a39037fa95ef33f2711ef",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/gpio_state.c",
+      "sha256": "e913d52ab6820e1d9314c47cdab7dd7a1ab4493da57d6d42c9f87ed43468563e",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/radio_board.c",
+      "sha256": "250858d0afcc7a9554d4d91766e998afe942f2cb6f49a495856fd307f87ed941",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/radio_control.c",
+      "sha256": "2d229817eddb89988213273246eafee36f5c0a644c73a8c98bcfa6cecee743d4",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/ambiq_cmdq.c",
+      "sha256": "39dfd4515413e88e66b07f8eea47664a6d666943069e65768f1a284435583a24",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/ambiq_cmdq.h",
+      "sha256": "8f4dffc5e3cf2b33cf877dab9ba5b2841b74451a379b9ab49ab4ec0d2869ce7d",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/ambiq_interrupt_mask.c",
+      "sha256": "27a574d24f61bf1bec7a13d16bc3e1f0816c35045f384b5ad85d808871f6a9eb",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/ambiq_interrupt_mask.h",
+      "sha256": "76e92c27af92ed403326c65acdbb890dccfb4f00788f06c6c99f09e4ec0de98a",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/ambiq_mspi_compat.h",
+      "sha256": "fe6af8d10f857eb6bfb2758907073bd5ab75691a6818c03c94f0124a0f285299",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/ambiq_mspi_interrupts.c",
+      "sha256": "032087d41fe463a36c6a119b8fd2a7beb1256356e2f6d8d9d7f4ca75e02e5ba3",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/ambiq_mspi_interrupts.h",
+      "sha256": "89f04627e3270417130428894d6523b66e1191842dfd5baba01ca0256be51337",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/ambiq_mspi_lifecycle.c",
+      "sha256": "c55c3e163097e0112b11eb9fc4192b6a25de8cdaf28da41b1e3a6c8f2272ad0d",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/simulator/entry.c",
+      "sha256": "762eab9e3d49371055ba5e9941f62540f6538348b23d9f5990e01e7340850b28",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/simulator/lifecycle_seams.c",
+      "sha256": "6b3e74175d61d32ef8c416a72f795ec7b722d6ab0442dd7409e6b7fb1d34e644",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/audio_cache_handoff/handoff.c",
+      "sha256": "ffbdf9c36d9e8bb3e209f900a5eaa383665fadb47029da6d0e2e81583936b323",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/audio_cache_handoff/handoff.h",
+      "sha256": "b93f87f5ea7ef8f92f98393b5db24c4cb0d78f49eeee17ae3ed10984fcc5f54f",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/audio_dma_rearm/rearm.c",
+      "sha256": "f5c6981d0e1a1bb63ff616b2689c32357e0aab80d1f9f5142b3a1fb279d0c6bc",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/audio_dma_rearm/rearm.h",
+      "sha256": "8f257f60eff0c9c4d0ecd6c6a2a4f50a5760257239d9bc24446be5c23ce1a524",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/audio_pcm_consumer/consumer.c",
+      "sha256": "aadc9b3aee7fab8629e22036e063127e98ed382b2fe424149169d22e1830c13b",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/audio_pcm_consumer/consumer.h",
+      "sha256": "49688d38e304bcb098a36ea324843d5c75731fd13e42139dea41f46268605044",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/audio_pcm_registration/registration.c",
+      "sha256": "81a23abd7af68fa418f93234647133ac92e6783c01e31cc6f69a2527351a4179",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/audio_pcm_registration/registration.h",
+      "sha256": "fc4d4388814a540635f9e7407ae79d7a3fefd306791edfc2f0ed20757f727d47",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/cache_maintenance/cache_maintenance.c",
+      "sha256": "365496e8fc154d0b604e292ab96272f6871106a705ac7a5439a67271f6961d03",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/cache_maintenance/cache_maintenance.h",
+      "sha256": "64c437f8de20c7e0c7e4ce21a8cff58a8afecf0a46950b17dd260783e9f12c11",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/freertos_daemon/daemon.c",
+      "sha256": "c3e7e6ef9180333d51ca5fe60ce862550ac1588aa121541285e927809204e40c",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/freertos_daemon/daemon.h",
+      "sha256": "16f72e7fe374dac03651a0822616aeeec931686eb907a3d1d31cd3dae956e2f8",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/freertos_daemon/receive_copy.c",
+      "sha256": "6c53f0de46bb6011370237d19cc7a7bac9afb698650e1fafe5670735b28883c4",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/freertos_daemon/simulator/providers.c",
+      "sha256": "af1ac9ee64c594b6c405ca5555a88d1aff03ffd48790ec85e0b16da70228e4a4",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/freertos_daemon/task_critical.c",
+      "sha256": "662173ca583d13a2d92312c17ba4512c7f707bd967a13784093051be4aacba7d",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/freertos_event_group/event_group.h",
+      "sha256": "37edf591b135477ae72b8e006e975b06c5a103d89417942f927f9a7cacd1654f",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/freertos_event_group/event_group_compat.h",
+      "sha256": "dcc3819ed41c3594546bb27891b3c0f0a4640ffdfa51a6ce56f4bf5b6c4380c1",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/freertos_event_group/event_groups_subset.c",
+      "sha256": "b33ba4457786db350a93b9fa613a6c2eae2344c6dce948534d53dc910e80a5c2",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/freertos_event_group/simulator/providers.c",
+      "sha256": "b53b02e5379248881fad42f1ebf3055bd8d82e543549c70c432a21689e590234",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/freertos_event_group/timer_pend_subset.c",
+      "sha256": "f1cafb3ed5b0cc33fcc9e336a4617b6266751aa701842b62931f14c82dcedbb3",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/freertos_event_group/wsf_event_adapter.c",
+      "sha256": "9753afcbbf921748070045cd26d1a8ccb3f89f68068275ff21fe350bbc49a32d",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/freertos_queue/queue.h",
+      "sha256": "69e7d62be2159ed94a5d24dc85e7a5456f3420d30a9be5167d5687bd2456838d",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/freertos_queue/queue_adapter.c",
+      "sha256": "477a3199aa54a897f601108becce47f348ef9fc8bf4f6e272cdb9ce3577c80d7",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/freertos_queue/queue_compat.h",
+      "sha256": "5fae5668bbcb12a5327d67c1e69ef31046bcc16f4d44028fd426accf27457eaf",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/freertos_queue/queue_subset.c",
+      "sha256": "75d32fc9be94b4de3f0bff294dafb7537d8231113c98b2681b5fbbf0c9ade5b2",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/freertos_queue/simulator/providers.c",
+      "sha256": "7d551795ca47d1a1c004d8cb4a2ea0943cf6baefbda413af30306d40dcc3ca37",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/freertos_ready/list_subset.c",
+      "sha256": "537ebd8aca3a9a757935179ff2474d3544bf0a07bd89fa697cc4bd90535b7677",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/freertos_ready/ready.h",
+      "sha256": "b88903df66fdfa00e97318afc5372de9ad2a5750b9d0ec32454e35042c7bfd7b",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/freertos_ready/ready_adapter.c",
+      "sha256": "fcfd72d02952c093d6c7391b6d678797db9912a960dbeb031b818ce1509465ec",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/freertos_ready/ready_compat.h",
+      "sha256": "46476ef71baa382e0d93d9be8159d71dee84606b993e09caa4a7b00b50ab34af",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/freertos_ready/simulator/providers.c",
+      "sha256": "617c052fb1e4b5aa5263a245790e4ef3891c246747029614ff3c4273010eb011",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/freertos_ready/tasks_subset.c",
+      "sha256": "0aa9d744536cfac094489722983743ec531c69932718a64c3c00f5d287645e99",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/freertos_resume/resume.h",
+      "sha256": "70b40111ce95d89cc95a6429e2e2f037d4d16920d4be7be5ee1e0ccc502abdfd",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/freertos_resume/resume_compat.h",
+      "sha256": "786f0877ff8d3d7a33ff194510afec90ea0b6684d94ed73070aca1f0ec10d2b2",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/freertos_resume/simulator/providers.c",
+      "sha256": "8eab11a2659a771170987514bc483a28602c92ba8fd882d07e1d1d5d9770857a",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/freertos_resume/tasks_resume.c",
+      "sha256": "e9038009d2eecf539d94eca032e5379dbb426a2eebda33327b257dfa2a66a767",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/freertos_resume/yield_request.c",
+      "sha256": "dd2e9e9cfe3ff315a71001d1ccf8edccb20f89de03c577c179969a8f4bbe9a61",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/freertos_tick/simulator/providers.c",
+      "sha256": "53d1b49bbc976c7f9271cc20ebfa36c05c52a6ad81a14d25826d52c991808949",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/freertos_tick/tasks_tick.c",
+      "sha256": "b287c101d356965e1dafb959caaf020c7f493fe60f77f5521eb8791da08891e8",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/freertos_tick/tick.h",
+      "sha256": "9bd975170e9c90ed5cfe57bb9819fdee29e5c3cf035cb3975d1d1cd138ff316f",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/freertos_tick/tick_compat.h",
+      "sha256": "4323bd026ea29f56df1ff9abf5f1e4579d9295f73af0db8f589dc85a01ca4f3b",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/power_domain/power_domain.c",
+      "sha256": "29333d2ac5740f0b9e6657a387c23641b0361c441b0628df16aee25171b794c7",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/power_domain/power_domain.h",
+      "sha256": "a47aaa61e248c78bd52ec2bc8ee74a5f3504eacf4f290989251eda13207e8057",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/radio_gpio/radio_gpio.c",
+      "sha256": "506dc9fee5f59d75afc7453ae1fc3352c376c7192a04a6fbda3a3a93a4d5d7cc",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/radio_gpio/radio_gpio.h",
+      "sha256": "0b137c878b549c7d450af6b557eca6f1169ec9c7ecdec2346dae07c9f6ccd5e6",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/radio_gpio/simulator/scheduler_boundary.c",
+      "sha256": "e7a468f3f21060e150b657c7993cd660536e7e7d4a5ec92d7e15aeea1fcaaa77",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/radio_iom_power_prepare/power_prepare.c",
+      "sha256": "373418706fa831325ee94171284c83b6d4432fecdde71daf57a488e49eca887f",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/radio_iom_power_prepare/power_prepare.h",
+      "sha256": "63c9d4dd6b118a371b0bd16ed0fa95296c5e5ef9b7a05d5b02a8ec97c159574e",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/radio_iom_release/iom_release.c",
+      "sha256": "dc44702b3a2592877b7f4c25d4b4d87091baae690ade389ac63929a3c03ea7b1",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/radio_iom_release/iom_release.h",
+      "sha256": "681a4d11f3609ba515ca2c48653de4902993802e1f88d82004d506921a39780d",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/radio_transport_pads/transport_pads.c",
+      "sha256": "8607b23d5c0f5fa1eb00b229670d7efc0929a5d91dc89b7574f1dacd0b97df3b",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/radio_transport_pads/transport_pads.h",
+      "sha256": "f9e58dd3d4040ed6591ec8e0acc04502b0f7de6d080e27871751aa33c5ac6ff7",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/simulator/entry.c",
+      "sha256": "cd61baf25d6cf38db1a631c0e5db5d194e87a3953536c5213135cc3498be813a",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb.c",
+      "sha256": "ef593088ec3c20985ae8c4b51cf932d9ccc9a98627b43dbe08e8befa412d8afd",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb.h",
+      "sha256": "92e7b7a09807209efba8b0372e615dd3b5ab32dd0459bc4c25675392e29b525d",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb_fifo.c",
+      "sha256": "f6c5439760848024e1bb297d3ab413aa4644f69e42c61c2b4ec692d2da94caca",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb_fifo.h",
+      "sha256": "b0cc52cc1f2c60ffb3da0c4a3931159b44c252f8343237f044db6ce7a600efbd",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb_mmio.c",
+      "sha256": "783266dd5cadfdb30c1d3fd52f94425f01e5dda86dc33e92f3ba7105f47516bd",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb_mmio.h",
+      "sha256": "246a8d858507f86efca279f1bcc3f2acf832b728db77d5a81163812fc1cf9c6f",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb_tx.c",
+      "sha256": "26c4c1d6cce94e42d5d7c2a117c6c592e297d9f8bb3b692add121430c904403c",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb_tx.h",
+      "sha256": "70d8e9f60fd9c67ccdd0217f036265f9b4f213c9dfae58af2a490ea4cb427829",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/wsf_radio/simulator/providers.c",
+      "sha256": "9573c153fdf64a01797fd8d56e802c70d7f00553ddaebd8334a8120eecac631f",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/wsf_radio/wsf_radio.c",
+      "sha256": "8b487a7bfd6dd091bbdc422bcafa448500740b9f160f8ec31e9db6aab26be4cb",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/wsf_radio/wsf_radio.h",
+      "sha256": "a5747d4739a8bf88694736b571430f1b30ff8067fb3a4c1968d5ab7410156256",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/wsf_timer/wsf_timer_compat.h",
+      "sha256": "3ee9a2f9cd849df597d155739d6dac7583a142df131e6dde298f2fe898953f2f",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/wsf_timer/wsf_timer_stop.c",
+      "sha256": "3617e50ecfb9f999df723ed996b008db997d9402a9b317c7bf603b78bf298264",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/foundation/wsf_timer/wsf_timer_stop.h",
+      "sha256": "ca20886609a5f19cb0352a2f726f65bfb39f6916eb7d129c19525eb54fee29e5",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/active_timer_offline/active.c",
+      "sha256": "b543755f42a3a4e29ece8e06ee9b04e87dd08189beff69d9648c8c9bee467c4c",
+      "tracked": false,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/active_timer_offline/timer.c",
+      "sha256": "d529edea5a27074f5f823a9c6a22dc04f091178952db5b65086ec8c384cd40b1",
+      "tracked": false,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/active_timer_offline/timer.h",
+      "sha256": "9e020a4ec0d6d9ae480ffaafb62fe0219ec6ed8f132a6bf8475441558576eeb2",
+      "tracked": false,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/all_slot_offline/slots.c",
+      "sha256": "302698546e2ad9d313413720b9cb8ad95eda52976e14c19878e57226b241f202",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/all_slot_offline/slots.h",
+      "sha256": "6a1a54d78e1b8faf8d6bbdd41cd8a4054a7095890ea65f5bd8b70c623aa95fad",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/auto_dither_offline/dither.c",
+      "sha256": "17c409a72cae2e7db8d2fe546305929135274ea00cd9574019febe8b5e342f60",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/auto_dither_offline/dither.h",
+      "sha256": "ef9e5db1e2061e08e6176348211db0f38c3c17616a4f57a800c353e560a056aa",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/base_frame_offline/base.c",
+      "sha256": "8215c2798d3cca723848e12f5fd99f3726dd4eeb8195f6f6ef1d5aaed390854c",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/base_frame_offline/base.h",
+      "sha256": "12f95069de62c6f4d95c620700cb7f2a547470d29f0ab543ab30f36f243741d8",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/calibration_offline/calibration.c",
+      "sha256": "bf459910812c4b33abf14e4ac71ad89103e4871b2f86d4a3277b7d9070f1e93c",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/calibration_offline/calibration.h",
+      "sha256": "c97f1ca1056565410709d741636044514c6262b1f4a5232c662645642a0370ad",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/clock_selection_offline/clock.c",
+      "sha256": "ae718de54e7b6a940216302676158a9f96424601d64e909c3b63d91f606bbda3",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/clock_selection_offline/clock.h",
+      "sha256": "9deb5a86c70cbdd9a10667b3cf63b46b3e5aa342abea8db912822fe1fd768b4b",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/config_bootstrap_offline/bootstrap.c",
+      "sha256": "8c823708052d9717eda72da5836bafe3ece749ec5820161b133fc485d2cbc2c6",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/config_bootstrap_offline/bootstrap.h",
+      "sha256": "0cb5b63f018f838300cc219e358e14c215dbfdedc354da73c55bd72096f605c2",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/config_bootstrap_offline/erase.c",
+      "sha256": "e71d796267d1eed25df563acfbedd5677c3100d18c3be6b4ffc702cdcd5a6257",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/eeprom_init_offline/init.c",
+      "sha256": "94c6e3fbfd060f8a3eacf252d34e3dcbf9ff8ab879cc4b1dab4e0b8a7452e12d",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/eeprom_init_offline/init.h",
+      "sha256": "f7988e8d4401e02d9f7b375824d6fee72bc82ee490c3074748a1fbed7d7fc566",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/eeprom_offline/app_event.c",
+      "sha256": "ebbd215229e2b6ded8e47831edc46d1cb2d5ca40fb443fa31373934d48850ff2",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/eeprom_offline/deferred.c",
+      "sha256": "9a5e5e1118ec8c93a49ee5e1fa8bc875426d157ca467165ce86f667bbad9be37",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/eeprom_offline/eeprom.h",
+      "sha256": "9576a14eec174d406f249ea78927693ccb3d39af29738e861a9d2cae3e9b0776",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/eeprom_offline/extended.c",
+      "sha256": "813ac06bf59edcfd20c2a3f3b156f1839ea92ceeaf656f16aa12e517b3d52550",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/eeprom_offline/flash.c",
+      "sha256": "5111042e7a2bff7a1d392510861db8dc2d378375f7ddbf8f404d9006f4899078",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/eeprom_offline/history.c",
+      "sha256": "96057c8f282786eca3f4aecc7d15485ec03f75b7884b0ee65d99344cce56d37b",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/eeprom_offline/history.h",
+      "sha256": "9c12b04fb40b29c3e0fdb38995fc735059f6d4823365e7a88b33bcad5b6f76fe",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/eeprom_offline/provider.h",
+      "sha256": "8977dd0bc665c0ce0a568ddc6635ad399a68c57c2a03d09f3406febef4683e3a",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/eeprom_offline/providers.c",
+      "sha256": "f60681843d36d30571a169f02c6002dd2c69a54e19e924ab3eb92581a21396e4",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/eeprom_offline/read.c",
+      "sha256": "43de31119b98d0df35eb511e34edf1698c63c2c2ab07ea5100fd9e3a3c3daa0a",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/eeprom_offline/storage.c",
+      "sha256": "16e6daba7e572e91097279d2ab208d47131345bd23df680858118542c36015b8",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/frame_generation_offline/generator.c",
+      "sha256": "c398e7ad896ec0586f4b68c70db4225ae9dd78da19ad3e96f4230f26af4ca67b",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/frame_generation_offline/generator.h",
+      "sha256": "e0d31923810223f198e3894411bb9af4a4437146dc2e39c3950ce53ba1595c7b",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/gesture_machine_offline/gesture.c",
+      "sha256": "b05bff211c2ca8a2c9387006e90185c4674dce8ac4e2287f58ef925b6981741d",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/gesture_machine_offline/gesture.h",
+      "sha256": "6c88499b0eea55cf4206902ab44fae603ad09c3815751739ab85987404605243",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/gesture_speed_offline/speed.c",
+      "sha256": "c089f97b535ea4315f6dabda7264991f887d6a53df787883f1caa6686e224154",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/gesture_speed_offline/speed.h",
+      "sha256": "af046edbea4493ac1a1e75b529becf5a55084f06e1201c6cf0d8046aee9e5931",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/ilo_compensation_offline/ilo.c",
+      "sha256": "82189f10935bb4b164bab080aba20f7ae83abdeffd3a82f0ab21c63a0a051306",
+      "tracked": false,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/ilo_compensation_offline/ilo.h",
+      "sha256": "5d021453f2e609b328e7fb56aad55c11093086a347d7aa7d268b7c317df1b1e4",
+      "tracked": false,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/lp_application_offline/application.c",
+      "sha256": "2b72fff6eec6ff65076e91fd64cd31565f035242b6728c5997704ea8985362cd",
+      "tracked": false,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/lp_application_offline/application.h",
+      "sha256": "e40be7bea765f1afdbbd8d4d2887176c7fdb4bb761266eb1f3272ca00d2e6cc6",
+      "tracked": false,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/lp_history_offline/decoder.c",
+      "sha256": "14c70dc4d563d6982fcd02a959154dc3a954c9e880be40c22b8a985dd6714c22",
+      "tracked": false,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/lp_history_offline/history.h",
+      "sha256": "ac47dc3dd76996981844e7ad8e4695b70fb3b4c072302059b6b890af14962a58",
+      "tracked": false,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/lp_history_offline/reset.c",
+      "sha256": "58ed746b4596b5d01481e3a3664d7dce1d9fc7d8f82140ee028192cf0c0f9e71",
+      "tracked": false,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/lp_scan_offline/scan.c",
+      "sha256": "acf41c91dfb6825cc7f6eccddafaddf4cf4dc63f38155b2ca50bd4f2d2697e9c",
+      "tracked": false,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/lp_scan_offline/scan.h",
+      "sha256": "ee3ed8703be3459c53392a0fde5643c2b2b246af2e7bee301c181d5ad933d855",
+      "tracked": false,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/max_raw_offline/max_raw.c",
+      "sha256": "2b88b692762e914cf6f0714a0418e67bcb56d46c0a7317b866e899e719b1b5d9",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/max_raw_offline/max_raw.h",
+      "sha256": "c6267702239032e472b98274879997ee6e5df57d22b46499983e1d5b6db08f96",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/mode_offline/capture.c",
+      "sha256": "47f49493e77901e6d3bcc5bce87e7295159ce6826321d0ed233e55b2f25c774c",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/mode_offline/cpu.c",
+      "sha256": "018f02ef024e01f67d64fdaa19c7189f8c0ecbe40173b91dc05b57ce4abcfcd6",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/mode_offline/init.c",
+      "sha256": "53d73757f9abd311a443debfd286064774b27a051d485cd2502c3dea426c20b5",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/mode_offline/mode.c",
+      "sha256": "1a4ca7945a8e2d5cb247201cc9413d1e2901cb7cce2949b6b96b9451a625f03d",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/mode_offline/mode.h",
+      "sha256": "8a2a7cadc773587516e8484486d66cf04536bea649b05bda62676019d6a9cc6d",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/mode_offline/regular.c",
+      "sha256": "2515e3ac47dfc1743d55bdb7b4d47463087c26f1a7f44b298bc847b8ff8321d4",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/pin_control_offline/pins.c",
+      "sha256": "4fc06e27b6b1903067101590010b4db5aaf156a99aa89f61c7db6bfd88a2556d",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/pin_control_offline/pins.h",
+      "sha256": "3745ce81cda2934c3333f8414a325774e5033b7ba9bd5f04c56fd6fc1ea03ab2",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/proximity_producer_offline/proximity.c",
+      "sha256": "dfb217f9dbdb55e77789e24d6aa79d3654ee2983a54e326ceb100878e1ec5975",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/proximity_producer_offline/proximity.h",
+      "sha256": "f0be4b00968222f4315265a0eee13de5c3da6bc2caa4cc79a13e218651074b3a",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/saturated_scan_offline/scan.c",
+      "sha256": "48c5b2ed1bb71221df36623458297b72d8405e4a01350a8240bf13cb69e81541",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/saturated_scan_offline/scan.h",
+      "sha256": "108b2453d6cb1a579806462f97b7a7c3e860dc7c277bab68aada22c074696ec0",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/scan_frame_offline/frame.c",
+      "sha256": "de80fde3341733d915ba7110806a72c9b2581a012a394b152f3614b663c77428",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/scan_frame_offline/frame.h",
+      "sha256": "d0c720a2baf6ea97e3e969e0c33f86733d9a25575c42949c3a321c1ea722e41e",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/scan_isr_offline/isr.c",
+      "sha256": "f9a5b945635a99d9929866e42eb985dc90cba930a3e5efa0f562b029968bc934",
+      "tracked": false,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/scan_isr_offline/isr.h",
+      "sha256": "edcacd69dc41b3c95a1ea422691696b6088d66fa886768b79a821ad52887d5fa",
+      "tracked": false,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/scan_preparation_offline/prepare.c",
+      "sha256": "9ccbf77d3a15b67c83b5e127dadcb65a802fa7e9906d71861fe30089e9063656",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/scan_preparation_offline/prepare.h",
+      "sha256": "b200c17df35c5e39d49da5e2d1d91c67a79dfcd3e2681ce9e0ecda5c32c03051",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/scan_watchdog_offline/watchdog.c",
+      "sha256": "416039471ed5951502206ddc6608de3a39761e54f69acf60ce9af8ac7bad724f",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/scan_watchdog_offline/watchdog.h",
+      "sha256": "6e40d14a6c22789ad283cac6ee21916dd81d99790397390bb4bc9c165883a4b0",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/slider_producer_offline/centroid.c",
+      "sha256": "3358be8fd170383982bd904d81a76b77b6055e1df5221b14790d614de8b3d2d0",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/slider_producer_offline/filter.c",
+      "sha256": "0b60fff13f39c0935eadb655cce4d954a36fba9726112adf7881ff14f6ab1493",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/slider_producer_offline/raw.c",
+      "sha256": "34c1910b7b85795186f177a4ea418f20c1934f6f3c327e2f5104b18f18de7ea6",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/slider_producer_offline/slider.c",
+      "sha256": "f221085ebdb406f58fa908768c618536ce8765b44caa937706c62481cd1d4315",
+      "tracked": true,
+      "ignored": false
+    },
+    {
+      "path": "g2/components/touch/slider_producer_offline/slider.h",
+      "sha256": "ade4ecd7bc84785c83cb2637397d138b80a033552d6a6b0973c3091ee5cd39e2",
+      "tracked": true,
+      "ignored": false
+    }
+  ],
+  "added": [
+    "g2/components/touch/active_timer_offline/active.c",
+    "g2/components/touch/active_timer_offline/timer.c",
+    "g2/components/touch/active_timer_offline/timer.h",
+    "g2/components/touch/ilo_compensation_offline/ilo.c",
+    "g2/components/touch/ilo_compensation_offline/ilo.h",
+    "g2/components/touch/lp_application_offline/application.c",
+    "g2/components/touch/lp_application_offline/application.h",
+    "g2/components/touch/lp_scan_offline/scan.c",
+    "g2/components/touch/lp_scan_offline/scan.h"
+  ],
+  "modified": [],
+  "removed": [],
+  "canonical_tracked": 532,
+  "canonical_untracked": 14,
+  "canonical_ignored": 0,
+  "sealed_files_checked": 656,
+  "sealed_files_changed": [],
+  "audit_inputs_checked": 110,
+  "audit_inputs_changed": [],
+  "checkpoints": {
+    "runtime-delay-native-integrated": {
+      "path": "g2/build/bootloader-completion/runtime-delay-native-integrated/e5aeae5297c6aa35c78a5f4c558365d2d47a0f8f6505f3ed2431914278ef6c32/candidate.elf",
+      "sha256": "e5aeae5297c6aa35c78a5f4c558365d2d47a0f8f6505f3ed2431914278ef6c32",
+      "matches_previous": true,
+      "matches_now": true
+    },
+    "terminal-native-integrated": {
+      "path": "g2/build/bootloader-completion/terminal-native-integrated/15d222c4f550da090e0893905111771b5e3cabd07948f4be082863851f1fdd32/candidate.elf",
+      "sha256": "15d222c4f550da090e0893905111771b5e3cabd07948f4be082863851f1fdd32",
+      "matches_previous": true,
+      "matches_now": true
+    },
+    "logger-native-integrated": {
+      "path": "g2/build/bootloader-completion/logger-native-integrated/1cdf1d63cc01590235139d85caea25e518e3cb9b8fcf4c4bed3c15e5c14c20fd/candidate.elf",
+      "sha256": "1cdf1d63cc01590235139d85caea25e518e3cb9b8fcf4c4bed3c15e5c14c20fd",
+      "matches_previous": true,
+      "matches_now": true
+    },
+    "platform-log-literals-integrated": {
+      "path": "g2/build/bootloader-completion/platform-log-literals-integrated/fe6b6c464c4f884965ce75fe2e6925adc8ee773bf49c4a34c86b34ff270429d3/candidate.elf",
+      "sha256": "fe6b6c464c4f884965ce75fe2e6925adc8ee773bf49c4a34c86b34ff270429d3",
+      "matches_previous": true,
+      "matches_now": true
+    }
+  },
+  "head": "36ff5930a4e832156f9ee3111e83480756ebef37",
+  "git_status": "A  g2/analysis/rescan-2026-10-08T115009Z/REPORT.md\nA  g2/analysis/rescan-2026-10-08T115009Z/snapshot.json\nA  g2/analysis/touch-all-slot-closure-2026-10-08/DELIVERABLES.json\nA  g2/analysis/touch-all-slot-closure-2026-10-08/REPORT.md\nA  g2/analysis/touch-all-slot-closure-2026-10-08/original-disassembly.txt\nA  g2/analysis/touch-all-slot-closure-2026-10-08/preservation.json\nA  g2/analysis/touch-all-slot-closure-2026-10-08/provenance.json\nA  g2/analysis/touch-all-slot-closure-2026-10-08/results.json\nA  g2/analysis/touch-all-slot-closure-2026-10-08/verify.py\nA  g2/analysis/touch-auto-dither-closure-2026-10-08/DELIVERABLES.json\nA  g2/analysis/touch-auto-dither-closure-2026-10-08/INDEX.md\nA  g2/analysis/touch-auto-dither-closure-2026-10-08/REPORT.md\nA  g2/analysis/touch-auto-dither-closure-2026-10-08/build_offline.py\nA  g2/analysis/touch-auto-dither-closure-2026-10-08/original-disassembly.txt\nA  g2/analysis/touch-auto-dither-closure-2026-10-08/preservation.json\nA  g2/analysis/touch-auto-dither-closure-2026-10-08/provenance.json\nA  g2/analysis/touch-auto-dither-closure-2026-10-08/reproduction-receipt.json\nA  g2/analysis/touch-auto-dither-closure-2026-10-08/results.json\nA  g2/analysis/touch-auto-dither-closure-2026-10-08/verify.py\nA  g2/analysis/touch-base-frame-closure-2026-10-08/DELIVERABLES.json\nA  g2/analysis/touch-base-frame-closure-2026-10-08/REPORT.md\nA  g2/analysis/touch-base-frame-closure-2026-10-08/original-disassembly.txt\nA  g2/analysis/touch-base-frame-closure-2026-10-08/preservation.json\nA  g2/analysis/touch-base-frame-closure-2026-10-08/provenance.json\nA  g2/analysis/touch-base-frame-closure-2026-10-08/results.json\nA  g2/analysis/touch-base-frame-closure-2026-10-08/verify.py\nA  g2/analysis/touch-cap-initialization-closure-2026-10-08/DELIVERABLES.json\nA  g2/analysis/touch-cap-initialization-closure-2026-10-08/REPORT.md\nA  g2/analysis/touch-cap-initialization-closure-2026-10-08/original-disassembly.txt\nA  g2/analysis/touch-cap-initialization-closure-2026-10-08/preservation.json\nA  g2/analysis/touch-cap-initialization-closure-2026-10-08/provenance.json\nA  g2/analysis/touch-cap-initialization-closure-2026-10-08/results.json\nA  g2/analysis/touch-cap-initialization-closure-2026-10-08/verify.py\nA  g2/analysis/touch-clock-selection-closure-2026-10-08/results.json\nA  g2/analysis/touch-clock-selection-closure-2026-10-08/verify.py\nA  g2/analysis/touch-frame-generation-closure-2026-10-08/DELIVERABLES.json\nA  g2/analysis/touch-frame-generation-closure-2026-10-08/REPORT.md\nA  g2/analysis/touch-frame-generation-closure-2026-10-08/cdac-results.json\nA  g2/analysis/touch-frame-generation-closure-2026-10-08/closed-results.json\nA  g2/analysis/touch-frame-generation-closure-2026-10-08/original-disassembly.txt\nA  g2/analysis/touch-frame-generation-closure-2026-10-08/preservation.json\nA  g2/analysis/touch-frame-generation-closure-2026-10-08/provenance.json\nA  g2/analysis/touch-frame-generation-closure-2026-10-08/results.json\nA  g2/analysis/touch-frame-generation-closure-2026-10-08/verify.py\nA  g2/analysis/touch-frame-generation-closure-2026-10-08/verify_cdac.py\nA  g2/analysis/touch-frame-generation-closure-2026-10-08/verify_closed.py\nA  g2/analysis/touch-mode-closure-2026-10-08/DELIVERABLES.json\nA  g2/analysis/touch-mode-closure-2026-10-08/INDEX.md\nA  g2/analysis/touch-mode-closure-2026-10-08/REPORT.md\nA  g2/analysis/touch-mode-closure-2026-10-08/build_offline.py\nA  g2/analysis/touch-mode-closure-2026-10-08/original-disassembly.txt\nA  g2/analysis/touch-mode-closure-2026-10-08/preservation.json\nA  g2/analysis/touch-mode-closure-2026-10-08/provenance.json\nA  g2/analysis/touch-mode-closure-2026-10-08/reproduction-receipt.json\nA  g2/analysis/touch-mode-closure-2026-10-08/results.json\nA  g2/analysis/touch-mode-closure-2026-10-08/verify.py\nA  g2/analysis/touch-msclp-attribution-2026-10-08/DELIVERABLES.json\nA  g2/analysis/touch-msclp-attribution-2026-10-08/REPORT.md\nA  g2/analysis/touch-msclp-attribution-2026-10-08/build_public.py\nA  g2/analysis/touch-msclp-attribution-2026-10-08/download-receipt.json\nA  g2/analysis/touch-msclp-attribution-2026-10-08/generator-download-receipt.json\nA  g2/analysis/touch-msclp-attribution-2026-10-08/loop-screen.json\nA  g2/analysis/touch-msclp-attribution-2026-10-08/preservation.json\nA  g2/analysis/touch-msclp-attribution-2026-10-08/public-results.json\nA  g2/analysis/touch-msclp-attribution-2026-10-08/receipt.json\nA  g2/analysis/touch-msclp-attribution-2026-10-08/reproduction-receipt.json\nA  g2/analysis/touch-msclp-attribution-2026-10-08/submodule-proposals.json\nA  g2/analysis/touch-msclp-attribution-2026-10-08/submodule-source-receipt.json\nA  g2/analysis/touch-msclp-attribution-2026-10-08/unique-exact-sections.json\nA  g2/analysis/touch-msclp-attribution-2026-10-08/verify.py\nA  g2/analysis/touch-pin-control-closure-2026-10-08/DELIVERABLES.json\nA  g2/analysis/touch-pin-control-closure-2026-10-08/REPORT.md\nA  g2/analysis/touch-pin-control-closure-2026-10-08/original-disassembly.txt\nA  g2/analysis/touch-pin-control-closure-2026-10-08/preservation.json\nA  g2/analysis/touch-pin-control-closure-2026-10-08/provenance.json\nA  g2/analysis/touch-pin-control-closure-2026-10-08/results.json\nA  g2/analysis/touch-pin-control-closure-2026-10-08/verify.py\nA  g2/analysis/touch-pin-control-closure-2026-10-08/verify_wrappers.py\nA  g2/analysis/touch-pin-control-closure-2026-10-08/wrapper-results.json\nA  g2/analysis/touch-regular-mode-composition-2026-10-08/DELIVERABLES.json\nA  g2/analysis/touch-regular-mode-composition-2026-10-08/REPORT.md\nA  g2/analysis/touch-regular-mode-composition-2026-10-08/preservation.json\nA  g2/analysis/touch-regular-mode-composition-2026-10-08/provenance.json\nA  g2/analysis/touch-regular-mode-composition-2026-10-08/results.json\nA  g2/analysis/touch-regular-mode-composition-2026-10-08/verify.py\nA  g2/analysis/touch-scan-mode-composition-2026-10-08/DELIVERABLES.json\nA  g2/analysis/touch-scan-mode-composition-2026-10-08/REPORT.md\nA  g2/analysis/touch-scan-mode-composition-2026-10-08/preservation.json\nA  g2/analysis/touch-scan-mode-composition-2026-10-08/provenance.json\nA  g2/analysis/touch-scan-mode-composition-2026-10-08/results.json\nA  g2/analysis/touch-scan-mode-composition-2026-10-08/verify.py\nA  g2/analysis/touch-scan-preparation-closure-2026-10-08/build_offline.py\nAM g2/analysis/touch-scan-preparation-closure-2026-10-08/callback_probe.c\nAM g2/analysis/touch-scan-preparation-closure-2026-10-08/results.json\nAM g2/analysis/touch-scan-preparation-closure-2026-10-08/verify.py\nA  g2/components/touch/all_slot_offline/DELIVERABLES.json\nA  g2/components/touch/all_slot_offline/README.md\nA  g2/components/touch/all_slot_offline/slots.c\nA  g2/components/touch/all_slot_offline/slots.h\nA  g2/components/touch/auto_dither_offline/DELIVERABLES.json\nA  g2/components/touch/auto_dither_offline/README.md\nA  g2/components/touch/auto_dither_offline/dither.c\nA  g2/components/touch/auto_dither_offline/dither.h\nA  g2/components/touch/base_frame_offline/DELIVERABLES.json\nA  g2/components/touch/base_frame_offline/README.md\nA  g2/components/touch/base_frame_offline/base.c\nA  g2/components/touch/base_frame_offline/base.h\nA  g2/components/touch/clock_selection_offline/clock.c\nA  g2/components/touch/clock_selection_offline/clock.h\nA  g2/components/touch/frame_generation_offline/DELIVERABLES.json\nA  g2/components/touch/frame_generation_offline/README.md\nA  g2/components/touch/frame_generation_offline/generator.c\nA  g2/components/touch/frame_generation_offline/generator.h\nA  g2/components/touch/mode_offline/DELIVERABLES.json\nA  g2/components/touch/mode_offline/README.md\nA  g2/components/touch/mode_offline/capture.c\nA  g2/components/touch/mode_offline/cpu.c\nA  g2/components/touch/mode_offline/init.c\nA  g2/components/touch/mode_offline/mode.c\nA  g2/components/touch/mode_offline/mode.h\nA  g2/components/touch/mode_offline/regular.c\nA  g2/components/touch/pin_control_offline/DELIVERABLES.json\nA  g2/components/touch/pin_control_offline/README.md\nA  g2/components/touch/pin_control_offline/pins.c\nA  g2/components/touch/pin_control_offline/pins.h\nA  g2/components/touch/scan_preparation_offline/prepare.c\nA  g2/components/touch/scan_preparation_offline/prepare.h\n?? g2/analysis/rescan-2026-10-08T125750Z/\n?? g2/analysis/touch-active-timer-closure-2026-10-08/\n?? g2/analysis/touch-clock-selection-closure-2026-10-08/DELIVERABLES.json\n?? g2/analysis/touch-clock-selection-closure-2026-10-08/REPORT.md\n?? g2/analysis/touch-clock-selection-closure-2026-10-08/original-disassembly.txt\n?? g2/analysis/touch-clock-selection-closure-2026-10-08/preservation.json\n?? g2/analysis/touch-clock-selection-closure-2026-10-08/provenance.json\n?? g2/analysis/touch-clock-selection-closure-2026-10-08/public-helper-screen.json\n?? g2/analysis/touch-clock-selection-closure-2026-10-08/screen_public_helpers.py\n?? g2/analysis/touch-ilo-compensation-closure-2026-10-08/\n?? g2/analysis/touch-lp-application-closure-2026-10-08/\n?? g2/analysis/touch-lp-filter-closure-2026-10-08/\n?? g2/analysis/touch-lp-history-closure-2026-10-08/\n?? g2/analysis/touch-public-dispatch-attribution-2026-10-08/\n?? g2/analysis/touch-scan-isr-closure-2026-10-08/\n?? g2/analysis/touch-scan-preparation-closure-2026-10-08/DELIVERABLES.json\n?? g2/analysis/touch-scan-preparation-closure-2026-10-08/INDEX.md\n?? g2/analysis/touch-scan-preparation-closure-2026-10-08/REPORT.md\n?? g2/analysis/touch-scan-preparation-closure-2026-10-08/original-disassembly.txt\n?? g2/analysis/touch-scan-preparation-closure-2026-10-08/preservation.json\n?? g2/analysis/touch-scan-preparation-closure-2026-10-08/provenance.json\n?? g2/analysis/touch-scan-preparation-closure-2026-10-08/reproduction-receipt.json\n?? g2/analysis/touch-scan-preparation-closure-2026-10-08/sdk-source-receipt.json\n?? g2/components/touch/active_timer_offline/\n?? g2/components/touch/clock_selection_offline/DELIVERABLES.json\n?? g2/components/touch/clock_selection_offline/README.md\n?? g2/components/touch/ilo_compensation_offline/\n?? g2/components/touch/lp_application_offline/\n?? g2/components/touch/lp_history_offline/\n?? g2/components/touch/lp_scan_offline/\n?? g2/components/touch/scan_isr_offline/\n?? g2/components/touch/scan_preparation_offline/DELIVERABLES.json\n?? g2/components/touch/scan_preparation_offline/README.md",
+  "worktrees": "worktree /Users/kalani/Repo/evenRealities-openCFW\nHEAD 36ff5930a4e832156f9ee3111e83480756ebef37\nbranch refs/heads/main",
+  "global_excludes": "",
+  "nested_ignores": [],
+  "info_exclude_exists": false,
+  "ignore_evidence": ".gitignore:15:build/\tg2/build/probe.elf"
+}

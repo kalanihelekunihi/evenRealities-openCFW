@@ -1,0 +1,16 @@
+{
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "source_sha256": "d6a4ba76d822f94bcc0777e578061b5ed466897be429151cbfd54ecf1b10891a",
+  "elf": "/tmp/opencfw-case-event-waiters-final/waiters.elf",
+  "elf_sha256": "2c2d4a732d17e43481ee8a46d91444ded0be61a12122f3819ded16dcc0da9c73",
+  "flags": [
+    "-mcpu=cortex-m0plus",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "peers": "Actual original scheduler suspend/resume and task-remove/list providers; no entry stubs."
+}

@@ -1,0 +1,17 @@
+"""Original/native/public start API and internal receive-setup comparisons."""
+from pathlib import Path
+import sys,struct,json,hashlib,itertools
+D=Path(__file__).resolve().parent;helper=D.parent/'case-uart-receive-closure-2026-10-08/verify.py';text=helper.read_text().split('rows=[]')[0];begin=text.index('entries={w:');end=text.index('\ndef guest',begin);text=text[:begin]+'entries={}'+text[end:];ns={'__file__':str(helper)};exec(text,ns);guest=ns['guest'];run=ns['run'];symbols=ns['symbols'];H=ns['H'];HW=ns['HW'];fw=ns['fw'];blob=ns['blob'];elf=ns['elf'];rows=[]
+api=[0x080064ec,symbols['case_uart_start_api'],symbols['HAL_UART_Receive_IT']];begin=[0x08008d98,symbols['case_uart_begin_rx'],symbols['UART_Start_Receive_IT']]
+for state,word,parity,fifo,threshold,count,ptr,rto,primask in itertools.product([0x20,0x22],[0,0x1000,0x10000000],[0,0x400],[0,0x20000000],[1,16],[0,1,16,0xffff],[0,0x20004004,0x20004005],[0,1],[0,1]):
+ vals=[]
+ for m,a in enumerate(api):
+  u=guest(state,7,0x123,0x5a,1,0,primask,rto);u.mem_write(H+8,struct.pack('<I',word));u.mem_write(H+16,struct.pack('<I',parity));u.mem_write(H+0x64,struct.pack('<IH',fifo,threshold));u.mem_write(HW,struct.pack('<I',0x55));u.mem_write(HW+8,struct.pack('<I',0x08000000));u.reg_write(ns['UC_ARM_REG_R1'],ptr);u.reg_write(ns['UC_ARM_REG_R2'],count);snap=run(u,a);ret=u.reg_read(ns['UC_ARM_REG_R0']);vals.append((ret,snap))
+ assert vals[0]==vals[1]==vals[2],('api',state,word,parity,fifo,threshold,count,ptr,rto,primask,[i for i,parts in enumerate(zip(*vals)) if len(set(str(x) for x in parts))>1]);rows.append(dict(kind='start_api',state=state,word_length=hex(word),parity=hex(parity),fifo=bool(fifo),threshold=threshold,count=count,pointer=hex(ptr),rto_enabled=rto,primask=primask,result=vals[0][0],selected_isr=hex(struct.unpack_from('<I',vals[0][1][1],0x74)[0]),mask=hex(struct.unpack_from('<H',vals[0][1][1],0x60)[0])))
+# Internal helper additionally demonstrates missing validation, with allocated memory and no ISR execution.
+for state,count,ptr in itertools.product([0x20,0x22],[0,1],[0,0x20004004]):
+ vals=[]
+ for m,a in enumerate(begin):
+  u=guest(state,7,0x123,0x5a,1,0,0,0);u.mem_write(H+8,struct.pack('<I',0));u.mem_write(H+16,struct.pack('<I',0));u.mem_write(H+0x64,struct.pack('<IH',0,1));u.reg_write(ns['UC_ARM_REG_R1'],ptr);u.reg_write(ns['UC_ARM_REG_R2'],count);snap=run(u,a);ret=u.reg_read(ns['UC_ARM_REG_R0']);vals.append((ret,snap))
+ assert vals[0]==vals[1]==vals[2];assert vals[0][0]==0;rows.append(dict(kind='internal_unchecked_setup',initial_state=state,count=count,pointer=hex(ptr),result=0,limit='Constructed direct internal call; no application reachability or physical ISR test.'))
+(D/'results.json').write_text(json.dumps(dict(status='PASS',cases=len(rows),comparisons=rows,firmware_sha256=hashlib.sha256(blob).hexdigest(),elf_sha256=hashlib.sha256(elf.read_bytes()).hexdigest(),limits=['Full public start API and internal helper; selected original64ec/8d98, independent C and pinned publicv1.4.5 bodies plus authentic mask macro.','Stored original callback pointers are compared as ABI metadata; no function-entry stubs, callback bodies are not invoked by these functions.','Coherent synthetic USART1 context/RAM; PRIMASK at atomic writes and restoration compared. No UART FIFO or asynchronous lifetime model.','Internal unchecked cases use direct synthetic calls and do not establish application reachability.','No whole-HAL revision/compiler, hardware safety, allocation extent or firmware byte-equality claim.']),indent=2)+'\n');print('PASS',len(rows))

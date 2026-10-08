@@ -1,0 +1,58 @@
+{
+  "raw_payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "load_address": "0x438000",
+  "new_functions": {
+    "early_switch": {
+      "address": "0x59fb70",
+      "end_exclusive": "0x59fbac",
+      "sha256": "162776d77e52782a269fa569a22606ecd6405c0c0ae43c27735a077a9a78a3bc"
+    },
+    "early_on": {
+      "address": "0x59fbac",
+      "end_exclusive": "0x59fca2",
+      "sha256": "51a30833b5d1b1f5db62367b1004e4ac0bc8f02879e92148d357ef4e61b19ef5"
+    },
+    "early_off": {
+      "address": "0x59fca2",
+      "end_exclusive": "0x59fd36",
+      "sha256": "470324919adad0674580acb943f3dc237862166e6606dafdbf08b2228c560102"
+    },
+    "temperature_publish": {
+      "address": "0x5a00c8",
+      "end_exclusive": "0x5a00fc",
+      "sha256": "8c0f9d33bb7819b647b2c76b428968c9456dc76b4beeb9e592a42a156453a6aa"
+    },
+    "temperature": {
+      "address": "0x5a00fc",
+      "end_exclusive": "0x5a0204",
+      "sha256": "5cf1d6490be8e99cbc802900d5021f53a44fd49ab34fae01f67cc4308c11b5a0"
+    },
+    "sleep": {
+      "address": "0x5a0204",
+      "end_exclusive": "0x5a0316",
+      "sha256": "affc47ae9190e795d32f018e89ef9fb5dc0276dc720e4774349d1005ea5d3c29"
+    },
+    "middle_on": {
+      "address": "0x5a0328",
+      "end_exclusive": "0x5a05e0",
+      "sha256": "c9552cf58053bfdb2f5a718ff6f8c02b4b0e2f364c7f4ef8943259b50c53ad8f"
+    },
+    "middle_off": {
+      "address": "0x5a05e0",
+      "end_exclusive": "0x5a0786",
+      "sha256": "edfe870951a87996468049011734304d32aaafa5d38ebee17748d930b8e5efb5"
+    }
+  },
+  "reused_native_wrappers": {
+    "early_control": "0x59FD36",
+    "middle_control": "0x5A0786"
+  },
+  "original_providers": {
+    "stock_delay": 4720545,
+    "stock_ton_update": 4719555,
+    "stock_buck_enable": 4718189,
+    "stock_save_irq": 4667713,
+    "stock_temperature_apply": 5898269,
+    "stock_stimer_running": 4773409
+  }
+}

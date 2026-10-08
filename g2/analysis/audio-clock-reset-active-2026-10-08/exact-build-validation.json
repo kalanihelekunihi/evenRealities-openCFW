@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "elf_sha256": "d23fd4410233e8a3b8c0ba9484e230c22a5e9ff99ed8b582cf43e17f59f37dd8",
+  "cases": 1392,
+  "sources_verified": true,
+  "results": {
+    "results.json": {
+      "cases": 1008,
+      "sha256": "d30b154916fe2dee69563a5184e90042e51a1e758619526bdb3653933eff246d",
+      "limits": [
+        "Actual original providers execute; no return stubs.",
+        "Peripheral readiness is a declared write-response model; not physical clock readiness.",
+        "Incoming R5 scratch passed explicitly to native helper for stock GPIO15 configuration high bits."
+      ]
+    },
+    "prefix-results.json": {
+      "cases": 384,
+      "sha256": "7d7a9f787d825fff130d314724cbc756b299ab89b2a57cd91e7b0e9614839fe5",
+      "limits": [
+        "Full common initializer native control flow; original revision/INFO1/register/memory/clock providers remain.",
+        "Synthetic calibration/readiness and retained state; no real factory/physical boot proof."
+      ]
+    }
+  }
+}

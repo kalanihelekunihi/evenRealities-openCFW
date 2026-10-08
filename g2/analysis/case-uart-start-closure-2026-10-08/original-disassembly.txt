@@ -1,0 +1,169 @@
+CODE 0x80064ec..0x8006544
+080064ec 70b5         push     {r4, r5, r6, lr}
+080064ee 8c23         movs     r3, #0x8c
+080064f0 1b58         ldr      r3, [r3, r0]
+080064f2 202b         cmp      r3, #0x20
+080064f4 01d0         beq      #0x80064fa
+080064f6 0220         movs     r0, #2
+080064f8 70bd         pop      {r4, r5, r6, pc}
+080064fa 0029         cmp      r1, #0
+080064fc 0bd0         beq      #0x8006516
+080064fe 002a         cmp      r2, #0
+08006500 09d0         beq      #0x8006516
+08006502 0124         movs     r4, #1
+08006504 8368         ldr      r3, [r0, #8]
+08006506 2403         lsls     r4, r4, #0xc
+08006508 a342         cmp      r3, r4
+0800650a 06d1         bne      #0x800651a
+0800650c 0369         ldr      r3, [r0, #0x10]
+0800650e 002b         cmp      r3, #0
+08006510 03d1         bne      #0x800651a
+08006512 cb07         lsls     r3, r1, #0x1f
+08006514 01d0         beq      #0x800651a
+08006516 0120         movs     r0, #1
+08006518 70bd         pop      {r4, r5, r6, pc}
+0800651a 0023         movs     r3, #0
+0800651c c366         str      r3, [r0, #0x6c]
+0800651e 0468         ldr      r4, [r0]
+08006520 6368         ldr      r3, [r4, #4]
+08006522 1b02         lsls     r3, r3, #8
+08006524 0bd5         bpl      #0x800653e
+08006526 eff31083     mrs      r3, primask
+0800652a 0125         movs     r5, #1
+0800652c 85f31088     msr      primask, r5
+08006530 2568         ldr      r5, [r4]
+08006532 0126         movs     r6, #1
+08006534 b606         lsls     r6, r6, #0x1a
+08006536 3543         orrs     r5, r6
+08006538 2560         str      r5, [r4]
+0800653a 83f31088     msr      primask, r3
+0800653e 02f02bfc     bl       #0x8008d98
+08006542 70bd         pop      {r4, r5, r6, pc}
+CODE 0x8008d98..0x8008eb0
+08008d98 f0b5         push     {r4, r5, r6, r7, lr}
+08008d9a 8165         str      r1, [r0, #0x58]
+08008d9c 0146         mov      r1, r0
+08008d9e 4031         adds     r1, #0x40
+08008da0 8a83         strh     r2, [r1, #0x1c]
+08008da2 ca83         strh     r2, [r1, #0x1e]
+08008da4 0025         movs     r5, #0
+08008da6 4567         str      r5, [r0, #0x74]
+08008da8 0124         movs     r4, #1
+08008daa 8368         ldr      r3, [r0, #8]
+08008dac 2403         lsls     r4, r4, #0xc
+08008dae ff26         movs     r6, #0xff
+08008db0 a342         cmp      r3, r4
+08008db2 04d1         bne      #0x8008dbe
+08008db4 0369         ldr      r3, [r0, #0x10]
+08008db6 002b         cmp      r3, #0
+08008db8 13d1         bne      #0x8008de2
+08008dba 3d4b         ldr      r3, [pc, #0xf4]
+08008dbc 0ae0         b        #0x8008dd4
+08008dbe 7f27         movs     r7, #0x7f
+08008dc0 002b         cmp      r3, #0
+08008dc2 09d0         beq      #0x8008dd8
+08008dc4 0126         movs     r6, #1
+08008dc6 3607         lsls     r6, r6, #0x1c
+08008dc8 b342         cmp      r3, r6
+08008dca 0cd1         bne      #0x8008de6
+08008dcc 0369         ldr      r3, [r0, #0x10]
+08008dce 002b         cmp      r3, #0
+08008dd0 05d0         beq      #0x8008dde
+08008dd2 3f23         movs     r3, #0x3f
+08008dd4 0b84         strh     r3, [r1, #0x20]
+08008dd6 07e0         b        #0x8008de8
+08008dd8 0369         ldr      r3, [r0, #0x10]
+08008dda 002b         cmp      r3, #0
+08008ddc 01d0         beq      #0x8008de2
+08008dde 0f84         strh     r7, [r1, #0x20]
+08008de0 02e0         b        #0x8008de8
+08008de2 0e84         strh     r6, [r1, #0x20]
+08008de4 00e0         b        #0x8008de8
+08008de6 0d84         strh     r5, [r1, #0x20]
+08008de8 0346         mov      r3, r0
+08008dea 8033         adds     r3, #0x80
+08008dec 1d61         str      r5, [r3, #0x10]
+08008dee 2225         movs     r5, #0x22
+08008df0 dd60         str      r5, [r3, #0xc]
+08008df2 eff31083     mrs      r3, primask
+08008df6 0125         movs     r5, #1
+08008df8 85f31088     msr      primask, r5
+08008dfc 0568         ldr      r5, [r0]
+08008dfe ae68         ldr      r6, [r5, #8]
+08008e00 0127         movs     r7, #1
+08008e02 3e43         orrs     r6, r7
+08008e04 ae60         str      r6, [r5, #8]
+08008e06 83f31088     msr      primask, r3
+08008e0a 436e         ldr      r3, [r0, #0x64]
+08008e0c 7d07         lsls     r5, r7, #0x1d
+08008e0e ab42         cmp      r3, r5
+08008e10 29d1         bne      #0x8008e66
+08008e12 098d         ldrh     r1, [r1, #0x28]
+08008e14 9142         cmp      r1, r2
+08008e16 26d8         bhi      #0x8008e66
+08008e18 8168         ldr      r1, [r0, #8]
+08008e1a a142         cmp      r1, r4
+08008e1c 02d1         bne      #0x8008e24
+08008e1e 0169         ldr      r1, [r0, #0x10]
+08008e20 0029         cmp      r1, #0
+08008e22 1dd0         beq      #0x8008e60
+08008e24 2349         ldr      r1, [pc, #0x8c]
+08008e26 4167         str      r1, [r0, #0x74]
+08008e28 0169         ldr      r1, [r0, #0x10]
+08008e2a 0029         cmp      r1, #0
+08008e2c 0cd0         beq      #0x8008e48
+08008e2e eff31081     mrs      r1, primask
+08008e32 0122         movs     r2, #1
+08008e34 82f31088     msr      primask, r2
+08008e38 0268         ldr      r2, [r0]
+08008e3a 1368         ldr      r3, [r2]
+08008e3c ff24         movs     r4, #0xff
+08008e3e 0134         adds     r4, #1
+08008e40 2343         orrs     r3, r4
+08008e42 1360         str      r3, [r2]
+08008e44 81f31088     msr      primask, r1
+08008e48 eff31081     mrs      r1, primask
+08008e4c 0122         movs     r2, #1
+08008e4e 82f31088     msr      primask, r2
+08008e52 0068         ldr      r0, [r0]
+08008e54 8268         ldr      r2, [r0, #8]
+08008e56 0123         movs     r3, #1
+08008e58 1b07         lsls     r3, r3, #0x1c
+08008e5a 1a43         orrs     r2, r3
+08008e5c 8260         str      r2, [r0, #8]
+08008e5e 23e0         b        #0x8008ea8
+08008e60 1549         ldr      r1, [pc, #0x54]
+08008e62 4167         str      r1, [r0, #0x74]
+08008e64 f0e7         b        #0x8008e48
+08008e66 8168         ldr      r1, [r0, #8]
+08008e68 a142         cmp      r1, r4
+08008e6a 02d1         bne      #0x8008e72
+08008e6c 0169         ldr      r1, [r0, #0x10]
+08008e6e 0029         cmp      r1, #0
+08008e70 0ed0         beq      #0x8008e90
+08008e72 1249         ldr      r1, [pc, #0x48]
+08008e74 4167         str      r1, [r0, #0x74]
+08008e76 0169         ldr      r1, [r0, #0x10]
+08008e78 0029         cmp      r1, #0
+08008e7a 0bd0         beq      #0x8008e94
+08008e7c eff31081     mrs      r1, primask
+08008e80 0122         movs     r2, #1
+08008e82 82f31088     msr      primask, r2
+08008e86 0068         ldr      r0, [r0]
+08008e88 0268         ldr      r2, [r0]
+08008e8a ff23         movs     r3, #0xff
+08008e8c 2133         adds     r3, #0x21
+08008e8e 09e0         b        #0x8008ea4
+08008e90 0b49         ldr      r1, [pc, #0x2c]
+08008e92 4167         str      r1, [r0, #0x74]
+08008e94 eff31081     mrs      r1, primask
+08008e98 0122         movs     r2, #1
+08008e9a 82f31088     msr      primask, r2
+08008e9e 0068         ldr      r0, [r0]
+08008ea0 0268         ldr      r2, [r0]
+08008ea2 2023         movs     r3, #0x20
+08008ea4 1a43         orrs     r2, r3
+08008ea6 0260         str      r2, [r0]
+08008ea8 81f31088     msr      primask, r1
+08008eac 0020         movs     r0, #0
+08008eae f0bd         pop      {r4, r5, r6, r7, pc}

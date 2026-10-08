@@ -1,0 +1,61 @@
+{
+  "function": "Cy_CapSense_ClrBusyFlags",
+  "pin": "247a9a0f79eb976f144f5fbeb29488c1c2606517",
+  "source_sha256": "777300a0129f032a507e0a222bae0f321f5d4423da2ef4778058255383db5890",
+  "translation_unit_sha256": "c07c8df897e79e8dacecc8897bbcb6407e614bb37a3f26e82a9eba3a83d31ca2",
+  "environment": "#include <stdint.h>\n#include <stddef.h>\n#define CY_CAPSENSE_BUSY_CH_MASK (0x01u)\n#define CY_CAPSENSE_BUSY (0x80u)\ntypedef struct { uint8_t pad[8]; uint32_t status; } common_context;\ntypedef struct { void (*ptrSSCallback)(void *); void (*ptrEOSCallback)(void *); } internal_context;\ntypedef struct { void *ptrCommonConfig; common_context *ptrCommonContext; internal_context *ptrInternalContext; } cy_stc_capsense_context_t;\n_Static_assert(offsetof(common_context,status)==8,\"status offset\");\n_Static_assert(offsetof(internal_context,ptrEOSCallback)==4,\"EOS offset\");\n_Static_assert(offsetof(cy_stc_capsense_context_t,ptrCommonContext)==4,\"common offset\");\n_Static_assert(offsetof(cy_stc_capsense_context_t,ptrInternalContext)==8,\"internal offset\");\n",
+  "comparisons": [
+    {
+      "optimization": "Og",
+      "stock_address": "0x614c",
+      "stock_extent": 36,
+      "public_extent": 36,
+      "exact": true,
+      "relocations": 0,
+      "public_sha256": "abb33ee26468ac94a0894b3e75b695b36e8f1e09caa82b0fe0a8db6e63f2cba6",
+      "stock_sha256": "abb33ee26468ac94a0894b3e75b695b36e8f1e09caa82b0fe0a8db6e63f2cba6",
+      "matching_offsets": [
+        "0x614c"
+      ]
+    },
+    {
+      "optimization": "O1",
+      "stock_address": "0x614c",
+      "stock_extent": 36,
+      "public_extent": 36,
+      "exact": true,
+      "relocations": 0,
+      "public_sha256": "abb33ee26468ac94a0894b3e75b695b36e8f1e09caa82b0fe0a8db6e63f2cba6",
+      "stock_sha256": "abb33ee26468ac94a0894b3e75b695b36e8f1e09caa82b0fe0a8db6e63f2cba6",
+      "matching_offsets": [
+        "0x614c"
+      ]
+    },
+    {
+      "optimization": "O2",
+      "stock_address": "0x614c",
+      "stock_extent": 36,
+      "public_extent": 28,
+      "exact": false,
+      "relocations": 0,
+      "public_sha256": "7f93f6b7126f6378e584b2b805f52ef33fd0b8f7ee3749bff0becdf9255714e9",
+      "stock_sha256": "abb33ee26468ac94a0894b3e75b695b36e8f1e09caa82b0fe0a8db6e63f2cba6",
+      "matching_offsets": []
+    },
+    {
+      "optimization": "Os",
+      "stock_address": "0x614c",
+      "stock_extent": 36,
+      "public_extent": 26,
+      "exact": false,
+      "relocations": 0,
+      "public_sha256": "512cdbc272538f53f0253784535dd8c1f2d5fb29db10c6f1d86b27ef136439b3",
+      "stock_sha256": "abb33ee26468ac94a0894b3e75b695b36e8f1e09caa82b0fe0a8db6e63f2cba6",
+      "matching_offsets": []
+    }
+  ],
+  "limits": [
+    "Verbatim selected public function, explicit minimal ARM32 layout and macros; not a complete SDK build.",
+    "No uniquely identified producer compiler/release or callback-body claim."
+  ]
+}

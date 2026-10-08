@@ -1,0 +1,53 @@
+{
+  "raw_payload_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "load_address": "0x438000",
+  "functions": {
+    "timer_publish": {
+      "address": "0x5a0ae8",
+      "end_exclusive": "0x5a0b54",
+      "sha256": "7b25d7dae842d5787345a5360a32fbf21f4adadc88e216b2eaa272cc77d7feda"
+    },
+    "boost_remove": {
+      "address": "0x5a0b54",
+      "end_exclusive": "0x5a0b9c",
+      "sha256": "73da1f0b69f23d583009d5dfbc2f46007ee0f8b9f56a5c8a3b4fccd58136f538"
+    },
+    "buck_complete": {
+      "address": "0x5a0b9c",
+      "end_exclusive": "0x5a0bcc",
+      "sha256": "fbc7ca52270345ca6b251d1c8c805a06e33af456500f9b17e05cfa7743af79f8"
+    },
+    "timer_isr": {
+      "address": "0x5a0bcc",
+      "end_exclusive": "0x5a0c1c",
+      "sha256": "56a906392d835eff84d847bae294efc5e0784ad2f4c9a5c1e61371d7a7439c26"
+    },
+    "ton": {
+      "address": "0x5a0d9c",
+      "end_exclusive": "0x5a0fc4",
+      "sha256": "a85df15a12dab48c2fd118dbde65dbb2f677f1f7782d93f03695442940e484b5"
+    },
+    "before_override": {
+      "address": "0x5a1bbc",
+      "end_exclusive": "0x5a1bcc",
+      "sha256": "eccf2f0d899554679f9aafe66d0e3cffec7460a8eee01d93cc85de66d1f85706"
+    },
+    "before_enable": {
+      "address": "0x5a1bcc",
+      "end_exclusive": "0x5a1be8",
+      "sha256": "a9f1788365379b8833cbcf5c1a275bcb2a067f9309a57294d5298f00ff326544"
+    },
+    "after_enable": {
+      "address": "0x5a1bec",
+      "end_exclusive": "0x5a1c14",
+      "sha256": "30827c858bfbbc617deac9dff8f36af6dc357154cc7d708629fe15547db96a81"
+    },
+    "initialize": {
+      "address": "0x5a1c18",
+      "end_exclusive": "0x5a1da4",
+      "sha256": "ab4bb31b6c099aaeb1e26401fff4b74cc86d299a25bce6ae42966a5cdd367649"
+    }
+  },
+  "static_registration": "Sealed registration480434 selects PCM2.1 for major0x22/revision2 or major0x23/revision1, installing0x5A0BCD at slot11 word0x2007329C.",
+  "static_irq_chain": "Authenticated vectorIRQ82 points0x4D58A7; stock wrapper0x4D58A6 calls0x48039A, which dispatches slot11. Live VTOR/NVIC/task delivery not established."
+}

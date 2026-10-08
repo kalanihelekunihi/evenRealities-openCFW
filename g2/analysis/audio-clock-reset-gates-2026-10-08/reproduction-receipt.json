@@ -1,0 +1,22 @@
+{
+  "sources": {
+    "g2/components/audio/clock_reset_gates_offline/gates.c": "586b301e69e1bf5e3e83a1abb3ee71de54106968259939bb983e7d493c62d4ff",
+    "g2/components/audio/clock_reset_gates_offline/gates.h": "66f943e85ab3e6a55d0524d057ce9f7b059848b9e3e98a65253091c61130639d"
+  },
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m33",
+    "-mfpu=fpv5-sp-d16",
+    "-mfloat-abi=hard",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib",
+    "-fshort-enums"
+  ],
+  "elf": "/tmp/opencfw-clock-reset-gates/control.elf",
+  "elf_sha256": "06f6f5c9ce8d4a76efb646519a5a0dc1b69c0968650a96deaf6a4ba72c05d4b9",
+  "link_script": "SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }"
+}

@@ -1,0 +1,17 @@
+{
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m0plus",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "source": "g2/components/case/local_commands_offline/local.c",
+  "source_sha256": "3317c75407d95bf100ba55de524463b67efea640cbc1a6e2d2da094f8e28831a",
+  "elf": "/tmp/opencfw-case-local/local.elf",
+  "elf_sha256": "b11bd858e735fb5481cc4c87ce7b28fe352d8bf9ccd31a02449f278d7304deea",
+  "link_script": "case_send = 0x0800680d; case_ack = 0x080068d1; case_control_a = 0x08006b81; case_control_b = 0x08006b99; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }"
+}

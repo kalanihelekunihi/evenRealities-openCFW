@@ -1,0 +1,41 @@
+{
+  "entries": [
+    {
+      "region": "variant initializer / one-time trim capture",
+      "status": "prior sealed native; capture bounded block",
+      "evidence": "../audio-trim-initialization-closure-2026-10-08/REPORT.md"
+    },
+    {
+      "region": "capture through retention and TON critical section",
+      "status": "native composition tested",
+      "boundary": "entry0x47FC14, exits0x47FDD4/0x47FDF0"
+    },
+    {
+      "region": "capture through common initializer return",
+      "status": "native suffix tested with original gated clock-mux dependency",
+      "boundary": "0x47FC14..0x47FE12; prefix0x47FAE8..0x47FC14 remains unimplemented"
+    },
+    {
+      "region": "TON and LP initialization/enable/disable dispatch",
+      "status": "native wrappers with native registered callbacks tested"
+    },
+    {
+      "region": "PCM2.2 reset",
+      "status": "native reset tested; actual control/providers original"
+    },
+    {
+      "region": "active clock-mux reset0x44B158",
+      "status": "actionable pinned-source lead; active branch untested"
+    },
+    {
+      "region": "common initializer prefix",
+      "status": "actionable source/disassembly lead; full call-sequence tests pending"
+    }
+  ],
+  "source_exhausted": false,
+  "external_boundaries": [
+    "Factory revision/calibration inputs",
+    "Physical clock/rail readiness",
+    "Coherent live task/IRQ/NVIC state"
+  ]
+}

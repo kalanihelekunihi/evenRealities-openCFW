@@ -1,0 +1,115 @@
+
+# CODE 0x47e916..0x47e97a (end exclusive)
+0047e916 70b5         push       {r4, r5, r6, lr}
+0047e918 0400         movs       r4, r0
+0047e91a d6f7f0fa     bl         #0x454efe
+0047e91e 0500         movs       r5, r0
+0047e920 974e         ldr        r6, [pc, #0x25c]
+0047e922 3068         ldr        r0, [r6]
+0047e924 8542         cmp        r5, r0
+0047e926 04d2         bhs        #0x47e932
+0047e928 00f0b2f8     bl         #0x47ea90
+0047e92c 0120         movs       r0, #1
+0047e92e 2060         str        r0, [r4]
+0047e930 01e0         b          #0x47e936
+0047e932 0020         movs       r0, #0
+0047e934 2060         str        r0, [r4]
+0047e936 3560         str        r5, [r6]
+0047e938 2800         movs       r0, r5
+0047e93a 70bd         pop        {r4, r5, r6, pc}
+0047e93c 10b5         push       {r4, lr}
+0047e93e 0024         movs       r4, #0
+0047e940 4160         str        r1, [r0, #4]
+0047e942 0061         str        r0, [r0, #0x10]
+0047e944 8a42         cmp        r2, r1
+0047e946 0bd3         blo        #0x47e960
+0047e948 d21a         subs       r2, r2, r3
+0047e94a 8169         ldr        r1, [r0, #0x18]
+0047e94c 8a42         cmp        r2, r1
+0047e94e 01d3         blo        #0x47e954
+0047e950 0124         movs       r4, #1
+0047e952 10e0         b          #0x47e976
+0047e954 011d         adds       r1, r0, #4
+0047e956 8948         ldr        r0, [pc, #0x224]
+0047e958 0068         ldr        r0, [r0]
+0047e95a d7f7aafb     bl         #0x4560b2
+0047e95e 0ae0         b          #0x47e976
+0047e960 9a42         cmp        r2, r3
+0047e962 03d2         bhs        #0x47e96c
+0047e964 9942         cmp        r1, r3
+0047e966 01d3         blo        #0x47e96c
+0047e968 0124         movs       r4, #1
+0047e96a 04e0         b          #0x47e976
+0047e96c 011d         adds       r1, r0, #4
+0047e96e 8248         ldr        r0, [pc, #0x208]
+0047e970 0068         ldr        r0, [r0]
+0047e972 d7f79efb     bl         #0x4560b2
+0047e976 2000         movs       r0, r4
+0047e978 10bd         pop        {r4, pc}
+
+# CODE 0x47ea90..0x47eab8 (end exclusive)
+0047ea90 80b5         push       {r7, lr}
+0047ea92 06e0         b          #0x47eaa2
+0047ea94 0868         ldr        r0, [r1]
+0047ea96 c068         ldr        r0, [r0, #0xc]
+0047ea98 0068         ldr        r0, [r0]
+0047ea9a 5ff0ff31     movs.w     r1, #-1
+0047ea9e fff7ccfe     bl         #0x47e83a
+0047eaa2 3549         ldr        r1, [pc, #0xd4]
+0047eaa4 0868         ldr        r0, [r1]
+0047eaa6 0068         ldr        r0, [r0]
+0047eaa8 0028         cmp        r0, #0
+0047eaaa f3d1         bne        #0x47ea94
+0047eaac 0868         ldr        r0, [r1]
+0047eaae 334a         ldr        r2, [pc, #0xcc]
+0047eab0 1368         ldr        r3, [r2]
+0047eab2 0b60         str        r3, [r1]
+0047eab4 1060         str        r0, [r2]
+0047eab6 01bd         pop        {r0, pc}
+
+# CODE 0x47e83a..0x47e878 (end exclusive)
+0047e83a 70b5         push       {r4, r5, r6, lr}
+0047e83c 0400         movs       r4, r0
+0047e83e 0d00         movs       r5, r1
+0047e840 dff83403     ldr.w      r0, [pc, #0x334]
+0047e844 0068         ldr        r0, [r0]
+0047e846 c068         ldr        r0, [r0, #0xc]
+0047e848 c668         ldr        r6, [r0, #0xc]
+0047e84a 301d         adds       r0, r6, #4
+0047e84c d7f74cfc     bl         #0x4560e8
+0047e850 96f82800     ldrb.w     r0, [r6, #0x28]
+0047e854 4007         lsls       r0, r0, #0x1d
+0047e856 05d5         bpl        #0x47e864
+0047e858 2a00         movs       r2, r5
+0047e85a 2100         movs       r1, r4
+0047e85c 3000         movs       r0, r6
+0047e85e fff7d8ff     bl         #0x47e812
+0047e862 05e0         b          #0x47e870
+0047e864 96f82800     ldrb.w     r0, [r6, #0x28]
+0047e868 10f0fe00     ands       r0, r0, #0xfe
+0047e86c 86f82800     strb.w     r0, [r6, #0x28]
+0047e870 3000         movs       r0, r6
+0047e872 316a         ldr        r1, [r6, #0x20]
+0047e874 8847         blx        r1
+0047e876 70bd         pop        {r4, r5, r6, pc}
+
+# CODE 0x47e812..0x47e83a (end exclusive)
+0047e812 70b5         push       {r4, r5, r6, lr}
+0047e814 0400         movs       r4, r0
+0047e816 0d00         movs       r5, r1
+0047e818 1600         movs       r6, r2
+0047e81a 04e0         b          #0x47e826
+0047e81c a069         ldr        r0, [r4, #0x18]
+0047e81e 4519         adds       r5, r0, r5
+0047e820 2000         movs       r0, r4
+0047e822 216a         ldr        r1, [r4, #0x20]
+0047e824 8847         blx        r1
+0047e826 2b00         movs       r3, r5
+0047e828 3200         movs       r2, r6
+0047e82a a169         ldr        r1, [r4, #0x18]
+0047e82c 4919         adds       r1, r1, r5
+0047e82e 2000         movs       r0, r4
+0047e830 00f084f8     bl         #0x47e93c
+0047e834 0028         cmp        r0, #0
+0047e836 f1d1         bne        #0x47e81c
+0047e838 70bd         pop        {r4, r5, r6, pc}

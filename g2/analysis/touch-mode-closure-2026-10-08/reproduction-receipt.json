@@ -1,0 +1,139 @@
+{
+  "mode": {
+    "elf_path": "/tmp/opencfw-touch-mode-reproduction/mode.elf",
+    "elf_sha256": "c57c6a0b759f840c71c1ec0691a78de4ca3d45dea151ff3aa2e2dcc702979081",
+    "source_hashes": {
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/mode_offline/mode.c": "1a4ca7945a8e2d5cb247201cc9413d1e2901cb7cce2949b6b96b9451a625f03d",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/mode_offline/cpu.c": "018f02ef024e01f67d64fdaa19c7189f8c0ecbe40173b91dc05b57ce4abcfcd6",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/config_bootstrap_offline/bootstrap.c": "8c823708052d9717eda72da5836bafe3ece749ec5820161b133fc485d2cbc2c6",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/mode_offline/init.c": "53d73757f9abd311a443debfd286064774b27a051d485cd2502c3dea426c20b5"
+    },
+    "flags": [
+      "-mcpu=cortex-m0plus",
+      "-mthumb",
+      "-Og",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-nostdlib",
+      "-Wl,--gc-sections",
+      "-Wl,-u,touch_switch_mode",
+      "-Wl,-u,touch_cap_init_fields",
+      "-Wl,-u,touch_wait_mrss",
+      "-Wl,-u,touch_switch_saturation_dependency"
+    ]
+  },
+  "pins": {
+    "elf_path": "/tmp/opencfw-touch-mode-reproduction/pins.elf",
+    "elf_sha256": "8aa5f013918b92b9afa06409ca68eebbdb389a4a8e2603a346effb42777b1441",
+    "source_hashes": {
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/pin_control_offline/pins.c": "4fc06e27b6b1903067101590010b4db5aaf156a99aa89f61c7db6bfd88a2556d"
+    },
+    "flags": [
+      "-mcpu=cortex-m0plus",
+      "-mthumb",
+      "-Og",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-nostdlib",
+      "-Wl,--gc-sections",
+      "-Wl,-u,touch_config_pin",
+      "-Wl,-u,touch_config_electrodes",
+      "-Wl,-u,touch_config_shields",
+      "-Wl,-u,touch_config_cmod"
+    ]
+  },
+  "init": {
+    "elf_path": "/tmp/opencfw-touch-mode-reproduction/init.elf",
+    "elf_sha256": "2005211336ee4dfc11f1feaa67072262a332e990fd560ad660c59858c35fc73a",
+    "source_hashes": {
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/mode_offline/mode.c": "1a4ca7945a8e2d5cb247201cc9413d1e2901cb7cce2949b6b96b9451a625f03d",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/mode_offline/cpu.c": "018f02ef024e01f67d64fdaa19c7189f8c0ecbe40173b91dc05b57ce4abcfcd6",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/config_bootstrap_offline/bootstrap.c": "8c823708052d9717eda72da5836bafe3ece749ec5820161b133fc485d2cbc2c6",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/mode_offline/init.c": "53d73757f9abd311a443debfd286064774b27a051d485cd2502c3dea426c20b5",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/mode_offline/capture.c": "47f49493e77901e6d3bcc5bce87e7295159ce6826321d0ed233e55b2f25c774c"
+    },
+    "flags": [
+      "-mcpu=cortex-m0plus",
+      "-mthumb",
+      "-Og",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-nostdlib",
+      "-Wl,--gc-sections",
+      "-Wl,-u,touch_cap_init",
+      "-Wl,-u,touch_capture_default"
+    ]
+  },
+  "regular": {
+    "elf_path": "/tmp/opencfw-touch-mode-reproduction/regular.elf",
+    "elf_sha256": "d0087fe6400ec563cb78dd2e5edeb9cd254c07e6496e5faf8cdae1343b2e5d73",
+    "source_hashes": {
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/mode_offline/mode.c": "1a4ca7945a8e2d5cb247201cc9413d1e2901cb7cce2949b6b96b9451a625f03d",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/mode_offline/cpu.c": "018f02ef024e01f67d64fdaa19c7189f8c0ecbe40173b91dc05b57ce4abcfcd6",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/config_bootstrap_offline/bootstrap.c": "8c823708052d9717eda72da5836bafe3ece749ec5820161b133fc485d2cbc2c6",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/mode_offline/regular.c": "2515e3ac47dfc1743d55bdb7b4d47463087c26f1a7f44b298bc847b8ff8321d4",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/pin_control_offline/pins.c": "4fc06e27b6b1903067101590010b4db5aaf156a99aa89f61c7db6bfd88a2556d"
+    },
+    "flags": [
+      "-mcpu=cortex-m0plus",
+      "-mthumb",
+      "-Og",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-nostdlib",
+      "-Wl,--gc-sections",
+      "-Wl,-u,touch_switch_regular_dependency"
+    ]
+  },
+  "scan-mode": {
+    "elf_path": "/tmp/opencfw-touch-mode-reproduction/scan-mode.elf",
+    "elf_sha256": "3d206732b2e6c5417f22c02afb007f4ba012e3b8c512cd6319a145ef7d24e551",
+    "source_hashes": {
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/mode_offline/mode.c": "1a4ca7945a8e2d5cb247201cc9413d1e2901cb7cce2949b6b96b9451a625f03d",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/mode_offline/cpu.c": "018f02ef024e01f67d64fdaa19c7189f8c0ecbe40173b91dc05b57ce4abcfcd6",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/config_bootstrap_offline/bootstrap.c": "8c823708052d9717eda72da5836bafe3ece749ec5820161b133fc485d2cbc2c6",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/saturated_scan_offline/scan.c": "48c5b2ed1bb71221df36623458297b72d8405e4a01350a8240bf13cb69e81541",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/max_raw_offline/max_raw.c": "2b88b692762e914cf6f0714a0418e67bcb56d46c0a7317b866e899e719b1b5d9",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/scan_watchdog_offline/watchdog.c": "416039471ed5951502206ddc6608de3a39761e54f69acf60ce9af8ac7bad724f",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/scan_frame_offline/frame.c": "de80fde3341733d915ba7110806a72c9b2581a012a394b152f3614b663c77428"
+    },
+    "flags": [
+      "-mcpu=cortex-m0plus",
+      "-mthumb",
+      "-Og",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-nostdlib",
+      "-Wl,--gc-sections",
+      "-Wl,-u,touch_execute_saturated",
+      "-Wl,-u,touch_switch_saturation_dependency"
+    ]
+  },
+  "generator": {
+    "elf_path": "/tmp/opencfw-touch-mode-reproduction/generator.elf",
+    "elf_sha256": "02e453d4e178704888bd3c848b13f83f86553400e589517fb5df6d8859458d81",
+    "source_hashes": {
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/components/touch/frame_generation_offline/generator.c": "c398e7ad896ec0586f4b68c70db4225ae9dd78da19ad3e96f4230f26af4ca67b"
+    },
+    "flags": [
+      "-mcpu=cortex-m0plus",
+      "-mthumb",
+      "-Og",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-nostdlib",
+      "-Wl,--gc-sections",
+      "-Wl,-u,touch_frame_mask",
+      "-Wl,-u,touch_adjust_divider",
+      "-Wl,-u,touch_generate_sensor",
+      "-Wl,-u,touch_generate_cdac",
+      "-Wl,-u,touch_generate_sensor_closed"
+    ]
+  }
+}

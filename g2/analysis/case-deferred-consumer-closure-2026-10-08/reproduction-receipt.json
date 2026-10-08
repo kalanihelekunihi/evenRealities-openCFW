@@ -1,0 +1,24 @@
+{
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m0plus",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "sources": {
+    "g2/components/case/deferred_consumer_offline/consumer.c": "54b6c1266341a1ec337781c0b8509bbbdb842a2f19405b452a2d0cb5f5ecf741",
+    "g2/components/case/deferred_consumer_offline/consumer.h": "a13c99ad6475d0f6fb84cc3d5f7a4d589a7e7203270f3b86d2d95c8ad6ba09ae",
+    "g2/components/case/deferred_event_offline/deferred.c": "398063f649894ab704b78bd5285dc6635af077368f24aeeec9cbbba9aa856059",
+    "g2/components/case/deferred_event_offline/deferred.h": "6f01b96706cc39ee2985768023451f87367e502b1b536faa732e629b3663a406"
+  },
+  "elf": "/tmp/opencfw-case-deferred-consumer-final/consumer.elf",
+  "elf_sha256": "bfa1f634820aa8d1209e73c96e9c9ef22a95da64b17a41b6e70a57586e2b3cd9",
+  "limits": [
+    "Reconstructed nonblocking/negative-command subset only. Original scheduler query/critical providers and indirect callbacks execute as peers.",
+    "No task/scheduler child result models. Configured synthetic globals are not an observed scheduler trace."
+  ]
+}

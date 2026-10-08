@@ -1,0 +1,36 @@
+{
+  "sources": {
+    "g2/components/audio/common_startup_offline/startup.c": "0b5dcfd3010c3642803b4c071165e73437fecfe00b3f6583ddccd1dbcfc6c921",
+    "g2/components/audio/common_startup_offline/startup.h": "86820ddb8df6510af79b9f75405ff387a7aa92df09cd1a859a21e86db1bd1630",
+    "g2/components/audio/trim_initialization_offline/initialize.c": "c8a43c953db2945a1e9dd3f934f6517440e6cfc87cdeafd16f3c535dce00760b",
+    "g2/components/audio/trim_initialization_offline/initialize.h": "94249afadb9f6a439d1b62a185b77aaea53793ec85157779c3a39a2d31455c3c",
+    "g2/components/audio/early_pcm_pending_offline/pending.c": "501fba0cda017e9d513783ce62b90c170ee22d3c6d61c6e8d20a8f5763fd613f",
+    "g2/components/audio/early_pcm_pending_offline/pending.h": "8e1a7aab1fa17371409d25c59d16a9cf600fdcf341ee27af664b2a71dc24a805"
+  },
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m33",
+    "-mfpu=fpv5-sp-d16",
+    "-mfloat-abi=hard",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib",
+    "-fshort-enums"
+  ],
+  "elf": "/tmp/opencfw-common-startup/control.elf",
+  "elf_sha256": "8354c76e890ef7f570b54f45ada1ce4ea6ce73f75c4a68d49766a8367a2248e3",
+  "bindings": {
+    "stock_clock_mux_reset": 4501849,
+    "stock_peripheral_enable": 4715961,
+    "stock_temperature_request": 4718633,
+    "stock_wait_status": 4720637,
+    "stock_save_irq": 4667713,
+    "stock_ton_update": 4719555,
+    "stock_delay": 4720545,
+    "stock_buck_enable": 4718189
+  },
+  "link_script": "stock_clock_mux_reset = 0x44b159; stock_peripheral_enable = 0x47f5b9; stock_temperature_request = 0x480029; stock_wait_status = 0x4807fd; stock_save_irq = 0x473941; stock_ton_update = 0x4803c3; stock_delay = 0x4807a1; stock_buck_enable = 0x47fe6d; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }"
+}

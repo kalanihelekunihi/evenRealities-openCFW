@@ -1,0 +1,56 @@
+{
+  "firmware": "g2/blobs/official/g2-2.2.6.10/firmware_box.bin",
+  "firmware_sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+  "raw_sha256": "773b6d4cfdaf0a5a74a557e3babe8222a0ae813436b76a7437c1096d2c60d677",
+  "architecture": "Cortex-M0+ Thumb",
+  "load_address": "0x08000000",
+  "wrapper_bytes": 32,
+  "selected_windows": [
+    {
+      "start": "0x800ad24",
+      "end_exclusive": "0x800ad48",
+      "sha256": "a5b486c47e5885ee9bd8d3d367325d125a6d93491df8ebd9bca1f099b68dd793"
+    },
+    {
+      "start": "0x800ad48",
+      "end_exclusive": "0x800adb8",
+      "sha256": "2fa7885a8baaa0ad20749af37c44c0b56063412d1ce68de7ebf2935f7fc0963c"
+    },
+    {
+      "start": "0x800c7a8",
+      "end_exclusive": "0x800c83a",
+      "sha256": "25ed2f4738dd79469436be2719114f2b02c11eed38dee49bf020f7b3f93b3633"
+    },
+    {
+      "start": "0x800ce0c",
+      "end_exclusive": "0x800ce30",
+      "sha256": "ec17423f9b89f227f1f29a53f60377cb3718898a5ec7f0da2bfff8667fd3d030"
+    },
+    {
+      "start": "0x800c568",
+      "end_exclusive": "0x800c578",
+      "sha256": "95683c30719f59412c67f611be6100bd11a71b699c5bbfbb91f49e8f04daf882"
+    },
+    {
+      "start": "0x800bf8c",
+      "end_exclusive": "0x800bf94",
+      "sha256": "06aa7c9d61770d1d5178b852307a42d0779e30cb82c2cbc8dea77581ffe72dea"
+    },
+    {
+      "start": "0x80000f4",
+      "end_exclusive": "0x8000102",
+      "sha256": "746ce6507d805245ecdcbdfdd2a4637d46737e19e0a0614ba248439bcd572a97"
+    },
+    {
+      "start": "0x800ac84",
+      "end_exclusive": "0x800acdc",
+      "sha256": "c7bba20cd3a1cff6ebdfb0b2664e5945049524598e6b3598c8a188c46cb0d04b"
+    },
+    {
+      "start": "0x800b0fc",
+      "end_exclusive": "0x800b128",
+      "sha256": "155db48cc2540d7c20a3b2ffad2f0329a50a481144543a2925de434f25485e8a"
+    }
+  ],
+  "limits": "Initialization and daemon windows are static call-chain evidence only; no initialization/daemon test claim. Literal/alignment windows are not code-coverage counts."
+}

@@ -1,0 +1,22 @@
+{
+  "status": "PASS_CREATION_ENTRY_BOUNDARY",
+  "original_only_cases": 1,
+  "boundary": [
+    {
+      "entry": "0x454820",
+      "arguments": [
+        "0x47e879",
+        "0x78ebcc",
+        "0x1000",
+        "0x0",
+        "0x36",
+        "0x2003fa98",
+        "0x20071ea0"
+      ]
+    }
+  ],
+  "limits": [
+    "Actual constructor and memory-provider instructions execute with already-created timer queue handle; stops before static task creation first instruction.",
+    "Proves task entry pointer and priority arguments, not successful creation, task population, context switch or live precedence."
+  ]
+}

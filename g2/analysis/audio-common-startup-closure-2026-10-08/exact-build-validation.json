@@ -1,0 +1,43 @@
+{
+  "status": "PASS",
+  "elf_sha256": "8354c76e890ef7f570b54f45ada1ce4ea6ce73f75c4a68d49766a8367a2248e3",
+  "total_cases": 3784,
+  "sources_verified": true,
+  "results": {
+    "startup-results.json": {
+      "cases": 3584,
+      "sha256": "075d14bc46f208049bbe47c587346f877e51c3010cf30238871eb35ac5fd71dc",
+      "counts": {
+        "common_capture_retention_block": 512,
+        "common_capture_ton_block": 512,
+        "ton_initialize_dispatch": 512,
+        "lp_initialize_dispatch": 512,
+        "lp_enable_dispatch": 512,
+        "lp_disable_dispatch": 512,
+        "common_capture_to_return": 512
+      },
+      "return_counts": null,
+      "limits": [
+        "Two explicitly bounded blocks plus capture-to-return suffix; prefix remains original/unreconstructed. Clock-mux reset executes original code with zero signature fixture, therefore gated-out reset branch.",
+        "Native capture/TON bodies composed; real IRQ-save, TON dispatch, delay and buck providers execute original instructions.",
+        "Synthetic callback registration, silicon revision, trim/MMIO and PRIMASK; no live scheduling or physical rail trace."
+      ]
+    },
+    "reset-results.json": {
+      "cases": 200,
+      "sha256": "860626cfc5fa3c091165853f325384eee3d7eb2ab0004dd4376d4bee8dadf555",
+      "counts": null,
+      "return_counts": {
+        "0": 70,
+        "1": 116,
+        "4": 14
+      },
+      "limits": [
+        "Real peripheral-enable, temperature wrapper, generic dispatch, wait and delay execute original instructions.",
+        "Both sides register original PCM2.2 control at0x5A490D; reset is native, control/provider dependencies remain original.",
+        "OTP-ready write response and timer release on wait-read are explicit synthetic MMIO events, not hardware traces.",
+        "Never-release fixtures exercise actual2500-loop timeout; physical elapsed time and live ISR delivery unverified."
+      ]
+    }
+  }
+}

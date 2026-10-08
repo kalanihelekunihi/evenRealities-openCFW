@@ -1,0 +1,22 @@
+{
+  "repository": "https://github.com/AmbiqMicro/ambiqhal_ambiq",
+  "pin": "5efc0228528a8adce5eae0d226fac85d2551eb3b",
+  "files": {
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/am_hal_spotmgr_pcm0_7.c": "710ba3c8d4e7064a43fa4c77981254ba3c7221545133bc6eaa36a3818190f4ba",
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/am_hal_spotmgr_pcm2_0.c": "85cf17f69d6b8eefe90ad0c1e60468a1e4183841c1cb6d579857902174cc4f4a",
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/am_hal_pwrctrl.h": "54ce1a2242e3d48ca14ad6f49c14e28667975314f7ef06f071f362404afb073f",
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/am_hal_spotmgr.c": "8e266d10f7622324f786db522b48919a48ec95998ce1533f8effe36ecc2be3cc"
+  },
+  "new_downloads": false,
+  "newly_used_source_facts": [
+    "am_hal_pwrctrl.h sets temperature compensation VDDC=false and VDDF=true, explaining selected stock hardware-apply body.",
+    "am_hal_spotmgr_pcm0_7.c names TON columns as CPU LP/HP, not sleep. Stock9-byte table matches its non-high-efficiency branch; no historical compiler/macro proof.",
+    "am_hal_spotmgr_pcm2_0.c identifies raw LP-switch threshold configuration and software enable flag."
+  ],
+  "remaining_leads": [
+    "Earlier initialization0x5A08E4, calibration/original-trim capture and runtime callback selection.",
+    "Common buck-register update0x47FE6C and generic wrappers still link original instructions; several existing bounded reconstructions may be reusable.",
+    "Default-reset/init/suspend callbacks and other silicon families require byte-grounded interpretation, not SDK substitution."
+  ],
+  "search_status": "Existing pinned source remains actionable; prior bounded public search found no additional version. No exhaustion claim."
+}

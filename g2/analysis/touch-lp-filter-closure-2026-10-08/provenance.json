@@ -1,0 +1,54 @@
+{
+  "firmware_path": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+  "firmware_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "wrapper_bytes": 32,
+  "raw_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "raw_load_address": "0x3300",
+  "architecture": "ARM Cortex-M0+ Thumb little endian",
+  "functions": {
+    "lp_scan": "0x6d74..0x702c",
+    "initialize_fields_slice": "0x4c84..0x4d8e",
+    "prepare_fields_slice": "0x71c8..0x7228",
+    "all_lp_wrapper": "0x7050",
+    "scan_isr": "0x6780"
+  },
+  "stock_context_address": "0x200004ec",
+  "stock_msclp_address": "0x40290000",
+  "reset_table_address": "0xb578",
+  "reset_copy": {
+    "source": "0xb58c",
+    "destination": "0x200004c0",
+    "words": 241
+  },
+  "reset_zero": {
+    "destination": "0x200008a8",
+    "words": 428
+  },
+  "context_words": [
+    "0xb2a8",
+    "0x20000528",
+    "0x20000c50",
+    "0xb0f8",
+    "0x20000548",
+    "0xb34c",
+    "0xb33c",
+    "0x20000c38",
+    "0x0",
+    "0x20000b38",
+    "0x20000aac",
+    "0x200009fc",
+    "0x20000818",
+    "0x20000808",
+    "0x2000065e"
+  ],
+  "pdl_pin": "35f1714623cfea682d5e285af80d50416b4c7bbc",
+  "capsense_semantic_pin": "247a9a0f79eb976f144f5fbeb29488c1c2606517",
+  "semantic_source_sha256": "777300a0129f032a507e0a222bae0f321f5d4423da2ef4778058255383db5890",
+  "limits": "No whole-image equality, actual LP-history capacity, analog/time/IRQ-delivery or unknown external callback-body claim.",
+  "additional_public_evidence": {
+    "/tmp/opencfw-vendor-leads-2026-10-08/capsense-247a9a0f79eb976f144f5fbeb29488c1c2606517/cy_capsense_generator_lp.c": "add5c3998551f398579e3d6b527abf99f4ff0feb929af91ad9066afc3d3907fc",
+    "/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/devices/include/ip/cyip_msclp.h": "777b627dadfbdddd5024b121edb0a57875c12d865db1cd245585b51944436d1f",
+    "/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/devices/include/psoc4000t_config.h": "a83a5cfe611d261e19752a7c5ecd48a76d7f32f9296425a589b3713418f07b30"
+  },
+  "third_party_gitlink": "25fa1cd5abb4cc66981b04f8872d57d74e398976; different from external6.10 comparator pin; not changed"
+}

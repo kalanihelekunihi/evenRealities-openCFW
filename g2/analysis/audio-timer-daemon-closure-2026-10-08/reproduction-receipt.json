@@ -1,0 +1,17 @@
+{
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "source": "g2/components/audio/timer_daemon_offline/daemon.c",
+  "source_sha256": "5b7df528e1fcaff38658073edd59eb72397c2f31f7d659660349baf5e90cca33",
+  "elf": "/tmp/opencfw-audio-timer-daemon/daemon.elf",
+  "elf_sha256": "9622c603607dd0daf17eb1b3ea213ac214ccbd7f281e764a949b876354485259",
+  "link_script": "audio_daemon_process_or_block = 0x47e88d; audio_daemon_drain_commands = 0x47e97b; audio_daemon_initialize_queue = 0x47eab9; audio_daemon_get_static_memory = 0x4d3611; audio_daemon_create_static = 0x454821; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }"
+}

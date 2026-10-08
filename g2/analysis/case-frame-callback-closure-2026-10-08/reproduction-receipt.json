@@ -1,0 +1,24 @@
+{
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m0plus",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "frame_source_sha256": "e8b26e400da84f8f7eb77b6517e847d63e505556f7b0a5890509ab57937580cd",
+  "start_source_sha256": "b93724ee65b48c9f16e917149e009c1a597089bdbbebb69b96263187e555f53f",
+  "elf": "/tmp/opencfw-case-frame-callback-final/frame.elf",
+  "elf_sha256": "50462d46773f79399c68cb1de0a804cfe207266e8c52f41c913df4559fef2f3e",
+  "boundaries": {
+    "bulk_receive": "0x080063ec",
+    "event_post": "0x0800a888"
+  },
+  "limits": [
+    "No semantic child entry stubs: tests stop before external bulk/event bodies; their return-dependent suffixes remain static reconstruction.",
+    "Native source rearm uses validated independent start API; original uses actual64ec/8d98."
+  ]
+}

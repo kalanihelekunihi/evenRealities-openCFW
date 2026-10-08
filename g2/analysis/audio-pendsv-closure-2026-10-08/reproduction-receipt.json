@@ -1,0 +1,17 @@
+{
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m33",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "source": "g2/components/audio/pendsv_offline/context.c",
+  "source_sha256": "2f94ef3ee8299093c70c6e24fdd729e745076055fce2f3875f7fe5f3c04abe11",
+  "elf": "/tmp/opencfw-audio-pendsv/context.elf",
+  "elf_sha256": "5fcea7b6aefabd6454bab74009803f803e8f0641ee7c137f340dfc98db82e3b9",
+  "link_script": "SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }"
+}

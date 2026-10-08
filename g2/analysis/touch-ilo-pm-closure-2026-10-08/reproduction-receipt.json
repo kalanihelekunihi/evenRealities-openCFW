@@ -1,0 +1,21 @@
+{
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "version": "arm-none-eabi-gcc (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) 13.3.1 20240614",
+  "pdl_pin": "35f1714623cfea682d5e285af80d50416b4c7bbc",
+  "pdl_source": "/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/drivers/source/cy_sysclk.c",
+  "pdl_sha256": "fa7d3221a4a52f4cae68d291237c57541448539db05ddf0ba653fd0a04c08594",
+  "public_environment": "#include <stdint.h>\n#include <stdbool.h>\ntypedef uint32_t cy_en_syspm_status_t;\ntypedef uint32_t cy_en_syspm_callback_mode_t;\ntypedef struct {void *base;void *context;} cy_stc_syspm_callback_params_t;\n#define CY_SYSPM_SUCCESS 0u\n#define CY_SYSPM_FAIL 0x4200ffu\n#define CY_SYSPM_CHECK_READY 1u\n#define CY_SYSPM_CHECK_FAIL 2u\n#define CY_SYSPM_BEFORE_TRANSITION 4u\n#define CY_SYSPM_AFTER_TRANSITION 8u\n#define CY_UNUSED_PARAMETER(p) ((void)(p))\nextern bool iloMeasurment,preventIloMeasurment;\n/* CY_IP_M0S8EXCO and CY_IP_M0S8WCO absent in selected device header. */\n",
+  "public_translation_unit_sha256": "02201bd86476936a2570ce80e6867568bb582cb59ff05f31c8164ed81c69d714",
+  "source_sha256": "f287159b45440a23218394f6ff53423163fdd093bdddcd9c8e12a20daa7133c4",
+  "elf": "/tmp/opencfw-touch-ilo-pm-reproduction/pm.elf",
+  "elf_sha256": "aea65d457deae6c1afddd53151373978b6f63ad1ba59f2095cb100dd4605531a",
+  "flags": [
+    "-mcpu=cortex-m0plus",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ]
+}

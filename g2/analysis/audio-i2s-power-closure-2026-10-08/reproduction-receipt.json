@@ -1,0 +1,17 @@
+{
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "source": "g2/components/audio/i2s_power_offline/power.c",
+  "source_sha256": "d0528b3d1ced6dfe19ba1d1e50147da2be90ff416c83b9c343e4e2f31ebe8259",
+  "elf": "/tmp/opencfw-audio-i2s-power/power.elf",
+  "elf_sha256": "1e366563b9bc72f035c48664336725de87fafbc633fb179b53be08667f4d1c55",
+  "link_script": "audio_power_peripheral_on = 0x47f5b9; audio_power_peripheral_off = 0x47f7af; audio_power_clock_acquire = 0x4c44bd; audio_power_clock_release = 0x4c4531; audio_power_clock_source = 0x58fd1d; audio_power_reconfigure = 0x58fdbd; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }"
+}

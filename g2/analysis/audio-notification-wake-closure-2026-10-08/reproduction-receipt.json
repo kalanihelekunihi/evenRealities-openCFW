@@ -1,0 +1,25 @@
+{
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "elf": "/tmp/opencfw-audio-notification-wake-final/wake.elf",
+  "elf_sha256": "32b35c2b42628c69a042d25a8506b151f7c6a49511bc573913f9419e13445151",
+  "source_hashes": {
+    "g2/components/audio/thread_flags_offline/flags.c": "9e656f9ff51effa3e40af088794e6756f455ea9d1f993281af3e98eaf68c4e9f",
+    "g2/components/audio/notification_wake_offline/wake.c": "11bcf2a24a0cf13ebbfbeff87c143b721c8d43e83f3912798221609ac70d3506",
+    "g2/components/audio/notification_wake_offline/wake.h": "34ffd5555001498cc6e9dd0b51b4d6f93687001e6314d4a65640575d954b22ac"
+  },
+  "public_translation_unit": "#include <stdint.h>\n#include <stddef.h>\ntypedef void *osThreadId_t,*TaskHandle_t;\ntypedef int32_t BaseType_t;\n#define THREAD_FLAGS_INVALID_BITS 0x80000000u\n#define osErrorParameter (-4)\n#define osError (-1)\n#define pdFALSE 0\n#define eSetBits 1\n#define eNoAction 0\nint32_t audio_irq_context(void);\nint32_t audio_notify_task(void *,uint32_t,uint32_t,uint32_t,uint32_t *);\nint32_t audio_original_notify_isr(void *,uint32_t,uint32_t,uint32_t,uint32_t *,int32_t *);\n#define IRQ_Context() audio_irq_context()\n#define xTaskNotifyFromISR(t,v,a,y) audio_original_notify_isr(t,0,v,a,0,y)\n#define xTaskNotifyAndQueryFromISR(t,v,a,p,y) audio_original_notify_isr(t,0,v,a,p,y)\n#define xTaskNotify(t,v,a) audio_notify_task(t,0,v,a,0)\n#define xTaskNotifyAndQuery(t,v,a,p) audio_notify_task(t,0,v,a,p)\n#define portYIELD_FROM_ISR(y) do{if(y)*(volatile uint32_t *)0xe000ed04u=0x10000000u;}while(0)\nuint32_t audio_public_flags_set (osThreadId_t thread_id, uint32_t flags) {\n  TaskHandle_t hTask = (TaskHandle_t)thread_id;\n  uint32_t rflags;\n  BaseType_t yield;\n\n  if ((hTask == NULL) || ((flags & THREAD_FLAGS_INVALID_BITS) != 0U)) {\n    rflags = (uint32_t)osErrorParameter;\n  }\n  else {\n    rflags = (uint32_t)osError;\n\n    if (IRQ_Context() != 0U) {\n      yield = pdFALSE;\n\n      (void)xTaskNotifyFromISR (hTask, flags, eSetBits, &yield);\n      (void)xTaskNotifyAndQueryFromISR (hTask, 0, eNoAction, &rflags, NULL);\n\n      portYIELD_FROM_ISR (yield);\n    }\n    else {\n      (void)xTaskNotify (hTask, flags, eSetBits);\n      (void)xTaskNotifyAndQuery (hTask, 0, eNoAction, &rflags);\n    }\n  }\n  /* Return flags after setting */\n  return (rflags);\n}",
+  "public_recipe": "g2/analysis/audio-thread-flags-closure-2026-10-08/build_offline.py",
+  "limits": [
+    "Original/public wrapper uses actual original ISR kernel. Independent wrapper uses new index0/action0/1 kernel subset.",
+    "Context and mask providers remain actual original peers; no scheduler task execution or exception delivery."
+  ]
+}

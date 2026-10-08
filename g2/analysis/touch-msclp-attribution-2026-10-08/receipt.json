@@ -1,0 +1,92 @@
+{
+  "compiler": "arm-none-eabi-gcc (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) 13.3.1 20240614",
+  "source_pin": "35f1714623cfea682d5e285af80d50416b4c7bbc",
+  "source_path": "/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/drivers/source/cy_msclp.c",
+  "source_sha256": "2613ec6fee3ac2ca6d8a42e483bb671f9ed63a58045b125ee6fe11f6f2d60f07",
+  "flags_except_optimization": [
+    "-mcpu=cortex-m0plus",
+    "-mthumb",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-DCY8C4046FNI_T412",
+    "-ffunction-sections"
+  ],
+  "comparisons": [
+    {
+      "optimization": "-Og",
+      "function": "Cy_MSCLP_ConfigureScan",
+      "section_bytes": 160,
+      "stock_extent": 160,
+      "exact_section_match": true,
+      "common_prefix_bytes": 160,
+      "sha256": "aca4046f59c198244af1fd481ce56c598688f0604b35c51169c238f40dda2ce5"
+    },
+    {
+      "optimization": "-Og",
+      "function": "Cy_MSCLP_Configure",
+      "section_bytes": 424,
+      "stock_extent": 424,
+      "exact_section_match": false,
+      "common_prefix_bytes": 158,
+      "sha256": "5cc48aca77ef1c55bf3fa196f549fe6f231a9470e713d5ccd29deabf98072a63"
+    },
+    {
+      "optimization": "-O1",
+      "function": "Cy_MSCLP_ConfigureScan",
+      "section_bytes": 148,
+      "stock_extent": 160,
+      "exact_section_match": false,
+      "common_prefix_bytes": 0,
+      "sha256": "59362da16d65d6a5f5f7706131e52185bcbbdf5f174bebefe5eb4b788e6da802"
+    },
+    {
+      "optimization": "-O1",
+      "function": "Cy_MSCLP_Configure",
+      "section_bytes": 404,
+      "stock_extent": 424,
+      "exact_section_match": false,
+      "common_prefix_bytes": 0,
+      "sha256": "55d7c4b9fab4cdb868e0ab5bfc336ba85741249e417587decfc698fc23a50de6"
+    },
+    {
+      "optimization": "-O2",
+      "function": "Cy_MSCLP_ConfigureScan",
+      "section_bytes": 168,
+      "stock_extent": 160,
+      "exact_section_match": false,
+      "common_prefix_bytes": 0,
+      "sha256": "5e3443f40593fffbb989a05fd8264f663ddc52df6366c209d8cf04727b9c2dc8"
+    },
+    {
+      "optimization": "-O2",
+      "function": "Cy_MSCLP_Configure",
+      "section_bytes": 396,
+      "stock_extent": 424,
+      "exact_section_match": false,
+      "common_prefix_bytes": 0,
+      "sha256": "35976d004d6af69d8b3063be31e8d361089cf6334eaba003b8d6d4b158102d2c"
+    },
+    {
+      "optimization": "-Os",
+      "function": "Cy_MSCLP_ConfigureScan",
+      "section_bytes": 140,
+      "stock_extent": 160,
+      "exact_section_match": false,
+      "common_prefix_bytes": 0,
+      "sha256": "54c086f157e6c84d27f0b5c2b7d2603a7bd5cc20a0b37286412173806936a77f"
+    },
+    {
+      "optimization": "-Os",
+      "function": "Cy_MSCLP_Configure",
+      "section_bytes": 388,
+      "stock_extent": 424,
+      "exact_section_match": false,
+      "common_prefix_bytes": 0,
+      "sha256": "f7b69cf0153b306ef2724ebf3a761ae7c1b52008f29d0068078eb404c268a82a"
+    }
+  ],
+  "limits": [
+    "Exact function section equality is compiled-source attribution, not uniquely identifying upstream release/compiler or whole-payload equality.",
+    "Raw relocatable sections compared only for these no-external-call functions."
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "clock": {
+    "gpio_returns": [
+      {
+        "provider": "pin_get",
+        "status": 0,
+        "count": 100
+      },
+      {
+        "provider": "pin_set",
+        "status": 0,
+        "count": 140
+      },
+      {
+        "provider": "pin_set",
+        "status": 7,
+        "count": 60
+      }
+    ],
+    "returns": null
+  },
+  "common_initializer": {
+    "gpio_returns": [
+      {
+        "provider": "pin_get",
+        "status": 0,
+        "count": 40
+      },
+      {
+        "provider": "pin_set",
+        "status": 0,
+        "count": 68
+      },
+      {
+        "provider": "pin_set",
+        "status": 7,
+        "count": 12
+      }
+    ],
+    "returns": {
+      "0": 40
+    }
+  }
+}
