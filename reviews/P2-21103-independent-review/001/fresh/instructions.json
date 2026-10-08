@@ -1,0 +1,50 @@
+[
+  {
+    "start": 4718820,
+    "end": 4718836,
+    "instructions": [
+      {
+        "address": 4718820,
+        "bytes": "4449",
+        "mnemonic": "ldr",
+        "operands": "r1, [pc, #272]\t@ (4801f8 <.text+0x114>)"
+      },
+      {
+        "address": 4718822,
+        "bytes": "0968",
+        "mnemonic": "ldr",
+        "operands": "r1, [r1, #0]"
+      },
+      {
+        "address": 4718824,
+        "bytes": "c90f",
+        "mnemonic": "lsrs",
+        "operands": "r1, r1, #31"
+      },
+      {
+        "address": 4718826,
+        "bytes": "91f00101",
+        "mnemonic": "eors.w",
+        "operands": "r1, r1, #1"
+      },
+      {
+        "address": 4718830,
+        "bytes": "0170",
+        "mnemonic": "strb",
+        "operands": "r1, [r0, #0]"
+      },
+      {
+        "address": 4718832,
+        "bytes": "0020",
+        "mnemonic": "movs",
+        "operands": "r0, #0"
+      },
+      {
+        "address": 4718834,
+        "bytes": "7047",
+        "mnemonic": "bx",
+        "operands": "lr"
+      }
+    ]
+  }
+]

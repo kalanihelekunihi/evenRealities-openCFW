@@ -1,0 +1,40 @@
+{
+  "utc": "2026-10-06T22:11:08.752879+00:00",
+  "status": "PASS",
+  "scope": "Same immutable source-linked ELF: 2 normal/update,3 malformed update,2 synthetic atomic-ROM interruption/reboot phases; trace bytes are overlapping observed instruction paths, not whole firmware/source completeness.",
+  "elf": "g2/build/bootloader-completion/source-image-compatible/snapshots/8cd9ed1a115ec00bfbed9f58c4e118b3250efb96b7e8ee88e57c070b215fc1db/bootloader-source-test.elf",
+  "elf_sha256": "8cd9ed1a115ec00bfbed9f58c4e118b3250efb96b7e8ee88e57c070b215fc1db",
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "seed_elf": "g2/build/bootloader-completion/source-image-compatible/snapshots/8cd9ed1a115ec00bfbed9f58c4e118b3250efb96b7e8ee88e57c070b215fc1db/filesystem-seed.elf",
+  "seed_elf_sha256": "e6ba6916ee417e9efec1f4dc90a50f8ce7777f0e2ad8f976e6d2e27856072b78",
+  "profiles": [
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/8cd9ed1a115ec00bfbed9f58c4e118b3250efb96b7e8ee88e57c070b215fc1db/comparison.json",
+      "sha256": "f42f9dff9261c7fce8229b7ac93eedb2903e0b26517ca642a1ab66eccc4dca55",
+      "status": "PASS",
+      "cases": 2,
+      "distinct_original_trace_bytes": 30368
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/8cd9ed1a115ec00bfbed9f58c4e118b3250efb96b7e8ee88e57c070b215fc1db/failures.json",
+      "sha256": "0efbe3aa9a3073470229c815a41afbcccf0fad55fc46ee0a0f6b1b522bc347fe",
+      "status": "PASS",
+      "cases": 3,
+      "distinct_original_trace_bytes": 29092
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/failure-profile/powerloss-review-strict-8cd9.json",
+      "sha256": "e1d062686b931117c0aa1fff8af40e483a9162b1f046a4d72350a64eeba51261",
+      "status": "PASS",
+      "cases": 2,
+      "distinct_original_trace_bytes": 30328
+    }
+  ],
+  "total_cases": 7,
+  "union_distinct_original_trace_bytes": 30814,
+  "limits": [
+    "No stock executable image loaded on source side; remaining numeric aliases are controlled cuts or unexecuted alternatives and must not satisfy standalone source closure.",
+    "Synthetic NOR/MMIO/ROM progress and atomic page writes only; no physical power failure, partial page, hardware timing/cache-coherence or app instruction execution.",
+    "Source/stock differences in relocated addresses are normalized at documented boundaries; tested helper/provider behavior is not byte identity."
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "status": "EXPECTED_MISMATCH_DETECTED_AND_FIXED",
+  "test": "timer-enabled direct locked-instruction vs compiled-source comparison",
+  "fixture": "timer-state-2-status-40000000",
+  "handler": 14,
+  "image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "failed_source_status_mask": "0x80000000",
+  "locked_instruction": "0x4294d8: LDR [0x40008064]; 0x4294da: LSLS r0,r0,#1; BPL loops when bit 30 is clear",
+  "correct_mask": "0x40000000",
+  "observed_failure": {
+    "stock_rom_wait_calls": [
+      145
+    ],
+    "source_rom_wait_call_count": 61,
+    "source_rom_wait_prefix": [
+      17,
+      17,
+      17
+    ],
+    "source_rom_wait_suffix": [
+      17,
+      17,
+      145
+    ]
+  },
+  "correction": "handlers.c now tests bit 30 and the timer enable gate tests bit 0, both derived from original LSL instruction semantics.",
+  "superseded_by": "comparison-timer-enabled-local.json"
+}

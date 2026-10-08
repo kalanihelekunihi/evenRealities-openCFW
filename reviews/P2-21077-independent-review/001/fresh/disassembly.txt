@@ -1,0 +1,39 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp0ote5v44/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047fdb4 <.text>:
+  47fdb4:	f8df 0408 	ldr.w	r0, [pc, #1032]	@ 4801c0 <.text+0x40c>
+  47fdb8:	6801      	ldr	r1, [r0, #0]
+  47fdba:	f051 4180 	orrs.w	r1, r1, #1073741824	@ 0x40000000
+  47fdbe:	6001      	str	r1, [r0, #0]
+  47fdc0:	f8df 0400 	ldr.w	r0, [pc, #1024]	@ 4801c4 <.text+0x410>
+  47fdc4:	6801      	ldr	r1, [r0, #0]
+  47fdc6:	f451 3180 	orrs.w	r1, r1, #65536	@ 0x10000
+  47fdca:	6001      	str	r1, [r0, #0]
+  47fdcc:	6801      	ldr	r1, [r0, #0]
+  47fdce:	f451 5180 	orrs.w	r1, r1, #4096	@ 0x1000
+  47fdd2:	6001      	str	r1, [r0, #0]
+  47fdd4:	f7f3 fdb4 	bl	473940 <.text-0xc474>
+  47fdd8:	9002      	str	r0, [sp, #8]
+  47fdda:	f000 fae7 	bl	4803ac <.text+0x5f8>
+  47fdde:	f8df 03e8 	ldr.w	r0, [pc, #1000]	@ 4801c8 <.text+0x414>
+  47fde2:	7801      	ldrb	r1, [r0, #0]
+  47fde4:	2000      	movs	r0, #0
+  47fde6:	f000 faec 	bl	4803c2 <.text+0x60e>
+  47fdea:	9802      	ldr	r0, [sp, #8]
+  47fdec:	f380 8810 	msr	PRIMASK, r0
+  47fdf0:	f000 faff 	bl	4803f2 <.text+0x63e>
+  47fdf4:	f7cb f9b0 	bl	44b158 <.text-0x34c5c>
+  47fdf8:	6820      	ldr	r0, [r4, #0]
+  47fdfa:	f000 00ff 	and.w	r0, r0, #255	@ 0xff
+  47fdfe:	2822      	cmp	r0, #34	@ 0x22
+  47fe00:	d305      	bcc.n	47fe0e <.text+0x5a>
+  47fe02:	f8df 03c8 	ldr.w	r0, [pc, #968]	@ 4801cc <.text+0x418>
+  47fe06:	6801      	ldr	r1, [r0, #0]
+  47fe08:	f051 0106 	orrs.w	r1, r1, #6
+  47fe0c:	6001      	str	r1, [r0, #0]
+  47fe0e:	2000      	movs	r0, #0
+  47fe10:	bd3e      	pop	{r1, r2, r3, r4, r5, pc}

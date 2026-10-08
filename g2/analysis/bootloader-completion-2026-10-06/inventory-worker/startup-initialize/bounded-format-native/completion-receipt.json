@@ -1,0 +1,75 @@
+{
+  "utc": "2026-10-08T00:12:43.189820+00:00",
+  "status": "PASS_BOUNDED_OFFLINE_CHECKPOINT",
+  "candidate_sha256": "0b80d612fe52fd296eae01d1e304daf8769df2a6847f8649ebfe787c3108d419",
+  "objects": 229,
+  "integration_cases": 7,
+  "integration_receipts": {
+    "comparison.json": {
+      "cases": 2,
+      "sha256": "fbe457cf42a013e22c852bf48481a15275c9a895f3c4390df0d3825567ef66d1"
+    },
+    "failures.json": {
+      "cases": 3,
+      "sha256": "898fe2101149accf696a8c5dd4da166e54d4febc340f8c94e73f4ea15d658bdd"
+    },
+    "powerloss.json": {
+      "cases": 2,
+      "sha256": "aa879ada8fa06b3bd8da388cc0a748acc665bc50e0eff02e3a4fad9691e70de2"
+    }
+  },
+  "suites": {
+    "broad": {
+      "jobs": 44,
+      "sha256": "809df559a1f0b0784ac74c82b00fc7b27c8659deb942ad3ff0b4432de3dd12f1"
+    },
+    "focused": {
+      "jobs": 11,
+      "sha256": "6764672e574aee3c58da85aaa2619642d5f65bcb55e401c0819f0843398e2b7d"
+    },
+    "extra": {
+      "jobs": 5,
+      "sha256": "0f7dfd4d24ad2c8092cbde363b42a6a8b9fabd91c49c5eacaa016fd273e3c544"
+    },
+    "closure": {
+      "jobs": 3,
+      "sha256": "cb738f821808783078243e031695e8077697c8c277525c48abfd54173c061e2a"
+    },
+    "affected": {
+      "jobs": 13,
+      "sha256": "92c37b69f3b6b4cdf1be011f83d303598c064d14c2f83467842162b46ae8b740"
+    }
+  },
+  "dedicated_comparisons": {
+    "runtime_hooks_with_child_contracts": 324,
+    "formatter_wrappers_with_engine_model": 560,
+    "hybrid_original_engine": 216
+  },
+  "exact_frozen_object_relink": true,
+  "canonical_c_object_reproductions": 3,
+  "preserved_failure_receipts": {
+    "focused-run-results.json": "f2b9bd48b6facf3aa36bebf81f54ac5c1770e441b7ef5745f93dadc3f2fb2f35",
+    "integration-malformed-results.json": "a7a2f902bcd4912e0fb8c277c3d38f9de1d29279e7db3afc15e37d8f6d89cc5a",
+    "integration-normal-results.json": "e0171e5beb554ec4fb494e961aa5457298908e654c925a7691fca7ffaf435657",
+    "broad-run-results.json": "b4003953305f31172dd9e3e5aff564c9d402f45618b63fd0e9788ae47fc231eb",
+    "affected-run-results.json": "1f0b903df581620ad007728387b7cbcff8e031b6438a8dbf2fd1916716601d43",
+    "extra-run-results.json": "48d91afda13235b69e1369cf786b5a69f75d5a1355aa047344bf12e101690521",
+    "integration-powerloss-results.json": "7b0a7575d8de349161010ab3b986f1a9228a253a4b3b86b0594d4bc29dc9854a",
+    "closure-run-results.json": "f140b8dcfb4c8ec513512538319bfd11685f2f8aed2a46282ca48528d0e4c62f"
+  },
+  "source_only_formatter": false,
+  "deployable_firmware": false,
+  "byte_identical_official_payload": false,
+  "ledger": {
+    "path": "g2/analysis/source-replacement-ledger-2026-10-08-runtime-format",
+    "files": {
+      "generate.py": "a164366890204e13d2df210f5fbb99fb6a51da0bdeba8852e8aebe8314847729",
+      "README.md": "924747cf374bafd005f3bddabd33ed7f2f2517793197d3121e1cd23f681f53cd",
+      "validate.py": "800d396c19111f666bb7c4ac244f40f69bea7157591ed55292bcffbec78c6f91",
+      "mapped-functions.json": "0a482e901156029591776f028c32ca825f01ae82f2dca908cdc6a3251b33c40c",
+      "validation.json": "1e2c9acbd6ef944ae02479556b8d3fb40f989898816b2e85a9c5900a1d18c508",
+      "call-contracts.json": "86ac7d17983de690038de379c69e6ae3765292026e90e0f8b10fd47f8d53b870",
+      "address-ledger.jsonl": "ce2c0ff931d95f0d58f7d9c26f2b3a6f94d979e3bc9c63bf8169b10f68941ce6"
+    }
+  }
+}

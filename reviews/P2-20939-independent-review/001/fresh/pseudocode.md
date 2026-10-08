@@ -1,0 +1,4 @@
+# Sixteen-byte local record output with exact helper count
+
+Partial/unaccepted;98instructionbytes47DF28..47DF8A. PUSH R3,R4,R5,LR16 thenSP-=16,total32.439C04(SP,literal47E2A0,16,liveR3). LocalSP4=freshword[pointerliteral47E2A4];SP8=freshword[pointerliteral47E2A8].47DDFE(SP,liveargs) calls4D34C4(SP,12,0,liveR3),returnsfullresult;storeitSP12. LocalSP0 andotherhelperwrittenbytesremain governedbyunresolved439C04,not assumedtemplatecopy.
+474550(literal47E2AC,address47E174,liveR2,R3)→R4. Fullzero→R0=FFFFFFFB(-5),exit. Otherwise474682(SP,1,16,R4)→R5fullresult;4745F4(R4,liveargs) alwaysaftercall. FullR5==16 returns0;elseFFFFFFFB(-5),ignoringcleanuphelperresult. SP+=20 discards16localbytes andsavedentryR3;POP R4,R5,PC12 restoressavedregsandLR. No entryR0retained;R1/R2/R3notrestored. No helper API orrecordownershipinferred; no C/freeze/completenessclaim.

@@ -1,0 +1,48 @@
+{
+  "status": "PASS",
+  "elf_sha256": "e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143",
+  "flags": [
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m33",
+    "-mthumb",
+    "-mfloat-abi=softfp",
+    "-O1",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-fshort-enums"
+  ],
+  "results": [
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_deferred21_native/pcm22_sequence22.c",
+      "source_sha256": "6db3c4bae7fae194292f44e81aa3f427308dcdc82644993fb65e84048f5dffdb",
+      "object_sha256": "94a7ac3e8e7dc13b9b3a821fc0c11855834c1ad4b775d39153dadb7598b413ab",
+      "frozen_object": "inputs/221/pcm22_sequence22.o"
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_deferred21_native/pcm22_deferred21.c",
+      "source_sha256": "0a1bb0507da29f87f241be0d9074412bf11216bd459f91d3bc94ceb4de9fc98a",
+      "object_sha256": "07268b8e0f4c89d8a4b6c7128f1d7abd18cff04fc3ef9cf1fdcc9880bb1bef33",
+      "frozen_object": "inputs/220/pcm22_deferred21.o"
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_deferred21_native/runtime_transition.c",
+      "source_sha256": "8ce13c66611f8a6a15d58cb82235dc7f639ec2ec828a39538e51b7af6cde8f48",
+      "object_sha256": "79bf55f9fbd5b00a87f1d2bffa9ff465a73e2e5306011e2912924bafcc55ba9f",
+      "frozen_object": "inputs/75/runtime_transition.o"
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_deferred21_native/initialized_data.c",
+      "source_sha256": "b5cd196c88fd4fe094a781822f7474026403815f0d8fe950812c50df865834f9",
+      "object_sha256": "6ac189d60062ba5473b42f57ae35b87304c606a93279608072cfd42ff375d91d",
+      "frozen_object": "inputs/206/initialized_data.o"
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_deferred21_native/startup_runtime.c",
+      "source_sha256": "d325207c9688d808ed6a8237835f1b12d1b2de0d5661480b5a2dafe49e909d3c",
+      "object_sha256": "427b409b00308a385f58e1c806f731c1386a2af640f2175544ea7dab43918544",
+      "frozen_object": "inputs/173/startup_runtime.o"
+    }
+  ]
+}

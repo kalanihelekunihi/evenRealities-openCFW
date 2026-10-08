@@ -1,0 +1,3 @@
+# Pool468C24..468C68
+
+Partial,unaccepted;68non-codebytes,seventeenalignedlittle-endianwords. PrecedingPOP PC468C22excludesfallthrough;nextentry468C68excluded. KnownPC-relativeconsumers19392..19450corroborate globalpointers,00x333333 valueanddiagnosticcontexts;exactvalues/knownreferenceaddressesstoredwithoutpointedobjectcontracts/exhaustiveinstructionconsumerclaim. ForcedThumb interpretations notexecutableevidence. No C/runtime/gates.

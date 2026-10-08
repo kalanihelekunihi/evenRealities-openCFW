@@ -1,0 +1,10 @@
+{
+  "id": "P2-20787",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "134B: initial fresh byte47 zero takes diagnostics2039; nonzero uses distinct diagnostics2036. Full R9 signed comparison to 10; R10 is table base + (R9<<8). Byte48 is checked before byte47; either zero loops to 47BD90 and rereads byte47. Both nonzero increments R11. Fresh replay and hashes verified."
+}

@@ -1,0 +1,56 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp7gl59sdb/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00480f0c <.text>:
+  480f0c:	b57c      	push	{r2, r3, r4, r5, r6, lr}
+  480f0e:	0004      	movs	r4, r0
+  480f10:	000e      	movs	r6, r1
+  480f12:	f8df 5828 	ldr.w	r5, [pc, #2088]	@ 48173c <.text+0x830>
+  480f16:	2ce0      	cmp	r4, #224	@ 0xe0
+  480f18:	d301      	bcc.n	480f1e <.text+0x12>
+  480f1a:	2005      	movs	r0, #5
+  480f1c:	e034      	b.n	480f88 <.text+0x7c>
+  480f1e:	0021      	movs	r1, r4
+  480f20:	0949      	lsrs	r1, r1, #5
+  480f22:	2201      	movs	r2, #1
+  480f24:	f014 001f 	ands.w	r0, r4, #31
+  480f28:	4082      	lsls	r2, r0
+  480f2a:	f8df 0814 	ldr.w	r0, [pc, #2068]	@ 481740 <.text+0x834>
+  480f2e:	f850 0021 	ldr.w	r0, [r0, r1, lsl #2]
+  480f32:	4210      	tst	r0, r2
+  480f34:	d10b      	bne.n	480f4e <.text+0x42>
+  480f36:	f3c6 2081 	ubfx	r0, r6, #10, #2
+  480f3a:	2802      	cmp	r0, #2
+  480f3c:	db15      	blt.n	480f6a <.text+0x5e>
+  480f3e:	f8df 0804 	ldr.w	r0, [pc, #2052]	@ 481744 <.text+0x838>
+  480f42:	f850 0021 	ldr.w	r0, [r0, r1, lsl #2]
+  480f46:	4210      	tst	r0, r2
+  480f48:	d10f      	bne.n	480f6a <.text+0x5e>
+  480f4a:	2007      	movs	r0, #7
+  480f4c:	e01c      	b.n	480f88 <.text+0x7c>
+  480f4e:	f3c6 3042 	ubfx	r0, r6, #13, #3
+  480f52:	2800      	cmp	r0, #0
+  480f54:	d009      	beq.n	480f6a <.text+0x5e>
+  480f56:	f3c6 3042 	ubfx	r0, r6, #13, #3
+  480f5a:	2806      	cmp	r0, #6
+  480f5c:	d005      	beq.n	480f6a <.text+0x5e>
+  480f5e:	f3c6 3042 	ubfx	r0, r6, #13, #3
+  480f62:	2801      	cmp	r0, #1
+  480f64:	d001      	beq.n	480f6a <.text+0x5e>
+  480f66:	2007      	movs	r0, #7
+  480f68:	e00e      	b.n	480f88 <.text+0x7c>
+  480f6a:	f7f2 fce9 	bl	473940 <.text-0xd5cc>
+  480f6e:	9000      	str	r0, [sp, #0]
+  480f70:	f8df 07d4 	ldr.w	r0, [pc, #2004]	@ 481748 <.text+0x83c>
+  480f74:	2173      	movs	r1, #115	@ 0x73
+  480f76:	6001      	str	r1, [r0, #0]
+  480f78:	f845 6024 	str.w	r6, [r5, r4, lsl #2]
+  480f7c:	2100      	movs	r1, #0
+  480f7e:	6001      	str	r1, [r0, #0]
+  480f80:	9800      	ldr	r0, [sp, #0]
+  480f82:	f380 8810 	msr	PRIMASK, r0
+  480f86:	2000      	movs	r0, #0
+  480f88:	bd76      	pop	{r1, r2, r4, r5, r6, pc}

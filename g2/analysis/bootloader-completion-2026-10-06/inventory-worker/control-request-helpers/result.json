@@ -1,0 +1,452 @@
+{
+  "status": "PASS",
+  "cases": 37,
+  "failures": [],
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_elf_sha256": "09196da7e22820f4b35e4f03a9f4844bb26eec425dde4eb4f422f29ef5b1549c",
+  "source_sha256": {
+    "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/control-request-helpers/verify_control_request_helpers.py": "f17f48c71441efafcdd57fa749834365968cf9010cc1a631af93a66fb5016b56",
+    "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/control-request-helpers/Makefile": "36dce8cec86b43f2b86382970265318b36a17f407652785d13af2dcd909a0fc6",
+    "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/control-request-helpers/module.ld": "ee5008ff034cb84eecdfc4fb03df5df991538036aeb0f4740a08d4f2745e03a1",
+    "g2/components/bootloader/nor_mspi_init/control_request_helpers.c": "e605680ef860c9505587652f56aa3642c5b1cbd42678ad8ba7f7f5a0a2b43324",
+    "g2/components/bootloader/nor_mspi_init/control_request_helpers.h": "52c7b4a5d75e5a55ece3886d295f824cc4f2fb343eb024516c5c189e73ef9f2d"
+  },
+  "distinct_original_instruction_bytes": 200,
+  "original_trace": {
+    "0x423e14": "d0f83828",
+    "0x423e18": "012a",
+    "0x423e1a": "02d0",
+    "0x423e1c": "022a",
+    "0x423e1e": "08d0",
+    "0x423e20": "0ae0",
+    "0x423e38": "51f48141",
+    "0x423e3c": "0800",
+    "0x423e3e": "7047",
+    "0x423e22": "41f48041",
+    "0x423e26": "51f0a001",
+    "0x423e2a": "0222",
+    "0x423e2c": "c0f83828",
+    "0x423e30": "04e0",
+    "0x423e32": "4ff48041",
+    "0x423e36": "01e0",
+    "0x427c12": "0200",
+    "0x427c14": "0028",
+    "0x427c16": "05d0",
+    "0x427c18": "0068",
+    "0x427c1a": "20f07e40",
+    "0x427c1e": "1a4b",
+    "0x427c20": "9842",
+    "0x427c22": "01d0",
+    "0x427c28": "1069",
+    "0x427c2a": "5369",
+    "0x427c2c": "9842",
+    "0x427c2e": "01d1",
+    "0x427c34": "5069",
+    "0x427c36": "536a",
+    "0x427c38": "9b68",
+    "0x427c3a": "0360",
+    "0x427c3c": "0023",
+    "0x427c3e": "4360",
+    "0x427c40": "0830",
+    "0x427c42": "c9b2",
+    "0x427c44": "0029",
+    "0x427c46": "01d0",
+    "0x427c4c": "0021",
+    "0x427c4e": "536a",
+    "0x427c50": "5b68",
+    "0x427c52": "1943",
+    "0x427c54": "0160",
+    "0x427c56": "5168",
+    "0x427c58": "4160",
+    "0x427c5a": "0830",
+    "0x427c5c": "5061",
+    "0x427c5e": "5069",
+    "0x427c60": "1061",
+    "0x427c62": "9068",
+    "0x427c64": "0949",
+    "0x427c66": "8842",
+    "0x427c68": "01d3",
+    "0x427c6e": "92f82000",
+    "0x427c72": "00f0ff00",
+    "0x427c76": "516a",
+    "0x427c78": "c968",
+    "0x427c7a": "0860",
+    "0x427c7c": "0020",
+    "0x427c7e": "7047",
+    "0x427c24": "0220",
+    "0x427c26": "2ae0",
+    "0x427c48": "0121",
+    "0x427c4a": "00e0",
+    "0x427c30": "0720",
+    "0x427c32": "24e0",
+    "0x4279be": "0100",
+    "0x4279c0": "0028",
+    "0x4279c2": "06d0",
+    "0x4279c4": "0068",
+    "0x4279c6": "20f07e40",
+    "0x4279ca": "dff8bc22",
+    "0x4279ce": "9042",
+    "0x4279d0": "01d0",
+    "0x4279d6": "0869",
+    "0x4279d8": "4a69",
+    "0x4279da": "9042",
+    "0x4279dc": "01d1",
+    "0x4279e2": "0869",
+    "0x4279e4": "4861",
+    "0x4279e6": "086a",
+    "0x4279e8": "401e",
+    "0x4279ea": "0862",
+    "0x4279ec": "0020",
+    "0x4279ee": "7047",
+    "0x4279de": "0720",
+    "0x4279e0": "05e0",
+    "0x4279d2": "0220",
+    "0x4279d4": "0be0"
+  },
+  "coverage": {
+    "mode_flags": "0x423e14",
+    "queue_post": "0x427c12",
+    "queue_release": "0x4279be"
+  },
+  "comparisons": [
+    {
+      "function": "mode_flags",
+      "fixture": {
+        "mode": 0,
+        "flags": 0
+      },
+      "return": 16512
+    },
+    {
+      "function": "mode_flags",
+      "fixture": {
+        "mode": 0,
+        "flags": 64
+      },
+      "return": 16576
+    },
+    {
+      "function": "mode_flags",
+      "fixture": {
+        "mode": 0,
+        "flags": 4194304
+      },
+      "return": 4210816
+    },
+    {
+      "function": "mode_flags",
+      "fixture": {
+        "mode": 0,
+        "flags": 4194368
+      },
+      "return": 4210880
+    },
+    {
+      "function": "mode_flags",
+      "fixture": {
+        "mode": 0,
+        "flags": 4294967295
+      },
+      "return": 4294967295
+    },
+    {
+      "function": "mode_flags",
+      "fixture": {
+        "mode": 1,
+        "flags": 0
+      },
+      "return": 16544
+    },
+    {
+      "function": "mode_flags",
+      "fixture": {
+        "mode": 1,
+        "flags": 64
+      },
+      "return": 16608
+    },
+    {
+      "function": "mode_flags",
+      "fixture": {
+        "mode": 1,
+        "flags": 4194304
+      },
+      "return": 4210848
+    },
+    {
+      "function": "mode_flags",
+      "fixture": {
+        "mode": 1,
+        "flags": 4194368
+      },
+      "return": 4210912
+    },
+    {
+      "function": "mode_flags",
+      "fixture": {
+        "mode": 1,
+        "flags": 4294967295
+      },
+      "return": 4294967295
+    },
+    {
+      "function": "mode_flags",
+      "fixture": {
+        "mode": 2,
+        "flags": 0
+      },
+      "return": 16384
+    },
+    {
+      "function": "mode_flags",
+      "fixture": {
+        "mode": 2,
+        "flags": 64
+      },
+      "return": 16384
+    },
+    {
+      "function": "mode_flags",
+      "fixture": {
+        "mode": 2,
+        "flags": 4194304
+      },
+      "return": 16384
+    },
+    {
+      "function": "mode_flags",
+      "fixture": {
+        "mode": 2,
+        "flags": 4194368
+      },
+      "return": 16384
+    },
+    {
+      "function": "mode_flags",
+      "fixture": {
+        "mode": 2,
+        "flags": 4294967295
+      },
+      "return": 16384
+    },
+    {
+      "function": "mode_flags",
+      "fixture": {
+        "mode": 3,
+        "flags": 0
+      },
+      "return": 16512
+    },
+    {
+      "function": "mode_flags",
+      "fixture": {
+        "mode": 3,
+        "flags": 64
+      },
+      "return": 16576
+    },
+    {
+      "function": "mode_flags",
+      "fixture": {
+        "mode": 3,
+        "flags": 4194304
+      },
+      "return": 4210816
+    },
+    {
+      "function": "mode_flags",
+      "fixture": {
+        "mode": 3,
+        "flags": 4194368
+      },
+      "return": 4210880
+    },
+    {
+      "function": "mode_flags",
+      "fixture": {
+        "mode": 3,
+        "flags": 4294967295
+      },
+      "return": 4294967295
+    },
+    {
+      "function": "mode_flags",
+      "fixture": {
+        "mode": 4294967295,
+        "flags": 0
+      },
+      "return": 16512
+    },
+    {
+      "function": "mode_flags",
+      "fixture": {
+        "mode": 4294967295,
+        "flags": 64
+      },
+      "return": 16576
+    },
+    {
+      "function": "mode_flags",
+      "fixture": {
+        "mode": 4294967295,
+        "flags": 4194304
+      },
+      "return": 4210816
+    },
+    {
+      "function": "mode_flags",
+      "fixture": {
+        "mode": 4294967295,
+        "flags": 4194368
+      },
+      "return": 4210880
+    },
+    {
+      "function": "mode_flags",
+      "fixture": {
+        "mode": 4294967295,
+        "flags": 4294967295
+      },
+      "return": 4294967295
+    },
+    {
+      "function": "queue_post",
+      "fixture": {
+        "valid": true,
+        "write": 0,
+        "producer": 8,
+        "queue_base": 536936448,
+        "kind": 0,
+        "sequence": 0,
+        "queue_null": false
+      },
+      "return": 0
+    },
+    {
+      "function": "queue_post",
+      "fixture": {
+        "valid": true,
+        "write": 0,
+        "producer": 8,
+        "queue_base": 536936448,
+        "kind": 0,
+        "sequence": 0,
+        "queue_null": true
+      },
+      "return": 2
+    },
+    {
+      "function": "queue_post",
+      "fixture": {
+        "valid": true,
+        "write": 0,
+        "producer": 8,
+        "queue_base": 537395200,
+        "kind": 1,
+        "sequence": 305419896,
+        "queue_null": false
+      },
+      "return": 0
+    },
+    {
+      "function": "queue_post",
+      "fixture": {
+        "valid": true,
+        "write": 0,
+        "producer": 8,
+        "queue_base": 537395200,
+        "kind": 1,
+        "sequence": 305419896,
+        "queue_null": true
+      },
+      "return": 2
+    },
+    {
+      "function": "queue_post",
+      "fixture": {
+        "valid": true,
+        "write": 0,
+        "producer": 0,
+        "kind": 257,
+        "sequence": 255,
+        "queue_null": false
+      },
+      "return": 7
+    },
+    {
+      "function": "queue_post",
+      "fixture": {
+        "valid": true,
+        "write": 0,
+        "producer": 0,
+        "kind": 257,
+        "sequence": 255,
+        "queue_null": true
+      },
+      "return": 2
+    },
+    {
+      "function": "queue_post",
+      "fixture": {
+        "valid": false,
+        "write": 0,
+        "producer": 8,
+        "queue_null": false
+      },
+      "return": 2
+    },
+    {
+      "function": "queue_post",
+      "fixture": {
+        "valid": true,
+        "write": 0,
+        "producer": 0,
+        "queue_null": false
+      },
+      "return": 7
+    },
+    {
+      "function": "queue_post",
+      "fixture": {
+        "valid": true,
+        "write": 0,
+        "producer": 0,
+        "queue_null": true
+      },
+      "return": 2
+    },
+    {
+      "function": "queue_release",
+      "fixture": {
+        "valid": true,
+        "write": 0,
+        "producer": 8,
+        "sequence": 1
+      },
+      "return": 0
+    },
+    {
+      "function": "queue_release",
+      "fixture": {
+        "valid": true,
+        "write": 0,
+        "producer": 0,
+        "sequence": 0
+      },
+      "return": 7
+    },
+    {
+      "function": "queue_release",
+      "fixture": {
+        "valid": false,
+        "write": 0,
+        "producer": 8,
+        "sequence": 1
+      },
+      "return": 2
+    }
+  ],
+  "limits": [
+    "All queue, descriptor, and MMIO memory is synthetic; this validates finite helper state transitions, not peripheral progress."
+  ]
+}

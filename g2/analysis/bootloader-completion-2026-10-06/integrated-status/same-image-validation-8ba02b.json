@@ -1,0 +1,123 @@
+{
+  "utc": "2026-10-07T06:17:22.219278+00:00",
+  "status": "PASS",
+  "elf_sha256": "8ba02bde41dc8042454d733c96283565632dc01bb7ad864c723bb836657146e4",
+  "profiles": [
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/8ba02bde41dc8042454d733c96283565632dc01bb7ad864c723bb836657146e4/comparison.json",
+      "sha256": "e8d5a3c5e32f2cbf2e53b3c3f8da8695ec223e9e032fc01279e6c012b6e0d163",
+      "cases": 2
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/8ba02bde41dc8042454d733c96283565632dc01bb7ad864c723bb836657146e4/failures.json",
+      "sha256": "204b917a1d645c4e42693d591a9b10d97b38778b97f9d02b4e585c3bad6088ba",
+      "cases": 3
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/8ba02bde41dc8042454d733c96283565632dc01bb7ad864c723bb836657146e4/powerloss.json",
+      "sha256": "b68c7d2b5ee9f9e87c0e43d80df9ab9f05371b7dd7125bdbc94215e125566149",
+      "cases": 2
+    }
+  ],
+  "total_cases": 7,
+  "additional_receipts": [
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/plain-printf-8ba0/mutex_block_boundary.json",
+      "sha256": "8edbb8b6f587595f9b344dc9fe3372947b6364ce8a1be91fbf21169a252ed853",
+      "cases": 4
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/plain-printf-8ba0/service_records.json",
+      "sha256": "fa9d79785cbc9a8e656970813e9289f1c5052257752e11c5ed54c4a1e7591d4b",
+      "cases": 112
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/plain-printf-8ba0/mutex_kernel.json",
+      "sha256": "ae3add49375c320da7f1b8ae81761e56d6cca80950b46e1153fe3616bbcf641b",
+      "cases": 516
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/plain-printf-8ba0/mutex_sequences.json",
+      "sha256": "882f3726ca755c4f533b52036eff115705e90696572d40fe62c88f00b7e5aadd",
+      "cases": 2
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/plain-printf-8ba0/elog_output.json",
+      "sha256": "64a807e68aa9bc528d4c49cb084af35c0a50508472700498c9811462685c3090",
+      "cases": 494
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/plain-printf-8ba0/alignment.json",
+      "sha256": "5fa0aff724eae1df97838bff44db65673fc690dfdb474505a878459edafebe9c",
+      "cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/plain-printf-8ba0/formatter-wrapper.json",
+      "sha256": "3bd334b27249fa8c3347f9cc2396abd7ad0facf2c254dd1be6eafdd2f43c542d",
+      "cases": 288
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/plain-printf-8ba0/formatter.json",
+      "sha256": "74223e2e7741fbeb45bc5727783fcd4b69e0b86cd0787e9b0843691dd98a3b9d",
+      "cases": 1778
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/plain-printf-8ba0/isr_delivery.json",
+      "sha256": "9700e4fc9eb7969e7f7825e26e62ca7208a4fa6540a965fb587c00428a24eb7e",
+      "cases": 1480
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/plain-printf-8ba0/elog_uart_tx.json",
+      "sha256": "cfb1795de584b8cdd61b733da19c2f23f89254b5d6a6338e3bd937215efbddd6",
+      "cases": 222
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/plain-printf-8ba0/setters.json",
+      "sha256": "fbbfb67572d03e7fb89a11da27e29b43765c3529d1910f6a939d370551c3c061",
+      "cases": 192
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/plain-printf-8ba0/startup_alternatives.json",
+      "sha256": "8aa4bc1e709eece8533a6a106550744fc930c7a53dbd3a86f7108f5bab7b9670",
+      "cases": 64
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/plain-printf-8ba0/manifest.json",
+      "sha256": "74c92fa5fa424ee9e57d3eac2eb415441ea3b0f7d12ba54d21b1d48cbc47dea2",
+      "cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/plain-printf-8ba0/service_startup_state.json",
+      "sha256": "cd334f30a41deab02f90554b1e1ec59cbc0acf6fbf930b168bca750271b26473",
+      "cases": 1
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/plain-printf-8ba0/isr_public_interfaces.json",
+      "sha256": "48aed5644a9fe02e4e9b8ca819b71f8cc4822fc214664a82c69802328d169d37",
+      "cases": 62
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/plain-printf-8ba0/isr_deferred_fifo.json",
+      "sha256": "db333186d53402566cea10bc5f0212bc4c16869901b3862c8adcd25865ab4551",
+      "cases": 1
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-config-leaves/shared-8ba0.json",
+      "sha256": "0e9f8ea96b6bb4c40f28fc43b8d606c465ceff1a3a4b948693208117c7874a0d",
+      "cases": 265
+    }
+  ],
+  "inputs": 640,
+  "linked_objects": 163,
+  "post_run_hash_mismatches": [],
+  "frozen_copies": "g2/build/bootloader-completion/source-image-compatible/snapshots/8ba02bde41dc8042454d733c96283565632dc01bb7ad864c723bb836657146e4/frozen-input-copies.json",
+  "alignment_mappings": 469,
+  "numeric_aliases": 29,
+  "segments": 42,
+  "deduplicated_observed_original_instruction_bytes": 38764,
+  "limits": [
+    "Seven-case integration preserves prior plain/EasyLogger/startup ABI models; direct native formatter1778/parser and288/wrapper tests use A9 FP64 instruction oracle. No expected-output FP stubs.",
+    "Original config copy helper remains modeled in M-profile leaf proof; A9 native helper discrepancy preserved. Three clock config children explicit dependencies.",
+    "Prior six FP64 integration effects and residentROM/peripheral/timing/task fixtures remain. No hardware/drain/source-completeness/byte-equality certification."
+  ]
+}

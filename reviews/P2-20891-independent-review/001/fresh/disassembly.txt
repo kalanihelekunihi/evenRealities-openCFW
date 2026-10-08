@@ -1,0 +1,57 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp_0if3rmk/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047d5b8 <.text>:
+  47d5b8:	f7bf fd89 	bl	43d0ce <.text-0x404ea>
+  47d5bc:	0780      	lsls	r0, r0, #30
+  47d5be:	d50f      	bpl.n	47d5e0 <.text+0x28>
+  47d5c0:	79a8      	ldrb	r0, [r5, #6]
+  47d5c2:	9002      	str	r0, [sp, #8]
+  47d5c4:	f8df 03bc 	ldr.w	r0, [pc, #956]	@ 47d984 <.text+0x3cc>
+  47d5c8:	9001      	str	r0, [sp, #4]
+  47d5ca:	20c1      	movs	r0, #193	@ 0xc1
+  47d5cc:	9000      	str	r0, [sp, #0]
+  47d5ce:	f8df 3340 	ldr.w	r3, [pc, #832]	@ 47d910 <.text+0x358>
+  47d5d2:	f8df 2340 	ldr.w	r2, [pc, #832]	@ 47d914 <.text+0x35c>
+  47d5d6:	f8df 1340 	ldr.w	r1, [pc, #832]	@ 47d918 <.text+0x360>
+  47d5da:	2003      	movs	r0, #3
+  47d5dc:	f7bf ffca 	bl	43d574 <.text-0x40044>
+  47d5e0:	f7bf fd75 	bl	43d0ce <.text-0x404ea>
+  47d5e4:	07c0      	lsls	r0, r0, #31
+  47d5e6:	d403      	bmi.n	47d5f0 <.text+0x38>
+  47d5e8:	f7bf fd71 	bl	43d0ce <.text-0x404ea>
+  47d5ec:	0740      	lsls	r0, r0, #29
+  47d5ee:	d507      	bpl.n	47d600 <.text+0x48>
+  47d5f0:	f8df 1394 	ldr.w	r1, [pc, #916]	@ 47d988 <.text+0x3d0>
+  47d5f4:	79ab      	ldrb	r3, [r5, #6]
+  47d5f6:	000a      	movs	r2, r1
+  47d5f8:	f05f 6044 	movs.w	r0, #205520896	@ 0xc400000
+  47d5fc:	f7bf fc4f 	bl	43ce9e <.text-0x4071a>
+  47d600:	f8df 62fc 	ldr.w	r6, [pc, #764]	@ 47d900 <.text+0x348>
+  47d604:	79a8      	ldrb	r0, [r5, #6]
+  47d606:	7831      	ldrb	r1, [r6, #0]
+  47d608:	f360 1186 	bfi	r1, r0, #6, #1
+  47d60c:	7031      	strb	r1, [r6, #0]
+  47d60e:	7830      	ldrb	r0, [r6, #0]
+  47d610:	f3c0 1080 	ubfx	r0, r0, #6, #1
+  47d614:	b2c0      	uxtb	r0, r0
+  47d616:	2800      	cmp	r0, #0
+  47d618:	d107      	bne.n	47d62a <.text+0x72>
+  47d61a:	7830      	ldrb	r0, [r6, #0]
+  47d61c:	f010 00ef 	ands.w	r0, r0, #239	@ 0xef
+  47d620:	7030      	strb	r0, [r6, #0]
+  47d622:	7830      	ldrb	r0, [r6, #0]
+  47d624:	f010 00df 	ands.w	r0, r0, #223	@ 0xdf
+  47d628:	7030      	strb	r0, [r6, #0]
+  47d62a:	f7dc ff9d 	bl	45a568 <.text-0x23050>
+  47d62e:	2801      	cmp	r0, #1
+  47d630:	d106      	bne.n	47d640 <.text+0x88>
+  47d632:	7830      	ldrb	r0, [r6, #0]
+  47d634:	f3c0 1180 	ubfx	r1, r0, #6, #1
+  47d638:	b2c9      	uxtb	r1, r1
+  47d63a:	2001      	movs	r0, #1
+  47d63c:	f02e fb90 	bl	4abd60 <.text+0x2e7a8>
+  47d640:	e0b9      	b.n	47d7b6 <.text+0x1fe>

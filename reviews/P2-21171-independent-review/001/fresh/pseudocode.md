@@ -1,0 +1,5 @@
+# Seven-word two-bank set and forty-byte unwind tail
+
+Partial/unaccepted;198 instruction bytes481230..4812F6. Continues4810B0;40-byteframe,R6bankselector,R7inputpointer,R4initialized0,SP8saved473940result. Mode3 testUXTBbankselector==1 skipsfirstbank;otherwise k0..6inorder:freshword[R7+4*k]input,loadpointerliteral481768+4*k,freshword[target],ORinputwithtarget,storetarget. ThenR6=UXTB(R6);if0skipsecondbank;otherwisesevennewinputreadsandtargetORwriteswithpointerliterals481784+4*k. Selector0firstonly,1secondonly,2..255both. Preserveunrolledread-before-targetwriteorderandinputrereads/aliasing.
+
+Allacceptedmodesjoin4812E8:reloadSP8fullhelperresult,MSR PRIMASK,R0;R0=R4 (initialized0andunchangedwithinallmodebranches). Validationerrorsfromprefixjoin4812F0directlywithR0status5/6,skippingMSR. ADDSP16discardsfourlocals/savedentryR0..R3;LDMIA R4,R5,R6,R7,R8,PC24 completes40-byteunwind. R1/R2/R3notrestored;no POPscratchaliasintoarguments. Mode3hasnoadditionalhelpercalls. No C/freeze/fullcoverage/equality claim.

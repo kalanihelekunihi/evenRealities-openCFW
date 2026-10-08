@@ -1,0 +1,50 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpzjf8j0xo/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047cd68 <.text>:
+  47cd68:	f1b2 7f80 	cmp.w	r2, #16777216	@ 0x1000000
+  47cd6c:	d365      	bcc.n	47ce3a <.text+0xd2>
+  47cd6e:	b5f0      	push	{r4, r5, r6, r7, lr}
+  47cd70:	fab2 f782 	clz	r7, r2
+  47cd74:	fab1 f481 	clz	r4, r1
+  47cd78:	f1c7 060f 	rsb	r6, r7, #15
+  47cd7c:	1b3d      	subs	r5, r7, r4
+  47cd7e:	fa22 f306 	lsr.w	r3, r2, r6
+  47cd82:	f107 0e11 	add.w	lr, r7, #17
+  47cd86:	41f2      	rors	r2, r6
+  47cd88:	3520      	adds	r5, #32
+  47cd8a:	405a      	eors	r2, r3
+  47cd8c:	f1b5 070f 	subs.w	r7, r5, #15
+  47cd90:	d9b8      	bls.n	47cd04 <.text-0x64>
+  47cd92:	4041      	eors	r1, r0
+  47cd94:	f1c4 0620 	rsb	r6, r4, #32
+  47cd98:	40a0      	lsls	r0, r4
+  47cd9a:	41f1      	rors	r1, r6
+  47cd9c:	4041      	eors	r1, r0
+  47cd9e:	fbb1 fcf3 	udiv	ip, r1, r3
+  47cda2:	fb03 111c 	mls	r1, r3, ip, r1
+  47cda6:	fba2 450c 	umull	r4, r5, r2, ip
+  47cdaa:	1b00      	subs	r0, r0, r4
+  47cdac:	41a9      	sbcs	r1, r5
+  47cdae:	d203      	bcs.n	47cdb8 <.text+0x50>
+  47cdb0:	f1bc 0c01 	subs.w	ip, ip, #1
+  47cdb4:	1880      	adds	r0, r0, r2
+  47cdb6:	4159      	adcs	r1, r3
+  47cdb8:	2f0f      	cmp	r7, #15
+  47cdba:	d312      	bcc.n	47cde2 <.text+0x7a>
+  47cdbc:	3f0f      	subs	r7, #15
+  47cdbe:	03c9      	lsls	r1, r1, #15
+  47cdc0:	ea41 4150 	orr.w	r1, r1, r0, lsr #17
+  47cdc4:	fbb1 f6f3 	udiv	r6, r1, r3
+  47cdc8:	fb03 1116 	mls	r1, r3, r6, r1
+  47cdcc:	fba2 4506 	umull	r4, r5, r2, r6
+  47cdd0:	ebd4 30c0 	rsbs	r0, r4, r0, lsl #15
+  47cdd4:	41a9      	sbcs	r1, r5
+  47cdd6:	d202      	bcs.n	47cdde <.text+0x76>
+  47cdd8:	1e76      	subs	r6, r6, #1
+  47cdda:	1880      	adds	r0, r0, r2
+  47cddc:	4159      	adcs	r1, r3
+  47cdde:	ea46 3ccc 	orr.w	ip, r6, ip, lsl #15

@@ -1,0 +1,16 @@
+{
+  "status": "EXPECTED_REJECTION",
+  "mutation": "Set bit4 instead of bit5 on third write",
+  "fixture": {
+    "seed": 0,
+    "irq": 0,
+    "arg": 1
+  },
+  "stock_third_write": 65569,
+  "mutant_third_write": 65553,
+  "exit_code": 1,
+  "mutant_elf_sha256": "913e2f75eb483250bf0f5f817aac89d0ba32129a3396de57cb7935f594e29f29",
+  "limits": [
+    "Temporary mutant only; production source unchanged."
+  ]
+}

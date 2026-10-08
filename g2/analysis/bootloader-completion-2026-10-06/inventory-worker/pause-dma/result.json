@@ -1,0 +1,344 @@
+{
+  "status": "PASS",
+  "cases": 7,
+  "distinct_original_instruction_bytes": 422,
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "stock_ranges": {
+    "scheduler_entry": [
+      "0x4240aa",
+      "0x4240d1"
+    ],
+    "scheduler_pause_continuation": [
+      "0x4240d2",
+      "0x42410d"
+    ],
+    "scheduler_dma_continuation": [
+      "0x42410e",
+      "0x42411f"
+    ],
+    "cq_pause_poll": [
+      "0x423fb8",
+      "0x42403d"
+    ],
+    "dma_program": [
+      "0x42403e",
+      "0x4240a9"
+    ],
+    "status_check": [
+      "0x41d246",
+      "0x41d289"
+    ]
+  },
+  "stock_range_sha256": {
+    "scheduler_entry": "8160fbf3efb2494fdda27015af1b5764ad016aea36f7da20d0f135d6300f72e9",
+    "scheduler_pause_continuation": "da3ecf6ba252a3fb32201166b498d6887e90807bbe2125f9ffa8c2aa74c559b6",
+    "scheduler_dma_continuation": "28a3cdd1a41801be8f13bcbb0a3c63b9fce799d53faee3a0129ae9d247e9baf0",
+    "cq_pause_poll": "ff20411c8e4283f16d82cb8373e95004d648e4c03d151ba89bf43ff7d58a2794",
+    "dma_program": "d075d73aba138735bc9229bcf8672cb6a1c2fadec21985d2159043534ad130e1",
+    "status_check": "c6bf044dbb8f4a358cc93e10eff0b2ec7065b47f8ff08cde9f912d749fd42ef9"
+  },
+  "source_sha256": {
+    "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/pause-dma/verify_pause_dma.py": "532c66efea1e80a1e4d296aeefe49f400736fc4ecc82a5a6e254279dfe335b96",
+    "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/pause-dma/Makefile": "a8cd8f73edc8c24bb58df48ef86952ae700294b726f8b1d6666bb4ec6fde3b7d",
+    "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/pause-dma/module.ld": "e436128c95211f09c2886e6dde4b035b35b79ee4bccce8532b986a904ce0df38",
+    "g2/components/bootloader/nor_mspi_queue/mspi_pause_dma.c": "02ea153066ae15b45e9922233b16332f65fc7a631e38b5db6622010bb3ee2907",
+    "g2/components/bootloader/nor_mspi_queue/mspi_pause_dma.h": "ad097ab0514115b87286e3bca300ff6a50d4eaa2ccfb453a18ca217958009d48",
+    "g2/components/bootloader/nor_mspi_init/status_poll.c": "210816cac79fd4286c40ad55e7c61782aff27d248232188079de4185409773c9"
+  },
+  "source_elf_sha256": "7b999c34dc978cc7724448d97a9f6ff75f5344ffb92102656c7d3554652af6ef",
+  "cases_detail": [
+    {
+      "fixture": {
+        "prior": 1,
+        "primask": 1
+      },
+      "return": 0,
+      "delay_calls": 0,
+      "clock_calls": [],
+      "state_sha256": "c17a4e75c1efc1a569f910442dc46f7efc13195930f383285ea91bc78cb9d4e2",
+      "mmio_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe"
+    },
+    {
+      "fixture": {
+        "prior": 0,
+        "primask": 0,
+        "dma_status": 0
+      },
+      "return": 0,
+      "delay_calls": 0,
+      "clock_calls": [
+        [
+          4,
+          16,
+          0
+        ]
+      ],
+      "state_sha256": "5b03dbb9b667343c5f7b4280ee5e499d182f517b1aca9b2f16d43023c153acb9",
+      "mmio_sha256": "99c480140ab2ed38bdf8413b091f7d82f44229fffc7618ee2beaaf3e593a1475"
+    },
+    {
+      "fixture": {
+        "prior": 0,
+        "control": 1,
+        "control_aux": 8,
+        "status_aux": 128,
+        "dma_status": 0,
+        "index": 1,
+        "ring": 4
+      },
+      "return": 0,
+      "delay_calls": 0,
+      "clock_calls": [
+        [
+          4,
+          16,
+          0
+        ]
+      ],
+      "state_sha256": "d11428c428c196648e65b6d9f5a57df57a7df3f83aeb2723e2eb28aff66f7869",
+      "mmio_sha256": "fff69ab189861226c5e37fcd8165cd19ed25d7a3c6b3112e3536b21bc7ef7cc9"
+    },
+    {
+      "fixture": {
+        "prior": 0,
+        "control": 1,
+        "clear_busy_after": 1,
+        "dma_status": 1,
+        "status_ready_after": 2,
+        "index": 3,
+        "ring": 4,
+        "module": 2,
+        "clock_status": 0
+      },
+      "return": 0,
+      "delay_calls": 2,
+      "clock_calls": [
+        [
+          4,
+          18,
+          0
+        ]
+      ],
+      "state_sha256": "0ffbbff92f8d33b9a4a09e50f8bb1045f812287482cefb1712ad05c090dd2a79",
+      "mmio_sha256": "59aa8c7fcd3fc1e6a160991fd49d07dbcb13809394eef01a72f7b3b20aa32b7d"
+    },
+    {
+      "fixture": {
+        "prior": 0,
+        "control": 1,
+        "control_aux": 8,
+        "status_aux": 0,
+        "module": 1
+      },
+      "return": 4,
+      "delay_calls": 100000,
+      "clock_calls": [],
+      "state_sha256": "27540501955b522d5c860913e117ae38e6a023c0d234a111277536892949670a",
+      "mmio_sha256": "a97308574a7ae1d73b0100c2771b4b5ca493a8af7b586bfbdc5f93f5368b2939"
+    },
+    {
+      "fixture": {
+        "prior": 0,
+        "control": 0,
+        "dma_status": 0,
+        "clock_status": 9,
+        "index": 3,
+        "ring": 4
+      },
+      "return": 9,
+      "delay_calls": 0,
+      "clock_calls": [
+        [
+          4,
+          16,
+          9
+        ]
+      ],
+      "state_sha256": "16c6fa27708f2429c8e5030a9cd6369bfa73fc32600cae98898926288634f052",
+      "mmio_sha256": "c656134c14c80746ea0b9970aed960a8ca04c81ad4c22880aa91a2eaf8c162b3"
+    },
+    {
+      "fixture": {
+        "prior": 0,
+        "control": 0,
+        "dma_status": 0,
+        "clock_status": 0,
+        "index": 4294967295,
+        "ring": 0
+      },
+      "return": 0,
+      "delay_calls": 0,
+      "clock_calls": [
+        [
+          4,
+          16,
+          0
+        ]
+      ],
+      "state_sha256": "ef4cb6b5bd8677584b1d3f4447adcf0139d6bb511e334a5479be08a603337c13",
+      "mmio_sha256": "303b82c7387a5adda67e125f7a7c29de0d3160d822487790011b0541ff21c528"
+    }
+  ],
+  "original_trace": {
+    "0x4240aa": "f8b5",
+    "0x4240ac": "0600",
+    "0x4240ae": "0f00",
+    "0x4240b0": "0025",
+    "0x4240b2": "f7f71bfc",
+    "0x41b8ec": "eff31080",
+    "0x41b8f0": "72b6",
+    "0x41b8f2": "7047",
+    "0x4240b6": "0090",
+    "0x4240b8": "d6f84048",
+    "0x4240bc": "d6f84008",
+    "0x4240c0": "3f18",
+    "0x4240c2": "c6f84078",
+    "0x4240c6": "0098",
+    "0x4240c8": "80f31088",
+    "0x4240cc": "002c",
+    "0x4240ce": "25d1",
+    "0x42411c": "2800",
+    "0x42411e": "f2bd",
+    "0x4240d0": "3000",
+    "0x4240d2": "fff771ff",
+    "0x423fb8": "f8b5",
+    "0x423fba": "0400",
+    "0x423fbc": "0020",
+    "0x423fbe": "dff8145c",
+    "0x423fc2": "2e00",
+    "0x423fc4": "dff8107c",
+    "0x423fc8": "6068",
+    "0x423fca": "17eb0030",
+    "0x423fce": "5ff40001",
+    "0x423fd2": "c0f8b412",
+    "0x423fd6": "06e0",
+    "0x423fe6": "6068",
+    "0x423fe8": "17eb0030",
+    "0x423fec": "d0f8a002",
+    "0x423ff0": "c007",
+    "0x423ff2": "15d5",
+    "0x424020": "0120",
+    "0x424022": "0090",
+    "0x424024": "0023",
+    "0x424026": "0122",
+    "0x424028": "6068",
+    "0x42402a": "17eb0037",
+    "0x42402e": "17f58271",
+    "0x424032": "2800",
+    "0x424034": "f9f707f9",
+    "0x41d246": "2de9f041",
+    "0x41d24a": "0500",
+    "0x41d24c": "0e00",
+    "0x41d24e": "1700",
+    "0x41d250": "9846",
+    "0x41d252": "069c",
+    "0x41d254": "06e0",
+    "0x41d264": "2000",
+    "0x41d266": "c0b2",
+    "0x41d268": "0028",
+    "0x41d26a": "05d0",
+    "0x41d26c": "3068",
+    "0x41d26e": "3840",
+    "0x41d270": "4045",
+    "0x41d272": "f0d1",
+    "0x41d274": "0020",
+    "0x41d276": "06e0",
+    "0x41d286": "bde8f081",
+    "0x424038": "f2bd",
+    "0x4240d6": "0028",
+    "0x4240d8": "21d1",
+    "0x4240da": "0020",
+    "0x4240dc": "7062",
+    "0x4240de": "dff8f80a",
+    "0x4240e2": "7168",
+    "0x4240e4": "10eb0131",
+    "0x4240e8": "4022",
+    "0x4240ea": "c1f80822",
+    "0x4240ee": "7168",
+    "0x4240f0": "10eb0131",
+    "0x4240f4": "7268",
+    "0x4240f6": "10eb0230",
+    "0x4240fa": "d0f80002",
+    "0x4240fe": "50f04000",
+    "0x424102": "c1f80002",
+    "0x424106": "0120",
+    "0x424108": "86f83c08",
+    "0x42410c": "3000",
+    "0x42410e": "fff796ff",
+    "0x42403e": "38b5",
+    "0x424040": "4468",
+    "0x424042": "d0f85028",
+    "0x424046": "521c",
+    "0x424048": "d0f84818",
+    "0x42404c": "b2fbf1f3",
+    "0x424050": "01fb1322",
+    "0x424054": "d0f85438",
+    "0x424058": "1821",
+    "0x42405a": "4a43",
+    "0x42405c": "03eb0205",
+    "0x424060": "4168",
+    "0x424062": "1031",
+    "0x424064": "c9b2",
+    "0x424066": "0420",
+    "0x424068": "fef742f9",
+    "0x42406c": "0028",
+    "0x42406e": "1bd1",
+    "0x424070": "dff8640b",
+    "0x424074": "0021",
+    "0x424076": "10eb0432",
+    "0x42407a": "c2f80011",
+    "0x42407e": "2968",
+    "0x424080": "10eb0432",
+    "0x424084": "c2f80811",
+    "0x424088": "6968",
+    "0x42408a": "10eb0432",
+    "0x42408e": "c2f80c11",
+    "0x424092": "a968",
+    "0x424094": "10eb0432",
+    "0x424098": "c2f81011",
+    "0x42409c": "e968",
+    "0x42409e": "10eb0430",
+    "0x4240a2": "c0f80011",
+    "0x4240a6": "0020",
+    "0x4240a8": "32bd",
+    "0x424112": "0500",
+    "0x424114": "002d",
+    "0x424116": "01d0",
+    "0x423ff4": "6068",
+    "0x423ff6": "17eb0030",
+    "0x423ffa": "d0f8ac02",
+    "0x423ffe": "c0f3c000",
+    "0x424002": "0028",
+    "0x424004": "08d0",
+    "0x424006": "6068",
+    "0x424008": "17eb0030",
+    "0x42400c": "d0f8b802",
+    "0x424010": "c009",
+    "0x424012": "10f00100",
+    "0x424016": "00e0",
+    "0x42401a": "c0b2",
+    "0x42401c": "0028",
+    "0x42401e": "dbd0",
+    "0x424018": "0020",
+    "0x423fd8": "3000",
+    "0x423fda": "461e",
+    "0x423fdc": "0028",
+    "0x423fde": "2cd0",
+    "0x423fe0": "0120",
+    "0x423fe2": "f9f7edf8",
+    "0x41d256": "2800",
+    "0x41d258": "451e",
+    "0x41d25a": "0028",
+    "0x41d25c": "12d0",
+    "0x41d25e": "0120",
+    "0x41d260": "fff7aeff",
+    "0x42403a": "0420",
+    "0x42403c": "fce7",
+    "0x424118": "2800",
+    "0x42411a": "00e0"
+  },
+  "limits": [
+    "MMIO is synthetic; delay callback can evolve modeled peripheral status.",
+    "No elapsed-time, hardware CQ, DMA completion, or flash effect is asserted."
+  ]
+}

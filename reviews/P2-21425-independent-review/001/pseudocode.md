@@ -1,0 +1,3 @@
+# Event context store and guarded flagged dispatch prefix
+
+Partial/unaccepted;62 instructionbytes484476..4844B4. PUSH entryR2/R3,R4/R5/R6/LR24B;R5=entry1record,R6=word[record+84];storeentryR0word[contextR6+16]. R4=wordliteral4849C8global;freshbyte[global+32]nonzero→484502unresolved. Elseword[context]zero→4844B4unresolved. NonzeroR1=524288,R0=freshword[context];43E0E0(liveR2/R3);zeroresult→4844B4. Nonzero byte[global+32]=1;R2=recordR5,R1=34,R0=freshword[context];451670(liveR3helpereffect);afterreturnbyte[global+32]=0. Fallthrough4844B4unresolved. Retain guardset-beforecallback/clear-afterreturn,pre-guardcontextstore andfreshcontextreads. No C,freeze,wholecoverage or equalityclaim.

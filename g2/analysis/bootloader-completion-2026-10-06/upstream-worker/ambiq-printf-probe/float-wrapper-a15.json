@@ -1,0 +1,1167 @@
+{
+  "status": "PASS",
+  "cases": 72,
+  "model": "A15",
+  "comparisons": [
+    {
+      "format": "%f",
+      "value": "1.25",
+      "original": [
+        "312e"
+      ],
+      "count": 2,
+      "conversion": [
+        {
+          "double_bits": "0x3ff4000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x3fa00000",
+          "precision": 4294967295
+        }
+      ]
+    },
+    {
+      "format": "%d:%f",
+      "value": "1.25",
+      "original": [
+        "373a312e"
+      ],
+      "count": 4,
+      "conversion": [
+        {
+          "double_bits": "0x3ff4000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x3fa00000",
+          "precision": 4294967295
+        }
+      ]
+    },
+    {
+      "format": "%f",
+      "value": "-1.25",
+      "original": [
+        "2d312e"
+      ],
+      "count": 3,
+      "conversion": [
+        {
+          "double_bits": "0xbff4000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0xbfa00000",
+          "precision": 4294967295
+        }
+      ]
+    },
+    {
+      "format": "%d:%f",
+      "value": "-1.25",
+      "original": [
+        "373a2d312e"
+      ],
+      "count": 5,
+      "conversion": [
+        {
+          "double_bits": "0xbff4000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0xbfa00000",
+          "precision": 4294967295
+        }
+      ]
+    },
+    {
+      "format": "%f",
+      "value": "0.0",
+      "original": [
+        "302e30"
+      ],
+      "count": 3,
+      "conversion": [
+        {
+          "double_bits": "0x0",
+          "fpscr_before": "0x0",
+          "single_bits": "0x0",
+          "precision": 4294967295
+        }
+      ]
+    },
+    {
+      "format": "%d:%f",
+      "value": "0.0",
+      "original": [
+        "373a302e30"
+      ],
+      "count": 5,
+      "conversion": [
+        {
+          "double_bits": "0x0",
+          "fpscr_before": "0x0",
+          "single_bits": "0x0",
+          "precision": 4294967295
+        }
+      ]
+    },
+    {
+      "format": "%f",
+      "value": "-0.0",
+      "original": [
+        "302e30"
+      ],
+      "count": 3,
+      "conversion": [
+        {
+          "double_bits": "0x8000000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x80000000",
+          "precision": 4294967295
+        }
+      ]
+    },
+    {
+      "format": "%d:%f",
+      "value": "-0.0",
+      "original": [
+        "373a302e30"
+      ],
+      "count": 5,
+      "conversion": [
+        {
+          "double_bits": "0x8000000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x80000000",
+          "precision": 4294967295
+        }
+      ]
+    },
+    {
+      "format": "%f",
+      "value": "1.363995",
+      "original": [
+        "312e"
+      ],
+      "count": 2,
+      "conversion": [
+        {
+          "double_bits": "0x3ff5d2ec6bce8534",
+          "fpscr_before": "0x0",
+          "single_bits": "0x3fae9763",
+          "precision": 4294967295
+        }
+      ]
+    },
+    {
+      "format": "%d:%f",
+      "value": "1.363995",
+      "original": [
+        "373a312e"
+      ],
+      "count": 4,
+      "conversion": [
+        {
+          "double_bits": "0x3ff5d2ec6bce8534",
+          "fpscr_before": "0x0",
+          "single_bits": "0x3fae9763",
+          "precision": 4294967295
+        }
+      ]
+    },
+    {
+      "format": "%f",
+      "value": "1.996",
+      "original": [
+        "322e"
+      ],
+      "count": 2,
+      "conversion": [
+        {
+          "double_bits": "0x3fffef9db22d0e56",
+          "fpscr_before": "0x0",
+          "single_bits": "0x3fff7cee",
+          "precision": 4294967295
+        }
+      ]
+    },
+    {
+      "format": "%d:%f",
+      "value": "1.996",
+      "original": [
+        "373a322e"
+      ],
+      "count": 4,
+      "conversion": [
+        {
+          "double_bits": "0x3fffef9db22d0e56",
+          "fpscr_before": "0x0",
+          "single_bits": "0x3fff7cee",
+          "precision": 4294967295
+        }
+      ]
+    },
+    {
+      "format": "%f",
+      "value": "inf",
+      "original": [
+        "232e23"
+      ],
+      "count": 3,
+      "conversion": [
+        {
+          "double_bits": "0x7ff0000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x7f800000",
+          "precision": 4294967295
+        }
+      ]
+    },
+    {
+      "format": "%d:%f",
+      "value": "inf",
+      "original": [
+        "373a232e23"
+      ],
+      "count": 5,
+      "conversion": [
+        {
+          "double_bits": "0x7ff0000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x7f800000",
+          "precision": 4294967295
+        }
+      ]
+    },
+    {
+      "format": "%f",
+      "value": "-inf",
+      "original": [
+        "232e23"
+      ],
+      "count": 3,
+      "conversion": [
+        {
+          "double_bits": "0xfff0000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0xff800000",
+          "precision": 4294967295
+        }
+      ]
+    },
+    {
+      "format": "%d:%f",
+      "value": "-inf",
+      "original": [
+        "373a232e23"
+      ],
+      "count": 5,
+      "conversion": [
+        {
+          "double_bits": "0xfff0000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0xff800000",
+          "precision": 4294967295
+        }
+      ]
+    },
+    {
+      "format": "%f",
+      "value": "nan",
+      "original": [
+        "232e23"
+      ],
+      "count": 3,
+      "conversion": [
+        {
+          "double_bits": "0x7ff8000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x7fc00000",
+          "precision": 4294967295
+        }
+      ]
+    },
+    {
+      "format": "%d:%f",
+      "value": "nan",
+      "original": [
+        "373a232e23"
+      ],
+      "count": 5,
+      "conversion": [
+        {
+          "double_bits": "0x7ff8000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x7fc00000",
+          "precision": 4294967295
+        }
+      ]
+    },
+    {
+      "format": "%.0f",
+      "value": "1.25",
+      "original": [
+        "312e"
+      ],
+      "count": 2,
+      "conversion": [
+        {
+          "double_bits": "0x3ff4000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x3fa00000",
+          "precision": 0
+        }
+      ]
+    },
+    {
+      "format": "%d:%.0f",
+      "value": "1.25",
+      "original": [
+        "373a312e"
+      ],
+      "count": 4,
+      "conversion": [
+        {
+          "double_bits": "0x3ff4000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x3fa00000",
+          "precision": 0
+        }
+      ]
+    },
+    {
+      "format": "%.0f",
+      "value": "-1.25",
+      "original": [
+        "2d312e"
+      ],
+      "count": 3,
+      "conversion": [
+        {
+          "double_bits": "0xbff4000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0xbfa00000",
+          "precision": 0
+        }
+      ]
+    },
+    {
+      "format": "%d:%.0f",
+      "value": "-1.25",
+      "original": [
+        "373a2d312e"
+      ],
+      "count": 5,
+      "conversion": [
+        {
+          "double_bits": "0xbff4000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0xbfa00000",
+          "precision": 0
+        }
+      ]
+    },
+    {
+      "format": "%.0f",
+      "value": "0.0",
+      "original": [
+        "302e30"
+      ],
+      "count": 3,
+      "conversion": [
+        {
+          "double_bits": "0x0",
+          "fpscr_before": "0x0",
+          "single_bits": "0x0",
+          "precision": 0
+        }
+      ]
+    },
+    {
+      "format": "%d:%.0f",
+      "value": "0.0",
+      "original": [
+        "373a302e30"
+      ],
+      "count": 5,
+      "conversion": [
+        {
+          "double_bits": "0x0",
+          "fpscr_before": "0x0",
+          "single_bits": "0x0",
+          "precision": 0
+        }
+      ]
+    },
+    {
+      "format": "%.0f",
+      "value": "-0.0",
+      "original": [
+        "302e30"
+      ],
+      "count": 3,
+      "conversion": [
+        {
+          "double_bits": "0x8000000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x80000000",
+          "precision": 0
+        }
+      ]
+    },
+    {
+      "format": "%d:%.0f",
+      "value": "-0.0",
+      "original": [
+        "373a302e30"
+      ],
+      "count": 5,
+      "conversion": [
+        {
+          "double_bits": "0x8000000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x80000000",
+          "precision": 0
+        }
+      ]
+    },
+    {
+      "format": "%.0f",
+      "value": "1.363995",
+      "original": [
+        "312e"
+      ],
+      "count": 2,
+      "conversion": [
+        {
+          "double_bits": "0x3ff5d2ec6bce8534",
+          "fpscr_before": "0x0",
+          "single_bits": "0x3fae9763",
+          "precision": 0
+        }
+      ]
+    },
+    {
+      "format": "%d:%.0f",
+      "value": "1.363995",
+      "original": [
+        "373a312e"
+      ],
+      "count": 4,
+      "conversion": [
+        {
+          "double_bits": "0x3ff5d2ec6bce8534",
+          "fpscr_before": "0x0",
+          "single_bits": "0x3fae9763",
+          "precision": 0
+        }
+      ]
+    },
+    {
+      "format": "%.0f",
+      "value": "1.996",
+      "original": [
+        "322e"
+      ],
+      "count": 2,
+      "conversion": [
+        {
+          "double_bits": "0x3fffef9db22d0e56",
+          "fpscr_before": "0x0",
+          "single_bits": "0x3fff7cee",
+          "precision": 0
+        }
+      ]
+    },
+    {
+      "format": "%d:%.0f",
+      "value": "1.996",
+      "original": [
+        "373a322e"
+      ],
+      "count": 4,
+      "conversion": [
+        {
+          "double_bits": "0x3fffef9db22d0e56",
+          "fpscr_before": "0x0",
+          "single_bits": "0x3fff7cee",
+          "precision": 0
+        }
+      ]
+    },
+    {
+      "format": "%.0f",
+      "value": "inf",
+      "original": [
+        "232e23"
+      ],
+      "count": 3,
+      "conversion": [
+        {
+          "double_bits": "0x7ff0000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x7f800000",
+          "precision": 0
+        }
+      ]
+    },
+    {
+      "format": "%d:%.0f",
+      "value": "inf",
+      "original": [
+        "373a232e23"
+      ],
+      "count": 5,
+      "conversion": [
+        {
+          "double_bits": "0x7ff0000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x7f800000",
+          "precision": 0
+        }
+      ]
+    },
+    {
+      "format": "%.0f",
+      "value": "-inf",
+      "original": [
+        "232e23"
+      ],
+      "count": 3,
+      "conversion": [
+        {
+          "double_bits": "0xfff0000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0xff800000",
+          "precision": 0
+        }
+      ]
+    },
+    {
+      "format": "%d:%.0f",
+      "value": "-inf",
+      "original": [
+        "373a232e23"
+      ],
+      "count": 5,
+      "conversion": [
+        {
+          "double_bits": "0xfff0000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0xff800000",
+          "precision": 0
+        }
+      ]
+    },
+    {
+      "format": "%.0f",
+      "value": "nan",
+      "original": [
+        "232e23"
+      ],
+      "count": 3,
+      "conversion": [
+        {
+          "double_bits": "0x7ff8000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x7fc00000",
+          "precision": 0
+        }
+      ]
+    },
+    {
+      "format": "%d:%.0f",
+      "value": "nan",
+      "original": [
+        "373a232e23"
+      ],
+      "count": 5,
+      "conversion": [
+        {
+          "double_bits": "0x7ff8000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x7fc00000",
+          "precision": 0
+        }
+      ]
+    },
+    {
+      "format": "%.2f",
+      "value": "1.25",
+      "original": [
+        "312e3235"
+      ],
+      "count": 4,
+      "conversion": [
+        {
+          "double_bits": "0x3ff4000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x3fa00000",
+          "precision": 2
+        }
+      ]
+    },
+    {
+      "format": "%d:%.2f",
+      "value": "1.25",
+      "original": [
+        "373a312e3235"
+      ],
+      "count": 6,
+      "conversion": [
+        {
+          "double_bits": "0x3ff4000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x3fa00000",
+          "precision": 2
+        }
+      ]
+    },
+    {
+      "format": "%.2f",
+      "value": "-1.25",
+      "original": [
+        "2d312e3235"
+      ],
+      "count": 5,
+      "conversion": [
+        {
+          "double_bits": "0xbff4000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0xbfa00000",
+          "precision": 2
+        }
+      ]
+    },
+    {
+      "format": "%d:%.2f",
+      "value": "-1.25",
+      "original": [
+        "373a2d312e3235"
+      ],
+      "count": 7,
+      "conversion": [
+        {
+          "double_bits": "0xbff4000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0xbfa00000",
+          "precision": 2
+        }
+      ]
+    },
+    {
+      "format": "%.2f",
+      "value": "0.0",
+      "original": [
+        "302e30"
+      ],
+      "count": 3,
+      "conversion": [
+        {
+          "double_bits": "0x0",
+          "fpscr_before": "0x0",
+          "single_bits": "0x0",
+          "precision": 2
+        }
+      ]
+    },
+    {
+      "format": "%d:%.2f",
+      "value": "0.0",
+      "original": [
+        "373a302e30"
+      ],
+      "count": 5,
+      "conversion": [
+        {
+          "double_bits": "0x0",
+          "fpscr_before": "0x0",
+          "single_bits": "0x0",
+          "precision": 2
+        }
+      ]
+    },
+    {
+      "format": "%.2f",
+      "value": "-0.0",
+      "original": [
+        "302e30"
+      ],
+      "count": 3,
+      "conversion": [
+        {
+          "double_bits": "0x8000000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x80000000",
+          "precision": 2
+        }
+      ]
+    },
+    {
+      "format": "%d:%.2f",
+      "value": "-0.0",
+      "original": [
+        "373a302e30"
+      ],
+      "count": 5,
+      "conversion": [
+        {
+          "double_bits": "0x8000000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x80000000",
+          "precision": 2
+        }
+      ]
+    },
+    {
+      "format": "%.2f",
+      "value": "1.363995",
+      "original": [
+        "312e3336"
+      ],
+      "count": 4,
+      "conversion": [
+        {
+          "double_bits": "0x3ff5d2ec6bce8534",
+          "fpscr_before": "0x0",
+          "single_bits": "0x3fae9763",
+          "precision": 2
+        }
+      ]
+    },
+    {
+      "format": "%d:%.2f",
+      "value": "1.363995",
+      "original": [
+        "373a312e3336"
+      ],
+      "count": 6,
+      "conversion": [
+        {
+          "double_bits": "0x3ff5d2ec6bce8534",
+          "fpscr_before": "0x0",
+          "single_bits": "0x3fae9763",
+          "precision": 2
+        }
+      ]
+    },
+    {
+      "format": "%.2f",
+      "value": "1.996",
+      "original": [
+        "322e3030"
+      ],
+      "count": 4,
+      "conversion": [
+        {
+          "double_bits": "0x3fffef9db22d0e56",
+          "fpscr_before": "0x0",
+          "single_bits": "0x3fff7cee",
+          "precision": 2
+        }
+      ]
+    },
+    {
+      "format": "%d:%.2f",
+      "value": "1.996",
+      "original": [
+        "373a322e3030"
+      ],
+      "count": 6,
+      "conversion": [
+        {
+          "double_bits": "0x3fffef9db22d0e56",
+          "fpscr_before": "0x0",
+          "single_bits": "0x3fff7cee",
+          "precision": 2
+        }
+      ]
+    },
+    {
+      "format": "%.2f",
+      "value": "inf",
+      "original": [
+        "232e23"
+      ],
+      "count": 3,
+      "conversion": [
+        {
+          "double_bits": "0x7ff0000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x7f800000",
+          "precision": 2
+        }
+      ]
+    },
+    {
+      "format": "%d:%.2f",
+      "value": "inf",
+      "original": [
+        "373a232e23"
+      ],
+      "count": 5,
+      "conversion": [
+        {
+          "double_bits": "0x7ff0000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x7f800000",
+          "precision": 2
+        }
+      ]
+    },
+    {
+      "format": "%.2f",
+      "value": "-inf",
+      "original": [
+        "232e23"
+      ],
+      "count": 3,
+      "conversion": [
+        {
+          "double_bits": "0xfff0000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0xff800000",
+          "precision": 2
+        }
+      ]
+    },
+    {
+      "format": "%d:%.2f",
+      "value": "-inf",
+      "original": [
+        "373a232e23"
+      ],
+      "count": 5,
+      "conversion": [
+        {
+          "double_bits": "0xfff0000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0xff800000",
+          "precision": 2
+        }
+      ]
+    },
+    {
+      "format": "%.2f",
+      "value": "nan",
+      "original": [
+        "232e23"
+      ],
+      "count": 3,
+      "conversion": [
+        {
+          "double_bits": "0x7ff8000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x7fc00000",
+          "precision": 2
+        }
+      ]
+    },
+    {
+      "format": "%d:%.2f",
+      "value": "nan",
+      "original": [
+        "373a232e23"
+      ],
+      "count": 5,
+      "conversion": [
+        {
+          "double_bits": "0x7ff8000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x7fc00000",
+          "precision": 2
+        }
+      ]
+    },
+    {
+      "format": "%.6f",
+      "value": "1.25",
+      "original": [
+        "312e323530303030"
+      ],
+      "count": 8,
+      "conversion": [
+        {
+          "double_bits": "0x3ff4000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x3fa00000",
+          "precision": 6
+        }
+      ]
+    },
+    {
+      "format": "%d:%.6f",
+      "value": "1.25",
+      "original": [
+        "373a312e323530303030"
+      ],
+      "count": 10,
+      "conversion": [
+        {
+          "double_bits": "0x3ff4000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x3fa00000",
+          "precision": 6
+        }
+      ]
+    },
+    {
+      "format": "%.6f",
+      "value": "-1.25",
+      "original": [
+        "2d312e323530303030"
+      ],
+      "count": 9,
+      "conversion": [
+        {
+          "double_bits": "0xbff4000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0xbfa00000",
+          "precision": 6
+        }
+      ]
+    },
+    {
+      "format": "%d:%.6f",
+      "value": "-1.25",
+      "original": [
+        "373a2d312e323530303030"
+      ],
+      "count": 11,
+      "conversion": [
+        {
+          "double_bits": "0xbff4000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0xbfa00000",
+          "precision": 6
+        }
+      ]
+    },
+    {
+      "format": "%.6f",
+      "value": "0.0",
+      "original": [
+        "302e30"
+      ],
+      "count": 3,
+      "conversion": [
+        {
+          "double_bits": "0x0",
+          "fpscr_before": "0x0",
+          "single_bits": "0x0",
+          "precision": 6
+        }
+      ]
+    },
+    {
+      "format": "%d:%.6f",
+      "value": "0.0",
+      "original": [
+        "373a302e30"
+      ],
+      "count": 5,
+      "conversion": [
+        {
+          "double_bits": "0x0",
+          "fpscr_before": "0x0",
+          "single_bits": "0x0",
+          "precision": 6
+        }
+      ]
+    },
+    {
+      "format": "%.6f",
+      "value": "-0.0",
+      "original": [
+        "302e30"
+      ],
+      "count": 3,
+      "conversion": [
+        {
+          "double_bits": "0x8000000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x80000000",
+          "precision": 6
+        }
+      ]
+    },
+    {
+      "format": "%d:%.6f",
+      "value": "-0.0",
+      "original": [
+        "373a302e30"
+      ],
+      "count": 5,
+      "conversion": [
+        {
+          "double_bits": "0x8000000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x80000000",
+          "precision": 6
+        }
+      ]
+    },
+    {
+      "format": "%.6f",
+      "value": "1.363995",
+      "original": [
+        "312e333633393935"
+      ],
+      "count": 8,
+      "conversion": [
+        {
+          "double_bits": "0x3ff5d2ec6bce8534",
+          "fpscr_before": "0x0",
+          "single_bits": "0x3fae9763",
+          "precision": 6
+        }
+      ]
+    },
+    {
+      "format": "%d:%.6f",
+      "value": "1.363995",
+      "original": [
+        "373a312e333633393935"
+      ],
+      "count": 10,
+      "conversion": [
+        {
+          "double_bits": "0x3ff5d2ec6bce8534",
+          "fpscr_before": "0x0",
+          "single_bits": "0x3fae9763",
+          "precision": 6
+        }
+      ]
+    },
+    {
+      "format": "%.6f",
+      "value": "1.996",
+      "original": [
+        "312e393936303030"
+      ],
+      "count": 8,
+      "conversion": [
+        {
+          "double_bits": "0x3fffef9db22d0e56",
+          "fpscr_before": "0x0",
+          "single_bits": "0x3fff7cee",
+          "precision": 6
+        }
+      ]
+    },
+    {
+      "format": "%d:%.6f",
+      "value": "1.996",
+      "original": [
+        "373a312e393936303030"
+      ],
+      "count": 10,
+      "conversion": [
+        {
+          "double_bits": "0x3fffef9db22d0e56",
+          "fpscr_before": "0x0",
+          "single_bits": "0x3fff7cee",
+          "precision": 6
+        }
+      ]
+    },
+    {
+      "format": "%.6f",
+      "value": "inf",
+      "original": [
+        "232e23"
+      ],
+      "count": 3,
+      "conversion": [
+        {
+          "double_bits": "0x7ff0000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x7f800000",
+          "precision": 6
+        }
+      ]
+    },
+    {
+      "format": "%d:%.6f",
+      "value": "inf",
+      "original": [
+        "373a232e23"
+      ],
+      "count": 5,
+      "conversion": [
+        {
+          "double_bits": "0x7ff0000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x7f800000",
+          "precision": 6
+        }
+      ]
+    },
+    {
+      "format": "%.6f",
+      "value": "-inf",
+      "original": [
+        "232e23"
+      ],
+      "count": 3,
+      "conversion": [
+        {
+          "double_bits": "0xfff0000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0xff800000",
+          "precision": 6
+        }
+      ]
+    },
+    {
+      "format": "%d:%.6f",
+      "value": "-inf",
+      "original": [
+        "373a232e23"
+      ],
+      "count": 5,
+      "conversion": [
+        {
+          "double_bits": "0xfff0000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0xff800000",
+          "precision": 6
+        }
+      ]
+    },
+    {
+      "format": "%.6f",
+      "value": "nan",
+      "original": [
+        "232e23"
+      ],
+      "count": 3,
+      "conversion": [
+        {
+          "double_bits": "0x7ff8000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x7fc00000",
+          "precision": 6
+        }
+      ]
+    },
+    {
+      "format": "%d:%.6f",
+      "value": "nan",
+      "original": [
+        "373a232e23"
+      ],
+      "count": 5,
+      "conversion": [
+        {
+          "double_bits": "0x7ff8000000000000",
+          "fpscr_before": "0x0",
+          "single_bits": "0x7fc00000",
+          "precision": 6
+        }
+      ]
+    }
+  ],
+  "negative_controls": {
+    "incorrect_double_bits_rejected": true
+  },
+  "limits": [
+    "Native original variadic printf wrapper executes; synthetic synchronous sink only. ARM R2/R3 double alignment checked via observed D0; prefix int in R1 tested.",
+    "A9/A15 instruction oracle with FPSCR default round-nearest, not M-profile scheduling or hardware proof.",
+    "NaN payloads/exception flags and concurrent sinks not certified."
+  ]
+}

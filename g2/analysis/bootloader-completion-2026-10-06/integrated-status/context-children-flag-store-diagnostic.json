@@ -1,0 +1,24 @@
+{
+  "finding": "Native IOM CQ path exposes two-versus-three generic queue-prefix write mismatch.",
+  "function": "0x427794",
+  "before_source_sha256": "97bccd723bf40335268114ba5459700efe2da1e51095aaba8494990bf29fd703",
+  "after_source_sha256": "e51571ce5e8ea55a2dc90f3f04f5fd4ff06975dae13d0b154a2958d5ffc537cf",
+  "fixture": {
+    "module": 0,
+    "interface": 0,
+    "queue_buffer": "0x20008000",
+    "words": 16,
+    "poll_status": 0
+  },
+  "stock_prefix_writes": [
+    16777216,
+    16777216,
+    30264781
+  ],
+  "prior_source_prefix_writes": [
+    16777216,
+    30264781
+  ],
+  "final_pool_mmio_status_equal": true,
+  "fix": "Separate volatile claimed-bit set and enabled-bit clear before writing magic. No write-normalization exemption introduced."
+}

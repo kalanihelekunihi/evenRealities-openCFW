@@ -1,0 +1,17 @@
+from pathlib import Path
+import json,hashlib,re,subprocess,tempfile
+b=Path('g2/build/pseudocode-first/20260930T190500Z');src=b/'attempts/P1-canonical-fixed-images-005/002/apollo_main-flash.bin';d=src.read_bytes();h=lambda x:hashlib.sha256(x).hexdigest();assert h(d)=='19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701';start=0x47dcb4;end=0x47dd08
+with tempfile.TemporaryDirectory() as td:
+ t=Path(td);(t/'input.bin').write_bytes(d[start-0x438000:end-0x438000]);(t/'input.s').write_text('.syntax unified\n.cpu cortex-m55\n.thumb\n.text\n.incbin "'+str(t/'input.bin')+'"\n');subprocess.run(['/opt/homebrew/bin/arm-none-eabi-as',str(t/'input.s'),'-o',str(t/'input.o')],check=True);rawtext=subprocess.check_output(['/opt/homebrew/bin/arm-none-eabi-objdump','-D','-j','.text','-M','force-thumb','--adjust-vma='+hex(start),str(t/'input.o')],text=True)
+rows=[];cursor=start
+for line in rawtext.splitlines():
+ m=re.match(r'\s*([0-9a-f]+):\s+([0-9a-f]{4}(?: [0-9a-f]{4})?)\s+([^\s]+)\s*(.*)',line)
+ if not m:continue
+ a=int(m[1],16)
+ if not start<=a<end:continue
+ raw=b''.join(int(v,16).to_bytes(2,'little') for v in m[2].split());assert a==cursor and raw==d[a-0x438000:a-0x438000+len(raw)];cursor+=len(raw);rows.append(dict(address=a,bytes=raw.hex(),mnemonic=m[3],operands=m[4]))
+assert cursor==end,(hex(cursor),hex(end),rawtext)
+o=b/'analysis/review-isolated-P2-20927/fresh';o.mkdir(parents=True,exist_ok=True);(o/'instructions.json').write_text(json.dumps([dict(start=start,end=end,instructions=rows)],indent=2)+'\n');(o/'disassembly.txt').write_text(rawtext);refs=sorted(set(int(m[1],16) for row in rows if (m:=re.search(r'@\s*\(?([0-9a-f]{6,8})',row['operands'])) and 'pc' in row['operands']))
+(o/'references.json').write_text(json.dumps([dict(address=a,bytes=d[a-0x438000:a-0x438000+4].hex(),value=int.from_bytes(d[a-0x438000:a-0x438000+4],'little')) for a in refs],indent=2)+'\n')
+(o/'pseudocode.md').write_text('# Mode-gated byte output, interrupt mask capture, signed local result\n\nPartial/unaccepted;84instructionbytes47DCB4..47DD08,threeentries.\nDCB4 PUSH R4,LR8,R4=entryR0 outputpointer. Call44906C(liveentryargs);fullresult!=2 writesoutputbyte0 andreturnsR0=0. Fullresult==2 calls44A1EA(liveargs);fullreturnedR0 is retained. R1=literal47E280+R0 modulo2^32;R2=literal47E284;unsignedsum<R2→R1=1 else0;writeoutputbyteR1. POP R4,PC restoresR4;return full44A1EAresult, not outputboolean. No pointercheck or pre-addition overflow guard recovered.\nDCE4 frameless leaf MRS R0,PRIMASK then CPSID i thenBXLR. Returns captured previousPRIMASK, disables maskable interrupts;R1/R2/R3unchanged. This resolves local helper semantics in21324: it executes counter updates after CPSID and restores captured PRIMASK before unsigneddivision. External454EFE behavior stillunresolved.\nDCEC PUSH R0,R1,R2,R3,R4,LR24. R1=16,R2=0,R4=SP,R0=R4;43C0E4(SP,16,0,liveR3). Then4D3554(SP,liveR1,R2,R3);afterreturn signed16bitload fromSP intoR0 (signextend to32). SP+=16 discards savedentryR0..3 overwrittenlocalstorage;POP R4,PC8 restoresentryR4 andLR. Return signedlocalhalfword,not helperreturn. Do not infer initialized bytes without43C0E4contract;helper writesremain opaque. No C/freeze/completenessclaim.\n')
+(o/'replay.py').write_bytes(Path(__file__).read_bytes());(o/'receipt.json').write_text(json.dumps(dict(accepted=False,status='partial',input_sha256=h(d),instruction_bytes=end-start,files={p.name:h(p.read_bytes()) for p in o.iterdir()}),indent=2)+'\n');print('PASS',end-start)

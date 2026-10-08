@@ -1,0 +1,56 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpvjd9hds3/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00483ce0 <.text>:
+  483ce0:	f8d9 0000 	ldr.w	r0, [r9]
+  483ce4:	f119 0904 	adds.w	r9, r9, #4
+  483ce8:	2800      	cmp	r0, #0
+  483cea:	d501      	bpl.n	483cf0 <.text+0x10>
+  483cec:	2101      	movs	r1, #1
+  483cee:	e000      	b.n	483cf2 <.text+0x12>
+  483cf0:	2100      	movs	r1, #0
+  483cf2:	2801      	cmp	r0, #1
+  483cf4:	da00      	bge.n	483cf8 <.text+0x18>
+  483cf6:	4240      	negs	r0, r0
+  483cf8:	f8cd 8014 	str.w	r8, [sp, #20]
+  483cfc:	9704      	str	r7, [sp, #16]
+  483cfe:	9403      	str	r4, [sp, #12]
+  483d00:	f8cd a008 	str.w	sl, [sp, #8]
+  483d04:	b2c9      	uxtb	r1, r1
+  483d06:	9101      	str	r1, [sp, #4]
+  483d08:	9000      	str	r0, [sp, #0]
+  483d0a:	9b0b      	ldr	r3, [sp, #44]	@ 0x2c
+  483d0c:	0032      	movs	r2, r6
+  483d0e:	990a      	ldr	r1, [sp, #40]	@ 0x28
+  483d10:	0028      	movs	r0, r5
+  483d12:	f7ff fa7a 	bl	48320a <.text-0xad6>
+  483d16:	0006      	movs	r6, r0
+  483d18:	e072      	b.n	483e00 <.text+0x120>
+  483d1a:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  483d1c:	7800      	ldrb	r0, [r0, #0]
+  483d1e:	2856      	cmp	r0, #86	@ 0x56
+  483d20:	d111      	bne.n	483d46 <.text+0x66>
+  483d22:	f8d9 0000 	ldr.w	r0, [r9]
+  483d26:	f119 0904 	adds.w	r9, r9, #4
+  483d2a:	6841      	ldr	r1, [r0, #4]
+  483d2c:	6809      	ldr	r1, [r1, #0]
+  483d2e:	9100      	str	r1, [sp, #0]
+  483d30:	6803      	ldr	r3, [r0, #0]
+  483d32:	9a0b      	ldr	r2, [sp, #44]	@ 0x2c
+  483d34:	1b92      	subs	r2, r2, r6
+  483d36:	980a      	ldr	r0, [sp, #40]	@ 0x28
+  483d38:	eb00 0106 	add.w	r1, r0, r6
+  483d3c:	0028      	movs	r0, r5
+  483d3e:	f7ff fe0f 	bl	483960 <.text-0x380>
+  483d42:	1986      	adds	r6, r0, r6
+  483d44:	e05c      	b.n	483e00 <.text+0x120>
+  483d46:	ea5f 5088 	movs.w	r0, r8, lsl #22
+  483d4a:	d51b      	bpl.n	483d84 <.text+0xa4>
+  483d4c:	f119 0207 	adds.w	r2, r9, #7
+  483d50:	f032 0207 	bics.w	r2, r2, #7
+  483d54:	e9d2 0100 	ldrd	r0, r1, [r2]
+  483d58:	f112 0908 	adds.w	r9, r2, #8
+  483d5c:	f8cd 8020 	str.w	r8, [sp, #32]

@@ -1,0 +1,12 @@
+[
+  {
+    "control": "wrong-deep-sleep-bit",
+    "rejected": true,
+    "diagnostic_tail": "or: ((0, 0, 0, 0, 0), {'events': [['write', 1073770496, 4, 0], ['write', 3758157072, 4, 4], ['wait-instruction', 'sev'], ['wait-instruction', 'wfe'], ['wait-instruction', 'wfe'], ['write', 3758157072, 4, 0]], 'cr1': 0, 'scr': 0, 'sp': 536903680, 'primask': 0}, {'events': [['write', 1073770496, 4, 0], ['write', 3758157072, 4, 0], ['wait-instruction', 'sev'], ['wait-instruction', 'wfe'], ['wait-instruction', 'wfe'], ['write', 3758157072, 4, 0]], 'cr1': 0, 'scr': 0, 'sp': 536903680, 'primask': 0})\n"
+  },
+  {
+    "control": "wrong-stop-selection",
+    "rejected": true,
+    "diagnostic_tail": "or: ((1, 0, 0, 0, 0), {'events': [['write', 1073770496, 4, 1], ['write', 3758157072, 4, 4], ['wait-instruction', 'sev'], ['wait-instruction', 'wfe'], ['wait-instruction', 'wfe'], ['write', 3758157072, 4, 0]], 'cr1': 1, 'scr': 0, 'sp': 536903680, 'primask': 0}, {'events': [['write', 1073770496, 4, 2], ['write', 3758157072, 4, 4], ['wait-instruction', 'sev'], ['wait-instruction', 'wfe'], ['wait-instruction', 'wfe'], ['write', 3758157072, 4, 0]], 'cr1': 2, 'scr': 0, 'sp': 536903680, 'primask': 0})\n"
+  }
+]

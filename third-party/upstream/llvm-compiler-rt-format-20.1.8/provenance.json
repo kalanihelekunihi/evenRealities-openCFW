@@ -1,0 +1,112 @@
+{
+  "upstream": "https://github.com/llvm/llvm-project",
+  "ref": "llvmorg-20.1.8",
+  "purpose": "source-available binary64 arithmetic lead for independent IAR formatter reconstruction; not original IAR source identity or byte match",
+  "files": [
+    {
+      "path": "comparedf2.c",
+      "url": "https://raw.githubusercontent.com/llvm/llvm-project/llvmorg-20.1.8/compiler-rt/lib/builtins/comparedf2.c",
+      "sha256": "c2af3f6a5ae89c08e5ee25b3ec03170b7e98d5dc699646c14820e359cd54fde5"
+    },
+    {
+      "path": "fp_compare_impl.inc",
+      "url": "https://raw.githubusercontent.com/llvm/llvm-project/llvmorg-20.1.8/compiler-rt/lib/builtins/fp_compare_impl.inc",
+      "sha256": "b3a602d7e840571537aef20a2ad57ad124f2efc7f0a456a37bece30e9dde6394"
+    },
+    {
+      "path": "fp_lib.h",
+      "url": "https://raw.githubusercontent.com/llvm/llvm-project/llvmorg-20.1.8/compiler-rt/lib/builtins/fp_lib.h",
+      "sha256": "8edc3d7debe27cb64355bbcd1d3d18390da20f7bf1358586ece770714bcfdc5e"
+    },
+    {
+      "path": "int_types.h",
+      "url": "https://raw.githubusercontent.com/llvm/llvm-project/llvmorg-20.1.8/compiler-rt/lib/builtins/int_types.h",
+      "sha256": "b4b768e1b2251df4c0161b4c1f120417500ff4883b7008120104d042eeb2151f"
+    },
+    {
+      "path": "int_endianness.h",
+      "url": "https://raw.githubusercontent.com/llvm/llvm-project/llvmorg-20.1.8/compiler-rt/lib/builtins/int_endianness.h",
+      "sha256": "ec5175561075845b7b16a92ad5ecdfd42a284de2736dd07e4ca7011b75c37709"
+    },
+    {
+      "path": "int_math.h",
+      "url": "https://raw.githubusercontent.com/llvm/llvm-project/llvmorg-20.1.8/compiler-rt/lib/builtins/int_math.h",
+      "sha256": "42d83ee41543909de016379a8251e211a6890cbc7945c433bb30f4ba29d7b10c"
+    },
+    {
+      "path": "int_lib.h",
+      "url": "https://raw.githubusercontent.com/llvm/llvm-project/llvmorg-20.1.8/compiler-rt/lib/builtins/int_lib.h",
+      "sha256": "b31130f10484636895daa13b91b63d47ea82b45547f29e4dd136b48a67854d30"
+    },
+    {
+      "path": "int_util.h",
+      "url": "https://raw.githubusercontent.com/llvm/llvm-project/llvmorg-20.1.8/compiler-rt/lib/builtins/int_util.h",
+      "sha256": "63d06198ab720a75c20bfd84be895c2746581b129168bae6201e7384bbb0473b"
+    },
+    {
+      "path": "floatsidf.c",
+      "url": "https://raw.githubusercontent.com/llvm/llvm-project/llvmorg-20.1.8/compiler-rt/lib/builtins/floatsidf.c",
+      "sha256": "d5141b5b7e860113c75f2d03d0cf39ca41aeea3e75390c40f73979c4ac172b51"
+    },
+    {
+      "path": "floatunsidf.c",
+      "url": "https://raw.githubusercontent.com/llvm/llvm-project/llvmorg-20.1.8/compiler-rt/lib/builtins/floatunsidf.c",
+      "sha256": "9f3593197c2584c14c86a4760051be18c788d0835cf8ffdb9f11834c2ce9bf5b"
+    },
+    {
+      "path": "fixdfsi.c",
+      "url": "https://raw.githubusercontent.com/llvm/llvm-project/llvmorg-20.1.8/compiler-rt/lib/builtins/fixdfsi.c",
+      "sha256": "7a17622bf348e1854ff5c47a3290acf7f7d85ddfd97f35e2af7d51d05964ebb2"
+    },
+    {
+      "path": "fp_fixint_impl.inc",
+      "url": "https://raw.githubusercontent.com/llvm/llvm-project/llvmorg-20.1.8/compiler-rt/lib/builtins/fp_fixint_impl.inc",
+      "sha256": "9f783582b31c028721a14561f2c5741b5bb19befa557a4575e1436381f966f4e"
+    },
+    {
+      "path": "divdf3.c",
+      "url": "https://raw.githubusercontent.com/llvm/llvm-project/llvmorg-20.1.8/compiler-rt/lib/builtins/divdf3.c",
+      "sha256": "2c8850a107c4ab79d518d1c3246ff936dd28446c82e17c1f347717a36b7a88a8"
+    },
+    {
+      "path": "fp_div_impl.inc",
+      "url": "https://raw.githubusercontent.com/llvm/llvm-project/llvmorg-20.1.8/compiler-rt/lib/builtins/fp_div_impl.inc",
+      "sha256": "2d1d901e87805e0bb2f3a3ab951b29224a59a761d6f292c3bd86f35368186fdd"
+    },
+    {
+      "path": "muldf3.c",
+      "url": "https://raw.githubusercontent.com/llvm/llvm-project/llvmorg-20.1.8/compiler-rt/lib/builtins/muldf3.c",
+      "sha256": "e35d748cefd466cb17e4d0fd4ef9d92e0911fea97bb7a59ad138479ba9c0d553"
+    },
+    {
+      "path": "fp_mul_impl.inc",
+      "url": "https://raw.githubusercontent.com/llvm/llvm-project/llvmorg-20.1.8/compiler-rt/lib/builtins/fp_mul_impl.inc",
+      "sha256": "5fd5ec9eaf57c983ed521f3501346660221d6f2d49d48d186b2046702b54d8c3"
+    },
+    {
+      "path": "subdf3.c",
+      "url": "https://raw.githubusercontent.com/llvm/llvm-project/llvmorg-20.1.8/compiler-rt/lib/builtins/subdf3.c",
+      "sha256": "201404b61436f1f617221ac20aeee67e41349baaf13ef838f0f5969e3b8b86ab"
+    },
+    {
+      "path": "adddf3.c",
+      "url": "https://raw.githubusercontent.com/llvm/llvm-project/llvmorg-20.1.8/compiler-rt/lib/builtins/adddf3.c",
+      "sha256": "c948665a4272f7155fd0cd51c3f2bb218bfd0d1dc0ab556565ee1a4eb315eb26"
+    },
+    {
+      "path": "fp_add_impl.inc",
+      "url": "https://raw.githubusercontent.com/llvm/llvm-project/llvmorg-20.1.8/compiler-rt/lib/builtins/fp_add_impl.inc",
+      "sha256": "327276adbb45d7e2cb2da1cf98b508da00b43b0cb84d4883d07878a0a9a1cd07"
+    },
+    {
+      "path": "fp_mode.h",
+      "url": "https://raw.githubusercontent.com/llvm/llvm-project/llvmorg-20.1.8/compiler-rt/lib/builtins/fp_mode.h",
+      "sha256": "874aa9eee8990ae2a6f48127ddb48c3198a8fa741f634f93053ebac3f89e1e83"
+    },
+    {
+      "path": "LICENSE.TXT",
+      "url": "https://raw.githubusercontent.com/llvm/llvm-project/llvmorg-20.1.8/LICENSE.TXT",
+      "sha256": "8d85c1057d742e597985c7d4e6320b015a9139385cff4cbae06ffc0ebe89afee"
+    }
+  ]
+}

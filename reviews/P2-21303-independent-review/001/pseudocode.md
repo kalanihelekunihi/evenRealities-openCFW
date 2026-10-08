@@ -1,0 +1,5 @@
+# Two-alpha composition thresholds and normalized blend
+
+Partial/unaccepted;124 instructionbytes482EF6..482F72. PUSH{R0,R4,LR}12bytes,SUBSP4,total16. FirstwordSP4..7 savedentryR0;SP0 initiallyunwritten. FreshfirstalphaSP7>=253returnsfreshfirstwordSP4withoutinitializingSP0. OtherwisestoreentryR1secondwordSP0;freshsecondalphaSP3<3returnsfirstword. ThenfreshfirstalphaSP7<3returnssecondwordSP0. Bothalphasintermediate: freshsecondalphaSP3==255 loadsR1=SP0,R0=SP4,call482E4C liveR2/R3;storehelperresultSP0,reloadR0,return.
+
+OtherpathfreshfirstalphaSP7→R0,R0=255-R0;freshsecondalphaSP3→R4,R4=255-R4;R4*=R0mod,ASR8,R4=255-R4mod (compositealpha). FreshfirstalphaSP7→R1,R1*=255mod;R0=UXTB(R4),UDIV R0=R1/R0 unsigned;storelowbyteR0 SP7,modifyingfirstalpha. ReloadsecondwordSP0→R1,modifiedfirstwordSP4→R0,call482E4C liveR2/R3;storehelperresultSP0 thenlowbytecurrentR4→SP3;reloadwordSP0→R0. AllpathsPOP{R1,R2,R4,PC}16bytes:R1=SP0 possiblyunwrittenfirstshortcut,R2=savedfirstwordpossiblyalphamodified,R4restored. PreserveexactASR/UDIV/truncations,thresholdorderandreturnaliases;noassumedfloatingformula. Following482F72..74zeroexcluded. No C,freeze,wholecoverage or equalityclaim.

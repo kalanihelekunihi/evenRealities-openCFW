@@ -1,0 +1,5 @@
+# Format parser frame, literal output and zero/minus flags prefix
+
+Partial/unaccepted;126 instructionbytes483960..4839DE. PUSH entryR0..R11/LR52B thenSUBSP36 total88B. R5=entry0callback;R9=SP88firststackarg;R6=0position. FreshSP40(savedentry1) zero→R5=wordliteral48400C,elsecallbackretained. Initialjump48398E.
+
+Literal-loop48397A: R3=freshSP44savedentry2,R2=R6,R1=freshSP40savedentry1;R0=freshSP48savedentry3cursor,byteR0[0]→R0;BLX R5;ignorecallbackresult,R6++wrap; reloadSP48cursor thenincrementstoreSP48 (callback may modify savedslot). Condition48398E independently reloadcursorandbyte;zero→483FAEunresolved. Otherwisefreshcursor/byteagain compare37percent;NE literal-loop. Percent: freshcursorincrementstoreSP48;R8=0flags. Freshcursor/byte dispatch space→4839EC,#→4839FA,+→4839DE,-→4839D0,0→4839C2;other→483A08unresolved. Zero ORR8bit0;minusORR8bit1. Both freshcursorincrementstoreSP48,R0=1,branch483A0Aunresolved. Preserve repeated reads and savedentry-stackaliasing; other flag branches pending. No C,freeze,wholecoverage or equalityclaim.

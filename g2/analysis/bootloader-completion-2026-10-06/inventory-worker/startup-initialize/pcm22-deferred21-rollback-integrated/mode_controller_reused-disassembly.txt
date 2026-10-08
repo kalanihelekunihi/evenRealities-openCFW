@@ -1,0 +1,118 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0041b954 <.data+0xb954>:
+  41b954:	e92d 43fe 	stmdb	sp!, {r1, r2, r3, r4, r5, r6, r7, r8, r9, lr}
+  41b958:	0005      	movs	r5, r0
+  41b95a:	f7ff ffc7 	bl	0x41b8ec
+  41b95e:	9001      	str	r0, [sp, #4]
+  41b960:	0028      	movs	r0, r5
+  41b962:	b2c0      	uxtb	r0, r0
+  41b964:	2802      	cmp	r0, #2
+  41b966:	d151      	bne.n	0x41ba0c
+  41b968:	2001      	movs	r0, #1
+  41b96a:	f88d 0002 	strb.w	r0, [sp, #2]
+  41b96e:	f10d 0202 	add.w	r2, sp, #2
+  41b972:	2100      	movs	r1, #0
+  41b974:	2000      	movs	r0, #0
+  41b976:	f001 f9d0 	bl	0x41cd1a
+  41b97a:	2600      	movs	r6, #0
+  41b97c:	f8df 7998 	ldr.w	r7, [pc, #2456]	@ 0x41c318
+  41b980:	6838      	ldr	r0, [r7, #0]
+  41b982:	f3c0 1040 	ubfx	r0, r0, #5, #1
+  41b986:	2800      	cmp	r0, #0
+  41b988:	d110      	bne.n	0x41b9ac
+  41b98a:	6838      	ldr	r0, [r7, #0]
+  41b98c:	f050 0020 	orrs.w	r0, r0, #32
+  41b990:	6038      	str	r0, [r7, #0]
+  41b992:	2001      	movs	r0, #1
+  41b994:	f001 fc14 	bl	0x41d1c0
+  41b998:	f05f 7380 	movs.w	r3, #16777216	@ 0x1000000
+  41b99c:	f05f 7280 	movs.w	r2, #16777216	@ 0x1000000
+  41b9a0:	f8df 1978 	ldr.w	r1, [pc, #2424]	@ 0x41c31c
+  41b9a4:	200f      	movs	r0, #15
+  41b9a6:	f001 fc39 	bl	0x41d21c
+  41b9aa:	2601      	movs	r6, #1
+  41b9ac:	f8df 096c 	ldr.w	r0, [pc, #2412]	@ 0x41c31c
+  41b9b0:	6800      	ldr	r0, [r0, #0]
+  41b9b2:	f3c0 6000 	ubfx	r0, r0, #24, #1
+  41b9b6:	2800      	cmp	r0, #0
+  41b9b8:	d101      	bne.n	0x41b9be
+  41b9ba:	2401      	movs	r4, #1
+  41b9bc:	e01c      	b.n	0x41b9f8
+  41b9be:	f8df 8ac0 	ldr.w	r8, [pc, #2752]	@ 0x41c480
+  41b9c2:	0028      	movs	r0, r5
+  41b9c4:	b2c0      	uxtb	r0, r0
+  41b9c6:	f8d8 1000 	ldr.w	r1, [r8]
+  41b9ca:	f360 0101 	bfi	r1, r0, #0, #2
+  41b9ce:	f8c8 1000 	str.w	r1, [r8]
+  41b9d2:	2404      	movs	r4, #4
+  41b9d4:	f05f 0900 	movs.w	r9, #0
+  41b9d8:	e004      	b.n	0x41b9e4
+  41b9da:	2001      	movs	r0, #1
+  41b9dc:	f001 fbf0 	bl	0x41d1c0
+  41b9e0:	f119 0901 	adds.w	r9, r9, #1
+  41b9e4:	f1b9 0f14 	cmp.w	r9, #20
+  41b9e8:	d206      	bcs.n	0x41b9f8
+  41b9ea:	f8d8 0000 	ldr.w	r0, [r8]
+  41b9ee:	f3c0 0080 	ubfx	r0, r0, #2, #1
+  41b9f2:	2801      	cmp	r0, #1
+  41b9f4:	dbf1      	blt.n	0x41b9da
+  41b9f6:	2400      	movs	r4, #0
+  41b9f8:	b2f6      	uxtb	r6, r6
+  41b9fa:	2e00      	cmp	r6, #0
+  41b9fc:	d003      	beq.n	0x41ba06
+  41b9fe:	6838      	ldr	r0, [r7, #0]
+  41ba00:	f030 0020 	bics.w	r0, r0, #32
+  41ba04:	6038      	str	r0, [r7, #0]
+  41ba06:	f001 f9f8 	bl	0x41cdfa
+  41ba0a:	e016      	b.n	0x41ba3a
+  41ba0c:	f8df 6a70 	ldr.w	r6, [pc, #2672]	@ 0x41c480
+  41ba10:	0028      	movs	r0, r5
+  41ba12:	b2c0      	uxtb	r0, r0
+  41ba14:	6831      	ldr	r1, [r6, #0]
+  41ba16:	f360 0101 	bfi	r1, r0, #0, #2
+  41ba1a:	6031      	str	r1, [r6, #0]
+  41ba1c:	2404      	movs	r4, #4
+  41ba1e:	2700      	movs	r7, #0
+  41ba20:	e003      	b.n	0x41ba2a
+  41ba22:	2001      	movs	r0, #1
+  41ba24:	f001 fbcc 	bl	0x41d1c0
+  41ba28:	1c7f      	adds	r7, r7, #1
+  41ba2a:	2f14      	cmp	r7, #20
+  41ba2c:	d205      	bcs.n	0x41ba3a
+  41ba2e:	6830      	ldr	r0, [r6, #0]
+  41ba30:	f3c0 0080 	ubfx	r0, r0, #2, #1
+  41ba34:	2801      	cmp	r0, #1
+  41ba36:	dbf4      	blt.n	0x41ba22
+  41ba38:	2400      	movs	r4, #0
+  41ba3a:	2c00      	cmp	r4, #0
+  41ba3c:	d10f      	bne.n	0x41ba5e
+  41ba3e:	f8df 0a44 	ldr.w	r0, [pc, #2628]	@ 0x41c484
+  41ba42:	7005      	strb	r5, [r0, #0]
+  41ba44:	b2ed      	uxtb	r5, r5
+  41ba46:	2d02      	cmp	r5, #2
+  41ba48:	d014      	beq.n	0x41ba74
+  41ba4a:	2000      	movs	r0, #0
+  41ba4c:	f88d 0001 	strb.w	r0, [sp, #1]
+  41ba50:	f10d 0201 	add.w	r2, sp, #1
+  41ba54:	2100      	movs	r1, #0
+  41ba56:	2000      	movs	r0, #0
+  41ba58:	f001 f95f 	bl	0x41cd1a
+  41ba5c:	e00a      	b.n	0x41ba74
+  41ba5e:	b2ed      	uxtb	r5, r5
+  41ba60:	2d02      	cmp	r5, #2
+  41ba62:	d107      	bne.n	0x41ba74
+  41ba64:	2000      	movs	r0, #0
+  41ba66:	f88d 0000 	strb.w	r0, [sp]
+  41ba6a:	466a      	mov	r2, sp
+  41ba6c:	2100      	movs	r1, #0
+  41ba6e:	2000      	movs	r0, #0
+  41ba70:	f001 f953 	bl	0x41cd1a
+  41ba74:	9801      	ldr	r0, [sp, #4]
+  41ba76:	f380 8810 	msr	PRIMASK, r0
+  41ba7a:	0020      	movs	r0, r4
+  41ba7c:	e8bd 83fe 	ldmia.w	sp!, {r1, r2, r3, r4, r5, r6, r7, r8, r9, pc}

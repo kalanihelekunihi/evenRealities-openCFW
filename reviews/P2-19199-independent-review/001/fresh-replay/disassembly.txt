@@ -1,0 +1,61 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpm82wxm8p/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0046a53a <.text>:
+  46a53a:	e92d 43f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, lr}
+  46a53e:	b085      	sub	sp, #20
+  46a540:	f8df 6950 	ldr.w	r6, [pc, #2384]	@ 46ae94 <.text+0x95a>
+  46a544:	6830      	ldr	r0, [r6, #0]
+  46a546:	2800      	cmp	r0, #0
+  46a548:	f000 80c0 	beq.w	46a6cc <.text+0x192>
+  46a54c:	2400      	movs	r4, #0
+  46a54e:	f8df 5948 	ldr.w	r5, [pc, #2376]	@ 46ae98 <.text+0x95e>
+  46a552:	6828      	ldr	r0, [r5, #0]
+  46a554:	2800      	cmp	r0, #0
+  46a556:	d103      	bne.n	46a560 <.text+0x26>
+  46a558:	f8df 0778 	ldr.w	r0, [pc, #1912]	@ 46acd4 <.text+0x79a>
+  46a55c:	6804      	ldr	r4, [r0, #0]
+  46a55e:	e01e      	b.n	46a59e <.text+0x64>
+  46a560:	f8df 0aa8 	ldr.w	r0, [pc, #2728]	@ 46b00c <.text+0xad2>
+  46a564:	6801      	ldr	r1, [r0, #0]
+  46a566:	2902      	cmp	r1, #2
+  46a568:	d106      	bne.n	46a578 <.text+0x3e>
+  46a56a:	6829      	ldr	r1, [r5, #0]
+  46a56c:	2901      	cmp	r1, #1
+  46a56e:	d103      	bne.n	46a578 <.text+0x3e>
+  46a570:	f8df 0764 	ldr.w	r0, [pc, #1892]	@ 46acd8 <.text+0x79e>
+  46a574:	6804      	ldr	r4, [r0, #0]
+  46a576:	e012      	b.n	46a59e <.text+0x64>
+  46a578:	6801      	ldr	r1, [r0, #0]
+  46a57a:	2903      	cmp	r1, #3
+  46a57c:	d106      	bne.n	46a58c <.text+0x52>
+  46a57e:	6829      	ldr	r1, [r5, #0]
+  46a580:	2901      	cmp	r1, #1
+  46a582:	d103      	bne.n	46a58c <.text+0x52>
+  46a584:	f8df 0750 	ldr.w	r0, [pc, #1872]	@ 46acd8 <.text+0x79e>
+  46a588:	6804      	ldr	r4, [r0, #0]
+  46a58a:	e008      	b.n	46a59e <.text+0x64>
+  46a58c:	6800      	ldr	r0, [r0, #0]
+  46a58e:	2803      	cmp	r0, #3
+  46a590:	d105      	bne.n	46a59e <.text+0x64>
+  46a592:	6828      	ldr	r0, [r5, #0]
+  46a594:	2802      	cmp	r0, #2
+  46a596:	d102      	bne.n	46a59e <.text+0x64>
+  46a598:	f8df 0a74 	ldr.w	r0, [pc, #2676]	@ 46b010 <.text+0xad6>
+  46a59c:	6804      	ldr	r4, [r0, #0]
+  46a59e:	2700      	movs	r7, #0
+  46a5a0:	f05f 0900 	movs.w	r9, #0
+  46a5a4:	2c00      	cmp	r4, #0
+  46a5a6:	d01b      	beq.n	46a5e0 <.text+0xa6>
+  46a5a8:	0020      	movs	r0, r4
+  46a5aa:	f7d5 fb61 	bl	43fc70 <.text-0x2a8ca>
+  46a5ae:	0007      	movs	r7, r0
+  46a5b0:	0020      	movs	r0, r4
+  46a5b2:	f7d5 fb95 	bl	43fce0 <.text-0x2a85a>
+  46a5b6:	4680      	mov	r8, r0
+  46a5b8:	0020      	movs	r0, r4
+  46a5ba:	f7d5 fc0e 	bl	43fdda <.text-0x2a760>
+  46a5be:	0004      	movs	r4, r0

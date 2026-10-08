@@ -1,0 +1,4 @@
+# Indexed entry six byte mask path only halfword narrow
+
+Partial/unaccepted;66 instructionbytes,inherited56-byteframe,R4entrypointer,R5fullentryR1unlessmaskpath,R6indexedrecord. Query0x43D0CE withlivearguments;bit0oneenters0x47AC2E,otherwisequeryagainandbit2zero skips0x47AC58. MaskpathloadsR1literal47B58C,independentlyfreshreadsbytes[R4+0..5]ascendingorderintoSP20,16,12,8,4,0 respectively. DestructivelynarrowR5LOW16 at0x47AC4A;R3=R5,R2=R1;call0x43CE9E(0x11C00000,R1,R2,LOW16index,fifthbyte5,sixthbyte4,seventhbyte3,eighthbyte2,ninthbyte1,tenthbyte0). Earlierloggerreadsarenotcached. R5narrowingoccursonlymaskpath.
+At0x47AC58 freshlyreadbyte[R6+46];bit0zero branchespending0x47ACA4,bit0onefallsthroughpending0x47AC60. No additionalrecordguardorhelpersemanticsinferred. No C,freezeorcompletenessclaim.

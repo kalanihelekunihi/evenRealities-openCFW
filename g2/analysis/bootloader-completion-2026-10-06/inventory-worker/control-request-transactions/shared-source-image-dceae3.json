@@ -1,0 +1,902 @@
+{
+  "status": "PASS",
+  "cases": 33,
+  "failures": [],
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_elf_sha256": "dceae3b56c3ef4b0572f4cd499230ca8f5eb20419cf1c4a0910d05d607389bee",
+  "source_sha256": {
+    "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/control-request-transactions/verify_control_request_transactions.py": "2ff31f393935a7ac457733f47777368bef63b73a295ce4066a334e730cc488ef",
+    "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/control-request-transactions/Makefile": "a9611a58d418c3edba7714c23fdbe782ae2ec153656183a6c8b23e76529085d8",
+    "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/control-request-transactions/module.ld": "63aafc82ed5c034e40901957c5cb6a4eec390729ee3f1554b410de28a42e7e91",
+    "g2/components/bootloader/nor_mspi_init/control_request_transactions.c": "b1c84f52d887cb1eb7e2cfa7575bda749a25a020e9cee9cc5017578480379d4c",
+    "g2/components/bootloader/nor_mspi_init/control_request_transactions.h": "fd6259aac80b8fe70b9343816c7fb0782141663f22ba816f1f614a3a6bbec76d",
+    "g2/components/bootloader/nor_mspi_init/control_request_helpers.c": "e605680ef860c9505587652f56aa3642c5b1cbd42678ad8ba7f7f5a0a2b43324",
+    "g2/components/bootloader/nor_mspi_init/control_request_helpers.h": "52c7b4a5d75e5a55ece3886d295f824cc4f2fb343eb024516c5c189e73ef9f2d",
+    "g2/components/bootloader/nor_mspi_init/control_request_state.c": "9a6177c1377741662d6abb250781c6aef1ad40952871cf39a60ea29131e96a70",
+    "g2/components/bootloader/nor_mspi_init/control_request_clock.c": "4b3f36e0d8d940963517c220ccc2ce81680ff56db6dedf90b01ef273294a0364",
+    "g2/components/bootloader/nor_mspi_init/control_request_extension.c": "85cfadfc4c45fab6b7684a81f749a591ad86196ec5a7a72cde9d9b899b5fa5c5",
+    "g2/components/bootloader/nor_mspi_init/control_read.c": "38f31db3ffbbdcd68ac04caa03fa972c1767f68612ca5cfcbcb9c6f833393019",
+    "g2/components/bootloader/nor_mspi_init/control_remaining.c": "0a552b3aeedde9dc221cda0208ffb8d77db71914b051479eb8928d8843e18d90",
+    "g2/components/bootloader/nor_mspi_queue/queue_descriptors.c": "c2402468dcf87ce0b40d326bc151dc77bba7fef5ec64353b719de8003dc0471b",
+    "g2/components/bootloader/nor_mspi_queue/nor_mspi_queue.c": "97bccd723bf40335268114ba5459700efe2da1e51095aaba8494990bf29fd703",
+    "g2/components/bootloader/nor_mspi_queue/mspi_pause_dma.c": "02ea153066ae15b45e9922233b16332f65fc7a631e38b5db6622010bb3ee2907",
+    "g2/components/bootloader/platform_control/critical_save.S": "c3be3d527c34f732bd53df3bc7230c45e94637a075952e113832d627c6a2863e",
+    "g2/components/bootloader/nor_mspi_init/status_poll.c": "210816cac79fd4286c40ad55e7c61782aff27d248232188079de4185409773c9",
+    "g2/components/bootloader/nor_mspi_power/device_configure.c": "930649b60d2479ffa3a4bd65118652285721a17a2a13a1a60f69a5fd8de37174"
+  },
+  "distinct_original_instruction_bytes": 1172,
+  "original_trace": {
+    "0x4251c0": "2de9ff47",
+    "0x4251c4": "0700",
+    "0x4251c6": "3d00",
+    "0x4251c8": "0024",
+    "0x4251ca": "002f",
+    "0x4251cc": "06d0",
+    "0x4251ce": "3868",
+    "0x4251d0": "20f07e40",
+    "0x4251d4": "dff8bc3c",
+    "0x4251d8": "9842",
+    "0x4251da": "01d0",
+    "0x4251e0": "0800",
+    "0x4251e2": "c0b2",
+    "0x4251e4": "2928",
+    "0x4251e6": "01db",
+    "0x4251ec": "287a",
+    "0x4251ee": "0028",
+    "0x4251f0": "01d1",
+    "0x4251f6": "6e68",
+    "0x4251f8": "c9b2",
+    "0x4251fa": "0029",
+    "0x4251fc": "62d0",
+    "0x4251fe": "0229",
+    "0x425200": "00f08880",
+    "0x425204": "73d3",
+    "0x425206": "0429",
+    "0x425208": "00f0b780",
+    "0x42520c": "c0f09b80",
+    "0x425210": "0629",
+    "0x425212": "00f0c680",
+    "0x425216": "c0f0ba80",
+    "0x42521a": "0829",
+    "0x42521c": "00f0d580",
+    "0x425220": "c0f0c980",
+    "0x425224": "0a29",
+    "0x425226": "00f0f380",
+    "0x42522a": "c0f0df80",
+    "0x42522e": "0c29",
+    "0x425230": "00f00281",
+    "0x425234": "c0f0f680",
+    "0x425238": "0e29",
+    "0x42523a": "00f01181",
+    "0x42523e": "c0f00581",
+    "0x425242": "1029",
+    "0x425244": "00f0e281",
+    "0x425248": "c0f08181",
+    "0x42524c": "1229",
+    "0x42524e": "00f08882",
+    "0x425252": "c0f02e82",
+    "0x425256": "1429",
+    "0x425258": "00f07582",
+    "0x42525c": "c0f0d782",
+    "0x425260": "1629",
+    "0x425262": "00f0fd82",
+    "0x425266": "c0f0f182",
+    "0x42526a": "1829",
+    "0x42526c": "00f01c83",
+    "0x425270": "c0f00883",
+    "0x425274": "1a29",
+    "0x425276": "00f03983",
+    "0x42527a": "c0f02183",
+    "0x42527e": "1c29",
+    "0x425280": "00f0f384",
+    "0x425284": "c0f0eb84",
+    "0x425288": "1e29",
+    "0x42528a": "00f03e85",
+    "0x425d0a": "0020",
+    "0x425d0c": "1400",
+    "0x425d0e": "5ff00008",
+    "0x425d12": "5ff00009",
+    "0x425d16": "0020",
+    "0x425d18": "002a",
+    "0x425d1a": "02d1",
+    "0x425d1c": "0620",
+    "0x425d1e": "fff7e3ba",
+    "0x4252e8": "04b0",
+    "0x4252ea": "bde8f087",
+    "0x425d22": "2079",
+    "0x425d24": "10f0e00f",
+    "0x425d28": "02d0",
+    "0x425d30": "a068",
+    "0x425d32": "5a49",
+    "0x425d34": "0842",
+    "0x425d36": "02d0",
+    "0x425d3e": "95f82c08",
+    "0x425d42": "0128",
+    "0x425d44": "02d0",
+    "0x425d4c": "d5f83808",
+    "0x425d50": "0028",
+    "0x425d52": "0ed0",
+    "0x425d54": "0020",
+    "0x425d56": "c5f83808",
+    "0x425d5a": "95f8c808",
+    "0x425d5e": "0028",
+    "0x425d60": "01d1",
+    "0x425d62": "bff35f8f",
+    "0x425d66": "2020",
+    "0x425d68": "4b49",
+    "0x425d6a": "11eb0631",
+    "0x425d6e": "c1f8b402",
+    "0x425d72": "2078",
+    "0x425d74": "0028",
+    "0x425d76": "51d0",
+    "0x425e1c": "02ab",
+    "0x425e1e": "01aa",
+    "0x425e20": "0321",
+    "0x425e22": "d5f82808",
+    "0x425e26": "01f070fd",
+    "0x42790a": "f8b5",
+    "0x42790c": "0e00",
+    "0x42790e": "1400",
+    "0x427910": "1d00",
+    "0x427912": "0700",
+    "0x427914": "0028",
+    "0x427916": "06d0",
+    "0x427918": "0068",
+    "0x42791a": "20f07e40",
+    "0x42791e": "dff86813",
+    "0x427922": "8842",
+    "0x427924": "01d0",
+    "0x42792a": "002c",
+    "0x42792c": "01d0",
+    "0x42792e": "002d",
+    "0x427930": "01d1",
+    "0x427936": "3869",
+    "0x427938": "7969",
+    "0x42793a": "8842",
+    "0x42793c": "01d0",
+    "0x427942": "3800",
+    "0x427944": "fff706ff",
+    "0x427754": "1cb5",
+    "0x427756": "0400",
+    "0x427758": "f4f7c8f8",
+    "0x41b8ec": "eff31080",
+    "0x41b8f0": "72b6",
+    "0x41b8f2": "7047",
+    "0x42775c": "0090",
+    "0x42775e": "606a",
+    "0x427760": "8068",
+    "0x427762": "0068",
+    "0x427764": "00f0ff00",
+    "0x427768": "216a",
+    "0x42776a": "090a",
+    "0x42776c": "0902",
+    "0x42776e": "0843",
+    "0x427770": "e061",
+    "0x427772": "216a",
+    "0x427774": "e069",
+    "0x427776": "091a",
+    "0x427778": "0029",
+    "0x42777a": "03d5",
+    "0x427784": "606a",
+    "0x427786": "4068",
+    "0x427788": "0068",
+    "0x42778a": "e060",
+    "0x42778c": "0098",
+    "0x42778e": "80f31088",
+    "0x427792": "13bd",
+    "0x427948": "f969",
+    "0x42794a": "fe31",
+    "0x42794c": "386a",
+    "0x42794e": "091a",
+    "0x427950": "0029",
+    "0x427952": "01d5",
+    "0x427958": "3869",
+    "0x42795a": "f968",
+    "0x42795c": "8842",
+    "0x42795e": "23d3",
+    "0x4279a8": "3869",
+    "0x4279aa": "711c",
+    "0x4279ac": "10ebc100",
+    "0x4279b0": "f968",
+    "0x4279b2": "8842",
+    "0x4279b4": "01d2",
+    "0x4279b6": "3869",
+    "0x4279b8": "dae7",
+    "0x427970": "2060",
+    "0x427972": "396a",
+    "0x427974": "491c",
+    "0x427976": "3962",
+    "0x427978": "396a",
+    "0x42797a": "2960",
+    "0x42797c": "10ebc600",
+    "0x427980": "7861",
+    "0x427982": "0020",
+    "0x427984": "f2bd",
+    "0x425e2a": "0028",
+    "0x425e2c": "7ff45caa",
+    "0x425e30": "ddf804a0",
+    "0x425e34": "1848",
+    "0x425e36": "10eb0631",
+    "0x425e3a": "11f52e71",
+    "0x425e3e": "caf80810",
+    "0x425e42": "daf80810",
+    "0x425e46": "caf80010",
+    "0x425e4a": "10eb0630",
+    "0x425e4e": "10f52d70",
+    "0x425e52": "caf81000",
+    "0x425e56": "6068",
+    "0x425e58": "58ea0008",
+    "0x425e5c": "4146",
+    "0x425e5e": "2800",
+    "0x425e60": "fdf7d8ff",
+    "0x423e14": "d0f83828",
+    "0x423e18": "012a",
+    "0x423e1a": "02d0",
+    "0x423e1c": "022a",
+    "0x423e1e": "08d0",
+    "0x423e20": "0ae0",
+    "0x423e38": "51f48141",
+    "0x423e3c": "0800",
+    "0x423e3e": "7047",
+    "0x425e64": "caf80400",
+    "0x425e68": "4ff48040",
+    "0x425e6c": "caf80c00",
+    "0x425e70": "a068",
+    "0x425e72": "59ea0009",
+    "0x425e76": "caf81490",
+    "0x425e7a": "f5f737fd",
+    "0x425e7e": "8146",
+    "0x425e80": "2078",
+    "0x425e82": "0028",
+    "0x425e84": "0cd0",
+    "0x425ea0": "0021",
+    "0x425ea2": "d5f82808",
+    "0x425ea6": "01f0a3fd",
+    "0x4279f0": "0200",
+    "0x4279f2": "0028",
+    "0x4279f4": "06d0",
+    "0x4279f6": "0068",
+    "0x4279f8": "20f07e40",
+    "0x4279fc": "dff88832",
+    "0x427a00": "9842",
+    "0x427a02": "01d0",
+    "0x427a08": "1069",
+    "0x427a0a": "5369",
+    "0x427a0c": "9842",
+    "0x427a0e": "01d1",
+    "0x427a14": "5069",
+    "0x427a16": "c9b2",
+    "0x427a18": "0029",
+    "0x427a1a": "01d0",
+    "0x427a20": "0021",
+    "0x427a22": "536a",
+    "0x427a24": "9b68",
+    "0x427a26": "1943",
+    "0x427a28": "0160",
+    "0x427a2a": "116a",
+    "0x427a2c": "4160",
+    "0x427a2e": "0830",
+    "0x427a30": "5061",
+    "0x427a32": "5069",
+    "0x427a34": "1061",
+    "0x427a36": "9068",
+    "0x427a38": "dff85012",
+    "0x427a3c": "8842",
+    "0x427a3e": "01d3",
+    "0x427a40": "bff35f8f",
+    "0x427a44": "92f82000",
+    "0x427a48": "00f0ff00",
+    "0x427a4c": "516a",
+    "0x427a4e": "c968",
+    "0x427a50": "0860",
+    "0x427a52": "0020",
+    "0x427a54": "7047",
+    "0x425eaa": "0600",
+    "0x425eac": "002e",
+    "0x425eae": "09d0",
+    "0x425ec4": "d5f82080",
+    "0x425ec8": "18f10100",
+    "0x425ecc": "2862",
+    "0x425ece": "2078",
+    "0x425ed0": "0028",
+    "0x425ed2": "01d0",
+    "0x425ed8": "0020",
+    "0x425eda": "85f82c08",
+    "0x425ede": "4846",
+    "0x425ee0": "80f31088",
+    "0x425ee4": "b8f1000f",
+    "0x425ee8": "e9d1",
+    "0x425eea": "3800",
+    "0x425eec": "fef74ff8",
+    "0x423f8e": "10b5",
+    "0x423f90": "0400",
+    "0x423f92": "6168",
+    "0x423f94": "1031",
+    "0x423f96": "c9b2",
+    "0x423f98": "0420",
+    "0x423f9a": "fef7a9f9",
+    "0x423f9e": "0028",
+    "0x423fa0": "03d1",
+    "0x423fa2": "d4f82808",
+    "0x423fa6": "03f067fc",
+    "0x427878": "0100",
+    "0x42787a": "0028",
+    "0x42787c": "06d0",
+    "0x42787e": "0068",
+    "0x427880": "20f07e40",
+    "0x427884": "dff80024",
+    "0x427888": "9042",
+    "0x42788a": "01d0",
+    "0x427890": "0868",
+    "0x427892": "c0f34060",
+    "0x427896": "0028",
+    "0x427898": "01d0",
+    "0x42789e": "8868",
+    "0x4278a0": "dff8e823",
+    "0x4278a4": "9042",
+    "0x4278a6": "01d3",
+    "0x4278a8": "bff35f8f",
+    "0x4278ac": "486a",
+    "0x4278ae": "0068",
+    "0x4278b0": "0068",
+    "0x4278b2": "50f00100",
+    "0x4278b6": "4a6a",
+    "0x4278b8": "1268",
+    "0x4278ba": "1060",
+    "0x4278bc": "0868",
+    "0x4278be": "50f00070",
+    "0x4278c2": "0860",
+    "0x4278c4": "0020",
+    "0x4278c6": "7047",
+    "0x423faa": "10bd",
+    "0x425ef0": "0600",
+    "0x425ef2": "002e",
+    "0x425ef4": "e3d0",
+    "0x425ebe": "3000",
+    "0x425ec0": "fff712ba",
+    "0x425d78": "95f82d08",
+    "0x425d7c": "0028",
+    "0x425d7e": "4dd1",
+    "0x425d80": "02ab",
+    "0x425d82": "01aa",
+    "0x425d84": "0121",
+    "0x425d86": "d5f82808",
+    "0x425d8a": "01f0befd",
+    "0x425d8e": "0028",
+    "0x425d90": "7ff4aaaa",
+    "0x425d94": "0298",
+    "0x425d96": "00f0ff00",
+    "0x425d9a": "05eb8000",
+    "0x425d9e": "dff8601a",
+    "0x425da2": "8162",
+    "0x425da4": "0298",
+    "0x425da6": "00f0ff00",
+    "0x425daa": "05eb8000",
+    "0x425dae": "c0f82854",
+    "0x425db2": "3948",
+    "0x425db4": "10eb0630",
+    "0x425db8": "10f52d70",
+    "0x425dbc": "0199",
+    "0x425dbe": "0860",
+    "0x425dc0": "0020",
+    "0x425dc2": "0199",
+    "0x425dc4": "4860",
+    "0x425dc6": "f5f791fd",
+    "0x425dca": "8146",
+    "0x425dcc": "0121",
+    "0x425dce": "d5f82808",
+    "0x425dd2": "01f00dfe",
+    "0x427a1c": "0121",
+    "0x427a1e": "00e0",
+    "0x425dd6": "8046",
+    "0x425dd8": "b8f1000f",
+    "0x425ddc": "09d0",
+    "0x425df2": "d5f82080",
+    "0x425df6": "18f10100",
+    "0x425dfa": "2862",
+    "0x425dfc": "4846",
+    "0x425dfe": "80f31088",
+    "0x425e02": "b8f1000f",
+    "0x425e06": "05d1",
+    "0x425e08": "3800",
+    "0x425e0a": "fef7c0f8",
+    "0x425e0e": "0028",
+    "0x425e10": "7ff46aaa",
+    "0x425e14": "5ff04008",
+    "0x425e18": "5ff48009",
+    "0x425e86": "0021",
+    "0x425e88": "d5f82808",
+    "0x425e8c": "01f0c1fe",
+    "0x427c12": "0200",
+    "0x427c14": "0028",
+    "0x427c16": "05d0",
+    "0x427c18": "0068",
+    "0x427c1a": "20f07e40",
+    "0x427c1e": "1a4b",
+    "0x427c20": "9842",
+    "0x427c22": "01d0",
+    "0x427c28": "1069",
+    "0x427c2a": "5369",
+    "0x427c2c": "9842",
+    "0x427c2e": "01d1",
+    "0x427c34": "5069",
+    "0x427c36": "536a",
+    "0x427c38": "9b68",
+    "0x427c3a": "0360",
+    "0x427c3c": "0023",
+    "0x427c3e": "4360",
+    "0x427c40": "0830",
+    "0x427c42": "c9b2",
+    "0x427c44": "0029",
+    "0x427c46": "01d0",
+    "0x427c4c": "0021",
+    "0x427c4e": "536a",
+    "0x427c50": "5b68",
+    "0x427c52": "1943",
+    "0x427c54": "0160",
+    "0x427c56": "5168",
+    "0x427c58": "4160",
+    "0x427c5a": "0830",
+    "0x427c5c": "5061",
+    "0x427c5e": "5069",
+    "0x427c60": "1061",
+    "0x427c62": "9068",
+    "0x427c64": "0949",
+    "0x427c66": "8842",
+    "0x427c68": "01d3",
+    "0x427c6a": "bff35f8f",
+    "0x427c6e": "92f82000",
+    "0x427c72": "00f0ff00",
+    "0x427c76": "516a",
+    "0x427c78": "c968",
+    "0x427c7a": "0860",
+    "0x427c7c": "0020",
+    "0x427c7e": "7047",
+    "0x425e90": "0600",
+    "0x425e92": "0be0",
+    "0x425ed4": "0220",
+    "0x425ed6": "00e0",
+    "0x425d2a": "0620",
+    "0x425d2c": "fff7dcba",
+    "0x425d38": "0620",
+    "0x425d3a": "fff7d5ba",
+    "0x425d46": "0720",
+    "0x425d48": "fff7ceba",
+    "0x424978": "d0f83018",
+    "0x42497c": "491c",
+    "0x42497e": "0162",
+    "0x424980": "0021",
+    "0x424982": "c161",
+    "0x424984": "0121",
+    "0x424986": "80f83418",
+    "0x42498a": "4021",
+    "0x42498c": "4068",
+    "0x42498e": "dff81428",
+    "0x424992": "12eb0032",
+    "0x424996": "c2f8b412",
+    "0x42499a": "7047"
+  },
+  "coverage_requests": [
+    30
+  ],
+  "comparisons": [
+    {
+      "request": 30,
+      "fixture": {
+        "module": 0,
+        "null": true
+      },
+      "return": 6,
+      "stock_callback": [],
+      "source_callback": []
+    },
+    {
+      "request": 30,
+      "fixture": {
+        "module": 0,
+        "cfg": "000000000000000000000000"
+      },
+      "return": 0,
+      "stock_callback": [],
+      "source_callback": []
+    },
+    {
+      "request": 30,
+      "fixture": {
+        "module": 0,
+        "cfg": "010000000000000000000000"
+      },
+      "return": 0,
+      "stock_callback": [
+        [
+          60,
+          4344185
+        ]
+      ],
+      "source_callback": [
+        [
+          60,
+          198789
+        ]
+      ]
+    },
+    {
+      "request": 30,
+      "fixture": {
+        "module": 0,
+        "cfg": "00000000e000000000000000"
+      },
+      "return": 6,
+      "stock_callback": [],
+      "source_callback": []
+    },
+    {
+      "request": 30,
+      "fixture": {
+        "module": 0,
+        "cfg": "0000000000000000e0e0e000"
+      },
+      "return": 6,
+      "stock_callback": [],
+      "source_callback": []
+    },
+    {
+      "request": 30,
+      "fixture": {
+        "module": 0,
+        "cfg": "000000000000000000000000",
+        "mode": 0
+      },
+      "return": 7,
+      "stock_callback": [],
+      "source_callback": []
+    },
+    {
+      "request": 30,
+      "fixture": {
+        "module": 0,
+        "cfg": "010000000000000000000000",
+        "completion_byte": 1
+      },
+      "return": 0,
+      "stock_callback": [],
+      "source_callback": []
+    },
+    {
+      "request": 30,
+      "fixture": {
+        "module": 0,
+        "cfg": "010000000000000000000000",
+        "clock_status": 7
+      },
+      "return": 7,
+      "stock_callback": [
+        [
+          60,
+          4344185
+        ]
+      ],
+      "source_callback": [
+        [
+          60,
+          198789
+        ]
+      ]
+    },
+    {
+      "request": 30,
+      "fixture": {
+        "module": 1,
+        "null": true
+      },
+      "return": 6,
+      "stock_callback": [],
+      "source_callback": []
+    },
+    {
+      "request": 30,
+      "fixture": {
+        "module": 1,
+        "cfg": "000000000000000000000000"
+      },
+      "return": 0,
+      "stock_callback": [],
+      "source_callback": []
+    },
+    {
+      "request": 30,
+      "fixture": {
+        "module": 1,
+        "cfg": "010000000000000000000000"
+      },
+      "return": 0,
+      "stock_callback": [
+        [
+          60,
+          4344185
+        ]
+      ],
+      "source_callback": [
+        [
+          60,
+          198789
+        ]
+      ]
+    },
+    {
+      "request": 30,
+      "fixture": {
+        "module": 1,
+        "cfg": "00000000e000000000000000"
+      },
+      "return": 6,
+      "stock_callback": [],
+      "source_callback": []
+    },
+    {
+      "request": 30,
+      "fixture": {
+        "module": 1,
+        "cfg": "0000000000000000e0e0e000"
+      },
+      "return": 6,
+      "stock_callback": [],
+      "source_callback": []
+    },
+    {
+      "request": 30,
+      "fixture": {
+        "module": 1,
+        "cfg": "000000000000000000000000",
+        "mode": 0
+      },
+      "return": 7,
+      "stock_callback": [],
+      "source_callback": []
+    },
+    {
+      "request": 30,
+      "fixture": {
+        "module": 1,
+        "cfg": "010000000000000000000000",
+        "completion_byte": 1
+      },
+      "return": 0,
+      "stock_callback": [],
+      "source_callback": []
+    },
+    {
+      "request": 30,
+      "fixture": {
+        "module": 1,
+        "cfg": "010000000000000000000000",
+        "clock_status": 7
+      },
+      "return": 7,
+      "stock_callback": [
+        [
+          60,
+          4344185
+        ]
+      ],
+      "source_callback": [
+        [
+          60,
+          198789
+        ]
+      ]
+    },
+    {
+      "request": 30,
+      "fixture": {
+        "module": 2,
+        "null": true
+      },
+      "return": 6,
+      "stock_callback": [],
+      "source_callback": []
+    },
+    {
+      "request": 30,
+      "fixture": {
+        "module": 2,
+        "cfg": "000000000000000000000000"
+      },
+      "return": 0,
+      "stock_callback": [],
+      "source_callback": []
+    },
+    {
+      "request": 30,
+      "fixture": {
+        "module": 2,
+        "cfg": "010000000000000000000000"
+      },
+      "return": 0,
+      "stock_callback": [
+        [
+          60,
+          4344185
+        ]
+      ],
+      "source_callback": [
+        [
+          60,
+          198789
+        ]
+      ]
+    },
+    {
+      "request": 30,
+      "fixture": {
+        "module": 2,
+        "cfg": "00000000e000000000000000"
+      },
+      "return": 6,
+      "stock_callback": [],
+      "source_callback": []
+    },
+    {
+      "request": 30,
+      "fixture": {
+        "module": 2,
+        "cfg": "0000000000000000e0e0e000"
+      },
+      "return": 6,
+      "stock_callback": [],
+      "source_callback": []
+    },
+    {
+      "request": 30,
+      "fixture": {
+        "module": 2,
+        "cfg": "000000000000000000000000",
+        "mode": 0
+      },
+      "return": 7,
+      "stock_callback": [],
+      "source_callback": []
+    },
+    {
+      "request": 30,
+      "fixture": {
+        "module": 2,
+        "cfg": "010000000000000000000000",
+        "completion_byte": 1
+      },
+      "return": 0,
+      "stock_callback": [],
+      "source_callback": []
+    },
+    {
+      "request": 30,
+      "fixture": {
+        "module": 2,
+        "cfg": "010000000000000000000000",
+        "clock_status": 7
+      },
+      "return": 7,
+      "stock_callback": [
+        [
+          60,
+          4344185
+        ]
+      ],
+      "source_callback": [
+        [
+          60,
+          198789
+        ]
+      ]
+    },
+    {
+      "request": 30,
+      "fixture": {
+        "module": 3,
+        "null": true
+      },
+      "return": 6,
+      "stock_callback": [],
+      "source_callback": []
+    },
+    {
+      "request": 30,
+      "fixture": {
+        "module": 3,
+        "cfg": "000000000000000000000000"
+      },
+      "return": 0,
+      "stock_callback": [],
+      "source_callback": []
+    },
+    {
+      "request": 30,
+      "fixture": {
+        "module": 3,
+        "cfg": "010000000000000000000000"
+      },
+      "return": 0,
+      "stock_callback": [
+        [
+          60,
+          4344185
+        ]
+      ],
+      "source_callback": [
+        [
+          60,
+          198789
+        ]
+      ]
+    },
+    {
+      "request": 30,
+      "fixture": {
+        "module": 3,
+        "cfg": "00000000e000000000000000"
+      },
+      "return": 6,
+      "stock_callback": [],
+      "source_callback": []
+    },
+    {
+      "request": 30,
+      "fixture": {
+        "module": 3,
+        "cfg": "0000000000000000e0e0e000"
+      },
+      "return": 6,
+      "stock_callback": [],
+      "source_callback": []
+    },
+    {
+      "request": 30,
+      "fixture": {
+        "module": 3,
+        "cfg": "000000000000000000000000",
+        "mode": 0
+      },
+      "return": 7,
+      "stock_callback": [],
+      "source_callback": []
+    },
+    {
+      "request": 30,
+      "fixture": {
+        "module": 3,
+        "cfg": "010000000000000000000000",
+        "completion_byte": 1
+      },
+      "return": 0,
+      "stock_callback": [],
+      "source_callback": []
+    },
+    {
+      "request": 30,
+      "fixture": {
+        "module": 3,
+        "cfg": "010000000000000000000000",
+        "clock_status": 7
+      },
+      "return": 7,
+      "stock_callback": [
+        [
+          60,
+          4344185
+        ]
+      ],
+      "source_callback": [
+        [
+          60,
+          198789
+        ]
+      ]
+    }
+  ],
+  "limits": [
+    "Request30 uses the pinned 0x4251c0 original dispatcher against synthetic RAM/MSPI MMIO; no hardware is accessed.",
+    "Clock request is an intercepted synthetic status provider. The queue descriptors/allocator/post/release and CQ enable bodies execute compiled source.",
+    "Callback pointers are rebased to the compiled source callback; the callback body has a separate original/source differential.",
+    "This is a request30-only isolated source provider and does not alter shared control routing; asynchronous DMA/peripheral progress remains synthetic."
+  ]
+}

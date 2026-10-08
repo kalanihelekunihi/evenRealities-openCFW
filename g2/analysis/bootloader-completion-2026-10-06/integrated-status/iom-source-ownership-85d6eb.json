@@ -1,0 +1,40 @@
+{
+  "utc": "2026-10-07T00:42:48.387712+00:00",
+  "image_sha256": "85d6eb5362976d4d4a296ae08b92161bb979342d21002dfa2257c0f75f5e975f",
+  "functions": [
+    {
+      "function": "claim",
+      "original_start": "0x42c4c6",
+      "original_end_exclusive": "0x42c538",
+      "original_body_bytes": 114,
+      "body_sha256": "9727ea0e7e8786ddfab4618f79b101d91192e7291034937b15da4a9246d17db2",
+      "source": "g2/components/bootloader/initializer_callbacks/context_claim.c",
+      "source_sha256": "a9bf1993c0fa379c4a65ec65329931477035eac83cc68bb3ee1692b74f25000a"
+    },
+    {
+      "function": "transaction",
+      "original_start": "0x42c988",
+      "original_end_exclusive": "0x42cc34",
+      "original_body_bytes": 684,
+      "body_sha256": "1a89b00660cf0c54c66e781ac95f19dd764bb671587c36959ad2cd34fec53ae5",
+      "source": "g2/components/bootloader/initializer_callbacks/context_transaction.c",
+      "source_sha256": "641476718d5a508ef4e87986bd5aa883c18595538981687e386413b758eb2d3e"
+    },
+    {
+      "function": "interrupt-enable",
+      "original_start": "0x42c63a",
+      "original_end_exclusive": "0x42c672",
+      "original_body_bytes": 56,
+      "body_sha256": "4bb8cd7875f57a46da8764a7c89f6058ce9f5aac52f707e5c86dc7a66c20d775",
+      "source": "g2/components/bootloader/initializer_callbacks/context_interrupt.c",
+      "source_sha256": "9188fb33ec9ab5c9c8c32f819b030474d9b00129cb2fb8cb970b0bc57c35c355"
+    }
+  ],
+  "deduplicated_original_body_bytes": 854,
+  "inventory_complete": false,
+  "limits": [
+    "Partial ownership inventory for these three bounded IOM functions only; other linked source has not been fully mapped.",
+    "Original extents are instruction-delimited and agree with consolidated symbol boundaries; body hashes bind exact locked bytes.",
+    "Transaction lower CQ/wait/power/clock dependencies are separately represented; ownership is not proof of native hardware behavior or all-path whole-system correctness."
+  ]
+}

@@ -1,0 +1,176 @@
+[
+  {
+    "start": 4712282,
+    "end": 4712368,
+    "instructions": [
+      {
+        "address": 4712282,
+        "bytes": "2de9f843",
+        "mnemonic": "stmdb",
+        "operands": "sp!, {r3, r4, r5, r6, r7, r8, r9, lr}"
+      },
+      {
+        "address": 4712286,
+        "bytes": "0600",
+        "mnemonic": "movs",
+        "operands": "r6, r0"
+      },
+      {
+        "address": 4712288,
+        "bytes": "0d00",
+        "mnemonic": "movs",
+        "operands": "r5, r1"
+      },
+      {
+        "address": 4712290,
+        "bytes": "1400",
+        "mnemonic": "movs",
+        "operands": "r4, r2"
+      },
+      {
+        "address": 4712292,
+        "bytes": "1f00",
+        "mnemonic": "movs",
+        "operands": "r7, r3"
+      },
+      {
+        "address": 4712294,
+        "bytes": "002d",
+        "mnemonic": "cmp",
+        "operands": "r5, #0"
+      },
+      {
+        "address": 4712296,
+        "bytes": "06d1",
+        "mnemonic": "bne.n",
+        "operands": "47e778 <.text+0x1e>"
+      },
+      {
+        "address": 4712298,
+        "bytes": "7bf19bfc",
+        "mnemonic": "bl",
+        "operands": "5fa0a4 <.text+0x17b94a>"
+      },
+      {
+        "address": 4712302,
+        "bytes": "0020",
+        "mnemonic": "movs",
+        "operands": "r0, #0"
+      },
+      {
+        "address": 4712304,
+        "bytes": "5ff0ff31",
+        "mnemonic": "movs.w",
+        "operands": "r1, #4294967295\t@ 0xffffffff"
+      },
+      {
+        "address": 4712308,
+        "bytes": "0860",
+        "mnemonic": "str",
+        "operands": "r0, [r1, #0]"
+      },
+      {
+        "address": 4712310,
+        "bytes": "fee7",
+        "mnemonic": "b.n",
+        "operands": "47e776 <.text+0x1c>"
+      },
+      {
+        "address": 4712312,
+        "bytes": "ddf82490",
+        "mnemonic": "ldr.w",
+        "operands": "r9, [sp, #36]\t@ 0x24"
+      },
+      {
+        "address": 4712316,
+        "bytes": "ddf82080",
+        "mnemonic": "ldr.w",
+        "operands": "r8, [sp, #32]"
+      },
+      {
+        "address": 4712320,
+        "bytes": "00f09af9",
+        "mnemonic": "bl",
+        "operands": "47eab8 <.text+0x35e>"
+      },
+      {
+        "address": 4712324,
+        "bytes": "c9f80060",
+        "mnemonic": "str.w",
+        "operands": "r6, [r9]"
+      },
+      {
+        "address": 4712328,
+        "bytes": "c9f81850",
+        "mnemonic": "str.w",
+        "operands": "r5, [r9, #24]"
+      },
+      {
+        "address": 4712332,
+        "bytes": "c9f81c70",
+        "mnemonic": "str.w",
+        "operands": "r7, [r9, #28]"
+      },
+      {
+        "address": 4712336,
+        "bytes": "c9f82080",
+        "mnemonic": "str.w",
+        "operands": "r8, [r9, #32]"
+      },
+      {
+        "address": 4712340,
+        "bytes": "19f10400",
+        "mnemonic": "adds.w",
+        "operands": "r0, r9, #4"
+      },
+      {
+        "address": 4712344,
+        "bytes": "0021",
+        "mnemonic": "movs",
+        "operands": "r1, #0"
+      },
+      {
+        "address": 4712346,
+        "bytes": "0161",
+        "mnemonic": "str",
+        "operands": "r1, [r0, #16]"
+      },
+      {
+        "address": 4712348,
+        "bytes": "002c",
+        "mnemonic": "cmp",
+        "operands": "r4, #0"
+      },
+      {
+        "address": 4712350,
+        "bytes": "05d0",
+        "mnemonic": "beq.n",
+        "operands": "47e7ac <.text+0x52>"
+      },
+      {
+        "address": 4712352,
+        "bytes": "99f82800",
+        "mnemonic": "ldrb.w",
+        "operands": "r0, [r9, #40]\t@ 0x28"
+      },
+      {
+        "address": 4712356,
+        "bytes": "50f00400",
+        "mnemonic": "orrs.w",
+        "operands": "r0, r0, #4"
+      },
+      {
+        "address": 4712360,
+        "bytes": "89f82800",
+        "mnemonic": "strb.w",
+        "operands": "r0, [r9, #40]\t@ 0x28"
+      },
+      {
+        "address": 4712364,
+        "bytes": "bde8f183",
+        "mnemonic": "ldmia.w",
+        "operands": "sp!, {r0, r4, r5, r6, r7, r8, r9, pc}"
+      }
+    ]
+  }
+]

@@ -1,0 +1,5 @@
+# Rejected stack state 0x469E18..0x469E66
+
+Partial/unaccepted;78instructionbytes. Samehandler32frame retainedfromSP16nonzeroorunmatchedSP12casebranch. Fresh43D0CEbit1diagnostic: freshwordSP12 ->R0,storeFULLwordSP8;SP4literal46A844,SP0=163,R3literal46A82C,R2literal46A830,R1literal46A834,R0=2 ->43D574. Separatefresh43D0CEbit0 orconditional thirdfreshbit2 enables R1literal46AAB8,R3=SECONDfreshwordSP12,R2R1,R0=0x08400000 ->43CE9E. PreservebothfreshSP12capturesanddistantliteral46AAB8.
+
+469E60explicitR0=FFFFFFFF;backwardbranch469E14 sharedADDSP24 thenPOP4/PC8 restores32frame; errorreturnretained. NextPUSH469E66newfunctionexcluded. Earlierresetfunctionseparate;thishandler469D48..469E66 withinternalearlyreturnandpostreturndiagnosticcontinuation. No C,freezeorwholecorpusclaim.

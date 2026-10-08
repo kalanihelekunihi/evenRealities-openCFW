@@ -1,0 +1,25 @@
+{
+  "elf_sha256": "eda59289afb08947773a6b7ba1d40b59985926cb4dd1d7042a4100cfd1740ea1",
+  "objects": {
+    "i2c.o": "5bb224411c4f1372ddca541f51abe4acb056fa59faaf1e4396934e2c76d79e79",
+    "scb.o": "99041f6a523b2768097dbe2535a5bb8701289d214f4444bbbb3cc3f69785b54d",
+    "app.o": "3c42681ef4bdbc5cdd8628fff3fb62501d2f50cdd7d1ce498b63281a58d77ee2",
+    "asm.o": "4fcad330e4cc3da31fdbe12a1ad98e0686fd5beb68af993f7e725d44e67d5e39",
+    "publish.o": "239b02e53ad8a544c67ae27b805298339c1bd6a8e1ef212852737a99b1764b2c"
+  },
+  "source_sha256": "3059bec5b70b60a0d80028ece37f911deaecd1b5bbea6b8fde7d3516922a7b8e",
+  "compiler": "arm-none-eabi-gcc (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) 13.3.1 20240614",
+  "flags": [
+    "-mcpu=cortex-m0plus",
+    "-mthumb",
+    "-Og",
+    "-fshort-enums",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-DCY8C4046FNI_T412",
+    "-ffunction-sections"
+  ],
+  "publish_source_sha256": "0b86500a53f2d8039ae4fa1f920528499a4aac01d965654db32f867212240a45",
+  "public_source_provenance": "../dependency-followup-2026-10-08/source-provenance.json",
+  "limits": "Independent callback covers only commands0,1,3 or>=9; public helper code is a tested comparator, not exact firmware reconstruction."
+}

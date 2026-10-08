@@ -1,0 +1,3 @@
+# First-bank seven fresh word stack-mask outputs
+
+Partial/unaccepted;88 instruction bytes481364..4813BC. Continues4812F6 bankselectorlowbyte0 branch;56-byteframe,R5entryR2outputpointer,SP4..SP28sevenmaskwords(defaultFFFFFFFForoptionalearlierbankreads). For k0..6 in increasingorder:loadpointerliteral4817A0+4*k,freshword[target],thenreloadmaskword[SP+4+4*k],AND,storeword[R5+4*k]. FirstwordusesR1value;remaininguseR2valueandR1=SP4maskbase. Exactorder is targetread beforemaskreload beforeoutputwrite for eachword;preservepotentialoutput/stack/targetaliasing andfreshmaskreloads. Writesoffset0..24 only;nooutputnullguardorcoherentsnapshotassumption. Branch48145C unresolvedrestore/return;nohelpercallsinfragment. No C/freeze/fullcoverage/equality claim.

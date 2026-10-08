@@ -1,0 +1,38 @@
+{
+  "status": "CAPABILITY_OBSERVATION_ONLY",
+  "backend": "Unicorn2.1.4 Cortex-M33 compatibility",
+  "comparisons": [
+    {
+      "seeded_ipsr": 0,
+      "instruction_address": "0x41b372",
+      "instruction": "bx r3",
+      "interrupts": [
+        8
+      ],
+      "error": null,
+      "result_pc": "0xfffffffc",
+      "result_psp": "0x20031000",
+      "result_ipsr": 0,
+      "result_r0": "0x0",
+      "expected_unstacked_target": "0x4189ac"
+    },
+    {
+      "seeded_ipsr": 14,
+      "instruction_address": "0x41b372",
+      "instruction": "bx r3",
+      "interrupts": [
+        8
+      ],
+      "error": null,
+      "result_pc": "0xfffffffc",
+      "result_psp": "0x20031000",
+      "result_ipsr": 14,
+      "result_r0": "0x0",
+      "expected_unstacked_target": "0x4189ac"
+    }
+  ],
+  "limits": [
+    "IPSR and a basic frame are manually seeded. Architectural NVIC active-exception state/exception entry is not established; rejection cannot prove firmware fault or complete backend support/absence.",
+    "This bounded probe must not substitute a Python unstack model for actual exception-return behavior."
+  ]
+}

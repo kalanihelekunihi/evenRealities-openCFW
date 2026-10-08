@@ -1,0 +1,10 @@
+{
+  "id": "P2-20731",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "178B across seven independent entry points. Verified each frame and return separately: first wrapper returns saved R3; second and guarded halfword helper return the second helper result; frameless setters return their documented adjusted pointer; guarded byte helper returns live helper result or skipped input; broadcast setter returns base+2000; final leaf returns literal pointer."
+}

@@ -1,0 +1,1 @@
+Partial/unaccepted:16bytes,4 aligned little-endian literal words47D8FC..47D90C. Everyword has mappedPC-load consumers retained with rawinstructions andcomponenthashchecks. Includes three message template pointers and flag pointer; pointed ownership and wholecorpuscoverage remain unproven. No source/freezechanges.

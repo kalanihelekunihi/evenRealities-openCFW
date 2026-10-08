@@ -1,0 +1,3374 @@
+{
+  "status": "PASS",
+  "cases": 216,
+  "distinct_original_trace_bytes": 224,
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "elf_sha256": "dceae3b56c3ef4b0572f4cd499230ca8f5eb20419cf1c4a0910d05d607389bee",
+  "source_sha256": {
+    "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/kernel-state-candidate/verify_kernel_state_candidate.py": "1acb090ccbef78ba3dcfcdcd13d35570402e1da0044c464f991abdf5528810a3",
+    "g2/components/bootloader/thread_creation/lifecycle.c": "ff291664ebac49876d349496141839aac97654d239bcf2e94ceae2ddd3d0f599",
+    "g2/components/bootloader/thread_creation/verify_lifecycle.py": "2873e2d4ab32faf90f81e8f827dbf024b6db3d3004b8a53b876e67d0e0e8b146",
+    "g2/build/bootloader-completion/source-image-compatible/snapshots/dceae3b56c3ef4b0572f4cd499230ca8f5eb20419cf1c4a0910d05d607389bee/bootloader-source-test.elf": "dceae3b56c3ef4b0572f4cd499230ca8f5eb20419cf1c4a0910d05d607389bee"
+  },
+  "original_trace": {
+    "0x416058": "80b5",
+    "0x41605a": "fff7e6ff",
+    "0x41602a": "10b5",
+    "0x41602c": "0024",
+    "0x41602e": "eff30580",
+    "0x416032": "0028",
+    "0x416034": "01d0",
+    "0x41603a": "02f08cfd",
+    "0x418b56": "dff8d006",
+    "0x418b5a": "0068",
+    "0x418b5c": "0028",
+    "0x418b5e": "01d1",
+    "0x418b60": "0120",
+    "0x418b62": "07e0",
+    "0x418b74": "7047",
+    "0x41603e": "0128",
+    "0x416040": "08d0",
+    "0x416054": "2000",
+    "0x416056": "10bd",
+    "0x41605e": "0028",
+    "0x416060": "02d0",
+    "0x416068": "02f075fd",
+    "0x41606c": "0128",
+    "0x41606e": "08d1",
+    "0x416070": "dff81815",
+    "0x416074": "0868",
+    "0x416076": "0028",
+    "0x416078": "03d1",
+    "0x41607a": "0120",
+    "0x41607c": "0860",
+    "0x41607e": "0020",
+    "0x416080": "01e0",
+    "0x416086": "02bd",
+    "0x416036": "0124",
+    "0x416038": "0ce0",
+    "0x416062": "7ff00500",
+    "0x416066": "0ee0",
+    "0x416082": "5ff0ff30",
+    "0x418b64": "dff8c406",
+    "0x418b68": "0068",
+    "0x418b6a": "0028",
+    "0x418b6c": "01d1",
+    "0x418b6e": "0220",
+    "0x418b70": "00e0",
+    "0x416042": "eff31080",
+    "0x416046": "0028",
+    "0x416048": "03d1",
+    "0x41604a": "eff31180",
+    "0x41604e": "0028",
+    "0x416050": "00d0",
+    "0x416052": "0124",
+    "0x418b72": "0020",
+    "0x416088": "80b5",
+    "0x41608a": "02f064fd",
+    "0x41608e": "0028",
+    "0x416090": "03d0",
+    "0x416092": "0228",
+    "0x416094": "03d1",
+    "0x41609e": "dff8ec04",
+    "0x4160a2": "0068",
+    "0x4160a4": "0128",
+    "0x4160a6": "01d1",
+    "0x4160ac": "0020",
+    "0x4160ae": "02bd",
+    "0x4160a8": "0120",
+    "0x4160aa": "00e0",
+    "0x416096": "0220",
+    "0x416098": "09e0",
+    "0x41609a": "0320",
+    "0x41609c": "07e0",
+    "0x4160b0": "10b5",
+    "0x4160b2": "fff7baff",
+    "0x4160b6": "0028",
+    "0x4160b8": "02d0",
+    "0x4160c0": "02f049fd",
+    "0x4160c4": "0128",
+    "0x4160c6": "0cd1",
+    "0x4160c8": "dff8c044",
+    "0x4160cc": "2068",
+    "0x4160ce": "0128",
+    "0x4160d0": "07d1",
+    "0x4160e2": "5ff0ff30",
+    "0x4160e6": "10bd",
+    "0x4160ba": "7ff00500",
+    "0x4160be": "12e0",
+    "0x4160d2": "fff7a9ff",
+    "0x416028": "7047",
+    "0x4160d6": "0220",
+    "0x4160d8": "2060",
+    "0x4160da": "02f035f8",
+    "0x4160de": "0020",
+    "0x4160e0": "01e0"
+  },
+  "comparisons": [
+    {
+      "function": "kernel_initialize",
+      "mode": 1,
+      "state": 0,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 0,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 1,
+      "state": 0,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 1,
+      "state": 0,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 0,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 1,
+      "state": 0,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 1,
+      "state": 0,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 0,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 1,
+      "state": 0,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 1,
+      "state": 0,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 0,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 1,
+      "state": 0,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 1,
+      "state": 1,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967295,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 1,
+      "state": 1,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 1,
+      "state": 1,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967295,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 1,
+      "state": 1,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 1,
+      "state": 1,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967295,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 1,
+      "state": 1,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 1,
+      "state": 1,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967295,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 1,
+      "state": 1,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 1,
+      "state": 2,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967295,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 1,
+      "state": 2,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 1,
+      "state": 2,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967295,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 1,
+      "state": 2,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 1,
+      "state": 2,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967295,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 1,
+      "state": 2,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 1,
+      "state": 2,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967295,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 1,
+      "state": 2,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 2,
+      "state": 0,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967295,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 2,
+      "state": 0,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 2,
+      "state": 0,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 2,
+      "state": 0,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 2,
+      "state": 0,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 2,
+      "state": 0,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 2,
+      "state": 0,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 2,
+      "state": 0,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 2,
+      "state": 1,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967295,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 2,
+      "state": 1,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 2,
+      "state": 1,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 2,
+      "state": 1,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 2,
+      "state": 1,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 2,
+      "state": 1,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 2,
+      "state": 1,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 2,
+      "state": 1,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 2,
+      "state": 2,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967295,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 2,
+      "state": 2,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 2,
+      "state": 2,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 2,
+      "state": 2,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 2,
+      "state": 2,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 2,
+      "state": 2,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 2,
+      "state": 2,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 2,
+      "state": 2,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 0,
+      "state": 0,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967295,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 0,
+      "state": 0,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 0,
+      "state": 0,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 0,
+      "state": 0,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 0,
+      "state": 0,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 0,
+      "state": 0,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 0,
+      "state": 0,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 0,
+      "state": 0,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 0,
+      "state": 1,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967295,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 0,
+      "state": 1,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 0,
+      "state": 1,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 0,
+      "state": 1,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 0,
+      "state": 1,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 0,
+      "state": 1,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 0,
+      "state": 1,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 0,
+      "state": 1,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 0,
+      "state": 2,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967295,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 0,
+      "state": 2,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 0,
+      "state": 2,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 0,
+      "state": 2,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 0,
+      "state": 2,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 0,
+      "state": 2,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 0,
+      "state": 2,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_initialize",
+      "mode": 0,
+      "state": 2,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 1,
+      "state": 0,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 0,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 1,
+      "state": 0,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 0,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 1,
+      "state": 0,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 0,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 1,
+      "state": 0,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 0,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 1,
+      "state": 0,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 0,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 1,
+      "state": 0,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 0,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 1,
+      "state": 0,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 0,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 1,
+      "state": 0,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 0,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 1,
+      "state": 1,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 1,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 1,
+      "state": 1,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 1,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 1,
+      "state": 1,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 1,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 1,
+      "state": 1,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 1,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 1,
+      "state": 1,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 1,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 1,
+      "state": 1,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 1,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 1,
+      "state": 1,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 1,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 1,
+      "state": 1,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 1,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 1,
+      "state": 2,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 0,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 1,
+      "state": 2,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 0,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 1,
+      "state": 2,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 0,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 1,
+      "state": 2,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 0,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 1,
+      "state": 2,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 0,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 1,
+      "state": 2,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 0,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 1,
+      "state": 2,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 0,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 1,
+      "state": 2,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 0,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 2,
+      "state": 0,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 2,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 2,
+      "state": 0,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 2,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 2,
+      "state": 0,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 2,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 2,
+      "state": 0,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 2,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 2,
+      "state": 0,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 2,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 2,
+      "state": 0,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 2,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 2,
+      "state": 0,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 2,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 2,
+      "state": 0,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 2,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 2,
+      "state": 1,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 2,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 2,
+      "state": 1,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 2,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 2,
+      "state": 1,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 2,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 2,
+      "state": 1,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 2,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 2,
+      "state": 1,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 2,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 2,
+      "state": 1,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 2,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 2,
+      "state": 1,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 2,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 2,
+      "state": 1,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 2,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 2,
+      "state": 2,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 2,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 2,
+      "state": 2,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 2,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 2,
+      "state": 2,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 2,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 2,
+      "state": 2,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 2,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 2,
+      "state": 2,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 2,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 2,
+      "state": 2,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 2,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 2,
+      "state": 2,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 2,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 2,
+      "state": 2,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 2,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 0,
+      "state": 0,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 3,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 0,
+      "state": 0,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 3,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 0,
+      "state": 0,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 3,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 0,
+      "state": 0,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 3,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 0,
+      "state": 0,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 3,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 0,
+      "state": 0,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 3,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 0,
+      "state": 0,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 3,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 0,
+      "state": 0,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 3,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 0,
+      "state": 1,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 3,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 0,
+      "state": 1,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 3,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 0,
+      "state": 1,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 3,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 0,
+      "state": 1,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 3,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 0,
+      "state": 1,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 3,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 0,
+      "state": 1,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 3,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 0,
+      "state": 1,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 3,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 0,
+      "state": 1,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 3,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 0,
+      "state": 2,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 3,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 0,
+      "state": 2,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 3,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 0,
+      "state": 2,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 3,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 0,
+      "state": 2,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 3,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 0,
+      "state": 2,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 3,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 0,
+      "state": 2,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 3,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 0,
+      "state": 2,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 3,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_state",
+      "mode": 0,
+      "state": 2,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 3,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 1,
+      "state": 0,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967295,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 1,
+      "state": 0,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 1,
+      "state": 0,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967295,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 1,
+      "state": 0,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 1,
+      "state": 0,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967295,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 1,
+      "state": 0,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 1,
+      "state": 0,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967295,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 1,
+      "state": 0,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 1,
+      "state": 1,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "kernel-start",
+            2
+          ]
+        ],
+        "state": 2,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 1,
+      "state": 1,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 1,
+      "state": 1,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "kernel-start",
+            2
+          ]
+        ],
+        "state": 2,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 1,
+      "state": 1,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 1,
+      "state": 1,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "kernel-start",
+            2
+          ]
+        ],
+        "state": 2,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 1,
+      "state": 1,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 1,
+      "state": 1,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 0,
+        "events": [
+          [
+            "kernel-start",
+            2
+          ]
+        ],
+        "state": 2,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 1,
+      "state": 1,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 1,
+      "state": 2,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967295,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 1,
+      "state": 2,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 1,
+      "state": 2,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967295,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 1,
+      "state": 2,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 1,
+      "state": 2,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967295,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 1,
+      "state": 2,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 1,
+      "state": 2,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967295,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 1,
+      "state": 2,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 2,
+      "state": 0,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967295,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 2,
+      "state": 0,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 2,
+      "state": 0,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 2,
+      "state": 0,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 2,
+      "state": 0,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 2,
+      "state": 0,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 2,
+      "state": 0,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 2,
+      "state": 0,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 2,
+      "state": 1,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967295,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 2,
+      "state": 1,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 2,
+      "state": 1,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 2,
+      "state": 1,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 2,
+      "state": 1,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 2,
+      "state": 1,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 2,
+      "state": 1,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 2,
+      "state": 1,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 2,
+      "state": 2,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967295,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 2,
+      "state": 2,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 2,
+      "state": 2,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 2,
+      "state": 2,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 2,
+      "state": 2,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 2,
+      "state": 2,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 2,
+      "state": 2,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 2,
+      "state": 2,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 0,
+      "state": 0,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967295,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 0,
+      "state": 0,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 0,
+      "state": 0,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 0,
+      "state": 0,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 0,
+      "state": 0,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 0,
+      "state": 0,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 0,
+      "state": 0,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 0,
+      "state": 0,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 0,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 0,
+      "state": 1,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967295,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 0,
+      "state": 1,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 0,
+      "state": 1,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 0,
+      "state": 1,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 0,
+      "state": 1,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 0,
+      "state": 1,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 0,
+      "state": 1,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 0,
+      "state": 1,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 1,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 0,
+      "state": 2,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967295,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 0,
+      "state": 2,
+      "primask": 0,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 0,
+      "state": 2,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 0,
+      "state": 2,
+      "primask": 0,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 0,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 0,
+      "state": 2,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 0,
+      "state": 2,
+      "primask": 1,
+      "basepri": 0,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 0
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 0,
+      "state": 2,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 0,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 48
+      }
+    },
+    {
+      "function": "kernel_start",
+      "mode": 0,
+      "state": 2,
+      "primask": 1,
+      "basepri": 48,
+      "ipsr": 3,
+      "observed": {
+        "return": 4294967290,
+        "events": [],
+        "state": 2,
+        "primask": 1,
+        "basepri": 48
+      }
+    }
+  ],
+  "limits": [
+    "Original 0x416088 and source opencfw_boot_kernel_state execute directly with the same no-argument, uint32 return ABI.",
+    "The stock kernel-start leaf and the combined ELF's linked opencfw_bl_kernel_start are intercepted with a fixed return value; this isolates wrapper state behavior.",
+    "Context/IPSR/PRIMASK/BASEPRI and memory are synthetic; no real scheduler, interrupt delivery, hardware, or byte-equality claim."
+  ]
+}

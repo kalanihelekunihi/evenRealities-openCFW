@@ -1,0 +1,164 @@
+{
+  "utc": "2026-10-07T07:58:42.600962+00:00",
+  "status": "PASS",
+  "elf_sha256": "f3ca176e492a1770ee1838bdd990e6519e3b435ca75d8c44d690233b11087ade",
+  "profiles": [
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/f3ca176e492a1770ee1838bdd990e6519e3b435ca75d8c44d690233b11087ade/comparison.json",
+      "sha256": "7f7dedea84670c79030642db9df29cb074d0ac570310f09150a31ce336839117",
+      "cases": 2
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/f3ca176e492a1770ee1838bdd990e6519e3b435ca75d8c44d690233b11087ade/failures.json",
+      "sha256": "6fd4c8e538f2abdc6fe4b156d747dcca313d9745f7980111bd88954f9c642130",
+      "cases": 3
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/f3ca176e492a1770ee1838bdd990e6519e3b435ca75d8c44d690233b11087ade/powerloss.json",
+      "sha256": "29188fe6d3df260f8f7212c9b690723ff72c9161e1bd7c69eac89c91c9d3a756",
+      "cases": 2
+    }
+  ],
+  "total_cases": 7,
+  "additional_receipts": [
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/clock-generators-f3ca/clock-config.json",
+      "sha256": "1c3ce504fa8f5298974c261a7581d59d7366d99bcd46a938aeb5c5653e90a2d0",
+      "cases": 5896,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/clock-generators-f3ca/clock-shared.json",
+      "sha256": "3711dde1ccae8510fd59c12e710840b73595ebe0c35cddab12fbaa4c8139a7f2",
+      "cases": 129,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/clock-generators-f3ca/elog_output.json",
+      "sha256": "3bf2c04ac5d38c345779a76b20e6479507e0dddcb1d7ea626ccd6bb2bd7da0f6",
+      "cases": 494,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/clock-generators-f3ca/elog_uart_tx.json",
+      "sha256": "cde680400375922d95d550f927f5c65187149de9b75d7be54c8069678e8fa8d6",
+      "cases": 222,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/clock-generators-f3ca/formatter.json",
+      "sha256": "6c1fae2810fdc11f1ae655227ee9ea62676d17ed7a37c84235e2f9920ee3c1e2",
+      "cases": 1778,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/clock-generators-f3ca/generators.json",
+      "sha256": "9127fbd06b8e295eca95af80bfe120ff6bd14ea2746018326dbaebe0feac8ee3",
+      "cases": 688,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/clock-generators-f3ca/isr_deferred_fifo.json",
+      "sha256": "cf60af661839cb00bdf865abff854640cd89cdaf8fb9d1d3f9c1d2674e80adcf",
+      "cases": 1,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/clock-generators-f3ca/isr_delivery.json",
+      "sha256": "7319153178ead7ab7b3ac3a3f204ab53b62a867ab479e4d9a58296de4564fc8a",
+      "cases": 1480,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/clock-generators-f3ca/isr_public_interfaces.json",
+      "sha256": "3440995129444327c97879a276eb14725d5395bb1cb722f8227f2b9589dc3549",
+      "cases": 62,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/clock-generators-f3ca/math.json",
+      "sha256": "27ce982ddedc5175e14e6b6723bc9d1cdb29dc0545ef8127d153d69298a5fe6c",
+      "cases": 4311,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/clock-generators-f3ca/mutex_block_boundary.json",
+      "sha256": "26e9a6b87a6fab34d714ce5602132d7e39fcadd56d5c6542c9422a9315d323c8",
+      "cases": 4,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/clock-generators-f3ca/mutex_kernel.json",
+      "sha256": "ede60da078e9c89f8369b4968ba7e184d059c878ddef253a48017b22bf6315d0",
+      "cases": 516,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/clock-generators-f3ca/mutex_sequences.json",
+      "sha256": "3b156b0f60e5e1436b792f12aad537bbefa3de33388b76cb1cd4bfcaca7c09c1",
+      "cases": 2,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/clock-generators-f3ca/native-config.json",
+      "sha256": "7af1ee932bf2003becf68a66b1e1821540ff703218df7ddbbdae18a343421059",
+      "cases": 48,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/clock-generators-f3ca/service_records.json",
+      "sha256": "a9659eae0800fbd191fb43d912c5b57d8a9a0d5ec8c92dedf43927a0fcc97320",
+      "cases": 112,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/clock-generators-f3ca/service_startup_state.json",
+      "sha256": "44f03f984ee9a2790242585eadef65d7f860b271277d791c8873cdbcab01a42c",
+      "cases": 1,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/clock-generators-f3ca/setters.json",
+      "sha256": "7f34f1983c9ce15f24dcbdf7e246a3dab75a45c9489fa70bbf9d1b85d7417855",
+      "cases": 192,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/clock-generators-f3ca/startup-leaves-native-copy.json",
+      "sha256": "adbc28e7bbbeff26ff14c1967935d2b8468830d2cde52e42d43345f3bc52701e",
+      "cases": 271,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/clock-generators-f3ca/startup-native-copy.json",
+      "sha256": "c11c88122d82f24676c56f739b9866a7e4ef20b316ae7d51decd726d9d7f975a",
+      "cases": 64,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/clock-generators-f3ca/startup_alternatives.json",
+      "sha256": "8588b166ad03ec91e88e99109d54a60d7a917039184b7019157cdda60670cf56",
+      "cases": 64,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/clock-generators-f3ca/wrapper.json",
+      "sha256": "f7c370682d7214330b6f5b6dc14b13fca3024797a5ae14bb4015d24d027b5d6e",
+      "cases": 288,
+      "shared_cases": null
+    }
+  ],
+  "inputs": 654,
+  "linked_objects": 168,
+  "post_run_hash_mismatches": [],
+  "frozen_copies": "g2/build/bootloader-completion/source-image-compatible/snapshots/f3ca176e492a1770ee1838bdd990e6519e3b435ca75d8c44d690233b11087ade/frozen-input-copies.json",
+  "alignment_mappings": 488,
+  "numeric_aliases": 26,
+  "segments": 42,
+  "deduplicated_observed_original_instruction_bytes": 38764,
+  "limits": [
+    "Seven integration cases retain existing logging/startup models. Native4311 math and48 M33 caller comparisons certify the generator software separately; 688 bounded PLL cases retain child cuts.",
+    "Clock request/release side effects remain modeled in direct caller tests. Native copies use MMIO-only recorder; old no-op SRAM-hook negative controls preserved.",
+    "Six original FP64 integration effects, external ROM APIs and synthetic peripheral/persistence/task/timing fixtures remain. Physical PLL lock/drain/live scheduling, whole source and byte equality not certified."
+  ]
+}

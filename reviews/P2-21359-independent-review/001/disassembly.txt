@@ -1,0 +1,63 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpv3f_zspd/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+004839de <.text>:
+  4839de:	f058 0804 	orrs.w	r8, r8, #4
+  4839e2:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  4839e4:	1c40      	adds	r0, r0, #1
+  4839e6:	900c      	str	r0, [sp, #48]	@ 0x30
+  4839e8:	2001      	movs	r0, #1
+  4839ea:	e00e      	b.n	483a0a <.text+0x2c>
+  4839ec:	f058 0808 	orrs.w	r8, r8, #8
+  4839f0:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  4839f2:	1c40      	adds	r0, r0, #1
+  4839f4:	900c      	str	r0, [sp, #48]	@ 0x30
+  4839f6:	2001      	movs	r0, #1
+  4839f8:	e007      	b.n	483a0a <.text+0x2c>
+  4839fa:	f058 0810 	orrs.w	r8, r8, #16
+  4839fe:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  483a00:	1c40      	adds	r0, r0, #1
+  483a02:	900c      	str	r0, [sp, #48]	@ 0x30
+  483a04:	2001      	movs	r0, #1
+  483a06:	e000      	b.n	483a0a <.text+0x2c>
+  483a08:	2000      	movs	r0, #0
+  483a0a:	2800      	cmp	r0, #0
+  483a0c:	d1cd      	bne.n	4839aa <.text-0x34>
+  483a0e:	2700      	movs	r7, #0
+  483a10:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  483a12:	7800      	ldrb	r0, [r0, #0]
+  483a14:	f7ff fb0d 	bl	483032 <.text-0x9ac>
+  483a18:	2800      	cmp	r0, #0
+  483a1a:	d004      	beq.n	483a26 <.text+0x48>
+  483a1c:	a80c      	add	r0, sp, #48	@ 0x30
+  483a1e:	f7ff fb11 	bl	483044 <.text-0x99a>
+  483a22:	0007      	movs	r7, r0
+  483a24:	e010      	b.n	483a48 <.text+0x6a>
+  483a26:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  483a28:	7800      	ldrb	r0, [r0, #0]
+  483a2a:	282a      	cmp	r0, #42	@ 0x2a
+  483a2c:	d10c      	bne.n	483a48 <.text+0x6a>
+  483a2e:	f8d9 7000 	ldr.w	r7, [r9]
+  483a32:	f119 0904 	adds.w	r9, r9, #4
+  483a36:	2f00      	cmp	r7, #0
+  483a38:	d503      	bpl.n	483a42 <.text+0x64>
+  483a3a:	f058 0802 	orrs.w	r8, r8, #2
+  483a3e:	427f      	negs	r7, r7
+  483a40:	e7ff      	b.n	483a42 <.text+0x64>
+  483a42:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  483a44:	1c40      	adds	r0, r0, #1
+  483a46:	900c      	str	r0, [sp, #48]	@ 0x30
+  483a48:	2400      	movs	r4, #0
+  483a4a:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  483a4c:	7800      	ldrb	r0, [r0, #0]
+  483a4e:	282e      	cmp	r0, #46	@ 0x2e
+  483a50:	d11d      	bne.n	483a8e <.text+0xb0>
+  483a52:	f458 6880 	orrs.w	r8, r8, #1024	@ 0x400
+  483a56:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  483a58:	1c40      	adds	r0, r0, #1
+  483a5a:	900c      	str	r0, [sp, #48]	@ 0x30
+  483a5c:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  483a5e:	7800      	ldrb	r0, [r0, #0]

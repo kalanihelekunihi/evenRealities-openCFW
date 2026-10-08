@@ -1,0 +1,5 @@
+# Low-byte mode validation and observed-field check; byte output getter
+
+Partial/unaccepted;124 instruction bytes 47F0A0..47F11C. F0A0 PUSH R4,LR8; R4=full entry R0. LOW8(mode) neither1 nor2 returns6. Mode2 only: fresh word through literal FABC, bits4..5 must equal3 else7; this check precedes current-mode equality. Fresh byte through literal FAB8 compared with LOW8(mode); equal returns0 without update or observed-field check. Unequal calls47EF74(LOW8(mode),live R1/R2/R3); full nonzero result returned unchanged. On helper zero, fresh word through literal FAB4 bits3..4 compared with LOW8(mode); equal returns0, unequal1. POP R4,PC releases8. This call links preceding prefix21432 and continuation21434; no assumption that byte equality proves observed hardware equality.
+
+F108 frameless getter: full entry R0 zero returns6; nonzero reads fresh byte through literal FAC0 into R1, stores it at entry R0, then returns0. No helper calls; BX LR; null path leaves R1 unchanged. Addresses/ownership and external helpers unresolved. No C/freeze/full coverage claim.

@@ -1,0 +1,31 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp56_1sozi/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00469d9e <.text>:
+  469d9e:	7808      	ldrb	r0, [r1, #0]
+  469da0:	f8df 2a98 	ldr.w	r2, [pc, #2712]	@ 46a83c <.text+0xa9e>
+  469da4:	7010      	strb	r0, [r2, #0]
+  469da6:	7848      	ldrb	r0, [r1, #1]
+  469da8:	788a      	ldrb	r2, [r1, #2]
+  469daa:	ea50 2002 	orrs.w	r0, r0, r2, lsl #8
+  469dae:	78ca      	ldrb	r2, [r1, #3]
+  469db0:	ea50 4002 	orrs.w	r0, r0, r2, lsl #16
+  469db4:	7909      	ldrb	r1, [r1, #4]
+  469db6:	ea50 6001 	orrs.w	r0, r0, r1, lsl #24
+  469dba:	f8df 1a84 	ldr.w	r1, [pc, #2692]	@ 46a840 <.text+0xaa2>
+  469dbe:	6008      	str	r0, [r1, #0]
+  469dc0:	f7f0 fbd2 	bl	45a568 <.text-0xf836>
+  469dc4:	2801      	cmp	r0, #1
+  469dc6:	d124      	bne.n	469e12 <.text+0x74>
+  469dc8:	f7d9 fb5c 	bl	443484 <.text-0x2691a>
+  469dcc:	2801      	cmp	r0, #1
+  469dce:	d120      	bne.n	469e12 <.text+0x74>
+  469dd0:	a904      	add	r1, sp, #16
+  469dd2:	a803      	add	r0, sp, #12
+  469dd4:	f7d9 fb96 	bl	443504 <.text-0x2689a>
+  469dd8:	9804      	ldr	r0, [sp, #16]
+  469dda:	2800      	cmp	r0, #0
+  469ddc:	d11c      	bne.n	469e18 <.text+0x7a>

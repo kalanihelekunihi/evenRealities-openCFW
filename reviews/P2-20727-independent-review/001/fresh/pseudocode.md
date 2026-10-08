@@ -1,0 +1,4 @@
+# Shared byte48 exact one two helpers live return
+
+Partial/unaccepted;24instructionbytes,inherited88-byteframe,R5destination. Freshbyte[R5+48]R0compareexact1. Unequalskips0x47B3AAwithR0freshunsignedbyte48. Equalcallsrecovered0x479B74(R5,liveR1/R2/R3),thencalls0x47B730(R5,liveargumentsafterfirst),withoutguardingfirsthelperresult. R0aftersecondhelperremainsliveforreturn.
+Shared0x47B3AAaddsSP76:discard72localsplus savedentryR3slot;POP R4,R5,PC12bytesrestoresremaining88-byteframe. Returnisfreshbyte48ifitwasnot1,otherwiseliveR0secondhelperresult. Notbooleanorentryargumentreturn. Preserveexactoneguardandunconditionalhelpersequence. No C,freezeorcompletenessclaim.

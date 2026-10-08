@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "elf_sha256": "761be47077105549cc3ae0688ec5b27b3c850bf49b51011135e8f76192ddbd30",
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "cases": 697,
+  "body_bytes": {
+    "configure": 282,
+    "temperature": 48,
+    "setter": 8,
+    "registers": 86,
+    "ready": 74,
+    "before": 22,
+    "middle": 22,
+    "after": 22
+  },
+  "mapped_body_bytes": 564,
+  "visited_body_bytes_total": 564,
+  "limits": [
+    "All eight source bodies plus native callback/query/power23/clock-release/wait helpers execute; elapsed delay and registered callback bodies controlled.",
+    "Synthetic acknowledgement/readiness/sticky bits only, no hardware timing/concurrency/drain proof. Clock owner state initialized empty; no claim every release ownership state tested.",
+    "Temperature retains incomingR1/R2 response words without complete successful callback. FP32 S0 store executes natively; no float conversion, physical measurement units or calibrated temperature interpretation proved."
+  ]
+}

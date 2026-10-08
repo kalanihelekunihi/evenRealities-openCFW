@@ -1,0 +1,51 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpxh5857we/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+004840c8 <.text>:
+  4840c8:	b518      	push	{r3, r4, lr}
+  4840ca:	b08f      	sub	sp, #60	@ 0x3c
+  4840cc:	f050 fa09 	bl	4d44e2 <.text+0x5041a>
+  4840d0:	4668      	mov	r0, sp
+  4840d2:	499c      	ldr	r1, [pc, #624]	@ (484344 <.text+0x27c>)
+  4840d4:	e891 001c 	ldmia.w	r1, {r2, r3, r4}
+  4840d8:	e880 001c 	stmia.w	r0, {r2, r3, r4}
+  4840dc:	2101      	movs	r1, #1
+  4840de:	4668      	mov	r0, sp
+  4840e0:	f050 fa14 	bl	4d450c <.text+0x50444>
+  4840e4:	a809      	add	r0, sp, #36	@ 0x24
+  4840e6:	4998      	ldr	r1, [pc, #608]	@ (484348 <.text+0x280>)
+  4840e8:	2218      	movs	r2, #24
+  4840ea:	f7b5 fd8b 	bl	439c04 <.text-0x4a4c4>
+  4840ee:	2101      	movs	r1, #1
+  4840f0:	a809      	add	r0, sp, #36	@ 0x24
+  4840f2:	f050 fa50 	bl	4d4596 <.text+0x504ce>
+  4840f6:	a803      	add	r0, sp, #12
+  4840f8:	4994      	ldr	r1, [pc, #592]	@ (48434c <.text+0x284>)
+  4840fa:	2218      	movs	r2, #24
+  4840fc:	f7b5 fd82 	bl	439c04 <.text-0x4a4c4>
+  484100:	2101      	movs	r1, #1
+  484102:	a803      	add	r0, sp, #12
+  484104:	f050 fa47 	bl	4d4596 <.text+0x504ce>
+  484108:	2101      	movs	r1, #1
+  48410a:	4891      	ldr	r0, [pc, #580]	@ (484350 <.text+0x288>)
+  48410c:	f050 fa43 	bl	4d4596 <.text+0x504ce>
+  484110:	2101      	movs	r1, #1
+  484112:	4890      	ldr	r0, [pc, #576]	@ (484354 <.text+0x28c>)
+  484114:	f050 fa3f 	bl	4d4596 <.text+0x504ce>
+  484118:	2101      	movs	r1, #1
+  48411a:	488f      	ldr	r0, [pc, #572]	@ (484358 <.text+0x290>)
+  48411c:	f050 fa3b 	bl	4d4596 <.text+0x504ce>
+  484120:	2101      	movs	r1, #1
+  484122:	488e      	ldr	r0, [pc, #568]	@ (48435c <.text+0x294>)
+  484124:	f050 fa37 	bl	4d4596 <.text+0x504ce>
+  484128:	2101      	movs	r1, #1
+  48412a:	2000      	movs	r0, #0
+  48412c:	f7f0 ff72 	bl	475014 <.text-0xf0b4>
+  484130:	2101      	movs	r1, #1
+  484132:	2001      	movs	r0, #1
+  484134:	f050 f9da 	bl	4d44ec <.text+0x50424>
+  484138:	b010      	add	sp, #64	@ 0x40
+  48413a:	bd10      	pop	{r4, pc}

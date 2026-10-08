@@ -1,0 +1,3 @@
+# Outer/inner lists and persistent work flag traversal
+
+Partial/unaccepted;70 instructionbytes484548..48458E. PUSH R4/R5/R6/LR16B;R6=0once;R0=0,44FA22(liveentryR1/R2/R3)→R5outer. WhileR5nonnull:R4=word[outer+684];whileR4nonnull R1=R4,R0=R5,48458E;nonzeroresultR6=1;freshword[innerR4+76]→R4afterhelper. AfterinnerloopR0=UXTB(R6);zero→484528 then48462Ewithhelper-effects;nonzero skipsboth. R6workflagnotresetperouter. R0=R5,44FA22→nextR5;repeat. OuterzeroPOP16B;R0iszero44FA22resultonusualexit,notR6. Exactpersistentflag,next-after-helperandzero-workglobalcallsretained. Childhelper48458E/48462Eunresolved. No C,freeze,wholecoverage or equalityclaim.

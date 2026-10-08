@@ -1,0 +1,1 @@
+Partial/unaccepted continuity47BC30..47C06A,1082 instruction bytes,11 maps. Component hashes,pinned byte tiling and local branch instruction boundaries checked. 72-byte frame, ten-record scan, separate fresh byte guards, independent threshold comparison/reloads and diagnostic-only live R0 return preserved. No source/freeze/whole-firmware completeness claim.

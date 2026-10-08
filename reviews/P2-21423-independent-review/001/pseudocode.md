@@ -1,0 +1,3 @@
+# Allocated record copies, parent link and tail append return
+
+Partial/unaccepted;54 instructionbytes484440..484476 continuing4843EE32Bframe. Completepending439C04(R0=R4+24,R1=R6,R2=16). StoreparentR5word[R4+72];439C04(R0=R4+56,R1=R5+24,R2=16). Store1word[R4+80]. Freshword[parentR5+68]zero→storeR4there. Nonzero independentlyreloadword[parent+68]R1;loopfreshword[R1]R0nonnull→independentword[R1]reloadintoR1thenrepeat;zero→word[R1]=R4append. No explicitnewnodeword0initializationinthiscandidate;allocatorcontractpending. R0=R4newrecord;ADDSP16discardssavedentryR0..R3;POPR4/R5/R6/PC16B,total32Breleased. Repeatednextlinkloadsandpossiblealiasingpreserved. No C,freeze,wholecoverage or equalityclaim.

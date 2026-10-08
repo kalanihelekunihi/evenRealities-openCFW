@@ -1,0 +1,15 @@
+{
+  "flags": [
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m33",
+    "-mthumb",
+    "-mfloat-abi=softfp",
+    "-O1",
+    "-ffreestanding",
+    "-fno-builtin"
+  ],
+  "source": "g2/components/bootloader/initializer_callbacks/platform_log_literals/platform_literals.c",
+  "source_sha256": "d265695402e00a63ce7f1bca57af95e2d1ef8740ea73ec39212ed0b33514d710",
+  "object_sha256": "7ff6ddf8b0b2568e092ba68d2b273f9f475262c205af43d55e81929d93fbc324",
+  "unchanged_predecessor_objects": 241
+}

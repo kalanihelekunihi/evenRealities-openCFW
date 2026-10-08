@@ -1,0 +1,19 @@
+{
+  "review_id": "P2-21461-independent-review",
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-single-head-status-predicate-ordered-helper-wrappers-21860-map/001",
+  "status": "partial",
+  "accepted": false,
+  "checks": {
+    "fresh_replay": "pass",
+    "instruction_bytes": 130,
+    "instructions_match": true,
+    "references_match": true,
+    "zero_halfword_at": "0x484A0E",
+    "wrapper_frame_bytes": 16,
+    "pop_r0_source": "saved entry R3"
+  },
+  "limitations": [
+    "helper contracts and caller ABI unresolved",
+    "no whole-routine coverage or acceptance claim"
+  ]
+}

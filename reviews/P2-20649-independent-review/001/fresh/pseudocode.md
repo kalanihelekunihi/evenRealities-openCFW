@@ -1,0 +1,5 @@
+# Count five entry diagnostic prefix
+
+Partial/unaccepted; 124 instruction bytes, routine prefix. PUSH R0,R1,R2,R3,R4,R5,R6,R7,R8,LR creates 40-byte frame. R7=full entry R0, R8=full entry R1, R5=full entry R2, R6=literal47AE64. Saved R0..R3 slots SP0..12 are writable scratch and later discarded, not return slots.
+Call recovered 0x47A676(LOW8 R5, live remaining arguments); signed R0<5 branches to pending0x47A7B6. Otherwise query0x43D0CE with live arguments; status bit1 zero skips to0x47A76C. Bit1 set selects literal47A8A4 for LOW8 R5 nonzero or47A8A8 for zero, writes selection SP8, literal47AE68 SP4, 918 SP0; call0x43D574(4,literal47AE28,literal47ADCC,literal47AE6C,fifth918,sixthliteral47AE68,seventhselection).
+At0x47A76C query status afresh; bit0 one enters0x47A77C; otherwise query again and bit2 zero branches0x47A798. Mask path independently selects literal47A8A4/47A8A8 using LOW8 R5 without narrowing R5, loads R1=literal47AE70,R2=R1,R3=selectedliteral and calls0x43CE9E(0x10400000,R1,R2,R3). Fallthrough pending0x47A798. Preserve all separate queries and live arguments. No C, freeze or wholecoverage claim.

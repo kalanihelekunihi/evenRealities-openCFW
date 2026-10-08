@@ -1,0 +1,158 @@
+[
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-hot-transitions-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-hot-transitions-integrated/verify.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-hot-transitions-integrated/e5972f996f4ffc9a08ac54ba8e92e07cbc1745425db32b1eb78a9c9dea67b7ff/candidate.elf"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 260 {'action': 58, 'guard': 46, 'state': 136, 'delete': 156, 'release': 62}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-hot-transitions-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-hot-transitions-integrated/verify_native_teardown.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-hot-transitions-integrated/e5972f996f4ffc9a08ac54ba8e92e07cbc1745425db32b1eb78a9c9dea67b7ff/candidate.elf"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 512 {'action': 52, 'guard': 46, 'state': 124, 'delete': 136, 'release': 62, 'dfu': 24, 'manager': 22}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-hot-transitions-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-hot-transitions-integrated/verify_selector3.py",
+      "--candidate",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-hot-transitions-integrated/e5972f996f4ffc9a08ac54ba8e92e07cbc1745425db32b1eb78a9c9dea67b7ff/candidate.elf",
+      "--frozen-base",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-hot-transitions-integrated/e5972f996f4ffc9a08ac54ba8e92e07cbc1745425db32b1eb78a9c9dea67b7ff/validation/selector3.json"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-hot-transitions-integrated/run_oracle.py\", line 29, in <module>\n    runpy.run_path(str(script),run_name='__main__')\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 294, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-hot-transitions-integrated/verify_selector3.py\", line 158, in <module>\n    if __name__=='__main__':main()\n                            ~~~~^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-hot-transitions-integrated/verify_selector3.py\", line 112, in main\n    bindings=json.loads(BINDINGS.read_text());assert bindings['slots']['3']=='opencfw_spot_pcm22_transition3' and bindings['source_mask']=='0x737d96f'\n                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-hot-transitions-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-hot-transitions-integrated/verify_selector17.py",
+      "--candidate",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-hot-transitions-integrated/e5972f996f4ffc9a08ac54ba8e92e07cbc1745425db32b1eb78a9c9dea67b7ff/candidate.elf",
+      "--frozen-base",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-hot-transitions-integrated/e5972f996f4ffc9a08ac54ba8e92e07cbc1745425db32b1eb78a9c9dea67b7ff/validation/selector17.json"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-hot-transitions-integrated/run_oracle.py\", line 29, in <module>\n    runpy.run_path(str(script),run_name='__main__')\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 294, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-hot-transitions-integrated/verify_selector17.py\", line 154, in <module>\n    if __name__=='__main__':main()\n                            ~~~~^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-hot-transitions-integrated/verify_selector17.py\", line 119, in main\n    table=json.loads(SELECTORS.read_text());binding=json.loads(BASE_BINDINGS.read_text());assert table['output_bytes']==1371 and binding['source_mask']=='0x737d96f'\n                                                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-hot-transitions-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-hot-transitions-integrated/verify_idle.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-hot-transitions-integrated/e5972f996f4ffc9a08ac54ba8e92e07cbc1745425db32b1eb78a9c9dea67b7ff/candidate.elf",
+      "--cleanup-addon",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-hot-transitions-integrated/e5972f996f4ffc9a08ac54ba8e92e07cbc1745425db32b1eb78a9c9dea67b7ff/candidate.elf"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 24 {'cleanup': 60, 'action': 0, 'guard': 0, 'state': 0, 'delete': 0, 'release': 62}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-hot-transitions-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-hot-transitions-integrated/verify_heap_drain.py",
+      "--candidate-elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-hot-transitions-integrated/e5972f996f4ffc9a08ac54ba8e92e07cbc1745425db32b1eb78a9c9dea67b7ff/candidate.elf",
+      "--cleanup-addon",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-hot-transitions-integrated/e5972f996f4ffc9a08ac54ba8e92e07cbc1745425db32b1eb78a9c9dea67b7ff/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-hot-transitions-integrated/e5972f996f4ffc9a08ac54ba8e92e07cbc1745425db32b1eb78a9c9dea67b7ff/validation/heap-drain.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"status\": \"PASS\",\n  \"cases\": 3,\n  \"heap_layout\": {\n    \"rtos_arena_start\": \"0x2000055c\",\n    \"rtos_arena_end_exclusive\": \"0x2001455c\",\n    \"rtos_arena_bytes\": 81920,\n    \"candidate_load_segments_overlapping_arena\": [],\n    \"iom_context_pool_starts_at_heap_end\": true,\n    \"rtos_heap_init_and_insert_are_inlined_in_candidate_allocator\": true\n  },\n  \"visited\": {\n    \"idle_cleanup\": 60,\n    \"release_storage\": 50,\n    \"rtos_allocate\": 212,\n    \"rtos_free\": 84,\n    \"rtos_heap_initialize\": 90,\n    \"rtos_heap_insert\": 92\n  }\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-hot-transitions-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-hot-transitions-integrated/verify_pendsv.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-hot-transitions-integrated/e5972f996f4ffc9a08ac54ba8e92e07cbc1745425db32b1eb78a9c9dea67b7ff/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-hot-transitions-integrated/e5972f996f4ffc9a08ac54ba8e92e07cbc1745425db32b1eb78a9c9dea67b7ff/validation/pendsv.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS actual non-FP PendSV save/select/restore 4 cases\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-hot-transitions-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-hot-transitions-integrated/verify_allocator.py",
+      "--candidate-elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-hot-transitions-integrated/e5972f996f4ffc9a08ac54ba8e92e07cbc1745425db32b1eb78a9c9dea67b7ff/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-hot-transitions-integrated/e5972f996f4ffc9a08ac54ba8e92e07cbc1745425db32b1eb78a9c9dea67b7ff/validation/allocator.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"status\": \"PASS\",\n  \"cases\": 3,\n  \"heap_layout\": {\n    \"rtos_arena_start\": \"0x2000055c\",\n    \"rtos_arena_end_exclusive\": \"0x2001455c\",\n    \"rtos_arena_bytes\": 81920,\n    \"candidate_load_segments_overlapping_arena\": [],\n    \"iom_context_pool_starts_at_heap_end\": true,\n    \"rtos_heap_init_and_insert_are_inlined_in_candidate_allocator\": true\n  },\n  \"visited\": {\n    \"release_storage\": 50,\n    \"rtos_allocate\": 212,\n    \"rtos_free\": 84,\n    \"rtos_heap_initialize\": 90,\n    \"rtos_heap_insert\": 92\n  }\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-hot-transitions-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-events-a/verify_event_a_sequence8_timer.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-hot-transitions-integrated/e5972f996f4ffc9a08ac54ba8e92e07cbc1745425db32b1eb78a9c9dea67b7ff/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-hot-transitions-integrated/e5972f996f4ffc9a08ac54ba8e92e07cbc1745425db32b1eb78a9c9dea67b7ff/validation/regressions/sequence8.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS selector 8 timer enabled 24 fixtures\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-hot-transitions-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-events-a/verify_event_a_root_handlers.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-hot-transitions-integrated/e5972f996f4ffc9a08ac54ba8e92e07cbc1745425db32b1eb78a9c9dea67b7ff/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-hot-transitions-integrated/e5972f996f4ffc9a08ac54ba8e92e07cbc1745425db32b1eb78a9c9dea67b7ff/validation/regressions/sequence02.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS selectors 0 and 2 across timer/cache modes {0: [7, 3, 6, 0], 2: [3, 7, 0, 6]}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-hot-transitions-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm2_2-handlers-14-18/verify.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-hot-transitions-integrated/e5972f996f4ffc9a08ac54ba8e92e07cbc1745425db32b1eb78a9c9dea67b7ff/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-hot-transitions-integrated/e5972f996f4ffc9a08ac54ba8e92e07cbc1745425db32b1eb78a9c9dea67b7ff/validation/regressions/transitions1418.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 56 handler/fixture pairs {14: 210, 18: 464} stock instruction bytes visited\n",
+    "stderr": ""
+  }
+]

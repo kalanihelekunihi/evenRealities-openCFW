@@ -1,0 +1,4 @@
+# Byte46 mismatch fresh observations clear flag
+
+Partial/unaccepted;100instructionbytes,inherited40-byteframe,R5entryrecord,R4matchedtablepointer,R6inheritedflag. Freshbyte[R5+46]R0thenfreshbyte[R4+46]R1;equalbranches0x47B932preservingR6. Unequalquery43D0CE;bit1zero skips0x47B908;otherwisefreshbyte[R4+46]SP12thenfreshbyte[R5+46]SP8,literal47C298 SP4,1939 SP0;call43D574(1,literal47BC24,literal47BC20,literal47C27C,fifth1939,sixthliteral47C298,seventhfreshentrybyte46,eighthfreshtablebyte46).
+At0x47B908queryfreshstatus;bit0oneenters0x47B918,otherwisequeryagainandbit2zero skips0x47B930. MaskpathR1literal47C29C,freshbyte[R4+46]SP0thenfreshbyte[R5+46]R3,R2sameR1;call43CE9E(0x04800000,R1,R2,freshentrybyte46,fifthfreshtablebyte46). At0x47B930R6zeroevenifdiagnosticsdisabled. Fallthroughpending0x47B932. Comparison/logger/maskreadpairsareindependentandordered;stackwritesaliasSP0..12savedentryR0..R3;maskoverwritesSP0withtablebyte46. No C,freezeorcompletenessclaim.

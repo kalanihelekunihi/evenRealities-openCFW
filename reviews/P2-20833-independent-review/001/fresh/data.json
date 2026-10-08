@@ -1,0 +1,37 @@
+{
+  "start": 4705300,
+  "end": 4705308,
+  "bytes": "a883690021433412",
+  "words": [
+    {
+      "address": 4705300,
+      "value": 6914984
+    },
+    {
+      "address": 4705304,
+      "value": 305414945
+    }
+  ],
+  "consumers": [
+    {
+      "component": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-byte-table-high-byte-xor-rolling-word-update-21228-map/001",
+      "instruction": {
+        "address": 4705234,
+        "bytes": "104e",
+        "mnemonic": "ldr",
+        "operands": "r6, [pc, #64]\t@ (47cc14 <.text+0x50>)"
+      },
+      "literal_address": 4705300
+    },
+    {
+      "component": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-rounded-word-count-helper-primask-saved-r3-return-21230-map/001",
+      "instruction": {
+        "address": 4705286,
+        "bytes": "0448",
+        "mnemonic": "ldr",
+        "operands": "r0, [pc, #16]\t@ (47cc18 <.text+0x30>)"
+      },
+      "literal_address": 4705304
+    }
+  ]
+}

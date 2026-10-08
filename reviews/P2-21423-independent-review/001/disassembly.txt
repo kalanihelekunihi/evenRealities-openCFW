@@ -1,0 +1,30 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmps2o9gob8/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00484440 <.text>:
+  484440:	f7b5 fbe0 	bl	439c04 <.text-0x4a83c>
+  484444:	64a5      	str	r5, [r4, #72]	@ 0x48
+  484446:	f114 0038 	adds.w	r0, r4, #56	@ 0x38
+  48444a:	f115 0118 	adds.w	r1, r5, #24
+  48444e:	2210      	movs	r2, #16
+  484450:	f7b5 fbd8 	bl	439c04 <.text-0x4a83c>
+  484454:	2001      	movs	r0, #1
+  484456:	6520      	str	r0, [r4, #80]	@ 0x50
+  484458:	6c68      	ldr	r0, [r5, #68]	@ 0x44
+  48445a:	2800      	cmp	r0, #0
+  48445c:	d101      	bne.n	484462 <.text+0x22>
+  48445e:	646c      	str	r4, [r5, #68]	@ 0x44
+  484460:	e006      	b.n	484470 <.text+0x30>
+  484462:	6c69      	ldr	r1, [r5, #68]	@ 0x44
+  484464:	e000      	b.n	484468 <.text+0x28>
+  484466:	6809      	ldr	r1, [r1, #0]
+  484468:	6808      	ldr	r0, [r1, #0]
+  48446a:	2800      	cmp	r0, #0
+  48446c:	d1fb      	bne.n	484466 <.text+0x26>
+  48446e:	600c      	str	r4, [r1, #0]
+  484470:	0020      	movs	r0, r4
+  484472:	b004      	add	sp, #16
+  484474:	bd70      	pop	{r4, r5, r6, pc}

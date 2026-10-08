@@ -1,0 +1,132 @@
+{
+  "status": "PASS",
+  "image": {
+    "path": "g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin",
+    "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+    "load_address": "0x410000",
+    "state": "Thumb"
+  },
+  "function": {
+    "entry": "0x42ba00",
+    "end_exclusive": "0x42bd8c",
+    "bytes": 908,
+    "sha256": "1a5659a51222d91d03686766dd6caf89fcb4a813088e80095f61d554cc575450",
+    "ghidra_signature": "int FUN_0042ba00(byte param_1,char param_2,uint *param_3);",
+    "direct_callees": [
+      "0x0041b8ec",
+      "0x0042ad40",
+      "0x0042aef0",
+      "0x0042b014",
+      "0x0042b294",
+      "0x0042b6b8"
+    ]
+  },
+  "installed_slot": {
+    "table": "0x20026e38",
+    "offset": "0x04",
+    "stored_thumb_target": "0x42ba01",
+    "routes": [
+      "revision 34 / trim 2",
+      "revision 35 / trim 1"
+    ],
+    "runtime_source": "g2/components/bootloader/initializer_callbacks/startup_runtime.c",
+    "runtime_comparison": {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/runtime-comparison.json",
+      "status": "PASS",
+      "cases": 832
+    }
+  },
+  "abi": {
+    "registers": {
+      "r0": "stimulus/event (low 8 bits)",
+      "r1": "on/option (low 8 bits)",
+      "r2": "argument pointer"
+    },
+    "corroboration": "Pinned Apollo510 SPOT HAL declares am_hal_spotmgr_power_state_update(stimulus, bOn, pArgs); the locked Ghidra record separately supplies byte/char/pointer types.",
+    "header_path": "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/ambiqhal-apollo510/ambiqhal/mcu/apollo510/hal/am_hal_spotmgr.h"
+  },
+  "literal_pool_words": {
+    "0x0042bfc8": "0x40021108",
+    "0x0042bfcc": "0x20026ba0",
+    "0x0042bfd0": "0x1f01600d",
+    "0x0042bfd4": "0x200271bb",
+    "0x0042bfd8": "0x40021008",
+    "0x0042bfdc": "0x40021010",
+    "0x0042bfe0": "0x40021018",
+    "0x0042bfe4": "0x40021028",
+    "0x0042bfe8": "0x200271ba",
+    "0x0042bfec": "0x200271a5",
+    "0x0042bff0": "0x20000553",
+    "0x0042bff4": "0xc3888000",
+    "0x0042bff8": "0xc1a00000",
+    "0x0042bffc": "0xc1b00000",
+    "0x0042c000": "0x42480000",
+    "0x0042c004": "0x42400000",
+    "0x0042c008": "0x447a0000",
+    "0x0042c00c": "0x20000144",
+    "0x0042c010": "0x200271af",
+    "0x0042c014": "0x200271b1",
+    "0x0042c018": "0x2000014c",
+    "0x0042c01c": "0x4002037c"
+  },
+  "decoder_contract": {
+    "entry": "0x42b6b8",
+    "body_end_exclusive": "0x42b9ba",
+    "hash": "74f4304f6e3aa59022a29eb5e5f5479c77072b33355825b7c9409897001bb9d1",
+    "caller_stack_frame_bytes": 32,
+    "input_pointer": "sp+4",
+    "major_output_pointer": "sp+0",
+    "minor_output_pointer": "sp+24",
+    "input_offset_16": "sp+20: temp category saved from 0x200271ba",
+    "input_offset_17": "sp+21: state byte copied from 0x200271bb or requested transition",
+    "input_offset_18": "sp+22: auxiliary category computed in wrapper, or input for SYSTEM stimulus",
+    "config_word_address": "0x434164",
+    "locked_image_config_word": "0x00000000",
+    "hardware_control_word": "0x40021000",
+    "mode_byte": "0x2002708c",
+    "call_site_instruction_evidence": "0x42bce6 add r2,sp,#24; 0x42bce8 mov r1,sp; 0x42bcea add r0,sp,#4; 0x42bcec bl 0x42b6b8"
+  },
+  "scanner_contract": {
+    "entry": "0x42aef0",
+    "end_exclusive": "0x42b010",
+    "bytes": 288,
+    "sha256": "7a54959ea8247c505df0f3139ce607b4d1fabb5d0015054b89bd44b5d79cc31b",
+    "predicate": {
+      "entry": "0x41f3f0",
+      "end_exclusive": "0x41f424",
+      "bytes": 52,
+      "sha256": "2629a71d82c78f7602d8f37273ae02bcf42f237cdaab9da0d4db6d57a1045692",
+      "independent_comparison": "startup-spot-handlers/events-comparison.json"
+    },
+    "literal_pool": {
+      "0x0042b9d4": "0x400204d8",
+      "0x0042b9d8": "0x200271c0",
+      "0x0042b9dc": "0x40008800",
+      "0x0042b9e0": "0x40008000",
+      "0x0042b9e4": "0x40008010"
+    },
+    "channel_table": "16 words at 0x40008200 + index*0x20; active bitmap at 0x40008010",
+    "caller_stack_input": "0x42bb6c stores the temperature category at sp+20; 0x42bc06 passes sp+4, so scanner input byte +16 is that category"
+  },
+  "transition_contract": {
+    "entry": "0x42b294",
+    "end_exclusive": "0x42b69c",
+    "bytes": 1032,
+    "sha256": "0393f03222d8b7e8c67ed0e7ffbba640f8030dac259a909ec7dbb20846325c2b",
+    "profile": "Apollo510 SPOT SRAM structure at 0x20026ba0: locked transition instructions index 21 packed state words at +4..+0x54 and consume trim fields through +0x68",
+    "rank_tables": [
+      "0x200000a4",
+      "0x200000f4"
+    ],
+    "current_index": "0x20000148",
+    "syspll_bit": "bit 0 at 0x400083e0",
+    "return": "old minor value in r0; caller ignores it",
+    "nested_extents_authenticated": 10,
+    "direct_comparison": "transition-comparison-corrected.json: 30 cases; 858/1032 original bytes visited; exact remaining addresses recorded"
+  },
+  "limits": [
+    "HAL header names corroborate the public API concepts; no public HAL body is claimed as an exact stock match.",
+    "The transition direct harness uses seeded SPOT profile/rank state and a void ROM cycle-wait timing service; it does not establish hardware behavior.",
+    "No hardware or production linker behavior is claimed."
+  ]
+}

@@ -1,0 +1,4 @@
+# Record match counter reload explicit pointer return
+
+Partial/unaccepted;82 instructionbytes. PUSH R3,R4,R5,R6,R7,LRcreates24-byteframe. R5fullentryR1,R4literal47AE64. NarrowR0LOW8then call0x4D2AA8(LOW8entryR0,liveentryR1/R2/R3);retainfullresultR6. SetR7=10andbranch0x47AD8A. LOW8 R7zero branches0x47ADC2explicitR0zero. Otherwisefreshbyte[R4+47]zero skips;thenfreshbyte[R4+6]compareLOW8 R6,unequalskips;passingrecordcalls0x4D294A(R4,fullR5,liveR2,R3). Fullresultzero skips. Skiptail0x47AD86decrementsR7andadvancesR4by200modulo2^32;tenrecords. No byte48guard.
+NonzerohelperresultloadsR0literal47AE50,freshfullword[R0]intoR1,incrementmodulo2^32andstoreback;independentlyreloadfullword[R0]intoR0thenstorefullword[R4+196]. SetR0fullR4andbranchshared0x47ADC4. POP R1,R4,R5,R6,R7,PCrestores24frame;R1becomesfullsavedentryR3,R0retainsselectedpointerorzero. Freshcounterreadandreloadnotcached,helpercontractnotinferred. No C,freezeorwholecoverageclaim.

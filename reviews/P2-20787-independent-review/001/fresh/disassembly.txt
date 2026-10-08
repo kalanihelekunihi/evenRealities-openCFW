@@ -1,0 +1,50 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpp77rjaqt/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047bd90 <.text>:
+  47bd90:	f89a 002f 	ldrb.w	r0, [sl, #47]	@ 0x2f
+  47bd94:	2800      	cmp	r0, #0
+  47bd96:	d0cf      	beq.n	47bd38 <.text-0x58>
+  47bd98:	f7c1 f999 	bl	43d0ce <.text-0x3ecc2>
+  47bd9c:	0780      	lsls	r0, r0, #30
+  47bd9e:	d513      	bpl.n	47bdc8 <.text+0x38>
+  47bda0:	f8da 00c4 	ldr.w	r0, [sl, #196]	@ 0xc4
+  47bda4:	9003      	str	r0, [sp, #12]
+  47bda6:	f8cd 9008 	str.w	r9, [sp, #8]
+  47bdaa:	f8df 0b00 	ldr.w	r0, [pc, #2816]	@ 47c8ac <.text+0xb1c>
+  47bdae:	9001      	str	r0, [sp, #4]
+  47bdb0:	f240 70f4 	movw	r0, #2036	@ 0x7f4
+  47bdb4:	9000      	str	r0, [sp, #0]
+  47bdb6:	f8df 3788 	ldr.w	r3, [pc, #1928]	@ 47c540 <.text+0x7b0>
+  47bdba:	f8df 2788 	ldr.w	r2, [pc, #1928]	@ 47c544 <.text+0x7b4>
+  47bdbe:	f8df 1788 	ldr.w	r1, [pc, #1928]	@ 47c548 <.text+0x7b8>
+  47bdc2:	2004      	movs	r0, #4
+  47bdc4:	f7c1 fbd6 	bl	43d574 <.text-0x3e81c>
+  47bdc8:	f7c1 f981 	bl	43d0ce <.text-0x3ecc2>
+  47bdcc:	07c0      	lsls	r0, r0, #31
+  47bdce:	d403      	bmi.n	47bdd8 <.text+0x48>
+  47bdd0:	f7c1 f97d 	bl	43d0ce <.text-0x3ecc2>
+  47bdd4:	0740      	lsls	r0, r0, #29
+  47bdd6:	d50a      	bpl.n	47bdee <.text+0x5e>
+  47bdd8:	f8df 2ad4 	ldr.w	r2, [pc, #2772]	@ 47c8b0 <.text+0xb20>
+  47bddc:	f8da 00c4 	ldr.w	r0, [sl, #196]	@ 0xc4
+  47bde0:	9000      	str	r0, [sp, #0]
+  47bde2:	464b      	mov	r3, r9
+  47bde4:	0011      	movs	r1, r2
+  47bde6:	f05f 5084 	movs.w	r0, #276824064	@ 0x10800000
+  47bdea:	f7c1 f858 	bl	43ce9e <.text-0x3eef2>
+  47bdee:	f119 0901 	adds.w	r9, r9, #1
+  47bdf2:	f1b9 0f0a 	cmp.w	r9, #10
+  47bdf6:	f280 809a 	bge.w	47bf2e <.text+0x19e>
+  47bdfa:	ea5f 2009 	movs.w	r0, r9, lsl #8
+  47bdfe:	eb04 0a00 	add.w	sl, r4, r0
+  47be02:	f89a 0030 	ldrb.w	r0, [sl, #48]	@ 0x30
+  47be06:	2800      	cmp	r0, #0
+  47be08:	d0c2      	beq.n	47bd90 <.text>
+  47be0a:	f89a 002f 	ldrb.w	r0, [sl, #47]	@ 0x2f
+  47be0e:	2800      	cmp	r0, #0
+  47be10:	d0be      	beq.n	47bd90 <.text>
+  47be12:	f11b 0b01 	adds.w	fp, fp, #1

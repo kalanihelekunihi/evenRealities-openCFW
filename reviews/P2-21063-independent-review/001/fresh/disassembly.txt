@@ -1,0 +1,57 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpn17_aub5/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047f954 <.text>:
+  47f954:	b538      	push	{r3, r4, r5, lr}
+  47f956:	b08c      	sub	sp, #48	@ 0x30
+  47f958:	f8df 07b8 	ldr.w	r0, [pc, #1976]	@ 480114 <.text+0x7c0>
+  47f95c:	6800      	ldr	r0, [r0, #0]
+  47f95e:	f3c0 00c0 	ubfx	r0, r0, #3, #1
+  47f962:	2800      	cmp	r0, #0
+  47f964:	d008      	beq.n	47f978 <.text+0x24>
+  47f966:	485e      	ldr	r0, [pc, #376]	@ (47fae0 <.text+0x18c>)
+  47f968:	6800      	ldr	r0, [r0, #0]
+  47f96a:	f3c0 60c0 	ubfx	r0, r0, #27, #1
+  47f96e:	f010 0001 	ands.w	r0, r0, #1
+  47f972:	f090 0001 	eors.w	r0, r0, #1
+  47f976:	e000      	b.n	47f97a <.text+0x26>
+  47f978:	2001      	movs	r0, #1
+  47f97a:	b2c0      	uxtb	r0, r0
+  47f97c:	2800      	cmp	r0, #0
+  47f97e:	d001      	beq.n	47f984 <.text+0x30>
+  47f980:	2007      	movs	r0, #7
+  47f982:	e095      	b.n	47fab0 <.text+0x15c>
+  47f984:	466b      	mov	r3, sp
+  47f986:	2202      	movs	r2, #2
+  47f988:	f44f 6190 	mov.w	r1, #1152	@ 0x480
+  47f98c:	2005      	movs	r0, #5
+  47f98e:	f054 fad5 	bl	4d3f3c <.text+0x545e8>
+  47f992:	2800      	cmp	r0, #0
+  47f994:	f040 808c 	bne.w	47fab0 <.text+0x15c>
+  47f998:	f8df 477c 	ldr.w	r4, [pc, #1916]	@ 480118 <.text+0x7c4>
+  47f99c:	9800      	ldr	r0, [sp, #0]
+  47f99e:	6060      	str	r0, [r4, #4]
+  47f9a0:	466d      	mov	r5, sp
+  47f9a2:	6868      	ldr	r0, [r5, #4]
+  47f9a4:	60a0      	str	r0, [r4, #8]
+  47f9a6:	466b      	mov	r3, sp
+  47f9a8:	2201      	movs	r2, #1
+  47f9aa:	f44f 7101 	mov.w	r1, #516	@ 0x204
+  47f9ae:	2001      	movs	r0, #1
+  47f9b0:	f054 fac4 	bl	4d3f3c <.text+0x545e8>
+  47f9b4:	2800      	cmp	r0, #0
+  47f9b6:	d17b      	bne.n	47fab0 <.text+0x15c>
+  47f9b8:	9800      	ldr	r0, [sp, #0]
+  47f9ba:	60e0      	str	r0, [r4, #12]
+  47f9bc:	466b      	mov	r3, sp
+  47f9be:	2201      	movs	r2, #1
+  47f9c0:	f240 2106 	movw	r1, #518	@ 0x206
+  47f9c4:	2001      	movs	r0, #1
+  47f9c6:	f054 fab9 	bl	4d3f3c <.text+0x545e8>
+  47f9ca:	2800      	cmp	r0, #0
+  47f9cc:	d170      	bne.n	47fab0 <.text+0x15c>
+  47f9ce:	9800      	ldr	r0, [sp, #0]
+  47f9d0:	6120      	str	r0, [r4, #16]

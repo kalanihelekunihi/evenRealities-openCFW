@@ -1,0 +1,35 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpgo2ticho/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00482900 <.text>:
+  482900:	1e52      	subs	r2, r2, #1
+  482902:	e004      	b.n	48290e <.text+0xe>
+  482904:	5c8b      	ldrb	r3, [r1, r2]
+  482906:	eb01 0702 	add.w	r7, r1, r2
+  48290a:	713b      	strb	r3, [r7, #4]
+  48290c:	1e52      	subs	r2, r2, #1
+  48290e:	2a00      	cmp	r2, #0
+  482910:	d5f8      	bpl.n	482904 <.text+0x4>
+  482912:	7a21      	ldrb	r1, [r4, #8]
+  482914:	1c49      	adds	r1, r1, #1
+  482916:	7221      	strb	r1, [r4, #8]
+  482918:	7a21      	ldrb	r1, [r4, #8]
+  48291a:	eb00 0181 	add.w	r1, r0, r1, lsl #2
+  48291e:	7a22      	ldrb	r2, [r4, #8]
+  482920:	4411      	add	r1, r2
+  482922:	f801 5c01 	strb.w	r5, [r1, #-1]
+  482926:	7a21      	ldrb	r1, [r4, #8]
+  482928:	eb00 0081 	add.w	r0, r0, r1, lsl #2
+  48292c:	f840 6c04 	str.w	r6, [r0, #-4]
+  482930:	0028      	movs	r0, r5
+  482932:	b2c0      	uxtb	r0, r0
+  482934:	f7ff ff23 	bl	48277e <.text-0x182>
+  482938:	6861      	ldr	r1, [r4, #4]
+  48293a:	2201      	movs	r2, #1
+  48293c:	fa12 f000 	lsls.w	r0, r2, r0
+  482940:	4308      	orrs	r0, r1
+  482942:	6060      	str	r0, [r4, #4]
+  482944:	bdf7      	pop	{r0, r1, r2, r4, r5, r6, r7, pc}

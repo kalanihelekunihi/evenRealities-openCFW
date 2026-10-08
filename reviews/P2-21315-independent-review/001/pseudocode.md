@@ -1,0 +1,5 @@
+# Numeric-output zero fill and width adjustment prefix
+
+Partial/unaccepted;106 instructionbytes4830DA..483144. PUSH{R3,R4,R5,R6,R7,R8,R9,LR}32bytes,SUBSP16,total48. R4=entryR0callback;freshSP48→R7buffer(fifthargument),SP52→R0count(sixth),SP56→R6(seventh),SP64→R12precision(ninth),SP68→R5width(tenth),SP72→LRflags(eleventh). EntryR1/R2/R3 remainlive. Flagsbit1set viaLSL30MI branchesunresolved483144skippingentirefillprefix. ElseifR5!=0 andflagsbit0set: R8=UXTB(R6);ifnonzeroor(flags&12)!=0 decrementR5mod;otherwiseunchanged. Thisadjustmentdoesnotalterstackwidth.
+
+Firstzero-fillloop unsignedR0<R12 andunsignedR0<32: R8=48,storelowbyte[R7+R0],R0++mod,repeat. Thensecondlooponlyflagsbit0set andunsignedR0<R5 andR0<32: samezero-store/countincrement,repeat. Fallthrough483144unresolved. No callinthisrange,bufferbound32appliesnewwritesbutinitialcountnotclamped. Preservefullwidth/precision comparisons,byteR6test,wrappingwidthdecrement,argumentreadorderandflagbit1skip. No C,freeze,wholecoverage or equalityclaim.

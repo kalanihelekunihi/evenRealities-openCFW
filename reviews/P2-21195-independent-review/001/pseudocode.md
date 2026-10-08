@@ -1,0 +1,5 @@
+# Format flags and star/signed width or bounded digit parser
+
+Partial/unaccepted;154 instruction bytes481884..48191E. Continues481836 with232frame,R10formatpointer,R9argumentcursorpointer,R1flags initially0,R2initial0. NULentry481884 returnswordSP52via4824E8 unresolvedunwind. FlaglooppreincrementsR10,freshbyte;spaceORflags1,plus2,minus4,hash8,zero16;repeatpreincrementuntilotherbyte. Firstnonflag remainsatR10. Starwidth:loadword[R9]cursor,loadfullword[cursor]postincrement4,storeadvancedcursor[R9];widthword→SP60. Signednegative→negatemod2^32→SP60,ORflag4;INT_MINremains80000000. IncrementR10once;join48190E.
+
+Nonstar:storeinitialR2zeroSP60;R3literal4824F0limit;loopfreshbyte[R10]→R2;unsigned(byte-48)<10 determinesdigit. OndigitreloadwidthSP60;ifsignedwidth<signedlimit,computeR4=5*widthmod2^32,R2=byte+2*R4-48mod2^32→SP60;elseleavewidthunchanged. Consumeeverydigitevenwhenlimitpreventsupdate. IncrementR10andrepeat. At48190E freshbyte[R10]reload;dot→48191E unresolvedprecision;otherwiseSP56=FFFFFFFF andbranch481972. PreservefreshreloadsandregisterR4clobberfromwidtharithmetic;no inferredsaturation orstandardprintf-equivalence. No C/freeze/fullcoverage/equality claim.

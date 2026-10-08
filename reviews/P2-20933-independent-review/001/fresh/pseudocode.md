@@ -1,0 +1,4 @@
+# Conditional dispatch with signed retry count guard
+
+Partial/unaccepted;82instructionbytes47DDAC..47DDFE. PUSH R7,LR8;443484(liveargs). Fullnonzero writesSP0=0 then47E7B0(freshword[pointerliteral47E28C],4,2000,0),withSP0stackarg0;returnsSP0viaPOP R0,PC.
+Fullfirstresultzero→48EB90(liveargs). Fullsecondresultzero skips remainingwork. Nonzero→R0=literal47E290 pointer,freshword intoR1;SIGNEDword>=10 skips. Otherwise independently rereadword,incrementmodulo2^32 andstore;SP0=0;47E7B0(freshword[pointerliteral47E28C],4,5000,0),withSP0stackarg0. Thus negative firstcountpasses, and secondfreshcountnotrecheckedbeforeincrement. No unsignedsaturation or cachedcount equivalence assumed. AllbranchesjoinPOP R0,PC: dispatchpathsreturnSP0zero subjecttocallee memorywrites; skippedpathsreturn savedentryR7 subjecttoexternalstackeffects. HelperreturnR0discarded. No C/freeze/completenessclaim;externalhelpersemanticsunresolved.

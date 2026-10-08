@@ -1,0 +1,5 @@
+# Conditional three-helper return and indexed record-query prefix
+
+Partial/unaccepted;136instructionbytes47F56E..47F5F6. F56E PUSH R4,LR8;R4literalFFBCvalue;4807FC(100,R4,256,256). Fullzero returnszero. Nonzero→4807FC(100,literalFFC0value,1,1). Fullnonzero returnssecondresultunchanged. Secondzero→independentlyfreshword throughliteral4800F4 OR1stored, then4807FC(100,R4,256,256),returnsfullthirdresult. POP R4,PC releases8; no normalization or earlyfallbackinvented.
+
+F5B8 PUSH R3,R4,R5,LR16;SUBSP24,40totalframe;R4fullentryR0. EF18(SP+4,LOW8(entryR0),liveR2/R3),fullnonzerobranchesF6EEoutsideprefixwithframeactive. Zero→freshSP4pointer dereferencedword, freshSP8mask; anyintersectionnonzero setsR0=0 thenbranchesF6EE. Otherwise LOW8(entryR0)==23 only, independentlyfreshwordthroughFAE0bit27zero setsR0=1 thenbranchesF6EE; bit27nonzero orotherindexcontinuesF5F6withframeactive,R4entryindex andlocal16byterecordatSP4fromEF18. No localrecordinitializationassumptionbeyondhelper call; no prefixreturn/unwind claim. Externalhelper/pointedownershipunresolved; noMMIO/C/freeze/fullcoverageclaim.

@@ -1,0 +1,52 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpan_um5mf/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+004812f6 <.text>:
+  4812f6:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+  4812f8:	b088      	sub	sp, #32
+  4812fa:	0006      	movs	r6, r0
+  4812fc:	000f      	movs	r7, r1
+  4812fe:	0015      	movs	r5, r2
+  481300:	2400      	movs	r4, #0
+  481302:	2000      	movs	r0, #0
+  481304:	e005      	b.n	481312 <.text+0x1c>
+  481306:	f05f 31ff 	movs.w	r1, #4294967295	@ 0xffffffff
+  48130a:	aa01      	add	r2, sp, #4
+  48130c:	f842 1020 	str.w	r1, [r2, r0, lsl #2]
+  481310:	1c40      	adds	r0, r0, #1
+  481312:	2807      	cmp	r0, #7
+  481314:	d3f7      	bcc.n	481306 <.text+0x10>
+  481316:	f7f2 fb13 	bl	473940 <.text-0xd9b6>
+  48131a:	9000      	str	r0, [sp, #0]
+  48131c:	0030      	movs	r0, r6
+  48131e:	b2c0      	uxtb	r0, r0
+  481320:	2800      	cmp	r0, #0
+  481322:	d14b      	bne.n	4813bc <.text+0xc6>
+  481324:	b2ff      	uxtb	r7, r7
+  481326:	2f00      	cmp	r7, #0
+  481328:	d01c      	beq.n	481364 <.text+0x6e>
+  48132a:	f8df 043c 	ldr.w	r0, [pc, #1084]	@ 481768 <.text+0x472>
+  48132e:	6800      	ldr	r0, [r0, #0]
+  481330:	9001      	str	r0, [sp, #4]
+  481332:	a801      	add	r0, sp, #4
+  481334:	f8df 1434 	ldr.w	r1, [pc, #1076]	@ 48176c <.text+0x476>
+  481338:	6809      	ldr	r1, [r1, #0]
+  48133a:	6041      	str	r1, [r0, #4]
+  48133c:	f8df 1430 	ldr.w	r1, [pc, #1072]	@ 481770 <.text+0x47a>
+  481340:	6809      	ldr	r1, [r1, #0]
+  481342:	6081      	str	r1, [r0, #8]
+  481344:	f8df 142c 	ldr.w	r1, [pc, #1068]	@ 481774 <.text+0x47e>
+  481348:	6809      	ldr	r1, [r1, #0]
+  48134a:	60c1      	str	r1, [r0, #12]
+  48134c:	f8df 1428 	ldr.w	r1, [pc, #1064]	@ 481778 <.text+0x482>
+  481350:	6809      	ldr	r1, [r1, #0]
+  481352:	6101      	str	r1, [r0, #16]
+  481354:	f8df 1424 	ldr.w	r1, [pc, #1060]	@ 48177c <.text+0x486>
+  481358:	6809      	ldr	r1, [r1, #0]
+  48135a:	6141      	str	r1, [r0, #20]
+  48135c:	f8df 1420 	ldr.w	r1, [pc, #1056]	@ 481780 <.text+0x48a>
+  481360:	6809      	ldr	r1, [r1, #0]
+  481362:	6181      	str	r1, [r0, #24]

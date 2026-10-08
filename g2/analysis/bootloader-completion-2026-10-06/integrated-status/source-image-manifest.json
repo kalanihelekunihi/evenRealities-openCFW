@@ -1,0 +1,1059 @@
+{
+  "utc": "2026-10-06T22:09:14.750671+00:00",
+  "scope": "Relocated source-linked bootloader test image. Segment execute permission includes rodata and padding; executable segment bytes are not instruction coverage. Every numeric alias is listed, including alternatives not reached by the receipt. No complete bootable payload, source closure or byte identity claim.",
+  "elf": "g2/build/bootloader-completion/source-image-compatible/bootloader-source-test.elf",
+  "elf_sha256": "8cd9ed1a115ec00bfbed9f58c4e118b3250efb96b7e8ee88e57c070b215fc1db",
+  "linker": "g2/components/bootloader/thread_creation/startup_source_image.ld",
+  "linker_sha256": "7e0ac5b6ed8373d39cd332c38bb8252898867873af40ae2fc7a9bb9002d0439c",
+  "receipt": "g2/build/bootloader-completion/source-image-compatible/comparison.json",
+  "receipt_sha256": "f42f9dff9261c7fce8229b7ac93eedb2903e0b26517ca642a1ab66eccc4dca55",
+  "receipt_status": "PASS",
+  "receipt_original_instruction_bytes": 30368,
+  "segments": [
+    {
+      "address": "0x10000",
+      "memory_bytes": 64132,
+      "file_bytes": 64132,
+      "flags": 5,
+      "sha256": "e34f35bf2d62f1cbd772408cfe2d2a3f80f352fd7ad128fc103bb181a2980aff"
+    },
+    {
+      "address": "0x430a9c",
+      "memory_bytes": 84,
+      "file_bytes": 84,
+      "flags": 5,
+      "sha256": "7e9758aa22dc4f86a139fdf378b1881339a5723ec4229211a44cab091805e13b"
+    },
+    {
+      "address": "0x43401c",
+      "memory_bytes": 8,
+      "file_bytes": 8,
+      "flags": 4,
+      "sha256": "dd7ee6eef507a502f9e1c859b8462f273c779591a37ed189ffe88db2ca68a21e"
+    },
+    {
+      "address": "0x433754",
+      "memory_bytes": 24,
+      "file_bytes": 24,
+      "flags": 4,
+      "sha256": "c69689bd915b0380c557fb108959845ffd678b7c195f825ae2d23ad33af03e66"
+    },
+    {
+      "address": "0x430880",
+      "memory_bytes": 480,
+      "file_bytes": 480,
+      "flags": 4,
+      "sha256": "1ed1fa3682f9c16c403ee0e6cee7761b70ca610656a2b6e56de3f0b05cee7fea"
+    },
+    {
+      "address": "0x433d98",
+      "memory_bytes": 48,
+      "file_bytes": 48,
+      "flags": 4,
+      "sha256": "5edb0868c1b00a19a1b9d1bf4eeca71be0c00dd7f83fc291602cf4adfcd598bf"
+    },
+    {
+      "address": "0x434158",
+      "memory_bytes": 8,
+      "file_bytes": 8,
+      "flags": 4,
+      "sha256": "9c6eb0e3277a2ea00a09263dbbc1cc4a61e4c68cca149f931c89b7c1d099d7ce"
+    },
+    {
+      "address": "0x42dad0",
+      "memory_bytes": 24,
+      "file_bytes": 24,
+      "flags": 4,
+      "sha256": "5ae02ff6e53b8366317a57fa4f157a9de18f62536411334d6743520659ce4c98"
+    },
+    {
+      "address": "0x4336e4",
+      "memory_bytes": 26,
+      "file_bytes": 26,
+      "flags": 4,
+      "sha256": "4c89635f2a55d8bf588d9ce6b0390be2b8d89648bcfd94a02236efc10d193b69"
+    },
+    {
+      "address": "0x419444",
+      "memory_bytes": 4,
+      "file_bytes": 4,
+      "flags": 5,
+      "sha256": "1925416ededf7a9fd8670d770189c042adf3bd8a3fcb4139a42274bc7e1cf7af"
+    },
+    {
+      "address": "0x41639a",
+      "memory_bytes": 4,
+      "file_bytes": 4,
+      "flags": 5,
+      "sha256": "300cdf0df0e29941a4c06ba28509b50a8f52fa52ac1833884eb0089909d2f76c"
+    },
+    {
+      "address": "0x42e2f8",
+      "memory_bytes": 4,
+      "file_bytes": 4,
+      "flags": 5,
+      "sha256": "7a5e021a58994b61b8a6703a9bf1324e2ea54d0e9e1b974c12f0b0fe87fb2912"
+    },
+    {
+      "address": "0x42e644",
+      "memory_bytes": 4,
+      "file_bytes": 4,
+      "flags": 5,
+      "sha256": "2f42a9f4648e9212418e7af8386de11edbb407da5cf795fd618bb0f876c374b5"
+    },
+    {
+      "address": "0x42ddae",
+      "memory_bytes": 4,
+      "file_bytes": 4,
+      "flags": 5,
+      "sha256": "0a7fa2f5afe57e18b079d3a89a625c4d6a97be354604332f17e5be5d5bc1fbe5"
+    },
+    {
+      "address": "0x42dd14",
+      "memory_bytes": 116,
+      "file_bytes": 116,
+      "flags": 5,
+      "sha256": "3452b1bac54d9626ab15f50d308195a9571b9612a450d235cd9011de687dd85f"
+    },
+    {
+      "address": "0x4341a4",
+      "memory_bytes": 4,
+      "file_bytes": 4,
+      "flags": 4,
+      "sha256": "725bca38e056913b09376dacbaa74eb3f961742535d131bf7927e950e11f7103"
+    },
+    {
+      "address": "0x433b3c",
+      "memory_bytes": 17,
+      "file_bytes": 17,
+      "flags": 4,
+      "sha256": "da618e4e1f9ff522b39ce08b93ba28ed2d2debf38da3b3ef3a9bada642686298"
+    },
+    {
+      "address": "0x433b50",
+      "memory_bytes": 18,
+      "file_bytes": 18,
+      "flags": 4,
+      "sha256": "a856efceeec5c6aa8130779566ef942f3e867cc430e04a60150b7e41924f38bc"
+    },
+    {
+      "address": "0x433f68",
+      "memory_bytes": 9,
+      "file_bytes": 9,
+      "flags": 4,
+      "sha256": "6c0d8ed182a09dfaa22e9c9b1b71d0c8f96dc148dfba82a943485fec58bf0799"
+    },
+    {
+      "address": "0x415326",
+      "memory_bytes": 6,
+      "file_bytes": 6,
+      "flags": 5,
+      "sha256": "f09dd117acd87e1cc43b66e513ff9d89b9a6e771c08e45ad8d06bcfa0fcfd9a8"
+    },
+    {
+      "address": "0x43198c",
+      "memory_bytes": 59,
+      "file_bytes": 59,
+      "flags": 4,
+      "sha256": "d2eb02e9e95ec14466a0400364d1ea24497a04b7073a2311ee47e2738ae06d72"
+    },
+    {
+      "address": "0x431e38",
+      "memory_bytes": 6,
+      "file_bytes": 6,
+      "flags": 5,
+      "sha256": "220cc1cf8922a71b3ca18368caedd4caecbf6e45fc145bbf0ed081898eedf0de"
+    },
+    {
+      "address": "0x4330d8",
+      "memory_bytes": 72,
+      "file_bytes": 72,
+      "flags": 4,
+      "sha256": "6b49c166db580b208c6fdbac81858b42603f164b9caf0f065507836def88cfa9"
+    },
+    {
+      "address": "0x42e39c",
+      "memory_bytes": 54,
+      "file_bytes": 54,
+      "flags": 5,
+      "sha256": "0d3acebdcafa910179698bb95700f3f226faf5693b0b47a12f8624b4d80f6d1a"
+    },
+    {
+      "address": "0x431340",
+      "memory_bytes": 74,
+      "file_bytes": 74,
+      "flags": 4,
+      "sha256": "ca9462b7a46fa98faca9acca1e7526de37d1417badd739f69c4586e083f92dbb"
+    },
+    {
+      "address": "0x433024",
+      "memory_bytes": 36,
+      "file_bytes": 36,
+      "flags": 4,
+      "sha256": "947f9c17b73a4338ff8d56fe2b2c55c340bd51db78d3dbbff869b2ddb5f3731a"
+    },
+    {
+      "address": "0x433360",
+      "memory_bytes": 30,
+      "file_bytes": 30,
+      "flags": 4,
+      "sha256": "cf4f26e31cb2eb28828b1b0f70c73b49f3903a7158fb1a839141dc8a5d8e4202"
+    },
+    {
+      "address": "0x43411c",
+      "memory_bytes": 5,
+      "file_bytes": 5,
+      "flags": 4,
+      "sha256": "2498c4cd987b16bdca8edb572c79e077433c77ea77b844557d156e7e324496f6"
+    },
+    {
+      "address": "0x434124",
+      "memory_bytes": 5,
+      "file_bytes": 5,
+      "flags": 4,
+      "sha256": "2498c4cd987b16bdca8edb572c79e077433c77ea77b844557d156e7e324496f6"
+    },
+    {
+      "address": "0x434134",
+      "memory_bytes": 8,
+      "file_bytes": 8,
+      "flags": 4,
+      "sha256": "22835a65866ce18944007db024d01ad9b0fba9985494f3f71755c4d5b25778b5"
+    },
+    {
+      "address": "0x43412c",
+      "memory_bytes": 5,
+      "file_bytes": 5,
+      "flags": 4,
+      "sha256": "1fb4a5dc35b8f2f5076872699bc2c56f10b372be3442d64873e000aba2f394da"
+    },
+    {
+      "address": "0x43413c",
+      "memory_bytes": 8,
+      "file_bytes": 8,
+      "flags": 4,
+      "sha256": "942af4968e52ddd40e0ebf13550c2c72c22f4acb76a5fd79983facf9f30e9f35"
+    }
+  ],
+  "numeric_aliases": [
+    {
+      "symbol": "opencfw_boot_platform_terminal",
+      "thumb_address": "0x4329c5",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_provider_41f9f8",
+      "thumb_address": "0x41f9f9",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_provider_41fa50",
+      "thumb_address": "0x41fa51",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_provider_41e1e8",
+      "thumb_address": "0x41e1e9",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_provider_41e266",
+      "thumb_address": "0x41e267",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_provider_41ba80",
+      "thumb_address": "0x41ba81",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_provider_415fae",
+      "thumb_address": "0x415faf",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_fs_mutex_acquire",
+      "thumb_address": "0x4166ab",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_fs_mutex_release",
+      "thumb_address": "0x416711",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_allocator_log",
+      "thumb_address": "0x08002101",
+      "kind": "named-test-provider-or-unrecovered-implementation-cut"
+    },
+    {
+      "symbol": "printf",
+      "thumb_address": "0x08002111",
+      "kind": "named-test-provider-or-unrecovered-implementation-cut"
+    },
+    {
+      "symbol": "opencfw_provider_4176ce",
+      "thumb_address": "0x4176cf",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_bl_task_return",
+      "thumb_address": "0x41b391",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_bl_stack_overflow",
+      "thumb_address": "0x41b601",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_provider_4201ba",
+      "thumb_address": "0x4201bb",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_provider_420890",
+      "thumb_address": "0x420891",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_provider_420c5c",
+      "thumb_address": "0x420c5d",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_bl_status_transfer_error",
+      "thumb_address": "0x415faf",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_publish_mspi_mode",
+      "thumb_address": "0x41fadd",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_read_mspi_register_id",
+      "thumb_address": "0x41d90f",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_bl_log",
+      "thumb_address": "0x4176cf",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_bl_transfer_error",
+      "thumb_address": "0x415faf",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_publish_device_mode",
+      "thumb_address": "0x41fadd",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_provider_416200",
+      "thumb_address": "0x416201",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_dfu_log",
+      "thumb_address": "0x08002121",
+      "kind": "named-test-provider-or-unrecovered-implementation-cut"
+    },
+    {
+      "symbol": "opencfw_bl_kernel_queue_put_from_isr",
+      "thumb_address": "0x41a025",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_bl_kernel_queue_get_from_isr",
+      "thumb_address": "0x41a3b1",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_bl_malloc_failed",
+      "thumb_address": "0x41b5f7",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_dfu_terminal",
+      "thumb_address": "0x42e1db",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_log",
+      "thumb_address": "0x4176cf",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_isr_thread_notify",
+      "thumb_address": "0x418fe9",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_bl_event_flags_set_isr",
+      "thumb_address": "0x419bd3",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_control_log",
+      "thumb_address": "0x08002131",
+      "kind": "named-test-provider-or-unrecovered-implementation-cut"
+    },
+    {
+      "symbol": "opencfw_boot_control_power_apply_configure",
+      "thumb_address": "0x08002211",
+      "kind": "named-test-provider-or-unrecovered-implementation-cut"
+    },
+    {
+      "symbol": "opencfw_boot_fs_error",
+      "thumb_address": "0x415faf",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_bl_kernel_state",
+      "thumb_address": "0x416089",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_bl_task_delay",
+      "thumb_address": "0x416379",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_hal_mspi_control_unrecovered_request",
+      "thumb_address": "0x08002221",
+      "kind": "named-test-provider-or-unrecovered-implementation-cut"
+    },
+    {
+      "symbol": "opencfw_bl_printf",
+      "thumb_address": "0x415faf",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_power_special_mode",
+      "thumb_address": "0x41bae9",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_rom_mram_program",
+      "thumb_address": "0x0200ff21",
+      "kind": "external-resident-ROM-API-body-absent-from-OTA"
+    },
+    {
+      "symbol": "opencfw_boot_device_wait_service",
+      "thumb_address": "0x4213e7",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_rom_delay_cycles",
+      "thumb_address": "0x00000041",
+      "kind": "external-resident-ROM-API-body-absent-from-OTA"
+    }
+  ],
+  "undefined_symbols": [],
+  "receipt_source_hash_mismatches": [
+    "g2/components/bootloader/thread_creation/write_image_manifest.py",
+    "g2/components/bootloader/thread_creation/verify_dfu_storage_powerloss.py"
+  ],
+  "authenticated_fixture_inputs": [
+    {
+      "kind": "initial-stack-value",
+      "bytes": 4
+    },
+    {
+      "kind": "compressed-initializer-data",
+      "bytes": 695
+    },
+    {
+      "kind": "application-vector",
+      "bytes": 8
+    }
+  ],
+  "modeled_interfaces": [
+    "Synthetic NOR ports/command completion; no physical persistence/latency/coherence",
+    "Selected mutex/kernel/logger callbacks and basic exception delivery",
+    "External ROM0200ff20 status/program callback; no ROM body loaded",
+    "Native full device-info mode1 query supplies range record word11; synthetic core-debug/MCU register values",
+    "Native41d1c0 floating delay math; only resident ROM Thumb41 delay-cycle call is modeled",
+    "Generated288-byte update and RAM application/flag pages; no application instruction execution"
+  ],
+  "remaining_source_gaps": [
+    "All remaining numeric stock-address aliases and fixture callbacks listed above require closure or a legitimate external-API justification for a standalone payload",
+    "HAL controls26\u201327,29\u201331,33\u201334 remain delegated here;31/33 private source ready but not routed in this ELF",
+    "Source INFO read service4213e6 is separately validated but not yet bound in mode0 shared-image path",
+    "Remaining initializer consumers/callbacks, timing/XIP and ISR/deferred/cancellation/termination integration",
+    "Full payload vectors/assets/layout/data source definition and exact compiler reproduction",
+    "Init-table41f9f8 consumer source ready but native qsort and actual callbacks remain open; partial tests use stock-derived sort output explicitly."
+  ],
+  "immutable_image_snapshot": "g2/build/bootloader-completion/source-image-compatible/snapshots/8cd9ed1a115ec00bfbed9f58c4e118b3250efb96b7e8ee88e57c070b215fc1db/bootloader-source-test.elf",
+  "immutable_seed_snapshot": "g2/build/bootloader-completion/source-image-compatible/snapshots/8cd9ed1a115ec00bfbed9f58c4e118b3250efb96b7e8ee88e57c070b215fc1db/filesystem-seed.elf",
+  "seed_sha256": "e6ba6916ee417e9efec1f4dc90a50f8ce7777f0e2ad8f976e6d2e27856072b78",
+  "paired_profiles": [
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/8cd9ed1a115ec00bfbed9f58c4e118b3250efb96b7e8ee88e57c070b215fc1db/comparison.json",
+      "sha256": "f42f9dff9261c7fce8229b7ac93eedb2903e0b26517ca642a1ab66eccc4dca55",
+      "status": "PASS",
+      "cases": 2
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/8cd9ed1a115ec00bfbed9f58c4e118b3250efb96b7e8ee88e57c070b215fc1db/failures.json",
+      "sha256": "0efbe3aa9a3073470229c815a41afbcccf0fad55fc46ee0a0f6b1b522bc347fe",
+      "status": "PASS",
+      "cases": 3
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/failure-profile/powerloss-review-strict-8cd9.json",
+      "status": "PASS",
+      "cases": 2,
+      "sha256": "e1d062686b931117c0aa1fff8af40e483a9162b1f046a4d72350a64eeba51261"
+    }
+  ],
+  "source_snapshot_scope": "Receipt source_sha256 inventories broad directories, including unlinked/unexecuted files; it is not an object-to-source compilation provenance map. Listed mismatches do not validate those current files.",
+  "prepared_link_input_objects": [
+    {
+      "path": "g2/build/bootloader-completion/main-callback-startup-integrated-compatible/init_records.o",
+      "sha256": "179fc1318f42227b765bbad075bccede74d02e6f0d52eb07a9cd420dc773a25d",
+      "bytes": 764
+    },
+    {
+      "path": "g2/build/bootloader-completion/main-callback-startup-integrated-compatible/initialize.o",
+      "sha256": "f0228b979155736cf4ed0f91028f5a1d2b0d31fb8f6fbb88607d05ef11aefc93",
+      "bytes": 1336
+    },
+    {
+      "path": "g2/build/bootloader-completion/main-callback-startup-integrated-compatible/main_callback.o",
+      "sha256": "3a3360468813c4ccfc4d9d0b4e96f0cfe6e12e3a88c8fd069e72a7ef95b87b72",
+      "bytes": 1692
+    },
+    {
+      "path": "g2/build/bootloader-completion/main-callback-startup-integrated-compatible/main_init.o",
+      "sha256": "1eaee9263ca1ca4cbac32e14ed3dfc7db602d96abd042eca59d7297e7fe3b077",
+      "bytes": 2364
+    },
+    {
+      "path": "g2/build/bootloader-completion/main-callback-startup-integrated-compatible/record_adapters.o",
+      "sha256": "745f5c92a7149068608d6bbadccd4c9ac98afa0b83374d9eff6283dac96f27dd",
+      "bytes": 844
+    },
+    {
+      "path": "g2/build/bootloader-completion/main-callback-startup-integrated-compatible/record_dispatch.o",
+      "sha256": "a0d9538805dc5bab6583f52b6aae8621a2de18c2ed4c45c57f529778ccfdbbc8",
+      "bytes": 928
+    },
+    {
+      "path": "g2/build/bootloader-completion/main-callback-startup-integrated-compatible/system_entry.o",
+      "sha256": "715865d6c377c459678a8642bb201efc46b69d3d5e9e3a1a6ea19702f091d25b",
+      "bytes": 1092
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-runtime-compatible/kernel_runtime.o",
+      "sha256": "5a335229e8c034f964418501521a5790b897a38c84e03e8e374f066c21d8ab9b",
+      "bytes": 2008
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-runtime-compatible/kernel_static.o",
+      "sha256": "3f54406b75a27c42c114b68ac7c602eb5cc58be5501e9ba2a10d74f361c55784",
+      "bytes": 1652
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-runtime-compatible/runtime_mode.o",
+      "sha256": "4379b46a68d7468a732f4eacd21e9e98136483639692388e665e05d012218281",
+      "bytes": 840
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-runtime-compatible/thread_creation.o",
+      "sha256": "32f4dddde5baa9a4e37351361731cd8a355db58ce884fe4d117c4f776cd2929e",
+      "bytes": 1176
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-runtime-compatible/thread_register.o",
+      "sha256": "191109e68dbcf10050118e0555ba518ca4d4562350fa017e14687d0e2c5f59f2",
+      "bytes": 1208
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-port-compatible/first_task_transfer.o",
+      "sha256": "b50edb2dbddce8d2f1d99cfc48c15bacb377e18cc6e404e4d9c9baf55b748315",
+      "bytes": 564
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-port-compatible/port_start.o",
+      "sha256": "fb72dc25d71a572df098ebbdb7c000d704e9c5159952b35d58143897ee061e48",
+      "bytes": 1112
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-port-compatible/scheduler_bootstrap.o",
+      "sha256": "e9d5d80b68e5c4dda5f6213951a6f3e8652cd5b82c62295ca61c48bae5217bb8",
+      "bytes": 1404
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-port-compatible/thread_select.o",
+      "sha256": "b230c3a6e6cf3aca4f6d4bb50d53c34afd382150b5bc27b2663c0dc2b16f3d31",
+      "bytes": 1272
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-port-compatible/timer_service.o",
+      "sha256": "a31782fd88418ca9b74ec64b73e9fc93eaaad7735e8f2e714d2837a7ea78d05a",
+      "bytes": 1896
+    },
+    {
+      "path": "g2/build/bootloader-completion/allocator-compatible/allocator.o",
+      "sha256": "966335e5519bca3f8e3a24bf6ef3d7fa66e4767f4a97e55327aec0f5607ad165",
+      "bytes": 1504
+    },
+    {
+      "path": "g2/build/bootloader-completion/allocator-compatible/runtime_memory.o",
+      "sha256": "b7b3ab617adf1bd1f47b1469c63430541a18397c8d749a0b563cb977f323e1a6",
+      "bytes": 1700
+    },
+    {
+      "path": "g2/build/bootloader-completion/allocator-compatible/tlsf.o",
+      "sha256": "943587c79da1c1fce6c50f2ed2d5effd1b54280efa48f69abbc2eb182ed81b31",
+      "bytes": 5996
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-allocator-startup-compatible/lifecycle.o",
+      "sha256": "cd94779252d97c3df5f7a4f5db38b9378513fa853c35ec581149334d9b8a329e",
+      "bytes": 1288
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-timer-startup-compatible/port_timer.o",
+      "sha256": "240f254cf27114436376c037946c9451dcf823b43c47390f1f1433d0b19a5649",
+      "bytes": 2176
+    },
+    {
+      "path": "g2/build/bootloader-completion/nor-init/nor_init.o",
+      "sha256": "2738b5b0c6c264ecb397b862cf63c98115341a257b0866ab870e73c055786b09",
+      "bytes": 2696
+    },
+    {
+      "path": "g2/build/bootloader-completion/nor-init/nor_read_status.o",
+      "sha256": "c84868d223ef10b69a214084f7b5ee6110b26efc9cbf430c643c8d05eeb772c1",
+      "bytes": 1124
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-clock-startup-compatible/clock_manager.o",
+      "sha256": "678ede2a028464b4bd523c6645d774c413b2e8c19bc5c533155cc7b67b13dd16",
+      "bytes": 2156
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-clock-startup-compatible/clock_class_providers.o",
+      "sha256": "431c4c734ee7c324fef40ebec631bc4d4d6ff14617b861d187023cba4d43424b",
+      "bytes": 1868
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-clock-startup-compatible/clock_class_provider4.o",
+      "sha256": "964cb8fe430614753da9fdd5d04a50697bd6d51316e76bed4c92363a86b850e7",
+      "bytes": 1756
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-clock-startup-compatible/clock_class_provider2.o",
+      "sha256": "9a29a1641ee230f56d398bdda8282b2b92555afb3be7a573bd8e84367dacb938",
+      "bytes": 2668
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-clock-startup-compatible/clock_class_provider5.o",
+      "sha256": "e05b7ca3d5f2b24f584c1460fc4d8d61dc831fb151f4e36f4052067e6571dddf",
+      "bytes": 2100
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-clock-startup-compatible/clock_class_provider6.o",
+      "sha256": "493a1b686bda905a055ca2de07dd513eb139e4ba7d6cb1e63ba79492aa6f97ce",
+      "bytes": 2784
+    },
+    {
+      "path": "g2/build/bootloader-completion/nor-mspi-init/nor_mspi_init.o",
+      "sha256": "335855d83c0f39511ec945e07037ea3a522c6d33bf00e081625af90fe1fe63e7",
+      "bytes": 3224
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-nor-commands-startup-compatible/nor_commands.o",
+      "sha256": "d3667a088ded162ea44ada356e90b3dfc76f896a409b547e0bf44662ae7a711b",
+      "bytes": 5180
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-manager-bridge-compatible/cmsis_notifications.o",
+      "sha256": "7c75da9620b3d7fedef939f2c9446c50d211b68bcabed61854ce61457b868ed0",
+      "bytes": 1852
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-manager-bridge-compatible/context.o",
+      "sha256": "03c49ece58e7c20720445e23490a2504316afca71fde380b1450e48bf984dc2c",
+      "bytes": 3788
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-manager-bridge-compatible/event_dispatch.o",
+      "sha256": "8a8e61fef3d6bb9c55517ea69ab21f17de43a70e9c942ed164311bd992c3652d",
+      "bytes": 4352
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-manager-bridge-compatible/event_flags_set.o",
+      "sha256": "788882dce971c9844ecd6794581385a5273f121c2bc6abaa0f41dc1a29c5aaa8",
+      "bytes": 3244
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-manager-bridge-compatible/event_runtime.o",
+      "sha256": "e4f0f45d5ff7e7b38329583e4c294a2a7f62f2d338afdd52515940e2ce0bcd05",
+      "bytes": 3008
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-manager-bridge-compatible/event_waiter_wake.o",
+      "sha256": "6d9fd3e7b4dd6e439c14eef9d9b5feaa1e4081b97a0f7bcc4bc1721aea8220d9",
+      "bytes": 1504
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-manager-bridge-compatible/exception_entry.o",
+      "sha256": "b82075709022b56e068c4435e34707fb9754b6122fb842280e3054019647617b",
+      "bytes": 996
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-manager-bridge-compatible/flags_runtime.o",
+      "sha256": "69a75a121074e0cb899027d823a70a916d0c799c9e2574b66bd2c30b2fa45ccc",
+      "bytes": 3044
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-manager-bridge-compatible/kernel_dynamic.o",
+      "sha256": "8489822a5ca22c373652ae4c6a18fa469c1052079788af761799b12a0396212c",
+      "bytes": 1320
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-manager-bridge-compatible/manager_handshake.o",
+      "sha256": "8c1718c7c11db99961efbae7d52fa37022f4901e653a188f784dc99d1a559f51",
+      "bytes": 3468
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-manager-bridge-compatible/manager_setup.o",
+      "sha256": "02573fae323ada2f700f2ed1d718020a48526fce0b0cdbdfc4c513496b8db8dd",
+      "bytes": 3404
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-manager-bridge-compatible/manager_task.o",
+      "sha256": "60c3285fa5330b26d48b1d681a90a22430d3727e08c042e20f957bef3cd026c0",
+      "bytes": 3052
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-manager-bridge-compatible/queue_buffer_release.o",
+      "sha256": "35dda0cdc01cdccfb634bb0954d07bc2c76cb66dfb3e54e73f612520cf952781",
+      "bytes": 1508
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-manager-bridge-compatible/queue_receive.o",
+      "sha256": "9837a5aa8bfc00dc75ab606c0bf20d175505239142e0785cc8247b39ecfc8ba8",
+      "bytes": 4604
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-manager-bridge-compatible/queue_send.o",
+      "sha256": "d1be36d5f1507c20f9879c02a3c935ac60851d3473a1df595fcdc62162b21df4",
+      "bytes": 3564
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-manager-bridge-compatible/queue_wrappers.o",
+      "sha256": "e5aee0dfeae6f127d458e52282cbe9f5b3b4e745b1ccb57552c238559ac558ca",
+      "bytes": 2984
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-manager-bridge-compatible/resource_creators.o",
+      "sha256": "469c85c4f99f4b89c8b05745e4b309d2a0a6cc6a7112bacd3fb335b186d12f0d",
+      "bytes": 5544
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-manager-bridge-compatible/rtos_heap.o",
+      "sha256": "f01213b91e0727406d0dd425d3515b0c84650ff284c35cefbad176b393093400",
+      "bytes": 2824
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-manager-bridge-compatible/runtime_context.o",
+      "sha256": "1ee45c61298b221b11bd75704c0c425336b0b6c1afe2ef2ca82c73fb7d23778f",
+      "bytes": 1208
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-manager-bridge-compatible/scheduler_resume.o",
+      "sha256": "3ebdb2ddec4dcc79513288f859156cd2af35a649abdb6574937dcd3f4f460c1f",
+      "bytes": 2012
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-manager-bridge-compatible/scheduler_tick.o",
+      "sha256": "e88c63b9793c0fe4784abaad259e16a5f358a3cef6d1b24bb975118c662e0282",
+      "bytes": 1392
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-manager-bridge-compatible/task_entry_adapters.o",
+      "sha256": "7eda19e6fa306388748510799580d774da7ae5a22cdc89ff5ee9c2e3581cea88",
+      "bytes": 1468
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-manager-bridge-compatible/thread_notifications.o",
+      "sha256": "aa0e806d279a7e978ad03051bc74e3bb5c9a146701fe7a9a6d8dc104c825a2b0",
+      "bytes": 2356
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-manager-bridge-compatible/thread_priority.o",
+      "sha256": "889acc866b32f9f7deada2c7f35a74add794346f11f863c98996220397a08b5e",
+      "bytes": 2036
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-manager-bridge-compatible/timer_commands.o",
+      "sha256": "878b9d14b80e5c579fa33c5955c2cede48ad8531ce49f9d72d6392da73a37dab",
+      "bytes": 2764
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-manager-bridge-compatible/timer_expiration.o",
+      "sha256": "02a9210503b49be6ae6c50bbfeb36c70a805dd7afb9d98c4075943864712ce5d",
+      "bytes": 1492
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-manager-bridge-compatible/timer_wait.o",
+      "sha256": "5d7ff921b10f130a97bdc36231dcc227bd12c3adb07e82231a6eb572af3f1de9",
+      "bytes": 5340
+    },
+    {
+      "path": "g2/build/bootloader-completion/reset-manager-compatible/reset.o",
+      "sha256": "99f3358d8c39d66f16a99fcbbd2241f26107869273e2ceb1bddf44957e3c0c8b",
+      "bytes": 728
+    },
+    {
+      "path": "g2/build/bootloader-completion/reset-manager-compatible/fpu.o",
+      "sha256": "001215f6ad7a09d8700439e528ccf9bd0693144cebc261e9db3e2d336ddb90e3",
+      "bytes": 500
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-dispatch-compatible/task.o",
+      "sha256": "18e6d2cb7278c6aafdcffc97fcceca53f69a186f53622dd2dbf6133dbb91aa89",
+      "bytes": 1960
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-dispatch-compatible/update_core.o",
+      "sha256": "f71afbd5e26bb26a1aed31f8dbb7fba5de7f806d8a6399b69f88f44cb7080e73",
+      "bytes": 5972
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-dispatch-compatible/rom_resources.o",
+      "sha256": "d7d65ede5e8c69933258b69eb9924b13153f686dd028de885b4824a7712a9638",
+      "bytes": 844
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-dispatch-compatible/handoff.o",
+      "sha256": "7f82e96e4eb99b8d5f9030b2e818952559d375eaada117916fb4037a405c6a30",
+      "bytes": 536
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-runtime-compatible/blocking_transfer.o",
+      "sha256": "943196762d30cfb0814377025b7f67c0323d2e84063069baccbdca12512efb9b",
+      "bytes": 1376
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-runtime-compatible/control.o",
+      "sha256": "903fd9d6ff7373e01056f852b2e24ed1ab6779dc69f6a01b74c7942ed3e7715e",
+      "bytes": 2972
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-runtime-compatible/critical_save.o",
+      "sha256": "ad0aa8ba89c31620ffb0e000d7d3a3c663f73d5aecccfd55f069e43fef1fe809",
+      "bytes": 436
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-runtime-compatible/fifo_transfer.o",
+      "sha256": "b78136d087d57b71dcc457f0a74ffe657b7382d6e5e64ddd8c09260cb3a1908b",
+      "bytes": 1560
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-runtime-compatible/hal_leaves.o",
+      "sha256": "4822df38ba3d6119df0ea00bf71f5ac2018febf1b68778af989a40707105d009",
+      "bytes": 3572
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-runtime-compatible/irq_guard.o",
+      "sha256": "3e7850092fb3bbff1e6a535b201010cf4b474d1c30ec7fa21f2314a98c1197b3",
+      "bytes": 488
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-runtime-compatible/nor_runtime.o",
+      "sha256": "8077aa9a6e38629a08e9ea2af4c7430ccd5eb9dcb7afbf6da39ea9c89bd03194",
+      "bytes": 2300
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-runtime-compatible/runtime.o",
+      "sha256": "952fc50db4f8353deb7f7c1da583f8ee569b016799285561137ebe943548c4e0",
+      "bytes": 2668
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-runtime-compatible/runtime_query.o",
+      "sha256": "1ddfec79e005d3139882b0a79ff310ce8ab9b5e19be2c70a0e64512e34e0132c",
+      "bytes": 2016
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-runtime-compatible/runtime_resources.o",
+      "sha256": "5c58234ad8db920e7f610bcb43bc909c6acc5a2d090ab2afa3d9095beda23c13",
+      "bytes": 848
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-runtime-compatible/runtime_transition.o",
+      "sha256": "95452bd3c4ac28db1beaf765b4f670da829cac354891be7efbbae414a885371f",
+      "bytes": 2268
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-runtime-compatible/runtime_wait_adapter.o",
+      "sha256": "fbe131413204030df27410f84287af2867214791ea460f4c7133013e26745471",
+      "bytes": 1028
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-runtime-compatible/status_poll.o",
+      "sha256": "4fd2b38de70bc2c7b452f41a1426319d39440b4deade5f4950c221ea5219e451",
+      "bytes": 1024
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-compatible/boot_mount.o",
+      "sha256": "47364f0fee9ecff62b6615e4475f6478f9bb84c6366d4b58b756427a0b152300",
+      "bytes": 3304
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-compatible/file_services.o",
+      "sha256": "012116931ff44a948b497a08f293c1574b05965d53c7a54c686f6070204e09fd",
+      "bytes": 2736
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-compatible/filesystem.o",
+      "sha256": "588a693a5d09d563751bf4d14b4adb134e451dcc1255ab7f73c62c2644af5c91",
+      "bytes": 2380
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-compatible/lfs.o",
+      "sha256": "d9eef730bea11bbb16065b05927b5ac44cf5acc280931c2c85135030f7c5cd29",
+      "bytes": 45676
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-compatible/lfs_util.o",
+      "sha256": "6cf6591c469f331b2f709da306697359b705656ade6e4b4415d160de805d6565",
+      "bytes": 1376
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-read-compatible/control_read.o",
+      "sha256": "bf8400fdf0a60734f12b53fbff569f2bb700c29c0e56a2ef7474463f5e50edf4",
+      "bytes": 2920
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-read-compatible/nor_read.o",
+      "sha256": "42382af19d5d3244eccf45e25ae9e5b04000627f430c0a11af9a401613184e30",
+      "bytes": 1296
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-read-compatible/runtime_helpers.o",
+      "sha256": "11d3d687bdea2f8e197dccf1ee7b02f86e82fb10d1100c091313911f039d92a5",
+      "bytes": 6124
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-nor-compatible/nor_write.o",
+      "sha256": "08d5f3e581a092e09c2356d5848cdad3a1180b5de7a9c132098b48395ac0332b",
+      "bytes": 5636
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-power-compatible/clock_release_all.o",
+      "sha256": "7f58b75493ee47d40fd467c32a8fb3299d586c2c592f011986e55933d02db11c",
+      "bytes": 1172
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-power-compatible/device_configure.o",
+      "sha256": "a97a4b017bade25e7c9a75fc1815e2429c2f72c2019aefd45af59a1a0ac52c72",
+      "bytes": 3384
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-power-compatible/mspi_clockgen_control.o",
+      "sha256": "1510be192b00d4a167596de6911ea6649df09778a28f39c388588463c7f76cf1",
+      "bytes": 1108
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-power-compatible/power_control.o",
+      "sha256": "4c4f2f33198d53be7bc3f1a5b1a1dcc15ead9d057be0b1e14c30ab70207aa393",
+      "bytes": 1548
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-power-compatible/power_control_adapter.o",
+      "sha256": "50eea517b68fa70f222bf102f7fec001aa7fe2e253c81f74a380916be4d5f7f2",
+      "bytes": 4620
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-power-compatible/power_domains.o",
+      "sha256": "8d925d0fc6426ab6df47eefee20b3077255c29522484097f5c4a11a29d42d0eb",
+      "bytes": 3700
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-queue-compatible/nor_mspi_queue.o",
+      "sha256": "9099517482e304e82279dbbc6167eb157be9c35f91fe3f60318651f8c537a4c5",
+      "bytes": 4704
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-queue-compatible/resources.o",
+      "sha256": "0abcb70c5748cdf2225a48f32c2869501b90d31d7e563b4c4d6a7d3f45d83497",
+      "bytes": 1192
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-cache-compatible/cache_runtime.o",
+      "sha256": "84acb230fa4224d1c782cf7485391865f66340f6a9817955678940d21bda4552",
+      "bytes": 1364
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-platform-compatible/control_remaining.o",
+      "sha256": "a116fbfef56a6466f6f708416ffd8c7351dd19069434eedfe6a8ba7a796be211",
+      "bytes": 1572
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-platform-compatible/device_info.o",
+      "sha256": "b1d8144ed63ab8001e51f21c3879123dcf19016f87ae96eee9f9c132e59e5673",
+      "bytes": 1596
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-platform-compatible/device_info_dispatch.o",
+      "sha256": "c9f685d5947bd2403f2d6886128ffe45002a7c0b1f6fc89c29361db1303085e4",
+      "bytes": 1204
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-platform-compatible/device_info_mode0.o",
+      "sha256": "20ad1a4e800262b448d628a3615e1584c5141123cbb11881ce926e396bf1b912",
+      "bytes": 1104
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-platform-compatible/device_mode_wait.o",
+      "sha256": "91cf62b0a4e392d1eec513cbd305e784779d89005cea334e762c4aeff539fa1c",
+      "bytes": 1016
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-platform-compatible/mram_rom_bridge.o",
+      "sha256": "121221e32b49e0dd5a5c1c24d66d13c5b773f57ff9dfa242bc93782e9b4dda33",
+      "bytes": 1020
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-platform-compatible/platform_startup.o",
+      "sha256": "6c861925f882e45caa84708fe4125f4acef06d668e7849eca505286a4ed9a370",
+      "bytes": 1296
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-platform-compatible/power_guards.o",
+      "sha256": "c2808bea9513a019b0df575d577012e252a0647d7c1adc9e9f053c99470a442c",
+      "bytes": 1816
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-platform-compatible/storage_callback_veneers.o",
+      "sha256": "33bb4b9a30475448ce506ef162f64bfeedd2ed0c1c41f5911f7a8c0246f9d7c1",
+      "bytes": 1040
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-platform-compatible/storage_callbacks.o",
+      "sha256": "f08562fbd5321ce3ccfadb533f04e3527a0e6876a287497d6a11fe9ab2364c13",
+      "bytes": 2592
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/local_providers.o",
+      "sha256": "77dcf484929b5dab97525af1519d96425a1232f7e0951dcc38f1627cb932a633",
+      "bytes": 1172
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/delay_math.o",
+      "sha256": "cde99120f1ea3ff29222e46e7e9b9d0768fbb935dc2b278a753ac5f264389a6d",
+      "bytes": 796
+    }
+  ],
+  "link_recipe_makefile_sha256": "ab0e326e0200a473a02da846afb6ccc6623db1bee674102c696db52c3e3a5dbc",
+  "prepared_object_scope": "Hashes of current prepared inputs expanded from this target recipe; historical compilation source-to-object attribution is not inferred.",
+  "same_image_validation_summary": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/same-image-validation.json"
+}

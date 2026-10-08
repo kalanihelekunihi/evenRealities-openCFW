@@ -1,0 +1,17 @@
+from pathlib import Path
+import json,hashlib,re,subprocess,tempfile
+b=Path('g2/build/pseudocode-first/20260930T190500Z');src=b/'attempts/P1-canonical-fixed-images-005/002/apollo_main-flash.bin';d=src.read_bytes();h=lambda x:hashlib.sha256(x).hexdigest();assert h(d)=='19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701';start=0x47a798;end=0x47a80a
+with tempfile.TemporaryDirectory() as td:
+ t=Path(td);(t/'input.bin').write_bytes(d[start-0x438000:end-0x438000]);(t/'input.s').write_text('.syntax unified\n.cpu cortex-m55\n.thumb\n.text\n.incbin "'+str(t/'input.bin')+'"\n');subprocess.run(['/opt/homebrew/bin/arm-none-eabi-as',str(t/'input.s'),'-o',str(t/'input.o')],check=True);rawtext=subprocess.check_output(['/opt/homebrew/bin/arm-none-eabi-objdump','-D','-j','.text','-M','force-thumb','--adjust-vma='+hex(start),str(t/'input.o')],text=True)
+rows=[];cursor=start
+for line in rawtext.splitlines():
+ m=re.match(r'\s*([0-9a-f]+):\s+([0-9a-f]{4}(?: [0-9a-f]{4})?)\s+([^\s]+)\s*(.*)',line)
+ if not m:continue
+ a=int(m[1],16)
+ if not start<=a<end:continue
+ raw=b''.join(int(v,16).to_bytes(2,'little') for v in m[2].split());assert a==cursor and raw==d[a-0x438000:a-0x438000+len(raw)];cursor+=len(raw);rows.append(dict(address=a,bytes=raw.hex(),mnemonic=m[3],operands=m[4]))
+assert cursor==end,(hex(cursor),hex(end),rawtext)
+o=Path('reviews/P2-20651-independent-review/001/fresh');o.mkdir(parents=True,exist_ok=False);(o/'instructions.json').write_text(json.dumps([dict(start=start,end=end,instructions=rows)],indent=2)+'\n');(o/'disassembly.txt').write_text(rawtext);refs=sorted(set(int(m[1],16) for row in rows if (m:=re.search(r'@\s*\(?([0-9a-f]{6,8})',row['operands'])) and 'pc' in row['operands']))
+(o/'references.json').write_text(json.dumps([dict(address=a,bytes=d[a-0x438000:a-0x438000+4].hex(),value=int.from_bytes(d[a-0x438000:a-0x438000+4],'little')) for a in refs],indent=2)+'\n')
+(o/'pseudocode.md').write_text('# Optional record clear and free slot initialize\n\nPartial/unaccepted; 114 instruction bytes, inherited40-byte frame; R5 full entry R2, R6 literal table base, R7 full entry R0, R8 full entry R1.\nAt0x47A798 call recovered0x47A6B4(LOW8 R5,live arguments) and retain full resultR4. Zero skips0x47A7B6. Nonzero set R1=R4,R2=0, freshly read byte[R1+6] intoR0 and call0x4D2880; then call recovered0x47A47C(R4,live arguments after first helper), without checking first result.\nAt0x47A7B6 setR1=10 and loop0x47A7BE: LOW8 R1zero branches pending0x47A80A; otherwise freshbyte[R6+47]nonzero decrementsR1 and advancesR6 by200 modulo2^32, repeat. First zero byte proceeds: R1=200,R2=0,R4=R6 and call0x43C0E4(R4,200,0,liveR3); its semantics/return are not inferred. Then storebyte1 atR6+47. Call0x4D2AA8(LOW8 R7,live arguments) and store LOW8 result atR6+6. Call0x4D293C(R6,fullR8,liveR2/R3). Then store LOW8 fullR5 atR6+195. LoadR0=literal47AE50; freshly loadword[R0] intoR1, increment modulo2^32 and write back, independently reloadword[R0] intoR0 and storefullword atR6+196. SetR0=R6 and branch shared epilogue0x47A850. No byte48 store in this map. Preserve ordered stores, fresh reloads, live helper arguments and effects. No C, freeze or completeness claim.\n')
+(o/'replay.py').write_bytes(Path(__file__).read_bytes());(o/'receipt.json').write_text(json.dumps(dict(accepted=False,status='partial',input_sha256=h(d),instruction_bytes=end-start,files={p.name:h(p.read_bytes()) for p in o.iterdir()}),indent=2)+'\n');print('PASS',end-start)

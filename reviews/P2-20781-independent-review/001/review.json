@@ -1,0 +1,10 @@
+{
+  "id": "P2-20781",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "156B inherited 72-byte frame: logger2004 and mask path use count10; later logger2005 reads the word through literal address 47C558, while mask route freshly reloads that word independently. SP0/4/8 are locals, separate status queries retained."
+}

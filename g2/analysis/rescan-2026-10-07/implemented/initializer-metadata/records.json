@@ -1,0 +1,47 @@
+{
+  "status": "PASS",
+  "image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "helper_sha256": "fc7ca9ccaae8aa7211bd6c219d0c84b829307e08163883dba7a94db6f4b0d33f",
+  "load_address": "0x410000",
+  "table_begin": "0x433440",
+  "table_end": "0x433460",
+  "result": {
+    "raw_record_count": 4,
+    "runner_capped_count": 4,
+    "records": [
+      {
+        "record_address": "0x433440",
+        "callback_thumb_address": "0x4301d7",
+        "priority": 1,
+        "known_role": "platform sequence",
+        "target_present_in_ota": true
+      },
+      {
+        "record_address": "0x433448",
+        "callback_thumb_address": "0x43194d",
+        "priority": 1,
+        "known_role": "services",
+        "target_present_in_ota": true
+      },
+      {
+        "record_address": "0x433450",
+        "callback_thumb_address": "0x415591",
+        "priority": 25,
+        "known_role": "redirect",
+        "target_present_in_ota": true
+      },
+      {
+        "record_address": "0x433458",
+        "callback_thumb_address": "0x41fd71",
+        "priority": 26,
+        "known_role": "allocator",
+        "target_present_in_ota": true
+      }
+    ],
+    "record_bytes_sha256": "d6ac25efb3f6ea1ff531a3a4b8fb043176be1f14b417a32c46db7a776b01ffe8",
+    "limits": [
+      "Records are call targets and priority metadata, not decompiler/source completeness. Runner skips zero callbacks.",
+      "Stock comparator returns signed low32(left.priority-right.priority); arbitrary unsigned sorting must not substitute for its behavior. Existing init_table/qsort source has original-instruction tests."
+    ]
+  }
+}

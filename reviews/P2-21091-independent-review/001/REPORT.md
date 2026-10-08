@@ -1,0 +1,1 @@
+Partial/unaccepted:8bytes47FFBC..47FFC4 twoalignedliteralwords; two decodedPCload consumers in map21448 retained and componenthasheschecked. Exactvalues preserved, pointedownership/additionalconsumers unresolved. AdjacentFFBA..FFBCpadding excluded. No C/freeze/fullcoverageclaim.

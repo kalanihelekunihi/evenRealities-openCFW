@@ -1,0 +1,23 @@
+{
+  "review_id": "P2-21413-independent-review",
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-configuration-resource-fifteen-pointer-literal-pool-21812-data/001",
+  "status": "partial",
+  "accepted": false,
+  "checks": {
+    "fresh_replay": "pass",
+    "data_bytes": 60,
+    "bytes_match": true,
+    "literal_words": 15,
+    "cited_consumer_maps_checked": [
+      "21796",
+      "21798",
+      "21808",
+      "21810"
+    ]
+  },
+  "limitations": [
+    "runtime RAM contents excluded",
+    "pointed-to flash data excluded",
+    "no ownership/type or exhaustive coverage claim"
+  ]
+}

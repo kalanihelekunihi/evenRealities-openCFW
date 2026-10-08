@@ -1,0 +1,235 @@
+{
+  "utc": "2026-10-07T11:38:07.398169+00:00",
+  "status": "PASS",
+  "role": "Promoted bounded source-linked offline test checkpoint; root startup remains unresolved",
+  "elf_sha256": "25a13e853209c2f5a210b87681be97bcb70b9804fec96d20b1bab582ff72b374",
+  "profiles": [
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/25a13e853209c2f5a210b87681be97bcb70b9804fec96d20b1bab582ff72b374/comparison.json",
+      "sha256": "27f492725a2e6c4569bc85d3d67c8bc8ae915509721bcf3b2e473f045ed991b9",
+      "cases": 2
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/25a13e853209c2f5a210b87681be97bcb70b9804fec96d20b1bab582ff72b374/failures.json",
+      "sha256": "9af22a5002a83fd41587da76823f12297f9cbbf75e4f530220de655ca92f71fd",
+      "cases": 3
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/25a13e853209c2f5a210b87681be97bcb70b9804fec96d20b1bab582ff72b374/powerloss.json",
+      "sha256": "9675a4542b2bfc9c253683b74d35da41c12b4857e51022668578ddb28c4a06da",
+      "cases": 2
+    }
+  ],
+  "total_cases": 7,
+  "additional_receipts": [
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/clock-config.json",
+      "sha256": "a8b01f4e6c4a8609355853104f9c7498fa4a0f3e149eb5ee0f624f2bd110654e",
+      "cases": 5896
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/clock-shared.json",
+      "sha256": "a7e995de451847b651561377a0f491951cf04cb3eda10208afdd3a3a6f12d458",
+      "cases": 129
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/clockmux-carry.json",
+      "sha256": "af16edf86327c7cbfd1ac0f1dfd6d3731c040bb535769b12ef7952b7c18df476",
+      "cases": 1024
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/clockmux-native.json",
+      "sha256": "c60900788d7d207e61a063f1a3a5a7594017724f569124cda52b4f3468e352ab",
+      "cases": 14
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/config.json",
+      "sha256": "f3843eb78ff5e3361e2461d9115ee3546259600006cce4d6dca3cf09fbb461e4",
+      "cases": 697
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/dispatch-native.json",
+      "sha256": "b44ec963a797852feb8e5ab1670abd859e844d036183e98b782ab3e4a5c63f04",
+      "cases": 400
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/elog_output.json",
+      "sha256": "5bf1c42daa961966650b6484b698c4e7b7170abc22ad86b4d5a290eb0acef875",
+      "cases": 494
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/elog_uart_tx.json",
+      "sha256": "dcb001d92d240bd232b2dce5ade37b4a47ff656e9cd67ae5779627efceca4df0",
+      "cases": 222
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/events-native.json",
+      "sha256": "4699d30bb4b436c6126470c1d3f8772dc8717d04124cad41f00f68ab6da0ccef",
+      "cases": 72
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/formatter.json",
+      "sha256": "48fa1a9b3757d09bd3caf9783fa70de24e96612f564c54f7c3b999e669a8bdd2",
+      "cases": 1778
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/generators.json",
+      "sha256": "23a3b67705ae6393c4f48d659e8dc681f271e7c64a69f0f3980a5618c9a41d02",
+      "cases": 688
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/init-leaves.json",
+      "sha256": "b53077501bb683ac0c2e71fa7571854bc486823a9c314555bd221efb000f2f82",
+      "cases": 956
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/isr_deferred_fifo.json",
+      "sha256": "75a957df2e161847d79551c9daaf07c7804269f740a5da60f2d9432a915f4b9c",
+      "cases": 1
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/isr_delivery.json",
+      "sha256": "b3dd08ed9e27f889d9fb83c4bb08f638a2a9453a866e201935660d755404f5d5",
+      "cases": 1480
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/isr_public_interfaces.json",
+      "sha256": "3e369b14eb23ef7de33235e2beefaae0bdc63a68e22feb138837e440e15c274f",
+      "cases": 62
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/math.json",
+      "sha256": "031c4cfb087983ba32e448167e0f4a957b30d657a901c4a85c7ed462250a4584",
+      "cases": 4311
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/memory-native.json",
+      "sha256": "154fc81f5736b47430962a63ed2996d647004e0c467c9393dc7b9f1008a6900c",
+      "cases": 936
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/memory.json",
+      "sha256": "fe9107144fcc91baa5194fad305498f8d9d391ffac33dfd9da695fc17f087297",
+      "cases": 936
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/mode.json",
+      "sha256": "403d2dc936dcf12008f9b62ee407e922f631cd45d94e4b0324fa25647f52ba57",
+      "cases": 1394
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/mutex_block_boundary.json",
+      "sha256": "770749df33c05917ba153e50f8d520a817766924206fd532e093f8a84b1dba4e",
+      "cases": 4
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/mutex_kernel.json",
+      "sha256": "9f0b2d5cf3f75a490f05245cebc461adb99f3536a5516603e36903d9874f98b7",
+      "cases": 516
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/mutex_sequences.json",
+      "sha256": "d9fe2cad57244521a7a7a952f0408255d53aee4425ed0d28a0a9776cfed34f22",
+      "cases": 2
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/native-config.json",
+      "sha256": "3612f3e4c1fa9b0785e1342879d90fd4438d7a7ffd92ae668d4beabaf5489d4d",
+      "cases": 48
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/power-read.json",
+      "sha256": "eac64c70660a15f8e79a7a0fe43108aef0abfc9d716dd39d04ee4e2694b25761",
+      "cases": 10
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/power20.json",
+      "sha256": "8d85918a90edcff2d5575e693fe10dcc8e633d25a3272da8a46bfd612b72d7cd",
+      "cases": 256
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/runtime-native.json",
+      "sha256": "ebc0d1f0e89ca5990867b05157739ca8d7364d85318c6834d224c7650fc5ee9b",
+      "cases": 168
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/runtime.json",
+      "sha256": "72b4d57e8a8f17f311e0b18069ededf647da489348cb2ccdab8b6af3be981659",
+      "cases": 832
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/rx.json",
+      "sha256": "bd505136eeb3e03a52510886347b2894472665071534fcc6a5c725b8970da955",
+      "cases": 422
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/service_records.json",
+      "sha256": "e553b195a40e4011ac100b78d674acf3c8e92caa168ac7993fc2aea0774bf614",
+      "cases": 112
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/service_startup_state.json",
+      "sha256": "b5d0b19a4d2e205ce33482dfc9a167aaedef6c74f14cd26a5dedba199b8554a3",
+      "cases": 1
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/setters.json",
+      "sha256": "50b8b01c7d8802999f9b929b54f3526d95d4cc31863bd59085d299f5810385c2",
+      "cases": 192
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/shutdown.json",
+      "sha256": "562c3961f73bd42e249650036ab7654cbd5ad3ebb3189b37bdfe7b244c69e2e9",
+      "cases": 903
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/startup-leaves-native-copy.json",
+      "sha256": "09f8320ece193a903b84a364766e2cc7c8af421f324cadb07a2d94858afeff6d",
+      "cases": 271
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/startup-native-copy.json",
+      "sha256": "4a524a82269b7a34fc79452a1edfb75b56d2370674de5a4508f356f54dfc1f5e",
+      "cases": 64
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/startup_alternatives.json",
+      "sha256": "7b4803ab31238b6a5c95b64e27286c006f0892adef0f054070d777c5b48f08bb",
+      "cases": 64
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/wrapper.json",
+      "sha256": "03a2547b160e8d9752abde9edd93167ca7a762e577238f67e78dcd040824d6b2",
+      "cases": 288
+    }
+  ],
+  "inputs": 699,
+  "linked_objects": 183,
+  "post_run_hash_mismatches": [],
+  "frozen_copies": "g2/build/bootloader-completion/source-image-compatible/snapshots/25a13e853209c2f5a210b87681be97bcb70b9804fec96d20b1bab582ff72b374/frozen-input-copies.json",
+  "frozen_copy_index_sha256": "0b07d9a09c556aa51ac191f284b9ed0f4af78ab7e6182d728516f3b2b6d40393",
+  "validation_input_manifest": {
+    "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/25a13e853209c2f5a210b87681be97bcb70b9804fec96d20b1bab582ff72b374/validation-input-hashes-final.json",
+    "sha256": "cd01a346134f7dfe8932d7d107addb698cdcc8537a4fad10c7a93c4d05b05aa2"
+  },
+  "alignment_mappings": 509,
+  "numeric_aliases": 17,
+  "segments": 42,
+  "deduplicated_observed_original_instruction_bytes": 38764,
+  "manifest": {
+    "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/manifest.json",
+    "sha256": "090698f5c3e6f612ded114dd383cbe18926835f997b34b5790b05f657cb67981"
+  },
+  "alignment_receipt": {
+    "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-clockfix-25a/alignment.json",
+    "sha256": "93d28fc6cbfed414cdf34684d056028613544526b1e03b065d2ff8580196d83b"
+  },
+  "limits": [
+    "Seven integration cases retain existing startup/logger models; native direct suites do not establish new native integration reachability.",
+    "Four initial callbacks and their timer plus four event-family callback entries are source-defined in the component runtime. Remaining21 unique callback targets remain original-address contracts; root41c4b4 is still selected unbound OTA boundary.",
+    "400 dispatcher comparisons use native INFO/ROM thunk, initial callbacks and timer, with resident ROM48 controlled. Corrected72 event comparisons use compiled event family and critical/delay providers, with ROM40 time controlled; exact unvisited branches remain in receipts.",
+    "14 clock-chain comparisons execute native indexed getter, selector2/4 GPIO contexts, delay/poll/power/PLL/cache with synthetic acknowledgement and ROM40 timing.1024 carry comparisons retain ten child cuts. Other GPIO selector branches are not proven by this suite.",
+    "Prepared-source object linker candidate; actual main Makefile rebuild equivalence has not been asserted. Mixed enum-size warnings remain; tested interfaces only.",
+    "External ROM bodies, six FP64 profile effects, physical hardware timing/coherence/drain/live scheduling, whole source completeness and byte equality remain unproven."
+  ]
+}

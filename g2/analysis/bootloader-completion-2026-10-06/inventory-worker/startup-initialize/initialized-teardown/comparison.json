@@ -1,0 +1,1036 @@
+{
+  "status": "PASS",
+  "cases": 48,
+  "image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "addon_elf_sha256": "2d35a0b0b1d6663417cd4bfa42b09cc1326fea5b405221becaec59fc2e43a533",
+  "coverage": {
+    "dfu": {
+      "start": "0x42ddda",
+      "end_exclusive": "0x42ddf2",
+      "sha256": "11df23f5964afb35c73937e9b03e8b010cce58ad1d840e5ea106b8b1abd1b6c1",
+      "visited_bytes": 24,
+      "extent_bytes": 24
+    },
+    "manager": {
+      "start": "0x42e3ca",
+      "end_exclusive": "0x42e3e0",
+      "sha256": "544c355918dcd5b5ceb47a9c31bda9a753885aaf41bcd3ed957ae58e587fcf4f",
+      "visited_bytes": 22,
+      "extent_bytes": 22
+    }
+  },
+  "comparisons": [
+    {
+      "name": "dfu",
+      "handle": 0,
+      "termination_status": 0,
+      "termination_mutates_handle": false,
+      "result": {
+        "calls": [],
+        "writes": [],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "dfu",
+      "handle": 0,
+      "termination_status": 0,
+      "termination_mutates_handle": true,
+      "result": {
+        "calls": [],
+        "writes": [],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "dfu",
+      "handle": 0,
+      "termination_status": 4294967293,
+      "termination_mutates_handle": false,
+      "result": {
+        "calls": [],
+        "writes": [],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "dfu",
+      "handle": 0,
+      "termination_status": 4294967293,
+      "termination_mutates_handle": true,
+      "result": {
+        "calls": [],
+        "writes": [],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "dfu",
+      "handle": 0,
+      "termination_status": 1911,
+      "termination_mutates_handle": false,
+      "result": {
+        "calls": [],
+        "writes": [],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "dfu",
+      "handle": 0,
+      "termination_status": 1911,
+      "termination_mutates_handle": true,
+      "result": {
+        "calls": [],
+        "writes": [],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "dfu",
+      "handle": 1,
+      "termination_status": 0,
+      "termination_mutates_handle": false,
+      "result": {
+        "calls": [
+          1
+        ],
+        "writes": [
+          [
+            536872148,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "dfu",
+      "handle": 1,
+      "termination_status": 0,
+      "termination_mutates_handle": true,
+      "result": {
+        "calls": [
+          1
+        ],
+        "writes": [
+          [
+            536872148,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "dfu",
+      "handle": 1,
+      "termination_status": 4294967293,
+      "termination_mutates_handle": false,
+      "result": {
+        "calls": [
+          1
+        ],
+        "writes": [
+          [
+            536872148,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "dfu",
+      "handle": 1,
+      "termination_status": 4294967293,
+      "termination_mutates_handle": true,
+      "result": {
+        "calls": [
+          1
+        ],
+        "writes": [
+          [
+            536872148,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "dfu",
+      "handle": 1,
+      "termination_status": 1911,
+      "termination_mutates_handle": false,
+      "result": {
+        "calls": [
+          1
+        ],
+        "writes": [
+          [
+            536872148,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "dfu",
+      "handle": 1,
+      "termination_status": 1911,
+      "termination_mutates_handle": true,
+      "result": {
+        "calls": [
+          1
+        ],
+        "writes": [
+          [
+            536872148,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "dfu",
+      "handle": 536875572,
+      "termination_status": 0,
+      "termination_mutates_handle": false,
+      "result": {
+        "calls": [
+          536875572
+        ],
+        "writes": [
+          [
+            536872148,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "dfu",
+      "handle": 536875572,
+      "termination_status": 0,
+      "termination_mutates_handle": true,
+      "result": {
+        "calls": [
+          536875572
+        ],
+        "writes": [
+          [
+            536872148,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "dfu",
+      "handle": 536875572,
+      "termination_status": 4294967293,
+      "termination_mutates_handle": false,
+      "result": {
+        "calls": [
+          536875572
+        ],
+        "writes": [
+          [
+            536872148,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "dfu",
+      "handle": 536875572,
+      "termination_status": 4294967293,
+      "termination_mutates_handle": true,
+      "result": {
+        "calls": [
+          536875572
+        ],
+        "writes": [
+          [
+            536872148,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "dfu",
+      "handle": 536875572,
+      "termination_status": 1911,
+      "termination_mutates_handle": false,
+      "result": {
+        "calls": [
+          536875572
+        ],
+        "writes": [
+          [
+            536872148,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "dfu",
+      "handle": 536875572,
+      "termination_status": 1911,
+      "termination_mutates_handle": true,
+      "result": {
+        "calls": [
+          536875572
+        ],
+        "writes": [
+          [
+            536872148,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "dfu",
+      "handle": 4294967295,
+      "termination_status": 0,
+      "termination_mutates_handle": false,
+      "result": {
+        "calls": [
+          4294967295
+        ],
+        "writes": [
+          [
+            536872148,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "dfu",
+      "handle": 4294967295,
+      "termination_status": 0,
+      "termination_mutates_handle": true,
+      "result": {
+        "calls": [
+          4294967295
+        ],
+        "writes": [
+          [
+            536872148,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "dfu",
+      "handle": 4294967295,
+      "termination_status": 4294967293,
+      "termination_mutates_handle": false,
+      "result": {
+        "calls": [
+          4294967295
+        ],
+        "writes": [
+          [
+            536872148,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "dfu",
+      "handle": 4294967295,
+      "termination_status": 4294967293,
+      "termination_mutates_handle": true,
+      "result": {
+        "calls": [
+          4294967295
+        ],
+        "writes": [
+          [
+            536872148,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "dfu",
+      "handle": 4294967295,
+      "termination_status": 1911,
+      "termination_mutates_handle": false,
+      "result": {
+        "calls": [
+          4294967295
+        ],
+        "writes": [
+          [
+            536872148,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "dfu",
+      "handle": 4294967295,
+      "termination_status": 1911,
+      "termination_mutates_handle": true,
+      "result": {
+        "calls": [
+          4294967295
+        ],
+        "writes": [
+          [
+            536872148,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "manager",
+      "handle": 0,
+      "termination_status": 0,
+      "termination_mutates_handle": false,
+      "result": {
+        "calls": [],
+        "writes": [],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "manager",
+      "handle": 0,
+      "termination_status": 0,
+      "termination_mutates_handle": true,
+      "result": {
+        "calls": [],
+        "writes": [],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "manager",
+      "handle": 0,
+      "termination_status": 4294967293,
+      "termination_mutates_handle": false,
+      "result": {
+        "calls": [],
+        "writes": [],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "manager",
+      "handle": 0,
+      "termination_status": 4294967293,
+      "termination_mutates_handle": true,
+      "result": {
+        "calls": [],
+        "writes": [],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "manager",
+      "handle": 0,
+      "termination_status": 1911,
+      "termination_mutates_handle": false,
+      "result": {
+        "calls": [],
+        "writes": [],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "manager",
+      "handle": 0,
+      "termination_status": 1911,
+      "termination_mutates_handle": true,
+      "result": {
+        "calls": [],
+        "writes": [],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "manager",
+      "handle": 1,
+      "termination_status": 0,
+      "termination_mutates_handle": false,
+      "result": {
+        "calls": [
+          1
+        ],
+        "writes": [
+          [
+            536872188,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "manager",
+      "handle": 1,
+      "termination_status": 0,
+      "termination_mutates_handle": true,
+      "result": {
+        "calls": [
+          1
+        ],
+        "writes": [
+          [
+            536872188,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "manager",
+      "handle": 1,
+      "termination_status": 4294967293,
+      "termination_mutates_handle": false,
+      "result": {
+        "calls": [
+          1
+        ],
+        "writes": [
+          [
+            536872188,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "manager",
+      "handle": 1,
+      "termination_status": 4294967293,
+      "termination_mutates_handle": true,
+      "result": {
+        "calls": [
+          1
+        ],
+        "writes": [
+          [
+            536872188,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "manager",
+      "handle": 1,
+      "termination_status": 1911,
+      "termination_mutates_handle": false,
+      "result": {
+        "calls": [
+          1
+        ],
+        "writes": [
+          [
+            536872188,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "manager",
+      "handle": 1,
+      "termination_status": 1911,
+      "termination_mutates_handle": true,
+      "result": {
+        "calls": [
+          1
+        ],
+        "writes": [
+          [
+            536872188,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "manager",
+      "handle": 536875572,
+      "termination_status": 0,
+      "termination_mutates_handle": false,
+      "result": {
+        "calls": [
+          536875572
+        ],
+        "writes": [
+          [
+            536872188,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "manager",
+      "handle": 536875572,
+      "termination_status": 0,
+      "termination_mutates_handle": true,
+      "result": {
+        "calls": [
+          536875572
+        ],
+        "writes": [
+          [
+            536872188,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "manager",
+      "handle": 536875572,
+      "termination_status": 4294967293,
+      "termination_mutates_handle": false,
+      "result": {
+        "calls": [
+          536875572
+        ],
+        "writes": [
+          [
+            536872188,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "manager",
+      "handle": 536875572,
+      "termination_status": 4294967293,
+      "termination_mutates_handle": true,
+      "result": {
+        "calls": [
+          536875572
+        ],
+        "writes": [
+          [
+            536872188,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "manager",
+      "handle": 536875572,
+      "termination_status": 1911,
+      "termination_mutates_handle": false,
+      "result": {
+        "calls": [
+          536875572
+        ],
+        "writes": [
+          [
+            536872188,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "manager",
+      "handle": 536875572,
+      "termination_status": 1911,
+      "termination_mutates_handle": true,
+      "result": {
+        "calls": [
+          536875572
+        ],
+        "writes": [
+          [
+            536872188,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "manager",
+      "handle": 4294967295,
+      "termination_status": 0,
+      "termination_mutates_handle": false,
+      "result": {
+        "calls": [
+          4294967295
+        ],
+        "writes": [
+          [
+            536872188,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "manager",
+      "handle": 4294967295,
+      "termination_status": 0,
+      "termination_mutates_handle": true,
+      "result": {
+        "calls": [
+          4294967295
+        ],
+        "writes": [
+          [
+            536872188,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "manager",
+      "handle": 4294967295,
+      "termination_status": 4294967293,
+      "termination_mutates_handle": false,
+      "result": {
+        "calls": [
+          4294967295
+        ],
+        "writes": [
+          [
+            536872188,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "manager",
+      "handle": 4294967295,
+      "termination_status": 4294967293,
+      "termination_mutates_handle": true,
+      "result": {
+        "calls": [
+          4294967295
+        ],
+        "writes": [
+          [
+            536872188,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "manager",
+      "handle": 4294967295,
+      "termination_status": 1911,
+      "termination_mutates_handle": false,
+      "result": {
+        "calls": [
+          4294967295
+        ],
+        "writes": [
+          [
+            536872188,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    },
+    {
+      "name": "manager",
+      "handle": 4294967295,
+      "termination_status": 1911,
+      "termination_mutates_handle": true,
+      "result": {
+        "calls": [
+          4294967295
+        ],
+        "writes": [
+          [
+            536872188,
+            4,
+            0
+          ]
+        ],
+        "handle": 0,
+        "r0": 0,
+        "r4": 2882400001,
+        "sp": 537128960,
+        "primask": 1
+      }
+    }
+  ],
+  "limits": [
+    "External target416200 (inherited termination label unverified) is an explicit call cut with controlled return and optional handle mutation; no real termination, scheduler, cancellation or quiescence proof.",
+    "Only wrapper behavior and stored-handle clearing established; not integrated into frozen4b candidate."
+  ]
+}

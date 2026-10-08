@@ -1,0 +1,10 @@
+{
+  "id": "P2-20831",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "Fresh replay passed for 44 instruction bytes; pinned image and source receipt hashes match. The helper rounds via wrapping (entry R2+3) then logical shift right two, forwards live entry arguments to 0x473940, then calls 0x4D0A2C with explicit rounded-count/state arguments and restores PRIMASK from that result. The epilogue POP includes R0 from saved SP0, so the visible return is original entry R3, not the helper result. The body has no stack writes. No CRC-wrapper or interrupt-state contract is inferred."
+}

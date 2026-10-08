@@ -1,0 +1,17 @@
+from pathlib import Path
+import json,hashlib,re,subprocess,tempfile
+b=Path('g2/build/pseudocode-first/20260930T190500Z');src=b/'attempts/P1-canonical-fixed-images-005/002/apollo_main-flash.bin';d=src.read_bytes();h=lambda x:hashlib.sha256(x).hexdigest();assert h(d)=='19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701';start=0x47f9d2;end=0x47fab4
+with tempfile.TemporaryDirectory() as td:
+ t=Path(td);(t/'input.bin').write_bytes(d[start-0x438000:end-0x438000]);(t/'input.s').write_text('.syntax unified\n.cpu cortex-m55\n.thumb\n.text\n.incbin "'+str(t/'input.bin')+'"\n');subprocess.run(['/opt/homebrew/bin/arm-none-eabi-as',str(t/'input.s'),'-o',str(t/'input.o')],check=True);rawtext=subprocess.check_output(['/opt/homebrew/bin/arm-none-eabi-objdump','-D','-j','.text','-M','force-thumb','--adjust-vma='+hex(start),str(t/'input.o')],text=True)
+rows=[];cursor=start
+for line in rawtext.splitlines():
+ m=re.match(r'\s*([0-9a-f]+):\s+([0-9a-f]{4}(?: [0-9a-f]{4})?)\s+([^\s]+)\s*(.*)',line)
+ if not m:continue
+ a=int(m[1],16)
+ if not start<=a<end:continue
+ raw=b''.join(int(v,16).to_bytes(2,'little') for v in m[2].split());assert a==cursor and raw==d[a-0x438000:a-0x438000+len(raw)];cursor+=len(raw);rows.append(dict(address=a,bytes=raw.hex(),mnemonic=m[3],operands=m[4]))
+assert cursor==end,(hex(cursor),hex(end),rawtext)
+o=b/'analysis/apollo-main-diagnostic-fixed-library-sequential-record-fetch-ordered-population-completion-tail-21464-map/001';o.mkdir(parents=True,exist_ok=False);(o/'instructions.json').write_text(json.dumps([dict(start=start,end=end,instructions=rows)],indent=2)+'\n');(o/'disassembly.txt').write_text(rawtext);refs=sorted(set(int(m[1],16) for row in rows if (m:=re.search(r'@\s*\(?([0-9a-f]{6,8})',row['operands'])) and 'pc' in row['operands']))
+(o/'references.json').write_text(json.dumps([dict(address=a,bytes=d[a-0x438000:a-0x438000+4].hex(),value=int.from_bytes(d[a-0x438000:a-0x438000+4],'little')) for a in refs],indent=2)+'\n')
+(o/'pseudocode.md').write_text('# Sequential record fetch and ordered population completion\n\nPartial/unaccepted;226instructionbytes47F9D2..47FAB4,continuation21462,64frame,R4destination,R5SPscratch. Everyfollowing4D3F3C callusesR3=SPandfullnonzeroresultbranchesFAB0unchangedbeforeitsassociatedcopies;previouswritesretained,no rollback. Call(3,520,8,SP),success readsSP0,4,8,12,16,20,24,28 independentlyinorder storingdest20,24,28,32,36,40,44,48. Call(1,528,1,SP),successSP0→dest52. Call(1,576,3,SP),successSP0,4,8→dest56,60,64. Call(1,586,2,SP),successSP0,4→dest72,76 (dest68skippeduntilfinalcall). Call(1,592,12,SP),successSP0..44 step4→dest80..124 step4,eachloadthenstoreinorder. Call(1,581,1,SP),successSP0loadedR1→dest68;literal48011Cvalue→dest0,onlyafterallpriorcallsuccess. FinalsuccessR0remainshelperzero;literal/destinationstoresdo notalterR0. FAB0ADDSP52 discards48locals+savedentryR3,POP R4,R5,PC releases12,total64. Prefixgatefailure7andallhelpererrorsuseepilogue. Scratchcontentsdependonhelper; do notinterpretcount/typeasbyteswithouthelperrecovery. Destinationmayalias scratch,preserveorderedindividualcopies; noatomicpublication/completeinitializationclaim. Pointedownership/externalhelpersemanticsunresolved;noMMIO/C/freeze/fullcoverageclaim.\n')
+(o/'replay.py').write_bytes(Path(__file__).read_bytes());(o/'receipt.json').write_text(json.dumps(dict(accepted=False,status='partial',input_sha256=h(d),instruction_bytes=end-start,files={p.name:h(p.read_bytes()) for p in o.iterdir()}),indent=2)+'\n');print('PASS',end-start)

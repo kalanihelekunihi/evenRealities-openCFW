@@ -1,0 +1,10 @@
+{
+  "id": "P2-20805",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "86B replay passed. PUSH R0..R6/LR establishes 32-byte frame; logger SP0/SP4 writes alias saved entry arguments, status calls are separate, mask path retains live R3 without explicit assignment. Counter word is reset unconditionally before setting R5 table base/R6 zero and branching to pending C230, including when no records qualify."
+}

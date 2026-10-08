@@ -1,0 +1,4 @@
+# Record helper eight saved registers entry diagnostics prefix
+
+Partial/unaccepted;80instructionbytes. PUSH R0,R1,R2,R3,R4,R5,R6,R7,R8,LRcreates40-byteframe;SP0savedentryR0,SP4savedentryR1,SP8savedentryR2,SP12savedentryR3,writableslots. R5fullentryR0recordpointer,R7literal47C158,R6one. Query43D0CEwithliveargs;bit1zero skips0x47B762. OtherwiseSP4literal47C15C,SP0=1913;call43D574(4,literal47BC24,literal47BC20,literal47C27C,fifth1913,sixthliteral47C15C). SavedentryR0/R1slotsareoverwrittenonloggerpath.
+At0x47B762queryfreshstatus;bit0oneenters0x47B772,otherwisequeryagainandbit2zero skips0x47B780. MaskpathR1literal47C160,R2same,liveR3;call43CE9E(0x10000000,R1,R2,liveR3). Fallthroughpending0x47B780. Preservefullentrypointer,statusqueries,liveargsandsavedslotwrites;epilogueandhelpersemanticsnotinferred. No C,freezeorcompletenessclaim.

@@ -1,0 +1,31 @@
+{
+  "status": "PASS",
+  "elf_sha256": "cf30c67430b8ad3f4e06c4fb70e510f80fc09a7449a64767d29322e41a2c23a1",
+  "flags": [
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m33",
+    "-mthumb",
+    "-mfloat-abi=softfp",
+    "-O1",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-fshort-enums",
+    "-mfpu=fpv5-sp-d16"
+  ],
+  "results": [
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_selector13_native/pcm22_sequence13.c",
+      "source_sha256": "d1a1c0f7ad98ee1531808d07ee495c337e2393a1e219c23a1cd336a76fb9132c",
+      "object_sha256": "b70602cb2e77b66e89951a8339512a9fc1b8d5f5f700dc0e75504bd3e33469a7",
+      "frozen_object": "inputs/225/pcm22_sequence13.o"
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_selector13_native/initialized_data.c",
+      "source_sha256": "296d492d083e555e7e00abf314513ad00f3c771984e663cfecab9307cb55ecbf",
+      "object_sha256": "c5536e4e0a586514e6aa839d4f7954ff82fa6f9da40536291794ab344539556d",
+      "frozen_object": "inputs/206/initialized_data.o"
+    }
+  ]
+}

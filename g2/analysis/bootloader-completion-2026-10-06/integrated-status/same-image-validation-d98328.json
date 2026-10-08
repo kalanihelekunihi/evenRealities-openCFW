@@ -1,0 +1,89 @@
+{
+  "utc": "2026-10-07T01:14:59.210460+00:00",
+  "status": "PASS",
+  "elf": "g2/build/bootloader-completion/source-image-compatible/snapshots/d983284c9a0fc72425b9e1e07e98db5f4aec9d83257ebc73c0b8214ea1f769e8/bootloader-source-test.elf",
+  "elf_sha256": "d983284c9a0fc72425b9e1e07e98db5f4aec9d83257ebc73c0b8214ea1f769e8",
+  "profiles": [
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/d983284c9a0fc72425b9e1e07e98db5f4aec9d83257ebc73c0b8214ea1f769e8/comparison.json",
+      "sha256": "aae76e611938b4fb5df1b528bcdb77e0cf6288c2ecb09d012fc4cf587eab1257",
+      "status": "PASS",
+      "cases": 2
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/d983284c9a0fc72425b9e1e07e98db5f4aec9d83257ebc73c0b8214ea1f769e8/failures.json",
+      "sha256": "219f5bd2d03f0488993602bc905a4cb8cf3e219a750aa91f4279f5569f205b53",
+      "status": "PASS",
+      "cases": 3
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/d983284c9a0fc72425b9e1e07e98db5f4aec9d83257ebc73c0b8214ea1f769e8/powerloss.json",
+      "sha256": "7d0bc34bc6cf5c96739220fce358f23662756e2e09efe9e617c6de70a0434182",
+      "status": "PASS",
+      "cases": 2
+    }
+  ],
+  "total_cases": 7,
+  "union_distinct_original_trace_bytes": 35362,
+  "payload_bytes": 148599,
+  "percentage": 23.796929992799413,
+  "interruption_checks": [
+    {
+      "interruption": "before",
+      "matches": {
+        "stopped_persistence_match": true,
+        "stopped_observable_match": true,
+        "reboot_persistence_match": true,
+        "reboot_observable_match": true
+      }
+    },
+    {
+      "interruption": "after",
+      "matches": {
+        "stopped_persistence_match": true,
+        "stopped_observable_match": true,
+        "reboot_persistence_match": true,
+        "reboot_observable_match": true
+      }
+    }
+  ],
+  "validation_input_hashes": {
+    "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/d983284c9a0fc72425b9e1e07e98db5f4aec9d83257ebc73c0b8214ea1f769e8/validation-input-hashes-final.json",
+    "sha256": "f1af8cbce071b0327cbbd425edc7e840f75a37f3e427407bc5ac0d6654952ee5",
+    "existing_source_runner_files": 572,
+    "linked_objects": 141,
+    "post_run_hash_mismatches": []
+  },
+  "additional_tests": [
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/context-children-d98328.json",
+      "sha256": "43055858f2f92f4f14799f567c9d23e1005ba79b30709dcdef5f35281e075333",
+      "status": "PASS",
+      "cases": 740
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/context-claim-transaction-d98328.json",
+      "sha256": "15e2ca7c5b33b1fe30360b7ce39c1198c14a2018728273e106656e1841bfca04",
+      "status": "PASS",
+      "cases": 496
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/context-interrupt-d98328.json",
+      "sha256": "2f75a371b019fb2a15ef615c9b1a55183fee1b0078381ce67aa3b69af31b9b6a",
+      "status": "PASS",
+      "cases": 52
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/iom-stable-subtype-d98328.json",
+      "sha256": "61148387bf73fa55e2a8e40d4e16f10ff1eb8770643f3854c9454e67a619af57",
+      "status": "PASS",
+      "cases": 2
+    }
+  ],
+  "limits": [
+    "Relocated source-linked test ELF, not a complete bootable/byte-identical payload.",
+    "Synthetic MMIO, scheduler, ADC and resident-ROM operations; no physical partial-write or IRQ/timing proof.",
+    "Six original FP64 effects emulated; union deduplicates byte addresses, including overlapping second-halfword logs.",
+    "Direct lower callbacks controlled; stable-subtype test is conditional model sensitivity, not hardware behavior."
+  ]
+}

@@ -1,0 +1,30 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp_ono6clx/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00481e46 <.text>:
+  481e46:	980e      	ldr	r0, [sp, #56]	@ 0x38
+  481e48:	2800      	cmp	r0, #0
+  481e4a:	bf47      	ittee	mi
+  481e4c:	2121      	movmi	r1, #33	@ 0x21
+  481e4e:	9101      	strmi	r1, [sp, #4]
+  481e50:	1c40      	addpl	r0, r0, #1
+  481e52:	9001      	strpl	r0, [sp, #4]
+  481e54:	9f01      	ldr	r7, [sp, #4]
+  481e56:	e9dd 012c 	ldrd	r0, r1, [sp, #176]	@ 0xb0
+  481e5a:	1c7f      	adds	r7, r7, #1
+  481e5c:	2200      	movs	r2, #0
+  481e5e:	2300      	movs	r3, #0
+  481e60:	e9dd 4502 	ldrd	r4, r5, [sp, #8]
+  481e64:	f052 f9ac 	bl	4d41c0 <.text+0x5237a>
+  481e68:	bf38      	it	cc
+  481e6a:	f085 4500 	eorcc.w	r5, r5, #2147483648	@ 0x80000000
+  481e6e:	9900      	ldr	r1, [sp, #0]
+  481e70:	f88d 2084 	strb.w	r2, [sp, #132]	@ 0x84
+  481e74:	1f09      	subs	r1, r1, #4
+  481e76:	2f00      	cmp	r7, #0
+  481e78:	9100      	str	r1, [sp, #0]
+  481e7a:	f10d 0685 	add.w	r6, sp, #133	@ 0x85
+  481e7e:	dd32      	ble.n	481ee6 <.text+0xa0>

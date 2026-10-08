@@ -1,0 +1,5 @@
+# Floating conversion threshold and external low-address call
+
+Partial/unaccepted;80 instruction bytes4807A0..4807F0. PUSH R7,LR8. VMOV entryR0rawbits→S0;VCVT.F32.U32 convertsunsignedinteger tofloat32;VCVT.U32.F32 S0,S0,#5 convertsfloat32to unsignedfixed-pointwith5fractionbits (retainarchitecturalconversion/rounding/saturation/FPSCR behavior,not simplewrappingentry*32). VMOVresultbits→R0. Freshwordthroughliteral4807F8 bits3..4!=2 setsR1=15. Equal2 convertscurrentR0unsignedtofloat32 S0,loadsS1floatbitsliteral4807F0;VMUL.F32 S0,S0,S1;loadsS1literal4807F4;VDIV.F32 S0,S0,S1;VCVT.U32.F32 S0,S0;VMOVresultR0;R1=24. No numericconstant assumptionsuntilpooldecoded.
+
+UnsignedR1>=R0 skipcall. Otherwise R0=R0-R1mod2^32;BL absolute0x40 withR1threshold,liveR2/R3,S0conversionstate/S1onbranch. Targetoutsidelockedflash,externaldependencysemanticsunknown. POP R0,PC alwaysreturnsfullentryR7,overwritescalculatedvalue/externalreturn;8frame released. FloatoperationsmaymodifyFPSCR flags; preserveinstructionsemantics,no algebraiccollapse/externaltimingclaim. NoMMIO/C/freeze/fullcoverageclaim. Following12bytesF0..FCnotcode.

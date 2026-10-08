@@ -1,0 +1,1 @@
+Partial/unaccepted continuity47CC60..47CE90,560instructionbytes,fourmaps. Component hashes,pinnedrawtiling andlocalbranch targets checked. Small/medium/highdivisor paths,zero handler external tailbranch,shared20byteframe and8byteframe,borrow corrections andquotient/remainderreturn retained. SeparateCCC8 internalentry accounted. No wholecoverage/source/freezeclaim.

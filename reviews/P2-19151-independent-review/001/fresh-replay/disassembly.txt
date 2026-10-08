@@ -1,0 +1,34 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpt0bt82ip/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00469dde <.text>:
+  469dde:	9803      	ldr	r0, [sp, #12]
+  469de0:	2808      	cmp	r0, #8
+  469de2:	d010      	beq.n	469e06 <.text+0x28>
+  469de4:	9803      	ldr	r0, [sp, #12]
+  469de6:	280b      	cmp	r0, #11
+  469de8:	d00d      	beq.n	469e06 <.text+0x28>
+  469dea:	9803      	ldr	r0, [sp, #12]
+  469dec:	2805      	cmp	r0, #5
+  469dee:	d00a      	beq.n	469e06 <.text+0x28>
+  469df0:	9803      	ldr	r0, [sp, #12]
+  469df2:	2806      	cmp	r0, #6
+  469df4:	d007      	beq.n	469e06 <.text+0x28>
+  469df6:	9803      	ldr	r0, [sp, #12]
+  469df8:	28e0      	cmp	r0, #224	@ 0xe0
+  469dfa:	d004      	beq.n	469e06 <.text+0x28>
+  469dfc:	9803      	ldr	r0, [sp, #12]
+  469dfe:	f640 71fe 	movw	r1, #4094	@ 0xffe
+  469e02:	4288      	cmp	r0, r1
+  469e04:	d108      	bne.n	469e18 <.text+0x3a>
+  469e06:	2364      	movs	r3, #100	@ 0x64
+  469e08:	2200      	movs	r2, #0
+  469e0a:	2100      	movs	r1, #0
+  469e0c:	2022      	movs	r0, #34	@ 0x22
+  469e0e:	f7f0 fd6e 	bl	45a8ee <.text-0xf4f0>
+  469e12:	2000      	movs	r0, #0
+  469e14:	b006      	add	sp, #24
+  469e16:	bd10      	pop	{r4, pc}

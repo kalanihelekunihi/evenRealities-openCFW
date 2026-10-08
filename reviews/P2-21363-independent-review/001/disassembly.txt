@@ -1,0 +1,59 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp6f9j3wml/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00483ae0 <.text>:
+  483ae0:	900c      	str	r0, [sp, #48]	@ 0x30
+  483ae2:	e011      	b.n	483b08 <.text+0x28>
+  483ae4:	f458 7880 	orrs.w	r8, r8, #256	@ 0x100
+  483ae8:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  483aea:	1c40      	adds	r0, r0, #1
+  483aec:	900c      	str	r0, [sp, #48]	@ 0x30
+  483aee:	e00b      	b.n	483b08 <.text+0x28>
+  483af0:	f458 7800 	orrs.w	r8, r8, #512	@ 0x200
+  483af4:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  483af6:	1c40      	adds	r0, r0, #1
+  483af8:	900c      	str	r0, [sp, #48]	@ 0x30
+  483afa:	e005      	b.n	483b08 <.text+0x28>
+  483afc:	f458 7880 	orrs.w	r8, r8, #256	@ 0x100
+  483b00:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  483b02:	1c40      	adds	r0, r0, #1
+  483b04:	900c      	str	r0, [sp, #48]	@ 0x30
+  483b06:	e7ff      	b.n	483b08 <.text+0x28>
+  483b08:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  483b0a:	7800      	ldrb	r0, [r0, #0]
+  483b0c:	2825      	cmp	r0, #37	@ 0x25
+  483b0e:	f000 8239 	beq.w	483f84 <.text+0x4a4>
+  483b12:	2845      	cmp	r0, #69	@ 0x45
+  483b14:	f000 8195 	beq.w	483e42 <.text+0x362>
+  483b18:	2846      	cmp	r0, #70	@ 0x46
+  483b1a:	f000 8175 	beq.w	483e08 <.text+0x328>
+  483b1e:	2847      	cmp	r0, #71	@ 0x47
+  483b20:	f000 818f 	beq.w	483e42 <.text+0x362>
+  483b24:	2850      	cmp	r0, #80	@ 0x50
+  483b26:	d01f      	beq.n	483b68 <.text+0x88>
+  483b28:	2858      	cmp	r0, #88	@ 0x58
+  483b2a:	d01d      	beq.n	483b68 <.text+0x88>
+  483b2c:	2862      	cmp	r0, #98	@ 0x62
+  483b2e:	d01b      	beq.n	483b68 <.text+0x88>
+  483b30:	2863      	cmp	r0, #99	@ 0x63
+  483b32:	f000 81b1 	beq.w	483e98 <.text+0x3b8>
+  483b36:	2864      	cmp	r0, #100	@ 0x64
+  483b38:	d016      	beq.n	483b68 <.text+0x88>
+  483b3a:	2865      	cmp	r0, #101	@ 0x65
+  483b3c:	f000 8181 	beq.w	483e42 <.text+0x362>
+  483b40:	2866      	cmp	r0, #102	@ 0x66
+  483b42:	f000 8161 	beq.w	483e08 <.text+0x328>
+  483b46:	2867      	cmp	r0, #103	@ 0x67
+  483b48:	f000 817b 	beq.w	483e42 <.text+0x362>
+  483b4c:	2869      	cmp	r0, #105	@ 0x69
+  483b4e:	d00b      	beq.n	483b68 <.text+0x88>
+  483b50:	286f      	cmp	r0, #111	@ 0x6f
+  483b52:	d009      	beq.n	483b68 <.text+0x88>
+  483b54:	2870      	cmp	r0, #112	@ 0x70
+  483b56:	d007      	beq.n	483b68 <.text+0x88>
+  483b58:	2873      	cmp	r0, #115	@ 0x73
+  483b5a:	f000 81c8 	beq.w	483eee <.text+0x40e>
+  483b5e:	2875      	cmp	r0, #117	@ 0x75

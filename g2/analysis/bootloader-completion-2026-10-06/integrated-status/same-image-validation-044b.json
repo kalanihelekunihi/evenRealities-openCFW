@@ -1,0 +1,37 @@
+{
+  "utc": "2026-10-06T23:02:35.902009+00:00",
+  "status": "PASS",
+  "elf": "g2/build/bootloader-completion/source-image-compatible/snapshots/044b12f85bc2954efbfea718d701e5c06ba5491e2d141ce05f1b33cf20b21463/bootloader-source-test.elf",
+  "elf_sha256": "044b12f85bc2954efbfea718d701e5c06ba5491e2d141ce05f1b33cf20b21463",
+  "seed_elf": "g2/build/bootloader-completion/source-image-compatible/snapshots/044b12f85bc2954efbfea718d701e5c06ba5491e2d141ce05f1b33cf20b21463/filesystem-seed.elf",
+  "seed_elf_sha256": "e6ba6916ee417e9efec1f4dc90a50f8ce7777f0e2ad8f976e6d2e27856072b78",
+  "profiles": [
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/044b12f85bc2954efbfea718d701e5c06ba5491e2d141ce05f1b33cf20b21463/comparison.json",
+      "sha256": "68e08d757a4dd69d84bbb167d7d8453e3d0bc486655f217040e9728d72c8e0d7",
+      "status": "PASS",
+      "cases": 2,
+      "distinct_original_trace_bytes": 30898
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/044b12f85bc2954efbfea718d701e5c06ba5491e2d141ce05f1b33cf20b21463/failures.json",
+      "sha256": "531868ad69bdba1ce1d02dda2b32c5af230f88cafd207d7cd488038be5db84fa",
+      "status": "PASS",
+      "cases": 3,
+      "distinct_original_trace_bytes": 29558
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/failure-profile/powerloss-review-strict-044b.json",
+      "sha256": "f09f83b610e47cef202ac814fba9b92f5391134f2d7575d4678b225cc3751d7b",
+      "status": "PASS",
+      "cases": 2,
+      "distinct_original_trace_bytes": 30858
+    }
+  ],
+  "total_cases": 7,
+  "union_distinct_original_trace_bytes": 31344,
+  "limits": [
+    "Native-source test image with remaining explicit internal providers, ROM callbacks and fixture assets; not source-complete, standalone bootable or byte-identical.",
+    "Interruption is immediately before/after atomic synthetic page programming; no physical partial-write/atomicity/recovery or application execution proof."
+  ]
+}

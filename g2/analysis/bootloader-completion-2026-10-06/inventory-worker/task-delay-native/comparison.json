@@ -1,0 +1,8362 @@
+{
+  "status": "PASS_TASK_DELAY_BODIES_WITH_SCHEDULER_CONTRACTS",
+  "cases": 270,
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_sha256": "4b546472dcc522008c36419e253341d4d077d7da2679d7414a2a50dc6f24ae8a",
+  "elf_sha256": "89dc8657467cbb30ed367c22aa10cc0361201bdddd1ea61d1136f0974f9ae3eb",
+  "bodies": [
+    {
+      "start": "0x416378",
+      "end": "0x41639a",
+      "bytes": 34,
+      "visited": 34
+    },
+    {
+      "start": "0x417fa8",
+      "end": "0x417fe4",
+      "bytes": 60,
+      "visited": 58
+    }
+  ],
+  "comparisons": [
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 0,
+        "suspended": 0,
+        "resume": 0,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 0,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 0,
+        "suspended": 0,
+        "resume": 0,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 0,
+        "suspended": 0,
+        "resume": 0,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 0,
+        "suspended": 0,
+        "resume": 1,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 0,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 0,
+        "suspended": 0,
+        "resume": 1,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 0,
+        "suspended": 0,
+        "resume": 1,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 0,
+        "suspended": 0,
+        "resume": 7,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 0,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 0,
+        "suspended": 0,
+        "resume": 7,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 0,
+        "suspended": 0,
+        "resume": 7,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 0,
+        "suspended": 1,
+        "resume": 0,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 0,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 0,
+        "suspended": 1,
+        "resume": 0,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 0,
+        "suspended": 1,
+        "resume": 0,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 0,
+        "suspended": 1,
+        "resume": 1,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 0,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 0,
+        "suspended": 1,
+        "resume": 1,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 0,
+        "suspended": 1,
+        "resume": 1,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 0,
+        "suspended": 1,
+        "resume": 7,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 0,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 0,
+        "suspended": 1,
+        "resume": 7,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 0,
+        "suspended": 1,
+        "resume": 7,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 0,
+        "suspended": 4294967295,
+        "resume": 0,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 0,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 0,
+        "suspended": 4294967295,
+        "resume": 0,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 0,
+        "suspended": 4294967295,
+        "resume": 0,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 0,
+        "suspended": 4294967295,
+        "resume": 1,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 0,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 0,
+        "suspended": 4294967295,
+        "resume": 1,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 0,
+        "suspended": 4294967295,
+        "resume": 1,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 0,
+        "suspended": 4294967295,
+        "resume": 7,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 0,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 0,
+        "suspended": 4294967295,
+        "resume": 7,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 0,
+        "suspended": 4294967295,
+        "resume": 7,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 1,
+        "suspended": 0,
+        "resume": 0,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            1,
+            0
+          ],
+          [
+            "resume"
+          ],
+          [
+            "reschedule"
+          ]
+        ],
+        "return": 0,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 1,
+        "suspended": 0,
+        "resume": 0,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 1,
+        "suspended": 0,
+        "resume": 0,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 1,
+        "suspended": 0,
+        "resume": 1,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            1,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": 0,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 1,
+        "suspended": 0,
+        "resume": 1,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 1,
+        "suspended": 0,
+        "resume": 1,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 1,
+        "suspended": 0,
+        "resume": 7,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            1,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": 0,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 1,
+        "suspended": 0,
+        "resume": 7,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 1,
+        "suspended": 0,
+        "resume": 7,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 1,
+        "suspended": 1,
+        "resume": 0,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 1,
+        "suspended": 1,
+        "resume": 0,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 1,
+        "suspended": 1,
+        "resume": 0,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 1,
+        "suspended": 1,
+        "resume": 1,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 1,
+        "suspended": 1,
+        "resume": 1,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 1,
+        "suspended": 1,
+        "resume": 1,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 1,
+        "suspended": 1,
+        "resume": 7,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 1,
+        "suspended": 1,
+        "resume": 7,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 1,
+        "suspended": 1,
+        "resume": 7,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 1,
+        "suspended": 4294967295,
+        "resume": 0,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 1,
+        "suspended": 4294967295,
+        "resume": 0,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 1,
+        "suspended": 4294967295,
+        "resume": 0,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 1,
+        "suspended": 4294967295,
+        "resume": 1,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 1,
+        "suspended": 4294967295,
+        "resume": 1,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 1,
+        "suspended": 4294967295,
+        "resume": 1,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 1,
+        "suspended": 4294967295,
+        "resume": 7,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 1,
+        "suspended": 4294967295,
+        "resume": 7,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 1,
+        "suspended": 4294967295,
+        "resume": 7,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2,
+        "suspended": 0,
+        "resume": 0,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            2,
+            0
+          ],
+          [
+            "resume"
+          ],
+          [
+            "reschedule"
+          ]
+        ],
+        "return": 0,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2,
+        "suspended": 0,
+        "resume": 0,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2,
+        "suspended": 0,
+        "resume": 0,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2,
+        "suspended": 0,
+        "resume": 1,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            2,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": 0,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2,
+        "suspended": 0,
+        "resume": 1,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2,
+        "suspended": 0,
+        "resume": 1,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2,
+        "suspended": 0,
+        "resume": 7,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            2,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": 0,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2,
+        "suspended": 0,
+        "resume": 7,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2,
+        "suspended": 0,
+        "resume": 7,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2,
+        "suspended": 1,
+        "resume": 0,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2,
+        "suspended": 1,
+        "resume": 0,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2,
+        "suspended": 1,
+        "resume": 0,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2,
+        "suspended": 1,
+        "resume": 1,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2,
+        "suspended": 1,
+        "resume": 1,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2,
+        "suspended": 1,
+        "resume": 1,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2,
+        "suspended": 1,
+        "resume": 7,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2,
+        "suspended": 1,
+        "resume": 7,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2,
+        "suspended": 1,
+        "resume": 7,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2,
+        "suspended": 4294967295,
+        "resume": 0,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2,
+        "suspended": 4294967295,
+        "resume": 0,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2,
+        "suspended": 4294967295,
+        "resume": 0,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2,
+        "suspended": 4294967295,
+        "resume": 1,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2,
+        "suspended": 4294967295,
+        "resume": 1,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2,
+        "suspended": 4294967295,
+        "resume": 1,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2,
+        "suspended": 4294967295,
+        "resume": 7,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2,
+        "suspended": 4294967295,
+        "resume": 7,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2,
+        "suspended": 4294967295,
+        "resume": 7,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2147483648,
+        "suspended": 0,
+        "resume": 0,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            2147483648,
+            0
+          ],
+          [
+            "resume"
+          ],
+          [
+            "reschedule"
+          ]
+        ],
+        "return": 0,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2147483648,
+        "suspended": 0,
+        "resume": 0,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2147483648,
+        "suspended": 0,
+        "resume": 0,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2147483648,
+        "suspended": 0,
+        "resume": 1,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            2147483648,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": 0,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2147483648,
+        "suspended": 0,
+        "resume": 1,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2147483648,
+        "suspended": 0,
+        "resume": 1,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2147483648,
+        "suspended": 0,
+        "resume": 7,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            2147483648,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": 0,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2147483648,
+        "suspended": 0,
+        "resume": 7,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2147483648,
+        "suspended": 0,
+        "resume": 7,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2147483648,
+        "suspended": 1,
+        "resume": 0,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2147483648,
+        "suspended": 1,
+        "resume": 0,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2147483648,
+        "suspended": 1,
+        "resume": 0,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2147483648,
+        "suspended": 1,
+        "resume": 1,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2147483648,
+        "suspended": 1,
+        "resume": 1,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2147483648,
+        "suspended": 1,
+        "resume": 1,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2147483648,
+        "suspended": 1,
+        "resume": 7,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2147483648,
+        "suspended": 1,
+        "resume": 7,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2147483648,
+        "suspended": 1,
+        "resume": 7,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2147483648,
+        "suspended": 4294967295,
+        "resume": 0,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2147483648,
+        "suspended": 4294967295,
+        "resume": 0,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2147483648,
+        "suspended": 4294967295,
+        "resume": 0,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2147483648,
+        "suspended": 4294967295,
+        "resume": 1,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2147483648,
+        "suspended": 4294967295,
+        "resume": 1,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2147483648,
+        "suspended": 4294967295,
+        "resume": 1,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2147483648,
+        "suspended": 4294967295,
+        "resume": 7,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2147483648,
+        "suspended": 4294967295,
+        "resume": 7,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 2147483648,
+        "suspended": 4294967295,
+        "resume": 7,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 4294967295,
+        "suspended": 0,
+        "resume": 0,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            4294967295,
+            0
+          ],
+          [
+            "resume"
+          ],
+          [
+            "reschedule"
+          ]
+        ],
+        "return": 0,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 4294967295,
+        "suspended": 0,
+        "resume": 0,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 4294967295,
+        "suspended": 0,
+        "resume": 0,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 4294967295,
+        "suspended": 0,
+        "resume": 1,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            4294967295,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": 0,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 4294967295,
+        "suspended": 0,
+        "resume": 1,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 4294967295,
+        "suspended": 0,
+        "resume": 1,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 4294967295,
+        "suspended": 0,
+        "resume": 7,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            4294967295,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": 0,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 4294967295,
+        "suspended": 0,
+        "resume": 7,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 4294967295,
+        "suspended": 0,
+        "resume": 7,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 4294967295,
+        "suspended": 1,
+        "resume": 0,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 4294967295,
+        "suspended": 1,
+        "resume": 0,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 4294967295,
+        "suspended": 1,
+        "resume": 0,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 4294967295,
+        "suspended": 1,
+        "resume": 1,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 4294967295,
+        "suspended": 1,
+        "resume": 1,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 4294967295,
+        "suspended": 1,
+        "resume": 1,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 4294967295,
+        "suspended": 1,
+        "resume": 7,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 4294967295,
+        "suspended": 1,
+        "resume": 7,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 4294967295,
+        "suspended": 1,
+        "resume": 7,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 4294967295,
+        "suspended": 4294967295,
+        "resume": 0,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 4294967295,
+        "suspended": 4294967295,
+        "resume": 0,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 4294967295,
+        "suspended": 4294967295,
+        "resume": 0,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 4294967295,
+        "suspended": 4294967295,
+        "resume": 1,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 4294967295,
+        "suspended": 4294967295,
+        "resume": 1,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 4294967295,
+        "suspended": 4294967295,
+        "resume": 1,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 4294967295,
+        "suspended": 4294967295,
+        "resume": 7,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ],
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 4294967295,
+        "suspended": 4294967295,
+        "resume": 7,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "cmsis",
+        "ticks": 4294967295,
+        "suspended": 4294967295,
+        "resume": 7,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "guard"
+          ]
+        ],
+        "return": 4294967290,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 0,
+        "suspended": 0,
+        "resume": 0,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 0,
+        "suspended": 0,
+        "resume": 0,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 0,
+        "suspended": 0,
+        "resume": 0,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 0,
+        "suspended": 0,
+        "resume": 1,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 0,
+        "suspended": 0,
+        "resume": 1,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 0,
+        "suspended": 0,
+        "resume": 1,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 0,
+        "suspended": 0,
+        "resume": 7,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 0,
+        "suspended": 0,
+        "resume": 7,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 0,
+        "suspended": 0,
+        "resume": 7,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 0,
+        "suspended": 1,
+        "resume": 0,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 0,
+        "suspended": 1,
+        "resume": 0,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 0,
+        "suspended": 1,
+        "resume": 0,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 0,
+        "suspended": 1,
+        "resume": 1,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 0,
+        "suspended": 1,
+        "resume": 1,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 0,
+        "suspended": 1,
+        "resume": 1,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 0,
+        "suspended": 1,
+        "resume": 7,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 0,
+        "suspended": 1,
+        "resume": 7,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 0,
+        "suspended": 1,
+        "resume": 7,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 1
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 0,
+        "suspended": 4294967295,
+        "resume": 0,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 0,
+        "suspended": 4294967295,
+        "resume": 0,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 0,
+        "suspended": 4294967295,
+        "resume": 0,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 0,
+        "suspended": 4294967295,
+        "resume": 1,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 0,
+        "suspended": 4294967295,
+        "resume": 1,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 0,
+        "suspended": 4294967295,
+        "resume": 1,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 0,
+        "suspended": 4294967295,
+        "resume": 7,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 0,
+        "suspended": 4294967295,
+        "resume": 7,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 0,
+        "suspended": 4294967295,
+        "resume": 7,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 4294967295
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 1,
+        "suspended": 0,
+        "resume": 0,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            1,
+            0
+          ],
+          [
+            "resume"
+          ],
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 1,
+        "suspended": 0,
+        "resume": 0,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            1,
+            0
+          ],
+          [
+            "resume"
+          ],
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 1,
+        "suspended": 0,
+        "resume": 0,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            1,
+            0
+          ],
+          [
+            "resume"
+          ],
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 1,
+        "suspended": 0,
+        "resume": 1,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            1,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 1,
+        "suspended": 0,
+        "resume": 1,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            1,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 1,
+        "suspended": 0,
+        "resume": 1,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            1,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 1,
+        "suspended": 0,
+        "resume": 7,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            1,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 1,
+        "suspended": 0,
+        "resume": 7,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            1,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 1,
+        "suspended": 0,
+        "resume": 7,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            1,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 1,
+        "suspended": 1,
+        "resume": 0,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 1,
+        "suspended": 1,
+        "resume": 0,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 1,
+        "suspended": 1,
+        "resume": 0,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 1,
+        "suspended": 1,
+        "resume": 1,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 1,
+        "suspended": 1,
+        "resume": 1,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 1,
+        "suspended": 1,
+        "resume": 1,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 1,
+        "suspended": 1,
+        "resume": 7,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 1,
+        "suspended": 1,
+        "resume": 7,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 1,
+        "suspended": 1,
+        "resume": 7,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 1,
+        "suspended": 4294967295,
+        "resume": 0,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 1,
+        "suspended": 4294967295,
+        "resume": 0,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 1,
+        "suspended": 4294967295,
+        "resume": 0,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 1,
+        "suspended": 4294967295,
+        "resume": 1,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 1,
+        "suspended": 4294967295,
+        "resume": 1,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 1,
+        "suspended": 4294967295,
+        "resume": 1,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 1,
+        "suspended": 4294967295,
+        "resume": 7,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 1,
+        "suspended": 4294967295,
+        "resume": 7,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 1,
+        "suspended": 4294967295,
+        "resume": 7,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2,
+        "suspended": 0,
+        "resume": 0,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            2,
+            0
+          ],
+          [
+            "resume"
+          ],
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2,
+        "suspended": 0,
+        "resume": 0,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            2,
+            0
+          ],
+          [
+            "resume"
+          ],
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2,
+        "suspended": 0,
+        "resume": 0,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            2,
+            0
+          ],
+          [
+            "resume"
+          ],
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2,
+        "suspended": 0,
+        "resume": 1,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            2,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2,
+        "suspended": 0,
+        "resume": 1,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            2,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2,
+        "suspended": 0,
+        "resume": 1,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            2,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2,
+        "suspended": 0,
+        "resume": 7,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            2,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2,
+        "suspended": 0,
+        "resume": 7,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            2,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2,
+        "suspended": 0,
+        "resume": 7,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            2,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2,
+        "suspended": 1,
+        "resume": 0,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2,
+        "suspended": 1,
+        "resume": 0,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2,
+        "suspended": 1,
+        "resume": 0,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2,
+        "suspended": 1,
+        "resume": 1,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2,
+        "suspended": 1,
+        "resume": 1,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2,
+        "suspended": 1,
+        "resume": 1,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2,
+        "suspended": 1,
+        "resume": 7,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2,
+        "suspended": 1,
+        "resume": 7,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2,
+        "suspended": 1,
+        "resume": 7,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2,
+        "suspended": 4294967295,
+        "resume": 0,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2,
+        "suspended": 4294967295,
+        "resume": 0,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2,
+        "suspended": 4294967295,
+        "resume": 0,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2,
+        "suspended": 4294967295,
+        "resume": 1,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2,
+        "suspended": 4294967295,
+        "resume": 1,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2,
+        "suspended": 4294967295,
+        "resume": 1,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2,
+        "suspended": 4294967295,
+        "resume": 7,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2,
+        "suspended": 4294967295,
+        "resume": 7,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2,
+        "suspended": 4294967295,
+        "resume": 7,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2147483648,
+        "suspended": 0,
+        "resume": 0,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            2147483648,
+            0
+          ],
+          [
+            "resume"
+          ],
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2147483648,
+        "suspended": 0,
+        "resume": 0,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            2147483648,
+            0
+          ],
+          [
+            "resume"
+          ],
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2147483648,
+        "suspended": 0,
+        "resume": 0,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            2147483648,
+            0
+          ],
+          [
+            "resume"
+          ],
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2147483648,
+        "suspended": 0,
+        "resume": 1,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            2147483648,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2147483648,
+        "suspended": 0,
+        "resume": 1,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            2147483648,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2147483648,
+        "suspended": 0,
+        "resume": 1,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            2147483648,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2147483648,
+        "suspended": 0,
+        "resume": 7,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            2147483648,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2147483648,
+        "suspended": 0,
+        "resume": 7,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            2147483648,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2147483648,
+        "suspended": 0,
+        "resume": 7,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            2147483648,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2147483648,
+        "suspended": 1,
+        "resume": 0,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2147483648,
+        "suspended": 1,
+        "resume": 0,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2147483648,
+        "suspended": 1,
+        "resume": 0,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2147483648,
+        "suspended": 1,
+        "resume": 1,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2147483648,
+        "suspended": 1,
+        "resume": 1,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2147483648,
+        "suspended": 1,
+        "resume": 1,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2147483648,
+        "suspended": 1,
+        "resume": 7,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2147483648,
+        "suspended": 1,
+        "resume": 7,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2147483648,
+        "suspended": 1,
+        "resume": 7,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2147483648,
+        "suspended": 4294967295,
+        "resume": 0,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2147483648,
+        "suspended": 4294967295,
+        "resume": 0,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2147483648,
+        "suspended": 4294967295,
+        "resume": 0,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2147483648,
+        "suspended": 4294967295,
+        "resume": 1,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2147483648,
+        "suspended": 4294967295,
+        "resume": 1,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2147483648,
+        "suspended": 4294967295,
+        "resume": 1,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2147483648,
+        "suspended": 4294967295,
+        "resume": 7,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2147483648,
+        "suspended": 4294967295,
+        "resume": 7,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 2147483648,
+        "suspended": 4294967295,
+        "resume": 7,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 4294967295,
+        "suspended": 0,
+        "resume": 0,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            4294967295,
+            0
+          ],
+          [
+            "resume"
+          ],
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 4294967295,
+        "suspended": 0,
+        "resume": 0,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            4294967295,
+            0
+          ],
+          [
+            "resume"
+          ],
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 4294967295,
+        "suspended": 0,
+        "resume": 0,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            4294967295,
+            0
+          ],
+          [
+            "resume"
+          ],
+          [
+            "reschedule"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 4294967295,
+        "suspended": 0,
+        "resume": 1,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            4294967295,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 4294967295,
+        "suspended": 0,
+        "resume": 1,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            4294967295,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 4294967295,
+        "suspended": 0,
+        "resume": 1,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            4294967295,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 4294967295,
+        "suspended": 0,
+        "resume": 7,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            4294967295,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 4294967295,
+        "suspended": 0,
+        "resume": 7,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            4294967295,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 4294967295,
+        "suspended": 0,
+        "resume": 7,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "suspend"
+          ],
+          [
+            "block",
+            4294967295,
+            0
+          ],
+          [
+            "resume"
+          ]
+        ],
+        "return": null,
+        "terminal": [],
+        "sp": 537128960,
+        "saved": [
+          11190276,
+          11190277,
+          11190278,
+          11190279,
+          11190280,
+          11190281,
+          11190282,
+          11190283
+        ],
+        "basepri": 0,
+        "suspended": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 4294967295,
+        "suspended": 1,
+        "resume": 0,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 4294967295,
+        "suspended": 1,
+        "resume": 0,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 4294967295,
+        "suspended": 1,
+        "resume": 0,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 4294967295,
+        "suspended": 1,
+        "resume": 1,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 4294967295,
+        "suspended": 1,
+        "resume": 1,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 4294967295,
+        "suspended": 1,
+        "resume": 1,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 4294967295,
+        "suspended": 1,
+        "resume": 7,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 4294967295,
+        "suspended": 1,
+        "resume": 7,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 4294967295,
+        "suspended": 1,
+        "resume": 7,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 4294967295,
+        "suspended": 4294967295,
+        "resume": 0,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 4294967295,
+        "suspended": 4294967295,
+        "resume": 0,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 4294967295,
+        "suspended": 4294967295,
+        "resume": 0,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 4294967295,
+        "suspended": 4294967295,
+        "resume": 1,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 4294967295,
+        "suspended": 4294967295,
+        "resume": 1,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 4294967295,
+        "suspended": 4294967295,
+        "resume": 1,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 4294967295,
+        "suspended": 4294967295,
+        "resume": 7,
+        "guard": 0
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 4294967295,
+        "suspended": 4294967295,
+        "resume": 7,
+        "guard": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    },
+    {
+      "fixture": {
+        "entry": "kernel",
+        "ticks": 4294967295,
+        "suspended": 4294967295,
+        "resume": 7,
+        "guard": 128
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "assert-fault-write",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ]
+      }
+    }
+  ],
+  "limits": [
+    "Guard and scheduler children are controlled returns/effects; their existing native implementations are not exercised by this body corpus. No live task scheduling or tick duration claim.",
+    "Kernel delay has void ABI; undefined returnR0 is excluded. CMSIS status, callee-saved registers,SP,BASEPRI, scheduler state and ordered helperargs compare.",
+    "Scheduler-suspended positive delay enters the real invalid-address store path; test stops at its pre-write hook. No hardware/host invalid-address store occurs."
+  ]
+}

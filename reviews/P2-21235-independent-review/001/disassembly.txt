@@ -1,0 +1,62 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp28j3jmb9/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00482174 <.text>:
+  482174:	f1bb 0f61 	cmp.w	fp, #97	@ 0x61
+  482178:	d117      	bne.n	4821aa <.text+0x36>
+  48217a:	f04f 0b70 	mov.w	fp, #112	@ 0x70
+  48217e:	e019      	b.n	4821b4 <.text+0x40>
+  482180:	b230      	sxth	r0, r6
+  482182:	4540      	cmp	r0, r8
+  482184:	da04      	bge.n	482190 <.text+0x1c>
+  482186:	f89d 1040 	ldrb.w	r1, [sp, #64]	@ 0x40
+  48218a:	070a      	lsls	r2, r1, #28
+  48218c:	bf58      	it	pl
+  48218e:	4680      	movpl	r8, r0
+  482190:	f1b8 0801 	subs.w	r8, r8, #1
+  482194:	bf48      	it	mi
+  482196:	f04f 0800 	movmi.w	r8, #0
+  48219a:	f1bb 0f67 	cmp.w	fp, #103	@ 0x67
+  48219e:	bf14      	ite	ne
+  4821a0:	f04f 0b45 	movne.w	fp, #69	@ 0x45
+  4821a4:	f04f 0b65 	moveq.w	fp, #101	@ 0x65
+  4821a8:	e004      	b.n	4821b4 <.text+0x40>
+  4821aa:	f1bb 0f41 	cmp.w	fp, #65	@ 0x41
+  4821ae:	bf08      	it	eq
+  4821b0:	f04f 0b50 	moveq.w	fp, #80	@ 0x50
+  4821b4:	9808      	ldr	r0, [sp, #32]
+  4821b6:	1c41      	adds	r1, r0, #1
+  4821b8:	9108      	str	r1, [sp, #32]
+  4821ba:	f1b8 0f00 	cmp.w	r8, #0
+  4821be:	9905      	ldr	r1, [sp, #20]
+  4821c0:	f814 2b01 	ldrb.w	r2, [r4], #1
+  4821c4:	540a      	strb	r2, [r1, r0]
+  4821c6:	dc03      	bgt.n	4821d0 <.text+0x5c>
+  4821c8:	f89d 0040 	ldrb.w	r0, [sp, #64]	@ 0x40
+  4821cc:	0701      	lsls	r1, r0, #28
+  4821ce:	d51a      	bpl.n	482206 <.text+0x92>
+  4821d0:	9808      	ldr	r0, [sp, #32]
+  4821d2:	1c41      	adds	r1, r0, #1
+  4821d4:	9108      	str	r1, [sp, #32]
+  4821d6:	f1b8 0f00 	cmp.w	r8, #0
+  4821da:	9905      	ldr	r1, [sp, #20]
+  4821dc:	540f      	strb	r7, [r1, r0]
+  4821de:	dd12      	ble.n	482206 <.text+0x92>
+  4821e0:	1e76      	subs	r6, r6, #1
+  4821e2:	b230      	sxth	r0, r6
+  4821e4:	4580      	cmp	r8, r0
+  4821e6:	bfb8      	it	lt
+  4821e8:	4646      	movlt	r6, r8
+  4821ea:	9805      	ldr	r0, [sp, #20]
+  4821ec:	9b08      	ldr	r3, [sp, #32]
+  4821ee:	b232      	sxth	r2, r6
+  4821f0:	4621      	mov	r1, r4
+  4821f2:	4418      	add	r0, r3
+  4821f4:	f7b7 fcf6 	bl	439be4 <.text-0x48590>
+  4821f8:	9908      	ldr	r1, [sp, #32]
+  4821fa:	b236      	sxth	r6, r6
+  4821fc:	1871      	adds	r1, r6, r1
+  4821fe:	9108      	str	r1, [sp, #32]

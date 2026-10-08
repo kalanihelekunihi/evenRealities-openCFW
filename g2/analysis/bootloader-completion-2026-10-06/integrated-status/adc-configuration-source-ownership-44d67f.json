@@ -1,0 +1,36 @@
+{
+  "utc": "2026-10-07T03:01:26.476362+00:00",
+  "image_sha256": "44d67f98730a7921f7ef5f1afa22651cdc9e5222753d1f2dcefafad7a89f8fbe",
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "functions": [
+    {
+      "symbol": "opencfw_bl_adc_context_configure",
+      "original_entry": "0x42eb74",
+      "original_end_exclusive": "0x42ebaa",
+      "source_entry": "0x351ac",
+      "compiled_function_bytes": 52,
+      "original_body_bytes": 54,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_adc_configure_channel",
+      "original_entry": "0x42eaf6",
+      "original_end_exclusive": "0x42eb74",
+      "source_entry": "0x351e0",
+      "compiled_function_bytes": 126,
+      "original_body_bytes": 126,
+      "ownership": "new-native-body"
+    }
+  ],
+  "new_native_body_bytes": 180,
+  "visited_new_native_body_bytes": 180,
+  "direct_cases": 93,
+  "source": "g2/components/bootloader/initializer_callbacks/adc_configuration.c",
+  "source_sha256": "6c129fce433b6d1f86ce6863c0b36ef5ceae15263220c3e57b9a7c47d1e8ba27",
+  "header_sha256": "9a48cf6e40ff1902701d00ed17931a62a8883e7cab55d635fae20a66c05760bb",
+  "validation": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/adc-configuration-44d67f.json",
+  "limits": [
+    "No external-call stubs; MMIO/global counter modeled as RAM.",
+    "All180 original body bytes visited across93 fixtures; not arbitrary concurrency, peripheral/fault behavior or byte identity."
+  ]
+}

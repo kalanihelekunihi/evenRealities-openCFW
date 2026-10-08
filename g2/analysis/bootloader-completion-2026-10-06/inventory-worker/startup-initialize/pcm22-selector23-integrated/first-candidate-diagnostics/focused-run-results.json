@@ -1,0 +1,158 @@
+[
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/verify.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector23-integrated/18fee7ce914bba8944630d2cfd5f07e05803d77be5fe2632fc0f7800cc1edfa5/candidate.elf"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 260 {'action': 58, 'guard': 46, 'state': 136, 'delete': 156, 'release': 62}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/verify_native_teardown.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector23-integrated/18fee7ce914bba8944630d2cfd5f07e05803d77be5fe2632fc0f7800cc1edfa5/candidate.elf"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 512 {'action': 52, 'guard': 46, 'state': 124, 'delete': 136, 'release': 62, 'dfu': 24, 'manager': 22}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/verify_selector3.py",
+      "--candidate",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector23-integrated/18fee7ce914bba8944630d2cfd5f07e05803d77be5fe2632fc0f7800cc1edfa5/candidate.elf",
+      "--frozen-base",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector23-integrated/18fee7ce914bba8944630d2cfd5f07e05803d77be5fe2632fc0f7800cc1edfa5/validation/selector3.json"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/run_oracle.py\", line 29, in <module>\n    runpy.run_path(str(script),run_name='__main__')\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 294, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/verify_selector3.py\", line 158, in <module>\n    if __name__=='__main__':main()\n                            ~~~~^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/verify_selector3.py\", line 131, in main\n    mask=getmask(mask_uc,symbols);assert mask==0x7f7d96f,hex(mask)\n                                         ^^^^^^^^^^^^^^^\nAssertionError: 0x777d96f\n"
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/verify_selector17.py",
+      "--candidate",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector23-integrated/18fee7ce914bba8944630d2cfd5f07e05803d77be5fe2632fc0f7800cc1edfa5/candidate.elf",
+      "--frozen-base",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector23-integrated/18fee7ce914bba8944630d2cfd5f07e05803d77be5fe2632fc0f7800cc1edfa5/validation/selector17.json"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/run_oracle.py\", line 29, in <module>\n    runpy.run_path(str(script),run_name='__main__')\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 294, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/verify_selector17.py\", line 154, in <module>\n    if __name__=='__main__':main()\n                            ~~~~^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/verify_selector17.py\", line 139, in main\n    mask=get_mask(source_uc,symbols);assert mask==0x7f7d96f,hex(mask)\n                                            ^^^^^^^^^^^^^^^\nAssertionError: 0x777d96f\n"
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/verify_idle.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector23-integrated/18fee7ce914bba8944630d2cfd5f07e05803d77be5fe2632fc0f7800cc1edfa5/candidate.elf",
+      "--cleanup-addon",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector23-integrated/18fee7ce914bba8944630d2cfd5f07e05803d77be5fe2632fc0f7800cc1edfa5/candidate.elf"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 24 {'cleanup': 60, 'action': 0, 'guard': 0, 'state': 0, 'delete': 0, 'release': 62}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/verify_heap_drain.py",
+      "--candidate-elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector23-integrated/18fee7ce914bba8944630d2cfd5f07e05803d77be5fe2632fc0f7800cc1edfa5/candidate.elf",
+      "--cleanup-addon",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector23-integrated/18fee7ce914bba8944630d2cfd5f07e05803d77be5fe2632fc0f7800cc1edfa5/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector23-integrated/18fee7ce914bba8944630d2cfd5f07e05803d77be5fe2632fc0f7800cc1edfa5/validation/heap-drain.json"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/run_oracle.py\", line 29, in <module>\n    runpy.run_path(str(script),run_name='__main__')\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 294, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/verify_heap_drain.py\", line 285, in <module>\n    args.output.write_text(json.dumps(result, indent=2) + \"\\n\")\n    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_local.py\", line 555, in write_text\n    return PathBase.write_text(self, data, encoding, errors, newline)\n           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_abc.py\", line 651, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_local.py\", line 537, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector23-integrated/18fee7ce914bba8944630d2cfd5f07e05803d77be5fe2632fc0f7800cc1edfa5/validation/heap-drain.json'\n"
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/verify_pendsv.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector23-integrated/18fee7ce914bba8944630d2cfd5f07e05803d77be5fe2632fc0f7800cc1edfa5/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector23-integrated/18fee7ce914bba8944630d2cfd5f07e05803d77be5fe2632fc0f7800cc1edfa5/validation/pendsv.json"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/run_oracle.py\", line 29, in <module>\n    runpy.run_path(str(script),run_name='__main__')\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 294, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/verify_pendsv.py\", line 45, in <module>\n    args.output.write_text(json.dumps({'status':'PASS','cases':len(rows),'elf_sha256':hashlib.sha256(args.elf.read_bytes()).hexdigest(),'original_trace':{hex(k):v for k,v in trace.items()},'comparisons':rows,'limits':['Actual basic/FP-high-register PendSV save/select/restore executes with synthetic coherent TCBs/ready lists and seeded PSP. Stops before BX EXC_RETURN; no architectural hardware stacking/unstacking or automatic task entry.','S16-S31 software save/restore executes for FType0; S0-S15/FPSCR architectural/lazy stacking, MVE/VPR state and exception unstacking are not emulated. No live IRQ/concurrency/hardware timing proof. Idle cleanup separately tested; this does not establish a real completed self-delete-to-idle lifecycle.']},indent=2)+'\\n');print('PASS actual non-FP PendSV save/select/restore',len(rows),'cases')\n    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_local.py\", line 555, in write_text\n    return PathBase.write_text(self, data, encoding, errors, newline)\n           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_abc.py\", line 651, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_local.py\", line 537, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector23-integrated/18fee7ce914bba8944630d2cfd5f07e05803d77be5fe2632fc0f7800cc1edfa5/validation/pendsv.json'\n"
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/verify_allocator.py",
+      "--candidate-elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector23-integrated/18fee7ce914bba8944630d2cfd5f07e05803d77be5fe2632fc0f7800cc1edfa5/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector23-integrated/18fee7ce914bba8944630d2cfd5f07e05803d77be5fe2632fc0f7800cc1edfa5/validation/allocator.json"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/run_oracle.py\", line 29, in <module>\n    runpy.run_path(str(script),run_name='__main__')\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 294, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/verify_allocator.py\", line 279, in <module>\n    args.output.write_text(json.dumps(result, indent=2) + \"\\n\")\n    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_local.py\", line 555, in write_text\n    return PathBase.write_text(self, data, encoding, errors, newline)\n           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_abc.py\", line 651, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_local.py\", line 537, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector23-integrated/18fee7ce914bba8944630d2cfd5f07e05803d77be5fe2632fc0f7800cc1edfa5/validation/allocator.json'\n"
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-events-a/verify_event_a_sequence8_timer.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector23-integrated/18fee7ce914bba8944630d2cfd5f07e05803d77be5fe2632fc0f7800cc1edfa5/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector23-integrated/18fee7ce914bba8944630d2cfd5f07e05803d77be5fe2632fc0f7800cc1edfa5/validation/regressions/sequence8.json"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/run_oracle.py\", line 29, in <module>\n    runpy.run_path(str(script),run_name='__main__')\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 294, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-events-a/verify_event_a_sequence8_timer.py\", line 129, in <module>\n    args.output.write_text(json.dumps(out,indent=2)+\"\\n\")\n    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_local.py\", line 555, in write_text\n    return PathBase.write_text(self, data, encoding, errors, newline)\n           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_abc.py\", line 651, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_local.py\", line 537, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector23-integrated/18fee7ce914bba8944630d2cfd5f07e05803d77be5fe2632fc0f7800cc1edfa5/validation/regressions/sequence8.json'\n"
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-events-a/verify_event_a_root_handlers.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector23-integrated/18fee7ce914bba8944630d2cfd5f07e05803d77be5fe2632fc0f7800cc1edfa5/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector23-integrated/18fee7ce914bba8944630d2cfd5f07e05803d77be5fe2632fc0f7800cc1edfa5/validation/regressions/sequence02.json"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/run_oracle.py\", line 29, in <module>\n    runpy.run_path(str(script),run_name='__main__')\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 294, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-events-a/verify_event_a_root_handlers.py\", line 183, in <module>\n    args.output.write_text(json.dumps(out,indent=2)+\"\\n\")\n    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_local.py\", line 555, in write_text\n    return PathBase.write_text(self, data, encoding, errors, newline)\n           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_abc.py\", line 651, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_local.py\", line 537, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector23-integrated/18fee7ce914bba8944630d2cfd5f07e05803d77be5fe2632fc0f7800cc1edfa5/validation/regressions/sequence02.json'\n"
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm2_2-handlers-14-18/verify.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector23-integrated/18fee7ce914bba8944630d2cfd5f07e05803d77be5fe2632fc0f7800cc1edfa5/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector23-integrated/18fee7ce914bba8944630d2cfd5f07e05803d77be5fe2632fc0f7800cc1edfa5/validation/regressions/transitions1418.json"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector23-integrated/run_oracle.py\", line 29, in <module>\n    runpy.run_path(str(script),run_name='__main__')\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 294, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm2_2-handlers-14-18/verify.py\", line 243, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm2_2-handlers-14-18/verify.py\", line 237, in main\n    args.output.write_text(json.dumps(output, indent=2) + \"\\n\")\n    ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_local.py\", line 555, in write_text\n    return PathBase.write_text(self, data, encoding, errors, newline)\n           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_abc.py\", line 651, in write_text\n    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:\n         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_local.py\", line 537, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector23-integrated/18fee7ce914bba8944630d2cfd5f07e05803d77be5fe2632fc0f7800cc1edfa5/validation/regressions/transitions1418.json'\n"
+  }
+]

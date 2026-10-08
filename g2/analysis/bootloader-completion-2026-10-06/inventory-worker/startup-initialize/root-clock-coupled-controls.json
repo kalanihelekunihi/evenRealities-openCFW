@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "r5_omission_rejected": true,
+  "fixture": {
+    "revision": 32,
+    "variant": 1,
+    "gate": 3,
+    "seed": 4294967295,
+    "saved": 0,
+    "present": true,
+    "irq": 0,
+    "clock_flags": 127,
+    "ambient_r5": 2780219352,
+    "ambient_r7": 0,
+    "clock_guard": 0
+  },
+  "stock_power_updates": [
+    [
+      "power_update",
+      15,
+      537030762
+    ],
+    [
+      "power_update",
+      15,
+      3735928559
+    ]
+  ],
+  "mutant_power_updates": [
+    [
+      "power_update",
+      15,
+      2780219354
+    ],
+    [
+      "power_update",
+      15,
+      3735928559
+    ]
+  ],
+  "r7_mutant_320_cases_passed": true,
+  "r7_limit": "These defined root observables discard clock return registers; passing R7 mutation is not proof of the direct clock entry ABI.",
+  "first_160_case_limit": "Clock guard disabled the body in every fixture; retained as an earlier guard-only result, superseded by1376-case expanded suite."
+}

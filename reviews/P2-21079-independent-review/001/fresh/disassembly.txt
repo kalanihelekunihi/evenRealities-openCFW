@@ -1,0 +1,39 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmppy_habv0/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047fe12 <.text>:
+  47fe12:	f8df 03bc 	ldr.w	r0, [pc, #956]	@ 4801d0 <.text+0x3be>
+  47fe16:	6801      	ldr	r1, [r0, #0]
+  47fe18:	f451 3100 	orrs.w	r1, r1, #131072	@ 0x20000
+  47fe1c:	6001      	str	r1, [r0, #0]
+  47fe1e:	6801      	ldr	r1, [r0, #0]
+  47fe20:	f451 2180 	orrs.w	r1, r1, #262144	@ 0x40000
+  47fe24:	6001      	str	r1, [r0, #0]
+  47fe26:	6801      	ldr	r1, [r0, #0]
+  47fe28:	f451 2100 	orrs.w	r1, r1, #524288	@ 0x80000
+  47fe2c:	6001      	str	r1, [r0, #0]
+  47fe2e:	6801      	ldr	r1, [r0, #0]
+  47fe30:	f451 3180 	orrs.w	r1, r1, #65536	@ 0x10000
+  47fe34:	6001      	str	r1, [r0, #0]
+  47fe36:	6801      	ldr	r1, [r0, #0]
+  47fe38:	f031 0110 	bics.w	r1, r1, #16
+  47fe3c:	6001      	str	r1, [r0, #0]
+  47fe3e:	6801      	ldr	r1, [r0, #0]
+  47fe40:	f051 010e 	orrs.w	r1, r1, #14
+  47fe44:	6001      	str	r1, [r0, #0]
+  47fe46:	6801      	ldr	r1, [r0, #0]
+  47fe48:	f051 0101 	orrs.w	r1, r1, #1
+  47fe4c:	6001      	str	r1, [r0, #0]
+  47fe4e:	6801      	ldr	r1, [r0, #0]
+  47fe50:	f431 7100 	bics.w	r1, r1, #512	@ 0x200
+  47fe54:	6001      	str	r1, [r0, #0]
+  47fe56:	6801      	ldr	r1, [r0, #0]
+  47fe58:	f451 71e0 	orrs.w	r1, r1, #448	@ 0x1c0
+  47fe5c:	6001      	str	r1, [r0, #0]
+  47fe5e:	6801      	ldr	r1, [r0, #0]
+  47fe60:	f051 0120 	orrs.w	r1, r1, #32
+  47fe64:	6001      	str	r1, [r0, #0]
+  47fe66:	4770      	bx	lr

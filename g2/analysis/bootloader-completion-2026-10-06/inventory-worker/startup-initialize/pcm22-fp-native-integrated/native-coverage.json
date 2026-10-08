@@ -1,0 +1,38 @@
+{
+  "status": "PASS_BOUNDED_NATIVE",
+  "elf_sha256": "82039de11491ebd971ba9b97d7eebb066f0b6a19f5cfad2a85d26295f2e0527f",
+  "sources": [
+    {
+      "path": "g2/build/bootloader-completion/pcm22-fp-native-integrated/82039de11491ebd971ba9b97d7eebb066f0b6a19f5cfad2a85d26295f2e0527f/validation/updater-frontier.json",
+      "sha256": "2be74fc9231b78ec49a098f10cca8262eedd0901bdf56af87f9a49f6eb9ce993",
+      "cases": 145
+    },
+    {
+      "path": "g2/build/bootloader-completion/pcm22-fp-native-integrated/82039de11491ebd971ba9b97d7eebb066f0b6a19f5cfad2a85d26295f2e0527f/validation/updater-installed.json",
+      "sha256": "98ec3e22829e68184b0ccd8a46c18f77e4d9bf7707ded30405f29bdedaaf0e2f",
+      "cases": 17
+    }
+  ],
+  "body_bytes": 758,
+  "visited_bytes": 756,
+  "missing": [
+    "0x42aa1e",
+    "0x42aa1f"
+  ],
+  "selectors_reached": [
+    0,
+    1,
+    2,
+    3,
+    6,
+    14,
+    17,
+    18,
+    20,
+    24
+  ],
+  "limits": [
+    "145 complete frontier fixtures plus17 targeted fixtures; no callback-cut receipt contributes coverage. Full default FPSCR is included in both comparisons.",
+    "Six unresolved paths match their stock/source stopping selector; they are not completed executions. Resident ROM delay40 stub and synthetic MMIO remain."
+  ]
+}

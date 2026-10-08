@@ -1,0 +1,50 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpdqazbeow/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0046a3d8 <.text>:
+  46a3d8:	b510      	push	{r4, lr}
+  46a3da:	b086      	sub	sp, #24
+  46a3dc:	f7d2 fe77 	bl	43d0ce <.text-0x2d30a>
+  46a3e0:	0780      	lsls	r0, r0, #30
+  46a3e2:	d50e      	bpl.n	46a402 <.text+0x2a>
+  46a3e4:	f8df 0a90 	ldr.w	r0, [pc, #2704]	@ 46ae78 <.text+0xaa0>
+  46a3e8:	9001      	str	r0, [sp, #4]
+  46a3ea:	f44f 70bb 	mov.w	r0, #374	@ 0x176
+  46a3ee:	9000      	str	r0, [sp, #0]
+  46a3f0:	f8df 3a88 	ldr.w	r3, [pc, #2696]	@ 46ae7c <.text+0xaa4>
+  46a3f4:	f8df 2438 	ldr.w	r2, [pc, #1080]	@ 46a830 <.text+0x458>
+  46a3f8:	f8df 1438 	ldr.w	r1, [pc, #1080]	@ 46a834 <.text+0x45c>
+  46a3fc:	2004      	movs	r0, #4
+  46a3fe:	f7d3 f8b9 	bl	43d574 <.text-0x2ce64>
+  46a402:	f7d2 fe64 	bl	43d0ce <.text-0x2d30a>
+  46a406:	07c0      	lsls	r0, r0, #31
+  46a408:	d403      	bmi.n	46a412 <.text+0x3a>
+  46a40a:	f7d2 fe60 	bl	43d0ce <.text-0x2d30a>
+  46a40e:	0740      	lsls	r0, r0, #29
+  46a410:	d506      	bpl.n	46a420 <.text+0x48>
+  46a412:	f8df 1a6c 	ldr.w	r1, [pc, #2668]	@ 46ae80 <.text+0xaa8>
+  46a416:	000a      	movs	r2, r1
+  46a418:	f05f 5080 	movs.w	r0, #268435456	@ 0x10000000
+  46a41c:	f7d2 fd3f 	bl	43ce9e <.text-0x2d53a>
+  46a420:	2000      	movs	r0, #0
+  46a422:	f8df 1be0 	ldr.w	r1, [pc, #3040]	@ 46b004 <.text+0xc2c>
+  46a426:	7008      	strb	r0, [r1, #0]
+  46a428:	f7ff fc36 	bl	469c98 <.text-0x740>
+  46a42c:	2800      	cmp	r0, #0
+  46a42e:	d156      	bne.n	46a4de <.text+0x106>
+  46a430:	210a      	movs	r1, #10
+  46a432:	2200      	movs	r2, #0
+  46a434:	ac03      	add	r4, sp, #12
+  46a436:	0020      	movs	r0, r4
+  46a438:	f7d1 fe54 	bl	43c0e4 <.text-0x2e2f4>
+  46a43c:	210a      	movs	r1, #10
+  46a43e:	2200      	movs	r2, #0
+  46a440:	ac03      	add	r4, sp, #12
+  46a442:	0020      	movs	r0, r4
+  46a444:	f7d1 fe4e 	bl	43c0e4 <.text-0x2e2f4>
+  46a448:	2105      	movs	r1, #5
+  46a44a:	a803      	add	r0, sp, #12
+  46a44c:	f7ff fc2e 	bl	469cac <.text-0x72c>

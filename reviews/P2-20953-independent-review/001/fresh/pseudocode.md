@@ -1,0 +1,5 @@
+# Flag-gated exact-count output with wrapping size rollover
+
+Partial/unaccepted;116instructionbytes47E178..47E1EC. PUSH R3,R4,R5,R6,R7,LR24;R4=entryR0,R5=entryR1. Freshbyte[pointerliteralE2B4]zero→R0=FFFFFFFE(-2)exit. OtherwiseR6=literalE2B8pointer;freshwordzero skipscapacityguard. Nonzero→freshword[pointerE2BC]+R5 modulo2^32;unsignedsum>=32769→47E06A(liveargs),thenword[R6]=0. Overflowwrapnotseparatelyrejected.
+R7=literalE2C0handlepointer;freshwordnonzero→output. Freshzero→freshword[R6]zero calls47E0C8(liveargs),else47E144(liveargs);fullreturnnonzero exitsunchangedR0(-5bylocalcontracts). Fullzero→output.
+Outputfreshword[R7]→R3;474682(entryR0,1,entryR1,R3). Fullresult!=R5→47E06A(liveargs),R0=FFFFFFFB(-5)exit. Equality→freshword[pointerE2BC]+R5modulo2^32 storedsameword;R0=0. ZeroentryR1canpass exactcountzero. Globalsreadatdistincttimes,nocachedhandle. POP R1,R4,R5,R6,R7,PC24 returnsR1=savedentryR3 subjecttohelperstackwrites;restorepreservedregs. No C/freeze/completenessclaim;externalhelpersemanticsremainunresolved.

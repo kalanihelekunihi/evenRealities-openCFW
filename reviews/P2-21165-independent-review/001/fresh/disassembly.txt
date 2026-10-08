@@ -1,0 +1,50 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmps272cb0c/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00481022 <.text>:
+  481022:	f7f2 fc8d 	bl	473940 <.text-0xd6e2>
+  481026:	9000      	str	r0, [sp, #0]
+  481028:	f8df 0724 	ldr.w	r0, [pc, #1828]	@ 481750 <.text+0x72e>
+  48102c:	f3c4 1142 	ubfx	r1, r4, #5, #3
+  481030:	f3c4 1242 	ubfx	r2, r4, #5, #3
+  481034:	f850 2022 	ldr.w	r2, [r0, r2, lsl #2]
+  481038:	2301      	movs	r3, #1
+  48103a:	f014 041f 	ands.w	r4, r4, #31
+  48103e:	fa13 f404 	lsls.w	r4, r3, r4
+  481042:	4054      	eors	r4, r2
+  481044:	f840 4021 	str.w	r4, [r0, r1, lsl #2]
+  481048:	9800      	ldr	r0, [sp, #0]
+  48104a:	f380 8810 	msr	PRIMASK, r0
+  48104e:	e02d      	b.n	4810ac <.text+0x8a>
+  481050:	f8df 070c 	ldr.w	r0, [pc, #1804]	@ 481760 <.text+0x73e>
+  481054:	f3c4 1142 	ubfx	r1, r4, #5, #3
+  481058:	2201      	movs	r2, #1
+  48105a:	f014 041f 	ands.w	r4, r4, #31
+  48105e:	fa12 f404 	lsls.w	r4, r2, r4
+  481062:	f840 4021 	str.w	r4, [r0, r1, lsl #2]
+  481066:	e021      	b.n	4810ac <.text+0x8a>
+  481068:	f8df 06f8 	ldr.w	r0, [pc, #1784]	@ 481764 <.text+0x742>
+  48106c:	f3c4 1142 	ubfx	r1, r4, #5, #3
+  481070:	2201      	movs	r2, #1
+  481072:	f014 041f 	ands.w	r4, r4, #31
+  481076:	fa12 f404 	lsls.w	r4, r2, r4
+  48107a:	f840 4021 	str.w	r4, [r0, r1, lsl #2]
+  48107e:	e015      	b.n	4810ac <.text+0x8a>
+  481080:	f7f2 fc5e 	bl	473940 <.text-0xd6e2>
+  481084:	9000      	str	r0, [sp, #0]
+  481086:	f8df 06cc 	ldr.w	r0, [pc, #1740]	@ 481754 <.text+0x732>
+  48108a:	f3c4 1142 	ubfx	r1, r4, #5, #3
+  48108e:	f3c4 1242 	ubfx	r2, r4, #5, #3
+  481092:	f850 2022 	ldr.w	r2, [r0, r2, lsl #2]
+  481096:	2301      	movs	r3, #1
+  481098:	f014 041f 	ands.w	r4, r4, #31
+  48109c:	fa13 f404 	lsls.w	r4, r3, r4
+  4810a0:	4054      	eors	r4, r2
+  4810a2:	f840 4021 	str.w	r4, [r0, r1, lsl #2]
+  4810a6:	9800      	ldr	r0, [sp, #0]
+  4810a8:	f380 8810 	msr	PRIMASK, r0
+  4810ac:	2000      	movs	r0, #0
+  4810ae:	bd16      	pop	{r1, r2, r4, pc}

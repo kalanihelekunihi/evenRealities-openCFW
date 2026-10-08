@@ -1,0 +1,63 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpu6qutymw/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00483960 <.text>:
+  483960:	e92d 4fff 	stmdb	sp!, {r0, r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, fp, lr}
+  483964:	b089      	sub	sp, #36	@ 0x24
+  483966:	0005      	movs	r5, r0
+  483968:	f8dd 9058 	ldr.w	r9, [sp, #88]	@ 0x58
+  48396c:	2600      	movs	r6, #0
+  48396e:	980a      	ldr	r0, [sp, #40]	@ 0x28
+  483970:	2800      	cmp	r0, #0
+  483972:	d10c      	bne.n	48398e <.text+0x2e>
+  483974:	f8df 5694 	ldr.w	r5, [pc, #1684]	@ 48400c <.text+0x6ac>
+  483978:	e009      	b.n	48398e <.text+0x2e>
+  48397a:	9b0b      	ldr	r3, [sp, #44]	@ 0x2c
+  48397c:	0032      	movs	r2, r6
+  48397e:	990a      	ldr	r1, [sp, #40]	@ 0x28
+  483980:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  483982:	7800      	ldrb	r0, [r0, #0]
+  483984:	47a8      	blx	r5
+  483986:	1c76      	adds	r6, r6, #1
+  483988:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  48398a:	1c40      	adds	r0, r0, #1
+  48398c:	900c      	str	r0, [sp, #48]	@ 0x30
+  48398e:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  483990:	7800      	ldrb	r0, [r0, #0]
+  483992:	2800      	cmp	r0, #0
+  483994:	f000 830b 	beq.w	483fae <.text+0x64e>
+  483998:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  48399a:	7800      	ldrb	r0, [r0, #0]
+  48399c:	2825      	cmp	r0, #37	@ 0x25
+  48399e:	d1ec      	bne.n	48397a <.text+0x1a>
+  4839a0:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  4839a2:	1c40      	adds	r0, r0, #1
+  4839a4:	900c      	str	r0, [sp, #48]	@ 0x30
+  4839a6:	f05f 0800 	movs.w	r8, #0
+  4839aa:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  4839ac:	7800      	ldrb	r0, [r0, #0]
+  4839ae:	2820      	cmp	r0, #32
+  4839b0:	d01c      	beq.n	4839ec <.text+0x8c>
+  4839b2:	2823      	cmp	r0, #35	@ 0x23
+  4839b4:	d021      	beq.n	4839fa <.text+0x9a>
+  4839b6:	282b      	cmp	r0, #43	@ 0x2b
+  4839b8:	d011      	beq.n	4839de <.text+0x7e>
+  4839ba:	282d      	cmp	r0, #45	@ 0x2d
+  4839bc:	d008      	beq.n	4839d0 <.text+0x70>
+  4839be:	2830      	cmp	r0, #48	@ 0x30
+  4839c0:	d122      	bne.n	483a08 <.text+0xa8>
+  4839c2:	f058 0801 	orrs.w	r8, r8, #1
+  4839c6:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  4839c8:	1c40      	adds	r0, r0, #1
+  4839ca:	900c      	str	r0, [sp, #48]	@ 0x30
+  4839cc:	2001      	movs	r0, #1
+  4839ce:	e01c      	b.n	483a0a <.text+0xaa>
+  4839d0:	f058 0802 	orrs.w	r8, r8, #2
+  4839d4:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  4839d6:	1c40      	adds	r0, r0, #1
+  4839d8:	900c      	str	r0, [sp, #48]	@ 0x30
+  4839da:	2001      	movs	r0, #1
+  4839dc:	e015      	b.n	483a0a <.text+0xaa>

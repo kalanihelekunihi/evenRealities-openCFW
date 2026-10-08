@@ -1,0 +1,10 @@
+{
+  "id": "P2-20849",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "Fresh locked-image replay passed for the two-byte leaf at 0x4D2B98..0x4D2B9A; hashes and raw bytes match. The sole instruction is BX LR, so it returns live register state without touching flags, memory, stack, or result registers. Map 21238 branches here on its zero-divisor path; that unsigned path returns the input numerator and zero divisor unchanged. The signed wrapper has distinct mapped normalization behavior, and no exception/trap contract is inferred."
+}

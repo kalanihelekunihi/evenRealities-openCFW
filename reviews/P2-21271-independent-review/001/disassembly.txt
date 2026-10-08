@@ -1,0 +1,32 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpshv8_6ke/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00482946 <.text>:
+  482946:	b580      	push	{r7, lr}
+  482948:	b2c9      	uxtb	r1, r1
+  48294a:	f7ff fee4 	bl	482716 <.text-0x230>
+  48294e:	bd02      	pop	{r1, pc}
+  482950:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+  482952:	0004      	movs	r4, r0
+  482954:	000d      	movs	r5, r1
+  482956:	0016      	movs	r6, r2
+  482958:	001f      	movs	r7, r3
+  48295a:	2114      	movs	r1, #20
+  48295c:	0020      	movs	r0, r4
+  48295e:	f7ff fecd 	bl	4826fc <.text-0x24a>
+  482962:	6025      	str	r5, [r4, #0]
+  482964:	0030      	movs	r0, r6
+  482966:	2800      	cmp	r0, #0
+  482968:	d101      	bne.n	48296e <.text+0x28>
+  48296a:	4e5a      	ldr	r6, [pc, #360]	@ (482ad4 <.text+0x18e>)
+  48296c:	e7ff      	b.n	48296e <.text+0x28>
+  48296e:	9907      	ldr	r1, [sp, #28]
+  482970:	9806      	ldr	r0, [sp, #24]
+  482972:	60a6      	str	r6, [r4, #8]
+  482974:	60e7      	str	r7, [r4, #12]
+  482976:	6120      	str	r0, [r4, #16]
+  482978:	6061      	str	r1, [r4, #4]
+  48297a:	bdf1      	pop	{r0, r4, r5, r6, r7, pc}

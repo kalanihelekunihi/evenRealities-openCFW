@@ -1,0 +1,4 @@
+# Identity and null byte6 FF two leaves
+
+Partial/unaccepted;20instructionbytes,twoframelessleaves,nocalls. Entry0x47AEC0comparesfullR0zero;nonzero branches0x47AEC6BX LRunchanged;zeroexplicitlysetsR0zero thenBX LR. ThusidentityfullR0,includingnoncanonicalpointervalues;nopointerread.
+Entry0x47AEC8comparesfullR0zero;nonzero freshlyreadsunsignedbyte[R0+6]intoR0thenbranches0x47AED2BX LR. ZeroR0returns255. No record47/48guard,lengthvalidationorinferredfieldcontract. BothpreserveLRandSP. No C,freezeorcompletenessclaim.

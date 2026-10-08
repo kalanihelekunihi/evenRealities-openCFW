@@ -1,0 +1,5 @@
+# P2-20819 independent review
+
+Status: **partial / unaccepted**.
+
+Fresh continuity replay passed: 584 bytes, 206 instructions, 24 local branches across maps21210/21212/21214/21216. Component and replay receipt hashes match; raw instruction rows tile 0x47C2BC..0x47C504 and every local branch target is an instruction start. The 64-byte frame carries four distinct fresh record guards; R5 counts eligible entries while R6/R7 advance for every visit, with signed R7<10 loop control. Post-scan diagnostics use separate status queries and full-width count/base values. Tail ADD40+POP24 preserves live R0 from the final status/diagnostic path; no explicit normalization is shown. Partial/unaccepted; no whole-image coverage or source-completeness claim.

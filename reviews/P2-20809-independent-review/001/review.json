@@ -1,0 +1,14 @@
+{
+  "id": "P2-20809",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "components": 2,
+  "instruction_bytes": 274,
+  "instructions": 97,
+  "branches": 13,
+  "summary": "Continuity replay passed: two components tile 47C164..47C276 for 274 bytes/97 instructions/13 local branches. Verified source component hashes, pinned bytes and local target boundaries. Cross-slice sequence resets global counter before table loop; loop has fresh byte47/48 guards and stride200; logger/mask SP0 writes alias saved return R0 in the 32-byte frame."
+}

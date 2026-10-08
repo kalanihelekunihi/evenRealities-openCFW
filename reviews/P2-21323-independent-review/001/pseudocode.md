@@ -1,0 +1,3 @@
+# Unsigned radix numeric-output stack handoff
+
+Partial/unaccepted;36 instructionbytes483278..48329C,continues48320A88-byteframe. StorecurrentR5flagsSP24;freshwordSP104(ninthentryargument)→R0→SP20;freshwordSP100(eighthargument)→R0→SP16;R6radix→SP12;freshbyteSP92(lowbyteof sixthentryargument)→R0,storefullzeroextendedwordSP8;R7digitcount→SP4;R0=SP28digitbuffer→SP0;R0=R4callback. Call4830DA withretainedentryR1/R2/R3 andthese7stackarguments. RetainreturnedR0;ADDSP64bypasses60localsand savedscratchR3slot;POP{R4,R5,R6,R7,R8,PC}24bytes,total88released. Preserveorderedstackstores/freshargumentreadwidth,callbackliveargs and returnR0;next48329Cseparateroutine. No C,freeze,wholecoverage or equalityclaim.

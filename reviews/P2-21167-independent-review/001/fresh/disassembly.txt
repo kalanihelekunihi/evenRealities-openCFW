@@ -1,0 +1,70 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp9whyx7hp/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+004810b0 <.text>:
+  4810b0:	e92d 41ff 	stmdb	sp!, {r0, r1, r2, r3, r4, r5, r6, r7, r8, lr}
+  4810b4:	0006      	movs	r6, r0
+  4810b6:	4688      	mov	r8, r1
+  4810b8:	2400      	movs	r4, #0
+  4810ba:	0017      	movs	r7, r2
+  4810bc:	2a00      	cmp	r2, #0
+  4810be:	d101      	bne.n	4810c4 <.text+0x14>
+  4810c0:	2006      	movs	r0, #6
+  4810c2:	e115      	b.n	4812f0 <.text+0x240>
+  4810c4:	4640      	mov	r0, r8
+  4810c6:	b2c0      	uxtb	r0, r0
+  4810c8:	2804      	cmp	r0, #4
+  4810ca:	db01      	blt.n	4810d0 <.text+0x20>
+  4810cc:	2006      	movs	r0, #6
+  4810ce:	e10f      	b.n	4812f0 <.text+0x240>
+  4810d0:	4640      	mov	r0, r8
+  4810d2:	b2c0      	uxtb	r0, r0
+  4810d4:	2802      	cmp	r0, #2
+  4810d6:	da16      	bge.n	481106 <.text+0x56>
+  4810d8:	6810      	ldr	r0, [r2, #0]
+  4810da:	28e0      	cmp	r0, #224	@ 0xe0
+  4810dc:	d301      	bcc.n	4810e2 <.text+0x32>
+  4810de:	2005      	movs	r0, #5
+  4810e0:	e106      	b.n	4812f0 <.text+0x240>
+  4810e2:	466a      	mov	r2, sp
+  4810e4:	a901      	add	r1, sp, #4
+  4810e6:	f7ff fef7 	bl	480ed8 <.text-0x1d8>
+  4810ea:	2800      	cmp	r0, #0
+  4810ec:	d001      	beq.n	4810f2 <.text+0x42>
+  4810ee:	2006      	movs	r0, #6
+  4810f0:	e0fe      	b.n	4812f0 <.text+0x240>
+  4810f2:	9801      	ldr	r0, [sp, #4]
+  4810f4:	f8df 5670 	ldr.w	r5, [pc, #1648]	@ 481768 <.text+0x6b8>
+  4810f8:	eb15 1500 	adds.w	r5, r5, r0, lsl #4
+  4810fc:	0030      	movs	r0, r6
+  4810fe:	b2c0      	uxtb	r0, r0
+  481100:	2801      	cmp	r0, #1
+  481102:	d100      	bne.n	481106 <.text+0x56>
+  481104:	3570      	adds	r5, #112	@ 0x70
+  481106:	f7f2 fc1b 	bl	473940 <.text-0xd770>
+  48110a:	9002      	str	r0, [sp, #8]
+  48110c:	fa5f f888 	uxtb.w	r8, r8
+  481110:	f1b8 0f00 	cmp.w	r8, #0
+  481114:	d008      	beq.n	481128 <.text+0x78>
+  481116:	f1b8 0f02 	cmp.w	r8, #2
+  48111a:	d01f      	beq.n	48115c <.text+0xac>
+  48111c:	d311      	bcc.n	481142 <.text+0x92>
+  48111e:	f1b8 0f03 	cmp.w	r8, #3
+  481122:	f000 8085 	beq.w	481230 <.text+0x180>
+  481126:	e0df      	b.n	4812e8 <.text+0x238>
+  481128:	6829      	ldr	r1, [r5, #0]
+  48112a:	9800      	ldr	r0, [sp, #0]
+  48112c:	4381      	bics	r1, r0
+  48112e:	6029      	str	r1, [r5, #0]
+  481130:	b2f6      	uxtb	r6, r6
+  481132:	2e02      	cmp	r6, #2
+  481134:	d104      	bne.n	481140 <.text+0x90>
+  481136:	3570      	adds	r5, #112	@ 0x70
+  481138:	6829      	ldr	r1, [r5, #0]
+  48113a:	9800      	ldr	r0, [sp, #0]
+  48113c:	4381      	bics	r1, r0
+  48113e:	6029      	str	r1, [r5, #0]
+  481140:	e0d2      	b.n	4812e8 <.text+0x238>

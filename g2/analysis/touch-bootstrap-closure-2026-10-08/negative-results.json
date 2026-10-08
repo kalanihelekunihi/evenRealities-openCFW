@@ -1,0 +1,79 @@
+[
+  {
+    "mutant": "accept_wrong_magic",
+    "rejected": true,
+    "inputs": [
+      "wrongmagic",
+      1000,
+      "success",
+      0
+    ],
+    "original_logs": [
+      [
+        43744
+      ],
+      [
+        43896
+      ]
+    ],
+    "mutant_logs": [
+      [
+        43944,
+        321,
+        1000
+      ]
+    ]
+  },
+  {
+    "mutant": "accept_failed_read",
+    "rejected": true,
+    "inputs": [
+      "badhistoric",
+      1000,
+      "success",
+      0
+    ],
+    "original_logs": [
+      [
+        43744
+      ],
+      [
+        43896
+      ]
+    ],
+    "mutant_logs": [
+      [
+        43944,
+        321,
+        1000
+      ]
+    ]
+  },
+  {
+    "mutant": "ignore_default_write_failure",
+    "rejected": true,
+    "inputs": [
+      "zero",
+      1000,
+      "erase-base-error",
+      0
+    ],
+    "original_logs": [
+      [
+        43744
+      ],
+      [
+        43848,
+        3
+      ]
+    ],
+    "mutant_logs": [
+      [
+        43744
+      ],
+      [
+        43896
+      ]
+    ]
+  }
+]

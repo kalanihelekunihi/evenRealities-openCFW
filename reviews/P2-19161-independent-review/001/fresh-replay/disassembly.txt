@@ -1,0 +1,71 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpftn7kiln/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00469f16 <.text>:
+  469f16:	280a      	cmp	r0, #10
+  469f18:	d114      	bne.n	469f44 <.text+0x2e>
+  469f1a:	2000      	movs	r0, #0
+  469f1c:	f88d 0010 	strb.w	r0, [sp, #16]
+  469f20:	a804      	add	r0, sp, #16
+  469f22:	210a      	movs	r1, #10
+  469f24:	7041      	strb	r1, [r0, #1]
+  469f26:	2100      	movs	r1, #0
+  469f28:	7081      	strb	r1, [r0, #2]
+  469f2a:	2100      	movs	r1, #0
+  469f2c:	70c1      	strb	r1, [r0, #3]
+  469f2e:	2100      	movs	r1, #0
+  469f30:	7101      	strb	r1, [r0, #4]
+  469f32:	2100      	movs	r1, #0
+  469f34:	7141      	strb	r1, [r0, #5]
+  469f36:	2300      	movs	r3, #0
+  469f38:	2206      	movs	r2, #6
+  469f3a:	a904      	add	r1, sp, #16
+  469f3c:	2022      	movs	r0, #34	@ 0x22
+  469f3e:	f7fa fe38 	bl	464bb2 <.text-0x5364>
+  469f42:	e02c      	b.n	469f9e <.text+0x88>
+  469f44:	2848      	cmp	r0, #72	@ 0x48
+  469f46:	d114      	bne.n	469f72 <.text+0x5c>
+  469f48:	2000      	movs	r0, #0
+  469f4a:	f88d 0008 	strb.w	r0, [sp, #8]
+  469f4e:	a802      	add	r0, sp, #8
+  469f50:	2148      	movs	r1, #72	@ 0x48
+  469f52:	7041      	strb	r1, [r0, #1]
+  469f54:	2100      	movs	r1, #0
+  469f56:	7081      	strb	r1, [r0, #2]
+  469f58:	2100      	movs	r1, #0
+  469f5a:	70c1      	strb	r1, [r0, #3]
+  469f5c:	2100      	movs	r1, #0
+  469f5e:	7101      	strb	r1, [r0, #4]
+  469f60:	2100      	movs	r1, #0
+  469f62:	7141      	strb	r1, [r0, #5]
+  469f64:	2300      	movs	r3, #0
+  469f66:	2206      	movs	r2, #6
+  469f68:	a902      	add	r1, sp, #8
+  469f6a:	2022      	movs	r0, #34	@ 0x22
+  469f6c:	f7fa fe21 	bl	464bb2 <.text-0x5364>
+  469f70:	e015      	b.n	469f9e <.text+0x88>
+  469f72:	2849      	cmp	r0, #73	@ 0x49
+  469f74:	d113      	bne.n	469f9e <.text+0x88>
+  469f76:	2000      	movs	r0, #0
+  469f78:	f88d 0000 	strb.w	r0, [sp]
+  469f7c:	4668      	mov	r0, sp
+  469f7e:	2149      	movs	r1, #73	@ 0x49
+  469f80:	7041      	strb	r1, [r0, #1]
+  469f82:	2100      	movs	r1, #0
+  469f84:	7081      	strb	r1, [r0, #2]
+  469f86:	2100      	movs	r1, #0
+  469f88:	70c1      	strb	r1, [r0, #3]
+  469f8a:	2100      	movs	r1, #0
+  469f8c:	7101      	strb	r1, [r0, #4]
+  469f8e:	2100      	movs	r1, #0
+  469f90:	7141      	strb	r1, [r0, #5]
+  469f92:	2300      	movs	r3, #0
+  469f94:	2206      	movs	r2, #6
+  469f96:	4669      	mov	r1, sp
+  469f98:	2022      	movs	r0, #34	@ 0x22
+  469f9a:	f7fa fe0a 	bl	464bb2 <.text-0x5364>
+  469f9e:	b00d      	add	sp, #52	@ 0x34
+  469fa0:	bd00      	pop	{pc}

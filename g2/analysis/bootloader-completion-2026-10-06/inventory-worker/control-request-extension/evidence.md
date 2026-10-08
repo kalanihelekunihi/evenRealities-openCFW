@@ -1,0 +1,13 @@
+# HAL MSPI control requests 31 and 33
+
+This isolated extension recovers two paths in the pinned `ota_s200_bootloader.bin` control dispatcher at `0x4251c0`. The locked artifact SHA-256 is `f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5`. Stock dispatch range `0x4251c0..0x4262e0` hashes to `d936cfa583f4d53150c86b30217e2e08ed0698793f13735e365f5a7d0cce0d48`; the reused stock CQ pause/DMA range `0x423fb8..0x42411f` hashes to `aa76d88b9281691ca6779c2790abada563f63e7cc777e38e9d81b1b78dfb3272`.
+
+Request 31 (`0x1f`) is the bounded setter: null config returns 6; an already nonzero `handle[0x215]` returns 7; otherwise it clears `handle[0x214]` and `[0x210]`, writes 1 to `[0x213]`, copies `config[0]` to `[0x215]`, stores `config[1]/24` at `[0x212]`, and returns zero. It does not call the command queue.
+
+Request 33 (`0x21`) conditionally executes DMB when byte `handle+0x8c8` is zero, writes `0x20` to MSPI `+0x2b4`, and clears `handle[0x20e]`. When `handle[0x211]` is zero it invokes the recovered stock-equivalent continuation `opencfw_provider_4240aa(handle, 0)`, propagates a nonzero status, then clears `[0x211]` on success. When `[0x211]` is nonzero it skips the continuation and returns zero. The continuation includes CQ pause/status polling and descriptor DMA programming; its clock and delay calls are intercepted by the fixture and synthetic MMIO/RAM stand in for hardware.
+
+`make test` compares original instructions at `0x4251c0` with the compiled source dispatcher/provider, plus the compiled request-33 continuation, across 20 cases (four module IDs, request-31 null/busy/success configurations, request-33 skip and execute paths). It passes with 706 distinct original instruction bytes exercised. The source ELF links `platform_control/critical_save.S`; it no longer copies the stock instructions at `0x41b8ec` into the source-side emulator. Critical-save assembly is therefore source, not an injected executable stock range. Machine-readable hashes, trace, and case outputs are in `result.json`; the exact invocation uses the repository's Unicorn virtualenv.
+
+`result-pre-native-critical-save.json` is preserved as historical evidence only: that earlier receipt did copy the eight stock critical-save bytes into source RAM and is superseded by the current receipt.
+
+This extension does not implement request 34 (`0x22`). A separate request-34 provider now exists in `g2/components/bootloader/nor_mspi_init/control_request34.c/.h`, with its own original/source fixture at `../control-request34/`; it is not yet routed through the shared control source. Thus this extension still covers only requests 31 and 33, and the full HAL-control family is not closed by this fixture alone.

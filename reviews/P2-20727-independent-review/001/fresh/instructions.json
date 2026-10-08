@@ -1,0 +1,62 @@
+[
+  {
+    "start": 4699030,
+    "end": 4699054,
+    "instructions": [
+      {
+        "address": 4699030,
+        "bytes": "95f83000",
+        "mnemonic": "ldrb.w",
+        "operands": "r0, [r5, #48]\t@ 0x30"
+      },
+      {
+        "address": 4699034,
+        "bytes": "0128",
+        "mnemonic": "cmp",
+        "operands": "r0, #1"
+      },
+      {
+        "address": 4699036,
+        "bytes": "05d1",
+        "mnemonic": "bne.n",
+        "operands": "47b3aa <.text+0x14>"
+      },
+      {
+        "address": 4699038,
+        "bytes": "2800",
+        "mnemonic": "movs",
+        "operands": "r0, r5"
+      },
+      {
+        "address": 4699040,
+        "bytes": "fef7e8fb",
+        "mnemonic": "bl",
+        "operands": "479b74 <.text-0x1822>"
+      },
+      {
+        "address": 4699044,
+        "bytes": "2800",
+        "mnemonic": "movs",
+        "operands": "r0, r5"
+      },
+      {
+        "address": 4699046,
+        "bytes": "00f0c3f9",
+        "mnemonic": "bl",
+        "operands": "47b730 <.text+0x39a>"
+      },
+      {
+        "address": 4699050,
+        "bytes": "13b0",
+        "mnemonic": "add",
+        "operands": "sp, #76\t@ 0x4c"
+      },
+      {
+        "address": 4699052,
+        "bytes": "30bd",
+        "mnemonic": "pop",
+        "operands": "{r4, r5, pc}"
+      }
+    ]
+  }
+]

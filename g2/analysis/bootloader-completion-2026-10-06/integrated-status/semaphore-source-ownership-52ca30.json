@@ -1,0 +1,46 @@
+{
+  "image_sha256": "52ca309db34cba5cf1c70f60d194b527277bdd5056e2331ad622a7b91d123915",
+  "functions": [
+    {
+      "function": "create",
+      "original_start": "0x416762",
+      "original_end_exclusive": "0x416816",
+      "original_body_bytes": 180,
+      "original_body_sha256": "48c3940e6f762adfbdbef5d40813bfcc043edd10947ad93982c1b8c1051a410f",
+      "source": "g2/components/bootloader/initializer_callbacks/semaphore_create.c",
+      "source_sha256": "b9b47784c328259a0d7ef21c13f530305f0e77346f3d2a082cae9a9874c969d1"
+    },
+    {
+      "function": "counting-static",
+      "original_start": "0x419e62",
+      "original_end_exclusive": "0x419e94",
+      "original_body_bytes": 50,
+      "original_body_sha256": "f509facdffd0b64cd93ea08e85b3a6e0a62ee801eac07b4d850495f31ed2b510",
+      "source": "g2/components/bootloader/initializer_callbacks/semaphore_create.c",
+      "source_sha256": "b9b47784c328259a0d7ef21c13f530305f0e77346f3d2a082cae9a9874c969d1"
+    },
+    {
+      "function": "counting-dynamic",
+      "original_start": "0x419e94",
+      "original_end_exclusive": "0x419ec0",
+      "original_body_bytes": 44,
+      "original_body_sha256": "51213277c726703c3bf8cab359afa422249ef1c39e294a499342c0d455babc15",
+      "source": "g2/components/bootloader/initializer_callbacks/semaphore_create.c",
+      "source_sha256": "b9b47784c328259a0d7ef21c13f530305f0e77346f3d2a082cae9a9874c969d1"
+    },
+    {
+      "function": "queue-destroy",
+      "original_start": "0x41a470",
+      "original_end_exclusive": "0x41a492",
+      "original_body_bytes": 34,
+      "original_body_sha256": "abd8232e9036c1b23d18897df519399b477243043359bcf2cf1c77d929fa45b3",
+      "source": "g2/components/bootloader/initializer_callbacks/semaphore_create.c",
+      "source_sha256": "b9b47784c328259a0d7ef21c13f530305f0e77346f3d2a082cae9a9874c969d1"
+    }
+  ],
+  "deduplicated_original_body_bytes": 308,
+  "limits": [
+    "Partial four-function source ownership, not source-complete payload. Counting/destroy C bodies are inlined in the selected wrapper; their separate sections were discarded by linker GC.",
+    "Wrapper-reachable behavior compared; independent constructor-invalid/null-destroy fatal paths are not directly tested."
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "P2-20765",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "190B; fresh byte46 bit0 controls whether 4751C8 compares source/table at +52 for 16 bytes. Nonzero full result takes diagnostic1946 and then two unconditional 43DACC dumps with ordered tuples, before clearing R6. Zero result takes separate diagnostic1951 and does not restore R6 to one. Status calls are distinct from the helper result."
+}

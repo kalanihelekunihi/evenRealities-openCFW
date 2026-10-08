@@ -1,0 +1,10 @@
+{
+  "id": "P2-20867",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "Fresh replay passed for 38 bytes at 0x47D066..0x47D08C; pinned image/source hashes and instruction tiling match. The dispatch performs one unsigned halfword load from [R6], then compares that same full value against six selector values and branches for exact selectors 1 through 6. Zero and values above 6 take the default target 0x47D7B6. No reload, masking, signed compare, stack write, pointer/length guard, or call occurs in this slice; case-target behavior remains pending."
+}

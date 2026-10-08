@@ -1,0 +1,57 @@
+
+g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0042a43a <.data+0x1a43a>:
+  42a43a:	e92d 41fc 	stmdb	sp!, {r2, r3, r4, r5, r6, r7, r8, lr}
+  42a43e:	0004      	movs	r4, r0
+  42a440:	000d      	movs	r5, r1
+  42a442:	0016      	movs	r6, r2
+  42a444:	001f      	movs	r7, r3
+  42a446:	2000      	movs	r0, #0
+  42a448:	2000      	movs	r0, #0
+  42a44a:	201a      	movs	r0, #26
+  42a44c:	f88d 0000 	strb.w	r0, [sp]
+  42a450:	42a5      	cmp	r5, r4
+  42a452:	d218      	bcs.n	0x42a486
+  42a454:	46a8      	mov	r8, r5
+  42a456:	45a0      	cmp	r8, r4
+  42a458:	d22e      	bcs.n	0x42a4b8
+  42a45a:	f118 0001 	adds.w	r0, r8, #1
+  42a45e:	466a      	mov	r2, sp
+  42a460:	4641      	mov	r1, r8
+  42a462:	f7ff ff27 	bl	0x42a2b4
+  42a466:	2800      	cmp	r0, #0
+  42a468:	d10a      	bne.n	0x42a480
+  42a46a:	003b      	movs	r3, r7
+  42a46c:	0032      	movs	r2, r6
+  42a46e:	0029      	movs	r1, r5
+  42a470:	0020      	movs	r0, r4
+  42a472:	f8df c848 	ldr.w	ip, [pc, #2120]	@ 0x42acbc
+  42a476:	f89d e000 	ldrb.w	lr, [sp]
+  42a47a:	f85c c02e 	ldr.w	ip, [ip, lr, lsl #2]
+  42a47e:	47e0      	blx	ip
+  42a480:	f118 0801 	adds.w	r8, r8, #1
+  42a484:	e7e7      	b.n	0x42a456
+  42a486:	46a8      	mov	r8, r5
+  42a488:	e014      	b.n	0x42a4b4
+  42a48a:	f1b8 0001 	subs.w	r0, r8, #1
+  42a48e:	466a      	mov	r2, sp
+  42a490:	4641      	mov	r1, r8
+  42a492:	f7ff ff0f 	bl	0x42a2b4
+  42a496:	2800      	cmp	r0, #0
+  42a498:	d10a      	bne.n	0x42a4b0
+  42a49a:	003b      	movs	r3, r7
+  42a49c:	0032      	movs	r2, r6
+  42a49e:	0029      	movs	r1, r5
+  42a4a0:	0020      	movs	r0, r4
+  42a4a2:	f8df c818 	ldr.w	ip, [pc, #2072]	@ 0x42acbc
+  42a4a6:	f89d e000 	ldrb.w	lr, [sp]
+  42a4aa:	f85c c02e 	ldr.w	ip, [ip, lr, lsl #2]
+  42a4ae:	47e0      	blx	ip
+  42a4b0:	f1b8 0801 	subs.w	r8, r8, #1
+  42a4b4:	4544      	cmp	r4, r8
+  42a4b6:	d3e8      	bcc.n	0x42a48a
+  42a4b8:	e8bd 81f3 	ldmia.w	sp!, {r0, r1, r4, r5, r6, r7, r8, pc}

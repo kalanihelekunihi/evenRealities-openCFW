@@ -1,0 +1,85 @@
+{
+  "status": "PASS",
+  "elf_sha256": "e5972f996f4ffc9a08ac54ba8e92e07cbc1745425db32b1eb78a9c9dea67b7ff",
+  "results": [
+    {
+      "source": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector5-integrated/pcm22_sequence5.c",
+      "source_sha256": "803f24acbde95b4294a2b4884a2f26554a5aa78fd9ff48f7e09325eedd0ff531",
+      "object_sha256": "633505a9d40d7f198208099fe5b0139418c432d9b55f6f0f12ccd665b6347f04",
+      "frozen_object": "inputs/218/pcm22_sequence5.o",
+      "flags": [
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m33",
+        "-mthumb",
+        "-mfloat-abi=softfp",
+        "-O1",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fshort-enums"
+      ],
+      "status": "PASS_IDENTICAL_OBJECT"
+    },
+    {
+      "source": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-hot-transitions-integrated/pcm22_hot_transitions.c",
+      "source_sha256": "9282d3d3ac6ca6a61d6edd0e6404db00c94886d18acd61777b7719104f574b4a",
+      "object_sha256": "7c5f6fec48bab4fe20c626b7e133093110fd4a52e7d06451ede20b52daa26e44",
+      "frozen_object": "inputs/219/pcm22_hot_transitions.o",
+      "flags": [
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m33",
+        "-mthumb",
+        "-mfloat-abi=softfp",
+        "-O1",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fshort-enums"
+      ],
+      "status": "PASS_IDENTICAL_OBJECT"
+    },
+    {
+      "source": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-hot-transitions-integrated/initialized_data.c",
+      "source_sha256": "a8fdf8e61a3c77b8f9ff291a8018348b6eb6b8263cf2f4297ead7371bdab7e4f",
+      "object_sha256": "69cec803321ff53ee6bfeb6fb3d408e70620657e04b0240a014fcce0c8fc06c9",
+      "frozen_object": "inputs/206/initialized_data.o",
+      "flags": [
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m33",
+        "-mthumb",
+        "-mfloat-abi=softfp",
+        "-O1",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fshort-enums"
+      ],
+      "status": "PASS_IDENTICAL_OBJECT"
+    },
+    {
+      "source": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-hot-transitions-integrated/startup_events_a.c",
+      "source_sha256": "9b838f4cd9d29048982dd00f773a4261bee5777b275a053bb8c6fd0dcabdfddf",
+      "object_sha256": "5d2edddfb5e39c700d682bcfa4e4345a753cc1b8f78ac576a8aa7649123d6050",
+      "frozen_object": "inputs/192/startup_events_a.o",
+      "flags": [
+        "--target=arm-none-eabi",
+        "-mcpu=cortex-m33",
+        "-mthumb",
+        "-mfloat-abi=softfp",
+        "-O1",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-ffunction-sections",
+        "-fdata-sections",
+        "-fshort-enums"
+      ],
+      "status": "PASS_IDENTICAL_OBJECT"
+    }
+  ],
+  "notes": [
+    "Final declarations match reached provider types; corrected declarations compile identically to preserved creation objects. Creation source copies remain immutable; final sources are separately hashed."
+  ]
+}

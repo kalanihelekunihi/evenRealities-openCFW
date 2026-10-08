@@ -1,0 +1,63 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpbk1meedc/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00484ba4 <.text>:
+  484ba4:	f894 0024 	ldrb.w	r0, [r4, #36]	@ 0x24
+  484ba8:	07c0      	lsls	r0, r0, #31
+  484baa:	d505      	bpl.n	484bb8 <.text+0x14>
+  484bac:	2102      	movs	r1, #2
+  484bae:	2012      	movs	r0, #18
+  484bb0:	f003 fbcc 	bl	48834c <.text+0x37a8>
+  484bb4:	0001      	movs	r1, r0
+  484bb6:	e003      	b.n	484bc0 <.text+0x1c>
+  484bb8:	2012      	movs	r0, #18
+  484bba:	f003 fb69 	bl	488290 <.text+0x36ec>
+  484bbe:	0001      	movs	r1, r0
+  484bc0:	f114 004c 	adds.w	r0, r4, #76	@ 0x4c
+  484bc4:	f04f fe71 	bl	4d48aa <.text+0x4fd06>
+  484bc8:	f647 75ff 	movw	r5, #32767	@ 0x7fff
+  484bcc:	0029      	movs	r1, r5
+  484bce:	f114 004c 	adds.w	r0, r4, #76	@ 0x4c
+  484bd2:	f04f ff4c 	bl	4d4a6e <.text+0x4feca>
+  484bd6:	6ae1      	ldr	r1, [r4, #44]	@ 0x2c
+  484bd8:	2007      	movs	r0, #7
+  484bda:	4341      	muls	r1, r0
+  484bdc:	3150      	adds	r1, #80	@ 0x50
+  484bde:	20a0      	movs	r0, #160	@ 0xa0
+  484be0:	fb91 f0f0 	sdiv	r0, r1, r0
+  484be4:	2802      	cmp	r0, #2
+  484be6:	db07      	blt.n	484bf8 <.text+0x54>
+  484be8:	6ae1      	ldr	r1, [r4, #44]	@ 0x2c
+  484bea:	2007      	movs	r0, #7
+  484bec:	4341      	muls	r1, r0
+  484bee:	3150      	adds	r1, #80	@ 0x50
+  484bf0:	20a0      	movs	r0, #160	@ 0xa0
+  484bf2:	fb91 f1f0 	sdiv	r1, r1, r0
+  484bf6:	e000      	b.n	484bfa <.text+0x56>
+  484bf8:	2101      	movs	r1, #1
+  484bfa:	f114 004c 	adds.w	r0, r4, #76	@ 0x4c
+  484bfe:	f7ff ff12 	bl	484a26 <.text-0x17e>
+  484c02:	6ae1      	ldr	r1, [r4, #44]	@ 0x2c
+  484c04:	2005      	movs	r0, #5
+  484c06:	4341      	muls	r1, r0
+  484c08:	3150      	adds	r1, #80	@ 0x50
+  484c0a:	20a0      	movs	r0, #160	@ 0xa0
+  484c0c:	fb91 f0f0 	sdiv	r0, r1, r0
+  484c10:	2802      	cmp	r0, #2
+  484c12:	db07      	blt.n	484c24 <.text+0x80>
+  484c14:	6ae1      	ldr	r1, [r4, #44]	@ 0x2c
+  484c16:	2005      	movs	r0, #5
+  484c18:	4341      	muls	r1, r0
+  484c1a:	3150      	adds	r1, #80	@ 0x50
+  484c1c:	20a0      	movs	r0, #160	@ 0xa0
+  484c1e:	fb91 f1f0 	sdiv	r1, r1, r0
+  484c22:	e000      	b.n	484c26 <.text+0x82>
+  484c24:	2101      	movs	r1, #1
+  484c26:	f114 004c 	adds.w	r0, r4, #76	@ 0x4c
+  484c2a:	f04f fdf6 	bl	4d481a <.text+0x4fc76>
+  484c2e:	2166      	movs	r1, #102	@ 0x66
+  484c30:	f114 004c 	adds.w	r0, r4, #76	@ 0x4c
+  484c34:	f04f fe46 	bl	4d48c4 <.text+0x4fd20>

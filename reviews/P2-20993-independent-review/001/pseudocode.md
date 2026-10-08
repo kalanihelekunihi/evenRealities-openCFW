@@ -1,0 +1,4 @@
+# Nested global object pointer with conditional loop and callback
+
+Partial/unaccepted;62instructionbytes47E83A..47E878. PUSH R4,R5,R6,LR16;R4=entryR0,R5=entryR1. R0=literal47EB78pointer;freshword[R0] thenfreshword[result+12] thenfreshword[result+12]→R6object. No nullguardsor cachedchainobservations.4560E8(object+4,liveR1,R2,R3),returnignored. Freshunsignedbyteobject40bit2set→47E812(object,entryR0,entryR1,liveR3)loophelper,thencommoncallback. Bit2clear→independentlyfreshbyteobject40 AND254 storeobject40 (clearbit0,preserveotherfreshbits),thencommoncallback. Thusbit2testandbit0clearread distinct;bit2setpathdoesnotexplicitlyclearbit0.
+CommonR0=object,R1=freshwordobject32;BLX R1 callbackwithliveR2/R3. ReturnfullcallbackR0;POP R4,R5,R6,PC restorespreservedregs. Callbackmayhavebeeninvokedrepeatedlyinsideloopplusoncehere;nocallbacknullcheck. No C/freeze/completenessclaim;globalownership/externalhelpersemanticsunresolved.

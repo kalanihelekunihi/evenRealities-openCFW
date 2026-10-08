@@ -1,0 +1,5 @@
+# Fallback record fetch and ordered register updates, middle fragment
+
+Partial/unaccepted;156 instruction bytes47FB78..47FC14;continuation21468 with24frame active. R4literal480118pointer;freshword[R4] compared literal48011Cvalue. Unequal→4D3F3C(1,528,1,R4+52),fullnonzero branchesFE10outsidefragmentunchanged;zero→4D3F3C(1,581,1,R4+68),fullnonzero sameexit. Equal skipsboth. Allsurvivingpaths480434(live);F7AE(23,live);F7AE(29,live),returnsignored. R4literal480100pointer;freshword&255 unsigned>=34→byte1storedthrough480130;lower leavesbyteunchanged. F204(literal480130value,live);F46A(literal480134value,live),ignoredreturns.
+
+Freshwordthrough480138 OR0xF80000 ORliteral48013Cvalue,thenAND~0x4000,storethrough480138pointer. Literal48013Cvalue is not dereferenced. Wordthrough480140=0. Freshwordthrough480144 replacesbits8..15with4,store. ContinueFC14with24frameactive; earlierpartialwritespersistonexternalfailure;noimplicitcleanup/rollback. Pointedownership/helpersemantics unresolved,noMMIO/C/freeze/fullcoverageclaim.

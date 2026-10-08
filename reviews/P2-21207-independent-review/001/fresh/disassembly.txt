@@ -1,0 +1,79 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp_jmfus1s/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00481b08 <.text>:
+  481b08:	9805      	ldr	r0, [sp, #20]
+  481b0a:	9908      	ldr	r1, [sp, #32]
+  481b0c:	9c09      	ldr	r4, [sp, #36]	@ 0x24
+  481b0e:	1847      	adds	r7, r0, r1
+  481b10:	b174      	cbz	r4, 481b30 <.text+0x28>
+  481b12:	9e30      	ldr	r6, [sp, #192]	@ 0xc0
+  481b14:	f817 1b01 	ldrb.w	r1, [r7], #1
+  481b18:	9804      	ldr	r0, [sp, #16]
+  481b1a:	47b0      	blx	r6
+  481b1c:	2800      	cmp	r0, #0
+  481b1e:	9004      	str	r0, [sp, #16]
+  481b20:	f000 84e0 	beq.w	4824e4 <.text+0x9dc>
+  481b24:	980d      	ldr	r0, [sp, #52]	@ 0x34
+  481b26:	1c40      	adds	r0, r0, #1
+  481b28:	1e64      	subs	r4, r4, #1
+  481b2a:	900d      	str	r0, [sp, #52]	@ 0x34
+  481b2c:	d1f2      	bne.n	481b14 <.text+0xc>
+  481b2e:	9630      	str	r6, [sp, #192]	@ 0xc0
+  481b30:	9c0c      	ldr	r4, [sp, #48]	@ 0x30
+  481b32:	2130      	movs	r1, #48	@ 0x30
+  481b34:	2c00      	cmp	r4, #0
+  481b36:	f88d 1000 	strb.w	r1, [sp]
+  481b3a:	dd0c      	ble.n	481b56 <.text+0x4e>
+  481b3c:	9e30      	ldr	r6, [sp, #192]	@ 0xc0
+  481b3e:	2301      	movs	r3, #1
+  481b40:	466a      	mov	r2, sp
+  481b42:	a902      	add	r1, sp, #8
+  481b44:	4630      	mov	r0, r6
+  481b46:	f000 fd9d 	bl	482684 <.text+0xb7c>
+  481b4a:	2800      	cmp	r0, #0
+  481b4c:	f040 84ca 	bne.w	4824e4 <.text+0x9dc>
+  481b50:	1e64      	subs	r4, r4, #1
+  481b52:	d1f4      	bne.n	481b3e <.text+0x36>
+  481b54:	9630      	str	r6, [sp, #192]	@ 0xc0
+  481b56:	f89d 0040 	ldrb.w	r0, [sp, #64]	@ 0x40
+  481b5a:	0741      	lsls	r1, r0, #29
+  481b5c:	f57f ae84 	bpl.w	481868 <.text-0x2a0>
+  481b60:	2020      	movs	r0, #32
+  481b62:	2d00      	cmp	r5, #0
+  481b64:	f88d 0000 	strb.w	r0, [sp]
+  481b68:	f77f ae7e 	ble.w	481868 <.text-0x2a0>
+  481b6c:	9c30      	ldr	r4, [sp, #192]	@ 0xc0
+  481b6e:	2301      	movs	r3, #1
+  481b70:	466a      	mov	r2, sp
+  481b72:	a902      	add	r1, sp, #8
+  481b74:	4620      	mov	r0, r4
+  481b76:	f000 fd85 	bl	482684 <.text+0xb7c>
+  481b7a:	2800      	cmp	r0, #0
+  481b7c:	f040 84b2 	bne.w	4824e4 <.text+0x9dc>
+  481b80:	1e6d      	subs	r5, r5, #1
+  481b82:	d1f4      	bne.n	481b6e <.text+0x66>
+  481b84:	9430      	str	r4, [sp, #192]	@ 0xc0
+  481b86:	e66f      	b.n	481868 <.text-0x2a0>
+  481b88:	f60f 3058 	addw	r0, pc, #2904	@ 0xb58
+  481b8c:	9005      	str	r0, [sp, #20]
+  481b8e:	f000 bc8d 	b.w	4824ac <.text+0x9a4>
+  481b92:	9d0e      	ldr	r5, [sp, #56]	@ 0x38
+  481b94:	2d00      	cmp	r5, #0
+  481b96:	d504      	bpl.n	481ba2 <.text+0x9a>
+  481b98:	4620      	mov	r0, r4
+  481b9a:	f7c8 fc4f 	bl	44a43c <.text-0x376cc>
+  481b9e:	4604      	mov	r4, r0
+  481ba0:	e007      	b.n	481bb2 <.text+0xaa>
+  481ba2:	462a      	mov	r2, r5
+  481ba4:	4620      	mov	r0, r4
+  481ba6:	f052 fa9b 	bl	4d40e0 <.text+0x525d8>
+  481baa:	2800      	cmp	r0, #0
+  481bac:	bf14      	ite	ne
+  481bae:	1b04      	subne	r4, r0, r4
+  481bb0:	462c      	moveq	r4, r5
+  481bb2:	9408      	str	r4, [sp, #32]
+  481bb4:	f000 bc7a 	b.w	4824ac <.text+0x9a4>

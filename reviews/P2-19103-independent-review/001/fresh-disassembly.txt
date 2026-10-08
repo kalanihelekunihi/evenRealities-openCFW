@@ -1,0 +1,45 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpxd9np9a4/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0046951a <.text>:
+  46951a:	0020      	movs	r0, r4
+  46951c:	b2c0      	uxtb	r0, r0
+  46951e:	2801      	cmp	r0, #1
+  469520:	d119      	bne.n	469556 <.text+0x3c>
+  469522:	0028      	movs	r0, r5
+  469524:	b2c0      	uxtb	r0, r0
+  469526:	2800      	cmp	r0, #0
+  469528:	d115      	bne.n	469556 <.text+0x3c>
+  46952a:	2001      	movs	r0, #1
+  46952c:	f8df 1658 	ldr.w	r1, [pc, #1624]	@ 469b88 <.text+0x66e>
+  469530:	7008      	strb	r0, [r1, #0]
+  469532:	2001      	movs	r0, #1
+  469534:	f032 fcf6 	bl	49bf24 <.text+0x32a0a>
+  469538:	f7f1 f816 	bl	45a568 <.text-0xefb2>
+  46953c:	2801      	cmp	r0, #1
+  46953e:	d107      	bne.n	469550 <.text+0x36>
+  469540:	f44f 73fa 	mov.w	r3, #500	@ 0x1f4
+  469544:	2200      	movs	r2, #0
+  469546:	2100      	movs	r1, #0
+  469548:	f44f 7085 	mov.w	r0, #266	@ 0x10a
+  46954c:	f7f1 f9cf 	bl	45a8ee <.text-0xec2c>
+  469550:	2000      	movs	r0, #0
+  469552:	b005      	add	sp, #20
+  469554:	bd30      	pop	{r4, r5, pc}
+  469556:	b2e4      	uxtb	r4, r4
+  469558:	2c00      	cmp	r4, #0
+  46955a:	d10a      	bne.n	469572 <.text+0x58>
+  46955c:	b2ed      	uxtb	r5, r5
+  46955e:	2d01      	cmp	r5, #1
+  469560:	d107      	bne.n	469572 <.text+0x58>
+  469562:	2000      	movs	r0, #0
+  469564:	f8df 1620 	ldr.w	r1, [pc, #1568]	@ 469b88 <.text+0x66e>
+  469568:	7008      	strb	r0, [r1, #0]
+  46956a:	2000      	movs	r0, #0
+  46956c:	f7ff fe26 	bl	4691bc <.text-0x35e>
+  469570:	e7e2      	b.n	469538 <.text+0x1e>
+  469572:	2000      	movs	r0, #0
+  469574:	e7ed      	b.n	469552 <.text+0x38>

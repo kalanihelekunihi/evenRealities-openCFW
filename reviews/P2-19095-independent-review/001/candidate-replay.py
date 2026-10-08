@@ -1,0 +1,17 @@
+from pathlib import Path
+import json,hashlib,re,subprocess,tempfile
+b=Path('g2/build/pseudocode-first/20260930T190500Z');src=b/'attempts/P1-canonical-fixed-images-005/002/apollo_main-flash.bin';d=src.read_bytes();h=lambda x:hashlib.sha256(x).hexdigest();assert h(d)=='19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701';start=0x469388;end=0x469400
+with tempfile.TemporaryDirectory() as td:
+ t=Path(td);(t/'input.bin').write_bytes(d[start-0x438000:end-0x438000]);(t/'input.s').write_text('.syntax unified\n.cpu cortex-m55\n.thumb\n.text\n.incbin "'+str(t/'input.bin')+'"\n');subprocess.run(['/opt/homebrew/bin/arm-none-eabi-as',str(t/'input.s'),'-o',str(t/'input.o')],check=True);rawtext=subprocess.check_output(['/opt/homebrew/bin/arm-none-eabi-objdump','-D','-j','.text','-M','force-thumb','--adjust-vma='+hex(start),str(t/'input.o')],text=True)
+rows=[];cursor=start
+for line in rawtext.splitlines():
+ m=re.match(r'\s*([0-9a-f]+):\s+([0-9a-f]{4}(?: [0-9a-f]{4})?)\s+([^\s]+)\s*(.*)',line)
+ if not m:continue
+ a=int(m[1],16)
+ if not start<=a<end:continue
+ raw=b''.join(int(v,16).to_bytes(2,'little') for v in m[2].split());assert a==cursor and raw==d[a-0x438000:a-0x438000+len(raw)];cursor+=len(raw);rows.append(dict(address=a,bytes=raw.hex(),mnemonic=m[3],operands=m[4]))
+assert cursor==end,(hex(cursor),hex(end),rawtext)
+o=b/'analysis/apollo-main-diagnostic-fixed-library-global-guard-context-bool-diagnostic-address-selection-entry-19496-map/001';o.mkdir(parents=True,exist_ok=False);(o/'instructions.json').write_text(json.dumps([dict(start=start,end=end,instructions=rows)],indent=2)+'\n');(o/'disassembly.txt').write_text(rawtext);refs=sorted(set(int(m[1],16) for row in rows if (m:=re.search(r'@\s*\(?([0-9a-f]{6,8})',row['operands'])) and 'pc' in row['operands']))
+(o/'references.json').write_text(json.dumps([dict(address=a,bytes=d[a-0x438000:a-0x438000+4].hex(),value=int.from_bytes(d[a-0x438000:a-0x438000+4],'little')) for a in refs],indent=2)+'\n')
+(o/'pseudocode.md').write_text('# Guarded diagnostic entry 0x469388..0x469400\n\nPartial/unaccepted;120 instruction bytes. PUSH R0/R1/R2/R3/R4/LR creates24-byte frame; SP0/4/8/12 original R0/1/2/3, SP16 savedR4,SP20 LR. Load R0=literal469B44 then unsignedbyte[R0]; nonzero branches46946C outsidechunk. Zero calls46919E withliveargs; R4=fullreturnedbool.\n\nFresh43D0CE bit1 enables diagnostic. SetR0=R4 then low8R0, leavingR4 intact; byte nonzero R0=ADDRESS469578 viaADR, zero R0=ADDRESS46957C. Store selectedaddressSP8, literal469B68 atSP4,141 atSP0. R3=literal469B6C,R2=literal469B38,R1=literal469B3C,R0=4 ->43D574.\n\nSeparatefresh43D0CE bit0 or conditional thirdfreshbit2 enables secondarydiagnostic. Testlow8R4 viaR0 temporaryagain. Nonzero R3=ADDRESS469578, zeroR3=ADDRESS46957C; these are immediatePC-relative addresses, not worddereferences. R1=literal469B70,R2=R1,R0=0x10400000 ->43CE9E. At4693FA truncateR4 inplacelow8; zero fallsoutsidechunk469400, nonzero branches469408. SavedargumentsSP0/4/8 may have been overwritten by diagnosticline/context/address; SP12 preserved inthischunk. Childcontracts anddata semantics unresolved, no C/freeze/runtimeclaim.\n')
+(o/'replay.py').write_bytes(Path(__file__).read_bytes());(o/'receipt.json').write_text(json.dumps(dict(accepted=False,status='partial',input_sha256=h(d),instruction_bytes=end-start,files={p.name:h(p.read_bytes()) for p in o.iterdir()}),indent=2)+'\n');print('PASS',end-start)

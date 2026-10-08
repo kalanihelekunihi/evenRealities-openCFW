@@ -1,0 +1,111 @@
+{
+  "status": "PASS_SCREENING_CONTROLS",
+  "source_commit": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+  "object_sha256": "97706af775b19c9f71715545ba0ee5df924fb8b90bd0b59e21c786cdf945902c",
+  "firmware_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "relocations": [
+    {
+      "r_offset": 104,
+      "r_info": 2579,
+      "r_info_sym": 10,
+      "r_info_type": 19,
+      "r_addend": 0
+    },
+    {
+      "r_offset": 190,
+      "r_info": 2067,
+      "r_info_sym": 8,
+      "r_info_type": 19,
+      "r_addend": 0
+    },
+    {
+      "r_offset": 222,
+      "r_info": 1299,
+      "r_info_sym": 5,
+      "r_info_type": 19,
+      "r_addend": 0
+    },
+    {
+      "r_offset": 258,
+      "r_info": 3603,
+      "r_info_sym": 14,
+      "r_info_type": 19,
+      "r_addend": 0
+    },
+    {
+      "r_offset": 314,
+      "r_info": 3603,
+      "r_info_sym": 14,
+      "r_info_type": 19,
+      "r_addend": 0
+    },
+    {
+      "r_offset": 382,
+      "r_info": 2579,
+      "r_info_sym": 10,
+      "r_info_type": 19,
+      "r_addend": 0
+    },
+    {
+      "r_offset": 470,
+      "r_info": 2579,
+      "r_info_sym": 10,
+      "r_info_type": 19,
+      "r_addend": 0
+    },
+    {
+      "r_offset": 516,
+      "r_info": 3603,
+      "r_info_sym": 14,
+      "r_info_type": 19,
+      "r_addend": 0
+    },
+    {
+      "r_offset": 568,
+      "r_info": 3603,
+      "r_info_sym": 14,
+      "r_info_type": 19,
+      "r_addend": 0
+    },
+    {
+      "r_offset": 602,
+      "r_info": 3603,
+      "r_info_sym": 14,
+      "r_info_type": 19,
+      "r_addend": 0
+    },
+    {
+      "r_offset": 716,
+      "r_info": 3603,
+      "r_info_sym": 14,
+      "r_info_type": 19,
+      "r_addend": 0
+    }
+  ],
+  "results": [
+    {
+      "extra_radius": 0,
+      "unmasked_bytes": 786,
+      "anchor_bytes": 110,
+      "payload_offsets": []
+    },
+    {
+      "extra_radius": 4,
+      "unmasked_bytes": 698,
+      "anchor_bytes": 106,
+      "payload_offsets": []
+    },
+    {
+      "extra_radius": 8,
+      "unmasked_bytes": 610,
+      "anchor_bytes": 102,
+      "payload_offsets": []
+    }
+  ],
+  "limits": [
+    "Whole relocation words and optionally surrounding bytes are discarded; this is a deliberately overmasked screen, not exact relocation resolution.",
+    "No linker relaxation, changed instruction selection, reordering or compiler variation is modeled.",
+    "No-hit excludes only the unchanged unmasked section pattern, not the API or equivalent implementation.",
+    "Object bytes are read locally; none exported. No new firmware attribution or source reconstruction is claimed."
+  ]
+}

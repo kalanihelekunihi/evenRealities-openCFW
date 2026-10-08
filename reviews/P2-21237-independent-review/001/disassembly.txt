@@ -1,0 +1,64 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpr2ai78ts/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00482200 <.text>:
+  482200:	eba8 0006 	sub.w	r0, r8, r6
+  482204:	900b      	str	r0, [sp, #44]	@ 0x2c
+  482206:	9805      	ldr	r0, [sp, #20]
+  482208:	9908      	ldr	r1, [sp, #32]
+  48220a:	4408      	add	r0, r1
+  48220c:	b229      	sxth	r1, r5
+  48220e:	2900      	cmp	r1, #0
+  482210:	f880 b000 	strb.w	fp, [r0]
+  482214:	d403      	bmi.n	48221e <.text+0x1e>
+  482216:	222b      	movs	r2, #43	@ 0x2b
+  482218:	7042      	strb	r2, [r0, #1]
+  48221a:	1c82      	adds	r2, r0, #2
+  48221c:	e004      	b.n	482228 <.text+0x28>
+  48221e:	222d      	movs	r2, #45	@ 0x2d
+  482220:	7042      	strb	r2, [r0, #1]
+  482222:	460d      	mov	r5, r1
+  482224:	1c82      	adds	r2, r0, #2
+  482226:	426d      	negs	r5, r5
+  482228:	2100      	movs	r1, #0
+  48222a:	ab2c      	add	r3, sp, #176	@ 0xb0
+  48222c:	4628      	mov	r0, r5
+  48222e:	e00a      	b.n	482246 <.text+0x46>
+  482230:	4604      	mov	r4, r0
+  482232:	200a      	movs	r0, #10
+  482234:	fb94 f0f0 	sdiv	r0, r4, r0
+  482238:	eb00 0580 	add.w	r5, r0, r0, lsl #2
+  48223c:	eba4 0445 	sub.w	r4, r4, r5, lsl #1
+  482240:	f803 4b01 	strb.w	r4, [r3], #1
+  482244:	1c49      	adds	r1, r1, #1
+  482246:	b200      	sxth	r0, r0
+  482248:	2800      	cmp	r0, #0
+  48224a:	dcf1      	bgt.n	482230 <.text+0x30>
+  48224c:	2901      	cmp	r1, #1
+  48224e:	dc06      	bgt.n	48225e <.text+0x5e>
+  482250:	f04b 0020 	orr.w	r0, fp, #32
+  482254:	2865      	cmp	r0, #101	@ 0x65
+  482256:	bf04      	itt	eq
+  482258:	2030      	moveq	r0, #48	@ 0x30
+  48225a:	f802 0b01 	strbeq.w	r0, [r2], #1
+  48225e:	2900      	cmp	r1, #0
+  482260:	ab2c      	add	r3, sp, #176	@ 0xb0
+  482262:	d108      	bne.n	482276 <.text+0x76>
+  482264:	2030      	movs	r0, #48	@ 0x30
+  482266:	f802 0b01 	strb.w	r0, [r2], #1
+  48226a:	e006      	b.n	48227a <.text+0x7a>
+  48226c:	1e49      	subs	r1, r1, #1
+  48226e:	5c58      	ldrb	r0, [r3, r1]
+  482270:	3030      	adds	r0, #48	@ 0x30
+  482272:	f802 0b01 	strb.w	r0, [r2], #1
+  482276:	2900      	cmp	r1, #0
+  482278:	dcf8      	bgt.n	48226c <.text+0x6c>
+  48227a:	9905      	ldr	r1, [sp, #20]
+  48227c:	9808      	ldr	r0, [sp, #32]
+  48227e:	4408      	add	r0, r1
+  482280:	1a12      	subs	r2, r2, r0
+  482282:	9209      	str	r2, [sp, #36]	@ 0x24
+  482284:	e049      	b.n	48231a <.text+0x11a>

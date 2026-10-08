@@ -1,0 +1,7 @@
+# Floating range fallback, sign and exponent normalization prefix
+
+Partial/unaccepted;194 instruction bytes 48364C..48370E. Entry saves R4..R11/LR (36B), allocates28B, total64B. R4=entry0,R10=entry1,R12=entry2,R5=entry3;R0=wordSP64,R11=SP68,R6=SP72. Compare d0 with itself, transfer FPSCR flags: NE→483688. Otherwise load full8B literal483908 to d2 and compare d0,d2: EQ→483688. Otherwise full8B literal483910, compare and PL→48369E; MI falls into483688. Do not infer these constants from four-byte reference prefixes.
+
+483688: ordered stores flagsR6→SP8,R11→SP4,R0→SP0; restore entry args R3=R5,R2=R12,R1=R10,R0=R4; call483350, then branch483902 return tail unresolved.
+
+48369E: compare d0 against full8B literal483918; MI gives R1=1,PL R1=0. R2=UXTB(R1); nonzero negates d0. Test R6 bit10 via left shift21/sign; clear sets R0=6, set retains SP64 precision. Store full d0 at SP0; load little-endian pair R2/R3. Extract exponent ((R3>>20)&2047)-1023 wrapping; VMOV rawbits to s2. R8/R9=original d0 pair. R2=FFFFFFFF,R3=wordliteral484004;AND R8 withR2,R9 withR3. Then R2=0,R3=wordliteral484008; OR original masked R8/R9 into R2/R3, store pairSP0. Convert signed s2 to binary64 d1; load full8B literals483920→d3 and483928→d4. Fallthrough48370E unresolved. Exact low/high words, flag branches and stack aliasing are retained; no normalized-number assumption for subnormals. No C,freeze,wholecoverage or equality claim.

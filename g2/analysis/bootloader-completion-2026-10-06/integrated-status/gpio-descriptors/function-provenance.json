@@ -1,0 +1,87 @@
+{
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "functions": [
+    {
+      "name": "registrar",
+      "start": "0x430280",
+      "end_exclusive": "0x4303bc",
+      "bytes": 316,
+      "body_sha256": "41b2abc6111a25a5b0ee15e4c3e877aaa486b631855ca3dd75fb388d55dd1391",
+      "classification": "new-native-body"
+    },
+    {
+      "name": "mask-status",
+      "start": "0x41dcca",
+      "end_exclusive": "0x41de3c",
+      "bytes": 370,
+      "body_sha256": "dadae7e28f6139e7569f6d53c40b7e162244c4e03641e85cae8edff269ac23ab",
+      "classification": "new-native-body"
+    },
+    {
+      "name": "mask-clear",
+      "start": "0x41de3c",
+      "end_exclusive": "0x41df48",
+      "bytes": 268,
+      "body_sha256": "bf3576c1265eaa074742588cad51ffe45e971429d3e9ba6fb52b2a1f62689f04",
+      "classification": "new-native-body"
+    },
+    {
+      "name": "callback-register",
+      "start": "0x41e000",
+      "end_exclusive": "0x41e09a",
+      "bytes": 154,
+      "body_sha256": "9216a0ee7383c93a2252527cc815b8a63b283f39b0f483399b864c266e2f7bce",
+      "classification": "new-native-body"
+    },
+    {
+      "name": "interrupt-control",
+      "start": "0x41da84",
+      "end_exclusive": "0x41dcca",
+      "bytes": 582,
+      "body_sha256": "f5887f0b1e495bdaec65ef07723005e6d8cf8b7a342e1d2fc81353df4f03df4d",
+      "classification": "new-native-body"
+    },
+    {
+      "name": "priority",
+      "start": "0x43025c",
+      "end_exclusive": "0x430280",
+      "bytes": 36,
+      "body_sha256": "ecf2bd6399d01eec88b38fd549bb5c511b6e5c06de2741cd54904269245e4f55",
+      "classification": "new-native-body"
+    },
+    {
+      "name": "nvic-enable-reused",
+      "start": "0x430240",
+      "end_exclusive": "0x43025c",
+      "bytes": 28,
+      "body_sha256": "5f76b9bde6a1e386ed0ecb96e419aab2895f1cd30353dfac8bd7ef39b6fbd6c0",
+      "classification": "reused-native-helper"
+    },
+    {
+      "name": "pin-index-inline",
+      "start": "0x41d8f8",
+      "end_exclusive": "0x41d90e",
+      "bytes": 22,
+      "body_sha256": "033b92d3d80163bb9f11f57cce771340b43bdfda7e49f6518daab87d6be56150",
+      "classification": "inline-reconstruction"
+    },
+    {
+      "name": "modeled-zero-fill-wrapper",
+      "start": "0x415ff4",
+      "end_exclusive": "0x415ffa",
+      "bytes": 6,
+      "body_sha256": "6131dafc089adfc17bb22e1377b2f85da9393e066315c5e87b08729e7dc92c6b",
+      "classification": "modeled-helper"
+    },
+    {
+      "name": "modeled-zero-fill-loop",
+      "start": "0x417c30",
+      "end_exclusive": "0x417c62",
+      "bytes": 50,
+      "body_sha256": "e006fd463df037973dddca646791c3e5dc05134051e690a7c5c54d585f41472b",
+      "classification": "modeled-helper"
+    }
+  ],
+  "source": "g2/components/bootloader/initializer_callbacks/gpio_descriptors.c",
+  "source_sha256": "0f209397b850c64a105a1dd46d5fe46beb59d95579bf7d178f33de85d5f8b280"
+}

@@ -1,0 +1,69 @@
+{
+  "status": "bounded independently reconstructed offline module; not production replacement",
+  "firmware_wrapper_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "runtime_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "architecture": "Cortex-M0+ Thumb, runtime base0x3300 after32-byte FWPK wrapper",
+  "origin": "g2/analysis/touch-history-closure-2026-10-08",
+  "ownership": "New isolated canonical module; original sealed analysis remains unchanged; existing accepted firmware checkpoint not relinked",
+  "promoted_sources": {
+    "history.c": "96057c8f282786eca3f4aecc7d15485ec03f75b7884b0ee65d99344cce56d37b",
+    "history.h": "9c12b04fb40b29c3e0fdb38995fc735059f6d4823365e7a88b33bcad5b6f76fe",
+    "provider.h": "ce12db1a7d20a61ffb13da0dae0a90923e549b9b00d1667309dd7dd00aab46c0",
+    "providers.c": "f60681843d36d30571a169f02c6002dd2c69a54e19e924ab3eb92581a21396e4",
+    "flash.c": "5111042e7a2bff7a1d392510861db8dc2d378375f7ddbf8f404d9006f4899078",
+    "extended.c": "b023a1b321ad6ae5fd4b678f36d2faffaa2aa945f4447b110b4f5adda4cdda9a",
+    "storage.c": "16e6daba7e572e91097279d2ab208d47131345bd23df680858118542c36015b8",
+    "app_event.c": "ebbd215229e2b6ded8e47831edc46d1cb2d5ca40fb443fa31373934d48850ff2",
+    "deferred.c": "9a5e5e1118ec8c93a49ee5e1fa8bc875426d157ca467165ce86f667bbad9be37"
+  },
+  "new_source": "read.c",
+  "stock_functions": {
+    "touch_define_last": "0x7fa4..0x8054",
+    "touch_integrity": "0x8058..0x8104",
+    "touch_history": "0x814c..0x81f2",
+    "touch_merge": "0x8680..0x8804",
+    "touch_extended_read": "0x82e0..0x854c (620 instruction bytes; literals through0x8554)",
+    "touch_simple_read": "0x7e44..0x7e62 (literal at0x7e64)",
+    "touch_eeprom_read": "0x8a78..0x8aa8 (48 instruction bytes; literal at0x8aa8)"
+  },
+  "upstream_behavioral_comparator": {
+    "project": "Infineon em-eeprom",
+    "release": "v2.20.0",
+    "commit": "0eeaba0dd7364dfa6badb48fe5d6692309a949e5",
+    "limits": "Behavioral family attribution, not exact producer-version/compiled-byte proof. Public source not copied into independent reconstruction."
+  },
+  "limits": [
+    "Not safe deployable firmware; no production build target",
+    "128-byte physical/step write geometry; alternative subrowRMW branch unimplemented",
+    "App callback has bounded sensor/reset contracts outside command7 coverage",
+    "Physical flash and SROM responses remain external/synthetic",
+    "Whole artifact source gate and byte equality not established"
+  ],
+  "upstream_stronger_candidate": {
+    "project": "Infineon/emeeprom",
+    "release_pins": {
+      "2.60.0": "6cacf37b5cfec2dc9acf1a2c222c1e3038d03bd9",
+      "2.70.0": "344183047f6e08535e3ce67ffc15f9df841dfd25",
+      "2.70.1": "6bbde322b7193528674dbf7fcdc2e971d0cff4fa"
+    },
+    "block_storage_pin": "8704a8bd913c6c93200f04ac052601c7728ff891",
+    "evidence_directory": "g2/analysis/touch-read-closure-2026-10-08",
+    "exact_selected_functions": 13,
+    "exact_selected_bytes_including_literals": 1476,
+    "producer_revision_unique": false,
+    "context4_name": "secSize (sector/erase size), previously generically namedstep"
+  },
+  "promoted_sources_current": {
+    "history.c": "96057c8f282786eca3f4aecc7d15485ec03f75b7884b0ee65d99344cce56d37b",
+    "eeprom.h": "9576a14eec174d406f249ea78927693ccb3d39af29738e861a9d2cae3e9b0776",
+    "flash.c": "5111042e7a2bff7a1d392510861db8dc2d378375f7ddbf8f404d9006f4899078",
+    "storage.c": "16e6daba7e572e91097279d2ab208d47131345bd23df680858118542c36015b8",
+    "extended.c": "813ac06bf59edcfd20c2a3f3b156f1839ea92ceeaf656f16aa12e517b3d52550",
+    "read.c": "43de31119b98d0df35eb511e34edf1698c63c2c2ab07ea5100fd9e3a3c3daa0a",
+    "deferred.c": "9a5e5e1118ec8c93a49ee5e1fa8bc875426d157ca467165ce86f667bbad9be37",
+    "history.h": "9c12b04fb40b29c3e0fdb38995fc735059f6d4823365e7a88b33bcad5b6f76fe",
+    "provider.h": "8977dd0bc665c0ce0a568ddc6635ad399a68c57c2a03d09f3406febef4683e3a",
+    "app_event.c": "ebbd215229e2b6ded8e47831edc46d1cb2d5ca40fb443fa31373934d48850ff2",
+    "providers.c": "f60681843d36d30571a169f02c6002dd2c69a54e19e924ab3eb92581a21396e4"
+  }
+}

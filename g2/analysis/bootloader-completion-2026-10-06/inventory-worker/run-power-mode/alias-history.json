@@ -1,0 +1,98 @@
+{
+  "metric": "Unique normalized OTA addresses remaining numeric in each selected linker profile. Not missing-source functions or whole-component completion. Profiles expose different dependencies as source paths expand.",
+  "history": [
+    {
+      "checkpoint": "ca59e91628c10bed63b695252e05b41b60b1e59fc0e551627ac4615e39e02043",
+      "manifest": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/source-image-manifest-ca59e9.json",
+      "manifest_sha256": "44fa9feb3967b17e27e4f91960aa10a1e808c59a94bf4b59631c2453f836d4d2",
+      "numeric_aliases": 31,
+      "unique_addresses": 23,
+      "unique_OTA_addresses": 16
+    },
+    {
+      "checkpoint": "9affaa59fb648834327b08181849cc02787cacc3044c90e86692790e10a1bac6",
+      "manifest": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/elog-setters/source-manifest.json",
+      "manifest_sha256": "4b5c059742837d0d31e65135500d16285c6ccb8e766dcb86e6482f9c146401b5",
+      "numeric_aliases": 27,
+      "unique_addresses": 19,
+      "unique_OTA_addresses": 12,
+      "added_OTA_addresses": [],
+      "removed_OTA_addresses": [
+        "0x4173ca",
+        "0x417438",
+        "0x4174a6",
+        "0x417510"
+      ]
+    },
+    {
+      "checkpoint": "be4ede3b0288899ff661ddca1c949b4e5b24db393d4277c6acc7f75da0d04608",
+      "manifest": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/elog-output/manifest-be4.json",
+      "manifest_sha256": "99df8d111f985886e46526f0499f64502ea10356ae9ed1871d34dd9e875cff5a",
+      "numeric_aliases": 34,
+      "unique_addresses": 29,
+      "unique_OTA_addresses": 22,
+      "added_OTA_addresses": [
+        "0x41583c",
+        "0x41b218",
+        "0x41b25c",
+        "0x41c4b4",
+        "0x41c86c",
+        "0x41ca2c",
+        "0x4222a0",
+        "0x422416",
+        "0x42348e",
+        "0x4234fa",
+        "0x423d20",
+        "0x423dd0"
+      ],
+      "removed_OTA_addresses": [
+        "0x4176ce",
+        "0x41fa50"
+      ]
+    },
+    {
+      "checkpoint": "e1049dc3f5b60479f3ca4f665fab62e11a495f8629f806238741b2b7661acac3",
+      "manifest": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/clock-config-e104/manifest.json",
+      "manifest_sha256": "268577801f93fe1953f71ed34bcbebb1012c35e559b16fa1a68d3f73d053e24c",
+      "numeric_aliases": 28,
+      "unique_addresses": 28,
+      "unique_OTA_addresses": 21,
+      "added_OTA_addresses": [
+        "0x426c24",
+        "0x427160"
+      ],
+      "removed_OTA_addresses": [
+        "0x415fae",
+        "0x4222a0",
+        "0x422416"
+      ]
+    },
+    {
+      "checkpoint": "f3ca176e492a1770ee1838bdd990e6519e3b435ca75d8c44d690233b11087ade",
+      "manifest": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/clock-generators-f3ca/manifest.json",
+      "manifest_sha256": "1776d8f7da7caa4f6e8da42ac7c6d39f0d543998fdf98942ca8b66ef2903e0b9",
+      "numeric_aliases": 26,
+      "unique_addresses": 26,
+      "unique_OTA_addresses": 19,
+      "added_OTA_addresses": [],
+      "removed_OTA_addresses": [
+        "0x426c24",
+        "0x427160"
+      ]
+    },
+    {
+      "checkpoint": "4edd8e7dbdd6486ed8cc25fa275f8597a04d21e9dd0728618255cddd3de7cbfe",
+      "manifest": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-rx-4edd/manifest.json",
+      "manifest_sha256": "a9feb0c25c0928bf080e9a1c25e9e2f54cae067d18af2a7898232f6200245d59",
+      "numeric_aliases": 24,
+      "unique_addresses": 24,
+      "unique_OTA_addresses": 17,
+      "added_OTA_addresses": [],
+      "removed_OTA_addresses": [
+        "0x42348e",
+        "0x4234fa"
+      ]
+    }
+  ],
+  "explanation": "ca59e9 had31 aliases/23 addresses/16 OTA;9affaa59 had27/19/12. Relative to ca59e9, be4ede3b exposes12 new OTA addresses and removes6, giving16+12-6=22. Relative to9affaa59 it exposes12 and removes2, giving12+12-2=22. Added addresses include startup clock/power/shutdown/external-mode children, IAR formatting wrappers and UART RX. Later clock/generator/RX closure yields21\u219219\u219217. Alias counts and unique addresses are different; existing source may remain behind an alias."
+}

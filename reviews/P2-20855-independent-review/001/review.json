@@ -1,0 +1,10 @@
+{
+  "id": "P2-20855",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "Fresh replay passed for 56 bytes at 0x47CF28..0x47CF60; pinned image/source hashes and tiling verified. This distinct template pointer supplies the SP0/SP4 words. Two independent 0x45A568 calls store the first low byte and use a full-width exact-1 comparison for SP5=2/1. No flag-byte read or SP6 write occurs here, so remaining template bytes are left as loaded before the output helper. The helper result is discarded; POP returns template-derived SP0/SP4 values and saved entry R7 from SP8. Callee writes may affect the returned buffer words; no template protocol contract is claimed."
+}

@@ -1,0 +1,64 @@
+{
+  "status": "bounded reconstructed offline initialization; not productionreplacement",
+  "wrapper_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "runtime_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "runtime_base": "0x3300",
+  "architecture": "CortexM0+ Thumb",
+  "actual_reset_data_table": {
+    "table": "0xb578..0xb584",
+    "source": "0xb58c",
+    "destination": "0x200004c0",
+    "word_count": 241,
+    "byte_count": 964,
+    "zero_table": "0xb584..0xb58c",
+    "zero_destination": "0x200008a8",
+    "zero_words": 428,
+    "zero_bytes": 1712
+  },
+  "factory_configuration": {
+    "source_bytes": "000100000002010100000000",
+    "decoded": {
+      "capacity": 256,
+      "simple": 0,
+      "wear": 2,
+      "redundant": 1,
+      "blocking": 1,
+      "initial_base": 0
+    },
+    "app_patched_base": "0xe400",
+    "logical_rows": 4,
+    "row_bytes": 128,
+    "sector_bytes": 128,
+    "historic_bytes": 64,
+    "payload_bytes": 48,
+    "main_region": "0xe400..0xe800",
+    "mirror_region": "0xe800..0xec00"
+  },
+  "functions": {
+    "touch_eeprom_init_bd": "0x898c..0x8a34 plus4literalbytes",
+    "touch_eeprom_init": "0x8a38..0x8a74 plus4literalbytes",
+    "touch_application_eeprom_init": "0x34d8..0x350a plus20literalbytes",
+    "touch_init_ranges": "0x8220..0x8288 plus4literalbytes",
+    "touch_init_program_size": "0x828c..0x82e0",
+    "touch_init_physical_size": "0x8200..0x821e",
+    "touch_provider_init": "0x486c..0x48a4 plus40literalbytes"
+  },
+  "own_sources": {
+    "init.c": "94c6e3fbfd060f8a3eacf252d34e3dcbf9ff8ab879cc4b1dab4e0b8a7452e12d",
+    "init.h": "f7988e8d4401e02d9f7b375824d6fee72bc82ee490c3074748a1fbed7d7fc566"
+  },
+  "dependencies": [
+    "sealed g2/components/touch/eeprom_offline and pinned publicPDL/helper inputs"
+  ],
+  "sdk_attribution": {
+    "emeeprom": "6cacf37b5cfec2dc9acf1a2c222c1e3038d03bd9",
+    "block_storage": "0a9781309e0e1832d12e99cdf1d0f75843396a76",
+    "exact_producer_revision_verified": false
+  },
+  "limits": [
+    "Actualdata-copy/BSS-zero instructions executed in fixture, not hardwareSystemInit/reset/boot.",
+    "Syntheticstorage and larger guestmemory/stack; no physicalSROM/hardwaredurability proof.",
+    "Valid128-byte installedprovider; zero granularity or malformed/unmappedpointer contexts outsidecontract.",
+    "LegacySDKadapter assumes validconfig pointer; nullguardedinnerInitBD is a differentcontract."
+  ]
+}

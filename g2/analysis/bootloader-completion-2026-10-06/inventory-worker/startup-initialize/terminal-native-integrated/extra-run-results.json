@@ -1,0 +1,72 @@
+[
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/terminal-native-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/terminal-native-integrated/verify_initialized_record.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/terminal-native-integrated/15d222c4f550da090e0893905111771b5e3cabd07948f4be082863851f1fdd32/candidate.elf"
+    ],
+    "returncode": 0,
+    "stdout": "TARGETS [(0, '0x427e85', True), (1, '0x428069', True), (2, '0x428241', True), (3, '0x4283e3', True), (4, '0x428507', True), (5, '0x42863f', True), (6, '0x428841', True), (7, '0x428921', False), (8, '0x428bb1', True), (9, '0x428ca5', True), (10, '0x428d91', True), (11, '0x428e6b', True), (12, '0x4290a3', True), (13, '0x4291ed', True), (14, '0x42944b', True), (15, '0x429525', True), (16, '0x42962d', True), (17, '0x429719', True), (18, '0x42984f', True), (19, '0x429a31', True), (20, '0x429b4d', True), (21, '0x429c47', True), (22, '0x429e01', False), (23, '0x429f69', True), (24, '0x42a031', False), (25, '0x42a033', False), (26, '0x42a035', False)]\nPASS initialized1371bytes;27selector targets ['0x427e85', '0x428069', '0x428241', '0x4283e3', '0x428507', '0x42863f', '0x428841', '0x428921', '0x428bb1', '0x428ca5', '0x428d91', '0x428e6b', '0x4290a3', '0x4291ed', '0x42944b', '0x429525', '0x42962d', '0x429719', '0x42984f', '0x429a31', '0x429b4d', '0x429c47', '0x429e01', '0x429f69', '0x42a031', '0x42a033', '0x42a035']\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/terminal-native-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/terminal-native-integrated/verify_selector1.py",
+      "--base",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/terminal-native-integrated/15d222c4f550da090e0893905111771b5e3cabd07948f4be082863851f1fdd32/candidate.elf",
+      "--addon",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/terminal-native-integrated/15d222c4f550da090e0893905111771b5e3cabd07948f4be082863851f1fdd32/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/terminal-native-integrated/15d222c4f550da090e0893905111771b5e3cabd07948f4be082863851f1fdd32/validation/selector1.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 18 direct selector1 fixtures; stock instruction bytes visited 472 of 472\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/terminal-native-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/selector1-idle-integrated/verify_root_initialized.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/terminal-native-integrated/15d222c4f550da090e0893905111771b5e3cabd07948f4be082863851f1fdd32/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/terminal-native-integrated/15d222c4f550da090e0893905111771b5e3cabd07948f4be082863851f1fdd32/validation/root-installed.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 1400 {'write': 50, 'read': 0, '20': 22, '24': 26, '28': 0, '30': 22, '34': 0, '38': 0, 'init': 810}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/terminal-native-integrated/run_oracle.py",
+      "g2/components/bootloader/thread_creation/verify_resume_tick.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/terminal-native-integrated/15d222c4f550da090e0893905111771b5e3cabd07948f4be082863851f1fdd32/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/terminal-native-integrated/15d222c4f550da090e0893905111771b5e3cabd07948f4be082863851f1fdd32/validation/resume_tick.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\"status\": \"PASS\", \"cases\": 96, \"distinct_original_trace_bytes\": 502}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/terminal-native-integrated/run_oracle.py",
+      "g2/components/bootloader/thread_creation/verify_tick.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/terminal-native-integrated/15d222c4f550da090e0893905111771b5e3cabd07948f4be082863851f1fdd32/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/terminal-native-integrated/15d222c4f550da090e0893905111771b5e3cabd07948f4be082863851f1fdd32/validation/tick.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\"status\": \"PASS\", \"cases\": 288, \"distinct_original_trace_bytes\": 348}\n",
+    "stderr": ""
+  }
+]

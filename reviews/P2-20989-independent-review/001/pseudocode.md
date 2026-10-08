@@ -1,0 +1,5 @@
+# Shared object-field initialization with bit-two flag update
+
+Partial/unaccepted;86instructionbytes47E75A..47E7B0. PUSH R3,R4,R5,R6,R7,R8,R9,LR32;R6=entryR0,R5=entryR1,R4=entryR2,R7=entryR3. FullR5zero→5FA0A4(liveargs),ifreturnsstoreword0toFFFFFFFFthenselfbranchE776ifstorecompletes. Nonzero→R9=freshSP36(callersixthargobjectpointer);R8=freshSP32(callerfiftharg);47EAB8(liveargs). Noobjectpointercheckbeforewrites.
+Writeobjectword0=entryR0,word24=entryR1,word28=entryR3,word32=fiftharg. R0=object+4;R1=0;storeword[R0+16]=0 (objectword20). EntryR2fullzero→skipflagwrite;nonzero→freshunsignedbyteobject40 OR4 thenstorebyteobject40, preservingotherbitsfromthatread. Doesnotclearbit2whenentryR2zero; wrapperspriorbyte40initializationsremainseparate. No writesrecoveredtoobject4..19,36..39,41..43.
+POP R0,R4,R5,R6,R7,R8,R9,PC32 returnsR0=savedentryR3 subjectcallee stackwrites,not objectpointer/helperresult;restorespreservedregs. Refinesfieldwritesof21384/86sharedhelperdependencywithoutclaimingremaining47EAB8semantics. No C/freeze/completenessclaim.

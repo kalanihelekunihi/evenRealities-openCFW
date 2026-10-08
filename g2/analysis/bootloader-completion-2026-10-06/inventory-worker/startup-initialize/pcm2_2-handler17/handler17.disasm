@@ -1,0 +1,107 @@
+00429718: 2de9f84f   push.w   {r3, r4, r5, r6, r7, r8, sb, sl, fp, lr}
+0042971c: 0500       movs     r5, r0
+0042971e: 1400       movs     r4, r2
+00429720: 0020       movs     r0, #0
+00429722: dff86009   ldr.w    r0, [pc, #0x960]
+00429726: 00eb8502   add.w    r2, r0, r5, lsl #2
+0042972a: 161d       adds     r6, r2, #4
+0042972c: 00eb8102   add.w    r2, r0, r1, lsl #2
+00429730: 121d       adds     r2, r2, #4
+00429732: 10f16403   adds.w   r3, r0, #0x64
+00429736: 1878       ldrb     r0, [r3]
+00429738: 10f07f00   ands     r0, r0, #0x7f
+0042973c: 8df80000   strb.w   r0, [sp]
+00429740: 6846       mov      r0, sp
+00429742: 1f68       ldr      r7, [r3]
+00429744: ff09       lsrs     r7, r7, #7
+00429746: 17f07f07   ands     r7, r7, #0x7f
+0042974a: 4770       strb     r7, [r0, #1]
+0042974c: 1f68       ldr      r7, [r3]
+0042974e: bf0b       lsrs     r7, r7, #0xe
+00429750: 17f07f07   ands     r7, r7, #0x7f
+00429754: 8770       strb     r7, [r0, #2]
+00429756: 1b68       ldr      r3, [r3]
+00429758: 5b0d       lsrs     r3, r3, #0x15
+0042975a: 13f07f03   ands     r3, r3, #0x7f
+0042975e: c370       strb     r3, [r0, #3]
+00429760: 1378       ldrb     r3, [r2]
+00429762: 13f07f03   ands     r3, r3, #0x7f
+00429766: 1268       ldr      r2, [r2]
+00429768: c2f34652   ubfx     r2, r2, #0x15, #7
+0042976c: 3268       ldr      r2, [r6]
+0042976e: c2f34657   ubfx     r7, r2, #0x15, #7
+00429772: 96f80080   ldrb.w   r8, [r6]
+00429776: 18f07f08   ands     r8, r8, #0x7f
+0042977a: 11f00301   ands     r1, r1, #3
+0042977e: 10f80190   ldrb.w   sb, [r0, r1]
+00429782: 15f00301   ands     r1, r5, #3
+00429786: 10f801a0   ldrb.w   sl, [r0, r1]
+0042978a: dff8fc08   ldr.w    r0, [pc, #0x8fc]
+0042978e: 0068       ldr      r0, [r0]
+00429790: c007       lsls     r0, r0, #0x1f
+00429792: 11d5       bpl      #0x4297b8
+00429794: 5ff0000b   movs.w   fp, #0
+00429798: 04e0       b        #0x4297a4
+0042979a: 0120       movs     r0, #1
+0042979c: f3f710fd   bl       #0x41d1c0
+004297a0: 1bf1010b   adds.w   fp, fp, #1
+004297a4: bbf13c0f   cmp.w    fp, #0x3c
+004297a8: 04d2       bhs      #0x4297b4
+004297aa: dff8080a   ldr.w    r0, [pc, #0xa08]
+004297ae: 0068       ldr      r0, [r0]
+004297b0: 4000       lsls     r0, r0, #1
+004297b2: f2d5       bpl      #0x42979a
+004297b4: 00f049fc   bl       #0x42a04a
+004297b8: dff8fc09   ldr.w    r0, [pc, #0x9fc]
+004297bc: 0460       str      r4, [r0]
+004297be: dff8e40a   ldr.w    r0, [pc, #0xae4]
+004297c2: 0560       str      r5, [r0]
+004297c4: 3068       ldr      r0, [r6]
+004297c6: c0f3c910   ubfx     r0, r0, #7, #0xa
+004297ca: dff8dc1a   ldr.w    r1, [pc, #0xadc]
+004297ce: 0860       str      r0, [r1]
+004297d0: 3068       ldr      r0, [r6]
+004297d2: c0f34340   ubfx     r0, r0, #0x11, #4
+004297d6: dff8d41a   ldr.w    r1, [pc, #0xad4]
+004297da: 0860       str      r0, [r1]
+004297dc: dff8d00a   ldr.w    r0, [pc, #0xad0]
+004297e0: 0760       str      r7, [r0]
+004297e2: dff89808   ldr.w    r0, [pc, #0x898]
+004297e6: c0f80080   str.w    r8, [r0]
+004297ea: baeb0900   subs.w   r0, sl, sb
+004297ee: 0128       cmp      r0, #1
+004297f0: 01db       blt      #0x4297f6
+004297f2: 4000       lsls     r0, r0, #1
+004297f4: 00e0       b        #0x4297f8
+004297f6: 0020       movs     r0, #0
+004297f8: 10eb0901   adds.w   r1, r0, sb
+004297fc: 8029       cmp      r1, #0x80
+004297fe: 06d3       blo      #0x42980e
+00429800: dff87c08   ldr.w    r0, [pc, #0x87c]
+00429804: 0168       ldr      r1, [r0]
+00429806: 51f07f01   orrs     r1, r1, #0x7f
+0042980a: 0160       str      r1, [r0]
+0042980c: 07e0       b        #0x42981e
+0042980e: dff87018   ldr.w    r1, [pc, #0x870]
+00429812: 10eb0909   adds.w   sb, r0, sb
+00429816: 0868       ldr      r0, [r1]
+00429818: 69f30600   bfi      r0, sb, #0, #7
+0042981c: 0860       str      r0, [r1]
+0042981e: 3068       ldr      r0, [r6]
+00429820: c0f34340   ubfx     r0, r0, #0x11, #4
+00429824: 8049       ldr      r1, [pc, #0x200]
+00429826: 0a68       ldr      r2, [r1]
+00429828: 60f38d22   bfi      r2, r0, #0xa, #4
+0042982c: 0a60       str      r2, [r1]
+0042982e: 3068       ldr      r0, [r6]
+00429830: c0f3c910   ubfx     r0, r0, #7, #0xa
+00429834: 0a68       ldr      r2, [r1]
+00429836: 920a       lsrs     r2, r2, #0xa
+00429838: 9202       lsls     r2, r2, #0xa
+0042983a: 1043       orrs     r0, r2
+0042983c: 0860       str      r0, [r1]
+0042983e: dff84008   ldr.w    r0, [pc, #0x840]
+00429842: 0168       ldr      r1, [r0]
+00429844: 6af30601   bfi      r1, sl, #0, #7
+00429848: 0160       str      r1, [r0]
+0042984a: bde8f18f   pop.w    {r0, r4, r5, r6, r7, r8, sb, sl, fp, pc}

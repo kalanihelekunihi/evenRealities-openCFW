@@ -1,0 +1,10 @@
+{
+  "id": "P2-20885",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "Fresh replay passed for 118 bytes at 0x47D43C..0x47D4B2; pinned image/source hashes and tiling match. The second-match path calls 0x45A568, then reads buffer byte5 freshly and compares against the helper LOW8 result. Matching diagnostic routes include independent byte6 observations. Exact byte6=1 freshly sets flag bit3, calls 0x47D8CE, then narrows only prior R6 to LOW8 and compares it against the full new R0; unequal/equal map to R4=1/0 respectively. The new helper result is not narrowed. Non-one branches to pending continuation; helper and flag effects are not generalized."
+}

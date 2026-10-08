@@ -1,0 +1,34 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp3_rjikz1/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047ac1e <.text>:
+  47ac1e:	f7c2 fa56 	bl	43d0ce <.text-0x3db50>
+  47ac22:	07c0      	lsls	r0, r0, #31
+  47ac24:	d403      	bmi.n	47ac2e <.text+0x10>
+  47ac26:	f7c2 fa52 	bl	43d0ce <.text-0x3db50>
+  47ac2a:	0740      	lsls	r0, r0, #29
+  47ac2c:	d514      	bpl.n	47ac58 <.text+0x3a>
+  47ac2e:	f8df 195c 	ldr.w	r1, [pc, #2396]	@ 47b58c <.text+0x96e>
+  47ac32:	7820      	ldrb	r0, [r4, #0]
+  47ac34:	9005      	str	r0, [sp, #20]
+  47ac36:	7860      	ldrb	r0, [r4, #1]
+  47ac38:	9004      	str	r0, [sp, #16]
+  47ac3a:	78a0      	ldrb	r0, [r4, #2]
+  47ac3c:	9003      	str	r0, [sp, #12]
+  47ac3e:	78e0      	ldrb	r0, [r4, #3]
+  47ac40:	9002      	str	r0, [sp, #8]
+  47ac42:	7920      	ldrb	r0, [r4, #4]
+  47ac44:	9001      	str	r0, [sp, #4]
+  47ac46:	7960      	ldrb	r0, [r4, #5]
+  47ac48:	9000      	str	r0, [sp, #0]
+  47ac4a:	b2ad      	uxth	r5, r5
+  47ac4c:	002b      	movs	r3, r5
+  47ac4e:	000a      	movs	r2, r1
+  47ac50:	f05f 508e 	movs.w	r0, #297795584	@ 0x11c00000
+  47ac54:	f7c2 f923 	bl	43ce9e <.text-0x3dd80>
+  47ac58:	f896 002e 	ldrb.w	r0, [r6, #46]	@ 0x2e
+  47ac5c:	07c0      	lsls	r0, r0, #31
+  47ac5e:	d521      	bpl.n	47aca4 <.text+0x86>

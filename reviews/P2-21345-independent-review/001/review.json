@@ -1,0 +1,23 @@
+{
+  "review_id": "P2-21345-independent-review",
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-floating-range-fallback-sign-exponent-bit-normalization-prefix-21744-map/001",
+  "status": "partial",
+  "accepted": false,
+  "checks": {
+    "fresh_replay": "pass",
+    "instruction_bytes": 194,
+    "instructions_match": true,
+    "references_match": true,
+    "frame_bytes": 64,
+    "fallback_stack_store_order": [
+      "SP+8",
+      "SP+4",
+      "SP+0"
+    ]
+  },
+  "limitations": [
+    "full VLDR literal semantics unresolved",
+    "continuation unresolved",
+    "no whole-routine coverage or acceptance claim"
+  ]
+}

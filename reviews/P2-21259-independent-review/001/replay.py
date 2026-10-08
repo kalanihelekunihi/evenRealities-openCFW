@@ -1,0 +1,10 @@
+from pathlib import Path
+import json,hashlib
+b=Path('g2/build/pseudocode-first/20260930T190500Z');d=(b/'attempts/P1-canonical-fixed-images-005/002/apollo_main-flash.bin').read_bytes();h=lambda v:hashlib.sha256(v).hexdigest();assert h(d)=='19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701'
+ranges=[(0x48182e,0x481830),(0x4824ee,0x482518),(0x482672,0x482684),(0x4826b2,0x4826fc)]
+rows=[dict(start=a,end=z,bytes=d[a-0x438000:z-0x438000].hex()) for a,z in ranges]
+assert sum(z-a for a,z in ranges)==136
+o=b/'analysis/review-isolated-P2-21259/fresh';o.mkdir(parents=True,exist_ok=True)
+(o/'bytes.json').write_text(json.dumps(rows,indent=2)+'\n')
+(o/'pseudocode.md').write_text('# Formatter literals, strings and alignment bytes\n\nPartial/unaccepted;136 non-code bytes in four disjoint intervals. 48182E..481830 zero halfword after byte-search return. 4824EE..4824F0 zero halfword after formatter return;4824F0 little-endian word0x0CCCCCCB;4824F4 ASCII "hjltzL" plus NUL at4824FA, zero4824FB;4824FC ASCII "printf_s: bad %s argument" with NUL at482514 and zeros482515..518. 482672..674 zero halfword after scaling return;482674 word100000;482678 word0x3FF00000;48267C word0x4197D784;482680 word0x40240000. Record raw words, no assumed arithmetic interpretation.\n\n4826B2..B4 zero halfword after callback return. 4826B4 ASCII "printf_s: %n disallowed" NUL4826CA;4826CC ASCII "printf: bad %n argument" NUL4826E2; zero4826CB and4826E3. 4826E4..E8 four zero bytes (null-string fallback pointer). 4826E8 "nan" NUL;4826EC "NAN" NUL;4826F0 "inf" NUL;4826F4 "INF" NUL;4826F8 "0" NUL followed two zero bytes to4826FC. Candidate ends before next code4826FC. Exact bytes in bytes.json are authoritative; consumer semantics reside in separately reviewed formatter/scaling candidates. No executable classification from arbitrary Thumb decoding of ASCII. No C,freeze,wholecoverage or equalityclaim.\n')
+(o/'replay.py').write_bytes(Path(__file__).read_bytes());(o/'receipt.json').write_text(json.dumps(dict(accepted=False,status='partial',input_sha256=h(d),data_bytes=136,files={p.name:h(p.read_bytes()) for p in o.iterdir()}),indent=2)+'\n');print('PASS',136)

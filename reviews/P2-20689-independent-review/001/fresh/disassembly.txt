@@ -1,0 +1,50 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpdqc1jfw8/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047acf8 <.text>:
+  47acf8:	b57c      	push	{r2, r3, r4, r5, r6, lr}
+  47acfa:	4c5a      	ldr	r4, [pc, #360]	@ (47ae64 <.text+0x16c>)
+  47acfc:	f7c2 f9e7 	bl	43d0ce <.text-0x3dc2a>
+  47ad00:	0780      	lsls	r0, r0, #30
+  47ad02:	d50c      	bpl.n	47ad1e <.text+0x26>
+  47ad04:	f8df 09d8 	ldr.w	r0, [pc, #2520]	@ 47b6e0 <.text+0x9e8>
+  47ad08:	9001      	str	r0, [sp, #4]
+  47ad0a:	f240 405a 	movw	r0, #1114	@ 0x45a
+  47ad0e:	9000      	str	r0, [sp, #0]
+  47ad10:	f8df 39d0 	ldr.w	r3, [pc, #2512]	@ 47b6e4 <.text+0x9ec>
+  47ad14:	4a2d      	ldr	r2, [pc, #180]	@ (47adcc <.text+0xd4>)
+  47ad16:	4944      	ldr	r1, [pc, #272]	@ (47ae28 <.text+0x130>)
+  47ad18:	2004      	movs	r0, #4
+  47ad1a:	f7c2 fc2b 	bl	43d574 <.text-0x3d784>
+  47ad1e:	f7c2 f9d6 	bl	43d0ce <.text-0x3dc2a>
+  47ad22:	07c0      	lsls	r0, r0, #31
+  47ad24:	d403      	bmi.n	47ad2e <.text+0x36>
+  47ad26:	f7c2 f9d2 	bl	43d0ce <.text-0x3dc2a>
+  47ad2a:	0740      	lsls	r0, r0, #29
+  47ad2c:	d506      	bpl.n	47ad3c <.text+0x44>
+  47ad2e:	f8df 19b8 	ldr.w	r1, [pc, #2488]	@ 47b6e8 <.text+0x9f0>
+  47ad32:	000a      	movs	r2, r1
+  47ad34:	f05f 5080 	movs.w	r0, #268435456	@ 0x10000000
+  47ad38:	f7c2 f8b1 	bl	43ce9e <.text-0x3de5a>
+  47ad3c:	250a      	movs	r5, #10
+  47ad3e:	e00d      	b.n	47ad5c <.text+0x64>
+  47ad40:	2000      	movs	r0, #0
+  47ad42:	f884 002f 	strb.w	r0, [r4, #47]	@ 0x2f
+  47ad46:	2000      	movs	r0, #0
+  47ad48:	f884 0030 	strb.w	r0, [r4, #48]	@ 0x30
+  47ad4c:	2106      	movs	r1, #6
+  47ad4e:	2200      	movs	r2, #0
+  47ad50:	0026      	movs	r6, r4
+  47ad52:	0030      	movs	r0, r6
+  47ad54:	f7c1 f9c6 	bl	43c0e4 <.text-0x3ec14>
+  47ad58:	1e6d      	subs	r5, r5, #1
+  47ad5a:	34c8      	adds	r4, #200	@ 0xc8
+  47ad5c:	0028      	movs	r0, r5
+  47ad5e:	b2c0      	uxtb	r0, r0
+  47ad60:	2800      	cmp	r0, #0
+  47ad62:	d1ed      	bne.n	47ad40 <.text+0x48>
+  47ad64:	f7fd fd1e 	bl	4787a4 <.text-0x2554>
+  47ad68:	bd73      	pop	{r0, r1, r4, r5, r6, pc}

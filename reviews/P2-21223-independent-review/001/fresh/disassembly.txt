@@ -1,0 +1,66 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp1473yzo3/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00481ee6 <.text>:
+  481ee6:	f10d 0085 	add.w	r0, sp, #133	@ 0x85
+  481eea:	1a36      	subs	r6, r6, r0
+  481eec:	9801      	ldr	r0, [sp, #4]
+  481eee:	f10d 0485 	add.w	r4, sp, #133	@ 0x85
+  481ef2:	4286      	cmp	r6, r0
+  481ef4:	bfd8      	it	le
+  481ef6:	4630      	movle	r0, r6
+  481ef8:	2800      	cmp	r0, #0
+  481efa:	d42f      	bmi.n	481f5c <.text+0x76>
+  481efc:	42b0      	cmp	r0, r6
+  481efe:	da06      	bge.n	481f0e <.text+0x28>
+  481f00:	f10d 0185 	add.w	r1, sp, #133	@ 0x85
+  481f04:	5c0a      	ldrb	r2, [r1, r0]
+  481f06:	2a08      	cmp	r2, #8
+  481f08:	bfa8      	it	ge
+  481f0a:	210f      	movge	r1, #15
+  481f0c:	da00      	bge.n	481f10 <.text+0x2a>
+  481f0e:	2100      	movs	r1, #0
+  481f10:	4602      	mov	r2, r0
+  481f12:	ab21      	add	r3, sp, #132	@ 0x84
+  481f14:	4413      	add	r3, r2
+  481f16:	e000      	b.n	481f1a <.text+0x34>
+  481f18:	1e40      	subs	r0, r0, #1
+  481f1a:	f813 5901 	ldrb.w	r5, [r3], #-1
+  481f1e:	1e52      	subs	r2, r2, #1
+  481f20:	428d      	cmp	r5, r1
+  481f22:	d0f9      	beq.n	481f18 <.text+0x32>
+  481f24:	290f      	cmp	r1, #15
+  481f26:	d104      	bne.n	481f32 <.text+0x4c>
+  481f28:	f10d 0185 	add.w	r1, sp, #133	@ 0x85
+  481f2c:	5c8b      	ldrb	r3, [r1, r2]
+  481f2e:	1c5b      	adds	r3, r3, #1
+  481f30:	548b      	strb	r3, [r1, r2]
+  481f32:	2a00      	cmp	r2, #0
+  481f34:	d504      	bpl.n	481f40 <.text+0x5a>
+  481f36:	9900      	ldr	r1, [sp, #0]
+  481f38:	1d09      	adds	r1, r1, #4
+  481f3a:	ac21      	add	r4, sp, #132	@ 0x84
+  481f3c:	1c40      	adds	r0, r0, #1
+  481f3e:	9100      	str	r1, [sp, #0]
+  481f40:	1e41      	subs	r1, r0, #1
+  481f42:	d40b      	bmi.n	481f5c <.text+0x76>
+  481f44:	1862      	adds	r2, r4, r1
+  481f46:	7813      	ldrb	r3, [r2, #0]
+  481f48:	3330      	adds	r3, #48	@ 0x30
+  481f4a:	b2dd      	uxtb	r5, r3
+  481f4c:	2d3a      	cmp	r5, #58	@ 0x3a
+  481f4e:	bfa4      	itt	ge
+  481f50:	445b      	addge	r3, fp
+  481f52:	3b3a      	subge	r3, #58	@ 0x3a
+  481f54:	1e49      	subs	r1, r1, #1
+  481f56:	f802 3901 	strb.w	r3, [r2], #-1
+  481f5a:	d5f4      	bpl.n	481f46 <.text+0x60>
+  481f5c:	990e      	ldr	r1, [sp, #56]	@ 0x38
+  481f5e:	2900      	cmp	r1, #0
+  481f60:	f140 80ac 	bpl.w	4820bc <.text+0x1d6>
+  481f64:	1e42      	subs	r2, r0, #1
+  481f66:	920e      	str	r2, [sp, #56]	@ 0x38
+  481f68:	e0a8      	b.n	4820bc <.text+0x1d6>

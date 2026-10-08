@@ -1,0 +1,289 @@
+{
+  "status": "PASS",
+  "image": "g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin",
+  "image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "load_address": "0x410000",
+  "architecture": "ARMv8-M Thumb (Cortex-M33 compatible instruction set)",
+  "function_source": "g2/research/corpus/apollo-bootloader/ghidra/open-2026-09-29/functions-000.jsonl",
+  "entries": [
+    {
+      "entry": "0x42abbc",
+      "name": "spotmgr_init_42abbc",
+      "start": "0x42abbc",
+      "end_inclusive": "0x42ac4d",
+      "bytes": 146,
+      "sha256": "1f0bfec6f59efe752ea106db7f7b7144fcd9b0df306919a7e03a7f2d550bca2d",
+      "extent_source": "Ghidra authenticated function range",
+      "callees": [
+        "0x41cc04",
+        "0x421548"
+      ]
+    },
+    {
+      "entry": "0x42bdf0",
+      "name": "hw_state_compose_42bdf0",
+      "start": "0x42bdf0",
+      "end_inclusive": "0x42bf4d",
+      "bytes": 350,
+      "sha256": "6abb107b7aebe13eaff37f34185f8865b71f27c756f8214d3646efa4f2304c1c",
+      "extent_source": "Ghidra authenticated function range",
+      "callees": [
+        "0x41cc04",
+        "0x421548"
+      ]
+    },
+    {
+      "entry": "0x42d6c0",
+      "name": "bl_bl009_dispatch",
+      "start": "0x42d6c0",
+      "end_inclusive": "0x42d79d",
+      "bytes": 222,
+      "sha256": "39812d745910a1fa17f8df9bcbc3e4633f99d79d8a4722a50d80fa241f37325b",
+      "extent_source": "Ghidra authenticated function range",
+      "callees": []
+    },
+    {
+      "entry": "0x42f670",
+      "name": "FUN_0042f670",
+      "start": "0x42f670",
+      "end_inclusive": "0x42f673",
+      "bytes": 4,
+      "sha256": "a7ddd513d149ea16fdd4db3f82267f83087aeaddd06b5dde5468adb704205fc4",
+      "extent_source": "Ghidra authenticated function range",
+      "callees": []
+    },
+    {
+      "entry": "0x41ce52",
+      "name": "FUN_0041ce52",
+      "start": "0x41ce52",
+      "end_inclusive": "0x41d0ed",
+      "bytes": 668,
+      "sha256": "3fe7c1c3d4d664da3041d42f4006205587105037609aca12f41925a666ee78b5",
+      "extent_source": "Ghidra authenticated function range",
+      "callees": [
+        "0x41560c",
+        "0x42abbc",
+        "0x42bdf0",
+        "0x42d6c0",
+        "0x42f670"
+      ]
+    },
+    {
+      "entry": "0x41cc04",
+      "name": "FUN_0041cc04",
+      "start": "0x41cc04",
+      "end_inclusive": "0x41cc47",
+      "bytes": 68,
+      "sha256": "ed229ffd09f1ee88e062850806cfb7a056c01332a5d482da01c7ac6da05268eb",
+      "extent_source": "Ghidra authenticated function range",
+      "callees": []
+    },
+    {
+      "entry": "0x421548",
+      "name": "FUN_00421548",
+      "start": "0x421548",
+      "end_inclusive": "0x42156d",
+      "bytes": 38,
+      "sha256": "3b5bbbf5927b1c40733445a47ac8ddcec46ba52837fd94cf3ee0dc20c28d9e72",
+      "extent_source": "Ghidra authenticated function range",
+      "callees": [
+        "0x4213e6"
+      ]
+    },
+    {
+      "entry": "0x4213e6",
+      "name": "FUN_004213e6",
+      "start": "0x4213e6",
+      "end_inclusive": "0x421547",
+      "bytes": 354,
+      "sha256": "989242545e69349bd0ff976d0bdd47f5800523263ad0f2c35fa06c0a68ea5127",
+      "extent_source": "Ghidra authenticated function range",
+      "callees": [
+        "0x41d28a",
+        "0x4213d8",
+        "0x4213da"
+      ]
+    },
+    {
+      "entry": "0x41d28a",
+      "name": "FUN_0041d28a",
+      "start": "0x41d28a",
+      "end_inclusive": "0x41d291",
+      "bytes": 8,
+      "sha256": "dc3dabe0882421df8696d49e608ebaae3a67965235de4e760f6a8ce1cb1715c1",
+      "extent_source": "Ghidra authenticated function range",
+      "callees": []
+    },
+    {
+      "entry": "0x42d562",
+      "name": "state_event_dispatch_42d562",
+      "start": "0x42d562",
+      "end_inclusive": "0x42d5c1",
+      "bytes": 96,
+      "sha256": "a060f2a726d07c0c67a1c00ada3aa671c805cfdab3a34e26239a7ebafc86eaa3",
+      "extent_source": "Ghidra authenticated function range",
+      "callees": [
+        "0x42ced8",
+        "0x42cfe0",
+        "0x42d104",
+        "0x42d3bc"
+      ]
+    },
+    {
+      "entry": "0x42ced8",
+      "name": "state_range_update_42ced8",
+      "start": "0x42ced8",
+      "end_inclusive": "0x42cfdf",
+      "bytes": 264,
+      "sha256": "5cf1d6490be8e99cbc802900d5021f53a44fd49ab34fae01f67cc4308c11b5a0",
+      "extent_source": "Ghidra authenticated function range",
+      "callees": [
+        "0x42cea4"
+      ]
+    },
+    {
+      "entry": "0x42cfe0",
+      "name": "state_event_zero_42cfe0",
+      "start": "0x42cfe0",
+      "end_inclusive": "0x42d0f1",
+      "bytes": 274,
+      "sha256": "c03a0f379d7bbafb93e2c9074e4d754081699d39c63b4c2820765ffdab996624",
+      "extent_source": "Ghidra authenticated function range",
+      "callees": [
+        "0x41f3f0"
+      ]
+    },
+    {
+      "entry": "0x42d104",
+      "name": "state_event_one_value_42d104",
+      "start": "0x42d104",
+      "end_inclusive": "0x42d3bb",
+      "bytes": 696,
+      "sha256": "cf108ad5215cbb620832a3e19e1eede59c9a5726494715ae311b14c0ffa07994",
+      "extent_source": "Ghidra authenticated function range",
+      "callees": [
+        "0x41d1c0"
+      ]
+    },
+    {
+      "entry": "0x42d3bc",
+      "name": "state_register_initialize_42d3bc",
+      "start": "0x42d3bc",
+      "end_inclusive": "0x42d561",
+      "bytes": 422,
+      "sha256": "28b119628520d11368f8517e23ba59254c17bb974684a59ead1266312f71e0c6",
+      "extent_source": "Ghidra authenticated function range",
+      "callees": [
+        "0x41d1c0"
+      ]
+    },
+    {
+      "entry": "0x42cea4",
+      "name": "state_update_critical_42cea4",
+      "start": "0x42cea4",
+      "end_inclusive": "0x42ced7",
+      "bytes": 52,
+      "sha256": "5e1f4567b244b4e447b9c7adefa7e1995a8994847c42da20da7cacf0269c17e1",
+      "extent_source": "Ghidra authenticated function range",
+      "callees": [
+        "0x41b8ec",
+        "0x42cdf8"
+      ]
+    },
+    {
+      "entry": "0x42cdf8",
+      "name": "state_adjust_42cdf8",
+      "start": "0x42cdf8",
+      "end_inclusive": "0x42cea3",
+      "bytes": 172,
+      "sha256": "38a50cc07d40a0b1d447b195a21d977b7484f4d3151feead6e34dee388b59991",
+      "extent_source": "Ghidra authenticated function range",
+      "callees": []
+    },
+    {
+      "entry": "0x41f3f0",
+      "name": "FUN_0041f3f0",
+      "start": "0x41f3f0",
+      "end_inclusive": "0x41f423",
+      "bytes": 52,
+      "sha256": "2629a71d82c78f7602d8f37273ae02bcf42f237cdaab9da0d4db6d57a1045692",
+      "extent_source": "Ghidra authenticated function range",
+      "callees": []
+    },
+    {
+      "entry": "0x41d1c0",
+      "name": "delay_us",
+      "start": "0x41d1c0",
+      "end_inclusive": "0x41d20f",
+      "bytes": 80,
+      "sha256": "c336d5c93475c6521bab00509a8ad8aaa1078b3bdc313ae43107777520af1895",
+      "extent_source": "Ghidra authenticated function range",
+      "callees": []
+    },
+    {
+      "entry": "0x41b8ec",
+      "name": "critical_save",
+      "start": "0x41b8ec",
+      "end_inclusive": "0x41b8f3",
+      "bytes": 8,
+      "sha256": "720733fcf19a5635fcab0791fcc2b007294712bb27536443ff79490821c168cf",
+      "extent_source": "Ghidra authenticated function range",
+      "callees": []
+    },
+    {
+      "entry": "0x42d5c2",
+      "name": "entry_0042d5c2",
+      "start": "0x42d5c2",
+      "end_inclusive": "0x42d5cb",
+      "bytes": 10,
+      "sha256": "25ecf9ae2286c9e2a088491125d73344390d883b7e889f4e480429ed557eaea5",
+      "extent_source": "byte-bounded return-entry analysis",
+      "callees": []
+    },
+    {
+      "entry": "0x42d5cc",
+      "name": "entry_0042d5cc",
+      "start": "0x42d5cc",
+      "end_inclusive": "0x42d5f7",
+      "bytes": 44,
+      "sha256": "921dcb1ed7c3ad303be20b88322f5d8e0cb72a101f33fc27906a4b8a6ee99a31",
+      "extent_source": "byte-bounded return-entry analysis",
+      "callees": []
+    },
+    {
+      "entry": "0x42d63a",
+      "name": "entry_0042d63a",
+      "start": "0x42d63a",
+      "end_inclusive": "0x42d691",
+      "bytes": 88,
+      "sha256": "f2b1e6d2bdacbeb3917a740b15665d1c67356b5bf257bd1be8329f822d0c2acb",
+      "extent_source": "byte-bounded return-entry analysis",
+      "callees": []
+    }
+  ],
+  "literal_values": {
+    "42abbc": {
+      "0x42ac50": "0x20026ba0",
+      "0x42ad38": "0x400201bc",
+      "0x42acec": "0x40021008",
+      "0x42ace4": "0x1f01600d"
+    },
+    "42bdf0": {
+      "0x42bfcc": "0x20026ba0",
+      "0x42c02c": "0x400201bc",
+      "0x42bfd8": "0x40021008",
+      "0x42bfd0": "0x1f01600d"
+    },
+    "42d6c0": {
+      "0x42d834": "0x4002000c",
+      "0x42d838": "0x20000098",
+      "0x42d810": "0x200271b3",
+      "0x42d7ac": "0x200271b4",
+      "0x42d844": "0x200271b5",
+      "0x42d83c": "0x200267f8",
+      "0x42d840": "0x3fe00000"
+    }
+  },
+  "verification": "Indexed Ghidra extents and per-body SHA-256 match the locked image; 42d5c2, 42d5cc, and 42d63a use separately return-bounded extents. Objdump output is bounded to each inclusive extent.",
+  "native_differential": "not run: Python Unicorn is unavailable in this execution environment; see REPORT.md."
+}

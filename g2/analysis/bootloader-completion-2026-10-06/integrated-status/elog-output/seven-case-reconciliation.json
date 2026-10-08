@@ -1,0 +1,30 @@
+{
+  "elf_sha256": "be4ede3b0288899ff661ddca1c949b4e5b24db393d4277c6acc7f75da0d04608",
+  "status": "PASS",
+  "inputs": 635,
+  "linked_objects": 161,
+  "post_run_hash_mismatches": [],
+  "profiles": [
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/be4ede3b0288899ff661ddca1c949b4e5b24db393d4277c6acc7f75da0d04608/comparison.json",
+      "sha256": "8f2b33fab5e46d4d0b2fcbe11248c164f22b4cebbf65ddb14c150f2d575b5ffa",
+      "status": "PASS",
+      "cases": 2
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/be4ede3b0288899ff661ddca1c949b4e5b24db393d4277c6acc7f75da0d04608/failures.json",
+      "sha256": "90e3a7b2f7edda3965f03b203b1f875ab10c8c47220c83752cdfb082289935df",
+      "status": "PASS",
+      "cases": 3
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/be4ede3b0288899ff661ddca1c949b4e5b24db393d4277c6acc7f75da0d04608/powerloss.json",
+      "sha256": "1d74dfbffeb9a38a9f4aa3c5c6f1a587e37af0ca0deda540c9c98b70a6d638f3",
+      "status": "PASS",
+      "cases": 2
+    }
+  ],
+  "limits": [
+    "Existing offline fixtures; integration logger/startup models retained. Not a source-completeness or hardware certification. Alignment, setters and manifest still require candidate-specific reconciliation before promotion."
+  ]
+}

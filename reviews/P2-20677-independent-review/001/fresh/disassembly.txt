@@ -1,0 +1,51 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp6qeshd68/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047ab6c <.text>:
+  47ab6c:	b578      	push	{r3, r4, r5, r6, lr}
+  47ab6e:	b089      	sub	sp, #36	@ 0x24
+  47ab70:	0004      	movs	r4, r0
+  47ab72:	000d      	movs	r5, r1
+  47ab74:	49bb      	ldr	r1, [pc, #748]	@ (47ae64 <.text+0x2f8>)
+  47ab76:	002a      	movs	r2, r5
+  47ab78:	b292      	uxth	r2, r2
+  47ab7a:	20c8      	movs	r0, #200	@ 0xc8
+  47ab7c:	4342      	muls	r2, r0
+  47ab7e:	eb01 0602 	add.w	r6, r1, r2
+  47ab82:	0028      	movs	r0, r5
+  47ab84:	b280      	uxth	r0, r0
+  47ab86:	280a      	cmp	r0, #10
+  47ab88:	da07      	bge.n	47ab9a <.text+0x2e>
+  47ab8a:	f896 002f 	ldrb.w	r0, [r6, #47]	@ 0x2f
+  47ab8e:	2800      	cmp	r0, #0
+  47ab90:	d003      	beq.n	47ab9a <.text+0x2e>
+  47ab92:	f896 0030 	ldrb.w	r0, [r6, #48]	@ 0x30
+  47ab96:	2800      	cmp	r0, #0
+  47ab98:	d121      	bne.n	47abde <.text+0x72>
+  47ab9a:	f7c2 fa98 	bl	43d0ce <.text-0x3da9e>
+  47ab9e:	0780      	lsls	r0, r0, #30
+  47aba0:	d50c      	bpl.n	47abbc <.text+0x50>
+  47aba2:	f8df 09d8 	ldr.w	r0, [pc, #2520]	@ 47b57c <.text+0xa10>
+  47aba6:	9001      	str	r0, [sp, #4]
+  47aba8:	f240 4035 	movw	r0, #1077	@ 0x435
+  47abac:	9000      	str	r0, [sp, #0]
+  47abae:	f8df 39d0 	ldr.w	r3, [pc, #2512]	@ 47b580 <.text+0xa14>
+  47abb2:	4a86      	ldr	r2, [pc, #536]	@ (47adcc <.text+0x260>)
+  47abb4:	499c      	ldr	r1, [pc, #624]	@ (47ae28 <.text+0x2bc>)
+  47abb6:	2001      	movs	r0, #1
+  47abb8:	f7c2 fcdc 	bl	43d574 <.text-0x3d5f8>
+  47abbc:	f7c2 fa87 	bl	43d0ce <.text-0x3da9e>
+  47abc0:	07c0      	lsls	r0, r0, #31
+  47abc2:	d403      	bmi.n	47abcc <.text+0x60>
+  47abc4:	f7c2 fa83 	bl	43d0ce <.text-0x3da9e>
+  47abc8:	0740      	lsls	r0, r0, #29
+  47abca:	d506      	bpl.n	47abda <.text+0x6e>
+  47abcc:	f8df 29b4 	ldr.w	r2, [pc, #2484]	@ 47b584 <.text+0xa18>
+  47abd0:	0011      	movs	r1, r2
+  47abd2:	f05f 6080 	movs.w	r0, #67108864	@ 0x4000000
+  47abd6:	f7c2 f962 	bl	43ce9e <.text-0x3dcce>
+  47abda:	2000      	movs	r0, #0
+  47abdc:	e083      	b.n	47ace6 <.text+0x17a>

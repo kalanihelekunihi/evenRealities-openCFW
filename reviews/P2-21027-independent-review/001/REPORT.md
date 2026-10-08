@@ -1,0 +1,1 @@
+Partial/unaccepted:20bytesEEFC..EF10 fivealignedliteralwords. EverywordmappedPCloadconsumerfrom21424retainedandcomponenthasheschecked. Diagnosticvaluesretainedverbatim; pointedownership/otherconsumersunproven. No C/freeze/completenessclaim.

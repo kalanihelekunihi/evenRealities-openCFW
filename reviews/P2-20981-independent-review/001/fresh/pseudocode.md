@@ -1,0 +1,4 @@
+# Three-byte runtime state message with fresh diagnostic reads
+
+Partial/unaccepted;124instructionbytes47E58E..47E60A. PUSH R3,R4,LR12;SP-=20,total32.43C0E4(SP+16,3,0,liveR3);explicitSP16byte9. R4=literalE60Cstatepointer;freshbyte0→SP17,freshbyte1→SP18,distinctreadtimes. SP0=5;465480(16,SP+16,3,0)withfifthstackarg5;sendresultignoredbyfollowinghelpers.
+Fresh43D0CEbit1set→independentlyfreshstatebyte1→SP12,freshstatebyte0→SP8,SP4=literalE668,SP0=154;43D574(4,literalE624,literalE620,literalE66C),fourstackargs. Thenfresh43D0CEbit0set→masklogger;elseanotherfreshcallbit2set→masklogger. Maskloggerfreshstatebyte1→SP0,freshstatebyte0→R3;43CE9E(10800000hex,literalE670,literalE670,R3),fifthstackargfreshbyte1. Theseobservationsmustnotreusepayloadbytesorstructureloggerreads. ReturnliveR0fromlastflaghelperormasklogger,noforcedzero. SP+=24discards20localsandsavedentryR3;POP R4,PC8 restoresR4. No C/freeze/completenessclaim.

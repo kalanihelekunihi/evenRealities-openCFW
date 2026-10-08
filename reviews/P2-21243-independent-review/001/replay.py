@@ -1,0 +1,17 @@
+from pathlib import Path
+import json,hashlib,re,subprocess,tempfile
+b=Path('g2/build/pseudocode-first/20260930T190500Z');src=b/'attempts/P1-canonical-fixed-images-005/002/apollo_main-flash.bin';d=src.read_bytes();h=lambda x:hashlib.sha256(x).hexdigest();assert h(d)=='19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701';start=0x4823de;end=0x48246c
+with tempfile.TemporaryDirectory() as td:
+ t=Path(td);(t/'input.bin').write_bytes(d[start-0x438000:end-0x438000]);(t/'input.s').write_text('.syntax unified\n.cpu cortex-m55\n.thumb\n.text\n.incbin "'+str(t/'input.bin')+'"\n');subprocess.run(['/opt/homebrew/bin/arm-none-eabi-as',str(t/'input.s'),'-o',str(t/'input.o')],check=True);rawtext=subprocess.check_output(['/opt/homebrew/bin/arm-none-eabi-objdump','-D','-j','.text','-M','force-thumb','--adjust-vma='+hex(start),str(t/'input.o')],text=True)
+rows=[];cursor=start
+for line in rawtext.splitlines():
+ m=re.match(r'\s*([0-9a-f]+):\s+([0-9a-f]{4}(?: [0-9a-f]{4})?)\s+([^\s]+)\s*(.*)',line)
+ if not m:continue
+ a=int(m[1],16)
+ if not start<=a<end:continue
+ raw=b''.join(int(v,16).to_bytes(2,'little') for v in m[2].split());assert a==cursor and raw==d[a-0x438000:a-0x438000+len(raw)];cursor+=len(raw);rows.append(dict(address=a,bytes=raw.hex(),mnemonic=m[3],operands=m[4]))
+assert cursor==end,(hex(cursor),hex(end),rawtext)
+o=b/'analysis/review-isolated-P2-21243/fresh';o.mkdir(parents=True,exist_ok=True);(o/'instructions.json').write_text(json.dumps([dict(start=start,end=end,instructions=rows)],indent=2)+'\n');(o/'disassembly.txt').write_text(rawtext);refs=sorted(set(int(m[1],16) for row in rows if (m:=re.search(r'@\s*\(?([0-9a-f]{6,8})',row['operands'])) and 'pc' in row['operands']))
+(o/'references.json').write_text(json.dumps([dict(address=a,bytes=d[a-0x438000:a-0x438000+4].hex(),value=int.from_bytes(d[a-0x438000:a-0x438000+4],'little')) for a in refs],indent=2)+'\n')
+(o/'pseudocode.md').write_text('# Signed modifier argument loading and sign prefix\n\nPartial/unaccepted; 142 instruction bytes 4823DE..48246C in 481836 formatter 232-byte frame. Fresh byte SP66 modifier: 98 byte, 104 halfword, 106/113 aligned doubleword, 108 and all other values ordinary word. Byte/halfword/word paths freshly load cursor [R9] into R1, load word [R1] into R0 with postincrement4, store updated cursor [R9], then SXTB/SXTH/retain full R0 respectively. Common 48243E R1=ASR(R0,31). Doubleword path fresh cursor R0; R2=(R0+7 modulo 2^32)&~7, store aligned cursor before LDRD R0/R1 from [R2]; increment R2 by8 and store cursor; skip sign extension. Store raw R0/R1 pair SP8/SP12.\n\nCompare high word R1 against0; negative sign selects fresh SP28 count R0 and R1=45, branch prefix store. Nonnegative path freshly reads halfword SP64; LSL30 tests flag bit1, if set select fresh SP28 count and ASCII43 plus. Otherwise LSL31 on retained flags halfword tests bit0; clear branches unresolved48246C, set selects fresh SP28 and ASCII32 space. Prefix store uses R2=SP72, store lowbyte R1 at [R2+R0] before incrementing R0 and storing updated SP28. Fallthrough48246C unresolved. This range stores the signed raw argument without negating its magnitude; preserve ordered cursor/argument/prefix stores and exact flag read width. No C, freeze, whole coverage or equality claim.\n')
+(o/'replay.py').write_bytes(Path(__file__).read_bytes());(o/'receipt.json').write_text(json.dumps(dict(accepted=False,status='partial',input_sha256=h(d),instruction_bytes=end-start,files={p.name:h(p.read_bytes()) for p in o.iterdir()}),indent=2)+'\n');print('PASS',end-start)

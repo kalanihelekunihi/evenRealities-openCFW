@@ -1,0 +1,170 @@
+{
+  "status": "PARTIAL",
+  "functions": [
+    {
+      "function": "ReadSimpleMode",
+      "address": "0x7e44",
+      "bytes": 36,
+      "exact": true,
+      "source_linked_sha256": "a1b8e82ac2651b58c7c34894e6f505a38ff4d792c743bc741f8e30a49cabb23c",
+      "stock_sha256": "a1b8e82ac2651b58c7c34894e6f505a38ff4d792c743bc741f8e30a49cabb23c",
+      "mismatch_offsets": []
+    },
+    {
+      "function": "CalcChecksum",
+      "address": "0x7e68",
+      "bytes": 60,
+      "exact": false,
+      "source_linked_sha256": "037729add507eee7a7340777a0fc8452c1f7de4ffa4589983eb9276e6785d7fd",
+      "stock_sha256": "7d97e84c7b28750fd51177cdb4d88e36e5c23e53a0d1e1d8dc1be57f488371b7",
+      "mismatch_offsets": [
+        "0x10",
+        "0x11",
+        "0x12",
+        "0x13",
+        "0x14",
+        "0x15",
+        "0x16",
+        "0x17",
+        "0x18",
+        "0x1a",
+        "0x1b",
+        "0x1c",
+        "0x1d",
+        "0x1e",
+        "0x1f",
+        "0x20",
+        "0x21",
+        "0x22",
+        "0x23",
+        "0x24",
+        "0x25",
+        "0x28",
+        "0x38"
+      ]
+    },
+    {
+      "function": "WriteRow",
+      "address": "0x7ea4",
+      "bytes": 100,
+      "exact": true,
+      "source_linked_sha256": "0bc30edbfb30a83a1ccac95ad9ec6f1c3fb8708682654a2400fa06ad1b9b414f",
+      "stock_sha256": "0bc30edbfb30a83a1ccac95ad9ec6f1c3fb8708682654a2400fa06ad1b9b414f",
+      "mismatch_offsets": []
+    },
+    {
+      "function": "CalculateRowChecksum",
+      "address": "0x7f6c",
+      "bytes": 12,
+      "exact": true,
+      "source_linked_sha256": "2ba000540258b6a9a9ba82ebb49ca0b88bd3bd0949cdafd72a75a9081450034f",
+      "stock_sha256": "2ba000540258b6a9a9ba82ebb49ca0b88bd3bd0949cdafd72a75a9081450034f",
+      "mismatch_offsets": []
+    },
+    {
+      "function": "GetStoredRowChecksum",
+      "address": "0x7f78",
+      "bytes": 4,
+      "exact": true,
+      "source_linked_sha256": "a89b85f8bccd76763270edbe8d4a9000e557118189ef0a663b750b93593d16da",
+      "stock_sha256": "a89b85f8bccd76763270edbe8d4a9000e557118189ef0a663b750b93593d16da",
+      "mismatch_offsets": []
+    },
+    {
+      "function": "CheckRowChecksum",
+      "address": "0x7f7c",
+      "bytes": 36,
+      "exact": true,
+      "source_linked_sha256": "c708f682a6ab757103335cd057bd00b8501516d4065325b420a8adfdd3261fef",
+      "stock_sha256": "c708f682a6ab757103335cd057bd00b8501516d4065325b420a8adfdd3261fef",
+      "mismatch_offsets": []
+    },
+    {
+      "function": "GetStoredSeqNum",
+      "address": "0x7fa0",
+      "bytes": 4,
+      "exact": true,
+      "source_linked_sha256": "a78fc9996461c9de89dede305a4ebaddf18e69f73df2a59a239610bf4bdef4cd",
+      "stock_sha256": "a78fc9996461c9de89dede305a4ebaddf18e69f73df2a59a239610bf4bdef4cd",
+      "mismatch_offsets": []
+    },
+    {
+      "function": "DefineLastWrittenRow",
+      "address": "0x7fa4",
+      "bytes": 180,
+      "exact": true,
+      "source_linked_sha256": "7e63a908bdbdb8f5b9dc8f72604a11ef897ee83bdf7535af0e8ff09806ee727c",
+      "stock_sha256": "7e63a908bdbdb8f5b9dc8f72604a11ef897ee83bdf7535af0e8ff09806ee727c",
+      "mismatch_offsets": []
+    },
+    {
+      "function": "CheckLastWrittenRowIntegrity",
+      "address": "0x8058",
+      "bytes": 180,
+      "exact": true,
+      "source_linked_sha256": "286c45e6d0848460de891add363887fb196750bf3ef15413ac551d7ba1d0dfb6",
+      "stock_sha256": "286c45e6d0848460de891add363887fb196750bf3ef15413ac551d7ba1d0dfb6",
+      "mismatch_offsets": []
+    },
+    {
+      "function": "GetNextRowPointer",
+      "address": "0x810c",
+      "bytes": 30,
+      "exact": true,
+      "source_linked_sha256": "00fc76e2fad394e1198eef32b50b40daf7bdade26f76e741737ad0a423dca912",
+      "stock_sha256": "00fc76e2fad394e1198eef32b50b40daf7bdade26f76e741737ad0a423dca912",
+      "mismatch_offsets": []
+    },
+    {
+      "function": "GetReadRowPointer",
+      "address": "0x812a",
+      "bytes": 34,
+      "exact": true,
+      "source_linked_sha256": "d64fbb674f6948beae83020c28b3e983d4766f4f055f2f87b5ca48d29ba20f8f",
+      "stock_sha256": "d64fbb674f6948beae83020c28b3e983d4766f4f055f2f87b5ca48d29ba20f8f",
+      "mismatch_offsets": []
+    },
+    {
+      "function": "CopyHistoricData",
+      "address": "0x814c",
+      "bytes": 180,
+      "exact": true,
+      "source_linked_sha256": "dac781de779872a8ea6b60d356d2ee018ae7142f9995bcddba021f606cb39f6d",
+      "stock_sha256": "dac781de779872a8ea6b60d356d2ee018ae7142f9995bcddba021f606cb39f6d",
+      "mismatch_offsets": []
+    },
+    {
+      "function": "ReadExtendedMode",
+      "address": "0x82e0",
+      "bytes": 628,
+      "exact": true,
+      "source_linked_sha256": "f2605d42cc04851e25b304dab5ec1550aff6523ea4b66ba64f149505aba69ac9",
+      "stock_sha256": "f2605d42cc04851e25b304dab5ec1550aff6523ea4b66ba64f149505aba69ac9",
+      "mismatch_offsets": []
+    },
+    {
+      "function": "Cy_Em_EEPROM_Read",
+      "address": "0x8a78",
+      "bytes": 52,
+      "exact": true,
+      "source_linked_sha256": "48f8d5db9efae6f0ee457296efcbd427f867ce1ba44507ce6e0f2e492cbab2da",
+      "stock_sha256": "48f8d5db9efae6f0ee457296efcbd427f867ce1ba44507ce6e0f2e492cbab2da",
+      "mismatch_offsets": []
+    }
+  ],
+  "exact_bytes": 1476,
+  "sdk_pin": "6cacf37b5cfec2dc9acf1a2c222c1e3038d03bd9",
+  "block_storage_pin": "8704a8bd913c6c93200f04ac052601c7728ff891",
+  "external_link_addresses": {
+    "__aeabi_uidiv": "0xa6c1",
+    "__aeabi_uidivmod": "0xa7cd",
+    "memset": "0xa9d5"
+  },
+  "limits": [
+    "RealSDKcandidate bodies and literals linked at recovered addresses; exact comparison includes resolvedBLrelocations, no masking.",
+    "Three external address symbols are contracts, not linked implementation source or executable replacements.",
+    "Relocatable compilation used existing system shim plus cy_israddress prototype; no emulator/device execution of SDK image.",
+    "14 selected bodies only; CopyHeadersData and other family bodies not admitted as exact.",
+    "Matching candidate does not uniquely identify producing SDK revision; no wholefirmware source/byteequality claim."
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "utc": "2026-10-07T02:25:20.165848+00:00",
+  "image_sha256": "6bef4edbcece2022ee41b9670cd4eff295fc62bb697e00e180c4efce8812c259",
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "functions": [
+    {
+      "name": "registrar",
+      "start": "0x430280",
+      "end_exclusive": "0x4303bc",
+      "bytes": 316,
+      "body_sha256": "41b2abc6111a25a5b0ee15e4c3e877aaa486b631855ca3dd75fb388d55dd1391",
+      "classification": "new-native-body",
+      "symbol": "opencfw_bl_descriptor_register",
+      "source_entry": "0x34d88"
+    },
+    {
+      "name": "mask-status",
+      "start": "0x41dcca",
+      "end_exclusive": "0x41de3c",
+      "bytes": 370,
+      "body_sha256": "dadae7e28f6139e7569f6d53c40b7e162244c4e03641e85cae8edff269ac23ab",
+      "classification": "new-native-body",
+      "symbol": "opencfw_boot_gpio_mask_status",
+      "source_entry": "0x34a30"
+    },
+    {
+      "name": "mask-clear",
+      "start": "0x41de3c",
+      "end_exclusive": "0x41df48",
+      "bytes": 268,
+      "body_sha256": "bf3576c1265eaa074742588cad51ffe45e971429d3e9ba6fb52b2a1f62689f04",
+      "classification": "new-native-body",
+      "symbol": "opencfw_boot_gpio_mask_clear",
+      "source_entry": "0x34adc"
+    },
+    {
+      "name": "callback-register",
+      "start": "0x41e000",
+      "end_exclusive": "0x41e09a",
+      "bytes": 154,
+      "body_sha256": "9216a0ee7383c93a2252527cc815b8a63b283f39b0f483399b864c266e2f7bce",
+      "classification": "new-native-body",
+      "symbol": "opencfw_boot_gpio_callback_register",
+      "source_entry": "0x34b54"
+    },
+    {
+      "name": "interrupt-control",
+      "start": "0x41da84",
+      "end_exclusive": "0x41dcca",
+      "bytes": 582,
+      "body_sha256": "f5887f0b1e495bdaec65ef07723005e6d8cf8b7a342e1d2fc81353df4f03df4d",
+      "classification": "new-native-body",
+      "symbol": "opencfw_boot_gpio_interrupt_control",
+      "source_entry": "0x34b8c"
+    },
+    {
+      "name": "priority",
+      "start": "0x43025c",
+      "end_exclusive": "0x430280",
+      "bytes": 36,
+      "body_sha256": "ecf2bd6399d01eec88b38fd549bb5c511b6e5c06de2741cd54904269245e4f55",
+      "classification": "new-native-body",
+      "symbol": "opencfw_boot_gpio_priority",
+      "source_entry": "0x34d60"
+    },
+    {
+      "name": "nvic-enable-reused",
+      "start": "0x430240",
+      "end_exclusive": "0x43025c",
+      "bytes": 28,
+      "body_sha256": "5f76b9bde6a1e386ed0ecb96e419aab2895f1cd30353dfac8bd7ef39b6fbd6c0",
+      "classification": "reused-native-helper",
+      "symbol": "opencfw_boot_context_nvic_enable",
+      "source_entry": "0x342c0"
+    }
+  ],
+  "new_native_body_bytes": 1726,
+  "visited_new_native_body_bytes": 1720,
+  "source": "g2/components/bootloader/initializer_callbacks/gpio_descriptors.c",
+  "source_sha256": "0f209397b850c64a105a1dd46d5fe46beb59d95579bf7d178f33de85d5f8b280",
+  "source_defined_noncode_bytes": 1172,
+  "limits": [
+    "Body ownership/trace visitation is not all inputs, hardware behavior, source completeness or byte-identical compilation.",
+    "28-byte original zero-fill helper is explicitly modeled due independently reproduced Unicorn failure; its56 original wrapper/loop bytes are not claimed visited by this suite.",
+    "NVIC430240 reuses existing context_nvic source; helper41d8f8 has22 original bytes inlined in control, not a separate emitted function."
+  ],
+  "unvisited_new_body_bytes": {
+    "0x41dac2..0x41dac6": "Pin-index helper always returns0; error arm not reached.",
+    "0x41dafa..0x41dafc": "Control validated as byte0..3 before switch; default branch not reached."
+  }
+}

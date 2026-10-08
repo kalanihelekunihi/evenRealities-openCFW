@@ -1,0 +1,33 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmphp7l0e0g/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+004807a0 <.text>:
+  4807a0:	b580      	push	{r7, lr}
+  4807a2:	ee00 0a10 	vmov	s0, r0
+  4807a6:	eeb8 0a40 	vcvt.f32.u32	s0, s0
+  4807aa:	eebf 0aed 	vcvt.u32.f32	s0, s0, #5
+  4807ae:	ee10 0a10 	vmov	r0, s0
+  4807b2:	4911      	ldr	r1, [pc, #68]	@ (4807f8 <.text+0x58>)
+  4807b4:	6809      	ldr	r1, [r1, #0]
+  4807b6:	f3c1 01c1 	ubfx	r1, r1, #3, #2
+  4807ba:	2902      	cmp	r1, #2
+  4807bc:	d001      	beq.n	4807c2 <.text+0x22>
+  4807be:	210f      	movs	r1, #15
+  4807c0:	e010      	b.n	4807e4 <.text+0x44>
+  4807c2:	ee00 0a10 	vmov	s0, r0
+  4807c6:	eeb8 0a40 	vcvt.f32.u32	s0, s0
+  4807ca:	eddf 0a09 	vldr	s1, [pc, #36]	@ 4807f0 <.text+0x50>
+  4807ce:	ee20 0a20 	vmul.f32	s0, s0, s1
+  4807d2:	eddf 0a08 	vldr	s1, [pc, #32]	@ 4807f4 <.text+0x54>
+  4807d6:	ee80 0a20 	vdiv.f32	s0, s0, s1
+  4807da:	eebc 0ac0 	vcvt.u32.f32	s0, s0
+  4807de:	ee10 0a10 	vmov	r0, s0
+  4807e2:	2118      	movs	r1, #24
+  4807e4:	4281      	cmp	r1, r0
+  4807e6:	d202      	bcs.n	4807ee <.text+0x4e>
+  4807e8:	1a40      	subs	r0, r0, r1
+  4807ea:	f77f f429 	bl	40 <.text-0x480760>
+  4807ee:	bd01      	pop	{r0, pc}

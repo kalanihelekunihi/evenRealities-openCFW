@@ -1,0 +1,52 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp8uvb2x96/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047d35c <.text>:
+  47d35c:	f7dd f904 	bl	45a568 <.text-0x22df4>
+  47d360:	7929      	ldrb	r1, [r5, #4]
+  47d362:	b2c0      	uxtb	r0, r0
+  47d364:	4281      	cmp	r1, r0
+  47d366:	d169      	bne.n	47d43c <.text+0xe0>
+  47d368:	f7bf feb1 	bl	43d0ce <.text-0x4028e>
+  47d36c:	0780      	lsls	r0, r0, #30
+  47d36e:	d50f      	bpl.n	47d390 <.text+0x34>
+  47d370:	79a8      	ldrb	r0, [r5, #6]
+  47d372:	9002      	str	r0, [sp, #8]
+  47d374:	f8df 05f4 	ldr.w	r0, [pc, #1524]	@ 47d96c <.text+0x610>
+  47d378:	9001      	str	r0, [sp, #4]
+  47d37a:	207e      	movs	r0, #126	@ 0x7e
+  47d37c:	9000      	str	r0, [sp, #0]
+  47d37e:	f8df 3590 	ldr.w	r3, [pc, #1424]	@ 47d910 <.text+0x5b4>
+  47d382:	f8df 2590 	ldr.w	r2, [pc, #1424]	@ 47d914 <.text+0x5b8>
+  47d386:	f8df 1590 	ldr.w	r1, [pc, #1424]	@ 47d918 <.text+0x5bc>
+  47d38a:	2004      	movs	r0, #4
+  47d38c:	f7c0 f8f2 	bl	43d574 <.text-0x3fde8>
+  47d390:	f7bf fe9d 	bl	43d0ce <.text-0x4028e>
+  47d394:	07c0      	lsls	r0, r0, #31
+  47d396:	d403      	bmi.n	47d3a0 <.text+0x44>
+  47d398:	f7bf fe99 	bl	43d0ce <.text-0x4028e>
+  47d39c:	0740      	lsls	r0, r0, #29
+  47d39e:	d507      	bpl.n	47d3b0 <.text+0x54>
+  47d3a0:	f8df 15cc 	ldr.w	r1, [pc, #1484]	@ 47d970 <.text+0x614>
+  47d3a4:	79ab      	ldrb	r3, [r5, #6]
+  47d3a6:	000a      	movs	r2, r1
+  47d3a8:	f05f 5082 	movs.w	r0, #272629760	@ 0x10400000
+  47d3ac:	f7bf fd77 	bl	43ce9e <.text-0x404be>
+  47d3b0:	79a8      	ldrb	r0, [r5, #6]
+  47d3b2:	2801      	cmp	r0, #1
+  47d3b4:	d10e      	bne.n	47d3d4 <.text+0x78>
+  47d3b6:	f8df 0548 	ldr.w	r0, [pc, #1352]	@ 47d900 <.text+0x5a4>
+  47d3ba:	7801      	ldrb	r1, [r0, #0]
+  47d3bc:	f051 0104 	orrs.w	r1, r1, #4
+  47d3c0:	7001      	strb	r1, [r0, #0]
+  47d3c2:	f000 fa84 	bl	47d8ce <.text+0x572>
+  47d3c6:	b2f6      	uxtb	r6, r6
+  47d3c8:	4286      	cmp	r6, r0
+  47d3ca:	d001      	beq.n	47d3d0 <.text+0x74>
+  47d3cc:	2401      	movs	r4, #1
+  47d3ce:	e0a1      	b.n	47d514 <.text+0x1b8>
+  47d3d0:	2400      	movs	r4, #0
+  47d3d2:	e09f      	b.n	47d514 <.text+0x1b8>

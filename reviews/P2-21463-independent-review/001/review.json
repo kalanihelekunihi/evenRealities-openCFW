@@ -1,0 +1,27 @@
+{
+  "review_id": "P2-21463-independent-review",
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-ordered-helper-pair-three-byte-field-initialize-prefix-21862-map/001",
+  "status": "partial",
+  "accepted": false,
+  "checks": {
+    "fresh_replay": "pass",
+    "instruction_bytes": 152,
+    "instructions_match": true,
+    "references_match": true,
+    "padding_halfword": "0x484A96",
+    "wrapper_frame_bytes": 16,
+    "open_frame_bytes": 32,
+    "copy_dest_offsets": [
+      48,
+      51,
+      54
+    ],
+    "copy_length": 3,
+    "third_clear_helper_r0": 0
+  },
+  "limitations": [
+    "external helper contracts unresolved",
+    "continuation beyond third copy unresolved",
+    "no whole-routine coverage or acceptance claim"
+  ]
+}

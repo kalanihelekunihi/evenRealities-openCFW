@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "cases": 956,
+  "elf_sha256": "08ae6d1a2f918716fa3b5a87d135f5975a755c73f62e3240e87009c0d8b538b7",
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "visited_body_bytes": {
+    "write": 62,
+    "read": 32,
+    "20": 22,
+    "24": 26,
+    "28": 22,
+    "30": 22,
+    "34": 22,
+    "38": 22
+  },
+  "limits": [
+    "Native original/source leaves; only registered callback bodies controlled. No SRAM write hooks. MMIO is mapped memory, not hardware.",
+    "No-argument callback registers are unspecified; comparison records call occurrence/status only. Two-byte callback arguments compare exactly.",
+    "Standalone prerequisite module; initializer and integrated-image reachability not established."
+  ]
+}

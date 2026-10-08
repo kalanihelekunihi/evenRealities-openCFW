@@ -1,0 +1,5 @@
+# Wide radix digit loop and numeric output handoff
+
+Partial/unaccepted;114 instructionbytes4832DC..48334E,continues48329C104-byteframe. EntryhelperreturnedR2rawdigit;R0=oldR9count,R9=R0+1mod;R1=UXTB(R2),signedbytecompare10. Lowbyte<10R2+=48mod;elseflagsR8bit5 chooses65or97 inR1,R2+=R1then-=10mod. R1=SP28,storelowbyteR2[buffer+oldcountR0]. Call47CC60(R0=R4,R1=R5,R2=R6,R3=R7);returnedR0/R1→R4/R5. Fullpairzero→483320;elseunsignedR9<32→4832D0firsthelpercall,repeatremainderflow;otherwise483320. Helpersemanticcontractunresolved;noteTWOcallsoncurrentpairperiteration,firstR2consumedthen secondR0/R1retained.
+
+Common483320 R3=R10,R2=R11;freshSP64context→R1,SP60callback→R0;storeR8flagsSP24;freshSP132→R4→SP20;freshSP128→R4→SP16;R6lowradixword→SP12;freshbyteSP112→R4→SP8fullword;R9count→SP4;R4=SP28buffer→SP0;call4830DA. RetainR0;ADDSP68bypasses60localsandtwo savedentryR0/R1slots;POP{R4,R5,R6,R7,R8,R9,R10,R11,PC}36bytes,total104released. Following48334E..350zeroexcluded. Preservefreshread/storeorder,lowradixwordhandoff andentryposition/contextrestoration. No C,freeze,wholecoverage or equalityclaim.

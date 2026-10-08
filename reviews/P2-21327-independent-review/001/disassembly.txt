@@ -1,0 +1,55 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpqunjn9i2/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+004832dc <.text>:
+  4832dc:	4648      	mov	r0, r9
+  4832de:	f110 0901 	adds.w	r9, r0, #1
+  4832e2:	0011      	movs	r1, r2
+  4832e4:	b2c9      	uxtb	r1, r1
+  4832e6:	290a      	cmp	r1, #10
+  4832e8:	da01      	bge.n	4832ee <.text+0x12>
+  4832ea:	3230      	adds	r2, #48	@ 0x30
+  4832ec:	e007      	b.n	4832fe <.text+0x22>
+  4832ee:	ea5f 6188 	movs.w	r1, r8, lsl #26
+  4832f2:	d501      	bpl.n	4832f8 <.text+0x1c>
+  4832f4:	2141      	movs	r1, #65	@ 0x41
+  4832f6:	e000      	b.n	4832fa <.text+0x1e>
+  4832f8:	2161      	movs	r1, #97	@ 0x61
+  4832fa:	1852      	adds	r2, r2, r1
+  4832fc:	3a0a      	subs	r2, #10
+  4832fe:	a907      	add	r1, sp, #28
+  483300:	540a      	strb	r2, [r1, r0]
+  483302:	0020      	movs	r0, r4
+  483304:	0029      	movs	r1, r5
+  483306:	0032      	movs	r2, r6
+  483308:	003b      	movs	r3, r7
+  48330a:	f7f9 fca9 	bl	47cc60 <.text-0x667c>
+  48330e:	0004      	movs	r4, r0
+  483310:	000d      	movs	r5, r1
+  483312:	2d00      	cmp	r5, #0
+  483314:	d101      	bne.n	48331a <.text+0x3e>
+  483316:	2c00      	cmp	r4, #0
+  483318:	d002      	beq.n	483320 <.text+0x44>
+  48331a:	f1b9 0f20 	cmp.w	r9, #32
+  48331e:	d3d7      	bcc.n	4832d0 <.text-0xc>
+  483320:	4653      	mov	r3, sl
+  483322:	465a      	mov	r2, fp
+  483324:	9910      	ldr	r1, [sp, #64]	@ 0x40
+  483326:	980f      	ldr	r0, [sp, #60]	@ 0x3c
+  483328:	f8cd 8018 	str.w	r8, [sp, #24]
+  48332c:	9c21      	ldr	r4, [sp, #132]	@ 0x84
+  48332e:	9405      	str	r4, [sp, #20]
+  483330:	9c20      	ldr	r4, [sp, #128]	@ 0x80
+  483332:	9404      	str	r4, [sp, #16]
+  483334:	9603      	str	r6, [sp, #12]
+  483336:	f89d 4070 	ldrb.w	r4, [sp, #112]	@ 0x70
+  48333a:	9402      	str	r4, [sp, #8]
+  48333c:	f8cd 9004 	str.w	r9, [sp, #4]
+  483340:	ac07      	add	r4, sp, #28
+  483342:	9400      	str	r4, [sp, #0]
+  483344:	f7ff fec9 	bl	4830da <.text-0x202>
+  483348:	b011      	add	sp, #68	@ 0x44
+  48334a:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}

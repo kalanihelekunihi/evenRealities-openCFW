@@ -1,0 +1,106 @@
+{
+  "elf_sha256": "be4ede3b0288899ff661ddca1c949b4e5b24db393d4277c6acc7f75da0d04608",
+  "status": "PASS",
+  "inputs": 635,
+  "linked_objects": 161,
+  "post_run_hash_mismatches": [],
+  "profiles": [
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/be4ede3b0288899ff661ddca1c949b4e5b24db393d4277c6acc7f75da0d04608/comparison.json",
+      "sha256": "8f2b33fab5e46d4d0b2fcbe11248c164f22b4cebbf65ddb14c150f2d575b5ffa",
+      "status": "PASS",
+      "cases": 2
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/be4ede3b0288899ff661ddca1c949b4e5b24db393d4277c6acc7f75da0d04608/failures.json",
+      "sha256": "90e3a7b2f7edda3965f03b203b1f875ab10c8c47220c83752cdfb082289935df",
+      "status": "PASS",
+      "cases": 3
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/be4ede3b0288899ff661ddca1c949b4e5b24db393d4277c6acc7f75da0d04608/powerloss.json",
+      "sha256": "1d74dfbffeb9a38a9f4aa3c5c6f1a587e37af0ca0deda540c9c98b70a6d638f3",
+      "status": "PASS",
+      "cases": 2
+    }
+  ],
+  "limits": [
+    "Offline modeled integration; six FP64 effects remain modeled. Logger/startup integration cuts remain; direct suites validate new bodies with documented lower stubs.",
+    "No physical UART drain, real IRQ/task schedule, source-complete build or byte equality certified."
+  ],
+  "additional_tests": [
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/elog-output/setters-be4.json",
+      "sha256": "df92689410165a8bb772061ce360125c680b7c617902b2e9132878b387bd0efe",
+      "cases": 192
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/elog-output/elog_output.json",
+      "sha256": "7908e9ca795d3116ad254b61adade13ee46ce78c0c0472a60d3494685bb1debd",
+      "cases": 494
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/elog-output/elog_uart_tx.json",
+      "sha256": "db4d04799b48a2880e9a71da67b404fb031915fc3daa8a8dc57edcf25324ed95",
+      "cases": 222
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/elog-output/startup_alternatives.json",
+      "sha256": "e42f1585fe0c0d1227a2305541166e28f0a0f9d412df8b3404411a049178d363",
+      "cases": 64
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/elog-output/mutex_kernel.json",
+      "sha256": "2a56ca9e8e5996a5ef208cf1e440b50afa73475b62b40dc474d49844f897fd71",
+      "cases": 516
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/elog-output/mutex_sequences.json",
+      "sha256": "a723da39ebdb0f84a0a34c554520fa4be8e982d7a8b47bf9d18f51d7b70098e7",
+      "cases": 2
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/elog-output/mutex_block_boundary.json",
+      "sha256": "40150ce469cbf8d2e82b3e13ae3b31272e8a83cc291915115d937c5c21dee996",
+      "cases": 4
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/elog-output/isr_delivery.json",
+      "sha256": "d8dcd321f96bd97b3ac49308428e2cb62169407733929fe3219aff80e8841b76",
+      "cases": 1480
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/elog-output/isr_public_interfaces.json",
+      "sha256": "34752543683b909bc31a6e889390deb092873119fdd430b6ea4527d3a9f3205a",
+      "cases": 62
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/elog-output/isr_deferred_fifo.json",
+      "sha256": "954ebddc0795d5ce19a06ad71cf895cec573b83b9d4b591b5e2c6e1671dc5513",
+      "cases": 1
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/elog-output/service_records.json",
+      "sha256": "929b77b5c130c02ba8ae8173e5ecff2eb78131757a6e4a07d577c590a5152ce8",
+      "cases": 112
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/elog-output/service_startup_state.json",
+      "sha256": "14198d1ececa6c7eb283397181d57d46829c9013b1d957070ee83ed3be437564",
+      "cases": 1
+    }
+  ],
+  "alignment_mappings": 454,
+  "numeric_aliases": 34,
+  "promotion_status": "verified offline checkpoint; full source closure not achieved",
+  "fixture_adapters": [
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/elog-output/output-fixture-adapter.py",
+      "sha256": "de013275174221700ee35f8bfe3eb31c1de0fee6711539de3f98bde1d5110e39"
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/elog-output/setter-fixture-adapter.py",
+      "sha256": "15aa055e9ff2d87871caf378d32e1933ea84e556762ccb09f496803e9c70e60e"
+    }
+  ]
+}

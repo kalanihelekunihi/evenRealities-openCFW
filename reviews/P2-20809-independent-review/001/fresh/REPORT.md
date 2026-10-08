@@ -1,0 +1,1 @@
+Partial/unaccepted continuity47C164..47C276,274 instruction bytes,two maps. Pinned input and component hashes,gapless raw tiling and localbranch targets checked. Reset precedes ten-record stride200 loop; fresh guards and counter reloads; diagnostic SP0 writes alias saved returnR0. No wholecoverage/source/freezeclaim.

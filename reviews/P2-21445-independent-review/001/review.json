@@ -1,0 +1,26 @@
+{
+  "review_id": "P2-21445-independent-review",
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-eighty-eight-byte-record-create-initialize-parent-packed-copy-21844-map/001",
+  "status": "partial",
+  "accepted": false,
+  "checks": {
+    "fresh_replay": "pass",
+    "instruction_bytes": 102,
+    "instructions_match": true,
+    "references_match": true,
+    "frame_bytes": 32,
+    "allocation_size": 88,
+    "initializer_args": [
+      "newRecord",
+      "parent",
+      "UXTB(entryR6)",
+      "entryR7"
+    ]
+  },
+  "limitations": [
+    "initializer target implementation unresolved",
+    "allocator contract unresolved",
+    "exception behavior outside evidence",
+    "no whole-routine coverage or acceptance claim"
+  ]
+}

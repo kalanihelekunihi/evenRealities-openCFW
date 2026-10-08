@@ -1,0 +1,246 @@
+{
+  "utc": "2026-10-07T12:08:18.041882+00:00",
+  "status": "PASS",
+  "role": "Promoted bounded source-linked offline test checkpoint; root startup remains unresolved",
+  "elf_sha256": "129a6b2f38f145f33e791874f52d722fb1715d5fff5c957a285644312f34a6f9",
+  "profiles": [
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/129a6b2f38f145f33e791874f52d722fb1715d5fff5c957a285644312f34a6f9/comparison.json",
+      "sha256": "563847705644ac21438716835b681b4f6fc83f5738ecb82675a1280d19ac4e19",
+      "cases": 2
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/129a6b2f38f145f33e791874f52d722fb1715d5fff5c957a285644312f34a6f9/failures.json",
+      "sha256": "8a7e34ee192c2de55625cc44612151bf6a33515320268954ed43f016fc050a5a",
+      "cases": 3
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/129a6b2f38f145f33e791874f52d722fb1715d5fff5c957a285644312f34a6f9/powerloss.json",
+      "sha256": "f44073858fa2b8bcadacc34138f7fed8b0f527692b1099068f3e5e886e02ed13",
+      "cases": 2
+    }
+  ],
+  "total_cases": 7,
+  "additional_receipts": [
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/clock-config.json",
+      "sha256": "1c944bfcc4d2b40029677e5bfec2f55a2f77d813c0ecf15a3048ee3e313473f5",
+      "cases": 5896
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/clock-shared.json",
+      "sha256": "64942ff18e9451192bed4754c9afec61aa656e1589cf7690c1080e12dea235f2",
+      "cases": 129
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/clockmux-carry.json",
+      "sha256": "6831fcb7e304b5cb72c936f16cdafcf36d194e6027be196f098e3f848d26d37d",
+      "cases": 1024
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/clockmux-native.json",
+      "sha256": "ba432e210f85f2d6b9357b085a1f75d99e75b69b9104e4371a50fd50721c4b7d",
+      "cases": 14
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/config.json",
+      "sha256": "ad66a880d5b316e8da8d9ad96fd108de2151dd693a276880b4ccdcc0e7e13f66",
+      "cases": 697
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/dispatch-native.json",
+      "sha256": "54cfcd307158d29268a85e49363b9c473783ae6dd346c628a9d008e7ea7da242",
+      "cases": 400
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/elog_output.json",
+      "sha256": "9f05253be2a84f0e5bd6870b7d4778863e87eeafc0734589b88db39f806ab162",
+      "cases": 494
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/elog_uart_tx.json",
+      "sha256": "4b5a1bfb5e729f253779a869ed33d112253a399dd7f7a63a8242ad0efaef00d4",
+      "cases": 222
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/events-native.json",
+      "sha256": "e1487124f84cfdb49c48f52630d1a3d1c47f6ee8e8d3a3183f0eeb532c767fe6",
+      "cases": 72
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/formatter.json",
+      "sha256": "17660a05a673aea30035bc65f987256f648be3d045007b18c04ac9845450b110",
+      "cases": 1778
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/generators.json",
+      "sha256": "6644731f7eec5d894f5065b6a7682bed749ca61305669e496dc2d6995cd01ab8",
+      "cases": 688
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/init-leaves.json",
+      "sha256": "5266bc3bfe1a896b5f20bc543cbb0d2e002291169d6c4f3ff156a66ae72d60c2",
+      "cases": 956
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/isr_deferred_fifo.json",
+      "sha256": "284caf01624495866354d240866d8d8f98bb1663e56413256310a9cd75c121bd",
+      "cases": 1
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/isr_delivery.json",
+      "sha256": "d996e1330db3f6f6407a3f1e9c20ee1e93140fc167ac81a7a8a09528239feb1e",
+      "cases": 1480
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/isr_public_interfaces.json",
+      "sha256": "3b8991816f0803766236a0e9170070b4e658b9a4c4a97f3f603b38f87252e1aa",
+      "cases": 62
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/math.json",
+      "sha256": "a1495de8e2a2e0276bf392c652a52b620efc651664f86e19d2eb13fc750804ed",
+      "cases": 4311
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/memory-native.json",
+      "sha256": "c0c564a2565e810dc75d70a2a9d325ee7bc2547071daeeb4289be2e3bf3bd3ea",
+      "cases": 936
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/memory.json",
+      "sha256": "54f611020c36c6b873f48c2a97e9e4342ac3d1ba923ec4eaa881e81c2390098e",
+      "cases": 936
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/mode.json",
+      "sha256": "99d5a7a50474705f53beb7638c17f88300e8bd8602a971c9a5c7bd3f40f8ed5d",
+      "cases": 1394
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/mutex_block_boundary.json",
+      "sha256": "3cbf6c2416c7cca75cd372e86c99b87248f0930987c4c46fe10a53a702bc46d0",
+      "cases": 4
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/mutex_kernel.json",
+      "sha256": "403307a20eb2e1f0d197cc9310f7d98452a89e6d3a2423f4c5cf560cf8f08431",
+      "cases": 516
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/mutex_sequences.json",
+      "sha256": "fb5d10988a09eaf208d525b993e0f644ba195e333cc2b02b01934875803d2737",
+      "cases": 2
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/native-config.json",
+      "sha256": "1d69a5f5ee42f1d9997032c8da88f570af77305e59ca3048864694aef518e8f6",
+      "cases": 48
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/power-read.json",
+      "sha256": "9fde6dff4fd159f798ded199a4369658f34b3d4aa5fd5c2a3bca23276578c68b",
+      "cases": 10
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/power20.json",
+      "sha256": "59eb298200929778d2574890189606fd2bc6a693c0f021791f6f25af71c1da66",
+      "cases": 256
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/runtime-native.json",
+      "sha256": "cee50ab620060360a466362ff0db0def4eeacb10290dcbca98d4978f45d00e19",
+      "cases": 168
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/runtime.json",
+      "sha256": "cd00589a968fe3d565d60f518d3edcd4d38927497f1b9db62000e830b66c51c5",
+      "cases": 832
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/rx.json",
+      "sha256": "eb5f31a0143d72e54c2612fb87b871c8bc8c796d8267da46f5f133a7092c68cd",
+      "cases": 422
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/service_records.json",
+      "sha256": "d2ebf8544b6bc6f9e53013a3cfcfece7e676378e088d66f701c7453e3450f36e",
+      "cases": 112
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/service_startup_state.json",
+      "sha256": "f05ae58d07efbc066e0972af87d0d3de1dc77bf740e6cb531ebd210a34373932",
+      "cases": 1
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/setters.json",
+      "sha256": "89951160c21fa6041d8534a1ba523de37c9fa33580060a9b1b0c91bdd8a53c64",
+      "cases": 192
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/shutdown.json",
+      "sha256": "f2458adaebe03147b955b9dcc7c30dee8d740c3cfb88111c6d3365e1d39b15d1",
+      "cases": 903
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/startup-leaves-native-copy.json",
+      "sha256": "dc3d71b6f5bedc7c1f44c3f4ee6467595f49e8de233fbe425cf1d9683a86e91b",
+      "cases": 271
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/startup-native-copy.json",
+      "sha256": "b3aa0e3c9a7f35a5a75e785e2043d9b54a36be1e2e412cf77e090ba1537ff586",
+      "cases": 64
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/startup_alternatives.json",
+      "sha256": "bfc30cc6cfb83287600f8f3364577b7455f263f0b2bf004a797132796672da37",
+      "cases": 64
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/ton-state.json",
+      "sha256": "4342a7ffd73fb22531b86e888194a0c3452142534bcafa8315a76a49944f7521",
+      "cases": 796
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/ton-trim.json",
+      "sha256": "a19ce7128bc3254a46cfb9d54d2d9b7feb61e5751c852219c6427f22b831f6f0",
+      "cases": 124
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/wrapper.json",
+      "sha256": "88ac6486ef10f91ef703cfea88dbd0a6b8458cb3e597b603f5eefb2f364264c4",
+      "cases": 288
+    }
+  ],
+  "inputs": 705,
+  "linked_objects": 185,
+  "post_run_hash_mismatches": [],
+  "frozen_copies": "g2/build/bootloader-completion/source-image-compatible/snapshots/129a6b2f38f145f33e791874f52d722fb1715d5fff5c957a285644312f34a6f9/frozen-input-copies.json",
+  "frozen_copy_index_sha256": "2c43f9fc6072561dd06756b8be77f73c17db7f48cb7916e2255b78c003212b83",
+  "validation_input_manifest": {
+    "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/129a6b2f38f145f33e791874f52d722fb1715d5fff5c957a285644312f34a6f9/validation-input-hashes-final.json",
+    "sha256": "31a22b47fb2379f00b2ce6e8f68336d6463ae876712e97175eab056af22fd9f4"
+  },
+  "alignment_mappings": 518,
+  "numeric_aliases": 17,
+  "segments": 43,
+  "deduplicated_observed_original_instruction_bytes": 38764,
+  "manifest": {
+    "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/manifest.json",
+    "sha256": "3538867f1a8a3775384f4a67f2a028b2c6de2ea45bf19cc2b43e1093522f1822"
+  },
+  "alignment_receipt": {
+    "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-ton-129a/alignment.json",
+    "sha256": "0966236819db1e5a04b2d2fae62b3b3d1a7d8571b79c10a2cccc4690ca183b68"
+  },
+  "limits": [
+    "Seven integration cases retain existing startup/logger models; native direct suites do not establish new native integration reachability.",
+    "Four initial callbacks and their timer plus four event-family and three TON callback entries are source-defined in the component runtime. Remaining18 unique callback targets remain original-address contracts; root41c4b4 is still selected unbound OTA boundary.",
+    "Three TON callback entries are now source-defined: two trim hooks and state callback42f38e; six TON bodies total1000 bytes plus separately verified gate40-byte provider.796 state/gate/begin/end and124 trim comparisons use native source, gate and delay with resident ROM40 controlled; 22 locked-table apply bytes and4 begin bytes remain unvisited.",
+    "400 dispatcher comparisons use native INFO/ROM thunk, initial callbacks and timer, with resident ROM48 controlled. Corrected72 event comparisons use compiled event family and critical/delay providers, with ROM40 time controlled; exact unvisited branches remain in receipts.",
+    "14 clock-chain comparisons execute native indexed getter, selector2/4 GPIO contexts, delay/poll/power/PLL/cache with synthetic acknowledgement and ROM40 timing.1024 carry comparisons retain ten child cuts. Other GPIO selector branches are not proven by this suite.",
+    "Prepared-source object linker candidate; actual main Makefile rebuild equivalence has not been asserted. Mixed enum-size warnings remain; tested interfaces only.",
+    "External ROM bodies, six FP64 profile effects, physical hardware timing/coherence/drain/live scheduling, whole source completeness and byte equality remain unproven."
+  ]
+}

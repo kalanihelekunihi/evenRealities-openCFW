@@ -1,0 +1,5 @@
+{
+  "reason": "Omitting -fshort-enums did not force an incompatible ABI: this Arm GNU default already emits small enums (readelf Tag_ABI_enum_size).",
+  "repair": "Force -fno-short-enums for the wrong-ABI control; rerun and restore positive receipts.",
+  "limit": "No uniquely explicit producer flag inferred from the compatible small-enum profile."
+}

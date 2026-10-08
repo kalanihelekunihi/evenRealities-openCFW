@@ -1,0 +1,1 @@
+Partial/unaccepted:40bytesEB6C..EB94,tenalignedliteralwords. EverywordmappedPCloadconsumerfrom21384..21404retainedandcomponenthasheschecked. Init/object/counterpointersandliteralsretainedverbatim; pointedownership/otherconsumersunproven. No C/freeze/completenessclaim.

@@ -26,6 +26,7 @@
     "g2/components/bootloader/startup/reset.S": "81c29f458fe82b48c6303c8f7096a6477a6c3e3954b04ae62cd75d0fcbcdb042",
     "g2/components/bootloader/thread_creation/timer_commands.h": "6a97f9a0448e3bd0c539b5be657c0ec71a8c7974bde9131cd94a4aea8569b0f6",
     "g2/components/bootloader/thread_creation/timer_service.c": "60563d37dc03cf584068d61bb9d8946be590116d0ad3d2b65f6c59b5581fa968",
+    "g2/components/bootloader/thread_creation/startup_dfu_storage_cache.ld": "dec802db3319a73b418bc9d52467274a237c20d2775aa5d76fb0c8ef22f55b2d",
     "g2/components/bootloader/thread_creation/thread_select.c": "b8b2450b5e4b97eba3d386d08ce3ff750108b98d4f8223c498da3ddc967bb19a",
     "g2/components/bootloader/thread_creation/scheduler_bootstrap.c": "2eec059b629811234b18717a7f452c349fd0db0bf882341a39d5bbbf358ad810",
     "g2/components/bootloader/thread_creation/dynamic_module.ld": "1bceb73e5d80261a4c9f4a252c75d463e068364aceeca6056e99f7c11e6746b3",
@@ -44,6 +45,7 @@
     "g2/components/bootloader/thread_creation/verify_select.py": "f29a78e5db95c2d2e5e37e03c8abb72672818a06aa877966b656c42b148f2a5d",
     "g2/components/bootloader/thread_creation/select_module.ld": "f33cf39228ae8692aee77f54f7897033ba16eace8850a69b031d4fd3881ddd4a",
     "g2/components/bootloader/thread_creation/thread_creation.c": "12681d96dcbb83cd0887b525c686f2d8c2094edb11164c88087a5e30490bb058",
+    "g2/components/bootloader/thread_creation/verify_dfu_storage_cache.py": "46d58b2023fc72ba1397371247ef6ba808a9a1130f1a120c24cd60e150aac17b",
     "g2/components/bootloader/thread_creation/verify_resume_tick.py": "7e835b4d3b1c077f84f20dd9a1b6964c7c241a82939dd778c85e86ac99ad6f59",
     "g2/components/bootloader/thread_creation/startup_static_integrated.ld": "07e54ad70c0ab6364cce98c5cc6cf72876235a6d37b311755fc0b861bc9e06ee",
     "g2/components/bootloader/thread_creation/verify_dfu_storage_nor.py": "33bb40da1f1efca59c9568eb5ac7d339dc1e4b7796500db93d0e3eeb106203fc",
@@ -134,8 +136,10 @@
     "g2/components/bootloader/thread_creation/event_waiter_wake.h": "86ab2eabfd5dfa5b5dd92c7ae531884d024c501f3ae052d537d4a3180f976aba",
     "g2/components/bootloader/thread_creation/verify_port_integrated.py": "d782db795a49cdaa1795f9c3b4348ac547ef6b2853e023d9bcc8e55b8db70b81",
     "g2/components/bootloader/thread_creation/verify_dfu_storage_read.py": "d6adfee7424ec60cecd34be1499bb8369df42e67b32a4f25568058da8c7f013a",
+    "g2/components/bootloader/thread_creation/startup_dfu_storage_platform.ld": "d52f617fb443f1566b590e408f4e95eae027a42467b67c7f44d28dc7d9497314",
     "g2/components/bootloader/thread_creation/queue_send.c": "d16a784f3fed5a1593a34f20b49a89e8aa45c37bd61b5634d9f82bf8fa966663",
     "g2/components/bootloader/thread_creation/lifecycle.c": "ff291664ebac49876d349496141839aac97654d239bcf2e94ceae2ddd3d0f599",
+    "g2/components/bootloader/thread_creation/verify_dfu_storage_platform.py": "eb04f6443c6e72c0126fbf6ccbb4d682de9fcfc2ed57c68542d4745bbdde1f1d",
     "g2/components/bootloader/thread_creation/startup_nor_integrated.ld": "420a417e45740051a7d990bb43a4bcfb6a4237b89ccce227ca866c7d0149a0a2",
     "g2/components/bootloader/thread_creation/queue_receive.c": "0b8ee96a10bc0a9957b54d446bcd174146b2673786047669a6c6b74912d2ae3c",
     "g2/components/bootloader/thread_creation/verify_register.py": "e7bfb1662b6b78febaa68e40fcfdd3fe3c6233b610bbaefd15dbf43ef68ce62c",
@@ -147,7 +151,7 @@
     "g2/components/bootloader/thread_creation/verify_owned_heap.py": "41d8684bfb0f2d4dbfe82133b33fb8bb61b9f2b1d30a3b6eae8c66511e7175f8",
     "g2/components/bootloader/thread_creation/startup_dfu_storage_failures.ld": "55a226623f7d7b3f51ce692de88034ec3ae3ec4848caa7dc98ef829669aa7a1d",
     "g2/components/bootloader/thread_creation/verify_fatal_priority.py": "32aa8e86221e2fd210e70350466fd1f64dc263370559b18ce9702cb0528d61ff",
-    "g2/components/bootloader/thread_creation/verify_dfu_storage_failures.py": "d990553ae55f49904b8c4df75184e485422c1e9d2b3836c11a6d47242d46a527",
+    "g2/components/bootloader/thread_creation/verify_dfu_storage_failures.py": "90f3741e9932eb197085bdd48ff6d3df7635c6c1234dbc95c866a5d7d50d7f00",
     "g2/components/bootloader/thread_creation/verify_resource_creators.py": "763a16cc35e1775873b74a88cfe686126a9b99459736d9729d757d2e4b43e1db",
     "g2/components/bootloader/thread_creation/queue_receive_module.ld": "1e6ca748288fd22b3b95cafc63000e30af307cb9f4bf3d3c75376e1480ebd0b4",
     "g2/components/bootloader/manager_task/verify_sender_integrated.py": "962a5ab9b70e7791e5ab5aad08da0dd410d48cdcf0b0e700972ef5d9ed1bdea6",
@@ -205,6 +209,7 @@
     "g2/components/bootloader/filesystem/owned_module.ld": "b0a3bf626f6606ea186d5034c51d759a3b448ca3d287f6075d8ce12bd6f7c618",
     "g2/components/bootloader/filesystem/task_module.ld": "20a3acea4c060d2af7010e0f7537676fc1394d7c1f6eb0f19b83f2a5eaa46387",
     "g2/components/bootloader/platform_control/power_domains_module.ld": "bf19fe1e9614927bffed90a3dab0898d389049d97d146c376585832b55d960c5",
+    "g2/components/bootloader/platform_control/cache_module.ld": "7876592ac1bd2db031220317f48e25a592f04f2d3753d8d829debe3ad188064a",
     "g2/components/bootloader/platform_control/runtime.c": "dba157e3638495272106bf40da47a111cd915bcbc35300015eba2dc92ebbc458",
     "g2/components/bootloader/platform_control/control.h": "596724724a2fb0e80d04e3abf2590616562a6f67f31b9a60c19e2c43d62c67eb",
     "g2/components/bootloader/platform_control/runtime_resources.c": "da2f414410610f596ca7bf306f28d340777b37460c66206352a7ac66b2215b9f",
@@ -217,6 +222,8 @@
     "g2/components/bootloader/platform_control/verify_power_domains.py": "04b7e32d69f060edff53ae0655138e8da98e51c3aa3fbb6543f89cb84d36097a",
     "g2/components/bootloader/platform_control/control.c": "8b6c54999184781870b3300e4f1b99416fc05bb89ad0577614615209e32b6f7d",
     "g2/components/bootloader/platform_control/runtime.h": "882967faf7b1a8aeed7bf6c95934063430529e7fe7409a5dffc3ed9336022135",
+    "g2/components/bootloader/platform_control/cache_runtime.c": "45af243657b6cf5a82e5b47e7d5563c7cf0399e67b473ee6c72456ae230e8a69",
+    "g2/components/bootloader/platform_control/verify_cache_runtime.py": "e1396cb9efc9d5f342bcd55008c5c0e42bb6aab34128461405239e7b85890942",
     "g2/components/bootloader/platform_control/module.ld": "0ee42704339350eb4d37eb129f23ff5f70a266a41ce3133a1626d5f8e9a8402b",
     "g2/components/bootloader/platform_control/runtime_transition.h": "8efd86cf5b310009da41ea12b431ffb4586ed337526785dbca54c8f79ce096a6",
     "g2/components/bootloader/platform_control/runtime_query.h": "b84fc51b524e254ae4f90e06f8fa479d50e9d2712bb270409f9bdca56d17e846",
@@ -241,6 +248,7 @@
     "g2/components/bootloader/nor_mspi_init/fifo_module.ld": "d43fb09379b1983b478e0226db0acb7d31e6d44f60c1e45181bc8f3eea3d970b",
     "g2/components/bootloader/nor_mspi_init/verify_leaves.py": "54239e6a7d74ec750891f34fb743741263d64fc165c5809b7655060a0da3a868",
     "g2/components/bootloader/nor_mspi_init/fifo_transfer.c": "f4b2d5a4b0cfa7e2f0ad2e167b4e114fdad1e7730bcd9565ec5718f66d062451",
+    "g2/components/bootloader/nor_mspi_init/control_remaining.h": "73859b4d00e25d8c2b0bc7795308275770ef87d1c444ad99701fa54e24998a4e",
     "g2/components/bootloader/nor_mspi_init/blocking_transfer.c": "4b311ebfe01ff2104dfbb42423780bff2ab22e0c5223a73d1008a6dd8cd1c51b",
     "g2/components/bootloader/nor_mspi_init/irq_guard.S": "6ed270a5221aa9984fc8df8e10244e0d0cd38cab2d6ce8c77310060ba0382cbb",
     "g2/components/bootloader/nor_mspi_init/verify_blocking.py": "8c92b8a26b25deef47eccaff324ab1e8d1bb8d490463d6b86cbd37aa5c85cde5",
@@ -252,6 +260,7 @@
     "g2/components/bootloader/nor_mspi_init/control_read_module.ld": "a44b31a55ee2e92d82ab149836b5770d1d79d01df2f32819d4532613e729a32b",
     "g2/components/bootloader/nor_mspi_init/blocking_module.ld": "aef1d9fbe1a3af996b8f5830b68351ff95b3f1c8975aca10eaf61fdbaa9bf882",
     "g2/components/bootloader/nor_mspi_init/verify_fifo_poll.py": "96aebae616f6ec9c3caeb5d14df0a6e83ac2d8a8f2440bdd2525206bb8919006",
+    "g2/components/bootloader/nor_mspi_init/control_remaining.c": "90cd9665bed64ec8c5897891216a5d1c36e7c7c4b318ef8636b54b9e962fcd7e",
     "g2/components/bootloader/nor_mspi_init/status_poll.c": "210816cac79fd4286c40ad55e7c61782aff27d248232188079de4185409773c9"
   },
   "original_trace": {
@@ -3356,7 +3365,15 @@
       "original": {
         "run": "stopped-before-terminal",
         "exception": "UcError",
+        "exception_detail": "Invalid memory read (UC_ERR_READ_UNMAPPED)",
         "pc": "0x415726",
+        "lr": "0x410613",
+        "registers": {
+          "r0": "0x200fdc6d",
+          "r1": "0x20100000",
+          "r2": "0xfff81d76",
+          "r3": "0x0"
+        },
         "arguments": [
           537910381,
           537919488,
@@ -3492,19 +3509,17 @@
             "opencfw_provider_421210"
           ]
         ],
-        "rom_events": []
+        "rom_events": [],
+        "guard_events": [],
+        "power_calls": [],
+        "control_logs": [],
+        "mram_cleanup": [],
+        "mmio_writes": [],
+        "reset_events": [],
+        "PRIMASK": 0
       },
       "source": {
-        "run": "stopped-before-terminal",
-        "exception": "AssertionError",
-        "pc": "0x41cd1a",
-        "arguments": [
-          5,
-          0,
-          537013636,
-          1046528
-        ],
-        "trace_tail": [],
+        "run": "terminal-reset-store",
         "boundary": [
           [
             "startup-control-provider",
@@ -3669,14 +3684,32 @@
             526
           ]
         ],
-        "file_calls": [
+        "control_logs": [
           [
-            "opencfw_provider_421210"
+            1,
+            505
+          ]
+        ],
+        "guard_events": [
+          [
+            "guard-begin",
+            "0x1bc90"
           ],
           [
-            "opencfw_boot_file_open",
-            "ota/s200_firmware_ota.bin",
-            "r+"
+            "guard-end",
+            "0x1bd8c"
+          ]
+        ],
+        "power_calls": [
+          [
+            5,
+            1,
+            128
+          ],
+          [
+            5,
+            0,
+            0
           ]
         ],
         "rom_events": [
@@ -3689,6 +3722,57 @@
             "ffffffffffffffffffffffffffffffff",
             0
           ]
+        ],
+        "mram_cleanup": [],
+        "mmio_writes": [
+          [
+            1073877012,
+            4,
+            32
+          ],
+          [
+            1073823752,
+            4,
+            195
+          ],
+          [
+            1073823780,
+            4,
+            0
+          ],
+          [
+            1073823752,
+            4,
+            0
+          ],
+          [
+            1073877012,
+            4,
+            0
+          ],
+          [
+            1073741832,
+            4,
+            212
+          ]
+        ],
+        "reset_events": [
+          [
+            "terminal-reset-store",
+            0,
+            212
+          ]
+        ],
+        "PRIMASK": 0,
+        "file_calls": [
+          [
+            "opencfw_provider_421210"
+          ],
+          [
+            "opencfw_boot_file_open",
+            "ota/s200_firmware_ota.bin",
+            "r+"
+          ]
         ]
       }
     },
@@ -3700,7 +3784,15 @@
       "original": {
         "run": "stopped-before-terminal",
         "exception": "UcError",
+        "exception_detail": "Invalid memory read (UC_ERR_READ_UNMAPPED)",
         "pc": "0x415726",
+        "lr": "0x410613",
+        "registers": {
+          "r0": "0x200fdc6d",
+          "r1": "0x20100000",
+          "r2": "0xfff81d76",
+          "r3": "0x0"
+        },
         "arguments": [
           537910381,
           537919488,
@@ -3836,19 +3928,17 @@
             "opencfw_provider_421210"
           ]
         ],
-        "rom_events": []
+        "rom_events": [],
+        "guard_events": [],
+        "power_calls": [],
+        "control_logs": [],
+        "mram_cleanup": [],
+        "mmio_writes": [],
+        "reset_events": [],
+        "PRIMASK": 0
       },
       "source": {
-        "run": "stopped-before-terminal",
-        "exception": "AssertionError",
-        "pc": "0x41cd1a",
-        "arguments": [
-          5,
-          0,
-          537013636,
-          1046528
-        ],
-        "trace_tail": [],
+        "run": "terminal-reset-store",
         "boundary": [
           [
             "startup-control-provider",
@@ -4013,6 +4103,86 @@
             532
           ]
         ],
+        "control_logs": [
+          [
+            1,
+            505
+          ]
+        ],
+        "guard_events": [
+          [
+            "guard-begin",
+            "0x1bc90"
+          ],
+          [
+            "guard-end",
+            "0x1bd8c"
+          ]
+        ],
+        "power_calls": [
+          [
+            5,
+            1,
+            128
+          ],
+          [
+            5,
+            0,
+            0
+          ]
+        ],
+        "rom_events": [
+          [
+            305414945,
+            1,
+            "0x20022d98",
+            1046528,
+            4,
+            "ffffffffffffffffffffffffffffffff",
+            7
+          ]
+        ],
+        "mram_cleanup": [],
+        "mmio_writes": [
+          [
+            1073877012,
+            4,
+            32
+          ],
+          [
+            1073823752,
+            4,
+            195
+          ],
+          [
+            1073823780,
+            4,
+            0
+          ],
+          [
+            1073823752,
+            4,
+            0
+          ],
+          [
+            1073877012,
+            4,
+            0
+          ],
+          [
+            1073741832,
+            4,
+            212
+          ]
+        ],
+        "reset_events": [
+          [
+            "terminal-reset-store",
+            0,
+            212
+          ]
+        ],
+        "PRIMASK": 0,
         "file_calls": [
           [
             "opencfw_provider_421210"
@@ -4028,17 +4198,6 @@
           [
             "opencfw_boot_file_close"
           ]
-        ],
-        "rom_events": [
-          [
-            305414945,
-            1,
-            "0x20022d98",
-            1046528,
-            4,
-            "ffffffffffffffffffffffffffffffff",
-            7
-          ]
         ]
       }
     },
@@ -4050,7 +4209,15 @@
       "original": {
         "run": "stopped-before-terminal",
         "exception": "UcError",
+        "exception_detail": "Invalid memory read (UC_ERR_READ_UNMAPPED)",
         "pc": "0x415726",
+        "lr": "0x410613",
+        "registers": {
+          "r0": "0x200fdc6d",
+          "r1": "0x20100000",
+          "r2": "0xfff81d76",
+          "r3": "0x0"
+        },
         "arguments": [
           537910381,
           537919488,
@@ -4186,19 +4353,17 @@
             "opencfw_provider_421210"
           ]
         ],
-        "rom_events": []
+        "rom_events": [],
+        "guard_events": [],
+        "power_calls": [],
+        "control_logs": [],
+        "mram_cleanup": [],
+        "mmio_writes": [],
+        "reset_events": [],
+        "PRIMASK": 0
       },
       "source": {
-        "run": "stopped-before-terminal",
-        "exception": "AssertionError",
-        "pc": "0x41cd1a",
-        "arguments": [
-          5,
-          0,
-          537013636,
-          1046528
-        ],
-        "trace_tail": [],
+        "run": "terminal-reset-store",
         "boundary": [
           [
             "startup-control-provider",
@@ -4388,6 +4553,86 @@
             228
           ]
         ],
+        "control_logs": [
+          [
+            1,
+            505
+          ]
+        ],
+        "guard_events": [
+          [
+            "guard-begin",
+            "0x1bc90"
+          ],
+          [
+            "guard-end",
+            "0x1bd8c"
+          ]
+        ],
+        "power_calls": [
+          [
+            5,
+            1,
+            128
+          ],
+          [
+            5,
+            0,
+            0
+          ]
+        ],
+        "rom_events": [
+          [
+            305414945,
+            1,
+            "0x20022d98",
+            1046528,
+            4,
+            "ffffffffffffffffffffffffffffffff",
+            85
+          ]
+        ],
+        "mram_cleanup": [],
+        "mmio_writes": [
+          [
+            1073877012,
+            4,
+            32
+          ],
+          [
+            1073823752,
+            4,
+            195
+          ],
+          [
+            1073823780,
+            4,
+            0
+          ],
+          [
+            1073823752,
+            4,
+            0
+          ],
+          [
+            1073877012,
+            4,
+            0
+          ],
+          [
+            1073741832,
+            4,
+            212
+          ]
+        ],
+        "reset_events": [
+          [
+            "terminal-reset-store",
+            0,
+            212
+          ]
+        ],
+        "PRIMASK": 0,
         "file_calls": [
           [
             "opencfw_provider_421210"
@@ -4417,17 +4662,6 @@
           [
             "opencfw_boot_file_close"
           ]
-        ],
-        "rom_events": [
-          [
-            305414945,
-            1,
-            "0x20022d98",
-            1046528,
-            4,
-            "ffffffffffffffffffffffffffffffff",
-            85
-          ]
         ]
       }
     }
@@ -4435,7 +4669,8 @@
   "limits": [
     "Source machine loads only ELF source executable segments and the first four locked bytes used as an initializer fixture; it never maps locked executable firmware. Original side executes pinned firmware. The missing ROM body at 0x0200ff20 is a synthetic callback returning the per-case status; source/stock MRAM bridge cleanup and terminal transaction code execute around it.",
     "Synthetic littlefs-backed NOR supplies a nonempty directory containing a different file for the missing-name case, a 19-byte short-file case and a bad-CRC case. These exact fixtures only are tested. MMIO, guard power acknowledgement, filesystem allocator/mutex/NOR providers and ROM status are modeled.",
-    "Only successful task error-path runs justify the four-FFFFFFFF-word/0x7fe000/cleanup/reset-store outcome. Stopped runs report exact PC/arguments and do not imply that the stock failure transaction completed. Harness terminal-store observation is not a silicon reset.",
+    "On all three original runs, execution stops before task dispatch at PC 0x415726 (`ldrbhs r3, [r1], #1`), with LR 0x410613 (return from the BL at 0x41060e to 0x41568c), R0=0x2010dc6d, R1=0x20110000, R2=0xfff71d76, R3=0. The trace shows no `opencfw_boot_file_open` call or DFU task error logs before this stop; it follows the initial filesystem mutex and `0x421210` provider event. This is an observed emulator/fixture divergence at the stock decompression/copy path, not a firmware defect claim. Source runs instead reach DFU task logs for each fixture, execute the guarded four-word MRAM request and cleanup, and hit the `0x40000008=0xd4` terminal reset store for the tested synthetic ROM statuses. The two machines therefore do not match on these malformed-input startup fixtures.",
+    "Only successful source task error-path runs justify the four-FFFFFFFF-word/0x7fe000/cleanup/reset-store outcome. Stopped runs report exact PC/arguments and do not imply that the stock failure transaction completed. Harness terminal-store observation is not a silicon reset.",
     "No cancellation API was introduced or exercised. The test does not establish behavior if power fails during ROM programming or terminal reset before/after the store; the external ROM implementation and physical power-fail atomicity remain outside the boundary.",
     "No complete source closure, byte identity, SBL/ROM implementation, peripheral timing or hardware write/reset claim."
   ]

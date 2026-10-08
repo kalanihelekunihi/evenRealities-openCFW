@@ -1,0 +1,61 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpd20stnlu/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00481c48 <.text>:
+  481c48:	f8d9 1000 	ldr.w	r1, [r9]
+  481c4c:	f851 0b04 	ldr.w	r0, [r1], #4
+  481c50:	f8c9 1000 	str.w	r1, [r9]
+  481c54:	2800      	cmp	r0, #0
+  481c56:	d149      	bne.n	481cec <.text+0xa4>
+  481c58:	f04f 34ff 	mov.w	r4, #4294967295	@ 0xffffffff
+  481c5c:	f60f 206c 	addw	r0, pc, #2668	@ 0xa6c
+  481c60:	e6f5      	b.n	481a4e <.text-0x1fa>
+  481c62:	f8d9 1000 	ldr.w	r1, [r9]
+  481c66:	f851 0b04 	ldr.w	r0, [r1], #4
+  481c6a:	f8c9 1000 	str.w	r1, [r9]
+  481c6e:	2800      	cmp	r0, #0
+  481c70:	d13c      	bne.n	481cec <.text+0xa4>
+  481c72:	f04f 34ff 	mov.w	r4, #4294967295	@ 0xffffffff
+  481c76:	f60f 2054 	addw	r0, pc, #2644	@ 0xa54
+  481c7a:	e6e8      	b.n	481a4e <.text-0x1fa>
+  481c7c:	f8d9 1000 	ldr.w	r1, [r9]
+  481c80:	f851 0b04 	ldr.w	r0, [r1], #4
+  481c84:	f8c9 1000 	str.w	r1, [r9]
+  481c88:	b980      	cbnz	r0, 481cac <.text+0x64>
+  481c8a:	f04f 34ff 	mov.w	r4, #4294967295	@ 0xffffffff
+  481c8e:	f60f 203c 	addw	r0, pc, #2620	@ 0xa3c
+  481c92:	e6dc      	b.n	481a4e <.text-0x1fa>
+  481c94:	f8d9 1000 	ldr.w	r1, [r9]
+  481c98:	f851 0b04 	ldr.w	r0, [r1], #4
+  481c9c:	f8c9 1000 	str.w	r1, [r9]
+  481ca0:	b920      	cbnz	r0, 481cac <.text+0x64>
+  481ca2:	f04f 34ff 	mov.w	r4, #4294967295	@ 0xffffffff
+  481ca6:	f60f 2024 	addw	r0, pc, #2596	@ 0xa24
+  481caa:	e6d0      	b.n	481a4e <.text-0x1fa>
+  481cac:	9a0d      	ldr	r2, [sp, #52]	@ 0x34
+  481cae:	17d3      	asrs	r3, r2, #31
+  481cb0:	e9c0 2300 	strd	r2, r3, [r0]
+  481cb4:	e3fa      	b.n	4824ac <.text+0x864>
+  481cb6:	f8d9 1000 	ldr.w	r1, [r9]
+  481cba:	f851 0b04 	ldr.w	r0, [r1], #4
+  481cbe:	f8c9 1000 	str.w	r1, [r9]
+  481cc2:	b920      	cbnz	r0, 481cce <.text+0x86>
+  481cc4:	f04f 34ff 	mov.w	r4, #4294967295	@ 0xffffffff
+  481cc8:	f60f 2000 	addw	r0, pc, #2560	@ 0xa00
+  481ccc:	e6bf      	b.n	481a4e <.text-0x1fa>
+  481cce:	990d      	ldr	r1, [sp, #52]	@ 0x34
+  481cd0:	7001      	strb	r1, [r0, #0]
+  481cd2:	e3eb      	b.n	4824ac <.text+0x864>
+  481cd4:	f8d9 1000 	ldr.w	r1, [r9]
+  481cd8:	f851 0b04 	ldr.w	r0, [r1], #4
+  481cdc:	f8c9 1000 	str.w	r1, [r9]
+  481ce0:	b920      	cbnz	r0, 481cec <.text+0xa4>
+  481ce2:	f04f 34ff 	mov.w	r4, #4294967295	@ 0xffffffff
+  481ce6:	f60f 10e4 	addw	r0, pc, #2532	@ 0x9e4
+  481cea:	e6b0      	b.n	481a4e <.text-0x1fa>
+  481cec:	990d      	ldr	r1, [sp, #52]	@ 0x34
+  481cee:	6001      	str	r1, [r0, #0]
+  481cf0:	e3dc      	b.n	4824ac <.text+0x864>

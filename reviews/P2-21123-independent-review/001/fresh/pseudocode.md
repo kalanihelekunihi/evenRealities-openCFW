@@ -1,0 +1,5 @@
+# Priority flags and version-conditional callback table writes
+
+Partial/unaccepted;230 instruction bytes4805C0..4806A6,16frameactive,R5tablepointer,R1versionpointer. Allliteral labels belowmeanexactloadedvalues,notdereferences; eachslotstoreinlistedorder. Freshbyte480708nonzero→literal48072C/730/734/738/73C/740 to tableoffset0/4/8/28/40/44,then6A6. Elsefreshbyte48070Cnonzero→literal480744/748/74C/750/754/758/75C tooffset0/4/8/20/24/28/44,then6A6.
+
+Otherwisefreshshortcircuitpredicate(V()==33 AND unsignedS()>=2) OR (V()==34 AND unsignedS()<2) OR (V()==35 AND S()==0),V()freshword[R1]&255,S()freshword480704. True→literal480760/764/768/76C/770/774/778/77C tooffset0/4/8/12/16/48/52/56. Thenfresh(V()==33 AND S()==2)→literal480780/784 tooffset24/28;elseliteral480788/78C to24/28;6A6. Falseinitialpredicate→fresh(V()==33 AND S()==1) only→literal480790/794/780/784 tooffset0/4/24/28;else nowrites;6A6. Allrepeatedreadsdistinct, prioritybranches shortcircuitlaterflags/versionreads; noassumingearliertableclearsemanticsorunwrittenoffsetvalues. Continue6A6with16frameactive,R4zero,R5/R6tablepointer. Targets/ownership unresolved,noC/freeze/fullcoverageclaim.

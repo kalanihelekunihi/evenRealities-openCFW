@@ -1,0 +1,1 @@
+Partial/unaccepted continuity47A8C4..47AB4E,650instruction bytes,seven maps. Component hashes,pinned tiling andlocalbranchboundaries checked. Distinct mismatch routes, fresh record/status reads, two ten-record loops, helper arguments and56-byte explicit boolean return retained. No source/freeze/wholefirmwareclaim.

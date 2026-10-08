@@ -1,0 +1,61 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpbhq8ynn7/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047fea0 <.text>:
+  47fea0:	b51f      	push	{r0, r1, r2, r3, r4, lr}
+  47fea2:	2400      	movs	r4, #0
+  47fea4:	b2c0      	uxtb	r0, r0
+  47fea6:	2800      	cmp	r0, #0
+  47fea8:	d005      	beq.n	47feb6 <.text+0x16>
+  47feaa:	2802      	cmp	r0, #2
+  47feac:	d03b      	beq.n	47ff26 <.text+0x86>
+  47feae:	d322      	bcc.n	47fef6 <.text+0x56>
+  47feb0:	2803      	cmp	r0, #3
+  47feb2:	d042      	beq.n	47ff3a <.text+0x9a>
+  47feb4:	e07d      	b.n	47ffb2 <.text+0x112>
+  47feb6:	48b4      	ldr	r0, [pc, #720]	@ (480188 <.text+0x2e8>)
+  47feb8:	6800      	ldr	r0, [r0, #0]
+  47feba:	f3c0 1001 	ubfx	r0, r0, #4, #2
+  47febe:	2803      	cmp	r0, #3
+  47fec0:	d017      	beq.n	47fef2 <.text+0x52>
+  47fec2:	f000 fa49 	bl	480358 <.text+0x4b8>
+  47fec6:	f7ff ffa4 	bl	47fe12 <.text-0x8e>
+  47feca:	48c2      	ldr	r0, [pc, #776]	@ (4801d4 <.text+0x334>)
+  47fecc:	6801      	ldr	r1, [r0, #0]
+  47fece:	f051 4100 	orrs.w	r1, r1, #2147483648	@ 0x80000000
+  47fed2:	6001      	str	r1, [r0, #0]
+  47fed4:	48c0      	ldr	r0, [pc, #768]	@ (4801d8 <.text+0x338>)
+  47fed6:	6801      	ldr	r1, [r0, #0]
+  47fed8:	f051 010f 	orrs.w	r1, r1, #15
+  47fedc:	6001      	str	r1, [r0, #0]
+  47fede:	f000 fa46 	bl	48036e <.text+0x4ce>
+  47fee2:	48be      	ldr	r0, [pc, #760]	@ (4801dc <.text+0x33c>)
+  47fee4:	6801      	ldr	r1, [r0, #0]
+  47fee6:	f051 0101 	orrs.w	r1, r1, #1
+  47feea:	6001      	str	r1, [r0, #0]
+  47feec:	f000 fa4a 	bl	480384 <.text+0x4e4>
+  47fef0:	e060      	b.n	47ffb4 <.text+0x114>
+  47fef2:	2000      	movs	r0, #0
+  47fef4:	e05f      	b.n	47ffb6 <.text+0x116>
+  47fef6:	2000      	movs	r0, #0
+  47fef8:	f88d 0000 	strb.w	r0, [sp]
+  47fefc:	4669      	mov	r1, sp
+  47fefe:	2017      	movs	r0, #23
+  47ff00:	f7ff fd04 	bl	47f90c <.text-0x594>
+  47ff04:	f89d 0000 	ldrb.w	r0, [sp]
+  47ff08:	2800      	cmp	r0, #0
+  47ff0a:	d00b      	beq.n	47ff24 <.text+0x84>
+  47ff0c:	f7ff fb2f 	bl	47f56e <.text-0x932>
+  47ff10:	2800      	cmp	r0, #0
+  47ff12:	d150      	bne.n	47ffb6 <.text+0x116>
+  47ff14:	2017      	movs	r0, #23
+  47ff16:	f7ff fc4a 	bl	47f7ae <.text-0x6f2>
+  47ff1a:	0004      	movs	r4, r0
+  47ff1c:	2c00      	cmp	r4, #0
+  47ff1e:	d001      	beq.n	47ff24 <.text+0x84>
+  47ff20:	0020      	movs	r0, r4
+  47ff22:	e048      	b.n	47ffb6 <.text+0x116>
+  47ff24:	e046      	b.n	47ffb4 <.text+0x114>

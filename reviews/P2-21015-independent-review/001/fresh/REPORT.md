@@ -1,0 +1,1 @@
+Partial/unaccepted continuityEBF8..ED10,280instructionbytes,two maps. Allcomponenthashes,pinnedrawtiling,localbranchtargetschecked.32frame spanningprefix/continuation,maskguards,fifthcallerarg,conditionalwordclear,fullsnapshotversuslow24resultretained. Externalhelpersunresolved. No wholecoverage/source/freezeclaim.

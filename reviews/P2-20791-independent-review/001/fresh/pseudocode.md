@@ -1,0 +1,3 @@
+# Eligible record byte6 then six byte thirteen arg log
+
+Partial/unaccepted;80instructionbytes,inherited72-byteframe,R10recordpointer. Query43D0CE;statusbit1zero skipspending0x47BEC8. Otherwisefreshbyte[R10+6]SP32,thenfreshbytes[R10+0..5]ascendingorderintoSP28,24,20,16,12,8. Literal47C8BC SP4,2023 SP0;call43D574(4,literal47C548,literal47C544,literal47C540,fifth2023,sixthliteral47C8BC,seventhbyte5,eighthbyte4,ninthbyte3,tenthbyte2,eleventhbyte1,twelfthbyte0,thirteenthbyte6). Preservebyte6firstthen0..5readorder,localsSP32within36-byteallocation,andlivequeryarguments. Fallthroughpending0x47BEC8. No C,freezeorcompletenessclaim.

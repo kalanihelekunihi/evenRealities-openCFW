@@ -1,0 +1,81 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp6ov28n4d/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+004827b0 <.text>:
+  4827b0:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+  4827b2:	0004      	movs	r4, r0
+  4827b4:	000d      	movs	r5, r1
+  4827b6:	0020      	movs	r0, r4
+  4827b8:	f7ff ffa6 	bl	482708 <.text-0xa8>
+  4827bc:	2800      	cmp	r0, #0
+  4827be:	d00d      	beq.n	4827dc <.text+0x2c>
+  4827c0:	f8df 02f8 	ldr.w	r0, [pc, #760]	@ 482abc <.text+0x30c>
+  4827c4:	9000      	str	r0, [sp, #0]
+  4827c6:	f8df 32f8 	ldr.w	r3, [pc, #760]	@ 482ac0 <.text+0x310>
+  4827ca:	f240 1217 	movw	r2, #279	@ 0x117
+  4827ce:	f8df 12e4 	ldr.w	r1, [pc, #740]	@ 482ab4 <.text+0x304>
+  4827d2:	2003      	movs	r0, #3
+  4827d4:	f7ca fd42 	bl	44d25c <.text-0x35554>
+  4827d8:	2000      	movs	r0, #0
+  4827da:	e044      	b.n	482866 <.text+0xb6>
+  4827dc:	7a20      	ldrb	r0, [r4, #8]
+  4827de:	2800      	cmp	r0, #0
+  4827e0:	d101      	bne.n	4827e6 <.text+0x36>
+  4827e2:	2000      	movs	r0, #0
+  4827e4:	e03f      	b.n	482866 <.text+0xb6>
+  4827e6:	6820      	ldr	r0, [r4, #0]
+  4827e8:	7a21      	ldrb	r1, [r4, #8]
+  4827ea:	eb00 0681 	add.w	r6, r0, r1, lsl #2
+  4827ee:	2000      	movs	r0, #0
+  4827f0:	e000      	b.n	4827f4 <.text+0x44>
+  4827f2:	1c40      	adds	r0, r0, #1
+  4827f4:	7a21      	ldrb	r1, [r4, #8]
+  4827f6:	4288      	cmp	r0, r1
+  4827f8:	d234      	bcs.n	482864 <.text+0xb4>
+  4827fa:	5c31      	ldrb	r1, [r6, r0]
+  4827fc:	002a      	movs	r2, r5
+  4827fe:	b2d2      	uxtb	r2, r2
+  482800:	4291      	cmp	r1, r2
+  482802:	d1f6      	bne.n	4827f2 <.text+0x42>
+  482804:	6827      	ldr	r7, [r4, #0]
+  482806:	7a21      	ldrb	r1, [r4, #8]
+  482808:	1e49      	subs	r1, r1, #1
+  48280a:	2005      	movs	r0, #5
+  48280c:	fb00 f001 	mul.w	r0, r0, r1
+  482810:	f7cc ff82 	bl	44f718 <.text-0x33098>
+  482814:	2800      	cmp	r0, #0
+  482816:	d101      	bne.n	48281c <.text+0x6c>
+  482818:	2000      	movs	r0, #0
+  48281a:	e024      	b.n	482866 <.text+0xb6>
+  48281c:	6020      	str	r0, [r4, #0]
+  48281e:	7a21      	ldrb	r1, [r4, #8]
+  482820:	1e49      	subs	r1, r1, #1
+  482822:	7221      	strb	r1, [r4, #8]
+  482824:	7a21      	ldrb	r1, [r4, #8]
+  482826:	eb00 0181 	add.w	r1, r0, r1, lsl #2
+  48282a:	2300      	movs	r3, #0
+  48282c:	001a      	movs	r2, r3
+  48282e:	e010      	b.n	482852 <.text+0xa2>
+  482830:	f816 c003 	ldrb.w	ip, [r6, r3]
+  482834:	46ae      	mov	lr, r5
+  482836:	fa5f fe8e 	uxtb.w	lr, lr
+  48283a:	45f4      	cmp	ip, lr
+  48283c:	d008      	beq.n	482850 <.text+0xa0>
+  48283e:	f857 c023 	ldr.w	ip, [r7, r3, lsl #2]
+  482842:	f840 c022 	str.w	ip, [r0, r2, lsl #2]
+  482846:	f816 c003 	ldrb.w	ip, [r6, r3]
+  48284a:	f801 c002 	strb.w	ip, [r1, r2]
+  48284e:	1c52      	adds	r2, r2, #1
+  482850:	1c5b      	adds	r3, r3, #1
+  482852:	f894 c008 	ldrb.w	ip, [r4, #8]
+  482856:	459c      	cmp	ip, r3
+  482858:	d2ea      	bcs.n	482830 <.text+0x80>
+  48285a:	0038      	movs	r0, r7
+  48285c:	f7cc ff7c 	bl	44f758 <.text-0x33058>
+  482860:	2001      	movs	r0, #1
+  482862:	e000      	b.n	482866 <.text+0xb6>
+  482864:	2000      	movs	r0, #0
+  482866:	bdf2      	pop	{r1, r4, r5, r6, r7, pc}

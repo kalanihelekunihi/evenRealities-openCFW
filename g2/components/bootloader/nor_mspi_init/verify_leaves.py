@@ -2,12 +2,14 @@
 """Instruction comparison of finite HAL MMIO/NVIC/PRIMASK providers."""
 import argparse,importlib.util,itertools,json
 from pathlib import Path
+from unicorn import UC_HOOK_MEM_WRITE
 HERE=Path(__file__).resolve().parent;ROOT=HERE.parents[3]
 spec=importlib.util.spec_from_file_location('base',HERE/'verify_nor_mspi_init.py');n=importlib.util.module_from_spec(spec);spec.loader.exec_module(n);v=n.v
 ENTRIES={'opencfw_hal_mspi_interrupt_enable':0x426450,'opencfw_hal_mspi_interrupt_clear':0x426506,'opencfw_hal_mspi_deinitialize':0x42516c,'opencfw_bl_interrupt_enable':0x41fdc0,'opencfw_bl_interrupt_priority':0x41fdde,'opencfw_bl_irq_guard_initialize':0x41b8e0,'opencfw_hal_mspi_enable':0x425066,'opencfw_hal_mspi_disable':0x4250f0,'opencfw_hal_mspi_configure':0x424af0}
 HANDLE=0x20006000
 class Machine(v.Machine):
- def __init__(self,*a,**kw):super().__init__(*a,**kw);self.cpu.mem_map(0x40060000,0x4000)
+ def __init__(self,*a,**kw):super().__init__(*a,**kw);self.cpu.mem_map(0x40060000,0x4000);self.cpu.hook_add(UC_HOOK_MEM_WRITE,self.mmio_write,begin=0x40060000,end=0x40063fff)
+ def mmio_write(self,uc,access,address,size,value,user):self.events.append(['mmio-write',hex(address),size,value&0xffffffff])
  def code(self,uc,pc,size,user):
   if pc==0x423f28:self.events.append(['cq-init',*self.args()[:3]]);self.ret();return
   if pc==0x423fac:self.events.append(['cq-disable',self.args()[0]]);self.ret(self.disable_status);return

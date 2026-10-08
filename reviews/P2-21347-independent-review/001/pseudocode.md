@@ -1,0 +1,5 @@
+# Floating exponent estimate and scale polynomial middle
+
+Partial/unaccepted;138 instruction bytes 48370E..483798, continuation of 48364C64-byte frame. Operations are ordered scalar binary64 VFP instructions. VMLA d4,d1,d3; d1=full8B SP0; d3=-1.5 immediate; d1=d1+d3; d3=full8B literal483930; VMLA d4,d1,d3. Convert d4 to signed32 s2 by VCVT.S32.F64 (truncate toward zero), rawmove toR7. Rawmove R7tos2; signed32→double d1. Load full8B483938→d3;d4=0.5;VMLA d4,d1,d3; truncate signed32 d4tos2→R2.
+
+R7→s2→signed-double d1;d3=full8B483940;d3=d1*d3. R2→s2→signed-double d1;d4=full8B483948;VMLA d3,d1,d4;d1=d3*d3. R2+=1023 wrapping; R3=ASR(R2,31) then immediately overwritten R3=R2<<20;R2=0;storepairR2/R3 at SP0. The dead arithmetic-shift register write still changes flags before later LSLS/MOVS; preserve instruction effects where needed. d4=2.0;d2=d3*d4;d5=2.0;d3=d5-d3;d5=14.0;d4=d1/d5;d6=10.0. Fallthrough483798 unresolved. Do not replace VMLA with fused VFMA or reorder arithmetic; literal references are four-byte prefixes and full eight-byte data awaits separate recovery. No C,freeze,wholecoverage or equality claim.

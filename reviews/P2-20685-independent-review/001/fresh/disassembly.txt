@@ -1,0 +1,56 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpbxuyqp8c/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047ac60 <.text>:
+  47ac60:	f7c2 fa35 	bl	43d0ce <.text-0x3db92>
+  47ac64:	0780      	lsls	r0, r0, #30
+  47ac66:	d50c      	bpl.n	47ac82 <.text+0x22>
+  47ac68:	f8df 0924 	ldr.w	r0, [pc, #2340]	@ 47b590 <.text+0x930>
+  47ac6c:	9001      	str	r0, [sp, #4]
+  47ac6e:	f44f 6088 	mov.w	r0, #1088	@ 0x440
+  47ac72:	9000      	str	r0, [sp, #0]
+  47ac74:	f8df 3908 	ldr.w	r3, [pc, #2312]	@ 47b580 <.text+0x920>
+  47ac78:	4a54      	ldr	r2, [pc, #336]	@ (47adcc <.text+0x16c>)
+  47ac7a:	496b      	ldr	r1, [pc, #428]	@ (47ae28 <.text+0x1c8>)
+  47ac7c:	2004      	movs	r0, #4
+  47ac7e:	f7c2 fc79 	bl	43d574 <.text-0x3d6ec>
+  47ac82:	f7c2 fa24 	bl	43d0ce <.text-0x3db92>
+  47ac86:	07c0      	lsls	r0, r0, #31
+  47ac88:	d403      	bmi.n	47ac92 <.text+0x32>
+  47ac8a:	f7c2 fa20 	bl	43d0ce <.text-0x3db92>
+  47ac8e:	0740      	lsls	r0, r0, #29
+  47ac90:	d506      	bpl.n	47aca0 <.text+0x40>
+  47ac92:	f8df 1900 	ldr.w	r1, [pc, #2304]	@ 47b594 <.text+0x934>
+  47ac96:	000a      	movs	r2, r1
+  47ac98:	f05f 5080 	movs.w	r0, #268435456	@ 0x10000000
+  47ac9c:	f7c2 f8ff 	bl	43ce9e <.text-0x3ddc2>
+  47aca0:	2001      	movs	r0, #1
+  47aca2:	e020      	b.n	47ace6 <.text+0x86>
+  47aca4:	f7c2 fa13 	bl	43d0ce <.text-0x3db92>
+  47aca8:	0780      	lsls	r0, r0, #30
+  47acaa:	d50c      	bpl.n	47acc6 <.text+0x66>
+  47acac:	f8df 08e8 	ldr.w	r0, [pc, #2280]	@ 47b598 <.text+0x938>
+  47acb0:	9001      	str	r0, [sp, #4]
+  47acb2:	f240 4049 	movw	r0, #1097	@ 0x449
+  47acb6:	9000      	str	r0, [sp, #0]
+  47acb8:	f8df 38c4 	ldr.w	r3, [pc, #2244]	@ 47b580 <.text+0x920>
+  47acbc:	4a43      	ldr	r2, [pc, #268]	@ (47adcc <.text+0x16c>)
+  47acbe:	495a      	ldr	r1, [pc, #360]	@ (47ae28 <.text+0x1c8>)
+  47acc0:	2002      	movs	r0, #2
+  47acc2:	f7c2 fc57 	bl	43d574 <.text-0x3d6ec>
+  47acc6:	f7c2 fa02 	bl	43d0ce <.text-0x3db92>
+  47acca:	07c0      	lsls	r0, r0, #31
+  47accc:	d403      	bmi.n	47acd6 <.text+0x76>
+  47acce:	f7c2 f9fe 	bl	43d0ce <.text-0x3db92>
+  47acd2:	0740      	lsls	r0, r0, #29
+  47acd4:	d506      	bpl.n	47ace4 <.text+0x84>
+  47acd6:	f8df 1a04 	ldr.w	r1, [pc, #2564]	@ 47b6dc <.text+0xa7c>
+  47acda:	000a      	movs	r2, r1
+  47acdc:	f05f 6000 	movs.w	r0, #134217728	@ 0x8000000
+  47ace0:	f7c2 f8dd 	bl	43ce9e <.text-0x3ddc2>
+  47ace4:	2000      	movs	r0, #0
+  47ace6:	b00a      	add	sp, #40	@ 0x28
+  47ace8:	bd70      	pop	{r4, r5, r6, pc}

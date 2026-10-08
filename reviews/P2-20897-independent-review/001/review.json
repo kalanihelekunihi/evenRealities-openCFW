@@ -1,0 +1,10 @@
+{
+  "id": "P2-20897",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "Fresh replay passed for 98 bytes at 0x47D7B6..0x47D818; pinned image/source hashes and tiling match. R4 is narrowed to LOW8 before the guard. Three possible independent 0x47D8CE observations feed a LOW8 logger value, a separate LOW8 mask value, and a final 0x4ABD60 call with explicit zero plus LOW8 result. The shared epilogue explicitly sets R0=0, adds 20 to SP (discarding 16 local bytes and saved entry R3), then POPs R4-R7/PC to complete the 40-byte frame. The case flag is not returned."
+}

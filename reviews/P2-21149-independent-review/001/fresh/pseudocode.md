@@ -1,0 +1,7 @@
+# Modes five/six and default: selector validation and helper errors
+
+Partial/unaccepted;148 instruction bytes480BC2..480C56. Continuation4809C4;16-byte frame,R4entryR1 pointer. Mode5 calls4C44BC withR0=2,R1=52 and liveR2/R3. Nonzero full helper result branches480A1A epilogue, preservingR0; no subsequent writes. On zero:nonnullR4→freshword[R4] v;accept v==0 or unsigned(v-3mod2^32)<5 (3..7);otherwise return6 via480A1A. Acceptednonnull: pointer480EB4 freshword→SP0;reloadclear0x7000→SP0;reload intoR1 then a SECOND freshword[R4] shifted12mod2^32 AND0x7000 ORR1→SP0;reloadstoreword. Validation value must not replace second read. NullR4 path: same initialword/scratchclear but OR0x4000, then store. Both successpaths freshword atpointer480EC8 OR0x80 store;branch480A18 setsR0=0 thenepilogue.
+
+Mode6: freshword atpointer480EB4 OR0x7000 store;freshword atpointer480EC8 clear0x80 store;call4C4530 withR0=2,R1=52 and liveR2/R3. Nonzero fullhelperresult→480A1A;zero→480A18 returns0. These writes precede helper failure and are not rolled back. No R4 dereference orSP0 scratch store on mode6. Default selectors7..255 return6 via480A1A withoutmodewrites/helpercall.
+
+CommonPOP R1,R4,R5,PC releases16. Mode5successful returnsR1scratchSP0 final configuration;earlyhelperfailure/invalidselector,mode6/default retain savedentryR3 inSP0 unless helper aliases stack. Preserve distinct fresh reads,scratch accesses,helper liveargs and effects. No C/freeze/fullcoverage/equality claim.

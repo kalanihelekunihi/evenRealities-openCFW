@@ -1,0 +1,4 @@
+# Unsigned wrapping interval decision with ordered object writes
+
+Partial/unaccepted;62instructionbytes47E93C..47E97A. PUSH R4,LR8;R4=0;writeobjectword4=entryR1;writeobjectword16=entryR0 selfpointer, beforeallchecks. UnsignedentryR2>=entryR1: R2=(entryR2-entryR3)modulo2^32;freshobjectword24intoR1;unsignedR2>=R1→R4=1,skiphelper. Otherwise4560B2(freshword[pointerliteralEB7C],object+4,wrappingR2,liveentryR3),R4stays0.
+UnsignedentryR2<entryR1: ifentryR2<entryR3 ANDentryR1>=entryR3 (bothunsigned),R4=1skiphelper. Otherwise4560B2(freshword[pointerliteralEB78],object+4,entryR2,entryR3),R4stays0. BothpathsreturnfullR0=R4,discardhelperreturn. POP R4,PC restoresentryR4. Noextraobject/counterrangeguards; helperreceivesdifferentglobalpointerdependingbranch. Writesandfreshobjectword24mustpreservealiasorder. Refines21390callbackloopcontinuationcondition;no C/freeze/completenessclaim.

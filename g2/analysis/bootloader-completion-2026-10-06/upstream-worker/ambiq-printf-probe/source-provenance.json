@@ -1,0 +1,18 @@
+{
+  "original_sdk_path": "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/utils/am_util_stdio.c",
+  "original_sdk_sha256": "69317e45879c520cf4061d5b76ad13498d5cdcd0851ecb2356683d566c1e122d",
+  "sdk_revision": "release_sdk_3_2_0-dd5f40c14b",
+  "copyright": "Ambiq Micro Inc., 2024",
+  "license": "BSD-3-Clause notice retained in plain_printf.c; generic utility only, not Apollo510 HAL identity",
+  "adapted_source": "g2/components/bootloader/initializer_callbacks/plain_printf.c",
+  "adapted_sha256": "47b073dc7cd64dff1274fc77bf7ef02f3b0bc0b730061a4009ef14ae26caed13",
+  "changes": [
+    "Explicit string precision applies to copied length",
+    "Negative string width emits abs(width) trailing padding",
+    "Default precision -1 as stock MOV fp,#-1",
+    "Fixed sink200270cc/buffer20024cd0/translation200271c4",
+    "Parser/helpers and printf wrapper retained; unrelated SDK APIs removed"
+  ],
+  "build_profile": "clang arm-none-eabi Cortex-M7 Thumb fpv5-d16 softfp O0 freestanding fno-builtin fwrapv; scalar profile avoids Armv8.1 cset unsupported by FP oracle",
+  "limits": "Comparison build profile, not official stock compiler or byte equality"
+}

@@ -1,0 +1,54 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp2uadrit3/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047fc14 <.text>:
+  47fc14:	f8df 1530 	ldr.w	r1, [pc, #1328]	@ 480148 <.text+0x534>
+  47fc18:	7808      	ldrb	r0, [r1, #0]
+  47fc1a:	2800      	cmp	r0, #0
+  47fc1c:	f040 80ca 	bne.w	47fdb4 <.text+0x1a0>
+  47fc20:	f8df 0528 	ldr.w	r0, [pc, #1320]	@ 48014c <.text+0x538>
+  47fc24:	6802      	ldr	r2, [r0, #0]
+  47fc26:	f3c2 5205 	ubfx	r2, r2, #20, #6
+  47fc2a:	f8df 3524 	ldr.w	r3, [pc, #1316]	@ 480150 <.text+0x53c>
+  47fc2e:	601a      	str	r2, [r3, #0]
+  47fc30:	f8df 2520 	ldr.w	r2, [pc, #1312]	@ 480154 <.text+0x540>
+  47fc34:	6813      	ldr	r3, [r2, #0]
+  47fc36:	f013 033f 	ands.w	r3, r3, #63	@ 0x3f
+  47fc3a:	f8df 551c 	ldr.w	r5, [pc, #1308]	@ 480158 <.text+0x544>
+  47fc3e:	602b      	str	r3, [r5, #0]
+  47fc40:	6800      	ldr	r0, [r0, #0]
+  47fc42:	0e80      	lsrs	r0, r0, #26
+  47fc44:	f8df 3514 	ldr.w	r3, [pc, #1300]	@ 48015c <.text+0x548>
+  47fc48:	6018      	str	r0, [r3, #0]
+  47fc4a:	6810      	ldr	r0, [r2, #0]
+  47fc4c:	f3c0 4085 	ubfx	r0, r0, #18, #6
+  47fc50:	f8df 250c 	ldr.w	r2, [pc, #1292]	@ 480160 <.text+0x54c>
+  47fc54:	6010      	str	r0, [r2, #0]
+  47fc56:	f8df 050c 	ldr.w	r0, [pc, #1292]	@ 480164 <.text+0x550>
+  47fc5a:	6800      	ldr	r0, [r0, #0]
+  47fc5c:	f010 007f 	ands.w	r0, r0, #127	@ 0x7f
+  47fc60:	f8df 2504 	ldr.w	r2, [pc, #1284]	@ 480168 <.text+0x554>
+  47fc64:	6010      	str	r0, [r2, #0]
+  47fc66:	f8df 0504 	ldr.w	r0, [pc, #1284]	@ 48016c <.text+0x558>
+  47fc6a:	6800      	ldr	r0, [r0, #0]
+  47fc6c:	f010 007f 	ands.w	r0, r0, #127	@ 0x7f
+  47fc70:	f8df 24fc 	ldr.w	r2, [pc, #1276]	@ 480170 <.text+0x55c>
+  47fc74:	6010      	str	r0, [r2, #0]
+  47fc76:	f8df 04fc 	ldr.w	r0, [pc, #1276]	@ 480174 <.text+0x560>
+  47fc7a:	6800      	ldr	r0, [r0, #0]
+  47fc7c:	f3c0 7041 	ubfx	r0, r0, #29, #2
+  47fc80:	f8df 24f4 	ldr.w	r2, [pc, #1268]	@ 480178 <.text+0x564>
+  47fc84:	6010      	str	r0, [r2, #0]
+  47fc86:	f8df 04f4 	ldr.w	r0, [pc, #1268]	@ 48017c <.text+0x568>
+  47fc8a:	6802      	ldr	r2, [r0, #0]
+  47fc8c:	f3c2 2283 	ubfx	r2, r2, #10, #4
+  47fc90:	f8df 34ec 	ldr.w	r3, [pc, #1260]	@ 480180 <.text+0x56c>
+  47fc94:	601a      	str	r2, [r3, #0]
+  47fc96:	f8df 24ec 	ldr.w	r2, [pc, #1260]	@ 480184 <.text+0x570>
+  47fc9a:	6800      	ldr	r0, [r0, #0]
+  47fc9c:	0580      	lsls	r0, r0, #22
+  47fc9e:	0d80      	lsrs	r0, r0, #22
+  47fca0:	6010      	str	r0, [r2, #0]

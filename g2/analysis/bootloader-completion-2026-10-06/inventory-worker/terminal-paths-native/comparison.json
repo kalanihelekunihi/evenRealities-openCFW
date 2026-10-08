@@ -1,0 +1,3291 @@
+{
+  "status": "PASS_FIVE_TERMINAL_PATHS_WITH_DECLARED_CHILDREN",
+  "cases": 120,
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_sha256": "abac16bf0d1a2f6521431b5efeabf786844f76c740a1bf809f463ff93e98a915",
+  "elf_sha256": "c54923eefd4e8f8b62db4958f2ead4be910e1c14ee2ff5fa89ce762d505510cc",
+  "original_bodies": [
+    {
+      "name": "task",
+      "start": 4305808,
+      "end": 4305850,
+      "bytes": 42,
+      "visited": 40
+    },
+    {
+      "name": "malloc",
+      "start": 4306422,
+      "end": 4306432,
+      "bytes": 10,
+      "visited": 10
+    },
+    {
+      "name": "overflow",
+      "start": 4306432,
+      "end": 4306444,
+      "bytes": 12,
+      "visited": 8
+    },
+    {
+      "name": "dfu",
+      "start": 4383194,
+      "end": 4383212,
+      "bytes": 18,
+      "visited": 18
+    },
+    {
+      "name": "platform",
+      "start": 4401604,
+      "end": 4401618,
+      "bytes": 14,
+      "visited": 14
+    }
+  ],
+  "comparisons": [
+    {
+      "fixture": {
+        "entry": "task",
+        "critical": 0,
+        "status": 0,
+        "child_return": 0,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "invalid-store",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ],
+        "basepri": 48
+      }
+    },
+    {
+      "fixture": {
+        "entry": "task",
+        "critical": 0,
+        "status": 0,
+        "child_return": 0,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "invalid-store",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ],
+        "basepri": 48
+      }
+    },
+    {
+      "fixture": {
+        "entry": "task",
+        "critical": 0,
+        "status": 0,
+        "child_return": 0,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "invalid-store",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ],
+        "basepri": 48
+      }
+    },
+    {
+      "fixture": {
+        "entry": "task",
+        "critical": 0,
+        "status": 0,
+        "child_return": 4294967290,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "invalid-store",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ],
+        "basepri": 48
+      }
+    },
+    {
+      "fixture": {
+        "entry": "task",
+        "critical": 0,
+        "status": 0,
+        "child_return": 4294967290,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "invalid-store",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ],
+        "basepri": 48
+      }
+    },
+    {
+      "fixture": {
+        "entry": "task",
+        "critical": 0,
+        "status": 0,
+        "child_return": 4294967290,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "invalid-store",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ],
+        "basepri": 48
+      }
+    },
+    {
+      "fixture": {
+        "entry": "task",
+        "critical": 0,
+        "status": 3735928559,
+        "child_return": 0,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "invalid-store",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ],
+        "basepri": 48
+      }
+    },
+    {
+      "fixture": {
+        "entry": "task",
+        "critical": 0,
+        "status": 3735928559,
+        "child_return": 0,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "invalid-store",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ],
+        "basepri": 48
+      }
+    },
+    {
+      "fixture": {
+        "entry": "task",
+        "critical": 0,
+        "status": 3735928559,
+        "child_return": 0,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "invalid-store",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ],
+        "basepri": 48
+      }
+    },
+    {
+      "fixture": {
+        "entry": "task",
+        "critical": 0,
+        "status": 3735928559,
+        "child_return": 4294967290,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "invalid-store",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ],
+        "basepri": 48
+      }
+    },
+    {
+      "fixture": {
+        "entry": "task",
+        "critical": 0,
+        "status": 3735928559,
+        "child_return": 4294967290,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "invalid-store",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ],
+        "basepri": 48
+      }
+    },
+    {
+      "fixture": {
+        "entry": "task",
+        "critical": 0,
+        "status": 3735928559,
+        "child_return": 4294967290,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "invalid-store",
+            4294967295,
+            4,
+            0,
+            48
+          ]
+        ],
+        "basepri": 48
+      }
+    },
+    {
+      "fixture": {
+        "entry": "task",
+        "critical": 4294967295,
+        "status": 0,
+        "child_return": 0,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "debug-return",
+            1,
+            537128960,
+            11190276,
+            11190277,
+            11190278,
+            11190279,
+            11190280,
+            11190281,
+            11190282,
+            11190283
+          ]
+        ],
+        "basepri": 48
+      }
+    },
+    {
+      "fixture": {
+        "entry": "task",
+        "critical": 4294967295,
+        "status": 0,
+        "child_return": 0,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "debug-return",
+            123,
+            537128960,
+            11190276,
+            11190277,
+            11190278,
+            11190279,
+            11190280,
+            11190281,
+            11190282,
+            11190283
+          ]
+        ],
+        "basepri": 48
+      }
+    },
+    {
+      "fixture": {
+        "entry": "task",
+        "critical": 4294967295,
+        "status": 0,
+        "child_return": 0,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "debug-return",
+            4294967295,
+            537128960,
+            11190276,
+            11190277,
+            11190278,
+            11190279,
+            11190280,
+            11190281,
+            11190282,
+            11190283
+          ]
+        ],
+        "basepri": 48
+      }
+    },
+    {
+      "fixture": {
+        "entry": "task",
+        "critical": 4294967295,
+        "status": 0,
+        "child_return": 4294967290,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "debug-return",
+            1,
+            537128960,
+            11190276,
+            11190277,
+            11190278,
+            11190279,
+            11190280,
+            11190281,
+            11190282,
+            11190283
+          ]
+        ],
+        "basepri": 48
+      }
+    },
+    {
+      "fixture": {
+        "entry": "task",
+        "critical": 4294967295,
+        "status": 0,
+        "child_return": 4294967290,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "debug-return",
+            123,
+            537128960,
+            11190276,
+            11190277,
+            11190278,
+            11190279,
+            11190280,
+            11190281,
+            11190282,
+            11190283
+          ]
+        ],
+        "basepri": 48
+      }
+    },
+    {
+      "fixture": {
+        "entry": "task",
+        "critical": 4294967295,
+        "status": 0,
+        "child_return": 4294967290,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "debug-return",
+            4294967295,
+            537128960,
+            11190276,
+            11190277,
+            11190278,
+            11190279,
+            11190280,
+            11190281,
+            11190282,
+            11190283
+          ]
+        ],
+        "basepri": 48
+      }
+    },
+    {
+      "fixture": {
+        "entry": "task",
+        "critical": 4294967295,
+        "status": 3735928559,
+        "child_return": 0,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "debug-return",
+            1,
+            537128960,
+            11190276,
+            11190277,
+            11190278,
+            11190279,
+            11190280,
+            11190281,
+            11190282,
+            11190283
+          ]
+        ],
+        "basepri": 48
+      }
+    },
+    {
+      "fixture": {
+        "entry": "task",
+        "critical": 4294967295,
+        "status": 3735928559,
+        "child_return": 0,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "debug-return",
+            123,
+            537128960,
+            11190276,
+            11190277,
+            11190278,
+            11190279,
+            11190280,
+            11190281,
+            11190282,
+            11190283
+          ]
+        ],
+        "basepri": 48
+      }
+    },
+    {
+      "fixture": {
+        "entry": "task",
+        "critical": 4294967295,
+        "status": 3735928559,
+        "child_return": 0,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "debug-return",
+            4294967295,
+            537128960,
+            11190276,
+            11190277,
+            11190278,
+            11190279,
+            11190280,
+            11190281,
+            11190282,
+            11190283
+          ]
+        ],
+        "basepri": 48
+      }
+    },
+    {
+      "fixture": {
+        "entry": "task",
+        "critical": 4294967295,
+        "status": 3735928559,
+        "child_return": 4294967290,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "debug-return",
+            1,
+            537128960,
+            11190276,
+            11190277,
+            11190278,
+            11190279,
+            11190280,
+            11190281,
+            11190282,
+            11190283
+          ]
+        ],
+        "basepri": 48
+      }
+    },
+    {
+      "fixture": {
+        "entry": "task",
+        "critical": 4294967295,
+        "status": 3735928559,
+        "child_return": 4294967290,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "debug-return",
+            123,
+            537128960,
+            11190276,
+            11190277,
+            11190278,
+            11190279,
+            11190280,
+            11190281,
+            11190282,
+            11190283
+          ]
+        ],
+        "basepri": 48
+      }
+    },
+    {
+      "fixture": {
+        "entry": "task",
+        "critical": 4294967295,
+        "status": 3735928559,
+        "child_return": 4294967290,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "mask"
+          ]
+        ],
+        "terminal": [
+          [
+            "debug-return",
+            4294967295,
+            537128960,
+            11190276,
+            11190277,
+            11190278,
+            11190279,
+            11190280,
+            11190281,
+            11190282,
+            11190283
+          ]
+        ],
+        "basepri": 48
+      }
+    },
+    {
+      "fixture": {
+        "entry": "malloc",
+        "critical": 0,
+        "status": 0,
+        "child_return": 0,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "4d616c6c6f634661696c65efbc9a63616e6e6f74206d616c6c6f63206d656d6f72790d0a",
+            null
+          ]
+        ],
+        "terminal": [
+          [
+            "spin-after-print"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "malloc",
+        "critical": 0,
+        "status": 0,
+        "child_return": 0,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "4d616c6c6f634661696c65efbc9a63616e6e6f74206d616c6c6f63206d656d6f72790d0a",
+            null
+          ]
+        ],
+        "terminal": [
+          [
+            "spin-after-print"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "malloc",
+        "critical": 0,
+        "status": 0,
+        "child_return": 0,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "4d616c6c6f634661696c65efbc9a63616e6e6f74206d616c6c6f63206d656d6f72790d0a",
+            null
+          ]
+        ],
+        "terminal": [
+          [
+            "spin-after-print"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "malloc",
+        "critical": 0,
+        "status": 0,
+        "child_return": 4294967290,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "4d616c6c6f634661696c65efbc9a63616e6e6f74206d616c6c6f63206d656d6f72790d0a",
+            null
+          ]
+        ],
+        "terminal": [
+          [
+            "spin-after-print"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "malloc",
+        "critical": 0,
+        "status": 0,
+        "child_return": 4294967290,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "4d616c6c6f634661696c65efbc9a63616e6e6f74206d616c6c6f63206d656d6f72790d0a",
+            null
+          ]
+        ],
+        "terminal": [
+          [
+            "spin-after-print"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "malloc",
+        "critical": 0,
+        "status": 0,
+        "child_return": 4294967290,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "4d616c6c6f634661696c65efbc9a63616e6e6f74206d616c6c6f63206d656d6f72790d0a",
+            null
+          ]
+        ],
+        "terminal": [
+          [
+            "spin-after-print"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "malloc",
+        "critical": 0,
+        "status": 3735928559,
+        "child_return": 0,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "4d616c6c6f634661696c65efbc9a63616e6e6f74206d616c6c6f63206d656d6f72790d0a",
+            null
+          ]
+        ],
+        "terminal": [
+          [
+            "spin-after-print"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "malloc",
+        "critical": 0,
+        "status": 3735928559,
+        "child_return": 0,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "4d616c6c6f634661696c65efbc9a63616e6e6f74206d616c6c6f63206d656d6f72790d0a",
+            null
+          ]
+        ],
+        "terminal": [
+          [
+            "spin-after-print"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "malloc",
+        "critical": 0,
+        "status": 3735928559,
+        "child_return": 0,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "4d616c6c6f634661696c65efbc9a63616e6e6f74206d616c6c6f63206d656d6f72790d0a",
+            null
+          ]
+        ],
+        "terminal": [
+          [
+            "spin-after-print"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "malloc",
+        "critical": 0,
+        "status": 3735928559,
+        "child_return": 4294967290,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "4d616c6c6f634661696c65efbc9a63616e6e6f74206d616c6c6f63206d656d6f72790d0a",
+            null
+          ]
+        ],
+        "terminal": [
+          [
+            "spin-after-print"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "malloc",
+        "critical": 0,
+        "status": 3735928559,
+        "child_return": 4294967290,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "4d616c6c6f634661696c65efbc9a63616e6e6f74206d616c6c6f63206d656d6f72790d0a",
+            null
+          ]
+        ],
+        "terminal": [
+          [
+            "spin-after-print"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "malloc",
+        "critical": 0,
+        "status": 3735928559,
+        "child_return": 4294967290,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "4d616c6c6f634661696c65efbc9a63616e6e6f74206d616c6c6f63206d656d6f72790d0a",
+            null
+          ]
+        ],
+        "terminal": [
+          [
+            "spin-after-print"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "malloc",
+        "critical": 4294967295,
+        "status": 0,
+        "child_return": 0,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "4d616c6c6f634661696c65efbc9a63616e6e6f74206d616c6c6f63206d656d6f72790d0a",
+            null
+          ]
+        ],
+        "terminal": [
+          [
+            "spin-after-print"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "malloc",
+        "critical": 4294967295,
+        "status": 0,
+        "child_return": 0,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "4d616c6c6f634661696c65efbc9a63616e6e6f74206d616c6c6f63206d656d6f72790d0a",
+            null
+          ]
+        ],
+        "terminal": [
+          [
+            "spin-after-print"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "malloc",
+        "critical": 4294967295,
+        "status": 0,
+        "child_return": 0,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "4d616c6c6f634661696c65efbc9a63616e6e6f74206d616c6c6f63206d656d6f72790d0a",
+            null
+          ]
+        ],
+        "terminal": [
+          [
+            "spin-after-print"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "malloc",
+        "critical": 4294967295,
+        "status": 0,
+        "child_return": 4294967290,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "4d616c6c6f634661696c65efbc9a63616e6e6f74206d616c6c6f63206d656d6f72790d0a",
+            null
+          ]
+        ],
+        "terminal": [
+          [
+            "spin-after-print"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "malloc",
+        "critical": 4294967295,
+        "status": 0,
+        "child_return": 4294967290,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "4d616c6c6f634661696c65efbc9a63616e6e6f74206d616c6c6f63206d656d6f72790d0a",
+            null
+          ]
+        ],
+        "terminal": [
+          [
+            "spin-after-print"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "malloc",
+        "critical": 4294967295,
+        "status": 0,
+        "child_return": 4294967290,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "4d616c6c6f634661696c65efbc9a63616e6e6f74206d616c6c6f63206d656d6f72790d0a",
+            null
+          ]
+        ],
+        "terminal": [
+          [
+            "spin-after-print"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "malloc",
+        "critical": 4294967295,
+        "status": 3735928559,
+        "child_return": 0,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "4d616c6c6f634661696c65efbc9a63616e6e6f74206d616c6c6f63206d656d6f72790d0a",
+            null
+          ]
+        ],
+        "terminal": [
+          [
+            "spin-after-print"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "malloc",
+        "critical": 4294967295,
+        "status": 3735928559,
+        "child_return": 0,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "4d616c6c6f634661696c65efbc9a63616e6e6f74206d616c6c6f63206d656d6f72790d0a",
+            null
+          ]
+        ],
+        "terminal": [
+          [
+            "spin-after-print"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "malloc",
+        "critical": 4294967295,
+        "status": 3735928559,
+        "child_return": 0,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "4d616c6c6f634661696c65efbc9a63616e6e6f74206d616c6c6f63206d656d6f72790d0a",
+            null
+          ]
+        ],
+        "terminal": [
+          [
+            "spin-after-print"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "malloc",
+        "critical": 4294967295,
+        "status": 3735928559,
+        "child_return": 4294967290,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "4d616c6c6f634661696c65efbc9a63616e6e6f74206d616c6c6f63206d656d6f72790d0a",
+            null
+          ]
+        ],
+        "terminal": [
+          [
+            "spin-after-print"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "malloc",
+        "critical": 4294967295,
+        "status": 3735928559,
+        "child_return": 4294967290,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "4d616c6c6f634661696c65efbc9a63616e6e6f74206d616c6c6f63206d656d6f72790d0a",
+            null
+          ]
+        ],
+        "terminal": [
+          [
+            "spin-after-print"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "malloc",
+        "critical": 4294967295,
+        "status": 3735928559,
+        "child_return": 4294967290,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "4d616c6c6f634661696c65efbc9a63616e6e6f74206d616c6c6f63206d656d6f72790d0a",
+            null
+          ]
+        ],
+        "terminal": [
+          [
+            "spin-after-print"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "overflow",
+        "critical": 0,
+        "status": 0,
+        "child_return": 0,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "7461736b20257320737461636b206f766572666c6f77",
+            "776f726b65722d74657374"
+          ]
+        ],
+        "terminal": [
+          [
+            "stock-breakpoint0"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "overflow",
+        "critical": 0,
+        "status": 0,
+        "child_return": 0,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "7461736b20257320737461636b206f766572666c6f77",
+            "776f726b65722d74657374"
+          ]
+        ],
+        "terminal": [
+          [
+            "stock-breakpoint0"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "overflow",
+        "critical": 0,
+        "status": 0,
+        "child_return": 0,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "7461736b20257320737461636b206f766572666c6f77",
+            "776f726b65722d74657374"
+          ]
+        ],
+        "terminal": [
+          [
+            "stock-breakpoint0"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "overflow",
+        "critical": 0,
+        "status": 0,
+        "child_return": 4294967290,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "7461736b20257320737461636b206f766572666c6f77",
+            "776f726b65722d74657374"
+          ]
+        ],
+        "terminal": [
+          [
+            "stock-breakpoint0"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "overflow",
+        "critical": 0,
+        "status": 0,
+        "child_return": 4294967290,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "7461736b20257320737461636b206f766572666c6f77",
+            "776f726b65722d74657374"
+          ]
+        ],
+        "terminal": [
+          [
+            "stock-breakpoint0"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "overflow",
+        "critical": 0,
+        "status": 0,
+        "child_return": 4294967290,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "7461736b20257320737461636b206f766572666c6f77",
+            "776f726b65722d74657374"
+          ]
+        ],
+        "terminal": [
+          [
+            "stock-breakpoint0"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "overflow",
+        "critical": 0,
+        "status": 3735928559,
+        "child_return": 0,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "7461736b20257320737461636b206f766572666c6f77",
+            "776f726b65722d74657374"
+          ]
+        ],
+        "terminal": [
+          [
+            "stock-breakpoint0"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "overflow",
+        "critical": 0,
+        "status": 3735928559,
+        "child_return": 0,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "7461736b20257320737461636b206f766572666c6f77",
+            "776f726b65722d74657374"
+          ]
+        ],
+        "terminal": [
+          [
+            "stock-breakpoint0"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "overflow",
+        "critical": 0,
+        "status": 3735928559,
+        "child_return": 0,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "7461736b20257320737461636b206f766572666c6f77",
+            "776f726b65722d74657374"
+          ]
+        ],
+        "terminal": [
+          [
+            "stock-breakpoint0"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "overflow",
+        "critical": 0,
+        "status": 3735928559,
+        "child_return": 4294967290,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "7461736b20257320737461636b206f766572666c6f77",
+            "776f726b65722d74657374"
+          ]
+        ],
+        "terminal": [
+          [
+            "stock-breakpoint0"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "overflow",
+        "critical": 0,
+        "status": 3735928559,
+        "child_return": 4294967290,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "7461736b20257320737461636b206f766572666c6f77",
+            "776f726b65722d74657374"
+          ]
+        ],
+        "terminal": [
+          [
+            "stock-breakpoint0"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "overflow",
+        "critical": 0,
+        "status": 3735928559,
+        "child_return": 4294967290,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "7461736b20257320737461636b206f766572666c6f77",
+            "776f726b65722d74657374"
+          ]
+        ],
+        "terminal": [
+          [
+            "stock-breakpoint0"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "overflow",
+        "critical": 4294967295,
+        "status": 0,
+        "child_return": 0,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "7461736b20257320737461636b206f766572666c6f77",
+            "776f726b65722d74657374"
+          ]
+        ],
+        "terminal": [
+          [
+            "stock-breakpoint0"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "overflow",
+        "critical": 4294967295,
+        "status": 0,
+        "child_return": 0,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "7461736b20257320737461636b206f766572666c6f77",
+            "776f726b65722d74657374"
+          ]
+        ],
+        "terminal": [
+          [
+            "stock-breakpoint0"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "overflow",
+        "critical": 4294967295,
+        "status": 0,
+        "child_return": 0,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "7461736b20257320737461636b206f766572666c6f77",
+            "776f726b65722d74657374"
+          ]
+        ],
+        "terminal": [
+          [
+            "stock-breakpoint0"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "overflow",
+        "critical": 4294967295,
+        "status": 0,
+        "child_return": 4294967290,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "7461736b20257320737461636b206f766572666c6f77",
+            "776f726b65722d74657374"
+          ]
+        ],
+        "terminal": [
+          [
+            "stock-breakpoint0"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "overflow",
+        "critical": 4294967295,
+        "status": 0,
+        "child_return": 4294967290,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "7461736b20257320737461636b206f766572666c6f77",
+            "776f726b65722d74657374"
+          ]
+        ],
+        "terminal": [
+          [
+            "stock-breakpoint0"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "overflow",
+        "critical": 4294967295,
+        "status": 0,
+        "child_return": 4294967290,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "7461736b20257320737461636b206f766572666c6f77",
+            "776f726b65722d74657374"
+          ]
+        ],
+        "terminal": [
+          [
+            "stock-breakpoint0"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "overflow",
+        "critical": 4294967295,
+        "status": 3735928559,
+        "child_return": 0,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "7461736b20257320737461636b206f766572666c6f77",
+            "776f726b65722d74657374"
+          ]
+        ],
+        "terminal": [
+          [
+            "stock-breakpoint0"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "overflow",
+        "critical": 4294967295,
+        "status": 3735928559,
+        "child_return": 0,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "7461736b20257320737461636b206f766572666c6f77",
+            "776f726b65722d74657374"
+          ]
+        ],
+        "terminal": [
+          [
+            "stock-breakpoint0"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "overflow",
+        "critical": 4294967295,
+        "status": 3735928559,
+        "child_return": 0,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "7461736b20257320737461636b206f766572666c6f77",
+            "776f726b65722d74657374"
+          ]
+        ],
+        "terminal": [
+          [
+            "stock-breakpoint0"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "overflow",
+        "critical": 4294967295,
+        "status": 3735928559,
+        "child_return": 4294967290,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "7461736b20257320737461636b206f766572666c6f77",
+            "776f726b65722d74657374"
+          ]
+        ],
+        "terminal": [
+          [
+            "stock-breakpoint0"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "overflow",
+        "critical": 4294967295,
+        "status": 3735928559,
+        "child_return": 4294967290,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "7461736b20257320737461636b206f766572666c6f77",
+            "776f726b65722d74657374"
+          ]
+        ],
+        "terminal": [
+          [
+            "stock-breakpoint0"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "overflow",
+        "critical": 4294967295,
+        "status": 3735928559,
+        "child_return": 4294967290,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "print",
+            "7461736b20257320737461636b206f766572666c6f77",
+            "776f726b65722d74657374"
+          ]
+        ],
+        "terminal": [
+          [
+            "stock-breakpoint0"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "dfu",
+        "critical": 0,
+        "status": 0,
+        "child_return": 0,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "signal",
+            1
+          ],
+          [
+            "delay",
+            4294967295
+          ],
+          [
+            "delay",
+            4294967295
+          ]
+        ],
+        "terminal": [
+          [
+            "two-delay-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "dfu",
+        "critical": 0,
+        "status": 0,
+        "child_return": 0,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "signal",
+            1
+          ],
+          [
+            "delay",
+            4294967295
+          ],
+          [
+            "delay",
+            4294967295
+          ]
+        ],
+        "terminal": [
+          [
+            "two-delay-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "dfu",
+        "critical": 0,
+        "status": 0,
+        "child_return": 0,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "signal",
+            1
+          ],
+          [
+            "delay",
+            4294967295
+          ],
+          [
+            "delay",
+            4294967295
+          ]
+        ],
+        "terminal": [
+          [
+            "two-delay-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "dfu",
+        "critical": 0,
+        "status": 0,
+        "child_return": 4294967290,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "signal",
+            1
+          ],
+          [
+            "delay",
+            4294967295
+          ],
+          [
+            "delay",
+            4294967295
+          ]
+        ],
+        "terminal": [
+          [
+            "two-delay-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "dfu",
+        "critical": 0,
+        "status": 0,
+        "child_return": 4294967290,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "signal",
+            1
+          ],
+          [
+            "delay",
+            4294967295
+          ],
+          [
+            "delay",
+            4294967295
+          ]
+        ],
+        "terminal": [
+          [
+            "two-delay-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "dfu",
+        "critical": 0,
+        "status": 0,
+        "child_return": 4294967290,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "signal",
+            1
+          ],
+          [
+            "delay",
+            4294967295
+          ],
+          [
+            "delay",
+            4294967295
+          ]
+        ],
+        "terminal": [
+          [
+            "two-delay-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "dfu",
+        "critical": 0,
+        "status": 3735928559,
+        "child_return": 0,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "signal",
+            1
+          ],
+          [
+            "delay",
+            4294967295
+          ],
+          [
+            "delay",
+            4294967295
+          ]
+        ],
+        "terminal": [
+          [
+            "two-delay-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "dfu",
+        "critical": 0,
+        "status": 3735928559,
+        "child_return": 0,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "signal",
+            1
+          ],
+          [
+            "delay",
+            4294967295
+          ],
+          [
+            "delay",
+            4294967295
+          ]
+        ],
+        "terminal": [
+          [
+            "two-delay-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "dfu",
+        "critical": 0,
+        "status": 3735928559,
+        "child_return": 0,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "signal",
+            1
+          ],
+          [
+            "delay",
+            4294967295
+          ],
+          [
+            "delay",
+            4294967295
+          ]
+        ],
+        "terminal": [
+          [
+            "two-delay-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "dfu",
+        "critical": 0,
+        "status": 3735928559,
+        "child_return": 4294967290,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "signal",
+            1
+          ],
+          [
+            "delay",
+            4294967295
+          ],
+          [
+            "delay",
+            4294967295
+          ]
+        ],
+        "terminal": [
+          [
+            "two-delay-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "dfu",
+        "critical": 0,
+        "status": 3735928559,
+        "child_return": 4294967290,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "signal",
+            1
+          ],
+          [
+            "delay",
+            4294967295
+          ],
+          [
+            "delay",
+            4294967295
+          ]
+        ],
+        "terminal": [
+          [
+            "two-delay-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "dfu",
+        "critical": 0,
+        "status": 3735928559,
+        "child_return": 4294967290,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "signal",
+            1
+          ],
+          [
+            "delay",
+            4294967295
+          ],
+          [
+            "delay",
+            4294967295
+          ]
+        ],
+        "terminal": [
+          [
+            "two-delay-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "dfu",
+        "critical": 4294967295,
+        "status": 0,
+        "child_return": 0,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "signal",
+            1
+          ],
+          [
+            "delay",
+            4294967295
+          ],
+          [
+            "delay",
+            4294967295
+          ]
+        ],
+        "terminal": [
+          [
+            "two-delay-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "dfu",
+        "critical": 4294967295,
+        "status": 0,
+        "child_return": 0,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "signal",
+            1
+          ],
+          [
+            "delay",
+            4294967295
+          ],
+          [
+            "delay",
+            4294967295
+          ]
+        ],
+        "terminal": [
+          [
+            "two-delay-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "dfu",
+        "critical": 4294967295,
+        "status": 0,
+        "child_return": 0,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "signal",
+            1
+          ],
+          [
+            "delay",
+            4294967295
+          ],
+          [
+            "delay",
+            4294967295
+          ]
+        ],
+        "terminal": [
+          [
+            "two-delay-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "dfu",
+        "critical": 4294967295,
+        "status": 0,
+        "child_return": 4294967290,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "signal",
+            1
+          ],
+          [
+            "delay",
+            4294967295
+          ],
+          [
+            "delay",
+            4294967295
+          ]
+        ],
+        "terminal": [
+          [
+            "two-delay-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "dfu",
+        "critical": 4294967295,
+        "status": 0,
+        "child_return": 4294967290,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "signal",
+            1
+          ],
+          [
+            "delay",
+            4294967295
+          ],
+          [
+            "delay",
+            4294967295
+          ]
+        ],
+        "terminal": [
+          [
+            "two-delay-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "dfu",
+        "critical": 4294967295,
+        "status": 0,
+        "child_return": 4294967290,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "signal",
+            1
+          ],
+          [
+            "delay",
+            4294967295
+          ],
+          [
+            "delay",
+            4294967295
+          ]
+        ],
+        "terminal": [
+          [
+            "two-delay-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "dfu",
+        "critical": 4294967295,
+        "status": 3735928559,
+        "child_return": 0,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "signal",
+            1
+          ],
+          [
+            "delay",
+            4294967295
+          ],
+          [
+            "delay",
+            4294967295
+          ]
+        ],
+        "terminal": [
+          [
+            "two-delay-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "dfu",
+        "critical": 4294967295,
+        "status": 3735928559,
+        "child_return": 0,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "signal",
+            1
+          ],
+          [
+            "delay",
+            4294967295
+          ],
+          [
+            "delay",
+            4294967295
+          ]
+        ],
+        "terminal": [
+          [
+            "two-delay-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "dfu",
+        "critical": 4294967295,
+        "status": 3735928559,
+        "child_return": 0,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "signal",
+            1
+          ],
+          [
+            "delay",
+            4294967295
+          ],
+          [
+            "delay",
+            4294967295
+          ]
+        ],
+        "terminal": [
+          [
+            "two-delay-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "dfu",
+        "critical": 4294967295,
+        "status": 3735928559,
+        "child_return": 4294967290,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "signal",
+            1
+          ],
+          [
+            "delay",
+            4294967295
+          ],
+          [
+            "delay",
+            4294967295
+          ]
+        ],
+        "terminal": [
+          [
+            "two-delay-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "dfu",
+        "critical": 4294967295,
+        "status": 3735928559,
+        "child_return": 4294967290,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "signal",
+            1
+          ],
+          [
+            "delay",
+            4294967295
+          ],
+          [
+            "delay",
+            4294967295
+          ]
+        ],
+        "terminal": [
+          [
+            "two-delay-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "dfu",
+        "critical": 4294967295,
+        "status": 3735928559,
+        "child_return": 4294967290,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "signal",
+            1
+          ],
+          [
+            "delay",
+            4294967295
+          ],
+          [
+            "delay",
+            4294967295
+          ]
+        ],
+        "terminal": [
+          [
+            "two-delay-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "platform",
+        "critical": 0,
+        "status": 0,
+        "child_return": 0,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "exit",
+            0
+          ],
+          [
+            "exit",
+            0
+          ]
+        ],
+        "terminal": [
+          [
+            "two-exit-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "platform",
+        "critical": 0,
+        "status": 0,
+        "child_return": 0,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "exit",
+            0
+          ],
+          [
+            "exit",
+            0
+          ]
+        ],
+        "terminal": [
+          [
+            "two-exit-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "platform",
+        "critical": 0,
+        "status": 0,
+        "child_return": 0,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "exit",
+            0
+          ],
+          [
+            "exit",
+            0
+          ]
+        ],
+        "terminal": [
+          [
+            "two-exit-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "platform",
+        "critical": 0,
+        "status": 0,
+        "child_return": 4294967290,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "exit",
+            0
+          ],
+          [
+            "exit",
+            0
+          ]
+        ],
+        "terminal": [
+          [
+            "two-exit-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "platform",
+        "critical": 0,
+        "status": 0,
+        "child_return": 4294967290,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "exit",
+            0
+          ],
+          [
+            "exit",
+            0
+          ]
+        ],
+        "terminal": [
+          [
+            "two-exit-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "platform",
+        "critical": 0,
+        "status": 0,
+        "child_return": 4294967290,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "exit",
+            0
+          ],
+          [
+            "exit",
+            0
+          ]
+        ],
+        "terminal": [
+          [
+            "two-exit-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "platform",
+        "critical": 0,
+        "status": 3735928559,
+        "child_return": 0,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "exit",
+            3735928559
+          ],
+          [
+            "exit",
+            3735928559
+          ]
+        ],
+        "terminal": [
+          [
+            "two-exit-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "platform",
+        "critical": 0,
+        "status": 3735928559,
+        "child_return": 0,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "exit",
+            3735928559
+          ],
+          [
+            "exit",
+            3735928559
+          ]
+        ],
+        "terminal": [
+          [
+            "two-exit-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "platform",
+        "critical": 0,
+        "status": 3735928559,
+        "child_return": 0,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "exit",
+            3735928559
+          ],
+          [
+            "exit",
+            3735928559
+          ]
+        ],
+        "terminal": [
+          [
+            "two-exit-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "platform",
+        "critical": 0,
+        "status": 3735928559,
+        "child_return": 4294967290,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "exit",
+            3735928559
+          ],
+          [
+            "exit",
+            3735928559
+          ]
+        ],
+        "terminal": [
+          [
+            "two-exit-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "platform",
+        "critical": 0,
+        "status": 3735928559,
+        "child_return": 4294967290,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "exit",
+            3735928559
+          ],
+          [
+            "exit",
+            3735928559
+          ]
+        ],
+        "terminal": [
+          [
+            "two-exit-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "platform",
+        "critical": 0,
+        "status": 3735928559,
+        "child_return": 4294967290,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "exit",
+            3735928559
+          ],
+          [
+            "exit",
+            3735928559
+          ]
+        ],
+        "terminal": [
+          [
+            "two-exit-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "platform",
+        "critical": 4294967295,
+        "status": 0,
+        "child_return": 0,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "exit",
+            0
+          ],
+          [
+            "exit",
+            0
+          ]
+        ],
+        "terminal": [
+          [
+            "two-exit-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "platform",
+        "critical": 4294967295,
+        "status": 0,
+        "child_return": 0,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "exit",
+            0
+          ],
+          [
+            "exit",
+            0
+          ]
+        ],
+        "terminal": [
+          [
+            "two-exit-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "platform",
+        "critical": 4294967295,
+        "status": 0,
+        "child_return": 0,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "exit",
+            0
+          ],
+          [
+            "exit",
+            0
+          ]
+        ],
+        "terminal": [
+          [
+            "two-exit-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "platform",
+        "critical": 4294967295,
+        "status": 0,
+        "child_return": 4294967290,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "exit",
+            0
+          ],
+          [
+            "exit",
+            0
+          ]
+        ],
+        "terminal": [
+          [
+            "two-exit-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "platform",
+        "critical": 4294967295,
+        "status": 0,
+        "child_return": 4294967290,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "exit",
+            0
+          ],
+          [
+            "exit",
+            0
+          ]
+        ],
+        "terminal": [
+          [
+            "two-exit-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "platform",
+        "critical": 4294967295,
+        "status": 0,
+        "child_return": 4294967290,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "exit",
+            0
+          ],
+          [
+            "exit",
+            0
+          ]
+        ],
+        "terminal": [
+          [
+            "two-exit-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "platform",
+        "critical": 4294967295,
+        "status": 3735928559,
+        "child_return": 0,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "exit",
+            3735928559
+          ],
+          [
+            "exit",
+            3735928559
+          ]
+        ],
+        "terminal": [
+          [
+            "two-exit-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "platform",
+        "critical": 4294967295,
+        "status": 3735928559,
+        "child_return": 0,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "exit",
+            3735928559
+          ],
+          [
+            "exit",
+            3735928559
+          ]
+        ],
+        "terminal": [
+          [
+            "two-exit-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "platform",
+        "critical": 4294967295,
+        "status": 3735928559,
+        "child_return": 0,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "exit",
+            3735928559
+          ],
+          [
+            "exit",
+            3735928559
+          ]
+        ],
+        "terminal": [
+          [
+            "two-exit-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "platform",
+        "critical": 4294967295,
+        "status": 3735928559,
+        "child_return": 4294967290,
+        "release": 1
+      },
+      "result": {
+        "events": [
+          [
+            "exit",
+            3735928559
+          ],
+          [
+            "exit",
+            3735928559
+          ]
+        ],
+        "terminal": [
+          [
+            "two-exit-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "platform",
+        "critical": 4294967295,
+        "status": 3735928559,
+        "child_return": 4294967290,
+        "release": 123
+      },
+      "result": {
+        "events": [
+          [
+            "exit",
+            3735928559
+          ],
+          [
+            "exit",
+            3735928559
+          ]
+        ],
+        "terminal": [
+          [
+            "two-exit-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    },
+    {
+      "fixture": {
+        "entry": "platform",
+        "critical": 4294967295,
+        "status": 3735928559,
+        "child_return": 4294967290,
+        "release": 4294967295
+      },
+      "result": {
+        "events": [
+          [
+            "exit",
+            3735928559
+          ],
+          [
+            "exit",
+            3735928559
+          ]
+        ],
+        "terminal": [
+          [
+            "two-exit-requests"
+          ]
+        ],
+        "basepri": 0
+      }
+    }
+  ],
+  "limits": [
+    "Child print/mask/signal/delay/exit effects are declared synthetic contracts; source/stock body instructions execute independently.",
+    "Debugger release is a synthetic write to the exact original/native SP-8 slot. Invalid store, BKPT0 and recurring loops are stopped by the offline harness; no hardware fault/exit/debugger event is asserted.",
+    "Noreturn paths compare diagnostic bytes, name argument, ordered requests and stopping boundary, not incidental stack/register layout. Debug-return path compares rawR0,SP,R4-R11 and mask."
+  ]
+}

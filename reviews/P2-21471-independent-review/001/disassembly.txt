@@ -1,0 +1,60 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp9jlmuyqi/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00484c9e <.text>:
+  484c9e:	f894 0028 	ldrb.w	r0, [r4, #40]	@ 0x28
+  484ca2:	2801      	cmp	r0, #1
+  484ca4:	d101      	bne.n	484caa <.text+0xc>
+  484ca6:	200e      	movs	r0, #14
+  484ca8:	e006      	b.n	484cb8 <.text+0x1a>
+  484caa:	f894 0028 	ldrb.w	r0, [r4, #40]	@ 0x28
+  484cae:	2802      	cmp	r0, #2
+  484cb0:	d101      	bne.n	484cb6 <.text+0x18>
+  484cb2:	200c      	movs	r0, #12
+  484cb4:	e000      	b.n	484cb8 <.text+0x1a>
+  484cb6:	200a      	movs	r0, #10
+  484cb8:	2800      	cmp	r0, #0
+  484cba:	d101      	bne.n	484cc0 <.text+0x22>
+  484cbc:	2100      	movs	r1, #0
+  484cbe:	e02b      	b.n	484d18 <.text+0x7a>
+  484cc0:	f894 0028 	ldrb.w	r0, [r4, #40]	@ 0x28
+  484cc4:	2801      	cmp	r0, #1
+  484cc6:	d101      	bne.n	484ccc <.text+0x2e>
+  484cc8:	200e      	movs	r0, #14
+  484cca:	e006      	b.n	484cda <.text+0x3c>
+  484ccc:	f894 0028 	ldrb.w	r0, [r4, #40]	@ 0x28
+  484cd0:	2802      	cmp	r0, #2
+  484cd2:	d101      	bne.n	484cd8 <.text+0x3a>
+  484cd4:	200c      	movs	r0, #12
+  484cd6:	e000      	b.n	484cda <.text+0x3c>
+  484cd8:	200a      	movs	r0, #10
+  484cda:	6ae1      	ldr	r1, [r4, #44]	@ 0x2c
+  484cdc:	fb00 f001 	mul.w	r0, r0, r1
+  484ce0:	3050      	adds	r0, #80	@ 0x50
+  484ce2:	21a0      	movs	r1, #160	@ 0xa0
+  484ce4:	fb90 f0f1 	sdiv	r0, r0, r1
+  484ce8:	2802      	cmp	r0, #2
+  484cea:	db14      	blt.n	484d16 <.text+0x78>
+  484cec:	f894 0028 	ldrb.w	r0, [r4, #40]	@ 0x28
+  484cf0:	2801      	cmp	r0, #1
+  484cf2:	d101      	bne.n	484cf8 <.text+0x5a>
+  484cf4:	200e      	movs	r0, #14
+  484cf6:	e006      	b.n	484d06 <.text+0x68>
+  484cf8:	f894 0028 	ldrb.w	r0, [r4, #40]	@ 0x28
+  484cfc:	2802      	cmp	r0, #2
+  484cfe:	d101      	bne.n	484d04 <.text+0x66>
+  484d00:	200c      	movs	r0, #12
+  484d02:	e000      	b.n	484d06 <.text+0x68>
+  484d04:	200a      	movs	r0, #10
+  484d06:	6ae1      	ldr	r1, [r4, #44]	@ 0x2c
+  484d08:	fb00 f001 	mul.w	r0, r0, r1
+  484d0c:	3050      	adds	r0, #80	@ 0x50
+  484d0e:	21a0      	movs	r1, #160	@ 0xa0
+  484d10:	fb90 f1f1 	sdiv	r1, r0, r1
+  484d14:	e000      	b.n	484d18 <.text+0x7a>
+  484d16:	2101      	movs	r1, #1
+  484d18:	f114 0040 	adds.w	r0, r4, #64	@ 0x40
+  484d1c:	f04f fdb9 	bl	4d4892 <.text+0x4fbf4>

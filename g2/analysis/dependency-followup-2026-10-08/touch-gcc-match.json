@@ -1,0 +1,59 @@
+{
+  "status": "PASS_EXACT_PINNED_SOURCE_BYTES",
+  "compiler": "Arm GNU 13.3.Rel1 GCC13.3.1 build arm-13.24",
+  "flags": "-mcpu=cortex-m0plus -mthumb -Og -ffreestanding -fno-builtin -DCY8C4046FNI_T412 -ffunction-sections",
+  "compiler_archive_sha256": "fb6921db95d345dc7e5e487dd43b745e3a5b4d5c0c7ca4f707347148760317b4",
+  "object_sha256": "99041f6a523b2768097dbe2535a5bb8701289d214f4444bbbb3cc3f69785b54d",
+  "elf_sha256": "88b93403d4b3d96b3b7b022d4fec864f59223e4cefeff769c1cb16421b9f75e1",
+  "functions": [
+    {
+      "name": "Cy_SCB_ReadArrayNoCheck",
+      "start": "0x9218",
+      "end": "0x9250",
+      "bytes": 56,
+      "already_matched": true
+    },
+    {
+      "name": "Cy_SCB_ReadArray",
+      "start": "0x9250",
+      "end": "0x926e",
+      "bytes": 30,
+      "new_compiled_match": true
+    },
+    {
+      "name": "Cy_SCB_WriteArrayNoCheck",
+      "start": "0x926e",
+      "end": "0x92a6",
+      "bytes": 56,
+      "new_compiled_match": true
+    },
+    {
+      "name": "Cy_SCB_WriteArray",
+      "start": "0x92a6",
+      "end": "0x92d6",
+      "bytes": 48,
+      "new_compiled_match": true
+    },
+    {
+      "name": "Cy_SCB_WriteDefaultArrayNoCheck",
+      "start": "0x92d6",
+      "end": "0x92e6",
+      "bytes": 16,
+      "new_compiled_match": true
+    },
+    {
+      "name": "Cy_SCB_WriteDefaultArray",
+      "start": "0x92e6",
+      "end": "0x9316",
+      "bytes": 48,
+      "new_compiled_match": true
+    }
+  ],
+  "new_compiled_attribution_bytes": 198,
+  "limits": [
+    "No unique producer GCC release selected: earlier releases also match the first routine.",
+    "No whole touch image or physical FIFO/IRQ proof.",
+    "Declaration-only system_cat2.h fixture; no recovered board initialization."
+  ],
+  "exact_contiguous_bytes": 254
+}

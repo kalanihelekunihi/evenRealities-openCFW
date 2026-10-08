@@ -208,7 +208,8 @@ uint32_t opencfw_provider_427794(uint32_t interface_id,
     state->producer_pointer = config->queue_buffer_address;
     state->read_pointer = config->queue_buffer_address +
         config->queue_size_half_units * 8u;
-    state->flags = (state->flags | 0x01000000u) & 0xfdffffffu;
+    state->flags |= 0x01000000u;
+    state->flags &= ~0x02000000u;
     state->flags = (state->flags & 0xff000000u) | CMDQ_MAGIC;
     state->interface_ops_address = CMDQ_OPS_BASE +
         interface_id * CMDQ_OPS_STRIDE;

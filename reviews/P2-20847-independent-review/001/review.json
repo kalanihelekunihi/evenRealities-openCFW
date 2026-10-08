@@ -1,0 +1,10 @@
+{
+  "id": "P2-20847",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "Fresh continuity replay passed: four component maps, 560 instruction bytes, 196 instructions and 19 local branches across 0x47CC60..0x47CE90. Locked image and all component receipt hashes match; byte tiling is gapless and local targets resolve to instruction starts, including CBZ/CBNZ. Cross-slice paths retain the frameless small-divisor path, 8-byte high-divisor path and shared 20-byte normalization frame through the pending continuation; the external zero-divisor handler remains unrecovered. The decoded tail recombines quotient/remainder registers and returns without broad arithmetic or whole-image coverage claims."
+}

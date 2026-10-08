@@ -1,0 +1,52 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpr4i08qsy/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047ebf8 <.text>:
+  47ebf8:	e92d 47f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, lr}
+  47ebfc:	0014      	movs	r4, r2
+  47ebfe:	001f      	movs	r7, r3
+  47ec00:	4680      	mov	r8, r0
+  47ec02:	f05f 0900 	movs.w	r9, #0
+  47ec06:	2200      	movs	r2, #0
+  47ec08:	2800      	cmp	r0, #0
+  47ec0a:	d106      	bne.n	47ec1a <.text+0x22>
+  47ec0c:	f17b fa4a 	bl	5fa0a4 <.text+0x17b4ac>
+  47ec10:	2000      	movs	r0, #0
+  47ec12:	f05f 31ff 	movs.w	r1, #4294967295	@ 0xffffffff
+  47ec16:	6008      	str	r0, [r1, #0]
+  47ec18:	e7fe      	b.n	47ec18 <.text+0x20>
+  47ec1a:	000e      	movs	r6, r1
+  47ec1c:	f016 4f7f 	tst.w	r6, #4278190080	@ 0xff000000
+  47ec20:	d006      	beq.n	47ec30 <.text+0x38>
+  47ec22:	f17b fa3f 	bl	5fa0a4 <.text+0x17b4ac>
+  47ec26:	2000      	movs	r0, #0
+  47ec28:	f05f 31ff 	movs.w	r1, #4294967295	@ 0xffffffff
+  47ec2c:	6008      	str	r0, [r1, #0]
+  47ec2e:	e7fe      	b.n	47ec2e <.text+0x36>
+  47ec30:	2e00      	cmp	r6, #0
+  47ec32:	d106      	bne.n	47ec42 <.text+0x4a>
+  47ec34:	f17b fa36 	bl	5fa0a4 <.text+0x17b4ac>
+  47ec38:	2000      	movs	r0, #0
+  47ec3a:	f05f 31ff 	movs.w	r1, #4294967295	@ 0xffffffff
+  47ec3e:	6008      	str	r0, [r1, #0]
+  47ec40:	e7fe      	b.n	47ec40 <.text+0x48>
+  47ec42:	9d08      	ldr	r5, [sp, #32]
+  47ec44:	f7d6 fe2e 	bl	4558a4 <.text-0x29354>
+  47ec48:	2800      	cmp	r0, #0
+  47ec4a:	d101      	bne.n	47ec50 <.text+0x58>
+  47ec4c:	2d00      	cmp	r5, #0
+  47ec4e:	d101      	bne.n	47ec54 <.text+0x5c>
+  47ec50:	2001      	movs	r0, #1
+  47ec52:	e000      	b.n	47ec56 <.text+0x5e>
+  47ec54:	2000      	movs	r0, #0
+  47ec56:	b2c0      	uxtb	r0, r0
+  47ec58:	2800      	cmp	r0, #0
+  47ec5a:	d106      	bne.n	47ec6a <.text+0x72>
+  47ec5c:	f17b fa22 	bl	5fa0a4 <.text+0x17b4ac>
+  47ec60:	2000      	movs	r0, #0
+  47ec62:	f05f 31ff 	movs.w	r1, #4294967295	@ 0xffffffff
+  47ec66:	6008      	str	r0, [r1, #0]
+  47ec68:	e7fe      	b.n	47ec68 <.text+0x70>

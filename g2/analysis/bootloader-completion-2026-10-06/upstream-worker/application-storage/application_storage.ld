@@ -3,6 +3,8 @@ EXTERN(opencfw_boot_platform_configure)
 EXTERN(opencfw_boot_storage_read)
 EXTERN(opencfw_boot_storage_program)
 EXTERN(opencfw_boot_storage_erase_validate)
+EXTERN(opencfw_test_power_control_calls)
+EXTERN(opencfw_test_accepted_power_object_calls)
 PHDRS {
   source_text PT_LOAD FLAGS(5);
   expand_adapter PT_LOAD FLAGS(5);

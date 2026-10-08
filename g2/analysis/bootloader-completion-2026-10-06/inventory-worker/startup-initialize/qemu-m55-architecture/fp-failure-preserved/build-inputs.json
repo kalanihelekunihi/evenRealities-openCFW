@@ -1,0 +1,45 @@
+{
+  "files": [
+    "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/qemu-m55-architecture/harness.c",
+    "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/qemu-m55-architecture/start.S",
+    "g2/components/bootloader/thread_creation/exception_entry.S",
+    "g2/components/bootloader/thread_creation/thread_select.c",
+    "g2/components/bootloader/thread_creation/thread_termination.c",
+    "g2/components/bootloader/thread_creation/idle_cleanup.c",
+    "g2/components/bootloader/thread_creation/kernel_runtime.c",
+    "g2/components/bootloader/thread_creation/scheduler_resume.c",
+    "g2/components/bootloader/thread_creation/scheduler_tick.c",
+    "g2/components/bootloader/thread_creation/timer_wait.c",
+    "g2/components/bootloader/thread_creation/rtos_heap.c",
+    "g2/components/bootloader/thread_creation/thread_register.c",
+    "g2/components/bootloader/queue/runtime_mode.c"
+  ],
+  "flags": [
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m55",
+    "-mthumb",
+    "-mfloat-abi=softfp",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-O1",
+    "-Wall",
+    "-Wextra"
+  ],
+  "objects": [
+    "/tmp/opencfw-qemu-m55/harness.o",
+    "/tmp/opencfw-qemu-m55/start.o",
+    "/tmp/opencfw-qemu-m55/exception_entry.o",
+    "/tmp/opencfw-qemu-m55/thread_select.o",
+    "/tmp/opencfw-qemu-m55/thread_termination.o",
+    "/tmp/opencfw-qemu-m55/idle_cleanup.o",
+    "/tmp/opencfw-qemu-m55/kernel_runtime.o",
+    "/tmp/opencfw-qemu-m55/scheduler_resume.o",
+    "/tmp/opencfw-qemu-m55/scheduler_tick.o",
+    "/tmp/opencfw-qemu-m55/timer_wait.o",
+    "/tmp/opencfw-qemu-m55/rtos_heap.o",
+    "/tmp/opencfw-qemu-m55/thread_register.o",
+    "/tmp/opencfw-qemu-m55/runtime_mode.o"
+  ]
+}

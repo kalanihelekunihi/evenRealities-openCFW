@@ -1,0 +1,255 @@
+{
+  "status": "PASS",
+  "cases": 3,
+  "candidate_elf": "/tmp/opencfw-root-runtime-action-integrated/candidate.elf",
+  "candidate_elf_sha256": "602cccc4975862a379b89d5747df0b5f8cc5b2cd56e808c5e78482ee6ebf0210",
+  "input_sha256": {
+    "candidate_elf": "602cccc4975862a379b89d5747df0b5f8cc5b2cd56e808c5e78482ee6ebf0210",
+    "verify_integrated.py": "28a3b4d3a476403c98d47c5e3b61530428d26d9bbe861e65c1305802a45877ef",
+    "original_bootloader": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5"
+  },
+  "candidate_relevant_sections": [
+    {
+      "name": ".source_cache",
+      "address": 196608,
+      "size": 65716,
+      "type": "SHT_PROGBITS"
+    },
+    {
+      "name": ".text",
+      "address": 65536,
+      "size": 64664,
+      "type": "SHT_PROGBITS"
+    },
+    {
+      "name": ".boot_iom_context_pool",
+      "address": 536954204,
+      "size": 17728,
+      "type": "SHT_NOBITS"
+    }
+  ],
+  "heap_layout": {
+    "rtos_arena_start": "0x2000055c",
+    "rtos_arena_end_exclusive": "0x2001455c",
+    "rtos_arena_bytes": 81920,
+    "candidate_load_segments_overlapping_arena": [],
+    "iom_context_pool_starts_at_heap_end": true,
+    "rtos_heap_init_and_insert_are_inlined_in_candidate_allocator": true
+  },
+  "coverage": {
+    "release_storage": {
+      "extent": [
+        "0x418ae8",
+        "0x418b28"
+      ],
+      "extent_bytes": 64,
+      "visited_bytes": 50,
+      "unvisited_ranges": [
+        [
+          "0x418b1a",
+          "0x418b28"
+        ]
+      ],
+      "stock_body_sha256": "fdf7ae220007939f0fcc81641a535cf7256d68e65373aa8af6b2b92fb1919467"
+    },
+    "rtos_allocate": {
+      "extent": [
+        "0x419730",
+        "0x419830"
+      ],
+      "extent_bytes": 256,
+      "visited_bytes": 212,
+      "unvisited_ranges": [
+        [
+          "0x41976a",
+          "0x41976c"
+        ],
+        [
+          "0x419784",
+          "0x419788"
+        ],
+        [
+          "0x41978e",
+          "0x419794"
+        ],
+        [
+          "0x4197c2",
+          "0x4197d0"
+        ],
+        [
+          "0x419810",
+          "0x419814"
+        ],
+        [
+          "0x41981c",
+          "0x41982a"
+        ]
+      ],
+      "stock_body_sha256": "4ef52e5d611c1272d71ca12df913d8519f832381a58b15aa547728452f0f3f7f"
+    },
+    "rtos_free": {
+      "extent": [
+        "0x419830",
+        "0x4198a0"
+      ],
+      "extent_bytes": 112,
+      "visited_bytes": 84,
+      "unvisited_ranges": [
+        [
+          "0x419848",
+          "0x419856"
+        ],
+        [
+          "0x41985c",
+          "0x41986a"
+        ]
+      ],
+      "stock_body_sha256": "164124796e7963d3c8d99b31f37712778c5dd16ea5c47973df3e14da1c118247"
+    },
+    "rtos_heap_initialize": {
+      "extent": [
+        "0x4198a0",
+        "0x4198fa"
+      ],
+      "extent_bytes": 90,
+      "visited_bytes": 90,
+      "unvisited_ranges": [],
+      "stock_body_sha256": "b8da1f9513fbb3cc600ba20113ff305c6576989a7eb3172247b7ba86a5580de4"
+    },
+    "rtos_heap_insert": {
+      "extent": [
+        "0x4198fa",
+        "0x419956"
+      ],
+      "extent_bytes": 92,
+      "visited_bytes": 92,
+      "unvisited_ranges": [],
+      "stock_body_sha256": "b5552485b78da363357ba1539b45200978080fba184928e80181aeae7c9bf3dc"
+    }
+  },
+  "comparisons": [
+    {
+      "ownership": 0,
+      "meaning": "stack+TCB",
+      "stack": "0x20000568",
+      "tcb": "0x20000678",
+      "pre_release_state": {
+        "arena_sha256": "d14a2861b857431abfeea01ecbe5ba539d1d36f220107273d2be1c7be428f886",
+        "heap_globals": "f006002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000050450120603e0100603e01000300000001000000",
+        "tcb": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc68050020cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc00cccc",
+        "stack_prefix": "53535353535353535353535353535353",
+        "events": [
+          1,
+          2,
+          1,
+          2,
+          1,
+          2,
+          1,
+          2
+        ]
+      },
+      "post_release_state": {
+        "arena_sha256": "fbe11f6f515f00f66bb8cd6cba1cd01332377d0b218c3b27df4e99f63e7fb38f",
+        "heap_globals": "6005002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000050450120f03f0100603e01000300000003000000",
+        "tcb": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc68050020cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc00cccc",
+        "stack_prefix": "53535353535353535353535353535353",
+        "events": [
+          1,
+          2,
+          1,
+          2,
+          1,
+          2,
+          1,
+          2,
+          1,
+          2,
+          1,
+          2
+        ]
+      },
+      "free_counter_before": 1,
+      "free_counter_after": 3,
+      "release_free_count_delta": 2
+    },
+    {
+      "ownership": 1,
+      "meaning": "TCB only",
+      "stack": "0x20018000",
+      "tcb": "0x20000568",
+      "pre_release_state": {
+        "arena_sha256": "6a4a767894e5de479139e646f4ede24271b6e3119f7772e092052db832e5879f",
+        "heap_globals": "e005002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000050450120703f0100703f01000200000001000000",
+        "tcb": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc00800120cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc01cccc",
+        "stack_prefix": "53535353535353535353535353535353",
+        "events": [
+          1,
+          2,
+          1,
+          2,
+          1,
+          2
+        ]
+      },
+      "post_release_state": {
+        "arena_sha256": "ee1f9aa1ee7a0f1c9af16f49615172bb379349592c27debcfa6ddb9808b31e98",
+        "heap_globals": "6005002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000050450120f03f0100703f01000200000002000000",
+        "tcb": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc00800120cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc01cccc",
+        "stack_prefix": "53535353535353535353535353535353",
+        "events": [
+          1,
+          2,
+          1,
+          2,
+          1,
+          2,
+          1,
+          2
+        ]
+      },
+      "free_counter_before": 1,
+      "free_counter_after": 2,
+      "release_free_count_delta": 1
+    },
+    {
+      "ownership": 2,
+      "meaning": "none",
+      "stack": "0x20018000",
+      "tcb": "0x20018200",
+      "pre_release_state": {
+        "arena_sha256": "3c1a57aa130f15b1a78a9e20631a56550aa533da17935cce68b776cb44bedb44",
+        "heap_globals": "6005002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000050450120f03f0100c03f01000100000001000000",
+        "tcb": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc00800120cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc02cccc",
+        "stack_prefix": "53535353535353535353535353535353",
+        "events": [
+          1,
+          2,
+          1,
+          2
+        ]
+      },
+      "post_release_state": {
+        "arena_sha256": "3c1a57aa130f15b1a78a9e20631a56550aa533da17935cce68b776cb44bedb44",
+        "heap_globals": "6005002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000050450120f03f0100c03f01000100000001000000",
+        "tcb": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc00800120cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc02cccc",
+        "stack_prefix": "53535353535353535353535353535353",
+        "events": [
+          1,
+          2,
+          1,
+          2
+        ]
+      },
+      "free_counter_before": 1,
+      "free_counter_after": 1,
+      "release_free_count_delta": 0
+    }
+  ],
+  "limits": [
+    "Candidate source executions load only its immutable ELF PT_LOAD content and do not load the stock bootloader; only its scheduler suspend/resume functions are controlled code cuts.",
+    "The whole-runtime candidate places .boot_iom_context_pool at the exact RTOS arena end, so it does not overlap [0x2000055c,0x2001455c). The unrelated TLSF/source allocator initializer is not called; the tested RTOS allocation performs its own initialization path.",
+    "Ownership fixtures 0/1/2 use valid allocated headers only for heap-owned blocks. Ownership 2 uses static TCB/stack after a probe allocation has been freed and coalesced to validate a live empty heap.",
+    "Synthetic Unicorn RAM and no-op scheduler cut returns; this is not a hardware allocator, concurrent free, malformed ownership, OOM, whole-task delete, or byte-identity proof."
+  ]
+}

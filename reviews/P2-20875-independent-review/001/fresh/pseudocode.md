@@ -1,0 +1,6 @@
+# Selector two helper result two fresh label selection diagnostics
+
+Partial/unaccepted;110instructionbytes;inherited40frame,R5buffer,R7entrylength,R4zero. D20E call47D8CEwithliveargs;R6=fullreturnedR0,replacingoriginalbufferregister. Nohelpercontractyet.
+D214query43D0CEbit1zero→D24C. Otherwiseindependentlycall45A568withliveargs;fullresult==1 selects literal47D94C else47D950;selectedvalue→SP8,literal47D954→SP4,122→SP0;43D574(4,literal47D918,literal47D914,literal47D910,122,literal47D954,selectedLiteral).
+D24Cfreshquerybit0one→D25C;elseanotherquerybit2zero→pendingD27C. D25C independentlycall45A568withliveargs;fullresult==1 selectsR3=literal47D94C else47D950;43CE9E(0x10400000,literal47D958,same,independentlySelectedLiteral);fallthroughpendingD27C.
+Do notcachehelperresultsorassumeselectedliteralstringswithoutpointeddata. R6retainedfullfirsthelperresult;localstackwrites. No C/freeze/completenessclaim.

@@ -1,0 +1,23 @@
+{
+  "utc": "2026-10-08T02:23:12.942040+00:00",
+  "status": "PASS_BOUNDED_NATIVE_TERMINAL_CHECKPOINT",
+  "candidate_sha256": "15d222c4f550da090e0893905111771b5e3cabd07948f4be082863851f1fdd32",
+  "objects": 239,
+  "previous_candidate_sha256": "e5aeae5297c6aa35c78a5f4c558365d2d47a0f8f6505f3ed2431914278ef6c32",
+  "integration_cases": 7,
+  "fresh_regression_jobs": 76,
+  "body_contract_cases": 120,
+  "native_mask_exit_coupled_cases": 48,
+  "canonical_object_reproduction": 1,
+  "exact_frozen_object_relink": true,
+  "ledger": "g2/analysis/source-replacement-ledger-2026-10-08-terminal",
+  "mapped_bodies": 36,
+  "mapped_original_bytes": 8764,
+  "source_complete_firmware": false,
+  "byte_identical_official_payload": false,
+  "limits": [
+    "Existing regression logger/fatal/terminal cuts retain the same declared event boundaries at new native aliases; they do not prove execution beyond those cuts.120 dedicated bodies and48 native critical/exit coupled cases provide separate evidence.",
+    "DFU signal/delay, fatal print still declared child contracts in120 tests. Actual trap/fault/hardware effects are stopped, synthetic debugger release and scheduling/MMIO/ROM limits persist.",
+    "All-linked static scan reports veneers and zero-size/local assembly targets separately; direct-call graphs are not completeness proof."
+  ]
+}

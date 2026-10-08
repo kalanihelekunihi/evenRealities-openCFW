@@ -1,0 +1,5 @@
+# Frameless restart word return and shutdown wrapper
+
+Partial/unaccepted;136 instruction bytes48028A..480312. 028Aframeless:R2literal4806D0pointer;freshwordclearbit0store;independentfreshwordsetbit1store;independentfreshwordclearbit1store. R0entryR0*6mod2^32 storedthrough4806D8. Word4806E0=C0000000;word4806F0=40000hex. Newfreshword[R2]OR1→R0,store[R2],BX LRreturnsfullfinalwrittenword,notproduct/pointer/normalizedstatus. R1literal4806F0pointer,R2D0pointer,R3unchanged.
+
+02CEPUSH R7,LR8;freshword4806D0clearbit0store;freshword4806E8clearbit15store;4C4530(4,49,liveR2/R3),ignoredreturn. R0=40000hex,storethrough4806F4;word4806E0=C0000000. Freshwordthrough4806F8 loadedR1butthenR1overwrittenwithliteral4806F0pointer;discardedreadstilloccurs. StoreR0(40000hex)throughF0pointer. POP R0,PC returnsfullsavedentryR7,discardingliveR0;8frame released. Preserveorderedreads/writesincludingdiscardedread;noPRIMASKoperations. Ownership/externalhelpersemantics/MMIO/C/freeze/fullcoverageunresolved/notclaimed.

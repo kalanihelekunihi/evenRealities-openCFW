@@ -1,0 +1,3700 @@
+{
+  "status": "PASS",
+  "cases": 53,
+  "elf_sha256": "ca59e91628c10bed63b695252e05b41b60b1e59fc0e551627ac4615e39e02043",
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "original_trace": {
+    "0x42790a": "f8b5",
+    "0x42790c": "0e00",
+    "0x42790e": "1400",
+    "0x427910": "1d00",
+    "0x427912": "0700",
+    "0x427914": "0028",
+    "0x427916": "06d0",
+    "0x427918": "0068",
+    "0x42791a": "20f07e40",
+    "0x42791e": "dff86813",
+    "0x427922": "8842",
+    "0x427924": "01d0",
+    "0x42792a": "002c",
+    "0x42792c": "01d0",
+    "0x42792e": "002d",
+    "0x427930": "01d1",
+    "0x427936": "3869",
+    "0x427938": "7969",
+    "0x42793a": "8842",
+    "0x42793c": "01d0",
+    "0x427942": "3800",
+    "0x427944": "fff706ff",
+    "0x427754": "1cb5",
+    "0x427756": "0400",
+    "0x427758": "f4f7c8f8",
+    "0x41b8ec": "eff31080",
+    "0x41b8f0": "72b6",
+    "0x41b8f2": "7047",
+    "0x42775c": "0090",
+    "0x42775e": "606a",
+    "0x427760": "8068",
+    "0x427762": "0068",
+    "0x427764": "00f0ff00",
+    "0x427768": "216a",
+    "0x42776a": "090a",
+    "0x42776c": "0902",
+    "0x42776e": "0843",
+    "0x427770": "e061",
+    "0x427772": "216a",
+    "0x427774": "e069",
+    "0x427776": "091a",
+    "0x427778": "0029",
+    "0x42777a": "03d5",
+    "0x427784": "606a",
+    "0x427786": "4068",
+    "0x427788": "0068",
+    "0x42778a": "e060",
+    "0x42778c": "0098",
+    "0x42778e": "80f31088",
+    "0x427792": "13bd",
+    "0x427948": "f969",
+    "0x42794a": "fe31",
+    "0x42794c": "386a",
+    "0x42794e": "091a",
+    "0x427950": "0029",
+    "0x427952": "01d5",
+    "0x427958": "3869",
+    "0x42795a": "f968",
+    "0x42795c": "8842",
+    "0x42795e": "23d3",
+    "0x427960": "b868",
+    "0x427962": "3969",
+    "0x427964": "b21c",
+    "0x427966": "11ebc201",
+    "0x42796a": "8842",
+    "0x42796c": "0bd3",
+    "0x42796e": "3869",
+    "0x427970": "2060",
+    "0x427972": "396a",
+    "0x427974": "491c",
+    "0x427976": "3962",
+    "0x427978": "396a",
+    "0x42797a": "2960",
+    "0x42797c": "10ebc600",
+    "0x427980": "7861",
+    "0x427982": "0020",
+    "0x427984": "f2bd",
+    "0x4279be": "0100",
+    "0x4279c0": "0028",
+    "0x4279c2": "06d0",
+    "0x4279c4": "0068",
+    "0x4279c6": "20f07e40",
+    "0x4279ca": "dff8bc22",
+    "0x4279ce": "9042",
+    "0x4279d0": "01d0",
+    "0x4279d6": "0869",
+    "0x4279d8": "4a69",
+    "0x4279da": "9042",
+    "0x4279dc": "01d1",
+    "0x4279de": "0720",
+    "0x4279e0": "05e0",
+    "0x4279ee": "7047",
+    "0x4279e2": "0869",
+    "0x4279e4": "4861",
+    "0x4279e6": "086a",
+    "0x4279e8": "401e",
+    "0x4279ea": "0862",
+    "0x4279ec": "0020",
+    "0x427986": "7868",
+    "0x427988": "711c",
+    "0x42798a": "10ebc100",
+    "0x42798e": "f968",
+    "0x427990": "8842",
+    "0x427992": "07d2",
+    "0x4279a4": "0520",
+    "0x4279a6": "ede7",
+    "0x4279f0": "0200",
+    "0x4279f2": "0028",
+    "0x4279f4": "06d0",
+    "0x4279f6": "0068",
+    "0x4279f8": "20f07e40",
+    "0x4279fc": "dff88832",
+    "0x427a00": "9842",
+    "0x427a02": "01d0",
+    "0x427a08": "1069",
+    "0x427a0a": "5369",
+    "0x427a0c": "9842",
+    "0x427a0e": "01d1",
+    "0x427a14": "5069",
+    "0x427a16": "c9b2",
+    "0x427a18": "0029",
+    "0x427a1a": "01d0",
+    "0x427a20": "0021",
+    "0x427a22": "536a",
+    "0x427a24": "9b68",
+    "0x427a26": "1943",
+    "0x427a28": "0160",
+    "0x427a2a": "116a",
+    "0x427a2c": "4160",
+    "0x427a2e": "0830",
+    "0x427a30": "5061",
+    "0x427a32": "5069",
+    "0x427a34": "1061",
+    "0x427a36": "9068",
+    "0x427a38": "dff85012",
+    "0x427a3c": "8842",
+    "0x427a3e": "01d3",
+    "0x427a44": "92f82000",
+    "0x427a48": "00f0ff00",
+    "0x427a4c": "516a",
+    "0x427a4e": "c968",
+    "0x427a50": "0860",
+    "0x427a52": "0020",
+    "0x427a54": "7047",
+    "0x427a1c": "0121",
+    "0x427a1e": "00e0",
+    "0x427a10": "0720",
+    "0x427a12": "1fe0",
+    "0x427ad6": "38b5",
+    "0x427ad8": "0d00",
+    "0x427ada": "0400",
+    "0x427adc": "0028",
+    "0x427ade": "05d0",
+    "0x427ae0": "0068",
+    "0x427ae2": "20f07e40",
+    "0x427ae6": "6849",
+    "0x427ae8": "8842",
+    "0x427aea": "01d0",
+    "0x427af0": "2000",
+    "0x427af2": "fff72ffe",
+    "0x427af6": "edb2",
+    "0x427af8": "002d",
+    "0x427afa": "05d1",
+    "0x427afc": "e069",
+    "0x427afe": "216a",
+    "0x427b00": "8842",
+    "0x427b02": "01d0",
+    "0x427b08": "2000",
+    "0x427b0a": "0168",
+    "0x427b0c": "31f08071",
+    "0x427b10": "0160",
+    "0x427b12": "606a",
+    "0x427b14": "0068",
+    "0x427b16": "0068",
+    "0x427b18": "4008",
+    "0x427b1a": "4000",
+    "0x427b1c": "616a",
+    "0x427b1e": "0968",
+    "0x427b20": "0860",
+    "0x427b22": "606a",
+    "0x427b24": "0069",
+    "0x427b26": "0168",
+    "0x427b28": "606a",
+    "0x427b2a": "4069",
+    "0x427b2c": "8143",
+    "0x427b2e": "606a",
+    "0x427b30": "0069",
+    "0x427b32": "0160",
+    "0x427b34": "0020",
+    "0x427b36": "32bd",
+    "0x427b04": "0320",
+    "0x427b06": "16e0",
+    "0x427932": "0620",
+    "0x427934": "26e0",
+    "0x427926": "0220",
+    "0x427928": "2ce0",
+    "0x427a04": "0220",
+    "0x427a06": "25e0",
+    "0x4279d2": "0220",
+    "0x4279d4": "0be0",
+    "0x427aec": "0220",
+    "0x427aee": "22e0",
+    "0x427954": "0520",
+    "0x427956": "15e0",
+    "0x427994": "3869",
+    "0x427996": "796a",
+    "0x427998": "4968",
+    "0x42799a": "0160",
+    "0x42799c": "7968",
+    "0x42799e": "4160",
+    "0x4279a0": "7868",
+    "0x4279a2": "e5e7",
+    "0x4279a8": "3869",
+    "0x4279aa": "711c",
+    "0x4279ac": "10ebc100",
+    "0x4279b0": "f968",
+    "0x4279b2": "8842",
+    "0x4279b4": "01d2",
+    "0x4279ba": "0520",
+    "0x4279bc": "e2e7",
+    "0x4279b6": "3869",
+    "0x4279b8": "dae7"
+  },
+  "comparisons": [
+    {
+      "label": "reserve-cancel-0",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          0,
+          7
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "c404a72bfca8082142c35e17aeccdfb46065ff0c63e780eace75dab884920536",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ],
+          [
+            537027520,
+            4,
+            1
+          ],
+          [
+            537027508,
+            4,
+            536903680
+          ]
+        ],
+        "mmio_writes": [],
+        "queue_sha256": "c0856f3aa1c015421cb8de07a05cbd35ef93f2375db404d585e07ea36c19c199",
+        "buffer_sha256": "890f78e5b4bb5087b9195157808e0bd32a57dc8d228017742b9eb3f38bc78506",
+        "status_buffer": "0080002001000000cccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "0080002001000000cccccccccccccccc"
+      }
+    },
+    {
+      "label": "reserve-cancel-1",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          0,
+          0
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "c404a72bfca8082142c35e17aeccdfb46065ff0c63e780eace75dab884920536",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ],
+          [
+            537027520,
+            4,
+            1
+          ],
+          [
+            537027508,
+            4,
+            536903688
+          ],
+          [
+            537027508,
+            4,
+            536903680
+          ],
+          [
+            537027520,
+            4,
+            0
+          ]
+        ],
+        "mmio_writes": [],
+        "queue_sha256": "b2e762ebf50fbc51375128ffa84fafb686ce91ca2ad0179b887bb7ca7b8f7766",
+        "buffer_sha256": "890f78e5b4bb5087b9195157808e0bd32a57dc8d228017742b9eb3f38bc78506",
+        "status_buffer": "0080002001000000cccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "0080002001000000cccccccccccccccc"
+      }
+    },
+    {
+      "label": "reserve-cancel-2",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          0,
+          0
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "c404a72bfca8082142c35e17aeccdfb46065ff0c63e780eace75dab884920536",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ],
+          [
+            537027520,
+            4,
+            1
+          ],
+          [
+            537027508,
+            4,
+            536903696
+          ],
+          [
+            537027508,
+            4,
+            536903680
+          ],
+          [
+            537027520,
+            4,
+            0
+          ]
+        ],
+        "mmio_writes": [],
+        "queue_sha256": "b2e762ebf50fbc51375128ffa84fafb686ce91ca2ad0179b887bb7ca7b8f7766",
+        "buffer_sha256": "890f78e5b4bb5087b9195157808e0bd32a57dc8d228017742b9eb3f38bc78506",
+        "status_buffer": "0080002001000000cccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "0080002001000000cccccccccccccccc"
+      }
+    },
+    {
+      "label": "reserve-cancel-8",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          0,
+          0
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "c404a72bfca8082142c35e17aeccdfb46065ff0c63e780eace75dab884920536",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ],
+          [
+            537027520,
+            4,
+            1
+          ],
+          [
+            537027508,
+            4,
+            536903744
+          ],
+          [
+            537027508,
+            4,
+            536903680
+          ],
+          [
+            537027520,
+            4,
+            0
+          ]
+        ],
+        "mmio_writes": [],
+        "queue_sha256": "b2e762ebf50fbc51375128ffa84fafb686ce91ca2ad0179b887bb7ca7b8f7766",
+        "buffer_sha256": "890f78e5b4bb5087b9195157808e0bd32a57dc8d228017742b9eb3f38bc78506",
+        "status_buffer": "0080002001000000cccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "0080002001000000cccccccccccccccc"
+      }
+    },
+    {
+      "label": "reserve-cancel-29",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          5,
+          7
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "c404a72bfca8082142c35e17aeccdfb46065ff0c63e780eace75dab884920536",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ]
+        ],
+        "mmio_writes": [],
+        "queue_sha256": "b2e762ebf50fbc51375128ffa84fafb686ce91ca2ad0179b887bb7ca7b8f7766",
+        "buffer_sha256": "890f78e5b4bb5087b9195157808e0bd32a57dc8d228017742b9eb3f38bc78506",
+        "status_buffer": "cccccccccccccccccccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "label": "reserve-cancel-30",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          5,
+          7
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "c404a72bfca8082142c35e17aeccdfb46065ff0c63e780eace75dab884920536",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ]
+        ],
+        "mmio_writes": [],
+        "queue_sha256": "b2e762ebf50fbc51375128ffa84fafb686ce91ca2ad0179b887bb7ca7b8f7766",
+        "buffer_sha256": "890f78e5b4bb5087b9195157808e0bd32a57dc8d228017742b9eb3f38bc78506",
+        "status_buffer": "cccccccccccccccccccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "label": "reserve-cancel-31",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          5,
+          7
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "c404a72bfca8082142c35e17aeccdfb46065ff0c63e780eace75dab884920536",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ]
+        ],
+        "mmio_writes": [],
+        "queue_sha256": "b2e762ebf50fbc51375128ffa84fafb686ce91ca2ad0179b887bb7ca7b8f7766",
+        "buffer_sha256": "890f78e5b4bb5087b9195157808e0bd32a57dc8d228017742b9eb3f38bc78506",
+        "status_buffer": "cccccccccccccccccccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "label": "reserve-cancel-32",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          5,
+          7
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "c404a72bfca8082142c35e17aeccdfb46065ff0c63e780eace75dab884920536",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ]
+        ],
+        "mmio_writes": [],
+        "queue_sha256": "b2e762ebf50fbc51375128ffa84fafb686ce91ca2ad0179b887bb7ca7b8f7766",
+        "buffer_sha256": "890f78e5b4bb5087b9195157808e0bd32a57dc8d228017742b9eb3f38bc78506",
+        "status_buffer": "cccccccccccccccccccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "label": "reserve-post-(1, 0)",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          0,
+          0,
+          7
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "ac4e55563988ce9f2673909313ef46324d55c4561ffc69574e6d2b7703fd4fed",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ],
+          [
+            537027520,
+            4,
+            1
+          ],
+          [
+            537027508,
+            4,
+            536903688
+          ],
+          [
+            536903688,
+            4,
+            1074086464
+          ],
+          [
+            536903692,
+            4,
+            1
+          ],
+          [
+            537027508,
+            4,
+            536903696
+          ],
+          [
+            537027504,
+            4,
+            536903696
+          ]
+        ],
+        "mmio_writes": [
+          [
+            1074086468,
+            4,
+            1
+          ]
+        ],
+        "queue_sha256": "8ab341e0934de43c3f0546f67253fe5c97af7507c9d6c1ec3e8ec09e6da4b79a",
+        "buffer_sha256": "96bc3a4f207527a42911195bfd49bb4c2d671280ae89cb2ac16efd885a71862f",
+        "status_buffer": "0080002001000000cccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "0080002001000000cccccccccccccccc"
+      }
+    },
+    {
+      "label": "reserve-post-(1, 1)",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          0,
+          0,
+          7
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "ac4e55563988ce9f2673909313ef46324d55c4561ffc69574e6d2b7703fd4fed",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ],
+          [
+            537027520,
+            4,
+            1
+          ],
+          [
+            537027508,
+            4,
+            536903688
+          ],
+          [
+            536903688,
+            4,
+            1074086465
+          ],
+          [
+            536903692,
+            4,
+            1
+          ],
+          [
+            537027508,
+            4,
+            536903696
+          ],
+          [
+            537027504,
+            4,
+            536903696
+          ]
+        ],
+        "mmio_writes": [
+          [
+            1074086468,
+            4,
+            1
+          ]
+        ],
+        "queue_sha256": "8ab341e0934de43c3f0546f67253fe5c97af7507c9d6c1ec3e8ec09e6da4b79a",
+        "buffer_sha256": "dbe399a65a31224bb67989cf3a49a5adcea94850f1b8277b0a770f41cd2a860e",
+        "status_buffer": "0080002001000000cccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "0080002001000000cccccccccccccccc"
+      }
+    },
+    {
+      "label": "reserve-post-(1, 256)",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          0,
+          0,
+          7
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "ac4e55563988ce9f2673909313ef46324d55c4561ffc69574e6d2b7703fd4fed",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ],
+          [
+            537027520,
+            4,
+            1
+          ],
+          [
+            537027508,
+            4,
+            536903688
+          ],
+          [
+            536903688,
+            4,
+            1074086464
+          ],
+          [
+            536903692,
+            4,
+            1
+          ],
+          [
+            537027508,
+            4,
+            536903696
+          ],
+          [
+            537027504,
+            4,
+            536903696
+          ]
+        ],
+        "mmio_writes": [
+          [
+            1074086468,
+            4,
+            1
+          ]
+        ],
+        "queue_sha256": "8ab341e0934de43c3f0546f67253fe5c97af7507c9d6c1ec3e8ec09e6da4b79a",
+        "buffer_sha256": "96bc3a4f207527a42911195bfd49bb4c2d671280ae89cb2ac16efd885a71862f",
+        "status_buffer": "0080002001000000cccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "0080002001000000cccccccccccccccc"
+      }
+    },
+    {
+      "label": "reserve-post-(1, 257)",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          0,
+          0,
+          7
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "ac4e55563988ce9f2673909313ef46324d55c4561ffc69574e6d2b7703fd4fed",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ],
+          [
+            537027520,
+            4,
+            1
+          ],
+          [
+            537027508,
+            4,
+            536903688
+          ],
+          [
+            536903688,
+            4,
+            1074086465
+          ],
+          [
+            536903692,
+            4,
+            1
+          ],
+          [
+            537027508,
+            4,
+            536903696
+          ],
+          [
+            537027504,
+            4,
+            536903696
+          ]
+        ],
+        "mmio_writes": [
+          [
+            1074086468,
+            4,
+            1
+          ]
+        ],
+        "queue_sha256": "8ab341e0934de43c3f0546f67253fe5c97af7507c9d6c1ec3e8ec09e6da4b79a",
+        "buffer_sha256": "dbe399a65a31224bb67989cf3a49a5adcea94850f1b8277b0a770f41cd2a860e",
+        "status_buffer": "0080002001000000cccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "0080002001000000cccccccccccccccc"
+      }
+    },
+    {
+      "label": "reserve-post-(2, 0)",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          0,
+          0,
+          7
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "ac4e55563988ce9f2673909313ef46324d55c4561ffc69574e6d2b7703fd4fed",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ],
+          [
+            537027520,
+            4,
+            1
+          ],
+          [
+            537027508,
+            4,
+            536903696
+          ],
+          [
+            536903696,
+            4,
+            1074086464
+          ],
+          [
+            536903700,
+            4,
+            1
+          ],
+          [
+            537027508,
+            4,
+            536903704
+          ],
+          [
+            537027504,
+            4,
+            536903704
+          ]
+        ],
+        "mmio_writes": [
+          [
+            1074086468,
+            4,
+            1
+          ]
+        ],
+        "queue_sha256": "e7f05085fea93d3462930459edb7d87b401c1c96aeb5ece08285267cdd396f43",
+        "buffer_sha256": "cef68004bf8050ab4ed65db91f6ec59b67a213ed3a98e674461a8aed01cc4fd5",
+        "status_buffer": "0080002001000000cccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "0080002001000000cccccccccccccccc"
+      }
+    },
+    {
+      "label": "reserve-post-(2, 1)",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          0,
+          0,
+          7
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "ac4e55563988ce9f2673909313ef46324d55c4561ffc69574e6d2b7703fd4fed",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ],
+          [
+            537027520,
+            4,
+            1
+          ],
+          [
+            537027508,
+            4,
+            536903696
+          ],
+          [
+            536903696,
+            4,
+            1074086465
+          ],
+          [
+            536903700,
+            4,
+            1
+          ],
+          [
+            537027508,
+            4,
+            536903704
+          ],
+          [
+            537027504,
+            4,
+            536903704
+          ]
+        ],
+        "mmio_writes": [
+          [
+            1074086468,
+            4,
+            1
+          ]
+        ],
+        "queue_sha256": "e7f05085fea93d3462930459edb7d87b401c1c96aeb5ece08285267cdd396f43",
+        "buffer_sha256": "3dd62f8106d3c1f958e952af9acbbe30b6409c0939393d0132dc474246f99a3c",
+        "status_buffer": "0080002001000000cccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "0080002001000000cccccccccccccccc"
+      }
+    },
+    {
+      "label": "reserve-post-(2, 256)",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          0,
+          0,
+          7
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "ac4e55563988ce9f2673909313ef46324d55c4561ffc69574e6d2b7703fd4fed",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ],
+          [
+            537027520,
+            4,
+            1
+          ],
+          [
+            537027508,
+            4,
+            536903696
+          ],
+          [
+            536903696,
+            4,
+            1074086464
+          ],
+          [
+            536903700,
+            4,
+            1
+          ],
+          [
+            537027508,
+            4,
+            536903704
+          ],
+          [
+            537027504,
+            4,
+            536903704
+          ]
+        ],
+        "mmio_writes": [
+          [
+            1074086468,
+            4,
+            1
+          ]
+        ],
+        "queue_sha256": "e7f05085fea93d3462930459edb7d87b401c1c96aeb5ece08285267cdd396f43",
+        "buffer_sha256": "cef68004bf8050ab4ed65db91f6ec59b67a213ed3a98e674461a8aed01cc4fd5",
+        "status_buffer": "0080002001000000cccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "0080002001000000cccccccccccccccc"
+      }
+    },
+    {
+      "label": "reserve-post-(2, 257)",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          0,
+          0,
+          7
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "ac4e55563988ce9f2673909313ef46324d55c4561ffc69574e6d2b7703fd4fed",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ],
+          [
+            537027520,
+            4,
+            1
+          ],
+          [
+            537027508,
+            4,
+            536903696
+          ],
+          [
+            536903696,
+            4,
+            1074086465
+          ],
+          [
+            536903700,
+            4,
+            1
+          ],
+          [
+            537027508,
+            4,
+            536903704
+          ],
+          [
+            537027504,
+            4,
+            536903704
+          ]
+        ],
+        "mmio_writes": [
+          [
+            1074086468,
+            4,
+            1
+          ]
+        ],
+        "queue_sha256": "e7f05085fea93d3462930459edb7d87b401c1c96aeb5ece08285267cdd396f43",
+        "buffer_sha256": "3dd62f8106d3c1f958e952af9acbbe30b6409c0939393d0132dc474246f99a3c",
+        "status_buffer": "0080002001000000cccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "0080002001000000cccccccccccccccc"
+      }
+    },
+    {
+      "label": "reserve-post-(8, 0)",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          0,
+          0,
+          7
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "ac4e55563988ce9f2673909313ef46324d55c4561ffc69574e6d2b7703fd4fed",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ],
+          [
+            537027520,
+            4,
+            1
+          ],
+          [
+            537027508,
+            4,
+            536903744
+          ],
+          [
+            536903744,
+            4,
+            1074086464
+          ],
+          [
+            536903748,
+            4,
+            1
+          ],
+          [
+            537027508,
+            4,
+            536903752
+          ],
+          [
+            537027504,
+            4,
+            536903752
+          ]
+        ],
+        "mmio_writes": [
+          [
+            1074086468,
+            4,
+            1
+          ]
+        ],
+        "queue_sha256": "eab7d9e646007f1fd8fb3f0cd3cd39f8dae8872e6b3ca2837c118d167daa0daa",
+        "buffer_sha256": "6d08c5847b990206e56d00de44c5cfa53196349e59ef0b542e948fed34ad16bf",
+        "status_buffer": "0080002001000000cccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "0080002001000000cccccccccccccccc"
+      }
+    },
+    {
+      "label": "reserve-post-(8, 1)",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          0,
+          0,
+          7
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "ac4e55563988ce9f2673909313ef46324d55c4561ffc69574e6d2b7703fd4fed",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ],
+          [
+            537027520,
+            4,
+            1
+          ],
+          [
+            537027508,
+            4,
+            536903744
+          ],
+          [
+            536903744,
+            4,
+            1074086465
+          ],
+          [
+            536903748,
+            4,
+            1
+          ],
+          [
+            537027508,
+            4,
+            536903752
+          ],
+          [
+            537027504,
+            4,
+            536903752
+          ]
+        ],
+        "mmio_writes": [
+          [
+            1074086468,
+            4,
+            1
+          ]
+        ],
+        "queue_sha256": "eab7d9e646007f1fd8fb3f0cd3cd39f8dae8872e6b3ca2837c118d167daa0daa",
+        "buffer_sha256": "34eb9e2e9d03c4449e306651f69ae2cb19d9dcc1b0e3c86b0275e7f814b5ad9f",
+        "status_buffer": "0080002001000000cccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "0080002001000000cccccccccccccccc"
+      }
+    },
+    {
+      "label": "reserve-post-(8, 256)",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          0,
+          0,
+          7
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "ac4e55563988ce9f2673909313ef46324d55c4561ffc69574e6d2b7703fd4fed",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ],
+          [
+            537027520,
+            4,
+            1
+          ],
+          [
+            537027508,
+            4,
+            536903744
+          ],
+          [
+            536903744,
+            4,
+            1074086464
+          ],
+          [
+            536903748,
+            4,
+            1
+          ],
+          [
+            537027508,
+            4,
+            536903752
+          ],
+          [
+            537027504,
+            4,
+            536903752
+          ]
+        ],
+        "mmio_writes": [
+          [
+            1074086468,
+            4,
+            1
+          ]
+        ],
+        "queue_sha256": "eab7d9e646007f1fd8fb3f0cd3cd39f8dae8872e6b3ca2837c118d167daa0daa",
+        "buffer_sha256": "6d08c5847b990206e56d00de44c5cfa53196349e59ef0b542e948fed34ad16bf",
+        "status_buffer": "0080002001000000cccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "0080002001000000cccccccccccccccc"
+      }
+    },
+    {
+      "label": "reserve-post-(8, 257)",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          0,
+          0,
+          7
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "ac4e55563988ce9f2673909313ef46324d55c4561ffc69574e6d2b7703fd4fed",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ],
+          [
+            537027520,
+            4,
+            1
+          ],
+          [
+            537027508,
+            4,
+            536903744
+          ],
+          [
+            536903744,
+            4,
+            1074086465
+          ],
+          [
+            536903748,
+            4,
+            1
+          ],
+          [
+            537027508,
+            4,
+            536903752
+          ],
+          [
+            537027504,
+            4,
+            536903752
+          ]
+        ],
+        "mmio_writes": [
+          [
+            1074086468,
+            4,
+            1
+          ]
+        ],
+        "queue_sha256": "eab7d9e646007f1fd8fb3f0cd3cd39f8dae8872e6b3ca2837c118d167daa0daa",
+        "buffer_sha256": "34eb9e2e9d03c4449e306651f69ae2cb19d9dcc1b0e3c86b0275e7f814b5ad9f",
+        "status_buffer": "0080002001000000cccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "0080002001000000cccccccccccccccc"
+      }
+    },
+    {
+      "label": "reserve-post-(29, 0)",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          5,
+          7,
+          7
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "c404a72bfca8082142c35e17aeccdfb46065ff0c63e780eace75dab884920536",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ]
+        ],
+        "mmio_writes": [],
+        "queue_sha256": "b2e762ebf50fbc51375128ffa84fafb686ce91ca2ad0179b887bb7ca7b8f7766",
+        "buffer_sha256": "890f78e5b4bb5087b9195157808e0bd32a57dc8d228017742b9eb3f38bc78506",
+        "status_buffer": "cccccccccccccccccccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "label": "reserve-post-(29, 1)",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          5,
+          7,
+          7
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "c404a72bfca8082142c35e17aeccdfb46065ff0c63e780eace75dab884920536",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ]
+        ],
+        "mmio_writes": [],
+        "queue_sha256": "b2e762ebf50fbc51375128ffa84fafb686ce91ca2ad0179b887bb7ca7b8f7766",
+        "buffer_sha256": "890f78e5b4bb5087b9195157808e0bd32a57dc8d228017742b9eb3f38bc78506",
+        "status_buffer": "cccccccccccccccccccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "label": "reserve-post-(29, 256)",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          5,
+          7,
+          7
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "c404a72bfca8082142c35e17aeccdfb46065ff0c63e780eace75dab884920536",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ]
+        ],
+        "mmio_writes": [],
+        "queue_sha256": "b2e762ebf50fbc51375128ffa84fafb686ce91ca2ad0179b887bb7ca7b8f7766",
+        "buffer_sha256": "890f78e5b4bb5087b9195157808e0bd32a57dc8d228017742b9eb3f38bc78506",
+        "status_buffer": "cccccccccccccccccccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "label": "reserve-post-(29, 257)",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          5,
+          7,
+          7
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "c404a72bfca8082142c35e17aeccdfb46065ff0c63e780eace75dab884920536",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ]
+        ],
+        "mmio_writes": [],
+        "queue_sha256": "b2e762ebf50fbc51375128ffa84fafb686ce91ca2ad0179b887bb7ca7b8f7766",
+        "buffer_sha256": "890f78e5b4bb5087b9195157808e0bd32a57dc8d228017742b9eb3f38bc78506",
+        "status_buffer": "cccccccccccccccccccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "label": "term-(0, 0)",
+      "validation": "stock/source isolated-term supplement",
+      "observation": {
+        "status": [
+          0
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "f4c8377c6a438f8bf7af3a551b3e5ff50af6fc076602d329f1717ed69392d949",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ],
+          [
+            537027488,
+            4,
+            47041997
+          ]
+        ],
+        "mmio_writes": [
+          [
+            1074086440,
+            4,
+            2
+          ],
+          [
+            1074086460,
+            4,
+            0
+          ]
+        ],
+        "queue_sha256": "b95016b23731ad315f8f49aa24e812838a126ea6ecc0ef7918193d9d9c90dd8e",
+        "buffer_sha256": "ab755fc87f437f3e17dec55b3dfaaaa2c5eec1337524feb220705605ec79f7af",
+        "status_buffer": "cccccccccccccccccccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "label": "term-(0, 1)",
+      "validation": "stock/source isolated-term supplement",
+      "observation": {
+        "status": [
+          3
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "e32eef9e78409cc8c8d59c06695e0afa8e905358fd6f804fe0df8cdba9eddbec",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ]
+        ],
+        "mmio_writes": [],
+        "queue_sha256": "5c77cf19122fd46a205000ac1d97eab221a3634062c2736e778ba26a45baf4a0",
+        "buffer_sha256": "ab755fc87f437f3e17dec55b3dfaaaa2c5eec1337524feb220705605ec79f7af",
+        "status_buffer": "cccccccccccccccccccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "label": "term-(0, 255)",
+      "validation": "stock/source isolated-term supplement",
+      "observation": {
+        "status": [
+          3
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "e32eef9e78409cc8c8d59c06695e0afa8e905358fd6f804fe0df8cdba9eddbec",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ]
+        ],
+        "mmio_writes": [],
+        "queue_sha256": "d261da8321304b9d5740475908e04e3aa010a42d220ee52f5872dcb32a86172c",
+        "buffer_sha256": "ab755fc87f437f3e17dec55b3dfaaaa2c5eec1337524feb220705605ec79f7af",
+        "status_buffer": "cccccccccccccccccccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "label": "term-(1, 0)",
+      "validation": "stock/source isolated-term supplement",
+      "observation": {
+        "status": [
+          0
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "f4c8377c6a438f8bf7af3a551b3e5ff50af6fc076602d329f1717ed69392d949",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ],
+          [
+            537027488,
+            4,
+            47041997
+          ]
+        ],
+        "mmio_writes": [
+          [
+            1074086440,
+            4,
+            2
+          ],
+          [
+            1074086460,
+            4,
+            0
+          ]
+        ],
+        "queue_sha256": "b95016b23731ad315f8f49aa24e812838a126ea6ecc0ef7918193d9d9c90dd8e",
+        "buffer_sha256": "ab755fc87f437f3e17dec55b3dfaaaa2c5eec1337524feb220705605ec79f7af",
+        "status_buffer": "cccccccccccccccccccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "label": "term-(1, 1)",
+      "validation": "stock/source isolated-term supplement",
+      "observation": {
+        "status": [
+          0
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "f4c8377c6a438f8bf7af3a551b3e5ff50af6fc076602d329f1717ed69392d949",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ],
+          [
+            537027488,
+            4,
+            47041997
+          ]
+        ],
+        "mmio_writes": [
+          [
+            1074086440,
+            4,
+            2
+          ],
+          [
+            1074086460,
+            4,
+            0
+          ]
+        ],
+        "queue_sha256": "0b4b3f9b754d8d6002c25e350bde7ef9a612b5ef747dc5336c7e8edaccec25b4",
+        "buffer_sha256": "ab755fc87f437f3e17dec55b3dfaaaa2c5eec1337524feb220705605ec79f7af",
+        "status_buffer": "cccccccccccccccccccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "label": "term-(1, 255)",
+      "validation": "stock/source isolated-term supplement",
+      "observation": {
+        "status": [
+          0
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "f4c8377c6a438f8bf7af3a551b3e5ff50af6fc076602d329f1717ed69392d949",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ],
+          [
+            537027488,
+            4,
+            47041997
+          ]
+        ],
+        "mmio_writes": [
+          [
+            1074086440,
+            4,
+            2
+          ],
+          [
+            1074086460,
+            4,
+            0
+          ]
+        ],
+        "queue_sha256": "247dcb7a0a8f21117cf0555230066c46b234680e131a0a0431edc98e64f67623",
+        "buffer_sha256": "ab755fc87f437f3e17dec55b3dfaaaa2c5eec1337524feb220705605ec79f7af",
+        "status_buffer": "cccccccccccccccccccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "label": "term-(256, 0)",
+      "validation": "stock/source isolated-term supplement",
+      "observation": {
+        "status": [
+          0
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "f4c8377c6a438f8bf7af3a551b3e5ff50af6fc076602d329f1717ed69392d949",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ],
+          [
+            537027488,
+            4,
+            47041997
+          ]
+        ],
+        "mmio_writes": [
+          [
+            1074086440,
+            4,
+            2
+          ],
+          [
+            1074086460,
+            4,
+            0
+          ]
+        ],
+        "queue_sha256": "b95016b23731ad315f8f49aa24e812838a126ea6ecc0ef7918193d9d9c90dd8e",
+        "buffer_sha256": "ab755fc87f437f3e17dec55b3dfaaaa2c5eec1337524feb220705605ec79f7af",
+        "status_buffer": "cccccccccccccccccccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "label": "term-(256, 1)",
+      "validation": "stock/source isolated-term supplement",
+      "observation": {
+        "status": [
+          3
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "e32eef9e78409cc8c8d59c06695e0afa8e905358fd6f804fe0df8cdba9eddbec",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ]
+        ],
+        "mmio_writes": [],
+        "queue_sha256": "5c77cf19122fd46a205000ac1d97eab221a3634062c2736e778ba26a45baf4a0",
+        "buffer_sha256": "ab755fc87f437f3e17dec55b3dfaaaa2c5eec1337524feb220705605ec79f7af",
+        "status_buffer": "cccccccccccccccccccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "label": "term-(256, 255)",
+      "validation": "stock/source isolated-term supplement",
+      "observation": {
+        "status": [
+          3
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "e32eef9e78409cc8c8d59c06695e0afa8e905358fd6f804fe0df8cdba9eddbec",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ]
+        ],
+        "mmio_writes": [],
+        "queue_sha256": "d261da8321304b9d5740475908e04e3aa010a42d220ee52f5872dcb32a86172c",
+        "buffer_sha256": "ab755fc87f437f3e17dec55b3dfaaaa2c5eec1337524feb220705605ec79f7af",
+        "status_buffer": "cccccccccccccccccccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "label": "term-(257, 0)",
+      "validation": "stock/source isolated-term supplement",
+      "observation": {
+        "status": [
+          0
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "f4c8377c6a438f8bf7af3a551b3e5ff50af6fc076602d329f1717ed69392d949",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ],
+          [
+            537027488,
+            4,
+            47041997
+          ]
+        ],
+        "mmio_writes": [
+          [
+            1074086440,
+            4,
+            2
+          ],
+          [
+            1074086460,
+            4,
+            0
+          ]
+        ],
+        "queue_sha256": "b95016b23731ad315f8f49aa24e812838a126ea6ecc0ef7918193d9d9c90dd8e",
+        "buffer_sha256": "ab755fc87f437f3e17dec55b3dfaaaa2c5eec1337524feb220705605ec79f7af",
+        "status_buffer": "cccccccccccccccccccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "label": "term-(257, 1)",
+      "validation": "stock/source isolated-term supplement",
+      "observation": {
+        "status": [
+          0
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "f4c8377c6a438f8bf7af3a551b3e5ff50af6fc076602d329f1717ed69392d949",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ],
+          [
+            537027488,
+            4,
+            47041997
+          ]
+        ],
+        "mmio_writes": [
+          [
+            1074086440,
+            4,
+            2
+          ],
+          [
+            1074086460,
+            4,
+            0
+          ]
+        ],
+        "queue_sha256": "0b4b3f9b754d8d6002c25e350bde7ef9a612b5ef747dc5336c7e8edaccec25b4",
+        "buffer_sha256": "ab755fc87f437f3e17dec55b3dfaaaa2c5eec1337524feb220705605ec79f7af",
+        "status_buffer": "cccccccccccccccccccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "label": "term-(257, 255)",
+      "validation": "stock/source isolated-term supplement",
+      "observation": {
+        "status": [
+          0
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "f4c8377c6a438f8bf7af3a551b3e5ff50af6fc076602d329f1717ed69392d949",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ],
+          [
+            537027488,
+            4,
+            47041997
+          ]
+        ],
+        "mmio_writes": [
+          [
+            1074086440,
+            4,
+            2
+          ],
+          [
+            1074086460,
+            4,
+            0
+          ]
+        ],
+        "queue_sha256": "247dcb7a0a8f21117cf0555230066c46b234680e131a0a0431edc98e64f67623",
+        "buffer_sha256": "ab755fc87f437f3e17dec55b3dfaaaa2c5eec1337524feb220705605ec79f7af",
+        "status_buffer": "cccccccccccccccccccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "label": "guard-reserve[537027488, 1, 0, 536887296]",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          6
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "c404a72bfca8082142c35e17aeccdfb46065ff0c63e780eace75dab884920536",
+        "events": [],
+        "state_writes": [],
+        "mmio_writes": [],
+        "queue_sha256": "b2e762ebf50fbc51375128ffa84fafb686ce91ca2ad0179b887bb7ca7b8f7766",
+        "buffer_sha256": "890f78e5b4bb5087b9195157808e0bd32a57dc8d228017742b9eb3f38bc78506",
+        "status_buffer": "cccccccccccccccccccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "label": "guard-reserve[537027488, 1, 536887296, 0]",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          6
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "c404a72bfca8082142c35e17aeccdfb46065ff0c63e780eace75dab884920536",
+        "events": [],
+        "state_writes": [],
+        "mmio_writes": [],
+        "queue_sha256": "b2e762ebf50fbc51375128ffa84fafb686ce91ca2ad0179b887bb7ca7b8f7766",
+        "buffer_sha256": "890f78e5b4bb5087b9195157808e0bd32a57dc8d228017742b9eb3f38bc78506",
+        "status_buffer": "cccccccccccccccccccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "label": "guard-reserve[0, 1, 536887296, 536887300]",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          2
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "c404a72bfca8082142c35e17aeccdfb46065ff0c63e780eace75dab884920536",
+        "events": [],
+        "state_writes": [],
+        "mmio_writes": [],
+        "queue_sha256": "b2e762ebf50fbc51375128ffa84fafb686ce91ca2ad0179b887bb7ca7b8f7766",
+        "buffer_sha256": "890f78e5b4bb5087b9195157808e0bd32a57dc8d228017742b9eb3f38bc78506",
+        "status_buffer": "cccccccccccccccccccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "label": "guard-post[0, 1]",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          2
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "c404a72bfca8082142c35e17aeccdfb46065ff0c63e780eace75dab884920536",
+        "events": [],
+        "state_writes": [],
+        "mmio_writes": [],
+        "queue_sha256": "b2e762ebf50fbc51375128ffa84fafb686ce91ca2ad0179b887bb7ca7b8f7766",
+        "buffer_sha256": "890f78e5b4bb5087b9195157808e0bd32a57dc8d228017742b9eb3f38bc78506",
+        "status_buffer": "cccccccccccccccccccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "label": "guard-cancel[0]",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          2
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "c404a72bfca8082142c35e17aeccdfb46065ff0c63e780eace75dab884920536",
+        "events": [],
+        "state_writes": [],
+        "mmio_writes": [],
+        "queue_sha256": "b2e762ebf50fbc51375128ffa84fafb686ce91ca2ad0179b887bb7ca7b8f7766",
+        "buffer_sha256": "890f78e5b4bb5087b9195157808e0bd32a57dc8d228017742b9eb3f38bc78506",
+        "status_buffer": "cccccccccccccccccccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "label": "guard-term[0, 1]",
+      "validation": "stock/source isolated-term supplement",
+      "observation": {
+        "status": [
+          2
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "c404a72bfca8082142c35e17aeccdfb46065ff0c63e780eace75dab884920536",
+        "events": [],
+        "state_writes": [],
+        "mmio_writes": [],
+        "queue_sha256": "b2e762ebf50fbc51375128ffa84fafb686ce91ca2ad0179b887bb7ca7b8f7766",
+        "buffer_sha256": "890f78e5b4bb5087b9195157808e0bd32a57dc8d228017742b9eb3f38bc78506",
+        "status_buffer": "cccccccccccccccccccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "label": "guard-post[537027488, 1]",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          7
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "c404a72bfca8082142c35e17aeccdfb46065ff0c63e780eace75dab884920536",
+        "events": [],
+        "state_writes": [],
+        "mmio_writes": [],
+        "queue_sha256": "b2e762ebf50fbc51375128ffa84fafb686ce91ca2ad0179b887bb7ca7b8f7766",
+        "buffer_sha256": "890f78e5b4bb5087b9195157808e0bd32a57dc8d228017742b9eb3f38bc78506",
+        "status_buffer": "cccccccccccccccccccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "label": "guard-cancel[537027488]",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          7
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "c404a72bfca8082142c35e17aeccdfb46065ff0c63e780eace75dab884920536",
+        "events": [],
+        "state_writes": [],
+        "mmio_writes": [],
+        "queue_sha256": "b2e762ebf50fbc51375128ffa84fafb686ce91ca2ad0179b887bb7ca7b8f7766",
+        "buffer_sha256": "890f78e5b4bb5087b9195157808e0bd32a57dc8d228017742b9eb3f38bc78506",
+        "status_buffer": "cccccccccccccccccccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "label": "sequence-full-254",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          0
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "c404a72bfca8082142c35e17aeccdfb46065ff0c63e780eace75dab884920536",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ],
+          [
+            537027520,
+            4,
+            255
+          ],
+          [
+            537027508,
+            4,
+            536903688
+          ]
+        ],
+        "mmio_writes": [],
+        "queue_sha256": "78a89263794f41ed3d2f1b1ef9598cb83abee6be7990555456743d2e2515a7d5",
+        "buffer_sha256": "890f78e5b4bb5087b9195157808e0bd32a57dc8d228017742b9eb3f38bc78506",
+        "status_buffer": "00800020ff000000cccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "00800020ff000000cccccccccccccccc"
+      }
+    },
+    {
+      "label": "sequence-full-255",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          5
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "c404a72bfca8082142c35e17aeccdfb46065ff0c63e780eace75dab884920536",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ]
+        ],
+        "mmio_writes": [],
+        "queue_sha256": "07bbc790dcbcbf9f7b5049fac4047a4288c25b578c4f932fcf219ad6c37abfb9",
+        "buffer_sha256": "890f78e5b4bb5087b9195157808e0bd32a57dc8d228017742b9eb3f38bc78506",
+        "status_buffer": "cccccccccccccccccccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "label": "sequence-full-256",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          0
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "c404a72bfca8082142c35e17aeccdfb46065ff0c63e780eace75dab884920536",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            256
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ],
+          [
+            537027520,
+            4,
+            257
+          ],
+          [
+            537027508,
+            4,
+            536903688
+          ]
+        ],
+        "mmio_writes": [],
+        "queue_sha256": "7fa7ebd0b5dfff78ac33042e3aad1913c5976895cf3f6a712391190631fac483",
+        "buffer_sha256": "890f78e5b4bb5087b9195157808e0bd32a57dc8d228017742b9eb3f38bc78506",
+        "status_buffer": "0080002001010000cccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "0080002001010000cccccccccccccccc"
+      }
+    },
+    {
+      "label": "sequence-full-257",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          0
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "c404a72bfca8082142c35e17aeccdfb46065ff0c63e780eace75dab884920536",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            256
+          ],
+          [
+            537027500,
+            4,
+            536903680
+          ],
+          [
+            537027520,
+            4,
+            258
+          ],
+          [
+            537027508,
+            4,
+            536903688
+          ]
+        ],
+        "mmio_writes": [],
+        "queue_sha256": "7427911e6d15e20e893708ef55229057fc7c079b374689b9eb8d5214a9366ca0",
+        "buffer_sha256": "890f78e5b4bb5087b9195157808e0bd32a57dc8d228017742b9eb3f38bc78506",
+        "status_buffer": "0080002002010000cccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "0080002002010000cccccccccccccccc"
+      }
+    },
+    {
+      "label": "space-(536903920, 536903808, 1)",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          0
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "289c5aaf9da3f3d57e39b8bf8de08ba4ae9451cfb1c6bf90684cfdc37b7b1c30",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903808
+          ],
+          [
+            536903920,
+            4,
+            1074086444
+          ],
+          [
+            536903924,
+            4,
+            536903680
+          ],
+          [
+            537027520,
+            4,
+            1
+          ],
+          [
+            537027508,
+            4,
+            536903688
+          ]
+        ],
+        "mmio_writes": [],
+        "queue_sha256": "bee1d5fc9d397e606cc54494ff6a349af18e4d3cb6e87393f54723a1c4490dcc",
+        "buffer_sha256": "b55fea695100ec59b82e928522fc6d3666a798ad3cae3e9f3e51ff7d15ec6a03",
+        "status_buffer": "0080002001000000cccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "0080002001000000cccccccccccccccc"
+      }
+    },
+    {
+      "label": "space-(536903920, 536903688, 1)",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          5
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "62fee05aa4409c0feb10e25f532484c4d31ca50a998cf4f073abeab4064006b7",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903688
+          ]
+        ],
+        "mmio_writes": [],
+        "queue_sha256": "a9415a7b0913528d19b6ddb0890e4ce7479c1c2a3e3fc26b368a9c7873ed8945",
+        "buffer_sha256": "890f78e5b4bb5087b9195157808e0bd32a57dc8d228017742b9eb3f38bc78506",
+        "status_buffer": "cccccccccccccccccccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "label": "space-(536903744, 536903760, 1)",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          5
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "a80be2a22af05dfe6af23b31e9174b0872fd9cd056648505c4433122d7ec711e",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903760
+          ]
+        ],
+        "mmio_writes": [],
+        "queue_sha256": "94c03a076513c293181353f11280ca597d3281ab8f31b585a6de3e1d75fffb6d",
+        "buffer_sha256": "890f78e5b4bb5087b9195157808e0bd32a57dc8d228017742b9eb3f38bc78506",
+        "status_buffer": "cccccccccccccccccccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "cccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "label": "space-(536903744, 536903768, 1)",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          0
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "6ee5f828a06be8f5a006cb39af8618c79d5a2b48073fe8e4f31323510c199763",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903768
+          ],
+          [
+            537027520,
+            4,
+            1
+          ],
+          [
+            537027508,
+            4,
+            536903752
+          ]
+        ],
+        "mmio_writes": [],
+        "queue_sha256": "43c3183499dff148a7e0ab78678c648c1d148194798454be002c80be8f2a53dd",
+        "buffer_sha256": "890f78e5b4bb5087b9195157808e0bd32a57dc8d228017742b9eb3f38bc78506",
+        "status_buffer": "4080002001000000cccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "4080002001000000cccccccccccccccc"
+      }
+    },
+    {
+      "label": "space-(536903744, 536903776, 1)",
+      "validation": "stock/source comparison",
+      "observation": {
+        "status": [
+          0
+        ],
+        "output": "efbeadde",
+        "pool_sha256": "668f2f9735bb1fae998f2bc0e05c2595af2952880b37da05741dc0cbe3c16561",
+        "mmio_sha256": "820911c92fc3d6cbd4ec211a290fb1c44dfb029c4c8c8e749b3b2dc0127ad28a",
+        "events": [],
+        "state_writes": [
+          [
+            537027516,
+            4,
+            0
+          ],
+          [
+            537027500,
+            4,
+            536903776
+          ],
+          [
+            537027520,
+            4,
+            1
+          ],
+          [
+            537027508,
+            4,
+            536903752
+          ]
+        ],
+        "mmio_writes": [],
+        "queue_sha256": "1f43e7edd75aa8dea54029c20c97c8bfb6d650481ef72944c3d5870bd947cbff",
+        "buffer_sha256": "890f78e5b4bb5087b9195157808e0bd32a57dc8d228017742b9eb3f38bc78506",
+        "status_buffer": "4080002001000000cccccccccccccccc",
+        "event_state": {
+          "cq_head": 0,
+          "cq_pending": 0,
+          "descriptor_head": 0,
+          "descriptor_pending": 0,
+          "descriptor_active": 0,
+          "callback_mode": 0,
+          "stop_flag": 0,
+          "descriptor_callbacks": [
+            134217985,
+            134217985,
+            134217985,
+            134217985
+          ],
+          "cq_callbacks": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "primask": 0
+        },
+        "outputs": "4080002001000000cccccccccccccccc"
+      }
+    }
+  ],
+  "limits": [
+    "Fresh CPU per fixture; MMIO is mapped RAM, peripheral consumer/index values supplied by fixture.",
+    "Reserve/post/cancel execute shared-image stock/source. With --term-elf, termination executes a separate retained source module from the frozen object against stock; it is not claimed linked into the shared image.",
+    "Reservation cancellation rewinds queue pointers/sequence, not heap free. No IOM uninitialize is invented."
+  ],
+  "term_module_sha256": "fabc35e2817438469141feb3645d761f62e4ae8ea7e2e16e5a71920ce3112b08",
+  "runner_sha256": "751c1c726f61e70378f86d29d616329705e0994effdef54b926c68a0e2989b8f"
+}

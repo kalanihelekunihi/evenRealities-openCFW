@@ -1,0 +1,91 @@
+{
+  "utc": "2026-10-07T01:50:03.708561+00:00",
+  "image_sha256": "92619ea6a92780848703d61cb91385c950b717089718aa6a82a13baf6fc1cda4",
+  "functions": [
+    {
+      "function": "publisher",
+      "symbol": "opencfw_boot_iom_descriptor_publish",
+      "original_start": "0x42c45a",
+      "original_end_exclusive": "0x42c4c6",
+      "original_body_bytes": 108,
+      "observed_original_bytes": 108,
+      "original_body_sha256": "0deea2026365cb9c3471cdd81a7644c3fa519db2239154f3456da25ab88c5525",
+      "source": "g2/components/bootloader/initializer_callbacks/context_events.c",
+      "source_sha256": "e1c9c36c1bf0d7cc477f6ad415bbe60c8af67596fea36e27b1684531299657a8"
+    },
+    {
+      "function": "service",
+      "symbol": "opencfw_boot_iom_event_service",
+      "original_start": "0x42c6f8",
+      "original_end_exclusive": "0x42c980",
+      "original_body_bytes": 648,
+      "observed_original_bytes": 648,
+      "original_body_sha256": "7272867858e1c23f8ad5e5938ef7f5e02d59289de7c3c76eb6c7ea69fcec5958",
+      "source": "g2/components/bootloader/initializer_callbacks/context_events.c",
+      "source_sha256": "e1c9c36c1bf0d7cc477f6ad415bbe60c8af67596fea36e27b1684531299657a8"
+    },
+    {
+      "function": "classify",
+      "symbol": "opencfw_boot_iom_error_classify",
+      "original_start": "0x42c076",
+      "original_end_exclusive": "0x42c0b2",
+      "original_body_bytes": 60,
+      "observed_original_bytes": 60,
+      "original_body_sha256": "ccdc2830f8d713ac41be3ffae702c125009eed11fc8b89d5f430e8c3a794af19",
+      "source": "g2/components/bootloader/initializer_callbacks/context_events.c",
+      "source_sha256": "e1c9c36c1bf0d7cc477f6ad415bbe60c8af67596fea36e27b1684531299657a8"
+    },
+    {
+      "function": "apply",
+      "symbol": "opencfw_boot_iom_event_apply",
+      "original_start": "0x42c0b2",
+      "original_end_exclusive": "0x42c222",
+      "original_body_bytes": 368,
+      "observed_original_bytes": 368,
+      "original_body_sha256": "a3d5075b7f480a21b071c587bb343466ca39d411ed426927e82b22168591937e",
+      "source": "g2/components/bootloader/initializer_callbacks/context_events.c",
+      "source_sha256": "e1c9c36c1bf0d7cc477f6ad415bbe60c8af67596fea36e27b1684531299657a8"
+    },
+    {
+      "function": "cq-status",
+      "symbol": "opencfw_boot_iom_cq_status",
+      "original_start": "0x427a56",
+      "original_end_exclusive": "0x427ad6",
+      "original_body_bytes": 128,
+      "observed_original_bytes": 128,
+      "original_body_sha256": "54f4dd9239da03fdb828d767378d1650218cb59a76e2f1cc57e628ff0bac9cd4",
+      "source": "g2/components/bootloader/initializer_callbacks/context_events.c",
+      "source_sha256": "e1c9c36c1bf0d7cc477f6ad415bbe60c8af67596fea36e27b1684531299657a8"
+    },
+    {
+      "function": "cq-resume",
+      "symbol": "opencfw_boot_iom_cq_resume",
+      "original_start": "0x427b38",
+      "original_end_exclusive": "0x427baa",
+      "original_body_bytes": 114,
+      "observed_original_bytes": 114,
+      "original_body_sha256": "bf382cf043bcfbd2443bb5c687740f48d4f970d90119ce671859e6852a4e33b7",
+      "source": "g2/components/bootloader/initializer_callbacks/context_events.c",
+      "source_sha256": "e1c9c36c1bf0d7cc477f6ad415bbe60c8af67596fea36e27b1684531299657a8"
+    },
+    {
+      "function": "cq-indices",
+      "symbol": "opencfw_boot_iom_cq_refresh_indices",
+      "original_start": "0x427754",
+      "original_end_exclusive": "0x427794",
+      "original_body_bytes": 64,
+      "observed_original_bytes": 64,
+      "original_body_sha256": "8a2b2f4d159d6c4d3ec68b81c254a81c976d757dc1c9d57319649cacf6c65317",
+      "source": "g2/components/bootloader/initializer_callbacks/context_events.c",
+      "source_sha256": "e1c9c36c1bf0d7cc477f6ad415bbe60c8af67596fea36e27b1684531299657a8"
+    }
+  ],
+  "deduplicated_original_body_bytes": 1490,
+  "observed_original_body_bytes": 1490,
+  "inventory_complete": false,
+  "limits": [
+    "Seven-function partial source ownership, not complete bootloader or source-complete firmware.",
+    "Consolidated get-status/resume ends were short: authenticated disassembly continues through427ad4/427ba8 returns; actual ends427ad6/427baa are used here.",
+    "Calls/fixtures/trace hashes distinguish original instructions from synthetic callback bytes."
+  ]
+}

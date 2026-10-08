@@ -1,0 +1,67 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpdr5zss4k/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00482c0e <.text>:
+  482c0e:	b570      	push	{r4, r5, r6, lr}
+  482c10:	0004      	movs	r4, r0
+  482c12:	000d      	movs	r5, r1
+  482c14:	2c00      	cmp	r4, #0
+  482c16:	d03f      	beq.n	482c98 <.text+0x8a>
+  482c18:	0020      	movs	r0, r4
+  482c1a:	f000 f85d 	bl	482cd8 <.text+0xca>
+  482c1e:	42a8      	cmp	r0, r5
+  482c20:	d110      	bne.n	482c44 <.text+0x36>
+  482c22:	0029      	movs	r1, r5
+  482c24:	0020      	movs	r0, r4
+  482c26:	f000 f863 	bl	482cf0 <.text+0xe2>
+  482c2a:	6060      	str	r0, [r4, #4]
+  482c2c:	6860      	ldr	r0, [r4, #4]
+  482c2e:	2800      	cmp	r0, #0
+  482c30:	d102      	bne.n	482c38 <.text+0x2a>
+  482c32:	2000      	movs	r0, #0
+  482c34:	60a0      	str	r0, [r4, #8]
+  482c36:	e02f      	b.n	482c98 <.text+0x8a>
+  482c38:	2200      	movs	r2, #0
+  482c3a:	6861      	ldr	r1, [r4, #4]
+  482c3c:	0020      	movs	r0, r4
+  482c3e:	f000 f8b6 	bl	482dae <.text+0x1a0>
+  482c42:	e029      	b.n	482c98 <.text+0x8a>
+  482c44:	0020      	movs	r0, r4
+  482c46:	f000 f84d 	bl	482ce4 <.text+0xd6>
+  482c4a:	42a8      	cmp	r0, r5
+  482c4c:	d110      	bne.n	482c70 <.text+0x62>
+  482c4e:	0029      	movs	r1, r5
+  482c50:	0020      	movs	r0, r4
+  482c52:	f000 f852 	bl	482cfa <.text+0xec>
+  482c56:	60a0      	str	r0, [r4, #8]
+  482c58:	68a0      	ldr	r0, [r4, #8]
+  482c5a:	2800      	cmp	r0, #0
+  482c5c:	d102      	bne.n	482c64 <.text+0x56>
+  482c5e:	2000      	movs	r0, #0
+  482c60:	6060      	str	r0, [r4, #4]
+  482c62:	e019      	b.n	482c98 <.text+0x8a>
+  482c64:	2200      	movs	r2, #0
+  482c66:	68a1      	ldr	r1, [r4, #8]
+  482c68:	0020      	movs	r0, r4
+  482c6a:	f000 f8aa 	bl	482dc2 <.text+0x1b4>
+  482c6e:	e013      	b.n	482c98 <.text+0x8a>
+  482c70:	0029      	movs	r1, r5
+  482c72:	0020      	movs	r0, r4
+  482c74:	f000 f841 	bl	482cfa <.text+0xec>
+  482c78:	0006      	movs	r6, r0
+  482c7a:	0029      	movs	r1, r5
+  482c7c:	0020      	movs	r0, r4
+  482c7e:	f000 f837 	bl	482cf0 <.text+0xe2>
+  482c82:	0005      	movs	r5, r0
+  482c84:	002a      	movs	r2, r5
+  482c86:	0031      	movs	r1, r6
+  482c88:	0020      	movs	r0, r4
+  482c8a:	f000 f89a 	bl	482dc2 <.text+0x1b4>
+  482c8e:	0032      	movs	r2, r6
+  482c90:	0029      	movs	r1, r5
+  482c92:	0020      	movs	r0, r4
+  482c94:	f000 f88b 	bl	482dae <.text+0x1a0>
+  482c98:	bd70      	pop	{r4, r5, r6, pc}

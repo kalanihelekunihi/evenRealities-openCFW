@@ -1,0 +1,1 @@
+Partial/unaccepted:4bytesEE5C..EE60 onealignedliteralword. MappedPCloadconsumerfrom21420retainedandcomponenthasheschecked. ValueisThumbaddress47EE1F mappingentry47EE1E alreadyrecoveredin21418; wrapperforwardingdoesnotproveotherconsumers/ownership. No C/freeze/completenessclaim.

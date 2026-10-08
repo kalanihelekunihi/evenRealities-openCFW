@@ -1,0 +1,59 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpk7cdln6r/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047bc7a <.text>:
+  47bc7a:	f7c1 fa28 	bl	43d0ce <.text-0x3ebac>
+  47bc7e:	0780      	lsls	r0, r0, #30
+  47bc80:	d510      	bpl.n	47bca4 <.text+0x2a>
+  47bc82:	200a      	movs	r0, #10
+  47bc84:	9002      	str	r0, [sp, #8]
+  47bc86:	f8df 08c8 	ldr.w	r0, [pc, #2248]	@ 47c550 <.text+0x8d6>
+  47bc8a:	9001      	str	r0, [sp, #4]
+  47bc8c:	f240 70d4 	movw	r0, #2004	@ 0x7d4
+  47bc90:	9000      	str	r0, [sp, #0]
+  47bc92:	f8df 38ac 	ldr.w	r3, [pc, #2220]	@ 47c540 <.text+0x8c6>
+  47bc96:	f8df 28ac 	ldr.w	r2, [pc, #2220]	@ 47c544 <.text+0x8ca>
+  47bc9a:	f8df 18ac 	ldr.w	r1, [pc, #2220]	@ 47c548 <.text+0x8ce>
+  47bc9e:	2004      	movs	r0, #4
+  47bca0:	f7c1 fc68 	bl	43d574 <.text-0x3e706>
+  47bca4:	f7c1 fa13 	bl	43d0ce <.text-0x3ebac>
+  47bca8:	07c0      	lsls	r0, r0, #31
+  47bcaa:	d403      	bmi.n	47bcb4 <.text+0x3a>
+  47bcac:	f7c1 fa0f 	bl	43d0ce <.text-0x3ebac>
+  47bcb0:	0740      	lsls	r0, r0, #29
+  47bcb2:	d507      	bpl.n	47bcc4 <.text+0x4a>
+  47bcb4:	f8df 189c 	ldr.w	r1, [pc, #2204]	@ 47c554 <.text+0x8da>
+  47bcb8:	230a      	movs	r3, #10
+  47bcba:	000a      	movs	r2, r1
+  47bcbc:	f05f 5082 	movs.w	r0, #272629760	@ 0x10400000
+  47bcc0:	f7c1 f8ed 	bl	43ce9e <.text-0x3eddc>
+  47bcc4:	f7c1 fa03 	bl	43d0ce <.text-0x3ebac>
+  47bcc8:	0780      	lsls	r0, r0, #30
+  47bcca:	d512      	bpl.n	47bcf2 <.text+0x78>
+  47bccc:	f8df 0888 	ldr.w	r0, [pc, #2184]	@ 47c558 <.text+0x8de>
+  47bcd0:	6800      	ldr	r0, [r0, #0]
+  47bcd2:	9002      	str	r0, [sp, #8]
+  47bcd4:	f8df 0884 	ldr.w	r0, [pc, #2180]	@ 47c55c <.text+0x8e2>
+  47bcd8:	9001      	str	r0, [sp, #4]
+  47bcda:	f240 70d5 	movw	r0, #2005	@ 0x7d5
+  47bcde:	9000      	str	r0, [sp, #0]
+  47bce0:	f8df 385c 	ldr.w	r3, [pc, #2140]	@ 47c540 <.text+0x8c6>
+  47bce4:	f8df 285c 	ldr.w	r2, [pc, #2140]	@ 47c544 <.text+0x8ca>
+  47bce8:	f8df 185c 	ldr.w	r1, [pc, #2140]	@ 47c548 <.text+0x8ce>
+  47bcec:	2004      	movs	r0, #4
+  47bcee:	f7c1 fc41 	bl	43d574 <.text-0x3e706>
+  47bcf2:	f7c1 f9ec 	bl	43d0ce <.text-0x3ebac>
+  47bcf6:	07c0      	lsls	r0, r0, #31
+  47bcf8:	d403      	bmi.n	47bd02 <.text+0x88>
+  47bcfa:	f7c1 f9e8 	bl	43d0ce <.text-0x3ebac>
+  47bcfe:	0740      	lsls	r0, r0, #29
+  47bd00:	d509      	bpl.n	47bd16 <.text+0x9c>
+  47bd02:	f8df 185c 	ldr.w	r1, [pc, #2140]	@ 47c560 <.text+0x8e6>
+  47bd06:	f8df 0850 	ldr.w	r0, [pc, #2128]	@ 47c558 <.text+0x8de>
+  47bd0a:	6803      	ldr	r3, [r0, #0]
+  47bd0c:	000a      	movs	r2, r1
+  47bd0e:	f05f 5082 	movs.w	r0, #272629760	@ 0x10400000
+  47bd12:	f7c1 f8c4 	bl	43ce9e <.text-0x3eddc>

@@ -1,0 +1,57 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpvhu9iwe5/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+004801fc <.text>:
+  4801fc:	f8df 04d0 	ldr.w	r0, [pc, #1232]	@ 4806d0 <.text+0x4d4>
+  480200:	6801      	ldr	r1, [r0, #0]
+  480202:	0849      	lsrs	r1, r1, #1
+  480204:	0049      	lsls	r1, r1, #1
+  480206:	6001      	str	r1, [r0, #0]
+  480208:	f44f 7188 	mov.w	r1, #272	@ 0x110
+  48020c:	6001      	str	r1, [r0, #0]
+  48020e:	f44f 7080 	mov.w	r0, #256	@ 0x100
+  480212:	f8df 14c0 	ldr.w	r1, [pc, #1216]	@ 4806d4 <.text+0x4d8>
+  480216:	6008      	str	r0, [r1, #0]
+  480218:	f05f 30ff 	movs.w	r0, #4294967295	@ 0xffffffff
+  48021c:	f8df 14b8 	ldr.w	r1, [pc, #1208]	@ 4806d8 <.text+0x4dc>
+  480220:	6008      	str	r0, [r1, #0]
+  480222:	f8df 14b8 	ldr.w	r1, [pc, #1208]	@ 4806dc <.text+0x4e0>
+  480226:	6008      	str	r0, [r1, #0]
+  480228:	f05f 4040 	movs.w	r0, #3221225472	@ 0xc0000000
+  48022c:	f8df 14b0 	ldr.w	r1, [pc, #1200]	@ 4806e0 <.text+0x4e4>
+  480230:	6008      	str	r0, [r1, #0]
+  480232:	f8df 04b0 	ldr.w	r0, [pc, #1200]	@ 4806e4 <.text+0x4e8>
+  480236:	6801      	ldr	r1, [r0, #0]
+  480238:	f051 4180 	orrs.w	r1, r1, #1073741824	@ 0x40000000
+  48023c:	6001      	str	r1, [r0, #0]
+  48023e:	4770      	bx	lr
+  480240:	b510      	push	{r4, lr}
+  480242:	0004      	movs	r4, r0
+  480244:	2131      	movs	r1, #49	@ 0x31
+  480246:	2004      	movs	r0, #4
+  480248:	f044 f938 	bl	4c44bc <.text+0x442c0>
+  48024c:	2006      	movs	r0, #6
+  48024e:	4344      	muls	r4, r0
+  480250:	f8df 0484 	ldr.w	r0, [pc, #1156]	@ 4806d8 <.text+0x4dc>
+  480254:	6004      	str	r4, [r0, #0]
+  480256:	f8df 0490 	ldr.w	r0, [pc, #1168]	@ 4806e8 <.text+0x4ec>
+  48025a:	6801      	ldr	r1, [r0, #0]
+  48025c:	f451 4100 	orrs.w	r1, r1, #32768	@ 0x8000
+  480260:	6001      	str	r1, [r0, #0]
+  480262:	f8df 046c 	ldr.w	r0, [pc, #1132]	@ 4806d0 <.text+0x4d4>
+  480266:	6801      	ldr	r1, [r0, #0]
+  480268:	f051 0102 	orrs.w	r1, r1, #2
+  48026c:	6001      	str	r1, [r0, #0]
+  48026e:	6801      	ldr	r1, [r0, #0]
+  480270:	f031 0102 	bics.w	r1, r1, #2
+  480274:	6001      	str	r1, [r0, #0]
+  480276:	f45f 2180 	movs.w	r1, #262144	@ 0x40000
+  48027a:	f8df 2470 	ldr.w	r2, [pc, #1136]	@ 4806ec <.text+0x4f0>
+  48027e:	6011      	str	r1, [r2, #0]
+  480280:	6801      	ldr	r1, [r0, #0]
+  480282:	f051 0101 	orrs.w	r1, r1, #1
+  480286:	6001      	str	r1, [r0, #0]
+  480288:	bd10      	pop	{r4, pc}

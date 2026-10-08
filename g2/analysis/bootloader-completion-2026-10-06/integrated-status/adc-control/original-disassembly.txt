@@ -1,0 +1,125 @@
+0042ec0c 4368         ldr r3, [r0, #4]
+0042ec0e 0028         cmp r0, #0
+0042ec10 06d0         beq #0x42ec20
+0042ec12 0068         ldr r0, [r0]
+0042ec14 20f07e40     bic r0, r0, #0xfe000000
+0042ec18 dff86035     ldr.w r3, [pc, #0x560]
+0042ec1c 9842         cmp r0, r3
+0042ec1e 01d0         beq #0x42ec24
+0042ec20 0220         movs r0, #2
+0042ec22 23e0         b #0x42ec6c
+0042ec24 c9b2         uxtb r1, r1
+0042ec26 0029         cmp r1, #0
+0042ec28 05d0         beq #0x42ec36
+0042ec2a 0229         cmp r1, #2
+0042ec2c 61d0         beq #0x42ecf2
+0042ec2e 1ed3         blo #0x42ec6e
+0042ec30 0329         cmp r1, #3
+0042ec32 78d0         beq #0x42ed26
+0042ec34 92e0         b #0x42ed5c
+0042ec36 5068         ldr r0, [r2, #4]
+0042ec38 b0f5801f     cmp.w r0, #0x100000
+0042ec3c 03d2         bhs #0x42ec46
+0042ec3e 9068         ldr r0, [r2, #8]
+0042ec40 b0f5801f     cmp.w r0, #0x100000
+0042ec44 01d3         blo #0x42ec4a
+0042ec46 0520         movs r0, #5
+0042ec48 10e0         b #0x42ec6c
+0042ec4a 5068         ldr r0, [r2, #4]
+0042ec4c 0003         lsls r0, r0, #0xc
+0042ec4e 000b         lsrs r0, r0, #0xc
+0042ec50 dff83815     ldr.w r1, [pc, #0x538]
+0042ec54 0860         str r0, [r1]
+0042ec56 9068         ldr r0, [r2, #8]
+0042ec58 0003         lsls r0, r0, #0xc
+0042ec5a 000b         lsrs r0, r0, #0xc
+0042ec5c dff83015     ldr.w r1, [pc, #0x530]
+0042ec60 0860         str r0, [r1]
+0042ec62 1078         ldrb r0, [r2]
+0042ec64 dff82c15     ldr.w r1, [pc, #0x52c]
+0042ec68 0860         str r0, [r1]
+0042ec6a 0020         movs r0, #0
+0042ec6c 7047         bx lr
+0042ec6e 002a         cmp r2, #0
+0042ec70 3dd0         beq #0x42ecee
+0042ec72 92ed020a     vldr s0, [r2, #8]
+0042ec76 dfed600a     vldr s1, [pc, #0x180]
+0042ec7a b4ee600a     vcmp.f32 s0, s1
+0042ec7e f1ee10fa     vmrs apsr_nzcv, fpscr
+0042ec82 32d1         bne #0x42ecea
+0042ec84 d2ed001a     vldr s3, [r2]
+0042ec88 dff8d404     ldr.w r0, [pc, #0x4d4]
+0042ec8c 90ed000a     vldr s0, [r0]
+0042ec90 d0ed010a     vldr s1, [r0, #4]
+0042ec94 90ed021a     vldr s2, [r0, #8]
+0042ec98 dff8fc04     ldr.w r0, [pc, #0x4fc]
+0042ec9c 90ed002a     vldr s4, [r0]
+0042eca0 b5ee402a     vcmp.f32 s4, #0
+0042eca4 f1ee10fa     vmrs apsr_nzcv, fpscr
+0042eca8 10d1         bne #0x42eccc
+0042ecaa dff8f014     ldr.w r1, [pc, #0x4f0]
+0042ecae 0160         str r1, [r0]
+0042ecb0 70ee810a     vadd.f32 s1, s1, s2
+0042ecb4 90ed001a     vldr s2, [r0]
+0042ecb8 60ee810a     vmul.f32 s1, s1, s2
+0042ecbc c0ed000a     vstr s1, [r0]
+0042ecc0 d0ed000a     vldr s1, [r0]
+0042ecc4 30ee800a     vadd.f32 s0, s1, s0
+0042ecc8 80ed000a     vstr s0, [r0]
+0042eccc 9fed4b0a     vldr s0, [pc, #0x12c]
+0042ecd0 21ee800a     vmul.f32 s0, s3, s0
+0042ecd4 d0ed000a     vldr s1, [r0]
+0042ecd8 30ee200a     vadd.f32 s0, s0, s1
+0042ecdc dfed630a     vldr s1, [pc, #0x18c]
+0042ece0 30ee200a     vadd.f32 s0, s0, s1
+0042ece4 82ed010a     vstr s0, [r2, #4]
+0042ece8 bfe7         b #0x42ec6a
+0042ecea 0720         movs r0, #7
+0042ecec bee7         b #0x42ec6c
+0042ecee 0620         movs r0, #6
+0042ecf0 bce7         b #0x42ec6c
+0042ecf2 002a         cmp r2, #0
+0042ecf4 15d0         beq #0x42ed22
+0042ecf6 92ed030a     vldr s0, [r2, #0xc]
+0042ecfa dfed3f0a     vldr s1, [pc, #0xfc]
+0042ecfe b4ee600a     vcmp.f32 s0, s1
+0042ed02 f1ee10fa     vmrs apsr_nzcv, fpscr
+0042ed06 0ad1         bne #0x42ed1e
+0042ed08 dff85404     ldr.w r0, [pc, #0x454]
+0042ed0c 0168         ldr r1, [r0]
+0042ed0e 1160         str r1, [r2]
+0042ed10 4168         ldr r1, [r0, #4]
+0042ed12 5160         str r1, [r2, #4]
+0042ed14 8168         ldr r1, [r0, #8]
+0042ed16 9160         str r1, [r2, #8]
+0042ed18 007b         ldrb r0, [r0, #0xc]
+0042ed1a d060         str r0, [r2, #0xc]
+0042ed1c a5e7         b #0x42ec6a
+0042ed1e 0720         movs r0, #7
+0042ed20 a4e7         b #0x42ec6c
+0042ed22 0620         movs r0, #6
+0042ed24 a2e7         b #0x42ec6c
+0042ed26 002a         cmp r2, #0
+0042ed28 16d0         beq #0x42ed58
+0042ed2a 1000         movs r0, r2
+0042ed2c 90ed030a     vldr s0, [r0, #0xc]
+0042ed30 dfed310a     vldr s1, [pc, #0xc4]
+0042ed34 b4ee600a     vcmp.f32 s0, s1
+0042ed38 f1ee10fa     vmrs apsr_nzcv, fpscr
+0042ed3c 0ad1         bne #0x42ed54
+0042ed3e dff83014     ldr.w r1, [pc, #0x430]
+0042ed42 0b68         ldr r3, [r1]
+0042ed44 0360         str r3, [r0]
+0042ed46 4968         ldr r1, [r1, #4]
+0042ed48 4160         str r1, [r0, #4]
+0042ed4a 0020         movs r0, #0
+0042ed4c 9060         str r0, [r2, #8]
+0042ed4e 0020         movs r0, #0
+0042ed50 d060         str r0, [r2, #0xc]
+0042ed52 8ae7         b #0x42ec6a
+0042ed54 0720         movs r0, #7
+0042ed56 89e7         b #0x42ec6c
+0042ed58 0620         movs r0, #6
+0042ed5a 87e7         b #0x42ec6c
+0042ed5c 0620         movs r0, #6
+0042ed5e 85e7         b #0x42ec6c

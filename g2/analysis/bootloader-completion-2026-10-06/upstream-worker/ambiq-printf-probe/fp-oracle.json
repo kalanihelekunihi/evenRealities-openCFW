@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "models": [
+    {
+      "model": 16,
+      "cases": 2007,
+      "status": "PASS"
+    },
+    {
+      "model": 17,
+      "cases": 2007,
+      "status": "PASS"
+    }
+  ],
+  "negative_control_changed_result_rejected": true,
+  "seed": 41552,
+  "native_library_sha256": "29723cd0eaa969e0e6d5cee8dcbc372b6c4e17ef036f0e473b2c35f69fe7c42c",
+  "limits": [
+    "Only conversion result bits checked; FPSCR round-nearest, FZ/DN disabled. Exception flags, other rounding modes and target hardware not certified.",
+    "NaN payload propagation excluded from exact-bit oracle; formatter NaN behavior compared separately.",
+    "A9/A15 share Unicorn implementation; independent comparator is native host C float cast, not a second independent ARM emulator."
+  ]
+}

@@ -1,0 +1,6 @@
+# Mode-gated byte output, interrupt mask capture, signed local result
+
+Partial/unaccepted;84instructionbytes47DCB4..47DD08,threeentries.
+DCB4 PUSH R4,LR8,R4=entryR0 outputpointer. Call44906C(liveentryargs);fullresult!=2 writesoutputbyte0 andreturnsR0=0. Fullresult==2 calls44A1EA(liveargs);fullreturnedR0 is retained. R1=literal47E280+R0 modulo2^32;R2=literal47E284;unsignedsum<R2→R1=1 else0;writeoutputbyteR1. POP R4,PC restoresR4;return full44A1EAresult, not outputboolean. No pointercheck or pre-addition overflow guard recovered.
+DCE4 frameless leaf MRS R0,PRIMASK then CPSID i thenBXLR. Returns captured previousPRIMASK, disables maskable interrupts;R1/R2/R3unchanged. This resolves local helper semantics in21324: it executes counter updates after CPSID and restores captured PRIMASK before unsigneddivision. External454EFE behavior stillunresolved.
+DCEC PUSH R0,R1,R2,R3,R4,LR24. R1=16,R2=0,R4=SP,R0=R4;43C0E4(SP,16,0,liveR3). Then4D3554(SP,liveR1,R2,R3);afterreturn signed16bitload fromSP intoR0 (signextend to32). SP+=16 discards savedentryR0..3 overwrittenlocalstorage;POP R4,PC8 restoresentryR4 andLR. Return signedlocalhalfword,not helperreturn. Do not infer initialized bytes without43C0E4contract;helper writesremain opaque. No C/freeze/completenessclaim.

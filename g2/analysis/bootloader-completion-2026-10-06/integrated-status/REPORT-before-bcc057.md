@@ -1,0 +1,64 @@
+# Bootloader functional completion status
+
+Current source-closure checkpoint: [native cache/register image2adc and seven same-image cases](REPORT-2adc.md). The image-specific8cd9 discussion below is retained as historical evidence.
+
+The strongest passing source-linked image currently runs reset → scheduler/tasks → source littlefs mount → normal or synthetic update → application reset entry. It is a bounded test ELF, not a complete bootable payload or a byte-identical reconstruction. No stock executable image is loaded on its source side.
+
+## Current functional evidence
+
+- Native NOR read/program/erase, MSPI power/domain control, device configuration and clockgen integration: PASS two reset/update cases, 28,874 distinct original instruction bytes. This result was rerun after the control-request source expansion.
+- HAL control requests0–24: PASS1,684 original/source cases, 1,942 instruction bytes, with status/config/handle/MMIO write ordering compared. Requests25,28,32,35–40 now pass972 direct tail cases /2,660 original bytes;26–27,29–31,33–34 remain explicit source gaps. New request25 integration found a private device-mode5 mismatch (source103 versus stock10f); correction complete. The earlier outer-device test compared the wrong MMIO base; its PASS was invalidated. Corrected actual40060000 tests now include640 direct private-helper cases plus2,823 outer cases. Mode-table,94 halfwords and HAL reset-register write order were corrected; the latest ordered integrated comparison passes.
+- Native MSPI command-queue implementation: isolated PASS73 cases /808 original instruction bytes. The source emits the exact480-byte scalar resource table at430880 (no executable pointers). Native reset integration PASS2 cases /29,378 original instruction bytes.
+- Actual scatter→platform configuration: isolated PASS568 original instruction bytes. The initializer already publishes descriptor200001e8 via200004f0;41f846 consumes the four-row configuration table and does not allocate that descriptor. This removes a previous incorrect interpretation; actual descriptor and source callbacks are integrated in the stronger image.
+
+The [native provider report](nor-read-followup/REPORT.md) retains detailed transaction and peripheral evidence. Counts overlap and are not completeness percentages. `validation-checkpoint.json` is an older aggregate checkpoint; it does not validate all subsequent source changes.
+
+Native cache-maintenance41e348 additionally passes270 direct cases /250 original bytes and the reset/update profile passes2 cases /29,404 bytes, comparing the entire modeled4KiB application page. This models architectural register/barrier operations, not physical cache coherence.
+
+The target-specific [source image manifest](source-image-manifest.json) lists all numeric aliases and ELF load segments. Immutable snapshot is under `g2/build/bootloader-completion/source-image-compatible/snapshots/8cd9ed1a115ec00bfbed9f58c4e118b3250efb96b7e8ee88e57c070b215fc1db/`; the manifest records both profile receipt hashes and 108 prepared link inputs. Current source test ELF SHA256 `8cd9ed1a115ec00bfbed9f58c4e118b3250efb96b7e8ee88e57c070b215fc1db` passes **two normal/update cases /30,368 original bytes** and **three malformed-update cases /29,092 original bytes**, using the same ELF. These workloads overlap. Four native FPU/delay providers additionally pass144 isolated cases /92 original bytes and remove five numeric aliases, leaving **43** numeric aliases (including legitimate external ROM, fixture providers and unexecuted stock alternatives). The manifest does not infer completeness from zero undefined symbols. Its broad source snapshot can include unlinked files; current changes listed as hash mismatches are not silently accepted as validation of those files.
+
+## Concrete remaining gaps
+
+| Interface/path | Current boundary | Source recovery vs external input |
+| --- | --- | --- |
+| Real application storage descriptor callbacks430a9c/430ac4/430aec | Actual source descriptor callbacks and full device-info mode1 query linked | Native callback/platform reset integration PASS2 cases /29,868 original bytes with full4KiB page and ordered peripheral writes. Read checks source bounds then copies. Program rounds byte count to words and invokes MRAM while discarding its status. The callback labeled erase only checks a four-byte range and does not erase. |
+| Platform initialization41f846 and initializer consumers41f9f8/41fa50 | Source41f846 integrated;41f9f8 private consumer now reconstructed but qsort provider still a cut;41fa50 remains a cut | Initializer and local wrappers available in locked bytes; no hardware blocker. |
+| MSPI command queue423f28/423f8e/423fac/423f54 and427xxx | Source/table linked in passing normal/update image; additional generic descriptor helpers16 cases /440 bytes isolated | Source linked in strongest reset image; physical queue progress remains an MMIO model. |
+| HAL controls26–27,29–31,33–34; NOR automatic timing/XIP420002/420890/420c5c | Explicit providers or unexecuted alternatives | Locked instructions and local SDK can recover implementation; physical calibration needs observed peripheral behavior. |
+| Accepted-object power configuration422ba8 continuation | Explicit failing provider; real tested startup object is NULL | Recoverable instructions; authentic non-NULL configuration/indirect targets must be established rather than invented. |
+| Runtime update41e348, ISR queue/event paths, termination and deferred callbacks | Cache41e348 fully source linked and directly tested; remaining ISR/termination/deferred paths not fully integrated | Source recovery/integration work remains; asynchronous scheduling and exception timing modeled. |
+| DFU missing/short/badCRC | Source error routine and guard/MRAM bridge implemented; matched failure profile in progress | Broad RAM observer caused original415726 artifact; restricting hooks to MMIO resolved it. Normalized original/source focused profile PASS3 cases /23,736 bytes, same payload/ABI/logs/cleanup/reset-store for ROM statuses0/7/55. Same native ELF malformed profile PASS3 cases /29,092 bytes, including full ordered peripheral-write equality. |
+| Power interruption/cancellation | No cancellation API established in DFU task; no physical MRAM partial-write model | Pinned d1c2 image strict cut/reboot PASS2 cases /29,908 bytes with complete modeled observable equality, including file/task/MMIO streams. Before leaves original page; after persists modeled payload; both keep active55555555 flag and retry update on reboot before reset-entry boundary. Same stronger8cd9 image strict cut/reboot PASS2 cases /30,328 bytes; seven cases across the same ELF now have30,814 distinct observed original instruction bytes in their union. Phase-field and input-hash-race receipts remain INVALID. A subsequent failed rerun used the source bootloader as the filesystem seed by mistake, not a firmware or shared-fixture regression. Physical partial programming/atomicity needs ROM or device evidence. |
+| Resident-ROM program0200ff20 and ROM delay Thumb41 | Bodies absent from locked OTA; source wrappers and public SDK contracts available | SDK can establish call ABI and wrapper semantics, not authenticate absent ROM machine code. ROM dump/trace or documented silicon behavior needed for its actual internals. |
+| Complete standalone payload layout, vectors, all callbacks/data and compiler reproduction | Current ELF is relocated source with adapters and explicit numeric aliases | More source closure and image integration needed; exact IAR/layout evidence separately pending. |
+
+## Reproduce and scope
+
+`make -C g2/components/bootloader/thread_creation dfu-storage-power-compatible` builds/runs the focused native NOR/power image. `dfu-storage-cache-compatible` links native queue and cache maintenance. `dfu-storage-platform-compatible` retains the actual scatter descriptor/callbacks. `source-image-compatible` is the explicit source-linked test-image target: one ELF with native error transaction linked, normal/update and malformed-update profiles. It is not a standalone hardware payload. `completion-regressions` retains the earlier aggregate suite; it is not a hardware-ready payload build.
+
+Source execution uses reconstructed C/assembly plus source-defined scalar tables. Authenticated fixture data currently includes initialSP4B, compressed initializer695B, and application vector8B. The test update is a generated288-byte file, not an official runnable update. NOR ports, peripheral progress, delays, selected mutex/kernel services and application storage remain modeled as documented. A numeric stock-address alias or `nm` with no undefined symbols is not an implemented source dependency.
+
+Bootloader SHA256: `f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5`; main OTA SHA256: `36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863`.
+
+No commits, staging, firmware flashing, hardware writes or IAR credential use. Physical boot, software/source completeness and byte identity remain separate unproven outcomes.
+
+## Newly closed local platform paths
+
+The native41d1c0 floating delay operand calculation passes780 cases /80 original bytes and executes in the stronger reset image; only resident ROM Thumb41 remains a physical delay dependency. Native device-info41d792/41d294 and mode0/wait-selector41d69c/421548 have555 direct fixtures /928 original bytes;112 of those exercise actual range-cache misses. See [device-info layout](DEVICE-INFO-LAYOUT.md): words8–11 are memory sizes in bytes, not clocks; word7 is untouched. This corrects the misleading existing clock-factors symbol name.
+
+Additional new private source covers MSPI pause/DMA4240aa/423fb8/42403e (7 cases /422 bytes) and requests31/33 (20 cases /706 bytes), but their shared control routing is not yet integrated. The remaining request set is therefore26–27,29–31,33–34 in this shared ELF, with31/33 now source-ready. Request34 still needs mode flags,4279be release and first-post enable integration. Counts overlap and do not measure payload completeness.
+
+The [same-image validation summary](same-image-validation.json) binds normal/update, malformed-update and strict interruption/reboot profile hashes to the immutable8cd9 ELF and distinct filesystem seed. The failed seed rerun was a CLI input mix-up (source image supplied as seed), not a firmware failure. Invalid diagnostics remain preserved.
+
+## Navigation and source-vs-hardware boundary
+
+- [Immutable image profiles and hashes](same-image-validation.json), [ELF/provider manifest](source-image-manifest.json), [strict interrupted update/reboot](failure-profile/powerloss-review-strict-8cd9.json).
+- [FPU/delay wrappers](local-providers/REPORT.md), [floating delay calculation](delay-math/REPORT.md), [device/feature layout and units](DEVICE-INFO-LAYOUT.md), [M55 compilation](native-closure-m55.json).
+- Device query/range and mode/selector tests: `../upstream-worker/application-storage/device-info-dispatch/`; new INFO read service: `../upstream-worker/application-storage/device-wait-service/` (folder uses historical mistaken wait name).
+- Queue pause/DMA and request31/33 source: `../inventory-worker/pause-dma/`, `../inventory-worker/control-request-extension/`. Init consumer and current qsort boundary: `../review-worker/init-table-runner/review.md`.
+
+The remaining internal alias list is **source work**, including unbound but recovered providers, initializer/qsort/callbacks, HAL/NOR timing/XIP, ISR/task termination and non-NULL power configuration. It is not an inherent hardware blocker. Source-defined complete vectors/assets/initial data/layout and compiler reproduction are also still unfinished. Current raw compressed initializer bytes are authenticated test input, not completed source-defined payload data.
+
+Resident ROM program0200ff20, delay40 and INFO read48 bodies lie outside this OTA. Legitimate ROM call wrappers can be reconstructed; actual ROM internals, partial-page power failure, physical latency/cache/IRQ behavior and hardware boot need appropriate ROM/device evidence. Exact IAR reproduction/auth remains pending and was not accessed. No commits, flashes, hardware writes or shared campaign gates were performed.
+
+Canonical INFO read service4213e6 plus the local41d28a ROM thunk are now source-recovered:8,068 direct cases /368 original instruction bytes, with only resident ROM48 intercepted. This remains source-ready outside the shared8cd9 image. See the corrected INFO dispatch report linked in navigation. API arguments are INFO selector, word offset, word count and destination; no scheduling/time semantics. The SDK and locked bytes also establish mode0 feature record16B with byte-sized enum fields and trim version at offset12, distinct from mode1 device record64B.

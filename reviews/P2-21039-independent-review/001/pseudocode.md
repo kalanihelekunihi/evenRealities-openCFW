@@ -1,0 +1,7 @@
+# Mode zero/three guard and ordered state updates
+
+Partial/unaccepted;232 instruction bytes47F11C..47F204. PUSH R1,R2,R3,R4,R5,LR24;R4=fullentryR0. LOW8(mode) outside{0,3} returns6. Mode3 requires fresh word through literalFABC bits4..5==3 else7. F90C(20,SP,liveR2/R3) fullnonzero returns1; zero then fresh byteSP0 nonzero returns3. SP0 holds saved entryR1 initially, passed by address; do not assume helper writes or initializes it.
+
+R5=literalFAC0pointer; LOW8(mode)==freshbyte[R5] bypasses protected update: read byte through FAC4 then independently read byte[R5] again, unequal writes LOW8(fullR4) to FAC4 target, return0. Independent reads may differ; initial equality does not permit caching second byte.
+
+Unequal:473940(livearguments) result savedSP4, overwriting savedentryR2. Mode3 calls4803C2(1,LOW8(mode),liveR2/R3). Freshword through FAC8: mode3 setsbit0 else (mode0) clearsbit0 by shifts; store. 4807A0(1,live). Freshword through FACC bits0..1 replaced with LOW8(mode)&3; store. Write LOW8(fullR4) byte[R5], then byte through FAC4, in that order. 4807A0(6,live). Mode0 calls4803C2(1,LOW8(mode),liveR2/R3). LoadSP4;MSR PRIMASK,R0;explicitreturn0. POP R1,R2,R3,R4,R5,PC releases24: restoredR1mayreflect SP0 helper writes, restoredR2 saved473940result on update path. Early paths do not restore PRIMASK because they do not invoke473940. No polling/readback validation after writes; helper returns ignored except F90C. Pointed ownership/external semantics unresolved; no MMIO/timing/C/freeze/wholecoverage claim.

@@ -1,0 +1,170 @@
+{
+  "utc": "2026-10-07T08:17:43.871030+00:00",
+  "status": "PASS",
+  "elf_sha256": "4edd8e7dbdd6486ed8cc25fa275f8597a04d21e9dd0728618255cddd3de7cbfe",
+  "profiles": [
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/4edd8e7dbdd6486ed8cc25fa275f8597a04d21e9dd0728618255cddd3de7cbfe/comparison.json",
+      "sha256": "8569e6618973ef55e67174ae84c5f70242064e5de089c2dd35b9eca7a9c9475b",
+      "cases": 2
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/4edd8e7dbdd6486ed8cc25fa275f8597a04d21e9dd0728618255cddd3de7cbfe/failures.json",
+      "sha256": "c0de750772f926963cd0879414c6fc7928105b7c366bd463f8c3d34da7dff0df",
+      "cases": 3
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/4edd8e7dbdd6486ed8cc25fa275f8597a04d21e9dd0728618255cddd3de7cbfe/powerloss.json",
+      "sha256": "96e6b1aba8db7023e7bbd097ea8ba61dcb55e7a1283c96eec9637070826ac6fe",
+      "cases": 2
+    }
+  ],
+  "total_cases": 7,
+  "additional_receipts": [
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-rx-4edd/clock-config.json",
+      "sha256": "2678a7ceafce8bd2f0147e4231fe9e6ad69974357dc282b352b7811b0975acda",
+      "cases": 5896,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-rx-4edd/clock-shared.json",
+      "sha256": "09d5e6eae584866c82206b2586c3ae58c4b5c18c61f7fdeaa02596ce4d5bcb22",
+      "cases": 129,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-rx-4edd/elog_output.json",
+      "sha256": "9deef4eb4ded12feca556ff7dc609413e348dbece9f7c93a0e5faddc04ab76a1",
+      "cases": 494,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-rx-4edd/elog_uart_tx.json",
+      "sha256": "f01f20847e1195cf2516ff33ab40531bcd4df8f5e589dc8589a6354d1cf17c74",
+      "cases": 222,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-rx-4edd/formatter.json",
+      "sha256": "ece31389ef311ebcfdecaa1ed5b7a77c29c42fef8af29fbae306fa919534c6dc",
+      "cases": 1778,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-rx-4edd/generators.json",
+      "sha256": "c749c40d92dbf42800e99eccab65499db8505afb7875e03567c723eecc238299",
+      "cases": 688,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-rx-4edd/isr_deferred_fifo.json",
+      "sha256": "ee974073c2e1e21bd1614f4d60d57157072f882217df19a1e3c1bc421ba1b165",
+      "cases": 1,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-rx-4edd/isr_delivery.json",
+      "sha256": "03aaf65d1df2b95318d9de4856d3fbd2658516689ffd5f1fc7c71dd486034f34",
+      "cases": 1480,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-rx-4edd/isr_public_interfaces.json",
+      "sha256": "9465e638e0fe456b760c8bdee26e50350fa265a1f60c882ab66adbc5e344be7c",
+      "cases": 62,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-rx-4edd/math.json",
+      "sha256": "02f28a20c72ed43e659cabdb840ef6d69253c39a50becd845b7c36f15035f3b6",
+      "cases": 4311,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-rx-4edd/mutex_block_boundary.json",
+      "sha256": "c8d8a425554ee6a6abce271b557aa52ee4a6f1845725951fe3f2f5eb6376be31",
+      "cases": 4,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-rx-4edd/mutex_kernel.json",
+      "sha256": "91a6a04f9249abb082a52bd34b93ed98d4dda6bfe0b0a8629b70d50e6aa81afb",
+      "cases": 516,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-rx-4edd/mutex_sequences.json",
+      "sha256": "6b19b949638a08d72556133d741289c3dde2697987b26ebbc3ea129cddfeea22",
+      "cases": 2,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-rx-4edd/native-config.json",
+      "sha256": "9d5a44597e3c70b15b4f45d0229d5cec3d1761dd61b561fc92f74e6e960ce976",
+      "cases": 48,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-rx-4edd/rx.json",
+      "sha256": "e9b19c7e51315c33cfebb6542b7dbb51e387fe30671b263c4ad336851e7ca79f",
+      "cases": 422,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-rx-4edd/service_records.json",
+      "sha256": "81b913a8bc57787be3a6ed37b16d982f082c8de65133757b9cc7e8006a6df74f",
+      "cases": 112,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-rx-4edd/service_startup_state.json",
+      "sha256": "351c2cf7e025fee47898b180dfedfd33a8c6225b93422744dcdf1f48472ae186",
+      "cases": 1,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-rx-4edd/setters.json",
+      "sha256": "4d7f32c8de1fef03fb505bb7fb83bf612d1bbc930ebc9ba1456e071d3fb26c2f",
+      "cases": 192,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-rx-4edd/startup-leaves-native-copy.json",
+      "sha256": "49070c70ac65f6fd528ccad5a3c0ad0188c279203f836547c64f8d9cbfd22219",
+      "cases": 271,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-rx-4edd/startup-native-copy.json",
+      "sha256": "1880d70d5cb951bd082bf668c95c0feba98555b343b283847e86b15d64df7b23",
+      "cases": 64,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-rx-4edd/startup_alternatives.json",
+      "sha256": "e8d0989a867c22fcbe51b6c777debfab35e17b908f74dd9478c2de20eb8a6051",
+      "cases": 64,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-rx-4edd/wrapper.json",
+      "sha256": "250472584f9907bbf9b13f019917f2b664c516e3b8633a8cac2b303f92fe3e8b",
+      "cases": 288,
+      "shared_cases": null
+    }
+  ],
+  "inputs": 661,
+  "linked_objects": 169,
+  "post_run_hash_mismatches": [],
+  "frozen_copies": "g2/build/bootloader-completion/source-image-compatible/snapshots/4edd8e7dbdd6486ed8cc25fa275f8597a04d21e9dd0728618255cddd3de7cbfe/frozen-input-copies.json",
+  "alignment_mappings": 489,
+  "numeric_aliases": 24,
+  "segments": 42,
+  "deduplicated_observed_original_instruction_bytes": 38764,
+  "limits": [
+    "Seven integration cases retain existing logging/startup models. Native422 RX comparisons execute RX/ring/cancel/critical and actual dispatcher modes1/3; older TX-only suite retains explicit RX cuts via frozen adapter. Prior4311 math+48 M33+688 bounded generator regressions preserve their limits.",
+    "Clock request/release side effects remain modeled in direct caller tests. Native copies use MMIO-only recorder; old no-op SRAM-hook negative controls preserved.",
+    "Six original FP64 integration effects, external ROM APIs and synthetic peripheral/persistence/task/timing fixtures remain. Physical PLL lock/drain/live scheduling, whole source and byte equality not certified."
+  ]
+}

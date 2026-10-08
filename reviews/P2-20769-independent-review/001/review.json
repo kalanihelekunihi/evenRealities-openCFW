@@ -1,0 +1,10 @@
+{
+  "id": "P2-20769",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "Corrected 182B map now accurately tests fresh byte46 bit2. Bit2 set reaches 4751C8(R5+7,R4+7,16,live R3); nonzero route diagnostics and two unconditional ordered dumps then clears R6; zero route diagnostics leaves R6 unchanged. Earlier P2-20767 review records original bit0 wording mismatch as historical."
+}

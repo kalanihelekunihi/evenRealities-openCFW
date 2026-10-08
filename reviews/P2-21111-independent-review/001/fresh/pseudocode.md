@@ -1,0 +1,5 @@
+# Optional callback table three dispatch wrappers
+
+Partial/unaccepted;70 instruction bytes480312..480358. 0312PUSH R4,LR8;R4literal4806FCtablepointer;freshword[R4+4]R3zero→return0,leavesentryR1/R2unmasked. NonzeroLOW8R1,LOW8R0;independentlyreloadword[R4+4]R3→BLX R3 withR0/R1lowbytes,R2entrypointer,R3actualsecondcallbackaddress;returnsfullcallbackR0. Secondpointercan differfromnonnulltest,includingzero;no guaranteednullsafeinvokeifmutabletable. POP R4,PC8. Callbacksemantics/outputwritesunknown;absentcallbackdoesnotinitializeoutput despitezeroresult.
+
+032C PUSH R7,LR8;R1literal4806FCpointer;freshword+12R0zero→return0;nonzeroindependentfreshword+12R0→BLX R0 withR0callbackaddress,R1tablepointer,liveentryR2/R3;fullcallbackresultreturned. POP R1,PC restoresentryR7intoR1. 0342identicalwrapperusingtableoffset16. Distincttest/callreadsretained;no inventedargumentnormalization/initialization. No PRIMASKoperations. Tableownership/callbacktargets/unresolvedbehaviorremainP2work;noC/freeze/fullcoverageclaim.

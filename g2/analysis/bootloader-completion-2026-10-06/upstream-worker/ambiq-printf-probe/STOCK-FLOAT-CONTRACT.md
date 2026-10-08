@@ -1,0 +1,19 @@
+# Stock float contract and target source adaptation
+
+The default `%f` output `1.25 -> "1."` is confirmed through native original instructions, not an expected-output stub. At original0x415c3a, default precision is-1. The stock variadic wrapper0x415fae stores r1/r2/r3; parser0x415f44 aligns the argument pointer to8 bytes and loads d0. For1.25, observed d0 bits are3ff4000000000000, converted s0 bits3fa00000, and r1 at ftoa0x415ab6 isffffffff. FPSCR before conversion is0. An integer prefix in r1 does not alter the double loaded from r2/r3.72 actual-wrapper fixtures PASS on each A9/A15 model (`float-wrapper-a9.json`, `float-wrapper-a15.json`).
+
+Stock ftoa emits the decimal point even with no fractional digits, and its rounding path can change the preceding digit. `%f`/`%.0f` with1.996 produce`2.`; `%.2f` produces`2.00`; `%.6f` produces`1.996000`. Zero and negative zero emit`0.0`. This is the generic plain logger, not an assertion about IAR snprintf or every firmware formatter.
+
+The minimum candidate changes the SDK default precision from6 to-1 in addition to the already tested string adaptations.1,104 float fixtures agree with stock over23 values ×8 precisions ×3 width forms ×2 translation states, including finite/sign/zero, NaN/infinity, underflow/large values and rounding boundaries. This is bounded evidence, not exhaustive IEEE-domain equivalence. The original SDK failure receipts remain negative controls.
+
+`g2/components/bootloader/initializer_callbacks/plain_printf.c` contains the licensed source adaptation, retains Ambiq's complete BSD-3-Clause notice and fixed stock sink/buffer/translation addresses. Provenance and precise changes are recorded in `source-provenance.json`. It is generic Apollo3/3P SDK utility source correspondence, not Apollo510 HAL producing-version identity. No retained stock opcode arrays or executable fallback.
+
+Compiled ARM candidate parser passes1,778 original-instruction fixtures; compiled variadic wrapper/sink passes288, including null sink and translation states. Both execute actual code under the FP64-capable A9 oracle. Source uses scalar Cortex-M7/fpv5-d16/softfp/O0 to avoid Armv8.1 cset unsupported by the oracle, not to claim the official compiler/build profile. Existing M-profile models reject the original FP64 conversion. Independent native C cast checks2,007 conversion inputs on each oracle model; exact NaN payloads, exception flags, FZ/DN/other rounding modes and target hardware remain outside proof.
+
+The parser still has no destination-capacity parameter. No overflow fix, standard-printf replacement, reentrant sink, task scheduling or physical transport guarantee is claimed. Apps/patches that need fractional digits from this specific formatter should supply explicit precision; do not assume default standard printf formatting.
+
+The shared candidate8ba02bde… contains this source plus the startup leaves. Direct1,778+288 formatter,265 leaves,192 setters,494 output,222 TX,64 startup and affected kernel/service comparisons PASS;469 alignment mappings PASS. Seven-case integration results and promotion are recorded separately when complete. Integration retains the prior plain-logger ABI fixture cut: those seven cases do not prove execution of the new formatter body.640 source/runner inputs and163 objects were frozen, with exact copies under the candidate snapshot.
+
+## Verified integration result
+
+All7 exact-image cases PASS on8ba02bde41dc8042454d733c96283565632dc01bb7ad864c723bb836657146e4.640 inputs/163 linked objects match their pre-run hashes and preserved exact copies.469 alignment mappings PASS;29 numeric aliases,42 segments,zero receipt source mismatches. Source linked, prior checkpoint preserved. See `../../integrated-status/same-image-validation-8ba02b.json`. Earlier pending text is historical; no integration model is silently promoted to native formatter execution.

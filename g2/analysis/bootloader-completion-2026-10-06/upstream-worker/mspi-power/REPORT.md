@@ -44,4 +44,21 @@ The clock-generator provider uses the locked helper's register literal `0x400041
 
 The public HAL source at the exact Apollo510 HAL5.1.0 gitlink (`5efc0228528a8adce5eae0d226fac85d2551eb3b`, file SHA-256 `5a91ab0c67bda4bd61c7d436b94b5a7c81693b948a331d282ae10e88cc5bf85f`) is a register/protocol cross-check only. The stock/source implementation follows the locked bootloader evidence; no public HAL body is claimed as an exact translation of the private firmware routine.
 
-`make -C g2/analysis/bootloader-completion-2026-10-06/upstream-worker/mspi-power test` compiles both providers for ARM and compares stock against source under Unicorn. The current run passes 2,823 cases: all 256 frequency bytes across modules 0–3 in SDR/DDR, every device-mode byte, plus invalid-handle/configuration and clock-transition error paths. It compares return values, the full 0x8d0-byte handle, the 0x300-byte MSPI register window, global clock-generator register, and delay/clock callback events. The stock run executes the original main routine and helpers `0x424120`, `0x4249a0`, `0x424a18`, and `critical_save 0x41b8ec`; the run covers 3,142 distinct original instruction bytes, not 3,142 instructions. MMIO and delay are synthetic; this establishes semantic equivalence for the listed cases, not physical timing, full-image linkage, or byte identity. Full per-case output is `out/device-configure-differential.json`.
+`make -C g2/analysis/bootloader-completion-2026-10-06/upstream-worker/mspi-power test` compiles both providers for ARM and compares stock against source under Unicorn. It covers all 256 frequency bytes across modules 0–3 in SDR/DDR, every device-mode byte, plus invalid-handle/configuration and clock-transition error paths. It compares return values, the full 0x8d0-byte handle, the MSPI register window, global clock-generator register, and delay/clock callback events. The stock run executes the original main routine and helpers `0x424120`, `0x4249a0`, `0x424a18`, and `critical_save 0x41b8ec`. MMIO and delay are synthetic; this establishes semantic equivalence for the listed cases, not physical timing, full-image linkage, or byte identity. Full per-case output is `out/device-configure-differential.json`.
+
+The MMIO model is at Apollo510 MSPI base `0x40060000`, with `0x1000` stride
+per module. A prior verification fixture accidentally compared memory at
+`0x40000000`; its PASS was invalid and must not be used. The current passing
+receipt is regenerated against the corrected base and includes direct calls
+to the stock private helper `0x424120` for all 32 selector bytes, five latency
+values `{0,1,2,3,0xff}`, and modules 0–3 (640 cases). The current run totals
+2,823 outer cases plus 640 direct-helper cases, and compares 3,238 distinct
+original instruction bytes. The mode table corrections are: selector 5 uses
+the `0x10f` latency-zero limit; 10 and 11 use `0x7ffff`, with mode 11 low
+DEV0CFG bits `18`; 17 uses the `0x10f` limit; 21 uses `0x103`; and 23 uses
+`0x3ff`. Register `0x94` packs config halfword at `+6` low and config halfword
+at `+4` high. Current source SHA-256 is
+`930649b60d2479ffa3a4bd65118652285721a17a2a13a1a60f69a5fd8de37174`, verifier
+SHA-256 is `ec52d18b66e0d255169c16ba77e0950081ff89205c782e038ea26cb7f7dd4a0a`,
+and source ELF SHA-256 is
+`426f79538c9b26285101ad0176c608d22268dd0175919ee2f3ec5ca9b1d30ac1`.

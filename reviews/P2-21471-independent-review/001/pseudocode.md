@@ -1,0 +1,5 @@
+# Repeated mode-selected signed scaled parameter
+
+Partial/unaccepted. Exact 130 instruction bytes 484C9E..484D20, continuing open32B frame484A98, object R4. Selector: fresh byte[object+40]==1 chooses14; else a separate fresh read==2 chooses12; else10. Test selected value against zero; zero branch sets R1=0 and jumps484D18, although constants10/12/14 make that branch unreachable in this local instruction flow. Retain structural branch evidence.
+
+Nonzero: run selector again using fresh reads, load fresh word[object+44], compute wrap32(selector*word+80), interpret as signed32 and SDIV160 truncating toward zero. Signed result<2 sets R1=1. Otherwise run selector a third time with fresh mode reads, reload word+44 and recompute wrap multiply/add and signed division into R1. Thus selection and dimension can be reread several times, not cached. Call4D4892(object+64,R1,liveR2/R3). Local zero branch bypasses arithmetic; all other arithmetic preserves wrapping before signed division. Frame remains open; next selection starts484D20. Helper contract unresolved. No C, freeze, whole coverage or equality claim.

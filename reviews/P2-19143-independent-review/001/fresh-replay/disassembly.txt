@@ -1,0 +1,32 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpf9njn7ic/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00469ce4 <.text>:
+  469ce4:	f8b3 4082 	ldrh.w	r4, [r3, #130]	@ 0x82
+  469ce8:	5d1c      	ldrb	r4, [r3, r4]
+  469cea:	0015      	movs	r5, r2
+  469cec:	b2ad      	uxth	r5, r5
+  469cee:	5544      	strb	r4, [r0, r5]
+  469cf0:	f8b3 4082 	ldrh.w	r4, [r3, #130]	@ 0x82
+  469cf4:	1c64      	adds	r4, r4, #1
+  469cf6:	2580      	movs	r5, #128	@ 0x80
+  469cf8:	fb94 f6f5 	sdiv	r6, r4, r5
+  469cfc:	fb05 4416 	mls	r4, r5, r6, r4
+  469d00:	f8a3 4082 	strh.w	r4, [r3, #130]	@ 0x82
+  469d04:	f8b3 4084 	ldrh.w	r4, [r3, #132]	@ 0x84
+  469d08:	1e64      	subs	r4, r4, #1
+  469d0a:	f8a3 4084 	strh.w	r4, [r3, #132]	@ 0x84
+  469d0e:	1c52      	adds	r2, r2, #1
+  469d10:	0014      	movs	r4, r2
+  469d12:	000d      	movs	r5, r1
+  469d14:	b2a4      	uxth	r4, r4
+  469d16:	b2ad      	uxth	r5, r5
+  469d18:	42ac      	cmp	r4, r5
+  469d1a:	d3e3      	bcc.n	469ce4 <.text>
+  469d1c:	b289      	uxth	r1, r1
+  469d1e:	0008      	movs	r0, r1
+  469d20:	bc70      	pop	{r4, r5, r6}
+  469d22:	4770      	bx	lr

@@ -1,0 +1,3735 @@
+{
+  "utc": "2026-10-07T03:51:04.688808+00:00",
+  "elf": "g2/build/bootloader-completion/source-image-compatible/snapshots/67f3f209bc1867dbb2a995e7805dd756105f05bae31831d86e61bda7df689796/bootloader-source-test.elf",
+  "elf_sha256": "67f3f209bc1867dbb2a995e7805dd756105f05bae31831d86e61bda7df689796",
+  "linked_defined_function_symbols": 509,
+  "deduplicated_linked_function_bytes": 83040,
+  "linked_function_inventory": [
+    {
+      "symbol": "enable_queue",
+      "address": "0x308a8",
+      "compiled_bytes": 38,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "enable_queue",
+      "address": "0x30ad0",
+      "compiled_bytes": 38,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "intro_sort",
+      "address": "0x32100",
+      "compiled_bytes": 5672,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "mode_register_update_wrapper",
+      "address": "0x33728",
+      "compiled_bytes": 32,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "mode_apply_initializer_route",
+      "address": "0x33748",
+      "compiled_bytes": 8,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "mode_apply_wrapper",
+      "address": "0x33774",
+      "compiled_bytes": 12,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "allocation_failure",
+      "address": "0x1030c",
+      "compiled_bytes": 16,
+      "section": ".text"
+    },
+    {
+      "symbol": "default_walker",
+      "address": "0x11370",
+      "compiled_bytes": 58,
+      "section": ".text"
+    },
+    {
+      "symbol": "block_locate_free",
+      "address": "0x117ec",
+      "compiled_bytes": 208,
+      "section": ".text"
+    },
+    {
+      "symbol": "block_prepare_used",
+      "address": "0x118bc",
+      "compiled_bytes": 240,
+      "section": ".text"
+    },
+    {
+      "symbol": "flags_fatal",
+      "address": "0x1430c",
+      "compiled_bytes": 16,
+      "section": ".text"
+    },
+    {
+      "symbol": "queue_buffer_release_fatal",
+      "address": "0x14814",
+      "compiled_bytes": 16,
+      "section": ".text"
+    },
+    {
+      "symbol": "queue_send_fatal",
+      "address": "0x14e6c",
+      "compiled_bytes": 16,
+      "section": ".text"
+    },
+    {
+      "symbol": "queue_failure",
+      "address": "0x14fb0",
+      "compiled_bytes": 24,
+      "section": ".text"
+    },
+    {
+      "symbol": "fatal",
+      "address": "0x1505c",
+      "compiled_bytes": 16,
+      "section": ".text"
+    },
+    {
+      "symbol": "timer_fatal",
+      "address": "0x15c10",
+      "compiled_bytes": 16,
+      "section": ".text"
+    },
+    {
+      "symbol": "ensure_directories",
+      "address": "0x1768c",
+      "compiled_bytes": 478,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_init",
+      "address": "0x18a20",
+      "compiled_bytes": 260,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_dir_alloc",
+      "address": "0x18b24",
+      "compiled_bytes": 126,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_dir_orphaningcommit",
+      "address": "0x18e44",
+      "compiled_bytes": 1364,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_fs_deorphan",
+      "address": "0x19398",
+      "compiled_bytes": 764,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_dir_fetchmatch",
+      "address": "0x1b468",
+      "compiled_bytes": 1416,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_dir_find_match",
+      "address": "0x1ba44",
+      "compiled_bytes": 152,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_dir_getslice",
+      "address": "0x1a0b4",
+      "compiled_bytes": 408,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_fs_forceconsistency",
+      "address": "0x1badc",
+      "compiled_bytes": 256,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_dir_find",
+      "address": "0x1bbdc",
+      "compiled_bytes": 446,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_dir_commit",
+      "address": "0x18ba4",
+      "compiled_bytes": 36,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_file_opencfg_",
+      "address": "0x17f08",
+      "compiled_bytes": 814,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_file_sync_",
+      "address": "0x18290",
+      "compiled_bytes": 260,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_file_flush",
+      "address": "0x19694",
+      "compiled_bytes": 256,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_file_flushedread",
+      "address": "0x1a32c",
+      "compiled_bytes": 258,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_file_write_",
+      "address": "0x183d0",
+      "compiled_bytes": 152,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_file_flushedwrite",
+      "address": "0x1a430",
+      "compiled_bytes": 980,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_file_seek_",
+      "address": "0x1846c",
+      "compiled_bytes": 334,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_ctz_find",
+      "address": "0x1a804",
+      "compiled_bytes": 404,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_fs_size_count",
+      "address": "0x1bd9c",
+      "compiled_bytes": 12,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_fs_traverse_",
+      "address": "0x18844",
+      "compiled_bytes": 474,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_ctz_traverse",
+      "address": "0x1bda8",
+      "compiled_bytes": 210,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_alloc_lookahead",
+      "address": "0x18e10",
+      "compiled_bytes": 50,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_alloc",
+      "address": "0x18bc8",
+      "compiled_bytes": 230,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_bd_read",
+      "address": "0x18cb0",
+      "compiled_bytes": 350,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_dir_relocatingcommit",
+      "address": "0x19794",
+      "compiled_bytes": 1634,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_file_relocate",
+      "address": "0x19df8",
+      "compiled_bytes": 308,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_fs_parent_match",
+      "address": "0x1b9f0",
+      "compiled_bytes": 82,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_bd_flush",
+      "address": "0x1a24c",
+      "compiled_bytes": 224,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_dir_commit_commit",
+      "address": "0x1acbc",
+      "compiled_bytes": 16,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_dir_traverse",
+      "address": "0x1a998",
+      "compiled_bytes": 804,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_dir_commit_size",
+      "address": "0x1b180",
+      "compiled_bytes": 26,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_dir_compact",
+      "address": "0x1b19c",
+      "compiled_bytes": 714,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_dir_commitattr",
+      "address": "0x1accc",
+      "compiled_bytes": 310,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_dir_commitcrc",
+      "address": "0x1ae04",
+      "compiled_bytes": 764,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_dir_getread",
+      "address": "0x19f2c",
+      "compiled_bytes": 198,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_bd_prog",
+      "address": "0x19ff4",
+      "compiled_bytes": 190,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_dir_traverse_filter",
+      "address": "0x1b100",
+      "compiled_bytes": 128,
+      "section": ".text"
+    },
+    {
+      "symbol": "mode_enter",
+      "address": "0x1d3c4",
+      "compiled_bytes": 4,
+      "section": ".text"
+    },
+    {
+      "symbol": "mode_leave",
+      "address": "0x1d3c8",
+      "compiled_bytes": 4,
+      "section": ".text"
+    },
+    {
+      "symbol": "request_clock",
+      "address": "0x1d3cc",
+      "compiled_bytes": 4,
+      "section": ".text"
+    },
+    {
+      "symbol": "release_all",
+      "address": "0x1d3d0",
+      "compiled_bytes": 4,
+      "section": ".text"
+    },
+    {
+      "symbol": "clockgen",
+      "address": "0x1d3d4",
+      "compiled_bytes": 4,
+      "section": ".text"
+    },
+    {
+      "symbol": "cq_disable",
+      "address": "0x1d3d8",
+      "compiled_bytes": 4,
+      "section": ".text"
+    },
+    {
+      "symbol": "cq_enable",
+      "address": "0x1d3dc",
+      "compiled_bytes": 4,
+      "section": ".text"
+    },
+    {
+      "symbol": "interrupt_disable",
+      "address": "0x1d3e0",
+      "compiled_bytes": 24,
+      "section": ".text"
+    },
+    {
+      "symbol": "delay_us",
+      "address": "0x1d3f8",
+      "compiled_bytes": 4,
+      "section": ".text"
+    },
+    {
+      "symbol": "mmio_read",
+      "address": "0x1d3fc",
+      "compiled_bytes": 14,
+      "section": ".text"
+    },
+    {
+      "symbol": "mmio_write",
+      "address": "0x1d40c",
+      "compiled_bytes": 14,
+      "section": ".text"
+    },
+    {
+      "symbol": "__printf_veneer",
+      "address": "0x1e7c8",
+      "compiled_bytes": 8,
+      "section": ".text"
+    },
+    {
+      "symbol": "__opencfw_boot_control_log_veneer",
+      "address": "0x1e7d0",
+      "compiled_bytes": 8,
+      "section": ".text"
+    },
+    {
+      "symbol": "__opencfw_boot_dfu_log_veneer",
+      "address": "0x1e7d8",
+      "compiled_bytes": 8,
+      "section": ".text"
+    },
+    {
+      "symbol": "__opencfw_boot_allocator_log_veneer",
+      "address": "0x1e7e0",
+      "compiled_bytes": 8,
+      "section": ".text"
+    },
+    {
+      "symbol": "__opencfw_boot_rom_mram_program_veneer",
+      "address": "0x1e7e8",
+      "compiled_bytes": 8,
+      "section": ".text"
+    },
+    {
+      "symbol": "__opencfw_boot_dfu_log_veneer",
+      "address": "0x42dd80",
+      "compiled_bytes": 8,
+      "section": ".boot_dfu_orchestrator"
+    },
+    {
+      "symbol": "opencfw_provider_41e1e8",
+      "address": "0x30000",
+      "compiled_bytes": 0,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_bl_radio_mode_sample",
+      "address": "0x12b9c",
+      "compiled_bytes": 32,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_adc_enable",
+      "address": "0x35ccc",
+      "compiled_bytes": 58,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_nor_init",
+      "address": "0x122e8",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_427794",
+      "address": "0x1d7e4",
+      "compiled_bytes": 230,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_dir_open",
+      "address": "0x1875c",
+      "compiled_bytes": 176,
+      "section": ".text"
+    },
+    {
+      "symbol": "strcpy",
+      "address": "0x11028",
+      "compiled_bytes": 68,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_context_interrupt_enable",
+      "address": "0x33a1c",
+      "compiled_bytes": 0,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_bl_post_context_register",
+      "address": "0x34e94",
+      "compiled_bytes": 146,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_thread_current",
+      "address": "0x1592c",
+      "compiled_bytes": 12,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_416590",
+      "address": "0x14430",
+      "compiled_bytes": 118,
+      "section": ".text"
+    },
+    {
+      "symbol": "tlsf_block_size_max",
+      "address": "0x11400",
+      "compiled_bytes": 6,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_first_task_transfer",
+      "address": "0x10a3c",
+      "compiled_bytes": 28,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_register_mode",
+      "address": "0x35694",
+      "compiled_bytes": 44,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "lfs_format",
+      "address": "0x17b1c",
+      "compiled_bytes": 296,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_descriptor_register",
+      "address": "0x34d88",
+      "compiled_bytes": 266,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_main_callback",
+      "address": "0x42e39c",
+      "compiled_bytes": 54,
+      "section": ".callback_text"
+    },
+    {
+      "symbol": "opencfw_boot_dfu_control_one",
+      "address": "0x14554",
+      "compiled_bytes": 80,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_41ac5a",
+      "address": "0x1e6fe",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_hal_mspi_control_queue_request",
+      "address": "0x1de38",
+      "compiled_bytes": 150,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_41f9d8",
+      "address": "0x1e732",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_remove_event_waiter",
+      "address": "0x14260",
+      "compiled_bytes": 156,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_clock_release_id4",
+      "address": "0x12af0",
+      "compiled_bytes": 170,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_hal_status_poll",
+      "address": "0x17548",
+      "compiled_bytes": 60,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_dfu_thread_init",
+      "address": "0x13e4c",
+      "compiled_bytes": 58,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_critical_save",
+      "address": "0x16c2c",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_context_claim",
+      "address": "0x33a54",
+      "compiled_bytes": 0,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_file_close",
+      "address": "0x17a20",
+      "compiled_bytes": 62,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_hal_mspi_device_configure",
+      "address": "0x1ce78",
+      "compiled_bytes": 820,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_file_prepare",
+      "address": "0x179d0",
+      "compiled_bytes": 78,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_thread_initialize",
+      "address": "0x10714",
+      "compiled_bytes": 292,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_file_seek",
+      "address": "0x18468",
+      "compiled_bytes": 4,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_4205f4",
+      "address": "0x12414",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_context_transaction",
+      "address": "0x33ab0",
+      "compiled_bytes": 664,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_device_wait_service",
+      "address": "0x1e214",
+      "compiled_bytes": 4,
+      "section": ".text"
+    },
+    {
+      "symbol": "tlsf_get_pool",
+      "address": "0x117b0",
+      "compiled_bytes": 6,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_timer_wait_expiry",
+      "address": "0x15ea4",
+      "compiled_bytes": 206,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_info_rom_read",
+      "address": "0x1e218",
+      "compiled_bytes": 8,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_mspi_mode_leave",
+      "address": "0x1d570",
+      "compiled_bytes": 444,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_unmount",
+      "address": "0x17ec0",
+      "compiled_bytes": 48,
+      "section": ".text"
+    },
+    {
+      "symbol": "tlsf_align_size",
+      "address": "0x113f8",
+      "compiled_bytes": 4,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_41ac44",
+      "address": "0x1e6e4",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_adc_context_configure",
+      "address": "0x359f0",
+      "compiled_bytes": 52,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_task_block",
+      "address": "0x15d34",
+      "compiled_bytes": 198,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_thread_notify_wait",
+      "address": "0x157a8",
+      "compiled_bytes": 134,
+      "section": ".text"
+    },
+    {
+      "symbol": "tlsf_remove_pool",
+      "address": "0x114d0",
+      "compiled_bytes": 108,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_interrupt_enable",
+      "address": "0x16f7c",
+      "compiled_bytes": 36,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_42e53c",
+      "address": "0x14104",
+      "compiled_bytes": 346,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_power_register_update",
+      "address": "0x12700",
+      "compiled_bytes": 142,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_context_nvic_enable",
+      "address": "0x342c0",
+      "compiled_bytes": 34,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_uart_baud",
+      "address": "0x35160",
+      "compiled_bytes": 778,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_dfu_panic",
+      "address": "0x10434",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_expand_record",
+      "address": "0x1012c",
+      "compiled_bytes": 324,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_hal_mspi_fifo_read",
+      "address": "0x16c90",
+      "compiled_bytes": 168,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_control_request_completion",
+      "address": "0x30884",
+      "compiled_bytes": 36,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_bl_kernel_reschedule",
+      "address": "0x104d4",
+      "compiled_bytes": 24,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_416816",
+      "address": "0x14ebc",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_mram_dispatch",
+      "address": "0x16b48",
+      "compiled_bytes": 98,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_queue_buffer_release",
+      "address": "0x14794",
+      "compiled_bytes": 128,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_dfu_flags_set",
+      "address": "0x13cfc",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_cache_maintain",
+      "address": "0x1da58",
+      "compiled_bytes": 512,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_tick_get",
+      "address": "0x15e70",
+      "compiled_bytes": 12,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_context_nvic_enable",
+      "address": "0x342c0",
+      "compiled_bytes": 0,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_test_timer_entry",
+      "address": "0x419444",
+      "compiled_bytes": 0,
+      "section": ".timer_task_adapter"
+    },
+    {
+      "symbol": "opencfw_bl_kernel_queue_put_blocking",
+      "address": "0x14b84",
+      "compiled_bytes": 744,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_mask_interrupts",
+      "address": "0x10434",
+      "compiled_bytes": 22,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_allocator_init",
+      "address": "0x10e38",
+      "compiled_bytes": 52,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_427c12",
+      "address": "0x30b24",
+      "compiled_bytes": 112,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_bl_kernel_exit",
+      "address": "0x10488",
+      "compiled_bytes": 76,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_adc_apply_profile",
+      "address": "0x35ec8",
+      "compiled_bytes": 142,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_test_timer_callback_entry",
+      "address": "0x41639a",
+      "compiled_bytes": 0,
+      "section": ".timer_callback_adapter"
+    },
+    {
+      "symbol": "opencfw_boot_iom_cq_refresh_indices",
+      "address": "0x34604",
+      "compiled_bytes": 56,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_hal_mspi_enable",
+      "address": "0x16dec",
+      "compiled_bytes": 128,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_hal_mspi_control_request34",
+      "address": "0x308d4",
+      "compiled_bytes": 508,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_provider_41fe62",
+      "address": "0x17014",
+      "compiled_bytes": 88,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_svc_dispatch",
+      "address": "0x10012",
+      "compiled_bytes": 38,
+      "section": ".text"
+    },
+    {
+      "symbol": "tlsf_block_size_min",
+      "address": "0x113fc",
+      "compiled_bytes": 4,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_dfu_queue_get",
+      "address": "0x14fc8",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_iom_event_apply",
+      "address": "0x3442c",
+      "compiled_bytes": 470,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_bl_kernel_queue_create_dynamic",
+      "address": "0x14adc",
+      "compiled_bytes": 168,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_4160e8",
+      "address": "0x15e70",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_fpu_init",
+      "address": "0x10108",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_zero_adapter",
+      "address": "0x431e38",
+      "compiled_bytes": 0,
+      "section": ".boot_zero_adapter"
+    },
+    {
+      "symbol": "opencfw_hal_mspi_deinitialize",
+      "address": "0x16f44",
+      "compiled_bytes": 54,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_verify",
+      "address": "0x16318",
+      "compiled_bytes": 1272,
+      "section": ".text"
+    },
+    {
+      "symbol": "memcpy",
+      "address": "0x10ed4",
+      "compiled_bytes": 104,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_delay_us_math",
+      "address": "0x1e748",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_missed_yield",
+      "address": "0x142fc",
+      "compiled_bytes": 14,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_clear",
+      "address": "0x10f3c",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_4279f0",
+      "address": "0x30cbc",
+      "compiled_bytes": 96,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_test_manager_entry",
+      "address": "0x42e2f8",
+      "compiled_bytes": 0,
+      "section": ".manager_task_adapter"
+    },
+    {
+      "symbol": "lfs_file_write",
+      "address": "0x183cc",
+      "compiled_bytes": 4,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_timer_initialize",
+      "address": "0x10d20",
+      "compiled_bytes": 148,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_status_transfer",
+      "address": "0x12414",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_manager_setup_noop",
+      "address": "0x146b0",
+      "compiled_bytes": 2,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_adc_activate",
+      "address": "0x35c90",
+      "compiled_bytes": 60,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_bl_post_bringup_setup",
+      "address": "0x35f58",
+      "compiled_bytes": 292,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_manager_task",
+      "address": "0x146b4",
+      "compiled_bytes": 224,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_storage_erase_validate",
+      "address": "0x430aec",
+      "compiled_bytes": 4,
+      "section": ".storage_erase"
+    },
+    {
+      "symbol": "opencfw_provider_42052a",
+      "address": "0x31b50",
+      "compiled_bytes": 248,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_bl_clock_request_id3",
+      "address": "0x12790",
+      "compiled_bytes": 124,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_vector_base_init",
+      "address": "0x103d0",
+      "compiled_bytes": 18,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_thread_priority_set",
+      "address": "0x15938",
+      "compiled_bytes": 226,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_42e278",
+      "address": "0x14620",
+      "compiled_bytes": 42,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_kernel_state",
+      "address": "0x11f2c",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_424a5a",
+      "address": "0x13a58",
+      "compiled_bytes": 118,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_fs_free",
+      "address": "0x10ea4",
+      "compiled_bytes": 48,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_thread_register",
+      "address": "0x109a4",
+      "compiled_bytes": 152,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_lfs_sync",
+      "address": "0x17b18",
+      "compiled_bytes": 4,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_41623a",
+      "address": "0x13cfc",
+      "compiled_bytes": 134,
+      "section": ".text"
+    },
+    {
+      "symbol": "clock_release",
+      "address": "0x125cc",
+      "compiled_bytes": 158,
+      "section": ".text"
+    },
+    {
+      "symbol": "tlsf_add_pool",
+      "address": "0x11410",
+      "compiled_bytes": 190,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_thread_priority_set",
+      "address": "0x15a1c",
+      "compiled_bytes": 50,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_system_entry",
+      "address": "0x103e4",
+      "compiled_bytes": 22,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_init_records_run",
+      "address": "0x103ac",
+      "compiled_bytes": 34,
+      "section": ".text"
+    },
+    {
+      "symbol": "clock_request",
+      "address": "0x12530",
+      "compiled_bytes": 156,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_storage_read_impl",
+      "address": "0x1e5b0",
+      "compiled_bytes": 162,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_adc_reset",
+      "address": "0x35864",
+      "compiled_bytes": 48,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_iom_cq_initialize",
+      "address": "0x341fc",
+      "compiled_bytes": 58,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_icache_enable",
+      "address": "0x30000",
+      "compiled_bytes": 78,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "tlsf_pool_overhead",
+      "address": "0x11408",
+      "compiled_bytes": 4,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_manager_flags_noop",
+      "address": "0x146ac",
+      "compiled_bytes": 2,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_kernel_static_thread",
+      "address": "0x10838",
+      "compiled_bytes": 164,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_hal_mspi_cq_init",
+      "address": "0x1d72c",
+      "compiled_bytes": 184,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_list_unlink",
+      "address": "0x15d14",
+      "compiled_bytes": 30,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_control_request34_noop",
+      "address": "0x308d0",
+      "compiled_bytes": 2,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_provider_41e266",
+      "address": "0x30050",
+      "compiled_bytes": 0,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_timeout_check",
+      "address": "0x14838",
+      "compiled_bytes": 100,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_gpio_callback_register",
+      "address": "0x34b54",
+      "compiled_bytes": 54,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_iom_cq_resume",
+      "address": "0x346ac",
+      "compiled_bytes": 102,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_bl_rtos_allocate",
+      "address": "0x1520c",
+      "compiled_bytes": 490,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_port_timer_irq_priority",
+      "address": "0x11f9c",
+      "compiled_bytes": 36,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_nor_prog",
+      "address": "0x1c9b8",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_irq_guard_initialize",
+      "address": "0x16fcc",
+      "compiled_bytes": 8,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_adc_configure_channel",
+      "address": "0x35a24",
+      "compiled_bytes": 126,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_provider_4160fe",
+      "address": "0x108fc",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_vector_handoff",
+      "address": "0x16a1c",
+      "compiled_bytes": 18,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_dfu_flags_wait",
+      "address": "0x13d84",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_420800",
+      "address": "0x31254",
+      "compiled_bytes": 152,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_hal_mspi_interrupt_clear",
+      "address": "0x16f10",
+      "compiled_bytes": 50,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_420c5c",
+      "address": "0x30fb0",
+      "compiled_bytes": 374,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_idle_memory",
+      "address": "0x10a98",
+      "compiled_bytes": 26,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_delay_scaled",
+      "address": "0x1e732",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_clock_request_id0",
+      "address": "0x124ac",
+      "compiled_bytes": 68,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_port_timer_gate_enable",
+      "address": "0x11f8c",
+      "compiled_bytes": 16,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_hal_mspi_cq_term",
+      "address": "0x1d9dc",
+      "compiled_bytes": 122,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_timer_process_commands",
+      "address": "0x15aa0",
+      "compiled_bytes": 366,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_queue_is_nonblocking_context",
+      "address": "0x14e7c",
+      "compiled_bytes": 64,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_dfu_task",
+      "address": "0x15fa0",
+      "compiled_bytes": 376,
+      "section": ".text"
+    },
+    {
+      "symbol": "tlsf_alloc_overhead",
+      "address": "0x1140c",
+      "compiled_bytes": 4,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_read_mspi_register_id",
+      "address": "0x1e7a8",
+      "compiled_bytes": 32,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_runtime_call",
+      "address": "0x1da58",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_control_mram",
+      "address": "0x1e220",
+      "compiled_bytes": 38,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_adc_profile_transfer",
+      "address": "0x35dc4",
+      "compiled_bytes": 260,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_kernel_state",
+      "address": "0x11f2c",
+      "compiled_bytes": 40,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_4278c8",
+      "address": "0x1d9a4",
+      "compiled_bytes": 56,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_init_callback_platform_sequence",
+      "address": "0x33750",
+      "compiled_bytes": 36,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_test_dfu_init_entry",
+      "address": "0x42ddae",
+      "compiled_bytes": 0,
+      "section": ".dfu_init_adapter"
+    },
+    {
+      "symbol": "opencfw_bl_kernel_dynamic_thread",
+      "address": "0x144a8",
+      "compiled_bytes": 172,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_mspi_blocking_transfer",
+      "address": "0x16a30",
+      "compiled_bytes": 280,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_41652e",
+      "address": "0x14098",
+      "compiled_bytes": 106,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_adc_enumerate",
+      "address": "0x35b20",
+      "compiled_bytes": 366,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_lfs_prog",
+      "address": "0x17aa4",
+      "compiled_bytes": 66,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_init_priority_compare",
+      "address": "0x32068",
+      "compiled_bytes": 8,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_storage_read",
+      "address": "0x430a9c",
+      "compiled_bytes": 4,
+      "section": ".storage_read"
+    },
+    {
+      "symbol": "opencfw_provider_42e2ea",
+      "address": "0x1464c",
+      "compiled_bytes": 94,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_dfu_thread_new",
+      "address": "0x108fc",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_delay",
+      "address": "0x1e732",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_420476",
+      "address": "0x122e8",
+      "compiled_bytes": 300,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_adc_normalize",
+      "address": "0x35d64",
+      "compiled_bytes": 94,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_provider_4162c4",
+      "address": "0x13d84",
+      "compiled_bytes": 198,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_clock_release_id2",
+      "address": "0x13008",
+      "compiled_bytes": 234,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_clock_release_id5",
+      "address": "0x13394",
+      "compiled_bytes": 210,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_reset_entry",
+      "address": "0x100d8",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_clock_release_id0",
+      "address": "0x124f0",
+      "compiled_bytes": 64,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_hal_mspi_control_latency",
+      "address": "0x1c72c",
+      "compiled_bytes": 38,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_mspi_get_xip_off_min_delay",
+      "address": "0x1ce24",
+      "compiled_bytes": 82,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_hal_mspi_cq_disable",
+      "address": "0x1d96c",
+      "compiled_bytes": 56,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_kernel_queue_create_static",
+      "address": "0x10c80",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_scheduler_resume",
+      "address": "0x15508",
+      "compiled_bytes": 316,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_post_configure",
+      "address": "0x170b4",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_41fe48",
+      "address": "0x16ff8",
+      "compiled_bytes": 28,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_expand_adapter",
+      "address": "0x415326",
+      "compiled_bytes": 0,
+      "section": ".boot_expand_adapter"
+    },
+    {
+      "symbol": "opencfw_bl_control_stage_two_flags",
+      "address": "0x30af8",
+      "compiled_bytes": 42,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_bl_port_start",
+      "address": "0x10a5c",
+      "compiled_bytes": 58,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_init_callback_redirect",
+      "address": "0x3382c",
+      "compiled_bytes": 132,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_publish_device_mode",
+      "address": "0x30fa8",
+      "compiled_bytes": 0,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "tlsf_check_pool",
+      "address": "0x113bc",
+      "compiled_bytes": 50,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_restore_interrupts",
+      "address": "0x1044c",
+      "compiled_bytes": 14,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_radio_mode_apply",
+      "address": "0x12bbc",
+      "compiled_bytes": 484,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_test_event_entry",
+      "address": "0x42e644",
+      "compiled_bytes": 0,
+      "section": ".event_task_adapter"
+    },
+    {
+      "symbol": "opencfw_boot_storage_erase_validate_impl",
+      "address": "0x1e6a8",
+      "compiled_bytes": 60,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_stream_mode",
+      "address": "0x16118",
+      "compiled_bytes": 38,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_iom_interrupt_status",
+      "address": "0x3498c",
+      "compiled_bytes": 66,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_nor_read",
+      "address": "0x1c5fc",
+      "compiled_bytes": 120,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_zero_table",
+      "address": "0x10270",
+      "compiled_bytes": 156,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_semaphore_create",
+      "address": "0x342e4",
+      "compiled_bytes": 0,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_device_info_initialize",
+      "address": "0x1ded0",
+      "compiled_bytes": 310,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_nor_erase",
+      "address": "0x1cba0",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_42069e",
+      "address": "0x31ab4",
+      "compiled_bytes": 154,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_port_fpu_enable",
+      "address": "0x100b6",
+      "compiled_bytes": 22,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_clock_release_id6",
+      "address": "0x13900",
+      "compiled_bytes": 342,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_iom_frequency",
+      "address": "0x34018",
+      "compiled_bytes": 68,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_provider_4201ba",
+      "address": "0x31a9c",
+      "compiled_bytes": 24,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_device_mode_wait",
+      "address": "0x1e100",
+      "compiled_bytes": 24,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_timer_expire",
+      "address": "0x15c20",
+      "compiled_bytes": 64,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_clock_request_id6",
+      "address": "0x13468",
+      "compiled_bytes": 1174,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_clock_request_id5",
+      "address": "0x130f4",
+      "compiled_bytes": 670,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_port_timer_irq_enable",
+      "address": "0x11fc0",
+      "compiled_bytes": 34,
+      "section": ".text"
+    },
+    {
+      "symbol": "tlsf_free",
+      "address": "0x11af4",
+      "compiled_bytes": 390,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_port_timer_read_counter",
+      "address": "0x12088",
+      "compiled_bytes": 32,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_kernel_start",
+      "address": "0x11f54",
+      "compiled_bytes": 56,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_event_thread",
+      "address": "0x13ed4",
+      "compiled_bytes": 98,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_svc_entry",
+      "address": "0x10000",
+      "compiled_bytes": 18,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_420890",
+      "address": "0x312ec",
+      "compiled_bytes": 266,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "tlsf_memalign",
+      "address": "0x119ac",
+      "compiled_bytes": 326,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_fp_lazy_mode",
+      "address": "0x1e6fe",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_config_transaction",
+      "address": "0x33ab0",
+      "compiled_bytes": 0,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_provider_420f10",
+      "address": "0x31cd8",
+      "compiled_bytes": 154,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_info_read_dispatch",
+      "address": "0x1e118",
+      "compiled_bytes": 250,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_ready_lists_initialize",
+      "address": "0x10504",
+      "compiled_bytes": 422,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_control_mode_two",
+      "address": "0x170dc",
+      "compiled_bytes": 102,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_dfu_error_transaction",
+      "address": "0x16bac",
+      "compiled_bytes": 98,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_kernel_enter",
+      "address": "0x1045c",
+      "compiled_bytes": 44,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_uart_ring_initialize",
+      "address": "0x34f28",
+      "compiled_bytes": 24,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_gpio_mask_clear",
+      "address": "0x34adc",
+      "compiled_bytes": 118,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_bl_timer_rollover",
+      "address": "0x15c60",
+      "compiled_bytes": 84,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_4199dc",
+      "address": "0x1431c",
+      "compiled_bytes": 274,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_power_callback",
+      "address": "0x1d41c",
+      "compiled_bytes": 24,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_timer_id_get",
+      "address": "0x15044",
+      "compiled_bytes": 24,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_timer_task",
+      "address": "0x15f74",
+      "compiled_bytes": 42,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_coprocessor_enable",
+      "address": "0x1e6e4",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_queue_get",
+      "address": "0x14fc8",
+      "compiled_bytes": 124,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_mspi_handle_initialize",
+      "address": "0x13a58",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_context_retry",
+      "address": "0x3426c",
+      "compiled_bytes": 82,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_hal_power_control",
+      "address": "0x1d3b8",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_dcache_enable",
+      "address": "0x30050",
+      "compiled_bytes": 880,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_provider_42dca2",
+      "address": "0x13e88",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_context_claim",
+      "address": "0x33a54",
+      "compiled_bytes": 92,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_control_power_apply",
+      "address": "0x170b4",
+      "compiled_bytes": 38,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_file_open",
+      "address": "0x1786c",
+      "compiled_bytes": 278,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_port_timer_clock_configure",
+      "address": "0x11fe4",
+      "compiled_bytes": 162,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_nor_read_delay",
+      "address": "0x1c910",
+      "compiled_bytes": 8,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_timer_callback_dispatcher",
+      "address": "0x1506c",
+      "compiled_bytes": 24,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_main_init",
+      "address": "0x10320",
+      "compiled_bytes": 140,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_clock_release_all",
+      "address": "0x1ccd0",
+      "compiled_bytes": 152,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_41fd70",
+      "address": "0x10e38",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_dfu_runtime_enable",
+      "address": "0x16c10",
+      "compiled_bytes": 26,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_control_query",
+      "address": "0x171c4",
+      "compiled_bytes": 50,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_41b2f8",
+      "address": "0x10434",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_42790a",
+      "address": "0x30bc8",
+      "compiled_bytes": 242,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_bl_mspi_status_transfer",
+      "address": "0x12414",
+      "compiled_bytes": 152,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_port_timer_configure",
+      "address": "0x1211c",
+      "compiled_bytes": 352,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_control_query_descriptor_copy",
+      "address": "0x17194",
+      "compiled_bytes": 46,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_iom_event_service",
+      "address": "0x34714",
+      "compiled_bytes": 630,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "tlsf_realloc",
+      "address": "0x11c7c",
+      "compiled_bytes": 636,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_stack_entry",
+      "address": "0x100e8",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_dfu_queue_new",
+      "address": "0x14ebc",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_config_retry",
+      "address": "0x3426c",
+      "compiled_bytes": 0,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_bl_queue_runtime_mode",
+      "address": "0x108dc",
+      "compiled_bytes": 32,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_context_configure",
+      "address": "0x33d48",
+      "compiled_bytes": 426,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_bl_clock_request_id2",
+      "address": "0x12de4",
+      "compiled_bytes": 548,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_control_mode_one",
+      "address": "0x1706c",
+      "compiled_bytes": 72,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_thread_notify",
+      "address": "0x15830",
+      "compiled_bytes": 250,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_nor_read_before",
+      "address": "0x1c674",
+      "compiled_bytes": 98,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_queue_create",
+      "address": "0x14ebc",
+      "compiled_bytes": 108,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_dfu_send",
+      "address": "0x13e88",
+      "compiled_bytes": 76,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_timer_queue_unlock",
+      "address": "0x15dfc",
+      "compiled_bytes": 116,
+      "section": ".text"
+    },
+    {
+      "symbol": "memcmp",
+      "address": "0x10f90",
+      "compiled_bytes": 100,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_control_power_apply_configure",
+      "address": "0x3501c",
+      "compiled_bytes": 324,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_hal_mspi_control",
+      "address": "0x1c000",
+      "compiled_bytes": 1532,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_timer_queue_fresh",
+      "address": "0x10c80",
+      "compiled_bytes": 160,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_4160b0",
+      "address": "0x11f54",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_hal_mspi_configure",
+      "address": "0x16d38",
+      "compiled_bytes": 180,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_mkdir",
+      "address": "0x185bc",
+      "compiled_bytes": 416,
+      "section": ".text"
+    },
+    {
+      "symbol": "tlsf_check",
+      "address": "0x11154",
+      "compiled_bytes": 466,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_hal_mspi_power_control",
+      "address": "0x1d220",
+      "compiled_bytes": 406,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_file_close",
+      "address": "0x18238",
+      "compiled_bytes": 86,
+      "section": ".text"
+    },
+    {
+      "symbol": "tlsf_create_with_pool",
+      "address": "0x11790",
+      "compiled_bytes": 28,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_scheduler_suspend",
+      "address": "0x154dc",
+      "compiled_bytes": 16,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_thread_new",
+      "address": "0x108fc",
+      "compiled_bytes": 168,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_delay_us",
+      "address": "0x1e748",
+      "compiled_bytes": 104,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_file_read",
+      "address": "0x17984",
+      "compiled_bytes": 76,
+      "section": ".text"
+    },
+    {
+      "symbol": "memset",
+      "address": "0x10f3c",
+      "compiled_bytes": 84,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_dfu_runtime_context",
+      "address": "0x154d4",
+      "compiled_bytes": 8,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_mspi_mode_enter",
+      "address": "0x1d434",
+      "compiled_bytes": 314,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_control_delay_status_change",
+      "address": "0x17534",
+      "compiled_bytes": 20,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_context_enable",
+      "address": "0x33f24",
+      "compiled_bytes": 0,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_provider_4201ba_core",
+      "address": "0x31d74",
+      "compiled_bytes": 120,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_nor_mspi_init",
+      "address": "0x13ad0",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_compare",
+      "address": "0x16140",
+      "compiled_bytes": 472,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_420e08",
+      "address": "0x31c48",
+      "compiled_bytes": 142,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_bl_mode_register_update",
+      "address": "0x338b0",
+      "compiled_bytes": 88,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_iom_select_interface",
+      "address": "0x33ef4",
+      "compiled_bytes": 46,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "tlsf_malloc",
+      "address": "0x117b8",
+      "compiled_bytes": 50,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_uart_interrupt_clear",
+      "address": "0x34fec",
+      "compiled_bytes": 48,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_provider_420b0c",
+      "address": "0x1c9b8",
+      "compiled_bytes": 488,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_hal_mspi_interrupt_enable",
+      "address": "0x16ee0",
+      "compiled_bytes": 46,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_iom_cq_enable",
+      "address": "0x34238",
+      "compiled_bytes": 42,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_provider_4279be",
+      "address": "0x30b94",
+      "compiled_bytes": 50,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_init_sort",
+      "address": "0x320dc",
+      "compiled_bytes": 36,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_bl_adc_command",
+      "address": "0x35d38",
+      "compiled_bytes": 42,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_bl_post_validate",
+      "address": "0x3546c",
+      "compiled_bytes": 480,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_pendsv_entry",
+      "address": "0x1005e",
+      "compiled_bytes": 88,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_context_guard",
+      "address": "0x103fc",
+      "compiled_bytes": 54,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_wait_list_sorted",
+      "address": "0x1489c",
+      "compiled_bytes": 52,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_mspi_mode_publish_core",
+      "address": "0x30d78",
+      "compiled_bytes": 560,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_control_transition",
+      "address": "0x171f8",
+      "compiled_bytes": 828,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_init_callback_services",
+      "address": "0x33780",
+      "compiled_bytes": 172,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_bl_radio_callback_finish",
+      "address": "0x12da0",
+      "compiled_bytes": 68,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_platform_system_init",
+      "address": "0x10320",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_41602a",
+      "address": "0x103fc",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_hal_mspi_pio_mixed",
+      "address": "0x1bfc8",
+      "compiled_bytes": 56,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_dfu_control_two",
+      "address": "0x145a4",
+      "compiled_bytes": 78,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_next_unblock_refresh",
+      "address": "0x154ec",
+      "compiled_bytes": 28,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_control_guard_begin",
+      "address": "0x1e3b8",
+      "compiled_bytes": 250,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_hal_mspi_disable",
+      "address": "0x16e6c",
+      "compiled_bytes": 114,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_clock_request",
+      "address": "0x12530",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_context_enable",
+      "address": "0x33f24",
+      "compiled_bytes": 242,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_gpio_interrupt_control",
+      "address": "0x34b8c",
+      "compiled_bytes": 466,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_hal_mspi_control_clock_request",
+      "address": "0x30524",
+      "compiled_bytes": 436,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_provider_41f846",
+      "address": "0x1e370",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_event_flags_set",
+      "address": "0x14018",
+      "compiled_bytes": 128,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_kernel_start",
+      "address": "0x10ab4",
+      "compiled_bytes": 136,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_clock_release_id3",
+      "address": "0x1280c",
+      "compiled_bytes": 128,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_clock_release_id1",
+      "address": "0x126c0",
+      "compiled_bytes": 64,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_iom_error_classify",
+      "address": "0x343f0",
+      "compiled_bytes": 58,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_iom4_irq_dispatch",
+      "address": "0x34a00",
+      "compiled_bytes": 48,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_dfu_queue_put",
+      "address": "0x14f28",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_nor_read_jedec_id",
+      "address": "0x1227c",
+      "compiled_bytes": 106,
+      "section": ".text"
+    },
+    {
+      "symbol": "strcspn",
+      "address": "0x11104",
+      "compiled_bytes": 78,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_lfs_erase",
+      "address": "0x17ae8",
+      "compiled_bytes": 48,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_iom_onebit",
+      "address": "0x3405c",
+      "compiled_bytes": 20,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_delay_raw",
+      "address": "0x1e740",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_41f9f8",
+      "address": "0x32070",
+      "compiled_bytes": 0,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_program",
+      "address": "0x16810",
+      "compiled_bytes": 524,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_dfu_runtime_context_get",
+      "address": "0x154c8",
+      "compiled_bytes": 10,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_416920",
+      "address": "0x14fc8",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "tlsf_size",
+      "address": "0x113f0",
+      "compiled_bytes": 6,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_427baa",
+      "address": "0x30d1c",
+      "compiled_bytes": 92,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_platform_configure",
+      "address": "0x1e370",
+      "compiled_bytes": 72,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_semaphore_create",
+      "address": "0x342e4",
+      "compiled_bytes": 174,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_provider_427878",
+      "address": "0x1d924",
+      "compiled_bytes": 72,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_clock_request_id4",
+      "address": "0x128f4",
+      "compiled_bytes": 506,
+      "section": ".text"
+    },
+    {
+      "symbol": "tlsf_walk_pool",
+      "address": "0x11328",
+      "compiled_bytes": 72,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_4209c4",
+      "address": "0x1c968",
+      "compiled_bytes": 78,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_rtos_free",
+      "address": "0x153f8",
+      "compiled_bytes": 206,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_main_terminal_spin",
+      "address": "0x1031c",
+      "compiled_bytes": 4,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_platform_bringup",
+      "address": "0x3607c",
+      "compiled_bytes": 1032,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_bl_port_timer_compare_set",
+      "address": "0x120a8",
+      "compiled_bytes": 116,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_timer_service_start",
+      "address": "0x10db4",
+      "compiled_bytes": 120,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_list_insert_sorted",
+      "address": "0x15cb4",
+      "compiled_bytes": 96,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_crc",
+      "address": "0x1be7c",
+      "compiled_bytes": 330,
+      "section": ".text"
+    },
+    {
+      "symbol": "tlsf_block_size",
+      "address": "0x113ac",
+      "compiled_bytes": 16,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_nor_read_jedec_id",
+      "address": "0x1227c",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_adc_context_initialize",
+      "address": "0x356d8",
+      "compiled_bytes": 394,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_list_initialize",
+      "address": "0x104ec",
+      "compiled_bytes": 22,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_420984",
+      "address": "0x1c918",
+      "compiled_bytes": 78,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_adc_disable",
+      "address": "0x35d08",
+      "compiled_bytes": 46,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_hal_mspi_fifo_write",
+      "address": "0x16c34",
+      "compiled_bytes": 90,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_4163b2",
+      "address": "0x15084",
+      "compiled_bytes": 260,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_post_finish",
+      "address": "0x34fbc",
+      "compiled_bytes": 46,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "lfs_file_open",
+      "address": "0x17ef0",
+      "compiled_bytes": 24,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_adc_correct_sample",
+      "address": "0x35aa4",
+      "compiled_bytes": 124,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_bl_nor_read_configure",
+      "address": "0x1c754",
+      "compiled_bytes": 174,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_mspi_handle_init",
+      "address": "0x13a58",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_420002",
+      "address": "0x3154c",
+      "compiled_bytes": 1106,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_thread_frame",
+      "address": "0x106ac",
+      "compiled_bytes": 104,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_thread_select",
+      "address": "0x10b3c",
+      "compiled_bytes": 322,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_interrupt_priority",
+      "address": "0x16fa0",
+      "compiled_bytes": 42,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_control_cleanup",
+      "address": "0x17144",
+      "compiled_bytes": 78,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_mspi_cq_enable",
+      "address": "0x1d8cc",
+      "compiled_bytes": 86,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_mspi_clockgen_control",
+      "address": "0x1d1ac",
+      "compiled_bytes": 114,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_nor_wait",
+      "address": "0x1c804",
+      "compiled_bytes": 266,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_gpio_priority",
+      "address": "0x34d60",
+      "compiled_bytes": 40,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_power_control",
+      "address": "0x1d41c",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_post_record_initialized",
+      "address": "0x1706c",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_queue_put",
+      "address": "0x14f28",
+      "compiled_bytes": 134,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_control_delay_us",
+      "address": "0x1e748",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_init_table_default",
+      "address": "0x32070",
+      "compiled_bytes": 106,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_bl_post_enable",
+      "address": "0x3564c",
+      "compiled_bytes": 36,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_timeout_capture",
+      "address": "0x14824",
+      "compiled_bytes": 18,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_storage_program_impl",
+      "address": "0x1e654",
+      "compiled_bytes": 84,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_fs_alloc",
+      "address": "0x10e6c",
+      "compiled_bytes": 54,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_416610",
+      "address": "0x15188",
+      "compiled_bytes": 132,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_420a08",
+      "address": "0x1cba0",
+      "compiled_bytes": 304,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_hal_mspi_control_state_request",
+      "address": "0x303c0",
+      "compiled_bytes": 354,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_provider_4240aa",
+      "address": "0x1e248",
+      "compiled_bytes": 294,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_power_control",
+      "address": "0x1d3b8",
+      "compiled_bytes": 12,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_hal_delay_us",
+      "address": "0x1e748",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_timer_reload",
+      "address": "0x15a50",
+      "compiled_bytes": 80,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_timer_sample_time",
+      "address": "0x15e7c",
+      "compiled_bytes": 40,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_dfu_orchestrator",
+      "address": "0x42dd14",
+      "compiled_bytes": 106,
+      "section": ".boot_dfu_orchestrator"
+    },
+    {
+      "symbol": "opencfw_boot_control_guard_end",
+      "address": "0x1e4b4",
+      "compiled_bytes": 250,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_mount",
+      "address": "0x17c44",
+      "compiled_bytes": 636,
+      "section": ".text"
+    },
+    {
+      "symbol": "strspn",
+      "address": "0x110b0",
+      "compiled_bytes": 84,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_first_task_restore",
+      "address": "0x10038",
+      "compiled_bytes": 38,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_device_info_query",
+      "address": "0x1e008",
+      "compiled_bytes": 142,
+      "section": ".text"
+    },
+    {
+      "symbol": "strlen",
+      "address": "0x10ff4",
+      "compiled_bytes": 50,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_hal_mspi_control_transaction_request",
+      "address": "0x306d8",
+      "compiled_bytes": 428,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_iom_interrupt_clear",
+      "address": "0x349d0",
+      "compiled_bytes": 48,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_event_wait_unblock",
+      "address": "0x13f80",
+      "compiled_bytes": 152,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_41fe28",
+      "address": "0x16fd4",
+      "compiled_bytes": 36,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_delay_raw",
+      "address": "0x1e740",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_lfs_read",
+      "address": "0x17a60",
+      "compiled_bytes": 66,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_device_mode_configure",
+      "address": "0x1e098",
+      "compiled_bytes": 102,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_allocator_core",
+      "address": "0x10e2c",
+      "compiled_bytes": 12,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_421210",
+      "address": "0x17584",
+      "compiled_bytes": 264,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_iom_cq_status",
+      "address": "0x3463c",
+      "compiled_bytes": 110,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_publish_mspi_mode",
+      "address": "0x30fa8",
+      "compiled_bytes": 8,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "strchr",
+      "address": "0x1106c",
+      "compiled_bytes": 66,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_nor_read_after",
+      "address": "0x1c6d8",
+      "compiled_bytes": 84,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_file_read",
+      "address": "0x18394",
+      "compiled_bytes": 56,
+      "section": ".text"
+    },
+    {
+      "symbol": "lfs_dir_close",
+      "address": "0x1880c",
+      "compiled_bytes": 54,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_kernel_initialize",
+      "address": "0x11ef8",
+      "compiled_bytes": 50,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_416058",
+      "address": "0x11ef8",
+      "compiled_bytes": 0,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_iom_descriptor_publish",
+      "address": "0x34394",
+      "compiled_bytes": 90,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_provider_4164da",
+      "address": "0x13f38",
+      "compiled_bytes": 72,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_control_critical_save",
+      "address": "0x16c2c",
+      "compiled_bytes": 8,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_gpio_mask_status",
+      "address": "0x34a30",
+      "compiled_bytes": 172,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_bl_post_activate",
+      "address": "0x34f40",
+      "compiled_bytes": 124,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_bl_platform_finish",
+      "address": "0x33920",
+      "compiled_bytes": 252,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_boot_storage_program",
+      "address": "0x430ac4",
+      "compiled_bytes": 4,
+      "section": ".storage_program"
+    },
+    {
+      "symbol": "opencfw_bl_instance_configure",
+      "address": "0x33d48",
+      "compiled_bytes": 0,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "tlsf_create",
+      "address": "0x1153c",
+      "compiled_bytes": 596,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_iom_cq_disable",
+      "address": "0x34264",
+      "compiled_bytes": 8,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_hal_mspi_control_remaining",
+      "address": "0x1dc58",
+      "compiled_bytes": 480,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_mspi_device_configure_private",
+      "address": "0x1cd68",
+      "compiled_bytes": 188,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_clock_request_id1",
+      "address": "0x1266c",
+      "compiled_bytes": 84,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_iom_clock_config",
+      "address": "0x34070",
+      "compiled_bytes": 394,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_bl_post_precommit",
+      "address": "0x35670",
+      "compiled_bytes": 36,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "tlsf_destroy",
+      "address": "0x117ac",
+      "compiled_bytes": 2,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_adc_configure",
+      "address": "0x35894",
+      "compiled_bytes": 348,
+      "section": ".source_cache"
+    },
+    {
+      "symbol": "opencfw_bl_kernel_queue_get_blocking",
+      "address": "0x148d0",
+      "compiled_bytes": 522,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_bl_tick_increment",
+      "address": "0x15644",
+      "compiled_bytes": 356,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_42e254",
+      "address": "0x145f4",
+      "compiled_bytes": 44,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_provider_420254",
+      "address": "0x13ad0",
+      "compiled_bytes": 554,
+      "section": ".text"
+    },
+    {
+      "symbol": "opencfw_boot_context_interrupt_enable",
+      "address": "0x33a1c",
+      "compiled_bytes": 54,
+      "section": ".source_cache"
+    }
+  ],
+  "selected_original_to_source_entries": [
+    {
+      "symbol": "opencfw_boot_init_table_default",
+      "original_entry": "0x41f9f8",
+      "source_entry": "0x32070",
+      "compiled_function_bytes": 106,
+      "original_body_bytes": null
+    },
+    {
+      "symbol": "opencfw_boot_init_sort",
+      "original_entry": "0x423d08",
+      "source_entry": "0x320dc",
+      "compiled_function_bytes": 36,
+      "original_body_bytes": null
+    },
+    {
+      "symbol": "opencfw_boot_init_priority_compare",
+      "original_entry": "0x423a48",
+      "source_entry": "0x32068",
+      "compiled_function_bytes": 8,
+      "original_body_bytes": null
+    },
+    {
+      "symbol": "opencfw_boot_init_callback_platform_sequence",
+      "original_entry": "0x4301d6",
+      "source_entry": "0x33750",
+      "compiled_function_bytes": 36,
+      "original_body_bytes": null
+    },
+    {
+      "symbol": "opencfw_boot_init_callback_services",
+      "original_entry": "0x43194c",
+      "source_entry": "0x33780",
+      "compiled_function_bytes": 172,
+      "original_body_bytes": null
+    },
+    {
+      "symbol": "opencfw_boot_init_callback_redirect",
+      "original_entry": "0x415590",
+      "source_entry": "0x3382c",
+      "compiled_function_bytes": 132,
+      "original_body_bytes": null
+    },
+    {
+      "symbol": "opencfw_boot_allocator_init",
+      "original_entry": "0x41fd70",
+      "source_entry": "0x10e38",
+      "compiled_function_bytes": 52,
+      "original_body_bytes": null
+    },
+    {
+      "symbol": "opencfw_bl_mode_register_update",
+      "original_entry": "0x41d9aa",
+      "source_entry": "0x338b0",
+      "compiled_function_bytes": 88,
+      "original_body_bytes": null
+    },
+    {
+      "symbol": "opencfw_bl_power_register_update",
+      "original_entry": "0x41d92c",
+      "source_entry": "0x12700",
+      "compiled_function_bytes": 142,
+      "original_body_bytes": null
+    },
+    {
+      "symbol": "opencfw_bl_platform_bringup",
+      "original_entry": "0x430000",
+      "source_entry": "0x3607c",
+      "compiled_function_bytes": 1032,
+      "original_body_bytes": null
+    },
+    {
+      "symbol": "opencfw_bl_post_bringup_setup",
+      "original_entry": "0x41f612",
+      "source_entry": "0x35f58",
+      "compiled_function_bytes": 292,
+      "original_body_bytes": null
+    },
+    {
+      "symbol": "opencfw_bl_platform_finish",
+      "original_entry": "0x430502",
+      "source_entry": "0x33920",
+      "compiled_function_bytes": 252,
+      "original_body_bytes": null
+    },
+    {
+      "symbol": "opencfw_boot_context_interrupt_enable",
+      "original_entry": "0x42c63a",
+      "source_entry": "0x33a1c",
+      "compiled_function_bytes": 54,
+      "original_body_bytes": 56
+    },
+    {
+      "symbol": "opencfw_boot_kernel_state",
+      "original_entry": "0x416088",
+      "source_entry": "0x11f2c",
+      "compiled_function_bytes": 40,
+      "original_body_bytes": null
+    },
+    {
+      "symbol": "opencfw_boot_context_claim",
+      "original_entry": "0x42c4c6",
+      "original_end_exclusive": "0x42c538",
+      "source_entry": "0x33a54",
+      "compiled_function_bytes": 92,
+      "original_body_bytes": 114
+    },
+    {
+      "symbol": "opencfw_boot_context_transaction",
+      "original_entry": "0x42c988",
+      "original_end_exclusive": "0x42cc34",
+      "source_entry": "0x33ab0",
+      "compiled_function_bytes": 664,
+      "original_body_bytes": 684
+    },
+    {
+      "symbol": "opencfw_boot_context_configure",
+      "original_entry": "0x42cc34",
+      "original_end_exclusive": "0x42cdb0",
+      "source_entry": "0x33d48",
+      "compiled_function_bytes": 426,
+      "original_body_bytes": 380
+    },
+    {
+      "symbol": "opencfw_boot_context_enable",
+      "original_entry": "0x42c538",
+      "original_end_exclusive": "0x42c63a",
+      "source_entry": "0x33f24",
+      "compiled_function_bytes": 242,
+      "original_body_bytes": 258
+    },
+    {
+      "symbol": "opencfw_boot_context_retry",
+      "original_entry": "0x43048e",
+      "original_end_exclusive": "0x430502",
+      "source_entry": "0x3426c",
+      "compiled_function_bytes": 82,
+      "original_body_bytes": 116
+    },
+    {
+      "symbol": "opencfw_boot_iom_select_interface",
+      "original_entry": "0x42c034",
+      "original_end_exclusive": "0x42c076",
+      "source_entry": "0x33ef4",
+      "compiled_function_bytes": 46,
+      "original_body_bytes": 66
+    },
+    {
+      "symbol": "opencfw_boot_iom_clock_config",
+      "original_entry": "0x42c26a",
+      "original_end_exclusive": "0x42c3e2",
+      "source_entry": "0x34070",
+      "compiled_function_bytes": 394,
+      "original_body_bytes": 376
+    },
+    {
+      "symbol": "opencfw_boot_iom_frequency",
+      "original_entry": "0x42c222",
+      "original_end_exclusive": "0x42c256",
+      "source_entry": "0x34018",
+      "compiled_function_bytes": 68,
+      "original_body_bytes": 52
+    },
+    {
+      "symbol": "opencfw_boot_iom_onebit",
+      "original_entry": "0x42c256",
+      "original_end_exclusive": "0x42c26a",
+      "source_entry": "0x3405c",
+      "compiled_function_bytes": 20,
+      "original_body_bytes": 20
+    },
+    {
+      "symbol": "opencfw_boot_iom_cq_initialize",
+      "original_entry": "0x42c3e2",
+      "original_end_exclusive": "0x42c420",
+      "source_entry": "0x341fc",
+      "compiled_function_bytes": 58,
+      "original_body_bytes": 62
+    },
+    {
+      "symbol": "opencfw_boot_iom_cq_enable",
+      "original_entry": "0x42c420",
+      "original_end_exclusive": "0x42c44e",
+      "source_entry": "0x34238",
+      "compiled_function_bytes": 42,
+      "original_body_bytes": 46
+    },
+    {
+      "symbol": "opencfw_boot_iom_cq_disable",
+      "original_entry": "0x42c44e",
+      "original_end_exclusive": "0x42c45a",
+      "source_entry": "0x34264",
+      "compiled_function_bytes": 8,
+      "original_body_bytes": 12
+    },
+    {
+      "symbol": "opencfw_provider_427794",
+      "original_entry": "0x427794",
+      "original_end_exclusive": "0x427878",
+      "source_entry": "0x1d7e4",
+      "compiled_function_bytes": 230,
+      "original_body_bytes": 228
+    },
+    {
+      "symbol": "opencfw_provider_427878",
+      "original_entry": "0x427878",
+      "original_end_exclusive": "0x4278c8",
+      "source_entry": "0x1d924",
+      "compiled_function_bytes": 72,
+      "original_body_bytes": 80
+    },
+    {
+      "symbol": "opencfw_provider_4278c8",
+      "original_entry": "0x4278c8",
+      "original_end_exclusive": "0x42790a",
+      "source_entry": "0x1d9a4",
+      "compiled_function_bytes": 56,
+      "original_body_bytes": 66
+    },
+    {
+      "symbol": "opencfw_boot_context_nvic_enable",
+      "original_entry": "0x430470",
+      "original_end_exclusive": "0x43048e",
+      "source_entry": "0x342c0",
+      "compiled_function_bytes": 34,
+      "original_body_bytes": 30
+    },
+    {
+      "symbol": "opencfw_boot_semaphore_create",
+      "original_entry": "0x416762",
+      "original_end_exclusive": "0x416816",
+      "source_entry": "0x342e4",
+      "compiled_function_bytes": 174,
+      "original_body_bytes": 180
+    },
+    {
+      "symbol": "opencfw_boot_iom_descriptor_publish",
+      "original_entry": "0x42c45a",
+      "original_end_exclusive": "0x42c4c6",
+      "source_entry": "0x34394",
+      "compiled_function_bytes": 90,
+      "original_body_bytes": 108
+    },
+    {
+      "symbol": "opencfw_boot_iom_event_service",
+      "original_entry": "0x42c6f8",
+      "original_end_exclusive": "0x42c980",
+      "source_entry": "0x34714",
+      "compiled_function_bytes": 630,
+      "original_body_bytes": 648
+    },
+    {
+      "symbol": "opencfw_boot_iom_error_classify",
+      "original_entry": "0x42c076",
+      "original_end_exclusive": "0x42c0b2",
+      "source_entry": "0x343f0",
+      "compiled_function_bytes": 58,
+      "original_body_bytes": 60
+    },
+    {
+      "symbol": "opencfw_boot_iom_event_apply",
+      "original_entry": "0x42c0b2",
+      "original_end_exclusive": "0x42c222",
+      "source_entry": "0x3442c",
+      "compiled_function_bytes": 470,
+      "original_body_bytes": 368
+    },
+    {
+      "symbol": "opencfw_boot_iom_cq_status",
+      "original_entry": "0x427a56",
+      "original_end_exclusive": "0x427ad6",
+      "source_entry": "0x3463c",
+      "compiled_function_bytes": 110,
+      "original_body_bytes": 128
+    },
+    {
+      "symbol": "opencfw_boot_iom_cq_resume",
+      "original_entry": "0x427b38",
+      "original_end_exclusive": "0x427baa",
+      "source_entry": "0x346ac",
+      "compiled_function_bytes": 102,
+      "original_body_bytes": 114
+    },
+    {
+      "symbol": "opencfw_boot_iom_cq_refresh_indices",
+      "original_entry": "0x427754",
+      "original_end_exclusive": "0x427794",
+      "source_entry": "0x34604",
+      "compiled_function_bytes": 56,
+      "original_body_bytes": 64
+    },
+    {
+      "symbol": "opencfw_boot_iom_interrupt_status",
+      "original_entry": "0x42c672",
+      "original_end_exclusive": "0x42c6b6",
+      "source_entry": "0x3498c",
+      "compiled_function_bytes": 66,
+      "original_body_bytes": 68
+    },
+    {
+      "symbol": "opencfw_boot_iom_interrupt_clear",
+      "original_entry": "0x42c6b6",
+      "original_end_exclusive": "0x42c6e4",
+      "source_entry": "0x349d0",
+      "compiled_function_bytes": 48,
+      "original_body_bytes": 46
+    },
+    {
+      "symbol": "opencfw_boot_iom4_irq_dispatch",
+      "original_entry": "0x430610",
+      "original_end_exclusive": "0x43063c",
+      "source_entry": "0x34a00",
+      "compiled_function_bytes": 48,
+      "original_body_bytes": 44
+    },
+    {
+      "symbol": "opencfw_bl_descriptor_register",
+      "original_entry": "0x430280",
+      "original_end_exclusive": "0x4303bc",
+      "source_entry": "0x34d88",
+      "compiled_function_bytes": 266,
+      "original_body_bytes": 316,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_boot_gpio_mask_status",
+      "original_entry": "0x41dcca",
+      "original_end_exclusive": "0x41de3c",
+      "source_entry": "0x34a30",
+      "compiled_function_bytes": 172,
+      "original_body_bytes": 370,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_boot_gpio_mask_clear",
+      "original_entry": "0x41de3c",
+      "original_end_exclusive": "0x41df48",
+      "source_entry": "0x34adc",
+      "compiled_function_bytes": 118,
+      "original_body_bytes": 268,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_boot_gpio_callback_register",
+      "original_entry": "0x41e000",
+      "original_end_exclusive": "0x41e09a",
+      "source_entry": "0x34b54",
+      "compiled_function_bytes": 54,
+      "original_body_bytes": 154,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_boot_gpio_interrupt_control",
+      "original_entry": "0x41da84",
+      "original_end_exclusive": "0x41dcca",
+      "source_entry": "0x34b8c",
+      "compiled_function_bytes": 466,
+      "original_body_bytes": 582,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_boot_gpio_priority",
+      "original_entry": "0x43025c",
+      "original_end_exclusive": "0x430280",
+      "source_entry": "0x34d60",
+      "compiled_function_bytes": 40,
+      "original_body_bytes": 36,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_boot_context_nvic_enable",
+      "original_entry": "0x430240",
+      "original_end_exclusive": "0x43025c",
+      "source_entry": "0x342c0",
+      "compiled_function_bytes": 34,
+      "original_body_bytes": 28,
+      "ownership": "reused-native-helper"
+    },
+    {
+      "symbol": "opencfw_bl_adc_context_initialize",
+      "original_entry": "0x42e8d0",
+      "original_end_exclusive": "0x42ea32",
+      "source_entry": "0x356d8",
+      "compiled_function_bytes": 394,
+      "original_body_bytes": 354,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_adc_reset",
+      "original_entry": "0x42ea32",
+      "original_end_exclusive": "0x42ea68",
+      "source_entry": "0x35864",
+      "compiled_function_bytes": 48,
+      "original_body_bytes": 54,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_boot_device_mode_wait",
+      "original_entry": "0x421548",
+      "original_end_exclusive": "0x42156e",
+      "source_entry": "0x1e100",
+      "compiled_function_bytes": 24,
+      "original_body_bytes": 38,
+      "ownership": "reused-native-body"
+    },
+    {
+      "symbol": "opencfw_boot_info_read_dispatch",
+      "original_entry": "0x4213e6",
+      "original_end_exclusive": "0x421548",
+      "source_entry": "0x1e118",
+      "compiled_function_bytes": 250,
+      "original_body_bytes": 354,
+      "ownership": "reused-native-body"
+    },
+    {
+      "symbol": "opencfw_boot_info_rom_read",
+      "original_entry": "0x41d28a",
+      "original_end_exclusive": "0x41d292",
+      "source_entry": "0x1e218",
+      "compiled_function_bytes": 8,
+      "original_body_bytes": 8,
+      "ownership": "reused-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_adc_configure",
+      "original_entry": "0x42ec0c",
+      "original_end_exclusive": "0x42ed60",
+      "source_entry": "0x35894",
+      "compiled_function_bytes": 348,
+      "original_body_bytes": 340,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_adc_context_configure",
+      "original_entry": "0x42eb74",
+      "original_end_exclusive": "0x42ebaa",
+      "source_entry": "0x359f0",
+      "compiled_function_bytes": 52,
+      "original_body_bytes": 54,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_adc_configure_channel",
+      "original_entry": "0x42eaf6",
+      "original_end_exclusive": "0x42eb74",
+      "source_entry": "0x35a24",
+      "compiled_function_bytes": 126,
+      "original_body_bytes": 126,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_adc_activate",
+      "original_entry": "0x42ed60",
+      "original_end_exclusive": "0x42eda0",
+      "source_entry": "0x35c90",
+      "compiled_function_bytes": 60,
+      "original_body_bytes": 64,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_adc_enable",
+      "original_entry": "0x42ebaa",
+      "original_end_exclusive": "0x42ebe2",
+      "source_entry": "0x35ccc",
+      "compiled_function_bytes": 58,
+      "original_body_bytes": 56,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_adc_disable",
+      "original_entry": "0x42ebe2",
+      "original_end_exclusive": "0x42ec0c",
+      "source_entry": "0x35d08",
+      "compiled_function_bytes": 46,
+      "original_body_bytes": 42,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_adc_command",
+      "original_entry": "0x42eff4",
+      "original_end_exclusive": "0x42f014",
+      "source_entry": "0x35d38",
+      "compiled_function_bytes": 42,
+      "original_body_bytes": 32,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_adc_normalize",
+      "original_entry": "0x42eda0",
+      "original_end_exclusive": "0x42edf6",
+      "source_entry": "0x35d64",
+      "compiled_function_bytes": 94,
+      "original_body_bytes": 86,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_adc_enumerate",
+      "original_entry": "0x42ee70",
+      "original_end_exclusive": "0x42eff4",
+      "source_entry": "0x35b20",
+      "compiled_function_bytes": 366,
+      "original_body_bytes": 388,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_boot_adc_correct_sample",
+      "original_entry": "0x42ee00",
+      "original_end_exclusive": "0x42ee6c",
+      "source_entry": "0x35aa4",
+      "compiled_function_bytes": 124,
+      "original_body_bytes": 108,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_adc_profile_transfer",
+      "original_entry": "0x42f020",
+      "original_end_exclusive": "0x42f14e",
+      "source_entry": "0x35dc4",
+      "compiled_function_bytes": 260,
+      "original_body_bytes": 302,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_adc_apply_profile",
+      "original_entry": "0x42ea68",
+      "original_end_exclusive": "0x42eaf6",
+      "source_entry": "0x35ec8",
+      "compiled_function_bytes": 142,
+      "original_body_bytes": 142,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_post_context_register",
+      "original_entry": "0x422ad4",
+      "original_end_exclusive": "0x422ba8",
+      "source_entry": "0x34e94",
+      "compiled_function_bytes": 146,
+      "original_body_bytes": 212,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_boot_control_power_apply",
+      "original_entry": "0x422ba8",
+      "original_end_exclusive": "0x422d20",
+      "source_entry": "0x170b4",
+      "compiled_function_bytes": 38,
+      "original_body_bytes": 376,
+      "ownership": "reused-guard-plus-new-accepted-body",
+      "accepted_source_entry": "0x3501c",
+      "accepted_compiled_bytes": 324
+    },
+    {
+      "symbol": "opencfw_bl_post_activate",
+      "original_entry": "0x422dc6",
+      "original_end_exclusive": "0x422e28",
+      "source_entry": "0x34f40",
+      "compiled_function_bytes": 124,
+      "original_body_bytes": 98,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_boot_uart_baud",
+      "original_entry": "0x422e28",
+      "original_end_exclusive": "0x422ee0",
+      "source_entry": "0x35160",
+      "compiled_function_bytes": 778,
+      "original_body_bytes": 184,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_post_validate",
+      "original_entry": "0x42308e",
+      "original_end_exclusive": "0x4232c8",
+      "source_entry": "0x3546c",
+      "compiled_function_bytes": 480,
+      "original_body_bytes": 570,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_post_finish",
+      "original_entry": "0x4236ce",
+      "original_end_exclusive": "0x4236fa",
+      "source_entry": "0x34fbc",
+      "compiled_function_bytes": 46,
+      "original_body_bytes": 44,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_boot_uart_interrupt_clear",
+      "original_entry": "0x423700",
+      "original_end_exclusive": "0x42372a",
+      "source_entry": "0x34fec",
+      "compiled_function_bytes": 48,
+      "original_body_bytes": 42,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_boot_uart_ring_initialize",
+      "original_entry": "0x4275ea",
+      "original_end_exclusive": "0x427602",
+      "source_entry": "0x34f28",
+      "compiled_function_bytes": 24,
+      "original_body_bytes": 24,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_post_precommit",
+      "original_entry": "0x41f4f4",
+      "original_end_exclusive": "0x41f512",
+      "source_entry": "0x35670",
+      "compiled_function_bytes": 36,
+      "original_body_bytes": 30,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_post_enable",
+      "original_entry": "0x41f512",
+      "original_end_exclusive": "0x41f530",
+      "source_entry": "0x3564c",
+      "compiled_function_bytes": 36,
+      "original_body_bytes": 30,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_register_mode",
+      "original_entry": "0x41f530",
+      "original_end_exclusive": "0x41f558",
+      "source_entry": "0x35694",
+      "compiled_function_bytes": 44,
+      "original_body_bytes": 40,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_boot_control_mode_one",
+      "original_entry": "0x41f8ba",
+      "original_end_exclusive": "0x41f918",
+      "source_entry": "0x1706c",
+      "compiled_function_bytes": 72,
+      "original_body_bytes": 94,
+      "ownership": "reused-native-body"
+    }
+  ],
+  "original_address_inventory_complete": false,
+  "whole_payload_implemented_percentage": null,
+  "limits": [
+    "ELF STT_FUNC sizes describe compiled relocated code, not original firmware coverage. They include local/runtime/veneer symbols and cannot be divided by original payload bytes as source completion.",
+    "The explicit original-entry map is a partial audit of selected initializer/kernel helpers; missing mappings do not imply absent source. Original function extents must be separately recovered before reporting deduplicated implemented original bytes.",
+    "Source instruction trace coverage and implementation ownership are separate. Passing comparisons do not prove all branches or source/byte completion."
+  ],
+  "iom_source_ownership": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/iom-source-ownership-4f111c.json",
+  "iom_original_body_bytes": 3540,
+  "source_owned_static_pool": {
+    "address": "0x2001455c",
+    "bytes": 17728,
+    "kind": "NOLOAD source BSS; no executable bytes"
+  },
+  "semaphore_source_ownership": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/semaphore-source-ownership-92619e.json",
+  "asynchronous_source_ownership": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/context-events-ownership-92619e.json",
+  "irq_source_ownership": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/context-irq-ownership-4f111c.json",
+  "gpio_source_ownership": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/gpio-source-ownership-6bef4e.json",
+  "adc_source_ownership": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/adc-source-ownership-8ec1fa.json",
+  "adc_source_owned_static_pool": {
+    "address": "0x20026df0",
+    "bytes": 72,
+    "section": "NOLOAD/source BSS",
+    "allocator": "none"
+  },
+  "adc_control_source_ownership": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/adc-control-source-ownership-4cb522.json",
+  "adc_configuration_source_ownership": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/adc-configuration-source-ownership-44d67f.json",
+  "adc_samples_source_ownership": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/adc-samples-source-ownership-8287c7.json",
+  "adc_profile_source_ownership": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/adc-profile-source-ownership-ff5313.json",
+  "uart_source_ownership": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-source-ownership-67f3f2.json"
+}

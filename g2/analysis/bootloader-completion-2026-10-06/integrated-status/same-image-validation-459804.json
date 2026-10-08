@@ -1,0 +1,50 @@
+{
+  "utc": "2026-10-07T00:23:51.267371+00:00",
+  "status": "PASS",
+  "elf": "g2/build/bootloader-completion/source-image-compatible/snapshots/4598040563d8f41b2fc71d430114b6b8564198b439e7225e9729d2f1c93acc2e/bootloader-source-test.elf",
+  "elf_sha256": "4598040563d8f41b2fc71d430114b6b8564198b439e7225e9729d2f1c93acc2e",
+  "seed_elf": "g2/build/bootloader-completion/source-image-compatible/snapshots/4598040563d8f41b2fc71d430114b6b8564198b439e7225e9729d2f1c93acc2e/filesystem-seed.elf",
+  "seed_elf_sha256": "e6ba6916ee417e9efec1f4dc90a50f8ce7777f0e2ad8f976e6d2e27856072b78",
+  "profiles": [
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/4598040563d8f41b2fc71d430114b6b8564198b439e7225e9729d2f1c93acc2e/comparison.json",
+      "sha256": "5042a3da52bfb6d9b36da3fd2aaae94514c0e1399a003dfedab060658d7e748d",
+      "status": "PASS",
+      "cases": 2,
+      "distinct_original_trace_bytes": 33652
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/4598040563d8f41b2fc71d430114b6b8564198b439e7225e9729d2f1c93acc2e/failures.json",
+      "sha256": "626b87a65a6cb16bff01fff7b03e2751b3c737f2b6c868c9c875796417220129",
+      "status": "PASS",
+      "cases": 3,
+      "distinct_original_trace_bytes": 32312
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/4598040563d8f41b2fc71d430114b6b8564198b439e7225e9729d2f1c93acc2e/powerloss.json",
+      "sha256": "daaf260cd21b5e048b2ad3008fb8da6093141d1171f100ba73d6baecaf7d7ebf",
+      "status": "PASS",
+      "cases": 2,
+      "distinct_original_trace_bytes": 33612
+    }
+  ],
+  "total_cases": 7,
+  "union_distinct_original_trace_bytes": 34098,
+  "validation_input_hashes": {
+    "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/4598040563d8f41b2fc71d430114b6b8564198b439e7225e9729d2f1c93acc2e/validation-input-hashes-final.json",
+    "sha256": "f4d121f78e894440724fab7ba428159497bd560435a0a64c043af50f7bec546d",
+    "existing_source_runner_files": 563,
+    "linked_objects": 134,
+    "post_run_hash_mismatches": []
+  },
+  "native_initializer": "PASS",
+  "native_nor": "PASS",
+  "limits": [
+    "Relocated source-linked test ELF with explicit internal provider cuts, resident-ROM callbacks and fixture data; not a standalone bootable/source-complete/byte-identical firmware.",
+    "Normal, malformed and interruption profiles compare proven initializer ABI arguments, callback tables and state, and native TX control length/word count/module/wire bytes. Raw FIFO words differ only in unused upper padding of the one-byte status write; full raw MMIO equality is not claimed.",
+    "Six original FP64 instruction slots use emulated effects under Unicorn; ADC readiness/samples, child HAL/RTOS and clock inputs are synthetic. Observed trace-byte union is not whole-image coverage.",
+    "Interruptions surround atomic synthetic ROM page operations; no physical partial-write, cache coherence, actual IRQ/task delivery, application instructions or hardware recovery proof.",
+    "New integration objects rebuilt and linked with134 captured prepared objects; not a clean whole-graph/source-payload rebuild."
+  ],
+  "trace_union_audit_note": "Corrected12 overlapping FP64 second-halfword log bytes formerly counted twice by summing per-PC lengths. Deduplicated original byte-address union is34098. Profile receipts unchanged."
+}

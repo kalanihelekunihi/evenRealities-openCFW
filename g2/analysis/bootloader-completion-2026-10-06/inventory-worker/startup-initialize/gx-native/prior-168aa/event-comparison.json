@@ -1,0 +1,5403 @@
+{
+  "status": "PASS",
+  "image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_elf_sha256": "168aa605de97a362f11c7e4b9aa4e4abd746355032c51cc2debe73c2ef7c5f8f",
+  "cases": 44,
+  "stock_body": {
+    "start": "0x42ba00",
+    "end_exclusive": "0x42bd8c",
+    "extent_bytes": 908,
+    "visited_original_bytes": 798,
+    "unvisited_bytes": 110,
+    "unvisited_addresses": [
+      "0x42bb20",
+      "0x42bb21",
+      "0x42bb38",
+      "0x42bb39",
+      "0x42bb86",
+      "0x42bb87",
+      "0x42bb88",
+      "0x42bb89",
+      "0x42bb8a",
+      "0x42bb8b",
+      "0x42bb8c",
+      "0x42bb8d",
+      "0x42bb98",
+      "0x42bb99",
+      "0x42bb9a",
+      "0x42bb9b",
+      "0x42bb9c",
+      "0x42bb9d",
+      "0x42bb9e",
+      "0x42bb9f",
+      "0x42bba0",
+      "0x42bba1",
+      "0x42bba2",
+      "0x42bba3",
+      "0x42bba4",
+      "0x42bba5",
+      "0x42bba6",
+      "0x42bba7",
+      "0x42bba8",
+      "0x42bba9",
+      "0x42bbaa",
+      "0x42bbab",
+      "0x42bbac",
+      "0x42bbad",
+      "0x42bbae",
+      "0x42bbaf",
+      "0x42bbb0",
+      "0x42bbb1",
+      "0x42bbb2",
+      "0x42bbb3",
+      "0x42bbb4",
+      "0x42bbb5",
+      "0x42bbb6",
+      "0x42bbb7",
+      "0x42bbb8",
+      "0x42bbb9",
+      "0x42bbba",
+      "0x42bbbb",
+      "0x42bbca",
+      "0x42bbcb",
+      "0x42bbcc",
+      "0x42bbcd",
+      "0x42bbce",
+      "0x42bbcf",
+      "0x42bbd0",
+      "0x42bbd1",
+      "0x42bbd2",
+      "0x42bbd3",
+      "0x42bbd4",
+      "0x42bbd5",
+      "0x42bbd6",
+      "0x42bbd7",
+      "0x42bbd8",
+      "0x42bbd9",
+      "0x42bbda",
+      "0x42bbdb",
+      "0x42bbdc",
+      "0x42bbdd",
+      "0x42bbde",
+      "0x42bbdf",
+      "0x42bbe0",
+      "0x42bbe1",
+      "0x42bbe2",
+      "0x42bbe3",
+      "0x42bc8c",
+      "0x42bc8d",
+      "0x42bc8e",
+      "0x42bc8f",
+      "0x42bc90",
+      "0x42bc91",
+      "0x42bc92",
+      "0x42bc93",
+      "0x42bc94",
+      "0x42bc95",
+      "0x42bc96",
+      "0x42bc97",
+      "0x42bc98",
+      "0x42bc99",
+      "0x42bc9a",
+      "0x42bc9b",
+      "0x42bc9c",
+      "0x42bc9d",
+      "0x42bd62",
+      "0x42bd63",
+      "0x42bd64",
+      "0x42bd65",
+      "0x42bd66",
+      "0x42bd67",
+      "0x42bd68",
+      "0x42bd69",
+      "0x42bd6a",
+      "0x42bd6b",
+      "0x42bd6c",
+      "0x42bd6d",
+      "0x42bd6e",
+      "0x42bd6f",
+      "0x42bd70",
+      "0x42bd71",
+      "0x42bd72",
+      "0x42bd73"
+    ]
+  },
+  "source_machine": {
+    "loaded_locked_image": false,
+    "source_code_bytes_visited": 2512
+  },
+  "native_descendants": [
+    {
+      "entry": "0x42ad40",
+      "end_exclusive": "0x42adb8",
+      "bytes": 120,
+      "sha256": "89f71050cf7850205a7a5ef9ccfb09dfadaadd5a6046355844d800589b65607d"
+    },
+    {
+      "entry": "0x42aef0",
+      "end_exclusive": "0x42b010",
+      "bytes": 288,
+      "sha256": "7a54959ea8247c505df0f3139ce607b4d1fabb5d0015054b89bd44b5d79cc31b",
+      "predicate": {
+        "entry": "0x41f3f0",
+        "end_exclusive": "0x41f424",
+        "bytes": 52,
+        "sha256": "2629a71d82c78f7602d8f37273ae02bcf42f237cdaab9da0d4db6d57a1045692"
+      }
+    },
+    {
+      "entry": "0x42b014",
+      "end_exclusive": "0x42b068",
+      "bytes": 84,
+      "sha256": "b3da01a94a3c08eb7eb0d7d344b6760d929296878e2dfbf9c4770373aedd3d88"
+    },
+    {
+      "entry": "0x42b6b8",
+      "end_exclusive": "0x42b9ba",
+      "bytes": 770,
+      "sha256": "74f4304f6e3aa59022a29eb5e5f5479c77072b33355825b7c9409897001bb9d1"
+    },
+    {
+      "entry": "0x42b294",
+      "end_exclusive": "0x42b69c",
+      "bytes": 1032,
+      "sha256": "0393f03222d8b7e8c67ed0e7ffbba640f8030dac259a909ec7dbb20846325c2b",
+      "direct_cases": 30,
+      "direct_bytes_visited": 858,
+      "unvisited_bytes": 174
+    }
+  ],
+  "lower_cuts": [],
+  "decoder_call_contract": {
+    "stock_sp_frame": "32 bytes",
+    "r0_input": "sp+4",
+    "r1_major_output": "sp+0",
+    "r2_minor_output": "sp+24",
+    "input_plus_16": "sp+20 temperature category",
+    "input_plus_17": "sp+21 current/request state byte",
+    "input_plus_18": "sp+22 auxiliary category"
+  },
+  "critical_save": "source-side compiled opencfw_boot_control_critical_save from platform_control/critical_save.S; stock 0x41b8ec executes in stock machine",
+  "comparisons": [
+    {
+      "case": "clock-gate-off",
+      "input": {
+        "name": "clock-gate-off",
+        "stimulus": 1,
+        "option": 0,
+        "arg": 286331153,
+        "null_args": false,
+        "gate": 0,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "11111111a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "profile-marker-mismatch",
+      "input": {
+        "name": "profile-marker-mismatch",
+        "stimulus": 1,
+        "option": 0,
+        "arg": 286331153,
+        "null_args": false,
+        "gate": 48,
+        "marker": 0,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 1,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 0,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "11111111a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "state-null",
+      "input": {
+        "name": "state-null",
+        "stimulus": 0,
+        "option": 0,
+        "arg": 286331153,
+        "null_args": true,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 0
+      },
+      "result": {
+        "status": 6,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "11111111a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "state-0-to-1",
+      "input": {
+        "name": "state-0-to-1",
+        "stimulus": 0,
+        "option": 0,
+        "arg": 1,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 8,
+        "decode_minor": 1,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073872964,
+            4,
+            0
+          ],
+          [
+            1073872972,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            14
+          ],
+          [
+            1073873032,
+            4,
+            6
+          ],
+          [
+            1073873792,
+            4,
+            536870912
+          ],
+          [
+            1073873792,
+            4,
+            805306368
+          ],
+          [
+            1073873732,
+            4,
+            402653184
+          ],
+          [
+            1073873752,
+            4,
+            0
+          ],
+          [
+            1073873740,
+            4,
+            201326592
+          ],
+          [
+            1073873792,
+            4,
+            268435456
+          ],
+          [
+            1073873792,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873032,
+            4,
+            0
+          ]
+        ],
+        "words": {
+          "20000144": 15,
+          "2000014c": 7,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "01",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "01000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "state-1-to-0-deferred",
+      "input": {
+        "name": "state-1-to-0-deferred",
+        "stimulus": 0,
+        "option": 0,
+        "arg": 0,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 1,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 12,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 13,
+        "decode_minor": 3,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 1,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073872964,
+            4,
+            0
+          ],
+          [
+            1073872972,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            14
+          ],
+          [
+            1073873032,
+            4,
+            6
+          ],
+          [
+            1073873792,
+            4,
+            536870912
+          ],
+          [
+            1073873792,
+            4,
+            805306368
+          ],
+          [
+            1073873732,
+            4,
+            0
+          ],
+          [
+            1073873752,
+            4,
+            0
+          ],
+          [
+            1073873740,
+            4,
+            201326592
+          ],
+          [
+            1073873792,
+            4,
+            268435456
+          ],
+          [
+            1073873792,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873032,
+            4,
+            0
+          ],
+          [
+            1073873788,
+            4,
+            2768240640
+          ],
+          [
+            1073873788,
+            4,
+            2768240640
+          ],
+          [
+            1073873788,
+            4,
+            2768240640
+          ]
+        ],
+        "words": {
+          "20000144": 7,
+          "2000014c": 6,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "00000000a4a3a2a1b4b3b2b1",
+        "primask": 1
+      }
+    },
+    {
+      "case": "state-0-to-2-scan",
+      "input": {
+        "name": "state-0-to-2-scan",
+        "stimulus": 0,
+        "option": 0,
+        "arg": 2,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 0,
+        "major": 8,
+        "minor": 1,
+        "snapshot": [
+          0,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 1,
+        "scan_mode": 1,
+        "scan_active": 32768,
+        "scan_channels": {
+          "15": 76801
+        },
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 9,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            14
+          ],
+          [
+            1073873032,
+            4,
+            6
+          ],
+          [
+            1073873792,
+            4,
+            536870912
+          ],
+          [
+            1073873792,
+            4,
+            805306368
+          ],
+          [
+            1073873732,
+            4,
+            0
+          ],
+          [
+            1073873752,
+            4,
+            0
+          ],
+          [
+            1073873740,
+            4,
+            201326592
+          ],
+          [
+            1073873792,
+            4,
+            268435456
+          ],
+          [
+            1073873792,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873032,
+            4,
+            0
+          ],
+          [
+            1073775584,
+            4,
+            76800
+          ],
+          [
+            1073774608,
+            4,
+            0
+          ],
+          [
+            1073774696,
+            4,
+            3221225472
+          ],
+          [
+            1073872964,
+            4,
+            0
+          ],
+          [
+            1073872972,
+            4,
+            0
+          ],
+          [
+            1073873032,
+            4,
+            0
+          ],
+          [
+            1073873328,
+            4,
+            0
+          ]
+        ],
+        "words": {
+          "20000144": 3,
+          "2000014c": 0,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 0,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "02",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "00",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "01"
+        },
+        "args": "02000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "state-0-to-2-scan-fast-exit",
+      "input": {
+        "name": "state-0-to-2-scan-fast-exit",
+        "stimulus": 0,
+        "option": 0,
+        "arg": 2,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 3,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [
+          [
+            1073873024,
+            4,
+            14
+          ],
+          [
+            1073873032,
+            4,
+            6
+          ],
+          [
+            1073873792,
+            4,
+            536870912
+          ],
+          [
+            1073873792,
+            4,
+            805306368
+          ],
+          [
+            1073873732,
+            4,
+            0
+          ],
+          [
+            1073873752,
+            4,
+            0
+          ],
+          [
+            1073873740,
+            4,
+            201326592
+          ],
+          [
+            1073873792,
+            4,
+            268435456
+          ],
+          [
+            1073873792,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873032,
+            4,
+            0
+          ]
+        ],
+        "words": {
+          "20000144": 4,
+          "2000014c": 6,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "03",
+          "200271bb": "02",
+          "20000553": "a5",
+          "200271af": "01",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "01"
+        },
+        "args": "02000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "state-0-to-2-scan-channel-trigger",
+      "input": {
+        "name": "state-0-to-2-scan-channel-trigger",
+        "stimulus": 0,
+        "option": 0,
+        "arg": 2,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 1,
+        "scan_channels": {
+          "0": 6401
+        },
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073872964,
+            4,
+            0
+          ],
+          [
+            1073872972,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            14
+          ],
+          [
+            1073873032,
+            4,
+            6
+          ],
+          [
+            1073873792,
+            4,
+            536870912
+          ],
+          [
+            1073873792,
+            4,
+            805306368
+          ],
+          [
+            1073873732,
+            4,
+            0
+          ],
+          [
+            1073873752,
+            4,
+            0
+          ],
+          [
+            1073873740,
+            4,
+            201326592
+          ],
+          [
+            1073873792,
+            4,
+            268435456
+          ],
+          [
+            1073873792,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873032,
+            4,
+            0
+          ]
+        ],
+        "words": {
+          "20000144": 7,
+          "2000014c": 6,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "02",
+          "20000553": "a5",
+          "200271af": "01",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "01"
+        },
+        "args": "02000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "state-other-pair-skip-decode",
+      "input": {
+        "name": "state-other-pair-skip-decode",
+        "stimulus": 0,
+        "option": 0,
+        "arg": 3,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 2,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 11,
+        "decode_minor": 5,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "03",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "03000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "state-equal-no-effect",
+      "input": {
+        "name": "state-equal-no-effect",
+        "stimulus": 0,
+        "option": 0,
+        "arg": 2,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 2,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073872964,
+            4,
+            0
+          ],
+          [
+            1073872972,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            14
+          ],
+          [
+            1073873032,
+            4,
+            6
+          ],
+          [
+            1073873792,
+            4,
+            536870912
+          ],
+          [
+            1073873792,
+            4,
+            805306368
+          ],
+          [
+            1073873732,
+            4,
+            0
+          ],
+          [
+            1073873752,
+            4,
+            0
+          ],
+          [
+            1073873740,
+            4,
+            201326592
+          ],
+          [
+            1073873792,
+            4,
+            268435456
+          ],
+          [
+            1073873792,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873032,
+            4,
+            0
+          ]
+        ],
+        "words": {
+          "20000144": 7,
+          "2000014c": 6,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "02",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "02000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "state-shortcut-2-0",
+      "input": {
+        "name": "state-shortcut-2-0",
+        "stimulus": 0,
+        "option": 0,
+        "arg": 0,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 2,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "00000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "state-shortcut-2-1",
+      "input": {
+        "name": "state-shortcut-2-1",
+        "stimulus": 0,
+        "option": 0,
+        "arg": 1,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 2,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "01",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "01000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "state-shortcut-3-0",
+      "input": {
+        "name": "state-shortcut-3-0",
+        "stimulus": 0,
+        "option": 0,
+        "arg": 0,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 3,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "00000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "state-shortcut-3-1",
+      "input": {
+        "name": "state-shortcut-3-1",
+        "stimulus": 0,
+        "option": 0,
+        "arg": 1,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 3,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "01",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "01000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "state-shortcut-4-0",
+      "input": {
+        "name": "state-shortcut-4-0",
+        "stimulus": 0,
+        "option": 0,
+        "arg": 0,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 4,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "00000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "state-shortcut-4-1",
+      "input": {
+        "name": "state-shortcut-4-1",
+        "stimulus": 0,
+        "option": 0,
+        "arg": 1,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 4,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "01",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "01000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "system-state-null",
+      "input": {
+        "name": "system-state-null",
+        "stimulus": 1,
+        "option": 0,
+        "arg": 286331153,
+        "null_args": true,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 0
+      },
+      "result": {
+        "status": 6,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "11111111a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "system-state",
+      "input": {
+        "name": "system-state",
+        "stimulus": 1,
+        "option": 0,
+        "arg": 3,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073872964,
+            4,
+            0
+          ],
+          [
+            1073872972,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            14
+          ],
+          [
+            1073873032,
+            4,
+            6
+          ],
+          [
+            1073873792,
+            4,
+            536870912
+          ],
+          [
+            1073873792,
+            4,
+            805306368
+          ],
+          [
+            1073873732,
+            4,
+            0
+          ],
+          [
+            1073873752,
+            4,
+            0
+          ],
+          [
+            1073873740,
+            4,
+            201326592
+          ],
+          [
+            1073873792,
+            4,
+            268435456
+          ],
+          [
+            1073873792,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873032,
+            4,
+            0
+          ]
+        ],
+        "words": {
+          "20000144": 7,
+          "2000014c": 6,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "03000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "temperature-null",
+      "input": {
+        "name": "temperature-null",
+        "stimulus": 2,
+        "option": 0,
+        "arg": 286331153,
+        "null_args": true,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 0
+      },
+      "result": {
+        "status": 6,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "11111111a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "temperature-category-0",
+      "input": {
+        "name": "temperature-category-0",
+        "stimulus": 2,
+        "option": 0,
+        "arg": 1103626240,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 0,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073872964,
+            4,
+            0
+          ],
+          [
+            1073872972,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            14
+          ],
+          [
+            1073873032,
+            4,
+            6
+          ],
+          [
+            1073873792,
+            4,
+            536870912
+          ],
+          [
+            1073873792,
+            4,
+            805306368
+          ],
+          [
+            1073873732,
+            4,
+            0
+          ],
+          [
+            1073873752,
+            4,
+            0
+          ],
+          [
+            1073873740,
+            4,
+            134217728
+          ],
+          [
+            1073873792,
+            4,
+            268435456
+          ],
+          [
+            1073873792,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873032,
+            4,
+            0
+          ]
+        ],
+        "words": {
+          "20000144": 5,
+          "2000014c": 6,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "02",
+          "200271bb": "00",
+          "20000553": "01",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "0000c841000000c000004842",
+        "primask": 0
+      }
+    },
+    {
+      "case": "temperature-category-1",
+      "input": {
+        "name": "temperature-category-1",
+        "stimulus": 2,
+        "option": 0,
+        "arg": 1103626240,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 1,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073872964,
+            4,
+            0
+          ],
+          [
+            1073872972,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            14
+          ],
+          [
+            1073873032,
+            4,
+            6
+          ],
+          [
+            1073873792,
+            4,
+            536870912
+          ],
+          [
+            1073873792,
+            4,
+            805306368
+          ],
+          [
+            1073873732,
+            4,
+            0
+          ],
+          [
+            1073873752,
+            4,
+            0
+          ],
+          [
+            1073873740,
+            4,
+            134217728
+          ],
+          [
+            1073873792,
+            4,
+            268435456
+          ],
+          [
+            1073873792,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873032,
+            4,
+            0
+          ]
+        ],
+        "words": {
+          "20000144": 5,
+          "2000014c": 6,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "02",
+          "200271bb": "00",
+          "20000553": "01",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "0000c841000000c000004842",
+        "primask": 0
+      }
+    },
+    {
+      "case": "temperature-category-2",
+      "input": {
+        "name": "temperature-category-2",
+        "stimulus": 2,
+        "option": 0,
+        "arg": 1103626240,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073872964,
+            4,
+            0
+          ],
+          [
+            1073872972,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            14
+          ],
+          [
+            1073873032,
+            4,
+            6
+          ],
+          [
+            1073873792,
+            4,
+            536870912
+          ],
+          [
+            1073873792,
+            4,
+            805306368
+          ],
+          [
+            1073873732,
+            4,
+            0
+          ],
+          [
+            1073873752,
+            4,
+            0
+          ],
+          [
+            1073873740,
+            4,
+            134217728
+          ],
+          [
+            1073873792,
+            4,
+            268435456
+          ],
+          [
+            1073873792,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873032,
+            4,
+            0
+          ]
+        ],
+        "words": {
+          "20000144": 5,
+          "2000014c": 6,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "02",
+          "200271bb": "00",
+          "20000553": "01",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "0000c841000000c000004842",
+        "primask": 0
+      }
+    },
+    {
+      "case": "temperature-category-3",
+      "input": {
+        "name": "temperature-category-3",
+        "stimulus": 2,
+        "option": 0,
+        "arg": 1103626240,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 3,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073872964,
+            4,
+            0
+          ],
+          [
+            1073872972,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            14
+          ],
+          [
+            1073873032,
+            4,
+            6
+          ],
+          [
+            1073873792,
+            4,
+            536870912
+          ],
+          [
+            1073873792,
+            4,
+            805306368
+          ],
+          [
+            1073873732,
+            4,
+            0
+          ],
+          [
+            1073873752,
+            4,
+            0
+          ],
+          [
+            1073873740,
+            4,
+            134217728
+          ],
+          [
+            1073873792,
+            4,
+            268435456
+          ],
+          [
+            1073873792,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873032,
+            4,
+            0
+          ]
+        ],
+        "words": {
+          "20000144": 5,
+          "2000014c": 6,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "02",
+          "200271bb": "00",
+          "20000553": "01",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "0000c841000000c000004842",
+        "primask": 0
+      }
+    },
+    {
+      "case": "temperature-category-4",
+      "input": {
+        "name": "temperature-category-4",
+        "stimulus": 2,
+        "option": 0,
+        "arg": 1103626240,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 4,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073872964,
+            4,
+            0
+          ],
+          [
+            1073872972,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            14
+          ],
+          [
+            1073873032,
+            4,
+            6
+          ],
+          [
+            1073873792,
+            4,
+            536870912
+          ],
+          [
+            1073873792,
+            4,
+            805306368
+          ],
+          [
+            1073873732,
+            4,
+            0
+          ],
+          [
+            1073873752,
+            4,
+            0
+          ],
+          [
+            1073873740,
+            4,
+            134217728
+          ],
+          [
+            1073873792,
+            4,
+            268435456
+          ],
+          [
+            1073873792,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873032,
+            4,
+            0
+          ]
+        ],
+        "words": {
+          "20000144": 5,
+          "2000014c": 6,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "02",
+          "200271bb": "00",
+          "20000553": "01",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "0000c841000000c000004842",
+        "primask": 0
+      }
+    },
+    {
+      "case": "temperature-category-5",
+      "input": {
+        "name": "temperature-category-5",
+        "stimulus": 2,
+        "option": 0,
+        "arg": 1103626240,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 5,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073872964,
+            4,
+            0
+          ],
+          [
+            1073872972,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            14
+          ],
+          [
+            1073873032,
+            4,
+            6
+          ],
+          [
+            1073873792,
+            4,
+            536870912
+          ],
+          [
+            1073873792,
+            4,
+            805306368
+          ],
+          [
+            1073873732,
+            4,
+            0
+          ],
+          [
+            1073873752,
+            4,
+            0
+          ],
+          [
+            1073873740,
+            4,
+            134217728
+          ],
+          [
+            1073873792,
+            4,
+            268435456
+          ],
+          [
+            1073873792,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873032,
+            4,
+            0
+          ]
+        ],
+        "words": {
+          "20000144": 5,
+          "2000014c": 6,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "02",
+          "200271bb": "00",
+          "20000553": "01",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "0000c841000000c000004842",
+        "primask": 0
+      }
+    },
+    {
+      "case": "decoder-stack-temp0-state1-aux1",
+      "input": {
+        "name": "decoder-stack-temp0-state1-aux1",
+        "stimulus": 0,
+        "option": 0,
+        "arg": 1,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 3,
+        "aux_byte": 0,
+        "mode_byte": 0,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          262144,
+          0,
+          0,
+          0
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 2097152,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073872964,
+            4,
+            0
+          ],
+          [
+            1073872972,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            14
+          ],
+          [
+            1073873032,
+            4,
+            6
+          ],
+          [
+            1073873792,
+            4,
+            536870912
+          ],
+          [
+            1073873792,
+            4,
+            805306368
+          ],
+          [
+            1073873732,
+            4,
+            0
+          ],
+          [
+            1073873752,
+            4,
+            0
+          ],
+          [
+            1073873740,
+            4,
+            201326592
+          ],
+          [
+            1073873792,
+            4,
+            268435456
+          ],
+          [
+            1073873792,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873032,
+            4,
+            0
+          ]
+        ],
+        "words": {
+          "20000144": 12,
+          "2000014c": 4,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 262144,
+          "40021010": 0,
+          "40021018": 0,
+          "40021028": 0
+        },
+        "bytes": {
+          "200271ba": "03",
+          "200271bb": "01",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "00",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "01000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "decoder-stack-temp4-state0-aux2",
+      "input": {
+        "name": "decoder-stack-temp4-state0-aux2",
+        "stimulus": 0,
+        "option": 0,
+        "arg": 0,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 1,
+        "temp_category": 4,
+        "aux_byte": 2,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          262144,
+          1220,
+          0,
+          0
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 4194304,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 5,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 262144,
+          "40021010": 1220,
+          "40021018": 0,
+          "40021028": 0
+        },
+        "bytes": {
+          "200271ba": "04",
+          "200271bb": "01",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "00000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "decoder-stack-powered-fields",
+      "input": {
+        "name": "decoder-stack-powered-fields",
+        "stimulus": 1,
+        "option": 0,
+        "arg": 286331153,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 2,
+        "temp_category": 15,
+        "aux_byte": 1,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          4194305,
+          1220,
+          0,
+          0
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 10485760,
+        "decoder_hw": 2,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 5,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 4194305,
+          "40021010": 1220,
+          "40021018": 0,
+          "40021028": 0
+        },
+        "bytes": {
+          "200271ba": "0f",
+          "200271bb": "02",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "11111111a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "dev-power-off-null",
+      "input": {
+        "name": "dev-power-off-null",
+        "stimulus": 3,
+        "option": 0,
+        "arg": 286331153,
+        "null_args": true,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 0
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073872964,
+            4,
+            0
+          ],
+          [
+            1073872972,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            14
+          ],
+          [
+            1073873032,
+            4,
+            6
+          ],
+          [
+            1073873792,
+            4,
+            536870912
+          ],
+          [
+            1073873792,
+            4,
+            805306368
+          ],
+          [
+            1073873732,
+            4,
+            0
+          ],
+          [
+            1073873752,
+            4,
+            0
+          ],
+          [
+            1073873740,
+            4,
+            201326592
+          ],
+          [
+            1073873792,
+            4,
+            268435456
+          ],
+          [
+            1073873792,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873032,
+            4,
+            0
+          ]
+        ],
+        "words": {
+          "20000144": 7,
+          "2000014c": 6,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "11111111a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "dev-power-on",
+      "input": {
+        "name": "dev-power-on",
+        "stimulus": 3,
+        "option": 1,
+        "arg": 128,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073872964,
+            4,
+            0
+          ],
+          [
+            1073872972,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            14
+          ],
+          [
+            1073873032,
+            4,
+            6
+          ],
+          [
+            1073873792,
+            4,
+            536870912
+          ],
+          [
+            1073873792,
+            4,
+            805306368
+          ],
+          [
+            1073873732,
+            4,
+            0
+          ],
+          [
+            1073873752,
+            4,
+            0
+          ],
+          [
+            1073873740,
+            4,
+            201326592
+          ],
+          [
+            1073873792,
+            4,
+            268435456
+          ],
+          [
+            1073873792,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873032,
+            4,
+            0
+          ]
+        ],
+        "words": {
+          "20000144": 7,
+          "2000014c": 6,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "80000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "dev-power-lowbyte-zero",
+      "input": {
+        "name": "dev-power-lowbyte-zero",
+        "stimulus": 3,
+        "option": 256,
+        "arg": 128,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073872964,
+            4,
+            0
+          ],
+          [
+            1073872972,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            14
+          ],
+          [
+            1073873032,
+            4,
+            6
+          ],
+          [
+            1073873792,
+            4,
+            536870912
+          ],
+          [
+            1073873792,
+            4,
+            805306368
+          ],
+          [
+            1073873732,
+            4,
+            0
+          ],
+          [
+            1073873752,
+            4,
+            0
+          ],
+          [
+            1073873740,
+            4,
+            201326592
+          ],
+          [
+            1073873792,
+            4,
+            268435456
+          ],
+          [
+            1073873792,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873032,
+            4,
+            0
+          ]
+        ],
+        "words": {
+          "20000144": 7,
+          "2000014c": 6,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "80000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "audio-power-off-null",
+      "input": {
+        "name": "audio-power-off-null",
+        "stimulus": 4,
+        "option": 0,
+        "arg": 286331153,
+        "null_args": true,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 0
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073872964,
+            4,
+            0
+          ],
+          [
+            1073872972,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            14
+          ],
+          [
+            1073873032,
+            4,
+            6
+          ],
+          [
+            1073873792,
+            4,
+            536870912
+          ],
+          [
+            1073873792,
+            4,
+            805306368
+          ],
+          [
+            1073873732,
+            4,
+            0
+          ],
+          [
+            1073873752,
+            4,
+            0
+          ],
+          [
+            1073873740,
+            4,
+            201326592
+          ],
+          [
+            1073873792,
+            4,
+            268435456
+          ],
+          [
+            1073873792,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873032,
+            4,
+            0
+          ]
+        ],
+        "words": {
+          "20000144": 7,
+          "2000014c": 6,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "11111111a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "audio-power-on",
+      "input": {
+        "name": "audio-power-on",
+        "stimulus": 4,
+        "option": 1,
+        "arg": 68,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073872964,
+            4,
+            0
+          ],
+          [
+            1073872972,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            14
+          ],
+          [
+            1073873032,
+            4,
+            6
+          ],
+          [
+            1073873792,
+            4,
+            536870912
+          ],
+          [
+            1073873792,
+            4,
+            805306368
+          ],
+          [
+            1073873732,
+            4,
+            0
+          ],
+          [
+            1073873752,
+            4,
+            0
+          ],
+          [
+            1073873740,
+            4,
+            201326592
+          ],
+          [
+            1073873792,
+            4,
+            268435456
+          ],
+          [
+            1073873792,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873032,
+            4,
+            0
+          ]
+        ],
+        "words": {
+          "20000144": 7,
+          "2000014c": 6,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "44000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "memory-null",
+      "input": {
+        "name": "memory-null",
+        "stimulus": 5,
+        "option": 0,
+        "arg": 286331153,
+        "null_args": true,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 0
+      },
+      "result": {
+        "status": 6,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "11111111a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "memory-replace",
+      "input": {
+        "name": "memory-replace",
+        "stimulus": 5,
+        "option": 0,
+        "arg": 3735928559,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073872964,
+            4,
+            0
+          ],
+          [
+            1073872972,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            14
+          ],
+          [
+            1073873032,
+            4,
+            6
+          ],
+          [
+            1073873792,
+            4,
+            536870912
+          ],
+          [
+            1073873792,
+            4,
+            805306368
+          ],
+          [
+            1073873732,
+            4,
+            0
+          ],
+          [
+            1073873752,
+            4,
+            0
+          ],
+          [
+            1073873740,
+            4,
+            201326592
+          ],
+          [
+            1073873792,
+            4,
+            268435456
+          ],
+          [
+            1073873792,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873032,
+            4,
+            0
+          ]
+        ],
+        "words": {
+          "20000144": 7,
+          "2000014c": 6,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "efbeaddea4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "ssram-off-null",
+      "input": {
+        "name": "ssram-off-null",
+        "stimulus": 6,
+        "option": 0,
+        "arg": 286331153,
+        "null_args": true,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 0
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073872964,
+            4,
+            0
+          ],
+          [
+            1073872972,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            14
+          ],
+          [
+            1073873032,
+            4,
+            6
+          ],
+          [
+            1073873792,
+            4,
+            536870912
+          ],
+          [
+            1073873792,
+            4,
+            805306368
+          ],
+          [
+            1073873732,
+            4,
+            0
+          ],
+          [
+            1073873752,
+            4,
+            0
+          ],
+          [
+            1073873740,
+            4,
+            201326592
+          ],
+          [
+            1073873792,
+            4,
+            268435456
+          ],
+          [
+            1073873792,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873032,
+            4,
+            0
+          ]
+        ],
+        "words": {
+          "20000144": 7,
+          "2000014c": 6,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "11111111a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "ssram-on-null",
+      "input": {
+        "name": "ssram-on-null",
+        "stimulus": 6,
+        "option": 1,
+        "arg": 286331153,
+        "null_args": true,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 0
+      },
+      "result": {
+        "status": 6,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "11111111a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "ssram-on",
+      "input": {
+        "name": "ssram-on",
+        "stimulus": 6,
+        "option": 1,
+        "arg": 51966,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073872964,
+            4,
+            0
+          ],
+          [
+            1073872972,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            14
+          ],
+          [
+            1073873032,
+            4,
+            6
+          ],
+          [
+            1073873792,
+            4,
+            536870912
+          ],
+          [
+            1073873792,
+            4,
+            805306368
+          ],
+          [
+            1073873732,
+            4,
+            0
+          ],
+          [
+            1073873752,
+            4,
+            0
+          ],
+          [
+            1073873740,
+            4,
+            201326592
+          ],
+          [
+            1073873792,
+            4,
+            268435456
+          ],
+          [
+            1073873792,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873032,
+            4,
+            0
+          ]
+        ],
+        "words": {
+          "20000144": 7,
+          "2000014c": 6,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "feca0000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "bad-stimulus",
+      "input": {
+        "name": "bad-stimulus",
+        "stimulus": 7,
+        "option": 0,
+        "arg": 286331153,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 6,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "11111111a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "decode-error",
+      "input": {
+        "name": "decode-error",
+        "stimulus": 1,
+        "option": 0,
+        "arg": 286331153,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 5,
+        "decode_major": 99,
+        "decode_minor": 101,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073872964,
+            4,
+            0
+          ],
+          [
+            1073872972,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            14
+          ],
+          [
+            1073873032,
+            4,
+            6
+          ],
+          [
+            1073873792,
+            4,
+            536870912
+          ],
+          [
+            1073873792,
+            4,
+            805306368
+          ],
+          [
+            1073873732,
+            4,
+            0
+          ],
+          [
+            1073873752,
+            4,
+            0
+          ],
+          [
+            1073873740,
+            4,
+            201326592
+          ],
+          [
+            1073873792,
+            4,
+            268435456
+          ],
+          [
+            1073873792,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873032,
+            4,
+            0
+          ]
+        ],
+        "words": {
+          "20000144": 7,
+          "2000014c": 6,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "11111111a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "major-12-to-13",
+      "input": {
+        "name": "major-12-to-13",
+        "stimulus": 1,
+        "option": 0,
+        "arg": 286331153,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 12,
+        "minor": 3,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 13,
+        "decode_minor": 4,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073872964,
+            4,
+            0
+          ],
+          [
+            1073872972,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            14
+          ],
+          [
+            1073873032,
+            4,
+            6
+          ],
+          [
+            1073873792,
+            4,
+            536870912
+          ],
+          [
+            1073873792,
+            4,
+            805306368
+          ],
+          [
+            1073873732,
+            4,
+            0
+          ],
+          [
+            1073873752,
+            4,
+            0
+          ],
+          [
+            1073873740,
+            4,
+            201326592
+          ],
+          [
+            1073873792,
+            4,
+            268435456
+          ],
+          [
+            1073873792,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873032,
+            4,
+            0
+          ]
+        ],
+        "words": {
+          "20000144": 7,
+          "2000014c": 6,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "11111111a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "major-8-to-11",
+      "input": {
+        "name": "major-8-to-11",
+        "stimulus": 1,
+        "option": 0,
+        "arg": 286331153,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 8,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 11,
+        "decode_minor": 5,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073872964,
+            4,
+            0
+          ],
+          [
+            1073872972,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            14
+          ],
+          [
+            1073873032,
+            4,
+            6
+          ],
+          [
+            1073873792,
+            4,
+            536870912
+          ],
+          [
+            1073873792,
+            4,
+            805306368
+          ],
+          [
+            1073873732,
+            4,
+            0
+          ],
+          [
+            1073873752,
+            4,
+            0
+          ],
+          [
+            1073873740,
+            4,
+            201326592
+          ],
+          [
+            1073873792,
+            4,
+            268435456
+          ],
+          [
+            1073873792,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873032,
+            4,
+            0
+          ]
+        ],
+        "words": {
+          "20000144": 7,
+          "2000014c": 6,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "11111111a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "major-outside-transition",
+      "input": {
+        "name": "major-outside-transition",
+        "stimulus": 1,
+        "option": 0,
+        "arg": 286331153,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 12,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 16,
+        "decode_minor": 1,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073872964,
+            4,
+            0
+          ],
+          [
+            1073872972,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            14
+          ],
+          [
+            1073873032,
+            4,
+            6
+          ],
+          [
+            1073873792,
+            4,
+            536870912
+          ],
+          [
+            1073873792,
+            4,
+            805306368
+          ],
+          [
+            1073873732,
+            4,
+            0
+          ],
+          [
+            1073873752,
+            4,
+            0
+          ],
+          [
+            1073873740,
+            4,
+            201326592
+          ],
+          [
+            1073873792,
+            4,
+            268435456
+          ],
+          [
+            1073873792,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873032,
+            4,
+            0
+          ]
+        ],
+        "words": {
+          "20000144": 7,
+          "2000014c": 6,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "11111111a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "state-high-input-byte",
+      "input": {
+        "name": "state-high-input-byte",
+        "stimulus": 256,
+        "option": 0,
+        "arg": 0,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 1,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "scan_gate": 0,
+        "scan_enable": 0,
+        "scan_mode": 0,
+        "scan_active": 0,
+        "scan_channels": {},
+        "scan_result": 165,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "decoder_config": 0,
+        "decoder_hw": 0,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "rom_boundary_note": "Only absent ROM40 wait controlled; direct child code executes",
+        "mmio": [
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073872964,
+            4,
+            0
+          ],
+          [
+            1073872972,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            14
+          ],
+          [
+            1073873032,
+            4,
+            6
+          ],
+          [
+            1073873792,
+            4,
+            536870912
+          ],
+          [
+            1073873792,
+            4,
+            805306368
+          ],
+          [
+            1073873732,
+            4,
+            0
+          ],
+          [
+            1073873752,
+            4,
+            0
+          ],
+          [
+            1073873740,
+            4,
+            201326592
+          ],
+          [
+            1073873792,
+            4,
+            268435456
+          ],
+          [
+            1073873792,
+            4,
+            0
+          ],
+          [
+            1073873024,
+            4,
+            0
+          ],
+          [
+            1073873032,
+            4,
+            0
+          ],
+          [
+            1073873788,
+            4,
+            2768240640
+          ],
+          [
+            1073873788,
+            4,
+            2768240640
+          ],
+          [
+            1073873788,
+            4,
+            2768240640
+          ]
+        ],
+        "words": {
+          "20000144": 7,
+          "2000014c": 6,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00",
+          "200271c0": "a5"
+        },
+        "args": "00000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    }
+  ],
+  "limits": [
+    "174 bytes of the transition child were not visited by its 30 direct fixtures; see transition-comparison.json for exact gaps.",
+    "Source-side executes only compiled C/provider/critical-save source ELF; no locked instruction bytes are injected.",
+    "Cortex-M33 offline emulation is not physical Apollo510 hardware or full firmware source/build equivalence."
+  ]
+}

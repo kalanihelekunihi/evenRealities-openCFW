@@ -1,0 +1,3067 @@
+{
+  "status": "PASS",
+  "image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_elf_sha256": "a1a9559098a783a09415657a242a919a3f277b96c82da49414dd5eb2a593cd12",
+  "cases": 39,
+  "stock_body": {
+    "start": "0x42ba00",
+    "end_exclusive": "0x42bd8c",
+    "extent_bytes": 908,
+    "visited_original_bytes": 782,
+    "unvisited_bytes": 126,
+    "unvisited_addresses": [
+      "0x42baba",
+      "0x42babb",
+      "0x42babc",
+      "0x42babd",
+      "0x42babe",
+      "0x42babf",
+      "0x42bac0",
+      "0x42bac1",
+      "0x42bac2",
+      "0x42bac3",
+      "0x42bac4",
+      "0x42bac5",
+      "0x42bac6",
+      "0x42bac7",
+      "0x42bad0",
+      "0x42bad1",
+      "0x42bad2",
+      "0x42bad3",
+      "0x42bb20",
+      "0x42bb21",
+      "0x42bb38",
+      "0x42bb39",
+      "0x42bb86",
+      "0x42bb87",
+      "0x42bb88",
+      "0x42bb89",
+      "0x42bb8a",
+      "0x42bb8b",
+      "0x42bb8c",
+      "0x42bb8d",
+      "0x42bb98",
+      "0x42bb99",
+      "0x42bb9a",
+      "0x42bb9b",
+      "0x42bb9c",
+      "0x42bb9d",
+      "0x42bb9e",
+      "0x42bb9f",
+      "0x42bba0",
+      "0x42bba1",
+      "0x42bba2",
+      "0x42bba3",
+      "0x42bba4",
+      "0x42bba5",
+      "0x42bba6",
+      "0x42bba7",
+      "0x42bba8",
+      "0x42bba9",
+      "0x42bbaa",
+      "0x42bbab",
+      "0x42bbac",
+      "0x42bbad",
+      "0x42bbae",
+      "0x42bbaf",
+      "0x42bbb0",
+      "0x42bbb1",
+      "0x42bbb2",
+      "0x42bbb3",
+      "0x42bbb4",
+      "0x42bbb5",
+      "0x42bbb6",
+      "0x42bbb7",
+      "0x42bbb8",
+      "0x42bbb9",
+      "0x42bbba",
+      "0x42bbbb",
+      "0x42bbca",
+      "0x42bbcb",
+      "0x42bbcc",
+      "0x42bbcd",
+      "0x42bbce",
+      "0x42bbcf",
+      "0x42bbd0",
+      "0x42bbd1",
+      "0x42bbd2",
+      "0x42bbd3",
+      "0x42bbd4",
+      "0x42bbd5",
+      "0x42bbd6",
+      "0x42bbd7",
+      "0x42bbd8",
+      "0x42bbd9",
+      "0x42bbda",
+      "0x42bbdb",
+      "0x42bbdc",
+      "0x42bbdd",
+      "0x42bbde",
+      "0x42bbdf",
+      "0x42bbe0",
+      "0x42bbe1",
+      "0x42bbe2",
+      "0x42bbe3",
+      "0x42bc16",
+      "0x42bc17",
+      "0x42bc18",
+      "0x42bc19",
+      "0x42bc1a",
+      "0x42bc1b",
+      "0x42bc1c",
+      "0x42bc1d",
+      "0x42bc1e",
+      "0x42bc1f",
+      "0x42bc20",
+      "0x42bc21",
+      "0x42bc22",
+      "0x42bc23",
+      "0x42bc24",
+      "0x42bc25",
+      "0x42bc8c",
+      "0x42bc8d",
+      "0x42bc8e",
+      "0x42bc8f",
+      "0x42bc90",
+      "0x42bc91",
+      "0x42bc92",
+      "0x42bc93",
+      "0x42bc94",
+      "0x42bc95",
+      "0x42bc96",
+      "0x42bc97",
+      "0x42bc98",
+      "0x42bc99",
+      "0x42bc9a",
+      "0x42bc9b",
+      "0x42bc9c",
+      "0x42bc9d"
+    ]
+  },
+  "source_machine": {
+    "loaded_locked_image": false,
+    "source_code_bytes_visited": 1200
+  },
+  "lower_cuts": [
+    "0x42ad40 temperature range",
+    "0x42aef0 buck/deep-sleep scan",
+    "0x42b014 transition effect",
+    "0x42b294 state transition",
+    "0x42b6b8 state decode"
+  ],
+  "critical_save": "source-side compiled opencfw_boot_control_critical_save from platform_control/critical_save.S; stock 0x41b8ec executes in stock machine",
+  "comparisons": [
+    {
+      "case": "clock-gate-off",
+      "input": {
+        "name": "clock-gate-off",
+        "stimulus": 1,
+        "option": 0,
+        "arg": 286331153,
+        "null_args": false,
+        "gate": 0,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "calls": [],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "11111111a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "profile-marker-mismatch",
+      "input": {
+        "name": "profile-marker-mismatch",
+        "stimulus": 1,
+        "option": 0,
+        "arg": 286331153,
+        "null_args": false,
+        "gate": 48,
+        "marker": 0,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 1,
+        "calls": [],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 0,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "11111111a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "state-null",
+      "input": {
+        "name": "state-null",
+        "stimulus": 0,
+        "option": 0,
+        "arg": 286331153,
+        "null_args": true,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 0
+      },
+      "result": {
+        "status": 6,
+        "calls": [],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "11111111a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "state-0-to-1",
+      "input": {
+        "name": "state-0-to-1",
+        "stimulus": 0,
+        "option": 0,
+        "arg": 1,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 8,
+        "decode_minor": 1,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "calls": [
+          {
+            "kind": 4,
+            "args": [
+              536870912,
+              0,
+              305419896,
+              2882400000,
+              0,
+              8,
+              1
+            ]
+          },
+          {
+            "kind": 5,
+            "args": [
+              8,
+              4,
+              1,
+              2
+            ]
+          }
+        ],
+        "mmio": [],
+        "words": {
+          "20000144": 8,
+          "2000014c": 1,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "01",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "01000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "state-1-to-0-deferred",
+      "input": {
+        "name": "state-1-to-0-deferred",
+        "stimulus": 0,
+        "option": 0,
+        "arg": 0,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 1,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 12,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 13,
+        "decode_minor": 3,
+        "primask": 1,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "calls": [
+          {
+            "kind": 4,
+            "args": [
+              536870912,
+              0,
+              305419896,
+              2882400000,
+              0,
+              13,
+              3
+            ]
+          },
+          {
+            "kind": 5,
+            "args": [
+              13,
+              12,
+              3,
+              2
+            ]
+          },
+          {
+            "kind": 3,
+            "args": [
+              0,
+              1
+            ]
+          }
+        ],
+        "mmio": [
+          [
+            1073873788,
+            4,
+            2768240640
+          ],
+          [
+            1073873788,
+            4,
+            2768240640
+          ],
+          [
+            1073873788,
+            4,
+            2768240640
+          ],
+          [
+            1073873788,
+            4,
+            2768240704
+          ],
+          [
+            1073873788,
+            4,
+            2768240712
+          ]
+        ],
+        "words": {
+          "20000144": 13,
+          "2000014c": 3,
+          "20026ba0": 520183821,
+          "4002037c": 2768240712,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "00000000a4a3a2a1b4b3b2b1",
+        "primask": 1
+      }
+    },
+    {
+      "case": "state-0-to-2-scan",
+      "input": {
+        "name": "state-0-to-2-scan",
+        "stimulus": 0,
+        "option": 0,
+        "arg": 2,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 8,
+        "minor": 1,
+        "snapshot": [
+          0,
+          256,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          32,
+          4,
+          16,
+          2048
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 9,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "calls": [
+          {
+            "kind": 2,
+            "args": [
+              0,
+              256,
+              305419896,
+              2882400000,
+              32,
+              260,
+              305419880,
+              2882397952
+            ]
+          },
+          {
+            "kind": 4,
+            "args": [
+              32,
+              260,
+              305419880,
+              2882397952,
+              0,
+              9,
+              2
+            ]
+          },
+          {
+            "kind": 5,
+            "args": [
+              9,
+              8,
+              2,
+              1
+            ]
+          }
+        ],
+        "mmio": [
+          [
+            1073873788,
+            4,
+            2768240704
+          ],
+          [
+            1073873788,
+            4,
+            2768240712
+          ]
+        ],
+        "words": {
+          "20000144": 9,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240712,
+          "40021008": 0,
+          "40021010": 256,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "02",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "02000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "state-other-pair-skip-decode",
+      "input": {
+        "name": "state-other-pair-skip-decode",
+        "stimulus": 0,
+        "option": 0,
+        "arg": 3,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 2,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 11,
+        "decode_minor": 5,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "calls": [
+          {
+            "kind": 3,
+            "args": [
+              3,
+              2
+            ]
+          }
+        ],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "03",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "03000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "state-equal-no-effect",
+      "input": {
+        "name": "state-equal-no-effect",
+        "stimulus": 0,
+        "option": 0,
+        "arg": 2,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 2,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "calls": [
+          {
+            "kind": 4,
+            "args": [
+              536870912,
+              0,
+              305419896,
+              2882400000,
+              0,
+              4,
+              2
+            ]
+          }
+        ],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "02",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "02000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "state-shortcut-2-0",
+      "input": {
+        "name": "state-shortcut-2-0",
+        "stimulus": 0,
+        "option": 0,
+        "arg": 0,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 2,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "calls": [],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "00000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "state-shortcut-2-1",
+      "input": {
+        "name": "state-shortcut-2-1",
+        "stimulus": 0,
+        "option": 0,
+        "arg": 1,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 2,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "calls": [],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "01",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "01000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "state-shortcut-3-0",
+      "input": {
+        "name": "state-shortcut-3-0",
+        "stimulus": 0,
+        "option": 0,
+        "arg": 0,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 3,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "calls": [],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "00000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "state-shortcut-3-1",
+      "input": {
+        "name": "state-shortcut-3-1",
+        "stimulus": 0,
+        "option": 0,
+        "arg": 1,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 3,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "calls": [],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "01",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "01000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "state-shortcut-4-0",
+      "input": {
+        "name": "state-shortcut-4-0",
+        "stimulus": 0,
+        "option": 0,
+        "arg": 0,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 4,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "calls": [],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "00000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "state-shortcut-4-1",
+      "input": {
+        "name": "state-shortcut-4-1",
+        "stimulus": 0,
+        "option": 0,
+        "arg": 1,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 4,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "calls": [],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "01",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "01000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "system-state-null",
+      "input": {
+        "name": "system-state-null",
+        "stimulus": 1,
+        "option": 0,
+        "arg": 286331153,
+        "null_args": true,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 0
+      },
+      "result": {
+        "status": 6,
+        "calls": [],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "11111111a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "system-state",
+      "input": {
+        "name": "system-state",
+        "stimulus": 1,
+        "option": 0,
+        "arg": 3,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "calls": [
+          {
+            "kind": 4,
+            "args": [
+              536870912,
+              0,
+              305419896,
+              2882400000,
+              0,
+              4,
+              2
+            ]
+          }
+        ],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "03000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "temperature-null",
+      "input": {
+        "name": "temperature-null",
+        "stimulus": 2,
+        "option": 0,
+        "arg": 286331153,
+        "null_args": true,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 0
+      },
+      "result": {
+        "status": 6,
+        "calls": [],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "11111111a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "temperature-category-0",
+      "input": {
+        "name": "temperature-category-0",
+        "stimulus": 2,
+        "option": 0,
+        "arg": 1103626240,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 0,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "calls": [
+          {
+            "kind": 1,
+            "args": [
+              1103626240
+            ]
+          },
+          {
+            "kind": 4,
+            "args": [
+              536870912,
+              0,
+              305419896,
+              2882400000,
+              0,
+              4,
+              2
+            ]
+          }
+        ],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "02",
+          "200271bb": "00",
+          "20000553": "01",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "0000c841000000c000004842",
+        "primask": 0
+      }
+    },
+    {
+      "case": "temperature-category-1",
+      "input": {
+        "name": "temperature-category-1",
+        "stimulus": 2,
+        "option": 0,
+        "arg": 1103626240,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 1,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "calls": [
+          {
+            "kind": 1,
+            "args": [
+              1103626240
+            ]
+          },
+          {
+            "kind": 4,
+            "args": [
+              536870912,
+              0,
+              305419896,
+              2882400000,
+              0,
+              4,
+              2
+            ]
+          }
+        ],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "02",
+          "200271bb": "00",
+          "20000553": "01",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "0000c841000000c000004842",
+        "primask": 0
+      }
+    },
+    {
+      "case": "temperature-category-2",
+      "input": {
+        "name": "temperature-category-2",
+        "stimulus": 2,
+        "option": 0,
+        "arg": 1103626240,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "calls": [
+          {
+            "kind": 1,
+            "args": [
+              1103626240
+            ]
+          },
+          {
+            "kind": 4,
+            "args": [
+              536870912,
+              0,
+              305419896,
+              2882400000,
+              0,
+              4,
+              2
+            ]
+          }
+        ],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "02",
+          "200271bb": "00",
+          "20000553": "01",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "0000c841000000c000004842",
+        "primask": 0
+      }
+    },
+    {
+      "case": "temperature-category-3",
+      "input": {
+        "name": "temperature-category-3",
+        "stimulus": 2,
+        "option": 0,
+        "arg": 1103626240,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 3,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "calls": [
+          {
+            "kind": 1,
+            "args": [
+              1103626240
+            ]
+          },
+          {
+            "kind": 4,
+            "args": [
+              536870912,
+              0,
+              305419896,
+              2882400000,
+              0,
+              4,
+              2
+            ]
+          }
+        ],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "02",
+          "200271bb": "00",
+          "20000553": "01",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "0000c841000000c000004842",
+        "primask": 0
+      }
+    },
+    {
+      "case": "temperature-category-4",
+      "input": {
+        "name": "temperature-category-4",
+        "stimulus": 2,
+        "option": 0,
+        "arg": 1103626240,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 4,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "calls": [
+          {
+            "kind": 1,
+            "args": [
+              1103626240
+            ]
+          },
+          {
+            "kind": 4,
+            "args": [
+              536870912,
+              0,
+              305419896,
+              2882400000,
+              0,
+              4,
+              2
+            ]
+          }
+        ],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "02",
+          "200271bb": "00",
+          "20000553": "01",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "0000c841000000c000004842",
+        "primask": 0
+      }
+    },
+    {
+      "case": "temperature-category-5",
+      "input": {
+        "name": "temperature-category-5",
+        "stimulus": 2,
+        "option": 0,
+        "arg": 1103626240,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 5,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "calls": [
+          {
+            "kind": 1,
+            "args": [
+              1103626240
+            ]
+          },
+          {
+            "kind": 4,
+            "args": [
+              536870912,
+              0,
+              305419896,
+              2882400000,
+              0,
+              4,
+              2
+            ]
+          }
+        ],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "02",
+          "200271bb": "00",
+          "20000553": "01",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "0000c841000000c000004842",
+        "primask": 0
+      }
+    },
+    {
+      "case": "dev-power-off-null",
+      "input": {
+        "name": "dev-power-off-null",
+        "stimulus": 3,
+        "option": 0,
+        "arg": 286331153,
+        "null_args": true,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 0
+      },
+      "result": {
+        "status": 0,
+        "calls": [
+          {
+            "kind": 4,
+            "args": [
+              536870912,
+              0,
+              305419896,
+              2882400000,
+              0,
+              4,
+              2
+            ]
+          }
+        ],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "11111111a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "dev-power-on",
+      "input": {
+        "name": "dev-power-on",
+        "stimulus": 3,
+        "option": 1,
+        "arg": 128,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "calls": [
+          {
+            "kind": 4,
+            "args": [
+              536871040,
+              0,
+              305419896,
+              2882400000,
+              0,
+              4,
+              2
+            ]
+          }
+        ],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "80000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "dev-power-lowbyte-zero",
+      "input": {
+        "name": "dev-power-lowbyte-zero",
+        "stimulus": 3,
+        "option": 256,
+        "arg": 128,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "calls": [
+          {
+            "kind": 4,
+            "args": [
+              536870912,
+              0,
+              305419896,
+              2882400000,
+              0,
+              4,
+              2
+            ]
+          }
+        ],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "80000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "audio-power-off-null",
+      "input": {
+        "name": "audio-power-off-null",
+        "stimulus": 4,
+        "option": 0,
+        "arg": 286331153,
+        "null_args": true,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 0
+      },
+      "result": {
+        "status": 0,
+        "calls": [
+          {
+            "kind": 4,
+            "args": [
+              536870912,
+              0,
+              305419896,
+              2882400000,
+              0,
+              4,
+              2
+            ]
+          }
+        ],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "11111111a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "audio-power-on",
+      "input": {
+        "name": "audio-power-on",
+        "stimulus": 4,
+        "option": 1,
+        "arg": 68,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "calls": [
+          {
+            "kind": 4,
+            "args": [
+              536870912,
+              68,
+              305419896,
+              2882400000,
+              0,
+              4,
+              2
+            ]
+          }
+        ],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "44000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "memory-null",
+      "input": {
+        "name": "memory-null",
+        "stimulus": 5,
+        "option": 0,
+        "arg": 286331153,
+        "null_args": true,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 0
+      },
+      "result": {
+        "status": 6,
+        "calls": [],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "11111111a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "memory-replace",
+      "input": {
+        "name": "memory-replace",
+        "stimulus": 5,
+        "option": 0,
+        "arg": 3735928559,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "calls": [
+          {
+            "kind": 4,
+            "args": [
+              536870912,
+              0,
+              3735928559,
+              2882400000,
+              0,
+              4,
+              2
+            ]
+          }
+        ],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "efbeaddea4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "ssram-off-null",
+      "input": {
+        "name": "ssram-off-null",
+        "stimulus": 6,
+        "option": 0,
+        "arg": 286331153,
+        "null_args": true,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 0
+      },
+      "result": {
+        "status": 0,
+        "calls": [
+          {
+            "kind": 4,
+            "args": [
+              536870912,
+              0,
+              305419896,
+              2882400000,
+              0,
+              4,
+              2
+            ]
+          }
+        ],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "11111111a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "ssram-on-null",
+      "input": {
+        "name": "ssram-on-null",
+        "stimulus": 6,
+        "option": 1,
+        "arg": 286331153,
+        "null_args": true,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 0
+      },
+      "result": {
+        "status": 6,
+        "calls": [],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "11111111a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "ssram-on",
+      "input": {
+        "name": "ssram-on",
+        "stimulus": 6,
+        "option": 1,
+        "arg": 51966,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "calls": [
+          {
+            "kind": 4,
+            "args": [
+              536870912,
+              0,
+              305419896,
+              51966,
+              0,
+              4,
+              2
+            ]
+          }
+        ],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "feca0000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "bad-stimulus",
+      "input": {
+        "name": "bad-stimulus",
+        "stimulus": 7,
+        "option": 0,
+        "arg": 286331153,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 6,
+        "calls": [],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "11111111a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "decode-error",
+      "input": {
+        "name": "decode-error",
+        "stimulus": 1,
+        "option": 0,
+        "arg": 286331153,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 5,
+        "decode_major": 99,
+        "decode_minor": 101,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 5,
+        "calls": [
+          {
+            "kind": 4,
+            "args": [
+              536870912,
+              0,
+              305419896,
+              2882400000,
+              5,
+              99,
+              101
+            ]
+          }
+        ],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "11111111a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "major-12-to-13",
+      "input": {
+        "name": "major-12-to-13",
+        "stimulus": 1,
+        "option": 0,
+        "arg": 286331153,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 12,
+        "minor": 3,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 13,
+        "decode_minor": 4,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "calls": [
+          {
+            "kind": 4,
+            "args": [
+              536870912,
+              0,
+              305419896,
+              2882400000,
+              0,
+              13,
+              4
+            ]
+          },
+          {
+            "kind": 5,
+            "args": [
+              13,
+              12,
+              4,
+              3
+            ]
+          }
+        ],
+        "mmio": [
+          [
+            1073873788,
+            4,
+            2768240704
+          ],
+          [
+            1073873788,
+            4,
+            2768240712
+          ]
+        ],
+        "words": {
+          "20000144": 13,
+          "2000014c": 4,
+          "20026ba0": 520183821,
+          "4002037c": 2768240712,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "11111111a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "major-8-to-11",
+      "input": {
+        "name": "major-8-to-11",
+        "stimulus": 1,
+        "option": 0,
+        "arg": 286331153,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 8,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 11,
+        "decode_minor": 5,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "calls": [
+          {
+            "kind": 4,
+            "args": [
+              536870912,
+              0,
+              305419896,
+              2882400000,
+              0,
+              11,
+              5
+            ]
+          },
+          {
+            "kind": 5,
+            "args": [
+              11,
+              8,
+              5,
+              2
+            ]
+          }
+        ],
+        "mmio": [
+          [
+            1073873788,
+            4,
+            2768240704
+          ],
+          [
+            1073873788,
+            4,
+            2768240712
+          ]
+        ],
+        "words": {
+          "20000144": 11,
+          "2000014c": 5,
+          "20026ba0": 520183821,
+          "4002037c": 2768240712,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "11111111a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "major-outside-transition",
+      "input": {
+        "name": "major-outside-transition",
+        "stimulus": 1,
+        "option": 0,
+        "arg": 286331153,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 0,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 12,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 16,
+        "decode_minor": 1,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "calls": [
+          {
+            "kind": 4,
+            "args": [
+              536870912,
+              0,
+              305419896,
+              2882400000,
+              0,
+              16,
+              1
+            ]
+          },
+          {
+            "kind": 5,
+            "args": [
+              16,
+              12,
+              1,
+              2
+            ]
+          }
+        ],
+        "mmio": [],
+        "words": {
+          "20000144": 16,
+          "2000014c": 1,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "00",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "11111111a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    },
+    {
+      "case": "state-high-input-byte",
+      "input": {
+        "name": "state-high-input-byte",
+        "stimulus": 256,
+        "option": 0,
+        "arg": 0,
+        "null_args": false,
+        "gate": 48,
+        "marker": 520183821,
+        "current": 1,
+        "temp_category": 0,
+        "aux_byte": 0,
+        "mode_byte": 1,
+        "major": 4,
+        "minor": 2,
+        "snapshot": [
+          536870912,
+          0,
+          305419896,
+          2882400000
+        ],
+        "scan_xor": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "temp_result": 2,
+        "decode_status": 0,
+        "decode_major": 4,
+        "decode_minor": 2,
+        "primask": 0,
+        "args": 536875008
+      },
+      "result": {
+        "status": 0,
+        "calls": [
+          {
+            "kind": 4,
+            "args": [
+              536870912,
+              0,
+              305419896,
+              2882400000,
+              0,
+              4,
+              2
+            ]
+          }
+        ],
+        "mmio": [],
+        "words": {
+          "20000144": 4,
+          "2000014c": 2,
+          "20026ba0": 520183821,
+          "4002037c": 2768240640,
+          "40021008": 536870912,
+          "40021010": 0,
+          "40021018": 305419896,
+          "40021028": 2882400000
+        },
+        "bytes": {
+          "200271ba": "00",
+          "200271bb": "01",
+          "20000553": "a5",
+          "200271af": "00",
+          "2002708c": "01",
+          "200271b0": "a7",
+          "200271b2": "00"
+        },
+        "args": "00000000a4a3a2a1b4b3b2b1",
+        "primask": 0
+      }
+    }
+  ],
+  "limits": [
+    "Five child contracts are synthetic explicit cuts; this pass validates parent control flow and call ABI, not child implementations.",
+    "Source-side executes only compiled C/provider/critical-save source ELF; no locked instruction bytes are injected.",
+    "Cortex-M33 offline emulation is not physical Apollo510 hardware or full firmware source/build equivalence."
+  ]
+}

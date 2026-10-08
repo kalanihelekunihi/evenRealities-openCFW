@@ -1,0 +1,111 @@
+{
+  "status": "PASS_CONTROLLED_DESCRIPTOR_INTERLEAVING",
+  "elf_sha256": "eda59289afb08947773a6b7ba1d40b59985926cb4dd1d7042a4100cfd1740ea1",
+  "comparisons": [
+    {
+      "injected": false,
+      "result": {
+        "partial_descriptor": [
+          536883200,
+          16,
+          5
+        ],
+        "final_descriptor": [
+          536883200,
+          2,
+          0
+        ],
+        "new_buffer": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "guard_bytes_changed": 0,
+        "old_buffer": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "trace": [],
+        "sp": 536903680,
+        "primask": 0
+      }
+    },
+    {
+      "injected": true,
+      "result": {
+        "partial_descriptor": [
+          536883200,
+          16,
+          5
+        ],
+        "final_descriptor": [
+          536883208,
+          2,
+          0
+        ],
+        "new_buffer": "4041424344454647cccccccccccccccccccccccccccccccccccccccccccccccc",
+        "guard_bytes_changed": 6,
+        "old_buffer": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "trace": [
+          [
+            "pop",
+            64
+          ],
+          [
+            "pop",
+            65
+          ],
+          [
+            "pop",
+            66
+          ],
+          [
+            "pop",
+            67
+          ],
+          [
+            "pop",
+            68
+          ],
+          [
+            "pop",
+            69
+          ],
+          [
+            "pop",
+            70
+          ],
+          [
+            "pop",
+            71
+          ],
+          [
+            "write",
+            96,
+            4,
+            32768
+          ],
+          [
+            "write",
+            4040,
+            4,
+            0
+          ],
+          [
+            "write",
+            772,
+            4,
+            7
+          ],
+          [
+            "write",
+            4032,
+            4,
+            1
+          ]
+        ],
+        "sp": 536903680,
+        "primask": 0
+      }
+    }
+  ],
+  "limits": [
+    "Manually invoke IRQ function between pointer and size stores in the same guest RAM, then restore setter registers and resume. This is not a physical exception/preemption trace.",
+    "Both actual stock and public API/IRQ/helpers execute; no semantic helper stubs.",
+    "Model a future unprotected thread-side buffer swap: old16-element descriptor replaced with a2-element buffer. Existing stock initializer and event callback use static16-element buffers; no claim this corruption occurs in stock hardware.",
+    "Serialization must be supplied by caller, as public SDK documents. IRQ enabled/pending/priority, exception stacking, real FIFO timing and allocator lifetime not proven."
+  ]
+}

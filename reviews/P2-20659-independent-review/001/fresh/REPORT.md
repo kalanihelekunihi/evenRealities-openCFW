@@ -1,0 +1,1 @@
+Partial/unaccepted:48 bytes,twelve aligned little-endian literal words47A894..47A8C4. Every word has mapped PC-load consumers retained with raw instructions and component hash checks. Pointed-to ownership and whole corpus coverage unproven; no source/freeze changes.

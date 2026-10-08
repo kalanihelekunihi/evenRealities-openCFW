@@ -1,0 +1,38 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpf31cnf1k/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+004834fc <.text>:
+  4834fc:	f1b8 0f20 	cmp.w	r8, #32
+  483500:	d21c      	bcs.n	48353c <.text+0x40>
+  483502:	1e7f      	subs	r7, r7, #1
+  483504:	f05f 090a 	movs.w	r9, #10
+  483508:	fbb4 faf9 	udiv	sl, r4, r9
+  48350c:	fb09 491a 	mls	r9, r9, sl, r4
+  483510:	f119 0930 	adds.w	r9, r9, #48	@ 0x30
+  483514:	f10d 0a10 	add.w	sl, sp, #16
+  483518:	f80a 9008 	strb.w	r9, [sl, r8]
+  48351c:	f118 0801 	adds.w	r8, r8, #1
+  483520:	f05f 090a 	movs.w	r9, #10
+  483524:	fbb4 f4f9 	udiv	r4, r4, r9
+  483528:	2c00      	cmp	r4, #0
+  48352a:	d1e7      	bne.n	4834fc <.text>
+  48352c:	e006      	b.n	48353c <.text+0x40>
+  48352e:	2430      	movs	r4, #48	@ 0x30
+  483530:	f10d 0910 	add.w	r9, sp, #16
+  483534:	f809 4008 	strb.w	r4, [r9, r8]
+  483538:	f118 0801 	adds.w	r8, r8, #1
+  48353c:	f1b8 0f20 	cmp.w	r8, #32
+  483540:	d203      	bcs.n	48354a <.text+0x4e>
+  483542:	003c      	movs	r4, r7
+  483544:	1e67      	subs	r7, r4, #1
+  483546:	2c00      	cmp	r4, #0
+  483548:	d1f1      	bne.n	48352e <.text+0x32>
+  48354a:	f1b8 0f20 	cmp.w	r8, #32
+  48354e:	d205      	bcs.n	48355c <.text+0x60>
+  483550:	242e      	movs	r4, #46	@ 0x2e
+  483552:	af04      	add	r7, sp, #16
+  483554:	f807 4008 	strb.w	r4, [r7, r8]
+  483558:	f118 0801 	adds.w	r8, r8, #1

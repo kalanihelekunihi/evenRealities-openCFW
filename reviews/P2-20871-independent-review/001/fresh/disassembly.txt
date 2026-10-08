@@ -1,0 +1,52 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp28n9pjdu/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047d0da <.text>:
+  47d0da:	f7bf fff8 	bl	43d0ce <.text-0x4000c>
+  47d0de:	0780      	lsls	r0, r0, #30
+  47d0e0:	d50f      	bpl.n	47d102 <.text+0x28>
+  47d0e2:	79a8      	ldrb	r0, [r5, #6]
+  47d0e4:	9002      	str	r0, [sp, #8]
+  47d0e6:	f8df 0850 	ldr.w	r0, [pc, #2128]	@ 47d938 <.text+0x85e>
+  47d0ea:	9001      	str	r0, [sp, #4]
+  47d0ec:	2059      	movs	r0, #89	@ 0x59
+  47d0ee:	9000      	str	r0, [sp, #0]
+  47d0f0:	f8df 381c 	ldr.w	r3, [pc, #2076]	@ 47d910 <.text+0x836>
+  47d0f4:	f8df 281c 	ldr.w	r2, [pc, #2076]	@ 47d914 <.text+0x83a>
+  47d0f8:	f8df 181c 	ldr.w	r1, [pc, #2076]	@ 47d918 <.text+0x83e>
+  47d0fc:	2004      	movs	r0, #4
+  47d0fe:	f7c0 fa39 	bl	43d574 <.text-0x3fb66>
+  47d102:	f7bf ffe4 	bl	43d0ce <.text-0x4000c>
+  47d106:	07c0      	lsls	r0, r0, #31
+  47d108:	d403      	bmi.n	47d112 <.text+0x38>
+  47d10a:	f7bf ffe0 	bl	43d0ce <.text-0x4000c>
+  47d10e:	0740      	lsls	r0, r0, #29
+  47d110:	d507      	bpl.n	47d122 <.text+0x48>
+  47d112:	f8df 1828 	ldr.w	r1, [pc, #2088]	@ 47d93c <.text+0x862>
+  47d116:	79ab      	ldrb	r3, [r5, #6]
+  47d118:	000a      	movs	r2, r1
+  47d11a:	f05f 5082 	movs.w	r0, #272629760	@ 0x10400000
+  47d11e:	f7bf febe 	bl	43ce9e <.text-0x4023c>
+  47d122:	79a8      	ldrb	r0, [r5, #6]
+  47d124:	2801      	cmp	r0, #1
+  47d126:	d111      	bne.n	47d14c <.text+0x72>
+  47d128:	f8df 07d4 	ldr.w	r0, [pc, #2004]	@ 47d900 <.text+0x826>
+  47d12c:	7801      	ldrb	r1, [r0, #0]
+  47d12e:	f051 0101 	orrs.w	r1, r1, #1
+  47d132:	7001      	strb	r1, [r0, #0]
+  47d134:	f8df 5808 	ldr.w	r5, [pc, #2056]	@ 47d940 <.text+0x866>
+  47d138:	0028      	movs	r0, r5
+  47d13a:	f7f9 fcc8 	bl	476ace <.text-0x660c>
+  47d13e:	2200      	movs	r2, #0
+  47d140:	f44f 7181 	mov.w	r1, #258	@ 0x102
+  47d144:	0028      	movs	r0, r5
+  47d146:	f7f9 fc1a 	bl	47697e <.text-0x675c>
+  47d14a:	e04b      	b.n	47d1e4 <.text+0x10a>
+  47d14c:	f8df 07b0 	ldr.w	r0, [pc, #1968]	@ 47d900 <.text+0x826>
+  47d150:	7801      	ldrb	r1, [r0, #0]
+  47d152:	f011 01fe 	ands.w	r1, r1, #254	@ 0xfe
+  47d156:	7001      	strb	r1, [r0, #0]
+  47d158:	e044      	b.n	47d1e4 <.text+0x10a>

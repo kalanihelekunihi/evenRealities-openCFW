@@ -1,0 +1,182 @@
+[
+  {
+    "start": 4736328,
+    "end": 4736398,
+    "instructions": [
+      {
+        "address": 4736328,
+        "bytes": "70b5",
+        "mnemonic": "push",
+        "operands": "{r4, r5, r6, lr}"
+      },
+      {
+        "address": 4736330,
+        "bytes": "0026",
+        "mnemonic": "movs",
+        "operands": "r6, #0"
+      },
+      {
+        "address": 4736332,
+        "bytes": "0020",
+        "mnemonic": "movs",
+        "operands": "r0, #0"
+      },
+      {
+        "address": 4736334,
+        "bytes": "cbf768fa",
+        "mnemonic": "bl",
+        "operands": "44fa22 <.text-0x34b26>"
+      },
+      {
+        "address": 4736338,
+        "bytes": "0500",
+        "mnemonic": "movs",
+        "operands": "r5, r0"
+      },
+      {
+        "address": 4736340,
+        "bytes": "15e0",
+        "mnemonic": "b.n",
+        "operands": "484582 <.text+0x3a>"
+      },
+      {
+        "address": 4736342,
+        "bytes": "2100",
+        "mnemonic": "movs",
+        "operands": "r1, r4"
+      },
+      {
+        "address": 4736344,
+        "bytes": "2800",
+        "mnemonic": "movs",
+        "operands": "r0, r5"
+      },
+      {
+        "address": 4736346,
+        "bytes": "00f018f8",
+        "mnemonic": "bl",
+        "operands": "48458e <.text+0x46>"
+      },
+      {
+        "address": 4736350,
+        "bytes": "0028",
+        "mnemonic": "cmp",
+        "operands": "r0, #0"
+      },
+      {
+        "address": 4736352,
+        "bytes": "00d0",
+        "mnemonic": "beq.n",
+        "operands": "484564 <.text+0x1c>"
+      },
+      {
+        "address": 4736354,
+        "bytes": "0126",
+        "mnemonic": "movs",
+        "operands": "r6, #1"
+      },
+      {
+        "address": 4736356,
+        "bytes": "e46c",
+        "mnemonic": "ldr",
+        "operands": "r4, [r4, #76]\t@ 0x4c"
+      },
+      {
+        "address": 4736358,
+        "bytes": "002c",
+        "mnemonic": "cmp",
+        "operands": "r4, #0"
+      },
+      {
+        "address": 4736360,
+        "bytes": "f5d1",
+        "mnemonic": "bne.n",
+        "operands": "484556 <.text+0xe>"
+      },
+      {
+        "address": 4736362,
+        "bytes": "3000",
+        "mnemonic": "movs",
+        "operands": "r0, r6"
+      },
+      {
+        "address": 4736364,
+        "bytes": "c0b2",
+        "mnemonic": "uxtb",
+        "operands": "r0, r0"
+      },
+      {
+        "address": 4736366,
+        "bytes": "0028",
+        "mnemonic": "cmp",
+        "operands": "r0, #0"
+      },
+      {
+        "address": 4736368,
+        "bytes": "03d1",
+        "mnemonic": "bne.n",
+        "operands": "48457a <.text+0x32>"
+      },
+      {
+        "address": 4736370,
+        "bytes": "fff7d9ff",
+        "mnemonic": "bl",
+        "operands": "484528 <.text-0x20>"
+      },
+      {
+        "address": 4736374,
+        "bytes": "00f05af8",
+        "mnemonic": "bl",
+        "operands": "48462e <.text+0xe6>"
+      },
+      {
+        "address": 4736378,
+        "bytes": "2800",
+        "mnemonic": "movs",
+        "operands": "r0, r5"
+      },
+      {
+        "address": 4736380,
+        "bytes": "cbf751fa",
+        "mnemonic": "bl",
+        "operands": "44fa22 <.text-0x34b26>"
+      },
+      {
+        "address": 4736384,
+        "bytes": "0500",
+        "mnemonic": "movs",
+        "operands": "r5, r0"
+      },
+      {
+        "address": 4736386,
+        "bytes": "002d",
+        "mnemonic": "cmp",
+        "operands": "r5, #0"
+      },
+      {
+        "address": 4736388,
+        "bytes": "02d0",
+        "mnemonic": "beq.n",
+        "operands": "48458c <.text+0x44>"
+      },
+      {
+        "address": 4736390,
+        "bytes": "d5f8ac42",
+        "mnemonic": "ldr.w",
+        "operands": "r4, [r5, #684]\t@ 0x2ac"
+      },
+      {
+        "address": 4736394,
+        "bytes": "ece7",
+        "mnemonic": "b.n",
+        "operands": "484566 <.text+0x1e>"
+      },
+      {
+        "address": 4736396,
+        "bytes": "70bd",
+        "mnemonic": "pop",
+        "operands": "{r4, r5, r6, pc}"
+      }
+    ]
+  }
+]

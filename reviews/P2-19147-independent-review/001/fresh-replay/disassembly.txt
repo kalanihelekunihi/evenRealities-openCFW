@@ -1,0 +1,51 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp8r_dqdy5/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00469d24 <.text>:
+  469d24:	b510      	push	{r4, lr}
+  469d26:	f8df 4afc 	ldr.w	r4, [pc, #2812]	@ 46a824 <.text+0xb00>
+  469d2a:	2000      	movs	r0, #0
+  469d2c:	f8a4 0080 	strh.w	r0, [r4, #128]	@ 0x80
+  469d30:	2000      	movs	r0, #0
+  469d32:	f8a4 0082 	strh.w	r0, [r4, #130]	@ 0x82
+  469d36:	2000      	movs	r0, #0
+  469d38:	f8a4 0084 	strh.w	r0, [r4, #132]	@ 0x84
+  469d3c:	2180      	movs	r1, #128	@ 0x80
+  469d3e:	2200      	movs	r2, #0
+  469d40:	0020      	movs	r0, r4
+  469d42:	f7d2 f9cf 	bl	43c0e4 <.text-0x2dc40>
+  469d46:	bd10      	pop	{r4, pc}
+  469d48:	b518      	push	{r3, r4, lr}
+  469d4a:	b085      	sub	sp, #20
+  469d4c:	0014      	movs	r4, r2
+  469d4e:	2c05      	cmp	r4, #5
+  469d50:	d025      	beq.n	469d9e <.text+0x7a>
+  469d52:	f7d3 f9bc 	bl	43d0ce <.text-0x2cc56>
+  469d56:	0780      	lsls	r0, r0, #30
+  469d58:	d50e      	bpl.n	469d78 <.text+0x54>
+  469d5a:	9402      	str	r4, [sp, #8]
+  469d5c:	f8df 0ac8 	ldr.w	r0, [pc, #2760]	@ 46a828 <.text+0xb04>
+  469d60:	9001      	str	r0, [sp, #4]
+  469d62:	2093      	movs	r0, #147	@ 0x93
+  469d64:	9000      	str	r0, [sp, #0]
+  469d66:	f8df 3ac4 	ldr.w	r3, [pc, #2756]	@ 46a82c <.text+0xb08>
+  469d6a:	f8df 2ac4 	ldr.w	r2, [pc, #2756]	@ 46a830 <.text+0xb0c>
+  469d6e:	f8df 1ac4 	ldr.w	r1, [pc, #2756]	@ 46a834 <.text+0xb10>
+  469d72:	2002      	movs	r0, #2
+  469d74:	f7d3 fbfe 	bl	43d574 <.text-0x2c7b0>
+  469d78:	f7d3 f9a9 	bl	43d0ce <.text-0x2cc56>
+  469d7c:	07c0      	lsls	r0, r0, #31
+  469d7e:	d403      	bmi.n	469d88 <.text+0x64>
+  469d80:	f7d3 f9a5 	bl	43d0ce <.text-0x2cc56>
+  469d84:	0740      	lsls	r0, r0, #29
+  469d86:	d507      	bpl.n	469d98 <.text+0x74>
+  469d88:	f8df 1aac 	ldr.w	r1, [pc, #2732]	@ 46a838 <.text+0xb14>
+  469d8c:	0023      	movs	r3, r4
+  469d8e:	000a      	movs	r2, r1
+  469d90:	f05f 6004 	movs.w	r0, #138412032	@ 0x8400000
+  469d94:	f7d3 f883 	bl	43ce9e <.text-0x2ce86>
+  469d98:	f05f 30ff 	movs.w	r0, #4294967295	@ 0xffffffff
+  469d9c:	e03a      	b.n	469e14 <.text+0xf0>

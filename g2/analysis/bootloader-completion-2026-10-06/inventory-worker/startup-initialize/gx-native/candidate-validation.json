@@ -1,0 +1,45 @@
+{
+  "status": "PASS",
+  "role": "Standalone native SPOT PCM2.1 root/clock candidate, unpromoted",
+  "elf_sha256": "5797d0992aeb4f3bcfbe0610dcf53a5158ca5b79347bcefdaf7fa9918c79cfe6",
+  "main_checkpoint_unchanged": "129a6b2f38f145f33e791874f52d722fb1715d5fff5c957a285644312f34a6f9",
+  "linked_objects": 191,
+  "snapshot": "g2/build/bootloader-completion/startup-root-gx-native/5797d0992aeb4f3bcfbe0610dcf53a5158ca5b79347bcefdaf7fa9918c79cfe6",
+  "input_manifest_sha256": "dc8ca20fc98404d486133223dc8c9ca1d430933869b398f9efd7c16f26aff49a",
+  "receipts": [
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/gx-native/root-comparison.json",
+      "sha256": "fa0d40c88a9ff34f5e8f918917d284eaf7bafa745666fa5b25e44671321fb998"
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/gx-native/root-initialized-ranks.json",
+      "sha256": "80919d5c166aceb9c993b7da6aba248a3baae5655e6c8a6c2a783c28c9dc6bb5"
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/gx-native/children-comparison.json",
+      "sha256": "8ebbabd4e9144722ffec1cfa8755fc5af66e58f9326acee2a6ca1d0a103307c8"
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/gx-native/event-comparison.json",
+      "sha256": "492ef8cf6cdf8d506a1e6b8b4a2b86e7040cbe2bd27a92232b8ceedbb3f25148"
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/gx-native/transition-initialized-ranks.json",
+      "sha256": "d87c9adffdd5f3add832b54e431b335f9a8fb40cb5d5a6ef5d569a60f148fd68"
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/gx-native/scatter-selector-table.json",
+      "sha256": "aa42bddd61880e84f4a79b4bdd886a8f4f6c47aabc8e01a057949dcd46db84f7"
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/gx-native/alignment.json",
+      "sha256": "7e04d47a60132f6b16503295b939244ff181bd9a1e109e377728d843bde53102"
+    }
+  ],
+  "reopened_cases": 176,
+  "remaining_excluded_cases": 368,
+  "limits": [
+    "Prepared compiled dependencies reused from prior4de9; their frozen source/evidence index verified unchanged. New GX source, adapters, replacement runtime and all actual linked objects copied separately. No complete Makefile/compiler reproduction claim.",
+    "Standalone candidate only; main129a unchanged. All7 integrated profiles/38same-image main regressions have NOT been run on this candidate."
+  ]
+}

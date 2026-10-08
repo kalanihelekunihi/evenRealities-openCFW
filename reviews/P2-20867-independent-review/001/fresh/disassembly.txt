@@ -1,0 +1,20 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpeibmx7vh/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047d066 <.text>:
+  47d066:	8830      	ldrh	r0, [r6, #0]
+  47d068:	2801      	cmp	r0, #1
+  47d06a:	d00f      	beq.n	47d08c <.text+0x26>
+  47d06c:	f0c0 83a3 	bcc.w	47d7b6 <.text+0x750>
+  47d070:	2803      	cmp	r0, #3
+  47d072:	f000 8250 	beq.w	47d516 <.text+0x4b0>
+  47d076:	f0c0 80ca 	bcc.w	47d20e <.text+0x1a8>
+  47d07a:	2805      	cmp	r0, #5
+  47d07c:	f000 834e 	beq.w	47d71c <.text+0x6b6>
+  47d080:	f0c0 829a 	bcc.w	47d5b8 <.text+0x552>
+  47d084:	2806      	cmp	r0, #6
+  47d086:	f000 82dc 	beq.w	47d642 <.text+0x5dc>
+  47d08a:	e394      	b.n	47d7b6 <.text+0x750>

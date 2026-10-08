@@ -12,8 +12,8 @@ extern void opencfw_provider_41f9d8(uint32_t amount);
 extern void opencfw_provider_42052a(void);
 extern void opencfw_provider_420f10(void);
 extern void opencfw_provider_4201ba(void);
-extern void opencfw_provider_420890(void);
-extern void opencfw_provider_420c5c(uint32_t mode);
+extern uint32_t opencfw_provider_420890(void);
+extern uint32_t opencfw_provider_420c5c(uint32_t mode);
 extern void opencfw_provider_41fe62(void);
 extern void opencfw_provider_41fe28(void);
 extern void opencfw_provider_4176ce(uint32_t level, const char *module,

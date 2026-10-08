@@ -1,0 +1,4 @@
+# Matching record index diagnostics helper and explicit one
+
+Partial/unaccepted;96 instructionbytes,inherited56-byteframe,R4entrypointer,R5passingrecordpointer,R6fullindex0..9fromloop. Query0x43D0CE;bit1zero skips0x47A9FA;otherwisewriteLOW8 R6 SP8,literal47B4BC SP4,1016 SP0;call0x43D574(4,literal47AE28,literal47ADCC,literal47B480,fifth1016,sixthliteral47B4BC,seventhLOW8index).
+At0x47A9FA queryfreshstatus;bit0oneenters0x47AA0A,otherwisequeryagain andbit2zero skips0x47AA1C. Maskpath R1literal47B4C0,R2=R1,R3=LOW8 R6;call0x43CE9E(0x10400000,R1,R2,R3). R6 remainsfulluntil0x47AA1CdestructivelynarrowsR6toLOW8. SetR2=zeroextendedLOW16 R6,R1=R5+7modulo2^32,R0=R4;call0x4D27F6(R4,R5+7,index,liveR3). IgnorehelperresultandexplicitlysetR0one,branchpendingepilogue0x47AB48. No inferredhelpercontract,C,freezeorcompletenessclaim.

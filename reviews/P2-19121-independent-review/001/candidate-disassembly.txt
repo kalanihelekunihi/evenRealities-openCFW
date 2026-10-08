@@ -1,0 +1,54 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmprd07wjqd/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00469878 <.text>:
+  469878:	2200      	movs	r2, #0
+  46987a:	2102      	movs	r1, #2
+  46987c:	6860      	ldr	r0, [r4, #4]
+  46987e:	f7d7 fdec 	bl	44145a <.text-0x2841e>
+  469882:	f07f 407f 	mvns.w	r0, #4278190080	@ 0xff000000
+  469886:	f7d7 fbe1 	bl	44104c <.text-0x2882c>
+  46988a:	2200      	movs	r2, #0
+  46988c:	0001      	movs	r1, r0
+  46988e:	6860      	ldr	r0, [r4, #4]
+  469890:	f7d7 fdbd 	bl	44140e <.text-0x2846a>
+  469894:	2200      	movs	r2, #0
+  469896:	48c2      	ldr	r0, [pc, #776]	@ (469ba0 <.text+0x328>)
+  469898:	6801      	ldr	r1, [r0, #0]
+  46989a:	6860      	ldr	r0, [r4, #4]
+  46989c:	f7d7 fdcf 	bl	44143e <.text-0x2843a>
+  4698a0:	2200      	movs	r2, #0
+  4698a2:	2100      	movs	r1, #0
+  4698a4:	6860      	ldr	r0, [r4, #4]
+  4698a6:	f7d7 fcfa 	bl	44129e <.text-0x285da>
+  4698aa:	2200      	movs	r2, #0
+  4698ac:	2100      	movs	r1, #0
+  4698ae:	6860      	ldr	r0, [r4, #4]
+  4698b0:	f7d7 fd34 	bl	44131c <.text-0x2855c>
+  4698b4:	4dc0      	ldr	r5, [pc, #768]	@ (469bb8 <.text+0x340>)
+  4698b6:	0028      	movs	r0, r5
+  4698b8:	f7f6 fbe4 	bl	460084 <.text-0x97f4>
+  4698bc:	0001      	movs	r1, r0
+  4698be:	0028      	movs	r0, r5
+  4698c0:	f7f6 fb9d 	bl	45fffe <.text-0x987a>
+  4698c4:	0001      	movs	r1, r0
+  4698c6:	6860      	ldr	r0, [r4, #4]
+  4698c8:	f02f fdb1 	bl	49942e <.text+0x2fbb6>
+  4698cc:	2300      	movs	r3, #0
+  4698ce:	2200      	movs	r2, #0
+  4698d0:	2109      	movs	r1, #9
+  4698d2:	6860      	ldr	r0, [r4, #4]
+  4698d4:	f7d5 fef0 	bl	43f6b8 <.text-0x2a1c0>
+  4698d8:	2000      	movs	r0, #0
+  4698da:	61a0      	str	r0, [r4, #24]
+  4698dc:	4caf      	ldr	r4, [pc, #700]	@ (469b9c <.text+0x324>)
+  4698de:	6820      	ldr	r0, [r4, #0]
+  4698e0:	f7fa fc13 	bl	46410a <.text-0x576e>
+  4698e4:	6820      	ldr	r0, [r4, #0]
+  4698e6:	49b5      	ldr	r1, [pc, #724]	@ (469bbc <.text+0x344>)
+  4698e8:	6048      	str	r0, [r1, #4]
+  4698ea:	2000      	movs	r0, #0
+  4698ec:	e0f7      	b.n	469ade <.text+0x266>

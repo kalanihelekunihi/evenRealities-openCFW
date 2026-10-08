@@ -1,0 +1,5 @@
+# Buffer selector dispatch 0x46A450..0x46A4E2
+
+Partial/unaccepted;146 instruction bytes. Inherit32-byte frame and SP12 buffer from preceding component. Call43D0CE(liveargs), test bit1 via LSLS30/BPL. If set, fresh unsigned byteSP12 stored as full wordSP8, literal46AE84 storedSP4,381 storedSP0;call43D574(4,literal46A834,literal46A830,literal46AE7C) with these extra words. Then fresh43D0CE bit0 test; if clear a further fresh43D0CE bit2 test. Either qualifying bit calls43CE9E(0x10400000,literal46B008,same literal,fresh unsigned byteSP12).
+
+Fresh byteSP12 toR0,UXTB,compare10/68/69/72. Selector68 calls46A6D2 with R0=68 and liveR1..3;69 calls46A77E similarly;10 calls46A848 similarly. Each reaches sharedepilogue. Selector72 calls45A568(liveargs);FULLresult1 calls464C36(34,0,0,0), other results go directly to epilogue. Default returns current selectorR0. Earlier ring-empty nonzero path jumps straight to sameepilogue, preserving that childR0. ADDSP24,POP4/PC8 returns liveR0 without forced normalization. Child meanings unresolved; no C/freeze/completeness claim.

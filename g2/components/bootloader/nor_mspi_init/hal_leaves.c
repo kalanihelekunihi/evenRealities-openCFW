@@ -25,7 +25,8 @@ uint32_t opencfw_hal_mspi_configure(uint32_t address, const uint32_t *config) {
     volatile uint32_t *base = (volatile uint32_t *)(uintptr_t)
         (0x40060000u + (module << 12));
     base[0x90 / 4] &= ~1u;
-    base[0x9c / 4] = base[0x80 / 4] = 0;
+    base[0x9c / 4] = 0;
+    base[0x80 / 4] = 0;
     uint32_t *state = (uint32_t *)(uintptr_t)
         (0x2001caa0u + module * 0x8d0u);
     state[6] = config[1];

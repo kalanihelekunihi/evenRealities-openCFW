@@ -1,0 +1,3 @@
+# Frameless sparse-index full-word direct write
+
+Partial/unaccepted;58 instruction bytes4815F2..48162C. FullentryR0unsignedindex:rejectindex<56,orunsigned(index-63mod2^32)<62,orindex>=132;return6withoutmemorywrite. Acceptedexact56..62or125..131. R3bank0ifindex<63else1;R2=~68=-69mod2^32;R0=index-69*bank-56mod2^32;offset=(R0<<4)+112*bankmod2^32. R2pointerliteral4817D8;R0=base+offset;storefullentryR1word[R0];return0BXLR. NoR1truncation,source/targetread,helpercall,PRIMASKchange,orstackframe. Same sparse mapping as481574querybutdifferenttargetbase;pointedownershipunresolved. No C/freeze/fullcoverage/equality claim.

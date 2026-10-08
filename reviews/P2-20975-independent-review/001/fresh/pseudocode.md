@@ -1,0 +1,4 @@
+# Two-byte message with helper low byte and independent diagnostics
+
+Partial/unaccepted;118instructionbytes47E4A6..47E51C. PUSH R3,R4,R5,LR16;SP-=16,total32.4A7832(liveargs)→R4fullresult. R5=SP+12;43C0E4(SP+12,2,0,liveR3),thenexplicitbyteSP12=13,SP13=LOW8R4. SP0=5;465480(16,SP+12,2,0)withfifthstackarg5. Sendresultignoredbyfollowingcalls.
+Firstfresh43D0CEbit1set→SP8=LOW8R4,SP4=literalE650,SP0=127;43D574(4,literalE624,literalE620,literalE654),stackargsretained. Thenindependentfresh43D0CEbit0set→masklogger;elseanotherfresh43D0CEbit2set→masklogger. Masklogger43CE9E(10400000hex,literalE658,literalE658,LOW8R4). NoforcedR0return:liveR0fromlastflaghelperormasklogger. SP+=20discards16localsandsavedentryR3;POP R4,R5,PC12. No failurecheck/retryonsend; separateobservationsmustnotcache. Payloadinitialhelpersemanticsnotneededforexplicit2bytes,butcalleewritespossible. No C/freeze/completenessclaim.

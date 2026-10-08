@@ -1,0 +1,5 @@
+# Nested state boolean output and unsigned counter observation
+
+Partial/unaccepted;74instructionbytes47E8F2..47E93C,twoentries.
+E8F2frameless:R2=literalEB78pointer;freshword[R2]→R1;freshword[R1]intoR1. Fullzero→R1=1,nonzero→R1=0;writeword[entryR0]=R1. Independentlyfreshreloadword[entryR0]intoR0. Nonzero→R0=0return. Zero→independentlyfreshword[R2],freshword[result+12],freshword[result]→R0return. R1retainspreviouslycomputedboolean,R2retainspointer,R3unchanged. Outputpointermayaliaschainmemory,sofreshreloadandsecondchainmustremainafterwrite;don'tsimplifytonulltestcachedsnapshot. No nullchainguards.
+E916 PUSH R4,R5,R6,LR16;R4=entryR0outputpointer;454EFE(liveargs)→R5fullcounter;R6=literalEB80pointer;freshpreviousword. UnsignedR5<previous→47EA90(liveargs),thenword[output]=1;otherwiseword[output]=0. BothpathsstoreR5word[R6]afteroutputwrite;R0=R5returns. Output/globalpointeralias/orderretained,helperreturnignored. POP R4,R5,R6,PC restorespreservedregs. Refines21394output-helperdependenciesbut47EA90/454EFEsemanticsremainunresolved. No C/freeze/completenessclaim.

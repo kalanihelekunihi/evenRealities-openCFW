@@ -1,0 +1,16 @@
+[
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/verify_runtime_bindings.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/runtime.json"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py\", line 29, in <module>\n    runpy.run_path(str(script),run_name='__main__')\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 294, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/verify_runtime_bindings.py\", line 68, in <module>\n    if stock!=source:args.output.with_suffix('.failure.json').write_text(json.dumps(dict(name=name,fixture=f,stock=stock,source=source),indent=2));raise AssertionError((name,f,stock,source))\n                                                                                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('dispatch', {'revision': 35, 'variant': 2, 'patch': 0, 'seed': 0, 'status': 0}, {'ret': 0, 'writes': [], 'events': [['selected-init', '0x42abbc']], 'output': 'a5a5a5a5', 'variant': '02000000', 'table': 'bdab420079a8420055ac4200000000000000000000000000000000007dab4200000000000000000037a042004ba04200000000000000000000000000', 'flags': '000000000100', 'cache': '0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000', 'irq': 0}, {'ret': 0, 'writes': [], 'events': [['selected-init', '0x42abbc']], 'output': 'a5a5a5a5', 'variant': '02000000', 'table': 'bdab420079a8420055ac4200000000000000000000000000000000007dab42000000000000000000690e05004ba04200000000000000000000000000', 'flags': '000000000100', 'cache': '0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000', 'irq': 0})\n"
+  }
+]

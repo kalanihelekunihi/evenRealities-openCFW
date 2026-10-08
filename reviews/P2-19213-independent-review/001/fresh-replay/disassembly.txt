@@ -1,0 +1,52 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp4zc21jse/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0046a77e <.text>:
+  46a77e:	b51f      	push	{r0, r1, r2, r3, r4, lr}
+  46a780:	f8df 4714 	ldr.w	r4, [pc, #1812]	@ 46ae98 <.text+0x71a>
+  46a784:	6820      	ldr	r0, [r4, #0]
+  46a786:	2801      	cmp	r0, #1
+  46a788:	db2a      	blt.n	46a7e0 <.text+0x62>
+  46a78a:	6820      	ldr	r0, [r4, #0]
+  46a78c:	1e40      	subs	r0, r0, #1
+  46a78e:	6020      	str	r0, [r4, #0]
+  46a790:	f7d2 fc9d 	bl	43d0ce <.text-0x2d6b0>
+  46a794:	0780      	lsls	r0, r0, #30
+  46a796:	d50e      	bpl.n	46a7b6 <.text+0x38>
+  46a798:	6820      	ldr	r0, [r4, #0]
+  46a79a:	9002      	str	r0, [sp, #8]
+  46a79c:	f8df 0898 	ldr.w	r0, [pc, #2200]	@ 46b038 <.text+0x8ba>
+  46a7a0:	9001      	str	r0, [sp, #4]
+  46a7a2:	f240 10eb 	movw	r0, #491	@ 0x1eb
+  46a7a6:	9000      	str	r0, [sp, #0]
+  46a7a8:	f8df 3890 	ldr.w	r3, [pc, #2192]	@ 46b03c <.text+0x8be>
+  46a7ac:	4a20      	ldr	r2, [pc, #128]	@ (46a830 <.text+0xb2>)
+  46a7ae:	4921      	ldr	r1, [pc, #132]	@ (46a834 <.text+0xb6>)
+  46a7b0:	2004      	movs	r0, #4
+  46a7b2:	f7d2 fedf 	bl	43d574 <.text-0x2d20a>
+  46a7b6:	f7d2 fc8a 	bl	43d0ce <.text-0x2d6b0>
+  46a7ba:	07c0      	lsls	r0, r0, #31
+  46a7bc:	d403      	bmi.n	46a7c6 <.text+0x48>
+  46a7be:	f7d2 fc86 	bl	43d0ce <.text-0x2d6b0>
+  46a7c2:	0740      	lsls	r0, r0, #29
+  46a7c4:	d507      	bpl.n	46a7d6 <.text+0x58>
+  46a7c6:	f8df 1878 	ldr.w	r1, [pc, #2168]	@ 46b040 <.text+0x8c2>
+  46a7ca:	6823      	ldr	r3, [r4, #0]
+  46a7cc:	000a      	movs	r2, r1
+  46a7ce:	f05f 5082 	movs.w	r0, #272629760	@ 0x10400000
+  46a7d2:	f7d2 fb64 	bl	43ce9e <.text-0x2d8e0>
+  46a7d6:	f7ff feb0 	bl	46a53a <.text-0x244>
+  46a7da:	f7ff fe82 	bl	46a4e2 <.text-0x29c>
+  46a7de:	e01f      	b.n	46a820 <.text+0xa2>
+  46a7e0:	f7d2 fc75 	bl	43d0ce <.text-0x2d6b0>
+  46a7e4:	0780      	lsls	r0, r0, #30
+  46a7e6:	d50c      	bpl.n	46a802 <.text+0x84>
+  46a7e8:	f8df 0858 	ldr.w	r0, [pc, #2136]	@ 46b044 <.text+0x8c6>
+  46a7ec:	9001      	str	r0, [sp, #4]
+  46a7ee:	f44f 70f8 	mov.w	r0, #496	@ 0x1f0
+  46a7f2:	9000      	str	r0, [sp, #0]
+  46a7f4:	f8df 3844 	ldr.w	r3, [pc, #2116]	@ 46b03c <.text+0x8be>
+  46a7f8:	4a0d      	ldr	r2, [pc, #52]	@ (46a830 <.text+0xb2>)

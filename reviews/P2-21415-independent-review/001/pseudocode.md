@@ -1,0 +1,3 @@
+# Three copied configuration flash records
+
+Partial/unaccepted;60 exact non-code bytes in three record intervals. 789FEC..789FF8 three little-endianwords01000100,01000000,00000000;loadedbyLDMandcopiedSP0/4/8in21796before4D450C. 774BC4..774BDC sixwords00000006,2013BE70,00010100,20208E6F,00000000,00000001;copied24BtoSP36before4D4596. 774BDC..774BF4 sixwords00000007,20378D9C,00010100,2037919B,00000000,00000001;copied24BtoSP12before4D4596. Exactrawbytesauthoritative, nofieldtypesorRAMinitialcontentsassumed. Sourceslinkedthroughliterals484344/348/34C. Recordsremainsemanticallypartialpendinghelpercontracts; no C,freeze,wholecoverage or equalityclaim.

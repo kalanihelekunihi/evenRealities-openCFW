@@ -4,12 +4,11 @@
  * locked configuration table; physical MRAM programming remains ROM-owned.
  */
 #include "storage_callbacks.h"
+#include "device_info_dispatch.h"
 
 #include <stddef.h>
 
 #define LIMIT_CACHE ((volatile uint32_t *)(uintptr_t)0x200270c8u)
-#define MODE_REGISTER (*(volatile uint32_t *)(uintptr_t)0x40020014u)
-#define RANGE_TABLE ((const volatile uint16_t *)(uintptr_t)0x43401cu)
 #define PROGRAM_KEY 0x12344321u
 
 __attribute__((section(".boot_storage_range_table"), used))
@@ -33,24 +32,29 @@ static void source_copy(uint8_t *destination, const uint8_t *source,
 
 uint32_t opencfw_boot_storage_range_valid(uint32_t address, uint32_t size)
 {
-    /* The raw target computes this 32-bit end value before its size check. */
-    const uint32_t inclusive_end = address + size - 1u;
+    /* Stock computes address+size-1 first, but later compares the original
+     * address and size separately; the computed end is not consumed. */
+    const uint32_t unused_end = address + size - 1u;
+    (void)unused_end;
     uint32_t limit = *LIMIT_CACHE;
     if (limit == 0u) {
-        const uint32_t mode = (MODE_REGISTER >> 2) & 3u;
-        limit = (uint32_t)RANGE_TABLE[mode] << 10;
+        volatile uint32_t record[16];
+        (void)opencfw_boot_device_info_query(1u, record);
+        limit = record[11];
         *LIMIT_CACHE = limit;
     }
 
-    if (size >= 0x4000u)
+    /* `address` is stock r5 and `size` is stock r4. The first comparison
+     * rejects addresses below 0x4000; addresses at or above it pass this
+     * stage, then the size is compared strictly below the cached limit. */
+    if (address < 0x4000u)
         return 0u;
-    return inclusive_end < limit ? 1u : 0u;
+    return size < limit ? 1u : 0u;
 }
 
-/* Stock entry 0x430a9c: (RAM destination, MRAM source, byte count). */
-__attribute__((section(".text.storage_read"), noinline))
-uint32_t opencfw_boot_storage_read(void *destination, const void *source,
-                                   uint32_t size)
+/* Stock veneer 0x430a9c targets this source body. */
+uint32_t opencfw_boot_storage_read_impl(void *destination, const void *source,
+                                        uint32_t size)
 {
     if (opencfw_boot_storage_range_valid((uint32_t)(uintptr_t)source,
                                          size) == 0u)
@@ -70,10 +74,10 @@ static uint32_t program_with_critical_state(uint32_t destination,
     return 0u;
 }
 
-/* Stock entry 0x430ac4: (MRAM destination, RAM source, byte count). */
-__attribute__((section(".text.storage_program"), noinline))
-uint32_t opencfw_boot_storage_program(uint32_t destination,
-                                      const void *source, uint32_t size)
+/* Stock veneer 0x430ac4 targets this source body. */
+uint32_t opencfw_boot_storage_program_impl(uint32_t destination,
+                                           const void *source,
+                                           uint32_t size)
 {
     if (opencfw_boot_storage_range_valid(destination, size) == 0u)
         return UINT32_MAX;
@@ -81,9 +85,8 @@ uint32_t opencfw_boot_storage_program(uint32_t destination,
     return 0u;
 }
 
-/* Stock entry 0x430aec: validate a 4-byte span; this callback does no erase. */
-__attribute__((section(".text.storage_erase"), noinline))
-uint32_t opencfw_boot_storage_erase_validate(uint32_t destination)
+/* Stock veneer 0x430aec targets this source body; there is no erase call. */
+uint32_t opencfw_boot_storage_erase_validate_impl(uint32_t destination)
 {
     return opencfw_boot_storage_range_valid(destination, 4u) != 0u
         ? 0u : UINT32_MAX;

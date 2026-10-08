@@ -1,0 +1,59 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpww6hu8vv/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00483f5e <.text>:
+  483f5e:	ea5f 7088 	movs.w	r0, r8, lsl #30
+  483f62:	d406      	bmi.n	483f72 <.text+0x14>
+  483f64:	e00a      	b.n	483f7c <.text+0x1e>
+  483f66:	9b0b      	ldr	r3, [sp, #44]	@ 0x2c
+  483f68:	0032      	movs	r2, r6
+  483f6a:	990a      	ldr	r1, [sp, #40]	@ 0x28
+  483f6c:	2020      	movs	r0, #32
+  483f6e:	47a8      	blx	r5
+  483f70:	1c76      	adds	r6, r6, #1
+  483f72:	4658      	mov	r0, fp
+  483f74:	f110 0b01 	adds.w	fp, r0, #1
+  483f78:	42b8      	cmp	r0, r7
+  483f7a:	d3f4      	bcc.n	483f66 <.text+0x8>
+  483f7c:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  483f7e:	1c40      	adds	r0, r0, #1
+  483f80:	900c      	str	r0, [sp, #48]	@ 0x30
+  483f82:	e504      	b.n	48398e <.text-0x5d0>
+  483f84:	9b0b      	ldr	r3, [sp, #44]	@ 0x2c
+  483f86:	0032      	movs	r2, r6
+  483f88:	990a      	ldr	r1, [sp, #40]	@ 0x28
+  483f8a:	2025      	movs	r0, #37	@ 0x25
+  483f8c:	47a8      	blx	r5
+  483f8e:	1c76      	adds	r6, r6, #1
+  483f90:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  483f92:	1c40      	adds	r0, r0, #1
+  483f94:	900c      	str	r0, [sp, #48]	@ 0x30
+  483f96:	e4fa      	b.n	48398e <.text-0x5d0>
+  483f98:	9b0b      	ldr	r3, [sp, #44]	@ 0x2c
+  483f9a:	0032      	movs	r2, r6
+  483f9c:	990a      	ldr	r1, [sp, #40]	@ 0x28
+  483f9e:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  483fa0:	7800      	ldrb	r0, [r0, #0]
+  483fa2:	47a8      	blx	r5
+  483fa4:	1c76      	adds	r6, r6, #1
+  483fa6:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  483fa8:	1c40      	adds	r0, r0, #1
+  483faa:	900c      	str	r0, [sp, #48]	@ 0x30
+  483fac:	e4ef      	b.n	48398e <.text-0x5d0>
+  483fae:	980b      	ldr	r0, [sp, #44]	@ 0x2c
+  483fb0:	4286      	cmp	r6, r0
+  483fb2:	d201      	bcs.n	483fb8 <.text+0x5a>
+  483fb4:	0032      	movs	r2, r6
+  483fb6:	e001      	b.n	483fbc <.text+0x5e>
+  483fb8:	9a0b      	ldr	r2, [sp, #44]	@ 0x2c
+  483fba:	1e52      	subs	r2, r2, #1
+  483fbc:	9b0b      	ldr	r3, [sp, #44]	@ 0x2c
+  483fbe:	990a      	ldr	r1, [sp, #40]	@ 0x28
+  483fc0:	2000      	movs	r0, #0
+  483fc2:	47a8      	blx	r5
+  483fc4:	0030      	movs	r0, r6
+  483fc6:	b00d      	add	sp, #52	@ 0x34
+  483fc8:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}

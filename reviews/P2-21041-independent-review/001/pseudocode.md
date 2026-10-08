@@ -1,0 +1,5 @@
+# Byte record to two masks; conditional bit-zero setup prefix
+
+Partial/unaccepted;144instructionbytes47F204..47F294,prefixonly. PUSH R1,R2,R3,R4,R5,R6,R7,R8,R9,LR40;R4=entryR0pointer;no nullguardbeforeloads. SP4=0 overwrites savedentryR2;R6=0;R5=0. Freshbyte[R4+0] stored through literalFAD0pointer, then independently reload byte[R4+0]. Secondreadzero setsR6|=32,SP4|=128;allotherbytevalues addneither (byte1branchconvergeswithothers).
+
+Freshbyte[R4+1]&7 ORintoR6; independently freshbyte[R4+1]&7 ORintoSP4, so masks maydiffer ifrecordchanges. Freshbyte[R4+3]:1→R6|=8,SP4|=8;3→R6|=24,SP4|=72;0/others addneither. Independentlyfreshbyte[R4+3]==3 then freshword through literalFAD4 &72 equals8→independentfreshword through literalFAD8 OR1 stored, R5=1; otherwiseR5 remains0. This setup can occur even when earlier byte3 read chose anothermaskbranch. No read/handling ofbyte2inprefix. ContinueF294with40frameactive,R4input,R6mask,SP4othermask,R5setupindicator. No return/fullfunction claim; unresolvedpointedownership/externalbehavior, noMMIO/C/freeze/fullcoverage claim.

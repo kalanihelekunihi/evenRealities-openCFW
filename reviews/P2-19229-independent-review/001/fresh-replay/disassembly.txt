@@ -1,0 +1,59 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpbt0nlvct/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0046aa22 <.text>:
+  46aa22:	f7d2 fda7 	bl	43d574 <.text-0x2d4ae>
+  46aa26:	f7d2 fb52 	bl	43d0ce <.text-0x2d954>
+  46aa2a:	07c0      	lsls	r0, r0, #31
+  46aa2c:	d403      	bmi.n	46aa36 <.text+0x14>
+  46aa2e:	f7d2 fb4e 	bl	43d0ce <.text-0x2d954>
+  46aa32:	0740      	lsls	r0, r0, #29
+  46aa34:	d506      	bpl.n	46aa44 <.text+0x22>
+  46aa36:	f8df 163c 	ldr.w	r1, [pc, #1596]	@ 46b074 <.text+0x652>
+  46aa3a:	000a      	movs	r2, r1
+  46aa3c:	f05f 5080 	movs.w	r0, #268435456	@ 0x10000000
+  46aa40:	f7d2 fa2d 	bl	43ce9e <.text-0x2db84>
+  46aa44:	e035      	b.n	46aab2 <.text+0x90>
+  46aa46:	6808      	ldr	r0, [r1, #0]
+  46aa48:	2802      	cmp	r0, #2
+  46aa4a:	d132      	bne.n	46aab2 <.text+0x90>
+  46aa4c:	f7d2 fb3f 	bl	43d0ce <.text-0x2d954>
+  46aa50:	0780      	lsls	r0, r0, #30
+  46aa52:	d50e      	bpl.n	46aa72 <.text+0x50>
+  46aa54:	f8df 0610 	ldr.w	r0, [pc, #1552]	@ 46b068 <.text+0x646>
+  46aa58:	9001      	str	r0, [sp, #4]
+  46aa5a:	f44f 7005 	mov.w	r0, #532	@ 0x214
+  46aa5e:	9000      	str	r0, [sp, #0]
+  46aa60:	f8df 35ec 	ldr.w	r3, [pc, #1516]	@ 46b050 <.text+0x62e>
+  46aa64:	f8df 25ec 	ldr.w	r2, [pc, #1516]	@ 46b054 <.text+0x632>
+  46aa68:	f8df 15ec 	ldr.w	r1, [pc, #1516]	@ 46b058 <.text+0x636>
+  46aa6c:	2004      	movs	r0, #4
+  46aa6e:	f7d2 fd81 	bl	43d574 <.text-0x2d4ae>
+  46aa72:	f7d2 fb2c 	bl	43d0ce <.text-0x2d954>
+  46aa76:	07c0      	lsls	r0, r0, #31
+  46aa78:	d403      	bmi.n	46aa82 <.text+0x60>
+  46aa7a:	f7d2 fb28 	bl	43d0ce <.text-0x2d954>
+  46aa7e:	0740      	lsls	r0, r0, #29
+  46aa80:	d506      	bpl.n	46aa90 <.text+0x6e>
+  46aa82:	f8df 15e8 	ldr.w	r1, [pc, #1512]	@ 46b06c <.text+0x64a>
+  46aa86:	000a      	movs	r2, r1
+  46aa88:	f05f 5080 	movs.w	r0, #268435456	@ 0x10000000
+  46aa8c:	f7d2 fa07 	bl	43ce9e <.text-0x2db84>
+  46aa90:	f7ef fd6a 	bl	45a568 <.text-0x104ba>
+  46aa94:	2801      	cmp	r0, #1
+  46aa96:	d10c      	bne.n	46aab2 <.text+0x90>
+  46aa98:	2300      	movs	r3, #0
+  46aa9a:	2200      	movs	r2, #0
+  46aa9c:	2100      	movs	r1, #0
+  46aa9e:	2022      	movs	r0, #34	@ 0x22
+  46aaa0:	f7fa f8c9 	bl	464c36 <.text-0x5dec>
+  46aaa4:	f44f 73fa 	mov.w	r3, #500	@ 0x1f4
+  46aaa8:	2200      	movs	r2, #0
+  46aaaa:	210f      	movs	r1, #15
+  46aaac:	2006      	movs	r0, #6
+  46aaae:	f7f0 f90d 	bl	45accc <.text-0xfd56>
+  46aab2:	b005      	add	sp, #20
+  46aab4:	bd00      	pop	{pc}

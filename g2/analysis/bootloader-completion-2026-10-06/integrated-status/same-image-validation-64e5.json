@@ -1,0 +1,187 @@
+{
+  "utc": "2026-10-07T08:42:37.668651+00:00",
+  "status": "PASS",
+  "elf_sha256": "64e525046809722484ff5fe65ebea5550352915ed292e5e6989a5acfa9ea9b7d",
+  "profiles": [
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/64e525046809722484ff5fe65ebea5550352915ed292e5e6989a5acfa9ea9b7d/comparison.json",
+      "sha256": "7ca9d7616b47e31a322723747823d676076ad872579924be7850fd2f0496f9ad",
+      "cases": 2
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/64e525046809722484ff5fe65ebea5550352915ed292e5e6989a5acfa9ea9b7d/failures.json",
+      "sha256": "48704d22219fc6daf360a8a9da11b7f731c99f261eb6b26877c087efa6829922",
+      "cases": 3
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/64e525046809722484ff5fe65ebea5550352915ed292e5e6989a5acfa9ea9b7d/powerloss.json",
+      "sha256": "753584e446859710b59e232928182a0ac15b6ca153016b1c96475c55c2879da5",
+      "cases": 2
+    }
+  ],
+  "total_cases": 7,
+  "additional_receipts": [
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/run-power-mode-64e5/clock-config.json",
+      "sha256": "5841ca71353a26e0fcc375dd9cee5ea7b7ece4d9f7ed81e5315f8b7b6dccff92",
+      "cases": 5896,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/run-power-mode-64e5/clock-shared.json",
+      "sha256": "979ed95d5d0866ab2bf55045d6df30da61986be52b46e9cfd5f63de011157332",
+      "cases": 129,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/run-power-mode-64e5/elog_output.json",
+      "sha256": "950d7923f2b15d422da7d22b81c3bdd5bf445d1c20fd5cbb41811d45365bd1c4",
+      "cases": 494,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/run-power-mode-64e5/elog_uart_tx.json",
+      "sha256": "4e4ab9b94dcc70f503a3eff14c3e6a1b5e66bfe9156c91b7ff60b58be97d89ea",
+      "cases": 222,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/run-power-mode-64e5/formatter.json",
+      "sha256": "3451ffecb3317999194ef206d1509aed2aef0cbdb2ba307bd18616a1b7ab07ff",
+      "cases": 1778,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/run-power-mode-64e5/generators.json",
+      "sha256": "529108adc2636b89632386e492fa058fbf37eff7c6b27dec50c59c3142b64ec7",
+      "cases": 688,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/run-power-mode-64e5/isr_deferred_fifo.json",
+      "sha256": "9aa19e63aec17d11a670a2034312d9dc1f178194367e576308dfda4e8bfe82e7",
+      "cases": 1,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/run-power-mode-64e5/isr_delivery.json",
+      "sha256": "7edb60e72080ab70ac5255d07a9f67d0931056dfa7ea5057e2122aba67502fa9",
+      "cases": 1480,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/run-power-mode-64e5/isr_public_interfaces.json",
+      "sha256": "5c8ed1cbc4fa583df5af104919423d7dd3a1b278faaf52e4c94632c329cea8db",
+      "cases": 62,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/run-power-mode-64e5/math.json",
+      "sha256": "fa65287ed5cd3c3f277308665f19208713ff07b59f11ff7d9b0d71080eb306ea",
+      "cases": 4311,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/run-power-mode-64e5/mode.json",
+      "sha256": "00afbf759a1fb1756fa529a9d8e1146cb223259730998ec02a1c23f37b451d70",
+      "cases": 1394,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/run-power-mode-64e5/mutex_block_boundary.json",
+      "sha256": "c4a3bdf9c93afe5c63904186ea1fca3ce3679f9a020e7a936ac7abecb0aa2136",
+      "cases": 4,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/run-power-mode-64e5/mutex_kernel.json",
+      "sha256": "94ab091b786849668f7236d0572e5cf48c06939e1d4f3bc1a6aa12dc40efee36",
+      "cases": 516,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/run-power-mode-64e5/mutex_sequences.json",
+      "sha256": "9532dabcd965563cfb212cd0029fbba105dff0c220c9dcf6aab836502479bd79",
+      "cases": 2,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/run-power-mode-64e5/native-config.json",
+      "sha256": "97aa635908da341c783921ab5b0f5200ab1ed6821c34733b3150975294e5ee31",
+      "cases": 48,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/run-power-mode-64e5/power20.json",
+      "sha256": "684334d0b04603a36911b563a36584792b55c23989fd9b9e5c3c07faba0e8082",
+      "cases": 256,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/run-power-mode-64e5/rx.json",
+      "sha256": "c138b25accbc620da6eeea1463d4828e7e8d7426138dd2c70b02046430c42ebb",
+      "cases": 422,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/run-power-mode-64e5/service_records.json",
+      "sha256": "ce8c07ff9fffb7433d980f668964861322cfba463b637fe50bbb7bc3ffc1ab96",
+      "cases": 112,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/run-power-mode-64e5/service_startup_state.json",
+      "sha256": "1b0560e1394f02eabbd471b8e96142a467d4fedce28004c36fe1b4eeab8c48df",
+      "cases": 1,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/run-power-mode-64e5/setters.json",
+      "sha256": "0feb398a43d32b7f2d5fdea851654f1a2cdb4ebde13de8527bb2b7ba10d3fcca",
+      "cases": 192,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/run-power-mode-64e5/startup-leaves-native-copy.json",
+      "sha256": "151dc4d385380115d22327a1c62fa31f9f62df17bf8052b88b51d36819aff959",
+      "cases": 271,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/run-power-mode-64e5/startup-native-copy.json",
+      "sha256": "149c7d49bea04f3738e73f57f76a2d05d257fe64cc3d819843d1cba05b72b21f",
+      "cases": 64,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/run-power-mode-64e5/startup_alternatives.json",
+      "sha256": "570b72b8e53e252be968e3af83ce5b087f35a0b681d626d98a65150ea0bbb3b2",
+      "cases": 64,
+      "shared_cases": null
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/run-power-mode-64e5/wrapper.json",
+      "sha256": "0d196260844df213dccc59ea37ffd8bcf4cc614b8f289330cb6072c209fb1c16",
+      "cases": 288,
+      "shared_cases": null
+    }
+  ],
+  "inputs": 664,
+  "linked_objects": 170,
+  "post_run_hash_mismatches": [],
+  "frozen_copies": "g2/build/bootloader-completion/source-image-compatible/snapshots/64e525046809722484ff5fe65ebea5550352915ed292e5e6989a5acfa9ea9b7d/frozen-input-copies.json",
+  "alignment_mappings": 490,
+  "numeric_aliases": 22,
+  "segments": 42,
+  "deduplicated_observed_original_instruction_bytes": 38764,
+  "limits": [
+    "Seven integration cases retain existing logging/startup models. Native422 RX comparisons execute RX/ring/cancel/critical and actual dispatcher modes1/3; older TX-only suite retains explicit RX cuts via frozen adapter. Prior4311 math+48 M33+688 bounded generator regressions preserve their limits.",
+    "Clock request/release side effects remain modeled in direct caller tests. Native copies use MMIO-only recorder; old no-op SRAM-hook negative controls preserved.",
+    "Six original FP64 integration effects, external ROM APIs and synthetic peripheral/persistence/task/timing fixtures remain. Physical PLL lock/drain/live scheduling, whole source and byte equality not certified.",
+    "Supplemental legacy power driver did not execute: setup requested absent standalone opencfw_boot_power_release_needed symbol. Native selector20 suite provides256 actual power enter/leave comparisons; no legacy-suite PASS claimed."
+  ],
+  "supplemental_input_index": {
+    "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/run-power-mode-64e5/supplemental-input-hashes.json",
+    "sha256": "541a5e3975107277442db6f99fc6483382b87243b8dc0d0bbc4941e269f1abc6"
+  }
+}

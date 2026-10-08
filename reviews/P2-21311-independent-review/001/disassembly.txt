@@ -1,0 +1,25 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp97uj5xob/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00483044 <.text>:
+  483044:	b538      	push	{r3, r4, r5, lr}
+  483046:	0004      	movs	r4, r0
+  483048:	2500      	movs	r5, #0
+  48304a:	e007      	b.n	48305c <.text+0x18>
+  48304c:	6820      	ldr	r0, [r4, #0]
+  48304e:	1c41      	adds	r1, r0, #1
+  483050:	6021      	str	r1, [r4, #0]
+  483052:	210a      	movs	r1, #10
+  483054:	7800      	ldrb	r0, [r0, #0]
+  483056:	3830      	subs	r0, #48	@ 0x30
+  483058:	fb01 0505 	mla	r5, r1, r5, r0
+  48305c:	6820      	ldr	r0, [r4, #0]
+  48305e:	7800      	ldrb	r0, [r0, #0]
+  483060:	f7ff ffe7 	bl	483032 <.text-0x12>
+  483064:	2800      	cmp	r0, #0
+  483066:	d1f1      	bne.n	48304c <.text+0x8>
+  483068:	0028      	movs	r0, r5
+  48306a:	bd32      	pop	{r1, r4, r5, pc}

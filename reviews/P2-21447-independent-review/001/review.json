@@ -1,0 +1,23 @@
+{
+  "review_id": "P2-21447-independent-review",
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-record-reset-three-copies-owner-callback-list-append-prefix-21846-map/001",
+  "status": "partial",
+  "accepted": false,
+  "checks": {
+    "fresh_replay": "pass",
+    "instruction_bytes": 100,
+    "instructions_match": true,
+    "references_match": true,
+    "frame_bytes": 24,
+    "ordered_copy_offsets": [
+      24,
+      4,
+      40
+    ]
+  },
+  "limitations": [
+    "continuation unresolved",
+    "callback/owner/list contracts not inferred",
+    "no whole-routine coverage or acceptance claim"
+  ]
+}

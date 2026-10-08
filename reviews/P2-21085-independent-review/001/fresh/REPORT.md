@@ -1,0 +1,1 @@
+Partial/unaccepted:12bytes47FE94..47FEA0 threealignedliteralwords. DecodedPCload consumers in maps21442/21446 retained; componenthasheschecked. Exactpointervalues retained; pointedownership/additionalconsumers unresolved. No C/freeze/fullcoverageclaim.

@@ -1,0 +1,3 @@
+# Case67tail468D96..468DFA
+
+Partial,unaccepted;100instructionbytes.Inherited24frame.R4/R5varywithpriorglobalguards,notusedhere. 45A568(alllive)FULLresult!=1->468DF6. Equal1:R0literal468F20,THENfreshbyte[R0]must4else468DF6. Fresh43D0CEbit1setSP4literal469130,SP0=498,R3literal469110,R2literal4690DC,R1literal4690E0,R0=3 to43D574. Separatefreshbit0 orconditional thirdbit2 R1literal469134,R2R1,R0=0x0C000000,liveR3 to43CE9E. R3/R2/R1=0,R0=16 to464C36. Shared468DF6R0=1->468F02. Fullpredicatevsfreshbytecheckretained;no childresulttest/statecontractassumed. Subsequentselector10branchexcluded;exactreplay only,no gates/runtime/acceptance.

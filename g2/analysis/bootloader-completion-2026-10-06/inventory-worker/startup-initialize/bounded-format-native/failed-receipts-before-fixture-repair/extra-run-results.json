@@ -1,0 +1,72 @@
+[
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/bounded-format-native/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/bounded-format-native/verify_initialized_record.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/bounded-format-native/0b80d612fe52fd296eae01d1e304daf8769df2a6847f8649ebfe787c3108d419/candidate.elf"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/bounded-format-native/run_oracle.py\", line 29, in <module>\n    runpy.run_path(str(script),run_name='__main__')\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 294, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/bounded-format-native/verify_initialized_record.py\", line 42, in <module>\n    bindings=json.loads((HERE/'native-selector-bindings.json').read_text())['slots']\n                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_local.py\", line 546, in read_text\n    return PathBase.read_text(self, encoding, errors, newline)\n           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_abc.py\", line 632, in read_text\n    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:\n         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_local.py\", line 537, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/bounded-format-native/native-selector-bindings.json'\n"
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/bounded-format-native/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/bounded-format-native/verify_selector1.py",
+      "--base",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/bounded-format-native/0b80d612fe52fd296eae01d1e304daf8769df2a6847f8649ebfe787c3108d419/candidate.elf",
+      "--addon",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/bounded-format-native/0b80d612fe52fd296eae01d1e304daf8769df2a6847f8649ebfe787c3108d419/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/bounded-format-native/0b80d612fe52fd296eae01d1e304daf8769df2a6847f8649ebfe787c3108d419/validation/selector1.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 18 direct selector1 fixtures; stock instruction bytes visited 472 of 472\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/bounded-format-native/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/selector1-idle-integrated/verify_root_initialized.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/bounded-format-native/0b80d612fe52fd296eae01d1e304daf8769df2a6847f8649ebfe787c3108d419/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/bounded-format-native/0b80d612fe52fd296eae01d1e304daf8769df2a6847f8649ebfe787c3108d419/validation/root-installed.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 1400 {'write': 50, 'read': 0, '20': 22, '24': 26, '28': 0, '30': 22, '34': 0, '38': 0, 'init': 810}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/bounded-format-native/run_oracle.py",
+      "g2/components/bootloader/thread_creation/verify_resume_tick.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/bounded-format-native/0b80d612fe52fd296eae01d1e304daf8769df2a6847f8649ebfe787c3108d419/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/bounded-format-native/0b80d612fe52fd296eae01d1e304daf8769df2a6847f8649ebfe787c3108d419/validation/resume_tick.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\"status\": \"PASS\", \"cases\": 96, \"distinct_original_trace_bytes\": 502}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/bounded-format-native/run_oracle.py",
+      "g2/components/bootloader/thread_creation/verify_tick.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/bounded-format-native/0b80d612fe52fd296eae01d1e304daf8769df2a6847f8649ebfe787c3108d419/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/bounded-format-native/0b80d612fe52fd296eae01d1e304daf8769df2a6847f8649ebfe787c3108d419/validation/tick.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\"status\": \"PASS\", \"cases\": 288, \"distinct_original_trace_bytes\": 348}\n",
+    "stderr": ""
+  }
+]

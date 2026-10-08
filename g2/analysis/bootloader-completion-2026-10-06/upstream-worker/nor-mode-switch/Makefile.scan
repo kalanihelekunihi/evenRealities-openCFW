@@ -1,0 +1,33 @@
+CC = clang
+LD = arm-none-eabi-ld
+PYTHON ?= /Users/kalani/.local/share/opencfw/venv/bin/python
+ROOT := ../../../../../
+HERE := $(CURDIR)
+COMP := $(ROOT)/g2/components/bootloader/nor_mspi_power
+NOR_INIT := $(ROOT)/g2/components/bootloader/nor_init
+NOR_STATUS := $(ROOT)/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/nor-read-status
+OUT ?= out
+CFLAGS := --target=arm-none-eabi -mcpu=cortex-m4 -mthumb -mfloat-abi=soft \
+	-ffreestanding -fno-builtin -ffunction-sections -fdata-sections \
+	-std=c11 -O2 -Wall -Wextra -Werror
+
+.PHONY: all verify
+all: $(OUT)/timing-scan.elf
+
+$(OUT):
+	mkdir -p $@
+
+$(OUT)/runtime-profile-table.bin: $(HERE)/extract_profile_table.py
+	$(PYTHON) $(HERE)/extract_profile_table.py --output $@
+
+$(OUT)/timing_scan.o: $(COMP)/timing_scan.c $(COMP)/timing_scan.h | $(OUT)
+	$(CC) $(CFLAGS) -I$(COMP) -c $< -o $@
+
+$(OUT)/nor_init_jedec.o: $(NOR_INIT)/nor_init.c $(NOR_INIT)/nor_init.h $(NOR_STATUS)/nor_read_status.h | $(OUT)
+	$(CC) $(CFLAGS) -I$(NOR_INIT) -I$(NOR_STATUS) -c $< -o $@
+
+$(OUT)/timing-scan.elf: $(OUT)/timing_scan.o $(OUT)/nor_init_jedec.o timing_scan.ld
+	$(LD) --gc-sections -T timing_scan.ld -o $@ $(OUT)/timing_scan.o $(OUT)/nor_init_jedec.o
+
+verify: $(OUT)/timing-scan.elf $(OUT)/runtime-profile-table.bin
+	$(PYTHON) verify_timing_scan.py --elf $(OUT)/timing-scan.elf --profile-table $(OUT)/runtime-profile-table.bin --output $(OUT)/timing-scan-differential.json

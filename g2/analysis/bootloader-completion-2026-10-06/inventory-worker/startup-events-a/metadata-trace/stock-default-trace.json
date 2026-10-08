@@ -1,0 +1,707 @@
+{
+  "status": "OBSERVED",
+  "image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "decoded_initializer_sha256": "e3bea7ccd46bc324829152b5b5a9069aecce5db243876273084d29bd7d47b843",
+  "decoded_initializer_bytes": 1371,
+  "initializer_record": [
+    "0x10bc",
+    "0x4e2",
+    "0x20000000"
+  ],
+  "callback_table": {
+    "address": "0x20000158",
+    "targets": [
+      "0x427e85",
+      "0x428069",
+      "0x428241",
+      "0x4283e3",
+      "0x428507",
+      "0x42863f",
+      "0x428841",
+      "0x428921",
+      "0x428bb1",
+      "0x428ca5",
+      "0x428d91",
+      "0x428e6b",
+      "0x4290a3",
+      "0x4291ed",
+      "0x42944b",
+      "0x429525",
+      "0x42962d",
+      "0x429719",
+      "0x42984f",
+      "0x429a31",
+      "0x429b4d",
+      "0x429c47",
+      "0x429e01",
+      "0x429f69",
+      "0x42a031",
+      "0x42a033",
+      "0x42a035"
+    ]
+  },
+  "default_state": {
+    "major": 7,
+    "minor_adjacent_word": 7,
+    "ton": 6,
+    "last_timer": 255
+  },
+  "profile_note": "Nonuniform fixture profile uses actual decoded VDDC/VDDF rank words; core/tempco and VDDCLV fields are explicitly synthetic.",
+  "trace_rule": "Original stock callback bytes only; stop before first table target instruction. No opaque return is fabricated.",
+  "observations": [
+    {
+      "fixture": {
+        "name": "temp-0.0",
+        "stimulus": 2,
+        "argument": 0,
+        "current_cpu": 0,
+        "current_temp": 2,
+        "state_flag": 1
+      },
+      "completed_to_stop": false,
+      "callbacks": [
+        {
+          "selector": 24,
+          "target": "0x42a030",
+          "caller_return": "0x42a4b0",
+          "args": [
+            5,
+            7,
+            0,
+            6
+          ],
+          "sp": "0x2003ef80",
+          "primask": 1,
+          "caller_bytes": "5cf82ec0e047",
+          "state_at_entry": {
+            "current_major": 7,
+            "current_ton": 6,
+            "timer": 255
+          }
+        },
+        {
+          "selector": 16,
+          "target": "0x42962c",
+          "caller_return": "0x42a4b0",
+          "args": [
+            5,
+            7,
+            0,
+            6
+          ],
+          "sp": "0x2003ef80",
+          "primask": 1,
+          "caller_bytes": "5cf82ec0e047",
+          "state_at_entry": {
+            "current_major": 7,
+            "current_ton": 6,
+            "timer": 255
+          }
+        }
+      ],
+      "status": 5,
+      "current_major": 7,
+      "ton": 6,
+      "timer": 255
+    },
+    {
+      "fixture": {
+        "name": "temp-49.5",
+        "stimulus": 2,
+        "argument": 1111883776,
+        "current_cpu": 0,
+        "current_temp": 2,
+        "state_flag": 1
+      },
+      "completed_to_stop": false,
+      "callbacks": [
+        {
+          "selector": 24,
+          "target": "0x42a030",
+          "caller_return": "0x42a4b0",
+          "args": [
+            5,
+            7,
+            0,
+            6
+          ],
+          "sp": "0x2003ef80",
+          "primask": 1,
+          "caller_bytes": "5cf82ec0e047",
+          "state_at_entry": {
+            "current_major": 7,
+            "current_ton": 6,
+            "timer": 255
+          }
+        },
+        {
+          "selector": 16,
+          "target": "0x42962c",
+          "caller_return": "0x42a4b0",
+          "args": [
+            5,
+            7,
+            0,
+            6
+          ],
+          "sp": "0x2003ef80",
+          "primask": 1,
+          "caller_bytes": "5cf82ec0e047",
+          "state_at_entry": {
+            "current_major": 7,
+            "current_ton": 6,
+            "timer": 255
+          }
+        }
+      ],
+      "status": 5,
+      "current_major": 7,
+      "ton": 6,
+      "timer": 255
+    },
+    {
+      "fixture": {
+        "name": "temp-50.0",
+        "stimulus": 2,
+        "argument": 1112014848,
+        "current_cpu": 0,
+        "current_temp": 2,
+        "state_flag": 1
+      },
+      "completed_to_stop": false,
+      "callbacks": [
+        {
+          "selector": 24,
+          "target": "0x42a030",
+          "caller_return": "0x42a4b0",
+          "args": [
+            4,
+            7,
+            0,
+            6
+          ],
+          "sp": "0x2003ef80",
+          "primask": 1,
+          "caller_bytes": "5cf82ec0e047",
+          "state_at_entry": {
+            "current_major": 7,
+            "current_ton": 6,
+            "timer": 255
+          }
+        },
+        {
+          "selector": 16,
+          "target": "0x42962c",
+          "caller_return": "0x42a4b0",
+          "args": [
+            4,
+            7,
+            0,
+            6
+          ],
+          "sp": "0x2003ef80",
+          "primask": 1,
+          "caller_bytes": "5cf82ec0e047",
+          "state_at_entry": {
+            "current_major": 7,
+            "current_ton": 6,
+            "timer": 255
+          }
+        }
+      ],
+      "status": 4,
+      "current_major": 7,
+      "ton": 6,
+      "timer": 255
+    },
+    {
+      "fixture": {
+        "name": "temp--20.0",
+        "stimulus": 2,
+        "argument": 3248488448,
+        "current_cpu": 0,
+        "current_temp": 2,
+        "state_flag": 1
+      },
+      "completed_to_stop": true,
+      "callbacks": [
+        {
+          "selector": 24,
+          "target": "0x42a030",
+          "caller_return": "0x42a4b0",
+          "args": [
+            6,
+            7,
+            0,
+            6
+          ],
+          "sp": "0x2003ef80",
+          "primask": 1,
+          "caller_bytes": "5cf82ec0e047",
+          "state_at_entry": {
+            "current_major": 7,
+            "current_ton": 6,
+            "timer": 255
+          }
+        }
+      ],
+      "status": 0,
+      "current_major": 6,
+      "ton": 6,
+      "timer": 255
+    },
+    {
+      "fixture": {
+        "name": "temp--0.5",
+        "stimulus": 2,
+        "argument": 3204448256,
+        "current_cpu": 0,
+        "current_temp": 2,
+        "state_flag": 1
+      },
+      "completed_to_stop": true,
+      "callbacks": [
+        {
+          "selector": 24,
+          "target": "0x42a030",
+          "caller_return": "0x42a4b0",
+          "args": [
+            6,
+            7,
+            0,
+            6
+          ],
+          "sp": "0x2003ef80",
+          "primask": 1,
+          "caller_bytes": "5cf82ec0e047",
+          "state_at_entry": {
+            "current_major": 7,
+            "current_ton": 6,
+            "timer": 255
+          }
+        }
+      ],
+      "status": 0,
+      "current_major": 6,
+      "ton": 6,
+      "timer": 255
+    },
+    {
+      "fixture": {
+        "name": "temp-999.0",
+        "stimulus": 2,
+        "argument": 1148829696,
+        "current_cpu": 0,
+        "current_temp": 2,
+        "state_flag": 1
+      },
+      "completed_to_stop": false,
+      "callbacks": [
+        {
+          "selector": 24,
+          "target": "0x42a030",
+          "caller_return": "0x42a4b0",
+          "args": [
+            4,
+            7,
+            0,
+            6
+          ],
+          "sp": "0x2003ef80",
+          "primask": 1,
+          "caller_bytes": "5cf82ec0e047",
+          "state_at_entry": {
+            "current_major": 7,
+            "current_ton": 6,
+            "timer": 255
+          }
+        },
+        {
+          "selector": 16,
+          "target": "0x42962c",
+          "caller_return": "0x42a4b0",
+          "args": [
+            4,
+            7,
+            0,
+            6
+          ],
+          "sp": "0x2003ef80",
+          "primask": 1,
+          "caller_bytes": "5cf82ec0e047",
+          "state_at_entry": {
+            "current_major": 7,
+            "current_ton": 6,
+            "timer": 255
+          }
+        }
+      ],
+      "status": 4,
+      "current_major": 7,
+      "ton": 6,
+      "timer": 255
+    },
+    {
+      "fixture": {
+        "name": "event-0",
+        "stimulus": 0,
+        "argument": 0,
+        "current_cpu": 0,
+        "current_temp": 2,
+        "state_flag": 1
+      },
+      "completed_to_stop": false,
+      "callbacks": [
+        {
+          "selector": 24,
+          "target": "0x42a030",
+          "caller_return": "0x42a4b0",
+          "args": [
+            5,
+            7,
+            0,
+            6
+          ],
+          "sp": "0x2003ef80",
+          "primask": 1,
+          "caller_bytes": "5cf82ec0e047",
+          "state_at_entry": {
+            "current_major": 7,
+            "current_ton": 6,
+            "timer": 255
+          }
+        },
+        {
+          "selector": 16,
+          "target": "0x42962c",
+          "caller_return": "0x42a4b0",
+          "args": [
+            5,
+            7,
+            0,
+            6
+          ],
+          "sp": "0x2003ef80",
+          "primask": 1,
+          "caller_bytes": "5cf82ec0e047",
+          "state_at_entry": {
+            "current_major": 7,
+            "current_ton": 6,
+            "timer": 255
+          }
+        }
+      ],
+      "status": 5,
+      "current_major": 7,
+      "ton": 6,
+      "timer": 255
+    },
+    {
+      "fixture": {
+        "name": "event-1",
+        "stimulus": 1,
+        "argument": 1,
+        "current_cpu": 0,
+        "current_temp": 2,
+        "state_flag": 1
+      },
+      "completed_to_stop": false,
+      "callbacks": [
+        {
+          "selector": 24,
+          "target": "0x42a030",
+          "caller_return": "0x42a4b0",
+          "args": [
+            5,
+            7,
+            2,
+            6
+          ],
+          "sp": "0x2003ef80",
+          "primask": 1,
+          "caller_bytes": "5cf82ec0e047",
+          "state_at_entry": {
+            "current_major": 7,
+            "current_ton": 6,
+            "timer": 255
+          }
+        },
+        {
+          "selector": 16,
+          "target": "0x42962c",
+          "caller_return": "0x42a4b0",
+          "args": [
+            5,
+            7,
+            2,
+            6
+          ],
+          "sp": "0x2003ef80",
+          "primask": 1,
+          "caller_bytes": "5cf82ec0e047",
+          "state_at_entry": {
+            "current_major": 7,
+            "current_ton": 6,
+            "timer": 255
+          }
+        }
+      ],
+      "status": 5,
+      "current_major": 7,
+      "ton": 6,
+      "timer": 255
+    },
+    {
+      "fixture": {
+        "name": "event-3",
+        "stimulus": 3,
+        "argument": 0,
+        "current_cpu": 0,
+        "current_temp": 2,
+        "state_flag": 1
+      },
+      "completed_to_stop": false,
+      "callbacks": [
+        {
+          "selector": 24,
+          "target": "0x42a030",
+          "caller_return": "0x42a4b0",
+          "args": [
+            5,
+            7,
+            0,
+            6
+          ],
+          "sp": "0x2003ef80",
+          "primask": 1,
+          "caller_bytes": "5cf82ec0e047",
+          "state_at_entry": {
+            "current_major": 7,
+            "current_ton": 6,
+            "timer": 255
+          }
+        },
+        {
+          "selector": 16,
+          "target": "0x42962c",
+          "caller_return": "0x42a4b0",
+          "args": [
+            5,
+            7,
+            0,
+            6
+          ],
+          "sp": "0x2003ef80",
+          "primask": 1,
+          "caller_bytes": "5cf82ec0e047",
+          "state_at_entry": {
+            "current_major": 7,
+            "current_ton": 6,
+            "timer": 255
+          }
+        }
+      ],
+      "status": 5,
+      "current_major": 7,
+      "ton": 6,
+      "timer": 255
+    },
+    {
+      "fixture": {
+        "name": "event-4",
+        "stimulus": 4,
+        "argument": 0,
+        "current_cpu": 0,
+        "current_temp": 2,
+        "state_flag": 1
+      },
+      "completed_to_stop": false,
+      "callbacks": [
+        {
+          "selector": 24,
+          "target": "0x42a030",
+          "caller_return": "0x42a4b0",
+          "args": [
+            5,
+            7,
+            0,
+            6
+          ],
+          "sp": "0x2003ef80",
+          "primask": 1,
+          "caller_bytes": "5cf82ec0e047",
+          "state_at_entry": {
+            "current_major": 7,
+            "current_ton": 6,
+            "timer": 255
+          }
+        },
+        {
+          "selector": 16,
+          "target": "0x42962c",
+          "caller_return": "0x42a4b0",
+          "args": [
+            5,
+            7,
+            0,
+            6
+          ],
+          "sp": "0x2003ef80",
+          "primask": 1,
+          "caller_bytes": "5cf82ec0e047",
+          "state_at_entry": {
+            "current_major": 7,
+            "current_ton": 6,
+            "timer": 255
+          }
+        }
+      ],
+      "status": 5,
+      "current_major": 7,
+      "ton": 6,
+      "timer": 255
+    },
+    {
+      "fixture": {
+        "name": "event-5",
+        "stimulus": 5,
+        "argument": 0,
+        "current_cpu": 0,
+        "current_temp": 2,
+        "state_flag": 1
+      },
+      "completed_to_stop": false,
+      "callbacks": [
+        {
+          "selector": 24,
+          "target": "0x42a030",
+          "caller_return": "0x42a4b0",
+          "args": [
+            5,
+            7,
+            0,
+            6
+          ],
+          "sp": "0x2003ef80",
+          "primask": 1,
+          "caller_bytes": "5cf82ec0e047",
+          "state_at_entry": {
+            "current_major": 7,
+            "current_ton": 6,
+            "timer": 255
+          }
+        },
+        {
+          "selector": 16,
+          "target": "0x42962c",
+          "caller_return": "0x42a4b0",
+          "args": [
+            5,
+            7,
+            0,
+            6
+          ],
+          "sp": "0x2003ef80",
+          "primask": 1,
+          "caller_bytes": "5cf82ec0e047",
+          "state_at_entry": {
+            "current_major": 7,
+            "current_ton": 6,
+            "timer": 255
+          }
+        }
+      ],
+      "status": 5,
+      "current_major": 7,
+      "ton": 6,
+      "timer": 255
+    },
+    {
+      "fixture": {
+        "name": "event-6",
+        "stimulus": 6,
+        "argument": 0,
+        "current_cpu": 0,
+        "current_temp": 2,
+        "state_flag": 1
+      },
+      "completed_to_stop": false,
+      "callbacks": [
+        {
+          "selector": 24,
+          "target": "0x42a030",
+          "caller_return": "0x42a4b0",
+          "args": [
+            5,
+            7,
+            0,
+            6
+          ],
+          "sp": "0x2003ef80",
+          "primask": 1,
+          "caller_bytes": "5cf82ec0e047",
+          "state_at_entry": {
+            "current_major": 7,
+            "current_ton": 6,
+            "timer": 255
+          }
+        },
+        {
+          "selector": 16,
+          "target": "0x42962c",
+          "caller_return": "0x42a4b0",
+          "args": [
+            5,
+            7,
+            0,
+            6
+          ],
+          "sp": "0x2003ef80",
+          "primask": 1,
+          "caller_bytes": "5cf82ec0e047",
+          "state_at_entry": {
+            "current_major": 7,
+            "current_ton": 6,
+            "timer": 255
+          }
+        }
+      ],
+      "status": 5,
+      "current_major": 7,
+      "ton": 6,
+      "timer": 255
+    },
+    {
+      "fixture": {
+        "name": "event-7",
+        "stimulus": 7,
+        "argument": 0,
+        "current_cpu": 0,
+        "current_temp": 2,
+        "state_flag": 1
+      },
+      "completed_to_stop": true,
+      "callbacks": [],
+      "status": 6,
+      "current_major": 7,
+      "ton": 6,
+      "timer": 255
+    },
+    {
+      "fixture": {
+        "name": "event-8",
+        "stimulus": 8,
+        "argument": 0,
+        "current_cpu": 0,
+        "current_temp": 2,
+        "state_flag": 1
+      },
+      "completed_to_stop": true,
+      "callbacks": [],
+      "status": 6,
+      "current_major": 7,
+      "ton": 6,
+      "timer": 255
+    }
+  ]
+}

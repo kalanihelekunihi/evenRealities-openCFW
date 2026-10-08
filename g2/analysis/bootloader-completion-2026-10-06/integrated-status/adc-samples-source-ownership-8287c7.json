@@ -1,0 +1,86 @@
+{
+  "utc": "2026-10-07T03:13:47.933882+00:00",
+  "image_sha256": "8287c7b86fea2f84996c517fa1d82b27fd23dd780d923d38db8376bf93e17014",
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "functions": [
+    {
+      "symbol": "opencfw_bl_adc_activate",
+      "original_entry": "0x42ed60",
+      "original_end_exclusive": "0x42eda0",
+      "source_entry": "0x3544c",
+      "compiled_function_bytes": 60,
+      "original_body_bytes": 64,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_adc_enable",
+      "original_entry": "0x42ebaa",
+      "original_end_exclusive": "0x42ebe2",
+      "source_entry": "0x35488",
+      "compiled_function_bytes": 58,
+      "original_body_bytes": 56,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_adc_disable",
+      "original_entry": "0x42ebe2",
+      "original_end_exclusive": "0x42ec0c",
+      "source_entry": "0x354c4",
+      "compiled_function_bytes": 46,
+      "original_body_bytes": 42,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_adc_command",
+      "original_entry": "0x42eff4",
+      "original_end_exclusive": "0x42f014",
+      "source_entry": "0x354f4",
+      "compiled_function_bytes": 42,
+      "original_body_bytes": 32,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_adc_normalize",
+      "original_entry": "0x42eda0",
+      "original_end_exclusive": "0x42edf6",
+      "source_entry": "0x35520",
+      "compiled_function_bytes": 94,
+      "original_body_bytes": 86,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_adc_enumerate",
+      "original_entry": "0x42ee70",
+      "original_end_exclusive": "0x42eff4",
+      "source_entry": "0x352dc",
+      "compiled_function_bytes": 366,
+      "original_body_bytes": 388,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_boot_adc_correct_sample",
+      "original_entry": "0x42ee00",
+      "original_end_exclusive": "0x42ee6c",
+      "source_entry": "0x35260",
+      "compiled_function_bytes": 124,
+      "original_body_bytes": 108,
+      "ownership": "new-native-body"
+    }
+  ],
+  "new_native_body_bytes": 776,
+  "visited_new_native_body_bytes": 776,
+  "direct_cases": 988,
+  "source": "g2/components/bootloader/initializer_callbacks/adc_samples.c",
+  "source_sha256": "2de032d8bd7d3c74c38deaa83e3a86ae2fb16043cb1bc84b5e0b59a67fb1fa5c",
+  "header_sha256": "b8a4d2715dd3915f487b58676c164bad4c1bbcc927af2c132fc2ff51f31b876f",
+  "validation": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/adc-samples-8287c7.json",
+  "reused_native_dependencies": [
+    "clock_release422364",
+    "class4 user map/critical/HFADJ helpers"
+  ],
+  "limits": [
+    "No FP32/external-call stubs in direct988 comparisons; FIFO/MMIO/user map explicit synthetic inputs.",
+    "All776 original body bytes visited, not arbitrary interleavings, actual calibration, FIFO or analog behavior.",
+    "Deactivation and timer disable are distinct; neither proves IRQ/task/callback drain/quiescence."
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "start": 4704960,
+  "end": 4704972,
+  "bytes": "906f720004797400c46f7200",
+  "words": [
+    {
+      "address": 4704960,
+      "value": 7499664
+    },
+    {
+      "address": 4704964,
+      "value": 7633156
+    },
+    {
+      "address": 4704968,
+      "value": 7499716
+    }
+  ],
+  "consumers": [
+    {
+      "component": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-post-scan-full-count-and-minimum-diagnostics-21194-map/001",
+      "instruction": {
+        "address": 4702144,
+        "bytes": "dff8fc1a",
+        "mnemonic": "ldr.w",
+        "operands": "r1, [pc, #2812]\t@ 47cac0 <.text+0xb92>"
+      },
+      "literal_address": 4704960
+    },
+    {
+      "component": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-post-scan-full-maximum-index-diagnostics-21196-map/001",
+      "instruction": {
+        "address": 4702176,
+        "bytes": "dff8e00a",
+        "mnemonic": "ldr.w",
+        "operands": "r0, [pc, #2784]\t@ 47cac4 <.text+0xaf2>"
+      },
+      "literal_address": 4704964
+    },
+    {
+      "component": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-post-scan-full-maximum-index-diagnostics-21196-map/001",
+      "instruction": {
+        "address": 4702222,
+        "bytes": "dff8b81a",
+        "mnemonic": "ldr.w",
+        "operands": "r1, [pc, #2744]\t@ 47cac8 <.text+0xaf6>"
+      },
+      "literal_address": 4704968
+    }
+  ]
+}

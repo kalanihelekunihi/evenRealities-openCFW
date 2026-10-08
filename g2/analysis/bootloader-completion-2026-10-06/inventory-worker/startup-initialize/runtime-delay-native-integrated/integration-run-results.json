@@ -1,0 +1,50 @@
+[
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/runtime-delay-native-integrated/run_oracle.py",
+      "g2/components/bootloader/thread_creation/verify_source_image.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/runtime-delay-native-integrated/e5aeae5297c6aa35c78a5f4c558365d2d47a0f8f6505f3ed2431914278ef6c32/candidate.elf",
+      "--seed-elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/filesystem/filesystem-update.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/runtime-delay-native-integrated/e5aeae5297c6aa35c78a5f4c558365d2d47a0f8f6505f3ed2431914278ef6c32/validation/comparison.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\"status\": \"PASS\", \"cases\": 2, \"distinct_original_trace_bytes\": 38318}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/runtime-delay-native-integrated/run_oracle.py",
+      "g2/components/bootloader/thread_creation/verify_source_image_failures.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/runtime-delay-native-integrated/e5aeae5297c6aa35c78a5f4c558365d2d47a0f8f6505f3ed2431914278ef6c32/candidate.elf",
+      "--seed-elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/filesystem/filesystem-update.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/runtime-delay-native-integrated/e5aeae5297c6aa35c78a5f4c558365d2d47a0f8f6505f3ed2431914278ef6c32/validation/failures.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\"status\": \"PASS\", \"cases\": 3, \"distinct_original_trace_bytes\": 37068}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/runtime-delay-native-integrated/run_oracle.py",
+      "g2/components/bootloader/thread_creation/verify_dfu_storage_powerloss.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/runtime-delay-native-integrated/e5aeae5297c6aa35c78a5f4c558365d2d47a0f8f6505f3ed2431914278ef6c32/candidate.elf",
+      "--seed-elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/filesystem/filesystem-update.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/runtime-delay-native-integrated/e5aeae5297c6aa35c78a5f4c558365d2d47a0f8f6505f3ed2431914278ef6c32/validation/powerloss.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\"status\": \"PASS\", \"cases\": 2, \"distinct_original_trace_bytes\": 38278}\n",
+    "stderr": ""
+  }
+]

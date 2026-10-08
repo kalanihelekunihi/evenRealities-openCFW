@@ -1,0 +1,5 @@
+# Three-helper reset sequence and constructed local record result
+
+Partial/unaccepted;154instructionbytes47EE60..47EEFA,twoentries.
+EE60 PUSH R7,LR8;4D3628(0,0,liveR2,R3);4D3CAE(0,liveR1,R2,R3);4D3ACC(liveargs);R0=0;POP R1,PC returnsR1=savedentryR7. Allhelperresultsdiscarded,alwayszeroifnormallyreturns.
+EE78 PUSH R4,LR8;SP-=48,total56;R4=entryR0recordpointer. Freshwordsrecord24/28/32→SP32/36/40;SP44=0. Freshword20→R2,word16→R1,word12+2000modulo2^32→R0;4D3CF8(R0,R1,R2,liveR3)→SP12fullresult. Independentlyfreshwords20/16/12→SP28/24/20;SP16=1. SP8notexplicitlyinitialized.4D3ADC(SP+8,liveR1,R2,R3). Fullzero→R0=0exit,no diagnostics. Fullnonzero→firstfresh43D0CEbit1set→SP4=literalEEFC,SP0=221;43D574(1,literalEF08,literalEF04,literalEF00). Thenfresh43D0CEbit0set→masklogger;elseanotherfreshcallbit2set→masklogger. Masklogger43CE9E(04000000hex,literalEF0C,literalEF0C,liveR3),R3notexplicitlyset. RegardlessdiagnosticsnonzeropathR0=1exit. SP+=48;POP R4,PC restoresentryR4. Distinctrecordobservationsbefore/afterhelperpreserved,no48bytememsetinferred. No C/freeze/completenessclaim.

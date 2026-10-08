@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "scope": "LVGL/Nema dependency inputs plus one explicitly unresolved image descriptor candidate; inventory only",
+  "dependencies": [
+    {
+      "name": "LVGL core",
+      "role": "generic object, image descriptor and draw framework",
+      "source_path": "third-party/upstream/lvgl",
+      "source_pin": "344c7c318047b7348e1be8572a9fd4260c251cfa",
+      "source_status": "present; hybrid 9.3-development baseline, not exact product source",
+      "license": "MIT (repository license; embedded font/asset licenses remain their own)",
+      "evidence": "g2/docs/reference/libraries.md:56; g2/docs/research/lvgl-ambiq-source-abi-recovery-audit.md",
+      "claim_limit": "No product-specific configuration/renderer equivalence or full source identity implied.",
+      "source_checkout_present_in_current_workspace": true
+    },
+    {
+      "name": "Ambiq LVGL draw backend",
+      "role": "Ambiq draw backend implementation and recovered handler ABI",
+      "source_path": "third-party/upstream/ambiq-lvgl/src/draw/ambiq",
+      "source_pin": "1e774257495fa43177e04fc5c8a42a77c2d7d619",
+      "source_status": "active source submodule is an uninitialized gitlink; exact 16-file MIT backend subtree is available in the owned reference snapshot",
+      "license": "MIT",
+      "evidence": "g2/docs/reference/libraries.md:57; g2/analysis/rescan-2026-10-07/implemented/resources/reference-snapshots/ambiq-lvgl-backend/provenance/g2-lvgl-ambiq-source-provenance.json",
+      "claim_limit": "Exactness applies to the Ambiq backend subtree only; excludes G2 runtime/compatibility providers and does not establish full LVGL/product build identity.",
+      "source_checkout_present_in_current_workspace": false,
+      "active_gitlink": {
+        "path": "third-party/upstream/ambiq-lvgl",
+        "commit": "5be8e0ae5077aa3880aba8a322b1487d6bc73c07",
+        "initialized": false
+      },
+      "historical_source_path": "g2/third_party/lvgl-ambiq-backend/src/draw/ambiq",
+      "reference_snapshot_path": "g2/analysis/rescan-2026-10-07/implemented/resources/reference-snapshots/ambiq-lvgl-backend/src/draw/ambiq",
+      "reference_snapshot_tree": "1e774257495fa43177e04fc5c8a42a77c2d7d619",
+      "reference_snapshot_manifest": "g2/analysis/rescan-2026-10-07/implemented/resources/reference-snapshots/ambiq-lvgl-backend/provenance/g2-lvgl-ambiq-source-provenance.json",
+      "reference_snapshot_present": true,
+      "verified_source_files": 16
+    },
+    {
+      "name": "Google liblc3",
+      "role": "LC3 encoder source candidate used by service_audio",
+      "source_path": "third-party/upstream/liblc3",
+      "source_pin": "96a3af0beb5487aca3b98a4b992a539a1f6d80d1",
+      "version": "1.1.3",
+      "source_status": "active source submodule is an uninitialized gitlink; complete v1.1.3 reference snapshot and original provenance are available in the owned directory",
+      "license": "Apache-2.0",
+      "evidence": "g2/docs/reference/libraries.md:72; g2/analysis/rescan-2026-10-07/implemented/resources/reference-snapshots/liblc3/PROVENANCE.json",
+      "claim_limit": "Apache-2.0 public v1.1.3 compatibility baseline only; provenance rejects exact public-source candidate and exact private checkout claims.",
+      "source_checkout_present_in_current_workspace": false,
+      "active_gitlink": {
+        "path": "third-party/upstream/liblc3",
+        "commit": "96a3af0beb5487aca3b98a4b992a539a1f6d80d1",
+        "initialized": false
+      },
+      "historical_source_path": "g2/third_party/liblc3",
+      "reference_snapshot_path": "g2/analysis/rescan-2026-10-07/implemented/resources/reference-snapshots/liblc3",
+      "reference_snapshot_tree": "345d1a17ee6bdf7ab872bf4c53bf2a1845552a12",
+      "snapshot_manifest_verified_entries": 38,
+      "reference_snapshot_present": true,
+      "historical_tree_files": 42,
+      "upstream_snapshot_manifest_entries_verified": 38
+    },
+    {
+      "name": "NemaGFX/NemaVG SDK",
+      "role": "GPU API and proprietary renderer implementation",
+      "source_path": "third-party/upstream/ambiqhal-nema/components/graphics/NemaGFX_SDK",
+      "source_pin": "NemaGFX 1.4.12 / NemaVG 1.1.8; AmbiqSuite 5.1.0",
+      "source_status": "active upstream source gitlinks are uninitialized; the bounded permissively licensed header/extension snapshot is available in the owned directory; no complete product-equivalent proprietary C closure is claimed",
+      "license": "Think Silicon permissive header license; archives are vendor binaries",
+      "evidence": "g2/docs/reference/libraries.md:58,173-176; g2/analysis/rescan-2026-10-07/implemented/resources/reference-snapshots/nema-sdk-headers/provenance/g2-nemagfx-ambiq-provenance.json",
+      "claim_limit": "Think Silicon header license preserved; public GCC archives are vendor binaries and differ from stock IAR objects. This is not complete proprietary Nema C implementation.",
+      "source_checkout_present_in_current_workspace": false,
+      "active_gitlinks": [
+        {
+          "path": "third-party/upstream/ambiqhal-nema",
+          "commit": "b853fded7e545f005727e13bf2ce83018c7e242d",
+          "initialized": false
+        },
+        {
+          "path": "third-party/upstream/ambiqhal-apollo510",
+          "commit": "5efc0228528a8adce5eae0d226fac85d2551eb3b",
+          "initialized": false
+        }
+      ],
+      "historical_source_path": "g2/third_party/nema-sdk-headers",
+      "reference_snapshot_path": "g2/analysis/rescan-2026-10-07/implemented/resources/reference-snapshots/nema-sdk-headers",
+      "reference_snapshot_tree": "5069f7e371971ff44238d98319b7310637c5f1d6",
+      "reference_snapshot_manifest": "g2/analysis/rescan-2026-10-07/implemented/resources/reference-snapshots/nema-sdk-headers/provenance/g2-nemagfx-ambiq-provenance.json",
+      "reference_snapshot_scope": "headers and GPU extension header only; no SDK archive binaries recovered",
+      "reference_snapshot_present": true,
+      "verified_header_snapshot_files": 33
+    },
+    {
+      "name": "Official resource payload",
+      "role": "proprietary stored image bytes and external NOR content",
+      "source_path": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+      "source_pin": "sha256 36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "source_status": "official Apollo payload present; six prior L8 images account for 28872 bytes; corresponding missing external NOR image is not supplied here",
+      "license": "Proprietary firmware/resources; redistribution permission not established",
+      "evidence": "g2/analysis/shortcut-batch-2026-10-05/resources/README.md; g2/tools/RESOURCE_PRESERVATION.md",
+      "claim_limit": "Does not infer any new format from the six L8 examples, regenerate absent NOR assets, or assert artwork authorship.",
+      "source_checkout_present_in_current_workspace": true
+    }
+  ],
+  "reference_input_validation": {
+    "tool": "verify_reference_inputs.py",
+    "receipt": "reference-input-validation.json",
+    "files": 91,
+    "claim": "SHA-256, size and historical Git blob validation; no compatibility inference"
+  }
+}

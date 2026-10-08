@@ -1,0 +1,55 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpxhyiy9ib/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00481a98 <.text>:
+  481a98:	9c0a      	ldr	r4, [sp, #40]	@ 0x28
+  481a9a:	2130      	movs	r1, #48	@ 0x30
+  481a9c:	2c00      	cmp	r4, #0
+  481a9e:	f88d 1000 	strb.w	r1, [sp]
+  481aa2:	dd0c      	ble.n	481abe <.text+0x26>
+  481aa4:	9e30      	ldr	r6, [sp, #192]	@ 0xc0
+  481aa6:	2301      	movs	r3, #1
+  481aa8:	466a      	mov	r2, sp
+  481aaa:	a902      	add	r1, sp, #8
+  481aac:	4630      	mov	r0, r6
+  481aae:	f000 fde9 	bl	482684 <.text+0xbec>
+  481ab2:	2800      	cmp	r0, #0
+  481ab4:	f040 8516 	bne.w	4824e4 <.text+0xa4c>
+  481ab8:	1e64      	subs	r4, r4, #1
+  481aba:	d1f4      	bne.n	481aa6 <.text+0xe>
+  481abc:	9630      	str	r6, [sp, #192]	@ 0xc0
+  481abe:	9f05      	ldr	r7, [sp, #20]
+  481ac0:	9c08      	ldr	r4, [sp, #32]
+  481ac2:	b174      	cbz	r4, 481ae2 <.text+0x4a>
+  481ac4:	9e30      	ldr	r6, [sp, #192]	@ 0xc0
+  481ac6:	f817 1b01 	ldrb.w	r1, [r7], #1
+  481aca:	9804      	ldr	r0, [sp, #16]
+  481acc:	47b0      	blx	r6
+  481ace:	2800      	cmp	r0, #0
+  481ad0:	9004      	str	r0, [sp, #16]
+  481ad2:	f000 8507 	beq.w	4824e4 <.text+0xa4c>
+  481ad6:	980d      	ldr	r0, [sp, #52]	@ 0x34
+  481ad8:	1c40      	adds	r0, r0, #1
+  481ada:	1e64      	subs	r4, r4, #1
+  481adc:	900d      	str	r0, [sp, #52]	@ 0x34
+  481ade:	d1f2      	bne.n	481ac6 <.text+0x2e>
+  481ae0:	9630      	str	r6, [sp, #192]	@ 0xc0
+  481ae2:	9c0b      	ldr	r4, [sp, #44]	@ 0x2c
+  481ae4:	2130      	movs	r1, #48	@ 0x30
+  481ae6:	2c00      	cmp	r4, #0
+  481ae8:	f88d 1000 	strb.w	r1, [sp]
+  481aec:	dd0c      	ble.n	481b08 <.text+0x70>
+  481aee:	9e30      	ldr	r6, [sp, #192]	@ 0xc0
+  481af0:	2301      	movs	r3, #1
+  481af2:	466a      	mov	r2, sp
+  481af4:	a902      	add	r1, sp, #8
+  481af6:	4630      	mov	r0, r6
+  481af8:	f000 fdc4 	bl	482684 <.text+0xbec>
+  481afc:	2800      	cmp	r0, #0
+  481afe:	f040 84f1 	bne.w	4824e4 <.text+0xa4c>
+  481b02:	1e64      	subs	r4, r4, #1
+  481b04:	d1f4      	bne.n	481af0 <.text+0x58>
+  481b06:	9630      	str	r6, [sp, #192]	@ 0xc0

@@ -1,0 +1,1262 @@
+{
+  "status": "PASS_STOCK_READBACK_AFTER_SYNTHETIC_COMMAND7",
+  "cases": 50,
+  "comparisons": [
+    {
+      "inputs": [
+        "blank",
+        1,
+        0,
+        "success",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "matches_requested_config": true
+    },
+    {
+      "inputs": [
+        "blank",
+        1,
+        0,
+        "load-error",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "0000000000000000",
+        "guards": "dddddddddddddddd0000000000000000dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "0000000000000000",
+        "guards": "dddddddddddddddd0000000000000000dddddddddddddddd"
+      },
+      "matches_requested_config": false
+    },
+    {
+      "inputs": [
+        "blank",
+        1,
+        0,
+        "program-error",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "0000000000000000",
+        "guards": "dddddddddddddddd0000000000000000dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "0000000000000000",
+        "guards": "dddddddddddddddd0000000000000000dddddddddddddddd"
+      },
+      "matches_requested_config": false
+    },
+    {
+      "inputs": [
+        "blank",
+        1,
+        0,
+        "torn16",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "0000000000000000",
+        "guards": "dddddddddddddddd0000000000000000dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "0000000000000000",
+        "guards": "dddddddddddddddd0000000000000000dddddddddddddddd"
+      },
+      "matches_requested_config": false
+    },
+    {
+      "inputs": [
+        "blank",
+        1,
+        0,
+        "restore-error",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "matches_requested_config": true
+    },
+    {
+      "inputs": [
+        "blank",
+        1,
+        1,
+        "success",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "matches_requested_config": true
+    },
+    {
+      "inputs": [
+        "blank",
+        1,
+        1,
+        "load-error",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "0000000000000000",
+        "guards": "dddddddddddddddd0000000000000000dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "0000000000000000",
+        "guards": "dddddddddddddddd0000000000000000dddddddddddddddd"
+      },
+      "matches_requested_config": false
+    },
+    {
+      "inputs": [
+        "blank",
+        1,
+        1,
+        "program-error",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "0000000000000000",
+        "guards": "dddddddddddddddd0000000000000000dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "0000000000000000",
+        "guards": "dddddddddddddddd0000000000000000dddddddddddddddd"
+      },
+      "matches_requested_config": false
+    },
+    {
+      "inputs": [
+        "blank",
+        1,
+        1,
+        "torn16",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "matches_requested_config": true
+    },
+    {
+      "inputs": [
+        "blank",
+        1,
+        1,
+        "restore-error",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "matches_requested_config": true
+    },
+    {
+      "inputs": [
+        "valid",
+        1,
+        0,
+        "success",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "matches_requested_config": true
+    },
+    {
+      "inputs": [
+        "valid",
+        1,
+        0,
+        "load-error",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "0001020304050607",
+        "guards": "dddddddddddddddd0001020304050607dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "0001020304050607",
+        "guards": "dddddddddddddddd0001020304050607dddddddddddddddd"
+      },
+      "matches_requested_config": false
+    },
+    {
+      "inputs": [
+        "valid",
+        1,
+        0,
+        "program-error",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "0001020304050607",
+        "guards": "dddddddddddddddd0001020304050607dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "0001020304050607",
+        "guards": "dddddddddddddddd0001020304050607dddddddddddddddd"
+      },
+      "matches_requested_config": false
+    },
+    {
+      "inputs": [
+        "valid",
+        1,
+        0,
+        "torn16",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "4445464748494a4b",
+        "guards": "dddddddddddddddd4445464748494a4bdddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "4445464748494a4b",
+        "guards": "dddddddddddddddd4445464748494a4bdddddddddddddddd"
+      },
+      "matches_requested_config": false
+    },
+    {
+      "inputs": [
+        "valid",
+        1,
+        0,
+        "restore-error",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "matches_requested_config": true
+    },
+    {
+      "inputs": [
+        "valid",
+        1,
+        1,
+        "success",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "matches_requested_config": true
+    },
+    {
+      "inputs": [
+        "valid",
+        1,
+        1,
+        "load-error",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "6c00000001000000",
+        "guards": "dddddddddddddddd6c00000001000000dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "6c00000001000000",
+        "guards": "dddddddddddddddd6c00000001000000dddddddddddddddd"
+      },
+      "matches_requested_config": false
+    },
+    {
+      "inputs": [
+        "valid",
+        1,
+        1,
+        "program-error",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "6c00000001000000",
+        "guards": "dddddddddddddddd6c00000001000000dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "6c00000001000000",
+        "guards": "dddddddddddddddd6c00000001000000dddddddddddddddd"
+      },
+      "matches_requested_config": false
+    },
+    {
+      "inputs": [
+        "valid",
+        1,
+        1,
+        "torn16",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "matches_requested_config": true
+    },
+    {
+      "inputs": [
+        "valid",
+        1,
+        1,
+        "restore-error",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "matches_requested_config": true
+    },
+    {
+      "inputs": [
+        "bad-all",
+        1,
+        0,
+        "success",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 155058177,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 2,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "matches_requested_config": true
+    },
+    {
+      "inputs": [
+        "bad-all",
+        1,
+        0,
+        "load-error",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 155058177,
+        "data": "0000000000000000",
+        "guards": "dddddddddddddddd0000000000000000dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 2,
+        "data": "0000000000000000",
+        "guards": "dddddddddddddddd0000000000000000dddddddddddddddd"
+      },
+      "matches_requested_config": false
+    },
+    {
+      "inputs": [
+        "bad-all",
+        1,
+        0,
+        "program-error",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 155058177,
+        "data": "0000000000000000",
+        "guards": "dddddddddddddddd0000000000000000dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 2,
+        "data": "0000000000000000",
+        "guards": "dddddddddddddddd0000000000000000dddddddddddddddd"
+      },
+      "matches_requested_config": false
+    },
+    {
+      "inputs": [
+        "bad-all",
+        1,
+        0,
+        "torn16",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 155058177,
+        "data": "0000000000000000",
+        "guards": "dddddddddddddddd0000000000000000dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 2,
+        "data": "0000000000000000",
+        "guards": "dddddddddddddddd0000000000000000dddddddddddddddd"
+      },
+      "matches_requested_config": false
+    },
+    {
+      "inputs": [
+        "bad-all",
+        1,
+        0,
+        "restore-error",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 155058177,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 2,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "matches_requested_config": true
+    },
+    {
+      "inputs": [
+        "bad-all",
+        1,
+        1,
+        "success",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "matches_requested_config": true
+    },
+    {
+      "inputs": [
+        "bad-all",
+        1,
+        1,
+        "load-error",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "6d00000001000000",
+        "guards": "dddddddddddddddd6d00000001000000dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "6d00000001000000",
+        "guards": "dddddddddddddddd6d00000001000000dddddddddddddddd"
+      },
+      "matches_requested_config": false
+    },
+    {
+      "inputs": [
+        "bad-all",
+        1,
+        1,
+        "program-error",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "6d00000001000000",
+        "guards": "dddddddddddddddd6d00000001000000dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "6d00000001000000",
+        "guards": "dddddddddddddddd6d00000001000000dddddddddddddddd"
+      },
+      "matches_requested_config": false
+    },
+    {
+      "inputs": [
+        "bad-all",
+        1,
+        1,
+        "torn16",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "matches_requested_config": true
+    },
+    {
+      "inputs": [
+        "bad-all",
+        1,
+        1,
+        "restore-error",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "matches_requested_config": true
+    },
+    {
+      "inputs": [
+        "torn-last",
+        1,
+        0,
+        "success",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "matches_requested_config": true
+    },
+    {
+      "inputs": [
+        "torn-last",
+        1,
+        0,
+        "load-error",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "0001020304050607",
+        "guards": "dddddddddddddddd0001020304050607dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "0001020304050607",
+        "guards": "dddddddddddddddd0001020304050607dddddddddddddddd"
+      },
+      "matches_requested_config": false
+    },
+    {
+      "inputs": [
+        "torn-last",
+        1,
+        0,
+        "program-error",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "0001020304050607",
+        "guards": "dddddddddddddddd0001020304050607dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "0001020304050607",
+        "guards": "dddddddddddddddd0001020304050607dddddddddddddddd"
+      },
+      "matches_requested_config": false
+    },
+    {
+      "inputs": [
+        "torn-last",
+        1,
+        0,
+        "torn16",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 155058177,
+        "data": "0000000000000000",
+        "guards": "dddddddddddddddd0000000000000000dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 2,
+        "data": "0000000000000000",
+        "guards": "dddddddddddddddd0000000000000000dddddddddddddddd"
+      },
+      "matches_requested_config": false
+    },
+    {
+      "inputs": [
+        "torn-last",
+        1,
+        0,
+        "restore-error",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "matches_requested_config": true
+    },
+    {
+      "inputs": [
+        "torn-last",
+        1,
+        1,
+        "success",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "matches_requested_config": true
+    },
+    {
+      "inputs": [
+        "torn-last",
+        1,
+        1,
+        "load-error",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "6c00000001000000",
+        "guards": "dddddddddddddddd6c00000001000000dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "6c00000001000000",
+        "guards": "dddddddddddddddd6c00000001000000dddddddddddddddd"
+      },
+      "matches_requested_config": false
+    },
+    {
+      "inputs": [
+        "torn-last",
+        1,
+        1,
+        "program-error",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "6c00000001000000",
+        "guards": "dddddddddddddddd6c00000001000000dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "6c00000001000000",
+        "guards": "dddddddddddddddd6c00000001000000dddddddddddddddd"
+      },
+      "matches_requested_config": false
+    },
+    {
+      "inputs": [
+        "torn-last",
+        1,
+        1,
+        "torn16",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "matches_requested_config": true
+    },
+    {
+      "inputs": [
+        "torn-last",
+        1,
+        1,
+        "restore-error",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "matches_requested_config": true
+    },
+    {
+      "inputs": [
+        "wrap",
+        1,
+        0,
+        "success",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "matches_requested_config": true
+    },
+    {
+      "inputs": [
+        "wrap",
+        1,
+        0,
+        "load-error",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "0001020304050607",
+        "guards": "dddddddddddddddd0001020304050607dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "0001020304050607",
+        "guards": "dddddddddddddddd0001020304050607dddddddddddddddd"
+      },
+      "matches_requested_config": false
+    },
+    {
+      "inputs": [
+        "wrap",
+        1,
+        0,
+        "program-error",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "0001020304050607",
+        "guards": "dddddddddddddddd0001020304050607dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "0001020304050607",
+        "guards": "dddddddddddddddd0001020304050607dddddddddddddddd"
+      },
+      "matches_requested_config": false
+    },
+    {
+      "inputs": [
+        "wrap",
+        1,
+        0,
+        "torn16",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 155058177,
+        "data": "0000000000000000",
+        "guards": "dddddddddddddddd0000000000000000dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 2,
+        "data": "0000000000000000",
+        "guards": "dddddddddddddddd0000000000000000dddddddddddddddd"
+      },
+      "matches_requested_config": false
+    },
+    {
+      "inputs": [
+        "wrap",
+        1,
+        0,
+        "restore-error",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "matches_requested_config": true
+    },
+    {
+      "inputs": [
+        "wrap",
+        1,
+        1,
+        "success",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "matches_requested_config": true
+    },
+    {
+      "inputs": [
+        "wrap",
+        1,
+        1,
+        "load-error",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "f6000000feffffff",
+        "guards": "ddddddddddddddddf6000000feffffffdddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "f6000000feffffff",
+        "guards": "ddddddddddddddddf6000000feffffffdddddddddddddddd"
+      },
+      "matches_requested_config": false
+    },
+    {
+      "inputs": [
+        "wrap",
+        1,
+        1,
+        "program-error",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "f6000000feffffff",
+        "guards": "ddddddddddddddddf6000000feffffffdddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "f6000000feffffff",
+        "guards": "ddddddddddddddddf6000000feffffffdddddddddddddddd"
+      },
+      "matches_requested_config": false
+    },
+    {
+      "inputs": [
+        "wrap",
+        1,
+        1,
+        "torn16",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "matches_requested_config": true
+    },
+    {
+      "inputs": [
+        "wrap",
+        1,
+        1,
+        "restore-error",
+        4660,
+        0
+      ],
+      "ack": "070017",
+      "deferred_status": [
+        0
+      ],
+      "library_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "application_readback": {
+        "status": 0,
+        "data": "554e564521433412",
+        "guards": "dddddddddddddddd554e564521433412dddddddddddddddd"
+      },
+      "matches_requested_config": true
+    }
+  ],
+  "limits": [
+    "Actual stock read dispatcher/simple or620-byte extended read/checksum/history/provider-copy instructions execute; no cuts.",
+    "Readback observes synthetic write-model output, not a physical device or durable storage.",
+    "No native-source equivalence is claimed for the620-byte read implementation; this is further original-instruction evidence.",
+    "Phone commands6/8 read RAM config, not this persistent-library path; no new on-device readback protocol is implemented."
+  ]
+}

@@ -7,10 +7,11 @@
 #include <stdint.h>
 
 uint32_t opencfw_boot_storage_range_valid(uint32_t address, uint32_t size);
-uint32_t opencfw_boot_storage_read(void *destination, const void *source,
-                                   uint32_t size);
-uint32_t opencfw_boot_storage_program(uint32_t destination,
-                                      const void *source, uint32_t size);
-uint32_t opencfw_boot_storage_erase_validate(uint32_t destination);
+uint32_t opencfw_boot_storage_read_impl(void *destination, const void *source,
+                                        uint32_t size);
+uint32_t opencfw_boot_storage_program_impl(uint32_t destination,
+                                           const void *source,
+                                           uint32_t size);
+uint32_t opencfw_boot_storage_erase_validate_impl(uint32_t destination);
 
 #endif

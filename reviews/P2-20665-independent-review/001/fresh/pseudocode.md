@@ -1,0 +1,3 @@
+# Ten record loop with two guards and byte46 bit2
+
+Partial/unaccepted;40 instruction bytes,inherited56-byteframe,R5tablebase,R4entrypointer. SetR6zeroandbranch0x47A9AE. SignedcomparisonofzeroextendedLOW8 R6with10 >= branchespending0x47AA2E. Otherwisefreshbyte[R5+47]zerobranches0x47A9AA;thenfreshbyte[R5+48]zerobranchessametail;thenfreshbyte[R5+46] bit2zero branchessametail. TailincrementsR6by1andR5by200modulo2^32andrepeats. Recordpassingbothnonnullguardsandbit2setfallsintopending0x47A9CE. No byte195matchtestintheseinstructions. Preserve shortcircuitreads; do notinfercontinuationorfinalreturn. No C,freeze orcompletenessclaim.

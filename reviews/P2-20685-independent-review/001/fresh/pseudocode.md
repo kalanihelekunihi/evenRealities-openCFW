@@ -1,0 +1,5 @@
+# Indexed byte46 bit0 boolean return
+
+Partial/unaccepted;138 instructionbytes,inherited56-byteframe. Bit0setroute0x47AC60 queries0x43D0CE;statusbit1zero skips0x47AC82,otherwisewriteliteral47B590 SP4,1088 SP0;call0x43D574(4,literal47AE28,literal47ADCC,literal47B580,fifth1088,sixthliteral47B590). At0x47AC82queryfreshstatus;bit0oneenters0x47AC92,otherwisequeryagainandbit2zero skips0x47ACA0. MaskpathR1literal47B594,R2same,liveR3;call0x43CE9E(0x10000000,R1,R2,liveR3). ExplicitR0one,branchshared0x47ACE6.
+Bit0clearroute0x47ACA4queriesstatus;bit1zero skips0x47ACC6,otherwisewriteliteral47B598 SP4,1097 SP0;call0x43D574(2,literal47AE28,literal47ADCC,literal47B580,fifth1097,sixthliteral47B598). At0x47ACC6queryfreshstatus;bit0oneenters0x47ACD6,otherwisequeryagainandbit2zero skips0x47ACE4. MaskpathR1literal47B6DC,R2same,liveR3;call0x43CE9E(0x08000000,R1,R2,liveR3). ExplicitR0zero.
+Shared0x47ACE6addsSP40:discard36localsand savedentryR3slot,thenPOP R4,R5,R6,PC16bytes restoresremainingframeandreturns explicitR0one/zero. Entryinvalidguardroutealsojoinswithzero. Separatequeriesandliveargumentspreserved. No C,freezeorwholecoverageclaim.

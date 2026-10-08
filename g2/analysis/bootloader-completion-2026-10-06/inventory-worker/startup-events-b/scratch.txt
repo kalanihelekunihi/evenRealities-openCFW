@@ -1,0 +1,205 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0041cc48 <.data+0xcc48>:
+  41cc48:	b510      	push	{r4, lr}
+  41cc4a:	0004      	movs	r4, r0
+  41cc4c:	2131      	movs	r1, #49	@ 0x31
+  41cc4e:	2004      	movs	r0, #4
+  41cc50:	f005 fb4e 	bl	0x4222f0
+  41cc54:	2006      	movs	r0, #6
+  41cc56:	4344      	muls	r4, r0
+  41cc58:	f8df 049c 	ldr.w	r0, [pc, #1180]	@ 0x41d0f8
+  41cc5c:	6004      	str	r4, [r0, #0]
+  41cc5e:	f8df 04a8 	ldr.w	r0, [pc, #1192]	@ 0x41d108
+  41cc62:	6801      	ldr	r1, [r0, #0]
+  41cc64:	f451 4100 	orrs.w	r1, r1, #32768	@ 0x8000
+  41cc68:	6001      	str	r1, [r0, #0]
+  41cc6a:	f8df 0484 	ldr.w	r0, [pc, #1156]	@ 0x41d0f0
+  41cc6e:	6801      	ldr	r1, [r0, #0]
+  41cc70:	f051 0102 	orrs.w	r1, r1, #2
+  41cc74:	6001      	str	r1, [r0, #0]
+  41cc76:	6801      	ldr	r1, [r0, #0]
+  41cc78:	f031 0102 	bics.w	r1, r1, #2
+  41cc7c:	6001      	str	r1, [r0, #0]
+  41cc7e:	f45f 2180 	movs.w	r1, #262144	@ 0x40000
+  41cc82:	f8df 2488 	ldr.w	r2, [pc, #1160]	@ 0x41d10c
+  41cc86:	6011      	str	r1, [r2, #0]
+  41cc88:	6801      	ldr	r1, [r0, #0]
+  41cc8a:	f051 0101 	orrs.w	r1, r1, #1
+  41cc8e:	6001      	str	r1, [r0, #0]
+  41cc90:	bd10      	pop	{r4, pc}
+  41cc92:	f8df 245c 	ldr.w	r2, [pc, #1116]	@ 0x41d0f0
+  41cc96:	6811      	ldr	r1, [r2, #0]
+  41cc98:	0849      	lsrs	r1, r1, #1
+  41cc9a:	0049      	lsls	r1, r1, #1
+  41cc9c:	6011      	str	r1, [r2, #0]
+  41cc9e:	6811      	ldr	r1, [r2, #0]
+  41cca0:	f051 0102 	orrs.w	r1, r1, #2
+  41cca4:	6011      	str	r1, [r2, #0]
+  41cca6:	6811      	ldr	r1, [r2, #0]
+  41cca8:	f031 0102 	bics.w	r1, r1, #2
+  41ccac:	6011      	str	r1, [r2, #0]
+  41ccae:	2106      	movs	r1, #6
+  41ccb0:	4348      	muls	r0, r1
+  41ccb2:	f8df 1444 	ldr.w	r1, [pc, #1092]	@ 0x41d0f8
+  41ccb6:	6008      	str	r0, [r1, #0]
+  41ccb8:	f05f 4040 	movs.w	r0, #3221225472	@ 0xc0000000
+  41ccbc:	f8df 1440 	ldr.w	r1, [pc, #1088]	@ 0x41d100
+  41ccc0:	6008      	str	r0, [r1, #0]
+  41ccc2:	f45f 2080 	movs.w	r0, #262144	@ 0x40000
+  41ccc6:	f8df 1448 	ldr.w	r1, [pc, #1096]	@ 0x41d110
+  41ccca:	6008      	str	r0, [r1, #0]
+  41cccc:	6810      	ldr	r0, [r2, #0]
+  41ccce:	f050 0001 	orrs.w	r0, r0, #1
+  41ccd2:	6010      	str	r0, [r2, #0]
+  41ccd4:	4770      	bx	lr
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0041e1e8 <.data+0xe1e8>:
+  41e1e8:	f8df 0258 	ldr.w	r0, [pc, #600]	@ 0x41e444
+  41e1ec:	6800      	ldr	r0, [r0, #0]
+  41e1ee:	f410 7f40 	tst.w	r0, #768	@ 0x300
+  41e1f2:	d001      	beq.n	0x41e1f8
+  41e1f4:	2001      	movs	r0, #1
+  41e1f6:	e019      	b.n	0x41e22c
+  41e1f8:	f8df 024c 	ldr.w	r0, [pc, #588]	@ 0x41e448
+  41e1fc:	6801      	ldr	r1, [r0, #0]
+  41e1fe:	0389      	lsls	r1, r1, #14
+  41e200:	d413      	bmi.n	0x41e22a
+  41e202:	f3bf 8f4f 	dsb	sy
+  41e206:	f3bf 8f6f 	isb	sy
+  41e20a:	2100      	movs	r1, #0
+  41e20c:	f8df 223c 	ldr.w	r2, [pc, #572]	@ 0x41e44c
+  41e210:	6011      	str	r1, [r2, #0]
+  41e212:	f3bf 8f4f 	dsb	sy
+  41e216:	f3bf 8f6f 	isb	sy
+  41e21a:	6801      	ldr	r1, [r0, #0]
+  41e21c:	f451 3100 	orrs.w	r1, r1, #131072	@ 0x20000
+  41e220:	6001      	str	r1, [r0, #0]
+  41e222:	f3bf 8f4f 	dsb	sy
+  41e226:	f3bf 8f6f 	isb	sy
+  41e22a:	2000      	movs	r0, #0
+  41e22c:	4770      	bx	lr
+  41e22e:	f8df 0214 	ldr.w	r0, [pc, #532]	@ 0x41e444
+  41e232:	6800      	ldr	r0, [r0, #0]
+  41e234:	f410 7f40 	tst.w	r0, #768	@ 0x300
+  41e238:	d001      	beq.n	0x41e23e
+  41e23a:	2001      	movs	r0, #1
+  41e23c:	e012      	b.n	0x41e264
+  41e23e:	f3bf 8f4f 	dsb	sy
+  41e242:	f3bf 8f6f 	isb	sy
+  41e246:	f8df 0200 	ldr.w	r0, [pc, #512]	@ 0x41e448
+  41e24a:	6801      	ldr	r1, [r0, #0]
+  41e24c:	f431 3100 	bics.w	r1, r1, #131072	@ 0x20000
+  41e250:	6001      	str	r1, [r0, #0]
+  41e252:	2000      	movs	r0, #0
+  41e254:	f8df 11f4 	ldr.w	r1, [pc, #500]	@ 0x41e44c
+  41e258:	6008      	str	r0, [r1, #0]
+  41e25a:	f3bf 8f4f 	dsb	sy
+  41e25e:	f3bf 8f6f 	isb	sy
+  41e262:	2000      	movs	r0, #0
+  41e264:	4770      	bx	lr
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0042adb8 <.data+0x1adb8>:
+  42adb8:	b2c0      	uxtb	r0, r0
+  42adba:	2800      	cmp	r0, #0
+  42adbc:	d00f      	beq.n	0x42adde
+  42adbe:	f8df 08dc 	ldr.w	r0, [pc, #2268]	@ 0x42b69c
+  42adc2:	6801      	ldr	r1, [r0, #0]
+  42adc4:	f451 31c0 	orrs.w	r1, r1, #98304	@ 0x18000
+  42adc8:	6001      	str	r1, [r0, #0]
+  42adca:	f8df 08d4 	ldr.w	r0, [pc, #2260]	@ 0x42b6a0
+  42adce:	f8df 18d4 	ldr.w	r1, [pc, #2260]	@ 0x42b6a4
+  42add2:	6e89      	ldr	r1, [r1, #104]	@ 0x68
+  42add4:	0b89      	lsrs	r1, r1, #14
+  42add6:	6802      	ldr	r2, [r0, #0]
+  42add8:	f361 0205 	bfi	r2, r1, #0, #6
+  42addc:	6002      	str	r2, [r0, #0]
+  42adde:	f8df 18c8 	ldr.w	r1, [pc, #2248]	@ 0x42b6a8
+  42ade2:	6808      	ldr	r0, [r1, #0]
+  42ade4:	0580      	lsls	r0, r0, #22
+  42ade6:	0d80      	lsrs	r0, r0, #22
+  42ade8:	1dc0      	adds	r0, r0, #7
+  42adea:	f5b0 6f80 	cmp.w	r0, #1024	@ 0x400
+  42adee:	d309      	bcc.n	0x42ae04
+  42adf0:	f240 30ff 	movw	r0, #1023	@ 0x3ff
+  42adf4:	680a      	ldr	r2, [r1, #0]
+  42adf6:	0592      	lsls	r2, r2, #22
+  42adf8:	0d92      	lsrs	r2, r2, #22
+  42adfa:	1a80      	subs	r0, r0, r2
+  42adfc:	f8df 2bbc 	ldr.w	r2, [pc, #3004]	@ 0x42b9bc
+  42ae00:	6010      	str	r0, [r2, #0]
+  42ae02:	e003      	b.n	0x42ae0c
+  42ae04:	2007      	movs	r0, #7
+  42ae06:	f8df 2bb4 	ldr.w	r2, [pc, #2996]	@ 0x42b9bc
+  42ae0a:	6010      	str	r0, [r2, #0]
+  42ae0c:	680a      	ldr	r2, [r1, #0]
+  42ae0e:	0a93      	lsrs	r3, r2, #10
+  42ae10:	029b      	lsls	r3, r3, #10
+  42ae12:	f8df 0ba8 	ldr.w	r0, [pc, #2984]	@ 0x42b9bc
+  42ae16:	6800      	ldr	r0, [r0, #0]
+  42ae18:	1882      	adds	r2, r0, r2
+  42ae1a:	0592      	lsls	r2, r2, #22
+  42ae1c:	0d92      	lsrs	r2, r2, #22
+  42ae1e:	431a      	orrs	r2, r3
+  42ae20:	600a      	str	r2, [r1, #0]
+  42ae22:	4770      	bx	lr
+  42ae24:	b410      	push	{r4}
+  42ae26:	f8df 1878 	ldr.w	r1, [pc, #2168]	@ 0x42b6a0
+  42ae2a:	f8df 2878 	ldr.w	r2, [pc, #2168]	@ 0x42b6a4
+  42ae2e:	6e93      	ldr	r3, [r2, #104]	@ 0x68
+  42ae30:	089b      	lsrs	r3, r3, #2
+  42ae32:	680c      	ldr	r4, [r1, #0]
+  42ae34:	f363 0405 	bfi	r4, r3, #0, #6
+  42ae38:	600c      	str	r4, [r1, #0]
+  42ae3a:	f8df 1860 	ldr.w	r1, [pc, #2144]	@ 0x42b69c
+  42ae3e:	6e92      	ldr	r2, [r2, #104]	@ 0x68
+  42ae40:	680b      	ldr	r3, [r1, #0]
+  42ae42:	f362 33d0 	bfi	r3, r2, #15, #2
+  42ae46:	600b      	str	r3, [r1, #0]
+  42ae48:	b2c0      	uxtb	r0, r0
+  42ae4a:	2800      	cmp	r0, #0
+  42ae4c:	d00c      	beq.n	0x42ae68
+  42ae4e:	f8df 1858 	ldr.w	r1, [pc, #2136]	@ 0x42b6a8
+  42ae52:	680a      	ldr	r2, [r1, #0]
+  42ae54:	0a93      	lsrs	r3, r2, #10
+  42ae56:	029b      	lsls	r3, r3, #10
+  42ae58:	f8df 0b60 	ldr.w	r0, [pc, #2912]	@ 0x42b9bc
+  42ae5c:	6800      	ldr	r0, [r0, #0]
+  42ae5e:	1a12      	subs	r2, r2, r0
+  42ae60:	0592      	lsls	r2, r2, #22
+  42ae62:	0d92      	lsrs	r2, r2, #22
+  42ae64:	431a      	orrs	r2, r3
+  42ae66:	600a      	str	r2, [r1, #0]
+  42ae68:	bc10      	pop	{r4}
+  42ae6a:	4770      	bx	lr
+  42ae6c:	f8df 083c 	ldr.w	r0, [pc, #2108]	@ 0x42b6ac
+  42ae70:	7800      	ldrb	r0, [r0, #0]
+  42ae72:	2800      	cmp	r0, #0
+  42ae74:	d111      	bne.n	0x42ae9a
+  42ae76:	f8df 0838 	ldr.w	r0, [pc, #2104]	@ 0x42b6b0
+  42ae7a:	f8df 1838 	ldr.w	r1, [pc, #2104]	@ 0x42b6b4
+  42ae7e:	6809      	ldr	r1, [r1, #0]
+  42ae80:	6802      	ldr	r2, [r0, #0]
+  42ae82:	f361 0206 	bfi	r2, r1, #0, #7
+  42ae86:	6002      	str	r2, [r0, #0]
+  42ae88:	f8df 0b34 	ldr.w	r0, [pc, #2868]	@ 0x42b9c0
+  42ae8c:	f8df 1b34 	ldr.w	r1, [pc, #2868]	@ 0x42b9c4
+  42ae90:	6809      	ldr	r1, [r1, #0]
+  42ae92:	6802      	ldr	r2, [r0, #0]
+  42ae94:	f361 0206 	bfi	r2, r1, #0, #7
+  42ae98:	6002      	str	r2, [r0, #0]
+  42ae9a:	4770      	bx	lr

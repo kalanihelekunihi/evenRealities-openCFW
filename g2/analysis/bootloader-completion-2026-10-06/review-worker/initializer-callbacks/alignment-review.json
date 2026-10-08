@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "good_elf_sha256": "dceae3b56c3ef4b0572f4cd499230ca8f5eb20419cf1c4a0910d05d607389bee",
+  "good_mappings": 331,
+  "known_bad_elf_sha256": "ac4b5688528586d9d49d332203d4f31985d2ca939728f7cf6cbb51dc951afb51",
+  "known_bad_rejected": "odd Thumb code mapping $t at 0x31a9b in .source_cache",
+  "checker_sha256": "c4bf20e5acaa72a75257aba90267dd0b2454cce6afdde2f6346114a700951659",
+  "summary": "Mapping symbols use even actual instruction PCs; Thumb STT_FUNC symbols retain bit zero tag."
+}

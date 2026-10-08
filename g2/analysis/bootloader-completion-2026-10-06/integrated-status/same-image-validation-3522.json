@@ -1,0 +1,235 @@
+{
+  "utc": "2026-10-07T11:27:17.086660+00:00",
+  "status": "PASS",
+  "role": "Promoted bounded source-linked offline test checkpoint; root startup remains unresolved",
+  "elf_sha256": "3522fde67aeaa49b2eceec7340f62f21d04902e6eb9138311e3a324e91922061",
+  "profiles": [
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/3522fde67aeaa49b2eceec7340f62f21d04902e6eb9138311e3a324e91922061/comparison.json",
+      "sha256": "17d1f2891fd17f1dbee2b1f1f349d1646cf4b36b7bebc0c818ab9bca2d26247d",
+      "cases": 2
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/3522fde67aeaa49b2eceec7340f62f21d04902e6eb9138311e3a324e91922061/failures.json",
+      "sha256": "f281063db2a62bef37b94b94581c5b42d10ed38a82aa47ac571a64cfcc46112e",
+      "cases": 3
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/3522fde67aeaa49b2eceec7340f62f21d04902e6eb9138311e3a324e91922061/powerloss.json",
+      "sha256": "28f6342c9029cced5f6c4c478fbc8c33a10ad64cd1550b7bcb3bf354067712ff",
+      "cases": 2
+    }
+  ],
+  "total_cases": 7,
+  "additional_receipts": [
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/clock-config.json",
+      "sha256": "f66d0eb5c2960172cdec86f07845df3ba2fa507a90338f95c974893163bc2949",
+      "cases": 5896
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/clock-shared.json",
+      "sha256": "cad59829595a77e3f6e0d2018c66ecceb2663328a4e944c15fd87ea25bdda9fe",
+      "cases": 129
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/clockmux-carry.json",
+      "sha256": "9814670b75c77b0badbb200d93b85e785e2007d4f22f7d8898c8873aaec011b9",
+      "cases": 896
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/clockmux-native.json",
+      "sha256": "6726c2b446fcc667d9c1ccfefa39439e8b1e7c27e5e1fce9e666f8787e9ded21",
+      "cases": 13
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/config.json",
+      "sha256": "b623792820bbbf8669d341ad428cbafef7d3b934fbdcc6ec3769f69221472304",
+      "cases": 697
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/dispatch-native.json",
+      "sha256": "833e45cd84f1ad039b0b75bd75c891f4bb62b8da3ca16304ae8fcb99d69fef2b",
+      "cases": 400
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/elog_output.json",
+      "sha256": "0489a379218942f1204f489826195b1938a5497dfcbbc0b1f155917fb472e17c",
+      "cases": 494
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/elog_uart_tx.json",
+      "sha256": "6db8e9e129d71bc1a2d14ce5a470934c62d421cdc11a35b847c827c9292f1ae0",
+      "cases": 222
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/events-native.json",
+      "sha256": "388402ddba0e161353fe9dd59baea5ebc1e6446c65e20d655a16ca80b2d9e45b",
+      "cases": 72
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/formatter.json",
+      "sha256": "3c422eac090d3eb8eb28f5cb508f9654fd3bb031430866140c245bf2ed351a0c",
+      "cases": 1778
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/generators.json",
+      "sha256": "677848ed8a2b5448f3f2686d81661861815c2c3d6b0c131e8942c34c73d49100",
+      "cases": 688
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/init-leaves.json",
+      "sha256": "59ea40de4b64d08122f3b31ff22db2840bbfafdd27af5a8dfbd9170bbaabb93b",
+      "cases": 956
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/isr_deferred_fifo.json",
+      "sha256": "947e9675ebdf7932846becfd2a12aa66c4dcf3881410c99561f1436bff5795ce",
+      "cases": 1
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/isr_delivery.json",
+      "sha256": "b79ccc5f944ee32d6c3ab04757558d0de1bd29d608e9e26643be4b7032055eb8",
+      "cases": 1480
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/isr_public_interfaces.json",
+      "sha256": "41889404be7a144ee61a617f04990a929ebbf0dd9bad2f1eb5666393f189817c",
+      "cases": 62
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/math.json",
+      "sha256": "848b1a269b888a386d011d7fc233dee2fc12075bc1f2e67584d97d4107fe0de3",
+      "cases": 4311
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/memory-native.json",
+      "sha256": "23cf42bc39b66e7a88d640ab57dc65467d31a7464dc1124e736d9c05c1428283",
+      "cases": 936
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/memory.json",
+      "sha256": "37aca07562e41db541642b77006de78b6c0624f6babe5652e81b617780576636",
+      "cases": 936
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/mode.json",
+      "sha256": "ed8c1cae8e70e751c0cf0a39c9f969dcb381d6a5edcf0d818caa0d080cf50dde",
+      "cases": 1394
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/mutex_block_boundary.json",
+      "sha256": "2b98a5876e514f277d1560591490ec1d01448d1e511ecaaf4470757d3edb626c",
+      "cases": 4
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/mutex_kernel.json",
+      "sha256": "3e550e463ba9b3025c7dfb08957d9592c8215ca12092a87041307816fdd8cf30",
+      "cases": 516
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/mutex_sequences.json",
+      "sha256": "4504d4a38596d6ef2245c5b190c76bcf3be59c47d812059bc37550a1a7f86ead",
+      "cases": 2
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/native-config.json",
+      "sha256": "8cf3badcbecdf3e940cb97768bcebc706e1406005e1c5ace37b7e85c3af50981",
+      "cases": 48
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/power-read.json",
+      "sha256": "9cce5540185aa89e92faeda649ad091fa65d4d51ad1dc29f33ec4ba8d267dca3",
+      "cases": 10
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/power20.json",
+      "sha256": "7c4d02b8e3133933175d9b409e7aabd0ff220bee174dc20291401536e12d2d05",
+      "cases": 256
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/runtime-native.json",
+      "sha256": "99f5c9665edeea8811769edbb19465dcde85f291dc643e0d3686feb4b4484738",
+      "cases": 168
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/runtime.json",
+      "sha256": "20a1a7e3e3ff24abc6d9afbe52ccca70f3ac55c16959727690102baeabda3130",
+      "cases": 832
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/rx.json",
+      "sha256": "21eac9488cef4ebd923c99d659419778ff330ae1e056e68193a0258ec863fd9a",
+      "cases": 422
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/service_records.json",
+      "sha256": "bf7713dfeb19b34780b9c339d2adff1c1e9ee373518e4d0af1cb577d9c09ed24",
+      "cases": 112
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/service_startup_state.json",
+      "sha256": "36eadca368544f71ac4008ef2cab1c7f8ee94cd48944c6d973156f772924a39e",
+      "cases": 1
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/setters.json",
+      "sha256": "e8928867b6b79f185049369595ec883ee88c5c5e16640068cffc5a7e12e47828",
+      "cases": 192
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/shutdown.json",
+      "sha256": "48f9e57dcb8f2023b5f56a7c7cc226f393c0be08c5c40a0a08ab480de5558389",
+      "cases": 903
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/startup-leaves-native-copy.json",
+      "sha256": "78b5a38454442b5e0ba890111579a19e022f53e4499cf9ff0c2a66bcfbd4715a",
+      "cases": 271
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/startup-native-copy.json",
+      "sha256": "b863ec313a494f6a914ba47933bf8bbd909f5b20e88ab6513d4a0c62fa2bee14",
+      "cases": 64
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/startup_alternatives.json",
+      "sha256": "f6eef54c5086c88e90373bb7c70e715c6a7b6c50beb9f02ddf6a0b9b437470cf",
+      "cases": 64
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/wrapper.json",
+      "sha256": "889f70b6a9884e4661865052ceefa081ccc613fa06c1a1494a01e667826e2afb",
+      "cases": 288
+    }
+  ],
+  "inputs": 698,
+  "linked_objects": 183,
+  "post_run_hash_mismatches": [],
+  "frozen_copies": "g2/build/bootloader-completion/source-image-compatible/snapshots/3522fde67aeaa49b2eceec7340f62f21d04902e6eb9138311e3a324e91922061/frozen-input-copies.json",
+  "frozen_copy_index_sha256": "bbce084119dcd516b2843706f5af05e2ba6a5d455fdc5cdd2a7abfc85c81af6c",
+  "validation_input_manifest": {
+    "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/3522fde67aeaa49b2eceec7340f62f21d04902e6eb9138311e3a324e91922061/validation-input-hashes-final.json",
+    "sha256": "a50bf4f866a0fdb95ac46c4b1097d670f62c27a779ce0e5a78bb4aeab8cec9a3"
+  },
+  "alignment_mappings": 508,
+  "numeric_aliases": 17,
+  "segments": 42,
+  "deduplicated_observed_original_instruction_bytes": 38764,
+  "manifest": {
+    "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/manifest.json",
+    "sha256": "f3d8e4aee555cb8810b898d3b385cbc204349608ba00f0da39c7513df855509b"
+  },
+  "alignment_receipt": {
+    "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-closure-3522/alignment.json",
+    "sha256": "3b7b1285e8e1b963a9d1eb502db15163bfbd675e696fcbb8a5fe5b37c043dbfb"
+  },
+  "limits": [
+    "Seven integration cases retain existing startup/logger models; native direct suites do not establish new native integration reachability.",
+    "Four initial callbacks and their timer plus four event-family callback entries are source-defined in the component runtime. Remaining21 unique callback targets remain original-address contracts; root41c4b4 is still selected unbound OTA boundary.",
+    "400 dispatcher comparisons use native INFO/ROM thunk, initial callbacks and timer, with resident ROM48 controlled. Corrected72 event comparisons use compiled event family and critical/delay providers, with ROM40 time controlled; exact unvisited branches remain in receipts.",
+    "13 clock-chain comparisons execute native indexed getter, selector2/4 GPIO contexts, delay/poll/power/PLL/cache with synthetic acknowledgement and ROM40 timing.896 carry comparisons retain ten child cuts. Other GPIO selector branches are not proven by this suite.",
+    "Prepared-source object linker candidate; actual main Makefile rebuild equivalence has not been asserted. Mixed enum-size warnings remain; tested interfaces only.",
+    "External ROM bodies, six FP64 profile effects, physical hardware timing/coherence/drain/live scheduling, whole source completeness and byte equality remain unproven."
+  ]
+}

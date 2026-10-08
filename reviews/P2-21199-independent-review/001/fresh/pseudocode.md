@@ -1,0 +1,5 @@
+# Modifier membership, doubled length and conversion consumption
+
+Partial/unaccepted;76 instruction bytes481972..4819BE. Continues481836232frame,R10formatpointer,R1flags,R9argcursor. STRHlow16R1→SP64flags. ADR R0=4824F4;freshbyte[R10]→R1;call481818(R0membershipstring,R1candidatebyte,liveR2/R3). Nonzeroresult→freshbyte[R10]postincrement1 intoR0;zeroresultleavesR10unchanged. Storelow8R0→SP66modifier thenfreshreloadbyteSP66.
+
+Modifier'h'(104):freshbyte[R10]=='h'→R1='b'(98),storebyteSP66,advanceR10one;otherwiseunchanged. Othermodifier:'l'(108) conditionallyfreshreadsbyte[R10] underITT EQ;second'l'→R1='q'(113),storebyteSP66,advanceR10one;otherwiseunchanged. ExactITpredication retained;membershipstringcontents/helpersstillseparaterecoveryrequirements,no assumptiongenericlengthmodifierlist. ThenR0=SP72scratchbuffer;storeSP24;freshbyte[R10]postincrement1→R11conversion. Dispatchbeyond4819BEunresolved. Preservemembershiphelperfullreturntestandfreshcandidateconsumptionratherthanreusepriorpeek;stackaliasing canaffectreload. No C/freeze/fullcoverage/equality claim.

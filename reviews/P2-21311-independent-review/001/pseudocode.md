@@ -1,0 +1,3 @@
+# Decimal cursor parser with wrapping accumulator
+
+Partial/unaccepted;40 instructionbytes483044..48306C. PUSH{R3,R4,R5,LR}16bytes;R4=entryR0cursorholder,R5=0;initiallybranchtest48305C. Testfreshword[R4]→R0,freshbyte[R0]→R0,call483032 ASCIIbytepredicate withliveR1/R2/R3;returnedR0nonzero→body. Bodyindependentlyreloadcursor[R4]→R0,R1=R0+1mod2^32,storeupdatedcursor[R4] BEFOREfreshbyte[oldR0];R1=10,byteR0-=48mod,R5=10*R5+R0mod2^32;retest. Thusvalidatedbyteisreread aftercursorwrite andmaydifferunderalias/mutation;do not collapsefreshreads. NondigitreturnsR0=currentR5,POP{R1,R4,R5,PC}16bytes,R1=savedentryR3. No sign/overflow/length/nullguard;initialnondigitconsumesnothingandreturns0. No C,freeze,wholecoverage or equalityclaim.

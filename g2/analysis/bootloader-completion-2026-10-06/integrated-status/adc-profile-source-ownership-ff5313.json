@@ -1,0 +1,46 @@
+{
+  "utc": "2026-10-07T03:26:50.360411+00:00",
+  "image_sha256": "ff53136b29001e2a88deeb93b968bb69fcfe56bcaea576cdf57bc201fbed7911",
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "functions": [
+    {
+      "symbol": "opencfw_bl_adc_profile_transfer",
+      "original_entry": "0x42f020",
+      "original_end_exclusive": "0x42f14e",
+      "source_entry": "0x35580",
+      "compiled_function_bytes": 260,
+      "original_body_bytes": 302,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_adc_apply_profile",
+      "original_entry": "0x42ea68",
+      "original_end_exclusive": "0x42eaf6",
+      "source_entry": "0x35684",
+      "compiled_function_bytes": 142,
+      "original_body_bytes": 142,
+      "ownership": "new-native-body"
+    }
+  ],
+  "new_native_body_bytes": 444,
+  "visited_new_native_body_bytes": 444,
+  "direct_cases": 650,
+  "source": "g2/components/bootloader/initializer_callbacks/adc_profile.c",
+  "source_sha256": "0328e83d97a358c700648fbf7b57d6f476cb6785bb3b84d1fe5105155596ff80",
+  "header_sha256": "3a6c9e6292a2a7897b783a8a85eadc2f2a91e6e793b55baee18efe67078e9a98",
+  "validation": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/adc-profile-ff5313.json",
+  "reused_native_dependencies": [
+    "power enter41bf84/leave41c17a for selector15",
+    "descriptor copy41b8f8/release-needed41c0be",
+    "power callback41cd1a/hooks41cd34/41cd4a",
+    "critical save41b8ec",
+    "status poll41d246/delay41d1c0",
+    "clock request4222f0/release422364/class4 user15"
+  ],
+  "limits": [
+    "Native user15 power/clock/query/poll/critical instructions; only absentROM40 and optional callback/hook targets explicitly controlled in direct650 tests.",
+    "All444 new ADC bytes visited; power children reused and tested only user15 paths, not every selector/scheduler condition.",
+    "Stack-local clock callback pointer addresses normalized after mapped bounds check; no lifetime/quiescence proof.",
+    "Power status fixed or explicitly modeled; no actual acknowledgement, calibration, physical sampling/elapsed time or hardware shutdown proof."
+  ]
+}

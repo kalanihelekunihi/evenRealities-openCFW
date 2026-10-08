@@ -1,0 +1,10 @@
+{
+  "id": "P2-20773",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "148B tail: two separate status/diagnostic paths, LOW8(R6) assigned to R0, then SP+=16 + POP completes 40-byte frame. The scan-exhaustion target also enters with R6=1; return 1 therefore does not prove a match. No post-match loop continuation appears in the reviewed span."
+}

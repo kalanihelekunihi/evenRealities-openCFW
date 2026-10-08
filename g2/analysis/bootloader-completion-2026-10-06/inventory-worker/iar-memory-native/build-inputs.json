@@ -1,0 +1,24 @@
+{
+  "flags": [
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m33",
+    "-mthumb",
+    "-mfloat-abi=softfp",
+    "-O2",
+    "-ffreestanding",
+    "-fno-builtin"
+  ],
+  "source": "g2/components/bootloader/initializer_callbacks/iar_memory_native/memory.c",
+  "source_sha256": "bde5388fea8bf5ad4263d3f9b4e527e12ae710adf5c6923afd441fb25fb93616",
+  "object_sha256": "e99b53f512bc664d5254d37df4823edfded516b56755ef2a52848b00755b5736",
+  "elf_sha256": "de12d6f844029b25fb0548b82c7a2038e3f605442c21c41fbddc4ca402465b50",
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "original_test_relocation": "410000\u219240000; unchanged full official bytes; body entry41560c\u21924560c,4156ac\u2192456ac",
+  "abi_elf_sha256": "9836dacab743cbc75d6bd1e3624bf045a461084cec8855f3b94a4538b65168c0",
+  "harness_inputs": {
+    "qemu_harness.c": "75b2da3f126376dc74e7ff2919b58a8e19dd9ff20db877da4aa06558da59e27b",
+    "qemu_start.S": "b303a5cbe90f19e65fe00f4c85d778f2d9c5f2b142b597604adb61565da55363",
+    "qemu_call_abi.S": "dc0afe704c3b7bfa3b232e9f51b7282a49c127690e4750d1d89b4e5ad408a759",
+    "qemu.ld": "6f3dce31f46f2bd0c9a0d2e042281e81d310827a9ca946d629955d9fa465877c"
+  }
+}

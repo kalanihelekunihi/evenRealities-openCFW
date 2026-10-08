@@ -27,8 +27,12 @@ class Machine:
   if source:
    for s in segments:
     lo=s['address']&~4095;hi=(s['address']+s['memory_size']+4095)&~4095
-    if not (STOP<=lo<STOP+0x10000 or BASE<=lo<BASE+0x25000):self.cpu.mem_map(lo,hi-lo)
-    self.cpu.mem_write(s['address'],s['data'])
+    # PT_LOAD SRAM/BSS may already be covered by the common SRAM mapping.
+    # Allocate only uncovered segments and initialize the full memory extent.
+    if not any(a<=lo and hi-1<=b for a,b,_ in self.cpu.mem_regions()):self.cpu.mem_map(lo,hi-lo)
+    if s['data']:self.cpu.mem_write(s['address'],s['data'])
+    tail=s['memory_size']-len(s['data'])
+    if tail:self.cpu.mem_write(s['address']+len(s['data']),b'\0'*tail)
     if s['flags']&1:self.exec_ranges.append((s['address'],s['address']+len(s['data'])))
   else:self.exec_ranges=[(BASE,BASE+BLOB.stat().st_size)]
   self.w(0x200004f0,DESC);self.w(DESC+4,4096);self.w(DESC+0x18,READ|1);self.w(DESC+0x1c,PROGRAM|1);self.w(DESC+0x20,ERASE|1)

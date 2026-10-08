@@ -1,0 +1,67 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp1cl3eqc7/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0048162c <.text>:
+  48162c:	b4f0      	push	{r4, r5, r6, r7}
+  48162e:	000c      	movs	r4, r1
+  481630:	0964      	lsrs	r4, r4, #5
+  481632:	1de5      	adds	r5, r4, #7
+  481634:	0006      	movs	r6, r0
+  481636:	b2f6      	uxtb	r6, r6
+  481638:	2e00      	cmp	r6, #0
+  48163a:	d110      	bne.n	48165e <.text+0x32>
+  48163c:	4874      	ldr	r0, [pc, #464]	@ (481810 <.text+0x1e4>)
+  48163e:	01e5      	lsls	r5, r4, #7
+  481640:	4428      	add	r0, r5
+  481642:	f011 051f 	ands.w	r5, r1, #31
+  481646:	f840 2025 	str.w	r2, [r0, r5, lsl #2]
+  48164a:	4872      	ldr	r0, [pc, #456]	@ (481814 <.text+0x1e8>)
+  48164c:	01e4      	lsls	r4, r4, #7
+  48164e:	4420      	add	r0, r4
+  481650:	f011 011f 	ands.w	r1, r1, #31
+  481654:	f840 3021 	str.w	r3, [r0, r1, lsl #2]
+  481658:	2000      	movs	r0, #0
+  48165a:	bcf0      	pop	{r4, r5, r6, r7}
+  48165c:	4770      	bx	lr
+  48165e:	0006      	movs	r6, r0
+  481660:	b2f6      	uxtb	r6, r6
+  481662:	2e01      	cmp	r6, #1
+  481664:	d10e      	bne.n	481684 <.text+0x58>
+  481666:	486a      	ldr	r0, [pc, #424]	@ (481810 <.text+0x1e4>)
+  481668:	01ec      	lsls	r4, r5, #7
+  48166a:	4420      	add	r0, r4
+  48166c:	f011 041f 	ands.w	r4, r1, #31
+  481670:	f840 2024 	str.w	r2, [r0, r4, lsl #2]
+  481674:	4867      	ldr	r0, [pc, #412]	@ (481814 <.text+0x1e8>)
+  481676:	01ed      	lsls	r5, r5, #7
+  481678:	4428      	add	r0, r5
+  48167a:	f011 011f 	ands.w	r1, r1, #31
+  48167e:	f840 3021 	str.w	r3, [r0, r1, lsl #2]
+  481682:	e7e9      	b.n	481658 <.text+0x2c>
+  481684:	b2c0      	uxtb	r0, r0
+  481686:	2802      	cmp	r0, #2
+  481688:	d11b      	bne.n	4816c2 <.text+0x96>
+  48168a:	4861      	ldr	r0, [pc, #388]	@ (481810 <.text+0x1e4>)
+  48168c:	01e6      	lsls	r6, r4, #7
+  48168e:	4406      	add	r6, r0
+  481690:	f011 071f 	ands.w	r7, r1, #31
+  481694:	f846 2027 	str.w	r2, [r6, r7, lsl #2]
+  481698:	4e5e      	ldr	r6, [pc, #376]	@ (481814 <.text+0x1e8>)
+  48169a:	01e4      	lsls	r4, r4, #7
+  48169c:	4434      	add	r4, r6
+  48169e:	f011 071f 	ands.w	r7, r1, #31
+  4816a2:	f844 3027 	str.w	r3, [r4, r7, lsl #2]
+  4816a6:	01ec      	lsls	r4, r5, #7
+  4816a8:	4420      	add	r0, r4
+  4816aa:	f011 041f 	ands.w	r4, r1, #31
+  4816ae:	f840 2024 	str.w	r2, [r0, r4, lsl #2]
+  4816b2:	01ed      	lsls	r5, r5, #7
+  4816b4:	eb06 0005 	add.w	r0, r6, r5
+  4816b8:	f011 011f 	ands.w	r1, r1, #31
+  4816bc:	f840 3021 	str.w	r3, [r0, r1, lsl #2]
+  4816c0:	e7ca      	b.n	481658 <.text+0x2c>
+  4816c2:	2006      	movs	r0, #6
+  4816c4:	e7c9      	b.n	48165a <.text+0x2e>

@@ -1,0 +1,195 @@
+{
+  "utc": "2026-10-07T02:07:20.460001+00:00",
+  "image_sha256": "4f111ccb9ed4131499a99a47af126d83f4b56f8abb54a5e6073cbc6566e93e8a",
+  "functions": [
+    {
+      "function": "claim",
+      "original_start": "0x42c4c6",
+      "original_end_exclusive": "0x42c538",
+      "original_body_bytes": 114,
+      "body_sha256": "9727ea0e7e8786ddfab4618f79b101d91192e7291034937b15da4a9246d17db2",
+      "source": "g2/components/bootloader/initializer_callbacks/context_claim.c",
+      "source_sha256": "a9bf1993c0fa379c4a65ec65329931477035eac83cc68bb3ee1692b74f25000a"
+    },
+    {
+      "function": "transaction",
+      "original_start": "0x42c988",
+      "original_end_exclusive": "0x42cc34",
+      "original_body_bytes": 684,
+      "body_sha256": "1a89b00660cf0c54c66e781ac95f19dd764bb671587c36959ad2cd34fec53ae5",
+      "source": "g2/components/bootloader/initializer_callbacks/context_transaction.c",
+      "source_sha256": "641476718d5a508ef4e87986bd5aa883c18595538981687e386413b758eb2d3e"
+    },
+    {
+      "function": "interrupt-enable",
+      "original_start": "0x42c63a",
+      "original_end_exclusive": "0x42c672",
+      "original_body_bytes": 56,
+      "body_sha256": "4bb8cd7875f57a46da8764a7c89f6058ce9f5aac52f707e5c86dc7a66c20d775",
+      "source": "g2/components/bootloader/initializer_callbacks/context_interrupt.c",
+      "source_sha256": "9188fb33ec9ab5c9c8c32f819b030474d9b00129cb2fb8cb970b0bc57c35c355"
+    },
+    {
+      "function": "configure",
+      "original_start": "0x42cc34",
+      "original_end_exclusive": "0x42cdb0",
+      "original_body_bytes": 380,
+      "body_sha256": "d881da0882c4dcc9f1385402b877bcb3d8c379de014c78707c8db99f5b03aa93",
+      "source": "g2/components/bootloader/initializer_callbacks/context_instance.c",
+      "source_sha256": "73193ca9b4c1bf245adcdf3e02b191036076ab7306b6d31699a0aa5c6de214ac"
+    },
+    {
+      "function": "enable",
+      "original_start": "0x42c538",
+      "original_end_exclusive": "0x42c63a",
+      "original_body_bytes": 258,
+      "body_sha256": "0183cf1cab1b0089fb0b49f71137bf868309198abd9319ca1e35f794ba430f2a",
+      "source": "g2/components/bootloader/initializer_callbacks/context_instance.c",
+      "source_sha256": "73193ca9b4c1bf245adcdf3e02b191036076ab7306b6d31699a0aa5c6de214ac"
+    },
+    {
+      "function": "select-interface",
+      "original_start": "0x42c034",
+      "original_end_exclusive": "0x42c076",
+      "original_body_bytes": 66,
+      "body_sha256": "4748ace7dc077c4c00e8b22fb267ba5d64a0d28286c6b2d30868907e5ffa2005",
+      "source": "g2/components/bootloader/initializer_callbacks/context_instance.c",
+      "source_sha256": "73193ca9b4c1bf245adcdf3e02b191036076ab7306b6d31699a0aa5c6de214ac"
+    },
+    {
+      "function": "frequency",
+      "original_start": "0x42c222",
+      "original_end_exclusive": "0x42c256",
+      "original_body_bytes": 52,
+      "body_sha256": "84a7909276921edf87861325fa09f547e536659109a2de4eeb1fd171f7f57411",
+      "source": "g2/components/bootloader/initializer_callbacks/context_clock.c",
+      "source_sha256": "45f6d4634e2b667085370cb85b69b7e4786058208e5ad19bb74954e5e41c6063"
+    },
+    {
+      "function": "onebit",
+      "original_start": "0x42c256",
+      "original_end_exclusive": "0x42c26a",
+      "original_body_bytes": 20,
+      "body_sha256": "c7c013df5ce01fcc66215af1337fed966a975393591a7bc7e17ebcf71bde8213",
+      "source": "g2/components/bootloader/initializer_callbacks/context_clock.c",
+      "source_sha256": "45f6d4634e2b667085370cb85b69b7e4786058208e5ad19bb74954e5e41c6063"
+    },
+    {
+      "function": "clock-config",
+      "original_start": "0x42c26a",
+      "original_end_exclusive": "0x42c3e2",
+      "original_body_bytes": 376,
+      "body_sha256": "23796b78366978bda2ee2db94e309c4f1cae4e92f5ffbc2072f75becca3ae9e8",
+      "source": "g2/components/bootloader/initializer_callbacks/context_clock.c",
+      "source_sha256": "45f6d4634e2b667085370cb85b69b7e4786058208e5ad19bb74954e5e41c6063"
+    },
+    {
+      "function": "cq-initialize",
+      "original_start": "0x42c3e2",
+      "original_end_exclusive": "0x42c420",
+      "original_body_bytes": 62,
+      "body_sha256": "1aa65df1cc920ea6fc753560e93e4967b36d8f0d49b1c37f9dd0b26295f84f02",
+      "source": "g2/components/bootloader/initializer_callbacks/context_queue.c",
+      "source_sha256": "8750919c8d87df9eeb1347d165275de4ba388b55b81d7e0131c7f76b15a9353c"
+    },
+    {
+      "function": "cq-enable",
+      "original_start": "0x42c420",
+      "original_end_exclusive": "0x42c44e",
+      "original_body_bytes": 46,
+      "body_sha256": "1714c962c633337cdcde5ef6b032ac0bb3f10324ac0320e57fa8120c368bd4d3",
+      "source": "g2/components/bootloader/initializer_callbacks/context_queue.c",
+      "source_sha256": "8750919c8d87df9eeb1347d165275de4ba388b55b81d7e0131c7f76b15a9353c"
+    },
+    {
+      "function": "cq-disable",
+      "original_start": "0x42c44e",
+      "original_end_exclusive": "0x42c45a",
+      "original_body_bytes": 12,
+      "body_sha256": "d967623a77aff3dfbddc473422f508342a52aae0fa9b3e79c0215f3b62434157",
+      "source": "g2/components/bootloader/initializer_callbacks/context_queue.c",
+      "source_sha256": "8750919c8d87df9eeb1347d165275de4ba388b55b81d7e0131c7f76b15a9353c"
+    },
+    {
+      "function": "retry",
+      "original_start": "0x43048e",
+      "original_end_exclusive": "0x430502",
+      "original_body_bytes": 116,
+      "body_sha256": "6ba3fb6ddde5fa56fd43fc1f7f717bcc7cf201df2ae6af1b86d20bdde8404dbb",
+      "source": "g2/components/bootloader/initializer_callbacks/context_retry.c",
+      "source_sha256": "79a38f101e88131fc859ca21039616a4451454a1e76014798591af407d9df364"
+    },
+    {
+      "function": "publisher",
+      "symbol": "opencfw_boot_iom_descriptor_publish",
+      "original_start": "0x42c45a",
+      "original_end_exclusive": "0x42c4c6",
+      "original_body_bytes": 108,
+      "observed_original_bytes": 108,
+      "original_body_sha256": "0deea2026365cb9c3471cdd81a7644c3fa519db2239154f3456da25ab88c5525",
+      "source": "g2/components/bootloader/initializer_callbacks/context_events.c",
+      "source_sha256": "e1c9c36c1bf0d7cc477f6ad415bbe60c8af67596fea36e27b1684531299657a8"
+    },
+    {
+      "function": "service",
+      "symbol": "opencfw_boot_iom_event_service",
+      "original_start": "0x42c6f8",
+      "original_end_exclusive": "0x42c980",
+      "original_body_bytes": 648,
+      "observed_original_bytes": 648,
+      "original_body_sha256": "7272867858e1c23f8ad5e5938ef7f5e02d59289de7c3c76eb6c7ea69fcec5958",
+      "source": "g2/components/bootloader/initializer_callbacks/context_events.c",
+      "source_sha256": "e1c9c36c1bf0d7cc477f6ad415bbe60c8af67596fea36e27b1684531299657a8"
+    },
+    {
+      "function": "classify",
+      "symbol": "opencfw_boot_iom_error_classify",
+      "original_start": "0x42c076",
+      "original_end_exclusive": "0x42c0b2",
+      "original_body_bytes": 60,
+      "observed_original_bytes": 60,
+      "original_body_sha256": "ccdc2830f8d713ac41be3ffae702c125009eed11fc8b89d5f430e8c3a794af19",
+      "source": "g2/components/bootloader/initializer_callbacks/context_events.c",
+      "source_sha256": "e1c9c36c1bf0d7cc477f6ad415bbe60c8af67596fea36e27b1684531299657a8"
+    },
+    {
+      "function": "apply",
+      "symbol": "opencfw_boot_iom_event_apply",
+      "original_start": "0x42c0b2",
+      "original_end_exclusive": "0x42c222",
+      "original_body_bytes": 368,
+      "observed_original_bytes": 368,
+      "original_body_sha256": "a3d5075b7f480a21b071c587bb343466ca39d411ed426927e82b22168591937e",
+      "source": "g2/components/bootloader/initializer_callbacks/context_events.c",
+      "source_sha256": "e1c9c36c1bf0d7cc477f6ad415bbe60c8af67596fea36e27b1684531299657a8"
+    },
+    {
+      "function": "interrupt-status",
+      "symbol": "opencfw_boot_iom_interrupt_status",
+      "original_start": "0x42c672",
+      "original_end_exclusive": "0x42c6b6",
+      "original_body_bytes": 68,
+      "body_sha256": "12a9d08495567647cb0d8416dfb736ee532845317b856b2b86e26b485510d347",
+      "source": "g2/components/bootloader/initializer_callbacks/context_irq.c",
+      "source_sha256": "b575bf206f6d735fd15c3fe6b96ec39bfe02b526c3475ebd73533368d2c44952"
+    },
+    {
+      "function": "interrupt-clear",
+      "symbol": "opencfw_boot_iom_interrupt_clear",
+      "original_start": "0x42c6b6",
+      "original_end_exclusive": "0x42c6e4",
+      "original_body_bytes": 46,
+      "body_sha256": "4a307af7da21ad92dbface1def9fb21fe550c8452a2c1a6b01755fdd0d7e2d4a",
+      "source": "g2/components/bootloader/initializer_callbacks/context_irq.c",
+      "source_sha256": "b575bf206f6d735fd15c3fe6b96ec39bfe02b526c3475ebd73533368d2c44952"
+    }
+  ],
+  "deduplicated_original_body_bytes": 3426,
+  "inventory_complete": false,
+  "limits": [
+    "Partial17-function IOM ownership; generic CQ indices/status/resume are separately recorded in the asynchronous ledger.",
+    "Original extents are instruction-delimited and agree with consolidated symbol boundaries; body hashes bind exact locked bytes.",
+    "Transaction lower CQ/wait/power/clock dependencies are separately represented; ownership is not proof of native hardware behavior or all-path whole-system correctness."
+  ],
+  "total_original_body_bytes": 3540
+}

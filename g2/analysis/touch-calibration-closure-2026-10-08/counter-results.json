@@ -1,0 +1,28 @@
+{
+  "status": "PASS_STOCK_COUNTER_SETUP_AND_INCREMENT",
+  "setup": {
+    "counter_after_init": 0,
+    "systick_ctrl": 3,
+    "systick_load": 40,
+    "callback_slot0": 13797
+  },
+  "increments": [
+    {
+      "before": 0,
+      "after": 1
+    },
+    {
+      "before": 123,
+      "after": 124
+    },
+    {
+      "before": 4294967295,
+      "after": 0
+    }
+  ],
+  "source_clock_enum": "0: clk_lf per pinned cy_systick.h",
+  "limits": [
+    "SysTick registers synthetic memory; no actual interrupts, time or LF clock frequency measured.",
+    "Counter increment is callback invocation count; application/library initialization and clock calibration remain separate."
+  ]
+}

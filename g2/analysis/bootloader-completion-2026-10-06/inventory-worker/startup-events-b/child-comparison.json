@@ -1,0 +1,496 @@
+{
+  "status": "PASS",
+  "image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_elf_sha256": "52a62c40ffc3f9fd941cbc5a9b6fd0543cd0f6eb65a92706282f0117e0df4563",
+  "cases": 41,
+  "native_children": {
+    "temperature": {
+      "start": "0x42ad40",
+      "end_exclusive": "0x42adb8",
+      "bytes": 120,
+      "sha256": "89f71050cf7850205a7a5ef9ccfb09dfadaadd5a6046355844d800589b65607d",
+      "visited_original_bytes": 120,
+      "unvisited_bytes": 0
+    },
+    "transition_effect": {
+      "start": "0x42b014",
+      "end_exclusive": "0x42b068",
+      "bytes": 84,
+      "sha256": "b3da01a94a3c08eb7eb0d7d344b6760d929296878e2dfbf9c4770373aedd3d88",
+      "visited_original_bytes": 84,
+      "unvisited_bytes": 0
+    }
+  },
+  "source_machine_loaded_locked_image": false,
+  "comparisons": [
+    {
+      "kind": "temperature",
+      "case": "f32--inf",
+      "result": {
+        "flag": "00",
+        "mark": "00",
+        "mmio_word": 2784953343,
+        "mmio": [],
+        "result": 4
+      }
+    },
+    {
+      "kind": "temperature",
+      "case": "f32--1000.0",
+      "result": {
+        "flag": "00",
+        "mark": "00",
+        "mmio_word": 2784953343,
+        "mmio": [],
+        "result": 4
+      }
+    },
+    {
+      "kind": "temperature",
+      "case": "f32--300.0001",
+      "result": {
+        "flag": "00",
+        "mark": "00",
+        "mmio_word": 2784953343,
+        "mmio": [],
+        "result": 4
+      }
+    },
+    {
+      "kind": "temperature",
+      "case": "f32--300.0",
+      "result": {
+        "flag": "00",
+        "mark": "00",
+        "mmio_word": 2784953343,
+        "mmio": [],
+        "result": 4
+      }
+    },
+    {
+      "kind": "temperature",
+      "case": "f32--299.9999",
+      "result": {
+        "flag": "00",
+        "mark": "00",
+        "mmio_word": 2784953343,
+        "mmio": [],
+        "result": 4
+      }
+    },
+    {
+      "kind": "temperature",
+      "case": "f32--273.0001",
+      "result": {
+        "flag": "00",
+        "mark": "00",
+        "mmio_word": 2784953343,
+        "mmio": [],
+        "result": 4
+      }
+    },
+    {
+      "kind": "temperature",
+      "case": "f32--273.0",
+      "result": {
+        "flag": "00",
+        "mark": "00",
+        "mmio_word": 2784953343,
+        "mmio": [],
+        "result": 0
+      }
+    },
+    {
+      "kind": "temperature",
+      "case": "f32--272.9999",
+      "result": {
+        "flag": "00",
+        "mark": "00",
+        "mmio_word": 2784953343,
+        "mmio": [],
+        "result": 0
+      }
+    },
+    {
+      "kind": "temperature",
+      "case": "f32--20.0001",
+      "result": {
+        "flag": "00",
+        "mark": "00",
+        "mmio_word": 2784953343,
+        "mmio": [],
+        "result": 0
+      }
+    },
+    {
+      "kind": "temperature",
+      "case": "f32--20.0",
+      "result": {
+        "flag": "00",
+        "mark": "00",
+        "mmio_word": 2784953343,
+        "mmio": [],
+        "result": 1
+      }
+    },
+    {
+      "kind": "temperature",
+      "case": "f32--19.9999",
+      "result": {
+        "flag": "00",
+        "mark": "00",
+        "mmio_word": 2784953343,
+        "mmio": [],
+        "result": 1
+      }
+    },
+    {
+      "kind": "temperature",
+      "case": "f32--0.0001",
+      "result": {
+        "flag": "00",
+        "mark": "00",
+        "mmio_word": 2784953343,
+        "mmio": [],
+        "result": 1
+      }
+    },
+    {
+      "kind": "temperature",
+      "case": "f32--0.0",
+      "result": {
+        "flag": "00",
+        "mark": "00",
+        "mmio_word": 2784953343,
+        "mmio": [],
+        "result": 2
+      }
+    },
+    {
+      "kind": "temperature",
+      "case": "f32-0.0",
+      "result": {
+        "flag": "00",
+        "mark": "00",
+        "mmio_word": 2784953343,
+        "mmio": [],
+        "result": 2
+      }
+    },
+    {
+      "kind": "temperature",
+      "case": "f32-0.0001",
+      "result": {
+        "flag": "00",
+        "mark": "00",
+        "mmio_word": 2784953343,
+        "mmio": [],
+        "result": 2
+      }
+    },
+    {
+      "kind": "temperature",
+      "case": "f32-49.9999",
+      "result": {
+        "flag": "00",
+        "mark": "00",
+        "mmio_word": 2784953343,
+        "mmio": [],
+        "result": 2
+      }
+    },
+    {
+      "kind": "temperature",
+      "case": "f32-50.0",
+      "result": {
+        "flag": "00",
+        "mark": "00",
+        "mmio_word": 2784953343,
+        "mmio": [],
+        "result": 3
+      }
+    },
+    {
+      "kind": "temperature",
+      "case": "f32-50.0001",
+      "result": {
+        "flag": "00",
+        "mark": "00",
+        "mmio_word": 2784953343,
+        "mmio": [],
+        "result": 3
+      }
+    },
+    {
+      "kind": "temperature",
+      "case": "f32-999.9999",
+      "result": {
+        "flag": "00",
+        "mark": "00",
+        "mmio_word": 2784953343,
+        "mmio": [],
+        "result": 3
+      }
+    },
+    {
+      "kind": "temperature",
+      "case": "f32-1000.0",
+      "result": {
+        "flag": "00",
+        "mark": "00",
+        "mmio_word": 2784953343,
+        "mmio": [],
+        "result": 4
+      }
+    },
+    {
+      "kind": "temperature",
+      "case": "f32-1000.0001",
+      "result": {
+        "flag": "00",
+        "mark": "00",
+        "mmio_word": 2784953343,
+        "mmio": [],
+        "result": 4
+      }
+    },
+    {
+      "kind": "temperature",
+      "case": "f32-inf",
+      "result": {
+        "flag": "00",
+        "mark": "00",
+        "mmio_word": 2784953343,
+        "mmio": [],
+        "result": 4
+      }
+    },
+    {
+      "kind": "temperature",
+      "case": "f32-nan",
+      "result": {
+        "flag": "00",
+        "mark": "00",
+        "mmio_word": 2784953343,
+        "mmio": [],
+        "result": 4
+      }
+    },
+    {
+      "kind": "transition_effect",
+      "case": "requested=0,current=0,flag=0",
+      "result": {
+        "flag": "00",
+        "mark": "a7",
+        "mmio_word": 2784953343,
+        "mmio": []
+      }
+    },
+    {
+      "kind": "transition_effect",
+      "case": "requested=0,current=0,flag=1",
+      "result": {
+        "flag": "01",
+        "mark": "a7",
+        "mmio_word": 2784953343,
+        "mmio": []
+      }
+    },
+    {
+      "kind": "transition_effect",
+      "case": "requested=0,current=1,flag=0",
+      "result": {
+        "flag": "00",
+        "mark": "a7",
+        "mmio_word": 2784887735,
+        "mmio": [
+          [
+            1073873788,
+            4,
+            2784887807
+          ],
+          [
+            1073873788,
+            4,
+            2784887799
+          ],
+          [
+            1073873788,
+            4,
+            2784887735
+          ]
+        ]
+      }
+    },
+    {
+      "kind": "transition_effect",
+      "case": "requested=0,current=1,flag=1",
+      "result": {
+        "flag": "00",
+        "mark": "a7",
+        "mmio_word": 2784887735,
+        "mmio": [
+          [
+            1073873788,
+            4,
+            2784887807
+          ],
+          [
+            1073873788,
+            4,
+            2784887799
+          ],
+          [
+            1073873788,
+            4,
+            2784887735
+          ]
+        ]
+      }
+    },
+    {
+      "kind": "transition_effect",
+      "case": "requested=0,current=2,flag=0",
+      "result": {
+        "flag": "00",
+        "mark": "a7",
+        "mmio_word": 2784953343,
+        "mmio": []
+      }
+    },
+    {
+      "kind": "transition_effect",
+      "case": "requested=0,current=2,flag=1",
+      "result": {
+        "flag": "01",
+        "mark": "a7",
+        "mmio_word": 2784953343,
+        "mmio": []
+      }
+    },
+    {
+      "kind": "transition_effect",
+      "case": "requested=1,current=0,flag=0",
+      "result": {
+        "flag": "00",
+        "mark": "a7",
+        "mmio_word": 2784953343,
+        "mmio": []
+      }
+    },
+    {
+      "kind": "transition_effect",
+      "case": "requested=1,current=0,flag=1",
+      "result": {
+        "flag": "01",
+        "mark": "a7",
+        "mmio_word": 2784953343,
+        "mmio": []
+      }
+    },
+    {
+      "kind": "transition_effect",
+      "case": "requested=1,current=1,flag=0",
+      "result": {
+        "flag": "00",
+        "mark": "a7",
+        "mmio_word": 2784953343,
+        "mmio": []
+      }
+    },
+    {
+      "kind": "transition_effect",
+      "case": "requested=1,current=1,flag=1",
+      "result": {
+        "flag": "01",
+        "mark": "a7",
+        "mmio_word": 2784953343,
+        "mmio": []
+      }
+    },
+    {
+      "kind": "transition_effect",
+      "case": "requested=1,current=2,flag=0",
+      "result": {
+        "flag": "00",
+        "mark": "a7",
+        "mmio_word": 2784953343,
+        "mmio": []
+      }
+    },
+    {
+      "kind": "transition_effect",
+      "case": "requested=1,current=2,flag=1",
+      "result": {
+        "flag": "01",
+        "mark": "a7",
+        "mmio_word": 2784953343,
+        "mmio": []
+      }
+    },
+    {
+      "kind": "transition_effect",
+      "case": "requested=2,current=0,flag=0",
+      "result": {
+        "flag": "00",
+        "mark": "a7",
+        "mmio_word": 2784953343,
+        "mmio": []
+      }
+    },
+    {
+      "kind": "transition_effect",
+      "case": "requested=2,current=0,flag=1",
+      "result": {
+        "flag": "01",
+        "mark": "a7",
+        "mmio_word": 2784953343,
+        "mmio": []
+      }
+    },
+    {
+      "kind": "transition_effect",
+      "case": "requested=2,current=1,flag=0",
+      "result": {
+        "flag": "00",
+        "mark": "01",
+        "mmio_word": 2784953343,
+        "mmio": []
+      }
+    },
+    {
+      "kind": "transition_effect",
+      "case": "requested=2,current=1,flag=1",
+      "result": {
+        "flag": "01",
+        "mark": "a7",
+        "mmio_word": 2784953343,
+        "mmio": []
+      }
+    },
+    {
+      "kind": "transition_effect",
+      "case": "requested=2,current=2,flag=0",
+      "result": {
+        "flag": "00",
+        "mark": "a7",
+        "mmio_word": 2784953343,
+        "mmio": []
+      }
+    },
+    {
+      "kind": "transition_effect",
+      "case": "requested=2,current=2,flag=1",
+      "result": {
+        "flag": "01",
+        "mark": "a7",
+        "mmio_word": 2784953343,
+        "mmio": []
+      }
+    }
+  ],
+  "limits": [
+    "Only the leaf temperature-range and transition-effect bodies are in this descendant closure.",
+    "Cortex-M33 emulation is a baseline subset check, not Apollo510 hardware validation."
+  ]
+}

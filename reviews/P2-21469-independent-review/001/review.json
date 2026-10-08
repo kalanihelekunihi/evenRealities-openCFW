@@ -1,0 +1,22 @@
+{
+  "review_id": "P2-21469-independent-review",
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-three-byte-stack-readback-object-parameter-setup-middle-21868-map/001",
+  "status": "partial",
+  "accepted": false,
+  "checks": {
+    "fresh_replay": "pass",
+    "instruction_bytes": 102,
+    "instructions_match": true,
+    "references_match": true,
+    "open_frame_bytes": 32,
+    "copy_length": 3,
+    "fullword_sp0_readback": true,
+    "fresh_object_offset_read": 28
+  },
+  "limitations": [
+    "SP0 fourth byte value unproven across helper calls",
+    "helper contracts unresolved",
+    "continuation unresolved",
+    "no whole-routine coverage or acceptance claim"
+  ]
+}

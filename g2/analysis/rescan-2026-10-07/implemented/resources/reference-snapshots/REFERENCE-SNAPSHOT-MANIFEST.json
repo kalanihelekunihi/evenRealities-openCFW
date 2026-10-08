@@ -1,0 +1,795 @@
+{
+  "schema_version": 1,
+  "source_commit": "c618f7f1062624666501152ea215b2e49d824659",
+  "method": "read-only git archive stream; no checkout/index/submodule/network operations",
+  "snapshots": [
+    {
+      "name": "ambiq-lvgl-backend",
+      "source_tree_path": "g2/third_party/lvgl-ambiq-backend/src/draw/ambiq",
+      "source_tree_git_sha1": "1e774257495fa43177e04fc5c8a42a77c2d7d619",
+      "file_count": 16,
+      "archive_members": 19
+    },
+    {
+      "name": "liblc3",
+      "source_tree_path": "g2/third_party/liblc3",
+      "source_tree_git_sha1": "345d1a17ee6bdf7ab872bf4c53bf2a1845552a12",
+      "file_count": 42,
+      "archive_members": 42
+    },
+    {
+      "name": "nema-sdk-headers",
+      "source_tree_path": "g2/third_party/nema-sdk-headers",
+      "source_tree_git_sha1": "5069f7e371971ff44238d98319b7310637c5f1d6",
+      "file_count": 33,
+      "archive_members": 34
+    }
+  ],
+  "historical_git_blob_checks": 95,
+  "lc3_snapshot_manifest_entries_verified": 38,
+  "lvgl_source_manifest_entries_verified": 16,
+  "files": [
+    {
+      "snapshot": "ambiq-lvgl-backend",
+      "path": "ambiq-lvgl-backend/src/draw/ambiq/lv_draw_ambiq.c",
+      "git_blob_sha1": "aad246ff0320cf9187b956413665360874ef2610",
+      "sha256": "c9ad0280fd1b394aa7bcac0004ab6148237e787add7650f77fc7df93da438626",
+      "bytes": 14363,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "ambiq-lvgl-backend",
+      "path": "ambiq-lvgl-backend/src/draw/ambiq/lv_draw_ambiq.h",
+      "git_blob_sha1": "c36b565abfae52431361a1d385eb7266052adc7a",
+      "sha256": "f36e09bd8aa98df9a2011d06348afdeab2d722ed6eed5e7f40e3f075bf034128",
+      "bytes": 4586,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "ambiq-lvgl-backend",
+      "path": "ambiq-lvgl-backend/src/draw/ambiq/lv_draw_ambiq_arc.c",
+      "git_blob_sha1": "fe6dc3c053399fc1dc8cb1e001d42ee7e4117a64",
+      "sha256": "cc67ac17c11162cf340341d5fbd1ee8a25c97fa7d28328d8ce6024acf8928fa7",
+      "bytes": 5132,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "ambiq-lvgl-backend",
+      "path": "ambiq-lvgl-backend/src/draw/ambiq/lv_draw_ambiq_border.c",
+      "git_blob_sha1": "078d0e32f8f6230088b164349fdea98c2b9b8718",
+      "sha256": "74725f830d03faac43e84d0a7cd82b30748b0baaf691a51d840d1710a851cd0b",
+      "bytes": 11025,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "ambiq-lvgl-backend",
+      "path": "ambiq-lvgl-backend/src/draw/ambiq/lv_draw_ambiq_box_shadow.c",
+      "git_blob_sha1": "e22c902150b8469a82cda531562cd411c36dd0ae",
+      "sha256": "0ddd7d321192450f907d8f4886d5b044af1c76b7ea37d693880d45ef0278b2a0",
+      "bytes": 19508,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "ambiq-lvgl-backend",
+      "path": "ambiq-lvgl-backend/src/draw/ambiq/lv_draw_ambiq_buffer.c",
+      "git_blob_sha1": "6fbf6567d43f78a18cfe9b94b6de7265c3ec168e",
+      "sha256": "77b8949e152b0be1f9f19d222e77728065926b030587e428b36921fec9f3b5dc",
+      "bytes": 12298,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "ambiq-lvgl-backend",
+      "path": "ambiq-lvgl-backend/src/draw/ambiq/lv_draw_ambiq_fill.c",
+      "git_blob_sha1": "a470d7bec4885aae9fccb558279fd99a8ade6cf5",
+      "sha256": "7d85c3b07d645367de421c511bbc0ae4010d5a4c4cc8afbc2135b070347a83c2",
+      "bytes": 4183,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "ambiq-lvgl-backend",
+      "path": "ambiq-lvgl-backend/src/draw/ambiq/lv_draw_ambiq_img.c",
+      "git_blob_sha1": "760a40e610c4597ece9e46ebdc3013dea3d4104f",
+      "sha256": "e84c6dc754b5cbe9501fed46fb64d3672fed0ae17133b54f7ae9b5c1afa5b50b",
+      "bytes": 11403,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "ambiq-lvgl-backend",
+      "path": "ambiq-lvgl-backend/src/draw/ambiq/lv_draw_ambiq_letter.c",
+      "git_blob_sha1": "c625260a3b615229738e910b8d75077e3f52e3bc",
+      "sha256": "fbf289aec0dd385246041967287ab5f570a5778e81884da63f53895ef9e484f7",
+      "bytes": 10993,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "ambiq-lvgl-backend",
+      "path": "ambiq-lvgl-backend/src/draw/ambiq/lv_draw_ambiq_line.c",
+      "git_blob_sha1": "6b74a88661e7d5a8094eb601ca6767ec6f27f8f3",
+      "sha256": "7f9cfb153bdae6b25a19e1e9c149ea49dc706a53d86e6f77d6193047c972f669",
+      "bytes": 5105,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "ambiq-lvgl-backend",
+      "path": "ambiq-lvgl-backend/src/draw/ambiq/lv_draw_ambiq_mask_rect.c",
+      "git_blob_sha1": "16450ccc32f6be838077fc97d7bfb4d9fbe361b9",
+      "sha256": "93cb55b3c8f244b2348f8ae6be9db669afcd36270007d10c6e1a025429fba100",
+      "bytes": 8510,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "ambiq-lvgl-backend",
+      "path": "ambiq-lvgl-backend/src/draw/ambiq/lv_draw_ambiq_private.c",
+      "git_blob_sha1": "35cdad279afcc045661f4bd473ec673e4743efc4",
+      "sha256": "55146d9585bfb222668de55f03d98383108b1c154b06ed739c80e3b32fbc49d3",
+      "bytes": 22884,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "ambiq-lvgl-backend",
+      "path": "ambiq-lvgl-backend/src/draw/ambiq/lv_draw_ambiq_private.h",
+      "git_blob_sha1": "35807da9719d68236a8682b7a494c0ecc15cb9ac",
+      "sha256": "06d258d435cdd12a054294c6a272f18e6dde5a68beab3c681f1657228b6840dd",
+      "bytes": 5018,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "ambiq-lvgl-backend",
+      "path": "ambiq-lvgl-backend/src/draw/ambiq/lv_draw_ambiq_triangle.c",
+      "git_blob_sha1": "f5506dec67e35a3767c4acdd9444a8e0b61174b2",
+      "sha256": "188eb70207fb1a07ad0a611af6e117d1613f1f69c337dbcfe204c7d7cc5434ca",
+      "bytes": 4625,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "ambiq-lvgl-backend",
+      "path": "ambiq-lvgl-backend/src/draw/ambiq/lv_draw_ambiq_vector.c",
+      "git_blob_sha1": "6759c86e35882657dfbc1fa821af6d0570218da9",
+      "sha256": "958dec0f248e0a479984deb00987569b3eae5d991272d80d37f2d91f7cd37006",
+      "bytes": 20271,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "ambiq-lvgl-backend",
+      "path": "ambiq-lvgl-backend/src/draw/ambiq/lv_draw_ambiq_vector_font.c",
+      "git_blob_sha1": "b6bc8dcbc0e9878e3ae1ee2721ba5f6546b13a9c",
+      "sha256": "b425c3280387a1c5392b69c0a99adbf5cf59502315474373d941e2ba1f1bd1f2",
+      "bytes": 10929,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/LICENSE",
+      "git_blob_sha1": "d645695673349e3947e8e5ae42332d0ac3164cd7",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "bytes": 11358,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/Makefile",
+      "git_blob_sha1": "50100bcd86bf97badb0f7ef8c6ff88617f203640",
+      "sha256": "53ff4cb0d7384805f831dd10bee2ba02d1f8a6dd72bf475c20e98aa2c02a9ec0",
+      "bytes": 4032,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/PROVENANCE.json",
+      "git_blob_sha1": "0ac60326b778c23ab8e40df54676fd28ef7d4e58",
+      "sha256": "91b5daf8383c6985807ffda06ed9918ec11e17a805a384948fa66a09ef7a56b3",
+      "bytes": 10822,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/README.md",
+      "git_blob_sha1": "6cb2a7e3f505f05d08f8e22f7ca46b51b3f461c4",
+      "sha256": "71ef012ea6625cea2690f579582a66960a02270641cb01ba6ad80a0da59dba3d",
+      "bytes": 5140,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/README.openCFW.md",
+      "git_blob_sha1": "5579fb902f6f8a1251135c486de8a20e8dc2da5e",
+      "sha256": "84c17709ce0f74a1076ccf141e5338dc818e963d5b19c135d605f0c0ef8e0aa7",
+      "bytes": 1574,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/SNAPSHOT.sha256",
+      "git_blob_sha1": "b2eecb863c311d5355a9c660fa421e050ad620a6",
+      "sha256": "082385608437fbb327afd891c85ca678d2b23f20ac6fe647c3f3079f7e4ca3c5",
+      "bytes": 2986,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/include/lc3.h",
+      "git_blob_sha1": "98022f3e22f1de6711ee825970cac12fad4c989f",
+      "sha256": "26ada473f22c586de358e819e489aaf972128018c653a173a7de5776ac358149",
+      "bytes": 16185,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/include/lc3_cpp.h",
+      "git_blob_sha1": "1949eb90492820e2cb89b3ea61012a7c0140330a",
+      "sha256": "4d06fcee983d9e5978938208c76e0446cf950344eba785687aa9d38054a5a3a6",
+      "bytes": 9721,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/include/lc3_private.h",
+      "git_blob_sha1": "4f5f657be50278d96f560275b88be2a1b348e1ea",
+      "sha256": "9971369be048d928e8cb4d30ab674c5f1df71e5771ea75b01ff4184f18182fe6",
+      "bytes": 4045,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/meson.build",
+      "git_blob_sha1": "0fa0904e5ec9f6cf0681b219e8a69476917996d7",
+      "sha256": "af6a46b12372b5ac78242e29470c1ce7f560bea321919af0466f085165ce0871",
+      "bytes": 1104,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/meson_options.txt",
+      "git_blob_sha1": "d840d1c031cdfbf5284a7510c7da341a34fbcf39",
+      "sha256": "ed0a12acba863aca41ed917a3de55553fef796a626ffde4744f46cd73c6146a2",
+      "bytes": 778,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/src/attdet.c",
+      "git_blob_sha1": "b498ef9ba265136ca34d7d08cb2d289b6a8cf799",
+      "sha256": "fa109979931fb72119f962807e4b9d5fcf2c62113df6c778ad724d04db10f7f6",
+      "bytes": 2931,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/src/attdet.h",
+      "git_blob_sha1": "4d4ee170e8c18f5866330734372914099d9176ae",
+      "sha256": "e6cba23dea78d694405a26448ef1dfba48e433db6ea631ecf344f10c42aeb2d3",
+      "bytes": 1289,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/src/bits.c",
+      "git_blob_sha1": "881258bf52b05a8415b0f6dfbb67792abf904158",
+      "sha256": "79d0ea8984a6be7b99ea0025a19dae216cfc29de417a649b1683de74854256e8",
+      "bytes": 9541,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/src/bits.h",
+      "git_blob_sha1": "de65c9313c16eba645a4c1b7ca4e5e318a7017b8",
+      "sha256": "b9080b1b60d368848e744f3a7855d4852b9ab6bbefa8d1e5fb035a20e90a0488",
+      "bytes": 8073,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/src/bwdet.c",
+      "git_blob_sha1": "0c4893972508610a36f2d7e44727baafd5760c30",
+      "sha256": "c31af798bb75dec645625778dc30b860e96b22c726c477a1538b928758ddd249",
+      "bytes": 4445,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/src/bwdet.h",
+      "git_blob_sha1": "773e6bb635064dea365313fcef25079142afea10",
+      "sha256": "3abaefbc286145a25157b95ab419a7f2d0ef2193c5b259c81900cc2811a3964f",
+      "bytes": 1906,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/src/common.h",
+      "git_blob_sha1": "2b23a8d3fe5801282710fad543ac83f5c20822b6",
+      "sha256": "a4949ea1a026137532f47873a20732a30bc62d600e31060affc8296d3db78a1c",
+      "bytes": 2952,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/src/energy.c",
+      "git_blob_sha1": "ffa3f786cf54764e895368d452fccbde7ce37aab",
+      "sha256": "bee68f82d47ce860f7bebae0a12b2a98c54242248af72cd8e41426317c4d8f2e",
+      "bytes": 1606,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/src/energy.h",
+      "git_blob_sha1": "8ebd726bae29677627a5fd249a281d0153f728a5",
+      "sha256": "1e59bccba0ac1c601605ee823788f50f63eb85a34652ecf5636b8560907fcb47",
+      "bytes": 1208,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/src/fastmath.h",
+      "git_blob_sha1": "86cbdfa2c817e997a1bb0a98067e5853a3e90181",
+      "sha256": "d216042352a370d1cd0b219220d92f6ee6e32f99074b193caff7c4696f3a69f0",
+      "bytes": 6646,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/src/lc3.c",
+      "git_blob_sha1": "ac4427a172b3a46a54e0dc019efecb2caca20012",
+      "sha256": "6a4a5d284585fb40fe51813fd48f3becde963a123e26699bb9bc1488a7ae0511",
+      "bytes": 20597,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/src/ltpf.c",
+      "git_blob_sha1": "08cbae6b8218322211daa74b1fa15496498756d0",
+      "sha256": "810c6f862a649b9a27b33dc7c1e1c8f64a339b5a4aa6fef8027eafbcf8f7e80e",
+      "bytes": 31944,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/src/ltpf.h",
+      "git_blob_sha1": "42cedc6abb01f17a78c84e46d575097241251259",
+      "sha256": "5be7d1c5977198840917ec0689986cd87028ad912e17052e23cf9d11bd6434ff",
+      "bytes": 3320,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/src/ltpf_arm.h",
+      "git_blob_sha1": "fab352901469c24cf4bbd2c0e2efc118384db9a2",
+      "sha256": "25f962dfad0f19bf89759c6b85a1e2de09f231c23f83edc6a2e90c9469051f69",
+      "bytes": 19587,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/src/ltpf_neon.h",
+      "git_blob_sha1": "27ba5d8e32c1560a275f6b3029351584bab29578",
+      "sha256": "4a4c2e11585e99c1a58f1bc875277f7d1de20ea369223d051020b2dfd7a0097c",
+      "bytes": 9258,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/src/makefile.mk",
+      "git_blob_sha1": "968ec43a68332ef62b83aca6ea2f2ca62e1b87db",
+      "sha256": "0b94f1c3fb7994e7f0dd18d8dd1a23e83eeb07ea1d05528f05de27de69694f84",
+      "bytes": 960,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/src/mdct.c",
+      "git_blob_sha1": "51d9579cc9493e2ba10ac90d0ad6efa497c1ecc2",
+      "sha256": "57eddd5597c5a5b3ec547eb32e517ec7a2c0fda186aac98cf38bf65959fa7ca3",
+      "bytes": 15024,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/src/mdct.h",
+      "git_blob_sha1": "18d08b99b2f21a45c1c357401aa716050f126c5e",
+      "sha256": "7ebe6ae187489bf1d076a88d31c11315e47ca93fa2ba2da3355dd411495184bf",
+      "bytes": 1787,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/src/mdct_neon.h",
+      "git_blob_sha1": "a970d4ade3ad95f640105a9173c30ac4fba8ca34",
+      "sha256": "6c23af2bfd363889b51c5cf0ad6ffdd7058df5d9a24630050e184e4316467885",
+      "bytes": 10071,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/src/meson.build",
+      "git_blob_sha1": "026f4eec142ba9dbcef282b735ecacac6aa631a3",
+      "sha256": "8ee72d5b7551068f021f0f736534840313c0279db045ac5453b0508e970f2063",
+      "bytes": 1480,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/src/plc.c",
+      "git_blob_sha1": "f225ca666b389e8d2cfbd44087a610cb2bf77930",
+      "sha256": "b307cbcde8dadfa39b00f8a3227efd088a034701f9119e53dd5d8e06c226300c",
+      "bytes": 1640,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/src/plc.h",
+      "git_blob_sha1": "a7990bd69d2417969315a3d86d5e54c415856240",
+      "sha256": "703cefdaa9355e10597cb107a1d75400b78c0ec84363509475def8f21fcbe455",
+      "bytes": 1459,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/src/sns.c",
+      "git_blob_sha1": "85660d009112d7d848ccf67bd0a1175fc612600b",
+      "sha256": "2eada2a454df085ac9451cde4fd8c01136d8d958758f406327105cac1ecc511b",
+      "bytes": 32515,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/src/sns.h",
+      "git_blob_sha1": "ecb80efbdd6d6e7d3a375360aad06cb94d9a4206",
+      "sha256": "46a1978bfc2426e3739381006fb81f04c64f9a9ac6274d6f6550c3e8d1a5358e",
+      "bytes": 2824,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/src/spec.c",
+      "git_blob_sha1": "25a28d4380f5df729ff4143b5c6b11238ed3078c",
+      "sha256": "a4fd35a2b7a80ef39cb9c3fe1c2822b9f8842d69c7df6158607aa74472208c70",
+      "bytes": 28260,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/src/spec.h",
+      "git_blob_sha1": "92843638f917ec73ffb7f31b9ec938f0a5113cd9",
+      "sha256": "43631212c0eee627bdb55612af8d68183235e308b3ba602bdc50cc64b07e03fd",
+      "bytes": 3416,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/src/tables.c",
+      "git_blob_sha1": "947813d5fbb225ad140574cb85b559b056e31498",
+      "sha256": "8f325e60f185472eaef727a6dc7adb23a322f7dea2f2b607784e097adfa5c828",
+      "bytes": 365193,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/src/tables.h",
+      "git_blob_sha1": "2dc7810c948aec989b8b8ea06e16c4593335ed55",
+      "sha256": "c6ca665cac2b4e55ed83fd63a934840f74ea26ef3dbb4e558524616624b66e41",
+      "bytes": 4385,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/src/tns.c",
+      "git_blob_sha1": "b2b9305ec01da607edd881967f801b7917cbddf9",
+      "sha256": "b6f2a8e2677c527ee96d83b843d581c0a6890d6cc4aec7eeaf5dcef3d477797c",
+      "bytes": 14715,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/src/tns.h",
+      "git_blob_sha1": "95d4e6723f1820a1019cfa9632abe019d9037440",
+      "sha256": "7175ac02efd0cc2201eee69e2f318a8e858317751e1653a8e64765ba85e9e459",
+      "bytes": 2798,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "liblc3",
+      "path": "liblc3/verify_snapshot.py",
+      "git_blob_sha1": "7a3d7b983782e59178ab4ec109eed7dc328d65fb",
+      "sha256": "aeff487df6d7b318e543894b8b9e8aee80c937731125446e7735b2789d8d6e1a",
+      "bytes": 2350,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/README.openCFW.md",
+      "git_blob_sha1": "55c5699727fe5c3c541b25c3798f290fcfb4db26",
+      "sha256": "c784e4375fa61aeb3541504bcd807f3fdcadfebc0eb7290fd4f535c23c4879a3",
+      "bytes": 1456,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/extensions/gpu_patch.h",
+      "git_blob_sha1": "79e6e220c5798a76e75d4af3789b19fa7ffc3f9a",
+      "sha256": "9aa403a02f5ef6c88f362337b85007cf7af77206d0218fd3b3d0ac408efd45e3",
+      "bytes": 13595,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/headers/LICENSE",
+      "git_blob_sha1": "4ba5d2cc1db909af5c8111414976cc9ce23e215b",
+      "sha256": "bb504491bd00c656c9622c9b9cfe805273c8c626ceb35480b5907983de718fbc",
+      "bytes": 1232,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/headers/NemaGFX/Nema/nema_programHW.h",
+      "git_blob_sha1": "c02071bd509c07ca5e3617fbdd1d935a5d0fa056",
+      "sha256": "0d7634f65fe3a04088b3895f0b8467823a73cf4496b7e5cb95e641c4cf84c465",
+      "bytes": 13784,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/headers/NemaGFX/Nema/nema_regs.h",
+      "git_blob_sha1": "1c5933b5a4571665e4bbec566ac53cb0ea08ec3a",
+      "sha256": "7ac2f2ad9bda610df64ca02ab4974ca93fada09898f3cbfdb3466ed2a4cf957c",
+      "bytes": 7278,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/headers/NemaGFX/Nema/nema_ringbuffer.h",
+      "git_blob_sha1": "fd2fd952b4ce2e7011858eb0b1f379f6ffb36696",
+      "sha256": "899ab16187af2c86a65d0d44e632432bb2a271eb9587023ea6efaee7e6806cf8",
+      "bytes": 2714,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/headers/NemaGFX/Nema/nema_shaderSpecific.h",
+      "git_blob_sha1": "61a504d1cd8db26b1a6e76ebb103a4734b50cee4",
+      "sha256": "7f6a48b2c8912adc400f3b081c9aa8d4d36e59f6f971ddc9f861dd3d3de75348",
+      "bytes": 4369,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/headers/include/tsi/NemaGFX/nema_blender.h",
+      "git_blob_sha1": "9912d2dfb2f66d1fd06781213d00f05f46de89e0",
+      "sha256": "47820157744ad6f0030bc116809b90fb205dff5de7d368c6e1671feac1801d4c",
+      "bytes": 8218,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/headers/include/tsi/NemaGFX/nema_cmdlist.h",
+      "git_blob_sha1": "c55109c9e1f13aee4d391229f337ce6d0ef6cfa5",
+      "sha256": "ea582be2bd7f90d40256de52f6eb4276c785b352522f63c09ef5c45291f82edd",
+      "bytes": 7406,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/headers/include/tsi/NemaGFX/nema_core.h",
+      "git_blob_sha1": "2cb73a17b8b79303d7b942ce7e8b144868bedf85",
+      "sha256": "74312d6770b3a8becb5b7dcbd1f4bc729a2d8c0129b9ef6a5018ac6ee3b20f5b",
+      "bytes": 1780,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/headers/include/tsi/NemaGFX/nema_easing.h",
+      "git_blob_sha1": "bf289383c6d945d0f597e38d2664b1daa14f50e4",
+      "sha256": "a499ed663b981e36b2de1fbd896ef9a7177e6a4fa178b2a0576b9001d6c8eae2",
+      "bytes": 10260,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/headers/include/tsi/NemaGFX/nema_error.h",
+      "git_blob_sha1": "e79a7b9a7737e8ca7bc57531709684cef04c1f04",
+      "sha256": "69dd7b3fa95d14bf7e1aa93738b5675741c26fff8e05a4fb1e1d31ed4fb5aab1",
+      "bytes": 3539,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/headers/include/tsi/NemaGFX/nema_font.h",
+      "git_blob_sha1": "bb5ab1adf4857b2d369336f8bca72eb6761f799e",
+      "sha256": "7a1a0c63b09abc26e4dce43ebf567d30b4dfb97707353982e110f12ce2a4c03b",
+      "bytes": 7084,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/headers/include/tsi/NemaGFX/nema_graphics.h",
+      "git_blob_sha1": "8a111f97b9b4416b117e0593155a8e7a885aed2a",
+      "sha256": "165138681ed662c8a3825bc4515448f87ebb890510c6ce26c65d72dab3266444",
+      "bytes": 37784,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/headers/include/tsi/NemaGFX/nema_hal.h",
+      "git_blob_sha1": "c76ef0463afa3d73c2be662d89f3c59a33df15f9",
+      "sha256": "752ec40cd2f581c191ab531a88cc8c8064f9948a131375f8c3c79959e7d35265",
+      "bytes": 5556,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/headers/include/tsi/NemaGFX/nema_interpolators.h",
+      "git_blob_sha1": "aa267cc3807652e656c9357643598e96a4ee6e4d",
+      "sha256": "11755946b9f00e63819a0cc43a569334e4b8d1d834f15e2e9368d206ebd36f42",
+      "bytes": 5484,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/headers/include/tsi/NemaGFX/nema_math.h",
+      "git_blob_sha1": "3bc3862a60d0cad12f69230295b9c41d7fc18276",
+      "sha256": "8d105b7e03ed0f619b50619e9d88838fb9737f98909865baa3a7555aab92b930",
+      "bytes": 7231,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/headers/include/tsi/NemaGFX/nema_matrix3x3.h",
+      "git_blob_sha1": "ba6d4d6b604da89cc435b5e762d0d1d63c88cda0",
+      "sha256": "9d37d476ff4bdc96e06fdeedcf7ed435220538fa0219f970d9547f993af618fb",
+      "bytes": 6688,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/headers/include/tsi/NemaGFX/nema_matrix4x4.h",
+      "git_blob_sha1": "2a03b051032c0ec437356daebd7f1c171b82a78d",
+      "sha256": "495ef5ca0c19bb2ab826a1aae15865923052d267407f927563050ed02fd7ab8c",
+      "bytes": 8405,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/headers/include/tsi/NemaGFX/nema_provisional.h",
+      "git_blob_sha1": "44a56588e70488541254f27b06fb50adabdd49e7",
+      "sha256": "ad6cdd8afb24c6b4ee6aca896fafab4e125e73ab34cdfdfcb7b507db7894a54a",
+      "bytes": 5286,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/headers/include/tsi/NemaGFX/nema_raster.h",
+      "git_blob_sha1": "770fbcd32a38cdeb459d4e7a19a2e6f280980302",
+      "sha256": "f07b4d8da69424f9630ac4a275d6f2cc9a2c4dd8318f92dbc5ba59a716617036",
+      "bytes": 3624,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/headers/include/tsi/NemaGFX/nema_transitions.h",
+      "git_blob_sha1": "3a92646a51215bf7105c7cf65914214e6d109ccf",
+      "sha256": "c725eff5efa9a7e0fbf60992cbb161248ecfaf7bb4b091f6425da4c12d1655db",
+      "bytes": 8600,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/headers/include/tsi/NemaGFX/nema_version.h",
+      "git_blob_sha1": "76df02be5ddc189887e5e15e98bfac43b2b4fdb4",
+      "sha256": "c0b2ec7681603a6b9f4268f665f73e9ea3038cf9763dd94453412a40c8cce7b7",
+      "bytes": 2399,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/headers/include/tsi/NemaVG/nema_vg.h",
+      "git_blob_sha1": "f3831d2b1e4b5a3fc0184fffea2b33bfe9593df8",
+      "sha256": "99b1cc85b3e0c5b469c1556d8e2a0743bda30647dc2ac7409f4856e6f7365c45",
+      "bytes": 12466,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/headers/include/tsi/NemaVG/nema_vg_context.h",
+      "git_blob_sha1": "401d5ffcced58e5583ede35128f0200c281ad658",
+      "sha256": "ebf26025a0a89aa8fad4d726567c9d51cfa3af5a97e8ed06f2af7189637b1d0f",
+      "bytes": 12650,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/headers/include/tsi/NemaVG/nema_vg_font.h",
+      "git_blob_sha1": "e3a0e71914bbe171a5961c209d4e4bf26936618e",
+      "sha256": "35fc6fc3af32168ee25fb5ebd094c5900b0dcb6b2a03b89e5df75f7a94722ed7",
+      "bytes": 10594,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/headers/include/tsi/NemaVG/nema_vg_paint.h",
+      "git_blob_sha1": "aa102fb45c05b98157bb11b6c050733f2dd591b1",
+      "sha256": "1706f603d674ddb724c5ac92b64a4eb9e84d8ebfe9332c828d68b5f9955020bb",
+      "bytes": 8396,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/headers/include/tsi/NemaVG/nema_vg_path.h",
+      "git_blob_sha1": "4280d4ed82067d0a37e56feee205f21b40b07483",
+      "sha256": "ec6a4eab89c120c14cbd64b40b3565747fd8ad2831f8f46a111c728ffe826f86",
+      "bytes": 6810,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/headers/include/tsi/NemaVG/nema_vg_tsvg.h",
+      "git_blob_sha1": "76bf74e6edaf635c3eaad21bc327f5fef5c7b7af",
+      "sha256": "ae48091b509fcf9fb48b8e1a95ee8a37de54e9fe14686f65eedf8f6825a44a4c",
+      "bytes": 2116,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/headers/include/tsi/NemaVG/nema_vg_version.h",
+      "git_blob_sha1": "680942c90139045a2f58d147d2594fcf80c44e83",
+      "sha256": "8482e9f089fe3d45dcf2552252923b5a75a1d705de077d94f3c3064751eb6374",
+      "bytes": 2430,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/headers/include/tsi/common/nema_event.h",
+      "git_blob_sha1": "652efddffd54c32bbbc406ff3f518c7162248793",
+      "sha256": "6c58b6f1c8926c242e90605b5c1c5688d116f9e97aff483ec88d9a27f9040005",
+      "bytes": 3291,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/headers/include/tsi/common/nema_utils.h",
+      "git_blob_sha1": "03caff051a0e9545e93f481bb0c4cbd9456964a1",
+      "sha256": "1bcfa011a73eff0e979ed4353b720c5f5e020776ffabbccbb340aaedc9c4e809",
+      "bytes": 2033,
+      "mode": "100644"
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "nema-sdk-headers/port/nema_sys_defs.h",
+      "git_blob_sha1": "a28d480db287e502e7dc99204f7265cee6cf333d",
+      "sha256": "d24a872ba3f8885d6fc6812f5cb57c10de70f7156d1fd58fb6f56829639e8be5",
+      "bytes": 18553,
+      "mode": "100644"
+    }
+  ],
+  "ancillary_historical_git_blob_checks": [
+    {
+      "snapshot": "ambiq-lvgl-backend",
+      "path": "LICENCE.txt",
+      "historical_git_path": "g2/third_party/lvgl-ambiq-backend/LICENCE.txt",
+      "git_blob_sha1": "690d2dfd7e97ca8e06535a496761c5e81aece439",
+      "sha256": "27a80bd36832ab42d35ad60c08b2b230a807a9bc0d58e94ec1531543dc49cbe8",
+      "bytes": 1072
+    },
+    {
+      "snapshot": "ambiq-lvgl-backend",
+      "path": "README.openCFW.md",
+      "historical_git_path": "g2/third_party/lvgl-ambiq-backend/README.openCFW.md",
+      "git_blob_sha1": "baea479a0b56977b288a1b250630f86444eb6134",
+      "sha256": "ad929552de6a0ac747e6668d8d5acd637c73ed2249fc20e64ec5f2c6ae0b8c76",
+      "bytes": 1884
+    },
+    {
+      "snapshot": "ambiq-lvgl-backend",
+      "path": "provenance/g2-lvgl-ambiq-source-provenance.json",
+      "historical_git_path": "g2/tools/manifests/g2-lvgl-ambiq-source-provenance.json",
+      "git_blob_sha1": "39802a891ea76e4481dad10a7a5fc3c77bbc5d2c",
+      "sha256": "4bedefd4ba8d14c31767c9c02eccfbf387b677777a13a766d5923a9427f47ec0",
+      "bytes": 7183
+    },
+    {
+      "snapshot": "nema-sdk-headers",
+      "path": "provenance/g2-nemagfx-ambiq-provenance.json",
+      "historical_git_path": "g2/tools/manifests/g2-nemagfx-ambiq-provenance.json",
+      "git_blob_sha1": "5ae65c984eb74d5ea43aff72c76edf53761aac81",
+      "sha256": "5a8e427ae337afb78f2901e74ae48d08d8c222944a50ada8adadfbdd98296bfa",
+      "bytes": 24898
+    }
+  ]
+}

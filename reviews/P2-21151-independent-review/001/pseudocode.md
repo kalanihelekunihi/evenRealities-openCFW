@@ -1,0 +1,5 @@
+# Priority-bit byte query and qualified fetched output prefix
+
+Partial/unaccepted;176 instruction bytes480C56..480D06. Separate frameless query480C56: pointerliteral480EC8 freshword bit8 set→byte[entryR0]=2;else SECOND freshword bit0 set→byte=1;elsebyte=0. Prioritybit8 andbit0 need not share snapshot. Return0 viaBXLR480C7A; no pointerguard.
+
+Routine480C7C PUSH R2,R3,R4,LR16;R4entryR0 output. Call4D3F3C(R0=1,R1=580,R2=1,R3=SP). Immediately store0 tooutput12 before checking fullhelperR0;nonzero→480D3C unresolved failure path. Zero: R1pointerliteral480E7C;freshword bits4..7==2, then SECONDfreshword low4bits>=2 (signedBLT,values0..15), then wordSP0<255 unsigned;alltrue→R2bool1 otherwise0. If false→480D06 unresolved here. If true: THIRDfreshword low4bits==3 skips decrement,otherwise reloadSP0 subtract1mod2^32 storeSP0. Four separate output12 RMWs: BFIbits8..15=2;freshbyteSP0 BFIbits0..7;freshword OR0x20000;freshword OR0x10000. Branch480D70 unresolved continuation. Preserve fresh reads,helper output stackaliasing,and ordered stores; no collapse to singlepackedstore. Neither epilogue nor finalstatuscovered for480C7C. No C/freeze/fullcoverage/equality claim.

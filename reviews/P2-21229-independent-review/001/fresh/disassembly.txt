@@ -1,0 +1,64 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmprr9c8x1w/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00482040 <.text>:
+  482040:	f10d 0085 	add.w	r0, sp, #133	@ 0x85
+  482044:	1a36      	subs	r6, r6, r0
+  482046:	f10d 0485 	add.w	r4, sp, #133	@ 0x85
+  48204a:	e004      	b.n	482056 <.text+0x16>
+  48204c:	9800      	ldr	r0, [sp, #0]
+  48204e:	1e40      	subs	r0, r0, #1
+  482050:	1e76      	subs	r6, r6, #1
+  482052:	9000      	str	r0, [sp, #0]
+  482054:	1c64      	adds	r4, r4, #1
+  482056:	7820      	ldrb	r0, [r4, #0]
+  482058:	2830      	cmp	r0, #48	@ 0x30
+  48205a:	d0f7      	beq.n	48204c <.text+0xc>
+  48205c:	f1b8 0f66 	cmp.w	r8, #102	@ 0x66
+  482060:	d102      	bne.n	482068 <.text+0x28>
+  482062:	9800      	ldr	r0, [sp, #0]
+  482064:	1c40      	adds	r0, r0, #1
+  482066:	e004      	b.n	482072 <.text+0x32>
+  482068:	f1b8 0f65 	cmp.w	r8, #101	@ 0x65
+  48206c:	bf0c      	ite	eq
+  48206e:	2001      	moveq	r0, #1
+  482070:	2000      	movne	r0, #0
+  482072:	990e      	ldr	r1, [sp, #56]	@ 0x38
+  482074:	1840      	adds	r0, r0, r1
+  482076:	4286      	cmp	r6, r0
+  482078:	bfb8      	it	lt
+  48207a:	1e70      	sublt	r0, r6, #1
+  48207c:	2800      	cmp	r0, #0
+  48207e:	d41d      	bmi.n	4820bc <.text+0x7c>
+  482080:	42b0      	cmp	r0, r6
+  482082:	da04      	bge.n	48208e <.text+0x4e>
+  482084:	5c21      	ldrb	r1, [r4, r0]
+  482086:	2934      	cmp	r1, #52	@ 0x34
+  482088:	bfc8      	it	gt
+  48208a:	2139      	movgt	r1, #57	@ 0x39
+  48208c:	dc00      	bgt.n	482090 <.text+0x50>
+  48208e:	2130      	movs	r1, #48	@ 0x30
+  482090:	4602      	mov	r2, r0
+  482092:	1e63      	subs	r3, r4, #1
+  482094:	189d      	adds	r5, r3, r2
+  482096:	e000      	b.n	48209a <.text+0x5a>
+  482098:	1e40      	subs	r0, r0, #1
+  48209a:	f815 6901 	ldrb.w	r6, [r5], #-1
+  48209e:	1e52      	subs	r2, r2, #1
+  4820a0:	428e      	cmp	r6, r1
+  4820a2:	d0f9      	beq.n	482098 <.text+0x58>
+  4820a4:	2939      	cmp	r1, #57	@ 0x39
+  4820a6:	d102      	bne.n	4820ae <.text+0x6e>
+  4820a8:	5ca1      	ldrb	r1, [r4, r2]
+  4820aa:	1c49      	adds	r1, r1, #1
+  4820ac:	54a1      	strb	r1, [r4, r2]
+  4820ae:	2a00      	cmp	r2, #0
+  4820b0:	d504      	bpl.n	4820bc <.text+0x7c>
+  4820b2:	9900      	ldr	r1, [sp, #0]
+  4820b4:	1c49      	adds	r1, r1, #1
+  4820b6:	461c      	mov	r4, r3
+  4820b8:	1c40      	adds	r0, r0, #1
+  4820ba:	9100      	str	r1, [sp, #0]

@@ -1,0 +1,275 @@
+{
+  "utc": "2026-10-07T03:57:09.211377+00:00",
+  "status": "PASS",
+  "elf": "g2/build/bootloader-completion/source-image-compatible/snapshots/67f3f209bc1867dbb2a995e7805dd756105f05bae31831d86e61bda7df689796/bootloader-source-test.elf",
+  "elf_sha256": "67f3f209bc1867dbb2a995e7805dd756105f05bae31831d86e61bda7df689796",
+  "seed_elf_sha256": "e6ba6916ee417e9efec1f4dc90a50f8ce7777f0e2ad8f976e6d2e27856072b78",
+  "profiles": [
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/67f3f209bc1867dbb2a995e7805dd756105f05bae31831d86e61bda7df689796/comparison-v3.json",
+      "sha256": "790ce1ce1347360a2daca0977cb47cb81e7cee5fbb71cce7d0f31466099ec091",
+      "status": "PASS",
+      "cases": 2
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/67f3f209bc1867dbb2a995e7805dd756105f05bae31831d86e61bda7df689796/failures-v3.json",
+      "sha256": "f9c14ca366d05e713557c6127f5ade7f048139f4b620f3cd23ca6725834e90cf",
+      "status": "PASS",
+      "cases": 3
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/67f3f209bc1867dbb2a995e7805dd756105f05bae31831d86e61bda7df689796/powerloss-v3.json",
+      "sha256": "6b9855cfd80a98b141d5432997c6bf63846d15024c7b7dd9845644ced2fc2dda",
+      "status": "PASS",
+      "cases": 2
+    }
+  ],
+  "total_cases": 7,
+  "union_distinct_original_trace_bytes": 38368,
+  "payload_bytes": 148599,
+  "percentage": 25.819823821156266,
+  "additional_seven_plus_async_direct_unique_bytes": 39926,
+  "additional_union_limits": "515 asynchronous direct cases use controlled callbacks, delay and finite synthetic FIFO/command states; not the same hardware/scheduling model as seven-case integration.",
+  "interruption_checks": [
+    {
+      "interruption": "before",
+      "matches": {
+        "stopped_persistence_match": true,
+        "stopped_observable_match": true,
+        "reboot_persistence_match": true,
+        "reboot_observable_match": true
+      },
+      "both_reboot_endpoints": "application reset entry, fixture matches, no exception"
+    },
+    {
+      "interruption": "after",
+      "matches": {
+        "stopped_persistence_match": true,
+        "stopped_observable_match": true,
+        "reboot_persistence_match": true,
+        "reboot_observable_match": true
+      },
+      "both_reboot_endpoints": "application reset entry, fixture matches, no exception"
+    }
+  ],
+  "validation_input_hashes": {
+    "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/67f3f209bc1867dbb2a995e7805dd756105f05bae31831d86e61bda7df689796/validation-input-hashes-final.json",
+    "sha256": "9f1672b5c65c3f68e402bd02c18bd516633144456f8467a1d8379763e1baca3e",
+    "existing_source_runner_files": 608,
+    "linked_objects": 153,
+    "post_run_hash_mismatches": []
+  },
+  "additional_tests": [
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/context-events-67f3f2.json",
+      "sha256": "24d7faa8d5a4368da7b68b1e568059a56c9697ae3f3d82706f03532fd5e5e9e6",
+      "status": "PASS",
+      "cases": 505
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/context-events-guards-67f3f2.json",
+      "sha256": "070af34a3298652e7155f67f084cec88a5799844e60b0acfcfc05e941530f960",
+      "status": "PASS",
+      "cases": 10
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/context-children-67f3f2.json",
+      "sha256": "825f8f3d6a7d78b6c5978817bd9e6aea557b6758d236635c96a69aae38e29333",
+      "status": "PASS",
+      "cases": 740
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/semaphore-owned-67f3f2.json",
+      "sha256": "49656d25494d4a88b4bd2a92d7a29a9190da153f0e73fad63f45bf738d5ad75b",
+      "status": "PASS",
+      "cases": 12
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/iom-stable-subtype-67f3f2.json",
+      "sha256": "d929a74ee4509f9e3feae2aee579dad2398c13b7c0fd78d2fd376f36f6117db1",
+      "status": "PASS",
+      "cases": 2
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/context-irq-67f3f2.json",
+      "sha256": "61901e2f45dbf2750381367d7c72c2a9d5b4abec8f1a05ce533d3d241dfc01d6",
+      "status": "PASS",
+      "cases": 292
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/gpio-descriptors-67f3f2.json",
+      "sha256": "bd4fc84daa28eafc3e9ad161a0c1c414f30e420cf367d9127e668a546556b814",
+      "status": "PASS",
+      "cases": 434
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/adc-context-67f3f2.json",
+      "sha256": "1bf096e67f252487d5e13ebe61301776982b2634d6a68923ac2d4126faf178a1",
+      "status": "PASS",
+      "cases": 135
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/adc-control-67f3f2.json",
+      "sha256": "b6da2000a4a113c68ec5512296d18ba553079b8cefc92808a24e4b7b98decc84",
+      "status": "PASS",
+      "cases": 279
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/adc-configuration-67f3f2.json",
+      "sha256": "637c9acb85735d39a33c4781e2778b992404230cd12e3782e29cf3c73ddf1b9f",
+      "status": "PASS",
+      "cases": 93
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/adc-samples-67f3f2.json",
+      "sha256": "2940aa3d9045c692a090f5ca7505e85420aaaed3bc36945cfd6353f91a469503",
+      "status": "PASS",
+      "cases": 988
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/adc-profile-67f3f2.json",
+      "sha256": "c84dc596ddab47122ee1ad34cf153c79458daec00549222badf1f547186c1e36",
+      "status": "PASS",
+      "cases": 650
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-context-67f3f2.json",
+      "sha256": "f9343d2a82260b8c4aea8d682292bb31961725c2874c16303e94d5578787aff1",
+      "status": "PASS",
+      "cases": 1040
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-startup-state-67f3f2.json",
+      "sha256": "3d3be13789d7af616457e341ca6ec3ba571d2f7cc335c76a39f6cab478000494",
+      "status": "PASS",
+      "cases": 1
+    }
+  ],
+  "additional_aux_runner": {
+    "path": "g2/components/bootloader/initializer_callbacks/verify_context_events_guards.py",
+    "sha256": "ebdef17625de7ede42a48f979fcbc5771d9f41d4f1e4cd107d93cb86d25c0590"
+  },
+  "trace_byte_audit": {
+    "method": "Deduplicate byte addresses; FP64 second-halfword NOP logs overlap modeled slots. Synthetic callback stub instructions are excluded from original trace.",
+    "patched_fp_second_halfword_records": [
+      {
+        "profile": "comparison-v3.json",
+        "pc": "0x43004a",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "comparison-v3.json",
+        "pc": "0x43004e",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "comparison-v3.json",
+        "pc": "0x430056",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "comparison-v3.json",
+        "pc": "0x43005a",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "comparison-v3.json",
+        "pc": "0x4301a0",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "comparison-v3.json",
+        "pc": "0x4301a4",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "failures-v3.json",
+        "pc": "0x43004a",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "failures-v3.json",
+        "pc": "0x43004e",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "failures-v3.json",
+        "pc": "0x430056",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "failures-v3.json",
+        "pc": "0x43005a",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "failures-v3.json",
+        "pc": "0x4301a0",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "failures-v3.json",
+        "pc": "0x4301a4",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "powerloss-v3.json",
+        "pc": "0x43004a",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "powerloss-v3.json",
+        "pc": "0x43004e",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "powerloss-v3.json",
+        "pc": "0x430056",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "powerloss-v3.json",
+        "pc": "0x43005a",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "powerloss-v3.json",
+        "pc": "0x4301a0",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "powerloss-v3.json",
+        "pc": "0x4301a4",
+        "recorded": "00bf"
+      }
+    ]
+  },
+  "limits": [
+    "Relocated source-linked test ELF, not a complete bootable/byte-identical payload.",
+    "Synthetic MMIO, scheduler, ADC and resident-ROM operations; no physical partial-write or IRQ/timing proof.",
+    "Six original FP64 effects emulated; union deduplicates byte addresses, including overlapping second-halfword logs.",
+    "Direct lower callbacks controlled; stable-subtype test is conditional model sensitivity, not hardware behavior.",
+    "ADC sample/lifecycle with explicitFIFO and reused native clock release plus context/channel/control FP32 and initializer/reset and native INFO selector/dispatch/thunk execute in shared startup, with explicit zero-valued resident ROM48 word fixture. No real factory/OTP behavior proof. Stock97 GPIO descriptors do not take callback registration; direct GPIO IRQ fixtures model28 zero-filled original stack bytes because Unicorn misexecutes its IT/STM carry loop. No such model is used by the seven integration cases. Asynchronous IOM IRQ delivery is also tested directly, not reached by shared startup.",
+    "UART constructor/downstream with native borrowed ring/baud/config/status/NVIC and reused power/class4 children execute. Class6 enabled PLL behavior, DMA, IRQ delivery/drain and hardware timing unproved. Store-width recorder projects actual transferred bytes; raw failed-run and intermediate recorder edit-error logs retained. Focused shared-reset state verifies all1136 pool bytes and row flags. ADC sample/lifecycle with explicitFIFO and reused native clock release plus context/channel/control FP32 and initializer/reset and native INFO selector/dispatch/thunk execute in shared startup, with explicit zero-valued resident ROM48 word fixture. No real factory/OTP behavior proof. Stock97 GPIO descriptors do not take callback registration; direct GPIO IRQ fixtures model28 zero-filled original stack bytes because Unicorn misexecutes its IT/STM carry loop. No such model is used by the seven integration cases. Asynchronous IOM IRQ delivery is also tested directly, not reached by shared startup."
+  ],
+  "separate_module_regressions": [
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/cmdq-ownership-isolated-term-67f3f2.json",
+      "sha256": "92469d55f700c0c3fb4c8db4150be7551dc2587d2e01253f556074f35e617174",
+      "cases": 53,
+      "shared_image_cases": 40,
+      "separate_term_module_cases": 13,
+      "module_sha256": "181736aed5b93dc58bcec10456651d3f5f7d38f25ad9a03a5f59ad557bd10c08",
+      "limits": "Termination module separate; no quiescence/free/callback drain proof."
+    }
+  ],
+  "alignment": {
+    "status": "PASS",
+    "mappings": 388,
+    "known_bad_regression": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/alignment-regression-67f3f2.json"
+  },
+  "source_manifest": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/source-image-manifest-67f3f2.json",
+  "uart_source_ownership": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-source-ownership-67f3f2.json",
+  "uart_state_validation": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-startup-state-67f3f2.json",
+  "store_width_evidence": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-context/store-width-evidence.json"
+}

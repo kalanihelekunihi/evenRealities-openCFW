@@ -1,0 +1,4 @@
+# Global base reload and ten record helper calls
+
+Partial/unaccepted; 54 instruction bytes. PUSH R3,R4,R5,LR creates16-byte frame. R5=literal47B4B0; independently read fullword[R5] intoR4 retained initial base. Call0x475014(0,1,liveR2,R3). Then independently reloadfullword[R5] intoR0 and call recovered0x4795DC withlive otherarguments; call recovered0x479418 withlive arguments after first helper, no result guard.
+SetR5zero. While signed comparison of zero-extendedLOW8 R5 with10 isless, call recovered0x4789B0(fullR4,LOW8 R5,liveR2,R3); advanceR4by200 andR5by1 modulo2^32. Ten calls use initial retainedbase, which may differ from the independently reloadedbase passed to0x4795DC. No cache or assumed stableglobal. Final POP R0,R4,R5,PC returns fullentryR3 fromSP0; discards last helperresult. No diagnostic writes in this routine. No C, freeze or wholecoverage claim.

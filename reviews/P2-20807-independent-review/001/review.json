@@ -1,0 +1,10 @@
+{
+  "id": "P2-20807",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "188B replay passed. Ten signed-count iterations with stride200; each tests fresh byte47 then byte48, increments global counter only after both nonzero, stores then independently reloads it. Logger path captures word196/full index; mask path independently reloads word196 into SP0, overwriting saved R0 even if logger skipped. Epilogue returns last SP0 writer; saved slots R1/R2/R3 may also be overwritten by logger."
+}

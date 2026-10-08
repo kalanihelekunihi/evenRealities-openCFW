@@ -1,0 +1,240 @@
+{
+  "utc": "2026-10-07T00:47:45.342604+00:00",
+  "status": "PASS",
+  "elf": "g2/build/bootloader-completion/source-image-compatible/snapshots/85d6eb5362976d4d4a296ae08b92161bb979342d21002dfa2257c0f75f5e975f/bootloader-source-test.elf",
+  "elf_sha256": "85d6eb5362976d4d4a296ae08b92161bb979342d21002dfa2257c0f75f5e975f",
+  "seed_elf": "g2/build/bootloader-completion/source-image-compatible/snapshots/85d6eb5362976d4d4a296ae08b92161bb979342d21002dfa2257c0f75f5e975f/filesystem-seed.elf",
+  "seed_elf_sha256": "e6ba6916ee417e9efec1f4dc90a50f8ce7777f0e2ad8f976e6d2e27856072b78",
+  "profiles": [
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/85d6eb5362976d4d4a296ae08b92161bb979342d21002dfa2257c0f75f5e975f/comparison.json",
+      "sha256": "8ce71adc1c530343ca8008bb03369268feb8c2117a56a667618719bd57f2d728",
+      "status": "PASS",
+      "cases": 2,
+      "distinct_original_trace_bytes": 33858
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/85d6eb5362976d4d4a296ae08b92161bb979342d21002dfa2257c0f75f5e975f/failures.json",
+      "sha256": "15fa4680b26b0fb357f013cb66a3a5a6630f3b0097346dc1bea3735e2048dc26",
+      "status": "PASS",
+      "cases": 3,
+      "distinct_original_trace_bytes": 32518
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/85d6eb5362976d4d4a296ae08b92161bb979342d21002dfa2257c0f75f5e975f/powerloss.json",
+      "sha256": "44528898ecf003175f3bc7ecff45d97972e1a8e053bd979bbd20c405ddebd7fe",
+      "status": "PASS",
+      "cases": 2,
+      "distinct_original_trace_bytes": 33818
+    }
+  ],
+  "total_cases": 7,
+  "union_distinct_original_trace_bytes": 34304,
+  "validation_input_hashes": {
+    "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/85d6eb5362976d4d4a296ae08b92161bb979342d21002dfa2257c0f75f5e975f/validation-input-hashes-final.json",
+    "sha256": "8fe837552aa999cdfc838078baf2f72ab256ec888fe98a64ea584e9fc0c7c385",
+    "existing_source_runner_files": 567,
+    "linked_objects": 137,
+    "post_run_hash_mismatches": []
+  },
+  "native_initializer": "PASS",
+  "native_nor": "PASS",
+  "limits": [
+    "Relocated source-linked test ELF with explicit internal provider cuts, resident-ROM callbacks and fixture data; not a standalone bootable/source-complete/byte-identical firmware.",
+    "Normal, malformed and interruption profiles compare proven initializer ABI arguments, callback tables and state, and native TX control length/word count/module/wire bytes. Raw FIFO words differ only in unused upper padding of the one-byte status write; full raw MMIO equality is not claimed.",
+    "Six original FP64 instruction slots use emulated effects under Unicorn; ADC readiness/samples, child HAL/RTOS and clock inputs are synthetic. Observed trace-byte union is not whole-image coverage.",
+    "Interruptions surround atomic synthetic ROM page operations; no physical partial-write, cache coherence, actual IRQ/task delivery, application instructions or hardware recovery proof.",
+    "New integration objects rebuilt and linked with137 captured prepared objects; not a clean whole-graph/source-payload rebuild."
+  ],
+  "trace_byte_audit": {
+    "method": "Deduplicate original byte addresses across profiles; never sum per-PC lengths. Compare logged bytes with locked image; only six known patched FP64 second-halfword NOP PCs differ. These aliases lie within already recorded4-byte modeled FP slots and add zero unique bytes.",
+    "patched_fp_second_halfword_records": [
+      {
+        "profile": "comparison.json",
+        "pc": "0x43004a",
+        "recorded": "00bf",
+        "locked": "c00a"
+      },
+      {
+        "profile": "comparison.json",
+        "pc": "0x43004e",
+        "recorded": "00bf",
+        "locked": "000b"
+      },
+      {
+        "profile": "comparison.json",
+        "pc": "0x430056",
+        "recorded": "00bf",
+        "locked": "c00a"
+      },
+      {
+        "profile": "comparison.json",
+        "pc": "0x43005a",
+        "recorded": "00bf",
+        "locked": "102b"
+      },
+      {
+        "profile": "comparison.json",
+        "pc": "0x4301a0",
+        "recorded": "00bf",
+        "locked": "c00a"
+      },
+      {
+        "profile": "comparison.json",
+        "pc": "0x4301a4",
+        "recorded": "00bf",
+        "locked": "102b"
+      },
+      {
+        "profile": "failures.json",
+        "pc": "0x43004a",
+        "recorded": "00bf",
+        "locked": "c00a"
+      },
+      {
+        "profile": "failures.json",
+        "pc": "0x43004e",
+        "recorded": "00bf",
+        "locked": "000b"
+      },
+      {
+        "profile": "failures.json",
+        "pc": "0x430056",
+        "recorded": "00bf",
+        "locked": "c00a"
+      },
+      {
+        "profile": "failures.json",
+        "pc": "0x43005a",
+        "recorded": "00bf",
+        "locked": "102b"
+      },
+      {
+        "profile": "failures.json",
+        "pc": "0x4301a0",
+        "recorded": "00bf",
+        "locked": "c00a"
+      },
+      {
+        "profile": "failures.json",
+        "pc": "0x4301a4",
+        "recorded": "00bf",
+        "locked": "102b"
+      },
+      {
+        "profile": "powerloss.json",
+        "pc": "0x43004a",
+        "recorded": "00bf",
+        "locked": "c00a"
+      },
+      {
+        "profile": "powerloss.json",
+        "pc": "0x43004e",
+        "recorded": "00bf",
+        "locked": "000b"
+      },
+      {
+        "profile": "powerloss.json",
+        "pc": "0x430056",
+        "recorded": "00bf",
+        "locked": "c00a"
+      },
+      {
+        "profile": "powerloss.json",
+        "pc": "0x43005a",
+        "recorded": "00bf",
+        "locked": "102b"
+      },
+      {
+        "profile": "powerloss.json",
+        "pc": "0x4301a0",
+        "recorded": "00bf",
+        "locked": "c00a"
+      },
+      {
+        "profile": "powerloss.json",
+        "pc": "0x4301a4",
+        "recorded": "00bf",
+        "locked": "102b"
+      }
+    ]
+  },
+  "interruption_reboot_phases": [
+    {
+      "interruption": "before",
+      "stopped_persistence_match": true,
+      "stopped_observable_match": true,
+      "reboot_persistence_match": true,
+      "reboot_observable_match": true,
+      "endpoints": {
+        "reboot_stock": {
+          "exception": null,
+          "application_reset_reached": true,
+          "application_payload_matches_fixture": true
+        },
+        "reboot_source": {
+          "exception": null,
+          "application_reset_reached": true,
+          "application_payload_matches_fixture": true
+        }
+      }
+    },
+    {
+      "interruption": "after",
+      "stopped_persistence_match": true,
+      "stopped_observable_match": true,
+      "reboot_persistence_match": true,
+      "reboot_observable_match": true,
+      "endpoints": {
+        "reboot_stock": {
+          "exception": null,
+          "application_reset_reached": true,
+          "application_payload_matches_fixture": true
+        },
+        "reboot_source": {
+          "exception": null,
+          "application_reset_reached": true,
+          "application_payload_matches_fixture": true
+        }
+      }
+    }
+  ],
+  "native_context_interrupt": {
+    "status": "PASS",
+    "original_entry": "0x42c63a",
+    "source_entry": "0x33a1c",
+    "leaf_receipt": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/context-interrupt-85d6eb.json",
+    "leaf_receipt_sha256": "ace558ea8dda8e58c07ae7aef2e2e63d6b8df29f839c60f94c884d8be2270892",
+    "cases": 52,
+    "shared_fixture_arguments": [
+      536963068,
+      255
+    ],
+    "shared_fixture_branch": "real module4 handle validates; forbidden mask bit1 returns6, caller ignores status. Successful register writes occur in direct composed/leaf tests, not this shared IRQ call."
+  },
+  "additional_direct_trace_union_bytes": 34948,
+  "additional_direct_trace_scope": "Seven shared cases plus496 direct claim/transaction/composed cases on this exact ELF; lower power/clock/CQ/wait calls are cut in direct suite. Not all separate historical suites or complete coverage.",
+  "native_context_claim_transaction": {
+    "status": "PASS",
+    "claim_original": "0x42c4c6",
+    "transaction_original": "0x42c988",
+    "source_owned_static_pool": {
+      "address": "0x2001455c",
+      "slots": 8,
+      "stride": 2216,
+      "bytes": 17728
+    },
+    "shared_claim_transaction_calls_per_normal_case": 4,
+    "shared_claimed_modules": [
+      2,
+      4,
+      5,
+      7
+    ],
+    "direct_cases": 496,
+    "direct_receipt": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/context-claim-transaction-85d6eb.json",
+    "direct_receipt_sha256": "e6b1610c9c512aacddc4421a449078068a8a9e6534c381c09d099b471b2ac32b",
+    "implementation_ownership": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/iom-source-ownership-85d6eb.json",
+    "cleanup": "Claim failures preserve state; transaction powerdown preserves static claim. No uninitialize/release body added; instance configuration/enable/retry/CQ children remain open."
+  }
+}

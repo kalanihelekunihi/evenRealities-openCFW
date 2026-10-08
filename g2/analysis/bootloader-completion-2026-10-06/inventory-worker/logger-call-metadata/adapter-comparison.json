@@ -1,0 +1,1357 @@
+{
+  "status": "PASS_ADAPTERS_AGAINST_ORIGINAL_CALL_METADATA",
+  "cases": 88,
+  "source_sha256": "e2e6695ac5df909331ecbbe8547ea45655d63dd475cadd2f0c7b15543b1e3e0b",
+  "elf_sha256": "1ec44c8505b1e65c832ebc1dae38ab002da983153879ec93cb345ffab5397c64",
+  "capture_sha256": "a4745a4d3d88b2dd36f2f3d8dff318bd64a5d4554dffbfbf50894d69ff04fba6",
+  "comparisons": [
+    {
+      "original_return_address": 4324773,
+      "family": "allocator",
+      "result": {
+        "level": 4,
+        "tag": "tlsf",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\third_party\\tlsf\\tlsf_init.c",
+        "function": "tlsf_adapter_init",
+        "line": 19,
+        "format": "tlsf init.",
+        "arguments": []
+      }
+    },
+    {
+      "original_return_address": 4382929,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 567,
+        "format": "app firmware SP = 0x%x",
+        "arguments": [
+          537393920
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382963,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 568,
+        "format": "just jump to app(0x%x) = 0x%x",
+        "arguments": [
+          4423680,
+          0
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382929,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 567,
+        "format": "app firmware SP = 0x%x",
+        "arguments": [
+          2684354560
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382963,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 568,
+        "format": "just jump to app(0x%x) = 0x%x",
+        "arguments": [
+          4423680,
+          0
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382423,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 523,
+        "format": "EVENT_DFU_VALID,updata firmware",
+        "arguments": []
+      }
+    },
+    {
+      "original_return_address": 4382565,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 538,
+        "format": "blobSize = %d(0x%x)",
+        "arguments": [
+          96,
+          96
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382597,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 539,
+        "format": "crcCheck = %d",
+        "arguments": [
+          1
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382625,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 540,
+        "format": "crc = 0x%x",
+        "arguments": [
+          305419896
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382667,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 541,
+        "format": "magicNum = %d(0x%x)",
+        "arguments": [
+          33,
+          33
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382695,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 542,
+        "format": "targetRunAddr = 0x%x",
+        "arguments": [
+          4423680
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382423,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 523,
+        "format": "EVENT_DFU_VALID,updata firmware",
+        "arguments": []
+      }
+    },
+    {
+      "original_return_address": 4382565,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 538,
+        "format": "blobSize = %d(0x%x)",
+        "arguments": [
+          96,
+          96
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382597,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 539,
+        "format": "crcCheck = %d",
+        "arguments": [
+          1
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382625,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 540,
+        "format": "crc = 0x%x",
+        "arguments": [
+          305419896
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382667,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 541,
+        "format": "magicNum = %d(0x%x)",
+        "arguments": [
+          33,
+          33
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382695,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 542,
+        "format": "targetRunAddr = 0x%x",
+        "arguments": [
+          4423680
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382821,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 558,
+        "format": "updata firmware success SP = 0x%x",
+        "arguments": [
+          537393920
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382855,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 559,
+        "format": "APP jumpaddr app(0x%x) = 0x%x",
+        "arguments": [
+          4423680,
+          0
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382423,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 523,
+        "format": "EVENT_DFU_VALID,updata firmware",
+        "arguments": []
+      }
+    },
+    {
+      "original_return_address": 4382565,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 538,
+        "format": "blobSize = %d(0x%x)",
+        "arguments": [
+          96,
+          96
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382597,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 539,
+        "format": "crcCheck = %d",
+        "arguments": [
+          1
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382625,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 540,
+        "format": "crc = 0x%x",
+        "arguments": [
+          305419896
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382667,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 541,
+        "format": "magicNum = %d(0x%x)",
+        "arguments": [
+          33,
+          33
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382695,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 542,
+        "format": "targetRunAddr = 0x%x",
+        "arguments": [
+          4423680
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382821,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 558,
+        "format": "updata firmware success SP = 0x%x",
+        "arguments": [
+          2684354560
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382855,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 559,
+        "format": "APP jumpaddr app(0x%x) = 0x%x",
+        "arguments": [
+          4423680,
+          0
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382423,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 523,
+        "format": "EVENT_DFU_VALID,updata firmware",
+        "arguments": []
+      }
+    },
+    {
+      "original_return_address": 4382477,
+      "family": "dfu_task",
+      "result": {
+        "level": 1,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 526,
+        "format": "ERR-Open failed %s",
+        "arguments": [
+          "ota/s200_firmware_ota.bin"
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382777,
+      "family": "dfu_task",
+      "result": {
+        "level": 1,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 553,
+        "format": "bootMetadataInfo.targetRunAddr = 0x%x(0x%x)",
+        "arguments": [
+          0,
+          4423680
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382477,
+      "family": "dfu_task",
+      "result": {
+        "level": 1,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 526,
+        "format": "ERR-Open failed %s",
+        "arguments": [
+          "ota/s200_firmware_ota.bin"
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382777,
+      "family": "dfu_task",
+      "result": {
+        "level": 1,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 553,
+        "format": "bootMetadataInfo.targetRunAddr = 0x%x(0x%x)",
+        "arguments": [
+          0,
+          4423680
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382821,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 558,
+        "format": "updata firmware success SP = 0x%x",
+        "arguments": [
+          537393920
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382855,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 559,
+        "format": "APP jumpaddr app(0x%x) = 0x%x",
+        "arguments": [
+          4423680,
+          0
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382363,
+      "family": "dfu_task",
+      "result": {
+        "level": 1,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 532,
+        "format": "ERR-Read failed %s : %zu",
+        "arguments": [
+          "ota/s200_firmware_ota.bin",
+          0
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382363,
+      "family": "dfu_task",
+      "result": {
+        "level": 1,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 532,
+        "format": "ERR-Read failed %s : %zu",
+        "arguments": [
+          "ota/s200_firmware_ota.bin",
+          0
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382363,
+      "family": "dfu_task",
+      "result": {
+        "level": 1,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 532,
+        "format": "ERR-Read failed %s : %zu",
+        "arguments": [
+          "ota/s200_firmware_ota.bin",
+          3
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382363,
+      "family": "dfu_task",
+      "result": {
+        "level": 1,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 532,
+        "format": "ERR-Read failed %s : %zu",
+        "arguments": [
+          "ota/s200_firmware_ota.bin",
+          3
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382363,
+      "family": "dfu_task",
+      "result": {
+        "level": 1,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 532,
+        "format": "ERR-Read failed %s : %zu",
+        "arguments": [
+          "ota/s200_firmware_ota.bin",
+          31
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382363,
+      "family": "dfu_task",
+      "result": {
+        "level": 1,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 532,
+        "format": "ERR-Read failed %s : %zu",
+        "arguments": [
+          "ota/s200_firmware_ota.bin",
+          31
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382363,
+      "family": "dfu_task",
+      "result": {
+        "level": 1,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 532,
+        "format": "ERR-Read failed %s : %zu",
+        "arguments": [
+          "ota/s200_firmware_ota.bin",
+          31
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382363,
+      "family": "dfu_task",
+      "result": {
+        "level": 1,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 532,
+        "format": "ERR-Read failed %s : %zu",
+        "arguments": [
+          "ota/s200_firmware_ota.bin",
+          31
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382363,
+      "family": "dfu_task",
+      "result": {
+        "level": 1,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 532,
+        "format": "ERR-Read failed %s : %zu",
+        "arguments": [
+          "ota/s200_firmware_ota.bin",
+          31
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382363,
+      "family": "dfu_task",
+      "result": {
+        "level": 1,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 532,
+        "format": "ERR-Read failed %s : %zu",
+        "arguments": [
+          "ota/s200_firmware_ota.bin",
+          31
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382363,
+      "family": "dfu_task",
+      "result": {
+        "level": 1,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 532,
+        "format": "ERR-Read failed %s : %zu",
+        "arguments": [
+          "ota/s200_firmware_ota.bin",
+          31
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382363,
+      "family": "dfu_task",
+      "result": {
+        "level": 1,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 532,
+        "format": "ERR-Read failed %s : %zu",
+        "arguments": [
+          "ota/s200_firmware_ota.bin",
+          31
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382565,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 538,
+        "format": "blobSize = %d(0x%x)",
+        "arguments": [
+          96,
+          96
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382597,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 539,
+        "format": "crcCheck = %d",
+        "arguments": [
+          0
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382625,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 540,
+        "format": "crc = 0x%x",
+        "arguments": [
+          305419896
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382667,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 541,
+        "format": "magicNum = %d(0x%x)",
+        "arguments": [
+          33,
+          33
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382695,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 542,
+        "format": "targetRunAddr = 0x%x",
+        "arguments": [
+          4423680
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382565,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 538,
+        "format": "blobSize = %d(0x%x)",
+        "arguments": [
+          96,
+          96
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382597,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 539,
+        "format": "crcCheck = %d",
+        "arguments": [
+          0
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382625,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 540,
+        "format": "crc = 0x%x",
+        "arguments": [
+          305419896
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382667,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 541,
+        "format": "magicNum = %d(0x%x)",
+        "arguments": [
+          33,
+          33
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382695,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 542,
+        "format": "targetRunAddr = 0x%x",
+        "arguments": [
+          4423680
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382821,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 558,
+        "format": "updata firmware success SP = 0x%x",
+        "arguments": [
+          537393920
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382855,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 559,
+        "format": "APP jumpaddr app(0x%x) = 0x%x",
+        "arguments": [
+          4423680,
+          0
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382565,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 538,
+        "format": "blobSize = %d(0x%x)",
+        "arguments": [
+          96,
+          96
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382597,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 539,
+        "format": "crcCheck = %d",
+        "arguments": [
+          0
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382625,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 540,
+        "format": "crc = 0x%x",
+        "arguments": [
+          305419896
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382667,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 541,
+        "format": "magicNum = %d(0x%x)",
+        "arguments": [
+          33,
+          33
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382695,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 542,
+        "format": "targetRunAddr = 0x%x",
+        "arguments": [
+          2415919104
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382777,
+      "family": "dfu_task",
+      "result": {
+        "level": 1,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 553,
+        "format": "bootMetadataInfo.targetRunAddr = 0x%x(0x%x)",
+        "arguments": [
+          2415919104,
+          4423680
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382565,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 538,
+        "format": "blobSize = %d(0x%x)",
+        "arguments": [
+          96,
+          96
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382597,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 539,
+        "format": "crcCheck = %d",
+        "arguments": [
+          0
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382625,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 540,
+        "format": "crc = 0x%x",
+        "arguments": [
+          305419896
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382667,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 541,
+        "format": "magicNum = %d(0x%x)",
+        "arguments": [
+          33,
+          33
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382695,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 542,
+        "format": "targetRunAddr = 0x%x",
+        "arguments": [
+          2415919104
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382777,
+      "family": "dfu_task",
+      "result": {
+        "level": 1,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 553,
+        "format": "bootMetadataInfo.targetRunAddr = 0x%x(0x%x)",
+        "arguments": [
+          2415919104,
+          4423680
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382821,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 558,
+        "format": "updata firmware success SP = 0x%x",
+        "arguments": [
+          537393920
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382565,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 538,
+        "format": "blobSize = %d(0x%x)",
+        "arguments": [
+          96,
+          96
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382597,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 539,
+        "format": "crcCheck = %d",
+        "arguments": [
+          1
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382625,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 540,
+        "format": "crc = 0x%x",
+        "arguments": [
+          305419896
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382667,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 541,
+        "format": "magicNum = %d(0x%x)",
+        "arguments": [
+          33,
+          33
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382695,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 542,
+        "format": "targetRunAddr = 0x%x",
+        "arguments": [
+          2415919104
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382777,
+      "family": "dfu_task",
+      "result": {
+        "level": 1,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 553,
+        "format": "bootMetadataInfo.targetRunAddr = 0x%x(0x%x)",
+        "arguments": [
+          2415919104,
+          4423680
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382565,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 538,
+        "format": "blobSize = %d(0x%x)",
+        "arguments": [
+          96,
+          96
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382597,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 539,
+        "format": "crcCheck = %d",
+        "arguments": [
+          1
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382625,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 540,
+        "format": "crc = 0x%x",
+        "arguments": [
+          305419896
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382667,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 541,
+        "format": "magicNum = %d(0x%x)",
+        "arguments": [
+          33,
+          33
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382695,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 542,
+        "format": "targetRunAddr = 0x%x",
+        "arguments": [
+          2415919104
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382777,
+      "family": "dfu_task",
+      "result": {
+        "level": 1,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 553,
+        "format": "bootMetadataInfo.targetRunAddr = 0x%x(0x%x)",
+        "arguments": [
+          2415919104,
+          4423680
+        ]
+      }
+    },
+    {
+      "original_return_address": 4382821,
+      "family": "dfu_task",
+      "result": {
+        "level": 4,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "_thread_msg_handler",
+        "line": 558,
+        "format": "updata firmware success SP = 0x%x",
+        "arguments": [
+          537393920
+        ]
+      }
+    },
+    {
+      "original_return_address": 4381905,
+      "family": "dfu_context",
+      "result": {
+        "level": 1,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "dfu_task_msg_send",
+        "line": 356,
+        "format": "dfu_task_msg_send queue null",
+        "arguments": []
+      }
+    },
+    {
+      "original_return_address": 4381953,
+      "family": "dfu_context",
+      "result": {
+        "level": 1,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "dfu_task_msg_send",
+        "line": 361,
+        "format": "msg missed",
+        "arguments": []
+      }
+    },
+    {
+      "original_return_address": 4382055,
+      "family": "dfu_context",
+      "result": {
+        "level": 1,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "thread_dfu",
+        "line": 409,
+        "format": "Notify error!",
+        "arguments": []
+      }
+    },
+    {
+      "original_return_address": 4382249,
+      "family": "control",
+      "result": {
+        "level": 1,
+        "tag": "task.dfu",
+        "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+        "function": "bootloader_error_reset",
+        "line": 505,
+        "format": "Bootloader ota fail, system reset!!!",
+        "arguments": []
+      }
+    }
+  ],
+  "limits": [
+    "Replays captured stock header/vector snapshots and consumes only format-defined variadic words. Actual compiled adapters execute, but logger/transport child is a ThumbBXLR fixture.",
+    "Adapters are new source bridges for fixed caller lines, not recovered stock function bodies, no bytes added to ownership ledger. Detail532 must be supplied by revised task caller; source caller coupling remains separate."
+  ]
+}

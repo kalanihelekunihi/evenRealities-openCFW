@@ -1,0 +1,175 @@
+{
+  "utc": "2026-10-07T18:52:06.093447+00:00",
+  "status": "PARTIAL_OR_FAILED",
+  "scenarios": [
+    {
+      "tag": "basic-owner0",
+      "fp": 0,
+      "ownership": 0,
+      "elf": "/tmp/opencfw-qemu-m55/basic-owner0.elf",
+      "elf_sha256": "edd8807f18517dadb602f2d04c8d40438e0eea5d40a75b8d759187da5c16256f",
+      "objects": [
+        "/tmp/opencfw-qemu-m55/basic-owner0-harness.o",
+        "/tmp/opencfw-qemu-m55/start.o",
+        "/tmp/opencfw-qemu-m55/exception_entry.o",
+        "/tmp/opencfw-qemu-m55/thread_select.o",
+        "/tmp/opencfw-qemu-m55/thread_termination.o",
+        "/tmp/opencfw-qemu-m55/idle_cleanup.o",
+        "/tmp/opencfw-qemu-m55/kernel_runtime.o",
+        "/tmp/opencfw-qemu-m55/scheduler_resume.o",
+        "/tmp/opencfw-qemu-m55/scheduler_tick.o",
+        "/tmp/opencfw-qemu-m55/timer_wait.o",
+        "/tmp/opencfw-qemu-m55/rtos_heap.o",
+        "/tmp/opencfw-qemu-m55/thread_register.o",
+        "/tmp/opencfw-qemu-m55/runtime_mode.o"
+      ],
+      "status": "PASS",
+      "result": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "START M55 core-only\nFACT irq_lr=0xfffffffd irq_psp=0x20000d48 irq_pc=0x00001480 irq_xpsr=0x21000000 irq_s0=0x00000000 irq_fpscr=0x00000000 outgoing_frame=0x20000d20 free_count=0x00000002 task_count=0x00000001 heap_free=0x00013ff0 control_idle=0x00000002\nPASS actual-entry-return basic 0x00000000 idle-reclaimed\n"
+      },
+      "facts": {
+        "irq_lr": 4294967293,
+        "irq_psp": 536874312,
+        "irq_pc": 5248,
+        "irq_xpsr": 553648128,
+        "irq_s0": 0,
+        "irq_fpscr": 0,
+        "outgoing_frame": 536874272,
+        "free_count": 2,
+        "task_count": 1,
+        "heap_free": 81904,
+        "control_idle": 2
+      },
+      "qemu_log": "/tmp/opencfw-qemu-m55/basic-owner0-int.log",
+      "qemu_log_sha256": "77131f536ad6e1babd4f4c5453b5d0caf3982d0804acb3a3a24ce24f49da7b91"
+    },
+    {
+      "tag": "basic-owner1",
+      "fp": 0,
+      "ownership": 1,
+      "elf": "/tmp/opencfw-qemu-m55/basic-owner1.elf",
+      "elf_sha256": "2e289e1b1312f2a0e0be706b452e6f787a3fa6a4800e49155772aca26b2f064d",
+      "objects": [
+        "/tmp/opencfw-qemu-m55/basic-owner1-harness.o",
+        "/tmp/opencfw-qemu-m55/start.o",
+        "/tmp/opencfw-qemu-m55/exception_entry.o",
+        "/tmp/opencfw-qemu-m55/thread_select.o",
+        "/tmp/opencfw-qemu-m55/thread_termination.o",
+        "/tmp/opencfw-qemu-m55/idle_cleanup.o",
+        "/tmp/opencfw-qemu-m55/kernel_runtime.o",
+        "/tmp/opencfw-qemu-m55/scheduler_resume.o",
+        "/tmp/opencfw-qemu-m55/scheduler_tick.o",
+        "/tmp/opencfw-qemu-m55/timer_wait.o",
+        "/tmp/opencfw-qemu-m55/rtos_heap.o",
+        "/tmp/opencfw-qemu-m55/thread_register.o",
+        "/tmp/opencfw-qemu-m55/runtime_mode.o"
+      ],
+      "status": "PASS",
+      "result": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "START M55 core-only\nFACT irq_lr=0xfffffffd irq_psp=0x00002b10 irq_pc=0x00001490 irq_xpsr=0x21000000 irq_s0=0x00000000 irq_fpscr=0x00000000 outgoing_frame=0x00002ae8 free_count=0x00000001 task_count=0x00000001 heap_free=0x00013ff0 control_idle=0x00000002\nPASS actual-entry-return basic 0x00000001 idle-reclaimed\n"
+      },
+      "facts": {
+        "irq_lr": 4294967293,
+        "irq_psp": 11024,
+        "irq_pc": 5264,
+        "irq_xpsr": 553648128,
+        "irq_s0": 0,
+        "irq_fpscr": 0,
+        "outgoing_frame": 10984,
+        "free_count": 1,
+        "task_count": 1,
+        "heap_free": 81904,
+        "control_idle": 2
+      },
+      "qemu_log": "/tmp/opencfw-qemu-m55/basic-owner1-int.log",
+      "qemu_log_sha256": "c46cef604cff4e39cf9e8210b66736ffc481143f4a01300b8a9e6252a64a360e"
+    },
+    {
+      "tag": "basic-owner2",
+      "fp": 0,
+      "ownership": 2,
+      "elf": "/tmp/opencfw-qemu-m55/basic-owner2.elf",
+      "elf_sha256": "6c77604cf80fb09c53990e8aacbd0ce65a556ca6dc3aade87ec2a392cce02ba3",
+      "objects": [
+        "/tmp/opencfw-qemu-m55/basic-owner2-harness.o",
+        "/tmp/opencfw-qemu-m55/start.o",
+        "/tmp/opencfw-qemu-m55/exception_entry.o",
+        "/tmp/opencfw-qemu-m55/thread_select.o",
+        "/tmp/opencfw-qemu-m55/thread_termination.o",
+        "/tmp/opencfw-qemu-m55/idle_cleanup.o",
+        "/tmp/opencfw-qemu-m55/kernel_runtime.o",
+        "/tmp/opencfw-qemu-m55/scheduler_resume.o",
+        "/tmp/opencfw-qemu-m55/scheduler_tick.o",
+        "/tmp/opencfw-qemu-m55/timer_wait.o",
+        "/tmp/opencfw-qemu-m55/rtos_heap.o",
+        "/tmp/opencfw-qemu-m55/thread_register.o",
+        "/tmp/opencfw-qemu-m55/runtime_mode.o"
+      ],
+      "status": "PASS",
+      "result": {
+        "exit_code": 0,
+        "stdout": "",
+        "stderr": "START M55 core-only\nFACT irq_lr=0xfffffffd irq_psp=0x00002b10 irq_pc=0x0000148c irq_xpsr=0x21000000 irq_s0=0x00000000 irq_fpscr=0x00000000 outgoing_frame=0x00002ae8 free_count=0x00000000 task_count=0x00000001 heap_free=0x00013ff0 control_idle=0x00000002\nPASS actual-entry-return basic 0x00000002 idle-reclaimed\n"
+      },
+      "facts": {
+        "irq_lr": 4294967293,
+        "irq_psp": 11024,
+        "irq_pc": 5260,
+        "irq_xpsr": 553648128,
+        "irq_s0": 0,
+        "irq_fpscr": 0,
+        "outgoing_frame": 10984,
+        "free_count": 0,
+        "task_count": 1,
+        "heap_free": 81904,
+        "control_idle": 2
+      },
+      "qemu_log": "/tmp/opencfw-qemu-m55/basic-owner2-int.log",
+      "qemu_log_sha256": "c46cef604cff4e39cf9e8210b66736ffc481143f4a01300b8a9e6252a64a360e"
+    },
+    {
+      "tag": "fp-owner0",
+      "fp": 1,
+      "ownership": 0,
+      "elf": "/tmp/opencfw-qemu-m55/fp-owner0.elf",
+      "elf_sha256": "ce98390869755d31bf9aeabc2ffb5f72002921d61015ce5d1ade8c7b7dc720ce",
+      "objects": [
+        "/tmp/opencfw-qemu-m55/fp-owner0-harness.o",
+        "/tmp/opencfw-qemu-m55/start.o",
+        "/tmp/opencfw-qemu-m55/exception_entry.o",
+        "/tmp/opencfw-qemu-m55/thread_select.o",
+        "/tmp/opencfw-qemu-m55/thread_termination.o",
+        "/tmp/opencfw-qemu-m55/idle_cleanup.o",
+        "/tmp/opencfw-qemu-m55/kernel_runtime.o",
+        "/tmp/opencfw-qemu-m55/scheduler_resume.o",
+        "/tmp/opencfw-qemu-m55/scheduler_tick.o",
+        "/tmp/opencfw-qemu-m55/timer_wait.o",
+        "/tmp/opencfw-qemu-m55/rtos_heap.o",
+        "/tmp/opencfw-qemu-m55/thread_register.o",
+        "/tmp/opencfw-qemu-m55/runtime_mode.o"
+      ],
+      "status": "FAIL",
+      "result": {
+        "exit_code": 90,
+        "stdout": "",
+        "stderr": "START M55 core-only\nFAIL FAULT LR=0xffffffed CFSR=0x00020000 HFSR=0x40000000 PC=0x000010aa\n"
+      },
+      "facts": {
+        "LR": 4294967277,
+        "CFSR": 131072,
+        "HFSR": 1073741824,
+        "PC": 4266
+      },
+      "qemu_log": "/tmp/opencfw-qemu-m55/fp-owner0-int.log",
+      "qemu_log_sha256": "90a8fac5aeae8aae4a12b9e1ba6e6453d711b04996e86f7e6a8b714416f3f5ce"
+    }
+  ],
+  "limits": [
+    "QEMU mps3-an547 core/NVIC/FP model with reconstructed source only; not Apollo510 peripherals, locked-original ELF execution, timing or hardware validation.",
+    "Synthetic coherent ready lists/tasks/stacks; actual SVC/IRQ/PendSV entry/return and allocator/scheduler/reclamation source execute. No timer or IRQ concurrency stress."
+  ]
+}

@@ -1,0 +1,5 @@
+# Ten record ordered two clears six byte helper saved slot return
+
+Partial/unaccepted;114 instructionbytes. PUSH R2,R3,R4,R5,R6,LR creates24-byteframe withwritableSP0entryR2andSP4entryR3. R4literal47AE64. Query0x43D0CE withlivearguments;statusbit1zero skips0x47AD1E. OtherwiseSP4literal47B6E0,SP0=1114;call0x43D574(4,literal47AE28,literal47ADCC,literal47B6E4,fifth1114,sixthliteral47B6E0).
+At0x47AD1E queryfreshstatus;bit0oneenters0x47AD2E,otherwisequeryagainandbit2zero skips0x47AD3C. MaskpathR1literal47B6E8,R2same,liveR3;call0x43CE9E(0x10000000,R1,R2,liveR3).
+SetR5=10,loop0x47AD5CtestsLOW8 R5nonzero. Eachiterationorderedstorebytezero[R4+47],thenbytezero[R4+48];R1=6,R2zero,R6=R4,R0=R6;call0x43C0E4(R4,6,0,liveR3),withoutassuminghelpersemantics. DecrementR5andadvanceR4by200modulo2^32;teniterations. Afterloopcallrecovered0x4787A4withlivearguments. POP R0,R1,R4,R5,R6,PC24bytes:returnR0fromSP0(entryR2ifloggerdidnotwrite,1114ifitdid),R1fromSP4(entryR3orliteral47B6E0),notfinalhelperresult. No C,freezeorcompletenessclaim.

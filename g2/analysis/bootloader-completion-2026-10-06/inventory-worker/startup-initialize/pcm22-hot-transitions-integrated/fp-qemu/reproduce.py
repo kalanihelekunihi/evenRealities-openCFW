@@ -1,0 +1,17 @@
+from pathlib import Path
+import json,hashlib,subprocess,shutil
+HERE=Path(__file__).resolve().parent;N=HERE.parent;ROOT=next(p for p in HERE.parents if (p/'AGENTS.md').exists());c=json.loads((N/'current-candidate.json').read_text());base=ROOT/c['directory'];old=ROOT/'g2/build/bootloader-completion/pcm21-selector6-integrated/c528f8bed79c3d55ce1d2b47db974b28ed0f63240bd0cc8c8f6d17d1f09fb76e';t=Path('/tmp/opencfw-hot-fp-qemu');t.mkdir(exist_ok=True);image=(ROOT/'g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin').read_bytes();assert hashlib.sha256(image).hexdigest()=='f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5';oracle=image[0x17e0c:0x18068];(t/'oracle.bin').write_bytes(oracle)
+flags=['--target=arm-none-eabi','-mcpu=cortex-m33','-mthumb','-mfloat-abi=softfp','-ffreestanding','-fno-builtin','-O1']
+for name in ['harness.c','start.S','oracle.S']:subprocess.run(['clang',*flags,'-c',str(HERE/name),'-o',str(t/(name+'.o'))],check=True)
+for label,b in [('positive',base),('predecessor-negative',old)]:
+ manifest=json.loads((b/'input-hashes.json').read_text());row=next(r for r in manifest['inputs'] if Path(r['path']).name=='startup_events_a.o');obj=b/row['path'];assert hashlib.sha256(obj.read_bytes()).hexdigest()==row['sha256'];elf=t/(label+'.elf');subprocess.run(['/opt/homebrew/bin/arm-none-eabi-ld','--gc-sections','-T',str(HERE/'module.ld'),'-o',str(elf),str(t/'start.S.o'),str(t/'harness.c.o'),str(obj),str(t/'oracle.S.o')],check=True)
+ run=subprocess.run(['/opt/homebrew/bin/qemu-system-arm','-M','mps3-an547','-nographic','-monitor','none','-serial','none','-semihosting-config','enable=on,target=native','-kernel',str(elf)],capture_output=True,text=True,timeout=25);assert run.returncode==0;log=run.stdout+run.stderr;(HERE/(label+'.log')).write_text(log);rows=[]
+ for line in log.splitlines():
+  mode,bits,before,x,y,xf,yf=[int(v,16) for v in line.split()];assert before==mode;rows.append(dict(fpscr=hex(mode),bits=hex(bits),initial_readback=hex(before),stock_bucket=x,source_bucket=y,stock_fpscr=hex(xf),source_fpscr=hex(yf),bucket_match=x==y,full_fpscr_match=xf==yf))
+ assert len(rows)==290
+ if label=='positive':assert all(r['bucket_match'] and r['full_fpscr_match'] for r in rows)
+ else:
+  assert any(not r['bucket_match'] for r in rows)
+  assert any(r['bits']=='0x7f800001' and r['fpscr']=='0x0' and not r['full_fpscr_match'] for r in rows)
+ out=dict(status='PASS' if label=='positive' else 'EXPECTED_NEGATIVE_CONTROL',cases=290,source_candidate_sha256=manifest['elf_sha256'],native_object_sha256=row['sha256'],qemu_elf_sha256=hashlib.sha256(elf.read_bytes()).hexdigest(),original_sha256=hashlib.sha256(image).hexdigest(),oracle_offset='0x17e0c',oracle_bytes=len(oracle),oracle_sha256=hashlib.sha256(oracle).hexdigest(),bucket_mismatches=sum(not r['bucket_match'] for r in rows),fpscr_mismatches=sum(not r['full_fpscr_match'] for r in rows),results=rows,limits=['Authenticated original classifier instructions/literals execute at relocated offline oracle address preserving branch/literal offsets; never included in source candidate.','Exact candidate object executes as native compiled source. Compare full raw FPSCR, no masking/writes to repair results. QEMU MPS3 Cortex-M55 scalar execution; no hardware exception IRQ/trap/scheduling proof.'])
+ (HERE/(label+'-comparison.json')).write_text(json.dumps(out,indent=2));shutil.copy2(elf,HERE/(label+'.elf'));print(label,out['status'],290,'bucket mismatches',out['bucket_mismatches'],'FPSCR mismatches',out['fpscr_mismatches'])

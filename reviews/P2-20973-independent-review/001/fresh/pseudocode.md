@@ -1,0 +1,3 @@
+# Low-byte comparison with address-taken saved entry word
+
+Partial/unaccepted;54instructionbytes47E470..47E4A6. PUSH R0,LR8 storesfullentryR0 atSP0.4A7838(0,liveR1,R2,R3) fullresultnonzero→freshunsignedbyte[resultpointer] intoR0;zero→R0=0. Freshunsignedbyte[SP0] intoR1;LOW8R0compareR1. Equalityskipsallfurthercalls/writes. Inequality→4A777C(0,SP,liveR2,R3) receivespointertosavedfullentryword,maymodifyit. Thenstateword[pointerliteral47E634]=1;4495E4(freshword[pointerliteral47E64C],4,liveR2,R3). ReturnPOP R0,PC setsR0=SP0fullword,initiallyentryR0butsubject4A777Candothercallee memorywrites. HelperreturnR0discarded. NocachedSPbyte/fullwordequivalence, no pointerownership/helpermeaninginferred. No C/freeze/completenessclaim.

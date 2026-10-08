@@ -1,0 +1,10 @@
+from pathlib import Path
+import json,hashlib
+b=Path('g2/build/pseudocode-first/20260930T190500Z');d=(b/'attempts/P1-canonical-fixed-images-005/002/apollo_main-flash.bin').read_bytes();h=lambda v:hashlib.sha256(v).hexdigest();assert h(d)=='19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701'
+ranges=[(0x483908,0x483960)]
+rows=[dict(start=a,end=z,bytes=d[a-0x438000:z-0x438000].hex()) for a,z in ranges]
+assert sum(z-a for a,z in ranges)==88
+o=b/'analysis/review-isolated-P2-21355/fresh';o.mkdir(parents=True,exist_ok=False)
+(o/'bytes.json').write_text(json.dumps(rows,indent=2)+'\n')
+(o/'pseudocode.md').write_text('# Floating range and scaling eleven binary64 literals\n\nPartial/unaccepted;88 exact non-code bytes483908..483960, eleven little-endian eight-byte slots after return483904..483908. Exact hexadecimal binary64 values, by address:\n483908 positive infinity;\n483910 -0x1.fffffffffffffp+1023 (negative maximum finite);\n483918 +0x0.0p+0;\n483920 0x1.34413509f79fbp-2;\n483928 0x1.68a288b60c8b3p-3;\n483930 0x1.287a7636f4361p-2;\n483938 0x1.a934f0979a371p+1;\n483940 0x1.26bb1bbb55516p+1;\n483948 -0x1.62e42fefa39efp-1;\n483950 0x1.a36e2eb1c432dp-14;\n483958 0x1.e848000000000p+19.\n\nAll full-width reads consumed by maps21744,21746,21748. 483908 equality special fallback;483910 negative lower boundary;483918 sign comparison zero. Other constants preserve exact bits for arithmetic and thresholds, without substituting runtime logarithms or rounded decimals. Four-byte reference prefixes in previous artifacts are now supplemented by these full slots. Exact raw bytes in bytes.json authoritative. Data candidate ends483960; no executable classification inferred from disassembly of literals. No C,freeze,wholecoverage or equalityclaim.\n')
+(o/'replay.py').write_bytes(Path(__file__).read_bytes());(o/'receipt.json').write_text(json.dumps(dict(accepted=False,status='partial',input_sha256=h(d),data_bytes=88,files={p.name:h(p.read_bytes()) for p in o.iterdir()}),indent=2)+'\n');print('PASS',88)

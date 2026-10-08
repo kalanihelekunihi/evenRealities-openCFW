@@ -1,0 +1,53 @@
+{
+  "fixture": {
+    "entry": "dfu",
+    "critical": 0,
+    "status": 0,
+    "child_return": 0,
+    "release": 1
+  },
+  "stock": {
+    "events": [
+      [
+        "signal",
+        1
+      ],
+      [
+        "delay",
+        4294967295
+      ],
+      [
+        "delay",
+        4294967295
+      ]
+    ],
+    "terminal": [
+      [
+        "two-delay-requests"
+      ]
+    ],
+    "basepri": 0
+  },
+  "source": {
+    "events": [
+      [
+        "signal",
+        0
+      ],
+      [
+        "delay",
+        4294967295
+      ],
+      [
+        "delay",
+        4294967295
+      ]
+    ],
+    "terminal": [
+      [
+        "two-delay-requests"
+      ]
+    ],
+    "basepri": 0
+  }
+}

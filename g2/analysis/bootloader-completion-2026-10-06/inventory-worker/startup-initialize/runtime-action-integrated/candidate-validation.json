@@ -1,0 +1,364 @@
+{
+  "utc": "2026-10-07T18:01:08.254754+00:00",
+  "status": "PASS",
+  "role": "Validated standalone bounded combined startup/RTOS test candidate; unpromoted shared129a unchanged",
+  "elf_sha256": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b",
+  "linked_objects": 207,
+  "input_manifest_sha256": "af6714749acac4a5898ef29a5ee37cabdcc139df0f61519b520ca3f042ad8fe8",
+  "post_run_frozen_mismatches": [],
+  "profiles": [
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/comparison.json",
+      "sha256": "9e2723fe34a13e25d94efbb610f972cbf360c10449dc62bb461ca190f702b1ba",
+      "cases": 2
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/failures.json",
+      "sha256": "16998ccf4280b5eea394b8c3c64f29c53807341c38a9721856dc6dac28450288",
+      "cases": 3
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/powerloss.json",
+      "sha256": "f408a12145ad0013e4875cfe0be41d4381bab215c8d130af9b37f1f57dd61beb",
+      "cases": 2
+    }
+  ],
+  "total_integration_cases": 7,
+  "additional_receipt_count": 54,
+  "additional_receipts": [
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/native-allocator-comparison.json",
+      "sha256": "c63f1b3271a2bbaba0840d9975470dcec4619385d85acc49b7e2d951f5b96fbc",
+      "cases": 3,
+      "elf_hash_field": null
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/native-comparison-native-teardown.json",
+      "sha256": "e5571929ba1ef05b8954e7aa4bfabf0215d39289501246b808adde720cf66324",
+      "cases": 512,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/native-comparison.json",
+      "sha256": "fcbb964680d144793dec203a321386ed1219543020c5ff36ede99f276bfd3eb4",
+      "cases": 260,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/native-initialized-record-comparison.json",
+      "sha256": "50815e488b37c7170740de121b2c8bfa10553537fcd63bf17b4a5fab3f61bbc4",
+      "cases": null,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-alignment.json",
+      "sha256": "66fee287a19a4956b7e63a6058a71b375c71b90280b547e7fd30e853e69dfa0d",
+      "cases": null,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-clock-config.json",
+      "sha256": "183101fbfef20fdcc61c70415f37845719ec8a7935c5eaafda984b942bb611ae",
+      "cases": 5896,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-clock-shared.json",
+      "sha256": "cd499c9d0856a068df769fcedfe8b7a95c2759544f8dc2ceaf061c60262ee434",
+      "cases": 129,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-clockmux-carry.json",
+      "sha256": "0475370f5413a418ba94289d971def2ca92bc036b5cb603367272e5e0ec3bb86",
+      "cases": 1024,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-clockmux-native.json",
+      "sha256": "56b1fc01e31cdd77bf6be4de810c7aa990a72669821d6fab20f2bd2fb6bec007",
+      "cases": 14,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-config.json",
+      "sha256": "a518849a2c5ba0b246ad9a7fd0e011e538f97dc3cbff80b2a32f2ba6ec4cbc06",
+      "cases": 697,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-dispatch-native.json",
+      "sha256": "887da96d265231584ce1eaab47cc18f5b6e5510730cb845487e73d32d1022824",
+      "cases": 400,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-elog_output.json",
+      "sha256": "92d8f286e010086502d39ad1df418b198927404b88092e2242ed5ab1f20b0db2",
+      "cases": 494,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-elog_uart_tx.json",
+      "sha256": "4e46d6d1062b4adb128c6f276c42f45bf90d3648ab48e1d9c02f762a94117683",
+      "cases": 222,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-events-native.json",
+      "sha256": "5bcd8942b9c0f54b2c3cc0e2e484969761be2596c5f2e01fe9f824f9fdf7182a",
+      "cases": 72,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-formatter.json",
+      "sha256": "a8852ac1e0a2cab7b532dad2665f47563ee252bc3bbcc272bbe55c3babeb643e",
+      "cases": 1778,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-generators.json",
+      "sha256": "07cd213f73f268080647236719e7d9a1050726030855a881aa3e682d7cc82653",
+      "cases": 688,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-gx-children.json",
+      "sha256": "6d84c493063ea182d2c49201fb8822a77eaec54c9927e949533eb974234f004d",
+      "cases": 4834,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-gx-event.json",
+      "sha256": "0ec67dc7549e372e6f8dc438f889ae7e21b5128268b9d1ca5871900c55120fe3",
+      "cases": 44,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-gx-transition.json",
+      "sha256": "28892fbf24c5d4c8c0c4378a26a67a2481787b3daa3b7491effb066ecc0b15e7",
+      "cases": 51,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-init-leaves.json",
+      "sha256": "93d85c7143c8e0e9b257482ad2e744046532f2577c8639513994b3490733e40a",
+      "cases": 956,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-isr_deferred_fifo.json",
+      "sha256": "39cfac5bf2794c904ce3b08898838764474c33523266b13a1705140b4e5ed062",
+      "cases": 1,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-isr_delivery.json",
+      "sha256": "13ff3eded710c428fb78f7a20a30a2624aa27a5c2f4edd7de9c2d15696f719ae",
+      "cases": 1480,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-isr_public_interfaces.json",
+      "sha256": "73eb0530fcff86703c328726cf9eb8f7241bdeb55f00289a6bbf03f56dabf2d7",
+      "cases": 62,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-math.json",
+      "sha256": "1d19805be6b44ef3ac86b75f3e08b4ba9751cfe4f12386626f6c935200603e4b",
+      "cases": 4311,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-memory-native.json",
+      "sha256": "f4a56d244db4b69788c7a20b04e2765d53d3f532000ee6a0a2e10d9cc5b5aad6",
+      "cases": 936,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-memory.json",
+      "sha256": "ff9f5fb3d7653d7ed59e7b81cfd505a6af8958f58744ff1e890e6b45c60ce92e",
+      "cases": 936,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-mode.json",
+      "sha256": "2ef6b3913184966333591ec8df492ed4f3c639d11da4ae1af7c06f9c19f629f9",
+      "cases": 1394,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-mutex_block_boundary.json",
+      "sha256": "20528f6612a03976f0e7e7995cd95c2cdb0ea7bcf431b2f00b206736284e7b0c",
+      "cases": 4,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-mutex_kernel.json",
+      "sha256": "35120d150738d5c4cd24d4c243c938cd8ba1d321ea8f30bd36e47a9f19753e14",
+      "cases": 516,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-mutex_sequences.json",
+      "sha256": "405ca95eb472d0cd1971f9c101bd0bdde53ca5059cd834d332f6d05340d9a36e",
+      "cases": 2,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-native-config.json",
+      "sha256": "da9b3c3a73e15ff6673ed809549da9523ad8316139b1d019b8f9bd45b81c2842",
+      "cases": 48,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-power-read.json",
+      "sha256": "9ad6ba31fa4e54844fcebf1a32683f7aec67c6c1d1f473b6afbe937fcf94b035",
+      "cases": 10,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-power20.json",
+      "sha256": "e346a78a77b82e1e86d0704a67c417a8d975dcbd7fa9ffd176daf00f0062128c",
+      "cases": 256,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-root-final-state.json",
+      "sha256": "7b2c61253c24673b778b3043a320b52a7356b0f5d017d48b9d3f31ae0927317d",
+      "cases": 1400,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-runtime-native.json",
+      "sha256": "fe0a640442dcbddb01ce3305866fc3069e919fb9f07965f16405e2f5b88b9903",
+      "cases": 168,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-runtime.json",
+      "sha256": "e6be3a17b633e56dcebd6cb0f1f00cc9373c6c1ddead0973ae1f566176442d41",
+      "cases": 832,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-rx.json",
+      "sha256": "2a1deb50886535caddc896c12b21c4328bf38b682d0180a7e0e5d1532a3996c3",
+      "cases": 422,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-sequence02.json",
+      "sha256": "cc4f4cd56491d21f77db45483ebdcd9b2b05307ae5e24c0a2b7539decc34f3b5",
+      "cases": null,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-sequence8.json",
+      "sha256": "e86dee130b0f80317838f71382197ebf7739c5424fbe4e3a43b124ddefed03e7",
+      "cases": 24,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-service_records.json",
+      "sha256": "3268307d5fd38a6ff1b673b23e2a180b35eaedafdc01f88286bb2b4189a45360",
+      "cases": 112,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-service_startup_state.json",
+      "sha256": "6bdb971480d7c3c6152276060946b4d7020cf97f183451c3382fc8b4cde2b722",
+      "cases": 1,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-setters.json",
+      "sha256": "0b6aa286b18acc656cb15d3a8e2fcaee12e84df33cba0748c714040b8f7d35f6",
+      "cases": 192,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-shutdown.json",
+      "sha256": "6714e6148c9e527af270ce23cd605bd624ef2756a9f4a897b3b593e967f28f58",
+      "cases": 903,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-startup-leaves-native-copy.json",
+      "sha256": "e588c6362b13ff4b3588e5b6414b5a6c83e6ba39311bbfb7db6a6aa00fd2b551",
+      "cases": 271,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-startup-native-copy.json",
+      "sha256": "119d070c23064b958743dff72ca158b7dbad254c20854704d5291d48301218f3",
+      "cases": 64,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-startup_alternatives.json",
+      "sha256": "b4f24fd1db8cd39ff8ae64b04e561c7c906e0e7b10dd01ba9b2563ee6e65dfa2",
+      "cases": 64,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-timer-final.json",
+      "sha256": "09660a004b22b1546ca556a96b0e2c7c81608b679de9068770aef0b38fcfa250",
+      "cases": 864,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-ton-state.json",
+      "sha256": "b5fa2cf9cee7109b92c6e6c2190076340b04fe08a7b158f54ca6f26ed114c23b",
+      "cases": 796,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-ton-trim.json",
+      "sha256": "e5da75d91c56763e7b8380301f154021db95efe7aabe6970da12666a6846e207",
+      "cases": 124,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-transitions1418.json",
+      "sha256": "dce995f010fa80aeab0961689fe1095eb1103ff7246534c78b8d09d12251985f",
+      "cases": null,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/regression-wrapper.json",
+      "sha256": "149355f770165c026f2eaf974a7e76676213f6bccac4b71295ece47f233b87ca",
+      "cases": 288,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/root-installed.json",
+      "sha256": "8e791ec52b33ad452c183157fc33b34cdf61a1208a441dfb4c05b6e995f42b71",
+      "cases": 1400,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/selector17-installed.json",
+      "sha256": "2003e4438e3f19bea0a63aee808a1dd671f4679a21bcec578d3029e152d81683",
+      "cases": null,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    },
+    {
+      "path": "g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/validation/selector3-installed.json",
+      "sha256": "5873dcc613f6fca237879a8d4de98e09c643798639bd971eeaf39afcfc655f50",
+      "cases": null,
+      "elf_hash_field": "c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b"
+    }
+  ],
+  "source_addendum_sha256": "0eb7b8e48450e33ac8c706da86255be64293ba0e12959987a6d92e8af668bb59",
+  "exact_frozen_object_rebuild": true,
+  "limits": [
+    "Integration retains explicit startup/logger/peripheral models; focus proofs separate.",
+    "RTOS260+teardown512 use allocator call recording; actual-heap ownership3 uses synthetic scheduler suspend/resume.",
+    "1400 root cases use real scatter-installed DATA; absent ROM40/48 and synthetic peripheral acknowledgements remain.",
+    "Self deletion observes PendSV only; real context switch/idle reclamation/concurrency and unimplemented selector paths unproven.",
+    "Not a production image, whole-source proof, or locked official byte-identical build.",
+    "Prior687 historical verifiercopy abb854 is unavailable; original manifest retained and later validator proven separately."
+  ]
+}

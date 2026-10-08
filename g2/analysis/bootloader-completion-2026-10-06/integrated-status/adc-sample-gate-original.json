@@ -1,0 +1,337 @@
+{
+  "status": "PASS",
+  "cases": 48,
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "scope": "Original instructions only, no reconstructed-source or shared-image equivalence claim.",
+  "original_trace": {
+    "0x42ee00": "dff87423",
+    "0x42ee04": "1278",
+    "0x42ee06": "002a",
+    "0x42ee08": "2fd0",
+    "0x42ee6a": "7047",
+    "0x42ee0a": "c9b2",
+    "0x42ee0c": "0029",
+    "0x42ee0e": "2cd0",
+    "0x42ee10": "c0f38d12",
+    "0x42ee14": "40f2a641",
+    "0x42ee18": "4a43",
+    "0x42ee1a": "120b",
+    "0x42ee1c": "00ee102a",
+    "0x42ee20": "b8ee400a",
+    "0x42ee24": "dff84813",
+    "0x42ee28": "f7ee000a",
+    "0x42ee2c": "91ed011a",
+    "0x42ee30": "70eec10a",
+    "0x42ee34": "80ee200a",
+    "0x42ee38": "d1ed000a",
+    "0x42ee3c": "9fed751a",
+    "0x42ee40": "00ee810a",
+    "0x42ee44": "dfed740a",
+    "0x42ee48": "20ee200a",
+    "0x42ee4c": "dfed730a",
+    "0x42ee50": "80ee200a",
+    "0x42ee54": "000d",
+    "0x42ee56": "0005",
+    "0x42ee58": "0100",
+    "0x42ee5a": "bceec00a",
+    "0x42ee5e": "10ee100a",
+    "0x42ee62": "8001",
+    "0x42ee64": "8003",
+    "0x42ee66": "800b",
+    "0x42ee68": "0843"
+  },
+  "comparisons": [
+    {
+      "valid": 0,
+      "enable": 0,
+      "input": "0x0",
+      "output": "0x0"
+    },
+    {
+      "valid": 0,
+      "enable": 0,
+      "input": "0x3f",
+      "output": "0x3f"
+    },
+    {
+      "valid": 0,
+      "enable": 0,
+      "input": "0xfffff",
+      "output": "0xfffff"
+    },
+    {
+      "valid": 0,
+      "enable": 0,
+      "input": "0xa5ffffff",
+      "output": "0xa5ffffff"
+    },
+    {
+      "valid": 0,
+      "enable": 1,
+      "input": "0x0",
+      "output": "0x0"
+    },
+    {
+      "valid": 0,
+      "enable": 1,
+      "input": "0x3f",
+      "output": "0x3f"
+    },
+    {
+      "valid": 0,
+      "enable": 1,
+      "input": "0xfffff",
+      "output": "0xfffff"
+    },
+    {
+      "valid": 0,
+      "enable": 1,
+      "input": "0xa5ffffff",
+      "output": "0xa5ffffff"
+    },
+    {
+      "valid": 0,
+      "enable": 256,
+      "input": "0x0",
+      "output": "0x0"
+    },
+    {
+      "valid": 0,
+      "enable": 256,
+      "input": "0x3f",
+      "output": "0x3f"
+    },
+    {
+      "valid": 0,
+      "enable": 256,
+      "input": "0xfffff",
+      "output": "0xfffff"
+    },
+    {
+      "valid": 0,
+      "enable": 256,
+      "input": "0xa5ffffff",
+      "output": "0xa5ffffff"
+    },
+    {
+      "valid": 0,
+      "enable": 257,
+      "input": "0x0",
+      "output": "0x0"
+    },
+    {
+      "valid": 0,
+      "enable": 257,
+      "input": "0x3f",
+      "output": "0x3f"
+    },
+    {
+      "valid": 0,
+      "enable": 257,
+      "input": "0xfffff",
+      "output": "0xfffff"
+    },
+    {
+      "valid": 0,
+      "enable": 257,
+      "input": "0xa5ffffff",
+      "output": "0xa5ffffff"
+    },
+    {
+      "valid": 1,
+      "enable": 0,
+      "input": "0x0",
+      "output": "0x0"
+    },
+    {
+      "valid": 1,
+      "enable": 0,
+      "input": "0x3f",
+      "output": "0x3f"
+    },
+    {
+      "valid": 1,
+      "enable": 0,
+      "input": "0xfffff",
+      "output": "0xfffff"
+    },
+    {
+      "valid": 1,
+      "enable": 0,
+      "input": "0xa5ffffff",
+      "output": "0xa5ffffff"
+    },
+    {
+      "valid": 1,
+      "enable": 1,
+      "input": "0x0",
+      "output": "0x0"
+    },
+    {
+      "valid": 1,
+      "enable": 1,
+      "input": "0x3f",
+      "output": "0x0"
+    },
+    {
+      "valid": 1,
+      "enable": 1,
+      "input": "0xfffff",
+      "output": "0x3ff00"
+    },
+    {
+      "valid": 1,
+      "enable": 1,
+      "input": "0xa5ffffff",
+      "output": "0xa5f3ff00"
+    },
+    {
+      "valid": 1,
+      "enable": 256,
+      "input": "0x0",
+      "output": "0x0"
+    },
+    {
+      "valid": 1,
+      "enable": 256,
+      "input": "0x3f",
+      "output": "0x3f"
+    },
+    {
+      "valid": 1,
+      "enable": 256,
+      "input": "0xfffff",
+      "output": "0xfffff"
+    },
+    {
+      "valid": 1,
+      "enable": 256,
+      "input": "0xa5ffffff",
+      "output": "0xa5ffffff"
+    },
+    {
+      "valid": 1,
+      "enable": 257,
+      "input": "0x0",
+      "output": "0x0"
+    },
+    {
+      "valid": 1,
+      "enable": 257,
+      "input": "0x3f",
+      "output": "0x0"
+    },
+    {
+      "valid": 1,
+      "enable": 257,
+      "input": "0xfffff",
+      "output": "0x3ff00"
+    },
+    {
+      "valid": 1,
+      "enable": 257,
+      "input": "0xa5ffffff",
+      "output": "0xa5f3ff00"
+    },
+    {
+      "valid": 255,
+      "enable": 0,
+      "input": "0x0",
+      "output": "0x0"
+    },
+    {
+      "valid": 255,
+      "enable": 0,
+      "input": "0x3f",
+      "output": "0x3f"
+    },
+    {
+      "valid": 255,
+      "enable": 0,
+      "input": "0xfffff",
+      "output": "0xfffff"
+    },
+    {
+      "valid": 255,
+      "enable": 0,
+      "input": "0xa5ffffff",
+      "output": "0xa5ffffff"
+    },
+    {
+      "valid": 255,
+      "enable": 1,
+      "input": "0x0",
+      "output": "0x0"
+    },
+    {
+      "valid": 255,
+      "enable": 1,
+      "input": "0x3f",
+      "output": "0x0"
+    },
+    {
+      "valid": 255,
+      "enable": 1,
+      "input": "0xfffff",
+      "output": "0x3ff00"
+    },
+    {
+      "valid": 255,
+      "enable": 1,
+      "input": "0xa5ffffff",
+      "output": "0xa5f3ff00"
+    },
+    {
+      "valid": 255,
+      "enable": 256,
+      "input": "0x0",
+      "output": "0x0"
+    },
+    {
+      "valid": 255,
+      "enable": 256,
+      "input": "0x3f",
+      "output": "0x3f"
+    },
+    {
+      "valid": 255,
+      "enable": 256,
+      "input": "0xfffff",
+      "output": "0xfffff"
+    },
+    {
+      "valid": 255,
+      "enable": 256,
+      "input": "0xa5ffffff",
+      "output": "0xa5ffffff"
+    },
+    {
+      "valid": 255,
+      "enable": 257,
+      "input": "0x0",
+      "output": "0x0"
+    },
+    {
+      "valid": 255,
+      "enable": 257,
+      "input": "0x3f",
+      "output": "0x0"
+    },
+    {
+      "valid": 255,
+      "enable": 257,
+      "input": "0xfffff",
+      "output": "0x3ff00"
+    },
+    {
+      "valid": 255,
+      "enable": 257,
+      "input": "0xa5ffffff",
+      "output": "0xa5f3ff00"
+    }
+  ],
+  "limits": [
+    "FP32/FPSCR default and zero gain/offset fixture only; arbitrary calibration, nonfinite values and saturation remain untested.",
+    "Mapped RAM/MMIO and direct invocation; no actual FIFO, analog or application delivery proof."
+  ]
+}

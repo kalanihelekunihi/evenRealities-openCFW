@@ -1,0 +1,15 @@
+{
+  "flags": [
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m33",
+    "-mthumb",
+    "-mfloat-abi=softfp",
+    "-O1",
+    "-ffreestanding",
+    "-fno-builtin"
+  ],
+  "source": "g2/components/bootloader/thread_creation/task_delay_native/task_delay.c",
+  "source_sha256": "4b546472dcc522008c36419e253341d4d077d7da2679d7414a2a50dc6f24ae8a",
+  "object_sha256": "a2092c328a74cb44ef47c8a264f42d0f61eb594157a22d9376fe4e47076ede61",
+  "unit_object_equal": true
+}

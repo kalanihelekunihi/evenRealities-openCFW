@@ -1,0 +1,51 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp6m3k59v5/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00469580 <.text>:
+  469580:	b57f      	push	{r0, r1, r2, r3, r4, r5, r6, lr}
+  469582:	001d      	movs	r5, r3
+  469584:	2802      	cmp	r0, #2
+  469586:	f040 81b2 	bne.w	4698ee <.text+0x36e>
+  46958a:	f7d3 fda0 	bl	43d0ce <.text-0x2c4b2>
+  46958e:	0780      	lsls	r0, r0, #30
+  469590:	d511      	bpl.n	4695b6 <.text+0x36>
+  469592:	f8df 05f4 	ldr.w	r0, [pc, #1524]	@ 469b88 <.text+0x608>
+  469596:	7800      	ldrb	r0, [r0, #0]
+  469598:	9002      	str	r0, [sp, #8]
+  46959a:	f8df 05f0 	ldr.w	r0, [pc, #1520]	@ 469b8c <.text+0x60c>
+  46959e:	9001      	str	r0, [sp, #4]
+  4695a0:	20d6      	movs	r0, #214	@ 0xd6
+  4695a2:	9000      	str	r0, [sp, #0]
+  4695a4:	f8df 35e8 	ldr.w	r3, [pc, #1512]	@ 469b90 <.text+0x610>
+  4695a8:	f8df 258c 	ldr.w	r2, [pc, #1420]	@ 469b38 <.text+0x5b8>
+  4695ac:	f8df 158c 	ldr.w	r1, [pc, #1420]	@ 469b3c <.text+0x5bc>
+  4695b0:	2003      	movs	r0, #3
+  4695b2:	f7d3 ffdf 	bl	43d574 <.text-0x2c00c>
+  4695b6:	f7d3 fd8a 	bl	43d0ce <.text-0x2c4b2>
+  4695ba:	07c0      	lsls	r0, r0, #31
+  4695bc:	d403      	bmi.n	4695c6 <.text+0x46>
+  4695be:	f7d3 fd86 	bl	43d0ce <.text-0x2c4b2>
+  4695c2:	0740      	lsls	r0, r0, #29
+  4695c4:	d509      	bpl.n	4695da <.text+0x5a>
+  4695c6:	f8df 15cc 	ldr.w	r1, [pc, #1484]	@ 469b94 <.text+0x614>
+  4695ca:	f8df 05bc 	ldr.w	r0, [pc, #1468]	@ 469b88 <.text+0x608>
+  4695ce:	7803      	ldrb	r3, [r0, #0]
+  4695d0:	000a      	movs	r2, r1
+  4695d2:	f05f 6044 	movs.w	r0, #205520896	@ 0xc400000
+  4695d6:	f7d3 fc62 	bl	43ce9e <.text-0x2c6e2>
+  4695da:	2001      	movs	r0, #1
+  4695dc:	f8df 1564 	ldr.w	r1, [pc, #1380]	@ 469b44 <.text+0x5c4>
+  4695e0:	7008      	strb	r0, [r1, #0]
+  4695e2:	211c      	movs	r1, #28
+  4695e4:	2200      	movs	r2, #0
+  4695e6:	f8df 45b0 	ldr.w	r4, [pc, #1456]	@ 469b98 <.text+0x618>
+  4695ea:	0026      	movs	r6, r4
+  4695ec:	0030      	movs	r0, r6
+  4695ee:	f7d2 fd79 	bl	43c0e4 <.text-0x2d49c>
+  4695f2:	f8df 0594 	ldr.w	r0, [pc, #1428]	@ 469b88 <.text+0x608>
+  4695f6:	7800      	ldrb	r0, [r0, #0]
+  4695f8:	2800      	cmp	r0, #0
+  4695fa:	f000 80de 	beq.w	4697ba <.text+0x23a>

@@ -1,0 +1,6410 @@
+{
+  "status": "PASS",
+  "cases": 13,
+  "stock_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "elf_sha256": "716672010eb0ec4c6af92a8947ec703c087386d4b96300ebe472a01f81b183c9",
+  "native_children": [
+    "41d1c0 delay source/stock",
+    "41d246 poll source/stock",
+    "41d3e4 selector2/4 source mode apply",
+    "41d90e register read source/stock",
+    "41d92c register update source/stock",
+    "41ca5c/41caa2 PLL power helpers source/stock",
+    "41e348 cache source/stock",
+    "41bf84/41c17a MSPI power-domain C source/stock"
+  ],
+  "cuts": [
+    "The test-only power-domain sibling services for selectors 20, 23, and 29 are linked but asserted unreachable by these fixtures.",
+    "Control-to-status acknowledgement is synthesized identically after writes to 0x40021004/0x4002100c; stock and source status-poll bodies execute against the resulting status registers. ROM cycle-wait at 0x40 is controlled."
+  ],
+  "mode_function_extent": [
+    "0x41d3e4",
+    "0x41d676"
+  ],
+  "stock_mode_unique_pcs": 100,
+  "stock_mode_bytes_reached": 254,
+  "stock_mode_reached_ranges": [
+    [
+      "0x41d3e4",
+      "0x41d3fa"
+    ],
+    [
+      "0x41d438",
+      "0x41d43c"
+    ],
+    [
+      "0x41d452",
+      "0x41d4d8"
+    ],
+    [
+      "0x41d4f2",
+      "0x41d4f4"
+    ],
+    [
+      "0x41d586",
+      "0x41d5e2"
+    ]
+  ],
+  "compared_machine_state": [
+    "R0/R1/R2",
+    "R4-R11 callee-saved",
+    "SP",
+    "PRIMASK"
+  ],
+  "cache_coverage": {
+    "caller_arguments": [
+      "NULL",
+      "1"
+    ],
+    "enabled_disabled_variants": true,
+    "ccsidr_sets_ways_variants": true,
+    "whole_invalidate_register": "0xe000ef74",
+    "system_write_capture_range": [
+      "0xe000e000",
+      "0xe000efff"
+    ]
+  },
+  "cache_cases": [
+    {
+      "flags": 127,
+      "r1": 0,
+      "r2": 0,
+      "r5": 537030756,
+      "pin_read": 305419896,
+      "primask": 0,
+      "cache_enabled": true,
+      "cache_sets": 0,
+      "cache_ways": 0,
+      "cache_case": "enabled_1x1"
+    },
+    {
+      "flags": 127,
+      "r1": 287454020,
+      "r2": 1985229328,
+      "r5": 2780219352,
+      "pin_read": 3735928559,
+      "primask": 1,
+      "cache_enabled": true,
+      "cache_sets": 2,
+      "cache_ways": 1,
+      "cache_case": "enabled_3x2"
+    },
+    {
+      "flags": 127,
+      "r1": 16909060,
+      "r2": 270544960,
+      "r5": 537030756,
+      "pin_read": 826366246,
+      "primask": 0,
+      "cache_enabled": true,
+      "cache_sets": 1,
+      "cache_ways": 2,
+      "cache_case": "enabled_2x3"
+    },
+    {
+      "flags": 127,
+      "r1": 4294967295,
+      "r2": 1431655765,
+      "r5": 2863311530,
+      "pin_read": 2271560481,
+      "primask": 1,
+      "cache_enabled": false,
+      "cache_sets": 3,
+      "cache_ways": 3,
+      "cache_case": "disabled_4x4"
+    }
+  ],
+  "limits": [
+    "Selector2/4 paths are compared from the 658-byte stock entry; the C class-provider source maps the directly relevant 88-byte subrange 0x41d3e4..0x41d43c and is not a complete replacement for other selectors in that 658-byte function.",
+    "PLL source entries are test-only wrappers around static source helpers in clock_class_provider6.c; no stock bytes or opcode data are used as source.",
+    "The power-domain C entries execute without direct child cuts on selector 2/4 clockmux paths; control/status acknowledgement is an offline model, not hardware evidence. ROM timing is controlled. No physical delay, electrical, clock-stability, or hardware behavior is claimed."
+  ],
+  "source_sha256": {
+    "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/clockmux_carried.c": "9d48018924a8e149c7567428e4b2fe72402fefc2554db0db45422268d295dde1",
+    "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/clockmux_entry.h": "e4df6900467b00f9e6c242da0e0b5fb9f6522fd08d56b2602fdb4e767e46099c",
+    "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/clockmux_entry.S": "3864536dc98c2baf43e84ebdbde62d8df04b64645a6d02b51d258fd6531f5d09",
+    "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-clockmux/build_native_chain.sh": "8988384d3974a3cff7529e875f4bf24536b2d8f3d55f6de8c2aa54e87763ede1",
+    "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-clockmux/native-chain.ld": "7ac7a0f70f2665c4f2ff632c38ed7e1374d42ca5049e6d9d6976ad39e99e4708",
+    "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-clockmux/native_adapters.c": "0d2091dd7b86317acc262bc91d56f9f36d283d72c68d67d95eb60981bdf4742b",
+    "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-clockmux/native_pll_access.c": "8609db17422c7fa219404de2f10fc8262905e89937bcc72eb2c87ce87b2b1cba",
+    "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-clockmux/power_domain_test_services.c": "09621bbf0ecbc129d05b295f23eadfb2bd82afc9d5a1146b945748e5a1c14451",
+    "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-clockmux/verify_native_chain.py": "68f738b250ca2b49551e3fd5345c4a495f0789900bc04c62d4166c27b921b180",
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/ambiqhal-apollo510/ambiqhal/CMSIS/AmbiqMicro/Include/apollo510.h": "b6ca35dc828ef95825c0a22f06e6ca5ed558a6542dc74310515fdc350051a797",
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/ambiqhal-apollo510/ambiqhal/CMSIS/AmbiqMicro/Include/system_apollo510.h": "b1bc37880aae9a430763be5d6d878b4109e863cb0d615f1ca59b0fb7b2fe081b",
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/ambiqhal-apollo510/cmsis-5-590/CMSIS/Core/Include/core_cm55.h": "5707f716cf03f7e80151108ae94601fcfdf362dd2d830876040213318f6dee3a",
+    "g2/components/bootloader/clock_manager/clock_class_provider2.c": "b50a240c481937f348c4f61ed2fc617da39ede819ae181a3dbf3cadfdb89a318",
+    "g2/components/bootloader/clock_manager/clock_class_provider2.h": "00a6a4b24316afefa27518fa070535c680a2f1b11ddeabde7b468139c9c2c4b7",
+    "g2/components/bootloader/clock_manager/clock_class_provider4.c": "35b9afed8d8e113ec62eb9bdff799bfdf95eeec12ab03992c1c69e406b32f252",
+    "g2/components/bootloader/clock_manager/clock_class_provider4.h": "520faebee585400bc3c67acbacf2c9dc5c131f13762305a9aac2bd89dada24c9",
+    "g2/components/bootloader/clock_manager/clock_class_provider6.c": "c6d05ef894f0e7ae3f354288d72a23ec6d5e668a9dabbdaf113ad3a05bc0c842",
+    "g2/components/bootloader/clock_manager/clock_class_provider6.h": "0ce61c610821b0e8bbf31b2a762b51df778dabc03d763c81ec9a18fa9c7ce0d6",
+    "g2/components/bootloader/clock_manager/clock_class_providers.c": "71a7210ba488db0b1e50739bd9448fe2fd82be6e4b7bf96cf2e82514fc197848",
+    "g2/components/bootloader/clock_manager/clock_class_providers.h": "42f1e264c56bad9ceb6a398c26b87873536f534162de9dad1869414f9968a7ca",
+    "g2/components/bootloader/clock_manager/clock_manager.c": "f993e3a50bee98afc14d5138998fbcad8cafc78e1a72d72bad1641b9c58213bb",
+    "g2/components/bootloader/clock_manager/clock_manager.h": "f459795fd12f415ba878ab335cfdc2b19da12a63ddbf3e7a42bffef642a441de",
+    "g2/components/bootloader/nor_mspi_init/status_poll.c": "210816cac79fd4286c40ad55e7c61782aff27d248232188079de4185409773c9",
+    "g2/components/bootloader/platform_control/power_domains.c": "0645d747f9fcc91bb8155715fc61150fab77b7d2aa31fd958500494b659120aa",
+    "g2/components/bootloader/platform_control/power_domains.h": "e7ffb273d59c6a3005f89f655ef00c8903124b9f389127d4db6768507d30b276",
+    "g2/components/bootloader/platform_control/runtime_query.c": "3bf806de515e9e071ce92e95d6312367690e72fcc05e36a74de2787401625b6d",
+    "g2/components/bootloader/platform_control/runtime_query.h": "b84fc51b524e254ae4f90e06f8fa479d50e9d2712bb270409f9bdca56d17e846",
+    "g2/components/bootloader/platform_control/critical_save.S": "c3be3d527c34f732bd53df3bc7230c45e94637a075952e113832d627c6a2863e",
+    "g2/components/foundation/cache_maintenance/cache_maintenance.c": "365496e8fc154d0b604e292ab96272f6871106a705ac7a5439a67271f6961d03",
+    "g2/components/foundation/cache_maintenance/cache_maintenance.h": "64c437f8de20c7e0c7e4ce21a8cff58a8afecf0a46950b17dd260783e9f12c11",
+    "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-clockmux/power_register_read.c": "e0066524e6ba58ea07ad7e813d60feeb5c505348d05b046841b71267dfe13b84"
+  },
+  "comparisons": [
+    {
+      "fixture": {
+        "flags": 127,
+        "r1": 0,
+        "r2": 0,
+        "r5": 537030756,
+        "pin_read": 305419896,
+        "primask": 0
+      },
+      "result": {
+        "return_regs": [
+          0,
+          305419896,
+          2309737967
+        ],
+        "callee_saved": [
+          2684354564,
+          537030756,
+          2684354566,
+          2684354567,
+          2684354568,
+          2684354569,
+          2684354570,
+          2684354571
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "calls": [
+          [
+            "delay",
+            1
+          ],
+          [
+            "poll",
+            200,
+            1073758256,
+            16777216,
+            16777216,
+            1
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "gpio",
+            2,
+            0
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "delay",
+            1500
+          ],
+          [
+            "power_read",
+            15
+          ],
+          [
+            "power_update",
+            15,
+            537030762
+          ],
+          [
+            "prepare"
+          ],
+          [
+            "delay",
+            1
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "mode_enter",
+            30
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            4,
+            4,
+            1
+          ],
+          [
+            "mode_enter",
+            31
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            1
+          ],
+          [
+            "mode_enter",
+            32
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            1
+          ],
+          [
+            "mode_enter",
+            33
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            1024,
+            1024,
+            1
+          ],
+          [
+            "mode_enter",
+            26
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            16777216,
+            16777216,
+            1
+          ],
+          [
+            "mode_enter",
+            27
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            33554432,
+            33554432,
+            1
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "cache",
+            0,
+            1
+          ],
+          [
+            "delay",
+            1
+          ],
+          [
+            "delay",
+            20
+          ],
+          [
+            "mode_leave",
+            30
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            4,
+            4,
+            0
+          ],
+          [
+            "mode_leave",
+            31
+          ],
+          [
+            "mode_leave",
+            32
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            0
+          ],
+          [
+            "mode_leave",
+            33
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            1024,
+            1024,
+            0
+          ],
+          [
+            "mode_leave",
+            26
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            16777216,
+            16777216,
+            0
+          ],
+          [
+            "mode_leave",
+            27
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            33554432,
+            33554432,
+            0
+          ],
+          [
+            "finish"
+          ],
+          [
+            "delay",
+            1
+          ],
+          [
+            "power_update",
+            15,
+            305419896
+          ],
+          [
+            "gpio",
+            4,
+            0
+          ]
+        ],
+        "rom_wait_cycles": [
+          17,
+          145,
+          145,
+          47985,
+          17,
+          145,
+          145,
+          17,
+          625,
+          17
+        ],
+        "mmio_writes": [
+          [
+            1073873088,
+            4,
+            324508639
+          ],
+          [
+            1073874152,
+            4,
+            324508631
+          ],
+          [
+            1073758276,
+            4,
+            324508671
+          ],
+          [
+            1073873192,
+            4,
+            268409856
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508623
+          ],
+          [
+            1073808384,
+            4,
+            115
+          ],
+          [
+            1073807420,
+            4,
+            537030762
+          ],
+          [
+            1073808384,
+            4,
+            0
+          ],
+          [
+            1073873328,
+            4,
+            324508639
+          ],
+          [
+            1073874136,
+            4,
+            324508639
+          ],
+          [
+            1073874136,
+            4,
+            324508639
+          ],
+          [
+            1073874136,
+            4,
+            324508637
+          ],
+          [
+            1073874136,
+            4,
+            324508633
+          ],
+          [
+            1073874136,
+            4,
+            324508665
+          ],
+          [
+            1073874136,
+            4,
+            324508665
+          ],
+          [
+            1073874136,
+            4,
+            861379577
+          ],
+          [
+            1073877004,
+            4,
+            4
+          ],
+          [
+            1073877004,
+            4,
+            68
+          ],
+          [
+            1073877004,
+            4,
+            196
+          ],
+          [
+            1073877004,
+            4,
+            1220
+          ],
+          [
+            1073876996,
+            4,
+            16777216
+          ],
+          [
+            1073876996,
+            4,
+            50331648
+          ],
+          [
+            1075843072,
+            4,
+            324508639
+          ],
+          [
+            1075872000,
+            4,
+            324508639
+          ],
+          [
+            1075876096,
+            4,
+            324508639
+          ],
+          [
+            1074470912,
+            4,
+            324508638
+          ],
+          [
+            1075904512,
+            4,
+            274176991
+          ],
+          [
+            1073874152,
+            4,
+            324508635
+          ],
+          [
+            1075843072,
+            4,
+            324508639
+          ],
+          [
+            1075872000,
+            4,
+            324508639
+          ],
+          [
+            1075876096,
+            4,
+            324508639
+          ],
+          [
+            1074470912,
+            4,
+            324508638
+          ],
+          [
+            1073877004,
+            4,
+            1216
+          ],
+          [
+            1073877004,
+            4,
+            1152
+          ],
+          [
+            1073877004,
+            4,
+            1024
+          ],
+          [
+            1073877004,
+            4,
+            0
+          ],
+          [
+            1073876996,
+            4,
+            33554432
+          ],
+          [
+            1073876996,
+            4,
+            0
+          ],
+          [
+            1073874136,
+            4,
+            324508665
+          ],
+          [
+            1073874136,
+            4,
+            324508409
+          ],
+          [
+            1073874136,
+            4,
+            324508377
+          ],
+          [
+            1073874136,
+            4,
+            324508381
+          ],
+          [
+            1073874136,
+            4,
+            324508383
+          ],
+          [
+            1073874136,
+            4,
+            2471992031
+          ],
+          [
+            1073874136,
+            4,
+            3545733855
+          ],
+          [
+            1073873328,
+            4,
+            326605791
+          ],
+          [
+            1073808384,
+            4,
+            115
+          ],
+          [
+            1073807420,
+            4,
+            305419896
+          ],
+          [
+            1073808384,
+            4,
+            0
+          ],
+          [
+            1073873192,
+            4,
+            51482624
+          ],
+          [
+            1073873196,
+            4,
+            324508358
+          ],
+          [
+            1073758276,
+            4,
+            324508639
+          ],
+          [
+            1073873088,
+            4,
+            324508638
+          ],
+          [
+            1073776728,
+            4,
+            0
+          ],
+          [
+            1073776728,
+            4,
+            1525678080
+          ]
+        ],
+        "system_writes": [
+          [
+            3758157188,
+            4,
+            0
+          ],
+          [
+            3758157684,
+            4,
+            1073741856
+          ],
+          [
+            3758157684,
+            4,
+            32
+          ],
+          [
+            3758157684,
+            4,
+            1073741824
+          ],
+          [
+            3758157684,
+            4,
+            0
+          ]
+        ],
+        "mmio_final": {
+          "0x40008858": 1525678080,
+          "0x4000885c": 0,
+          "0x400200c0": 324508638,
+          "0x4002000c": 34,
+          "0x400201b0": 326605791,
+          "0x400204d8": 3545733855,
+          "0x400204e8": 324508635,
+          "0x40004044": 324508639,
+          "0x40004030": 16777216,
+          "0x4001003c": 305419896,
+          "0x40010400": 0,
+          "0x40020120": 324508639,
+          "0x40020128": 51482624,
+          "0x4002012c": 324508358,
+          "0x40201000": 324508639,
+          "0x40208100": 324508639,
+          "0x40209100": 324508639,
+          "0x400b2000": 324508638,
+          "0x40210000": 274176991,
+          "0xe000ed14": 65536,
+          "0xe000ed80": 8200,
+          "0xe000ed84": 0,
+          "0xe000ef74": 0
+        }
+      }
+    },
+    {
+      "fixture": {
+        "flags": 127,
+        "r1": 287454020,
+        "r2": 1985229328,
+        "r5": 2780219352,
+        "pin_read": 3735928559,
+        "primask": 1
+      },
+      "result": {
+        "return_regs": [
+          0,
+          3735928559,
+          2309737967
+        ],
+        "callee_saved": [
+          2684354564,
+          2780219352,
+          2684354566,
+          2684354567,
+          2684354568,
+          2684354569,
+          2684354570,
+          2684354571
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "calls": [
+          [
+            "delay",
+            1
+          ],
+          [
+            "poll",
+            200,
+            1073758256,
+            16777216,
+            16777216,
+            1
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "gpio",
+            2,
+            0
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "delay",
+            1500
+          ],
+          [
+            "power_read",
+            15
+          ],
+          [
+            "power_update",
+            15,
+            2780219354
+          ],
+          [
+            "prepare"
+          ],
+          [
+            "delay",
+            1
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "mode_enter",
+            30
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            4,
+            4,
+            1
+          ],
+          [
+            "mode_enter",
+            31
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            1
+          ],
+          [
+            "mode_enter",
+            32
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            1
+          ],
+          [
+            "mode_enter",
+            33
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            1024,
+            1024,
+            1
+          ],
+          [
+            "mode_enter",
+            26
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            16777216,
+            16777216,
+            1
+          ],
+          [
+            "mode_enter",
+            27
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            33554432,
+            33554432,
+            1
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "cache",
+            0,
+            1
+          ],
+          [
+            "delay",
+            1
+          ],
+          [
+            "delay",
+            20
+          ],
+          [
+            "mode_leave",
+            30
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            4,
+            4,
+            0
+          ],
+          [
+            "mode_leave",
+            31
+          ],
+          [
+            "mode_leave",
+            32
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            0
+          ],
+          [
+            "mode_leave",
+            33
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            1024,
+            1024,
+            0
+          ],
+          [
+            "mode_leave",
+            26
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            16777216,
+            16777216,
+            0
+          ],
+          [
+            "mode_leave",
+            27
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            33554432,
+            33554432,
+            0
+          ],
+          [
+            "finish"
+          ],
+          [
+            "delay",
+            1
+          ],
+          [
+            "power_update",
+            15,
+            3735928559
+          ],
+          [
+            "gpio",
+            4,
+            0
+          ]
+        ],
+        "rom_wait_cycles": [
+          17,
+          145,
+          145,
+          47985,
+          17,
+          145,
+          145,
+          17,
+          625,
+          17
+        ],
+        "mmio_writes": [
+          [
+            1073873088,
+            4,
+            324508639
+          ],
+          [
+            1073874152,
+            4,
+            324508631
+          ],
+          [
+            1073758276,
+            4,
+            324508671
+          ],
+          [
+            1073873192,
+            4,
+            268409856
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508623
+          ],
+          [
+            1073808384,
+            4,
+            115
+          ],
+          [
+            1073807420,
+            4,
+            2780219354
+          ],
+          [
+            1073808384,
+            4,
+            0
+          ],
+          [
+            1073873328,
+            4,
+            324508639
+          ],
+          [
+            1073874136,
+            4,
+            324508639
+          ],
+          [
+            1073874136,
+            4,
+            324508639
+          ],
+          [
+            1073874136,
+            4,
+            324508637
+          ],
+          [
+            1073874136,
+            4,
+            324508633
+          ],
+          [
+            1073874136,
+            4,
+            324508665
+          ],
+          [
+            1073874136,
+            4,
+            324508665
+          ],
+          [
+            1073874136,
+            4,
+            861379577
+          ],
+          [
+            1073877004,
+            4,
+            4
+          ],
+          [
+            1073877004,
+            4,
+            68
+          ],
+          [
+            1073877004,
+            4,
+            196
+          ],
+          [
+            1073877004,
+            4,
+            1220
+          ],
+          [
+            1073876996,
+            4,
+            16777216
+          ],
+          [
+            1073876996,
+            4,
+            50331648
+          ],
+          [
+            1075843072,
+            4,
+            324508639
+          ],
+          [
+            1075872000,
+            4,
+            324508639
+          ],
+          [
+            1075876096,
+            4,
+            324508639
+          ],
+          [
+            1074470912,
+            4,
+            324508638
+          ],
+          [
+            1075904512,
+            4,
+            274176991
+          ],
+          [
+            1073874152,
+            4,
+            324508635
+          ],
+          [
+            1075843072,
+            4,
+            324508639
+          ],
+          [
+            1075872000,
+            4,
+            324508639
+          ],
+          [
+            1075876096,
+            4,
+            324508639
+          ],
+          [
+            1074470912,
+            4,
+            324508638
+          ],
+          [
+            1073877004,
+            4,
+            1216
+          ],
+          [
+            1073877004,
+            4,
+            1152
+          ],
+          [
+            1073877004,
+            4,
+            1024
+          ],
+          [
+            1073877004,
+            4,
+            0
+          ],
+          [
+            1073876996,
+            4,
+            33554432
+          ],
+          [
+            1073876996,
+            4,
+            0
+          ],
+          [
+            1073874136,
+            4,
+            324508665
+          ],
+          [
+            1073874136,
+            4,
+            324508409
+          ],
+          [
+            1073874136,
+            4,
+            324508377
+          ],
+          [
+            1073874136,
+            4,
+            324508381
+          ],
+          [
+            1073874136,
+            4,
+            324508383
+          ],
+          [
+            1073874136,
+            4,
+            2471992031
+          ],
+          [
+            1073874136,
+            4,
+            3545733855
+          ],
+          [
+            1073873328,
+            4,
+            326605791
+          ],
+          [
+            1073873192,
+            4,
+            51482624
+          ],
+          [
+            1073873196,
+            4,
+            324508358
+          ],
+          [
+            1073758276,
+            4,
+            324508639
+          ],
+          [
+            1073873088,
+            4,
+            324508638
+          ],
+          [
+            1073776728,
+            4,
+            0
+          ],
+          [
+            1073776728,
+            4,
+            1525678080
+          ]
+        ],
+        "system_writes": [
+          [
+            3758157188,
+            4,
+            0
+          ],
+          [
+            3758157684,
+            4,
+            1073741856
+          ],
+          [
+            3758157684,
+            4,
+            32
+          ],
+          [
+            3758157684,
+            4,
+            1073741824
+          ],
+          [
+            3758157684,
+            4,
+            0
+          ]
+        ],
+        "mmio_final": {
+          "0x40008858": 1525678080,
+          "0x4000885c": 0,
+          "0x400200c0": 324508638,
+          "0x4002000c": 34,
+          "0x400201b0": 326605791,
+          "0x400204d8": 3545733855,
+          "0x400204e8": 324508635,
+          "0x40004044": 324508639,
+          "0x40004030": 16777216,
+          "0x4001003c": 2780219354,
+          "0x40010400": 0,
+          "0x40020120": 324508639,
+          "0x40020128": 51482624,
+          "0x4002012c": 324508358,
+          "0x40201000": 324508639,
+          "0x40208100": 324508639,
+          "0x40209100": 324508639,
+          "0x400b2000": 324508638,
+          "0x40210000": 274176991,
+          "0xe000ed14": 65536,
+          "0xe000ed80": 8200,
+          "0xe000ed84": 0,
+          "0xe000ef74": 0
+        }
+      }
+    },
+    {
+      "fixture": {
+        "flags": 60,
+        "r1": 0,
+        "r2": 2882400001,
+        "r5": 537030756,
+        "pin_read": 195948557,
+        "primask": 1
+      },
+      "result": {
+        "return_regs": [
+          0,
+          195948557,
+          2309737967
+        ],
+        "callee_saved": [
+          2684354564,
+          537030756,
+          2684354566,
+          2684354567,
+          2684354568,
+          2684354569,
+          2684354570,
+          2684354571
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "calls": [
+          [
+            "poll",
+            200,
+            1073758256,
+            16777216,
+            16777216,
+            1
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "gpio",
+            2,
+            0
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "delay",
+            1500
+          ],
+          [
+            "power_read",
+            15
+          ],
+          [
+            "power_update",
+            15,
+            537030762
+          ],
+          [
+            "prepare"
+          ],
+          [
+            "delay",
+            1
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "mode_enter",
+            30
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            4,
+            4,
+            1
+          ],
+          [
+            "mode_enter",
+            31
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            1
+          ],
+          [
+            "mode_enter",
+            32
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            1
+          ],
+          [
+            "mode_enter",
+            33
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            1024,
+            1024,
+            1
+          ],
+          [
+            "mode_enter",
+            26
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            16777216,
+            16777216,
+            1
+          ],
+          [
+            "mode_enter",
+            27
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            33554432,
+            33554432,
+            1
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "cache",
+            0,
+            1
+          ],
+          [
+            "delay",
+            1
+          ],
+          [
+            "delay",
+            20
+          ],
+          [
+            "mode_leave",
+            30
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            4,
+            4,
+            0
+          ],
+          [
+            "mode_leave",
+            31
+          ],
+          [
+            "mode_leave",
+            32
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            0
+          ],
+          [
+            "mode_leave",
+            33
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            1024,
+            1024,
+            0
+          ],
+          [
+            "mode_leave",
+            26
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            16777216,
+            16777216,
+            0
+          ],
+          [
+            "mode_leave",
+            27
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            33554432,
+            33554432,
+            0
+          ],
+          [
+            "finish"
+          ],
+          [
+            "delay",
+            1
+          ],
+          [
+            "power_update",
+            15,
+            195948557
+          ],
+          [
+            "gpio",
+            4,
+            0
+          ]
+        ],
+        "rom_wait_cycles": [
+          145,
+          145,
+          47985,
+          17,
+          145,
+          145,
+          17,
+          625,
+          17
+        ],
+        "mmio_writes": [
+          [
+            1073758276,
+            4,
+            324508671
+          ],
+          [
+            1073873192,
+            4,
+            268409856
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508623
+          ],
+          [
+            1073808384,
+            4,
+            115
+          ],
+          [
+            1073807420,
+            4,
+            537030762
+          ],
+          [
+            1073808384,
+            4,
+            0
+          ],
+          [
+            1073873328,
+            4,
+            324508639
+          ],
+          [
+            1073874136,
+            4,
+            324508639
+          ],
+          [
+            1073874136,
+            4,
+            324508639
+          ],
+          [
+            1073874136,
+            4,
+            324508637
+          ],
+          [
+            1073874136,
+            4,
+            324508633
+          ],
+          [
+            1073874136,
+            4,
+            324508633
+          ],
+          [
+            1073874136,
+            4,
+            324508633
+          ],
+          [
+            1073874136,
+            4,
+            861379545
+          ],
+          [
+            1073877004,
+            4,
+            4
+          ],
+          [
+            1073877004,
+            4,
+            68
+          ],
+          [
+            1073877004,
+            4,
+            196
+          ],
+          [
+            1073877004,
+            4,
+            1220
+          ],
+          [
+            1073876996,
+            4,
+            16777216
+          ],
+          [
+            1073876996,
+            4,
+            50331648
+          ],
+          [
+            1075843072,
+            4,
+            324508639
+          ],
+          [
+            1075872000,
+            4,
+            324508639
+          ],
+          [
+            1075876096,
+            4,
+            324508639
+          ],
+          [
+            1074470912,
+            4,
+            324508638
+          ],
+          [
+            1075904512,
+            4,
+            274176991
+          ],
+          [
+            1075843072,
+            4,
+            324508639
+          ],
+          [
+            1075872000,
+            4,
+            324508639
+          ],
+          [
+            1075876096,
+            4,
+            324508639
+          ],
+          [
+            1074470912,
+            4,
+            324508638
+          ],
+          [
+            1073877004,
+            4,
+            1216
+          ],
+          [
+            1073877004,
+            4,
+            1152
+          ],
+          [
+            1073877004,
+            4,
+            1024
+          ],
+          [
+            1073877004,
+            4,
+            0
+          ],
+          [
+            1073876996,
+            4,
+            33554432
+          ],
+          [
+            1073876996,
+            4,
+            0
+          ],
+          [
+            1073874136,
+            4,
+            324508633
+          ],
+          [
+            1073874136,
+            4,
+            324508377
+          ],
+          [
+            1073874136,
+            4,
+            324508377
+          ],
+          [
+            1073874136,
+            4,
+            324508381
+          ],
+          [
+            1073874136,
+            4,
+            324508383
+          ],
+          [
+            1073874136,
+            4,
+            2471992031
+          ],
+          [
+            1073874136,
+            4,
+            3545733855
+          ],
+          [
+            1073873328,
+            4,
+            326605791
+          ],
+          [
+            1073808384,
+            4,
+            115
+          ],
+          [
+            1073807420,
+            4,
+            195948557
+          ],
+          [
+            1073808384,
+            4,
+            0
+          ],
+          [
+            1073873192,
+            4,
+            51482624
+          ],
+          [
+            1073873196,
+            4,
+            324508358
+          ],
+          [
+            1073758276,
+            4,
+            324508639
+          ],
+          [
+            1073776728,
+            4,
+            0
+          ],
+          [
+            1073776728,
+            4,
+            1525678080
+          ]
+        ],
+        "system_writes": [
+          [
+            3758157188,
+            4,
+            0
+          ],
+          [
+            3758157684,
+            4,
+            1073741856
+          ],
+          [
+            3758157684,
+            4,
+            32
+          ],
+          [
+            3758157684,
+            4,
+            1073741824
+          ],
+          [
+            3758157684,
+            4,
+            0
+          ]
+        ],
+        "mmio_final": {
+          "0x40008858": 1525678080,
+          "0x4000885c": 0,
+          "0x400200c0": 324508639,
+          "0x4002000c": 34,
+          "0x400201b0": 326605791,
+          "0x400204d8": 3545733855,
+          "0x400204e8": 324508639,
+          "0x40004044": 324508639,
+          "0x40004030": 16777216,
+          "0x4001003c": 195948557,
+          "0x40010400": 0,
+          "0x40020120": 324508639,
+          "0x40020128": 51482624,
+          "0x4002012c": 324508358,
+          "0x40201000": 324508639,
+          "0x40208100": 324508639,
+          "0x40209100": 324508639,
+          "0x400b2000": 324508638,
+          "0x40210000": 274176991,
+          "0xe000ed14": 65536,
+          "0xe000ed80": 8200,
+          "0xe000ed84": 0,
+          "0xe000ef74": 0
+        }
+      }
+    },
+    {
+      "fixture": {
+        "flags": 100,
+        "r1": 16909060,
+        "r2": 270544960,
+        "r5": 537030756,
+        "pin_read": 826366246,
+        "primask": 0
+      },
+      "result": {
+        "return_regs": [
+          1,
+          826366246,
+          2309737967
+        ],
+        "callee_saved": [
+          2684354564,
+          537030756,
+          2684354566,
+          2684354567,
+          2684354568,
+          2684354569,
+          2684354570,
+          2684354571
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "calls": [
+          [
+            "poll",
+            200,
+            1073758256,
+            16777216,
+            16777216,
+            1
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "power_read",
+            15
+          ],
+          [
+            "power_update",
+            15,
+            537030762
+          ],
+          [
+            "prepare"
+          ],
+          [
+            "delay",
+            1
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "mode_enter",
+            30
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            4,
+            4,
+            1
+          ],
+          [
+            "mode_enter",
+            31
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            1
+          ],
+          [
+            "mode_enter",
+            32
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            1
+          ],
+          [
+            "mode_enter",
+            33
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            1024,
+            1024,
+            1
+          ],
+          [
+            "mode_enter",
+            26
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            16777216,
+            16777216,
+            1
+          ],
+          [
+            "mode_enter",
+            27
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            33554432,
+            33554432,
+            1
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "cache",
+            0,
+            1
+          ],
+          [
+            "delay",
+            1
+          ],
+          [
+            "delay",
+            20
+          ],
+          [
+            "mode_leave",
+            30
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            4,
+            4,
+            0
+          ],
+          [
+            "mode_leave",
+            31
+          ],
+          [
+            "mode_leave",
+            32
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            0
+          ],
+          [
+            "mode_leave",
+            33
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            1024,
+            1024,
+            0
+          ],
+          [
+            "mode_leave",
+            26
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            16777216,
+            16777216,
+            0
+          ],
+          [
+            "mode_leave",
+            27
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            33554432,
+            33554432,
+            0
+          ],
+          [
+            "finish"
+          ],
+          [
+            "delay",
+            1
+          ],
+          [
+            "power_update",
+            15,
+            826366246
+          ]
+        ],
+        "rom_wait_cycles": [
+          145,
+          17,
+          145,
+          145,
+          17,
+          625,
+          17
+        ],
+        "mmio_writes": [
+          [
+            1073758276,
+            4,
+            324508671
+          ],
+          [
+            1073808384,
+            4,
+            115
+          ],
+          [
+            1073807420,
+            4,
+            537030762
+          ],
+          [
+            1073808384,
+            4,
+            0
+          ],
+          [
+            1073873328,
+            4,
+            324508639
+          ],
+          [
+            1073874136,
+            4,
+            324508639
+          ],
+          [
+            1073874136,
+            4,
+            324508639
+          ],
+          [
+            1073874136,
+            4,
+            324508637
+          ],
+          [
+            1073874136,
+            4,
+            324508633
+          ],
+          [
+            1073874136,
+            4,
+            324508665
+          ],
+          [
+            1073874136,
+            4,
+            324508665
+          ],
+          [
+            1073874136,
+            4,
+            861379577
+          ],
+          [
+            1073877004,
+            4,
+            4
+          ],
+          [
+            1073877004,
+            4,
+            68
+          ],
+          [
+            1073877004,
+            4,
+            196
+          ],
+          [
+            1073877004,
+            4,
+            1220
+          ],
+          [
+            1073876996,
+            4,
+            16777216
+          ],
+          [
+            1073876996,
+            4,
+            50331648
+          ],
+          [
+            1075843072,
+            4,
+            324508639
+          ],
+          [
+            1075872000,
+            4,
+            324508639
+          ],
+          [
+            1075876096,
+            4,
+            324508639
+          ],
+          [
+            1074470912,
+            4,
+            324508638
+          ],
+          [
+            1075904512,
+            4,
+            274176991
+          ],
+          [
+            1075843072,
+            4,
+            324508639
+          ],
+          [
+            1075872000,
+            4,
+            324508639
+          ],
+          [
+            1075876096,
+            4,
+            324508639
+          ],
+          [
+            1074470912,
+            4,
+            324508638
+          ],
+          [
+            1073877004,
+            4,
+            1216
+          ],
+          [
+            1073877004,
+            4,
+            1152
+          ],
+          [
+            1073877004,
+            4,
+            1024
+          ],
+          [
+            1073877004,
+            4,
+            0
+          ],
+          [
+            1073876996,
+            4,
+            33554432
+          ],
+          [
+            1073876996,
+            4,
+            0
+          ],
+          [
+            1073874136,
+            4,
+            324508665
+          ],
+          [
+            1073874136,
+            4,
+            324508409
+          ],
+          [
+            1073874136,
+            4,
+            324508377
+          ],
+          [
+            1073874136,
+            4,
+            324508381
+          ],
+          [
+            1073874136,
+            4,
+            324508383
+          ],
+          [
+            1073874136,
+            4,
+            2471992031
+          ],
+          [
+            1073874136,
+            4,
+            3545733855
+          ],
+          [
+            1073873328,
+            4,
+            326605791
+          ],
+          [
+            1073758276,
+            4,
+            324508639
+          ],
+          [
+            1073776728,
+            4,
+            0
+          ],
+          [
+            1073776728,
+            4,
+            1525678080
+          ]
+        ],
+        "system_writes": [
+          [
+            3758157188,
+            4,
+            0
+          ],
+          [
+            3758157684,
+            4,
+            1073741856
+          ],
+          [
+            3758157684,
+            4,
+            32
+          ],
+          [
+            3758157684,
+            4,
+            1073741824
+          ],
+          [
+            3758157684,
+            4,
+            0
+          ]
+        ],
+        "mmio_final": {
+          "0x40008858": 1525678080,
+          "0x4000885c": 0,
+          "0x400200c0": 324508639,
+          "0x4002000c": 34,
+          "0x400201b0": 326605791,
+          "0x400204d8": 3545733855,
+          "0x400204e8": 324508639,
+          "0x40004044": 324508639,
+          "0x40004030": 16777216,
+          "0x4001003c": 537030762,
+          "0x40010400": 0,
+          "0x40020120": 324508639,
+          "0x40020128": 324508639,
+          "0x4002012c": 324508639,
+          "0x40201000": 324508639,
+          "0x40208100": 324508639,
+          "0x40209100": 324508639,
+          "0x400b2000": 324508638,
+          "0x40210000": 274176991,
+          "0xe000ed14": 65536,
+          "0xe000ed80": 8200,
+          "0xe000ed84": 0,
+          "0xe000ef74": 0
+        }
+      }
+    },
+    {
+      "fixture": {
+        "flags": 12,
+        "r1": 4294967295,
+        "r2": 1431655765,
+        "r5": 2863311530,
+        "pin_read": 2271560481,
+        "primask": 1
+      },
+      "result": {
+        "return_regs": [
+          0,
+          1431655765,
+          2309737967
+        ],
+        "callee_saved": [
+          2684354564,
+          2863311530,
+          2684354566,
+          2684354567,
+          2684354568,
+          2684354569,
+          2684354570,
+          2684354571
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "calls": [
+          [
+            "poll",
+            200,
+            1073758256,
+            16777216,
+            16777216,
+            1
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "gpio",
+            2,
+            0
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "delay",
+            1500
+          ],
+          [
+            "mode_enter",
+            30
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            4,
+            4,
+            1
+          ],
+          [
+            "mode_enter",
+            31
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            1
+          ],
+          [
+            "mode_enter",
+            32
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            1
+          ],
+          [
+            "mode_enter",
+            33
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            1024,
+            1024,
+            1
+          ],
+          [
+            "mode_enter",
+            26
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            16777216,
+            16777216,
+            1
+          ],
+          [
+            "mode_enter",
+            27
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            33554432,
+            33554432,
+            1
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "cache",
+            0,
+            1
+          ],
+          [
+            "delay",
+            1
+          ],
+          [
+            "delay",
+            20
+          ],
+          [
+            "mode_leave",
+            30
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            4,
+            4,
+            0
+          ],
+          [
+            "mode_leave",
+            31
+          ],
+          [
+            "mode_leave",
+            32
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            0
+          ],
+          [
+            "mode_leave",
+            33
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            1024,
+            1024,
+            0
+          ],
+          [
+            "mode_leave",
+            26
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            16777216,
+            16777216,
+            0
+          ],
+          [
+            "mode_leave",
+            27
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            33554432,
+            33554432,
+            0
+          ],
+          [
+            "gpio",
+            4,
+            0
+          ]
+        ],
+        "rom_wait_cycles": [
+          145,
+          145,
+          47985,
+          145,
+          17,
+          625
+        ],
+        "mmio_writes": [
+          [
+            1073758276,
+            4,
+            324508671
+          ],
+          [
+            1073873192,
+            4,
+            268409856
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508623
+          ],
+          [
+            1073877004,
+            4,
+            4
+          ],
+          [
+            1073877004,
+            4,
+            68
+          ],
+          [
+            1073877004,
+            4,
+            196
+          ],
+          [
+            1073877004,
+            4,
+            1220
+          ],
+          [
+            1073876996,
+            4,
+            16777216
+          ],
+          [
+            1073876996,
+            4,
+            50331648
+          ],
+          [
+            1075843072,
+            4,
+            324508639
+          ],
+          [
+            1075872000,
+            4,
+            324508639
+          ],
+          [
+            1075876096,
+            4,
+            324508639
+          ],
+          [
+            1074470912,
+            4,
+            324508638
+          ],
+          [
+            1075904512,
+            4,
+            274176991
+          ],
+          [
+            1075843072,
+            4,
+            324508639
+          ],
+          [
+            1075872000,
+            4,
+            324508639
+          ],
+          [
+            1075876096,
+            4,
+            324508639
+          ],
+          [
+            1074470912,
+            4,
+            324508638
+          ],
+          [
+            1073877004,
+            4,
+            1216
+          ],
+          [
+            1073877004,
+            4,
+            1152
+          ],
+          [
+            1073877004,
+            4,
+            1024
+          ],
+          [
+            1073877004,
+            4,
+            0
+          ],
+          [
+            1073876996,
+            4,
+            33554432
+          ],
+          [
+            1073876996,
+            4,
+            0
+          ],
+          [
+            1073873192,
+            4,
+            51482624
+          ],
+          [
+            1073873196,
+            4,
+            324508358
+          ],
+          [
+            1073758276,
+            4,
+            324508639
+          ],
+          [
+            1073776728,
+            4,
+            0
+          ],
+          [
+            1073776728,
+            4,
+            1525678080
+          ]
+        ],
+        "system_writes": [
+          [
+            3758157188,
+            4,
+            0
+          ],
+          [
+            3758157684,
+            4,
+            1073741856
+          ],
+          [
+            3758157684,
+            4,
+            32
+          ],
+          [
+            3758157684,
+            4,
+            1073741824
+          ],
+          [
+            3758157684,
+            4,
+            0
+          ]
+        ],
+        "mmio_final": {
+          "0x40008858": 1525678080,
+          "0x4000885c": 0,
+          "0x400200c0": 324508639,
+          "0x4002000c": 34,
+          "0x400201b0": 324508639,
+          "0x400204d8": 324508639,
+          "0x400204e8": 324508639,
+          "0x40004044": 324508639,
+          "0x40004030": 16777216,
+          "0x4001003c": 2271560481,
+          "0x40010400": 324508639,
+          "0x40020120": 324508639,
+          "0x40020128": 51482624,
+          "0x4002012c": 324508358,
+          "0x40201000": 324508639,
+          "0x40208100": 324508639,
+          "0x40209100": 324508639,
+          "0x400b2000": 324508638,
+          "0x40210000": 274176991,
+          "0xe000ed14": 65536,
+          "0xe000ed80": 8200,
+          "0xe000ed84": 0,
+          "0xe000ef74": 0
+        }
+      }
+    },
+    {
+      "fixture": {
+        "flags": 1,
+        "r1": 0,
+        "r2": 0,
+        "r5": 2780219352,
+        "pin_read": 0,
+        "primask": 0
+      },
+      "result": {
+        "return_regs": [
+          0,
+          0,
+          2309737967
+        ],
+        "callee_saved": [
+          2684354564,
+          2780219352,
+          2684354566,
+          2684354567,
+          2684354568,
+          2684354569,
+          2684354570,
+          2684354571
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "calls": [
+          [
+            "delay",
+            1
+          ],
+          [
+            "mode_enter",
+            30
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            4,
+            4,
+            1
+          ],
+          [
+            "mode_enter",
+            31
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            1
+          ],
+          [
+            "mode_enter",
+            32
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            1
+          ],
+          [
+            "mode_enter",
+            33
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            1024,
+            1024,
+            1
+          ],
+          [
+            "mode_enter",
+            26
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            16777216,
+            16777216,
+            1
+          ],
+          [
+            "mode_enter",
+            27
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            33554432,
+            33554432,
+            1
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "cache",
+            0,
+            1
+          ],
+          [
+            "delay",
+            1
+          ],
+          [
+            "delay",
+            20
+          ],
+          [
+            "mode_leave",
+            30
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            4,
+            4,
+            0
+          ],
+          [
+            "mode_leave",
+            31
+          ],
+          [
+            "mode_leave",
+            32
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            0
+          ],
+          [
+            "mode_leave",
+            33
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            1024,
+            1024,
+            0
+          ],
+          [
+            "mode_leave",
+            26
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            16777216,
+            16777216,
+            0
+          ],
+          [
+            "mode_leave",
+            27
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            33554432,
+            33554432,
+            0
+          ]
+        ],
+        "rom_wait_cycles": [
+          17,
+          145,
+          17,
+          625
+        ],
+        "mmio_writes": [
+          [
+            1073873088,
+            4,
+            324508639
+          ],
+          [
+            1073874152,
+            4,
+            324508631
+          ],
+          [
+            1073877004,
+            4,
+            4
+          ],
+          [
+            1073877004,
+            4,
+            68
+          ],
+          [
+            1073877004,
+            4,
+            196
+          ],
+          [
+            1073877004,
+            4,
+            1220
+          ],
+          [
+            1073876996,
+            4,
+            16777216
+          ],
+          [
+            1073876996,
+            4,
+            50331648
+          ],
+          [
+            1075843072,
+            4,
+            324508639
+          ],
+          [
+            1075872000,
+            4,
+            324508639
+          ],
+          [
+            1075876096,
+            4,
+            324508639
+          ],
+          [
+            1074470912,
+            4,
+            324508638
+          ],
+          [
+            1075904512,
+            4,
+            274176991
+          ],
+          [
+            1073874152,
+            4,
+            324508635
+          ],
+          [
+            1075843072,
+            4,
+            324508639
+          ],
+          [
+            1075872000,
+            4,
+            324508639
+          ],
+          [
+            1075876096,
+            4,
+            324508639
+          ],
+          [
+            1074470912,
+            4,
+            324508638
+          ],
+          [
+            1073877004,
+            4,
+            1216
+          ],
+          [
+            1073877004,
+            4,
+            1152
+          ],
+          [
+            1073877004,
+            4,
+            1024
+          ],
+          [
+            1073877004,
+            4,
+            0
+          ],
+          [
+            1073876996,
+            4,
+            33554432
+          ],
+          [
+            1073876996,
+            4,
+            0
+          ],
+          [
+            1073873088,
+            4,
+            324508638
+          ],
+          [
+            1073776728,
+            4,
+            0
+          ],
+          [
+            1073776728,
+            4,
+            1525678080
+          ]
+        ],
+        "system_writes": [
+          [
+            3758157188,
+            4,
+            0
+          ],
+          [
+            3758157684,
+            4,
+            1073741856
+          ],
+          [
+            3758157684,
+            4,
+            32
+          ],
+          [
+            3758157684,
+            4,
+            1073741824
+          ],
+          [
+            3758157684,
+            4,
+            0
+          ]
+        ],
+        "mmio_final": {
+          "0x40008858": 1525678080,
+          "0x4000885c": 0,
+          "0x400200c0": 324508638,
+          "0x4002000c": 34,
+          "0x400201b0": 324508639,
+          "0x400204d8": 324508639,
+          "0x400204e8": 324508635,
+          "0x40004044": 324508639,
+          "0x40004030": 16777216,
+          "0x4001003c": 0,
+          "0x40010400": 324508639,
+          "0x40020120": 324508639,
+          "0x40020128": 324508639,
+          "0x4002012c": 324508639,
+          "0x40201000": 324508639,
+          "0x40208100": 324508639,
+          "0x40209100": 324508639,
+          "0x400b2000": 324508638,
+          "0x40210000": 274176991,
+          "0xe000ed14": 65536,
+          "0xe000ed80": 8200,
+          "0xe000ed84": 0,
+          "0xe000ef74": 0
+        }
+      }
+    },
+    {
+      "fixture": {
+        "flags": 0,
+        "r1": 287454020,
+        "r2": 1985229328,
+        "r5": 537030756,
+        "pin_read": 4294967295,
+        "primask": 1
+      },
+      "result": {
+        "return_regs": [
+          287454020,
+          1985229328,
+          2309737967
+        ],
+        "callee_saved": [
+          2684354564,
+          537030756,
+          2684354566,
+          2684354567,
+          2684354568,
+          2684354569,
+          2684354570,
+          2684354571
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "calls": [],
+        "rom_wait_cycles": [],
+        "mmio_writes": [
+          [
+            1073776728,
+            4,
+            0
+          ],
+          [
+            1073776728,
+            4,
+            1525678080
+          ]
+        ],
+        "system_writes": [],
+        "mmio_final": {
+          "0x40008858": 1525678080,
+          "0x4000885c": 0,
+          "0x400200c0": 324508639,
+          "0x4002000c": 34,
+          "0x400201b0": 324508639,
+          "0x400204d8": 324508639,
+          "0x400204e8": 324508639,
+          "0x40004044": 324508639,
+          "0x40004030": 16777216,
+          "0x4001003c": 4294967295,
+          "0x40010400": 324508639,
+          "0x40020120": 324508639,
+          "0x40020128": 324508639,
+          "0x4002012c": 324508639,
+          "0x40201000": 324508639,
+          "0x40208100": 324508639,
+          "0x40209100": 324508639,
+          "0x400b2000": 324508639,
+          "0x40210000": 324508639,
+          "0xe000ed14": 65536,
+          "0xe000ed80": 8200,
+          "0xe000ed84": 0,
+          "0xe000ef74": 324508639
+        }
+      }
+    },
+    {
+      "fixture": {
+        "flags": 127,
+        "r1": 287454020,
+        "r2": 1985229328,
+        "r5": 537030756,
+        "pin_read": 324508639,
+        "primask": 1,
+        "guard_busy": true
+      },
+      "result": {
+        "return_regs": [
+          287454020,
+          1985229328,
+          2309737967
+        ],
+        "callee_saved": [
+          2684354564,
+          537030756,
+          2684354566,
+          2684354567,
+          2684354568,
+          2684354569,
+          2684354570,
+          2684354571
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "calls": [],
+        "rom_wait_cycles": [],
+        "mmio_writes": [
+          [
+            1073776728,
+            4,
+            0
+          ],
+          [
+            1073776728,
+            4,
+            1525678080
+          ]
+        ],
+        "system_writes": [],
+        "mmio_final": {
+          "0x40008858": 1525678080,
+          "0x4000885c": 2,
+          "0x400200c0": 324508639,
+          "0x4002000c": 34,
+          "0x400201b0": 324508639,
+          "0x400204d8": 324508639,
+          "0x400204e8": 324508639,
+          "0x40004044": 324508639,
+          "0x40004030": 16777216,
+          "0x4001003c": 324508639,
+          "0x40010400": 324508639,
+          "0x40020120": 324508639,
+          "0x40020128": 324508639,
+          "0x4002012c": 324508639,
+          "0x40201000": 324508639,
+          "0x40208100": 324508639,
+          "0x40209100": 324508639,
+          "0x400b2000": 324508639,
+          "0x40210000": 324508639,
+          "0xe000ed14": 65536,
+          "0xe000ed80": 8200,
+          "0xe000ed84": 0,
+          "0xe000ef74": 324508639
+        }
+      }
+    },
+    {
+      "fixture": {
+        "flags": 127,
+        "r1": 0,
+        "r2": 0,
+        "r5": 2780219352,
+        "pin_read": 0,
+        "primask": 0,
+        "revision": 33
+      },
+      "result": {
+        "return_regs": [
+          0,
+          0,
+          2309737967
+        ],
+        "callee_saved": [
+          2684354564,
+          2780219352,
+          2684354566,
+          2684354567,
+          2684354568,
+          2684354569,
+          2684354570,
+          2684354571
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "calls": [
+          [
+            "delay",
+            1
+          ],
+          [
+            "poll",
+            200,
+            1073758256,
+            16777216,
+            16777216,
+            1
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "gpio",
+            2,
+            0
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "delay",
+            1500
+          ],
+          [
+            "power_read",
+            15
+          ],
+          [
+            "power_update",
+            15,
+            2780219354
+          ],
+          [
+            "prepare"
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "mode_enter",
+            30
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            4,
+            4,
+            1
+          ],
+          [
+            "mode_enter",
+            31
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            1
+          ],
+          [
+            "mode_enter",
+            32
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            1
+          ],
+          [
+            "mode_enter",
+            33
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            1024,
+            1024,
+            1
+          ],
+          [
+            "mode_enter",
+            26
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            16777216,
+            16777216,
+            1
+          ],
+          [
+            "mode_enter",
+            27
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            33554432,
+            33554432,
+            1
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "cache",
+            0,
+            1
+          ],
+          [
+            "delay",
+            1
+          ],
+          [
+            "delay",
+            20
+          ],
+          [
+            "mode_leave",
+            30
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            4,
+            4,
+            0
+          ],
+          [
+            "mode_leave",
+            31
+          ],
+          [
+            "mode_leave",
+            32
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            0
+          ],
+          [
+            "mode_leave",
+            33
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            1024,
+            1024,
+            0
+          ],
+          [
+            "mode_leave",
+            26
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            16777216,
+            16777216,
+            0
+          ],
+          [
+            "mode_leave",
+            27
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            33554432,
+            33554432,
+            0
+          ],
+          [
+            "finish"
+          ],
+          [
+            "power_update",
+            15,
+            0
+          ],
+          [
+            "gpio",
+            4,
+            0
+          ]
+        ],
+        "rom_wait_cycles": [
+          17,
+          145,
+          145,
+          47985,
+          145,
+          145,
+          17,
+          625
+        ],
+        "mmio_writes": [
+          [
+            1073873088,
+            4,
+            324508639
+          ],
+          [
+            1073874152,
+            4,
+            324508631
+          ],
+          [
+            1073758276,
+            4,
+            324508671
+          ],
+          [
+            1073873192,
+            4,
+            268409856
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508623
+          ],
+          [
+            1073808384,
+            4,
+            115
+          ],
+          [
+            1073807420,
+            4,
+            2780219354
+          ],
+          [
+            1073808384,
+            4,
+            0
+          ],
+          [
+            1073874136,
+            4,
+            324508639
+          ],
+          [
+            1073874136,
+            4,
+            324508639
+          ],
+          [
+            1073874136,
+            4,
+            324508637
+          ],
+          [
+            1073874136,
+            4,
+            324508633
+          ],
+          [
+            1073874136,
+            4,
+            324508665
+          ],
+          [
+            1073874136,
+            4,
+            324508665
+          ],
+          [
+            1073874136,
+            4,
+            861379577
+          ],
+          [
+            1073877004,
+            4,
+            4
+          ],
+          [
+            1073877004,
+            4,
+            68
+          ],
+          [
+            1073877004,
+            4,
+            196
+          ],
+          [
+            1073877004,
+            4,
+            1220
+          ],
+          [
+            1073876996,
+            4,
+            16777216
+          ],
+          [
+            1073876996,
+            4,
+            50331648
+          ],
+          [
+            1075843072,
+            4,
+            324508639
+          ],
+          [
+            1075872000,
+            4,
+            324508639
+          ],
+          [
+            1075876096,
+            4,
+            324508639
+          ],
+          [
+            1074470912,
+            4,
+            324508638
+          ],
+          [
+            1075904512,
+            4,
+            274176991
+          ],
+          [
+            1073874152,
+            4,
+            324508635
+          ],
+          [
+            1075843072,
+            4,
+            324508639
+          ],
+          [
+            1075872000,
+            4,
+            324508639
+          ],
+          [
+            1075876096,
+            4,
+            324508639
+          ],
+          [
+            1074470912,
+            4,
+            324508638
+          ],
+          [
+            1073877004,
+            4,
+            1216
+          ],
+          [
+            1073877004,
+            4,
+            1152
+          ],
+          [
+            1073877004,
+            4,
+            1024
+          ],
+          [
+            1073877004,
+            4,
+            0
+          ],
+          [
+            1073876996,
+            4,
+            33554432
+          ],
+          [
+            1073876996,
+            4,
+            0
+          ],
+          [
+            1073874136,
+            4,
+            324508665
+          ],
+          [
+            1073874136,
+            4,
+            324508409
+          ],
+          [
+            1073874136,
+            4,
+            324508377
+          ],
+          [
+            1073874136,
+            4,
+            324508381
+          ],
+          [
+            1073874136,
+            4,
+            324508383
+          ],
+          [
+            1073874136,
+            4,
+            2471992031
+          ],
+          [
+            1073874136,
+            4,
+            3545733855
+          ],
+          [
+            1073808384,
+            4,
+            115
+          ],
+          [
+            1073807420,
+            4,
+            0
+          ],
+          [
+            1073808384,
+            4,
+            0
+          ],
+          [
+            1073873192,
+            4,
+            51482624
+          ],
+          [
+            1073873196,
+            4,
+            324508358
+          ],
+          [
+            1073758276,
+            4,
+            324508639
+          ],
+          [
+            1073873088,
+            4,
+            324508638
+          ],
+          [
+            1073776728,
+            4,
+            0
+          ],
+          [
+            1073776728,
+            4,
+            1525678080
+          ]
+        ],
+        "system_writes": [
+          [
+            3758157188,
+            4,
+            0
+          ],
+          [
+            3758157684,
+            4,
+            1073741856
+          ],
+          [
+            3758157684,
+            4,
+            32
+          ],
+          [
+            3758157684,
+            4,
+            1073741824
+          ],
+          [
+            3758157684,
+            4,
+            0
+          ]
+        ],
+        "mmio_final": {
+          "0x40008858": 1525678080,
+          "0x4000885c": 0,
+          "0x400200c0": 324508638,
+          "0x4002000c": 33,
+          "0x400201b0": 324508639,
+          "0x400204d8": 3545733855,
+          "0x400204e8": 324508635,
+          "0x40004044": 324508639,
+          "0x40004030": 16777216,
+          "0x4001003c": 0,
+          "0x40010400": 0,
+          "0x40020120": 324508639,
+          "0x40020128": 51482624,
+          "0x4002012c": 324508358,
+          "0x40201000": 324508639,
+          "0x40208100": 324508639,
+          "0x40209100": 324508639,
+          "0x400b2000": 324508638,
+          "0x40210000": 274176991,
+          "0xe000ed14": 65536,
+          "0xe000ed80": 8200,
+          "0xe000ed84": 0,
+          "0xe000ef74": 0
+        }
+      }
+    },
+    {
+      "fixture": {
+        "flags": 127,
+        "r1": 0,
+        "r2": 0,
+        "r5": 537030756,
+        "pin_read": 305419896,
+        "primask": 0,
+        "cache_enabled": true,
+        "cache_sets": 0,
+        "cache_ways": 0,
+        "cache_case": "enabled_1x1"
+      },
+      "result": {
+        "return_regs": [
+          0,
+          305419896,
+          2309737967
+        ],
+        "callee_saved": [
+          2684354564,
+          537030756,
+          2684354566,
+          2684354567,
+          2684354568,
+          2684354569,
+          2684354570,
+          2684354571
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "calls": [
+          [
+            "delay",
+            1
+          ],
+          [
+            "poll",
+            200,
+            1073758256,
+            16777216,
+            16777216,
+            1
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "gpio",
+            2,
+            0
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "delay",
+            1500
+          ],
+          [
+            "power_read",
+            15
+          ],
+          [
+            "power_update",
+            15,
+            537030762
+          ],
+          [
+            "prepare"
+          ],
+          [
+            "delay",
+            1
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "mode_enter",
+            30
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            4,
+            4,
+            1
+          ],
+          [
+            "mode_enter",
+            31
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            1
+          ],
+          [
+            "mode_enter",
+            32
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            1
+          ],
+          [
+            "mode_enter",
+            33
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            1024,
+            1024,
+            1
+          ],
+          [
+            "mode_enter",
+            26
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            16777216,
+            16777216,
+            1
+          ],
+          [
+            "mode_enter",
+            27
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            33554432,
+            33554432,
+            1
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "cache",
+            0,
+            1
+          ],
+          [
+            "delay",
+            1
+          ],
+          [
+            "delay",
+            20
+          ],
+          [
+            "mode_leave",
+            30
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            4,
+            4,
+            0
+          ],
+          [
+            "mode_leave",
+            31
+          ],
+          [
+            "mode_leave",
+            32
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            0
+          ],
+          [
+            "mode_leave",
+            33
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            1024,
+            1024,
+            0
+          ],
+          [
+            "mode_leave",
+            26
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            16777216,
+            16777216,
+            0
+          ],
+          [
+            "mode_leave",
+            27
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            33554432,
+            33554432,
+            0
+          ],
+          [
+            "finish"
+          ],
+          [
+            "delay",
+            1
+          ],
+          [
+            "power_update",
+            15,
+            305419896
+          ],
+          [
+            "gpio",
+            4,
+            0
+          ]
+        ],
+        "rom_wait_cycles": [
+          17,
+          145,
+          145,
+          47985,
+          17,
+          145,
+          145,
+          17,
+          625,
+          17
+        ],
+        "mmio_writes": [
+          [
+            1073873088,
+            4,
+            324508639
+          ],
+          [
+            1073874152,
+            4,
+            324508631
+          ],
+          [
+            1073758276,
+            4,
+            324508671
+          ],
+          [
+            1073873192,
+            4,
+            268409856
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508623
+          ],
+          [
+            1073808384,
+            4,
+            115
+          ],
+          [
+            1073807420,
+            4,
+            537030762
+          ],
+          [
+            1073808384,
+            4,
+            0
+          ],
+          [
+            1073873328,
+            4,
+            324508639
+          ],
+          [
+            1073874136,
+            4,
+            324508639
+          ],
+          [
+            1073874136,
+            4,
+            324508639
+          ],
+          [
+            1073874136,
+            4,
+            324508637
+          ],
+          [
+            1073874136,
+            4,
+            324508633
+          ],
+          [
+            1073874136,
+            4,
+            324508665
+          ],
+          [
+            1073874136,
+            4,
+            324508665
+          ],
+          [
+            1073874136,
+            4,
+            861379577
+          ],
+          [
+            1073877004,
+            4,
+            4
+          ],
+          [
+            1073877004,
+            4,
+            68
+          ],
+          [
+            1073877004,
+            4,
+            196
+          ],
+          [
+            1073877004,
+            4,
+            1220
+          ],
+          [
+            1073876996,
+            4,
+            16777216
+          ],
+          [
+            1073876996,
+            4,
+            50331648
+          ],
+          [
+            1075843072,
+            4,
+            324508639
+          ],
+          [
+            1075872000,
+            4,
+            324508639
+          ],
+          [
+            1075876096,
+            4,
+            324508639
+          ],
+          [
+            1074470912,
+            4,
+            324508638
+          ],
+          [
+            1075904512,
+            4,
+            274176991
+          ],
+          [
+            1073874152,
+            4,
+            324508635
+          ],
+          [
+            1075843072,
+            4,
+            324508639
+          ],
+          [
+            1075872000,
+            4,
+            324508639
+          ],
+          [
+            1075876096,
+            4,
+            324508639
+          ],
+          [
+            1074470912,
+            4,
+            324508638
+          ],
+          [
+            1073877004,
+            4,
+            1216
+          ],
+          [
+            1073877004,
+            4,
+            1152
+          ],
+          [
+            1073877004,
+            4,
+            1024
+          ],
+          [
+            1073877004,
+            4,
+            0
+          ],
+          [
+            1073876996,
+            4,
+            33554432
+          ],
+          [
+            1073876996,
+            4,
+            0
+          ],
+          [
+            1073874136,
+            4,
+            324508665
+          ],
+          [
+            1073874136,
+            4,
+            324508409
+          ],
+          [
+            1073874136,
+            4,
+            324508377
+          ],
+          [
+            1073874136,
+            4,
+            324508381
+          ],
+          [
+            1073874136,
+            4,
+            324508383
+          ],
+          [
+            1073874136,
+            4,
+            2471992031
+          ],
+          [
+            1073874136,
+            4,
+            3545733855
+          ],
+          [
+            1073873328,
+            4,
+            326605791
+          ],
+          [
+            1073808384,
+            4,
+            115
+          ],
+          [
+            1073807420,
+            4,
+            305419896
+          ],
+          [
+            1073808384,
+            4,
+            0
+          ],
+          [
+            1073873192,
+            4,
+            51482624
+          ],
+          [
+            1073873196,
+            4,
+            324508358
+          ],
+          [
+            1073758276,
+            4,
+            324508639
+          ],
+          [
+            1073873088,
+            4,
+            324508638
+          ],
+          [
+            1073776728,
+            4,
+            0
+          ],
+          [
+            1073776728,
+            4,
+            1525678080
+          ]
+        ],
+        "system_writes": [
+          [
+            3758157188,
+            4,
+            0
+          ],
+          [
+            3758157684,
+            4,
+            0
+          ]
+        ],
+        "mmio_final": {
+          "0x40008858": 1525678080,
+          "0x4000885c": 0,
+          "0x400200c0": 324508638,
+          "0x4002000c": 34,
+          "0x400201b0": 326605791,
+          "0x400204d8": 3545733855,
+          "0x400204e8": 324508635,
+          "0x40004044": 324508639,
+          "0x40004030": 16777216,
+          "0x4001003c": 305419896,
+          "0x40010400": 0,
+          "0x40020120": 324508639,
+          "0x40020128": 51482624,
+          "0x4002012c": 324508358,
+          "0x40201000": 324508639,
+          "0x40208100": 324508639,
+          "0x40209100": 324508639,
+          "0x400b2000": 324508638,
+          "0x40210000": 274176991,
+          "0xe000ed14": 65536,
+          "0xe000ed80": 0,
+          "0xe000ed84": 0,
+          "0xe000ef74": 0
+        }
+      }
+    },
+    {
+      "fixture": {
+        "flags": 127,
+        "r1": 287454020,
+        "r2": 1985229328,
+        "r5": 2780219352,
+        "pin_read": 3735928559,
+        "primask": 1,
+        "cache_enabled": true,
+        "cache_sets": 2,
+        "cache_ways": 1,
+        "cache_case": "enabled_3x2"
+      },
+      "result": {
+        "return_regs": [
+          0,
+          3735928559,
+          2309737967
+        ],
+        "callee_saved": [
+          2684354564,
+          2780219352,
+          2684354566,
+          2684354567,
+          2684354568,
+          2684354569,
+          2684354570,
+          2684354571
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "calls": [
+          [
+            "delay",
+            1
+          ],
+          [
+            "poll",
+            200,
+            1073758256,
+            16777216,
+            16777216,
+            1
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "gpio",
+            2,
+            0
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "delay",
+            1500
+          ],
+          [
+            "power_read",
+            15
+          ],
+          [
+            "power_update",
+            15,
+            2780219354
+          ],
+          [
+            "prepare"
+          ],
+          [
+            "delay",
+            1
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "mode_enter",
+            30
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            4,
+            4,
+            1
+          ],
+          [
+            "mode_enter",
+            31
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            1
+          ],
+          [
+            "mode_enter",
+            32
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            1
+          ],
+          [
+            "mode_enter",
+            33
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            1024,
+            1024,
+            1
+          ],
+          [
+            "mode_enter",
+            26
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            16777216,
+            16777216,
+            1
+          ],
+          [
+            "mode_enter",
+            27
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            33554432,
+            33554432,
+            1
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "cache",
+            0,
+            1
+          ],
+          [
+            "delay",
+            1
+          ],
+          [
+            "delay",
+            20
+          ],
+          [
+            "mode_leave",
+            30
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            4,
+            4,
+            0
+          ],
+          [
+            "mode_leave",
+            31
+          ],
+          [
+            "mode_leave",
+            32
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            0
+          ],
+          [
+            "mode_leave",
+            33
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            1024,
+            1024,
+            0
+          ],
+          [
+            "mode_leave",
+            26
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            16777216,
+            16777216,
+            0
+          ],
+          [
+            "mode_leave",
+            27
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            33554432,
+            33554432,
+            0
+          ],
+          [
+            "finish"
+          ],
+          [
+            "delay",
+            1
+          ],
+          [
+            "power_update",
+            15,
+            3735928559
+          ],
+          [
+            "gpio",
+            4,
+            0
+          ]
+        ],
+        "rom_wait_cycles": [
+          17,
+          145,
+          145,
+          47985,
+          17,
+          145,
+          145,
+          17,
+          625,
+          17
+        ],
+        "mmio_writes": [
+          [
+            1073873088,
+            4,
+            324508639
+          ],
+          [
+            1073874152,
+            4,
+            324508631
+          ],
+          [
+            1073758276,
+            4,
+            324508671
+          ],
+          [
+            1073873192,
+            4,
+            268409856
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508623
+          ],
+          [
+            1073808384,
+            4,
+            115
+          ],
+          [
+            1073807420,
+            4,
+            2780219354
+          ],
+          [
+            1073808384,
+            4,
+            0
+          ],
+          [
+            1073873328,
+            4,
+            324508639
+          ],
+          [
+            1073874136,
+            4,
+            324508639
+          ],
+          [
+            1073874136,
+            4,
+            324508639
+          ],
+          [
+            1073874136,
+            4,
+            324508637
+          ],
+          [
+            1073874136,
+            4,
+            324508633
+          ],
+          [
+            1073874136,
+            4,
+            324508665
+          ],
+          [
+            1073874136,
+            4,
+            324508665
+          ],
+          [
+            1073874136,
+            4,
+            861379577
+          ],
+          [
+            1073877004,
+            4,
+            4
+          ],
+          [
+            1073877004,
+            4,
+            68
+          ],
+          [
+            1073877004,
+            4,
+            196
+          ],
+          [
+            1073877004,
+            4,
+            1220
+          ],
+          [
+            1073876996,
+            4,
+            16777216
+          ],
+          [
+            1073876996,
+            4,
+            50331648
+          ],
+          [
+            1075843072,
+            4,
+            324508639
+          ],
+          [
+            1075872000,
+            4,
+            324508639
+          ],
+          [
+            1075876096,
+            4,
+            324508639
+          ],
+          [
+            1074470912,
+            4,
+            324508638
+          ],
+          [
+            1075904512,
+            4,
+            274176991
+          ],
+          [
+            1073874152,
+            4,
+            324508635
+          ],
+          [
+            1075843072,
+            4,
+            324508639
+          ],
+          [
+            1075872000,
+            4,
+            324508639
+          ],
+          [
+            1075876096,
+            4,
+            324508639
+          ],
+          [
+            1074470912,
+            4,
+            324508638
+          ],
+          [
+            1073877004,
+            4,
+            1216
+          ],
+          [
+            1073877004,
+            4,
+            1152
+          ],
+          [
+            1073877004,
+            4,
+            1024
+          ],
+          [
+            1073877004,
+            4,
+            0
+          ],
+          [
+            1073876996,
+            4,
+            33554432
+          ],
+          [
+            1073876996,
+            4,
+            0
+          ],
+          [
+            1073874136,
+            4,
+            324508665
+          ],
+          [
+            1073874136,
+            4,
+            324508409
+          ],
+          [
+            1073874136,
+            4,
+            324508377
+          ],
+          [
+            1073874136,
+            4,
+            324508381
+          ],
+          [
+            1073874136,
+            4,
+            324508383
+          ],
+          [
+            1073874136,
+            4,
+            2471992031
+          ],
+          [
+            1073874136,
+            4,
+            3545733855
+          ],
+          [
+            1073873328,
+            4,
+            326605791
+          ],
+          [
+            1073873192,
+            4,
+            51482624
+          ],
+          [
+            1073873196,
+            4,
+            324508358
+          ],
+          [
+            1073758276,
+            4,
+            324508639
+          ],
+          [
+            1073873088,
+            4,
+            324508638
+          ],
+          [
+            1073776728,
+            4,
+            0
+          ],
+          [
+            1073776728,
+            4,
+            1525678080
+          ]
+        ],
+        "system_writes": [
+          [
+            3758157188,
+            4,
+            0
+          ],
+          [
+            3758157684,
+            4,
+            1073741888
+          ],
+          [
+            3758157684,
+            4,
+            64
+          ],
+          [
+            3758157684,
+            4,
+            1073741856
+          ],
+          [
+            3758157684,
+            4,
+            32
+          ],
+          [
+            3758157684,
+            4,
+            1073741824
+          ],
+          [
+            3758157684,
+            4,
+            0
+          ]
+        ],
+        "mmio_final": {
+          "0x40008858": 1525678080,
+          "0x4000885c": 0,
+          "0x400200c0": 324508638,
+          "0x4002000c": 34,
+          "0x400201b0": 326605791,
+          "0x400204d8": 3545733855,
+          "0x400204e8": 324508635,
+          "0x40004044": 324508639,
+          "0x40004030": 16777216,
+          "0x4001003c": 2780219354,
+          "0x40010400": 0,
+          "0x40020120": 324508639,
+          "0x40020128": 51482624,
+          "0x4002012c": 324508358,
+          "0x40201000": 324508639,
+          "0x40208100": 324508639,
+          "0x40209100": 324508639,
+          "0x400b2000": 324508638,
+          "0x40210000": 274176991,
+          "0xe000ed14": 65536,
+          "0xe000ed80": 16392,
+          "0xe000ed84": 0,
+          "0xe000ef74": 0
+        }
+      }
+    },
+    {
+      "fixture": {
+        "flags": 127,
+        "r1": 16909060,
+        "r2": 270544960,
+        "r5": 537030756,
+        "pin_read": 826366246,
+        "primask": 0,
+        "cache_enabled": true,
+        "cache_sets": 1,
+        "cache_ways": 2,
+        "cache_case": "enabled_2x3"
+      },
+      "result": {
+        "return_regs": [
+          0,
+          826366246,
+          2309737967
+        ],
+        "callee_saved": [
+          2684354564,
+          537030756,
+          2684354566,
+          2684354567,
+          2684354568,
+          2684354569,
+          2684354570,
+          2684354571
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "calls": [
+          [
+            "delay",
+            1
+          ],
+          [
+            "poll",
+            200,
+            1073758256,
+            16777216,
+            16777216,
+            1
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "gpio",
+            2,
+            0
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "delay",
+            1500
+          ],
+          [
+            "power_read",
+            15
+          ],
+          [
+            "power_update",
+            15,
+            537030762
+          ],
+          [
+            "prepare"
+          ],
+          [
+            "delay",
+            1
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "mode_enter",
+            30
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            4,
+            4,
+            1
+          ],
+          [
+            "mode_enter",
+            31
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            1
+          ],
+          [
+            "mode_enter",
+            32
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            1
+          ],
+          [
+            "mode_enter",
+            33
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            1024,
+            1024,
+            1
+          ],
+          [
+            "mode_enter",
+            26
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            16777216,
+            16777216,
+            1
+          ],
+          [
+            "mode_enter",
+            27
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            33554432,
+            33554432,
+            1
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "cache",
+            0,
+            1
+          ],
+          [
+            "delay",
+            1
+          ],
+          [
+            "delay",
+            20
+          ],
+          [
+            "mode_leave",
+            30
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            4,
+            4,
+            0
+          ],
+          [
+            "mode_leave",
+            31
+          ],
+          [
+            "mode_leave",
+            32
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            0
+          ],
+          [
+            "mode_leave",
+            33
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            1024,
+            1024,
+            0
+          ],
+          [
+            "mode_leave",
+            26
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            16777216,
+            16777216,
+            0
+          ],
+          [
+            "mode_leave",
+            27
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            33554432,
+            33554432,
+            0
+          ],
+          [
+            "finish"
+          ],
+          [
+            "delay",
+            1
+          ],
+          [
+            "power_update",
+            15,
+            826366246
+          ],
+          [
+            "gpio",
+            4,
+            0
+          ]
+        ],
+        "rom_wait_cycles": [
+          17,
+          145,
+          145,
+          47985,
+          17,
+          145,
+          145,
+          17,
+          625,
+          17
+        ],
+        "mmio_writes": [
+          [
+            1073873088,
+            4,
+            324508639
+          ],
+          [
+            1073874152,
+            4,
+            324508631
+          ],
+          [
+            1073758276,
+            4,
+            324508671
+          ],
+          [
+            1073873192,
+            4,
+            268409856
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508623
+          ],
+          [
+            1073808384,
+            4,
+            115
+          ],
+          [
+            1073807420,
+            4,
+            537030762
+          ],
+          [
+            1073808384,
+            4,
+            0
+          ],
+          [
+            1073873328,
+            4,
+            324508639
+          ],
+          [
+            1073874136,
+            4,
+            324508639
+          ],
+          [
+            1073874136,
+            4,
+            324508639
+          ],
+          [
+            1073874136,
+            4,
+            324508637
+          ],
+          [
+            1073874136,
+            4,
+            324508633
+          ],
+          [
+            1073874136,
+            4,
+            324508665
+          ],
+          [
+            1073874136,
+            4,
+            324508665
+          ],
+          [
+            1073874136,
+            4,
+            861379577
+          ],
+          [
+            1073877004,
+            4,
+            4
+          ],
+          [
+            1073877004,
+            4,
+            68
+          ],
+          [
+            1073877004,
+            4,
+            196
+          ],
+          [
+            1073877004,
+            4,
+            1220
+          ],
+          [
+            1073876996,
+            4,
+            16777216
+          ],
+          [
+            1073876996,
+            4,
+            50331648
+          ],
+          [
+            1075843072,
+            4,
+            324508639
+          ],
+          [
+            1075872000,
+            4,
+            324508639
+          ],
+          [
+            1075876096,
+            4,
+            324508639
+          ],
+          [
+            1074470912,
+            4,
+            324508638
+          ],
+          [
+            1075904512,
+            4,
+            274176991
+          ],
+          [
+            1073874152,
+            4,
+            324508635
+          ],
+          [
+            1075843072,
+            4,
+            324508639
+          ],
+          [
+            1075872000,
+            4,
+            324508639
+          ],
+          [
+            1075876096,
+            4,
+            324508639
+          ],
+          [
+            1074470912,
+            4,
+            324508638
+          ],
+          [
+            1073877004,
+            4,
+            1216
+          ],
+          [
+            1073877004,
+            4,
+            1152
+          ],
+          [
+            1073877004,
+            4,
+            1024
+          ],
+          [
+            1073877004,
+            4,
+            0
+          ],
+          [
+            1073876996,
+            4,
+            33554432
+          ],
+          [
+            1073876996,
+            4,
+            0
+          ],
+          [
+            1073874136,
+            4,
+            324508665
+          ],
+          [
+            1073874136,
+            4,
+            324508409
+          ],
+          [
+            1073874136,
+            4,
+            324508377
+          ],
+          [
+            1073874136,
+            4,
+            324508381
+          ],
+          [
+            1073874136,
+            4,
+            324508383
+          ],
+          [
+            1073874136,
+            4,
+            2471992031
+          ],
+          [
+            1073874136,
+            4,
+            3545733855
+          ],
+          [
+            1073873328,
+            4,
+            326605791
+          ],
+          [
+            1073873192,
+            4,
+            51482624
+          ],
+          [
+            1073873196,
+            4,
+            324508358
+          ],
+          [
+            1073758276,
+            4,
+            324508639
+          ],
+          [
+            1073873088,
+            4,
+            324508638
+          ],
+          [
+            1073776728,
+            4,
+            0
+          ],
+          [
+            1073776728,
+            4,
+            1525678080
+          ]
+        ],
+        "system_writes": [
+          [
+            3758157188,
+            4,
+            0
+          ],
+          [
+            3758157684,
+            4,
+            2147483680
+          ],
+          [
+            3758157684,
+            4,
+            1073741856
+          ],
+          [
+            3758157684,
+            4,
+            32
+          ],
+          [
+            3758157684,
+            4,
+            2147483648
+          ],
+          [
+            3758157684,
+            4,
+            1073741824
+          ],
+          [
+            3758157684,
+            4,
+            0
+          ]
+        ],
+        "mmio_final": {
+          "0x40008858": 1525678080,
+          "0x4000885c": 0,
+          "0x400200c0": 324508638,
+          "0x4002000c": 34,
+          "0x400201b0": 326605791,
+          "0x400204d8": 3545733855,
+          "0x400204e8": 324508635,
+          "0x40004044": 324508639,
+          "0x40004030": 16777216,
+          "0x4001003c": 537030762,
+          "0x40010400": 0,
+          "0x40020120": 324508639,
+          "0x40020128": 51482624,
+          "0x4002012c": 324508358,
+          "0x40201000": 324508639,
+          "0x40208100": 324508639,
+          "0x40209100": 324508639,
+          "0x400b2000": 324508638,
+          "0x40210000": 274176991,
+          "0xe000ed14": 65536,
+          "0xe000ed80": 8208,
+          "0xe000ed84": 0,
+          "0xe000ef74": 0
+        }
+      }
+    },
+    {
+      "fixture": {
+        "flags": 127,
+        "r1": 4294967295,
+        "r2": 1431655765,
+        "r5": 2863311530,
+        "pin_read": 2271560481,
+        "primask": 1,
+        "cache_enabled": false,
+        "cache_sets": 3,
+        "cache_ways": 3,
+        "cache_case": "disabled_4x4"
+      },
+      "result": {
+        "return_regs": [
+          0,
+          2271560481,
+          2309737967
+        ],
+        "callee_saved": [
+          2684354564,
+          2863311530,
+          2684354566,
+          2684354567,
+          2684354568,
+          2684354569,
+          2684354570,
+          2684354571
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "calls": [
+          [
+            "delay",
+            1
+          ],
+          [
+            "poll",
+            200,
+            1073758256,
+            16777216,
+            16777216,
+            1
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "gpio",
+            2,
+            0
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "delay",
+            1500
+          ],
+          [
+            "power_read",
+            15
+          ],
+          [
+            "power_update",
+            15,
+            2863311530
+          ],
+          [
+            "prepare"
+          ],
+          [
+            "delay",
+            1
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "mode_enter",
+            30
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            4,
+            4,
+            1
+          ],
+          [
+            "mode_enter",
+            31
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            1
+          ],
+          [
+            "mode_enter",
+            32
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            1
+          ],
+          [
+            "mode_enter",
+            33
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            1024,
+            1024,
+            1
+          ],
+          [
+            "mode_enter",
+            26
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            16777216,
+            16777216,
+            1
+          ],
+          [
+            "mode_enter",
+            27
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            33554432,
+            33554432,
+            1
+          ],
+          [
+            "delay",
+            5
+          ],
+          [
+            "cache",
+            0,
+            1
+          ],
+          [
+            "delay",
+            1
+          ],
+          [
+            "delay",
+            20
+          ],
+          [
+            "mode_leave",
+            30
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            4,
+            4,
+            0
+          ],
+          [
+            "mode_leave",
+            31
+          ],
+          [
+            "mode_leave",
+            32
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            192,
+            192,
+            0
+          ],
+          [
+            "mode_leave",
+            33
+          ],
+          [
+            "poll",
+            5,
+            1073877008,
+            1024,
+            1024,
+            0
+          ],
+          [
+            "mode_leave",
+            26
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            16777216,
+            16777216,
+            0
+          ],
+          [
+            "mode_leave",
+            27
+          ],
+          [
+            "poll",
+            5,
+            1073877000,
+            33554432,
+            33554432,
+            0
+          ],
+          [
+            "finish"
+          ],
+          [
+            "delay",
+            1
+          ],
+          [
+            "power_update",
+            15,
+            2271560481
+          ],
+          [
+            "gpio",
+            4,
+            0
+          ]
+        ],
+        "rom_wait_cycles": [
+          17,
+          145,
+          145,
+          47985,
+          17,
+          145,
+          145,
+          17,
+          625,
+          17
+        ],
+        "mmio_writes": [
+          [
+            1073873088,
+            4,
+            324508639
+          ],
+          [
+            1073874152,
+            4,
+            324508631
+          ],
+          [
+            1073758276,
+            4,
+            324508671
+          ],
+          [
+            1073873192,
+            4,
+            268409856
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508639
+          ],
+          [
+            1073873196,
+            4,
+            324508623
+          ],
+          [
+            1073873328,
+            4,
+            324508639
+          ],
+          [
+            1073874136,
+            4,
+            324508639
+          ],
+          [
+            1073874136,
+            4,
+            324508639
+          ],
+          [
+            1073874136,
+            4,
+            324508637
+          ],
+          [
+            1073874136,
+            4,
+            324508633
+          ],
+          [
+            1073874136,
+            4,
+            324508665
+          ],
+          [
+            1073874136,
+            4,
+            324508665
+          ],
+          [
+            1073874136,
+            4,
+            861379577
+          ],
+          [
+            1073877004,
+            4,
+            4
+          ],
+          [
+            1073877004,
+            4,
+            68
+          ],
+          [
+            1073877004,
+            4,
+            196
+          ],
+          [
+            1073877004,
+            4,
+            1220
+          ],
+          [
+            1073876996,
+            4,
+            16777216
+          ],
+          [
+            1073876996,
+            4,
+            50331648
+          ],
+          [
+            1075843072,
+            4,
+            324508639
+          ],
+          [
+            1075872000,
+            4,
+            324508639
+          ],
+          [
+            1075876096,
+            4,
+            324508639
+          ],
+          [
+            1074470912,
+            4,
+            324508638
+          ],
+          [
+            1075904512,
+            4,
+            274176991
+          ],
+          [
+            1073874152,
+            4,
+            324508635
+          ],
+          [
+            1075843072,
+            4,
+            324508639
+          ],
+          [
+            1075872000,
+            4,
+            324508639
+          ],
+          [
+            1075876096,
+            4,
+            324508639
+          ],
+          [
+            1074470912,
+            4,
+            324508638
+          ],
+          [
+            1073877004,
+            4,
+            1216
+          ],
+          [
+            1073877004,
+            4,
+            1152
+          ],
+          [
+            1073877004,
+            4,
+            1024
+          ],
+          [
+            1073877004,
+            4,
+            0
+          ],
+          [
+            1073876996,
+            4,
+            33554432
+          ],
+          [
+            1073876996,
+            4,
+            0
+          ],
+          [
+            1073874136,
+            4,
+            324508665
+          ],
+          [
+            1073874136,
+            4,
+            324508409
+          ],
+          [
+            1073874136,
+            4,
+            324508377
+          ],
+          [
+            1073874136,
+            4,
+            324508381
+          ],
+          [
+            1073874136,
+            4,
+            324508383
+          ],
+          [
+            1073874136,
+            4,
+            2471992031
+          ],
+          [
+            1073874136,
+            4,
+            3545733855
+          ],
+          [
+            1073873328,
+            4,
+            326605791
+          ],
+          [
+            1073808384,
+            4,
+            115
+          ],
+          [
+            1073807420,
+            4,
+            2271560481
+          ],
+          [
+            1073808384,
+            4,
+            0
+          ],
+          [
+            1073873192,
+            4,
+            51482624
+          ],
+          [
+            1073873196,
+            4,
+            324508358
+          ],
+          [
+            1073758276,
+            4,
+            324508639
+          ],
+          [
+            1073873088,
+            4,
+            324508638
+          ],
+          [
+            1073776728,
+            4,
+            0
+          ],
+          [
+            1073776728,
+            4,
+            1525678080
+          ]
+        ],
+        "system_writes": [],
+        "mmio_final": {
+          "0x40008858": 1525678080,
+          "0x4000885c": 0,
+          "0x400200c0": 324508638,
+          "0x4002000c": 34,
+          "0x400201b0": 326605791,
+          "0x400204d8": 3545733855,
+          "0x400204e8": 324508635,
+          "0x40004044": 324508639,
+          "0x40004030": 16777216,
+          "0x4001003c": 2271560481,
+          "0x40010400": 0,
+          "0x40020120": 324508639,
+          "0x40020128": 51482624,
+          "0x4002012c": 324508358,
+          "0x40201000": 324508639,
+          "0x40208100": 324508639,
+          "0x40209100": 324508639,
+          "0x400b2000": 324508638,
+          "0x40210000": 274176991,
+          "0xe000ed14": 0,
+          "0xe000ed80": 24600,
+          "0xe000ed84": 0,
+          "0xe000ef74": 324508639
+        }
+      }
+    }
+  ]
+}

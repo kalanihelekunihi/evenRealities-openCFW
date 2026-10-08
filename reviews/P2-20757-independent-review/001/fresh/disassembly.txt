@@ -1,0 +1,50 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp71iqo22n/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047b780 <.text>:
+  47b780:	2101      	movs	r1, #1
+  47b782:	2000      	movs	r0, #0
+  47b784:	f7f9 fc46 	bl	475014 <.text-0x676c>
+  47b788:	f05f 0800 	movs.w	r8, #0
+  47b78c:	e003      	b.n	47b796 <.text+0x16>
+  47b78e:	f517 7780 	adds.w	r7, r7, #256	@ 0x100
+  47b792:	f118 0801 	adds.w	r8, r8, #1
+  47b796:	f1b8 0f0a 	cmp.w	r8, #10
+  47b79a:	f280 81e3 	bge.w	47bb64 <.text+0x3e4>
+  47b79e:	003c      	movs	r4, r7
+  47b7a0:	0021      	movs	r1, r4
+  47b7a2:	0028      	movs	r0, r5
+  47b7a4:	f057 f8d1 	bl	4d294a <.text+0x571ca>
+  47b7a8:	2800      	cmp	r0, #0
+  47b7aa:	d0f0      	beq.n	47b78e <.text+0xe>
+  47b7ac:	79a8      	ldrb	r0, [r5, #6]
+  47b7ae:	79a1      	ldrb	r1, [r4, #6]
+  47b7b0:	4288      	cmp	r0, r1
+  47b7b2:	d1ec      	bne.n	47b78e <.text+0xe>
+  47b7b4:	f7c1 fc8b 	bl	43d0ce <.text-0x3e6b2>
+  47b7b8:	0780      	lsls	r0, r0, #30
+  47b7ba:	d510      	bpl.n	47b7de <.text+0x5e>
+  47b7bc:	f8cd 8008 	str.w	r8, [sp, #8]
+  47b7c0:	f8df 0abc 	ldr.w	r0, [pc, #2748]	@ 47c280 <.text+0xb00>
+  47b7c4:	9001      	str	r0, [sp, #4]
+  47b7c6:	f240 7082 	movw	r0, #1922	@ 0x782
+  47b7ca:	9000      	str	r0, [sp, #0]
+  47b7cc:	f8df 3aac 	ldr.w	r3, [pc, #2732]	@ 47c27c <.text+0xafc>
+  47b7d0:	f8df 244c 	ldr.w	r2, [pc, #1100]	@ 47bc20 <.text+0x4a0>
+  47b7d4:	f8df 144c 	ldr.w	r1, [pc, #1100]	@ 47bc24 <.text+0x4a4>
+  47b7d8:	2004      	movs	r0, #4
+  47b7da:	f7c1 fecb 	bl	43d574 <.text-0x3e20c>
+  47b7de:	f7c1 fc76 	bl	43d0ce <.text-0x3e6b2>
+  47b7e2:	07c0      	lsls	r0, r0, #31
+  47b7e4:	d403      	bmi.n	47b7ee <.text+0x6e>
+  47b7e6:	f7c1 fc72 	bl	43d0ce <.text-0x3e6b2>
+  47b7ea:	0740      	lsls	r0, r0, #29
+  47b7ec:	d507      	bpl.n	47b7fe <.text+0x7e>
+  47b7ee:	f8df 2a94 	ldr.w	r2, [pc, #2708]	@ 47c284 <.text+0xb04>
+  47b7f2:	4643      	mov	r3, r8
+  47b7f4:	0011      	movs	r1, r2
+  47b7f6:	f05f 5082 	movs.w	r0, #272629760	@ 0x10400000
+  47b7fa:	f7c1 fb50 	bl	43ce9e <.text-0x3e8e2>

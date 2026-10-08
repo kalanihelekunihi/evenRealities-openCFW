@@ -1,0 +1,5 @@
+# Numeric alternate radix prefix in bounded reverse buffer
+
+Partial/unaccepted;132 instructionbytes483144..4831C8;continues4830DA48-byteframe. FlagsLRbit4clear(LSL27PL)→unresolved4831C8. Set: freshwordSP60 eighthargument→R8radix;flagsbit10set(LSL21MI)skipscountadjustment. OtherwiseiffullR0count!=0 and(count==R12precision OR count==R5width):decrementR0mod;ifresultnonzero andR8==16,decrementagain. No zero-byteerase;decrementschange insertionposition.
+
+IfR8==16 andflagsbit5clear andunsignedcount<32: R12=120,storelowbyte[R7+R0],R0++,branch4831BA. Otherwise ifR8==16 andflagsbit5set andcount<32: R12=88,storebyte,count++,branch4831BA. Otherwise ifR8==2 andcount<32:R12=98,storebyte,count++. Allpaths4831BA ifunsignedcount<32:R12=48,storeASCII0,count++;else skip. Fallthrough4831C8. Thusalternateflagmayappend0forotherradices;do not restrictunsupportedradixwithoutcallerproof. R12 formerlyprecisiongetsclobberedbyLSLflags and prefixstores. Preservefullradix/width comparisons,flagbit10countadjustment,ordered x/X/b then0writes inreversebuffer,individualbounds. No C,freeze,wholecoverage or equalityclaim.

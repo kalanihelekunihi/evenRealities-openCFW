@@ -1,0 +1,48 @@
+[
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm21-selector6-integrated/run_oracle.py",
+      "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm2_2-native/verify_dispatch_bindings.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm21-selector6-integrated/c528f8bed79c3d55ce1d2b47db974b28ed0f63240bd0cc8c8f6d17d1f09fb76e/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm21-selector6-integrated/c528f8bed79c3d55ce1d2b47db974b28ed0f63240bd0cc8c8f6d17d1f09fb76e/validation/regressions/dispatch-native.json"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm21-selector6-integrated/run_oracle.py\", line 29, in <module>\n    runpy.run_path(str(script),run_name='__main__')\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 294, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm2_2-native/verify_dispatch_bindings.py\", line 59, in <module>\n    if stock!=source:args.output.with_suffix('.failure.json').write_text(json.dumps(dict(name=name,fixture=f,stock=stock,source=source),indent=2));raise AssertionError((name,f,stock,source))\n                                                                                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ('dispatch', {'revision': 34, 'variant': 2, 'patch': 0, 'otp_selected': False, 'otp_power': False, 'read_value': 0}, {'profile': '0d60011f000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f001', 'extra_flags': '000000', 'ret': 0, 'writes': [[1073872936, 4, 0], [1073872936, 4, 1], [1073872992, 4, 32768], [1073872992, 4, 49152], [1073872992, 4, 57344], [1073775584, 4, 0], [1073775584, 4, 272], [1073775600, 4, 256], [1073775592, 4, 4294967295], [1073775596, 4, 4294967295], [1073774696, 4, 3221225472], [1073774688, 4, 1073741824]], 'events': [['ROM', 1107309424, 16], ['ROM', 1107309504, 4], ['ROM', 1107309536, 1]], 'output': 'a5a5a5a5', 'variant': '02000000', 'table': 'f1bd420001ba420055bf420000000000000000008dbd4200a1bd4200bdbd42000000000000000000000000009dae4200000000000000000000000000', 'flags': '010000000001', 'cache': '0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000', 'irq': 0}, {'profile': '0d60011f000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000f001', 'extra_flags': '000000', 'ret': 0, 'writes': [[1073872936, 4, 0], [1073872936, 4, 1], [1073872992, 4, 32768], [1073872992, 4, 49152], [1073872992, 4, 57344], [1073775584, 4, 0], [1073775584, 4, 272], [1073775600, 4, 256], [1073775592, 4, 4294967295], [1073775596, 4, 4294967295], [1073774696, 4, 3221225472], [1073774688, 4, 1073741824]], 'events': [['ROM', 1107309424, 16], ['ROM', 1107309504, 4], ['ROM', 1107309536, 1]], 'output': 'a5a5a5a5', 'variant': '02000000', 'table': 'f1bd420001ba420055bf420000000000000000008dbd4200a1bd4200bdbd4200000000000000000000000000b51d0300000000000000000000000000', 'flags': '010000000001', 'cache': '0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000', 'irq': 0})\n"
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm21-selector6-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm21-selector6-integrated/verify_selector3.py",
+      "--candidate",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm21-selector6-integrated/c528f8bed79c3d55ce1d2b47db974b28ed0f63240bd0cc8c8f6d17d1f09fb76e/candidate.elf",
+      "--frozen-base",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm21-selector6-integrated/c528f8bed79c3d55ce1d2b47db974b28ed0f63240bd0cc8c8f6d17d1f09fb76e/validation/selector3.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS integrated selector3: normalized initialized DATA; 7 direct fixtures; natural [19,7,6,6] callback\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm21-selector6-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm21-selector6-integrated/verify_selector17.py",
+      "--candidate",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm21-selector6-integrated/c528f8bed79c3d55ce1d2b47db974b28ed0f63240bd0cc8c8f6d17d1f09fb76e/candidate.elf",
+      "--frozen-base",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm21-selector6-integrated/c528f8bed79c3d55ce1d2b47db974b28ed0f63240bd0cc8c8f6d17d1f09fb76e/validation/selector17.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS scatter adapter output normalized to 1371 stock bytes; slot17 0x31fdd mask 0x707c14f walker args [[10, 9, 3, 1]] return [17, 1]\n",
+    "stderr": ""
+  }
+]

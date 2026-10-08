@@ -1,0 +1,6 @@
+from pathlib import Path
+import sys,subprocess,json,hashlib
+D=Path(__file__).resolve().parent;gcc=Path(sys.argv[1]);out=Path(sys.argv[2]);out.mkdir(parents=True,exist_ok=True);root=D.parents[1]/'components/touch';src=Path(sys.argv[3]) if len(sys.argv)>3 else root/'gesture_machine_offline/gesture.c';sources=[src,root/'gesture_speed_offline/speed.c',root/'config_bootstrap_offline/bootstrap.c'];flags=['-mcpu=cortex-m0plus','-mthumb','-Og','-ffreestanding','-fno-builtin','-ffunction-sections'];inc=['-I'+str(root/x) for x in ['gesture_machine_offline','gesture_speed_offline','config_bootstrap_offline','eeprom_offline','eeprom_init_offline']];objs=[]
+for i,s in enumerate(sources):
+ o=out/f'source{i}.o';subprocess.run([str(gcc),*flags,*inc,'-c',str(s),'-o',str(o)],check=True);objs.append(o)
+elf=out/'gesture.elf';subprocess.run([str(gcc.with_name('arm-none-eabi-ld')),'--gc-sections','-Ttext=0x100000','-e','touch_gesture_step',*[str(o) for o in objs],'-o',str(elf)],check=True);r={'elf_sha256':hashlib.sha256(elf.read_bytes()).hexdigest(),'source_sha256':{str(s):hashlib.sha256(s.read_bytes()).hexdigest() for s in sources},'flags':flags};(out/'receipt.json').write_text(json.dumps(r,indent=2)+'\n');print(r['elf_sha256'])

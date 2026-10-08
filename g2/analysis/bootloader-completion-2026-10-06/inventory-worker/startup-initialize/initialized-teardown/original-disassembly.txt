@@ -1,0 +1,32 @@
+Range 0042ddda..0042ddf2
+0042ddda 10b5         push {r4, lr}
+0042dddc dff87843     ldr.w r4, [pc, #0x378]
+0042dde0 a068         ldr r0, [r4, #8]
+0042dde2 0028         cmp r0, #0
+0042dde4 04d0         beq #0x42ddf0
+0042dde6 a068         ldr r0, [r4, #8]
+0042dde8 e8f70afa     bl #0x416200
+0042ddec 0020         movs r0, #0
+0042ddee a060         str r0, [r4, #8]
+0042ddf0 10bd         pop {r4, pc}
+Range 0042e3ca..0042e3e0
+0042e3ca 10b5         push {r4, lr}
+0042e3cc 274c         ldr r4, [pc, #0x9c]
+0042e3ce a068         ldr r0, [r4, #8]
+0042e3d0 0028         cmp r0, #0
+0042e3d2 04d0         beq #0x42e3de
+0042e3d4 a068         ldr r0, [r4, #8]
+0042e3d6 e7f713ff     bl #0x416200
+0042e3da 0020         movs r0, #0
+0042e3dc a060         str r0, [r4, #8]
+0042e3de 10bd         pop {r4, pc}
+Range 00416200..00416216
+00416200 38b5         push {r3, r4, r5, lr}
+00416202 0400         movs r4, r0
+00416204 fff711ff     bl #0x41602a
+00416208 0028         cmp r0, #0
+0041620a 02d0         beq #0x416212
+0041620c 7ff00505     mvns r5, #5
+00416210 11e0         b #0x416236
+00416212 002c         cmp r4, #0
+00416214 02d1         bne #0x41621c

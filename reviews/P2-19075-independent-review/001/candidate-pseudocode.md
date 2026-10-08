@@ -1,0 +1,5 @@
+# Selector-five tail 0x469036..0x46908C
+
+Partial/unaccepted; 86 instruction bytes. Inherit 24-byte PUSH frame from 0x468F24, R4 FULL original selector 5, R5 original R3. Fresh 0x43D0CE result bit1 enables diagnostic: SP4=literal 0x469164, SP0=594, R3=literal 0x469144, R2=literal 0x4690DC, R1=literal 0x4690E0, R0=3 -> 0x43D574. Separate fresh 0x43D0CE result bit0, or conditional third fresh result bit2, enables R1=literal 0x469168, R2=R1, R0=0x0C000000 and live R3 -> 0x43CE9E.
+
+At 0x469070 call 0x45A568 with live R0/R1/R2/R3. FULL result 1 loads R0=literal 0x469150 and calls 0x4ABD14 with live other arguments. Other full results skip this call. Both paths at 0x46907E call 0x4ABBA4 with their respective live arguments, preserving the path-dependent R0. Set R0=0, R1=literal 0x469124, store word zero at [R1]. Explicitly set R0=0 again and branch backward to shared POP at 0x469024, restoring R1/R2/R3/R4/R5/PC. SP0/SP4 may contain diagnostic line/context rather than original saved registers. Following aligned words at 0x46908C are excluded from executable pseudocode. No child contract, C implementation, runtime proof, or gate acceptance inferred.

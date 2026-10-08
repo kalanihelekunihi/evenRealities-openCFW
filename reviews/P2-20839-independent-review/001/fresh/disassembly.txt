@@ -1,0 +1,48 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpjmq8_vu4/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047cc60 <.text>:
+  47cc60:	bbbb      	cbnz	r3, 47ccd2 <.text+0x72>
+  47cc62:	b1e1      	cbz	r1, 47cc9e <.text+0x3e>
+  47cc64:	f5b2 3f80 	cmp.w	r2, #65536	@ 0x10000
+  47cc68:	f080 807e 	bcs.w	47cd68 <.text+0x108>
+  47cc6c:	2a02      	cmp	r2, #2
+  47cc6e:	d91e      	bls.n	47ccae <.text+0x4e>
+  47cc70:	468c      	mov	ip, r1
+  47cc72:	fbb1 f1f2 	udiv	r1, r1, r2
+  47cc76:	fb02 c311 	mls	r3, r2, r1, ip
+  47cc7a:	041b      	lsls	r3, r3, #16
+  47cc7c:	ea43 4310 	orr.w	r3, r3, r0, lsr #16
+  47cc80:	fbb3 fcf2 	udiv	ip, r3, r2
+  47cc84:	fb02 331c 	mls	r3, r2, ip, r3
+  47cc88:	b280      	uxth	r0, r0
+  47cc8a:	ea40 4303 	orr.w	r3, r0, r3, lsl #16
+  47cc8e:	fbb3 f0f2 	udiv	r0, r3, r2
+  47cc92:	fb02 3210 	mls	r2, r2, r0, r3
+  47cc96:	ea40 400c 	orr.w	r0, r0, ip, lsl #16
+  47cc9a:	2300      	movs	r3, #0
+  47cc9c:	4770      	bx	lr
+  47cc9e:	2a02      	cmp	r2, #2
+  47cca0:	d905      	bls.n	47ccae <.text+0x4e>
+  47cca2:	4684      	mov	ip, r0
+  47cca4:	fbb0 f0f2 	udiv	r0, r0, r2
+  47cca8:	fb02 c210 	mls	r2, r2, r0, ip
+  47ccac:	4770      	bx	lr
+  47ccae:	b14a      	cbz	r2, 47ccc4 <.text+0x64>
+  47ccb0:	d105      	bne.n	47ccbe <.text+0x5e>
+  47ccb2:	f000 0201 	and.w	r2, r0, #1
+  47ccb6:	0849      	lsrs	r1, r1, #1
+  47ccb8:	ea5f 0030 	movs.w	r0, r0, rrx
+  47ccbc:	4770      	bx	lr
+  47ccbe:	2200      	movs	r2, #0
+  47ccc0:	2300      	movs	r3, #0
+  47ccc2:	4770      	bx	lr
+  47ccc4:	f055 bf68 	b.w	4d2b98 <.text+0x55f38>
+  47ccc8:	000b      	movs	r3, r1
+  47ccca:	0002      	movs	r2, r0
+  47cccc:	2100      	movs	r1, #0
+  47ccce:	2000      	movs	r0, #0
+  47ccd0:	4770      	bx	lr

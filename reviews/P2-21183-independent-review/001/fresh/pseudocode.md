@@ -1,0 +1,5 @@
+# Sparse-index protected query with two output stores
+
+Partial/unaccepted;126 instruction bytes481574..4815F2. STMDB R2,R3,R4,R5,R6,R7,R8,LR32. R7fullentryR0index,R6entryR1maskenable,R4entryR2output,R5status0. Nulloutput orindex<56unsigned orunsigned(index-63mod2^32)<62 orindex>=132→return6,nowrites/helper. Acceptedindicesexact56..62or125..131. BankR1=0forindex<63else1;normalizedn=index-69*bank-56mod2^32 (MVN68 gives-69). Offset=16*n+112*bankmod2^32. R8=pointerliteral481768+offset;R7=pointerliteral4817A0+offset. Call473940 withR0basepointer4817A0,R1bank,R2offset,liveR3;savefullresultSP0 overwritesentryR2.
+
+UXTBmaskenable nonzero→freshword[R8],zero→FFFFFFFF;storeword[R4] first. Then freshword[R4]→R1 BEFOREfreshword[R7]→R0;AND andstoreword[R4] again. Preservetwooutputstoresandoutputreload;aliaswithtargetcanchangequeryresult. ReloadSP0 MSR PRIMASK;R0=R5zero. CommonLDMIA R1,R2,R4,R5,R6,R7,R8,PC32: R1helperresultonsuccess,entryR2onerror;R2savedentryR3 unlessaliasmutated. No single-storecollapse,nullguardfortargets, C/freeze/fullcoverage/equality claim.

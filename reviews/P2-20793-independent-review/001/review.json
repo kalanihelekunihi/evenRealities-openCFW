@@ -1,0 +1,10 @@
+{
+  "id": "P2-20793",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "102B: 0x11C00000 mask path reads byte6 then bytes0..5. At eligible loop tail, first fresh word196 is unsigned-compared against R5; only lower values trigger a separate reload into R5 and R7=R9. Second independent word196 read compares against R6; only greater values trigger separate reload into R6 and R8=R9. All outcomes join BDEE. No value stability or monotonicity assumption."
+}

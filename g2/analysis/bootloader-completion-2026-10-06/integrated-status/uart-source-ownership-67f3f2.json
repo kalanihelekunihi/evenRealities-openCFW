@@ -1,0 +1,140 @@
+{
+  "utc": "2026-10-07T03:51:04.688808+00:00",
+  "image_sha256": "67f3f209bc1867dbb2a995e7805dd756105f05bae31831d86e61bda7df689796",
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "functions": [
+    {
+      "symbol": "opencfw_bl_post_context_register",
+      "original_entry": "0x422ad4",
+      "original_end_exclusive": "0x422ba8",
+      "source_entry": "0x34e94",
+      "compiled_function_bytes": 146,
+      "original_body_bytes": 212,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_boot_control_power_apply",
+      "original_entry": "0x422ba8",
+      "original_end_exclusive": "0x422d20",
+      "source_entry": "0x170b4",
+      "compiled_function_bytes": 38,
+      "original_body_bytes": 376,
+      "ownership": "reused-guard-plus-new-accepted-body",
+      "accepted_source_entry": "0x3501c",
+      "accepted_compiled_bytes": 324
+    },
+    {
+      "symbol": "opencfw_bl_post_activate",
+      "original_entry": "0x422dc6",
+      "original_end_exclusive": "0x422e28",
+      "source_entry": "0x34f40",
+      "compiled_function_bytes": 124,
+      "original_body_bytes": 98,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_boot_uart_baud",
+      "original_entry": "0x422e28",
+      "original_end_exclusive": "0x422ee0",
+      "source_entry": "0x35160",
+      "compiled_function_bytes": 778,
+      "original_body_bytes": 184,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_post_validate",
+      "original_entry": "0x42308e",
+      "original_end_exclusive": "0x4232c8",
+      "source_entry": "0x3546c",
+      "compiled_function_bytes": 480,
+      "original_body_bytes": 570,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_post_finish",
+      "original_entry": "0x4236ce",
+      "original_end_exclusive": "0x4236fa",
+      "source_entry": "0x34fbc",
+      "compiled_function_bytes": 46,
+      "original_body_bytes": 44,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_boot_uart_interrupt_clear",
+      "original_entry": "0x423700",
+      "original_end_exclusive": "0x42372a",
+      "source_entry": "0x34fec",
+      "compiled_function_bytes": 48,
+      "original_body_bytes": 42,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_boot_uart_ring_initialize",
+      "original_entry": "0x4275ea",
+      "original_end_exclusive": "0x427602",
+      "source_entry": "0x34f28",
+      "compiled_function_bytes": 24,
+      "original_body_bytes": 24,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_post_precommit",
+      "original_entry": "0x41f4f4",
+      "original_end_exclusive": "0x41f512",
+      "source_entry": "0x35670",
+      "compiled_function_bytes": 36,
+      "original_body_bytes": 30,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_post_enable",
+      "original_entry": "0x41f512",
+      "original_end_exclusive": "0x41f530",
+      "source_entry": "0x3564c",
+      "compiled_function_bytes": 36,
+      "original_body_bytes": 30,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_register_mode",
+      "original_entry": "0x41f530",
+      "original_end_exclusive": "0x41f558",
+      "source_entry": "0x35694",
+      "compiled_function_bytes": 44,
+      "original_body_bytes": 40,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_boot_control_mode_one",
+      "original_entry": "0x41f8ba",
+      "original_end_exclusive": "0x41f918",
+      "source_entry": "0x1706c",
+      "compiled_function_bytes": 72,
+      "original_body_bytes": 94,
+      "ownership": "reused-native-body"
+    }
+  ],
+  "direct_mapped_body_bytes": 1652,
+  "visited_direct_mapped_body_bytes": 1652,
+  "direct_cases": 1040,
+  "source": "g2/components/bootloader/initializer_callbacks/uart_context.c",
+  "source_sha256": "ef546603b29f9e5b9e1646ad68526d4acbebac1c050828a618286bd33d4bb0d7",
+  "header_sha256": "d3e0fc81a071c19d83656c2a406c99531f3ff05b2d5b5142622573c802d7abcf",
+  "validation": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-context-67f3f2.json",
+  "static_pool": {
+    "address": "0x20024400",
+    "bytes": 1136,
+    "contexts": 4,
+    "stride": 284
+  },
+  "limits": [
+    "Original and source constructor/config/borrowed ring/baud/interrupt/NVIC instructions execute; native power and class4 clock children execute.",
+    "Resident ROM40 cycle wait is controlled; power status and UART/NVIC MMIO are fixed RAM. No physical acknowledgement, IRQ delivery, DMA, scheduler or buffer-drain proof.",
+    "Class6 feature disabled exercises its native error branch, whose status UART ignores; PLL enabled behavior is outside this fixture.",
+    "UART division uses a source specialization for the observed 64/32 ABI; the general 42287c helper is not claimed implemented. UDIV trap disabled, including zero divisor.",
+    "Stack-local clock callback addresses are normalized after mapped bounds check; no asynchronous lifetime proof.",
+    "No allocator is called. Reinitialization retains unrelated context bytes and never frees borrowed buffers.",
+    "Shared row callback41f8ba reused native source; direct UART suite does not call this row wrapper. Seven-case shared validation must establish its actual visitation separately.",
+    "General64-bit division42287c is not fully mapped; UART source specializes only the observed64/32 contract. Native power wrapper mapping owns its existing guard and newly implemented accepted helper together."
+  ]
+}

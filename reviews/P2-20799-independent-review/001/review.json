@@ -1,0 +1,10 @@
+{
+  "id": "P2-20799",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "74B fresh replay passed. Logger diagnostics use explicit context pointers and code2048; mask path calls 43CE9E with mask0x10000000 and live R3, with no explicit setup of R3/fifth stack arg in this block. Epilogue adds 36 and pops eight saved registers plus PC, completing the 72-byte frame while preserving the current live R0; no normalized return is assigned."
+}

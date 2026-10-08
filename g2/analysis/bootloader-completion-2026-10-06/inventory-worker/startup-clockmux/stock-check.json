@@ -1,0 +1,33 @@
+{
+  "status": "PASS",
+  "mode": "static original-instruction checks; direct children cut at BL",
+  "stock_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "load_address": "0x410000",
+  "function_range": [
+    "0x41acb2",
+    "0x41b04c"
+  ],
+  "function_bytes": 922,
+  "callee_addresses": [
+    "0x41bf84",
+    "0x41c17a",
+    "0x41ca5c",
+    "0x41caa2",
+    "0x41d1c0",
+    "0x41d246",
+    "0x41d3e4",
+    "0x41d90e",
+    "0x41d92c",
+    "0x41e348"
+  ],
+  "caller_r5_carry": {
+    "load_site": "0x41c606",
+    "literal": "0x41cb5c",
+    "incoming_value": "0x20027064",
+    "gpio_bfi_site": "0x41ae1a"
+  },
+  "limits": [
+    "This receipt is static boundary/disassembly validation; native-comparison.json is the separate dynamic stock-versus-C cut test.",
+    "Child behavior is outside both parent-level checks; no child-cut result is called a whole-function source-closure comparison."
+  ]
+}

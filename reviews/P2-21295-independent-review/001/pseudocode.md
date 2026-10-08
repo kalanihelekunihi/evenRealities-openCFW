@@ -1,0 +1,5 @@
+# Empty-endpoint predicate, clear wrapper and computed link writes
+
+Partial/unaccepted;80 instructionbytes482D88..482DD8. Frameless482D88 nullR0descriptorreturns1withoutreads;otherwisefreshword[R0+4]→R1,nonnullreturns0withoutsecondfieldread. Zero firstfieldfreshword[R0+8]→R0;zero returns1,nonnull0;BXLR. Separate482DA4 PUSH{R7,LR}8bytes,R1=0,call482C9A withentryR0/liveR2/R3;POP{R0,PC}returns savedentryR7 overridingtraversalresult.
+
+482DAE PUSH{R2}4bytes first,beforetestingfullR1node. Nullnode skipall descriptorreads/writes,ADDSP4,BXLR,retainR0/R1. Nonnull freshword[entryR0descriptor]→R0,R0+=entryR1mod2^32,R1=SP,freshword[SP]→R1savedentryR2,storefullR1[R0];ADDSP4,BXLR. 482DC2 samebutR0+=4mod afterdescriptoroffset+node. BothhelpersR2retained,nonnullreturns computedstoreaddressR0 andsavedvalueR1;no descriptor/null/offsetguard. Stackfreshread participatesalias-sensitiveordering. Thesewritesresolve nodehelpermemoryeffects atnode+descriptorword andnode+descriptorword+4; do notassumefixedoffset. No C,freeze,wholecoverage or equalityclaim.

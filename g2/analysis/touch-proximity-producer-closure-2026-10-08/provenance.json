@@ -1,0 +1,22 @@
+{
+  "artifact": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+  "wrapper_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "runtime_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "runtime_base": "0x3300",
+  "widget2": "0xb218",
+  "context": "0x200005c0",
+  "factory_context_fields": {
+    "finger_threshold": 1000,
+    "proximity_threshold": 160,
+    "negative_reset": 30,
+    "noise": 40,
+    "negative_noise": 40,
+    "hysteresis": 10,
+    "on_debounce": 3,
+    "baseline_iir_coefficient": 1
+  },
+  "raw_flags": "0x3696",
+  "software_raw_coefficient": 64,
+  "source_comparator": "https://github.com/Infineon/capsense/blob/247a9a0f79eb976f144f5fbeb29488c1c2606517/cy_capsense_processing.c",
+  "claims": "Independent semantic reconstruction, not exact upstream attribution or byte-identical firmware"
+}

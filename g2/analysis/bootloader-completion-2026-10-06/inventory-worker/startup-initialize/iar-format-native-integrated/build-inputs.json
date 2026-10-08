@@ -1,0 +1,78 @@
+{
+  "flags": [
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m33",
+    "-mthumb",
+    "-mfloat-abi=softfp",
+    "-mfpu=fpv5-d16",
+    "-O2",
+    "-ffreestanding",
+    "-fno-builtin"
+  ],
+  "new_sources": [
+    {
+      "source": "g2/components/bootloader/initializer_callbacks/iar_format_native/engine.c",
+      "source_sha256": "b5127b99383c750f462417625d64f7310989b52f6cf5a06379f5234a523c38c0",
+      "object": "/tmp/opencfw-iar-format-integrated/engine.o",
+      "object_sha256": "7314b0b2cdeef47b96e87ced64cd6c2518d4859f74cb576282e18dd47f4b99c9"
+    },
+    {
+      "source": "g2/components/bootloader/initializer_callbacks/iar_format_native/entry.c",
+      "source_sha256": "a703521489477980cedcc0d26f1b3713f0e2392deb984f6c1792315e431a83f0",
+      "object": "/tmp/opencfw-iar-format-integrated/entry.o",
+      "object_sha256": "f969ff6938e4b324eabf1abab994258089337711077fb7bde75a2f1d7ad72868"
+    },
+    {
+      "source": "g2/components/bootloader/initializer_callbacks/iar_format_native/termination.c",
+      "source_sha256": "10aacb73b244cb9b0ea0c244f1443691bf16bdb6524ea4dda01ef5d5968596fe",
+      "object": "/tmp/opencfw-iar-format-integrated/termination.o",
+      "object_sha256": "266fdab2fdfe78e2102054fc3a66328b6735ce1ce23d660f460b2a5c4e62eecd"
+    },
+    {
+      "source": "g2/components/bootloader/initializer_callbacks/iar_format_native/fp_primitives.c",
+      "source_sha256": "0b3f18db7d571268ad7e2833f5b68667d30b79f818d54c44f061b343c822d57e",
+      "object": "/tmp/opencfw-iar-format-integrated/fp_primitives.o",
+      "object_sha256": "2c3fadbca2caa87aeb2ca9b5b9aacd00e9e48f70392eaf0744cded3bfd8fa577"
+    },
+    {
+      "source": "g2/components/bootloader/initializer_callbacks/iar_format_native/float_render.c",
+      "source_sha256": "c548777ac0d4f0547dde5bf34d1eb1787655ca4b87cd7c1bb2cb710c7c5af0bb",
+      "object": "/tmp/opencfw-iar-format-integrated/float_render.o",
+      "object_sha256": "0ff11f2d33af4a46c072aebc4d0a48bf67593ed53a93fe0878565e94f61f5818"
+    },
+    {
+      "source": "g2/components/bootloader/initializer_callbacks/iar_format_native/format_parser.c",
+      "source_sha256": "f9f782b6eb070a0ef9acbd5ea5c53aad69f5364b574d12b03cf904c26e1e6f23",
+      "object": "/tmp/opencfw-iar-format-integrated/format_parser.o",
+      "object_sha256": "9ebeeadd8a9da8d8c55edcc7f85c91386890d33f77f8478b9ded5f01651550d2"
+    },
+    {
+      "source": "g2/components/bootloader/initializer_callbacks/iar_format_native/integer_cursor.c",
+      "source_sha256": "135e1abf0ae9f9b0b267c30a90ae3eabe429faca45deb69094e63f270f832bb5",
+      "object": "/tmp/opencfw-iar-format-integrated/integer_cursor.o",
+      "object_sha256": "6b60c277ac61bdd2d18a0ef072a4f509d128a11688095b2ee57fd8f008f356f2"
+    },
+    {
+      "source": "g2/components/bootloader/initializer_callbacks/iar_format_native/integer_render.c",
+      "source_sha256": "eb85bd1e64d27c8db503e9de7c3d7f1b44732d08eb81b61cca6db4f1084c9805",
+      "object": "/tmp/opencfw-iar-format-integrated/integer_render.o",
+      "object_sha256": "963bfe54bd6fe2effe502a3c4567452d31e79beea70f13de636c5f2eb2449de5"
+    }
+  ],
+  "previous_candidate": "0b80d612fe52fd296eae01d1e304daf8769df2a6847f8649ebfe787c3108d419",
+  "sources": {
+    "g2/components/bootloader/initializer_callbacks/iar_format_native/engine.h": "ab5af1aa509c7737818cbce322212233fb45efff834ca6ed53ef80d8e50b43e8",
+    "g2/components/bootloader/initializer_callbacks/iar_format_native/fp_primitives.c": "0b3f18db7d571268ad7e2833f5b68667d30b79f818d54c44f061b343c822d57e",
+    "g2/components/bootloader/initializer_callbacks/iar_format_native/format_parser.c": "f9f782b6eb070a0ef9acbd5ea5c53aad69f5364b574d12b03cf904c26e1e6f23",
+    "g2/components/bootloader/initializer_callbacks/iar_format_native/record.h": "73111e0258212cde368be3c50916b97da0d857f738d8f07315fb1032d39b6eaf",
+    "g2/components/bootloader/initializer_callbacks/iar_format_native/integer_cursor.c": "135e1abf0ae9f9b0b267c30a90ae3eabe429faca45deb69094e63f270f832bb5",
+    "g2/components/bootloader/initializer_callbacks/iar_format_native/termination.c": "10aacb73b244cb9b0ea0c244f1443691bf16bdb6524ea4dda01ef5d5968596fe",
+    "g2/components/bootloader/initializer_callbacks/iar_format_native/engine.c": "b5127b99383c750f462417625d64f7310989b52f6cf5a06379f5234a523c38c0",
+    "g2/components/bootloader/initializer_callbacks/iar_format_native/format_parser.h": "add37db12a0236f35a534c59cbcb047f9666137fcc3be89faf22bef253b96cbb",
+    "g2/components/bootloader/initializer_callbacks/iar_format_native/integer_render.c": "eb85bd1e64d27c8db503e9de7c3d7f1b44732d08eb81b61cca6db4f1084c9805",
+    "g2/components/bootloader/initializer_callbacks/iar_format_native/entry.c": "a703521489477980cedcc0d26f1b3713f0e2392deb984f6c1792315e431a83f0",
+    "g2/components/bootloader/initializer_callbacks/iar_format_native/float_render.c": "c548777ac0d4f0547dde5bf34d1eb1787655ca4b87cd7c1bb2cb710c7c5af0bb",
+    "g2/components/bootloader/initializer_callbacks/iar_format_native/integer_cursor.h": "1ff0a041c06a10b60b96c53030e0c3070aab604f2ad251c0be93ad6bad563fb4"
+  },
+  "linker_sha256": "9c7601b5df0fafcc1dc6be7f6028b605be07d4b06a78632348f1fc921154dac6"
+}

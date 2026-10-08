@@ -1,0 +1,53 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpj9hu_nl0/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+004687b4 <.text>:
+  4687b4:	2c00      	cmp	r4, #0
+  4687b6:	d030      	beq.n	46881a <.text+0x66>
+  4687b8:	7820      	ldrb	r0, [r4, #0]
+  4687ba:	0039      	movs	r1, r7
+  4687bc:	b2c9      	uxtb	r1, r1
+  4687be:	4288      	cmp	r0, r1
+  4687c0:	d02b      	beq.n	46881a <.text+0x66>
+  4687c2:	0038      	movs	r0, r7
+  4687c4:	b2c0      	uxtb	r0, r0
+  4687c6:	f015 fe53 	bl	47e470 <.text+0x15cbc>
+  4687ca:	f7d4 fc80 	bl	43d0ce <.text-0x2b6e6>
+  4687ce:	0780      	lsls	r0, r0, #30
+  4687d0:	d511      	bpl.n	4687f6 <.text+0x42>
+  4687d2:	0038      	movs	r0, r7
+  4687d4:	b2c0      	uxtb	r0, r0
+  4687d6:	9003      	str	r0, [sp, #12]
+  4687d8:	7820      	ldrb	r0, [r4, #0]
+  4687da:	9002      	str	r0, [sp, #8]
+  4687dc:	f8df 08cc 	ldr.w	r0, [pc, #2252]	@ 4690ac <.text+0x8f8>
+  4687e0:	9001      	str	r0, [sp, #4]
+  4687e2:	f240 1045 	movw	r0, #325	@ 0x145
+  4687e6:	9000      	str	r0, [sp, #0]
+  4687e8:	f8df 371c 	ldr.w	r3, [pc, #1820]	@ 468f08 <.text+0x754>
+  4687ec:	4a92      	ldr	r2, [pc, #584]	@ (468a38 <.text+0x284>)
+  4687ee:	4993      	ldr	r1, [pc, #588]	@ (468a3c <.text+0x288>)
+  4687f0:	2003      	movs	r0, #3
+  4687f2:	f7d4 febf 	bl	43d574 <.text-0x2b240>
+  4687f6:	f7d4 fc6a 	bl	43d0ce <.text-0x2b6e6>
+  4687fa:	07c0      	lsls	r0, r0, #31
+  4687fc:	d403      	bmi.n	468806 <.text+0x52>
+  4687fe:	f7d4 fc66 	bl	43d0ce <.text-0x2b6e6>
+  468802:	0740      	lsls	r0, r0, #29
+  468804:	d509      	bpl.n	46881a <.text+0x66>
+  468806:	f8df 18a8 	ldr.w	r1, [pc, #2216]	@ 4690b0 <.text+0x8fc>
+  46880a:	b2ff      	uxtb	r7, r7
+  46880c:	9700      	str	r7, [sp, #0]
+  46880e:	7823      	ldrb	r3, [r4, #0]
+  468810:	000a      	movs	r2, r1
+  468812:	f05f 6048 	movs.w	r0, #209715200	@ 0xc800000
+  468816:	f7d4 fb42 	bl	43ce9e <.text-0x2b916>
+  46881a:	0028      	movs	r0, r5
+  46881c:	b2c0      	uxtb	r0, r0
+  46881e:	f015 fe7d 	bl	47e51c <.text+0x15d68>
+  468822:	2000      	movs	r0, #0
+  468824:	f7ff fc19 	bl	46805a <.text-0x75a>
+  468828:	e0fe      	b.n	468a28 <.text+0x274>

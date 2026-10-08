@@ -1,0 +1,103 @@
+{
+  "status": "PASS_EXACT_SELECTED_PDL_PROVIDER_BYTES",
+  "version": "1.3.0",
+  "pin": "0a9781309e0e1832d12e99cdf1d0f75843396a76",
+  "functions": [
+    {
+      "function": "read_size",
+      "address": "0x4780",
+      "bytes": 4,
+      "exact": true,
+      "source_linked_sha256": "64d23481cb6a254816fb9c4c9b22031f78ed0a6ece5a6b0f6849a3ee7f77a2bb",
+      "stock_sha256": "64d23481cb6a254816fb9c4c9b22031f78ed0a6ece5a6b0f6849a3ee7f77a2bb",
+      "mismatch_offsets": []
+    },
+    {
+      "function": "program_size",
+      "address": "0x4784",
+      "bytes": 4,
+      "exact": true,
+      "source_linked_sha256": "827664d7a48fb1b0d798876a8dc606e50de666cda171d709af4e14adbc6769cc",
+      "stock_sha256": "827664d7a48fb1b0d798876a8dc606e50de666cda171d709af4e14adbc6769cc",
+      "mismatch_offsets": []
+    },
+    {
+      "function": "erase_size",
+      "address": "0x4788",
+      "bytes": 4,
+      "exact": true,
+      "source_linked_sha256": "827664d7a48fb1b0d798876a8dc606e50de666cda171d709af4e14adbc6769cc",
+      "stock_sha256": "827664d7a48fb1b0d798876a8dc606e50de666cda171d709af4e14adbc6769cc",
+      "mismatch_offsets": []
+    },
+    {
+      "function": "erase_value",
+      "address": "0x478c",
+      "bytes": 4,
+      "exact": true,
+      "source_linked_sha256": "a7ddd513d149ea16fdd4db3f82267f83087aeaddd06b5dde5468adb704205fc4",
+      "stock_sha256": "a7ddd513d149ea16fdd4db3f82267f83087aeaddd06b5dde5468adb704205fc4",
+      "mismatch_offsets": []
+    },
+    {
+      "function": "is_in_range",
+      "address": "0x4790",
+      "bytes": 26,
+      "exact": true,
+      "source_linked_sha256": "34d29269b688544ba949a8a1589744dfc00a8b9225b7759c751fcba94da396b5",
+      "stock_sha256": "34d29269b688544ba949a8a1589744dfc00a8b9225b7759c751fcba94da396b5",
+      "mismatch_offsets": []
+    },
+    {
+      "function": "is_erase_required",
+      "address": "0x47aa",
+      "bytes": 4,
+      "exact": true,
+      "source_linked_sha256": "a7ddd513d149ea16fdd4db3f82267f83087aeaddd06b5dde5468adb704205fc4",
+      "stock_sha256": "a7ddd513d149ea16fdd4db3f82267f83087aeaddd06b5dde5468adb704205fc4",
+      "mismatch_offsets": []
+    },
+    {
+      "function": "erase",
+      "address": "0x47b0",
+      "bytes": 96,
+      "exact": true,
+      "source_linked_sha256": "697bc60287c24325691dd0fc5e84e8e00c31adf36e3d9ace9e71de8326393d35",
+      "stock_sha256": "697bc60287c24325691dd0fc5e84e8e00c31adf36e3d9ace9e71de8326393d35",
+      "mismatch_offsets": []
+    },
+    {
+      "function": "program",
+      "address": "0x4810",
+      "bytes": 80,
+      "exact": true,
+      "source_linked_sha256": "dad3455d138b0f929ea25ee05c7b1e80d1c30a4c202629931da4cabab00cae4a",
+      "stock_sha256": "dad3455d138b0f929ea25ee05c7b1e80d1c30a4c202629931da4cabab00cae4a",
+      "mismatch_offsets": []
+    },
+    {
+      "function": "read",
+      "address": "0x4860",
+      "bytes": 12,
+      "exact": true,
+      "source_linked_sha256": "1a586e27e01bb88464842bfddca5cbffebd1eb098f9d717133855e73ce132a95",
+      "stock_sha256": "1a586e27e01bb88464842bfddca5cbffebd1eb098f9d717133855e73ce132a95",
+      "mismatch_offsets": []
+    },
+    {
+      "function": "create",
+      "address": "0x486c",
+      "bytes": 96,
+      "exact": true,
+      "source_linked_sha256": "492363fcf53e213d91e569d048a083a789bbe8f9aae949d22e5499d922b25090",
+      "stock_sha256": "492363fcf53e213d91e569d048a083a789bbe8f9aae949d22e5499d922b25090",
+      "mismatch_offsets": []
+    }
+  ],
+  "exact_bytes": 330,
+  "limits": [
+    "All ten unmodified public provider bodies, literal data and resolved relocations matchstock.",
+    "External driver/division/memory aliases are contracts; not included in provider330-byte sourceattribution.",
+    "Not unique producing version proof; no physicalflash/source-complete claim."
+  ]
+}

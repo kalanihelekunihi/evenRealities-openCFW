@@ -1,0 +1,3 @@
+# TLSF pool and mutex failure diagnostic strings
+
+Partial/unaccepted;64 exactdata bytes in two NUL-terminated strings. 75165C..75167F ASCII TLSF memory pool creation failed! followednewline0AandNUL00 (35B). 75D650..75D66D ASCII TLSF mutex creation failed! followednewline0AandNUL00 (29B). Literals484360/484364pointrespectivelyhere;map21798passesfirstto4733EEwhen4D06ECreturnsnull andsecondwhen4416D6returnsnull,thenobservedselfloops. StringsprovideauthoritativeTLSFpool/mutexnamingevidence; fullhelpercontractsremainseparate. No bytesafterNULclaimed,paddingownershippending. No C,freeze,wholecoverage or equalityclaim.

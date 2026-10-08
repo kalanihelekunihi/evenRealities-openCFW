@@ -1,0 +1,1 @@
+31 nonoverlapping mapped bodies / 8,668 original bytes. Inherits 29-body formatter ledger; adds CMSIS/kernel delay94 bytes. A bounded lower bound, not whole-payload completeness. Native scheduler/list memory and PendSV requests compare; exception delivery, physical elapsed time and arbitrary scheduling are unproved.

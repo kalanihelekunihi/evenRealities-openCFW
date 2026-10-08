@@ -1,0 +1,3 @@
+# Pool468A30..468A40
+
+Partial,unaccepted;16non-codebytes,fouralignedlittle-endianwords. PrecedingPOP PC468A2Eexcludesfallthrough;nextentry468A40excluded. KnownPC-relativeconsumers19394..19438 corroboratepool;exactvaluesandknownreferenceaddressesstored,no exhaustiveinstructionconsumer orpointedobjectcontractclaim. ForcedThumbmnemonics notexecutableevidence. No C/runtime/gates.

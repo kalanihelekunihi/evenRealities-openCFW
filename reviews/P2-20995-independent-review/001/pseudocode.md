@@ -1,0 +1,5 @@
+# Infinite callback driver and wrapping comparison dispatch
+
+Partial/unaccepted;122instructionbytes47E878..47E8F2,twoentries.
+E878 PUSH R7,LR8 once;infinite loop47E8F2(SP,liveargs),thenfreshSP0→R1;47E88C(fullreturnR0,R1,liveR2,R3);47E97A(liveargs);branchE87A. Noepilogue/return or repeatedframegrowth;SP0initialsavedentryR7 exposedtohelperwrites. Confirms21384addressE879ThumbentryE878.
+E88C PUSH R2,R3,R4,R5,R6,LR24;R5=entryR0,R4=entryR1;454D7C(liveargs);47E916(SP,liveargs)→R6fullresult. FreshSP0nonzero→454DCC(liveargs),return. FreshSP0zero: ifR4zeroANDunsignedR6>=R5→454DCC(liveargs),47E83A(entryR0,R6,liveargs),return. OtherwiseifR4nonzero: freshword[pointerliteralEB7C],thenfreshword[resultpointer];zero→R4=1,nonzero→R4=0. OriginalR4zero remainszeroonthispath. R5=(entryR0-R6)modulo2^32;442030(freshword[pointerEB6C],R5,R4,liveR3);454DCC(liveargs);fullreturnedR0zero→4420BC(liveargs),nonzero skips. ReturnPOP R0,R1,R4,R5,R6,PC24: R0=SP0,R1=SP4 (initiallysavedentryR2/R3,subject47E916andothercallee writes),not lasthelperresult. Preserve unsignedcomparisonandwrappingsubtraction, distinctcalls. No C/freeze/completenessclaim;helpersremainingunresolved.

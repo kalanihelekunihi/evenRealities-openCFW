@@ -1,0 +1,4 @@
+# Record word196 index diagnostics2039
+
+Partial/unaccepted;88instructionbytes,inherited72-byteframe,R10recordpointer,R9fullindexfrompendingloop. At0x47BD38query43D0CEwithliveargs;bit1zero skips0x47BD68;otherwisefreshfullword[R10+196]SP12,fullR9 SP8,literal47C564 SP4,2039 SP0;call43D574(4,literal47C548,literal47C544,literal47C540,fifth2039,sixthliteral47C564,seventhfullindex,eighthfreshword196).
+At0x47BD68queryfreshstatus;bit0oneenters0x47BD78,otherwisequeryagainandbit2zero skips0x47BD8E. MaskpathR1literal47C8A8,independentlyfreshword[R10+196]SP0,R3fullR9,R2sameR1;call43CE9E(0x10800000,R1,R2,fullindex,fifthfreshword196). At0x47BD8Ebranchpending0x47BDEE. LocalsSP0..12not savedregisterslots;no cachedword196or inferredfieldcontract. No C,freezeorcompletenessclaim.

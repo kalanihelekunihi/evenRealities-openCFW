@@ -1,0 +1,45 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpx4ytv73q/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0048320a <.text>:
+  48320a:	e92d 41f8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, lr}
+  48320e:	b08f      	sub	sp, #60	@ 0x3c
+  483210:	0004      	movs	r4, r0
+  483212:	9816      	ldr	r0, [sp, #88]	@ 0x58
+  483214:	9d1b      	ldr	r5, [sp, #108]	@ 0x6c
+  483216:	2700      	movs	r7, #0
+  483218:	2800      	cmp	r0, #0
+  48321a:	d101      	bne.n	483220 <.text+0x16>
+  48321c:	f035 0510 	bics.w	r5, r5, #16
+  483220:	9e18      	ldr	r6, [sp, #96]	@ 0x60
+  483222:	ea5f 5c45 	movs.w	ip, r5, lsl #21
+  483226:	d501      	bpl.n	48322c <.text+0x22>
+  483228:	2800      	cmp	r0, #0
+  48322a:	d025      	beq.n	483278 <.text+0x6e>
+  48322c:	fbb0 fcf6 	udiv	ip, r0, r6
+  483230:	fb06 0c1c 	mls	ip, r6, ip, r0
+  483234:	46be      	mov	lr, r7
+  483236:	f11e 0701 	adds.w	r7, lr, #1
+  48323a:	46e0      	mov	r8, ip
+  48323c:	fa5f f888 	uxtb.w	r8, r8
+  483240:	f1b8 0f0a 	cmp.w	r8, #10
+  483244:	da02      	bge.n	48324c <.text+0x42>
+  483246:	f11c 0c30 	adds.w	ip, ip, #48	@ 0x30
+  48324a:	e00b      	b.n	483264 <.text+0x5a>
+  48324c:	ea5f 6885 	movs.w	r8, r5, lsl #26
+  483250:	d502      	bpl.n	483258 <.text+0x4e>
+  483252:	f05f 0841 	movs.w	r8, #65	@ 0x41
+  483256:	e001      	b.n	48325c <.text+0x52>
+  483258:	f05f 0861 	movs.w	r8, #97	@ 0x61
+  48325c:	eb1c 0c08 	adds.w	ip, ip, r8
+  483260:	f1bc 0c0a 	subs.w	ip, ip, #10
+  483264:	f10d 081c 	add.w	r8, sp, #28
+  483268:	f808 c00e 	strb.w	ip, [r8, lr]
+  48326c:	fbb0 f0f6 	udiv	r0, r0, r6
+  483270:	2800      	cmp	r0, #0
+  483272:	d001      	beq.n	483278 <.text+0x6e>
+  483274:	2f20      	cmp	r7, #32
+  483276:	d3d9      	bcc.n	48322c <.text+0x22>

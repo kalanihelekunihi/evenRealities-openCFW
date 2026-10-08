@@ -1,0 +1,19 @@
+{
+  "title": "Armv8-M Architecture Reference Manual",
+  "revision": "DDI0553B.z ID06022026",
+  "url": "https://documentation-service.arm.com/static/699eb70d77ad5021756604d8?token=",
+  "sha256": "468594b22cf5a4bae1261f2cd39d5aa51040fbb566be18cc358c169918fd7a72",
+  "bytes": 16439994,
+  "local": "g2/build/bootloader-completion/pcm22-fp-native-integrated/82039de11491ebd971ba9b97d7eebb066f0b6a19f5cfad2a85d26295f2e0527f/reference/ARM_DDI0553B_z.pdf",
+  "pages": [
+    171,
+    172,
+    1068,
+    1984
+  ],
+  "semantics": [
+    "FZ transforms single/double subnormal inputs to signed zero and raises Input Denormal; IDC is its status flag.",
+    "Scalar VCMP uses FPSCR-controlled comparison and quiet_nan_exc false; FPCompare raises invalid for signaling NaN and returns unordered NZCV for any NaN.",
+    "Official M55 manual101051/0101 revision0101-03 confirms FZ/DefaultNaN support and FPSCR reset0x40000 (LTPSIZE default, not FZ16)."
+  ]
+}

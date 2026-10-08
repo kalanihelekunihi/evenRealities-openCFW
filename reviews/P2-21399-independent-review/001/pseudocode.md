@@ -1,0 +1,3 @@
+# Object two-resource initialization and null diagnostic loops
+
+Partial/unaccepted;64 instructionbytes48413C..48417C. PUSH R4/R5/R6/LR16B;R4=entry0object,R5=entry1,R6=entry2. R1=R6,R0=R5;call4D06EC withR2stillentry2,R3liveentry3;store resultword[object+4],freshreloadtestzero. Zero:R0=wordliteral484360;4733EE;infinitebranch48415A afterhelperreturns. Nonzero:R0=1;4416D6 (R1..3priorhelper-effects);storeword[object],freshreloadtestzero. Zero:R0=wordliteral484364;4733EE;infinitebranch484170afterreturn. Nonzero sequentialword[object+8]=0,word[object+12]=0,word[object+16]=R6. Fallthrough48417Cunresolved;frame remains16B. Observedfirmware self-loops preserved as recoveredbehavior,notintroducedreplacementtraps. No C,freeze,wholecoverage or equalityclaim.

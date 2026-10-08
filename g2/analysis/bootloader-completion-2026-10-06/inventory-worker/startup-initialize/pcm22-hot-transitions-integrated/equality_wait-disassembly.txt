@@ -1,0 +1,27 @@
+
+g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0041d21c <.data+0xd21c>:
+  41d21c:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+  41d21e:	0004      	movs	r4, r0
+  41d220:	000d      	movs	r5, r1
+  41d222:	0016      	movs	r6, r2
+  41d224:	001f      	movs	r7, r3
+  41d226:	e006      	b.n	0x41d236
+  41d228:	0020      	movs	r0, r4
+  41d22a:	1e44      	subs	r4, r0, #1
+  41d22c:	2800      	cmp	r0, #0
+  41d22e:	d008      	beq.n	0x41d242
+  41d230:	2001      	movs	r0, #1
+  41d232:	f7ff ffc5 	bl	0x41d1c0
+  41d236:	6828      	ldr	r0, [r5, #0]
+  41d238:	4030      	ands	r0, r6
+  41d23a:	42b8      	cmp	r0, r7
+  41d23c:	d1f4      	bne.n	0x41d228
+  41d23e:	2000      	movs	r0, #0
+  41d240:	e000      	b.n	0x41d244
+  41d242:	2004      	movs	r0, #4
+  41d244:	bdf2      	pop	{r1, r4, r5, r6, r7, pc}

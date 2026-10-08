@@ -1,0 +1,48 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpivaw21bs/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+004833a6 <.text>:
+  4833a6:	ed9f 2b9e 	vldr	d2, [pc, #632]	@ 483620 <.text+0x27a>
+  4833aa:	eeb4 0b42 	vcmp.f64	d0, d2
+  4833ae:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  4833b2:	d114      	bne.n	4833de <.text+0x38>
+  4833b4:	ea5f 744c 	movs.w	r4, ip, lsl #29
+  4833b8:	d501      	bpl.n	4833be <.text+0x18>
+  4833ba:	2404      	movs	r4, #4
+  4833bc:	e000      	b.n	4833c0 <.text+0x1a>
+  4833be:	2403      	movs	r4, #3
+  4833c0:	ea5f 754c 	movs.w	r5, ip, lsl #29
+  4833c4:	d502      	bpl.n	4833cc <.text+0x26>
+  4833c6:	f8df 5c34 	ldr.w	r5, [pc, #3124]	@ 483ffc <.text+0xc56>
+  4833ca:	e000      	b.n	4833ce <.text+0x28>
+  4833cc:	a596      	add	r5, pc, #600	@ (adr r5, 483628 <.text+0x282>)
+  4833ce:	f8cd c00c 	str.w	ip, [sp, #12]
+  4833d2:	9602      	str	r6, [sp, #8]
+  4833d4:	9401      	str	r4, [sp, #4]
+  4833d6:	9500      	str	r5, [sp, #0]
+  4833d8:	f7ff fe48 	bl	48306c <.text-0x33a>
+  4833dc:	e116      	b.n	48360c <.text+0x266>
+  4833de:	9f14      	ldr	r7, [sp, #80]	@ 0x50
+  4833e0:	ed9f 2b92 	vldr	d2, [pc, #584]	@ 48362c <.text+0x286>
+  4833e4:	eeb4 0b42 	vcmp.f64	d0, d2
+  4833e8:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  4833ec:	da06      	bge.n	4833fc <.text+0x56>
+  4833ee:	ed9f 2b91 	vldr	d2, [pc, #580]	@ 483634 <.text+0x28e>
+  4833f2:	eeb4 0b42 	vcmp.f64	d0, d2
+  4833f6:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  4833fa:	d506      	bpl.n	48340a <.text+0x64>
+  4833fc:	f8cd c008 	str.w	ip, [sp, #8]
+  483400:	9601      	str	r6, [sp, #4]
+  483402:	9700      	str	r7, [sp, #0]
+  483404:	f000 f922 	bl	48364c <.text+0x2a6>
+  483408:	e100      	b.n	48360c <.text+0x266>
+  48340a:	f05f 0e00 	movs.w	lr, #0
+  48340e:	ed9f 2b8b 	vldr	d2, [pc, #556]	@ 48363c <.text+0x296>
+  483412:	eeb4 0b42 	vcmp.f64	d0, d2
+  483416:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  48341a:	d503      	bpl.n	483424 <.text+0x7e>
+  48341c:	f05f 0e01 	movs.w	lr, #1
+  483420:	eeb1 0b40 	vneg.f64	d0, d0

@@ -1,0 +1,5 @@
+# Callback byte loop with state, counter and failure return
+
+Partial/unaccepted;46 instructionbytes482684..4826B2. PUSH{R3,R4,R5,R6,R7,LR}24-byteframe. R5=entryR0 callback,R6=entryR1 structure,R7=entryR2 source,R4=entryR3 count; R0=0. If fullcountzero skipallreads/calls and return0 viaPOP{R1,R4,R5,R6,R7,PC};returnedR1=savedentryR3.
+
+Loop: freshbyte[R7]→R1 withsourcepostincrement1; then freshword[R6+8]→R0; BLX R5 withtheseR0/R1 and liveR2/R3. Store fullreturnedR0 to[R6+8] before testingzero. Zero→errorentry4826AC setsR0=FFFFFFFF andsamePOP, no counterincrement. Nonzero: freshword[R6+44]→R0,incrementmod2^32,storeback; R0=0;decrementR4mod2^32 and repeatifnonzero. Thus successfulreturn0; fullunsignednonzerocount controls wrapping decrement withoutsignedguard. Callbackeffects may affect subsequently fresh state/counterreads; sourceisadvanced beforecallbackfailure. No callbackvalidityguard, no assumed externalbehavior. Following4826B2..B4 zerohalfword excluded;4826B4+diagnosticstrings are data outsidecandidate. No C,freeze,wholecoverage or equalityclaim.

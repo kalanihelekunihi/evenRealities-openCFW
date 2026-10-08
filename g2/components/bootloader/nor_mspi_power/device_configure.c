@@ -44,15 +44,15 @@ void opencfw_bl_mspi_device_configure_private(uint32_t *handle)
     } device_mode_t;
     static const device_mode_t modes[26] = {
         {1, 1, 0x000, 0}, {2, 1, 0x000, 0}, {5, 0, 0x000, 0},
-        {6, 0, 0x000, 0}, {9, 0, 0x000, 1}, {10, 0, 0x000, 0},
+        {6, 0, 0x000, 0}, {9, 0, 0x000, 1}, {10, 0, 0x000, 1},
         {13,0, 0x000, 3}, {14,0, 0x000, 3}, {13,0, 0x000, 3},
-        {14,0, 0x000, 3}, {17,0, 0x000, 2}, {14,0, 0x000, 3},
+        {14,0, 0x000, 3}, {17,0, 0x000, 4}, {18,0, 0x000, 4},
         {1, 0, 0x100, 0}, {2, 0, 0x100, 0},
         {1, 0, 0x300, 0}, {2, 0, 0x300, 0},
-        {1, 0, 0x500, 1}, {2, 0, 0x500, 0},
+        {1, 0, 0x500, 1}, {2, 0, 0x500, 1},
         {1, 0, 0x700, 1}, {2, 0, 0x700, 1},
-        {1, 0, 0x000, 0}, {2, 0, 0x000, 1},
-        {1, 0, 0x900, 3}, {2, 0, 0x900, 0},
+        {1, 0, 0x000, 0}, {2, 0, 0x000, 0},
+        {1, 0, 0x900, 3}, {2, 0, 0x900, 3},
         {1, 0, 0xb00, 3}, {2, 0, 0xb00, 3},
     };
     const uint32_t module = handle[1];
@@ -77,6 +77,7 @@ void opencfw_bl_mspi_device_configure_private(uint32_t *handle)
     case 1: limit = latency ? 0x8000001fu : 0x10fu; break;
     case 2: limit = latency ? 0x0007ffffu : 0x10fu; break;
     case 3: limit = 0x3ffu; break;
+    case 4: limit = 0x7ffffu; break;
     default: limit = latency ? 0x80000013u : 0x103u; break;
     }
     write_reg(module, 0x44u, limit);
@@ -218,8 +219,8 @@ uint32_t opencfw_hal_mspi_device_configure(uint32_t handle_address,
     write_reg(module, 0x90u, xip);
 
     write_reg(module, 0x94u,
-        (uint32_t)*(const uint16_t *)(const void *)(config + 4u) |
-        ((uint32_t)*(const uint16_t *)(const void *)(config + 6u) << 16));
+        (uint32_t)*(const uint16_t *)(const void *)(config + 6u) |
+        ((uint32_t)*(const uint16_t *)(const void *)(config + 4u) << 16));
     write_reg(module, 0x98u,
         (*(const uint16_t *)(const void *)(config + 0x14u) & 0xfffu) |
         ((uint32_t)(config[0x16] & 0x0fu) << 12));

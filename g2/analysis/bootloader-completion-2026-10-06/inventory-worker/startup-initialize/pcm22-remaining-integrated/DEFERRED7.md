@@ -1,0 +1,4 @@
+
+## Deferred7 continuation proof
+
+365 comparisons execute installed selector7, then explicitly invoke native timer service in the same guest state. All end with ongoing byte26 and compare return/FPSCR, ordered register/global writes, stack and callee-saved registers. Start publishes7 after enabling/programming the timer; completion restores target VDDC/CORE/VDDF and clears the ongoing marker through the existing native service path. This is synthetic scheduling, not an observed interrupt window. Timer argument50 produces programmed compare300 via native multiply-by6; physical timer clock/time remains unverified. A51-argument negative control rejects compare306. The locked4 no-delay sequence also rejects an inserted SDK10us delay (ROM delay inputs[] versus[305]). Existing helper coverage is not added to the body ledger.

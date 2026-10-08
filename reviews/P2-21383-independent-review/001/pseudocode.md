@@ -1,0 +1,3 @@
+# Formatter pointer and mask disjoint literals
+
+Partial/unaccepted;24 exactdata bytes in483FCC..483FD0 and483FFC..484010. Sixlittle-endianwordslots:483FCC→0078DC7C;483FFC→0078DC84;484000→006EE378;484004→000FFFFF;484008→3FF00000;48400C→00483031. 483FCCconsumedbynegative-specialstringmap21728;483FFCpositive-specialstringmap21730;484000scale-tablepointermap21732;484004highmantissamask and484008highnormalizedexponentmap21744;48400CThumbcallback483030|1 selectedwhenentrycontextzero map21756. Exactpointertargets/scale-tablecontentsnotincludedhere, stillneeddatarecovery. Intervening483FD0..483FFCexcludedascodependingrecovery; no classifycodefromworddump. No C,freeze,wholecoverage or equalityclaim.

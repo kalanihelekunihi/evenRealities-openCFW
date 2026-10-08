@@ -1,0 +1,13 @@
+{
+  "utc": "2026-10-07T13:07:43.554583+00:00",
+  "status": "FAIL",
+  "candidate_sha256": "632e00a0ddd4df65549ccf17edf90abd7c6f400d73b89babad93929cd4cee5d2",
+  "counterexample_sha256": "1aa9f30e5773997d5bc1f82bc35c282460b43fc330b029ea913ada04ffe75376",
+  "counterexample": "root-before-pcm22-fix.failure.json",
+  "promotion": "blocked; promoted129a unchanged",
+  "mismatches": [
+    "40020080 ordered writes",
+    "source-only delay10/ROM40 305"
+  ],
+  "limits": "Source table five observed callbacks seeded by test; other selectors execution-guarded. Real IRQ scheduling, ROM and peripheral timing unavailable."
+}

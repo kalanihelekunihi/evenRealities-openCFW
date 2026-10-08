@@ -1,0 +1,10 @@
+{
+  "id": "P2-20695",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "82B: ten-entry scan uses fresh byte47 and halfword76 equality observations (no byte48 guard); 4751C8 receives (record+68,R6,8,live R3), and full zero selects a record. Counter is incremented/stored then independently reloaded. Shared return is selected pointer or explicit zero; POP restores saved R3 to R1."
+}

@@ -1,0 +1,28 @@
+{
+  "utc": "2026-10-07T02:56:14.725536+00:00",
+  "image_sha256": "4cb522cf7cbeffc853a2b2f5428abbd8b9ec8584071c59eb34d30b609a478b8a",
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "functions": [
+    {
+      "symbol": "opencfw_bl_adc_configure",
+      "original_entry": "0x42ec0c",
+      "original_end_exclusive": "0x42ed60",
+      "source_entry": "0x35050",
+      "compiled_function_bytes": 348,
+      "original_body_bytes": 340,
+      "ownership": "new-native-body"
+    }
+  ],
+  "new_native_body_bytes": 340,
+  "visited_new_native_body_bytes": 340,
+  "direct_cases": 279,
+  "source": "g2/components/bootloader/initializer_callbacks/adc_control.c",
+  "source_sha256": "4bfbf08084c3a2f335405b3106ce1d3be3e2c72ac40e178b417441c9072d257f",
+  "header_sha256": "e213fb6517827350f620d0e79e0272529de7ffd9c0cae6123c050fbb0fd80a8e",
+  "validation": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/adc-control-4cb522.json",
+  "limits": [
+    "Native FP32 without stubs; MMIO mapped RAM and chained residentROM fixture only.",
+    "All340 original body bytes visited, not all inputs or physical calibration proof.",
+    "Getters API success is not calibration validity; lazy temperature cache not invalidated by init/reset."
+  ]
+}

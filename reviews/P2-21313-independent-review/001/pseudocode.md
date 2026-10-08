@@ -1,0 +1,5 @@
+# Reverse byte output with leading and trailing space callbacks
+
+Partial/unaccepted;110 instructionbytes48306C..4830DA. PUSH{R3,R4,R5,R6,R7,R8,R9,R10,R11,LR}40bytes;R5=callbackentryR0,R6=entryR1,R7=entryR2position,R8=entryR3. FreshSP44→R4length(sixthargument),SP48→R9width(seventh),SP52→R10flags(eighth);SP40 fifthargumentbuffer remainsfreshloadedperbyte. StoreinitialR7SP0overwritessavedR3. If(flags&3)==0,R11=R4;whileunsignedR11<R9:BLXcallback(R0=32,R1=R6,R2=R7,R3=R8),ignoreinterpretedreturn;R7++,R11++mod. Otherflags skipprepadding.
+
+BodywhilefullR4!=0:decrementR4mod,R3=R8,R2=R7,R1=R6;freshwordSP40→R0buffer,freshbyte[buffer+R4]→R0;BLXR5;R7++mod;repeat. Thusreversebyteorderandfullwrappingcount,not signedlengthguard. AfterbodyR10LSL30 sign testsbit1;clearreturn;settrailingloop: freshSP0initialposition→R0;R0=R7-R0mod;unsignedR0<R9→callback(32,R6,R7,R8),R7++andretest;elseend. ReturnR0=currentR7;POP{R1,R4,R5,R6,R7,R8,R9,R10,R11,PC}40bytes,R1=storedinitialpositionSP0. No callbackstatuscheck/nullguard;preservefreshbuffer/initialpositionreads and exactflags. No C,freeze,wholecoverage or equalityclaim.

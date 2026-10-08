@@ -1,0 +1,13 @@
+# Remaining PCM selectors4/7/19: grounded probes
+
+Source:pcm22_remaining.c. Original ranges4:428506..42863e(312B),7:428920..428a78(344B),19:429a30..429b4c(284B), all from locked bootloaderf89a4c46. The literal pool starting428a78 is excluded from7's body. Probe identity and per-body byte hashes are in current-candidate.json/remaining-probe-comparison.json. Standalone227-object probe, no table/capability promotion.
+
+4 waits/services timer and publishes trim cache; it loads CORE temperature coefficient then CORE trim, target VDDC and target VDDF, adjusts TON, clears CPU override bit3, AOR override bit6 and CPU status-select bit16 at4002037c. The locked body has no10us delay between VDDC and VDDF, unlike the pinned SDK family. Its raw return is packed control bytes.
+
+7 matches the timer-delay conditional SDK family, not the synchronous alternative. It uses the same locked0.9float boost as13 for VDDF, boosts VDDC, publishes target at20000154, calls native timer-start41cc48 with50, then stores7 to2000055a. Raw return is float-derived VDDF delta. Timer-start native code multiplies its argument by6 into the compare register; this proves register programming, not physical clock frequency. The source uses already-linked native timer-start and dependent GPIO setup; no new external instruction stub is added. Deferred completion7b is a separate existing timer-service path and must not be called synchronous by this reconstruction. Synthetic fixtures don't establish hardware callback scheduling.
+
+19 takes old and new LV trim from one of four7-bit control chunks indexed by current&3 and target&3; these are not the profile VDDC bits21..27. It computes oldLV+2*max(newLV-oldLV,0), saturates the register low7 bits at127 when result>=128, delays natively50us, then restores newLV to40020048. It publishes cached profile globals but has no TON adjustment or CORE load in its own body. Raw return is packed control bytes.
+
+remaining-probe-comparison.json records the bounded direct comparisons including MMIO-write order, PRIMASK, full rawFPSCR, ROM delay inputs, stack and callee-saved registers. Clock/cache/readiness state and resident ROM40 are synthetic/stubbed; original bytes execute only on the stock side. Full instruction reachability is not all-value equivalence or physical-device proof. Newly added LV fixtures discriminate positive, zero, decreasing and saturating boost branches.
+
+Next: install own table relocations/capability bits into a successor only after final probe receipts, run natural dispatch chains and exact-image seven integration cases/regressions/relink/object reproduction. Preserve13 and earlier checkpoints and keep this evidence distinct from integrated ownership ledger.

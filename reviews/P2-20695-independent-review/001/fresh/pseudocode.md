@@ -1,0 +1,4 @@
+# Record halfword eight byte helper zero counter pointer return
+
+Partial/unaccepted;82 instructionbytes. PUSH R3,R4,R5,R6,R7,LR24-byteframe. R5fullentryR0,R6fullentryR1,R4literal47AE64,R7=10. Loop0x47ADE4testsLOW8 R7zero;zero explicitR0zero at0x47AE22. Otherwisefreshbyte[R4+47]zero skips;freshunsignedhalfword[R4+76]compareLOW16 R5,unequalskips. Passingrecordcalls0x4751C8(R4+68modulo2^32,fullR6,8,liveR3);fullresultnonzero skips. Skiptail0x47ADE0decrementsR7andadvancesR4by200modulo2^32;tenrecords. No byte48guard;helperresultzero selectsrecord,oppositeprevioushelperguard.
+SelectedrecordloadsR0literal47AE50,freshword[R0]R1,incrementmodulo2^32andstoreback;independentlyreloadword[R0]R0andstorefullword[R4+196]. SetR0fullR4,branchshared0x47AE24. POP R1,R4,R5,R6,R7,PCrestores24frame;R1savedentryR3,R0selectedpointerorzero. Preservefreshcounterread/reload,livehelperargs,nounprovedhelpercontract. No C,freezeorcompletenessclaim.

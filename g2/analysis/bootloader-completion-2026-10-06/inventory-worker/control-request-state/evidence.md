@@ -1,0 +1,9 @@
+# MSPI HAL control requests 26, 27, and 29
+
+This standalone source fixture compares the pinned stock dispatcher at `0x4251c0` with compiled providers for requests 26 (`0x1a`), 27 (`0x1b`), and 29 (`0x1d`). The locked image is `ota_s200_bootloader.bin`, SHA-256 `f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5`.
+
+Request 26 consumes a frequency byte and reconstructs clock-source selection, clock release/request ordering, divider and mode register writes, and the XIP-specific register setup. Request 27 returns the source pause helper result. Request 29 validates config and handle state, compares its requested Boolean directly with the current mode byte, pauses only when leaving mode 2, then invokes queue reset (whose return stock ignores) and updates the handle fields. The raw null-config path in request 26 dereferences its pointer without a guard.
+
+The differential passed 172 cases and exercised 1,404 distinct stock instruction bytes. The fixture covers four module IDs, request-26 frequency bytes 0–24, invalid frequency, XIP modes, release/request failures, null config with address zero mapped to bytes 0/1/23, request-27 pause, and request-29 guard/mode transitions. The exact case traces, stock trace, and hashes are in `result.json`.
+
+Clockgen control, device configuration/XIP delay, pause/status polling, queue reset, and critical-save assembly are compiled source dependencies. Clock-manager release/request and delay callbacks are intercepted providers. All RAM and MSPI/CLKGEN MMIO are synthetic. Request 26 performs a raw load from config byte address zero when passed null; the fixture proves matching behavior for the three mapped byte values, while actual address-zero contents remain target-dependent. Consequently this validates source behavior against the pinned instruction paths but does not establish physical peripheral progress, timing, or the shared image's routing of requests 26/27/29.

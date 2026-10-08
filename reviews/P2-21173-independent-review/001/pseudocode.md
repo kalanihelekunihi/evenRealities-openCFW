@@ -1,0 +1,5 @@
+# Seven-word all-ones stack mask and optional bank snapshot prefix
+
+Partial/unaccepted;110 instruction bytes4812F6..481364. PUSH R3,R4,R5,R6,R7,LR24 thenSUBSP32 totals56-byteframe. R6fullentryR0bankselector,R7fullentryR1maskenable,R5entryR2outputpointer,R4=0. R0counter0;unsignedcounter<7loop stores0xFFFFFFFF atSP+4+4*counter andincrementscounter,exactsevenwordsSP4..SP28. Call473940 withR0=7 andliveR1=FFFFFFFF,R2=SP4,R3entrylive;savefullresultSP0. No pointerorselectorvalidationbeforehelper.
+
+UXTBbankselector!=0 branches4813BC unresolvedotherbank. Forbanklowbyte0:R7=UXTBmaskenable;ifzero skipmaskreads→481364;otherwise loadpointerliterals481768/76C/770/774/778/77C/780 inthatorder,eachfreshwordstored atSP4/8/12/16/20/24/28 respectively. No target/outputwritesinthisprefix;stackmaskdefaultallonesororderedbanksnapshot. Preservehelperpotentialstackaliasing andfreshread/storeorder,withoutassumingatomiccoherentsnapshot. Continuationat481364/4813BC andepilogue unresolved;no C/freeze/fullcoverage/equality claim.

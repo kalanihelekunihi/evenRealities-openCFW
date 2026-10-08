@@ -1,0 +1,1 @@
+Partial/unaccepted:12bytes,3 aligned little-endian literal words47CAC0..47CACC. Everyword has mappedPC-load consumers retained with rawinstructions andcomponenthashchecks. Includes extrema diagnostic literals; pointed ownership and wholecorpuscoverage remain unproven. No source/freezechanges.

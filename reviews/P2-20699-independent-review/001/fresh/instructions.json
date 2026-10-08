@@ -1,0 +1,188 @@
+[
+  {
+    "start": 4697720,
+    "end": 4697792,
+    "instructions": [
+      {
+        "address": 4697720,
+        "bytes": "30b4",
+        "mnemonic": "push",
+        "operands": "{r4, r5}"
+      },
+      {
+        "address": 4697722,
+        "bytes": "0300",
+        "mnemonic": "movs",
+        "operands": "r3, r0"
+      },
+      {
+        "address": 4697724,
+        "bytes": "0020",
+        "mnemonic": "movs",
+        "operands": "r0, #0"
+      },
+      {
+        "address": 4697726,
+        "bytes": "93f82e40",
+        "mnemonic": "ldrb.w",
+        "operands": "r4, [r3, #46]\t@ 0x2e"
+      },
+      {
+        "address": 4697730,
+        "bytes": "2142",
+        "mnemonic": "tst",
+        "operands": "r1, r4"
+      },
+      {
+        "address": 4697732,
+        "bytes": "1ad0",
+        "mnemonic": "beq.n",
+        "operands": "47aebc <.text+0x44>"
+      },
+      {
+        "address": 4697734,
+        "bytes": "c9b2",
+        "mnemonic": "uxtb",
+        "operands": "r1, r1"
+      },
+      {
+        "address": 4697736,
+        "bytes": "0129",
+        "mnemonic": "cmp",
+        "operands": "r1, #1"
+      },
+      {
+        "address": 4697738,
+        "bytes": "06d0",
+        "mnemonic": "beq.n",
+        "operands": "47ae9a <.text+0x22>"
+      },
+      {
+        "address": 4697740,
+        "bytes": "0229",
+        "mnemonic": "cmp",
+        "operands": "r1, #2"
+      },
+      {
+        "address": 4697742,
+        "bytes": "0ad0",
+        "mnemonic": "beq.n",
+        "operands": "47aea6 <.text+0x2e>"
+      },
+      {
+        "address": 4697744,
+        "bytes": "0429",
+        "mnemonic": "cmp",
+        "operands": "r1, #4"
+      },
+      {
+        "address": 4697746,
+        "bytes": "0ed0",
+        "mnemonic": "beq.n",
+        "operands": "47aeb2 <.text+0x3a>"
+      },
+      {
+        "address": 4697748,
+        "bytes": "0829",
+        "mnemonic": "cmp",
+        "operands": "r1, #8"
+      },
+      {
+        "address": 4697750,
+        "bytes": "0ed0",
+        "mnemonic": "beq.n",
+        "operands": "47aeb6 <.text+0x3e>"
+      },
+      {
+        "address": 4697752,
+        "bytes": "10e0",
+        "mnemonic": "b.n",
+        "operands": "47aebc <.text+0x44>"
+      },
+      {
+        "address": 4697754,
+        "bytes": "93f84e00",
+        "mnemonic": "ldrb.w",
+        "operands": "r0, [r3, #78]\t@ 0x4e"
+      },
+      {
+        "address": 4697758,
+        "bytes": "1070",
+        "mnemonic": "strb",
+        "operands": "r0, [r2, #0]"
+      },
+      {
+        "address": 4697760,
+        "bytes": "13f13400",
+        "mnemonic": "adds.w",
+        "operands": "r0, r3, #52\t@ 0x34"
+      },
+      {
+        "address": 4697764,
+        "bytes": "0ae0",
+        "mnemonic": "b.n",
+        "operands": "47aebc <.text+0x44>"
+      },
+      {
+        "address": 4697766,
+        "bytes": "93f86a00",
+        "mnemonic": "ldrb.w",
+        "operands": "r0, [r3, #106]\t@ 0x6a"
+      },
+      {
+        "address": 4697770,
+        "bytes": "1070",
+        "mnemonic": "strb",
+        "operands": "r0, [r2, #0]"
+      },
+      {
+        "address": 4697772,
+        "bytes": "13f15000",
+        "mnemonic": "adds.w",
+        "operands": "r0, r3, #80\t@ 0x50"
+      },
+      {
+        "address": 4697776,
+        "bytes": "04e0",
+        "mnemonic": "b.n",
+        "operands": "47aebc <.text+0x44>"
+      },
+      {
+        "address": 4697778,
+        "bytes": "d81d",
+        "mnemonic": "adds",
+        "operands": "r0, r3, #7"
+      },
+      {
+        "address": 4697780,
+        "bytes": "02e0",
+        "mnemonic": "b.n",
+        "operands": "47aebc <.text+0x44>"
+      },
+      {
+        "address": 4697782,
+        "bytes": "13f11e00",
+        "mnemonic": "adds.w",
+        "operands": "r0, r3, #30"
+      },
+      {
+        "address": 4697786,
+        "bytes": "ffe7",
+        "mnemonic": "b.n",
+        "operands": "47aebc <.text+0x44>"
+      },
+      {
+        "address": 4697788,
+        "bytes": "30bc",
+        "mnemonic": "pop",
+        "operands": "{r4, r5}"
+      },
+      {
+        "address": 4697790,
+        "bytes": "7047",
+        "mnemonic": "bx",
+        "operands": "lr"
+      }
+    ]
+  }
+]

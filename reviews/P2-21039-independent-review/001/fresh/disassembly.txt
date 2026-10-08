@@ -1,0 +1,105 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmplsqykrnr/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047f11c <.text>:
+  47f11c:	b53e      	push	{r1, r2, r3, r4, r5, lr}
+  47f11e:	0004      	movs	r4, r0
+  47f120:	0020      	movs	r0, r4
+  47f122:	b2c0      	uxtb	r0, r0
+  47f124:	2800      	cmp	r0, #0
+  47f126:	d005      	beq.n	47f134 <.text+0x18>
+  47f128:	0020      	movs	r0, r4
+  47f12a:	b2c0      	uxtb	r0, r0
+  47f12c:	2803      	cmp	r0, #3
+  47f12e:	d001      	beq.n	47f134 <.text+0x18>
+  47f130:	2006      	movs	r0, #6
+  47f132:	e066      	b.n	47f202 <.text+0xe6>
+  47f134:	0020      	movs	r0, r4
+  47f136:	b2c0      	uxtb	r0, r0
+  47f138:	2803      	cmp	r0, #3
+  47f13a:	d108      	bne.n	47f14e <.text+0x32>
+  47f13c:	f8df 097c 	ldr.w	r0, [pc, #2428]	@ 47fabc <.text+0x9a0>
+  47f140:	6800      	ldr	r0, [r0, #0]
+  47f142:	f3c0 1001 	ubfx	r0, r0, #4, #2
+  47f146:	2803      	cmp	r0, #3
+  47f148:	d001      	beq.n	47f14e <.text+0x32>
+  47f14a:	2007      	movs	r0, #7
+  47f14c:	e059      	b.n	47f202 <.text+0xe6>
+  47f14e:	4669      	mov	r1, sp
+  47f150:	2014      	movs	r0, #20
+  47f152:	f000 fbdb 	bl	47f90c <.text+0x7f0>
+  47f156:	2800      	cmp	r0, #0
+  47f158:	d001      	beq.n	47f15e <.text+0x42>
+  47f15a:	2001      	movs	r0, #1
+  47f15c:	e051      	b.n	47f202 <.text+0xe6>
+  47f15e:	f89d 0000 	ldrb.w	r0, [sp]
+  47f162:	2800      	cmp	r0, #0
+  47f164:	d001      	beq.n	47f16a <.text+0x4e>
+  47f166:	2003      	movs	r0, #3
+  47f168:	e04b      	b.n	47f202 <.text+0xe6>
+  47f16a:	f8df 5954 	ldr.w	r5, [pc, #2388]	@ 47fac0 <.text+0x9a4>
+  47f16e:	0020      	movs	r0, r4
+  47f170:	7829      	ldrb	r1, [r5, #0]
+  47f172:	b2c0      	uxtb	r0, r0
+  47f174:	4288      	cmp	r0, r1
+  47f176:	d108      	bne.n	47f18a <.text+0x6e>
+  47f178:	f8df 0948 	ldr.w	r0, [pc, #2376]	@ 47fac4 <.text+0x9a8>
+  47f17c:	7801      	ldrb	r1, [r0, #0]
+  47f17e:	782a      	ldrb	r2, [r5, #0]
+  47f180:	4291      	cmp	r1, r2
+  47f182:	d000      	beq.n	47f186 <.text+0x6a>
+  47f184:	7004      	strb	r4, [r0, #0]
+  47f186:	2000      	movs	r0, #0
+  47f188:	e03b      	b.n	47f202 <.text+0xe6>
+  47f18a:	f7f4 fbd9 	bl	473940 <.text-0xb7dc>
+  47f18e:	9001      	str	r0, [sp, #4]
+  47f190:	0020      	movs	r0, r4
+  47f192:	b2c0      	uxtb	r0, r0
+  47f194:	2803      	cmp	r0, #3
+  47f196:	d104      	bne.n	47f1a2 <.text+0x86>
+  47f198:	0021      	movs	r1, r4
+  47f19a:	b2c9      	uxtb	r1, r1
+  47f19c:	2001      	movs	r0, #1
+  47f19e:	f001 f910 	bl	4803c2 <.text+0x12a6>
+  47f1a2:	0020      	movs	r0, r4
+  47f1a4:	b2c0      	uxtb	r0, r0
+  47f1a6:	2803      	cmp	r0, #3
+  47f1a8:	d106      	bne.n	47f1b8 <.text+0x9c>
+  47f1aa:	f8df 091c 	ldr.w	r0, [pc, #2332]	@ 47fac8 <.text+0x9ac>
+  47f1ae:	6801      	ldr	r1, [r0, #0]
+  47f1b0:	f051 0101 	orrs.w	r1, r1, #1
+  47f1b4:	6001      	str	r1, [r0, #0]
+  47f1b6:	e005      	b.n	47f1c4 <.text+0xa8>
+  47f1b8:	f8df 090c 	ldr.w	r0, [pc, #2316]	@ 47fac8 <.text+0x9ac>
+  47f1bc:	6801      	ldr	r1, [r0, #0]
+  47f1be:	0849      	lsrs	r1, r1, #1
+  47f1c0:	0049      	lsls	r1, r1, #1
+  47f1c2:	6001      	str	r1, [r0, #0]
+  47f1c4:	2001      	movs	r0, #1
+  47f1c6:	f001 faeb 	bl	4807a0 <.text+0x1684>
+  47f1ca:	f8df 0900 	ldr.w	r0, [pc, #2304]	@ 47facc <.text+0x9b0>
+  47f1ce:	0021      	movs	r1, r4
+  47f1d0:	b2c9      	uxtb	r1, r1
+  47f1d2:	6802      	ldr	r2, [r0, #0]
+  47f1d4:	f361 0201 	bfi	r2, r1, #0, #2
+  47f1d8:	6002      	str	r2, [r0, #0]
+  47f1da:	702c      	strb	r4, [r5, #0]
+  47f1dc:	f8df 08e4 	ldr.w	r0, [pc, #2276]	@ 47fac4 <.text+0x9a8>
+  47f1e0:	7004      	strb	r4, [r0, #0]
+  47f1e2:	2006      	movs	r0, #6
+  47f1e4:	f001 fadc 	bl	4807a0 <.text+0x1684>
+  47f1e8:	0020      	movs	r0, r4
+  47f1ea:	b2c0      	uxtb	r0, r0
+  47f1ec:	2800      	cmp	r0, #0
+  47f1ee:	d104      	bne.n	47f1fa <.text+0xde>
+  47f1f0:	0021      	movs	r1, r4
+  47f1f2:	b2c9      	uxtb	r1, r1
+  47f1f4:	2001      	movs	r0, #1
+  47f1f6:	f001 f8e4 	bl	4803c2 <.text+0x12a6>
+  47f1fa:	9801      	ldr	r0, [sp, #4]
+  47f1fc:	f380 8810 	msr	PRIMASK, r0
+  47f200:	2000      	movs	r0, #0
+  47f202:	bd3e      	pop	{r1, r2, r3, r4, r5, pc}

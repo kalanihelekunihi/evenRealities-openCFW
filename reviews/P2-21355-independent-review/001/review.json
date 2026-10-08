@@ -1,0 +1,34 @@
+{
+  "review_id": "P2-21355-independent-review",
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-floating-range-scaling-eleven-binary64-literal-pool-21754-data/001",
+  "status": "partial",
+  "accepted": false,
+  "checks": {
+    "fresh_replay": "pass",
+    "data_bytes": 88,
+    "bytes_match": true,
+    "literal_slots_decoded": 11,
+    "consumer_maps": {
+      "21744": [
+        "0x00483908",
+        "0x00483910",
+        "0x00483918",
+        "0x00483920",
+        "0x00483928"
+      ],
+      "21746": [
+        "0x00483930",
+        "0x00483938",
+        "0x00483940",
+        "0x00483948"
+      ],
+      "21748": [
+        "0x00483950",
+        "0x00483958"
+      ]
+    }
+  },
+  "limitations": [
+    "pointed-to ownership and exhaustive image coverage are not established"
+  ]
+}

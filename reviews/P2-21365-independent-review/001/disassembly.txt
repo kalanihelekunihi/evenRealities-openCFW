@@ -1,0 +1,61 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp1qetafdp/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00483b60 <.text>:
+  483b60:	d002      	beq.n	483b68 <.text+0x8>
+  483b62:	2878      	cmp	r0, #120	@ 0x78
+  483b64:	f040 8218 	bne.w	483f98 <.text+0x438>
+  483b68:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  483b6a:	7800      	ldrb	r0, [r0, #0]
+  483b6c:	2878      	cmp	r0, #120	@ 0x78
+  483b6e:	d003      	beq.n	483b78 <.text+0x18>
+  483b70:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  483b72:	7800      	ldrb	r0, [r0, #0]
+  483b74:	2858      	cmp	r0, #88	@ 0x58
+  483b76:	d102      	bne.n	483b7e <.text+0x1e>
+  483b78:	f05f 0a10 	movs.w	sl, #16
+  483b7c:	e027      	b.n	483bce <.text+0x6e>
+  483b7e:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  483b80:	7800      	ldrb	r0, [r0, #0]
+  483b82:	2870      	cmp	r0, #112	@ 0x70
+  483b84:	d003      	beq.n	483b8e <.text+0x2e>
+  483b86:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  483b88:	7800      	ldrb	r0, [r0, #0]
+  483b8a:	2850      	cmp	r0, #80	@ 0x50
+  483b8c:	d10d      	bne.n	483baa <.text+0x4a>
+  483b8e:	f05f 0a10 	movs.w	sl, #16
+  483b92:	f058 0810 	orrs.w	r8, r8, #16
+  483b96:	f458 7880 	orrs.w	r8, r8, #256	@ 0x100
+  483b9a:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  483b9c:	7840      	ldrb	r0, [r0, #1]
+  483b9e:	2856      	cmp	r0, #86	@ 0x56
+  483ba0:	d115      	bne.n	483bce <.text+0x6e>
+  483ba2:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  483ba4:	1c40      	adds	r0, r0, #1
+  483ba6:	900c      	str	r0, [sp, #48]	@ 0x30
+  483ba8:	e011      	b.n	483bce <.text+0x6e>
+  483baa:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  483bac:	7800      	ldrb	r0, [r0, #0]
+  483bae:	286f      	cmp	r0, #111	@ 0x6f
+  483bb0:	d102      	bne.n	483bb8 <.text+0x58>
+  483bb2:	f05f 0a08 	movs.w	sl, #8
+  483bb6:	e00a      	b.n	483bce <.text+0x6e>
+  483bb8:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  483bba:	7800      	ldrb	r0, [r0, #0]
+  483bbc:	2862      	cmp	r0, #98	@ 0x62
+  483bbe:	d102      	bne.n	483bc6 <.text+0x66>
+  483bc0:	f05f 0a02 	movs.w	sl, #2
+  483bc4:	e003      	b.n	483bce <.text+0x6e>
+  483bc6:	f05f 0a0a 	movs.w	sl, #10
+  483bca:	f038 0810 	bics.w	r8, r8, #16
+  483bce:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  483bd0:	7800      	ldrb	r0, [r0, #0]
+  483bd2:	2858      	cmp	r0, #88	@ 0x58
+  483bd4:	d003      	beq.n	483bde <.text+0x7e>
+  483bd6:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  483bd8:	7800      	ldrb	r0, [r0, #0]
+  483bda:	2850      	cmp	r0, #80	@ 0x50
+  483bdc:	d101      	bne.n	483be2 <.text+0x82>

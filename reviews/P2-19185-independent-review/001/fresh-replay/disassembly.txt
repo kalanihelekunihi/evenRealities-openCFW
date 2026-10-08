@@ -1,0 +1,33 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpopcartdo/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0046a2f0 <.text>:
+  46a2f0:	f8df 99d8 	ldr.w	r9, [pc, #2520]	@ 46accc <.text+0x9dc>
+  46a2f4:	f8d9 0000 	ldr.w	r0, [r9]
+  46a2f8:	f7d5 f9b8 	bl	43f66c <.text-0x2ac84>
+  46a2fc:	6830      	ldr	r0, [r6, #0]
+  46a2fe:	f7d5 fd4e 	bl	43fd9e <.text-0x2a552>
+  46a302:	4682      	mov	sl, r0
+  46a304:	6830      	ldr	r0, [r6, #0]
+  46a306:	f7d5 fd68 	bl	43fdda <.text-0x2a516>
+  46a30a:	0005      	movs	r5, r0
+  46a30c:	6838      	ldr	r0, [r7, #0]
+  46a30e:	f7d5 fd64 	bl	43fdda <.text-0x2a516>
+  46a312:	0004      	movs	r4, r0
+  46a314:	f8df 09c4 	ldr.w	r0, [pc, #2500]	@ 46acdc <.text+0x9ec>
+  46a318:	6800      	ldr	r0, [r0, #0]
+  46a31a:	eb1a 0a40 	adds.w	sl, sl, r0, lsl #1
+  46a31e:	4651      	mov	r1, sl
+  46a320:	f8d9 0000 	ldr.w	r0, [r9]
+  46a324:	f7d5 f8ef 	bl	43f506 <.text-0x2adea>
+  46a328:	f8df 09a4 	ldr.w	r0, [pc, #2468]	@ 46acd0 <.text+0x9e0>
+  46a32c:	6800      	ldr	r0, [r0, #0]
+  46a32e:	eb10 0a0a 	adds.w	sl, r0, sl
+  46a332:	f8cd a000 	str.w	sl, [sp]
+  46a336:	f8df a98c 	ldr.w	sl, [pc, #2444]	@ 46acc4 <.text+0x9d4>
+  46a33a:	9900      	ldr	r1, [sp, #0]
+  46a33c:	f8da 0000 	ldr.w	r0, [sl]
+  46a340:	f7d5 f8e1 	bl	43f506 <.text-0x2adea>

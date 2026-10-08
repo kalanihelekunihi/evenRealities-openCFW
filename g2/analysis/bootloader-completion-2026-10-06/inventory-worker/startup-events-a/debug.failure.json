@@ -1,0 +1,227 @@
+{
+  "fixture": "ton-adjust-m11",
+  "input": {
+    "stimulus": 3,
+    "on": 0,
+    "args_words": [
+      0
+    ],
+    "current_temp": 0,
+    "current_cpu": 1,
+    "state_flag": 0,
+    "device": 0,
+    "audio": 0,
+    "memory": 0,
+    "ssram": 0,
+    "old_major": 11,
+    "old_minor": 4
+  },
+  "stock": {
+    "status": 0,
+    "primask": 0,
+    "args": "00000000aaaaaaaa55555555",
+    "globals": {
+      "537031102": "01",
+      "537031101": "00",
+      "537031087": "a5",
+      "537031088": "a5",
+      "536872275": "00",
+      "536871248": "0b000000",
+      "536871364": "01000000",
+      "537031104": "00"
+    },
+    "power_registers": [
+      0,
+      0,
+      0,
+      0,
+      218235652,
+      2271565089
+    ],
+    "calls": {
+      "deepsleep": {
+        "calls": 0,
+        "before": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "after": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "flag_after": 0
+      },
+      "determine": {
+        "calls": 1,
+        "snapshot": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "outputs": [
+          0,
+          11,
+          1
+        ]
+      },
+      "trim": {
+        "calls": 1,
+        "args": [
+          11,
+          11,
+          1,
+          4
+        ],
+        "config_registers": [
+          218235652,
+          2271565089
+        ]
+      },
+      "temperature_transition": {
+        "calls": 0,
+        "args": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "state_sequence": {
+        "calls": 0,
+        "args": [
+          0,
+          0
+        ],
+        "status": 0,
+        "selector": 0
+      },
+      "dispatch": {
+        "calls": 0,
+        "args": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  },
+  "source": {
+    "status": 0,
+    "primask": 0,
+    "args": "00000000aaaaaaaa55555555",
+    "globals": {
+      "537031102": "01",
+      "537031101": "00",
+      "537031087": "a5",
+      "537031088": "a5",
+      "536872275": "00",
+      "536871248": "0b000000",
+      "536871364": "01000000",
+      "537031104": "00"
+    },
+    "power_registers": [
+      0,
+      0,
+      0,
+      0,
+      84017924,
+      2271567649
+    ],
+    "calls": {
+      "deepsleep": {
+        "calls": 0,
+        "before": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "after": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "flag_after": 0
+      },
+      "determine": {
+        "calls": 1,
+        "snapshot": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "outputs": [
+          0,
+          11,
+          1
+        ]
+      },
+      "trim": {
+        "calls": 1,
+        "args": [
+          11,
+          11,
+          1,
+          4
+        ],
+        "config_registers": [
+          84017924,
+          2271567649
+        ]
+      },
+      "temperature_transition": {
+        "calls": 0,
+        "args": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "state_sequence": {
+        "calls": 0,
+        "args": [
+          0,
+          0
+        ],
+        "status": 0,
+        "selector": 0
+      },
+      "dispatch": {
+        "calls": 0,
+        "args": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "elf_sha256": "5539579c6fe6821387b10bef54f82b50138973806889f909d37b955e5ecdf31b",
+  "cases": 903,
+  "functions": [
+    {
+      "name": "first",
+      "start": "0x423d20",
+      "end_exclusive": "0x423d58",
+      "body_bytes": 56,
+      "observed_body_bytes": 56
+    },
+    {
+      "name": "prepare",
+      "start": "0x423d58",
+      "end_exclusive": "0x423d7a",
+      "body_bytes": 34,
+      "observed_body_bytes": 34
+    },
+    {
+      "name": "wait_clear",
+      "start": "0x423d7a",
+      "end_exclusive": "0x423d9a",
+      "body_bytes": 32,
+      "observed_body_bytes": 32
+    },
+    {
+      "name": "wait_slot",
+      "start": "0x423da0",
+      "end_exclusive": "0x423dc4",
+      "body_bytes": 36,
+      "observed_body_bytes": 36
+    },
+    {
+      "name": "wait_zero",
+      "start": "0x423dc4",
+      "end_exclusive": "0x423dce",
+      "body_bytes": 10,
+      "observed_body_bytes": 10
+    },
+    {
+      "name": "second",
+      "start": "0x423dd0",
+      "end_exclusive": "0x423e0c",
+      "body_bytes": 60,
+      "observed_body_bytes": 60
+    },
+    {
+      "name": "clock",
+      "start": "0x422468",
+      "end_exclusive": "0x4224b2",
+      "body_bytes": 74,
+      "observed_body_bytes": 74
+    },
+    {
+      "name": "resource",
+      "start": "0x4224b2",
+      "end_exclusive": "0x42252e",
+      "body_bytes": 124,
+      "observed_body_bytes": 124
+    },
+    {
+      "name": "debug",
+      "start": "0x42252e",
+      "end_exclusive": "0x422574",
+      "body_bytes": 70,
+      "observed_body_bytes": 70
+    }
+  ],
+  "total_original_body_bytes": 496,
+  "source_inputs": {
+    "g2/components/bootloader/initializer_callbacks/startup_shutdown.c": "61de6bf8f7d2ab747a16b4389466270ea70d8125df365e0422da69d929c6b3eb",
+    "g2/components/bootloader/initializer_callbacks/startup_shutdown.h": "bbeddfafc242a77fc1e9a37b0c4dafda283f74e3d003034cd2abe7237957f58f",
+    "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-shutdown/verify.py": "91d3aeb23367de70ae76c4bc79193885585dd809dafee6061a3b19d3e2df716f"
+  },
+  "limits": [
+    "All nine source bodies plus actual critical/query/power28/wait helpers execute. Only elapsed delay and registered callback bodies controlled. No SRAM-write recorder.",
+    "Power acknowledgement is synthetic; real MMIO semantics, scheduling and IRQ/task drain unproven. Delay arguments not wall-clock proof."
+  ]
+}

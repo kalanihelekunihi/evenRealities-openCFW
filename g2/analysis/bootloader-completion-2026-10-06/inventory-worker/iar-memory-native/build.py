@@ -1,0 +1,6 @@
+from pathlib import Path
+import subprocess,json,hashlib,argparse
+N=Path(__file__).resolve().parent;R=next(p for p in N.parents if (p/'AGENTS.md').exists());ap=argparse.ArgumentParser();ap.add_argument('--output',type=Path,required=True);a=ap.parse_args();a.output.mkdir(parents=True,exist_ok=True);flags=['--target=arm-none-eabi','-mcpu=cortex-m33','-mthumb','-mfloat-abi=softfp','-O2','-ffreestanding','-fno-builtin'];sources=[(R/'g2/components/bootloader/initializer_callbacks/iar_memory_native/memory.c','memory.o'),(N/'qemu_harness.c','harness.o'),(N/'qemu_start.S','start.o'),(N/'qemu_call_abi.S','abi.o')]
+for src,name in sources:subprocess.run(['clang',*flags,'-c',str(src),'-o',str(a.output/name)],cwd=R,check=True)
+subprocess.run(['/opt/homebrew/bin/arm-none-eabi-ld','-T',str(N/'qemu.ld'),str(a.output/'start.o'),str(a.output/'harness.o'),str(a.output/'abi.o'),str(a.output/'memory.o'),'-o',str(a.output/'memory-qemu-abi.elf')],check=True)
+h=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest();m=json.loads((N/'build-inputs.json').read_text());assert h(a.output/'memory-qemu-abi.elf')==m['abi_elf_sha256'];assert h(a.output/'memory.o')==m['object_sha256'];print('PASS exact source-object/ABI-ELF reproduction',m['abi_elf_sha256'])

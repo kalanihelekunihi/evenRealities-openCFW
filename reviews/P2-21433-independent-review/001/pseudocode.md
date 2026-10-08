@@ -1,0 +1,3 @@
+# Child status-three cleanup with saved next and unlink prefix
+
+Partial/unaccepted;46 instructionbytes48458E..4845BC. PUSH entryR3/R4/R5/R6/R7/LR24B;R6=entry0outer,R5=entry1parent,R4previous=0;R0=word[parent+68]head. Whilenodenonnull: R7=word[node]nextBEFOREhelper;R1=word[node+80]status. Status!=3→R4=node,R0=R7advance. Status3:R1=outerR6,R0stillnode;4848E8(liveR2/R3);afterhelperifpreviousR4zero→word[parent+68]=savednextR7elseword[previous]=savednext;R0=R7repeat. Previousunchangedafterremoval,allowingconsecutivehead/interiorremovals. No freshnodeaccessafterhelper; savednextnecessaryifhelperfreesnode. Actualhelpercontractunresolved. Headzero→4845BCunresolvedcontinuation;frame24Bretained. No C,freeze,wholecoverage or equalityclaim.

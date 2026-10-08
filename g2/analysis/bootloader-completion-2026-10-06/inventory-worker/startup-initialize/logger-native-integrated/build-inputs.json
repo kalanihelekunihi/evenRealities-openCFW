@@ -1,0 +1,23 @@
+{
+  "flags": [
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m33",
+    "-mthumb",
+    "-mfloat-abi=softfp",
+    "-O1",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-I",
+    "g2/components/bootloader/filesystem/freestanding_include"
+  ],
+  "sources": {
+    "g2/components/bootloader/log_call_adapters/task_with_log_detail.c": "ad91612f4b69ae785359f9c3f17d8071f57c086ee120c9032bad0e768acb3bf9",
+    "g2/components/bootloader/log_call_adapters/log_adapters.c": "e2e6695ac5df909331ecbbe8547ea45655d63dd475cadd2f0c7b15543b1e3e0b"
+  },
+  "objects": {
+    "task.o": "397d15813bd67912f2d0714994a86b7b0f3f77c92f1121b973cfa14ce5d2bcb0",
+    "log_adapters.o": "2c3e46e01d3ab541cd92c3f1072540c4a13be10baa4d9c7dbd9c8ab2ca60a72d"
+  },
+  "unchanged_predecessor_objects": 238,
+  "superseded_task_index": 61
+}

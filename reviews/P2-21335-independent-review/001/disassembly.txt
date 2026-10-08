@@ -1,0 +1,44 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpkpht_b1h/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0048348c <.text>:
+  48348c:	1c64      	adds	r4, r4, #1
+  48348e:	ee01 4a10 	vmov	s2, r4
+  483492:	eeb8 1b41 	vcvt.f64.u32	d1, s2
+  483496:	eb09 09c7 	add.w	r9, r9, r7, lsl #3
+  48349a:	ed99 2b00 	vldr	d2, [r9]
+  48349e:	eeb4 1b42 	vcmp.f64	d1, d2
+  4834a2:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  4834a6:	db0f      	blt.n	4834c8 <.text+0x3c>
+  4834a8:	2400      	movs	r4, #0
+  4834aa:	1c6d      	adds	r5, r5, #1
+  4834ac:	e00c      	b.n	4834c8 <.text+0x3c>
+  4834ae:	eeb6 3b00 	vmov.f64	d3, #96	@ 0x3f000000  0.5
+  4834b2:	eeb4 1b43 	vcmp.f64	d1, d3
+  4834b6:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  4834ba:	d405      	bmi.n	4834c8 <.text+0x3c>
+  4834bc:	2c00      	cmp	r4, #0
+  4834be:	d002      	beq.n	4834c6 <.text+0x3a>
+  4834c0:	ea5f 79c4 	movs.w	r9, r4, lsl #31
+  4834c4:	d500      	bpl.n	4834c8 <.text+0x3c>
+  4834c6:	1c64      	adds	r4, r4, #1
+  4834c8:	2f00      	cmp	r7, #0
+  4834ca:	d117      	bne.n	4834fc <.text+0x70>
+  4834cc:	ee01 5a10 	vmov	s2, r5
+  4834d0:	eeb8 1bc1 	vcvt.f64.s32	d1, s2
+  4834d4:	ee30 0b41 	vsub.f64	d0, d0, d1
+  4834d8:	eeb6 2b00 	vmov.f64	d2, #96	@ 0x3f000000  0.5
+  4834dc:	eeb4 0b42 	vcmp.f64	d0, d2
+  4834e0:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  4834e4:	d506      	bpl.n	4834f4 <.text+0x68>
+  4834e6:	ed9f 2b57 	vldr	d2, [pc, #348]	@ 483644 <.text+0x1b8>
+  4834ea:	eeb4 0b42 	vcmp.f64	d0, d2
+  4834ee:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  4834f2:	db33      	blt.n	48355c <.text+0xd0>
+  4834f4:	07ec      	lsls	r4, r5, #31
+  4834f6:	d531      	bpl.n	48355c <.text+0xd0>
+  4834f8:	1c6d      	adds	r5, r5, #1
+  4834fa:	e02f      	b.n	48355c <.text+0xd0>

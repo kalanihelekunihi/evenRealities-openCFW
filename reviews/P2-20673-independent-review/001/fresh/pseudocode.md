@@ -1,0 +1,6 @@
+# Fallback result diagnostics boolean shared epilogue
+
+Partial/unaccepted;148 instructionbytes,inherited56-byteframe. At0x47AABA destructivelynarrowR6LOW8;zero branches0x47AB06,failurediagnostics;nonzeroenters0x47AAC0,successdiagnostics.
+Success:query0x43D0CE,bit1zero skips0x47AAE4;otherwisewrite literal47B56C SP4,1049 SP0;call0x43D574(4,literal47AE28,literal47ADCC,literal47B480,fifth1049,sixthliteral47B56C). At0x47AAE4 queryfreshstatus;bit0oneenters0x47AAF4,otherwisequeryagainandbit2zero skips0x47AB02. MaskpathR1literal47B570,R2same,liveR3;call0x43CE9E(0x10000000,R1,R2,liveR3). ExplicitR0one,branchshared0x47AB48.
+Failure:query0x43D0CE,bit1zero skips0x47AB28;otherwisewrite literal47B574 SP4,1055 SP0;call0x43D574(2,literal47AE28,literal47ADCC,literal47B480,fifth1055,sixthliteral47B574). At0x47AB28 queryfreshstatus;bit0oneenters0x47AB38,otherwisequeryagainandbit2zero skips0x47AB46. MaskpathR1literal47B578,R2same,liveR3;call0x43CE9E(0x08000000,R1,R2,liveR3). ExplicitR0zero.
+Shared0x47AB48 SP+=32 thenPOP R4,R5,R6,R7,R8,PC24bytes restoresentire56-byteframeandreturnsexplicitR0. Earlierentryzero/scanexhaustionreturnzero,bit2recordhelperpathreturnsone regardlesshelperresult. Preservequeriesandlivearguments;no C,freezeorwholecoverageclaim.

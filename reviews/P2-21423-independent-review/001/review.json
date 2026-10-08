@@ -1,0 +1,19 @@
+{
+  "review_id": "P2-21423-independent-review",
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-allocated-record-copy-parent-tail-list-append-return-21822-map/001",
+  "status": "partial",
+  "accepted": false,
+  "checks": {
+    "fresh_replay": "pass",
+    "instruction_bytes": 54,
+    "instructions_match": true,
+    "references_match": true,
+    "frame_release_bytes": 32,
+    "explicit_node_word0_store": false
+  },
+  "limitations": [
+    "allocator contract unresolved",
+    "list ownership/semantics not inferred",
+    "no whole-routine coverage or acceptance claim"
+  ]
+}

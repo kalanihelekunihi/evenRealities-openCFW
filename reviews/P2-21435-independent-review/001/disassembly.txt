@@ -1,0 +1,57 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpmoh29o4f/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+004845bc <.text>:
+  4845bc:	2600      	movs	r6, #0
+  4845be:	6ca8      	ldr	r0, [r5, #72]	@ 0x48
+  4845c0:	2800      	cmp	r0, #0
+  4845c2:	d01b      	beq.n	4845fc <.text+0x40>
+  4845c4:	f895 0050 	ldrb.w	r0, [r5, #80]	@ 0x50
+  4845c8:	2800      	cmp	r0, #0
+  4845ca:	d017      	beq.n	4845fc <.text+0x40>
+  4845cc:	6c68      	ldr	r0, [r5, #68]	@ 0x44
+  4845ce:	2800      	cmp	r0, #0
+  4845d0:	d114      	bne.n	4845fc <.text+0x40>
+  4845d2:	6ca8      	ldr	r0, [r5, #72]	@ 0x48
+  4845d4:	6c41      	ldr	r1, [r0, #68]	@ 0x44
+  4845d6:	e000      	b.n	4845da <.text+0x1e>
+  4845d8:	6809      	ldr	r1, [r1, #0]
+  4845da:	2900      	cmp	r1, #0
+  4845dc:	d01e      	beq.n	48461c <.text+0x60>
+  4845de:	7908      	ldrb	r0, [r1, #4]
+  4845e0:	2807      	cmp	r0, #7
+  4845e2:	d1f9      	bne.n	4845d8 <.text+0x1c>
+  4845e4:	6d08      	ldr	r0, [r1, #80]	@ 0x50
+  4845e6:	2800      	cmp	r0, #0
+  4845e8:	d1f6      	bne.n	4845d8 <.text+0x1c>
+  4845ea:	6d48      	ldr	r0, [r1, #84]	@ 0x54
+  4845ec:	69c0      	ldr	r0, [r0, #28]
+  4845ee:	42a8      	cmp	r0, r5
+  4845f0:	d1f2      	bne.n	4845d8 <.text+0x1c>
+  4845f2:	2001      	movs	r0, #1
+  4845f4:	6508      	str	r0, [r1, #80]	@ 0x50
+  4845f6:	f000 f81a 	bl	48462e <.text+0x72>
+  4845fa:	e00f      	b.n	48461c <.text+0x60>
+  4845fc:	f8df 03a8 	ldr.w	r0, [pc, #936]	@ 4849a8 <.text+0x3ec>
+  484600:	f8d0 413c 	ldr.w	r4, [r0, #316]	@ 0x13c
+  484604:	e008      	b.n	484618 <.text+0x5c>
+  484606:	0029      	movs	r1, r5
+  484608:	0020      	movs	r0, r4
+  48460a:	68e2      	ldr	r2, [r4, #12]
+  48460c:	4790      	blx	r2
+  48460e:	f110 0f01 	cmn.w	r0, #1
+  484612:	d000      	beq.n	484616 <.text+0x5a>
+  484614:	2601      	movs	r6, #1
+  484616:	6824      	ldr	r4, [r4, #0]
+  484618:	2c00      	cmp	r4, #0
+  48461a:	d1f4      	bne.n	484606 <.text+0x4a>
+  48461c:	0030      	movs	r0, r6
+  48461e:	b2c0      	uxtb	r0, r0
+  484620:	bdf2      	pop	{r1, r4, r5, r6, r7, pc}
+  484622:	b580      	push	{r7, lr}
+  484624:	f8df 037c 	ldr.w	r0, [pc, #892]	@ 4849a4 <.text+0x3e8>
+  484628:	f050 f85e 	bl	4d46e8 <.text+0x5012c>
+  48462c:	bd01      	pop	{r0, pc}

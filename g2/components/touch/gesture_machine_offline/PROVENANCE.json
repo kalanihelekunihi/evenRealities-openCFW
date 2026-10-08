@@ -1,0 +1,17 @@
+{
+  "wrapper_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "step": "0x4070..0x43da",
+  "attention_rearm": "0x3afc",
+  "standalone_elf_sha256": "7bb9c18a96194f0d180947fecab8f4471a538c09f3fcb876e1fc6fd47801fc04",
+  "composed_elf_sha256": "a5940348e9ea02ce14d0366c04f9df2b7342ddb2f25d5b4181bae26e1deee7c3",
+  "source_sha256": "b05bff211c2ca8a2c9387006e90185c4674dce8ac4e2287f58ef925b6981741d",
+  "native_dependencies": [
+    "gesture_speed_offline/speed.c",
+    "config_bootstrap_offline/bootstrap.c software-delay sections only"
+  ],
+  "limits": [
+    "Valid bounded state/ring and explicitly sequential counters/samples.",
+    "No borrowed executable firmware in standalone module; selected native sections in composed guest.",
+    "Analog scan/IRQ scheduling/physical duration/SROM durability unverified."
+  ]
+}

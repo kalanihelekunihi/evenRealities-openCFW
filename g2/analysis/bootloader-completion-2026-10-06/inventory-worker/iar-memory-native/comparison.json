@@ -1,0 +1,22 @@
+{
+  "status": "PASS_ORIGINAL_MEMORY_HELPERS_M55",
+  "cases": 840,
+  "fill_cases": 504,
+  "aligned_copy_cases": 336,
+  "elf_sha256": "9836dacab743cbc75d6bd1e3624bf045a461084cec8855f3b94a4538b65168c0",
+  "stock_oracle_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_sha256": "bde5388fea8bf5ad4263d3f9b4e527e12ae710adf5c6923afd441fb25fb93616",
+  "stdout": "",
+  "stderr": "PASS_MEMORY 840\n",
+  "returncode": 0,
+  "checks": [
+    "Full320-byte source/target buffers including guards",
+    "Fill rawR0 original destination; aligned copy rawR0 destination+(count&~1)",
+    "Explicit seededR4-R11,pre/postSP,PRIMASK,BASEPRI"
+  ],
+  "limits": [
+    "Original bytes relocated410000\u219240000 unchanged. Actual original/native helper instructions, no semantic child stubs. Synthetic coherent RAM, no interrupts/cache/concurrency/hardware.",
+    "Lengths0..256 from21 fixed values. Fill4 byte alignments/6 values; copy4 word-aligned source/target offsets each; nonoverlap only. No unaligned big-copy, memmove, all-length or access-order equivalence claim.",
+    "Standalone helper source, not installed into accepted242 candidate. Existing integration fixtures still retain their documented original helper models."
+  ]
+}

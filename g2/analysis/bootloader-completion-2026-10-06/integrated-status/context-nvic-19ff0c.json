@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "cases": 196608,
+  "elf_sha256": "19ff0c9366ae316f2671dfd13462c1383ca37696734f2da68427d7c75185afb8",
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "original_entry": "0x430470",
+  "original_trace": {
+    "0x430470": "0100",
+    "0x430472": "09b2",
+    "0x430474": "0029",
+    "0x430476": "09d4",
+    "0x430478": "0122",
+    "0x43047a": "10f01f01",
+    "0x43047e": "8a40",
+    "0x430480": "dff8b811",
+    "0x430484": "00b2",
+    "0x430486": "4009",
+    "0x430488": "41f82020",
+    "0x43048c": "7047"
+  },
+  "distinct_original_trace_bytes": 30,
+  "limits": [
+    "All65536 low-halfwords and three high-halfword patterns tested; high-halfword truncation follows original instructions.",
+    "Compare issued volatile writes, not actual NVIC W1S behavior, implemented IRQ count, asynchronous delivery or safety of invalid positive IRQ numbers."
+  ]
+}

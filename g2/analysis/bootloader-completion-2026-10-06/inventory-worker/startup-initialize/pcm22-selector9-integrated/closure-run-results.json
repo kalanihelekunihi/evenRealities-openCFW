@@ -1,0 +1,39 @@
+[
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector9-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector9-integrated/verify_updater_installed.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector9-integrated/7ffc7b0eafdf7e6fd13eaaeaacac1c1ea3826f7f1f32d52d73604d17ae84e651/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector9-integrated/7ffc7b0eafdf7e6fd13eaaeaacac1c1ea3826f7f1f32d52d73604d17ae84e651/validation/updater-installed.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 17 fixtures; body bytes 550 of 758; table +4 {'33-2': '0x42d563', '34-2': '0x42ba01', '35-2': '0x42a879', '36-0': '0x42a879'}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector9-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector9-integrated/verify_bootstrap_installed.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector9-integrated/7ffc7b0eafdf7e6fd13eaaeaacac1c1ea3826f7f1f32d52d73604d17ae84e651/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector9-integrated/7ffc7b0eafdf7e6fd13eaaeaacac1c1ea3826f7f1f32d52d73604d17ae84e651/validation/bootstrap-installed.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\"status\": \"PASS\", \"cases\": 6, \"distinct_original_trace_bytes\": 894}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector9-integrated/verify_chain.py"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 528 {'step_ticks': {'start': '0x418394', 'end': '0x418408', 'bytes': 116, 'covered': 110}, 'counter_read': {'start': '0x41f424', 'end': '0x41f440', 'bytes': 28, 'covered': 28}, 'timer_compare': {'start': '0x41f440', 'end': '0x41f4ac', 'bytes': 108, 'covered': 108}, 'stimer_interrupt_clear': {'start': '0x41f4b6', 'end': '0x41f4c0', 'bytes': 10, 'covered': 10}, 'irq_clear': {'start': '0x41b630', 'end': '0x41b64c', 'bytes': 28, 'covered': 28}, 'pre_sleep': {'start': '0x41b5e8', 'end': '0x41b5f4', 'bytes': 12, 'covered': 12}, 'post_sleep': {'start': '0x41b5f4', 'end': '0x41b5f6', 'bytes': 2, 'covered': 2}, 'sample_three': {'start': '0x422aac', 'end': '0x422ac8', 'bytes': 28, 'covered': 28}, 'irq_save': {'start': '0x41b8ec', 'end': '0x41b8f4', 'bytes': 8, 'covered': 8}, 'idle_entry': {'start': '0x4189ac', 'end': '0x4189fa', 'bytes': 78, 'covered': 76}, 'tickless_sleep': {'start': '0x41b754', 'end': '0x41b818', 'bytes': 196, 'covered': 160}, 'deep_sleep': {'start': '0x41a71e', 'end': '0x41ac44', 'bytes': 1318, 'covered': 1284}, 'cp_get': {'start': '0x41ca0c', 'end': '0x41ca2c', 'bytes': 32, 'covered': 32}, 'cp_set': {'start': '0x41c9ca', 'end': '0x41ca08', 'bytes': 62, 'covered': 62}, 'lp_enable': {'start': '0x41ce26', 'end': '0x41ce3c', 'bytes': 22, 'covered': 22}, 'lp_disable': {'start': '0x41ce3c', 'end': '0x41ce52', 'bytes': 22, 'covered': 22}}\n",
+    "stderr": ""
+  }
+]

@@ -1,0 +1,43 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpumysze99/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0048370e <.text>:
+  48370e:	ee01 4b03 	vmla.f64	d4, d1, d3
+  483712:	ed9d 1b00 	vldr	d1, [sp]
+  483716:	eebf 3b08 	vmov.f64	d3, #248	@ 0xbfc00000 -1.5
+  48371a:	ee31 1b03 	vadd.f64	d1, d1, d3
+  48371e:	ed9f 3b84 	vldr	d3, [pc, #528]	@ 483930 <.text+0x222>
+  483722:	ee01 4b03 	vmla.f64	d4, d1, d3
+  483726:	eebd 1bc4 	vcvt.s32.f64	s2, d4
+  48372a:	ee11 7a10 	vmov	r7, s2
+  48372e:	ee01 7a10 	vmov	s2, r7
+  483732:	eeb8 1bc1 	vcvt.f64.s32	d1, s2
+  483736:	ed9f 3b80 	vldr	d3, [pc, #512]	@ 483938 <.text+0x22a>
+  48373a:	eeb6 4b00 	vmov.f64	d4, #96	@ 0x3f000000  0.5
+  48373e:	ee01 4b03 	vmla.f64	d4, d1, d3
+  483742:	eebd 1bc4 	vcvt.s32.f64	s2, d4
+  483746:	ee11 2a10 	vmov	r2, s2
+  48374a:	ee01 7a10 	vmov	s2, r7
+  48374e:	eeb8 1bc1 	vcvt.f64.s32	d1, s2
+  483752:	ed9f 3b7b 	vldr	d3, [pc, #492]	@ 483940 <.text+0x232>
+  483756:	ee21 3b03 	vmul.f64	d3, d1, d3
+  48375a:	ee01 2a10 	vmov	s2, r2
+  48375e:	eeb8 1bc1 	vcvt.f64.s32	d1, s2
+  483762:	ed9f 4b79 	vldr	d4, [pc, #484]	@ 483948 <.text+0x23a>
+  483766:	ee01 3b04 	vmla.f64	d3, d1, d4
+  48376a:	ee23 1b03 	vmul.f64	d1, d3, d3
+  48376e:	f202 32ff 	addw	r2, r2, #1023	@ 0x3ff
+  483772:	17d3      	asrs	r3, r2, #31
+  483774:	0513      	lsls	r3, r2, #20
+  483776:	2200      	movs	r2, #0
+  483778:	e9cd 2300 	strd	r2, r3, [sp]
+  48377c:	eeb0 4b00 	vmov.f64	d4, #0	@ 0x40000000  2.0
+  483780:	ee23 2b04 	vmul.f64	d2, d3, d4
+  483784:	eeb0 5b00 	vmov.f64	d5, #0	@ 0x40000000  2.0
+  483788:	ee35 3b43 	vsub.f64	d3, d5, d3
+  48378c:	eeb2 5b0c 	vmov.f64	d5, #44	@ 0x41600000  14.0
+  483790:	ee81 4b05 	vdiv.f64	d4, d1, d5
+  483794:	eeb2 6b04 	vmov.f64	d6, #36	@ 0x41200000  10.0

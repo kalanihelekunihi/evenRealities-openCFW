@@ -1,0 +1,50 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpe5barvlr/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0046a8c0 <.text>:
+  46a8c0:	f7d2 fc05 	bl	43d0ce <.text-0x2d7f2>
+  46a8c4:	0780      	lsls	r0, r0, #30
+  46a8c6:	d50e      	bpl.n	46a8e6 <.text+0x26>
+  46a8c8:	f8df 0794 	ldr.w	r0, [pc, #1940]	@ 46b060 <.text+0x7a0>
+  46a8cc:	9001      	str	r0, [sp, #4]
+  46a8ce:	f44f 70ff 	mov.w	r0, #510	@ 0x1fe
+  46a8d2:	9000      	str	r0, [sp, #0]
+  46a8d4:	f8df 3778 	ldr.w	r3, [pc, #1912]	@ 46b050 <.text+0x790>
+  46a8d8:	f8df 2778 	ldr.w	r2, [pc, #1912]	@ 46b054 <.text+0x794>
+  46a8dc:	f8df 1778 	ldr.w	r1, [pc, #1912]	@ 46b058 <.text+0x798>
+  46a8e0:	2003      	movs	r0, #3
+  46a8e2:	f7d2 fe47 	bl	43d574 <.text-0x2d34c>
+  46a8e6:	f7d2 fbf2 	bl	43d0ce <.text-0x2d7f2>
+  46a8ea:	07c0      	lsls	r0, r0, #31
+  46a8ec:	d403      	bmi.n	46a8f6 <.text+0x36>
+  46a8ee:	f7d2 fbee 	bl	43d0ce <.text-0x2d7f2>
+  46a8f2:	0740      	lsls	r0, r0, #29
+  46a8f4:	d506      	bpl.n	46a904 <.text+0x44>
+  46a8f6:	f8df 176c 	ldr.w	r1, [pc, #1900]	@ 46b064 <.text+0x7a4>
+  46a8fa:	000a      	movs	r2, r1
+  46a8fc:	f05f 6040 	movs.w	r0, #201326592	@ 0xc000000
+  46a900:	f7d2 facd 	bl	43ce9e <.text-0x2da22>
+  46a904:	f7ef fe30 	bl	45a568 <.text-0x10358>
+  46a908:	2801      	cmp	r0, #1
+  46a90a:	f040 80d2 	bne.w	46aab2 <.text+0x1f2>
+  46a90e:	2300      	movs	r3, #0
+  46a910:	2200      	movs	r2, #0
+  46a912:	2100      	movs	r1, #0
+  46a914:	2022      	movs	r0, #34	@ 0x22
+  46a916:	f7fa f98e 	bl	464c36 <.text-0x5c8a>
+  46a91a:	e0ca      	b.n	46aab2 <.text+0x1f2>
+  46a91c:	6808      	ldr	r0, [r1, #0]
+  46a91e:	2801      	cmp	r0, #1
+  46a920:	f040 80c7 	bne.w	46aab2 <.text+0x1f2>
+  46a924:	f7d2 fbd3 	bl	43d0ce <.text-0x2d7f2>
+  46a928:	0780      	lsls	r0, r0, #30
+  46a92a:	d50e      	bpl.n	46a94a <.text+0x8a>
+  46a92c:	f8df 0738 	ldr.w	r0, [pc, #1848]	@ 46b068 <.text+0x7a8>
+  46a930:	9001      	str	r0, [sp, #4]
+  46a932:	f240 2003 	movw	r0, #515	@ 0x203
+  46a936:	9000      	str	r0, [sp, #0]
+  46a938:	f8df 3714 	ldr.w	r3, [pc, #1812]	@ 46b050 <.text+0x790>
+  46a93c:	f8df 2714 	ldr.w	r2, [pc, #1812]	@ 46b054 <.text+0x794>

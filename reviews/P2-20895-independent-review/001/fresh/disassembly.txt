@@ -1,0 +1,67 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp39zluy2k/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047d71c <.text>:
+  47d71c:	f7bf fcd7 	bl	43d0ce <.text-0x4064e>
+  47d720:	0780      	lsls	r0, r0, #30
+  47d722:	d509      	bpl.n	47d738 <.text+0x1c>
+  47d724:	489d      	ldr	r0, [pc, #628]	@ (47d99c <.text+0x280>)
+  47d726:	9001      	str	r0, [sp, #4]
+  47d728:	20e5      	movs	r0, #229	@ 0xe5
+  47d72a:	9000      	str	r0, [sp, #0]
+  47d72c:	4b78      	ldr	r3, [pc, #480]	@ (47d910 <.text+0x1f4>)
+  47d72e:	4a79      	ldr	r2, [pc, #484]	@ (47d914 <.text+0x1f8>)
+  47d730:	4979      	ldr	r1, [pc, #484]	@ (47d918 <.text+0x1fc>)
+  47d732:	2003      	movs	r0, #3
+  47d734:	f7bf ff1e 	bl	43d574 <.text-0x401a8>
+  47d738:	f7bf fcc9 	bl	43d0ce <.text-0x4064e>
+  47d73c:	07c0      	lsls	r0, r0, #31
+  47d73e:	d403      	bmi.n	47d748 <.text+0x2c>
+  47d740:	f7bf fcc5 	bl	43d0ce <.text-0x4064e>
+  47d744:	0740      	lsls	r0, r0, #29
+  47d746:	d505      	bpl.n	47d754 <.text+0x38>
+  47d748:	4995      	ldr	r1, [pc, #596]	@ (47d9a0 <.text+0x284>)
+  47d74a:	000a      	movs	r2, r1
+  47d74c:	f05f 6040 	movs.w	r0, #201326592	@ 0xc000000
+  47d750:	f7bf fba5 	bl	43ce9e <.text-0x4087e>
+  47d754:	f7dc ff08 	bl	45a568 <.text-0x231b4>
+  47d758:	7969      	ldrb	r1, [r5, #5]
+  47d75a:	b2c0      	uxtb	r0, r0
+  47d75c:	4281      	cmp	r1, r0
+  47d75e:	d129      	bne.n	47d7b4 <.text+0x98>
+  47d760:	f7bf fcb5 	bl	43d0ce <.text-0x4064e>
+  47d764:	0780      	lsls	r0, r0, #30
+  47d766:	d50d      	bpl.n	47d784 <.text+0x68>
+  47d768:	f025 f8d4 	bl	4a2914 <.text+0x251f8>
+  47d76c:	b2c0      	uxtb	r0, r0
+  47d76e:	9002      	str	r0, [sp, #8]
+  47d770:	488c      	ldr	r0, [pc, #560]	@ (47d9a4 <.text+0x288>)
+  47d772:	9001      	str	r0, [sp, #4]
+  47d774:	20e7      	movs	r0, #231	@ 0xe7
+  47d776:	9000      	str	r0, [sp, #0]
+  47d778:	4b65      	ldr	r3, [pc, #404]	@ (47d910 <.text+0x1f4>)
+  47d77a:	4a66      	ldr	r2, [pc, #408]	@ (47d914 <.text+0x1f8>)
+  47d77c:	4966      	ldr	r1, [pc, #408]	@ (47d918 <.text+0x1fc>)
+  47d77e:	2004      	movs	r0, #4
+  47d780:	f7bf fef8 	bl	43d574 <.text-0x401a8>
+  47d784:	f7bf fca3 	bl	43d0ce <.text-0x4064e>
+  47d788:	07c0      	lsls	r0, r0, #31
+  47d78a:	d403      	bmi.n	47d794 <.text+0x78>
+  47d78c:	f7bf fc9f 	bl	43d0ce <.text-0x4064e>
+  47d790:	0740      	lsls	r0, r0, #29
+  47d792:	d509      	bpl.n	47d7a8 <.text+0x8c>
+  47d794:	f025 f8be 	bl	4a2914 <.text+0x251f8>
+  47d798:	4983      	ldr	r1, [pc, #524]	@ (47d9a8 <.text+0x28c>)
+  47d79a:	b2c0      	uxtb	r0, r0
+  47d79c:	0003      	movs	r3, r0
+  47d79e:	000a      	movs	r2, r1
+  47d7a0:	f05f 5082 	movs.w	r0, #272629760	@ 0x10400000
+  47d7a4:	f7bf fb7b 	bl	43ce9e <.text-0x4087e>
+  47d7a8:	f025 f8b4 	bl	4a2914 <.text+0x251f8>
+  47d7ac:	2800      	cmp	r0, #0
+  47d7ae:	d001      	beq.n	47d7b4 <.text+0x98>
+  47d7b0:	f7ff fb91 	bl	47ced6 <.text-0x846>
+  47d7b4:	e7ff      	b.n	47d7b6 <.text+0x9a>

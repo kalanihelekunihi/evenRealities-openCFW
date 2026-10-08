@@ -1,0 +1,55 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpsriaqqir/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00480358 <.text>:
+  480358:	b580      	push	{r7, lr}
+  48035a:	f8df 13a0 	ldr.w	r1, [pc, #928]	@ 4806fc <.text+0x3a4>
+  48035e:	6948      	ldr	r0, [r1, #20]
+  480360:	2800      	cmp	r0, #0
+  480362:	d002      	beq.n	48036a <.text+0x12>
+  480364:	6948      	ldr	r0, [r1, #20]
+  480366:	4780      	blx	r0
+  480368:	e000      	b.n	48036c <.text+0x14>
+  48036a:	2000      	movs	r0, #0
+  48036c:	bd02      	pop	{r1, pc}
+  48036e:	b580      	push	{r7, lr}
+  480370:	f8df 1388 	ldr.w	r1, [pc, #904]	@ 4806fc <.text+0x3a4>
+  480374:	6988      	ldr	r0, [r1, #24]
+  480376:	2800      	cmp	r0, #0
+  480378:	d002      	beq.n	480380 <.text+0x28>
+  48037a:	6988      	ldr	r0, [r1, #24]
+  48037c:	4780      	blx	r0
+  48037e:	e000      	b.n	480382 <.text+0x2a>
+  480380:	2000      	movs	r0, #0
+  480382:	bd02      	pop	{r1, pc}
+  480384:	b580      	push	{r7, lr}
+  480386:	f8df 1374 	ldr.w	r1, [pc, #884]	@ 4806fc <.text+0x3a4>
+  48038a:	69c8      	ldr	r0, [r1, #28]
+  48038c:	2800      	cmp	r0, #0
+  48038e:	d002      	beq.n	480396 <.text+0x3e>
+  480390:	69c8      	ldr	r0, [r1, #28]
+  480392:	4780      	blx	r0
+  480394:	e000      	b.n	480398 <.text+0x40>
+  480396:	2000      	movs	r0, #0
+  480398:	bd02      	pop	{r1, pc}
+  48039a:	b580      	push	{r7, lr}
+  48039c:	f8df 135c 	ldr.w	r1, [pc, #860]	@ 4806fc <.text+0x3a4>
+  4803a0:	6ac8      	ldr	r0, [r1, #44]	@ 0x2c
+  4803a2:	2800      	cmp	r0, #0
+  4803a4:	d001      	beq.n	4803aa <.text+0x52>
+  4803a6:	6ac8      	ldr	r0, [r1, #44]	@ 0x2c
+  4803a8:	4780      	blx	r0
+  4803aa:	bd01      	pop	{r0, pc}
+  4803ac:	b580      	push	{r7, lr}
+  4803ae:	f8df 134c 	ldr.w	r1, [pc, #844]	@ 4806fc <.text+0x3a4>
+  4803b2:	6a08      	ldr	r0, [r1, #32]
+  4803b4:	2800      	cmp	r0, #0
+  4803b6:	d002      	beq.n	4803be <.text+0x66>
+  4803b8:	6a08      	ldr	r0, [r1, #32]
+  4803ba:	4780      	blx	r0
+  4803bc:	e000      	b.n	4803c0 <.text+0x68>
+  4803be:	2000      	movs	r0, #0
+  4803c0:	bd02      	pop	{r1, pc}

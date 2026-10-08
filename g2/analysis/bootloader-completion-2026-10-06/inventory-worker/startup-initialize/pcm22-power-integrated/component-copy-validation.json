@@ -1,0 +1,40 @@
+{
+  "status": "PASS",
+  "elf_sha256": "aac9ab01bf1d628162a8ec528bf73bc2b04a1f655a88091795650e600b27ea45",
+  "objects": 3,
+  "copies": [
+    {
+      "source": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-power-integrated/startup_events_a.c",
+      "component": "g2/components/bootloader/initializer_callbacks/pcm22_power/startup_events_a.c",
+      "sha256": "db914cecdc1b0a1c4cc67a65fdb9890ae2e6f62e1be38c06366404ff3e2aee1c"
+    },
+    {
+      "source": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-power-integrated/startup_events_a.h",
+      "component": "g2/components/bootloader/initializer_callbacks/pcm22_power/startup_events_a.h",
+      "sha256": "508c3e6c67ac2857828a9f354f4df69d304b5e10e4f571c25203349269aee4d7"
+    },
+    {
+      "source": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-power-integrated/startup_runtime.c",
+      "component": "g2/components/bootloader/initializer_callbacks/pcm22_power/startup_runtime.c",
+      "sha256": "a5243423cb17a1e8461af23314438aaefe8ef9269d145728b8c8b97f408ede06"
+    },
+    {
+      "source": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-power-integrated/spot_sleep_wrappers.c",
+      "component": "g2/components/bootloader/initializer_callbacks/pcm22_power/spot_sleep_wrappers.c",
+      "sha256": "744c122309a3b8cb5b987580a6c105776c064575e0d08217923958287a9f880d"
+    }
+  ],
+  "flags": [
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m33",
+    "-mthumb",
+    "-mfloat-abi=softfp",
+    "-O1",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-fshort-enums"
+  ],
+  "note": "Isolated component copies compile to exact frozen successor objects; parent component files/build recipes unchanged."
+}

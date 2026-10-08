@@ -1,0 +1,18 @@
+[
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-selector13-integrated/run_oracle.py",
+      "g2/components/bootloader/thread_creation/verify_source_image.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector13-integrated/cf30c67430b8ad3f4e06c4fb70e510f80fc09a7449a64767d29322e41a2c23a1/candidate.elf",
+      "--seed-elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/filesystem/filesystem-update.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-selector13-integrated/cf30c67430b8ad3f4e06c4fb70e510f80fc09a7449a64767d29322e41a2c23a1/validation/comparison.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\"status\": \"PASS\", \"cases\": 2, \"distinct_original_trace_bytes\": 38318}\n",
+    "stderr": ""
+  }
+]

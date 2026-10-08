@@ -1,0 +1,3 @@
+Independent stock-body reconstruction. Current validation evidence is in g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/bounded-format-native/. Canonical C compiles to exact frozen229-candidate objects (canonical-source-reproduction.json). See the final report for validation status; fixture stubs/hybrid original formatter execution do not establish hardware behavior or full source-only bootloader closure. No firmware image is installed.
+
+Accepted bounded offline229checkpoint: fresh7integration cases and76regression jobs pass. The full source-only formatter, bootloader and byte-identical production artifact remain incomplete. See REPORT.md and completion-receipt.json in the analysis directory.

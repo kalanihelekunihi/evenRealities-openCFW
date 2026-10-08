@@ -1,0 +1,30 @@
+{
+  "measured_utc": "2026-10-08T07:07:56.970527+00:00",
+  "wrapper_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "runtime_base": "0x3300",
+  "functions": {
+    "getter": "0x3a1c",
+    "save": "0x3a38",
+    "gesture_init": "0x404c",
+    "sensor_status": "0x7d36",
+    "widget_active": "0x7d04",
+    "proximity": "0x441c",
+    "report_calibration": "0x3b24"
+  },
+  "borrowed_original_code": [
+    "gesture0x4070",
+    "speed0x3efc",
+    "original memory/division helpers used by those bodies"
+  ],
+  "sdk_evidence": {
+    "path": "/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/drivers/include/cy_systick.h",
+    "sha256": "441fdffdb4eb70d32156439fa5365f260309a7effb0aa15aa67688a566380c2a",
+    "pin": "35f1714623cfea682d5e285af80d50416b4c7bbc",
+    "clock_enum_0": "clk_lf"
+  },
+  "limits": [
+    "Independent semantic reconstruction, not exact-source byte matching.",
+    "Original gesture body retained only in offline fixture; no production integration.",
+    "Synthetic sensor structures,SROM,SysTick MMIO; no physical calibration/timing proof."
+  ]
+}

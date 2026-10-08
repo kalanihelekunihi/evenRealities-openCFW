@@ -1,0 +1,3 @@
+# Object function continuity
+
+Partial,unaccepted.Components19396/19398/19400/19402tile4680C8..4682AA. All localdirectbranches landonrecoveredinstructionstarts. Nullguard,wrapperchildsequence,stackrecordpredicate andfreshbytechecks/actions,diagnostics,sharedrecursiveiteration and40frame/liveR0return recorded. Recursivecalltargetentryincluded;childcontracts unresolved. Structural/exactbyteproof only,no semantic acceptance/corpus/source/gates.

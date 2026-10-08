@@ -1,0 +1,51 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp22kdjijc/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00469a76 <.text>:
+  469a76:	2805      	cmp	r0, #5
+  469a78:	d130      	bne.n	469adc <.text+0x66>
+  469a7a:	f7d3 fb28 	bl	43d0ce <.text-0x2c9a8>
+  469a7e:	0780      	lsls	r0, r0, #30
+  469a80:	d50a      	bpl.n	469a98 <.text+0x22>
+  469a82:	4857      	ldr	r0, [pc, #348]	@ (469be0 <.text+0x16a>)
+  469a84:	9001      	str	r0, [sp, #4]
+  469a86:	f44f 70bd 	mov.w	r0, #378	@ 0x17a
+  469a8a:	9000      	str	r0, [sp, #0]
+  469a8c:	4b40      	ldr	r3, [pc, #256]	@ (469b90 <.text+0x11a>)
+  469a8e:	4a2a      	ldr	r2, [pc, #168]	@ (469b38 <.text+0xc2>)
+  469a90:	492a      	ldr	r1, [pc, #168]	@ (469b3c <.text+0xc6>)
+  469a92:	2004      	movs	r0, #4
+  469a94:	f7d3 fd6e 	bl	43d574 <.text-0x2c502>
+  469a98:	f7d3 fb19 	bl	43d0ce <.text-0x2c9a8>
+  469a9c:	07c0      	lsls	r0, r0, #31
+  469a9e:	d403      	bmi.n	469aa8 <.text+0x32>
+  469aa0:	f7d3 fb15 	bl	43d0ce <.text-0x2c9a8>
+  469aa4:	0740      	lsls	r0, r0, #29
+  469aa6:	d505      	bpl.n	469ab4 <.text+0x3e>
+  469aa8:	494e      	ldr	r1, [pc, #312]	@ (469be4 <.text+0x16e>)
+  469aaa:	000a      	movs	r2, r1
+  469aac:	f05f 5080 	movs.w	r0, #268435456	@ 0x10000000
+  469ab0:	f7d3 f9f5 	bl	43ce9e <.text-0x2cbd8>
+  469ab4:	4834      	ldr	r0, [pc, #208]	@ (469b88 <.text+0x112>)
+  469ab6:	7800      	ldrb	r0, [r0, #0]
+  469ab8:	2800      	cmp	r0, #0
+  469aba:	d005      	beq.n	469ac8 <.text+0x52>
+  469abc:	2001      	movs	r0, #1
+  469abe:	f7ff fb7d 	bl	4691bc <.text-0x8ba>
+  469ac2:	2001      	movs	r0, #1
+  469ac4:	f032 fa2e 	bl	49bf24 <.text+0x324ae>
+  469ac8:	2000      	movs	r0, #0
+  469aca:	491e      	ldr	r1, [pc, #120]	@ (469b44 <.text+0xce>)
+  469acc:	7008      	strb	r0, [r1, #0]
+  469ace:	2000      	movs	r0, #0
+  469ad0:	4920      	ldr	r1, [pc, #128]	@ (469b54 <.text+0xde>)
+  469ad2:	7008      	strb	r0, [r1, #0]
+  469ad4:	f7ff fccb 	bl	46946e <.text-0x608>
+  469ad8:	2000      	movs	r0, #0
+  469ada:	e000      	b.n	469ade <.text+0x68>
+  469adc:	2000      	movs	r0, #0
+  469ade:	b004      	add	sp, #16
+  469ae0:	bd70      	pop	{r4, r5, r6, pc}

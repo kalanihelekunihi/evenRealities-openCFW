@@ -1,0 +1,1104 @@
+{
+  "status": "PASS",
+  "cases": 52,
+  "entry": "0x42c63a",
+  "locked_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_elf_sha256": "bcc057db988238f1209f2e9aead5e699156b7050402ad6c08b9f667d1c964da7",
+  "compiled_source_sha256": "9188fb33ec9ab5c9c8c32f819b030474d9b00129cb2fb8cb970b0bc57c35c355",
+  "verifier_sha256": "322201598f29f5271b28677b52d73c908ad226c65e2892f8254996177dbda00a",
+  "linker_script_sha256": "c426f036665ed7c1ed87d8a5e8a15b16051842904a630effbfd4163774ed2c02",
+  "locked_body_sha256": "4bb8cd7875f57a46da8764a7c89f6058ce9f5aac52f707e5c86dc7a66c20d775",
+  "unique_original_instruction_addresses": 22,
+  "original_trace_bytes": 56,
+  "limits": [
+    "Only the bounded handle/mask/module cases in this test were exercised.",
+    "MMIO registers are Unicorn RAM, not physical interrupt-controller behavior.",
+    "This leaf test does not establish whole-callback or whole-image equivalence."
+  ],
+  "comparisons": [
+    {
+      "handle": null,
+      "mask": 0,
+      "original": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      },
+      "source": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      }
+    },
+    {
+      "handle": null,
+      "mask": 1,
+      "original": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      },
+      "source": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      }
+    },
+    {
+      "handle": null,
+      "mask": 2,
+      "original": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      },
+      "source": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      }
+    },
+    {
+      "handle": null,
+      "mask": 4,
+      "original": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      },
+      "source": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      }
+    },
+    {
+      "handle": null,
+      "mask": 2147483648,
+      "original": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      },
+      "source": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      }
+    },
+    {
+      "handle": null,
+      "mask": 3221225473,
+      "original": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      },
+      "source": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      }
+    },
+    {
+      "handle": null,
+      "mask": 1073741823,
+      "original": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      },
+      "source": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      }
+    },
+    {
+      "handle": null,
+      "mask": 4294967295,
+      "original": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      },
+      "source": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      }
+    },
+    {
+      "handle": [
+        0,
+        0
+      ],
+      "mask": 0,
+      "original": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      },
+      "source": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      }
+    },
+    {
+      "handle": [
+        0,
+        0
+      ],
+      "mask": 1,
+      "original": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      },
+      "source": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      }
+    },
+    {
+      "handle": [
+        0,
+        0
+      ],
+      "mask": 2,
+      "original": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      },
+      "source": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      }
+    },
+    {
+      "handle": [
+        0,
+        0
+      ],
+      "mask": 4,
+      "original": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      },
+      "source": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      }
+    },
+    {
+      "handle": [
+        0,
+        0
+      ],
+      "mask": 2147483648,
+      "original": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      },
+      "source": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      }
+    },
+    {
+      "handle": [
+        0,
+        0
+      ],
+      "mask": 3221225473,
+      "original": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      },
+      "source": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      }
+    },
+    {
+      "handle": [
+        0,
+        0
+      ],
+      "mask": 1073741823,
+      "original": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      },
+      "source": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      }
+    },
+    {
+      "handle": [
+        0,
+        0
+      ],
+      "mask": 4294967295,
+      "original": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      },
+      "source": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      }
+    },
+    {
+      "handle": [
+        17970263,
+        0
+      ],
+      "mask": 0,
+      "original": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      },
+      "source": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      }
+    },
+    {
+      "handle": [
+        17970263,
+        0
+      ],
+      "mask": 1,
+      "original": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      },
+      "source": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      }
+    },
+    {
+      "handle": [
+        17970263,
+        0
+      ],
+      "mask": 2,
+      "original": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      },
+      "source": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      }
+    },
+    {
+      "handle": [
+        17970263,
+        0
+      ],
+      "mask": 4,
+      "original": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      },
+      "source": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      }
+    },
+    {
+      "handle": [
+        17970263,
+        0
+      ],
+      "mask": 2147483648,
+      "original": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      },
+      "source": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      }
+    },
+    {
+      "handle": [
+        17970263,
+        0
+      ],
+      "mask": 3221225473,
+      "original": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      },
+      "source": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      }
+    },
+    {
+      "handle": [
+        17970263,
+        0
+      ],
+      "mask": 1073741823,
+      "original": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      },
+      "source": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      }
+    },
+    {
+      "handle": [
+        17970263,
+        0
+      ],
+      "mask": 4294967295,
+      "original": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      },
+      "source": {
+        "return": 2,
+        "writes": [],
+        "target_value": 256
+      }
+    },
+    {
+      "handle": [
+        4279383126,
+        0
+      ],
+      "mask": 0,
+      "original": {
+        "return": 0,
+        "writes": [
+          [
+            1074070016,
+            4,
+            256
+          ]
+        ],
+        "target_value": 256
+      },
+      "source": {
+        "return": 0,
+        "writes": [
+          [
+            1074070016,
+            4,
+            256
+          ]
+        ],
+        "target_value": 256
+      }
+    },
+    {
+      "handle": [
+        4279383126,
+        0
+      ],
+      "mask": 1,
+      "original": {
+        "return": 0,
+        "writes": [
+          [
+            1074070016,
+            4,
+            257
+          ]
+        ],
+        "target_value": 257
+      },
+      "source": {
+        "return": 0,
+        "writes": [
+          [
+            1074070016,
+            4,
+            257
+          ]
+        ],
+        "target_value": 257
+      }
+    },
+    {
+      "handle": [
+        4279383126,
+        0
+      ],
+      "mask": 2,
+      "original": {
+        "return": 6,
+        "writes": [],
+        "target_value": 256
+      },
+      "source": {
+        "return": 6,
+        "writes": [],
+        "target_value": 256
+      }
+    },
+    {
+      "handle": [
+        4279383126,
+        0
+      ],
+      "mask": 4,
+      "original": {
+        "return": 0,
+        "writes": [
+          [
+            1074070016,
+            4,
+            260
+          ]
+        ],
+        "target_value": 260
+      },
+      "source": {
+        "return": 0,
+        "writes": [
+          [
+            1074070016,
+            4,
+            260
+          ]
+        ],
+        "target_value": 260
+      }
+    },
+    {
+      "handle": [
+        4279383126,
+        0
+      ],
+      "mask": 2147483648,
+      "original": {
+        "return": 0,
+        "writes": [
+          [
+            1074070016,
+            4,
+            2147483904
+          ]
+        ],
+        "target_value": 2147483904
+      },
+      "source": {
+        "return": 0,
+        "writes": [
+          [
+            1074070016,
+            4,
+            2147483904
+          ]
+        ],
+        "target_value": 2147483904
+      }
+    },
+    {
+      "handle": [
+        4279383126,
+        0
+      ],
+      "mask": 3221225473,
+      "original": {
+        "return": 0,
+        "writes": [
+          [
+            1074070016,
+            4,
+            3221225729
+          ]
+        ],
+        "target_value": 3221225729
+      },
+      "source": {
+        "return": 0,
+        "writes": [
+          [
+            1074070016,
+            4,
+            3221225729
+          ]
+        ],
+        "target_value": 3221225729
+      }
+    },
+    {
+      "handle": [
+        4279383126,
+        0
+      ],
+      "mask": 1073741823,
+      "original": {
+        "return": 6,
+        "writes": [],
+        "target_value": 256
+      },
+      "source": {
+        "return": 6,
+        "writes": [],
+        "target_value": 256
+      }
+    },
+    {
+      "handle": [
+        4279383126,
+        0
+      ],
+      "mask": 4294967295,
+      "original": {
+        "return": 6,
+        "writes": [],
+        "target_value": 256
+      },
+      "source": {
+        "return": 6,
+        "writes": [],
+        "target_value": 256
+      }
+    },
+    {
+      "handle": [
+        17970262,
+        0
+      ],
+      "mask": 1,
+      "initial": 0,
+      "original": {
+        "return": 0,
+        "writes": [
+          [
+            1074070016,
+            4,
+            1
+          ]
+        ],
+        "target_value": 1
+      },
+      "source": {
+        "return": 0,
+        "writes": [
+          [
+            1074070016,
+            4,
+            1
+          ]
+        ],
+        "target_value": 1
+      }
+    },
+    {
+      "handle": [
+        17970262,
+        0
+      ],
+      "mask": 2,
+      "initial": 0,
+      "original": {
+        "return": 6,
+        "writes": [],
+        "target_value": 0
+      },
+      "source": {
+        "return": 6,
+        "writes": [],
+        "target_value": 0
+      }
+    },
+    {
+      "handle": [
+        17970262,
+        0
+      ],
+      "mask": 4,
+      "initial": 0,
+      "original": {
+        "return": 0,
+        "writes": [
+          [
+            1074070016,
+            4,
+            4
+          ]
+        ],
+        "target_value": 4
+      },
+      "source": {
+        "return": 0,
+        "writes": [
+          [
+            1074070016,
+            4,
+            4
+          ]
+        ],
+        "target_value": 4
+      }
+    },
+    {
+      "handle": [
+        17970262,
+        0
+      ],
+      "mask": 36,
+      "initial": 128,
+      "original": {
+        "return": 0,
+        "writes": [
+          [
+            1074070016,
+            4,
+            164
+          ]
+        ],
+        "target_value": 164
+      },
+      "source": {
+        "return": 0,
+        "writes": [
+          [
+            1074070016,
+            4,
+            164
+          ]
+        ],
+        "target_value": 164
+      }
+    },
+    {
+      "handle": [
+        17970262,
+        0
+      ],
+      "mask": 1073741823,
+      "initial": 2147483648,
+      "original": {
+        "return": 6,
+        "writes": [],
+        "target_value": 2147483648
+      },
+      "source": {
+        "return": 6,
+        "writes": [],
+        "target_value": 2147483648
+      }
+    },
+    {
+      "handle": [
+        17970262,
+        1
+      ],
+      "mask": 1,
+      "initial": 0,
+      "original": {
+        "return": 0,
+        "writes": [
+          [
+            1074074112,
+            4,
+            1
+          ]
+        ],
+        "target_value": 1
+      },
+      "source": {
+        "return": 0,
+        "writes": [
+          [
+            1074074112,
+            4,
+            1
+          ]
+        ],
+        "target_value": 1
+      }
+    },
+    {
+      "handle": [
+        17970262,
+        1
+      ],
+      "mask": 2,
+      "initial": 0,
+      "original": {
+        "return": 6,
+        "writes": [],
+        "target_value": 0
+      },
+      "source": {
+        "return": 6,
+        "writes": [],
+        "target_value": 0
+      }
+    },
+    {
+      "handle": [
+        17970262,
+        1
+      ],
+      "mask": 4,
+      "initial": 0,
+      "original": {
+        "return": 0,
+        "writes": [
+          [
+            1074074112,
+            4,
+            4
+          ]
+        ],
+        "target_value": 4
+      },
+      "source": {
+        "return": 0,
+        "writes": [
+          [
+            1074074112,
+            4,
+            4
+          ]
+        ],
+        "target_value": 4
+      }
+    },
+    {
+      "handle": [
+        17970262,
+        1
+      ],
+      "mask": 36,
+      "initial": 128,
+      "original": {
+        "return": 0,
+        "writes": [
+          [
+            1074074112,
+            4,
+            164
+          ]
+        ],
+        "target_value": 164
+      },
+      "source": {
+        "return": 0,
+        "writes": [
+          [
+            1074074112,
+            4,
+            164
+          ]
+        ],
+        "target_value": 164
+      }
+    },
+    {
+      "handle": [
+        17970262,
+        1
+      ],
+      "mask": 1073741823,
+      "initial": 2147483648,
+      "original": {
+        "return": 6,
+        "writes": [],
+        "target_value": 2147483648
+      },
+      "source": {
+        "return": 6,
+        "writes": [],
+        "target_value": 2147483648
+      }
+    },
+    {
+      "handle": [
+        17970262,
+        2
+      ],
+      "mask": 1,
+      "initial": 0,
+      "original": {
+        "return": 0,
+        "writes": [
+          [
+            1074078208,
+            4,
+            1
+          ]
+        ],
+        "target_value": 1
+      },
+      "source": {
+        "return": 0,
+        "writes": [
+          [
+            1074078208,
+            4,
+            1
+          ]
+        ],
+        "target_value": 1
+      }
+    },
+    {
+      "handle": [
+        17970262,
+        2
+      ],
+      "mask": 2,
+      "initial": 0,
+      "original": {
+        "return": 6,
+        "writes": [],
+        "target_value": 0
+      },
+      "source": {
+        "return": 6,
+        "writes": [],
+        "target_value": 0
+      }
+    },
+    {
+      "handle": [
+        17970262,
+        2
+      ],
+      "mask": 4,
+      "initial": 0,
+      "original": {
+        "return": 0,
+        "writes": [
+          [
+            1074078208,
+            4,
+            4
+          ]
+        ],
+        "target_value": 4
+      },
+      "source": {
+        "return": 0,
+        "writes": [
+          [
+            1074078208,
+            4,
+            4
+          ]
+        ],
+        "target_value": 4
+      }
+    },
+    {
+      "handle": [
+        17970262,
+        2
+      ],
+      "mask": 36,
+      "initial": 128,
+      "original": {
+        "return": 0,
+        "writes": [
+          [
+            1074078208,
+            4,
+            164
+          ]
+        ],
+        "target_value": 164
+      },
+      "source": {
+        "return": 0,
+        "writes": [
+          [
+            1074078208,
+            4,
+            164
+          ]
+        ],
+        "target_value": 164
+      }
+    },
+    {
+      "handle": [
+        17970262,
+        2
+      ],
+      "mask": 1073741823,
+      "initial": 2147483648,
+      "original": {
+        "return": 6,
+        "writes": [],
+        "target_value": 2147483648
+      },
+      "source": {
+        "return": 6,
+        "writes": [],
+        "target_value": 2147483648
+      }
+    },
+    {
+      "handle": [
+        17970262,
+        3
+      ],
+      "mask": 1,
+      "initial": 0,
+      "original": {
+        "return": 0,
+        "writes": [
+          [
+            1074082304,
+            4,
+            1
+          ]
+        ],
+        "target_value": 1
+      },
+      "source": {
+        "return": 0,
+        "writes": [
+          [
+            1074082304,
+            4,
+            1
+          ]
+        ],
+        "target_value": 1
+      }
+    },
+    {
+      "handle": [
+        17970262,
+        3
+      ],
+      "mask": 2,
+      "initial": 0,
+      "original": {
+        "return": 6,
+        "writes": [],
+        "target_value": 0
+      },
+      "source": {
+        "return": 6,
+        "writes": [],
+        "target_value": 0
+      }
+    },
+    {
+      "handle": [
+        17970262,
+        3
+      ],
+      "mask": 4,
+      "initial": 0,
+      "original": {
+        "return": 0,
+        "writes": [
+          [
+            1074082304,
+            4,
+            4
+          ]
+        ],
+        "target_value": 4
+      },
+      "source": {
+        "return": 0,
+        "writes": [
+          [
+            1074082304,
+            4,
+            4
+          ]
+        ],
+        "target_value": 4
+      }
+    },
+    {
+      "handle": [
+        17970262,
+        3
+      ],
+      "mask": 36,
+      "initial": 128,
+      "original": {
+        "return": 0,
+        "writes": [
+          [
+            1074082304,
+            4,
+            164
+          ]
+        ],
+        "target_value": 164
+      },
+      "source": {
+        "return": 0,
+        "writes": [
+          [
+            1074082304,
+            4,
+            164
+          ]
+        ],
+        "target_value": 164
+      }
+    },
+    {
+      "handle": [
+        17970262,
+        3
+      ],
+      "mask": 1073741823,
+      "initial": 2147483648,
+      "original": {
+        "return": 6,
+        "writes": [],
+        "target_value": 2147483648
+      },
+      "source": {
+        "return": 6,
+        "writes": [],
+        "target_value": 2147483648
+      }
+    }
+  ]
+}

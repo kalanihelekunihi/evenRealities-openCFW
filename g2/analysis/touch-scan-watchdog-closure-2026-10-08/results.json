@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "cases": {
+    "watchdog": 144,
+    "wait": 100
+  },
+  "elf_sha256": "dcb2de2d83b4f6762d93c51e569fd1207009f22c085636c35dff0b199d52293b",
+  "limits": [
+    "Synthetic context and MMIO completion-read sequence; no physical time or ADC acquisition.",
+    "Original division/multiplication code executes; no call-entry stubs.",
+    "Write-to-clear semantics modeled for interrupt register, not full peripheral emulator."
+  ]
+}

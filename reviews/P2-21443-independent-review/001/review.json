@@ -1,0 +1,27 @@
+{
+  "review_id": "P2-21443-independent-review",
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-record-reset-byte-unaligned-word-null-diagnostic-helper-21842-map/001",
+  "status": "partial",
+  "accepted": false,
+  "checks": {
+    "fresh_replay": "pass",
+    "instruction_bytes": 68,
+    "instructions_match": true,
+    "references_match": true,
+    "frame_bytes": 24,
+    "byte_store_value": 255,
+    "helper_args": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "unaligned_word_store_offset": 57
+  },
+  "limitations": [
+    "helper contract unresolved",
+    "unaligned access effects not inferred",
+    "exception behavior outside evidence",
+    "no whole-routine coverage or acceptance claim"
+  ]
+}

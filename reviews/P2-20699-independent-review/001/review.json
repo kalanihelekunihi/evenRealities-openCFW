@@ -1,0 +1,10 @@
+{
+  "id": "P2-20699",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "72B, frameless leaf except for an 8-byte R4/R5 save; full entry R1 is AND-tested against a fresh byte46 before LOW8 selector dispatch. Selectors 1/2 read the selected length byte, store it through R2, then return pointer offsets; 4/8 return offsets without output writes. Other selector values and zero intersection return zero."
+}

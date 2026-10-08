@@ -1,0 +1,6077 @@
+{
+  "status": "PASS_ORIGINAL_INTEGER_CURSOR_FRAGMENTS",
+  "cases": 288,
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_sha256": "135e1abf0ae9f9b0b267c30a90ae3eabe429faca45deb69094e63f270f832bb5",
+  "native_elf_sha256": "9e0633992f27c315ccc0a8463c1ff80645ac5f80861ec4399799868e5fd18164",
+  "fragments": [
+    {
+      "start": "0x41ef8c",
+      "end": "0x41eff2",
+      "bytes": 102,
+      "visited": 102,
+      "sha256": "456ca948968a9ca9ff7d282745da0c4afdb5239b79bdb9c4ad50c4bfb959ccf5"
+    },
+    {
+      "start": "0x41f022",
+      "end": "0x41f088",
+      "bytes": 102,
+      "visited": 102,
+      "sha256": "9f34909e83fc2af568a0d8119d2f001d4bbffe75eb75585a4983c70e634db2d4"
+    }
+  ],
+  "results": [
+    {
+      "length": 0,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 0,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 0,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 0,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 0,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483648,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 0,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483648,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 0,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483647,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 0,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483647,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 0,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 0,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 0,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          65535,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 0,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          65535,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 0,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          4294967295,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 0,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          4294967295,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 0,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          305419896,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 0,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          305419896,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 0,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 0,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 0,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 0,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 0,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483648,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 0,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483648,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 0,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483647,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 0,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483647,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 0,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 0,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 0,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          65535,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 0,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          65535,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 0,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          4294967295,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 0,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          4294967295,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 0,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          305419896,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 0,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          305419896,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          120,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          120,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          4294967295,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          4294967295,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          4294967295,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          4294967295,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          4294967295,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          4294967295,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          4294967295,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          4294967295,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          120,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 98,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          120,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          65535,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          65535,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          65535,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          65535,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          65535,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          65535,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          22136,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          22136,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          4294967295,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          4294967295,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          4294967295,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          4294967295,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          4294967295,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          4294967295,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          22136,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 104,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          22136,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 8,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 8,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          255,
+          65535
+        ],
+        "consumed_bytes": 8,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          255,
+          65535
+        ],
+        "consumed_bytes": 8,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483648,
+          4294967295
+        ],
+        "consumed_bytes": 8,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483648,
+          4294967295
+        ],
+        "consumed_bytes": 8,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483647,
+          305419896
+        ],
+        "consumed_bytes": 8,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483647,
+          305419896
+        ],
+        "consumed_bytes": 8,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 12,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 12,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483648,
+          4294967295
+        ],
+        "consumed_bytes": 12,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483648,
+          4294967295
+        ],
+        "consumed_bytes": 12,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          1,
+          0
+        ],
+        "consumed_bytes": 12,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          1,
+          0
+        ],
+        "consumed_bytes": 12,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2309737967,
+          2147483648
+        ],
+        "consumed_bytes": 12,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2309737967,
+          2147483648
+        ],
+        "consumed_bytes": 12,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 8,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 8,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          255,
+          65535
+        ],
+        "consumed_bytes": 8,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          255,
+          65535
+        ],
+        "consumed_bytes": 8,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483648,
+          4294967295
+        ],
+        "consumed_bytes": 8,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483648,
+          4294967295
+        ],
+        "consumed_bytes": 8,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483647,
+          305419896
+        ],
+        "consumed_bytes": 8,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483647,
+          305419896
+        ],
+        "consumed_bytes": 8,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 12,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 12,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483648,
+          4294967295
+        ],
+        "consumed_bytes": 12,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483648,
+          4294967295
+        ],
+        "consumed_bytes": 12,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          1,
+          0
+        ],
+        "consumed_bytes": 12,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          1,
+          0
+        ],
+        "consumed_bytes": 12,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2309737967,
+          2147483648
+        ],
+        "consumed_bytes": 12,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 106,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2309737967,
+          2147483648
+        ],
+        "consumed_bytes": 12,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483648,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483648,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483647,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483647,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          65535,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          65535,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          4294967295,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          4294967295,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          305419896,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          305419896,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483648,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483648,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483647,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483647,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          65535,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          65535,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          4294967295,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          4294967295,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          305419896,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 108,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          305419896,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 8,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 8,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          255,
+          65535
+        ],
+        "consumed_bytes": 8,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          255,
+          65535
+        ],
+        "consumed_bytes": 8,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483648,
+          4294967295
+        ],
+        "consumed_bytes": 8,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483648,
+          4294967295
+        ],
+        "consumed_bytes": 8,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483647,
+          305419896
+        ],
+        "consumed_bytes": 8,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483647,
+          305419896
+        ],
+        "consumed_bytes": 8,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 12,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 12,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483648,
+          4294967295
+        ],
+        "consumed_bytes": 12,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483648,
+          4294967295
+        ],
+        "consumed_bytes": 12,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          1,
+          0
+        ],
+        "consumed_bytes": 12,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          1,
+          0
+        ],
+        "consumed_bytes": 12,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2309737967,
+          2147483648
+        ],
+        "consumed_bytes": 12,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2309737967,
+          2147483648
+        ],
+        "consumed_bytes": 12,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 8,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 8,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          255,
+          65535
+        ],
+        "consumed_bytes": 8,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          255,
+          65535
+        ],
+        "consumed_bytes": 8,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483648,
+          4294967295
+        ],
+        "consumed_bytes": 8,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483648,
+          4294967295
+        ],
+        "consumed_bytes": 8,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483647,
+          305419896
+        ],
+        "consumed_bytes": 8,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483647,
+          305419896
+        ],
+        "consumed_bytes": 8,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 12,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 12,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483648,
+          4294967295
+        ],
+        "consumed_bytes": 12,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483648,
+          4294967295
+        ],
+        "consumed_bytes": 12,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          1,
+          0
+        ],
+        "consumed_bytes": 12,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          1,
+          0
+        ],
+        "consumed_bytes": 12,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2309737967,
+          2147483648
+        ],
+        "consumed_bytes": 12,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 113,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2309737967,
+          2147483648
+        ],
+        "consumed_bytes": 12,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483648,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483648,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483647,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483647,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          65535,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          65535,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          4294967295,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          4294967295,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          305419896,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          305419896,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483648,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483648,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483647,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483647,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          65535,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          65535,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          4294967295,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          4294967295,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          305419896,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 116,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          305419896,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483648,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483648,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483647,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483647,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          65535,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          65535,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          4294967295,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          4294967295,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          305419896,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          305419896,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483648,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483648,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483647,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483647,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          65535,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          65535,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          4294967295,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          4294967295,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          305419896,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 122,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          305419896,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483648,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483648,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483647,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 0,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483647,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          65535,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          65535,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          4294967295,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          4294967295,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          305419896,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 0,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          305419896,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          255,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483648,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483648,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          2147483647,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 1,
+      "alignment_offset": 0,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          2147483647,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          0,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000000000000000000000000000000"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          65535,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        255,
+        65535,
+        2147483648,
+        4294967295
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          65535,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ff000000ffff000000000080ffffffff"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          4294967295,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483648,
+        4294967295,
+        1,
+        0
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          4294967295,
+          4294967295
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "00000080ffffffff0100000000000000"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 0,
+      "result": {
+        "value_words": [
+          305419896,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 0,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    },
+    {
+      "length": 76,
+      "signed": 1,
+      "alignment_offset": 4,
+      "words": [
+        2147483647,
+        305419896,
+        2309737967,
+        2147483648
+      ],
+      "mask": 1,
+      "result": {
+        "value_words": [
+          305419896,
+          0
+        ],
+        "consumed_bytes": 4,
+        "mask": 1,
+        "caller_words": "ffffff7f78563412efcdab8900000080"
+      }
+    }
+  ],
+  "limits": [
+    "Fragment boundary entry with synthetic stack/cursor state; no stubbed children or original image loaded on C side.",
+    "Independent helper for future source engine. Not an independent original function, not linked into229 candidate, and not counted as full source-owned engine bytes. Integer rendering, sign-prefix construction, precision/padding and all floating/secure paths remain separate."
+  ]
+}

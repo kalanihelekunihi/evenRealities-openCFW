@@ -1,0 +1,37 @@
+{
+  "utc": "2026-10-06T22:41:45.342812+00:00",
+  "status": "PASS",
+  "elf": "g2/build/bootloader-completion/source-image-compatible/snapshots/2adcc60aba10fed90231072a059b6e7922a10d646444278aba42d1cf9d9e2839/bootloader-source-test.elf",
+  "elf_sha256": "2adcc60aba10fed90231072a059b6e7922a10d646444278aba42d1cf9d9e2839",
+  "seed_elf": "g2/build/bootloader-completion/source-image-compatible/snapshots/2adcc60aba10fed90231072a059b6e7922a10d646444278aba42d1cf9d9e2839/filesystem-seed.elf",
+  "seed_elf_sha256": "e6ba6916ee417e9efec1f4dc90a50f8ce7777f0e2ad8f976e6d2e27856072b78",
+  "profiles": [
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/2adcc60aba10fed90231072a059b6e7922a10d646444278aba42d1cf9d9e2839/comparison.json",
+      "sha256": "762ce5476570ed3543a261d3db1d441e29d53f871abd4fd022e3711fab8efc35",
+      "status": "PASS",
+      "cases": 2,
+      "distinct_original_trace_bytes": 30742
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/2adcc60aba10fed90231072a059b6e7922a10d646444278aba42d1cf9d9e2839/failures.json",
+      "sha256": "2958f10519e4c375e071e24b20ee8646fd0831258b76d5e66909226a3d1787e5",
+      "status": "PASS",
+      "cases": 3,
+      "distinct_original_trace_bytes": 29402
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/failure-profile/powerloss-review-strict-2adc.json",
+      "sha256": "acff3e44881cf14aad44fb509ca170dac94359f5c630f95adbc3c03c6a3ec9be",
+      "status": "PASS",
+      "cases": 2,
+      "distinct_original_trace_bytes": 30702
+    }
+  ],
+  "total_cases": 7,
+  "union_distinct_original_trace_bytes": 31188,
+  "limits": [
+    "Source-linked test ELF only; explicit providers and fixture assets remain. No standalone source completeness or byte identity.",
+    "Interruption immediately before/after an atomic synthetic ROM write; no physical power failure or partial-write claim. Fresh reboot stops before application instructions."
+  ]
+}

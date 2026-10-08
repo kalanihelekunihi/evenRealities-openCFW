@@ -1,0 +1,10 @@
+{
+  "id": "P2-20841",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "Fresh replay passed for 150 instruction bytes at 0x47CCD2..0x47CD68; image/source hashes and tiling verified. Branches to 0x47CCC8 and 0x47CD92 leave this map as described. The decode matches the two paths: low-highword divisor normalization uses CLZ and register shifts/rotates, UDIV/MLS and UMULL followed by SUBS/SBCS borrow correction; the >=65536 path uses a distinct 8-byte frame and correction. The normalized path retains its 20-byte frame at the pending 0x47CD92 branch. Register-controlled shifts are recorded as ARM operations; no host-language shift semantics are substituted. Partial/unaccepted; no quotient helper contract beyond shown instructions."
+}

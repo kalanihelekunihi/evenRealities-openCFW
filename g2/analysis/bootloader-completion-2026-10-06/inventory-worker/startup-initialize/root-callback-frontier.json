@@ -1,0 +1,22 @@
+{
+  "status": "OPEN",
+  "stock_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "boundaries": [
+    {
+      "address": "0x42f38e",
+      "before": "Unbound on rev33/variant1 clock callback selector4",
+      "now": "Recovered TON event family and native trim/gate/delay bodies; component source and796 direct comparisons PASS"
+    },
+    {
+      "address": "0x42ba00",
+      "trigger": "rev35/variant1 native clock selector4 with on1; shared memory selector6 with on1 even if clock is skipped",
+      "now": "Unbound in coupled image; separate GX reconstruction exists but still requires integration and caller-context tests"
+    },
+    {
+      "address": "0x42a878",
+      "trigger": "EM family rev35/variant>=2 orrev>=36",
+      "now": "Unbound in coupled image; owned EM transition/selector frontier remains"
+    }
+  ],
+  "limits": "Native TON/clock suite excludes416 active-clock opaque-family cases. Native memory/power/all-child suites exclude544 EM/GX family cases because memory callbacks can execute without clock switching. No opaque callback return stub is permitted."
+}

@@ -1,0 +1,206 @@
+{
+  "status": "PASS",
+  "cases": 16,
+  "comparisons": [
+    {
+      "enabled": false,
+      "translated": false,
+      "format": "literal",
+      "stock_count": 0,
+      "sdk_count": 0,
+      "stock_events": [],
+      "sdk_events": [],
+      "match": true
+    },
+    {
+      "enabled": false,
+      "translated": false,
+      "format": "a\nb",
+      "stock_count": 0,
+      "sdk_count": 0,
+      "stock_events": [],
+      "sdk_events": [],
+      "match": true
+    },
+    {
+      "enabled": false,
+      "translated": false,
+      "format": "%08x",
+      "stock_count": 0,
+      "sdk_count": 0,
+      "stock_events": [],
+      "sdk_events": [],
+      "match": true
+    },
+    {
+      "enabled": false,
+      "translated": false,
+      "format": "%d",
+      "stock_count": 0,
+      "sdk_count": 0,
+      "stock_events": [],
+      "sdk_events": [],
+      "match": true
+    },
+    {
+      "enabled": false,
+      "translated": true,
+      "format": "literal",
+      "stock_count": 0,
+      "sdk_count": 0,
+      "stock_events": [],
+      "sdk_events": [],
+      "match": true
+    },
+    {
+      "enabled": false,
+      "translated": true,
+      "format": "a\nb",
+      "stock_count": 0,
+      "sdk_count": 0,
+      "stock_events": [],
+      "sdk_events": [],
+      "match": true
+    },
+    {
+      "enabled": false,
+      "translated": true,
+      "format": "%08x",
+      "stock_count": 0,
+      "sdk_count": 0,
+      "stock_events": [],
+      "sdk_events": [],
+      "match": true
+    },
+    {
+      "enabled": false,
+      "translated": true,
+      "format": "%d",
+      "stock_count": 0,
+      "sdk_count": 0,
+      "stock_events": [],
+      "sdk_events": [],
+      "match": true
+    },
+    {
+      "enabled": true,
+      "translated": false,
+      "format": "literal",
+      "stock_count": 7,
+      "sdk_count": 7,
+      "stock_events": [
+        "6c69746572616c"
+      ],
+      "sdk_events": [
+        "6c69746572616c"
+      ],
+      "match": true
+    },
+    {
+      "enabled": true,
+      "translated": false,
+      "format": "a\nb",
+      "stock_count": 3,
+      "sdk_count": 3,
+      "stock_events": [
+        "610a62"
+      ],
+      "sdk_events": [
+        "610a62"
+      ],
+      "match": true
+    },
+    {
+      "enabled": true,
+      "translated": false,
+      "format": "%08x",
+      "stock_count": 8,
+      "sdk_count": 8,
+      "stock_events": [
+        "3030303030313233"
+      ],
+      "sdk_events": [
+        "3030303030313233"
+      ],
+      "match": true
+    },
+    {
+      "enabled": true,
+      "translated": false,
+      "format": "%d",
+      "stock_count": 3,
+      "sdk_count": 3,
+      "stock_events": [
+        "2d3432"
+      ],
+      "sdk_events": [
+        "2d3432"
+      ],
+      "match": true
+    },
+    {
+      "enabled": true,
+      "translated": true,
+      "format": "literal",
+      "stock_count": 7,
+      "sdk_count": 7,
+      "stock_events": [
+        "6c69746572616c"
+      ],
+      "sdk_events": [
+        "6c69746572616c"
+      ],
+      "match": true
+    },
+    {
+      "enabled": true,
+      "translated": true,
+      "format": "a\nb",
+      "stock_count": 4,
+      "sdk_count": 4,
+      "stock_events": [
+        "610d0a62"
+      ],
+      "sdk_events": [
+        "610d0a62"
+      ],
+      "match": true
+    },
+    {
+      "enabled": true,
+      "translated": true,
+      "format": "%08x",
+      "stock_count": 8,
+      "sdk_count": 8,
+      "stock_events": [
+        "3030303030313233"
+      ],
+      "sdk_events": [
+        "3030303030313233"
+      ],
+      "match": true
+    },
+    {
+      "enabled": true,
+      "translated": true,
+      "format": "%d",
+      "stock_count": 3,
+      "sdk_count": 3,
+      "stock_events": [
+        "2d3432"
+      ],
+      "sdk_events": [
+        "2d3432"
+      ],
+      "match": true
+    }
+  ],
+  "negative_controls": {
+    "changed_sink_bytes_rejected": true
+  },
+  "limits": [
+    "Native original printf wrapper and parser, synthetic synchronous sink.",
+    "No concurrent/reentrant sink, long output, null strings or formatter overflow tested.",
+    "This printf API has no destination-capacity argument; no safe truncation contract implied."
+  ]
+}

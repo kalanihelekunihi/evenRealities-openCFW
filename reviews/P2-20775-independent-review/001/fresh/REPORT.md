@@ -1,0 +1,1 @@
+Partial/unaccepted continuity47B730..47BBF8,1224instruction bytes,nine maps. Component hashes,pinned tiling andlocalbranchboundaries checked. Fullindex tenentryscan,orderedfreshfieldreads,threeguardedbuffercomparisons,unconditionalmismatchdumps and40-byte explicitflagreturn retained. No source/freeze/wholefirmwareclaim.

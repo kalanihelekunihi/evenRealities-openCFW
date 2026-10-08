@@ -1,0 +1,5 @@
+# Single-bank direct writes, discarded read and zero return
+
+Partial/unaccepted;132 instruction bytes4814F0..481574. Continues481468 with16-byte PUSH R2,R3,R4,LRframe,R4nonnullentryR1inputpointer,R0fullentryselector at4814F0. UXTBselector0→call473940 withR0fullselector,R1lowbyte0,liveR2/R3;savefullresultSP0;orderedk0..6freshword[R4+4*k]directstoresvia pointerliterals4817D8+4*k;reloadSP0 MSR PRIMASK. OtherwiseUXTB R0 selector1→samehelper withR0lowbyte1,R1lowbyte(previouscheck)1,liveR2/R3;saveSP0;sevenorderedfreshinputstores via4817F4+4*k;reloadSP0 MSR. Selectors3..255(skip2handledprefix) performnowrites/nohelper butjoin48156C.
+
+Common48156C:pointerliteral4817D4,freshwordread discarded,thenR0=0. Mode2prefixalsojoinscommonread. Nullinputprefixreturns6direct481572,skippingdiscardedread. POP R1,R2,R4,PC16;R1SP0helperresultforvalid0/1/2,entryR2forother/null;R2savedentryR3 unlessaliasmutated. Preservediscardedsource readandallinput/targetaliasing;noinvalidselectorerror exceptnull. No C/freeze/fullcoverage/equality claim.

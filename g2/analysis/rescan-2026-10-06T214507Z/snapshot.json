@@ -1,0 +1,3527 @@
+{
+  "utc": "2026-10-06T21:45:07.716316+00:00",
+  "baseline": "g2/analysis/rescan-2026-10-06T210748Z",
+  "counts": {
+    "g2/components/bootloader": 172,
+    "g2/components/foundation": 89
+  },
+  "source_inventory": [
+    {
+      "path": "g2/components/bootloader/allocator/allocator.c",
+      "sha256": "b78b6903fd273b3c64938139c2c2b06f781c1b36259ce8e4503aad787b4ea1e7",
+      "bytes": 1272,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/allocator/allocator.h",
+      "sha256": "339770d10388ab70b1aafcc759922d9773377dcb6d42a06bbb9d8281b4a1957f",
+      "bytes": 392,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/allocator/freestanding_include/assert.h",
+      "sha256": "b08fec1aad7e1c23108292964a83a37e017742c2767fa2f51200b53c72ef5b78",
+      "bytes": 249,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/allocator/freestanding_include/stdio.h",
+      "sha256": "a10cf35ba89fe0d34efd4450e171dde3f95b791b7db00c17ffc443cfaafd80d3",
+      "bytes": 145,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/allocator/upstream/tlsf.c",
+      "sha256": "2a0f8cfc9cfe6114ccdc6cf22339059440b16f1149b5107bead4ae4c3a0d50e2",
+      "bytes": 35135,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/allocator/upstream/tlsf.h",
+      "sha256": "f7f73c48810ba60203095667c226e5a600a6ea0f69afba48efff6efbaa628d4f",
+      "bytes": 3523,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/application_storage/device_info.c",
+      "sha256": "3a88fc13bcf02864e1cf179219d8c08321c1d8806a8f52dea63b21f257818915",
+      "bytes": 2534,
+      "ignore_rule": null,
+      "change": "added"
+    },
+    {
+      "path": "g2/components/bootloader/application_storage/device_info.h",
+      "sha256": "963bdfaf8fd5aa35a9c00a3acbfcf5d8f9ad882a9f6802a0f3929dbfcfbcdb5f",
+      "bytes": 358,
+      "ignore_rule": null,
+      "change": "added"
+    },
+    {
+      "path": "g2/components/bootloader/application_storage/storage_callback_veneers.S",
+      "sha256": "d5742c31b807c17ca354713dfd9ee5c4332551af19e58ce660880a31eddb239b",
+      "bytes": 1065,
+      "ignore_rule": null,
+      "change": "added"
+    },
+    {
+      "path": "g2/components/bootloader/application_storage/storage_callbacks.c",
+      "sha256": "2a0474c90b4139ac204044734a3c2fd70dc60121489203f95546a841a5c3d302",
+      "bytes": 3553,
+      "ignore_rule": null,
+      "change": "added"
+    },
+    {
+      "path": "g2/components/bootloader/application_storage/storage_callbacks.h",
+      "sha256": "84b9d5e4202f9fa5ab61950fbf9b1b9f6ade00739942b600f7ddd8d3e4d2ea29",
+      "bytes": 699,
+      "ignore_rule": null,
+      "change": "added"
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_class_provider2.c",
+      "sha256": "b50a240c481937f348c4f61ed2fc617da39ede819ae181a3dbf3cadfdb89a318",
+      "bytes": 8688,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_class_provider2.h",
+      "sha256": "00a6a4b24316afefa27518fa070535c680a2f1b11ddeabde7b468139c9c2c4b7",
+      "bytes": 735,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_class_provider4.c",
+      "sha256": "35b9afed8d8e113ec62eb9bdff799bfdf95eeec12ab03992c1c69e406b32f252",
+      "bytes": 5848,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_class_provider4.h",
+      "sha256": "520faebee585400bc3c67acbacf2c9dc5c131f13762305a9aac2bd89dada24c9",
+      "bytes": 293,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_class_provider5.c",
+      "sha256": "985dc1b605eb62e819f01f65349186386051118ec10182d449e70c425f7d9054",
+      "bytes": 8125,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_class_provider5.h",
+      "sha256": "20911ac9b9ab74d7ac17605573350e2ddee437c1a106e26be29fb6e3b9d65247",
+      "bytes": 244,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_class_provider6.c",
+      "sha256": "c6d05ef894f0e7ae3f354288d72a23ec6d5e668a9dabbdaf113ad3a05bc0c842",
+      "bytes": 11521,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_class_provider6.h",
+      "sha256": "0ce61c610821b0e8bbf31b2a762b51df778dabc03d763c81ec9a18fa9c7ce0d6",
+      "bytes": 244,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_class_providers.c",
+      "sha256": "71a7210ba488db0b1e50739bd9448fe2fd82be6e4b7bf96cf2e82514fc197848",
+      "bytes": 5118,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_class_providers.h",
+      "sha256": "42f1e264c56bad9ceb6a398c26b87873536f534162de9dad1869414f9968a7ca",
+      "bytes": 530,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_manager.c",
+      "sha256": "f993e3a50bee98afc14d5138998fbcad8cafc78e1a72d72bad1641b9c58213bb",
+      "bytes": 4518,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_manager.h",
+      "sha256": "f459795fd12f415ba878ab335cfdc2b19da12a63ddbf3e7a42bffef642a441de",
+      "bytes": 429,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/clock_manager/clock_release_all.c",
+      "sha256": "829e07af426c5cf69a58640d58e3687dc9fd66bb67aebaacee37c4c2ba8c82a2",
+      "bytes": 492,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/dfu_task/context.c",
+      "sha256": "0fbf34013818699b3844b63dea3dd3d4c5e4505b8514b0b70865bbf6af4d66e3",
+      "bytes": 3141,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/dfu_task/context.h",
+      "sha256": "fe1e980cc2b856113a49a9adf64b2fd69a7cd3f3869dbed60d158a70b44de7b3",
+      "bytes": 404,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/dfu_task/runtime_context.c",
+      "sha256": "17c1062b2a01289a76914bbfee28217a0ab4e2ef3ef6a7c3bf2028f67fb92973",
+      "bytes": 570,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/dfu_task/runtime_context.h",
+      "sha256": "aaa44240a3835a33b6e5314f52941130f7a6059b334e72b5c11fdbc037499235",
+      "bytes": 433,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/dfu_task/task.c",
+      "sha256": "5d62671c63b4cc90b60242eeef64561b958ed9204e5b756cbd44bf5ed1e54208",
+      "bytes": 2603,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/dfu_task/task.h",
+      "sha256": "bcb81f6904c9874a61843b3b53d515c7e9f541d58b1f2091037c94f91ea54d05",
+      "bytes": 627,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/boot_lfs_defines.h",
+      "sha256": "e623b34026ebd5efd96254dfac3710007f2f6c57cd28e99759724fe0c4d8ee96",
+      "bytes": 399,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/boot_mount.c",
+      "sha256": "25b15e8b001385a6b4e813e73dab32511f5e92a6d53736a48e309ae591fc4a2c",
+      "bytes": 3274,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/boot_mount.h",
+      "sha256": "19566733da47e0966488d03fb28d30f8f4dd1cfc043f552a8aa824d6b40e69c9",
+      "bytes": 391,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/boot_mount_test.c",
+      "sha256": "915544cd65331f9cbd1e590ae243c61eb21452ad9ea73b9024131e081a0d6a40",
+      "bytes": 2943,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/file_services.c",
+      "sha256": "a01329c4d096be958c9516aaaa080f9896adeb602c08c57c8005a90c599a3ce1",
+      "bytes": 2789,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/file_services.h",
+      "sha256": "cff43ab70749850e301b4dd7febe287b661d4a64e05ed62c683d9466aeb05cb7",
+      "bytes": 698,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/filesystem.c",
+      "sha256": "a316029904feb6c62671d501e6b6a5699168b6cd23c52a06ac390e9b6709ea57",
+      "bytes": 2221,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/filesystem.h",
+      "sha256": "7c121607fdae349145bd07cf28094fac810a549c38a735a61d03b48f93ab37d5",
+      "bytes": 802,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/freestanding_include/inttypes.h",
+      "sha256": "720aa6448b4b2976d4f56477ffcf8f981dd81200abf56bf2e231db01eb6266f7",
+      "bytes": 295,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/freestanding_include/stdlib.h",
+      "sha256": "b5b2d2393401d3772013399e6459f71364f2aa84e39b8f58620b595d5912d268",
+      "bytes": 179,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/freestanding_include/string.h",
+      "sha256": "2276666b644c8ef7ba3a262b7c7887296ae1f5aeb1e730be3387f8d412f4aa26",
+      "bytes": 485,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/host_test.c",
+      "sha256": "b4bfdb67beecec782daa75d672bfb38e0d1b49c79e1852734218d955a3ceec4a",
+      "bytes": 4665,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/runtime_memory.c",
+      "sha256": "f147b6e4f67f5c5eb5f13f8f6835b3ce9b9f3896ec497c1a3531bbed8fa52210",
+      "bytes": 1205,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/upstream/lfs.c",
+      "sha256": "81a209e8551754d13b24fc0a2b6707fb3b2475e14feba00bf0df722b98a31398",
+      "bytes": 196753,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/upstream/lfs.h",
+      "sha256": "ee44e99d6b19119b3e577b969b80c9d5e6f96410c9593794afddf6d4b314c486",
+      "bytes": 26439,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/upstream/lfs_util.c",
+      "sha256": "f2fbde533670560434bd9f5a547174cc7c5a4670a02c47b4bd85180dced8b2ec",
+      "bytes": 988,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/filesystem/upstream/lfs_util.h",
+      "sha256": "f5d249326646c818e62af3cefefe8a57e7b484446a0f48d1050b95e60925088e",
+      "bytes": 7954,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/flags_runtime/cmsis_notifications.c",
+      "sha256": "f84d37de11bfce426ea01104cec060d3cda9a134ed190c0583d5b3560380d123",
+      "bytes": 3371,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/flags_runtime/flags_runtime.c",
+      "sha256": "eaf3d2efe405fc387fb2d4486158c87fedcc9ca44794cf86f1b6cd24740bdd5c",
+      "bytes": 6131,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/flags_runtime/flags_runtime.h",
+      "sha256": "01cb99976d89e31a037d48db1c3afe70ec3688b3b04aa3b152943f96e961f54c",
+      "bytes": 880,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/main_callback/main_callback.c",
+      "sha256": "8a139eac4a79fe6eb2f18c28f768b4d2ee08603a070f92c76a01751686af2cb4",
+      "bytes": 1718,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/main_callback/main_callback.h",
+      "sha256": "bb8eb480f7a8ca2b25adc7f930e944f7d560827eb80d8fe2a750cc38ec06fca4",
+      "bytes": 157,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/main_init/main_init.c",
+      "sha256": "ce3d93d0065d60ce53b5ae7ed44ebf7089fd45f502af37c928923957bac1433a",
+      "bytes": 2668,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/main_init/main_init.h",
+      "sha256": "dff1e14a40f50ded0468e903150737d469b3a8654dfc4dee65c81b00ec1cde2a",
+      "bytes": 208,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/manager_task/event_dispatch.c",
+      "sha256": "dbb075848372956682351c036dda2ce92f4608f4425f37dc228aaf20a0ec0aed",
+      "bytes": 3685,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/manager_task/event_dispatch.h",
+      "sha256": "1b871a1f2d1329e260b0760e8512fe19e78f39deecafe2a115130613daaff5ce",
+      "bytes": 662,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/manager_task/event_runtime.c",
+      "sha256": "0020fc6f30e073e51336a6fb20e31cbf9a63b81344e73aa07d98ee5e08a19048",
+      "bytes": 2428,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/manager_task/manager_handshake.c",
+      "sha256": "acdbcf05cc74105fde1d24775629dde25fef6283352872ad7b9ceb30cb2dd647",
+      "bytes": 1474,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/manager_task/manager_setup.c",
+      "sha256": "deb2520637d097c0fdf942568938834334d141c25824f8e569dfcd4ed0e89d09",
+      "bytes": 2111,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/manager_task/manager_task.c",
+      "sha256": "368329ddbf4e5d4fed79e64fcf352b91b0ee0f0ef671a6defee9134cd2272c9a",
+      "bytes": 2360,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/manager_task/manager_task.h",
+      "sha256": "f8d306d38037d714198392035234e364baabb56d4350d916036847670f7f974f",
+      "bytes": 655,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/mspi/interrupt.c",
+      "sha256": "595295e4c65ed84f6cb3307c64aa64b62e04ed54b94d73fc9b2d10be42c3affb",
+      "bytes": 233,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/nor_commands/nor_commands.c",
+      "sha256": "afa8dde882e2b8487205131a31860ea86ea9f7b212ca2db28c7c28fa6fdf6762",
+      "bytes": 8745,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/nor_commands/nor_commands.h",
+      "sha256": "c9ca5bd2cec4fcfe318aefa4b636224b8f4b046d641cf6b3e3755ebf39897e13",
+      "bytes": 575,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/nor_commands/nor_timing_wrapper.S",
+      "sha256": "36859385822686e86a7c53498368eb8c461e226c5b0abd6e6c69ab9eff94ef35",
+      "bytes": 631,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/nor_init/nor_init.c",
+      "sha256": "38af0c5d6cec6f4aa93789f55b72817d20bd07244396270a4c3a628261d2d19c",
+      "bytes": 3414,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/nor_init/nor_init.h",
+      "sha256": "4e281e2af2d329308c0f4a829610a32f72b3a59dd2c7a207e1777c3230f64e63",
+      "bytes": 547,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/nor_init/nor_runtime.c",
+      "sha256": "91523b049b2eca423f390b89ac1b1e2c495b265e596911510781c0b47ce5f7bf",
+      "bytes": 1610,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/blocking_transfer.c",
+      "sha256": "4b311ebfe01ff2104dfbb42423780bff2ab22e0c5223a73d1008a6dd8cd1c51b",
+      "bytes": 2337,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/control_read.c",
+      "sha256": "38f31db3ffbbdcd68ac04caa03fa972c1767f68612ca5cfcbcb9c6f833393019",
+      "bytes": 5138,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/control_remaining.c",
+      "sha256": "83b72df446ace159766ac98711cfde9a33a212c11a4403c33b4a05e8303b8065",
+      "bytes": 3713,
+      "ignore_rule": null,
+      "change": "added"
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/control_remaining.h",
+      "sha256": "02846fa49e979350fd586bb7f24b44e9f7f329fa38a70730101522dd4a8f7a7a",
+      "bytes": 785,
+      "ignore_rule": null,
+      "change": "added"
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/fifo_transfer.c",
+      "sha256": "f4b2d5a4b0cfa7e2f0ad2e167b4e114fdad1e7730bcd9565ec5718f66d062451",
+      "bytes": 1855,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/hal_leaves.c",
+      "sha256": "edaf8433793100f7c9b07e4ad29c7bd7a41112e7ee1b8a6f9c6e4ce92fb7b3c7",
+      "bytes": 4439,
+      "ignore_rule": null,
+      "change": "modified"
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/irq_guard.S",
+      "sha256": "6ed270a5221aa9984fc8df8e10244e0d0cd38cab2d6ce8c77310060ba0382cbb",
+      "bytes": 397,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/nor_mspi_init.c",
+      "sha256": "e01cd5ac757a6c41ac7a846db6f63b83a8eee91c5e55a92c16908351ee7ba92e",
+      "bytes": 8062,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/nor_mspi_init.h",
+      "sha256": "25e82a1e772ed8a0761602d7e1171ffda8506bc17c23c172171f6c00e8906dcc",
+      "bytes": 524,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_init/status_poll.c",
+      "sha256": "210816cac79fd4286c40ad55e7c61782aff27d248232188079de4185409773c9",
+      "bytes": 659,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_power/device_configure.c",
+      "sha256": "930649b60d2479ffa3a4bd65118652285721a17a2a13a1a60f69a5fd8de37174",
+      "bytes": 9904,
+      "ignore_rule": null,
+      "change": "modified"
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_power/device_configure.h",
+      "sha256": "aa4beadfa440bd8663456f2e96e62e1af508bf3e88ac4d8abd721ac93fd83703",
+      "bytes": 366,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_power/mspi_clockgen_control.c",
+      "sha256": "fea3b66f9be7107c9a50034ab2cccb5b830c2462728933ea4b4deccd998b3b0d",
+      "bytes": 1890,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_power/power_control.c",
+      "sha256": "4a34124a5629c80380c44f790997d24233cd88da33efcff434f33a0523bf000a",
+      "bytes": 5196,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_power/power_control.h",
+      "sha256": "e289097aaa6bec65f53fe773728eb38cde9645c286dfc264f9e1026bf264b593",
+      "bytes": 1385,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_power/power_control_adapter.c",
+      "sha256": "f929eea855a6938c0a016d9711bb57deedd74a595efc7a90a93a672e32357a3f",
+      "bytes": 3351,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_power/power_control_adapter.h",
+      "sha256": "b25ebef80829a70b518d17f1152c075e6879993905caa21b80248c50a98a1fad",
+      "bytes": 332,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_queue/nor_mspi_queue.c",
+      "sha256": "97bccd723bf40335268114ba5459700efe2da1e51095aaba8494990bf29fd703",
+      "bytes": 10059,
+      "ignore_rule": null,
+      "change": "modified"
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_queue/nor_mspi_queue.h",
+      "sha256": "64aca4faef257635215cfa6f00e101818f830d8b62a836e65be5de2c73303c54",
+      "bytes": 1055,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_queue/queue_descriptors.c",
+      "sha256": "c2402468dcf87ce0b40d326bc151dc77bba7fef5ec64353b719de8003dc0471b",
+      "bytes": 4381,
+      "ignore_rule": null,
+      "change": "added"
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_queue/queue_descriptors.h",
+      "sha256": "46907c03c2620997e8a1e3ee17487f7abd742063713dba454250c86a3bdae16b",
+      "bytes": 601,
+      "ignore_rule": null,
+      "change": "added"
+    },
+    {
+      "path": "g2/components/bootloader/nor_mspi_queue/resources.c",
+      "sha256": "44f74d611d02dda5909983da1365d71d97d5fcfaab8dea7de7c4c7cf22afe544",
+      "bytes": 2182,
+      "ignore_rule": null,
+      "change": "added"
+    },
+    {
+      "path": "g2/components/bootloader/nor_read/nor_read.c",
+      "sha256": "d55c8d97c751b9e726fe5b6f305a21d1bdfe2d42dc64d3058afcc2398d7678a9",
+      "bytes": 4144,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/nor_read/nor_read.h",
+      "sha256": "bf3ecfeb0f4a7ec14fc5679fdec0a3d47b5479125741f470c4e3d4581532040d",
+      "bytes": 261,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/nor_read/runtime_helpers.c",
+      "sha256": "0a3de22639d6d75d58c482b6f7c57cb687adac79a3b59eaf0d6bf3f46b7c952c",
+      "bytes": 3143,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/nor_read/runtime_helpers.h",
+      "sha256": "c824342a96553c973e49440c20ba5d2e557e76f82170c1967f8490be7deee6f7",
+      "bytes": 510,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/nor_write/nor_write.c",
+      "sha256": "1a8bd4e22f9c16d08f2615c67951b8b821943475760cf6b1cb110423f6c11ace",
+      "bytes": 6975,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/nor_write/nor_write.h",
+      "sha256": "bf021dc7aece5f979f220e44861440beaf6d9c7e4337197156e5123b52fd36fd",
+      "bytes": 441,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/cache_runtime.c",
+      "sha256": "45af243657b6cf5a82e5b47e7d5563c7cf0399e67b473ee6c72456ae230e8a69",
+      "bytes": 1253,
+      "ignore_rule": null,
+      "change": "added"
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/control.c",
+      "sha256": "8b6c54999184781870b3300e4f1b99416fc05bb89ad0577614615209e32b6f7d",
+      "bytes": 2606,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/control.h",
+      "sha256": "596724724a2fb0e80d04e3abf2590616562a6f67f31b9a60c19e2c43d62c67eb",
+      "bytes": 435,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/critical_save.S",
+      "sha256": "c3be3d527c34f732bd53df3bc7230c45e94637a075952e113832d627c6a2863e",
+      "bytes": 460,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/mram_rom_bridge.c",
+      "sha256": "77c556a1458f0a4d1bca76f72ab08ad8e3e311264e0112870e1eea6ab1b29d73",
+      "bytes": 703,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/power_domains.c",
+      "sha256": "0645d747f9fcc91bb8155715fc61150fab77b7d2aa31fd958500494b659120aa",
+      "bytes": 4219,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/power_domains.h",
+      "sha256": "e7ffb273d59c6a3005f89f655ef00c8903124b9f389127d4db6768507d30b276",
+      "bytes": 487,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/power_guards.c",
+      "sha256": "73f56d843fc648b7a18e56dc9cf698f8e74279703762b4d60cc872846bab71b9",
+      "bytes": 1085,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/runtime.c",
+      "sha256": "dba157e3638495272106bf40da47a111cd915bcbc35300015eba2dc92ebbc458",
+      "bytes": 3236,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/runtime.h",
+      "sha256": "882967faf7b1a8aeed7bf6c95934063430529e7fe7409a5dffc3ed9336022135",
+      "bytes": 644,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/runtime_query.c",
+      "sha256": "3bf806de515e9e071ce92e95d6312367690e72fcc05e36a74de2787401625b6d",
+      "bytes": 3561,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/runtime_query.h",
+      "sha256": "b84fc51b524e254ae4f90e06f8fa479d50e9d2712bb270409f9bdca56d17e846",
+      "bytes": 441,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/runtime_resources.c",
+      "sha256": "da2f414410610f596ca7bf306f28d340777b37460c66206352a7ac66b2215b9f",
+      "bytes": 488,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/runtime_transition.c",
+      "sha256": "9748e60f599fbaf5b3d96e01b02acb04c0fe477c39a8c274ba5be9a6074f1649",
+      "bytes": 3253,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/runtime_transition.h",
+      "sha256": "8efd86cf5b310009da41ea12b431ffb4586ed337526785dbca54c8f79ce096a6",
+      "bytes": 282,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/platform_control/runtime_wait_adapter.c",
+      "sha256": "4721c73affe1064b1266ebeb65922c861e19efb3ed08e7b0151e9f9bed5239c6",
+      "bytes": 485,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/platform_startup/platform_startup.c",
+      "sha256": "45efd567e793079ba58ec1bb8704d789b51be7a136316b1284cf59abc6969622",
+      "bytes": 1696,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/platform_startup/platform_startup.h",
+      "sha256": "6807f5060e28b8ad3fc77f74940cb5811522b14ac6e47e370222bfbbd921ce71",
+      "bytes": 283,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/port_timer/port_timer.c",
+      "sha256": "017dd562b45b2c1cbe65490619047db00babd025c0f9cb5b5b8459d94044cb68",
+      "bytes": 6045,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/port_timer/port_timer.h",
+      "sha256": "18492792c8bc39aa6221ad0670af95dbcbde823b0b08c28516b6fb2a240c5205",
+      "bytes": 1183,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/queue/mutex.c",
+      "sha256": "6989dfbac60611e2a4a612f030b927a375737c9da08d106d3d7697a6c5c606b7",
+      "bytes": 1351,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/queue/queue_wrappers.c",
+      "sha256": "e7c168579d68b36f4406c194fd460eaaf041fa2f75f328e1e01444522308d5b3",
+      "bytes": 6049,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/queue/queue_wrappers.h",
+      "sha256": "5ae09065df69edd0c4cc92ceb2393c2a7fe7e43912ddf14f33d63dd390cc1b42",
+      "bytes": 1353,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/queue/runtime_mode.c",
+      "sha256": "dd97dc30a02adc443beeb3b96f1df0c4a2ea830ec5ea7e4f144603e1664ea83e",
+      "bytes": 435,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/startup/fpu.S",
+      "sha256": "8a5304062febf6f5504805fc6c4508c61b40731fff331551201a991c29d22f7b",
+      "bytes": 507,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/startup/init_records.S",
+      "sha256": "81aafaf87771afa630ff8f9ef3d9c7c953757bcd758415391ea441a5b1494505",
+      "bytes": 938,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/startup/initialize.c",
+      "sha256": "3ad0388b5d00242fab034766b763aaf062a2438ac58fb7d1976c219c67d36b86",
+      "bytes": 1622,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/startup/initialize.h",
+      "sha256": "e260f05257ded054aaa7192676567ef1561aece6918863442731a53e00580fe4",
+      "bytes": 280,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/startup/itcm_helpers.S",
+      "sha256": "a2fb3cdb5d43aa631d8c885758ce87fd2a3d337f6aa56b17e8153589a7ad1069",
+      "bytes": 1119,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/startup/record_adapters.S",
+      "sha256": "80c8715af940f0882cca10af8a888a7f558214bb840ece23c8f1102763fc844c",
+      "bytes": 573,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/startup/record_dispatch.c",
+      "sha256": "4ae73092a684d52c3cf0aa8a22342e5d447c9bb1ecf8a8947ca23e4db7ebf2fd",
+      "bytes": 712,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/startup/reset.S",
+      "sha256": "81c29f458fe82b48c6303c8f7096a6477a6c3e3954b04ae62cd75d0fcbcdb042",
+      "bytes": 739,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/startup/system_entry.c",
+      "sha256": "611dc555059aad35d7564306d68175765708845cc43f374f32f5888d040cffde",
+      "bytes": 650,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/event_flags_set.c",
+      "sha256": "44a56d1f817cf4e6a84f920446f2a549b0a9230cb219716d6796d3db6dd5c2ae",
+      "bytes": 3811,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/event_flags_set.h",
+      "sha256": "e4253a9a63570953cd65ac0225b1afcb10afa9c451813e6de5645294a73c10e6",
+      "bytes": 512,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/event_waiter_wake.c",
+      "sha256": "d4612d9a8e7f84dec3bd4b1b03e9cc205e6ae650fefd49e7335bd096f93817a3",
+      "bytes": 2092,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/event_waiter_wake.h",
+      "sha256": "86ab2eabfd5dfa5b5dd92c7ae531884d024c501f3ae052d537d4a3180f976aba",
+      "bytes": 477,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/exception_entry.S",
+      "sha256": "3a4749119084ef014b25e7dad642f9d7fdacd45e990acb100eb61e361a6175e3",
+      "bytes": 2405,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/first_task_transfer.S",
+      "sha256": "e60328e0f299d4ef866f9102fa4b1417a21856d0f30f719a60fcdd86220732a4",
+      "bytes": 545,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/kernel_dynamic.c",
+      "sha256": "510cca2b99b9ba5e43f7311fb0788fc9d198cf8ca70d24238a40aef6f16e4045",
+      "bytes": 1081,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/kernel_runtime.c",
+      "sha256": "f936291ab3ce21f750aea5a5cda2140c7ed2fae6af1d01c7de4c727e60b43ccc",
+      "bytes": 1918,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/kernel_static.c",
+      "sha256": "03e3d500609c627d88fea12f7b468e5a2da8a20b42bbbd81f539192469191491",
+      "bytes": 2320,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/lifecycle.c",
+      "sha256": "ff291664ebac49876d349496141839aac97654d239bcf2e94ceae2ddd3d0f599",
+      "bytes": 922,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/port_start.c",
+      "sha256": "751306f7e7de7d773a6ec4331baaed8e756578a193a956f912d21f488b5bf56e",
+      "bytes": 710,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/queue_buffer_release.c",
+      "sha256": "c60b5f0a6bd0edb6632547c4e951fcc99e3c36e947a18d45c8a7b3f08ec2696d",
+      "bytes": 1858,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/queue_buffer_release.h",
+      "sha256": "0bd21fecc2cd3be0677cedc7c13ee8a8195e1150a773c22551fbe2bc6d5e64cd",
+      "bytes": 260,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/queue_receive.c",
+      "sha256": "0b8ee96a10bc0a9957b54d446bcd174146b2673786047669a6c6b74912d2ae3c",
+      "bytes": 4742,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/queue_receive.h",
+      "sha256": "8bc78e8b93365058889d375720fb33990dac977957172db119255e6310abfcd6",
+      "bytes": 691,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/queue_send.c",
+      "sha256": "d16a784f3fed5a1593a34f20b49a89e8aa45c37bd61b5634d9f82bf8fa966663",
+      "bytes": 4914,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/queue_send.h",
+      "sha256": "527612c2bc54c11ac867d07b96f77599149cf091526bdd8e0c4893dbab262129",
+      "bytes": 565,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/resource_creators.c",
+      "sha256": "161750b3284b751aa9f4372a510c82b586ccd79ddebe28c8546902b0f3bb7d8d",
+      "bytes": 4928,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/resource_creators.h",
+      "sha256": "95e6025334f717a9f9f2b6f74e9b77924dec12d53c0a13e4b4327a0606675637",
+      "bytes": 1112,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/restore_probe.S",
+      "sha256": "13eebafbed3259ec82560d2f1b062c1d10bb093ac3a79cfa55a65bbeedffa662",
+      "bytes": 414,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/rtos_heap.c",
+      "sha256": "2f2c47abefd460fab72c5ec22fe110c24141877f83dc1a0440eb4bdebb124025",
+      "bytes": 2918,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/scheduler_bootstrap.c",
+      "sha256": "2eec059b629811234b18717a7f452c349fd0db0bf882341a39d5bbbf358ad810",
+      "bytes": 1503,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/scheduler_resume.c",
+      "sha256": "8d2b445f1c50f68737aab186f92d03acfdf5c3a5e63edb0742e895843d1fbb03",
+      "bytes": 2733,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/scheduler_tick.c",
+      "sha256": "a9d354c01555e0a0dee1dd4c406ff06062db000189c7c773d2a908f28371ab15",
+      "bytes": 2511,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/task_entry_adapters.S",
+      "sha256": "99d8c21f9f86940f5ba2f2897f521faffc7c421e8469ad15fa59ebaf1d7b1c91",
+      "bytes": 1023,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/thread_creation.c",
+      "sha256": "12681d96dcbb83cd0887b525c686f2d8c2094edb11164c88087a5e30490bb058",
+      "bytes": 1552,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/thread_creation.h",
+      "sha256": "bf09b1dd9847ac4772760069fe98ab0a340c4380df4a279f53f6f9e7ac76f136",
+      "bytes": 1178,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/thread_notifications.c",
+      "sha256": "77d21a7958b3fbf9f584a7f6ca5effeb34ea5e3afef886038018088419b9e693",
+      "bytes": 3221,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/thread_notifications.h",
+      "sha256": "1505c1ea37ab4ae78e798f8cf237a021ff280b23286febb4dc9856158f1bb7cf",
+      "bytes": 498,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/thread_priority.c",
+      "sha256": "28aeb88afbacddd94aac7c8f15641b4ff2020b21e6b699a833b982e3da810541",
+      "bytes": 2523,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/thread_register.c",
+      "sha256": "638f2ee05e19054e177c3fffeba6f6dcfab85e8029cc86a1d9db850336f526bc",
+      "bytes": 1499,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/thread_select.c",
+      "sha256": "b8b2450b5e4b97eba3d386d08ce3ff750108b98d4f8223c498da3ddc967bb19a",
+      "bytes": 1600,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/timer_commands.c",
+      "sha256": "dcb4a0b3fec989ac78046def236bf21315ca10bd5284ec209a4d86105a0018b0",
+      "bytes": 4182,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/timer_commands.h",
+      "sha256": "6a97f9a0448e3bd0c539b5be657c0ec71a8c7974bde9131cd94a4aea8569b0f6",
+      "bytes": 475,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/timer_expiration.c",
+      "sha256": "87b5130ad93f4ea040fd03cb86305126f65a3ed2a31ac5349dbad3847a33a158",
+      "bytes": 2067,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/timer_expiration.h",
+      "sha256": "08864dc106880883c7440ea67aa56d425a9fcac1a391a7e8298af6e20190f919",
+      "bytes": 539,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/timer_service.c",
+      "sha256": "60563d37dc03cf584068d61bb9d8946be590116d0ad3d2b65f6c59b5581fa968",
+      "bytes": 2306,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/timer_wait.c",
+      "sha256": "08abc6689d1c7e5f5269f274be38815cafd0081ff0a8605e213ea42f7149aff3",
+      "bytes": 5865,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/thread_creation/timer_wait.h",
+      "sha256": "5bf1fc39a271dfba768ae51becdd3ce8a44350f8cd0103b810cac3766da204a3",
+      "bytes": 874,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/update_core/handoff.S",
+      "sha256": "483d9d93639b6bbbe31b081b14745a550f694b6f9581081ff9ec69d59381e6c5",
+      "bytes": 594,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/update_core/rom_resources.c",
+      "sha256": "0fa2ad19685f924c4db99eba4f4a59aa346fca58b23e51a4b5470a77ce63efff",
+      "bytes": 406,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/update_core/update_core.c",
+      "sha256": "7ec6576285f84829158ee19bfca53a1db113f4400f60a3697c5b00fa896fb369",
+      "bytes": 5898,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/bootloader/update_core/update_core.h",
+      "sha256": "f8729dd2b81d2e90ca502eb014625352a64aac641a8c266c2c481ca5a650492c",
+      "bytes": 1887,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio/ambiq_gpio.h",
+      "sha256": "fa08cb47b7bd451f77c4c06bd442c6bcd3297a431019ad0d0a2a5cabed5c2496",
+      "bytes": 1137,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio/ambiq_gpio_compat.h",
+      "sha256": "3d610896f61f927d2579c4bbfb50ff45abfedbdd488bc478b3cec719dd57c601",
+      "bytes": 1586,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio/ambiq_gpio_irq.c",
+      "sha256": "7a713514c4b185b5aa811fed32e1fd4ac7c596f70c13543eb1a0884b75ac1ba2",
+      "bytes": 10004,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/ambiq_gpio_config.c",
+      "sha256": "4f73b343fc2907a359ce757e7fe934d587aefe55504b1abbe87c89675668e892",
+      "bytes": 4770,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/gpio_config.h",
+      "sha256": "503f5e3d346bd89f6b1b27952c49d789913da3857b136d55a50c5b4bae1738f6",
+      "bytes": 4401,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/gpio_config_compat.h",
+      "sha256": "d5364aaadfdb25682685edddbe70f016660c4f69bfc98270e248d365c623527d",
+      "bytes": 5344,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/gpio_control_compat.h",
+      "sha256": "1662d7626dd77102d7560cc249052db65428abd3d84b3cc032c77ed25e9f6502",
+      "bytes": 430,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/gpio_interrupt_control.c",
+      "sha256": "d23f207c25c84744f76918884a66a32c9ebc92b41a4cdf160c107409343ec1a2",
+      "bytes": 7367,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/gpio_interrupt_control.h",
+      "sha256": "e3277f16f9c7956402575c66557f9c1b3eac81aad30a39037fa95ef33f2711ef",
+      "bytes": 1310,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/gpio_state.c",
+      "sha256": "e913d52ab6820e1d9314c47cdab7dd7a1ab4493da57d6d42c9f87ed43468563e",
+      "bytes": 3373,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/radio_board.c",
+      "sha256": "250858d0afcc7a9554d4d91766e998afe942f2cb6f49a495856fd307f87ed941",
+      "bytes": 633,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/ambiq_gpio_config/radio_control.c",
+      "sha256": "2d229817eddb89988213273246eafee36f5c0a644c73a8c98bcfa6cecee743d4",
+      "bytes": 1208,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/ambiq_cmdq.c",
+      "sha256": "39dfd4515413e88e66b07f8eea47664a6d666943069e65768f1a284435583a24",
+      "bytes": 6226,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/ambiq_cmdq.h",
+      "sha256": "8f4dffc5e3cf2b33cf877dab9ba5b2841b74451a379b9ab49ab4ec0d2869ce7d",
+      "bytes": 4580,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/ambiq_interrupt_mask.c",
+      "sha256": "27a574d24f61bf1bec7a13d16bc3e1f0816c35045f384b5ad85d808871f6a9eb",
+      "bytes": 4625,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/ambiq_interrupt_mask.h",
+      "sha256": "76e92c27af92ed403326c65acdbb890dccfb4f00788f06c6c99f09e4ec0de98a",
+      "bytes": 450,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/ambiq_mspi_compat.h",
+      "sha256": "fe6af8d10f857eb6bfb2758907073bd5ab75691a6818c03c94f0124a0f285299",
+      "bytes": 4625,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/ambiq_mspi_interrupts.c",
+      "sha256": "032087d41fe463a36c6a119b8fd2a7beb1256356e2f6d8d9d7f4ca75e02e5ba3",
+      "bytes": 4780,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/ambiq_mspi_interrupts.h",
+      "sha256": "89f04627e3270417130428894d6523b66e1191842dfd5baba01ca0256be51337",
+      "bytes": 1765,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/ambiq_mspi_lifecycle.c",
+      "sha256": "c55c3e163097e0112b11eb9fc4192b6a25de8cdaf28da41b1e3a6c8f2272ad0d",
+      "bytes": 3862,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/simulator/entry.c",
+      "sha256": "762eab9e3d49371055ba5e9941f62540f6538348b23d9f5990e01e7340850b28",
+      "bytes": 691,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/ambiq_mspi/simulator/lifecycle_seams.c",
+      "sha256": "6b3e74175d61d32ef8c416a72f795ec7b722d6ab0442dd7409e6b7fb1d34e644",
+      "bytes": 1165,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/audio_cache_handoff/handoff.c",
+      "sha256": "ffbdf9c36d9e8bb3e209f900a5eaa383665fadb47029da6d0e2e81583936b323",
+      "bytes": 2694,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/audio_cache_handoff/handoff.h",
+      "sha256": "b93f87f5ea7ef8f92f98393b5db24c4cb0d78f49eeee17ae3ed10984fcc5f54f",
+      "bytes": 1183,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/audio_dma_rearm/rearm.c",
+      "sha256": "f5c6981d0e1a1bb63ff616b2689c32357e0aab80d1f9f5142b3a1fb279d0c6bc",
+      "bytes": 4089,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/audio_dma_rearm/rearm.h",
+      "sha256": "8f257f60eff0c9c4d0ecd6c6a2a4f50a5760257239d9bc24446be5c23ce1a524",
+      "bytes": 989,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/audio_pcm_consumer/consumer.c",
+      "sha256": "aadc9b3aee7fab8629e22036e063127e98ed382b2fe424149169d22e1830c13b",
+      "bytes": 3483,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/audio_pcm_consumer/consumer.h",
+      "sha256": "49688d38e304bcb098a36ea324843d5c75731fd13e42139dea41f46268605044",
+      "bytes": 1029,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/audio_pcm_registration/registration.c",
+      "sha256": "81a23abd7af68fa418f93234647133ac92e6783c01e31cc6f69a2527351a4179",
+      "bytes": 1664,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/audio_pcm_registration/registration.h",
+      "sha256": "fc4d4388814a540635f9e7407ae79d7a3fefd306791edfc2f0ed20757f727d47",
+      "bytes": 823,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/cache_maintenance/cache_maintenance.c",
+      "sha256": "365496e8fc154d0b604e292ab96272f6871106a705ac7a5439a67271f6961d03",
+      "bytes": 2041,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/cache_maintenance/cache_maintenance.h",
+      "sha256": "64c437f8de20c7e0c7e4ce21a8cff58a8afecf0a46950b17dd260783e9f12c11",
+      "bytes": 517,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/freertos_daemon/daemon.c",
+      "sha256": "c3e7e6ef9180333d51ca5fe60ce862550ac1588aa121541285e927809204e40c",
+      "bytes": 1304,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/freertos_daemon/daemon.h",
+      "sha256": "16f72e7fe374dac03651a0822616aeeec931686eb907a3d1d31cd3dae956e2f8",
+      "bytes": 683,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/freertos_daemon/receive_copy.c",
+      "sha256": "6c53f0de46bb6011370237d19cc7a7bac9afb698650e1fafe5670735b28883c4",
+      "bytes": 2590,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/freertos_daemon/simulator/providers.c",
+      "sha256": "af1ac9ee64c594b6c405ca5555a88d1aff03ffd48790ec85e0b16da70228e4a4",
+      "bytes": 1197,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/freertos_daemon/task_critical.c",
+      "sha256": "662173ca583d13a2d92312c17ba4512c7f707bd967a13784093051be4aacba7d",
+      "bytes": 636,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/freertos_event_group/event_group.h",
+      "sha256": "37edf591b135477ae72b8e006e975b06c5a103d89417942f927f9a7cacd1654f",
+      "bytes": 2008,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/freertos_event_group/event_group_compat.h",
+      "sha256": "dcc3819ed41c3594546bb27891b3c0f0a4640ffdfa51a6ce56f4bf5b6c4380c1",
+      "bytes": 1651,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/freertos_event_group/event_groups_subset.c",
+      "sha256": "b33ba4457786db350a93b9fa613a6c2eae2344c6dce948534d53dc910e80a5c2",
+      "bytes": 6258,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/freertos_event_group/simulator/providers.c",
+      "sha256": "b53b02e5379248881fad42f1ebf3055bd8d82e543549c70c432a21689e590234",
+      "bytes": 949,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/freertos_event_group/timer_pend_subset.c",
+      "sha256": "f1cafb3ed5b0cc33fcc9e336a4617b6266751aa701842b62931f14c82dcedbb3",
+      "bytes": 2491,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/freertos_event_group/wsf_event_adapter.c",
+      "sha256": "9753afcbbf921748070045cd26d1a8ccb3f89f68068275ff21fe350bbc49a32d",
+      "bytes": 402,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/freertos_queue/queue.h",
+      "sha256": "69e7d62be2159ed94a5d24dc85e7a5456f3420d30a9be5167d5687bd2456838d",
+      "bytes": 1085,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/freertos_queue/queue_adapter.c",
+      "sha256": "477a3199aa54a897f601108becce47f348ef9fc8bf4f6e272cdb9ce3577c80d7",
+      "bytes": 718,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/freertos_queue/queue_compat.h",
+      "sha256": "5fae5668bbcb12a5327d67c1e69ef31046bcc16f4d44028fd426accf27457eaf",
+      "bytes": 1507,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/freertos_queue/queue_subset.c",
+      "sha256": "75d32fc9be94b4de3f0bff294dafb7537d8231113c98b2681b5fbbf0c9ade5b2",
+      "bytes": 12857,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/freertos_queue/simulator/providers.c",
+      "sha256": "7d551795ca47d1a1c004d8cb4a2ea0943cf6baefbda413af30306d40dcc3ca37",
+      "bytes": 1041,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/freertos_ready/list_subset.c",
+      "sha256": "537ebd8aca3a9a757935179ff2474d3544bf0a07bd89fa697cc4bd90535b7677",
+      "bytes": 3228,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/freertos_ready/ready.h",
+      "sha256": "b88903df66fdfa00e97318afc5372de9ad2a5750b9d0ec32454e35042c7bfd7b",
+      "bytes": 534,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/freertos_ready/ready_adapter.c",
+      "sha256": "fcfd72d02952c093d6c7391b6d678797db9912a960dbeb031b818ce1509465ec",
+      "bytes": 266,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/freertos_ready/ready_compat.h",
+      "sha256": "46476ef71baa382e0d93d9be8159d71dee84606b993e09caa4a7b00b50ab34af",
+      "bytes": 2094,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/freertos_ready/simulator/providers.c",
+      "sha256": "617c052fb1e4b5aa5263a245790e4ef3891c246747029614ff3c4273010eb011",
+      "bytes": 1100,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/freertos_ready/tasks_subset.c",
+      "sha256": "0aa9d744536cfac094489722983743ec531c69932718a64c3c00f5d287645e99",
+      "bytes": 5426,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/freertos_resume/resume.h",
+      "sha256": "70b40111ce95d89cc95a6429e2e2f037d4d16920d4be7be5ee1e0ccc502abdfd",
+      "bytes": 297,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/freertos_resume/resume_compat.h",
+      "sha256": "786f0877ff8d3d7a33ff194510afec90ea0b6684d94ed73070aca1f0ec10d2b2",
+      "bytes": 584,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/freertos_resume/simulator/providers.c",
+      "sha256": "8eab11a2659a771170987514bc483a28602c92ba8fd882d07e1d1d5d9770857a",
+      "bytes": 1152,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/freertos_resume/tasks_resume.c",
+      "sha256": "e9038009d2eecf539d94eca032e5379dbb426a2eebda33327b257dfa2a66a767",
+      "bytes": 7449,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/freertos_resume/yield_request.c",
+      "sha256": "dd2e9e9cfe3ff315a71001d1ccf8edccb20f89de03c577c179969a8f4bbe9a61",
+      "bytes": 289,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/freertos_tick/simulator/providers.c",
+      "sha256": "53d1b49bbc976c7f9271cc20ebfa36c05c52a6ad81a14d25826d52c991808949",
+      "bytes": 1029,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/freertos_tick/tasks_tick.c",
+      "sha256": "b287c101d356965e1dafb959caaf020c7f493fe60f77f5521eb8791da08891e8",
+      "bytes": 9478,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/freertos_tick/tick.h",
+      "sha256": "9bd975170e9c90ed5cfe57bb9819fdee29e5c3cf035cb3975d1d1cd138ff316f",
+      "bytes": 243,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/freertos_tick/tick_compat.h",
+      "sha256": "4323bd026ea29f56df1ff9abf5f1e4579d9295f73af0db8f589dc85a01ca4f3b",
+      "bytes": 905,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/power_domain/power_domain.c",
+      "sha256": "29333d2ac5740f0b9e6657a387c23641b0361c441b0628df16aee25171b794c7",
+      "bytes": 2826,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/power_domain/power_domain.h",
+      "sha256": "a47aaa61e248c78bd52ec2bc8ee74a5f3504eacf4f290989251eda13207e8057",
+      "bytes": 601,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/radio_gpio/radio_gpio.c",
+      "sha256": "506dc9fee5f59d75afc7453ae1fc3352c376c7192a04a6fbda3a3a93a4d5d7cc",
+      "bytes": 2317,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/radio_gpio/radio_gpio.h",
+      "sha256": "0b137c878b549c7d450af6b557eca6f1169ec9c7ecdec2346dae07c9f6ccd5e6",
+      "bytes": 1116,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/radio_gpio/simulator/scheduler_boundary.c",
+      "sha256": "e7a468f3f21060e150b657c7993cd660536e7e7d4a5ec92d7e15aeea1fcaaa77",
+      "bytes": 218,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/radio_iom_power_prepare/power_prepare.c",
+      "sha256": "373418706fa831325ee94171284c83b6d4432fecdde71daf57a488e49eca887f",
+      "bytes": 1603,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/radio_iom_power_prepare/power_prepare.h",
+      "sha256": "63c9d4dd6b118a371b0bd16ed0fa95296c5e5ef9b7a05d5b02a8ec97c159574e",
+      "bytes": 599,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/radio_iom_release/iom_release.c",
+      "sha256": "dc44702b3a2592877b7f4c25d4b4d87091baae690ade389ac63929a3c03ea7b1",
+      "bytes": 1448,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/radio_iom_release/iom_release.h",
+      "sha256": "681a4d11f3609ba515ca2c48653de4902993802e1f88d82004d506921a39780d",
+      "bytes": 415,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/radio_transport_pads/transport_pads.c",
+      "sha256": "8607b23d5c0f5fa1eb00b229670d7efc0929a5d91dc89b7574f1dacd0b97df3b",
+      "bytes": 1315,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/radio_transport_pads/transport_pads.h",
+      "sha256": "f9e58dd3d4040ed6591ec8e0acc04502b0f7de6d080e27871751aa33c5ac6ff7",
+      "bytes": 199,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/simulator/entry.c",
+      "sha256": "cd61baf25d6cf38db1a631c0e5db5d194e87a3953536c5213135cc3498be813a",
+      "bytes": 1347,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb.c",
+      "sha256": "ef593088ec3c20985ae8c4b51cf932d9ccc9a98627b43dbe08e8befa412d8afd",
+      "bytes": 1881,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb.h",
+      "sha256": "92e7b7a09807209efba8b0372e615dd3b5ab32dd0459bc4c25675392e29b525d",
+      "bytes": 2157,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb_fifo.c",
+      "sha256": "f6c5439760848024e1bb297d3ab413aa4644f69e42c61c2b4ec692d2da94caca",
+      "bytes": 1231,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb_fifo.h",
+      "sha256": "b0cc52cc1f2c60ffb3da0c4a3931159b44c252f8343237f044db6ce7a600efbd",
+      "bytes": 1476,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb_mmio.c",
+      "sha256": "783266dd5cadfdb30c1d3fd52f94425f01e5dda86dc33e92f3ba7105f47516bd",
+      "bytes": 3724,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb_mmio.h",
+      "sha256": "246a8d858507f86efca279f1bcc3f2acf832b728db77d5a81163812fc1cf9c6f",
+      "bytes": 2582,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb_tx.c",
+      "sha256": "26c4c1d6cce94e42d5d7c2a117c6c592e297d9f8bb3b692add121430c904403c",
+      "bytes": 3213,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/touch_scb/touch_scb_tx.h",
+      "sha256": "70d8e9f60fd9c67ccdd0217f036265f9b4f213c9dfae58af2a490ea4cb427829",
+      "bytes": 2216,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/wsf_radio/simulator/providers.c",
+      "sha256": "9573c153fdf64a01797fd8d56e802c70d7f00553ddaebd8334a8120eecac631f",
+      "bytes": 735,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/wsf_radio/wsf_radio.c",
+      "sha256": "8b487a7bfd6dd091bbdc422bcafa448500740b9f160f8ec31e9db6aab26be4cb",
+      "bytes": 4405,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/wsf_radio/wsf_radio.h",
+      "sha256": "a5747d4739a8bf88694736b571430f1b30ff8067fb3a4c1968d5ab7410156256",
+      "bytes": 1954,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/wsf_timer/wsf_timer_compat.h",
+      "sha256": "3ee9a2f9cd849df597d155739d6dac7583a142df131e6dde298f2fe898953f2f",
+      "bytes": 839,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/wsf_timer/wsf_timer_stop.c",
+      "sha256": "3617e50ecfb9f999df723ed996b008db997d9402a9b317c7bf603b78bf298264",
+      "bytes": 2849,
+      "ignore_rule": null,
+      "change": "unchanged"
+    },
+    {
+      "path": "g2/components/foundation/wsf_timer/wsf_timer_stop.h",
+      "sha256": "ca20886609a5f19cb0352a2f726f65bfb39f6916eb7d129c19525eb54fee29e5",
+      "bytes": 892,
+      "ignore_rule": null,
+      "change": "unchanged"
+    }
+  ],
+  "removed": [],
+  "validation_receipts": [
+    {
+      "path": "g2/build/bootloader-completion/allocator-compatible/comparison-first.json",
+      "sha256": "c1c6aad414d98ec684654a8ad2da23534c0846f1e3d6690762fa412a20a9f15e",
+      "mtime_utc": "2026-10-06T14:12:45.782625+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 265,
+        "distinct_original_trace_bytes": 1994,
+        "elf_sha256": "7e3c11af74beff58187f7b180d9dbbbb8624bbc10c49c1391a5a698b107147a3"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/cache-runtime/comparison.json",
+      "sha256": "a6374a14a3bac230d255b0480de6e11551e4d8a07d10644228021c183297c129",
+      "mtime_utc": "2026-10-06T21:15:01.996009+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 270,
+        "distinct_original_trace_bytes": 250,
+        "elf_sha256": "6b9bdab823a240eae09b6eef3fb5f6807cfd386623a76b31adbae6b37e44ffbd"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/clock-release-all/comparison.json",
+      "sha256": "5ec460492eacc53a857ac441df2d3341d50ad012aae0690a74166c1288e4ca7f",
+      "mtime_utc": "2026-10-06T20:50:51.807580+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 2560,
+        "distinct_original_trace_bytes": 96,
+        "elf_sha256": "21cfa8f63e68c767686f1dade164cf40b4171922728f6afe201e8644a5fd2748"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-context-compatible/comparison-first.json",
+      "sha256": "0fa1901248f6890d8b3ad698ad7eb0251ab9499b34189cd0ab5430d78c7321e0",
+      "mtime_utc": "2026-10-06T14:26:00.351277+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 37,
+        "distinct_original_trace_bytes": 310,
+        "elf_sha256": "b37153a90bf7a3f985737c7235b70a4a58e5da7aac904c0cbdbaa9813ca93aa7"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-dispatch-compatible/comparison.json",
+      "sha256": "fc1e75b1f57005a10c08d2602c862ad1bd05e4d49e2bc97559f2af69960518ef",
+      "mtime_utc": "2026-10-06T20:28:50.009018+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 4,
+        "distinct_original_trace_bytes": 9632,
+        "elf_sha256": "18c654c06943c321cbece54ab8de2e71c37fd5074516e18da6f1fc51aab01766"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-runtime-compatible/comparison.json",
+      "sha256": "1b26ae1b3c45ab1c9994e71650b28a654def4acd5fd9b9608f8145232d4302d4",
+      "mtime_utc": "2026-10-06T20:29:49.934458+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 8,
+        "distinct_original_trace_bytes": 11384,
+        "elf_sha256": "152e639b974a7acec133052e4e73057e8fe3175eeece849b68bf385b283f9b78"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-cache-compatible/comparison.json",
+      "sha256": "d2265a4460381112bbb484e3a53ee2d44ea8a625eb518040fc8be8fda7a5d070",
+      "mtime_utc": "2026-10-06T21:24:23.143418+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 2,
+        "distinct_original_trace_bytes": 29404,
+        "elf_sha256": "bd0a6d1901483360024d6d853edc132fceb4005e14ae8b671c6771c735a96450"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-compatible/comparison.json",
+      "sha256": "074e055eb0d2b86c2be8f7c644279176ba3cefed82d29379e9a1e8dd6e3e42e2",
+      "mtime_utc": "2026-10-06T20:30:18.026289+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 2,
+        "distinct_original_trace_bytes": 24382,
+        "elf_sha256": "044cfcd6ca781fb29642df80437bfb625b182e8aab804050b2ac1068a174e2e8"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-nor-compatible/comparison.json",
+      "sha256": "857c55508ab5ddcb6cb678053a7a5314bd45c0f6ab130c75b7cad4f9bb3bc639",
+      "mtime_utc": "2026-10-06T20:48:22.190845+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 2,
+        "distinct_original_trace_bytes": 25684,
+        "elf_sha256": "7c852d9e1b2e1e349eb8588d8c2d5d8c31340ae52d8378675daf3d602b68861c"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-platform-compatible/comparison.json",
+      "sha256": "93e7209e0e1e0c5c43120d88a6a2aff6d61e8c5cf454c515cab687fe353ec81a",
+      "mtime_utc": "2026-10-06T21:32:28.198425+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 2,
+        "distinct_original_trace_bytes": 29868,
+        "elf_sha256": "6bdd23aced81d0cc9e3f490ab12011d6f850bd3d24e97ee99e09d45a0f749d91"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-power-compatible/comparison.json",
+      "sha256": "bd1a714f5daac32b596549c48ed17f0b4cb1ec6a7eddb055de75e045c02f8d9a",
+      "mtime_utc": "2026-10-06T21:22:20.373946+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 2,
+        "distinct_original_trace_bytes": 28874,
+        "elf_sha256": "564c9d98b128bdb95153d150f1867d8827fd32ec6902693059573202872702d7"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-queue-compatible/comparison.json",
+      "sha256": "c713de9ad04e9941cb431121dfd04ae02245bee6ac1fe331696b88913819aa48",
+      "mtime_utc": "2026-10-06T21:23:20.535060+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 2,
+        "distinct_original_trace_bytes": 29378,
+        "elf_sha256": "2ccdfdfac5a2761216c8f118f25e95e752f53b96e583b205abe03f79bfa12a17"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-storage-read-compatible/comparison.json",
+      "sha256": "a0b01b612dc57063bac68f930e91235dbfcfc8bbc3324a76ed6eebff88a5f627",
+      "mtime_utc": "2026-10-06T20:44:51.184191+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 2,
+        "distinct_original_trace_bytes": 25326,
+        "elf_sha256": "5b1a4615d9381a02d79e2275345582c279028fa46e3c05e506d55b8c492cc388"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/dfu-task-compatible/comparison-first.json",
+      "sha256": "457a7fb7fa982786238c2ff8bc8ecceae58d4afac1cc300f34cd77d6ace5abc4",
+      "mtime_utc": "2026-10-06T14:19:43.464916+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 213,
+        "distinct_original_trace_bytes": 734,
+        "elf_sha256": "4873edb0e7a6916d4c8d7eed047462394b57b57148fd4f5c75892d918589bbb8"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/filesystem-compatible/integration-final.json",
+      "sha256": "c08069218d704c8e3dd98ab0d04302128b3528daa5d80899748a034653746363",
+      "mtime_utc": "2026-10-06T13:54:18.517742+00:00",
+      "summary": {
+        "status": "PASS"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/filesystem-compatible/integration-first.json",
+      "sha256": "89f1839eba41248aff172a27b948b0918c5b8adffa473ccdc63d715c1560152a",
+      "mtime_utc": "2026-10-06T13:53:06.247603+00:00",
+      "summary": {
+        "status": "PASS"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/filesystem-owned-compatible/integration-first.json",
+      "sha256": "035dec43dd1cc66eeefeaaa9e524c262d177fafcbe4bf8af7ab43745ea658524",
+      "mtime_utc": "2026-10-06T14:14:07.673500+00:00",
+      "summary": {
+        "status": "PASS"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/filesystem-owned-compatible/integration-revalidated.json",
+      "sha256": "d8f3a6c2257fc7689e7e2635df16c54321e821c2603d298bba8f0d4c7abaa87c",
+      "mtime_utc": "2026-10-06T14:57:16.150839+00:00",
+      "summary": {
+        "status": "PASS"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/main-callback-compatible/comparison-first.json",
+      "sha256": "2406972aa8699d474e8a3b12e050c92618d2405174a0c4bde95a7e2d1e90b067",
+      "mtime_utc": "2026-10-06T16:43:57.858719+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 4,
+        "distinct_original_trace_bytes": 44,
+        "elf_sha256": "ad76a9faa2f85f206b06e1c243e6332fddb1232b06f2cbe1f8b239b1217d1382"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/main-callback-startup-integrated-compatible/comparison-first.json",
+      "sha256": "095cc9c4d77eb14ee69b5ae91e594ea1b2972abaa0419d171dda936d5cf8158d",
+      "mtime_utc": "2026-10-06T16:44:20.738587+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 4,
+        "distinct_original_trace_bytes": 370,
+        "elf_sha256": "30b0374a266261a13f9ecf0841aed4645b2c42a79a1bd91c37496e1a20dfdcb0"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/main-init/main-init-comparison-final.json",
+      "sha256": "666dfbac3d9c06225afda0362bfdefcbae6cf4743c2e2628bd42ecfaf1777291",
+      "mtime_utc": "2026-10-06T16:10:30.761038+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 6,
+        "distinct_original_trace_bytes": 100,
+        "elf_sha256": "3ef1dd457b005297228043c42122f8da524694802a094e23043cb713dae8d114"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/main-init/main-init-comparison-first.json",
+      "sha256": "2292d6da79c9a1806f2d8edb0174b1f5ed51e27d71b123da95eba8b4613459c9",
+      "mtime_utc": "2026-10-06T16:09:18.450554+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 6,
+        "distinct_original_trace_bytes": 98,
+        "elf_sha256": "3ef1dd457b005297228043c42122f8da524694802a094e23043cb713dae8d114"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/main-init/main-init-comparison.json",
+      "sha256": "7f0c8456f102a42ac81a1a1dda32ca6ff5c8f9de81806f8991fec0c30e5053a2",
+      "mtime_utc": "2026-10-06T16:28:44.119257+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 6,
+        "distinct_original_trace_bytes": 100,
+        "elf_sha256": "3ef1dd457b005297228043c42122f8da524694802a094e23043cb713dae8d114"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/main-init/startup-main-init-compatible/comparison-final.json",
+      "sha256": "8a7377303bd54a0e3a01a4c737cad4ed09e914a29e4d31274b59bf3e5d15c89f",
+      "mtime_utc": "2026-10-06T16:28:55.479176+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 4,
+        "distinct_original_trace_bytes": 338,
+        "elf_sha256": "c77454bb4b939d5c155bf4c6d9e2481e045be3142da1a66ebff69681124c75ca"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/manager-dispatch-compatible/comparison.json",
+      "sha256": "9690abcb922eb9d3cf2bf4137e9df5954bc9ecfdb7bfceb07c112461b4112640",
+      "mtime_utc": "2026-10-06T20:30:38.823231+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 445,
+        "distinct_original_trace_bytes": 588,
+        "elf_sha256": "3ced39c58d2e71a8d4c92da54ecd7f2f231aae5dccc01f7f12f07b1a34f14c8e"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/manager-event-compatible/comparison.json",
+      "sha256": "9b86d82a250361911107ea1f04d07b5d66f9a638c1810244ec9e2e4f0f9236f9",
+      "mtime_utc": "2026-10-06T20:30:33.052859+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 32,
+        "distinct_original_trace_bytes": 262,
+        "elf_sha256": "b2522c76d0f94c85d18e519ab23299be83873f26f3f43257045ec3bf975934e1"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/manager-handshake-compatible/comparison.json",
+      "sha256": "d398bf87d4df7f34f02a674b1f219442656d41aa7e1e6bda3f032491e628983b",
+      "mtime_utc": "2026-10-06T20:30:31.379752+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 42,
+        "distinct_original_trace_bytes": 140,
+        "elf_sha256": "8460423c1133166f63d0284aabd72b0823a8af94bc0cc1564ff2f3bc117c214a"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/manager-sender-integrated/comparison.json",
+      "sha256": "4fb28d41da61fcc4e8f9c958b383d2c201a224c44921bf9ce04e7868d7db5c95",
+      "mtime_utc": "2026-10-06T20:30:32.440862+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 8,
+        "distinct_original_trace_bytes": 328,
+        "elf_sha256": "40bea67a87436c68dcc37bc376a2b938f56cc896f8788d71ff4322f1b47f8c6f"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/manager-setup-compatible/comparison.json",
+      "sha256": "49bfc2d83d2891523c9530b4b40f78b7a20a069fbef254082eb438674da1e50c",
+      "mtime_utc": "2026-10-06T20:30:32.790454+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 32,
+        "distinct_original_trace_bytes": 600,
+        "elf_sha256": "c330393599ac37ff4926bc3d43a785bf7331d6fd1a42e1c07acc59961019945a"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/manager-task/comparison.json",
+      "sha256": "90a2a7d9731fb9d7ca5e5256b16f32b272a1db395c576be075ee1d79d6db9cf1",
+      "mtime_utc": "2026-10-06T20:30:32.213351+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 10,
+        "distinct_original_trace_bytes": 214,
+        "elf_sha256": "198f8c20531f29ea7d4a7342cd2a645e410855f468e4b0a61098fc0d5d3dcbe2"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/mspi-blocking-compatible/comparison.json",
+      "sha256": "24aa38096fd1c4f7727e786893083e0f8b447181d505e709bf5c05c9c8e1da15",
+      "mtime_utc": "2026-10-06T20:25:16.603266+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 722,
+        "distinct_original_trace_bytes": 364,
+        "elf_sha256": "e075fc29dfa582a17bd1d61219afd08b341ea7e8c2dbf4caa369ce21cd844dd8"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/mspi-compatible/comparison-first.json",
+      "sha256": "3f84c7667c57b4840f7547e6a376dd4591ec091602a0b8b16cd70b43190b3ecf",
+      "mtime_utc": "2026-10-06T14:58:35.000052+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 37,
+        "distinct_original_trace_bytes": 48,
+        "elf_sha256": "d2d22a7fb852c99bf0f2f0eccb6f6eb9f8ec1bc46a9aff134e7411973d1604cc"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/mspi-control-read/comparison.json",
+      "sha256": "f12af16f20a38210d1ef790581ce0e299f1a8bdf3d146796f219c9044fd3cc28",
+      "mtime_utc": "2026-10-06T21:05:08.988174+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 1684,
+        "distinct_original_trace_bytes": 1942,
+        "elf_sha256": "5d73050ef4ae09df23dc7c778f678ea706aae3a78f51fa8d1cab4adb73fdd049"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/mspi-fifo-poll-compatible/comparison.json",
+      "sha256": "b9a66ee4740b51d6608111a0653c54df011b3d128c5a55f105512c64e61d6f24",
+      "mtime_utc": "2026-10-06T20:25:09.733418+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 496,
+        "distinct_original_trace_bytes": 300
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/mspi-leaves-compatible/comparison.json",
+      "sha256": "225b6030f6c214f0e83e83b5a0d9a0d74cf3420bdc8444a6a94fa51944fd8fef",
+      "mtime_utc": "2026-10-06T21:31:07.137846+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 527,
+        "distinct_original_trace_bytes": 704,
+        "elf_sha256": "56e968e18be89de75c51d1716c552174a1c49388fad7bb2971d7546ce3ad41d9"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/mutex-nor-queue-runtime-task-integrated-compatible/integration-first.json",
+      "sha256": "49dbedd47f99251989cf5bcade1dabc4d5d13499078124e3fc61dddc3896dff1",
+      "mtime_utc": "2026-10-06T15:25:55.851351+00:00",
+      "summary": {
+        "status": "PASS"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/mutex-runtime-compatible/comparison-first.json",
+      "sha256": "3e8516cb229454a89625a1946ad5a588ae6aac38282c5d7710f265e74c7f732b",
+      "mtime_utc": "2026-10-06T15:24:40.686313+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 288,
+        "distinct_original_trace_bytes": 258,
+        "elf_sha256": "1cfda5f5d2173b7774d08649ebd0c62f2f930c7cc37c5991abecd8c9c7c86f55"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/nor-init/comparison.json",
+      "sha256": "723584c186c1aa06ca4debf1599bcdd2afc6819495acb24e173b0b225d35f851",
+      "mtime_utc": "2026-10-06T17:41:52.470876+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 6,
+        "distinct_original_trace_bytes": 414,
+        "elf_sha256": "dc9e0aba217e7a13c4f942c8bd70aee24650d911f3875517c0dd1e11190a92de"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/nor-queue-runtime-task-integrated-compatible/integration-first.json",
+      "sha256": "f84c7b56579386a64db053b39d79ac132a6981ff1af7c362d9e29c435d87a481",
+      "mtime_utc": "2026-10-06T15:15:59.627713+00:00",
+      "summary": {
+        "status": "PASS"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/nor-read-components/comparison-first.json",
+      "sha256": "b5e70e05f6cabb820272265d1034a18aacbe0936122aa8cf929b2a4ef52a2a57",
+      "mtime_utc": "2026-10-06T15:15:47.381257+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 10,
+        "elf_sha256": "95ed294ea63882281dc57167443681482a1b5e40182af4d2a1f4114d89e06e53"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/nor-read-helpers/comparison.json",
+      "sha256": "75d2b25e8c296e78171201e2f77efb7e2301bcd64ee49e3c933697c7f5ec3db9",
+      "mtime_utc": "2026-10-06T20:35:13.757619+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 177,
+        "distinct_original_trace_bytes": 544,
+        "elf_sha256": "f7fcb54c31da99b76b0338ab281e1d0c01ac2b9f57ac6ceca40139ca9540b050"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/nor-runtime-compatible/comparison.json",
+      "sha256": "02720553a0317d0c0abc69d077ac39873a43c349f5a9b569e2fbcaf61e944ed0",
+      "mtime_utc": "2026-10-06T20:30:18.285608+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 96,
+        "distinct_original_trace_bytes": 116,
+        "elf_sha256": "fe6b65a128bd1ae78e322ed0ac93e7583a5cc7c2361ec5ad1ce2401675ddd0c0"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/platform-control-compatible/comparison-first.json",
+      "sha256": "cba577cebf063c23bad6041aaf4d9a6ca8ebcbd7530eb0e7aa5d9736494d4c18",
+      "mtime_utc": "2026-10-06T14:34:30.429276+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 496,
+        "distinct_original_trace_bytes": 270,
+        "elf_sha256": "ae92e06e55becf04c4941bc0e50750cf817120800af63ced71b2edc73c2115fc"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/platform-control-critical-rom-compatible/comparison-first.json",
+      "sha256": "36d0605a16f78f1ec5d8ccd7cbb8617c65c883e51c94bce9744a52dc378b8771",
+      "mtime_utc": "2026-10-06T15:09:52.881510+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 496,
+        "distinct_original_trace_bytes": 308,
+        "elf_sha256": "70ead2bf1b4c316c26721bc50a2234c7d3667021a36087cfd2b4e0f394a5d50e"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/platform-control-power-compatible/control-comparison-first.json",
+      "sha256": "f8bf8538b9c3d3f929915d71dca6e39a14220a56140e880e63aaa98635418416",
+      "mtime_utc": "2026-10-06T15:35:22.758746+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 500,
+        "distinct_original_trace_bytes": 472,
+        "elf_sha256": "584995795c375db0b79ba46df8a466a8fba0baa6f4a289e3bbf5a0572ff84f1a"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/platform-control-power-compatible/guards-comparison-first.json",
+      "sha256": "8f6548a8e99d5878376594b90ac464281793feedef08e9cb8f1618c776ec2186",
+      "mtime_utc": "2026-10-06T15:31:44.636240+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 14,
+        "distinct_original_trace_bytes": 164,
+        "elf_sha256": "584995795c375db0b79ba46df8a466a8fba0baa6f4a289e3bbf5a0572ff84f1a"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/platform-control-rom-compatible/comparison-first.json",
+      "sha256": "220bdfcbe33508eda472d8e81f8289d80946e5c6eca589956022b4f794dd7997",
+      "mtime_utc": "2026-10-06T14:39:12.909680+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 496,
+        "distinct_original_trace_bytes": 300,
+        "elf_sha256": "39d62b08b8f89b23160120a6ddff254004e7c7a2b072b081325f86d92fd01d47"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/power-domains/comparison.json",
+      "sha256": "fd38832fbd786acd2ca18f2d2bf4ce558d3e6e648935578e8862ff50426d01fb",
+      "mtime_utc": "2026-10-06T20:53:31.357355+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 960,
+        "distinct_original_trace_bytes": 966,
+        "elf_sha256": "b2c6312c927b091c6c44d317625e9ff6eb90d8871828c90f3b0ea7b1a5798be8"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/queue-components/comparison-first.json",
+      "sha256": "d435a9d096e9918bea2168b2ae59a3213739206b381b42461f47abffbd48d2c4",
+      "mtime_utc": "2026-10-06T15:04:27.262927+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 45,
+        "elf_sha256": "05f43bb31ba14a246aa36f5bbfbb896e4c301e5de7c7031fe20bb2b8682f26df"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/queue-runtime/comparison-first.json",
+      "sha256": "65d6b61aed64ef0dd8be469c28a4d2ec62e5970a36274963510fbb7ba8bc762b",
+      "mtime_utc": "2026-10-06T15:06:58.956435+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 45,
+        "elf_sha256": "e433ed46e19973a8aacaaf0c8743eecaaf520e9215859bdf4a5cd4ebd14c0dc7"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/queue-runtime-task-integrated-compatible/integration-final.json",
+      "sha256": "58a22b0497b87501018e8e8047995dff487eddb164a443966a5f99b3264eac9a",
+      "mtime_utc": "2026-10-06T15:10:40.176849+00:00",
+      "summary": {
+        "status": "PASS"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/queue-runtime-task-integrated-compatible/integration-first.json",
+      "sha256": "72363f25bd35b00a9342be48f7c49c4721a3d1a992c343f25f7acff8ed28946e",
+      "mtime_utc": "2026-10-06T15:08:11.450880+00:00",
+      "summary": {
+        "status": "PASS"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/queue-task-integrated-compatible/integration-first.json",
+      "sha256": "1003d7dc39d889bb0a059b1f3f59dedcc7b586bcb3807676deb32ae1eb11120b",
+      "mtime_utc": "2026-10-06T15:04:42.504641+00:00",
+      "summary": {
+        "status": "PASS"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/reset-manager-compatible/comparison.json",
+      "sha256": "49f4f352835b1166cc7f9467a6e30cf104a1cf4d4e9027d0b4d683804b84e022",
+      "mtime_utc": "2026-10-06T20:28:23.692406+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 4,
+        "distinct_original_trace_bytes": 9342,
+        "elf_sha256": "268b9099131431135015e45605123313d21523cccd504ca64f65cdda9bd3e65a"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/resource-creators-compatible/comparison.json",
+      "sha256": "2dfc7808855e03ba44d3adbe5b2cec19a431de69d3e308306e6e3834f77441a8",
+      "mtime_utc": "2026-10-06T20:30:20.034227+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 312,
+        "distinct_original_trace_bytes": 690,
+        "elf_sha256": "101d9a947f9862df4111f15eee8a358bc645a7a501ec2b82721174afcc0d280e"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/comparison.json",
+      "sha256": "9dad22899deaad5b6c93d196d94871b4dc2db463fff0aee4702c05aef232cb11",
+      "mtime_utc": "2026-10-06T21:42:54.352703+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 2,
+        "distinct_original_trace_bytes": 29868,
+        "elf_sha256": "c4dba52f034d6bea3624665fd85f8e60ccec6d9218e8dc996f3f292a7b2060a5"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/failures.json",
+      "sha256": "b267b4a28399de6dc26f12617f8ed63310ebb99092a176a6d4efc4062ab520fe",
+      "mtime_utc": "2026-10-06T21:44:32.551454+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 3,
+        "distinct_original_trace_bytes": 28966,
+        "elf_sha256": "c4dba52f034d6bea3624665fd85f8e60ccec6d9218e8dc996f3f292a7b2060a5"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-compatible/comparison-final.json",
+      "sha256": "cbc0aedab1e091b4c52c8134acb4e95901cbda1acfba7ed6b0a95e2966c0ff01",
+      "mtime_utc": "2026-10-06T14:16:36.476449+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 39,
+        "distinct_original_trace_bytes": 182,
+        "elf_sha256": "51e796b57856c954b40145667f176bd9f6bcf3fcc044d7dacce4707ab3e79564"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-compatible/comparison-first.json",
+      "sha256": "49d2d8f83777c6fdf13f2dc265af8a4c72a1aa8d83823bc6885dff8b315c2040",
+      "mtime_utc": "2026-10-06T14:10:05.031605+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 39,
+        "distinct_original_trace_bytes": 182,
+        "elf_sha256": "51e796b57856c954b40145667f176bd9f6bcf3fcc044d7dacce4707ab3e79564"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-compatible/itcm-comparison-first.json",
+      "sha256": "0d067c803b7af7c1f1b20488c8dee9c8d9d8a67c1f9521721f87e66e0f725360",
+      "mtime_utc": "2026-10-06T14:29:37.635104+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 16,
+        "elf_sha256": "b5be566800ec967507a3722529bb7d3f4270668ae1d491b0a20a644051f3d6b5"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-records-compatible/comparison-entry.json",
+      "sha256": "84d08dbcbb0fd42fd3039dad36b95235031cfa76d8138cd6627e3ce324894de3",
+      "mtime_utc": "2026-10-06T15:53:45.024941+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 4,
+        "distinct_original_trace_bytes": 242,
+        "elf_sha256": "3356511474e1d4d19bc6f0c75f6a317e6aadcc3e98f40537812ed7e62d49bf9f"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-records-compatible/comparison-first.json",
+      "sha256": "2fe2f933016d9247f8fb99140b268c2c4055095f536bdbaa5d1644d0a5891337",
+      "mtime_utc": "2026-10-06T15:48:18.591100+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 3,
+        "distinct_original_trace_bytes": 212,
+        "elf_sha256": "3fdc935143661bff2b0be17f9726b1d142ce4cf2df4ed1d24c0cae5fce8ec426"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-records-compatible/comparison-fpu.json",
+      "sha256": "f869afec93ae58df5a5da703b0073e87da4f4fe7f8c8040cc34455eafba5d914",
+      "mtime_utc": "2026-10-06T16:08:19.358913+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 7,
+        "distinct_original_trace_bytes": 276,
+        "elf_sha256": "5d4ab7d02c44a29aa51331cd181e74e4490ac5d696a21b78f8e69c30c62fc978"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-records-table-compatible/comparison-final.json",
+      "sha256": "13bdf38c29f4203245eb1be7122c549e5a029f8993565d46f88c227176a0d085",
+      "mtime_utc": "2026-10-06T16:40:19.805346+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 7,
+        "distinct_original_trace_bytes": 276,
+        "elf_sha256": "8630624787ff53ae193982da5b179802d51ae82253e28391391a473d094cc6a6"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/task-integrated-compatible/integration-first.json",
+      "sha256": "94d50bf23a538692053cbff90e52c13a8a2eec16a31a8d5ecd402c6884e799ab",
+      "mtime_utc": "2026-10-06T14:22:08.810201+00:00",
+      "summary": {
+        "status": "PASS"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/task-integrated-compatible/integration-revalidated.json",
+      "sha256": "c82ae2278356ef7512b43aa186fcd8da438b4f2a8e21c639702eed8eeea165ca",
+      "mtime_utc": "2026-10-06T14:56:36.976421+00:00",
+      "summary": {
+        "status": "PASS"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-allocator-startup-compatible/comparison-first.json",
+      "sha256": "cadee24c6d219c1674729c280da435d60db00b4fc336826e630dfc7b9e55bc83",
+      "mtime_utc": "2026-10-06T17:37:10.901645+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 2,
+        "distinct_original_trace_bytes": 2742,
+        "elf_sha256": "99005a5e2f5826ebd74940ce6e1d90dcb39697e4fa9054b036c703b176d093e8"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-bootstrap-compatible/comparison-first.json",
+      "sha256": "42e45aed044dc5cda0d355835a06cc5624a8bba3c9a823e1aa04f77dc77bf9f0",
+      "mtime_utc": "2026-10-06T17:02:58.387300+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 6,
+        "distinct_original_trace_bytes": 894,
+        "elf_sha256": "3a9ad49e59c0019ee38ab43168db722fff6fdb1e3b4cea839fd7fd57908183f9"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-bootstrap-startup-compatible/comparison-first.json",
+      "sha256": "bd9ff7febb3fd38cbb2fb41117e0f225c612691eb838f71f2a42274285c060c5",
+      "mtime_utc": "2026-10-06T17:03:04.001627+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 2,
+        "distinct_original_trace_bytes": 1532,
+        "elf_sha256": "fa0eec03dcea20d4a728d311779f0f0888de0a39780993dd3e9f56bfd4a86032"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-clock-startup-compatible/comparison-first.json",
+      "sha256": "b48d5d73635f03c0af907482b96774a5749538ad6f28bd4f2a4ccda17a3117af",
+      "mtime_utc": "2026-10-06T17:54:08.468930+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 6,
+        "distinct_original_trace_bytes": 3634,
+        "elf_sha256": "c3e2ff46a3ecabab104a927f2f02221a4badbd96f16ea92ce209b5ba2818e32e"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-creation-compatible/comparison-first.json",
+      "sha256": "c2e91c4c31ceda985fa77d471d206e5a299a8579869afb1569dbe0e82b162570",
+      "mtime_utc": "2026-10-06T16:51:37.236785+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 324,
+        "distinct_original_trace_bytes": 200,
+        "elf_sha256": "3f126d0372c94907166a595e7180bac7b3d747771cd5e3452cd431f31e201eeb"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-creation-startup-compatible/comparison-first.json",
+      "sha256": "32e1e6721c0312f295cbea8c332851418ff2d224e39a63cf7d7e19e88746625c",
+      "mtime_utc": "2026-10-06T16:52:40.280023+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 4,
+        "distinct_original_trace_bytes": 514,
+        "elf_sha256": "0cb1d2dd2e15ec83f33a5ef33e6b2660c4c1b59029b6cd986aefb59404d7021b"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-dynamic-compatible/comparison-first.json",
+      "sha256": "7306137f7d5e3b087eea6cc60d463fe0bd11696b0f920347c31b63294fee0a6c",
+      "mtime_utc": "2026-10-06T17:17:16.212108+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 18,
+        "distinct_original_trace_bytes": 962,
+        "elf_sha256": "f68045d6af41e086cf8f161f79702931e049dde7cad6fd3b00aed446e7f6eee1"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-event-flags-set-compatible/comparison.json",
+      "sha256": "8c3921421a1110e6830576811712a5d83563450068a474a778dd3984dcc3405a",
+      "mtime_utc": "2026-10-06T20:30:23.443812+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 356,
+        "distinct_original_trace_bytes": 918,
+        "elf_sha256": "e8429ba097c669ca88f0c02de26b4d1d92880245cfcf322c289e508a0f32653f"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-heap-compatible/comparison-first.json",
+      "sha256": "c1b9da377ecc1218ea3a2c4a8873cf8bc0088e610c156d164850939f2a9b2b8f",
+      "mtime_utc": "2026-10-06T20:30:28.365159+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 159,
+        "distinct_original_trace_bytes": 496,
+        "elf_sha256": "66627e40c2fb5023713e1b9d5bd9ab19467361e0c486ab1d3071b2fb6b98dbb2"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-lifecycle-compatible/comparison-first.json",
+      "sha256": "bddbcfe3ec4a2bd26fe0db0edcfc379f5a8c4119bfdfa1ad5c060f146f36bee8",
+      "mtime_utc": "2026-10-06T16:59:25.706142+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 216,
+        "distinct_original_trace_bytes": 224,
+        "elf_sha256": "be9062a4a5941c7b53587471a7180c09952542a62308ffbfd33deeb9ab86d74e"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-manager-bridge-compatible/comparison.json",
+      "sha256": "25a47721c9103838f0a903db58401380c5fab5a9a710432c93e57d9cf55039ec",
+      "mtime_utc": "2026-10-06T20:27:58.350724+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 4,
+        "distinct_original_trace_bytes": 9270,
+        "elf_sha256": "8b936ab68f3f3bfc1ed34fab8cefe3942403f9599fb2845ee78f5c151defd37a"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-mspi-startup-compatible/comparison-first.json",
+      "sha256": "81c80e45ca29042cb14a09b2cb36fde3043482d40e54e34fa568908d470b4db3",
+      "mtime_utc": "2026-10-06T20:26:08.905540+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 10,
+        "distinct_original_trace_bytes": 4206,
+        "elf_sha256": "091130f49dd5a2fbc6636f3f846822e6e55164cf9027994c4202d10253a9ec90"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-nor-commands-startup-compatible/comparison.json",
+      "sha256": "612cf0d4e8a2a6fdc3f64c1d12ad4eb32d6714d38c1a9b41cd3f6e6a5019449f",
+      "mtime_utc": "2026-10-06T20:27:31.600060+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 16,
+        "distinct_original_trace_bytes": 4688,
+        "elf_sha256": "64eb51b1864ee40518922d4eb6fb9de84a0a8116ceb5c1bdfbfd551b92f4a0b6"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-nor-startup-compatible/comparison-first.json",
+      "sha256": "52c6206f518e96af717416c5a0199e0de09cf035860dc3ec7e01dbcf74f19386",
+      "mtime_utc": "2026-10-06T17:46:03.175789+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 6,
+        "distinct_original_trace_bytes": 3592,
+        "elf_sha256": "be20e524c8141ca9d3dfba3a309e114cb9779cd4386e1c5895c3790d204aa710"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-notifications-compatible/comparison.json",
+      "sha256": "151dc8a12ca4656e3a9ef54035c8b5e96029ab101f0165130a6492200e489b82",
+      "mtime_utc": "2026-10-06T20:30:22.009599+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 295,
+        "distinct_original_trace_bytes": 848,
+        "elf_sha256": "e004979e7c3097ebfa13276c25d59e90eb88d4b3f555b33dd7f85cb00ed1cb7c"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-owned-heap-compatible/comparison-first.json",
+      "sha256": "386075c00864b74de6aaf6a92aea26ab08277ae48123cf93d1844b8b9b9fd713",
+      "mtime_utc": "2026-10-06T20:30:29.211015+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 3,
+        "distinct_original_trace_bytes": 1392,
+        "elf_sha256": "1b98ddfe5a4f4d23917baa1e2d3027a6f4cf643a58618d80ffd640f4232c662b"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-owned-heap-compatible/resume-comparison.json",
+      "sha256": "b5781befc4df3aa47513cb63308690e4d01dd3c553b13cacb654b78c23d4ad73",
+      "mtime_utc": "2026-10-06T17:23:06.376247+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 96,
+        "distinct_original_trace_bytes": 424,
+        "elf_sha256": "1b98ddfe5a4f4d23917baa1e2d3027a6f4cf643a58618d80ffd640f4232c662b"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-pendsv-compatible/comparison-first.json",
+      "sha256": "8a458cccddd01d0cf4a98909bd1a6c96c0c854143dc0ddae584a8290f4c3251a",
+      "mtime_utc": "2026-10-06T20:30:26.545156+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 2,
+        "distinct_original_trace_bytes": 236,
+        "elf_sha256": "666e4679ff2f458583e94dbc48bd163d01ccc64517f5c0d68ae957190adb28cf"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-pendsv-compatible/fp-comparison.json",
+      "sha256": "9618cf0d2d262e6e8eeb0a480f4ba2492463c8e4a8a4909b94e474950a15eb35",
+      "mtime_utc": "2026-10-06T17:29:38.325308+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 2,
+        "distinct_original_trace_bytes": 244,
+        "elf_sha256": "666e4679ff2f458583e94dbc48bd163d01ccc64517f5c0d68ae957190adb28cf"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-pendsv-compatible/svc-comparison.json",
+      "sha256": "d7829753acc478c90332e3e91ffd1bab75b9c1725f39318d97cce483e0d0a3b9",
+      "mtime_utc": "2026-10-06T20:30:26.776832+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 10,
+        "distinct_original_trace_bytes": 132,
+        "elf_sha256": "666e4679ff2f458583e94dbc48bd163d01ccc64517f5c0d68ae957190adb28cf"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-port-compatible/comparison-first.json",
+      "sha256": "3589909f307bec38fd418a9c1fed23e3e55cfc5215b8a0404ccffcb0cf069077",
+      "mtime_utc": "2026-10-06T17:37:02.030536+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 1,
+        "distinct_original_trace_bytes": 1328,
+        "elf_sha256": "6c738cb5cb3baa8adbf40d23577e600926da5a3f14872b091d083051c213bb92"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-port-startup-compatible/comparison-first.json",
+      "sha256": "78a211a7fa063dfa5dc672eee35c106cd265d7ecd8ba8bc7634b4050f10c2b6d",
+      "mtime_utc": "2026-10-06T17:10:12.262745+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 2,
+        "distinct_original_trace_bytes": 1958,
+        "elf_sha256": "e5f5f06360c059f3231eefa18670b58d036e96583fd58341c698701361afae3d"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-priority-compatible/comparison.json",
+      "sha256": "ed01e5840074463e303c086afdde34940f27e774e27db98eeabe9a1fa1a18273",
+      "mtime_utc": "2026-10-06T20:30:26.232125+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 247,
+        "distinct_original_trace_bytes": 462,
+        "elf_sha256": "f6b079206b961193c98899eaca53803e0af83362895b2ed2181ae0d7a9892c52"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-queue-receive-compatible/comparison.json",
+      "sha256": "194b3f5d3029420ca33a257342b9aa0eb9b6be3550d664750cf3b6367cb4629f",
+      "mtime_utc": "2026-10-06T20:30:20.955786+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 219,
+        "distinct_original_trace_bytes": 1198,
+        "elf_sha256": "7cbfe6d7b0a3b33767bd68e0d019c8b656aed5e849a6563e647ece14aa1e9b78"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-register-compatible/comparison-first.json",
+      "sha256": "0cb78eb9cd19a3824ba7ac203d7935b67d808e9aeb8449427817c3c46d1d5963",
+      "mtime_utc": "2026-10-06T16:55:38.601505+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 32,
+        "distinct_original_trace_bytes": 730,
+        "elf_sha256": "b0889a9119e9a22d6ababf38d364ebb6812a5a123e9a0cbf4159ef8de004daa0"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-runtime-compatible/comparison-first.json",
+      "sha256": "fda7ec8fab1f38a68ad65db0cdf5e859df57faf0e72890f653c250ab7f42b692",
+      "mtime_utc": "2026-10-06T20:30:28.852132+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 32,
+        "distinct_original_trace_bytes": 1022,
+        "elf_sha256": "b8eb4c37eefa63e69929871eb866c0a6d95d5f121d5690f5d519ab88262a0fca"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-runtime-compatible/fatal-priority-comparison.json",
+      "sha256": "5d346f2c62e56b9c8ead178ac0a22fb4360acabefd3da6b0e0b683396edf8435",
+      "mtime_utc": "2026-10-06T17:06:49.238654+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 1,
+        "distinct_original_trace_bytes": 398,
+        "elf_sha256": "b8eb4c37eefa63e69929871eb866c0a6d95d5f121d5690f5d519ab88262a0fca"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-runtime-startup-compatible/comparison-first.json",
+      "sha256": "35c0a27afeb8492559c5a83d0434bba8fdf6f27daa62d5ae01d729272e0766c1",
+      "mtime_utc": "2026-10-06T16:58:30.402906+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 2,
+        "distinct_original_trace_bytes": 1288,
+        "elf_sha256": "3feaef0254639c2c17cf36f8e14929fe925599ccb516b912f5481480af68a2ed"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-select-compatible/comparison-first.json",
+      "sha256": "6c207cccef1a8ef8e46bfafff36af81fc13f496697b5f38a04d1d91bcb10c557",
+      "mtime_utc": "2026-10-06T17:08:05.965563+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 24,
+        "distinct_original_trace_bytes": 180,
+        "elf_sha256": "cb0e72de8f04011ff4b18f6fbc6647e208cb1bcf9295fe2033a3f184319b78fb"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-source-m55/restore-comparison.json",
+      "sha256": "8b7ccdfd65f7bb5111e5ef1e1e077d349f811c87d8c76eba2af82b91d00c94cf",
+      "mtime_utc": "2026-10-06T17:14:10.474616+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 2,
+        "distinct_original_trace_bytes": 36,
+        "elf_sha256": "0574f929dab224c31c37898ffe8ad3fd0c624a4ebb84a3716a0cb93cde57d159"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-static-compatible/comparison-first.json",
+      "sha256": "6ef72789c90028682a2c651e9bf5a3ed9a58aac2d353b939a697fcb3d5977a8a",
+      "mtime_utc": "2026-10-06T16:54:22.579362+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 36,
+        "distinct_original_trace_bytes": 552,
+        "elf_sha256": "1ad7ad23a9ed181304331a7e7a6fcd7b385dccd721e2098fc72bab312833b3d0"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-tick-compatible/comparison-first.json",
+      "sha256": "2c4505883be2444a5d329edff0a50252839fa7c2b96fe9fa5b209717010de56d",
+      "mtime_utc": "2026-10-06T20:30:28.093494+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 288,
+        "distinct_original_trace_bytes": 348,
+        "elf_sha256": "f6802ef91f5472ecd53ff185ac460449469de85666ffe14c5a5a2ba767c42082"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-tick-compatible/owned-heap-comparison.json",
+      "sha256": "96d073a62e05477092f57f68aff1a7f53a9aa66c6867d1c71a36b1b032730c13",
+      "mtime_utc": "2026-10-06T17:27:20.022363+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 3,
+        "distinct_original_trace_bytes": 1392,
+        "elf_sha256": "f6802ef91f5472ecd53ff185ac460449469de85666ffe14c5a5a2ba767c42082"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-tick-compatible/resume-tick-comparison.json",
+      "sha256": "c8c6819d6d6a29a34ffbd033b37e654896871f610e92f626784f0ea143f1856e",
+      "mtime_utc": "2026-10-06T17:28:16.903624+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 96,
+        "distinct_original_trace_bytes": 502,
+        "elf_sha256": "f6802ef91f5472ecd53ff185ac460449469de85666ffe14c5a5a2ba767c42082"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-timer-compatible/comparison-first.json",
+      "sha256": "4359cda68d77777476cb28522825678923e9a0123f49dbaa20d3a9f5b3e76b3d",
+      "mtime_utc": "2026-10-06T17:05:38.483084+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 4,
+        "distinct_original_trace_bytes": 1280,
+        "elf_sha256": "72ec00a755d90c256001bab269f0266ba9d37c186acf558012de9d8f893c65e2"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-timer-startup-compatible/comparison-first.json",
+      "sha256": "01c32b5e31fc4371c503d278912185b2b51479a3f79a75c79c576fc3e07195f7",
+      "mtime_utc": "2026-10-06T17:42:53.830128+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 2,
+        "distinct_original_trace_bytes": 3178,
+        "elf_sha256": "2ee26a7dd91a2970e1db146fdeba87a45ee5c39d68912cf26cd57e770be7b5ed"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/thread-timer-wait-compatible/comparison.json",
+      "sha256": "d7c9f8d87bd7d73aef1b3b68aa1edf984557bdf2cc970fed07072d027e6cbd37",
+      "mtime_utc": "2026-10-06T20:27:32.368890+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 200,
+        "distinct_original_trace_bytes": 808,
+        "elf_sha256": "d86b6c7eb5f9f4627ad6c09c920a0a7e4b349951e536d1e0b5d00a9b4705265a"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/timer-expiration-compatible/comparison.json",
+      "sha256": "af1438ad3aec25e6af93867ad49168e78278f1129cc1937dd01da10ff61016e3",
+      "mtime_utc": "2026-10-06T20:30:19.344666+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 9,
+        "distinct_original_trace_bytes": 278,
+        "elf_sha256": "706c5d834f3e72c7c13e640716d2ae1049a6b17b52e3ff6c3236325317f9fa1f"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/update-core-compatible/comparison-final.json",
+      "sha256": "f062b97a132a4980708b7e80ecba6f602646c55ae26f47d3e65822d7abad3ce4",
+      "mtime_utc": "2026-10-06T13:46:11.889734+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 4542,
+        "distinct_original_trace_bytes": 1208,
+        "elf_sha256": "12016f0e966d9ecfb2fa2861d9352b58d53c1074997cfa0d333e1eb25cdca487"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/update-core-compatible/comparison-first.json",
+      "sha256": "8f2072866b9a55bf29e048897d6d6c86d558d189983117bf7ff3ca39b4e11603",
+      "mtime_utc": "2026-10-06T13:39:46.910562+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 4514,
+        "distinct_original_trace_bytes": 1208,
+        "elf_sha256": "12016f0e966d9ecfb2fa2861d9352b58d53c1074997cfa0d333e1eb25cdca487"
+      }
+    },
+    {
+      "path": "g2/build/bootloader-completion/update-core-compatible/comparison-resources-final.json",
+      "sha256": "e2bd35763737cd5e35b4959b62773c9642c90d2af03d5d8db78f83862dca2716",
+      "mtime_utc": "2026-10-06T13:55:03.385395+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 4542,
+        "distinct_original_trace_bytes": 1208,
+        "elf_sha256": "eb84e29c286fd22d018ea13b78ef27cde1f374d8067b29199586da1e1420aae4"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/em-extraction-inventory.json",
+      "sha256": "625835ae7233b1c160bcf61fd48feb71ac0030e46d14fc567b55bfac66a81d34",
+      "mtime_utc": "2026-10-06T15:56:36.823135+00:00",
+      "summary": {
+        "status": "PASS"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/failure-profile/comparison-review.json",
+      "sha256": "1c0a5ddbe820e520688ad4a03e0c40812c1e3ad614b9a60f1d221b53dc6c6d08",
+      "mtime_utc": "2026-10-06T21:34:22.515366+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 3,
+        "distinct_original_trace_bytes": 23736,
+        "elf_sha256": "5fcb82b18cb93715a159b276b26790c0d81b5574c5e4fd66979e697e5a30728d"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/failure-profile/powerloss-review.json",
+      "sha256": "70d8fc98d10c77681d88309f78609809cf6769fc5cc3e43380dcff4501592779",
+      "mtime_utc": "2026-10-06T21:43:29.006049+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 2,
+        "distinct_original_trace_bytes": 29120,
+        "elf_sha256": "6bdd23aced81d0cc9e3f490ab12011d6f850bd3d24e97ee99e09d45a0f749d91"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/failure-profile/storage-baseline-check.json",
+      "sha256": "aca0e4d491e478e6caa929fb321ecefef2003b160f6dd7a87102ccd7efe4a596",
+      "mtime_utc": "2026-10-06T21:02:56.095145+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 2,
+        "distinct_original_trace_bytes": 24382,
+        "elf_sha256": "218eab20efb6ede86acf6efcdef62986e45b289d61a48219dd641d8658f28d04"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/mspi-blocking-comparison.json",
+      "sha256": "205a6ff9c7f73684072ed9d1fae186350321fb850821f92ac2b9d507ad8886fe",
+      "mtime_utc": "2026-10-06T20:04:48.506804+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 722,
+        "distinct_original_trace_bytes": 364,
+        "elf_sha256": "e075fc29dfa582a17bd1d61219afd08b341ea7e8c2dbf4caa369ce21cd844dd8"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/mspi-fifo-poll-comparison.json",
+      "sha256": "2f73708784360c61eeccfc9d7a9cc3841861653b7677bd0940bdb26b98d32b3e",
+      "mtime_utc": "2026-10-06T20:11:13.575169+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 496,
+        "distinct_original_trace_bytes": 300
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/mspi-leaves-comparison.json",
+      "sha256": "dd6982be4d7381a6ad1b274e4d04dda1845e893cd04fa9d8bd6421cc961a1245",
+      "mtime_utc": "2026-10-06T19:56:05.824491+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 455,
+        "distinct_original_trace_bytes": 478,
+        "elf_sha256": "0230aad64ad98ffa967b9d7f4ecc15cd7e9e7a6bfa79a6b90bc630b96bf2ccf2"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/nor-runtime-comparison.json",
+      "sha256": "1f794f47665d15728d9847c76ef2ae37cc63297e7d9c3b686b51d6c6d04d6d0a",
+      "mtime_utc": "2026-10-06T19:52:46.249649+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 96,
+        "distinct_original_trace_bytes": 116,
+        "elf_sha256": "fe6b65a128bd1ae78e322ed0ac93e7583a5cc7c2361ec5ad1ce2401675ddd0c0"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/control-remaining/result.json",
+      "sha256": "05292d54ad9e8c374287abcb939a1cfd39c62d9bfb8c8471a272ef3e5252ed08",
+      "mtime_utc": "2026-10-06T21:39:24.670721+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 972
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/dfu-runtime-control/platform-control-comparison.json",
+      "sha256": "3be5c0891de354fa8d8714ad04383f1a65607f3c9de8eb8454dac08203555917",
+      "mtime_utc": "2026-10-06T19:24:25.981876+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 496,
+        "distinct_original_trace_bytes": 270,
+        "elf_sha256": "9fa5c65acd1fd6420b7703e10f0f4df1627a8278493894512a71e785d11ea94f"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/filesystem-source-arm.json",
+      "sha256": "4e8034b6a0377ec71697136565af5e984bfcb9fb3746e0d55622abcd2953f860",
+      "mtime_utc": "2026-10-06T19:53:21.800312+00:00",
+      "summary": {
+        "status": "PASS"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/filesystem-update/boot-mount-differential.json",
+      "sha256": "9870ef19c6b26cd9bd19f8d007e4ae0d619047af8cdc9d551e28ce5d85e0eb35",
+      "mtime_utc": "2026-10-06T20:14:19.196247+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 4
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/filesystem-update/file-services-comparison.json",
+      "sha256": "38af618f9bc606966dc0aa76a2136eb42dcd5d7493526452d14ea11100948642",
+      "mtime_utc": "2026-10-06T20:25:11.618431+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 1
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/filesystem-update/source-task-update-real-read.json",
+      "sha256": "1f32ebdcc3130df6393f0ccbc1004ed48ca12b4592cbf283dcd3d1f35846c66c",
+      "mtime_utc": "2026-10-06T20:25:15.509892+00:00",
+      "summary": {
+        "status": "PASS"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/filesystem-update/source-task-update.json",
+      "sha256": "e4594e07cf02b2ec5f2bbc06ae7bcdd8c36875b787e4436cc8fa5f50355ad3de",
+      "mtime_utc": "2026-10-06T19:58:10.647506+00:00",
+      "summary": {
+        "status": "PASS"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/flags-runtime/cmsis-notifications-comparison.json",
+      "sha256": "c7895a9cbd8b290b603e4c7a5b44c2d16270cdaad97738ce0c7d51b0e53294ac",
+      "mtime_utc": "2026-10-06T20:30:30.966835+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 10,
+        "elf_sha256": "1b041b361b58222b5dd1dffb2712227b11ec0a897e82c9276a6fc2ba2b4a289e"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/flags-runtime/flags-runtime-comparison.json",
+      "sha256": "2975140be2713539876c4cdf512ae5ce916393c82a8bbed516e8a5916080f3fb",
+      "mtime_utc": "2026-10-06T20:30:30.831753+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 21,
+        "elf_sha256": "1b041b361b58222b5dd1dffb2712227b11ec0a897e82c9276a6fc2ba2b4a289e"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/mspi-queue/result.json",
+      "sha256": "ef7bb4cf087633fe841966f833d8c227a07f5dc95a5a79d60a9a7a5fa1b38448",
+      "mtime_utc": "2026-10-06T21:11:15.790514+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 73
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/nor-commands/nor-commands-comparison.json",
+      "sha256": "546cb18ca64685ea503cfd216b6b292ae77c62e8e814b0ab7faa09e1a4a52a25",
+      "mtime_utc": "2026-10-06T20:30:39.035906+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 13,
+        "elf_sha256": "71f71b96c1babac12430841fbc85be5fbf438efcb7cf075855ff9ad964841703"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/nor-init/nor-init-comparison.json",
+      "sha256": "7c4e35d8f8d4d0c70529653f5409a45a9916cc3406f3884d71459263648c483c",
+      "mtime_utc": "2026-10-06T17:44:43.863240+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 6,
+        "distinct_original_trace_bytes": 414,
+        "elf_sha256": "dc9e0aba217e7a13c4f942c8bd70aee24650d911f3875517c0dd1e11190a92de"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/nor-mspi-init/nor-mspi-init-comparison.json",
+      "sha256": "4a765608dc2e411b31703f6c113e58fc334fb754b4b3d28dc3ff2ec68d79a7f0",
+      "mtime_utc": "2026-10-06T17:58:06.133325+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 13,
+        "elf_sha256": "9956d8a2ecb936638b6271ff5d7236bff7cb238b8902ae413994bf6478886dd7"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/nor-read/nor-read-comparison.json",
+      "sha256": "aaa42fd24feeae37c0ae5818ba613c88e65c404a6e1a54561e8f4718f8dd5e33",
+      "mtime_utc": "2026-10-06T15:12:54.516163+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 10,
+        "elf_sha256": "95ed294ea63882281dc57167443681482a1b5e40182af4d2a1f4114d89e06e53"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/nor-read-setup/nor-read-setup-comparison.json",
+      "sha256": "8bd2c08d67871162396863ceed607c60e5f18459492efd228755b85af8f4bc60",
+      "mtime_utc": "2026-10-06T16:05:10.214616+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 17,
+        "elf_sha256": "d025a47beed5a450f109519c0b8d9058f3f7c1c493f18221cb05633401da5491"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/nor-read-setup/nor-read-setup-linked-status-comparison.json",
+      "sha256": "b5b80b2f2dc890c0ba16531ccf8efb818dca657717e0d71108e0aba06526ffaa",
+      "mtime_utc": "2026-10-06T16:06:09.926248+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 7,
+        "elf_sha256": "1aa65054337c9a5723be5a193c354fefa2c98a86fde51ee1555e177727f42037"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/nor-read-status/nor-read-status-comparison.json",
+      "sha256": "af389b46b61ff6be0b5d9edbd0cf57e59cfcda16f950de93323fa97d82d32d32",
+      "mtime_utc": "2026-10-06T16:02:31.048852+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 13,
+        "elf_sha256": "7f40e32605975ac833b799d34ea3becef6af7ddac4d1724bc29d068503aa9f3b"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/nor-write/nor-write-comparison.json",
+      "sha256": "66d6883e022eef580cd4583584dc06adc728ddfac18ab087b8931d6971a69594",
+      "mtime_utc": "2026-10-06T20:46:30.985449+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 27
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/queue-buffer-release/queue-buffer-release-comparison.json",
+      "sha256": "2c81f6c792522dfbbaa216e677bce151d782ccc6894c99b216fd4340b4601b78",
+      "mtime_utc": "2026-10-06T20:30:30.049850+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 7,
+        "distinct_original_trace_bytes": 160,
+        "elf_sha256": "d13dfc2164347558153556f57e1ee17c41a91943c1710508d6740de7dbe36d5b"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/queue-descriptors/result.json",
+      "sha256": "3002d328c4afea518a44f57c14d3c65cff19e0ca477ee305a84f152bc838e5c4",
+      "mtime_utc": "2026-10-06T21:43:04.955238+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 16
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/queue-send/queue-send-comparison.json",
+      "sha256": "8a6052d5e65d41c5250d067da06c0f50f7f3fa9099d116be80cdc434efbec12e",
+      "mtime_utc": "2026-10-06T20:30:30.259582+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 16,
+        "distinct_original_trace_bytes": 514,
+        "elf_sha256": "1b4162b0a84ecec2e56a104352047084583ffdbb326788ac2c6fc5c9d8a514b6"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/queue-wrappers/queue-comparison.json",
+      "sha256": "41e4788e7589773c7ab81373fe5a52ebd93f801d9ad71764d770df441c46aff3",
+      "mtime_utc": "2026-10-06T14:51:18.786140+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 45,
+        "elf_sha256": "05f43bb31ba14a246aa36f5bbfbb896e4c301e5de7c7031fe20bb2b8682f26df"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/timer-expiration/comparison.json",
+      "sha256": "f0bcf1bec8831bf3479a308f2544f1520a780a167ba9df6a47a2daf99ecab428",
+      "mtime_utc": "2026-10-06T19:34:46.621119+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 9,
+        "distinct_original_trace_bytes": 278,
+        "elf_sha256": "706c5d834f3e72c7c13e640716d2ae1049a6b17b52e3ff6c3236325317f9fa1f"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/review-worker/allocator-independent.json",
+      "sha256": "c1c6aad414d98ec684654a8ad2da23534c0846f1e3d6690762fa412a20a9f15e",
+      "mtime_utc": "2026-10-06T14:19:30.638254+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 265,
+        "distinct_original_trace_bytes": 1994,
+        "elf_sha256": "7e3c11af74beff58187f7b180d9dbbbb8624bbc10c49c1391a5a698b107147a3"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/review-worker/downloaded-tools/queue-runtime-independent.json",
+      "sha256": "65d6b61aed64ef0dd8be469c28a4d2ec62e5970a36274963510fbb7ba8bc762b",
+      "mtime_utc": "2026-10-06T15:09:41.220349+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 45,
+        "elf_sha256": "e433ed46e19973a8aacaaf0c8743eecaaf520e9215859bdf4a5cd4ebd14c0dc7"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/review-worker/filesystem-real-tlsf-independent.json",
+      "sha256": "035dec43dd1cc66eeefeaaa9e524c262d177fafcbe4bf8af7ab43745ea658524",
+      "mtime_utc": "2026-10-06T14:20:20.640855+00:00",
+      "summary": {
+        "status": "PASS"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/review-worker/independent-comparison.json",
+      "sha256": "8f2072866b9a55bf29e048897d6d6c86d558d189983117bf7ff3ca39b4e11603",
+      "mtime_utc": "2026-10-06T13:43:51.780600+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 4514,
+        "distinct_original_trace_bytes": 1208,
+        "elf_sha256": "12016f0e966d9ecfb2fa2861d9352b58d53c1074997cfa0d333e1eb25cdca487"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/review-worker/mutex-power/guards-independent.json",
+      "sha256": "357cdb35347008b79c19de000bd094c45558972830fdb9dcf9c90653b9ddaee4",
+      "mtime_utc": "2026-10-06T15:54:49.137865+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 14,
+        "distinct_original_trace_bytes": 164,
+        "elf_sha256": "584995795c375db0b79ba46df8a466a8fba0baa6f4a289e3bbf5a0572ff84f1a"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/review-worker/mutex-power/mutex-independent.json",
+      "sha256": "3e8516cb229454a89625a1946ad5a588ae6aac38282c5d7710f265e74c7f732b",
+      "mtime_utc": "2026-10-06T15:54:36.255574+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 288,
+        "distinct_original_trace_bytes": 258,
+        "elf_sha256": "1cfda5f5d2173b7774d08649ebd0c62f2f930c7cc37c5991abecd8c9c7c86f55"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/review-worker/nor-read-components-independent.json",
+      "sha256": "b5e70e05f6cabb820272265d1034a18aacbe0936122aa8cf929b2a4ef52a2a57",
+      "mtime_utc": "2026-10-06T15:19:14.956289+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 10,
+        "elf_sha256": "95ed294ea63882281dc57167443681482a1b5e40182af4d2a1f4114d89e06e53"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/review-worker/startup-independent.json",
+      "sha256": "cbc0aedab1e091b4c52c8134acb4e95901cbda1acfba7ed6b0a95e2966c0ff01",
+      "mtime_utc": "2026-10-06T14:19:11.119666+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 39,
+        "distinct_original_trace_bytes": 182,
+        "elf_sha256": "51e796b57856c954b40145667f176bd9f6bcf3fcc044d7dacce4707ab3e79564"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/application-storage/device-info/out/comparison.json",
+      "sha256": "2746043809cfd6e64593623930e4e6b8b7de2732cd120a43c00634f3d15f3247",
+      "mtime_utc": "2026-10-06T21:41:39.166335+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 80
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/application-storage/out/comparison.json",
+      "sha256": "880830a65eb01f33fbd12f3b66b640b4239d90ab891528a1956e2169148408fe",
+      "mtime_utc": "2026-10-06T21:30:22.684702+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 19,
+        "distinct_original_trace_bytes": 976,
+        "elf_sha256": "b72810b15b83962c5e0fe5379c43cb9656aa9f3fc038891de9a2e4a962027fb5"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/clock-manager/out/comparison.json",
+      "sha256": "7c2fa90b37f58bcbb072b9e9df9999e4f454b7bcdeee28608ab71634985f2e75",
+      "mtime_utc": "2026-10-06T19:08:06.614764+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 128
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/clock-manager/out/repro/comparison.json",
+      "sha256": "7c2fa90b37f58bcbb072b9e9df9999e4f454b7bcdeee28608ab71634985f2e75",
+      "mtime_utc": "2026-10-06T20:30:32.017430+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 128
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/dfu-runtime-context/out/comparison.json",
+      "sha256": "24ffe5b22286678087734f3534d04f3f2890543c356e15a2d2507f1b2a6a9c43",
+      "mtime_utc": "2026-10-06T20:30:30.543480+00:00",
+      "summary": {
+        "status": "PASS"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/event-waiter-wake/out/comparison.json",
+      "sha256": "a1597839e847c5293fec0b807e94a911a833c2cfec4179cc25076d30de8e6bc5",
+      "mtime_utc": "2026-10-06T20:30:30.403947+00:00",
+      "summary": {
+        "status": "PASS"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/mspi-cmdq-consumer/out/chain-comparison.json",
+      "sha256": "1c991dce959af40a55573fad96d4a087b0cd979e8ebc3e0a04cba30bbd74a8bb",
+      "mtime_utc": "2026-10-06T16:26:57.430870+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 12
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/mspi-cmdq-consumer/out/chain-table-comparison.json",
+      "sha256": "3b1e8cab70552b9a1fed45027f21848e0b590edfc25d98334ff11fcfefd721cc",
+      "mtime_utc": "2026-10-06T16:26:57.599378+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 12
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/mspi-cmdq-consumer/out/comparison.json",
+      "sha256": "b4e6e91a856c8d892e05b79c4c0ab19385d8b6cb5bf169078aa3afc07b915980",
+      "mtime_utc": "2026-10-06T16:26:57.262834+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 19,
+        "elf_sha256": "a725564494f598ba4c75bf884af478b7e384d7c98a2a5a9834c981d6d84ffae8"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/mspi-cq-init/out/comparison.json",
+      "sha256": "2fde8aee39833110782b136e55519d7bccde420939511148f8f4d9d0be8a0fe2",
+      "mtime_utc": "2026-10-06T15:59:10.976090+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 8,
+        "elf_sha256": "d9d24ce0eb9459db0763c1af6a30a80c4d1871d3957929d993b524f6f3125840"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/mspi-enable/out/comparison.json",
+      "sha256": "03e9c994871ee9a2a102cd12047c07efe4b3469d5462bd77f628be0145f5bf03",
+      "mtime_utc": "2026-10-06T15:41:04.680256+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 9,
+        "elf_sha256": "e5dabd5ca12b00d54de8207ae14957d5fd3dd37902d00cc97d95bd87b2bb1e5c"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/mspi-power/out/device-configure-differential.json",
+      "sha256": "122d8537b637155c48cec08f49dd4d4e94d257c16ddaf3453bad6b5a8630b3b8",
+      "mtime_utc": "2026-10-06T21:29:39.159399+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 2823
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/mspi-power/out/power-control-differential.json",
+      "sha256": "b4cd1a18ac4d1242ba2b472153fc7b5d81b0caf93ce8c0b568238a83ecabb49e",
+      "mtime_utc": "2026-10-06T21:29:39.547745+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 19
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/platform-control-runtime/out/mode-one.json",
+      "sha256": "78304c0c3f15296aa47f765b45fa400edc38325e807f9e793a7d3d0c163b5b0b",
+      "mtime_utc": "2026-10-06T20:17:51.698585+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 171
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/platform-startup/out/comparison.json",
+      "sha256": "372c53f0e5e9e762ff927df8bd2c54d508a0f97251602c94a9e27ed25ef5a126",
+      "mtime_utc": "2026-10-06T21:08:38.217012+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 2,
+        "distinct_original_trace_bytes": 568,
+        "elf_sha256": "54546eb708f7503091effd94a3a52a3ae42f751697f627c75954ab6ea20e7dce"
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/port-timer/out/comparison.json",
+      "sha256": "ed2c90bbfd90273fabb7805ad5dba83af813409fd54286c69903545724aaeaab",
+      "mtime_utc": "2026-10-06T17:42:06.607724+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 28
+      }
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/timer-commands/out/comparison.json",
+      "sha256": "4163cbea1bde5a53590426382c5edb04d207ca757498b507fce7bcf9c3d9ea2e",
+      "mtime_utc": "2026-10-06T20:30:29.833775+00:00",
+      "summary": {
+        "status": "PASS",
+        "cases": 23
+      }
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "status": "PASS",
+  "valid_cases": 224,
+  "edge_cases": [
+    {
+      "register_id": "0xe0",
+      "out_pointer": "0x20001000",
+      "status": 5
+    },
+    {
+      "register_id": "0xff",
+      "out_pointer": "0x20001000",
+      "status": 5
+    },
+    {
+      "register_id": "0xffffffff",
+      "out_pointer": "0x20001000",
+      "status": 5
+    },
+    {
+      "register_id": "0x0",
+      "out_pointer": "0x0",
+      "status": 6
+    },
+    {
+      "register_id": "0xdf",
+      "out_pointer": "0x0",
+      "status": 6
+    },
+    {
+      "register_id": "0xe0",
+      "out_pointer": "0x0",
+      "status": 5
+    }
+  ],
+  "distinct_original_instruction_bytes": 30,
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_elf_sha256": "69ef7476b1e04eb088ff964604cd1d6d94b2c1a7c842e8969cd5a8c6f7faabcb",
+  "source_sha256": {
+    "g2/components/bootloader/nor_mspi_init/register_id.c": "b985d9db7767d82fa13fba6f11d3810ceae52465de3543b65e08a4faad594ac9",
+    "g2/components/bootloader/nor_mspi_init/register_id.h": "fc088be8abe868030a8f2327182c4d42e90ec673c77e7c345f1e16b6146d7b97",
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/nor-register-id/register_id.ld": "c86484d7242c16856de982f04363a94a21625f7f6aff4ef33164d0b55c0f49c4",
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/nor-register-id/Makefile": "22db47f9ed6da42268efdab6af852719a3a9aa52d457c2fdf735a153517eca00",
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/nor-register-id/verify_register_id.py": "6e9e80f40d6e3500fe7e2cef05b3ed422a269f8e6cd5afb2c16c9760a0fc27fe"
+  },
+  "original_trace": {
+    "0x41d90e": "dff80028",
+    "0x41d912": "e028",
+    "0x41d914": "01d3",
+    "0x41d91a": "0029",
+    "0x41d91c": "01d1",
+    "0x41d922": "52f82000",
+    "0x41d926": "0860",
+    "0x41d928": "0020",
+    "0x41d92a": "7047",
+    "0x41d916": "0520",
+    "0x41d918": "07e0",
+    "0x41d91e": "0620",
+    "0x41d920": "03e0"
+  },
+  "limits": [
+    "All 224 accepted IDs execute original/source instructions and match a deterministic synthetic 32-bit register value at 0x40010000 + ID*4.",
+    "Boundary fixtures confirm stock returns 5 for IDs >=0xe0 before checking a null output pointer, and returns 6 for null output with an in-range ID; these paths perform no register read.",
+    "The locked literal establishes the base address 0x40010000. The local Apollo510 SDK subset does not name this block, so no peripheral or register semantic label is assigned.",
+    "MMIO is synthetic Unicorn RAM. No hardware read or behavior is established."
+  ]
+}

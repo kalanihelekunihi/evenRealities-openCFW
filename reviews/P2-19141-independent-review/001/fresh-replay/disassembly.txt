@@ -1,0 +1,38 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpkd_rxpma/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00469c98 <.text>:
+  469c98:	f8df 0b88 	ldr.w	r0, [pc, #2952]	@ 46a824 <.text+0xb8c>
+  469c9c:	f8b0 0084 	ldrh.w	r0, [r0, #132]	@ 0x84
+  469ca0:	2800      	cmp	r0, #0
+  469ca2:	d101      	bne.n	469ca8 <.text+0x10>
+  469ca4:	2001      	movs	r0, #1
+  469ca6:	e000      	b.n	469caa <.text+0x12>
+  469ca8:	2000      	movs	r0, #0
+  469caa:	4770      	bx	lr
+  469cac:	b470      	push	{r4, r5, r6}
+  469cae:	2800      	cmp	r0, #0
+  469cb0:	d003      	beq.n	469cba <.text+0x22>
+  469cb2:	000a      	movs	r2, r1
+  469cb4:	b292      	uxth	r2, r2
+  469cb6:	2a00      	cmp	r2, #0
+  469cb8:	d102      	bne.n	469cc0 <.text+0x28>
+  469cba:	f07f 0002 	mvns.w	r0, #2
+  469cbe:	e02f      	b.n	469d20 <.text+0x88>
+  469cc0:	f8df 3b60 	ldr.w	r3, [pc, #2912]	@ 46a824 <.text+0xb8c>
+  469cc4:	f8b3 2084 	ldrh.w	r2, [r3, #132]	@ 0x84
+  469cc8:	2a00      	cmp	r2, #0
+  469cca:	d101      	bne.n	469cd0 <.text+0x38>
+  469ccc:	2000      	movs	r0, #0
+  469cce:	e027      	b.n	469d20 <.text+0x88>
+  469cd0:	000a      	movs	r2, r1
+  469cd2:	f8b3 4084 	ldrh.w	r4, [r3, #132]	@ 0x84
+  469cd6:	b292      	uxth	r2, r2
+  469cd8:	42a2      	cmp	r2, r4
+  469cda:	d301      	bcc.n	469ce0 <.text+0x48>
+  469cdc:	f8b3 1084 	ldrh.w	r1, [r3, #132]	@ 0x84
+  469ce0:	2200      	movs	r2, #0
+  469ce2:	e015      	b.n	469d10 <.text+0x78>

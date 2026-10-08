@@ -1,0 +1,60 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpz1xxa_dz/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047a91e <.text>:
+  47a91e:	0001      	movs	r1, r0
+  47a920:	b2c9      	uxtb	r1, r1
+  47a922:	2901      	cmp	r1, #1
+  47a924:	f040 80a7 	bne.w	47aa76 <.text+0x158>
+  47a928:	7961      	ldrb	r1, [r4, #5]
+  47a92a:	f011 01c0 	ands.w	r1, r1, #192	@ 0xc0
+  47a92e:	2940      	cmp	r1, #64	@ 0x40
+  47a930:	f040 80a1 	bne.w	47aa76 <.text+0x158>
+  47a934:	f7c2 fbcb 	bl	43d0ce <.text-0x3d850>
+  47a938:	0780      	lsls	r0, r0, #30
+  47a93a:	d51a      	bpl.n	47a972 <.text+0x54>
+  47a93c:	7820      	ldrb	r0, [r4, #0]
+  47a93e:	9007      	str	r0, [sp, #28]
+  47a940:	7860      	ldrb	r0, [r4, #1]
+  47a942:	9006      	str	r0, [sp, #24]
+  47a944:	78a0      	ldrb	r0, [r4, #2]
+  47a946:	9005      	str	r0, [sp, #20]
+  47a948:	78e0      	ldrb	r0, [r4, #3]
+  47a94a:	9004      	str	r0, [sp, #16]
+  47a94c:	7920      	ldrb	r0, [r4, #4]
+  47a94e:	9003      	str	r0, [sp, #12]
+  47a950:	7960      	ldrb	r0, [r4, #5]
+  47a952:	9002      	str	r0, [sp, #8]
+  47a954:	f8df 0b5c 	ldr.w	r0, [pc, #2908]	@ 47b4b4 <.text+0xb96>
+  47a958:	9001      	str	r0, [sp, #4]
+  47a95a:	f240 30ee 	movw	r0, #1006	@ 0x3ee
+  47a95e:	9000      	str	r0, [sp, #0]
+  47a960:	f8df 3b1c 	ldr.w	r3, [pc, #2844]	@ 47b480 <.text+0xb62>
+  47a964:	f8df 2464 	ldr.w	r2, [pc, #1124]	@ 47adcc <.text+0x4ae>
+  47a968:	f8df 14bc 	ldr.w	r1, [pc, #1212]	@ 47ae28 <.text+0x50a>
+  47a96c:	2004      	movs	r0, #4
+  47a96e:	f7c2 fe01 	bl	43d574 <.text-0x3d3aa>
+  47a972:	f7c2 fbac 	bl	43d0ce <.text-0x3d850>
+  47a976:	07c0      	lsls	r0, r0, #31
+  47a978:	d403      	bmi.n	47a982 <.text+0x64>
+  47a97a:	f7c2 fba8 	bl	43d0ce <.text-0x3d850>
+  47a97e:	0740      	lsls	r0, r0, #29
+  47a980:	d511      	bpl.n	47a9a6 <.text+0x88>
+  47a982:	f8df 1b34 	ldr.w	r1, [pc, #2868]	@ 47b4b8 <.text+0xb9a>
+  47a986:	7820      	ldrb	r0, [r4, #0]
+  47a988:	9004      	str	r0, [sp, #16]
+  47a98a:	7860      	ldrb	r0, [r4, #1]
+  47a98c:	9003      	str	r0, [sp, #12]
+  47a98e:	78a0      	ldrb	r0, [r4, #2]
+  47a990:	9002      	str	r0, [sp, #8]
+  47a992:	78e0      	ldrb	r0, [r4, #3]
+  47a994:	9001      	str	r0, [sp, #4]
+  47a996:	7920      	ldrb	r0, [r4, #4]
+  47a998:	9000      	str	r0, [sp, #0]
+  47a99a:	7963      	ldrb	r3, [r4, #5]
+  47a99c:	000a      	movs	r2, r1
+  47a99e:	f05f 508c 	movs.w	r0, #293601280	@ 0x11800000
+  47a9a2:	f7c2 fa7c 	bl	43ce9e <.text-0x3da80>

@@ -1,0 +1,46 @@
+
+g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00427e0c <.data+0x17e0c>:
+  427e0c:	eefb 0a04 	vmov.f32	s1, #180	@ 0xc1a00000 -20.0
+  427e10:	eeb4 0a60 	vcmp.f32	s0, s1
+  427e14:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  427e18:	d508      	bpl.n	0x427e2c
+  427e1a:	ed9f 1a90 	vldr	s2, [pc, #576]	@ 0x42805c
+  427e1e:	eeb4 0a41 	vcmp.f32	s0, s2
+  427e22:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  427e26:	db01      	blt.n	0x427e2c
+  427e28:	2000      	movs	r0, #0
+  427e2a:	e02a      	b.n	0x427e82
+  427e2c:	eeb4 0a60 	vcmp.f32	s0, s1
+  427e30:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  427e34:	db06      	blt.n	0x427e44
+  427e36:	eeb5 0a40 	vcmp.f32	s0, #0.0
+  427e3a:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  427e3e:	d501      	bpl.n	0x427e44
+  427e40:	2001      	movs	r0, #1
+  427e42:	e01e      	b.n	0x427e82
+  427e44:	eeb5 0a40 	vcmp.f32	s0, #0.0
+  427e48:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  427e4c:	db08      	blt.n	0x427e60
+  427e4e:	eddf 0a84 	vldr	s1, [pc, #528]	@ 0x428060
+  427e52:	eeb4 0a60 	vcmp.f32	s0, s1
+  427e56:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  427e5a:	d501      	bpl.n	0x427e60
+  427e5c:	2002      	movs	r0, #2
+  427e5e:	e010      	b.n	0x427e82
+  427e60:	eddf 0a7f 	vldr	s1, [pc, #508]	@ 0x428060
+  427e64:	eeb4 0a60 	vcmp.f32	s0, s1
+  427e68:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  427e6c:	db08      	blt.n	0x427e80
+  427e6e:	eddf 0a7d 	vldr	s1, [pc, #500]	@ 0x428064
+  427e72:	eeb4 0a60 	vcmp.f32	s0, s1
+  427e76:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  427e7a:	d501      	bpl.n	0x427e80
+  427e7c:	2003      	movs	r0, #3
+  427e7e:	e000      	b.n	0x427e82
+  427e80:	2004      	movs	r0, #4
+  427e82:	4770      	bx	lr

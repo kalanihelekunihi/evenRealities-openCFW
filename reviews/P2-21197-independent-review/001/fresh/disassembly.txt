@@ -1,0 +1,37 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpajq_jx57/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0048191e <.text>:
+  48191e:	f81a 0f01 	ldrb.w	r0, [sl, #1]!
+  481922:	282a      	cmp	r0, #42	@ 0x2a
+  481924:	d109      	bne.n	48193a <.text+0x1c>
+  481926:	f8d9 0000 	ldr.w	r0, [r9]
+  48192a:	f850 2b04 	ldr.w	r2, [r0], #4
+  48192e:	f8c9 0000 	str.w	r0, [r9]
+  481932:	920e      	str	r2, [sp, #56]	@ 0x38
+  481934:	f10a 0a01 	add.w	sl, sl, #1
+  481938:	e01b      	b.n	481972 <.text+0x54>
+  48193a:	282d      	cmp	r0, #45	@ 0x2d
+  48193c:	bf0c      	ite	eq
+  48193e:	f10a 0a01 	addeq.w	sl, sl, #1
+  481942:	2000      	movne	r0, #0
+  481944:	2200      	movs	r2, #0
+  481946:	920e      	str	r2, [sp, #56]	@ 0x38
+  481948:	f8df 4ba4 	ldr.w	r4, [pc, #2980]	@ 4824f0 <.text+0xbd2>
+  48194c:	e00b      	b.n	481966 <.text+0x48>
+  48194e:	b940      	cbnz	r0, 481962 <.text+0x44>
+  481950:	9a0e      	ldr	r2, [sp, #56]	@ 0x38
+  481952:	42a2      	cmp	r2, r4
+  481954:	da05      	bge.n	481962 <.text+0x44>
+  481956:	eb02 0582 	add.w	r5, r2, r2, lsl #2
+  48195a:	eb03 0345 	add.w	r3, r3, r5, lsl #1
+  48195e:	3b30      	subs	r3, #48	@ 0x30
+  481960:	930e      	str	r3, [sp, #56]	@ 0x38
+  481962:	f10a 0a01 	add.w	sl, sl, #1
+  481966:	f89a 3000 	ldrb.w	r3, [sl]
+  48196a:	f1a3 0230 	sub.w	r2, r3, #48	@ 0x30
+  48196e:	2a0a      	cmp	r2, #10
+  481970:	d3ed      	bcc.n	48194e <.text+0x30>

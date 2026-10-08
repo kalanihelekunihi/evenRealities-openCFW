@@ -1,0 +1,8 @@
+# Message-dispatch loop with signed indirect calls and object flags
+
+Partial/unaccepted;278instructionbytes47E97A..47EA90. PUSH R4,R5,LR12;SP-=20,total32. Loop441B0A(freshword[pointerEB6C],SP,0,liveR3). Fullzero→exitR0=0,SP+=20,POP R4,R5,PC12. Nonzero→freshSP0 signednegative callsindirectfunctionfreshSP4 withR0=freshSP8,R1=freshSP12,R2=functionpointer,liveR3. ThenindependentlyfreshSP0signednegative→repeatpoll;otherwisecontinue. CallbackcanmodifySP0,sosecondsignreadnotcollapsed.
+R4=freshSP8objectpointer;freshobjectword20nonzero→4560E8(object+4,liveargs).47E916(SP+16,liveargs)→R5fullcounter. FreshSP0dispatch:1/2/6/7→E9F0;3/8→EA28;4/9→EA36;5→EA6C;0or>=10→repeatpoll (signalreadytested).
+E9F0 freshobjectbyte40 OR1store;R3=freshSP4,R2=R5,R1=independentlyfreshSP4+freshobjectword24modulo2^32,R0=object;47E93C. Fullzero→poll. Nonzero→freshbyte40bit2clear→freshbyte40AND254store thencommoncallback. Bit2set→47E812(object,freshSP4+freshword24modulo2^32,R5,liveR3),thencommoncallback withoutcallerbit0clear. CommonR0=object,R1=freshword32,BLXR1(liveR2/R3),thenpoll.
+EA28 freshbyte40AND254store,poll.
+EA36 freshbyte40OR1store;word24=freshSP4;freshword24zero→5FA0A4(liveargs),ifreturnsstore0toFFFFFFFFthenselfloopEA6A. Nonzero→R3=oldR5,R2=oldR5;R5=oldR5+independentlyfreshword24modulo2^32;47E93C(object,R5,oldR5,oldR5),returnignored,poll.
+EA6C freshbyte40bit1clear→456210(object,liveargs);bit1set→independentlyfreshbyte40AND254store;poll. Nohelperresultchecksonthefree-shapedcallorcallbacks. FreshSP/objectreads and orderedwritesretained,nocachedmessageorflagsnapshot. No C/freeze/completenessclaim;pollhelper/messageownershipunresolved.

@@ -1,0 +1,46 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpideo8igo/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00468d2a <.text>:
+  468d2a:	2c43      	cmp	r4, #67	@ 0x43
+  468d2c:	d165      	bne.n	468dfa <.text+0xd0>
+  468d2e:	0028      	movs	r0, r5
+  468d30:	68c0      	ldr	r0, [r0, #12]
+  468d32:	46c0      	nop			@ (mov r8, r8)
+  468d34:	f8df 43e0 	ldr.w	r4, [pc, #992]	@ 469118 <.text+0x3ee>
+  468d38:	6820      	ldr	r0, [r4, #0]
+  468d3a:	2800      	cmp	r0, #0
+  468d3c:	d02b      	beq.n	468d96 <.text+0x6c>
+  468d3e:	f8df 53e4 	ldr.w	r5, [pc, #996]	@ 469124 <.text+0x3fa>
+  468d42:	6828      	ldr	r0, [r5, #0]
+  468d44:	2801      	cmp	r0, #1
+  468d46:	d126      	bne.n	468d96 <.text+0x6c>
+  468d48:	f7d4 f9c1 	bl	43d0ce <.text-0x2bc5c>
+  468d4c:	0780      	lsls	r0, r0, #30
+  468d4e:	d50e      	bpl.n	468d6e <.text+0x44>
+  468d50:	f8df 03d4 	ldr.w	r0, [pc, #980]	@ 469128 <.text+0x3fe>
+  468d54:	9001      	str	r0, [sp, #4]
+  468d56:	f44f 70ef 	mov.w	r0, #478	@ 0x1de
+  468d5a:	9000      	str	r0, [sp, #0]
+  468d5c:	f8df 33b0 	ldr.w	r3, [pc, #944]	@ 469110 <.text+0x3e6>
+  468d60:	f8df 2378 	ldr.w	r2, [pc, #888]	@ 4690dc <.text+0x3b2>
+  468d64:	f8df 1378 	ldr.w	r1, [pc, #888]	@ 4690e0 <.text+0x3b6>
+  468d68:	2004      	movs	r0, #4
+  468d6a:	f7d4 fc03 	bl	43d574 <.text-0x2b7b6>
+  468d6e:	f7d4 f9ae 	bl	43d0ce <.text-0x2bc5c>
+  468d72:	07c0      	lsls	r0, r0, #31
+  468d74:	d403      	bmi.n	468d7e <.text+0x54>
+  468d76:	f7d4 f9aa 	bl	43d0ce <.text-0x2bc5c>
+  468d7a:	0740      	lsls	r0, r0, #29
+  468d7c:	d506      	bpl.n	468d8c <.text+0x62>
+  468d7e:	f8df 13ac 	ldr.w	r1, [pc, #940]	@ 46912c <.text+0x402>
+  468d82:	000a      	movs	r2, r1
+  468d84:	f05f 5080 	movs.w	r0, #268435456	@ 0x10000000
+  468d88:	f7d4 f889 	bl	43ce9e <.text-0x2be8c>
+  468d8c:	6820      	ldr	r0, [r4, #0]
+  468d8e:	f7ff fa8c 	bl	4682aa <.text-0xa80>
+  468d92:	2000      	movs	r0, #0
+  468d94:	6028      	str	r0, [r5, #0]

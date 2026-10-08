@@ -1,0 +1,60 @@
+{
+  "original": {
+    "family": "dfu_task",
+    "return_address": 4382565,
+    "level": 4,
+    "tag": "task.dfu",
+    "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+    "function": "_thread_msg_handler",
+    "line": 538,
+    "format": "blobSize = %d(0x%x)",
+    "argument_words": [
+      96,
+      96,
+      1,
+      0,
+      0,
+      0
+    ],
+    "header_words": [
+      67108960,
+      305419896,
+      0,
+      0,
+      33,
+      4423680,
+      0,
+      0
+    ],
+    "application_vector": [
+      0,
+      0
+    ]
+  },
+  "expected": {
+    "level": 4,
+    "tag": "task.dfu",
+    "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+    "function": "_thread_msg_handler",
+    "line": 538,
+    "format": "blobSize = %d(0x%x)",
+    "arguments": [
+      96,
+      96
+    ]
+  },
+  "source": [
+    {
+      "level": 4,
+      "tag": "task.dfu",
+      "file": "D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c",
+      "function": "_thread_msg_handler",
+      "line": 538,
+      "format": "blobSize = %d(0x%x)",
+      "arguments": [
+        67108960,
+        67108960
+      ]
+    }
+  ]
+}

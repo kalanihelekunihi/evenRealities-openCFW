@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "elf_sha256": "7ffc7b0eafdf7e6fd13eaaeaacac1c1ea3826f7f1f32d52d73604d17ae84e651",
+  "flags": [
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m33",
+    "-mthumb",
+    "-mfloat-abi=softfp",
+    "-O1",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-fshort-enums"
+  ],
+  "results": [
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_selector9_native/initialized_data.c",
+      "source_sha256": "538a475db677a90d197ebb47dfcd8ee182c9dd8d2a87bd7365eb9d2b7c25b282",
+      "object_sha256": "ee8b1eebec21b076b2d8ca7a8db2c9e91d46dca8bbdcb36384dac3769da7e319",
+      "frozen_object": "inputs/206/initialized_data.o"
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_selector9_native/pcm22_sequence9.c",
+      "source_sha256": "9f63835b8b79b61c7fcd32a9a277b34525d4167fa14c10b97e343b81ec9117be",
+      "object_sha256": "5289e2bc09b71aa64ea0d8dc1da7746ec88a5fef600611b39a34a13db7b624a5",
+      "frozen_object": "inputs/224/pcm22_sequence9.o"
+    }
+  ]
+}

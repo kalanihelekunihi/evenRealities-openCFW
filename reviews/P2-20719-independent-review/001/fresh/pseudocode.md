@@ -1,0 +1,4 @@
+# Selector four six ascending source byte diagnostics
+
+Partial/unaccepted;116instructionbytes,inherited88-byteframe,R4source. Query0x43D0CE;bit1zero skips0x47B264. Otherwiseindependentlyfreshreadbytes[R4+20..25]ascendingorder;foroffsetjstoreunsignedbyteSP(108-4*j),SP28..8. Literal47B728 SP4,1325 SP0;call0x43D574(4,literal47B6F8,literal47B6F4,literal47B6F0,fifth1325,sixthliteral47B728,seventhbyte25,eighthbyte24,ninthbyte23,tenthbyte22,eleventhbyte21,twelfthbyte20).
+At0x47B264queryfreshstatus;bit0oneenters0x47B274,otherwisequeryagainandbit2zero skips0x47B298. MaskpathR1literal47B72C,independentlyfreshreadbytes20..24ascendingintostackSP16,12,8,4,0;thenfreshbyte25R3,R2=R1. Call0x43CE9E(0x11800000,R1,R2,byte25,fifthbyte24,sixthbyte23,seventhbyte22,eighthbyte21,ninthbyte20). At0x47B298branchpending0x47B348. Preserveorderedfreshreadsandlivequeries,no cachedbuffer. No C,freezeorcompletenessclaim.

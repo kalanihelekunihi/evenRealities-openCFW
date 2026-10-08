@@ -1,0 +1,55 @@
+{
+  "status": "PASS",
+  "elf_sha256": "67f3f209bc1867dbb2a995e7805dd756105f05bae31831d86e61bda7df689796",
+  "comparisons": [
+    {
+      "family": "UART",
+      "source": false,
+      "raw_hook": [
+        [
+          3758154768,
+          1,
+          4080
+        ]
+      ],
+      "stored_byte": 240
+    },
+    {
+      "family": "UART",
+      "source": true,
+      "raw_hook": [
+        [
+          3758154768,
+          1,
+          4080
+        ]
+      ],
+      "stored_byte": 240
+    },
+    {
+      "family": "existing-NOR",
+      "source": false,
+      "raw_hook": [
+        [
+          3758154784,
+          1,
+          4080
+        ]
+      ],
+      "stored_byte": 240
+    },
+    {
+      "family": "existing-NOR",
+      "source": true,
+      "raw_hook": [
+        [
+          3758154784,
+          1,
+          4080
+        ]
+      ],
+      "stored_byte": 240
+    }
+  ],
+  "explanation": "Unicorn STRB hook exposes full source register; memory byte and width-projected hook agree. Shared peripheral recorder now projects each value to its actual width."
+}

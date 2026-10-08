@@ -1,0 +1,584 @@
+{
+  "candidate_sha256": "15d222c4f550da090e0893905111771b5e3cabd07948f4be082863851f1fdd32",
+  "root_symbols": 731,
+  "direct_reachable_linked_functions": 731,
+  "indirect_sites": 131,
+  "unresolved": [
+    {
+      "caller_address": 254548,
+      "caller_names": [
+        "opencfw_bl_kernel_mutex_give_tagged"
+      ],
+      "site": 254598,
+      "target": 253932,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 234648,
+      "caller_names": [
+        "opencfw_boot_uart_log_send"
+      ],
+      "site": 234792,
+      "target": 125412,
+      "kind": "bl",
+      "aliases": [
+        "opencfw_boot_delay_raw",
+        "opencfw_bl_delay_raw"
+      ],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 243932,
+      "caller_names": [
+        "opencfw_boot_uart_rx_pump"
+      ],
+      "site": 244146,
+      "target": 243600,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 233492,
+      "caller_names": [
+        "opencfw_boot_uart_tx_ring_get"
+      ],
+      "site": 233636,
+      "target": 233476,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 243860,
+      "caller_names": [
+        "opencfw_boot_uart_rx_collect"
+      ],
+      "site": 243920,
+      "target": 243600,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 233316,
+      "caller_names": [
+        "opencfw_boot_uart_tx_ring_add"
+      ],
+      "site": 233466,
+      "target": 233476,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 243476,
+      "caller_names": [
+        "opencfw_boot_uart_rx_claim"
+      ],
+      "site": 243588,
+      "target": 243600,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 234008,
+      "caller_names": [
+        "opencfw_boot_uart_tx_pump"
+      ],
+      "site": 234220,
+      "target": 233476,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 233760,
+      "caller_names": [
+        "opencfw_boot_uart_tx_drain_ring"
+      ],
+      "site": 233872,
+      "target": 233476,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 233880,
+      "caller_names": [
+        "opencfw_boot_uart_tx_claim"
+      ],
+      "site": 233996,
+      "target": 233476,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 125420,
+      "caller_names": [
+        "opencfw_bl_delay_us"
+      ],
+      "site": 125500,
+      "target": 64,
+      "kind": "bl",
+      "aliases": [
+        "opencfw_boot_rom_delay_cycles"
+      ],
+      "category": "external_resident_ROM"
+    },
+    {
+      "caller_address": 254500,
+      "caller_names": [
+        "opencfw_bl_kernel_mutex_take_tagged"
+      ],
+      "site": 254544,
+      "target": 253932,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 253968,
+      "caller_names": [
+        "opencfw_bl_kernel_mutex_take_plain"
+      ],
+      "site": 254496,
+      "target": 253932,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 253784,
+      "caller_names": [
+        "opencfw_boot_mutex_disinherit_timeout"
+      ],
+      "site": 253926,
+      "target": 253932,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 124092,
+      "caller_names": [
+        "opencfw_boot_info_rom_read"
+      ],
+      "site": 124094,
+      "target": 72,
+      "kind": "bl",
+      "aliases": [
+        "opencfw_boot_rom48"
+      ],
+      "category": "external_resident_ROM"
+    },
+    {
+      "caller_address": 82828,
+      "caller_names": [
+        "opencfw_provider_42e53c"
+      ],
+      "site": 83080,
+      "target": 66276,
+      "kind": "bl",
+      "aliases": [
+        "opencfw_provider_416200",
+        "opencfw_boot_dfu_thread_terminate"
+      ],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 210952,
+      "caller_names": [
+        "opencfw_hal_mspi_control_transaction_request"
+      ],
+      "site": 211350,
+      "target": 211416,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 210952,
+      "caller_names": [
+        "opencfw_hal_mspi_control_transaction_request"
+      ],
+      "site": 211368,
+      "target": 211416,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 117416,
+      "caller_names": [
+        "opencfw_bl_nor_wait"
+      ],
+      "site": 117492,
+      "target": 125412,
+      "kind": "bl",
+      "aliases": [
+        "opencfw_boot_delay_raw",
+        "opencfw_bl_delay_raw"
+      ],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 117416,
+      "caller_names": [
+        "opencfw_bl_nor_wait"
+      ],
+      "site": 117632,
+      "target": 125412,
+      "kind": "bl",
+      "aliases": [
+        "opencfw_boot_delay_raw",
+        "opencfw_bl_delay_raw"
+      ],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 216192,
+      "caller_names": [
+        "opencfw_provider_42052a"
+      ],
+      "site": 216320,
+      "target": 125398,
+      "kind": "bl",
+      "aliases": [
+        "opencfw_provider_41f9d8",
+        "opencfw_boot_delay_scaled",
+        "opencfw_bl_delay"
+      ],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 216192,
+      "caller_names": [
+        "opencfw_provider_42052a"
+      ],
+      "site": 216432,
+      "target": 125398,
+      "kind": "bl",
+      "aliases": [
+        "opencfw_provider_41f9d8",
+        "opencfw_boot_delay_scaled",
+        "opencfw_bl_delay"
+      ],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 74952,
+      "caller_names": [
+        "opencfw_provider_420476"
+      ],
+      "site": 75026,
+      "target": 125398,
+      "kind": "bl",
+      "aliases": [
+        "opencfw_provider_41f9d8",
+        "opencfw_boot_delay_scaled",
+        "opencfw_bl_delay"
+      ],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 240336,
+      "caller_names": [
+        "opencfw_boot_startup_select6"
+      ],
+      "site": 240574,
+      "target": 239672,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 239688,
+      "caller_names": [
+        "opencfw_boot_startup_select5"
+      ],
+      "site": 240108,
+      "target": 239672,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 239688,
+      "caller_names": [
+        "opencfw_boot_startup_select5"
+      ],
+      "site": 240298,
+      "target": 239672,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 239072,
+      "caller_names": [
+        "opencfw_boot_startup_select4"
+      ],
+      "site": 239434,
+      "target": 239672,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 243616,
+      "caller_names": [
+        "opencfw_boot_uart_rx_cancel"
+      ],
+      "site": 243704,
+      "target": 243600,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 66440,
+      "caller_names": [
+        "opencfw_boot_main_init"
+      ],
+      "site": 66444,
+      "target": 125398,
+      "kind": "bl",
+      "aliases": [
+        "opencfw_provider_41f9d8",
+        "opencfw_boot_delay_scaled",
+        "opencfw_bl_delay"
+      ],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 66440,
+      "caller_names": [
+        "opencfw_boot_main_init"
+      ],
+      "site": 66458,
+      "target": 125320,
+      "kind": "bl",
+      "aliases": [
+        "opencfw_provider_41ac44",
+        "opencfw_boot_coprocessor_enable"
+      ],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 66440,
+      "caller_names": [
+        "opencfw_boot_main_init"
+      ],
+      "site": 66464,
+      "target": 125346,
+      "kind": "bl",
+      "aliases": [
+        "opencfw_provider_41ac5a",
+        "opencfw_boot_fp_lazy_mode"
+      ],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 66248,
+      "caller_names": [
+        "opencfw_boot_manager_thread_deinit"
+      ],
+      "site": 66264,
+      "target": 66276,
+      "kind": "bl",
+      "aliases": [
+        "opencfw_provider_416200",
+        "opencfw_boot_dfu_thread_terminate"
+      ],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 82192,
+      "caller_names": [
+        "opencfw_boot_dfu_send"
+      ],
+      "site": 82228,
+      "target": 125552,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 82192,
+      "caller_names": [
+        "opencfw_boot_dfu_send"
+      ],
+      "site": 82240,
+      "target": 125552,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 226204,
+      "caller_names": [
+        "opencfw_boot_context_retry"
+      ],
+      "site": 226270,
+      "target": 125398,
+      "kind": "bl",
+      "aliases": [
+        "opencfw_provider_41f9d8",
+        "opencfw_boot_delay_scaled",
+        "opencfw_bl_delay"
+      ],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 66220,
+      "caller_names": [
+        "opencfw_boot_dfu_thread_deinit_native"
+      ],
+      "site": 66236,
+      "target": 66276,
+      "kind": "bl",
+      "aliases": [
+        "opencfw_provider_416200",
+        "opencfw_boot_dfu_thread_terminate"
+      ],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 91208,
+      "caller_names": [
+        "opencfw_boot_dfu_task"
+      ],
+      "site": 91324,
+      "target": 125552,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 91208,
+      "caller_names": [
+        "opencfw_boot_dfu_task"
+      ],
+      "site": 91390,
+      "target": 125552,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 91208,
+      "caller_names": [
+        "opencfw_boot_dfu_task"
+      ],
+      "site": 91400,
+      "target": 125552,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 91208,
+      "caller_names": [
+        "opencfw_boot_dfu_task"
+      ],
+      "site": 91410,
+      "target": 125552,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 91208,
+      "caller_names": [
+        "opencfw_boot_dfu_task"
+      ],
+      "site": 91420,
+      "target": 125552,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 91208,
+      "caller_names": [
+        "opencfw_boot_dfu_task"
+      ],
+      "site": 91430,
+      "target": 125552,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 91208,
+      "caller_names": [
+        "opencfw_boot_dfu_task"
+      ],
+      "site": 91490,
+      "target": 125552,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 91208,
+      "caller_names": [
+        "opencfw_boot_dfu_task"
+      ],
+      "site": 91512,
+      "target": 125552,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 91208,
+      "caller_names": [
+        "opencfw_boot_dfu_task"
+      ],
+      "site": 91526,
+      "target": 125552,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 91208,
+      "caller_names": [
+        "opencfw_boot_dfu_task"
+      ],
+      "site": 91542,
+      "target": 125552,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 91208,
+      "caller_names": [
+        "opencfw_boot_dfu_task"
+      ],
+      "site": 91560,
+      "target": 125552,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    },
+    {
+      "caller_address": 91208,
+      "caller_names": [
+        "opencfw_boot_dfu_task"
+      ],
+      "site": 91570,
+      "target": 125552,
+      "kind": "bl",
+      "aliases": [],
+      "category": "unattributed_call"
+    }
+  ]
+}

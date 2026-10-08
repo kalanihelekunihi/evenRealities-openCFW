@@ -1,0 +1,44 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp94vf0jf_/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+004819be <.text>:
+  4819be:	f1bb 0125 	subs.w	r1, fp, #37	@ 0x25
+  4819c2:	d02c      	beq.n	481a1e <.text+0x60>
+  4819c4:	391c      	subs	r1, #28
+  4819c6:	f000 8194 	beq.w	481cf2 <.text+0x334>
+  4819ca:	1f09      	subs	r1, r1, #4
+  4819cc:	2902      	cmp	r1, #2
+  4819ce:	f240 8190 	bls.w	481cf2 <.text+0x334>
+  4819d2:	3913      	subs	r1, #19
+  4819d4:	f000 84b8 	beq.w	482348 <.text+0x98a>
+  4819d8:	3909      	subs	r1, #9
+  4819da:	f000 818a 	beq.w	481cf2 <.text+0x334>
+  4819de:	1e89      	subs	r1, r1, #2
+  4819e0:	f000 854d 	beq.w	48247e <.text+0xac0>
+  4819e4:	1e49      	subs	r1, r1, #1
+  4819e6:	f000 84fa 	beq.w	4823de <.text+0xa20>
+  4819ea:	1e49      	subs	r1, r1, #1
+  4819ec:	2902      	cmp	r1, #2
+  4819ee:	f240 8180 	bls.w	481cf2 <.text+0x334>
+  4819f2:	1f09      	subs	r1, r1, #4
+  4819f4:	f000 84f3 	beq.w	4823de <.text+0xa20>
+  4819f8:	1f49      	subs	r1, r1, #5
+  4819fa:	f000 80ef 	beq.w	481bdc <.text+0x21e>
+  4819fe:	1e49      	subs	r1, r1, #1
+  481a00:	f000 84a2 	beq.w	482348 <.text+0x98a>
+  481a04:	1e49      	subs	r1, r1, #1
+  481a06:	f000 80d7 	beq.w	481bb8 <.text+0x1fa>
+  481a0a:	1ec9      	subs	r1, r1, #3
+  481a0c:	d00c      	beq.n	481a28 <.text+0x6a>
+  481a0e:	1e89      	subs	r1, r1, #2
+  481a10:	f000 849a 	beq.w	482348 <.text+0x98a>
+  481a14:	1ec9      	subs	r1, r1, #3
+  481a16:	f000 8497 	beq.w	482348 <.text+0x98a>
+  481a1a:	f000 bd3b 	b.w	482494 <.text+0xad6>
+  481a1e:	2301      	movs	r3, #1
+  481a20:	9307      	str	r3, [sp, #28]
+  481a22:	2125      	movs	r1, #37	@ 0x25
+  481a24:	f000 bd33 	b.w	48248e <.text+0xad0>

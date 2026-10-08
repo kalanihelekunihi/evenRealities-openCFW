@@ -1,0 +1,5 @@
+# Pair scaling bit loop with arithmetic shift
+
+Partial/unaccepted;70 instructionbytes48262C..482672. Push{R4,R6,R7,R8,R9,LR}24-byteframe. R6=entryR0,R7=entryR1,R4=entryR2,R8=0; freshwordliteral482680→R9. Initially branch looptest482666. FullR4==0 returns unchangedentrypair viaR0=R6,R1=R7 and24-bytePOP{R4,R6,R7,R8,R9,PC}.
+
+NonzeroR4 loop: LSL31 testsbit0. Ifset call4D4354(R0=R6,R1=R7,R2=R8,R3=R9); returnedR0/R1→R6/R7. Eitherpath call4D4354(R0=R8,R1=R9,R2=R8,R3=R9), then ASR R4 by1, returnedR0/R1→R8/R9; looptest fullR4!=0. Thus unconditional helper call also occurs on final positive iteration, with exact helper register flow retained; arithmetic helper semantics unresolved. SignednegativeentryR4 remains negative under ASR and never reacheszero absent externalinterruption; no positivityguard inthishelper. Literal482680 rawvalue recorded inreferences.json; do not assume standard floating arithmetic from shape. Following482672..482674 zero halfword excluded. No C,freeze,wholecoverage or equalityclaim.

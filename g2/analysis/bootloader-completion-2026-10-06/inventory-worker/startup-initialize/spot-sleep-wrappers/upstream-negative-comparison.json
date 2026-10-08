@@ -1,0 +1,204 @@
+{
+  "status": "PASS",
+  "cases": 24,
+  "distinct_original_bytes": 68,
+  "results": [
+    {
+      "simo": 0,
+      "info": "0x0",
+      "stimulus": 0,
+      "mask": 0,
+      "result": 0,
+      "args_unchanged": true
+    },
+    {
+      "simo": 0,
+      "info": "0x0",
+      "stimulus": 0,
+      "mask": 1,
+      "result": 0,
+      "args_unchanged": true
+    },
+    {
+      "simo": 0,
+      "info": "0x0",
+      "stimulus": 1,
+      "mask": 0,
+      "result": 0,
+      "args_unchanged": true
+    },
+    {
+      "simo": 0,
+      "info": "0x0",
+      "stimulus": 1,
+      "mask": 1,
+      "result": 0,
+      "args_unchanged": true
+    },
+    {
+      "simo": 0,
+      "info": "0x0",
+      "stimulus": 2,
+      "mask": 0,
+      "result": 0,
+      "args_unchanged": true
+    },
+    {
+      "simo": 0,
+      "info": "0x0",
+      "stimulus": 2,
+      "mask": 1,
+      "result": 0,
+      "args_unchanged": true
+    },
+    {
+      "simo": 0,
+      "info": "0x0",
+      "stimulus": 255,
+      "mask": 0,
+      "result": 0,
+      "args_unchanged": true
+    },
+    {
+      "simo": 0,
+      "info": "0x0",
+      "stimulus": 255,
+      "mask": 1,
+      "result": 0,
+      "args_unchanged": true
+    },
+    {
+      "simo": 0,
+      "info": "0x1f01600d",
+      "stimulus": 0,
+      "mask": 0,
+      "result": 0,
+      "args_unchanged": true
+    },
+    {
+      "simo": 0,
+      "info": "0x1f01600d",
+      "stimulus": 0,
+      "mask": 1,
+      "result": 0,
+      "args_unchanged": true
+    },
+    {
+      "simo": 0,
+      "info": "0x1f01600d",
+      "stimulus": 1,
+      "mask": 0,
+      "result": 0,
+      "args_unchanged": true
+    },
+    {
+      "simo": 0,
+      "info": "0x1f01600d",
+      "stimulus": 1,
+      "mask": 1,
+      "result": 0,
+      "args_unchanged": true
+    },
+    {
+      "simo": 0,
+      "info": "0x1f01600d",
+      "stimulus": 2,
+      "mask": 0,
+      "result": 0,
+      "args_unchanged": true
+    },
+    {
+      "simo": 0,
+      "info": "0x1f01600d",
+      "stimulus": 2,
+      "mask": 1,
+      "result": 0,
+      "args_unchanged": true
+    },
+    {
+      "simo": 0,
+      "info": "0x1f01600d",
+      "stimulus": 255,
+      "mask": 0,
+      "result": 0,
+      "args_unchanged": true
+    },
+    {
+      "simo": 0,
+      "info": "0x1f01600d",
+      "stimulus": 255,
+      "mask": 1,
+      "result": 0,
+      "args_unchanged": true
+    },
+    {
+      "simo": 3,
+      "info": "0x0",
+      "stimulus": 0,
+      "mask": 0,
+      "result": 1,
+      "args_unchanged": true
+    },
+    {
+      "simo": 3,
+      "info": "0x0",
+      "stimulus": 0,
+      "mask": 1,
+      "result": 1,
+      "args_unchanged": true
+    },
+    {
+      "simo": 3,
+      "info": "0x0",
+      "stimulus": 1,
+      "mask": 0,
+      "result": 1,
+      "args_unchanged": true
+    },
+    {
+      "simo": 3,
+      "info": "0x0",
+      "stimulus": 1,
+      "mask": 1,
+      "result": 1,
+      "args_unchanged": true
+    },
+    {
+      "simo": 3,
+      "info": "0x0",
+      "stimulus": 2,
+      "mask": 0,
+      "result": 1,
+      "args_unchanged": true
+    },
+    {
+      "simo": 3,
+      "info": "0x0",
+      "stimulus": 2,
+      "mask": 1,
+      "result": 1,
+      "args_unchanged": true
+    },
+    {
+      "simo": 3,
+      "info": "0x0",
+      "stimulus": 255,
+      "mask": 0,
+      "result": 1,
+      "args_unchanged": true
+    },
+    {
+      "simo": 3,
+      "info": "0x0",
+      "stimulus": 255,
+      "mask": 1,
+      "result": 1,
+      "args_unchanged": true
+    }
+  ],
+  "negative_hypothesis": "Pinned public PCM2.2 source handles temperature stimulus when SIMOBUCK is inactive; locked42a878 returns0 without updating temperature bounds or calling classification. Public upstream is family corroboration, not a drop-in exact replacement.",
+  "limits": [
+    "Original instructions only for inactive SIMOBUCK or invalid INFO guards; no active valid-profile state-update claim.",
+    "Public source divergence is static source comparison, not execution of its complete dependency closure."
+  ]
+}

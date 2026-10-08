@@ -1,0 +1,37 @@
+{
+  "start": 4718524,
+  "end": 4718532,
+  "bytes": "800102407c0a0c40",
+  "words": [
+    {
+      "address": 4718524,
+      "value": 1073873280
+    },
+    {
+      "address": 4718528,
+      "value": 1074530940
+    }
+  ],
+  "consumers": [
+    {
+      "component": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-conditional-three-helper-return-record-query-prefix-21448-map/001",
+      "instruction": {
+        "address": 4715888,
+        "bytes": "dff8484a",
+        "mnemonic": "ldr.w",
+        "operands": "r4, [pc, #2632]\t@ 47ffbc <.text+0xa4e>"
+      },
+      "literal_address": 4718524
+    },
+    {
+      "component": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-conditional-three-helper-return-record-query-prefix-21448-map/001",
+      "instruction": {
+        "address": 4715916,
+        "bytes": "dff8301a",
+        "mnemonic": "ldr.w",
+        "operands": "r1, [pc, #2608]\t@ 47ffc0 <.text+0xa52>"
+      },
+      "literal_address": 4718528
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+[
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/iar-format-native-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/iar-format-native-integrated/verify_selector17.py",
+      "--candidate",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/iar-format-native-integrated/dbbd73cfd6b5f15fb1ec4dce44ee4c67d56d1ad4d1c7fef4915f112f550da258/candidate.elf",
+      "--frozen-base",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/iar-format-native-integrated/dbbd73cfd6b5f15fb1ec4dce44ee4c67d56d1ad4d1c7fef4915f112f550da258/validation/selector17.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS scatter adapter output normalized to 1371 stock bytes; slot17 0x320c9 mask 0x7ffffff walker args [[10, 9, 3, 1]] return [17, 1]\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/iar-format-native-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/iar-format-native-integrated/verify_heap_drain.py",
+      "--candidate-elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/iar-format-native-integrated/dbbd73cfd6b5f15fb1ec4dce44ee4c67d56d1ad4d1c7fef4915f112f550da258/candidate.elf",
+      "--cleanup-addon",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/iar-format-native-integrated/dbbd73cfd6b5f15fb1ec4dce44ee4c67d56d1ad4d1c7fef4915f112f550da258/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/iar-format-native-integrated/dbbd73cfd6b5f15fb1ec4dce44ee4c67d56d1ad4d1c7fef4915f112f550da258/validation/heap-drain.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"status\": \"PASS\",\n  \"cases\": 3,\n  \"heap_layout\": {\n    \"rtos_arena_start\": \"0x2000055c\",\n    \"rtos_arena_end_exclusive\": \"0x2001455c\",\n    \"rtos_arena_bytes\": 81920,\n    \"candidate_load_segments_overlapping_arena\": [],\n    \"iom_context_pool_starts_at_heap_end\": true,\n    \"rtos_heap_init_and_insert_are_inlined_in_candidate_allocator\": true\n  },\n  \"visited\": {\n    \"idle_cleanup\": 60,\n    \"release_storage\": 50,\n    \"rtos_allocate\": 212,\n    \"rtos_free\": 84,\n    \"rtos_heap_initialize\": 90,\n    \"rtos_heap_insert\": 92\n  }\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/iar-format-native-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/iar-format-native-integrated/verify_allocator.py",
+      "--candidate-elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/iar-format-native-integrated/dbbd73cfd6b5f15fb1ec4dce44ee4c67d56d1ad4d1c7fef4915f112f550da258/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/iar-format-native-integrated/dbbd73cfd6b5f15fb1ec4dce44ee4c67d56d1ad4d1c7fef4915f112f550da258/validation/allocator.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"status\": \"PASS\",\n  \"cases\": 3,\n  \"heap_layout\": {\n    \"rtos_arena_start\": \"0x2000055c\",\n    \"rtos_arena_end_exclusive\": \"0x2001455c\",\n    \"rtos_arena_bytes\": 81920,\n    \"candidate_load_segments_overlapping_arena\": [],\n    \"iom_context_pool_starts_at_heap_end\": true,\n    \"rtos_heap_init_and_insert_are_inlined_in_candidate_allocator\": true\n  },\n  \"visited\": {\n    \"release_storage\": 50,\n    \"rtos_allocate\": 212,\n    \"rtos_free\": 84,\n    \"rtos_heap_initialize\": 90,\n    \"rtos_heap_insert\": 92\n  }\n}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/iar-format-native-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/iar-format-native-integrated/verify_selector1.py",
+      "--base",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/iar-format-native-integrated/dbbd73cfd6b5f15fb1ec4dce44ee4c67d56d1ad4d1c7fef4915f112f550da258/candidate.elf",
+      "--addon",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/iar-format-native-integrated/dbbd73cfd6b5f15fb1ec4dce44ee4c67d56d1ad4d1c7fef4915f112f550da258/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/iar-format-native-integrated/dbbd73cfd6b5f15fb1ec4dce44ee4c67d56d1ad4d1c7fef4915f112f550da258/validation/selector1.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 18 direct selector1 fixtures; stock instruction bytes visited 472 of 472\n",
+    "stderr": ""
+  }
+]

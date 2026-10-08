@@ -1,0 +1,30 @@
+{
+  "review_id": "P2-21465-independent-review",
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-fourth-three-byte-field-paired-object-setup-middle-21864-map/001",
+  "status": "partial",
+  "accepted": false,
+  "checks": {
+    "fresh_replay": "pass",
+    "instruction_bytes": 142,
+    "instructions_match": true,
+    "references_match": true,
+    "open_frame_bytes": 32,
+    "field_copy_offset": 57,
+    "field_copy_length": 3,
+    "pair_setup_call_order": [
+      "488198(+388)",
+      "488198(+400)",
+      "482950(+868)",
+      "482950(+888)",
+      "4D4ABC(+388,+868)",
+      "4D4ABC(+400,+888)",
+      "488198(+76)"
+    ]
+  },
+  "limitations": [
+    "literal target semantics unresolved",
+    "helper contracts not inferred",
+    "continuation/return outside slice",
+    "no whole-routine coverage or acceptance claim"
+  ]
+}

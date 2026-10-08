@@ -1,0 +1,4 @@
+# Full entry R1 zero diagnostics saved slot prefix
+
+Partial/unaccepted;78instructionbytes. PUSH R1,R2,R3,R4,R5,LRcreates24-byteframe,SP0entryR1,SP4entryR2,SP8entryR3. FullentryR1nonzero branchespending0x47B5EAwithR0stillfullentryR0,R1entryR1,R2entryR2,R3entryR3. ZeroentryR1queries43D0CEwithliveargs;bit1zero skips0x47B5C8. Otherwisewriteliteral47C070 SP4,1868 SP0;call43D574(1,literal47BC24,literal47BC20,literal47C074,fifth1868,sixthliteral47C070). Thesearewritestosavedargumentslots.
+At0x47B5C8queryfreshstatus;bit0oneenters0x47B5D8,otherwisequeryagainandbit2zero skips0x47B5E6. MaskpathR2literal47C078,R1same,liveR3;call43CE9E(0x04000000,R1,R2,liveR3). At0x47B5E6explicitR0zero,branchpending0x47B6DA;finalreturnnotinferreduntilepiloguerecovered. Preservefullcondition,statusqueries,liveargumentsandstackaliasing. No C,freezeorcompletenessclaim.

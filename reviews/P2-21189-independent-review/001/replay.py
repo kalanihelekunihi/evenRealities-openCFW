@@ -1,0 +1,17 @@
+from pathlib import Path
+import json,hashlib,re,subprocess,tempfile
+b=Path('g2/build/pseudocode-first/20260930T190500Z');src=b/'attempts/P1-canonical-fixed-images-005/002/apollo_main-flash.bin';d=src.read_bytes();h=lambda x:hashlib.sha256(x).hexdigest();assert h(d)=='19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701';start=0x4816c6;end=0x48173a
+with tempfile.TemporaryDirectory() as td:
+ t=Path(td);(t/'input.bin').write_bytes(d[start-0x438000:end-0x438000]);(t/'input.s').write_text('.syntax unified\n.cpu cortex-m55\n.thumb\n.text\n.incbin "'+str(t/'input.bin')+'"\n');subprocess.run(['/opt/homebrew/bin/arm-none-eabi-as',str(t/'input.s'),'-o',str(t/'input.o')],check=True);rawtext=subprocess.check_output(['/opt/homebrew/bin/arm-none-eabi-objdump','-D','-j','.text','-M','force-thumb','--adjust-vma='+hex(start),str(t/'input.o')],text=True)
+rows=[];cursor=start
+for line in rawtext.splitlines():
+ m=re.match(r'\s*([0-9a-f]+):\s+([0-9a-f]{4}(?: [0-9a-f]{4})?)\s+([^\s]+)\s*(.*)',line)
+ if not m:continue
+ a=int(m[1],16)
+ if not start<=a<end:continue
+ raw=b''.join(int(v,16).to_bytes(2,'little') for v in m[2].split());assert a==cursor and raw==d[a-0x438000:a-0x438000+len(raw)];cursor+=len(raw);rows.append(dict(address=a,bytes=raw.hex(),mnemonic=m[3],operands=m[4]))
+assert cursor==end,(hex(cursor),hex(end),rawtext)
+o=b/'analysis/apollo-main-diagnostic-fixed-library-sparse-bank-lowest-set-bit-callback-array-dispatch-21588-map/001';o.mkdir(parents=True,exist_ok=False);(o/'instructions.json').write_text(json.dumps([dict(start=start,end=end,instructions=rows)],indent=2)+'\n');(o/'disassembly.txt').write_text(rawtext);refs=sorted(set(int(m[1],16) for row in rows if (m:=re.search(r'@\s*\(?([0-9a-f]{6,8})',row['operands'])) and 'pc' in row['operands']))
+(o/'references.json').write_text(json.dumps([dict(address=a,bytes=d[a-0x438000:a-0x438000+4].hex(),value=int.from_bytes(d[a-0x438000:a-0x438000+4],'little')) for a in refs],indent=2)+'\n')
+(o/'pseudocode.md').write_text('# Sparse-bank lowest-set-bit callback-array dispatch\n\nPartial/unaccepted;116 instruction bytes4816C6..48173A. PUSH R4,R5,R6,LR16;R5fullentryR0index,R4fullentryR1bitmask,R6status0. Acceptunsigned(index-125mod2^32)<7 ORunsigned(index-56mod2^32)<7;otherwise return5withoutarrayread/call. Exact56..62or125..131. Normalizedbank56..62→index-56 (0..6),125..131→index-125+7 (7..13);nominaladditionalnormalizationbranches unreachableforacceptedinputs.\n\nLoopR4==0→returnR6. Otherwiselowbit=(-R4mod2^32)&R4;slot=31-CLZ(lowbit),1<<slotclearedfromR4BEFOREarrayreads/callback. Loadpointerliteral481810+128*normalizedbank+4*slot freshword→R1callbackaddress;thenpointerliteral481814+sameoffset freshword→R0argument. R2=R1callbackaddress;nonnull→BLXR1 at481700 withR0loadedargument,R1callbackaddress,R2sameaddress,R3=128*bank;callbackresultignored,looprechecksR4. Nullcallback setsR6=7stickyandcontinuesremainingbits;argumentwordstillreadonnullcallback. Slotsprocessedascending0..31;fresharraysreadperbit,callbackcanmodifylaterentries. ABI-savedR4/R5/R6retainremainingmask/bank/status. Return0unlessanynullthen7;fullmask0returns0withoutarrayreads. POP R4,R5,R6,PC16;zero2padding48173A..48173Cexcluded. No C/freeze/fullcoverage/equality claim.\n')
+(o/'replay.py').write_bytes(Path(__file__).read_bytes());(o/'receipt.json').write_text(json.dumps(dict(accepted=False,status='partial',input_sha256=h(d),instruction_bytes=end-start,files={p.name:h(p.read_bytes()) for p in o.iterdir()}),indent=2)+'\n');print('PASS',end-start)

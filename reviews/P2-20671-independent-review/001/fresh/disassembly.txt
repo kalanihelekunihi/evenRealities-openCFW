@@ -1,0 +1,35 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmppa_zjq6_/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047aa76 <.text>:
+  47aa76:	b2c0      	uxtb	r0, r0
+  47aa78:	f058 f816 	bl	4d2aa8 <.text+0x58032>
+  47aa7c:	0007      	movs	r7, r0
+  47aa7e:	f05f 0800 	movs.w	r8, #0
+  47aa82:	e002      	b.n	47aa8a <.text+0x14>
+  47aa84:	f118 0801 	adds.w	r8, r8, #1
+  47aa88:	35c8      	adds	r5, #200	@ 0xc8
+  47aa8a:	4640      	mov	r0, r8
+  47aa8c:	b2c0      	uxtb	r0, r0
+  47aa8e:	280a      	cmp	r0, #10
+  47aa90:	da13      	bge.n	47aaba <.text+0x44>
+  47aa92:	f895 002f 	ldrb.w	r0, [r5, #47]	@ 0x2f
+  47aa96:	2800      	cmp	r0, #0
+  47aa98:	d0f4      	beq.n	47aa84 <.text+0xe>
+  47aa9a:	f895 0030 	ldrb.w	r0, [r5, #48]	@ 0x30
+  47aa9e:	2800      	cmp	r0, #0
+  47aaa0:	d0f0      	beq.n	47aa84 <.text+0xe>
+  47aaa2:	79a8      	ldrb	r0, [r5, #6]
+  47aaa4:	0039      	movs	r1, r7
+  47aaa6:	b2c9      	uxtb	r1, r1
+  47aaa8:	4288      	cmp	r0, r1
+  47aaaa:	d1eb      	bne.n	47aa84 <.text+0xe>
+  47aaac:	0021      	movs	r1, r4
+  47aaae:	0028      	movs	r0, r5
+  47aab0:	f057 ff4b 	bl	4d294a <.text+0x57ed4>
+  47aab4:	2800      	cmp	r0, #0
+  47aab6:	d0e5      	beq.n	47aa84 <.text+0xe>
+  47aab8:	2601      	movs	r6, #1

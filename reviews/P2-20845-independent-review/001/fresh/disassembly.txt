@@ -1,0 +1,63 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp1z_f9mgt/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047cde2 <.text>:
+  47cde2:	b307      	cbz	r7, 47ce26 <.text+0x44>
+  47cde4:	4041      	eors	r1, r0
+  47cde6:	f1c7 0620 	rsb	r6, r7, #32
+  47cdea:	40b8      	lsls	r0, r7
+  47cdec:	41f1      	rors	r1, r6
+  47cdee:	4041      	eors	r1, r0
+  47cdf0:	fbb1 f6f3 	udiv	r6, r1, r3
+  47cdf4:	fb03 1116 	mls	r1, r3, r6, r1
+  47cdf8:	fba2 4506 	umull	r4, r5, r2, r6
+  47cdfc:	1b00      	subs	r0, r0, r4
+  47cdfe:	41a9      	sbcs	r1, r5
+  47ce00:	d202      	bcs.n	47ce08 <.text+0x26>
+  47ce02:	1e76      	subs	r6, r6, #1
+  47ce04:	1880      	adds	r0, r0, r2
+  47ce06:	4159      	adcs	r1, r3
+  47ce08:	ea80 0201 	eor.w	r2, r0, r1
+  47ce0c:	fa21 f30e 	lsr.w	r3, r1, lr
+  47ce10:	f1c7 0420 	rsb	r4, r7, #32
+  47ce14:	fa62 f20e 	ror.w	r2, r2, lr
+  47ce18:	fa0c f007 	lsl.w	r0, ip, r7
+  47ce1c:	405a      	eors	r2, r3
+  47ce1e:	fa2c f104 	lsr.w	r1, ip, r4
+  47ce22:	4330      	orrs	r0, r6
+  47ce24:	bdf0      	pop	{r4, r5, r6, r7, pc}
+  47ce26:	ea80 0201 	eor.w	r2, r0, r1
+  47ce2a:	fa21 f30e 	lsr.w	r3, r1, lr
+  47ce2e:	2100      	movs	r1, #0
+  47ce30:	fa62 f20e 	ror.w	r2, r2, lr
+  47ce34:	4660      	mov	r0, ip
+  47ce36:	405a      	eors	r2, r3
+  47ce38:	bdf0      	pop	{r4, r5, r6, r7, pc}
+  47ce3a:	468c      	mov	ip, r1
+  47ce3c:	fbb1 f1f2 	udiv	r1, r1, r2
+  47ce40:	fb02 c311 	mls	r3, r2, r1, ip
+  47ce44:	021b      	lsls	r3, r3, #8
+  47ce46:	ea43 6310 	orr.w	r3, r3, r0, lsr #24
+  47ce4a:	fbb3 fcf2 	udiv	ip, r3, r2
+  47ce4e:	fb02 331c 	mls	r3, r2, ip, r3
+  47ce52:	021b      	lsls	r3, r3, #8
+  47ce54:	ea4c 2000 	orr.w	r0, ip, r0, lsl #8
+  47ce58:	ea43 6310 	orr.w	r3, r3, r0, lsr #24
+  47ce5c:	fbb3 fcf2 	udiv	ip, r3, r2
+  47ce60:	fb02 331c 	mls	r3, r2, ip, r3
+  47ce64:	021b      	lsls	r3, r3, #8
+  47ce66:	ea4c 2000 	orr.w	r0, ip, r0, lsl #8
+  47ce6a:	ea43 6310 	orr.w	r3, r3, r0, lsr #24
+  47ce6e:	fbb3 fcf2 	udiv	ip, r3, r2
+  47ce72:	fb02 331c 	mls	r3, r2, ip, r3
+  47ce76:	021b      	lsls	r3, r3, #8
+  47ce78:	ea4c 2000 	orr.w	r0, ip, r0, lsl #8
+  47ce7c:	ea43 6310 	orr.w	r3, r3, r0, lsr #24
+  47ce80:	fbb3 fcf2 	udiv	ip, r3, r2
+  47ce84:	fb02 321c 	mls	r2, r2, ip, r3
+  47ce88:	ea4c 2000 	orr.w	r0, ip, r0, lsl #8
+  47ce8c:	2300      	movs	r3, #0
+  47ce8e:	4770      	bx	lr

@@ -1,0 +1,25 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpd476s2oz/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0046a74a <.text>:
+  46a74a:	f44f 70f1 	mov.w	r0, #482	@ 0x1e2
+  46a74e:	9000      	str	r0, [sp, #0]
+  46a750:	f8df 38d4 	ldr.w	r3, [pc, #2260]	@ 46b028 <.text+0x8de>
+  46a754:	4a36      	ldr	r2, [pc, #216]	@ (46a830 <.text+0xe6>)
+  46a756:	4937      	ldr	r1, [pc, #220]	@ (46a834 <.text+0xea>)
+  46a758:	2004      	movs	r0, #4
+  46a75a:	f7d2 ff0b 	bl	43d574 <.text-0x2d1d6>
+  46a75e:	f7d2 fcb6 	bl	43d0ce <.text-0x2d67c>
+  46a762:	07c0      	lsls	r0, r0, #31
+  46a764:	d403      	bmi.n	46a76e <.text+0x24>
+  46a766:	f7d2 fcb2 	bl	43d0ce <.text-0x2d67c>
+  46a76a:	0740      	lsls	r0, r0, #29
+  46a76c:	d506      	bpl.n	46a77c <.text+0x32>
+  46a76e:	f8df 28c4 	ldr.w	r2, [pc, #2244]	@ 46b034 <.text+0x8ea>
+  46a772:	0011      	movs	r1, r2
+  46a774:	f05f 5080 	movs.w	r0, #268435456	@ 0x10000000
+  46a778:	f7d2 fb91 	bl	43ce9e <.text-0x2d8ac>
+  46a77c:	bd1f      	pop	{r0, r1, r2, r3, r4, pc}

@@ -1,0 +1,62 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp8b6e777c/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047f0a0 <.text>:
+  47f0a0:	b510      	push	{r4, lr}
+  47f0a2:	0004      	movs	r4, r0
+  47f0a4:	0020      	movs	r0, r4
+  47f0a6:	b2c0      	uxtb	r0, r0
+  47f0a8:	2801      	cmp	r0, #1
+  47f0aa:	d005      	beq.n	47f0b8 <.text+0x18>
+  47f0ac:	0020      	movs	r0, r4
+  47f0ae:	b2c0      	uxtb	r0, r0
+  47f0b0:	2802      	cmp	r0, #2
+  47f0b2:	d001      	beq.n	47f0b8 <.text+0x18>
+  47f0b4:	2006      	movs	r0, #6
+  47f0b6:	e026      	b.n	47f106 <.text+0x66>
+  47f0b8:	0020      	movs	r0, r4
+  47f0ba:	b2c0      	uxtb	r0, r0
+  47f0bc:	2802      	cmp	r0, #2
+  47f0be:	d108      	bne.n	47f0d2 <.text+0x32>
+  47f0c0:	f8df 09f8 	ldr.w	r0, [pc, #2552]	@ 47fabc <.text+0xa1c>
+  47f0c4:	6800      	ldr	r0, [r0, #0]
+  47f0c6:	f3c0 1001 	ubfx	r0, r0, #4, #2
+  47f0ca:	2803      	cmp	r0, #3
+  47f0cc:	d001      	beq.n	47f0d2 <.text+0x32>
+  47f0ce:	2007      	movs	r0, #7
+  47f0d0:	e019      	b.n	47f106 <.text+0x66>
+  47f0d2:	0020      	movs	r0, r4
+  47f0d4:	f8df 19e0 	ldr.w	r1, [pc, #2528]	@ 47fab8 <.text+0xa18>
+  47f0d8:	7809      	ldrb	r1, [r1, #0]
+  47f0da:	b2c0      	uxtb	r0, r0
+  47f0dc:	4288      	cmp	r0, r1
+  47f0de:	d101      	bne.n	47f0e4 <.text+0x44>
+  47f0e0:	2000      	movs	r0, #0
+  47f0e2:	e010      	b.n	47f106 <.text+0x66>
+  47f0e4:	0020      	movs	r0, r4
+  47f0e6:	b2c0      	uxtb	r0, r0
+  47f0e8:	f7ff ff44 	bl	47ef74 <.text-0x12c>
+  47f0ec:	2800      	cmp	r0, #0
+  47f0ee:	d10a      	bne.n	47f106 <.text+0x66>
+  47f0f0:	f8df 09c0 	ldr.w	r0, [pc, #2496]	@ 47fab4 <.text+0xa14>
+  47f0f4:	6800      	ldr	r0, [r0, #0]
+  47f0f6:	f3c0 00c1 	ubfx	r0, r0, #3, #2
+  47f0fa:	b2e4      	uxtb	r4, r4
+  47f0fc:	42a0      	cmp	r0, r4
+  47f0fe:	d001      	beq.n	47f104 <.text+0x64>
+  47f100:	2001      	movs	r0, #1
+  47f102:	e000      	b.n	47f106 <.text+0x66>
+  47f104:	2000      	movs	r0, #0
+  47f106:	bd10      	pop	{r4, pc}
+  47f108:	2800      	cmp	r0, #0
+  47f10a:	d101      	bne.n	47f110 <.text+0x70>
+  47f10c:	2006      	movs	r0, #6
+  47f10e:	e004      	b.n	47f11a <.text+0x7a>
+  47f110:	f8df 19ac 	ldr.w	r1, [pc, #2476]	@ 47fac0 <.text+0xa20>
+  47f114:	7809      	ldrb	r1, [r1, #0]
+  47f116:	7001      	strb	r1, [r0, #0]
+  47f118:	2000      	movs	r0, #0
+  47f11a:	4770      	bx	lr

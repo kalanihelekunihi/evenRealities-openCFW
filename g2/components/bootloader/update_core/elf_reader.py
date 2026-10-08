@@ -10,7 +10,8 @@ def elf_info(path):
   for s in elf.iter_segments():
    if s['p_type']!='PT_LOAD':continue
    lo=s['p_vaddr'];size=s['p_memsz'];assert s['p_filesz']<=size<=65536
-   assert any(a<=lo<=lo+size<=b for a,b in [(0x10000,0x20000),(0x410000,0x434477),(0x20000000,0x20040000)])
+   # Two explicit relocated source slots, each still bounded to64KiB.
+   assert any(a<=lo<=lo+size<=b for a,b in [(0x10000,0x20000),(0x30000,0x40000),(0x410000,0x434477),(0x20000000,0x20040000)])
    segments.append(dict(address=lo,memory_size=size,data=s.data(),flags=s['p_flags']))
   section=elf.get_section_by_name('.symtab');assert section
   symbols={s.name:s['st_value'] for s in section.iter_symbols() if s.name and s['st_shndx']!='SHN_UNDEF'}

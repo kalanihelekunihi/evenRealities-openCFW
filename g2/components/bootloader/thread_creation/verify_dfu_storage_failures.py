@@ -41,6 +41,7 @@ class FailureMachine(s.Machine):
         self.cpu.mem_map(0x40000000,0x1000); self.cpu.mem_map(0x40014000,0x1000); self.cpu.mem_map(0x0200f000,0x1000)
         self.storage=True; self.executed.update((self.symbols[n]&~1) if self.source else a for n,a in s.FILES.items())
         self.rom_status=0; self.guard_events=[]; self.rom_events=[]; self.control_logs=[]
+        self.error_logs=[]; self.file_results=[]; self.pending_file_returns=[]
         self.scenario=''
         self.guard_active=False
         self.in_failure=False
@@ -50,7 +51,10 @@ class FailureMachine(s.Machine):
         self.guard_end=(self.symbols['opencfw_boot_control_guard_end']&~1) if self.source else 0x41bde4
         if self.source:
             self.executed.update(self.symbols[n]&~1 for n in ['opencfw_boot_control_guard_begin','opencfw_boot_control_guard_end','opencfw_boot_control_mram','opencfw_boot_dfu_error_transaction','opencfw_boot_control_critical_save'])
-        self.cpu.hook_add(UC_HOOK_MEM_WRITE,self.memwrite)
+        # Keep memory observation on MMIO only: a broad write hook perturbs
+        # the stock decompression path under Unicorn (a known observer effect).
+        for lo,hi in ((0x40000000,0x40000fff),(0x40014000,0x40014fff),(0x40021000,0x40021fff)):
+            self.cpu.hook_add(UC_HOOK_MEM_WRITE,self.memwrite,begin=lo,end=hi)
     def drive(self):
         try:return super().drive()
         except AssertionError:
@@ -59,9 +63,20 @@ class FailureMachine(s.Machine):
     def memwrite(self,uc,access,address,size,value,user):
         if address in (0x40000004,0x40000008,0x40014008,0x40014024,REQUEST):
             self.mmio_writes.append([address,size,value & 0xffffffff])
+        if self.in_failure and address in (0x40014008,0x40014024):
+            self.mram_cleanup.append([address,value & 0xffffffff])
         if address==REQUEST and self.guard_active and not (value&0x20):
             self.w(STATUS,self.u(STATUS)&~0x80)
     def code(self,uc,pc,size,user):
+        for pending in list(self.pending_file_returns):
+            if pc==pending[0]:
+                self.file_results.append([pending[1],pending[2],pending[3],self.args()[0]])
+                self.pending_file_returns.remove(pending)
+        for name,address in s.FILES.items():
+            entry=(self.symbols[name]&~1) if self.source else address
+            if pc==entry:
+                args=self.args(); path=self.cstr(args[1]) if name=='opencfw_boot_file_open' else ''
+                self.pending_file_returns.append((self.cpu.reg_read(v.a.UC_ARM_REG_LR)&~1,name,args[0],path))
         if self.in_failure and (self.u(0x40000008)==0xd4 or self.u(0x40000004)==0x1b):
             self.reset_events.append(['terminal-reset-store',self.u(0x40000004),self.u(0x40000008)])
             self.stop('terminal-reset-store'); return
@@ -72,12 +87,14 @@ class FailureMachine(s.Machine):
             if not self.source:
                 # Let pinned stock transaction instructions continue; the
                 # inherited storage verifier's early boundary is bypassed.
-                r.code(self,uc,pc,size,user); return
+                super(s.Machine,self).code(uc,pc,size,user); return
         if self.in_failure and pc==self.guard_begin:
             self.guard_events.append(['guard-begin',hex(pc)])
         if self.in_failure and pc==self.guard_end:self.guard_events.append(['guard-end',hex(pc)])
         if self.in_failure and pc==self.guard_end:
-            self.w(STATUS,self.u(STATUS)&~0x80);self.guard_active=False
+            # The source guard's disable callback runs after this point. Keep
+            # the modeled guard active until that callback is observed.
+            self.w(STATUS,self.u(STATUS)&~0x80)
         if self.source and pc in (0x41f8ba,0x41ba80,0x41c990):
             self.boundary_events.append(['startup-control-provider',hex(pc),self.args()[0]])
             self.ret(0);return
@@ -89,14 +106,15 @@ class FailureMachine(s.Machine):
         if pc==ROM and self.in_failure:
             key,operation,source,word_offset=self.args(); words=self.u(uc.reg_read(v.a.UC_ARM_REG_SP))
             payload=bytes(uc.mem_read(source,words*4)) if words<=16 else b''
-            self.rom_events.append([key,operation,hex(source),word_offset,words,payload.hex(),self.rom_status])
+            sp=uc.reg_read(v.a.UC_ARM_REG_SP); assert 0<=source-sp<=0x400
+            self.rom_events.append([key,operation,hex(source),word_offset,words,payload.hex(),self.rom_status,hex(sp),hex(source-sp)])
             self.ret(self.rom_status); return
         if self.in_failure and pc in (0x40014008,0x40014024):
             self.mram_cleanup.append([pc,self.args()[0]])
         if pc==CONTROL_LOG and self.in_failure:
-            level,line,*_=self.args(); self.control_logs.append([level,line]); self.ret(); return
+            level,line,*_=self.args(); self.control_logs.append([level,line]); self.error_logs.append([level,line]); self.ret(); return
         if pc==0x4176ce and self.args()[1]==0x433fe0:
-            self.task_events.append(['dfu-log',self.args()[0],self.u(uc.reg_read(v.a.UC_ARM_REG_SP))]); self.ret(); return
+            level=self.args()[0]; line=self.u(uc.reg_read(v.a.UC_ARM_REG_SP)); self.task_events.append(['dfu-log',level,line]); self.error_logs.append([level,line]); self.ret(); return
         if pc==0x4176ce and self.cstr(self.args()[1])=='file_system':self.ret();return
         if pc==self.failure_entry and self.source:
             pass
@@ -127,19 +145,26 @@ def main():
             try:m.drive()
             except Exception as exc:
                 print('OBSERVED-STOP',scenario,'source',m.source,'pc',hex(m.cpu.reg_read(v.a.UC_ARM_REG_PC)),type(exc).__name__)
-                result.append(dict(run='stopped-before-terminal',exception=type(exc).__name__,pc=hex(m.cpu.reg_read(v.a.UC_ARM_REG_PC)),arguments=m.args(),trace_tail=list(m.trace.items())[-12:],boundary=m.boundary_events,task_events=m.task_events,file_calls=m.file_calls,rom_events=m.rom_events))
+                result.append(dict(run='stopped-before-terminal',exception=type(exc).__name__,exception_detail=str(exc),pc=hex(m.cpu.reg_read(v.a.UC_ARM_REG_PC)),lr=hex(m.cpu.reg_read(v.a.UC_ARM_REG_LR)),registers={name:hex(m.cpu.reg_read(reg)) for name,reg in [('r0',v.a.UC_ARM_REG_R0),('r1',v.a.UC_ARM_REG_R1),('r2',v.a.UC_ARM_REG_R2),('r3',v.a.UC_ARM_REG_R3)]},arguments=m.args(),trace_tail=list(m.trace.items())[-12:],boundary=m.boundary_events,task_events=m.task_events,file_calls=m.file_calls,file_results=m.file_results,rom_events=m.rom_events,guard_events=m.guard_events,power_calls=m.power_calls,control_logs=m.control_logs,error_logs=m.error_logs,mram_cleanup=m.mram_cleanup,mmio_writes=m.mmio_writes,reset_events=m.reset_events,PRIMASK=m.cpu.reg_read(v.a.UC_ARM_REG_PRIMASK)))
             else:
                 assert m.reason=='terminal-reset-store', (scenario,m.source,m.reason,hex(m.cpu.reg_read(v.a.UC_ARM_REG_PC)))
                 assert len(m.rom_events)==1 and m.rom_events[0][0:5]==[0x12344321,1,m.rom_events[0][2],0xff800,4]
                 assert m.rom_events[0][5]=='ffffffffffffffffffffffffffffffff'
                 assert m.reset_events==[['terminal-reset-store',0,0xd4]]
                 assert [x[0] for x in m.guard_events]==['guard-begin','guard-end']
-                result.append(dict(run='terminal-reset-store',boundary=m.boundary_events,task_events=m.task_events,control_logs=m.control_logs,guard_events=m.guard_events,power_calls=m.power_calls,rom_events=m.rom_events,mram_cleanup=m.mram_cleanup,mmio_writes=m.mmio_writes,reset_events=m.reset_events,PRIMASK=m.cpu.reg_read(v.a.UC_ARM_REG_PRIMASK),file_calls=m.file_calls))
+                result.append(dict(run='terminal-reset-store',boundary=m.boundary_events,task_events=m.task_events,control_logs=m.control_logs,error_logs=m.error_logs,guard_events=m.guard_events,power_calls=m.power_calls,rom_events=m.rom_events,mram_cleanup=m.mram_cleanup,mmio_writes=m.mmio_writes,reset_events=m.reset_events,PRIMASK=m.cpu.reg_read(v.a.UC_ARM_REG_PRIMASK),file_calls=m.file_calls,file_results=m.file_results))
         trace.update(pair[0].trace)
         cases.append(dict(scenario=scenario,synthetic_rom_status=status,seed_nor_sha256=hashlib.sha256(disk).hexdigest(),seed_elf_sha256=seedhash,original=result[0],source=result[1]))
-    all_match=all(c['original']==c['source'] for c in cases)
+    def normalized(result):
+        rom=[event[:2]+event[3:7] for event in result['rom_events']]
+        files=[[name,path,status] for name,_,path,status in result['file_results']]
+        guard_roles=[event[0] for event in result['guard_events']]
+        logs=[[event[1],event[2]] for event in result['task_events'] if event[0]=='dfu-log']+result['control_logs']
+        return (rom,result['mram_cleanup'],result['mmio_writes'],result['reset_events'],result['PRIMASK'],logs,files,result['file_calls'],result['power_calls'],guard_roles)
+    all_match=all(normalized(x['original'])==normalized(x['source']) for x in cases)
+    raw_match=all(x['original']==x['source'] for x in cases)
     used={int(pc,0)+i for pc,raw in trace.items() for i in range(len(bytes.fromhex(raw)))}
     completed=all(x['original'].get('run')=='terminal-reset-store' and x['source'].get('run')=='terminal-reset-store' for x in cases)
-    report=dict(status='PASS' if all_match and completed else 'PARTIAL',all_original_source_match=all_match,cases=len(cases),distinct_original_trace_bytes=len(used),original_sha256=v.SHA,application_sha256=v.sha(app),elf_sha256=v.sha(a.elf),seed_elf_sha256=v.sha(a.seed_elf),source_sha256={str(p.relative_to(ROOT)):v.sha(p) for folder in ['startup','thread_creation','manager_task','dfu_task','update_core','filesystem','platform_control','nor_init','nor_mspi_init'] for p in (ROOT/'g2/components/bootloader'/folder).iterdir() if p.is_file() and p.suffix in ['.c','.h','.S','.ld','.py']},original_trace=trace,comparisons=cases,limits=['Source machine loads only ELF source executable segments and the first four locked bytes used as an initializer fixture; it never maps locked executable firmware. Original side executes pinned firmware. The missing ROM body at 0x0200ff20 is a synthetic callback returning the per-case status; source/stock MRAM bridge cleanup and terminal transaction code execute around it.','Synthetic littlefs-backed NOR supplies a nonempty directory containing a different file for the missing-name case, a 19-byte short-file case and a bad-CRC case. These exact fixtures only are tested. MMIO, guard power acknowledgement, filesystem allocator/mutex/NOR providers and ROM status are modeled.','Only successful task error-path runs justify the four-FFFFFFFF-word/0x7fe000/cleanup/reset-store outcome. Stopped runs report exact PC/arguments and do not imply that the stock failure transaction completed. Harness terminal-store observation is not a silicon reset.','No cancellation API was introduced or exercised. The test does not establish behavior if power fails during ROM programming or terminal reset before/after the store; the external ROM implementation and physical power-fail atomicity remain outside the boundary.','No complete source closure, byte identity, SBL/ROM implementation, peripheral timing or hardware write/reset claim.'])
+    report=dict(status='PASS' if all_match and completed else 'PARTIAL',all_original_source_match=all_match,raw_original_source_records_match=raw_match,cases=len(cases),distinct_original_trace_bytes=len(used),original_sha256=v.SHA,application_sha256=v.sha(app),elf_sha256=v.sha(a.elf),seed_elf_sha256=v.sha(a.seed_elf),source_sha256={str(p.relative_to(ROOT)):v.sha(p) for folder in ['startup','thread_creation','manager_task','dfu_task','update_core','filesystem','platform_control','nor_init','nor_mspi_init'] for p in (ROOT/'g2/components/bootloader'/folder).iterdir() if p.is_file() and p.suffix in ['.c','.h','.S','.ld','.py']},original_trace=trace,comparisons=cases,limits=['Source machine loads only ELF source executable segments and the first four locked bytes used as an initializer fixture; it never maps locked executable firmware. Original side executes pinned firmware. The missing ROM body at 0x0200ff20 is a synthetic callback returning the per-case status; source/stock MRAM bridge cleanup and terminal transaction code execute around it.','Synthetic littlefs-backed NOR supplies a nonempty directory containing a different file for the missing-name case, a 19-byte short-file case and a bad-CRC case. These exact fixtures only are tested. MMIO, guard power acknowledgement, filesystem allocator/mutex/NOR providers and ROM status are modeled.','With the current MMIO-only write hook, all original and source runs reach task-level errors, the guarded MRAM bridge, cleanup writes, and terminal reset store. An earlier broad write-hook run stopped stock at 0x415726 during a decompression copy; that was an emulator observer effect and is superseded by this bounded-hook profile. Stock and source use distinct but mapped stack payload addresses (preserved per ROM event with SP); equality compares payload bytes and transaction arguments, not raw stack addresses or linked code addresses.','The normalized equality compares ROM key/op/offset/count/bytes/status, file call status/path, ordered error log level/line events, guard/power calls, cleanup/MMIO writes, PRIMASK and terminal-store observation. The raw records retain code/stack addresses and logger channel differences, so raw record equality is false.','All tested ROM statuses (0, 7, 0x55) return through the synthetic callback and are followed by the same four-word 0xFF payload, cleanup register writes, and reset store. Harness reset-store observation is not a silicon reset; the callback is not the absent ROM implementation.','No cancellation API was introduced or exercised. The test does not establish behavior if power fails during ROM programming or terminal reset before/after the store; the external ROM implementation and physical power-fail atomicity remain outside the boundary.','No complete source closure, byte identity, SBL/ROM implementation, peripheral timing or hardware write/reset claim.'])
     a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(report,indent=2)+'\n');print(json.dumps({'status':report['status'],'cases':report['cases'],'original_bytes':report['distinct_original_trace_bytes']}))
 if __name__=='__main__':main()

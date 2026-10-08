@@ -1,0 +1,272 @@
+{
+  "review_id": "P2-21459-independent-review",
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-dispatch-cleanup-twenty-two-word-literal-pool-21858-data/001",
+  "status": "partial",
+  "accepted": false,
+  "checks": {
+    "fresh_replay": "pass",
+    "input_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+    "data_bytes": 88,
+    "word_count": 22,
+    "bytes_match": true,
+    "all_slots_have_consumer_21818_21856": true,
+    "additional_earlier_consumers_found": true
+  },
+  "slot_consumers": {
+    "0x004849A4": {
+      "word": "0x2006F690",
+      "consumers_21818_21856": [
+        21818,
+        21834,
+        21836
+      ],
+      "other_maps_also_reference": [
+        17938,
+        17944,
+        17976
+      ]
+    },
+    "0x004849A8": {
+      "word": "0x2006F548",
+      "consumers_21818_21856": [
+        21818,
+        21828,
+        21834,
+        21836,
+        21850,
+        21854
+      ],
+      "other_maps_also_reference": [
+        17936,
+        17942,
+        17946,
+        17966,
+        17970,
+        17978
+      ]
+    },
+    "0x004849AC": {
+      "word": "0x007865F0",
+      "consumers_21818_21856": [
+        21818,
+        21820,
+        21844
+      ],
+      "other_maps_also_reference": [
+        16546,
+        17928,
+        17962,
+        17978
+      ]
+    },
+    "0x004849B0": {
+      "word": "0x0077FBE4",
+      "consumers_21818_21856": [
+        21818
+      ],
+      "other_maps_also_reference": [
+        17978
+      ]
+    },
+    "0x004849B4": {
+      "word": "0x00760A70",
+      "consumers_21818_21856": [
+        21818,
+        21820,
+        21840,
+        21842,
+        21844
+      ],
+      "other_maps_also_reference": [
+        16546,
+        17928,
+        17958,
+        17960,
+        17962,
+        17978
+      ]
+    },
+    "0x004849B8": {
+      "word": "0x0077FBD0",
+      "consumers_21818_21856": [
+        21818
+      ],
+      "other_maps_also_reference": [
+        17978
+      ]
+    },
+    "0x004849BC": {
+      "word": "0x006E859C",
+      "consumers_21818_21856": [
+        21818,
+        21820,
+        21826,
+        21840,
+        21842,
+        21844,
+        21850,
+        21854
+      ],
+      "other_maps_also_reference": [
+        16546,
+        16548,
+        17928,
+        17930,
+        17942,
+        17958,
+        17960,
+        17962,
+        17966,
+        17978
+      ]
+    },
+    "0x004849C0": {
+      "word": "0x0077FC0C",
+      "consumers_21818_21856": [
+        21820
+      ],
+      "other_maps_also_reference": [
+        16546,
+        17928
+      ]
+    },
+    "0x004849C4": {
+      "word": "0x0077FBF8",
+      "consumers_21818_21856": [
+        21820
+      ],
+      "other_maps_also_reference": [
+        16546,
+        17928
+      ]
+    },
+    "0x004849C8": {
+      "word": "0x2006F684",
+      "consumers_21818_21856": [
+        21824
+      ],
+      "other_maps_also_reference": [
+        16548,
+        17930
+      ]
+    },
+    "0x004849CC": {
+      "word": "0x0073F4D0",
+      "consumers_21818_21856": [
+        21826
+      ],
+      "other_maps_also_reference": [
+        16548,
+        17930
+      ]
+    },
+    "0x004849D0": {
+      "word": "0x00760A90",
+      "consumers_21818_21856": [
+        21826
+      ],
+      "other_maps_also_reference": [
+        16548,
+        17930
+      ]
+    },
+    "0x004849D4": {
+      "word": "0x00786620",
+      "consumers_21818_21856": [
+        21840,
+        21842
+      ],
+      "other_maps_also_reference": [
+        17958,
+        17960
+      ]
+    },
+    "0x004849D8": {
+      "word": "0x00786610",
+      "consumers_21818_21856": [
+        21840,
+        21842
+      ],
+      "other_maps_also_reference": [
+        17958,
+        17960
+      ]
+    },
+    "0x004849DC": {
+      "word": "0x00786600",
+      "consumers_21818_21856": [
+        21840
+      ],
+      "other_maps_also_reference": [
+        17958
+      ]
+    },
+    "0x004849E0": {
+      "word": "0x00786630",
+      "consumers_21818_21856": [
+        21842
+      ],
+      "other_maps_also_reference": [
+        17960
+      ]
+    },
+    "0x004849E4": {
+      "word": "0x0077FC20",
+      "consumers_21818_21856": [
+        21844
+      ],
+      "other_maps_also_reference": [
+        17962
+      ]
+    },
+    "0x004849E8": {
+      "word": "0x007780BC",
+      "consumers_21818_21856": [
+        21844
+      ],
+      "other_maps_also_reference": [
+        17962
+      ]
+    },
+    "0x004849EC": {
+      "word": "0x0073F4FC",
+      "consumers_21818_21856": [
+        21850
+      ],
+      "other_maps_also_reference": [
+        17966
+      ]
+    },
+    "0x004849F0": {
+      "word": "0x007780D4",
+      "consumers_21818_21856": [
+        21850
+      ],
+      "other_maps_also_reference": [
+        17966
+      ]
+    },
+    "0x004849F4": {
+      "word": "0x0074A834",
+      "consumers_21818_21856": [
+        21854
+      ],
+      "other_maps_also_reference": [
+        17942
+      ]
+    },
+    "0x004849F8": {
+      "word": "0x00786640",
+      "consumers_21818_21856": [
+        21854
+      ],
+      "other_maps_also_reference": [
+        17942
+      ]
+    }
+  },
+  "limitations": [
+    "runtime RAM and pointed-to flash data excluded",
+    "ownership/exhaustive image coverage not established"
+  ]
+}

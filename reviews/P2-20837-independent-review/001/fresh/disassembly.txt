@@ -1,0 +1,32 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpo0gg7z01/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047cc1c <.text>:
+  47cc1c:	f013 4c00 	ands.w	ip, r3, #2147483648	@ 0x80000000
+  47cc20:	d503      	bpl.n	47cc2a <.text+0xe>
+  47cc22:	425b      	negs	r3, r3
+  47cc24:	4252      	negs	r2, r2
+  47cc26:	f163 0300 	sbc.w	r3, r3, #0
+  47cc2a:	ea9c 0c21 	eors.w	ip, ip, r1, asr #32
+  47cc2e:	f000 8017 	beq.w	47cc60 <.text+0x44>
+  47cc32:	b510      	push	{r4, lr}
+  47cc34:	4664      	mov	r4, ip
+  47cc36:	d303      	bcc.n	47cc40 <.text+0x24>
+  47cc38:	4249      	negs	r1, r1
+  47cc3a:	4240      	negs	r0, r0
+  47cc3c:	f161 0100 	sbc.w	r1, r1, #0
+  47cc40:	f000 f80e 	bl	47cc60 <.text+0x44>
+  47cc44:	0064      	lsls	r4, r4, #1
+  47cc46:	d304      	bcc.n	47cc52 <.text+0x36>
+  47cc48:	4249      	negs	r1, r1
+  47cc4a:	4240      	negs	r0, r0
+  47cc4c:	f161 0100 	sbc.w	r1, r1, #0
+  47cc50:	4224      	tst	r4, r4
+  47cc52:	d503      	bpl.n	47cc5c <.text+0x40>
+  47cc54:	425b      	negs	r3, r3
+  47cc56:	4252      	negs	r2, r2
+  47cc58:	f163 0300 	sbc.w	r3, r3, #0
+  47cc5c:	bd10      	pop	{r4, pc}

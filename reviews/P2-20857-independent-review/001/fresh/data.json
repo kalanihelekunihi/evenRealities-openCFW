@@ -1,0 +1,75 @@
+{
+  "start": 4708604,
+  "end": 4708620,
+  "bytes": "dced780043500720e4ed7800eced7800",
+  "words": [
+    {
+      "address": 4708604,
+      "value": 7925212
+    },
+    {
+      "address": 4708608,
+      "value": 537350211
+    },
+    {
+      "address": 4708612,
+      "value": 7925220
+    },
+    {
+      "address": 4708616,
+      "value": 7925228
+    }
+  ],
+  "consumers": [
+    {
+      "component": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-eight-byte-template-two-fresh-reads-message259-saved-slot-return-21250-map/001",
+      "instruction": {
+        "address": 4705938,
+        "bytes": "dff8680a",
+        "mnemonic": "ldr.w",
+        "operands": "r0, [pc, #2664]\t@ 47d8fc <.text+0xa6c>"
+      },
+      "literal_address": 4708604
+    },
+    {
+      "component": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-eight-byte-template-two-fresh-reads-message259-saved-slot-return-21250-map/001",
+      "instruction": {
+        "address": 4705976,
+        "bytes": "dff8440a",
+        "mnemonic": "ldr.w",
+        "operands": "r0, [pc, #2628]\t@ 47d900 <.text+0xa70>"
+      },
+      "literal_address": 4708608
+    },
+    {
+      "component": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-alternate-template-bit-four-two-three-message259-21252-map/001",
+      "instruction": {
+        "address": 4706008,
+        "bytes": "dff8280a",
+        "mnemonic": "ldr.w",
+        "operands": "r0, [pc, #2600]\t@ 47d904 <.text+0xa2e>"
+      },
+      "literal_address": 4708612
+    },
+    {
+      "component": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-alternate-template-bit-four-two-three-message259-21252-map/001",
+      "instruction": {
+        "address": 4706046,
+        "bytes": "dff8000a",
+        "mnemonic": "ldr.w",
+        "operands": "r0, [pc, #2560]\t@ 47d900 <.text+0xa2a>"
+      },
+      "literal_address": 4708608
+    },
+    {
+      "component": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-third-template-two-fresh-calls-message259-21254-map/001",
+      "instruction": {
+        "address": 4706090,
+        "bytes": "dff8dc09",
+        "mnemonic": "ldr.w",
+        "operands": "r0, [pc, #2524]\t@ 47d908 <.text+0x9e0>"
+      },
+      "literal_address": 4708616
+    }
+  ]
+}

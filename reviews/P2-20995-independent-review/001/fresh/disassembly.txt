@@ -1,0 +1,56 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpyss8s7mz/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047e878 <.text>:
+  47e878:	b580      	push	{r7, lr}
+  47e87a:	4668      	mov	r0, sp
+  47e87c:	f000 f839 	bl	47e8f2 <.text+0x7a>
+  47e880:	9900      	ldr	r1, [sp, #0]
+  47e882:	f000 f803 	bl	47e88c <.text+0x14>
+  47e886:	f000 f878 	bl	47e97a <.text+0x102>
+  47e88a:	e7f6      	b.n	47e87a <.text+0x2>
+  47e88c:	b57c      	push	{r2, r3, r4, r5, r6, lr}
+  47e88e:	0005      	movs	r5, r0
+  47e890:	000c      	movs	r4, r1
+  47e892:	f7d6 fa73 	bl	454d7c <.text-0x29afc>
+  47e896:	4668      	mov	r0, sp
+  47e898:	f000 f83d 	bl	47e916 <.text+0x9e>
+  47e89c:	0006      	movs	r6, r0
+  47e89e:	9800      	ldr	r0, [sp, #0]
+  47e8a0:	2800      	cmp	r0, #0
+  47e8a2:	d123      	bne.n	47e8ec <.text+0x74>
+  47e8a4:	2c00      	cmp	r4, #0
+  47e8a6:	d108      	bne.n	47e8ba <.text+0x42>
+  47e8a8:	42ae      	cmp	r6, r5
+  47e8aa:	d306      	bcc.n	47e8ba <.text+0x42>
+  47e8ac:	f7d6 fa8e 	bl	454dcc <.text-0x29aac>
+  47e8b0:	0031      	movs	r1, r6
+  47e8b2:	0028      	movs	r0, r5
+  47e8b4:	f7ff ffc1 	bl	47e83a <.text-0x3e>
+  47e8b8:	e01a      	b.n	47e8f0 <.text+0x78>
+  47e8ba:	2c00      	cmp	r4, #0
+  47e8bc:	d008      	beq.n	47e8d0 <.text+0x58>
+  47e8be:	f8df 02bc 	ldr.w	r0, [pc, #700]	@ 47eb7c <.text+0x304>
+  47e8c2:	6800      	ldr	r0, [r0, #0]
+  47e8c4:	6800      	ldr	r0, [r0, #0]
+  47e8c6:	2800      	cmp	r0, #0
+  47e8c8:	d101      	bne.n	47e8ce <.text+0x56>
+  47e8ca:	2401      	movs	r4, #1
+  47e8cc:	e000      	b.n	47e8d0 <.text+0x58>
+  47e8ce:	2400      	movs	r4, #0
+  47e8d0:	0022      	movs	r2, r4
+  47e8d2:	1bad      	subs	r5, r5, r6
+  47e8d4:	0029      	movs	r1, r5
+  47e8d6:	48a5      	ldr	r0, [pc, #660]	@ (47eb6c <.text+0x2f4>)
+  47e8d8:	6800      	ldr	r0, [r0, #0]
+  47e8da:	f7c3 fba9 	bl	442030 <.text-0x3c848>
+  47e8de:	f7d6 fa75 	bl	454dcc <.text-0x29aac>
+  47e8e2:	2800      	cmp	r0, #0
+  47e8e4:	d104      	bne.n	47e8f0 <.text+0x78>
+  47e8e6:	f7c3 fbe9 	bl	4420bc <.text-0x3c7bc>
+  47e8ea:	e001      	b.n	47e8f0 <.text+0x78>
+  47e8ec:	f7d6 fa6e 	bl	454dcc <.text-0x29aac>
+  47e8f0:	bd73      	pop	{r0, r1, r4, r5, r6, pc}

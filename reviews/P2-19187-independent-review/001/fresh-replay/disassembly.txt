@@ -1,0 +1,57 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmps07gecdv/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0046a344 <.text>:
+  46a344:	f8da 0000 	ldr.w	r0, [sl]
+  46a348:	f7e3 fcab 	bl	44dca2 <.text-0x1c6a2>
+  46a34c:	4683      	mov	fp, r0
+  46a34e:	4658      	mov	r0, fp
+  46a350:	f7d5 fd25 	bl	43fd9e <.text-0x2a5a6>
+  46a354:	9900      	ldr	r1, [sp, #0]
+  46a356:	1a40      	subs	r0, r0, r1
+  46a358:	2102      	movs	r1, #2
+  46a35a:	fb90 f1f1 	sdiv	r1, r0, r1
+  46a35e:	f8da 0000 	ldr.w	r0, [sl]
+  46a362:	f7d4 febd 	bl	43f0e0 <.text-0x2b264>
+  46a366:	4658      	mov	r0, fp
+  46a368:	f7d5 fd37 	bl	43fdda <.text-0x2a56a>
+  46a36c:	f8df 1958 	ldr.w	r1, [pc, #2392]	@ 46acc8 <.text+0x984>
+  46a370:	6809      	ldr	r1, [r1, #0]
+  46a372:	1a40      	subs	r0, r0, r1
+  46a374:	2102      	movs	r1, #2
+  46a376:	fb90 f1f1 	sdiv	r1, r0, r1
+  46a37a:	f8da 0000 	ldr.w	r0, [sl]
+  46a37e:	f7d4 fee0 	bl	43f142 <.text-0x2b202>
+  46a382:	f8df a95c 	ldr.w	sl, [pc, #2396]	@ 46ace0 <.text+0x99c>
+  46a386:	f8da 3000 	ldr.w	r3, [sl]
+  46a38a:	2200      	movs	r2, #0
+  46a38c:	2102      	movs	r1, #2
+  46a38e:	6830      	ldr	r0, [r6, #0]
+  46a390:	f7d5 f992 	bl	43f6b8 <.text-0x2ac8c>
+  46a394:	f8da 0000 	ldr.w	r0, [sl]
+  46a398:	182d      	adds	r5, r5, r0
+  46a39a:	f8df 0948 	ldr.w	r0, [pc, #2376]	@ 46ace4 <.text+0x9a0>
+  46a39e:	6800      	ldr	r0, [r0, #0]
+  46a3a0:	1945      	adds	r5, r0, r5
+  46a3a2:	002b      	movs	r3, r5
+  46a3a4:	2200      	movs	r2, #0
+  46a3a6:	2102      	movs	r1, #2
+  46a3a8:	6838      	ldr	r0, [r7, #0]
+  46a3aa:	f7d5 f985 	bl	43f6b8 <.text-0x2ac8c>
+  46a3ae:	1964      	adds	r4, r4, r5
+  46a3b0:	f8df 0ac0 	ldr.w	r0, [pc, #2752]	@ 46ae74 <.text+0xb30>
+  46a3b4:	6800      	ldr	r0, [r0, #0]
+  46a3b6:	1904      	adds	r4, r0, r4
+  46a3b8:	0023      	movs	r3, r4
+  46a3ba:	2200      	movs	r2, #0
+  46a3bc:	2102      	movs	r1, #2
+  46a3be:	f8d8 0000 	ldr.w	r0, [r8]
+  46a3c2:	f7d5 f979 	bl	43f6b8 <.text-0x2ac8c>
+  46a3c6:	f8d9 0000 	ldr.w	r0, [r9]
+  46a3ca:	f7d5 f94f 	bl	43f66c <.text-0x2acd8>
+  46a3ce:	f000 f8b4 	bl	46a53a <.text+0x1f6>
+  46a3d2:	e8bd 8ff1 	ldmia.w	sp!, {r0, r4, r5, r6, r7, r8, r9, sl, fp, pc}
+  46a3d6:	4770      	bx	lr

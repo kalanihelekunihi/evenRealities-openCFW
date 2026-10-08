@@ -12,7 +12,7 @@ class Machine:
  def __init__(self,source,segments,syms):
   self.source=source;self.events=[];self.trace={};self.cpu=Uc(UC_ARCH_ARM,UC_MODE_THUMB);self.cpu.mem_map(0x410000,0x30000);self.cpu.mem_map(0x10000,0x20000);self.cpu.mem_map(0x20000000,0x40000);self.cpu.mem_map(0xe000e000,0x2000);self.cpu.mem_map(0x08000000,0x1000)
   if source:
-   for address,data,size,flags in segments:self.cpu.mem_write(address,data)
+   for segment in segments:self.cpu.mem_write(segment['address'],segment['data'])
    self.entry=syms['opencfw_boot_cache_maintain']
   else:self.cpu.mem_write(0x410000,BLOB.read_bytes());self.entry=0x41e349
   self.cpu.hook_add(UC_HOOK_CODE,self.code);self.cpu.hook_add(UC_HOOK_MEM_WRITE,self.write,begin=0xe000e000,end=0xe000ffff)

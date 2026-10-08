@@ -1,0 +1,9 @@
+# Native kernel-state alias validation — dceae3 candidate
+
+Pinned image: `g2/build/bootloader-completion/source-image-compatible/snapshots/dceae3b56c3ef4b0572f4cd499230ca8f5eb20419cf1c4a0910d05d607389bee/bootloader-source-test.elf`, SHA-256 `dceae3b56c3ef4b0572f4cd499230ca8f5eb20419cf1c4a0910d05d607389bee`.
+
+The candidate exports the native function `opencfw_boot_kernel_state` at Thumb symbol `0x11f2d`, while `opencfw_bl_kernel_state` remains an absolute alias to stock `0x416089`. The native function is declared as `uint32_t opencfw_boot_kernel_state(void)`, matching the stock no-argument, scalar return ABI used by callers. It reads the source-defined queue runtime-mode helper and the kernel-state word at `0x200270d4`.
+
+`verify_kernel_state_candidate.py` retakes the existing lifecycle comparisons against this exact candidate. Result: PASS, 216 cases, 224 distinct original instruction bytes. The input product is 3 entrypoints × 3 runtime modes × 3 state words × 2 PRIMASK values × 2 BASEPRI values × 2 IPSR values = 216; it is not 324. `kernel_state` executes original and source bodies directly. For the combined lifecycle suite only, the stock kernel-start leaf and the candidate's linked kernel-start function are both intercepted with the same synthetic return; no claim is made for that function or actual scheduling. See `result-dceae3.json` for per-case state, ABI return comparison, and source hashes.
+
+Minimal candidate binding change, not applied here: in `startup_source_image.ld`, replace `opencfw_bl_kernel_state = 0x416089;` with `opencfw_bl_kernel_state = opencfw_boot_kernel_state;`. This lets existing callers such as `nor_read/runtime_helpers.c` resolve to the source function. Other linker profiles that intentionally share this component need the same substitution when selected. No source, linker, or shared runtime file was changed for this validation.

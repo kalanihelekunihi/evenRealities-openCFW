@@ -1,0 +1,4 @@
+# Sentinel-triggered shared initialization and optional output
+
+Partial/unaccepted;60instructionbytes47EF38..47EF74. PUSH R3,R4,R5,LR16;R4=entryR0outputpointer;R5=literal47F948globalpointer;freshglobalword==FFFFFFFF triggers4D3F3C(1,580,1,R5). Otherinitialwordvalues skiphelper. AfterhelperfreshglobalwordR1zero→storeglobal0;nonzeroANDfullhelperR0nonzero→storeglobal0;nonzeroANDhelperR0zero→retainglobal. Do notassumestandardstatusconvention;exactzerotestsretained.
+Thenfulloutputpointerzero→R0=6return. Nonzero→independentlyfreshglobalwordstoredword[output],R0=0return. Initializationoccursbeforeoutputpointervalidation,so nulloutputcanstilltriggerglobalchanges. POP R1,R4,R5,PC16 returnsR1=savedentryR3subjectcallee stackwrites,restoresR4/R5. No C/freeze/completenessclaim;helpermeaning/globalownershipunresolved.

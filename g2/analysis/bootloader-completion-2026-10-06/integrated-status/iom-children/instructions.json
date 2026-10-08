@@ -1,0 +1,4860 @@
+[
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc34",
+    "bytes": "2de9f041",
+    "mnemonic": "push.w",
+    "operands": "{r4, r5, r6, r7, r8, lr}"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc38",
+    "bytes": "0500",
+    "mnemonic": "movs",
+    "operands": "r5, r0"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc3a",
+    "bytes": "5ff00008",
+    "mnemonic": "movs.w",
+    "operands": "r8, #0"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc3e",
+    "bytes": "0028",
+    "mnemonic": "cmp",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc40",
+    "bytes": "05d0",
+    "mnemonic": "beq",
+    "operands": "#0x42cc4e"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc42",
+    "bytes": "0268",
+    "mnemonic": "ldr",
+    "operands": "r2, [r0]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc44",
+    "bytes": "22f07e42",
+    "mnemonic": "bic",
+    "operands": "r2, r2, #0xfe000000"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc48",
+    "bytes": "594b",
+    "mnemonic": "ldr",
+    "operands": "r3, [pc, #0x164]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc4a",
+    "bytes": "9a42",
+    "mnemonic": "cmp",
+    "operands": "r2, r3"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc4c",
+    "bytes": "01d0",
+    "mnemonic": "beq",
+    "operands": "#0x42cc52"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc4e",
+    "bytes": "0220",
+    "mnemonic": "movs",
+    "operands": "r0, #2"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc50",
+    "bytes": "ace0",
+    "mnemonic": "b",
+    "operands": "#0x42cdac"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc52",
+    "bytes": "0028",
+    "mnemonic": "cmp",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc54",
+    "bytes": "05d0",
+    "mnemonic": "beq",
+    "operands": "#0x42cc62"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc56",
+    "bytes": "0c00",
+    "mnemonic": "movs",
+    "operands": "r4, r1"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc58",
+    "bytes": "002c",
+    "mnemonic": "cmp",
+    "operands": "r4, #0"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc5a",
+    "bytes": "02d0",
+    "mnemonic": "beq",
+    "operands": "#0x42cc62"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc5c",
+    "bytes": "6868",
+    "mnemonic": "ldr",
+    "operands": "r0, [r5, #4]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc5e",
+    "bytes": "0828",
+    "mnemonic": "cmp",
+    "operands": "r0, #8"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc60",
+    "bytes": "01d3",
+    "mnemonic": "blo",
+    "operands": "#0x42cc66"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc62",
+    "bytes": "0620",
+    "mnemonic": "movs",
+    "operands": "r0, #6"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc64",
+    "bytes": "a2e0",
+    "mnemonic": "b",
+    "operands": "#0x42cdac"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc66",
+    "bytes": "2868",
+    "mnemonic": "ldr",
+    "operands": "r0, [r5]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc68",
+    "bytes": "c0f34060",
+    "mnemonic": "ubfx",
+    "operands": "r0, r0, #0x19, #1"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc6c",
+    "bytes": "0028",
+    "mnemonic": "cmp",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc6e",
+    "bytes": "01d0",
+    "mnemonic": "beq",
+    "operands": "#0x42cc74"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc70",
+    "bytes": "0720",
+    "mnemonic": "movs",
+    "operands": "r0, #7"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc72",
+    "bytes": "9be0",
+    "mnemonic": "b",
+    "operands": "#0x42cdac"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc74",
+    "bytes": "6e68",
+    "mnemonic": "ldr",
+    "operands": "r6, [r5, #4]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc76",
+    "bytes": "2078",
+    "mnemonic": "ldrb",
+    "operands": "r0, [r4]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc78",
+    "bytes": "2872",
+    "mnemonic": "strb",
+    "operands": "r0, [r5, #8]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc7a",
+    "bytes": "dff84471",
+    "mnemonic": "ldr.w",
+    "operands": "r7, [pc, #0x144]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc7e",
+    "bytes": "41f21000",
+    "mnemonic": "movw",
+    "operands": "r0, #0x1010"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc82",
+    "bytes": "17eb0631",
+    "mnemonic": "adds.w",
+    "operands": "r1, r7, r6, lsl #12"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc86",
+    "bytes": "c1f80401",
+    "mnemonic": "str.w",
+    "operands": "r0, [r1, #0x104]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc8a",
+    "bytes": "2078",
+    "mnemonic": "ldrb",
+    "operands": "r0, [r4]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc8c",
+    "bytes": "0028",
+    "mnemonic": "cmp",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc8e",
+    "bytes": "3ad1",
+    "mnemonic": "bne",
+    "operands": "#0x42cd06"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc90",
+    "bytes": "207a",
+    "mnemonic": "ldrb",
+    "operands": "r0, [r4, #8]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc92",
+    "bytes": "0428",
+    "mnemonic": "cmp",
+    "operands": "r0, #4"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc94",
+    "bytes": "01db",
+    "mnemonic": "blt",
+    "operands": "#0x42cc9a"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc96",
+    "bytes": "0620",
+    "mnemonic": "movs",
+    "operands": "r0, #6"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc98",
+    "bytes": "88e0",
+    "mnemonic": "b",
+    "operands": "#0x42cdac"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc9a",
+    "bytes": "6068",
+    "mnemonic": "ldr",
+    "operands": "r0, [r4, #4]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cc9c",
+    "bytes": "dff82c11",
+    "mnemonic": "ldr.w",
+    "operands": "r1, [pc, #0x12c]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cca0",
+    "bytes": "8842",
+    "mnemonic": "cmp",
+    "operands": "r0, r1"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cca2",
+    "bytes": "01d3",
+    "mnemonic": "blo",
+    "operands": "#0x42cca8"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cca4",
+    "bytes": "0620",
+    "mnemonic": "movs",
+    "operands": "r0, #6"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cca6",
+    "bytes": "81e0",
+    "mnemonic": "b",
+    "operands": "#0x42cdac"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cca8",
+    "bytes": "207a",
+    "mnemonic": "ldrb",
+    "operands": "r0, [r4, #8]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42ccaa",
+    "bytes": "c0f34001",
+    "mnemonic": "ubfx",
+    "operands": "r1, r0, #1, #1"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42ccae",
+    "bytes": "6068",
+    "mnemonic": "ldr",
+    "operands": "r0, [r4, #4]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42ccb0",
+    "bytes": "fff7dbfa",
+    "mnemonic": "bl",
+    "operands": "#0x42c26a"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42ccb4",
+    "bytes": "217a",
+    "mnemonic": "ldrb",
+    "operands": "r1, [r4, #8]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42ccb6",
+    "bytes": "11f00301",
+    "mnemonic": "ands",
+    "operands": "r1, r1, #3"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42ccba",
+    "bytes": "17eb0632",
+    "mnemonic": "adds.w",
+    "operands": "r2, r7, r6, lsl #12"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42ccbe",
+    "bytes": "c2f88012",
+    "mnemonic": "str.w",
+    "operands": "r1, [r2, #0x280]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42ccc2",
+    "bytes": "50f00100",
+    "mnemonic": "orrs",
+    "operands": "r0, r0, #1"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42ccc6",
+    "bytes": "17eb0637",
+    "mnemonic": "adds.w",
+    "operands": "r7, r7, r6, lsl #12"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42ccca",
+    "bytes": "c7f81801",
+    "mnemonic": "str.w",
+    "operands": "r0, [r7, #0x118]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42ccce",
+    "bytes": "dff80001",
+    "mnemonic": "ldr.w",
+    "operands": "r0, [pc, #0x100]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42ccd2",
+    "bytes": "6168",
+    "mnemonic": "ldr",
+    "operands": "r1, [r4, #4]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42ccd4",
+    "bytes": "b0fbf1f0",
+    "mnemonic": "udiv",
+    "operands": "r0, r0, r1"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42ccd8",
+    "bytes": "c5f86408",
+    "mnemonic": "str.w",
+    "operands": "r0, [r5, #0x864]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42ccdc",
+    "bytes": "4ff47a70",
+    "mnemonic": "mov.w",
+    "operands": "r0, #0x3e8"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cce0",
+    "bytes": "c5f86008",
+    "mnemonic": "str.w",
+    "operands": "r0, [r5, #0x860]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cce4",
+    "bytes": "e068",
+    "mnemonic": "ldr",
+    "operands": "r0, [r4, #0xc]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cce6",
+    "bytes": "e860",
+    "mnemonic": "str",
+    "operands": "r0, [r5, #0xc]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cce8",
+    "bytes": "2069",
+    "mnemonic": "ldr",
+    "operands": "r0, [r4, #0x10]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42ccea",
+    "bytes": "2861",
+    "mnemonic": "str",
+    "operands": "r0, [r5, #0x10]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42ccec",
+    "bytes": "e868",
+    "mnemonic": "ldr",
+    "operands": "r0, [r5, #0xc]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42ccee",
+    "bytes": "0028",
+    "mnemonic": "cmp",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42ccf0",
+    "bytes": "4ed0",
+    "mnemonic": "beq",
+    "operands": "#0x42cd90"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42ccf2",
+    "bytes": "e868",
+    "mnemonic": "ldr",
+    "operands": "r0, [r5, #0xc]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42ccf4",
+    "bytes": "2969",
+    "mnemonic": "ldr",
+    "operands": "r1, [r5, #0x10]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42ccf6",
+    "bytes": "10eb8100",
+    "mnemonic": "adds.w",
+    "operands": "r0, r0, r1, lsl #2"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42ccfa",
+    "bytes": "dff8d810",
+    "mnemonic": "ldr.w",
+    "operands": "r1, [pc, #0xd8]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42ccfe",
+    "bytes": "8842",
+    "mnemonic": "cmp",
+    "operands": "r0, r1"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd00",
+    "bytes": "31d2",
+    "mnemonic": "bhs",
+    "operands": "#0x42cd66"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd02",
+    "bytes": "0120",
+    "mnemonic": "movs",
+    "operands": "r0, #1"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd04",
+    "bytes": "30e0",
+    "mnemonic": "b",
+    "operands": "#0x42cd68"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd06",
+    "bytes": "2078",
+    "mnemonic": "ldrb",
+    "operands": "r0, [r4]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd08",
+    "bytes": "0128",
+    "mnemonic": "cmp",
+    "operands": "r0, #1"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd0a",
+    "bytes": "2ad1",
+    "mnemonic": "bne",
+    "operands": "#0x42cd62"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd0c",
+    "bytes": "6068",
+    "mnemonic": "ldr",
+    "operands": "r0, [r4, #4]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd0e",
+    "bytes": "dff8c810",
+    "mnemonic": "ldr.w",
+    "operands": "r1, [pc, #0xc8]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd12",
+    "bytes": "8842",
+    "mnemonic": "cmp",
+    "operands": "r0, r1"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd14",
+    "bytes": "08d0",
+    "mnemonic": "beq",
+    "operands": "#0x42cd28"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd16",
+    "bytes": "dff8c410",
+    "mnemonic": "ldr.w",
+    "operands": "r1, [pc, #0xc4]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd1a",
+    "bytes": "8842",
+    "mnemonic": "cmp",
+    "operands": "r0, r1"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd1c",
+    "bytes": "0dd0",
+    "mnemonic": "beq",
+    "operands": "#0x42cd3a"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd1e",
+    "bytes": "dff8b010",
+    "mnemonic": "ldr.w",
+    "operands": "r1, [pc, #0xb0]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd22",
+    "bytes": "8842",
+    "mnemonic": "cmp",
+    "operands": "r0, r1"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd24",
+    "bytes": "12d0",
+    "mnemonic": "beq",
+    "operands": "#0x42cd4c"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd26",
+    "bytes": "1ae0",
+    "mnemonic": "b",
+    "operands": "#0x42cd5e"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd28",
+    "bytes": "dff8b400",
+    "mnemonic": "ldr.w",
+    "operands": "r0, [pc, #0xb4]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd2c",
+    "bytes": "dff8b410",
+    "mnemonic": "ldr.w",
+    "operands": "r1, [pc, #0xb4]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd30",
+    "bytes": "17eb0632",
+    "mnemonic": "adds.w",
+    "operands": "r2, r7, r6, lsl #12"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd34",
+    "bytes": "c2f8c012",
+    "mnemonic": "str.w",
+    "operands": "r1, [r2, #0x2c0]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd38",
+    "bytes": "c3e7",
+    "mnemonic": "b",
+    "operands": "#0x42ccc2"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd3a",
+    "bytes": "dff8ac00",
+    "mnemonic": "ldr.w",
+    "operands": "r0, [pc, #0xac]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd3e",
+    "bytes": "dff8ac10",
+    "mnemonic": "ldr.w",
+    "operands": "r1, [pc, #0xac]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd42",
+    "bytes": "17eb0632",
+    "mnemonic": "adds.w",
+    "operands": "r2, r7, r6, lsl #12"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd46",
+    "bytes": "c2f8c012",
+    "mnemonic": "str.w",
+    "operands": "r1, [r2, #0x2c0]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd4a",
+    "bytes": "bae7",
+    "mnemonic": "b",
+    "operands": "#0x42ccc2"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd4c",
+    "bytes": "dff8a000",
+    "mnemonic": "ldr.w",
+    "operands": "r0, [pc, #0xa0]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd50",
+    "bytes": "dff8a010",
+    "mnemonic": "ldr.w",
+    "operands": "r1, [pc, #0xa0]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd54",
+    "bytes": "17eb0632",
+    "mnemonic": "adds.w",
+    "operands": "r2, r7, r6, lsl #12"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd58",
+    "bytes": "c2f8c012",
+    "mnemonic": "str.w",
+    "operands": "r1, [r2, #0x2c0]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd5c",
+    "bytes": "b1e7",
+    "mnemonic": "b",
+    "operands": "#0x42ccc2"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd5e",
+    "bytes": "0620",
+    "mnemonic": "movs",
+    "operands": "r0, #6"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd60",
+    "bytes": "24e0",
+    "mnemonic": "b",
+    "operands": "#0x42cdac"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd62",
+    "bytes": "0520",
+    "mnemonic": "movs",
+    "operands": "r0, #5"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd64",
+    "bytes": "22e0",
+    "mnemonic": "b",
+    "operands": "#0x42cdac"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd66",
+    "bytes": "0020",
+    "mnemonic": "movs",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd68",
+    "bytes": "85f8a408",
+    "mnemonic": "strb.w",
+    "operands": "r0, [r5, #0x8a4]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd6c",
+    "bytes": "2869",
+    "mnemonic": "ldr",
+    "operands": "r0, [r5, #0x10]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd6e",
+    "bytes": "0838",
+    "mnemonic": "subs",
+    "operands": "r0, #8"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd70",
+    "bytes": "8000",
+    "mnemonic": "lsls",
+    "operands": "r0, r0, #2"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd72",
+    "bytes": "6021",
+    "mnemonic": "movs",
+    "operands": "r1, #0x60"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd74",
+    "bytes": "b0fbf1f0",
+    "mnemonic": "udiv",
+    "operands": "r0, r0, r1"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd78",
+    "bytes": "c5f85808",
+    "mnemonic": "str.w",
+    "operands": "r0, [r5, #0x858]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd7c",
+    "bytes": "d5f85808",
+    "mnemonic": "ldr.w",
+    "operands": "r0, [r5, #0x858]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd80",
+    "bytes": "40f20111",
+    "mnemonic": "movw",
+    "operands": "r1, #0x101"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd84",
+    "bytes": "8842",
+    "mnemonic": "cmp",
+    "operands": "r0, r1"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd86",
+    "bytes": "03d3",
+    "mnemonic": "blo",
+    "operands": "#0x42cd90"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd88",
+    "bytes": "4ff48070",
+    "mnemonic": "mov.w",
+    "operands": "r0, #0x100"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd8c",
+    "bytes": "c5f85808",
+    "mnemonic": "str.w",
+    "operands": "r0, [r5, #0x858]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd90",
+    "bytes": "0020",
+    "mnemonic": "movs",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd92",
+    "bytes": "06e0",
+    "mnemonic": "b",
+    "operands": "#0x42cda2"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd94",
+    "bytes": "0021",
+    "mnemonic": "movs",
+    "operands": "r1, #0"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd96",
+    "bytes": "0200",
+    "mnemonic": "movs",
+    "operands": "r2, r0"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd98",
+    "bytes": "d2b2",
+    "mnemonic": "uxtb",
+    "operands": "r2, r2"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd9a",
+    "bytes": "2a44",
+    "mnemonic": "add",
+    "operands": "r2, r5"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cd9c",
+    "bytes": "82f8a018",
+    "mnemonic": "strb.w",
+    "operands": "r1, [r2, #0x8a0]"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cda0",
+    "bytes": "401c",
+    "mnemonic": "adds",
+    "operands": "r0, r0, #1"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cda2",
+    "bytes": "0100",
+    "mnemonic": "movs",
+    "operands": "r1, r0"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cda4",
+    "bytes": "c9b2",
+    "mnemonic": "uxtb",
+    "operands": "r1, r1"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cda6",
+    "bytes": "0429",
+    "mnemonic": "cmp",
+    "operands": "r1, #4"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cda8",
+    "bytes": "f4db",
+    "mnemonic": "blt",
+    "operands": "#0x42cd94"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cdaa",
+    "bytes": "4046",
+    "mnemonic": "mov",
+    "operands": "r0, r8"
+  },
+  {
+    "function": "opencfw_boot_context_configure",
+    "pc": "0x42cdac",
+    "bytes": "bde8f081",
+    "mnemonic": "pop.w",
+    "operands": "{r4, r5, r6, r7, r8, pc}"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c538",
+    "bytes": "7cb5",
+    "mnemonic": "push",
+    "operands": "{r2, r3, r4, r5, r6, lr}"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c53a",
+    "bytes": "0500",
+    "mnemonic": "movs",
+    "operands": "r5, r0"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c53c",
+    "bytes": "0024",
+    "mnemonic": "movs",
+    "operands": "r4, #0"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c53e",
+    "bytes": "0028",
+    "mnemonic": "cmp",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c540",
+    "bytes": "06d0",
+    "mnemonic": "beq",
+    "operands": "#0x42c550"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c542",
+    "bytes": "0068",
+    "mnemonic": "ldr",
+    "operands": "r0, [r0]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c544",
+    "bytes": "20f07e40",
+    "mnemonic": "bic",
+    "operands": "r0, r0, #0xfe000000"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c548",
+    "bytes": "dff86418",
+    "mnemonic": "ldr.w",
+    "operands": "r1, [pc, #0x864]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c54c",
+    "bytes": "8842",
+    "mnemonic": "cmp",
+    "operands": "r0, r1"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c54e",
+    "bytes": "01d0",
+    "mnemonic": "beq",
+    "operands": "#0x42c554"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c550",
+    "bytes": "0220",
+    "mnemonic": "movs",
+    "operands": "r0, #2"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c552",
+    "bytes": "71e0",
+    "mnemonic": "b",
+    "operands": "#0x42c638"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c554",
+    "bytes": "2868",
+    "mnemonic": "ldr",
+    "operands": "r0, [r5]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c556",
+    "bytes": "c0f34060",
+    "mnemonic": "ubfx",
+    "operands": "r0, r0, #0x19, #1"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c55a",
+    "bytes": "0028",
+    "mnemonic": "cmp",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c55c",
+    "bytes": "01d0",
+    "mnemonic": "beq",
+    "operands": "#0x42c562"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c55e",
+    "bytes": "0020",
+    "mnemonic": "movs",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c560",
+    "bytes": "6ae0",
+    "mnemonic": "b",
+    "operands": "#0x42c638"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c562",
+    "bytes": "287a",
+    "mnemonic": "ldrb",
+    "operands": "r0, [r5, #8]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c564",
+    "bytes": "0028",
+    "mnemonic": "cmp",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c566",
+    "bytes": "01d1",
+    "mnemonic": "bne",
+    "operands": "#0x42c56c"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c568",
+    "bytes": "0021",
+    "mnemonic": "movs",
+    "operands": "r1, #0"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c56a",
+    "bytes": "00e0",
+    "mnemonic": "b",
+    "operands": "#0x42c56e"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c56c",
+    "bytes": "0121",
+    "mnemonic": "movs",
+    "operands": "r1, #1"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c56e",
+    "bytes": "6868",
+    "mnemonic": "ldr",
+    "operands": "r0, [r5, #4]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c570",
+    "bytes": "fff760fd",
+    "mnemonic": "bl",
+    "operands": "#0x42c034"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c574",
+    "bytes": "0028",
+    "mnemonic": "cmp",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c576",
+    "bytes": "01d1",
+    "mnemonic": "bne",
+    "operands": "#0x42c57c"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c578",
+    "bytes": "0920",
+    "mnemonic": "movs",
+    "operands": "r0, #9"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c57a",
+    "bytes": "5de0",
+    "mnemonic": "b",
+    "operands": "#0x42c638"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c57c",
+    "bytes": "e868",
+    "mnemonic": "ldr",
+    "operands": "r0, [r5, #0xc]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c57e",
+    "bytes": "0028",
+    "mnemonic": "cmp",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c580",
+    "bytes": "2fd0",
+    "mnemonic": "beq",
+    "operands": "#0x42c5e2"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c582",
+    "bytes": "0020",
+    "mnemonic": "movs",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c584",
+    "bytes": "6862",
+    "mnemonic": "str",
+    "operands": "r0, [r5, #0x24]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c586",
+    "bytes": "0020",
+    "mnemonic": "movs",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c588",
+    "bytes": "e861",
+    "mnemonic": "str",
+    "operands": "r0, [r5, #0x1c]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c58a",
+    "bytes": "574e",
+    "mnemonic": "ldr",
+    "operands": "r6, [pc, #0x15c]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c58c",
+    "bytes": "6868",
+    "mnemonic": "ldr",
+    "operands": "r0, [r5, #4]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c58e",
+    "bytes": "16eb0030",
+    "mnemonic": "adds.w",
+    "operands": "r0, r6, r0, lsl #12"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c592",
+    "bytes": "dff82818",
+    "mnemonic": "ldr.w",
+    "operands": "r1, [pc, #0x828]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c596",
+    "bytes": "c0f83812",
+    "mnemonic": "str.w",
+    "operands": "r1, [r0, #0x238]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c59a",
+    "bytes": "0020",
+    "mnemonic": "movs",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c59c",
+    "bytes": "c5f85408",
+    "mnemonic": "str.w",
+    "operands": "r0, [r5, #0x854]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5a0",
+    "bytes": "0020",
+    "mnemonic": "movs",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5a2",
+    "bytes": "85f83c08",
+    "mnemonic": "strb.w",
+    "operands": "r0, [r5, #0x83c]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5a6",
+    "bytes": "0020",
+    "mnemonic": "movs",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5a8",
+    "bytes": "c5f83808",
+    "mnemonic": "str.w",
+    "operands": "r0, [r5, #0x838]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5ac",
+    "bytes": "0020",
+    "mnemonic": "movs",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5ae",
+    "bytes": "c5f84408",
+    "mnemonic": "str.w",
+    "operands": "r0, [r5, #0x844]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5b2",
+    "bytes": "0020",
+    "mnemonic": "movs",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5b4",
+    "bytes": "c5f84008",
+    "mnemonic": "str.w",
+    "operands": "r0, [r5, #0x840]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5b8",
+    "bytes": "0020",
+    "mnemonic": "movs",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5ba",
+    "bytes": "85f82c08",
+    "mnemonic": "strb.w",
+    "operands": "r0, [r5, #0x82c]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5be",
+    "bytes": "0020",
+    "mnemonic": "movs",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5c0",
+    "bytes": "c5f83008",
+    "mnemonic": "str.w",
+    "operands": "r0, [r5, #0x830]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5c4",
+    "bytes": "0120",
+    "mnemonic": "movs",
+    "operands": "r0, #1"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5c6",
+    "bytes": "85f82d08",
+    "mnemonic": "strb.w",
+    "operands": "r0, [r5, #0x82d]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5ca",
+    "bytes": "ea68",
+    "mnemonic": "ldr",
+    "operands": "r2, [r5, #0xc]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5cc",
+    "bytes": "2969",
+    "mnemonic": "ldr",
+    "operands": "r1, [r5, #0x10]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5ce",
+    "bytes": "2800",
+    "mnemonic": "movs",
+    "operands": "r0, r5"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5d0",
+    "bytes": "fff707ff",
+    "mnemonic": "bl",
+    "operands": "#0x42c3e2"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5d4",
+    "bytes": "0400",
+    "mnemonic": "movs",
+    "operands": "r4, r0"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5d6",
+    "bytes": "6868",
+    "mnemonic": "ldr",
+    "operands": "r0, [r5, #4]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5d8",
+    "bytes": "16eb0036",
+    "mnemonic": "adds.w",
+    "operands": "r6, r6, r0, lsl #12"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5dc",
+    "bytes": "0220",
+    "mnemonic": "movs",
+    "operands": "r0, #2"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5de",
+    "bytes": "c6f81002",
+    "mnemonic": "str.w",
+    "operands": "r0, [r6, #0x210]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5e2",
+    "bytes": "002c",
+    "mnemonic": "cmp",
+    "operands": "r4, #0"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5e4",
+    "bytes": "27d1",
+    "mnemonic": "bne",
+    "operands": "#0x42c636"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5e6",
+    "bytes": "404e",
+    "mnemonic": "ldr",
+    "operands": "r6, [pc, #0x100]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5e8",
+    "bytes": "0120",
+    "mnemonic": "movs",
+    "operands": "r0, #1"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5ea",
+    "bytes": "0090",
+    "mnemonic": "str",
+    "operands": "r0, [sp]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5ec",
+    "bytes": "0423",
+    "mnemonic": "movs",
+    "operands": "r3, #4"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5ee",
+    "bytes": "0622",
+    "mnemonic": "movs",
+    "operands": "r2, #6"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5f0",
+    "bytes": "6868",
+    "mnemonic": "ldr",
+    "operands": "r0, [r5, #4]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5f2",
+    "bytes": "16eb0030",
+    "mnemonic": "adds.w",
+    "operands": "r0, r6, r0, lsl #12"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5f6",
+    "bytes": "10f51271",
+    "mnemonic": "adds.w",
+    "operands": "r1, r0, #0x248"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5fa",
+    "bytes": "4ff47a70",
+    "mnemonic": "mov.w",
+    "operands": "r0, #0x3e8"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c5fe",
+    "bytes": "f0f722fe",
+    "mnemonic": "bl",
+    "operands": "#0x41d246"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c602",
+    "bytes": "0400",
+    "mnemonic": "movs",
+    "operands": "r4, r0"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c604",
+    "bytes": "002c",
+    "mnemonic": "cmp",
+    "operands": "r4, #0"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c606",
+    "bytes": "04d1",
+    "mnemonic": "bne",
+    "operands": "#0x42c612"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c608",
+    "bytes": "2868",
+    "mnemonic": "ldr",
+    "operands": "r0, [r5]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c60a",
+    "bytes": "50f00070",
+    "mnemonic": "orrs",
+    "operands": "r0, r0, #0x2000000"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c60e",
+    "bytes": "2860",
+    "mnemonic": "str",
+    "operands": "r0, [r5]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c610",
+    "bytes": "11e0",
+    "mnemonic": "b",
+    "operands": "#0x42c636"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c612",
+    "bytes": "6868",
+    "mnemonic": "ldr",
+    "operands": "r0, [r5, #4]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c614",
+    "bytes": "16eb0030",
+    "mnemonic": "adds.w",
+    "operands": "r0, r6, r0, lsl #12"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c618",
+    "bytes": "10f58e70",
+    "mnemonic": "adds.w",
+    "operands": "r0, r0, #0x11c"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c61c",
+    "bytes": "0168",
+    "mnemonic": "ldr",
+    "operands": "r1, [r0]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c61e",
+    "bytes": "4908",
+    "mnemonic": "lsrs",
+    "operands": "r1, r1, #1"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c620",
+    "bytes": "4900",
+    "mnemonic": "lsls",
+    "operands": "r1, r1, #1"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c622",
+    "bytes": "0160",
+    "mnemonic": "str",
+    "operands": "r1, [r0]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c624",
+    "bytes": "6868",
+    "mnemonic": "ldr",
+    "operands": "r0, [r5, #4]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c626",
+    "bytes": "16eb0036",
+    "mnemonic": "adds.w",
+    "operands": "r6, r6, r0, lsl #12"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c62a",
+    "bytes": "16f58e70",
+    "mnemonic": "adds.w",
+    "operands": "r0, r6, #0x11c"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c62e",
+    "bytes": "0168",
+    "mnemonic": "ldr",
+    "operands": "r1, [r0]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c630",
+    "bytes": "31f01001",
+    "mnemonic": "bics",
+    "operands": "r1, r1, #0x10"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c634",
+    "bytes": "0160",
+    "mnemonic": "str",
+    "operands": "r1, [r0]"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c636",
+    "bytes": "2000",
+    "mnemonic": "movs",
+    "operands": "r0, r4"
+  },
+  {
+    "function": "opencfw_boot_context_enable",
+    "pc": "0x42c638",
+    "bytes": "76bd",
+    "mnemonic": "pop",
+    "operands": "{r1, r2, r4, r5, r6, pc}"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x43048e",
+    "bytes": "f8b5",
+    "mnemonic": "push",
+    "operands": "{r3, r4, r5, r6, r7, lr}"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x430490",
+    "bytes": "0500",
+    "mnemonic": "movs",
+    "operands": "r5, r0"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x430492",
+    "bytes": "0024",
+    "mnemonic": "movs",
+    "operands": "r4, #0"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x430494",
+    "bytes": "2800",
+    "mnemonic": "movs",
+    "operands": "r0, r5"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x430496",
+    "bytes": "c0b2",
+    "mnemonic": "uxtb",
+    "operands": "r0, r0"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x430498",
+    "bytes": "0428",
+    "mnemonic": "cmp",
+    "operands": "r0, #4"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x43049a",
+    "bytes": "15d1",
+    "mnemonic": "bne",
+    "operands": "#0x4304c8"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x43049c",
+    "bytes": "dff8a061",
+    "mnemonic": "ldr.w",
+    "operands": "r6, [pc, #0x1a0]"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304a0",
+    "bytes": "dff8a071",
+    "mnemonic": "ldr.w",
+    "operands": "r7, [pc, #0x1a0]"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304a4",
+    "bytes": "3968",
+    "mnemonic": "ldr",
+    "operands": "r1, [r7]"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304a6",
+    "bytes": "2800",
+    "mnemonic": "movs",
+    "operands": "r0, r5"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304a8",
+    "bytes": "c0b2",
+    "mnemonic": "uxtb",
+    "operands": "r0, r0"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304aa",
+    "bytes": "0001",
+    "mnemonic": "lsls",
+    "operands": "r0, r0, #4"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304ac",
+    "bytes": "3044",
+    "mnemonic": "add",
+    "operands": "r0, r6"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304ae",
+    "bytes": "8068",
+    "mnemonic": "ldr",
+    "operands": "r0, [r0, #8]"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304b0",
+    "bytes": "0068",
+    "mnemonic": "ldr",
+    "operands": "r0, [r0]"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304b2",
+    "bytes": "edf73bfa",
+    "mnemonic": "bl",
+    "operands": "#0x41d92c"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304b6",
+    "bytes": "3968",
+    "mnemonic": "ldr",
+    "operands": "r1, [r7]"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304b8",
+    "bytes": "2800",
+    "mnemonic": "movs",
+    "operands": "r0, r5"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304ba",
+    "bytes": "c0b2",
+    "mnemonic": "uxtb",
+    "operands": "r0, r0"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304bc",
+    "bytes": "0001",
+    "mnemonic": "lsls",
+    "operands": "r0, r0, #4"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304be",
+    "bytes": "3044",
+    "mnemonic": "add",
+    "operands": "r0, r6"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304c0",
+    "bytes": "8068",
+    "mnemonic": "ldr",
+    "operands": "r0, [r0, #8]"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304c2",
+    "bytes": "4068",
+    "mnemonic": "ldr",
+    "operands": "r0, [r0, #4]"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304c4",
+    "bytes": "edf732fa",
+    "mnemonic": "bl",
+    "operands": "#0x41d92c"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304c8",
+    "bytes": "0026",
+    "mnemonic": "movs",
+    "operands": "r6, #0"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304ca",
+    "bytes": "03e0",
+    "mnemonic": "b",
+    "operands": "#0x4304d4"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304cc",
+    "bytes": "0a20",
+    "mnemonic": "movs",
+    "operands": "r0, #0xa"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304ce",
+    "bytes": "eff783fa",
+    "mnemonic": "bl",
+    "operands": "#0x41f9d8"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304d2",
+    "bytes": "761c",
+    "mnemonic": "adds",
+    "operands": "r6, r6, #1"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304d4",
+    "bytes": "b6f57a7f",
+    "mnemonic": "cmp.w",
+    "operands": "r6, #0x3e8"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304d8",
+    "bytes": "0dda",
+    "mnemonic": "bge",
+    "operands": "#0x4304f6"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304da",
+    "bytes": "0122",
+    "mnemonic": "movs",
+    "operands": "r2, #1"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304dc",
+    "bytes": "0221",
+    "mnemonic": "movs",
+    "operands": "r1, #2"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304de",
+    "bytes": "dff86001",
+    "mnemonic": "ldr.w",
+    "operands": "r0, [pc, #0x160]"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304e2",
+    "bytes": "2b00",
+    "mnemonic": "movs",
+    "operands": "r3, r5"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304e4",
+    "bytes": "dbb2",
+    "mnemonic": "uxtb",
+    "operands": "r3, r3"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304e6",
+    "bytes": "1b01",
+    "mnemonic": "lsls",
+    "operands": "r3, r3, #4"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304e8",
+    "bytes": "1844",
+    "mnemonic": "add",
+    "operands": "r0, r3"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304ea",
+    "bytes": "4068",
+    "mnemonic": "ldr",
+    "operands": "r0, [r0, #4]"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304ec",
+    "bytes": "fcf74cfa",
+    "mnemonic": "bl",
+    "operands": "#0x42c988"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304f0",
+    "bytes": "0400",
+    "mnemonic": "movs",
+    "operands": "r4, r0"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304f2",
+    "bytes": "002c",
+    "mnemonic": "cmp",
+    "operands": "r4, #0"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304f4",
+    "bytes": "ead1",
+    "mnemonic": "bne",
+    "operands": "#0x4304cc"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304f6",
+    "bytes": "002c",
+    "mnemonic": "cmp",
+    "operands": "r4, #0"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304f8",
+    "bytes": "01d0",
+    "mnemonic": "beq",
+    "operands": "#0x4304fe"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304fa",
+    "bytes": "0420",
+    "mnemonic": "movs",
+    "operands": "r0, #4"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304fc",
+    "bytes": "00e0",
+    "mnemonic": "b",
+    "operands": "#0x430500"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x4304fe",
+    "bytes": "0020",
+    "mnemonic": "movs",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_context_retry",
+    "pc": "0x430500",
+    "bytes": "f2bd",
+    "mnemonic": "pop",
+    "operands": "{r1, r4, r5, r6, r7, pc}"
+  },
+  {
+    "function": "opencfw_boot_iom_select_interface",
+    "pc": "0x42c034",
+    "bytes": "dff8b026",
+    "mnemonic": "ldr.w",
+    "operands": "r2, [pc, #0x6b0]"
+  },
+  {
+    "function": "opencfw_boot_iom_select_interface",
+    "pc": "0x42c038",
+    "bytes": "12eb0033",
+    "mnemonic": "adds.w",
+    "operands": "r3, r2, r0, lsl #12"
+  },
+  {
+    "function": "opencfw_boot_iom_select_interface",
+    "pc": "0x42c03c",
+    "bytes": "d3f81c31",
+    "mnemonic": "ldr.w",
+    "operands": "r3, [r3, #0x11c]"
+  },
+  {
+    "function": "opencfw_boot_iom_select_interface",
+    "pc": "0x42c040",
+    "bytes": "c3f34203",
+    "mnemonic": "ubfx",
+    "operands": "r3, r3, #1, #3"
+  },
+  {
+    "function": "opencfw_boot_iom_select_interface",
+    "pc": "0x42c044",
+    "bytes": "8b42",
+    "mnemonic": "cmp",
+    "operands": "r3, r1"
+  },
+  {
+    "function": "opencfw_boot_iom_select_interface",
+    "pc": "0x42c046",
+    "bytes": "0ed0",
+    "mnemonic": "beq",
+    "operands": "#0x42c066"
+  },
+  {
+    "function": "opencfw_boot_iom_select_interface",
+    "pc": "0x42c048",
+    "bytes": "12eb0033",
+    "mnemonic": "adds.w",
+    "operands": "r3, r2, r0, lsl #12"
+  },
+  {
+    "function": "opencfw_boot_iom_select_interface",
+    "pc": "0x42c04c",
+    "bytes": "d3f81c31",
+    "mnemonic": "ldr.w",
+    "operands": "r3, [r3, #0x11c]"
+  },
+  {
+    "function": "opencfw_boot_iom_select_interface",
+    "pc": "0x42c050",
+    "bytes": "c3f34213",
+    "mnemonic": "ubfx",
+    "operands": "r3, r3, #5, #3"
+  },
+  {
+    "function": "opencfw_boot_iom_select_interface",
+    "pc": "0x42c054",
+    "bytes": "8b42",
+    "mnemonic": "cmp",
+    "operands": "r3, r1"
+  },
+  {
+    "function": "opencfw_boot_iom_select_interface",
+    "pc": "0x42c056",
+    "bytes": "0cd1",
+    "mnemonic": "bne",
+    "operands": "#0x42c072"
+  },
+  {
+    "function": "opencfw_boot_iom_select_interface",
+    "pc": "0x42c058",
+    "bytes": "1021",
+    "mnemonic": "movs",
+    "operands": "r1, #0x10"
+  },
+  {
+    "function": "opencfw_boot_iom_select_interface",
+    "pc": "0x42c05a",
+    "bytes": "12eb0032",
+    "mnemonic": "adds.w",
+    "operands": "r2, r2, r0, lsl #12"
+  },
+  {
+    "function": "opencfw_boot_iom_select_interface",
+    "pc": "0x42c05e",
+    "bytes": "c2f81c11",
+    "mnemonic": "str.w",
+    "operands": "r1, [r2, #0x11c]"
+  },
+  {
+    "function": "opencfw_boot_iom_select_interface",
+    "pc": "0x42c062",
+    "bytes": "0120",
+    "mnemonic": "movs",
+    "operands": "r0, #1"
+  },
+  {
+    "function": "opencfw_boot_iom_select_interface",
+    "pc": "0x42c064",
+    "bytes": "7047",
+    "mnemonic": "bx",
+    "operands": "lr"
+  },
+  {
+    "function": "opencfw_boot_iom_select_interface",
+    "pc": "0x42c066",
+    "bytes": "0121",
+    "mnemonic": "movs",
+    "operands": "r1, #1"
+  },
+  {
+    "function": "opencfw_boot_iom_select_interface",
+    "pc": "0x42c068",
+    "bytes": "12eb0032",
+    "mnemonic": "adds.w",
+    "operands": "r2, r2, r0, lsl #12"
+  },
+  {
+    "function": "opencfw_boot_iom_select_interface",
+    "pc": "0x42c06c",
+    "bytes": "c2f81c11",
+    "mnemonic": "str.w",
+    "operands": "r1, [r2, #0x11c]"
+  },
+  {
+    "function": "opencfw_boot_iom_select_interface",
+    "pc": "0x42c070",
+    "bytes": "f7e7",
+    "mnemonic": "b",
+    "operands": "#0x42c062"
+  },
+  {
+    "function": "opencfw_boot_iom_select_interface",
+    "pc": "0x42c072",
+    "bytes": "0020",
+    "mnemonic": "movs",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_iom_select_interface",
+    "pc": "0x42c074",
+    "bytes": "f6e7",
+    "mnemonic": "b",
+    "operands": "#0x42c064"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c26a",
+    "bytes": "2de9fc41",
+    "mnemonic": "push.w",
+    "operands": "{r2, r3, r4, r5, r6, r7, r8, lr}"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c26e",
+    "bytes": "0028",
+    "mnemonic": "cmp",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c270",
+    "bytes": "02d1",
+    "mnemonic": "bne",
+    "operands": "#0x42c278"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c272",
+    "bytes": "0020",
+    "mnemonic": "movs",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c274",
+    "bytes": "0021",
+    "mnemonic": "movs",
+    "operands": "r1, #0"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c276",
+    "bytes": "b2e0",
+    "mnemonic": "b",
+    "operands": "#0x42c3de"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c278",
+    "bytes": "dff80467",
+    "mnemonic": "ldr.w",
+    "operands": "r6, [pc, #0x704]"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c27c",
+    "bytes": "b6fbf0f2",
+    "mnemonic": "udiv",
+    "operands": "r2, r6, r0"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c280",
+    "bytes": "00fb1262",
+    "mnemonic": "mls",
+    "operands": "r2, r0, r2, r6"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c284",
+    "bytes": "002a",
+    "mnemonic": "cmp",
+    "operands": "r2, #0"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c286",
+    "bytes": "01d0",
+    "mnemonic": "beq",
+    "operands": "#0x42c28c"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c288",
+    "bytes": "0123",
+    "mnemonic": "movs",
+    "operands": "r3, #1"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c28a",
+    "bytes": "00e0",
+    "mnemonic": "b",
+    "operands": "#0x42c28e"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c28c",
+    "bytes": "0023",
+    "mnemonic": "movs",
+    "operands": "r3, #0"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c28e",
+    "bytes": "b6fbf0f2",
+    "mnemonic": "udiv",
+    "operands": "r2, r6, r0"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c292",
+    "bytes": "9b18",
+    "mnemonic": "adds",
+    "operands": "r3, r3, r2"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c294",
+    "bytes": "5a42",
+    "mnemonic": "rsbs",
+    "operands": "r2, r3, #0"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c296",
+    "bytes": "1a40",
+    "mnemonic": "ands",
+    "operands": "r2, r3"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c298",
+    "bytes": "b2fa82f7",
+    "mnemonic": "clz",
+    "operands": "r7, r2"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c29c",
+    "bytes": "d7f11f07",
+    "mnemonic": "rsbs.w",
+    "operands": "r7, r7, #0x1f"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2a0",
+    "bytes": "072f",
+    "mnemonic": "cmp",
+    "operands": "r7, #7"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2a2",
+    "bytes": "00db",
+    "mnemonic": "blt",
+    "operands": "#0x42c2a6"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2a4",
+    "bytes": "0627",
+    "mnemonic": "movs",
+    "operands": "r7, #6"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2a6",
+    "bytes": "b0eb963f",
+    "mnemonic": "cmp.w",
+    "operands": "r0, r6, lsr #14"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2aa",
+    "bytes": "09d3",
+    "mnemonic": "blo",
+    "operands": "#0x42c2c0"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2ac",
+    "bytes": "0322",
+    "mnemonic": "movs",
+    "operands": "r2, #3"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2ae",
+    "bytes": "b6fbf2f2",
+    "mnemonic": "udiv",
+    "operands": "r2, r6, r2"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2b2",
+    "bytes": "9042",
+    "mnemonic": "cmp",
+    "operands": "r0, r2"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2b4",
+    "bytes": "06d3",
+    "mnemonic": "blo",
+    "operands": "#0x42c2c4"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2b6",
+    "bytes": "3200",
+    "mnemonic": "movs",
+    "operands": "r2, r6"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2b8",
+    "bytes": "5208",
+    "mnemonic": "lsrs",
+    "operands": "r2, r2, #1"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2ba",
+    "bytes": "521e",
+    "mnemonic": "subs",
+    "operands": "r2, r2, #1"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2bc",
+    "bytes": "8242",
+    "mnemonic": "cmp",
+    "operands": "r2, r0"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2be",
+    "bytes": "01d3",
+    "mnemonic": "blo",
+    "operands": "#0x42c2c4"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2c0",
+    "bytes": "0125",
+    "mnemonic": "movs",
+    "operands": "r5, #1"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2c2",
+    "bytes": "00e0",
+    "mnemonic": "b",
+    "operands": "#0x42c2c6"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2c4",
+    "bytes": "0025",
+    "mnemonic": "movs",
+    "operands": "r5, #0"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2c6",
+    "bytes": "0124",
+    "mnemonic": "movs",
+    "operands": "r4, #1"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2c8",
+    "bytes": "14fa07fc",
+    "mnemonic": "lsls.w",
+    "operands": "ip, r4, r7"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2cc",
+    "bytes": "6a00",
+    "mnemonic": "lsls",
+    "operands": "r2, r5, #1"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2ce",
+    "bytes": "521c",
+    "mnemonic": "adds",
+    "operands": "r2, r2, #1"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2d0",
+    "bytes": "02fb0cf2",
+    "mnemonic": "mul",
+    "operands": "r2, r2, ip"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2d4",
+    "bytes": "b3fbf2fc",
+    "mnemonic": "udiv",
+    "operands": "ip, r3, r2"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2d8",
+    "bytes": "9e46",
+    "mnemonic": "mov",
+    "operands": "lr, r3"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2da",
+    "bytes": "befbf2f8",
+    "mnemonic": "udiv",
+    "operands": "r8, lr, r2"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2de",
+    "bytes": "02fb18e2",
+    "mnemonic": "mls",
+    "operands": "r2, r2, r8, lr"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2e2",
+    "bytes": "002a",
+    "mnemonic": "cmp",
+    "operands": "r2, #0"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2e4",
+    "bytes": "02d0",
+    "mnemonic": "beq",
+    "operands": "#0x42c2ec"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2e6",
+    "bytes": "1cf1010c",
+    "mnemonic": "adds.w",
+    "operands": "ip, ip, #1"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2ea",
+    "bytes": "ffe7",
+    "mnemonic": "b",
+    "operands": "#0x42c2ec"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2ec",
+    "bytes": "bcfa8cfe",
+    "mnemonic": "clz",
+    "operands": "lr, ip"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2f0",
+    "bytes": "def11f0e",
+    "mnemonic": "rsbs.w",
+    "operands": "lr, lr, #0x1f"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2f4",
+    "bytes": "bef1080f",
+    "mnemonic": "cmp.w",
+    "operands": "lr, #8"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2f8",
+    "bytes": "03d3",
+    "mnemonic": "blo",
+    "operands": "#0x42c302"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2fa",
+    "bytes": "17eb0e07",
+    "mnemonic": "adds.w",
+    "operands": "r7, r7, lr"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c2fe",
+    "bytes": "ff1f",
+    "mnemonic": "subs",
+    "operands": "r7, r7, #7"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c300",
+    "bytes": "ffe7",
+    "mnemonic": "b",
+    "operands": "#0x42c302"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c302",
+    "bytes": "7f1c",
+    "mnemonic": "adds",
+    "operands": "r7, r7, #1"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c304",
+    "bytes": "082f",
+    "mnemonic": "cmp",
+    "operands": "r7, #8"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c306",
+    "bytes": "02d3",
+    "mnemonic": "blo",
+    "operands": "#0x42c30e"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c308",
+    "bytes": "0020",
+    "mnemonic": "movs",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c30a",
+    "bytes": "0021",
+    "mnemonic": "movs",
+    "operands": "r1, #0"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c30c",
+    "bytes": "67e0",
+    "mnemonic": "b",
+    "operands": "#0x42c3de"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c30e",
+    "bytes": "bef1080f",
+    "mnemonic": "cmp.w",
+    "operands": "lr, #8"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c312",
+    "bytes": "11d3",
+    "mnemonic": "blo",
+    "operands": "#0x42c338"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c314",
+    "bytes": "6246",
+    "mnemonic": "mov",
+    "operands": "r2, ip"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c316",
+    "bytes": "1ef1f908",
+    "mnemonic": "adds.w",
+    "operands": "r8, lr, #0xf9"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c31a",
+    "bytes": "3cfa08fc",
+    "mnemonic": "lsrs.w",
+    "operands": "ip, ip, r8"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c31e",
+    "bytes": "bef1070e",
+    "mnemonic": "subs.w",
+    "operands": "lr, lr, #7"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c322",
+    "bytes": "14fa0efe",
+    "mnemonic": "lsls.w",
+    "operands": "lr, r4, lr"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c326",
+    "bytes": "b2fbfef8",
+    "mnemonic": "udiv",
+    "operands": "r8, r2, lr"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c32a",
+    "bytes": "0efb1822",
+    "mnemonic": "mls",
+    "operands": "r2, lr, r8, r2"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c32e",
+    "bytes": "002a",
+    "mnemonic": "cmp",
+    "operands": "r2, #0"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c330",
+    "bytes": "02d0",
+    "mnemonic": "beq",
+    "operands": "#0x42c338"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c332",
+    "bytes": "1cf1010c",
+    "mnemonic": "adds.w",
+    "operands": "ip, ip, #1"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c336",
+    "bytes": "ffe7",
+    "mnemonic": "b",
+    "operands": "#0x42c338"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c338",
+    "bytes": "b0eb960f",
+    "mnemonic": "cmp.w",
+    "operands": "r0, r6, lsr #2"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c33c",
+    "bytes": "04d2",
+    "mnemonic": "bhs",
+    "operands": "#0x42c348"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c33e",
+    "bytes": "17f1ff00",
+    "mnemonic": "adds.w",
+    "operands": "r0, r7, #0xff"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c342",
+    "bytes": "8440",
+    "mnemonic": "lsls",
+    "operands": "r4, r0"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c344",
+    "bytes": "9c42",
+    "mnemonic": "cmp",
+    "operands": "r4, r3"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c346",
+    "bytes": "01d1",
+    "mnemonic": "bne",
+    "operands": "#0x42c34c"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c348",
+    "bytes": "0023",
+    "mnemonic": "movs",
+    "operands": "r3, #0"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c34a",
+    "bytes": "00e0",
+    "mnemonic": "b",
+    "operands": "#0x42c34e"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c34c",
+    "bytes": "0123",
+    "mnemonic": "movs",
+    "operands": "r3, #1"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c34e",
+    "bytes": "0129",
+    "mnemonic": "cmp",
+    "operands": "r1, #1"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c350",
+    "bytes": "03d1",
+    "mnemonic": "bne",
+    "operands": "#0x42c35a"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c352",
+    "bytes": "bcf10204",
+    "mnemonic": "subs.w",
+    "operands": "r4, ip, #2"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c356",
+    "bytes": "6408",
+    "mnemonic": "lsrs",
+    "operands": "r4, r4, #1"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c358",
+    "bytes": "02e0",
+    "mnemonic": "b",
+    "operands": "#0x42c360"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c35a",
+    "bytes": "bcf10104",
+    "mnemonic": "subs.w",
+    "operands": "r4, ip, #1"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c35e",
+    "bytes": "6408",
+    "mnemonic": "lsrs",
+    "operands": "r4, r4, #1"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c360",
+    "bytes": "3802",
+    "mnemonic": "lsls",
+    "operands": "r0, r7, #8"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c362",
+    "bytes": "10f47060",
+    "mnemonic": "ands",
+    "operands": "r0, r0, #0xf00"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c366",
+    "bytes": "2903",
+    "mnemonic": "lsls",
+    "operands": "r1, r5, #0xc"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c368",
+    "bytes": "11f48051",
+    "mnemonic": "ands",
+    "operands": "r1, r1, #0x1000"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c36c",
+    "bytes": "0843",
+    "mnemonic": "orrs",
+    "operands": "r0, r1"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c36e",
+    "bytes": "5903",
+    "mnemonic": "lsls",
+    "operands": "r1, r3, #0xd"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c370",
+    "bytes": "11f40051",
+    "mnemonic": "ands",
+    "operands": "r1, r1, #0x2000"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c374",
+    "bytes": "0843",
+    "mnemonic": "orrs",
+    "operands": "r0, r1"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c376",
+    "bytes": "2404",
+    "mnemonic": "lsls",
+    "operands": "r4, r4, #0x10"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c378",
+    "bytes": "14f47f04",
+    "mnemonic": "ands",
+    "operands": "r4, r4, #0xff0000"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c37c",
+    "bytes": "0443",
+    "mnemonic": "orrs",
+    "operands": "r4, r0"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c37e",
+    "bytes": "bcf10100",
+    "mnemonic": "subs.w",
+    "operands": "r0, ip, #1"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c382",
+    "bytes": "54ea0064",
+    "mnemonic": "orrs.w",
+    "operands": "r4, r4, r0, lsl #24"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c386",
+    "bytes": "bcf1010c",
+    "mnemonic": "subs.w",
+    "operands": "ip, ip, #1"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c38a",
+    "bytes": "cdf800c0",
+    "mnemonic": "str.w",
+    "operands": "ip, [sp]"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c38e",
+    "bytes": "2a00",
+    "mnemonic": "movs",
+    "operands": "r2, r5"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c390",
+    "bytes": "3900",
+    "mnemonic": "movs",
+    "operands": "r1, r7"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c392",
+    "bytes": "3000",
+    "mnemonic": "movs",
+    "operands": "r0, r6"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c394",
+    "bytes": "fff745ff",
+    "mnemonic": "bl",
+    "operands": "#0x42c222"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c398",
+    "bytes": "0500",
+    "mnemonic": "movs",
+    "operands": "r5, r0"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c39a",
+    "bytes": "dff8e805",
+    "mnemonic": "ldr.w",
+    "operands": "r0, [pc, #0x5e8]"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c39e",
+    "bytes": "b5fbf0f1",
+    "mnemonic": "udiv",
+    "operands": "r1, r5, r0"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c3a2",
+    "bytes": "00fb1150",
+    "mnemonic": "mls",
+    "operands": "r0, r0, r1, r5"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c3a6",
+    "bytes": "0028",
+    "mnemonic": "cmp",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c3a8",
+    "bytes": "17d1",
+    "mnemonic": "bne",
+    "operands": "#0x42c3da"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c3aa",
+    "bytes": "dff8d805",
+    "mnemonic": "ldr.w",
+    "operands": "r0, [pc, #0x5d8]"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c3ae",
+    "bytes": "b5fbf0f0",
+    "mnemonic": "udiv",
+    "operands": "r0, r5, r0"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c3b2",
+    "bytes": "fff750ff",
+    "mnemonic": "bl",
+    "operands": "#0x42c256"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c3b6",
+    "bytes": "0028",
+    "mnemonic": "cmp",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c3b8",
+    "bytes": "0fd0",
+    "mnemonic": "beq",
+    "operands": "#0x42c3da"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c3ba",
+    "bytes": "0020",
+    "mnemonic": "movs",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c3bc",
+    "bytes": "0300",
+    "mnemonic": "movs",
+    "operands": "r3, r0"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c3be",
+    "bytes": "0100",
+    "mnemonic": "movs",
+    "operands": "r1, r0"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c3c0",
+    "bytes": "0122",
+    "mnemonic": "movs",
+    "operands": "r2, #1"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c3c2",
+    "bytes": "0090",
+    "mnemonic": "str",
+    "operands": "r0, [sp]"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c3c4",
+    "bytes": "3900",
+    "mnemonic": "movs",
+    "operands": "r1, r7"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c3c6",
+    "bytes": "3000",
+    "mnemonic": "movs",
+    "operands": "r0, r6"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c3c8",
+    "bytes": "fff72bff",
+    "mnemonic": "bl",
+    "operands": "#0x42c222"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c3cc",
+    "bytes": "0500",
+    "mnemonic": "movs",
+    "operands": "r5, r0"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c3ce",
+    "bytes": "3f02",
+    "mnemonic": "lsls",
+    "operands": "r7, r7, #8"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c3d0",
+    "bytes": "17f47067",
+    "mnemonic": "ands",
+    "operands": "r7, r7, #0xf00"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c3d4",
+    "bytes": "57f48057",
+    "mnemonic": "orrs",
+    "operands": "r7, r7, #0x1000"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c3d8",
+    "bytes": "3c00",
+    "mnemonic": "movs",
+    "operands": "r4, r7"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c3da",
+    "bytes": "2900",
+    "mnemonic": "movs",
+    "operands": "r1, r5"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c3dc",
+    "bytes": "2000",
+    "mnemonic": "movs",
+    "operands": "r0, r4"
+  },
+  {
+    "function": "opencfw_boot_iom_clock_config",
+    "pc": "0x42c3de",
+    "bytes": "bde8fc81",
+    "mnemonic": "pop.w",
+    "operands": "{r2, r3, r4, r5, r6, r7, r8, pc}"
+  },
+  {
+    "function": "opencfw_boot_iom_frequency",
+    "pc": "0x42c222",
+    "bytes": "70b4",
+    "mnemonic": "push",
+    "operands": "{r4, r5, r6}"
+  },
+  {
+    "function": "opencfw_boot_iom_frequency",
+    "pc": "0x42c224",
+    "bytes": "0400",
+    "mnemonic": "movs",
+    "operands": "r4, r0"
+  },
+  {
+    "function": "opencfw_boot_iom_frequency",
+    "pc": "0x42c226",
+    "bytes": "039d",
+    "mnemonic": "ldr",
+    "operands": "r5, [sp, #0xc]"
+  },
+  {
+    "function": "opencfw_boot_iom_frequency",
+    "pc": "0x42c228",
+    "bytes": "0126",
+    "mnemonic": "movs",
+    "operands": "r6, #1"
+  },
+  {
+    "function": "opencfw_boot_iom_frequency",
+    "pc": "0x42c22a",
+    "bytes": "481e",
+    "mnemonic": "subs",
+    "operands": "r0, r1, #1"
+  },
+  {
+    "function": "opencfw_boot_iom_frequency",
+    "pc": "0x42c22c",
+    "bytes": "8640",
+    "mnemonic": "lsls",
+    "operands": "r6, r0"
+  },
+  {
+    "function": "opencfw_boot_iom_frequency",
+    "pc": "0x42c22e",
+    "bytes": "5200",
+    "mnemonic": "lsls",
+    "operands": "r2, r2, #1"
+  },
+  {
+    "function": "opencfw_boot_iom_frequency",
+    "pc": "0x42c230",
+    "bytes": "521c",
+    "mnemonic": "adds",
+    "operands": "r2, r2, #1"
+  },
+  {
+    "function": "opencfw_boot_iom_frequency",
+    "pc": "0x42c232",
+    "bytes": "02fb06f2",
+    "mnemonic": "mul",
+    "operands": "r2, r2, r6"
+  },
+  {
+    "function": "opencfw_boot_iom_frequency",
+    "pc": "0x42c236",
+    "bytes": "6b43",
+    "mnemonic": "muls",
+    "operands": "r3, r5, r3"
+  },
+  {
+    "function": "opencfw_boot_iom_frequency",
+    "pc": "0x42c238",
+    "bytes": "5b1c",
+    "mnemonic": "adds",
+    "operands": "r3, r3, #1"
+  },
+  {
+    "function": "opencfw_boot_iom_frequency",
+    "pc": "0x42c23a",
+    "bytes": "5a43",
+    "mnemonic": "muls",
+    "operands": "r2, r3, r2"
+  },
+  {
+    "function": "opencfw_boot_iom_frequency",
+    "pc": "0x42c23c",
+    "bytes": "b4fbf2f0",
+    "mnemonic": "udiv",
+    "operands": "r0, r4, r2"
+  },
+  {
+    "function": "opencfw_boot_iom_frequency",
+    "pc": "0x42c240",
+    "bytes": "b4fbf2f1",
+    "mnemonic": "udiv",
+    "operands": "r1, r4, r2"
+  },
+  {
+    "function": "opencfw_boot_iom_frequency",
+    "pc": "0x42c244",
+    "bytes": "02fb1144",
+    "mnemonic": "mls",
+    "operands": "r4, r2, r1, r4"
+  },
+  {
+    "function": "opencfw_boot_iom_frequency",
+    "pc": "0x42c248",
+    "bytes": "5208",
+    "mnemonic": "lsrs",
+    "operands": "r2, r2, #1"
+  },
+  {
+    "function": "opencfw_boot_iom_frequency",
+    "pc": "0x42c24a",
+    "bytes": "a242",
+    "mnemonic": "cmp",
+    "operands": "r2, r4"
+  },
+  {
+    "function": "opencfw_boot_iom_frequency",
+    "pc": "0x42c24c",
+    "bytes": "01d2",
+    "mnemonic": "bhs",
+    "operands": "#0x42c252"
+  },
+  {
+    "function": "opencfw_boot_iom_frequency",
+    "pc": "0x42c24e",
+    "bytes": "401c",
+    "mnemonic": "adds",
+    "operands": "r0, r0, #1"
+  },
+  {
+    "function": "opencfw_boot_iom_frequency",
+    "pc": "0x42c250",
+    "bytes": "ffe7",
+    "mnemonic": "b",
+    "operands": "#0x42c252"
+  },
+  {
+    "function": "opencfw_boot_iom_frequency",
+    "pc": "0x42c252",
+    "bytes": "70bc",
+    "mnemonic": "pop",
+    "operands": "{r4, r5, r6}"
+  },
+  {
+    "function": "opencfw_boot_iom_frequency",
+    "pc": "0x42c254",
+    "bytes": "7047",
+    "mnemonic": "bx",
+    "operands": "lr"
+  },
+  {
+    "function": "opencfw_boot_iom_onebit",
+    "pc": "0x42c256",
+    "bytes": "0028",
+    "mnemonic": "cmp",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_iom_onebit",
+    "pc": "0x42c258",
+    "bytes": "04d0",
+    "mnemonic": "beq",
+    "operands": "#0x42c264"
+  },
+  {
+    "function": "opencfw_boot_iom_onebit",
+    "pc": "0x42c25a",
+    "bytes": "411e",
+    "mnemonic": "subs",
+    "operands": "r1, r0, #1"
+  },
+  {
+    "function": "opencfw_boot_iom_onebit",
+    "pc": "0x42c25c",
+    "bytes": "0842",
+    "mnemonic": "tst",
+    "operands": "r0, r1"
+  },
+  {
+    "function": "opencfw_boot_iom_onebit",
+    "pc": "0x42c25e",
+    "bytes": "01d1",
+    "mnemonic": "bne",
+    "operands": "#0x42c264"
+  },
+  {
+    "function": "opencfw_boot_iom_onebit",
+    "pc": "0x42c260",
+    "bytes": "0120",
+    "mnemonic": "movs",
+    "operands": "r0, #1"
+  },
+  {
+    "function": "opencfw_boot_iom_onebit",
+    "pc": "0x42c262",
+    "bytes": "00e0",
+    "mnemonic": "b",
+    "operands": "#0x42c266"
+  },
+  {
+    "function": "opencfw_boot_iom_onebit",
+    "pc": "0x42c264",
+    "bytes": "0020",
+    "mnemonic": "movs",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_iom_onebit",
+    "pc": "0x42c266",
+    "bytes": "c0b2",
+    "mnemonic": "uxtb",
+    "operands": "r0, r0"
+  },
+  {
+    "function": "opencfw_boot_iom_onebit",
+    "pc": "0x42c268",
+    "bytes": "7047",
+    "mnemonic": "bx",
+    "operands": "lr"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_initialize",
+    "pc": "0x42c3e2",
+    "bytes": "1fb5",
+    "mnemonic": "push",
+    "operands": "{r0, r1, r2, r3, r4, lr}"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_initialize",
+    "pc": "0x42c3e4",
+    "bytes": "0400",
+    "mnemonic": "movs",
+    "operands": "r4, r0"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_initialize",
+    "pc": "0x42c3e6",
+    "bytes": "6068",
+    "mnemonic": "ldr",
+    "operands": "r0, [r4, #4]"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_initialize",
+    "pc": "0x42c3e8",
+    "bytes": "0023",
+    "mnemonic": "movs",
+    "operands": "r3, #0"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_initialize",
+    "pc": "0x42c3ea",
+    "bytes": "0023",
+    "mnemonic": "movs",
+    "operands": "r3, #0"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_initialize",
+    "pc": "0x42c3ec",
+    "bytes": "c4f82838",
+    "mnemonic": "str.w",
+    "operands": "r3, [r4, #0x828]"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_initialize",
+    "pc": "0x42c3f0",
+    "bytes": "0023",
+    "mnemonic": "movs",
+    "operands": "r3, #0"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_initialize",
+    "pc": "0x42c3f2",
+    "bytes": "2362",
+    "mnemonic": "str",
+    "operands": "r3, [r4, #0x20]"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_initialize",
+    "pc": "0x42c3f4",
+    "bytes": "0023",
+    "mnemonic": "movs",
+    "operands": "r3, #0"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_initialize",
+    "pc": "0x42c3f6",
+    "bytes": "c4f85c38",
+    "mnemonic": "str.w",
+    "operands": "r3, [r4, #0x85c]"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_initialize",
+    "pc": "0x42c3fa",
+    "bytes": "0192",
+    "mnemonic": "str",
+    "operands": "r2, [sp, #4]"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_initialize",
+    "pc": "0x42c3fc",
+    "bytes": "4908",
+    "mnemonic": "lsrs",
+    "operands": "r1, r1, #1"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_initialize",
+    "pc": "0x42c3fe",
+    "bytes": "0091",
+    "mnemonic": "str",
+    "operands": "r1, [sp]"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_initialize",
+    "pc": "0x42c400",
+    "bytes": "0121",
+    "mnemonic": "movs",
+    "operands": "r1, #1"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_initialize",
+    "pc": "0x42c402",
+    "bytes": "8df80810",
+    "mnemonic": "strb.w",
+    "operands": "r1, [sp, #8]"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_initialize",
+    "pc": "0x42c406",
+    "bytes": "04f62802",
+    "mnemonic": "addw",
+    "operands": "r2, r4, #0x828"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_initialize",
+    "pc": "0x42c40a",
+    "bytes": "6946",
+    "mnemonic": "mov",
+    "operands": "r1, sp"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_initialize",
+    "pc": "0x42c40c",
+    "bytes": "c0b2",
+    "mnemonic": "uxtb",
+    "operands": "r0, r0"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_initialize",
+    "pc": "0x42c40e",
+    "bytes": "fbf7c1f9",
+    "mnemonic": "bl",
+    "operands": "#0x427794"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_initialize",
+    "pc": "0x42c412",
+    "bytes": "0028",
+    "mnemonic": "cmp",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_initialize",
+    "pc": "0x42c414",
+    "bytes": "02d1",
+    "mnemonic": "bne",
+    "operands": "#0x42c41c"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_initialize",
+    "pc": "0x42c416",
+    "bytes": "4ff48071",
+    "mnemonic": "mov.w",
+    "operands": "r1, #0x100"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_initialize",
+    "pc": "0x42c41a",
+    "bytes": "2162",
+    "mnemonic": "str",
+    "operands": "r1, [r4, #0x20]"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_initialize",
+    "pc": "0x42c41c",
+    "bytes": "04b0",
+    "mnemonic": "add",
+    "operands": "sp, #0x10"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_initialize",
+    "pc": "0x42c41e",
+    "bytes": "10bd",
+    "mnemonic": "pop",
+    "operands": "{r4, pc}"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_enable",
+    "pc": "0x42c420",
+    "bytes": "80b5",
+    "mnemonic": "push",
+    "operands": "{r7, lr}"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_enable",
+    "pc": "0x42c422",
+    "bytes": "416a",
+    "mnemonic": "ldr",
+    "operands": "r1, [r0, #0x24]"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_enable",
+    "pc": "0x42c424",
+    "bytes": "0029",
+    "mnemonic": "cmp",
+    "operands": "r1, #0"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_enable",
+    "pc": "0x42c426",
+    "bytes": "0dd1",
+    "mnemonic": "bne",
+    "operands": "#0x42c444"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_enable",
+    "pc": "0x42c428",
+    "bytes": "dff8bc22",
+    "mnemonic": "ldr.w",
+    "operands": "r2, [pc, #0x2bc]"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_enable",
+    "pc": "0x42c42c",
+    "bytes": "4168",
+    "mnemonic": "ldr",
+    "operands": "r1, [r0, #4]"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_enable",
+    "pc": "0x42c42e",
+    "bytes": "12eb0131",
+    "mnemonic": "adds.w",
+    "operands": "r1, r2, r1, lsl #12"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_enable",
+    "pc": "0x42c432",
+    "bytes": "d1f82c12",
+    "mnemonic": "ldr.w",
+    "operands": "r1, [r1, #0x22c]"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_enable",
+    "pc": "0x42c436",
+    "bytes": "4368",
+    "mnemonic": "ldr",
+    "operands": "r3, [r0, #4]"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_enable",
+    "pc": "0x42c438",
+    "bytes": "12eb0332",
+    "mnemonic": "adds.w",
+    "operands": "r2, r2, r3, lsl #12"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_enable",
+    "pc": "0x42c43c",
+    "bytes": "12f50b72",
+    "mnemonic": "adds.w",
+    "operands": "r2, r2, #0x22c"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_enable",
+    "pc": "0x42c440",
+    "bytes": "0a60",
+    "mnemonic": "str",
+    "operands": "r2, [r1]"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_enable",
+    "pc": "0x42c442",
+    "bytes": "4960",
+    "mnemonic": "str",
+    "operands": "r1, [r1, #4]"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_enable",
+    "pc": "0x42c444",
+    "bytes": "d0f82808",
+    "mnemonic": "ldr.w",
+    "operands": "r0, [r0, #0x828]"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_enable",
+    "pc": "0x42c448",
+    "bytes": "fbf716fa",
+    "mnemonic": "bl",
+    "operands": "#0x427878"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_enable",
+    "pc": "0x42c44c",
+    "bytes": "02bd",
+    "mnemonic": "pop",
+    "operands": "{r1, pc}"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_disable",
+    "pc": "0x42c44e",
+    "bytes": "80b5",
+    "mnemonic": "push",
+    "operands": "{r7, lr}"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_disable",
+    "pc": "0x42c450",
+    "bytes": "d0f82808",
+    "mnemonic": "ldr.w",
+    "operands": "r0, [r0, #0x828]"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_disable",
+    "pc": "0x42c454",
+    "bytes": "fbf738fa",
+    "mnemonic": "bl",
+    "operands": "#0x4278c8"
+  },
+  {
+    "function": "opencfw_boot_iom_cq_disable",
+    "pc": "0x42c458",
+    "bytes": "02bd",
+    "mnemonic": "pop",
+    "operands": "{r1, pc}"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427794",
+    "bytes": "30b4",
+    "mnemonic": "push",
+    "operands": "{r4, r5}"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427796",
+    "bytes": "0300",
+    "mnemonic": "movs",
+    "operands": "r3, r0"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427798",
+    "bytes": "1800",
+    "mnemonic": "movs",
+    "operands": "r0, r3"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x42779a",
+    "bytes": "c0b2",
+    "mnemonic": "uxtb",
+    "operands": "r0, r0"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x42779c",
+    "bytes": "0c28",
+    "mnemonic": "cmp",
+    "operands": "r0, #0xc"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x42779e",
+    "bytes": "01db",
+    "mnemonic": "blt",
+    "operands": "#0x4277a4"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277a0",
+    "bytes": "0520",
+    "mnemonic": "movs",
+    "operands": "r0, #5"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277a2",
+    "bytes": "67e0",
+    "mnemonic": "b",
+    "operands": "#0x427874"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277a4",
+    "bytes": "0029",
+    "mnemonic": "cmp",
+    "operands": "r1, #0"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277a6",
+    "bytes": "07d0",
+    "mnemonic": "beq",
+    "operands": "#0x4277b8"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277a8",
+    "bytes": "4868",
+    "mnemonic": "ldr",
+    "operands": "r0, [r1, #4]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277aa",
+    "bytes": "0028",
+    "mnemonic": "cmp",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277ac",
+    "bytes": "04d0",
+    "mnemonic": "beq",
+    "operands": "#0x4277b8"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277ae",
+    "bytes": "002a",
+    "mnemonic": "cmp",
+    "operands": "r2, #0"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277b0",
+    "bytes": "02d0",
+    "mnemonic": "beq",
+    "operands": "#0x4277b8"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277b2",
+    "bytes": "0868",
+    "mnemonic": "ldr",
+    "operands": "r0, [r1]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277b4",
+    "bytes": "0228",
+    "mnemonic": "cmp",
+    "operands": "r0, #2"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277b6",
+    "bytes": "01d2",
+    "mnemonic": "bhs",
+    "operands": "#0x4277bc"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277b8",
+    "bytes": "0620",
+    "mnemonic": "movs",
+    "operands": "r0, #6"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277ba",
+    "bytes": "5be0",
+    "mnemonic": "b",
+    "operands": "#0x427874"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277bc",
+    "bytes": "2c24",
+    "mnemonic": "movs",
+    "operands": "r4, #0x2c"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277be",
+    "bytes": "dff8c054",
+    "mnemonic": "ldr.w",
+    "operands": "r5, [pc, #0x4c0]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277c2",
+    "bytes": "1800",
+    "mnemonic": "movs",
+    "operands": "r0, r3"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277c4",
+    "bytes": "c0b2",
+    "mnemonic": "uxtb",
+    "operands": "r0, r0"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277c6",
+    "bytes": "6043",
+    "mnemonic": "muls",
+    "operands": "r0, r4, r0"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277c8",
+    "bytes": "2858",
+    "mnemonic": "ldr",
+    "operands": "r0, [r5, r0]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277ca",
+    "bytes": "c0f30060",
+    "mnemonic": "ubfx",
+    "operands": "r0, r0, #0x18, #1"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277ce",
+    "bytes": "0028",
+    "mnemonic": "cmp",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277d0",
+    "bytes": "01d0",
+    "mnemonic": "beq",
+    "operands": "#0x4277d6"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277d2",
+    "bytes": "0720",
+    "mnemonic": "movs",
+    "operands": "r0, #7"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277d4",
+    "bytes": "4ee0",
+    "mnemonic": "b",
+    "operands": "#0x427874"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277d6",
+    "bytes": "1800",
+    "mnemonic": "movs",
+    "operands": "r0, r3"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277d8",
+    "bytes": "c0b2",
+    "mnemonic": "uxtb",
+    "operands": "r0, r0"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277da",
+    "bytes": "04fb00f4",
+    "mnemonic": "mul",
+    "operands": "r4, r4, r0"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277de",
+    "bytes": "2c44",
+    "mnemonic": "add",
+    "operands": "r4, r5"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277e0",
+    "bytes": "0868",
+    "mnemonic": "ldr",
+    "operands": "r0, [r1]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277e2",
+    "bytes": "c000",
+    "mnemonic": "lsls",
+    "operands": "r0, r0, #3"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277e4",
+    "bytes": "a061",
+    "mnemonic": "str",
+    "operands": "r0, [r4, #0x18]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277e6",
+    "bytes": "4868",
+    "mnemonic": "ldr",
+    "operands": "r0, [r1, #4]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277e8",
+    "bytes": "6060",
+    "mnemonic": "str",
+    "operands": "r0, [r4, #4]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277ea",
+    "bytes": "e060",
+    "mnemonic": "str",
+    "operands": "r0, [r4, #0xc]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277ec",
+    "bytes": "6061",
+    "mnemonic": "str",
+    "operands": "r0, [r4, #0x14]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277ee",
+    "bytes": "2061",
+    "mnemonic": "str",
+    "operands": "r0, [r4, #0x10]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277f0",
+    "bytes": "4868",
+    "mnemonic": "ldr",
+    "operands": "r0, [r1, #4]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277f2",
+    "bytes": "0d68",
+    "mnemonic": "ldr",
+    "operands": "r5, [r1]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277f4",
+    "bytes": "10ebc500",
+    "mnemonic": "adds.w",
+    "operands": "r0, r0, r5, lsl #3"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277f8",
+    "bytes": "a060",
+    "mnemonic": "str",
+    "operands": "r0, [r4, #8]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277fa",
+    "bytes": "2000",
+    "mnemonic": "movs",
+    "operands": "r0, r4"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277fc",
+    "bytes": "0568",
+    "mnemonic": "ldr",
+    "operands": "r5, [r0]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x4277fe",
+    "bytes": "55f08075",
+    "mnemonic": "orrs",
+    "operands": "r5, r5, #0x1000000"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427802",
+    "bytes": "0560",
+    "mnemonic": "str",
+    "operands": "r5, [r0]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427804",
+    "bytes": "2000",
+    "mnemonic": "movs",
+    "operands": "r0, r4"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427806",
+    "bytes": "0568",
+    "mnemonic": "ldr",
+    "operands": "r5, [r0]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427808",
+    "bytes": "35f00075",
+    "mnemonic": "bics",
+    "operands": "r5, r5, #0x2000000"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x42780c",
+    "bytes": "0560",
+    "mnemonic": "str",
+    "operands": "r5, [r0]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x42780e",
+    "bytes": "2000",
+    "mnemonic": "movs",
+    "operands": "r0, r4"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427810",
+    "bytes": "0568",
+    "mnemonic": "ldr",
+    "operands": "r5, [r0]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427812",
+    "bytes": "15f07f45",
+    "mnemonic": "ands",
+    "operands": "r5, r5, #0xff000000"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427816",
+    "bytes": "45f0cd15",
+    "mnemonic": "orr",
+    "operands": "r5, r5, #0xcd00cd"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x42781a",
+    "bytes": "55f44d45",
+    "mnemonic": "orrs",
+    "operands": "r5, r5, #0xcd00"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x42781e",
+    "bytes": "0560",
+    "mnemonic": "str",
+    "operands": "r5, [r0]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427820",
+    "bytes": "dff86054",
+    "mnemonic": "ldr.w",
+    "operands": "r5, [pc, #0x460]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427824",
+    "bytes": "dbb2",
+    "mnemonic": "uxtb",
+    "operands": "r3, r3"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427826",
+    "bytes": "2820",
+    "mnemonic": "movs",
+    "operands": "r0, #0x28"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427828",
+    "bytes": "4343",
+    "mnemonic": "muls",
+    "operands": "r3, r0, r3"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x42782a",
+    "bytes": "05eb0300",
+    "mnemonic": "add.w",
+    "operands": "r0, r5, r3"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x42782e",
+    "bytes": "6062",
+    "mnemonic": "str",
+    "operands": "r0, [r4, #0x24]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427830",
+    "bytes": "0020",
+    "mnemonic": "movs",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427832",
+    "bytes": "e061",
+    "mnemonic": "str",
+    "operands": "r0, [r4, #0x1c]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427834",
+    "bytes": "0020",
+    "mnemonic": "movs",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427836",
+    "bytes": "2062",
+    "mnemonic": "str",
+    "operands": "r0, [r4, #0x20]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427838",
+    "bytes": "0020",
+    "mnemonic": "movs",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x42783a",
+    "bytes": "636a",
+    "mnemonic": "ldr",
+    "operands": "r3, [r4, #0x24]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x42783c",
+    "bytes": "9b68",
+    "mnemonic": "ldr",
+    "operands": "r3, [r3, #8]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x42783e",
+    "bytes": "1860",
+    "mnemonic": "str",
+    "operands": "r0, [r3]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427840",
+    "bytes": "0020",
+    "mnemonic": "movs",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427842",
+    "bytes": "636a",
+    "mnemonic": "ldr",
+    "operands": "r3, [r4, #0x24]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427844",
+    "bytes": "db68",
+    "mnemonic": "ldr",
+    "operands": "r3, [r3, #0xc]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427846",
+    "bytes": "1860",
+    "mnemonic": "str",
+    "operands": "r0, [r3]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427848",
+    "bytes": "606a",
+    "mnemonic": "ldr",
+    "operands": "r0, [r4, #0x24]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x42784a",
+    "bytes": "0069",
+    "mnemonic": "ldr",
+    "operands": "r0, [r0, #0x10]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x42784c",
+    "bytes": "0368",
+    "mnemonic": "ldr",
+    "operands": "r3, [r0]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x42784e",
+    "bytes": "606a",
+    "mnemonic": "ldr",
+    "operands": "r0, [r4, #0x24]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427850",
+    "bytes": "4069",
+    "mnemonic": "ldr",
+    "operands": "r0, [r0, #0x14]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427852",
+    "bytes": "0343",
+    "mnemonic": "orrs",
+    "operands": "r3, r0"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427854",
+    "bytes": "606a",
+    "mnemonic": "ldr",
+    "operands": "r0, [r4, #0x24]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427856",
+    "bytes": "0069",
+    "mnemonic": "ldr",
+    "operands": "r0, [r0, #0x10]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427858",
+    "bytes": "0360",
+    "mnemonic": "str",
+    "operands": "r3, [r0]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x42785a",
+    "bytes": "4868",
+    "mnemonic": "ldr",
+    "operands": "r0, [r1, #4]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x42785c",
+    "bytes": "636a",
+    "mnemonic": "ldr",
+    "operands": "r3, [r4, #0x24]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x42785e",
+    "bytes": "5b68",
+    "mnemonic": "ldr",
+    "operands": "r3, [r3, #4]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427860",
+    "bytes": "1860",
+    "mnemonic": "str",
+    "operands": "r0, [r3]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427862",
+    "bytes": "087a",
+    "mnemonic": "ldrb",
+    "operands": "r0, [r1, #8]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427864",
+    "bytes": "4000",
+    "mnemonic": "lsls",
+    "operands": "r0, r0, #1"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427866",
+    "bytes": "10f00200",
+    "mnemonic": "ands",
+    "operands": "r0, r0, #2"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x42786a",
+    "bytes": "616a",
+    "mnemonic": "ldr",
+    "operands": "r1, [r4, #0x24]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x42786c",
+    "bytes": "0968",
+    "mnemonic": "ldr",
+    "operands": "r1, [r1]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x42786e",
+    "bytes": "0860",
+    "mnemonic": "str",
+    "operands": "r0, [r1]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427870",
+    "bytes": "1460",
+    "mnemonic": "str",
+    "operands": "r4, [r2]"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427872",
+    "bytes": "0020",
+    "mnemonic": "movs",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427874",
+    "bytes": "30bc",
+    "mnemonic": "pop",
+    "operands": "{r4, r5}"
+  },
+  {
+    "function": "opencfw_provider_427794",
+    "pc": "0x427876",
+    "bytes": "7047",
+    "mnemonic": "bx",
+    "operands": "lr"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x427878",
+    "bytes": "0100",
+    "mnemonic": "movs",
+    "operands": "r1, r0"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x42787a",
+    "bytes": "0028",
+    "mnemonic": "cmp",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x42787c",
+    "bytes": "06d0",
+    "mnemonic": "beq",
+    "operands": "#0x42788c"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x42787e",
+    "bytes": "0068",
+    "mnemonic": "ldr",
+    "operands": "r0, [r0]"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x427880",
+    "bytes": "20f07e40",
+    "mnemonic": "bic",
+    "operands": "r0, r0, #0xfe000000"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x427884",
+    "bytes": "dff80024",
+    "mnemonic": "ldr.w",
+    "operands": "r2, [pc, #0x400]"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x427888",
+    "bytes": "9042",
+    "mnemonic": "cmp",
+    "operands": "r0, r2"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x42788a",
+    "bytes": "01d0",
+    "mnemonic": "beq",
+    "operands": "#0x427890"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x42788c",
+    "bytes": "0220",
+    "mnemonic": "movs",
+    "operands": "r0, #2"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x42788e",
+    "bytes": "1ae0",
+    "mnemonic": "b",
+    "operands": "#0x4278c6"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x427890",
+    "bytes": "0868",
+    "mnemonic": "ldr",
+    "operands": "r0, [r1]"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x427892",
+    "bytes": "c0f34060",
+    "mnemonic": "ubfx",
+    "operands": "r0, r0, #0x19, #1"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x427896",
+    "bytes": "0028",
+    "mnemonic": "cmp",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x427898",
+    "bytes": "01d0",
+    "mnemonic": "beq",
+    "operands": "#0x42789e"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x42789a",
+    "bytes": "0020",
+    "mnemonic": "movs",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x42789c",
+    "bytes": "13e0",
+    "mnemonic": "b",
+    "operands": "#0x4278c6"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x42789e",
+    "bytes": "8868",
+    "mnemonic": "ldr",
+    "operands": "r0, [r1, #8]"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x4278a0",
+    "bytes": "dff8e823",
+    "mnemonic": "ldr.w",
+    "operands": "r2, [pc, #0x3e8]"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x4278a4",
+    "bytes": "9042",
+    "mnemonic": "cmp",
+    "operands": "r0, r2"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x4278a6",
+    "bytes": "01d3",
+    "mnemonic": "blo",
+    "operands": "#0x4278ac"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x4278a8",
+    "bytes": "bff35f8f",
+    "mnemonic": "dmb",
+    "operands": "sy"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x4278ac",
+    "bytes": "486a",
+    "mnemonic": "ldr",
+    "operands": "r0, [r1, #0x24]"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x4278ae",
+    "bytes": "0068",
+    "mnemonic": "ldr",
+    "operands": "r0, [r0]"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x4278b0",
+    "bytes": "0068",
+    "mnemonic": "ldr",
+    "operands": "r0, [r0]"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x4278b2",
+    "bytes": "50f00100",
+    "mnemonic": "orrs",
+    "operands": "r0, r0, #1"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x4278b6",
+    "bytes": "4a6a",
+    "mnemonic": "ldr",
+    "operands": "r2, [r1, #0x24]"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x4278b8",
+    "bytes": "1268",
+    "mnemonic": "ldr",
+    "operands": "r2, [r2]"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x4278ba",
+    "bytes": "1060",
+    "mnemonic": "str",
+    "operands": "r0, [r2]"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x4278bc",
+    "bytes": "0868",
+    "mnemonic": "ldr",
+    "operands": "r0, [r1]"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x4278be",
+    "bytes": "50f00070",
+    "mnemonic": "orrs",
+    "operands": "r0, r0, #0x2000000"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x4278c2",
+    "bytes": "0860",
+    "mnemonic": "str",
+    "operands": "r0, [r1]"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x4278c4",
+    "bytes": "0020",
+    "mnemonic": "movs",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_provider_427878",
+    "pc": "0x4278c6",
+    "bytes": "7047",
+    "mnemonic": "bx",
+    "operands": "lr"
+  },
+  {
+    "function": "opencfw_provider_4278c8",
+    "pc": "0x4278c8",
+    "bytes": "0100",
+    "mnemonic": "movs",
+    "operands": "r1, r0"
+  },
+  {
+    "function": "opencfw_provider_4278c8",
+    "pc": "0x4278ca",
+    "bytes": "0028",
+    "mnemonic": "cmp",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_provider_4278c8",
+    "pc": "0x4278cc",
+    "bytes": "06d0",
+    "mnemonic": "beq",
+    "operands": "#0x4278dc"
+  },
+  {
+    "function": "opencfw_provider_4278c8",
+    "pc": "0x4278ce",
+    "bytes": "0068",
+    "mnemonic": "ldr",
+    "operands": "r0, [r0]"
+  },
+  {
+    "function": "opencfw_provider_4278c8",
+    "pc": "0x4278d0",
+    "bytes": "20f07e40",
+    "mnemonic": "bic",
+    "operands": "r0, r0, #0xfe000000"
+  },
+  {
+    "function": "opencfw_provider_4278c8",
+    "pc": "0x4278d4",
+    "bytes": "dff8b023",
+    "mnemonic": "ldr.w",
+    "operands": "r2, [pc, #0x3b0]"
+  },
+  {
+    "function": "opencfw_provider_4278c8",
+    "pc": "0x4278d8",
+    "bytes": "9042",
+    "mnemonic": "cmp",
+    "operands": "r0, r2"
+  },
+  {
+    "function": "opencfw_provider_4278c8",
+    "pc": "0x4278da",
+    "bytes": "01d0",
+    "mnemonic": "beq",
+    "operands": "#0x4278e0"
+  },
+  {
+    "function": "opencfw_provider_4278c8",
+    "pc": "0x4278dc",
+    "bytes": "0220",
+    "mnemonic": "movs",
+    "operands": "r0, #2"
+  },
+  {
+    "function": "opencfw_provider_4278c8",
+    "pc": "0x4278de",
+    "bytes": "13e0",
+    "mnemonic": "b",
+    "operands": "#0x427908"
+  },
+  {
+    "function": "opencfw_provider_4278c8",
+    "pc": "0x4278e0",
+    "bytes": "0868",
+    "mnemonic": "ldr",
+    "operands": "r0, [r1]"
+  },
+  {
+    "function": "opencfw_provider_4278c8",
+    "pc": "0x4278e2",
+    "bytes": "c0f34060",
+    "mnemonic": "ubfx",
+    "operands": "r0, r0, #0x19, #1"
+  },
+  {
+    "function": "opencfw_provider_4278c8",
+    "pc": "0x4278e6",
+    "bytes": "0028",
+    "mnemonic": "cmp",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_provider_4278c8",
+    "pc": "0x4278e8",
+    "bytes": "01d1",
+    "mnemonic": "bne",
+    "operands": "#0x4278ee"
+  },
+  {
+    "function": "opencfw_provider_4278c8",
+    "pc": "0x4278ea",
+    "bytes": "0020",
+    "mnemonic": "movs",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_provider_4278c8",
+    "pc": "0x4278ec",
+    "bytes": "0ce0",
+    "mnemonic": "b",
+    "operands": "#0x427908"
+  },
+  {
+    "function": "opencfw_provider_4278c8",
+    "pc": "0x4278ee",
+    "bytes": "486a",
+    "mnemonic": "ldr",
+    "operands": "r0, [r1, #0x24]"
+  },
+  {
+    "function": "opencfw_provider_4278c8",
+    "pc": "0x4278f0",
+    "bytes": "0068",
+    "mnemonic": "ldr",
+    "operands": "r0, [r0]"
+  },
+  {
+    "function": "opencfw_provider_4278c8",
+    "pc": "0x4278f2",
+    "bytes": "0068",
+    "mnemonic": "ldr",
+    "operands": "r0, [r0]"
+  },
+  {
+    "function": "opencfw_provider_4278c8",
+    "pc": "0x4278f4",
+    "bytes": "4008",
+    "mnemonic": "lsrs",
+    "operands": "r0, r0, #1"
+  },
+  {
+    "function": "opencfw_provider_4278c8",
+    "pc": "0x4278f6",
+    "bytes": "4000",
+    "mnemonic": "lsls",
+    "operands": "r0, r0, #1"
+  },
+  {
+    "function": "opencfw_provider_4278c8",
+    "pc": "0x4278f8",
+    "bytes": "4a6a",
+    "mnemonic": "ldr",
+    "operands": "r2, [r1, #0x24]"
+  },
+  {
+    "function": "opencfw_provider_4278c8",
+    "pc": "0x4278fa",
+    "bytes": "1268",
+    "mnemonic": "ldr",
+    "operands": "r2, [r2]"
+  },
+  {
+    "function": "opencfw_provider_4278c8",
+    "pc": "0x4278fc",
+    "bytes": "1060",
+    "mnemonic": "str",
+    "operands": "r0, [r2]"
+  },
+  {
+    "function": "opencfw_provider_4278c8",
+    "pc": "0x4278fe",
+    "bytes": "0868",
+    "mnemonic": "ldr",
+    "operands": "r0, [r1]"
+  },
+  {
+    "function": "opencfw_provider_4278c8",
+    "pc": "0x427900",
+    "bytes": "30f00070",
+    "mnemonic": "bics",
+    "operands": "r0, r0, #0x2000000"
+  },
+  {
+    "function": "opencfw_provider_4278c8",
+    "pc": "0x427904",
+    "bytes": "0860",
+    "mnemonic": "str",
+    "operands": "r0, [r1]"
+  },
+  {
+    "function": "opencfw_provider_4278c8",
+    "pc": "0x427906",
+    "bytes": "0020",
+    "mnemonic": "movs",
+    "operands": "r0, #0"
+  },
+  {
+    "function": "opencfw_provider_4278c8",
+    "pc": "0x427908",
+    "bytes": "7047",
+    "mnemonic": "bx",
+    "operands": "lr"
+  }
+]

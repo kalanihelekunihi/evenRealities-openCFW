@@ -1,0 +1,116 @@
+[
+  {
+    "start": 4730948,
+    "end": 4730988,
+    "instructions": [
+      {
+        "address": 4730948,
+        "bytes": "38b5",
+        "mnemonic": "push",
+        "operands": "{r3, r4, r5, lr}"
+      },
+      {
+        "address": 4730950,
+        "bytes": "0400",
+        "mnemonic": "movs",
+        "operands": "r4, r0"
+      },
+      {
+        "address": 4730952,
+        "bytes": "0025",
+        "mnemonic": "movs",
+        "operands": "r5, #0"
+      },
+      {
+        "address": 4730954,
+        "bytes": "07e0",
+        "mnemonic": "b.n",
+        "operands": "48305c <.text+0x18>"
+      },
+      {
+        "address": 4730956,
+        "bytes": "2068",
+        "mnemonic": "ldr",
+        "operands": "r0, [r4, #0]"
+      },
+      {
+        "address": 4730958,
+        "bytes": "411c",
+        "mnemonic": "adds",
+        "operands": "r1, r0, #1"
+      },
+      {
+        "address": 4730960,
+        "bytes": "2160",
+        "mnemonic": "str",
+        "operands": "r1, [r4, #0]"
+      },
+      {
+        "address": 4730962,
+        "bytes": "0a21",
+        "mnemonic": "movs",
+        "operands": "r1, #10"
+      },
+      {
+        "address": 4730964,
+        "bytes": "0078",
+        "mnemonic": "ldrb",
+        "operands": "r0, [r0, #0]"
+      },
+      {
+        "address": 4730966,
+        "bytes": "3038",
+        "mnemonic": "subs",
+        "operands": "r0, #48\t@ 0x30"
+      },
+      {
+        "address": 4730968,
+        "bytes": "01fb0505",
+        "mnemonic": "mla",
+        "operands": "r5, r1, r5, r0"
+      },
+      {
+        "address": 4730972,
+        "bytes": "2068",
+        "mnemonic": "ldr",
+        "operands": "r0, [r4, #0]"
+      },
+      {
+        "address": 4730974,
+        "bytes": "0078",
+        "mnemonic": "ldrb",
+        "operands": "r0, [r0, #0]"
+      },
+      {
+        "address": 4730976,
+        "bytes": "fff7e7ff",
+        "mnemonic": "bl",
+        "operands": "483032 <.text-0x12>"
+      },
+      {
+        "address": 4730980,
+        "bytes": "0028",
+        "mnemonic": "cmp",
+        "operands": "r0, #0"
+      },
+      {
+        "address": 4730982,
+        "bytes": "f1d1",
+        "mnemonic": "bne.n",
+        "operands": "48304c <.text+0x8>"
+      },
+      {
+        "address": 4730984,
+        "bytes": "2800",
+        "mnemonic": "movs",
+        "operands": "r0, r5"
+      },
+      {
+        "address": 4730986,
+        "bytes": "32bd",
+        "mnemonic": "pop",
+        "operands": "{r1, r4, r5, pc}"
+      }
+    ]
+  }
+]

@@ -1,0 +1,5 @@
+# Star precision and negative precision digit consumption
+
+Partial/unaccepted;84 instruction bytes48191E..481972. Continues481836232frame,R10atdot,R9argumentcursorpointer,R1flags. PreincrementR10,freshbyteR0. Star42:loadcursorword[R9]→R0;loadfullprecisionword[cursor]postincrement4→R2;storeadvancedcursor[R9];storefullR2SP56 withoutnegative normalization;advanceR10one;branch481972 unresolvedmodifierstage.
+
+Nonstar:compareR0minus45;ITE EQ incrementsR10whenminus,otherwiseR0=0. MinuskeepsR0=45 as negative-marker. R2=0→SP56;R4literal4824F0limit. Digitloopfreshbyte[R10]→R3;unsigned(R3-48)<10. Ondigit:R0nonzero skipsnumericupdate entirely;otherwise reloadSP56→R2;if signedR2>=signedlimit skipupdate;elseR5=5*R2mod2^32,R3=byte+2*R5-48mod2^32→SP56. Everydigitconsumed byincrementR10 regardlessmarker/limit. Thus textualminusprecision consumesdigitswhileleavingprecision0;starnegativefullwordretained. R4/R5clobberedbylimit/arithmetic;flagsR1retained. Freshreads/stackreloads preserved;no conventionalprintf-assumption orC/freeze/fullcoverage/equality claim.

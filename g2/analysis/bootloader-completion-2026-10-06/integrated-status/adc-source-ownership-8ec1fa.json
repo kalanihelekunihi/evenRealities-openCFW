@@ -1,0 +1,78 @@
+{
+  "utc": "2026-10-07T02:41:50.487125+00:00",
+  "image_sha256": "8ec1fa00cae0c882dae79282e43736418537a942645ba185d7a6d6026f5618fb",
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "functions": [
+    {
+      "function": "initialize",
+      "start": "0x42e8d0",
+      "end_exclusive": "0x42ea32",
+      "original_body_bytes": 354,
+      "sha256": "21eb4fbe548c1f7c1c16bbf7bf31671f7cdbf125ee784a96893efdef723f6fd8",
+      "symbol": "opencfw_bl_adc_context_initialize",
+      "source_entry": "0x34e94",
+      "ownership": "new-native-body"
+    },
+    {
+      "function": "reset",
+      "start": "0x42ea32",
+      "end_exclusive": "0x42ea68",
+      "original_body_bytes": 54,
+      "sha256": "33eeb24b6b211f5d9920815c5ccc30b5c985bb5f094890a5e543b85e194c19b4",
+      "symbol": "opencfw_bl_adc_reset",
+      "source_entry": "0x35020",
+      "ownership": "new-native-body"
+    },
+    {
+      "function": "INFO-selector-reused",
+      "start": "0x421548",
+      "end_exclusive": "0x42156e",
+      "original_body_bytes": 38,
+      "sha256": "3b5bbbf5927b1c40733445a47ac8ddcec46ba52837fd94cf3ee0dc20c28d9e72",
+      "symbol": "opencfw_boot_device_mode_wait",
+      "source_entry": "0x1e100",
+      "ownership": "reused-native-body"
+    },
+    {
+      "function": "INFO-dispatch-reused",
+      "start": "0x4213e6",
+      "end_exclusive": "0x421548",
+      "original_body_bytes": 354,
+      "sha256": "989242545e69349bd0ff976d0bdd47f5800523263ad0f2c35fa06c0a68ea5127",
+      "symbol": "opencfw_boot_info_read_dispatch",
+      "source_entry": "0x1e118",
+      "ownership": "reused-native-body"
+    },
+    {
+      "function": "ROM-thunk-reused",
+      "start": "0x41d28a",
+      "end_exclusive": "0x41d292",
+      "original_body_bytes": 8,
+      "sha256": "dc3dabe0882421df8696d49e608ebaae3a67965235de4e760f6a8ce1cb1715c1",
+      "symbol": "opencfw_boot_info_rom_read",
+      "source_entry": "0x1e218",
+      "ownership": "reused-native-body"
+    }
+  ],
+  "new_native_body_bytes": 408,
+  "visited_new_native_body_bytes": 408,
+  "static_context": {
+    "address": "0x20026df0",
+    "bytes": 72,
+    "section": "NOLOAD/source BSS",
+    "allocator": "none"
+  },
+  "source": "g2/components/bootloader/initializer_callbacks/adc_context.c",
+  "source_sha256": "4eb80e023e049165ab8e4ff1c0e36e560989c795e1807656d5fb51ceb6bde816",
+  "sdk_files": {
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/ambiqhal-apollo510/ambiqhal/mcu/apollo510/hal/am_hal_adc.h": "9b551d0863b33fd3d2acd1e884d8f6fb2088fb87e1efb2e07a01d10afa74d89a",
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/ambiqhal-apollo510/ambiqhal/mcu/apollo510/hal/am_hal_info.h": "43bf671719ceab7d56b0e7b11c35894c75088771d156b84838fd71d136121858",
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/ambiqhal-apollo510/ambiqhal/mcu/apollo510/regs/am_mcu_apollo510_mraminfo1.h": "1113c8b5e668077e5546614f5b8d16a50921186dc10ecf042c4c097ef5488b38",
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/ambiqhal-apollo510/ambiqhal/mcu/apollo510/regs/am_mcu_apollo510_otpinfo1.h": "2578377cd221c4e510d5a677ce52a95ac15acf144556dc8f3a322e11aa15e7c6"
+  },
+  "limits": [
+    "Only residentROM48 words/status are controlled; original/source INFO chain executes. Physical OTP/calibration/analog/IRQ/task behavior unproved.",
+    "All408 mapped new body bytes visited across135 fixture comparisons, not all inputs/interleavings or byte-identical compile.",
+    "Reset is metadata claim clearing, not free/disable/drain/quiescence."
+  ]
+}

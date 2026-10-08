@@ -1,0 +1,5 @@
+# Floating scale rational correction and exponent width selection
+
+Partial/unaccepted;136 instruction bytes 483798..483820. Continuation of 48364C64-byte frame. Ordered binary64 operations: d4=d4+d6(10); d4=d1/d4;d6=6;d4=d4+d6;d1=d1/d4;d1=d3+d1;d1=d2/d1;d3=1;d1=d1+d3;d2=fullSP0;d1=d1*d2;store d1SP0;reload d1SP0;compare original magnitude d0,d1 and transfer flags. PL skips to4837E8;MI R7--wrapping, reload d1SP0, d3=10, d1=d1/d3, storeSP0.
+
+R2=R7+99mod32; unsigned R2<199 gives R8=4 elseR8=5, preserving wrapped comparison. Test R6bit11 via LSLS20; clear→48383C unresolved. Set loads full8B literal483950→d2 and compares d0,d2; LT→483832 unresolved; otherwise literal483958→d2, compare d0,d2; PL→483832. Otherwise signed compare R7,R0; GE→483824 unresolved; LT R0=R0-R7 wrapping at48381E. Fallthrough483820 unresolved. Literal data remains to recover in full; references only four-byte prefixes. Exact VFP condition codes preserved, including LT versus MI. No C, freeze,wholecoverage or equality claim.

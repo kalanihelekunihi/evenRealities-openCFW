@@ -1,0 +1,17 @@
+from pathlib import Path
+import json,hashlib,re,subprocess,tempfile
+b=Path('g2/build/pseudocode-first/20260930T190500Z');src=b/'attempts/P1-canonical-fixed-images-005/002/apollo_main-flash.bin';d=src.read_bytes();h=lambda x:hashlib.sha256(x).hexdigest();assert h(d)=='19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701';start=0x480a32;end=0x480ad4
+with tempfile.TemporaryDirectory() as td:
+ t=Path(td);(t/'input.bin').write_bytes(d[start-0x438000:end-0x438000]);(t/'input.s').write_text('.syntax unified\n.cpu cortex-m55\n.thumb\n.text\n.incbin "'+str(t/'input.bin')+'"\n');subprocess.run(['/opt/homebrew/bin/arm-none-eabi-as',str(t/'input.s'),'-o',str(t/'input.o')],check=True);rawtext=subprocess.check_output(['/opt/homebrew/bin/arm-none-eabi-objdump','-D','-j','.text','-M','force-thumb','--adjust-vma='+hex(start),str(t/'input.o')],text=True)
+rows=[];cursor=start
+for line in rawtext.splitlines():
+ m=re.match(r'\s*([0-9a-f]+):\s+([0-9a-f]{4}(?: [0-9a-f]{4})?)\s+([^\s]+)\s*(.*)',line)
+ if not m:continue
+ a=int(m[1],16)
+ if not start<=a<end:continue
+ raw=b''.join(int(v,16).to_bytes(2,'little') for v in m[2].split());assert a==cursor and raw==d[a-0x438000:a-0x438000+len(raw)];cursor+=len(raw);rows.append(dict(address=a,bytes=raw.hex(),mnemonic=m[3],operands=m[4]))
+assert cursor==end,(hex(cursor),hex(end),rawtext)
+o=b/'analysis/review-isolated-P2-21143/fresh';o.mkdir(parents=True,exist_ok=True);(o/'instructions.json').write_text(json.dumps([dict(start=start,end=end,instructions=rows)],indent=2)+'\n');(o/'disassembly.txt').write_text(rawtext);refs=sorted(set(int(m[1],16) for row in rows if (m:=re.search(r'@\s*\(?([0-9a-f]{6,8})',row['operands'])) and 'pc' in row['operands']))
+(o/'references.json').write_text(json.dumps([dict(address=a,bytes=d[a-0x438000:a-0x438000+4].hex(),value=int.from_bytes(d[a-0x438000:a-0x438000+4],'little')) for a in refs],indent=2)+'\n')
+(o/'pseudocode.md').write_text('# Mode two masked-source configuration and ordered bit pulse\n\nPartial/unaccepted;162 instruction bytes480A32..480AD4. Dispatch mode2 of4809C4;16-byte frame, R4entryR1 optional pointer. R1=pointer literal480EB4; fresh word[R1]→SP0; reload and AND literal480EB8→SP0; reload intoR2. Fresh byte from pointer480EBC AND63 ORR2. Fresh word from pointer480EC0 shifted6mod2^32 AND960 (0x3C0) ORR2. OR immediate literal480EC4 intoR2 (literal value, not dereferenced);storeSP0;reloadSP0→word[R1]. Preserve exact order and scratch slots.\n\nR5=pointer literal480EC8;freshword→SP0;reload clear0x22→SP0;reload OR2→SP0;reload storeword[R5]. Then three separate fresh read/modify/write operations OR1,OR16,OR8, in that order. Call4807A0 withR0=5 and liveR1/R2/R3; ignore return. Separate freshword[R5] clear16 and store. If R4nonnull and freshbyte[R4]==1: freshword[R5]→SP0;reload ANDliteral480ECC→SP0;reload OR256→SP0;reload storeword[R5]. Otherwise skip this optional update. Branch480A18 setsR0=0, thenPOP R1,R4,R5,PC16; R1 receives current scratchSP0 (before pulse when optional update skipped; final optional configuration when taken), not savedentryR3. No validation failure return or pointer-word nullguard. Exact helper FP/external dependencies remain recorded elsewhere; do not infer time units. No C/freeze/fullcoverage/equality claim; other modes unresolved.\n')
+(o/'replay.py').write_bytes(Path(__file__).read_bytes());(o/'receipt.json').write_text(json.dumps(dict(accepted=False,status='partial',input_sha256=h(d),instruction_bytes=end-start,files={p.name:h(p.read_bytes()) for p in o.iterdir()}),indent=2)+'\n');print('PASS',end-start)

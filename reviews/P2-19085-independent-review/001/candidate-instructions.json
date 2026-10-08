@@ -1,0 +1,224 @@
+[
+  {
+    "start": 4624828,
+    "end": 4624924,
+    "instructions": [
+      {
+        "address": 4624828,
+        "bytes": "1cb5",
+        "mnemonic": "push",
+        "operands": "{r2, r3, r4, lr}"
+      },
+      {
+        "address": 4624830,
+        "bytes": "0400",
+        "mnemonic": "movs",
+        "operands": "r4, r0"
+      },
+      {
+        "address": 4624832,
+        "bytes": "02f044f9",
+        "mnemonic": "bl",
+        "operands": "46b44c <.text+0x2290>"
+      },
+      {
+        "address": 4624836,
+        "bytes": "0028",
+        "mnemonic": "cmp",
+        "operands": "r0, #0"
+      },
+      {
+        "address": 4624838,
+        "bytes": "07d0",
+        "mnemonic": "beq.n",
+        "operands": "4691d8 <.text+0x1c>"
+      },
+      {
+        "address": 4624840,
+        "bytes": "e4b2",
+        "mnemonic": "uxtb",
+        "operands": "r4, r4"
+      },
+      {
+        "address": 4624842,
+        "bytes": "002c",
+        "mnemonic": "cmp",
+        "operands": "r4, #0"
+      },
+      {
+        "address": 4624844,
+        "bytes": "01d0",
+        "mnemonic": "beq.n",
+        "operands": "4691d2 <.text+0x16>"
+      },
+      {
+        "address": 4624846,
+        "bytes": "0121",
+        "mnemonic": "movs",
+        "operands": "r1, #1"
+      },
+      {
+        "address": 4624848,
+        "bytes": "00e0",
+        "mnemonic": "b.n",
+        "operands": "4691d4 <.text+0x18>"
+      },
+      {
+        "address": 4624850,
+        "bytes": "0021",
+        "mnemonic": "movs",
+        "operands": "r1, #0"
+      },
+      {
+        "address": 4624852,
+        "bytes": "4175",
+        "mnemonic": "strb",
+        "operands": "r1, [r0, #21]"
+      },
+      {
+        "address": 4624854,
+        "bytes": "20e0",
+        "mnemonic": "b.n",
+        "operands": "46921a <.text+0x5e>"
+      },
+      {
+        "address": 4624856,
+        "bytes": "d3f779ff",
+        "mnemonic": "bl",
+        "operands": "43d0ce <.text-0x2c0ee>"
+      },
+      {
+        "address": 4624860,
+        "bytes": "8007",
+        "mnemonic": "lsls",
+        "operands": "r0, r0, #30"
+      },
+      {
+        "address": 4624862,
+        "bytes": "0dd5",
+        "mnemonic": "bpl.n",
+        "operands": "4691fc <.text+0x40>"
+      },
+      {
+        "address": 4624864,
+        "bytes": "dff84c09",
+        "mnemonic": "ldr.w",
+        "operands": "r0, [pc, #2380]\t@ 469b30 <.text+0x974>"
+      },
+      {
+        "address": 4624868,
+        "bytes": "0190",
+        "mnemonic": "str",
+        "operands": "r0, [sp, #4]"
+      },
+      {
+        "address": 4624870,
+        "bytes": "4c20",
+        "mnemonic": "movs",
+        "operands": "r0, #76\t@ 0x4c"
+      },
+      {
+        "address": 4624872,
+        "bytes": "0090",
+        "mnemonic": "str",
+        "operands": "r0, [sp, #0]"
+      },
+      {
+        "address": 4624874,
+        "bytes": "dff84839",
+        "mnemonic": "ldr.w",
+        "operands": "r3, [pc, #2376]\t@ 469b34 <.text+0x978>"
+      },
+      {
+        "address": 4624878,
+        "bytes": "dff84829",
+        "mnemonic": "ldr.w",
+        "operands": "r2, [pc, #2376]\t@ 469b38 <.text+0x97c>"
+      },
+      {
+        "address": 4624882,
+        "bytes": "dff84819",
+        "mnemonic": "ldr.w",
+        "operands": "r1, [pc, #2376]\t@ 469b3c <.text+0x980>"
+      },
+      {
+        "address": 4624886,
+        "bytes": "0120",
+        "mnemonic": "movs",
+        "operands": "r0, #1"
+      },
+      {
+        "address": 4624888,
+        "bytes": "d4f7bcf9",
+        "mnemonic": "bl",
+        "operands": "43d574 <.text-0x2bc48>"
+      },
+      {
+        "address": 4624892,
+        "bytes": "d3f767ff",
+        "mnemonic": "bl",
+        "operands": "43d0ce <.text-0x2c0ee>"
+      },
+      {
+        "address": 4624896,
+        "bytes": "c007",
+        "mnemonic": "lsls",
+        "operands": "r0, r0, #31"
+      },
+      {
+        "address": 4624898,
+        "bytes": "03d4",
+        "mnemonic": "bmi.n",
+        "operands": "46920c <.text+0x50>"
+      },
+      {
+        "address": 4624900,
+        "bytes": "d3f763ff",
+        "mnemonic": "bl",
+        "operands": "43d0ce <.text-0x2c0ee>"
+      },
+      {
+        "address": 4624904,
+        "bytes": "4007",
+        "mnemonic": "lsls",
+        "operands": "r0, r0, #29"
+      },
+      {
+        "address": 4624906,
+        "bytes": "06d5",
+        "mnemonic": "bpl.n",
+        "operands": "46921a <.text+0x5e>"
+      },
+      {
+        "address": 4624908,
+        "bytes": "dff83019",
+        "mnemonic": "ldr.w",
+        "operands": "r1, [pc, #2352]\t@ 469b40 <.text+0x984>"
+      },
+      {
+        "address": 4624912,
+        "bytes": "0a00",
+        "mnemonic": "movs",
+        "operands": "r2, r1"
+      },
+      {
+        "address": 4624914,
+        "bytes": "5ff08060",
+        "mnemonic": "movs.w",
+        "operands": "r0, #67108864\t@ 0x4000000"
+      },
+      {
+        "address": 4624918,
+        "bytes": "d3f742fe",
+        "mnemonic": "bl",
+        "operands": "43ce9e <.text-0x2c31e>"
+      },
+      {
+        "address": 4624922,
+        "bytes": "13bd",
+        "mnemonic": "pop",
+        "operands": "{r0, r1, r4, pc}"
+      }
+    ]
+  }
+]

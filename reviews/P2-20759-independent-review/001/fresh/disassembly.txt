@@ -1,0 +1,41 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpmfo8vnwc/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047b7fe <.text>:
+  47b7fe:	f895 0030 	ldrb.w	r0, [r5, #48]	@ 0x30
+  47b802:	f894 1030 	ldrb.w	r1, [r4, #48]	@ 0x30
+  47b806:	4288      	cmp	r0, r1
+  47b808:	d02d      	beq.n	47b866 <.text+0x68>
+  47b80a:	f7c1 fc60 	bl	43d0ce <.text-0x3e730>
+  47b80e:	0780      	lsls	r0, r0, #30
+  47b810:	d514      	bpl.n	47b83c <.text+0x3e>
+  47b812:	f894 0030 	ldrb.w	r0, [r4, #48]	@ 0x30
+  47b816:	9003      	str	r0, [sp, #12]
+  47b818:	f895 0030 	ldrb.w	r0, [r5, #48]	@ 0x30
+  47b81c:	9002      	str	r0, [sp, #8]
+  47b81e:	f8df 0a68 	ldr.w	r0, [pc, #2664]	@ 47c288 <.text+0xa8a>
+  47b822:	9001      	str	r0, [sp, #4]
+  47b824:	f240 7087 	movw	r0, #1927	@ 0x787
+  47b828:	9000      	str	r0, [sp, #0]
+  47b82a:	f8df 3a50 	ldr.w	r3, [pc, #2640]	@ 47c27c <.text+0xa7e>
+  47b82e:	f8df 23f0 	ldr.w	r2, [pc, #1008]	@ 47bc20 <.text+0x422>
+  47b832:	f8df 13f0 	ldr.w	r1, [pc, #1008]	@ 47bc24 <.text+0x426>
+  47b836:	2001      	movs	r0, #1
+  47b838:	f7c1 fe9c 	bl	43d574 <.text-0x3e28a>
+  47b83c:	f7c1 fc47 	bl	43d0ce <.text-0x3e730>
+  47b840:	07c0      	lsls	r0, r0, #31
+  47b842:	d403      	bmi.n	47b84c <.text+0x4e>
+  47b844:	f7c1 fc43 	bl	43d0ce <.text-0x3e730>
+  47b848:	0740      	lsls	r0, r0, #29
+  47b84a:	d50b      	bpl.n	47b864 <.text+0x66>
+  47b84c:	f8df 1a3c 	ldr.w	r1, [pc, #2620]	@ 47c28c <.text+0xa8e>
+  47b850:	f894 0030 	ldrb.w	r0, [r4, #48]	@ 0x30
+  47b854:	9000      	str	r0, [sp, #0]
+  47b856:	f895 3030 	ldrb.w	r3, [r5, #48]	@ 0x30
+  47b85a:	000a      	movs	r2, r1
+  47b85c:	f05f 6090 	movs.w	r0, #75497472	@ 0x4800000
+  47b860:	f7c1 fb1d 	bl	43ce9e <.text-0x3e960>
+  47b864:	2600      	movs	r6, #0

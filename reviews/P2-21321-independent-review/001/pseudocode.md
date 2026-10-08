@@ -1,0 +1,5 @@
+# Unsigned radix remainder digit buffer prefix
+
+Partial/unaccepted;110 instructionbytes48320A..483278. PUSH{R3,R4,R5,R6,R7,R8,LR}28bytes,SUBSP60,total88. R4=entryR0callback,freshSP88→R0value(fifthargument),SP108→R5flags(tenth),R7=0count. Ifvaluezero clearflagsbit4R5;freshSP96→R6radix(seventh). Flagsbit10set andvaluezero→unresolved483278 skipsdigitloop. Otherwise enterloopatleastonce.
+
+R12=UDIV(R0,R6),thenMLS R12=R0-R6*R12mod(remainder);LR=oldR7,R7=LR+1mod. R8=UXTB(R12),compareto10signed(byteunsignedrange). If<10 R12+=48mod;otherwiseflagsbit5 choosesR8=65else97,R12+=R8then-=10mod. R8=SP28buffer,storelowbyteR12[buffer+LR]. R0=UDIV(currentR0,R6);ifzero→483278;elseunsignedR7<32repeats,otherwisefallthrough483278. No radixvalidation/zero-divisorhandlingestablished;recordUDIVarchitecturaloperationwithoutassumingvalidbase. Digitarraywritesbounded32underentrycount0; preservefullremainder arithmetic versuslowbyteclassification,byteflagcaseandfirstiterationzero behavior. EntryR1/R2/R3 remainlive. No C,freeze,wholecoverage or equalityclaim.

@@ -1,0 +1,51 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpqo74d2vo/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0046a6d2 <.text>:
+  46a6d2:	b51f      	push	{r0, r1, r2, r3, r4, lr}
+  46a6d4:	f8df 47c0 	ldr.w	r4, [pc, #1984]	@ 46ae98 <.text+0x7c6>
+  46a6d8:	6820      	ldr	r0, [r4, #0]
+  46a6da:	f8df 1930 	ldr.w	r1, [pc, #2352]	@ 46b00c <.text+0x93a>
+  46a6de:	6809      	ldr	r1, [r1, #0]
+  46a6e0:	1e49      	subs	r1, r1, #1
+  46a6e2:	4288      	cmp	r0, r1
+  46a6e4:	da2a      	bge.n	46a73c <.text+0x6a>
+  46a6e6:	6820      	ldr	r0, [r4, #0]
+  46a6e8:	1c40      	adds	r0, r0, #1
+  46a6ea:	6020      	str	r0, [r4, #0]
+  46a6ec:	f7d2 fcef 	bl	43d0ce <.text-0x2d604>
+  46a6f0:	0780      	lsls	r0, r0, #30
+  46a6f2:	d50e      	bpl.n	46a712 <.text+0x40>
+  46a6f4:	6820      	ldr	r0, [r4, #0]
+  46a6f6:	9002      	str	r0, [sp, #8]
+  46a6f8:	f8df 0928 	ldr.w	r0, [pc, #2344]	@ 46b024 <.text+0x952>
+  46a6fc:	9001      	str	r0, [sp, #4]
+  46a6fe:	f240 10dd 	movw	r0, #477	@ 0x1dd
+  46a702:	9000      	str	r0, [sp, #0]
+  46a704:	f8df 3920 	ldr.w	r3, [pc, #2336]	@ 46b028 <.text+0x956>
+  46a708:	4a49      	ldr	r2, [pc, #292]	@ (46a830 <.text+0x15e>)
+  46a70a:	494a      	ldr	r1, [pc, #296]	@ (46a834 <.text+0x162>)
+  46a70c:	2004      	movs	r0, #4
+  46a70e:	f7d2 ff31 	bl	43d574 <.text-0x2d15e>
+  46a712:	f7d2 fcdc 	bl	43d0ce <.text-0x2d604>
+  46a716:	07c0      	lsls	r0, r0, #31
+  46a718:	d403      	bmi.n	46a722 <.text+0x50>
+  46a71a:	f7d2 fcd8 	bl	43d0ce <.text-0x2d604>
+  46a71e:	0740      	lsls	r0, r0, #29
+  46a720:	d507      	bpl.n	46a732 <.text+0x60>
+  46a722:	f8df 1908 	ldr.w	r1, [pc, #2312]	@ 46b02c <.text+0x95a>
+  46a726:	6823      	ldr	r3, [r4, #0]
+  46a728:	000a      	movs	r2, r1
+  46a72a:	f05f 5082 	movs.w	r0, #272629760	@ 0x10400000
+  46a72e:	f7d2 fbb6 	bl	43ce9e <.text-0x2d834>
+  46a732:	f7ff ff02 	bl	46a53a <.text-0x198>
+  46a736:	f7ff fed4 	bl	46a4e2 <.text-0x1f0>
+  46a73a:	e01f      	b.n	46a77c <.text+0xaa>
+  46a73c:	f7d2 fcc7 	bl	43d0ce <.text-0x2d604>
+  46a740:	0780      	lsls	r0, r0, #30
+  46a742:	d50c      	bpl.n	46a75e <.text+0x8c>
+  46a744:	f8df 08e8 	ldr.w	r0, [pc, #2280]	@ 46b030 <.text+0x95e>
+  46a748:	9001      	str	r0, [sp, #4]

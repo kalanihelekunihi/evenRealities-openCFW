@@ -1,0 +1,4 @@
+# Full entry R1 zero diagnostic early return prefix
+
+Partial/unaccepted;90 instruction bytes. PUSH R4,R5,R6,R7,R8,LR24bytes then SP-=32 creates56-byte frame. R4=fullentryR1;R5=literal47AE64;R6zero. FullR4nonzero branchespending0x47A91E withR0 stillfullentryR0. FullR4zero queries0x43D0CE withlive arguments;statusbit1zero skips0x47A8FC. Otherwise writes literal47B464 SP4 and998 SP0 then calls0x43D574(1,literal47AE28,literal47ADCC,literal47B480,fifth998,sixthliteral47B464).
+At0x47A8FC query status afresh;bit0one enters0x47A90C,otherwisequeryagain andbit2zero skips0x47A91A. Maskpath loadsR2literal47B484,R1=R2, leavesliveR3 andcalls0x43CE9E(0x04000000,R1,R2,liveR3). At0x47A91A explicitlyR0zero thenbranchpendingepilogue0x47AB48. Preserve fullentryR1condition, independent statusqueries andlivearguments. No inferred pointer validation or helper contracts. No C,freeze orwholecoverageclaim.

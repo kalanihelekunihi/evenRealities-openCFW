@@ -1,0 +1,60 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpnw8uo63t/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00468558 <.text>:
+  468558:	f7d4 fdb9 	bl	43d0ce <.text-0x2b48a>
+  46855c:	0780      	lsls	r0, r0, #30
+  46855e:	d510      	bpl.n	468582 <.text+0x2a>
+  468560:	7820      	ldrb	r0, [r4, #0]
+  468562:	9002      	str	r0, [sp, #8]
+  468564:	f8df 09a8 	ldr.w	r0, [pc, #2472]	@ 468f10 <.text+0x9b8>
+  468568:	9001      	str	r0, [sp, #4]
+  46856a:	f44f 7084 	mov.w	r0, #264	@ 0x108
+  46856e:	9000      	str	r0, [sp, #0]
+  468570:	f8df 3994 	ldr.w	r3, [pc, #2452]	@ 468f08 <.text+0x9b0>
+  468574:	f8df 24c0 	ldr.w	r2, [pc, #1216]	@ 468a38 <.text+0x4e0>
+  468578:	f8df 14c0 	ldr.w	r1, [pc, #1216]	@ 468a3c <.text+0x4e4>
+  46857c:	2003      	movs	r0, #3
+  46857e:	f7d4 fff9 	bl	43d574 <.text-0x2afe4>
+  468582:	f7d4 fda4 	bl	43d0ce <.text-0x2b48a>
+  468586:	07c0      	lsls	r0, r0, #31
+  468588:	d403      	bmi.n	468592 <.text+0x3a>
+  46858a:	f7d4 fda0 	bl	43d0ce <.text-0x2b48a>
+  46858e:	0740      	lsls	r0, r0, #29
+  468590:	d507      	bpl.n	4685a2 <.text+0x4a>
+  468592:	f8df 1980 	ldr.w	r1, [pc, #2432]	@ 468f14 <.text+0x9bc>
+  468596:	7823      	ldrb	r3, [r4, #0]
+  468598:	000a      	movs	r2, r1
+  46859a:	f05f 6044 	movs.w	r0, #205520896	@ 0xc400000
+  46859e:	f7d4 fc7e 	bl	43ce9e <.text-0x2b6ba>
+  4685a2:	b2f6      	uxtb	r6, r6
+  4685a4:	2e01      	cmp	r6, #1
+  4685a6:	d141      	bne.n	46862c <.text+0xd4>
+  4685a8:	2300      	movs	r3, #0
+  4685aa:	2200      	movs	r2, #0
+  4685ac:	2100      	movs	r1, #0
+  4685ae:	2010      	movs	r0, #16
+  4685b0:	f7fc fabd 	bl	464b2e <.text-0x3a2a>
+  4685b4:	e03a      	b.n	46862c <.text+0xd4>
+  4685b6:	b2f6      	uxtb	r6, r6
+  4685b8:	2e01      	cmp	r6, #1
+  4685ba:	d137      	bne.n	46862c <.text+0xd4>
+  4685bc:	f7da ff62 	bl	443484 <.text-0x250d4>
+  4685c0:	2801      	cmp	r0, #1
+  4685c2:	d133      	bne.n	46862c <.text+0xd4>
+  4685c4:	2010      	movs	r0, #16
+  4685c6:	f7da ff83 	bl	4434d0 <.text-0x25088>
+  4685ca:	2801      	cmp	r0, #1
+  4685cc:	d12e      	bne.n	46862c <.text+0xd4>
+  4685ce:	f8df 0948 	ldr.w	r0, [pc, #2376]	@ 468f18 <.text+0x9c0>
+  4685d2:	7800      	ldrb	r0, [r0, #0]
+  4685d4:	f88d 0001 	strb.w	r0, [sp, #1]
+  4685d8:	2300      	movs	r3, #0
+  4685da:	2201      	movs	r2, #1
+  4685dc:	f10d 0101 	add.w	r1, sp, #1
+  4685e0:	2010      	movs	r0, #16
+  4685e2:	f7fc fae6 	bl	464bb2 <.text-0x39a6>
+  4685e6:	e021      	b.n	46862c <.text+0xd4>

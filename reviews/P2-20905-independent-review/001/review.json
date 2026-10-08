@@ -1,0 +1,10 @@
+{
+  "id": "P2-20905",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "Fresh replay passed for 88 bytes at 0x47D818..0x47D870; image/source hashes and tiling match. The initial 0x4A2FDC result is tested full-width: zero takes diagnostics and does not make a message call; nonzero reaches a second helper whose full-width zero/nonzero branches call different message routines. The helper results are not returned. The POP aliases return SP0 (saved entry R5 unless logger 253 overwrote it), SP4 (saved R6 unless logger literal overwrote it), and saved R7 into R2. No LOW8 guard is used for these helper selections."
+}

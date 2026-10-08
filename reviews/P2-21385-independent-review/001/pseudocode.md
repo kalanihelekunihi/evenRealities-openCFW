@@ -1,0 +1,5 @@
+# Format variadic and explicit argument-list wrappers
+
+Partial/unaccepted;44 instructionbytes483FD0..483FFC. First483FD0 pushesentryR3(4B),thenR6/R7/LR12Btotal16. R3=entryR2format,R2=SP12addresssavedentryR3(firstvararg),storeR2SP0 overwriting savedR6slot;R2=entryR1capacity,R1=entryR0context,R0=wordliteral484010callback;call483960. POPR1/R2loadsSP0varargpointerandSP4savedR7;LDRPCfromSP8savedLR,SP+=8discardsLRandentryR3. Total16Brelease;helperR0resultretained,R6/R7notmodifiedbywrapperexceptcalleeconvention.
+
+Second483FEA pushesR7/LR8B;storeentryR3explicitarglistSP0overwritessavedR7;R3=entryR2format,R2=entryR1capacity,R1=entryR0context,R0=wordliteral484010callback;call483960;POPR1/PCloadsarglistR1andreturnLR,release8B;helperR0retained. Callbackliteralfullwordreadreferences.json resolvespointerbuttargethelperseparate. ExactstackaliasesandreturnedR1/R2effects retained. No C,freeze,wholecoverage or equalityclaim.

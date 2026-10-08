@@ -1,0 +1,255 @@
+{
+  "utc": "2026-10-07T02:57:55.971166+00:00",
+  "status": "PASS",
+  "elf": "g2/build/bootloader-completion/source-image-compatible/snapshots/4cb522cf7cbeffc853a2b2f5428abbd8b9ec8584071c59eb34d30b609a478b8a/bootloader-source-test.elf",
+  "elf_sha256": "4cb522cf7cbeffc853a2b2f5428abbd8b9ec8584071c59eb34d30b609a478b8a",
+  "seed_elf_sha256": "e6ba6916ee417e9efec1f4dc90a50f8ce7777f0e2ad8f976e6d2e27856072b78",
+  "profiles": [
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/4cb522cf7cbeffc853a2b2f5428abbd8b9ec8584071c59eb34d30b609a478b8a/comparison.json",
+      "sha256": "9fb51c2366099b8b239dc8e36c1502519561aa24dad1672cb8a342650db36d54",
+      "status": "PASS",
+      "cases": 2
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/4cb522cf7cbeffc853a2b2f5428abbd8b9ec8584071c59eb34d30b609a478b8a/failures.json",
+      "sha256": "5eb443058abe8870e1139067c7d4106f117f0d4cb8694436c700138ac56df338",
+      "status": "PASS",
+      "cases": 3
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/4cb522cf7cbeffc853a2b2f5428abbd8b9ec8584071c59eb34d30b609a478b8a/powerloss.json",
+      "sha256": "2d507fda08a450c9562c53783f49732a75aa54dec91d6ed7286ac70abbb9565a",
+      "status": "PASS",
+      "cases": 2
+    }
+  ],
+  "total_cases": 7,
+  "union_distinct_original_trace_bytes": 36246,
+  "payload_bytes": 148599,
+  "percentage": 24.391819595017463,
+  "additional_seven_plus_async_direct_unique_bytes": 37804,
+  "additional_union_limits": "515 asynchronous direct cases use controlled callbacks, delay and finite synthetic FIFO/command states; not the same hardware/scheduling model as seven-case integration.",
+  "interruption_checks": [
+    {
+      "interruption": "before",
+      "matches": {
+        "stopped_persistence_match": true,
+        "stopped_observable_match": true,
+        "reboot_persistence_match": true,
+        "reboot_observable_match": true
+      },
+      "both_reboot_endpoints": "application reset entry, fixture matches, no exception"
+    },
+    {
+      "interruption": "after",
+      "matches": {
+        "stopped_persistence_match": true,
+        "stopped_observable_match": true,
+        "reboot_persistence_match": true,
+        "reboot_observable_match": true
+      },
+      "both_reboot_endpoints": "application reset entry, fixture matches, no exception"
+    }
+  ],
+  "validation_input_hashes": {
+    "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/4cb522cf7cbeffc853a2b2f5428abbd8b9ec8584071c59eb34d30b609a478b8a/validation-input-hashes-final.json",
+    "sha256": "14158d46eda9e945ff3df1e5b9262b8e3cf0c448e34d2abd9ab6fd2e58ee9402",
+    "existing_source_runner_files": 595,
+    "linked_objects": 149,
+    "post_run_hash_mismatches": []
+  },
+  "additional_tests": [
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/context-events-4cb522.json",
+      "sha256": "cf01128bca49850cb7a8c8b40adf572f34e6a934147e9cd662ea7460c1847672",
+      "status": "PASS",
+      "cases": 505
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/context-events-guards-4cb522.json",
+      "sha256": "6749b7f8e21ee63f79d7cc8caaedf1ded5f49621cf114ab1786f7ca71c290aa0",
+      "status": "PASS",
+      "cases": 10
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/context-children-4cb522.json",
+      "sha256": "ea5745573f7ada116999ca7973eb37328841ca33e346d472d7f2ee46a958ddec",
+      "status": "PASS",
+      "cases": 740
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/semaphore-owned-4cb522.json",
+      "sha256": "46774d61eb2be179b97594bcdc5243045d7182eadfed08c76a3ac571b5406306",
+      "status": "PASS",
+      "cases": 12
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/iom-stable-subtype-4cb522.json",
+      "sha256": "878fd04ca42a76398ae23886c02754dd4c4e05a1cc441a1bc3c32b8b1ea0c794",
+      "status": "PASS",
+      "cases": 2
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/context-irq-4cb522.json",
+      "sha256": "f29d864c67abab7701276081b9264ab98f911355e333909db0b1e53aa47c24a0",
+      "status": "PASS",
+      "cases": 292
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/gpio-descriptors-4cb522.json",
+      "sha256": "6895477a17c0b6367429e293db41cea18d1fcbf7a71f7bcadefb7066205bf594",
+      "status": "PASS",
+      "cases": 434
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/adc-context-4cb522.json",
+      "sha256": "ece56ef53745ba65eb5aaeb667a69b0786194ad557dbaea8b57fba756595ef23",
+      "status": "PASS",
+      "cases": 135
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/adc-control-4cb522.json",
+      "sha256": "dd64316929b2dc594cf6a43d9678f4ce1ceb99e4c29c7a3a6b64e7ed860ae798",
+      "status": "PASS",
+      "cases": 279
+    }
+  ],
+  "additional_aux_runner": {
+    "path": "g2/components/bootloader/initializer_callbacks/verify_context_events_guards.py",
+    "sha256": "ebdef17625de7ede42a48f979fcbc5771d9f41d4f1e4cd107d93cb86d25c0590"
+  },
+  "trace_byte_audit": {
+    "method": "Deduplicate byte addresses; FP64 second-halfword NOP logs overlap modeled slots. Synthetic callback stub instructions are excluded from original trace.",
+    "patched_fp_second_halfword_records": [
+      {
+        "profile": "comparison.json",
+        "pc": "0x43004a",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "comparison.json",
+        "pc": "0x43004e",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "comparison.json",
+        "pc": "0x430056",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "comparison.json",
+        "pc": "0x43005a",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "comparison.json",
+        "pc": "0x4301a0",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "comparison.json",
+        "pc": "0x4301a4",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "failures.json",
+        "pc": "0x43004a",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "failures.json",
+        "pc": "0x43004e",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "failures.json",
+        "pc": "0x430056",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "failures.json",
+        "pc": "0x43005a",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "failures.json",
+        "pc": "0x4301a0",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "failures.json",
+        "pc": "0x4301a4",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "powerloss.json",
+        "pc": "0x43004a",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "powerloss.json",
+        "pc": "0x43004e",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "powerloss.json",
+        "pc": "0x430056",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "powerloss.json",
+        "pc": "0x43005a",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "powerloss.json",
+        "pc": "0x4301a0",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "powerloss.json",
+        "pc": "0x4301a4",
+        "recorded": "00bf"
+      }
+    ]
+  },
+  "limits": [
+    "Relocated source-linked test ELF, not a complete bootable/byte-identical payload.",
+    "Synthetic MMIO, scheduler, ADC and resident-ROM operations; no physical partial-write or IRQ/timing proof.",
+    "Six original FP64 effects emulated; union deduplicates byte addresses, including overlapping second-halfword logs.",
+    "Direct lower callbacks controlled; stable-subtype test is conditional model sensitivity, not hardware behavior.",
+    "ADC control/getters FP32 plus initializer/reset and native INFO selector/dispatch/thunk execute in shared startup, with explicit zero-valued resident ROM48 word fixture. No real factory/OTP behavior proof. Stock97 GPIO descriptors do not take callback registration; direct GPIO IRQ fixtures model28 zero-filled original stack bytes because Unicorn misexecutes its IT/STM carry loop. No such model is used by the seven integration cases. Asynchronous IOM IRQ delivery is also tested directly, not reached by shared startup."
+  ],
+  "separate_module_regressions": [
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/cmdq-ownership-isolated-term-4cb522.json",
+      "sha256": "46ca57507bff081a9e373c64f92e91ddd73d792296820a35cdff89ffa17afe7a",
+      "cases": 53,
+      "shared_image_cases": 40,
+      "separate_term_module_cases": 13,
+      "module_sha256": "181736aed5b93dc58bcec10456651d3f5f7d38f25ad9a03a5f59ad557bd10c08",
+      "limits": "Term module remains separate; no quiescence/free/callback drain proof."
+    }
+  ],
+  "adc_control_source_ownership": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/adc-control-source-ownership-4cb522.json",
+  "alignment": {
+    "status": "PASS",
+    "mappings": 367
+  },
+  "source_manifest": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/source-image-manifest-4cb522.json",
+  "resident_rom_fixture": {
+    "entry": "0x48",
+    "read_addresses": [
+      "0x42003300",
+      "0x42003304",
+      "0x42003308",
+      "0x42003328",
+      "0x4200332c"
+    ],
+    "word_count": 1,
+    "synthetic_word": 0,
+    "synthetic_status": 0,
+    "limits": "External resident ROM model; no actual factory calibration."
+  }
+}

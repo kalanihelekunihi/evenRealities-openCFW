@@ -1,0 +1,9163 @@
+{
+  "status": "PASS",
+  "cases": 205,
+  "blob_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "elf_sha256": "9262e581b149853f9b3ca17c9edaeac217ab4a8746c5bb404a4fdee85568facc",
+  "coverage": {
+    "step_ticks": {
+      "start": "0x418394",
+      "end": "0x418408",
+      "bytes": 116,
+      "covered": 110
+    },
+    "counter_read": {
+      "start": "0x41f424",
+      "end": "0x41f440",
+      "bytes": 28,
+      "covered": 28
+    },
+    "timer_compare": {
+      "start": "0x41f440",
+      "end": "0x41f4ac",
+      "bytes": 108,
+      "covered": 108
+    },
+    "stimer_interrupt_clear": {
+      "start": "0x41f4b6",
+      "end": "0x41f4c0",
+      "bytes": 10,
+      "covered": 10
+    },
+    "irq_clear": {
+      "start": "0x41b630",
+      "end": "0x41b64c",
+      "bytes": 28,
+      "covered": 28
+    },
+    "pre_sleep": {
+      "start": "0x41b5e8",
+      "end": "0x41b5f4",
+      "bytes": 12,
+      "covered": 12
+    },
+    "post_sleep": {
+      "start": "0x41b5f4",
+      "end": "0x41b5f6",
+      "bytes": 2,
+      "covered": 2
+    },
+    "sample_three": {
+      "start": "0x422aac",
+      "end": "0x422ac8",
+      "bytes": 28,
+      "covered": 28
+    },
+    "irq_save": {
+      "start": "0x41b8ec",
+      "end": "0x41b8f4",
+      "bytes": 8,
+      "covered": 8
+    },
+    "idle_entry": {
+      "start": "0x4189ac",
+      "end": "0x4189fa",
+      "bytes": 78,
+      "covered": 76
+    },
+    "tickless_sleep": {
+      "start": "0x41b754",
+      "end": "0x41b818",
+      "bytes": 196,
+      "covered": 160
+    }
+  },
+  "results": [
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 0,
+        "r0": 0,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 0,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 0,
+        "r0": 0,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 0,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 0,
+        "r0": 1,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 0,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 0,
+        "r0": 1,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 0,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 0,
+        "r0": 5,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 0,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 0,
+        "r0": 5,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 0,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 0,
+        "r0": 100,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 0,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 0,
+        "r0": 100,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 0,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 10,
+        "r0": 0,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 0,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 10,
+        "r0": 0,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 0,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 10,
+        "r0": 1,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 1,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 10,
+        "r0": 1,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 1,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 10,
+        "r0": 5,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 5,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 10,
+        "r0": 5,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 5,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 10,
+        "r0": 100,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 0,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 10,
+        "r0": 100,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 0,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 15,
+        "r0": 0,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 0,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 15,
+        "r0": 0,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 0,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 15,
+        "r0": 1,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 1,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 15,
+        "r0": 1,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 1,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 15,
+        "r0": 5,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 5,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 15,
+        "r0": 5,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 5,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 15,
+        "r0": 100,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 0,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 15,
+        "r0": 100,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 0,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 100,
+        "r0": 0,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 0,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 100,
+        "r0": 0,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 0,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 100,
+        "r0": 1,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 1,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 100,
+        "r0": 1,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 1,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 100,
+        "r0": 5,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 5,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 100,
+        "r0": 5,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 5,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 100,
+        "r0": 100,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 0,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 100,
+        "r0": 100,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 99,
+          "0x20027154": 8,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 4294967295,
+        "r0": 0,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 0,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 4294967295,
+        "r0": 0,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 0,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 4294967295,
+        "r0": 1,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 1,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 4294967295,
+        "r0": 1,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 1,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 4294967295,
+        "r0": 5,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 5,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 4294967295,
+        "r0": 5,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 5,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 4294967295,
+        "r0": 100,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 100,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 0,
+        "next": 4294967295,
+        "r0": 100,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 100,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 0,
+        "r0": 0,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 0,
+        "r0": 0,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 0,
+        "r0": 1,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 0,
+        "r0": 1,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 0,
+        "r0": 5,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 0,
+        "r0": 5,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 0,
+        "r0": 100,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 0,
+        "r0": 100,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 10,
+        "r0": 0,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 10,
+        "r0": 0,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 10,
+        "r0": 1,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 10,
+        "r0": 1,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 10,
+        "r0": 5,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 10,
+        "r0": 5,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 10,
+        "r0": 100,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 10,
+        "r0": 100,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 15,
+        "r0": 0,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 15,
+        "r0": 0,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 15,
+        "r0": 1,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 11,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 15,
+        "r0": 1,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 11,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 15,
+        "r0": 5,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 15,
+        "r0": 5,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 14,
+          "0x20027154": 8,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 15,
+        "r0": 100,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 15,
+        "r0": 100,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 100,
+        "r0": 0,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 100,
+        "r0": 0,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 100,
+        "r0": 1,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 11,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 100,
+        "r0": 1,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 11,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 100,
+        "r0": 5,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 15,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 100,
+        "r0": 5,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 15,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 100,
+        "r0": 100,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 100,
+        "r0": 100,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 4294967295,
+        "r0": 0,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 4294967295,
+        "r0": 0,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 4294967295,
+        "r0": 1,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 11,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 4294967295,
+        "r0": 1,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 11,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 4294967295,
+        "r0": 5,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 15,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 4294967295,
+        "r0": 5,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 15,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 4294967295,
+        "r0": 100,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 110,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 10,
+        "next": 4294967295,
+        "r0": 100,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 110,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 0,
+        "r0": 0,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 0,
+        "r0": 0,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 0,
+        "r0": 1,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 0,
+        "r0": 1,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 0,
+        "r0": 5,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 0,
+        "r0": 5,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 0,
+        "r0": 100,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 0,
+        "r0": 100,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 10,
+        "r0": 0,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 10,
+        "r0": 0,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 10,
+        "r0": 1,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 10,
+        "r0": 1,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 10,
+        "r0": 5,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 10,
+        "r0": 5,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 10,
+        "r0": 100,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 10,
+        "r0": 100,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 15,
+        "r0": 0,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 15,
+        "r0": 0,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 15,
+        "r0": 1,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 15,
+        "r0": 1,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 15,
+        "r0": 5,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 15,
+        "r0": 5,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 15,
+        "r0": 100,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 15,
+        "r0": 100,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 100,
+        "r0": 0,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 100,
+        "r0": 0,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 100,
+        "r0": 1,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 100,
+        "r0": 1,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 100,
+        "r0": 5,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 100,
+        "r0": 5,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 100,
+        "r0": 100,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 84,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 100,
+        "r0": 100,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 84,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 4294967295,
+        "r0": 0,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 4294967295,
+        "r0": 0,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967280,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 4294967295,
+        "r0": 1,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967281,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 4294967295,
+        "r0": 1,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967281,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 4294967295,
+        "r0": 5,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967285,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 4294967295,
+        "r0": 5,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 4294967285,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 4294967295,
+        "r0": 100,
+        "suspended": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 84,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "step_ticks",
+      "fixture": {
+        "ticks": 4294967280,
+        "next": 4294967295,
+        "r0": 100,
+        "suspended": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 84,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "counter_read",
+      "fixture": {
+        "samples": [
+          [
+            1,
+            1,
+            2
+          ]
+        ]
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            1,
+            1
+          ],
+          [
+            1073776644,
+            1,
+            1
+          ],
+          [
+            1073776644,
+            2,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [],
+        "return": 1
+      }
+    },
+    {
+      "function": "counter_read",
+      "fixture": {
+        "samples": [
+          [
+            1,
+            2,
+            3
+          ]
+        ]
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            1,
+            1
+          ],
+          [
+            1073776644,
+            2,
+            1
+          ],
+          [
+            1073776644,
+            3,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [],
+        "return": 3
+      }
+    },
+    {
+      "function": "counter_read",
+      "fixture": {
+        "samples": [
+          [
+            4294967295,
+            0,
+            1
+          ]
+        ]
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            4294967295,
+            1
+          ],
+          [
+            1073776644,
+            0,
+            1
+          ],
+          [
+            1073776644,
+            1,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [],
+        "return": 1
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 0,
+        "r1": 0,
+        "mask": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 104,
+          "0x40008820": 1,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776672,
+            4,
+            1
+          ]
+        ],
+        "return": 134217728
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 0,
+        "r1": 0,
+        "mask": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 104,
+          "0x40008820": 1,
+          "0x40008908": 0
+        },
+        "primask": 1,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776672,
+            4,
+            1
+          ]
+        ],
+        "return": 134217728
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 0,
+        "r1": 1,
+        "mask": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 104,
+          "0x40008820": 1,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776672,
+            4,
+            1
+          ]
+        ],
+        "return": 134217728
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 0,
+        "r1": 1,
+        "mask": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 104,
+          "0x40008820": 1,
+          "0x40008908": 0
+        },
+        "primask": 1,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776672,
+            4,
+            1
+          ]
+        ],
+        "return": 134217728
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 0,
+        "r1": 3,
+        "mask": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 104,
+          "0x40008820": 1,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776672,
+            4,
+            1
+          ]
+        ],
+        "return": 134217728
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 0,
+        "r1": 3,
+        "mask": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 104,
+          "0x40008820": 1,
+          "0x40008908": 0
+        },
+        "primask": 1,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776672,
+            4,
+            1
+          ]
+        ],
+        "return": 134217728
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 0,
+        "r1": 4,
+        "mask": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 104,
+          "0x40008820": 1,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776672,
+            4,
+            1
+          ]
+        ],
+        "return": 134217728
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 0,
+        "r1": 4,
+        "mask": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 104,
+          "0x40008820": 1,
+          "0x40008908": 0
+        },
+        "primask": 1,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776672,
+            4,
+            1
+          ]
+        ],
+        "return": 134217728
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 0,
+        "r1": 10,
+        "mask": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 104,
+          "0x40008820": 4,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776672,
+            4,
+            4
+          ]
+        ],
+        "return": 0
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 0,
+        "r1": 10,
+        "mask": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 104,
+          "0x40008820": 4,
+          "0x40008908": 0
+        },
+        "primask": 1,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776672,
+            4,
+            4
+          ]
+        ],
+        "return": 0
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 0,
+        "r1": 100,
+        "mask": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 104,
+          "0x40008820": 94,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776672,
+            4,
+            94
+          ]
+        ],
+        "return": 0
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 0,
+        "r1": 100,
+        "mask": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 104,
+          "0x40008820": 94,
+          "0x40008908": 0
+        },
+        "primask": 1,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776672,
+            4,
+            94
+          ]
+        ],
+        "return": 0
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 1,
+        "r1": 0,
+        "mask": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776676,
+            4,
+            1
+          ]
+        ],
+        "return": 134217728
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 1,
+        "r1": 0,
+        "mask": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 1,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776676,
+            4,
+            1
+          ]
+        ],
+        "return": 134217728
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 1,
+        "r1": 1,
+        "mask": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776676,
+            4,
+            1
+          ]
+        ],
+        "return": 134217728
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 1,
+        "r1": 1,
+        "mask": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 1,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776676,
+            4,
+            1
+          ]
+        ],
+        "return": 134217728
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 1,
+        "r1": 3,
+        "mask": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776676,
+            4,
+            1
+          ]
+        ],
+        "return": 134217728
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 1,
+        "r1": 3,
+        "mask": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 1,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776676,
+            4,
+            1
+          ]
+        ],
+        "return": 134217728
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 1,
+        "r1": 4,
+        "mask": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776676,
+            4,
+            1
+          ]
+        ],
+        "return": 134217728
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 1,
+        "r1": 4,
+        "mask": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 1,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776676,
+            4,
+            1
+          ]
+        ],
+        "return": 134217728
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 1,
+        "r1": 10,
+        "mask": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776676,
+            4,
+            6
+          ]
+        ],
+        "return": 0
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 1,
+        "r1": 10,
+        "mask": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 1,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776676,
+            4,
+            6
+          ]
+        ],
+        "return": 0
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 1,
+        "r1": 100,
+        "mask": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776676,
+            4,
+            96
+          ]
+        ],
+        "return": 0
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 1,
+        "r1": 100,
+        "mask": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 1,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776676,
+            4,
+            96
+          ]
+        ],
+        "return": 0
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 7,
+        "r1": 0,
+        "mask": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776700,
+            4,
+            1
+          ]
+        ],
+        "return": 134217728
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 7,
+        "r1": 0,
+        "mask": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 1,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776700,
+            4,
+            1
+          ]
+        ],
+        "return": 134217728
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 7,
+        "r1": 1,
+        "mask": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776700,
+            4,
+            1
+          ]
+        ],
+        "return": 134217728
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 7,
+        "r1": 1,
+        "mask": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 1,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776700,
+            4,
+            1
+          ]
+        ],
+        "return": 134217728
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 7,
+        "r1": 3,
+        "mask": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776700,
+            4,
+            1
+          ]
+        ],
+        "return": 134217728
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 7,
+        "r1": 3,
+        "mask": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 1,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776700,
+            4,
+            1
+          ]
+        ],
+        "return": 134217728
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 7,
+        "r1": 4,
+        "mask": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776700,
+            4,
+            1
+          ]
+        ],
+        "return": 134217728
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 7,
+        "r1": 4,
+        "mask": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 1,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776700,
+            4,
+            1
+          ]
+        ],
+        "return": 134217728
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 7,
+        "r1": 10,
+        "mask": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776700,
+            4,
+            6
+          ]
+        ],
+        "return": 0
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 7,
+        "r1": 10,
+        "mask": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 1,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776700,
+            4,
+            6
+          ]
+        ],
+        "return": 0
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 7,
+        "r1": 100,
+        "mask": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776700,
+            4,
+            96
+          ]
+        ],
+        "return": 0
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 7,
+        "r1": 100,
+        "mask": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 1,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776700,
+            4,
+            96
+          ]
+        ],
+        "return": 0
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 8,
+        "r1": 0,
+        "mask": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [],
+        "return": 5
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 8,
+        "r1": 0,
+        "mask": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 1,
+        "basepri": 0,
+        "mmio_writes": [],
+        "return": 5
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 8,
+        "r1": 1,
+        "mask": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [],
+        "return": 5
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 8,
+        "r1": 1,
+        "mask": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 1,
+        "basepri": 0,
+        "mmio_writes": [],
+        "return": 5
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 8,
+        "r1": 3,
+        "mask": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [],
+        "return": 5
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 8,
+        "r1": 3,
+        "mask": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 1,
+        "basepri": 0,
+        "mmio_writes": [],
+        "return": 5
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 8,
+        "r1": 4,
+        "mask": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [],
+        "return": 5
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 8,
+        "r1": 4,
+        "mask": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 1,
+        "basepri": 0,
+        "mmio_writes": [],
+        "return": 5
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 8,
+        "r1": 10,
+        "mask": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [],
+        "return": 5
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 8,
+        "r1": 10,
+        "mask": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 1,
+        "basepri": 0,
+        "mmio_writes": [],
+        "return": 5
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 8,
+        "r1": 100,
+        "mask": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [],
+        "return": 5
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 8,
+        "r1": 100,
+        "mask": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 1,
+        "basepri": 0,
+        "mmio_writes": [],
+        "return": 5
+      }
+    },
+    {
+      "function": "stimer_interrupt_clear",
+      "fixture": {
+        "r0": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776904,
+            4,
+            0
+          ]
+        ],
+        "return": 11259375
+      }
+    },
+    {
+      "function": "stimer_interrupt_clear",
+      "fixture": {
+        "r0": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 1
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776904,
+            4,
+            1
+          ]
+        ],
+        "return": 11259375
+      }
+    },
+    {
+      "function": "stimer_interrupt_clear",
+      "fixture": {
+        "r0": 4294967295
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 4294967295
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776904,
+            4,
+            4294967295
+          ]
+        ],
+        "return": 11259375
+      }
+    },
+    {
+      "function": "irq_clear",
+      "fixture": {
+        "r0": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            3758154368,
+            4,
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "function": "irq_clear",
+      "fixture": {
+        "r0": 31
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            3758154368,
+            4,
+            2147483648
+          ]
+        ]
+      }
+    },
+    {
+      "function": "irq_clear",
+      "fixture": {
+        "r0": 32
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            3758154372,
+            4,
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "function": "irq_clear",
+      "fixture": {
+        "r0": 63
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            3758154372,
+            4,
+            2147483648
+          ]
+        ]
+      }
+    },
+    {
+      "function": "irq_clear",
+      "fixture": {
+        "r0": 65535
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "irq_clear",
+      "fixture": {
+        "r0": 4294934528
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "pre_sleep",
+      "fixture": {
+        "r0": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [
+          [
+            "deep",
+            [
+              1
+            ]
+          ]
+        ],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [],
+        "return": 0
+      }
+    },
+    {
+      "function": "post_sleep",
+      "fixture": {
+        "r0": 0
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "pre_sleep",
+      "fixture": {
+        "r0": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [
+          [
+            "deep",
+            [
+              1
+            ]
+          ]
+        ],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [],
+        "return": 0
+      }
+    },
+    {
+      "function": "post_sleep",
+      "fixture": {
+        "r0": 1
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "pre_sleep",
+      "fixture": {
+        "r0": 100
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [
+          [
+            "deep",
+            [
+              1
+            ]
+          ]
+        ],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [],
+        "return": 0
+      }
+    },
+    {
+      "function": "post_sleep",
+      "fixture": {
+        "r0": 100
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "idle_entry",
+      "fixture": {
+        "ready": 1,
+        "expected": [
+          0
+        ],
+        "next": 5,
+        "ticks": 10
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [
+          [
+            "cleanup",
+            []
+          ],
+          [
+            "suspend",
+            []
+          ]
+        ],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 0,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "idle_entry",
+      "fixture": {
+        "ready": 1,
+        "expected": [
+          0
+        ],
+        "next": 100,
+        "ticks": 10
+      },
+      "result": {
+        "end": [
+          "second-idle-iteration"
+        ],
+        "calls": [
+          [
+            "cleanup",
+            []
+          ],
+          [
+            "suspend",
+            []
+          ],
+          [
+            "deep",
+            [
+              1
+            ]
+          ],
+          [
+            "resume",
+            []
+          ],
+          [
+            "cleanup",
+            []
+          ]
+        ],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            105,
+            1
+          ],
+          [
+            1073776644,
+            105,
+            1
+          ],
+          [
+            1073776644,
+            105,
+            1
+          ],
+          [
+            1073776644,
+            106,
+            1
+          ],
+          [
+            1073776644,
+            106,
+            1
+          ],
+          [
+            1073776644,
+            106,
+            1
+          ],
+          [
+            1073776644,
+            107,
+            1
+          ],
+          [
+            1073776644,
+            107,
+            1
+          ],
+          [
+            1073776644,
+            107,
+            1
+          ],
+          [
+            1073776644,
+            108,
+            1
+          ],
+          [
+            1073776644,
+            108,
+            1
+          ],
+          [
+            1073776644,
+            108,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 0,
+          "0x200004c4": 0,
+          "0x200001c8": 108,
+          "0x40008820": 1,
+          "0x40008908": 1
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776672,
+            4,
+            85
+          ],
+          [
+            1073776904,
+            4,
+            1
+          ],
+          [
+            3758154372,
+            4,
+            1
+          ],
+          [
+            1073776672,
+            4,
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "function": "idle_entry",
+      "fixture": {
+        "ready": 1,
+        "expected": [
+          3,
+          0
+        ],
+        "next": 5,
+        "ticks": 10
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [
+          [
+            "cleanup",
+            []
+          ],
+          [
+            "suspend",
+            []
+          ]
+        ],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 0,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "idle_entry",
+      "fixture": {
+        "ready": 1,
+        "expected": [
+          3,
+          0
+        ],
+        "next": 100,
+        "ticks": 10
+      },
+      "result": {
+        "end": [
+          "second-idle-iteration"
+        ],
+        "calls": [
+          [
+            "cleanup",
+            []
+          ],
+          [
+            "suspend",
+            []
+          ],
+          [
+            "deep",
+            [
+              1
+            ]
+          ],
+          [
+            "resume",
+            []
+          ],
+          [
+            "cleanup",
+            []
+          ]
+        ],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            105,
+            1
+          ],
+          [
+            1073776644,
+            105,
+            1
+          ],
+          [
+            1073776644,
+            105,
+            1
+          ],
+          [
+            1073776644,
+            106,
+            1
+          ],
+          [
+            1073776644,
+            106,
+            1
+          ],
+          [
+            1073776644,
+            106,
+            1
+          ],
+          [
+            1073776644,
+            107,
+            1
+          ],
+          [
+            1073776644,
+            107,
+            1
+          ],
+          [
+            1073776644,
+            107,
+            1
+          ],
+          [
+            1073776644,
+            108,
+            1
+          ],
+          [
+            1073776644,
+            108,
+            1
+          ],
+          [
+            1073776644,
+            108,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 0,
+          "0x200004c4": 0,
+          "0x200001c8": 108,
+          "0x40008820": 1,
+          "0x40008908": 1
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776672,
+            4,
+            85
+          ],
+          [
+            1073776904,
+            4,
+            1
+          ],
+          [
+            3758154372,
+            4,
+            1
+          ],
+          [
+            1073776672,
+            4,
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "function": "idle_entry",
+      "fixture": {
+        "ready": 1,
+        "expected": [
+          3,
+          4
+        ],
+        "next": 5,
+        "ticks": 10
+      },
+      "result": {
+        "end": [
+          "assertion-write"
+        ],
+        "calls": [
+          [
+            "cleanup",
+            []
+          ],
+          [
+            "suspend",
+            []
+          ]
+        ],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 0,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 48,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "idle_entry",
+      "fixture": {
+        "ready": 1,
+        "expected": [
+          3,
+          4
+        ],
+        "next": 100,
+        "ticks": 10
+      },
+      "result": {
+        "end": [
+          "second-idle-iteration"
+        ],
+        "calls": [
+          [
+            "cleanup",
+            []
+          ],
+          [
+            "suspend",
+            []
+          ],
+          [
+            "deep",
+            [
+              1
+            ]
+          ],
+          [
+            "resume",
+            []
+          ],
+          [
+            "cleanup",
+            []
+          ]
+        ],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            105,
+            1
+          ],
+          [
+            1073776644,
+            105,
+            1
+          ],
+          [
+            1073776644,
+            105,
+            1
+          ],
+          [
+            1073776644,
+            106,
+            1
+          ],
+          [
+            1073776644,
+            106,
+            1
+          ],
+          [
+            1073776644,
+            106,
+            1
+          ],
+          [
+            1073776644,
+            107,
+            1
+          ],
+          [
+            1073776644,
+            107,
+            1
+          ],
+          [
+            1073776644,
+            107,
+            1
+          ],
+          [
+            1073776644,
+            108,
+            1
+          ],
+          [
+            1073776644,
+            108,
+            1
+          ],
+          [
+            1073776644,
+            108,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 0,
+          "0x200004c4": 0,
+          "0x200001c8": 108,
+          "0x40008820": 1,
+          "0x40008908": 1
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776672,
+            4,
+            85
+          ],
+          [
+            1073776904,
+            4,
+            1
+          ],
+          [
+            3758154372,
+            4,
+            1
+          ],
+          [
+            1073776672,
+            4,
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "function": "idle_entry",
+      "fixture": {
+        "ready": 2,
+        "expected": [
+          0
+        ],
+        "next": 5,
+        "ticks": 10
+      },
+      "result": {
+        "end": [
+          "second-idle-iteration"
+        ],
+        "calls": [
+          [
+            "cleanup",
+            []
+          ],
+          [
+            "resched",
+            []
+          ],
+          [
+            "cleanup",
+            []
+          ]
+        ],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 0,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "idle_entry",
+      "fixture": {
+        "ready": 2,
+        "expected": [
+          0
+        ],
+        "next": 100,
+        "ticks": 10
+      },
+      "result": {
+        "end": [
+          "second-idle-iteration"
+        ],
+        "calls": [
+          [
+            "cleanup",
+            []
+          ],
+          [
+            "resched",
+            []
+          ],
+          [
+            "cleanup",
+            []
+          ]
+        ],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 0,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "idle_entry",
+      "fixture": {
+        "ready": 2,
+        "expected": [
+          3,
+          0
+        ],
+        "next": 5,
+        "ticks": 10
+      },
+      "result": {
+        "end": [
+          "second-idle-iteration"
+        ],
+        "calls": [
+          [
+            "cleanup",
+            []
+          ],
+          [
+            "resched",
+            []
+          ],
+          [
+            "cleanup",
+            []
+          ]
+        ],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 0,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "idle_entry",
+      "fixture": {
+        "ready": 2,
+        "expected": [
+          3,
+          0
+        ],
+        "next": 100,
+        "ticks": 10
+      },
+      "result": {
+        "end": [
+          "second-idle-iteration"
+        ],
+        "calls": [
+          [
+            "cleanup",
+            []
+          ],
+          [
+            "resched",
+            []
+          ],
+          [
+            "cleanup",
+            []
+          ]
+        ],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 0,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "idle_entry",
+      "fixture": {
+        "ready": 2,
+        "expected": [
+          3,
+          4
+        ],
+        "next": 5,
+        "ticks": 10
+      },
+      "result": {
+        "end": [
+          "second-idle-iteration"
+        ],
+        "calls": [
+          [
+            "cleanup",
+            []
+          ],
+          [
+            "resched",
+            []
+          ],
+          [
+            "cleanup",
+            []
+          ]
+        ],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 0,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "idle_entry",
+      "fixture": {
+        "ready": 2,
+        "expected": [
+          3,
+          4
+        ],
+        "next": 100,
+        "ticks": 10
+      },
+      "result": {
+        "end": [
+          "second-idle-iteration"
+        ],
+        "calls": [
+          [
+            "cleanup",
+            []
+          ],
+          [
+            "resched",
+            []
+          ],
+          [
+            "cleanup",
+            []
+          ]
+        ],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 0,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "idle_entry",
+      "fixture": {
+        "ready": 1,
+        "expected": [
+          100
+        ],
+        "next": 100,
+        "ticks": 10,
+        "post_next": 10,
+        "post_pending": 0
+      },
+      "result": {
+        "end": [
+          "second-idle-iteration"
+        ],
+        "calls": [
+          [
+            "cleanup",
+            []
+          ],
+          [
+            "suspend",
+            []
+          ],
+          [
+            "resume",
+            []
+          ],
+          [
+            "cleanup",
+            []
+          ]
+        ],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 0,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "idle_entry",
+      "fixture": {
+        "ready": 1,
+        "expected": [
+          100
+        ],
+        "next": 100,
+        "ticks": 10,
+        "post_next": 10,
+        "post_pending": 1
+      },
+      "result": {
+        "end": [
+          "second-idle-iteration"
+        ],
+        "calls": [
+          [
+            "cleanup",
+            []
+          ],
+          [
+            "suspend",
+            []
+          ],
+          [
+            "resume",
+            []
+          ],
+          [
+            "cleanup",
+            []
+          ]
+        ],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 1,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "idle_entry",
+      "fixture": {
+        "ready": 1,
+        "expected": [
+          100
+        ],
+        "next": 100,
+        "ticks": 10,
+        "post_next": 11,
+        "post_pending": 0
+      },
+      "result": {
+        "end": [
+          "second-idle-iteration"
+        ],
+        "calls": [
+          [
+            "cleanup",
+            []
+          ],
+          [
+            "suspend",
+            []
+          ],
+          [
+            "resume",
+            []
+          ],
+          [
+            "cleanup",
+            []
+          ]
+        ],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 0,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "idle_entry",
+      "fixture": {
+        "ready": 1,
+        "expected": [
+          100
+        ],
+        "next": 100,
+        "ticks": 10,
+        "post_next": 11,
+        "post_pending": 1
+      },
+      "result": {
+        "end": [
+          "second-idle-iteration"
+        ],
+        "calls": [
+          [
+            "cleanup",
+            []
+          ],
+          [
+            "suspend",
+            []
+          ],
+          [
+            "resume",
+            []
+          ],
+          [
+            "cleanup",
+            []
+          ]
+        ],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 1,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "idle_entry",
+      "fixture": {
+        "ready": 1,
+        "expected": [
+          100
+        ],
+        "next": 100,
+        "ticks": 10,
+        "post_next": 100,
+        "post_pending": 0
+      },
+      "result": {
+        "end": [
+          "second-idle-iteration"
+        ],
+        "calls": [
+          [
+            "cleanup",
+            []
+          ],
+          [
+            "suspend",
+            []
+          ],
+          [
+            "deep",
+            [
+              1
+            ]
+          ],
+          [
+            "resume",
+            []
+          ],
+          [
+            "cleanup",
+            []
+          ]
+        ],
+        "mmio_reads": [
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            100,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            101,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            102,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            103,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            104,
+            1
+          ],
+          [
+            1073776644,
+            105,
+            1
+          ],
+          [
+            1073776644,
+            105,
+            1
+          ],
+          [
+            1073776644,
+            105,
+            1
+          ],
+          [
+            1073776644,
+            106,
+            1
+          ],
+          [
+            1073776644,
+            106,
+            1
+          ],
+          [
+            1073776644,
+            106,
+            1
+          ],
+          [
+            1073776644,
+            107,
+            1
+          ],
+          [
+            1073776644,
+            107,
+            1
+          ],
+          [
+            1073776644,
+            107,
+            1
+          ],
+          [
+            1073776644,
+            108,
+            1
+          ],
+          [
+            1073776644,
+            108,
+            1
+          ],
+          [
+            1073776644,
+            108,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 0,
+          "0x200004c4": 0,
+          "0x200001c8": 108,
+          "0x40008820": 1,
+          "0x40008908": 1
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776672,
+            4,
+            85
+          ],
+          [
+            1073776904,
+            4,
+            1
+          ],
+          [
+            3758154372,
+            4,
+            1
+          ],
+          [
+            1073776672,
+            4,
+            1
+          ]
+        ]
+      }
+    },
+    {
+      "function": "idle_entry",
+      "fixture": {
+        "ready": 1,
+        "expected": [
+          100
+        ],
+        "next": 100,
+        "ticks": 10,
+        "post_next": 100,
+        "post_pending": 1
+      },
+      "result": {
+        "end": [
+          "second-idle-iteration"
+        ],
+        "calls": [
+          [
+            "cleanup",
+            []
+          ],
+          [
+            "suspend",
+            []
+          ],
+          [
+            "resume",
+            []
+          ],
+          [
+            "cleanup",
+            []
+          ]
+        ],
+        "mmio_reads": [],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 1,
+          "0x200004c4": 0,
+          "0x200001c8": 100,
+          "0x40008820": 0,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": []
+      }
+    },
+    {
+      "function": "timer_compare",
+      "fixture": {
+        "r0": 0,
+        "r1": 10,
+        "last": 4294967292,
+        "samples": [
+          [
+            4294967294,
+            4294967294,
+            4294967294
+          ],
+          [
+            4294967295,
+            4294967295,
+            4294967295
+          ],
+          [
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            1
+          ]
+        ]
+      },
+      "result": {
+        "end": [
+          "return"
+        ],
+        "calls": [],
+        "mmio_reads": [
+          [
+            1073776644,
+            4294967294,
+            1
+          ],
+          [
+            1073776644,
+            4294967294,
+            1
+          ],
+          [
+            1073776644,
+            4294967294,
+            1
+          ],
+          [
+            1073776644,
+            4294967295,
+            1
+          ],
+          [
+            1073776644,
+            4294967295,
+            1
+          ],
+          [
+            1073776644,
+            4294967295,
+            1
+          ],
+          [
+            1073776644,
+            0,
+            1
+          ],
+          [
+            1073776644,
+            0,
+            1
+          ],
+          [
+            1073776644,
+            0,
+            1
+          ]
+        ],
+        "state": {
+          "0x20027148": 10,
+          "0x20027154": 7,
+          "0x200004c4": 0,
+          "0x200001c8": 0,
+          "0x40008820": 6,
+          "0x40008908": 0
+        },
+        "primask": 0,
+        "basepri": 0,
+        "mmio_writes": [
+          [
+            1073776672,
+            4,
+            6
+          ]
+        ],
+        "return": 0
+      }
+    }
+  ],
+  "limits": [
+    "Native sampler/IRQ-save/critical helpers/sleep policy/tickless/tick-step/timer wrappers execute. Deep-sleep and idle cleanup/reschedule/suspend/resume calls remain modeled boundaries.",
+    "MMIO is synthetic memory; no Apollo counter timing, W1C effects, NVIC pending delivery or deep sleep. Full idle is compared to the next iteration, not run as a live scheduler."
+  ]
+}

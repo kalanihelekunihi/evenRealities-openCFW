@@ -1,0 +1,205 @@
+
+g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00428e6a <.data+0x18e6a>:
+  428e6a:	e92d 4ffe 	stmdb	sp!, {r1, r2, r3, r4, r5, r6, r7, r8, r9, sl, fp, lr}
+  428e6e:	0004      	movs	r4, r0
+  428e70:	4690      	mov	r8, r2
+  428e72:	2000      	movs	r0, #0
+  428e74:	f8df 07ac 	ldr.w	r0, [pc, #1964]	@ 0x429624
+  428e78:	eb00 0284 	add.w	r2, r0, r4, lsl #2
+  428e7c:	1d12      	adds	r2, r2, #4
+  428e7e:	9200      	str	r2, [sp, #0]
+  428e80:	eb00 0281 	add.w	r2, r0, r1, lsl #2
+  428e84:	1d12      	adds	r2, r2, #4
+  428e86:	f110 0364 	adds.w	r3, r0, #100	@ 0x64
+  428e8a:	7818      	ldrb	r0, [r3, #0]
+  428e8c:	f010 007f 	ands.w	r0, r0, #127	@ 0x7f
+  428e90:	f88d 0004 	strb.w	r0, [sp, #4]
+  428e94:	a801      	add	r0, sp, #4
+  428e96:	681d      	ldr	r5, [r3, #0]
+  428e98:	09ed      	lsrs	r5, r5, #7
+  428e9a:	f015 057f 	ands.w	r5, r5, #127	@ 0x7f
+  428e9e:	7045      	strb	r5, [r0, #1]
+  428ea0:	681d      	ldr	r5, [r3, #0]
+  428ea2:	0bad      	lsrs	r5, r5, #14
+  428ea4:	f015 057f 	ands.w	r5, r5, #127	@ 0x7f
+  428ea8:	7085      	strb	r5, [r0, #2]
+  428eaa:	681b      	ldr	r3, [r3, #0]
+  428eac:	0d5b      	lsrs	r3, r3, #21
+  428eae:	f013 037f 	ands.w	r3, r3, #127	@ 0x7f
+  428eb2:	70c3      	strb	r3, [r0, #3]
+  428eb4:	7815      	ldrb	r5, [r2, #0]
+  428eb6:	f015 057f 	ands.w	r5, r5, #127	@ 0x7f
+  428eba:	6812      	ldr	r2, [r2, #0]
+  428ebc:	f3c2 5246 	ubfx	r2, r2, #21, #7
+  428ec0:	9a00      	ldr	r2, [sp, #0]
+  428ec2:	6812      	ldr	r2, [r2, #0]
+  428ec4:	f3c2 5646 	ubfx	r6, r2, #21, #7
+  428ec8:	9a00      	ldr	r2, [sp, #0]
+  428eca:	7817      	ldrb	r7, [r2, #0]
+  428ecc:	f017 077f 	ands.w	r7, r7, #127	@ 0x7f
+  428ed0:	f011 0103 	ands.w	r1, r1, #3
+  428ed4:	5c41      	ldrb	r1, [r0, r1]
+  428ed6:	f014 0103 	ands.w	r1, r4, #3
+  428eda:	5c40      	ldrb	r0, [r0, r1]
+  428edc:	f8df 0748 	ldr.w	r0, [pc, #1864]	@ 0x429628
+  428ee0:	6800      	ldr	r0, [r0, #0]
+  428ee2:	07c0      	lsls	r0, r0, #31
+  428ee4:	d511      	bpl.n	0x428f0a
+  428ee6:	f05f 0900 	movs.w	r9, #0
+  428eea:	e004      	b.n	0x428ef6
+  428eec:	2001      	movs	r0, #1
+  428eee:	f7f4 f967 	bl	0x41d1c0
+  428ef2:	f119 0901 	adds.w	r9, r9, #1
+  428ef6:	f1b9 0f3c 	cmp.w	r9, #60	@ 0x3c
+  428efa:	d204      	bcs.n	0x428f06
+  428efc:	f8df 0800 	ldr.w	r0, [pc, #2048]	@ 0x429700
+  428f00:	6800      	ldr	r0, [r0, #0]
+  428f02:	0040      	lsls	r0, r0, #1
+  428f04:	d5f2      	bpl.n	0x428eec
+  428f06:	f001 f8a0 	bl	0x42a04a
+  428f0a:	f8cd 8008 	str.w	r8, [sp, #8]
+  428f0e:	9802      	ldr	r0, [sp, #8]
+  428f10:	f8df 17f0 	ldr.w	r1, [pc, #2032]	@ 0x429704
+  428f14:	6008      	str	r0, [r1, #0]
+  428f16:	f8df 07f0 	ldr.w	r0, [pc, #2032]	@ 0x429708
+  428f1a:	6004      	str	r4, [r0, #0]
+  428f1c:	9800      	ldr	r0, [sp, #0]
+  428f1e:	6800      	ldr	r0, [r0, #0]
+  428f20:	f3c0 10c9 	ubfx	r0, r0, #7, #10
+  428f24:	f8df 17e4 	ldr.w	r1, [pc, #2020]	@ 0x42970c
+  428f28:	6008      	str	r0, [r1, #0]
+  428f2a:	9800      	ldr	r0, [sp, #0]
+  428f2c:	6800      	ldr	r0, [r0, #0]
+  428f2e:	f3c0 4043 	ubfx	r0, r0, #17, #4
+  428f32:	f8df 17dc 	ldr.w	r1, [pc, #2012]	@ 0x429710
+  428f36:	6008      	str	r0, [r1, #0]
+  428f38:	f8df 07d8 	ldr.w	r0, [pc, #2008]	@ 0x429714
+  428f3c:	6006      	str	r6, [r0, #0]
+  428f3e:	f8df 05e0 	ldr.w	r0, [pc, #1504]	@ 0x429520
+  428f42:	6007      	str	r7, [r0, #0]
+  428f44:	f8df 8298 	ldr.w	r8, [pc, #664]	@ 0x4291e0
+  428f48:	2001      	movs	r0, #1
+  428f4a:	f8d8 1000 	ldr.w	r1, [r8]
+  428f4e:	f360 0101 	bfi	r1, r0, #0, #2
+  428f52:	f8c8 1000 	str.w	r1, [r8]
+  428f56:	f05f 0900 	movs.w	r9, #0
+  428f5a:	e004      	b.n	0x428f66
+  428f5c:	2001      	movs	r0, #1
+  428f5e:	f7f4 f92f 	bl	0x41d1c0
+  428f62:	f119 0901 	adds.w	r9, r9, #1
+  428f66:	f1b9 0f14 	cmp.w	r9, #20
+  428f6a:	d205      	bcs.n	0x428f78
+  428f6c:	f8d8 0000 	ldr.w	r0, [r8]
+  428f70:	f3c0 0080 	ubfx	r0, r0, #2, #1
+  428f74:	2801      	cmp	r0, #1
+  428f76:	dbf1      	blt.n	0x428f5c
+  428f78:	f8df 0aa8 	ldr.w	r0, [pc, #2728]	@ 0x429a24
+  428f7c:	6801      	ldr	r1, [r0, #0]
+  428f7e:	f031 0140 	bics.w	r1, r1, #64	@ 0x40
+  428f82:	6001      	str	r1, [r0, #0]
+  428f84:	6801      	ldr	r1, [r0, #0]
+  428f86:	f031 0108 	bics.w	r1, r1, #8
+  428f8a:	6001      	str	r1, [r0, #0]
+  428f8c:	6801      	ldr	r1, [r0, #0]
+  428f8e:	f051 7100 	orrs.w	r1, r1, #33554432	@ 0x2000000
+  428f92:	6001      	str	r1, [r0, #0]
+  428f94:	f05f 0900 	movs.w	r9, #0
+  428f98:	f8df a248 	ldr.w	sl, [pc, #584]	@ 0x4291e4
+  428f9c:	f8da 0000 	ldr.w	r0, [sl]
+  428fa0:	f3c0 1040 	ubfx	r0, r0, #5, #1
+  428fa4:	2800      	cmp	r0, #0
+  428fa6:	d112      	bne.n	0x428fce
+  428fa8:	f8da 0000 	ldr.w	r0, [sl]
+  428fac:	f050 0020 	orrs.w	r0, r0, #32
+  428fb0:	f8ca 0000 	str.w	r0, [sl]
+  428fb4:	2001      	movs	r0, #1
+  428fb6:	f7f4 f903 	bl	0x41d1c0
+  428fba:	f05f 7380 	movs.w	r3, #16777216	@ 0x1000000
+  428fbe:	f05f 7280 	movs.w	r2, #16777216	@ 0x1000000
+  428fc2:	4989      	ldr	r1, [pc, #548]	@ (0x4291e8)
+  428fc4:	200f      	movs	r0, #15
+  428fc6:	f7f4 f929 	bl	0x41d21c
+  428fca:	f05f 0901 	movs.w	r9, #1
+  428fce:	4886      	ldr	r0, [pc, #536]	@ (0x4291e8)
+  428fd0:	6800      	ldr	r0, [r0, #0]
+  428fd2:	f3c0 6000 	ubfx	r0, r0, #24, #1
+  428fd6:	2800      	cmp	r0, #0
+  428fd8:	d017      	beq.n	0x42900a
+  428fda:	2002      	movs	r0, #2
+  428fdc:	f8d8 1000 	ldr.w	r1, [r8]
+  428fe0:	f360 0101 	bfi	r1, r0, #0, #2
+  428fe4:	f8c8 1000 	str.w	r1, [r8]
+  428fe8:	f05f 0b00 	movs.w	fp, #0
+  428fec:	e004      	b.n	0x428ff8
+  428fee:	2001      	movs	r0, #1
+  428ff0:	f7f4 f8e6 	bl	0x41d1c0
+  428ff4:	f11b 0b01 	adds.w	fp, fp, #1
+  428ff8:	f1bb 0f14 	cmp.w	fp, #20
+  428ffc:	d205      	bcs.n	0x42900a
+  428ffe:	f8d8 0000 	ldr.w	r0, [r8]
+  429002:	f3c0 0080 	ubfx	r0, r0, #2, #1
+  429006:	2801      	cmp	r0, #1
+  429008:	dbf1      	blt.n	0x428fee
+  42900a:	fa5f f989 	uxtb.w	r9, r9
+  42900e:	f1b9 0f00 	cmp.w	r9, #0
+  429012:	d005      	beq.n	0x429020
+  429014:	f8da 0000 	ldr.w	r0, [sl]
+  429018:	f030 0020 	bics.w	r0, r0, #32
+  42901c:	f8ca 0000 	str.w	r0, [sl]
+  429020:	9800      	ldr	r0, [sp, #0]
+  429022:	6800      	ldr	r0, [r0, #0]
+  429024:	f3c0 4043 	ubfx	r0, r0, #17, #4
+  429028:	f8df 19fc 	ldr.w	r1, [pc, #2556]	@ 0x429a28
+  42902c:	680a      	ldr	r2, [r1, #0]
+  42902e:	f360 228d 	bfi	r2, r0, #10, #4
+  429032:	600a      	str	r2, [r1, #0]
+  429034:	9800      	ldr	r0, [sp, #0]
+  429036:	6800      	ldr	r0, [r0, #0]
+  429038:	f3c0 10c9 	ubfx	r0, r0, #7, #10
+  42903c:	680a      	ldr	r2, [r1, #0]
+  42903e:	0a92      	lsrs	r2, r2, #10
+  429040:	0292      	lsls	r2, r2, #10
+  429042:	4310      	orrs	r0, r2
+  429044:	6008      	str	r0, [r1, #0]
+  429046:	f8df 09e4 	ldr.w	r0, [pc, #2532]	@ 0x429a2c
+  42904a:	6801      	ldr	r1, [r0, #0]
+  42904c:	09c9      	lsrs	r1, r1, #7
+  42904e:	01c9      	lsls	r1, r1, #7
+  429050:	430e      	orrs	r6, r1
+  429052:	6006      	str	r6, [r0, #0]
+  429054:	1b78      	subs	r0, r7, r5
+  429056:	2801      	cmp	r0, #1
+  429058:	db01      	blt.n	0x42905e
+  42905a:	0040      	lsls	r0, r0, #1
+  42905c:	e000      	b.n	0x429060
+  42905e:	2000      	movs	r0, #0
+  429060:	1941      	adds	r1, r0, r5
+  429062:	2980      	cmp	r1, #128	@ 0x80
+  429064:	d306      	bcc.n	0x429074
+  429066:	f8df 0d38 	ldr.w	r0, [pc, #3384]	@ 0x429da0
+  42906a:	6801      	ldr	r1, [r0, #0]
+  42906c:	f051 017f 	orrs.w	r1, r1, #127	@ 0x7f
+  429070:	6001      	str	r1, [r0, #0]
+  429072:	e006      	b.n	0x429082
+  429074:	f8df 1d28 	ldr.w	r1, [pc, #3368]	@ 0x429da0
+  429078:	1945      	adds	r5, r0, r5
+  42907a:	6808      	ldr	r0, [r1, #0]
+  42907c:	f365 0006 	bfi	r0, r5, #0, #7
+  429080:	6008      	str	r0, [r1, #0]
+  429082:	2032      	movs	r0, #50	@ 0x32
+  429084:	f7f4 f89c 	bl	0x41d1c0
+  429088:	f8df 0d14 	ldr.w	r0, [pc, #3348]	@ 0x429da0
+  42908c:	6801      	ldr	r1, [r0, #0]
+  42908e:	09c9      	lsrs	r1, r1, #7
+  429090:	01c9      	lsls	r1, r1, #7
+  429092:	430f      	orrs	r7, r1
+  429094:	6007      	str	r7, [r0, #0]
+  429096:	0021      	movs	r1, r4
+  429098:	9802      	ldr	r0, [sp, #8]
+  42909a:	f001 f88f 	bl	0x42a1bc
+  42909e:	e8bd 8ff7 	ldmia.w	sp!, {r0, r1, r2, r4, r5, r6, r7, r8, r9, sl, fp, pc}

@@ -1,0 +1,5 @@
+# Indexed mask set and seven-word two-bank clear
+
+Partial/unaccepted;238 instruction bytes481142..481230. Continues4810B0,40-byteframe;R5indexedbankpointer,R6entrybankselector,R7inputpointer,SP0mask,SP8saved473940result. Mode1:freshword[R5] ORfreshwordSP0 thenstore;R6=UXTB(R6);if==2 R5+=112 thenanotherfreshword ORfreshSP0maskstore. Branch4812E8 unresolvedepilogue.
+
+Mode2: testUXTBbankselector==1;true skipsfirstsevenupdates. Otherwise for k=0..6 inincreasingorder: freshword[R7+4*k] mask;loadliteralpointer slots481768+4*k;freshword[thatpointer] AND~mask;storeback. Theseareunrolledorderedupdates,notbulkcopy;eachinputreadprecedestargetread/write. ThenR6=UXTB(R6);if==0 skipsecondbank. Otherwise repeatsevenupdateswithfreshinputwords again andpointerliteral slots481784+4*k. Thusselector0firstbankonly,1secondbankonly,2..255bothbanks;no bankrangevalidation. Preserve input/targetaliasing andrereadsbetweenselectedbanks. No loopcounterorboundtestexists inencodedunrolledsequence. Branch4812E8 unresolvedrestore/return. No C/freeze/fullcoverage/equality claim.

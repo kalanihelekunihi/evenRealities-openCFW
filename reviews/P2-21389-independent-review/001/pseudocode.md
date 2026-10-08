@@ -1,0 +1,3 @@
+# Eight-byte context registration, release and enable helper
+
+Partial/unaccepted;62 instructionbytes484014..484052. PUSH R4/R5/R6/LR16B;R5=entry0,R6=entry1;R0=8;call44F718allocator→R4. NullR4returnsR0=0. NonnullR2=R4,R1=0,R0=alignedPC484030+125=4840AD(oddaddress,possibleThumbcallback);call464466(liveR3retained),result0→release44F758(R4),return0. Nonzeroresult: word[R4]=R5 thenword[R4+4]=R6;R1=1,R0=still464466result(nonzero,notR4reloaded),call4645AC;ignore result,R0=1. POPR4/R5/R6/PCrelease16B. Preserve actualhelperargs and callbackpointer arithmetic; do notinfer registration semantics beyond evident call sequence. Helpers/target4840ACunresolved. No C,freeze,wholecoverage or equalityclaim.

@@ -1,0 +1,4 @@
+# Full-helper-selected flag boolean wrappers
+
+Partial/unaccepted; 54 instruction bytes, two entries. Entry 47D9C4 pushes R7,LR (8 bytes), calls 4A2FDC with live entry arguments, then POP R1,PC: R0 is the full helper result; R1 becomes saved entry R7, and the BL result is not normalized.
+Entry 47D9CC pushes R7,LR (8 bytes), calls 4A2914 with live arguments and tests its full 32-bit result. Nonzero selects 47D8E4; zero selects 47D8F0. Each selected helper receives live arguments. The previously recovered leaves read runtime flag bit 4 or bit 5 respectively. The selected full result is tested for zero, normalized to 0 or 1 and UXTB applied before POP R1,PC. R1 becomes saved entry R7; R0 is the selected bit boolean. The first helper observation and subsequent flag read are distinct and must not be collapsed into a cached flag read. R2/R3 are subject to external helper clobbers. No C, freeze, whole coverage or external-helper-completeness claim.

@@ -1,0 +1,61 @@
+{
+  "status": "PASS",
+  "cases": 8064,
+  "null_cases": 4,
+  "thunk_cases": 2,
+  "distinct_original_instruction_bytes": 368,
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_elf_sha256": "7c08208d48b2a372ff1b315890d81498b81adc2b0eacc556dd0e597d40a2cc9a",
+  "source_sha256": {
+    "g2/components/bootloader/application_storage/device_wait_service.c": "e35256bae08034dfb917947cd440d933642268257dd61a8f5b99b0fc44747080",
+    "g2/components/bootloader/application_storage/device_wait_service.h": "692f0c66e5b0d76130a7a9d14b35138320f92953091e50d01f1ccaad565bd9bb",
+    "g2/components/bootloader/application_storage/info_read_rom_thunk.S": "071726f8476a3c9c71874bc787f460890ac901c24229c3c2835cf14c3e52f590",
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/application-storage/device-wait-service/device_wait_service.ld": "203f666c2f1d93a0cf3425152e6b8ea75bf9b36aa944aca60fd256d409e1b134",
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/application-storage/device-wait-service/Makefile": "9acbe9d16484d3831d6cce076675b63e19589600dfb9f91655547d65c89bb9bb",
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/application-storage/device-wait-service/verify_device_wait_service.py": "0e02757122afa04629435246adde2f279822754c335a0834fe00ed788a4f9bee"
+  },
+  "function": {
+    "stock": "0x4213e6",
+    "source_dispatch": "0x432000",
+    "compatibility_alias": "0x4320fc",
+    "stock_rom_thunk": "0x41d28a..0x41d292",
+    "source_rom_thunk": "0x432100",
+    "rom_entry": "0x48"
+  },
+  "thunk_fixtures": [
+    {
+      "saved_r7": "0x11223344",
+      "result": "0x11223344",
+      "sp": "0x2003f000",
+      "rom_arguments": [
+        [
+          1107320832,
+          536875008,
+          7,
+          1515890085,
+          3221344269
+        ]
+      ]
+    },
+    {
+      "saved_r7": "0xdeadbeef",
+      "result": "0xdeadbeef",
+      "sp": "0x2003f000",
+      "rom_arguments": [
+        [
+          1107320832,
+          536875008,
+          7,
+          1515890085,
+          3221344269
+        ]
+      ]
+    }
+  ],
+  "limits": [
+    "The selector dispatch and internal word-offset helper execute as original stock instructions for the comparison. The original ROM thunk at 0x41d28a and the source assembly thunk both execute; only ROM entry 0x48 and a source-linked stand-in at 0x080002a0 are intercepted.",
+    "The resident ROM implementation is unavailable. Its boundary is passed (INFO address, destination pointer, word count); tests control its written first word and return value. The thunk preserves stock push {r7,lr}/BL/pop {r0,pc} behavior, including discarding the ROM return value in favor of saved R7. Direct thunk fixtures verify saved R7 is returned and SP is restored.",
+    "The word at 0x400201bc, the stock bit-27 gate read at 0x40021008, destination memory, and ROM effects are synthetic. SDK evidence supports INFO-space selector names and word units, but the stock bit-27 guard is reported as a raw gate without asserting it is identical to an SDK API readiness check.",
+    "No physical OTP power state, storage timing, or complete resident-ROM copy/error behavior is established."
+  ]
+}

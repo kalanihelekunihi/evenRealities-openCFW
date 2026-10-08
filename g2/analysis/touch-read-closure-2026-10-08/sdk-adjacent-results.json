@@ -1,0 +1,266 @@
+[
+  {
+    "version": "2.70.0",
+    "command": [
+      "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "-mcpu=cortex-m0plus",
+      "-mthumb",
+      "-Og",
+      "-fshort-enums",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-DCY8C4046FNI_T412",
+      "-ffunction-sections",
+      "-include",
+      "/tmp/opencfw-emeeprom-family/compile-interface.h",
+      "-I/tmp/opencfw-emeeprom-family/2.70.0",
+      "-I/tmp/opencfw-emeeprom-family/block-storage-1.2.1",
+      "-I/tmp/opencfw-touch-source",
+      "-I/tmp/opencfw-touch-source/cmsis",
+      "-I/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/drivers/include",
+      "-I/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/devices/include",
+      "-I/tmp/opencfw-touch-source/core-lib-ca57d1e519e08badec6891d1776c7b4f05e09561/include",
+      "-c",
+      "/tmp/opencfw-emeeprom-family/2.70.0/cy_em_eeprom.c",
+      "-o",
+      "/tmp/opencfw-emeeprom-family/2.70.0/candidate.o"
+    ],
+    "compile_status": 0,
+    "diagnostic": "",
+    "link_status": 0,
+    "link_diagnostic": "",
+    "functions": [
+      {
+        "function": "ReadSimpleMode",
+        "address": "0x7e44",
+        "bytes": 36,
+        "exact": true,
+        "source_linked_sha256": "a1b8e82ac2651b58c7c34894e6f505a38ff4d792c743bc741f8e30a49cabb23c"
+      },
+      {
+        "function": "CalcChecksum",
+        "address": "0x7e68",
+        "bytes": 60,
+        "exact": false,
+        "source_linked_sha256": "037729add507eee7a7340777a0fc8452c1f7de4ffa4589983eb9276e6785d7fd"
+      },
+      {
+        "function": "WriteRow",
+        "address": "0x7ea4",
+        "bytes": 100,
+        "exact": true,
+        "source_linked_sha256": "0bc30edbfb30a83a1ccac95ad9ec6f1c3fb8708682654a2400fa06ad1b9b414f"
+      },
+      {
+        "function": "CalculateRowChecksum",
+        "address": "0x7f6c",
+        "bytes": 12,
+        "exact": true,
+        "source_linked_sha256": "2ba000540258b6a9a9ba82ebb49ca0b88bd3bd0949cdafd72a75a9081450034f"
+      },
+      {
+        "function": "GetStoredRowChecksum",
+        "address": "0x7f78",
+        "bytes": 4,
+        "exact": true,
+        "source_linked_sha256": "a89b85f8bccd76763270edbe8d4a9000e557118189ef0a663b750b93593d16da"
+      },
+      {
+        "function": "CheckRowChecksum",
+        "address": "0x7f7c",
+        "bytes": 36,
+        "exact": true,
+        "source_linked_sha256": "c708f682a6ab757103335cd057bd00b8501516d4065325b420a8adfdd3261fef"
+      },
+      {
+        "function": "GetStoredSeqNum",
+        "address": "0x7fa0",
+        "bytes": 4,
+        "exact": true,
+        "source_linked_sha256": "a78fc9996461c9de89dede305a4ebaddf18e69f73df2a59a239610bf4bdef4cd"
+      },
+      {
+        "function": "DefineLastWrittenRow",
+        "address": "0x7fa4",
+        "bytes": 180,
+        "exact": true,
+        "source_linked_sha256": "7e63a908bdbdb8f5b9dc8f72604a11ef897ee83bdf7535af0e8ff09806ee727c"
+      },
+      {
+        "function": "CheckLastWrittenRowIntegrity",
+        "address": "0x8058",
+        "bytes": 180,
+        "exact": true,
+        "source_linked_sha256": "286c45e6d0848460de891add363887fb196750bf3ef15413ac551d7ba1d0dfb6"
+      },
+      {
+        "function": "GetNextRowPointer",
+        "address": "0x810c",
+        "bytes": 30,
+        "exact": true,
+        "source_linked_sha256": "00fc76e2fad394e1198eef32b50b40daf7bdade26f76e741737ad0a423dca912"
+      },
+      {
+        "function": "GetReadRowPointer",
+        "address": "0x812a",
+        "bytes": 34,
+        "exact": true,
+        "source_linked_sha256": "d64fbb674f6948beae83020c28b3e983d4766f4f055f2f87b5ca48d29ba20f8f"
+      },
+      {
+        "function": "CopyHistoricData",
+        "address": "0x814c",
+        "bytes": 180,
+        "exact": true,
+        "source_linked_sha256": "dac781de779872a8ea6b60d356d2ee018ae7142f9995bcddba021f606cb39f6d"
+      },
+      {
+        "function": "ReadExtendedMode",
+        "address": "0x82e0",
+        "bytes": 628,
+        "exact": true,
+        "source_linked_sha256": "f2605d42cc04851e25b304dab5ec1550aff6523ea4b66ba64f149505aba69ac9"
+      },
+      {
+        "function": "Cy_Em_EEPROM_Read",
+        "address": "0x8a78",
+        "bytes": 52,
+        "exact": true,
+        "source_linked_sha256": "48f8d5db9efae6f0ee457296efcbd427f867ce1ba44507ce6e0f2e492cbab2da"
+      }
+    ],
+    "exact_bytes": 1476
+  },
+  {
+    "version": "2.70.1",
+    "command": [
+      "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "-mcpu=cortex-m0plus",
+      "-mthumb",
+      "-Og",
+      "-fshort-enums",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-DCY8C4046FNI_T412",
+      "-ffunction-sections",
+      "-include",
+      "/tmp/opencfw-emeeprom-family/compile-interface.h",
+      "-I/tmp/opencfw-emeeprom-family/2.70.1",
+      "-I/tmp/opencfw-emeeprom-family/block-storage-1.2.1",
+      "-I/tmp/opencfw-touch-source",
+      "-I/tmp/opencfw-touch-source/cmsis",
+      "-I/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/drivers/include",
+      "-I/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/devices/include",
+      "-I/tmp/opencfw-touch-source/core-lib-ca57d1e519e08badec6891d1776c7b4f05e09561/include",
+      "-c",
+      "/tmp/opencfw-emeeprom-family/2.70.1/cy_em_eeprom.c",
+      "-o",
+      "/tmp/opencfw-emeeprom-family/2.70.1/candidate.o"
+    ],
+    "compile_status": 0,
+    "diagnostic": "",
+    "link_status": 0,
+    "link_diagnostic": "",
+    "functions": [
+      {
+        "function": "ReadSimpleMode",
+        "address": "0x7e44",
+        "bytes": 36,
+        "exact": true,
+        "source_linked_sha256": "a1b8e82ac2651b58c7c34894e6f505a38ff4d792c743bc741f8e30a49cabb23c"
+      },
+      {
+        "function": "CalcChecksum",
+        "address": "0x7e68",
+        "bytes": 60,
+        "exact": false,
+        "source_linked_sha256": "037729add507eee7a7340777a0fc8452c1f7de4ffa4589983eb9276e6785d7fd"
+      },
+      {
+        "function": "WriteRow",
+        "address": "0x7ea4",
+        "bytes": 100,
+        "exact": true,
+        "source_linked_sha256": "0bc30edbfb30a83a1ccac95ad9ec6f1c3fb8708682654a2400fa06ad1b9b414f"
+      },
+      {
+        "function": "CalculateRowChecksum",
+        "address": "0x7f6c",
+        "bytes": 12,
+        "exact": true,
+        "source_linked_sha256": "2ba000540258b6a9a9ba82ebb49ca0b88bd3bd0949cdafd72a75a9081450034f"
+      },
+      {
+        "function": "GetStoredRowChecksum",
+        "address": "0x7f78",
+        "bytes": 4,
+        "exact": true,
+        "source_linked_sha256": "a89b85f8bccd76763270edbe8d4a9000e557118189ef0a663b750b93593d16da"
+      },
+      {
+        "function": "CheckRowChecksum",
+        "address": "0x7f7c",
+        "bytes": 36,
+        "exact": true,
+        "source_linked_sha256": "c708f682a6ab757103335cd057bd00b8501516d4065325b420a8adfdd3261fef"
+      },
+      {
+        "function": "GetStoredSeqNum",
+        "address": "0x7fa0",
+        "bytes": 4,
+        "exact": true,
+        "source_linked_sha256": "a78fc9996461c9de89dede305a4ebaddf18e69f73df2a59a239610bf4bdef4cd"
+      },
+      {
+        "function": "DefineLastWrittenRow",
+        "address": "0x7fa4",
+        "bytes": 180,
+        "exact": true,
+        "source_linked_sha256": "7e63a908bdbdb8f5b9dc8f72604a11ef897ee83bdf7535af0e8ff09806ee727c"
+      },
+      {
+        "function": "CheckLastWrittenRowIntegrity",
+        "address": "0x8058",
+        "bytes": 180,
+        "exact": true,
+        "source_linked_sha256": "286c45e6d0848460de891add363887fb196750bf3ef15413ac551d7ba1d0dfb6"
+      },
+      {
+        "function": "GetNextRowPointer",
+        "address": "0x810c",
+        "bytes": 30,
+        "exact": true,
+        "source_linked_sha256": "00fc76e2fad394e1198eef32b50b40daf7bdade26f76e741737ad0a423dca912"
+      },
+      {
+        "function": "GetReadRowPointer",
+        "address": "0x812a",
+        "bytes": 34,
+        "exact": true,
+        "source_linked_sha256": "d64fbb674f6948beae83020c28b3e983d4766f4f055f2f87b5ca48d29ba20f8f"
+      },
+      {
+        "function": "CopyHistoricData",
+        "address": "0x814c",
+        "bytes": 180,
+        "exact": true,
+        "source_linked_sha256": "dac781de779872a8ea6b60d356d2ee018ae7142f9995bcddba021f606cb39f6d"
+      },
+      {
+        "function": "ReadExtendedMode",
+        "address": "0x82e0",
+        "bytes": 628,
+        "exact": true,
+        "source_linked_sha256": "f2605d42cc04851e25b304dab5ec1550aff6523ea4b66ba64f149505aba69ac9"
+      },
+      {
+        "function": "Cy_Em_EEPROM_Read",
+        "address": "0x8a78",
+        "bytes": 52,
+        "exact": true,
+        "source_linked_sha256": "48f8d5db9efae6f0ee457296efcbd427f867ce1ba44507ce6e0f2e492cbab2da"
+      }
+    ],
+    "exact_bytes": 1476
+  }
+]

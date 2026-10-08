@@ -1,0 +1,11 @@
+# Native dependency closure
+
+Closed this checkpoint: scalar temperature classifier VCMP/FPSCR behavior; selector20 temperature transition (stock0x429b4c..0x429c46), now compiler-installed in the actual DATA table. Its helpers were already source-native: delay41d1c0, timer service42a04a and service downstream2b/7b providers. No callback return substitute was used to close the path.
+
+Selector20 snapshots packed low-voltage trims and target LDO/VDDF before any timer handling, optionally waits up to60 delay(1) calls for ready-bit30 and invokes timer service, writes cached TON/target/trim fields using the stock before/after read ordering, updates CORE-LDO register40020080 in two ordered read/modify/writes (bits10..13 then0..9), calls delay(5), and leaves the packed word in R0. The walker at0x42a43a calls through BLX at0x42a47e/0x42a4ae and immediately advances its loop index, discarding callback returns. The reconstructed uint32 return preserves the observed register value; it is not a firmware success/error status or a proven public callback ABI. It does not call TON adjustment or directly load VDDF hardware. Values are delay-helper arguments; synthetic readiness is not elapsed hardware time.
+
+145 broad frontier fixtures and17 targeted fixtures compare actual source execution including full default FPSCR. Their trace union covers756/758 updater bytes, with remaining default branch0x42aa1e..0x42aa1f unvisited. This measures executed bytes, not all state combinations or whole-system completion. Reached native selectors:0/1/2/3/6/14/17/18/20/24.
+
+Remaining reached boundaries: selector5 on CPU0->1 and0->2; selector11 on temperature50/999; selector12 on a deep-sleep temperature gate; selector21 on a hot-state grid configuration. Both stock/source are stopped before each unsupported body and must select the same index. Prioritize selector5 and its actual callees next. Do not substitute callback-cut coverage for those paths.
+
+Still separate: raw direct-call flag-width ABI, FP activation/lazy-context/NMI timing, physical peripherals/timer readiness and unavailable resident ROM. Source section placement remains a three-slot offline fixture. No bundle equality or hardware-safe transition conclusion.

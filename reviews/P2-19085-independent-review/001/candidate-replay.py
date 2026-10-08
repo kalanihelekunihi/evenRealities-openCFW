@@ -1,0 +1,17 @@
+from pathlib import Path
+import json,hashlib,re,subprocess,tempfile
+b=Path('g2/build/pseudocode-first/20260930T190500Z');src=b/'attempts/P1-canonical-fixed-images-005/002/apollo_main-flash.bin';d=src.read_bytes();h=lambda x:hashlib.sha256(x).hexdigest();assert h(d)=='19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701';start=0x4691bc;end=0x46921c
+with tempfile.TemporaryDirectory() as td:
+ t=Path(td);(t/'input.bin').write_bytes(d[start-0x438000:end-0x438000]);(t/'input.s').write_text('.syntax unified\n.cpu cortex-m55\n.thumb\n.text\n.incbin "'+str(t/'input.bin')+'"\n');subprocess.run(['/opt/homebrew/bin/arm-none-eabi-as',str(t/'input.s'),'-o',str(t/'input.o')],check=True);rawtext=subprocess.check_output(['/opt/homebrew/bin/arm-none-eabi-objdump','-D','-j','.text','-M','force-thumb','--adjust-vma='+hex(start),str(t/'input.o')],text=True)
+rows=[];cursor=start
+for line in rawtext.splitlines():
+ m=re.match(r'\s*([0-9a-f]+):\s+([0-9a-f]{4}(?: [0-9a-f]{4})?)\s+([^\s]+)\s*(.*)',line)
+ if not m:continue
+ a=int(m[1],16)
+ if not start<=a<end:continue
+ raw=b''.join(int(v,16).to_bytes(2,'little') for v in m[2].split());assert a==cursor and raw==d[a-0x438000:a-0x438000+len(raw)];cursor+=len(raw);rows.append(dict(address=a,bytes=raw.hex(),mnemonic=m[3],operands=m[4]))
+assert cursor==end,(hex(cursor),hex(end),rawtext)
+o=b/'analysis/apollo-main-diagnostic-fixed-library-context-byte21-lowbyte-setter-null-diagnostics-and-saved-r2-return-19486-map/001';o.mkdir(parents=True,exist_ok=False);(o/'instructions.json').write_text(json.dumps([dict(start=start,end=end,instructions=rows)],indent=2)+'\n');(o/'disassembly.txt').write_text(rawtext);refs=sorted(set(int(m[1],16) for row in rows if (m:=re.search(r'@\s*\(?([0-9a-f]{6,8})',row['operands'])) and 'pc' in row['operands']))
+(o/'references.json').write_text(json.dumps([dict(address=a,bytes=d[a-0x438000:a-0x438000+4].hex(),value=int.from_bytes(d[a-0x438000:a-0x438000+4],'little')) for a in refs],indent=2)+'\n')
+(o/'pseudocode.md').write_text('# Byte setter 0x4691BC..0x46921C\n\nPartial/unaccepted; complete 96-byte function. PUSH R2/R3/R4/LR creates 16-byte frame, SP0 original R2 and SP4 original R3. R4=original R0. Call 0x46B44C with live original arguments. FULL child result nonzero: truncate R4 in place to low8(original R0); R1=1 if that byte nonzero else 0; store byte R1 at [child pointer+21]; branch shared return 0x46921A. Do not test the full original setter input.\n\nFULL child result zero: fresh call 0x43D0CE with live arguments. If result bit1 set: SP4=literal 0x469B30; SP0=76; R3=literal 0x469B34; R2=literal 0x469B38; R1=literal 0x469B3C; R0=1 -> call 0x43D574. Separate fresh 0x43D0CE result bit0, or conditional third fresh result bit2, enables R1=literal 0x469B40, R2=R1, R0=0x04000000, live R3 -> 0x43CE9E. Otherwise skip.\n\nShared 0x46921A POP R0/R1/R4/PC consumes16 bytes. Therefore return R0 is original R2 on nonnull and null paths without bit1 diagnostics, or 76 when the bit1 diagnostic overwrote SP0. R1 similarly original R3 or diagnostic context literal. Child pointer/result does not survive into return R0. R4 restored. Child contracts unresolved; no gate, C or runtime claim.\n')
+(o/'replay.py').write_bytes(Path(__file__).read_bytes());(o/'receipt.json').write_text(json.dumps(dict(accepted=False,status='partial',input_sha256=h(d),instruction_bytes=end-start,files={p.name:h(p.read_bytes()) for p in o.iterdir()}),indent=2)+'\n');print('PASS',end-start)

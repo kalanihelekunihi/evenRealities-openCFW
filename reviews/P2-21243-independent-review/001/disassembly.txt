@@ -1,0 +1,61 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpqiiy5wkw/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+004823de <.text>:
+  4823de:	f89d 0042 	ldrb.w	r0, [sp, #66]	@ 0x42
+  4823e2:	2862      	cmp	r0, #98	@ 0x62
+  4823e4:	d008      	beq.n	4823f8 <.text+0x1a>
+  4823e6:	2868      	cmp	r0, #104	@ 0x68
+  4823e8:	d00e      	beq.n	482408 <.text+0x2a>
+  4823ea:	286a      	cmp	r0, #106	@ 0x6a
+  4823ec:	d014      	beq.n	482418 <.text+0x3a>
+  4823ee:	286c      	cmp	r0, #108	@ 0x6c
+  4823f0:	d01f      	beq.n	482432 <.text+0x54>
+  4823f2:	2871      	cmp	r0, #113	@ 0x71
+  4823f4:	d010      	beq.n	482418 <.text+0x3a>
+  4823f6:	e01c      	b.n	482432 <.text+0x54>
+  4823f8:	f8d9 1000 	ldr.w	r1, [r9]
+  4823fc:	f851 0b04 	ldr.w	r0, [r1], #4
+  482400:	f8c9 1000 	str.w	r1, [r9]
+  482404:	b240      	sxtb	r0, r0
+  482406:	e01a      	b.n	48243e <.text+0x60>
+  482408:	f8d9 1000 	ldr.w	r1, [r9]
+  48240c:	f851 0b04 	ldr.w	r0, [r1], #4
+  482410:	f8c9 1000 	str.w	r1, [r9]
+  482414:	b200      	sxth	r0, r0
+  482416:	e012      	b.n	48243e <.text+0x60>
+  482418:	f8d9 0000 	ldr.w	r0, [r9]
+  48241c:	1dc2      	adds	r2, r0, #7
+  48241e:	f022 0207 	bic.w	r2, r2, #7
+  482422:	f8c9 2000 	str.w	r2, [r9]
+  482426:	e9d2 0100 	ldrd	r0, r1, [r2]
+  48242a:	3208      	adds	r2, #8
+  48242c:	f8c9 2000 	str.w	r2, [r9]
+  482430:	e006      	b.n	482440 <.text+0x62>
+  482432:	f8d9 1000 	ldr.w	r1, [r9]
+  482436:	f851 0b04 	ldr.w	r0, [r1], #4
+  48243a:	f8c9 1000 	str.w	r1, [r9]
+  48243e:	17c1      	asrs	r1, r0, #31
+  482440:	e9cd 0102 	strd	r0, r1, [sp, #8]
+  482444:	2900      	cmp	r1, #0
+  482446:	d502      	bpl.n	48244e <.text+0x70>
+  482448:	9807      	ldr	r0, [sp, #28]
+  48244a:	212d      	movs	r1, #45	@ 0x2d
+  48244c:	e00a      	b.n	482464 <.text+0x86>
+  48244e:	f8bd 0040 	ldrh.w	r0, [sp, #64]	@ 0x40
+  482452:	0781      	lsls	r1, r0, #30
+  482454:	d502      	bpl.n	48245c <.text+0x7e>
+  482456:	9807      	ldr	r0, [sp, #28]
+  482458:	212b      	movs	r1, #43	@ 0x2b
+  48245a:	e003      	b.n	482464 <.text+0x86>
+  48245c:	07c0      	lsls	r0, r0, #31
+  48245e:	d505      	bpl.n	48246c <.text+0x8e>
+  482460:	9807      	ldr	r0, [sp, #28]
+  482462:	2120      	movs	r1, #32
+  482464:	aa12      	add	r2, sp, #72	@ 0x48
+  482466:	5411      	strb	r1, [r2, r0]
+  482468:	1c40      	adds	r0, r0, #1
+  48246a:	9007      	str	r0, [sp, #28]

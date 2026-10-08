@@ -1,0 +1,107 @@
+{
+  "start": 4699308,
+  "end": 4699336,
+  "bytes": "30196f0060ee780054c46d00e46e6a0088b56e0000f66d007c196f00",
+  "words": [
+    {
+      "address": 4699308,
+      "value": 7280944
+    },
+    {
+      "address": 4699312,
+      "value": 7925344
+    },
+    {
+      "address": 4699316,
+      "value": 7193684
+    },
+    {
+      "address": 4699320,
+      "value": 6975204
+    },
+    {
+      "address": 4699324,
+      "value": 7255432
+    },
+    {
+      "address": 4699328,
+      "value": 7206400
+    },
+    {
+      "address": 4699332,
+      "value": 7281020
+    }
+  ],
+  "consumers": [
+    {
+      "component": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-no-free-slot-diagnostics-explicit-pointer-return-21054-map/001",
+      "instruction": {
+        "address": 4696128,
+        "bytes": "dff8681c",
+        "mnemonic": "ldr.w",
+        "operands": "r1, [pc, #3176]\t@ 47b4ac <.text+0xca2>"
+      },
+      "literal_address": 4699308
+    },
+    {
+      "component": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-global-base-fresh-reload-ten-record-helper-saved-r3-return-21058-map/001",
+      "instruction": {
+        "address": 4696158,
+        "bytes": "dff8505c",
+        "mnemonic": "ldr.w",
+        "operands": "r5, [pc, #3152]\t@ 47b4b0 <.text+0xc54>"
+      },
+      "literal_address": 4699312
+    },
+    {
+      "component": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-entry-low-byte-one-type-bits-six-byte-diagnostics-21064-map/001",
+      "instruction": {
+        "address": 4696404,
+        "bytes": "dff85c0b",
+        "mnemonic": "ldr.w",
+        "operands": "r0, [pc, #2908]\t@ 47b4b4 <.text+0xb96>"
+      },
+      "literal_address": 4699316
+    },
+    {
+      "component": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-entry-low-byte-one-type-bits-six-byte-diagnostics-21064-map/001",
+      "instruction": {
+        "address": 4696450,
+        "bytes": "dff8341b",
+        "mnemonic": "ldr.w",
+        "operands": "r1, [pc, #2868]\t@ 47b4b8 <.text+0xb9a>"
+      },
+      "literal_address": 4699320
+    },
+    {
+      "component": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-matching-record-index-diagnostics-helper-explicit-one-21068-map/001",
+      "instruction": {
+        "address": 4696540,
+        "bytes": "dff8dc0a",
+        "mnemonic": "ldr.w",
+        "operands": "r0, [pc, #2780]\t@ 47b4bc <.text+0xaee>"
+      },
+      "literal_address": 4699324
+    },
+    {
+      "component": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-matching-record-index-diagnostics-helper-explicit-one-21068-map/001",
+      "instruction": {
+        "address": 4696586,
+        "bytes": "dff8b41a",
+        "mnemonic": "ldr.w",
+        "operands": "r1, [pc, #2740]\t@ 47b4c0 <.text+0xaf2>"
+      },
+      "literal_address": 4699328
+    },
+    {
+      "component": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-bit-two-scan-exhaustion-explicit-zero-21070-map/001",
+      "instruction": {
+        "address": 4696630,
+        "bytes": "dff88c0a",
+        "mnemonic": "ldr.w",
+        "operands": "r0, [pc, #2700]\t@ 47b4c4 <.text+0xa96>"
+      },
+      "literal_address": 4699332
+    }
+  ]
+}

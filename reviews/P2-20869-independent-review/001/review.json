@@ -1,0 +1,10 @@
+{
+  "id": "P2-20869",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "Fresh replay passed for 78 bytes at 0x47D08C..0x47D0DA; pinned image/source hashes and tiling match. The 40-byte frame is inherited. Diagnostic paths make separate status queries, with the mask setup using live R3 without a local assignment. The later functional path calls 0x45A568 first, then freshly loads buffer byte4, compares its full byte value against the helper LOW8 result, and branches to distinct pending targets. No earlier helper result or byte observation is reused."
+}

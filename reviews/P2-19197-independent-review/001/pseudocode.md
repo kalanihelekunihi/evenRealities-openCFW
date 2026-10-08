@@ -1,0 +1,3 @@
+# Stack record construction 0x46A4E2..0x46A53A
+
+Partial/unaccepted;88instructionbytes. PUSH7/LR8 then SUBSP96 gives104-byte frame. R0=SP ->4503D6(liveR1..3). Load addressliteral46ACC4, freshwordthroughitR1;storeR1toSP0. NOP. Storeliteral46AE88toSP4. NOP. Call4506CE(SP,0,0,liveR3). Store200toSP48,NOP;literal46AE8CtoSP32,NOP;literal46AE90toSP16,NOP. Storebyte1throughaddressliteral46B004. R0=SP ->450408(liveR1/R2/R3), then ADDSP100 discards96-byte localrecord plus savedR7slot, POPPC4. ChildR0returned unchanged. Record initializer and consumers remain unresolved childcontracts; do not assume the unobserved stackfields or stringify literalpointers. No C/freeze/wholecorpusclaim.

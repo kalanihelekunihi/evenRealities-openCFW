@@ -1,0 +1,77 @@
+{
+  "image": "g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin",
+  "image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "load_address": "0x410000",
+  "architecture": "Arm Thumb / Cortex-M55 family; scalar Cortex-M33 Unicorn test engine",
+  "functions": [
+    {
+      "name": "selector5",
+      "entry": "0x42863e",
+      "end": "0x428840",
+      "bytes": 514,
+      "sha256": "1ca4dc237d5a62982dd4361eb54a7b76308d0a822e5e26c9ce78ed0ef5120547"
+    },
+    {
+      "name": "selector11",
+      "entry": "0x428e6a",
+      "end": "0x4290a2",
+      "bytes": 568,
+      "sha256": "727a2c0543d59142084a0dbc59c05a25d7228f811cc09c9018fee2297bce78d4"
+    },
+    {
+      "name": "selector12",
+      "entry": "0x4290a2",
+      "end": "0x4291e0",
+      "bytes": 318,
+      "sha256": "320aa5d5df19b97d90c2ce6ee04ef8c4e231c8ec1094d863a25bbcf43da7b73e"
+    },
+    {
+      "name": "selector21",
+      "entry": "0x429c46",
+      "end": "0x429d9e",
+      "bytes": 344,
+      "sha256": "846627b1f8b071b4cc86024dfedbe1e5e1e585a0b2f9891186d3d2b84d94f3be"
+    },
+    {
+      "name": "equality_wait",
+      "entry": "0x41d21c",
+      "end": "0x41d246",
+      "bytes": 42,
+      "sha256": "6420c4ecc4fd66dab58e4de017013ce982e42299b5e4557d15a59007ea2a0ad2"
+    },
+    {
+      "name": "walker",
+      "entry": "0x42a43a",
+      "end": "0x42a4bc",
+      "bytes": 130,
+      "sha256": "1075e4055c2ef66d985f8938f881a08d43a90791be3dc0b2700ff7e0074ed107"
+    },
+    {
+      "name": "updater_global_and_bounds",
+      "entry": "0x42a924",
+      "end": "0x42aa58",
+      "bytes": 308,
+      "sha256": "a1377eeacb3748a521e212a84be5391e6c9737026efb85da048a1bf71f812a92"
+    },
+    {
+      "name": "unbound_deferred21b",
+      "entry": "0x429da4",
+      "end": "0x429df6",
+      "bytes": 82,
+      "sha256": "a69ea6c52f959eba65684feebd9651d2068cdd0d91caf8eb45d74e52969c61a4"
+    }
+  ],
+  "sdk": {
+    "acquisition": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/upstream/acquisition.json",
+    "commit": "5efc0228528a8adce5eae0d226fac85d2551eb3b",
+    "path": "mcu/apollo510/hal/am_hal_spotmgr_pcm2_2.c",
+    "sha256": "eac14263dc23ea211b917e9c3feb69695eb511d204961fdf301c1b0fa9abbeb7",
+    "counterpart_lines": {
+      "5": 1169,
+      "11": 1397,
+      "12": 1420,
+      "21": 1602
+    },
+    "limits": "SDK family identification only; stock instructions govern variant and compiler differences."
+  }
+}

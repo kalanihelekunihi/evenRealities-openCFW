@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "component": "Ambiq LVGL draw backend",
+  "repository": "https://github.com/AmbiqMicro/LVGL.git",
+  "license": {
+    "spdx": "MIT",
+    "path": "LICENCE.txt",
+    "git_blob_sha1": "690d2dfd7e97ca8e06535a496761c5e81aece439",
+    "size": 1072,
+    "sha256": "27a80bd36832ab42d35ad60c08b2b230a807a9bc0d58e94ec1531543dc49cbe8"
+  },
+  "source_state": {
+    "subtree_path": "src/draw/ambiq",
+    "subtree_git_tree_sha1": "1e774257495fa43177e04fc5c8a42a77c2d7d619",
+    "canonical_default_branch_commit": "5be8e0ae5077aa3880aba8a322b1487d6bc73c07",
+    "canonical_commit_tree": "8893a4abf4bf0baf39a18d6bdb7376d2c9a87b82",
+    "canonical_parent": "5403c4b7bb2890368a7dccbd22162d579210e35c",
+    "canonical_author_date": "2025-07-09T15:52:24+08:00",
+    "canonical_subject": "refactor : update prprocessing management for  lv_draw_ambiq_vector_font.",
+    "equivalent_replay_commit": "67fd93e268f86b2ce90d4f1b14b53e36bf49ddd0",
+    "equivalent_replay_tree": "0a2d0927a7b2d33de47775e9e25eb3321af5d944",
+    "equivalent_replay_parent": "d3a45af024671178a17cabe1d5fa37bd43fa1df8",
+    "commit_ambiguity": "Both commit objects contain the identical src/draw/ambiq subtree, so linked firmware cannot distinguish them. The canonical commit is preferred because it is on the repository default ambiq-stable lineage.",
+    "immediately_excluded_backend_commit": "6770071cb7c4ab97b83669078fe461df812bc79e",
+    "immediately_excluded_author_date": "2025-07-10T11:11:41+08:00",
+    "immediately_excluded_subject": "feat(draw): support LV_DRAW_TASK_TYPE_LETTER task"
+  },
+  "patch_history": {
+    "generic_clear_copy_hook_commit": "d4dcd26bd97a0b09778ab9f789b6e7a7354bc967",
+    "generic_clear_copy_hook_parent": "17fd8491396567e457efa9d0b163ccac49bd52ef",
+    "generic_clear_copy_hook_author_date": "2025-01-08T11:36:00+08:00",
+    "generic_clear_copy_hook_subject": "use GPU for memcopy and memclear",
+    "ambiq_buffer_wiring_commit": "925470ddbff5f445f6bca3905305ca9d0f2cf5c8",
+    "ambiq_buffer_wiring_parent": "d4dcd26bd97a0b09778ab9f789b6e7a7354bc967",
+    "ambiq_buffer_wiring_author_date": "2025-01-08T11:38:36+08:00",
+    "ambiq_buffer_wiring_subject": "1, added mutex to lock the GPU context, enable call NemaSDK APIs frrm multiple thread"
+  },
+  "stock_evidence": {
+    "official_image": "blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+    "official_image_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "lv_global_base": "0x2006F548",
+    "handler_offsets": ["0xC8", "0xE8", "0x108"],
+    "handler_size": 32,
+    "handler_fields": [
+      "buf_malloc_cb@0x00",
+      "buf_free_cb@0x04",
+      "align_pointer_cb@0x08",
+      "invalidate_cache_cb@0x0C",
+      "flush_cache_cb@0x10",
+      "width_to_stride_cb@0x14",
+      "clear_cb@0x18",
+      "copy_cb@0x1C"
+    ],
+    "retained_source_line_fingerprints": {
+      "lv_draw_ambiq.c": [87],
+      "lv_draw_ambiq_arc.c": [110],
+      "lv_draw_ambiq_box_shadow.c": [111],
+      "lv_draw_ambiq_buffer.c": [68, 107, 120, 181, 221, 255],
+      "lv_draw_ambiq_fill.c": [87],
+      "lv_draw_ambiq_img.c": [74, 85, 96, 101, 106, 155, 172, 183],
+      "lv_draw_ambiq_letter.c": [80, 112, 130, 134],
+      "lv_draw_ambiq_mask_rect.c": [102],
+      "lv_draw_ambiq_private.c": [273, 277, 282, 295, 297, 301, 332, 377, 385, 399, 482, 509, 538, 555, 559, 663, 708, 715, 725, 731],
+      "lv_draw_ambiq_triangle.c": [94],
+      "lv_draw_ambiq_vector_font.c": [186, 199, 202, 209, 235, 240, 281, 297, 299, 312]
+    },
+    "qualification": "The retained line diagnostics and assignment topology identify the public Ambiq subtree state. They do not imply that the complete G2 LVGL core came from either whole repository tree."
+  },
+  "candidate_files": [
+    {"path":"src/draw/ambiq/lv_draw_ambiq.c","size":14363,"sha256":"c9ad0280fd1b394aa7bcac0004ab6148237e787add7650f77fc7df93da438626","git_blob_sha1":"aad246ff0320cf9187b956413665360874ef2610"},
+    {"path":"src/draw/ambiq/lv_draw_ambiq.h","size":4586,"sha256":"f36e09bd8aa98df9a2011d06348afdeab2d722ed6eed5e7f40e3f075bf034128","git_blob_sha1":"c36b565abfae52431361a1d385eb7266052adc7a"},
+    {"path":"src/draw/ambiq/lv_draw_ambiq_arc.c","size":5132,"sha256":"cc67ac17c11162cf340341d5fbd1ee8a25c97fa7d28328d8ce6024acf8928fa7","git_blob_sha1":"fe6dc3c053399fc1dc8cb1e001d42ee7e4117a64"},
+    {"path":"src/draw/ambiq/lv_draw_ambiq_border.c","size":11025,"sha256":"74725f830d03faac43e84d0a7cd82b30748b0baaf691a51d840d1710a851cd0b","git_blob_sha1":"078d0e32f8f6230088b164349fdea98c2b9b8718"},
+    {"path":"src/draw/ambiq/lv_draw_ambiq_box_shadow.c","size":19508,"sha256":"0ddd7d321192450f907d8f4886d5b044af1c76b7ea37d693880d45ef0278b2a0","git_blob_sha1":"e22c902150b8469a82cda531562cd411c36dd0ae"},
+    {"path":"src/draw/ambiq/lv_draw_ambiq_buffer.c","size":12298,"sha256":"77b8949e152b0be1f9f19d222e77728065926b030587e428b36921fec9f3b5dc","git_blob_sha1":"6fbf6567d43f78a18cfe9b94b6de7265c3ec168e"},
+    {"path":"src/draw/ambiq/lv_draw_ambiq_fill.c","size":4183,"sha256":"7d85c3b07d645367de421c511bbc0ae4010d5a4c4cc8afbc2135b070347a83c2","git_blob_sha1":"a470d7bec4885aae9fccb558279fd99a8ade6cf5"},
+    {"path":"src/draw/ambiq/lv_draw_ambiq_img.c","size":11403,"sha256":"e84c6dc754b5cbe9501fed46fb64d3672fed0ae17133b54f7ae9b5c1afa5b50b","git_blob_sha1":"760a40e610c4597ece9e46ebdc3013dea3d4104f"},
+    {"path":"src/draw/ambiq/lv_draw_ambiq_letter.c","size":10993,"sha256":"fbf289aec0dd385246041967287ab5f570a5778e81884da63f53895ef9e484f7","git_blob_sha1":"c625260a3b615229738e910b8d75077e3f52e3bc"},
+    {"path":"src/draw/ambiq/lv_draw_ambiq_line.c","size":5105,"sha256":"7f9cfb153bdae6b25a19e1e9c149ea49dc706a53d86e6f77d6193047c972f669","git_blob_sha1":"6b74a88661e7d5a8094eb601ca6767ec6f27f8f3"},
+    {"path":"src/draw/ambiq/lv_draw_ambiq_mask_rect.c","size":8510,"sha256":"93cb55b3c8f244b2348f8ae6be9db669afcd36270007d10c6e1a025429fba100","git_blob_sha1":"16450ccc32f6be838077fc97d7bfb4d9fbe361b9"},
+    {"path":"src/draw/ambiq/lv_draw_ambiq_private.c","size":22884,"sha256":"55146d9585bfb222668de55f03d98383108b1c154b06ed739c80e3b32fbc49d3","git_blob_sha1":"35cdad279afcc045661f4bd473ec673e4743efc4"},
+    {"path":"src/draw/ambiq/lv_draw_ambiq_private.h","size":5018,"sha256":"06d258d435cdd12a054294c6a272f18e6dde5a68beab3c681f1657228b6840dd","git_blob_sha1":"35807da9719d68236a8682b7a494c0ecc15cb9ac"},
+    {"path":"src/draw/ambiq/lv_draw_ambiq_triangle.c","size":4625,"sha256":"188eb70207fb1a07ad0a611af6e117d1613f1f69c337dbcfe204c7d7cc5434ca","git_blob_sha1":"f5506dec67e35a3767c4acdd9444a8e0b61174b2"},
+    {"path":"src/draw/ambiq/lv_draw_ambiq_vector.c","size":20271,"sha256":"958dec0f248e0a479984deb00987569b3eae5d991272d80d37f2d91f7cd37006","git_blob_sha1":"6759c86e35882657dfbc1fa821af6d0570218da9"},
+    {"path":"src/draw/ambiq/lv_draw_ambiq_vector_font.c","size":10929,"sha256":"b425c3280387a1c5392b69c0a99adbf5cf59502315474373d941e2ba1f1bd1f2","git_blob_sha1":"b6bc8dcbc0e9878e3ae1ee2721ba5f6546b13a9c"}
+  ],
+  "integration_status": "source, ABI, and public Nema/GPU dependency identities closed; production-excluded pending stock-IAR/GPU-patch admission, bare-metal HAL, hardware validation, and atomic source integration"
+}

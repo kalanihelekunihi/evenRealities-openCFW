@@ -1,0 +1,109 @@
+{
+  "compiler": "GCC13.3.1",
+  "stock_sizes": {
+    "Cy_SCB_I2C_Init": 438,
+    "Cy_SCB_I2C_SlaveInterrupt": 276
+  },
+  "results": [
+    {
+      "optimization": "-Og",
+      "assert_class": "default3",
+      "sizes": {
+        "Cy_SCB_I2C_Init": 492,
+        "Cy_SCB_I2C_SlaveInterrupt": 300
+      }
+    },
+    {
+      "optimization": "-Og",
+      "assert_class": "CY_ASSERT_CLASS_1",
+      "sizes": {
+        "Cy_SCB_I2C_Init": 428,
+        "Cy_SCB_I2C_SlaveInterrupt": 300
+      }
+    },
+    {
+      "optimization": "-Og",
+      "assert_class": "CY_ASSERT_CLASS_2",
+      "sizes": {
+        "Cy_SCB_I2C_Init": 480,
+        "Cy_SCB_I2C_SlaveInterrupt": 300
+      }
+    },
+    {
+      "optimization": "-O1",
+      "assert_class": "default3",
+      "sizes": {
+        "Cy_SCB_I2C_Init": 452,
+        "Cy_SCB_I2C_SlaveInterrupt": 1684
+      }
+    },
+    {
+      "optimization": "-O1",
+      "assert_class": "CY_ASSERT_CLASS_1",
+      "sizes": {
+        "Cy_SCB_I2C_Init": 392,
+        "Cy_SCB_I2C_SlaveInterrupt": 1572
+      }
+    },
+    {
+      "optimization": "-O1",
+      "assert_class": "CY_ASSERT_CLASS_2",
+      "sizes": {
+        "Cy_SCB_I2C_Init": 444,
+        "Cy_SCB_I2C_SlaveInterrupt": 1684
+      }
+    },
+    {
+      "optimization": "-Os",
+      "assert_class": "default3",
+      "sizes": {
+        "Cy_SCB_I2C_Init": 436,
+        "Cy_SCB_I2C_SlaveInterrupt": 1412
+      }
+    },
+    {
+      "optimization": "-Os",
+      "assert_class": "CY_ASSERT_CLASS_1",
+      "sizes": {
+        "Cy_SCB_I2C_Init": 380,
+        "Cy_SCB_I2C_SlaveInterrupt": 1436
+      }
+    },
+    {
+      "optimization": "-Os",
+      "assert_class": "CY_ASSERT_CLASS_2",
+      "sizes": {
+        "Cy_SCB_I2C_Init": 424,
+        "Cy_SCB_I2C_SlaveInterrupt": 1412
+      }
+    },
+    {
+      "optimization": "-O2",
+      "assert_class": "default3",
+      "sizes": {
+        "Cy_SCB_I2C_Init": 468,
+        "Cy_SCB_I2C_SlaveInterrupt": 1692
+      }
+    },
+    {
+      "optimization": "-O2",
+      "assert_class": "CY_ASSERT_CLASS_1",
+      "sizes": {
+        "Cy_SCB_I2C_Init": 392,
+        "Cy_SCB_I2C_SlaveInterrupt": 1644
+      }
+    },
+    {
+      "optimization": "-O2",
+      "assert_class": "CY_ASSERT_CLASS_2",
+      "sizes": {
+        "Cy_SCB_I2C_Init": 456,
+        "Cy_SCB_I2C_SlaveInterrupt": 1692
+      }
+    }
+  ],
+  "limits": [
+    "Extent screen only; equality in size would not prove a byte match.",
+    "This matrix does not exhaust versions, configurations or compiler flags."
+  ]
+}

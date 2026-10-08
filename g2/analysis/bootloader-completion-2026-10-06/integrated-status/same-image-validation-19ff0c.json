@@ -1,0 +1,185 @@
+{
+  "utc": "2026-10-07T01:21:37.163240+00:00",
+  "status": "PASS",
+  "elf": "g2/build/bootloader-completion/source-image-compatible/snapshots/19ff0c9366ae316f2671dfd13462c1383ca37696734f2da68427d7c75185afb8/bootloader-source-test.elf",
+  "elf_sha256": "19ff0c9366ae316f2671dfd13462c1383ca37696734f2da68427d7c75185afb8",
+  "seed_elf_sha256": "e6ba6916ee417e9efec1f4dc90a50f8ce7777f0e2ad8f976e6d2e27856072b78",
+  "profiles": [
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/19ff0c9366ae316f2671dfd13462c1383ca37696734f2da68427d7c75185afb8/comparison.json",
+      "sha256": "28487c461188c2a9b31dc68a035aa338848a885530c753eccebfb709fc5702d9",
+      "status": "PASS",
+      "cases": 2
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/19ff0c9366ae316f2671dfd13462c1383ca37696734f2da68427d7c75185afb8/failures.json",
+      "sha256": "f23d04b829ad57bada10e49c3e7282dfc916b864e7b0f60598aae9a9e9485095",
+      "status": "PASS",
+      "cases": 3
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/19ff0c9366ae316f2671dfd13462c1383ca37696734f2da68427d7c75185afb8/powerloss.json",
+      "sha256": "d138ccf76d3d6fa3d4d33e0a346df0514eee2f5fb5e49345d4630b239c5754b1",
+      "status": "PASS",
+      "cases": 2
+    }
+  ],
+  "total_cases": 7,
+  "union_distinct_original_trace_bytes": 35392,
+  "payload_bytes": 148599,
+  "percentage": 23.817118553960658,
+  "interruption_checks": [
+    {
+      "interruption": "before",
+      "matches": {
+        "stopped_persistence_match": true,
+        "stopped_observable_match": true,
+        "reboot_persistence_match": true,
+        "reboot_observable_match": true
+      },
+      "both_reboot_endpoints": "application reset entry, fixture matches, no exception"
+    },
+    {
+      "interruption": "after",
+      "matches": {
+        "stopped_persistence_match": true,
+        "stopped_observable_match": true,
+        "reboot_persistence_match": true,
+        "reboot_observable_match": true
+      },
+      "both_reboot_endpoints": "application reset entry, fixture matches, no exception"
+    }
+  ],
+  "validation_input_hashes": {
+    "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/19ff0c9366ae316f2671dfd13462c1383ca37696734f2da68427d7c75185afb8/validation-input-hashes-final.json",
+    "sha256": "a8af6af8d91a576c968b14f1f2b32d18fe819e8df1b8d108fdfb708272a31b00",
+    "existing_source_runner_files": 573,
+    "linked_objects": 142,
+    "post_run_hash_mismatches": []
+  },
+  "additional_tests": [
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/context-nvic-19ff0c.json",
+      "sha256": "8b6256bbd06974d08047d13f7973e87fdd5c96da8d11435543e19a4659ae06c9",
+      "status": "PASS",
+      "cases": 196608
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/context-children-19ff0c.json",
+      "sha256": "f21978b21517160fdd64f3a6d2d7eaaa32e212a74d77dcb8decd82bd5611bb87",
+      "status": "PASS",
+      "cases": 740
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/iom-stable-subtype-19ff0c.json",
+      "sha256": "2252b2c5a3057773ec5573a298fb85199552c03fadcfa93d43874ec25988bb2e",
+      "status": "PASS",
+      "cases": 2
+    }
+  ],
+  "additional_direct_runner": {
+    "path": "g2/components/bootloader/initializer_callbacks/verify_context_nvic.py",
+    "sha256": "1a32ae4243fe934ff0293bdb1941e9c7a6f15740e6d0c76e6fc42525bbca0d4d"
+  },
+  "trace_byte_audit": {
+    "method": "Deduplicated byte-address union. Only known FP64 second-halfword NOP logs differ; these overlap recorded modeled4-byte slots.",
+    "patched_fp_second_halfword_records": [
+      {
+        "profile": "comparison.json",
+        "pc": "0x43004a",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "comparison.json",
+        "pc": "0x43004e",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "comparison.json",
+        "pc": "0x430056",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "comparison.json",
+        "pc": "0x43005a",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "comparison.json",
+        "pc": "0x4301a0",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "comparison.json",
+        "pc": "0x4301a4",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "failures.json",
+        "pc": "0x43004a",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "failures.json",
+        "pc": "0x43004e",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "failures.json",
+        "pc": "0x430056",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "failures.json",
+        "pc": "0x43005a",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "failures.json",
+        "pc": "0x4301a0",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "failures.json",
+        "pc": "0x4301a4",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "powerloss.json",
+        "pc": "0x43004a",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "powerloss.json",
+        "pc": "0x43004e",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "powerloss.json",
+        "pc": "0x430056",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "powerloss.json",
+        "pc": "0x43005a",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "powerloss.json",
+        "pc": "0x4301a0",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "powerloss.json",
+        "pc": "0x4301a4",
+        "recorded": "00bf"
+      }
+    ]
+  },
+  "limits": [
+    "Relocated source-linked test ELF, not a complete bootable/byte-identical payload.",
+    "Synthetic MMIO, scheduler, ADC and resident-ROM operations; no physical partial-write or IRQ/timing proof.",
+    "Six original FP64 effects emulated; union deduplicates byte addresses, including overlapping second-halfword logs.",
+    "Direct lower callbacks controlled; stable-subtype test is conditional model sensitivity, not hardware behavior."
+  ]
+}

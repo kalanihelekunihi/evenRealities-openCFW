@@ -1,0 +1,4877 @@
+{
+  "status": "PASS",
+  "cases": 144,
+  "distinct_original_trace_bytes": 92,
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "elf_sha256": "75c9c7ca6e45478cd290b26017fcfc05870d2b40646d935084e00a00a76f8d3b",
+  "source_sha256": {
+    "g2/components/bootloader/platform_startup/verify_local_providers.py": "662d4ab0d38e4bcd9589c84d8c85c578727c16732e0fa94be0200827716d9aed",
+    "g2/components/bootloader/platform_startup/local_providers.S": "642a29c3fb27fd42874d96a255032add1d270f95bd2e4125f8b0b38285f4d338",
+    "g2/components/bootloader/platform_startup/local_providers.ld": "4f27ad684433d8207da08403535171fff3438d0174e0f59bf2649b29dbdb8bd1"
+  },
+  "comparisons": [
+    {
+      "function": "coprocessor_enable",
+      "argument": 0,
+      "initial": 0,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            15728640
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          15728640,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "0000f000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 0,
+      "initial": 0,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            15728640
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          15728640,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "0000f000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 0,
+      "initial": 305419896,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            318002808
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          318002808,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "7856f412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 0,
+      "initial": 305419896,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            318002808
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          318002808,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "7856f412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 0,
+      "initial": 4294967295,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            4294967295
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          4294967295,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 0,
+      "initial": 4294967295,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            4294967295
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          4294967295,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 1,
+      "initial": 0,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            15728640
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          15728640,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "0000f000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 1,
+      "initial": 0,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            15728640
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          15728640,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "0000f000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 1,
+      "initial": 305419896,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            318002808
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          318002808,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "7856f412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 1,
+      "initial": 305419896,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            318002808
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          318002808,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "7856f412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 1,
+      "initial": 4294967295,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            4294967295
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          4294967295,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 1,
+      "initial": 4294967295,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            4294967295
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          4294967295,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 256,
+      "initial": 0,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            15728640
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          15728640,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "0000f000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 256,
+      "initial": 0,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            15728640
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          15728640,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "0000f000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 256,
+      "initial": 305419896,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            318002808
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          318002808,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "7856f412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 256,
+      "initial": 305419896,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            318002808
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          318002808,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "7856f412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 256,
+      "initial": 4294967295,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            4294967295
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          4294967295,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 256,
+      "initial": 4294967295,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            4294967295
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          4294967295,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 257,
+      "initial": 0,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            15728640
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          15728640,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "0000f000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 257,
+      "initial": 0,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            15728640
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          15728640,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "0000f000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 257,
+      "initial": 305419896,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            318002808
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          318002808,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "7856f412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 257,
+      "initial": 305419896,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            318002808
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          318002808,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "7856f412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 257,
+      "initial": 4294967295,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            4294967295
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          4294967295,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 257,
+      "initial": 4294967295,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            4294967295
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          4294967295,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 4294967295,
+      "initial": 0,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            15728640
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          15728640,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "0000f000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 4294967295,
+      "initial": 0,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            15728640
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          15728640,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "0000f000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 4294967295,
+      "initial": 305419896,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            318002808
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          318002808,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "7856f412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 4294967295,
+      "initial": 305419896,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            318002808
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          318002808,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "7856f412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 4294967295,
+      "initial": 4294967295,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            4294967295
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          4294967295,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 4294967295,
+      "initial": 4294967295,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            4294967295
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          4294967295,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 2147483648,
+      "initial": 0,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            15728640
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          15728640,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "0000f000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 2147483648,
+      "initial": 0,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            15728640
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          15728640,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "0000f000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 2147483648,
+      "initial": 305419896,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            318002808
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          318002808,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "7856f412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 2147483648,
+      "initial": 305419896,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            318002808
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          318002808,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "7856f412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 2147483648,
+      "initial": 4294967295,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            4294967295
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          4294967295,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "coprocessor_enable",
+      "argument": 2147483648,
+      "initial": 4294967295,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "write",
+            "0xe000ed88",
+            4,
+            4294967295
+          ],
+          [
+            "dsb"
+          ],
+          [
+            "isb"
+          ]
+        ],
+        "return_registers": [
+          3758157192,
+          4294967295,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 0,
+      "initial": 0,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            0
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            2147483648
+          ]
+        ],
+        "return_registers": [
+          0,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "00000000",
+        "fpccr": "00000080"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 0,
+      "initial": 0,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            1
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            2147483648
+          ]
+        ],
+        "return_registers": [
+          1,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "00000000",
+        "fpccr": "00000080"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 0,
+      "initial": 305419896,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            0
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            2452903544
+          ]
+        ],
+        "return_registers": [
+          0,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "78563412",
+        "fpccr": "78563492"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 0,
+      "initial": 305419896,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            1
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            2452903544
+          ]
+        ],
+        "return_registers": [
+          1,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "78563412",
+        "fpccr": "78563492"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 0,
+      "initial": 4294967295,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            0
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            3221225471
+          ]
+        ],
+        "return_registers": [
+          0,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffbf"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 0,
+      "initial": 4294967295,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            1
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            3221225471
+          ]
+        ],
+        "return_registers": [
+          1,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffbf"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 1,
+      "initial": 0,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            0
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            3221225472
+          ]
+        ],
+        "return_registers": [
+          0,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "00000000",
+        "fpccr": "000000c0"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 1,
+      "initial": 0,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            1
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            3221225472
+          ]
+        ],
+        "return_registers": [
+          1,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "00000000",
+        "fpccr": "000000c0"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 1,
+      "initial": 305419896,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            0
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            3526645368
+          ]
+        ],
+        "return_registers": [
+          0,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "78563412",
+        "fpccr": "785634d2"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 1,
+      "initial": 305419896,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            1
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            3526645368
+          ]
+        ],
+        "return_registers": [
+          1,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "78563412",
+        "fpccr": "785634d2"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 1,
+      "initial": 4294967295,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            0
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            4294967295
+          ]
+        ],
+        "return_registers": [
+          0,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 1,
+      "initial": 4294967295,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            1
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            4294967295
+          ]
+        ],
+        "return_registers": [
+          1,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 256,
+      "initial": 0,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            0
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            2147483648
+          ]
+        ],
+        "return_registers": [
+          0,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "00000000",
+        "fpccr": "00000080"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 256,
+      "initial": 0,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            1
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            2147483648
+          ]
+        ],
+        "return_registers": [
+          1,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "00000000",
+        "fpccr": "00000080"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 256,
+      "initial": 305419896,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            0
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            2452903544
+          ]
+        ],
+        "return_registers": [
+          0,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "78563412",
+        "fpccr": "78563492"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 256,
+      "initial": 305419896,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            1
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            2452903544
+          ]
+        ],
+        "return_registers": [
+          1,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "78563412",
+        "fpccr": "78563492"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 256,
+      "initial": 4294967295,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            0
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            3221225471
+          ]
+        ],
+        "return_registers": [
+          0,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffbf"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 256,
+      "initial": 4294967295,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            1
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            3221225471
+          ]
+        ],
+        "return_registers": [
+          1,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffbf"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 257,
+      "initial": 0,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            0
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            3221225472
+          ]
+        ],
+        "return_registers": [
+          0,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "00000000",
+        "fpccr": "000000c0"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 257,
+      "initial": 0,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            1
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            3221225472
+          ]
+        ],
+        "return_registers": [
+          1,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "00000000",
+        "fpccr": "000000c0"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 257,
+      "initial": 305419896,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            0
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            3526645368
+          ]
+        ],
+        "return_registers": [
+          0,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "78563412",
+        "fpccr": "785634d2"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 257,
+      "initial": 305419896,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            1
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            3526645368
+          ]
+        ],
+        "return_registers": [
+          1,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "78563412",
+        "fpccr": "785634d2"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 257,
+      "initial": 4294967295,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            0
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            4294967295
+          ]
+        ],
+        "return_registers": [
+          0,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 257,
+      "initial": 4294967295,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            1
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            4294967295
+          ]
+        ],
+        "return_registers": [
+          1,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 4294967295,
+      "initial": 0,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            0
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            3221225472
+          ]
+        ],
+        "return_registers": [
+          0,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "00000000",
+        "fpccr": "000000c0"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 4294967295,
+      "initial": 0,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            1
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            3221225472
+          ]
+        ],
+        "return_registers": [
+          1,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "00000000",
+        "fpccr": "000000c0"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 4294967295,
+      "initial": 305419896,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            0
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            3526645368
+          ]
+        ],
+        "return_registers": [
+          0,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "78563412",
+        "fpccr": "785634d2"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 4294967295,
+      "initial": 305419896,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            1
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            3526645368
+          ]
+        ],
+        "return_registers": [
+          1,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "78563412",
+        "fpccr": "785634d2"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 4294967295,
+      "initial": 4294967295,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            0
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            4294967295
+          ]
+        ],
+        "return_registers": [
+          0,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 4294967295,
+      "initial": 4294967295,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            1
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            4294967295
+          ]
+        ],
+        "return_registers": [
+          1,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 2147483648,
+      "initial": 0,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            0
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            2147483648
+          ]
+        ],
+        "return_registers": [
+          0,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "00000000",
+        "fpccr": "00000080"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 2147483648,
+      "initial": 0,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            1
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            2147483648
+          ]
+        ],
+        "return_registers": [
+          1,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "00000000",
+        "fpccr": "00000080"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 2147483648,
+      "initial": 305419896,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            0
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            2452903544
+          ]
+        ],
+        "return_registers": [
+          0,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "78563412",
+        "fpccr": "78563492"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 2147483648,
+      "initial": 305419896,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            1
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            2452903544
+          ]
+        ],
+        "return_registers": [
+          1,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "78563412",
+        "fpccr": "78563492"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 2147483648,
+      "initial": 4294967295,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            0
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            3221225471
+          ]
+        ],
+        "return_registers": [
+          0,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffbf"
+      }
+    },
+    {
+      "function": "fp_lazy_mode",
+      "argument": 2147483648,
+      "initial": 4294967295,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "critical-save",
+            1
+          ],
+          [
+            "write",
+            "0xe000ef34",
+            4,
+            3221225471
+          ]
+        ],
+        "return_registers": [
+          1,
+          259,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffbf"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 0,
+      "initial": 0,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            0
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "00000000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 0,
+      "initial": 0,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            0
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "00000000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 0,
+      "initial": 305419896,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            0
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "78563412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 0,
+      "initial": 305419896,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            0
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "78563412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 0,
+      "initial": 4294967295,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            0
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 0,
+      "initial": 4294967295,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            0
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 1,
+      "initial": 0,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            1000
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "00000000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 1,
+      "initial": 0,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            1000
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "00000000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 1,
+      "initial": 305419896,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            1000
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "78563412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 1,
+      "initial": 305419896,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            1000
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "78563412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 1,
+      "initial": 4294967295,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            1000
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 1,
+      "initial": 4294967295,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            1000
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 256,
+      "initial": 0,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            256000
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "00000000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 256,
+      "initial": 0,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            256000
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "00000000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 256,
+      "initial": 305419896,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            256000
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "78563412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 256,
+      "initial": 305419896,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            256000
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "78563412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 256,
+      "initial": 4294967295,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            256000
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 256,
+      "initial": 4294967295,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            256000
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 257,
+      "initial": 0,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            257000
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "00000000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 257,
+      "initial": 0,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            257000
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "00000000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 257,
+      "initial": 305419896,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            257000
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "78563412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 257,
+      "initial": 305419896,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            257000
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "78563412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 257,
+      "initial": 4294967295,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            257000
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 257,
+      "initial": 4294967295,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            257000
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 4294967295,
+      "initial": 0,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            4294966296
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "00000000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 4294967295,
+      "initial": 0,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            4294966296
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "00000000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 4294967295,
+      "initial": 305419896,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            4294966296
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "78563412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 4294967295,
+      "initial": 305419896,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            4294966296
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "78563412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 4294967295,
+      "initial": 4294967295,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            4294966296
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 4294967295,
+      "initial": 4294967295,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            4294966296
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 2147483648,
+      "initial": 0,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            0
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "00000000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 2147483648,
+      "initial": 0,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            0
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "00000000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 2147483648,
+      "initial": 305419896,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            0
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "78563412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 2147483648,
+      "initial": 305419896,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            0
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "78563412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 2147483648,
+      "initial": 4294967295,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            0
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "delay_scaled",
+      "argument": 2147483648,
+      "initial": 4294967295,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            0
+          ]
+        ],
+        "return_registers": [
+          263,
+          1000,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 0,
+      "initial": 0,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            0
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "00000000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 0,
+      "initial": 0,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            0
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "00000000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 0,
+      "initial": 305419896,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            0
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "78563412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 0,
+      "initial": 305419896,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            0
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "78563412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 0,
+      "initial": 4294967295,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            0
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 0,
+      "initial": 4294967295,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            0
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 1,
+      "initial": 0,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            1
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "00000000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 1,
+      "initial": 0,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            1
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "00000000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 1,
+      "initial": 305419896,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            1
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "78563412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 1,
+      "initial": 305419896,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            1
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "78563412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 1,
+      "initial": 4294967295,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            1
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 1,
+      "initial": 4294967295,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            1
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 256,
+      "initial": 0,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            256
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "00000000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 256,
+      "initial": 0,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            256
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "00000000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 256,
+      "initial": 305419896,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            256
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "78563412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 256,
+      "initial": 305419896,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            256
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "78563412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 256,
+      "initial": 4294967295,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            256
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 256,
+      "initial": 4294967295,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            256
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 257,
+      "initial": 0,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            257
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "00000000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 257,
+      "initial": 0,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            257
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "00000000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 257,
+      "initial": 305419896,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            257
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "78563412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 257,
+      "initial": 305419896,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            257
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "78563412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 257,
+      "initial": 4294967295,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            257
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 257,
+      "initial": 4294967295,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            257
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 4294967295,
+      "initial": 0,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            4294967295
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "00000000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 4294967295,
+      "initial": 0,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            4294967295
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "00000000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 4294967295,
+      "initial": 305419896,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            4294967295
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "78563412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 4294967295,
+      "initial": 305419896,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            4294967295
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "78563412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 4294967295,
+      "initial": 4294967295,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            4294967295
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 4294967295,
+      "initial": 4294967295,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            4294967295
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 2147483648,
+      "initial": 0,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            2147483648
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "00000000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 2147483648,
+      "initial": 0,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            2147483648
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "00000000",
+        "fpccr": "00000000"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 2147483648,
+      "initial": 305419896,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            2147483648
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "78563412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 2147483648,
+      "initial": 305419896,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            2147483648
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "78563412",
+        "fpccr": "78563412"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 2147483648,
+      "initial": 4294967295,
+      "primask": 0,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            2147483648
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 0,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    },
+    {
+      "function": "delay_raw",
+      "argument": 2147483648,
+      "initial": 4294967295,
+      "primask": 1,
+      "result": {
+        "events": [
+          [
+            "delay-us-argument",
+            2147483648
+          ]
+        ],
+        "return_registers": [
+          263,
+          257,
+          260,
+          261,
+          262,
+          263,
+          264,
+          265,
+          266,
+          267
+        ],
+        "sp": 537128960,
+        "primask": 1,
+        "cpacr": "ffffffff",
+        "fpccr": "ffffffff"
+      }
+    }
+  ],
+  "original_trace": {
+    "0x41ac44": "dff87804",
+    "0x41ac48": "0168",
+    "0x41ac4a": "51f47001",
+    "0x41ac4e": "0160",
+    "0x41ac50": "bff34f8f",
+    "0x41ac54": "bff36f8f",
+    "0x41ac58": "7047",
+    "0x41ac5a": "1cb5",
+    "0x41ac5c": "0400",
+    "0x41ac5e": "00f045fe",
+    "0x41ac62": "0090",
+    "0x41ac64": "dff85c14",
+    "0x41ac68": "0868",
+    "0x41ac6a": "20f04040",
+    "0x41ac6e": "e4b2",
+    "0x41ac70": "002c",
+    "0x41ac72": "02d0",
+    "0x41ac7a": "5ff00042",
+    "0x41ac7e": "1043",
+    "0x41ac80": "0860",
+    "0x41ac82": "0098",
+    "0x41ac84": "80f31088",
+    "0x41ac88": "13bd",
+    "0x41ac74": "5ff04042",
+    "0x41ac78": "01e0",
+    "0x41f9d8": "80b5",
+    "0x41f9da": "4ff47a71",
+    "0x41f9de": "4843",
+    "0x41f9e0": "fdf7eefb",
+    "0x41f9e4": "01bd",
+    "0x41f9e6": "80b5",
+    "0x41f9e8": "fdf7eafb",
+    "0x41f9ec": "01bd"
+  },
+  "limits": [
+    "Critical-save callee and HAL delay are explicit controlled callbacks. Tests establish wrapper operands, volatile stores/barriers, PRIMASK restoration and return/callee-saved register behavior; no physical delay, FPU exception timing or silicon ordering measurement.",
+    "Scaled delay uses unsigned 32-bit multiplication by1000; raw delay forwards unchanged. Low-byte FP mode truncation and preexisting control bits covered."
+  ]
+}

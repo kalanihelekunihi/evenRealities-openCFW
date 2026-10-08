@@ -1,0 +1,263 @@
+{
+  "status": "PASS",
+  "image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "base_elf_sha256": "370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598",
+  "addon_elf_sha256": "99bde1f77b1c69918a5494ffb47a2fe8823c091b2e82dd2244dcd9bcedae35e9",
+  "selector_table_address": "0x20000158",
+  "selector_table_bytes": 108,
+  "selector_table_sha256": "81c33f127f9fe57795f236e7316cbfb32ff43cd576ba1b5256b3d7bf7b4dee21",
+  "selector16_stock_target": "0x42962d",
+  "selector16_source_target": "0x3f501",
+  "temperature_matrix_address": "0x433498",
+  "temperature_matrix_sha256": "d83c73b1f5370cc6063489aedc4f0701bdec2ca34a492233caa521c0cf2ea5e8",
+  "walker_range": [
+    "0x42a43a",
+    "0x42a4bc"
+  ],
+  "selector_range": [
+    "0x42a2b4",
+    "0x42a43a"
+  ],
+  "handler_range": [
+    "0x42962c",
+    "0x429700"
+  ],
+  "coverage": {
+    "walker": 80,
+    "selector": 152,
+    "handler": 202
+  },
+  "fixtures": [
+    {
+      "fixture": {
+        "name": "current6-target5-selector16",
+        "walker_args": [
+          5,
+          6,
+          3,
+          1
+        ],
+        "handler_args": [
+          5,
+          6,
+          3,
+          1
+        ],
+        "profiles": [
+          92688418,
+          120353709,
+          148019000,
+          175684291,
+          203349582,
+          228917721,
+          256583012,
+          15812847,
+          43478138,
+          71143301,
+          96711440,
+          124376731,
+          152042022,
+          179576241,
+          207241532,
+          232809671,
+          260474962,
+          19704797,
+          47370088,
+          75035379,
+          102700670
+        ],
+        "low_voltage": [
+          27,
+          68,
+          109,
+          22
+        ],
+        "timer_control": 0,
+        "timer_status": 0,
+        "timer_state": 0,
+        "clock_user": false,
+        "mode": 0
+      },
+      "selector_matrix_cell": {
+        "current_group": 1,
+        "target_group": 1,
+        "base_sequence": 25,
+        "temperature_class": "le0(current)->gt0(target)",
+        "resolved_selector": 16
+      },
+      "result": {
+        "calls": [
+          [
+            5,
+            6,
+            3,
+            1
+          ]
+        ],
+        "return_regs": [
+          16,
+          1
+        ],
+        "state": {
+          "200270b0": "6d000000",
+          "200270b4": "59000000",
+          "200270b8": "03020000",
+          "200270bc": "02000000",
+          "200270c0": "03000000",
+          "200270c4": "05000000",
+          "40020044": "44005a5a",
+          "40020048": "08005a5a",
+          "40020080": "80005a5a",
+          "400083e0": "00000000",
+          "40008064": "00000000",
+          "2000055a": "00000000"
+        },
+        "writes": [
+          [
+            1073872968,
+            4,
+            1515847688
+          ]
+        ],
+        "wait_cycles": [],
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "sp": 537128960,
+        "primask": 0
+      }
+    },
+    {
+      "fixture": {
+        "name": "current6-target5-selector16",
+        "walker_args": [
+          5,
+          6,
+          3,
+          1
+        ],
+        "handler_args": [
+          5,
+          6,
+          3,
+          1
+        ],
+        "profiles": [
+          92688418,
+          120353709,
+          148019000,
+          175684291,
+          203349582,
+          228917721,
+          256583012,
+          15812847,
+          43478138,
+          71143301,
+          96711440,
+          124376731,
+          152042022,
+          179576241,
+          207241532,
+          232809671,
+          260474962,
+          19704797,
+          47370088,
+          75035379,
+          102700670
+        ],
+        "low_voltage": [
+          27,
+          68,
+          109,
+          22
+        ],
+        "timer_control": 2147488309,
+        "timer_status": 1073741824,
+        "timer_state": 26,
+        "clock_user": true,
+        "mode": 0
+      },
+      "selector_matrix_cell": {
+        "current_group": 1,
+        "target_group": 1,
+        "base_sequence": 25,
+        "temperature_class": "le0(current)->gt0(target)",
+        "resolved_selector": 16
+      },
+      "result": {
+        "calls": [
+          [
+            5,
+            6,
+            3,
+            1
+          ]
+        ],
+        "return_regs": [
+          16,
+          1
+        ],
+        "state": {
+          "200270b0": "6d000000",
+          "200270b4": "59000000",
+          "200270b8": "03020000",
+          "200270bc": "02000000",
+          "200270c0": "03000000",
+          "200270c4": "05000000",
+          "40020044": "44005a5a",
+          "40020048": "08005a5a",
+          "40020080": "80005a5a",
+          "400083e0": "34120080",
+          "40008064": "00000040",
+          "2000055a": "1a000000"
+        },
+        "writes": [
+          [
+            1073775584,
+            4,
+            2147488308
+          ],
+          [
+            1073774608,
+            4,
+            0
+          ],
+          [
+            1073774696,
+            4,
+            3221225472
+          ],
+          [
+            1073872968,
+            4,
+            1515847688
+          ]
+        ],
+        "wait_cycles": [],
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "sp": 537128960,
+        "primask": 0
+      }
+    }
+  ],
+  "limits": [
+    "The authentic walker and selector plus selector16 execute on stock; source executes reconstructed walker/selector and selector16 handler. Full authenticated callback table is seeded on both, with only slot16 bound to compiled selector16 on source.",
+    "Only ROM cycle-wait service at 0x40 is controlled. Actual timer, delay, clock and selector16 helpers execute. Offline emulation only; no hardware or whole-firmware equivalence claim."
+  ]
+}

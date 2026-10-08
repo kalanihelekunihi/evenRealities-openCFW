@@ -1,0 +1,10 @@
+{
+  "id": "P2-20817",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "152B replay passed. Logger2146 uses constants 256 then64 in stack slots; second logger2147 follows a separate query pair. Mask paths use 0x10800000 with 256/64 or 0x10000000 with live R3 not explicitly assigned in the setup. ADD40+POP24 completes 64-byte frame and returns live R0 without explicit normalization."
+}

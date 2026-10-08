@@ -1,0 +1,17 @@
+{
+  "firmware_path": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+  "firmware_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "offline_fixture_elfs": {
+    "/tmp/opencfw-touch-calibration/provider.elf": "e9a4521cbeaac084884bd16c1144dd468f0db58eab344a846f33e63423c4a4a0",
+    "/tmp/opencfw-touch-gesture-machine/composed-gesture.elf": "a5940348e9ea02ce14d0366c04f9df2b7342ddb2f25d5b4181bae26e1deee7c3",
+    "/tmp/opencfw-touch-slider-producer/composed-slider.elf": "5d465dde89705dc405681827bc8c3531f2657a08641cf648502484ee9c847576",
+    "/tmp/opencfw-touch-proximity-composed/proximity.elf": "f5fd3263f865816ec49dfe5d9ca3c2cc2e5dce58df3b5cbd4e6613921c104605"
+  },
+  "sealed_evidence": [
+    "touch-proximity-producer-closure-2026-10-08",
+    "touch-slider-producer-closure-2026-10-08",
+    "touch-gesture-machine-closure-2026-10-08",
+    "touch-calibration-closure-2026-10-08"
+  ],
+  "source_claim": "Semantic independent offline closure, not production equality"
+}

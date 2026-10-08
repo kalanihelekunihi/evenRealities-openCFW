@@ -1,0 +1,53 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpqg2lo2b6/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0046a050 <.text>:
+  46a050:	2c48      	cmp	r4, #72	@ 0x48
+  46a052:	d10b      	bne.n	46a06c <.text+0x1c>
+  46a054:	f7f0 fa88 	bl	45a568 <.text-0xfae8>
+  46a058:	2802      	cmp	r0, #2
+  46a05a:	d101      	bne.n	46a060 <.text+0x10>
+  46a05c:	2001      	movs	r0, #1
+  46a05e:	e094      	b.n	46a18a <.text+0x13a>
+  46a060:	0029      	movs	r1, r5
+  46a062:	0020      	movs	r0, r4
+  46a064:	f7ff feff 	bl	469e66 <.text-0x1ea>
+  46a068:	2001      	movs	r0, #1
+  46a06a:	e08e      	b.n	46a18a <.text+0x13a>
+  46a06c:	2c44      	cmp	r4, #68	@ 0x44
+  46a06e:	d12d      	bne.n	46a0cc <.text+0x7c>
+  46a070:	f7d3 f82d 	bl	43d0ce <.text-0x2cf82>
+  46a074:	0780      	lsls	r0, r0, #30
+  46a076:	d50e      	bpl.n	46a096 <.text+0x46>
+  46a078:	f8df 0a58 	ldr.w	r0, [pc, #2648]	@ 46aad4 <.text+0xa84>
+  46a07c:	9001      	str	r0, [sp, #4]
+  46a07e:	f240 1005 	movw	r0, #261	@ 0x105
+  46a082:	9000      	str	r0, [sp, #0]
+  46a084:	f8df 3a3c 	ldr.w	r3, [pc, #2620]	@ 46aac4 <.text+0xa74>
+  46a088:	f8df 27a4 	ldr.w	r2, [pc, #1956]	@ 46a830 <.text+0x7e0>
+  46a08c:	f8df 17a4 	ldr.w	r1, [pc, #1956]	@ 46a834 <.text+0x7e4>
+  46a090:	2004      	movs	r0, #4
+  46a092:	f7d3 fa6f 	bl	43d574 <.text-0x2cadc>
+  46a096:	f7d3 f81a 	bl	43d0ce <.text-0x2cf82>
+  46a09a:	07c0      	lsls	r0, r0, #31
+  46a09c:	d403      	bmi.n	46a0a6 <.text+0x56>
+  46a09e:	f7d3 f816 	bl	43d0ce <.text-0x2cf82>
+  46a0a2:	0740      	lsls	r0, r0, #29
+  46a0a4:	d506      	bpl.n	46a0b4 <.text+0x64>
+  46a0a6:	f8df 1a30 	ldr.w	r1, [pc, #2608]	@ 46aad8 <.text+0xa88>
+  46a0aa:	000a      	movs	r2, r1
+  46a0ac:	f05f 5080 	movs.w	r0, #268435456	@ 0x10000000
+  46a0b0:	f7d2 fef5 	bl	43ce9e <.text-0x2d1b2>
+  46a0b4:	f7f0 fa58 	bl	45a568 <.text-0xfae8>
+  46a0b8:	2802      	cmp	r0, #2
+  46a0ba:	d101      	bne.n	46a0c0 <.text+0x70>
+  46a0bc:	2001      	movs	r0, #1
+  46a0be:	e064      	b.n	46a18a <.text+0x13a>
+  46a0c0:	0029      	movs	r1, r5
+  46a0c2:	0020      	movs	r0, r4
+  46a0c4:	f7ff fecf 	bl	469e66 <.text-0x1ea>
+  46a0c8:	2001      	movs	r0, #1
+  46a0ca:	e05e      	b.n	46a18a <.text+0x13a>

@@ -1,0 +1,56 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpy6xc5tz6/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0048028a <.text>:
+  48028a:	f8df 2444 	ldr.w	r2, [pc, #1092]	@ 4806d0 <.text+0x446>
+  48028e:	6811      	ldr	r1, [r2, #0]
+  480290:	0849      	lsrs	r1, r1, #1
+  480292:	0049      	lsls	r1, r1, #1
+  480294:	6011      	str	r1, [r2, #0]
+  480296:	6811      	ldr	r1, [r2, #0]
+  480298:	f051 0102 	orrs.w	r1, r1, #2
+  48029c:	6011      	str	r1, [r2, #0]
+  48029e:	6811      	ldr	r1, [r2, #0]
+  4802a0:	f031 0102 	bics.w	r1, r1, #2
+  4802a4:	6011      	str	r1, [r2, #0]
+  4802a6:	2106      	movs	r1, #6
+  4802a8:	4348      	muls	r0, r1
+  4802aa:	f8df 142c 	ldr.w	r1, [pc, #1068]	@ 4806d8 <.text+0x44e>
+  4802ae:	6008      	str	r0, [r1, #0]
+  4802b0:	f05f 4040 	movs.w	r0, #3221225472	@ 0xc0000000
+  4802b4:	f8df 1428 	ldr.w	r1, [pc, #1064]	@ 4806e0 <.text+0x456>
+  4802b8:	6008      	str	r0, [r1, #0]
+  4802ba:	f45f 2080 	movs.w	r0, #262144	@ 0x40000
+  4802be:	f8df 1430 	ldr.w	r1, [pc, #1072]	@ 4806f0 <.text+0x466>
+  4802c2:	6008      	str	r0, [r1, #0]
+  4802c4:	6810      	ldr	r0, [r2, #0]
+  4802c6:	f050 0001 	orrs.w	r0, r0, #1
+  4802ca:	6010      	str	r0, [r2, #0]
+  4802cc:	4770      	bx	lr
+  4802ce:	b580      	push	{r7, lr}
+  4802d0:	f8df 03fc 	ldr.w	r0, [pc, #1020]	@ 4806d0 <.text+0x446>
+  4802d4:	6801      	ldr	r1, [r0, #0]
+  4802d6:	0849      	lsrs	r1, r1, #1
+  4802d8:	0049      	lsls	r1, r1, #1
+  4802da:	6001      	str	r1, [r0, #0]
+  4802dc:	f8df 0408 	ldr.w	r0, [pc, #1032]	@ 4806e8 <.text+0x45e>
+  4802e0:	6801      	ldr	r1, [r0, #0]
+  4802e2:	f431 4100 	bics.w	r1, r1, #32768	@ 0x8000
+  4802e6:	6001      	str	r1, [r0, #0]
+  4802e8:	2131      	movs	r1, #49	@ 0x31
+  4802ea:	2004      	movs	r0, #4
+  4802ec:	f044 f920 	bl	4c4530 <.text+0x442a6>
+  4802f0:	f45f 2080 	movs.w	r0, #262144	@ 0x40000
+  4802f4:	f8df 13fc 	ldr.w	r1, [pc, #1020]	@ 4806f4 <.text+0x46a>
+  4802f8:	6008      	str	r0, [r1, #0]
+  4802fa:	f05f 4140 	movs.w	r1, #3221225472	@ 0xc0000000
+  4802fe:	f8df 23e0 	ldr.w	r2, [pc, #992]	@ 4806e0 <.text+0x456>
+  480302:	6011      	str	r1, [r2, #0]
+  480304:	f8df 13f0 	ldr.w	r1, [pc, #1008]	@ 4806f8 <.text+0x46e>
+  480308:	6809      	ldr	r1, [r1, #0]
+  48030a:	f8df 13e4 	ldr.w	r1, [pc, #996]	@ 4806f0 <.text+0x466>
+  48030e:	6008      	str	r0, [r1, #0]
+  480310:	bd01      	pop	{r0, pc}

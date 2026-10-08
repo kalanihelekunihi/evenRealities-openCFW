@@ -1,0 +1,55 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpaok7ecqn/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047eaf6 <.text>:
+  47eaf6:	b510      	push	{r4, lr}
+  47eaf8:	0004      	movs	r4, r0
+  47eafa:	2800      	cmp	r0, #0
+  47eafc:	d106      	bne.n	47eb0c <.text+0x16>
+  47eafe:	f17b fad1 	bl	5fa0a4 <.text+0x17b5ae>
+  47eb02:	2000      	movs	r0, #0
+  47eb04:	f05f 31ff 	movs.w	r1, #4294967295	@ 0xffffffff
+  47eb08:	6008      	str	r0, [r1, #0]
+  47eb0a:	e7fe      	b.n	47eb0a <.text+0x14>
+  47eb0c:	f7c3 fae0 	bl	4420d0 <.text-0x3ca26>
+  47eb10:	f894 0028 	ldrb.w	r0, [r4, #40]	@ 0x28
+  47eb14:	07c0      	lsls	r0, r0, #31
+  47eb16:	d401      	bmi.n	47eb1c <.text+0x26>
+  47eb18:	2400      	movs	r4, #0
+  47eb1a:	e000      	b.n	47eb1e <.text+0x28>
+  47eb1c:	2401      	movs	r4, #1
+  47eb1e:	f7c3 fae3 	bl	4420e8 <.text-0x3ca0e>
+  47eb22:	0020      	movs	r0, r4
+  47eb24:	bd10      	pop	{r4, pc}
+  47eb26:	b510      	push	{r4, lr}
+  47eb28:	0004      	movs	r4, r0
+  47eb2a:	2800      	cmp	r0, #0
+  47eb2c:	d106      	bne.n	47eb3c <.text+0x46>
+  47eb2e:	f17b fab9 	bl	5fa0a4 <.text+0x17b5ae>
+  47eb32:	2000      	movs	r0, #0
+  47eb34:	f05f 31ff 	movs.w	r1, #4294967295	@ 0xffffffff
+  47eb38:	6008      	str	r0, [r1, #0]
+  47eb3a:	e7fe      	b.n	47eb3a <.text+0x44>
+  47eb3c:	f7c3 fac8 	bl	4420d0 <.text-0x3ca26>
+  47eb40:	69e4      	ldr	r4, [r4, #28]
+  47eb42:	f7c3 fad1 	bl	4420e8 <.text-0x3ca0e>
+  47eb46:	0020      	movs	r0, r4
+  47eb48:	bd10      	pop	{r4, pc}
+  47eb4a:	b51f      	push	{r0, r1, r2, r3, r4, lr}
+  47eb4c:	001c      	movs	r4, r3
+  47eb4e:	f07f 0301 	mvns.w	r3, #1
+  47eb52:	9300      	str	r3, [sp, #0]
+  47eb54:	9001      	str	r0, [sp, #4]
+  47eb56:	9102      	str	r1, [sp, #8]
+  47eb58:	9203      	str	r2, [sp, #12]
+  47eb5a:	2300      	movs	r3, #0
+  47eb5c:	0022      	movs	r2, r4
+  47eb5e:	4669      	mov	r1, sp
+  47eb60:	4802      	ldr	r0, [pc, #8]	@ (47eb6c <.text+0x76>)
+  47eb62:	6800      	ldr	r0, [r0, #0]
+  47eb64:	f7c2 fef5 	bl	441952 <.text-0x3d1a4>
+  47eb68:	b004      	add	sp, #16
+  47eb6a:	bd10      	pop	{r4, pc}

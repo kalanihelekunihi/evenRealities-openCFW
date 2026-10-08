@@ -1,0 +1,98 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpdbmn3wo3/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00481142 <.text>:
+  481142:	6829      	ldr	r1, [r5, #0]
+  481144:	9800      	ldr	r0, [sp, #0]
+  481146:	4301      	orrs	r1, r0
+  481148:	6029      	str	r1, [r5, #0]
+  48114a:	b2f6      	uxtb	r6, r6
+  48114c:	2e02      	cmp	r6, #2
+  48114e:	d104      	bne.n	48115a <.text+0x18>
+  481150:	3570      	adds	r5, #112	@ 0x70
+  481152:	6829      	ldr	r1, [r5, #0]
+  481154:	9800      	ldr	r0, [sp, #0]
+  481156:	4301      	orrs	r1, r0
+  481158:	6029      	str	r1, [r5, #0]
+  48115a:	e0c5      	b.n	4812e8 <.text+0x1a6>
+  48115c:	0030      	movs	r0, r6
+  48115e:	b2c0      	uxtb	r0, r0
+  481160:	2801      	cmp	r0, #1
+  481162:	d030      	beq.n	4811c6 <.text+0x84>
+  481164:	6839      	ldr	r1, [r7, #0]
+  481166:	f8df 0600 	ldr.w	r0, [pc, #1536]	@ 481768 <.text+0x626>
+  48116a:	6802      	ldr	r2, [r0, #0]
+  48116c:	ea32 0101 	bics.w	r1, r2, r1
+  481170:	6001      	str	r1, [r0, #0]
+  481172:	6879      	ldr	r1, [r7, #4]
+  481174:	f8df 05f4 	ldr.w	r0, [pc, #1524]	@ 48176c <.text+0x62a>
+  481178:	6802      	ldr	r2, [r0, #0]
+  48117a:	ea32 0101 	bics.w	r1, r2, r1
+  48117e:	6001      	str	r1, [r0, #0]
+  481180:	68b9      	ldr	r1, [r7, #8]
+  481182:	f8df 05ec 	ldr.w	r0, [pc, #1516]	@ 481770 <.text+0x62e>
+  481186:	6802      	ldr	r2, [r0, #0]
+  481188:	ea32 0101 	bics.w	r1, r2, r1
+  48118c:	6001      	str	r1, [r0, #0]
+  48118e:	68f9      	ldr	r1, [r7, #12]
+  481190:	f8df 05e0 	ldr.w	r0, [pc, #1504]	@ 481774 <.text+0x632>
+  481194:	6802      	ldr	r2, [r0, #0]
+  481196:	ea32 0101 	bics.w	r1, r2, r1
+  48119a:	6001      	str	r1, [r0, #0]
+  48119c:	6939      	ldr	r1, [r7, #16]
+  48119e:	f8df 05d8 	ldr.w	r0, [pc, #1496]	@ 481778 <.text+0x636>
+  4811a2:	6802      	ldr	r2, [r0, #0]
+  4811a4:	ea32 0101 	bics.w	r1, r2, r1
+  4811a8:	6001      	str	r1, [r0, #0]
+  4811aa:	6979      	ldr	r1, [r7, #20]
+  4811ac:	f8df 05cc 	ldr.w	r0, [pc, #1484]	@ 48177c <.text+0x63a>
+  4811b0:	6802      	ldr	r2, [r0, #0]
+  4811b2:	ea32 0101 	bics.w	r1, r2, r1
+  4811b6:	6001      	str	r1, [r0, #0]
+  4811b8:	69b9      	ldr	r1, [r7, #24]
+  4811ba:	f8df 05c4 	ldr.w	r0, [pc, #1476]	@ 481780 <.text+0x63e>
+  4811be:	6802      	ldr	r2, [r0, #0]
+  4811c0:	ea32 0101 	bics.w	r1, r2, r1
+  4811c4:	6001      	str	r1, [r0, #0]
+  4811c6:	b2f6      	uxtb	r6, r6
+  4811c8:	2e00      	cmp	r6, #0
+  4811ca:	d030      	beq.n	48122e <.text+0xec>
+  4811cc:	6839      	ldr	r1, [r7, #0]
+  4811ce:	f8df 05b4 	ldr.w	r0, [pc, #1460]	@ 481784 <.text+0x642>
+  4811d2:	6802      	ldr	r2, [r0, #0]
+  4811d4:	ea32 0101 	bics.w	r1, r2, r1
+  4811d8:	6001      	str	r1, [r0, #0]
+  4811da:	6879      	ldr	r1, [r7, #4]
+  4811dc:	f8df 05a8 	ldr.w	r0, [pc, #1448]	@ 481788 <.text+0x646>
+  4811e0:	6802      	ldr	r2, [r0, #0]
+  4811e2:	ea32 0101 	bics.w	r1, r2, r1
+  4811e6:	6001      	str	r1, [r0, #0]
+  4811e8:	68b9      	ldr	r1, [r7, #8]
+  4811ea:	f8df 05a0 	ldr.w	r0, [pc, #1440]	@ 48178c <.text+0x64a>
+  4811ee:	6802      	ldr	r2, [r0, #0]
+  4811f0:	ea32 0101 	bics.w	r1, r2, r1
+  4811f4:	6001      	str	r1, [r0, #0]
+  4811f6:	68f9      	ldr	r1, [r7, #12]
+  4811f8:	f8df 0594 	ldr.w	r0, [pc, #1428]	@ 481790 <.text+0x64e>
+  4811fc:	6802      	ldr	r2, [r0, #0]
+  4811fe:	ea32 0101 	bics.w	r1, r2, r1
+  481202:	6001      	str	r1, [r0, #0]
+  481204:	6939      	ldr	r1, [r7, #16]
+  481206:	f8df 058c 	ldr.w	r0, [pc, #1420]	@ 481794 <.text+0x652>
+  48120a:	6802      	ldr	r2, [r0, #0]
+  48120c:	ea32 0101 	bics.w	r1, r2, r1
+  481210:	6001      	str	r1, [r0, #0]
+  481212:	6979      	ldr	r1, [r7, #20]
+  481214:	f8df 0580 	ldr.w	r0, [pc, #1408]	@ 481798 <.text+0x656>
+  481218:	6802      	ldr	r2, [r0, #0]
+  48121a:	ea32 0101 	bics.w	r1, r2, r1
+  48121e:	6001      	str	r1, [r0, #0]
+  481220:	69b9      	ldr	r1, [r7, #24]
+  481222:	f8df 0578 	ldr.w	r0, [pc, #1400]	@ 48179c <.text+0x65a>
+  481226:	6802      	ldr	r2, [r0, #0]
+  481228:	ea32 0101 	bics.w	r1, r2, r1
+  48122c:	6001      	str	r1, [r0, #0]
+  48122e:	e05b      	b.n	4812e8 <.text+0x1a6>

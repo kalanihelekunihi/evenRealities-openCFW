@@ -1,0 +1,156 @@
+{
+  "status": "COMPARED",
+  "acquired": [
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/gx-native/upstream/am_hal_spotmgr_pcm2_1.c",
+      "bytes": 89847,
+      "sha256": "5646b20d8ccf59042523f0e9095f8b4a96b2231b6a53d3ef1b3994dcce67fbad",
+      "url": "https://raw.githubusercontent.com/AmbiqMicro/ambiqhal_ambiq/5efc0228528a8adce5eae0d226fac85d2551eb3b/mcu/apollo510/hal/am_hal_spotmgr_pcm2_1.c",
+      "existing_submodule": "third-party/upstream/ambiqhal-apollo510",
+      "pin": "5efc0228528a8adce5eae0d226fac85d2551eb3b",
+      "license": "BSD-3-Clause notice retained",
+      "release_marker": "release_5p1p0beta-2927d425bf"
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/gx-native/upstream/am_hal_spotmgr_pcm2_2.c",
+      "bytes": 135836,
+      "sha256": "eac14263dc23ea211b917e9c3feb69695eb511d204961fdf301c1b0fa9abbeb7",
+      "url": "https://raw.githubusercontent.com/AmbiqMicro/ambiqhal_ambiq/5efc0228528a8adce5eae0d226fac85d2551eb3b/mcu/apollo510/hal/am_hal_spotmgr_pcm2_2.c",
+      "existing_submodule": "third-party/upstream/ambiqhal-apollo510",
+      "pin": "5efc0228528a8adce5eae0d226fac85d2551eb3b",
+      "license": "BSD-3-Clause notice retained",
+      "release_marker": "release_5p1p0beta-2927d425bf"
+    }
+  ],
+  "probes": [
+    {
+      "probe": "g_ui32PwrStVddcVoltLvl",
+      "upstream_values": [
+        0,
+        0,
+        1,
+        2,
+        1,
+        1,
+        2,
+        3,
+        6,
+        4,
+        4,
+        4,
+        8,
+        7,
+        5,
+        5,
+        1,
+        1,
+        2,
+        3,
+        3
+      ],
+      "stock_initialized_values": [
+        0,
+        0,
+        1,
+        2,
+        1,
+        1,
+        2,
+        3,
+        6,
+        4,
+        4,
+        4,
+        8,
+        7,
+        5,
+        5,
+        1,
+        1,
+        2,
+        3,
+        1
+      ],
+      "match": false,
+      "scope": "21-word initialized rank data equality only; not executable/source identity",
+      "matching_words": 20,
+      "different_indices": [
+        20
+      ]
+    },
+    {
+      "probe": "g_ui32PwrStVddfVoltLvl",
+      "upstream_values": [
+        1,
+        0,
+        0,
+        0,
+        3,
+        2,
+        2,
+        2,
+        5,
+        4,
+        4,
+        4,
+        6,
+        4,
+        4,
+        4,
+        6,
+        4,
+        4,
+        4,
+        6
+      ],
+      "stock_initialized_values": [
+        1,
+        0,
+        0,
+        0,
+        3,
+        2,
+        2,
+        2,
+        5,
+        4,
+        4,
+        4,
+        6,
+        4,
+        4,
+        4,
+        6,
+        4,
+        4,
+        4,
+        7
+      ],
+      "match": false,
+      "scope": "21-word initialized rank data equality only; not executable/source identity",
+      "matching_words": 20,
+      "different_indices": [
+        20
+      ]
+    },
+    {
+      "probe": "PCM2.1 feature early-temperature recording",
+      "upstream": "Temperature stimulus is handled while SIMOBUCK inactive before returning.",
+      "stock_reconstruction": "42ba00 immediately returns when40021108 state!=3; no temperature write on inactive gate.",
+      "match": false,
+      "scope": "Concrete control-flow difference; public beta producing checkout not identical by blanket substitution."
+    },
+    {
+      "probe": "trim-cache reconstruction regression",
+      "stock_instruction": "42b618 loads literal42b9c4=200270ac and42b61c storeslow7bits",
+      "before": "Reconstruction wrote200270a4",
+      "after": "writes200270ac",
+      "counterexample": "transition-before-fix.failure.json",
+      "validation": "51targeted transition cases PASS,880/1032body bytes; same-image broader rerun pending"
+    }
+  ],
+  "limits": [
+    "PCM2.1/PCM2.2 are Apollo510 power-control module variants. EM9305/GX8002 SDKs do not implement these ARM bodies.",
+    "Source names/matrix/rank agreement assist reconstruction; do not prove compiler identity, complete producing source or equivalent behavior in untested branches."
+  ]
+}

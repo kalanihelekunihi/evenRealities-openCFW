@@ -1,0 +1,59 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp_090vjtt/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+004803c2 <.text>:
+  4803c2:	b580      	push	{r7, lr}
+  4803c4:	f8df 3334 	ldr.w	r3, [pc, #820]	@ 4806fc <.text+0x33a>
+  4803c8:	6a5a      	ldr	r2, [r3, #36]	@ 0x24
+  4803ca:	2a00      	cmp	r2, #0
+  4803cc:	d004      	beq.n	4803d8 <.text+0x16>
+  4803ce:	b2c9      	uxtb	r1, r1
+  4803d0:	b2c0      	uxtb	r0, r0
+  4803d2:	6a5a      	ldr	r2, [r3, #36]	@ 0x24
+  4803d4:	4790      	blx	r2
+  4803d6:	e000      	b.n	4803da <.text+0x18>
+  4803d8:	2000      	movs	r0, #0
+  4803da:	bd02      	pop	{r1, pc}
+  4803dc:	b580      	push	{r7, lr}
+  4803de:	f8df 131c 	ldr.w	r1, [pc, #796]	@ 4806fc <.text+0x33a>
+  4803e2:	6a88      	ldr	r0, [r1, #40]	@ 0x28
+  4803e4:	2800      	cmp	r0, #0
+  4803e6:	d002      	beq.n	4803ee <.text+0x2c>
+  4803e8:	6a88      	ldr	r0, [r1, #40]	@ 0x28
+  4803ea:	4780      	blx	r0
+  4803ec:	e000      	b.n	4803f0 <.text+0x2e>
+  4803ee:	2000      	movs	r0, #0
+  4803f0:	bd02      	pop	{r1, pc}
+  4803f2:	b580      	push	{r7, lr}
+  4803f4:	f8df 1304 	ldr.w	r1, [pc, #772]	@ 4806fc <.text+0x33a>
+  4803f8:	6b08      	ldr	r0, [r1, #48]	@ 0x30
+  4803fa:	2800      	cmp	r0, #0
+  4803fc:	d002      	beq.n	480404 <.text+0x42>
+  4803fe:	6b08      	ldr	r0, [r1, #48]	@ 0x30
+  480400:	4780      	blx	r0
+  480402:	e000      	b.n	480406 <.text+0x44>
+  480404:	2000      	movs	r0, #0
+  480406:	bd02      	pop	{r1, pc}
+  480408:	b580      	push	{r7, lr}
+  48040a:	f8df 12f0 	ldr.w	r1, [pc, #752]	@ 4806fc <.text+0x33a>
+  48040e:	6b48      	ldr	r0, [r1, #52]	@ 0x34
+  480410:	2800      	cmp	r0, #0
+  480412:	d002      	beq.n	48041a <.text+0x58>
+  480414:	6b48      	ldr	r0, [r1, #52]	@ 0x34
+  480416:	4780      	blx	r0
+  480418:	e000      	b.n	48041c <.text+0x5a>
+  48041a:	2000      	movs	r0, #0
+  48041c:	bd02      	pop	{r1, pc}
+  48041e:	b580      	push	{r7, lr}
+  480420:	f8df 12d8 	ldr.w	r1, [pc, #728]	@ 4806fc <.text+0x33a>
+  480424:	6b88      	ldr	r0, [r1, #56]	@ 0x38
+  480426:	2800      	cmp	r0, #0
+  480428:	d002      	beq.n	480430 <.text+0x6e>
+  48042a:	6b88      	ldr	r0, [r1, #56]	@ 0x38
+  48042c:	4780      	blx	r0
+  48042e:	e000      	b.n	480432 <.text+0x70>
+  480430:	2000      	movs	r0, #0
+  480432:	bd02      	pop	{r1, pc}

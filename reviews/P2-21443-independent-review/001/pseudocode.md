@@ -1,0 +1,3 @@
+# Record reset byte and unaligned word helper
+
+Partial/unaccepted;68 instructionbytes48471A..48475E. PUSHentryR0/R1/R2/R3/R4/LR24B;R4=entry0record. Nullorderedliteral4849D4SP8,4849D8SP4,4849B4SP0(overwritesentryR2/R1/R0);R3=wordliteral4849E0,R2=387,R1=wordliteral4849BC,R0=3;44D25C;R0=0,R1=FFFFFFFF,word[R1]=0repeat48473C. Nonnullbyte[record+56]=255;R3/R2/R1/R0=0;44107C;storefullwordresultR0 atunalignedrecord+57 (bytes57..60),thenPOPR0/R1/R2/R3/R4/PCrestoresentryargs/release24B. HelperresultusedforfieldbutreturnR0originalrecord. Preserveunalignedwordstoreandbytefieldorder; helpercontractunresolved. No C,freeze,wholecoverage or equalityclaim.

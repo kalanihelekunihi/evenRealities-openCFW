@@ -1,0 +1,3 @@
+# Context-matching registration traversal, removal and release
+
+Partial/unaccepted;88 instructionbytes484052..4840AA. PUSH R3/R4/R5/R6/R7/R8/R9/LR32B. R5=entry0,R6=entry1;R0=0,call4645EC→R4current;R7found=0. Loopcurrentnonnull: R0=current,call4645EC→R8next BEFORE matching/removal;freshword[current+8]R0,computedR1=alignedPC484074+57=4840AD;unequalskip. EqualR9=word[current+12];word[R9]compareR5,NEskip;word[R9+4]compareR6,NEskip. Bothmatchcall4644EE(current),then44F758(R9context),R7=1;continueR4=R8savednext. Allmatchingnodesprocessed. Nullcurrent→R0=UXTB(R7);POP R1(savedentryR3),R4/R5/R6/R7/R8/R9/PCrelease32B. Helperscontractpending; exactnext-before-remove and callbackpointermatch preserved. Adjacent4840AA..ACpaddingexcluded. No C,freeze,wholecoverage or equalityclaim.

@@ -1,0 +1,57 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpjexrjsn7/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0048246c <.text>:
+  48246c:	a812      	add	r0, sp, #72	@ 0x48
+  48246e:	9907      	ldr	r1, [sp, #28]
+  482470:	4401      	add	r1, r0
+  482472:	9105      	str	r1, [sp, #20]
+  482474:	4659      	mov	r1, fp
+  482476:	a802      	add	r0, sp, #8
+  482478:	f000 f84e 	bl	482518 <.text+0xac>
+  48247c:	e016      	b.n	4824ac <.text+0x40>
+  48247e:	2001      	movs	r0, #1
+  482480:	9007      	str	r0, [sp, #28]
+  482482:	f8d9 0000 	ldr.w	r0, [r9]
+  482486:	f850 1b04 	ldr.w	r1, [r0], #4
+  48248a:	f8c9 0000 	str.w	r0, [r9]
+  48248e:	f88d 1048 	strb.w	r1, [sp, #72]	@ 0x48
+  482492:	e00b      	b.n	4824ac <.text+0x40>
+  482494:	2101      	movs	r1, #1
+  482496:	2225      	movs	r2, #37	@ 0x25
+  482498:	f1bb 0f00 	cmp.w	fp, #0
+  48249c:	9107      	str	r1, [sp, #28]
+  48249e:	f88d 2048 	strb.w	r2, [sp, #72]	@ 0x48
+  4824a2:	d003      	beq.n	4824ac <.text+0x40>
+  4824a4:	2202      	movs	r2, #2
+  4824a6:	9207      	str	r2, [sp, #28]
+  4824a8:	f88d b049 	strb.w	fp, [sp, #73]	@ 0x49
+  4824ac:	9d0f      	ldr	r5, [sp, #60]	@ 0x3c
+  4824ae:	9907      	ldr	r1, [sp, #28]
+  4824b0:	980a      	ldr	r0, [sp, #40]	@ 0x28
+  4824b2:	1a6d      	subs	r5, r5, r1
+  4824b4:	9908      	ldr	r1, [sp, #32]
+  4824b6:	1a2d      	subs	r5, r5, r0
+  4824b8:	980b      	ldr	r0, [sp, #44]	@ 0x2c
+  4824ba:	1a6d      	subs	r5, r5, r1
+  4824bc:	9909      	ldr	r1, [sp, #36]	@ 0x24
+  4824be:	1a2d      	subs	r5, r5, r0
+  4824c0:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  4824c2:	1a6d      	subs	r5, r5, r1
+  4824c4:	f89d 1040 	ldrb.w	r1, [sp, #64]	@ 0x40
+  4824c8:	1a2d      	subs	r5, r5, r0
+  4824ca:	0748      	lsls	r0, r1, #29
+  4824cc:	f53f aad2 	bmi.w	481a74 <.text-0x9f8>
+  4824d0:	2120      	movs	r1, #32
+  4824d2:	2d00      	cmp	r5, #0
+  4824d4:	f88d 1000 	strb.w	r1, [sp]
+  4824d8:	f77f aacc 	ble.w	481a74 <.text-0x9f8>
+  4824dc:	9e30      	ldr	r6, [sp, #192]	@ 0xc0
+  4824de:	462c      	mov	r4, r5
+  4824e0:	f7ff babc 	b.w	481a5c <.text-0xa10>
+  4824e4:	f04f 30ff 	mov.w	r0, #4294967295	@ 0xffffffff
+  4824e8:	b031      	add	sp, #196	@ 0xc4
+  4824ea:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}

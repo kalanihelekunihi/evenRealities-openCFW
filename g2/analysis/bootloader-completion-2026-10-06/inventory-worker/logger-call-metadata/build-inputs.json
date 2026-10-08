@@ -1,0 +1,24 @@
+{
+  "files": {
+    "g2/build/bootloader-completion/logger-call-metadata/opencfw-log-adapters.elf": "1ec44c8505b1e65c832ebc1dae38ab002da983153879ec93cb345ffab5397c64",
+    "g2/build/bootloader-completion/logger-call-metadata/opencfw-dfu-task-logger.elf": "9fdcbf19501ff5c485b3d1687f1ca56a1efa3849c36bd3ab5412b70aab95d171",
+    "g2/build/bootloader-completion/logger-call-metadata/opencfw-log-adapters.o": "2c3e46e01d3ab541cd92c3f1072540c4a13be10baa4d9c7dbd9c8ab2ca60a72d",
+    "g2/build/bootloader-completion/logger-call-metadata/opencfw-dfu-task-detail.o": "397d15813bd67912f2d0714994a86b7b0f3f77c92f1121b973cfa14ce5d2bcb0",
+    "g2/build/bootloader-completion/logger-call-metadata/opencfw-logger-memory.o": "a257f82c94177266cc006faed2d09c0bcf616df03b7c13d03678d52082835562",
+    "g2/components/bootloader/log_call_adapters/task_with_log_detail.c": "ad91612f4b69ae785359f9c3f17d8071f57c086ee120c9032bad0e768acb3bf9",
+    "g2/components/bootloader/log_call_adapters/log_adapters.c": "e2e6695ac5df909331ecbbe8547ea45655d63dd475cadd2f0c7b15543b1e3e0b",
+    "g2/components/bootloader/log_call_adapters/log_adapters.h": "c09588b969039290cd5a3574db9afe38794820ff3a5ab85f7335fe0453e661a1"
+  },
+  "flags": [
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m33",
+    "-mthumb",
+    "-mfloat-abi=softfp",
+    "-O1",
+    "-ffreestanding",
+    "-fno-builtin"
+  ],
+  "task_include": "g2/components/bootloader/filesystem/freestanding_include",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.2.0\nThread model: posix\nInstalledDir: /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin\n",
+  "limits": "Standalone module and call-site reconstruction, not accepted integrated successor."
+}

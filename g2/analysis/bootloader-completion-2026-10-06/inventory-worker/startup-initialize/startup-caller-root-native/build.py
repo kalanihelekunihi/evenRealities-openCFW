@@ -1,0 +1,9 @@
+from pathlib import Path
+import json,subprocess,hashlib,shutil
+P=Path('g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize');PRE=P/'iar-format-native-integrated';N=P/'startup-caller-root-native';N.mkdir(exist_ok=True);T=Path('/tmp/opencfw-startup-caller-root');T.mkdir(exist_ok=True);old=json.loads((PRE/'current-candidate.json').read_text());OLD=Path(old['directory']);m=json.loads((OLD/'input-hashes.json').read_text());h=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest();objs=[]
+for r in m['inputs']:
+ p=OLD/r['path'];assert h(p)==r['sha256'];objs.append(str(p))
+s=(OLD/'source/module.ld').read_text();assert s.count('opencfw_boot_startup_power_initialize = 0x41c4b5;')==1;s=s.replace('opencfw_boot_startup_power_initialize = 0x41c4b5;','opencfw_boot_startup_power_initialize = opencfw_boot_startup_initialize_abi;');ld=T/'module.ld';ld.write_text(s);elf=T/'candidate.elf';r=subprocess.run(['/opt/homebrew/bin/arm-none-eabi-ld','--gc-sections','-T',str(ld),'-o',str(elf),*objs],capture_output=True,text=True);assert r.returncode==0,r.stderr;(N/'link.log').write_text(r.stderr);sha=h(elf);B=Path('g2/build/bootloader-completion/startup-caller-root-native')/sha;B.mkdir(parents=True,exist_ok=True);shutil.copy2(elf,B/'candidate.elf');(B/'source').mkdir(exist_ok=True);shutil.copy2(ld,B/'source/module.ld')
+for r in m['inputs']:
+ p=B/r['path'];p.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(OLD/r['path'],p)
+m['elf_sha256']=sha;(B/'input-hashes.json').write_text(json.dumps(m,indent=2)+'\n');(N/'current-candidate.json').write_text(json.dumps({'directory':str(B),'sha256':sha,'objects':237,'previous_sha256':old['sha256']},indent=2)+'\n');shutil.copy2(PRE/'run_oracle.py',N/'run_oracle.py');shutil.copy2(PRE/'elf_reader_three_slots.py',N/'elf_reader_three_slots.py');(N/'build.py').write_bytes(Path('/tmp/opencfw-build-startup-root.py').read_bytes());print('root alias variant',sha)

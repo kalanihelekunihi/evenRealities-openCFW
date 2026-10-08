@@ -1,0 +1,70 @@
+{
+  "elf_sha256": "4edd8e7dbdd6486ed8cc25fa275f8597a04d21e9dd0728618255cddd3de7cbfe",
+  "receipt_sha256": "e9b19c7e51315c33cfebb6542b7dbb51e387fe30671b263c4ad336851e7ca79f",
+  "scope": "New UART RX function family only; not whole-payload source coverage. Dispatcher is previously reconstructed source, separate52-byte RX-mode supplement.",
+  "functions": [
+    {
+      "name": "claim",
+      "start": "0x422f4c",
+      "end_exclusive": "0x422fa2",
+      "original_body_bytes": 86,
+      "observed_instruction_bytes": 86,
+      "source": "g2/components/bootloader/initializer_callbacks/uart_rx.c"
+    },
+    {
+      "name": "cancel",
+      "start": "0x422fa2",
+      "end_exclusive": "0x422fde",
+      "original_body_bytes": 60,
+      "observed_instruction_bytes": 60,
+      "source": "g2/components/bootloader/initializer_callbacks/uart_rx.c"
+    },
+    {
+      "name": "fifo",
+      "start": "0x4232c8",
+      "end_exclusive": "0x42330e",
+      "original_body_bytes": 70,
+      "observed_instruction_bytes": 70,
+      "source": "g2/components/bootloader/initializer_callbacks/uart_rx.c"
+    },
+    {
+      "name": "collect",
+      "start": "0x423350",
+      "end_exclusive": "0x423390",
+      "original_body_bytes": 64,
+      "observed_instruction_bytes": 64,
+      "source": "g2/components/bootloader/initializer_callbacks/uart_rx.c"
+    },
+    {
+      "name": "blocking",
+      "start": "0x42348e",
+      "end_exclusive": "0x4234d8",
+      "original_body_bytes": 74,
+      "observed_instruction_bytes": 74,
+      "source": "g2/components/bootloader/initializer_callbacks/uart_rx.c"
+    },
+    {
+      "name": "start",
+      "start": "0x4234fa",
+      "end_exclusive": "0x423524",
+      "original_body_bytes": 42,
+      "observed_instruction_bytes": 42,
+      "source": "g2/components/bootloader/initializer_callbacks/uart_rx.c"
+    },
+    {
+      "name": "pump",
+      "start": "0x423608",
+      "end_exclusive": "0x4236ce",
+      "original_body_bytes": 198,
+      "observed_instruction_bytes": 198,
+      "source": "g2/components/bootloader/initializer_callbacks/uart_rx.c"
+    }
+  ],
+  "total_original_body_bytes": 594,
+  "total_observed_instruction_bytes": 594,
+  "limits": [
+    "Original RX/ring/critical/cancel zero-fill instructions execute; source ELF only. Independent module models source critical-save, integrated ELF uses native critical save.",
+    "Finite synthetic FIFO reads and refill at delay boundary, no hardware/UART IRQ/race/timing/overrun/drain certification. Callback records observe irq/count/progress/busy at entry then return.",
+    "Delay1000 injected; zero/infinite timeout stall observed only at explicit synthetic four-poll boundary, not claimed to finish. No SRAM write hooks or expected-copy models."
+  ]
+}

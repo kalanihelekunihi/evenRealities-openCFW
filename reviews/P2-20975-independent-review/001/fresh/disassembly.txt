@@ -1,0 +1,55 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpv1u3qz9r/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047e4a6 <.text>:
+  47e4a6:	b538      	push	{r3, r4, r5, lr}
+  47e4a8:	b084      	sub	sp, #16
+  47e4aa:	f029 f9c2 	bl	4a7832 <.text+0x2938c>
+  47e4ae:	0004      	movs	r4, r0
+  47e4b0:	2102      	movs	r1, #2
+  47e4b2:	2200      	movs	r2, #0
+  47e4b4:	ad03      	add	r5, sp, #12
+  47e4b6:	0028      	movs	r0, r5
+  47e4b8:	f7bd fe14 	bl	43c0e4 <.text-0x423c2>
+  47e4bc:	200d      	movs	r0, #13
+  47e4be:	f88d 000c 	strb.w	r0, [sp, #12]
+  47e4c2:	f88d 400d 	strb.w	r4, [sp, #13]
+  47e4c6:	2005      	movs	r0, #5
+  47e4c8:	9000      	str	r0, [sp, #0]
+  47e4ca:	2300      	movs	r3, #0
+  47e4cc:	2202      	movs	r2, #2
+  47e4ce:	a903      	add	r1, sp, #12
+  47e4d0:	2010      	movs	r0, #16
+  47e4d2:	f7e6 ffd5 	bl	465480 <.text-0x19026>
+  47e4d6:	f7be fdfa 	bl	43d0ce <.text-0x413d8>
+  47e4da:	0780      	lsls	r0, r0, #30
+  47e4dc:	d50c      	bpl.n	47e4f8 <.text+0x52>
+  47e4de:	0020      	movs	r0, r4
+  47e4e0:	b2c0      	uxtb	r0, r0
+  47e4e2:	9002      	str	r0, [sp, #8]
+  47e4e4:	485a      	ldr	r0, [pc, #360]	@ (47e650 <.text+0x1aa>)
+  47e4e6:	9001      	str	r0, [sp, #4]
+  47e4e8:	207f      	movs	r0, #127	@ 0x7f
+  47e4ea:	9000      	str	r0, [sp, #0]
+  47e4ec:	4b59      	ldr	r3, [pc, #356]	@ (47e654 <.text+0x1ae>)
+  47e4ee:	4a4c      	ldr	r2, [pc, #304]	@ (47e620 <.text+0x17a>)
+  47e4f0:	494c      	ldr	r1, [pc, #304]	@ (47e624 <.text+0x17e>)
+  47e4f2:	2004      	movs	r0, #4
+  47e4f4:	f7bf f83e 	bl	43d574 <.text-0x40f32>
+  47e4f8:	f7be fde9 	bl	43d0ce <.text-0x413d8>
+  47e4fc:	07c0      	lsls	r0, r0, #31
+  47e4fe:	d403      	bmi.n	47e508 <.text+0x62>
+  47e500:	f7be fde5 	bl	43d0ce <.text-0x413d8>
+  47e504:	0740      	lsls	r0, r0, #29
+  47e506:	d507      	bpl.n	47e518 <.text+0x72>
+  47e508:	4953      	ldr	r1, [pc, #332]	@ (47e658 <.text+0x1b2>)
+  47e50a:	b2e4      	uxtb	r4, r4
+  47e50c:	0023      	movs	r3, r4
+  47e50e:	000a      	movs	r2, r1
+  47e510:	f05f 5082 	movs.w	r0, #272629760	@ 0x10400000
+  47e514:	f7be fcc3 	bl	43ce9e <.text-0x41608>
+  47e518:	b005      	add	sp, #20
+  47e51a:	bd30      	pop	{r4, r5, pc}

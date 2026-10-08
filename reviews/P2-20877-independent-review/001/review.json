@@ -1,0 +1,10 @@
+{
+  "id": "P2-20877",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "Fresh replay passed for 112 bytes at 0x47D27C..0x47D2EC; pinned image/source hashes and tiling match. The inherited full R6 value is preserved. Both diagnostic branches read the runtime flag byte independently for bit3 then bit2, placing bit3/bit2 in the stack/register arguments in the observed order; the mask branch repeats those reads rather than reusing a snapshot. These are four distinct byte observations across branches, and status queries are separate. No flag stability assumption is made; continuation remains pending."
+}

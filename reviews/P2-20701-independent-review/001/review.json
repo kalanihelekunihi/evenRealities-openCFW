@@ -1,0 +1,10 @@
+{
+  "id": "P2-20701",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "20B across two frameless leaves. The first returns full entry R0 unchanged when nonzero and explicit zero otherwise, without dereferencing. The second returns 255 for zero input; for nonzero input it freshly loads unsigned byte [R0+6]. Both leave SP/LR intact."
+}

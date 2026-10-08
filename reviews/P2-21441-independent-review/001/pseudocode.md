@@ -1,0 +1,3 @@
+# Nonnull record zero-88-byte and reset wrapper
+
+Partial/unaccepted;60 instructionbytes4846DE..48471A. PUSHentryR0/R1/R2/R3/R4/LR24B;R4=entry0record. Nullrecordorderedliteral4849D4→SP8(savedentryR2),4849D8→SP4(savedentryR1),4849B4→SP0(savedentryR0);R3=wordliteral4849DC,R2=380,R1=wordliteral4849BC,R0=3;44D25C;thenR0=0,R1=FFFFFFFF,word[R1]=0loop484700. NonnullR1=88,R0=recordR4;484380zero-fillwrapper;R0=recordR4;48471Aresethelper. POPR0/R1/R2/R3/R4/PCrestoresentryargsand24Bframe,normalreturnR0originalrecordratherthanhelperresult. Exactzero88Bextentandobserveddiagnosticstoreloopretained. Resethelperunresolved. No C,freeze,wholecoverage or equalityclaim.

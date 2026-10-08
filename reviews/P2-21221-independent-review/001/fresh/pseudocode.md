@@ -1,0 +1,5 @@
+# Hex float helper chain and seven-nibble backward buffer loop
+
+Partial/unaccepted;102 instruction bytes481E80..481EE6. Continues481836232frame,R4/R5workingpair,R6buffercursor,R7budget. Loopcall43C0B0(R0R4,R1R5,R2=0,R3=0);returnedcarryset→481EE6 unresolvedrounding. Carryclear:R2=28,call4D41F4 withliveR0/R1/R3;returnpair→R4/R5. Call4D42F8 withreturnpair/liveotherargs;R8fullreturnR0;R7-=7mod2^32. IfsignedR7>0 call4D4306 withliveargs;returnpair→R2/R3;R0/R1workingR4/R5;call4D4314;returnpair→R4/R5. Helpersemanticsremainexplicitdependencies.
+
+R0=R6+7mod2^32,R1=7. IfsignedR8>0:R1--updatesflags;ITTT PL conditionalR2=R8&15,predecrementR0storebyteR2,R8=ASR(R8,4). BPLusesflagsfromR1decrement,loopsbacktofreshCMP R8. IfR8<=0orR1becomesnegative,join481EDC. Zero-fillloopdecrementsR1thenifPL R2=0,predecrementR0storebyte0,repeat. Preserveseparateddecrementtests:atmostsevennibble/zerobytes;rawdigits0..15 notASCIIyet. R6=R0+7;ifsignedR7>0repeathelperloopelsefallthrough481EE6. No replacementwithordinaryhexformatting/C/freeze/fullcoverage/equality claim.

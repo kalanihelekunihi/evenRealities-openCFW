@@ -1,0 +1,5 @@
+# Two-mode fresh bit-field byte output query
+
+Partial/unaccepted;250 instruction bytes480D72..480E6C. PUSH R7,LR8. FullentryR1 null→return6. NonnullR2=entryR1;selectorUXTBentryR0:0→decode,1→snapshot,other→return6 withoutoutputwrites. Mode0:R0=pointerliteral480E84;freshword low2bits index. Ordered byte writes offsets1,0,2: index0 values0,0,0;index1 values0,0,1;index2 values1,1,1;index3 values1,1,2. Mask guarantees0..3; nominal unmatchedbranch480DA0→480DD8 unreachableforstableinstructionsemantics.
+
+Then independentfreshwordreads fromsamepointer for each output:bits2..3→byte3;bit6→byte4;bit7→byte5;bit8→byte6;bit9→byte7;bit10→byte8;bit19→byte9;bits20..21→byte10. One-bit paths signedcompare<1 map0/1 exactly;never merge fresh reads or reorderstores,includingaliasing. R0=R2output;call480C7C withliveR1/R2/R3;ignorefullhelperresult;return0. Mode1:R0=R1entrypointer;call480874 withliveR1/R2/R3;ignorefullresult;return0. CommonPOP R1,PC releases8;R1restoressavedentryR7 unlesshelperaliasmutation. No sizeguard or outputinitializationoninvalidselector;padding480E6C..480E70zero4excluded. No C/freeze/fullcoverage/equality claim.

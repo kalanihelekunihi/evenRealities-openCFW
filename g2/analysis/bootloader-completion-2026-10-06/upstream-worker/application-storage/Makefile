@@ -20,6 +20,7 @@ $(OUT)/application-storage.elf: $(OUT)/initialize.o $(OUT)/record_dispatch.o \
 		$(OUT)/record_adapters.o $(OUT)/system_entry.o $(OUT)/main_init.o \
 		$(OUT)/platform_startup.o $(OUT)/platform_control_runtime.o \
 		$(OUT)/clock_class_providers.o $(OUT)/storage_callbacks.o \
+		$(OUT)/storage_callback_veneers.o \
 		$(OUT)/control.o $(OUT)/power_guards.o $(OUT)/mram_rom_bridge.o \
 		$(OUT)/critical_save.o $(OUT)/test_cuts.o application_storage.ld | $(OUT)
 	$(LD) --gc-sections -T application_storage.ld -o $@ \
@@ -43,6 +44,8 @@ $(OUT)/clock_class_providers.o: $(COMPONENTS)/clock_manager/clock_class_provider
 	$(CC) $(CFLAGS) -I$(COMPONENTS)/clock_manager -c $< -o $@
 $(OUT)/storage_callbacks.o: $(COMPONENTS)/application_storage/storage_callbacks.c | $(OUT)
 	$(CC) $(CFLAGS) -I$(COMPONENTS)/application_storage -c $< -o $@
+$(OUT)/storage_callback_veneers.o: $(COMPONENTS)/application_storage/storage_callback_veneers.S | $(OUT)
+	$(CC) $(CFLAGS) -c $< -o $@
 $(OUT)/control.o: $(COMPONENTS)/platform_control/control.c | $(OUT)
 	$(CC) $(CFLAGS) -I$(COMPONENTS)/platform_control -c $< -o $@
 $(OUT)/power_guards.o: $(COMPONENTS)/platform_control/power_guards.c | $(OUT)

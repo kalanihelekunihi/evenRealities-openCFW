@@ -1,0 +1,30 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp3s28k14y/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047e470 <.text>:
+  47e470:	b501      	push	{r0, lr}
+  47e472:	2000      	movs	r0, #0
+  47e474:	f029 f9e0 	bl	4a7838 <.text+0x293c8>
+  47e478:	2800      	cmp	r0, #0
+  47e47a:	d001      	beq.n	47e480 <.text+0x10>
+  47e47c:	7800      	ldrb	r0, [r0, #0]
+  47e47e:	e000      	b.n	47e482 <.text+0x12>
+  47e480:	2000      	movs	r0, #0
+  47e482:	f89d 1000 	ldrb.w	r1, [sp]
+  47e486:	b2c0      	uxtb	r0, r0
+  47e488:	4288      	cmp	r0, r1
+  47e48a:	d00b      	beq.n	47e4a4 <.text+0x34>
+  47e48c:	4669      	mov	r1, sp
+  47e48e:	2000      	movs	r0, #0
+  47e490:	f029 f974 	bl	4a777c <.text+0x2930c>
+  47e494:	2001      	movs	r0, #1
+  47e496:	4967      	ldr	r1, [pc, #412]	@ (47e634 <.text+0x1c4>)
+  47e498:	6008      	str	r0, [r1, #0]
+  47e49a:	2104      	movs	r1, #4
+  47e49c:	486b      	ldr	r0, [pc, #428]	@ (47e64c <.text+0x1dc>)
+  47e49e:	6800      	ldr	r0, [r0, #0]
+  47e4a0:	f7cb f8a0 	bl	4495e4 <.text-0x34e8c>
+  47e4a4:	bd01      	pop	{r0, pc}

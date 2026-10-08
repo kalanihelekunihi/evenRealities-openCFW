@@ -1,0 +1,153 @@
+{
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "interval": [
+    "0x42c034",
+    "0x42cdb0"
+  ],
+  "instruction_bytes": 3424,
+  "accounted_functions": 18,
+  "functions": [
+    {
+      "start": "0x42c034",
+      "end": "0x42c076",
+      "source": "g2/components/bootloader/initializer_callbacks/context_instance.c"
+    },
+    {
+      "start": "0x42c076",
+      "end": "0x42c0b2",
+      "source": "g2/components/bootloader/initializer_callbacks/context_events.c"
+    },
+    {
+      "start": "0x42c0b2",
+      "end": "0x42c222",
+      "source": "g2/components/bootloader/initializer_callbacks/context_events.c"
+    },
+    {
+      "start": "0x42c222",
+      "end": "0x42c256",
+      "source": "g2/components/bootloader/initializer_callbacks/context_clock.c"
+    },
+    {
+      "start": "0x42c256",
+      "end": "0x42c26a",
+      "source": "g2/components/bootloader/initializer_callbacks/context_clock.c"
+    },
+    {
+      "start": "0x42c26a",
+      "end": "0x42c3e2",
+      "source": "g2/components/bootloader/initializer_callbacks/context_clock.c"
+    },
+    {
+      "start": "0x42c3e2",
+      "end": "0x42c420",
+      "source": "g2/components/bootloader/initializer_callbacks/context_queue.c"
+    },
+    {
+      "start": "0x42c420",
+      "end": "0x42c44e",
+      "source": "g2/components/bootloader/initializer_callbacks/context_queue.c"
+    },
+    {
+      "start": "0x42c44e",
+      "end": "0x42c45a",
+      "source": "g2/components/bootloader/initializer_callbacks/context_queue.c"
+    },
+    {
+      "start": "0x42c45a",
+      "end": "0x42c4c6",
+      "source": "g2/components/bootloader/initializer_callbacks/context_events.c"
+    },
+    {
+      "start": "0x42c4c6",
+      "end": "0x42c538",
+      "source": "g2/components/bootloader/initializer_callbacks/context_claim.c"
+    },
+    {
+      "start": "0x42c538",
+      "end": "0x42c63a",
+      "source": "g2/components/bootloader/initializer_callbacks/context_instance.c"
+    },
+    {
+      "start": "0x42c63a",
+      "end": "0x42c672",
+      "source": "g2/components/bootloader/initializer_callbacks/context_interrupt.c"
+    },
+    {
+      "start": "0x42c672",
+      "end": "0x42c6b6",
+      "source": "g2/components/bootloader/initializer_callbacks/context_irq.c"
+    },
+    {
+      "start": "0x42c6b6",
+      "end": "0x42c6e4",
+      "source": "g2/components/bootloader/initializer_callbacks/context_irq.c"
+    },
+    {
+      "start": "0x42c6f8",
+      "end": "0x42c980",
+      "source": "g2/components/bootloader/initializer_callbacks/context_events.c"
+    },
+    {
+      "start": "0x42c988",
+      "end": "0x42cc34",
+      "source": "g2/components/bootloader/initializer_callbacks/context_transaction.c"
+    },
+    {
+      "start": "0x42cc34",
+      "end": "0x42cdb0",
+      "source": "g2/components/bootloader/initializer_callbacks/context_instance.c"
+    }
+  ],
+  "literal_pools": [
+    {
+      "start": "0x42c6e4",
+      "end": "0x42c6f8",
+      "bytes": 20,
+      "hex": "00000000000005400100000802000008efbeadde"
+    },
+    {
+      "start": "0x42c980",
+      "end": "0x42c988",
+      "bytes": 8,
+      "hex": "00d8b80590d00300"
+    }
+  ],
+  "queue_field_stores": [
+    {
+      "address": "0x42c584",
+      "instruction": "str r0, [r5, #0x24]"
+    },
+    {
+      "address": "0x42c59c",
+      "instruction": "str.w r0, [r5, #0x854]"
+    },
+    {
+      "address": "0x42c5b4",
+      "instruction": "str.w r0, [r5, #0x840]"
+    },
+    {
+      "address": "0x42c76e",
+      "instruction": "str.w r0, [r6, #0x840]"
+    },
+    {
+      "address": "0x42c85c",
+      "instruction": "str r0, [r6, #0x24]"
+    },
+    {
+      "address": "0x42c890",
+      "instruction": "str r0, [r1, #0x28]"
+    },
+    {
+      "address": "0x42c8b6",
+      "instruction": "str r0, [r6, #0x24]"
+    },
+    {
+      "address": "0x42c8f2",
+      "instruction": "str r0, [r1, #0x28]"
+    }
+  ],
+  "scope": "Complete partition of this contiguous retained IOM island, not a formal proof about all inline/dynamic code elsewhere in the image.",
+  "sdk_reference": "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/mcu/apollo3p/hal/am_hal_iom.c",
+  "sdk_sha256": "60123fcd0754aebebfb3e407fe72df836d2a1d719c6dae6ff1432ca7fbdef55d",
+  "finding": "All18 retained bodies are accounted. SDK nonblocking/blocking submission, CQAddTransaction/full rejection, disable/uninitialize are not standalone retained bodies in this island; vendor SDK semantics must not be substituted as locked-firmware implementations."
+}

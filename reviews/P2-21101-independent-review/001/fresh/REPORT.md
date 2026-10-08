@@ -1,0 +1,1 @@
+Partial/unaccepted:4bytes4800E0..4800E4 onealignedliteralword; one decodedPCload consumer in map21446 retained and componenthasheschecked. Exactpointervalue preserved, pointedownership/additionalconsumers unresolved. Adjacent4800DE..4800E0padding excluded. No C/freeze/fullcoverageclaim.

@@ -1,0 +1,90 @@
+[
+  {
+    "mutant": "threshold_inclusive",
+    "rejected": true,
+    "inputs": [
+      [
+        110,
+        0,
+        0,
+        0
+      ],
+      0,
+      0,
+      100,
+      10,
+      2,
+      0
+    ],
+    "different_fields": [
+      "context",
+      "sensors",
+      "debounce",
+      "position_x"
+    ]
+  },
+  {
+    "mutant": "publish_during_debounce",
+    "rejected": true,
+    "inputs": [
+      [
+        111,
+        0,
+        0,
+        0
+      ],
+      0,
+      2,
+      100,
+      10,
+      2,
+      0
+    ],
+    "different_fields": [
+      "sensors"
+    ]
+  },
+  {
+    "mutant": "latest_centroid_tie",
+    "rejected": true,
+    "inputs": [
+      [
+        111,
+        111,
+        111,
+        111
+      ],
+      0,
+      0,
+      100,
+      10,
+      2,
+      0
+    ],
+    "different_fields": [
+      "position_x"
+    ]
+  },
+  {
+    "mutant": "wrong_iir_weight",
+    "rejected": true,
+    "inputs": [
+      [
+        0,
+        0,
+        0,
+        111
+      ],
+      0,
+      0,
+      100,
+      10,
+      2,
+      8388866
+    ],
+    "different_fields": [
+      "history_x",
+      "position_x"
+    ]
+  }
+]

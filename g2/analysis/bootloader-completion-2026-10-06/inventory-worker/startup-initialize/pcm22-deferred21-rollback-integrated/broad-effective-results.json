@@ -1,0 +1,612 @@
+[
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/components/bootloader/thread_creation/verify_mutex_kernel.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/mutex_kernel.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\"status\": \"PASS\", \"cases\": 516, \"visited_body_bytes\": {\"opencfw_boot_mutex_acquire\": 102, \"opencfw_boot_mutex_release\": 82, \"opencfw_bl_kernel_mutex_take_plain\": 326, \"opencfw_bl_kernel_mutex_take_tagged\": 62, \"opencfw_bl_kernel_mutex_give_tagged\": 62, \"opencfw_boot_current_task\": 8, \"opencfw_boot_mutex_claim_current\": 22, \"opencfw_boot_mutex_inherit\": 162, \"opencfw_boot_mutex_disinherit_timeout\": 158, \"opencfw_boot_mutex_waiter_priority\": 18}, \"elf_sha256\": \"e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143\"}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/components/bootloader/thread_creation/verify_mutex_sequences.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/mutex_sequences.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\"status\": \"PASS\", \"cases\": 2, \"elf_sha256\": \"e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143\"}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/components/bootloader/thread_creation/verify_mutex_block_boundary.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/mutex_block_boundary.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\"status\": \"PASS\", \"cases\": 4, \"elf_sha256\": \"e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143\"}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/components/bootloader/thread_creation/verify_isr_delivery.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/isr_delivery.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\"status\": \"PASS\", \"cases\": 1480, \"visited_body_bytes\": {\"opencfw_bl_kernel_queue_put_from_isr\": 218, \"opencfw_bl_kernel_queue_get_from_isr\": 186, \"opencfw_boot_isr_thread_notify\": 400, \"opencfw_boot_pend_callback_isr\": 34, \"opencfw_boot_event_flags_deferred\": 8, \"opencfw_bl_event_flags_set_isr\": 16, \"opencfw_boot_kernel_queue_reset\": 164, \"opencfw_boot_queue_isr_task_count\": 6}, \"elf_sha256\": \"e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143\"}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/components/bootloader/thread_creation/verify_isr_public_interfaces.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/isr_public_interfaces.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\"status\": \"PASS\", \"cases\": 62, \"elf_sha256\": \"e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143\"}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/components/bootloader/thread_creation/verify_isr_deferred_fifo.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/isr_deferred_fifo.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\"status\": \"PASS\", \"cases\": 1, \"elf_sha256\": \"e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143\"}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/components/bootloader/initializer_callbacks/verify_service_records.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/service_records.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\"status\": \"PASS\", \"cases\": 112, \"elf_sha256\": \"e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143\", \"visited_body_bytes\": {\"guard\": 14, \"initialize\": 20, \"acquire\": 22, \"release\": 18, \"wake\": 8, \"sleep\": 8, \"commit\": 86}}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/components/bootloader/initializer_callbacks/verify_service_startup_state.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/service_startup_state.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\"status\": \"PASS\", \"cases\": 1, \"elf_sha256\": \"e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143\"}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/uart-rx/verify_tx_compat.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/elog_uart_tx.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\"status\": \"PASS\", \"cases\": 222, \"elf_sha256\": \"e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143\", \"visited_body_bytes\": {\"log\": 154, \"claim\": 106, \"dispatch\": 72, \"blocking\": 74, \"start\": 34, \"pump\": 228, \"fifo\": 48, \"drain\": 78, \"ring-add\": 94, \"ring-get\": 90}}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/components/bootloader/initializer_callbacks/verify_startup_alternatives.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/startup_alternatives.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\"status\": \"PASS\", \"cases\": 64, \"elf_sha256\": \"e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143\"}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "/tmp/opencfw-output-fixture.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/elog_output.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\"status\": \"PASS\", \"cases\": 494, \"elf_sha256\": \"e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143\", \"visited_body_bytes\": {\"output\": 948, \"tag-level\": 124, \"lock\": 34, \"unlock\": 34, \"format\": 42, \"append\": 52}}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "/tmp/opencfw-be4-setters.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/setters.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\"status\": \"PASS\", \"cases\": 192, \"elf_sha256\": \"e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143\", \"visited_body_bytes\": {\"opencfw_bl_service_mode\": 108, \"opencfw_bl_service_enable\": 108, \"opencfw_bl_invalid_pin_configure\": 104, \"opencfw_bl_service_configure\": 94}}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-power-config/verify.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/config.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 697 {'configure': 282, 'temperature': 48, 'setter': 8, 'registers': 86, 'ready': 74, 'before': 22, 'middle': 22, 'after': 22}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/verify.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/init-leaves.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 956 {'write': 62, 'read': 32, '20': 22, '24': 26, '28': 22, '30': 22, '34': 22, '38': 22}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/verify_runtime_bindings.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/runtime.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 832 {'dispatch': 668, 'trim': 60, 'info': 352}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/verify_runtime_native.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/runtime-native.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 168 {'dispatch': 0, 'trim': 60, 'info': 352}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/verify_memory.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/memory.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 936 {'mcu': 450, 'shared': 256}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/verify_memory_native.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/memory-native.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 936 {'mcu': 442, 'shared': 256}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-shutdown/verify.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/shutdown.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 903 {'first': 56, 'prepare': 34, 'wait_clear': 32, 'wait_slot': 36, 'wait_zero': 10, 'second': 60, 'clock': 74, 'resource': 124, 'debug': 70}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/run-power-mode/verify.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/mode.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 1394 {'mode': 104, 'transition': 300, 'special': 228, 'hook': 26}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/run-power-mode/verify_power20.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/power20.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 256\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm2_2-native/verify_root_pcm22_state.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/root-final-state.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 1400 {'write': 50, 'read': 0, '20': 22, '24': 26, '28': 0, '30': 22, '34': 0, '38': 0, 'init': 810}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm2_2-native/verify_timer_support.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/timer-final.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 864 {'2b': {'body_bytes': 106, 'visited': 106}, '7b': {'body_bytes': 276, 'visited': 276}, 'ISR': {'body_bytes': 46, 'visited': 46}, 'start': {'body_bytes': 74, 'visited': 74}, 'stop': {'body_bytes': 68, 'visited': 68}, 'cache': {'body_bytes': 56, 'visited': 56}}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/gx-native/verify_gx_children.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/gx-children.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 4834 cases {'temperature': {'start': '0x42ad40', 'end_exclusive': '0x42adb8', 'bytes': 120, 'sha256': '89f71050cf7850205a7a5ef9ccfb09dfadaadd5a6046355844d800589b65607d', 'visited_original_bytes': 120, 'unvisited_bytes': 0, 'unvisited_addresses': []}, 'transition_effect': {'start': '0x42b014', 'end_exclusive': '0x42b068', 'bytes': 84, 'sha256': 'b3da01a94a3c08eb7eb0d7d344b6760d929296878e2dfbf9c4770373aedd3d88', 'visited_original_bytes': 84, 'unvisited_bytes': 0, 'unvisited_addresses': []}, 'state_decode': {'start': '0x42b6b8', 'end_exclusive': '0x42b9ba', 'bytes': 770, 'sha256': '74f4304f6e3aa59022a29eb5e5f5479c77072b33355825b7c9409897001bb9d1', 'visited_original_bytes': 740, 'unvisited_bytes': 30, 'unvisited_addresses': ['0x42b88a', '0x42b88b', '0x42b960', '0x42b961', '0x42b962', '0x42b963', '0x42b964', '0x42b965', '0x42b966', '0x42b967', '0x42b968', '0x42b969', '0x42b96a', '0x42b96b', '0x42b96c', '0x42b96d', '0x42b96e', '0x42b96f', '0x42b970', '0x42b971', '0x42b972', '0x42b973', '0x42b974', '0x42b975', '0x42b976', '0x42b977', '0x42b9b6', '0x42b9b7', '0x42b9b8', '0x42b9b9']}, 'buck_deepsleep_scan': {'start': '0x42aef0', 'end_exclusive': '0x42b010', 'bytes': 288, 'sha256': '7a54959ea8247c505df0f3139ce607b4d1fabb5d0015054b89bd44b5d79cc31b', 'visited_original_bytes': 288, 'unvisited_bytes': 0, 'unvisited_addresses': [], 'predicate': {'start': '0x41f3f0', 'end_exclusive': '0x41f424', 'bytes': 52, 'sha256': '2629a71d82c78f7602d8f37273ae02bcf42f237cdaab9da0d4db6d57a1045692', 'existing_independent_comparison': 'startup-spot-handlers/events-comparison.json'}}}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/gx-native/verify_gx_event.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/gx-event.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 44 cases 798 / 908 stock bytes visited source bytes 2544\nunvisited 0x42bb20, 0x42bb21, 0x42bb38, 0x42bb39, 0x42bb86, 0x42bb87, 0x42bb88, 0x42bb89, 0x42bb8a, 0x42bb8b, 0x42bb8c, 0x42bb8d, 0x42bb98, 0x42bb99, 0x42bb9a, 0x42bb9b, 0x42bb9c, 0x42bb9d, 0x42bb9e, 0x42bb9f, 0x42bba0, 0x42bba1, 0x42bba2, 0x42bba3, 0x42bba4, 0x42bba5, 0x42bba6, 0x42bba7, 0x42bba8, 0x42bba9\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/gx-native/verify_gx_transition_initialized.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/gx-transition.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 51 cases; 880 / 1032 transition bytes; 2464 original bytes\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/components/bootloader/thread_creation/verify_code_alignment.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/alignment.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\"status\": \"PASS\", \"elf_sha256\": \"e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143\", \"mappings\": 615}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/clock-config-children/verify.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/clock-config.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 5896\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-config-leaves/verify_native_scoped.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/startup-leaves-native-copy.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 271\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/copy-it-reproduction/verify_startup_native_copy.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/startup-native-copy.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\"status\": \"PASS\", \"cases\": 64, \"elf_sha256\": \"e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143\"}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/components/bootloader/clock_manager/verify_clock_shared.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/clock-shared.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\"status\": \"PASS\", \"cases\": 128, \"original_instruction_bytes_reached\": 4588}\n{\"status\": \"PASS\", \"shared_cases\": 129, \"pll_timeout_retry\": [4, 0, 0, 4], \"elf_sha256\": \"e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143\"}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/ambiq-printf-probe/verify_target.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/formatter.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 1778\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/ambiq-printf-probe/verify_target_wrapper.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/wrapper.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 288\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/clock-generators/verify.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/generators.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 688\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/clock-generators/verify_math.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/math.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 4311 {'floor': 256, 'round': 256, 'ceil': 256, 'mod': 2560, 'gcd': 173, 'integer': 173, 'fraction': 173, 'vco': 176, 'pll': 96, 'min': 192}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/clock-generators/verify_config_native.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/native-config.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 48\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/uart-rx/verify.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/rx.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 422 {'claim': 86, 'cancel': 60, 'fifo': 70, 'collect': 64, 'blocking': 74, 'start': 42, 'pump': 198, 'transfer': 52}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/verify_clockmux_carry_full.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/clockmux-carry.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 1024 stock-vs-C clockmux cases\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/verify_clockmux_full_candidate.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/clockmux-native.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 14 native-child clockmux chain cases; selector function 100 unique PCs / 254 bytes reached\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/verify_dispatch_bindings.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/dispatch-native.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 400 {'dispatch': 668, 'trim': 0, 'info': 0}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/verify_events_full_candidate.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/events-native.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 72 {'42d562': {'start': '0x42d562', 'end_exclusive': '0x42d5c2', 'visited': 96, 'extent_bytes': 96}, '42ced8': {'start': '0x42ced8', 'end_exclusive': '0x42cfe0', 'visited': 264, 'extent_bytes': 264}, '42cfe0': {'start': '0x42cfe0', 'end_exclusive': '0x42d0f2', 'visited': 274, 'extent_bytes': 274}, '42d104': {'start': '0x42d104', 'end_exclusive': '0x42d3bc', 'visited': 612, 'extent_bytes': 696}, '42d3bc': {'start': '0x42d3bc', 'end_exclusive': '0x42d562', 'visited': 310, 'extent_bytes': 422}, '42cea4': {'start': '0x42cea4', 'end_exclusive': '0x42ced8', 'visited': 42, 'extent_bytes': 52}, '42cdf8': {'start': '0x42cdf8', 'end_exclusive': '0x42cea4', 'visited': 158, 'extent_bytes': 172}, '41f3f0': {'start': '0x41f3f0', 'end_exclusive': '0x41f424', 'visited': 52, 'extent_bytes': 52}, '42d5c2': {'start': '0x42d5c2', 'end_exclusive': '0x42d5cc', 'visited': 10, 'extent_bytes': 10}, '42d5cc': {'start': '0x42d5cc', 'end_exclusive': '0x42d5f8', 'visited': 44, 'extent_bytes': 44}, '42d63a': {'start': '0x42d63a', 'end_exclusive': '0x42d692', 'visited': 88, 'extent_bytes': 88}}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/verify_power_read_full.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/power-read.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 10 power-register-read cases\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/verify_ton_state_native.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/ton-state.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 796 {'event': {'start': '0x42f38e', 'end_exclusive': '0x42f3da', 'visited_bytes': 76, 'body_bytes': 76}, 'begin': {'start': '0x42f204', 'end_exclusive': '0x42f2fa', 'visited_bytes': 242, 'body_bytes': 246}, 'end': {'start': '0x42f2fa', 'end_exclusive': '0x42f38e', 'visited_bytes': 148, 'body_bytes': 148}, 'gate': {'start': '0x42f1c8', 'end_exclusive': '0x42f204', 'visited_bytes': 60, 'body_bytes': 60}}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-deferred21-rollback-integrated/run_oracle.py",
+      "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/verify_ton_compiled_full.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-deferred21-rollback-integrated/e5c70f86f09717487f2e85f76b507ed9d79a374f1baa90eda9d4b7f40a4bd143/validation/regressions/ton-trim.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\n  \"status\": \"PASS\",\n  \"cases\": 124,\n  \"coverage\": {\n    \"cache\": {\n      \"extent\": [\n        \"0x42f41a\",\n        \"0x42f4b2\"\n      ],\n      \"extent_bytes\": 152,\n      \"visited_bytes\": 152,\n      \"unvisited_bytes\": 0,\n      \"unvisited_ranges\": []\n    },\n    \"apply\": {\n      \"extent\": [\n        \"0x42f4b2\",\n        \"0x42f5f0\"\n      ],\n      \"extent_bytes\": 318,\n      \"visited_bytes\": 296,\n      \"unvisited_bytes\": 22,\n      \"unvisited_ranges\": [\n        [\n          \"0x42f520\",\n          \"0x42f524\"\n        ],\n        [\n          \"0x42f554\",\n          \"0x42f55a\"\n        ],\n        [\n          \"0x42f58a\",\n          \"0x42f590\"\n        ],\n        [\n          \"0x42f5be\",\n          \"0x42f5c4\"\n        ]\n      ]\n    }\n  }\n}\n",
+    "stderr": ""
+  }
+]

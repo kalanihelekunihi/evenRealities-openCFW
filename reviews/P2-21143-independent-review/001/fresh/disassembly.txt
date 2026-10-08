@@ -1,0 +1,71 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp18dri54i/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00480a32 <.text>:
+  480a32:	f8df 1480 	ldr.w	r1, [pc, #1152]	@ 480eb4 <.text+0x482>
+  480a36:	6808      	ldr	r0, [r1, #0]
+  480a38:	9000      	str	r0, [sp, #0]
+  480a3a:	9a00      	ldr	r2, [sp, #0]
+  480a3c:	f8df 0478 	ldr.w	r0, [pc, #1144]	@ 480eb8 <.text+0x486>
+  480a40:	4002      	ands	r2, r0
+  480a42:	9200      	str	r2, [sp, #0]
+  480a44:	9a00      	ldr	r2, [sp, #0]
+  480a46:	f8df 0474 	ldr.w	r0, [pc, #1140]	@ 480ebc <.text+0x48a>
+  480a4a:	7800      	ldrb	r0, [r0, #0]
+  480a4c:	f010 003f 	ands.w	r0, r0, #63	@ 0x3f
+  480a50:	4302      	orrs	r2, r0
+  480a52:	f8df 046c 	ldr.w	r0, [pc, #1132]	@ 480ec0 <.text+0x48e>
+  480a56:	6800      	ldr	r0, [r0, #0]
+  480a58:	0180      	lsls	r0, r0, #6
+  480a5a:	f410 7070 	ands.w	r0, r0, #960	@ 0x3c0
+  480a5e:	4302      	orrs	r2, r0
+  480a60:	f8df 0460 	ldr.w	r0, [pc, #1120]	@ 480ec4 <.text+0x492>
+  480a64:	4302      	orrs	r2, r0
+  480a66:	9200      	str	r2, [sp, #0]
+  480a68:	9800      	ldr	r0, [sp, #0]
+  480a6a:	6008      	str	r0, [r1, #0]
+  480a6c:	f8df 5458 	ldr.w	r5, [pc, #1112]	@ 480ec8 <.text+0x496>
+  480a70:	6828      	ldr	r0, [r5, #0]
+  480a72:	9000      	str	r0, [sp, #0]
+  480a74:	9800      	ldr	r0, [sp, #0]
+  480a76:	f030 0022 	bics.w	r0, r0, #34	@ 0x22
+  480a7a:	9000      	str	r0, [sp, #0]
+  480a7c:	9800      	ldr	r0, [sp, #0]
+  480a7e:	f050 0002 	orrs.w	r0, r0, #2
+  480a82:	9000      	str	r0, [sp, #0]
+  480a84:	9800      	ldr	r0, [sp, #0]
+  480a86:	6028      	str	r0, [r5, #0]
+  480a88:	6828      	ldr	r0, [r5, #0]
+  480a8a:	f050 0001 	orrs.w	r0, r0, #1
+  480a8e:	6028      	str	r0, [r5, #0]
+  480a90:	6828      	ldr	r0, [r5, #0]
+  480a92:	f050 0010 	orrs.w	r0, r0, #16
+  480a96:	6028      	str	r0, [r5, #0]
+  480a98:	6828      	ldr	r0, [r5, #0]
+  480a9a:	f050 0008 	orrs.w	r0, r0, #8
+  480a9e:	6028      	str	r0, [r5, #0]
+  480aa0:	2005      	movs	r0, #5
+  480aa2:	f7ff fe7d 	bl	4807a0 <.text-0x292>
+  480aa6:	6828      	ldr	r0, [r5, #0]
+  480aa8:	f030 0010 	bics.w	r0, r0, #16
+  480aac:	6028      	str	r0, [r5, #0]
+  480aae:	2c00      	cmp	r4, #0
+  480ab0:	d00f      	beq.n	480ad2 <.text+0xa0>
+  480ab2:	7820      	ldrb	r0, [r4, #0]
+  480ab4:	2801      	cmp	r0, #1
+  480ab6:	d10c      	bne.n	480ad2 <.text+0xa0>
+  480ab8:	6828      	ldr	r0, [r5, #0]
+  480aba:	9000      	str	r0, [sp, #0]
+  480abc:	9900      	ldr	r1, [sp, #0]
+  480abe:	f8df 040c 	ldr.w	r0, [pc, #1036]	@ 480ecc <.text+0x49a>
+  480ac2:	4001      	ands	r1, r0
+  480ac4:	9100      	str	r1, [sp, #0]
+  480ac6:	9800      	ldr	r0, [sp, #0]
+  480ac8:	f450 7080 	orrs.w	r0, r0, #256	@ 0x100
+  480acc:	9000      	str	r0, [sp, #0]
+  480ace:	9800      	ldr	r0, [sp, #0]
+  480ad0:	6028      	str	r0, [r5, #0]
+  480ad2:	e7a1      	b.n	480a18 <.text-0x1a>

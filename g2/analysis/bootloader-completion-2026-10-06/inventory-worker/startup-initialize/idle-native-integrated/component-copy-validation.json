@@ -1,0 +1,54 @@
+{
+  "status": "PASS",
+  "objects": [
+    {
+      "source": "g2/components/bootloader/thread_creation/idle_sleep/idle_chain.c",
+      "sha256": "c6ffd0ec4a3a69605a816311d1a5c5797dcf48c2f771cd0a7a16edf86355ef72",
+      "object_sha256": "222bf0a223162cab5f95b193b88075233694e4b696fe9a92d1ea4b0c5a442f0a",
+      "frozen_object": "inputs/209/idle_chain.o"
+    },
+    {
+      "source": "g2/components/bootloader/thread_creation/idle_sleep/tickless_native.c",
+      "sha256": "cf2d057f2e0cec8e5306eca6bda21c8836974772eb1fc05d25ffc8077f20ab1d",
+      "object_sha256": "9908f155ce64e760e6943c72b8aea0bb88846ffc2f62695e7082ef796c76cc0c",
+      "frozen_object": "inputs/210/tickless_native.o"
+    },
+    {
+      "source": "g2/components/bootloader/thread_creation/idle_sleep/sleep_policy.c",
+      "sha256": "94800cb3e70113c5f416ada31619d1172242148baa641a6fa980e6c76cf361ba",
+      "object_sha256": "ec7e0e165e2726fedad6aff084f2680b3077e3c6b1de9372d8bfbfbb7d6bf0f5",
+      "frozen_object": "inputs/213/sleep_policy.o"
+    },
+    {
+      "source": "g2/components/bootloader/thread_creation/idle_sleep/sleep_helpers.c",
+      "sha256": "035822c3773b91c04952f67a84e66b2b50fd2e184517d174550d102569ad31cc",
+      "object_sha256": "117cbf61e35bcedd7817e088a5723ff18b34f77ed84186d7d32aa8fda051e8e1",
+      "frozen_object": "inputs/212/sleep_helpers.o"
+    },
+    {
+      "source": "g2/components/bootloader/thread_creation/idle_sleep/sysctrl_sleep.c",
+      "sha256": "8c9ae26ef99e45d636f43d5f3b976e4ac722e723f4f29711089d856b1b196cfe",
+      "object_sha256": "0300c29d960f87f405cc991a82dde0ee3b89865c4b94c34d403f1db22c7946b4",
+      "frozen_object": "inputs/211/sysctrl_sleep.o"
+    },
+    {
+      "source": "g2/components/bootloader/thread_creation/idle_sleep/scheduler_bootstrap.c",
+      "sha256": "1be4c81322771e1fd75d85a87780694b36cf70f22bd6e214899e6ed457796417",
+      "object_sha256": "476b78cf199609dadb81873a5d8155b579567fa59b20871abdc6bfe7bf0e6662",
+      "frozen_object": "inputs/14/scheduler_bootstrap.o"
+    }
+  ],
+  "flags": [
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m33",
+    "-mthumb",
+    "-mfloat-abi=softfp",
+    "-O1",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-fshort-enums"
+  ],
+  "note": "CP setter return declaration corrected; compiled objects remain byte-identical to frozen candidate inputs."
+}

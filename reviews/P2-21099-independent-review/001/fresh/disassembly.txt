@@ -1,0 +1,59 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpd_6moauj/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00480058 <.text>:
+  480058:	b580      	push	{r7, lr}
+  48005a:	f7f3 fc71 	bl	473940 <.text-0xc718>
+  48005e:	9000      	str	r0, [sp, #0]
+  480060:	4827      	ldr	r0, [pc, #156]	@ (480100 <.text+0xa8>)
+  480062:	6800      	ldr	r0, [r0, #0]
+  480064:	f000 00ff 	and.w	r0, r0, #255	@ 0xff
+  480068:	2822      	cmp	r0, #34	@ 0x22
+  48006a:	d307      	bcc.n	48007c <.text+0x24>
+  48006c:	4848      	ldr	r0, [pc, #288]	@ (480190 <.text+0x138>)
+  48006e:	6801      	ldr	r1, [r0, #0]
+  480070:	f431 1100 	bics.w	r1, r1, #2097152	@ 0x200000
+  480074:	6001      	str	r1, [r0, #0]
+  480076:	2001      	movs	r0, #1
+  480078:	f000 fb92 	bl	4807a0 <.text+0x748>
+  48007c:	485e      	ldr	r0, [pc, #376]	@ (4801f8 <.text+0x1a0>)
+  48007e:	6801      	ldr	r1, [r0, #0]
+  480080:	f021 4100 	bic.w	r1, r1, #2147483648	@ 0x80000000
+  480084:	6001      	str	r1, [r0, #0]
+  480086:	6801      	ldr	r1, [r0, #0]
+  480088:	f031 4180 	bics.w	r1, r1, #1073741824	@ 0x40000000
+  48008c:	6001      	str	r1, [r0, #0]
+  48008e:	9800      	ldr	r0, [sp, #0]
+  480090:	f380 8810 	msr	PRIMASK, r0
+  480094:	2005      	movs	r0, #5
+  480096:	f000 fb83 	bl	4807a0 <.text+0x748>
+  48009a:	2000      	movs	r0, #0
+  48009c:	bd02      	pop	{r1, pc}
+  48009e:	b580      	push	{r7, lr}
+  4800a0:	f7f3 fc4e 	bl	473940 <.text-0xc718>
+  4800a4:	9000      	str	r0, [sp, #0]
+  4800a6:	4854      	ldr	r0, [pc, #336]	@ (4801f8 <.text+0x1a0>)
+  4800a8:	6801      	ldr	r1, [r0, #0]
+  4800aa:	f051 4100 	orrs.w	r1, r1, #2147483648	@ 0x80000000
+  4800ae:	6001      	str	r1, [r0, #0]
+  4800b0:	6801      	ldr	r1, [r0, #0]
+  4800b2:	f051 4180 	orrs.w	r1, r1, #1073741824	@ 0x40000000
+  4800b6:	6001      	str	r1, [r0, #0]
+  4800b8:	4811      	ldr	r0, [pc, #68]	@ (480100 <.text+0xa8>)
+  4800ba:	6800      	ldr	r0, [r0, #0]
+  4800bc:	f000 00ff 	and.w	r0, r0, #255	@ 0xff
+  4800c0:	2822      	cmp	r0, #34	@ 0x22
+  4800c2:	d307      	bcc.n	4800d4 <.text+0x7c>
+  4800c4:	2001      	movs	r0, #1
+  4800c6:	f000 fb6b 	bl	4807a0 <.text+0x748>
+  4800ca:	4831      	ldr	r0, [pc, #196]	@ (480190 <.text+0x138>)
+  4800cc:	6801      	ldr	r1, [r0, #0]
+  4800ce:	f451 1100 	orrs.w	r1, r1, #2097152	@ 0x200000
+  4800d2:	6001      	str	r1, [r0, #0]
+  4800d4:	9800      	ldr	r0, [sp, #0]
+  4800d6:	f380 8810 	msr	PRIMASK, r0
+  4800da:	2000      	movs	r0, #0
+  4800dc:	bd02      	pop	{r1, pc}

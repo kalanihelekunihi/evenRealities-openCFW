@@ -1,0 +1,6 @@
+from pathlib import Path
+import sys,subprocess,json,hashlib
+D=Path(__file__).resolve().parent;gcc=Path(sys.argv[1]);out=Path(sys.argv[2]);out.mkdir(parents=True,exist_ok=True);root=D.parents[1]/'components/touch/slider_producer_offline';sources=[Path(sys.argv[4]) if len(sys.argv)>4 else root/'centroid.c',root/'filter.c',Path(sys.argv[5]) if len(sys.argv)>5 else root/'raw.c',Path(sys.argv[3]) if len(sys.argv)>3 else root/'slider.c'];flags=['-mcpu=cortex-m0plus','-mthumb','-Og','-ffreestanding','-fno-builtin','-ffunction-sections'];objects=[]
+for i,s in enumerate(sources):
+ o=out/f'source{i}.o';subprocess.run([str(gcc),*flags,'-I'+str(root),'-c',str(s),'-o',str(o)],check=True);objects.append(o)
+elf=out/'slider.elf';subprocess.run([str(gcc.with_name('arm-none-eabi-ld')),'-Ttext=0x100000','-e','touch_slider_process','-u','touch_slider_widget','-u','touch_sensor_baseline','-u','touch_sensor_difference',*[str(o) for o in objects],'-o',str(elf)],check=True);r={'elf_sha256':hashlib.sha256(elf.read_bytes()).hexdigest(),'source_sha256':{str(s):hashlib.sha256(s.read_bytes()).hexdigest() for s in sources},'header_sha256':hashlib.sha256((root/'slider.h').read_bytes()).hexdigest(),'flags':flags};(out/'receipt.json').write_text(json.dumps(r,indent=2)+'\n');print(r['elf_sha256'])

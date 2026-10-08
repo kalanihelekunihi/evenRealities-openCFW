@@ -1,0 +1,34 @@
+{
+  "candidate_sha256": "dbbd73cfd6b5f15fb1ec4dce44ee4c67d56d1ad4d1c7fef4915f112f550da258",
+  "root_symbols": 38,
+  "direct_reachable_linked_functions": 96,
+  "indirect_sites": 23,
+  "unresolved": [
+    {
+      "caller_address": 125388,
+      "caller_names": [
+        "opencfw_bl_delay_us"
+      ],
+      "site": 125468,
+      "target": 64,
+      "kind": "bl",
+      "aliases": [
+        "opencfw_boot_rom_delay_cycles"
+      ],
+      "category": "external_resident_ROM"
+    },
+    {
+      "caller_address": 124060,
+      "caller_names": [
+        "opencfw_boot_info_rom_read"
+      ],
+      "site": 124062,
+      "target": 72,
+      "kind": "bl",
+      "aliases": [
+        "opencfw_boot_rom48"
+      ],
+      "category": "external_resident_ROM"
+    }
+  ]
+}

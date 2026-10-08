@@ -1,0 +1,10 @@
+{
+  "id": "P2-20829",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "Fresh replay passed for the 36-byte function at 0x47CBC4..0x47CBE8; locked-image SHA and all source receipt hashes match, and decoded instructions tile the range with the loop branch landing on an instruction boundary. The routine reads the initial state, loops while unsigned index < length, combines each input byte with the state high byte, indexes a word table, updates state with the byte lookup result XOR state<<8, then writes state once. For length zero it still reads and writes the state word. R0 remains the input pointer; the 12-byte frame is popped before BX LR. Table contents and polynomial meaning are not inferred."
+}

@@ -1,0 +1,3 @@
+# Preceding-node status skip and record comparison predicate
+
+Partial/unaccepted;54 instructionbytes4848B2..4848E8. PUSHentryR3/R4/R5/LR16B,SUBSP16,total32B;R5=entry1candidate,R4=word[entry0owner+68]head. TraversalnullnodeorR4==candidate→R0=1return. Othernodesstatusword+80==3skipnextfreshword[node]. OtherwiseR2=candidate+24,R1=currentnode+24,R0=SP16Btemporary,450BCC(liveR3retained). Resultzero→nextfreshword[node]repeat;nonzeroR0=0return. ADDSP20discards16Btemp+savedentryR3slot4;POP R4/R5/PC12B,total32B. Tempcontentsnotassumed, helpercomparisonsemanticsunknown. Candidateabsencecanstillreturn1onlistend; preservesorder-before-candidate andstatus3skip. No C,freeze,wholecoverage or equalityclaim.

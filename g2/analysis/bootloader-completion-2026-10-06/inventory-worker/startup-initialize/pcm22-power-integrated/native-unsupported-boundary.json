@@ -1,0 +1,48 @@
+{
+  "status": "EXPECTED_SOURCE_BOUNDARY",
+  "cases": 2,
+  "elf_sha256": "aac9ab01bf1d628162a8ec528bf73bc2b04a1f655a88091795650e600b27ea45",
+  "results": [
+    {
+      "stock": true,
+      "selector": 6,
+      "target": "0x428841",
+      "fixture": {
+        "stimulus": 0,
+        "on": 0,
+        "current_cpu": 1,
+        "args_words": [
+          0,
+          0,
+          0
+        ],
+        "old_major": 13,
+        "old_minor": 7,
+        "device": 1024,
+        "audio": 32,
+        "current_temp": 2
+      }
+    },
+    {
+      "stock": false,
+      "selector": 6,
+      "target": "0x428841",
+      "fixture": {
+        "stimulus": 0,
+        "on": 0,
+        "current_cpu": 1,
+        "args_words": [
+          0,
+          0,
+          0
+        ],
+        "old_major": 13,
+        "old_minor": 7,
+        "device": 1024,
+        "audio": 32,
+        "current_temp": 2
+      }
+    }
+  ],
+  "reason": "Actual HP-to-LP path reaches unsupported selector6 before its first instruction; no return substitute provided."
+}

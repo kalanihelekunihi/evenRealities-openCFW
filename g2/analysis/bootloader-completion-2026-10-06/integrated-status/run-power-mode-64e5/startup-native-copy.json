@@ -1,0 +1,1920 @@
+{
+  "status": "PASS",
+  "cases": 64,
+  "elf_sha256": "64e525046809722484ff5fe65ebea5550352915ed292e5e6989a5acfa9ea9b7d",
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "runner_sha256": "389474386f8ce40e3e72d00e8f4c3d5a1bd404a7d1e0c9599773e7bd7a62c40b",
+  "original_trace": {
+    "0x41fa50": "00b5",
+    "0x41fa52": "87b0",
+    "0x41fa54": "00f020f8",
+    "0x41fa98": "10b5",
+    "0x41fa9a": "dff83440",
+    "0x41fa9e": "2078",
+    "0x41faa0": "0128",
+    "0x41faa2": "14d1",
+    "0x41face": "10bd",
+    "0x41fa58": "fcf72cfd",
+    "0x41fa5c": "0021",
+    "0x41fa5e": "0020",
+    "0x41fa60": "fcf704ff",
+    "0x41fa64": "6846",
+    "0x41fa66": "b3ee090a",
+    "0x41fa6a": "fcf7dfff",
+    "0x41fa6e": "02a8",
+    "0x41fa70": "dff86010",
+    "0x41fa74": "1422",
+    "0x41fa76": "f5f719fe",
+    "0x4156ac": "103a",
+    "0x4156ae": "07d3",
+    "0x4156b0": "30b4",
+    "0x4156b2": "b1e83810",
+    "0x4156b6": "103a",
+    "0x4156b8": "a0e83810",
+    "0x4156bc": "f9d2",
+    "0x4156be": "30bc",
+    "0x4156c0": "5307",
+    "0x4156c2": "24bf",
+    "0x4156cc": "44bf",
+    "0x4156ce": "51f8043b",
+    "0x4156d2": "40f8043b",
+    "0x4156d6": "d207",
+    "0x4156d8": "24bf",
+    "0x4156e2": "44bf",
+    "0x4156e8": "7047",
+    "0x41fa7a": "02a8",
+    "0x41fa7c": "02f0cbfc",
+    "0x41fa80": "0022",
+    "0x41fa82": "0021",
+    "0x41fa84": "0420",
+    "0x41fa86": "02f00bfc",
+    "0x41fa8a": "0022",
+    "0x41fa8c": "0021",
+    "0x41fa8e": "0520",
+    "0x41fa90": "02f006fc",
+    "0x41fa94": "07b0",
+    "0x41fa96": "00bd",
+    "0x41faa4": "04f03cf9",
+    "0x41faa8": "0028",
+    "0x41faaa": "00d0",
+    "0x41faae": "04f08ff9",
+    "0x41fab2": "0028",
+    "0x41fab4": "00d0",
+    "0x41fab8": "0020",
+    "0x41faba": "f5f7bffe",
+    "0x41fabe": "dff81800",
+    "0x41fac2": "0168",
+    "0x41fac4": "1c20",
+    "0x41fac6": "fdf731ff",
+    "0x41faca": "0020",
+    "0x41facc": "2070",
+    "0x41fab6": "fee7",
+    "0x41faac": "fee7"
+  },
+  "comparisons": [
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 0,
+        "first": 0,
+        "second": 0,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [
+          [
+            "power-init"
+          ],
+          [
+            "power-config",
+            0,
+            0
+          ],
+          [
+            "temperature",
+            "0x41c80000"
+          ],
+          [
+            "descriptor",
+            "00000000000000000000000000800000001bb700"
+          ],
+          [
+            "clock-select",
+            4,
+            0,
+            0
+          ],
+          [
+            "clock-select",
+            5,
+            0,
+            0
+          ]
+        ],
+        "flag": 0,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 0,
+        "first": 0,
+        "second": 0,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [
+          [
+            "power-init"
+          ],
+          [
+            "power-config",
+            0,
+            0
+          ],
+          [
+            "temperature",
+            "0x41c80000"
+          ],
+          [
+            "descriptor",
+            "00000000000000000000000000800000001bb700"
+          ],
+          [
+            "clock-select",
+            4,
+            0,
+            0
+          ],
+          [
+            "clock-select",
+            5,
+            0,
+            0
+          ]
+        ],
+        "flag": 0,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 0,
+        "first": 0,
+        "second": 7,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [
+          [
+            "power-init"
+          ],
+          [
+            "power-config",
+            0,
+            0
+          ],
+          [
+            "temperature",
+            "0x41c80000"
+          ],
+          [
+            "descriptor",
+            "00000000000000000000000000800000001bb700"
+          ],
+          [
+            "clock-select",
+            4,
+            0,
+            0
+          ],
+          [
+            "clock-select",
+            5,
+            0,
+            0
+          ]
+        ],
+        "flag": 0,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 0,
+        "first": 0,
+        "second": 7,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [
+          [
+            "power-init"
+          ],
+          [
+            "power-config",
+            0,
+            0
+          ],
+          [
+            "temperature",
+            "0x41c80000"
+          ],
+          [
+            "descriptor",
+            "00000000000000000000000000800000001bb700"
+          ],
+          [
+            "clock-select",
+            4,
+            0,
+            0
+          ],
+          [
+            "clock-select",
+            5,
+            0,
+            0
+          ]
+        ],
+        "flag": 0,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 0,
+        "first": 1,
+        "second": 0,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [
+          [
+            "power-init"
+          ],
+          [
+            "power-config",
+            0,
+            0
+          ],
+          [
+            "temperature",
+            "0x41c80000"
+          ],
+          [
+            "descriptor",
+            "00000000000000000000000000800000001bb700"
+          ],
+          [
+            "clock-select",
+            4,
+            0,
+            0
+          ],
+          [
+            "clock-select",
+            5,
+            0,
+            0
+          ]
+        ],
+        "flag": 0,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 0,
+        "first": 1,
+        "second": 0,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [
+          [
+            "power-init"
+          ],
+          [
+            "power-config",
+            0,
+            0
+          ],
+          [
+            "temperature",
+            "0x41c80000"
+          ],
+          [
+            "descriptor",
+            "00000000000000000000000000800000001bb700"
+          ],
+          [
+            "clock-select",
+            4,
+            0,
+            0
+          ],
+          [
+            "clock-select",
+            5,
+            0,
+            0
+          ]
+        ],
+        "flag": 0,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 0,
+        "first": 1,
+        "second": 7,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [
+          [
+            "power-init"
+          ],
+          [
+            "power-config",
+            0,
+            0
+          ],
+          [
+            "temperature",
+            "0x41c80000"
+          ],
+          [
+            "descriptor",
+            "00000000000000000000000000800000001bb700"
+          ],
+          [
+            "clock-select",
+            4,
+            0,
+            0
+          ],
+          [
+            "clock-select",
+            5,
+            0,
+            0
+          ]
+        ],
+        "flag": 0,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 0,
+        "first": 1,
+        "second": 7,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [
+          [
+            "power-init"
+          ],
+          [
+            "power-config",
+            0,
+            0
+          ],
+          [
+            "temperature",
+            "0x41c80000"
+          ],
+          [
+            "descriptor",
+            "00000000000000000000000000800000001bb700"
+          ],
+          [
+            "clock-select",
+            4,
+            0,
+            0
+          ],
+          [
+            "clock-select",
+            5,
+            0,
+            0
+          ]
+        ],
+        "flag": 0,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 1,
+        "first": 0,
+        "second": 0,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [
+          [
+            "first"
+          ],
+          [
+            "second"
+          ],
+          [
+            "external-mode",
+            0
+          ],
+          [
+            "power-update",
+            28,
+            287454020
+          ],
+          [
+            "power-init"
+          ],
+          [
+            "power-config",
+            0,
+            0
+          ],
+          [
+            "temperature",
+            "0x41c80000"
+          ],
+          [
+            "descriptor",
+            "00000000000000000000000000800000001bb700"
+          ],
+          [
+            "clock-select",
+            4,
+            0,
+            0
+          ],
+          [
+            "clock-select",
+            5,
+            0,
+            0
+          ]
+        ],
+        "flag": 0,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 1,
+        "first": 0,
+        "second": 0,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [
+          [
+            "first"
+          ],
+          [
+            "second"
+          ],
+          [
+            "external-mode",
+            0
+          ],
+          [
+            "power-update",
+            28,
+            287454020
+          ],
+          [
+            "power-init"
+          ],
+          [
+            "power-config",
+            0,
+            0
+          ],
+          [
+            "temperature",
+            "0x41c80000"
+          ],
+          [
+            "descriptor",
+            "00000000000000000000000000800000001bb700"
+          ],
+          [
+            "clock-select",
+            4,
+            0,
+            0
+          ],
+          [
+            "clock-select",
+            5,
+            0,
+            0
+          ]
+        ],
+        "flag": 0,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 1,
+        "first": 0,
+        "second": 7,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [
+          [
+            "first"
+          ],
+          [
+            "second"
+          ]
+        ],
+        "flag": 1,
+        "spin": true,
+        "failed": "second"
+      }
+    },
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 1,
+        "first": 0,
+        "second": 7,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [
+          [
+            "first"
+          ],
+          [
+            "second"
+          ]
+        ],
+        "flag": 1,
+        "spin": true,
+        "failed": "second"
+      }
+    },
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 1,
+        "first": 1,
+        "second": 0,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [
+          [
+            "first"
+          ]
+        ],
+        "flag": 1,
+        "spin": true,
+        "failed": "first"
+      }
+    },
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 1,
+        "first": 1,
+        "second": 0,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [
+          [
+            "first"
+          ]
+        ],
+        "flag": 1,
+        "spin": true,
+        "failed": "first"
+      }
+    },
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 1,
+        "first": 1,
+        "second": 7,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [
+          [
+            "first"
+          ]
+        ],
+        "flag": 1,
+        "spin": true,
+        "failed": "first"
+      }
+    },
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 1,
+        "first": 1,
+        "second": 7,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [
+          [
+            "first"
+          ]
+        ],
+        "flag": 1,
+        "spin": true,
+        "failed": "first"
+      }
+    },
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 2,
+        "first": 0,
+        "second": 0,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [
+          [
+            "power-init"
+          ],
+          [
+            "power-config",
+            0,
+            0
+          ],
+          [
+            "temperature",
+            "0x41c80000"
+          ],
+          [
+            "descriptor",
+            "00000000000000000000000000800000001bb700"
+          ],
+          [
+            "clock-select",
+            4,
+            0,
+            0
+          ],
+          [
+            "clock-select",
+            5,
+            0,
+            0
+          ]
+        ],
+        "flag": 2,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 2,
+        "first": 0,
+        "second": 0,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [
+          [
+            "power-init"
+          ],
+          [
+            "power-config",
+            0,
+            0
+          ],
+          [
+            "temperature",
+            "0x41c80000"
+          ],
+          [
+            "descriptor",
+            "00000000000000000000000000800000001bb700"
+          ],
+          [
+            "clock-select",
+            4,
+            0,
+            0
+          ],
+          [
+            "clock-select",
+            5,
+            0,
+            0
+          ]
+        ],
+        "flag": 2,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 2,
+        "first": 0,
+        "second": 7,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [
+          [
+            "power-init"
+          ],
+          [
+            "power-config",
+            0,
+            0
+          ],
+          [
+            "temperature",
+            "0x41c80000"
+          ],
+          [
+            "descriptor",
+            "00000000000000000000000000800000001bb700"
+          ],
+          [
+            "clock-select",
+            4,
+            0,
+            0
+          ],
+          [
+            "clock-select",
+            5,
+            0,
+            0
+          ]
+        ],
+        "flag": 2,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 2,
+        "first": 0,
+        "second": 7,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [
+          [
+            "power-init"
+          ],
+          [
+            "power-config",
+            0,
+            0
+          ],
+          [
+            "temperature",
+            "0x41c80000"
+          ],
+          [
+            "descriptor",
+            "00000000000000000000000000800000001bb700"
+          ],
+          [
+            "clock-select",
+            4,
+            0,
+            0
+          ],
+          [
+            "clock-select",
+            5,
+            0,
+            0
+          ]
+        ],
+        "flag": 2,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 2,
+        "first": 1,
+        "second": 0,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [
+          [
+            "power-init"
+          ],
+          [
+            "power-config",
+            0,
+            0
+          ],
+          [
+            "temperature",
+            "0x41c80000"
+          ],
+          [
+            "descriptor",
+            "00000000000000000000000000800000001bb700"
+          ],
+          [
+            "clock-select",
+            4,
+            0,
+            0
+          ],
+          [
+            "clock-select",
+            5,
+            0,
+            0
+          ]
+        ],
+        "flag": 2,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 2,
+        "first": 1,
+        "second": 0,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [
+          [
+            "power-init"
+          ],
+          [
+            "power-config",
+            0,
+            0
+          ],
+          [
+            "temperature",
+            "0x41c80000"
+          ],
+          [
+            "descriptor",
+            "00000000000000000000000000800000001bb700"
+          ],
+          [
+            "clock-select",
+            4,
+            0,
+            0
+          ],
+          [
+            "clock-select",
+            5,
+            0,
+            0
+          ]
+        ],
+        "flag": 2,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 2,
+        "first": 1,
+        "second": 7,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [
+          [
+            "power-init"
+          ],
+          [
+            "power-config",
+            0,
+            0
+          ],
+          [
+            "temperature",
+            "0x41c80000"
+          ],
+          [
+            "descriptor",
+            "00000000000000000000000000800000001bb700"
+          ],
+          [
+            "clock-select",
+            4,
+            0,
+            0
+          ],
+          [
+            "clock-select",
+            5,
+            0,
+            0
+          ]
+        ],
+        "flag": 2,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 2,
+        "first": 1,
+        "second": 7,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [
+          [
+            "power-init"
+          ],
+          [
+            "power-config",
+            0,
+            0
+          ],
+          [
+            "temperature",
+            "0x41c80000"
+          ],
+          [
+            "descriptor",
+            "00000000000000000000000000800000001bb700"
+          ],
+          [
+            "clock-select",
+            4,
+            0,
+            0
+          ],
+          [
+            "clock-select",
+            5,
+            0,
+            0
+          ]
+        ],
+        "flag": 2,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 255,
+        "first": 0,
+        "second": 0,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [
+          [
+            "power-init"
+          ],
+          [
+            "power-config",
+            0,
+            0
+          ],
+          [
+            "temperature",
+            "0x41c80000"
+          ],
+          [
+            "descriptor",
+            "00000000000000000000000000800000001bb700"
+          ],
+          [
+            "clock-select",
+            4,
+            0,
+            0
+          ],
+          [
+            "clock-select",
+            5,
+            0,
+            0
+          ]
+        ],
+        "flag": 255,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 255,
+        "first": 0,
+        "second": 0,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [
+          [
+            "power-init"
+          ],
+          [
+            "power-config",
+            0,
+            0
+          ],
+          [
+            "temperature",
+            "0x41c80000"
+          ],
+          [
+            "descriptor",
+            "00000000000000000000000000800000001bb700"
+          ],
+          [
+            "clock-select",
+            4,
+            0,
+            0
+          ],
+          [
+            "clock-select",
+            5,
+            0,
+            0
+          ]
+        ],
+        "flag": 255,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 255,
+        "first": 0,
+        "second": 7,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [
+          [
+            "power-init"
+          ],
+          [
+            "power-config",
+            0,
+            0
+          ],
+          [
+            "temperature",
+            "0x41c80000"
+          ],
+          [
+            "descriptor",
+            "00000000000000000000000000800000001bb700"
+          ],
+          [
+            "clock-select",
+            4,
+            0,
+            0
+          ],
+          [
+            "clock-select",
+            5,
+            0,
+            0
+          ]
+        ],
+        "flag": 255,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 255,
+        "first": 0,
+        "second": 7,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [
+          [
+            "power-init"
+          ],
+          [
+            "power-config",
+            0,
+            0
+          ],
+          [
+            "temperature",
+            "0x41c80000"
+          ],
+          [
+            "descriptor",
+            "00000000000000000000000000800000001bb700"
+          ],
+          [
+            "clock-select",
+            4,
+            0,
+            0
+          ],
+          [
+            "clock-select",
+            5,
+            0,
+            0
+          ]
+        ],
+        "flag": 255,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 255,
+        "first": 1,
+        "second": 0,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [
+          [
+            "power-init"
+          ],
+          [
+            "power-config",
+            0,
+            0
+          ],
+          [
+            "temperature",
+            "0x41c80000"
+          ],
+          [
+            "descriptor",
+            "00000000000000000000000000800000001bb700"
+          ],
+          [
+            "clock-select",
+            4,
+            0,
+            0
+          ],
+          [
+            "clock-select",
+            5,
+            0,
+            0
+          ]
+        ],
+        "flag": 255,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 255,
+        "first": 1,
+        "second": 0,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [
+          [
+            "power-init"
+          ],
+          [
+            "power-config",
+            0,
+            0
+          ],
+          [
+            "temperature",
+            "0x41c80000"
+          ],
+          [
+            "descriptor",
+            "00000000000000000000000000800000001bb700"
+          ],
+          [
+            "clock-select",
+            4,
+            0,
+            0
+          ],
+          [
+            "clock-select",
+            5,
+            0,
+            0
+          ]
+        ],
+        "flag": 255,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 255,
+        "first": 1,
+        "second": 7,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [
+          [
+            "power-init"
+          ],
+          [
+            "power-config",
+            0,
+            0
+          ],
+          [
+            "temperature",
+            "0x41c80000"
+          ],
+          [
+            "descriptor",
+            "00000000000000000000000000800000001bb700"
+          ],
+          [
+            "clock-select",
+            4,
+            0,
+            0
+          ],
+          [
+            "clock-select",
+            5,
+            0,
+            0
+          ]
+        ],
+        "flag": 255,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": false,
+      "fixture": {
+        "flag": 255,
+        "first": 1,
+        "second": 7,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [
+          [
+            "power-init"
+          ],
+          [
+            "power-config",
+            0,
+            0
+          ],
+          [
+            "temperature",
+            "0x41c80000"
+          ],
+          [
+            "descriptor",
+            "00000000000000000000000000800000001bb700"
+          ],
+          [
+            "clock-select",
+            4,
+            0,
+            0
+          ],
+          [
+            "clock-select",
+            5,
+            0,
+            0
+          ]
+        ],
+        "flag": 255,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 0,
+        "first": 0,
+        "second": 0,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [],
+        "flag": 0,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 0,
+        "first": 0,
+        "second": 0,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [],
+        "flag": 0,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 0,
+        "first": 0,
+        "second": 7,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [],
+        "flag": 0,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 0,
+        "first": 0,
+        "second": 7,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [],
+        "flag": 0,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 0,
+        "first": 1,
+        "second": 0,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [],
+        "flag": 0,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 0,
+        "first": 1,
+        "second": 0,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [],
+        "flag": 0,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 0,
+        "first": 1,
+        "second": 7,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [],
+        "flag": 0,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 0,
+        "first": 1,
+        "second": 7,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [],
+        "flag": 0,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 1,
+        "first": 0,
+        "second": 0,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [
+          [
+            "first"
+          ],
+          [
+            "second"
+          ],
+          [
+            "external-mode",
+            0
+          ],
+          [
+            "power-update",
+            28,
+            287454020
+          ]
+        ],
+        "flag": 0,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 1,
+        "first": 0,
+        "second": 0,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [
+          [
+            "first"
+          ],
+          [
+            "second"
+          ],
+          [
+            "external-mode",
+            0
+          ],
+          [
+            "power-update",
+            28,
+            287454020
+          ]
+        ],
+        "flag": 0,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 1,
+        "first": 0,
+        "second": 7,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [
+          [
+            "first"
+          ],
+          [
+            "second"
+          ]
+        ],
+        "flag": 1,
+        "spin": true,
+        "failed": "second"
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 1,
+        "first": 0,
+        "second": 7,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [
+          [
+            "first"
+          ],
+          [
+            "second"
+          ]
+        ],
+        "flag": 1,
+        "spin": true,
+        "failed": "second"
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 1,
+        "first": 1,
+        "second": 0,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [
+          [
+            "first"
+          ]
+        ],
+        "flag": 1,
+        "spin": true,
+        "failed": "first"
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 1,
+        "first": 1,
+        "second": 0,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [
+          [
+            "first"
+          ]
+        ],
+        "flag": 1,
+        "spin": true,
+        "failed": "first"
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 1,
+        "first": 1,
+        "second": 7,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [
+          [
+            "first"
+          ]
+        ],
+        "flag": 1,
+        "spin": true,
+        "failed": "first"
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 1,
+        "first": 1,
+        "second": 7,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [
+          [
+            "first"
+          ]
+        ],
+        "flag": 1,
+        "spin": true,
+        "failed": "first"
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 2,
+        "first": 0,
+        "second": 0,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [],
+        "flag": 2,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 2,
+        "first": 0,
+        "second": 0,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [],
+        "flag": 2,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 2,
+        "first": 0,
+        "second": 7,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [],
+        "flag": 2,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 2,
+        "first": 0,
+        "second": 7,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [],
+        "flag": 2,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 2,
+        "first": 1,
+        "second": 0,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [],
+        "flag": 2,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 2,
+        "first": 1,
+        "second": 0,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [],
+        "flag": 2,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 2,
+        "first": 1,
+        "second": 7,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [],
+        "flag": 2,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 2,
+        "first": 1,
+        "second": 7,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [],
+        "flag": 2,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 255,
+        "first": 0,
+        "second": 0,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [],
+        "flag": 255,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 255,
+        "first": 0,
+        "second": 0,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [],
+        "flag": 255,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 255,
+        "first": 0,
+        "second": 7,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [],
+        "flag": 255,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 255,
+        "first": 0,
+        "second": 7,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [],
+        "flag": 255,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 255,
+        "first": 1,
+        "second": 0,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [],
+        "flag": 255,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 255,
+        "first": 1,
+        "second": 0,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [],
+        "flag": 255,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 255,
+        "first": 1,
+        "second": 7,
+        "clock-select": 0
+      },
+      "observation": {
+        "events": [],
+        "flag": 255,
+        "spin": false,
+        "failed": null
+      }
+    },
+    {
+      "conditional": true,
+      "fixture": {
+        "flag": 255,
+        "first": 1,
+        "second": 7,
+        "clock-select": 9
+      },
+      "observation": {
+        "events": [],
+        "flag": 255,
+        "spin": false,
+        "failed": null
+      }
+    }
+  ],
+  "limits": [
+    "First/second errors execute into recurring instruction loops, preserveflag1 and prevent subsequentcalls; no hardware halt or reset performed.",
+    "Float argument is passed inS0 and compares exact25.0f bits. Descriptor20bytes and explicitcalls compare; scratch pointer relocated and scratch bytes not used downstream.",
+    "Injected clock errors are ignored as stock; all-success conditional clearsflag only after externalmode/powerupdate. No hardware timing/drain or live scheduling proof.",
+    "Native original descriptor copy4156ac; scoped MMIO recorder avoids reproduced no-op SRAM hook discrepancy. Other HAL child models remain; no hardware proof."
+  ],
+  "fixture_adapter_sha256": "a16a030698c43d1e91d691aac7ab1faff8bb3685c5f4b0244bd79507a8d5de03",
+  "native_copy_supplement": "Original4156ac descriptor copy executes; only MMIO is instrumented. No expected-copy stub. Nine child API models remain as the original orchestration suite."
+}

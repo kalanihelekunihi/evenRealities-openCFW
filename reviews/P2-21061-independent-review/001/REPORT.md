@@ -1,0 +1,1 @@
+Partial/unaccepted:16bytes47F944..47F954 fouralignedliteralwords. Everyword has decodedPCload consumer in maps21428/21430/21432/21434; component hashes checked. Exact pointer/constant values retained; pointed objects and any additional consumers remain unresolved. Adjacent47F942..F944 padding not included. No C/freeze/fullcoverageclaim.

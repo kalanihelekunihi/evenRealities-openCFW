@@ -1,0 +1,11 @@
+Superseded by [native UART constructor/downstream source and validation](uart-context/REPORT.md), checkpoint 67f3f2.1,040 direct comparisons/all1,652 mapped bytes, focused shared-state comparison and 7 fresh integrated cases PASS. Existing 422ba8 source was a guard only; accepted save/restore body is now source-owned.41f8ba clears initialized and powers down. TX/RX/DMA/IRQ/task drain remains unproved. Original static note follows.
+
+# Next native startup context edge422ad4
+
+Static finding only, no new implementation or tests claimed. Locked bootloader SHA f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5. Body422ad4..422ba8=212 instruction bytes, no child calls.
+
+Constructor takes full32-bit index0..3 and pointer-to-handle. Index>=4 returns5 before null pointer6. If existing *out is nonzero and the pointed flags match01ea9e06 undermask01ffffff, returns7; it does **not** check selected static pool occupancy in this path. Otherwise it chooses20024400+index*0x11c, ORs claimbit24, replaces low24 withmagic00ea9e06 while preserving high flags, writes index+28, and initializes selected fields rather than zeroing the entire284-byte context: byte4=0,word30=0,bytes11a/119/dc/dd=0,wordsd8/9c=0,bytede=1. It publishes *out last. Source-owned pool/layout, call/data ownership and malformed/preexisting handle error precedence require original/source tests.
+
+Current exact-image callflow calls this for post rows1,2,3; old return stub leaves their output handles0. Real source closure must replace the return stub and feed resulting2002451c/20024638/20024754 into downstream configure422ba8/validate42308e/activate422dc6/finish4236ce. Existing native implementations may be reusable (422ba8 is already native as control_power_apply elsewhere); inspect before duplicating. Required pointer/config/transfer lifecycle children, borrowed structures and error folding must remain explicit. A real context pointer is not evidence that peripheral, bus or task startup works.
+
+The main remaining families are post configuration/activation and service guard/commit/RTOS kernel beneath initializer callbacks, then startup alternatives/logger/fatal/complete layout and compiler/byte equality. Begin with this bounded constructor and actual reached children; no wide inventory or generic SDK replacement is needed.

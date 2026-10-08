@@ -1,0 +1,10 @@
+{
+  "id": "P2-20891",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "Fresh replay passed for 138 bytes at 0x47D5B8..0x47D642; pinned image/source hashes and tiling match. Diagnostic branches use separate status queries and fresh byte6 observations. The functional path inserts only the input byte6 low bit into flag bit6, stores it, then independently reloads flag state. On zero, two separate flag-byte reload/modify/store sequences clear bits4 and5. A later independent helper result is compared full-width to 1; exact one reloads bit6 and calls 0x4ABD60 with explicit arguments. No combined clear mask or input-byte truthiness is inferred; continuation remains pending."
+}

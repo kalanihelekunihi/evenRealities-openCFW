@@ -1,0 +1,17 @@
+from pathlib import Path
+import json,hashlib,re,subprocess,tempfile
+b=Path('g2/build/pseudocode-first/20260930T190500Z');src=b/'attempts/P1-canonical-fixed-images-005/002/apollo_main-flash.bin';d=src.read_bytes();h=lambda x:hashlib.sha256(x).hexdigest();assert h(d)=='19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701';start=0x47ddfe;end=0x47de7a
+with tempfile.TemporaryDirectory() as td:
+ t=Path(td);(t/'input.bin').write_bytes(d[start-0x438000:end-0x438000]);(t/'input.s').write_text('.syntax unified\n.cpu cortex-m55\n.thumb\n.text\n.incbin "'+str(t/'input.bin')+'"\n');subprocess.run(['/opt/homebrew/bin/arm-none-eabi-as',str(t/'input.s'),'-o',str(t/'input.o')],check=True);rawtext=subprocess.check_output(['/opt/homebrew/bin/arm-none-eabi-objdump','-D','-j','.text','-M','force-thumb','--adjust-vma='+hex(start),str(t/'input.o')],text=True)
+rows=[];cursor=start
+for line in rawtext.splitlines():
+ m=re.match(r'\s*([0-9a-f]+):\s+([0-9a-f]{4}(?: [0-9a-f]{4})?)\s+([^\s]+)\s*(.*)',line)
+ if not m:continue
+ a=int(m[1],16)
+ if not start<=a<end:continue
+ raw=b''.join(int(v,16).to_bytes(2,'little') for v in m[2].split());assert a==cursor and raw==d[a-0x438000:a-0x438000+len(raw)];cursor+=len(raw);rows.append(dict(address=a,bytes=raw.hex(),mnemonic=m[3],operands=m[4]))
+assert cursor==end,(hex(cursor),hex(end),rawtext)
+o=b/'analysis/review-isolated-P2-20935/fresh';o.mkdir(parents=True,exist_ok=True);(o/'instructions.json').write_text(json.dumps([dict(start=start,end=end,instructions=rows)],indent=2)+'\n');(o/'disassembly.txt').write_text(rawtext);refs=sorted(set(int(m[1],16) for row in rows if (m:=re.search(r'@\s*\(?([0-9a-f]{6,8})',row['operands'])) and 'pc' in row['operands']))
+(o/'references.json').write_text(json.dumps([dict(address=a,bytes=d[a-0x438000:a-0x438000+4].hex(),value=int.from_bytes(d[a-0x438000:a-0x438000+4],'little')) for a in refs],indent=2)+'\n')
+(o/'pseudocode.md').write_text('# Fixed helper wrappers and exact parser end-pointer acceptance\n\nPartial/unaccepted;124instructionbytes47DDFE..47DE7A,threeentries.\nDDFE PUSH R7,LR8;4D34C4(entryR0,12,0,liveR3);POP R1,PC returns fullhelperR0 andR1=savedentryR7.\nDE0A PUSH R7,LR8;R3=entryR2,R2=literal47E294;44B728(entryR0,entryR1,literal,entryR2). POP R0,PC returns savedentryR7,discardingformatterresult.\nDE18 PUSH R2,R3,R4,R5,R6,LR24;R4=entryR0,R5=entryR1.44A43C(R4,liveargs)→R6 fullresult. UnsignedR6<8→failure0. Otherwise44B610(R4,address47E084,3,liveR3);fullnonzero→failure0. Otherwise46CACC((R4+R6-4)modulo2^32,literal47E298,liveR2,R3);fullnonzero→failure0.\nThenSP0=0;48D874(R4+3 modulo2^32,SP,10,liveR3);fullreturnedvalue→R1. FirstfreshSP0 mustnonzero; otherwisefailure0. SecondindependentSP0 mustequal(R4+R6-4)modulo2^32;otherwisefailure0. EqualitystoresfullR1 toword[entryR1] thenR0=1. No recovered nulloutputcheck, numericrangecheck or localparseroverflowguard. HelpersmaymodifySP0, and firstnonzerotest mustnot collapse withsecondload. POP R1,R2,R4,R5,R6,PC24: R1=SP0 (savedentryR2 onearlyfailure orparserlocal),R2=savedentryR3 subjecttocallee memoryeffects;R4..6restored. No string/API semantics inferred from unrecoveredhelpers; no C/freeze/completenessclaim.\n')
+(o/'replay.py').write_bytes(Path(__file__).read_bytes());(o/'receipt.json').write_text(json.dumps(dict(accepted=False,status='partial',input_sha256=h(d),instruction_bytes=end-start,files={p.name:h(p.read_bytes()) for p in o.iterdir()}),indent=2)+'\n');print('PASS',end-start)

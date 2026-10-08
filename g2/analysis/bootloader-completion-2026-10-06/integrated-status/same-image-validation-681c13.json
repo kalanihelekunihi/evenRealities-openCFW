@@ -1,0 +1,311 @@
+{
+  "utc": "2026-10-07T04:37:22.557863+00:00",
+  "status": "PASS",
+  "elf": "g2/build/bootloader-completion/source-image-compatible/snapshots/681c13c6f3079412efb46ff17aba6afcd7d80fef293418613d772c48448bd7d4/bootloader-source-test.elf",
+  "elf_sha256": "681c13c6f3079412efb46ff17aba6afcd7d80fef293418613d772c48448bd7d4",
+  "seed_elf_sha256": "e6ba6916ee417e9efec1f4dc90a50f8ce7777f0e2ad8f976e6d2e27856072b78",
+  "profiles": [
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/681c13c6f3079412efb46ff17aba6afcd7d80fef293418613d772c48448bd7d4/comparison.json",
+      "sha256": "b57a73ce95d29adefd3b19fd08d3cd203b9d131f3caa4ccf3e4c5c3aa6572af7",
+      "status": "PASS",
+      "cases": 2
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/681c13c6f3079412efb46ff17aba6afcd7d80fef293418613d772c48448bd7d4/failures.json",
+      "sha256": "149a43025fc2251438e6ceceef7a834e8960799540a08b72d02251b27d2d4b88",
+      "status": "PASS",
+      "cases": 3
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/681c13c6f3079412efb46ff17aba6afcd7d80fef293418613d772c48448bd7d4/powerloss.json",
+      "sha256": "09ff61d1b686f8b01da57496350d8aeadede03414d2192307755fad081629342",
+      "status": "PASS",
+      "cases": 2
+    }
+  ],
+  "total_cases": 7,
+  "union_distinct_original_trace_bytes": 38764,
+  "payload_bytes": 148599,
+  "percentage": 26.086312828484715,
+  "additional_seven_plus_async_direct_unique_bytes": 40322,
+  "additional_union_limits": "515 asynchronous direct cases use controlled callbacks, delay and finite synthetic FIFO/command states; not the same hardware/scheduling model as seven-case integration.",
+  "interruption_checks": [
+    {
+      "interruption": "before",
+      "matches": {
+        "stopped_persistence_match": true,
+        "stopped_observable_match": true,
+        "reboot_persistence_match": true,
+        "reboot_observable_match": true
+      },
+      "both_reboot_endpoints": "application reset entry, fixture matches, no exception"
+    },
+    {
+      "interruption": "after",
+      "matches": {
+        "stopped_persistence_match": true,
+        "stopped_observable_match": true,
+        "reboot_persistence_match": true,
+        "reboot_observable_match": true
+      },
+      "both_reboot_endpoints": "application reset entry, fixture matches, no exception"
+    }
+  ],
+  "validation_input_hashes": {
+    "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/681c13c6f3079412efb46ff17aba6afcd7d80fef293418613d772c48448bd7d4/validation-input-hashes-final.json",
+    "sha256": "a53d65698af7ecf889e6f7abe0dac7628e924039ad09d002351ba61ce1e26c5c",
+    "existing_source_runner_files": 619,
+    "linked_objects": 156,
+    "post_run_hash_mismatches": []
+  },
+  "additional_tests": [
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/context-events-681c13.json",
+      "sha256": "e2e4024bd8e02092979d55ba1d8dc6588e1afb7901da40f4ab01e2aeac67b686",
+      "status": "PASS",
+      "cases": 505
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/context-events-guards-681c13.json",
+      "sha256": "2bbde689462fae48d32ef80152126442e87acf548697afade528cf17bbf79fa3",
+      "status": "PASS",
+      "cases": 10
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/context-children-681c13.json",
+      "sha256": "5b9bab4abfcfd64c1616455170c81eae04531c3115ca76b8a8c3bcecc0002e0f",
+      "status": "PASS",
+      "cases": 740
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/semaphore-owned-681c13.json",
+      "sha256": "12f3bd763d53780856cb2f4d2db4a8ab618dc3cfd9a4c2b85dcc361e22d9ff3f",
+      "status": "PASS",
+      "cases": 12
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/iom-stable-subtype-681c13.json",
+      "sha256": "c84bf3ada211c0b5f907e393802978a64d041ff321923ea14424572e796a2682",
+      "status": "PASS",
+      "cases": 2
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/context-irq-681c13.json",
+      "sha256": "963e255bf72010b2717591f7a72167387848be70a4e715a48a3c1df8e311b7b4",
+      "status": "PASS",
+      "cases": 292
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/gpio-descriptors-681c13.json",
+      "sha256": "c5ec66644f3329a8563843644ccd0ea8af72ef5509e5a8f89bc3201051eacd97",
+      "status": "PASS",
+      "cases": 434
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/adc-context-681c13.json",
+      "sha256": "68f19a5b2e1fec600ab60c0c7769166e0b254154a6f185762a87775b96816618",
+      "status": "PASS",
+      "cases": 135
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/adc-control-681c13.json",
+      "sha256": "01080735efda455300d7fcf2eee134f1d50b3d85b99d1ed02f4b19e9e09d17d1",
+      "status": "PASS",
+      "cases": 279
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/adc-configuration-681c13.json",
+      "sha256": "3f8ca1eb64a1604f0705e859f8e75babcbe94dae96bd1c0361600ec1c5af323b",
+      "status": "PASS",
+      "cases": 93
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/adc-samples-681c13.json",
+      "sha256": "80951c65273fa152feadc7f9195b608f98644690d663d54b56ca4653c0831667",
+      "status": "PASS",
+      "cases": 988
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/adc-profile-681c13.json",
+      "sha256": "6929b6650605ac289211cd3b014930343bfec6a636af0c4b6217fac18211ed8f",
+      "status": "PASS",
+      "cases": 650
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-context-681c13.json",
+      "sha256": "64c3f777db3ff322fd1738231223db89adef600ae58dccb93501aca9e48a5db9",
+      "status": "PASS",
+      "cases": 1040
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/uart-startup-state-681c13.json",
+      "sha256": "f5f92d9da793d31aa7a19c7d43dd59b0d68e64a589cb320d30cee30ae4ddba33",
+      "status": "PASS",
+      "cases": 1
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/service-records-681c13.json",
+      "sha256": "f1e4faee54c0668b68cf93d30ebe458e2213c7bfbecf2e81da284bef3788ca68",
+      "status": "PASS",
+      "cases": 112
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/service-startup-state-681c13.json",
+      "sha256": "1e3f07d28288317286f2300a72a05e8e515ba474ce66773c83db3c064c68dc3d",
+      "status": "PASS",
+      "cases": 1
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/clock-shared-681c13.json",
+      "sha256": "dce390e64a18b56ec17beb743e80afb90b81a9b17d469fa4ba806f562803c0bb",
+      "status": "PASS",
+      "cases": 129
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/mutex-kernel-681c13.json",
+      "sha256": "95d1f33a988f1a04475f3d5d4bd0109e9bbbb70d8dcca2baee9567ae371d6513",
+      "status": "PASS",
+      "cases": 516
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/mutex-sequences-681c13.json",
+      "sha256": "c9978ce55078bc27fe319a4bb0f05a2ca61203dba14e0e6dbb93904da3dbddf3",
+      "status": "PASS",
+      "cases": 2
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/mutex-block-boundary-681c13.json",
+      "sha256": "88939d1d933412f22368ececb91ba13afe3e547dec6378673a6c5887a4e41c51",
+      "status": "PASS",
+      "cases": 4
+    }
+  ],
+  "additional_aux_runner": {
+    "path": "g2/components/bootloader/initializer_callbacks/verify_context_events_guards.py",
+    "sha256": "ebdef17625de7ede42a48f979fcbc5771d9f41d4f1e4cd107d93cb86d25c0590"
+  },
+  "trace_byte_audit": {
+    "method": "Deduplicate byte addresses; FP64 second-halfword NOP logs overlap modeled slots. Synthetic callback stub instructions are excluded from original trace.",
+    "patched_fp_second_halfword_records": [
+      {
+        "profile": "comparison.json",
+        "pc": "0x43004a",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "comparison.json",
+        "pc": "0x43004e",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "comparison.json",
+        "pc": "0x430056",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "comparison.json",
+        "pc": "0x43005a",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "comparison.json",
+        "pc": "0x4301a0",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "comparison.json",
+        "pc": "0x4301a4",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "failures.json",
+        "pc": "0x43004a",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "failures.json",
+        "pc": "0x43004e",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "failures.json",
+        "pc": "0x430056",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "failures.json",
+        "pc": "0x43005a",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "failures.json",
+        "pc": "0x4301a0",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "failures.json",
+        "pc": "0x4301a4",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "powerloss.json",
+        "pc": "0x43004a",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "powerloss.json",
+        "pc": "0x43004e",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "powerloss.json",
+        "pc": "0x430056",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "powerloss.json",
+        "pc": "0x43005a",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "powerloss.json",
+        "pc": "0x4301a0",
+        "recorded": "00bf"
+      },
+      {
+        "profile": "powerloss.json",
+        "pc": "0x4301a4",
+        "recorded": "00bf"
+      }
+    ]
+  },
+  "limits": [
+    "Relocated source-linked test ELF, not a complete bootable/byte-identical payload.",
+    "Synthetic MMIO, scheduler, ADC and resident-ROM operations; no physical partial-write or IRQ/timing proof.",
+    "Six original FP64 effects emulated; union deduplicates byte addresses, including overlapping second-halfword logs.",
+    "Direct lower callbacks controlled; stable-subtype test is conditional model sensitivity, not hardware behavior.",
+    "ADC sample/lifecycle with explicitFIFO and reused native clock release plus context/channel/control FP32 and initializer/reset and native INFO selector/dispatch/thunk execute in shared startup, with explicit zero-valued resident ROM48 word fixture. No real factory/OTP behavior proof. Stock97 GPIO descriptors do not take callback registration; direct GPIO IRQ fixtures model28 zero-filled original stack bytes because Unicorn misexecutes its IT/STM carry loop. No such model is used by the seven integration cases. Asynchronous IOM IRQ delivery is also tested directly, not reached by shared startup.",
+    "UART constructor/downstream with native borrowed ring/baud/config/status/NVIC and reused power/class4 children execute. Class6 enabled PLL behavior is compared by129 direct fixture cases; physical PLL lock, DMA, IRQ delivery/drain and hardware timing unproved. Store-width recorder projects actual transferred bytes; raw failed-run and intermediate recorder edit-error logs retained. Focused shared-reset state verifies all1136 pool bytes and row flags. ADC sample/lifecycle with explicitFIFO and reused native clock release plus context/channel/control FP32 and initializer/reset and native INFO selector/dispatch/thunk execute in shared startup, with explicit zero-valued resident ROM48 word fixture. No real factory/OTP behavior proof. Stock97 GPIO descriptors do not take callback registration; direct GPIO IRQ fixtures model28 zero-filled original stack bytes because Unicorn misexecutes its IT/STM carry loop. No such model is used by the seven integration cases. Asynchronous IOM IRQ delivery is also tested directly, not reached by shared startup.",
+    "Native mutex source1052 mapped body bytes:184 reused wrapper bytes +868 new kernel/priority helper bytes.516 direct comparisons visit1002 bytes;2 persistent native sequences use synthetic CURRENT selection;4 actual block-setup cases stop before PendSV request body/task restoration. Recursive/inheritance cases are direct-suite coverage, not reached by normal integration. No actual cancellation/delete/drain/global-scheduler proof. Service-only test seam and separate CMDQ relocated address repairs preserve failed evidence and do not modify candidate ELF/main runner imports."
+  ],
+  "alignment": {
+    "status": "PASS",
+    "mappings": 407,
+    "receipt": "g2/build/bootloader-completion/source-image-compatible/snapshots/681c13c6f3079412efb46ff17aba6afcd7d80fef293418613d772c48448bd7d4/alignment.json"
+  },
+  "source_manifest": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/source-image-manifest-681c13.json",
+  "remaining_providers": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/remaining-providers-current.md",
+  "separate_module_regressions": [
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/cmdq-ownership-isolated-term-681c13.json",
+      "sha256": "408312ed8693df66308f25ee78b41d8ba65aa8c1de918345d066a91e8129d77f",
+      "cases": 53,
+      "shared_image_cases": 40,
+      "separate_term_module_cases": 13,
+      "module_sha256": "9b4eff994546638effc18cc8de176a9ab20ca9b5f5ed2efc76fa7fe32e2fbbed",
+      "provenance": "g2/build/bootloader-completion/source-image-compatible/snapshots/681c13c6f3079412efb46ff17aba6afcd7d80fef293418613d772c48448bd7d4/term-module-provenance.json",
+      "limits": "Separate termination supplement relinked to current critical-save16c45;13 cases are not shared-image linkage."
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+[
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/verify.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/idle-native-integrated/badad5a92beec12dd1f5389033d51db87aa8d5bb77cb3410a7e465f2aa649b57/candidate.elf"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 260 {'action': 58, 'guard': 46, 'state': 136, 'delete': 156, 'release': 62}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/verify_native_teardown.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/idle-native-integrated/badad5a92beec12dd1f5389033d51db87aa8d5bb77cb3410a7e465f2aa649b57/candidate.elf"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 512 {'action': 52, 'guard': 46, 'state': 124, 'delete': 136, 'release': 62, 'dfu': 24, 'manager': 22}\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/verify_selector3.py",
+      "--candidate",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/idle-native-integrated/badad5a92beec12dd1f5389033d51db87aa8d5bb77cb3410a7e465f2aa649b57/candidate.elf",
+      "--frozen-base",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/idle-native-integrated/badad5a92beec12dd1f5389033d51db87aa8d5bb77cb3410a7e465f2aa649b57/validation/selector3.json"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/run_oracle.py\", line 26, in <module>\n    runpy.run_path(str(script),run_name='__main__')\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 294, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/verify_selector3.py\", line 158, in <module>\n    if __name__=='__main__':main()\n                            ~~~~^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/verify_selector3.py\", line 112, in main\n    bindings=json.loads(BINDINGS.read_text());assert bindings['slots']['3']=='opencfw_spot_pcm22_transition3' and bindings['source_mask']=='0x707c10f'\n                        ~~~~~~~~~~~~~~~~~~^^\n  File \"/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_local.py\", line 546, in read_text\n    return PathBase.read_text(self, encoding, errors, newline)\n           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_abc.py\", line 632, in read_text\n    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:\n         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_local.py\", line 537, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/native-selector-bindings.json'\n"
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/verify_selector17.py",
+      "--candidate",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/idle-native-integrated/badad5a92beec12dd1f5389033d51db87aa8d5bb77cb3410a7e465f2aa649b57/candidate.elf",
+      "--frozen-base",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/runtime-action-integrated/c711fbf4b73d29afd014102d99aaf37d1a1635d8505db519564076dd79e9a20b/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/idle-native-integrated/badad5a92beec12dd1f5389033d51db87aa8d5bb77cb3410a7e465f2aa649b57/validation/selector17.json"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/run_oracle.py\", line 26, in <module>\n    runpy.run_path(str(script),run_name='__main__')\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 294, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/verify_selector17.py\", line 154, in <module>\n    if __name__=='__main__':main()\n                            ~~~~^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/verify_selector17.py\", line 119, in main\n    table=json.loads(SELECTORS.read_text());binding=json.loads(BASE_BINDINGS.read_text());assert table['output_bytes']==1371 and binding['source_mask']=='0x707c10f'\n                                                               ~~~~~~~~~~~~~~~~~~~~~~~^^\n  File \"/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_local.py\", line 546, in read_text\n    return PathBase.read_text(self, encoding, errors, newline)\n           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_abc.py\", line 632, in read_text\n    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:\n         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.13/3.13.15/Frameworks/Python.framework/Versions/3.13/lib/python3.13/pathlib/_local.py\", line 537, in open\n    return io.open(self, mode, buffering, encoding, errors, newline)\n           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/native-selector-bindings.json'\n"
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/verify_idle.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/idle-native-integrated/badad5a92beec12dd1f5389033d51db87aa8d5bb77cb3410a7e465f2aa649b57/candidate.elf",
+      "--cleanup-addon",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/idle-native-integrated/badad5a92beec12dd1f5389033d51db87aa8d5bb77cb3410a7e465f2aa649b57/candidate.elf"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/run_oracle.py\", line 26, in <module>\n    runpy.run_path(str(script),run_name='__main__')\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 294, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/verify_idle.py\", line 69, in <module>\n    x,y=run(False,f),run(True,f)\n        ~~~^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/verify_idle.py\", line 17, in run\n    for lo,sz in [(0x10000,0x10000),(0x30000,0x30000),(0x410000,0x30000),(0x20000000,0x40000),(0xe000e000,0x1000)]:u.mem_map(lo,sz)\n                                                                                                                   ~~~~~~~~~^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/run_oracle.py\", line 21, in map_slot\n    return original_map(address,size,*args,**kw)\n  File \"/Users/kalani/.local/share/opencfw/venv/lib/python3.13/site-packages/unicorn/unicorn_py3/unicorn.py\", line 834, in mem_map\n    raise UcError(status)\nunicorn.unicorn_py3.unicorn.UcError: Invalid memory mapping (UC_ERR_MAP)\n"
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/verify_heap_drain.py",
+      "--candidate-elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/idle-native-integrated/badad5a92beec12dd1f5389033d51db87aa8d5bb77cb3410a7e465f2aa649b57/candidate.elf",
+      "--cleanup-addon",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/idle-native-integrated/badad5a92beec12dd1f5389033d51db87aa8d5bb77cb3410a7e465f2aa649b57/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/idle-native-integrated/badad5a92beec12dd1f5389033d51db87aa8d5bb77cb3410a7e465f2aa649b57/validation/heap-drain.json"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/run_oracle.py\", line 26, in <module>\n    runpy.run_path(str(script),run_name='__main__')\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 294, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/verify_heap_drain.py\", line 41, in <module>\n    assert candidate_hash == EXPECTED_CANDIDATE, candidate_hash\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: badad5a92beec12dd1f5389033d51db87aa8d5bb77cb3410a7e465f2aa649b57\n"
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/verify_pendsv.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/idle-native-integrated/badad5a92beec12dd1f5389033d51db87aa8d5bb77cb3410a7e465f2aa649b57/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/idle-native-integrated/badad5a92beec12dd1f5389033d51db87aa8d5bb77cb3410a7e465f2aa649b57/validation/pendsv.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS actual non-FP PendSV save/select/restore 4 cases\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/verify_allocator.py",
+      "--candidate-elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/idle-native-integrated/badad5a92beec12dd1f5389033d51db87aa8d5bb77cb3410a7e465f2aa649b57/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/idle-native-integrated/badad5a92beec12dd1f5389033d51db87aa8d5bb77cb3410a7e465f2aa649b57/validation/allocator.json"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/run_oracle.py\", line 26, in <module>\n    runpy.run_path(str(script),run_name='__main__')\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 294, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/verify_allocator.py\", line 39, in <module>\n    assert candidate_hash == EXPECTED_CANDIDATE, candidate_hash\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: badad5a92beec12dd1f5389033d51db87aa8d5bb77cb3410a7e465f2aa649b57\n"
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-events-a/verify_event_a_sequence8_timer.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/idle-native-integrated/badad5a92beec12dd1f5389033d51db87aa8d5bb77cb3410a7e465f2aa649b57/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/idle-native-integrated/badad5a92beec12dd1f5389033d51db87aa8d5bb77cb3410a7e465f2aa649b57/validation/regressions/sequence8.json"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/run_oracle.py\", line 26, in <module>\n    runpy.run_path(str(script),run_name='__main__')\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 294, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-events-a/verify_event_a_sequence8_timer.py\", line 114, in <module>\n    stock=run(True,case);source=run(False,case)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-events-a/verify_event_a_sequence8_timer.py\", line 73, in run\n    u.mem_map(lo,size)\n    ~~~~~~~~~^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/run_oracle.py\", line 21, in map_slot\n    return original_map(address,size,*args,**kw)\n  File \"/Users/kalani/.local/share/opencfw/venv/lib/python3.13/site-packages/unicorn/unicorn_py3/unicorn.py\", line 834, in mem_map\n    raise UcError(status)\nunicorn.unicorn_py3.unicorn.UcError: Invalid memory mapping (UC_ERR_MAP)\n"
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-events-a/verify_event_a_root_handlers.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/idle-native-integrated/badad5a92beec12dd1f5389033d51db87aa8d5bb77cb3410a7e465f2aa649b57/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/idle-native-integrated/badad5a92beec12dd1f5389033d51db87aa8d5bb77cb3410a7e465f2aa649b57/validation/regressions/sequence02.json"
+    ],
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/run_oracle.py\", line 26, in <module>\n    runpy.run_path(str(script),run_name='__main__')\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<frozen runpy>\", line 294, in run_path\n  File \"<frozen runpy>\", line 98, in _run_module_code\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-events-a/verify_event_a_root_handlers.py\", line 158, in <module>\n    original=run(True,selector,timer_enabled,cache_enabled,\n                 service_state,cached_current)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-events-a/verify_event_a_root_handlers.py\", line 107, in run\n    u.mem_map(lo,size)\n    ~~~~~~~~~^^^^^^^^^\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/run_oracle.py\", line 21, in map_slot\n    return original_map(address,size,*args,**kw)\n  File \"/Users/kalani/.local/share/opencfw/venv/lib/python3.13/site-packages/unicorn/unicorn_py3/unicorn.py\", line 834, in mem_map\n    raise UcError(status)\nunicorn.unicorn_py3.unicorn.UcError: Invalid memory mapping (UC_ERR_MAP)\n"
+  },
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/idle-native-integrated/run_oracle.py",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm2_2-handlers-14-18/verify.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/idle-native-integrated/badad5a92beec12dd1f5389033d51db87aa8d5bb77cb3410a7e465f2aa649b57/candidate.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/idle-native-integrated/badad5a92beec12dd1f5389033d51db87aa8d5bb77cb3410a7e465f2aa649b57/validation/regressions/transitions1418.json"
+    ],
+    "returncode": 0,
+    "stdout": "PASS 56 handler/fixture pairs {14: 210, 18: 464} stock instruction bytes visited\n",
+    "stderr": ""
+  }
+]

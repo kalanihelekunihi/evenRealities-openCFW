@@ -1,0 +1,1184 @@
+{
+  "status": "PASS",
+  "cases": 16,
+  "comparisons": [
+    {
+      "name": "null_handle",
+      "mode": 1,
+      "fixture": {
+        "handle": 0
+      },
+      "result": {
+        "return": 2,
+        "events": [],
+        "sp": 537063424,
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "first_read_error",
+      "mode": 1,
+      "fixture": {
+        "reads": [
+          [
+            7,
+            0
+          ]
+        ]
+      },
+      "result": {
+        "return": 7,
+        "events": [
+          [
+            "delay"
+          ],
+          [
+            "read",
+            5,
+            0,
+            0,
+            1,
+            7,
+            null
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mx25u25643g_quad_enable",
+            1313,
+            "Failed to read status register 2\n"
+          ]
+        ],
+        "sp": 537063424,
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "already_clear",
+      "mode": 0,
+      "fixture": {
+        "reads": [
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "result": {
+        "return": 0,
+        "events": [
+          [
+            "delay"
+          ],
+          [
+            "read",
+            5,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mx25u25643g_quad_enable",
+            1322,
+            "QE bit already in desired state\n"
+          ]
+        ],
+        "sp": 537063424,
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "already_set",
+      "mode": 1,
+      "fixture": {
+        "reads": [
+          [
+            0,
+            64
+          ]
+        ]
+      },
+      "result": {
+        "return": 0,
+        "events": [
+          [
+            "delay"
+          ],
+          [
+            "read",
+            5,
+            0,
+            0,
+            1,
+            0,
+            64
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mx25u25643g_quad_enable",
+            1322,
+            "QE bit already in desired state\n"
+          ]
+        ],
+        "sp": 537063424,
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "reserved_bits_force_rewrite",
+      "mode": 0,
+      "fixture": {
+        "reads": [
+          [
+            0,
+            28
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "result": {
+        "return": 0,
+        "events": [
+          [
+            "delay"
+          ],
+          [
+            "read",
+            5,
+            0,
+            0,
+            1,
+            0,
+            28
+          ],
+          [
+            "wren",
+            0
+          ],
+          [
+            "write",
+            1,
+            0,
+            0,
+            "00",
+            0
+          ],
+          [
+            "delay"
+          ],
+          [
+            "read",
+            5,
+            0,
+            0,
+            1,
+            0,
+            0
+          ]
+        ],
+        "sp": 537063424,
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "wren_error",
+      "mode": 1,
+      "fixture": {
+        "reads": [
+          [
+            0,
+            0
+          ]
+        ],
+        "wren_status": 9
+      },
+      "result": {
+        "return": 9,
+        "events": [
+          [
+            "delay"
+          ],
+          [
+            "read",
+            5,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            "wren",
+            9
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mx25u25643g_quad_enable",
+            1329,
+            "Write enable failed before setting QE\n"
+          ]
+        ],
+        "sp": 537063424,
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "write_set",
+      "mode": 1,
+      "fixture": {
+        "reads": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            64
+          ]
+        ]
+      },
+      "result": {
+        "return": 0,
+        "events": [
+          [
+            "delay"
+          ],
+          [
+            "read",
+            5,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            "wren",
+            0
+          ],
+          [
+            "write",
+            1,
+            0,
+            0,
+            "40",
+            0
+          ],
+          [
+            "delay"
+          ],
+          [
+            "read",
+            5,
+            0,
+            0,
+            1,
+            0,
+            64
+          ]
+        ],
+        "sp": 537063424,
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "write_clear",
+      "mode": 0,
+      "fixture": {
+        "reads": [
+          [
+            0,
+            64
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "result": {
+        "return": 0,
+        "events": [
+          [
+            "delay"
+          ],
+          [
+            "read",
+            5,
+            0,
+            0,
+            1,
+            0,
+            64
+          ],
+          [
+            "wren",
+            0
+          ],
+          [
+            "write",
+            1,
+            0,
+            0,
+            "00",
+            0
+          ],
+          [
+            "delay"
+          ],
+          [
+            "read",
+            5,
+            0,
+            0,
+            1,
+            0,
+            0
+          ]
+        ],
+        "sp": 537063424,
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "clear_reserved_bits",
+      "mode": 1,
+      "fixture": {
+        "reads": [
+          [
+            0,
+            28
+          ],
+          [
+            0,
+            64
+          ]
+        ]
+      },
+      "result": {
+        "return": 0,
+        "events": [
+          [
+            "delay"
+          ],
+          [
+            "read",
+            5,
+            0,
+            0,
+            1,
+            0,
+            28
+          ],
+          [
+            "wren",
+            0
+          ],
+          [
+            "write",
+            1,
+            0,
+            0,
+            "40",
+            0
+          ],
+          [
+            "delay"
+          ],
+          [
+            "read",
+            5,
+            0,
+            0,
+            1,
+            0,
+            64
+          ]
+        ],
+        "sp": 537063424,
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "write_error",
+      "mode": 1,
+      "fixture": {
+        "reads": [
+          [
+            0,
+            0
+          ]
+        ],
+        "write_status": 3
+      },
+      "result": {
+        "return": 3,
+        "events": [
+          [
+            "delay"
+          ],
+          [
+            "read",
+            5,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            "wren",
+            0
+          ],
+          [
+            "write",
+            1,
+            0,
+            0,
+            "40",
+            3
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mx25u25643g_quad_enable",
+            1344,
+            "Failed to write status register 2\n"
+          ]
+        ],
+        "sp": 537063424,
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "verify_read_error",
+      "mode": 1,
+      "fixture": {
+        "reads": [
+          [
+            0,
+            0
+          ],
+          [
+            4,
+            0
+          ]
+        ]
+      },
+      "result": {
+        "return": 4,
+        "events": [
+          [
+            "delay"
+          ],
+          [
+            "read",
+            5,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            "wren",
+            0
+          ],
+          [
+            "write",
+            1,
+            0,
+            0,
+            "40",
+            0
+          ],
+          [
+            "delay"
+          ],
+          [
+            "read",
+            5,
+            0,
+            0,
+            1,
+            4,
+            null
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mx25u25643g_quad_enable",
+            1354,
+            "Failed to verify QE bit\n"
+          ]
+        ],
+        "sp": 537063424,
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "verify_mismatch_set",
+      "mode": 1,
+      "fixture": {
+        "reads": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "result": {
+        "return": 1,
+        "events": [
+          [
+            "delay"
+          ],
+          [
+            "read",
+            5,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            "wren",
+            0
+          ],
+          [
+            "write",
+            1,
+            0,
+            0,
+            "40",
+            0
+          ],
+          [
+            "delay"
+          ],
+          [
+            "read",
+            5,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mx25u25643g_quad_enable",
+            1360,
+            "Failed to %s QE bit\n",
+            "set"
+          ]
+        ],
+        "sp": 537063424,
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "verify_mismatch_clear",
+      "mode": 0,
+      "fixture": {
+        "reads": [
+          [
+            0,
+            64
+          ],
+          [
+            0,
+            64
+          ]
+        ]
+      },
+      "result": {
+        "return": 1,
+        "events": [
+          [
+            "delay"
+          ],
+          [
+            "read",
+            5,
+            0,
+            0,
+            1,
+            0,
+            64
+          ],
+          [
+            "wren",
+            0
+          ],
+          [
+            "write",
+            1,
+            0,
+            0,
+            "00",
+            0
+          ],
+          [
+            "delay"
+          ],
+          [
+            "read",
+            5,
+            0,
+            0,
+            1,
+            0,
+            64
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mx25u25643g_quad_enable",
+            1360,
+            "Failed to %s QE bit\n",
+            "clear"
+          ]
+        ],
+        "sp": 537063424,
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "non_boolean_mode_2",
+      "mode": 2,
+      "fixture": {
+        "reads": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            64
+          ]
+        ]
+      },
+      "result": {
+        "return": 1,
+        "events": [
+          [
+            "delay"
+          ],
+          [
+            "read",
+            5,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            "wren",
+            0
+          ],
+          [
+            "write",
+            1,
+            0,
+            0,
+            "40",
+            0
+          ],
+          [
+            "delay"
+          ],
+          [
+            "read",
+            5,
+            0,
+            0,
+            1,
+            0,
+            64
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mx25u25643g_quad_enable",
+            1360,
+            "Failed to %s QE bit\n",
+            "set"
+          ]
+        ],
+        "sp": 537063424,
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "non_boolean_mode_ff",
+      "mode": 255,
+      "fixture": {
+        "reads": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            64
+          ]
+        ]
+      },
+      "result": {
+        "return": 1,
+        "events": [
+          [
+            "delay"
+          ],
+          [
+            "read",
+            5,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            "wren",
+            0
+          ],
+          [
+            "write",
+            1,
+            0,
+            0,
+            "40",
+            0
+          ],
+          [
+            "delay"
+          ],
+          [
+            "read",
+            5,
+            0,
+            0,
+            1,
+            0,
+            64
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mx25u25643g_quad_enable",
+            1360,
+            "Failed to %s QE bit\n",
+            "set"
+          ]
+        ],
+        "sp": 537063424,
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "non_boolean_mode_100",
+      "mode": 256,
+      "fixture": {
+        "reads": [
+          [
+            0,
+            0
+          ],
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "result": {
+        "return": 0,
+        "events": [
+          [
+            "delay"
+          ],
+          [
+            "read",
+            5,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mx25u25643g_quad_enable",
+            1322,
+            "QE bit already in desired state\n"
+          ]
+        ],
+        "sp": 537063424,
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  ],
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_elf_sha256": "93994cf07a4a5e583129b490ad8df21d2eba3b3a92f5c7c197c92b9b22b67d60",
+  "source_sha256": {
+    "g2/components/bootloader/nor_mspi_power/serial_mode_switch.c": "ee6f33ef2491749b7040e4a0e9d30124446a9eaa427ad8a6dbc1bc30032b7a8a",
+    "g2/components/bootloader/nor_mspi_power/serial_mode_switch.h": "1fbc334e3375a9c517c6bf56fdcf24971f61637458e846a76c6b29f8fe1af61d",
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/nor-mode-switch/Makefile": "88706121330c0af47ac3a61127537288aee9a24d861c641f99725938829b02fc",
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/nor-mode-switch/mode_switch.ld": "142fce3163c2839e421b875260d71d11c26b487830009692bcca94c25a030322",
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/nor-mode-switch/verify_mode_switch.py": "c465b5f42f65accc19430d5f9a632adffabfa2f42cb6ba65a57f7085d74455ee"
+  },
+  "distinct_original_trace_bytes": 414,
+  "original_trace": {
+    "0x420c5c": "38b5",
+    "0x420c5e": "84b0",
+    "0x420c60": "0500",
+    "0x420c62": "dff8ac03",
+    "0x420c66": "0068",
+    "0x420c68": "0028",
+    "0x420c6a": "01d1",
+    "0x420c6c": "0220",
+    "0x420c6e": "c2e0",
+    "0x420df6": "05b0",
+    "0x420df8": "30bd",
+    "0x420c70": "fff7c0fd",
+    "0x420c74": "0120",
+    "0x420c76": "0090",
+    "0x420c78": "03ab",
+    "0x420c7a": "0022",
+    "0x420c7c": "0021",
+    "0x420c7e": "0520",
+    "0x420c80": "fff7b8fc",
+    "0x420c84": "0400",
+    "0x420c86": "002c",
+    "0x420c88": "10d0",
+    "0x420c8a": "dff8e803",
+    "0x420c8e": "0190",
+    "0x420c90": "40f22150",
+    "0x420c94": "0090",
+    "0x420c96": "dff8e033",
+    "0x420c9a": "dff89423",
+    "0x420c9e": "dff89413",
+    "0x420ca2": "0220",
+    "0x420ca4": "f6f713fd",
+    "0x420ca8": "2000",
+    "0x420caa": "a4e0",
+    "0x420cac": "9df80c00",
+    "0x420cb0": "c0b2",
+    "0x420cb2": "8009",
+    "0x420cb4": "10f00100",
+    "0x420cb8": "9df80c10",
+    "0x420cbc": "11f03c0f",
+    "0x420cc0": "01d0",
+    "0x420cc6": "0021",
+    "0x420cc8": "2a00",
+    "0x420cca": "c0b2",
+    "0x420ccc": "d2b2",
+    "0x420cce": "9042",
+    "0x420cd0": "13d1",
+    "0x420cd2": "c9b2",
+    "0x420cd4": "0029",
+    "0x420cd6": "10d1",
+    "0x420cd8": "dff8a003",
+    "0x420cdc": "0190",
+    "0x420cde": "40f22a50",
+    "0x420ce2": "0090",
+    "0x420ce4": "dff89033",
+    "0x420ce8": "dff84423",
+    "0x420cec": "dff84413",
+    "0x420cf0": "0220",
+    "0x420cf2": "f6f7ecfc",
+    "0x420cf6": "0020",
+    "0x420cf8": "7de0",
+    "0x420cc2": "0121",
+    "0x420cc4": "00e0",
+    "0x420cfa": "fff743fe",
+    "0x420cfe": "0400",
+    "0x420d00": "002c",
+    "0x420d02": "0ed0",
+    "0x420d22": "2800",
+    "0x420d24": "c0b2",
+    "0x420d26": "0028",
+    "0x420d28": "06d0",
+    "0x420d38": "9df80c00",
+    "0x420d3c": "10f0bf00",
+    "0x420d40": "8df80c00",
+    "0x420d44": "9df80c00",
+    "0x420d48": "10f0c300",
+    "0x420d4c": "8df80c00",
+    "0x420d50": "0120",
+    "0x420d52": "0090",
+    "0x420d54": "03ab",
+    "0x420d56": "0022",
+    "0x420d58": "0021",
+    "0x420d5a": "0120",
+    "0x420d5c": "fff79ffc",
+    "0x420d60": "0400",
+    "0x420d62": "002c",
+    "0x420d64": "0dd0",
+    "0x420d82": "fff737fd",
+    "0x420d86": "0120",
+    "0x420d88": "0090",
+    "0x420d8a": "03ab",
+    "0x420d8c": "0022",
+    "0x420d8e": "0021",
+    "0x420d90": "0520",
+    "0x420d92": "fff72ffc",
+    "0x420d96": "0400",
+    "0x420d98": "002c",
+    "0x420d9a": "0cd0",
+    "0x420db6": "9df80c00",
+    "0x420dba": "c0b2",
+    "0x420dbc": "8009",
+    "0x420dbe": "10f00100",
+    "0x420dc2": "2900",
+    "0x420dc4": "c0b2",
+    "0x420dc6": "c9b2",
+    "0x420dc8": "8842",
+    "0x420dca": "13d0",
+    "0x420df4": "0020",
+    "0x420d04": "dff87803",
+    "0x420d08": "0190",
+    "0x420d0a": "40f23150",
+    "0x420d0e": "0090",
+    "0x420d10": "dff86433",
+    "0x420d14": "c64a",
+    "0x420d16": "c749",
+    "0x420d18": "0220",
+    "0x420d1a": "f6f7d8fc",
+    "0x420d1e": "2000",
+    "0x420d20": "69e0",
+    "0x420d2a": "9df80c00",
+    "0x420d2e": "50f04000",
+    "0x420d32": "8df80c00",
+    "0x420d36": "05e0",
+    "0x420d66": "dff81c03",
+    "0x420d6a": "0190",
+    "0x420d6c": "4ff4a860",
+    "0x420d70": "0090",
+    "0x420d72": "c14b",
+    "0x420d74": "ae4a",
+    "0x420d76": "af49",
+    "0x420d78": "0220",
+    "0x420d7a": "f6f7a8fc",
+    "0x420d7e": "2000",
+    "0x420d80": "39e0",
+    "0x420d9c": "ba48",
+    "0x420d9e": "0190",
+    "0x420da0": "40f24a50",
+    "0x420da4": "0090",
+    "0x420da6": "b44b",
+    "0x420da8": "a14a",
+    "0x420daa": "a249",
+    "0x420dac": "0220",
+    "0x420dae": "f6f78efc",
+    "0x420db2": "2000",
+    "0x420db4": "1fe0",
+    "0x420dcc": "edb2",
+    "0x420dce": "002d",
+    "0x420dd0": "01d0",
+    "0x420dd2": "66a0",
+    "0x420dd4": "00e0",
+    "0x420dd8": "0290",
+    "0x420dda": "ad48",
+    "0x420ddc": "0190",
+    "0x420dde": "4ff4aa60",
+    "0x420de2": "0090",
+    "0x420de4": "a44b",
+    "0x420de6": "924a",
+    "0x420de8": "9249",
+    "0x420dea": "0220",
+    "0x420dec": "f6f76ffc",
+    "0x420df0": "0120",
+    "0x420df2": "00e0",
+    "0x420dd6": "ad48"
+  },
+  "limits": [
+    "Locked 0x420c5c instructions execute against source compiled as a separate ARM object; delay, status transfer, WREN, status write, and logger are deterministic synthetic callbacks at matching interfaces.",
+    "The handle slot is the locked literal target 0x200270dc. NOR status bytes and lower-provider return values are fixture inputs; no physical flash or MSPI hardware is accessed.",
+    "The delay provider's raw semantics are not a measured physical duration. This test does not establish serial-mode electrical timing, flash acceptance, XIP execution, full-image linkage, or byte identity."
+  ]
+}

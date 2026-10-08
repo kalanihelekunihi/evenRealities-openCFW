@@ -1,0 +1,15 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0042a036 <.data+0x1a036>:
+  42a036:	b580      	push	{r7, lr}
+  42a038:	f8df 0510 	ldr.w	r0, [pc, #1296]	@ 0x42a54c
+  42a03c:	7800      	ldrb	r0, [r0, #0]
+  42a03e:	2800      	cmp	r0, #0
+  42a040:	d001      	beq.n	0x42a046
+  42a042:	f7ff feaf 	bl	0x429da4
+  42a046:	2000      	movs	r0, #0
+  42a048:	bd02      	pop	{r1, pc}

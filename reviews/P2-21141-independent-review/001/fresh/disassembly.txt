@@ -1,0 +1,55 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmppkq4045i/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+004809c4 <.text>:
+  4809c4:	b538      	push	{r3, r4, r5, lr}
+  4809c6:	000c      	movs	r4, r1
+  4809c8:	b2c0      	uxtb	r0, r0
+  4809ca:	2800      	cmp	r0, #0
+  4809cc:	d00c      	beq.n	4809e8 <.text+0x24>
+  4809ce:	2802      	cmp	r0, #2
+  4809d0:	d02f      	beq.n	480a32 <.text+0x6e>
+  4809d2:	d323      	bcc.n	480a1c <.text+0x58>
+  4809d4:	2804      	cmp	r0, #4
+  4809d6:	f000 80c6 	beq.w	480b66 <.text+0x1a2>
+  4809da:	d37b      	bcc.n	480ad4 <.text+0x110>
+  4809dc:	2806      	cmp	r0, #6
+  4809de:	f000 8126 	beq.w	480c2e <.text+0x26a>
+  4809e2:	f0c0 80ee 	bcc.w	480bc2 <.text+0x1fe>
+  4809e6:	e134      	b.n	480c52 <.text+0x28e>
+  4809e8:	f8df 04c4 	ldr.w	r0, [pc, #1220]	@ 480eb0 <.text+0x4ec>
+  4809ec:	6801      	ldr	r1, [r0, #0]
+  4809ee:	9100      	str	r1, [sp, #0]
+  4809f0:	9900      	ldr	r1, [sp, #0]
+  4809f2:	0949      	lsrs	r1, r1, #5
+  4809f4:	0149      	lsls	r1, r1, #5
+  4809f6:	9100      	str	r1, [sp, #0]
+  4809f8:	2c00      	cmp	r4, #0
+  4809fa:	d007      	beq.n	480a0c <.text+0x48>
+  4809fc:	7821      	ldrb	r1, [r4, #0]
+  4809fe:	2901      	cmp	r1, #1
+  480a00:	d104      	bne.n	480a0c <.text+0x48>
+  480a02:	9900      	ldr	r1, [sp, #0]
+  480a04:	f051 0105 	orrs.w	r1, r1, #5
+  480a08:	9100      	str	r1, [sp, #0]
+  480a0a:	e003      	b.n	480a14 <.text+0x50>
+  480a0c:	9900      	ldr	r1, [sp, #0]
+  480a0e:	f051 0119 	orrs.w	r1, r1, #25
+  480a12:	9100      	str	r1, [sp, #0]
+  480a14:	9900      	ldr	r1, [sp, #0]
+  480a16:	6001      	str	r1, [r0, #0]
+  480a18:	2000      	movs	r0, #0
+  480a1a:	bd32      	pop	{r1, r4, r5, pc}
+  480a1c:	f8df 0490 	ldr.w	r0, [pc, #1168]	@ 480eb0 <.text+0x4ec>
+  480a20:	6801      	ldr	r1, [r0, #0]
+  480a22:	9100      	str	r1, [sp, #0]
+  480a24:	9900      	ldr	r1, [sp, #0]
+  480a26:	0889      	lsrs	r1, r1, #2
+  480a28:	0089      	lsls	r1, r1, #2
+  480a2a:	9100      	str	r1, [sp, #0]
+  480a2c:	9900      	ldr	r1, [sp, #0]
+  480a2e:	6001      	str	r1, [r0, #0]
+  480a30:	e7f2      	b.n	480a18 <.text+0x54>

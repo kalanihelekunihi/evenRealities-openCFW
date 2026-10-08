@@ -1,0 +1,1 @@
+Partial/unaccepted:12exactbytes78B648..78B654,threewords1/0/0. Pointer47E614andmap21362componenthashverified. Consumerloadsallthreewords thenoverwritesmiddlestackwordwithLOW8entryR0. Pointedownership/otherconsumersunproven. No C/freeze/completenessclaim.

@@ -1,0 +1,330 @@
+{
+  "utc": "2026-10-07T13:30:00.804512+00:00",
+  "status": "PASS",
+  "role": "Validated bounded offline native startup candidate; unpromoted shared checkpoint remains129a",
+  "elf_sha256": "370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598",
+  "profiles": [
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/comparison.json",
+      "sha256": "1fc3cc7a7648f99578a69a069bcd4e6cda483207cef09fc73402fb294f24273d",
+      "cases": 2,
+      "role": "integration with existing explicit startup/logger models"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/failures.json",
+      "sha256": "cce58aec17d2f51e23d03c478c47ac8437d656ef2407bb70091c326b4af1db02",
+      "cases": 3,
+      "role": "integration with existing explicit startup/logger models"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/powerloss.json",
+      "sha256": "2de842c266bda1a7038c446227d582d02e2e1d2c09754c441656b9a66f1ef71f",
+      "cases": 2,
+      "role": "integration with existing explicit startup/logger models"
+    }
+  ],
+  "total_integration_cases": 7,
+  "additional_receipts": [
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/alignment.json",
+      "sha256": "169d5a7667e2fe35ee6fe9d56098aa05dad0eb3eeebc99f7c364334370eddc32",
+      "cases": null,
+      "role": "alignment"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/clock-config.json",
+      "sha256": "3f5a99c6d63f090e301e5cef04823de8c51e9481f333e10b38b119a02de3e38a",
+      "cases": 5896,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/clock-shared.json",
+      "sha256": "7a6c1b87be0d685492585853f7da12e4215aad066b813e866a063df507deac2c",
+      "cases": 129,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/clockmux-carry.json",
+      "sha256": "4ae4de1397025b3cd5e84ab26d0e7881e09c732c927bc8b4121718722e194ead",
+      "cases": 1024,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/clockmux-native.json",
+      "sha256": "c6627bd95ee5e1ca9b3371cf7af9c81f236ef1aa9255504be2af7c308e2d1b86",
+      "cases": 14,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/config.json",
+      "sha256": "10b81d38d72775998a40415911076df3ef32bf59bfd13b1078ef2a14856b41d9",
+      "cases": 697,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/dispatch-native.json",
+      "sha256": "a497677c9cc5322334cf6a0d13fe634385825a9af9f291c79dfb0199b9689fd0",
+      "cases": 400,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/elog_output.json",
+      "sha256": "825dcf7492ae49c4c37db6f8a46b3e0a574be011afbdc5fae48e252f36843890",
+      "cases": 494,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/elog_uart_tx.json",
+      "sha256": "978b17dcc2dd21c34b7149d37dbf2dcb5afe98d44c75cf23a9bb1f43c28ee2d7",
+      "cases": 222,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/events-native.json",
+      "sha256": "3a7673ce8a94c8c4c85e2b2617e00de449370ef73f6ce532e2de1679f5c16cab",
+      "cases": 72,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/formatter.json",
+      "sha256": "7671e5904af45e4cf5620c49b6fa68cee6451eab697ea6a484e68d3bcd051305",
+      "cases": 1778,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/generators.json",
+      "sha256": "b201a811e95541a1d64a508f1fc5554e03a88a56c2cd40fdc5b28bf82e4fe839",
+      "cases": 688,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/gx-children.json",
+      "sha256": "98d067b7ebaf38405812b96d82fd5d3de06d14ea85a8c879f46fa98a58a10301",
+      "cases": 4834,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/gx-event.json",
+      "sha256": "d0b022f9576f5ed3ac8e3deb253502d692c1e783deedcf1a9a043c6ac451427d",
+      "cases": 44,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/gx-transition.json",
+      "sha256": "266586dcd4c812ca0fcb539b7e4332c1b057d0b42c53667f7978b5ab31dffaaa",
+      "cases": 51,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/init-leaves.json",
+      "sha256": "b7a3ed31b73c844cf1b0ca44485ce1a86b95a31c7845e8b133801327dc1f1397",
+      "cases": 956,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/isr_deferred_fifo.json",
+      "sha256": "246946a469df7dc7ca4bc8fff499d1c76fa764b8a3080da235774dd02507c1a8",
+      "cases": 1,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/isr_delivery.json",
+      "sha256": "86eee8b33b25caead416118a77b2dfec61731d8f4fca59e61813f379b87e161f",
+      "cases": 1480,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/isr_public_interfaces.json",
+      "sha256": "245b2f6edfac03433181bc6b47023f9e5e7dbd72464573864d7474b2beed1e80",
+      "cases": 62,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/math.json",
+      "sha256": "acb099cf614089ee7fd7c0af69a93e1a090a1fd8cee5a8c24601d85ef4fc265a",
+      "cases": 4311,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/memory-native.json",
+      "sha256": "9c52e018dc85ceab1953d3665cdcbe4fb4f43823e69c85a5b1a1975306758415",
+      "cases": 936,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/memory.json",
+      "sha256": "0afda230e0256561be398208f7fac69cf57102462c87b3ec54c50327dbd7d8fd",
+      "cases": 936,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/mode.json",
+      "sha256": "3fc2f3dc48b8e537f0b4cabf533d98676f3b2ac7fec6f665913020b4d0969704",
+      "cases": 1394,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/mutex_block_boundary.json",
+      "sha256": "303815041a10537aac7e4db89fac3913238ce2e73b732c39faa520aa3d050a3b",
+      "cases": 4,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/mutex_kernel.json",
+      "sha256": "7cdafc1777fe77f3d59a8b8da3bdd9b8f8f5b4a013417a8753232ed8541edca8",
+      "cases": 516,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/mutex_sequences.json",
+      "sha256": "ec232d6ef2cb6ca027885bde36cea88cca9ce20dd5f5224e008cebb5bbad400d",
+      "cases": 2,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/native-config.json",
+      "sha256": "3682a36e11ebc65ca678e7a4094d86bfd92592f81955cc2ab33d695ed006f142",
+      "cases": 48,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/power-read.json",
+      "sha256": "c318a629e2e7d7caf2e71f8c685b27800b74868b77506d3e228a73a7092e177a",
+      "cases": 10,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/power20.json",
+      "sha256": "b94280119c0b78d55074a9400b322ba850e507a678595c15cd6c250fceff8c28",
+      "cases": 256,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/root-final-state.json",
+      "sha256": "92a7eb7868b73402c8d56ad641c1705f8fed3fa1c727f469aa1cf44ed735130a",
+      "cases": 1400,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/runtime-native.json",
+      "sha256": "2c1318a9638dbdf01e4caf5548f6260e2dbba762df213a5742957a738c0889ed",
+      "cases": 168,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/runtime.json",
+      "sha256": "ccf711f397cbe558834a2207ed8d1d3c025994a0ab545fabd13efff1aa5d60db",
+      "cases": 832,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/rx.json",
+      "sha256": "b812fc6df7f7e2bba30e5acc39d7be651c961466aaa1c1190b6654690aa03372",
+      "cases": 422,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/service_records.json",
+      "sha256": "57a1db931986af5ef47dd09d7fd912d1c35357c00f7e498a5f8b116ff29423e3",
+      "cases": 112,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/service_startup_state.json",
+      "sha256": "360425295c7c01ee2adc667d741b69ae75eb799888cd767f6edf516115bd7f8e",
+      "cases": 1,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/setters.json",
+      "sha256": "e59b890eeb1a02122744cd9334b3b4eae26d74325cb8424769e394f6469f9e21",
+      "cases": 192,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/shutdown.json",
+      "sha256": "05592c684ffc559709685ff9333624d9cd6272093b1e8d9e86e2674ed1dd4fcf",
+      "cases": 903,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/startup-leaves-native-copy.json",
+      "sha256": "faa0362c95f0bfc961d1bdc1e187ead3a68a78198625eb0c2eb5e4ac6f5eadc6",
+      "cases": 271,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/startup-native-copy.json",
+      "sha256": "5678139d11934cece778e2285b28f80d30350caa9d9c8dea13dfb7f7052d51fc",
+      "cases": 64,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/startup_alternatives.json",
+      "sha256": "0a138ef4dc70b68a7384bd153bd4a2ec52c2962837290cf8933bd386e55bfd2b",
+      "cases": 64,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/timer-final.json",
+      "sha256": "3bbdc2fad4326bc8e65839ec3318451e58152ee7bf7bd84426e438dd073bbf6d",
+      "cases": 864,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/ton-state.json",
+      "sha256": "30cce631be3314f047b1d91a934291a96cfe13db076413df49338e707f8b269c",
+      "cases": 796,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/ton-trim.json",
+      "sha256": "d783093679abceb4e6820092aa5ff6e1a316b2b7e9da5fc796ca41fa785aff01",
+      "cases": 124,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/wrapper.json",
+      "sha256": "9443f68d88e39d03c6d8c967bb92563e9337142ddadbc2ad010e806727e2632b",
+      "cases": 288,
+      "role": "offline regression"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/root-initialized-comparison.json",
+      "sha256": "d0af53001a41241e1159954acddfb71e5faaee27f93e815b5d560539f32334dc",
+      "cases": 1400,
+      "role": "new native comparison"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/comparison-root-handlers.json",
+      "sha256": "00dba715fbe5e9cdb62ef5ca95541af2d946564dca6626977b23a25a79498186",
+      "cases": 0,
+      "role": "new native comparison"
+    },
+    {
+      "path": "g2/build/bootloader-completion/startup-pcm22-native/370bdfaad92ffb7fca2a7e24d9950ab1ceebb071ef8238d357d6f6c722079598/validation/comparison-timer-enabled-final.json",
+      "sha256": "56174dd865753c98ce9dbe9619744c5dfa55600dee5f253bf2bffec5a5d337ac",
+      "cases": 56,
+      "role": "new native comparison"
+    }
+  ],
+  "inherited_regression_receipts": 38,
+  "additional_behavioral_suites": 8,
+  "alignment_mappings": 568,
+  "linked_objects": 197,
+  "frozen_current_inputs": 220,
+  "verified_prior_frozen_inputs": 220,
+  "verified_inherited_frozen_inputs": 902,
+  "input_manifest_sha256": "907871e2eb6e073e59449ee1d098c4d9a1e88e7bdbacb5259b6d338f53a36836",
+  "post_run_input_mismatches": [],
+  "reopened_startup_cases": 368,
+  "excluded_startup_cases": 0,
+  "limits": [
+    "Zero excluded cases applies to two1400-case root matrices; other selector/profile/temperature combinations remain unresolved.",
+    "Five observed selector entries seeded from authenticated scatter data and rebound to source by harness; full metadata relocation/initialization not proven.",
+    "Source/original root call chain compared without child-success substitutes; absent ROM40/48 and synthetic peripheral acknowledgement/readiness remain controlled.",
+    "Integration cases still use explicit startup/logger models and established FP64 instruction controls. No real timer IRQ scheduling, physical hardware timing/drain, complete source or byte equality claim.",
+    "Selected main-linker root alias0x41c4b5 remains unresolved for its broader interface. No promotion or shared campaign changes.",
+    "Selector8 successor has separate24-case proof; not included in this candidate hash."
+  ]
+}

@@ -1,0 +1,4 @@
+# Object operation continuation
+
+Partial/unaccepted;166bytesEC6A..ED10,21410 continuation32frame.454D7C(liveargs);R10=freshword[R8];47EE30(R10,R6,R7,liveR3). Fullnonzero:R5=0;ifR4nonzero,freshword[R8]&~R6stored;joinECBE. FullzeroandR5zero:R0=1;joinwithoutR10change. FullzeroandR5nonzero:ifR4nonzeroR9|=01000000hex;ifR7nonzeroR9|=04000000hex;R9|=R6;4552AE(R8+4,R9,R5,liveR3);R10=0;join.
+ECBE454DCC(liveargs). R5zero returnsfullR10snapshot,nothighbytemasked. R5nonzero:fullhelperresultzero→4420BC(liveargs);then455ACA(liveargs)→R10. Bit25set skipssecondlockedsection. Bit25clear→4420D0(liveargs);R10=freshword[R8];second47EE30(R10,R6,R7,liveR3);fullnonzeroANDR4nonzero→freshword[R8]&~R6storedviaR6;otherwiseunchanged. R0=1;4420E8(liveargs). BothR5nonzeropathsR10&=00FFFFFF;returnR0=R10. POP R4/R5/R6/R7/R8/R9/R10/PC32 restoresframe. Returnedfreshsnapshotcanprecedeconditionalclear;do notsubstitutefinalword. No C/freeze/completenessclaim;helpersemanticsunresolved.

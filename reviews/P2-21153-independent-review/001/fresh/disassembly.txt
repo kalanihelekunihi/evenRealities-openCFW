@@ -1,0 +1,45 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpeob3vrvc/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00480d06 <.text>:
+  480d06:	f114 010c 	adds.w	r1, r4, #12
+  480d0a:	680a      	ldr	r2, [r1, #0]
+  480d0c:	f432 427f 	bics.w	r2, r2, #65280	@ 0xff00
+  480d10:	600a      	str	r2, [r1, #0]
+  480d12:	f114 010c 	adds.w	r1, r4, #12
+  480d16:	466a      	mov	r2, sp
+  480d18:	7812      	ldrb	r2, [r2, #0]
+  480d1a:	680b      	ldr	r3, [r1, #0]
+  480d1c:	f362 0307 	bfi	r3, r2, #0, #8
+  480d20:	600b      	str	r3, [r1, #0]
+  480d22:	f114 010c 	adds.w	r1, r4, #12
+  480d26:	680a      	ldr	r2, [r1, #0]
+  480d28:	f432 3200 	bics.w	r2, r2, #131072	@ 0x20000
+  480d2c:	600a      	str	r2, [r1, #0]
+  480d2e:	f114 010c 	adds.w	r1, r4, #12
+  480d32:	680a      	ldr	r2, [r1, #0]
+  480d34:	f452 3280 	orrs.w	r2, r2, #65536	@ 0x10000
+  480d38:	600a      	str	r2, [r1, #0]
+  480d3a:	e019      	b.n	480d70 <.text+0x6a>
+  480d3c:	f114 010c 	adds.w	r1, r4, #12
+  480d40:	680a      	ldr	r2, [r1, #0]
+  480d42:	f432 427f 	bics.w	r2, r2, #65280	@ 0xff00
+  480d46:	600a      	str	r2, [r1, #0]
+  480d48:	f114 010c 	adds.w	r1, r4, #12
+  480d4c:	466a      	mov	r2, sp
+  480d4e:	7812      	ldrb	r2, [r2, #0]
+  480d50:	680b      	ldr	r3, [r1, #0]
+  480d52:	f362 0307 	bfi	r3, r2, #0, #8
+  480d56:	600b      	str	r3, [r1, #0]
+  480d58:	f114 010c 	adds.w	r1, r4, #12
+  480d5c:	680a      	ldr	r2, [r1, #0]
+  480d5e:	f432 3200 	bics.w	r2, r2, #131072	@ 0x20000
+  480d62:	600a      	str	r2, [r1, #0]
+  480d64:	f114 010c 	adds.w	r1, r4, #12
+  480d68:	680a      	ldr	r2, [r1, #0]
+  480d6a:	f432 3280 	bics.w	r2, r2, #65536	@ 0x10000
+  480d6e:	600a      	str	r2, [r1, #0]
+  480d70:	bd16      	pop	{r1, r2, r4, pc}

@@ -1,0 +1,10 @@
+{
+  "id": "P2-20859",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "Fresh locked-image replay passed for 24 bytes containing three eight-byte templates. Image/source hashes match; initial words are 0x00010003, 0x00010006 and 0x00010005, and initial template bytes 4..7 are zero as recorded. Pointer literals and mapped consumer records match the flash. The runtime flag pointer 0x20075043 is outside this flash artifact, so its contents are unverified; pointed ownership and exhaustive consumer coverage remain unclaimed."
+}

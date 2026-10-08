@@ -1,0 +1,1 @@
+36 nonoverlapping mapped bodies / 8,764 original bytes. Inherits31-body delay ledger; adds five terminal/fatal bodies96B. Source ownership is a bounded lower bound.120 body-contract cases and48 real native-mask/exit child cases; pretrap/fault stops, synthetic debugger release, scheduler and logger child limits remain. No all-input, complete bootloader or byte-identical claim.

@@ -1,0 +1,39 @@
+{
+  "elf_sha256": "c473c306afd27bba6bd7e1cc9427f53bedc16bd85c0cb42ebe7341cd4fa0635c",
+  "objects": {
+    "flash.o": "d4b0b304cfe6b8db8197539aab6e90a5950604f963d2d046edf8ef7ca3c5ff40",
+    "providers.o": "f78e46d7d0ccd2516390153a4ed16ae6786c62fa0acb2c7c81810b13689fc816",
+    "extended.o": "f1e930199e2457d842ba2452d00e18119081eece1dfbe710184e3f1070496c97",
+    "storage.o": "beae3127fa94788903335d65efcc4c51b029a984e12d69be9ccbdffee61db1a0",
+    "read.o": "4e6dba41c00911045b1bdafdc51a0ca6b75859eda6e199c7ec370d9ad813a2ed",
+    "init.o": "283e1ab16b84a95fe0162b6afbc8fe8b4bce116501fa851ff2c65a46924c80a7",
+    "app.o": "c641212a149e6a65d183a0d5d272a8a94ee2c2ad37bcc2c03107e6b387892871",
+    "deferred.o": "e930f412adaf2871ea43d2ab2f8b51eb9b0c34631d11046fb7fcd9486304882a",
+    "i2c.o": "5bb224411c4f1372ddca541f51abe4acb056fa59faaf1e4396934e2c76d79e79",
+    "history.o": "02a9f95b89ca87dd0b46b2029e76d8ab6d2dbdbd83871ce03a76832f043dcce0",
+    "asm.o": "4fcad330e4cc3da31fdbe12a1ad98e0686fd5beb68af993f7e725d44e67d5e39"
+  },
+  "sources": {
+    "flash.c": "5111042e7a2bff7a1d392510861db8dc2d378375f7ddbf8f404d9006f4899078",
+    "providers.c": "f60681843d36d30571a169f02c6002dd2c69a54e19e924ab3eb92581a21396e4",
+    "extended.c": "813ac06bf59edcfd20c2a3f3b156f1839ea92ceeaf656f16aa12e517b3d52550",
+    "storage.c": "16e6daba7e572e91097279d2ab208d47131345bd23df680858118542c36015b8",
+    "init.c": "94c6e3fbfd060f8a3eacf252d34e3dcbf9ff8ab879cc4b1dab4e0b8a7452e12d",
+    "read.c": "43de31119b98d0df35eb511e34edf1698c63c2c2ab07ea5100fd9e3a3c3daa0a",
+    "app_event.c": "ebbd215229e2b6ded8e47831edc46d1cb2d5ca40fb443fa31373934d48850ff2",
+    "deferred.c": "9a5e5e1118ec8c93a49ee5e1fa8bc875426d157ca467165ce86f667bbad9be37",
+    "history.c": "96057c8f282786eca3f4aecc7d15485ec03f75b7884b0ee65d99344cce56d37b"
+  },
+  "compiler": "arm-none-eabi-gcc (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) 13.3.1 20240614",
+  "flags": [
+    "-mcpu=cortex-m0plus",
+    "-mthumb",
+    "-Og",
+    "-fshort-enums",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-DCY8C4046FNI_T412",
+    "-ffunction-sections"
+  ],
+  "limits": "Independent flash/provider control flow; SROM external synthetic boundary; not safe deployable firmware."
+}

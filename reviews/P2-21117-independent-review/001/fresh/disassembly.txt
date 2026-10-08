@@ -1,0 +1,58 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpfsjc_z1n/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00480434 <.text>:
+  480434:	b570      	push	{r4, r5, r6, lr}
+  480436:	2400      	movs	r4, #0
+  480438:	213c      	movs	r1, #60	@ 0x3c
+  48043a:	2200      	movs	r2, #0
+  48043c:	f8df 52bc 	ldr.w	r5, [pc, #700]	@ 4806fc <.text+0x2c8>
+  480440:	002e      	movs	r6, r5
+  480442:	0030      	movs	r0, r6
+  480444:	f7bb fe4e 	bl	43c0e4 <.text-0x44350>
+  480448:	f8df 12b4 	ldr.w	r1, [pc, #692]	@ 480700 <.text+0x2cc>
+  48044c:	6808      	ldr	r0, [r1, #0]
+  48044e:	f000 00ff 	and.w	r0, r0, #255	@ 0xff
+  480452:	2823      	cmp	r0, #35	@ 0x23
+  480454:	d104      	bne.n	480460 <.text+0x2c>
+  480456:	f8df 02ac 	ldr.w	r0, [pc, #684]	@ 480704 <.text+0x2d0>
+  48045a:	6800      	ldr	r0, [r0, #0]
+  48045c:	2802      	cmp	r0, #2
+  48045e:	d204      	bcs.n	48046a <.text+0x36>
+  480460:	6808      	ldr	r0, [r1, #0]
+  480462:	f000 00ff 	and.w	r0, r0, #255	@ 0xff
+  480466:	2824      	cmp	r0, #36	@ 0x24
+  480468:	d303      	bcc.n	480472 <.text+0x3e>
+  48046a:	2001      	movs	r0, #1
+  48046c:	4aa6      	ldr	r2, [pc, #664]	@ (480708 <.text+0x2d4>)
+  48046e:	7010      	strb	r0, [r2, #0]
+  480470:	e002      	b.n	480478 <.text+0x44>
+  480472:	2000      	movs	r0, #0
+  480474:	4aa4      	ldr	r2, [pc, #656]	@ (480708 <.text+0x2d4>)
+  480476:	7010      	strb	r0, [r2, #0]
+  480478:	6808      	ldr	r0, [r1, #0]
+  48047a:	f000 00ff 	and.w	r0, r0, #255	@ 0xff
+  48047e:	2822      	cmp	r0, #34	@ 0x22
+  480480:	d103      	bne.n	48048a <.text+0x56>
+  480482:	48a0      	ldr	r0, [pc, #640]	@ (480704 <.text+0x2d0>)
+  480484:	6800      	ldr	r0, [r0, #0]
+  480486:	2802      	cmp	r0, #2
+  480488:	d008      	beq.n	48049c <.text+0x68>
+  48048a:	6808      	ldr	r0, [r1, #0]
+  48048c:	f000 00ff 	and.w	r0, r0, #255	@ 0xff
+  480490:	2823      	cmp	r0, #35	@ 0x23
+  480492:	d107      	bne.n	4804a4 <.text+0x70>
+  480494:	489b      	ldr	r0, [pc, #620]	@ (480704 <.text+0x2d0>)
+  480496:	6800      	ldr	r0, [r0, #0]
+  480498:	2801      	cmp	r0, #1
+  48049a:	d103      	bne.n	4804a4 <.text+0x70>
+  48049c:	2001      	movs	r0, #1
+  48049e:	4a9b      	ldr	r2, [pc, #620]	@ (48070c <.text+0x2d8>)
+  4804a0:	7010      	strb	r0, [r2, #0]
+  4804a2:	e002      	b.n	4804aa <.text+0x76>
+  4804a4:	2000      	movs	r0, #0
+  4804a6:	4a99      	ldr	r2, [pc, #612]	@ (48070c <.text+0x2d8>)
+  4804a8:	7010      	strb	r0, [r2, #0]

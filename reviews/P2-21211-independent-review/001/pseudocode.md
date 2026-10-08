@@ -1,0 +1,5 @@
+# Count byte, word and sign-extended double-word stores
+
+Partial/unaccepted;170 instruction bytes481C48..481CF2. Continues481836232frame,R9argumentcursorpointer. Modifierzentry481C48,tentry481C62,jentry481C7C,qentry481C94,bentry481CB6,defaultentry481CD4:each independentlyloadsword[R9]cursor,loadsfulltargetpointerword[cursor]postincrement4,storesadvancedcursor[R9]BEFOREnulltest. Nullallvariants:R4FFFFFFFF,ADR R0=4826CC,branch481A4E existingdiagnosticpath. No targetwriteonnull.
+
+Nonnullz/t/default (andlfrompriorfragment) join481CEC:freshwordSP52counter→R1,storefullword[target],branch4824AC. Nonnullj/q join481CAC:freshwordSP52→R2;R3=arithmeticR2>>31;STRD lowcounter/signextensionhigh at[target]/[target+4];branch4824AC. Nonnullb:freshwordSP52→R1;storelow8byte[target];branch4824AC. hlow16storehandledpriorfragment. Preserveexactwidthandj/qsignextension of32bitcounter,notzeroextension;argumentpointeralways4-bytecursorstrideevenfor64bitdestination. No alignment/nullfallback/C/freeze/fullcoverage/equality claim;commonoutputcontinuationunresolved.

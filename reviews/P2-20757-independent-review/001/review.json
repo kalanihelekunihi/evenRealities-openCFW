@@ -1,0 +1,10 @@
+{
+  "id": "P2-20757",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "126B inherited 40-byte frame: 475014 initializer, full signed R8 loop to 10 with stride 256, 4D294A full-result guard, then distinct fresh byte6 loads from R5 and R4 for equality. Logger stores full index at SP8 and aliases saved SP0/4; mask uses full index with 0x10400000. Loop tail/epilogue remain outside this slice."
+}

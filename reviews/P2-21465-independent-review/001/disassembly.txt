@@ -1,0 +1,54 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpb1u9e8d6/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00484b16 <.text>:
+  484b16:	f894 0024 	ldrb.w	r0, [r4, #36]	@ 0x24
+  484b1a:	07c0      	lsls	r0, r0, #31
+  484b1c:	d505      	bpl.n	484b2a <.text+0x14>
+  484b1e:	f8df 0964 	ldr.w	r0, [pc, #2404]	@ 485484 <.text+0x96e>
+  484b22:	f7bc fa93 	bl	44104c <.text-0x43aca>
+  484b26:	9000      	str	r0, [sp, #0]
+  484b28:	e004      	b.n	484b34 <.text+0x1e>
+  484b2a:	2102      	movs	r1, #2
+  484b2c:	2012      	movs	r0, #18
+  484b2e:	f003 fbd0 	bl	4882d2 <.text+0x37bc>
+  484b32:	9000      	str	r0, [sp, #0]
+  484b34:	f114 0039 	adds.w	r0, r4, #57	@ 0x39
+  484b38:	4669      	mov	r1, sp
+  484b3a:	2203      	movs	r2, #3
+  484b3c:	f7b5 f852 	bl	439be4 <.text-0x4af32>
+  484b40:	f514 70c2 	adds.w	r0, r4, #388	@ 0x184
+  484b44:	f003 fb28 	bl	488198 <.text+0x3682>
+  484b48:	f514 70c8 	adds.w	r0, r4, #400	@ 0x190
+  484b4c:	f003 fb24 	bl	488198 <.text+0x3682>
+  484b50:	f8df 5934 	ldr.w	r5, [pc, #2356]	@ 485488 <.text+0x972>
+  484b54:	f8df 6934 	ldr.w	r6, [pc, #2356]	@ 48548c <.text+0x976>
+  484b58:	2000      	movs	r0, #0
+  484b5a:	9001      	str	r0, [sp, #4]
+  484b5c:	2046      	movs	r0, #70	@ 0x46
+  484b5e:	9000      	str	r0, [sp, #0]
+  484b60:	2350      	movs	r3, #80	@ 0x50
+  484b62:	0032      	movs	r2, r6
+  484b64:	0029      	movs	r1, r5
+  484b66:	f514 7059 	adds.w	r0, r4, #868	@ 0x364
+  484b6a:	f7fd fef1 	bl	482950 <.text-0x21c6>
+  484b6e:	2000      	movs	r0, #0
+  484b70:	9001      	str	r0, [sp, #4]
+  484b72:	2000      	movs	r0, #0
+  484b74:	9000      	str	r0, [sp, #0]
+  484b76:	2350      	movs	r3, #80	@ 0x50
+  484b78:	0032      	movs	r2, r6
+  484b7a:	0029      	movs	r1, r5
+  484b7c:	f514 705e 	adds.w	r0, r4, #888	@ 0x378
+  484b80:	f7fd fee6 	bl	482950 <.text-0x21c6>
+  484b84:	f514 7159 	adds.w	r1, r4, #868	@ 0x364
+  484b88:	f514 70c2 	adds.w	r0, r4, #388	@ 0x184
+  484b8c:	f04f ff96 	bl	4d4abc <.text+0x4ffa6>
+  484b90:	f514 715e 	adds.w	r1, r4, #888	@ 0x378
+  484b94:	f514 70c8 	adds.w	r0, r4, #400	@ 0x190
+  484b98:	f04f ff90 	bl	4d4abc <.text+0x4ffa6>
+  484b9c:	f114 004c 	adds.w	r0, r4, #76	@ 0x4c
+  484ba0:	f003 fafa 	bl	488198 <.text+0x3682>

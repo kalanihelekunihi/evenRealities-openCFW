@@ -1,0 +1,336 @@
+{
+  "utc": "2026-10-07T18:34:30.626267+00:00",
+  "status": "PASS",
+  "elf_sha256": "8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c",
+  "role": "Validated standalone compiler-installed selector1/native idle-helper successor; shared129a unchanged",
+  "linked_objects": 209,
+  "input_manifest_sha256": "a5672b13401330e5ac9af002a095c83c7e611dc807b94c75b42b875a5cf1fefa",
+  "post_run_frozen_mismatches": [],
+  "exact_frozen_object_rebuild": true,
+  "total_integration_cases": 7,
+  "profiles": [
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/comparison.json",
+      "sha256": "c64733ca004c2b76bc0259e15c80f3c4c8411027d72ae239207bcab3a68b9d40",
+      "cases": 2
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/failures.json",
+      "sha256": "d153fa53701c3368247dccd7205116cdbe959b02ad2c9a145a4a3286beebdff3",
+      "cases": 3
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/powerloss.json",
+      "sha256": "8587eceb7ce5d5bf74892d4807dbf724ea9d6d4f30c39b7888f61bc83d652310",
+      "cases": 2
+    }
+  ],
+  "additional_receipt_count": 59,
+  "additional_receipts": [
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/allocator.json",
+      "sha256": "158a15fe9cb2fb4f3e66a28d233a859bccbf69c8e7b7673a87e4a00d3dfd0049",
+      "cases": 3
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/heap-drain.json",
+      "sha256": "e6c846520865958fe83f2f85a0c26ba715a417be5dff5a4ce3ce3fad5c36160d",
+      "cases": 3
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/pendsv-fp.json",
+      "sha256": "d086adb3096d2b358c23df878b8defdb89a97e476314ff59d563794da955f6c6",
+      "cases": 4
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/pendsv.json",
+      "sha256": "29988978b6fbcc773fcd9b48e043ec1ea26a2d3c453188a3b236b58a3709c4b8",
+      "cases": 2
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/root-installed.json",
+      "sha256": "807ced2c85c7346d37b84fd97726375d9309d2f3666d210d38eb354038f3c3bd",
+      "cases": 1400
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/selector1.json",
+      "sha256": "6d6dfe9753c258172e2ed6735442ca694c0ce49595397f82e02726f8c3e2f2c4",
+      "cases": null
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/selector17.json",
+      "sha256": "fd5eb31dec8d6f20181b86bcd4b2aa435e8adbca27d0a82e947c96deaa2d51ea",
+      "cases": null
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/selector3.json",
+      "sha256": "cf9fbe98f52649ad58e658680d233d00cdec224b8f06848442fba34edfdbefa5",
+      "cases": null
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-alignment.json",
+      "sha256": "eb8f5b61934318d865415bf08dfbd500d6b7ec05535698d9cea6a78bd9db6ae6",
+      "cases": null
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-clock-config.json",
+      "sha256": "17adc29030e43cc6c9ef25989d5a93a3f303e97a751af22035f0862b9d407e90",
+      "cases": 5896
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-clock-shared.json",
+      "sha256": "ce00882437c168accb52765e3242670845893e78719fa2a8dc294045f494f1b5",
+      "cases": 129
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-clockmux-carry.json",
+      "sha256": "6f6bf62dd1147c1dd74bf87b31bc6e579df007bfe5b94fdf01d66e97cf1cf1f7",
+      "cases": 1024
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-clockmux-native.json",
+      "sha256": "abe148f92530c41f918055f7814365e8800fbe0822454815fb2c2839370e9cf1",
+      "cases": 14
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-config.json",
+      "sha256": "327fbed853f0126bdc4c50d81fc2cd065e6ed116cc5dd312bb75b5d519814e06",
+      "cases": 697
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-dispatch-native.json",
+      "sha256": "0d5392e13e20b903294564651674c9884b68b4a13c8a55452b91952f30d593db",
+      "cases": 400
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-elog_output.json",
+      "sha256": "3bb55a82113b903c637aba41df67018049a2a35bca977ac108448e4c3039a337",
+      "cases": 494
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-elog_uart_tx.json",
+      "sha256": "c6515aa876b66553cfdc8fde96d8ff07a91644534419b7b3a74b0cb0fc79a19a",
+      "cases": 222
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-events-native.json",
+      "sha256": "3678810210832bef308ebba3073e43083766a9a4dec9ba3b7dc742671b579a21",
+      "cases": 72
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-formatter.json",
+      "sha256": "61a56c0a22c7209a9fc678f01df46c7e16fc7ab45ef8a53661626966fb2cb71e",
+      "cases": 1778
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-generators.json",
+      "sha256": "d9d0fd07dc95d56af99941d42099844c47a3ed63dca4072fd87a78ed97726424",
+      "cases": 688
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-gx-children.json",
+      "sha256": "ac8634f18956f1101b1b1922b494ebef3c98e953ce73b5b9c8810fdf5b49523a",
+      "cases": 4834
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-gx-event.json",
+      "sha256": "86cf15980207c34c6448af3a982d9f6d38cfc996532f6f01e8772280484c40dd",
+      "cases": 44
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-gx-transition.json",
+      "sha256": "702669623634ca15ee308c828097ac88af66cd3f15493cb9a6b297b13e1d13c6",
+      "cases": 51
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-init-leaves.json",
+      "sha256": "184bc05bfaf5bb8652cb9fbcec39ec17f0af87661e64dde8f2f02b152b04a696",
+      "cases": 956
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-isr_deferred_fifo.json",
+      "sha256": "aa9c669250893b25177e5f334712e1835b4a28f4ffaeeaa0ba98ab09559b4c14",
+      "cases": 1
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-isr_delivery.json",
+      "sha256": "7c898ebe1e04894d5a25de6e5cc21aeb0c388a17906fb5874deac70fc68db82b",
+      "cases": 1480
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-isr_public_interfaces.json",
+      "sha256": "ac0f472fcbde7d6ebe5aff0de373fd5e5e86d12e79d333456461204a6eb34e85",
+      "cases": 62
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-math.json",
+      "sha256": "b19b42f5c34bf34ce58bb421319abf4f0ac4b42cfe0bb39e71a82fe652b63a33",
+      "cases": 4311
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-memory-native.json",
+      "sha256": "8aa248c35f8ed811809132f8ba7d7122e797ffab556448459cbd4c81b1f3272c",
+      "cases": 936
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-memory.json",
+      "sha256": "f153680d22216d32c624b67d34a40f51b4e13fa099842f9424c023976f0717e0",
+      "cases": 936
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-mode.json",
+      "sha256": "97bfc670a03f4e617d62aa97b7f9a31137a04c50cc9104ff0daf2850a3571a51",
+      "cases": 1394
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-mutex_block_boundary.json",
+      "sha256": "1b9cb4aa162d4158fb865a3da0644b1436463d8ad03671f10022446d47401e85",
+      "cases": 4
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-mutex_kernel.json",
+      "sha256": "ab99d08c6ee80bcce2d92e04f37ac99ec836bd5b78e418ce4741f8c5430bf139",
+      "cases": 516
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-mutex_sequences.json",
+      "sha256": "20d845b9a485ca1a8586752451df5a6884756be380466406e419a5a69474c63c",
+      "cases": 2
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-native-config.json",
+      "sha256": "3cbdb5c20c9f7f1a1a1306629213912b06af2217e28532c787cb81265b2cdcbb",
+      "cases": 48
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-power-read.json",
+      "sha256": "3a5419ed9bb6551cef6778af9d9dc77f0c8ae2f8bf815ba7d3e84cba87c50191",
+      "cases": 10
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-power20.json",
+      "sha256": "cc9781d55a2b65bf56c61774803c571c353c9dbc041a401b18d26265d8986fd0",
+      "cases": 256
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-root-final-state.json",
+      "sha256": "c1ab265baa87e6fb7aa18125009ab5205972909c315409106a4969861b02dfbb",
+      "cases": 1400
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-runtime-native.json",
+      "sha256": "dffe95540008ec3785efff2544f7558bcbb5992d557fff82fde4da67b2cfa3b4",
+      "cases": 168
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-runtime.json",
+      "sha256": "489cf55b1f0f33b7598c9f7fdca58da7ce8d8f7c43088d1f1e8354bb3968c18c",
+      "cases": 832
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-rx.json",
+      "sha256": "3baac383251473fcd2f463a8f5515aef1757ecbcd555df0f4f602afd1730fdea",
+      "cases": 422
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-sequence02.json",
+      "sha256": "04b620ba49092057caac940e319f592338d4280e15b63f2f9f6b99a9738ef879",
+      "cases": null
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-sequence8.json",
+      "sha256": "8a59a56d7b228373c21685402e67040df9d3f09ec2258bec190e240e30ca9bce",
+      "cases": 24
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-service_records.json",
+      "sha256": "002ee21b15f8b4d2c96d61f50149e8378bc6a7a90755721ae1bf71f1646d4730",
+      "cases": 112
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-service_startup_state.json",
+      "sha256": "fa6397150f9f5d3c8954deea219a2a4163bd0eebc864337e6a4e327fac0f47cd",
+      "cases": 1
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-setters.json",
+      "sha256": "1d3e04483eeec3d822ba53c6a2633c35e3b42dec413ca78c09757ed5851191b5",
+      "cases": 192
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-shutdown.json",
+      "sha256": "e1d436136c87efbd28bf7e0af630a080918f0b5e226f0869ef80a85edfaddee6",
+      "cases": 903
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-startup-leaves-native-copy.json",
+      "sha256": "e99271fead2a620e50816b67ee63acc59a83dec33c1194066f74809a0b4c1bd9",
+      "cases": 271
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-startup-native-copy.json",
+      "sha256": "c7c28176d9ca6fc07065e50b6c8f06dccfe1308b3489f289fc5d8f4028bc6f33",
+      "cases": 64
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-startup_alternatives.json",
+      "sha256": "3db1a71e8c7b74b7214d6ba27fd37bbcc213f62fade56e8a84177dd632d7b7a7",
+      "cases": 64
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-timer-final.json",
+      "sha256": "1b4e2cf51bb376a723592e349cd871bdfa15b00a649f8ab8eee84e53ce230e7f",
+      "cases": 864
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-ton-state.json",
+      "sha256": "42dcc17074a007d189172257b551c8868d0bd794a6e239c27b7613604ed14416",
+      "cases": 796
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-ton-trim.json",
+      "sha256": "ab9e48f7487dd06b9b3a36ed3d34b4d9174982358e4efe51761577f3f7cc24f0",
+      "cases": 124
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-transitions1418.json",
+      "sha256": "f7e03fce7fa7d4e53293c87639b89d9cd81eec6780799a34eb28d9c59271c18e",
+      "cases": null
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/regression-wrapper.json",
+      "sha256": "e36a0201ed2032b953b05506999cee102b11e45b85e595b109da24de00738de1",
+      "cases": 288
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/runtime260.json",
+      "sha256": "3b359b64fdf993c203a82c059d9f20fae30bd414df3bba1fb67983c75e051250",
+      "cases": 260
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/teardown512.json",
+      "sha256": "2894abc8684c326bbf96efc304bb27676855e73369f4c9cac795c226bc87a31c",
+      "cases": 512
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/idle24.json",
+      "sha256": "62a63bd3db1c9a87003a67504bdc51e21b55878bdfc78093ecf9bc685d542272",
+      "cases": 24
+    },
+    {
+      "path": "g2/build/bootloader-completion/selector1-idle-integrated/8e255c6effef3c7d685f5d0aa98a163ebf163314be8c96dec958d806a9114d0c/validation/initialized-data.json",
+      "sha256": "eb2a5d72a8dd08eaf66b5d45cf11b914062c42197f0aa47b6491c1696c39ad13",
+      "cases": null
+    }
+  ],
+  "source_addendum_sha256": "f9c3b556112e1500d2d39e343a652630e1ec8aaad2b205c3417f2cc3839a9b31",
+  "native_selector_mask": "0x707c10f",
+  "limits": [
+    "Integration startup/logger/peripheral models retained; no hardware or production firmware claim.",
+    "Native idle helper linked and directly verified; actual idle task entry4189ac is still an unimplemented address contract.",
+    "PendSV basic/FP-high-register instructions tested before architectural exception return; automatic unstack, FP-low/lazy/MVE context and asynchronous IRQ scheduling unverified.",
+    "Tickless addon192cases is separately validated, not linked into this209object candidate; timer/hooks/WFI are controlled.",
+    "Historical selector17 verifiercopy remains unavailable; original manifest unchanged.",
+    "Not whole source or official byte-identical firmware build."
+  ]
+}

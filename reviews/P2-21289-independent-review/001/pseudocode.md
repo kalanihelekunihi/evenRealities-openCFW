@@ -1,0 +1,5 @@
+# Node traversal, callback or release, endpoint and link accessors
+
+Partial/unaccepted;104 instructionbytes482C9A..482D02. Traversal482C9A PUSH{R3,R4,R5,R6,R7,LR}24bytes;R5=entrydescriptor,R6=entrycallback. Call482CD8(R0=R5,liveothers),R4=returnedhead;R0=0 initially,branch482CD2test. WhileR4nonzero:call482CF0(R0=R5,R1=R4,liveR2/R3),save returnednextR7 BEFOREcallback/removal. IfR6nonzero BLX R6(R0=R4,liveR1/R2/R3),skipunlink/release. Elsecall482C0E(R5,R4,liveR2/R3),then44F758(R0=currentR4,liveR1/R2/R3). BothpathsR4=currentR7,retest. EndPOP{R0,R4,R5,R6,R7,PC}24bytesreturns savedentryR3word ratherthan0/lasthelperresult. No cycle/membershipguard;callback maychangefuturefreshlinkreads butsavednext usedcurrentiteration.
+
+Separateframeless482CD8 returns0ifdescriptorR0null elsefreshword[R0+4]. 482CE4 samewithfield+8. 482CF0: freshword[descriptorR0]→R0;R0+=entryR1mod;R0+=4mod;freshword[R0]→R0,BXLR. 482CFA samewithout+4. Linkaccessors no nullguard,computedoffset dependsdescriptorword; do notassumefixednodefieldoffset. EachBXLRno stackchange. No C,freeze,wholecoverage or equalityclaim.

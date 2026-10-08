@@ -1,0 +1,87 @@
+{
+  "status": "PASS",
+  "elf_sha256": "162b06837e95019d948c5e286c57188620ad1d032f1d7900e790ef1154dd280c",
+  "profiles": [
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/162b06837e95019d948c5e286c57188620ad1d032f1d7900e790ef1154dd280c/comparison.json",
+      "sha256": "955ac06c49dfe0f43a7d1a5ead45e94de4e913b1fc4ea4fbf7eb87706f718295",
+      "cases": 2
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/162b06837e95019d948c5e286c57188620ad1d032f1d7900e790ef1154dd280c/failures.json",
+      "sha256": "54ddf6796d321773d374bacc1c12e96e5b2ab4ab42fb3814a9e5fe92fce8821f",
+      "cases": 3
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/162b06837e95019d948c5e286c57188620ad1d032f1d7900e790ef1154dd280c/powerloss.json",
+      "sha256": "8b328d47d343b6082185d766a14bce281249549ba4fd335c0654b90b1132a80f",
+      "cases": 2
+    }
+  ],
+  "inputs": 637,
+  "linked_objects": 162,
+  "post_run_hash_mismatches": [],
+  "limits": [
+    "Seven-case provider models retained. Native startup config leaves direct265 comparisons; original copy modeled, three HAL children stubbed.",
+    "Unmodeled original copy-helper receipt is COUNTEREXAMPLE and is not promoted to native helper proof. No hardware/drain/source-completeness/byte-equality certification."
+  ],
+  "additional_receipts": [
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-config-162b/mutex_block_boundary.json",
+      "sha256": "563b64a5d022cb8eb60601f21826d62bc007c844bbdeb975d969bc3940b8792b"
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-config-162b/service_records.json",
+      "sha256": "7af134dd0cd2c5e4562be3c6c5ab8e88586f0ed334615e7a4771967a93aac41e"
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-config-162b/mutex_kernel.json",
+      "sha256": "58856fb851f64b3811b663e8ea78a805ddcb27f5240ddab76442925204e700a4"
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-config-162b/mutex_sequences.json",
+      "sha256": "e7cbbbb34dab0bd18a5adf96fee96d96b08d8dfe211896b40b29515b49f34344"
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-config-162b/elog_output.json",
+      "sha256": "27d84a8219e5d386655b5a8c2eb8b392dc8fca9b2db07551921ab831781deea7"
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-config-162b/alignment.json",
+      "sha256": "4ff19f77282fc58e57124627d117015396802cfa898837de9c0297a2f3507305"
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-config-162b/isr_delivery.json",
+      "sha256": "529c151148298086b2a5b479af69b8a63b802cd50086c00a43232b9cc5478028"
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-config-162b/elog_uart_tx.json",
+      "sha256": "2fec74d88b1461c84d34f98824c1ba5edd02d28281f707c55b2f2036224c3e6f"
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-config-162b/setters.json",
+      "sha256": "d94e9fd27a7e2fc53239ae4261e7d7168c242ba09a65559ddbe783e4edbb089e"
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-config-162b/startup_alternatives.json",
+      "sha256": "18f81b51575f0ad8062181cef301642789f9e5967ca518670ebc57ca78d5a462"
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-config-162b/manifest.json",
+      "sha256": "e07dbd147fe99290f301cc92df04d3a867c77809712c2f4407893a1751c16c3b"
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-config-162b/service_startup_state.json",
+      "sha256": "e7d5a735179b7a05a55521ba484dad3a27fd17063aad23cb63ba8e02bd54527d"
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-config-162b/isr_public_interfaces.json",
+      "sha256": "2916e68835794cbbd6b05b1df1be75efd6cfcaf5e669f2f33dbf52b3d41e6465"
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/startup-config-162b/isr_deferred_fifo.json",
+      "sha256": "caf0448cf496cd24e315ccc692c3b006ae04ca0fabe9a02902e46f2ada13cee3"
+    }
+  ],
+  "leaf_receipt": "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-config-leaves/shared-162b.json"
+}

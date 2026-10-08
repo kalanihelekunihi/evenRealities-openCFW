@@ -1,0 +1,153 @@
+{
+  "status": "PASS",
+  "base_elf_sha256": "4b1fb7505187310b0b9bcd84f1479693a313db9485d4741960a1fbdf6210c645",
+  "addon_elf_sha256": "3aa4b8001237242a59126d18eaaa4a0c718aa466986d985d44a065370e347bb9",
+  "image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "initializer_sha256": "e3bea7ccd46bc324829152b5b5a9069aecce5db243876273084d29bd7d47b843",
+  "natural_fixture": {
+    "stimulus": "temperature",
+    "temperature_c": -100.0,
+    "current_major": 7,
+    "target_major": 19,
+    "current_minor": 6,
+    "target_minor": 6,
+    "state_flag": 0,
+    "device_power": 4194304
+  },
+  "source_table_binding": "After running the real source-owned data installer and validating normalized data/table, the test changes only installed slot 3 to the new addon symbol in this emulator run. No shared initializer/table source or frozen base ELF is changed.",
+  "comparison": {
+    "stock": {
+      "side": "stock",
+      "profile_sha256": "a8f6f5ace33120aac171eba55b9e9df8854c321d19c47f2bf029e297c8a5b4f5",
+      "table_sha256": "81c33f127f9fe57795f236e7316cbfb32ff43cd576ba1b5256b3d7bf7b4dee21",
+      "slot3": "0x4283e3",
+      "calls": [
+        {
+          "selector": 3,
+          "pc": "0x4283e2",
+          "args": [
+            19,
+            7,
+            6,
+            6
+          ],
+          "caller_return": "0x42a542",
+          "sp": "0x2003efa0",
+          "primask": 1
+        }
+      ],
+      "unknown_frontier": null,
+      "completed": true,
+      "status": 0,
+      "state": {
+        "major": 19,
+        "minor": 6,
+        "ton": 6,
+        "timer": 255,
+        "state_words": {
+          "200270b0": "03000000",
+          "200270b4": "04000000",
+          "200270b8": "ca020000",
+          "200270bc": "0e000000",
+          "200270c0": "06000000",
+          "200270c4": "13000000"
+        }
+      },
+      "arguments_after": "0000c8c2008088c30000a0c1",
+      "waits": [
+        1585
+      ],
+      "mmio_writes": [
+        [
+          1073873732,
+          4,
+          827794536
+        ],
+        [
+          1073873752,
+          4,
+          610800983
+        ],
+        [
+          1073872972,
+          4,
+          1515852294
+        ],
+        [
+          1073872972,
+          4,
+          1515852292
+        ]
+      ]
+    },
+    "source": {
+      "side": "source",
+      "profile_sha256": "a8f6f5ace33120aac171eba55b9e9df8854c321d19c47f2bf029e297c8a5b4f5",
+      "table_sha256": "0b2bf0d40f7dd7e030c2c068bc6ea639c3358340471dd243de8c097a19f0588e",
+      "slot3": "0x3fd01",
+      "calls": [
+        {
+          "selector": 3,
+          "pc": "0x3fd00",
+          "args": [
+            19,
+            7,
+            6,
+            6
+          ],
+          "caller_return": "0x31c1a",
+          "sp": "0x2003efb0",
+          "primask": 1
+        }
+      ],
+      "unknown_frontier": null,
+      "completed": true,
+      "status": 0,
+      "state": {
+        "major": 19,
+        "minor": 6,
+        "ton": 6,
+        "timer": 255,
+        "state_words": {
+          "200270b0": "03000000",
+          "200270b4": "04000000",
+          "200270b8": "ca020000",
+          "200270bc": "0e000000",
+          "200270c0": "06000000",
+          "200270c4": "13000000"
+        }
+      },
+      "arguments_after": "0000c8c2008088c30000a0c1",
+      "waits": [
+        1585
+      ],
+      "mmio_writes": [
+        [
+          1073873732,
+          4,
+          827794536
+        ],
+        [
+          1073873752,
+          4,
+          610800983
+        ],
+        [
+          1073872972,
+          4,
+          1515852294
+        ],
+        [
+          1073872972,
+          4,
+          1515852292
+        ]
+      ]
+    }
+  },
+  "limits": [
+    "Stock callback/walker/selector/handler instructions run from the authenticated firmware. Source callback and walker run from frozen 4b source ELF; only selector3 is supplied by the separately frozen addon.",
+    "ROM cycle-wait at 0x40 returns immediately with R0 preserved and logs the argument; this is the only absent external boundary. Timer is disabled, so timer service is not called.",
+    "INFO1 profile core/tempco and packed VDDCLV values are synthetic; VDDC/VDDF rank fields come from decoded initializer data. MMIO values and outcomes are deterministic offline fixtures, not physical hardware behavior."
+  ]
+}

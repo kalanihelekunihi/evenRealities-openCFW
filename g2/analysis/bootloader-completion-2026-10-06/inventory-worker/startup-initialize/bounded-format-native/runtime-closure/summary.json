@@ -1,0 +1,60 @@
+{
+  "candidate_sha256": "0b80d612fe52fd296eae01d1e304daf8769df2a6847f8649ebfe787c3108d419",
+  "root_symbols": 38,
+  "direct_reachable_linked_functions": 77,
+  "indirect_sites": 13,
+  "unresolved": [
+    {
+      "caller_address": 238688,
+      "caller_names": [
+        "opencfw_boot_elog_vsnprintf"
+      ],
+      "site": 238730,
+      "target": 4318330,
+      "kind": "bl",
+      "aliases": [
+        "opencfw_boot_format_engine"
+      ],
+      "category": "unbound_original_executable_reference"
+    },
+    {
+      "caller_address": 238756,
+      "caller_names": [
+        "opencfw_boot_elog_snprintf"
+      ],
+      "site": 238806,
+      "target": 4318330,
+      "kind": "bl",
+      "aliases": [
+        "opencfw_boot_format_engine"
+      ],
+      "category": "unbound_original_executable_reference"
+    },
+    {
+      "caller_address": 125628,
+      "caller_names": [
+        "opencfw_bl_delay_us"
+      ],
+      "site": 125708,
+      "target": 64,
+      "kind": "bl",
+      "aliases": [
+        "opencfw_boot_rom_delay_cycles"
+      ],
+      "category": "external_resident_ROM"
+    },
+    {
+      "caller_address": 124300,
+      "caller_names": [
+        "opencfw_boot_info_rom_read"
+      ],
+      "site": 124302,
+      "target": 72,
+      "kind": "bl",
+      "aliases": [
+        "opencfw_boot_rom48"
+      ],
+      "category": "external_resident_ROM"
+    }
+  ]
+}

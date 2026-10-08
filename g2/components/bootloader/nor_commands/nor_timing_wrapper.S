@@ -3,6 +3,7 @@
 .syntax unified
 .thumb
 .section .text.opencfw_provider_4201ba,"ax",%progbits
+.p2align 1
 .global opencfw_provider_4201ba
 .type opencfw_provider_4201ba,%function
 .thumb_func

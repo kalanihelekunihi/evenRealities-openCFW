@@ -1,0 +1,59 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp5qjo8ph9/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+004816c6 <.text>:
+  4816c6:	b570      	push	{r4, r5, r6, lr}
+  4816c8:	0005      	movs	r5, r0
+  4816ca:	000c      	movs	r4, r1
+  4816cc:	2600      	movs	r6, #0
+  4816ce:	f1b5 007d 	subs.w	r0, r5, #125	@ 0x7d
+  4816d2:	2807      	cmp	r0, #7
+  4816d4:	d305      	bcc.n	4816e2 <.text+0x1c>
+  4816d6:	f1b5 0038 	subs.w	r0, r5, #56	@ 0x38
+  4816da:	2807      	cmp	r0, #7
+  4816dc:	d301      	bcc.n	4816e2 <.text+0x1c>
+  4816de:	2005      	movs	r0, #5
+  4816e0:	e02a      	b.n	481738 <.text+0x72>
+  4816e2:	2d3f      	cmp	r5, #63	@ 0x3f
+  4816e4:	d205      	bcs.n	4816f2 <.text+0x2c>
+  4816e6:	2d7d      	cmp	r5, #125	@ 0x7d
+  4816e8:	d301      	bcc.n	4816ee <.text+0x28>
+  4816ea:	3d7d      	subs	r5, #125	@ 0x7d
+  4816ec:	e009      	b.n	481702 <.text+0x3c>
+  4816ee:	3d38      	subs	r5, #56	@ 0x38
+  4816f0:	e007      	b.n	481702 <.text+0x3c>
+  4816f2:	2d7d      	cmp	r5, #125	@ 0x7d
+  4816f4:	d301      	bcc.n	4816fa <.text+0x34>
+  4816f6:	3d7d      	subs	r5, #125	@ 0x7d
+  4816f8:	e000      	b.n	4816fc <.text+0x36>
+  4816fa:	3d38      	subs	r5, #56	@ 0x38
+  4816fc:	1ded      	adds	r5, r5, #7
+  4816fe:	e000      	b.n	481702 <.text+0x3c>
+  481700:	4788      	blx	r1
+  481702:	2c00      	cmp	r4, #0
+  481704:	d017      	beq.n	481736 <.text+0x70>
+  481706:	4260      	negs	r0, r4
+  481708:	4020      	ands	r0, r4
+  48170a:	fab0 f080 	clz	r0, r0
+  48170e:	f1d0 001f 	rsbs	r0, r0, #31
+  481712:	2101      	movs	r1, #1
+  481714:	4081      	lsls	r1, r0
+  481716:	438c      	bics	r4, r1
+  481718:	493d      	ldr	r1, [pc, #244]	@ (481810 <.text+0x14a>)
+  48171a:	01ea      	lsls	r2, r5, #7
+  48171c:	4411      	add	r1, r2
+  48171e:	f851 1020 	ldr.w	r1, [r1, r0, lsl #2]
+  481722:	4a3c      	ldr	r2, [pc, #240]	@ (481814 <.text+0x14e>)
+  481724:	01eb      	lsls	r3, r5, #7
+  481726:	441a      	add	r2, r3
+  481728:	f852 0020 	ldr.w	r0, [r2, r0, lsl #2]
+  48172c:	000a      	movs	r2, r1
+  48172e:	2a00      	cmp	r2, #0
+  481730:	d1e6      	bne.n	481700 <.text+0x3a>
+  481732:	2607      	movs	r6, #7
+  481734:	e7e5      	b.n	481702 <.text+0x3c>
+  481736:	0030      	movs	r0, r6
+  481738:	bd70      	pop	{r4, r5, r6, pc}

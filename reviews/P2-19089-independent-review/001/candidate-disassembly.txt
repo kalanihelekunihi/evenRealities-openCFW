@@ -1,0 +1,60 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpxsln75_z/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0046928c <.text>:
+  46928c:	f7d3 ff1f 	bl	43d0ce <.text-0x2c1be>
+  469290:	0780      	lsls	r0, r0, #30
+  469292:	d50d      	bpl.n	4692b0 <.text+0x24>
+  469294:	f8df 08c0 	ldr.w	r0, [pc, #2240]	@ 469b58 <.text+0x8cc>
+  469298:	9001      	str	r0, [sp, #4]
+  46929a:	2063      	movs	r0, #99	@ 0x63
+  46929c:	9000      	str	r0, [sp, #0]
+  46929e:	f8df 38ac 	ldr.w	r3, [pc, #2220]	@ 469b4c <.text+0x8c0>
+  4692a2:	f8df 2894 	ldr.w	r2, [pc, #2196]	@ 469b38 <.text+0x8ac>
+  4692a6:	f8df 1894 	ldr.w	r1, [pc, #2196]	@ 469b3c <.text+0x8b0>
+  4692aa:	2003      	movs	r0, #3
+  4692ac:	f7d4 f962 	bl	43d574 <.text-0x2bd18>
+  4692b0:	f7d3 ff0d 	bl	43d0ce <.text-0x2c1be>
+  4692b4:	07c0      	lsls	r0, r0, #31
+  4692b6:	d403      	bmi.n	4692c0 <.text+0x34>
+  4692b8:	f7d3 ff09 	bl	43d0ce <.text-0x2c1be>
+  4692bc:	0740      	lsls	r0, r0, #29
+  4692be:	d506      	bpl.n	4692ce <.text+0x42>
+  4692c0:	f8df 2898 	ldr.w	r2, [pc, #2200]	@ 469b5c <.text+0x8d0>
+  4692c4:	0011      	movs	r1, r2
+  4692c6:	f05f 6040 	movs.w	r0, #201326592	@ 0xc000000
+  4692ca:	f7d3 fde8 	bl	43ce9e <.text-0x2c3ee>
+  4692ce:	f7f1 f94b 	bl	45a568 <.text-0xed24>
+  4692d2:	2801      	cmp	r0, #1
+  4692d4:	d122      	bne.n	46931c <.text+0x90>
+  4692d6:	2400      	movs	r4, #0
+  4692d8:	f7da f8e0 	bl	44349c <.text-0x25df0>
+  4692dc:	2801      	cmp	r0, #1
+  4692de:	d106      	bne.n	4692ee <.text+0x62>
+  4692e0:	2401      	movs	r4, #1
+  4692e2:	2300      	movs	r3, #0
+  4692e4:	2200      	movs	r2, #0
+  4692e6:	2100      	movs	r1, #0
+  4692e8:	2000      	movs	r0, #0
+  4692ea:	f7fb fca4 	bl	464c36 <.text-0x4656>
+  4692ee:	f7da f8e1 	bl	4434b4 <.text-0x25dd8>
+  4692f2:	2801      	cmp	r0, #1
+  4692f4:	d112      	bne.n	46931c <.text+0x90>
+  4692f6:	2c00      	cmp	r4, #0
+  4692f8:	d106      	bne.n	469308 <.text+0x7c>
+  4692fa:	2300      	movs	r3, #0
+  4692fc:	2200      	movs	r2, #0
+  4692fe:	2100      	movs	r1, #0
+  469300:	2000      	movs	r0, #0
+  469302:	f7fb fc98 	bl	464c36 <.text-0x4656>
+  469306:	e009      	b.n	46931c <.text+0x90>
+  469308:	f44f 70fa 	mov.w	r0, #500	@ 0x1f4
+  46930c:	f7eb fc1e 	bl	454b4c <.text-0x14740>
+  469310:	2300      	movs	r3, #0
+  469312:	2200      	movs	r2, #0
+  469314:	2100      	movs	r1, #0
+  469316:	2000      	movs	r0, #0
+  469318:	f7fb fc8d 	bl	464c36 <.text-0x4656>

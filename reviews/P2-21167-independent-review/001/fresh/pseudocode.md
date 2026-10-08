@@ -1,0 +1,5 @@
+# Four-mode pointer validation and indexed bank clear prefix
+
+Partial/unaccepted;146 instruction bytes4810B0..481142. STMDB savesR0..R8,LR40bytes;R6entryR0bankselector,R8entryR1mode,R4=0,R7entryR2pointer. FullR2null→return6via4812F0 unresolvedepilogue. UXTBmode>=4→6;mode0/1: freshword[R2]index>=224unsigned→5;else480ED8(index,SP+4,SP)→SP4wordindex/SP0mask. Helpernonzero mappedto6;zero→R5=literalpointer481768+16*wordSP4mod2^32. IfUXTBbankselector==1 add112toR5;otherwisebase. Modes2/3 skipindexload/addresscalculation;R5remainssavedentryR5 pendinglaterbranches.
+
+Call473940 withliveR0/R1/R2/R3;savefullresultSP8 overwritingentryR2. R8=UXTBmode;dispatch0→481128,1→481142,2→48115C,3→481230,nominalother→4812E8. Mode0:freshword[R5]clearwordSP0mask store;R6=UXTBbankselector;ifR6==2 add112R5 andperformanotherfreshwordclearusingfreshSP0reload. Branch4812E8 unresolvedrestore/return. No outputinitializationorpointer-sizecheck beyondnonnull;inputpointerisreadindex,notassumedoutput. Preservehelperstackslots,bankstride16 and112offset,read/writeorder. Othermodes/epilogue unresolved;no C/freeze/fullcoverage/equality claim.

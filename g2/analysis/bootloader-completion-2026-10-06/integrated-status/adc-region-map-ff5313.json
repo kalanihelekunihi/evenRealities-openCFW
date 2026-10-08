@@ -1,0 +1,173 @@
+{
+  "image_sha256": "ff53136b29001e2a88deeb93b968bb69fcfe56bcaea576cdf57bc201fbed7911",
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "start": "0x42e8d0",
+  "end_exclusive": "0x42f14e",
+  "span_bytes": 2174,
+  "mapped_functions": [
+    {
+      "symbol": "opencfw_bl_adc_context_initialize",
+      "original_entry": "0x42e8d0",
+      "original_end_exclusive": "0x42ea32",
+      "source_entry": "0x34e94",
+      "compiled_function_bytes": 394,
+      "original_body_bytes": 354,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_adc_reset",
+      "original_entry": "0x42ea32",
+      "original_end_exclusive": "0x42ea68",
+      "source_entry": "0x35020",
+      "compiled_function_bytes": 48,
+      "original_body_bytes": 54,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_adc_configure",
+      "original_entry": "0x42ec0c",
+      "original_end_exclusive": "0x42ed60",
+      "source_entry": "0x35050",
+      "compiled_function_bytes": 348,
+      "original_body_bytes": 340,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_adc_context_configure",
+      "original_entry": "0x42eb74",
+      "original_end_exclusive": "0x42ebaa",
+      "source_entry": "0x351ac",
+      "compiled_function_bytes": 52,
+      "original_body_bytes": 54,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_adc_configure_channel",
+      "original_entry": "0x42eaf6",
+      "original_end_exclusive": "0x42eb74",
+      "source_entry": "0x351e0",
+      "compiled_function_bytes": 126,
+      "original_body_bytes": 126,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_adc_activate",
+      "original_entry": "0x42ed60",
+      "original_end_exclusive": "0x42eda0",
+      "source_entry": "0x3544c",
+      "compiled_function_bytes": 60,
+      "original_body_bytes": 64,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_adc_enable",
+      "original_entry": "0x42ebaa",
+      "original_end_exclusive": "0x42ebe2",
+      "source_entry": "0x35488",
+      "compiled_function_bytes": 58,
+      "original_body_bytes": 56,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_adc_disable",
+      "original_entry": "0x42ebe2",
+      "original_end_exclusive": "0x42ec0c",
+      "source_entry": "0x354c4",
+      "compiled_function_bytes": 46,
+      "original_body_bytes": 42,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_adc_command",
+      "original_entry": "0x42eff4",
+      "original_end_exclusive": "0x42f014",
+      "source_entry": "0x354f4",
+      "compiled_function_bytes": 42,
+      "original_body_bytes": 32,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_adc_normalize",
+      "original_entry": "0x42eda0",
+      "original_end_exclusive": "0x42edf6",
+      "source_entry": "0x35520",
+      "compiled_function_bytes": 94,
+      "original_body_bytes": 86,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_adc_enumerate",
+      "original_entry": "0x42ee70",
+      "original_end_exclusive": "0x42eff4",
+      "source_entry": "0x352dc",
+      "compiled_function_bytes": 366,
+      "original_body_bytes": 388,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_boot_adc_correct_sample",
+      "original_entry": "0x42ee00",
+      "original_end_exclusive": "0x42ee6c",
+      "source_entry": "0x35260",
+      "compiled_function_bytes": 124,
+      "original_body_bytes": 108,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_adc_profile_transfer",
+      "original_entry": "0x42f020",
+      "original_end_exclusive": "0x42f14e",
+      "source_entry": "0x35580",
+      "compiled_function_bytes": 260,
+      "original_body_bytes": 302,
+      "ownership": "new-native-body"
+    },
+    {
+      "symbol": "opencfw_bl_adc_apply_profile",
+      "original_entry": "0x42ea68",
+      "original_end_exclusive": "0x42eaf6",
+      "source_entry": "0x35684",
+      "compiled_function_bytes": 142,
+      "original_body_bytes": 142,
+      "ownership": "new-native-body"
+    }
+  ],
+  "deduplicated_instruction_body_bytes": 2148,
+  "float_literals": [
+    {
+      "address": "0x42edf8",
+      "bits": "0xc2f6e979"
+    },
+    {
+      "address": "0x42edfc",
+      "bits": "0x43910000"
+    },
+    {
+      "address": "0x42ee6c",
+      "bits": "0xc3889333"
+    },
+    {
+      "address": "0x42f014",
+      "bits": "0xc47a0000"
+    },
+    {
+      "address": "0x42f018",
+      "bits": "0x45800000"
+    },
+    {
+      "address": "0x42f01c",
+      "bits": "0x4494c000"
+    }
+  ],
+  "literal_bytes": 24,
+  "alignment": {
+    "address": "0x42edf6",
+    "bytes": 2,
+    "value": "0000"
+  },
+  "unaccounted_bytes_in_this_span": 0,
+  "limits": [
+    "Locked contiguous ADC region only; additional inline/dynamic code elsewhere and physical dependencies not certified.",
+    "Original/source tested behavior is bounded by recorded synthetic inputs; mapping is not whole bootloader source completeness, working hardware or byte equality."
+  ]
+}

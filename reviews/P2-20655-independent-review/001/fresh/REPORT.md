@@ -1,0 +1,1 @@
+Partial/unaccepted continuity47A71C..47A856,314instruction bytes,three maps. Component hashes,pinned tiling andlocalbranchboundaries checked. Distinct status queries, helper arguments, ordered field writes and fresh counter reload retained; 40-byte frame discards saved R0..R3 slots then returns explicit pointer or zero. No source/freeze/wholefirmwareclaim.

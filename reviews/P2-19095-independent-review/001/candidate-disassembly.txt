@@ -1,0 +1,54 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp_t7zpaef/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00469388 <.text>:
+  469388:	b51f      	push	{r0, r1, r2, r3, r4, lr}
+  46938a:	f8df 07b8 	ldr.w	r0, [pc, #1976]	@ 469b44 <.text+0x7bc>
+  46938e:	7800      	ldrb	r0, [r0, #0]
+  469390:	2800      	cmp	r0, #0
+  469392:	d16b      	bne.n	46946c <.text+0xe4>
+  469394:	f7ff ff03 	bl	46919e <.text-0x1ea>
+  469398:	0004      	movs	r4, r0
+  46939a:	f7d3 fe98 	bl	43d0ce <.text-0x2c2ba>
+  46939e:	0780      	lsls	r0, r0, #30
+  4693a0:	d515      	bpl.n	4693ce <.text+0x46>
+  4693a2:	0020      	movs	r0, r4
+  4693a4:	b2c0      	uxtb	r0, r0
+  4693a6:	2800      	cmp	r0, #0
+  4693a8:	d001      	beq.n	4693ae <.text+0x26>
+  4693aa:	a073      	add	r0, pc, #460	@ (adr r0, 469578 <.text+0x1f0>)
+  4693ac:	e000      	b.n	4693b0 <.text+0x28>
+  4693ae:	a073      	add	r0, pc, #460	@ (adr r0, 46957c <.text+0x1f4>)
+  4693b0:	9002      	str	r0, [sp, #8]
+  4693b2:	f8df 07b4 	ldr.w	r0, [pc, #1972]	@ 469b68 <.text+0x7e0>
+  4693b6:	9001      	str	r0, [sp, #4]
+  4693b8:	208d      	movs	r0, #141	@ 0x8d
+  4693ba:	9000      	str	r0, [sp, #0]
+  4693bc:	f8df 37ac 	ldr.w	r3, [pc, #1964]	@ 469b6c <.text+0x7e4>
+  4693c0:	f8df 2774 	ldr.w	r2, [pc, #1908]	@ 469b38 <.text+0x7b0>
+  4693c4:	f8df 1774 	ldr.w	r1, [pc, #1908]	@ 469b3c <.text+0x7b4>
+  4693c8:	2004      	movs	r0, #4
+  4693ca:	f7d4 f8d3 	bl	43d574 <.text-0x2be14>
+  4693ce:	f7d3 fe7e 	bl	43d0ce <.text-0x2c2ba>
+  4693d2:	07c0      	lsls	r0, r0, #31
+  4693d4:	d403      	bmi.n	4693de <.text+0x56>
+  4693d6:	f7d3 fe7a 	bl	43d0ce <.text-0x2c2ba>
+  4693da:	0740      	lsls	r0, r0, #29
+  4693dc:	d50d      	bpl.n	4693fa <.text+0x72>
+  4693de:	0020      	movs	r0, r4
+  4693e0:	b2c0      	uxtb	r0, r0
+  4693e2:	2800      	cmp	r0, #0
+  4693e4:	d001      	beq.n	4693ea <.text+0x62>
+  4693e6:	a364      	add	r3, pc, #400	@ (adr r3, 469578 <.text+0x1f0>)
+  4693e8:	e000      	b.n	4693ec <.text+0x64>
+  4693ea:	a364      	add	r3, pc, #400	@ (adr r3, 46957c <.text+0x1f4>)
+  4693ec:	f8df 1780 	ldr.w	r1, [pc, #1920]	@ 469b70 <.text+0x7e8>
+  4693f0:	000a      	movs	r2, r1
+  4693f2:	f05f 5082 	movs.w	r0, #272629760	@ 0x10400000
+  4693f6:	f7d3 fd52 	bl	43ce9e <.text-0x2c4ea>
+  4693fa:	b2e4      	uxtb	r4, r4
+  4693fc:	2c00      	cmp	r4, #0
+  4693fe:	d103      	bne.n	469408 <.text+0x80>

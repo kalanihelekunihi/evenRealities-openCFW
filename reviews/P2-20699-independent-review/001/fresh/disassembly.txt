@@ -1,0 +1,37 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpn4vgawhx/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0047ae78 <.text>:
+  47ae78:	b430      	push	{r4, r5}
+  47ae7a:	0003      	movs	r3, r0
+  47ae7c:	2000      	movs	r0, #0
+  47ae7e:	f893 402e 	ldrb.w	r4, [r3, #46]	@ 0x2e
+  47ae82:	4221      	tst	r1, r4
+  47ae84:	d01a      	beq.n	47aebc <.text+0x44>
+  47ae86:	b2c9      	uxtb	r1, r1
+  47ae88:	2901      	cmp	r1, #1
+  47ae8a:	d006      	beq.n	47ae9a <.text+0x22>
+  47ae8c:	2902      	cmp	r1, #2
+  47ae8e:	d00a      	beq.n	47aea6 <.text+0x2e>
+  47ae90:	2904      	cmp	r1, #4
+  47ae92:	d00e      	beq.n	47aeb2 <.text+0x3a>
+  47ae94:	2908      	cmp	r1, #8
+  47ae96:	d00e      	beq.n	47aeb6 <.text+0x3e>
+  47ae98:	e010      	b.n	47aebc <.text+0x44>
+  47ae9a:	f893 004e 	ldrb.w	r0, [r3, #78]	@ 0x4e
+  47ae9e:	7010      	strb	r0, [r2, #0]
+  47aea0:	f113 0034 	adds.w	r0, r3, #52	@ 0x34
+  47aea4:	e00a      	b.n	47aebc <.text+0x44>
+  47aea6:	f893 006a 	ldrb.w	r0, [r3, #106]	@ 0x6a
+  47aeaa:	7010      	strb	r0, [r2, #0]
+  47aeac:	f113 0050 	adds.w	r0, r3, #80	@ 0x50
+  47aeb0:	e004      	b.n	47aebc <.text+0x44>
+  47aeb2:	1dd8      	adds	r0, r3, #7
+  47aeb4:	e002      	b.n	47aebc <.text+0x44>
+  47aeb6:	f113 001e 	adds.w	r0, r3, #30
+  47aeba:	e7ff      	b.n	47aebc <.text+0x44>
+  47aebc:	bc30      	pop	{r4, r5}
+  47aebe:	4770      	bx	lr

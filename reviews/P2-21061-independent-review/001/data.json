@@ -1,0 +1,75 @@
+{
+  "start": 4716868,
+  "end": 4716884,
+  "bytes": "b0ec6b00e80100204440004030400040",
+  "words": [
+    {
+      "address": 4716868,
+      "value": 7072944
+    },
+    {
+      "address": 4716872,
+      "value": 536871400
+    },
+    {
+      "address": 4716876,
+      "value": 1073758276
+    },
+    {
+      "address": 4716880,
+      "value": 1073758256
+    }
+  ],
+  "consumers": [
+    {
+      "component": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-saved-entry-wrapper-indexed-sixteen-byte-copy-21428-map/001",
+      "instruction": {
+        "address": 4714278,
+        "bytes": "dff81c2a",
+        "mnemonic": "ldr.w",
+        "operands": "r2, [pc, #2588]\t@ 47f944 <.text+0xa34>"
+      },
+      "literal_address": 4716868
+    },
+    {
+      "component": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-sentinel-shared-initialization-optional-output-21430-map/001",
+      "instruction": {
+        "address": 4714300,
+        "bytes": "dff8085a",
+        "mnemonic": "ldr.w",
+        "operands": "r5, [pc, #2568]\t@ 47f948 <.text+0xa10>"
+      },
+      "literal_address": 4716872
+    },
+    {
+      "component": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-low-byte-mode-two-prefix-conditional-flag-setup-21432-map/001",
+      "instruction": {
+        "address": 4714396,
+        "bytes": "dff8ac79",
+        "mnemonic": "ldr.w",
+        "operands": "r7, [pc, #2476]\t@ 47f94c <.text+0x9d8>"
+      },
+      "literal_address": 4716876
+    },
+    {
+      "component": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-low-byte-mode-two-prefix-conditional-flag-setup-21432-map/001",
+      "instruction": {
+        "address": 4714432,
+        "bytes": "dff88c19",
+        "mnemonic": "ldr.w",
+        "operands": "r1, [pc, #2444]\t@ 47f950 <.text+0x9dc>"
+      },
+      "literal_address": 4716880
+    },
+    {
+      "component": "g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-mode-bit-two-poll-cleanup-status-return-21434-map/001",
+      "instruction": {
+        "address": 4714444,
+        "bytes": "dff88009",
+        "mnemonic": "ldr.w",
+        "operands": "r0, [pc, #2432]\t@ 47f950 <.text+0x984>"
+      },
+      "literal_address": 4716880
+    }
+  ]
+}

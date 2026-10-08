@@ -1,0 +1,473 @@
+{
+  "utc": "2026-10-07T07:55:20.038344+00:00",
+  "scope": "Relocated source-linked bootloader test image. Segment execute permission includes rodata and padding; executable segment bytes are not instruction coverage. Every numeric alias is listed, including alternatives not reached by the receipt. No complete bootable payload, source closure or byte identity claim.",
+  "elf": "g2/build/bootloader-completion/source-image-compatible/snapshots/f3ca176e492a1770ee1838bdd990e6519e3b435ca75d8c44d690233b11087ade/bootloader-source-test.elf",
+  "elf_sha256": "f3ca176e492a1770ee1838bdd990e6519e3b435ca75d8c44d690233b11087ade",
+  "linker": "g2/build/bootloader-completion/source-image-compatible/snapshots/f3ca176e492a1770ee1838bdd990e6519e3b435ca75d8c44d690233b11087ade/startup_source_image.ld",
+  "linker_sha256": "ea15765a5a9c787639240b65c192ab17460732ad961d31c9f08ee3435f882385",
+  "receipt": "g2/build/bootloader-completion/source-image-compatible/snapshots/f3ca176e492a1770ee1838bdd990e6519e3b435ca75d8c44d690233b11087ade/comparison.json",
+  "receipt_sha256": "7f7dedea84670c79030642db9df29cb074d0ac570310f09150a31ce336839117",
+  "receipt_status": "PASS",
+  "receipt_original_instruction_bytes": 38318,
+  "segments": [
+    {
+      "address": "0x10000",
+      "memory_bytes": 64496,
+      "file_bytes": 64496,
+      "flags": 5,
+      "sha256": "69aab95bc3f39403480108dac8dcdb2bf2467fde4e0fcbba470c79e0d7cc71aa"
+    },
+    {
+      "address": "0x30000",
+      "memory_bytes": 41500,
+      "file_bytes": 41500,
+      "flags": 5,
+      "sha256": "d102f0d03cc4bf4911c527ac1aaf1cf4520df72cd41320e53e7e8a60571ce98a"
+    },
+    {
+      "address": "0x433440",
+      "memory_bytes": 32,
+      "file_bytes": 32,
+      "flags": 4,
+      "sha256": "0ce061dd854c31ed681ede525a47e294969f17fe69a6e18c7997206607cb0db8"
+    },
+    {
+      "address": "0x433d58",
+      "memory_bytes": 64,
+      "file_bytes": 64,
+      "flags": 4,
+      "sha256": "82add5a9ae8765e700329d69124b4dfb466fb7dc1bae34ffb9b2e1e5a592875c"
+    },
+    {
+      "address": "0x42f674",
+      "memory_bytes": 1164,
+      "file_bytes": 1164,
+      "flags": 4,
+      "sha256": "6fc9fa7cc921845e12cd3e0dfdb151730a39112e1cf692cc528a30e058222576"
+    },
+    {
+      "address": "0x43409c",
+      "memory_bytes": 8,
+      "file_bytes": 8,
+      "flags": 4,
+      "sha256": "b6fc4836178315962628b4f71a4ca1824778a91202bafe269be0a4af9ec884de"
+    },
+    {
+      "address": "0x433d28",
+      "memory_bytes": 16,
+      "file_bytes": 16,
+      "flags": 4,
+      "sha256": "679c0d07441a6c9461c2ea591e7a06f9512b511fda69bff3c4243f18d2ba8ede"
+    },
+    {
+      "address": "0x433f50",
+      "memory_bytes": 10,
+      "file_bytes": 10,
+      "flags": 4,
+      "sha256": "2b2f872885adb76a729ebb22841b19ca659e326781b8c2efbdd1d717b9eae575"
+    },
+    {
+      "address": "0x20024400",
+      "memory_bytes": 1136,
+      "file_bytes": 0,
+      "flags": 6,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "address": "0x20026df0",
+      "memory_bytes": 72,
+      "file_bytes": 0,
+      "flags": 6,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "address": "0x2001455c",
+      "memory_bytes": 17728,
+      "file_bytes": 0,
+      "flags": 6,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "address": "0x430a9c",
+      "memory_bytes": 84,
+      "file_bytes": 84,
+      "flags": 5,
+      "sha256": "1846b3701862e2d5421626cbdb353e2892d26b310fc684ffabbe00c42e3923b8"
+    },
+    {
+      "address": "0x43401c",
+      "memory_bytes": 8,
+      "file_bytes": 8,
+      "flags": 4,
+      "sha256": "dd7ee6eef507a502f9e1c859b8462f273c779591a37ed189ffe88db2ca68a21e"
+    },
+    {
+      "address": "0x433754",
+      "memory_bytes": 24,
+      "file_bytes": 24,
+      "flags": 4,
+      "sha256": "c69689bd915b0380c557fb108959845ffd678b7c195f825ae2d23ad33af03e66"
+    },
+    {
+      "address": "0x430880",
+      "memory_bytes": 480,
+      "file_bytes": 480,
+      "flags": 4,
+      "sha256": "1ed1fa3682f9c16c403ee0e6cee7761b70ca610656a2b6e56de3f0b05cee7fea"
+    },
+    {
+      "address": "0x433d98",
+      "memory_bytes": 48,
+      "file_bytes": 48,
+      "flags": 4,
+      "sha256": "5edb0868c1b00a19a1b9d1bf4eeca71be0c00dd7f83fc291602cf4adfcd598bf"
+    },
+    {
+      "address": "0x434158",
+      "memory_bytes": 8,
+      "file_bytes": 8,
+      "flags": 4,
+      "sha256": "9c6eb0e3277a2ea00a09263dbbc1cc4a61e4c68cca149f931c89b7c1d099d7ce"
+    },
+    {
+      "address": "0x42dad0",
+      "memory_bytes": 24,
+      "file_bytes": 24,
+      "flags": 4,
+      "sha256": "5ae02ff6e53b8366317a57fa4f157a9de18f62536411334d6743520659ce4c98"
+    },
+    {
+      "address": "0x4336e4",
+      "memory_bytes": 26,
+      "file_bytes": 26,
+      "flags": 4,
+      "sha256": "4c89635f2a55d8bf588d9ce6b0390be2b8d89648bcfd94a02236efc10d193b69"
+    },
+    {
+      "address": "0x419444",
+      "memory_bytes": 4,
+      "file_bytes": 4,
+      "flags": 5,
+      "sha256": "5697b7ae52b5cf29bb25e3c2e7c3940db58fab0062028a0a14e9bbdea14cb755"
+    },
+    {
+      "address": "0x41639a",
+      "memory_bytes": 4,
+      "file_bytes": 4,
+      "flags": 5,
+      "sha256": "0283dfda5b4308c8a11291ef03fd03a05de89241cc092d78de8fb16bdc17b2d1"
+    },
+    {
+      "address": "0x42e2f8",
+      "memory_bytes": 4,
+      "file_bytes": 4,
+      "flags": 5,
+      "sha256": "050c6729b3a8550a732ef73ed9b15ebaa9962f20b078309871cda71c7345f794"
+    },
+    {
+      "address": "0x42e644",
+      "memory_bytes": 4,
+      "file_bytes": 4,
+      "flags": 5,
+      "sha256": "8340b8f380eca8bd32a6206e0420fe164639ee74f7d32c6904d4cee991dd5f78"
+    },
+    {
+      "address": "0x42ddae",
+      "memory_bytes": 4,
+      "file_bytes": 4,
+      "flags": 5,
+      "sha256": "6a13234c2a483899e8abb7175d03b8e14288a94472e2e8f8a00abfc6f6f70d9a"
+    },
+    {
+      "address": "0x42dd14",
+      "memory_bytes": 116,
+      "file_bytes": 116,
+      "flags": 5,
+      "sha256": "ca05ae445eba7c36be907be7c8a6215e857eae6d499344fd5f0afdc19109b994"
+    },
+    {
+      "address": "0x4341a4",
+      "memory_bytes": 4,
+      "file_bytes": 4,
+      "flags": 4,
+      "sha256": "725bca38e056913b09376dacbaa74eb3f961742535d131bf7927e950e11f7103"
+    },
+    {
+      "address": "0x433b3c",
+      "memory_bytes": 17,
+      "file_bytes": 17,
+      "flags": 4,
+      "sha256": "da618e4e1f9ff522b39ce08b93ba28ed2d2debf38da3b3ef3a9bada642686298"
+    },
+    {
+      "address": "0x433b50",
+      "memory_bytes": 18,
+      "file_bytes": 18,
+      "flags": 4,
+      "sha256": "a856efceeec5c6aa8130779566ef942f3e867cc430e04a60150b7e41924f38bc"
+    },
+    {
+      "address": "0x433f68",
+      "memory_bytes": 9,
+      "file_bytes": 9,
+      "flags": 4,
+      "sha256": "6c0d8ed182a09dfaa22e9c9b1b71d0c8f96dc148dfba82a943485fec58bf0799"
+    },
+    {
+      "address": "0x415326",
+      "memory_bytes": 6,
+      "file_bytes": 6,
+      "flags": 5,
+      "sha256": "f09dd117acd87e1cc43b66e513ff9d89b9a6e771c08e45ad8d06bcfa0fcfd9a8"
+    },
+    {
+      "address": "0x43198c",
+      "memory_bytes": 59,
+      "file_bytes": 59,
+      "flags": 4,
+      "sha256": "d2eb02e9e95ec14466a0400364d1ea24497a04b7073a2311ee47e2738ae06d72"
+    },
+    {
+      "address": "0x431e38",
+      "memory_bytes": 6,
+      "file_bytes": 6,
+      "flags": 5,
+      "sha256": "220cc1cf8922a71b3ca18368caedd4caecbf6e45fc145bbf0ed081898eedf0de"
+    },
+    {
+      "address": "0x4330d8",
+      "memory_bytes": 72,
+      "file_bytes": 72,
+      "flags": 4,
+      "sha256": "6b49c166db580b208c6fdbac81858b42603f164b9caf0f065507836def88cfa9"
+    },
+    {
+      "address": "0x42e39c",
+      "memory_bytes": 54,
+      "file_bytes": 54,
+      "flags": 5,
+      "sha256": "0d3acebdcafa910179698bb95700f3f226faf5693b0b47a12f8624b4d80f6d1a"
+    },
+    {
+      "address": "0x431340",
+      "memory_bytes": 74,
+      "file_bytes": 74,
+      "flags": 4,
+      "sha256": "ca9462b7a46fa98faca9acca1e7526de37d1417badd739f69c4586e083f92dbb"
+    },
+    {
+      "address": "0x433024",
+      "memory_bytes": 36,
+      "file_bytes": 36,
+      "flags": 4,
+      "sha256": "947f9c17b73a4338ff8d56fe2b2c55c340bd51db78d3dbbff869b2ddb5f3731a"
+    },
+    {
+      "address": "0x433360",
+      "memory_bytes": 30,
+      "file_bytes": 30,
+      "flags": 4,
+      "sha256": "cf4f26e31cb2eb28828b1b0f70c73b49f3903a7158fb1a839141dc8a5d8e4202"
+    },
+    {
+      "address": "0x43411c",
+      "memory_bytes": 5,
+      "file_bytes": 5,
+      "flags": 4,
+      "sha256": "2498c4cd987b16bdca8edb572c79e077433c77ea77b844557d156e7e324496f6"
+    },
+    {
+      "address": "0x434124",
+      "memory_bytes": 5,
+      "file_bytes": 5,
+      "flags": 4,
+      "sha256": "2498c4cd987b16bdca8edb572c79e077433c77ea77b844557d156e7e324496f6"
+    },
+    {
+      "address": "0x434134",
+      "memory_bytes": 8,
+      "file_bytes": 8,
+      "flags": 4,
+      "sha256": "22835a65866ce18944007db024d01ad9b0fba9985494f3f71755c4d5b25778b5"
+    },
+    {
+      "address": "0x43412c",
+      "memory_bytes": 5,
+      "file_bytes": 5,
+      "flags": 4,
+      "sha256": "1fb4a5dc35b8f2f5076872699bc2c56f10b372be3442d64873e000aba2f394da"
+    },
+    {
+      "address": "0x43413c",
+      "memory_bytes": 8,
+      "file_bytes": 8,
+      "flags": 4,
+      "sha256": "942af4968e52ddd40e0ebf13550c2c72c22f4acb76a5fd79983facf9f30e9f35"
+    }
+  ],
+  "numeric_aliases": [
+    {
+      "symbol": "opencfw_boot_platform_terminal",
+      "thumb_address": "0x4329c5",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_provider_41ba80",
+      "thumb_address": "0x41ba81",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_allocator_log",
+      "thumb_address": "0x08002101",
+      "kind": "named-test-provider-or-unrecovered-implementation-cut"
+    },
+    {
+      "symbol": "printf",
+      "thumb_address": "0x08002111",
+      "kind": "named-test-provider-or-unrecovered-implementation-cut"
+    },
+    {
+      "symbol": "opencfw_bl_task_return",
+      "thumb_address": "0x41b391",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_bl_stack_overflow",
+      "thumb_address": "0x41b601",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_provider_416200",
+      "thumb_address": "0x416201",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_dfu_log",
+      "thumb_address": "0x08002121",
+      "kind": "named-test-provider-or-unrecovered-implementation-cut"
+    },
+    {
+      "symbol": "opencfw_bl_malloc_failed",
+      "thumb_address": "0x41b5f7",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_dfu_terminal",
+      "thumb_address": "0x42e1db",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_control_log",
+      "thumb_address": "0x08002131",
+      "kind": "named-test-provider-or-unrecovered-implementation-cut"
+    },
+    {
+      "symbol": "opencfw_bl_task_delay",
+      "thumb_address": "0x416379",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_power_special_mode",
+      "thumb_address": "0x41bae9",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_rom_mram_program",
+      "thumb_address": "0x0200ff21",
+      "kind": "external-resident-ROM-API-body-absent-from-OTA"
+    },
+    {
+      "symbol": "opencfw_boot_rom48",
+      "thumb_address": "0x00000049",
+      "kind": "external-resident-ROM-API-body-absent-from-OTA"
+    },
+    {
+      "symbol": "opencfw_boot_rom_delay_cycles",
+      "thumb_address": "0x00000041",
+      "kind": "external-resident-ROM-API-body-absent-from-OTA"
+    },
+    {
+      "symbol": "opencfw_boot_elog_snprintf",
+      "thumb_address": "0x41b219",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_elog_vsnprintf",
+      "thumb_address": "0x41b25d",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_uart_rx_blocking",
+      "thumb_address": "0x42348f",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_uart_rx_start",
+      "thumb_address": "0x4234fb",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_startup_shutdown_first",
+      "thumb_address": "0x423d21",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_startup_shutdown_second",
+      "thumb_address": "0x423dd1",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_startup_external_mode",
+      "thumb_address": "0x41583d",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_startup_power_initialize",
+      "thumb_address": "0x41c4b5",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_startup_power_configure",
+      "thumb_address": "0x41c86d",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    },
+    {
+      "symbol": "opencfw_boot_startup_temperature",
+      "thumb_address": "0x41ca2d",
+      "kind": "explicit-fixture-provider-or-unexecuted-stock-alias"
+    }
+  ],
+  "undefined_symbols": [],
+  "receipt_source_hash_mismatches": [],
+  "authenticated_fixture_inputs": [
+    {
+      "kind": "initial-stack-value",
+      "bytes": 4
+    },
+    {
+      "kind": "compressed-initializer-data",
+      "bytes": 695
+    },
+    {
+      "kind": "application-vector",
+      "bytes": 8
+    }
+  ],
+  "modeled_interfaces": [
+    "Synthetic NOR ports and command completion, not physical persistence/latency/coherence",
+    "Selected mutex/kernel/delay/logger callbacks; basic exception delivery",
+    "External ROM0200ff20 status/program callback; no ROM body loaded",
+    "Generated288-byte update and RAM application/flag pages, no application instructions",
+    "Native device-info mode1 query; silicon/core-debug values and resident-ROM delay remain synthetic inputs",
+    "Native cache startup and maintenance operands/barriers; synthetic SCB registers do not establish physical coherence",
+    "Native initializer table/qsort/callback bodies; explicit child API cuts, synthetic ADC samples and six emulated stock FP64 instruction effects",
+    "Native NOR timing/address/serial-mode chain; synthetic status registers, JEDEC response and immediate SPI completion",
+    "Kernel-state caller now binds native source; actual stock/source RAM flag queries have a separate73-case NOR wait comparison with modeled lower status/raw-delay/task-delay APIs. Normal immediately-ready paths may not enter this secondary wait branch."
+  ],
+  "remaining_source_gaps": [
+    "Numeric aliases listed above must each be closed or justified as legitimate external APIs for a standalone payload",
+    "Generic CQ/descriptor execution alternatives, asynchronous progress and cancellation outside exercised source paths",
+    "Initializer child ADC/platform/service/RTOS APIs and remaining startup orchestration, ISR/deferred/cancellation/termination integration",
+    "Full payload vectors/assets/layout/data source definition and compiler reproduction"
+  ]
+}

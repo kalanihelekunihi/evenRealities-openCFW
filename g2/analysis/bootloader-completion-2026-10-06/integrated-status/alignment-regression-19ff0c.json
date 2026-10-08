@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "checker_sha256": "71aeddccdb33ffa7179181630f0eae788000d94360c0274274918a3f2a94af2f",
+  "cases": [
+    {
+      "elf": "g2/build/bootloader-completion/source-image-compatible/snapshots/ac4b5688528586d9d49d332203d4f31985d2ca939728f7cf6cbb51dc951afb51/bootloader-source-test.elf",
+      "elf_sha256": "ac4b5688528586d9d49d332203d4f31985d2ca939728f7cf6cbb51dc951afb51",
+      "expected_pass": false,
+      "exit_code": 1,
+      "stdout": "",
+      "stderr_tail": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/components/bootloader/thread_creation/verify_code_alignment.py\", line 45, in <module>\n    result = inspect(args.elf)\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/components/bootloader/thread_creation/verify_code_alignment.py\", line 30, in inspect\n    assert value % 2 == 0, f'odd Thumb code mapping {symbol.name} at {value:#x} in {section.name}'\n           ^^^^^^^^^^^^^^\nAssertionError: odd Thumb code mapping $t at 0x31a9b in .source_cache\n"
+    },
+    {
+      "elf": "g2/build/bootloader-completion/source-image-compatible/snapshots/19ff0c9366ae316f2671dfd13462c1383ca37696734f2da68427d7c75185afb8/bootloader-source-test.elf",
+      "elf_sha256": "19ff0c9366ae316f2671dfd13462c1383ca37696734f2da68427d7c75185afb8",
+      "expected_pass": true,
+      "exit_code": 0,
+      "stdout": "{\"status\": \"PASS\", \"elf_sha256\": \"19ff0c9366ae316f2671dfd13462c1383ca37696734f2da68427d7c75185afb8\", \"mappings\": 347}\n",
+      "stderr_tail": ""
+    }
+  ]
+}

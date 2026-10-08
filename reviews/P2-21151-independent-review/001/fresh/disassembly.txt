@@ -1,0 +1,81 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpsjfiftd1/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00480c56 <.text>:
+  480c56:	4a9c      	ldr	r2, [pc, #624]	@ (480ec8 <.text+0x272>)
+  480c58:	6811      	ldr	r1, [r2, #0]
+  480c5a:	f3c1 2100 	ubfx	r1, r1, #8, #1
+  480c5e:	2900      	cmp	r1, #0
+  480c60:	d105      	bne.n	480c6e <.text+0x18>
+  480c62:	6811      	ldr	r1, [r2, #0]
+  480c64:	07c9      	lsls	r1, r1, #31
+  480c66:	d405      	bmi.n	480c74 <.text+0x1e>
+  480c68:	2100      	movs	r1, #0
+  480c6a:	7001      	strb	r1, [r0, #0]
+  480c6c:	e004      	b.n	480c78 <.text+0x22>
+  480c6e:	2102      	movs	r1, #2
+  480c70:	7001      	strb	r1, [r0, #0]
+  480c72:	e001      	b.n	480c78 <.text+0x22>
+  480c74:	2101      	movs	r1, #1
+  480c76:	7001      	strb	r1, [r0, #0]
+  480c78:	2000      	movs	r0, #0
+  480c7a:	4770      	bx	lr
+  480c7c:	b51c      	push	{r2, r3, r4, lr}
+  480c7e:	0004      	movs	r4, r0
+  480c80:	466b      	mov	r3, sp
+  480c82:	2201      	movs	r2, #1
+  480c84:	f44f 7111 	mov.w	r1, #580	@ 0x244
+  480c88:	2001      	movs	r0, #1
+  480c8a:	f053 f957 	bl	4d3f3c <.text+0x532e6>
+  480c8e:	2100      	movs	r1, #0
+  480c90:	60e1      	str	r1, [r4, #12]
+  480c92:	2800      	cmp	r0, #0
+  480c94:	d152      	bne.n	480d3c <.text+0xe6>
+  480c96:	4979      	ldr	r1, [pc, #484]	@ (480e7c <.text+0x226>)
+  480c98:	680a      	ldr	r2, [r1, #0]
+  480c9a:	f3c2 1203 	ubfx	r2, r2, #4, #4
+  480c9e:	2a02      	cmp	r2, #2
+  480ca0:	d109      	bne.n	480cb6 <.text+0x60>
+  480ca2:	680a      	ldr	r2, [r1, #0]
+  480ca4:	f012 020f 	ands.w	r2, r2, #15
+  480ca8:	2a02      	cmp	r2, #2
+  480caa:	db04      	blt.n	480cb6 <.text+0x60>
+  480cac:	9a00      	ldr	r2, [sp, #0]
+  480cae:	2aff      	cmp	r2, #255	@ 0xff
+  480cb0:	d201      	bcs.n	480cb6 <.text+0x60>
+  480cb2:	2201      	movs	r2, #1
+  480cb4:	e000      	b.n	480cb8 <.text+0x62>
+  480cb6:	2200      	movs	r2, #0
+  480cb8:	b2d2      	uxtb	r2, r2
+  480cba:	2a00      	cmp	r2, #0
+  480cbc:	d023      	beq.n	480d06 <.text+0xb0>
+  480cbe:	6809      	ldr	r1, [r1, #0]
+  480cc0:	f011 010f 	ands.w	r1, r1, #15
+  480cc4:	2903      	cmp	r1, #3
+  480cc6:	d002      	beq.n	480cce <.text+0x78>
+  480cc8:	9900      	ldr	r1, [sp, #0]
+  480cca:	1e49      	subs	r1, r1, #1
+  480ccc:	9100      	str	r1, [sp, #0]
+  480cce:	f114 010c 	adds.w	r1, r4, #12
+  480cd2:	2202      	movs	r2, #2
+  480cd4:	680b      	ldr	r3, [r1, #0]
+  480cd6:	f362 230f 	bfi	r3, r2, #8, #8
+  480cda:	600b      	str	r3, [r1, #0]
+  480cdc:	f114 010c 	adds.w	r1, r4, #12
+  480ce0:	466a      	mov	r2, sp
+  480ce2:	7812      	ldrb	r2, [r2, #0]
+  480ce4:	680b      	ldr	r3, [r1, #0]
+  480ce6:	f362 0307 	bfi	r3, r2, #0, #8
+  480cea:	600b      	str	r3, [r1, #0]
+  480cec:	f114 010c 	adds.w	r1, r4, #12
+  480cf0:	680a      	ldr	r2, [r1, #0]
+  480cf2:	f452 3200 	orrs.w	r2, r2, #131072	@ 0x20000
+  480cf6:	600a      	str	r2, [r1, #0]
+  480cf8:	f114 010c 	adds.w	r1, r4, #12
+  480cfc:	680a      	ldr	r2, [r1, #0]
+  480cfe:	f452 3280 	orrs.w	r2, r2, #65536	@ 0x10000
+  480d02:	600a      	str	r2, [r1, #0]
+  480d04:	e034      	b.n	480d70 <.text+0x11a>

@@ -1,0 +1,4 @@
+# Selector one length mask sixteen byte log
+
+Partial/unaccepted;138instructionbytes,inherited88-byteframe,R4source,R5destination. At0x47AF8Cquery0x43D0CE;bit0oneenters0x47AF9C,otherwisequeryagainandbit2zero skips0x47AFB0. MaskpathR1literal47B704,freshunsignedhalfword[R4+28]SP0,thenfreshbyte[R4+31]R3,R2=R1;call0x43CE9E(0x10800000,R1,R2,freshbyte31,fifthfreshhalfword28).
+At0x47AFB0queryfreshstatus;bit1zero skipspending0x47B016. Otherwiseindependentlyfreshreadbytes[R4+19..4]descendingorder. Foroffsetjfrom19downto4 storeunsignedbyteatSP(4*j-8),coveringSP68..8. Thenliteral47B708 SP4,1300 SP0;call0x43D574(4,literal47B6F8,literal47B6F4,literal47B6F0,fifth1300,sixthliteral47B708,seventhbyte4,eighthbyte5,...,twentysecondbyte19). Keeporderedreadsandexplicitstackarguments;no cachedsourcebuffer/helpercontract. No C,freezeorcompletenessclaim.

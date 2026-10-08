@@ -1,0 +1,3 @@
+# Frameless entry bit inserted into three ordered word fields
+
+Partial/unaccepted;40 instruction bytes47FE6C..47FE94. R1literal4801D0valueusedpointer. R2LOW8(entryR0);freshword[R1]→R3,BFIbit16fromR2bit0,store. IndependentlyR2LOW8(entryR0);newfreshword[R1]→R3,BFIbit0fromR2bit0,store. R0itselfLOW8(entryR0);newfreshword[R1]→R2,BFIbit5fromR0bit0,store. BX LR returnsLOW8(entryR0),notnormalizedbitvalue;R1pointer,R2finalwrittenword,R3secondwrittenword. Three distinctRMWs preserveotherbitsbasedonfreshread;do notcombineorreplacefullLOW8returnwithbit0. No stack/helper/PRIMASKoperations. Pointedownership/MMIO/C/freeze/fullcoverage unresolved/notclaimed.

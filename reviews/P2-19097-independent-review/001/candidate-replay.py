@@ -1,0 +1,17 @@
+from pathlib import Path
+import json,hashlib,re,subprocess,tempfile
+b=Path('g2/build/pseudocode-first/20260930T190500Z');src=b/'attempts/P1-canonical-fixed-images-005/002/apollo_main-flash.bin';d=src.read_bytes();h=lambda x:hashlib.sha256(x).hexdigest();assert h(d)=='19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701';start=0x469400;end=0x46949a
+with tempfile.TemporaryDirectory() as td:
+ t=Path(td);(t/'input.bin').write_bytes(d[start-0x438000:end-0x438000]);(t/'input.s').write_text('.syntax unified\n.cpu cortex-m55\n.thumb\n.text\n.incbin "'+str(t/'input.bin')+'"\n');subprocess.run(['/opt/homebrew/bin/arm-none-eabi-as',str(t/'input.s'),'-o',str(t/'input.o')],check=True);rawtext=subprocess.check_output(['/opt/homebrew/bin/arm-none-eabi-objdump','-D','-j','.text','-M','force-thumb','--adjust-vma='+hex(start),str(t/'input.o')],text=True)
+rows=[];cursor=start
+for line in rawtext.splitlines():
+ m=re.match(r'\s*([0-9a-f]+):\s+([0-9a-f]{4}(?: [0-9a-f]{4})?)\s+([^\s]+)\s*(.*)',line)
+ if not m:continue
+ a=int(m[1],16)
+ if not start<=a<end:continue
+ raw=b''.join(int(v,16).to_bytes(2,'little') for v in m[2].split());assert a==cursor and raw==d[a-0x438000:a-0x438000+len(raw)];cursor+=len(raw);rows.append(dict(address=a,bytes=raw.hex(),mnemonic=m[3],operands=m[4]))
+assert cursor==end,(hex(cursor),hex(end),rawtext)
+o=b/'analysis/apollo-main-diagnostic-fixed-library-inverted-context-byte-child-diagnostics-pop-return-and-selector-leaves-19498-map/001';o.mkdir(parents=True,exist_ok=False);(o/'instructions.json').write_text(json.dumps([dict(start=start,end=end,instructions=rows)],indent=2)+'\n');(o/'disassembly.txt').write_text(rawtext);refs=sorted(set(int(m[1],16) for row in rows if (m:=re.search(r'@\s*\(?([0-9a-f]{6,8})',row['operands'])) and 'pc' in row['operands']))
+(o/'references.json').write_text(json.dumps([dict(address=a,bytes=d[a-0x438000:a-0x438000+4].hex(),value=int.from_bytes(d[a-0x438000:a-0x438000+4],'little')) for a in refs],indent=2)+'\n')
+(o/'pseudocode.md').write_text('# Inverted byte, return and leaves 0x469400..0x46949A\n\nPartial/unaccepted;154 instruction bytes. Inherit24-byte frame. R4 low8contextbool zero sets byteSP12=1, nonzero sets byteSP12=0, preserving upper24 bits of savedoriginalR3word. Shared46940E setsSP0=4,R3=0,R2=1,R1=SP12,R0=266 ->464F76. FULLresultR4=R0 zero branches46946C. Nonzero fresh43D0CE bit1diagnostic storesR4SP8,literal469B74SP4,150SP0,R3literal469B6C,R2literal469B38,R1literal469B3C,R0=1 ->43D574. Separatefreshbit0 orconditionalthirdfreshbit2 enables R2=literal469B78,R3=FULLR4,R1=R2,R0=0x04400000 ->43CE9E.\n\nShared46946C POP R0/R1/R2/R3/R4/PC consumes24bytes. Initialglobalguardnonzero returns originalR0/R1/R2/R3. Actionpaths return R0=4 fromSP0, unless resultdiagnosticbit1 overwroteSP0 with150. R1/R2 similarly reflect overwrittencontext/result ifdiagnostic; restoredR3 includesSP12modifiedbyte and possiblechildwrites throughpointer. LivechildR0 is not returned. R4 restored.\n\n46946E standalone BXLR changes no registers. 469470..46949A leaf comparesFULLR2 inorderedtree10,66,67,68,69,72; eachcase anddefault separatelysetR0=1 andBXLR469498. Preserveorderedcomparisons despitecommonresult; nochildcalls. No C,freezeorwholecorpusclaim.\n')
+(o/'replay.py').write_bytes(Path(__file__).read_bytes());(o/'receipt.json').write_text(json.dumps(dict(accepted=False,status='partial',input_sha256=h(d),instruction_bytes=end-start,files={p.name:h(p.read_bytes()) for p in o.iterdir()}),indent=2)+'\n');print('PASS',end-start)

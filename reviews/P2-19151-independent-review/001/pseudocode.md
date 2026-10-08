@@ -1,0 +1,5 @@
+# Stack-word cases and early return 0x469DDE..0x469E18
+
+Partial/unaccepted;58instructionbytes. Inherit32frame, priorfreshSP16wordzero. OrderedFULLwordSP12 comparisons8,11,5,6,224,4094; EACHcomparisonfreshreloadsSP12 toR0. Firstfiveequalbranches469E06;last4094comparisonsetsR1=4094 andunequalbranches469E18 outsidechunk. Do notcollapseintocachedswitchifmemoryreadfidelityrequired.
+
+Matchingcase469E06 calls45A8EE(34,0,0,100).469E12explicitR0=0 (alsoearliermode/predicatefailureentry);469E14 ADDSP24 skips20localbytesandsavedoriginalR3word;POP R4/PC8 restores32frame. EarlierselectorrejectionFFFFFFFF enters469E14directlypreservingerrorR0. 469E18 is SAMEfunctioncontinuationenteredfromSP16nonzeroorunmatchedSP12cases, notnewentry;frameintactthere. Childcontracts unresolved; no C,freezeorwholefunctionclaim.

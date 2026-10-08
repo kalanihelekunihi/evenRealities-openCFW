@@ -1,0 +1,48 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpn2qx09sc/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00482dd8 <.text>:
+  482dd8:	b433      	push	{r0, r1, r4, r5}
+  482dda:	b081      	sub	sp, #4
+  482ddc:	f248 0081 	movw	r0, #32897	@ 0x8081
+  482de0:	f89d 1006 	ldrb.w	r1, [sp, #6]
+  482de4:	0013      	movs	r3, r2
+  482de6:	b2db      	uxtb	r3, r3
+  482de8:	f89d 400a 	ldrb.w	r4, [sp, #10]
+  482dec:	0015      	movs	r5, r2
+  482dee:	b2ed      	uxtb	r5, r5
+  482df0:	f1d5 05ff 	rsbs	r5, r5, #255	@ 0xff
+  482df4:	436c      	muls	r4, r5
+  482df6:	fb03 4101 	mla	r1, r3, r1, r4
+  482dfa:	4341      	muls	r1, r0
+  482dfc:	0dc9      	lsrs	r1, r1, #23
+  482dfe:	f88d 1002 	strb.w	r1, [sp, #2]
+  482e02:	f89d 1005 	ldrb.w	r1, [sp, #5]
+  482e06:	0013      	movs	r3, r2
+  482e08:	b2db      	uxtb	r3, r3
+  482e0a:	f89d 4009 	ldrb.w	r4, [sp, #9]
+  482e0e:	0015      	movs	r5, r2
+  482e10:	b2ed      	uxtb	r5, r5
+  482e12:	f1d5 05ff 	rsbs	r5, r5, #255	@ 0xff
+  482e16:	436c      	muls	r4, r5
+  482e18:	fb03 4101 	mla	r1, r3, r1, r4
+  482e1c:	4341      	muls	r1, r0
+  482e1e:	0dc9      	lsrs	r1, r1, #23
+  482e20:	f88d 1001 	strb.w	r1, [sp, #1]
+  482e24:	f89d 1004 	ldrb.w	r1, [sp, #4]
+  482e28:	0013      	movs	r3, r2
+  482e2a:	b2db      	uxtb	r3, r3
+  482e2c:	f89d 4008 	ldrb.w	r4, [sp, #8]
+  482e30:	b2d2      	uxtb	r2, r2
+  482e32:	f1d2 02ff 	rsbs	r2, r2, #255	@ 0xff
+  482e36:	fb02 f204 	mul.w	r2, r2, r4
+  482e3a:	fb03 2201 	mla	r2, r3, r1, r2
+  482e3e:	4342      	muls	r2, r0
+  482e40:	0dd2      	lsrs	r2, r2, #23
+  482e42:	f88d 2000 	strb.w	r2, [sp]
+  482e46:	9800      	ldr	r0, [sp, #0]
+  482e48:	bc3e      	pop	{r1, r2, r3, r4, r5}
+  482e4a:	4770      	bx	lr

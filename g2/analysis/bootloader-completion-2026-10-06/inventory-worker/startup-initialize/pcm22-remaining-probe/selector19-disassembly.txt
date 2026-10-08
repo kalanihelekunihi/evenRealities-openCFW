@@ -1,0 +1,103 @@
+
+g2/blobs/official/g2-2.2.6.10/ota_s200_bootloader.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00429a30 <.data+0x19a30>:
+  429a30:	e92d 4ff8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, r9, sl, fp, lr}
+  429a34:	0005      	movs	r5, r0
+  429a36:	0014      	movs	r4, r2
+  429a38:	2000      	movs	r0, #0
+  429a3a:	f8df 0648 	ldr.w	r0, [pc, #1608]	@ 0x42a084
+  429a3e:	eb00 0285 	add.w	r2, r0, r5, lsl #2
+  429a42:	1d16      	adds	r6, r2, #4
+  429a44:	eb00 0281 	add.w	r2, r0, r1, lsl #2
+  429a48:	1d12      	adds	r2, r2, #4
+  429a4a:	f110 0364 	adds.w	r3, r0, #100	@ 0x64
+  429a4e:	7818      	ldrb	r0, [r3, #0]
+  429a50:	f010 007f 	ands.w	r0, r0, #127	@ 0x7f
+  429a54:	f88d 0000 	strb.w	r0, [sp]
+  429a58:	4668      	mov	r0, sp
+  429a5a:	681f      	ldr	r7, [r3, #0]
+  429a5c:	09ff      	lsrs	r7, r7, #7
+  429a5e:	f017 077f 	ands.w	r7, r7, #127	@ 0x7f
+  429a62:	7047      	strb	r7, [r0, #1]
+  429a64:	681f      	ldr	r7, [r3, #0]
+  429a66:	0bbf      	lsrs	r7, r7, #14
+  429a68:	f017 077f 	ands.w	r7, r7, #127	@ 0x7f
+  429a6c:	7087      	strb	r7, [r0, #2]
+  429a6e:	681b      	ldr	r3, [r3, #0]
+  429a70:	0d5b      	lsrs	r3, r3, #21
+  429a72:	f013 037f 	ands.w	r3, r3, #127	@ 0x7f
+  429a76:	70c3      	strb	r3, [r0, #3]
+  429a78:	7813      	ldrb	r3, [r2, #0]
+  429a7a:	f013 037f 	ands.w	r3, r3, #127	@ 0x7f
+  429a7e:	6812      	ldr	r2, [r2, #0]
+  429a80:	f3c2 5246 	ubfx	r2, r2, #21, #7
+  429a84:	6832      	ldr	r2, [r6, #0]
+  429a86:	f3c2 5746 	ubfx	r7, r2, #21, #7
+  429a8a:	f896 8000 	ldrb.w	r8, [r6]
+  429a8e:	f018 087f 	ands.w	r8, r8, #127	@ 0x7f
+  429a92:	f011 0103 	ands.w	r1, r1, #3
+  429a96:	f810 9001 	ldrb.w	r9, [r0, r1]
+  429a9a:	f015 0103 	ands.w	r1, r5, #3
+  429a9e:	f810 a001 	ldrb.w	sl, [r0, r1]
+  429aa2:	f8df 05e4 	ldr.w	r0, [pc, #1508]	@ 0x42a088
+  429aa6:	6800      	ldr	r0, [r0, #0]
+  429aa8:	07c0      	lsls	r0, r0, #31
+  429aaa:	d511      	bpl.n	0x429ad0
+  429aac:	f05f 0b00 	movs.w	fp, #0
+  429ab0:	e004      	b.n	0x429abc
+  429ab2:	2001      	movs	r0, #1
+  429ab4:	f7f3 fb84 	bl	0x41d1c0
+  429ab8:	f11b 0b01 	adds.w	fp, fp, #1
+  429abc:	f1bb 0f3c 	cmp.w	fp, #60	@ 0x3c
+  429ac0:	d204      	bcs.n	0x429acc
+  429ac2:	f8df 06f0 	ldr.w	r0, [pc, #1776]	@ 0x42a1b4
+  429ac6:	6800      	ldr	r0, [r0, #0]
+  429ac8:	0040      	lsls	r0, r0, #1
+  429aca:	d5f2      	bpl.n	0x429ab2
+  429acc:	f000 fabd 	bl	0x42a04a
+  429ad0:	f8df 06e4 	ldr.w	r0, [pc, #1764]	@ 0x42a1b8
+  429ad4:	6004      	str	r4, [r0, #0]
+  429ad6:	f8df 07cc 	ldr.w	r0, [pc, #1996]	@ 0x42a2a4
+  429ada:	6005      	str	r5, [r0, #0]
+  429adc:	6830      	ldr	r0, [r6, #0]
+  429ade:	f3c0 10c9 	ubfx	r0, r0, #7, #10
+  429ae2:	f8df 17c4 	ldr.w	r1, [pc, #1988]	@ 0x42a2a8
+  429ae6:	6008      	str	r0, [r1, #0]
+  429ae8:	6830      	ldr	r0, [r6, #0]
+  429aea:	f3c0 4043 	ubfx	r0, r0, #17, #4
+  429aee:	f8df 17bc 	ldr.w	r1, [pc, #1980]	@ 0x42a2ac
+  429af2:	6008      	str	r0, [r1, #0]
+  429af4:	f8df 07b8 	ldr.w	r0, [pc, #1976]	@ 0x42a2b0
+  429af8:	6007      	str	r7, [r0, #0]
+  429afa:	f8df 0580 	ldr.w	r0, [pc, #1408]	@ 0x42a07c
+  429afe:	f8c0 8000 	str.w	r8, [r0]
+  429b02:	ebba 0009 	subs.w	r0, sl, r9
+  429b06:	2801      	cmp	r0, #1
+  429b08:	db01      	blt.n	0x429b0e
+  429b0a:	0040      	lsls	r0, r0, #1
+  429b0c:	e000      	b.n	0x429b10
+  429b0e:	2000      	movs	r0, #0
+  429b10:	eb10 0109 	adds.w	r1, r0, r9
+  429b14:	2980      	cmp	r1, #128	@ 0x80
+  429b16:	d306      	bcc.n	0x429b26
+  429b18:	f8df 0564 	ldr.w	r0, [pc, #1380]	@ 0x42a080
+  429b1c:	6801      	ldr	r1, [r0, #0]
+  429b1e:	f051 017f 	orrs.w	r1, r1, #127	@ 0x7f
+  429b22:	6001      	str	r1, [r0, #0]
+  429b24:	e007      	b.n	0x429b36
+  429b26:	f8df 1558 	ldr.w	r1, [pc, #1368]	@ 0x42a080
+  429b2a:	eb10 0909 	adds.w	r9, r0, r9
+  429b2e:	6808      	ldr	r0, [r1, #0]
+  429b30:	f369 0006 	bfi	r0, r9, #0, #7
+  429b34:	6008      	str	r0, [r1, #0]
+  429b36:	2032      	movs	r0, #50	@ 0x32
+  429b38:	f7f3 fb42 	bl	0x41d1c0
+  429b3c:	f8df 0540 	ldr.w	r0, [pc, #1344]	@ 0x42a080
+  429b40:	6801      	ldr	r1, [r0, #0]
+  429b42:	f36a 0106 	bfi	r1, sl, #0, #7
+  429b46:	6001      	str	r1, [r0, #0]
+  429b48:	e8bd 8ff1 	ldmia.w	sp!, {r0, r4, r5, r6, r7, r8, r9, sl, fp, pc}

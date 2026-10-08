@@ -1,0 +1,62 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpbxqnhj54/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00480f8a <.text>:
+  480f8a:	b2c9      	uxtb	r1, r1
+  480f8c:	2900      	cmp	r1, #0
+  480f8e:	d003      	beq.n	480f98 <.text+0xe>
+  480f90:	2902      	cmp	r1, #2
+  480f92:	d017      	beq.n	480fc4 <.text+0x3a>
+  480f94:	d30f      	bcc.n	480fb6 <.text+0x2c>
+  480f96:	e01c      	b.n	480fd2 <.text+0x48>
+  480f98:	f8df 17b0 	ldr.w	r1, [pc, #1968]	@ 48174c <.text+0x7c2>
+  480f9c:	f3c0 1342 	ubfx	r3, r0, #5, #3
+  480fa0:	eb01 0183 	add.w	r1, r1, r3, lsl #2
+  480fa4:	6809      	ldr	r1, [r1, #0]
+  480fa6:	f010 001f 	ands.w	r0, r0, #31
+  480faa:	40c1      	lsrs	r1, r0
+  480fac:	f011 0101 	ands.w	r1, r1, #1
+  480fb0:	6011      	str	r1, [r2, #0]
+  480fb2:	2000      	movs	r0, #0
+  480fb4:	4770      	bx	lr
+  480fb6:	f8df 1798 	ldr.w	r1, [pc, #1944]	@ 481750 <.text+0x7c6>
+  480fba:	f3c0 1342 	ubfx	r3, r0, #5, #3
+  480fbe:	eb01 0183 	add.w	r1, r1, r3, lsl #2
+  480fc2:	e7ef      	b.n	480fa4 <.text+0x1a>
+  480fc4:	f8df 178c 	ldr.w	r1, [pc, #1932]	@ 481754 <.text+0x7ca>
+  480fc8:	f3c0 1342 	ubfx	r3, r0, #5, #3
+  480fcc:	eb01 0183 	add.w	r1, r1, r3, lsl #2
+  480fd0:	e7e8      	b.n	480fa4 <.text+0x1a>
+  480fd2:	2006      	movs	r0, #6
+  480fd4:	e7ee      	b.n	480fb4 <.text+0x2a>
+  480fd6:	b51c      	push	{r2, r3, r4, lr}
+  480fd8:	0004      	movs	r4, r0
+  480fda:	b2c9      	uxtb	r1, r1
+  480fdc:	2900      	cmp	r1, #0
+  480fde:	d008      	beq.n	480ff2 <.text+0x68>
+  480fe0:	2902      	cmp	r1, #2
+  480fe2:	d01e      	beq.n	481022 <.text+0x98>
+  480fe4:	d311      	bcc.n	48100a <.text+0x80>
+  480fe6:	2904      	cmp	r1, #4
+  480fe8:	d03e      	beq.n	481068 <.text+0xde>
+  480fea:	d331      	bcc.n	481050 <.text+0xc6>
+  480fec:	2905      	cmp	r1, #5
+  480fee:	d047      	beq.n	481080 <.text+0xf6>
+  480ff0:	e05c      	b.n	4810ac <.text+0x122>
+  480ff2:	f8df 0764 	ldr.w	r0, [pc, #1892]	@ 481758 <.text+0x7ce>
+  480ff6:	f3c4 1142 	ubfx	r1, r4, #5, #3
+  480ffa:	2201      	movs	r2, #1
+  480ffc:	f014 041f 	ands.w	r4, r4, #31
+  481000:	fa12 f404 	lsls.w	r4, r2, r4
+  481004:	f840 4021 	str.w	r4, [r0, r1, lsl #2]
+  481008:	e050      	b.n	4810ac <.text+0x122>
+  48100a:	f8df 0750 	ldr.w	r0, [pc, #1872]	@ 48175c <.text+0x7d2>
+  48100e:	f3c4 1142 	ubfx	r1, r4, #5, #3
+  481012:	2201      	movs	r2, #1
+  481014:	f014 041f 	ands.w	r4, r4, #31
+  481018:	fa12 f404 	lsls.w	r4, r2, r4
+  48101c:	f840 4021 	str.w	r4, [r0, r1, lsl #2]
+  481020:	e044      	b.n	4810ac <.text+0x122>

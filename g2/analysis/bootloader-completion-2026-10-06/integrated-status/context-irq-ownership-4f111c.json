@@ -1,0 +1,40 @@
+{
+  "image_sha256": "4f111ccb9ed4131499a99a47af126d83f4b56f8abb54a5e6073cbc6566e93e8a",
+  "functions": [
+    {
+      "function": "interrupt-status",
+      "symbol": "opencfw_boot_iom_interrupt_status",
+      "original_start": "0x42c672",
+      "original_end_exclusive": "0x42c6b6",
+      "original_body_bytes": 68,
+      "body_sha256": "12a9d08495567647cb0d8416dfb736ee532845317b856b2b86e26b485510d347",
+      "source": "g2/components/bootloader/initializer_callbacks/context_irq.c",
+      "source_sha256": "b575bf206f6d735fd15c3fe6b96ec39bfe02b526c3475ebd73533368d2c44952"
+    },
+    {
+      "function": "interrupt-clear",
+      "symbol": "opencfw_boot_iom_interrupt_clear",
+      "original_start": "0x42c6b6",
+      "original_end_exclusive": "0x42c6e4",
+      "original_body_bytes": 46,
+      "body_sha256": "4a307af7da21ad92dbface1def9fb21fe550c8452a2c1a6b01755fdd0d7e2d4a",
+      "source": "g2/components/bootloader/initializer_callbacks/context_irq.c",
+      "source_sha256": "b575bf206f6d735fd15c3fe6b96ec39bfe02b526c3475ebd73533368d2c44952"
+    },
+    {
+      "function": "iom4-irq-wrapper",
+      "symbol": "opencfw_boot_iom4_irq_dispatch",
+      "original_start": "0x430610",
+      "original_end_exclusive": "0x43063c",
+      "original_body_bytes": 44,
+      "body_sha256": "e86d5fd014697cf1e1816f931f8b9224116bf9a9e40b6757ad58523eb21c3c92",
+      "source": "g2/components/bootloader/initializer_callbacks/context_irq.c",
+      "source_sha256": "b575bf206f6d735fd15c3fe6b96ec39bfe02b526c3475ebd73533368d2c44952"
+    }
+  ],
+  "original_body_bytes": 158,
+  "vector_address": "0x410068",
+  "vector_word": "0x430611",
+  "external_irq": 10,
+  "limits": "Wrapper invoked as a function; no modeled exception entry/return or physical IRQ delivery."
+}

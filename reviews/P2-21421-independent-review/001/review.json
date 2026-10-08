@@ -1,0 +1,20 @@
+{
+  "review_id": "P2-21421-independent-review",
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-list-counter-return-ninety-two-byte-allocation-copy-prefix-21820-map/001",
+  "status": "partial",
+  "accepted": false,
+  "checks": {
+    "fresh_replay": "pass",
+    "instruction_bytes": 96,
+    "instructions_match": true,
+    "references_match": true,
+    "frame_bytes": 32,
+    "allocation_size": 92
+  },
+  "limitations": [
+    "second copy/helper continuation unresolved",
+    "external helper contracts not inferred",
+    "exception behavior outside evidence",
+    "no whole-routine coverage or acceptance claim"
+  ]
+}

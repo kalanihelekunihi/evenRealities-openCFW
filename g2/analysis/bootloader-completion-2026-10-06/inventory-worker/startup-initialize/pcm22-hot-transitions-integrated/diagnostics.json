@@ -1,0 +1,33 @@
+{
+  "verifier_pin_failures": "focused-first-attempt.json and focused-second-pin-attempt.json; repaired runs in focused-pin-repairs.json",
+  "direct_first_attempt": {
+    "error": "UC_ERR_READ_UNMAPPED",
+    "cause": "test memory map omitted e001e300 cache-block register reached by selector21 native cache helper",
+    "resolution": "mapped e001e000 page; no candidate instruction changes"
+  },
+  "synthetic_mutation_attempt": {
+    "status": "DIAGNOSTIC_NOT_PASS",
+    "injected_class": 5,
+    "fault_pc": "0x434044",
+    "last_original_pcs": [
+      "0x42a318",
+      "0x42a31a",
+      "0x42a31c",
+      "0x42a434",
+      "0x42a436",
+      "0x42a438",
+      "0x42a528",
+      "0x42a52a",
+      "0x42a52c",
+      "0x42a52e",
+      "0x42a530",
+      "0x42a532",
+      "0x42a534",
+      "0x42a538",
+      "0x42a53c",
+      "0x42a540"
+    ],
+    "resolution": "Bound prefix comparison before actual state/deepsleep helper entry. Do not count downstream corrupted-global execution as PASS."
+  },
+  "prototype_correction": "Final void TON/timer-stop and uint32 cache-disable declarations reproduce frozen objects exactly; source-object-reproduction.json"
+}

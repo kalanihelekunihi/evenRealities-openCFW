@@ -1,0 +1,19 @@
+{
+  "review_id": "P2-21415-independent-review",
+  "candidate": "analysis/apollo-main-diagnostic-fixed-library-configuration-three-copied-flash-records-21814-data/001",
+  "status": "partial",
+  "accepted": false,
+  "checks": {
+    "fresh_replay": "pass",
+    "data_bytes": 60,
+    "bytes_match": true,
+    "word_count": 15,
+    "map_21796_literals_match": true,
+    "copy_ranges_match": true
+  },
+  "limitations": [
+    "field semantics/RAM contents excluded",
+    "helper contracts not inferred",
+    "no exhaustive ownership or acceptance claim"
+  ]
+}

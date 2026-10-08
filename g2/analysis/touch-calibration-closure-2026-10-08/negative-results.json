@@ -1,0 +1,59 @@
+[
+  {
+    "mutant": "calibrate_at_49",
+    "rejected": true,
+    "inputs": [
+      1000,
+      1049,
+      1049,
+      1,
+      1,
+      1,
+      "success"
+    ],
+    "different_fields": [
+      "record",
+      "storage",
+      "context",
+      "events"
+    ]
+  },
+  {
+    "mutant": "new_baseline_in_same_report",
+    "rejected": true,
+    "inputs": [
+      1000,
+      1050,
+      1049,
+      1,
+      1,
+      1,
+      "success"
+    ],
+    "different_fields": [
+      "report",
+      "tx"
+    ]
+  },
+  {
+    "mutant": "proximity_at_500",
+    "rejected": true,
+    "inputs": [
+      1000,
+      1500,
+      1049,
+      0,
+      1,
+      0,
+      "success"
+    ],
+    "different_fields": [
+      "report",
+      "tx",
+      "flags",
+      "proximity",
+      "i2c",
+      "gpio"
+    ]
+  }
+]

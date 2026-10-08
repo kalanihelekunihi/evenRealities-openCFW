@@ -1,0 +1,5 @@
+# Hex float discarded digit, carry scan and ASCII conversion
+
+Partial/unaccepted;132 instruction bytes481EE6..481F6A. Continues481836232frame. R6=workingcursor-(SP133)mod2^32 digitlength;R4=SP133;R0=wordSP4budget;ifsignedlength<=budget R0=length. SignedR0negative→481F5C. OtherwiseifR0<lengthsigned,freshbyte[SP133+R0]>=8→R1=15,elseR1=0;R0>=length→R1=0. R2=R0,R3=SP132+R2. Backwardscan:freshbyte[R3]postdecrement→R5;R2--;ifR5==R1 R0--andrepeat. No boundguardinencodedscan;SP132sentinel/helper-returnbyteaffectsstop. R1=15→freshbyte[SP133+R2]increment1storelow8 there. R2negative→SP0exponent+=4,R4=SP132,R0++mod2^32;elseR4SP133.
+
+R1=R0-1;signednegative skipsASCIIloop. OtherwiseR2=R4+R1;repeatfreshbyte[R2]+48→R3;low8R3>=58 (signedcompare,but0..255) conditionallyR3+=R11then-=58;R1--;storelow8R3[R2]postdecrement;repeatwhileR1nonnegative. ExactconversionusesoriginalR11'a'/'A',notfixedtable. ReloadprecisionSP56;signednonnegative→4820BC;negative→SP56=R0-1then4820BC. Preservebackwardread/writeorder,carry/exponentchangesandmodarithmetic;no inferredties-to-even orC/freeze/fullcoverage/equality claim.

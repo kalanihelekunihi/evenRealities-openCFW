@@ -1,0 +1,3 @@
+# Registration callback removes, frees and invokes saved pair
+
+Partial/unaccepted;26 instructionbytes4840AC..4840C6,Thumbtarget4840AD usedby21788/21790. PUSH R4/R5/R6/LR16B;R6=word[entryR0+12]context;loadpairR4/R5=word[R6]/word[R6+4]. R0stillentryobject;call4644EE(liveentryR1/R2/R3retained). R0=R6,call44F758free. ThenR0=R5savedargument,R1=R4savedfunction,BLXR1;R2/R3arefreehelper-effects,notrestored. CallbackresultR0retained;POPR4/R5/R6/PCrelease16B. Paircapturedbefore removal/free and invokedafter both. No null checks or retry in observed routine. Adjacent4840C6..C8paddingexcluded. No C,freeze,wholecoverage or equalityclaim.

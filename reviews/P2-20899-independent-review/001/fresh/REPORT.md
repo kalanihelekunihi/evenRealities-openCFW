@@ -1,0 +1,1 @@
+Partial/unaccepted continuity47CF60..47D818,2232instructionbytes,19maps. Component hashes,pinnedrawtiling andlocalbranch targets includingCBZ/CBNZ checked.40frame,sixselector paths,independentbuffer/flag/helperobservations,asymmetrichelpercomparisons andexplicitzero return retained. Externalhelpercontracts notfullyrecovered. No wholecoverage/source/freezeclaim.

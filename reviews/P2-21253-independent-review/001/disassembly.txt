@@ -1,0 +1,74 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpcibm76sl/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00482590 <.text>:
+  482590:	3230      	adds	r2, #48	@ 0x30
+  482592:	b2d0      	uxtb	r0, r2
+  482594:	1e76      	subs	r6, r6, #1
+  482596:	283a      	cmp	r0, #58	@ 0x3a
+  482598:	9601      	str	r6, [sp, #4]
+  48259a:	da0e      	bge.n	4825ba <.text+0x2a>
+  48259c:	55a2      	strb	r2, [r4, r6]
+  48259e:	4640      	mov	r0, r8
+  4825a0:	4649      	mov	r1, r9
+  4825a2:	462a      	mov	r2, r5
+  4825a4:	17eb      	asrs	r3, r5, #31
+  4825a6:	f7fa fb5b 	bl	47cc60 <.text-0x5930>
+  4825aa:	4680      	mov	r8, r0
+  4825ac:	ea5f 0901 	movs.w	r9, r1
+  4825b0:	bf08      	it	eq
+  4825b2:	f1b8 0f00 	cmpeq.w	r8, #0
+  4825b6:	d105      	bne.n	4825c4 <.text+0x34>
+  4825b8:	e008      	b.n	4825cc <.text+0x3c>
+  4825ba:	f89d 0000 	ldrb.w	r0, [sp]
+  4825be:	1812      	adds	r2, r2, r0
+  4825c0:	3a51      	subs	r2, #81	@ 0x51
+  4825c2:	e7eb      	b.n	48259c <.text+0xc>
+  4825c4:	68f8      	ldr	r0, [r7, #12]
+  4825c6:	19a1      	adds	r1, r4, r6
+  4825c8:	4288      	cmp	r0, r1
+  4825ca:	d3db      	bcc.n	482584 <.text-0xc>
+  4825cc:	2d08      	cmp	r5, #8
+  4825ce:	d109      	bne.n	4825e4 <.text+0x54>
+  4825d0:	f897 0038 	ldrb.w	r0, [r7, #56]	@ 0x38
+  4825d4:	0701      	lsls	r1, r0, #28
+  4825d6:	d505      	bpl.n	4825e4 <.text+0x54>
+  4825d8:	5da0      	ldrb	r0, [r4, r6]
+  4825da:	2830      	cmp	r0, #48	@ 0x30
+  4825dc:	d002      	beq.n	4825e4 <.text+0x54>
+  4825de:	1e76      	subs	r6, r6, #1
+  4825e0:	2030      	movs	r0, #48	@ 0x30
+  4825e2:	55a0      	strb	r0, [r4, r6]
+  4825e4:	f1c6 033c 	rsb	r3, r6, #60	@ 0x3c
+  4825e8:	61bb      	str	r3, [r7, #24]
+  4825ea:	19a1      	adds	r1, r4, r6
+  4825ec:	60f9      	str	r1, [r7, #12]
+  4825ee:	6b38      	ldr	r0, [r7, #48]	@ 0x30
+  4825f0:	4283      	cmp	r3, r0
+  4825f2:	da08      	bge.n	482606 <.text+0x76>
+  4825f4:	1ac3      	subs	r3, r0, r3
+  4825f6:	623b      	str	r3, [r7, #32]
+  4825f8:	f64f 70ef 	movw	r0, #65519	@ 0xffef
+  4825fc:	8f39      	ldrh	r1, [r7, #56]	@ 0x38
+  4825fe:	4001      	ands	r1, r0
+  482600:	8739      	strh	r1, [r7, #56]	@ 0x38
+  482602:	e8bd 87f3 	ldmia.w	sp!, {r0, r1, r4, r5, r6, r7, r8, r9, sl, pc}
+  482606:	2800      	cmp	r0, #0
+  482608:	d50e      	bpl.n	482628 <.text+0x98>
+  48260a:	f897 0038 	ldrb.w	r0, [r7, #56]	@ 0x38
+  48260e:	f000 0014 	and.w	r0, r0, #20
+  482612:	2810      	cmp	r0, #16
+  482614:	d108      	bne.n	482628 <.text+0x98>
+  482616:	6b7a      	ldr	r2, [r7, #52]	@ 0x34
+  482618:	6979      	ldr	r1, [r7, #20]
+  48261a:	6a38      	ldr	r0, [r7, #32]
+  48261c:	1a52      	subs	r2, r2, r1
+  48261e:	1a12      	subs	r2, r2, r0
+  482620:	1ad2      	subs	r2, r2, r3
+  482622:	2a00      	cmp	r2, #0
+  482624:	bfc8      	it	gt
+  482626:	623a      	strgt	r2, [r7, #32]
+  482628:	e8bd 87f3 	ldmia.w	sp!, {r0, r1, r4, r5, r6, r7, r8, r9, sl, pc}

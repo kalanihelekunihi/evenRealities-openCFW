@@ -1,0 +1,145 @@
+{
+  "status": "PASS",
+  "cases": 10,
+  "stock_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "function_range": [
+    "0x41d90e",
+    "0x41d92c"
+  ],
+  "function_bytes": 30,
+  "source_sha256": "e0066524e6ba58ea07ad7e813d60feeb5c505348d05b046841b71267dfe13b84",
+  "elf_sha256": "129a6b2f38f145f33e791874f52d722fb1715d5fff5c957a285644312f34a6f9",
+  "correspondence": "Exact instruction-derived operation: reject id >=224 with 5; reject null output with 6; otherwise write MMIO[0x40010000 + 4*id] and return 0.",
+  "comparisons": [
+    {
+      "fixture": {
+        "register_id": 0,
+        "output_nonnull": true,
+        "primask": 0,
+        "seed": 0
+      },
+      "result": {
+        "status": 0,
+        "out": 0,
+        "primask": 0
+      }
+    },
+    {
+      "fixture": {
+        "register_id": 15,
+        "output_nonnull": true,
+        "primask": 1,
+        "seed": 305419896
+      },
+      "result": {
+        "status": 0,
+        "out": 1467250607,
+        "primask": 1
+      }
+    },
+    {
+      "fixture": {
+        "register_id": 223,
+        "output_nonnull": true,
+        "primask": 1,
+        "seed": 4294967295
+      },
+      "result": {
+        "status": 0,
+        "out": 766310360,
+        "primask": 1
+      }
+    },
+    {
+      "fixture": {
+        "register_id": 0,
+        "output_nonnull": false,
+        "primask": 0,
+        "seed": 0
+      },
+      "result": {
+        "status": 6,
+        "out": 2779096485,
+        "primask": 0
+      }
+    },
+    {
+      "fixture": {
+        "register_id": 15,
+        "output_nonnull": false,
+        "primask": 1,
+        "seed": 2882400001
+      },
+      "result": {
+        "status": 6,
+        "out": 2779096485,
+        "primask": 1
+      }
+    },
+    {
+      "fixture": {
+        "register_id": 223,
+        "output_nonnull": false,
+        "primask": 0,
+        "seed": 1985229328
+      },
+      "result": {
+        "status": 6,
+        "out": 2779096485,
+        "primask": 0
+      }
+    },
+    {
+      "fixture": {
+        "register_id": 224,
+        "output_nonnull": true,
+        "primask": 0,
+        "seed": 305419896
+      },
+      "result": {
+        "status": 5,
+        "out": 2779096485,
+        "primask": 0
+      }
+    },
+    {
+      "fixture": {
+        "register_id": 255,
+        "output_nonnull": true,
+        "primask": 1,
+        "seed": 4294967295
+      },
+      "result": {
+        "status": 5,
+        "out": 2779096485,
+        "primask": 1
+      }
+    },
+    {
+      "fixture": {
+        "register_id": 224,
+        "output_nonnull": false,
+        "primask": 1,
+        "seed": 0
+      },
+      "result": {
+        "status": 5,
+        "out": 2779096485,
+        "primask": 1
+      }
+    },
+    {
+      "fixture": {
+        "register_id": 4294967295,
+        "output_nonnull": true,
+        "primask": 0,
+        "seed": 1515870810
+      },
+      "result": {
+        "status": 5,
+        "out": 2779096485,
+        "primask": 0
+      }
+    }
+  ]
+}

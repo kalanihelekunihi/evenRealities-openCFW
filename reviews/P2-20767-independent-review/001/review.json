@@ -1,0 +1,11 @@
+{
+  "id": "P2-20767",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "finding": "Pseudocode says bit0; raw instruction sequence tests bit2.",
+  "summary": "182B replay passes. Disassembly confirms fresh LDRB [R5,#46], LSLS #29 and BPL: bit2 clear branches to 47BAA6; bit2 set executes 4751C8 with R5+7/R4+7/16/live R3. Note a pseudocode mismatch: it says \u201cBit0 one calls,\u201d but the raw test is bit2. Nonzero helper route runs diagnostic1958 then two unconditional ordered 43DACC dumps and clears R6; zero route runs diagnostic1963 and leaves R6 unchanged."
+}

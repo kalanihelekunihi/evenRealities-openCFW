@@ -1,0 +1,47 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpt5_p2z4b/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0046a9ae <.text>:
+  46a9ae:	f44f 7003 	mov.w	r0, #524	@ 0x20c
+  46a9b2:	9000      	str	r0, [sp, #0]
+  46a9b4:	f8df 3698 	ldr.w	r3, [pc, #1688]	@ 46b050 <.text+0x6a2>
+  46a9b8:	f8df 2698 	ldr.w	r2, [pc, #1688]	@ 46b054 <.text+0x6a6>
+  46a9bc:	f8df 1698 	ldr.w	r1, [pc, #1688]	@ 46b058 <.text+0x6aa>
+  46a9c0:	2004      	movs	r0, #4
+  46a9c2:	f7d2 fdd7 	bl	43d574 <.text-0x2d43a>
+  46a9c6:	f7d2 fb82 	bl	43d0ce <.text-0x2d8e0>
+  46a9ca:	07c0      	lsls	r0, r0, #31
+  46a9cc:	d403      	bmi.n	46a9d6 <.text+0x28>
+  46a9ce:	f7d2 fb7e 	bl	43d0ce <.text-0x2d8e0>
+  46a9d2:	0740      	lsls	r0, r0, #29
+  46a9d4:	d506      	bpl.n	46a9e4 <.text+0x36>
+  46a9d6:	f8df 168c 	ldr.w	r1, [pc, #1676]	@ 46b064 <.text+0x6b6>
+  46a9da:	000a      	movs	r2, r1
+  46a9dc:	f05f 5080 	movs.w	r0, #268435456	@ 0x10000000
+  46a9e0:	f7d2 fa5d 	bl	43ce9e <.text-0x2db10>
+  46a9e4:	f7ef fdc0 	bl	45a568 <.text-0x10446>
+  46a9e8:	2801      	cmp	r0, #1
+  46a9ea:	d162      	bne.n	46aab2 <.text+0x104>
+  46a9ec:	2300      	movs	r3, #0
+  46a9ee:	2200      	movs	r2, #0
+  46a9f0:	2100      	movs	r1, #0
+  46a9f2:	2022      	movs	r0, #34	@ 0x22
+  46a9f4:	f7fa f91f 	bl	464c36 <.text-0x5d78>
+  46a9f8:	e05b      	b.n	46aab2 <.text+0x104>
+  46a9fa:	6808      	ldr	r0, [r1, #0]
+  46a9fc:	2801      	cmp	r0, #1
+  46a9fe:	d122      	bne.n	46aa46 <.text+0x98>
+  46aa00:	f7d2 fb65 	bl	43d0ce <.text-0x2d8e0>
+  46aa04:	0780      	lsls	r0, r0, #30
+  46aa06:	d50e      	bpl.n	46aa26 <.text+0x78>
+  46aa08:	f8df 0664 	ldr.w	r0, [pc, #1636]	@ 46b070 <.text+0x6c2>
+  46aa0c:	9001      	str	r0, [sp, #4]
+  46aa0e:	f240 2011 	movw	r0, #529	@ 0x211
+  46aa12:	9000      	str	r0, [sp, #0]
+  46aa14:	f8df 3638 	ldr.w	r3, [pc, #1592]	@ 46b050 <.text+0x6a2>
+  46aa18:	f8df 2638 	ldr.w	r2, [pc, #1592]	@ 46b054 <.text+0x6a6>
+  46aa1c:	f8df 1638 	ldr.w	r1, [pc, #1592]	@ 46b058 <.text+0x6aa>
+  46aa20:	2004      	movs	r0, #4

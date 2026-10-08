@@ -1,0 +1,46 @@
+.syntax unified
+.thumb
+.section .text.call3,"ax",%progbits
+.global call3_record
+.type call3_record,%function
+.thumb_func
+call3_record:
+ push {r4-r11,lr}
+ sub sp,#20
+ str r0,[sp]
+ str r1,[sp,#4]
+ str r2,[sp,#8]
+ str r3,[sp,#12]
+ ldr r4,[sp,#56]
+ str r4,[sp,#16]
+ mov r0,sp
+ str r0,[r4,#48]
+ movw r4,#0x4004
+ movw r5,#0x4005
+ movw r6,#0x4006
+ movw r7,#0x4007
+ movw r8,#0x4008
+ movw r9,#0x4009
+ movw r10,#0x400a
+ movw r11,#0x400b
+ ldr r0,[sp,#4]
+ ldr r1,[sp,#8]
+ ldr r2,[sp,#12]
+ ldr r12,[sp]
+ blx r12
+ ldr r3,[sp,#16]
+ str r0,[r3]
+ mov r0,sp
+ str r0,[r3,#4]
+ add r3,#8
+ stmia r3!,{r4-r11}
+ mrs r0,primask
+ str r0,[r3]
+ mrs r0,basepri
+ str r0,[r3,#4]
+ ldr r0,[sp,#16]
+ ldr r0,[r0]
+ add sp,#20
+ pop {r4-r11,pc}
+.size call3_record,.-call3_record
+.section .note.GNU-stack,"",%progbits

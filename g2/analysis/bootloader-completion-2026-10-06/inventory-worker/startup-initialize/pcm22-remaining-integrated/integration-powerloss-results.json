@@ -1,0 +1,18 @@
+[
+  {
+    "command": [
+      "/Users/kalani/.local/share/opencfw/venv/bin/python",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm22-remaining-integrated/run_oracle.py",
+      "g2/components/bootloader/thread_creation/verify_dfu_storage_powerloss.py",
+      "--elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/candidate.elf",
+      "--seed-elf",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/filesystem/filesystem-update.elf",
+      "--output",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/validation/powerloss.json"
+    ],
+    "returncode": 0,
+    "stdout": "{\"status\": \"PASS\", \"cases\": 2, \"distinct_original_trace_bytes\": 38278}\n",
+    "stderr": ""
+  }
+]

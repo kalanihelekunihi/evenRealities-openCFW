@@ -1,0 +1,7 @@
+# Selector two second match set bit three asymmetric result compare
+
+Partial/unaccepted;118instructionbytes;inherited40frame,R5buffer,R6priorfullhelperresult,R4inheritedzeroonfirstmismatchpath.
+D43C call45A568withliveargs;thenfreshunsignedbyte[R5+5];comparetoLOW8helperresult. Unequal→pendingD514. EqualD448query43D0CEbit1zero→D470;elsefreshbyte6→SP8,literal47D974→SP4,147→SP0;43D574(4,literal47D918,literal47D914,literal47D910,147,literal47D974,freshByte6).
+D470freshquerybit0one→D480;elseanotherquerybit2zero→D490. D480independentlyfreshbyte6→R3;43CE9E(0x10400000,literal47D978,same,freshByte6).
+D490independentlyfreshbyte6==1:ptrliteral47D900;freshflagbyteOR8store. Thenindependentlycall47D8CEwithliveargs;R6=LOW8priorR6;compareR6againstfullnewR0. UnequalR4=1→pendingD4B2;equalR4=0→pendingD4B2. Newhelperresultisnotnarrowed; oldresultnarrowedonlyaftercall. Byte6not1→pendingD4B8.
+Do notassumehelperstableorflagupdateeffects. Diagnosticstackwriteslocal; pendingD4B2behaviornotinferred. No C/freeze/completenessclaim.

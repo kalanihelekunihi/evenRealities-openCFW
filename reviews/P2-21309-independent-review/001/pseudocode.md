@@ -1,0 +1,5 @@
+# Recursive flagged-pointer restore and small byte helpers
+
+Partial/unaccepted;82 instructionbytes482FF2..483044. 482FF2 PUSH{R4,R5,R6,LR}16bytes;R4=entryR0,R5=entryR1holder. Freshword[R5]→R6savedpointer;independentlyreload[R5]→R0,thenfreshword[R0]→R0,testzero. Nonzeroindependentlyreloadholderpointer,freshword[pointer+32],UBFXbit20,test. Setbit: independentlyreloadholderpointer,freshword[pointer]→R0,store[R5];recursivelycall482FF2(R0=R4,R1=R5,liveR2/R3). Zero firstnestedword/clearbit skipsrecursion. BothpathsrestorefullR6[R5] evenifcallbacksmodifiedholder,then482FCE(R0=R4,R1=R5,liveR2/R3);POP{R4,R5,R6,PC}retainshelperR0. No nullguardonholder/pointer,no recursioncycleguard;exact repeatedfreshpointerreads preserved.
+
+Separateframeless483028 unsignedR2<R3 storeslowbyteR0 at[R1+R2],else skip;BXLR retainsR0. 483030 BXLRalone,no effects. 483032 UXTB R0,subtract48mod;unsignedresult<10→R0=1else0;UXTBfinalR0,BXLR. ThusbyteASCII48..57predicate, no memory. No C,freeze,wholecoverage or equalityclaim.

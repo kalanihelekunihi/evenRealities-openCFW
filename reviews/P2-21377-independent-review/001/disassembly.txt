@@ -1,0 +1,46 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpigiunl0i/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00483e98 <.text>:
+  483e98:	2401      	movs	r4, #1
+  483e9a:	ea5f 7088 	movs.w	r0, r8, lsl #30
+  483e9e:	d40a      	bmi.n	483eb6 <.text+0x1e>
+  483ea0:	e005      	b.n	483eae <.text+0x16>
+  483ea2:	9b0b      	ldr	r3, [sp, #44]	@ 0x2c
+  483ea4:	0032      	movs	r2, r6
+  483ea6:	990a      	ldr	r1, [sp, #40]	@ 0x28
+  483ea8:	2020      	movs	r0, #32
+  483eaa:	47a8      	blx	r5
+  483eac:	1c76      	adds	r6, r6, #1
+  483eae:	0020      	movs	r0, r4
+  483eb0:	1c44      	adds	r4, r0, #1
+  483eb2:	42b8      	cmp	r0, r7
+  483eb4:	d3f5      	bcc.n	483ea2 <.text+0xa>
+  483eb6:	f8d9 0000 	ldr.w	r0, [r9]
+  483eba:	f119 0904 	adds.w	r9, r9, #4
+  483ebe:	9b0b      	ldr	r3, [sp, #44]	@ 0x2c
+  483ec0:	0032      	movs	r2, r6
+  483ec2:	990a      	ldr	r1, [sp, #40]	@ 0x28
+  483ec4:	b2c0      	uxtb	r0, r0
+  483ec6:	47a8      	blx	r5
+  483ec8:	1c76      	adds	r6, r6, #1
+  483eca:	ea5f 7088 	movs.w	r0, r8, lsl #30
+  483ece:	d406      	bmi.n	483ede <.text+0x46>
+  483ed0:	e009      	b.n	483ee6 <.text+0x4e>
+  483ed2:	9b0b      	ldr	r3, [sp, #44]	@ 0x2c
+  483ed4:	0032      	movs	r2, r6
+  483ed6:	990a      	ldr	r1, [sp, #40]	@ 0x28
+  483ed8:	2020      	movs	r0, #32
+  483eda:	47a8      	blx	r5
+  483edc:	1c76      	adds	r6, r6, #1
+  483ede:	0020      	movs	r0, r4
+  483ee0:	1c44      	adds	r4, r0, #1
+  483ee2:	42b8      	cmp	r0, r7
+  483ee4:	d3f5      	bcc.n	483ed2 <.text+0x3a>
+  483ee6:	980c      	ldr	r0, [sp, #48]	@ 0x30
+  483ee8:	1c40      	adds	r0, r0, #1
+  483eea:	900c      	str	r0, [sp, #48]	@ 0x30
+  483eec:	e54f      	b.n	48398e <.text-0x50a>

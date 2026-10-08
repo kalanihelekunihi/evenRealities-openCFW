@@ -1,0 +1,12 @@
+[
+  {
+    "mutation": "zero-yields",
+    "rejected": true,
+    "stderr": "Traceback (most recent call last):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/task-delay-native/verify.py\", line 47, in <module>\n    if x!=y:(N/'failure.json').write_text(json.dumps({'fixture':f,'stock':x,'source':y},indent=2));raise AssertionError((f,x,y))\n                                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ({'entry': 'cmsis', 'ticks': 0, 'suspended': 0, 'resume': 0, 'guard': 0}, {'events': [['guard']], 'return': 0, 'terminal': [], 'sp': 537128960, 'saved': [11190276, 11190277, 11190278, 11190279, 11190280, 11190281, 11190282, 11190283], 'basepri': 0, 'suspended': 0}, {'events': [['guard'], ['reschedule']], 'return': 0, 'terminal': [], 'sp': 537128960, 'saved': [11190276, 11190277, 11190278, 11190279, 11190280, 11190281, 11190282, 11190283], 'basepri': 0, 'suspended': 0})\n"
+  },
+  {
+    "mutation": "resume-yield",
+    "rejected": true,
+    "stderr": "ast):\n  File \"/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/task-delay-native/verify.py\", line 47, in <module>\n    if x!=y:(N/'failure.json').write_text(json.dumps({'fixture':f,'stock':x,'source':y},indent=2));raise AssertionError((f,x,y))\n                                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ({'entry': 'cmsis', 'ticks': 1, 'suspended': 0, 'resume': 0, 'guard': 0}, {'events': [['guard'], ['suspend'], ['block', 1, 0], ['resume'], ['reschedule']], 'return': 0, 'terminal': [], 'sp': 537128960, 'saved': [11190276, 11190277, 11190278, 11190279, 11190280, 11190281, 11190282, 11190283], 'basepri': 0, 'suspended': 0}, {'events': [['guard'], ['suspend'], ['block', 1, 0], ['resume']], 'return': 0, 'terminal': [], 'sp': 537128960, 'saved': [11190276, 11190277, 11190278, 11190279, 11190280, 11190281, 11190282, 11190283], 'basepri': 0, 'suspended': 0})\n"
+  }
+]

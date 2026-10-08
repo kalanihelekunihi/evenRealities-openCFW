@@ -1,0 +1,56 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpl42j0lh1/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00483144 <.text>:
+  483144:	ea5f 68ce 	movs.w	r8, lr, lsl #27
+  483148:	d53e      	bpl.n	4831c8 <.text+0x84>
+  48314a:	f8dd 803c 	ldr.w	r8, [sp, #60]	@ 0x3c
+  48314e:	ea5f 594e 	movs.w	r9, lr, lsl #21
+  483152:	d40c      	bmi.n	48316e <.text+0x2a>
+  483154:	2800      	cmp	r0, #0
+  483156:	d00a      	beq.n	48316e <.text+0x2a>
+  483158:	4560      	cmp	r0, ip
+  48315a:	d001      	beq.n	483160 <.text+0x1c>
+  48315c:	42a8      	cmp	r0, r5
+  48315e:	d106      	bne.n	48316e <.text+0x2a>
+  483160:	1e40      	subs	r0, r0, #1
+  483162:	2800      	cmp	r0, #0
+  483164:	d003      	beq.n	48316e <.text+0x2a>
+  483166:	f1b8 0f10 	cmp.w	r8, #16
+  48316a:	d100      	bne.n	48316e <.text+0x2a>
+  48316c:	1e40      	subs	r0, r0, #1
+  48316e:	f1b8 0f10 	cmp.w	r8, #16
+  483172:	d10a      	bne.n	48318a <.text+0x46>
+  483174:	ea5f 6c8e 	movs.w	ip, lr, lsl #26
+  483178:	d407      	bmi.n	48318a <.text+0x46>
+  48317a:	2820      	cmp	r0, #32
+  48317c:	d205      	bcs.n	48318a <.text+0x46>
+  48317e:	f05f 0c78 	movs.w	ip, #120	@ 0x78
+  483182:	f807 c000 	strb.w	ip, [r7, r0]
+  483186:	1c40      	adds	r0, r0, #1
+  483188:	e017      	b.n	4831ba <.text+0x76>
+  48318a:	f1b8 0f10 	cmp.w	r8, #16
+  48318e:	d10a      	bne.n	4831a6 <.text+0x62>
+  483190:	ea5f 6c8e 	movs.w	ip, lr, lsl #26
+  483194:	d507      	bpl.n	4831a6 <.text+0x62>
+  483196:	2820      	cmp	r0, #32
+  483198:	d205      	bcs.n	4831a6 <.text+0x62>
+  48319a:	f05f 0c58 	movs.w	ip, #88	@ 0x58
+  48319e:	f807 c000 	strb.w	ip, [r7, r0]
+  4831a2:	1c40      	adds	r0, r0, #1
+  4831a4:	e009      	b.n	4831ba <.text+0x76>
+  4831a6:	f1b8 0f02 	cmp.w	r8, #2
+  4831aa:	d106      	bne.n	4831ba <.text+0x76>
+  4831ac:	2820      	cmp	r0, #32
+  4831ae:	d204      	bcs.n	4831ba <.text+0x76>
+  4831b0:	f05f 0c62 	movs.w	ip, #98	@ 0x62
+  4831b4:	f807 c000 	strb.w	ip, [r7, r0]
+  4831b8:	1c40      	adds	r0, r0, #1
+  4831ba:	2820      	cmp	r0, #32
+  4831bc:	d204      	bcs.n	4831c8 <.text+0x84>
+  4831be:	f05f 0c30 	movs.w	ip, #48	@ 0x30
+  4831c2:	f807 c000 	strb.w	ip, [r7, r0]
+  4831c6:	1c40      	adds	r0, r0, #1

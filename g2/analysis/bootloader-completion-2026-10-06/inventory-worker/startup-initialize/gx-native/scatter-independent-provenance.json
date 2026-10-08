@@ -1,0 +1,53 @@
+{
+  "status": "PASS",
+  "method": "Independent bounded Python file decoder versus original-instruction/native-C receipt and pre-existing whole-startup digest",
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "stream_sha256": "5b8e3a303e0ca03dcf5375491441067823e17d840181ae16898c58b8cafde4f8",
+  "output_sha256": "e3bea7ccd46bc324829152b5b5a9069aecce5db243876273084d29bd7d47b843",
+  "callback_table_sha256": "81c33f127f9fe57795f236e7316cbfb32ff43cd576ba1b5256b3d7bf7b4dee21",
+  "targets": [
+    "0x427e85",
+    "0x428069",
+    "0x428241",
+    "0x4283e3",
+    "0x428507",
+    "0x42863f",
+    "0x428841",
+    "0x428921",
+    "0x428bb1",
+    "0x428ca5",
+    "0x428d91",
+    "0x428e6b",
+    "0x4290a3",
+    "0x4291ed",
+    "0x42944b",
+    "0x429525",
+    "0x42962d",
+    "0x429719",
+    "0x42984f",
+    "0x429a31",
+    "0x429b4d",
+    "0x429c47",
+    "0x429e01",
+    "0x429f69",
+    "0x42a031",
+    "0x42a033",
+    "0x42a035"
+  ],
+  "record_raw": "bc100000e204000000000020",
+  "negative_controls": [
+    {
+      "name": "truncated",
+      "rejected": true
+    },
+    {
+      "name": "byte_mutation",
+      "rejected": true
+    }
+  ],
+  "reference_sha256": "68a241f051218541a310ad2ef25ac7d5222bebf7791dd739e3174b9d9caedee2",
+  "limits": [
+    "Independent implementation and receipt/held-out digest agreement; not an independent physical acquisition of firmware.",
+    "Stored callback addresses are data provenance, not implemented target bodies or complete compressed-stream source reconstruction."
+  ]
+}

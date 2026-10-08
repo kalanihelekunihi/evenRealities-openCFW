@@ -1,0 +1,10 @@
+{
+  "id": "P2-20727",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "24B tail; exact byte48==1 condition calls 479B74 then 47B730 unconditionally; exact mismatch returns the fresh byte48 value. Shared epilogue discards 72 local bytes and saved R3, then returns live second-helper R0 or mismatch byte."
+}

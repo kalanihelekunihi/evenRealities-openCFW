@@ -1,0 +1,30 @@
+{
+  "status": "PASS",
+  "elf_sha256": "8aca98ea30439829915d54c00ee6f1e66487aa9251691a70591ea3b66294d307",
+  "flags": [
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m33",
+    "-mthumb",
+    "-mfloat-abi=softfp",
+    "-O1",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-fshort-enums"
+  ],
+  "results": [
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_selector23_native/initialized_data.c",
+      "source_sha256": "3680be8d0c768a0ea37bdc6c292c49ea3cb74fccd5abebcc151e177439a20671",
+      "object_sha256": "f84095219aba755f29c27875cc064ce4d837e06e1541b4ae644150abe754d3c7",
+      "frozen_object": "inputs/206/initialized_data.o"
+    },
+    {
+      "path": "g2/components/bootloader/initializer_callbacks/pcm22_selector23_native/pcm22_sequence23.c",
+      "source_sha256": "86ac45d027275797bdb323824d2adbefa2680cda230163c83b11d248e15bbf3f",
+      "object_sha256": "62c5de107e711e1997e7c729172a1a8b052b11fdcea892742821df3be6ffecb3",
+      "frozen_object": "inputs/222/pcm22_sequence23.o"
+    }
+  ]
+}

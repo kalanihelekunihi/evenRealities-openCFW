@@ -1,0 +1,12 @@
+[
+  {
+    "control": "omit-final-retry",
+    "rejected": true,
+    "diagnostic_tail": "*vals);b=run(True,*vals);assert a==b,(vals,a,b)\n                                                                                  ^^^^\nAssertionError: ((512, 0, 0, -1, 0), {'return': 3, 'writes': [[1073770496, 4, 512]], 'busy_reads': [2684355584, 2684355584], 'sp': 536903680, 'primask': 0}, {'return': 3, 'writes': [[1073770496, 4, 512]], 'busy_reads': [2684355584], 'sp': 536903680, 'primask': 0})\n"
+  },
+  {
+    "control": "wrong-regulator-busy-bit",
+    "rejected": true,
+    "diagnostic_tail": "*vals);b=run(True,*vals);assert a==b,(vals,a,b)\n                                                                                  ^^^^\nAssertionError: ((512, 0, 0, -1, 0), {'return': 3, 'writes': [[1073770496, 4, 512]], 'busy_reads': [2684355584, 2684355584], 'sp': 536903680, 'primask': 0}, {'return': 0, 'writes': [[1073770496, 4, 512]], 'busy_reads': [2684355584], 'sp': 536903680, 'primask': 0})\n"
+  }
+]

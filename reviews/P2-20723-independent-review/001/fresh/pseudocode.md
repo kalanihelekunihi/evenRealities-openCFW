@@ -1,0 +1,3 @@
+# Other selector fresh byte30 error diagnostics
+
+Partial/unaccepted;74instructionbytes,inherited88-byteframe,R4source,R5destination. Query0x43D0CE;bit1zero skips0x47B328;otherwisefreshbyte[R4+30]SP8,literal47BC00 SP4,1337 SP0;call0x43D574(2,literal47B6F8,literal47B6F4,literal47B6F0,fifth1337,sixthliteral47BC00,seventhfreshbyte30). At0x47B328queryfreshstatus;bit0oneenters0x47B338,otherwisequeryagainandbit2zero skips0x47B348. MaskpathR1literal47BC04,R2same,independentlyfreshbyte[R4+30]R3;call0x43CE9E(0x08400000,R1,R2,R3). Fallthroughpendingcommon0x47B348. ThisblockdoesnotwriteR5recordorassignreturnconstant. Preservefreshreadsfromdispatch/logger/maskandlivearguments. No C,freezeorcompletenessclaim.

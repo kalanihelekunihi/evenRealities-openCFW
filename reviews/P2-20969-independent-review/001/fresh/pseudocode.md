@@ -1,0 +1,5 @@
+# Exact-one state guard and conditional clear with stack-word return
+
+Partial/unaccepted;138instructionbytes47E3E6..47E470. PUSH R2,R3,R4,LR16;R4=literal47E634statepointer;freshword!=1 skipsallcalls/writes. Otherwisefresh43D0CEbit1set→SP4=literalE638,SP0=92;43D574(4,literalE624,literalE620,literalE63C). Thenfresh43D0CEbit0set→masklogger;elseanotherfresh43D0CEbit2set→masklogger. Masklogger43CE9E(10000000hex,literalE640,literalE640,liveR3). R3notexplicitlysetbymaskcaller.
+Alwaysafterfirstdiagnostics4A77D2(liveargs). Fullzero→stateword0write,skiperrordiagnostics. Fullnonzero→fresh43D0CEbit1set→SP4=literalE644,SP0=97;43D574(1,literalE624,literalE620,literalE63C). Thenfresh43D0CEbit0set→masklogger;elseanotherfreshcallbit2set→masklogger. Errorlogger43CE9E(04000000hex,literalE648,literalE648,liveR3). Errorpathhasnostateclear.
+AllpathsPOP R0,R1,R4,PC16: R0=SP0,R1=SP4,initiallysavedentryR2/R3;firststructuredloggeroverwriteswith92/E638;errorstructuredloggeroverwriteswith97/E644,lastwritewins. Maskloggers/helperreturnR0discarded;callee stackwritesremainpossible. Statewordguard/clear andflagobservationsretainexactorder. No C/freeze/completenessclaim.

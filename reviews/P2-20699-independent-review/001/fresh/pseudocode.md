@@ -1,0 +1,4 @@
+# Full mask test low byte selector pointer length leaf
+
+Partial/unaccepted;72 instructionbytes. PUSH R4,R5creates8-byteframe,LRunsaved,nocalls. R3fullentryR0recordpointer;R0zero. Freshbyte[R3+46]R4;TST fullentryR1withR4. ZerointersectionreturnsR0zeroat0x47AEBCwithoutoutputwrite. NonzerointersectiondestructivelynarrowsR1LOW8anddispatchesexactvalues1,2,4,8;allotherselectorsreturnzeroevenifintersectionnonzero.
+Selector1freshbyte[R3+78]R0,storebyte[R2]fromit,thenR0=R3+52modulo2^32. Selector2freshbyte[R3+106],storebyte[R2],thenR0=R3+80modulo2^32. Selector4returnsR3+7modulo2^32withnooutputbytewrite. Selector8returnsR3+30modulo2^32withnooutputbytewrite. No record47/48guards orpointervalidation. Ordering matters underaliasing:readselectedlength,storeoutputbyte,thenpointerarithmetic. SharedPOP R4,R5andBX LRrestore8frame;explicitpointer/zeroR0. PreservefullmasktestbeforeLOW8dispatch. No C,freezeorcompletenessclaim.

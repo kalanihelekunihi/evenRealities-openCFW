@@ -1,0 +1,53 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp6gnacf99/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00482ef6 <.text>:
+  482ef6:	b511      	push	{r0, r4, lr}
+  482ef8:	b081      	sub	sp, #4
+  482efa:	f89d 0007 	ldrb.w	r0, [sp, #7]
+  482efe:	28fd      	cmp	r0, #253	@ 0xfd
+  482f00:	da04      	bge.n	482f0c <.text+0x16>
+  482f02:	9100      	str	r1, [sp, #0]
+  482f04:	f89d 0003 	ldrb.w	r0, [sp, #3]
+  482f08:	2803      	cmp	r0, #3
+  482f0a:	da01      	bge.n	482f10 <.text+0x1a>
+  482f0c:	9801      	ldr	r0, [sp, #4]
+  482f0e:	e02f      	b.n	482f70 <.text+0x7a>
+  482f10:	f89d 0007 	ldrb.w	r0, [sp, #7]
+  482f14:	2803      	cmp	r0, #3
+  482f16:	da01      	bge.n	482f1c <.text+0x26>
+  482f18:	9800      	ldr	r0, [sp, #0]
+  482f1a:	e029      	b.n	482f70 <.text+0x7a>
+  482f1c:	f89d 0003 	ldrb.w	r0, [sp, #3]
+  482f20:	28ff      	cmp	r0, #255	@ 0xff
+  482f22:	d106      	bne.n	482f32 <.text+0x3c>
+  482f24:	9900      	ldr	r1, [sp, #0]
+  482f26:	9801      	ldr	r0, [sp, #4]
+  482f28:	f7ff ff90 	bl	482e4c <.text-0xaa>
+  482f2c:	9000      	str	r0, [sp, #0]
+  482f2e:	9800      	ldr	r0, [sp, #0]
+  482f30:	e01e      	b.n	482f70 <.text+0x7a>
+  482f32:	f89d 0007 	ldrb.w	r0, [sp, #7]
+  482f36:	f1d0 00ff 	rsbs	r0, r0, #255	@ 0xff
+  482f3a:	f89d 4003 	ldrb.w	r4, [sp, #3]
+  482f3e:	f1d4 04ff 	rsbs	r4, r4, #255	@ 0xff
+  482f42:	fb04 f400 	mul.w	r4, r4, r0
+  482f46:	1224      	asrs	r4, r4, #8
+  482f48:	f1d4 04ff 	rsbs	r4, r4, #255	@ 0xff
+  482f4c:	f89d 1007 	ldrb.w	r1, [sp, #7]
+  482f50:	20ff      	movs	r0, #255	@ 0xff
+  482f52:	4341      	muls	r1, r0
+  482f54:	0020      	movs	r0, r4
+  482f56:	b2c0      	uxtb	r0, r0
+  482f58:	fbb1 f0f0 	udiv	r0, r1, r0
+  482f5c:	f88d 0007 	strb.w	r0, [sp, #7]
+  482f60:	9900      	ldr	r1, [sp, #0]
+  482f62:	9801      	ldr	r0, [sp, #4]
+  482f64:	f7ff ff72 	bl	482e4c <.text-0xaa>
+  482f68:	9000      	str	r0, [sp, #0]
+  482f6a:	f88d 4003 	strb.w	r4, [sp, #3]
+  482f6e:	9800      	ldr	r0, [sp, #0]
+  482f70:	bd16      	pop	{r1, r2, r4, pc}

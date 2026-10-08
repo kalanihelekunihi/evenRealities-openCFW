@@ -1,0 +1,13 @@
+{
+  "module": "g2/build/bootloader-completion/isolated-term/181736aed5b93dc58bcec10456651d3f5f7d38f25ad9a03a5f59ad557bd10c08/opencfw-term-isolated.elf",
+  "module_sha256": "181736aed5b93dc58bcec10456651d3f5f7d38f25ad9a03a5f59ad557bd10c08",
+  "input_object": "g2/build/bootloader-completion/dfu-storage-queue-compatible/nor_mspi_queue.o",
+  "input_object_sha256": "4d7ecaa4ab303c29ea5e2ad134c48296346ecf64e0770d245242b22a3d39c6a8",
+  "linker": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/cmdq-ownership/term-isolated.ld",
+  "linker_sha256": "7cdd37fe10c0b5a23750b422f4228a5b054e5e93f1ebc84e3d8dd7381b20f126",
+  "source": "g2/components/bootloader/nor_mspi_queue/nor_mspi_queue.c",
+  "source_sha256": "e51571ce5e8ea55a2dc90f3f04f5fd4ff06975dae13d0b154a2958d5ffc537cf",
+  "shared_image": "4f111ccb9ed4131499a99a47af126d83f4b56f8abb54a5e6073cbc6566e93e8a",
+  "command": "arm-none-eabi-ld --gc-sections -T g2/analysis/bootloader-completion-2026-10-06/integrated-status/cmdq-ownership/term-isolated.ld -o <module.elf> g2/build/bootloader-completion/dfu-storage-queue-compatible/nor_mspi_queue.o",
+  "limits": "Supplementary module, not part of shared-image SHA. No clean-source build or hardware proof."
+}

@@ -1,0 +1,45 @@
+{
+  "status": "PASS_PUBLIC_ABI_OFFSETS_MATCH_STOCK_ACCESSORS",
+  "values": [
+    32,
+    4,
+    8,
+    28,
+    48,
+    20,
+    44
+  ],
+  "labels": [
+    "context size",
+    "sector size",
+    "logical capacity",
+    "provider pointer",
+    "provider size",
+    "read slot5",
+    "erase-required slot11"
+  ],
+  "command": [
+    "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+    "-mcpu=cortex-m0plus",
+    "-mthumb",
+    "-Og",
+    "-fshort-enums",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-DCY8C4046FNI_T412",
+    "-ffunction-sections",
+    "-include",
+    "/tmp/opencfw-emeeprom-family/compile-interface.h",
+    "-I/tmp/opencfw-emeeprom-family/2.60.0",
+    "-I/tmp/opencfw-emeeprom-family/block-storage-1.2.1",
+    "-I/tmp/opencfw-touch-source",
+    "-I/tmp/opencfw-touch-source/cmsis",
+    "-I/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/drivers/include",
+    "-I/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/devices/include",
+    "-I/tmp/opencfw-touch-source/core-lib-ca57d1e519e08badec6891d1776c7b4f05e09561/include",
+    "-c",
+    "/tmp/opencfw-emeeprom-family/abi.c",
+    "-o",
+    "/tmp/opencfw-emeeprom-family/abi.o"
+  ]
+}

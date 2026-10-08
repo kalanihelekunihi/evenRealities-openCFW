@@ -1,0 +1,3 @@
+# Selectordispatch continuity
+
+Partial,unaccepted.Components19456..19466tile468C68..468F04.Alllocaldirectbrancheslandonrecoveredinstructionstarts.Cases66/67optionalword/globalflags/recursiveactions,remainingselectorFULLpredicates/sharedchild,diagnostics,and24frame return1recorded.Unguardedunusedoffset12readretained.Childcontracts unresolved.Structural/exactbyteproof only,no semantic acceptance/corpus/source/gates.

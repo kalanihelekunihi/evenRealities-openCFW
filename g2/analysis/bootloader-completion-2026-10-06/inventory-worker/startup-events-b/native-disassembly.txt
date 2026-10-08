@@ -1,0 +1,3692 @@
+
+event-cuts.elf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00010000 <opencfw_boot_spot_state_power_event>:
+   10000:	e92d 4ff0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
+   10004:	b089      	sub	sp, #36	@ 0x24
+   10006:	4616      	mov	r6, r2
+   10008:	f241 0408 	movw	r4, #4104	@ 0x1008
+   1000c:	2200      	movs	r2, #0
+   1000e:	f2c4 0402 	movt	r4, #16386	@ 0x4002
+   10012:	e9cd 2207 	strd	r2, r2, [sp, #28]
+   10016:	f8d4 3100 	ldr.w	r3, [r4, #256]	@ 0x100
+   1001a:	43db      	mvns	r3, r3
+   1001c:	f013 0f30 	tst.w	r3, #48	@ 0x30
+   10020:	f040 8162 	bne.w	102e8 <opencfw_boot_spot_state_power_event+0x2e8>
+   10024:	4607      	mov	r7, r0
+   10026:	f646 30a0 	movw	r0, #27552	@ 0x6ba0
+   1002a:	f2c2 0002 	movt	r0, #8194	@ 0x2002
+   1002e:	6800      	ldr	r0, [r0, #0]
+   10030:	f246 020d 	movw	r2, #24589	@ 0x600d
+   10034:	f6c1 7201 	movt	r2, #7937	@ 0x1f01
+   10038:	4290      	cmp	r0, r2
+   1003a:	d115      	bne.n	10068 <opencfw_boot_spot_state_power_event+0x68>
+   1003c:	f247 1bbb 	movw	fp, #29115	@ 0x71bb
+   10040:	460d      	mov	r5, r1
+   10042:	f2c2 0b02 	movt	fp, #8194	@ 0x2002
+   10046:	f001 f8bf 	bl	111c8 <opencfw_boot_control_critical_save>
+   1004a:	f89b 1000 	ldrb.w	r1, [fp]
+   1004e:	4680      	mov	r8, r0
+   10050:	b967      	cbnz	r7, 1006c <opencfw_boot_spot_state_power_event+0x6c>
+   10052:	b15e      	cbz	r6, 1006c <opencfw_boot_spot_state_power_event+0x6c>
+   10054:	1e88      	subs	r0, r1, #2
+   10056:	2802      	cmp	r0, #2
+   10058:	d808      	bhi.n	1006c <opencfw_boot_spot_state_power_event+0x6c>
+   1005a:	6830      	ldr	r0, [r6, #0]
+   1005c:	f010 01fe 	ands.w	r1, r0, #254	@ 0xfe
+   10060:	d104      	bne.n	1006c <opencfw_boot_spot_state_power_event+0x6c>
+   10062:	f88b 0000 	strb.w	r0, [fp]
+   10066:	e13c      	b.n	102e2 <opencfw_boot_spot_state_power_event+0x2e2>
+   10068:	2201      	movs	r2, #1
+   1006a:	e13d      	b.n	102e8 <opencfw_boot_spot_state_power_event+0x2e8>
+   1006c:	6820      	ldr	r0, [r4, #0]
+   1006e:	9003      	str	r0, [sp, #12]
+   10070:	68a2      	ldr	r2, [r4, #8]
+   10072:	0343      	lsls	r3, r0, #13
+   10074:	9204      	str	r2, [sp, #16]
+   10076:	6921      	ldr	r1, [r4, #16]
+   10078:	9105      	str	r1, [sp, #20]
+   1007a:	6a21      	ldr	r1, [r4, #32]
+   1007c:	9106      	str	r1, [sp, #24]
+   1007e:	f81b 1c01 	ldrb.w	r1, [fp, #-1]
+   10082:	d402      	bmi.n	1008a <opencfw_boot_spot_state_power_event+0x8a>
+   10084:	f04f 0a00 	mov.w	sl, #0
+   10088:	e007      	b.n	1009a <opencfw_boot_spot_state_power_event+0x9a>
+   1008a:	f81b 3c16 	ldrb.w	r3, [fp, #-22]
+   1008e:	f04f 0a02 	mov.w	sl, #2
+   10092:	2b00      	cmp	r3, #0
+   10094:	bf08      	it	eq
+   10096:	f04f 0a01 	moveq.w	sl, #1
+   1009a:	f89b 9000 	ldrb.w	r9, [fp]
+   1009e:	b35f      	cbz	r7, 100f8 <opencfw_boot_spot_state_power_event+0xf8>
+   100a0:	2f01      	cmp	r7, #1
+   100a2:	d04c      	beq.n	1013e <opencfw_boot_spot_state_power_event+0x13e>
+   100a4:	2f04      	cmp	r7, #4
+   100a6:	d041      	beq.n	1012c <opencfw_boot_spot_state_power_event+0x12c>
+   100a8:	2f02      	cmp	r7, #2
+   100aa:	d14d      	bne.n	10148 <opencfw_boot_spot_state_power_event+0x148>
+   100ac:	2e00      	cmp	r6, #0
+   100ae:	f000 80b2 	beq.w	10216 <opencfw_boot_spot_state_power_event+0x216>
+   100b2:	ed96 0a00 	vldr	s0, [r6]
+   100b6:	f000 f925 	bl	10304 <event_child_temperature_range>
+   100ba:	4601      	mov	r1, r0
+   100bc:	f80b 0c01 	strb.w	r0, [fp, #-1]
+   100c0:	2803      	cmp	r0, #3
+   100c2:	f04f 0000 	mov.w	r0, #0
+   100c6:	f240 5253 	movw	r2, #1363	@ 0x553
+   100ca:	bf38      	it	cc
+   100cc:	2001      	movcc	r0, #1
+   100ce:	f2c2 0200 	movt	r2, #8192	@ 0x2000
+   100d2:	2904      	cmp	r1, #4
+   100d4:	7010      	strb	r0, [r2, #0]
+   100d6:	f200 80a4 	bhi.w	10222 <opencfw_boot_spot_state_power_event+0x222>
+   100da:	e8df f001 	tbb	[pc, r1]
+   100de:	a2828c03 			@ <UNDEFINED> instruction: a2828c03
+   100e2:	f2480099 	vqadd.s8	d16, d24, d9
+   100e6:	0000      	movs	r0, r0
+   100e8:	f2cc 3088 	movt	r0, #50056	@ 0xc388
+   100ec:	6070      	str	r0, [r6, #4]
+   100ee:	2000      	movs	r0, #0
+   100f0:	f2cc 10a0 	movt	r0, #49568	@ 0xc1a0
+   100f4:	60b0      	str	r0, [r6, #8]
+   100f6:	e0b0      	b.n	1025a <opencfw_boot_spot_state_power_event+0x25a>
+   100f8:	2e00      	cmp	r6, #0
+   100fa:	f000 808c 	beq.w	10216 <opencfw_boot_spot_state_power_event+0x216>
+   100fe:	f896 9000 	ldrb.w	r9, [r6]
+   10102:	f89b 0000 	ldrb.w	r0, [fp]
+   10106:	4548      	cmp	r0, r9
+   10108:	f000 80a7 	beq.w	1025a <opencfw_boot_spot_state_power_event+0x25a>
+   1010c:	f1b9 0f02 	cmp.w	r9, #2
+   10110:	d13f      	bne.n	10192 <opencfw_boot_spot_state_power_event+0x192>
+   10112:	f240 1544 	movw	r5, #324	@ 0x144
+   10116:	a803      	add	r0, sp, #12
+   10118:	f2c2 0500 	movt	r5, #8192	@ 0x2000
+   1011c:	460c      	mov	r4, r1
+   1011e:	f000 f913 	bl	10348 <event_child_buck_deepsleep_scan>
+   10122:	6828      	ldr	r0, [r5, #0]
+   10124:	2808      	cmp	r0, #8
+   10126:	d12d      	bne.n	10184 <opencfw_boot_spot_state_power_event+0x184>
+   10128:	2000      	movs	r0, #0
+   1012a:	e02f      	b.n	1018c <opencfw_boot_spot_state_power_event+0x18c>
+   1012c:	2d00      	cmp	r5, #0
+   1012e:	f000 8094 	beq.w	1025a <opencfw_boot_spot_state_power_event+0x25a>
+   10132:	2e00      	cmp	r6, #0
+   10134:	d06f      	beq.n	10216 <opencfw_boot_spot_state_power_event+0x216>
+   10136:	6830      	ldr	r0, [r6, #0]
+   10138:	4310      	orrs	r0, r2
+   1013a:	9004      	str	r0, [sp, #16]
+   1013c:	e08d      	b.n	1025a <opencfw_boot_spot_state_power_event+0x25a>
+   1013e:	2e00      	cmp	r6, #0
+   10140:	d069      	beq.n	10216 <opencfw_boot_spot_state_power_event+0x216>
+   10142:	f8d6 a000 	ldr.w	sl, [r6]
+   10146:	e088      	b.n	1025a <opencfw_boot_spot_state_power_event+0x25a>
+   10148:	2f03      	cmp	r7, #3
+   1014a:	d808      	bhi.n	1015e <opencfw_boot_spot_state_power_event+0x15e>
+   1014c:	2d00      	cmp	r5, #0
+   1014e:	f000 8084 	beq.w	1025a <opencfw_boot_spot_state_power_event+0x25a>
+   10152:	2e00      	cmp	r6, #0
+   10154:	d05f      	beq.n	10216 <opencfw_boot_spot_state_power_event+0x216>
+   10156:	6832      	ldr	r2, [r6, #0]
+   10158:	4310      	orrs	r0, r2
+   1015a:	9003      	str	r0, [sp, #12]
+   1015c:	e07d      	b.n	1025a <opencfw_boot_spot_state_power_event+0x25a>
+   1015e:	2f06      	cmp	r7, #6
+   10160:	d106      	bne.n	10170 <opencfw_boot_spot_state_power_event+0x170>
+   10162:	2d00      	cmp	r5, #0
+   10164:	d079      	beq.n	1025a <opencfw_boot_spot_state_power_event+0x25a>
+   10166:	2e00      	cmp	r6, #0
+   10168:	d055      	beq.n	10216 <opencfw_boot_spot_state_power_event+0x216>
+   1016a:	6830      	ldr	r0, [r6, #0]
+   1016c:	9006      	str	r0, [sp, #24]
+   1016e:	e074      	b.n	1025a <opencfw_boot_spot_state_power_event+0x25a>
+   10170:	2206      	movs	r2, #6
+   10172:	2f05      	cmp	r7, #5
+   10174:	f04f 0701 	mov.w	r7, #1
+   10178:	d846      	bhi.n	10208 <opencfw_boot_spot_state_power_event+0x208>
+   1017a:	2e00      	cmp	r6, #0
+   1017c:	d044      	beq.n	10208 <opencfw_boot_spot_state_power_event+0x208>
+   1017e:	6830      	ldr	r0, [r6, #0]
+   10180:	9005      	str	r0, [sp, #20]
+   10182:	e02c      	b.n	101de <opencfw_boot_spot_state_power_event+0x1de>
+   10184:	6828      	ldr	r0, [r5, #0]
+   10186:	380c      	subs	r0, #12
+   10188:	bf18      	it	ne
+   1018a:	2001      	movne	r0, #1
+   1018c:	4621      	mov	r1, r4
+   1018e:	f80b 0c0c 	strb.w	r0, [fp, #-12]
+   10192:	f1b9 0f01 	cmp.w	r9, #1
+   10196:	f89b 0000 	ldrb.w	r0, [fp]
+   1019a:	bf08      	it	eq
+   1019c:	2800      	cmpeq	r0, #0
+   1019e:	d019      	beq.n	101d4 <opencfw_boot_spot_state_power_event+0x1d4>
+   101a0:	f1b9 0f00 	cmp.w	r9, #0
+   101a4:	f89b 0000 	ldrb.w	r0, [fp]
+   101a8:	bf08      	it	eq
+   101aa:	2801      	cmpeq	r0, #1
+   101ac:	d016      	beq.n	101dc <opencfw_boot_spot_state_power_event+0x1dc>
+   101ae:	f1b9 0f02 	cmp.w	r9, #2
+   101b2:	f89b 0000 	ldrb.w	r0, [fp]
+   101b6:	bf08      	it	eq
+   101b8:	2800      	cmpeq	r0, #0
+   101ba:	d03d      	beq.n	10238 <opencfw_boot_spot_state_power_event+0x238>
+   101bc:	f89b 2000 	ldrb.w	r2, [fp]
+   101c0:	4648      	mov	r0, r9
+   101c2:	460c      	mov	r4, r1
+   101c4:	4611      	mov	r1, r2
+   101c6:	f000 f8ed 	bl	103a4 <event_child_transition_effect>
+   101ca:	4621      	mov	r1, r4
+   101cc:	f88b 9000 	strb.w	r9, [fp]
+   101d0:	2200      	movs	r2, #0
+   101d2:	e021      	b.n	10218 <opencfw_boot_spot_state_power_event+0x218>
+   101d4:	2701      	movs	r7, #1
+   101d6:	f88b 7000 	strb.w	r7, [fp]
+   101da:	e000      	b.n	101de <opencfw_boot_spot_state_power_event+0x1de>
+   101dc:	2700      	movs	r7, #0
+   101de:	2200      	movs	r2, #0
+   101e0:	e03d      	b.n	1025e <opencfw_boot_spot_state_power_event+0x25e>
+   101e2:	f04f 4040 	mov.w	r0, #3221225472	@ 0xc0000000
+   101e6:	6070      	str	r0, [r6, #4]
+   101e8:	2000      	movs	r0, #0
+   101ea:	f2c4 2040 	movt	r0, #16960	@ 0x4240
+   101ee:	f500 2000 	add.w	r0, r0, #524288	@ 0x80000
+   101f2:	60b0      	str	r0, [r6, #8]
+   101f4:	e031      	b.n	1025a <opencfw_boot_spot_state_power_event+0x25a>
+   101f6:	2000      	movs	r0, #0
+   101f8:	f2cc 10a0 	movt	r0, #49568	@ 0xc1a0
+   101fc:	f500 1080 	add.w	r0, r0, #1048576	@ 0x100000
+   10200:	2200      	movs	r2, #0
+   10202:	6070      	str	r0, [r6, #4]
+   10204:	60b2      	str	r2, [r6, #8]
+   10206:	e029      	b.n	1025c <opencfw_boot_spot_state_power_event+0x25c>
+   10208:	2001      	movs	r0, #1
+   1020a:	2800      	cmp	r0, #0
+   1020c:	d16a      	bne.n	102e4 <opencfw_boot_spot_state_power_event+0x2e4>
+   1020e:	e029      	b.n	10264 <opencfw_boot_spot_state_power_event+0x264>
+   10210:	2000      	movs	r0, #0
+   10212:	6070      	str	r0, [r6, #4]
+   10214:	60b0      	str	r0, [r6, #8]
+   10216:	2206      	movs	r2, #6
+   10218:	2701      	movs	r7, #1
+   1021a:	2001      	movs	r0, #1
+   1021c:	2800      	cmp	r0, #0
+   1021e:	d161      	bne.n	102e4 <opencfw_boot_spot_state_power_event+0x2e4>
+   10220:	e020      	b.n	10264 <opencfw_boot_spot_state_power_event+0x264>
+   10222:	2903      	cmp	r1, #3
+   10224:	d819      	bhi.n	1025a <opencfw_boot_spot_state_power_event+0x25a>
+   10226:	2000      	movs	r0, #0
+   10228:	f2c4 2040 	movt	r0, #16960	@ 0x4240
+   1022c:	6070      	str	r0, [r6, #4]
+   1022e:	2000      	movs	r0, #0
+   10230:	f2c4 407a 	movt	r0, #17530	@ 0x447a
+   10234:	60b0      	str	r0, [r6, #8]
+   10236:	e010      	b.n	1025a <opencfw_boot_spot_state_power_event+0x25a>
+   10238:	f247 008c 	movw	r0, #28812	@ 0x708c
+   1023c:	f2c2 0002 	movt	r0, #8194	@ 0x2002
+   10240:	7800      	ldrb	r0, [r0, #0]
+   10242:	07c0      	lsls	r0, r0, #31
+   10244:	d006      	beq.n	10254 <opencfw_boot_spot_state_power_event+0x254>
+   10246:	f1ba 0f00 	cmp.w	sl, #0
+   1024a:	bf04      	itt	eq
+   1024c:	9803      	ldreq	r0, [sp, #12]
+   1024e:	ea5f 0080 	movseq.w	r0, r0, lsl #2
+   10252:	d04d      	beq.n	102f0 <opencfw_boot_spot_state_power_event+0x2f0>
+   10254:	2002      	movs	r0, #2
+   10256:	f88b 0000 	strb.w	r0, [fp]
+   1025a:	2200      	movs	r2, #0
+   1025c:	2701      	movs	r7, #1
+   1025e:	2000      	movs	r0, #0
+   10260:	2800      	cmp	r0, #0
+   10262:	d13f      	bne.n	102e4 <opencfw_boot_spot_state_power_event+0x2e4>
+   10264:	a807      	add	r0, sp, #28
+   10266:	9001      	str	r0, [sp, #4]
+   10268:	ae08      	add	r6, sp, #32
+   1026a:	fa5f f38a 	uxtb.w	r3, sl
+   1026e:	a803      	add	r0, sp, #12
+   10270:	464a      	mov	r2, r9
+   10272:	9600      	str	r6, [sp, #0]
+   10274:	f000 f8b8 	bl	103e8 <event_child_state_decode>
+   10278:	4602      	mov	r2, r0
+   1027a:	bb98      	cbnz	r0, 102e4 <opencfw_boot_spot_state_power_event+0x2e4>
+   1027c:	f240 1544 	movw	r5, #324	@ 0x144
+   10280:	f2c2 0500 	movt	r5, #8192	@ 0x2000
+   10284:	682e      	ldr	r6, [r5, #0]
+   10286:	68ab      	ldr	r3, [r5, #8]
+   10288:	e9dd 2007 	ldrd	r2, r0, [sp, #28]
+   1028c:	42b0      	cmp	r0, r6
+   1028e:	bf08      	it	eq
+   10290:	429a      	cmpeq	r2, r3
+   10292:	d00a      	beq.n	102aa <opencfw_boot_spot_state_power_event+0x2aa>
+   10294:	4631      	mov	r1, r6
+   10296:	f000 f8ed 	bl	10474 <event_child_state_transition>
+   1029a:	b937      	cbnz	r7, 102aa <opencfw_boot_spot_state_power_event+0x2aa>
+   1029c:	f89b 1000 	ldrb.w	r1, [fp]
+   102a0:	4648      	mov	r0, r9
+   102a2:	f000 f87f 	bl	103a4 <event_child_transition_effect>
+   102a6:	f88b 9000 	strb.w	r9, [fp]
+   102aa:	9808      	ldr	r0, [sp, #32]
+   102ac:	2e0c      	cmp	r6, #12
+   102ae:	d103      	bne.n	102b8 <opencfw_boot_spot_state_power_event+0x2b8>
+   102b0:	f1a0 010d 	sub.w	r1, r0, #13
+   102b4:	2903      	cmp	r1, #3
+   102b6:	d304      	bcc.n	102c2 <opencfw_boot_spot_state_power_event+0x2c2>
+   102b8:	2e08      	cmp	r6, #8
+   102ba:	d10e      	bne.n	102da <opencfw_boot_spot_state_power_event+0x2da>
+   102bc:	3809      	subs	r0, #9
+   102be:	2802      	cmp	r0, #2
+   102c0:	d80b      	bhi.n	102da <opencfw_boot_spot_state_power_event+0x2da>
+   102c2:	f240 307c 	movw	r0, #892	@ 0x37c
+   102c6:	f2c4 0002 	movt	r0, #16386	@ 0x4002
+   102ca:	6801      	ldr	r1, [r0, #0]
+   102cc:	f041 0140 	orr.w	r1, r1, #64	@ 0x40
+   102d0:	6001      	str	r1, [r0, #0]
+   102d2:	6801      	ldr	r1, [r0, #0]
+   102d4:	f041 0108 	orr.w	r1, r1, #8
+   102d8:	6001      	str	r1, [r0, #0]
+   102da:	9808      	ldr	r0, [sp, #32]
+   102dc:	6028      	str	r0, [r5, #0]
+   102de:	9807      	ldr	r0, [sp, #28]
+   102e0:	60a8      	str	r0, [r5, #8]
+   102e2:	2200      	movs	r2, #0
+   102e4:	f388 8810 	msr	PRIMASK, r8
+   102e8:	4610      	mov	r0, r2
+   102ea:	b009      	add	sp, #36	@ 0x24
+   102ec:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}
+   102f0:	f8bd 0010 	ldrh.w	r0, [sp, #16]
+   102f4:	f240 42c4 	movw	r2, #1220	@ 0x4c4
+   102f8:	4210      	tst	r0, r2
+   102fa:	bf04      	itt	eq
+   102fc:	2001      	moveq	r0, #1
+   102fe:	f80b 0c0c 	strbeq.w	r0, [fp, #-12]
+   10302:	e7a7      	b.n	10254 <opencfw_boot_spot_state_power_event+0x254>
+
+00010304 <event_child_temperature_range>:
+   10304:	f642 00f4 	movw	r0, #10484	@ 0x28f4
+   10308:	f2c0 0001 	movt	r0, #1
+   1030c:	6801      	ldr	r1, [r0, #0]
+   1030e:	232c      	movs	r3, #44	@ 0x2c
+   10310:	1c4a      	adds	r2, r1, #1
+   10312:	6002      	str	r2, [r0, #0]
+   10314:	f642 02f8 	movw	r2, #10488	@ 0x28f8
+   10318:	f2c0 0201 	movt	r2, #1
+   1031c:	fb01 2003 	mla	r0, r1, r3, r2
+   10320:	fb01 f303 	mul.w	r3, r1, r3
+   10324:	2101      	movs	r1, #1
+   10326:	50d1      	str	r1, [r2, r3]
+   10328:	2200      	movs	r2, #0
+   1032a:	bf00      	nop
+   1032c:	f840 2021 	str.w	r2, [r0, r1, lsl #2]
+   10330:	3101      	adds	r1, #1
+   10332:	290b      	cmp	r1, #11
+   10334:	d1fa      	bne.n	1032c <event_child_temperature_range+0x28>
+   10336:	ed80 0a01 	vstr	s0, [r0, #4]
+   1033a:	f642 00d4 	movw	r0, #10452	@ 0x28d4
+   1033e:	f2c0 0001 	movt	r0, #1
+   10342:	6800      	ldr	r0, [r0, #0]
+   10344:	b2c0      	uxtb	r0, r0
+   10346:	4770      	bx	lr
+
+00010348 <event_child_buck_deepsleep_scan>:
+   10348:	b510      	push	{r4, lr}
+   1034a:	f642 01f4 	movw	r1, #10484	@ 0x28f4
+   1034e:	f2c0 0101 	movt	r1, #1
+   10352:	680a      	ldr	r2, [r1, #0]
+   10354:	f642 0cf8 	movw	ip, #10488	@ 0x28f8
+   10358:	1c53      	adds	r3, r2, #1
+   1035a:	600b      	str	r3, [r1, #0]
+   1035c:	f2c0 0c01 	movt	ip, #1
+   10360:	232c      	movs	r3, #44	@ 0x2c
+   10362:	fb02 ce03 	mla	lr, r2, r3, ip
+   10366:	fb02 f203 	mul.w	r2, r2, r3
+   1036a:	2302      	movs	r3, #2
+   1036c:	f84c 3002 	str.w	r3, [ip, r2]
+   10370:	2201      	movs	r2, #1
+   10372:	2300      	movs	r3, #0
+   10374:	f84e 3022 	str.w	r3, [lr, r2, lsl #2]
+   10378:	3201      	adds	r2, #1
+   1037a:	2a0b      	cmp	r2, #11
+   1037c:	d1fa      	bne.n	10374 <event_child_buck_deepsleep_scan+0x2c>
+   1037e:	f642 0cd8 	movw	ip, #10456	@ 0x28d8
+   10382:	2200      	movs	r2, #0
+   10384:	f2c0 0c01 	movt	ip, #1
+   10388:	5883      	ldr	r3, [r0, r2]
+   1038a:	eb0e 0102 	add.w	r1, lr, r2
+   1038e:	604b      	str	r3, [r1, #4]
+   10390:	f85c 3002 	ldr.w	r3, [ip, r2]
+   10394:	5884      	ldr	r4, [r0, r2]
+   10396:	4063      	eors	r3, r4
+   10398:	5083      	str	r3, [r0, r2]
+   1039a:	3204      	adds	r2, #4
+   1039c:	2a10      	cmp	r2, #16
+   1039e:	614b      	str	r3, [r1, #20]
+   103a0:	d1f2      	bne.n	10388 <event_child_buck_deepsleep_scan+0x40>
+   103a2:	bd10      	pop	{r4, pc}
+
+000103a4 <event_child_transition_effect>:
+   103a4:	b580      	push	{r7, lr}
+   103a6:	f642 0cf4 	movw	ip, #10484	@ 0x28f4
+   103aa:	f2c0 0c01 	movt	ip, #1
+   103ae:	f8dc 3000 	ldr.w	r3, [ip]
+   103b2:	f04f 0e2c 	mov.w	lr, #44	@ 0x2c
+   103b6:	1c5a      	adds	r2, r3, #1
+   103b8:	f8cc 2000 	str.w	r2, [ip]
+   103bc:	f642 0cf8 	movw	ip, #10488	@ 0x28f8
+   103c0:	f2c0 0c01 	movt	ip, #1
+   103c4:	fb03 c20e 	mla	r2, r3, lr, ip
+   103c8:	fb03 fe0e 	mul.w	lr, r3, lr
+   103cc:	2303      	movs	r3, #3
+   103ce:	f84c 300e 	str.w	r3, [ip, lr]
+   103d2:	2301      	movs	r3, #1
+   103d4:	f04f 0c00 	mov.w	ip, #0
+   103d8:	f842 c023 	str.w	ip, [r2, r3, lsl #2]
+   103dc:	3301      	adds	r3, #1
+   103de:	2b0b      	cmp	r3, #11
+   103e0:	d1fa      	bne.n	103d8 <event_child_transition_effect+0x34>
+   103e2:	6050      	str	r0, [r2, #4]
+   103e4:	6091      	str	r1, [r2, #8]
+   103e6:	bd80      	pop	{r7, pc}
+
+000103e8 <event_child_state_decode>:
+   103e8:	b5f0      	push	{r4, r5, r6, r7, lr}
+   103ea:	f642 04f4 	movw	r4, #10484	@ 0x28f4
+   103ee:	f2c0 0401 	movt	r4, #1
+   103f2:	6825      	ldr	r5, [r4, #0]
+   103f4:	f8dd c018 	ldr.w	ip, [sp, #24]
+   103f8:	1c6e      	adds	r6, r5, #1
+   103fa:	6026      	str	r6, [r4, #0]
+   103fc:	f642 04f8 	movw	r4, #10488	@ 0x28f8
+   10400:	f2c0 0401 	movt	r4, #1
+   10404:	262c      	movs	r6, #44	@ 0x2c
+   10406:	fb05 4406 	mla	r4, r5, r6, r4
+   1040a:	f8dd e014 	ldr.w	lr, [sp, #20]
+   1040e:	2604      	movs	r6, #4
+   10410:	4625      	mov	r5, r4
+   10412:	f845 6b04 	str.w	r6, [r5], #4
+   10416:	2601      	movs	r6, #1
+   10418:	2700      	movs	r7, #0
+   1041a:	bf00      	nop
+   1041c:	f844 7026 	str.w	r7, [r4, r6, lsl #2]
+   10420:	3601      	adds	r6, #1
+   10422:	2e0b      	cmp	r6, #11
+   10424:	d1fa      	bne.n	1041c <event_child_state_decode+0x34>
+   10426:	2600      	movs	r6, #0
+   10428:	f850 7026 	ldr.w	r7, [r0, r6, lsl #2]
+   1042c:	f845 7026 	str.w	r7, [r5, r6, lsl #2]
+   10430:	3601      	adds	r6, #1
+   10432:	2e04      	cmp	r6, #4
+   10434:	d1f8      	bne.n	10428 <event_child_state_decode+0x40>
+   10436:	f642 00e8 	movw	r0, #10472	@ 0x28e8
+   1043a:	6161      	str	r1, [r4, #20]
+   1043c:	61a2      	str	r2, [r4, #24]
+   1043e:	61e3      	str	r3, [r4, #28]
+   10440:	f2c0 0001 	movt	r0, #1
+   10444:	6800      	ldr	r0, [r0, #0]
+   10446:	f8ce 0000 	str.w	r0, [lr]
+   1044a:	f642 00ec 	movw	r0, #10476	@ 0x28ec
+   1044e:	f2c0 0001 	movt	r0, #1
+   10452:	6800      	ldr	r0, [r0, #0]
+   10454:	f8cc 0000 	str.w	r0, [ip]
+   10458:	f642 00f0 	movw	r0, #10480	@ 0x28f0
+   1045c:	f2c0 0001 	movt	r0, #1
+   10460:	6801      	ldr	r1, [r0, #0]
+   10462:	6221      	str	r1, [r4, #32]
+   10464:	f8de 1000 	ldr.w	r1, [lr]
+   10468:	6261      	str	r1, [r4, #36]	@ 0x24
+   1046a:	f8dc 1000 	ldr.w	r1, [ip]
+   1046e:	62a1      	str	r1, [r4, #40]	@ 0x28
+   10470:	6800      	ldr	r0, [r0, #0]
+   10472:	bdf0      	pop	{r4, r5, r6, r7, pc}
+
+00010474 <event_child_state_transition>:
+   10474:	b570      	push	{r4, r5, r6, lr}
+   10476:	f642 0cf4 	movw	ip, #10484	@ 0x28f4
+   1047a:	f2c0 0c01 	movt	ip, #1
+   1047e:	f8dc e000 	ldr.w	lr, [ip]
+   10482:	f642 06f8 	movw	r6, #10488	@ 0x28f8
+   10486:	f10e 0401 	add.w	r4, lr, #1
+   1048a:	f2c0 0601 	movt	r6, #1
+   1048e:	252c      	movs	r5, #44	@ 0x2c
+   10490:	f8cc 4000 	str.w	r4, [ip]
+   10494:	fb0e 6c05 	mla	ip, lr, r5, r6
+   10498:	fb0e f505 	mul.w	r5, lr, r5
+   1049c:	2405      	movs	r4, #5
+   1049e:	5174      	str	r4, [r6, r5]
+   104a0:	f04f 0e01 	mov.w	lr, #1
+   104a4:	2400      	movs	r4, #0
+   104a6:	bf00      	nop
+   104a8:	f84c 402e 	str.w	r4, [ip, lr, lsl #2]
+   104ac:	f10e 0e01 	add.w	lr, lr, #1
+   104b0:	f1be 0f0b 	cmp.w	lr, #11
+   104b4:	d1f8      	bne.n	104a8 <event_child_state_transition+0x34>
+   104b6:	f8cc 0004 	str.w	r0, [ip, #4]
+   104ba:	f8cc 1008 	str.w	r1, [ip, #8]
+   104be:	f8cc 200c 	str.w	r2, [ip, #12]
+   104c2:	f8cc 3010 	str.w	r3, [ip, #16]
+   104c6:	bd70      	pop	{r4, r5, r6, pc}
+
+000104c8 <native_spot_temperature_range>:
+   104c8:	eebb 1a04 	vmov.f32	s2, #180	@ 0xc1a00000 -20.0
+   104cc:	eeb4 0a41 	vcmp.f32	s0, s2
+   104d0:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+   104d4:	d508      	bpl.n	104e8 <native_spot_temperature_range+0x20>
+   104d6:	ed9f 2a1b 	vldr	s4, [pc, #108]	@ 10544 <native_spot_temperature_range+0x7c>
+   104da:	eeb4 0a42 	vcmp.f32	s0, s4
+   104de:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+   104e2:	bfa4      	itt	ge
+   104e4:	2000      	movge	r0, #0
+   104e6:	4770      	bxge	lr
+   104e8:	eeb4 0a41 	vcmp.f32	s0, s2
+   104ec:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+   104f0:	db06      	blt.n	10500 <native_spot_temperature_range+0x38>
+   104f2:	eeb5 0a40 	vcmp.f32	s0, #0.0
+   104f6:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+   104fa:	bf44      	itt	mi
+   104fc:	2001      	movmi	r0, #1
+   104fe:	4770      	bxmi	lr
+   10500:	eeb5 0a40 	vcmp.f32	s0, #0.0
+   10504:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+   10508:	db08      	blt.n	1051c <native_spot_temperature_range+0x54>
+   1050a:	ed9f 1a0f 	vldr	s2, [pc, #60]	@ 10548 <native_spot_temperature_range+0x80>
+   1050e:	eeb4 0a41 	vcmp.f32	s0, s2
+   10512:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+   10516:	bf44      	itt	mi
+   10518:	2002      	movmi	r0, #2
+   1051a:	4770      	bxmi	lr
+   1051c:	ed9f 1a0b 	vldr	s2, [pc, #44]	@ 1054c <native_spot_temperature_range+0x84>
+   10520:	2004      	movs	r0, #4
+   10522:	eeb4 0a41 	vcmp.f32	s0, s2
+   10526:	ed9f 1a08 	vldr	s2, [pc, #32]	@ 10548 <native_spot_temperature_range+0x80>
+   1052a:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+   1052e:	bf48      	it	mi
+   10530:	2003      	movmi	r0, #3
+   10532:	eeb4 0a41 	vcmp.f32	s0, s2
+   10536:	2104      	movs	r1, #4
+   10538:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+   1053c:	bfb8      	it	lt
+   1053e:	4608      	movlt	r0, r1
+   10540:	4770      	bx	lr
+   10542:	bf00      	nop
+   10544:	c3888000 			@ <UNDEFINED> instruction: c3888000
+   10548:	42480000 			@ <UNDEFINED> instruction: 42480000
+   1054c:	447a0000 			@ <UNDEFINED> instruction: 447a0000
+
+00010550 <native_spot_transition_effect>:
+   10550:	f247 12b2 	movw	r2, #29106	@ 0x71b2
+   10554:	2802      	cmp	r0, #2
+   10556:	f2c2 0202 	movt	r2, #8194	@ 0x2002
+   1055a:	bf08      	it	eq
+   1055c:	2901      	cmpeq	r1, #1
+   1055e:	d105      	bne.n	1056c <native_spot_transition_effect+0x1c>
+   10560:	7813      	ldrb	r3, [r2, #0]
+   10562:	2b00      	cmp	r3, #0
+   10564:	bf04      	itt	eq
+   10566:	2301      	moveq	r3, #1
+   10568:	f802 3c02 	strbeq.w	r3, [r2, #-2]
+   1056c:	2800      	cmp	r0, #0
+   1056e:	bf08      	it	eq
+   10570:	2901      	cmpeq	r1, #1
+   10572:	d000      	beq.n	10576 <native_spot_transition_effect+0x26>
+   10574:	4770      	bx	lr
+   10576:	f240 307c 	movw	r0, #892	@ 0x37c
+   1057a:	f2c4 0002 	movt	r0, #16386	@ 0x4002
+   1057e:	6801      	ldr	r1, [r0, #0]
+   10580:	f421 3180 	bic.w	r1, r1, #65536	@ 0x10000
+   10584:	6001      	str	r1, [r0, #0]
+   10586:	6801      	ldr	r1, [r0, #0]
+   10588:	f021 0108 	bic.w	r1, r1, #8
+   1058c:	6001      	str	r1, [r0, #0]
+   1058e:	6801      	ldr	r1, [r0, #0]
+   10590:	f021 0140 	bic.w	r1, r1, #64	@ 0x40
+   10594:	6001      	str	r1, [r0, #0]
+   10596:	2000      	movs	r0, #0
+   10598:	7010      	strb	r0, [r2, #0]
+   1059a:	4770      	bx	lr
+
+0001059c <native_spot_state_decode>:
+   1059c:	b5b0      	push	{r4, r5, r7, lr}
+   1059e:	f244 1364 	movw	r3, #16740	@ 0x4164
+   105a2:	f2c0 0343 	movt	r3, #67	@ 0x43
+   105a6:	681b      	ldr	r3, [r3, #0]
+   105a8:	f241 0300 	movw	r3, #4096	@ 0x1000
+   105ac:	f2c4 0302 	movt	r3, #16386	@ 0x4002
+   105b0:	f8d3 e000 	ldr.w	lr, [r3]
+   105b4:	f247 038c 	movw	r3, #28812	@ 0x708c
+   105b8:	f2c2 0302 	movt	r3, #8194	@ 0x2002
+   105bc:	f893 c000 	ldrb.w	ip, [r3]
+   105c0:	7c04      	ldrb	r4, [r0, #16]
+   105c2:	7c45      	ldrb	r5, [r0, #17]
+   105c4:	7c83      	ldrb	r3, [r0, #18]
+   105c6:	ea4f 2404 	mov.w	r4, r4, lsl #8
+   105ca:	b155      	cbz	r5, 105e2 <native_spot_state_decode+0x46>
+   105cc:	2d01      	cmp	r5, #1
+   105ce:	d102      	bne.n	105d6 <native_spot_state_decode+0x3a>
+   105d0:	f044 0401 	orr.w	r4, r4, #1
+   105d4:	e005      	b.n	105e2 <native_spot_state_decode+0x46>
+   105d6:	f00e 0503 	and.w	r5, lr, #3
+   105da:	2d02      	cmp	r5, #2
+   105dc:	bf08      	it	eq
+   105de:	f044 0401 	orreq.w	r4, r4, #1
+   105e2:	1e5d      	subs	r5, r3, #1
+   105e4:	2d02      	cmp	r5, #2
+   105e6:	d303      	bcc.n	105f0 <native_spot_state_decode+0x54>
+   105e8:	6805      	ldr	r5, [r0, #0]
+   105ea:	00ad      	lsls	r5, r5, #2
+   105ec:	f000 808f 	beq.w	1070e <native_spot_state_decode+0x172>
+   105f0:	f044 0410 	orr.w	r4, r4, #16
+   105f4:	2b01      	cmp	r3, #1
+   105f6:	f36f 341f 	bfc	r4, #12, #20
+   105fa:	d004      	beq.n	10606 <native_spot_state_decode+0x6a>
+   105fc:	2b02      	cmp	r3, #2
+   105fe:	bf08      	it	eq
+   10600:	f504 5400 	addeq.w	r4, r4, #8192	@ 0x2000
+   10604:	e001      	b.n	1060a <native_spot_state_decode+0x6e>
+   10606:	f504 5480 	add.w	r4, r4, #4096	@ 0x1000
+   1060a:	6803      	ldr	r3, [r0, #0]
+   1060c:	009d      	lsls	r5, r3, #2
+   1060e:	d002      	beq.n	10616 <native_spot_state_decode+0x7a>
+   10610:	f504 3480 	add.w	r4, r4, #65536	@ 0x10000
+   10614:	e006      	b.n	10624 <native_spot_state_decode+0x88>
+   10616:	8880      	ldrh	r0, [r0, #4]
+   10618:	f240 45c4 	movw	r5, #1220	@ 0x4c4
+   1061c:	4228      	tst	r0, r5
+   1061e:	bf18      	it	ne
+   10620:	f504 3480 	addne.w	r4, r4, #65536	@ 0x10000
+   10624:	f640 70ff 	movw	r0, #4095	@ 0xfff
+   10628:	f2c0 0010 	movt	r0, #16
+   1062c:	f413 0f40 	tst.w	r3, #12582912	@ 0xc00000
+   10630:	bf18      	it	ne
+   10632:	f504 1480 	addne.w	r4, r4, #1048576	@ 0x100000
+   10636:	4020      	ands	r0, r4
+   10638:	f5b0 7f40 	cmp.w	r0, #768	@ 0x300
+   1063c:	da28      	bge.n	10690 <native_spot_state_decode+0xf4>
+   1063e:	2811      	cmp	r0, #17
+   10640:	f240 806f 	bls.w	10722 <native_spot_state_decode+0x186>
+   10644:	f5a0 7380 	sub.w	r3, r0, #256	@ 0x100
+   10648:	2b11      	cmp	r3, #17
+   1064a:	f240 807d 	bls.w	10748 <native_spot_state_decode+0x1ac>
+   1064e:	f5a0 7000 	sub.w	r0, r0, #512	@ 0x200
+   10652:	2811      	cmp	r0, #17
+   10654:	f200 80f6 	bhi.w	10844 <native_spot_state_decode+0x2a8>
+   10658:	e8df f010 	tbh	[pc, r0, lsl #1]
+   1065c:	00e50012 			@ <UNDEFINED> instruction: 00e50012
+   10660:	00f400f4 	ldrshteq	r0, [r4], #4
+   10664:	00f400f4 	ldrshteq	r0, [r4], #4
+   10668:	00f400f4 	ldrshteq	r0, [r4], #4
+   1066c:	00f400f4 	ldrshteq	r0, [r4], #4
+   10670:	00f400f4 	ldrshteq	r0, [r4], #4
+   10674:	00f400f4 	ldrshteq	r0, [r4], #4
+   10678:	00f400f4 	ldrshteq	r0, [r4], #4
+   1067c:	00ed00e2 			@ <UNDEFINED> instruction: 00ed00e2
+   10680:	f04f 0e05 	mov.w	lr, #5
+   10684:	ea5f 70cc 	movs.w	r0, ip, lsl #31
+   10688:	bf08      	it	eq
+   1068a:	f04f 0e01 	moveq.w	lr, #1
+   1068e:	e0de      	b.n	1084e <native_spot_state_decode+0x2b2>
+   10690:	f240 130f 	movw	r3, #271	@ 0x10f
+   10694:	f2c0 0310 	movt	r3, #16
+   10698:	4298      	cmp	r0, r3
+   1069a:	dc1c      	bgt.n	106d6 <native_spot_state_decode+0x13a>
+   1069c:	f5a0 7340 	sub.w	r3, r0, #768	@ 0x300
+   106a0:	2b11      	cmp	r3, #17
+   106a2:	f200 807a 	bhi.w	1079a <native_spot_state_decode+0x1fe>
+   106a6:	e8df f013 	tbh	[pc, r3, lsl #1]
+   106aa:	008f0012 			@ <UNDEFINED> instruction: 008f0012
+   106ae:	00cd00cd 			@ <UNDEFINED> instruction: 00cd00cd
+   106b2:	00cd00cd 			@ <UNDEFINED> instruction: 00cd00cd
+   106b6:	00cd00cd 			@ <UNDEFINED> instruction: 00cd00cd
+   106ba:	00cd00cd 			@ <UNDEFINED> instruction: 00cd00cd
+   106be:	00cd00cd 			@ <UNDEFINED> instruction: 00cd00cd
+   106c2:	00cd00cd 			@ <UNDEFINED> instruction: 00cd00cd
+   106c6:	00cd00cd 			@ <UNDEFINED> instruction: 00cd00cd
+   106ca:	009a0097 			@ <UNDEFINED> instruction: 009a0097
+   106ce:	2004      	movs	r0, #4
+   106d0:	ea00 0e8c 	and.w	lr, r0, ip, lsl #2
+   106d4:	e0bb      	b.n	1084e <native_spot_state_decode+0x2b2>
+   106d6:	f240 2310 	movw	r3, #528	@ 0x210
+   106da:	f2c0 0310 	movt	r3, #16
+   106de:	4298      	cmp	r0, r3
+   106e0:	f300 8045 	bgt.w	1076e <native_spot_state_decode+0x1d2>
+   106e4:	f240 1510 	movw	r5, #272	@ 0x110
+   106e8:	f2c0 0510 	movt	r5, #16
+   106ec:	42a8      	cmp	r0, r5
+   106ee:	f000 808f 	beq.w	10810 <native_spot_state_decode+0x274>
+   106f2:	f240 1511 	movw	r5, #273	@ 0x111
+   106f6:	f2c0 0510 	movt	r5, #16
+   106fa:	42a8      	cmp	r0, r5
+   106fc:	f000 8080 	beq.w	10800 <native_spot_state_decode+0x264>
+   10700:	4298      	cmp	r0, r3
+   10702:	f040 809f 	bne.w	10844 <native_spot_state_decode+0x2a8>
+   10706:	2001      	movs	r0, #1
+   10708:	f04f 0e11 	mov.w	lr, #17
+   1070c:	e09b      	b.n	10846 <native_spot_state_decode+0x2aa>
+   1070e:	f8b0 e004 	ldrh.w	lr, [r0, #4]
+   10712:	f240 45c4 	movw	r5, #1220	@ 0x4c4
+   10716:	ea1e 0f05 	tst.w	lr, r5
+   1071a:	bf18      	it	ne
+   1071c:	f044 0410 	orrne.w	r4, r4, #16
+   10720:	e768      	b.n	105f4 <native_spot_state_decode+0x58>
+   10722:	f04f 0e07 	mov.w	lr, #7
+   10726:	e8df f000 	tbb	[pc, r0]
+   1072a:	8d8d4409 			@ <UNDEFINED> instruction: 8d8d4409
+   1072e:	8d8d8d8d 			@ <UNDEFINED> instruction: 8d8d8d8d
+   10732:	8d8d8d8d 			@ <UNDEFINED> instruction: 8d8d8d8d
+   10736:	8d8d8d8d 			@ <UNDEFINED> instruction: 8d8d8d8d
+   1073a:	ea5f4c92 			@ <UNDEFINED> instruction: ea5f4c92
+   1073e:	70cc      	strb	r4, [r1, #3]
+   10740:	bf08      	it	eq
+   10742:	f04f 0e03 	moveq.w	lr, #3
+   10746:	e082      	b.n	1084e <native_spot_state_decode+0x2b2>
+   10748:	e8df f003 	tbb	[pc, r3]
+   1074c:	7c7c4f09 			@ <UNDEFINED> instruction: 7c7c4f09
+   10750:	7c7c7c7c 			@ <UNDEFINED> instruction: 7c7c7c7c
+   10754:	7c7c7c7c 			@ <UNDEFINED> instruction: 7c7c7c7c
+   10758:	7c7c7c7c 			@ <UNDEFINED> instruction: 7c7c7c7c
+   1075c:	f04f574c 			@ <UNDEFINED> instruction: f04f574c
+   10760:	0e06      	lsrs	r6, r0, #24
+   10762:	ea5f 70cc 	movs.w	r0, ip, lsl #31
+   10766:	bf08      	it	eq
+   10768:	f04f 0e02 	moveq.w	lr, #2
+   1076c:	e06f      	b.n	1084e <native_spot_state_decode+0x2b2>
+   1076e:	f240 2311 	movw	r3, #529	@ 0x211
+   10772:	f2c0 0310 	movt	r3, #16
+   10776:	4298      	cmp	r0, r3
+   10778:	d04e      	beq.n	10818 <native_spot_state_decode+0x27c>
+   1077a:	f240 3310 	movw	r3, #784	@ 0x310
+   1077e:	f2c0 0310 	movt	r3, #16
+   10782:	4298      	cmp	r0, r3
+   10784:	d040      	beq.n	10808 <native_spot_state_decode+0x26c>
+   10786:	f240 3311 	movw	r3, #785	@ 0x311
+   1078a:	f2c0 0310 	movt	r3, #16
+   1078e:	4298      	cmp	r0, r3
+   10790:	d158      	bne.n	10844 <native_spot_state_decode+0x2a8>
+   10792:	2001      	movs	r0, #1
+   10794:	f04f 0e0c 	mov.w	lr, #12
+   10798:	e055      	b.n	10846 <native_spot_state_decode+0x2aa>
+   1079a:	f1b0 1f10 	cmp.w	r0, #1048592	@ 0x100010
+   1079e:	d04d      	beq.n	1083c <native_spot_state_decode+0x2a0>
+   107a0:	2311      	movs	r3, #17
+   107a2:	f2c0 0310 	movt	r3, #16
+   107a6:	4298      	cmp	r0, r3
+   107a8:	d14c      	bne.n	10844 <native_spot_state_decode+0x2a8>
+   107aa:	2001      	movs	r0, #1
+   107ac:	f04f 0e0f 	mov.w	lr, #15
+   107b0:	e049      	b.n	10846 <native_spot_state_decode+0x2aa>
+   107b2:	f04f 0e0f 	mov.w	lr, #15
+   107b6:	ea5f 70cc 	movs.w	r0, ip, lsl #31
+   107ba:	bf08      	it	eq
+   107bc:	f04f 0e0b 	moveq.w	lr, #11
+   107c0:	e045      	b.n	1084e <native_spot_state_decode+0x2b2>
+   107c2:	f04f 0e0f 	mov.w	lr, #15
+   107c6:	e042      	b.n	1084e <native_spot_state_decode+0x2b2>
+   107c8:	f04f 0e0c 	mov.w	lr, #12
+   107cc:	ea5f 70cc 	movs.w	r0, ip, lsl #31
+   107d0:	bf08      	it	eq
+   107d2:	f04f 0e08 	moveq.w	lr, #8
+   107d6:	e03a      	b.n	1084e <native_spot_state_decode+0x2b2>
+   107d8:	f04f 0e04 	mov.w	lr, #4
+   107dc:	e037      	b.n	1084e <native_spot_state_decode+0x2b2>
+   107de:	f04f 0e0c 	mov.w	lr, #12
+   107e2:	e034      	b.n	1084e <native_spot_state_decode+0x2b2>
+   107e4:	f04f 0e06 	mov.w	lr, #6
+   107e8:	e031      	b.n	1084e <native_spot_state_decode+0x2b2>
+   107ea:	f04f 0e0e 	mov.w	lr, #14
+   107ee:	ea5f 70cc 	movs.w	r0, ip, lsl #31
+   107f2:	bf08      	it	eq
+   107f4:	f04f 0e0a 	moveq.w	lr, #10
+   107f8:	e029      	b.n	1084e <native_spot_state_decode+0x2b2>
+   107fa:	f04f 0e0e 	mov.w	lr, #14
+   107fe:	e026      	b.n	1084e <native_spot_state_decode+0x2b2>
+   10800:	2001      	movs	r0, #1
+   10802:	f04f 0e0e 	mov.w	lr, #14
+   10806:	e01e      	b.n	10846 <native_spot_state_decode+0x2aa>
+   10808:	2001      	movs	r0, #1
+   1080a:	f04f 0e10 	mov.w	lr, #16
+   1080e:	e01a      	b.n	10846 <native_spot_state_decode+0x2aa>
+   10810:	2001      	movs	r0, #1
+   10812:	f04f 0e12 	mov.w	lr, #18
+   10816:	e016      	b.n	10846 <native_spot_state_decode+0x2aa>
+   10818:	2001      	movs	r0, #1
+   1081a:	f04f 0e0d 	mov.w	lr, #13
+   1081e:	e012      	b.n	10846 <native_spot_state_decode+0x2aa>
+   10820:	f04f 0e05 	mov.w	lr, #5
+   10824:	e013      	b.n	1084e <native_spot_state_decode+0x2b2>
+   10826:	f04f 0e0d 	mov.w	lr, #13
+   1082a:	ea5f 70cc 	movs.w	r0, ip, lsl #31
+   1082e:	bf08      	it	eq
+   10830:	f04f 0e09 	moveq.w	lr, #9
+   10834:	e00b      	b.n	1084e <native_spot_state_decode+0x2b2>
+   10836:	f04f 0e0d 	mov.w	lr, #13
+   1083a:	e008      	b.n	1084e <native_spot_state_decode+0x2b2>
+   1083c:	2001      	movs	r0, #1
+   1083e:	f04f 0e13 	mov.w	lr, #19
+   10842:	e000      	b.n	10846 <native_spot_state_decode+0x2aa>
+   10844:	2000      	movs	r0, #0
+   10846:	2800      	cmp	r0, #0
+   10848:	bf04      	itt	eq
+   1084a:	2005      	moveq	r0, #5
+   1084c:	bdb0      	popeq	{r4, r5, r7, pc}
+   1084e:	f24f 030f 	movw	r3, #61455	@ 0xf00f
+   10852:	f2c0 030e 	movt	r3, #14
+   10856:	f503 3080 	add.w	r0, r3, #65536	@ 0x10000
+   1085a:	4020      	ands	r0, r4
+   1085c:	f8c1 e000 	str.w	lr, [r1]
+   10860:	d007      	beq.n	10872 <native_spot_state_decode+0x2d6>
+   10862:	2801      	cmp	r0, #1
+   10864:	d108      	bne.n	10878 <native_spot_state_decode+0x2dc>
+   10866:	ea5f 70cc 	movs.w	r0, ip, lsl #31
+   1086a:	f04f 0007 	mov.w	r0, #7
+   1086e:	bf08      	it	eq
+   10870:	2001      	moveq	r0, #1
+   10872:	6010      	str	r0, [r2, #0]
+   10874:	2000      	movs	r0, #0
+   10876:	bdb0      	pop	{r4, r5, r7, pc}
+   10878:	ea04 0103 	and.w	r1, r4, r3
+   1087c:	f5b1 5f00 	cmp.w	r1, #8192	@ 0x2000
+   10880:	da08      	bge.n	10894 <native_spot_state_decode+0x2f8>
+   10882:	f5b1 5f80 	cmp.w	r1, #4096	@ 0x1000
+   10886:	d014      	beq.n	108b2 <native_spot_state_decode+0x316>
+   10888:	f241 0301 	movw	r3, #4097	@ 0x1001
+   1088c:	4299      	cmp	r1, r3
+   1088e:	d108      	bne.n	108a2 <native_spot_state_decode+0x306>
+   10890:	2004      	movs	r0, #4
+   10892:	e7ee      	b.n	10872 <native_spot_state_decode+0x2d6>
+   10894:	d00f      	beq.n	108b6 <native_spot_state_decode+0x31a>
+   10896:	f242 0301 	movw	r3, #8193	@ 0x2001
+   1089a:	4299      	cmp	r1, r3
+   1089c:	d101      	bne.n	108a2 <native_spot_state_decode+0x306>
+   1089e:	2005      	movs	r0, #5
+   108a0:	e7e7      	b.n	10872 <native_spot_state_decode+0x2d6>
+   108a2:	f5b0 3f80 	cmp.w	r0, #65536	@ 0x10000
+   108a6:	d008      	beq.n	108ba <native_spot_state_decode+0x31e>
+   108a8:	f1b0 1f01 	cmp.w	r0, #65537	@ 0x10001
+   108ac:	d107      	bne.n	108be <native_spot_state_decode+0x322>
+   108ae:	2007      	movs	r0, #7
+   108b0:	e7df      	b.n	10872 <native_spot_state_decode+0x2d6>
+   108b2:	2002      	movs	r0, #2
+   108b4:	e7dd      	b.n	10872 <native_spot_state_decode+0x2d6>
+   108b6:	2003      	movs	r0, #3
+   108b8:	e7db      	b.n	10872 <native_spot_state_decode+0x2d6>
+   108ba:	2006      	movs	r0, #6
+   108bc:	e7d9      	b.n	10872 <native_spot_state_decode+0x2d6>
+   108be:	2005      	movs	r0, #5
+   108c0:	bdb0      	pop	{r4, r5, r7, pc}
+	...
+
+000108c4 <native_spot_buck_deepsleep_scan>:
+   108c4:	b5b0      	push	{r4, r5, r7, lr}
+   108c6:	2903      	cmp	r1, #3
+   108c8:	f247 11c0 	movw	r1, #29120	@ 0x71c0
+   108cc:	f2c2 0102 	movt	r1, #8194	@ 0x2002
+   108d0:	d060      	beq.n	10994 <native_spot_buck_deepsleep_scan+0xd0>
+   108d2:	6802      	ldr	r2, [r0, #0]
+   108d4:	0092      	lsls	r2, r2, #2
+   108d6:	d15d      	bne.n	10994 <native_spot_buck_deepsleep_scan+0xd0>
+   108d8:	8880      	ldrh	r0, [r0, #4]
+   108da:	f240 42c4 	movw	r2, #1220	@ 0x4c4
+   108de:	4210      	tst	r0, r2
+   108e0:	d158      	bne.n	10994 <native_spot_buck_deepsleep_scan+0xd0>
+   108e2:	f240 40d8 	movw	r0, #1240	@ 0x4d8
+   108e6:	f2c4 0002 	movt	r0, #16386	@ 0x4002
+   108ea:	6800      	ldr	r0, [r0, #0]
+   108ec:	0080      	lsls	r0, r0, #2
+   108ee:	d451      	bmi.n	10994 <native_spot_buck_deepsleep_scan+0xd0>
+   108f0:	f648 0000 	movw	r0, #34816	@ 0x8800
+   108f4:	f2c4 0000 	movt	r0, #16384	@ 0x4000
+   108f8:	6802      	ldr	r2, [r0, #0]
+   108fa:	f811 3c01 	ldrb.w	r3, [r1, #-1]
+   108fe:	2b00      	cmp	r3, #0
+   10900:	f04f 0300 	mov.w	r3, #0
+   10904:	d009      	beq.n	1091a <native_spot_buck_deepsleep_scan+0x56>
+   10906:	6805      	ldr	r5, [r0, #0]
+   10908:	f015 040f 	ands.w	r4, r5, #15
+   1090c:	bf18      	it	ne
+   1090e:	2401      	movne	r4, #1
+   10910:	f1b5 4f80 	cmp.w	r5, #1073741824	@ 0x40000000
+   10914:	bf38      	it	cc
+   10916:	2301      	movcc	r3, #1
+   10918:	4023      	ands	r3, r4
+   1091a:	f04f 0c01 	mov.w	ip, #1
+   1091e:	b133      	cbz	r3, 1092e <native_spot_buck_deepsleep_scan+0x6a>
+   10920:	f002 020f 	and.w	r2, r2, #15
+   10924:	3a01      	subs	r2, #1
+   10926:	2a02      	cmp	r2, #2
+   10928:	f04f 0401 	mov.w	r4, #1
+   1092c:	d333      	bcc.n	10996 <native_spot_buck_deepsleep_scan+0xd2>
+   1092e:	f64f 0210 	movw	r2, #63504	@ 0xf810
+   10932:	f6cf 72ff 	movt	r2, #65535	@ 0xffff
+   10936:	5882      	ldr	r2, [r0, r2]
+   10938:	f240 0e3f 	movw	lr, #63	@ 0x3f
+   1093c:	f5a0 63c0 	sub.w	r3, r0, #1536	@ 0x600
+   10940:	2000      	movs	r0, #0
+   10942:	f2c0 1ef8 	movt	lr, #504	@ 0x1f8
+   10946:	bf00      	nop
+   10948:	681c      	ldr	r4, [r3, #0]
+   1094a:	07e5      	lsls	r5, r4, #31
+   1094c:	d018      	beq.n	10980 <native_spot_buck_deepsleep_scan+0xbc>
+   1094e:	fa22 f500 	lsr.w	r5, r2, r0
+   10952:	07ed      	lsls	r5, r5, #31
+   10954:	d014      	beq.n	10980 <native_spot_buck_deepsleep_scan+0xbc>
+   10956:	f3c4 2508 	ubfx	r5, r4, #8, #9
+   1095a:	f5a5 7480 	sub.w	r4, r5, #256	@ 0x100
+   1095e:	2ce0      	cmp	r4, #224	@ 0xe0
+   10960:	d308      	bcc.n	10974 <native_spot_buck_deepsleep_scan+0xb0>
+   10962:	2d18      	cmp	r5, #24
+   10964:	f04f 0400 	mov.w	r4, #0
+   10968:	d806      	bhi.n	10978 <native_spot_buck_deepsleep_scan+0xb4>
+   1096a:	fa0c f505 	lsl.w	r5, ip, r5
+   1096e:	ea15 0f0e 	tst.w	r5, lr
+   10972:	d001      	beq.n	10978 <native_spot_buck_deepsleep_scan+0xb4>
+   10974:	2401      	movs	r4, #1
+   10976:	700c      	strb	r4, [r1, #0]
+   10978:	07a4      	lsls	r4, r4, #30
+   1097a:	d004      	beq.n	10986 <native_spot_buck_deepsleep_scan+0xc2>
+   1097c:	e00c      	b.n	10998 <native_spot_buck_deepsleep_scan+0xd4>
+   1097e:	bf00      	nop
+   10980:	2404      	movs	r4, #4
+   10982:	07a4      	lsls	r4, r4, #30
+   10984:	d108      	bne.n	10998 <native_spot_buck_deepsleep_scan+0xd4>
+   10986:	3001      	adds	r0, #1
+   10988:	3320      	adds	r3, #32
+   1098a:	2810      	cmp	r0, #16
+   1098c:	f04f 0400 	mov.w	r4, #0
+   10990:	d1da      	bne.n	10948 <native_spot_buck_deepsleep_scan+0x84>
+   10992:	e000      	b.n	10996 <native_spot_buck_deepsleep_scan+0xd2>
+   10994:	2401      	movs	r4, #1
+   10996:	700c      	strb	r4, [r1, #0]
+   10998:	2000      	movs	r0, #0
+   1099a:	bdb0      	pop	{r4, r5, r7, pc}
+
+0001099c <native_spot_trim_enable_42adb8>:
+   1099c:	2800      	cmp	r0, #0
+   1099e:	f240 0080 	movw	r0, #128	@ 0x80
+   109a2:	f2c4 0002 	movt	r0, #16386	@ 0x4002
+   109a6:	d010      	beq.n	109ca <native_spot_trim_enable_42adb8+0x2e>
+   109a8:	f8d0 1130 	ldr.w	r1, [r0, #304]	@ 0x130
+   109ac:	f646 4208 	movw	r2, #27656	@ 0x6c08
+   109b0:	f441 31c0 	orr.w	r1, r1, #98304	@ 0x18000
+   109b4:	f8c0 1130 	str.w	r1, [r0, #304]	@ 0x130
+   109b8:	f2c2 0202 	movt	r2, #8194	@ 0x2002
+   109bc:	6881      	ldr	r1, [r0, #8]
+   109be:	6812      	ldr	r2, [r2, #0]
+   109c0:	0989      	lsrs	r1, r1, #6
+   109c2:	0b92      	lsrs	r2, r2, #14
+   109c4:	f361 129f 	bfi	r2, r1, #6, #26
+   109c8:	6082      	str	r2, [r0, #8]
+   109ca:	6801      	ldr	r1, [r0, #0]
+   109cc:	f240 33ff 	movw	r3, #1023	@ 0x3ff
+   109d0:	460a      	mov	r2, r1
+   109d2:	f36f 229f 	bfc	r2, #10, #22
+   109d6:	f5b2 7f7e 	cmp.w	r2, #1016	@ 0x3f8
+   109da:	bf98      	it	ls
+   109dc:	f44f 727e 	movls.w	r2, #1016	@ 0x3f8
+   109e0:	405a      	eors	r2, r3
+   109e2:	f247 03a4 	movw	r3, #28836	@ 0x70a4
+   109e6:	f2c2 0302 	movt	r3, #8194	@ 0x2002
+   109ea:	601a      	str	r2, [r3, #0]
+   109ec:	440a      	add	r2, r1
+   109ee:	0a89      	lsrs	r1, r1, #10
+   109f0:	f361 229f 	bfi	r2, r1, #10, #22
+   109f4:	6002      	str	r2, [r0, #0]
+   109f6:	4770      	bx	lr
+
+000109f8 <native_spot_profile_trim_42ae24>:
+   109f8:	2180      	movs	r1, #128	@ 0x80
+   109fa:	f646 4c08 	movw	ip, #27656	@ 0x6c08
+   109fe:	f2c4 0102 	movt	r1, #16386	@ 0x4002
+   10a02:	f2c2 0c02 	movt	ip, #8194	@ 0x2002
+   10a06:	688a      	ldr	r2, [r1, #8]
+   10a08:	f8dc 3000 	ldr.w	r3, [ip]
+   10a0c:	0992      	lsrs	r2, r2, #6
+   10a0e:	089b      	lsrs	r3, r3, #2
+   10a10:	f362 139f 	bfi	r3, r2, #6, #26
+   10a14:	608b      	str	r3, [r1, #8]
+   10a16:	f8d1 2130 	ldr.w	r2, [r1, #304]	@ 0x130
+   10a1a:	f8dc 3000 	ldr.w	r3, [ip]
+   10a1e:	2800      	cmp	r0, #0
+   10a20:	f363 32d0 	bfi	r2, r3, #15, #2
+   10a24:	f8c1 2130 	str.w	r2, [r1, #304]	@ 0x130
+   10a28:	bf08      	it	eq
+   10a2a:	4770      	bxeq	lr
+   10a2c:	f247 02a4 	movw	r2, #28836	@ 0x70a4
+   10a30:	f2c2 0202 	movt	r2, #8194	@ 0x2002
+   10a34:	6808      	ldr	r0, [r1, #0]
+   10a36:	6812      	ldr	r2, [r2, #0]
+   10a38:	1a82      	subs	r2, r0, r2
+   10a3a:	0a80      	lsrs	r0, r0, #10
+   10a3c:	f360 229f 	bfi	r2, r0, #10, #22
+   10a40:	600a      	str	r2, [r1, #0]
+   10a42:	4770      	bx	lr
+
+00010a44 <native_spot_trim_restore_42ae6c>:
+   10a44:	f247 00a8 	movw	r0, #28840	@ 0x70a8
+   10a48:	f2c2 0002 	movt	r0, #8194	@ 0x2002
+   10a4c:	f890 1106 	ldrb.w	r1, [r0, #262]	@ 0x106
+   10a50:	2900      	cmp	r1, #0
+   10a52:	bf18      	it	ne
+   10a54:	4770      	bxne	lr
+   10a56:	2144      	movs	r1, #68	@ 0x44
+   10a58:	f2c4 0102 	movt	r1, #16386	@ 0x4002
+   10a5c:	680a      	ldr	r2, [r1, #0]
+   10a5e:	6803      	ldr	r3, [r0, #0]
+   10a60:	09d2      	lsrs	r2, r2, #7
+   10a62:	f362 13df 	bfi	r3, r2, #7, #25
+   10a66:	600b      	str	r3, [r1, #0]
+   10a68:	688a      	ldr	r2, [r1, #8]
+   10a6a:	6840      	ldr	r0, [r0, #4]
+   10a6c:	09d2      	lsrs	r2, r2, #7
+   10a6e:	f362 10df 	bfi	r0, r2, #7, #25
+   10a72:	6088      	str	r0, [r1, #8]
+   10a74:	4770      	bx	lr
+	...
+
+00010a78 <native_spot_power_transition_trims>:
+   10a78:	e92d 4ff0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
+   10a7c:	b081      	sub	sp, #4
+   10a7e:	f240 3680 	movw	r6, #896	@ 0x380
+   10a82:	f64f 5900 	movw	r9, #64768	@ 0xfd00
+   10a86:	f2c4 0602 	movt	r6, #16386	@ 0x4002
+   10a8a:	f6cf 79ff 	movt	r9, #65535	@ 0xffff
+   10a8e:	4605      	mov	r5, r0
+   10a90:	f856 0009 	ldr.w	r0, [r6, r9]
+   10a94:	f64f 5808 	movw	r8, #64776	@ 0xfd08
+   10a98:	f6cf 78ff 	movt	r8, #65535	@ 0xffff
+   10a9c:	4602      	mov	r2, r0
+   10a9e:	460c      	mov	r4, r1
+   10aa0:	f856 1008 	ldr.w	r1, [r6, r8]
+   10aa4:	f36f 229f 	bfc	r2, #10, #22
+   10aa8:	f240 33f1 	movw	r3, #1009	@ 0x3f1
+   10aac:	429a      	cmp	r2, r3
+   10aae:	bf98      	it	ls
+   10ab0:	461a      	movls	r2, r3
+   10ab2:	f240 33ff 	movw	r3, #1023	@ 0x3ff
+   10ab6:	ea82 0703 	eor.w	r7, r2, r3
+   10aba:	f001 023f 	and.w	r2, r1, #63	@ 0x3f
+   10abe:	2a39      	cmp	r2, #57	@ 0x39
+   10ac0:	bf98      	it	ls
+   10ac2:	2239      	movls	r2, #57	@ 0x39
+   10ac4:	f082 0a3f 	eor.w	sl, r2, #63	@ 0x3f
+   10ac8:	183a      	adds	r2, r7, r0
+   10aca:	0a80      	lsrs	r0, r0, #10
+   10acc:	f360 229f 	bfi	r2, r0, #10, #22
+   10ad0:	eb0a 0001 	add.w	r0, sl, r1
+   10ad4:	0989      	lsrs	r1, r1, #6
+   10ad6:	f361 109f 	bfi	r0, r1, #6, #26
+   10ada:	f646 3bf4 	movw	fp, #27636	@ 0x6bf4
+   10ade:	f846 2009 	str.w	r2, [r6, r9]
+   10ae2:	f846 0008 	str.w	r0, [r6, r8]
+   10ae6:	2014      	movs	r0, #20
+   10ae8:	f2c2 0b02 	movt	fp, #8194	@ 0x2002
+   10aec:	f001 f820 	bl	11b30 <opencfw_bl_delay_us>
+   10af0:	6830      	ldr	r0, [r6, #0]
+   10af2:	f040 5000 	orr.w	r0, r0, #536870912	@ 0x20000000
+   10af6:	6030      	str	r0, [r6, #0]
+   10af8:	6830      	ldr	r0, [r6, #0]
+   10afa:	f040 5080 	orr.w	r0, r0, #268435456	@ 0x10000000
+   10afe:	6030      	str	r0, [r6, #0]
+   10b00:	2014      	movs	r0, #20
+   10b02:	f001 f815 	bl	11b30 <opencfw_bl_delay_us>
+   10b06:	2d04      	cmp	r5, #4
+   10b08:	d819      	bhi.n	10b3e <native_spot_power_transition_trims+0xc6>
+   10b0a:	e8df f005 	tbb	[pc, r5]
+   10b0e:	18070c03 			@ <UNDEFINED> instruction: 18070c03
+   10b12:	f8db0011 			@ <UNDEFINED> instruction: f8db0011
+   10b16:	1008      	asrs	r0, r1, #32
+   10b18:	0a88      	lsrs	r0, r1, #10
+   10b1a:	e030      	b.n	10b7e <native_spot_power_transition_trims+0x106>
+   10b1c:	f8db 1000 	ldr.w	r1, [fp]
+   10b20:	f8db 0004 	ldr.w	r0, [fp, #4]
+   10b24:	e02b      	b.n	10b7e <native_spot_power_transition_trims+0x106>
+   10b26:	f8db 0008 	ldr.w	r0, [fp, #8]
+   10b2a:	0941      	lsrs	r1, r0, #5
+   10b2c:	0bc0      	lsrs	r0, r0, #15
+   10b2e:	e026      	b.n	10b7e <native_spot_power_transition_trims+0x106>
+   10b30:	f8db 0000 	ldr.w	r0, [fp]
+   10b34:	f8db 2004 	ldr.w	r2, [fp, #4]
+   10b38:	0941      	lsrs	r1, r0, #5
+   10b3a:	0950      	lsrs	r0, r2, #5
+   10b3c:	e01f      	b.n	10b7e <native_spot_power_transition_trims+0x106>
+   10b3e:	2d03      	cmp	r5, #3
+   10b40:	d806      	bhi.n	10b50 <native_spot_power_transition_trims+0xd8>
+   10b42:	f8db 0000 	ldr.w	r0, [fp]
+   10b46:	f8db 2004 	ldr.w	r2, [fp, #4]
+   10b4a:	0a81      	lsrs	r1, r0, #10
+   10b4c:	0a90      	lsrs	r0, r2, #10
+   10b4e:	e016      	b.n	10b7e <native_spot_power_transition_trims+0x106>
+   10b50:	2d06      	cmp	r5, #6
+   10b52:	d103      	bne.n	10b5c <native_spot_power_transition_trims+0xe4>
+   10b54:	f8db 100c 	ldr.w	r1, [fp, #12]
+   10b58:	0a88      	lsrs	r0, r1, #10
+   10b5a:	e010      	b.n	10b7e <native_spot_power_transition_trims+0x106>
+   10b5c:	2d05      	cmp	r5, #5
+   10b5e:	d908      	bls.n	10b72 <native_spot_power_transition_trims+0xfa>
+   10b60:	2d07      	cmp	r5, #7
+   10b62:	d106      	bne.n	10b72 <native_spot_power_transition_trims+0xfa>
+   10b64:	f856 0c3c 	ldr.w	r0, [r6, #-60]
+   10b68:	f856 2c2c 	ldr.w	r2, [r6, #-44]
+   10b6c:	0ac1      	lsrs	r1, r0, #11
+   10b6e:	0c50      	lsrs	r0, r2, #17
+   10b70:	e005      	b.n	10b7e <native_spot_power_transition_trims+0x106>
+   10b72:	f8db 0000 	ldr.w	r0, [fp]
+   10b76:	f8db 2004 	ldr.w	r2, [fp, #4]
+   10b7a:	0bc1      	lsrs	r1, r0, #15
+   10b7c:	0bd0      	lsrs	r0, r2, #15
+   10b7e:	f1a4 0208 	sub.w	r2, r4, #8
+   10b82:	2a07      	cmp	r2, #7
+   10b84:	f001 011f 	and.w	r1, r1, #31
+   10b88:	d818      	bhi.n	10bbc <native_spot_power_transition_trims+0x144>
+   10b8a:	e8df f002 	tbb	[pc, r2]
+   10b8e:	17171704 			@ <UNDEFINED> instruction: 17171704
+   10b92:	1309170e 	movwne	r1, #38670	@ 0x970e
+   10b96:	f8db 1008 	ldr.w	r1, [fp, #8]
+   10b9a:	f3c1 5104 	ubfx	r1, r1, #20, #5
+   10b9e:	e00d      	b.n	10bbc <native_spot_power_transition_trims+0x144>
+   10ba0:	2919      	cmp	r1, #25
+   10ba2:	bf28      	it	cs
+   10ba4:	2119      	movcs	r1, #25
+   10ba6:	3106      	adds	r1, #6
+   10ba8:	e008      	b.n	10bbc <native_spot_power_transition_trims+0x144>
+   10baa:	f8db 1000 	ldr.w	r1, [fp]
+   10bae:	f3c1 5104 	ubfx	r1, r1, #20, #5
+   10bb2:	e003      	b.n	10bbc <native_spot_power_transition_trims+0x144>
+   10bb4:	2913      	cmp	r1, #19
+   10bb6:	bf28      	it	cs
+   10bb8:	2113      	movcs	r1, #19
+   10bba:	310c      	adds	r1, #12
+   10bbc:	f856 2c3c 	ldr.w	r2, [r6, #-60]
+   10bc0:	2c11      	cmp	r4, #17
+   10bc2:	f361 625d 	bfi	r2, r1, #25, #5
+   10bc6:	f846 2c3c 	str.w	r2, [r6, #-60]
+   10bca:	f856 1c28 	ldr.w	r1, [r6, #-40]
+   10bce:	f360 210c 	bfi	r1, r0, #8, #5
+   10bd2:	f846 1c28 	str.w	r1, [r6, #-40]
+   10bd6:	d809      	bhi.n	10bec <native_spot_power_transition_trims+0x174>
+   10bd8:	2001      	movs	r0, #1
+   10bda:	2122      	movs	r1, #34	@ 0x22
+   10bdc:	40a0      	lsls	r0, r4
+   10bde:	f2c0 0102 	movt	r1, #2
+   10be2:	4208      	tst	r0, r1
+   10be4:	d002      	beq.n	10bec <native_spot_power_transition_trims+0x174>
+   10be6:	f04f 6000 	mov.w	r0, #134217728	@ 0x8000000
+   10bea:	e001      	b.n	10bf0 <native_spot_power_transition_trims+0x178>
+   10bec:	f04f 6040 	mov.w	r0, #201326592	@ 0xc000000
+   10bf0:	f856 1c34 	ldr.w	r1, [r6, #-52]
+   10bf4:	f021 5178 	bic.w	r1, r1, #1040187392	@ 0x3e000000
+   10bf8:	4308      	orrs	r0, r1
+   10bfa:	f846 0c34 	str.w	r0, [r6, #-52]
+   10bfe:	6830      	ldr	r0, [r6, #0]
+   10c00:	f020 5000 	bic.w	r0, r0, #536870912	@ 0x20000000
+   10c04:	6030      	str	r0, [r6, #0]
+   10c06:	6830      	ldr	r0, [r6, #0]
+   10c08:	f020 5080 	bic.w	r0, r0, #268435456	@ 0x10000000
+   10c0c:	6030      	str	r0, [r6, #0]
+   10c0e:	f856 0009 	ldr.w	r0, [r6, r9]
+   10c12:	f856 1008 	ldr.w	r1, [r6, r8]
+   10c16:	1bc2      	subs	r2, r0, r7
+   10c18:	0a80      	lsrs	r0, r0, #10
+   10c1a:	f360 229f 	bfi	r2, r0, #10, #22
+   10c1e:	eba1 000a 	sub.w	r0, r1, sl
+   10c22:	0989      	lsrs	r1, r1, #6
+   10c24:	f361 109f 	bfi	r0, r1, #6, #26
+   10c28:	f846 2009 	str.w	r2, [r6, r9]
+   10c2c:	f846 0008 	str.w	r0, [r6, r8]
+   10c30:	b001      	add	sp, #4
+   10c32:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}
+	...
+
+00010c38 <native_spot_state_transition>:
+   10c38:	e92d 4ff0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
+   10c3c:	b083      	sub	sp, #12
+   10c3e:	f646 35a0 	movw	r5, #27552	@ 0x6ba0
+   10c42:	f2c2 0502 	movt	r5, #8194	@ 0x2002
+   10c46:	eb05 0a81 	add.w	sl, r5, r1, lsl #2
+   10c4a:	4683      	mov	fp, r0
+   10c4c:	f240 0ef4 	movw	lr, #244	@ 0xf4
+   10c50:	f8da 0004 	ldr.w	r0, [sl, #4]
+   10c54:	f2c2 0e00 	movt	lr, #8192	@ 0x2000
+   10c58:	eb05 008b 	add.w	r0, r5, fp, lsl #2
+   10c5c:	6846      	ldr	r6, [r0, #4]
+   10c5e:	f8de 0054 	ldr.w	r0, [lr, #84]	@ 0x54
+   10c62:	f1ae 0850 	sub.w	r8, lr, #80	@ 0x50
+   10c66:	eb05 0080 	add.w	r0, r5, r0, lsl #2
+   10c6a:	6840      	ldr	r0, [r0, #4]
+   10c6c:	461c      	mov	r4, r3
+   10c6e:	9001      	str	r0, [sp, #4]
+   10c70:	f858 0021 	ldr.w	r0, [r8, r1, lsl #2]
+   10c74:	f858 702b 	ldr.w	r7, [r8, fp, lsl #2]
+   10c78:	42b8      	cmp	r0, r7
+   10c7a:	d201      	bcs.n	10c80 <native_spot_state_transition+0x48>
+   10c7c:	2301      	movs	r3, #1
+   10c7e:	e008      	b.n	10c92 <native_spot_state_transition+0x5a>
+   10c80:	f85e 0021 	ldr.w	r0, [lr, r1, lsl #2]
+   10c84:	f85e 302b 	ldr.w	r3, [lr, fp, lsl #2]
+   10c88:	4298      	cmp	r0, r3
+   10c8a:	f04f 0300 	mov.w	r3, #0
+   10c8e:	bf38      	it	cc
+   10c90:	2301      	movcc	r3, #1
+   10c92:	f248 3ce0 	movw	ip, #33760	@ 0x83e0
+   10c96:	f2c4 0c00 	movt	ip, #16384	@ 0x4000
+   10c9a:	1b10      	subs	r0, r2, r4
+   10c9c:	bf18      	it	ne
+   10c9e:	2001      	movne	r0, #1
+   10ca0:	f8dc 9000 	ldr.w	r9, [ip]
+   10ca4:	458b      	cmp	fp, r1
+   10ca6:	d107      	bne.n	10cb8 <native_spot_state_transition+0x80>
+   10ca8:	42a2      	cmp	r2, r4
+   10caa:	f000 8289 	beq.w	111c0 <native_spot_state_transition+0x588>
+   10cae:	4610      	mov	r0, r2
+   10cb0:	4659      	mov	r1, fp
+   10cb2:	f7ff fee1 	bl	10a78 <native_spot_power_transition_trims>
+   10cb6:	e283      	b.n	111c0 <native_spot_state_transition+0x588>
+   10cb8:	9400      	str	r4, [sp, #0]
+   10cba:	f021 0404 	bic.w	r4, r1, #4
+   10cbe:	9602      	str	r6, [sp, #8]
+   10cc0:	1e66      	subs	r6, r4, #1
+   10cc2:	f1a1 0711 	sub.w	r7, r1, #17
+   10cc6:	fab6 f686 	clz	r6, r6
+   10cca:	fab7 f787 	clz	r7, r7
+   10cce:	0976      	lsrs	r6, r6, #5
+   10cd0:	097f      	lsrs	r7, r7, #5
+   10cd2:	4337      	orrs	r7, r6
+   10cd4:	f1a4 0608 	sub.w	r6, r4, #8
+   10cd8:	fab6 f686 	clz	r6, r6
+   10cdc:	0976      	lsrs	r6, r6, #5
+   10cde:	4337      	orrs	r7, r6
+   10ce0:	f021 0601 	bic.w	r6, r1, #1
+   10ce4:	3e0e      	subs	r6, #14
+   10ce6:	fab6 f686 	clz	r6, r6
+   10cea:	0976      	lsrs	r6, r6, #5
+   10cec:	4337      	orrs	r7, r6
+   10cee:	f02b 0604 	bic.w	r6, fp, #4
+   10cf2:	1e74      	subs	r4, r6, #1
+   10cf4:	fab4 f484 	clz	r4, r4
+   10cf8:	0964      	lsrs	r4, r4, #5
+   10cfa:	4327      	orrs	r7, r4
+   10cfc:	f1ab 0411 	sub.w	r4, fp, #17
+   10d00:	fab4 f484 	clz	r4, r4
+   10d04:	3e08      	subs	r6, #8
+   10d06:	0964      	lsrs	r4, r4, #5
+   10d08:	fab6 f686 	clz	r6, r6
+   10d0c:	4327      	orrs	r7, r4
+   10d0e:	0976      	lsrs	r6, r6, #5
+   10d10:	4337      	orrs	r7, r6
+   10d12:	f02b 0601 	bic.w	r6, fp, #1
+   10d16:	3e0e      	subs	r6, #14
+   10d18:	fab6 f686 	clz	r6, r6
+   10d1c:	0976      	lsrs	r6, r6, #5
+   10d1e:	4337      	orrs	r7, r6
+   10d20:	4338      	orrs	r0, r7
+   10d22:	2780      	movs	r7, #128	@ 0x80
+   10d24:	f247 16ae 	movw	r6, #29102	@ 0x71ae
+   10d28:	f2c4 0702 	movt	r7, #16386	@ 0x4002
+   10d2c:	f2c2 0602 	movt	r6, #8194	@ 0x2002
+   10d30:	b36b      	cbz	r3, 10d8e <native_spot_state_transition+0x156>
+   10d32:	07c0      	lsls	r0, r0, #31
+   10d34:	d005      	beq.n	10d42 <native_spot_state_transition+0x10a>
+   10d36:	4610      	mov	r0, r2
+   10d38:	460c      	mov	r4, r1
+   10d3a:	4659      	mov	r1, fp
+   10d3c:	f7ff fe9c 	bl	10a78 <native_spot_power_transition_trims>
+   10d40:	4621      	mov	r1, r4
+   10d42:	9c02      	ldr	r4, [sp, #8]
+   10d44:	f64f 60fa 	movw	r0, #65274	@ 0xfefa
+   10d48:	f3c4 5846 	ubfx	r8, r4, #21, #7
+   10d4c:	f6cf 70ff 	movt	r0, #65535	@ 0xffff
+   10d50:	f846 8000 	str.w	r8, [r6, r0]
+   10d54:	f64f 60fe 	movw	r0, #65278	@ 0xfefe
+   10d58:	f004 0e7f 	and.w	lr, r4, #127	@ 0x7f
+   10d5c:	f6cf 70ff 	movt	r0, #65535	@ 0xffff
+   10d60:	f846 e000 	str.w	lr, [r6, r0]
+   10d64:	6838      	ldr	r0, [r7, #0]
+   10d66:	463a      	mov	r2, r7
+   10d68:	0c67      	lsrs	r7, r4, #17
+   10d6a:	f367 208d 	bfi	r0, r7, #10, #4
+   10d6e:	4635      	mov	r5, r6
+   10d70:	6010      	str	r0, [r2, #0]
+   10d72:	ea5f 7cc9 	movs.w	ip, r9, lsl #31
+   10d76:	f3c4 10c9 	ubfx	r0, r4, #7, #10
+   10d7a:	d119      	bne.n	10db0 <native_spot_state_transition+0x178>
+   10d7c:	6817      	ldr	r7, [r2, #0]
+   10d7e:	f240 36ff 	movw	r6, #1023	@ 0x3ff
+   10d82:	43b7      	bics	r7, r6
+   10d84:	4438      	add	r0, r7
+   10d86:	6010      	str	r0, [r2, #0]
+   10d88:	f8da 0004 	ldr.w	r0, [sl, #4]
+   10d8c:	e024      	b.n	10dd8 <native_spot_state_transition+0x1a0>
+   10d8e:	ea5f 79c9 	movs.w	r9, r9, lsl #31
+   10d92:	d056      	beq.n	10e42 <native_spot_state_transition+0x20a>
+   10d94:	f8de 1054 	ldr.w	r1, [lr, #84]	@ 0x54
+   10d98:	46b2      	mov	sl, r6
+   10d9a:	eb0e 0181 	add.w	r1, lr, r1, lsl #2
+   10d9e:	f851 1c50 	ldr.w	r1, [r1, #-80]
+   10da2:	f858 302b 	ldr.w	r3, [r8, fp, lsl #2]
+   10da6:	4299      	cmp	r1, r3
+   10da8:	f080 8102 	bcs.w	10fb0 <native_spot_state_transition+0x378>
+   10dac:	2301      	movs	r3, #1
+   10dae:	e10a      	b.n	10fc6 <native_spot_state_transition+0x38e>
+   10db0:	f5b0 7f7e 	cmp.w	r0, #1016	@ 0x3f8
+   10db4:	bf98      	it	ls
+   10db6:	f44f 707e 	movls.w	r0, #1016	@ 0x3f8
+   10dba:	f240 36ff 	movw	r6, #1023	@ 0x3ff
+   10dbe:	4070      	eors	r0, r6
+   10dc0:	f64f 66f6 	movw	r6, #65270	@ 0xfef6
+   10dc4:	f6cf 76ff 	movt	r6, #65535	@ 0xffff
+   10dc8:	51a8      	str	r0, [r5, r6]
+   10dca:	09e7      	lsrs	r7, r4, #7
+   10dcc:	6816      	ldr	r6, [r2, #0]
+   10dce:	4438      	add	r0, r7
+   10dd0:	f360 0609 	bfi	r6, r0, #0, #10
+   10dd4:	6016      	str	r6, [r2, #0]
+   10dd6:	9801      	ldr	r0, [sp, #4]
+   10dd8:	4691      	mov	r9, r2
+   10dda:	4602      	mov	r2, r0
+   10ddc:	f3c0 5046 	ubfx	r0, r0, #21, #7
+   10de0:	2600      	movs	r6, #0
+   10de2:	4580      	cmp	r8, r0
+   10de4:	bf88      	it	hi
+   10de6:	2601      	movhi	r6, #1
+   10de8:	eba8 0400 	sub.w	r4, r8, r0
+   10dec:	fa04 f606 	lsl.w	r6, r4, r6
+   10df0:	f002 047f 	and.w	r4, r2, #127	@ 0x7f
+   10df4:	4692      	mov	sl, r2
+   10df6:	45a6      	cmp	lr, r4
+   10df8:	f04f 0200 	mov.w	r2, #0
+   10dfc:	ebae 0304 	sub.w	r3, lr, r4
+   10e00:	4430      	add	r0, r6
+   10e02:	f04f 0700 	mov.w	r7, #0
+   10e06:	bf88      	it	hi
+   10e08:	2201      	movhi	r2, #1
+   10e0a:	287f      	cmp	r0, #127	@ 0x7f
+   10e0c:	fa03 f602 	lsl.w	r6, r3, r2
+   10e10:	d806      	bhi.n	10e20 <native_spot_state_transition+0x1e8>
+   10e12:	1932      	adds	r2, r6, r4
+   10e14:	2a7f      	cmp	r2, #127	@ 0x7f
+   10e16:	d803      	bhi.n	10e20 <native_spot_state_transition+0x1e8>
+   10e18:	782a      	ldrb	r2, [r5, #0]
+   10e1a:	fab2 f282 	clz	r2, r2
+   10e1e:	0957      	lsrs	r7, r2, #5
+   10e20:	f859 2c3c 	ldr.w	r2, [r9, #-60]
+   10e24:	f022 047f 	bic.w	r4, r2, #127	@ 0x7f
+   10e28:	b177      	cbz	r7, 10e48 <native_spot_state_transition+0x210>
+   10e2a:	f000 007f 	and.w	r0, r0, #127	@ 0x7f
+   10e2e:	4320      	orrs	r0, r4
+   10e30:	f849 0c3c 	str.w	r0, [r9, #-60]
+   10e34:	f859 0c34 	ldr.w	r0, [r9, #-52]
+   10e38:	eb06 020a 	add.w	r2, r6, sl
+   10e3c:	f362 0006 	bfi	r0, r2, #0, #7
+   10e40:	e00b      	b.n	10e5a <native_spot_state_transition+0x222>
+   10e42:	2300      	movs	r3, #0
+   10e44:	46b2      	mov	sl, r6
+   10e46:	e0be      	b.n	10fc6 <native_spot_state_transition+0x38e>
+   10e48:	ea44 0008 	orr.w	r0, r4, r8
+   10e4c:	f849 0c3c 	str.w	r0, [r9, #-60]
+   10e50:	f859 0c34 	ldr.w	r0, [r9, #-52]
+   10e54:	f020 007f 	bic.w	r0, r0, #127	@ 0x7f
+   10e58:	4470      	add	r0, lr
+   10e5a:	f849 0c34 	str.w	r0, [r9, #-52]
+   10e5e:	b117      	cbz	r7, 10e66 <native_spot_state_transition+0x22e>
+   10e60:	f44f 7796 	mov.w	r7, #300	@ 0x12c
+   10e64:	e006      	b.n	10e74 <native_spot_state_transition+0x23c>
+   10e66:	7828      	ldrb	r0, [r5, #0]
+   10e68:	f642 67e0 	movw	r7, #12000	@ 0x2ee0
+   10e6c:	2800      	cmp	r0, #0
+   10e6e:	bf08      	it	eq
+   10e70:	f44f 6796 	moveq.w	r7, #1200	@ 0x4b0
+   10e74:	f24e 2688 	movw	r6, #57992	@ 0xe288
+   10e78:	f1bc 0f00 	cmp.w	ip, #0
+   10e7c:	f2ce 0600 	movt	r6, #57344	@ 0xe000
+   10e80:	d155      	bne.n	10f2e <native_spot_state_transition+0x2f6>
+   10e82:	f8d9 0130 	ldr.w	r0, [r9, #304]	@ 0x130
+   10e86:	f646 32a0 	movw	r2, #27552	@ 0x6ba0
+   10e8a:	f440 30c0 	orr.w	r0, r0, #98304	@ 0x18000
+   10e8e:	f8c9 0130 	str.w	r0, [r9, #304]	@ 0x130
+   10e92:	f2c2 0202 	movt	r2, #8194	@ 0x2002
+   10e96:	f8d9 0008 	ldr.w	r0, [r9, #8]
+   10e9a:	6e92      	ldr	r2, [r2, #104]	@ 0x68
+   10e9c:	0980      	lsrs	r0, r0, #6
+   10e9e:	0b92      	lsrs	r2, r2, #14
+   10ea0:	f360 129f 	bfi	r2, r0, #6, #26
+   10ea4:	f8c9 2008 	str.w	r2, [r9, #8]
+   10ea8:	f8d9 0000 	ldr.w	r0, [r9]
+   10eac:	f240 33ff 	movw	r3, #1023	@ 0x3ff
+   10eb0:	4602      	mov	r2, r0
+   10eb2:	f36f 229f 	bfc	r2, #10, #22
+   10eb6:	f5b2 7f7e 	cmp.w	r2, #1016	@ 0x3f8
+   10eba:	bf98      	it	ls
+   10ebc:	f44f 727e 	movls.w	r2, #1016	@ 0x3f8
+   10ec0:	405a      	eors	r2, r3
+   10ec2:	f64f 63f6 	movw	r3, #65270	@ 0xfef6
+   10ec6:	f6cf 73ff 	movt	r3, #65535	@ 0xffff
+   10eca:	50ea      	str	r2, [r5, r3]
+   10ecc:	4402      	add	r2, r0
+   10ece:	0a80      	lsrs	r0, r0, #10
+   10ed0:	f360 229f 	bfi	r2, r0, #10, #22
+   10ed4:	2004      	movs	r0, #4
+   10ed6:	460c      	mov	r4, r1
+   10ed8:	2131      	movs	r1, #49	@ 0x31
+   10eda:	f8c9 2000 	str.w	r2, [r9]
+   10ede:	f000 f9b9 	bl	11254 <clock_request>
+   10ee2:	f248 33e0 	movw	r3, #33760	@ 0x83e0
+   10ee6:	f2c4 0300 	movt	r3, #16384	@ 0x4000
+   10eea:	f64f 4030 	movw	r0, #64560	@ 0xfc30
+   10eee:	609f      	str	r7, [r3, #8]
+   10ef0:	f6cf 70ff 	movt	r0, #65535	@ 0xffff
+   10ef4:	581a      	ldr	r2, [r3, r0]
+   10ef6:	4621      	mov	r1, r4
+   10ef8:	f442 4200 	orr.w	r2, r2, #32768	@ 0x8000
+   10efc:	501a      	str	r2, [r3, r0]
+   10efe:	6818      	ldr	r0, [r3, #0]
+   10f00:	f44f 2280 	mov.w	r2, #262144	@ 0x40000
+   10f04:	f040 0002 	orr.w	r0, r0, #2
+   10f08:	6018      	str	r0, [r3, #0]
+   10f0a:	6818      	ldr	r0, [r3, #0]
+   10f0c:	f020 0002 	bic.w	r0, r0, #2
+   10f10:	6018      	str	r0, [r3, #0]
+   10f12:	f64f 6080 	movw	r0, #65152	@ 0xfe80
+   10f16:	f6cf 70ff 	movt	r0, #65535	@ 0xffff
+   10f1a:	5032      	str	r2, [r6, r0]
+   10f1c:	6818      	ldr	r0, [r3, #0]
+   10f1e:	f040 0001 	orr.w	r0, r0, #1
+   10f22:	6018      	str	r0, [r3, #0]
+   10f24:	20f4      	movs	r0, #244	@ 0xf4
+   10f26:	f2c2 0000 	movt	r0, #8192	@ 0x2000
+   10f2a:	6544      	str	r4, [r0, #84]	@ 0x54
+   10f2c:	e01e      	b.n	10f6c <native_spot_state_transition+0x334>
+   10f2e:	f248 33e0 	movw	r3, #33760	@ 0x83e0
+   10f32:	f2c4 0300 	movt	r3, #16384	@ 0x4000
+   10f36:	6818      	ldr	r0, [r3, #0]
+   10f38:	f04f 4240 	mov.w	r2, #3221225472	@ 0xc0000000
+   10f3c:	f020 0001 	bic.w	r0, r0, #1
+   10f40:	6018      	str	r0, [r3, #0]
+   10f42:	6818      	ldr	r0, [r3, #0]
+   10f44:	f040 0002 	orr.w	r0, r0, #2
+   10f48:	6018      	str	r0, [r3, #0]
+   10f4a:	6818      	ldr	r0, [r3, #0]
+   10f4c:	f020 0002 	bic.w	r0, r0, #2
+   10f50:	6018      	str	r0, [r3, #0]
+   10f52:	f64f 4088 	movw	r0, #64648	@ 0xfc88
+   10f56:	f6cf 70ff 	movt	r0, #65535	@ 0xffff
+   10f5a:	609f      	str	r7, [r3, #8]
+   10f5c:	501a      	str	r2, [r3, r0]
+   10f5e:	f44f 2080 	mov.w	r0, #262144	@ 0x40000
+   10f62:	6030      	str	r0, [r6, #0]
+   10f64:	6818      	ldr	r0, [r3, #0]
+   10f66:	f040 0001 	orr.w	r0, r0, #1
+   10f6a:	6018      	str	r0, [r3, #0]
+   10f6c:	9c00      	ldr	r4, [sp, #0]
+   10f6e:	f02b 0007 	bic.w	r0, fp, #7
+   10f72:	2908      	cmp	r1, #8
+   10f74:	d202      	bcs.n	10f7c <native_spot_state_transition+0x344>
+   10f76:	2808      	cmp	r0, #8
+   10f78:	d006      	beq.n	10f88 <native_spot_state_transition+0x350>
+   10f7a:	e015      	b.n	10fa8 <native_spot_state_transition+0x370>
+   10f7c:	2808      	cmp	r0, #8
+   10f7e:	d113      	bne.n	10fa8 <native_spot_state_transition+0x370>
+   10f80:	f021 0003 	bic.w	r0, r1, #3
+   10f84:	2810      	cmp	r0, #16
+   10f86:	d10f      	bne.n	10fa8 <native_spot_state_transition+0x370>
+   10f88:	f64e 5714 	movw	r7, #60692	@ 0xed14
+   10f8c:	f2ce 0700 	movt	r7, #57344	@ 0xe000
+   10f90:	6838      	ldr	r0, [r7, #0]
+   10f92:	0380      	lsls	r0, r0, #14
+   10f94:	f100 80db 	bmi.w	1114e <native_spot_state_transition+0x516>
+   10f98:	f8d9 02fc 	ldr.w	r0, [r9, #764]	@ 0x2fc
+   10f9c:	f440 3080 	orr.w	r0, r0, #65536	@ 0x10000
+   10fa0:	f8c9 02fc 	str.w	r0, [r9, #764]	@ 0x2fc
+   10fa4:	2001      	movs	r0, #1
+   10fa6:	7128      	strb	r0, [r5, #4]
+   10fa8:	2014      	movs	r0, #20
+   10faa:	f000 fdc1 	bl	11b30 <opencfw_bl_delay_us>
+   10fae:	e107      	b.n	111c0 <native_spot_state_transition+0x588>
+   10fb0:	f8de 1054 	ldr.w	r1, [lr, #84]	@ 0x54
+   10fb4:	f85e 1021 	ldr.w	r1, [lr, r1, lsl #2]
+   10fb8:	f85e 302b 	ldr.w	r3, [lr, fp, lsl #2]
+   10fbc:	4299      	cmp	r1, r3
+   10fbe:	f04f 0300 	mov.w	r3, #0
+   10fc2:	bf38      	it	cc
+   10fc4:	2301      	movcc	r3, #1
+   10fc6:	9c02      	ldr	r4, [sp, #8]
+   10fc8:	2b00      	cmp	r3, #0
+   10fca:	ea4f 11d4 	mov.w	r1, r4, lsr #7
+   10fce:	f3c4 13c9 	ubfx	r3, r4, #7, #10
+   10fd2:	d010      	beq.n	10ff6 <native_spot_state_transition+0x3be>
+   10fd4:	f5b3 7f7e 	cmp.w	r3, #1016	@ 0x3f8
+   10fd8:	bf98      	it	ls
+   10fda:	f44f 737e 	movls.w	r3, #1016	@ 0x3f8
+   10fde:	f240 36ff 	movw	r6, #1023	@ 0x3ff
+   10fe2:	4073      	eors	r3, r6
+   10fe4:	f64f 66f6 	movw	r6, #65270	@ 0xfef6
+   10fe8:	f6cf 76ff 	movt	r6, #65535	@ 0xffff
+   10fec:	f84a 3006 	str.w	r3, [sl, r6]
+   10ff0:	440b      	add	r3, r1
+   10ff2:	f36f 239f 	bfc	r3, #10, #22
+   10ff6:	683e      	ldr	r6, [r7, #0]
+   10ff8:	f240 34ff 	movw	r4, #1023	@ 0x3ff
+   10ffc:	43a6      	bics	r6, r4
+   10ffe:	4433      	add	r3, r6
+   11000:	603b      	str	r3, [r7, #0]
+   11002:	683b      	ldr	r3, [r7, #0]
+   11004:	0a89      	lsrs	r1, r1, #10
+   11006:	f361 238d 	bfi	r3, r1, #10, #4
+   1100a:	603b      	str	r3, [r7, #0]
+   1100c:	f89a 1000 	ldrb.w	r1, [sl]
+   11010:	f1b9 0f00 	cmp.w	r9, #0
+   11014:	d012      	beq.n	1103c <native_spot_state_transition+0x404>
+   11016:	b989      	cbnz	r1, 1103c <native_spot_state_transition+0x404>
+   11018:	9c02      	ldr	r4, [sp, #8]
+   1101a:	f64f 63fa 	movw	r3, #65274	@ 0xfefa
+   1101e:	f3c4 5146 	ubfx	r1, r4, #21, #7
+   11022:	f6cf 73ff 	movt	r3, #65535	@ 0xffff
+   11026:	f84a 1003 	str.w	r1, [sl, r3]
+   1102a:	f64f 63fe 	movw	r3, #65278	@ 0xfefe
+   1102e:	f004 017f 	and.w	r1, r4, #127	@ 0x7f
+   11032:	f6cf 73ff 	movt	r3, #65535	@ 0xffff
+   11036:	f84a 1003 	str.w	r1, [sl, r3]
+   1103a:	e00d      	b.n	11058 <native_spot_state_transition+0x420>
+   1103c:	f857 1c3c 	ldr.w	r1, [r7, #-60]
+   11040:	9c02      	ldr	r4, [sp, #8]
+   11042:	0d63      	lsrs	r3, r4, #21
+   11044:	f363 0106 	bfi	r1, r3, #0, #7
+   11048:	f847 1c3c 	str.w	r1, [r7, #-60]
+   1104c:	f857 1c34 	ldr.w	r1, [r7, #-52]
+   11050:	f364 0106 	bfi	r1, r4, #0, #7
+   11054:	f847 1c34 	str.w	r1, [r7, #-52]
+   11058:	9c00      	ldr	r4, [sp, #0]
+   1105a:	07c0      	lsls	r0, r0, #31
+   1105c:	d009      	beq.n	11072 <native_spot_state_transition+0x43a>
+   1105e:	4610      	mov	r0, r2
+   11060:	4659      	mov	r1, fp
+   11062:	4666      	mov	r6, ip
+   11064:	f7ff fd08 	bl	10a78 <native_spot_power_transition_trims>
+   11068:	f240 0ef4 	movw	lr, #244	@ 0xf4
+   1106c:	f2c2 0e00 	movt	lr, #8192	@ 0x2000
+   11070:	46b4      	mov	ip, r6
+   11072:	f1b9 0f00 	cmp.w	r9, #0
+   11076:	f000 80a3 	beq.w	111c0 <native_spot_state_transition+0x588>
+   1107a:	f858 002b 	ldr.w	r0, [r8, fp, lsl #2]
+   1107e:	f8de 1054 	ldr.w	r1, [lr, #84]	@ 0x54
+   11082:	eb0e 0181 	add.w	r1, lr, r1, lsl #2
+   11086:	f851 1c50 	ldr.w	r1, [r1, #-80]
+   1108a:	4288      	cmp	r0, r1
+   1108c:	f200 8098 	bhi.w	111c0 <native_spot_state_transition+0x588>
+   11090:	f85e 002b 	ldr.w	r0, [lr, fp, lsl #2]
+   11094:	f8de 1054 	ldr.w	r1, [lr, #84]	@ 0x54
+   11098:	f85e 1021 	ldr.w	r1, [lr, r1, lsl #2]
+   1109c:	4288      	cmp	r0, r1
+   1109e:	f200 808f 	bhi.w	111c0 <native_spot_state_transition+0x588>
+   110a2:	f8dc 0000 	ldr.w	r0, [ip]
+   110a6:	4666      	mov	r6, ip
+   110a8:	f020 0001 	bic.w	r0, r0, #1
+   110ac:	f8cc 0000 	str.w	r0, [ip]
+   110b0:	f64f 4030 	movw	r0, #64560	@ 0xfc30
+   110b4:	f6cf 70ff 	movt	r0, #65535	@ 0xffff
+   110b8:	f85c 1000 	ldr.w	r1, [ip, r0]
+   110bc:	f421 4100 	bic.w	r1, r1, #32768	@ 0x8000
+   110c0:	f84c 1000 	str.w	r1, [ip, r0]
+   110c4:	2004      	movs	r0, #4
+   110c6:	2131      	movs	r1, #49	@ 0x31
+   110c8:	f000 f912 	bl	112f0 <clock_release>
+   110cc:	f24e 2188 	movw	r1, #57992	@ 0xe288
+   110d0:	f06f 00ff 	mvn.w	r0, #255	@ 0xff
+   110d4:	f2ce 0100 	movt	r1, #57344	@ 0xe000
+   110d8:	f44f 2280 	mov.w	r2, #262144	@ 0x40000
+   110dc:	500a      	str	r2, [r1, r0]
+   110de:	f64f 4088 	movw	r0, #64648	@ 0xfc88
+   110e2:	f6cf 70ff 	movt	r0, #65535	@ 0xffff
+   110e6:	f04f 4340 	mov.w	r3, #3221225472	@ 0xc0000000
+   110ea:	5033      	str	r3, [r6, r0]
+   110ec:	2000      	movs	r0, #0
+   110ee:	f2c4 70ff 	movt	r0, #18431	@ 0x47ff
+   110f2:	6800      	ldr	r0, [r0, #0]
+   110f4:	600a      	str	r2, [r1, #0]
+   110f6:	f89a 0000 	ldrb.w	r0, [sl]
+   110fa:	b9c8      	cbnz	r0, 11130 <native_spot_state_transition+0x4f8>
+   110fc:	f64f 61fa 	movw	r1, #65274	@ 0xfefa
+   11100:	f857 0c3c 	ldr.w	r0, [r7, #-60]
+   11104:	f6cf 71ff 	movt	r1, #65535	@ 0xffff
+   11108:	f85a 1001 	ldr.w	r1, [sl, r1]
+   1110c:	09c0      	lsrs	r0, r0, #7
+   1110e:	f360 11df 	bfi	r1, r0, #7, #25
+   11112:	f847 1c3c 	str.w	r1, [r7, #-60]
+   11116:	f64f 61fe 	movw	r1, #65278	@ 0xfefe
+   1111a:	f857 0c34 	ldr.w	r0, [r7, #-52]
+   1111e:	f6cf 71ff 	movt	r1, #65535	@ 0xffff
+   11122:	f85a 1001 	ldr.w	r1, [sl, r1]
+   11126:	09c0      	lsrs	r0, r0, #7
+   11128:	f360 11df 	bfi	r1, r0, #7, #25
+   1112c:	f847 1c34 	str.w	r1, [r7, #-52]
+   11130:	68b8      	ldr	r0, [r7, #8]
+   11132:	6ea9      	ldr	r1, [r5, #104]	@ 0x68
+   11134:	0980      	lsrs	r0, r0, #6
+   11136:	0889      	lsrs	r1, r1, #2
+   11138:	f360 119f 	bfi	r1, r0, #6, #26
+   1113c:	60b9      	str	r1, [r7, #8]
+   1113e:	f8d7 0130 	ldr.w	r0, [r7, #304]	@ 0x130
+   11142:	6ea9      	ldr	r1, [r5, #104]	@ 0x68
+   11144:	f361 30d0 	bfi	r0, r1, #15, #2
+   11148:	f8c7 0130 	str.w	r0, [r7, #304]	@ 0x130
+   1114c:	e038      	b.n	111c0 <native_spot_state_transition+0x588>
+   1114e:	f24e 3600 	movw	r6, #58112	@ 0xe300
+   11152:	f2ce 0601 	movt	r6, #57345	@ 0xe001
+   11156:	6830      	ldr	r0, [r6, #0]
+   11158:	f410 7f40 	tst.w	r0, #768	@ 0x300
+   1115c:	d10e      	bne.n	1117c <native_spot_state_transition+0x544>
+   1115e:	f3bf 8f4f 	dsb	sy
+   11162:	f3bf 8f6f 	isb	sy
+   11166:	6838      	ldr	r0, [r7, #0]
+   11168:	f420 3000 	bic.w	r0, r0, #131072	@ 0x20000
+   1116c:	6038      	str	r0, [r7, #0]
+   1116e:	2000      	movs	r0, #0
+   11170:	f8c7 023c 	str.w	r0, [r7, #572]	@ 0x23c
+   11174:	f3bf 8f4f 	dsb	sy
+   11178:	f3bf 8f6f 	isb	sy
+   1117c:	f8d9 02fc 	ldr.w	r0, [r9, #764]	@ 0x2fc
+   11180:	f440 3080 	orr.w	r0, r0, #65536	@ 0x10000
+   11184:	f8c9 02fc 	str.w	r0, [r9, #764]	@ 0x2fc
+   11188:	2001      	movs	r0, #1
+   1118a:	7128      	strb	r0, [r5, #4]
+   1118c:	2014      	movs	r0, #20
+   1118e:	f000 fccf 	bl	11b30 <opencfw_bl_delay_us>
+   11192:	6830      	ldr	r0, [r6, #0]
+   11194:	f410 7f40 	tst.w	r0, #768	@ 0x300
+   11198:	d112      	bne.n	111c0 <native_spot_state_transition+0x588>
+   1119a:	2000      	movs	r0, #0
+   1119c:	f3bf 8f4f 	dsb	sy
+   111a0:	f3bf 8f6f 	isb	sy
+   111a4:	f8c7 023c 	str.w	r0, [r7, #572]	@ 0x23c
+   111a8:	f3bf 8f4f 	dsb	sy
+   111ac:	f3bf 8f6f 	isb	sy
+   111b0:	6838      	ldr	r0, [r7, #0]
+   111b2:	f440 3000 	orr.w	r0, r0, #131072	@ 0x20000
+   111b6:	6038      	str	r0, [r7, #0]
+   111b8:	f3bf 8f4f 	dsb	sy
+   111bc:	f3bf 8f6f 	isb	sy
+   111c0:	4620      	mov	r0, r4
+   111c2:	b003      	add	sp, #12
+   111c4:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}
+
+000111c8 <opencfw_boot_control_critical_save>:
+   111c8:	f3ef 8010 	mrs	r0, PRIMASK
+   111cc:	b672      	cpsid	i
+   111ce:	4770      	bx	lr
+
+000111d0 <opencfw_bl_clock_request_id0>:
+   111d0:	f646 6c74 	movw	ip, #28276	@ 0x6e74
+   111d4:	f2c2 0c02 	movt	ip, #8194	@ 0x2002
+   111d8:	f3c0 1342 	ubfx	r3, r0, #5, #3
+   111dc:	f000 021f 	and.w	r2, r0, #31
+   111e0:	f85c 3023 	ldr.w	r3, [ip, r3, lsl #2]
+   111e4:	2101      	movs	r1, #1
+   111e6:	fa01 f202 	lsl.w	r2, r1, r2
+   111ea:	4213      	tst	r3, r2
+   111ec:	d001      	beq.n	111f2 <opencfw_bl_clock_request_id0+0x22>
+   111ee:	2000      	movs	r0, #0
+   111f0:	4770      	bx	lr
+   111f2:	f3ef 8310 	mrs	r3, PRIMASK
+   111f6:	b672      	cpsid	i
+   111f8:	2838      	cmp	r0, #56	@ 0x38
+   111fa:	d807      	bhi.n	1120c <opencfw_bl_clock_request_id0+0x3c>
+   111fc:	08c0      	lsrs	r0, r0, #3
+   111fe:	f000 0004 	and.w	r0, r0, #4
+   11202:	f850 100c 	ldr.w	r1, [r0, ip]
+   11206:	4311      	orrs	r1, r2
+   11208:	f840 100c 	str.w	r1, [r0, ip]
+   1120c:	f383 8810 	msr	PRIMASK, r3
+   11210:	2000      	movs	r0, #0
+   11212:	4770      	bx	lr
+
+00011214 <opencfw_bl_clock_release_id0>:
+   11214:	f646 6c74 	movw	ip, #28276	@ 0x6e74
+   11218:	f2c2 0c02 	movt	ip, #8194	@ 0x2002
+   1121c:	f3c0 1342 	ubfx	r3, r0, #5, #3
+   11220:	f000 021f 	and.w	r2, r0, #31
+   11224:	f85c 3023 	ldr.w	r3, [ip, r3, lsl #2]
+   11228:	2101      	movs	r1, #1
+   1122a:	fa01 f202 	lsl.w	r2, r1, r2
+   1122e:	4213      	tst	r3, r2
+   11230:	d00e      	beq.n	11250 <opencfw_bl_clock_release_id0+0x3c>
+   11232:	f3ef 8310 	mrs	r3, PRIMASK
+   11236:	b672      	cpsid	i
+   11238:	2838      	cmp	r0, #56	@ 0x38
+   1123a:	d807      	bhi.n	1124c <opencfw_bl_clock_release_id0+0x38>
+   1123c:	08c0      	lsrs	r0, r0, #3
+   1123e:	f000 0004 	and.w	r0, r0, #4
+   11242:	f850 100c 	ldr.w	r1, [r0, ip]
+   11246:	4391      	bics	r1, r2
+   11248:	f840 100c 	str.w	r1, [r0, ip]
+   1124c:	f383 8810 	msr	PRIMASK, r3
+   11250:	2000      	movs	r0, #0
+   11252:	4770      	bx	lr
+
+00011254 <clock_request>:
+   11254:	b580      	push	{r7, lr}
+   11256:	b2ca      	uxtb	r2, r1
+   11258:	2a38      	cmp	r2, #56	@ 0x38
+   1125a:	d901      	bls.n	11260 <clock_request+0xc>
+   1125c:	2006      	movs	r0, #6
+   1125e:	bd80      	pop	{r7, pc}
+   11260:	b2c0      	uxtb	r0, r0
+   11262:	2806      	cmp	r0, #6
+   11264:	d8fa      	bhi.n	1125c <clock_request+0x8>
+   11266:	e8df f000 	tbb	[pc, r0]
+   1126a:	2f2a3404 			@ <UNDEFINED> instruction: 2f2a3404
+   1126e:	003e3925 			@ <UNDEFINED> instruction: 003e3925
+   11272:	f646 6e74 	movw	lr, #28276	@ 0x6e74
+   11276:	f2c2 0e02 	movt	lr, #8194	@ 0x2002
+   1127a:	f3c1 1042 	ubfx	r0, r1, #5, #3
+   1127e:	f001 0c1f 	and.w	ip, r1, #31
+   11282:	f85e 0020 	ldr.w	r0, [lr, r0, lsl #2]
+   11286:	2301      	movs	r3, #1
+   11288:	fa03 f30c 	lsl.w	r3, r3, ip
+   1128c:	4218      	tst	r0, r3
+   1128e:	d10f      	bne.n	112b0 <clock_request+0x5c>
+   11290:	f3ef 8c10 	mrs	ip, PRIMASK
+   11294:	b672      	cpsid	i
+   11296:	2a38      	cmp	r2, #56	@ 0x38
+   11298:	d808      	bhi.n	112ac <clock_request+0x58>
+   1129a:	f3c1 00c4 	ubfx	r0, r1, #3, #5
+   1129e:	f000 0004 	and.w	r0, r0, #4
+   112a2:	f850 100e 	ldr.w	r1, [r0, lr]
+   112a6:	4319      	orrs	r1, r3
+   112a8:	f840 100e 	str.w	r1, [r0, lr]
+   112ac:	f38c 8810 	msr	PRIMASK, ip
+   112b0:	2000      	movs	r0, #0
+   112b2:	bd80      	pop	{r7, pc}
+   112b4:	4610      	mov	r0, r2
+   112b6:	e8bd 4080 	ldmia.w	sp!, {r7, lr}
+   112ba:	f000 bc6d 	b.w	11b98 <opencfw_bl_clock_request_id4>
+   112be:	4610      	mov	r0, r2
+   112c0:	e8bd 4080 	ldmia.w	sp!, {r7, lr}
+   112c4:	f000 baae 	b.w	11824 <opencfw_bl_clock_request_id2>
+   112c8:	4610      	mov	r0, r2
+   112ca:	e8bd 4080 	ldmia.w	sp!, {r7, lr}
+   112ce:	f000 b8f1 	b.w	114b4 <opencfw_bl_clock_request_id3>
+   112d2:	4610      	mov	r0, r2
+   112d4:	e8bd 4080 	ldmia.w	sp!, {r7, lr}
+   112d8:	f000 b85a 	b.w	11390 <opencfw_bl_clock_request_id1>
+   112dc:	4610      	mov	r0, r2
+   112de:	e8bd 4080 	ldmia.w	sp!, {r7, lr}
+   112e2:	f000 bdad 	b.w	11e40 <opencfw_bl_clock_request_id5>
+   112e6:	4610      	mov	r0, r2
+   112e8:	e8bd 4080 	ldmia.w	sp!, {r7, lr}
+   112ec:	f000 bf8c 	b.w	12208 <opencfw_bl_clock_request_id6>
+
+000112f0 <clock_release>:
+   112f0:	b580      	push	{r7, lr}
+   112f2:	b2ca      	uxtb	r2, r1
+   112f4:	2a38      	cmp	r2, #56	@ 0x38
+   112f6:	d901      	bls.n	112fc <clock_release+0xc>
+   112f8:	2006      	movs	r0, #6
+   112fa:	bd80      	pop	{r7, pc}
+   112fc:	b2c0      	uxtb	r0, r0
+   112fe:	2806      	cmp	r0, #6
+   11300:	d8fa      	bhi.n	112f8 <clock_release+0x8>
+   11302:	e8df f000 	tbb	[pc, r0]
+   11306:	302b3504 			@ <UNDEFINED> instruction: 302b3504
+   1130a:	003f3a26 			@ <UNDEFINED> instruction: 003f3a26
+   1130e:	f646 6c74 	movw	ip, #28276	@ 0x6e74
+   11312:	f2c2 0c02 	movt	ip, #8194	@ 0x2002
+   11316:	f3c1 1342 	ubfx	r3, r1, #5, #3
+   1131a:	f001 0e1f 	and.w	lr, r1, #31
+   1131e:	f85c 3023 	ldr.w	r3, [ip, r3, lsl #2]
+   11322:	2001      	movs	r0, #1
+   11324:	fa00 f00e 	lsl.w	r0, r0, lr
+   11328:	4203      	tst	r3, r0
+   1132a:	d010      	beq.n	1134e <clock_release+0x5e>
+   1132c:	f3ef 8310 	mrs	r3, PRIMASK
+   11330:	b672      	cpsid	i
+   11332:	2a38      	cmp	r2, #56	@ 0x38
+   11334:	d809      	bhi.n	1134a <clock_release+0x5a>
+   11336:	f3c1 01c4 	ubfx	r1, r1, #3, #5
+   1133a:	f001 0104 	and.w	r1, r1, #4
+   1133e:	f851 200c 	ldr.w	r2, [r1, ip]
+   11342:	ea22 0000 	bic.w	r0, r2, r0
+   11346:	f841 000c 	str.w	r0, [r1, ip]
+   1134a:	f383 8810 	msr	PRIMASK, r3
+   1134e:	2000      	movs	r0, #0
+   11350:	bd80      	pop	{r7, pc}
+   11352:	4610      	mov	r0, r2
+   11354:	e8bd 4080 	ldmia.w	sp!, {r7, lr}
+   11358:	f000 bd1c 	b.w	11d94 <opencfw_bl_clock_release_id4>
+   1135c:	4610      	mov	r0, r2
+   1135e:	e8bd 4080 	ldmia.w	sp!, {r7, lr}
+   11362:	f000 bb7d 	b.w	11a60 <opencfw_bl_clock_release_id2>
+   11366:	4610      	mov	r0, r2
+   11368:	e8bd 4080 	ldmia.w	sp!, {r7, lr}
+   1136c:	f000 b8e0 	b.w	11530 <opencfw_bl_clock_release_id3>
+   11370:	4610      	mov	r0, r2
+   11372:	e8bd 4080 	ldmia.w	sp!, {r7, lr}
+   11376:	f000 b835 	b.w	113e4 <opencfw_bl_clock_release_id1>
+   1137a:	4610      	mov	r0, r2
+   1137c:	e8bd 4080 	ldmia.w	sp!, {r7, lr}
+   11380:	f000 bee4 	b.w	1214c <opencfw_bl_clock_release_id5>
+   11384:	4610      	mov	r0, r2
+   11386:	e8bd 4080 	ldmia.w	sp!, {r7, lr}
+   1138a:	f001 b98d 	b.w	126a8 <opencfw_bl_clock_release_id6>
+	...
+
+00011390 <opencfw_bl_clock_request_id1>:
+   11390:	2188      	movs	r1, #136	@ 0x88
+   11392:	f2c2 0100 	movt	r1, #8192	@ 0x2000
+   11396:	6809      	ldr	r1, [r1, #0]
+   11398:	2900      	cmp	r1, #0
+   1139a:	bf04      	itt	eq
+   1139c:	2007      	moveq	r0, #7
+   1139e:	4770      	bxeq	lr
+   113a0:	f646 6c7c 	movw	ip, #28284	@ 0x6e7c
+   113a4:	f2c2 0c02 	movt	ip, #8194	@ 0x2002
+   113a8:	f3c0 1342 	ubfx	r3, r0, #5, #3
+   113ac:	f000 021f 	and.w	r2, r0, #31
+   113b0:	f85c 3023 	ldr.w	r3, [ip, r3, lsl #2]
+   113b4:	2101      	movs	r1, #1
+   113b6:	fa01 f202 	lsl.w	r2, r1, r2
+   113ba:	4213      	tst	r3, r2
+   113bc:	d001      	beq.n	113c2 <opencfw_bl_clock_request_id1+0x32>
+   113be:	2000      	movs	r0, #0
+   113c0:	4770      	bx	lr
+   113c2:	f3ef 8310 	mrs	r3, PRIMASK
+   113c6:	b672      	cpsid	i
+   113c8:	2838      	cmp	r0, #56	@ 0x38
+   113ca:	d807      	bhi.n	113dc <opencfw_bl_clock_request_id1+0x4c>
+   113cc:	08c0      	lsrs	r0, r0, #3
+   113ce:	f000 0004 	and.w	r0, r0, #4
+   113d2:	f850 100c 	ldr.w	r1, [r0, ip]
+   113d6:	4311      	orrs	r1, r2
+   113d8:	f840 100c 	str.w	r1, [r0, ip]
+   113dc:	f383 8810 	msr	PRIMASK, r3
+   113e0:	2000      	movs	r0, #0
+   113e2:	4770      	bx	lr
+
+000113e4 <opencfw_bl_clock_release_id1>:
+   113e4:	f646 6c7c 	movw	ip, #28284	@ 0x6e7c
+   113e8:	f2c2 0c02 	movt	ip, #8194	@ 0x2002
+   113ec:	f3c0 1342 	ubfx	r3, r0, #5, #3
+   113f0:	f000 021f 	and.w	r2, r0, #31
+   113f4:	f85c 3023 	ldr.w	r3, [ip, r3, lsl #2]
+   113f8:	2101      	movs	r1, #1
+   113fa:	fa01 f202 	lsl.w	r2, r1, r2
+   113fe:	4213      	tst	r3, r2
+   11400:	d00e      	beq.n	11420 <opencfw_bl_clock_release_id1+0x3c>
+   11402:	f3ef 8310 	mrs	r3, PRIMASK
+   11406:	b672      	cpsid	i
+   11408:	2838      	cmp	r0, #56	@ 0x38
+   1140a:	d807      	bhi.n	1141c <opencfw_bl_clock_release_id1+0x38>
+   1140c:	08c0      	lsrs	r0, r0, #3
+   1140e:	f000 0004 	and.w	r0, r0, #4
+   11412:	f850 100c 	ldr.w	r1, [r0, ip]
+   11416:	4391      	bics	r1, r2
+   11418:	f840 100c 	str.w	r1, [r0, ip]
+   1141c:	f383 8810 	msr	PRIMASK, r3
+   11420:	2000      	movs	r0, #0
+   11422:	4770      	bx	lr
+
+00011424 <opencfw_bl_power_register_update>:
+   11424:	28df      	cmp	r0, #223	@ 0xdf
+   11426:	bf84      	itt	hi
+   11428:	2005      	movhi	r0, #5
+   1142a:	4770      	bxhi	lr
+   1142c:	b580      	push	{r7, lr}
+   1142e:	f642 0294 	movw	r2, #10388	@ 0x2894
+   11432:	ea4f 1e50 	mov.w	lr, r0, lsr #5
+   11436:	f2c0 0201 	movt	r2, #1
+   1143a:	f000 031f 	and.w	r3, r0, #31
+   1143e:	f04f 0c01 	mov.w	ip, #1
+   11442:	f852 202e 	ldr.w	r2, [r2, lr, lsl #2]
+   11446:	fa0c f303 	lsl.w	r3, ip, r3
+   1144a:	421a      	tst	r2, r3
+   1144c:	d00d      	beq.n	1146a <opencfw_bl_power_register_update+0x46>
+   1144e:	f3c1 3c42 	ubfx	ip, r1, #13, #3
+   11452:	f1bc 0f06 	cmp.w	ip, #6
+   11456:	f04f 0207 	mov.w	r2, #7
+   1145a:	d824      	bhi.n	114a6 <opencfw_bl_power_register_update+0x82>
+   1145c:	2301      	movs	r3, #1
+   1145e:	fa03 f30c 	lsl.w	r3, r3, ip
+   11462:	f013 0f43 	tst.w	r3, #67	@ 0x43
+   11466:	d10a      	bne.n	1147e <opencfw_bl_power_register_update+0x5a>
+   11468:	e01d      	b.n	114a6 <opencfw_bl_power_register_update+0x82>
+   1146a:	050a      	lsls	r2, r1, #20
+   1146c:	d507      	bpl.n	1147e <opencfw_bl_power_register_update+0x5a>
+   1146e:	f642 02b0 	movw	r2, #10416	@ 0x28b0
+   11472:	f2c0 0201 	movt	r2, #1
+   11476:	f852 202e 	ldr.w	r2, [r2, lr, lsl #2]
+   1147a:	421a      	tst	r2, r3
+   1147c:	d017      	beq.n	114ae <opencfw_bl_power_register_update+0x8a>
+   1147e:	f240 4300 	movw	r3, #1024	@ 0x400
+   11482:	f2c4 0301 	movt	r3, #16385	@ 0x4001
+   11486:	2273      	movs	r2, #115	@ 0x73
+   11488:	f3ef 8c10 	mrs	ip, PRIMASK
+   1148c:	b672      	cpsid	i
+   1148e:	601a      	str	r2, [r3, #0]
+   11490:	f64f 4200 	movw	r2, #64512	@ 0xfc00
+   11494:	eb03 0080 	add.w	r0, r3, r0, lsl #2
+   11498:	f6cf 72ff 	movt	r2, #65535	@ 0xffff
+   1149c:	5081      	str	r1, [r0, r2]
+   1149e:	2200      	movs	r2, #0
+   114a0:	601a      	str	r2, [r3, #0]
+   114a2:	f38c 8810 	msr	PRIMASK, ip
+   114a6:	e8bd 4080 	ldmia.w	sp!, {r7, lr}
+   114aa:	4610      	mov	r0, r2
+   114ac:	4770      	bx	lr
+   114ae:	2207      	movs	r2, #7
+   114b0:	e7f9      	b.n	114a6 <opencfw_bl_power_register_update+0x82>
+	...
+
+000114b4 <opencfw_bl_clock_request_id3>:
+   114b4:	b570      	push	{r4, r5, r6, lr}
+   114b6:	218c      	movs	r1, #140	@ 0x8c
+   114b8:	f2c2 0100 	movt	r1, #8192	@ 0x2000
+   114bc:	6809      	ldr	r1, [r1, #0]
+   114be:	b189      	cbz	r1, 114e4 <opencfw_bl_clock_request_id3+0x30>
+   114c0:	f646 6e8c 	movw	lr, #28300	@ 0x6e8c
+   114c4:	f2c2 0e02 	movt	lr, #8194	@ 0x2002
+   114c8:	f3c0 1342 	ubfx	r3, r0, #5, #3
+   114cc:	f000 011f 	and.w	r1, r0, #31
+   114d0:	f85e 2023 	ldr.w	r2, [lr, r3, lsl #2]
+   114d4:	2301      	movs	r3, #1
+   114d6:	408b      	lsls	r3, r1
+   114d8:	421a      	tst	r2, r3
+   114da:	f04f 0100 	mov.w	r1, #0
+   114de:	d003      	beq.n	114e8 <opencfw_bl_clock_request_id3+0x34>
+   114e0:	4608      	mov	r0, r1
+   114e2:	bd70      	pop	{r4, r5, r6, pc}
+   114e4:	2007      	movs	r0, #7
+   114e6:	bd70      	pop	{r4, r5, r6, pc}
+   114e8:	f240 4400 	movw	r4, #1024	@ 0x400
+   114ec:	f3ef 8c10 	mrs	ip, PRIMASK
+   114f0:	b672      	cpsid	i
+   114f2:	f2c4 0401 	movt	r4, #16385	@ 0x4001
+   114f6:	2573      	movs	r5, #115	@ 0x73
+   114f8:	f3ef 8210 	mrs	r2, PRIMASK
+   114fc:	b672      	cpsid	i
+   114fe:	6025      	str	r5, [r4, #0]
+   11500:	f64f 453c 	movw	r5, #64572	@ 0xfc3c
+   11504:	f6cf 75ff 	movt	r5, #65535	@ 0xffff
+   11508:	260a      	movs	r6, #10
+   1150a:	5166      	str	r6, [r4, r5]
+   1150c:	6021      	str	r1, [r4, #0]
+   1150e:	f382 8810 	msr	PRIMASK, r2
+   11512:	2838      	cmp	r0, #56	@ 0x38
+   11514:	d807      	bhi.n	11526 <opencfw_bl_clock_request_id3+0x72>
+   11516:	08c0      	lsrs	r0, r0, #3
+   11518:	f000 0004 	and.w	r0, r0, #4
+   1151c:	f850 100e 	ldr.w	r1, [r0, lr]
+   11520:	4319      	orrs	r1, r3
+   11522:	f840 100e 	str.w	r1, [r0, lr]
+   11526:	f38c 8810 	msr	PRIMASK, ip
+   1152a:	2100      	movs	r1, #0
+   1152c:	4608      	mov	r0, r1
+   1152e:	bd70      	pop	{r4, r5, r6, pc}
+
+00011530 <opencfw_bl_clock_release_id3>:
+   11530:	f646 628c 	movw	r2, #28300	@ 0x6e8c
+   11534:	f2c2 0202 	movt	r2, #8194	@ 0x2002
+   11538:	f3c0 1342 	ubfx	r3, r0, #5, #3
+   1153c:	f000 0c1f 	and.w	ip, r0, #31
+   11540:	f852 3023 	ldr.w	r3, [r2, r3, lsl #2]
+   11544:	2101      	movs	r1, #1
+   11546:	fa01 f10c 	lsl.w	r1, r1, ip
+   1154a:	420b      	tst	r3, r1
+   1154c:	d034      	beq.n	115b8 <opencfw_bl_clock_release_id3+0x88>
+   1154e:	b580      	push	{r7, lr}
+   11550:	231c      	movs	r3, #28
+   11552:	f3ef 8c10 	mrs	ip, PRIMASK
+   11556:	b672      	cpsid	i
+   11558:	2838      	cmp	r0, #56	@ 0x38
+   1155a:	ea03 03d0 	and.w	r3, r3, r0, lsr #3
+   1155e:	d807      	bhi.n	11570 <opencfw_bl_clock_release_id3+0x40>
+   11560:	08c0      	lsrs	r0, r0, #3
+   11562:	f000 0e04 	and.w	lr, r0, #4
+   11566:	f85e 0002 	ldr.w	r0, [lr, r2]
+   1156a:	4388      	bics	r0, r1
+   1156c:	f84e 0002 	str.w	r0, [lr, r2]
+   11570:	5898      	ldr	r0, [r3, r2]
+   11572:	4208      	tst	r0, r1
+   11574:	d11c      	bne.n	115b0 <opencfw_bl_clock_release_id3+0x80>
+   11576:	2000      	movs	r0, #0
+   11578:	2300      	movs	r3, #0
+   1157a:	bf00      	nop
+   1157c:	5881      	ldr	r1, [r0, r2]
+   1157e:	3004      	adds	r0, #4
+   11580:	2808      	cmp	r0, #8
+   11582:	ea43 0301 	orr.w	r3, r3, r1
+   11586:	d1f9      	bne.n	1157c <opencfw_bl_clock_release_id3+0x4c>
+   11588:	b993      	cbnz	r3, 115b0 <opencfw_bl_clock_release_id3+0x80>
+   1158a:	f240 4100 	movw	r1, #1024	@ 0x400
+   1158e:	f2c4 0101 	movt	r1, #16385	@ 0x4001
+   11592:	2273      	movs	r2, #115	@ 0x73
+   11594:	f3ef 8010 	mrs	r0, PRIMASK
+   11598:	b672      	cpsid	i
+   1159a:	600a      	str	r2, [r1, #0]
+   1159c:	f64f 423c 	movw	r2, #64572	@ 0xfc3c
+   115a0:	f6cf 72ff 	movt	r2, #65535	@ 0xffff
+   115a4:	2303      	movs	r3, #3
+   115a6:	508b      	str	r3, [r1, r2]
+   115a8:	2200      	movs	r2, #0
+   115aa:	600a      	str	r2, [r1, #0]
+   115ac:	f380 8810 	msr	PRIMASK, r0
+   115b0:	f38c 8810 	msr	PRIMASK, ip
+   115b4:	e8bd 4080 	ldmia.w	sp!, {r7, lr}
+   115b8:	2000      	movs	r0, #0
+   115ba:	4770      	bx	lr
+
+000115bc <opencfw_bl_radio_mode_sample>:
+   115bc:	f240 112c 	movw	r1, #300	@ 0x12c
+   115c0:	f2c4 0102 	movt	r1, #16386	@ 0x4002
+   115c4:	680a      	ldr	r2, [r1, #0]
+   115c6:	4601      	mov	r1, r0
+   115c8:	05d0      	lsls	r0, r2, #23
+   115ca:	f04f 0302 	mov.w	r3, #2
+   115ce:	f04f 0000 	mov.w	r0, #0
+   115d2:	bf58      	it	pl
+   115d4:	f002 0301 	andpl.w	r3, r2, #1
+   115d8:	700b      	strb	r3, [r1, #0]
+   115da:	4770      	bx	lr
+
+000115dc <opencfw_bl_radio_mode_apply>:
+   115dc:	b570      	push	{r4, r5, r6, lr}
+   115de:	2290      	movs	r2, #144	@ 0x90
+   115e0:	f2c2 0200 	movt	r2, #8192	@ 0x2000
+   115e4:	461c      	mov	r4, r3
+   115e6:	6813      	ldr	r3, [r2, #0]
+   115e8:	6852      	ldr	r2, [r2, #4]
+   115ea:	2806      	cmp	r0, #6
+   115ec:	f200 809b 	bhi.w	11726 <opencfw_bl_radio_mode_apply+0x14a>
+   115f0:	e8df f000 	tbb	[pc, r0]
+   115f4:	74349c04 			@ <UNDEFINED> instruction: 74349c04
+   115f8:	00afa716 			@ <UNDEFINED> instruction: 00afa716
+   115fc:	f240 102c 	movw	r0, #300	@ 0x12c
+   11600:	f2c4 0002 	movt	r0, #16386	@ 0x4002
+   11604:	f850 2c0c 	ldr.w	r2, [r0, #-12]
+   11608:	f022 021f 	bic.w	r2, r2, #31
+   1160c:	f04f 0319 	mov.w	r3, #25
+   11610:	b119      	cbz	r1, 1161a <opencfw_bl_radio_mode_apply+0x3e>
+   11612:	7809      	ldrb	r1, [r1, #0]
+   11614:	2901      	cmp	r1, #1
+   11616:	bf08      	it	eq
+   11618:	2305      	moveq	r3, #5
+   1161a:	ea43 0402 	orr.w	r4, r3, r2
+   1161e:	e08d      	b.n	1173c <opencfw_bl_radio_mode_apply+0x160>
+   11620:	f240 102c 	movw	r0, #300	@ 0x12c
+   11624:	f2c4 0002 	movt	r0, #16386	@ 0x4002
+   11628:	f850 1c04 	ldr.w	r1, [r0, #-4]
+   1162c:	f247 0600 	movw	r6, #28672	@ 0x7000
+   11630:	f2cc 0600 	movt	r6, #49152	@ 0xc000
+   11634:	f003 033f 	and.w	r3, r3, #63	@ 0x3f
+   11638:	f002 020f 	and.w	r2, r2, #15
+   1163c:	4031      	ands	r1, r6
+   1163e:	ea43 1282 	orr.w	r2, r3, r2, lsl #6
+   11642:	4411      	add	r1, r2
+   11644:	f041 7140 	orr.w	r1, r1, #50331648	@ 0x3000000
+   11648:	f441 118c 	orr.w	r1, r1, #1146880	@ 0x118000
+   1164c:	f840 1c04 	str.w	r1, [r0, #-4]
+   11650:	6801      	ldr	r1, [r0, #0]
+   11652:	f240 122b 	movw	r2, #299	@ 0x12b
+   11656:	4391      	bics	r1, r2
+   11658:	1c8c      	adds	r4, r1, #2
+   1165a:	e093      	b.n	11784 <opencfw_bl_radio_mode_apply+0x1a8>
+   1165c:	f240 152c 	movw	r5, #300	@ 0x12c
+   11660:	f2c4 0502 	movt	r5, #16386	@ 0x4002
+   11664:	f855 0c04 	ldr.w	r0, [r5, #-4]
+   11668:	f247 0600 	movw	r6, #28672	@ 0x7000
+   1166c:	f2cc 0600 	movt	r6, #49152	@ 0xc000
+   11670:	f003 033f 	and.w	r3, r3, #63	@ 0x3f
+   11674:	f002 020f 	and.w	r2, r2, #15
+   11678:	4030      	ands	r0, r6
+   1167a:	ea43 1282 	orr.w	r2, r3, r2, lsl #6
+   1167e:	4410      	add	r0, r2
+   11680:	f648 4200 	movw	r2, #35840	@ 0x8c00
+   11684:	f6c0 72ff 	movt	r2, #4095	@ 0xfff
+   11688:	4310      	orrs	r0, r2
+   1168a:	f845 0c04 	str.w	r0, [r5, #-4]
+   1168e:	6828      	ldr	r0, [r5, #0]
+   11690:	460e      	mov	r6, r1
+   11692:	f040 0002 	orr.w	r0, r0, #2
+   11696:	f020 0420 	bic.w	r4, r0, #32
+   1169a:	602c      	str	r4, [r5, #0]
+   1169c:	6828      	ldr	r0, [r5, #0]
+   1169e:	f040 0001 	orr.w	r0, r0, #1
+   116a2:	6028      	str	r0, [r5, #0]
+   116a4:	6828      	ldr	r0, [r5, #0]
+   116a6:	f040 0010 	orr.w	r0, r0, #16
+   116aa:	6028      	str	r0, [r5, #0]
+   116ac:	6828      	ldr	r0, [r5, #0]
+   116ae:	f040 0008 	orr.w	r0, r0, #8
+   116b2:	6028      	str	r0, [r5, #0]
+   116b4:	2005      	movs	r0, #5
+   116b6:	f000 fa3b 	bl	11b30 <opencfw_bl_delay_us>
+   116ba:	6829      	ldr	r1, [r5, #0]
+   116bc:	2e00      	cmp	r6, #0
+   116be:	f021 0110 	bic.w	r1, r1, #16
+   116c2:	6029      	str	r1, [r5, #0]
+   116c4:	d05f      	beq.n	11786 <opencfw_bl_radio_mode_apply+0x1aa>
+   116c6:	7830      	ldrb	r0, [r6, #0]
+   116c8:	2801      	cmp	r0, #1
+   116ca:	d15c      	bne.n	11786 <opencfw_bl_radio_mode_apply+0x1aa>
+   116cc:	6828      	ldr	r0, [r5, #0]
+   116ce:	f440 7080 	orr.w	r0, r0, #256	@ 0x100
+   116d2:	f020 0109 	bic.w	r1, r0, #9
+   116d6:	2000      	movs	r0, #0
+   116d8:	6029      	str	r1, [r5, #0]
+   116da:	bd70      	pop	{r4, r5, r6, pc}
+   116dc:	f003 033f 	and.w	r3, r3, #63	@ 0x3f
+   116e0:	f002 020f 	and.w	r2, r2, #15
+   116e4:	ea43 1282 	orr.w	r2, r3, r2, lsl #6
+   116e8:	f648 4300 	movw	r3, #35840	@ 0x8c00
+   116ec:	f240 102c 	movw	r0, #300	@ 0x12c
+   116f0:	f6c0 73ff 	movt	r3, #4095	@ 0xfff
+   116f4:	f2c4 0002 	movt	r0, #16386	@ 0x4002
+   116f8:	431a      	orrs	r2, r3
+   116fa:	f840 2c04 	str.w	r2, [r0, #-4]
+   116fe:	6802      	ldr	r2, [r0, #0]
+   11700:	f240 132b 	movw	r3, #299	@ 0x12b
+   11704:	439a      	bics	r2, r3
+   11706:	3222      	adds	r2, #34	@ 0x22
+   11708:	6002      	str	r2, [r0, #0]
+   1170a:	6802      	ldr	r2, [r0, #0]
+   1170c:	f042 0201 	orr.w	r2, r2, #1
+   11710:	6002      	str	r2, [r0, #0]
+   11712:	b391      	cbz	r1, 1177a <opencfw_bl_radio_mode_apply+0x19e>
+   11714:	7809      	ldrb	r1, [r1, #0]
+   11716:	2901      	cmp	r1, #1
+   11718:	d12f      	bne.n	1177a <opencfw_bl_radio_mode_apply+0x19e>
+   1171a:	6801      	ldr	r1, [r0, #0]
+   1171c:	f441 7180 	orr.w	r1, r1, #256	@ 0x100
+   11720:	f021 0401 	bic.w	r4, r1, #1
+   11724:	e02e      	b.n	11784 <opencfw_bl_radio_mode_apply+0x1a8>
+   11726:	2006      	movs	r0, #6
+   11728:	4621      	mov	r1, r4
+   1172a:	bd70      	pop	{r4, r5, r6, pc}
+   1172c:	f240 102c 	movw	r0, #300	@ 0x12c
+   11730:	f2c4 0002 	movt	r0, #16386	@ 0x4002
+   11734:	f850 1c0c 	ldr.w	r1, [r0, #-12]
+   11738:	f021 0403 	bic.w	r4, r1, #3
+   1173c:	f840 4c0c 	str.w	r4, [r0, #-12]
+   11740:	e021      	b.n	11786 <opencfw_bl_radio_mode_apply+0x1aa>
+   11742:	460d      	mov	r5, r1
+   11744:	2002      	movs	r0, #2
+   11746:	2134      	movs	r1, #52	@ 0x34
+   11748:	f7ff fd84 	bl	11254 <clock_request>
+   1174c:	b1f0      	cbz	r0, 1178c <opencfw_bl_radio_mode_apply+0x1b0>
+   1174e:	4621      	mov	r1, r4
+   11750:	bd70      	pop	{r4, r5, r6, pc}
+   11752:	f240 102c 	movw	r0, #300	@ 0x12c
+   11756:	f2c4 0002 	movt	r0, #16386	@ 0x4002
+   1175a:	f850 1c04 	ldr.w	r1, [r0, #-4]
+   1175e:	f441 41e0 	orr.w	r1, r1, #28672	@ 0x7000
+   11762:	f840 1c04 	str.w	r1, [r0, #-4]
+   11766:	6801      	ldr	r1, [r0, #0]
+   11768:	f021 0180 	bic.w	r1, r1, #128	@ 0x80
+   1176c:	6001      	str	r1, [r0, #0]
+   1176e:	2002      	movs	r0, #2
+   11770:	2134      	movs	r1, #52	@ 0x34
+   11772:	f7ff fdbd 	bl	112f0 <clock_release>
+   11776:	4621      	mov	r1, r4
+   11778:	bd70      	pop	{r4, r5, r6, pc}
+   1177a:	6801      	ldr	r1, [r0, #0]
+   1177c:	f041 0108 	orr.w	r1, r1, #8
+   11780:	f021 0420 	bic.w	r4, r1, #32
+   11784:	6004      	str	r4, [r0, #0]
+   11786:	2000      	movs	r0, #0
+   11788:	4621      	mov	r1, r4
+   1178a:	bd70      	pop	{r4, r5, r6, pc}
+   1178c:	f240 112c 	movw	r1, #300	@ 0x12c
+   11790:	f2c4 0102 	movt	r1, #16386	@ 0x4002
+   11794:	b175      	cbz	r5, 117b4 <opencfw_bl_radio_mode_apply+0x1d8>
+   11796:	6828      	ldr	r0, [r5, #0]
+   11798:	1ec2      	subs	r2, r0, #3
+   1179a:	2a05      	cmp	r2, #5
+   1179c:	d218      	bcs.n	117d0 <opencfw_bl_radio_mode_apply+0x1f4>
+   1179e:	f851 4c04 	ldr.w	r4, [r1, #-4]
+   117a2:	2201      	movs	r2, #1
+   117a4:	f360 340e 	bfi	r4, r0, #12, #3
+   117a8:	2000      	movs	r0, #0
+   117aa:	f841 4c04 	str.w	r4, [r1, #-4]
+   117ae:	2a00      	cmp	r2, #0
+   117b0:	d0cd      	beq.n	1174e <opencfw_bl_radio_mode_apply+0x172>
+   117b2:	e007      	b.n	117c4 <opencfw_bl_radio_mode_apply+0x1e8>
+   117b4:	f851 4c04 	ldr.w	r4, [r1, #-4]
+   117b8:	2004      	movs	r0, #4
+   117ba:	f360 340e 	bfi	r4, r0, #12, #3
+   117be:	f841 4c04 	str.w	r4, [r1, #-4]
+   117c2:	2000      	movs	r0, #0
+   117c4:	680a      	ldr	r2, [r1, #0]
+   117c6:	f042 0280 	orr.w	r2, r2, #128	@ 0x80
+   117ca:	600a      	str	r2, [r1, #0]
+   117cc:	4621      	mov	r1, r4
+   117ce:	bd70      	pop	{r4, r5, r6, pc}
+   117d0:	2800      	cmp	r0, #0
+   117d2:	d0e4      	beq.n	1179e <opencfw_bl_radio_mode_apply+0x1c2>
+   117d4:	2200      	movs	r2, #0
+   117d6:	2006      	movs	r0, #6
+   117d8:	2a00      	cmp	r2, #0
+   117da:	d0b8      	beq.n	1174e <opencfw_bl_radio_mode_apply+0x172>
+   117dc:	e7f2      	b.n	117c4 <opencfw_bl_radio_mode_apply+0x1e8>
+	...
+
+000117e0 <opencfw_bl_radio_callback_finish>:
+   117e0:	b5b0      	push	{r4, r5, r7, lr}
+   117e2:	f247 159b 	movw	r5, #29083	@ 0x719b
+   117e6:	f2c2 0502 	movt	r5, #8194	@ 0x2002
+   117ea:	7829      	ldrb	r1, [r5, #0]
+   117ec:	2900      	cmp	r1, #0
+   117ee:	bf08      	it	eq
+   117f0:	bdb0      	popeq	{r4, r5, r7, pc}
+   117f2:	4604      	mov	r4, r0
+   117f4:	6800      	ldr	r0, [r0, #0]
+   117f6:	b140      	cbz	r0, 1180a <opencfw_bl_radio_callback_finish+0x2a>
+   117f8:	7828      	ldrb	r0, [r5, #0]
+   117fa:	b130      	cbz	r0, 1180a <opencfw_bl_radio_callback_finish+0x2a>
+   117fc:	200a      	movs	r0, #10
+   117fe:	f000 f997 	bl	11b30 <opencfw_bl_delay_us>
+   11802:	6820      	ldr	r0, [r4, #0]
+   11804:	3801      	subs	r0, #1
+   11806:	6020      	str	r0, [r4, #0]
+   11808:	d1f6      	bne.n	117f8 <opencfw_bl_radio_callback_finish+0x18>
+   1180a:	f247 0240 	movw	r2, #28736	@ 0x7040
+   1180e:	2100      	movs	r1, #0
+   11810:	f2c2 0202 	movt	r2, #8194	@ 0x2002
+   11814:	f3ef 8010 	mrs	r0, PRIMASK
+   11818:	b672      	cpsid	i
+   1181a:	7029      	strb	r1, [r5, #0]
+   1181c:	6011      	str	r1, [r2, #0]
+   1181e:	f380 8810 	msr	PRIMASK, r0
+   11822:	bdb0      	pop	{r4, r5, r7, pc}
+
+00011824 <opencfw_bl_clock_request_id2>:
+   11824:	e92d 4ff0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
+   11828:	b083      	sub	sp, #12
+   1182a:	2290      	movs	r2, #144	@ 0x90
+   1182c:	2196      	movs	r1, #150	@ 0x96
+   1182e:	f2c2 0200 	movt	r2, #8192	@ 0x2000
+   11832:	9102      	str	r1, [sp, #8]
+   11834:	f852 1c10 	ldr.w	r1, [r2, #-16]
+   11838:	2900      	cmp	r1, #0
+   1183a:	d03c      	beq.n	118b6 <opencfw_bl_clock_request_id2+0x92>
+   1183c:	f247 0840 	movw	r8, #28736	@ 0x7040
+   11840:	f2c2 0802 	movt	r8, #8194	@ 0x2002
+   11844:	f247 149b 	movw	r4, #29083	@ 0x719b
+   11848:	f3c0 1142 	ubfx	r1, r0, #5, #3
+   1184c:	f5a8 77de 	sub.w	r7, r8, #444	@ 0x1bc
+   11850:	f2c2 0402 	movt	r4, #8194	@ 0x2002
+   11854:	f857 3021 	ldr.w	r3, [r7, r1, lsl #2]
+   11858:	f000 011f 	and.w	r1, r0, #31
+   1185c:	2601      	movs	r6, #1
+   1185e:	f3ef 8a10 	mrs	sl, PRIMASK
+   11862:	b672      	cpsid	i
+   11864:	fa06 f501 	lsl.w	r5, r6, r1
+   11868:	7821      	ldrb	r1, [r4, #0]
+   1186a:	422b      	tst	r3, r5
+   1186c:	d027      	beq.n	118be <opencfw_bl_clock_request_id2+0x9a>
+   1186e:	b119      	cbz	r1, 11878 <opencfw_bl_clock_request_id2+0x54>
+   11870:	f8d8 0000 	ldr.w	r0, [r8]
+   11874:	6800      	ldr	r0, [r0, #0]
+   11876:	9002      	str	r0, [sp, #8]
+   11878:	a802      	add	r0, sp, #8
+   1187a:	f8c8 0000 	str.w	r0, [r8]
+   1187e:	f38a 8810 	msr	PRIMASK, sl
+   11882:	7820      	ldrb	r0, [r4, #0]
+   11884:	2800      	cmp	r0, #0
+   11886:	d03e      	beq.n	11906 <opencfw_bl_clock_request_id2+0xe2>
+   11888:	9802      	ldr	r0, [sp, #8]
+   1188a:	b140      	cbz	r0, 1189e <opencfw_bl_clock_request_id2+0x7a>
+   1188c:	7820      	ldrb	r0, [r4, #0]
+   1188e:	b130      	cbz	r0, 1189e <opencfw_bl_clock_request_id2+0x7a>
+   11890:	200a      	movs	r0, #10
+   11892:	f000 f94d 	bl	11b30 <opencfw_bl_delay_us>
+   11896:	9802      	ldr	r0, [sp, #8]
+   11898:	3801      	subs	r0, #1
+   1189a:	9002      	str	r0, [sp, #8]
+   1189c:	d1f6      	bne.n	1188c <opencfw_bl_clock_request_id2+0x68>
+   1189e:	2000      	movs	r0, #0
+   118a0:	f3ef 8110 	mrs	r1, PRIMASK
+   118a4:	b672      	cpsid	i
+   118a6:	7020      	strb	r0, [r4, #0]
+   118a8:	f8c8 0000 	str.w	r0, [r8]
+   118ac:	f381 8810 	msr	PRIMASK, r1
+   118b0:	b003      	add	sp, #12
+   118b2:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}
+   118b6:	2007      	movs	r0, #7
+   118b8:	b003      	add	sp, #12
+   118ba:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}
+   118be:	b119      	cbz	r1, 118c8 <opencfw_bl_clock_request_id2+0xa4>
+   118c0:	f8d8 1000 	ldr.w	r1, [r8]
+   118c4:	6809      	ldr	r1, [r1, #0]
+   118c6:	9102      	str	r1, [sp, #8]
+   118c8:	f240 192c 	movw	r9, #300	@ 0x12c
+   118cc:	f2c4 0902 	movt	r9, #16386	@ 0x4002
+   118d0:	f8d9 3000 	ldr.w	r3, [r9]
+   118d4:	f003 0101 	and.w	r1, r3, #1
+   118d8:	05de      	lsls	r6, r3, #23
+   118da:	bf48      	it	mi
+   118dc:	2102      	movmi	r1, #2
+   118de:	f812 3c14 	ldrb.w	r3, [r2, #-20]
+   118e2:	b1a1      	cbz	r1, 1190e <opencfw_bl_clock_request_id2+0xea>
+   118e4:	2e00      	cmp	r6, #0
+   118e6:	d500      	bpl.n	118ea <opencfw_bl_clock_request_id2+0xc6>
+   118e8:	b13b      	cbz	r3, 118fa <opencfw_bl_clock_request_id2+0xd6>
+   118ea:	f04f 0900 	mov.w	r9, #0
+   118ee:	2901      	cmp	r1, #1
+   118f0:	f04f 0101 	mov.w	r1, #1
+   118f4:	bf08      	it	eq
+   118f6:	2b01      	cmpeq	r3, #1
+   118f8:	d142      	bne.n	11980 <opencfw_bl_clock_request_id2+0x15c>
+   118fa:	f04f 0903 	mov.w	r9, #3
+   118fe:	2100      	movs	r1, #0
+   11900:	2900      	cmp	r1, #0
+   11902:	d13e      	bne.n	11982 <opencfw_bl_clock_request_id2+0x15e>
+   11904:	e043      	b.n	1198e <opencfw_bl_clock_request_id2+0x16a>
+   11906:	2000      	movs	r0, #0
+   11908:	b003      	add	sp, #12
+   1190a:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}
+   1190e:	2b01      	cmp	r3, #1
+   11910:	d160      	bne.n	119d4 <opencfw_bl_clock_request_id2+0x1b0>
+   11912:	2101      	movs	r1, #1
+   11914:	f88d 1007 	strb.w	r1, [sp, #7]
+   11918:	6813      	ldr	r3, [r2, #0]
+   1191a:	6852      	ldr	r2, [r2, #4]
+   1191c:	f003 033f 	and.w	r3, r3, #63	@ 0x3f
+   11920:	f002 020f 	and.w	r2, r2, #15
+   11924:	ea43 1282 	orr.w	r2, r3, r2, lsl #6
+   11928:	f648 4300 	movw	r3, #35840	@ 0x8c00
+   1192c:	f6c0 73ff 	movt	r3, #4095	@ 0xfff
+   11930:	431a      	orrs	r2, r3
+   11932:	f849 2c04 	str.w	r2, [r9, #-4]
+   11936:	f8d9 2000 	ldr.w	r2, [r9]
+   1193a:	f240 132b 	movw	r3, #299	@ 0x12b
+   1193e:	439a      	bics	r2, r3
+   11940:	3222      	adds	r2, #34	@ 0x22
+   11942:	f8c9 2000 	str.w	r2, [r9]
+   11946:	f8d9 2000 	ldr.w	r2, [r9]
+   1194a:	2608      	movs	r6, #8
+   1194c:	f042 0201 	orr.w	r2, r2, #1
+   11950:	f8c9 2000 	str.w	r2, [r9]
+   11954:	f89d 2007 	ldrb.w	r2, [sp, #7]
+   11958:	f8d9 3000 	ldr.w	r3, [r9]
+   1195c:	2a01      	cmp	r2, #1
+   1195e:	f06f 0228 	mvn.w	r2, #40	@ 0x28
+   11962:	bf04      	itt	eq
+   11964:	f64f 62fe 	movweq	r2, #65278	@ 0xfefe
+   11968:	f6cf 72ff 	movteq	r2, #65535	@ 0xffff
+   1196c:	ea02 0203 	and.w	r2, r2, r3
+   11970:	bf08      	it	eq
+   11972:	f44f 7680 	moveq.w	r6, #256	@ 0x100
+   11976:	4332      	orrs	r2, r6
+   11978:	f8c9 2000 	str.w	r2, [r9]
+   1197c:	f04f 0900 	mov.w	r9, #0
+   11980:	b129      	cbz	r1, 1198e <opencfw_bl_clock_request_id2+0x16a>
+   11982:	211c      	movs	r1, #28
+   11984:	ea01 00d0 	and.w	r0, r1, r0, lsr #3
+   11988:	59c1      	ldr	r1, [r0, r7]
+   1198a:	4329      	orrs	r1, r5
+   1198c:	51c1      	str	r1, [r0, r7]
+   1198e:	7820      	ldrb	r0, [r4, #0]
+   11990:	2800      	cmp	r0, #0
+   11992:	bf1c      	itt	ne
+   11994:	f10d 0008 	addne.w	r0, sp, #8
+   11998:	f8c8 0000 	strne.w	r0, [r8]
+   1199c:	f38a 8810 	msr	PRIMASK, sl
+   119a0:	7820      	ldrb	r0, [r4, #0]
+   119a2:	b198      	cbz	r0, 119cc <opencfw_bl_clock_request_id2+0x1a8>
+   119a4:	9802      	ldr	r0, [sp, #8]
+   119a6:	b140      	cbz	r0, 119ba <opencfw_bl_clock_request_id2+0x196>
+   119a8:	7820      	ldrb	r0, [r4, #0]
+   119aa:	b130      	cbz	r0, 119ba <opencfw_bl_clock_request_id2+0x196>
+   119ac:	200a      	movs	r0, #10
+   119ae:	f000 f8bf 	bl	11b30 <opencfw_bl_delay_us>
+   119b2:	9802      	ldr	r0, [sp, #8]
+   119b4:	3801      	subs	r0, #1
+   119b6:	9002      	str	r0, [sp, #8]
+   119b8:	d1f6      	bne.n	119a8 <opencfw_bl_clock_request_id2+0x184>
+   119ba:	2100      	movs	r1, #0
+   119bc:	f3ef 8010 	mrs	r0, PRIMASK
+   119c0:	b672      	cpsid	i
+   119c2:	7021      	strb	r1, [r4, #0]
+   119c4:	f8c8 1000 	str.w	r1, [r8]
+   119c8:	f380 8810 	msr	PRIMASK, r0
+   119cc:	4648      	mov	r0, r9
+   119ce:	b003      	add	sp, #12
+   119d0:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}
+   119d4:	4683      	mov	fp, r0
+   119d6:	6810      	ldr	r0, [r2, #0]
+   119d8:	6851      	ldr	r1, [r2, #4]
+   119da:	f859 2c04 	ldr.w	r2, [r9, #-4]
+   119de:	f247 0300 	movw	r3, #28672	@ 0x7000
+   119e2:	f2cc 0300 	movt	r3, #49152	@ 0xc000
+   119e6:	f000 003f 	and.w	r0, r0, #63	@ 0x3f
+   119ea:	f001 010f 	and.w	r1, r1, #15
+   119ee:	401a      	ands	r2, r3
+   119f0:	ea40 1081 	orr.w	r0, r0, r1, lsl #6
+   119f4:	f648 4100 	movw	r1, #35840	@ 0x8c00
+   119f8:	4410      	add	r0, r2
+   119fa:	f6c0 71ff 	movt	r1, #4095	@ 0xfff
+   119fe:	4308      	orrs	r0, r1
+   11a00:	f849 0c04 	str.w	r0, [r9, #-4]
+   11a04:	f8d9 0000 	ldr.w	r0, [r9]
+   11a08:	f040 0002 	orr.w	r0, r0, #2
+   11a0c:	f020 0020 	bic.w	r0, r0, #32
+   11a10:	f8c9 0000 	str.w	r0, [r9]
+   11a14:	f8d9 0000 	ldr.w	r0, [r9]
+   11a18:	f040 0001 	orr.w	r0, r0, #1
+   11a1c:	f8c9 0000 	str.w	r0, [r9]
+   11a20:	f8d9 0000 	ldr.w	r0, [r9]
+   11a24:	f040 0010 	orr.w	r0, r0, #16
+   11a28:	f8c9 0000 	str.w	r0, [r9]
+   11a2c:	f8d9 0000 	ldr.w	r0, [r9]
+   11a30:	f040 0008 	orr.w	r0, r0, #8
+   11a34:	f8c9 0000 	str.w	r0, [r9]
+   11a38:	2005      	movs	r0, #5
+   11a3a:	f000 f879 	bl	11b30 <opencfw_bl_delay_us>
+   11a3e:	f8d9 0000 	ldr.w	r0, [r9]
+   11a42:	2101      	movs	r1, #1
+   11a44:	f020 0010 	bic.w	r0, r0, #16
+   11a48:	f8c9 0000 	str.w	r0, [r9]
+   11a4c:	7820      	ldrb	r0, [r4, #0]
+   11a4e:	f04f 0900 	mov.w	r9, #0
+   11a52:	2800      	cmp	r0, #0
+   11a54:	bf08      	it	eq
+   11a56:	7021      	strbeq	r1, [r4, #0]
+   11a58:	4658      	mov	r0, fp
+   11a5a:	2900      	cmp	r1, #0
+   11a5c:	d191      	bne.n	11982 <opencfw_bl_clock_request_id2+0x15e>
+   11a5e:	e796      	b.n	1198e <opencfw_bl_clock_request_id2+0x16a>
+
+00011a60 <opencfw_bl_clock_release_id2>:
+   11a60:	b570      	push	{r4, r5, r6, lr}
+   11a62:	f646 6e84 	movw	lr, #28292	@ 0x6e84
+   11a66:	f2c2 0e02 	movt	lr, #8194	@ 0x2002
+   11a6a:	f3c0 1142 	ubfx	r1, r0, #5, #3
+   11a6e:	f85e 2021 	ldr.w	r2, [lr, r1, lsl #2]
+   11a72:	f000 011f 	and.w	r1, r0, #31
+   11a76:	2301      	movs	r3, #1
+   11a78:	fa03 f101 	lsl.w	r1, r3, r1
+   11a7c:	420a      	tst	r2, r1
+   11a7e:	d054      	beq.n	11b2a <opencfw_bl_clock_release_id2+0xca>
+   11a80:	221c      	movs	r2, #28
+   11a82:	ea02 00d0 	and.w	r0, r2, r0, lsr #3
+   11a86:	f3ef 8c10 	mrs	ip, PRIMASK
+   11a8a:	b672      	cpsid	i
+   11a8c:	f850 200e 	ldr.w	r2, [r0, lr]
+   11a90:	f04f 3355 	mov.w	r3, #1431655765	@ 0x55555555
+   11a94:	ea22 0101 	bic.w	r1, r2, r1
+   11a98:	f840 100e 	str.w	r1, [r0, lr]
+   11a9c:	2200      	movs	r2, #0
+   11a9e:	f04f 3033 	mov.w	r0, #858993459	@ 0x33333333
+   11aa2:	f04f 3101 	mov.w	r1, #16843009	@ 0x1010101
+   11aa6:	2400      	movs	r4, #0
+   11aa8:	f85e 5024 	ldr.w	r5, [lr, r4, lsl #2]
+   11aac:	3401      	adds	r4, #1
+   11aae:	ea03 0655 	and.w	r6, r3, r5, lsr #1
+   11ab2:	1bad      	subs	r5, r5, r6
+   11ab4:	f025 36cc 	bic.w	r6, r5, #3435973836	@ 0xcccccccc
+   11ab8:	ea00 0595 	and.w	r5, r0, r5, lsr #2
+   11abc:	4435      	add	r5, r6
+   11abe:	eb05 1515 	add.w	r5, r5, r5, lsr #4
+   11ac2:	f025 35f0 	bic.w	r5, r5, #4042322160	@ 0xf0f0f0f0
+   11ac6:	fb05 f501 	mul.w	r5, r5, r1
+   11aca:	2c01      	cmp	r4, #1
+   11acc:	eb02 6215 	add.w	r2, r2, r5, lsr #24
+   11ad0:	d0ea      	beq.n	11aa8 <opencfw_bl_clock_release_id2+0x48>
+   11ad2:	bb42      	cbnz	r2, 11b26 <opencfw_bl_clock_release_id2+0xc6>
+   11ad4:	2090      	movs	r0, #144	@ 0x90
+   11ad6:	f2c2 0000 	movt	r0, #8192	@ 0x2000
+   11ada:	f240 1228 	movw	r2, #296	@ 0x128
+   11ade:	6801      	ldr	r1, [r0, #0]
+   11ae0:	6840      	ldr	r0, [r0, #4]
+   11ae2:	f2c4 0202 	movt	r2, #16386	@ 0x4002
+   11ae6:	6813      	ldr	r3, [r2, #0]
+   11ae8:	f247 0400 	movw	r4, #28672	@ 0x7000
+   11aec:	f2cc 0400 	movt	r4, #49152	@ 0xc000
+   11af0:	f001 013f 	and.w	r1, r1, #63	@ 0x3f
+   11af4:	f000 000f 	and.w	r0, r0, #15
+   11af8:	4023      	ands	r3, r4
+   11afa:	ea41 1080 	orr.w	r0, r1, r0, lsl #6
+   11afe:	4418      	add	r0, r3
+   11b00:	f040 7040 	orr.w	r0, r0, #50331648	@ 0x3000000
+   11b04:	f440 108c 	orr.w	r0, r0, #1146880	@ 0x118000
+   11b08:	6010      	str	r0, [r2, #0]
+   11b0a:	6850      	ldr	r0, [r2, #4]
+   11b0c:	f240 112b 	movw	r1, #299	@ 0x12b
+   11b10:	4388      	bics	r0, r1
+   11b12:	3002      	adds	r0, #2
+   11b14:	6050      	str	r0, [r2, #4]
+   11b16:	f247 109b 	movw	r0, #29083	@ 0x719b
+   11b1a:	f2c2 0002 	movt	r0, #8194	@ 0x2002
+   11b1e:	2100      	movs	r1, #0
+   11b20:	7001      	strb	r1, [r0, #0]
+   11b22:	f8ce 11bc 	str.w	r1, [lr, #444]	@ 0x1bc
+   11b26:	f38c 8810 	msr	PRIMASK, ip
+   11b2a:	2000      	movs	r0, #0
+   11b2c:	bd70      	pop	{r4, r5, r6, pc}
+	...
+
+00011b30 <opencfw_bl_delay_us>:
+   11b30:	ee00 0a10 	vmov	s0, r0
+   11b34:	ed9f 1a15 	vldr	s2, [pc, #84]	@ 11b8c <opencfw_bl_delay_us+0x5c>
+   11b38:	eeb8 0a40 	vcvt.f32.u32	s0, s0
+   11b3c:	ee20 0a01 	vmul.f32	s0, s0, s2
+   11b40:	eebc 0ac0 	vcvt.u32.f32	s0, s0
+   11b44:	ed9f 2a12 	vldr	s4, [pc, #72]	@ 11b90 <opencfw_bl_delay_us+0x60>
+   11b48:	eeb8 1a40 	vcvt.f32.u32	s2, s0
+   11b4c:	ed9f 3a11 	vldr	s6, [pc, #68]	@ 11b94 <opencfw_bl_delay_us+0x64>
+   11b50:	ee21 1a02 	vmul.f32	s2, s2, s4
+   11b54:	ee81 1a03 	vdiv.f32	s2, s2, s6
+   11b58:	f241 0000 	movw	r0, #4096	@ 0x1000
+   11b5c:	f2c4 0002 	movt	r0, #16386	@ 0x4002
+   11b60:	6800      	ldr	r0, [r0, #0]
+   11b62:	ee10 2a10 	vmov	r2, s0
+   11b66:	f000 0118 	and.w	r1, r0, #24
+   11b6a:	2910      	cmp	r1, #16
+   11b6c:	f04f 010f 	mov.w	r1, #15
+   11b70:	eebc 0ac1 	vcvt.u32.f32	s0, s2
+   11b74:	ee10 0a10 	vmov	r0, s0
+   11b78:	bf0c      	ite	eq
+   11b7a:	2118      	moveq	r1, #24
+   11b7c:	4610      	movne	r0, r2
+   11b7e:	4288      	cmp	r0, r1
+   11b80:	bf98      	it	ls
+   11b82:	4770      	bxls	lr
+   11b84:	1a40      	subs	r0, r0, r1
+   11b86:	2141      	movs	r1, #65	@ 0x41
+   11b88:	4708      	bx	r1
+   11b8a:	bf00      	nop
+   11b8c:	42000000 			@ <UNDEFINED> instruction: 42000000
+   11b90:	437a0000 			@ <UNDEFINED> instruction: 437a0000
+   11b94:	42c00000 			@ <UNDEFINED> instruction: 42c00000
+
+00011b98 <opencfw_bl_clock_request_id4>:
+   11b98:	e92d 41f0 	stmdb	sp!, {r4, r5, r6, r7, r8, lr}
+   11b9c:	b082      	sub	sp, #8
+   11b9e:	f247 149c 	movw	r4, #29084	@ 0x719c
+   11ba2:	f2c2 0402 	movt	r4, #8194	@ 0x2002
+   11ba6:	f44f 717a 	mov.w	r1, #1000	@ 0x3e8
+   11baa:	9101      	str	r1, [sp, #4]
+   11bac:	f3c0 1142 	ubfx	r1, r0, #5, #3
+   11bb0:	f5a4 7242 	sub.w	r2, r4, #776	@ 0x308
+   11bb4:	f852 6021 	ldr.w	r6, [r2, r1, lsl #2]
+   11bb8:	f000 011f 	and.w	r1, r0, #31
+   11bbc:	2301      	movs	r3, #1
+   11bbe:	408b      	lsls	r3, r1
+   11bc0:	f3ef 8110 	mrs	r1, PRIMASK
+   11bc4:	b672      	cpsid	i
+   11bc6:	7827      	ldrb	r7, [r4, #0]
+   11bc8:	421e      	tst	r6, r3
+   11bca:	d038      	beq.n	11c3e <opencfw_bl_clock_request_id4+0xa6>
+   11bcc:	f64f 65a8 	movw	r5, #65192	@ 0xfea8
+   11bd0:	f6cf 75ff 	movt	r5, #65535	@ 0xffff
+   11bd4:	b117      	cbz	r7, 11bdc <opencfw_bl_clock_request_id4+0x44>
+   11bd6:	5960      	ldr	r0, [r4, r5]
+   11bd8:	6800      	ldr	r0, [r0, #0]
+   11bda:	9001      	str	r0, [sp, #4]
+   11bdc:	a801      	add	r0, sp, #4
+   11bde:	5160      	str	r0, [r4, r5]
+   11be0:	f381 8810 	msr	PRIMASK, r1
+   11be4:	7820      	ldrb	r0, [r4, #0]
+   11be6:	2800      	cmp	r0, #0
+   11be8:	f000 8094 	beq.w	11d14 <opencfw_bl_clock_request_id4+0x17c>
+   11bec:	9801      	ldr	r0, [sp, #4]
+   11bee:	b1a8      	cbz	r0, 11c1c <opencfw_bl_clock_request_id4+0x84>
+   11bf0:	f241 0600 	movw	r6, #4096	@ 0x1000
+   11bf4:	f2c4 0602 	movt	r6, #16386	@ 0x4002
+   11bf8:	2741      	movs	r7, #65	@ 0x41
+   11bfa:	bf00      	nop
+   11bfc:	7820      	ldrb	r0, [r4, #0]
+   11bfe:	b168      	cbz	r0, 11c1c <opencfw_bl_clock_request_id4+0x84>
+   11c00:	6830      	ldr	r0, [r6, #0]
+   11c02:	f000 0018 	and.w	r0, r0, #24
+   11c06:	2810      	cmp	r0, #16
+   11c08:	f240 1031 	movw	r0, #305	@ 0x131
+   11c0c:	bf08      	it	eq
+   11c0e:	f240 3029 	movweq	r0, #809	@ 0x329
+   11c12:	47b8      	blx	r7
+   11c14:	9801      	ldr	r0, [sp, #4]
+   11c16:	3801      	subs	r0, #1
+   11c18:	9001      	str	r0, [sp, #4]
+   11c1a:	d1ef      	bne.n	11bfc <opencfw_bl_clock_request_id4+0x64>
+   11c1c:	f247 109e 	movw	r0, #29086	@ 0x719e
+   11c20:	f2c2 0002 	movt	r0, #8194	@ 0x2002
+   11c24:	2201      	movs	r2, #1
+   11c26:	f3ef 8110 	mrs	r1, PRIMASK
+   11c2a:	b672      	cpsid	i
+   11c2c:	7002      	strb	r2, [r0, #0]
+   11c2e:	2000      	movs	r0, #0
+   11c30:	7020      	strb	r0, [r4, #0]
+   11c32:	5160      	str	r0, [r4, r5]
+   11c34:	f381 8810 	msr	PRIMASK, r1
+   11c38:	b002      	add	sp, #8
+   11c3a:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
+   11c3e:	b137      	cbz	r7, 11c4e <opencfw_bl_clock_request_id4+0xb6>
+   11c40:	f64f 67a8 	movw	r7, #65192	@ 0xfea8
+   11c44:	f6cf 77ff 	movt	r7, #65535	@ 0xffff
+   11c48:	59e7      	ldr	r7, [r4, r7]
+   11c4a:	683f      	ldr	r7, [r7, #0]
+   11c4c:	9701      	str	r7, [sp, #4]
+   11c4e:	f240 5750 	movw	r7, #1360	@ 0x550
+   11c52:	f2c2 0700 	movt	r7, #8192	@ 0x2000
+   11c56:	783f      	ldrb	r7, [r7, #0]
+   11c58:	2f00      	cmp	r7, #0
+   11c5a:	d05f      	beq.n	11d1c <opencfw_bl_clock_request_id4+0x184>
+   11c5c:	f64f 47f8 	movw	r7, #64760	@ 0xfcf8
+   11c60:	f6cf 77ff 	movt	r7, #65535	@ 0xffff
+   11c64:	59e7      	ldr	r7, [r4, r7]
+   11c66:	f04f 3655 	mov.w	r6, #1431655765	@ 0x55555555
+   11c6a:	ea06 0557 	and.w	r5, r6, r7, lsr #1
+   11c6e:	1b7f      	subs	r7, r7, r5
+   11c70:	f04f 3e33 	mov.w	lr, #858993459	@ 0x33333333
+   11c74:	ea0e 0597 	and.w	r5, lr, r7, lsr #2
+   11c78:	f027 37cc 	bic.w	r7, r7, #3435973836	@ 0xcccccccc
+   11c7c:	443d      	add	r5, r7
+   11c7e:	f64f 47fc 	movw	r7, #64764	@ 0xfcfc
+   11c82:	f6cf 77ff 	movt	r7, #65535	@ 0xffff
+   11c86:	59e7      	ldr	r7, [r4, r7]
+   11c88:	eb05 1515 	add.w	r5, r5, r5, lsr #4
+   11c8c:	ea06 0657 	and.w	r6, r6, r7, lsr #1
+   11c90:	1bbe      	subs	r6, r7, r6
+   11c92:	ea0e 0796 	and.w	r7, lr, r6, lsr #2
+   11c96:	f026 36cc 	bic.w	r6, r6, #3435973836	@ 0xcccccccc
+   11c9a:	4437      	add	r7, r6
+   11c9c:	eb07 1717 	add.w	r7, r7, r7, lsr #4
+   11ca0:	f025 35f0 	bic.w	r5, r5, #4042322160	@ 0xf0f0f0f0
+   11ca4:	f04f 3801 	mov.w	r8, #16843009	@ 0x1010101
+   11ca8:	f027 37f0 	bic.w	r7, r7, #4042322160	@ 0xf0f0f0f0
+   11cac:	fb05 f508 	mul.w	r5, r5, r8
+   11cb0:	fb07 f708 	mul.w	r7, r7, r8
+   11cb4:	f04f 0c1c 	mov.w	ip, #28
+   11cb8:	432f      	orrs	r7, r5
+   11cba:	2600      	movs	r6, #0
+   11cbc:	ebb6 6f17 	cmp.w	r6, r7, lsr #24
+   11cc0:	ea0c 00d0 	and.w	r0, ip, r0, lsr #3
+   11cc4:	d121      	bne.n	11d0a <opencfw_bl_clock_request_id4+0x172>
+   11cc6:	f244 0744 	movw	r7, #16452	@ 0x4044
+   11cca:	f2c4 0700 	movt	r7, #16384	@ 0x4000
+   11cce:	683e      	ldr	r6, [r7, #0]
+   11cd0:	f046 0601 	orr.w	r6, r6, #1
+   11cd4:	603e      	str	r6, [r7, #0]
+   11cd6:	f64f 6694 	movw	r6, #65172	@ 0xfe94
+   11cda:	f6cf 76ff 	movt	r6, #65535	@ 0xffff
+   11cde:	59a6      	ldr	r6, [r4, r6]
+   11ce0:	b19e      	cbz	r6, 11d0a <opencfw_bl_clock_request_id4+0x172>
+   11ce2:	f64f 6650 	movw	r6, #65104	@ 0xfe50
+   11ce6:	f6cf 76ff 	movt	r6, #65535	@ 0xffff
+   11cea:	59a6      	ldr	r6, [r4, r6]
+   11cec:	f046 0601 	orr.w	r6, r6, #1
+   11cf0:	f847 6c24 	str.w	r6, [r7, #-36]
+   11cf4:	7827      	ldrb	r7, [r4, #0]
+   11cf6:	b947      	cbnz	r7, 11d0a <opencfw_bl_clock_request_id4+0x172>
+   11cf8:	f247 179e 	movw	r7, #29086	@ 0x719e
+   11cfc:	f2c2 0702 	movt	r7, #8194	@ 0x2002
+   11d00:	783f      	ldrb	r7, [r7, #0]
+   11d02:	2f00      	cmp	r7, #0
+   11d04:	bf04      	itt	eq
+   11d06:	2701      	moveq	r7, #1
+   11d08:	7027      	strbeq	r7, [r4, #0]
+   11d0a:	5887      	ldr	r7, [r0, r2]
+   11d0c:	433b      	orrs	r3, r7
+   11d0e:	5083      	str	r3, [r0, r2]
+   11d10:	2000      	movs	r0, #0
+   11d12:	e004      	b.n	11d1e <opencfw_bl_clock_request_id4+0x186>
+   11d14:	2000      	movs	r0, #0
+   11d16:	b002      	add	sp, #8
+   11d18:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
+   11d1c:	2001      	movs	r0, #1
+   11d1e:	7822      	ldrb	r2, [r4, #0]
+   11d20:	b12a      	cbz	r2, 11d2e <opencfw_bl_clock_request_id4+0x196>
+   11d22:	f64f 62a8 	movw	r2, #65192	@ 0xfea8
+   11d26:	f6cf 72ff 	movt	r2, #65535	@ 0xffff
+   11d2a:	ab01      	add	r3, sp, #4
+   11d2c:	50a3      	str	r3, [r4, r2]
+   11d2e:	f381 8810 	msr	PRIMASK, r1
+   11d32:	7821      	ldrb	r1, [r4, #0]
+   11d34:	b359      	cbz	r1, 11d8e <opencfw_bl_clock_request_id4+0x1f6>
+   11d36:	4605      	mov	r5, r0
+   11d38:	9801      	ldr	r0, [sp, #4]
+   11d3a:	b1a8      	cbz	r0, 11d68 <opencfw_bl_clock_request_id4+0x1d0>
+   11d3c:	f241 0600 	movw	r6, #4096	@ 0x1000
+   11d40:	f2c4 0602 	movt	r6, #16386	@ 0x4002
+   11d44:	2741      	movs	r7, #65	@ 0x41
+   11d46:	bf00      	nop
+   11d48:	7820      	ldrb	r0, [r4, #0]
+   11d4a:	b168      	cbz	r0, 11d68 <opencfw_bl_clock_request_id4+0x1d0>
+   11d4c:	6830      	ldr	r0, [r6, #0]
+   11d4e:	f000 0018 	and.w	r0, r0, #24
+   11d52:	2810      	cmp	r0, #16
+   11d54:	f240 1031 	movw	r0, #305	@ 0x131
+   11d58:	bf08      	it	eq
+   11d5a:	f240 3029 	movweq	r0, #809	@ 0x329
+   11d5e:	47b8      	blx	r7
+   11d60:	9801      	ldr	r0, [sp, #4]
+   11d62:	3801      	subs	r0, #1
+   11d64:	9001      	str	r0, [sp, #4]
+   11d66:	d1ef      	bne.n	11d48 <opencfw_bl_clock_request_id4+0x1b0>
+   11d68:	f247 119e 	movw	r1, #29086	@ 0x719e
+   11d6c:	f2c2 0102 	movt	r1, #8194	@ 0x2002
+   11d70:	2201      	movs	r2, #1
+   11d72:	f3ef 8010 	mrs	r0, PRIMASK
+   11d76:	b672      	cpsid	i
+   11d78:	700a      	strb	r2, [r1, #0]
+   11d7a:	f64f 62a8 	movw	r2, #65192	@ 0xfea8
+   11d7e:	2100      	movs	r1, #0
+   11d80:	f6cf 72ff 	movt	r2, #65535	@ 0xffff
+   11d84:	7021      	strb	r1, [r4, #0]
+   11d86:	50a1      	str	r1, [r4, r2]
+   11d88:	f380 8810 	msr	PRIMASK, r0
+   11d8c:	4628      	mov	r0, r5
+   11d8e:	b002      	add	sp, #8
+   11d90:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
+
+00011d94 <opencfw_bl_clock_release_id4>:
+   11d94:	f646 6c94 	movw	ip, #28308	@ 0x6e94
+   11d98:	f2c2 0c02 	movt	ip, #8194	@ 0x2002
+   11d9c:	f3c0 1242 	ubfx	r2, r0, #5, #3
+   11da0:	f85c 3022 	ldr.w	r3, [ip, r2, lsl #2]
+   11da4:	f000 021f 	and.w	r2, r0, #31
+   11da8:	2101      	movs	r1, #1
+   11daa:	fa01 f202 	lsl.w	r2, r1, r2
+   11dae:	4213      	tst	r3, r2
+   11db0:	d043      	beq.n	11e3a <opencfw_bl_clock_release_id4+0xa6>
+   11db2:	b510      	push	{r4, lr}
+   11db4:	211c      	movs	r1, #28
+   11db6:	ea01 01d0 	and.w	r1, r1, r0, lsr #3
+   11dba:	f3ef 8e10 	mrs	lr, PRIMASK
+   11dbe:	b672      	cpsid	i
+   11dc0:	f851 300c 	ldr.w	r3, [r1, ip]
+   11dc4:	f04f 3455 	mov.w	r4, #1431655765	@ 0x55555555
+   11dc8:	ea23 0202 	bic.w	r2, r3, r2
+   11dcc:	f841 200c 	str.w	r2, [r1, ip]
+   11dd0:	f8dc 1000 	ldr.w	r1, [ip]
+   11dd4:	f8dc 2004 	ldr.w	r2, [ip, #4]
+   11dd8:	ea04 0351 	and.w	r3, r4, r1, lsr #1
+   11ddc:	ea04 0452 	and.w	r4, r4, r2, lsr #1
+   11de0:	1ac9      	subs	r1, r1, r3
+   11de2:	f04f 3333 	mov.w	r3, #858993459	@ 0x33333333
+   11de6:	1b12      	subs	r2, r2, r4
+   11de8:	ea03 0091 	and.w	r0, r3, r1, lsr #2
+   11dec:	f021 31cc 	bic.w	r1, r1, #3435973836	@ 0xcccccccc
+   11df0:	ea03 0392 	and.w	r3, r3, r2, lsr #2
+   11df4:	f022 32cc 	bic.w	r2, r2, #3435973836	@ 0xcccccccc
+   11df8:	4408      	add	r0, r1
+   11dfa:	441a      	add	r2, r3
+   11dfc:	eb00 1010 	add.w	r0, r0, r0, lsr #4
+   11e00:	eb02 1212 	add.w	r2, r2, r2, lsr #4
+   11e04:	f020 30f0 	bic.w	r0, r0, #4042322160	@ 0xf0f0f0f0
+   11e08:	f04f 3101 	mov.w	r1, #16843009	@ 0x1010101
+   11e0c:	f022 32f0 	bic.w	r2, r2, #4042322160	@ 0xf0f0f0f0
+   11e10:	fb00 f001 	mul.w	r0, r0, r1
+   11e14:	fb02 f101 	mul.w	r1, r2, r1
+   11e18:	4308      	orrs	r0, r1
+   11e1a:	2100      	movs	r1, #0
+   11e1c:	ebb1 6f10 	cmp.w	r1, r0, lsr #24
+   11e20:	d107      	bne.n	11e32 <opencfw_bl_clock_release_id4+0x9e>
+   11e22:	f244 0044 	movw	r0, #16452	@ 0x4044
+   11e26:	f2c4 0000 	movt	r0, #16384	@ 0x4000
+   11e2a:	6801      	ldr	r1, [r0, #0]
+   11e2c:	f021 0101 	bic.w	r1, r1, #1
+   11e30:	6001      	str	r1, [r0, #0]
+   11e32:	f38e 8810 	msr	PRIMASK, lr
+   11e36:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
+   11e3a:	2000      	movs	r0, #0
+   11e3c:	4770      	bx	lr
+	...
+
+00011e40 <opencfw_bl_clock_request_id5>:
+   11e40:	e92d 4ff0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
+   11e44:	b083      	sub	sp, #12
+   11e46:	f646 78f8 	movw	r8, #28664	@ 0x6ff8
+   11e4a:	f2c2 0802 	movt	r8, #8194	@ 0x2002
+   11e4e:	2132      	movs	r1, #50	@ 0x32
+   11e50:	9102      	str	r1, [sp, #8]
+   11e52:	f3c0 1142 	ubfx	r1, r0, #5, #3
+   11e56:	f5a8 79ae 	sub.w	r9, r8, #348	@ 0x15c
+   11e5a:	f859 2021 	ldr.w	r2, [r9, r1, lsl #2]
+   11e5e:	f000 011f 	and.w	r1, r0, #31
+   11e62:	2301      	movs	r3, #1
+   11e64:	fa03 fa01 	lsl.w	sl, r3, r1
+   11e68:	f247 1b9d 	movw	fp, #29085	@ 0x719d
+   11e6c:	f3ef 8c10 	mrs	ip, PRIMASK
+   11e70:	b672      	cpsid	i
+   11e72:	ea12 0f0a 	tst.w	r2, sl
+   11e76:	f2c2 0b02 	movt	fp, #8194	@ 0x2002
+   11e7a:	d02e      	beq.n	11eda <opencfw_bl_clock_request_id5+0x9a>
+   11e7c:	f89b 0000 	ldrb.w	r0, [fp]
+   11e80:	b128      	cbz	r0, 11e8e <opencfw_bl_clock_request_id5+0x4e>
+   11e82:	f46f 70aa 	mvn.w	r0, #340	@ 0x154
+   11e86:	f85b 0000 	ldr.w	r0, [fp, r0]
+   11e8a:	6800      	ldr	r0, [r0, #0]
+   11e8c:	9002      	str	r0, [sp, #8]
+   11e8e:	f46f 70aa 	mvn.w	r0, #340	@ 0x154
+   11e92:	aa02      	add	r2, sp, #8
+   11e94:	f84b 2000 	str.w	r2, [fp, r0]
+   11e98:	f38c 8810 	msr	PRIMASK, ip
+   11e9c:	f89b 0000 	ldrb.w	r0, [fp]
+   11ea0:	2800      	cmp	r0, #0
+   11ea2:	d072      	beq.n	11f8a <opencfw_bl_clock_request_id5+0x14a>
+   11ea4:	9802      	ldr	r0, [sp, #8]
+   11ea6:	b148      	cbz	r0, 11ebc <opencfw_bl_clock_request_id5+0x7c>
+   11ea8:	f89b 0000 	ldrb.w	r0, [fp]
+   11eac:	b130      	cbz	r0, 11ebc <opencfw_bl_clock_request_id5+0x7c>
+   11eae:	200a      	movs	r0, #10
+   11eb0:	f7ff fe3e 	bl	11b30 <opencfw_bl_delay_us>
+   11eb4:	9802      	ldr	r0, [sp, #8]
+   11eb6:	3801      	subs	r0, #1
+   11eb8:	9002      	str	r0, [sp, #8]
+   11eba:	d1f5      	bne.n	11ea8 <opencfw_bl_clock_request_id5+0x68>
+   11ebc:	2000      	movs	r0, #0
+   11ebe:	f46f 72aa 	mvn.w	r2, #340	@ 0x154
+   11ec2:	f3ef 8110 	mrs	r1, PRIMASK
+   11ec6:	b672      	cpsid	i
+   11ec8:	f88b 0000 	strb.w	r0, [fp]
+   11ecc:	f84b 0002 	str.w	r0, [fp, r2]
+   11ed0:	f381 8810 	msr	PRIMASK, r1
+   11ed4:	b003      	add	sp, #12
+   11ed6:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}
+   11eda:	221c      	movs	r2, #28
+   11edc:	ea02 00d0 	and.w	r0, r2, r0, lsr #3
+   11ee0:	f64f 62a4 	movw	r2, #65188	@ 0xfea4
+   11ee4:	9001      	str	r0, [sp, #4]
+   11ee6:	2000      	movs	r0, #0
+   11ee8:	f6cf 72ff 	movt	r2, #65535	@ 0xffff
+   11eec:	f04f 3355 	mov.w	r3, #1431655765	@ 0x55555555
+   11ef0:	f04f 3733 	mov.w	r7, #858993459	@ 0x33333333
+   11ef4:	f04f 3601 	mov.w	r6, #16843009	@ 0x1010101
+   11ef8:	2400      	movs	r4, #0
+   11efa:	bf00      	nop
+   11efc:	eb08 0184 	add.w	r1, r8, r4, lsl #2
+   11f00:	5889      	ldr	r1, [r1, r2]
+   11f02:	3401      	adds	r4, #1
+   11f04:	ea03 0551 	and.w	r5, r3, r1, lsr #1
+   11f08:	1b49      	subs	r1, r1, r5
+   11f0a:	f021 35cc 	bic.w	r5, r1, #3435973836	@ 0xcccccccc
+   11f0e:	ea07 0191 	and.w	r1, r7, r1, lsr #2
+   11f12:	4429      	add	r1, r5
+   11f14:	eb01 1111 	add.w	r1, r1, r1, lsr #4
+   11f18:	f021 31f0 	bic.w	r1, r1, #4042322160	@ 0xf0f0f0f0
+   11f1c:	fb01 f106 	mul.w	r1, r1, r6
+   11f20:	2c01      	cmp	r4, #1
+   11f22:	eb00 6011 	add.w	r0, r0, r1, lsr #24
+   11f26:	d0e9      	beq.n	11efc <opencfw_bl_clock_request_id5+0xbc>
+   11f28:	2800      	cmp	r0, #0
+   11f2a:	bf04      	itt	eq
+   11f2c:	2001      	moveq	r0, #1
+   11f2e:	f88b 0002 	strbeq.w	r0, [fp, #2]
+   11f32:	9901      	ldr	r1, [sp, #4]
+   11f34:	f240 5451 	movw	r4, #1361	@ 0x551
+   11f38:	f851 0009 	ldr.w	r0, [r1, r9]
+   11f3c:	f2c2 0400 	movt	r4, #8192	@ 0x2000
+   11f40:	ea40 000a 	orr.w	r0, r0, sl
+   11f44:	f841 0009 	str.w	r0, [r1, r9]
+   11f48:	f38c 8810 	msr	PRIMASK, ip
+   11f4c:	7820      	ldrb	r0, [r4, #0]
+   11f4e:	b328      	cbz	r0, 11f9c <opencfw_bl_clock_request_id5+0x15c>
+   11f50:	f46f 70b4 	mvn.w	r0, #360	@ 0x168
+   11f54:	f85b 0000 	ldr.w	r0, [fp, r0]
+   11f58:	b300      	cbz	r0, 11f9c <opencfw_bl_clock_request_id5+0x15c>
+   11f5a:	f898 0000 	ldrb.w	r0, [r8]
+   11f5e:	b1c0      	cbz	r0, 11f92 <opencfw_bl_clock_request_id5+0x152>
+   11f60:	2036      	movs	r0, #54	@ 0x36
+   11f62:	f7ff faa7 	bl	114b4 <opencfw_bl_clock_request_id3>
+   11f66:	b1c8      	cbz	r0, 11f9c <opencfw_bl_clock_request_id5+0x15c>
+   11f68:	f3ef 8010 	mrs	r0, PRIMASK
+   11f6c:	b672      	cpsid	i
+   11f6e:	9a01      	ldr	r2, [sp, #4]
+   11f70:	f852 1009 	ldr.w	r1, [r2, r9]
+   11f74:	ea21 010a 	bic.w	r1, r1, sl
+   11f78:	f842 1009 	str.w	r1, [r2, r9]
+   11f7c:	f380 8810 	msr	PRIMASK, r0
+   11f80:	2000      	movs	r0, #0
+   11f82:	2800      	cmp	r0, #0
+   11f84:	f040 809d 	bne.w	120c2 <opencfw_bl_clock_request_id5+0x282>
+   11f88:	e0c0      	b.n	1210c <opencfw_bl_clock_request_id5+0x2cc>
+   11f8a:	2000      	movs	r0, #0
+   11f8c:	b003      	add	sp, #12
+   11f8e:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}
+   11f92:	2036      	movs	r0, #54	@ 0x36
+   11f94:	f7ff fc46 	bl	11824 <opencfw_bl_clock_request_id2>
+   11f98:	2800      	cmp	r0, #0
+   11f9a:	d1e5      	bne.n	11f68 <opencfw_bl_clock_request_id5+0x128>
+   11f9c:	f3ef 8310 	mrs	r3, PRIMASK
+   11fa0:	b672      	cpsid	i
+   11fa2:	f89b 0000 	ldrb.w	r0, [fp]
+   11fa6:	b128      	cbz	r0, 11fb4 <opencfw_bl_clock_request_id5+0x174>
+   11fa8:	f46f 70aa 	mvn.w	r0, #340	@ 0x154
+   11fac:	f85b 0000 	ldr.w	r0, [fp, r0]
+   11fb0:	6800      	ldr	r0, [r0, #0]
+   11fb2:	9002      	str	r0, [sp, #8]
+   11fb4:	7827      	ldrb	r7, [r4, #0]
+   11fb6:	2f00      	cmp	r7, #0
+   11fb8:	d074      	beq.n	120a4 <opencfw_bl_clock_request_id5+0x264>
+   11fba:	f89b 0002 	ldrb.w	r0, [fp, #2]
+   11fbe:	2800      	cmp	r0, #0
+   11fc0:	f04f 0000 	mov.w	r0, #0
+   11fc4:	d06f      	beq.n	120a6 <opencfw_bl_clock_request_id5+0x266>
+   11fc6:	464d      	mov	r5, r9
+   11fc8:	f244 0948 	movw	r9, #16456	@ 0x4048
+   11fcc:	9300      	str	r3, [sp, #0]
+   11fce:	f2c4 0900 	movt	r9, #16384	@ 0x4000
+   11fd2:	f88b 0002 	strb.w	r0, [fp, #2]
+   11fd6:	f859 0c04 	ldr.w	r0, [r9, #-4]
+   11fda:	4656      	mov	r6, sl
+   11fdc:	0680      	lsls	r0, r0, #26
+   11fde:	d41b      	bmi.n	12018 <opencfw_bl_clock_request_id5+0x1d8>
+   11fe0:	f859 0c04 	ldr.w	r0, [r9, #-4]
+   11fe4:	f04f 0a64 	mov.w	sl, #100	@ 0x64
+   11fe8:	f040 0020 	orr.w	r0, r0, #32
+   11fec:	f849 0c04 	str.w	r0, [r9, #-4]
+   11ff0:	e003      	b.n	11ffa <opencfw_bl_clock_request_id5+0x1ba>
+   11ff2:	f04f 0a00 	mov.w	sl, #0
+   11ff6:	2400      	movs	r4, #0
+   11ff8:	b174      	cbz	r4, 12018 <opencfw_bl_clock_request_id5+0x1d8>
+   11ffa:	f859 0c18 	ldr.w	r0, [r9, #-24]
+   11ffe:	01c0      	lsls	r0, r0, #7
+   12000:	d4f9      	bmi.n	11ff6 <opencfw_bl_clock_request_id5+0x1b6>
+   12002:	f1ba 0f00 	cmp.w	sl, #0
+   12006:	d0f4      	beq.n	11ff2 <opencfw_bl_clock_request_id5+0x1b2>
+   12008:	2001      	movs	r0, #1
+   1200a:	2401      	movs	r4, #1
+   1200c:	f7ff fd90 	bl	11b30 <opencfw_bl_delay_us>
+   12010:	f1aa 0a01 	sub.w	sl, sl, #1
+   12014:	2c00      	cmp	r4, #0
+   12016:	d1f0      	bne.n	11ffa <opencfw_bl_clock_request_id5+0x1ba>
+   12018:	f46f 70b4 	mvn.w	r0, #360	@ 0x168
+   1201c:	f85b 0000 	ldr.w	r0, [fp, r0]
+   12020:	2800      	cmp	r0, #0
+   12022:	d05d      	beq.n	120e0 <opencfw_bl_clock_request_id5+0x2a0>
+   12024:	f8d9 0004 	ldr.w	r0, [r9, #4]
+   12028:	f46f 73d0 	mvn.w	r3, #416	@ 0x1a0
+   1202c:	f040 0007 	orr.w	r0, r0, #7
+   12030:	f8c9 0004 	str.w	r0, [r9, #4]
+   12034:	f8d9 0000 	ldr.w	r0, [r9]
+   12038:	f898 1000 	ldrb.w	r1, [r8]
+   1203c:	f020 5000 	bic.w	r0, r0, #536870912	@ 0x20000000
+   12040:	f001 0101 	and.w	r1, r1, #1
+   12044:	ea40 7041 	orr.w	r0, r0, r1, lsl #29
+   12048:	f8c9 0000 	str.w	r0, [r9]
+   1204c:	f64f 605c 	movw	r0, #65116	@ 0xfe5c
+   12050:	f6cf 70ff 	movt	r0, #65535	@ 0xffff
+   12054:	f81b 0000 	ldrb.w	r0, [fp, r0]
+   12058:	f8d9 1008 	ldr.w	r1, [r9, #8]
+   1205c:	46b2      	mov	sl, r6
+   1205e:	f360 0101 	bfi	r1, r0, #0, #2
+   12062:	f8c9 1008 	str.w	r1, [r9, #8]
+   12066:	f64f 71fc 	movw	r1, #65532	@ 0xfffc
+   1206a:	f8d9 0008 	ldr.w	r0, [r9, #8]
+   1206e:	f6c7 71ff 	movt	r1, #32767	@ 0x7fff
+   12072:	f85b 3003 	ldr.w	r3, [fp, r3]
+   12076:	1dca      	adds	r2, r1, #7
+   12078:	4010      	ands	r0, r2
+   1207a:	ea01 0183 	and.w	r1, r1, r3, lsl #2
+   1207e:	4408      	add	r0, r1
+   12080:	f8c9 0008 	str.w	r0, [r9, #8]
+   12084:	f8d9 0000 	ldr.w	r0, [r9]
+   12088:	f040 0001 	orr.w	r0, r0, #1
+   1208c:	f8c9 0000 	str.w	r0, [r9]
+   12090:	f89b 0000 	ldrb.w	r0, [fp]
+   12094:	46a9      	mov	r9, r5
+   12096:	2800      	cmp	r0, #0
+   12098:	bf04      	itt	eq
+   1209a:	2001      	moveq	r0, #1
+   1209c:	f88b 0000 	strbeq.w	r0, [fp]
+   120a0:	2000      	movs	r0, #0
+   120a2:	e020      	b.n	120e6 <opencfw_bl_clock_request_id5+0x2a6>
+   120a4:	2001      	movs	r0, #1
+   120a6:	b32f      	cbz	r7, 120f4 <opencfw_bl_clock_request_id5+0x2b4>
+   120a8:	f89b 1000 	ldrb.w	r1, [fp]
+   120ac:	2900      	cmp	r1, #0
+   120ae:	bf1e      	ittt	ne
+   120b0:	f46f 71aa 	mvnne.w	r1, #340	@ 0x154
+   120b4:	f10d 0208 	addne.w	r2, sp, #8
+   120b8:	f84b 2001 	strne.w	r2, [fp, r1]
+   120bc:	f383 8810 	msr	PRIMASK, r3
+   120c0:	b320      	cbz	r0, 1210c <opencfw_bl_clock_request_id5+0x2cc>
+   120c2:	7821      	ldrb	r1, [r4, #0]
+   120c4:	b311      	cbz	r1, 1210c <opencfw_bl_clock_request_id5+0x2cc>
+   120c6:	f46f 71b4 	mvn.w	r1, #360	@ 0x168
+   120ca:	f85b 1001 	ldr.w	r1, [fp, r1]
+   120ce:	b1e9      	cbz	r1, 1210c <opencfw_bl_clock_request_id5+0x2cc>
+   120d0:	4604      	mov	r4, r0
+   120d2:	f898 0000 	ldrb.w	r0, [r8]
+   120d6:	b1a8      	cbz	r0, 12104 <opencfw_bl_clock_request_id5+0x2c4>
+   120d8:	2036      	movs	r0, #54	@ 0x36
+   120da:	f7ff fa29 	bl	11530 <opencfw_bl_clock_release_id3>
+   120de:	e014      	b.n	1210a <opencfw_bl_clock_request_id5+0x2ca>
+   120e0:	2000      	movs	r0, #0
+   120e2:	46a9      	mov	r9, r5
+   120e4:	46b2      	mov	sl, r6
+   120e6:	f240 5451 	movw	r4, #1361	@ 0x551
+   120ea:	9b00      	ldr	r3, [sp, #0]
+   120ec:	f2c2 0400 	movt	r4, #8192	@ 0x2000
+   120f0:	2f00      	cmp	r7, #0
+   120f2:	d1d9      	bne.n	120a8 <opencfw_bl_clock_request_id5+0x268>
+   120f4:	9a01      	ldr	r2, [sp, #4]
+   120f6:	f852 1009 	ldr.w	r1, [r2, r9]
+   120fa:	ea21 010a 	bic.w	r1, r1, sl
+   120fe:	f842 1009 	str.w	r1, [r2, r9]
+   12102:	e7d1      	b.n	120a8 <opencfw_bl_clock_request_id5+0x268>
+   12104:	2036      	movs	r0, #54	@ 0x36
+   12106:	f7ff fcab 	bl	11a60 <opencfw_bl_clock_release_id2>
+   1210a:	4620      	mov	r0, r4
+   1210c:	f89b 1000 	ldrb.w	r1, [fp]
+   12110:	b1c9      	cbz	r1, 12146 <opencfw_bl_clock_request_id5+0x306>
+   12112:	4605      	mov	r5, r0
+   12114:	9802      	ldr	r0, [sp, #8]
+   12116:	b148      	cbz	r0, 1212c <opencfw_bl_clock_request_id5+0x2ec>
+   12118:	f89b 0000 	ldrb.w	r0, [fp]
+   1211c:	b130      	cbz	r0, 1212c <opencfw_bl_clock_request_id5+0x2ec>
+   1211e:	200a      	movs	r0, #10
+   12120:	f7ff fd06 	bl	11b30 <opencfw_bl_delay_us>
+   12124:	9802      	ldr	r0, [sp, #8]
+   12126:	3801      	subs	r0, #1
+   12128:	9002      	str	r0, [sp, #8]
+   1212a:	d1f5      	bne.n	12118 <opencfw_bl_clock_request_id5+0x2d8>
+   1212c:	2100      	movs	r1, #0
+   1212e:	f46f 72aa 	mvn.w	r2, #340	@ 0x154
+   12132:	f3ef 8010 	mrs	r0, PRIMASK
+   12136:	b672      	cpsid	i
+   12138:	f88b 1000 	strb.w	r1, [fp]
+   1213c:	f84b 1002 	str.w	r1, [fp, r2]
+   12140:	f380 8810 	msr	PRIMASK, r0
+   12144:	4628      	mov	r0, r5
+   12146:	b003      	add	sp, #12
+   12148:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}
+
+0001214c <opencfw_bl_clock_release_id5>:
+   1214c:	e92d 41f0 	stmdb	sp!, {r4, r5, r6, r7, r8, lr}
+   12150:	f646 649c 	movw	r4, #28316	@ 0x6e9c
+   12154:	f2c2 0402 	movt	r4, #8194	@ 0x2002
+   12158:	f3c0 1142 	ubfx	r1, r0, #5, #3
+   1215c:	f854 2021 	ldr.w	r2, [r4, r1, lsl #2]
+   12160:	f000 011f 	and.w	r1, r0, #31
+   12164:	2301      	movs	r3, #1
+   12166:	fa03 f101 	lsl.w	r1, r3, r1
+   1216a:	420a      	tst	r2, r1
+   1216c:	d048      	beq.n	12200 <opencfw_bl_clock_release_id5+0xb4>
+   1216e:	221c      	movs	r2, #28
+   12170:	ea02 00d0 	and.w	r0, r2, r0, lsr #3
+   12174:	f3ef 8810 	mrs	r8, PRIMASK
+   12178:	b672      	cpsid	i
+   1217a:	5902      	ldr	r2, [r0, r4]
+   1217c:	f04f 3301 	mov.w	r3, #16843009	@ 0x1010101
+   12180:	ea22 0101 	bic.w	r1, r2, r1
+   12184:	5101      	str	r1, [r0, r4]
+   12186:	2000      	movs	r0, #0
+   12188:	f04f 3155 	mov.w	r1, #1431655765	@ 0x55555555
+   1218c:	f04f 3233 	mov.w	r2, #858993459	@ 0x33333333
+   12190:	2600      	movs	r6, #0
+   12192:	bf00      	nop
+   12194:	f854 5026 	ldr.w	r5, [r4, r6, lsl #2]
+   12198:	3601      	adds	r6, #1
+   1219a:	ea01 0755 	and.w	r7, r1, r5, lsr #1
+   1219e:	1bef      	subs	r7, r5, r7
+   121a0:	f027 35cc 	bic.w	r5, r7, #3435973836	@ 0xcccccccc
+   121a4:	ea02 0797 	and.w	r7, r2, r7, lsr #2
+   121a8:	442f      	add	r7, r5
+   121aa:	eb07 1717 	add.w	r7, r7, r7, lsr #4
+   121ae:	f027 37f0 	bic.w	r7, r7, #4042322160	@ 0xf0f0f0f0
+   121b2:	fb07 f703 	mul.w	r7, r7, r3
+   121b6:	2e01      	cmp	r6, #1
+   121b8:	eb00 6017 	add.w	r0, r0, r7, lsr #24
+   121bc:	d0ea      	beq.n	12194 <opencfw_bl_clock_release_id5+0x48>
+   121be:	b9e8      	cbnz	r0, 121fc <opencfw_bl_clock_release_id5+0xb0>
+   121c0:	f8d4 0198 	ldr.w	r0, [r4, #408]	@ 0x198
+   121c4:	f244 0644 	movw	r6, #16452	@ 0x4044
+   121c8:	f2c4 0600 	movt	r6, #16384	@ 0x4000
+   121cc:	b190      	cbz	r0, 121f4 <opencfw_bl_clock_release_id5+0xa8>
+   121ce:	f247 159d 	movw	r5, #29085	@ 0x719d
+   121d2:	f2c2 0502 	movt	r5, #8194	@ 0x2002
+   121d6:	2700      	movs	r7, #0
+   121d8:	70af      	strb	r7, [r5, #2]
+   121da:	6870      	ldr	r0, [r6, #4]
+   121dc:	f020 0001 	bic.w	r0, r0, #1
+   121e0:	6070      	str	r0, [r6, #4]
+   121e2:	2036      	movs	r0, #54	@ 0x36
+   121e4:	f7ff fc3c 	bl	11a60 <opencfw_bl_clock_release_id2>
+   121e8:	2036      	movs	r0, #54	@ 0x36
+   121ea:	f7ff f9a1 	bl	11530 <opencfw_bl_clock_release_id3>
+   121ee:	702f      	strb	r7, [r5, #0]
+   121f0:	f8c4 71ac 	str.w	r7, [r4, #428]	@ 0x1ac
+   121f4:	6830      	ldr	r0, [r6, #0]
+   121f6:	f020 0020 	bic.w	r0, r0, #32
+   121fa:	6030      	str	r0, [r6, #0]
+   121fc:	f388 8810 	msr	PRIMASK, r8
+   12200:	2000      	movs	r0, #0
+   12202:	e8bd 81f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, pc}
+	...
+
+00012208 <opencfw_bl_clock_request_id6>:
+   12208:	e92d 4ff0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
+   1220c:	b081      	sub	sp, #4
+   1220e:	f247 0b04 	movw	fp, #28676	@ 0x7004
+   12212:	f2c2 0b02 	movt	fp, #8194	@ 0x2002
+   12216:	f3c0 1142 	ubfx	r1, r0, #5, #3
+   1221a:	f5ab 79b0 	sub.w	r9, fp, #352	@ 0x160
+   1221e:	f859 1021 	ldr.w	r1, [r9, r1, lsl #2]
+   12222:	f000 021f 	and.w	r2, r0, #31
+   12226:	2301      	movs	r3, #1
+   12228:	fa03 fa02 	lsl.w	sl, r3, r2
+   1222c:	ea11 0f0a 	tst.w	r1, sl
+   12230:	d004      	beq.n	1223c <opencfw_bl_clock_request_id6+0x34>
+   12232:	2400      	movs	r4, #0
+   12234:	4620      	mov	r0, r4
+   12236:	b001      	add	sp, #4
+   12238:	e8bd 8ff0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, pc}
+   1223c:	211c      	movs	r1, #28
+   1223e:	f64f 62a0 	movw	r2, #65184	@ 0xfea0
+   12242:	ea01 08d0 	and.w	r8, r1, r0, lsr #3
+   12246:	2100      	movs	r1, #0
+   12248:	f3ef 8c10 	mrs	ip, PRIMASK
+   1224c:	b672      	cpsid	i
+   1224e:	f6cf 72ff 	movt	r2, #65535	@ 0xffff
+   12252:	f04f 3355 	mov.w	r3, #1431655765	@ 0x55555555
+   12256:	f04f 3733 	mov.w	r7, #858993459	@ 0x33333333
+   1225a:	f04f 3401 	mov.w	r4, #16843009	@ 0x1010101
+   1225e:	2600      	movs	r6, #0
+   12260:	eb0b 0586 	add.w	r5, fp, r6, lsl #2
+   12264:	58ad      	ldr	r5, [r5, r2]
+   12266:	3601      	adds	r6, #1
+   12268:	ea03 0055 	and.w	r0, r3, r5, lsr #1
+   1226c:	1a28      	subs	r0, r5, r0
+   1226e:	f020 35cc 	bic.w	r5, r0, #3435973836	@ 0xcccccccc
+   12272:	ea07 0090 	and.w	r0, r7, r0, lsr #2
+   12276:	4428      	add	r0, r5
+   12278:	eb00 1010 	add.w	r0, r0, r0, lsr #4
+   1227c:	f020 30f0 	bic.w	r0, r0, #4042322160	@ 0xf0f0f0f0
+   12280:	fb00 f004 	mul.w	r0, r0, r4
+   12284:	2e01      	cmp	r6, #1
+   12286:	eb01 6110 	add.w	r1, r1, r0, lsr #24
+   1228a:	d0e9      	beq.n	12260 <opencfw_bl_clock_request_id6+0x58>
+   1228c:	f247 17a0 	movw	r7, #29088	@ 0x71a0
+   12290:	2900      	cmp	r1, #0
+   12292:	f2c2 0702 	movt	r7, #8194	@ 0x2002
+   12296:	bf04      	itt	eq
+   12298:	2001      	moveq	r0, #1
+   1229a:	7038      	strbeq	r0, [r7, #0]
+   1229c:	f858 0009 	ldr.w	r0, [r8, r9]
+   122a0:	ea40 000a 	orr.w	r0, r0, sl
+   122a4:	f848 0009 	str.w	r0, [r8, r9]
+   122a8:	f38c 8810 	msr	PRIMASK, ip
+   122ac:	f817 5c06 	ldrb.w	r5, [r7, #-6]
+   122b0:	f89b 0000 	ldrb.w	r0, [fp]
+   122b4:	9000      	str	r0, [sp, #0]
+   122b6:	b145      	cbz	r5, 122ca <opencfw_bl_clock_request_id6+0xc2>
+   122b8:	b148      	cbz	r0, 122ce <opencfw_bl_clock_request_id6+0xc6>
+   122ba:	2035      	movs	r0, #53	@ 0x35
+   122bc:	f7ff f8fa 	bl	114b4 <opencfw_bl_clock_request_id3>
+   122c0:	4604      	mov	r4, r0
+   122c2:	2035      	movs	r0, #53	@ 0x35
+   122c4:	f7ff faae 	bl	11824 <opencfw_bl_clock_request_id2>
+   122c8:	e008      	b.n	122dc <opencfw_bl_clock_request_id6+0xd4>
+   122ca:	2400      	movs	r4, #0
+   122cc:	e006      	b.n	122dc <opencfw_bl_clock_request_id6+0xd4>
+   122ce:	2035      	movs	r0, #53	@ 0x35
+   122d0:	f7ff faa8 	bl	11824 <opencfw_bl_clock_request_id2>
+   122d4:	4604      	mov	r4, r0
+   122d6:	2035      	movs	r0, #53	@ 0x35
+   122d8:	f7ff f8ec 	bl	114b4 <opencfw_bl_clock_request_id3>
+   122dc:	f3ef 8610 	mrs	r6, PRIMASK
+   122e0:	b672      	cpsid	i
+   122e2:	b10c      	cbz	r4, 122e8 <opencfw_bl_clock_request_id6+0xe0>
+   122e4:	2700      	movs	r7, #0
+   122e6:	e10d      	b.n	12504 <opencfw_bl_clock_request_id6+0x2fc>
+   122e8:	f817 0c06 	ldrb.w	r0, [r7, #-6]
+   122ec:	b190      	cbz	r0, 12314 <opencfw_bl_clock_request_id6+0x10c>
+   122ee:	7838      	ldrb	r0, [r7, #0]
+   122f0:	2400      	movs	r4, #0
+   122f2:	2800      	cmp	r0, #0
+   122f4:	f000 8103 	beq.w	124fe <opencfw_bl_clock_request_id6+0x2f6>
+   122f8:	f247 0c3c 	movw	ip, #28732	@ 0x703c
+   122fc:	f2c2 0c02 	movt	ip, #8194	@ 0x2002
+   12300:	703c      	strb	r4, [r7, #0]
+   12302:	f8dc 0000 	ldr.w	r0, [ip]
+   12306:	f644 4e30 	movw	lr, #19504	@ 0x4c30
+   1230a:	f2c0 1e50 	movt	lr, #336	@ 0x150
+   1230e:	b138      	cbz	r0, 12320 <opencfw_bl_clock_request_id6+0x118>
+   12310:	2001      	movs	r0, #1
+   12312:	e051      	b.n	123b8 <opencfw_bl_clock_request_id6+0x1b0>
+   12314:	2700      	movs	r7, #0
+   12316:	2401      	movs	r4, #1
+   12318:	2c00      	cmp	r4, #0
+   1231a:	f040 80f3 	bne.w	12504 <opencfw_bl_clock_request_id6+0x2fc>
+   1231e:	e155      	b.n	125cc <opencfw_bl_clock_request_id6+0x3c4>
+   12320:	f85c 0c2c 	ldr.w	r0, [ip, #-44]
+   12324:	01c0      	lsls	r0, r0, #7
+   12326:	f04f 0000 	mov.w	r0, #0
+   1232a:	d444      	bmi.n	123b6 <opencfw_bl_clock_request_id6+0x1ae>
+   1232c:	f85c 1c2c 	ldr.w	r1, [ip, #-44]
+   12330:	4667      	mov	r7, ip
+   12332:	f041 7180 	orr.w	r1, r1, #16777216	@ 0x1000000
+   12336:	f84c 1c2c 	str.w	r1, [ip, #-44]
+   1233a:	f85c 2c2c 	ldr.w	r2, [ip, #-44]
+   1233e:	f240 11b0 	movw	r1, #432	@ 0x1b0
+   12342:	f002 427f 	and.w	r2, r2, #4278190080	@ 0xff000000
+   12346:	4472      	add	r2, lr
+   12348:	f102 427f 	add.w	r2, r2, #4278190080	@ 0xff000000
+   1234c:	f84c 2c2c 	str.w	r2, [ip, #-44]
+   12350:	f84c 0c28 	str.w	r0, [ip, #-40]
+   12354:	f64f 605c 	movw	r0, #65116	@ 0xfe5c
+   12358:	f2c4 0102 	movt	r1, #16386	@ 0x4002
+   1235c:	f3ef 8410 	mrs	r4, PRIMASK
+   12360:	b672      	cpsid	i
+   12362:	f6cf 70ff 	movt	r0, #65535	@ 0xffff
+   12366:	5808      	ldr	r0, [r1, r0]
+   12368:	f000 00fe 	and.w	r0, r0, #254	@ 0xfe
+   1236c:	2822      	cmp	r0, #34	@ 0x22
+   1236e:	d306      	bcc.n	1237e <opencfw_bl_clock_request_id6+0x176>
+   12370:	6808      	ldr	r0, [r1, #0]
+   12372:	f420 1000 	bic.w	r0, r0, #2097152	@ 0x200000
+   12376:	6008      	str	r0, [r1, #0]
+   12378:	2001      	movs	r0, #1
+   1237a:	f7ff fbd9 	bl	11b30 <opencfw_bl_delay_us>
+   1237e:	f240 40d8 	movw	r0, #1240	@ 0x4d8
+   12382:	f2c4 0002 	movt	r0, #16386	@ 0x4002
+   12386:	6801      	ldr	r1, [r0, #0]
+   12388:	f021 4100 	bic.w	r1, r1, #2147483648	@ 0x80000000
+   1238c:	6001      	str	r1, [r0, #0]
+   1238e:	6801      	ldr	r1, [r0, #0]
+   12390:	f021 4180 	bic.w	r1, r1, #1073741824	@ 0x40000000
+   12394:	6001      	str	r1, [r0, #0]
+   12396:	f384 8810 	msr	PRIMASK, r4
+   1239a:	2005      	movs	r0, #5
+   1239c:	f7ff fbc8 	bl	11b30 <opencfw_bl_delay_us>
+   123a0:	f1a7 002c 	sub.w	r0, r7, #44	@ 0x2c
+   123a4:	f644 4e30 	movw	lr, #19504	@ 0x4c30
+   123a8:	46bc      	mov	ip, r7
+   123aa:	6038      	str	r0, [r7, #0]
+   123ac:	2400      	movs	r4, #0
+   123ae:	2001      	movs	r0, #1
+   123b0:	f2c0 1e50 	movt	lr, #336	@ 0x150
+   123b4:	e000      	b.n	123b8 <opencfw_bl_clock_request_id6+0x1b0>
+   123b6:	2407      	movs	r4, #7
+   123b8:	b348      	cbz	r0, 1240e <opencfw_bl_clock_request_id6+0x206>
+   123ba:	f8dc 0000 	ldr.w	r0, [ip]
+   123be:	b328      	cbz	r0, 1240c <opencfw_bl_clock_request_id6+0x204>
+   123c0:	6800      	ldr	r0, [r0, #0]
+   123c2:	f020 417e 	bic.w	r1, r0, #4261412864	@ 0xfe000000
+   123c6:	4571      	cmp	r1, lr
+   123c8:	d120      	bne.n	1240c <opencfw_bl_clock_request_id6+0x204>
+   123ca:	0180      	lsls	r0, r0, #6
+   123cc:	f100 80f5 	bmi.w	125ba <opencfw_bl_clock_request_id6+0x3b2>
+   123d0:	f81c 0c35 	ldrb.w	r0, [ip, #-53]
+   123d4:	283f      	cmp	r0, #63	@ 0x3f
+   123d6:	d817      	bhi.n	12408 <opencfw_bl_clock_request_id6+0x200>
+   123d8:	f81c 0c36 	ldrb.w	r0, [ip, #-54]
+   123dc:	f83c 1c32 	ldrh.w	r1, [ip, #-50]
+   123e0:	2801      	cmp	r0, #1
+   123e2:	d105      	bne.n	123f0 <opencfw_bl_clock_request_id6+0x1e8>
+   123e4:	f2a1 32c1 	subw	r2, r1, #961	@ 0x3c1
+   123e8:	f46f 736f 	mvn.w	r3, #956	@ 0x3bc
+   123ec:	429a      	cmp	r2, r3
+   123ee:	d30b      	bcc.n	12408 <opencfw_bl_clock_request_id6+0x200>
+   123f0:	2801      	cmp	r0, #1
+   123f2:	d004      	beq.n	123fe <opencfw_bl_clock_request_id6+0x1f6>
+   123f4:	f1a1 0061 	sub.w	r0, r1, #97	@ 0x61
+   123f8:	f110 0f57 	cmn.w	r0, #87	@ 0x57
+   123fc:	d304      	bcc.n	12408 <opencfw_bl_clock_request_id6+0x200>
+   123fe:	f81c 0c34 	ldrb.w	r0, [ip, #-52]
+   12402:	2807      	cmp	r0, #7
+   12404:	f240 80e4 	bls.w	125d0 <opencfw_bl_clock_request_id6+0x3c8>
+   12408:	2406      	movs	r4, #6
+   1240a:	e000      	b.n	1240e <opencfw_bl_clock_request_id6+0x206>
+   1240c:	2402      	movs	r4, #2
+   1240e:	bb3c      	cbnz	r4, 12460 <opencfw_bl_clock_request_id6+0x258>
+   12410:	f8dc 0000 	ldr.w	r0, [ip]
+   12414:	b318      	cbz	r0, 1245e <opencfw_bl_clock_request_id6+0x256>
+   12416:	6801      	ldr	r1, [r0, #0]
+   12418:	f021 427e 	bic.w	r2, r1, #4261412864	@ 0xfe000000
+   1241c:	4572      	cmp	r2, lr
+   1241e:	d11e      	bne.n	1245e <opencfw_bl_clock_request_id6+0x256>
+   12420:	0189      	lsls	r1, r1, #6
+   12422:	d419      	bmi.n	12458 <opencfw_bl_clock_request_id6+0x250>
+   12424:	f64f 61b0 	movw	r1, #65200	@ 0xfeb0
+   12428:	f240 12b0 	movw	r2, #432	@ 0x1b0
+   1242c:	f6cf 71ff 	movt	r1, #65535	@ 0xffff
+   12430:	f2c4 0202 	movt	r2, #16386	@ 0x4002
+   12434:	5851      	ldr	r1, [r2, r1]
+   12436:	43c9      	mvns	r1, r1
+   12438:	f411 2f70 	tst.w	r1, #983040	@ 0xf0000
+   1243c:	f040 80bf 	bne.w	125be <opencfw_bl_clock_request_id6+0x3b6>
+   12440:	f240 41d8 	movw	r1, #1240	@ 0x4d8
+   12444:	f2c4 0102 	movt	r1, #16386	@ 0x4002
+   12448:	680a      	ldr	r2, [r1, #0]
+   1244a:	f042 5200 	orr.w	r2, r2, #536870912	@ 0x20000000
+   1244e:	600a      	str	r2, [r1, #0]
+   12450:	6801      	ldr	r1, [r0, #0]
+   12452:	f041 7100 	orr.w	r1, r1, #33554432	@ 0x2000000
+   12456:	6001      	str	r1, [r0, #0]
+   12458:	2400      	movs	r4, #0
+   1245a:	b924      	cbnz	r4, 12466 <opencfw_bl_clock_request_id6+0x25e>
+   1245c:	e0b3      	b.n	125c6 <opencfw_bl_clock_request_id6+0x3be>
+   1245e:	2402      	movs	r4, #2
+   12460:	2c00      	cmp	r4, #0
+   12462:	f000 80b0 	beq.w	125c6 <opencfw_bl_clock_request_id6+0x3be>
+   12466:	f8dc 7000 	ldr.w	r7, [ip]
+   1246a:	2f00      	cmp	r7, #0
+   1246c:	d047      	beq.n	124fe <opencfw_bl_clock_request_id6+0x2f6>
+   1246e:	6838      	ldr	r0, [r7, #0]
+   12470:	f020 417e 	bic.w	r1, r0, #4261412864	@ 0xfe000000
+   12474:	4571      	cmp	r1, lr
+   12476:	d13d      	bne.n	124f4 <opencfw_bl_clock_request_id6+0x2ec>
+   12478:	0180      	lsls	r0, r0, #6
+   1247a:	f240 40d8 	movw	r0, #1240	@ 0x4d8
+   1247e:	f2c4 0002 	movt	r0, #16386	@ 0x4002
+   12482:	d507      	bpl.n	12494 <opencfw_bl_clock_request_id6+0x28c>
+   12484:	6801      	ldr	r1, [r0, #0]
+   12486:	f021 5100 	bic.w	r1, r1, #536870912	@ 0x20000000
+   1248a:	6001      	str	r1, [r0, #0]
+   1248c:	6839      	ldr	r1, [r7, #0]
+   1248e:	f021 7100 	bic.w	r1, r1, #33554432	@ 0x2000000
+   12492:	6039      	str	r1, [r7, #0]
+   12494:	6801      	ldr	r1, [r0, #0]
+   12496:	2900      	cmp	r1, #0
+   12498:	d428      	bmi.n	124ec <opencfw_bl_clock_request_id6+0x2e4>
+   1249a:	f3ef 8b10 	mrs	fp, PRIMASK
+   1249e:	b672      	cpsid	i
+   124a0:	6801      	ldr	r1, [r0, #0]
+   124a2:	f240 12b0 	movw	r2, #432	@ 0x1b0
+   124a6:	f041 4100 	orr.w	r1, r1, #2147483648	@ 0x80000000
+   124aa:	6001      	str	r1, [r0, #0]
+   124ac:	6801      	ldr	r1, [r0, #0]
+   124ae:	f2c4 0202 	movt	r2, #16386	@ 0x4002
+   124b2:	f041 4180 	orr.w	r1, r1, #1073741824	@ 0x40000000
+   124b6:	6001      	str	r1, [r0, #0]
+   124b8:	f64f 605c 	movw	r0, #65116	@ 0xfe5c
+   124bc:	f6cf 70ff 	movt	r0, #65535	@ 0xffff
+   124c0:	5810      	ldr	r0, [r2, r0]
+   124c2:	f000 00fe 	and.w	r0, r0, #254	@ 0xfe
+   124c6:	2822      	cmp	r0, #34	@ 0x22
+   124c8:	d30e      	bcc.n	124e8 <opencfw_bl_clock_request_id6+0x2e0>
+   124ca:	2001      	movs	r0, #1
+   124cc:	f7ff fb30 	bl	11b30 <opencfw_bl_delay_us>
+   124d0:	f240 11b0 	movw	r1, #432	@ 0x1b0
+   124d4:	f2c4 0102 	movt	r1, #16386	@ 0x4002
+   124d8:	6808      	ldr	r0, [r1, #0]
+   124da:	f247 0c3c 	movw	ip, #28732	@ 0x703c
+   124de:	f2c2 0c02 	movt	ip, #8194	@ 0x2002
+   124e2:	f440 1000 	orr.w	r0, r0, #2097152	@ 0x200000
+   124e6:	6008      	str	r0, [r1, #0]
+   124e8:	f38b 8810 	msr	PRIMASK, fp
+   124ec:	6838      	ldr	r0, [r7, #0]
+   124ee:	f020 7080 	bic.w	r0, r0, #16777216	@ 0x1000000
+   124f2:	6038      	str	r0, [r7, #0]
+   124f4:	2700      	movs	r7, #0
+   124f6:	f8cc 7000 	str.w	r7, [ip]
+   124fa:	b91c      	cbnz	r4, 12504 <opencfw_bl_clock_request_id6+0x2fc>
+   124fc:	e066      	b.n	125cc <opencfw_bl_clock_request_id6+0x3c4>
+   124fe:	2700      	movs	r7, #0
+   12500:	2c00      	cmp	r4, #0
+   12502:	d063      	beq.n	125cc <opencfw_bl_clock_request_id6+0x3c4>
+   12504:	f858 0009 	ldr.w	r0, [r8, r9]
+   12508:	ea20 000a 	bic.w	r0, r0, sl
+   1250c:	f848 0009 	str.w	r0, [r8, r9]
+   12510:	f386 8810 	msr	PRIMASK, r6
+   12514:	b135      	cbz	r5, 12524 <opencfw_bl_clock_request_id6+0x31c>
+   12516:	b314      	cbz	r4, 1255e <opencfw_bl_clock_request_id6+0x356>
+   12518:	2035      	movs	r0, #53	@ 0x35
+   1251a:	f7ff faa1 	bl	11a60 <opencfw_bl_clock_release_id2>
+   1251e:	2035      	movs	r0, #53	@ 0x35
+   12520:	f7ff f806 	bl	11530 <opencfw_bl_clock_release_id3>
+   12524:	2f00      	cmp	r7, #0
+   12526:	f43f ae85 	beq.w	12234 <opencfw_bl_clock_request_id6+0x2c>
+   1252a:	f247 003c 	movw	r0, #28732	@ 0x703c
+   1252e:	f2c2 0002 	movt	r0, #8194	@ 0x2002
+   12532:	6800      	ldr	r0, [r0, #0]
+   12534:	b188      	cbz	r0, 1255a <opencfw_bl_clock_request_id6+0x352>
+   12536:	6800      	ldr	r0, [r0, #0]
+   12538:	f644 4130 	movw	r1, #19504	@ 0x4c30
+   1253c:	f020 407e 	bic.w	r0, r0, #4261412864	@ 0xfe000000
+   12540:	f2c0 1150 	movt	r1, #336	@ 0x150
+   12544:	4288      	cmp	r0, r1
+   12546:	d108      	bne.n	1255a <opencfw_bl_clock_request_id6+0x352>
+   12548:	f240 45d8 	movw	r5, #1240	@ 0x4d8
+   1254c:	f2c4 0502 	movt	r5, #16386	@ 0x4002
+   12550:	6828      	ldr	r0, [r5, #0]
+   12552:	0080      	lsls	r0, r0, #2
+   12554:	d40c      	bmi.n	12570 <opencfw_bl_clock_request_id6+0x368>
+   12556:	2407      	movs	r4, #7
+   12558:	e66c      	b.n	12234 <opencfw_bl_clock_request_id6+0x2c>
+   1255a:	2402      	movs	r4, #2
+   1255c:	e66a      	b.n	12234 <opencfw_bl_clock_request_id6+0x2c>
+   1255e:	9800      	ldr	r0, [sp, #0]
+   12560:	2800      	cmp	r0, #0
+   12562:	d0dc      	beq.n	1251e <opencfw_bl_clock_request_id6+0x316>
+   12564:	2035      	movs	r0, #53	@ 0x35
+   12566:	f7ff fa7b 	bl	11a60 <opencfw_bl_clock_release_id2>
+   1256a:	2f00      	cmp	r7, #0
+   1256c:	d1dd      	bne.n	1252a <opencfw_bl_clock_request_id6+0x322>
+   1256e:	e661      	b.n	12234 <opencfw_bl_clock_request_id6+0x2c>
+   12570:	6828      	ldr	r0, [r5, #0]
+   12572:	68a9      	ldr	r1, [r5, #8]
+   12574:	68ea      	ldr	r2, [r5, #12]
+   12576:	07d2      	lsls	r2, r2, #31
+   12578:	f47f ae5b 	bne.w	12232 <opencfw_bl_clock_request_id6+0x2a>
+   1257c:	f011 013f 	ands.w	r1, r1, #63	@ 0x3f
+   12580:	d019      	beq.n	125b6 <opencfw_bl_clock_request_id6+0x3ae>
+   12582:	0580      	lsls	r0, r0, #22
+   12584:	f240 7053 	movw	r0, #1875	@ 0x753
+   12588:	bf58      	it	pl
+   1258a:	f44f 707a 	movpl.w	r0, #1000	@ 0x3e8
+   1258e:	220b      	movs	r2, #11
+   12590:	fb10 2001 	smlabb	r0, r0, r1, r2
+   12594:	f245 5156 	movw	r1, #21846	@ 0x5556
+   12598:	f2c1 5155 	movt	r1, #5461	@ 0x1555
+   1259c:	fba0 0601 	umull	r0, r6, r0, r1
+   125a0:	2404      	movs	r4, #4
+   125a2:	2001      	movs	r0, #1
+   125a4:	f7ff fac4 	bl	11b30 <opencfw_bl_delay_us>
+   125a8:	68e8      	ldr	r0, [r5, #12]
+   125aa:	07c0      	lsls	r0, r0, #31
+   125ac:	f47f ae41 	bne.w	12232 <opencfw_bl_clock_request_id6+0x2a>
+   125b0:	3e01      	subs	r6, #1
+   125b2:	d1f6      	bne.n	125a2 <opencfw_bl_clock_request_id6+0x39a>
+   125b4:	e63e      	b.n	12234 <opencfw_bl_clock_request_id6+0x2c>
+   125b6:	2404      	movs	r4, #4
+   125b8:	e63c      	b.n	12234 <opencfw_bl_clock_request_id6+0x2c>
+   125ba:	2407      	movs	r4, #7
+   125bc:	e727      	b.n	1240e <opencfw_bl_clock_request_id6+0x206>
+   125be:	2407      	movs	r4, #7
+   125c0:	2c00      	cmp	r4, #0
+   125c2:	f47f af50 	bne.w	12466 <opencfw_bl_clock_request_id6+0x25e>
+   125c6:	2701      	movs	r7, #1
+   125c8:	2c00      	cmp	r4, #0
+   125ca:	d19b      	bne.n	12504 <opencfw_bl_clock_request_id6+0x2fc>
+   125cc:	2400      	movs	r4, #0
+   125ce:	e79f      	b.n	12510 <opencfw_bl_clock_request_id6+0x308>
+   125d0:	f81c 2c33 	ldrb.w	r2, [ip, #-51]
+   125d4:	2406      	movs	r4, #6
+   125d6:	2a07      	cmp	r2, #7
+   125d8:	bf98      	it	ls
+   125da:	4282      	cmpls	r2, r0
+   125dc:	f63f af17 	bhi.w	1240e <opencfw_bl_clock_request_id6+0x206>
+   125e0:	f240 40d8 	movw	r0, #1240	@ 0x4d8
+   125e4:	f2c4 0002 	movt	r0, #16386	@ 0x4002
+   125e8:	6802      	ldr	r2, [r0, #0]
+   125ea:	f81c 3c37 	ldrb.w	r3, [ip, #-55]
+   125ee:	f422 7200 	bic.w	r2, r2, #512	@ 0x200
+   125f2:	f003 0301 	and.w	r3, r3, #1
+   125f6:	ea42 2243 	orr.w	r2, r2, r3, lsl #9
+   125fa:	6002      	str	r2, [r0, #0]
+   125fc:	6802      	ldr	r2, [r0, #0]
+   125fe:	f89b 3000 	ldrb.w	r3, [fp]
+   12602:	f36f 311f 	bfc	r1, #12, #20
+   12606:	f363 1245 	bfi	r2, r3, #5, #1
+   1260a:	6002      	str	r2, [r0, #0]
+   1260c:	6802      	ldr	r2, [r0, #0]
+   1260e:	f81c 3c36 	ldrb.w	r3, [ip, #-54]
+   12612:	2400      	movs	r4, #0
+   12614:	f363 02c3 	bfi	r2, r3, #3, #1
+   12618:	6002      	str	r2, [r0, #0]
+   1261a:	f85c 2c30 	ldr.w	r2, [ip, #-48]
+   1261e:	6843      	ldr	r3, [r0, #4]
+   12620:	f362 0317 	bfi	r3, r2, #0, #24
+   12624:	6043      	str	r3, [r0, #4]
+   12626:	6882      	ldr	r2, [r0, #8]
+   12628:	f36f 421b 	bfc	r2, #16, #12
+   1262c:	ea42 4101 	orr.w	r1, r2, r1, lsl #16
+   12630:	6081      	str	r1, [r0, #8]
+   12632:	f81c 1c35 	ldrb.w	r1, [ip, #-53]
+   12636:	6882      	ldr	r2, [r0, #8]
+   12638:	f361 0205 	bfi	r2, r1, #0, #6
+   1263c:	6082      	str	r2, [r0, #8]
+   1263e:	6881      	ldr	r1, [r0, #8]
+   12640:	f81c 2c34 	ldrb.w	r2, [ip, #-52]
+   12644:	f421 41e0 	bic.w	r1, r1, #28672	@ 0x7000
+   12648:	f002 0207 	and.w	r2, r2, #7
+   1264c:	ea41 3102 	orr.w	r1, r1, r2, lsl #12
+   12650:	6081      	str	r1, [r0, #8]
+   12652:	6881      	ldr	r1, [r0, #8]
+   12654:	f81c 2c33 	ldrb.w	r2, [ip, #-51]
+   12658:	f421 61e0 	bic.w	r1, r1, #1792	@ 0x700
+   1265c:	f002 0207 	and.w	r2, r2, #7
+   12660:	ea41 2102 	orr.w	r1, r1, r2, lsl #8
+   12664:	6081      	str	r1, [r0, #8]
+   12666:	f648 0258 	movw	r2, #34904	@ 0x8858
+   1266a:	f3ef 8110 	mrs	r1, PRIMASK
+   1266e:	b672      	cpsid	i
+   12670:	f2c4 0200 	movt	r2, #16384	@ 0x4000
+   12674:	6813      	ldr	r3, [r2, #0]
+   12676:	f89b 7000 	ldrb.w	r7, [fp]
+   1267a:	f367 1386 	bfi	r3, r7, #6, #1
+   1267e:	6013      	str	r3, [r2, #0]
+   12680:	f381 8810 	msr	PRIMASK, r1
+   12684:	6801      	ldr	r1, [r0, #0]
+   12686:	f021 0110 	bic.w	r1, r1, #16
+   1268a:	6001      	str	r1, [r0, #0]
+   1268c:	6801      	ldr	r1, [r0, #0]
+   1268e:	f041 0101 	orr.w	r1, r1, #1
+   12692:	6001      	str	r1, [r0, #0]
+   12694:	6801      	ldr	r1, [r0, #0]
+   12696:	f021 0102 	bic.w	r1, r1, #2
+   1269a:	6001      	str	r1, [r0, #0]
+   1269c:	6801      	ldr	r1, [r0, #0]
+   1269e:	f021 0104 	bic.w	r1, r1, #4
+   126a2:	6001      	str	r1, [r0, #0]
+   126a4:	e6b3      	b.n	1240e <opencfw_bl_clock_request_id6+0x206>
+	...
+
+000126a8 <opencfw_bl_clock_release_id6>:
+   126a8:	e92d 47f0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, lr}
+   126ac:	f646 65a4 	movw	r5, #28324	@ 0x6ea4
+   126b0:	f2c2 0502 	movt	r5, #8194	@ 0x2002
+   126b4:	f3c0 1142 	ubfx	r1, r0, #5, #3
+   126b8:	f855 2021 	ldr.w	r2, [r5, r1, lsl #2]
+   126bc:	f000 011f 	and.w	r1, r0, #31
+   126c0:	2301      	movs	r3, #1
+   126c2:	fa03 f101 	lsl.w	r1, r3, r1
+   126c6:	420a      	tst	r2, r1
+   126c8:	f000 808d 	beq.w	127e6 <opencfw_bl_clock_release_id6+0x13e>
+   126cc:	221c      	movs	r2, #28
+   126ce:	ea02 00d0 	and.w	r0, r2, r0, lsr #3
+   126d2:	f3ef 8a10 	mrs	sl, PRIMASK
+   126d6:	b672      	cpsid	i
+   126d8:	5942      	ldr	r2, [r0, r5]
+   126da:	f04f 3301 	mov.w	r3, #16843009	@ 0x1010101
+   126de:	ea22 0101 	bic.w	r1, r2, r1
+   126e2:	5141      	str	r1, [r0, r5]
+   126e4:	2000      	movs	r0, #0
+   126e6:	f04f 3155 	mov.w	r1, #1431655765	@ 0x55555555
+   126ea:	f04f 3233 	mov.w	r2, #858993459	@ 0x33333333
+   126ee:	2700      	movs	r7, #0
+   126f0:	f855 6027 	ldr.w	r6, [r5, r7, lsl #2]
+   126f4:	3701      	adds	r7, #1
+   126f6:	ea01 0456 	and.w	r4, r1, r6, lsr #1
+   126fa:	1b36      	subs	r6, r6, r4
+   126fc:	f026 34cc 	bic.w	r4, r6, #3435973836	@ 0xcccccccc
+   12700:	ea02 0696 	and.w	r6, r2, r6, lsr #2
+   12704:	4426      	add	r6, r4
+   12706:	eb06 1616 	add.w	r6, r6, r6, lsr #4
+   1270a:	f026 36f0 	bic.w	r6, r6, #4042322160	@ 0xf0f0f0f0
+   1270e:	fb06 f603 	mul.w	r6, r6, r3
+   12712:	2f01      	cmp	r7, #1
+   12714:	eb00 6016 	add.w	r0, r0, r6, lsr #24
+   12718:	d0ea      	beq.n	126f0 <opencfw_bl_clock_release_id6+0x48>
+   1271a:	2800      	cmp	r0, #0
+   1271c:	d161      	bne.n	127e2 <opencfw_bl_clock_release_id6+0x13a>
+   1271e:	2600      	movs	r6, #0
+   12720:	f885 62fc 	strb.w	r6, [r5, #764]	@ 0x2fc
+   12724:	f8d5 7198 	ldr.w	r7, [r5, #408]	@ 0x198
+   12728:	2f00      	cmp	r7, #0
+   1272a:	d04e      	beq.n	127ca <opencfw_bl_clock_release_id6+0x122>
+   1272c:	6838      	ldr	r0, [r7, #0]
+   1272e:	f644 4130 	movw	r1, #19504	@ 0x4c30
+   12732:	f2c0 1150 	movt	r1, #336	@ 0x150
+   12736:	f020 407e 	bic.w	r0, r0, #4261412864	@ 0xfe000000
+   1273a:	4288      	cmp	r0, r1
+   1273c:	f240 40d8 	movw	r0, #1240	@ 0x4d8
+   12740:	f2c4 0002 	movt	r0, #16386	@ 0x4002
+   12744:	d107      	bne.n	12756 <opencfw_bl_clock_release_id6+0xae>
+   12746:	6802      	ldr	r2, [r0, #0]
+   12748:	f022 5200 	bic.w	r2, r2, #536870912	@ 0x20000000
+   1274c:	6002      	str	r2, [r0, #0]
+   1274e:	683a      	ldr	r2, [r7, #0]
+   12750:	f022 7200 	bic.w	r2, r2, #33554432	@ 0x2000000
+   12754:	603a      	str	r2, [r7, #0]
+   12756:	683a      	ldr	r2, [r7, #0]
+   12758:	f022 437e 	bic.w	r3, r2, #4261412864	@ 0xfe000000
+   1275c:	428b      	cmp	r3, r1
+   1275e:	d134      	bne.n	127ca <opencfw_bl_clock_release_id6+0x122>
+   12760:	0191      	lsls	r1, r2, #6
+   12762:	d507      	bpl.n	12774 <opencfw_bl_clock_release_id6+0xcc>
+   12764:	6801      	ldr	r1, [r0, #0]
+   12766:	f021 5100 	bic.w	r1, r1, #536870912	@ 0x20000000
+   1276a:	6001      	str	r1, [r0, #0]
+   1276c:	6839      	ldr	r1, [r7, #0]
+   1276e:	f021 7100 	bic.w	r1, r1, #33554432	@ 0x2000000
+   12772:	6039      	str	r1, [r7, #0]
+   12774:	6801      	ldr	r1, [r0, #0]
+   12776:	2900      	cmp	r1, #0
+   12778:	d423      	bmi.n	127c2 <opencfw_bl_clock_release_id6+0x11a>
+   1277a:	f3ef 8810 	mrs	r8, PRIMASK
+   1277e:	b672      	cpsid	i
+   12780:	6801      	ldr	r1, [r0, #0]
+   12782:	f240 19b0 	movw	r9, #432	@ 0x1b0
+   12786:	f041 4100 	orr.w	r1, r1, #2147483648	@ 0x80000000
+   1278a:	6001      	str	r1, [r0, #0]
+   1278c:	6801      	ldr	r1, [r0, #0]
+   1278e:	f2c4 0902 	movt	r9, #16386	@ 0x4002
+   12792:	f041 4180 	orr.w	r1, r1, #1073741824	@ 0x40000000
+   12796:	6001      	str	r1, [r0, #0]
+   12798:	f64f 605c 	movw	r0, #65116	@ 0xfe5c
+   1279c:	f6cf 70ff 	movt	r0, #65535	@ 0xffff
+   127a0:	f859 0000 	ldr.w	r0, [r9, r0]
+   127a4:	f000 00fe 	and.w	r0, r0, #254	@ 0xfe
+   127a8:	2822      	cmp	r0, #34	@ 0x22
+   127aa:	d308      	bcc.n	127be <opencfw_bl_clock_release_id6+0x116>
+   127ac:	2001      	movs	r0, #1
+   127ae:	f7ff f9bf 	bl	11b30 <opencfw_bl_delay_us>
+   127b2:	f8d9 0000 	ldr.w	r0, [r9]
+   127b6:	f440 1000 	orr.w	r0, r0, #2097152	@ 0x200000
+   127ba:	f8c9 0000 	str.w	r0, [r9]
+   127be:	f388 8810 	msr	PRIMASK, r8
+   127c2:	6838      	ldr	r0, [r7, #0]
+   127c4:	f020 7080 	bic.w	r0, r0, #16777216	@ 0x1000000
+   127c8:	6038      	str	r0, [r7, #0]
+   127ca:	f8c5 6198 	str.w	r6, [r5, #408]	@ 0x198
+   127ce:	f895 0160 	ldrb.w	r0, [r5, #352]	@ 0x160
+   127d2:	b118      	cbz	r0, 127dc <opencfw_bl_clock_release_id6+0x134>
+   127d4:	2035      	movs	r0, #53	@ 0x35
+   127d6:	f7fe feab 	bl	11530 <opencfw_bl_clock_release_id3>
+   127da:	e002      	b.n	127e2 <opencfw_bl_clock_release_id6+0x13a>
+   127dc:	2035      	movs	r0, #53	@ 0x35
+   127de:	f7ff f93f 	bl	11a60 <opencfw_bl_clock_release_id2>
+   127e2:	f38a 8810 	msr	PRIMASK, sl
+   127e6:	2000      	movs	r0, #0
+   127e8:	e8bd 87f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, sl, pc}
+
+000127ec <opencfw_boot_syspll_power_initialize_for_clockmux>:
+   127ec:	b510      	push	{r4, lr}
+   127ee:	f240 10b0 	movw	r0, #432	@ 0x1b0
+   127f2:	f64f 615c 	movw	r1, #65116	@ 0xfe5c
+   127f6:	f2c4 0002 	movt	r0, #16386	@ 0x4002
+   127fa:	f3ef 8410 	mrs	r4, PRIMASK
+   127fe:	b672      	cpsid	i
+   12800:	f6cf 71ff 	movt	r1, #65535	@ 0xffff
+   12804:	5841      	ldr	r1, [r0, r1]
+   12806:	f001 01fe 	and.w	r1, r1, #254	@ 0xfe
+   1280a:	2922      	cmp	r1, #34	@ 0x22
+   1280c:	d306      	bcc.n	1281c <opencfw_boot_syspll_power_initialize_for_clockmux+0x30>
+   1280e:	6801      	ldr	r1, [r0, #0]
+   12810:	f421 1100 	bic.w	r1, r1, #2097152	@ 0x200000
+   12814:	6001      	str	r1, [r0, #0]
+   12816:	2001      	movs	r0, #1
+   12818:	f7ff f98a 	bl	11b30 <opencfw_bl_delay_us>
+   1281c:	f240 40d8 	movw	r0, #1240	@ 0x4d8
+   12820:	f2c4 0002 	movt	r0, #16386	@ 0x4002
+   12824:	6801      	ldr	r1, [r0, #0]
+   12826:	f021 4100 	bic.w	r1, r1, #2147483648	@ 0x80000000
+   1282a:	6001      	str	r1, [r0, #0]
+   1282c:	6801      	ldr	r1, [r0, #0]
+   1282e:	f021 4180 	bic.w	r1, r1, #1073741824	@ 0x40000000
+   12832:	6001      	str	r1, [r0, #0]
+   12834:	f384 8810 	msr	PRIMASK, r4
+   12838:	2005      	movs	r0, #5
+   1283a:	e8bd 4010 	ldmia.w	sp!, {r4, lr}
+   1283e:	f7ff b977 	b.w	11b30 <opencfw_bl_delay_us>
+	...
+
+00012844 <opencfw_boot_syspll_power_restore_for_clockmux>:
+   12844:	b5b0      	push	{r4, r5, r7, lr}
+   12846:	f240 40d8 	movw	r0, #1240	@ 0x4d8
+   1284a:	f3ef 8410 	mrs	r4, PRIMASK
+   1284e:	b672      	cpsid	i
+   12850:	f2c4 0002 	movt	r0, #16386	@ 0x4002
+   12854:	6801      	ldr	r1, [r0, #0]
+   12856:	f240 15b0 	movw	r5, #432	@ 0x1b0
+   1285a:	f041 4100 	orr.w	r1, r1, #2147483648	@ 0x80000000
+   1285e:	6001      	str	r1, [r0, #0]
+   12860:	6801      	ldr	r1, [r0, #0]
+   12862:	f2c4 0502 	movt	r5, #16386	@ 0x4002
+   12866:	f041 4180 	orr.w	r1, r1, #1073741824	@ 0x40000000
+   1286a:	6001      	str	r1, [r0, #0]
+   1286c:	f64f 605c 	movw	r0, #65116	@ 0xfe5c
+   12870:	f6cf 70ff 	movt	r0, #65535	@ 0xffff
+   12874:	5828      	ldr	r0, [r5, r0]
+   12876:	f000 00fe 	and.w	r0, r0, #254	@ 0xfe
+   1287a:	2822      	cmp	r0, #34	@ 0x22
+   1287c:	d306      	bcc.n	1288c <opencfw_boot_syspll_power_restore_for_clockmux+0x48>
+   1287e:	2001      	movs	r0, #1
+   12880:	f7ff f956 	bl	11b30 <opencfw_bl_delay_us>
+   12884:	6828      	ldr	r0, [r5, #0]
+   12886:	f440 1000 	orr.w	r0, r0, #2097152	@ 0x200000
+   1288a:	6028      	str	r0, [r5, #0]
+   1288c:	f384 8810 	msr	PRIMASK, r4
+   12890:	bdb0      	pop	{r4, r5, r7, pc}
+	...
+
+00012894 <register_allowed_mode>:
+   12894:	00000000 			@ <UNDEFINED> instruction: 00000000
+   12898:	00003fe0 			@ <UNDEFINED> instruction: 00003fe0
+   1289c:	000003ff 	strdeq	r0, [r0], -pc	@ <UNPREDICTABLE>
+   128a0:	1ffbfe00 			@ <UNDEFINED> instruction: 1ffbfe00
+   128a4:	0007c000 			@ <UNDEFINED> instruction: 0007c000
+	...
+
+000128b0 <register_nonstandard_allowed>:
+   128b0:	8fc007e6 			@ <UNDEFINED> instruction: 8fc007e6
+   128b4:	e3f3ffff 			@ <UNDEFINED> instruction: e3f3ffff
+   128b8:	81ffffff 			@ <UNDEFINED> instruction: 81ffffff
+   128bc:	ffffffff 			@ <UNDEFINED> instruction: ffffffff
+   128c0:	f00fc07f 			@ <UNDEFINED> instruction: f00fc07f
+   128c4:	00000001 			@ <UNDEFINED> instruction: 00000001
+   128c8:	00000189 			@ <UNDEFINED> instruction: 00000189
+
+Disassembly of section .ARM.exidx.text.opencfw_boot_spot_state_power_event:
+
+000128cc <.ARM.exidx.text.opencfw_boot_spot_state_power_event>:
+   128cc:	7fffd734 			@ <UNDEFINED> instruction: 7fffd734
+   128d0:	00000001 			@ <UNDEFINED> instruction: 00000001
+
+Disassembly of section .comment:
+
+00000000 <.comment>:
+   0:	6c707041 			@ <UNDEFINED> instruction: 6c707041
+   4:	6c632065 			@ <UNDEFINED> instruction: 6c632065
+   8:	20676e61 			@ <UNDEFINED> instruction: 20676e61
+   c:	73726576 			@ <UNDEFINED> instruction: 73726576
+  10:	206e6f69 			@ <UNDEFINED> instruction: 206e6f69
+  14:	302e3132 			@ <UNDEFINED> instruction: 302e3132
+  18:	2820302e 			@ <UNDEFINED> instruction: 2820302e
+  1c:	6e616c63 			@ <UNDEFINED> instruction: 6e616c63
+  20:	31322d67 			@ <UNDEFINED> instruction: 31322d67
+  24:	332e3030 			@ <UNDEFINED> instruction: 332e3030
+  28:	2e34332e 			@ <UNDEFINED> instruction: 2e34332e
+  2c:	Address 0x2c is out of bounds.
+
+
+Disassembly of section .ARM.attributes:
+
+00000000 <.ARM.attributes>:
+   0:	00003d41 			@ <UNDEFINED> instruction: 00003d41
+   4:	61656100 			@ <UNDEFINED> instruction: 61656100
+   8:	01006962 			@ <UNDEFINED> instruction: 01006962
+   c:	00000033 			@ <UNDEFINED> instruction: 00000033
+  10:	726f6305 			@ <UNDEFINED> instruction: 726f6305
+  14:	2d786574 			@ <UNDEFINED> instruction: 2d786574
+  18:	0033336d 			@ <UNDEFINED> instruction: 0033336d
+  1c:	4d071106 			@ <UNDEFINED> instruction: 4d071106
+  20:	080a0309 			@ <UNDEFINED> instruction: 080a0309
+  24:	04120111 			@ <UNDEFINED> instruction: 04120111
+  28:	03170114 			@ <UNDEFINED> instruction: 03170114
+  2c:	021a0118 			@ <UNDEFINED> instruction: 021a0118
+  30:	011c011b 			@ <UNDEFINED> instruction: 011c011b
+  34:	0122011e 			@ <UNDEFINED> instruction: 0122011e
+  38:	01260124 			@ <UNDEFINED> instruction: 01260124
+  3c:	Address 0x3c is out of bounds.
+

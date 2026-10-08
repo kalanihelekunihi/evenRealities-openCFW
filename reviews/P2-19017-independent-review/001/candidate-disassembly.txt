@@ -1,0 +1,45 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpfoc6ubbf/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+004684f6 <.text>:
+  4684f6:	0021      	movs	r1, r4
+  4684f8:	b289      	uxth	r1, r1
+  4684fa:	0028      	movs	r0, r5
+  4684fc:	f03f f9e8 	bl	4a78d0 <.text+0x3f3da>
+  468500:	2800      	cmp	r0, #0
+  468502:	d171      	bne.n	4685e8 <.text+0xf2>
+  468504:	f8df 471c 	ldr.w	r4, [pc, #1820]	@ 468c24 <.text+0x72e>
+  468508:	78a0      	ldrb	r0, [r4, #2]
+  46850a:	2802      	cmp	r0, #2
+  46850c:	f040 808e 	bne.w	46862c <.text+0x136>
+  468510:	7820      	ldrb	r0, [r4, #0]
+  468512:	2804      	cmp	r0, #4
+  468514:	d117      	bne.n	468546 <.text+0x50>
+  468516:	2000      	movs	r0, #0
+  468518:	f015 ffaa 	bl	47e470 <.text+0x15f7a>
+  46851c:	b2f6      	uxtb	r6, r6
+  46851e:	2e01      	cmp	r6, #1
+  468520:	f040 8084 	bne.w	46862c <.text+0x136>
+  468524:	f7da ffae 	bl	443484 <.text-0x25072>
+  468528:	2801      	cmp	r0, #1
+  46852a:	f040 807f 	bne.w	46862c <.text+0x136>
+  46852e:	2010      	movs	r0, #16
+  468530:	f7da ffce 	bl	4434d0 <.text-0x25026>
+  468534:	2801      	cmp	r0, #1
+  468536:	d179      	bne.n	46862c <.text+0x136>
+  468538:	2300      	movs	r3, #0
+  46853a:	2200      	movs	r2, #0
+  46853c:	2100      	movs	r1, #0
+  46853e:	2010      	movs	r0, #16
+  468540:	f7fc fb79 	bl	464c36 <.text-0x38c0>
+  468544:	e072      	b.n	46862c <.text+0x136>
+  468546:	f7da ff9d 	bl	443484 <.text-0x25072>
+  46854a:	2800      	cmp	r0, #0
+  46854c:	d004      	beq.n	468558 <.text+0x62>
+  46854e:	2010      	movs	r0, #16
+  468550:	f7da ffbe 	bl	4434d0 <.text-0x25026>
+  468554:	2801      	cmp	r0, #1
+  468556:	d02e      	beq.n	4685b6 <.text+0xc0>

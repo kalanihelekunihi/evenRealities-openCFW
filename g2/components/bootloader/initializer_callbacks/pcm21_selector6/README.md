@@ -1,0 +1,1 @@
+Separate 217-object offline successor sources. Do not link dispatcher/data copies alongside parent variants. Evidence: g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/pcm21-selector6-integrated/REPORT.md. No hardware promotion or byte-identical bundle claim.

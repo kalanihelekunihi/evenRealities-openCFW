@@ -1,0 +1,55 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpo2tnpclp/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0048306c <.text>:
+  48306c:	e92d 4ff8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, r9, sl, fp, lr}
+  483070:	0005      	movs	r5, r0
+  483072:	000e      	movs	r6, r1
+  483074:	0017      	movs	r7, r2
+  483076:	4698      	mov	r8, r3
+  483078:	9c0b      	ldr	r4, [sp, #44]	@ 0x2c
+  48307a:	f8dd 9030 	ldr.w	r9, [sp, #48]	@ 0x30
+  48307e:	f8dd a034 	ldr.w	sl, [sp, #52]	@ 0x34
+  483082:	9700      	str	r7, [sp, #0]
+  483084:	f01a 0f03 	tst.w	sl, #3
+  483088:	d10b      	bne.n	4830a2 <.text+0x36>
+  48308a:	46a3      	mov	fp, r4
+  48308c:	e007      	b.n	48309e <.text+0x32>
+  48308e:	4643      	mov	r3, r8
+  483090:	003a      	movs	r2, r7
+  483092:	0031      	movs	r1, r6
+  483094:	2020      	movs	r0, #32
+  483096:	47a8      	blx	r5
+  483098:	1c7f      	adds	r7, r7, #1
+  48309a:	f11b 0b01 	adds.w	fp, fp, #1
+  48309e:	45cb      	cmp	fp, r9
+  4830a0:	d3f5      	bcc.n	48308e <.text+0x22>
+  4830a2:	2c00      	cmp	r4, #0
+  4830a4:	d008      	beq.n	4830b8 <.text+0x4c>
+  4830a6:	1e64      	subs	r4, r4, #1
+  4830a8:	4643      	mov	r3, r8
+  4830aa:	003a      	movs	r2, r7
+  4830ac:	0031      	movs	r1, r6
+  4830ae:	980a      	ldr	r0, [sp, #40]	@ 0x28
+  4830b0:	5d00      	ldrb	r0, [r0, r4]
+  4830b2:	47a8      	blx	r5
+  4830b4:	1c7f      	adds	r7, r7, #1
+  4830b6:	e7f4      	b.n	4830a2 <.text+0x36>
+  4830b8:	ea5f 708a 	movs.w	r0, sl, lsl #30
+  4830bc:	d406      	bmi.n	4830cc <.text+0x60>
+  4830be:	e009      	b.n	4830d4 <.text+0x68>
+  4830c0:	4643      	mov	r3, r8
+  4830c2:	003a      	movs	r2, r7
+  4830c4:	0031      	movs	r1, r6
+  4830c6:	2020      	movs	r0, #32
+  4830c8:	47a8      	blx	r5
+  4830ca:	1c7f      	adds	r7, r7, #1
+  4830cc:	9800      	ldr	r0, [sp, #0]
+  4830ce:	1a38      	subs	r0, r7, r0
+  4830d0:	4548      	cmp	r0, r9
+  4830d2:	d3f5      	bcc.n	4830c0 <.text+0x54>
+  4830d4:	0038      	movs	r0, r7
+  4830d6:	e8bd 8ff2 	ldmia.w	sp!, {r1, r4, r5, r6, r7, r8, r9, sl, fp, pc}

@@ -1,0 +1,54 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmp2ueuds_3/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00482518 <.text>:
+  482518:	e92d 47fc 	stmdb	sp!, {r2, r3, r4, r5, r6, r7, r8, r9, sl, lr}
+  48251c:	4607      	mov	r7, r0
+  48251e:	468a      	mov	sl, r1
+  482520:	693c      	ldr	r4, [r7, #16]
+  482522:	4650      	mov	r0, sl
+  482524:	286f      	cmp	r0, #111	@ 0x6f
+  482526:	bf08      	it	eq
+  482528:	2508      	moveq	r5, #8
+  48252a:	d005      	beq.n	482538 <.text+0x20>
+  48252c:	f7ff f980 	bl	481830 <.text-0xce8>
+  482530:	2878      	cmp	r0, #120	@ 0x78
+  482532:	bf14      	ite	ne
+  482534:	250a      	movne	r5, #10
+  482536:	2510      	moveq	r5, #16
+  482538:	e9d7 0100 	ldrd	r0, r1, [r7]
+  48253c:	263c      	movs	r6, #60	@ 0x3c
+  48253e:	4680      	mov	r8, r0
+  482540:	4689      	mov	r9, r1
+  482542:	f1ba 0f64 	cmp.w	sl, #100	@ 0x64
+  482546:	bf18      	it	ne
+  482548:	f1ba 0f69 	cmpne.w	sl, #105	@ 0x69
+  48254c:	d105      	bne.n	48255a <.text+0x42>
+  48254e:	2900      	cmp	r1, #0
+  482550:	d503      	bpl.n	48255a <.text+0x42>
+  482552:	f1d8 0800 	rsbs	r8, r8, #0
+  482556:	eb69 0949 	sbc.w	r9, r9, r9, lsl #1
+  48255a:	f1b9 0f00 	cmp.w	r9, #0
+  48255e:	bf08      	it	eq
+  482560:	f1b8 0f00 	cmpeq.w	r8, #0
+  482564:	d10c      	bne.n	482580 <.text+0x68>
+  482566:	6b38      	ldr	r0, [r7, #48]	@ 0x30
+  482568:	b950      	cbnz	r0, 482580 <.text+0x68>
+  48256a:	2d08      	cmp	r5, #8
+  48256c:	d13a      	bne.n	4825e4 <.text+0xcc>
+  48256e:	f897 0038 	ldrb.w	r0, [r7, #56]	@ 0x38
+  482572:	0701      	lsls	r1, r0, #28
+  482574:	d536      	bpl.n	4825e4 <.text+0xcc>
+  482576:	2230      	movs	r2, #48	@ 0x30
+  482578:	263b      	movs	r6, #59	@ 0x3b
+  48257a:	f884 203b 	strb.w	r2, [r4, #59]	@ 0x3b
+  48257e:	e031      	b.n	4825e4 <.text+0xcc>
+  482580:	f88d a000 	strb.w	sl, [sp]
+  482584:	4640      	mov	r0, r8
+  482586:	4649      	mov	r1, r9
+  482588:	462a      	mov	r2, r5
+  48258a:	17eb      	asrs	r3, r5, #31
+  48258c:	f7fa fb68 	bl	47cc60 <.text-0x58b8>

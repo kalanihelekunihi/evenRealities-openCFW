@@ -1,0 +1,93 @@
+{
+  "scanned_at_utc": "2026-10-07T09:28:25.822592+00:00",
+  "baseline": "2026-10-07T05:42:33.672125+00:00",
+  "sdk_inventory": {
+    "Ambiq": {
+      "path": "third-party/local-vendor/sources/AmbiqSuite_R3.2.0",
+      "files": 7903,
+      ".c": 1011,
+      ".h": 794,
+      ".a": 26,
+      ".elf": 0,
+      ".map": 0,
+      "file_count_delta": 0
+    },
+    "EM": {
+      "path": "third-party/local-vendor/sources/em9305-v4.6/EM9305_SDK/EM9305_EM_BLEU_SDK_v4.6",
+      "files": 7437,
+      ".c": 238,
+      ".h": 1235,
+      ".a": 109,
+      ".elf": 6,
+      ".map": 0,
+      "file_count_delta": 0
+    },
+    "IAR": {
+      "path": "third-party/local-vendor/toolchains/iar-linux-x86_64/cxarm-10.10.2",
+      "files": 2405,
+      ".c": 29,
+      ".h": 939,
+      ".a": 675,
+      ".elf": 0,
+      ".map": 0,
+      "file_count_delta": 0
+    }
+  },
+  "source_inventory": {
+    "g2/components": {
+      "files": 366,
+      "extensions": {
+        ".h": 139,
+        ".c": 208,
+        ".S": 19
+      }
+    },
+    "r1": {
+      "files": 43,
+      "extensions": {
+        ".h": 22,
+        ".c": 21
+      }
+    }
+  },
+  "git": {
+    "staged": {
+      "files": 1330,
+      "c_or_header": 64
+    },
+    "unstaged": {
+      "files": 16,
+      "c_or_header": 3
+    },
+    "untracked": {
+      "files": 4408,
+      "c_or_header": 140
+    }
+  },
+  "nested_ignore_files": [
+    "g2/analysis/shortcut-batch-2026-10-05/resources/.gitignore"
+  ],
+  "global_excludes": null,
+  "info_exclude_active_rules": [],
+  "candidate_receipts": {
+    "comparison.json": {
+      "status": "PASS",
+      "elf_sha256": "761be47077105549cc3ae0688ec5b27b3c850bf49b51011135e8f76192ddbd30",
+      "cases": 2
+    },
+    "failures.json": {
+      "status": "PASS",
+      "elf_sha256": "761be47077105549cc3ae0688ec5b27b3c850bf49b51011135e8f76192ddbd30",
+      "cases": 3
+    },
+    "powerloss.json": {
+      "present": false
+    }
+  },
+  "startup_power_config": {
+    "status": "PASS",
+    "cases": 697,
+    "elf_sha256": "761be47077105549cc3ae0688ec5b27b3c850bf49b51011135e8f76192ddbd30",
+    "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5"
+  }
+}

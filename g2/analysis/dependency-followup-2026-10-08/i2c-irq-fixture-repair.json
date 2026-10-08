@@ -1,0 +1,16 @@
+{
+  "error": "Initial fixture reversed HS/RX helper addresses while reading branch order; existing touch catalogue/decompilation already correctly identify HS9344 and receive9748.",
+  "first_failure": {
+    "inputs": [
+      0,
+      0,
+      1,
+      false,
+      0,
+      0
+    ],
+    "actual_stock_entry": "0x9748",
+    "incorrect_label": "SlaveHandleHsMode"
+  },
+  "repair": "Correct only the fixture child label mapping, validated against catalogue and both individual callee decompilations; public/stock code unchanged."
+}

@@ -1,0 +1,3 @@
+# Node allocation and opposite-endpoint link sequence
+
+Partial/unaccepted;68 instructionbytes482BCA..482C0E. PUSH{R3,R4,R5,LR}16bytes;R5=entryR0descriptor;freshword[R5]→R0,add8mod2^32;call44F718 liveR1/R2/R3. R4=returnedR0;zero skipsalllinkwrites andreturns0. NonzeroR2=0,R1=R4,R0=R5,call482DC2 liveR3. Freshword[R5+8]→R2,R1=currentR4,R0=currentR5,call482DAE liveR3. Freshword[R5+8]→R0;nonzero independentlyreload[R5+8]→R1,R2=R4,R0=R5,call482DC2 liveR3. BothpathsstoreR4 at[R5+8],thenfreshword[R5+4]→R0;zero storesR4 at[R5+4],nonzero retains. R0=R4,POP{R1,R4,R5,PC}16bytes;R1=savedentryR3. No descriptornullguard or allocation/linkcontractassumption. Preserve ordered freshendpointreads,callclobberboundaries and endpointstoreorder. No C,freeze,wholecoverage or equalityclaim.

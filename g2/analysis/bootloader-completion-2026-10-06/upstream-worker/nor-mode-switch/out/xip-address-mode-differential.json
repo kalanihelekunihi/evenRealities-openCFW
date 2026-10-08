@@ -1,0 +1,1084 @@
+{
+  "status": "PASS",
+  "cases": 15,
+  "comparisons": [
+    {
+      "case": "address_mode_handle",
+      "function": "420890",
+      "arguments": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "fixture": {
+        "handle": 0
+      },
+      "result": {
+        "return": 2,
+        "events": [],
+        "sp": 537063424,
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "address_mode_handle",
+      "function": "420890",
+      "arguments": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "fixture": {
+        "handle": 536895488
+      },
+      "result": {
+        "return": 1,
+        "events": [
+          [
+            "delay",
+            0
+          ],
+          [
+            "wren",
+            0
+          ],
+          [
+            "command",
+            183,
+            0,
+            0,
+            0,
+            0,
+            "",
+            0
+          ],
+          [
+            "delay",
+            0
+          ],
+          [
+            "read",
+            21,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mx25u25643g_is_4byte_mode",
+            952,
+            "43G is 3byte device address mode\n"
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mx25u25643g_enter_4byte_mode",
+            990,
+            "Failed to verify 4-byte mode\n"
+          ]
+        ],
+        "sp": 537063424,
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "first_delay_error",
+      "function": "420890",
+      "arguments": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "fixture": {
+        "delays": [
+          8
+        ]
+      },
+      "result": {
+        "return": 3,
+        "events": [
+          [
+            "delay",
+            8
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mx25u25643g_enter_4byte_mode",
+            968,
+            "Device is busy\n"
+          ]
+        ],
+        "sp": 537063424,
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "wren_error",
+      "function": "420890",
+      "arguments": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "fixture": {
+        "wren_status": 6
+      },
+      "result": {
+        "return": 6,
+        "events": [
+          [
+            "delay",
+            0
+          ],
+          [
+            "wren",
+            6
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mx25u25643g_enter_4byte_mode",
+            975,
+            "Write enable failed before entering 4-byte mode\n"
+          ]
+        ],
+        "sp": 537063424,
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "b7_command_error",
+      "function": "420890",
+      "arguments": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "fixture": {
+        "command_status": 7
+      },
+      "result": {
+        "return": 7,
+        "events": [
+          [
+            "delay",
+            0
+          ],
+          [
+            "wren",
+            0
+          ],
+          [
+            "command",
+            183,
+            0,
+            0,
+            0,
+            0,
+            "",
+            7
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mx25u25643g_enter_4byte_mode",
+            982,
+            "Failed to enter 4-byte mode\n"
+          ]
+        ],
+        "sp": 537063424,
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "status_read_error_treated_nonzero",
+      "function": "420890",
+      "arguments": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "fixture": {
+        "reads": [
+          [
+            9,
+            0
+          ]
+        ],
+        "wrdi_status": 4
+      },
+      "result": {
+        "return": 4,
+        "events": [
+          [
+            "delay",
+            0
+          ],
+          [
+            "wren",
+            0
+          ],
+          [
+            "command",
+            183,
+            0,
+            0,
+            0,
+            0,
+            "",
+            0
+          ],
+          [
+            "delay",
+            0
+          ],
+          [
+            "read",
+            21,
+            0,
+            0,
+            1,
+            9,
+            null
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mx25u25643g_is_4byte_mode",
+            944,
+            "Read 4byte mode failed\n"
+          ],
+          [
+            "wrdi",
+            4
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mx25u25643g_enter_4byte_mode",
+            996,
+            "exit write enable fail\n"
+          ]
+        ],
+        "sp": 537063424,
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "status_bit_clear",
+      "function": "420890",
+      "arguments": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "fixture": {
+        "reads": [
+          [
+            0,
+            0
+          ]
+        ],
+        "wrdi_status": 0
+      },
+      "result": {
+        "return": 1,
+        "events": [
+          [
+            "delay",
+            0
+          ],
+          [
+            "wren",
+            0
+          ],
+          [
+            "command",
+            183,
+            0,
+            0,
+            0,
+            0,
+            "",
+            0
+          ],
+          [
+            "delay",
+            0
+          ],
+          [
+            "read",
+            21,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mx25u25643g_is_4byte_mode",
+            952,
+            "43G is 3byte device address mode\n"
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mx25u25643g_enter_4byte_mode",
+            990,
+            "Failed to verify 4-byte mode\n"
+          ]
+        ],
+        "sp": 537063424,
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "status_bit_set",
+      "function": "420890",
+      "arguments": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "fixture": {
+        "reads": [
+          [
+            0,
+            32
+          ]
+        ],
+        "wrdi_status": 0
+      },
+      "result": {
+        "return": 0,
+        "events": [
+          [
+            "delay",
+            0
+          ],
+          [
+            "wren",
+            0
+          ],
+          [
+            "command",
+            183,
+            0,
+            0,
+            0,
+            0,
+            "",
+            0
+          ],
+          [
+            "delay",
+            0
+          ],
+          [
+            "read",
+            21,
+            0,
+            0,
+            1,
+            0,
+            32
+          ],
+          [
+            "wrdi",
+            0
+          ]
+        ],
+        "sp": 537063424,
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "status_bit6_only_is_clear",
+      "function": "420890",
+      "arguments": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "fixture": {
+        "reads": [
+          [
+            0,
+            64
+          ]
+        ],
+        "wrdi_status": 0
+      },
+      "result": {
+        "return": 1,
+        "events": [
+          [
+            "delay",
+            0
+          ],
+          [
+            "wren",
+            0
+          ],
+          [
+            "command",
+            183,
+            0,
+            0,
+            0,
+            0,
+            "",
+            0
+          ],
+          [
+            "delay",
+            0
+          ],
+          [
+            "read",
+            21,
+            0,
+            0,
+            1,
+            0,
+            64
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mx25u25643g_is_4byte_mode",
+            952,
+            "43G is 3byte device address mode\n"
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mx25u25643g_enter_4byte_mode",
+            990,
+            "Failed to verify 4-byte mode\n"
+          ]
+        ],
+        "sp": 537063424,
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "disable_error",
+      "function": "420890",
+      "arguments": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "fixture": {
+        "reads": [
+          [
+            0,
+            32
+          ]
+        ],
+        "wrdi_status": 10
+      },
+      "result": {
+        "return": 10,
+        "events": [
+          [
+            "delay",
+            0
+          ],
+          [
+            "wren",
+            0
+          ],
+          [
+            "command",
+            183,
+            0,
+            0,
+            0,
+            0,
+            "",
+            0
+          ],
+          [
+            "delay",
+            0
+          ],
+          [
+            "read",
+            21,
+            0,
+            0,
+            1,
+            0,
+            32
+          ],
+          [
+            "wrdi",
+            10
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mx25u25643g_enter_4byte_mode",
+            996,
+            "exit write enable fail\n"
+          ]
+        ],
+        "sp": 537063424,
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "second_delay_ignored",
+      "function": "420890",
+      "arguments": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "fixture": {
+        "delays": [
+          0,
+          77
+        ],
+        "reads": [
+          [
+            0,
+            32
+          ]
+        ]
+      },
+      "result": {
+        "return": 0,
+        "events": [
+          [
+            "delay",
+            0
+          ],
+          [
+            "wren",
+            0
+          ],
+          [
+            "command",
+            183,
+            0,
+            0,
+            0,
+            0,
+            "",
+            0
+          ],
+          [
+            "delay",
+            77
+          ],
+          [
+            "read",
+            21,
+            0,
+            0,
+            1,
+            0,
+            32
+          ],
+          [
+            "wrdi",
+            0
+          ]
+        ],
+        "sp": 537063424,
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "checker_read_error",
+      "function": "420800",
+      "arguments": [
+        305419896,
+        2882400001,
+        9320,
+        3735928559
+      ],
+      "fixture": {
+        "reads": [
+          [
+            11,
+            0
+          ]
+        ]
+      },
+      "result": {
+        "return": 11,
+        "events": [
+          [
+            "read",
+            21,
+            0,
+            0,
+            1,
+            11,
+            null
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mx25u25643g_is_4byte_mode",
+            944,
+            "Read 4byte mode failed\n"
+          ]
+        ],
+        "sp": 537063424,
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "checker_bit_clear",
+      "function": "420800",
+      "arguments": [
+        305419896,
+        2882400001,
+        9320,
+        3735928559
+      ],
+      "fixture": {
+        "reads": [
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      "result": {
+        "return": 0,
+        "events": [
+          [
+            "read",
+            21,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mx25u25643g_is_4byte_mode",
+            952,
+            "43G is 3byte device address mode\n"
+          ]
+        ],
+        "sp": 537063424,
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "checker_bit_set",
+      "function": "420800",
+      "arguments": [
+        305419896,
+        2882400001,
+        9320,
+        3735928559
+      ],
+      "fixture": {
+        "reads": [
+          [
+            0,
+            32
+          ]
+        ]
+      },
+      "result": {
+        "return": 1,
+        "events": [
+          [
+            "read",
+            21,
+            0,
+            0,
+            1,
+            0,
+            32
+          ]
+        ],
+        "sp": 537063424,
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "case": "checker_bit6_only",
+      "function": "420800",
+      "arguments": [
+        305419896,
+        2882400001,
+        9320,
+        3735928559
+      ],
+      "fixture": {
+        "reads": [
+          [
+            0,
+            64
+          ]
+        ]
+      },
+      "result": {
+        "return": 0,
+        "events": [
+          [
+            "read",
+            21,
+            0,
+            0,
+            1,
+            0,
+            64
+          ],
+          [
+            "log",
+            2,
+            "drv.norflash",
+            "D:\\01_workspace\\s200_ap510b_iar_git\\driver\\flash\\drv_mx25u25643g.c",
+            "mx25u25643g_is_4byte_mode",
+            952,
+            "43G is 3byte device address mode\n"
+          ]
+        ],
+        "sp": 537063424,
+        "callee_saved": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  ],
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_elf_sha256": "8584cf08e1fa6c2a6d10bebb1a9ad13d9f13c96a44b6559ec0e4bc3fcb575ae1",
+  "source_sha256": {
+    "g2/components/bootloader/nor_mspi_power/xip_address_mode.c": "f3a5a78f9113d2cdb8a1db9c1ab564c351eb6f1b42a64f7eef8517b1f9b51a68",
+    "g2/components/bootloader/nor_mspi_power/xip_address_mode.h": "4c35422e824dd877551de9e24891061a6b73ac003f5903e993d7d91a27922b70",
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/nor-mode-switch/Makefile.xip": "daf221908e6fa1e9290736a6727e2d53648eb2f67a9ea7707461e670b8b2b4a4",
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/nor-mode-switch/xip_address_mode.ld": "3e07a6cd8072fe37054d405569bc16ee047a3adcc0766a9b4aacd682e3b842b6",
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/nor-mode-switch/verify_xip_address_mode.py": "84eebd517014393d959f6aa8d024f43e098201163236b29a5426e6543dbdf57a"
+  },
+  "distinct_original_trace_bytes": 340,
+  "original_trace": {
+    "0x420890": "1cb5",
+    "0x420892": "dff87c07",
+    "0x420896": "0068",
+    "0x420898": "0028",
+    "0x42089a": "01d1",
+    "0x42089c": "0220",
+    "0x42089e": "6ae0",
+    "0x420976": "16bd",
+    "0x4208a0": "fff7a8ff",
+    "0x4208a4": "0028",
+    "0x4208a6": "0ed0",
+    "0x4208c6": "00f05df8",
+    "0x4208ca": "0400",
+    "0x4208cc": "002c",
+    "0x4208ce": "0ed0",
+    "0x4208ee": "0020",
+    "0x4208f0": "0090",
+    "0x4208f2": "0023",
+    "0x4208f4": "0022",
+    "0x4208f6": "0021",
+    "0x4208f8": "b720",
+    "0x4208fa": "fff7d0fe",
+    "0x4208fe": "0400",
+    "0x420900": "002c",
+    "0x420902": "0ed0",
+    "0x420922": "fff767ff",
+    "0x420926": "fff76bff",
+    "0x420800": "1fb5",
+    "0x420802": "0522",
+    "0x420804": "0021",
+    "0x420806": "02a8",
+    "0x420808": "06f002fa",
+    "0x42080c": "0120",
+    "0x42080e": "0090",
+    "0x420810": "02ab",
+    "0x420812": "0022",
+    "0x420814": "0021",
+    "0x420816": "1520",
+    "0x420818": "fff7ecfe",
+    "0x42081c": "0400",
+    "0x42081e": "002c",
+    "0x420820": "0ed0",
+    "0x420840": "9df80800",
+    "0x420844": "8006",
+    "0x420846": "01d5",
+    "0x42084c": "dff8bc07",
+    "0x420850": "0190",
+    "0x420852": "4ff46e70",
+    "0x420856": "0090",
+    "0x420858": "dff8ac37",
+    "0x42085c": "464a",
+    "0x42085e": "9f49",
+    "0x420860": "0220",
+    "0x420862": "f6f734ff",
+    "0x420866": "0020",
+    "0x420868": "04b0",
+    "0x42086a": "10bd",
+    "0x42092a": "0028",
+    "0x42092c": "0ed1",
+    "0x42092e": "dff8f406",
+    "0x420932": "0190",
+    "0x420934": "40f2de30",
+    "0x420938": "0090",
+    "0x42093a": "dff8dc36",
+    "0x42093e": "0e4a",
+    "0x420940": "6649",
+    "0x420942": "0220",
+    "0x420944": "f6f7c3fe",
+    "0x420948": "0120",
+    "0x42094a": "14e0",
+    "0x4208a8": "dff86807",
+    "0x4208ac": "0190",
+    "0x4208ae": "4ff47270",
+    "0x4208b2": "0090",
+    "0x4208b4": "dff86037",
+    "0x4208b8": "2f4a",
+    "0x4208ba": "8849",
+    "0x4208bc": "0220",
+    "0x4208be": "f6f706ff",
+    "0x4208c2": "0320",
+    "0x4208c4": "57e0",
+    "0x4208d0": "dff84807",
+    "0x4208d4": "0190",
+    "0x4208d6": "40f2cf30",
+    "0x4208da": "0090",
+    "0x4208dc": "dff83837",
+    "0x4208e0": "254a",
+    "0x4208e2": "7e49",
+    "0x4208e4": "0220",
+    "0x4208e6": "f6f7f2fe",
+    "0x4208ea": "2000",
+    "0x4208ec": "43e0",
+    "0x420904": "dff81807",
+    "0x420908": "0190",
+    "0x42090a": "40f2d630",
+    "0x42090e": "0090",
+    "0x420910": "dff80437",
+    "0x420914": "184a",
+    "0x420916": "7149",
+    "0x420918": "0220",
+    "0x42091a": "f6f7d8fe",
+    "0x42091e": "2000",
+    "0x420920": "29e0",
+    "0x420822": "dff8e007",
+    "0x420826": "0190",
+    "0x420828": "4ff46c70",
+    "0x42082c": "0090",
+    "0x42082e": "dff8d837",
+    "0x420832": "514a",
+    "0x420834": "a949",
+    "0x420836": "0220",
+    "0x420838": "f6f749ff",
+    "0x42083c": "2000",
+    "0x42083e": "13e0",
+    "0x42094c": "00f03af8",
+    "0x420950": "0400",
+    "0x420952": "002c",
+    "0x420954": "0ed0",
+    "0x420956": "dff8d006",
+    "0x42095a": "0190",
+    "0x42095c": "4ff47970",
+    "0x420960": "0090",
+    "0x420962": "dff8b436",
+    "0x420966": "044a",
+    "0x420968": "5c49",
+    "0x42096a": "0220",
+    "0x42096c": "f6f7affe",
+    "0x420970": "2000",
+    "0x420972": "00e0",
+    "0x420848": "0120",
+    "0x42084a": "0de0",
+    "0x420974": "0020"
+  },
+  "limits": [
+    "The locked 0x420890 and 0x420800 instructions execute against a separately compiled source ELF. Delay, status transfer, command, WREN/WRDI, and logging are controlled exact-interface callbacks; original memset wrapper 0x426c10 is modeled by a byte clear.",
+    "The active handle slot and status bytes are synthetic. The provider reconstructs the firmware's four-byte-mode command/status flow; it does not prove the attached flash accepted the command or that XIP address decoding works on hardware.",
+    "Delay values are raw provider results, not physical units. No hardware, timing, full image, or byte identity is claimed."
+  ]
+}

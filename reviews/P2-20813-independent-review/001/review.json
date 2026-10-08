@@ -1,0 +1,10 @@
+{
+  "id": "P2-20813",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "202B replay passed. Four ordered independent checks are byte47, byte48, fullword0==FFFFFFFF, then an independent fullword0==0; only records passing all are eligible (R5 increments). Logger receives fourteen args with bytes0..5 ascending; mask call receives eleven args with a second, independent ordered set. R6 visitcount and R7 full index increment unconditionally, stride 256."
+}

@@ -1,0 +1,5 @@
+# State-dependent object selection 0x46A53A..0x46A5C0
+
+Partial/unaccepted;134instructionbytes. STMDB saves4/5/6/7/8/9/LR28,allocate20,total48-byteframe. R6=addressliteral46AE94;freshword[R6]FULLzero branches46A6CC outsidecomponent. OtherwiseR4=0,R5=addressliteral46AE98. Freshword[R5]zero selectsR4=freshword[addressliteral46ACD4],then59E. Nonzero loadsR0=addressliteral46B00C. Firstfreshword[R0]==2 and SECONDfreshword[R5]==1 selectsR4=freshword[addressliteral46ACD8]. Otherwise at578 anotherfreshword[R0]==3 and nextfreshword[R5]==1 selects sameobjectglobal. Otherwise at58C anotherfreshword[R0]==3 and nextfreshword[R5]==2 selectsR4=freshword[addressliteral46B010]. FailedconditionsretainR4zero. Distinct freshglobalreads are not cached, even with no intervening calls.
+
+At59E R7=0,R9=0;FULLR4zero branches46A5E0 outsidecomponent. Nonzero calls43FC70(R4,live1..3),captures FULLresultR7;43FCE0(R4,live1..3),capturesFULLresultR8;43FDDA(R4,live1..3),replacesR4withFULLresult. R8uninitialized onzero route until later evidence. Childcontracts unresolved;no C/freeze/corpusclaim.

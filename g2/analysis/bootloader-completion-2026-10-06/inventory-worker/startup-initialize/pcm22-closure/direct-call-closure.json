@@ -1,0 +1,1948 @@
+{
+  "candidate_sha256": "6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0",
+  "roots": [
+    "event_a_pcm22_transition_sequence_0",
+    "event_a_pcm22_transition_sequence_2",
+    "event_a_transition_sequence_8_timer_native",
+    "opencfw_spot_pcm22_transition14",
+    "opencfw_spot_pcm22_transition15",
+    "opencfw_spot_pcm22_transition16",
+    "opencfw_spot_pcm22_transition18",
+    "event_a_transition_sequence_24",
+    "event_a_transition_sequence_24",
+    "event_a_transition_sequence_24",
+    "opencfw_spot_pcm22_transition3",
+    "opencfw_spot_pcm22_transition17",
+    "opencfw_spot_pcm22_transition1",
+    "opencfw_spot_pcm22_transition6",
+    "opencfw_spot_pcm22_transition20",
+    "opencfw_spot_pcm22_transition5",
+    "opencfw_spot_pcm22_transition11",
+    "opencfw_spot_pcm22_transition12",
+    "opencfw_spot_pcm22_transition21",
+    "opencfw_spot_pcm22_transition22",
+    "opencfw_spot_pcm22_transition23",
+    "opencfw_spot_pcm22_transition10",
+    "opencfw_spot_pcm22_transition9",
+    "opencfw_spot_pcm22_transition13",
+    "opencfw_spot_pcm22_transition4",
+    "opencfw_spot_pcm22_transition7",
+    "opencfw_spot_pcm22_transition19",
+    "opencfw_boot_spotmgr_power_state_update_a",
+    "opencfw_pcm22_timer_service",
+    "opencfw_pcm22_post_lptohp"
+  ],
+  "linked_functions": [
+    {
+      "linked_address": 75776,
+      "linked_bytes": 156,
+      "names": [
+        "clock_request"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/24/clock_manager.o",
+          "sha256": "678ede2a028464b4bd523c6645d774c413b2e8c19bc5c533155cc7b67b13dd16",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/24/clock_manager.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 75878,
+          "target": 76740,
+          "kind": "b.w"
+        },
+        {
+          "site": 75888,
+          "target": 78004,
+          "kind": "b.w"
+        },
+        {
+          "site": 75898,
+          "target": 76384,
+          "kind": "b.w"
+        },
+        {
+          "site": 75908,
+          "target": 76092,
+          "kind": "b.w"
+        },
+        {
+          "site": 75918,
+          "target": 78788,
+          "kind": "b.w"
+        },
+        {
+          "site": 75928,
+          "target": 79672,
+          "kind": "b.w"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 75932,
+      "linked_bytes": 158,
+      "names": [
+        "clock_release"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/24/clock_manager.o",
+          "sha256": "678ede2a028464b4bd523c6645d774c413b2e8c19bc5c533155cc7b67b13dd16",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/24/clock_manager.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 76036,
+          "target": 77248,
+          "kind": "b.w"
+        },
+        {
+          "site": 76046,
+          "target": 78552,
+          "kind": "b.w"
+        },
+        {
+          "site": 76056,
+          "target": 76508,
+          "kind": "b.w"
+        },
+        {
+          "site": 76066,
+          "target": 76176,
+          "kind": "b.w"
+        },
+        {
+          "site": 76076,
+          "target": 79460,
+          "kind": "b.w"
+        },
+        {
+          "site": 76086,
+          "target": 80848,
+          "kind": "b.w"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 76092,
+      "linked_bytes": 84,
+      "names": [
+        "opencfw_bl_clock_request_id1"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/25/clock_class_providers.o",
+          "sha256": "431c4c734ee7c324fef40ebec631bc4d4d6ff14617b861d187023cba4d43424b",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/25/clock_class_providers.o"
+        }
+      ],
+      "direct_calls": [],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 76176,
+      "linked_bytes": 64,
+      "names": [
+        "opencfw_bl_clock_release_id1"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/25/clock_class_providers.o",
+          "sha256": "431c4c734ee7c324fef40ebec631bc4d4d6ff14617b861d187023cba4d43424b",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/25/clock_class_providers.o"
+        }
+      ],
+      "direct_calls": [],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 76384,
+      "linked_bytes": 124,
+      "names": [
+        "opencfw_bl_clock_request_id3"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/25/clock_class_providers.o",
+          "sha256": "431c4c734ee7c324fef40ebec631bc4d4d6ff14617b861d187023cba4d43424b",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/25/clock_class_providers.o"
+        }
+      ],
+      "direct_calls": [],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 76508,
+      "linked_bytes": 128,
+      "names": [
+        "opencfw_bl_clock_release_id3"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/25/clock_class_providers.o",
+          "sha256": "431c4c734ee7c324fef40ebec631bc4d4d6ff14617b861d187023cba4d43424b",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/25/clock_class_providers.o"
+        }
+      ],
+      "direct_calls": [],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 76740,
+      "linked_bytes": 506,
+      "names": [
+        "opencfw_bl_clock_request_id4"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/26/clock_class_provider4.o",
+          "sha256": "964cb8fe430614753da9fdd5d04a50697bd6d51316e76bed4c92363a86b850e7",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/26/clock_class_provider4.o"
+        }
+      ],
+      "direct_calls": [],
+      "indirect_sites": [
+        {
+          "site": 76858,
+          "operand": "r7",
+          "kind": "blx"
+        },
+        {
+          "site": 77118,
+          "operand": "r7",
+          "kind": "blx"
+        }
+      ],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 77248,
+      "linked_bytes": 170,
+      "names": [
+        "opencfw_bl_clock_release_id4"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/26/clock_class_provider4.o",
+          "sha256": "964cb8fe430614753da9fdd5d04a50697bd6d51316e76bed4c92363a86b850e7",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/26/clock_class_provider4.o"
+        }
+      ],
+      "direct_calls": [],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 78004,
+      "linked_bytes": 548,
+      "names": [
+        "opencfw_bl_clock_request_id2"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/27/clock_class_provider2.o",
+          "sha256": "9a29a1641ee230f56d398bdda8282b2b92555afb3be7a573bd8e84367dacb938",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/27/clock_class_provider2.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 78114,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 78436,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 78514,
+          "target": 125628,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 78552,
+      "linked_bytes": 234,
+      "names": [
+        "opencfw_bl_clock_release_id2"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/27/clock_class_provider2.o",
+          "sha256": "9a29a1641ee230f56d398bdda8282b2b92555afb3be7a573bd8e84367dacb938",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/27/clock_class_provider2.o"
+        }
+      ],
+      "direct_calls": [],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 78788,
+      "linked_bytes": 670,
+      "names": [
+        "opencfw_bl_clock_request_id5"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/28/clock_class_provider5.o",
+          "sha256": "e05b7ca3d5f2b24f584c1460fc4d8d61dc831fb151f4e36f4052067e6571dddf",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/28/clock_class_provider5.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 78890,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 79082,
+          "target": 76384,
+          "kind": "bl"
+        },
+        {
+          "site": 79118,
+          "target": 78004,
+          "kind": "bl"
+        },
+        {
+          "site": 79210,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 79386,
+          "target": 76508,
+          "kind": "bl"
+        },
+        {
+          "site": 79394,
+          "target": 78552,
+          "kind": "bl"
+        },
+        {
+          "site": 79418,
+          "target": 125628,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 79460,
+      "linked_bytes": 210,
+      "names": [
+        "opencfw_bl_clock_release_id5"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/28/clock_class_provider5.o",
+          "sha256": "e05b7ca3d5f2b24f584c1460fc4d8d61dc831fb151f4e36f4052067e6571dddf",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/28/clock_class_provider5.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 79634,
+          "target": 78552,
+          "kind": "bl"
+        },
+        {
+          "site": 79640,
+          "target": 76508,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 79672,
+      "linked_bytes": 1174,
+      "names": [
+        "opencfw_bl_clock_request_id6"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/29/clock_class_provider6.o",
+          "sha256": "fab22ee6e4a9053e2915614849c6cfe6e00a6ea2063b2a51c5afc4121cb53bbb",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/29/clock_class_provider6.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 79878,
+          "target": 76384,
+          "kind": "bl"
+        },
+        {
+          "site": 79886,
+          "target": 78004,
+          "kind": "bl"
+        },
+        {
+          "site": 79900,
+          "target": 78004,
+          "kind": "bl"
+        },
+        {
+          "site": 79908,
+          "target": 76384,
+          "kind": "bl"
+        },
+        {
+          "site": 80078,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 80112,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 80604,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 80678,
+          "target": 78552,
+          "kind": "bl"
+        },
+        {
+          "site": 80684,
+          "target": 76508,
+          "kind": "bl"
+        },
+        {
+          "site": 80752,
+          "target": 78552,
+          "kind": "bl"
+        },
+        {
+          "site": 80810,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 80830,
+          "target": 76508,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 80848,
+      "linked_bytes": 342,
+      "names": [
+        "opencfw_bl_clock_release_id6"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/29/clock_class_provider6.o",
+          "sha256": "fab22ee6e4a9053e2915614849c6cfe6e00a6ea2063b2a51c5afc4121cb53bbb",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/29/clock_class_provider6.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 81126,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 81168,
+          "target": 76508,
+          "kind": "bl"
+        },
+        {
+          "site": 81176,
+          "target": 78552,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 94628,
+      "linked_bytes": 8,
+      "names": [
+        "opencfw_boot_control_critical_save"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/67/critical_save.o",
+          "sha256": "ad0aa8ba89c31620ffb0e000d7d3a3c663f73d5aecccfd55f069e43fef1fe809",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/67/critical_save.o"
+        }
+      ],
+      "direct_calls": [],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 96424,
+      "linked_bytes": 20,
+      "names": [
+        "opencfw_boot_control_delay_status_change"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/76/runtime_wait_adapter.o",
+          "sha256": "fbe131413204030df27410f84287af2867214791ea460f4c7133013e26745471",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/76/runtime_wait_adapter.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 96436,
+          "target": 96444,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 96444,
+      "linked_bytes": 60,
+      "names": [
+        "opencfw_hal_status_poll"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/77/status_poll.o",
+          "sha256": "4fd2b38de70bc2c7b452f41a1426319d39440b4deade5f4950c221ea5219e451",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/77/status_poll.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 96484,
+          "target": 125628,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 125628,
+      "linked_bytes": 104,
+      "names": [
+        "opencfw_bl_delay_us"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/26/clock_class_provider4.o",
+          "sha256": "964cb8fe430614753da9fdd5d04a50697bd6d51316e76bed4c92363a86b850e7",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/26/clock_class_provider4.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 125708,
+          "target": 64,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 200784,
+      "linked_bytes": 84,
+      "names": [
+        "opencfw_pcm22_spot_timer_start"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/191/timer_support.o",
+          "sha256": "9364e6fcb571a497f82edcd79e75183816e754a7f41c8320f5f984fb52b50e36",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/191/timer_support.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 200792,
+          "target": 75776,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 200868,
+      "linked_bytes": 72,
+      "names": [
+        "opencfw_pcm22_spot_timer_stop"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/191/timer_support.o",
+          "sha256": "9364e6fcb571a497f82edcd79e75183816e754a7f41c8320f5f984fb52b50e36",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/191/timer_support.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 200902,
+          "target": 75932,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 200940,
+      "linked_bytes": 60,
+      "names": [
+        "opencfw_pcm22_icache_disable"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/191/timer_support.o",
+          "sha256": "9364e6fcb571a497f82edcd79e75183816e754a7f41c8320f5f984fb52b50e36",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/191/timer_support.o"
+        }
+      ],
+      "direct_calls": [],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 201432,
+      "linked_bytes": 216,
+      "names": [
+        "opencfw_pcm22_timer_service"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/191/timer_support.o",
+          "sha256": "9364e6fcb571a497f82edcd79e75183816e754a7f41c8320f5f984fb52b50e36",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/191/timer_support.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 201444,
+          "target": 94628,
+          "kind": "bl"
+        },
+        {
+          "site": 201510,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 201602,
+          "target": 75932,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 201648,
+      "linked_bytes": 228,
+      "names": [
+        "event_a_power_ton_adjust"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/193/startup_event_a_trim.o",
+          "sha256": "6b4cffc00bb0aec0bb4a3e22b4b825d23c0449f2fa7e9af64cfc47ace5cba64d",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/193/startup_event_a_trim.o"
+        }
+      ],
+      "direct_calls": [],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 201876,
+      "linked_bytes": 138,
+      "names": [
+        "event_a_power_trims_update"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/193/startup_event_a_trim.o",
+          "sha256": "6b4cffc00bb0aec0bb4a3e22b4b825d23c0449f2fa7e9af64cfc47ace5cba64d",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/193/startup_event_a_trim.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 201906,
+          "target": 201648,
+          "kind": "b.w"
+        },
+        {
+          "site": 201926,
+          "target": 202364,
+          "kind": "b.w"
+        },
+        {
+          "site": 201960,
+          "target": 202364,
+          "kind": "bl"
+        },
+        {
+          "site": 201974,
+          "target": 202016,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [
+        {
+          "site": 202008,
+          "operand": "r7",
+          "kind": "blx"
+        }
+      ],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 202016,
+      "linked_bytes": 346,
+      "names": [
+        "event_a_state_transition_sequence"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/194/startup_event_a_transitions.o",
+          "sha256": "ceac5013446836fa1e994520b6f4c30d437ae058d2e8c0c7c23eb118733fd724",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/194/startup_event_a_transitions.o"
+        }
+      ],
+      "direct_calls": [],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 202364,
+      "linked_bytes": 152,
+      "names": [
+        "event_a_temperature_transition_separate"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/194/startup_event_a_transitions.o",
+          "sha256": "ceac5013446836fa1e994520b6f4c30d437ae058d2e8c0c7c23eb118733fd724",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/194/startup_event_a_transitions.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 202416,
+          "target": 202016,
+          "kind": "bl"
+        },
+        {
+          "site": 202476,
+          "target": 202016,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [
+        {
+          "site": 202440,
+          "operand": "r6",
+          "kind": "blx"
+        },
+        {
+          "site": 202500,
+          "operand": "r6",
+          "kind": "blx"
+        }
+      ],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 202516,
+      "linked_bytes": 2,
+      "names": [
+        "event_a_transition_sequence_24"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/194/startup_event_a_transitions.o",
+          "sha256": "ceac5013446836fa1e994520b6f4c30d437ae058d2e8c0c7c23eb118733fd724",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/194/startup_event_a_transitions.o"
+        }
+      ],
+      "direct_calls": [],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 202544,
+      "linked_bytes": 450,
+      "names": [
+        "event_a_pcm22_transition_sequence_0"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/195/startup_event_a_sequences_0_2.o",
+          "sha256": "1a9534e84ed022447f07e9df7048b1e1d9b805a93f85d5c97fc1a36a0cdc3b53",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/195/startup_event_a_sequences_0_2.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 202672,
+          "target": 201648,
+          "kind": "bl"
+        },
+        {
+          "site": 202708,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 202736,
+          "target": 200940,
+          "kind": "bl"
+        },
+        {
+          "site": 202772,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 202780,
+          "target": 209244,
+          "kind": "bl"
+        },
+        {
+          "site": 202870,
+          "target": 201648,
+          "kind": "bl"
+        },
+        {
+          "site": 202890,
+          "target": 200868,
+          "kind": "bl"
+        },
+        {
+          "site": 202970,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 202978,
+          "target": 201432,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 202996,
+      "linked_bytes": 236,
+      "names": [
+        "event_a_pcm22_transition_sequence_2"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/195/startup_event_a_sequences_0_2.o",
+          "sha256": "1a9534e84ed022447f07e9df7048b1e1d9b805a93f85d5c97fc1a36a0cdc3b53",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/195/startup_event_a_sequences_0_2.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 203060,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 203068,
+          "target": 201432,
+          "kind": "bl"
+        },
+        {
+          "site": 203126,
+          "target": 201648,
+          "kind": "bl"
+        },
+        {
+          "site": 203184,
+          "target": 200784,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 203232,
+      "linked_bytes": 194,
+      "names": [
+        "opencfw_spot_pcm22_transition14"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/196/pcm22_handlers.o",
+          "sha256": "63c9e58635d8a4a7f272a8c0cc3be17ab194b7a0313163f75a0640bf661b5dc4",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/196/pcm22_handlers.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 203324,
+          "target": 201432,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [
+        {
+          "site": 203318,
+          "operand": "r8",
+          "kind": "blx"
+        }
+      ],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 203428,
+      "linked_bytes": 418,
+      "names": [
+        "opencfw_spot_pcm22_transition18"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/196/pcm22_handlers.o",
+          "sha256": "63c9e58635d8a4a7f272a8c0cc3be17ab194b7a0313163f75a0640bf661b5dc4",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/196/pcm22_handlers.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 203580,
+          "target": 201432,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [
+        {
+          "site": 203574,
+          "operand": "sl",
+          "kind": "blx"
+        },
+        {
+          "site": 203768,
+          "operand": "r6",
+          "kind": "blx"
+        },
+        {
+          "site": 203820,
+          "operand": "r6",
+          "kind": "blx"
+        }
+      ],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 203848,
+      "linked_bytes": 146,
+      "names": [
+        "event_a_transition_sequence_8_timer_native"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/197/pcm22_sequence8.o",
+          "sha256": "5715584d6cb07a13370143f7bd78120ee36354e88edeed6a19b3064d6f3e669b",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/197/pcm22_sequence8.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 203900,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 203908,
+          "target": 201432,
+          "kind": "bl"
+        },
+        {
+          "site": 203958,
+          "target": 201648,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 203996,
+      "linked_bytes": 216,
+      "names": [
+        "opencfw_spot_pcm22_transition6"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/216/pcm22_sequence6.o",
+          "sha256": "c8c62f552deac0b79c147d04b78acdaf0593c2ba5eed6f8cbe50c6538e939b94",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/216/pcm22_sequence6.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 204082,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 204092,
+          "target": 201432,
+          "kind": "bl"
+        },
+        {
+          "site": 204200,
+          "target": 201648,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 204212,
+      "linked_bytes": 236,
+      "names": [
+        "opencfw_spot_pcm22_transition20"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/217/pcm22_sequence20.o",
+          "sha256": "1c5ec9f0ebebdd500e87de2f7202cd5b223d63c88b185793b50219b8e53c196a",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/217/pcm22_sequence20.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 204298,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 204308,
+          "target": 201432,
+          "kind": "bl"
+        },
+        {
+          "site": 204436,
+          "target": 125628,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 204540,
+      "linked_bytes": 252,
+      "names": [
+        "opencfw_spot_pcm22_transition15"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/198/pcm22_handler15.o",
+          "sha256": "f9edfe192461baf04f460d841736562d8c4b6f353e6139b2c6839a1aeaecde13",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/198/pcm22_handler15.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 204650,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 204660,
+          "target": 201432,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 204792,
+      "linked_bytes": 208,
+      "names": [
+        "opencfw_spot_pcm22_transition16"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/199/pcm22_handler16.o",
+          "sha256": "bb465f0190ea48a8a0b10a6a2142e853774b22970a1542f1bd227e9a4275793a",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/199/pcm22_handler16.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 204902,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 204912,
+          "target": 201432,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 205000,
+      "linked_bytes": 270,
+      "names": [
+        "opencfw_spot_pcm22_transition17"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/200/pcm22_handler17.o",
+          "sha256": "2d40d7b55cced1f562735a44389f496deb9ef006562a54b18f86a65c34f92094",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/200/pcm22_handler17.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 205118,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 205128,
+          "target": 201432,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 205272,
+      "linked_bytes": 204,
+      "names": [
+        "opencfw_spot_pcm22_transition3"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/201/pcm22_handler3.o",
+          "sha256": "d2edb3681053e2f1641ce563d1d31c1a140ca30137cbef60941330d04bba4181",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/201/pcm22_handler3.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 205328,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 205336,
+          "target": 201432,
+          "kind": "bl"
+        },
+        {
+          "site": 205416,
+          "target": 201648,
+          "kind": "bl"
+        },
+        {
+          "site": 205454,
+          "target": 125628,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 205476,
+      "linked_bytes": 484,
+      "names": [
+        "opencfw_spot_pcm22_transition1"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/207/handler1-softfp.o",
+          "sha256": "3e69a129d03a4c90dfb7cc630af385fd5af1de4fd9588231a2b12aef347387d7",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/207/handler1-softfp.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 205572,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 205580,
+          "target": 201432,
+          "kind": "bl"
+        },
+        {
+          "site": 205638,
+          "target": 201648,
+          "kind": "bl"
+        },
+        {
+          "site": 205728,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 205790,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 205860,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 205866,
+          "target": 200940,
+          "kind": "bl"
+        },
+        {
+          "site": 205908,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 205912,
+          "target": 209244,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 209244,
+      "linked_bytes": 78,
+      "names": [
+        "opencfw_boot_icache_enable"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/118/cache_enable.o",
+          "sha256": "375751db5f7d332f191ac3dfb5ea37e4b9727654ac508cfcd4a8fead8a866487",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/118/cache_enable.o"
+        }
+      ],
+      "direct_calls": [],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 327680,
+      "linked_bytes": 248,
+      "names": [
+        "event_a_temperature_classify_bits"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/192/startup_events_a.o",
+          "sha256": "5d2edddfb5e39c700d682bcfa4e4345a753cc1b8f78ac576a8aa7649123d6050",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/192/startup_events_a.o"
+        }
+      ],
+      "direct_calls": [],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 327928,
+      "linked_bytes": 24,
+      "names": [
+        "event_a_internal_power_domain"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/192/startup_events_a.o",
+          "sha256": "5d2edddfb5e39c700d682bcfa4e4345a753cc1b8f78ac576a8aa7649123d6050",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/192/startup_events_a.o"
+        }
+      ],
+      "direct_calls": [],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 327952,
+      "linked_bytes": 202,
+      "names": [
+        "event_a_deepsleep_state"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/192/startup_events_a.o",
+          "sha256": "5d2edddfb5e39c700d682bcfa4e4345a753cc1b8f78ac576a8aa7649123d6050",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/192/startup_events_a.o"
+        }
+      ],
+      "direct_calls": [],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 328156,
+      "linked_bytes": 864,
+      "names": [
+        "event_a_state_determine"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/192/startup_events_a.o",
+          "sha256": "5d2edddfb5e39c700d682bcfa4e4345a753cc1b8f78ac576a8aa7649123d6050",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/192/startup_events_a.o"
+        }
+      ],
+      "direct_calls": [],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 329020,
+      "linked_bytes": 636,
+      "names": [
+        "opencfw_boot_spotmgr_power_state_update_a"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/192/startup_events_a.o",
+          "sha256": "5d2edddfb5e39c700d682bcfa4e4345a753cc1b8f78ac576a8aa7649123d6050",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/192/startup_events_a.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 329090,
+          "target": 94628,
+          "kind": "bl"
+        },
+        {
+          "site": 329206,
+          "target": 327680,
+          "kind": "bl"
+        },
+        {
+          "site": 329304,
+          "target": 327952,
+          "kind": "bl"
+        },
+        {
+          "site": 329484,
+          "target": 327928,
+          "kind": "bl"
+        },
+        {
+          "site": 329574,
+          "target": 328156,
+          "kind": "bl"
+        },
+        {
+          "site": 329610,
+          "target": 201876,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 329656,
+      "linked_bytes": 540,
+      "names": [
+        "opencfw_spot_pcm22_transition5"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/218/pcm22_sequence5.o",
+          "sha256": "633505a9d40d7f198208099fe5b0139418c432d9b55f6f0f12ccd665b6347f04",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/218/pcm22_sequence5.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 329794,
+          "target": 201648,
+          "kind": "bl"
+        },
+        {
+          "site": 329826,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 329894,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 329910,
+          "target": 96424,
+          "kind": "bl"
+        },
+        {
+          "site": 329950,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 330056,
+          "target": 201648,
+          "kind": "bl"
+        },
+        {
+          "site": 330086,
+          "target": 200868,
+          "kind": "bl"
+        },
+        {
+          "site": 330174,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 330182,
+          "target": 201432,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 330196,
+      "linked_bytes": 462,
+      "names": [
+        "opencfw_spot_pcm22_transition11"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/219/pcm22_hot_transitions.o",
+          "sha256": "7c5f6fec48bab4fe20c626b7e133093110fd4a52e7d06451ede20b52daa26e44",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/219/pcm22_hot_transitions.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 330280,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 330288,
+          "target": 201432,
+          "kind": "bl"
+        },
+        {
+          "site": 330374,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 330446,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 330462,
+          "target": 96424,
+          "kind": "bl"
+        },
+        {
+          "site": 330502,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 330628,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 330646,
+          "target": 201648,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 330660,
+      "linked_bytes": 272,
+      "names": [
+        "opencfw_spot_pcm22_transition12"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/219/pcm22_hot_transitions.o",
+          "sha256": "7c5f6fec48bab4fe20c626b7e133093110fd4a52e7d06451ede20b52daa26e44",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/219/pcm22_hot_transitions.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 330748,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 330758,
+          "target": 201432,
+          "kind": "bl"
+        },
+        {
+          "site": 330912,
+          "target": 125628,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 330932,
+      "linked_bytes": 342,
+      "names": [
+        "opencfw_spot_pcm22_transition21"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/219/pcm22_hot_transitions.o",
+          "sha256": "7c5f6fec48bab4fe20c626b7e133093110fd4a52e7d06451ede20b52daa26e44",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/219/pcm22_hot_transitions.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 331032,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 331042,
+          "target": 201432,
+          "kind": "bl"
+        },
+        {
+          "site": 331108,
+          "target": 201648,
+          "kind": "bl"
+        },
+        {
+          "site": 331152,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 331198,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 331204,
+          "target": 200940,
+          "kind": "bl"
+        },
+        {
+          "site": 331226,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 331230,
+          "target": 209244,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 331368,
+      "linked_bytes": 96,
+      "names": [
+        "opencfw_pcm22_post_lptohp"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/220/pcm22_deferred21.o",
+          "sha256": "07268b8e0f4c89d8a4b6c7128f1d7abd18cff04fc3ef9cf1fdcc9880bb1bef33",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/220/pcm22_deferred21.o"
+        }
+      ],
+      "direct_calls": [],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 331464,
+      "linked_bytes": 344,
+      "names": [
+        "opencfw_spot_pcm22_transition22"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/221/pcm22_sequence22.o",
+          "sha256": "94a7ac3e8e7dc13b9b3a821fc0c11855834c1ad4b775d39153dadb7598b413ab",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/221/pcm22_sequence22.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 331548,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 331556,
+          "target": 201432,
+          "kind": "bl"
+        },
+        {
+          "site": 331696,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 331752,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 331796,
+          "target": 201648,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 331808,
+      "linked_bytes": 198,
+      "names": [
+        "opencfw_spot_pcm22_transition23"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/222/pcm22_sequence23.o",
+          "sha256": "62c5de107e711e1997e7c729172a1a8b052b11fdcea892742821df3be6ffecb3",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/222/pcm22_sequence23.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 331894,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 331904,
+          "target": 201432,
+          "kind": "bl"
+        },
+        {
+          "site": 331994,
+          "target": 201648,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 332008,
+      "linked_bytes": 198,
+      "names": [
+        "opencfw_spot_pcm22_transition10"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/223/pcm22_sequence10.o",
+          "sha256": "b410591fe69f10c06b54662c638a1fdb7289b3815db0e37cad42a73e065963ee",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/223/pcm22_sequence10.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 332094,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 332104,
+          "target": 201432,
+          "kind": "bl"
+        },
+        {
+          "site": 332194,
+          "target": 201648,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 332208,
+      "linked_bytes": 216,
+      "names": [
+        "opencfw_spot_pcm22_transition9"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/224/pcm22_sequence9.o",
+          "sha256": "5289e2bc09b71aa64ea0d8dc1da7746ec88a5fef600611b39a34a13db7b624a5",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/224/pcm22_sequence9.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 332294,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 332304,
+          "target": 201432,
+          "kind": "bl"
+        },
+        {
+          "site": 332412,
+          "target": 201648,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 332424,
+      "linked_bytes": 532,
+      "names": [
+        "opencfw_spot_pcm22_transition13"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/225/pcm22_sequence13.o",
+          "sha256": "b70602cb2e77b66e89951a8339512a9fc1b8d5f5f700dc0e75504bd3e33469a7",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/inputs/225/pcm22_sequence13.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 332524,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 332532,
+          "target": 201432,
+          "kind": "bl"
+        },
+        {
+          "site": 332598,
+          "target": 201648,
+          "kind": "bl"
+        },
+        {
+          "site": 332720,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 332778,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 332816,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 332876,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 332892,
+          "target": 96424,
+          "kind": "bl"
+        },
+        {
+          "site": 332924,
+          "target": 125628,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 332956,
+      "linked_bytes": 302,
+      "names": [
+        "opencfw_spot_pcm22_transition4"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/226/pcm22_remaining.o",
+          "sha256": "a7844965575b22b60771fa4d86633cfd75eab173323b0ed24354e739c7a46e9e",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/pcm22_remaining.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 333040,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 333050,
+          "target": 201432,
+          "kind": "bl"
+        },
+        {
+          "site": 333222,
+          "target": 201648,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 333260,
+      "linked_bytes": 278,
+      "names": [
+        "opencfw_spot_pcm22_transition19"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/226/pcm22_remaining.o",
+          "sha256": "a7844965575b22b60771fa4d86633cfd75eab173323b0ed24354e739c7a46e9e",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/pcm22_remaining.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 333350,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 333360,
+          "target": 201432,
+          "kind": "bl"
+        },
+        {
+          "site": 333518,
+          "target": 125628,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    },
+    {
+      "linked_address": 333540,
+      "linked_bytes": 292,
+      "names": [
+        "opencfw_spot_pcm22_transition7"
+      ],
+      "object_provenance": [
+        {
+          "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/bootloader-completion/pcm22-remaining-integrated/6e16ec94fe251b7c2bce48afda5ecf972928a70337ad7f9f2e4942757a29a9c0/inputs/226/pcm22_remaining.o",
+          "sha256": "a7844965575b22b60771fa4d86633cfd75eab173323b0ed24354e739c7a46e9e",
+          "origin": "/tmp/opencfw-pcm22-remaining-successor/pcm22_remaining.o"
+        }
+      ],
+      "direct_calls": [
+        {
+          "site": 333628,
+          "target": 125628,
+          "kind": "bl"
+        },
+        {
+          "site": 333638,
+          "target": 201432,
+          "kind": "bl"
+        },
+        {
+          "site": 333698,
+          "target": 201648,
+          "kind": "bl"
+        },
+        {
+          "site": 333804,
+          "target": 200784,
+          "kind": "bl"
+        }
+      ],
+      "indirect_sites": [],
+      "source_status": "linked function; original mapping/source attribution separate"
+    }
+  ],
+  "unresolved_calls": [
+    {
+      "caller_address": 125628,
+      "caller_names": [
+        "opencfw_bl_delay_us"
+      ],
+      "site": 125708,
+      "target": 64,
+      "kind": "bl",
+      "aliases": [
+        "opencfw_boot_rom_delay_cycles"
+      ],
+      "category": "external_resident_ROM"
+    }
+  ],
+  "limits": [
+    "Static direct calls/tails only; indirect sites explicit, runtime data/callback edges require binding/trace evidence.",
+    "STT_FUNC and object presence do not prove C origin, exact-match upstream or behavioral completeness.",
+    "No original body bytes admitted by this graph."
+  ]
+}

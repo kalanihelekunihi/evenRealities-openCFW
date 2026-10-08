@@ -1,0 +1,5 @@
+# Branch tail and alternate entry 0x46976A..0x4697EC
+
+Partial/unaccepted;130instructionbytes. InheritedR4globaladdress. Freshword[R4] ->498668(liveargs),FULLresultstore[R4+8]. Ordered43F09A(freshword[R4+8],373,198,live3),498680(freshword[R4+8],literal469BB0,live2,live3),43DFA4(freshword[R4+8],16,live2,live3). Independentfreshword[R4] ->498668(liveargs),FULLresultstore[R4+12]. Ordered43F09A(freshword[R4+12],180,198,live3),498680(freshword[R4+12],literal469BB4,live2,live3),43DFA4(freshword[R4+12],16,live2,live3). R0=0;storeword0[R4+24];branch4698DC outsidechunk.
+
+4697BAalternateentryfrombytezero guard4695FA, withR5originalR3 preserved (doesnotpassresourceR5replacementat4696FA). R6=literal469B9C,R0=R5 ->43DE82(liveargs),FULLresultstore[R6]. Ordered43F4C0(freshword[R6],576,288,live3),43F09A(freshword[R6],0,0,live3),43DFA4(freshword[R6],16,live2,live3). R0=0 ->44104C(liveargs),FULLresultliveat4697EC. Preserveorderedfreshreloads anddistinctbranchregisterstate. No C,freezeorchildcontractclaim.

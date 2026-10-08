@@ -23,6 +23,7 @@ ENTRY, END = 0x424be4, 0x425066
 STOP = 0x08000000
 HANDLE, CONFIG, STACK = 0x20001000, 0x20002000, 0x2003f000
 MMIO = 0x40000000
+MSPI_BASE = 0x40060000
 MODULE_STRIDE = 0x1000
 STOCK_CUTS = {0x4222f0: "clock_request", 0x422364: "clock_release",
               0x41d1c0: "delay_us"}
@@ -116,23 +117,27 @@ class Machine:
         self.events.clear(); self.trace.clear(); self.finished = False
         self._fixture = fixture
         module = fixture.get("module", 0)
+        cfg=bytearray(fixture.get("config",bytes(24)))
         h = bytearray(0x8d0)
         struct.pack_into("<I",h,0,fixture.get("magic",0x01bebebe))
         struct.pack_into("<I",h,4,module)
         struct.pack_into("<I",h,8,fixture.get("configured",1))
         struct.pack_into("<I",h,24,fixture.get("dma_handle",0))
+        # 0x424be4 copies config[0] into private handle byte 10 before calling
+        # 0x424120. Seed the same derived state for direct and full-path cases.
+        h[10] = fixture.get("private_mode", cfg[0]) & 0xff
         h[0x8c9] = fixture.get("old_class",4) & 0xff
+        h[0x09] = fixture.get("handle_latency", fixture.get("old_frequency",9)) & 0xff
         h[0x0c] = fixture.get("old_frequency",9) & 0xff
         h[0x0d] = fixture.get("pending",0x35) & 0xff
         struct.pack_into("<I",h,0x8cc,fixture.get("old_delay",73))
         self.uc.mem_write(HANDLE,bytes(h))
-        cfg=bytearray(fixture.get("config",bytes(24)))
         self.uc.mem_write(CONFIG,bytes(cfg))
         region=bytearray(0x300)
         rng=random.Random(fixture.get("seed",0x424be4))
         for off in range(0,len(region),4):
             struct.pack_into("<I",region,off,rng.getrandbits(32))
-        self.uc.mem_write(MMIO+module*MODULE_STRIDE,bytes(region))
+        self.uc.mem_write(MSPI_BASE+module*MODULE_STRIDE,bytes(region))
 
     def run(self, symbols):
         regs=(a.UC_ARM_REG_R0,a.UC_ARM_REG_R1,a.UC_ARM_REG_R2,a.UC_ARM_REG_R3)
@@ -148,8 +153,21 @@ class Machine:
         return {"return":self.uc.reg_read(a.UC_ARM_REG_R0),
                 "events":list(self.events),
                 "handle":bytes(self.uc.mem_read(HANDLE,0x8d0)).hex(),
-                "mmio":bytes(self.uc.mem_read(MMIO+module*MODULE_STRIDE,0x300)).hex(),
+                "mmio":bytes(self.uc.mem_read(MSPI_BASE+module*MODULE_STRIDE,0x300)).hex(),
                 "clkgen":bytes(self.uc.mem_read(0x40004110,4)).hex()}
+
+    def run_private(self, symbols):
+        self.events.clear(); self.trace.clear(); self.finished=False
+        self.uc.reg_write(a.UC_ARM_REG_R0,HANDLE)
+        self.uc.reg_write(a.UC_ARM_REG_SP,STACK)
+        self.uc.reg_write(a.UC_ARM_REG_LR,STOP|1)
+        start=(symbols["opencfw_bl_mspi_device_configure_private"] & ~1
+               if self.source else 0x424120)
+        self.uc.emu_start(start|1,STOP+0x10000,count=100000)
+        assert self.finished,("private helper did not return",hex(start),
+                              hex(self.uc.reg_read(a.UC_ARM_REG_PC)))
+        return {"handle":bytes(self.uc.mem_read(HANDLE,0x8d0)).hex(),
+                "mmio":bytes(self.uc.mem_read(MSPI_BASE,0x4000)).hex()}
 
 
 def main():
@@ -207,6 +225,15 @@ def main():
         if observed[0]!=observed[1]:
             differing={k:[x[k] for x in observed] for k in observed[0]
                         if observed[0][k]!=observed[1][k]}
+            if "mmio" in differing:
+                left,right=(bytes.fromhex(x["mmio"]) for x in observed)
+                differing["mmio_word_diffs"]=[
+                    {"address":hex(MSPI_BASE+fixture.get("module",0)*MODULE_STRIDE+off),
+                     "stock":hex(int.from_bytes(left[off:off+4],"little")),
+                     "source":hex(int.from_bytes(right[off:off+4],"little"))}
+                    for off in range(0,min(len(left),len(right)),4)
+                    if left[off:off+4]!=right[off:off+4]][:16]
+                del differing["mmio"]
             raise AssertionError((name,differing,pair[0].events,pair[1].events,
                                   sorted(pair[0].trace),
                                   pair[0].uc.reg_read(a.UC_ARM_REG_PC)))
@@ -217,21 +244,51 @@ def main():
           "events":observed[0]["events"],
           "handle_sha256":hashlib.sha256(bytes.fromhex(observed[0]["handle"])).hexdigest(),
           "mmio_sha256":hashlib.sha256(bytes.fromhex(observed[0]["mmio"])).hexdigest()})
+
+    # Directly call stock 0x424120 against byte-accurate private handle state;
+    # this independently covers its selector byte and latency byte rather than
+    # inferring private-helper coverage from the outer configure routine.
+    private_cases = 0
+    for module in range(4):
+      for mode in range(32):
+       for latency in (0, 1, 2, 3, 0xff):
+        fixture={"module":module,"private_mode":mode,
+                 "handle_latency":latency,"config":bytes(24),
+                 "seed":0x424120 + module*1000 + mode*5 + latency}
+        pair=[Machine(False),Machine(True,segments,symbols)]
+        for m in pair: m.setup(fixture)
+        observed=[m.run_private(symbols) for m in pair]
+        if observed[0] != observed[1]:
+            left,right=(bytes.fromhex(x["mmio"]) for x in observed)
+            diffs=[]
+            for offset in range(0,len(left),4):
+                if left[offset:offset+4] != right[offset:offset+4]:
+                    diffs.append({"address":hex(MSPI_BASE+offset),
+                        "stock":hex(int.from_bytes(left[offset:offset+4],"little")),
+                        "source":hex(int.from_bytes(right[offset:offset+4],"little"))})
+            raise AssertionError(("private mode differential",module,mode,
+                                  latency,diffs[:16]))
+        trace.update(pair[0].trace)
+        used.update(int(pc,0)+n for pc,raw in pair[0].trace.items()
+                    for n in range(len(bytes.fromhex(raw))))
+        private_cases += 1
     tracked=[ROOT/"g2/components/bootloader/nor_mspi_power/device_configure.c",
              ROOT/"g2/components/bootloader/nor_mspi_power/device_configure.h",
              ROOT/"g2/components/bootloader/nor_mspi_power/mspi_clockgen_control.c",
              HERE/"device_configure_module.ld",HERE/"verify_device_configure.py"]
-    report={"status":"PASS","cases":len(out),"original_sha256":IMAGE_SHA,
+    report={"status":"PASS","cases":len(out),
+      "direct_private_helper_cases":private_cases,"original_sha256":IMAGE_SHA,
       "source_elf_sha256":sha(args.elf),"source_sha256":{str(p.relative_to(ROOT)):sha(p) for p in tracked},
       "distinct_original_instruction_bytes":len(used),"original_instruction_trace":trace,
       "comparisons":out,
       "limits":[
       "Original 0x424be4 and direct private helpers 0x424120/0x4249a0/0x424a18 plus critical_save 0x41b8ec execute in stock; clock request/release and delay_us are intercepted as named synthetic providers.",
-        "MMIO at 0x40000000 + module*0x1000 is synthetic Unicorn memory. No physical hardware or peripheral timing is tested.",
+        "MSPI MMIO at 0x40060000 + module*0x1000 is synthetic Unicorn memory. No physical hardware or peripheral timing is tested.",
         "The 24-byte firmware config and private handle do not use the public 52-byte Ambiq HAL config ABI.",
         "This profile validates semantic equivalence for listed cases, not firmware linkage or byte identity."]}
     args.output.parent.mkdir(parents=True,exist_ok=True);args.output.write_text(json.dumps(report,indent=2)+"\n")
     print(json.dumps({"status":report["status"],"cases":report["cases"],
+      "direct_private_helper_cases":private_cases,
       "distinct_original_instruction_bytes":len(used)}))
 
 if __name__=="__main__": main()

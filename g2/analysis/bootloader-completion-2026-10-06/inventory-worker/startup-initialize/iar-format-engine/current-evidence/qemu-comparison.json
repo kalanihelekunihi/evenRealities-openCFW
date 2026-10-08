@@ -1,0 +1,37 @@
+{
+  "status": "PASS",
+  "cases": 5062,
+  "exit_code": 0,
+  "elf_sha256": "6331f3e654d41870ba807e0c334ac0d4d8ace4d195267161c7ad42725b850e63",
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "source_hashes": {
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/iar-format-engine/qemu-full/harness.c": "5f53bba6bd0b562fa53a5c9b1e5083b753bf2948e26407467c5052188f9b2c2c",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/iar-format-engine/qemu-full/start.S": "5a3055cf502766343c6f64a269985e94b953a93931651e56ed4424eb2b116c1a",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/iar-format-engine/qemu-full/call.S": "6a95fae2d03f369f3f1288a6aa24b704ef6528fa39deb53636b3f3f07da82349",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/iar-format-engine/qemu-full/oracle.S": "cd18c56e3e519907326b8f7db5b9c914ff0cceb4d3c2dbfd91265025d7255e52",
+    "g2/components/bootloader/initializer_callbacks/iar_format_native/engine.c": "b5127b99383c750f462417625d64f7310989b52f6cf5a06379f5234a523c38c0",
+    "g2/components/bootloader/initializer_callbacks/iar_format_native/entry.c": "a703521489477980cedcc0d26f1b3713f0e2392deb984f6c1792315e431a83f0",
+    "g2/components/bootloader/initializer_callbacks/iar_format_native/termination.c": "10aacb73b244cb9b0ea0c244f1443691bf16bdb6524ea4dda01ef5d5968596fe",
+    "g2/components/bootloader/initializer_callbacks/iar_format_native/fp_primitives.c": "0b3f18db7d571268ad7e2833f5b68667d30b79f818d54c44f061b343c822d57e",
+    "g2/components/bootloader/initializer_callbacks/iar_format_native/float_render.c": "c548777ac0d4f0547dde5bf34d1eb1787655ca4b87cd7c1bb2cb710c7c5af0bb",
+    "g2/components/bootloader/initializer_callbacks/iar_format_native/format_parser.c": "f9f782b6eb070a0ef9acbd5ea5c53aad69f5364b574d12b03cf904c26e1e6f23",
+    "g2/components/bootloader/initializer_callbacks/iar_format_native/integer_cursor.c": "135e1abf0ae9f9b0b267c30a90ae3eabe429faca45deb69094e63f270f832bb5",
+    "g2/components/bootloader/initializer_callbacks/iar_format_native/integer_render.c": "eb85bd1e64d27c8db503e9de7c3d7f1b44732d08eb81b61cca6db4f1084c9805"
+  },
+  "flags": [
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m33",
+    "-mthumb",
+    "-mfloat-abi=softfp",
+    "-mfpu=fpv5-d16",
+    "-O2",
+    "-ffreestanding",
+    "-fno-builtin"
+  ],
+  "log_sha256": "8a88a4efd05858c56cdeae4a80ea8cc73d2e14ac4054f3763248add5b9cfd883",
+  "limits": [
+    "QEMU11 M55; unchanged oracle relocated 0x410000 to0x40000. Native controlled output/constraint callbacks and decimal locale. No hardware/scheduler proof.",
+    "Exact return, callback32-bit argument/context sequence, va cursor, n-write targets, caller words, R4-R11, SP, PRIMASK and full FPSCR comparison. Stock-size callee scratch painted identically to31.",
+    "Default-handler semihost termination excluded here; prior revision Unicorn boundary receipts preserved."
+  ]
+}

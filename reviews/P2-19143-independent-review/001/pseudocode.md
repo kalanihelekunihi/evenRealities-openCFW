@@ -1,0 +1,5 @@
+# Dequeue loop 0x469CE4..0x469D24
+
+Partial/unaccepted;64instructionbytes. Inherit12frame,R0destination,R3globaladdressliteral46A824,R1requested/clampedlength,R2index0. Looptest469D10 unsignedlow16R2<low16R1 enters469CE4; otherwiseexit. Eachiterationfreshunsignedhalf[R3+130] ->R4,thenunsignedbyte[R3+R4] ->R4 WITHOUTprenormalizingindex. R5=low16R2;storebyteR4[R0+R5]. SECONDfreshunsignedhalf[R3+130] ->R4;increment1;R5=128;R6=SIGNEDdivideR4by128truncatedtowardzero;R4=R4-128*R6 viaMLS;storelow16[R3+130]. Freshunsignedhalf[R3+132] ->R4;wrapping32subtract1;storelow16[R3+132]. IncrementFULLR2;repeatlow16test.
+
+ExituXTHR1inplace;R0=R1zeroextendedlength. Shared469D20 POP4/5/6 restores12frame,thenBXLR. Earliererror/emptyarmsenterPOPwithR0FFFFFFFD/0; successfulreturnlow16R1. Orderedwritesandfreshreadsallowdestinationaliaswithindex/count; no snapshotorcountnonzeroinvariantassumed. Initialindexmayoutside128beforefirstread; signedremainderofincrementedunsignedhalf produces0..127. No C,freezeorwholecorpusclaim.

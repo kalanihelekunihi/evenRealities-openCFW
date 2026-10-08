@@ -1,0 +1,7 @@
+# Native formatter successor mapping
+
+29 address-mapped bodies cover8574 original bytes (+3642 versus accepted229): prior20 bodies4932, formatter engine3256, integer renderer276 and seven FP primitives110. The parser/cursor/float fragments lie within the engine extent and are not counted again. Mapping a complete function range describes the linked reconstruction footprint, not exhaustive dynamic coverage or byte-identical engine compilation. Only the seven naked FP primitive bodies have proven exact compiled instruction identity.
+
+The source-side formatter closure loads no official executable bytes in1,511 nonfloating and216 wrapper comparisons. M55 QEMU executes a relocated unchanged stock oracle separately from the same eight canonical objects;5,062 cases compare callback arguments, output, va cursor, n-targets, full FPSCR and ABI state. Additional four stack patterns and four rejected controls remain bounded evidence. No hardware/interrupt/scheduler, every-input or original-load-address floating proof is claimed. General ldexp is not reconstructed; the formatter's normalized-fraction+28 path is specialized. Dynamic caller callbacks, handler20027190, locale2000053c and stack bytes are runtime inputs.
+
+Production partitions remain official_blob for all six payloads. Remaining offline ownership is unknown; there is no exact whole-image code denominator or replacement percentage. Previous accepted229 ledger is immutable. Successor integration and reproducibility receipts are in the linked candidate report.

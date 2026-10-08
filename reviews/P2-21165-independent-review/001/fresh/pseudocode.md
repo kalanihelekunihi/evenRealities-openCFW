@@ -1,0 +1,5 @@
+# Remaining write modes: protected XOR and shared zero return
+
+Partial/unaccepted;142 instruction bytes481022..4810B0. Continues480FD6;16-byteframe,R4fullentryR0index. Mode2 calls473940 withliveR0/R1/R2/R3;savefullresultSP0 (overwritesentryR2). R0pointerliteral481750;R1=R2=(R4>>5)&7;freshword[R0+4*R2]→R2;R3=1;R4=1<<(R4&31);XORR4withfreshword;storeword[R0+4*R1]. ReloadSP0→R0,MSR PRIMASK,R0,branch4810AC. Mode5 same exact sequence withpointerliteral481754. Helpers mayaffectliveness;frame-protectedR4 retainsindex underABI;do notassumehelpersemantics beyondexplicitcall/MSR.
+
+Mode3 pointerliteral481760 andmode4 pointerliteral481764:wordindex=(R4>>5)&7;R2=1;R4=1<<(R4&31);directmaskwordstorepointer+4*wordindex withoutread/RMW;branch4810AC. Shared4810AC returns0thenPOP R1,R2,R4,PC16. Invalidselectors6..255fromprefix alsojoin andreturn0withoutwrite/helper. Modes0/1/3/4/default R1receivessavedentryR2;mode2/5 R1helperresultSP0;R2savedentryR3 unlessaliasmutated. No224bound,nullguard orreadback. No C/freeze/fullcoverage/equality claim.

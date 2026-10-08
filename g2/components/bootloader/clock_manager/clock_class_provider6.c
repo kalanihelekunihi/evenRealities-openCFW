@@ -354,3 +354,13 @@ uint32_t opencfw_bl_clock_release_id6(uint8_t user_id)
     critical_restore(previous);
     return 0u;
 }
+
+/* Source accessors for the independently verified clockmux caller. */
+void opencfw_boot_syspll_power_initialize_for_clockmux(void)
+{
+    pll_power_initialize();
+}
+void opencfw_boot_syspll_power_restore_for_clockmux(void)
+{
+    pll_power_restore();
+}

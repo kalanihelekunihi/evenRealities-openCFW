@@ -1,0 +1,4 @@
+# Two-byte entry-low-byte message with independent diagnostics
+
+Partial/unaccepted;114instructionbytes47E51C..47E58E. PUSH R3,R4,R5,LR16;SP-=16,total32;R4=fullentryR0. R5=SP+12;43C0E4(SP+12,2,0,liveR3),thenexplicitbyteSP12=14,SP13=LOW8entryR0. SP0=5;465480(16,SP+12,2,0)withfifthstackarg5. FullentryR0retainedR4fordiagnostics, butonlyLOW8used.
+Firstfresh43D0CEbit1set→SP8=LOW8R4,SP4=literalE65C,SP0=140;43D574(4,literalE624,literalE620,literalE660). Thenindependentfresh43D0CEbit0set→masklogger;elseanotherfresh43D0CEbit2set→masklogger. Masklogger43CE9E(10400000hex,literalE664,literalE664,LOW8R4). ReturnliveR0fromlastflaghelperormasklogger,notexplicitentry/sendresult. SP+=20discards16localsandsavedentryR3;POP R4,R5,PC12. No sendresultcheck; payload14differspreviousroutine13, andsourceisentryargumentratherthan4A7832return. No C/freeze/completenessclaim.

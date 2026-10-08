@@ -1,0 +1,11 @@
+# Next retained initializer dependency: ADC context42e8d0
+
+Static instruction-derived finding only; not implemented/integrated by the GPIO checkpoint. Locked bootloader f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5. Body42e8d0..42ea32 (354 bytes), factory-read child421548, caller430000 platform bringup. This is a real retained boundary, unlike absent standalone IOM submit/uninitialize.
+
+The function accepts module0 only (other module returns5), requires output pointer (else6), rejects already-claimed static context (bit24 ->7). Pool base20026df0, stride72. It sets claimed bit, preserves upper flag byte, sets lower24 magic0xafafaf, stores module0 at+4, zeros2002702c and **publishes output pointer before calibration reads**. Later failure does not roll back claim: it selects calibration validity/fallbacks and returns0.
+
+Calibration first checks cached structure200267f8 for magic0x1f01600d. If valid it copies cached+38/+3c/+40 to20026fc0; otherwise calls421548(1,0x240/241/242,1,out-word), ORing return statuses. All three resulting words must be nonzero and combined status0; otherwise it replaces them with raw constants4395c000/3f839874/bb8c47a1 and clears byte+12. Successful raw read/cached values mark byte+12=1. These raw words are not assigned physical units here.
+
+Second calibration pair uses cached+48 ->20026fe4 and cached+4c ->20026fe0, or reads421548(1,0x24a,1,20026fe4) and421548(1,0x24b,1,20026fe0). It clears bit0 of4002010c, then sets marker byte20027199 only when both words are nonzero and combined read status0; it does not supply a fallback pair in this body.
+
+Sibling reset42ea32..42ea68 validates context magic/claimed bit, clears claim then lower24 magic, resets module+4 and returns0; invalid handle returns2. This resets context metadata, not proven peripheral stop or callback/task drain. Native source reconstruction should preserve publication order, separate stores and default-versus-valid markers; trace actual421548 lower behavior before calling factory reads failure-safe. Existing source has a lower421548 provider interface in application_storage/device_info_mode0.c, so inspect/reuse its actual integration instead of inventing hardware input.

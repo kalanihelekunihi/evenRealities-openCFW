@@ -1,0 +1,32 @@
+{
+  "status": "COUNTEREXAMPLE_REPRODUCED_AND_FIXED",
+  "fixture": "current6-target5-selector16",
+  "image_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "walker_entry": "0x42a43a",
+  "input_args": [
+    5,
+    6,
+    3,
+    1
+  ],
+  "callback_args_stock_and_source": [
+    5,
+    6,
+    3,
+    1
+  ],
+  "before_fix": {
+    "stock_return_registers": [
+      16,
+      1
+    ],
+    "source_return_registers": [
+      859113499,
+      5
+    ],
+    "state_and_peripheral_write_sequences": "Matched; discrepancy was the walker return ABI."
+  },
+  "instruction_basis": "Walker prologue saves incoming r2/r3; selector ID is stored at [sp]; epilogue pops saved r2/r3 into r0/r1. The original return is selector ID 16 in r0 and original r3 (1) in r1.",
+  "fix": "Added source walker wrapper returning uint64_t(selector | current_ton<<32), while executing selector computation and callback through the authenticated table.",
+  "superseded_by": "comparison-walker-selector16.json"
+}

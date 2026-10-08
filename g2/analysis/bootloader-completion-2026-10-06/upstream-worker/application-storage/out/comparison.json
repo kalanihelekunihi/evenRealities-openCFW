@@ -1,0 +1,572 @@
+{
+  "status": "PASS",
+  "cases": 19,
+  "distinct_original_trace_bytes": 976,
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "elf_sha256": "b72810b15b83962c5e0fe5379c43cb9656aa9f3fc038891de9a2e4a962027fb5",
+  "source_sha256": {
+    "g2/components/bootloader/application_storage/storage_callbacks.c": "2a0474c90b4139ac204044734a3c2fd70dc60121489203f95546a841a5c3d302",
+    "g2/components/bootloader/application_storage/storage_callbacks.h": "84b9d5e4202f9fa5ab61950fbf9b1b9f6ade00739942b600f7ddd8d3e4d2ea29",
+    "g2/components/bootloader/application_storage/storage_callback_veneers.S": "d5742c31b807c17ca354713dfd9ee5c4332551af19e58ce660880a31eddb239b",
+    "g2/components/bootloader/platform_control/control.c": "8b6c54999184781870b3300e4f1b99416fc05bb89ad0577614615209e32b6f7d",
+    "g2/components/bootloader/platform_control/power_guards.c": "73f56d843fc648b7a18e56dc9cf698f8e74279703762b4d60cc872846bab71b9",
+    "g2/components/bootloader/platform_control/mram_rom_bridge.c": "77c556a1458f0a4d1bca76f72ab08ad8e3e311264e0112870e1eea6ab1b29d73",
+    "g2/components/bootloader/platform_control/critical_save.S": "c3be3d527c34f732bd53df3bc7230c45e94637a075952e113832d627c6a2863e",
+    "g2/components/bootloader/platform_startup/platform_startup.c": "45efd567e793079ba58ec1bb8704d789b51be7a136316b1284cf59abc6969622",
+    "g2/components/bootloader/platform_control/runtime.c": "dba157e3638495272106bf40da47a111cd915bcbc35300015eba2dc92ebbc458",
+    "g2/components/bootloader/clock_manager/clock_class_providers.c": "71a7210ba488db0b1e50739bd9448fe2fd82be6e4b7bf96cf2e82514fc197848",
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/application-storage/test_cuts.c": "2d0b91d8357803f5db6a76ca86f34d32af75deed69947bba1a35cf5dd2411562",
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/application-storage/application_storage.ld": "0981c0cb3fdb660e9a1cefdd222cb12b15dd625c218b9eb2a6b5ad6475e99c37",
+    "g2/analysis/bootloader-completion-2026-10-06/upstream-worker/application-storage/verify_application_storage.py": "6d44589884cc184a251b09958a0f23056ee291deada861029c73a2d0d3dc54ba"
+  },
+  "scatter_descriptor": {
+    "address": "0x200001e8",
+    "raw_64_bytes": "0010000000100000000000000000000000000000000000009d0a4300c50a4300ed0a430008030000030002000000001400010101000000000000000008030000",
+    "callback_fields": {
+      "read": "0x430a9d",
+      "program": "0x430ac5",
+      "erase_validate": "0x430aed"
+    }
+  },
+  "callback_source_addresses": {
+    "read": "0x430a9c",
+    "program": "0x430ac4",
+    "erase_validate": "0x430aec"
+  },
+  "range_limit_bytes_by_mode": [
+    "0x100000",
+    "0x200000",
+    "0x300000",
+    "0x400000"
+  ],
+  "comparisons": [
+    {
+      "case": "erase-below-minimum-mode-0",
+      "callback": "erase_validate",
+      "fixture": {
+        "argument": 16380,
+        "mode": 0
+      },
+      "original_range_helper_cut": [
+        {
+          "mode": 0,
+          "bound": 1048576
+        }
+      ],
+      "result": {
+        "return": "0xffffffff",
+        "range_limit_after": "0x100000",
+        "rom_calls": [],
+        "mram_cleanup_writes": [],
+        "primask": 0,
+        "read_destination": "00000000000000000000000000000000",
+        "power_control_cut_calls": 0
+      }
+    },
+    {
+      "case": "erase-minimum-address-mode-0",
+      "callback": "erase_validate",
+      "fixture": {
+        "argument": 16384,
+        "mode": 0
+      },
+      "original_range_helper_cut": [
+        {
+          "mode": 0,
+          "bound": 1048576
+        }
+      ],
+      "result": {
+        "return": "0x0",
+        "range_limit_after": "0x100000",
+        "rom_calls": [],
+        "mram_cleanup_writes": [],
+        "primask": 0,
+        "read_destination": "00000000000000000000000000000000",
+        "power_control_cut_calls": 0
+      }
+    },
+    {
+      "case": "erase-below-minimum-mode-1",
+      "callback": "erase_validate",
+      "fixture": {
+        "argument": 16380,
+        "mode": 1
+      },
+      "original_range_helper_cut": [
+        {
+          "mode": 1,
+          "bound": 2097152
+        }
+      ],
+      "result": {
+        "return": "0xffffffff",
+        "range_limit_after": "0x200000",
+        "rom_calls": [],
+        "mram_cleanup_writes": [],
+        "primask": 0,
+        "read_destination": "00000000000000000000000000000000",
+        "power_control_cut_calls": 0
+      }
+    },
+    {
+      "case": "erase-minimum-address-mode-1",
+      "callback": "erase_validate",
+      "fixture": {
+        "argument": 16384,
+        "mode": 1
+      },
+      "original_range_helper_cut": [
+        {
+          "mode": 1,
+          "bound": 2097152
+        }
+      ],
+      "result": {
+        "return": "0x0",
+        "range_limit_after": "0x200000",
+        "rom_calls": [],
+        "mram_cleanup_writes": [],
+        "primask": 0,
+        "read_destination": "00000000000000000000000000000000",
+        "power_control_cut_calls": 0
+      }
+    },
+    {
+      "case": "erase-below-minimum-mode-2",
+      "callback": "erase_validate",
+      "fixture": {
+        "argument": 16380,
+        "mode": 2
+      },
+      "original_range_helper_cut": [
+        {
+          "mode": 2,
+          "bound": 3145728
+        }
+      ],
+      "result": {
+        "return": "0xffffffff",
+        "range_limit_after": "0x300000",
+        "rom_calls": [],
+        "mram_cleanup_writes": [],
+        "primask": 0,
+        "read_destination": "00000000000000000000000000000000",
+        "power_control_cut_calls": 0
+      }
+    },
+    {
+      "case": "erase-minimum-address-mode-2",
+      "callback": "erase_validate",
+      "fixture": {
+        "argument": 16384,
+        "mode": 2
+      },
+      "original_range_helper_cut": [
+        {
+          "mode": 2,
+          "bound": 3145728
+        }
+      ],
+      "result": {
+        "return": "0x0",
+        "range_limit_after": "0x300000",
+        "rom_calls": [],
+        "mram_cleanup_writes": [],
+        "primask": 0,
+        "read_destination": "00000000000000000000000000000000",
+        "power_control_cut_calls": 0
+      }
+    },
+    {
+      "case": "erase-below-minimum-mode-3",
+      "callback": "erase_validate",
+      "fixture": {
+        "argument": 16380,
+        "mode": 3
+      },
+      "original_range_helper_cut": [
+        {
+          "mode": 3,
+          "bound": 4194304
+        }
+      ],
+      "result": {
+        "return": "0xffffffff",
+        "range_limit_after": "0x400000",
+        "rom_calls": [],
+        "mram_cleanup_writes": [],
+        "primask": 0,
+        "read_destination": "00000000000000000000000000000000",
+        "power_control_cut_calls": 0
+      }
+    },
+    {
+      "case": "erase-minimum-address-mode-3",
+      "callback": "erase_validate",
+      "fixture": {
+        "argument": 16384,
+        "mode": 3
+      },
+      "original_range_helper_cut": [
+        {
+          "mode": 3,
+          "bound": 4194304
+        }
+      ],
+      "result": {
+        "return": "0x0",
+        "range_limit_after": "0x400000",
+        "rom_calls": [],
+        "mram_cleanup_writes": [],
+        "primask": 0,
+        "read_destination": "00000000000000000000000000000000",
+        "power_control_cut_calls": 0
+      }
+    },
+    {
+      "case": "read-final-16-bytes-under-limit",
+      "callback": "read",
+      "fixture": {
+        "arg0": 536936448,
+        "arg1": 16400,
+        "arg2": 16,
+        "mode": 0,
+        "read_address": 16400,
+        "read_bytes": "000102030405060708090a0b0c0d0e0f"
+      },
+      "original_range_helper_cut": [
+        {
+          "mode": 0,
+          "bound": 1048576
+        }
+      ],
+      "result": {
+        "return": "0x0",
+        "range_limit_after": "0x100000",
+        "rom_calls": [],
+        "mram_cleanup_writes": [],
+        "primask": 0,
+        "read_destination": "000102030405060708090a0b0c0d0e0f",
+        "power_control_cut_calls": 0
+      }
+    },
+    {
+      "case": "read-below-minimum-address",
+      "callback": "read",
+      "fixture": {
+        "arg0": 536936448,
+        "arg1": 16383,
+        "arg2": 16,
+        "mode": 0
+      },
+      "original_range_helper_cut": [
+        {
+          "mode": 0,
+          "bound": 1048576
+        }
+      ],
+      "result": {
+        "return": "0xffffffff",
+        "range_limit_after": "0x100000",
+        "rom_calls": [],
+        "mram_cleanup_writes": [],
+        "primask": 0,
+        "read_destination": "000102030405060708090a0b0c0d0e0f",
+        "power_control_cut_calls": 0
+      }
+    },
+    {
+      "case": "read-16k-below-mode-size-limit",
+      "callback": "read",
+      "fixture": {
+        "arg0": 536936448,
+        "arg1": 20480,
+        "arg2": 16384,
+        "mode": 0,
+        "read_address": 20480,
+        "read_zero_size": 16384
+      },
+      "original_range_helper_cut": [
+        {
+          "mode": 0,
+          "bound": 1048576
+        }
+      ],
+      "result": {
+        "return": "0x0",
+        "range_limit_after": "0x100000",
+        "rom_calls": [],
+        "mram_cleanup_writes": [],
+        "primask": 0,
+        "read_destination": "00000000000000000000000000000000",
+        "power_control_cut_calls": 0
+      }
+    },
+    {
+      "case": "read-mode-size-limit",
+      "callback": "read",
+      "fixture": {
+        "arg0": 536936448,
+        "arg1": 20480,
+        "arg2": 3145728,
+        "mode": 2
+      },
+      "original_range_helper_cut": [
+        {
+          "mode": 2,
+          "bound": 3145728
+        }
+      ],
+      "result": {
+        "return": "0xffffffff",
+        "range_limit_after": "0x300000",
+        "rom_calls": [],
+        "mram_cleanup_writes": [],
+        "primask": 0,
+        "read_destination": "00000000000000000000000000000000",
+        "power_control_cut_calls": 0
+      }
+    },
+    {
+      "case": "read-zero-length",
+      "callback": "read",
+      "fixture": {
+        "arg0": 536936448,
+        "arg1": 20480,
+        "arg2": 0,
+        "mode": 0
+      },
+      "original_range_helper_cut": [
+        {
+          "mode": 0,
+          "bound": 1048576
+        }
+      ],
+      "result": {
+        "return": "0x0",
+        "range_limit_after": "0x100000",
+        "rom_calls": [],
+        "mram_cleanup_writes": [],
+        "primask": 0,
+        "read_destination": "00000000000000000000000000000000",
+        "power_control_cut_calls": 0
+      }
+    },
+    {
+      "case": "program-valid-rom-success",
+      "callback": "program",
+      "fixture": {
+        "arg0": 16384,
+        "arg1": 536936448,
+        "arg2": 16,
+        "mode": 3,
+        "rom_status": 0,
+        "source_bytes": "000102030405060708090a0b0c0d0e0f"
+      },
+      "original_range_helper_cut": [
+        {
+          "mode": 3,
+          "bound": 4194304
+        }
+      ],
+      "result": {
+        "return": "0x0",
+        "range_limit_after": "0x400000",
+        "rom_calls": [
+          {
+            "key": "0x12344321",
+            "operation": 1,
+            "source": "0x20010000",
+            "word_offset": "0x3ff01000",
+            "word_count": 4,
+            "source_bytes": "000102030405060708090a0b0c0d0e0f",
+            "status": "0x0"
+          }
+        ],
+        "mram_cleanup_writes": [
+          [
+            "0x40014008",
+            4,
+            195
+          ],
+          [
+            "0x40014024",
+            4,
+            0
+          ],
+          [
+            "0x40014008",
+            4,
+            0
+          ]
+        ],
+        "primask": 0,
+        "read_destination": "000102030405060708090a0b0c0d0e0f",
+        "power_control_cut_calls": 0
+      }
+    },
+    {
+      "case": "program-valid-rom-error-ignored",
+      "callback": "program",
+      "fixture": {
+        "arg0": 16384,
+        "arg1": 536936448,
+        "arg2": 16,
+        "mode": 3,
+        "rom_status": 4294967295,
+        "source_bytes": "000102030405060708090a0b0c0d0e0f"
+      },
+      "original_range_helper_cut": [
+        {
+          "mode": 3,
+          "bound": 4194304
+        }
+      ],
+      "result": {
+        "return": "0x0",
+        "range_limit_after": "0x400000",
+        "rom_calls": [
+          {
+            "key": "0x12344321",
+            "operation": 1,
+            "source": "0x20010000",
+            "word_offset": "0x3ff01000",
+            "word_count": 4,
+            "source_bytes": "000102030405060708090a0b0c0d0e0f",
+            "status": "0xffffffff"
+          }
+        ],
+        "mram_cleanup_writes": [
+          [
+            "0x40014008",
+            4,
+            195
+          ],
+          [
+            "0x40014024",
+            4,
+            0
+          ],
+          [
+            "0x40014008",
+            4,
+            0
+          ]
+        ],
+        "primask": 0,
+        "read_destination": "000102030405060708090a0b0c0d0e0f",
+        "power_control_cut_calls": 0
+      }
+    },
+    {
+      "case": "program-size-limit",
+      "callback": "program",
+      "fixture": {
+        "arg0": 16384,
+        "arg1": 536936448,
+        "arg2": 4194304,
+        "mode": 3
+      },
+      "original_range_helper_cut": [
+        {
+          "mode": 3,
+          "bound": 4194304
+        }
+      ],
+      "result": {
+        "return": "0xffffffff",
+        "range_limit_after": "0x400000",
+        "rom_calls": [],
+        "mram_cleanup_writes": [],
+        "primask": 0,
+        "read_destination": "000102030405060708090a0b0c0d0e0f",
+        "power_control_cut_calls": 0
+      }
+    },
+    {
+      "case": "program-misaligned-destination",
+      "callback": "program",
+      "fixture": {
+        "arg0": 16386,
+        "arg1": 536936448,
+        "arg2": 16,
+        "mode": 3
+      },
+      "original_range_helper_cut": [
+        {
+          "mode": 3,
+          "bound": 4194304
+        }
+      ],
+      "result": {
+        "return": "0x0",
+        "range_limit_after": "0x400000",
+        "rom_calls": [],
+        "mram_cleanup_writes": [],
+        "primask": 0,
+        "read_destination": "000102030405060708090a0b0c0d0e0f",
+        "power_control_cut_calls": 0
+      }
+    },
+    {
+      "case": "program-below-minimum-address",
+      "callback": "program",
+      "fixture": {
+        "arg0": 16383,
+        "arg1": 536936448,
+        "arg2": 16,
+        "mode": 3
+      },
+      "original_range_helper_cut": [
+        {
+          "mode": 3,
+          "bound": 4194304
+        }
+      ],
+      "result": {
+        "return": "0xffffffff",
+        "range_limit_after": "0x400000",
+        "rom_calls": [],
+        "mram_cleanup_writes": [],
+        "primask": 0,
+        "read_destination": "000102030405060708090a0b0c0d0e0f",
+        "power_control_cut_calls": 0
+      }
+    },
+    {
+      "case": "program-address-high",
+      "callback": "program",
+      "fixture": {
+        "arg0": 4294967288,
+        "arg1": 536936448,
+        "arg2": 16,
+        "mode": 3
+      },
+      "original_range_helper_cut": [
+        {
+          "mode": 3,
+          "bound": 4194304
+        }
+      ],
+      "result": {
+        "return": "0x0",
+        "range_limit_after": "0x400000",
+        "rom_calls": [],
+        "mram_cleanup_writes": [],
+        "primask": 0,
+        "read_destination": "000102030405060708090a0b0c0d0e0f",
+        "power_control_cut_calls": 0
+      }
+    }
+  ],
+  "limits": [
+    "The callback pointers are read from the exact descriptor published by startup scatter at 0x200001e8; the source ELF replaces the three callback entry addresses with four-byte C-source veneers.",
+    "For original execution only, 0x41d792 is cut at the single output field consumed by 0x430a60: stack+0x2c receives the value selected by synthetic 0x40020014 bits[3:2] and the locked halfword table 0x43401c. Its unrelated power-status construction and repeated delay calls are not modeled. Source derives the same selected field directly and maintains cache 0x200270c8.",
+    "The public/control source is executed through 0x42e4f4/0x42e4a0 and stock 0x42e8a4; only the external ROM service 0x0200ff20 is stubbed with controlled status. Its register cleanup executes on both sides. No physical MRAM programming is claimed.",
+    "The descriptor +0x20 callback only validates a 4-byte range and returns 0 or -1; it performs no erase operation.",
+    "The raw range helper computes 32-bit `address + size - 1` but does not consume it; it accepts when the original address is at least 0x4000 and size is strictly below the cached mode-selected limit. Tests cover both independent comparisons, zero-size behavior, and program-word alignment rejection.",
+    "ROM guard-enabled power control is set to zero in the fixture; no hardware acknowledgement, delay timing, flash coherence, cache behavior, or device write is modeled.",
+    "This focused callback/profile comparison is not a full source rebuild or byte-identity result."
+  ]
+}

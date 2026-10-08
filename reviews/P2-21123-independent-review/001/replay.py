@@ -1,0 +1,17 @@
+from pathlib import Path
+import json,hashlib,re,subprocess,tempfile
+b=Path('g2/build/pseudocode-first/20260930T190500Z');src=b/'attempts/P1-canonical-fixed-images-005/002/apollo_main-flash.bin';d=src.read_bytes();h=lambda x:hashlib.sha256(x).hexdigest();assert h(d)=='19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701';start=0x4805c0;end=0x4806a6
+with tempfile.TemporaryDirectory() as td:
+ t=Path(td);(t/'input.bin').write_bytes(d[start-0x438000:end-0x438000]);(t/'input.s').write_text('.syntax unified\n.cpu cortex-m55\n.thumb\n.text\n.incbin "'+str(t/'input.bin')+'"\n');subprocess.run(['/opt/homebrew/bin/arm-none-eabi-as',str(t/'input.s'),'-o',str(t/'input.o')],check=True);rawtext=subprocess.check_output(['/opt/homebrew/bin/arm-none-eabi-objdump','-D','-j','.text','-M','force-thumb','--adjust-vma='+hex(start),str(t/'input.o')],text=True)
+rows=[];cursor=start
+for line in rawtext.splitlines():
+ m=re.match(r'\s*([0-9a-f]+):\s+([0-9a-f]{4}(?: [0-9a-f]{4})?)\s+([^\s]+)\s*(.*)',line)
+ if not m:continue
+ a=int(m[1],16)
+ if not start<=a<end:continue
+ raw=b''.join(int(v,16).to_bytes(2,'little') for v in m[2].split());assert a==cursor and raw==d[a-0x438000:a-0x438000+len(raw)];cursor+=len(raw);rows.append(dict(address=a,bytes=raw.hex(),mnemonic=m[3],operands=m[4]))
+assert cursor==end,(hex(cursor),hex(end),rawtext)
+o=b/'analysis/apollo-main-diagnostic-fixed-library-priority-flags-version-conditional-callback-table-writes-21522-map/001';o.mkdir(parents=True,exist_ok=False);(o/'instructions.json').write_text(json.dumps([dict(start=start,end=end,instructions=rows)],indent=2)+'\n');(o/'disassembly.txt').write_text(rawtext);refs=sorted(set(int(m[1],16) for row in rows if (m:=re.search(r'@\s*\(?([0-9a-f]{6,8})',row['operands'])) and 'pc' in row['operands']))
+(o/'references.json').write_text(json.dumps([dict(address=a,bytes=d[a-0x438000:a-0x438000+4].hex(),value=int.from_bytes(d[a-0x438000:a-0x438000+4],'little')) for a in refs],indent=2)+'\n')
+(o/'pseudocode.md').write_text('# Priority flags and version-conditional callback table writes\n\nPartial/unaccepted;230 instruction bytes4805C0..4806A6,16frameactive,R5tablepointer,R1versionpointer. Allliteral labels belowmeanexactloadedvalues,notdereferences; eachslotstoreinlistedorder. Freshbyte480708nonzero→literal48072C/730/734/738/73C/740 to tableoffset0/4/8/28/40/44,then6A6. Elsefreshbyte48070Cnonzero→literal480744/748/74C/750/754/758/75C tooffset0/4/8/20/24/28/44,then6A6.\n\nOtherwisefreshshortcircuitpredicate(V()==33 AND unsignedS()>=2) OR (V()==34 AND unsignedS()<2) OR (V()==35 AND S()==0),V()freshword[R1]&255,S()freshword480704. True→literal480760/764/768/76C/770/774/778/77C tooffset0/4/8/12/16/48/52/56. Thenfresh(V()==33 AND S()==2)→literal480780/784 tooffset24/28;elseliteral480788/78C to24/28;6A6. Falseinitialpredicate→fresh(V()==33 AND S()==1) only→literal480790/794/780/784 tooffset0/4/24/28;else nowrites;6A6. Allrepeatedreadsdistinct, prioritybranches shortcircuitlaterflags/versionreads; noassumingearliertableclearsemanticsorunwrittenoffsetvalues. Continue6A6with16frameactive,R4zero,R5/R6tablepointer. Targets/ownership unresolved,noC/freeze/fullcoverageclaim.\n')
+(o/'replay.py').write_bytes(Path(__file__).read_bytes());(o/'receipt.json').write_text(json.dumps(dict(accepted=False,status='partial',input_sha256=h(d),instruction_bytes=end-start,files={p.name:h(p.read_bytes()) for p in o.iterdir()}),indent=2)+'\n');print('PASS',end-start)

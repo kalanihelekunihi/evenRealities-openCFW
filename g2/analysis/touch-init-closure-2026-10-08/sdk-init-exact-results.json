@@ -1,0 +1,55 @@
+{
+  "functions": [
+    {
+      "function": "GetPhysicalSize",
+      "address": "0x8200",
+      "bytes": 30,
+      "exact": true,
+      "source_linked_sha256": "564c428a19438282db3016f394c15413886c514ff3cef2c0d5f8f6880e5e50e4",
+      "stock_sha256": "564c428a19438282db3016f394c15413886c514ff3cef2c0d5f8f6880e5e50e4",
+      "mismatch_offsets": []
+    },
+    {
+      "function": "CheckRanges",
+      "address": "0x8220",
+      "bytes": 108,
+      "exact": true,
+      "source_linked_sha256": "1cbb7dc1d7c8074f89f9812c7e96952b5f5ce57e18547bcd1060f59ad319dbe3",
+      "stock_sha256": "1cbb7dc1d7c8074f89f9812c7e96952b5f5ce57e18547bcd1060f59ad319dbe3",
+      "mismatch_offsets": []
+    },
+    {
+      "function": "ComputeEEPROMProgramSize",
+      "address": "0x828c",
+      "bytes": 84,
+      "exact": true,
+      "source_linked_sha256": "e5a456e084b11a726daa13bbe2ad37278b68db5e8ce7c814e8e69787be2f7b40",
+      "stock_sha256": "e5a456e084b11a726daa13bbe2ad37278b68db5e8ce7c814e8e69787be2f7b40",
+      "mismatch_offsets": []
+    },
+    {
+      "function": "Cy_Em_EEPROM_Init_BD",
+      "address": "0x898c",
+      "bytes": 172,
+      "exact": true,
+      "source_linked_sha256": "b2f4643f8448ac70e9be8b3bd1963909f5a1590e9be40262ce8cbb90167e3682",
+      "stock_sha256": "b2f4643f8448ac70e9be8b3bd1963909f5a1590e9be40262ce8cbb90167e3682",
+      "mismatch_offsets": []
+    },
+    {
+      "function": "Cy_Em_EEPROM_Init",
+      "address": "0x8a38",
+      "bytes": 64,
+      "exact": true,
+      "source_linked_sha256": "683cf44aa464a723c48820d14f3f55460c2ac96e27db95a07e07f2ca20cea678",
+      "stock_sha256": "683cf44aa464a723c48820d14f3f55460c2ac96e27db95a07e07f2ca20cea678",
+      "mismatch_offsets": []
+    }
+  ],
+  "exact_bytes": 458,
+  "limits": [
+    "Exactselectedbody/literal comparison with all relocationsresolved.",
+    "Externalcreate/division/memset aliases are addresscontracts; prior13matched functions reused.",
+    "Sourcebased RAMprovider/scratch assigned stockaddresses, not wholefirmwarelink/sourceequality."
+  ]
+}

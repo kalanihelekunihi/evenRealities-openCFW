@@ -1,0 +1,24 @@
+{
+  "flags": [
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m33",
+    "-mthumb",
+    "-mfloat-abi=softfp",
+    "-mfpu=fpv5-d16",
+    "-O2",
+    "-ffreestanding",
+    "-fno-builtin"
+  ],
+  "sources": [
+    "/tmp/opencfw-iar-engine/engine.o",
+    "/tmp/opencfw-iar-engine/entry.o",
+    "/tmp/opencfw-iar-engine/format_parser.o",
+    "/tmp/opencfw-iar-engine/integer_cursor.o",
+    "/tmp/opencfw-iar-engine/integer_render.o",
+    "/tmp/opencfw-iar-engine/termination.o",
+    "/tmp/opencfw-iar-engine/fp_primitives.o",
+    "/tmp/opencfw-iar-engine/float_render.o"
+  ],
+  "elf_sha256": "7fbb252495faffc13dfcc8be93b5f9fd0f390ca892063b862efbb14bfe1a75eb",
+  "scope": "isolated draft engine; not successor to validated229"
+}

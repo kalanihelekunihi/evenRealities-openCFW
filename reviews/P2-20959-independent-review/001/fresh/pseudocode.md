@@ -1,0 +1,4 @@
+# Low-byte mode switch with guarded byte-state update
+
+Partial/unaccepted;80instructionbytes47E2D0..47E320. PUSH R4,R5,R6,LR16;R5=fullentryR1;R4=literal47E60Cstatepointer;writebyte2=0 beforeallmodechecks. LOW8entryR0 compared:1→updatepath,2or3→return0,no furtherwrites;0or4..255→return1. Thusentrymode256maps0andreturns1afterclear.
+Mode1:R6=literal47E610handlepointer;4497B6(freshword[R6],FFFFFFFF,liveR2,R3). Freshstatebyte0andfreshinputbyte[entryR1]compare;inequalitywritesstatebyte1=0,equalityleavesit. Independentlyfreshinputbytecopiedstatebyte0;writebyte2=2. Independentlyfreshword[R6] passed44981C(liveargs);R0=0returns. No pointerchecks, atomicityor helpermeaninginferred; observeinputbytecomparereadandcopyread separately. POP R4,R5,R6,PC restorespreservedregs; no C/freeze/completenessclaim.

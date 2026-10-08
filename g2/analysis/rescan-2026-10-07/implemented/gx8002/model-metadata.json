@@ -1,0 +1,78 @@
+{
+  "codec": {
+    "fwpk_segment_offset": 38284,
+    "sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "size": 326092
+  },
+  "evidence": [
+    "g2/tools/analyze_g2_codec_stage2_sections.py: binary-verified image and model boundaries",
+    "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-npu-staging-review-053/review.json: independent conditional staging tuple review",
+    "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-codec-npu-consumer-mapping-061/001/consumer-proposal.json: initializer fields and GRUS layout corroboration",
+    "third-party/upstream/nationalchip-lvp-kws/include/driver/gx_snpu.h: pinned SDK GRUS structure reference"
+  ],
+  "image_a_model": {
+    "commands": {
+      "hex_extent": "[0xf804,0x11bd0)",
+      "kind": "gxNPU command stream; executable by NPU",
+      "segment_extent": [
+        63492,
+        72656
+      ],
+      "sha256": "c38ed6d22c7c0b6178288678364acd10bd5730aa382c1e19a32f6cf2bd1430b9",
+      "size": 9164,
+      "staged_cpu_address": "0x20003304"
+    },
+    "exact_fit_to_backup_image": "0x2f3b0 == 0x2f3b0",
+    "staged_layout": {
+      "arena_base": "0x20000000",
+      "arithmetic": "0x20000000 + align4(0) + align4(13056) + align4(4) = 0x20003304; + align4(9164) = 0x200056d0; + align4(120800) = 0x20022eb0",
+      "command_end_and_weight_start": "0x200056d0",
+      "command_start": "0x20003304",
+      "weight_end": "0x20022eb0"
+    },
+    "weights": {
+      "hex_extent": "[0x11bd0,0x2f3b0)",
+      "kind": "trained-model weights/data",
+      "segment_extent": [
+        72656,
+        193456
+      ],
+      "sha256": "397971427d7097180d07eb63f9822904a555e51f7643d946ebb38d71a967f8cf",
+      "size": 120800,
+      "staged_cpu_address": "0x200056d0"
+    }
+  },
+  "interface": {
+    "getter_return_sizes_bytes": {
+      "cmd": 9164,
+      "data": 13056,
+      "ops": 0,
+      "tmp": 4,
+      "weight": 120800
+    },
+    "grus_task_fields": {
+      "cmd": "0x14",
+      "data": "0x08",
+      "input": "0x0c",
+      "module_id": "0x00",
+      "ops": "0x04",
+      "output": "0x10",
+      "tmp_mem": "0x18",
+      "weight": "0x1c"
+    },
+    "task_initializer": {
+      "field_transfer_evidence": "raw-body hash; see evidence references",
+      "length": 56,
+      "segment_offset": "0x8c28",
+      "sha256": "abef8eff3685a8e789509abad858f5f1323969ae83d0a7c4eb160f56d91845fd"
+    }
+  },
+  "limits": [
+    "Staging addresses remain conditional instruction-backed candidates; no live hardware read is claimed.",
+    "Commands and weights are not extracted to output files.",
+    "No trained-model source pipeline, NPU instruction semantics, C-source completeness, or byte-identical rebuild claim.",
+    "LVP/GXDNN component licenses vary; this tool imports no SDK header or model bytes."
+  ],
+  "schema_version": 1,
+  "verification": "PASS: locked stock codec bytes and model extent metadata"
+}

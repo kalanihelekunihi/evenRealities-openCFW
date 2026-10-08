@@ -1,0 +1,25 @@
+{
+  "artifact": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+  "wrapper_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "runtime_sha256": "371d8a61b659a33b4cad4a7d892e144aba8263ae59497b4f658afc5b0c430f87",
+  "runtime_base": "0x3300",
+  "wrapper": "0x5cac",
+  "saturated_scan": "0x7bc0",
+  "postprocessing": "0x7c4e..0x7c9a",
+  "initialize_caller": "0x7278",
+  "widget2_first_slot": 4,
+  "widget2_chop_cycles": 1,
+  "widget2_clock_source_reset": 2,
+  "initial_context_status": 0,
+  "initial_max_raw": 0,
+  "sdk_comparators": [
+    {
+      "url": "https://github.com/Infineon/capsense/blob/247a9a0f79eb976f144f5fbeb29488c1c2606517/cy_capsense_sensing.c",
+      "sha256": "3713e84b5de7aff120e35bdc002b1047fa6fbebb2f1e42bc8be73d69011f7956"
+    },
+    {
+      "url": "https://github.com/Infineon/capsense/blob/247a9a0f79eb976f144f5fbeb29488c1c2606517/cy_capsense_sensing_lp.c",
+      "sha256": "777300a0129f032a507e0a222bae0f321f5d4423da2ef4778058255383db5890"
+    }
+  ]
+}

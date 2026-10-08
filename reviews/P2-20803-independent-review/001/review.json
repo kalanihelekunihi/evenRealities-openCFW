@@ -1,0 +1,10 @@
+{
+  "id": "P2-20803",
+  "status": "partial",
+  "accepted": false,
+  "fresh_replay": "PASS",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "source_hashes_verified": true,
+  "fresh_hashes_verified": true,
+  "summary": "198B replay passed. Only the fullword FFFFFFFF sentinel branch reaches the designated helper; non-sentinel goes to the independent counter increment/store/reload path. Diagnostic logger/mask each independently load the counter. Logger 2067/2072 writes alias saved SP0 and SP4/SP8, so POP R0 returns entry R0 unless a logger overwrote it; if both ran, last logger 2072 wins. POP32 completes the frame and ignores final helper R0."
+}

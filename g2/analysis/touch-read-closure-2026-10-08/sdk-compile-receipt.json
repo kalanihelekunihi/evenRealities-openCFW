@@ -1,0 +1,29 @@
+{
+  "command": [
+    "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+    "-mcpu=cortex-m0plus",
+    "-mthumb",
+    "-Og",
+    "-fshort-enums",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-DCY8C4046FNI_T412",
+    "-ffunction-sections",
+    "-include",
+    "/tmp/opencfw-emeeprom-family/compile-interface.h",
+    "-I/tmp/opencfw-emeeprom-family/2.60.0",
+    "-I/tmp/opencfw-emeeprom-family/block-storage-1.2.1",
+    "-I/tmp/opencfw-touch-source",
+    "-I/tmp/opencfw-touch-source/cmsis",
+    "-I/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/drivers/include",
+    "-I/tmp/opencfw-touch-source/mtb-pdl-cat2-35f1714623cfea682d5e285af80d50416b4c7bbc/devices/include",
+    "-I/tmp/opencfw-touch-source/core-lib-ca57d1e519e08badec6891d1776c7b4f05e09561/include",
+    "-c",
+    "/tmp/opencfw-emeeprom-family/2.60.0/cy_em_eeprom.c",
+    "-o",
+    "/tmp/opencfw-emeeprom-family/2.60.0/candidate.o"
+  ],
+  "compiler": "arm-none-eabi-gcc (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) 13.3.1 20240614",
+  "object_sha256": "d1895c89ca9565907d41990c8fceff87902c424d1a62ab3e62dbed301afd432b",
+  "limit": "cy_israddress prototype supplied because existing system shim lacks it; no executable stand-in added; relocatable object only."
+}

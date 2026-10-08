@@ -1,0 +1,6 @@
+from pathlib import Path
+import subprocess,shutil,json
+N=Path('g2/analysis/bootloader-completion-2026-10-06/inventory-worker/task-delay-native');rows=[]
+for name,old,new in [('zero-yields','if(ticks)opencfw_kernel_delay(ticks);','opencfw_kernel_delay(ticks);'),('resume-yield','if(!resumed)opencfw_bl_kernel_reschedule();','if(resumed)opencfw_bl_kernel_reschedule();')]:
+ T=Path('/tmp/opencfw-delay-mutants')/name;T.mkdir(parents=True,exist_ok=True);c=T/'task_delay.c';s=(N/'task_delay.c').read_text();assert old in s;c.write_text(s.replace(old,new));subprocess.run(['clang','--target=arm-none-eabi','-mcpu=cortex-m33','-mthumb','-mfloat-abi=softfp','-O1','-ffreestanding','-fno-builtin','-c',str(c),'-o',str(T/'task_delay.o')],check=True);subprocess.run(['/opt/homebrew/bin/arm-none-eabi-ld','-T',str(N/'module.ld'),str(T/'task_delay.o'),'-o',str(T/'candidate.elf')],capture_output=True,check=True);r=subprocess.run(['/Users/kalani/.local/share/opencfw/venv/bin/python',str(N/'verify.py'),'--elf',str(T/'candidate.elf')],capture_output=True,text=True);assert r.returncode!=0;shutil.copy2(N/'failure.json',N/(name+'-failure.json'));rows.append({'mutation':name,'rejected':True,'stderr':r.stderr[-1000:]});print('REJECTED',name)
+(N/'negative-controls.json').write_text(json.dumps(rows,indent=2)+'\n')

@@ -1,0 +1,62 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmpedfcbjc6/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+004849fc <.text>:
+  4849fc:	6c40      	ldr	r0, [r0, #68]	@ 0x44
+  4849fe:	2800      	cmp	r0, #0
+  484a00:	d004      	beq.n	484a0c <.text+0x10>
+  484a02:	6d01      	ldr	r1, [r0, #80]	@ 0x50
+  484a04:	2901      	cmp	r1, #1
+  484a06:	d001      	beq.n	484a0c <.text+0x10>
+  484a08:	2000      	movs	r0, #0
+  484a0a:	e7ff      	b.n	484a0c <.text+0x10>
+  484a0c:	4770      	bx	lr
+  484a0e:	0000      	movs	r0, r0
+  484a10:	b538      	push	{r3, r4, r5, lr}
+  484a12:	0004      	movs	r4, r0
+  484a14:	0015      	movs	r5, r2
+  484a16:	0020      	movs	r0, r4
+  484a18:	f04f feff 	bl	4d481a <.text+0x4fe1e>
+  484a1c:	0029      	movs	r1, r5
+  484a1e:	0020      	movs	r0, r4
+  484a20:	f04f ff01 	bl	4d4826 <.text+0x4fe2a>
+  484a24:	bd31      	pop	{r0, r4, r5, pc}
+  484a26:	b538      	push	{r3, r4, r5, lr}
+  484a28:	0004      	movs	r4, r0
+  484a2a:	000d      	movs	r5, r1
+  484a2c:	0029      	movs	r1, r5
+  484a2e:	0020      	movs	r0, r4
+  484a30:	f04f ff23 	bl	4d487a <.text+0x4fe7e>
+  484a34:	0029      	movs	r1, r5
+  484a36:	0020      	movs	r0, r4
+  484a38:	f04f ff25 	bl	4d4886 <.text+0x4fe8a>
+  484a3c:	0029      	movs	r1, r5
+  484a3e:	0020      	movs	r0, r4
+  484a40:	f04f ff0f 	bl	4d4862 <.text+0x4fe66>
+  484a44:	0029      	movs	r1, r5
+  484a46:	0020      	movs	r0, r4
+  484a48:	f04f ff11 	bl	4d486e <.text+0x4fe72>
+  484a4c:	bd31      	pop	{r0, r4, r5, pc}
+  484a4e:	b538      	push	{r3, r4, r5, lr}
+  484a50:	0004      	movs	r4, r0
+  484a52:	000d      	movs	r5, r1
+  484a54:	0029      	movs	r1, r5
+  484a56:	0020      	movs	r0, r4
+  484a58:	f04f ff0f 	bl	4d487a <.text+0x4fe7e>
+  484a5c:	0029      	movs	r1, r5
+  484a5e:	0020      	movs	r0, r4
+  484a60:	f04f ff11 	bl	4d4886 <.text+0x4fe8a>
+  484a64:	bd31      	pop	{r0, r4, r5, pc}
+  484a66:	b538      	push	{r3, r4, r5, lr}
+  484a68:	0004      	movs	r4, r0
+  484a6a:	000d      	movs	r5, r1
+  484a6c:	0029      	movs	r1, r5
+  484a6e:	0020      	movs	r0, r4
+  484a70:	f04f fef7 	bl	4d4862 <.text+0x4fe66>
+  484a74:	0029      	movs	r1, r5
+  484a76:	0020      	movs	r0, r4
+  484a78:	f04f fef9 	bl	4d486e <.text+0x4fe72>
+  484a7c:	bd31      	pop	{r0, r4, r5, pc}

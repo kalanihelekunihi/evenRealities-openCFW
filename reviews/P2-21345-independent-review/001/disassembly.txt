@@ -1,0 +1,72 @@
+
+/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/tmprqni9i_g/input.o:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+0048364c <.text>:
+  48364c:	e92d 4ff0 	stmdb	sp!, {r4, r5, r6, r7, r8, r9, sl, fp, lr}
+  483650:	b087      	sub	sp, #28
+  483652:	0004      	movs	r4, r0
+  483654:	468a      	mov	sl, r1
+  483656:	4694      	mov	ip, r2
+  483658:	001d      	movs	r5, r3
+  48365a:	9810      	ldr	r0, [sp, #64]	@ 0x40
+  48365c:	f8dd b044 	ldr.w	fp, [sp, #68]	@ 0x44
+  483660:	9e12      	ldr	r6, [sp, #72]	@ 0x48
+  483662:	eeb4 0b40 	vcmp.f64	d0, d0
+  483666:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  48366a:	d10d      	bne.n	483688 <.text+0x3c>
+  48366c:	ed9f 2ba6 	vldr	d2, [pc, #664]	@ 483908 <.text+0x2bc>
+  483670:	eeb4 0b42 	vcmp.f64	d0, d2
+  483674:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  483678:	d006      	beq.n	483688 <.text+0x3c>
+  48367a:	ed9f 2ba5 	vldr	d2, [pc, #660]	@ 483910 <.text+0x2c4>
+  48367e:	eeb4 0b42 	vcmp.f64	d0, d2
+  483682:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  483686:	d50a      	bpl.n	48369e <.text+0x52>
+  483688:	9602      	str	r6, [sp, #8]
+  48368a:	f8cd b004 	str.w	fp, [sp, #4]
+  48368e:	9000      	str	r0, [sp, #0]
+  483690:	002b      	movs	r3, r5
+  483692:	4662      	mov	r2, ip
+  483694:	4651      	mov	r1, sl
+  483696:	0020      	movs	r0, r4
+  483698:	f7ff fe5a 	bl	483350 <.text-0x2fc>
+  48369c:	e131      	b.n	483902 <.text+0x2b6>
+  48369e:	ed9f 2b9e 	vldr	d2, [pc, #632]	@ 483918 <.text+0x2cc>
+  4836a2:	eeb4 0b42 	vcmp.f64	d0, d2
+  4836a6:	eef1 fa10 	vmrs	APSR_nzcv, fpscr
+  4836aa:	d501      	bpl.n	4836b0 <.text+0x64>
+  4836ac:	2101      	movs	r1, #1
+  4836ae:	e000      	b.n	4836b2 <.text+0x66>
+  4836b0:	2100      	movs	r1, #0
+  4836b2:	000a      	movs	r2, r1
+  4836b4:	b2d2      	uxtb	r2, r2
+  4836b6:	2a00      	cmp	r2, #0
+  4836b8:	d001      	beq.n	4836be <.text+0x72>
+  4836ba:	eeb1 0b40 	vneg.f64	d0, d0
+  4836be:	0572      	lsls	r2, r6, #21
+  4836c0:	d400      	bmi.n	4836c4 <.text+0x78>
+  4836c2:	2006      	movs	r0, #6
+  4836c4:	ed8d 0b00 	vstr	d0, [sp]
+  4836c8:	e9dd 2300 	ldrd	r2, r3, [sp]
+  4836cc:	0d1a      	lsrs	r2, r3, #20
+  4836ce:	2300      	movs	r3, #0
+  4836d0:	0552      	lsls	r2, r2, #21
+  4836d2:	0d52      	lsrs	r2, r2, #21
+  4836d4:	f2a2 32ff 	subw	r2, r2, #1023	@ 0x3ff
+  4836d8:	ee01 2a10 	vmov	s2, r2
+  4836dc:	e9dd 8900 	ldrd	r8, r9, [sp]
+  4836e0:	f05f 32ff 	movs.w	r2, #4294967295	@ 0xffffffff
+  4836e4:	f8df 391c 	ldr.w	r3, [pc, #2332]	@ 484004 <.text+0x9b8>
+  4836e8:	ea18 0802 	ands.w	r8, r8, r2
+  4836ec:	ea19 0903 	ands.w	r9, r9, r3
+  4836f0:	2200      	movs	r2, #0
+  4836f2:	f8df 3914 	ldr.w	r3, [pc, #2324]	@ 484008 <.text+0x9bc>
+  4836f6:	ea58 0202 	orrs.w	r2, r8, r2
+  4836fa:	ea59 0303 	orrs.w	r3, r9, r3
+  4836fe:	e9cd 2300 	strd	r2, r3, [sp]
+  483702:	eeb8 1bc1 	vcvt.f64.s32	d1, s2
+  483706:	ed9f 3b86 	vldr	d3, [pc, #536]	@ 483920 <.text+0x2d4>
+  48370a:	ed9f 4b87 	vldr	d4, [pc, #540]	@ 483928 <.text+0x2dc>

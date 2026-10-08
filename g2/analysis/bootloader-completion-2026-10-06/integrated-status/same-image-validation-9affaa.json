@@ -1,0 +1,119 @@
+{
+  "utc": "2026-10-07T05:12:27.947863+00:00",
+  "status": "PASS",
+  "elf": "g2/build/bootloader-completion/source-image-compatible/snapshots/9affaa59fb648834327b08181849cc02787cacc3044c90e86692790e10a1bac6/bootloader-source-test.elf",
+  "elf_sha256": "9affaa59fb648834327b08181849cc02787cacc3044c90e86692790e10a1bac6",
+  "total_cases": 7,
+  "profiles": [
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/9affaa59fb648834327b08181849cc02787cacc3044c90e86692790e10a1bac6/comparison.json",
+      "sha256": "dbfd90366227155c209f6a492f9eb3b3e4d69b75d90017dbc18c82f533fa49b0",
+      "status": "PASS",
+      "cases": 2
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/9affaa59fb648834327b08181849cc02787cacc3044c90e86692790e10a1bac6/failures.json",
+      "sha256": "6bb046046811e877d2dfcdff67fb7863638474bbfc51edc9a9f0b414f34c309b",
+      "status": "PASS",
+      "cases": 3
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/9affaa59fb648834327b08181849cc02787cacc3044c90e86692790e10a1bac6/powerloss.json",
+      "sha256": "85a8def5783a12bf728bd59128c5f197bb1602fa74c1a4b2769352f8367f9003",
+      "status": "PASS",
+      "cases": 2
+    }
+  ],
+  "union_distinct_original_trace_bytes": 38764,
+  "payload_bytes": 148599,
+  "percentage": 26.086312828484715,
+  "interruption_checks": [
+    {
+      "interruption": "before",
+      "matches": {
+        "stopped_persistence_match": true,
+        "stopped_observable_match": true,
+        "reboot_persistence_match": true,
+        "reboot_observable_match": true
+      }
+    },
+    {
+      "interruption": "after",
+      "matches": {
+        "stopped_persistence_match": true,
+        "stopped_observable_match": true,
+        "reboot_persistence_match": true,
+        "reboot_observable_match": true
+      }
+    }
+  ],
+  "validation_input_hashes": {
+    "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/9affaa59fb648834327b08181849cc02787cacc3044c90e86692790e10a1bac6/validation-input-hashes-final.json",
+    "sha256": "e21b64305bbf9a112093e88f789c38ced4164e430ad9b1e12dd390c0e7490037",
+    "existing_source_runner_files": 628,
+    "linked_objects": 158,
+    "post_run_hash_mismatches": []
+  },
+  "additional_tests": [
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/elog-setters/comparison-candidate.json",
+      "sha256": "e1a396f5ec7bea1995794af9bfb5fe0ba0f8f1ab68684a99c95d2fb2095a4b40",
+      "status": "PASS",
+      "cases": 192
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/elog-setters/mutex_kernel.json",
+      "sha256": "91770ef9ef1d01567ea5ffc82ce5ff12d4408b7d03d1aa358d9261fde5395b07",
+      "status": "PASS",
+      "cases": 516
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/elog-setters/mutex_sequences.json",
+      "sha256": "7f973ea82f8be63544a528d88ac132a0e5cbb4a7b70577350b7d150cbec4e3dd",
+      "status": "PASS",
+      "cases": 2
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/elog-setters/mutex_block_boundary.json",
+      "sha256": "b2b7cd5b2d973f406abeacb60bc7e957020d66698a22a68f7e445d5419e5370f",
+      "status": "PASS",
+      "cases": 4
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/elog-setters/isr_delivery.json",
+      "sha256": "faef1fa9bb24956299dbfa3891bf51f50335e8adb7819238f34de9af8fde4036",
+      "status": "PASS",
+      "cases": 1480
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/elog-setters/isr_public_interfaces.json",
+      "sha256": "a58edcc534ebbe85bae635ab24625deb40bf756862e6327ba2743736197bb99a",
+      "status": "PASS",
+      "cases": 62
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/elog-setters/isr_deferred_fifo.json",
+      "sha256": "8cd86c9b418a26f7d523fad6db04526f7a8f988f4812ac1b55eee9ef3346078b",
+      "status": "PASS",
+      "cases": 1
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/elog-setters/service_records.json",
+      "sha256": "157b15e4ab7caf06e78c00d89b72532cbae90cda2f115ebc24bb5eec011380a4",
+      "status": "PASS",
+      "cases": 112
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/elog-setters/service_startup_state.json",
+      "sha256": "262201d77009da5324caae55e3dd1342d6c223d65480d4730e33fa22dc39b8f7",
+      "status": "PASS",
+      "cases": 1
+    }
+  ],
+  "limits": [
+    "Offline fixture comparison, not source-complete/byte-identical firmware. Six prior FP64 instruction effects modeled. Peripheral/ROM/timing/task boundaries preserved.",
+    "Four native EasyLogger setters192 direct tests. Logger sink/callback modeled in focused suite, reset stops at AIRCR. Four reset retry branches unvisited.",
+    "Native mutex/ISR/service regressions rerun; other ca59e9 peripheral receipts remain historical and are not relabeled as current.",
+    "Logging/output4176ce and printf415fae, startup alternatives, task restoration/delete/drain and full vectors/assets/layout/compiler equality remain unresolved."
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "utc": "2026-10-06T22:33:33.284568+00:00",
+  "status": "PASS",
+  "elf": "g2/build/bootloader-completion/source-image-compatible/snapshots/3234118f1f93c53ac3354bb23641c00b5e975062b408265b2f6a2ea6a7f4ca0e/bootloader-source-test.elf",
+  "elf_sha256": "3234118f1f93c53ac3354bb23641c00b5e975062b408265b2f6a2ea6a7f4ca0e",
+  "seed_elf": "g2/build/bootloader-completion/source-image-compatible/snapshots/3234118f1f93c53ac3354bb23641c00b5e975062b408265b2f6a2ea6a7f4ca0e/filesystem-seed.elf",
+  "seed_elf_sha256": "e6ba6916ee417e9efec1f4dc90a50f8ce7777f0e2ad8f976e6d2e27856072b78",
+  "profiles": [
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/3234118f1f93c53ac3354bb23641c00b5e975062b408265b2f6a2ea6a7f4ca0e/comparison.json",
+      "sha256": "8c0d7b00dbcf8f26ec12134e7ff309155909d015ba1dba9e34bfed69f4ac830d",
+      "status": "PASS",
+      "cases": 2,
+      "distinct_original_trace_bytes": 30368
+    },
+    {
+      "path": "g2/build/bootloader-completion/source-image-compatible/snapshots/3234118f1f93c53ac3354bb23641c00b5e975062b408265b2f6a2ea6a7f4ca0e/failures-rerun.json",
+      "sha256": "b9625d3fc80f4e40f0f1e7be8c50433f13b2ef3f3e82689bd22925ec61ae2ea6",
+      "status": "PASS",
+      "cases": 3,
+      "distinct_original_trace_bytes": 29092
+    },
+    {
+      "path": "g2/analysis/bootloader-completion-2026-10-06/integrated-status/failure-profile/powerloss-review-strict-3234.json",
+      "sha256": "efb63aa70f8eceadbf3657393fabfefe890e7afbe78a57842f52cc26207d8f20",
+      "status": "PASS",
+      "cases": 2,
+      "distinct_original_trace_bytes": 30328
+    }
+  ],
+  "total_cases": 7,
+  "union_distinct_original_trace_bytes": 30814,
+  "limits": [
+    "Source-linked test ELF only; explicit providers and fixture assets remain. No standalone source completeness or byte identity.",
+    "Interruption occurs before/after an atomic synthetic resident-ROM write; no physical power failure or partial-write claim. Reboot stops before application instructions."
+  ],
+  "runner_provenance_note": "During the strict3234 run, helper files acquired conditional support for later native-cache images. The3234 ELF lacks those symbols, so that added branch is inactive for this image. ELF and seed were immutable throughout; runner source_sha256 is a post-run filesystem hash, not a captured loaded-script snapshot."
+}

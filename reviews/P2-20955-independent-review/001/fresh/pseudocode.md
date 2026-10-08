@@ -1,0 +1,6 @@
+# Conditional rollover cleanup, handle helper wrapper and fatal initialization branch
+
+Partial/unaccepted;134instructionbytes47E1EC..47E272,threeentries.
+E1EC PUSH R3,R4,R5,LR16;freshbyte[pointerliteralE2B4]zero→R0=FFFFFFFE(-2). OtherwiseR4=literalE2B8pointer;freshwordzero→R0=0. Nonzero→R5=literalE2BCpointer;freshwordunsigned<33→R0=0. Otherwise47E06A(liveargs),word[R4]=0,word[R5]=0,R0=0. POP R1,R4,R5,PC returnsR1=savedentryR3.
+E220 PUSH R7,LR8;R1=literalE2C0pointer;freshwordzero skiphelper. Nonzero→independentlyfreshword intoR0;474910(R0,liveR1,R2,R3). POP R0,PC returns savedentryR7,not helperreturn; no globalclear.
+E232 PUSH R2,R3,R4,LR16;R4=literalE28Cpointer;freshwordnonzero skipsinitialization. Zero→SP4=literalE2C4 overwritessavedentryR3;SP0=literalE2C8 overwritessavedentryR2;47E712(literalE2CC,2000,0,0) withSP0/SP4stackarguments. StorefullreturnedR0globalword,thenfreshreloadtest. Freshzero→5FA0A4(liveargs);ifnormallyreturns,R0=0,R1=FFFFFFFF,storeword0toaddressFFFFFFFF;thenunconditionalselfbranchE266forever ifstorecompletes. This is exact write/loop behavior; faultmechanism notassumed. Freshnonzero→48EAC8(liveargs),47DD92(liveargs),thenreturn. POP R0,R1,R4,PC returnsSP0/SP4 (initializationliterals subjectcallee memorywrites,or savedentryR2/R3oninitialnonzero),restoresentryR4. No C/freeze/completenessclaim;externalhelpersremainunresolved.

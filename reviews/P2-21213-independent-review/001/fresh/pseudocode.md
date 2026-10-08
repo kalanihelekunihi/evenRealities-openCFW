@@ -1,0 +1,5 @@
+# Aligned double-word fetch, sign prefix and precision defaults
+
+Partial/unaccepted;136 instruction bytes481CF2..481D7A. Continues481836232frame,R9argcursor,R11conversion. ModifierbyteSP66=='L'(76) selectsITTEEloadcursorintoR1 vsR0;both computeR2=(cursor+7mod2^32)&~7. Storealignedcursor[R9]BEFORELDRD R0low/R1high;R2+=8;storeadvancedcursor[R9];STRD rawlow/highSP8/SP12. Signbithigh31set→appendminus45. OtherwisefreshhalfwordSP64flags bit1set→plus43;elsebit0set→space32;elseappendnone. AppendfreshwordSP28count:byte[SP72+count]=sign;count++mod2^32→SP28. Signprioritynegative,plus,space;negativezero/rawNaNsign preserved bybitcheck.
+
+R12=SP72+freshSP28;R3=R11OR32;reloadrawSP8/SP12→SP176/SP180;SP20=R12;R4=SP132. IfR3=='a'(97) skipprecisiondefaults→481D7A. Otherconversions:wordSP56precision signednegative→R1=6→SP56;precision0and(R11OR32)=='g'(103)→R1=1→SP56;otherprecisionunchanged. ExactITconditionflags fromprecisionCMP andconditionalconversionCMP retained. No floatingnumericreplacement, laterclassification/formattingunresolved;no C/freeze/fullcoverage/equality claim.

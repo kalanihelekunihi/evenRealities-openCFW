@@ -1,0 +1,4 @@
+# Selector two ordered writes length diagnostics
+
+Partial/unaccepted;112instructionbytes,inherited88-byteframe,R4source,R5destination. Freshbyte[R4+31]storebyte[R5+106];call0x439BE4(R5+80modulo2^32,R4+4modulo2^32,26,liveR3). Thenfreshbyte[R5+46]OR2andstoreLOW8back. Query0x43D0CE;bit1zero skips0x47B0C8;otherwisefreshhalfword[R4+28]SP12,thenfreshbyte[R4+31]SP8,literal47B710 SP4,1308 SP0;call0x43D574(4,literal47B6F8,literal47B6F4,literal47B6F0,fifth1308,sixthliteral47B710,seventhfreshbyte31,eighthfreshhalfword28).
+At0x47B0C8queryfreshstatus;bit0oneenters0x47B0D8,otherwisequeryagainandbit2zero skips0x47B0EC. MaskpathR1literal47B714,freshhalfword[R4+28]SP0,thenfreshbyte[R4+31]R3,R2sameR1;call0x43CE9E(0x10800000,R1,R2,freshbyte31,fifthfreshhalfword28). Fallthroughpending0x47B0EC. Preserveorderedstores,helperargumentsandindependentreads. No C,freezeorcompletenessclaim.

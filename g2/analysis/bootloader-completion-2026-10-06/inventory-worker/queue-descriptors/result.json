@@ -1,0 +1,248 @@
+{
+  "status": "PASS",
+  "cases": 16,
+  "distinct_original_instruction_bytes": 440,
+  "original_sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+  "stock_ranges": {
+    "alloc": "0x42790a",
+    "post": "0x4279f0",
+    "reset": "0x427baa"
+  },
+  "stock_range_sha256": {
+    "alloc": "74a57509503aa339dce2f40cdbff6d283585b7eac2f526c7d4939548e55baa3c",
+    "post": "457794f4df1853b69f6e267d49376d35858cf949ea4f990881492be01e3ee359",
+    "reset": "ab799f96661b76eb277c61e39d8e443657951731c97b77106f64680463d67fc3"
+  },
+  "source_sha256": {
+    "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/queue-descriptors/verify_queue_descriptors.py": "0b0b4111bef8c338be38eab2c945dde8a59ddca4e951286ffc66e0078273b5a4",
+    "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/queue-descriptors/Makefile": "703f2cc982b4921d87a21f358fc5846b8441cada6d3e67028d8ba9180a8d7442",
+    "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/queue-descriptors/module.ld": "d16795b8f142a74a48f63ed2043313de499826346a85bffcc19aaa6e4cec2c29",
+    "g2/components/bootloader/nor_mspi_queue/queue_descriptors.c": "c2402468dcf87ce0b40d326bc151dc77bba7fef5ec64353b719de8003dc0471b",
+    "g2/components/bootloader/nor_mspi_queue/queue_descriptors.h": "46907c03c2620997e8a1e3ee17487f7abd742063713dba454250c86a3bdae16b"
+  },
+  "source_elf_sha256": "0e7ac86619bd854f4f5610a73dea164c0186562184a112d78c1761a3dc4bb5f9",
+  "cases_detail": [
+    {
+      "function": "post",
+      "fixture": {
+        "flags": 30264781,
+        "write": 0,
+        "producer": 8,
+        "current": 4,
+        "end_index": 9,
+        "low": 305397762
+      },
+      "return": 0,
+      "state_sha256": "462598b5c0cddc63fd6c6ceee1e70ab4f948abaef556cb80b3efdaeb5137b79c"
+    },
+    {
+      "function": "post",
+      "fixture": {
+        "flags": 30264781,
+        "write": 0,
+        "producer": 8,
+        "current": 4,
+        "end_index": 9,
+        "low": 305397762,
+        "read_address": 537395200
+      },
+      "return": 0,
+      "state_sha256": "db0b0d33f9ad25411f92d01f366bb177d52e8e98af37d3d1c55ef6e69bbc336b"
+    },
+    {
+      "function": "post",
+      "fixture": {
+        "flags": 30264781,
+        "write": 0,
+        "producer": 0,
+        "current": 0,
+        "end_index": 0,
+        "low": 0
+      },
+      "return": 7,
+      "state_sha256": "955c8713395e57a1904fb7eb76c34df22da63af5eb183c53c37b13d753131d0d"
+    },
+    {
+      "function": "post",
+      "fixture": {
+        "flags": 0,
+        "write": 0,
+        "producer": 8,
+        "current": 1,
+        "end_index": 9,
+        "low": 0
+      },
+      "return": 2,
+      "state_sha256": "0fbca6ca8c1eb3421b2baebcc7097c16b886baea98d41686ed4d2b526650b7d8"
+    },
+    {
+      "function": "alloc",
+      "fixture": {
+        "flags": 30264781,
+        "write": 0,
+        "producer": 0,
+        "current": 4,
+        "end_index": 4,
+        "low": 4,
+        "count": 3
+      },
+      "return": 0,
+      "state_sha256": "4b7b1b78561d1ef019c3831bc5d1d7a1e09d389631fee592a4d90c072c962433"
+    },
+    {
+      "function": "alloc",
+      "fixture": {
+        "flags": 30264781,
+        "write": 2048,
+        "producer": 2048,
+        "current": 4,
+        "end_index": 4,
+        "low": 4,
+        "count": 2
+      },
+      "return": 0,
+      "state_sha256": "27e2b3a7a3cd71ecf9d8fcdf1359830a099e0d59344095b7f8df84f51b3f8c04"
+    },
+    {
+      "function": "alloc",
+      "fixture": {
+        "flags": 30264781,
+        "write": 4080,
+        "producer": 4080,
+        "current": 4,
+        "end_index": 4,
+        "low": 4,
+        "count": 1
+      },
+      "return": 0,
+      "state_sha256": "fbd3b5e4b322d57d4232d4ccfb9e47af1514c4c2cc0299bff1e34d9e44cf1632"
+    },
+    {
+      "function": "alloc",
+      "fixture": {
+        "flags": 30264781,
+        "write": 0,
+        "producer": 8,
+        "current": 4,
+        "end_index": 4,
+        "low": 4,
+        "count": 1
+      },
+      "return": 7,
+      "state_sha256": "e0963fd7919fcb3a4d5d38f82a5f6e0796184188003776b31a70800f08b63297"
+    },
+    {
+      "function": "alloc",
+      "fixture": {
+        "flags": 30264781,
+        "write": 0,
+        "producer": 0,
+        "current": 0,
+        "end_index": 4,
+        "low": 4,
+        "count": 255
+      },
+      "return": 5,
+      "state_sha256": "fb58428deceda96316e8f12aeb3afe7d28eef70b0766954b40ee647348407c27"
+    },
+    {
+      "function": "alloc",
+      "fixture": {
+        "flags": 30264781,
+        "write": 0,
+        "producer": 0,
+        "current": 255,
+        "end_index": 0,
+        "low": 0,
+        "count": 2
+      },
+      "return": 0,
+      "state_sha256": "7bb5489f8032672c124b3aaa2b5f13f39c4b35db8178457bd1285c1b4e9047e0"
+    },
+    {
+      "function": "alloc",
+      "fixture": {
+        "flags": 30264781,
+        "write": 0,
+        "producer": 0,
+        "current": 0,
+        "end_index": 0,
+        "low": 0,
+        "count": 0
+      },
+      "return": 0,
+      "state_sha256": "9c44ac8f473300a8fc1c63b752959e0c341f44eea60d27741964ce5bb029753d"
+    },
+    {
+      "function": "alloc",
+      "fixture": {
+        "flags": 30264781,
+        "write": 0,
+        "producer": 0,
+        "current": 0,
+        "end_index": 0,
+        "low": 0,
+        "count": 1
+      },
+      "return": 6,
+      "state_sha256": "955c8713395e57a1904fb7eb76c34df22da63af5eb183c53c37b13d753131d0d"
+    },
+    {
+      "function": "alloc",
+      "fixture": {
+        "flags": 0,
+        "write": 0,
+        "producer": 0,
+        "current": 0,
+        "end_index": 0,
+        "low": 0,
+        "count": 1
+      },
+      "return": 2,
+      "state_sha256": "0c7b751a21f58ce2be9eb99e24033c413f24b6153306e3f6cd95018084d00cbe"
+    },
+    {
+      "function": "reset",
+      "fixture": {
+        "flags": 30264781,
+        "write": 40,
+        "producer": 72,
+        "current": 1024,
+        "end_index": 7,
+        "low": 18
+      },
+      "return": 0,
+      "state_sha256": "d6482374444307e1a5b79c67e6078d2a8e63998d88fe9da8e19824369206aeb3"
+    },
+    {
+      "function": "reset",
+      "fixture": {
+        "flags": 63819213,
+        "write": 0,
+        "producer": 0,
+        "current": 0,
+        "end_index": 0,
+        "low": 0
+      },
+      "return": 7,
+      "state_sha256": "2b73345da6446f6ad403961cfe310247c8eada5462d4e2682f2a0c9126e9b1cf"
+    },
+    {
+      "function": "reset",
+      "fixture": {
+        "flags": 0,
+        "write": 0,
+        "producer": 0,
+        "current": 0,
+        "end_index": 0,
+        "low": 0
+      },
+      "return": 2,
+      "state_sha256": "0c7b751a21f58ce2be9eb99e24033c413f24b6153306e3f6cd95018084d00cbe"
+    }
+  ],
+  "limits": [
+    "Queue state and MMIO are synthetic; no device was accessed.",
+    "The helpers allocate/post/reset descriptors only; they do not demonstrate physical CQ execution or completion."
+  ]
+}

@@ -1,0 +1,3 @@
+# Indexed record entry six byte thirteen argument log
+
+Partial/unaccepted;64 instructionbytes,inherited56-byteframe,R4fullentryR0,R5fullentryR1,R6indexedrecordpointer. Query0x43D0CE;statusbit1zero skips pending0x47AC1E. Otherwiseindependentlyreadbytes[R4+0..5] ascendingorderintostackSP32,28,24,20,16,12respectively. WriteLOW16 R5 SP8,literal47B588 SP4,1083 SP0. Call0x43D574(4,literal47AE28,literal47ADCC,literal47B580,fifth1083,sixthliteral47B588,seventhLOW16index,eighthbyte5,ninthbyte4,tenthbyte3,eleventhbyte2,twelfthbyte1,thirteenthbyte0). R5notdestructivelynarrowed. Preservefreshreads,livequeryarguments andpendingcontinuation. No C,freezeorcompletenessclaim.

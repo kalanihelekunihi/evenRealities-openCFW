@@ -1,0 +1,24 @@
+{
+  "elf_sha256": "b400fe9e1004ec83c205ee82cf3dcf3274fb20f0f704d803bfebdb77880bbaf7",
+  "objects": {
+    "flash.o": "d4b0b304cfe6b8db8197539aab6e90a5950604f963d2d046edf8ef7ca3c5ff40",
+    "providers.o": "7ba889d7ad7747b7ea0858568985e77b7ca66f6249de627e2c479b376035fbe4",
+    "asm.o": "4fcad330e4cc3da31fdbe12a1ad98e0686fd5beb68af993f7e725d44e67d5e39"
+  },
+  "sources": {
+    "flash.c": "5111042e7a2bff7a1d392510861db8dc2d378375f7ddbf8f404d9006f4899078",
+    "providers.c": "58bd4e1ecfe130c8c4957fb54390eed80871c7cd529fe797e41de1942f449a94"
+  },
+  "compiler": "arm-none-eabi-gcc (Arm GNU Toolchain 13.3.Rel1 (Build arm-13.24)) 13.3.1 20240614",
+  "flags": [
+    "-mcpu=cortex-m0plus",
+    "-mthumb",
+    "-Og",
+    "-fshort-enums",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-DCY8C4046FNI_T412",
+    "-ffunction-sections"
+  ],
+  "limits": "Independent flash/provider control flow; SROM external synthetic boundary; not safe deployable firmware."
+}

@@ -1,0 +1,4 @@
+# Eligible record byte46 word index diagnostics
+
+Partial/unaccepted;98instructionbytes,inherited72-byteframe,R10recordpointer,R9fullindex. Query43D0CE;bit1zero skips0x47BE4C;otherwisefreshbyte[R10+46]SP16,thenfreshfullword[R10+196]SP12,fullR9SP8,literal47C8B4 SP4,2020 SP0;call43D574(4,literal47C548,literal47C544,literal47C540,fifth2020,sixthliteral47C8B4,seventhfullindex,eighthfreshword196,ninthfreshbyte46).
+At0x47BE4Cqueryfreshstatus;bit0oneenters0x47BE5C,otherwisequeryagainandbit2zero skips0x47BE78. MaskpathR1literal47C8B8,independentlyfreshbyte[R10+46]SP4,thenfreshword[R10+196]SP0,R3fullR9,R2sameR1;call43CE9E(0x10C00000,R1,R2,fullindex,fifthfreshword196,sixthfreshbyte46). Preserveorderedfreshreads,queriesandlocals,no cachedfields. Fallthroughpending0x47BE78. No C,freezeorcompletenessclaim.

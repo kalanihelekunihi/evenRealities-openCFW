@@ -1,0 +1,3 @@
+# Shared destination byte46 diagnostics
+
+Partial/unaccepted;78instructionbytes,inherited88-byteframe,R5destination,R4source. Query0x43D0CE;bit1zero skips0x47B374;otherwisefreshbyte[R5+46]SP8,literal47BC08 SP4,1340 SP0;call0x43D574(4,literal47B6F8,literal47B6F4,literal47B6F0,fifth1340,sixthliteral47BC08,seventhfreshdestinationbyte46). At0x47B374queryfreshstatus;bit0oneenters0x47B384,otherwisequeryagainandbit2zero skips0x47B396. MaskpathR1literal47BC0C,R2same,independentlyfreshbyte[R5+46]R3;call0x43CE9E(0x10400000,R1,R2,R3). Allselectorpathsreachthiscommonblockincludingunknownselector. Preservefreshreads,queriesandlivearguments;fallthroughpending0x47B396. No C,freezeorcompletenessclaim.

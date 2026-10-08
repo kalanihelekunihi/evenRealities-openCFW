@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/bootloader-completion-2026-10-06/inventory-worker/logger-call-metadata/verify_adapters.py", line 39, in <module>
+    if got!=[expected]:(N/'adapter-failure.json').write_text(json.dumps(dict(original=r,expected=expected,source=got),indent=2));raise AssertionError((r['family'],r['line'],expected,got))
+                                                                                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ('dfu_task', 538, {'level': 4, 'tag': 'task.dfu', 'file': 'D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c', 'function': '_thread_msg_handler', 'line': 538, 'format': 'blobSize = %d(0x%x)', 'arguments': [96, 96]}, [{'level': 4, 'tag': 'task.dfu', 'file': 'D:\\01_workspace\\s200_ap510b_iar_git\\product\\s200\\bootloader\\threads\\thread_dfu.c', 'function': '_thread_msg_handler', 'line': 538, 'format': 'blobSize = %d(0x%x)', 'arguments': [67108960, 67108960]}])
