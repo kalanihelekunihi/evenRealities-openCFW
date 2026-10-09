@@ -1,0 +1,89 @@
+{
+  "raw_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "functions": {
+    "any": {
+      "start": "0x4c377a",
+      "end_exclusive": "0x4c37a8",
+      "bytes": 46,
+      "sha256": "11a6cf814c1a66760a988880dac541c55419e26aa1f4c7ef2de27b9a0d7e019f",
+      "scope": "native complete"
+    },
+    "user_query": {
+      "start": "0x4c37a8",
+      "end_exclusive": "0x4c37ca",
+      "bytes": 34,
+      "sha256": "8dc0a88874cc74f9148e7ae8b6e70f50b7cd1f732db5b74982a8abcccb1bd6f5",
+      "scope": "native complete"
+    },
+    "user_count": {
+      "start": "0x4c37ca",
+      "end_exclusive": "0x4c37fe",
+      "bytes": 52,
+      "sha256": "2c98fb87af946ccd169b0e0f8225c9455b682478941053f2a25da7ac6e23c689",
+      "scope": "native complete"
+    },
+    "user_set": {
+      "start": "0x4c37fe",
+      "end_exclusive": "0x4c387e",
+      "bytes": 128,
+      "sha256": "bc7fc361719841b4cd3b48adad0bb774fe817371892b0a9cbe4e8744c5ec2a8e",
+      "scope": "native complete"
+    },
+    "xtal_status": {
+      "start": "0x480c56",
+      "end_exclusive": "0x480c7c",
+      "bytes": 38,
+      "sha256": "19e5abd53ba53fb1a0b3f74bc40bbf5775c13e7b17d015c1598706fa788424e7",
+      "scope": "native complete"
+    },
+    "xtal_release": {
+      "start": "0x4c3e9a",
+      "end_exclusive": "0x4c3ef4",
+      "bytes": 90,
+      "sha256": "eb4296ca80b0d9d1ae7ee1067fc821ad7bad56b3ab72b87e1dc2a2ddc61a7ed6",
+      "scope": "native complete"
+    },
+    "xtal_request": {
+      "start": "0x4c3d9e",
+      "end_exclusive": "0x4c3e9a",
+      "bytes": 252,
+      "sha256": "e8236f245430c77e313d1fa4e03c016b41d4ced3465e7197e57376e6b666ec88",
+      "scope": "pseudocode, original execution"
+    },
+    "xtal_wait": {
+      "start": "0x4c3d70",
+      "end_exclusive": "0x4c3d9e",
+      "bytes": 46,
+      "sha256": "c5769a91c08b99890f6d26bf7b75d4ee1e90e1e99fb5e95f9579c1a948ea886c",
+      "scope": "pseudocode, original execution"
+    },
+    "counter_wait": {
+      "start": "0x4c387e",
+      "end_exclusive": "0x4c38a0",
+      "bytes": 34,
+      "sha256": "c8b1048bb1373519c1f4c09a05ddbd31211a99c70fa661bbdf82f3465d48c060",
+      "scope": "pseudocode, original execution"
+    },
+    "request_dispatch": {
+      "start": "0x4c44bc",
+      "end_exclusive": "0x4c4530",
+      "bytes": 116,
+      "sha256": "53cfb358989e68ae979d2814964a3e779ae0f0eba76836f99d409393d0e78d51",
+      "scope": "original dependency"
+    },
+    "release_dispatch": {
+      "start": "0x4c4530",
+      "end_exclusive": "0x4c45a4",
+      "bytes": 116,
+      "sha256": "6a131868a276083764d4714178857124ccb4209a5f3e7552d874aba7f7c1a54e",
+      "scope": "original dependency"
+    }
+  },
+  "data_layout": {
+    "user_bitmap": "0x20073324,7 rows of 2 uint32",
+    "xtal_stabilizing": "0x20074F56 byte",
+    "xtal_counter_pointer": "0x20074260 uint32",
+    "xtal_board_mode": "0x200001CC byte",
+    "xtal_board_frequency": "0x200001D0 uint32"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "scope": "Bounded timer/wake/callback executable-source assessment, not global source exhaustion",
+  "closed_or_superseded": [
+    {
+      "lead": "Timer daemon selection",
+      "evidence": "g2/analysis/audio-timer-yield-boundary-successor-2026-10-08/REPORT.md",
+      "limit": "Stops at actual yield; pre-due passive-return claim corrected."
+    },
+    {
+      "lead": "Event-unblock/queue-unlock/critical/list providers",
+      "evidence": "g2/analysis/audio-timer-wake-provider-closure-2026-10-08/REPORT.md",
+      "limit": "Constructed coherent lists, no physical context handover."
+    },
+    {
+      "lead": "Stock timer callback/type6 action",
+      "evidence": "g2/analysis/audio-watchdog-callback-closure-2026-10-09/REPORT.md",
+      "limit": "Argument ignored; type6 logger-mask0 selection; other callback pointers unverified."
+    },
+    {
+      "lead": "Tick/replay",
+      "evidence": [
+        "g2/analysis/audio-tick-expiry-closure-2026-10-08/REPORT.md",
+        "g2/analysis/audio-resume-ticks-closure-2026-10-08/REPORT.md"
+      ],
+      "limit": "Already native selected providers; do not redo as new gap."
+    },
+    {
+      "lead": "PCM2.1 completion and I2S power/uninitialize",
+      "evidence": [
+        "g2/analysis/audio-pcm21-completion-closure-2026-10-08/REPORT.md",
+        "g2/analysis/audio-i2s-power-closure-2026-10-08/REPORT.md"
+      ],
+      "limit": "Already recovered; earlier source-lead lists are stale. Old ROM0x40 blocker superseded by authenticated ITCM timing closure."
+    }
+  ],
+  "actionable_remaining": [
+    {
+      "target": "Actual generic queue send0x4417EE/receive0x441B0A and CMSIS queue wrapper0x449ABE",
+      "source": "Pinned upstream-queue.c and existing CMSIS source/ABI evidence",
+      "constraint": "Need selected stock-vs-public differences and real native providers; this batch retains original queue/CMSIS bodies."
+    },
+    {
+      "target": "Audio type6 logger-enabled branches and type0 special-control continuation0x57A816",
+      "source": "Authenticated stock instructions and existing callback route evidence",
+      "constraint": "Selected mask0 tests do not close logger-enabled handling or DSP/producer continuation."
+    },
+    {
+      "target": "PCM0.7/2.0 preparation/Ton/GPU/suspend/reset bodies",
+      "source": "Existing pinned Ambiq HAL files, audio-pcm21-completion source-reference.json",
+      "constraint": "Available source; not blocked by hardware merely to reconstruct software."
+    },
+    {
+      "target": "Touch application callbacks/reentrant I2C ownership",
+      "source": "Existing pinned PDL/core/CMSIS source and touched helper evidence",
+      "constraint": "No fabricated callback or successful bus completion."
+    },
+    {
+      "target": "Selected case peripheral HAL paths",
+      "source": "Existing pinned STM32G0 HAL sources",
+      "constraint": "Device status/IRQ timing remains synthetic."
+    },
+    {
+      "target": "Dirty-close filesystem/cache/block behavior",
+      "source": "Existing littlefs/FlashDB adapters",
+      "constraint": "Requires coherent mounted image/cache/block data for real I/O evidence."
+    }
+  ],
+  "external_inputs_needed": [
+    {
+      "claim": "Live timer/delete lifetime fault or safe quiescing patch",
+      "needed": "Coherent sender/daemon TCB+saved PC/frame,priority/ready/pending/waiting lists,queue occupancy,timer/status/expiry/ID,aux allocator history, and PendSV/tick/IRQ delivery trace at publication/callback/drain boundaries."
+    },
+    {
+      "claim": "Physical producer/DMA/clock shutdown",
+      "needed": "Peripheral/IRQ/DMA trace and authentic device calibration/status; passive MMIO/software marker alone cannot establish physical completion."
+    }
+  ],
+  "source_exhausted_globally": false
+}

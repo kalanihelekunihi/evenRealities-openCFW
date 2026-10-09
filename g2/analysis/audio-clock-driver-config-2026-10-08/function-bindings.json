@@ -1,0 +1,81 @@
+{
+  "raw_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "functions": {
+    "pll_init": {
+      "start": "0x5398e0",
+      "end_exclusive": "0x53993c",
+      "bytes": 92,
+      "sha256": "344102274cb76e2a8e22e731aeb54f9905ff60611af472e0f2651fa87da23230",
+      "scope": "complete native offline function, explicitly linked original child providers"
+    },
+    "pll_deinit": {
+      "start": "0x539944",
+      "end_exclusive": "0x539994",
+      "bytes": 80,
+      "sha256": "15762cbfef691f5bc58b02426033212a57b18b62f4f594a1c40167790a83629c",
+      "scope": "complete native offline function, explicitly linked original child providers"
+    },
+    "pll_enable": {
+      "start": "0x539994",
+      "end_exclusive": "0x539a10",
+      "bytes": 124,
+      "sha256": "40618d8ed60a8a9e45079e8778a8e124d20fcfb5b317674574f21025b943963a",
+      "scope": "complete native offline function, explicitly linked original child providers"
+    },
+    "pll_disable": {
+      "start": "0x539a10",
+      "end_exclusive": "0x539a40",
+      "bytes": 48,
+      "sha256": "f45a5402b99d6dad3fc6f6549fbf6b229ecb2d30de69ac3e08e77b133d25e132",
+      "scope": "complete native offline function, explicitly linked original child providers"
+    },
+    "pll_configure": {
+      "start": "0x539a40",
+      "end_exclusive": "0x539b56",
+      "bytes": 278,
+      "sha256": "952498aa439122aadd5548d9bb261e5fcee1bae570e7b71931464f86c69ac010",
+      "scope": "complete native offline function, explicitly linked original child providers"
+    },
+    "pll_wait": {
+      "start": "0x539b56",
+      "end_exclusive": "0x539bbc",
+      "bytes": 102,
+      "sha256": "e1998b485572e20fb3a2118c8c8f01427e112d268308baf41299ace6849d8a11",
+      "scope": "complete native offline function, explicitly linked original child providers"
+    },
+    "hfrc2_config": {
+      "start": "0x4c399e",
+      "end_exclusive": "0x4c3b44",
+      "bytes": 422,
+      "sha256": "95cc85385d62c8941dc0fb0b1175559e45744e4818453839091d2815126c0ddb",
+      "scope": "complete native offline function, explicitly linked original child providers"
+    },
+    "syspll_config": {
+      "start": "0x4c3b44",
+      "end_exclusive": "0x4c3bfc",
+      "bytes": 184,
+      "sha256": "ff895137693076b855a8416be47cf7d6a1f988bbafd371b9bcf23ea608d191b0",
+      "scope": "complete native offline function, explicitly linked original child providers"
+    },
+    "clock_config_dispatch": {
+      "start": "0x4c446c",
+      "end_exclusive": "0x4c449e",
+      "bytes": 50,
+      "sha256": "7da05bfcd4b489183db4a2a1becfbe3bb7a0e3dc297e74e632c00e454d653164",
+      "scope": "complete native offline function, explicitly linked original child providers"
+    }
+  },
+  "layout": {
+    "pll_state": "0x200740F4 prefix/magic +0;module +4",
+    "handle_checks": "(prefix & ~0xFE000000) ==0x01504C30; initialized bit24, enabled bit25",
+    "config": "12 bytes:ref,vco,mode,refdiv,postdiv1,postdiv2,u16 fbdiv,u32 fraction",
+    "pll_control": "0x400204D8",
+    "pll_fraction": "0x400204DC low24",
+    "pll_dividers": "0x400204E0",
+    "pll_lock": "0x400204E4 bit0",
+    "simobuck": "0x40020060 bits16..19",
+    "hfrc2_cache": "0x20073F3C",
+    "syspll_cache": "0x20073F48",
+    "syspll_selected_hz": "0x20074258"
+  }
+}

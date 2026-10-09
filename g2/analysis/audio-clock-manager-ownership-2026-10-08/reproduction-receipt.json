@@ -1,0 +1,21 @@
+{
+  "sources": {
+    "g2/components/audio/clock_manager_ownership_offline/ownership.c": "9d9048090bb05e556a5163c5e9619c6bfb9d2cd3225174cc3d770a2b3bfcf97f",
+    "g2/components/audio/clock_manager_ownership_offline/ownership.h": "dd87c180aad8d8a77165ca6e19e0016b2768687de60d71b4498683fbdf85e364"
+  },
+  "elf": "/tmp/opencfw-clock-ownership/control.elf",
+  "elf_sha256": "7875dedc218c22c9a83f92838fc37967c26d22c070d8e9891a42007025342c78",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m33",
+    "-mfpu=fpv5-sp-d16",
+    "-mfloat-abi=hard",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib",
+    "-fshort-enums"
+  ],
+  "link_script": "stock_save_irq = 0x473941; stock_oscillator = 0x4809c5; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }"
+}

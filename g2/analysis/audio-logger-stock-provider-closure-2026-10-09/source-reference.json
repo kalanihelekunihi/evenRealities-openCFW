@@ -1,0 +1,35 @@
+{
+  "source_files": {
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/mcu/am_hal_utils.c": {
+      "sha256": "20a26a34ceb7835fa2a233bbbf2454f5f43e13aeb1ab43d51f5ff14a38f579a3",
+      "unchanged_function_text": {
+        "am_hal_delay_us_status_change": "e35c716987e257ffe34ee1e55b31f0c641fc13a74af2b7b582e9075bc7be6644"
+      }
+    },
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/mcu/am_hal_debug.c": {
+      "sha256": "08e762d766432a883e1cdc2f1de2851614864f1a02d64cff45ae046538a2f61d",
+      "unchanged_function_text": {
+        "am_hal_debug_disable": "0671245f72a512762973cfe1df91ad4e424729d998d935e3c775c05062e01308",
+        "am_hal_debug_power": "14b6a4f197bcc3b06f1cc71fc175b6874868dca5074fd63108ebd4abafc5a436",
+        "am_hal_debug_trace_disable": "04f9938edf7eb7b22bf5d5011923e571533b71848a861f7b54921d838ae12ffe"
+      }
+    },
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/mcu/am_hal_itm.c": {
+      "sha256": "72cc8cc222447958b3aeb719ad5104f35adb3d9e1780992c27e0d2e85d0380a9",
+      "unchanged_function_text": {
+        "am_hal_itm_disable": "0152a1434f447be61d6d3d7a7d752fe2c808d0f13583d36ba3c11a1bc74b50b6",
+        "am_hal_itm_tpiu_pipeline_flush": "70226daf30d28486989f60a9a2d3c72edc6d3738a8dd44a18c24532eb746312a",
+        "am_hal_itm_not_busy": "78f63841bb8c2ec8cbfb8d02660b8eb77a4bbdac2a41a45caf1925cd9b2a1819",
+        "am_hal_itm_stimulus_not_busy": "e01bc299b21241cfacba2995b5be47206a354db2dfed700c47fc7e0c3064fc0f",
+        "am_hal_itm_print_not_busy": "7c482e491eabba8ecd9eadf83509847ac74a319a8221d47ec222ab185fad22a6"
+      }
+    },
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/mcu/am_hal_tpiu.c": {
+      "sha256": "a1484b7c02b4638e8dc89b63c2b4e2a6b24b90d0eba29459d35ccd48bddb7490",
+      "unchanged_function_text": {
+        "am_hal_tpiu_disable": "c2b699fec606f5117ddd98b602a1cbd6969fb48a85ea21077d408b257b0501e4"
+      }
+    }
+  },
+  "adaptations": "Unchanged selected function text; fixed-address compatibility definitions, status constants and original-layout bitfield definitions. Delay and peripheral power remain explicit external providers, not included firmware source."
+}

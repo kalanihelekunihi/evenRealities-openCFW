@@ -1,0 +1,15 @@
+# Logger callback lifecycle lead
+
+The completed [memory-pool batch](../audio-cmsis-memory-pool-closure-2026-10-09/REPORT.md) and [formatter successor](../audio-main-formatter-source-successor-2026-10-09/REPORT.md) are already sealed with matching exact-build receipts. Their484 and88 author-validated comparisons do not establish live task handover or the output driver. Formatter floating-point validation uses scalar Thumb/VFP Cortex-A15 execution because Unicorn's M33/M7 profiles reject the unchanged stock VCVT.F32.F64 instruction; no Cortex-M exception behavior is inferred.
+
+New original-byte evidence identifies a conditional disable path: 0x4C2B30 calls setter0x472C7C with zero, clearing callback0x200742F0, only when flag0x20074F4E equals1 and children0x539254 and0x539304 both return zero. Failure returns lead to actual self-loops0x4C2B44/0x4C2B4E. After clearing the callback, the routine calls0x480F0C with0x1C and the word at0x78EE3C, then clears the flag. This is not proof of unconditional boot-time logging disable.
+
+**Five original-instruction fixtures PASS**: flag0/2 bypasses, each child failure, and the successful disable sequence. Setter instructions execute unchanged. Three child functions are explicit return stubs: no child hardware/lifecycle behavior or scheduling is validated. The comparison checks callback and flag writes, captured child arguments and termination boundary. No native C rebuild was added or claimed for this small pseudocode-only batch.
+
+A second pointer literal at0x4448B8 is used by corpus function0x444684 to dispatch through the same callback; it is not an installation site. The current decompiled corpus contains one setter caller,0x4C2B30, and a call chain0x5CDD14→0x4C2AE8→0x4C2B30. A two-byte-aligned scan of this locked raw image finds only two exact literal occurrences of0x200742F0 (0x4448B8 and0x47345C). This is a bounded literal/corpus search, not a proof that no computed address, bulk initializer, ROM routine or runtime mutation installs a sink.
+
+Provenance: wrapped main image `g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin`, SHA25636c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863; raw payload excludes32byte wrapper, load0x438000, SHA25619044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701. Existing primary source candidate remains AmbiqSuite release_sdk_3_2_0-dd5f40c14b utility am_util_stdio.c, via the already recovered bootloader adaptation. No new SDK version attribution is made.
+
+Next useful static leads are flag0x20074F4E initialization/writers, RAM initialization records covering0x200742F0, and registration paths around0x539254/0x539304. These searches are not exhausted. A live sink address or runtime startup trace would resolve dynamic binding, but is not yet required to continue those static leads. No source-complete, byte-identical or hardware-safety claim.
+
+[Readable pseudocode](pseudocode.md), [reproducible instruction fixtures](verify.py), [results and explicit stub limits](results.json), [preservation](preservation.json).

@@ -1,0 +1,1740 @@
+{
+  "status": "PASS",
+  "cases": 40,
+  "elf_sha256": "6e28bd25c7f6d8123e0a8a1f55fb679a44272c0d14be21808fbf6145d13525f9",
+  "comparisons": [
+    {
+      "inputs": {
+        "static": 0,
+        "aux_dynamic": 0,
+        "command": 3,
+        "now": 149,
+        "reuse": false,
+        "empty": false
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": false,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block",
+        "restricted_queue_wait_entry",
+        "drain_commands"
+      ],
+      "boundary": [
+        {
+          "kind": "next_iteration"
+        }
+      ],
+      "after": {
+        "queue_count": 0,
+        "list_count": 0,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "00",
+        "timer_id": 536896648,
+        "frees": [],
+        "free_bytes": 0,
+        "last_tick": 149,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "4f2e30d8c9a4113a48712f9115a3a0f30b647f379520ac25736a513f50f17471"
+    },
+    {
+      "inputs": {
+        "static": 0,
+        "aux_dynamic": 0,
+        "command": 3,
+        "now": 150,
+        "reuse": false,
+        "empty": false
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": false,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block"
+      ],
+      "boundary": [
+        {
+          "kind": "user_callback_entry",
+          "address": "0x53c2a4",
+          "argument": 305419896
+        }
+      ],
+      "after": {
+        "queue_count": 1,
+        "list_count": 0,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "00",
+        "timer_id": 536896648,
+        "frees": [],
+        "free_bytes": 0,
+        "last_tick": 150,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "9eeb8d6939a7aa1ac3e340d0d4a3f16d07a250330a349993e412ac76bab8ef72"
+    },
+    {
+      "inputs": {
+        "static": 0,
+        "aux_dynamic": 0,
+        "command": 3,
+        "now": 151,
+        "reuse": false,
+        "empty": false
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": false,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block"
+      ],
+      "boundary": [
+        {
+          "kind": "user_callback_entry",
+          "address": "0x53c2a4",
+          "argument": 305419896
+        }
+      ],
+      "after": {
+        "queue_count": 1,
+        "list_count": 0,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "00",
+        "timer_id": 536896648,
+        "frees": [],
+        "free_bytes": 0,
+        "last_tick": 151,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "9eeb8d6939a7aa1ac3e340d0d4a3f16d07a250330a349993e412ac76bab8ef72"
+    },
+    {
+      "inputs": {
+        "static": 0,
+        "aux_dynamic": 0,
+        "command": 5,
+        "now": 149,
+        "reuse": false,
+        "empty": false
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": false,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block",
+        "restricted_queue_wait_entry",
+        "drain_commands"
+      ],
+      "boundary": [
+        {
+          "kind": "next_iteration"
+        }
+      ],
+      "after": {
+        "queue_count": 0,
+        "list_count": 0,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "01",
+        "timer_id": 536896648,
+        "frees": [
+          536896520
+        ],
+        "free_bytes": 56,
+        "last_tick": 149,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "fa6f52436f61794e312feb94c61450fdd9b27ced8db00ef8bf020322e8dcea0e"
+    },
+    {
+      "inputs": {
+        "static": 0,
+        "aux_dynamic": 0,
+        "command": 5,
+        "now": 150,
+        "reuse": false,
+        "empty": false
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": false,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block"
+      ],
+      "boundary": [
+        {
+          "kind": "user_callback_entry",
+          "address": "0x53c2a4",
+          "argument": 305419896
+        }
+      ],
+      "after": {
+        "queue_count": 1,
+        "list_count": 0,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "00",
+        "timer_id": 536896648,
+        "frees": [],
+        "free_bytes": 0,
+        "last_tick": 150,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "df79c034e5345af079f57059227573370704886307ae8a057cf28e3fc65de340"
+    },
+    {
+      "inputs": {
+        "static": 0,
+        "aux_dynamic": 0,
+        "command": 5,
+        "now": 151,
+        "reuse": false,
+        "empty": false
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": false,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block"
+      ],
+      "boundary": [
+        {
+          "kind": "user_callback_entry",
+          "address": "0x53c2a4",
+          "argument": 305419896
+        }
+      ],
+      "after": {
+        "queue_count": 1,
+        "list_count": 0,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "00",
+        "timer_id": 536896648,
+        "frees": [],
+        "free_bytes": 0,
+        "last_tick": 151,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "df79c034e5345af079f57059227573370704886307ae8a057cf28e3fc65de340"
+    },
+    {
+      "inputs": {
+        "static": 0,
+        "aux_dynamic": 1,
+        "command": 3,
+        "now": 149,
+        "reuse": false,
+        "empty": false
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": false,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block",
+        "restricted_queue_wait_entry",
+        "drain_commands"
+      ],
+      "boundary": [
+        {
+          "kind": "next_iteration"
+        }
+      ],
+      "after": {
+        "queue_count": 0,
+        "list_count": 0,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "00",
+        "timer_id": 536896649,
+        "frees": [],
+        "free_bytes": 0,
+        "last_tick": 149,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "985c8ad77c144f573b11502ca79a0d3dbf1d94c5bb38225268bc5bcab6b62e9e"
+    },
+    {
+      "inputs": {
+        "static": 0,
+        "aux_dynamic": 1,
+        "command": 3,
+        "now": 150,
+        "reuse": false,
+        "empty": false
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": false,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block"
+      ],
+      "boundary": [
+        {
+          "kind": "user_callback_entry",
+          "address": "0x53c2a4",
+          "argument": 305419896
+        }
+      ],
+      "after": {
+        "queue_count": 1,
+        "list_count": 0,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "00",
+        "timer_id": 536896649,
+        "frees": [],
+        "free_bytes": 0,
+        "last_tick": 150,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "73339282ea665fa6db15dc1f33c90acdc6af52946696ed1f5d855fd4be2563c2"
+    },
+    {
+      "inputs": {
+        "static": 0,
+        "aux_dynamic": 1,
+        "command": 3,
+        "now": 151,
+        "reuse": false,
+        "empty": false
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": false,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block"
+      ],
+      "boundary": [
+        {
+          "kind": "user_callback_entry",
+          "address": "0x53c2a4",
+          "argument": 305419896
+        }
+      ],
+      "after": {
+        "queue_count": 1,
+        "list_count": 0,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "00",
+        "timer_id": 536896649,
+        "frees": [],
+        "free_bytes": 0,
+        "last_tick": 151,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "73339282ea665fa6db15dc1f33c90acdc6af52946696ed1f5d855fd4be2563c2"
+    },
+    {
+      "inputs": {
+        "static": 0,
+        "aux_dynamic": 1,
+        "command": 5,
+        "now": 149,
+        "reuse": false,
+        "empty": false
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": true,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block",
+        "restricted_queue_wait_entry",
+        "drain_commands"
+      ],
+      "boundary": [
+        {
+          "kind": "next_iteration"
+        }
+      ],
+      "after": {
+        "queue_count": 0,
+        "list_count": 0,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "01",
+        "timer_id": 536896649,
+        "frees": [
+          536896648,
+          536896520
+        ],
+        "free_bytes": 80,
+        "last_tick": 149,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "e8e00c802ea4e1b2b9e00a67c5ff7d3b2d4372802fe6dfa90a9e17a09db87b92"
+    },
+    {
+      "inputs": {
+        "static": 0,
+        "aux_dynamic": 1,
+        "command": 5,
+        "now": 150,
+        "reuse": false,
+        "empty": false
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": true,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block"
+      ],
+      "boundary": [
+        {
+          "kind": "user_callback_entry",
+          "address": "0x53c2a4",
+          "argument": 305419896
+        }
+      ],
+      "after": {
+        "queue_count": 1,
+        "list_count": 0,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "00",
+        "timer_id": 536896649,
+        "frees": [
+          536896648
+        ],
+        "free_bytes": 24,
+        "last_tick": 150,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "a6f38acbff31facb1116e981df2e987089e0998dfb9b1eec1beffe9b904d403c"
+    },
+    {
+      "inputs": {
+        "static": 0,
+        "aux_dynamic": 1,
+        "command": 5,
+        "now": 151,
+        "reuse": false,
+        "empty": false
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": true,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block"
+      ],
+      "boundary": [
+        {
+          "kind": "user_callback_entry",
+          "address": "0x53c2a4",
+          "argument": 305419896
+        }
+      ],
+      "after": {
+        "queue_count": 1,
+        "list_count": 0,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "00",
+        "timer_id": 536896649,
+        "frees": [
+          536896648
+        ],
+        "free_bytes": 24,
+        "last_tick": 151,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "a6f38acbff31facb1116e981df2e987089e0998dfb9b1eec1beffe9b904d403c"
+    },
+    {
+      "inputs": {
+        "static": 1,
+        "aux_dynamic": 0,
+        "command": 3,
+        "now": 149,
+        "reuse": false,
+        "empty": false
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": false,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block",
+        "restricted_queue_wait_entry",
+        "drain_commands"
+      ],
+      "boundary": [
+        {
+          "kind": "next_iteration"
+        }
+      ],
+      "after": {
+        "queue_count": 0,
+        "list_count": 0,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "02",
+        "timer_id": 536896648,
+        "frees": [],
+        "free_bytes": 0,
+        "last_tick": 149,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "ce6005ba805def1ea9294850173abf9f1fb744fb97d73d4f8f500406c9010c94"
+    },
+    {
+      "inputs": {
+        "static": 1,
+        "aux_dynamic": 0,
+        "command": 3,
+        "now": 150,
+        "reuse": false,
+        "empty": false
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": false,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block"
+      ],
+      "boundary": [
+        {
+          "kind": "user_callback_entry",
+          "address": "0x53c2a4",
+          "argument": 305419896
+        }
+      ],
+      "after": {
+        "queue_count": 1,
+        "list_count": 0,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "02",
+        "timer_id": 536896648,
+        "frees": [],
+        "free_bytes": 0,
+        "last_tick": 150,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "059e965c01e15362cf8bde883718956eb6e61b0f521c0b427b10f6870ab89c88"
+    },
+    {
+      "inputs": {
+        "static": 1,
+        "aux_dynamic": 0,
+        "command": 3,
+        "now": 151,
+        "reuse": false,
+        "empty": false
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": false,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block"
+      ],
+      "boundary": [
+        {
+          "kind": "user_callback_entry",
+          "address": "0x53c2a4",
+          "argument": 305419896
+        }
+      ],
+      "after": {
+        "queue_count": 1,
+        "list_count": 0,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "02",
+        "timer_id": 536896648,
+        "frees": [],
+        "free_bytes": 0,
+        "last_tick": 151,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "059e965c01e15362cf8bde883718956eb6e61b0f521c0b427b10f6870ab89c88"
+    },
+    {
+      "inputs": {
+        "static": 1,
+        "aux_dynamic": 0,
+        "command": 5,
+        "now": 149,
+        "reuse": false,
+        "empty": false
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": false,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block",
+        "restricted_queue_wait_entry",
+        "drain_commands"
+      ],
+      "boundary": [
+        {
+          "kind": "next_iteration"
+        }
+      ],
+      "after": {
+        "queue_count": 0,
+        "list_count": 0,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "02",
+        "timer_id": 536896648,
+        "frees": [],
+        "free_bytes": 0,
+        "last_tick": 149,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "8ad6a363a84f3e6570b027323870ef2708a7f69fe7ac7876bb551e18c26523c3"
+    },
+    {
+      "inputs": {
+        "static": 1,
+        "aux_dynamic": 0,
+        "command": 5,
+        "now": 150,
+        "reuse": false,
+        "empty": false
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": false,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block"
+      ],
+      "boundary": [
+        {
+          "kind": "user_callback_entry",
+          "address": "0x53c2a4",
+          "argument": 305419896
+        }
+      ],
+      "after": {
+        "queue_count": 1,
+        "list_count": 0,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "02",
+        "timer_id": 536896648,
+        "frees": [],
+        "free_bytes": 0,
+        "last_tick": 150,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "0c39de2e60d5529a72e55bf40f7417bf8a71e9e37f6cfae23f8e2d9557b146ab"
+    },
+    {
+      "inputs": {
+        "static": 1,
+        "aux_dynamic": 0,
+        "command": 5,
+        "now": 151,
+        "reuse": false,
+        "empty": false
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": false,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block"
+      ],
+      "boundary": [
+        {
+          "kind": "user_callback_entry",
+          "address": "0x53c2a4",
+          "argument": 305419896
+        }
+      ],
+      "after": {
+        "queue_count": 1,
+        "list_count": 0,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "02",
+        "timer_id": 536896648,
+        "frees": [],
+        "free_bytes": 0,
+        "last_tick": 151,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "0c39de2e60d5529a72e55bf40f7417bf8a71e9e37f6cfae23f8e2d9557b146ab"
+    },
+    {
+      "inputs": {
+        "static": 1,
+        "aux_dynamic": 1,
+        "command": 3,
+        "now": 149,
+        "reuse": false,
+        "empty": false
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": false,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block",
+        "restricted_queue_wait_entry",
+        "drain_commands"
+      ],
+      "boundary": [
+        {
+          "kind": "next_iteration"
+        }
+      ],
+      "after": {
+        "queue_count": 0,
+        "list_count": 0,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "02",
+        "timer_id": 536896649,
+        "frees": [],
+        "free_bytes": 0,
+        "last_tick": 149,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "acd1a56cd5e912bd1260ff1dd221ac8e95abe8cb080bb39d73af6600f29ad22e"
+    },
+    {
+      "inputs": {
+        "static": 1,
+        "aux_dynamic": 1,
+        "command": 3,
+        "now": 150,
+        "reuse": false,
+        "empty": false
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": false,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block"
+      ],
+      "boundary": [
+        {
+          "kind": "user_callback_entry",
+          "address": "0x53c2a4",
+          "argument": 305419896
+        }
+      ],
+      "after": {
+        "queue_count": 1,
+        "list_count": 0,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "02",
+        "timer_id": 536896649,
+        "frees": [],
+        "free_bytes": 0,
+        "last_tick": 150,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "52edc7e0594f8bf26915095910e507b5168e874b5a97ebc38480ad5e42575570"
+    },
+    {
+      "inputs": {
+        "static": 1,
+        "aux_dynamic": 1,
+        "command": 3,
+        "now": 151,
+        "reuse": false,
+        "empty": false
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": false,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block"
+      ],
+      "boundary": [
+        {
+          "kind": "user_callback_entry",
+          "address": "0x53c2a4",
+          "argument": 305419896
+        }
+      ],
+      "after": {
+        "queue_count": 1,
+        "list_count": 0,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "02",
+        "timer_id": 536896649,
+        "frees": [],
+        "free_bytes": 0,
+        "last_tick": 151,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "52edc7e0594f8bf26915095910e507b5168e874b5a97ebc38480ad5e42575570"
+    },
+    {
+      "inputs": {
+        "static": 1,
+        "aux_dynamic": 1,
+        "command": 5,
+        "now": 149,
+        "reuse": false,
+        "empty": false
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": true,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block",
+        "restricted_queue_wait_entry",
+        "drain_commands"
+      ],
+      "boundary": [
+        {
+          "kind": "next_iteration"
+        }
+      ],
+      "after": {
+        "queue_count": 0,
+        "list_count": 0,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "02",
+        "timer_id": 536896649,
+        "frees": [
+          536896648
+        ],
+        "free_bytes": 24,
+        "last_tick": 149,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "f5cd7034bfba2bfe42030877e95e32255eb00b38e5f16934e0bd5660ce703576"
+    },
+    {
+      "inputs": {
+        "static": 1,
+        "aux_dynamic": 1,
+        "command": 5,
+        "now": 150,
+        "reuse": false,
+        "empty": false
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": true,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block"
+      ],
+      "boundary": [
+        {
+          "kind": "user_callback_entry",
+          "address": "0x53c2a4",
+          "argument": 305419896
+        }
+      ],
+      "after": {
+        "queue_count": 1,
+        "list_count": 0,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "02",
+        "timer_id": 536896649,
+        "frees": [
+          536896648
+        ],
+        "free_bytes": 24,
+        "last_tick": 150,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "e8f39f6599f6f2550eec80a3a2e5b7cacccd6acb55a4461878c836ed7bfc02a9"
+    },
+    {
+      "inputs": {
+        "static": 1,
+        "aux_dynamic": 1,
+        "command": 5,
+        "now": 151,
+        "reuse": false,
+        "empty": false
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": true,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block"
+      ],
+      "boundary": [
+        {
+          "kind": "user_callback_entry",
+          "address": "0x53c2a4",
+          "argument": 305419896
+        }
+      ],
+      "after": {
+        "queue_count": 1,
+        "list_count": 0,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "02",
+        "timer_id": 536896649,
+        "frees": [
+          536896648
+        ],
+        "free_bytes": 24,
+        "last_tick": 151,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "e8f39f6599f6f2550eec80a3a2e5b7cacccd6acb55a4461878c836ed7bfc02a9"
+    },
+    {
+      "inputs": {
+        "static": 0,
+        "aux_dynamic": 1,
+        "command": 5,
+        "now": 150,
+        "reuse": true,
+        "empty": false
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": true,
+        "aux_word": 5489317,
+        "aux_arg": 3405691582
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block"
+      ],
+      "boundary": [
+        {
+          "kind": "user_callback_entry",
+          "address": "0x53c2a4",
+          "argument": 3405691582
+        }
+      ],
+      "after": {
+        "queue_count": 1,
+        "list_count": 0,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "00",
+        "timer_id": 536896649,
+        "frees": [
+          536896648
+        ],
+        "free_bytes": 0,
+        "last_tick": 150,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "183673cc3ab619dc0042ecc045b4b463d77dac3494a663e10019f2f124920d78"
+    },
+    {
+      "inputs": {
+        "static": 1,
+        "aux_dynamic": 1,
+        "command": 5,
+        "now": 150,
+        "reuse": true,
+        "empty": false
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": true,
+        "aux_word": 5489317,
+        "aux_arg": 3405691582
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block"
+      ],
+      "boundary": [
+        {
+          "kind": "user_callback_entry",
+          "address": "0x53c2a4",
+          "argument": 3405691582
+        }
+      ],
+      "after": {
+        "queue_count": 1,
+        "list_count": 0,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "02",
+        "timer_id": 536896649,
+        "frees": [
+          536896648
+        ],
+        "free_bytes": 0,
+        "last_tick": 150,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "529399431ee3b600a33ab69d6e7d383295c80f8e25cd4b5338fc0c8952687ee7"
+    },
+    {
+      "inputs": {
+        "static": 1,
+        "aux_dynamic": 0,
+        "command": 0,
+        "now": 149,
+        "reuse": false,
+        "empty": false
+      },
+      "before": {
+        "queue_count": 0,
+        "list_count": 1,
+        "aux_freed": false,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block",
+        "restricted_queue_wait_entry"
+      ],
+      "boundary": [
+        {
+          "kind": "restricted_wait_entry",
+          "queue": 536895488,
+          "ticks": 1,
+          "wait_indefinitely": 0
+        }
+      ],
+      "after": {
+        "queue_count": 0,
+        "list_count": 1,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "03",
+        "timer_id": 536896648,
+        "frees": [],
+        "free_bytes": 0,
+        "last_tick": 149,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "288d3f76a6ba75923989c344bd1bd7f6017e40d72f0efbf8244dd3fcbf1326dd"
+    },
+    {
+      "inputs": {
+        "static": 1,
+        "aux_dynamic": 0,
+        "command": 0,
+        "now": 149,
+        "reuse": false,
+        "empty": true
+      },
+      "before": {
+        "queue_count": 0,
+        "list_count": 0,
+        "aux_freed": false,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block",
+        "restricted_queue_wait_entry"
+      ],
+      "boundary": [
+        {
+          "kind": "restricted_wait_entry",
+          "queue": 536895488,
+          "ticks": 4294967147,
+          "wait_indefinitely": 1
+        }
+      ],
+      "after": {
+        "queue_count": 0,
+        "list_count": 0,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "02",
+        "timer_id": 536896648,
+        "frees": [],
+        "free_bytes": 0,
+        "last_tick": 149,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "8f8365c6c54fe23bc02fd7e49c7c452dd4d89093a15b5f5e1cba006e1c7caa62"
+    },
+    {
+      "inputs": {
+        "static": 0,
+        "aux_dynamic": 1,
+        "command": 3,
+        "now": 150,
+        "reuse": false,
+        "empty": false,
+        "autoreload": true
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": false,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block"
+      ],
+      "boundary": [
+        {
+          "kind": "user_callback_entry",
+          "address": "0x53c2a4",
+          "argument": 305419896
+        }
+      ],
+      "after": {
+        "queue_count": 1,
+        "list_count": 1,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "05",
+        "timer_id": 536896649,
+        "frees": [],
+        "free_bytes": 0,
+        "last_tick": 150,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "6abefadd1e10015028a1abd969b72325f3bfdb6d4a20ac61620fa697ff665c91"
+    },
+    {
+      "inputs": {
+        "static": 0,
+        "aux_dynamic": 1,
+        "command": 3,
+        "now": 151,
+        "reuse": false,
+        "empty": false,
+        "autoreload": true
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": false,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block"
+      ],
+      "boundary": [
+        {
+          "kind": "user_callback_entry",
+          "address": "0x53c2a4",
+          "argument": 305419896
+        }
+      ],
+      "after": {
+        "queue_count": 1,
+        "list_count": 1,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "05",
+        "timer_id": 536896649,
+        "frees": [],
+        "free_bytes": 0,
+        "last_tick": 151,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "6abefadd1e10015028a1abd969b72325f3bfdb6d4a20ac61620fa697ff665c91"
+    },
+    {
+      "inputs": {
+        "static": 0,
+        "aux_dynamic": 1,
+        "command": 5,
+        "now": 150,
+        "reuse": false,
+        "empty": false,
+        "autoreload": true
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": true,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block"
+      ],
+      "boundary": [
+        {
+          "kind": "user_callback_entry",
+          "address": "0x53c2a4",
+          "argument": 305419896
+        }
+      ],
+      "after": {
+        "queue_count": 1,
+        "list_count": 1,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "05",
+        "timer_id": 536896649,
+        "frees": [
+          536896648
+        ],
+        "free_bytes": 24,
+        "last_tick": 150,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "5a038aa0f453e5500239a073675c75823d1aab50e2c5c355a26cbee42e665bcf"
+    },
+    {
+      "inputs": {
+        "static": 0,
+        "aux_dynamic": 1,
+        "command": 5,
+        "now": 151,
+        "reuse": false,
+        "empty": false,
+        "autoreload": true
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": true,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block"
+      ],
+      "boundary": [
+        {
+          "kind": "user_callback_entry",
+          "address": "0x53c2a4",
+          "argument": 305419896
+        }
+      ],
+      "after": {
+        "queue_count": 1,
+        "list_count": 1,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "05",
+        "timer_id": 536896649,
+        "frees": [
+          536896648
+        ],
+        "free_bytes": 24,
+        "last_tick": 151,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "5a038aa0f453e5500239a073675c75823d1aab50e2c5c355a26cbee42e665bcf"
+    },
+    {
+      "inputs": {
+        "static": 1,
+        "aux_dynamic": 1,
+        "command": 3,
+        "now": 150,
+        "reuse": false,
+        "empty": false,
+        "autoreload": true
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": false,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block"
+      ],
+      "boundary": [
+        {
+          "kind": "user_callback_entry",
+          "address": "0x53c2a4",
+          "argument": 305419896
+        }
+      ],
+      "after": {
+        "queue_count": 1,
+        "list_count": 1,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "07",
+        "timer_id": 536896649,
+        "frees": [],
+        "free_bytes": 0,
+        "last_tick": 150,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "ca37927b8091e5afa48860852c4e98b072b6860436ace6a103e361518d4e4c14"
+    },
+    {
+      "inputs": {
+        "static": 1,
+        "aux_dynamic": 1,
+        "command": 3,
+        "now": 151,
+        "reuse": false,
+        "empty": false,
+        "autoreload": true
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": false,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block"
+      ],
+      "boundary": [
+        {
+          "kind": "user_callback_entry",
+          "address": "0x53c2a4",
+          "argument": 305419896
+        }
+      ],
+      "after": {
+        "queue_count": 1,
+        "list_count": 1,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "07",
+        "timer_id": 536896649,
+        "frees": [],
+        "free_bytes": 0,
+        "last_tick": 151,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "ca37927b8091e5afa48860852c4e98b072b6860436ace6a103e361518d4e4c14"
+    },
+    {
+      "inputs": {
+        "static": 1,
+        "aux_dynamic": 1,
+        "command": 5,
+        "now": 150,
+        "reuse": false,
+        "empty": false,
+        "autoreload": true
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": true,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block"
+      ],
+      "boundary": [
+        {
+          "kind": "user_callback_entry",
+          "address": "0x53c2a4",
+          "argument": 305419896
+        }
+      ],
+      "after": {
+        "queue_count": 1,
+        "list_count": 1,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "07",
+        "timer_id": 536896649,
+        "frees": [
+          536896648
+        ],
+        "free_bytes": 24,
+        "last_tick": 150,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "07cb24126c211410a9decd7adfb17869cd1fa4c36776e4651918b2e62907742a"
+    },
+    {
+      "inputs": {
+        "static": 1,
+        "aux_dynamic": 1,
+        "command": 5,
+        "now": 151,
+        "reuse": false,
+        "empty": false,
+        "autoreload": true
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 1,
+        "aux_freed": true,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block"
+      ],
+      "boundary": [
+        {
+          "kind": "user_callback_entry",
+          "address": "0x53c2a4",
+          "argument": 305419896
+        }
+      ],
+      "after": {
+        "queue_count": 1,
+        "list_count": 1,
+        "current_list": 536896000,
+        "overflow_list": 536896256,
+        "timer_status": "07",
+        "timer_id": 536896649,
+        "frees": [
+          536896648
+        ],
+        "free_bytes": 24,
+        "last_tick": 151,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "07cb24126c211410a9decd7adfb17869cd1fa4c36776e4651918b2e62907742a"
+    },
+    {
+      "inputs": {
+        "static": 0,
+        "aux_dynamic": 1,
+        "command": 3,
+        "now": 0,
+        "reuse": false,
+        "empty": false,
+        "wrap": true
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 0,
+        "aux_freed": false,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block",
+        "switch_lists",
+        "drain_commands"
+      ],
+      "boundary": [
+        {
+          "kind": "next_iteration"
+        }
+      ],
+      "after": {
+        "queue_count": 0,
+        "list_count": 0,
+        "current_list": 536896256,
+        "overflow_list": 536896000,
+        "timer_status": "00",
+        "timer_id": 536896649,
+        "frees": [],
+        "free_bytes": 0,
+        "last_tick": 0,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "27d965ab5eaaaad76311dc3ebd726f354c9aab403557797d17fabef8d98f8177"
+    },
+    {
+      "inputs": {
+        "static": 0,
+        "aux_dynamic": 1,
+        "command": 5,
+        "now": 0,
+        "reuse": false,
+        "empty": false,
+        "wrap": true
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 0,
+        "aux_freed": true,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block",
+        "switch_lists",
+        "drain_commands"
+      ],
+      "boundary": [
+        {
+          "kind": "next_iteration"
+        }
+      ],
+      "after": {
+        "queue_count": 0,
+        "list_count": 0,
+        "current_list": 536896256,
+        "overflow_list": 536896000,
+        "timer_status": "01",
+        "timer_id": 536896649,
+        "frees": [
+          536896648,
+          536896520
+        ],
+        "free_bytes": 80,
+        "last_tick": 0,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "99434214aa4b2e97ffbf2c7ca0685586dc5ee5abb89d22f34ee5b53ae85654b0"
+    },
+    {
+      "inputs": {
+        "static": 1,
+        "aux_dynamic": 1,
+        "command": 3,
+        "now": 0,
+        "reuse": false,
+        "empty": false,
+        "wrap": true
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 0,
+        "aux_freed": false,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block",
+        "switch_lists",
+        "drain_commands"
+      ],
+      "boundary": [
+        {
+          "kind": "next_iteration"
+        }
+      ],
+      "after": {
+        "queue_count": 0,
+        "list_count": 0,
+        "current_list": 536896256,
+        "overflow_list": 536896000,
+        "timer_status": "02",
+        "timer_id": 536896649,
+        "frees": [],
+        "free_bytes": 0,
+        "last_tick": 0,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "7588f54c9b2870578c6c36ef9025ecfa7c0a4d650b963c041f64a9c00c7c480f"
+    },
+    {
+      "inputs": {
+        "static": 1,
+        "aux_dynamic": 1,
+        "command": 5,
+        "now": 0,
+        "reuse": false,
+        "empty": false,
+        "wrap": true
+      },
+      "before": {
+        "queue_count": 1,
+        "list_count": 0,
+        "aux_freed": true,
+        "aux_word": 5489317,
+        "aux_arg": 305419896
+      },
+      "trace": [
+        "next_expiry",
+        "process_or_block",
+        "switch_lists",
+        "drain_commands"
+      ],
+      "boundary": [
+        {
+          "kind": "next_iteration"
+        }
+      ],
+      "after": {
+        "queue_count": 0,
+        "list_count": 0,
+        "current_list": 536896256,
+        "overflow_list": 536896000,
+        "timer_status": "02",
+        "timer_id": 536896649,
+        "frees": [
+          536896648
+        ],
+        "free_bytes": 24,
+        "last_tick": 0,
+        "scheduler_suspended": 0,
+        "basepri": 0
+      },
+      "state_digest": "50824ff7a5055b36adeb52f4218ad8c622b4ce86286cc44ff8c78de3d5e91818"
+    }
+  ],
+  "limits": [
+    "Five native daemon/expiry/sample/process functions; actual original command-drain/queue/allocator/list/scheduler/adapter/reload/wrap providers remain explicit.",
+    "Actual callback first instruction,empty-queue wait entry or next iteration is an execution boundary; no callback/blocking return stubs.",
+    "Single-shot andselected autoreload/tick-wrap paths,zero modeled task count/running1 andconstructed list/queue/heap state. Live task wakeup,IRQ/TCB scheduling andhardware lifetime hazard remain unverified."
+  ]
+}

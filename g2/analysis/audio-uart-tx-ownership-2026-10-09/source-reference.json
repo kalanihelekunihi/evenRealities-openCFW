@@ -1,0 +1,26 @@
+{
+  "sources": {
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/mcu/am_hal_uart.c": {
+      "sha256": "db0807cbd0ff5df110afde4a8e8561857e2e669529da290289919516ec12799a",
+      "unchanged_function_text": {
+        "write_transaction_save": "623612e39d15c47a810dfbeaf80fcc06fb64ec173c7eb80adb83b59424b12eea",
+        "am_hal_uart_fifo_write": "839c7270afa8243fb307d2418eba7b2a9ae9d2fd1913fad651825874f80b4827",
+        "tx_queue_update": "920e7cc0e8204ec487e642d159e9fc0eb36ccafe5c2560485ade42b123e731b4",
+        "nonblocking_write_sm": "ccb1417f24c4e11ee938900a73bc996107035e96f0a3151b4eccec035d8626f3",
+        "nonblocking_write": "892a0e277f5a555622c7ac5884c7b2246234f30084c5d0c0ad4950d644bd1353",
+        "blocking_write": "1ea276da7b47036e40e3c28629cce10d9726fe810f26f84627eeb6b846cece93",
+        "am_hal_uart_buffer_configure": "86e00324520879b2d7347265ef69aea2fb1ad0548f854793516c59c44e17e2d8",
+        "am_hal_uart_initialize": "1c76bd8459b7625e8997b6b16667ecbddc1e651362c15c1b516f2f0cf0636226"
+      }
+    },
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/am_hal_queue.c": {
+      "sha256": "2ca55e34d5b9d4843e32ce0ab24e312bde580716c708c7f017adcd0a12dbd1e4",
+      "unchanged_function_text": {
+        "am_hal_queue_item_add": "6ae183baeaaf82fe2d21667e6dbc6176ddfc4a6e1cab23a0e3026f07dc6b2db3",
+        "am_hal_queue_item_get": "d79564ec518d372bc9f17f0384fb0e96261d6bcb283c2c8a6185d3a043c50ea2",
+        "am_hal_queue_init": "1ddc3c56bb8374b23592c934c9319a75d3e6f69f73d02bfe84dd99b9d387b38d"
+      }
+    }
+  },
+  "adaptations": "Selected function text unchanged; sparse fixed register/state layout and one-byte enum ABI adapter. Explicit synthetic delay/callback boundaries."
+}

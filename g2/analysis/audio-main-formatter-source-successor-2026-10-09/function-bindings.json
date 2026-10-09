@@ -1,0 +1,24 @@
+{
+  "main_formatter": "0x473036..0x4733EE",
+  "logger": "0x4733EE..0x47341A",
+  "failure_hook": "0x46D85E..0x46D868",
+  "zero_return_fixture_sink": "0x5A0A6C",
+  "helper_entries": {
+    "ndigits_u64": "0x472D40",
+    "ndigits_i64": "0x472D64",
+    "ndigits_hex": "0x472D76",
+    "decimal_parse": "0x472D9C",
+    "u64_decimal": "0x472DE0",
+    "u64_hex": "0x472E48",
+    "string_length": "0x472EBC",
+    "padding": "0x472ED4",
+    "float_to_text": "0x472EF6"
+  },
+  "globals": {
+    "sink_pointer": "0x200742F0",
+    "shared_buffer": "0x2006B930",
+    "newline_translation": "0x20074F7F"
+  },
+  "ABI": "32-bit ARM variadic integer registers/stack, 64-bit values aligned to8. Float arguments are doubles converted to single by stock VCvt.F32.F640x473392.",
+  "scope": "Selected formatter/source behavior and synthetic real no-op sink; actual sink driver binding/output not claimed."
+}

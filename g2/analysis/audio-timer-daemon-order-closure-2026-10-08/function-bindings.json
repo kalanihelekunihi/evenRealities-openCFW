@@ -1,0 +1,43 @@
+{
+  "raw_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "functions": {
+    "expired": {
+      "start": "0x47e83a",
+      "end_exclusive": "0x47e878",
+      "sha256": "94ed9421f98b5f3dd08dd15024fb413dcee8c28ef9f3b9d6c548b11e56b26335",
+      "native_symbol": "audio_timer_expired"
+    },
+    "daemon": {
+      "start": "0x47e878",
+      "end_exclusive": "0x47e88c",
+      "sha256": "9a7fd60775e97786baeb1ea1871423c63c5d744b5b8e1ce0c8176e8bb80d377a",
+      "native_symbol": "audio_timer_daemon"
+    },
+    "process_or_block": {
+      "start": "0x47e88c",
+      "end_exclusive": "0x47e8f2",
+      "sha256": "1a91d5140d4c19e02b094cf31c6b94777c036771accc734d7a3c2fcae1c4a5c9",
+      "native_symbol": "audio_timer_process_or_block"
+    },
+    "next_expiry": {
+      "start": "0x47e8f2",
+      "end_exclusive": "0x47e916",
+      "sha256": "7e3174c9a6779e8de61169aa56caaf80700280739c4572c0341f232d2d7d7056",
+      "native_symbol": "audio_timer_next_expiry"
+    },
+    "sample_time": {
+      "start": "0x47e916",
+      "end_exclusive": "0x47e93c",
+      "sha256": "4f3993dde00ab95ce630c49d9c405eefc82a4b43a9bda90b8a655dd7667bde54",
+      "native_symbol": "audio_timer_sample_time"
+    }
+  },
+  "state": {
+    "current_list": "0x20074AA8",
+    "overflow_list": "0x20074AAC",
+    "command_queue": "0x20074AB0",
+    "last_tick": "0x20074AB8"
+  },
+  "callback_boundary": "0x53C2A4,first user instruction not executed",
+  "blocking_boundary": "0x442030,first restricted-queue-wait instruction not executed in empty-queue cases"
+}

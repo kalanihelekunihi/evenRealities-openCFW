@@ -1,0 +1,42 @@
+{
+  "raw_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "functions": {
+    "lfrc_request": {
+      "start": "0x4c3bfc",
+      "end_exclusive": "0x4c3c2e",
+      "sha256": "455972840f9f71a921b76bf96224b80608875e5915c9ce88a7a4370ae74011b3",
+      "native_symbol": "audio_lfrc_request"
+    },
+    "lfrc_release": {
+      "start": "0x4c3c2e",
+      "end_exclusive": "0x4c3c60",
+      "sha256": "ee6863789b925a70f3a2da3211c4c174862ca117e2fca460d868be2365e6b946",
+      "native_symbol": "audio_lfrc_release"
+    },
+    "xtal_ls_request": {
+      "start": "0x4c3c60",
+      "end_exclusive": "0x4c3ca2",
+      "sha256": "e87bbc3b51aaa9bbdb5e95fcd540d3ffdc927937074da7318a8de95b83ce0415",
+      "native_symbol": "audio_xtal_ls_request"
+    },
+    "xtal_ls_release": {
+      "start": "0x4c3ca2",
+      "end_exclusive": "0x4c3cd4",
+      "sha256": "df2d54c7f2b54c24060b298130947496dc40803e8c4b9fac98360a6417f539a7",
+      "native_symbol": "audio_xtal_ls_release"
+    },
+    "clock_request": {
+      "start": "0x4c44bc",
+      "end_exclusive": "0x4c4530",
+      "sha256": "53cfb358989e68ae979d2814964a3e779ae0f0eba76836f99d409393d0e78d51",
+      "native_symbol": "audio_clock_request"
+    },
+    "clock_release": {
+      "start": "0x4c4530",
+      "end_exclusive": "0x4c45a4",
+      "sha256": "6a131868a276083764d4714178857124ccb4209a5f3e7552d874aba7f7c1a54e",
+      "native_symbol": "audio_clock_release"
+    }
+  },
+  "existing_native_provider": "info_memory_offline/oscillator.c:0x4809C4, compiled unchanged; original clock references now native dispatch"
+}

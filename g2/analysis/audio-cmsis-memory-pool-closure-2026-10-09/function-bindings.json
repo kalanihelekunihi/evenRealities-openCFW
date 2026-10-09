@@ -1,0 +1,112 @@
+{
+  "ranges": {
+    "osMemoryPoolNew": {
+      "start": "0x449c14",
+      "end_exclusive": "0x449d3e"
+    },
+    "osMemoryPoolAlloc": {
+      "start": "0x449d3e",
+      "end_exclusive": "0x449dd0"
+    },
+    "osMemoryPoolFree": {
+      "start": "0x449dd4",
+      "end_exclusive": "0x449e8e"
+    },
+    "CreateBlock": {
+      "start": "0x449e98",
+      "end_exclusive": "0x449eb8"
+    },
+    "AllocBlock": {
+      "start": "0x449eb8",
+      "end_exclusive": "0x449eca"
+    },
+    "FreeBlock": {
+      "start": "0x449eca",
+      "end_exclusive": "0x449ed2"
+    },
+    "uxQueueMessagesWaiting": {
+      "start": "0x441e66",
+      "end_exclusive": "0x441e8a"
+    },
+    "uxQueueMessagesWaitingFromISR": {
+      "start": "0x441e8a",
+      "end_exclusive": "0x441ea2"
+    },
+    "xQueueGenericReset": {
+      "start": "0x441516",
+      "end_exclusive": "0x4415ca"
+    },
+    "xQueueGenericCreateStatic": {
+      "start": "0x4415ca",
+      "end_exclusive": "0x441636"
+    },
+    "prvInitialiseNewQueue": {
+      "start": "0x441696",
+      "end_exclusive": "0x4416b8"
+    },
+    "xQueueCreateCountingSemaphoreStatic": {
+      "start": "0x441790",
+      "end_exclusive": "0x4417c2"
+    },
+    "vListInitialise": {
+      "start": "0x45607c",
+      "end_exclusive": "0x45609a"
+    },
+    "pvPortMalloc": {
+      "start": "0x456110",
+      "end_exclusive": "0x456210"
+    },
+    "vPortFree": {
+      "start": "0x456210",
+      "end_exclusive": "0x456280"
+    },
+    "prvHeapInit": {
+      "start": "0x456280",
+      "end_exclusive": "0x4562da"
+    },
+    "prvInsertBlockIntoFreeList": {
+      "start": "0x4562da",
+      "end_exclusive": "0x456338"
+    },
+    "vApplicationMallocFailedHook": {
+      "start": "0x46d85e",
+      "end_exclusive": "0x46d868"
+    },
+    "logger_wrapper": {
+      "start": "0x4733ee",
+      "end_exclusive": "0x47341a"
+    }
+  },
+  "layout": {
+    "pool.head": 0,
+    "pool.sem": 4,
+    "pool.array": 8,
+    "pool.array_size": 12,
+    "pool.name": 16,
+    "pool.slot_stride": 20,
+    "pool.slot_count": 24,
+    "pool.created_index": 28,
+    "pool.status": 32,
+    "pool.embedded_semaphore": 36,
+    "sizeof_pool": 116,
+    "sizeof_embedded_queue": 80,
+    "status_mask": "0x5EED0000",
+    "heap.base": "0x20004558",
+    "heap.bytes": "0x2F000",
+    "heap.start_sentinel": "0x20074158",
+    "heap.end_pointer": "0x2007465C",
+    "heap.free": "0x20074660",
+    "heap.minimum_free": "0x20074664",
+    "heap.alloc_count": "0x20074668",
+    "heap.free_count": "0x2007466C",
+    "heap.header_bytes": 8,
+    "heap.alignment": 8,
+    "logger.sink_pointer": "0x200742F0",
+    "logger.buffer": "0x2006B930"
+  },
+  "remaining_boundaries": [
+    "before real port yield0x4420BC",
+    "before opaque formatter0x473036 with logger enabled",
+    "before heap assertion mask/fault sequence; distinguish normal mask calls by LR"
+  ]
+}

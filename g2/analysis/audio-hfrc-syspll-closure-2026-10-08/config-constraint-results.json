@@ -1,0 +1,76 @@
+{
+  "status": "PASS",
+  "cases": 8,
+  "validation": "original-only private configuration assertions, not native comparison",
+  "comparisons": [
+    {
+      "family": "hfrc2",
+      "reference": 0,
+      "hs_hz": 0,
+      "external_hz": 12000000,
+      "status": 7,
+      "valid": "00"
+    },
+    {
+      "family": "hfrc2",
+      "reference": 0,
+      "hs_hz": 24000000,
+      "external_hz": 12000000,
+      "status": 0,
+      "valid": "01"
+    },
+    {
+      "family": "hfrc2",
+      "reference": 1,
+      "hs_hz": 0,
+      "external_hz": 12000000,
+      "status": 0,
+      "valid": "01"
+    },
+    {
+      "family": "hfrc2",
+      "reference": 1,
+      "hs_hz": 24000000,
+      "external_hz": 12000000,
+      "status": 0,
+      "valid": "01"
+    },
+    {
+      "family": "syspll",
+      "reference": 0,
+      "hs_hz": 0,
+      "external_hz": 12000000,
+      "status": 7,
+      "valid": "00"
+    },
+    {
+      "family": "syspll",
+      "reference": 0,
+      "hs_hz": 24000000,
+      "external_hz": 12000000,
+      "status": 0,
+      "valid": "01"
+    },
+    {
+      "family": "syspll",
+      "reference": 1,
+      "hs_hz": 0,
+      "external_hz": 12000000,
+      "status": 0,
+      "valid": "01"
+    },
+    {
+      "family": "syspll",
+      "reference": 1,
+      "hs_hz": 24000000,
+      "external_hz": 12000000,
+      "status": 0,
+      "valid": "01"
+    }
+  ],
+  "limits": [
+    "Explicit valid config with no active users; no full boot/caller or hardware reference proof.",
+    "Stock HS=0 prevents a freshly validated adjusted XTAL-reference config.",
+    "Tests that manually seed valid XTAL-reference config at HS=0 are constructed/inconsistent state, not established stock-startup reachability."
+  ]
+}

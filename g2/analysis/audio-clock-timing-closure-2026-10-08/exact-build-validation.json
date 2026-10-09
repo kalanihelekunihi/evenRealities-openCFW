@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "elf_sha256": "4f75c392ee947f969c7f8f9cedd56f9da03c61b02fb566a14c86797bdb481fed",
+  "comparisons": {
+    "results.json": 1598,
+    "generator-results.json": 2530,
+    "config-results.json": 1144,
+    "driver-results.json": 1407,
+    "manager-results.json": 816,
+    "reachability-results.json": 36,
+    "math-results.json": 13920,
+    "public-results.json": 1584
+  },
+  "total": 23035,
+  "new_timing_irq": 1598,
+  "reused_composition": 21437,
+  "sources_match": true,
+  "original_code_bindings": {},
+  "undefined_symbols": [],
+  "source_guest_guard": "Every source execution in all eight suites requires PC in native0x100000..0x110000; any original/external instruction aborts. Reachability retains the guard through the sequence.",
+  "trace_correction": "Spin call recorder changed from address/LR dedup to live-call tracking so repeated same-site calls are counted. Driver canonical trace map extended to native wait5; all affected suites rerun on unchanged ELF. Documentation-only inherited provider-limit strings corrected after validation.",
+  "limits": "Source-only executable closure for reached clock paths; authenticated firmware initialization/scalar data and synthetic MMIO remain test inputs. Not whole-firmware source completeness/physical timing/byte equality."
+}

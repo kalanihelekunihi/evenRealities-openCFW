@@ -1,0 +1,14 @@
+{
+  "upstream_pin": "def7d2df2b0506d3d249334974f51e427c17a41c",
+  "ready_provenance": "g2/components/foundation/freertos_ready/SOURCE_PROVENANCE.json",
+  "ready_provenance_sha256": "4e832d18ee8f82de57f508da3b3782b14a145ef112fcd5871b907a847efc8c44",
+  "queue_source": "g2/analysis/case-deferred-event-closure-2026-10-08/upstream-queue.c",
+  "queue_source_sha256": "5cdf4fa35fe059446effff5bf20deaf83ddffb08921bc198fda106b1d17dd894",
+  "public_body": "prvUnlockQueue, renamed/exported with queue sets0 and stock ARM32 queue/list macros; public ready/list bodies compiled unchanged",
+  "reconstructed_not_pristine_public": "port.c architectural helpers and sorted.c, authenticated stock instruction reconstruction, not claimed unique upstream/compiler attribution",
+  "first_build_corrections": [
+    "Linker assignment whitespace fixed before first successful build.",
+    "A first harness incorrectly rejected mask-helper0x5FA0A4 as an assertion; disassembly identified it as normal critical-section code. Fatal continuations are0x45537E/0x4420F6.",
+    "Inline MRS output needed early-clobber constraint to avoid overwriting its threshold input; corrected and all final suites rerun."
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "raw_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "functions": {
+    "xtal_request": {
+      "start": "0x4c3d9e",
+      "end_exclusive": "0x4c3e9a",
+      "bytes": 252,
+      "sha256": "e8236f245430c77e313d1fa4e03c016b41d4ced3465e7197e57376e6b666ec88",
+      "scope": "complete native"
+    },
+    "xtal_wait": {
+      "start": "0x4c3d70",
+      "end_exclusive": "0x4c3d9e",
+      "bytes": 46,
+      "sha256": "c5769a91c08b99890f6d26bf7b75d4ee1e90e1e99fb5e95f9579c1a948ea886c",
+      "scope": "complete native"
+    },
+    "counter_wait": {
+      "start": "0x4c387e",
+      "end_exclusive": "0x4c38a0",
+      "bytes": 34,
+      "sha256": "c8b1048bb1373519c1f4c09a05ddbd31211a99c70fa661bbdf82f3465d48c060",
+      "scope": "complete native"
+    },
+    "board_set": {
+      "start": "0x4c45e2",
+      "end_exclusive": "0x4c45fc",
+      "bytes": 26,
+      "sha256": "ce91cf596462036215c634d5f9fad9e95b811117922a0676de731b3be642f57f",
+      "scope": "complete native"
+    },
+    "hfrc_config": {
+      "start": "0x4c38a0",
+      "end_exclusive": "0x4c399e",
+      "bytes": 254,
+      "sha256": "7374e536401b0f7eb5eadd64bd10f2430326b628d20273a14dfec1bbaa3c59ea",
+      "scope": "complete native"
+    },
+    "platform_board_block": {
+      "start": "0x4c2b06",
+      "end_exclusive": "0x4c2b18",
+      "bytes": 18,
+      "sha256": "beb2a06cb1b2565031bf4b43c4c4d218ff3d5bf99b737cb53d3c0a1e0c34aba9",
+      "scope": "original-only bounded block"
+    },
+    "hfrc_target_provider": {
+      "start": "0x4d3914",
+      "end_exclusive": "0x4d391e",
+      "bytes": 10,
+      "sha256": "15eabeb671434c5c1f485fd4600130400e24f0e1ce62364e4b684e1b6e17bfdf",
+      "scope": "original provider"
+    },
+    "hfrc_apply_provider": {
+      "start": "0x4d3938",
+      "end_exclusive": "0x4d3944",
+      "bytes": 12,
+      "sha256": "2f3c942fa6e0a1f4fb8b0d1627b094d289322a0e6dcec92bcdc3fd8b0354d217",
+      "scope": "original provider"
+    },
+    "hfrc_disable_provider": {
+      "start": "0x4d3944",
+      "end_exclusive": "0x4d3952",
+      "bytes": 14,
+      "sha256": "9c8ce07724ee14bf19003f771d009e86d5a60f98cf35890d7b9b750d1a15d79f",
+      "scope": "original provider"
+    }
+  },
+  "board_default_table": {
+    "address": "0x77D8F8",
+    "bytes": 20,
+    "sha256": "83071d009f0a48be8576c88f3e6fcde97b9c7c535e314d7e04fc2b1646b125b7"
+  },
+  "hfrc_default_table": {
+    "address": "0x789FC8",
+    "bytes": 12,
+    "sha256": "cf7b2d0cc5752f6acfbe2d5f07d9736ab761637c6380ae17e97017d1d5e0cd5f"
+  }
+}

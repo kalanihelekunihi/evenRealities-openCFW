@@ -1,0 +1,11 @@
+{
+  "pin": "5efc0228528a8adce5eae0d226fac85d2551eb3b",
+  "files": {
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/am_hal_clkmgr.c": "7bf600fbe46c39ffd478debd887a570b8f076a509a2913b06511c7f7234b25a2",
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/am_hal_clkmgr.h": "39ea260e7f1bcd06c0ced31bea86508e6861f0fa2a4ddc09571fe01a4f7573e5"
+  },
+  "differences": [
+    "Stock HFRC release lacks SDK disable-HFADJ/clear-stabilizing path.",
+    "Source guides names and structures; every native control flow compared to actual stock instructions."
+  ]
+}

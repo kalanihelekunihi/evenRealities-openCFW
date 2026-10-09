@@ -1,0 +1,23 @@
+{
+  "sources": {
+    "g2/components/audio/xtal_request_offline/request.c": "493aba4b3e72ce2ca40a3eb2e500bd2d520a1d05e7cbebc0efd30573aea86da1",
+    "g2/components/audio/xtal_request_offline/request.h": "22dde7f1b96651aad61aa4fa823d0319fc31126a91f8f335d604667ce8295216",
+    "g2/components/audio/clock_manager_ownership_offline/ownership.c": "9d9048090bb05e556a5163c5e9619c6bfb9d2cd3225174cc3d770a2b3bfcf97f",
+    "g2/components/audio/clock_manager_ownership_offline/ownership.h": "dd87c180aad8d8a77165ca6e19e0016b2768687de60d71b4498683fbdf85e364"
+  },
+  "elf": "/tmp/opencfw-xtal-request/control.elf",
+  "elf_sha256": "dadddc179d3c595cf782166eced5130bfc2989e00c172c7f2c545f90e1511e2d",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m33",
+    "-mfpu=fpv5-sp-d16",
+    "-mfloat-abi=hard",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib",
+    "-fshort-enums"
+  ],
+  "link_script": "stock_save_irq = 0x473941; stock_oscillator = 0x4809c5; stock_delay = 0x4807a1; stock_hfrc_target = 0x4d3915; stock_hfrc_apply = 0x4d3939; stock_hfrc_disable = 0x4d3945; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }"
+}

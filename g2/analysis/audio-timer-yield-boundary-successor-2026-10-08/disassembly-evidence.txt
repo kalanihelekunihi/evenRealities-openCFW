@@ -1,0 +1,9 @@
+
+port_yield 0x4420bc..0x4420d0 SHA256dd981b3e9196c6fd87bb79719c94628c89e564d5728b3fdd1ff08c397eccb397
+004420bc: 5ff08050     movs.w r0, #0x10000000
+004420c0: 5649         ldr r1, [pc, #0x158]
+004420c2: 0860         str r0, [r1]
+004420c4: bff34f8f     dsb sy
+004420c8: bff36f8f     isb sy
+004420cc: 7047         bx lr
+004420ce: 0000         movs r0, r0

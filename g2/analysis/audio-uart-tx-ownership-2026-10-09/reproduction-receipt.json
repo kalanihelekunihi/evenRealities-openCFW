@@ -1,0 +1,24 @@
+{
+  "elf": "/tmp/opencfw-uart-tx/uart.elf",
+  "elf_sha256": "8b1923223a443e6d8935d4091400089c87f1ddd37de3fac8c7ce0969bb4afe06",
+  "sources": {
+    "g2/components/audio/uart_tx_offline/am_hal_queue.c": "141d27bdd76226aba0712ae08b06df40bfd2f16aa1deace969e5a0d01cad574a",
+    "g2/components/audio/uart_tx_offline/am_hal_uart.c": "7fe6809637b77530ffd758edeacc83d18495ff39d8bf09f7105eea7587be9344",
+    "g2/components/audio/uart_tx_offline/compat.h": "61a675d80b148374eb0720266788108371f474453a4c90f531cd4787b3a61443"
+  },
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "flags": [
+    "-mcpu=cortex-m33",
+    "-mthumb",
+    "-Og",
+    "-fkeep-static-functions",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "link_script": "am_hal_delay_us = 0x4807A1; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }",
+  "original_executable_aliases": {
+    "delay": "0x4807A0"
+  },
+  "limits": "Delay explicit synthetic external provider. MMIO/callback fixtures offline, no physical TX."
+}

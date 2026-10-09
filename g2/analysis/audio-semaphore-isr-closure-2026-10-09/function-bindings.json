@@ -1,0 +1,28 @@
+{
+  "new_bodies": {
+    "xQueueReceiveFromISR": [
+      "0x441DA6",
+      "0x441E66"
+    ],
+    "xQueueGiveFromISR": [
+      "0x441A42",
+      "0x441B0A"
+    ],
+    "audio_semaphore_acquire": [
+      "0x44994E",
+      "0x4499B8"
+    ],
+    "audio_semaphore_release": [
+      "0x4499B8",
+      "0x449A0E"
+    ]
+  },
+  "reused_copy_helper": "prvCopyDataFromQueue",
+  "stock_callers": [
+    "osMemoryPoolAlloc0x449D3E uses ISR receive in IRQ-style route",
+    "osSemaphoreAcquire0x44994E",
+    "osSemaphoreRelease0x4499B8"
+  ],
+  "data_layout": "Queue offsets preserved from semaphore-take predecessor; Rx lock68,Tx lock69; count56, item_size64",
+  "validation_limits": "Constructed scheduler/mask/waiter inputs; no hardware exception delivery"
+}

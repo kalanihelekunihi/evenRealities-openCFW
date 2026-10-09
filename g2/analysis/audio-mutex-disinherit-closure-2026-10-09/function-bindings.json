@@ -1,0 +1,31 @@
+{
+  "bindings": {
+    "xTaskPriorityInherit": {
+      "start": "0x4558CC",
+      "end_exclusive": "0x45596E"
+    },
+    "xTaskPriorityDisinherit": {
+      "start": "0x45596E",
+      "end_exclusive": "0x455A12"
+    },
+    "vTaskPriorityDisinheritAfterTimeout": {
+      "start": "0x455A1C",
+      "end_exclusive": "0x455ACA"
+    }
+  },
+  "layout": {
+    "TCB.state": 4,
+    "TCB.event": 24,
+    "TCB.priority": 44,
+    "TCB.base_priority": 96,
+    "TCB.mutexes_held": 100,
+    "ready_lists": "0x2006A49C",
+    "current_tcb": "0x20074A20",
+    "top_ready_priority": "0x20074A38"
+  },
+  "callees": [
+    "uxListRemove0x4560E8/native sealed list source",
+    "inlined ready-list insert/native vListInsertEnd"
+  ],
+  "invalid_boundary": "Stop before mask helper0x5FA0A4 preceding deliberate fault-store/spin; no assertion recovery claimed"
+}

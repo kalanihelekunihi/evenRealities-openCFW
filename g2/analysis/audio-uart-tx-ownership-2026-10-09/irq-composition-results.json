@@ -1,0 +1,32 @@
+{
+  "status": "PASS",
+  "cases": 4,
+  "elf_sha256": "8b1923223a443e6d8935d4091400089c87f1ddd37de3fac8c7ce0969bb4afe06",
+  "comparisons": [
+    {
+      "status": 0,
+      "interrupt_clear_word": 0,
+      "channel_completion": 0,
+      "hal_last_tx_complete": 0
+    },
+    {
+      "status": 1,
+      "interrupt_clear_word": 1,
+      "channel_completion": 1,
+      "hal_last_tx_complete": 1
+    },
+    {
+      "status": 32,
+      "interrupt_clear_word": 32,
+      "channel_completion": 0,
+      "hal_last_tx_complete": 0
+    },
+    {
+      "status": 33,
+      "interrupt_clear_word": 33,
+      "channel_completion": 1,
+      "hal_last_tx_complete": 1
+    }
+  ],
+  "limits": "Manually entered original channel1 interrupt wrapper with injected status register; stock status/clear/service providers, original or native inactive-TX state machine. No exception/vector delivery, RX or DMA path, actual interrupt timing or physical TX."
+}

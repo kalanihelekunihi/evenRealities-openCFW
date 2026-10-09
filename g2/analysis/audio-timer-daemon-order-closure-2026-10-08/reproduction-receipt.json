@@ -1,0 +1,30 @@
+{
+  "elf": "/tmp/opencfw-timer-daemon-order/daemon.elf",
+  "elf_sha256": "6e28bd25c7f6d8123e0a8a1f55fb679a44272c0d14be21808fbf6145d13525f9",
+  "sources": {
+    "g2/components/audio/timer_daemon_order_offline/daemon.c": "e73d8f5933923eef508fe55332783b5311bd7850003978d8fdfbbd06e1af7bbe",
+    "g2/components/audio/timer_daemon_order_offline/daemon.h": "3cdda04aa619ecfc8336079da69d05ad296931cbb747701ac99ad5d2e84d25fa"
+  },
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "bindings": {
+    "stock_scheduler_suspend": 4541821,
+    "stock_scheduler_resume": 4541901,
+    "stock_tick_count": 4542207,
+    "stock_timer_switch_lists": 4713105,
+    "stock_list_remove": 4546793,
+    "stock_timer_reload": 4712467,
+    "stock_queue_restricted_wait": 4464689,
+    "stock_yield": 4464829,
+    "stock_timer_drain_commands": 4712827
+  },
+  "link_script": "stock_scheduler_suspend = 0x454d7d; stock_scheduler_resume = 0x454dcd; stock_tick_count = 0x454eff; stock_timer_switch_lists = 0x47ea91; stock_list_remove = 0x4560e9; stock_timer_reload = 0x47e813; stock_queue_restricted_wait = 0x442031; stock_yield = 0x4420bd; stock_timer_drain_commands = 0x47e97b; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }"
+}

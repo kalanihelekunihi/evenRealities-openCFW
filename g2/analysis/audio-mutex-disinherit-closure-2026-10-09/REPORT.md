@@ -1,0 +1,11 @@
+# Mutex priority source closure
+
+Three actual stock task providers are reconstructed from the selected FreeRTOS V10.5.1 public bodies: inheritance0x4558CC, release disinherit0x45596E and timeout disinherit0x455A1C. [Pseudocode](pseudocode.md), [ABI/addresses](function-bindings.json), [source reference](source-reference.json), [reusable C](../../components/audio/mutex_disinherit_offline/disinherit.c).
+
+**711 direct original-instruction comparisons PASS**:195 release,259 timeout,257 inheritance. **24 additional queue-give compositions PASS** against a separate integrated ELF, replacing the prior original disinherit alias with native source. Both final artifacts, all source/header hashes and result hashes match their receipts; unresolved symbols are zero. All reached native instructions remain source-only. Invalid holder/count paths stop before the stock assertion mask/fault sequence. Neither suite substitutes helper results or stock instructions.
+
+Release decrements held count even when priority does not change. Priority restores only on last mutex release; queue give subsequently clears its holder and can request yield. With another mutex held, inherited priority remains. Timeout disinherit does not decrement held count: only a single-mutex holder can change to max(base,remaining-waiter), and a blocked holder stays on its existing state list. The event item's high bit protects a value used for another purpose. Inheritance may return true when priority already exceeds caller priority but base is lower; return true does not necessarily mean a fresh change occurred.
+
+The former queue-before-disinherit boundary is closed for these synthetic mutex-give cases. A requested yield still stops before port execution; no task handover, exception return, complete timed-out queue transaction, physical lifetime fault or firmware patch safety is claimed. State is coherent but synthetic. Reused list/wake/critical providers and queue regression paths are not newly recovered bodies.
+
+The local tasks source provides these concrete bodies. Held-count increment0x455AE0 already has an exact-source replacement attribution in apollo_main.tsv, so it is not counted as new missing-source discovery. Whole mutex take/recursive operations and scheduler-driven completion remain separate actionable work. The broader source-lead search is not declared exhausted.

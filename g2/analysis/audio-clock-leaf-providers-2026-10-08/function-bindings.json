@@ -1,0 +1,104 @@
+{
+  "raw_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "functions": {
+    "ext_request": {
+      "start": "0x4c3cd4",
+      "end_exclusive": "0x4c3d28",
+      "bytes": 84,
+      "sha256": "a064c56a1982836e3659a110ed6dfaff843a1e10c8f22a41058b5cd3935f824c",
+      "scope": "native leaf; M33-compatible offline profile, divide-trap and hardware timing boundaries explicit"
+    },
+    "ext_release": {
+      "start": "0x4c3d28",
+      "end_exclusive": "0x4c3d70",
+      "bytes": 72,
+      "sha256": "df96dc77c74073c35a39dceb115a2c8595b17e84ec6ba6b9136c5f3359929b87",
+      "scope": "native leaf; M33-compatible offline profile, divide-trap and hardware timing boundaries explicit"
+    },
+    "pll_power_enable": {
+      "start": "0x480058",
+      "end_exclusive": "0x48009e",
+      "bytes": 70,
+      "sha256": "22d3bdcbc12b811f3e882cedca00a5d353bd54a327ceb22065adfcfd49218a38",
+      "scope": "native leaf; M33-compatible offline profile, divide-trap and hardware timing boundaries explicit"
+    },
+    "pll_power_disable": {
+      "start": "0x48009e",
+      "end_exclusive": "0x4800de",
+      "bytes": 64,
+      "sha256": "9823fe770daf50650ad41cfda67e35b33a7ecdd9087b5ce73c70c7233d0110f7",
+      "scope": "native leaf; M33-compatible offline profile, divide-trap and hardware timing boundaries explicit"
+    },
+    "pll_power_enabled": {
+      "start": "0x4800e4",
+      "end_exclusive": "0x4800f4",
+      "bytes": 16,
+      "sha256": "88fe4bc375b30d44413f20a96455db8b9a360ffc73d884e2ad72466a377c1d11",
+      "scope": "native leaf; M33-compatible offline profile, divide-trap and hardware timing boundaries explicit"
+    },
+    "hfrc_force": {
+      "start": "0x4d391e",
+      "end_exclusive": "0x4d3938",
+      "bytes": 26,
+      "sha256": "f9a534885d93c13e5786052214ad6fd9fa86aac9fdcacebfb697ede03326d105",
+      "scope": "native leaf; M33-compatible offline profile, divide-trap and hardware timing boundaries explicit"
+    },
+    "hfrc_apply": {
+      "start": "0x4d3938",
+      "end_exclusive": "0x4d3944",
+      "bytes": 12,
+      "sha256": "2f3c942fa6e0a1f4fb8b0d1627b094d289322a0e6dcec92bcdc3fd8b0354d217",
+      "scope": "native leaf; M33-compatible offline profile, divide-trap and hardware timing boundaries explicit"
+    },
+    "hfrc_disable": {
+      "start": "0x4d3944",
+      "end_exclusive": "0x4d3952",
+      "bytes": 14,
+      "sha256": "9c8ce07724ee14bf19003f771d009e86d5a60f98cf35890d7b9b750d1a15d79f",
+      "scope": "native leaf; M33-compatible offline profile, divide-trap and hardware timing boundaries explicit"
+    },
+    "hfrc2_force": {
+      "start": "0x4d3952",
+      "end_exclusive": "0x4d3992",
+      "bytes": 64,
+      "sha256": "8399d1a23e1cbfcdf603c957f27db31823a189ecb2a5f4bcb6688df0157eebff",
+      "scope": "native leaf; M33-compatible offline profile, divide-trap and hardware timing boundaries explicit"
+    },
+    "hfrc2_apply": {
+      "start": "0x4d3992",
+      "end_exclusive": "0x4d39e4",
+      "bytes": 82,
+      "sha256": "017d2181c1374fbbff1b9049a5ad0da5ec49b16e5183e329c9967c312c617987",
+      "scope": "native leaf; M33-compatible offline profile, divide-trap and hardware timing boundaries explicit"
+    },
+    "hfrc2_disable": {
+      "start": "0x4d39e4",
+      "end_exclusive": "0x4d39f2",
+      "bytes": 14,
+      "sha256": "f637b53c11af41a03a2c5e55bc4024128cc179305ebc5fe67239818c3c5f370e",
+      "scope": "native leaf; M33-compatible offline profile, divide-trap and hardware timing boundaries explicit"
+    },
+    "hfrc2_ratio": {
+      "start": "0x4d38ea",
+      "end_exclusive": "0x4d3914",
+      "bytes": 42,
+      "sha256": "5d56a93dc2746c295ee2b3507ab4e1be4dae68f057dff4f26b519616bfd486df",
+      "scope": "native leaf; M33-compatible offline profile, divide-trap and hardware timing boundaries explicit"
+    },
+    "hfrc_target": {
+      "start": "0x4d3914",
+      "end_exclusive": "0x4d391e",
+      "bytes": 10,
+      "sha256": "15eabeb671434c5c1f485fd4600130400e24f0e1ce62364e4b684e1b6e17bfdf",
+      "scope": "native leaf; M33-compatible offline profile, divide-trap and hardware timing boundaries explicit"
+    }
+  },
+  "constant_data": {
+    "ext_pin_source": "0x78EE34 =3; function nibble replaced with10 on request",
+    "ext_pin_disabled": "0x78EE38 =3 on last release"
+  },
+  "remaining_generator": {
+    "postdiv": "0x539794",
+    "min_vco": "0x539674"
+  }
+}

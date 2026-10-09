@@ -1,0 +1,23 @@
+{
+  "elf": "/tmp/opencfw-mutex-disinherit/mutex.elf",
+  "elf_sha256": "555937f301b529049bb09a62007febfd71e3eb3134772f5b02e1c48046d8572a",
+  "sources": {
+    "g2/components/audio/mutex_disinherit_offline/disinherit.c": "734c2ddd12b268dcc539063c875e7913695caeecceab0f092ed76cca3ca6f1cb",
+    "g2/components/foundation/freertos_ready/list_subset.c": "537ebd8aca3a9a757935179ff2474d3544bf0a07bd89fa697cc4bd90535b7677",
+    "g2/components/audio/mutex_disinherit_offline/compat.h": "fb5c9104f184e289ac0af22948b658047e82859aad190e516a532a7ae7ebefef",
+    "g2/components/audio/mutex_disinherit_offline/disinherit.h": "b503c0d0565417bbafc3423ca4755af4f164244dc85ca9d2707f9f595ae870d8",
+    "g2/components/foundation/freertos_ready/ready_compat.h": "46476ef71baa382e0d93d9be8159d71dee84606b993e09caa4a7b00b50ab34af",
+    "g2/components/foundation/freertos_ready/ready.h": "b88903df66fdfa00e97318afc5372de9ad2a5750b9d0ec32454e35042c7bfd7b",
+    "g2/components/foundation/freertos_event_group/event_group.h": "37edf591b135477ae72b8e006e975b06c5a103d89417942f927f9a7cacd1654f"
+  },
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "flags": [
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "link_script": "mutex_assert_boundary = 0x5fa0a5; opencfw_event_group_assert_failure = 0x45537f; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }"
+}

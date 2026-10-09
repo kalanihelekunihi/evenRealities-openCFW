@@ -1,0 +1,23 @@
+{
+  "elf": "/tmp/opencfw-main-format/format.elf",
+  "elf_sha256": "62ae5dfd48d70ddc91e4eb46ea89d7212bb1c693b2ed3251d98486c5ff64c01a",
+  "sources": {
+    "g2/components/audio/main_formatter_offline/format.c": "92563c1b28c8b3b70238d9605f7e344e639d64d6c1b359ff3a4c9e20e8de8215",
+    "g2/components/audio/main_formatter_offline/known_noop.c": "8268543bb381bad1acb49f9377b6a9ec05b6de87f9a321e62411a83863409818",
+    "g2/components/audio/cmsis_memory_pool_offline/failure.c": "8b9321f8b3e090db67cc9ef839ece2bb0c47baac9583bf3ee1745ebc35e86901",
+    "g2/components/audio/main_formatter_offline/format.h": "e1736b74b7546444e81e48d2f54ecdb184ac7e58713f7cd203696af8b721596d"
+  },
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "flags": [
+    "-mcpu=cortex-m33",
+    "-mfpu=fpv5-d16",
+    "-mfloat-abi=hard",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "original_executable_aliases": [],
+  "link_script": "SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }"
+}

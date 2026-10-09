@@ -1,0 +1,27 @@
+{
+  "elf": "/tmp/opencfw-uart-rx-stream/rx.elf",
+  "elf_sha256": "c7d5caa94e13b6b6f6e5274410eb7f5aa74ac42b11e6d3c41c0f147a42522837",
+  "sources": {
+    "g2/components/audio/uart_rx_stream_offline/am_hal_uart.c": "e982fa8412641fccf7642dc46a13d2ebe570cd33fa6f5205a3a756a62200bedc",
+    "g2/components/audio/uart_rx_stream_offline/stream_buffer.c": "318792dc90f274383ef835cb9081a176994cd2a28f60ed64037e264ef5739415",
+    "g2/components/audio/uart_rx_stream_offline/support.c": "b47f30562c9d8bf635fddbc2cf9393102410937263935805ba0f55597231bd51",
+    "g2/components/audio/uart_rx_stream_offline/compat.h": "745383c5607432a58996f19554f7c5f0c4c1797560d5cca2e1a916f0d69e27ef"
+  },
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "flags": [
+    "-mcpu=cortex-m33",
+    "-mthumb",
+    "-Og",
+    "-fkeep-static-functions",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "link_script": "pvPortMalloc = 0x456111; offline_notify = 0x455DC1; offline_assert = 0x10FFF1; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }",
+  "original_executable_aliases": {
+    "malloc": "0x456110",
+    "task_notify": "0x455DC0"
+  },
+  "test_assert_cut": "0x10FFF0",
+  "limits": "Allocator/notification external providers cut or explicitly stubbed. No scheduler handover/hardware RX."
+}

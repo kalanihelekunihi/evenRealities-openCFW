@@ -1,0 +1,118 @@
+
+expired
+0047e83a 70b5         push {r4, r5, r6, lr}
+0047e83c 0400         movs r4, r0
+0047e83e 0d00         movs r5, r1
+0047e840 dff83403     ldr.w r0, [pc, #0x334]
+0047e844 0068         ldr r0, [r0]
+0047e846 c068         ldr r0, [r0, #0xc]
+0047e848 c668         ldr r6, [r0, #0xc]
+0047e84a 301d         adds r0, r6, #4
+0047e84c d7f74cfc     bl #0x4560e8
+0047e850 96f82800     ldrb.w r0, [r6, #0x28]
+0047e854 4007         lsls r0, r0, #0x1d
+0047e856 05d5         bpl #0x47e864
+0047e858 2a00         movs r2, r5
+0047e85a 2100         movs r1, r4
+0047e85c 3000         movs r0, r6
+0047e85e fff7d8ff     bl #0x47e812
+0047e862 05e0         b #0x47e870
+0047e864 96f82800     ldrb.w r0, [r6, #0x28]
+0047e868 10f0fe00     ands r0, r0, #0xfe
+0047e86c 86f82800     strb.w r0, [r6, #0x28]
+0047e870 3000         movs r0, r6
+0047e872 316a         ldr r1, [r6, #0x20]
+0047e874 8847         blx r1
+0047e876 70bd         pop {r4, r5, r6, pc}
+
+daemon
+0047e878 80b5         push {r7, lr}
+0047e87a 6846         mov r0, sp
+0047e87c 00f039f8     bl #0x47e8f2
+0047e880 0099         ldr r1, [sp]
+0047e882 00f003f8     bl #0x47e88c
+0047e886 00f078f8     bl #0x47e97a
+0047e88a f6e7         b #0x47e87a
+
+process_or_block
+0047e88c 7cb5         push {r2, r3, r4, r5, r6, lr}
+0047e88e 0500         movs r5, r0
+0047e890 0c00         movs r4, r1
+0047e892 d6f773fa     bl #0x454d7c
+0047e896 6846         mov r0, sp
+0047e898 00f03df8     bl #0x47e916
+0047e89c 0600         movs r6, r0
+0047e89e 0098         ldr r0, [sp]
+0047e8a0 0028         cmp r0, #0
+0047e8a2 23d1         bne #0x47e8ec
+0047e8a4 002c         cmp r4, #0
+0047e8a6 08d1         bne #0x47e8ba
+0047e8a8 ae42         cmp r6, r5
+0047e8aa 06d3         blo #0x47e8ba
+0047e8ac d6f78efa     bl #0x454dcc
+0047e8b0 3100         movs r1, r6
+0047e8b2 2800         movs r0, r5
+0047e8b4 fff7c1ff     bl #0x47e83a
+0047e8b8 1ae0         b #0x47e8f0
+0047e8ba 002c         cmp r4, #0
+0047e8bc 08d0         beq #0x47e8d0
+0047e8be dff8bc02     ldr.w r0, [pc, #0x2bc]
+0047e8c2 0068         ldr r0, [r0]
+0047e8c4 0068         ldr r0, [r0]
+0047e8c6 0028         cmp r0, #0
+0047e8c8 01d1         bne #0x47e8ce
+0047e8ca 0124         movs r4, #1
+0047e8cc 00e0         b #0x47e8d0
+0047e8ce 0024         movs r4, #0
+0047e8d0 2200         movs r2, r4
+0047e8d2 ad1b         subs r5, r5, r6
+0047e8d4 2900         movs r1, r5
+0047e8d6 a548         ldr r0, [pc, #0x294]
+0047e8d8 0068         ldr r0, [r0]
+0047e8da c3f7a9fb     bl #0x442030
+0047e8de d6f775fa     bl #0x454dcc
+0047e8e2 0028         cmp r0, #0
+0047e8e4 04d1         bne #0x47e8f0
+0047e8e6 c3f7e9fb     bl #0x4420bc
+0047e8ea 01e0         b #0x47e8f0
+0047e8ec d6f76efa     bl #0x454dcc
+0047e8f0 73bd         pop {r0, r1, r4, r5, r6, pc}
+
+next_expiry
+0047e8f2 a14a         ldr r2, [pc, #0x284]
+0047e8f4 1168         ldr r1, [r2]
+0047e8f6 0968         ldr r1, [r1]
+0047e8f8 0029         cmp r1, #0
+0047e8fa 01d1         bne #0x47e900
+0047e8fc 0121         movs r1, #1
+0047e8fe 00e0         b #0x47e902
+0047e900 0021         movs r1, #0
+0047e902 0160         str r1, [r0]
+0047e904 0068         ldr r0, [r0]
+0047e906 0028         cmp r0, #0
+0047e908 03d1         bne #0x47e912
+0047e90a 1068         ldr r0, [r2]
+0047e90c c068         ldr r0, [r0, #0xc]
+0047e90e 0068         ldr r0, [r0]
+0047e910 00e0         b #0x47e914
+0047e912 0020         movs r0, #0
+0047e914 7047         bx lr
+
+sample_time
+0047e916 70b5         push {r4, r5, r6, lr}
+0047e918 0400         movs r4, r0
+0047e91a d6f7f0fa     bl #0x454efe
+0047e91e 0500         movs r5, r0
+0047e920 974e         ldr r6, [pc, #0x25c]
+0047e922 3068         ldr r0, [r6]
+0047e924 8542         cmp r5, r0
+0047e926 04d2         bhs #0x47e932
+0047e928 00f0b2f8     bl #0x47ea90
+0047e92c 0120         movs r0, #1
+0047e92e 2060         str r0, [r4]
+0047e930 01e0         b #0x47e936
+0047e932 0020         movs r0, #0
+0047e934 2060         str r0, [r4]
+0047e936 3560         str r5, [r6]
+0047e938 2800         movs r0, r5
+0047e93a 70bd         pop {r4, r5, r6, pc}

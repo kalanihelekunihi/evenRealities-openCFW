@@ -1,0 +1,7095 @@
+{
+  "status": "PASS",
+  "cases": 240,
+  "elf_sha256": "d9490bdf1f772492d499bb4012420c2fee171c6ae0e4b01b720d269f635fa860",
+  "raw_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "bindings": {
+    "uart_group_can_poll": "0x47f6f2",
+    "uart_power_pre": "0x48032c",
+    "uart_power_post": "0x480342",
+    "uart_group_control": "0x480312",
+    "uart_status_wait": "0x480826"
+  },
+  "comparisons": [
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 11,
+        "enabled": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 11,
+        "enabled": 512
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 11,
+        "enabled": 1024
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            1024
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            1024
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 11,
+        "enabled": 2048
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            2048
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            2048
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 11,
+        "enabled": 4096
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 11,
+        "enabled": 7680
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 11,
+        "enabled": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 11,
+        "enabled": 4294967295
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 12,
+        "enabled": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 12,
+        "enabled": 512
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 12,
+        "enabled": 1024
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            1024
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            1024
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 12,
+        "enabled": 2048
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            2048
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            2048
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 12,
+        "enabled": 4096
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 12,
+        "enabled": 7680
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 12,
+        "enabled": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 12,
+        "enabled": 4294967295
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 13,
+        "enabled": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 13,
+        "enabled": 512
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 13,
+        "enabled": 1024
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            1024
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            1024
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 13,
+        "enabled": 2048
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            2048
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            2048
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 13,
+        "enabled": 4096
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 13,
+        "enabled": 7680
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 13,
+        "enabled": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 13,
+        "enabled": 4294967295
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 14,
+        "enabled": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 14,
+        "enabled": 512
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 14,
+        "enabled": 1024
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            1024
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            1024
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 14,
+        "enabled": 2048
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            2048
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            2048
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 14,
+        "enabled": 4096
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 14,
+        "enabled": 7680
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 14,
+        "enabled": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 14,
+        "enabled": 4294967295
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 267,
+        "enabled": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 267,
+        "enabled": 512
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 267,
+        "enabled": 1024
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            1024
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            1024
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 267,
+        "enabled": 2048
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            2048
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            2048
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 267,
+        "enabled": 4096
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 267,
+        "enabled": 7680
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 267,
+        "enabled": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 267,
+        "enabled": 4294967295
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 268,
+        "enabled": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 268,
+        "enabled": 512
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 268,
+        "enabled": 1024
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            1024
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            1024
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 268,
+        "enabled": 2048
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            2048
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            2048
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 268,
+        "enabled": 4096
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 268,
+        "enabled": 7680
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 268,
+        "enabled": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 268,
+        "enabled": 4294967295
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 269,
+        "enabled": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 269,
+        "enabled": 512
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 269,
+        "enabled": 1024
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            1024
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            1024
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 269,
+        "enabled": 2048
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            2048
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            2048
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 269,
+        "enabled": 4096
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 269,
+        "enabled": 7680
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 269,
+        "enabled": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 269,
+        "enabled": 4294967295
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 270,
+        "enabled": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 270,
+        "enabled": 512
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 270,
+        "enabled": 1024
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            1024
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            1024
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 270,
+        "enabled": 2048
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            2048
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            2048
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 270,
+        "enabled": 4096
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 270,
+        "enabled": 7680
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 270,
+        "enabled": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_can_poll",
+      "fixture": {
+        "domain": 270,
+        "enabled": 4294967295
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_power_pre",
+      "fixture": {
+        "callback": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_power_pre",
+      "fixture": {
+        "callback": 1
+      },
+      "observed": {
+        "stop": [
+          "before-callback"
+        ],
+        "return": null,
+        "mmio_trace": [],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_power_post",
+      "fixture": {
+        "callback": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_power_post",
+      "fixture": {
+        "callback": 1
+      },
+      "observed": {
+        "stop": [
+          "before-callback"
+        ],
+        "return": null,
+        "mmio_trace": [],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_control",
+      "fixture": {
+        "action": 3,
+        "enable": 0,
+        "callback": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_control",
+      "fixture": {
+        "action": 3,
+        "enable": 0,
+        "callback": 1
+      },
+      "observed": {
+        "stop": [
+          "before-callback"
+        ],
+        "return": null,
+        "mmio_trace": [],
+        "delays": [],
+        "callback_arguments": [
+          3,
+          0,
+          537137152
+        ]
+      }
+    },
+    {
+      "function": "uart_group_control",
+      "fixture": {
+        "action": 3,
+        "enable": 1,
+        "callback": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_control",
+      "fixture": {
+        "action": 3,
+        "enable": 1,
+        "callback": 1
+      },
+      "observed": {
+        "stop": [
+          "before-callback"
+        ],
+        "return": null,
+        "mmio_trace": [],
+        "delays": [],
+        "callback_arguments": [
+          3,
+          1,
+          537137152
+        ]
+      }
+    },
+    {
+      "function": "uart_group_control",
+      "fixture": {
+        "action": 3,
+        "enable": 256,
+        "callback": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_control",
+      "fixture": {
+        "action": 3,
+        "enable": 256,
+        "callback": 1
+      },
+      "observed": {
+        "stop": [
+          "before-callback"
+        ],
+        "return": null,
+        "mmio_trace": [],
+        "delays": [],
+        "callback_arguments": [
+          3,
+          0,
+          537137152
+        ]
+      }
+    },
+    {
+      "function": "uart_group_control",
+      "fixture": {
+        "action": 3,
+        "enable": 257,
+        "callback": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_control",
+      "fixture": {
+        "action": 3,
+        "enable": 257,
+        "callback": 1
+      },
+      "observed": {
+        "stop": [
+          "before-callback"
+        ],
+        "return": null,
+        "mmio_trace": [],
+        "delays": [],
+        "callback_arguments": [
+          3,
+          1,
+          537137152
+        ]
+      }
+    },
+    {
+      "function": "uart_group_control",
+      "fixture": {
+        "action": 259,
+        "enable": 0,
+        "callback": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_control",
+      "fixture": {
+        "action": 259,
+        "enable": 0,
+        "callback": 1
+      },
+      "observed": {
+        "stop": [
+          "before-callback"
+        ],
+        "return": null,
+        "mmio_trace": [],
+        "delays": [],
+        "callback_arguments": [
+          3,
+          0,
+          537137152
+        ]
+      }
+    },
+    {
+      "function": "uart_group_control",
+      "fixture": {
+        "action": 259,
+        "enable": 1,
+        "callback": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_control",
+      "fixture": {
+        "action": 259,
+        "enable": 1,
+        "callback": 1
+      },
+      "observed": {
+        "stop": [
+          "before-callback"
+        ],
+        "return": null,
+        "mmio_trace": [],
+        "delays": [],
+        "callback_arguments": [
+          3,
+          1,
+          537137152
+        ]
+      }
+    },
+    {
+      "function": "uart_group_control",
+      "fixture": {
+        "action": 259,
+        "enable": 256,
+        "callback": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_control",
+      "fixture": {
+        "action": 259,
+        "enable": 256,
+        "callback": 1
+      },
+      "observed": {
+        "stop": [
+          "before-callback"
+        ],
+        "return": null,
+        "mmio_trace": [],
+        "delays": [],
+        "callback_arguments": [
+          3,
+          0,
+          537137152
+        ]
+      }
+    },
+    {
+      "function": "uart_group_control",
+      "fixture": {
+        "action": 259,
+        "enable": 257,
+        "callback": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_group_control",
+      "fixture": {
+        "action": 259,
+        "enable": 257,
+        "callback": 1
+      },
+      "observed": {
+        "stop": [
+          "before-callback"
+        ],
+        "return": null,
+        "mmio_trace": [],
+        "delays": [],
+        "callback_arguments": [
+          3,
+          1,
+          537137152
+        ]
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 0,
+        "equal": 0,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 0,
+        "equal": 0,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 0,
+        "equal": 0,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 0,
+        "equal": 1,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 0,
+        "equal": 1,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 0,
+        "equal": 1,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 0,
+        "equal": 256,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 0,
+        "equal": 256,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 0,
+        "equal": 256,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 0,
+        "equal": 257,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 0,
+        "equal": 257,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 0,
+        "equal": 257,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 512,
+        "equal": 0,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 512,
+        "equal": 0,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 512,
+        "equal": 0,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 512,
+        "equal": 1,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 512,
+        "equal": 1,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 512,
+        "equal": 1,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 512,
+        "equal": 256,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 512,
+        "equal": 256,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 512,
+        "equal": 256,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 512,
+        "equal": 257,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 512,
+        "equal": 257,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 512,
+        "equal": 257,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 7680,
+        "equal": 0,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 7680,
+        "equal": 0,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 7680,
+        "equal": 0,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 7680,
+        "equal": 1,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 7680,
+        "equal": 1,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 7680,
+        "equal": 1,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 7680,
+        "equal": 256,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 7680,
+        "equal": 256,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 7680,
+        "equal": 256,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 7680,
+        "equal": 257,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 7680,
+        "equal": 257,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 7680,
+        "equal": 257,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 4294967295,
+        "equal": 0,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 4294967295,
+        "equal": 0,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 4294967295,
+        "equal": 0,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 4294967295,
+        "equal": 1,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 4294967295,
+        "equal": 1,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 4294967295,
+        "equal": 1,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 4294967295,
+        "equal": 256,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 4294967295,
+        "equal": 256,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 4294967295,
+        "equal": 256,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 4294967295,
+        "equal": 257,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 4294967295,
+        "equal": 257,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 0,
+        "status": 4294967295,
+        "equal": 257,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 0,
+        "equal": 0,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 0,
+        "equal": 0,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 0,
+        "equal": 0,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 0,
+        "equal": 1,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 0,
+        "equal": 1,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 0,
+        "equal": 1,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 0,
+        "equal": 256,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 0,
+        "equal": 256,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 0,
+        "equal": 256,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 0,
+        "equal": 257,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 0,
+        "equal": 257,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 0,
+        "equal": 257,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 512,
+        "equal": 0,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 512,
+        "equal": 0,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 512,
+        "equal": 0,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 512,
+        "equal": 1,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 512,
+        "equal": 1,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 512,
+        "equal": 1,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 512,
+        "equal": 256,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 512,
+        "equal": 256,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 512,
+        "equal": 256,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 512,
+        "equal": 257,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 512,
+        "equal": 257,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 512,
+        "equal": 257,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 7680,
+        "equal": 0,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 7680,
+        "equal": 0,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 7680,
+        "equal": 0,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 7680,
+        "equal": 1,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 7680,
+        "equal": 1,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 7680,
+        "equal": 1,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 7680,
+        "equal": 256,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 7680,
+        "equal": 256,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 7680,
+        "equal": 256,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 7680,
+        "equal": 257,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 7680,
+        "equal": 257,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 7680,
+        "equal": 257,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 4294967295,
+        "equal": 0,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 4294967295,
+        "equal": 0,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 4294967295,
+        "equal": 0,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 4294967295,
+        "equal": 1,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 4294967295,
+        "equal": 1,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 4294967295,
+        "equal": 1,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 4294967295,
+        "equal": 256,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 4294967295,
+        "equal": 256,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 4294967295,
+        "equal": 256,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 4294967295,
+        "equal": 257,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 4294967295,
+        "equal": 257,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 1,
+        "status": 4294967295,
+        "equal": 257,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 0,
+        "equal": 0,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 0,
+        "equal": 0,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 0,
+        "equal": 0,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 0,
+        "equal": 1,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 0,
+        "equal": 1,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 0,
+        "equal": 1,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 0,
+        "equal": 256,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 0,
+        "equal": 256,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 0,
+        "equal": 256,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 0,
+        "equal": 257,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 0,
+        "equal": 257,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 0,
+        "equal": 257,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 512,
+        "equal": 0,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 512,
+        "equal": 0,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 512,
+        "equal": 0,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 512,
+        "equal": 1,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 512,
+        "equal": 1,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 512,
+        "equal": 1,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 512,
+        "equal": 256,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 512,
+        "equal": 256,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 512,
+        "equal": 256,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 512,
+        "equal": 257,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 512,
+        "equal": 257,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 512,
+        "equal": 257,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            512
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 7680,
+        "equal": 0,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 7680,
+        "equal": 0,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 7680,
+        "equal": 0,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 7680,
+        "equal": 1,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 7680,
+        "equal": 1,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 7680,
+        "equal": 1,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 7680,
+        "equal": 256,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 7680,
+        "equal": 256,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 7680,
+        "equal": 256,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 7680,
+        "equal": 257,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 7680,
+        "equal": 257,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 7680,
+        "equal": 257,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 4294967295,
+        "equal": 0,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 4294967295,
+        "equal": 0,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 4294967295,
+        "equal": 0,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 4294967295,
+        "equal": 1,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 4294967295,
+        "equal": 1,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 4294967295,
+        "equal": 1,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 4294967295,
+        "equal": 256,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 4294967295,
+        "equal": 256,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 4294967295,
+        "equal": 256,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 4294967295,
+        "equal": 257,
+        "change_after": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 4294967295,
+        "equal": 257,
+        "change_after": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "budget": 5,
+        "status": 4294967295,
+        "equal": 257,
+        "change_after": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            4294967295
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "expected": 0,
+        "mask": 0,
+        "status": 7680,
+        "budget": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "expected": 0,
+        "mask": 512,
+        "status": 7680,
+        "budget": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "expected": 0,
+        "mask": 7680,
+        "status": 7680,
+        "budget": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "expected": 512,
+        "mask": 0,
+        "status": 7680,
+        "budget": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "expected": 512,
+        "mask": 512,
+        "status": 7680,
+        "budget": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "expected": 512,
+        "mask": 7680,
+        "status": 7680,
+        "budget": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "expected": 7680,
+        "mask": 0,
+        "status": 7680,
+        "budget": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "expected": 7680,
+        "mask": 512,
+        "status": 7680,
+        "budget": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "expected": 7680,
+        "mask": 7680,
+        "status": 7680,
+        "budget": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "expected": 4294967295,
+        "mask": 0,
+        "status": 7680,
+        "budget": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "expected": 4294967295,
+        "mask": 512,
+        "status": 7680,
+        "budget": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    },
+    {
+      "function": "uart_status_wait",
+      "fixture": {
+        "expected": 4294967295,
+        "mask": 7680,
+        "status": 7680,
+        "budget": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680
+          ]
+        ],
+        "delays": [
+          1
+        ],
+        "callback_arguments": []
+      }
+    }
+  ],
+  "reached_native_addresses": [
+    "0x100000",
+    "0x100002",
+    "0x100004",
+    "0x100006",
+    "0x100008",
+    "0x10000c",
+    "0x10000e",
+    "0x100010",
+    "0x100014",
+    "0x100016",
+    "0x100018",
+    "0x10001a",
+    "0x10001e",
+    "0x100020",
+    "0x100022",
+    "0x100024",
+    "0x100026",
+    "0x100028",
+    "0x10002a",
+    "0x10002e",
+    "0x100030",
+    "0x100038",
+    "0x10003a",
+    "0x10003c",
+    "0x10003e",
+    "0x100040",
+    "0x100044",
+    "0x100046",
+    "0x10004a",
+    "0x10004c",
+    "0x100054",
+    "0x100056",
+    "0x100058",
+    "0x10005c",
+    "0x10005e",
+    "0x100062",
+    "0x100064",
+    "0x10006c",
+    "0x10006e",
+    "0x100070",
+    "0x100074",
+    "0x100076",
+    "0x100078",
+    "0x10007a",
+    "0x10007e",
+    "0x100080",
+    "0x100082",
+    "0x100086",
+    "0x10008c",
+    "0x100090",
+    "0x100092",
+    "0x100094",
+    "0x100096",
+    "0x10009a",
+    "0x10009c",
+    "0x1000a0",
+    "0x1000a2",
+    "0x1000a4",
+    "0x1000a6",
+    "0x1000a8",
+    "0x1000aa",
+    "0x1000ac",
+    "0x1000b0",
+    "0x1000b2",
+    "0x1000b4",
+    "0x1000b8",
+    "0x1000ba",
+    "0x1000bc",
+    "0x1000be",
+    "0x1000c0",
+    "0x1000c4",
+    "0x1000c6",
+    "0x1000c8",
+    "0x1000ca",
+    "0x1000ce",
+    "0x1000d0",
+    "0x1000d4",
+    "0x1000d6",
+    "0x1000d8",
+    "0x1000da",
+    "0x1000dc",
+    "0x1000de",
+    "0x1000e0",
+    "0x1000e4",
+    "0x1000e6",
+    "0x1000e8",
+    "0x1000ea",
+    "0x1000ec",
+    "0x1000ee",
+    "0x1000f0",
+    "0x1000f2",
+    "0x1000f4",
+    "0x1000f6"
+  ],
+  "limits": "UART-domain predicate subset; ordered MMIO traces compared. Delay/status fixtures synthetic, callback cases stop before body. No physical power, callback execution or scheduling proof."
+}

@@ -1,0 +1,58 @@
+{
+  "sources": {
+    "g2/components/audio/clock_driver_config_offline/driver.c": "e4e26b5cfe77b95ce10363b5a7489ea2608538684474ed20bf544133dbe6e7c8",
+    "g2/components/audio/clock_driver_config_offline/config.c": "cb4ae9b0ddc409834be89c2ab42176cbcb63b49e5df3c5fb03de2dc575c1f434",
+    "g2/components/audio/hfrc_syspll_offline/clocks.c": "0cb4c63287d2b8c1a6a2fa681b6420d92d32940283df1a30fa7e36e62a5deb3a",
+    "g2/components/audio/xtal_request_offline/request.c": "493aba4b3e72ce2ca40a3eb2e500bd2d520a1d05e7cbebc0efd30573aea86da1",
+    "g2/components/audio/clock_manager_ownership_offline/ownership.c": "9d9048090bb05e556a5163c5e9619c6bfb9d2cd3225174cc3d770a2b3bfcf97f",
+    "g2/components/audio/gpio_providers_offline/clock_requests.c": "ddc77056a7aca3319d2dce4271f52c12be5c931f4e7f7d9f026577edd89cfda9",
+    "g2/components/audio/clock_driver_config_offline/driver.h": "0e0091ffd40ba5a755c3f8e535b5b90a3616113d0f310df68e0ca08f03632eaa",
+    "g2/components/audio/hfrc_syspll_offline/clocks.h": "47e99794d2f413ded8571b494dec4ee1279a753688b38882508e073e79b86a12",
+    "g2/components/audio/xtal_request_offline/request.h": "22dde7f1b96651aad61aa4fa823d0319fc31126a91f8f335d604667ce8295216",
+    "g2/components/audio/clock_manager_ownership_offline/ownership.h": "dd87c180aad8d8a77165ca6e19e0016b2768687de60d71b4498683fbdf85e364",
+    "g2/components/audio/gpio_providers_offline/clock_requests.h": "e2b60a94ba2a9a0c0f539ef2c86d7091f638aa16ac54eb469463b1298482383e"
+  },
+  "elf": "/tmp/opencfw-clock-driver-config/control.elf",
+  "elf_sha256": "8b7227684c467c5d3cc8e3ea2b97c61447cc270d254a1ec816eb1673f1617114",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m33",
+    "-mfpu=fpv5-sp-d16",
+    "-mfloat-abi=hard",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib",
+    "-fshort-enums"
+  ],
+  "bindings": {
+    "stock_save_irq": 4667713,
+    "stock_oscillator": 4721093,
+    "stock_delay": 4720545,
+    "stock_hfrc_target": 5060885,
+    "stock_hfrc_apply": 5060921,
+    "stock_hfrc_disable": 5060933,
+    "stock_hfrc_force": 5060895,
+    "stock_hfrc2_force": 5060947,
+    "stock_hfrc2_apply": 5061011,
+    "stock_hfrc2_disable": 5061093,
+    "stock_ext_request": 4996309,
+    "stock_ext_release": 4996393,
+    "stock_pll_power_enable": 4718681,
+    "stock_pll_power_disable": 4718751,
+    "stock_pll_power_enabled": 4718821,
+    "stock_wait5": 4720679,
+    "stock_hfrc2_ratio": 5060843,
+    "stock_pll_generate": 5478293
+  },
+  "aliases": {
+    "stock_pll_init": "audio_pll_init",
+    "stock_pll_deinit": "audio_pll_deinit",
+    "stock_pll_enable": "audio_pll_enable",
+    "stock_pll_disable": "audio_pll_disable",
+    "stock_pll_config": "audio_pll_configure",
+    "stock_pll_wait": "audio_pll_wait"
+  },
+  "link_script": "stock_save_irq = 0x473941; stock_oscillator = 0x4809c5; stock_delay = 0x4807a1; stock_hfrc_target = 0x4d3915; stock_hfrc_apply = 0x4d3939; stock_hfrc_disable = 0x4d3945; stock_hfrc_force = 0x4d391f; stock_hfrc2_force = 0x4d3953; stock_hfrc2_apply = 0x4d3993; stock_hfrc2_disable = 0x4d39e5; stock_ext_request = 0x4c3cd5; stock_ext_release = 0x4c3d29; stock_pll_power_enable = 0x480059; stock_pll_power_disable = 0x48009f; stock_pll_power_enabled = 0x4800e5; stock_wait5 = 0x480827; stock_hfrc2_ratio = 0x4d38eb; stock_pll_generate = 0x539795; stock_pll_init = audio_pll_init; stock_pll_deinit = audio_pll_deinit; stock_pll_enable = audio_pll_enable; stock_pll_disable = audio_pll_disable; stock_pll_config = audio_pll_configure; stock_pll_wait = audio_pll_wait; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }"
+}

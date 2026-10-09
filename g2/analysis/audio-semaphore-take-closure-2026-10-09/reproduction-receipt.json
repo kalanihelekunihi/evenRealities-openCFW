@@ -1,0 +1,53 @@
+{
+  "elf": "/tmp/opencfw-semaphore-take/queue.elf",
+  "elf_sha256": "9bd8584d32519b5c6745b714fe0e83b1e40ef68fef47675652bc23a188a9cc3c",
+  "sources": {
+    "g2/components/audio/semaphore_take_offline/take.c": "f8f164e8b1efad183e64e308e170e6bd602a744f8aaa715b7c0a07ce840077ae",
+    "g2/components/audio/semaphore_take_offline/held.c": "55333fdbbd70cc4f718eef210a66ed50c00079d37dba9fe0904947bc05924b6c",
+    "g2/components/audio/mutex_disinherit_offline/disinherit.c": "734c2ddd12b268dcc539063c875e7913695caeecceab0f092ed76cca3ca6f1cb",
+    "g2/components/audio/queue_cmsis_offline/queue.c": "402a74f068c07c26ba73a75c63109e1d11e5123e7453b54497ef22b1813e14d8",
+    "g2/components/audio/queue_cmsis_offline/cmsis.c": "fa0e2490d54deca2bf8baf83808b9350e49df609f4d46d4aaf395ff70338ae5b",
+    "g2/components/audio/timer_wake_providers_offline/unlock.c": "9dc8720957acbf042b3bee59017b5176447304eadd63780da87d6180094277fd",
+    "g2/components/audio/timer_wake_providers_offline/port.c": "fdb2a47b0550b4da6e049b6cfabb55194298201e559ad765032098eed4dd9fdc",
+    "g2/components/foundation/freertos_queue/queue_subset.c": "75d32fc9be94b4de3f0bff294dafb7537d8231113c98b2681b5fbbf0c9ade5b2",
+    "g2/components/foundation/freertos_ready/tasks_subset.c": "0aa9d744536cfac094489722983743ec531c69932718a64c3c00f5d287645e99",
+    "g2/components/foundation/freertos_ready/list_subset.c": "537ebd8aca3a9a757935179ff2474d3544bf0a07bd89fa697cc4bd90535b7677",
+    "g2/components/foundation/freertos_ready/ready_adapter.c": "fcfd72d02952c093d6c7391b6d678797db9912a960dbeb031b818ce1509465ec",
+    "g2/components/audio/queue_cmsis_offline/blocking.c": "188ef9fce9fe7dc8aa57143907f2a67addbd40df9461128bbe3dbc1388505f2f",
+    "g2/components/audio/timer_wake_providers_offline/sorted.c": "b7cc6b29c70181d4304c37b8eded012029f0e687c735053e882cb98d205bd22c",
+    "g2/components/audio/delayed_block_offline/block.c": "0ecf98f19aac0b7cf4aa81f46cbf5021b418f205e0d3e3bc05867052fe1f675a",
+    "g2/components/audio/resume_ticks_offline/resume.c": "6347104574e63896120a6b490a417390ef6773aa60c5e34c9d640c42df58b9eb",
+    "g2/components/audio/tick_expiry_offline/tick.c": "e8e3b2cc3a819784f11a3ad7782d4db706cc1d3ce198088efbbaa74b2f69169d",
+    "g2/components/audio/semaphore_take_offline/compat.h": "4a6b3dccd19475fdf0e22c73666b7e42eec93a0cacab32c62293c67644c8b24b",
+    "g2/components/audio/semaphore_take_offline/take.h": "381f06d6a5d37b536fd309b5b372f2ea518cf3b34f999ac82f46fa9207cfe2f3",
+    "g2/components/audio/mutex_disinherit_offline/compat.h": "fb5c9104f184e289ac0af22948b658047e82859aad190e516a532a7ae7ebefef",
+    "g2/components/audio/mutex_disinherit_offline/disinherit.h": "b503c0d0565417bbafc3423ca4755af4f164244dc85ca9d2707f9f595ae870d8",
+    "g2/components/audio/queue_cmsis_offline/queue.h": "25ae109db8ab7a1db40e52f220b7416787003d13dc7c76ece23e520d0d302242",
+    "g2/components/audio/queue_cmsis_offline/compat.h": "4ea52064df6ddc5d7b076326569659bd96ee3f871d384d5f0180daa2d7f35899",
+    "g2/components/audio/timer_wake_providers_offline/unlock.h": "c06ada9e1a3e18535e4a4fad176223e4d173a691067554e19f18dc2104c0dfb9",
+    "g2/components/foundation/freertos_queue/queue.h": "69e7d62be2159ed94a5d24dc85e7a5456f3420d30a9be5167d5687bd2456838d",
+    "g2/components/foundation/freertos_queue/queue_compat.h": "5fae5668bbcb12a5327d67c1e69ef31046bcc16f4d44028fd426accf27457eaf",
+    "g2/components/foundation/freertos_ready/ready.h": "b88903df66fdfa00e97318afc5372de9ad2a5750b9d0ec32454e35042c7bfd7b",
+    "g2/components/foundation/freertos_ready/ready_compat.h": "46476ef71baa382e0d93d9be8159d71dee84606b993e09caa4a7b00b50ab34af",
+    "g2/components/foundation/freertos_event_group/event_group.h": "37edf591b135477ae72b8e006e975b06c5a103d89417942f927f9a7cacd1654f",
+    "g2/components/audio/notification_wake_offline/wake.h": "34ffd5555001498cc6e9dd0b51b4d6f93687001e6314d4a65640575d954b22ac"
+  },
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "bindings": {
+    "stock_bad_critical_exit": 4464887,
+    "opencfw_event_group_assert_failure": 4543359,
+    "audio_queue_bad_argument": 4462593,
+    "stock_port_yield": 4464829,
+    "mutex_assert_boundary": 6267045
+  },
+  "link_script": "stock_bad_critical_exit = 0x4420f7; opencfw_event_group_assert_failure = 0x45537f; audio_queue_bad_argument = 0x441801; stock_port_yield = 0x4420bd; mutex_assert_boundary = 0x5fa0a5; stock_priority_disinherit = xTaskPriorityDisinherit; stock_scheduler_resume = audio_resume_pending_ticks_selected; audio_resume_enter = stock_enter_critical; audio_resume_exit = stock_exit_critical; audio_resume_yield = stock_port_yield; audio_resume_next_unblock = audio_queue_next_unblock; audio_block_remove = uxListRemove; audio_block_sorted_insert = audio_public_list_insert; opencfw_queue_mask_set = audio_port_mask_set; opencfw_queue_mask_restore = audio_port_mask_restore; opencfw_queue_memcpy = audio_queue_copy_bytes; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }"
+}

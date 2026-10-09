@@ -1,0 +1,80 @@
+{
+  "raw_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "functions": {
+    "hfrc_wait": {
+      "start": "0x4c3ef4",
+      "end_exclusive": "0x4c3f2a",
+      "bytes": 54,
+      "sha256": "70ad22850ac018f98ef63cce98c4492cc79d08d722cad38c730298e591d6f0d4",
+      "scope": "complete native offline function, original child providers explicit"
+    },
+    "hfrc_request": {
+      "start": "0x4c3f2a",
+      "end_exclusive": "0x4c4016",
+      "bytes": 236,
+      "sha256": "9128e08a8d088d839a7c09e5ea40843d04613c92764de3098907259ce78a6800",
+      "scope": "complete native offline function, original child providers explicit"
+    },
+    "hfrc_release": {
+      "start": "0x4c4016",
+      "end_exclusive": "0x4c4058",
+      "bytes": 66,
+      "sha256": "d7960ed1ec9501ee80d94b760c2f6a05a3ccb59de0b4d8a64d06b56278c26e78",
+      "scope": "complete native offline function, original child providers explicit"
+    },
+    "hfrc2_wait": {
+      "start": "0x4c4058",
+      "end_exclusive": "0x4c4086",
+      "bytes": 46,
+      "sha256": "12c42d916a2e68d57a1202b7184aa9174b71fed8d9a2ae38e31e091f4c2e40a5",
+      "scope": "complete native offline function, original child providers explicit"
+    },
+    "hfrc2_request": {
+      "start": "0x4c4086",
+      "end_exclusive": "0x4c420c",
+      "bytes": 390,
+      "sha256": "6d40c419a159df260c9687a8a42856e5b555b8aa65376a4b70e5c162081e1555",
+      "scope": "complete native offline function, original child providers explicit"
+    },
+    "hfrc2_release": {
+      "start": "0x4c420c",
+      "end_exclusive": "0x4c427e",
+      "bytes": 114,
+      "sha256": "d1e521a9a9b02ced2263ad4482516ee74c4445214e91a3a286d02d6890ef929b",
+      "scope": "complete native offline function, original child providers explicit"
+    },
+    "syspll_request": {
+      "start": "0x4c427e",
+      "end_exclusive": "0x4c43d8",
+      "bytes": 346,
+      "sha256": "a38d9501b480b8047a3c39694c3e8170b5934c2cdd5ff0c3a9867c87f67946b3",
+      "scope": "complete native offline function, original child providers explicit"
+    },
+    "syspll_release": {
+      "start": "0x4c43ec",
+      "end_exclusive": "0x4c445a",
+      "bytes": 110,
+      "sha256": "f8709037df0100bc5ea222e08d54046d31a06bf7aabf29450a32e392966cbd0b",
+      "scope": "complete native offline function, original child providers explicit"
+    }
+  },
+  "layout": {
+    "user_rows": "clock4/5/6 at0x20073324+8*clock",
+    "hfrc_config_valid": "0x20004536",
+    "hfrc2_config_valid": "0x20004537",
+    "syspll_config_valid": "0x20074F55",
+    "hfrc_stabilizing": "0x20074F57",
+    "hfrc2_stabilizing": "0x20074F58",
+    "hfrc_stabilized": "0x20074F59",
+    "hfrc2_start_pending": "0x20074F5A",
+    "syspll_start_pending": "0x20074F5B",
+    "hfrc_counter_pointer": "0x20074264",
+    "hfrc2_counter_pointer": "0x20074268",
+    "syspll_handle": "0x2007425C",
+    "syspll_driver_storage": "0x200740F4",
+    "hfrc_force_bit": "0x40004044 bit0",
+    "hfrc2_force_bit": "0x40004044 bit5",
+    "hfadj_control": "0x40004020",
+    "syspll_control": "0x400204D8"
+  }
+}

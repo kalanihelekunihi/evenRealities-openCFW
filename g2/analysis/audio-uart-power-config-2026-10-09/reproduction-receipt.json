@@ -1,0 +1,27 @@
+{
+  "elf": "/tmp/opencfw-uart-power/power.elf",
+  "elf_sha256": "64135f5d52c67c77cc80bbe6421d9fbe2b107ac988dfb1b3893cbcdd920b3d7a",
+  "sources": {
+    "g2/components/audio/uart_power_config_offline/am_hal_uart.c": "14afdaf81a6c31283669ebd993a75fa6821fbb6e0107c2f1f588acd4f1d6916b",
+    "g2/components/audio/uart_power_config_offline/division_support.c": "5f4e8cb0623a51a1cfa01f323921d11248a836c8b1e60c41b73e4133617673b9",
+    "g2/components/audio/uart_power_config_offline/compat.h": "5264f0a545bd6bee22496f6fabc1781783025adbf261127855b93d14c057e133"
+  },
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "flags": [
+    "-mcpu=cortex-m33",
+    "-mthumb",
+    "-Og",
+    "-fkeep-static-functions",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "link_script": "am_hal_pwrctrl_periph_enable = 0x47F5B9; am_hal_pwrctrl_periph_disable = 0x47F7AF; am_hal_clkmgr_clock_request = 0x4C44BD; am_hal_clkmgr_clock_release = 0x4C4531; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }",
+  "original_executable_aliases": {
+    "power_enable": "0x47F5B8",
+    "power_disable": "0x47F7AE",
+    "clock_request": "0x4C44BC",
+    "clock_release": "0x4C4530"
+  },
+  "limits": "Explicit power/clock stubs, fixed synthetic register state, quotient-only division support; not a full compiler runtime or physical setup."
+}

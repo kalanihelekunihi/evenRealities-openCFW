@@ -1,0 +1,23 @@
+{
+  "elf": "/tmp/opencfw-watchdog-callback/watchdog.elf",
+  "elf_sha256": "ce678646719f3a1203ca531c5a87f94d76d89b05b812dbd6d1d49809c8bd749f",
+  "sources": {
+    "g2/components/audio/watchdog_callback_offline/watchdog.c": "bbf843b02778509b17e6e9707bb03bf7cab881f905ecdca12baa01f2f99446b5",
+    "g2/components/audio/watchdog_callback_offline/watchdog.h": "bd0b376d1367ea7e4413ac333e0fe43745120bf9079299aabbb6743fd533d0ad"
+  },
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "bindings": {
+    "stock_audio_submit": 5490233,
+    "stock_audio_log_mask": 4444367
+  },
+  "link_script": "stock_audio_submit = 0x53c639; stock_audio_log_mask = 0x43d0cf; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }"
+}

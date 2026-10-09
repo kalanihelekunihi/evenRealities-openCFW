@@ -1,0 +1,11 @@
+{
+  "provider_opportunity": "All four runtime providers are bounded integer-bit algorithms plus errno side effect; reconstructed and validated without original-provider calls or host-libm substitutions.",
+  "available_pinned_source": "Ambiq am_hal_syspll.c contains callers, not implementation of floorf/fmodf/roundf/ceilf.",
+  "repository_source_search": "rg --files third-party screened for s_flo/sf_/roundf/fmodf/newlib/picolibc; no matching provider implementation found.",
+  "attribution": "No unique runtime vendor/version or pristine upstream source attribution established. Native implementation is explicitly recovered C from authenticated instruction behavior.",
+  "remaining": [
+    "Actual delay/status polling and IRQ helpers still original in this ELF; pinned mcu/am_hal_utils.c supplies source lead.",
+    "Full M55/exception scheduling and physical clock behavior remain outside scalar profile."
+  ],
+  "exhaustion": false
+}

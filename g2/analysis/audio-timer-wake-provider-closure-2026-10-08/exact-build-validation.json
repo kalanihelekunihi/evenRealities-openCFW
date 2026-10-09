@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "elf_sha256": "fcbca083d04257e4a95496d36041f601795a9a18351a1e42b0be7bcd43c8113a",
+  "counts": {
+    "results.json": 819,
+    "delete-integration-results.json": 48,
+    "wait-integration-results.json": 96,
+    "port-results.json": 74,
+    "list-results.json": 180
+  },
+  "total": 1217,
+  "direct_provider_cases": 1073,
+  "integration_cases": 144,
+  "source_hashes_match": true,
+  "native_code_guard": "819 wake/unlock +96 restricted-wait source executions require PC0x100000..0x110000. Delete integration deliberately executes actual original queue/allocator/CMSIS peers, routing event-unblock entry to real native code.",
+  "limits": "Constructed coherent scheduler/list/TCB-prefix state; no physical exception dispatch/return or live lifetime claim.",
+  "undefined_symbols": [],
+  "source_code_guard_cases": 915
+}

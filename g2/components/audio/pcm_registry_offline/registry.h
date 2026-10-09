@@ -1,0 +1,9 @@
+#include <stdint.h>
+uint32_t pcm_registry_before_override(void);
+uint32_t pcm_registry_before_enable(void);
+uint32_t pcm_registry_after_enable(void);
+uint32_t pcm_registry_ton_initialize(void);
+uint32_t pcm_registry_tempco_suspend(void);
+uint32_t pcm_registry_lp_initialize(void);
+uint32_t pcm_registry_lp_enable(void);
+uint32_t pcm_registry_lp_disable(void);

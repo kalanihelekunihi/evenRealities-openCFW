@@ -1,0 +1,41 @@
+{
+  "utc": "2026-10-08T22:29:27.282185+00:00",
+  "prior_sealed_entries": 2187,
+  "all_match": true,
+  "audit_inputs": 110,
+  "checkpoints": {
+    "runtime-delay-native-integrated": {
+      "path": "g2/build/bootloader-completion/runtime-delay-native-integrated/e5aeae5297c6aa35c78a5f4c558365d2d47a0f8f6505f3ed2431914278ef6c32/candidate.elf",
+      "sha256": "e5aeae5297c6aa35c78a5f4c558365d2d47a0f8f6505f3ed2431914278ef6c32",
+      "matches_previous": true,
+      "matches_now": true
+    },
+    "terminal-native-integrated": {
+      "path": "g2/build/bootloader-completion/terminal-native-integrated/15d222c4f550da090e0893905111771b5e3cabd07948f4be082863851f1fdd32/candidate.elf",
+      "sha256": "15d222c4f550da090e0893905111771b5e3cabd07948f4be082863851f1fdd32",
+      "matches_previous": true,
+      "matches_now": true
+    },
+    "logger-native-integrated": {
+      "path": "g2/build/bootloader-completion/logger-native-integrated/1cdf1d63cc01590235139d85caea25e518e3cb9b8fcf4c4bed3c15e5c14c20fd/candidate.elf",
+      "sha256": "1cdf1d63cc01590235139d85caea25e518e3cb9b8fcf4c4bed3c15e5c14c20fd",
+      "matches_previous": true,
+      "matches_now": true
+    },
+    "platform-log-literals-integrated": {
+      "path": "g2/build/bootloader-completion/platform-log-literals-integrated/fe6b6c464c4f884965ce75fe2e6925adc8ee773bf49c4a34c86b34ff270429d3/candidate.elf",
+      "sha256": "fe6b6c464c4f884965ce75fe2e6925adc8ee773bf49c4a34c86b34ff270429d3",
+      "matches_previous": true,
+      "matches_now": true
+    }
+  },
+  "before": {
+    "head": "36337d9b39ff36d318b0531f2968ca7e0554a7b1",
+    "index_sha256": "9cd107566f6e8d61f76734aac26fdb52b010cdfede26f8a6a6ca0b40bfeb9974"
+  },
+  "after": {
+    "head": "36337d9b39ff36d318b0531f2968ca7e0554a7b1",
+    "index_sha256": "9cd107566f6e8d61f76734aac26fdb52b010cdfede26f8a6a6ca0b40bfeb9974"
+  },
+  "index_reconciliation": "Prior scan index differs from historical index because of concurrent commit/staging; current index captured before this batch and preserved exactly. No staging or undo."
+}

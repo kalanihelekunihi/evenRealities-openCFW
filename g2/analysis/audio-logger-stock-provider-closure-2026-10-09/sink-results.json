@@ -1,0 +1,112 @@
+{
+  "status": "PASS",
+  "cases": 9,
+  "raw_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "comparisons": [
+    {
+      "kind": "init-prefix",
+      "sink_pointer": "0x5415C3",
+      "channel1_callback": "0x5415E7",
+      "cut": [
+        {
+          "boundary": "0x57deea",
+          "r0": 2048,
+          "r1": 1
+        }
+      ]
+    },
+    {
+      "kind": "sink-to-driver-boundary",
+      "text_hex": "",
+      "channel_active": 0,
+      "cut": [
+        {
+          "boundary": "return",
+          "result": 1
+        }
+      ]
+    },
+    {
+      "kind": "sink-to-driver-boundary",
+      "text_hex": "",
+      "channel_active": 1,
+      "cut": [
+        {
+          "boundary": "0x58e3f8",
+          "handle": "0x20050000",
+          "descriptor_hex": "0000042000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "kind": "sink-to-driver-boundary",
+      "text_hex": "616263",
+      "channel_active": 0,
+      "cut": [
+        {
+          "boundary": "return",
+          "result": 1
+        }
+      ]
+    },
+    {
+      "kind": "sink-to-driver-boundary",
+      "text_hex": "616263",
+      "channel_active": 1,
+      "cut": [
+        {
+          "boundary": "0x58e3f8",
+          "handle": "0x20050000",
+          "descriptor_hex": "0000042003000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "kind": "sink-to-driver-boundary",
+      "text_hex": "6c6f670a",
+      "channel_active": 0,
+      "cut": [
+        {
+          "boundary": "return",
+          "result": 1
+        }
+      ]
+    },
+    {
+      "kind": "sink-to-driver-boundary",
+      "text_hex": "6c6f670a",
+      "channel_active": 1,
+      "cut": [
+        {
+          "boundary": "0x58e3f8",
+          "handle": "0x20050000",
+          "descriptor_hex": "0000042004000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "kind": "sink-to-driver-boundary",
+      "text_hex": "41414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141",
+      "channel_active": 0,
+      "cut": [
+        {
+          "boundary": "return",
+          "result": 1
+        }
+      ]
+    },
+    {
+      "kind": "sink-to-driver-boundary",
+      "text_hex": "41414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141414141",
+      "channel_active": 1,
+      "cut": [
+        {
+          "boundary": "0x58e3f8",
+          "handle": "0x20050000",
+          "descriptor_hex": "00000420cd000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        }
+      ]
+    }
+  ],
+  "limits": "Original setter, registration callback, strlen, memset and UART wrapper instructions executed. Initialization stops before allocator57DEEA; active TX stops before HAL58E3F8. No physical UART, TX completion or driver ownership claim."
+}

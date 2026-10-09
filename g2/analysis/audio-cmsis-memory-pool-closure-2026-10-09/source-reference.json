@@ -1,0 +1,14 @@
+{
+  "sources": {
+    "g2/analysis/case-deferred-event-closure-2026-10-08/upstream-queue.c": "5cdf4fa35fe059446effff5bf20deaf83ddffb08921bc198fda106b1d17dd894",
+    "g2/analysis/bootloader-completion-2026-10-06/inventory-worker/startup-initialize/runtime-action-416200/upstream/cmsis_os2.c": "8a0d60b56ad30c4f7957f64fa581158017b6812ec94b832d974c773ae4f2bc36",
+    "g2/components/bootloader/thread_creation/rtos_heap.c": "2f2c47abefd460fab72c5ec22fe110c24141877f83dc1a0440eb4bdebb124025"
+  },
+  "method": "Selected public CMSIS/FreeRTOS10.5.1 bodies with licenses; main heap algorithm adapted from unchanged already-recovered bootloader source and independently matched to main instruction/constants. Reconstructed list initializer and failure/logger wrappers distinguished from pristine source selections.",
+  "blob": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+  "blob_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "header_bytes": 32,
+  "load_address": "0x438000",
+  "authenticated_scalar": "word0x78F118 is8 (heap header size)",
+  "authenticated_string": "0x758F70: MallocFailed: cannot malloc memory\\n"
+}

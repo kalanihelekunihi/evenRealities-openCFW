@@ -1,0 +1,93 @@
+
+save_irq
+00473940 eff31080     mrs r0, primask
+00473944 72b6         cpsid i
+00473946 7047         bx lr
+
+delay_us
+004807a0 80b5         push {r7, lr}
+004807a2 00ee100a     vmov s0, r0
+004807a6 b8ee400a     vcvt.f32.u32 s0, s0
+004807aa bfeeed0a     vcvt.u32.f32 s0, s0, #5
+004807ae 10ee100a     vmov r0, s0
+004807b2 1149         ldr r1, [pc, #0x44]
+004807b4 0968         ldr r1, [r1]
+004807b6 c1f3c101     ubfx r1, r1, #3, #2
+004807ba 0229         cmp r1, #2
+004807bc 01d0         beq #0x4807c2
+004807be 0f21         movs r1, #0xf
+004807c0 10e0         b #0x4807e4
+004807c2 00ee100a     vmov s0, r0
+004807c6 b8ee400a     vcvt.f32.u32 s0, s0
+004807ca dfed090a     vldr s1, [pc, #0x24]
+004807ce 20ee200a     vmul.f32 s0, s0, s1
+004807d2 dfed080a     vldr s1, [pc, #0x20]
+004807d6 80ee200a     vdiv.f32 s0, s0, s1
+004807da bceec00a     vcvt.u32.f32 s0, s0
+004807de 10ee100a     vmov r0, s0
+004807e2 1821         movs r1, #0x18
+004807e4 8142         cmp r1, r0
+004807e6 02d2         bhs #0x4807ee
+004807e8 401a         subs r0, r0, r1
+004807ea 7ff729f4     bl #0x40
+004807ee 01bd         pop {r0, pc}
+
+wait4
+004807fc f8b5         push {r3, r4, r5, r6, r7, lr}
+004807fe 0400         movs r4, r0
+00480800 0d00         movs r5, r1
+00480802 1600         movs r6, r2
+00480804 1f00         movs r7, r3
+00480806 06e0         b #0x480816
+00480808 2000         movs r0, r4
+0048080a 441e         subs r4, r0, #1
+0048080c 0028         cmp r0, #0
+0048080e 08d0         beq #0x480822
+00480810 0120         movs r0, #1
+00480812 fff7c5ff     bl #0x4807a0
+00480816 2868         ldr r0, [r5]
+00480818 3040         ands r0, r6
+0048081a b842         cmp r0, r7
+0048081c f4d1         bne #0x480808
+0048081e 0020         movs r0, #0
+00480820 00e0         b #0x480824
+00480822 0420         movs r0, #4
+00480824 f2bd         pop {r1, r4, r5, r6, r7, pc}
+
+wait5
+00480826 2de9f041     push.w {r4, r5, r6, r7, r8, lr}
+0048082a 0500         movs r5, r0
+0048082c 0e00         movs r6, r1
+0048082e 1700         movs r7, r2
+00480830 9846         mov r8, r3
+00480832 069c         ldr r4, [sp, #0x18]
+00480834 06e0         b #0x480844
+00480836 2800         movs r0, r5
+00480838 451e         subs r5, r0, #1
+0048083a 0028         cmp r0, #0
+0048083c 12d0         beq #0x480864
+0048083e 0120         movs r0, #1
+00480840 fff7aeff     bl #0x4807a0
+00480844 2000         movs r0, r4
+00480846 c0b2         uxtb r0, r0
+00480848 0028         cmp r0, #0
+0048084a 05d0         beq #0x480858
+0048084c 3068         ldr r0, [r6]
+0048084e 3840         ands r0, r7
+00480850 4045         cmp r0, r8
+00480852 f0d1         bne #0x480836
+00480854 0020         movs r0, #0
+00480856 06e0         b #0x480866
+00480858 3068         ldr r0, [r6]
+0048085a 3840         ands r0, r7
+0048085c 4045         cmp r0, r8
+0048085e ead0         beq #0x480836
+00480860 0020         movs r0, #0
+00480862 00e0         b #0x480866
+00480864 0420         movs r0, #4
+00480866 bde8f081     pop.w {r4, r5, r6, r7, r8, pc}
+
+delay_cycles
+00000040 0138         subs r0, #1
+00000042 fdd1         bne #0x40
+00000044 7047         bx lr

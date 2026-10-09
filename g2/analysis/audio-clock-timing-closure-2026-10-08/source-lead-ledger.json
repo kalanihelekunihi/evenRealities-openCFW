@@ -1,0 +1,40 @@
+{
+  "scope": "Bounded clock-generator/manager/oscillator/math/delay executable dependency closure, not a whole-image exhaustion declaration.",
+  "closed_in_successors": {
+    "syspll_generators": "audio-syspll-generator-closure-2026-10-08:6 functions",
+    "low_speed_and_public_dispatch": "audio-clock-public-dispatch-closure-2026-10-08:6 functions,prior native oscillator integrated",
+    "float_runtime": "audio-float-runtime-closure-2026-10-08:4 providers,errno side effects",
+    "timing_irq": "this batch:5 functions,including authenticatedITCM spin"
+  },
+  "remaining_original_executable_bindings_in_final_elf": [],
+  "observed_source_execution_boundary": "All23,035 source cases aborted if PC outside the source guest; all passed.",
+  "still_external_or_unverified": [
+    "Physical clock frequency/settling/PLL lock and delay elapsed time",
+    "Live IRQ/scheduler/exception entry-return and whole-system shutdown",
+    "Unique original math-runtime vendor/version and exact producer compiler attribution",
+    "Whole-image/source-complete or byte-identical rebuild; startup/calibration/scalar inputs still authenticated observations"
+  ],
+  "broader_actionable_source_leads": [
+    {
+      "target": "Actual timer-daemon command-vs-expiry and tick processing0x45504C",
+      "source": "Existing pinned FreeRTOS source; prior timer command,queue/delete and scheduling fragments available",
+      "constraint": "Synthetic control-flow fixtures can advance understanding; real scheduler/device traces needed for actual concurrent lifetime reachability."
+    },
+    {
+      "target": "Touch application callbacks/reentrantI2C ownership",
+      "source": "Pinned PDL/core/CMSIS closure and actual helper evidence",
+      "constraint": "Do not replace callbacks with no-state stubs and claim lifetime closure."
+    },
+    {
+      "target": "Selected case HAL peripheral path",
+      "source": "Pinned STM32G0 HAL sources and existing recovered adapters",
+      "constraint": "Peripheral status/IRQ timing remains synthetic without device trace."
+    },
+    {
+      "target": "Dirty file-close/cache/block integration",
+      "source": "Existing littlefs/FlashDB adapters",
+      "constraint": "Mounted block/cache contents required for actual storage/error behavior; no fake successful I/O."
+    }
+  ],
+  "source_exhausted_globally": false
+}

@@ -1,0 +1,97 @@
+{
+  "status": "PASS",
+  "cases": 5,
+  "wrapped_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "raw_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "comparisons": [
+    {
+      "flag": 0,
+      "first_stub_return": 0,
+      "second_stub_return": 0,
+      "calls": [],
+      "callback_after": "0x12345679",
+      "flag_after": 0,
+      "stop": [
+        "0x100000"
+      ]
+    },
+    {
+      "flag": 2,
+      "first_stub_return": 0,
+      "second_stub_return": 0,
+      "calls": [],
+      "callback_after": "0x12345679",
+      "flag_after": 2,
+      "stop": [
+        "0x100000"
+      ]
+    },
+    {
+      "flag": 1,
+      "first_stub_return": 1,
+      "second_stub_return": 0,
+      "calls": [
+        {
+          "address": "0x539254",
+          "r0": 1,
+          "r1": 0
+        }
+      ],
+      "callback_after": "0x12345679",
+      "flag_after": 1,
+      "stop": [
+        "0x4c2b44"
+      ]
+    },
+    {
+      "flag": 1,
+      "first_stub_return": 0,
+      "second_stub_return": 1,
+      "calls": [
+        {
+          "address": "0x539254",
+          "r0": 1,
+          "r1": 0
+        },
+        {
+          "address": "0x539304",
+          "r0": 0,
+          "r1": 0
+        }
+      ],
+      "callback_after": "0x12345679",
+      "flag_after": 1,
+      "stop": [
+        "0x4c2b4e"
+      ]
+    },
+    {
+      "flag": 1,
+      "first_stub_return": 0,
+      "second_stub_return": 0,
+      "calls": [
+        {
+          "address": "0x539254",
+          "r0": 1,
+          "r1": 0
+        },
+        {
+          "address": "0x539304",
+          "r0": 0,
+          "r1": 0
+        },
+        {
+          "address": "0x480f0c",
+          "r0": 28,
+          "r1": 3
+        }
+      ],
+      "callback_after": "0x0",
+      "flag_after": 0,
+      "stop": [
+        "0x100000"
+      ]
+    }
+  ],
+  "limits": "Actual original instructions; calls 539254/539304/480f0c stubbed. No child lifecycle, live driver, scheduler or hardware inference."
+}

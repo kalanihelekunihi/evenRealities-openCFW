@@ -1,0 +1,119 @@
+{
+  "status": "PASS",
+  "cases": 12,
+  "validation": "original-instruction bounded block and subsequent complete request assertions",
+  "block_start": "0x4C2B06",
+  "block_end_exclusive": "0x4C2B18",
+  "default_table_address": "0x77D8F8",
+  "default_table_sha256": "83071d009f0a48be8576c88f3e6fcde97b9c7c535e314d7e04fc2b1646b125b7",
+  "defaults": {
+    "hs_mode": 0,
+    "hs_hz": 0,
+    "ls_mode": 0,
+    "ls_hz": 32768,
+    "external_hz": 12000000
+  },
+  "comparisons": [
+    {
+      "pattern": 0,
+      "primask": 0,
+      "user": 0,
+      "board": "00000000000000000000000000800000001bb700",
+      "xtal_request_status": 7,
+      "user_bitmap_unchanged": true
+    },
+    {
+      "pattern": 0,
+      "primask": 0,
+      "user": 52,
+      "board": "00000000000000000000000000800000001bb700",
+      "xtal_request_status": 7,
+      "user_bitmap_unchanged": true
+    },
+    {
+      "pattern": 0,
+      "primask": 0,
+      "user": 56,
+      "board": "00000000000000000000000000800000001bb700",
+      "xtal_request_status": 7,
+      "user_bitmap_unchanged": true
+    },
+    {
+      "pattern": 0,
+      "primask": 1,
+      "user": 0,
+      "board": "00000000000000000000000000800000001bb700",
+      "xtal_request_status": 7,
+      "user_bitmap_unchanged": true
+    },
+    {
+      "pattern": 0,
+      "primask": 1,
+      "user": 52,
+      "board": "00000000000000000000000000800000001bb700",
+      "xtal_request_status": 7,
+      "user_bitmap_unchanged": true
+    },
+    {
+      "pattern": 0,
+      "primask": 1,
+      "user": 56,
+      "board": "00000000000000000000000000800000001bb700",
+      "xtal_request_status": 7,
+      "user_bitmap_unchanged": true
+    },
+    {
+      "pattern": 255,
+      "primask": 0,
+      "user": 0,
+      "board": "00000000000000000000000000800000001bb700",
+      "xtal_request_status": 7,
+      "user_bitmap_unchanged": true
+    },
+    {
+      "pattern": 255,
+      "primask": 0,
+      "user": 52,
+      "board": "00000000000000000000000000800000001bb700",
+      "xtal_request_status": 7,
+      "user_bitmap_unchanged": true
+    },
+    {
+      "pattern": 255,
+      "primask": 0,
+      "user": 56,
+      "board": "00000000000000000000000000800000001bb700",
+      "xtal_request_status": 7,
+      "user_bitmap_unchanged": true
+    },
+    {
+      "pattern": 255,
+      "primask": 1,
+      "user": 0,
+      "board": "00000000000000000000000000800000001bb700",
+      "xtal_request_status": 7,
+      "user_bitmap_unchanged": true
+    },
+    {
+      "pattern": 255,
+      "primask": 1,
+      "user": 52,
+      "board": "00000000000000000000000000800000001bb700",
+      "xtal_request_status": 7,
+      "user_bitmap_unchanged": true
+    },
+    {
+      "pattern": 255,
+      "primask": 1,
+      "user": 56,
+      "board": "00000000000000000000000000800000001bb700",
+      "xtal_request_status": 7,
+      "user_bitmap_unchanged": true
+    }
+  ],
+  "limits": [
+    "Stops before HFRC/HFRC2 configuration calls; not complete platform initialization.",
+    "No claim that another caller never later changes board info.",
+    "No connected hardware or observed running-board configuration."
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "scan_exclusive_end": "0x600FAA",
+  "direct_BL_candidates": [
+    {
+      "address": "0x4c2b52",
+      "bytes": "b0f793f8",
+      "decoded": [
+        [
+          "bl",
+          "#0x472c7c"
+        ]
+      ]
+    },
+    {
+      "address": "0x541726",
+      "bytes": "31f7a9fa",
+      "decoded": [
+        [
+          "bl",
+          "#0x472c7c"
+        ]
+      ]
+    }
+  ],
+  "literal_occurrences": {
+    "0x472c7c": [],
+    "0x472c7d": [],
+    "0x200742f0": [
+      "0x4448b8",
+      "0x47345c"
+    ],
+    "0x20074f4e": [
+      "0x4c306c"
+    ]
+  },
+  "nearby_base_exclusion": "Adjacent200742EC pointer at5A4FA0 belongs to original5A4EF4 which loads/stores offset0; not+4 callback. No global computed-write completeness claimed."
+}

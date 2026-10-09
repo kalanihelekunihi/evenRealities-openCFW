@@ -1,0 +1,59 @@
+{
+  "status": "MATCH_CONFIRMED_PRIOR_DECOMPILER_INFERENCE_CORRECTED",
+  "original_valid": {
+    "stop": [
+      "return"
+    ],
+    "return": 0,
+    "mmio_trace": [
+      [
+        "W",
+        "0x40039044",
+        4,
+        305419896
+      ],
+      [
+        "R",
+        "0x40039040",
+        4,
+        0
+      ]
+    ]
+  },
+  "source_valid": {
+    "stop": [
+      "return"
+    ],
+    "return": 0,
+    "mmio_trace": [
+      [
+        "W",
+        "0x40039044",
+        4,
+        305419896
+      ],
+      [
+        "R",
+        "0x40039040",
+        4,
+        0
+      ]
+    ]
+  },
+  "original_null": {
+    "stop": [
+      "Invalid memory read (UC_ERR_READ_UNMAPPED)"
+    ],
+    "return": null,
+    "mmio_trace": []
+  },
+  "source_null": {
+    "stop": [
+      "Invalid memory read (UC_ERR_READ_UNMAPPED)"
+    ],
+    "return": null,
+    "mmio_trace": []
+  },
+  "elf_sha256": "64135f5d52c67c77cc80bbe6421d9fbe2b107ac988dfb1b3893cbcdd920b3d7a",
+  "limits": "Offline fixture establishes access sequence and unmapped NULL read, not physical MIS read effect."
+}

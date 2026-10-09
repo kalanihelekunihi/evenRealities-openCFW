@@ -1,0 +1,86 @@
+{
+  "status": "REPRODUCED_TOOLING_DISCREPANCY",
+  "unicorn_version": "2.1.4",
+  "elf_sha256": "353b4924621f173656d8001756edd683b3e07d0480c2ea205660b5624f63e86b",
+  "inputs": {
+    "kind": "receive",
+    "capacity": 1,
+    "size": 4,
+    "prefill": 1
+  },
+  "original_continuous": {
+    "return_value": 1,
+    "boundary": [],
+    "queue_count": 0,
+    "woken": 0,
+    "wake_calls": [],
+    "icsr_writes": [],
+    "extra_payload_writes": [
+      {
+        "address": "0x20008249",
+        "size": 1,
+        "value": 4294967295,
+        "pc": "0x441fba"
+      },
+      {
+        "address": "0x20008248",
+        "size": 1,
+        "value": 4294967295,
+        "pc": "0x441fec"
+      }
+    ],
+    "rx_lock": -1,
+    "tx_lock": -1,
+    "basepri": 0,
+    "primask": 0,
+    "current_state_container": "0x2006a848",
+    "current_event_container": "0x0",
+    "next_unblock_tick": 4294967295,
+    "suspend_count": 0,
+    "ipsr": 0,
+    "state_digest": "0df2b6698fcdad6a33cf43eec73c79105aee3ec86a87bc76f70693e791d4df50",
+    "source_guard_pass": null
+  },
+  "original_instruction_stepped": {
+    "return_value": 1,
+    "boundary": [],
+    "queue_count": 0,
+    "woken": 0,
+    "wake_calls": [],
+    "icsr_writes": [],
+    "extra_payload_writes": [],
+    "rx_lock": -1,
+    "tx_lock": -1,
+    "basepri": 0,
+    "primask": 0,
+    "current_state_container": "0x2006a848",
+    "current_event_container": "0x0",
+    "next_unblock_tick": 4294967295,
+    "suspend_count": 0,
+    "ipsr": 0,
+    "state_digest": "b5de400f99df740b14900dde62901cf6334c77eff6444044328204f838d6ac24",
+    "source_guard_pass": null
+  },
+  "native_instruction_stepped": {
+    "return_value": 1,
+    "boundary": [],
+    "queue_count": 0,
+    "woken": 0,
+    "wake_calls": [],
+    "icsr_writes": [],
+    "extra_payload_writes": [],
+    "rx_lock": -1,
+    "tx_lock": -1,
+    "basepri": 0,
+    "primask": 0,
+    "current_state_container": "0x2006a848",
+    "current_event_container": "0x0",
+    "next_unblock_tick": 4294967295,
+    "suspend_count": 0,
+    "ipsr": 0,
+    "state_digest": "b5de400f99df740b14900dde62901cf6334c77eff6444044328204f838d6ac24",
+    "source_guard_pass": true
+  },
+  "interpretation": "Continuous execution unexpectedly carries Thumb IT state from actual memcpy return across stock caller pop and enters queue-unlock with a receive-output pointer. Single instruction execution restores expected payload-only writes and agrees with native source. M33-compatible profile also reproduced the continuous discrepancy in a separate inspection. No hardware defect or emulator-vendor attribution claimed.",
+  "limits": "Stepping uses count1 and actual currentPC; no register/flag/byte modifications, helper substitutions, copied opcodes or fabricated returns. All primary comparisons use this mode."
+}

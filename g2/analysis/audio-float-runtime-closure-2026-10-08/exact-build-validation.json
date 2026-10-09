@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "elf_sha256": "85e69f0005a7b1bf5e0a400e9849777a1deeba001f178c85aafb39d9ed71739d",
+  "comparisons": {
+    "results.json": 13920,
+    "generator-results.json": 2530,
+    "config-results.json": 1144,
+    "driver-results.json": 1407,
+    "manager-results.json": 816,
+    "reachability-results.json": 36
+  },
+  "total": 19853,
+  "direct_math": 13920,
+  "reused_generator": 2530,
+  "reused_composition": 3403,
+  "sources_match": true,
+  "correction": "Finite numerator modulo infinity initially canonicalized incorrectly; direct original-instruction test rejected it. Corrected source returns numerator, rebuilt, all direct/generator/composition suites rerun on final ELF.",
+  "limits": "Bespoke source reconstructed from authenticated instructions, not exact compiled upstream attribution or whole-image coverage."
+}

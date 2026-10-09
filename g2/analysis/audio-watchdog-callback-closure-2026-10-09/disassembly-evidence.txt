@@ -1,0 +1,105 @@
+
+tick_callback 0x53c2a4..0x53c2be SHA256ec2166b8ab5a8e47c4a6c03901f66a40ac93866b4ea88712826950162b9dbbb6
+0053c2a4: e0b5         push {r5, r6, r7, lr}
+0053c2a6: 6846         mov r0, sp
+0053c2a8: 0021         movs r1, #0
+0053c2aa: 0022         movs r2, #0
+0053c2ac: 0023         movs r3, #0
+0053c2ae: 80e80e00     stm.w r0, {r1, r2, r3}
+0053c2b2: 0620         movs r0, #6
+0053c2b4: 0090         str r0, [sp]
+0053c2b6: 6846         mov r0, sp
+0053c2b8: 00f0bef9     bl #0x53c638
+0053c2bc: 07bd         pop {r0, r1, r2, pc}
+
+type0_emitter 0x53ca10..0x53ca32 SHA256c2d1b57648d197e19ceb04fd425d31880813f6475ee9f4e67a4896d02704f468
+0053ca10: 1fb5         push {r0, r1, r2, r3, r4, lr}
+0053ca12: 6946         mov r1, sp
+0053ca14: 0022         movs r2, #0
+0053ca16: 0023         movs r3, #0
+0053ca18: 0024         movs r4, #0
+0053ca1a: 81e81c00     stm.w r1, {r2, r3, r4}
+0053ca1e: 0021         movs r1, #0
+0053ca20: 0091         str r1, [sp]
+0053ca22: 0121         movs r1, #1
+0053ca24: 0191         str r1, [sp, #4]
+0053ca26: c0b2         uxtb r0, r0
+0053ca28: 0290         str r0, [sp, #8]
+0053ca2a: 6846         mov r0, sp
+0053ca2c: fff704fe     bl #0x53c638
+0053ca30: 1fbd         pop {r0, r1, r2, r3, r4, pc}
+
+type6_selected 0x53c92e..0x53c9fa SHA25600ca490c806612e19b175bfce7d3371a6fadc7b23cf947097c217947a1095bf4
+0053c92e: 18b5         push {r3, r4, lr}
+0053c930: 85b0         sub sp, #0x14
+0053c932: dff8c805     ldr.w r0, [pc, #0x5c8]
+0053c936: 0078         ldrb r0, [r0]
+0053c938: 0028         cmp r0, #0
+0053c93a: 5cd0         beq #0x53c9f6
+0053c93c: dff89c05     ldr.w r0, [pc, #0x59c]
+0053c940: 0468         ldr r4, [r0]
+0053c942: 0021         movs r1, #0
+0053c944: 0160         str r1, [r0]
+0053c946: 142c         cmp r4, #0x14
+0053c948: 31d2         bhs #0x53c9ae
+0053c94a: 00f7c0fb     bl #0x43d0ce
+0053c94e: 8007         lsls r0, r0, #0x1e
+0053c950: 14d5         bpl #0x53c97c
+0053c952: 4ff4fa60     mov.w r0, #0x7d0
+0053c956: 0490         str r0, [sp, #0x10]
+0053c958: 1420         movs r0, #0x14
+0053c95a: 0390         str r0, [sp, #0xc]
+0053c95c: 0294         str r4, [sp, #8]
+0053c95e: dff8a005     ldr.w r0, [pc, #0x5a0]
+0053c962: 0190         str r0, [sp, #4]
+0053c964: 40f2ad10     movw r0, #0x1ad
+0053c968: 0090         str r0, [sp]
+0053c96a: dff89835     ldr.w r3, [pc, #0x598]
+0053c96e: dff81c24     ldr.w r2, [pc, #0x41c]
+0053c972: dff81c14     ldr.w r1, [pc, #0x41c]
+0053c976: 0220         movs r0, #2
+0053c978: 00f7fcfd     bl #0x43d574
+0053c97c: 00f7a7fb     bl #0x43d0ce
+0053c980: c007         lsls r0, r0, #0x1f
+0053c982: 03d4         bmi #0x53c98c
+0053c984: 00f7a3fb     bl #0x43d0ce
+0053c988: 4007         lsls r0, r0, #0x1d
+0053c98a: 0cd5         bpl #0x53c9a6
+0053c98c: dff87815     ldr.w r1, [pc, #0x578]
+0053c990: 4ff4fa60     mov.w r0, #0x7d0
+0053c994: 0190         str r0, [sp, #4]
+0053c996: 1420         movs r0, #0x14
+0053c998: 0090         str r0, [sp]
+0053c99a: 2300         movs r3, r4
+0053c99c: 0a00         movs r2, r1
+0053c99e: 5ff00c60     movs.w r0, #0x8c00000
+0053c9a2: 00f77cfa     bl #0x43ce9e
+0053c9a6: 0220         movs r0, #2
+0053c9a8: 00f032f8     bl #0x53ca10
+0053c9ac: 23e0         b #0x53c9f6
+0053c9ae: 00f78efb     bl #0x43d0ce
+0053c9b2: 8007         lsls r0, r0, #0x1e
+0053c9b4: 0fd5         bpl #0x53c9d6
+0053c9b6: 0294         str r4, [sp, #8]
+0053c9b8: dff85005     ldr.w r0, [pc, #0x550]
+0053c9bc: 0190         str r0, [sp, #4]
+0053c9be: 4ff4d870     mov.w r0, #0x1b0
+0053c9c2: 0090         str r0, [sp]
+0053c9c4: dff83c35     ldr.w r3, [pc, #0x53c]
+0053c9c8: dff8c023     ldr.w r2, [pc, #0x3c0]
+0053c9cc: dff8c013     ldr.w r1, [pc, #0x3c0]
+0053c9d0: 0320         movs r0, #3
+0053c9d2: 00f7cffd     bl #0x43d574
+0053c9d6: 00f77afb     bl #0x43d0ce
+0053c9da: c007         lsls r0, r0, #0x1f
+0053c9dc: 03d4         bmi #0x53c9e6
+0053c9de: 00f776fb     bl #0x43d0ce
+0053c9e2: 4007         lsls r0, r0, #0x1d
+0053c9e4: 07d5         bpl #0x53c9f6
+0053c9e6: dff82825     ldr.w r2, [pc, #0x528]
+0053c9ea: 2300         movs r3, r4
+0053c9ec: 1100         movs r1, r2
+0053c9ee: 5ff04460     movs.w r0, #0xc400000
+0053c9f2: 00f754fa     bl #0x43ce9e
+0053c9f6: 06b0         add sp, #0x18
+0053c9f8: 10bd         pop {r4, pc}

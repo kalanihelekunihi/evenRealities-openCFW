@@ -1,0 +1,74 @@
+{
+  "status": "PASS",
+  "cases": 1,
+  "raw_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "record": "0x75d3f4",
+  "source": "0x79189e",
+  "packed": "0x54e0",
+  "input_bytes": 10864,
+  "destination": "0x20000000",
+  "output_bytes": 17752,
+  "decoded_sha256": "df1a1fdf7b2792a7c4ef7a2c5cc6d1423bc7833b556fdfcedb8d6d927fbbb743",
+  "original_instruction_steps": 136529,
+  "channels": [
+    {
+      "channel": 0,
+      "module": 0,
+      "handle": "0x0",
+      "pins": "0x0",
+      "config": "0x0",
+      "queues": "0x0",
+      "callback": "0x0",
+      "active": 0,
+      "completion": 0
+    },
+    {
+      "channel": 1,
+      "module": 1,
+      "handle": "0x0",
+      "pins": "0x786060",
+      "config": "0x20000ccc",
+      "queues": "0x20000cfc",
+      "callback": "0x0",
+      "active": 0,
+      "completion": 0
+    },
+    {
+      "channel": 2,
+      "module": 2,
+      "handle": "0x0",
+      "pins": "0x786070",
+      "config": "0x20000cdc",
+      "queues": "0x20000d0c",
+      "callback": "0x0",
+      "active": 0,
+      "completion": 0
+    },
+    {
+      "channel": 3,
+      "module": 3,
+      "handle": "0x0",
+      "pins": "0x786080",
+      "config": "0x20000cec",
+      "queues": "0x20000d1c",
+      "callback": "0x0",
+      "active": 0,
+      "completion": 0
+    }
+  ],
+  "channel1_queue_words": [
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x200b9c20"
+  ],
+  "channel1_config_words": [
+    "0xe1000",
+    "0x203",
+    "0x2020000",
+    "0x0",
+    "0xf4240",
+    "0x203"
+  ],
+  "limits": "Static decoder matches original instruction-stepped decoder over entire initialized SRAM record. Not full reset/runtime; no peripheral initialization or hardware execution."
+}

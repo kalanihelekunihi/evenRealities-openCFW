@@ -1,0 +1,23 @@
+{
+  "sources": {
+    "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/FreeRTOSv10.5.1/Source/stream_buffer.c": {
+      "sha256": "86d948694c723b814c9606a6c804ea7c1bd30b3da518d1d6a83b81f972e3a152",
+      "unchanged_function_text": {
+        "xStreamBufferGenericCreate": "754b8289aba744d0759569b8bd35565a5b7a52e2cb9edb65ababc403e1318627",
+        "xStreamBufferSpacesAvailable": "f9e65cf8c8010be623c66fe996791bf57dc84b7e8032a0132b45d2871ac45179",
+        "xStreamBufferSendFromISR": "e630dd068ff211e436552873f82b1ec662c6fb8ee1c678f1ae2c88105ec45fac",
+        "prvWriteMessageToBuffer": "224797c2f060b8462cdcf7ea6634d21fdc776c1350ad6523994049e5fa05e1a5",
+        "prvWriteBytesToBuffer": "8fb20fa5bf542c01e886f75f3b74f16333ac81e2cb8e26abca29954121aaaff2",
+        "prvBytesInBuffer": "8950f6803a79137463a8e1d77c99866ab0fd954d26e7293ba018a9aeaf7c22ea",
+        "prvInitialiseNewStreamBuffer": "eacc158676e82b737d4d22ea1d2ad406012a91e4593f938fd6c03951b443dc3d"
+      }
+    },
+    "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/mcu/am_hal_uart.c": {
+      "sha256": "db0807cbd0ff5df110afde4a8e8561857e2e669529da290289919516ec12799a",
+      "unchanged_function_text": {
+        "am_hal_uart_fifo_read": "29d4528061bd5881a09861533c3732535e44a79a4092f5004fbc8a618d9e16ad"
+      }
+    }
+  },
+  "adaptations": "Selected bodies unchanged; stock36B stream state, config macros, fixed UART/layout definitions and bounded byte-copy/mask support. Dynamic heap and task-notification aliases remain external."
+}

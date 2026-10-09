@@ -1,0 +1,56 @@
+{
+  "new_bodies": [
+    "xQueueSemaphoreTake",
+    "prvGetDisinheritPriorityAfterTimeout",
+    "xQueueGiveMutexRecursive",
+    "xQueueTakeMutexRecursive",
+    "audio_mutex_acquire",
+    "audio_mutex_release"
+  ],
+  "reused_attributed_helper": "pvTaskIncrementMutexHeldCount",
+  "ranges": {
+    "xQueueSemaphoreTake": {
+      "start": "0x441c44",
+      "end_exclusive": "0x441da6"
+    },
+    "prvGetDisinheritPriorityAfterTimeout": {
+      "start": "0x441ec4",
+      "end_exclusive": "0x441ed8"
+    },
+    "xQueueGiveMutexRecursive": {
+      "start": "0x441710",
+      "end_exclusive": "0x441750"
+    },
+    "xQueueTakeMutexRecursive": {
+      "start": "0x441750",
+      "end_exclusive": "0x441790"
+    },
+    "audio_mutex_acquire": {
+      "start": "0x4497b6",
+      "end_exclusive": "0x44981c"
+    },
+    "audio_mutex_release": {
+      "start": "0x44981c",
+      "end_exclusive": "0x449864"
+    },
+    "pvTaskIncrementMutexHeldCount": {
+      "start": "0x455ae0",
+      "end_exclusive": "0x455af6"
+    }
+  },
+  "queue_layout": {
+    "type_pcHead": 0,
+    "holder": 8,
+    "recursive_depth": 12,
+    "send_waiters": 16,
+    "receive_waiters": 36,
+    "available_count": 56,
+    "length": 60,
+    "item_size": 64
+  },
+  "boundaries": [
+    "before port yield0x4420BC",
+    "before assertion fault sequence; assertion child instruction does not execute"
+  ],
+  "data_model": "ARM32 little endian; ticks are not established milliseconds"
+}

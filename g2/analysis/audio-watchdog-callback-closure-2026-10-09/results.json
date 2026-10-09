@@ -1,0 +1,3517 @@
+{
+  "status": "PASS",
+  "cases": 123,
+  "elf_sha256": "ce678646719f3a1203ca531c5a87f94d76d89b05b812dbd6d1d49809c8bd749f",
+  "logging_mask_address": "0x20004543",
+  "comparisons": [
+    {
+      "inputs": {
+        "kind": "tick",
+        "argument": 0,
+        "queue": "null"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            6,
+            0,
+            0
+          ]
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "tick",
+        "argument": 0,
+        "queue": "empty"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            6,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        }
+      ],
+      "boundary": [
+        {
+          "kind": "before_thread_flags_set",
+          "thread": 536900096,
+          "flags": 4194304
+        }
+      ],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "060000000000000000000000",
+      "queue_digest": "2d703d66aa674e908ffae4d4405c5908553183605d2c6533dbf8cb62cacde51d",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "tick",
+        "argument": 0,
+        "queue": "full"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            6,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "tick",
+        "argument": 1,
+        "queue": "null"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            6,
+            0,
+            0
+          ]
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "tick",
+        "argument": 1,
+        "queue": "empty"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            6,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        }
+      ],
+      "boundary": [
+        {
+          "kind": "before_thread_flags_set",
+          "thread": 536900096,
+          "flags": 4194304
+        }
+      ],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "060000000000000000000000",
+      "queue_digest": "2d703d66aa674e908ffae4d4405c5908553183605d2c6533dbf8cb62cacde51d",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "tick",
+        "argument": 1,
+        "queue": "full"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            6,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "tick",
+        "argument": 3405691582,
+        "queue": "null"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            6,
+            0,
+            0
+          ]
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "tick",
+        "argument": 3405691582,
+        "queue": "empty"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            6,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        }
+      ],
+      "boundary": [
+        {
+          "kind": "before_thread_flags_set",
+          "thread": 536900096,
+          "flags": 4194304
+        }
+      ],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "060000000000000000000000",
+      "queue_digest": "2d703d66aa674e908ffae4d4405c5908553183605d2c6533dbf8cb62cacde51d",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "tick",
+        "argument": 3405691582,
+        "queue": "full"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            6,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "tick",
+        "argument": 4294967295,
+        "queue": "null"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            6,
+            0,
+            0
+          ]
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "tick",
+        "argument": 4294967295,
+        "queue": "empty"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            6,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        }
+      ],
+      "boundary": [
+        {
+          "kind": "before_thread_flags_set",
+          "thread": 536900096,
+          "flags": 4194304
+        }
+      ],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "060000000000000000000000",
+      "queue_digest": "2d703d66aa674e908ffae4d4405c5908553183605d2c6533dbf8cb62cacde51d",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "tick",
+        "argument": 4294967295,
+        "queue": "full"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            6,
+            0,
+            0
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "emit_type0",
+        "argument": 0,
+        "queue": "null"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            0
+          ]
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "emit_type0",
+        "argument": 0,
+        "queue": "empty"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        }
+      ],
+      "boundary": [
+        {
+          "kind": "before_thread_flags_set",
+          "thread": 536900096,
+          "flags": 4194304
+        }
+      ],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "000000000100000000000000",
+      "queue_digest": "1b2c5285c1eba0a28a44980d536f929c71bfdf511d99329c34cd05a4ca3e865f",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "emit_type0",
+        "argument": 0,
+        "queue": "full"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "emit_type0",
+        "argument": 1,
+        "queue": "null"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            1
+          ]
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "emit_type0",
+        "argument": 1,
+        "queue": "empty"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        }
+      ],
+      "boundary": [
+        {
+          "kind": "before_thread_flags_set",
+          "thread": 536900096,
+          "flags": 4194304
+        }
+      ],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "000000000100000001000000",
+      "queue_digest": "cfca516ca06a9d2a61e71354a1f09caaeba2f3672dc82a70c9073cb57a6c2f6f",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "emit_type0",
+        "argument": 1,
+        "queue": "full"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            1
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "emit_type0",
+        "argument": 2,
+        "queue": "null"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "emit_type0",
+        "argument": 2,
+        "queue": "empty"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        }
+      ],
+      "boundary": [
+        {
+          "kind": "before_thread_flags_set",
+          "thread": 536900096,
+          "flags": 4194304
+        }
+      ],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "000000000100000002000000",
+      "queue_digest": "52fab0e8a55f64ec28a8f1d8dd24126f5bbc12a47048499ad5089618509c8a73",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "emit_type0",
+        "argument": 2,
+        "queue": "full"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "emit_type0",
+        "argument": 255,
+        "queue": "null"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            255
+          ]
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "emit_type0",
+        "argument": 255,
+        "queue": "empty"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            255
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        }
+      ],
+      "boundary": [
+        {
+          "kind": "before_thread_flags_set",
+          "thread": 536900096,
+          "flags": 4194304
+        }
+      ],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "0000000001000000ff000000",
+      "queue_digest": "b228f8a51320e5d59ee918402442851a823ce454539ff498fda3a8c97ff7187b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "emit_type0",
+        "argument": 255,
+        "queue": "full"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            255
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "emit_type0",
+        "argument": 256,
+        "queue": "null"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            0
+          ]
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "emit_type0",
+        "argument": 256,
+        "queue": "empty"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        }
+      ],
+      "boundary": [
+        {
+          "kind": "before_thread_flags_set",
+          "thread": 536900096,
+          "flags": 4194304
+        }
+      ],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "000000000100000000000000",
+      "queue_digest": "1b2c5285c1eba0a28a44980d536f929c71bfdf511d99329c34cd05a4ca3e865f",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "emit_type0",
+        "argument": 256,
+        "queue": "full"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "emit_type0",
+        "argument": 258,
+        "queue": "null"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "emit_type0",
+        "argument": 258,
+        "queue": "empty"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        }
+      ],
+      "boundary": [
+        {
+          "kind": "before_thread_flags_set",
+          "thread": 536900096,
+          "flags": 4194304
+        }
+      ],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "000000000100000002000000",
+      "queue_digest": "52fab0e8a55f64ec28a8f1d8dd24126f5bbc12a47048499ad5089618509c8a73",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "emit_type0",
+        "argument": 258,
+        "queue": "full"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "emit_type0",
+        "argument": 4294967295,
+        "queue": "null"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            255
+          ]
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "emit_type0",
+        "argument": 4294967295,
+        "queue": "empty"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            255
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        }
+      ],
+      "boundary": [
+        {
+          "kind": "before_thread_flags_set",
+          "thread": 536900096,
+          "flags": 4194304
+        }
+      ],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "0000000001000000ff000000",
+      "queue_digest": "b228f8a51320e5d59ee918402442851a823ce454539ff498fda3a8c97ff7187b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "emit_type0",
+        "argument": 4294967295,
+        "queue": "full"
+      },
+      "trace": [
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            255
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "null",
+        "enabled": 0,
+        "counter": 0
+      },
+      "trace": [],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "null",
+        "enabled": 0,
+        "counter": 19
+      },
+      "trace": [],
+      "boundary": [],
+      "counter_after": 19,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "null",
+        "enabled": 0,
+        "counter": 20
+      },
+      "trace": [],
+      "boundary": [],
+      "counter_after": 20,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "null",
+        "enabled": 0,
+        "counter": 21
+      },
+      "trace": [],
+      "boundary": [],
+      "counter_after": 21,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "null",
+        "enabled": 0,
+        "counter": 4294967295
+      },
+      "trace": [],
+      "boundary": [],
+      "counter_after": 4294967295,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "null",
+        "enabled": 1,
+        "counter": 0
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "null",
+        "enabled": 1,
+        "counter": 19
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "null",
+        "enabled": 1,
+        "counter": 20
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "null",
+        "enabled": 1,
+        "counter": 21
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "null",
+        "enabled": 1,
+        "counter": 4294967295
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "null",
+        "enabled": 255,
+        "counter": 0
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "null",
+        "enabled": 255,
+        "counter": 19
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "null",
+        "enabled": 255,
+        "counter": 20
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "null",
+        "enabled": 255,
+        "counter": 21
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "null",
+        "enabled": 255,
+        "counter": 4294967295
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "empty",
+        "enabled": 0,
+        "counter": 0
+      },
+      "trace": [],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "empty",
+        "enabled": 0,
+        "counter": 19
+      },
+      "trace": [],
+      "boundary": [],
+      "counter_after": 19,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "empty",
+        "enabled": 0,
+        "counter": 20
+      },
+      "trace": [],
+      "boundary": [],
+      "counter_after": 20,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "empty",
+        "enabled": 0,
+        "counter": 21
+      },
+      "trace": [],
+      "boundary": [],
+      "counter_after": 21,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "empty",
+        "enabled": 0,
+        "counter": 4294967295
+      },
+      "trace": [],
+      "boundary": [],
+      "counter_after": 4294967295,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "empty",
+        "enabled": 1,
+        "counter": 0
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        }
+      ],
+      "boundary": [
+        {
+          "kind": "before_thread_flags_set",
+          "thread": 536900096,
+          "flags": 4194304
+        }
+      ],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "000000000100000002000000",
+      "queue_digest": "52fab0e8a55f64ec28a8f1d8dd24126f5bbc12a47048499ad5089618509c8a73",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "empty",
+        "enabled": 1,
+        "counter": 19
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        }
+      ],
+      "boundary": [
+        {
+          "kind": "before_thread_flags_set",
+          "thread": 536900096,
+          "flags": 4194304
+        }
+      ],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "000000000100000002000000",
+      "queue_digest": "52fab0e8a55f64ec28a8f1d8dd24126f5bbc12a47048499ad5089618509c8a73",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "empty",
+        "enabled": 1,
+        "counter": 20
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "empty",
+        "enabled": 1,
+        "counter": 21
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "empty",
+        "enabled": 1,
+        "counter": 4294967295
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "empty",
+        "enabled": 255,
+        "counter": 0
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        }
+      ],
+      "boundary": [
+        {
+          "kind": "before_thread_flags_set",
+          "thread": 536900096,
+          "flags": 4194304
+        }
+      ],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "000000000100000002000000",
+      "queue_digest": "52fab0e8a55f64ec28a8f1d8dd24126f5bbc12a47048499ad5089618509c8a73",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "empty",
+        "enabled": 255,
+        "counter": 19
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        }
+      ],
+      "boundary": [
+        {
+          "kind": "before_thread_flags_set",
+          "thread": 536900096,
+          "flags": 4194304
+        }
+      ],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "000000000100000002000000",
+      "queue_digest": "52fab0e8a55f64ec28a8f1d8dd24126f5bbc12a47048499ad5089618509c8a73",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "empty",
+        "enabled": 255,
+        "counter": 20
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "empty",
+        "enabled": 255,
+        "counter": 21
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "empty",
+        "enabled": 255,
+        "counter": 4294967295
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "full",
+        "enabled": 0,
+        "counter": 0
+      },
+      "trace": [],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "full",
+        "enabled": 0,
+        "counter": 19
+      },
+      "trace": [],
+      "boundary": [],
+      "counter_after": 19,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "full",
+        "enabled": 0,
+        "counter": 20
+      },
+      "trace": [],
+      "boundary": [],
+      "counter_after": 20,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "full",
+        "enabled": 0,
+        "counter": 21
+      },
+      "trace": [],
+      "boundary": [],
+      "counter_after": 21,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "full",
+        "enabled": 0,
+        "counter": 4294967295
+      },
+      "trace": [],
+      "boundary": [],
+      "counter_after": 4294967295,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "full",
+        "enabled": 1,
+        "counter": 0
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "full",
+        "enabled": 1,
+        "counter": 19
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "full",
+        "enabled": 1,
+        "counter": 20
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "full",
+        "enabled": 1,
+        "counter": 21
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "full",
+        "enabled": 1,
+        "counter": 4294967295
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "full",
+        "enabled": 255,
+        "counter": 0
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "full",
+        "enabled": 255,
+        "counter": 19
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "full",
+        "enabled": 255,
+        "counter": 20
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "full",
+        "enabled": 255,
+        "counter": 21
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 0,
+        "queue": "full",
+        "enabled": 255,
+        "counter": 4294967295
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "null",
+        "enabled": 0,
+        "counter": 0
+      },
+      "trace": [],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "null",
+        "enabled": 0,
+        "counter": 19
+      },
+      "trace": [],
+      "boundary": [],
+      "counter_after": 19,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "null",
+        "enabled": 0,
+        "counter": 20
+      },
+      "trace": [],
+      "boundary": [],
+      "counter_after": 20,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "null",
+        "enabled": 0,
+        "counter": 21
+      },
+      "trace": [],
+      "boundary": [],
+      "counter_after": 21,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "null",
+        "enabled": 0,
+        "counter": 4294967295
+      },
+      "trace": [],
+      "boundary": [],
+      "counter_after": 4294967295,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "null",
+        "enabled": 1,
+        "counter": 0
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "null",
+        "enabled": 1,
+        "counter": 19
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "null",
+        "enabled": 1,
+        "counter": 20
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "null",
+        "enabled": 1,
+        "counter": 21
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "null",
+        "enabled": 1,
+        "counter": 4294967295
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "null",
+        "enabled": 255,
+        "counter": 0
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "null",
+        "enabled": 255,
+        "counter": 19
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "null",
+        "enabled": 255,
+        "counter": 20
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "null",
+        "enabled": 255,
+        "counter": 21
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "null",
+        "enabled": 255,
+        "counter": 4294967295
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "empty",
+        "enabled": 0,
+        "counter": 0
+      },
+      "trace": [],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "empty",
+        "enabled": 0,
+        "counter": 19
+      },
+      "trace": [],
+      "boundary": [],
+      "counter_after": 19,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "empty",
+        "enabled": 0,
+        "counter": 20
+      },
+      "trace": [],
+      "boundary": [],
+      "counter_after": 20,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "empty",
+        "enabled": 0,
+        "counter": 21
+      },
+      "trace": [],
+      "boundary": [],
+      "counter_after": 21,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "empty",
+        "enabled": 0,
+        "counter": 4294967295
+      },
+      "trace": [],
+      "boundary": [],
+      "counter_after": 4294967295,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "empty",
+        "enabled": 1,
+        "counter": 0
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        }
+      ],
+      "boundary": [
+        {
+          "kind": "before_thread_flags_set",
+          "thread": 536900096,
+          "flags": 4194304
+        }
+      ],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "000000000100000002000000",
+      "queue_digest": "52fab0e8a55f64ec28a8f1d8dd24126f5bbc12a47048499ad5089618509c8a73",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "empty",
+        "enabled": 1,
+        "counter": 19
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        }
+      ],
+      "boundary": [
+        {
+          "kind": "before_thread_flags_set",
+          "thread": 536900096,
+          "flags": 4194304
+        }
+      ],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "000000000100000002000000",
+      "queue_digest": "52fab0e8a55f64ec28a8f1d8dd24126f5bbc12a47048499ad5089618509c8a73",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "empty",
+        "enabled": 1,
+        "counter": 20
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "empty",
+        "enabled": 1,
+        "counter": 21
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "empty",
+        "enabled": 1,
+        "counter": 4294967295
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "empty",
+        "enabled": 255,
+        "counter": 0
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        }
+      ],
+      "boundary": [
+        {
+          "kind": "before_thread_flags_set",
+          "thread": 536900096,
+          "flags": 4194304
+        }
+      ],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "000000000100000002000000",
+      "queue_digest": "52fab0e8a55f64ec28a8f1d8dd24126f5bbc12a47048499ad5089618509c8a73",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "empty",
+        "enabled": 255,
+        "counter": 19
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        }
+      ],
+      "boundary": [
+        {
+          "kind": "before_thread_flags_set",
+          "thread": 536900096,
+          "flags": 4194304
+        }
+      ],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "000000000100000002000000",
+      "queue_digest": "52fab0e8a55f64ec28a8f1d8dd24126f5bbc12a47048499ad5089618509c8a73",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "empty",
+        "enabled": 255,
+        "counter": 20
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "empty",
+        "enabled": 255,
+        "counter": 21
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "empty",
+        "enabled": 255,
+        "counter": 4294967295
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 0,
+      "queue_payload": "000000000000000000000000",
+      "queue_digest": "0de6e7a15f9f1902e68183175244c73093b2fd50a1b67c719d667c7363cc3e6b",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "full",
+        "enabled": 0,
+        "counter": 0
+      },
+      "trace": [],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "full",
+        "enabled": 0,
+        "counter": 19
+      },
+      "trace": [],
+      "boundary": [],
+      "counter_after": 19,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "full",
+        "enabled": 0,
+        "counter": 20
+      },
+      "trace": [],
+      "boundary": [],
+      "counter_after": 20,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "full",
+        "enabled": 0,
+        "counter": 21
+      },
+      "trace": [],
+      "boundary": [],
+      "counter_after": 21,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "full",
+        "enabled": 0,
+        "counter": 4294967295
+      },
+      "trace": [],
+      "boundary": [],
+      "counter_after": 4294967295,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "full",
+        "enabled": 1,
+        "counter": 0
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "full",
+        "enabled": 1,
+        "counter": 19
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "full",
+        "enabled": 1,
+        "counter": 20
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "full",
+        "enabled": 1,
+        "counter": 21
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "full",
+        "enabled": 1,
+        "counter": 4294967295
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "full",
+        "enabled": 255,
+        "counter": 0
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "full",
+        "enabled": 255,
+        "counter": 19
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "audio_submit",
+          "message": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "call": "message_queue_put",
+          "queue": 536895488,
+          "priority": 0,
+          "timeout_ticks": 0
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "full",
+        "enabled": 255,
+        "counter": 20
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "full",
+        "enabled": 255,
+        "counter": 21
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "kind": "type6",
+        "argument": 3405691582,
+        "queue": "full",
+        "enabled": 255,
+        "counter": 4294967295
+      },
+      "trace": [
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        },
+        {
+          "call": "log_mask"
+        }
+      ],
+      "boundary": [],
+      "counter_after": 0,
+      "queue_count": 1,
+      "queue_payload": "63000000580000004d000000",
+      "queue_digest": "cec1a56ad30206aac4389d5d754033fb978ffe17762629d8b675dccd608f75fe",
+      "basepri": 0
+    }
+  ],
+  "limits": [
+    "Callback and emitter complete; type6 handler selects logging-disabled contract only.",
+    "Actual publisher/CMSIS queue wrapper/queue copy execute; success stops before thread flag set rather than fabricating a resumed task.",
+    "No callback argument memory read, real time cadence, live timer/delete interleaving or hardware fault inference."
+  ]
+}

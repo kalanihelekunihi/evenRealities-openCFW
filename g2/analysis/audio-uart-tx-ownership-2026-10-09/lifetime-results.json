@@ -1,0 +1,74 @@
+{
+  "status": "PASS",
+  "cases": 3,
+  "elf_sha256": "8b1923223a443e6d8935d4091400089c87f1ddd37de3fac8c7ce0969bb4afe06",
+  "comparisons": [
+    {
+      "mode": "fifo-partial",
+      "after_first_return": {
+        "written": 2,
+        "writing": 1,
+        "queue_length": 0,
+        "fifo": [
+          97,
+          98
+        ]
+      },
+      "after_mutation_and_service": {
+        "written": 5,
+        "writing": 0,
+        "queue_length": 0,
+        "fifo": [
+          97,
+          98,
+          90,
+          90,
+          90
+        ]
+      }
+    },
+    {
+      "mode": "queue-partial",
+      "after_first_return": {
+        "written": 2,
+        "writing": 1,
+        "queue_length": 2,
+        "fifo": []
+      },
+      "after_mutation_and_service": {
+        "written": 5,
+        "writing": 0,
+        "queue_length": 0,
+        "fifo": [
+          97,
+          98,
+          90,
+          90,
+          90
+        ]
+      }
+    },
+    {
+      "mode": "queue-complete",
+      "after_first_return": {
+        "written": 5,
+        "writing": 0,
+        "queue_length": 5,
+        "fifo": []
+      },
+      "after_mutation_and_service": {
+        "written": 5,
+        "writing": 0,
+        "queue_length": 0,
+        "fifo": [
+          97,
+          98,
+          99,
+          100,
+          101
+        ]
+      }
+    }
+  ],
+  "limits": "Deliberate source mutation between manually scheduled calls, synthetic FIFO availability; illustrates borrow/copy contract, not a proved live firmware misuse or race."
+}

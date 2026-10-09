@@ -1,0 +1,837 @@
+{
+  "status": "PASS",
+  "cases": 24,
+  "elf_sha256": "ee7e5e0c073c433c324b957aec6cc8a657fc0a20f3c790c86512ba897c931d04",
+  "comparisons": [
+    {
+      "inputs": {
+        "kind": "send",
+        "capacity": 1,
+        "size": 0,
+        "base": 12,
+        "held": 1,
+        "holder_null": false,
+        "waiter": null
+      },
+      "return_value": null,
+      "boundary": [
+        {
+          "kind": "before_port_yield",
+          "queue_count": 1
+        }
+      ],
+      "queue_count": 1,
+      "woken": 0,
+      "wake_calls": [],
+      "icsr_writes": [],
+      "extra_payload_writes": [],
+      "rx_lock": -1,
+      "tx_lock": -1,
+      "basepri": 48,
+      "primask": 0,
+      "current_state_container": "0x2006a58c",
+      "current_event_container": "0x0",
+      "next_unblock_tick": 4294967295,
+      "suspend_count": 0,
+      "ipsr": 0,
+      "state_digest": "aaac235982e03ec563c38c2046f3bf76d4a4df88b8cb6b216266a42c523f0a7b",
+      "mutex_holder": 0,
+      "mutexes_held": 0,
+      "task_priority": 12
+    },
+    {
+      "inputs": {
+        "kind": "send",
+        "capacity": 1,
+        "size": 0,
+        "base": 12,
+        "held": 1,
+        "holder_null": false,
+        "waiter": 46
+      },
+      "return_value": null,
+      "boundary": [
+        {
+          "kind": "before_port_yield",
+          "queue_count": 1
+        }
+      ],
+      "queue_count": 1,
+      "woken": 0,
+      "wake_calls": [
+        536895524
+      ],
+      "icsr_writes": [],
+      "extra_payload_writes": [],
+      "rx_lock": -1,
+      "tx_lock": -1,
+      "basepri": 48,
+      "primask": 0,
+      "current_state_container": "0x2006a58c",
+      "current_event_container": "0x0",
+      "next_unblock_tick": 4294967295,
+      "suspend_count": 0,
+      "ipsr": 0,
+      "state_digest": "2e3eeb5491688dbf5858b318f5b37c88d964171cf18102f334b993e3d61b02d1",
+      "mutex_holder": 0,
+      "mutexes_held": 0,
+      "task_priority": 12
+    },
+    {
+      "inputs": {
+        "kind": "send",
+        "capacity": 1,
+        "size": 0,
+        "base": 12,
+        "held": 1,
+        "holder_null": false,
+        "waiter": 54
+      },
+      "return_value": null,
+      "boundary": [
+        {
+          "kind": "before_port_yield",
+          "queue_count": 1
+        }
+      ],
+      "queue_count": 1,
+      "woken": 0,
+      "wake_calls": [
+        536895524
+      ],
+      "icsr_writes": [],
+      "extra_payload_writes": [],
+      "rx_lock": -1,
+      "tx_lock": -1,
+      "basepri": 48,
+      "primask": 0,
+      "current_state_container": "0x2006a58c",
+      "current_event_container": "0x0",
+      "next_unblock_tick": 4294967295,
+      "suspend_count": 0,
+      "ipsr": 0,
+      "state_digest": "5b59a53a4424f4933c65c9abdb1692645392785223ef71339610f50a3a055377",
+      "mutex_holder": 0,
+      "mutexes_held": 0,
+      "task_priority": 12
+    },
+    {
+      "inputs": {
+        "kind": "send",
+        "capacity": 1,
+        "size": 0,
+        "base": 12,
+        "held": 1,
+        "holder_null": true,
+        "waiter": null
+      },
+      "return_value": 1,
+      "boundary": [],
+      "queue_count": 1,
+      "woken": 0,
+      "wake_calls": [],
+      "icsr_writes": [],
+      "extra_payload_writes": [],
+      "rx_lock": -1,
+      "tx_lock": -1,
+      "basepri": 0,
+      "primask": 0,
+      "current_state_container": "0x2006a848",
+      "current_event_container": "0x0",
+      "next_unblock_tick": 4294967295,
+      "suspend_count": 0,
+      "ipsr": 0,
+      "state_digest": "16442898f58ece970f548b62803e6a4958c97cfb9dc60b5105c4562f2102ac9b",
+      "mutex_holder": 0,
+      "mutexes_held": 1,
+      "task_priority": 47
+    },
+    {
+      "inputs": {
+        "kind": "send",
+        "capacity": 1,
+        "size": 0,
+        "base": 12,
+        "held": 1,
+        "holder_null": true,
+        "waiter": 46
+      },
+      "return_value": 1,
+      "boundary": [],
+      "queue_count": 1,
+      "woken": 0,
+      "wake_calls": [
+        536895524
+      ],
+      "icsr_writes": [],
+      "extra_payload_writes": [],
+      "rx_lock": -1,
+      "tx_lock": -1,
+      "basepri": 0,
+      "primask": 0,
+      "current_state_container": "0x2006a848",
+      "current_event_container": "0x0",
+      "next_unblock_tick": 4294967295,
+      "suspend_count": 0,
+      "ipsr": 0,
+      "state_digest": "ddb9e059da062223426f4c1f75e347e5fb34c3b557d0709e9f47fcb54ecf967f",
+      "mutex_holder": 0,
+      "mutexes_held": 1,
+      "task_priority": 47
+    },
+    {
+      "inputs": {
+        "kind": "send",
+        "capacity": 1,
+        "size": 0,
+        "base": 12,
+        "held": 1,
+        "holder_null": true,
+        "waiter": 54
+      },
+      "return_value": null,
+      "boundary": [
+        {
+          "kind": "before_port_yield",
+          "queue_count": 1
+        }
+      ],
+      "queue_count": 1,
+      "woken": 0,
+      "wake_calls": [
+        536895524
+      ],
+      "icsr_writes": [],
+      "extra_payload_writes": [],
+      "rx_lock": -1,
+      "tx_lock": -1,
+      "basepri": 48,
+      "primask": 0,
+      "current_state_container": "0x2006a848",
+      "current_event_container": "0x0",
+      "next_unblock_tick": 4294967295,
+      "suspend_count": 0,
+      "ipsr": 0,
+      "state_digest": "f413aea7ec1e9ea7fdefd604e1ea7d8ae379bbbf4cf63ecaf605f5cbffa64821",
+      "mutex_holder": 0,
+      "mutexes_held": 1,
+      "task_priority": 47
+    },
+    {
+      "inputs": {
+        "kind": "send",
+        "capacity": 1,
+        "size": 0,
+        "base": 12,
+        "held": 2,
+        "holder_null": false,
+        "waiter": null
+      },
+      "return_value": 1,
+      "boundary": [],
+      "queue_count": 1,
+      "woken": 0,
+      "wake_calls": [],
+      "icsr_writes": [],
+      "extra_payload_writes": [],
+      "rx_lock": -1,
+      "tx_lock": -1,
+      "basepri": 0,
+      "primask": 0,
+      "current_state_container": "0x2006a848",
+      "current_event_container": "0x0",
+      "next_unblock_tick": 4294967295,
+      "suspend_count": 0,
+      "ipsr": 0,
+      "state_digest": "16442898f58ece970f548b62803e6a4958c97cfb9dc60b5105c4562f2102ac9b",
+      "mutex_holder": 0,
+      "mutexes_held": 1,
+      "task_priority": 47
+    },
+    {
+      "inputs": {
+        "kind": "send",
+        "capacity": 1,
+        "size": 0,
+        "base": 12,
+        "held": 2,
+        "holder_null": false,
+        "waiter": 46
+      },
+      "return_value": 1,
+      "boundary": [],
+      "queue_count": 1,
+      "woken": 0,
+      "wake_calls": [
+        536895524
+      ],
+      "icsr_writes": [],
+      "extra_payload_writes": [],
+      "rx_lock": -1,
+      "tx_lock": -1,
+      "basepri": 0,
+      "primask": 0,
+      "current_state_container": "0x2006a848",
+      "current_event_container": "0x0",
+      "next_unblock_tick": 4294967295,
+      "suspend_count": 0,
+      "ipsr": 0,
+      "state_digest": "ddb9e059da062223426f4c1f75e347e5fb34c3b557d0709e9f47fcb54ecf967f",
+      "mutex_holder": 0,
+      "mutexes_held": 1,
+      "task_priority": 47
+    },
+    {
+      "inputs": {
+        "kind": "send",
+        "capacity": 1,
+        "size": 0,
+        "base": 12,
+        "held": 2,
+        "holder_null": false,
+        "waiter": 54
+      },
+      "return_value": null,
+      "boundary": [
+        {
+          "kind": "before_port_yield",
+          "queue_count": 1
+        }
+      ],
+      "queue_count": 1,
+      "woken": 0,
+      "wake_calls": [
+        536895524
+      ],
+      "icsr_writes": [],
+      "extra_payload_writes": [],
+      "rx_lock": -1,
+      "tx_lock": -1,
+      "basepri": 48,
+      "primask": 0,
+      "current_state_container": "0x2006a848",
+      "current_event_container": "0x0",
+      "next_unblock_tick": 4294967295,
+      "suspend_count": 0,
+      "ipsr": 0,
+      "state_digest": "f413aea7ec1e9ea7fdefd604e1ea7d8ae379bbbf4cf63ecaf605f5cbffa64821",
+      "mutex_holder": 0,
+      "mutexes_held": 1,
+      "task_priority": 47
+    },
+    {
+      "inputs": {
+        "kind": "send",
+        "capacity": 1,
+        "size": 0,
+        "base": 12,
+        "held": 2,
+        "holder_null": true,
+        "waiter": null
+      },
+      "return_value": 1,
+      "boundary": [],
+      "queue_count": 1,
+      "woken": 0,
+      "wake_calls": [],
+      "icsr_writes": [],
+      "extra_payload_writes": [],
+      "rx_lock": -1,
+      "tx_lock": -1,
+      "basepri": 0,
+      "primask": 0,
+      "current_state_container": "0x2006a848",
+      "current_event_container": "0x0",
+      "next_unblock_tick": 4294967295,
+      "suspend_count": 0,
+      "ipsr": 0,
+      "state_digest": "d88200219e7618bf4b39b93e8e99ae940a5872ff81652d46238dc9b733cbf819",
+      "mutex_holder": 0,
+      "mutexes_held": 2,
+      "task_priority": 47
+    },
+    {
+      "inputs": {
+        "kind": "send",
+        "capacity": 1,
+        "size": 0,
+        "base": 12,
+        "held": 2,
+        "holder_null": true,
+        "waiter": 46
+      },
+      "return_value": 1,
+      "boundary": [],
+      "queue_count": 1,
+      "woken": 0,
+      "wake_calls": [
+        536895524
+      ],
+      "icsr_writes": [],
+      "extra_payload_writes": [],
+      "rx_lock": -1,
+      "tx_lock": -1,
+      "basepri": 0,
+      "primask": 0,
+      "current_state_container": "0x2006a848",
+      "current_event_container": "0x0",
+      "next_unblock_tick": 4294967295,
+      "suspend_count": 0,
+      "ipsr": 0,
+      "state_digest": "bb2a89a5ee199cceeb0e70ebbb31895657362b70c3cb66fd92b77e60b85767b8",
+      "mutex_holder": 0,
+      "mutexes_held": 2,
+      "task_priority": 47
+    },
+    {
+      "inputs": {
+        "kind": "send",
+        "capacity": 1,
+        "size": 0,
+        "base": 12,
+        "held": 2,
+        "holder_null": true,
+        "waiter": 54
+      },
+      "return_value": null,
+      "boundary": [
+        {
+          "kind": "before_port_yield",
+          "queue_count": 1
+        }
+      ],
+      "queue_count": 1,
+      "woken": 0,
+      "wake_calls": [
+        536895524
+      ],
+      "icsr_writes": [],
+      "extra_payload_writes": [],
+      "rx_lock": -1,
+      "tx_lock": -1,
+      "basepri": 48,
+      "primask": 0,
+      "current_state_container": "0x2006a848",
+      "current_event_container": "0x0",
+      "next_unblock_tick": 4294967295,
+      "suspend_count": 0,
+      "ipsr": 0,
+      "state_digest": "7eb46f4e938736020e2cd4fb2372f787b8a9f19d31c93be7ab0736f50af724a1",
+      "mutex_holder": 0,
+      "mutexes_held": 2,
+      "task_priority": 47
+    },
+    {
+      "inputs": {
+        "kind": "send",
+        "capacity": 1,
+        "size": 0,
+        "base": 47,
+        "held": 1,
+        "holder_null": false,
+        "waiter": null
+      },
+      "return_value": 1,
+      "boundary": [],
+      "queue_count": 1,
+      "woken": 0,
+      "wake_calls": [],
+      "icsr_writes": [],
+      "extra_payload_writes": [],
+      "rx_lock": -1,
+      "tx_lock": -1,
+      "basepri": 0,
+      "primask": 0,
+      "current_state_container": "0x2006a848",
+      "current_event_container": "0x0",
+      "next_unblock_tick": 4294967295,
+      "suspend_count": 0,
+      "ipsr": 0,
+      "state_digest": "dc1b68a12a5816f0bb8668bcfbbaee3c6b2408f52d5e80812ed9345114224830",
+      "mutex_holder": 0,
+      "mutexes_held": 0,
+      "task_priority": 47
+    },
+    {
+      "inputs": {
+        "kind": "send",
+        "capacity": 1,
+        "size": 0,
+        "base": 47,
+        "held": 1,
+        "holder_null": false,
+        "waiter": 46
+      },
+      "return_value": 1,
+      "boundary": [],
+      "queue_count": 1,
+      "woken": 0,
+      "wake_calls": [
+        536895524
+      ],
+      "icsr_writes": [],
+      "extra_payload_writes": [],
+      "rx_lock": -1,
+      "tx_lock": -1,
+      "basepri": 0,
+      "primask": 0,
+      "current_state_container": "0x2006a848",
+      "current_event_container": "0x0",
+      "next_unblock_tick": 4294967295,
+      "suspend_count": 0,
+      "ipsr": 0,
+      "state_digest": "99475d8658915eacf168b629146342a4383c397534a512dd1915260f6ddba0a7",
+      "mutex_holder": 0,
+      "mutexes_held": 0,
+      "task_priority": 47
+    },
+    {
+      "inputs": {
+        "kind": "send",
+        "capacity": 1,
+        "size": 0,
+        "base": 47,
+        "held": 1,
+        "holder_null": false,
+        "waiter": 54
+      },
+      "return_value": null,
+      "boundary": [
+        {
+          "kind": "before_port_yield",
+          "queue_count": 1
+        }
+      ],
+      "queue_count": 1,
+      "woken": 0,
+      "wake_calls": [
+        536895524
+      ],
+      "icsr_writes": [],
+      "extra_payload_writes": [],
+      "rx_lock": -1,
+      "tx_lock": -1,
+      "basepri": 48,
+      "primask": 0,
+      "current_state_container": "0x2006a848",
+      "current_event_container": "0x0",
+      "next_unblock_tick": 4294967295,
+      "suspend_count": 0,
+      "ipsr": 0,
+      "state_digest": "f1bbb8275c52bb3b1982f6b58d532cdfb31068265ac805afb60eca757267d52a",
+      "mutex_holder": 0,
+      "mutexes_held": 0,
+      "task_priority": 47
+    },
+    {
+      "inputs": {
+        "kind": "send",
+        "capacity": 1,
+        "size": 0,
+        "base": 47,
+        "held": 1,
+        "holder_null": true,
+        "waiter": null
+      },
+      "return_value": 1,
+      "boundary": [],
+      "queue_count": 1,
+      "woken": 0,
+      "wake_calls": [],
+      "icsr_writes": [],
+      "extra_payload_writes": [],
+      "rx_lock": -1,
+      "tx_lock": -1,
+      "basepri": 0,
+      "primask": 0,
+      "current_state_container": "0x2006a848",
+      "current_event_container": "0x0",
+      "next_unblock_tick": 4294967295,
+      "suspend_count": 0,
+      "ipsr": 0,
+      "state_digest": "0f63f33297d0680d807f6564b8c0a1b47e7231149f148ff9f6beadbbbd21a84f",
+      "mutex_holder": 0,
+      "mutexes_held": 1,
+      "task_priority": 47
+    },
+    {
+      "inputs": {
+        "kind": "send",
+        "capacity": 1,
+        "size": 0,
+        "base": 47,
+        "held": 1,
+        "holder_null": true,
+        "waiter": 46
+      },
+      "return_value": 1,
+      "boundary": [],
+      "queue_count": 1,
+      "woken": 0,
+      "wake_calls": [
+        536895524
+      ],
+      "icsr_writes": [],
+      "extra_payload_writes": [],
+      "rx_lock": -1,
+      "tx_lock": -1,
+      "basepri": 0,
+      "primask": 0,
+      "current_state_container": "0x2006a848",
+      "current_event_container": "0x0",
+      "next_unblock_tick": 4294967295,
+      "suspend_count": 0,
+      "ipsr": 0,
+      "state_digest": "66b1953424f677ce42af6d1c598e41ca7e59346d6dea7943818b55d5108af993",
+      "mutex_holder": 0,
+      "mutexes_held": 1,
+      "task_priority": 47
+    },
+    {
+      "inputs": {
+        "kind": "send",
+        "capacity": 1,
+        "size": 0,
+        "base": 47,
+        "held": 1,
+        "holder_null": true,
+        "waiter": 54
+      },
+      "return_value": null,
+      "boundary": [
+        {
+          "kind": "before_port_yield",
+          "queue_count": 1
+        }
+      ],
+      "queue_count": 1,
+      "woken": 0,
+      "wake_calls": [
+        536895524
+      ],
+      "icsr_writes": [],
+      "extra_payload_writes": [],
+      "rx_lock": -1,
+      "tx_lock": -1,
+      "basepri": 48,
+      "primask": 0,
+      "current_state_container": "0x2006a848",
+      "current_event_container": "0x0",
+      "next_unblock_tick": 4294967295,
+      "suspend_count": 0,
+      "ipsr": 0,
+      "state_digest": "dd30a9c2998effe1b515513cc1acd89a4b8daab49ce9ddb91611611cf35c4133",
+      "mutex_holder": 0,
+      "mutexes_held": 1,
+      "task_priority": 47
+    },
+    {
+      "inputs": {
+        "kind": "send",
+        "capacity": 1,
+        "size": 0,
+        "base": 47,
+        "held": 2,
+        "holder_null": false,
+        "waiter": null
+      },
+      "return_value": 1,
+      "boundary": [],
+      "queue_count": 1,
+      "woken": 0,
+      "wake_calls": [],
+      "icsr_writes": [],
+      "extra_payload_writes": [],
+      "rx_lock": -1,
+      "tx_lock": -1,
+      "basepri": 0,
+      "primask": 0,
+      "current_state_container": "0x2006a848",
+      "current_event_container": "0x0",
+      "next_unblock_tick": 4294967295,
+      "suspend_count": 0,
+      "ipsr": 0,
+      "state_digest": "0f63f33297d0680d807f6564b8c0a1b47e7231149f148ff9f6beadbbbd21a84f",
+      "mutex_holder": 0,
+      "mutexes_held": 1,
+      "task_priority": 47
+    },
+    {
+      "inputs": {
+        "kind": "send",
+        "capacity": 1,
+        "size": 0,
+        "base": 47,
+        "held": 2,
+        "holder_null": false,
+        "waiter": 46
+      },
+      "return_value": 1,
+      "boundary": [],
+      "queue_count": 1,
+      "woken": 0,
+      "wake_calls": [
+        536895524
+      ],
+      "icsr_writes": [],
+      "extra_payload_writes": [],
+      "rx_lock": -1,
+      "tx_lock": -1,
+      "basepri": 0,
+      "primask": 0,
+      "current_state_container": "0x2006a848",
+      "current_event_container": "0x0",
+      "next_unblock_tick": 4294967295,
+      "suspend_count": 0,
+      "ipsr": 0,
+      "state_digest": "66b1953424f677ce42af6d1c598e41ca7e59346d6dea7943818b55d5108af993",
+      "mutex_holder": 0,
+      "mutexes_held": 1,
+      "task_priority": 47
+    },
+    {
+      "inputs": {
+        "kind": "send",
+        "capacity": 1,
+        "size": 0,
+        "base": 47,
+        "held": 2,
+        "holder_null": false,
+        "waiter": 54
+      },
+      "return_value": null,
+      "boundary": [
+        {
+          "kind": "before_port_yield",
+          "queue_count": 1
+        }
+      ],
+      "queue_count": 1,
+      "woken": 0,
+      "wake_calls": [
+        536895524
+      ],
+      "icsr_writes": [],
+      "extra_payload_writes": [],
+      "rx_lock": -1,
+      "tx_lock": -1,
+      "basepri": 48,
+      "primask": 0,
+      "current_state_container": "0x2006a848",
+      "current_event_container": "0x0",
+      "next_unblock_tick": 4294967295,
+      "suspend_count": 0,
+      "ipsr": 0,
+      "state_digest": "dd30a9c2998effe1b515513cc1acd89a4b8daab49ce9ddb91611611cf35c4133",
+      "mutex_holder": 0,
+      "mutexes_held": 1,
+      "task_priority": 47
+    },
+    {
+      "inputs": {
+        "kind": "send",
+        "capacity": 1,
+        "size": 0,
+        "base": 47,
+        "held": 2,
+        "holder_null": true,
+        "waiter": null
+      },
+      "return_value": 1,
+      "boundary": [],
+      "queue_count": 1,
+      "woken": 0,
+      "wake_calls": [],
+      "icsr_writes": [],
+      "extra_payload_writes": [],
+      "rx_lock": -1,
+      "tx_lock": -1,
+      "basepri": 0,
+      "primask": 0,
+      "current_state_container": "0x2006a848",
+      "current_event_container": "0x0",
+      "next_unblock_tick": 4294967295,
+      "suspend_count": 0,
+      "ipsr": 0,
+      "state_digest": "1d4833d84ccb41307bb14da29eb9589f1edd36eb1b2162229f8d6997f6a86f96",
+      "mutex_holder": 0,
+      "mutexes_held": 2,
+      "task_priority": 47
+    },
+    {
+      "inputs": {
+        "kind": "send",
+        "capacity": 1,
+        "size": 0,
+        "base": 47,
+        "held": 2,
+        "holder_null": true,
+        "waiter": 46
+      },
+      "return_value": 1,
+      "boundary": [],
+      "queue_count": 1,
+      "woken": 0,
+      "wake_calls": [
+        536895524
+      ],
+      "icsr_writes": [],
+      "extra_payload_writes": [],
+      "rx_lock": -1,
+      "tx_lock": -1,
+      "basepri": 0,
+      "primask": 0,
+      "current_state_container": "0x2006a848",
+      "current_event_container": "0x0",
+      "next_unblock_tick": 4294967295,
+      "suspend_count": 0,
+      "ipsr": 0,
+      "state_digest": "e8731f493f36d592e3f850d5000e1c7c4a1c8310e0c140562bbe7dc695688576",
+      "mutex_holder": 0,
+      "mutexes_held": 2,
+      "task_priority": 47
+    },
+    {
+      "inputs": {
+        "kind": "send",
+        "capacity": 1,
+        "size": 0,
+        "base": 47,
+        "held": 2,
+        "holder_null": true,
+        "waiter": 54
+      },
+      "return_value": null,
+      "boundary": [
+        {
+          "kind": "before_port_yield",
+          "queue_count": 1
+        }
+      ],
+      "queue_count": 1,
+      "woken": 0,
+      "wake_calls": [
+        536895524
+      ],
+      "icsr_writes": [],
+      "extra_payload_writes": [],
+      "rx_lock": -1,
+      "tx_lock": -1,
+      "basepri": 48,
+      "primask": 0,
+      "current_state_container": "0x2006a848",
+      "current_event_container": "0x0",
+      "next_unblock_tick": 4294967295,
+      "suspend_count": 0,
+      "ipsr": 0,
+      "state_digest": "df3cdececef9a68537e8254f90f7889ff3a3663a8825993b9ee415fff5353411",
+      "mutex_holder": 0,
+      "mutexes_held": 2,
+      "task_priority": 47
+    }
+  ],
+  "limits": [
+    "Mutex-give chain executes native disinherit/list/critical/wake providers, stops before actual port yield.",
+    "Synthetic coherent held count/base priority and waiters; no exception return or full lifecycle proof."
+  ]
+}

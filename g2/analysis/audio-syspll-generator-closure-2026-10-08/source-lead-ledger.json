@@ -1,0 +1,90 @@
+{
+  "scope": "Specific remaining clock/math dependencies plus retained broader source leads; not an exhaustive image ledger.",
+  "newly_closed": [
+    "SYSPLL GCD",
+    "integer/fraction feasibility",
+    "base config generation",
+    "min-VCO/postdivider lookup",
+    "postdivider weighted selection"
+  ],
+  "remaining": {
+    "low_speed_and_dispatch": {
+      "functions": {
+        "LFRC_request": {
+          "start": "0x4c3bfc",
+          "end_exclusive": "0x4c3c2e",
+          "sha256": "455972840f9f71a921b76bf96224b80608875e5915c9ce88a7a4370ae74011b3"
+        },
+        "LFRC_release": {
+          "start": "0x4c3c2e",
+          "end_exclusive": "0x4c3c60",
+          "sha256": "ee6863789b925a70f3a2da3211c4c174862ca117e2fca460d868be2365e6b946"
+        },
+        "XTAL_LS_request": {
+          "start": "0x4c3c60",
+          "end_exclusive": "0x4c3ca2",
+          "sha256": "e87bbc3b51aaa9bbdb5e95fcd540d3ffdc927937074da7318a8de95b83ce0415"
+        },
+        "XTAL_LS_release": {
+          "start": "0x4c3ca2",
+          "end_exclusive": "0x4c3cd4",
+          "sha256": "df2d54c7f2b54c24060b298130947496dc40803e8c4b9fac98360a6417f539a7"
+        },
+        "public_request": {
+          "start": "0x4c44bc",
+          "end_exclusive": "0x4c4530",
+          "sha256": "53cfb358989e68ae979d2814964a3e779ae0f0eba76836f99d409393d0e78d51"
+        },
+        "public_release": {
+          "start": "0x4c4530",
+          "end_exclusive": "0x4c45a4",
+          "sha256": "6a131868a276083764d4714178857124ccb4209a5f3e7552d874aba7f7c1a54e"
+        },
+        "delay": {
+          "start": "0x4807a0",
+          "end_exclusive": "0x4807f0",
+          "sha256": "f95193c502160b469e1579e13223f1cdf488a2d8fab9ec07f686c9101fbed753"
+        },
+        "wait4": {
+          "start": "0x4807fc",
+          "end_exclusive": "0x480826",
+          "sha256": "6420c4ecc4fd66dab58e4de017013ce982e42299b5e4557d15a59007ea2a0ad2"
+        },
+        "wait5": {
+          "start": "0x480826",
+          "end_exclusive": "0x48086a",
+          "sha256": "c6bf044dbb8f4a358cc93e10eff0b2ec7065b47f8ff08cde9f912d749fd42ef9"
+        }
+      },
+      "source": "am_hal_clkmgr.c and mcu/am_hal_utils.c",
+      "priority": "Next bounded batch: six LFRC/XTAL-LS/public ownership dispatcher functions; then delay/status waits.",
+      "new_static_fact": "Stock LFRC and XTAL-LS request/release change only ownership bits; no optional XTAL-LS hardware control code. Public dispatch narrows clock/user to bytes and rejects user>=57 or clock>6 with6."
+    },
+    "math_libraries": {
+      "entries": [
+        "0x43A5A0",
+        "0x577C3C",
+        "0x577D08",
+        "0x577D40"
+      ],
+      "status": "All execute authenticated original bytes in current numerical/composition tests. Runtime core provenance/reconstruction remains open; SDK math calls are not their implementation source."
+    },
+    "oscillator": {
+      "entry": "0x4809C4",
+      "status": "Native source already exists in info_memory_offline/oscillator.c, but current clock combined ELF still binds original. Integrate only after closing native public dispatch to retain real ownership behavior."
+    },
+    "earlier_leads": [
+      "Touch application callbacks/reentrant I2C ownership with available pinned PDL source",
+      "Selected case HAL peripheral paths",
+      "Actual timer-daemon command-vs-expiry loop/tick processing",
+      "Dirty file-close media state requires real mounted image/cache inputs"
+    ],
+    "external_boundaries": [
+      "Physical oscillator/PLL settling and actual frequency",
+      "Live IRQ/scheduler ordering and exception behavior",
+      "Resident ROM/factory data absent from locked OTA",
+      "Full M55 execution beyond scalar M33-compatible profile"
+    ]
+  },
+  "source_exhausted": false
+}

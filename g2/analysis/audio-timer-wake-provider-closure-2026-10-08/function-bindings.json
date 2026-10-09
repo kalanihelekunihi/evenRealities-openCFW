@@ -1,0 +1,61 @@
+{
+  "wrapped_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "raw_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "load_address": "0x438000",
+  "functions": {
+    "event_unblock": {
+      "start": "0x455370",
+      "end_exclusive": "0x455466",
+      "sha256": "1a5d4850f0799e97548f23ee1617fc1de362f8d2a674301baa6facd579d13de4",
+      "native_symbol": "opencfw_ready_remove_event_list"
+    },
+    "queue_unlock": {
+      "start": "0x441f88",
+      "end_exclusive": "0x441ff6",
+      "sha256": "25eb09eeb3f819a998a8d56ebac062fb54fcc5140af8445c5d39c514187b9f7d",
+      "native_symbol": "audio_public_queue_unlock"
+    },
+    "sorted_insert": {
+      "start": "0x4560b2",
+      "end_exclusive": "0x4560e8",
+      "sha256": "10c1fa85d530a003183c42d2fc11b80386669d011ce19f7a9c2a6d32516d4c59",
+      "native_symbol": "audio_public_list_insert"
+    },
+    "list_remove": {
+      "start": "0x4560e8",
+      "end_exclusive": "0x45610e",
+      "sha256": "e1ca0b525effd60568d00101c08010374cebfd3c80ee6ade4fec4da54bcb8794",
+      "native_symbol": "uxListRemove"
+    },
+    "mask_set": {
+      "start": "0x5fa0a4",
+      "end_exclusive": "0x5fa0ba",
+      "sha256": "f6bd0708e653c8e8880e33e298f9dc8ede1305c9386ea4ca5ff554d4022dc323",
+      "native_symbol": "audio_port_mask_set"
+    },
+    "mask_restore": {
+      "start": "0x5fa0ba",
+      "end_exclusive": "0x5fa0c0",
+      "sha256": "0dd88846aaff316ddd5a5281ff7c4df3bdcce6a73b2969b73afb587e2d6490d4",
+      "native_symbol": "audio_port_mask_restore"
+    },
+    "critical_enter": {
+      "start": "0x4420d0",
+      "end_exclusive": "0x4420e8",
+      "sha256": "5809638c22f928d2b32cd21cc9b92a292fad24cd8b8008de4ad92b9faeaba0d4",
+      "native_symbol": "stock_enter_critical"
+    },
+    "critical_exit": {
+      "start": "0x4420e8",
+      "end_exclusive": "0x442114",
+      "sha256": "bfd3ddb76c61ad634a3f58ed203260da3834895b646c9dffada546f9dc9d2a31",
+      "native_symbol": "stock_exit_critical"
+    },
+    "missed_yield": {
+      "start": "0x4555e6",
+      "end_exclusive": "0x4555f0",
+      "sha256": "8cada1af8ad4973f2ad647d45c8a0ac9c56fdf2d8b270607844b7940eb7d5d2d",
+      "native_symbol": "stock_missed_yield"
+    }
+  }
+}

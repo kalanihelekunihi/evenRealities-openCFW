@@ -1,0 +1,3566 @@
+{
+  "status": "PASS",
+  "cases": 24,
+  "validation": "original-instruction sequence assertions, no native comparison",
+  "input_raw_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "fixture": "Synthetic XTAL board frequency24MHz, mode0, clean ownership, inactive controller; optional second user0",
+  "comparisons": [
+    {
+      "drive": 1,
+      "other_user": 0,
+      "initial_primask": 0,
+      "statuses": [
+        6,
+        6,
+        0
+      ],
+      "before": {
+        "users_low": 0,
+        "users_high": 0,
+        "control": 0,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "after": {
+        "users_low": 0,
+        "users_high": 1048576,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "repeat": {
+        "users_low": 0,
+        "users_high": 1048576,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "released": {
+        "users_low": 0,
+        "users_high": 0,
+        "control": 2,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "trace": [
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            2,
+            0,
+            1073873196
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            1
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            6,
+            0,
+            150
+          ]
+        },
+        {
+          "address": "0x4c4530",
+          "args": [
+            2,
+            52,
+            150
+          ]
+        },
+        {
+          "address": "0x4c3e9a",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            4,
+            537386968,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "drive": 1,
+      "other_user": 0,
+      "initial_primask": 1,
+      "statuses": [
+        6,
+        6,
+        0
+      ],
+      "before": {
+        "users_low": 0,
+        "users_high": 0,
+        "control": 0,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "after": {
+        "users_low": 0,
+        "users_high": 1048576,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "repeat": {
+        "users_low": 0,
+        "users_high": 1048576,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "released": {
+        "users_low": 0,
+        "users_high": 0,
+        "control": 2,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "trace": [
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            2,
+            0,
+            1073873196
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            1
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            6,
+            0,
+            150
+          ]
+        },
+        {
+          "address": "0x4c4530",
+          "args": [
+            2,
+            52,
+            150
+          ]
+        },
+        {
+          "address": "0x4c3e9a",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            4,
+            537386968,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "drive": 1,
+      "other_user": 1,
+      "initial_primask": 0,
+      "statuses": [
+        6,
+        6,
+        0
+      ],
+      "before": {
+        "users_low": 1,
+        "users_high": 0,
+        "control": 0,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "after": {
+        "users_low": 1,
+        "users_high": 1048576,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "repeat": {
+        "users_low": 1,
+        "users_high": 1048576,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "released": {
+        "users_low": 1,
+        "users_high": 0,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "trace": [
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            2,
+            0,
+            1073873196
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            1
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            6,
+            0,
+            150
+          ]
+        },
+        {
+          "address": "0x4c4530",
+          "args": [
+            2,
+            52,
+            150
+          ]
+        },
+        {
+          "address": "0x4c3e9a",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "drive": 1,
+      "other_user": 1,
+      "initial_primask": 1,
+      "statuses": [
+        6,
+        6,
+        0
+      ],
+      "before": {
+        "users_low": 1,
+        "users_high": 0,
+        "control": 0,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "after": {
+        "users_low": 1,
+        "users_high": 1048576,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "repeat": {
+        "users_low": 1,
+        "users_high": 1048576,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "released": {
+        "users_low": 1,
+        "users_high": 0,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "trace": [
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            2,
+            0,
+            1073873196
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            1
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            6,
+            0,
+            150
+          ]
+        },
+        {
+          "address": "0x4c4530",
+          "args": [
+            2,
+            52,
+            150
+          ]
+        },
+        {
+          "address": "0x4c3e9a",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "drive": 2,
+      "other_user": 0,
+      "initial_primask": 0,
+      "statuses": [
+        6,
+        6,
+        0
+      ],
+      "before": {
+        "users_low": 0,
+        "users_high": 0,
+        "control": 0,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "after": {
+        "users_low": 0,
+        "users_high": 1048576,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "repeat": {
+        "users_low": 0,
+        "users_high": 1048576,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "released": {
+        "users_low": 0,
+        "users_high": 0,
+        "control": 2,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "trace": [
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            2,
+            0,
+            1073873196
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            1
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            6,
+            0,
+            150
+          ]
+        },
+        {
+          "address": "0x4c4530",
+          "args": [
+            2,
+            52,
+            150
+          ]
+        },
+        {
+          "address": "0x4c3e9a",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            4,
+            537386968,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "drive": 2,
+      "other_user": 0,
+      "initial_primask": 1,
+      "statuses": [
+        6,
+        6,
+        0
+      ],
+      "before": {
+        "users_low": 0,
+        "users_high": 0,
+        "control": 0,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "after": {
+        "users_low": 0,
+        "users_high": 1048576,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "repeat": {
+        "users_low": 0,
+        "users_high": 1048576,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "released": {
+        "users_low": 0,
+        "users_high": 0,
+        "control": 2,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "trace": [
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            2,
+            0,
+            1073873196
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            1
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            6,
+            0,
+            150
+          ]
+        },
+        {
+          "address": "0x4c4530",
+          "args": [
+            2,
+            52,
+            150
+          ]
+        },
+        {
+          "address": "0x4c3e9a",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            4,
+            537386968,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "drive": 2,
+      "other_user": 1,
+      "initial_primask": 0,
+      "statuses": [
+        6,
+        6,
+        0
+      ],
+      "before": {
+        "users_low": 1,
+        "users_high": 0,
+        "control": 0,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "after": {
+        "users_low": 1,
+        "users_high": 1048576,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "repeat": {
+        "users_low": 1,
+        "users_high": 1048576,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "released": {
+        "users_low": 1,
+        "users_high": 0,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "trace": [
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            2,
+            0,
+            1073873196
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            1
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            6,
+            0,
+            150
+          ]
+        },
+        {
+          "address": "0x4c4530",
+          "args": [
+            2,
+            52,
+            150
+          ]
+        },
+        {
+          "address": "0x4c3e9a",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "drive": 2,
+      "other_user": 1,
+      "initial_primask": 1,
+      "statuses": [
+        6,
+        6,
+        0
+      ],
+      "before": {
+        "users_low": 1,
+        "users_high": 0,
+        "control": 0,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "after": {
+        "users_low": 1,
+        "users_high": 1048576,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "repeat": {
+        "users_low": 1,
+        "users_high": 1048576,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "released": {
+        "users_low": 1,
+        "users_high": 0,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "trace": [
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            2,
+            0,
+            1073873196
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            1
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            6,
+            0,
+            150
+          ]
+        },
+        {
+          "address": "0x4c4530",
+          "args": [
+            2,
+            52,
+            150
+          ]
+        },
+        {
+          "address": "0x4c3e9a",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "drive": 8,
+      "other_user": 0,
+      "initial_primask": 0,
+      "statuses": [
+        6,
+        6,
+        0
+      ],
+      "before": {
+        "users_low": 0,
+        "users_high": 0,
+        "control": 0,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "after": {
+        "users_low": 0,
+        "users_high": 1048576,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "repeat": {
+        "users_low": 0,
+        "users_high": 1048576,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "released": {
+        "users_low": 0,
+        "users_high": 0,
+        "control": 2,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "trace": [
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            2,
+            0,
+            1073873196
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            1
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            6,
+            0,
+            150
+          ]
+        },
+        {
+          "address": "0x4c4530",
+          "args": [
+            2,
+            52,
+            150
+          ]
+        },
+        {
+          "address": "0x4c3e9a",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            4,
+            537386968,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "drive": 8,
+      "other_user": 0,
+      "initial_primask": 1,
+      "statuses": [
+        6,
+        6,
+        0
+      ],
+      "before": {
+        "users_low": 0,
+        "users_high": 0,
+        "control": 0,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "after": {
+        "users_low": 0,
+        "users_high": 1048576,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "repeat": {
+        "users_low": 0,
+        "users_high": 1048576,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "released": {
+        "users_low": 0,
+        "users_high": 0,
+        "control": 2,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "trace": [
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            2,
+            0,
+            1073873196
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            1
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            6,
+            0,
+            150
+          ]
+        },
+        {
+          "address": "0x4c4530",
+          "args": [
+            2,
+            52,
+            150
+          ]
+        },
+        {
+          "address": "0x4c3e9a",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            4,
+            537386968,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "drive": 8,
+      "other_user": 1,
+      "initial_primask": 0,
+      "statuses": [
+        6,
+        6,
+        0
+      ],
+      "before": {
+        "users_low": 1,
+        "users_high": 0,
+        "control": 0,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "after": {
+        "users_low": 1,
+        "users_high": 1048576,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "repeat": {
+        "users_low": 1,
+        "users_high": 1048576,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "released": {
+        "users_low": 1,
+        "users_high": 0,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "trace": [
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            2,
+            0,
+            1073873196
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            1
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            6,
+            0,
+            150
+          ]
+        },
+        {
+          "address": "0x4c4530",
+          "args": [
+            2,
+            52,
+            150
+          ]
+        },
+        {
+          "address": "0x4c3e9a",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "drive": 8,
+      "other_user": 1,
+      "initial_primask": 1,
+      "statuses": [
+        6,
+        6,
+        0
+      ],
+      "before": {
+        "users_low": 1,
+        "users_high": 0,
+        "control": 0,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "after": {
+        "users_low": 1,
+        "users_high": 1048576,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "repeat": {
+        "users_low": 1,
+        "users_high": 1048576,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "released": {
+        "users_low": 1,
+        "users_high": 0,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "trace": [
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            2,
+            0,
+            1073873196
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            1
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            6,
+            0,
+            150
+          ]
+        },
+        {
+          "address": "0x4c4530",
+          "args": [
+            2,
+            52,
+            150
+          ]
+        },
+        {
+          "address": "0x4c3e9a",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "drive": 0,
+      "other_user": 0,
+      "initial_primask": 0,
+      "statuses": [
+        0,
+        0,
+        0
+      ],
+      "before": {
+        "users_low": 0,
+        "users_high": 0,
+        "control": 0,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "after": {
+        "users_low": 0,
+        "users_high": 1048576,
+        "control": 139,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "repeat": {
+        "users_low": 0,
+        "users_high": 1048576,
+        "control": 139,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "released": {
+        "users_low": 0,
+        "users_high": 0,
+        "control": 2,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "trace": [
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            2,
+            0,
+            1073873196
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            1
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            6,
+            0,
+            0
+          ]
+        },
+        {
+          "address": "0x4c4530",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3e9a",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            4,
+            537386968,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "drive": 0,
+      "other_user": 0,
+      "initial_primask": 1,
+      "statuses": [
+        0,
+        0,
+        0
+      ],
+      "before": {
+        "users_low": 0,
+        "users_high": 0,
+        "control": 0,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "after": {
+        "users_low": 0,
+        "users_high": 1048576,
+        "control": 139,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "repeat": {
+        "users_low": 0,
+        "users_high": 1048576,
+        "control": 139,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "released": {
+        "users_low": 0,
+        "users_high": 0,
+        "control": 2,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "trace": [
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            2,
+            0,
+            1073873196
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            1
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            6,
+            0,
+            0
+          ]
+        },
+        {
+          "address": "0x4c4530",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3e9a",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            4,
+            537386968,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "drive": 0,
+      "other_user": 1,
+      "initial_primask": 0,
+      "statuses": [
+        0,
+        0,
+        0
+      ],
+      "before": {
+        "users_low": 1,
+        "users_high": 0,
+        "control": 0,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "after": {
+        "users_low": 1,
+        "users_high": 1048576,
+        "control": 139,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "repeat": {
+        "users_low": 1,
+        "users_high": 1048576,
+        "control": 139,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "released": {
+        "users_low": 1,
+        "users_high": 0,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "trace": [
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            2,
+            0,
+            1073873196
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            1
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            6,
+            0,
+            0
+          ]
+        },
+        {
+          "address": "0x4c4530",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3e9a",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "drive": 0,
+      "other_user": 1,
+      "initial_primask": 1,
+      "statuses": [
+        0,
+        0,
+        0
+      ],
+      "before": {
+        "users_low": 1,
+        "users_high": 0,
+        "control": 0,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "after": {
+        "users_low": 1,
+        "users_high": 1048576,
+        "control": 139,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "repeat": {
+        "users_low": 1,
+        "users_high": 1048576,
+        "control": 139,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "released": {
+        "users_low": 1,
+        "users_high": 0,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "trace": [
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            2,
+            0,
+            1073873196
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            1
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            6,
+            0,
+            0
+          ]
+        },
+        {
+          "address": "0x4c4530",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3e9a",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "drive": 3,
+      "other_user": 0,
+      "initial_primask": 0,
+      "statuses": [
+        0,
+        0,
+        0
+      ],
+      "before": {
+        "users_low": 0,
+        "users_high": 0,
+        "control": 0,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "after": {
+        "users_low": 0,
+        "users_high": 1048576,
+        "control": 139,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "repeat": {
+        "users_low": 0,
+        "users_high": 1048576,
+        "control": 139,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "released": {
+        "users_low": 0,
+        "users_high": 0,
+        "control": 2,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "trace": [
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            2,
+            0,
+            1073873196
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            1
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            12288
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            12288
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            6,
+            0,
+            12288
+          ]
+        },
+        {
+          "address": "0x4c4530",
+          "args": [
+            2,
+            52,
+            12288
+          ]
+        },
+        {
+          "address": "0x4c3e9a",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            4,
+            537386968,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "drive": 3,
+      "other_user": 0,
+      "initial_primask": 1,
+      "statuses": [
+        0,
+        0,
+        0
+      ],
+      "before": {
+        "users_low": 0,
+        "users_high": 0,
+        "control": 0,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "after": {
+        "users_low": 0,
+        "users_high": 1048576,
+        "control": 139,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "repeat": {
+        "users_low": 0,
+        "users_high": 1048576,
+        "control": 139,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "released": {
+        "users_low": 0,
+        "users_high": 0,
+        "control": 2,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "trace": [
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            2,
+            0,
+            1073873196
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            1
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            12288
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            12288
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            6,
+            0,
+            12288
+          ]
+        },
+        {
+          "address": "0x4c4530",
+          "args": [
+            2,
+            52,
+            12288
+          ]
+        },
+        {
+          "address": "0x4c3e9a",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            4,
+            537386968,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "drive": 3,
+      "other_user": 1,
+      "initial_primask": 0,
+      "statuses": [
+        0,
+        0,
+        0
+      ],
+      "before": {
+        "users_low": 1,
+        "users_high": 0,
+        "control": 0,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "after": {
+        "users_low": 1,
+        "users_high": 1048576,
+        "control": 139,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "repeat": {
+        "users_low": 1,
+        "users_high": 1048576,
+        "control": 139,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "released": {
+        "users_low": 1,
+        "users_high": 0,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "trace": [
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            2,
+            0,
+            1073873196
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            1
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            12288
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            12288
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            6,
+            0,
+            12288
+          ]
+        },
+        {
+          "address": "0x4c4530",
+          "args": [
+            2,
+            52,
+            12288
+          ]
+        },
+        {
+          "address": "0x4c3e9a",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "drive": 3,
+      "other_user": 1,
+      "initial_primask": 1,
+      "statuses": [
+        0,
+        0,
+        0
+      ],
+      "before": {
+        "users_low": 1,
+        "users_high": 0,
+        "control": 0,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "after": {
+        "users_low": 1,
+        "users_high": 1048576,
+        "control": 139,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "repeat": {
+        "users_low": 1,
+        "users_high": 1048576,
+        "control": 139,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "released": {
+        "users_low": 1,
+        "users_high": 0,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "trace": [
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            2,
+            0,
+            1073873196
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            1
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            12288
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            12288
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            6,
+            0,
+            12288
+          ]
+        },
+        {
+          "address": "0x4c4530",
+          "args": [
+            2,
+            52,
+            12288
+          ]
+        },
+        {
+          "address": "0x4c3e9a",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "drive": 7,
+      "other_user": 0,
+      "initial_primask": 0,
+      "statuses": [
+        0,
+        0,
+        0
+      ],
+      "before": {
+        "users_low": 0,
+        "users_high": 0,
+        "control": 0,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "after": {
+        "users_low": 0,
+        "users_high": 1048576,
+        "control": 139,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "repeat": {
+        "users_low": 0,
+        "users_high": 1048576,
+        "control": 139,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "released": {
+        "users_low": 0,
+        "users_high": 0,
+        "control": 2,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "trace": [
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            2,
+            0,
+            1073873196
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            1
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            28672
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            28672
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            6,
+            0,
+            28672
+          ]
+        },
+        {
+          "address": "0x4c4530",
+          "args": [
+            2,
+            52,
+            28672
+          ]
+        },
+        {
+          "address": "0x4c3e9a",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            4,
+            537386968,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "drive": 7,
+      "other_user": 0,
+      "initial_primask": 1,
+      "statuses": [
+        0,
+        0,
+        0
+      ],
+      "before": {
+        "users_low": 0,
+        "users_high": 0,
+        "control": 0,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "after": {
+        "users_low": 0,
+        "users_high": 1048576,
+        "control": 139,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "repeat": {
+        "users_low": 0,
+        "users_high": 1048576,
+        "control": 139,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "released": {
+        "users_low": 0,
+        "users_high": 0,
+        "control": 2,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "trace": [
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            2,
+            0,
+            1073873196
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            1
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            28672
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            28672
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            6,
+            0,
+            28672
+          ]
+        },
+        {
+          "address": "0x4c4530",
+          "args": [
+            2,
+            52,
+            28672
+          ]
+        },
+        {
+          "address": "0x4c3e9a",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            4,
+            537386968,
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "drive": 7,
+      "other_user": 1,
+      "initial_primask": 0,
+      "statuses": [
+        0,
+        0,
+        0
+      ],
+      "before": {
+        "users_low": 1,
+        "users_high": 0,
+        "control": 0,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "after": {
+        "users_low": 1,
+        "users_high": 1048576,
+        "control": 139,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "repeat": {
+        "users_low": 1,
+        "users_high": 1048576,
+        "control": 139,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "released": {
+        "users_low": 1,
+        "users_high": 0,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 0
+      },
+      "trace": [
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            2,
+            0,
+            1073873196
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            1
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            28672
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            28672
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            6,
+            0,
+            28672
+          ]
+        },
+        {
+          "address": "0x4c4530",
+          "args": [
+            2,
+            52,
+            28672
+          ]
+        },
+        {
+          "address": "0x4c3e9a",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "drive": 7,
+      "other_user": 1,
+      "initial_primask": 1,
+      "statuses": [
+        0,
+        0,
+        0
+      ],
+      "before": {
+        "users_low": 1,
+        "users_high": 0,
+        "control": 0,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "after": {
+        "users_low": 1,
+        "users_high": 1048576,
+        "control": 139,
+        "stabilizing": "00",
+        "counter": 0,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "repeat": {
+        "users_low": 1,
+        "users_high": 1048576,
+        "control": 139,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "released": {
+        "users_low": 1,
+        "users_high": 0,
+        "control": 11,
+        "stabilizing": "00",
+        "counter": 537386956,
+        "retained": 1525678080,
+        "primask": 1
+      },
+      "trace": [
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            0
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            2,
+            0,
+            1073873196
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            1
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            5,
+            536895488,
+            28672
+          ]
+        },
+        {
+          "address": "0x4c44bc",
+          "args": [
+            2,
+            52,
+            28672
+          ]
+        },
+        {
+          "address": "0x4c3d9e",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4809c4",
+          "args": [
+            6,
+            0,
+            28672
+          ]
+        },
+        {
+          "address": "0x4c4530",
+          "args": [
+            2,
+            52,
+            28672
+          ]
+        },
+        {
+          "address": "0x4c3e9a",
+          "args": [
+            52,
+            52,
+            52
+          ]
+        },
+        {
+          "address": "0x4c37fe",
+          "args": [
+            2,
+            52,
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Software user bitmap retention is proved in these fixtures; naturally occurring hardware defect/leak is not.",
+    "Repeated requests use a bit, not a reference counter.",
+    "Counters/delay loop are original software execution; physical startup and ISR interleaving not modeled."
+  ]
+}

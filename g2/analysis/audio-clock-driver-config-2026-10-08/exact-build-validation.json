@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "elf_sha256": "8b7227684c467c5d3cc8e3ea2b97c61447cc270d254a1ec816eb1673f1617114",
+  "comparisons": {
+    "driver": 1407,
+    "config": 1144,
+    "manager": 816,
+    "reachability": 36
+  },
+  "total": 3403,
+  "sources_match": true,
+  "regression_overlap": "816 manager fixtures reuse prior test inputs but exercise newly native driver dependencies. Do not sum as distinct whole-firmware coverage."
+}

@@ -1,0 +1,41 @@
+{
+  "elf": "/tmp/opencfw-early-pcm-dispatch/init.elf",
+  "elf_sha256": "045ddd1212b7b57714832e28754199bc5246eaa9d754c23bbfd0fab468be3457",
+  "sources": {
+    "g2/components/audio/early_pcm_dispatch_offline/dispatch.c": "d6d2413f87f8ae2bea95d954322430bf2926d15b8f04fd5bfda545ba2db8f622",
+    "g2/components/audio/trim_initialization_offline/initialize.c": "c8a43c953db2945a1e9dd3f934f6517440e6cfc87cdeafd16f3c535dce00760b",
+    "g2/components/audio/early_pcm_gpu_offline/gpu.c": "9284898fdabafc805fa01aa0df5cbdf182abccebd288cb9e4309453f936a1014",
+    "g2/components/audio/early_pcm_pending_offline/pending.c": "501fba0cda017e9d513783ce62b90c170ee22d3c6d61c6e8d20a8f5763fd613f",
+    "g2/components/audio/clock_timing_offline/timing.c": "a261d47f16ae0136b6f8e0c37d10f6378590cf04f96e6f08a38275c47b0e0521",
+    "g2/components/audio/early_pcm_dispatch_offline/dispatch.h": "163fc5ed9cf841a6420bdcac5e14c6ae756f943490f1d40f5992c78c27ff927b",
+    "g2/components/audio/trim_initialization_offline/initialize.h": "94249afadb9f6a439d1b62a185b77aaea53793ec85157779c3a39a2d31455c3c",
+    "g2/components/audio/early_pcm_gpu_offline/gpu.h": "c0704b859beb77076d1fe06d65cd0072a1c65d48680dc2d7ddb042348771b00b",
+    "g2/components/audio/early_pcm_pending_offline/pending.h": "8e1a7aab1fa17371409d25c59d16a9cf600fdcf341ee27af664b2a71dc24a805",
+    "g2/components/audio/clock_timing_offline/timing.h": "7e706ca526b4c1a39cf0658e64ba88b2f6e535780aa73b92de43b6f41c6becb1"
+  },
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m33",
+    "-mfpu=fpv5-sp-d16",
+    "-mfloat-abi=hard",
+    "-mthumb",
+    "-Og",
+    "-ffp-contract=off",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib",
+    "-fshort-enums"
+  ],
+  "bindings": {
+    "stock_stimer_running": 4773409
+  },
+  "aliases": {
+    "stock_delay": "audio_delay_us",
+    "stock_save_irq": "audio_save_irq",
+    "stock_temperature_apply": "pcm_hardware_temperature",
+    "stock_buck_enable": "pcm_buck_control",
+    "stock_ton_update": "pcm_ton_dispatch"
+  },
+  "link_script": "stock_stimer_running = 0x48d621; stock_delay = audio_delay_us; stock_save_irq = audio_save_irq; stock_temperature_apply = pcm_hardware_temperature; stock_buck_enable = pcm_buck_control; stock_ton_update = pcm_ton_dispatch; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }"
+}

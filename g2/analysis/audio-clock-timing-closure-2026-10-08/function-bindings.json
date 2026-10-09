@@ -1,0 +1,42 @@
+{
+  "raw_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "functions": {
+    "save_irq": {
+      "start": "0x473940",
+      "end_exclusive": "0x473948",
+      "sha256": "720733fcf19a5635fcab0791fcc2b007294712bb27536443ff79490821c168cf",
+      "native_symbol": "audio_save_irq"
+    },
+    "delay_us": {
+      "start": "0x4807a0",
+      "end_exclusive": "0x4807f0",
+      "sha256": "f95193c502160b469e1579e13223f1cdf488a2d8fab9ec07f686c9101fbed753",
+      "native_symbol": "audio_delay_us"
+    },
+    "wait4": {
+      "start": "0x4807fc",
+      "end_exclusive": "0x480826",
+      "sha256": "6420c4ecc4fd66dab58e4de017013ce982e42299b5e4557d15a59007ea2a0ad2",
+      "native_symbol": "audio_wait4"
+    },
+    "wait5": {
+      "start": "0x480826",
+      "end_exclusive": "0x48086a",
+      "sha256": "c6bf044dbb8f4a358cc93e10eff0b2ec7065b47f8ff08cde9f912d749fd42ef9",
+      "native_symbol": "audio_wait5"
+    },
+    "delay_cycles": {
+      "start": "0x40",
+      "end_exclusive": "0x46",
+      "sha256": "c5c855e6f7cfc08b58f586a46b44b895bc33bda66242061d73357d9f93e76471",
+      "whole_decoded_24byte_record_sha256": "0676154418085b0630f2a20cc50fbbe3967dd2d9b7794fe1aad3f6af14f2fb83",
+      "native_symbol": "audio_delay_cycles",
+      "provenance": "Authenticated startup ITCM record; only first6 bytes are the spin body, not following copy utility/padding."
+    }
+  },
+  "scalar_literals": {
+    "0x4807F0": "float250",
+    "0x4807F4": "float96",
+    "0x4807F8": "0x40021000 performance-status word"
+  }
+}

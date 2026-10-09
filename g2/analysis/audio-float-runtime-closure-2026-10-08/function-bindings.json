@@ -1,0 +1,44 @@
+{
+  "raw_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "functions_and_support": {
+    "floorf": {
+      "start": "0x43a5a0",
+      "end_exclusive": "0x43a5dc",
+      "sha256": "5d42eb435cda5ee014a32df9264591054eb64f3cb0a3ac0b26a000c2f3f024a5"
+    },
+    "fmodf": {
+      "start": "0x577c3c",
+      "end_exclusive": "0x577d08",
+      "sha256": "c445d247baf5a92baeb058a975d31783641546225c32e154be824d98392f68ac"
+    },
+    "roundf": {
+      "start": "0x577d08",
+      "end_exclusive": "0x577d40",
+      "sha256": "8c3f55964179a0a0d6a2de6eb1332b546e43634f984207e382e825abe425155d"
+    },
+    "ceilf": {
+      "start": "0x577d40",
+      "end_exclusive": "0x577d7c",
+      "sha256": "60c7420498a0436382f13084ac7b7246521a05766cf028af280ece363bd8da81"
+    },
+    "domain_error_veneer": {
+      "start": "0x577c34",
+      "end_exclusive": "0x577c38",
+      "sha256": "c2e4959aa23a73c67d7e2bb28b1cfadadf884bd65f2fdcc28953cb79adf95687"
+    },
+    "domain_error_entry": {
+      "start": "0x439ca4",
+      "end_exclusive": "0x439cb2",
+      "sha256": "c8f0b7b877865ce0f05883d06ee187d144d96194bffe3bf1acdd06487da88d21"
+    },
+    "domain_error_common_store_return": {
+      "start": "0x439cbe",
+      "end_exclusive": "0x439cc4",
+      "sha256": "924a4a9a09a8527e33c9c6f998d91aebf10bffeaca290a1cf58d1dd2a5b25d2b"
+    }
+  },
+  "scalar_literals": {
+    "0x577C38": "0x439CA5 domain-error target, not code coverage",
+    "0x439CD4": "0x20074F14 errno address, not code coverage"
+  }
+}

@@ -1,0 +1,347 @@
+{
+  "status": "PASS",
+  "cases": 8,
+  "elf_sha256": "33ddc0d6b8e73517044607e913444cec692b43c011ffd9d3a6b48f034b686aad",
+  "comparisons": [
+    {
+      "inputs": {
+        "full_heap": true,
+        "full_failure": true,
+        "logging": false,
+        "heap_ops": [
+          [
+            "alloc",
+            0
+          ]
+        ]
+      },
+      "calls": [
+        {
+          "operation": [
+            "alloc",
+            0
+          ],
+          "value": null,
+          "free_bytes": 192504,
+          "minimum_free": 192504,
+          "alloc_count": 0,
+          "free_count": 0,
+          "boundary": [
+            {
+              "kind": "nonreturning_failure_spin"
+            }
+          ]
+        }
+      ],
+      "boundary": [
+        {
+          "kind": "nonreturning_failure_spin"
+        }
+      ],
+      "heap_state_sha256": "e844177083ac38f31f5af9ebcbed15ae3bb8249c440d5d25131fcceaf4496112",
+      "suspend": 0,
+      "critical_nesting": 0,
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "full_heap": true,
+        "full_failure": true,
+        "logging": true,
+        "heap_ops": [
+          [
+            "alloc",
+            0
+          ]
+        ]
+      },
+      "calls": [
+        {
+          "operation": [
+            "alloc",
+            0
+          ],
+          "value": null,
+          "free_bytes": 192504,
+          "minimum_free": 192504,
+          "alloc_count": 0,
+          "free_count": 0,
+          "boundary": [
+            {
+              "kind": "before_opaque_formatter",
+              "buffer": "0x2006b930",
+              "format": "0x758f70"
+            }
+          ]
+        }
+      ],
+      "boundary": [
+        {
+          "kind": "before_opaque_formatter",
+          "buffer": "0x2006b930",
+          "format": "0x758f70"
+        }
+      ],
+      "heap_state_sha256": "e844177083ac38f31f5af9ebcbed15ae3bb8249c440d5d25131fcceaf4496112",
+      "suspend": 0,
+      "critical_nesting": 0,
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "full_heap": true,
+        "full_failure": true,
+        "logging": false,
+        "heap_ops": [
+          [
+            "alloc",
+            192496
+          ]
+        ]
+      },
+      "calls": [
+        {
+          "operation": [
+            "alloc",
+            192496
+          ],
+          "value": null,
+          "free_bytes": 192504,
+          "minimum_free": 192504,
+          "alloc_count": 0,
+          "free_count": 0,
+          "boundary": [
+            {
+              "kind": "nonreturning_failure_spin"
+            }
+          ]
+        }
+      ],
+      "boundary": [
+        {
+          "kind": "nonreturning_failure_spin"
+        }
+      ],
+      "heap_state_sha256": "e844177083ac38f31f5af9ebcbed15ae3bb8249c440d5d25131fcceaf4496112",
+      "suspend": 0,
+      "critical_nesting": 0,
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "full_heap": true,
+        "full_failure": true,
+        "logging": true,
+        "heap_ops": [
+          [
+            "alloc",
+            192496
+          ]
+        ]
+      },
+      "calls": [
+        {
+          "operation": [
+            "alloc",
+            192496
+          ],
+          "value": null,
+          "free_bytes": 192504,
+          "minimum_free": 192504,
+          "alloc_count": 0,
+          "free_count": 0,
+          "boundary": [
+            {
+              "kind": "before_opaque_formatter",
+              "buffer": "0x2006b930",
+              "format": "0x758f70"
+            }
+          ]
+        }
+      ],
+      "boundary": [
+        {
+          "kind": "before_opaque_formatter",
+          "buffer": "0x2006b930",
+          "format": "0x758f70"
+        }
+      ],
+      "heap_state_sha256": "e844177083ac38f31f5af9ebcbed15ae3bb8249c440d5d25131fcceaf4496112",
+      "suspend": 0,
+      "critical_nesting": 0,
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "full_heap": true,
+        "full_failure": true,
+        "logging": false,
+        "heap_ops": [
+          [
+            "alloc",
+            2147483648
+          ]
+        ]
+      },
+      "calls": [
+        {
+          "operation": [
+            "alloc",
+            2147483648
+          ],
+          "value": null,
+          "free_bytes": 192504,
+          "minimum_free": 192504,
+          "alloc_count": 0,
+          "free_count": 0,
+          "boundary": [
+            {
+              "kind": "nonreturning_failure_spin"
+            }
+          ]
+        }
+      ],
+      "boundary": [
+        {
+          "kind": "nonreturning_failure_spin"
+        }
+      ],
+      "heap_state_sha256": "e844177083ac38f31f5af9ebcbed15ae3bb8249c440d5d25131fcceaf4496112",
+      "suspend": 0,
+      "critical_nesting": 0,
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "full_heap": true,
+        "full_failure": true,
+        "logging": true,
+        "heap_ops": [
+          [
+            "alloc",
+            2147483648
+          ]
+        ]
+      },
+      "calls": [
+        {
+          "operation": [
+            "alloc",
+            2147483648
+          ],
+          "value": null,
+          "free_bytes": 192504,
+          "minimum_free": 192504,
+          "alloc_count": 0,
+          "free_count": 0,
+          "boundary": [
+            {
+              "kind": "before_opaque_formatter",
+              "buffer": "0x2006b930",
+              "format": "0x758f70"
+            }
+          ]
+        }
+      ],
+      "boundary": [
+        {
+          "kind": "before_opaque_formatter",
+          "buffer": "0x2006b930",
+          "format": "0x758f70"
+        }
+      ],
+      "heap_state_sha256": "e844177083ac38f31f5af9ebcbed15ae3bb8249c440d5d25131fcceaf4496112",
+      "suspend": 0,
+      "critical_nesting": 0,
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "full_heap": true,
+        "full_failure": true,
+        "logging": false,
+        "heap_ops": [
+          [
+            "alloc",
+            4294967295
+          ]
+        ]
+      },
+      "calls": [
+        {
+          "operation": [
+            "alloc",
+            4294967295
+          ],
+          "value": null,
+          "free_bytes": 192504,
+          "minimum_free": 192504,
+          "alloc_count": 0,
+          "free_count": 0,
+          "boundary": [
+            {
+              "kind": "nonreturning_failure_spin"
+            }
+          ]
+        }
+      ],
+      "boundary": [
+        {
+          "kind": "nonreturning_failure_spin"
+        }
+      ],
+      "heap_state_sha256": "e844177083ac38f31f5af9ebcbed15ae3bb8249c440d5d25131fcceaf4496112",
+      "suspend": 0,
+      "critical_nesting": 0,
+      "basepri": 0
+    },
+    {
+      "inputs": {
+        "full_heap": true,
+        "full_failure": true,
+        "logging": true,
+        "heap_ops": [
+          [
+            "alloc",
+            4294967295
+          ]
+        ]
+      },
+      "calls": [
+        {
+          "operation": [
+            "alloc",
+            4294967295
+          ],
+          "value": null,
+          "free_bytes": 192504,
+          "minimum_free": 192504,
+          "alloc_count": 0,
+          "free_count": 0,
+          "boundary": [
+            {
+              "kind": "before_opaque_formatter",
+              "buffer": "0x2006b930",
+              "format": "0x758f70"
+            }
+          ]
+        }
+      ],
+      "boundary": [
+        {
+          "kind": "before_opaque_formatter",
+          "buffer": "0x2006b930",
+          "format": "0x758f70"
+        }
+      ],
+      "heap_state_sha256": "e844177083ac38f31f5af9ebcbed15ae3bb8249c440d5d25131fcceaf4496112",
+      "suspend": 0,
+      "critical_nesting": 0,
+      "basepri": 0
+    }
+  ],
+  "limits": [
+    "Actual heap failure callback and disabled logger execute to real self-loop; no allocation return fabricated.",
+    "Enabled logger stops before original opaque formatter; formatter and registered sink do not execute or receive fake results."
+  ]
+}

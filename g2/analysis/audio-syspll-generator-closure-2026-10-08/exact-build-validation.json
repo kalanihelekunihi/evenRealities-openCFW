@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "elf_sha256": "edf36ff82a704138e03b751c4a41a253e827c770c4e701cb6e2f753f26a32ebd",
+  "comparisons": {
+    "results.json": 2530,
+    "config-results.json": 1144,
+    "driver-results.json": 1407,
+    "manager-results.json": 816,
+    "reachability-results.json": 36
+  },
+  "total": 5933,
+  "direct_generator": 2530,
+  "reused_composition": 3403,
+  "sources_match": true,
+  "fixture_correction": "First configuration comparison failed only because copied call instrumentation recognized original0x539794 but not native audio_pll_postdiv. Hook extended to both entries; all1144 configuration and36 reachability cases rerun on unchanged ELF.",
+  "limits": "Author-recorded original/native comparisons; no independent review or whole-firmware coverage/equality claim."
+}

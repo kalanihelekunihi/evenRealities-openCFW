@@ -1,0 +1,11 @@
+{
+  "source": "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/mcu/am_hal_uart.c",
+  "source_sha256": "db0807cbd0ff5df110afde4a8e8561857e2e669529da290289919516ec12799a",
+  "unchanged_function_text": {
+    "am_hal_uart_power_control": "33c01b478574e8cc11f3bcd73e56d1f1e5a1066e93688ae5a8affde31353bb3f",
+    "am_hal_uart_interrupt_clear": "f671233f75f42cb35eba385879099863978cb28019267fc458d29ff4de276921",
+    "config_baudrate": "6dafc5e3e49365a7bbfe7a62db77d0c99aa4299faa6648cfb28f763e38ea9933",
+    "am_hal_uart_configure": "93dd83efc1a6482a9584a2f1ca0c29d59ac0f8122bf315ecdea843cd9a3d3f83"
+  },
+  "adaptations": "Sparse stock handle/register/config layouts and chip revision/status macros. Integer64 division-only support for selected call sites; not a complete runtime ABI implementation. Clock/peripheral providers external."
+}
