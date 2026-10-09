@@ -1,0 +1,154 @@
+{
+  "target_slices": [
+    {
+      "name": "gx8002_reset_entry",
+      "offset": "0x15514",
+      "bytes": 40,
+      "matches": true,
+      "actual": "9fb7304cee7e70154b75908d044b5945863004400d46aab96c7d3ddef53457e9"
+    },
+    {
+      "name": "trap_c",
+      "offset": "0x15604",
+      "bytes": 12,
+      "matches": true,
+      "actual": "f8ec967d03ef9eeaafb922734982c0f90f3a3a6929301dff1b2371efe1f61cd9"
+    },
+    {
+      "name": "trap",
+      "offset": "0x15610",
+      "bytes": 80,
+      "matches": true,
+      "actual": "5ba30b8f517d90ef1b6a2fe5bd589015668a3229d00f0c17677ef73da547fcf9"
+    },
+    {
+      "name": "gx8002_clock_init_pointer",
+      "offset": "0x17a9c",
+      "bytes": 564,
+      "matches": true,
+      "actual": "a0ff342ff5296de314212fb33651adea5b074b154d1c0ed79824353d1e70b30b"
+    },
+    {
+      "name": "gx8002_audio_record_callback",
+      "offset": "0x18228",
+      "bytes": 256,
+      "matches": true,
+      "actual": "2414ecbbcd71e88bf500b63c0e70bca1d30f4150a5247bdedbecf4e718c82130"
+    },
+    {
+      "name": "audio_board_state",
+      "offset": "0x189b8",
+      "bytes": 240,
+      "matches": true,
+      "actual": "e1d1077d066d53c1e39bcefca3ec0294d43ace92ffc1a986d2a432cd931dde2e"
+    },
+    {
+      "name": "audio_board_init",
+      "offset": "0xc5b0",
+      "bytes": 44,
+      "matches": true,
+      "actual": "cd10d5b801530b6c988eab0c643163f67cf12605b0a84bfe66a9edd85fe20d14"
+    },
+    {
+      "name": "gx8002_uart_message_start",
+      "offset": "0x11068",
+      "bytes": 92,
+      "matches": true,
+      "actual": "0051bd5f4c8dd725a5ec0be68c953ff0df19deb69c9f1f51f5990035e6efb8fb"
+    },
+    {
+      "name": "UartMessageAsyncSend",
+      "offset": "0x11948",
+      "bytes": 156,
+      "matches": true,
+      "actual": "7fb1da8b58509c76a54186308eaec6074ec325c8340005336f660ed8f6fb28e0"
+    },
+    {
+      "name": "UartMessageAsyncInit",
+      "offset": "0x119e4",
+      "bytes": 244,
+      "matches": true,
+      "actual": "9c2fc75d81d2d33b267afb85eaee5a3a279ec48217b64fff5af3b145de8fd334"
+    },
+    {
+      "name": "vad_level_3_message",
+      "offset": "0x143bb",
+      "bytes": 27,
+      "matches": true,
+      "actual": "f327478411746c488e7c91fcab8fc90f3d664d73402b2c2993b6008e580af10a"
+    },
+    {
+      "name": "vad_level_2_message",
+      "offset": "0x143d6",
+      "bytes": 27,
+      "matches": true,
+      "actual": "b2f4156da28cc8a6a1e2a76a252b54e234a2b486e5cd800cb46cf81288255aaf"
+    },
+    {
+      "name": "vad_level_1_message",
+      "offset": "0x143f1",
+      "bytes": 27,
+      "matches": true,
+      "actual": "3232830cfedc99ecaa573d6b4f0daab355462bd7283dd904be4c4034e0674b9f"
+    }
+  ],
+  "provenance": [
+    {
+      "name": "embarc-osp",
+      "files": 2970,
+      "mismatches": [],
+      "head": "67ea926c6a62aa6e19efdc3b11cba3ea0b467e29",
+      "expected_commit": "67ea926c6a62aa6e19efdc3b11cba3ea0b467e29",
+      "remote": "https://github.com/foss-for-mips-arc-processors/embarc_osp.git",
+      "expected_remote": "https://github.com/foss-for-mips-arc-processors/embarc_osp.git"
+    },
+    {
+      "name": "nationalchip-lvp-aiot",
+      "files": 580,
+      "mismatches": [],
+      "head": "d4aa00943e22f9ddfa424f979fae3ee2a62f5c0b",
+      "expected_commit": "d4aa00943e22f9ddfa424f979fae3ee2a62f5c0b",
+      "remote": "https://github.com/NationalChip/lvp_aiot.git",
+      "expected_remote": "https://github.com/NationalChip/lvp_aiot.git"
+    }
+  ],
+  "strings": [
+    {
+      "ascii": "[LVP_AUD]vad param 3 [%d]\n",
+      "matches": true,
+      "offsets": [
+        82875,
+        310264
+      ]
+    },
+    {
+      "ascii": "[LVP_AUD]vad param 2 [%d]\n",
+      "matches": true,
+      "offsets": [
+        82902,
+        310292
+      ]
+    },
+    {
+      "ascii": "[LVP_AUD]vad param 1 [%d]\n",
+      "matches": true,
+      "offsets": [
+        82929,
+        310320
+      ]
+    },
+    {
+      "ascii": "[MSG2.0]",
+      "matches": true,
+      "offsets": []
+    },
+    {
+      "ascii": "grus_gx8002b_dev_1v",
+      "matches": true,
+      "offsets": [
+        83126,
+        310512
+      ]
+    }
+  ]
+}

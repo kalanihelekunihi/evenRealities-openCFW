@@ -1,0 +1,31 @@
+# Remaining source-led P2 candidates
+
+## Result
+
+Three bounded **codec/C-SKY** candidate groups have concrete source-reference value outside the completed clock/VAD/UART and touch Configure branches. These are existing declared symbol extents, not invented firmware scope. All 19 source-name intersection target slices were checked against the locked codec payload and their recorded symbol hashes match. No implementation or instruction recovery was performed.
+
+**Ownership is provisional.** At this read-only snapshot, 117 on-disk task contracts had no explicit scope/address/name reservation for these intersections, and 17,788 primary analysis receipts had no overlapping recorded runtime/range/extent/span for them under the documented scan. This is not authoritative proof of vacancy: broad inventory ownership, live external task state, child-only coordinates, receipts stored under other layouts and concurrent edits can escape this index. Owner must confirm/reserve before execution. `remaining-source-ownership-scan.json` preserves the method and per-target identities. Source-name intersection is a lead, not source attribution.
+
+## Prioritized candidates for owner reservation
+
+| Priority | Existing declared target extent | Exact official source pointers | Knowledge the mapping can add |
+|---|---|---|---|
+| 1: mode callback dispatch | image_a_xip `LvpInitMode [0x102085A4,0x102085F8)`; `LvpModeTick [0x102085F8,0x1020861C)` | Registered KWS `8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5`, `lvp/lvp_mode.c:58,111`; acquired AIoT `d4aa00943e22f9ddfa424f979fae3ee2a62f5c0b`, same path:31,84 | Named mode-table field order, buffer_init/init/tick contracts, default idle fallback and returned loop flag constrain indirect roots for already declared functions. AIoT removes optional feed/record/denoise/FFT/etc mode table entries; these differ from KWS only if enabled. Actual table words/configuration, not semantic similarity, must select the target family. No current callback runtime contents are inferred. |
+| 2: application event routing | image_a_xip `LvpTriggerAppEvent [0x10208CC0,0x10208CD4)`; `LvpAppEventTick [0x10208D48,0x10208D98)` | KWS `lvp/app_core/lvp_app_core.c:105,231`; AIoT same path:56,139 | Public APP_EVENT/queue/callback schemas can label event dispatch and distinguish enabled routing to misc/ain queues, watchdog tick branch and callback-field offsets. AIoT adds optional UART-TTS reply-player branch and omits KWS G-sensor update implementation. These are compile-time/configuration discriminators, not an exact attribution. Prioritize non-UART callback/queue roots; do not reopen completed UART lifecycle work. |
+| 3: private codec queue contracts | image_a_sram `LvpQueuePut [0x100261B8,0x10026212)`; image_a_xip `LvpQueueGet [0x10206FB0,0x10206FFA)`, `IsEmpty [0x10206FFC,0x10207006)`, `IsFull [0x10207008,0x10207020)` | KWS `lvp/common/lvp_queue.c:22,34,57,62`; AIoT same path:22,35,58,63; queue layout `lvp/common/lvp_queue.h` at each pin | Circular-buffer field order, modulo behavior, reserved-empty-slot convention and byte-copy loops supply a bounded contract for source-name-correlated extents. This is NationalChip queue code, separate from completed Apollo FreeRTOS/CMSIS queue providers. AIoT places Get in DRAM0_STAGE2_SRAM_ATTR while KWS leaves it in default placement; target XIP vs SRAM link mapping can constrain placement environment. Function semantics are shared, so source pin cannot be selected by behavior alone. |
+
+Prefer existing registered KWS paths for common code. Acquired AIoT is useful as a differential reference; no new acquisition or submodule change is required. Published source links can be constructed as `https://github.com/NationalChip/lvp_kws/blob/8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5/<path>` and `https://github.com/NationalChip/lvp_aiot/blob/d4aa00943e22f9ddfa424f979fae3ee2a62f5c0b/<path>`.
+
+## Rejected intersections and architecture limits
+
+`remaining-source-symbol-intersections.json` lists 19 lexical function-name intersections. Generated CTC model files repeat the same helper names across model variants; a single last name match does not bind any exact stock model. Their command/weight/ops/data sizes, model content and configuration must first be independently tied to the authenticated image. They are not ranked as useful new mappings. `LvpKwsDone`, `LvpAudioInDone`, `KwsStrategyInit` are small/common helpers with little differential value; selected lifecycle branches are already worked, so no new assignment is proposed.
+
+Acquired embARC yields no additional **ARC** producing-source lead beyond the closed architecture comparison: target external startup bytes are absent, fixed vendor IRQ wrappers are distinct from embARC generic dispatch and existing QPC/vendor SDK anchors already outrank analogy. No unowned ARC source-mapping candidate is established by this track.
+
+For **ARM**, the new PDL history adds no alternate Configure loop/type/count mapping after owner's experiments and audit. Existing Ambiq/CMSIS/Infineon/STM32 families are already represented and completed audio/UART/power/touch branches must not be re-queued. The declared ARM startup packets remain owned instruction/pseudocode work; this track has no genuinely new unowned official-source mapping to add from its acquired references.
+
+## Evidence and coordination boundary
+
+Read goal reconciliation ledger, workflow state, inventory analysis-plan, codec symbols, current task contracts, primary analysis receipts, acquired source differences and latest audit FINAL-RECONCILIATION. G2/G3 gates remain not_run. No missing-type or historical-loop hypothesis is re-proposed after the audit closes it. Runtime reachability, active indirect roots, physical SRAM/XIP selection, exact compiler/configuration and producing checkout remain unproven.
+
+This identifies provisional source-reference candidates for existing C-SKY extents. It does not claim global source exhaustion, admission, corpus coverage or vacancy. Owner must reconcile current ownership and decide whether each candidate adds knowledge before assigning instruction recovery. No source/index/state/device mutations, compilation, Docker access, downloaded code execution or extra workers occurred.

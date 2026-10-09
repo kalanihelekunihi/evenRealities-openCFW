@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20260930T190500Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "component": "codec",
+  "image_id": "binh_a_stage2_xip",
+  "address_space": "conditional_stage2_xip_10203004",
+  "isa_mode": "C-SKY_ABIv2",
+  "function_id": "codec:binh_a_stage2_xip:conditional_stage2_xip_10203004:270555316:csky_abiv2",
+  "entry": 270555316,
+  "runtime_range": [
+    270555316,
+    270555332
+  ],
+  "child_range": [
+    10416,
+    10432
+  ],
+  "payload_range": [
+    60992,
+    61008
+  ],
+  "runtime_base": 270544900,
+  "component_payload_offset": 50576,
+  "body_sha256": "6bdb07c6468e4e2d97ba7c22736df347e8f2736c8d5009f053d8958265bceb3c",
+  "countable_body_bytes": 16,
+  "direct_inputs": [
+    {
+      "path": "g2/analysis/csky-indexed-word-accessor-2026-10-09/results.json",
+      "sha256": "43dfabc3376e63b029866efbbfad8e69a3ec8d91bb0f9608767065351ac21450"
+    },
+    {
+      "path": "g2/analysis/csky-indexed-word-accessor-2026-10-09/body.objdump.txt",
+      "sha256": "c5552a2dd15136e0d3e43b44dde7d35f15dd2d199674e0f175aa6fdcb4887b50"
+    },
+    {
+      "path": "g2/analysis/csky-indexed-word-accessor-2026-10-09/pseudocode.md",
+      "sha256": "a59c2e58367a5d1c95a318436d5721912b97cef406315573b00d5f5eb607631d"
+    },
+    {
+      "path": "g2/analysis/csky-indexed-word-accessor-2026-10-09/verify.py",
+      "sha256": "d7ab5e88bc42d00f615cefaaed22c42a4e59c8fe6a1b50d2d5f2d612325f10aa"
+    },
+    {
+      "path": "g2/analysis/csky-indexed-word-accessor-2026-10-09/ownership-scan.json",
+      "sha256": "37de2b6211e8f46fcbc1c58984fe9747f934982ebbe038688bb71c7ef25a3f18"
+    },
+    {
+      "path": "g2/analysis/coverage-audit-parallel-2026-10-09/CSKY-REVIEW.md",
+      "sha256": "e69f2b14bae566950b7f8cd1e57e35e13a63d127a421789af281306da293baf5"
+    },
+    {
+      "path": "g2/analysis/coverage-audit-parallel-2026-10-09/CSKY-VERIFICATION.json",
+      "sha256": "43fb30ad7848197ad463a907d8fb88627cd75e31197ca0fcf68516a7b0f44497"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-recovery-5316/001/full-xip.objdump.txt",
+      "sha256": "13a9f1eef49d3cfdc8e4795164223968481701fd7a029bbc6a1ac530e30029b7"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-recovery-5316/001/decoder-receipt.json",
+      "sha256": "3e4f21ebfa06b8bc4c43ff9e23b2af2998d30f1cf0865033da5900fd9530ad00"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin",
+      "sha256": "49c9aed0126493220a3e48827c267d5e94f64d51d9ede0ccc3e84b8946744584"
+    },
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+      "sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0"
+    }
+  ],
+  "record_kind": "review_ready_adoption_proposal_not_campaign_admission",
+  "owner": "current_reconstruction_execution_track",
+  "exclusive_output_path": "g2/analysis/csky-indexed-word-accessor-2026-10-09",
+  "required_gate_receipt": {
+    "path": "g2/build/pseudocode-first/20260930T190500Z/receipts/G1-target-and-inventory-107/receipt.json",
+    "sha256": "fe17aa5a4e7456a81f342c3ca6d67233b065c42dd5c5a09917bb8e603e4d6610"
+  },
+  "instruction_correspondence": [
+    {
+      "address": 270555316,
+      "bytes": 2,
+      "decoder_word": "14d1",
+      "instruction": "push      \tr4, r15"
+    },
+    {
+      "address": 270555318,
+      "bytes": 2,
+      "decoder_word": "4122",
+      "instruction": "lsli      \tr1, r1, 2"
+    },
+    {
+      "address": 270555320,
+      "bytes": 2,
+      "decoder_word": "6d0b",
+      "instruction": "mov      \tr4, r2"
+    },
+    {
+      "address": 270555322,
+      "bytes": 2,
+      "decoder_word": "6004",
+      "instruction": "addu      \tr0, r1"
+    },
+    {
+      "address": 270555324,
+      "bytes": 4,
+      "decoder_word": "e3fffe98",
+      "instruction": "bsr      \t0x102055ec\t// 0x102055ec"
+    },
+    {
+      "address": 270555328,
+      "bytes": 2,
+      "decoder_word": "b400",
+      "instruction": "st.w      \tr0, (r4, 0x0)"
+    },
+    {
+      "address": 270555330,
+      "bytes": 2,
+      "decoder_word": "1491",
+      "instruction": "pop      \tr4, r15"
+    }
+  ],
+  "edges": [
+    {
+      "from": 270555324,
+      "to": 270554604,
+      "kind": "direct_call",
+      "shared_dependency_not_counted": true
+    },
+    {
+      "from": 270555946,
+      "to": 270555316,
+      "kind": "observed_direct_caller"
+    },
+    {
+      "from": 270555330,
+      "kind": "return"
+    }
+  ],
+  "independent_review": {
+    "reviewer": "parallel_coverage_audit_track",
+    "record": {
+      "path": "g2/analysis/coverage-audit-parallel-2026-10-09/CSKY-REVIEW.md",
+      "sha256": "e69f2b14bae566950b7f8cd1e57e35e13a63d127a421789af281306da293baf5"
+    },
+    "decision": "bounded_static_supported_coordinator_consideration_pending",
+    "reviewer_task_id": "01a120b1-9d22-7596-9ee5-a6d93342c014",
+    "proposal_review": {
+      "path": "g2/analysis/coverage-audit-parallel-2026-10-09/PROPOSAL-REVIEW.md",
+      "sha256": "81075d6f6cc31f148d84a74937dda52b9e4574c36403613035f3466298f77f4e"
+    }
+  },
+  "accepted": false,
+  "coverage_update_performed": false,
+  "unresolved": [
+    "conditional live mapping",
+    "formal ABI and memory/device identity",
+    "coordinator serialization and adoption",
+    "global ownership and code-data reconciliation"
+  ],
+  "author_task_id": "01a0f4a0-6c2a-70e7-8394-b1e0c936f028"
+}

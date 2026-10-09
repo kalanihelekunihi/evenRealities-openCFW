@@ -1,0 +1,90 @@
+{
+  "scope": "Current G2 static source-provider ledger after notification, codec lifecycle, and direct codec IRQ closure; not a whole-image source-completeness claim.",
+  "locked_firmware_raw_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "resolved": [
+    {
+      "family": "GPIO configuration/state/IRQ frontend",
+      "evidence": [
+        "g2/analysis/ambiq-gpio-config-2026-10-05/REPORT.md",
+        "g2/analysis/radio-gpio-control-2026-10-05/REPORT.md",
+        "g2/analysis/ambiq-gpio-irq-2026-10-05/REPORT.md",
+        "g2/analysis/audio-gpio-providers-2026-10-08/REPORT.md"
+      ],
+      "status": "Source-backed software behavior; pinmux/electrical/NVIC behavior remains external."
+    },
+    {
+      "family": "CMSIS memory pool and semaphore dependencies",
+      "evidence": ["g2/analysis/audio-cmsis-memory-pool-closure-2026-10-09/REPORT.md"],
+      "status": "Selected stock bodies closed through actual failure/handover boundary."
+    },
+    {
+      "family": "Codec UART power/configuration and direct IRQ receive delivery",
+      "evidence": [
+        "g2/analysis/audio-codec-lifecycle-hal-composition-2026-10-09/REPORT.md",
+        "g2/analysis/audio-codec-uart-irq-delivery-2026-10-09/REPORT.md"
+      ],
+      "status": "Software providers and direct wrapper semantics closed; vector/NVIC delivery is not."
+    }
+  ],
+  "actionable_static_sources": [
+    {
+      "family": "Apollo510 UART transfer and completion",
+      "stock_leads": ["0x58E454", "0x58E4E8", "0x541A2E"],
+      "official_source": "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/mcu/am_hal_uart.c",
+      "source_sha256": "db0807cbd0ff5df110afde4a8e8561857e2e669529da290289919516ec12799a",
+      "pin": "5efc0228528a8adce5eae0d226fac85d2551eb3b",
+      "next_evidence": "Bind transfer mode, internal TX buffering/copy boundary, interrupt completion, and application instance initializer against locked instructions."
+    },
+    {
+      "family": "INFO1 and MCU/SRAM/oscillator providers",
+      "stock_leads": ["0x47F954", "0x47F204", "0x47F46A", "0x4809C4"],
+      "official_sources": [
+        {"path": "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/am_hal_info.c", "sha256": "e958f9552eb4a2b7070f410c856600c0bb56494bc112db930f3d1b4c7d0f1f6c"},
+        {"path": "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/mcu/am_hal_mcuctrl.c", "sha256": "3a75caa326f613bf3aaeba99b1354a9824249b2ed6d139ba2b72010e8eba9500"},
+        {"path": "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/am_hal_pwrctrl.c", "sha256": "84cc1da6a01dd46f29e0465074ad92602c4dd6d7a12f7f4596aef64a9a250586"}
+      ],
+      "pin": "5efc0228528a8adce5eae0d226fac85d2551eb3b",
+      "next_evidence": "Compare exact selected bodies and error propagation; factory/trim contents remain supplied inputs."
+    },
+    {
+      "family": "Remaining application-owned audio transition and logger initialization",
+      "stock_leads": ["sequence 7 producer 0x5A29A0", "sequence 21 producer 0x5A3CC6", "logger flag 0x20074F4E writers"],
+      "official_source": null,
+      "next_evidence": "Continue locked-image decompilation and caller/data-flow recovery; no upstream package can substitute for application source."
+    }
+  ],
+  "source_blocked": [
+    {
+      "family": "Exact private AmbiqSuite producing checkout and IAR 9.60.2 runtime/build",
+      "reason": "Public Ambiq 5.1.0 replay is available, but the historical private checkout and exact proprietary compiler/runtime source are unavailable."
+    },
+    {
+      "family": "NemaGFX/NemaVG implementation",
+      "reason": "Public headers and GCC archives exist; implementation source and stock IAR objects are not public."
+    },
+    {
+      "family": "EM9305 SDK 4.2 and Packetcraft/EM controller",
+      "reason": "Exact archives are proprietary; public Cordio is only an older host comparator."
+    },
+    {
+      "family": "Resident ROM routines",
+      "reason": "Addresses 0x40, 0x48, and 0x0200FF20 are outside the authenticated OTA; require authenticated ROM bytes or matching vendor source."
+    }
+  ],
+  "runtime_only": [
+    "PendSV/NVIC exception entry and return, actual task selection, and initialized live scheduler population",
+    "Physical UART/GPIO/clock/power timing and electrical state",
+    "Real factory INFO1/trim/calibration contents and device-specific readiness",
+    "Concurrent producer/consumer reachability and device lifetime traces"
+  ],
+  "source_search": {
+    "gitlinks_in_index": 53,
+    "gitmodule_paths": 52,
+    "canonical_ambiq_path": "third-party/upstream/ambiqhal-apollo510",
+    "canonical_ambiq_pin": "5efc0228528a8adce5eae0d226fac85d2551eb3b",
+    "undeclared_duplicate_gitlink": "third-party/reference/ambiqhal-audio-5.1.0",
+    "duplicate_pin": "5efc0228528a8adce5eae0d226fac85d2551eb3b",
+    "download_decision": "No download performed: the useful official source is already present at the selected commit; missing families are private/proprietary, application-owned, ROM-only, or runtime-only."
+  },
+  "global_source_exhausted": false
+}

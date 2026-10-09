@@ -1,0 +1,576 @@
+{
+  "selection_sha256": "1deb0c33306b10a9fa726d3bafb11c5f894bf3b9d6195abb5558bd6f4554d7c2",
+  "compiler": {
+    "version": "14.2.Rel1",
+    "url": "https://gitlab.arm.com/api/v4/projects/tooling%2Fgnu-toolchains-for-arm/packages/generic/gnu-toolchain/14.2.rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi.tar.xz",
+    "archive_sha256": "62a63b981fe391a9cbad7ef51b17e49aeaa3e7b0d029b36ca1e9c3b2a9b78823",
+    "gcc": "tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
+    "gcc_sha256": "2e6d1fc0b7709d2fc08278a06bbcbfadb6fafcf5837e13cde01a1fbd07ad6db1",
+    "checksum_receipt_sha256": "0058e16f204afcb764a38af718b835e1b3f86e52aef1d0518c8f4397df69b2a7",
+    "signature_verification": false
+  },
+  "units": [
+    {
+      "source_unit": "cy_sysint.c",
+      "source_sha256": "7880bcee6f639cb1a78aaeb46602bbfaba2afd57e9869c79fc45204e292eaadb",
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "--network",
+        "none",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges",
+        "-v",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi:/tool:ro",
+        "-v",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-compiler14-successor-2026-10-09/tools/pdl-input:/pdl:ro",
+        "-v",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/dependency-followup-2026-10-08/touch-source:/headers:ro",
+        "-v",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-pdl14-system-interface-2026-10-09/interface:/interface:ro",
+        "-v",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-pdl14-system-interface-2026-10-09/outputs/cy_sysint.c:/out",
+        "ubuntu@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55",
+        "/tool/bin/arm-none-eabi-gcc",
+        "-mcpu=cortex-m0plus",
+        "-mthumb",
+        "-Og",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-DCY8C4046FNI_T412",
+        "-ffunction-sections",
+        "-I/interface",
+        "-I/headers",
+        "-I/headers/cmsis",
+        "-I/pdl/drivers/include",
+        "-I/pdl/devices/include",
+        "-I/headers/core-lib-ca57d1e519e08badec6891d1776c7b4f05e09561/include",
+        "-c",
+        "/pdl/drivers/source/cy_sysint.c",
+        "-o",
+        "/out/public.o"
+      ],
+      "exit_code": 0,
+      "diagnostics": "",
+      "functions": [
+        {
+          "function": "Cy_SysInt_SetVector",
+          "address": 41588,
+          "historical_code_bytes": 40,
+          "target_code_sha256": "f6edba26d99f37da897dd3ae65225e806a7dfa47d212cddbabafb750d1df0c8a",
+          "absolute_payload_offset": 28564,
+          "confidence": "Strong",
+          "source_unit": "cy_sysint.c",
+          "status": "predeclared_unchanged_source_comparison",
+          "compiled_bytes": 52,
+          "compiled_sha256": "d628e5d6ec7297f6b0fda77f2704ff67b62d0c43304d5f5f7656d9a0ec8a4784",
+          "relocations": [
+            {
+              "offset": 44,
+              "type": 2,
+              "symbol": "__RAM_VECTOR_TABLE"
+            },
+            {
+              "offset": 48,
+              "type": 2,
+              "symbol": "__Vectors"
+            }
+          ],
+          "overlap_mismatched_positions": [],
+          "comparison_status": "relocation_or_extent_boundary"
+        },
+        {
+          "function": "Cy_SysInt_Init",
+          "address": 41640,
+          "historical_code_bytes": 60,
+          "target_code_sha256": "ba1ac67702b267f9dad652680f738491a9d26e621f88e86d453a738d35dea85a",
+          "absolute_payload_offset": 28616,
+          "confidence": "Strong",
+          "source_unit": "cy_sysint.c",
+          "status": "predeclared_unchanged_source_comparison",
+          "compiled_bytes": 72,
+          "compiled_sha256": "1668b28072cfdef2cf309cb580ecf656e91c6003aed568fb19e45b66b517d9a7",
+          "relocations": [
+            {
+              "offset": 24,
+              "type": 10,
+              "symbol": "__NVIC_SetPriority"
+            },
+            {
+              "offset": 48,
+              "type": 10,
+              "symbol": "Cy_SysInt_SetVector"
+            },
+            {
+              "offset": 64,
+              "type": 2,
+              "symbol": "__RAM_VECTOR_TABLE"
+            }
+          ],
+          "overlap_mismatched_positions": [
+            26,
+            50
+          ],
+          "comparison_status": "relocation_or_extent_boundary"
+        }
+      ],
+      "consumed_input_hashes": {
+        "/pdl/drivers/source/cy_sysint.c": "7880bcee6f639cb1a78aaeb46602bbfaba2afd57e9869c79fc45204e292eaadb",
+        "/pdl/drivers/include/cy_sysint.h": "cd20a01c0e77963dba119ca18e39453d39ad5a69c264beb3be911a195eef08b2",
+        "/tool/lib/gcc/arm-none-eabi/14.2.1/include/stddef.h": "c93f57f1538121cdbc27b59a47f1ed82b078d40e404b46481c83bafadd5deada",
+        "/pdl/drivers/include/cy_device.h": "9c6818390b6e68458141370690e1e4175848bb950cfc5b2aec9db7b23027f6e9",
+        "/pdl/devices/include/cy_device_headers.h": "5d30f5a298ac34084ff8d899fdcecebee7a4170d2e634fc097ccfa664f4b64fa",
+        "/pdl/devices/include/cy8c4046fni_t412.h": "5e8ac6fab78847c7a667b9afd0e425e8ceefdb92390cb51a0d0fba09939d6a3b",
+        "/headers/cmsis/core_cm0plus.h": "a09fa9c6b8b21d1920bce15b98aa56182b027e9278cca0b154812bac2aea3cfa",
+        "/tool/lib/gcc/arm-none-eabi/14.2.1/include/stdint.h": "86a7914ab7d6a18465a6fb9a7b54f945cad604fdbf3ca0d10e4e0254e0037911",
+        "/tool/lib/gcc/arm-none-eabi/14.2.1/include/stdint-gcc.h": "bc975de13f21d9336769718601ec86e1c1efd60fc75f5f4ce1d04508768a6e49",
+        "/headers/cmsis/cmsis_version.h": "184c19fd3ee73632edf35a0b4d49cd48be75fbf49e6ccb19d9db05fa83bea4b3",
+        "/headers/cmsis/cmsis_compiler.h": "b51963d271c1571ca3463654c76aa7ea50c4eac5d0a2710df10414ac64d9e0f8",
+        "/headers/cmsis/cmsis_gcc.h": "43bfd1fe69fbbc2ca70aaf7d43cc3e20f16e0c7f66e1bdef9b51af6dc14b2617",
+        "/interface/system_cat2.h": "5eb47d11872c01221d27a5b8be87327fc564aafdd1fb6fde2eea2421161ecf99",
+        "/pdl/devices/include/psoc4000t_config.h": "a83a5cfe611d261e19752a7c5ecd48a76d7f32f9296425a589b3713418f07b30",
+        "/pdl/devices/include/ip/cyip_sflash_psoc4000t.h": "66cb98fe5806304dba9be7a79ffd3585c060aee6caa5b735e57140006dfa67e6",
+        "/pdl/devices/include/ip/cyip_headers.h": "6450f87bcfb025efa312c8a23bbefa303244d38d94448b375de5abb866a493e6",
+        "/pdl/devices/include/ip/cyip_peri.h": "95db82fdc0293f2f18a13281c7bbfd216628707c481bf255e36caa0b568de342",
+        "/pdl/devices/include/ip/cyip_hsiom.h": "7638c928fa62097f82ad34b7d1cbbeaa20ac1c035f72ad827d53522dcf99409f",
+        "/pdl/devices/include/ip/cyip_srsslt.h": "74bf8dfb47a1839774a26e4e4dcdf5956adf1b09e20df5abc24be3fccf7a4a65",
+        "/pdl/devices/include/ip/cyip_gpio.h": "c48618ad2bb0a1efa656e23f5b97954b7ed1459d789cacd591877372ae73b93c",
+        "/pdl/devices/include/ip/cyip_cpuss_v3.h": "41d774ede5b9d7a5b3eb9bcbd41e96b35d90f0cbe63918513e78e7d1bb9f8bbd",
+        "/pdl/devices/include/ip/cyip_dmac_v3.h": "8266541cf8f15457b52418d8a3f2b2ab15c33bedb5a33ee58b4b4e2f9e8e5626",
+        "/pdl/devices/include/ip/cyip_spcif_v3.h": "1d9e33f49bfa3b0aebc5340b6903568e080d6215b44bad20f664781e93ad1639",
+        "/pdl/devices/include/ip/cyip_tcpwm_v2.h": "e94f9c408d8d45e21829da98b3d98eb59e95190d4d0b5ea0763c6f7df437063c",
+        "/pdl/devices/include/ip/cyip_scb_v3.h": "bd2ccbee6b9a580834538915d6b40356df9b9d6c1c36a1fbfcba623881e11c7c",
+        "/pdl/devices/include/ip/cyip_msclp.h": "777b627dadfbdddd5024b121edb0a57875c12d865db1cd245585b51944436d1f",
+        "/pdl/devices/include/gpio_psoc4000t_25_wlcsp.h": "96200d5a5382694a432f29607a9f2738ec6ff097ccece7ee1dbe72c58449ab62",
+        "/pdl/drivers/include/cy_syslib.h": "6c6e35da19d618c752c767873e89ae6144877a1a4eacafe13b31cc0c0f8e7ca4",
+        "/tool/lib/gcc/arm-none-eabi/14.2.1/include/stdbool.h": "7b9c438a5b2f082a560a72da8d752da51062cc6f84d1c4acec45ff0a68e8d037",
+        "/headers/core-lib-ca57d1e519e08badec6891d1776c7b4f05e09561/include/cy_utils.h": "5c084c021be5aa19c667dad4975ac01dd0dafe569dbbcf64392ab9c919d2da7b",
+        "/headers/core-lib-ca57d1e519e08badec6891d1776c7b4f05e09561/include/cy_result.h": "7bf08391ef9934c9d5678729d89c7b6db10f22fade519fae97970c6bead7b322"
+      },
+      "output_hashes": {
+        "public.i": "50582aab09cae3430dfb1dd63cf009c1c9e75308946dff79d8179f4d099026fc",
+        "public.o": "5b1ed7e92d09103577896974adc0b6d4519fae00a070b34617fe12a542bec7e3",
+        "public.d": "5489965e205bb9aac4e7caa1b9d990da2af651f717af5867b4a570a7c9064edc"
+      }
+    },
+    {
+      "source_unit": "cy_syslib.c",
+      "source_sha256": "e0288bc9fc7d6f743709afcf9d30e50132262be4c13f1df6332c673e28e62377",
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "--network",
+        "none",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges",
+        "-v",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi:/tool:ro",
+        "-v",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-compiler14-successor-2026-10-09/tools/pdl-input:/pdl:ro",
+        "-v",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/dependency-followup-2026-10-08/touch-source:/headers:ro",
+        "-v",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-pdl14-system-interface-2026-10-09/interface:/interface:ro",
+        "-v",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-pdl14-system-interface-2026-10-09/outputs/cy_syslib.c:/out",
+        "ubuntu@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55",
+        "/tool/bin/arm-none-eabi-gcc",
+        "-mcpu=cortex-m0plus",
+        "-mthumb",
+        "-Og",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-DCY8C4046FNI_T412",
+        "-ffunction-sections",
+        "-I/interface",
+        "-I/headers",
+        "-I/headers/cmsis",
+        "-I/pdl/drivers/include",
+        "-I/pdl/devices/include",
+        "-I/headers/core-lib-ca57d1e519e08badec6891d1776c7b4f05e09561/include",
+        "-c",
+        "/pdl/drivers/source/cy_syslib.c",
+        "-o",
+        "/out/public.o"
+      ],
+      "exit_code": 0,
+      "diagnostics": "",
+      "functions": [
+        {
+          "function": "Cy_SysLib_DelayCycles",
+          "address": 17536,
+          "historical_code_bytes": 18,
+          "target_code_sha256": "a8b62136d338c6dc91e6f900f19cb30344601be2bc97b168940ca57281293760",
+          "absolute_payload_offset": 4512,
+          "confidence": "Strong",
+          "source_unit": "cy_syslib.c",
+          "status": "predeclared_unchanged_source_comparison",
+          "comparison_status": "expected_section_absent"
+        },
+        {
+          "function": "Cy_SysLib_EnterCriticalSection",
+          "address": 17554,
+          "historical_code_bytes": 8,
+          "target_code_sha256": "720733fcf19a5635fcab0791fcc2b007294712bb27536443ff79490821c168cf",
+          "absolute_payload_offset": 4530,
+          "confidence": "Strong",
+          "source_unit": "cy_syslib.c",
+          "status": "predeclared_unchanged_source_comparison",
+          "comparison_status": "expected_section_absent"
+        },
+        {
+          "function": "Cy_SysLib_ExitCriticalSection",
+          "address": 17562,
+          "historical_code_bytes": 6,
+          "target_code_sha256": "379ef840451b3bf5f9903b215cd3fe49e26244e0b6b8afe47b9e5c37a1ee1ca2",
+          "absolute_payload_offset": 4538,
+          "confidence": "Strong",
+          "source_unit": "cy_syslib.c",
+          "status": "predeclared_unchanged_source_comparison",
+          "comparison_status": "expected_section_absent"
+        },
+        {
+          "function": "Cy_SysLib_Delay",
+          "address": 41712,
+          "historical_code_bytes": 40,
+          "target_code_sha256": "ccddf11f013fe0689e0d64677177f9ec21ebcf0f59616be7aa29603d4ce2b9a7",
+          "absolute_payload_offset": 28688,
+          "confidence": "Strong",
+          "source_unit": "cy_syslib.c",
+          "status": "predeclared_unchanged_source_comparison",
+          "compiled_bytes": 52,
+          "compiled_sha256": "432ca3a895eea619ae7ceef163247c3afd3c6705bbf98eca620756b0d497bdc6",
+          "relocations": [
+            {
+              "offset": 10,
+              "type": 10,
+              "symbol": "Cy_SysLib_DelayCycles"
+            },
+            {
+              "offset": 34,
+              "type": 10,
+              "symbol": "Cy_SysLib_DelayCycles"
+            },
+            {
+              "offset": 40,
+              "type": 2,
+              "symbol": "cy_delay32kMs"
+            },
+            {
+              "offset": 48,
+              "type": 2,
+              "symbol": "cy_delayFreqKhz"
+            }
+          ],
+          "overlap_mismatched_positions": [
+            10,
+            12,
+            13,
+            34,
+            36,
+            37
+          ],
+          "comparison_status": "relocation_or_extent_boundary"
+        },
+        {
+          "function": "Cy_SysLib_DelayUs",
+          "address": 41764,
+          "historical_code_bytes": 14,
+          "target_code_sha256": "ea5dc16e63fcc13363c2c5e46bb7625701840a0842b3f6e648f11e5e8c2af831",
+          "absolute_payload_offset": 28740,
+          "confidence": "Inferred",
+          "source_unit": "cy_syslib.c",
+          "status": "predeclared_unchanged_source_comparison",
+          "compiled_bytes": 20,
+          "compiled_sha256": "2291e468572b150b3137fad79af3621955b54741b538f2e8d9c154f28f2cfa53",
+          "relocations": [
+            {
+              "offset": 8,
+              "type": 10,
+              "symbol": "Cy_SysLib_DelayCycles"
+            },
+            {
+              "offset": 16,
+              "type": 2,
+              "symbol": "cy_delayFreqMhz"
+            }
+          ],
+          "overlap_mismatched_positions": [
+            8,
+            10,
+            11
+          ],
+          "comparison_status": "relocation_or_extent_boundary"
+        }
+      ],
+      "consumed_input_hashes": {
+        "/pdl/drivers/source/cy_syslib.c": "e0288bc9fc7d6f743709afcf9d30e50132262be4c13f1df6332c673e28e62377",
+        "/pdl/drivers/include/cy_syslib.h": "6c6e35da19d618c752c767873e89ae6144877a1a4eacafe13b31cc0c0f8e7ca4",
+        "/tool/lib/gcc/arm-none-eabi/14.2.1/include/stdint.h": "86a7914ab7d6a18465a6fb9a7b54f945cad604fdbf3ca0d10e4e0254e0037911",
+        "/tool/lib/gcc/arm-none-eabi/14.2.1/include/stdint-gcc.h": "bc975de13f21d9336769718601ec86e1c1efd60fc75f5f4ce1d04508768a6e49",
+        "/tool/lib/gcc/arm-none-eabi/14.2.1/include/stdbool.h": "7b9c438a5b2f082a560a72da8d752da51062cc6f84d1c4acec45ff0a68e8d037",
+        "/headers/core-lib-ca57d1e519e08badec6891d1776c7b4f05e09561/include/cy_utils.h": "5c084c021be5aa19c667dad4975ac01dd0dafe569dbbcf64392ab9c919d2da7b",
+        "/headers/core-lib-ca57d1e519e08badec6891d1776c7b4f05e09561/include/cy_result.h": "7bf08391ef9934c9d5678729d89c7b6db10f22fade519fae97970c6bead7b322",
+        "/pdl/drivers/include/cy_device.h": "9c6818390b6e68458141370690e1e4175848bb950cfc5b2aec9db7b23027f6e9",
+        "/pdl/devices/include/cy_device_headers.h": "5d30f5a298ac34084ff8d899fdcecebee7a4170d2e634fc097ccfa664f4b64fa",
+        "/pdl/devices/include/cy8c4046fni_t412.h": "5e8ac6fab78847c7a667b9afd0e425e8ceefdb92390cb51a0d0fba09939d6a3b",
+        "/headers/cmsis/core_cm0plus.h": "a09fa9c6b8b21d1920bce15b98aa56182b027e9278cca0b154812bac2aea3cfa",
+        "/headers/cmsis/cmsis_version.h": "184c19fd3ee73632edf35a0b4d49cd48be75fbf49e6ccb19d9db05fa83bea4b3",
+        "/headers/cmsis/cmsis_compiler.h": "b51963d271c1571ca3463654c76aa7ea50c4eac5d0a2710df10414ac64d9e0f8",
+        "/headers/cmsis/cmsis_gcc.h": "43bfd1fe69fbbc2ca70aaf7d43cc3e20f16e0c7f66e1bdef9b51af6dc14b2617",
+        "/interface/system_cat2.h": "5eb47d11872c01221d27a5b8be87327fc564aafdd1fb6fde2eea2421161ecf99",
+        "/pdl/devices/include/psoc4000t_config.h": "a83a5cfe611d261e19752a7c5ecd48a76d7f32f9296425a589b3713418f07b30",
+        "/pdl/devices/include/ip/cyip_sflash_psoc4000t.h": "66cb98fe5806304dba9be7a79ffd3585c060aee6caa5b735e57140006dfa67e6",
+        "/pdl/devices/include/ip/cyip_headers.h": "6450f87bcfb025efa312c8a23bbefa303244d38d94448b375de5abb866a493e6",
+        "/pdl/devices/include/ip/cyip_peri.h": "95db82fdc0293f2f18a13281c7bbfd216628707c481bf255e36caa0b568de342",
+        "/pdl/devices/include/ip/cyip_hsiom.h": "7638c928fa62097f82ad34b7d1cbbeaa20ac1c035f72ad827d53522dcf99409f",
+        "/pdl/devices/include/ip/cyip_srsslt.h": "74bf8dfb47a1839774a26e4e4dcdf5956adf1b09e20df5abc24be3fccf7a4a65",
+        "/pdl/devices/include/ip/cyip_gpio.h": "c48618ad2bb0a1efa656e23f5b97954b7ed1459d789cacd591877372ae73b93c",
+        "/pdl/devices/include/ip/cyip_cpuss_v3.h": "41d774ede5b9d7a5b3eb9bcbd41e96b35d90f0cbe63918513e78e7d1bb9f8bbd",
+        "/pdl/devices/include/ip/cyip_dmac_v3.h": "8266541cf8f15457b52418d8a3f2b2ab15c33bedb5a33ee58b4b4e2f9e8e5626",
+        "/pdl/devices/include/ip/cyip_spcif_v3.h": "1d9e33f49bfa3b0aebc5340b6903568e080d6215b44bad20f664781e93ad1639",
+        "/pdl/devices/include/ip/cyip_tcpwm_v2.h": "e94f9c408d8d45e21829da98b3d98eb59e95190d4d0b5ea0763c6f7df437063c",
+        "/pdl/devices/include/ip/cyip_scb_v3.h": "bd2ccbee6b9a580834538915d6b40356df9b9d6c1c36a1fbfcba623881e11c7c",
+        "/pdl/devices/include/ip/cyip_msclp.h": "777b627dadfbdddd5024b121edb0a57875c12d865db1cd245585b51944436d1f",
+        "/pdl/devices/include/gpio_psoc4000t_25_wlcsp.h": "96200d5a5382694a432f29607a9f2738ec6ff097ccece7ee1dbe72c58449ab62",
+        "/tool/lib/gcc/arm-none-eabi/14.2.1/include/stddef.h": "c93f57f1538121cdbc27b59a47f1ed82b078d40e404b46481c83bafadd5deada",
+        "/tool/arm-none-eabi/include/string.h": "79722fe25a7d01447fee06a0b8efe7535c1b891568730ba154a139c59c068ffc",
+        "/tool/arm-none-eabi/include/_ansi.h": "5c6403b471ee897c9a6c12e00a58617247804eb3ee72d7baeb7c08616090dd1d",
+        "/tool/arm-none-eabi/include/newlib.h": "f5b1f4cb2854a583795145eeb2b3f4115411bbd216a683356cdddaa208adb9ad",
+        "/tool/arm-none-eabi/include/_newlib_version.h": "bfc4b55e8665b5c4ae407e090a6aac2fb829905f04a5a7519686631eb1633fff",
+        "/tool/arm-none-eabi/include/sys/config.h": "583e381e7184a477bcea569149f6154ccf4f0faa0829a9d8363954adb7aecf14",
+        "/tool/arm-none-eabi/include/machine/ieeefp.h": "ec1e7f9f068ef40e2ec360681a4bbc7e2f3f1e3bb9e141a254a1f1ccdc4af195",
+        "/tool/arm-none-eabi/include/sys/features.h": "c580ee2a628857e7ebeb0484d078b16cf61049f14b2492b0cac5b54ed1f34cca",
+        "/tool/arm-none-eabi/include/sys/reent.h": "948b8a04507fd331248a164f0dfd12443e9942d3893b0159efd0865d787405f7",
+        "/tool/arm-none-eabi/include/sys/cdefs.h": "9dcd9f554b32c40791b8f081f34c83767c61c0bc567b4a486066edda39812f3e",
+        "/tool/arm-none-eabi/include/machine/_default_types.h": "5d8f9f7ead7927e4b8b7ed00172e84f2ae82ea7f5f6ba3240ff813a9236771b3",
+        "/tool/arm-none-eabi/include/sys/_types.h": "1abe39aca5104bafbde2e0219e7cdc3e96129b22ce1ef5cd58b66d8d147d3fb7",
+        "/tool/arm-none-eabi/include/machine/_types.h": "44544ecbbc10c8aa58ca2da6d0617ffeee5af847af24515ab108c8218d6d92c8",
+        "/tool/arm-none-eabi/include/sys/lock.h": "f5cad9196ce745967fd2673e085b5c03df7887d4d11d7544aff05ff6679be6b8",
+        "/tool/arm-none-eabi/include/sys/_locale.h": "adc8e11513e5f83a0c73ac641c256815b0aa6cc8a09a43d2c97b1ee79db9f154",
+        "/tool/arm-none-eabi/include/strings.h": "743121afb2f530045eb63bcfa3fdbc4ecf555131bd1cf7ce36a268f758bb4be5",
+        "/tool/arm-none-eabi/include/sys/string.h": "b7164ee36ccb0a08bc27c7e381ea417c97d8c3fd3157de62b75d2a6bf7a0a589"
+      },
+      "output_hashes": {
+        "public.i": "60fc380b03df3e89921afd70568b1ece96005befe018c4bff0ebb0dbdbe1df45",
+        "public.o": "22b1d92ec903546daaf1b768259a4405ca89a81e20bd3eb62cb3c9040eff42b8",
+        "public.d": "069f847798c2b6d0c275b14c24a24b2937dd6fadeb43da515fe1fea25d3cb8c0"
+      }
+    },
+    {
+      "source_unit": "cy_systick.c",
+      "source_sha256": "e6035ec4478368f73ed89707d185f4eaca085269343cb9ccb5e5b90435c9e8f2",
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "--network",
+        "none",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges",
+        "-v",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi:/tool:ro",
+        "-v",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-compiler14-successor-2026-10-09/tools/pdl-input:/pdl:ro",
+        "-v",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/dependency-followup-2026-10-08/touch-source:/headers:ro",
+        "-v",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-pdl14-system-interface-2026-10-09/interface:/interface:ro",
+        "-v",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-pdl14-system-interface-2026-10-09/outputs/cy_systick.c:/out",
+        "ubuntu@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55",
+        "/tool/bin/arm-none-eabi-gcc",
+        "-mcpu=cortex-m0plus",
+        "-mthumb",
+        "-Og",
+        "-ffreestanding",
+        "-fno-builtin",
+        "-DCY8C4046FNI_T412",
+        "-ffunction-sections",
+        "-I/interface",
+        "-I/headers",
+        "-I/headers/cmsis",
+        "-I/pdl/drivers/include",
+        "-I/pdl/devices/include",
+        "-I/headers/core-lib-ca57d1e519e08badec6891d1776c7b4f05e09561/include",
+        "-c",
+        "/pdl/drivers/source/cy_systick.c",
+        "-o",
+        "/out/public.o"
+      ],
+      "exit_code": 0,
+      "diagnostics": "",
+      "functions": [
+        {
+          "function": "Cy_SysTick_ServiceCallbacks",
+          "address": 42484,
+          "historical_code_bytes": 36,
+          "target_code_sha256": "906e1fce8eaafa95081f67c2d866c8c796259e3f616c492a42d4e2e5b2ab94fd",
+          "absolute_payload_offset": 29460,
+          "confidence": "Inferred",
+          "source_unit": "cy_systick.c",
+          "status": "predeclared_unchanged_source_comparison",
+          "compiled_bytes": 44,
+          "compiled_sha256": "b642e82168ffc0e660c26abc724d56c6ca408b5aae61350811cb37cea09a4a06",
+          "relocations": [
+            {
+              "offset": 40,
+              "type": 2,
+              "symbol": ""
+            }
+          ],
+          "overlap_mismatched_positions": [],
+          "comparison_status": "relocation_or_extent_boundary"
+        },
+        {
+          "function": "Cy_SysTick_Enable",
+          "address": 42528,
+          "historical_code_bytes": 20,
+          "target_code_sha256": "840421b206ab4311a51771ed1814d0d1524ea460f0ebcc93a27ec718dd0a2dbe",
+          "absolute_payload_offset": 29504,
+          "confidence": "Inferred",
+          "source_unit": "cy_systick.c",
+          "status": "predeclared_unchanged_source_comparison",
+          "compiled_bytes": 24,
+          "compiled_sha256": "0b2b621114164e4772b34a2039c954fb5ab6047813d2536e6bb50b38e661394a",
+          "relocations": [],
+          "overlap_mismatched_positions": [],
+          "comparison_status": "relocation_or_extent_boundary"
+        },
+        {
+          "function": "Cy_SysTick_SetClockSource",
+          "address": 42552,
+          "historical_code_bytes": 18,
+          "target_code_sha256": "62a12c998cd10c3f340edeb68c643e6ef6590288cd19bc6dc65eeeca469bc2c4",
+          "absolute_payload_offset": 29528,
+          "confidence": "Inferred",
+          "source_unit": "cy_systick.c",
+          "status": "predeclared_unchanged_source_comparison",
+          "compiled_bytes": 24,
+          "compiled_sha256": "a54db68c6ca1baa3e5b528f2914b41d8edb8644d46952d473bcab5a941741069",
+          "relocations": [],
+          "overlap_mismatched_positions": [],
+          "comparison_status": "relocation_or_extent_boundary"
+        },
+        {
+          "function": "Cy_SysTick_Init",
+          "address": 42576,
+          "historical_code_bytes": 70,
+          "target_code_sha256": "922d6cde0f9ca45972dd69c5c5f8d10cb87f3ea517176b413e88656b4983fbae",
+          "absolute_payload_offset": 29552,
+          "confidence": "Inferred",
+          "source_unit": "cy_systick.c",
+          "status": "predeclared_unchanged_source_comparison",
+          "compiled_bytes": 88,
+          "compiled_sha256": "1bd64359bc38c7ce253dc7a9f3a41aa0fb081ccbb82b1550df60e7df23ac1da0",
+          "relocations": [
+            {
+              "offset": 38,
+              "type": 10,
+              "symbol": "Cy_SysTick_SetClockSource"
+            },
+            {
+              "offset": 64,
+              "type": 10,
+              "symbol": "Cy_SysTick_Enable"
+            },
+            {
+              "offset": 72,
+              "type": 2,
+              "symbol": ""
+            },
+            {
+              "offset": 76,
+              "type": 2,
+              "symbol": "__RAM_VECTOR_TABLE"
+            },
+            {
+              "offset": 80,
+              "type": 2,
+              "symbol": "Cy_SysTick_ServiceCallbacks"
+            }
+          ],
+          "overlap_mismatched_positions": [
+            40,
+            66
+          ],
+          "comparison_status": "relocation_or_extent_boundary"
+        },
+        {
+          "function": "Cy_SysTick_SetCallback",
+          "address": 42664,
+          "historical_code_bytes": 18,
+          "target_code_sha256": "b88dd21f71847063c4d508a5bece3857cdbdb019d445b6830eaf825d57efc5f3",
+          "absolute_payload_offset": 29640,
+          "confidence": "Inferred",
+          "source_unit": "cy_systick.c",
+          "status": "predeclared_unchanged_source_comparison",
+          "compiled_bytes": 24,
+          "compiled_sha256": "b59b277e0db8545b35c21950f446c40d67cd27aeb08ba41b23c976599af2bf1d",
+          "relocations": [
+            {
+              "offset": 20,
+              "type": 2,
+              "symbol": ""
+            }
+          ],
+          "overlap_mismatched_positions": [],
+          "comparison_status": "relocation_or_extent_boundary"
+        }
+      ],
+      "consumed_input_hashes": {
+        "/pdl/drivers/source/cy_systick.c": "e6035ec4478368f73ed89707d185f4eaca085269343cb9ccb5e5b90435c9e8f2",
+        "/pdl/drivers/include/cy_systick.h": "441fdffdb4eb70d32156439fa5365f260309a7effb0aa15aa67688a566380c2a",
+        "/tool/lib/gcc/arm-none-eabi/14.2.1/include/stdint.h": "86a7914ab7d6a18465a6fb9a7b54f945cad604fdbf3ca0d10e4e0254e0037911",
+        "/tool/lib/gcc/arm-none-eabi/14.2.1/include/stdint-gcc.h": "bc975de13f21d9336769718601ec86e1c1efd60fc75f5f4ce1d04508768a6e49",
+        "/pdl/drivers/include/cy_syslib.h": "6c6e35da19d618c752c767873e89ae6144877a1a4eacafe13b31cc0c0f8e7ca4",
+        "/tool/lib/gcc/arm-none-eabi/14.2.1/include/stdbool.h": "7b9c438a5b2f082a560a72da8d752da51062cc6f84d1c4acec45ff0a68e8d037",
+        "/headers/core-lib-ca57d1e519e08badec6891d1776c7b4f05e09561/include/cy_utils.h": "5c084c021be5aa19c667dad4975ac01dd0dafe569dbbcf64392ab9c919d2da7b",
+        "/headers/core-lib-ca57d1e519e08badec6891d1776c7b4f05e09561/include/cy_result.h": "7bf08391ef9934c9d5678729d89c7b6db10f22fade519fae97970c6bead7b322",
+        "/pdl/drivers/include/cy_device.h": "9c6818390b6e68458141370690e1e4175848bb950cfc5b2aec9db7b23027f6e9",
+        "/pdl/devices/include/cy_device_headers.h": "5d30f5a298ac34084ff8d899fdcecebee7a4170d2e634fc097ccfa664f4b64fa",
+        "/pdl/devices/include/cy8c4046fni_t412.h": "5e8ac6fab78847c7a667b9afd0e425e8ceefdb92390cb51a0d0fba09939d6a3b",
+        "/headers/cmsis/core_cm0plus.h": "a09fa9c6b8b21d1920bce15b98aa56182b027e9278cca0b154812bac2aea3cfa",
+        "/headers/cmsis/cmsis_version.h": "184c19fd3ee73632edf35a0b4d49cd48be75fbf49e6ccb19d9db05fa83bea4b3",
+        "/headers/cmsis/cmsis_compiler.h": "b51963d271c1571ca3463654c76aa7ea50c4eac5d0a2710df10414ac64d9e0f8",
+        "/headers/cmsis/cmsis_gcc.h": "43bfd1fe69fbbc2ca70aaf7d43cc3e20f16e0c7f66e1bdef9b51af6dc14b2617",
+        "/interface/system_cat2.h": "5eb47d11872c01221d27a5b8be87327fc564aafdd1fb6fde2eea2421161ecf99",
+        "/pdl/devices/include/psoc4000t_config.h": "a83a5cfe611d261e19752a7c5ecd48a76d7f32f9296425a589b3713418f07b30",
+        "/pdl/devices/include/ip/cyip_sflash_psoc4000t.h": "66cb98fe5806304dba9be7a79ffd3585c060aee6caa5b735e57140006dfa67e6",
+        "/pdl/devices/include/ip/cyip_headers.h": "6450f87bcfb025efa312c8a23bbefa303244d38d94448b375de5abb866a493e6",
+        "/pdl/devices/include/ip/cyip_peri.h": "95db82fdc0293f2f18a13281c7bbfd216628707c481bf255e36caa0b568de342",
+        "/pdl/devices/include/ip/cyip_hsiom.h": "7638c928fa62097f82ad34b7d1cbbeaa20ac1c035f72ad827d53522dcf99409f",
+        "/pdl/devices/include/ip/cyip_srsslt.h": "74bf8dfb47a1839774a26e4e4dcdf5956adf1b09e20df5abc24be3fccf7a4a65",
+        "/pdl/devices/include/ip/cyip_gpio.h": "c48618ad2bb0a1efa656e23f5b97954b7ed1459d789cacd591877372ae73b93c",
+        "/pdl/devices/include/ip/cyip_cpuss_v3.h": "41d774ede5b9d7a5b3eb9bcbd41e96b35d90f0cbe63918513e78e7d1bb9f8bbd",
+        "/pdl/devices/include/ip/cyip_dmac_v3.h": "8266541cf8f15457b52418d8a3f2b2ab15c33bedb5a33ee58b4b4e2f9e8e5626",
+        "/pdl/devices/include/ip/cyip_spcif_v3.h": "1d9e33f49bfa3b0aebc5340b6903568e080d6215b44bad20f664781e93ad1639",
+        "/pdl/devices/include/ip/cyip_tcpwm_v2.h": "e94f9c408d8d45e21829da98b3d98eb59e95190d4d0b5ea0763c6f7df437063c",
+        "/pdl/devices/include/ip/cyip_scb_v3.h": "bd2ccbee6b9a580834538915d6b40356df9b9d6c1c36a1fbfcba623881e11c7c",
+        "/pdl/devices/include/ip/cyip_msclp.h": "777b627dadfbdddd5024b121edb0a57875c12d865db1cd245585b51944436d1f",
+        "/pdl/devices/include/gpio_psoc4000t_25_wlcsp.h": "96200d5a5382694a432f29607a9f2738ec6ff097ccece7ee1dbe72c58449ab62",
+        "/tool/lib/gcc/arm-none-eabi/14.2.1/include/stddef.h": "c93f57f1538121cdbc27b59a47f1ed82b078d40e404b46481c83bafadd5deada"
+      },
+      "output_hashes": {
+        "public.i": "73c6490308fa994d506a10d3a57d7f2b0874d728808a7c4eef6f00de9d28a159",
+        "public.o": "b60c49aea6dfa3c9f20eb6f0b1e713ad7d79502adcba8a25db0301fd92207a83",
+        "public.d": "e032f1c1c8e31de6a9b42e1e235cb8006e9220b80d9df5d13bdcdab19136cb93"
+      }
+    }
+  ],
+  "admitted": false
+}

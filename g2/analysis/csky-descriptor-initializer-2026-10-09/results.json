@@ -1,0 +1,251 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20260930T190500Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "component": "codec",
+  "image_id": "binh_a_stage2_xip",
+  "isa_mode": "C-SKY_ABIv2",
+  "status": "partial_unreviewed_not_admitted",
+  "accepted": false,
+  "range": [
+    270555348,
+    270555472
+  ],
+  "body_sha256": "c13a69a60ee8e84ee09a3825ae1d2d7802a908f58b0ac5deac21c071f9d72d33",
+  "code_range": [
+    270555348,
+    270555462
+  ],
+  "code_bytes": 114,
+  "bkpt_range": [
+    270555462,
+    270555464
+  ],
+  "bkpt_bytes": 2,
+  "literal_range": [
+    270555464,
+    270555472
+  ],
+  "literal_bytes": 8,
+  "child_range": [
+    10448,
+    10572
+  ],
+  "payload_range": [
+    61024,
+    61148
+  ],
+  "conditional_runtime_base": 270544900,
+  "direct_inputs": [
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin",
+      "sha256": "49c9aed0126493220a3e48827c267d5e94f64d51d9ede0ccc3e84b8946744584"
+    },
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+      "sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-objdump",
+      "sha256": "7150f7ffc2ac163f3d2d465620e5dac96df4b29411e5d0944419c41657cc2382"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-recovery-5316/001/full-xip.objdump.txt",
+      "sha256": "13a9f1eef49d3cfdc8e4795164223968481701fd7a029bbc6a1ac530e30029b7"
+    }
+  ],
+  "decoder_argv": [
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-objdump",
+    "-D",
+    "--disassemble-zeroes",
+    "-b",
+    "binary",
+    "-m",
+    "csky",
+    "-EL",
+    "--adjust-vma=0x10203004",
+    "--start-address=0x102058d4",
+    "--stop-address=0x10205946",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin"
+  ],
+  "decoder_exit_code": 0,
+  "instructions": [
+    {
+      "address": 270555348,
+      "bytes": 4,
+      "instruction": "movi      \tr12, 0"
+    },
+    {
+      "address": 270555352,
+      "bytes": 4,
+      "instruction": "lrw      \tr20, 0x20027350\t// 0x10205948"
+    },
+    {
+      "address": 270555356,
+      "bytes": 2,
+      "instruction": "mov      \tr1, r12"
+    },
+    {
+      "address": 270555358,
+      "bytes": 4,
+      "instruction": "lsli      \tr21, r20, 0"
+    },
+    {
+      "address": 270555362,
+      "bytes": 4,
+      "instruction": "movi      \tr23, 12"
+    },
+    {
+      "address": 270555366,
+      "bytes": 4,
+      "instruction": "movi      \tr22, 144"
+    },
+    {
+      "address": 270555370,
+      "bytes": 4,
+      "instruction": "movih      \tr24, 1"
+    },
+    {
+      "address": 270555374,
+      "bytes": 4,
+      "instruction": "addi      \tr24, r24, 136"
+    },
+    {
+      "address": 270555378,
+      "bytes": 4,
+      "instruction": "lrw      \tr25, 0x4100ff\t// 0x1020594c"
+    },
+    {
+      "address": 270555382,
+      "bytes": 4,
+      "instruction": "addi      \tr2, r12, 44"
+    },
+    {
+      "address": 270555386,
+      "bytes": 4,
+      "instruction": "addu      \tr2, r20, r2"
+    },
+    {
+      "address": 270555390,
+      "bytes": 2,
+      "instruction": "movi      \tr0, 0"
+    },
+    {
+      "address": 270555392,
+      "bytes": 4,
+      "instruction": "mult      \tr3, r1, r22"
+    },
+    {
+      "address": 270555396,
+      "bytes": 4,
+      "instruction": "movi      \tr18, 8"
+    },
+    {
+      "address": 270555400,
+      "bytes": 2,
+      "instruction": "mov      \tr13, r3"
+    },
+    {
+      "address": 270555402,
+      "bytes": 4,
+      "instruction": "mula.32.l      \tr13, r0, r23"
+    },
+    {
+      "address": 270555406,
+      "bytes": 4,
+      "instruction": "addi      \tr19, r0, 128"
+    },
+    {
+      "address": 270555410,
+      "bytes": 4,
+      "instruction": "addu      \tr13, r21, r13"
+    },
+    {
+      "address": 270555414,
+      "bytes": 4,
+      "instruction": "bseti      \tr19, r19, 16"
+    },
+    {
+      "address": 270555418,
+      "bytes": 4,
+      "instruction": "st.w      \tr19, (r13, 0x20)"
+    },
+    {
+      "address": 270555422,
+      "bytes": 4,
+      "instruction": "zext      \tr19, r2, 27, 0"
+    },
+    {
+      "address": 270555426,
+      "bytes": 4,
+      "instruction": "st.w      \tr19, (r13, 0x24)"
+    },
+    {
+      "address": 270555430,
+      "bytes": 2,
+      "instruction": "addi      \tr2, 12"
+    },
+    {
+      "address": 270555432,
+      "bytes": 2,
+      "instruction": "addi      \tr0, 1"
+    },
+    {
+      "address": 270555434,
+      "bytes": 4,
+      "instruction": "bnezad      \tr18, 0x10205908\t// 0x10205908"
+    },
+    {
+      "address": 270555438,
+      "bytes": 2,
+      "instruction": "addi      \tr1, 1"
+    },
+    {
+      "address": 270555440,
+      "bytes": 4,
+      "instruction": "addu      \tr3, r21, r3"
+    },
+    {
+      "address": 270555444,
+      "bytes": 2,
+      "instruction": "cmpnei      \tr1, 10"
+    },
+    {
+      "address": 270555446,
+      "bytes": 4,
+      "instruction": "st.w      \tr24, (r3, 0x80)"
+    },
+    {
+      "address": 270555450,
+      "bytes": 4,
+      "instruction": "addi      \tr12, r12, 144"
+    },
+    {
+      "address": 270555454,
+      "bytes": 4,
+      "instruction": "st.w      \tr25, (r3, 0x10)"
+    },
+    {
+      "address": 270555458,
+      "bytes": 2,
+      "instruction": "bt      \t0x102058f6\t// 0x102058f6"
+    },
+    {
+      "address": 270555460,
+      "bytes": 2,
+      "instruction": "jmp      \tr15"
+    }
+  ],
+  "direct_callers": [
+    "10205d20:\te3fffdda \tbsr      \t0x102058d4\t// 0x102058d4"
+  ],
+  "ownership_contracts_scanned": 117,
+  "original_instruction_execution": false,
+  "semantic_model_execution": false,
+  "unresolved": [
+    "MULA.32.L and BNEZAD manual-backed exact semantics",
+    "register ABI/caller contracts",
+    "live mapping and structure meaning",
+    "independent review and adoption"
+  ]
+}

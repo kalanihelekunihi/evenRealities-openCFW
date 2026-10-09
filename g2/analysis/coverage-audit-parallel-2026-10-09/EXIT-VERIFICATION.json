@@ -1,0 +1,44 @@
+{
+  "sources_hash_verified": true,
+  "compile_runs": [
+    {
+      "function": "__libc_init_array",
+      "input_hashes_verified": true,
+      "object_hash_verified": true,
+      "preprocessing_hash_verified": true,
+      "nonrelocated_mismatches_verified": true,
+      "mismatch_count": 37
+    },
+    {
+      "function": "exit",
+      "input_hashes_verified": true,
+      "object_hash_verified": true,
+      "preprocessing_hash_verified": true,
+      "nonrelocated_mismatches_verified": true,
+      "mismatch_count": 0
+    }
+  ],
+  "link_input_hashes_verified": true,
+  "exit_exact": true,
+  "exit_hash_verified": true,
+  "extent_verified": true,
+  "undefined_weak_exitprocs_verified": true,
+  "weak_call_linked_bytes": "00e000bf",
+  "only_relocations_changed": true,
+  "exit_call_target_verified": true,
+  "weak_literal_zero": true,
+  "stdio_slot_verified": true,
+  "original_LDR_references": [
+    [
+      "0xa9ac",
+      "0xa9cc"
+    ],
+    [
+      "0xa9bc",
+      "0xa9d0"
+    ]
+  ],
+  "ends_at_memset_start": true,
+  "new_dependency_bytes": 40,
+  "census_increment": 0
+}

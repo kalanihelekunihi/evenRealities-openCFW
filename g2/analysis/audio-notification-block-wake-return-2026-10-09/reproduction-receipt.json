@@ -1,0 +1,25 @@
+{
+  "elf": "/tmp/opencfw-notification-roundtrip/roundtrip.elf",
+  "elf_sha256": "4c1db2c7fa972fe602f44f587c698535f254c1b9c3ea9b3f536f1ab7f310f659",
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "flags": [
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "link_script": "audio_irq_context = 0x44900F; audio_tick = 0x454EFF; audio_enter_critical = 0x4420D1; audio_exit_critical = 0x4420E9; audio_block_ticks = audio_block_current; audio_yield = 0x4420BD; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }",
+  "sources": {
+    "g2/components/audio/notification_wait_offline/wait.c": "4cb784daba9a06f6eaca4df811dde79721db5310cec61df685aeb4cbdf989f1b",
+    "g2/components/audio/notification_block_offline/block.c": "af3ee7322a88aee66c9122e0862357a87d556fe094c15bd808ba9bd6dc7a9286",
+    "g2/components/audio/uart_rx_notifier_offline/notify.c": "9109a27d92b066ad885ddf5b004d63d9000bf5dbf16759bb210cbeb236e96882",
+    "g2/components/audio/uart_rx_stream_offline/support.c": "b47f30562c9d8bf635fddbc2cf9393102410937263935805ba0f55597231bd51",
+    "g2/components/audio/tick_expiry_offline/tick.c": "e8e3b2cc3a819784f11a3ad7782d4db706cc1d3ce198088efbbaa74b2f69169d",
+    "g2/components/audio/notification_wake_offline/wake.h": "34ffd5555001498cc6e9dd0b51b4d6f93687001e6314d4a65640575d954b22ac",
+    "g2/components/audio/notification_block_offline/block.h": "5df0625579945eb952acb659c8292ea970eefcce087024304f8dfae0726bd5c5",
+    "g2/components/audio/uart_rx_notifier_offline/notify.h": "78e29df0eaacafd30804f4d202aeb770ccf29cb02a4b70946e035b48ce80ab59"
+  },
+  "limits": "Fixture explicitly orders block, notifier or tick, then resumes the saved wait continuation. No exception delivery/context switch is simulated."
+}

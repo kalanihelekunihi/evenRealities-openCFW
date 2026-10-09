@@ -1,0 +1,27 @@
+{
+  "elf": "/tmp/opencfw-codec-lifecycle-hal/lifecycle.elf",
+  "elf_sha256": "40e832faec8595446f5b13ff9e6d5a2aace229fb0cebf46d059e7bf064bd4837",
+  "sources": {
+    "g2/components/audio/codec_uart_lifecycle_offline/lifecycle.c": "08d1b5dd7fa9ed5227c32628fe3511dc6f47401885328e7d453d9fabd020b4b8",
+    "g2/components/audio/codec_uart_drain_offline/drain.c": "eac8a63efe99ad2d819cff4e4db561d3f5cf5e5f9385ade30fd0d6ed907f710e",
+    "g2/components/audio/uart_rx_consumer_offline/ring.c": "4c3ad9247963da8714f56426a88084efb97f56d8db4cd29f44aa9a42d1e6eaaf",
+    "g2/components/audio/uart_power_config_offline/am_hal_uart.c": "14afdaf81a6c31283669ebd993a75fa6821fbb6e0107c2f1f588acd4f1d6916b",
+    "g2/components/audio/uart_power_config_offline/division_support.c": "5f4e8cb0623a51a1cfa01f323921d11248a836c8b1e60c41b73e4133617673b9",
+    "g2/components/audio/codec_uart_lifecycle_offline/lifecycle.h": "99a65fab17c3652163c0a2f0d1e9322aa263b30552c418f3bba9a2812b056cb7",
+    "g2/components/audio/codec_uart_drain_offline/drain.h": "0099b093f0f3479d96b8625485f21252d8a8f24e54897f3d0081abbf2b28d6a8",
+    "g2/components/audio/uart_rx_consumer_offline/ring.h": "4b9187940c795dd9a910e6d286c0751c5305e4d34fecd0ac9a90e05252e14e5a",
+    "g2/components/audio/uart_power_config_offline/compat.h": "5264f0a545bd6bee22496f6fabc1781783025adbf261127855b93d14c057e133"
+  },
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "flags": [
+    "-mcpu=cortex-m33",
+    "-mthumb",
+    "-Og",
+    "-fkeep-static-functions",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "link_script": "codec_hal_power = am_hal_uart_power_control; codec_gpio_config = 0x480F0D; codec_hal_configure = am_hal_uart_configure; am_hal_pwrctrl_periph_enable = 0x47F5B9; am_hal_pwrctrl_periph_disable = 0x47F7AF; am_hal_clkmgr_clock_request = 0x4C44BD; am_hal_clkmgr_clock_release = 0x4C4531; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }",
+  "limits": "Lifecycle calls reconstructed HAL power/configure. Peripheral-domain/clock/GPIO providers remain explicit fixture boundaries; no physical state claim."
+}

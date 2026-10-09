@@ -1,0 +1,310 @@
+{
+  "argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--platform",
+    "linux/amd64",
+    "--network",
+    "none",
+    "--cap-drop",
+    "ALL",
+    "--security-opt",
+    "no-new-privileges",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi:/tool:ro",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-pdl14-finite-census-2026-10-09/outputs/cy_scb_i2c.c:/input:ro",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-i2c14-slave-linkage-2026-10-09/outputs:/out",
+    "ubuntu@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55",
+    "/tool/bin/arm-none-eabi-ld",
+    "--gc-sections",
+    "-T",
+    "/out/link.ld",
+    "/input/public.o",
+    "/out/common.o",
+    "/out/assembly.o",
+    "-o",
+    "/out/linked.elf"
+  ],
+  "diagnostics": "",
+  "original_calls": [
+    {
+      "caller": "SlaveHandleHsMode",
+      "instruction": "0x9368",
+      "callee": "Cy_SCB_SetRxFifoLevel",
+      "target": "0x9316"
+    },
+    {
+      "caller": "SlaveHandleStop",
+      "instruction": "0x94d0",
+      "callee": "Cy_SCB_SetRxFifoLevel",
+      "target": "0x9316"
+    },
+    {
+      "caller": "SlaveHandleAck",
+      "instruction": "0x959e",
+      "callee": "Cy_SCB_SetRxFifoLevel",
+      "target": "0x9316"
+    },
+    {
+      "caller": "SlaveHandleAddress",
+      "instruction": "0x9652",
+      "callee": "Cy_SCB_SetRxFifoLevel",
+      "target": "0x9316"
+    },
+    {
+      "caller": "SlaveHandleAddress",
+      "instruction": "0x9716",
+      "callee": "SlaveHandleAck",
+      "target": "0x9510"
+    },
+    {
+      "caller": "SlaveHandleDataReceive",
+      "instruction": "0x979a",
+      "callee": "Cy_SCB_ReadArray",
+      "target": "0x9250"
+    },
+    {
+      "caller": "SlaveHandleDataReceive",
+      "instruction": "0x97de",
+      "callee": "Cy_SCB_SetRxFifoLevel",
+      "target": "0x9316"
+    },
+    {
+      "caller": "SlaveHandleDataTransmit",
+      "instruction": "0x984e",
+      "callee": "Cy_SCB_WriteDefaultArray",
+      "target": "0x92e6"
+    },
+    {
+      "caller": "SlaveHandleDataTransmit",
+      "instruction": "0x9878",
+      "callee": "Cy_SCB_WriteArray",
+      "target": "0x92a6"
+    },
+    {
+      "caller": "SlaveHandleDataTransmit",
+      "instruction": "0x98a2",
+      "callee": "Cy_SysLib_EnterCriticalSection",
+      "target": "0x4492"
+    },
+    {
+      "caller": "SlaveHandleDataTransmit",
+      "instruction": "0x98ba",
+      "callee": "Cy_SysLib_ExitCriticalSection",
+      "target": "0x449a"
+    },
+    {
+      "caller": "Cy_SCB_I2C_SlaveInterrupt",
+      "instruction": "0x9b7a",
+      "callee": "SlaveHandleDataReceive",
+      "target": "0x9748"
+    },
+    {
+      "caller": "Cy_SCB_I2C_SlaveInterrupt",
+      "instruction": "0x9bb2",
+      "callee": "SlaveHandleHsMode",
+      "target": "0x9344"
+    },
+    {
+      "caller": "Cy_SCB_I2C_SlaveInterrupt",
+      "instruction": "0x9bda",
+      "callee": "SlaveHandleStop",
+      "target": "0x93c4"
+    },
+    {
+      "caller": "Cy_SCB_I2C_SlaveInterrupt",
+      "instruction": "0x9bf2",
+      "callee": "SlaveHandleAddress",
+      "target": "0x95b8"
+    },
+    {
+      "caller": "Cy_SCB_I2C_SlaveInterrupt",
+      "instruction": "0x9c10",
+      "callee": "SlaveHandleDataTransmit",
+      "target": "0x97fc"
+    }
+  ],
+  "sections": [
+    {
+      "section": "assembly",
+      "address": "0x4480",
+      "expected_bytes": 32,
+      "linked_bytes": 32,
+      "exact": true,
+      "sha256": "02cb5cdf6b3c45ffd15d390fe015586fa14e4a7f5950424848b068ceb7343347",
+      "stock_sha256": "02cb5cdf6b3c45ffd15d390fe015586fa14e4a7f5950424848b068ceb7343347",
+      "selected_new_candidate": false,
+      "new_helper_outside_denominator": false
+    },
+    {
+      "section": "read_helper",
+      "address": "0x9218",
+      "expected_bytes": 56,
+      "linked_bytes": 56,
+      "exact": true,
+      "sha256": "07627776d2bc275029e974a40d0944d6b87502cfea118880b8d60d6c3fa97cc7",
+      "stock_sha256": "07627776d2bc275029e974a40d0944d6b87502cfea118880b8d60d6c3fa97cc7",
+      "selected_new_candidate": false,
+      "new_helper_outside_denominator": false
+    },
+    {
+      "section": "read",
+      "address": "0x9250",
+      "expected_bytes": 30,
+      "linked_bytes": 30,
+      "exact": true,
+      "sha256": "c7729e5dfb38b7391112b5eeeb9e0a8b0fc0d2ad0bc2e1e9b53b353b401e5e49",
+      "stock_sha256": "c7729e5dfb38b7391112b5eeeb9e0a8b0fc0d2ad0bc2e1e9b53b353b401e5e49",
+      "selected_new_candidate": false,
+      "new_helper_outside_denominator": false
+    },
+    {
+      "section": "write_helper",
+      "address": "0x926e",
+      "expected_bytes": 56,
+      "linked_bytes": 56,
+      "exact": true,
+      "sha256": "ba8eabab79e5f3cf46e4b9b7bd76456a262ed1ff7d3780885a747f9eb6e1b434",
+      "stock_sha256": "ba8eabab79e5f3cf46e4b9b7bd76456a262ed1ff7d3780885a747f9eb6e1b434",
+      "selected_new_candidate": false,
+      "new_helper_outside_denominator": false
+    },
+    {
+      "section": "write",
+      "address": "0x92a6",
+      "expected_bytes": 48,
+      "linked_bytes": 48,
+      "exact": true,
+      "sha256": "e3bd934582667c74ed28fa5a43ce49d2a70802d22b01b6f01ff19994fa474ce9",
+      "stock_sha256": "e3bd934582667c74ed28fa5a43ce49d2a70802d22b01b6f01ff19994fa474ce9",
+      "selected_new_candidate": false,
+      "new_helper_outside_denominator": false
+    },
+    {
+      "section": "default_helper",
+      "address": "0x92d6",
+      "expected_bytes": 16,
+      "linked_bytes": 16,
+      "exact": true,
+      "sha256": "ec65352149705e5d99247c6304f60772bc6feacccd2c020952f45b32e2c531b1",
+      "stock_sha256": "ec65352149705e5d99247c6304f60772bc6feacccd2c020952f45b32e2c531b1",
+      "selected_new_candidate": false,
+      "new_helper_outside_denominator": false
+    },
+    {
+      "section": "default",
+      "address": "0x92e6",
+      "expected_bytes": 48,
+      "linked_bytes": 48,
+      "exact": true,
+      "sha256": "a138965686502bfecef80f1c8972059b8ea8379e3ea2f23ffd3ad471f749284b",
+      "stock_sha256": "a138965686502bfecef80f1c8972059b8ea8379e3ea2f23ffd3ad471f749284b",
+      "selected_new_candidate": false,
+      "new_helper_outside_denominator": false
+    },
+    {
+      "section": "rx_level",
+      "address": "0x9316",
+      "expected_bytes": 44,
+      "linked_bytes": 44,
+      "exact": true,
+      "sha256": "1fdc6e20657ebf1efbbf7423c354904526f55af9f31d09ad5cd700d69ecdb993",
+      "stock_sha256": "1fdc6e20657ebf1efbbf7423c354904526f55af9f31d09ad5cd700d69ecdb993",
+      "selected_new_candidate": false,
+      "new_helper_outside_denominator": false
+    },
+    {
+      "section": "hs",
+      "address": "0x9344",
+      "expected_bytes": 128,
+      "linked_bytes": 128,
+      "exact": true,
+      "sha256": "52844b41444911e07df42cf8ad10eb7b5a31898b841d87d511e7d1db8dcda351",
+      "stock_sha256": "52844b41444911e07df42cf8ad10eb7b5a31898b841d87d511e7d1db8dcda351",
+      "selected_new_candidate": false,
+      "new_helper_outside_denominator": true
+    },
+    {
+      "section": "stop",
+      "address": "0x93c4",
+      "expected_bytes": 332,
+      "linked_bytes": 332,
+      "exact": true,
+      "sha256": "c98e65e44665be0fc59c2a501d437a7976647cf68350dff1282d7c459ac9a895",
+      "stock_sha256": "c98e65e44665be0fc59c2a501d437a7976647cf68350dff1282d7c459ac9a895",
+      "selected_new_candidate": false,
+      "new_helper_outside_denominator": true
+    },
+    {
+      "section": "ack",
+      "address": "0x9510",
+      "expected_bytes": 168,
+      "linked_bytes": 168,
+      "exact": true,
+      "sha256": "6058a2b52db992048467aef5bc1adb825cf4975ae8405156ed026afda64bb3d0",
+      "stock_sha256": "6058a2b52db992048467aef5bc1adb825cf4975ae8405156ed026afda64bb3d0",
+      "selected_new_candidate": false,
+      "new_helper_outside_denominator": true
+    },
+    {
+      "section": "address",
+      "address": "0x95b8",
+      "expected_bytes": 400,
+      "linked_bytes": 400,
+      "exact": true,
+      "sha256": "a2b594c7c52671833920a85339d891fbe3965fe25380a01fcb20baa5dcb6fb1c",
+      "stock_sha256": "a2b594c7c52671833920a85339d891fbe3965fe25380a01fcb20baa5dcb6fb1c",
+      "selected_new_candidate": false,
+      "new_helper_outside_denominator": true
+    },
+    {
+      "section": "receive",
+      "address": "0x9748",
+      "expected_bytes": 180,
+      "linked_bytes": 180,
+      "exact": true,
+      "sha256": "b8ba3ec664ad73e970f0de0138138dcab5cdcd9eb9bf66f9d6c6fd20838315ba",
+      "stock_sha256": "b8ba3ec664ad73e970f0de0138138dcab5cdcd9eb9bf66f9d6c6fd20838315ba",
+      "selected_new_candidate": false,
+      "new_helper_outside_denominator": true
+    },
+    {
+      "section": "transmit",
+      "address": "0x97fc",
+      "expected_bytes": 248,
+      "linked_bytes": 248,
+      "exact": true,
+      "sha256": "e913457dc3dbd58e46abfa5403da34d1069e0658ef07347964a7abe05736a72c",
+      "stock_sha256": "e913457dc3dbd58e46abfa5403da34d1069e0658ef07347964a7abe05736a72c",
+      "selected_new_candidate": false,
+      "new_helper_outside_denominator": true
+    },
+    {
+      "section": "interrupt",
+      "address": "0x9b0c",
+      "expected_bytes": 300,
+      "linked_bytes": 300,
+      "exact": true,
+      "sha256": "8d2b73c512f67e2ec8808e95dc8cb453852bf1ee1a5af5911bf9830dc827da6e",
+      "stock_sha256": "8d2b73c512f67e2ec8808e95dc8cb453852bf1ee1a5af5911bf9830dc827da6e",
+      "selected_new_candidate": true,
+      "new_helper_outside_denominator": false
+    }
+  ],
+  "input_object_sha256": "49d7e3cd82a0ed1ae7027494e733685a669334c2b16b0344f8249629af2ab6fb",
+  "common_object_sha256": "4c3849be4ad73caf2487ca46e1f96eda9a146f7c415248372095f355b62bf0c1",
+  "assembly_object_sha256": "4fcad330e4cc3da31fdbe12a1ad98e0686fd5beb68af993f7e725d44e67d5e39",
+  "link_script_sha256": "9a16cc54165e64aa989de3043ffeeca576e3e68797d1d65043201d5cff2eabb6",
+  "linked_elf_sha256": "3302d9ab43aaa941f7b9ea1202f1e097a3ea438c36b30276a11a43306abdd761",
+  "new_selected_candidate_functions": 1,
+  "new_selected_candidate_bytes": 300,
+  "new_helpers_outside_denominator_bytes": 1456,
+  "new_helpers_outside_denominator_functions": 6,
+  "independent_review": "pending",
+  "original_execution": false,
+  "manual_byte_patches": false,
+  "limits": "Complete reached direct-call byte linkage, not I2C bus traffic, event ordering, IRQ delivery or concurrent context state."
+}

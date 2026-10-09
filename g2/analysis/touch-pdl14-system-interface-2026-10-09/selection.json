@@ -1,0 +1,141 @@
+{
+  "scope": "existing Cy_ PDL-attributed symbol rows only; not all firmware functions",
+  "selection_before_compilation": true,
+  "payload_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "symbols_sha256": "ccd9c94ff3cde6c56067c60894c7952101deae88fe088a81b941f2513fdb73b0",
+  "functions": [
+    {
+      "function": "Cy_SysLib_DelayCycles",
+      "address": 17536,
+      "historical_code_bytes": 18,
+      "target_code_sha256": "a8b62136d338c6dc91e6f900f19cb30344601be2bc97b168940ca57281293760",
+      "absolute_payload_offset": 4512,
+      "confidence": "Strong",
+      "source_unit": "cy_syslib.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysLib_EnterCriticalSection",
+      "address": 17554,
+      "historical_code_bytes": 8,
+      "target_code_sha256": "720733fcf19a5635fcab0791fcc2b007294712bb27536443ff79490821c168cf",
+      "absolute_payload_offset": 4530,
+      "confidence": "Strong",
+      "source_unit": "cy_syslib.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysLib_ExitCriticalSection",
+      "address": 17562,
+      "historical_code_bytes": 6,
+      "target_code_sha256": "379ef840451b3bf5f9903b215cd3fe49e26244e0b6b8afe47b9e5c37a1ee1ca2",
+      "absolute_payload_offset": 4538,
+      "confidence": "Strong",
+      "source_unit": "cy_syslib.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysInt_SetVector",
+      "address": 41588,
+      "historical_code_bytes": 40,
+      "target_code_sha256": "f6edba26d99f37da897dd3ae65225e806a7dfa47d212cddbabafb750d1df0c8a",
+      "absolute_payload_offset": 28564,
+      "confidence": "Strong",
+      "source_unit": "cy_sysint.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysInt_Init",
+      "address": 41640,
+      "historical_code_bytes": 60,
+      "target_code_sha256": "ba1ac67702b267f9dad652680f738491a9d26e621f88e86d453a738d35dea85a",
+      "absolute_payload_offset": 28616,
+      "confidence": "Strong",
+      "source_unit": "cy_sysint.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysLib_Delay",
+      "address": 41712,
+      "historical_code_bytes": 40,
+      "target_code_sha256": "ccddf11f013fe0689e0d64677177f9ec21ebcf0f59616be7aa29603d4ce2b9a7",
+      "absolute_payload_offset": 28688,
+      "confidence": "Strong",
+      "source_unit": "cy_syslib.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysLib_DelayUs",
+      "address": 41764,
+      "historical_code_bytes": 14,
+      "target_code_sha256": "ea5dc16e63fcc13363c2c5e46bb7625701840a0842b3f6e648f11e5e8c2af831",
+      "absolute_payload_offset": 28740,
+      "confidence": "Inferred",
+      "source_unit": "cy_syslib.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysTick_ServiceCallbacks",
+      "address": 42484,
+      "historical_code_bytes": 36,
+      "target_code_sha256": "906e1fce8eaafa95081f67c2d866c8c796259e3f616c492a42d4e2e5b2ab94fd",
+      "absolute_payload_offset": 29460,
+      "confidence": "Inferred",
+      "source_unit": "cy_systick.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysTick_Enable",
+      "address": 42528,
+      "historical_code_bytes": 20,
+      "target_code_sha256": "840421b206ab4311a51771ed1814d0d1524ea460f0ebcc93a27ec718dd0a2dbe",
+      "absolute_payload_offset": 29504,
+      "confidence": "Inferred",
+      "source_unit": "cy_systick.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysTick_SetClockSource",
+      "address": 42552,
+      "historical_code_bytes": 18,
+      "target_code_sha256": "62a12c998cd10c3f340edeb68c643e6ef6590288cd19bc6dc65eeeca469bc2c4",
+      "absolute_payload_offset": 29528,
+      "confidence": "Inferred",
+      "source_unit": "cy_systick.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysTick_Init",
+      "address": 42576,
+      "historical_code_bytes": 70,
+      "target_code_sha256": "922d6cde0f9ca45972dd69c5c5f8d10cb87f3ea517176b413e88656b4983fbae",
+      "absolute_payload_offset": 29552,
+      "confidence": "Inferred",
+      "source_unit": "cy_systick.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysTick_SetCallback",
+      "address": 42664,
+      "historical_code_bytes": 18,
+      "target_code_sha256": "b88dd21f71847063c4d508a5bece3857cdbdb019d445b6830eaf825d57efc5f3",
+      "absolute_payload_offset": 29640,
+      "confidence": "Inferred",
+      "source_unit": "cy_systick.c",
+      "status": "predeclared_unchanged_source_comparison"
+    }
+  ],
+  "recognized_task_overlaps": [],
+  "extra_completed_control_not_named_in_symbols": "Cy_MSCLP_ConfigureScan",
+  "prior_selection_sha256": "a9e507a8aced3eee3fe51eb42ac134ac5f7c8a9331115439ca36fac513bc0d57",
+  "additional_input": {
+    "repository": "https://github.com/Infineon/TARGET_CY8CKIT-040T.git",
+    "commit": "d1bf634023bf92d083ad0e32083987f67b4a64e6",
+    "url": "https://raw.githubusercontent.com/Infineon/TARGET_CY8CKIT-040T/d1bf634023bf92d083ad0e32083987f67b4a64e6/system_cat2.h",
+    "path": "interface/system_cat2.h",
+    "sha256": "5eb47d11872c01221d27a5b8be87327fc564aafdd1fb6fde2eea2421161ecf99",
+    "purpose": "authentic PSoC4000T system declarations; BSP/producer identity not established",
+    "license": "Apache-2.0",
+    "modified": false
+  }
+}

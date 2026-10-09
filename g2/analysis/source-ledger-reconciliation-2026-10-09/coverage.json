@@ -1,0 +1,31 @@
+{
+  "uart_rx": {
+    "status": "resolved_to_scheduler_and_physical_boundary",
+    "batches": {
+      "audio-uart-rx-stream-ownership-2026-10-09": {"direct": 564, "compositions": 18},
+      "audio-uart-rx-consumer-2026-10-09": {"receiver": 391, "ring": 216, "prefix": 4},
+      "audio-uart-rx-notifier-2026-10-09": {"direct": 1440, "compositions": 36},
+      "audio-codec-uart-irq-delivery-2026-10-09": {"comparisons": 112},
+      "audio-codec-uart-rx-drain-2026-10-09": {"comparisons": 320}
+    },
+    "runtime_boundary": ["PendSV/NVIC delivery", "live task selection", "physical UART/IRQ timing"]
+  },
+  "pcm_variants": {
+    "pcm07_pcm20": {
+      "status": "selected_registered_software_bodies_resolved",
+      "batches": [
+        "audio-early-pcm-gpu-closure-2026-10-08",
+        "audio-early-pcm-pending-closure-2026-10-08",
+        "audio-trim-initialization-closure-2026-10-08",
+        "audio-early-pcm-dispatch-closure-2026-10-09"
+      ]
+    },
+    "pcm21": {"status": "resolved_through_default_reset", "final_family_comparisons_with_regressions": 7720},
+    "pcm22": {"status": "all_27_transition_entries_resolved", "comparisons_with_regressions": 12019},
+    "suspend": {"wrapper": "0x4803DC", "slot": 10, "stock_child_established": false, "registration_fixtures": 168}
+  },
+  "new_comparisons": 0,
+  "reason": "Named bodies already have sealed original/source comparisons; reconciliation avoids duplicate coverage claims.",
+  "remaining_static": ["actual CPU power-mode wrappers/callers", "UART3 TX interrupt drain"],
+  "global_source_exhausted": false
+}

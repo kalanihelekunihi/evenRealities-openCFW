@@ -1,0 +1,368 @@
+{
+  "tasks_scanned": 117,
+  "candidates": [
+    {
+      "source": "lvp/common/lvp_queue.c",
+      "line": 21,
+      "address": "0x100261B8",
+      "end": "0x10026212",
+      "size": "90",
+      "name": "LvpQueuePut",
+      "module": "image_a_sram",
+      "confidence": "Inferred",
+      "evidence": "g2/docs/research/gx8002-uart-receive-callback-source-verification.json: package 0x181CC; descriptive name from codec function recovery | also: gx8002-queue-put-comparison.json, gx8002-uart-body-queue.json, gx8002-uart-empty-header-queue.json, gx8002-uart-message-enqueue-queue.json +2 more",
+      "stock_sha256": "f267c3301f1725624a009ffb30bf92f2dee4c0f708918a078c9f1270e94e173a",
+      "ownership_hits": [],
+      "primary_receipt_hits": [],
+      "target_validation": {
+        "payload_offset": "0x181cc",
+        "sha256": "f267c3301f1725624a009ffb30bf92f2dee4c0f708918a078c9f1270e94e173a",
+        "matches_symbol_stock_hash": true
+      }
+    },
+    {
+      "source": "lvp/common/snpu_engine/lvp_kws.c",
+      "line": 341,
+      "address": "0x10206DAC",
+      "end": "0x10206DC0",
+      "size": "20",
+      "name": "LvpKwsDone",
+      "module": "image_a_xip",
+      "confidence": "Inferred",
+      "evidence": "g2/docs/research/gx8002-stream-shutdown-verification.json: package 0x10338; descriptive name from codec function recovery",
+      "stock_sha256": "310acf73ea192928c8cb6807edca2a4b7f2ecd3b9c17d571b19e187e2eb3d5f3",
+      "ownership_hits": [],
+      "primary_receipt_hits": [],
+      "target_validation": {
+        "payload_offset": "0x10338",
+        "sha256": "310acf73ea192928c8cb6807edca2a4b7f2ecd3b9c17d571b19e187e2eb3d5f3",
+        "matches_symbol_stock_hash": true
+      }
+    },
+    {
+      "source": "lvp/common/lvp_queue.c",
+      "line": 34,
+      "address": "0x10206FB0",
+      "end": "0x10206FFA",
+      "size": "74",
+      "name": "LvpQueueGet",
+      "module": "image_a_xip",
+      "confidence": "Inferred",
+      "evidence": "g2/docs/research/gx8002-queue-get-comparison.json: package 0x1053C; descriptive name from codec function recovery",
+      "stock_sha256": "31898a7d6f013ef63ffcc625138adff59d5aa02529e9f18833d168de8b53a043",
+      "ownership_hits": [],
+      "primary_receipt_hits": [],
+      "target_validation": {
+        "payload_offset": "0x1053c",
+        "sha256": "31898a7d6f013ef63ffcc625138adff59d5aa02529e9f18833d168de8b53a043",
+        "matches_symbol_stock_hash": true
+      }
+    },
+    {
+      "source": "lvp/common/lvp_queue.c",
+      "line": 57,
+      "address": "0x10206FFC",
+      "end": "0x10207006",
+      "size": "10",
+      "name": "LvpQueueIsEmpty",
+      "module": "image_a_xip",
+      "confidence": "Inferred",
+      "evidence": "g2/docs/research/gx8002-uart-message-initialize-source-verification.json: package 0x10588; descriptive name from codec function recovery | also: gx8002-queue-source-verification.json, gx8002-uart-message-initialize-queue.json",
+      "stock_sha256": "bc6d60f81dfc11f3f53d02427b0026e5f4bafde64a7523070778e7fe9852b679",
+      "ownership_hits": [],
+      "primary_receipt_hits": [],
+      "target_validation": {
+        "payload_offset": "0x10588",
+        "sha256": "bc6d60f81dfc11f3f53d02427b0026e5f4bafde64a7523070778e7fe9852b679",
+        "matches_symbol_stock_hash": true
+      }
+    },
+    {
+      "source": "lvp/common/lvp_queue.c",
+      "line": 62,
+      "address": "0x10207008",
+      "end": "0x10207020",
+      "size": "24",
+      "name": "LvpQueueIsFull",
+      "module": "image_a_xip",
+      "confidence": "Inferred",
+      "evidence": "g2/docs/research/gx8002-uart-message-initialize-source-verification.json: package 0x10594; descriptive name from codec function recovery | also: gx8002-queue-source-verification.json, gx8002-uart-message-initialize-queue.json",
+      "stock_sha256": "c620a8a4045d04230f4b4bb4597e2eddb44da812b769e99a36e0d4956144e4a9",
+      "ownership_hits": [],
+      "primary_receipt_hits": [],
+      "target_validation": {
+        "payload_offset": "0x10594",
+        "sha256": "c620a8a4045d04230f4b4bb4597e2eddb44da812b769e99a36e0d4956144e4a9",
+        "matches_symbol_stock_hash": true
+      }
+    },
+    {
+      "source": "lvp/common/lvp_audio_in.c",
+      "line": 604,
+      "address": "0x102073F8",
+      "end": "0x10207404",
+      "size": "12",
+      "name": "LvpAudioInDone",
+      "module": "image_a_xip",
+      "confidence": "Inferred",
+      "evidence": "g2/docs/research/gx8002-stream-shutdown-verification.json: package 0x10984; descriptive name from codec function recovery",
+      "stock_sha256": "d73c9634cda502fcfb7390b3ec55401dca01f7b02e41c8015ab51e935d30c13e",
+      "ownership_hits": [],
+      "primary_receipt_hits": [],
+      "target_validation": {
+        "payload_offset": "0x10984",
+        "sha256": "d73c9634cda502fcfb7390b3ec55401dca01f7b02e41c8015ab51e935d30c13e",
+        "matches_symbol_stock_hash": true
+      }
+    },
+    {
+      "source": "lvp/lvp_mode.c",
+      "line": 30,
+      "address": "0x102085A4",
+      "end": "0x102085F8",
+      "size": "84",
+      "name": "LvpInitMode",
+      "module": "image_a_xip",
+      "confidence": "Inferred",
+      "evidence": "g2/docs/research/gx8002-mode-verification.json: package 0x11B30; descriptive name from codec function recovery",
+      "stock_sha256": "7ea4eddc86dbfc7cdd2943a6e321418dbd9bbd155f11792fe8567449974ffa0f",
+      "ownership_hits": [],
+      "primary_receipt_hits": [],
+      "target_validation": {
+        "payload_offset": "0x11b30",
+        "sha256": "7ea4eddc86dbfc7cdd2943a6e321418dbd9bbd155f11792fe8567449974ffa0f",
+        "matches_symbol_stock_hash": true
+      }
+    },
+    {
+      "source": "lvp/lvp_mode.c",
+      "line": 83,
+      "address": "0x102085F8",
+      "end": "0x1020861C",
+      "size": "36",
+      "name": "LvpModeTick",
+      "module": "image_a_xip",
+      "confidence": "Inferred",
+      "evidence": "g2/docs/research/gx8002-mode-verification.json: package 0x11B84; descriptive name from codec function recovery",
+      "stock_sha256": "6fe66edddaa6c6c5191823ca65723295e5764b563b1491f8490b6a64772afaa5",
+      "ownership_hits": [],
+      "primary_receipt_hits": [],
+      "target_validation": {
+        "payload_offset": "0x11b84",
+        "sha256": "6fe66edddaa6c6c5191823ca65723295e5764b563b1491f8490b6a64772afaa5",
+        "matches_symbol_stock_hash": true
+      }
+    },
+    {
+      "source": "lvp/vui/kws/kws_strategy.c",
+      "line": 26,
+      "address": "0x10208978",
+      "end": "0x10208980",
+      "size": "8",
+      "name": "KwsStrategyInit",
+      "module": "image_a_xip",
+      "confidence": "Inferred",
+      "evidence": "g2/docs/research/gx8002-kws-reset-verification.json: package 0x11F04; descriptive name from codec function recovery",
+      "stock_sha256": "a8d2053faa21656bd4def9c5933ed4c9c013520e45d946e35f3d9bbc2314a08e",
+      "ownership_hits": [],
+      "primary_receipt_hits": [],
+      "target_validation": {
+        "payload_offset": "0x11f04",
+        "sha256": "a8d2053faa21656bd4def9c5933ed4c9c013520e45d946e35f3d9bbc2314a08e",
+        "matches_symbol_stock_hash": true
+      }
+    },
+    {
+      "source": "lvp/vui/kws/models/viva_general_asr_v103_v055/v1.0.3_v0.5.5/ctc_model.c",
+      "line": 26,
+      "address": "0x10208BF4",
+      "end": "0x10208BFC",
+      "size": "8",
+      "name": "LvpModelGetCmdSize",
+      "module": "image_a_xip",
+      "confidence": "Inferred",
+      "evidence": "g2/docs/research/gx8002-model-interface-verification.json: package 0x12180; descriptive name from codec function recovery",
+      "stock_sha256": "a3722fb1d2e110aab8d1c46fb50ae644f2a1465b30f1cc4070c57ea8daad7377",
+      "ownership_hits": [],
+      "primary_receipt_hits": [],
+      "target_validation": {
+        "payload_offset": "0x12180",
+        "sha256": "a3722fb1d2e110aab8d1c46fb50ae644f2a1465b30f1cc4070c57ea8daad7377",
+        "matches_symbol_stock_hash": true
+      }
+    },
+    {
+      "source": "lvp/vui/kws/models/viva_general_asr_v103_v055/v1.0.3_v0.5.5/ctc_model.c",
+      "line": 32,
+      "address": "0x10208BFC",
+      "end": "0x10208C04",
+      "size": "8",
+      "name": "LvpModelGetWeightSize",
+      "module": "image_a_xip",
+      "confidence": "Inferred",
+      "evidence": "g2/docs/research/gx8002-model-interface-verification.json: package 0x12188; descriptive name from codec function recovery",
+      "stock_sha256": "9e42c34e2845d3cb222c3a9fdb7052c5afe7295954eac0b05cdfde745c2a0628",
+      "ownership_hits": [],
+      "primary_receipt_hits": [],
+      "target_validation": {
+        "payload_offset": "0x12188",
+        "sha256": "9e42c34e2845d3cb222c3a9fdb7052c5afe7295954eac0b05cdfde745c2a0628",
+        "matches_symbol_stock_hash": true
+      }
+    },
+    {
+      "source": "lvp/vui/kws/models/viva_general_asr_v103_v055/v1.0.3_v0.5.5/ctc_model.c",
+      "line": 38,
+      "address": "0x10208C04",
+      "end": "0x10208C08",
+      "size": "4",
+      "name": "LvpModelGetOpsSize",
+      "module": "image_a_xip",
+      "confidence": "Inferred",
+      "evidence": "g2/docs/research/gx8002-model-interface-verification.json: package 0x12190; descriptive name from codec function recovery",
+      "stock_sha256": "45370350a684766b91f6812212e07e5548ee4513419b4ebad49d55184bbcc347",
+      "ownership_hits": [],
+      "primary_receipt_hits": [],
+      "target_validation": {
+        "payload_offset": "0x12190",
+        "sha256": "45370350a684766b91f6812212e07e5548ee4513419b4ebad49d55184bbcc347",
+        "matches_symbol_stock_hash": true
+      }
+    },
+    {
+      "source": "lvp/vui/kws/models/viva_general_asr_v103_v055/v1.0.3_v0.5.5/ctc_model.c",
+      "line": 44,
+      "address": "0x10208C08",
+      "end": "0x10208C10",
+      "size": "8",
+      "name": "LvpModelGetDataSize",
+      "module": "image_a_xip",
+      "confidence": "Inferred",
+      "evidence": "g2/docs/research/gx8002-model-interface-verification.json: package 0x12194; descriptive name from codec function recovery",
+      "stock_sha256": "b463c3e0f0e30ffdf516c93f2465e1ddd155c492d9adedda33faa4760101cdcc",
+      "ownership_hits": [],
+      "primary_receipt_hits": [],
+      "target_validation": {
+        "payload_offset": "0x12194",
+        "sha256": "b463c3e0f0e30ffdf516c93f2465e1ddd155c492d9adedda33faa4760101cdcc",
+        "matches_symbol_stock_hash": true
+      }
+    },
+    {
+      "source": "lvp/vui/kws/models/viva_general_asr_v103_v055/v1.0.3_v0.5.5/ctc_model.c",
+      "line": 50,
+      "address": "0x10208C10",
+      "end": "0x10208C14",
+      "size": "4",
+      "name": "LvpModelGetTmpSize",
+      "module": "image_a_xip",
+      "confidence": "Inferred",
+      "evidence": "g2/docs/research/gx8002-model-interface-verification.json: package 0x1219C; descriptive name from codec function recovery",
+      "stock_sha256": "121a905852ec4e098f07b7890d24bb5ac863f1ab9ef50247a25391d4b4350b5d",
+      "ownership_hits": [],
+      "primary_receipt_hits": [],
+      "target_validation": {
+        "payload_offset": "0x1219c",
+        "sha256": "121a905852ec4e098f07b7890d24bb5ac863f1ab9ef50247a25391d4b4350b5d",
+        "matches_symbol_stock_hash": true
+      }
+    },
+    {
+      "source": "lvp/vui/kws/models/viva_general_asr_v103_v055/v1.0.3_v0.5.5/ctc_model.c",
+      "line": 56,
+      "address": "0x10208C14",
+      "end": "0x10208C28",
+      "size": "20",
+      "name": "LvpSetSnpuTask",
+      "module": "image_a_xip",
+      "confidence": "Inferred",
+      "evidence": "g2/docs/research/gx8002-model-set-task-verification.json: package 0x121A0; descriptive name from codec function recovery",
+      "stock_sha256": "0371a4e5c9a2c0e5e8d5ad62e13a94e5b33a7da838d2d3116519cdb18693faa1",
+      "ownership_hits": [],
+      "primary_receipt_hits": [],
+      "target_validation": {
+        "payload_offset": "0x121a0",
+        "sha256": "0371a4e5c9a2c0e5e8d5ad62e13a94e5b33a7da838d2d3116519cdb18693faa1",
+        "matches_symbol_stock_hash": true
+      }
+    },
+    {
+      "source": "lvp/vui/kws/models/viva_general_asr_v103_v055/v1.0.3_v0.5.5/ctc_model.c",
+      "line": 141,
+      "address": "0x10208C28",
+      "end": "0x10208C60",
+      "size": "56",
+      "name": "LvpCTCModelInitSnpuTask",
+      "module": "image_a_xip",
+      "confidence": "Inferred",
+      "evidence": "g2/docs/research/gx8002-model-interface-verification.json: package 0x121B4; descriptive name from codec function recovery",
+      "stock_sha256": "abef8eff3685a8e789509abad858f5f1323969ae83d0a7c4eb160f56d91845fd",
+      "ownership_hits": [],
+      "primary_receipt_hits": [],
+      "target_validation": {
+        "payload_offset": "0x121b4",
+        "sha256": "abef8eff3685a8e789509abad858f5f1323969ae83d0a7c4eb160f56d91845fd",
+        "matches_symbol_stock_hash": true
+      }
+    },
+    {
+      "source": "lvp/vui/kws/models/viva_general_asr_v103_v055/v1.0.3_v0.5.5/ctc_model.c",
+      "line": 219,
+      "address": "0x10208C74",
+      "end": "0x10208C7C",
+      "size": "8",
+      "name": "LvpCTCModelGetSnpuFeatsDim",
+      "module": "image_a_xip",
+      "confidence": "Inferred",
+      "evidence": "g2/docs/research/gx8002-model-interface-verification.json: package 0x12200; descriptive name from codec function recovery",
+      "stock_sha256": "8ba283e5dc6b03d5f48ed7fd96a04d260e5a16fc4563b2b2ee093f732f4eb4ae",
+      "ownership_hits": [],
+      "primary_receipt_hits": [],
+      "target_validation": {
+        "payload_offset": "0x12200",
+        "sha256": "8ba283e5dc6b03d5f48ed7fd96a04d260e5a16fc4563b2b2ee093f732f4eb4ae",
+        "matches_symbol_stock_hash": true
+      }
+    },
+    {
+      "source": "lvp/app_core/lvp_app_core.c",
+      "line": 56,
+      "address": "0x10208CC0",
+      "end": "0x10208CD4",
+      "size": "20",
+      "name": "LvpTriggerAppEvent",
+      "module": "image_a_xip",
+      "confidence": "Inferred",
+      "evidence": "g2/docs/research/gx8002-trigger-event-verification.json: package 0x1224C; descriptive name from codec function recovery",
+      "stock_sha256": "2f5554b3cdeefadc8c4ec289e4c5cf451d9be34a66a46b4bdbf6b31fc9fb6dad",
+      "ownership_hits": [],
+      "primary_receipt_hits": [],
+      "target_validation": {
+        "payload_offset": "0x1224c",
+        "sha256": "2f5554b3cdeefadc8c4ec289e4c5cf451d9be34a66a46b4bdbf6b31fc9fb6dad",
+        "matches_symbol_stock_hash": true
+      }
+    },
+    {
+      "source": "lvp/app_core/lvp_app_core.c",
+      "line": 138,
+      "address": "0x10208D48",
+      "end": "0x10208D98",
+      "size": "80",
+      "name": "LvpAppEventTick",
+      "module": "image_a_xip",
+      "confidence": "Inferred",
+      "evidence": "g2/docs/research/gx8002-app-tick-verification.json: package 0x122D4; descriptive name from codec function recovery",
+      "stock_sha256": "84e1d267b7ced9c6614fdfd8c965e440dc9f457c1b8541f56d0c5a060529f123",
+      "ownership_hits": [],
+      "primary_receipt_hits": [],
+      "target_validation": {
+        "payload_offset": "0x122d4",
+        "sha256": "84e1d267b7ced9c6614fdfd8c965e440dc9f457c1b8541f56d0c5a060529f123",
+        "matches_symbol_stock_hash": true
+      }
+    }
+  ],
+  "method": "scope-only exact symbol/address references and explicit half-open hex ranges; ownership status not inferred from absence; primary analysis receipts scanned for runtime/range/extent/span two-word ranges; overlaps are evidence leads, not completion proof",
+  "primary_receipts_scanned": 17788
+}

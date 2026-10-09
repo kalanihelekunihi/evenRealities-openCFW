@@ -1,0 +1,65 @@
+{
+  "payload_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "disassembly_sha256": "13a9f1eef49d3cfdc8e4795164223968481701fd7a029bbc6a1ac530e30029b7",
+  "checks": [
+    {
+      "address": "0x1020744a",
+      "payload_offset": "0x109d6",
+      "disassembly_line": "1020744a:\t121d      \tlrw      \tr0, 0x1020ae2f\t// 0x102075bc",
+      "decoder_bytes": "1d12",
+      "payload_bytes": "1d12",
+      "equal": true
+    },
+    {
+      "address": "0x1020744c",
+      "payload_offset": "0x109d8",
+      "disassembly_line": "1020744c:\te3fffbec \tbsr      \t0x10206c24\t// 0x10206c24",
+      "decoder_bytes": "ffe3ecfb",
+      "payload_bytes": "ffe3ecfb",
+      "equal": true
+    },
+    {
+      "address": "0x10207510",
+      "payload_offset": "0x10a9c",
+      "disassembly_line": "10207510:\t110c      \tlrw      \tr0, 0x1020ae4a\t// 0x102075c0",
+      "decoder_bytes": "0c11",
+      "payload_bytes": "0c11",
+      "equal": true
+    },
+    {
+      "address": "0x10207512",
+      "payload_offset": "0x10a9e",
+      "disassembly_line": "10207512:\te3fffb89 \tbsr      \t0x10206c24\t// 0x10206c24",
+      "decoder_bytes": "ffe389fb",
+      "payload_bytes": "ffe389fb",
+      "equal": true
+    },
+    {
+      "address": "0x1020752e",
+      "payload_offset": "0x10aba",
+      "disassembly_line": "1020752e:\t1106      \tlrw      \tr0, 0x1020ae65\t// 0x102075c4",
+      "decoder_bytes": "0611",
+      "payload_bytes": "0611",
+      "equal": true
+    },
+    {
+      "address": "0x10207530",
+      "payload_offset": "0x10abc",
+      "disassembly_line": "10207530:\te3fffb7a \tbsr      \t0x10206c24\t// 0x10206c24",
+      "decoder_bytes": "ffe37afb",
+      "payload_bytes": "ffe37afb",
+      "equal": true
+    }
+  ],
+  "callee_existing_symbol": {
+    "address": "0x10206C24",
+    "end": "0x10206C42",
+    "size": "30",
+    "name": "gx8002_printf",
+    "module": "image_a_xip",
+    "confidence": "Inferred",
+    "evidence": "g2/docs/research/gx8002-printf-verification.json: package 0x101B0; descriptive name from codec function recovery",
+    "stock_sha256": "668c463a445bc03c2bb244458cc237fa266848152201fbe4f4865b2c61fb88f8"
+  },
+  "limit": "Byte-valid string-load/call instructions only. No reachability, execution, source lineage or exact producing checkout proof."
+}

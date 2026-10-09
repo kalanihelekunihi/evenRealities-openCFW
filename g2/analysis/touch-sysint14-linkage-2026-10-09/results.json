@@ -1,0 +1,153 @@
+{
+  "argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--platform",
+    "linux/amd64",
+    "--network",
+    "none",
+    "--cap-drop",
+    "ALL",
+    "--security-opt",
+    "no-new-privileges",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi:/tool:ro",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-pdl14-system-interface-2026-10-09/outputs/cy_sysint.c:/input:ro",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-sysint14-linkage-2026-10-09/outputs:/out",
+    "ubuntu@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55",
+    "/tool/bin/arm-none-eabi-ld",
+    "--gc-sections",
+    "-T",
+    "/out/link.ld",
+    "/input/public.o",
+    "-o",
+    "/out/linked.elf"
+  ],
+  "diagnostics": "",
+  "original_calls": [
+    {
+      "address": "0xa2c0",
+      "target": "0xa214",
+      "bytes": "fff7a8ff"
+    },
+    {
+      "address": "0xa2d8",
+      "target": "0xa274",
+      "bytes": "fff7ccff"
+    }
+  ],
+  "original_literal_references": [
+    {
+      "instruction": "0xa278",
+      "literal_address": "0xa2a0",
+      "literal_value": "0x20000400",
+      "bytes": "094b"
+    },
+    {
+      "instruction": "0xa280",
+      "literal_address": "0xa2a4",
+      "literal_value": "0x3300",
+      "bytes": "084b"
+    },
+    {
+      "instruction": "0xa28e",
+      "literal_address": "0xa2a0",
+      "literal_value": "0x20000400",
+      "bytes": "044a"
+    },
+    {
+      "instruction": "0xa2c8",
+      "literal_address": "0xa2e8",
+      "literal_value": "0x20000400",
+      "bytes": "074b"
+    }
+  ],
+  "relocations": [
+    {
+      "section": ".text.Cy_SysInt_SetVector",
+      "offset": 44,
+      "type": 2,
+      "symbol": "__RAM_VECTOR_TABLE",
+      "raw_word": "00000000"
+    },
+    {
+      "section": ".text.Cy_SysInt_SetVector",
+      "offset": 48,
+      "type": 2,
+      "symbol": "__Vectors",
+      "raw_word": "00000000"
+    },
+    {
+      "section": ".text.Cy_SysInt_Init",
+      "offset": 24,
+      "type": 10,
+      "symbol": "__NVIC_SetPriority",
+      "raw_word": "fff7feff"
+    },
+    {
+      "section": ".text.Cy_SysInt_Init",
+      "offset": 48,
+      "type": 10,
+      "symbol": "Cy_SysInt_SetVector",
+      "raw_word": "fff7feff"
+    },
+    {
+      "section": ".text.Cy_SysInt_Init",
+      "offset": 64,
+      "type": 2,
+      "symbol": "__RAM_VECTOR_TABLE",
+      "raw_word": "00000000"
+    }
+  ],
+  "sections": [
+    {
+      "section": "nvic",
+      "address": "0xa214",
+      "absolute_payload_offset": 28468,
+      "expected_bytes": 96,
+      "linked_bytes": 96,
+      "exact": true,
+      "sha256": "aa340e5b106ac34822951b1439edaa5a5faaf58acf98e39e203593f7741d285c",
+      "stock_sha256": "aa340e5b106ac34822951b1439edaa5a5faaf58acf98e39e203593f7741d285c",
+      "dependency_outside_selected_denominator": true
+    },
+    {
+      "section": "vector",
+      "address": "0xa274",
+      "absolute_payload_offset": 28564,
+      "expected_bytes": 52,
+      "linked_bytes": 52,
+      "exact": true,
+      "sha256": "260e898230d9af8e3ab26e86028d1d59f15596d248015597d59b2e8559150b7b",
+      "stock_sha256": "260e898230d9af8e3ab26e86028d1d59f15596d248015597d59b2e8559150b7b",
+      "dependency_outside_selected_denominator": false
+    },
+    {
+      "section": "init",
+      "address": "0xa2a8",
+      "absolute_payload_offset": 28616,
+      "expected_bytes": 72,
+      "linked_bytes": 72,
+      "exact": true,
+      "sha256": "3935045310ad6ba42db0dba9d10e394c4506b21e507797ddb28c26c232e7a5f9",
+      "stock_sha256": "3935045310ad6ba42db0dba9d10e394c4506b21e507797ddb28c26c232e7a5f9",
+      "dependency_outside_selected_denominator": false
+    }
+  ],
+  "input_object_sha256": "5b1ed7e92d09103577896974adc0b6d4519fae00a070b34617fe12a542bec7e3",
+  "prior_receipt_sha256": "d5490ff8518408f6970990185187214b20778c300b5539f226cf861f471b1c79",
+  "link_script_sha256": "ad8fd82dad3058ac6094c5cb75d33b1ee4165598c52c75c8ac0c493456a03437",
+  "linked_elf_sha256": "ab40e914c8ecf0f5b8f71ccc7bdd5c51780f55e86e07af525b7b269bef80fed4",
+  "linker_sha256": "6d859aa8ace34f7bf205fc1f1beb5bbdfe6dc10a3c96efcf36271983c54d254d",
+  "new_selected_candidate_functions": 2,
+  "new_selected_candidate_bytes": 124,
+  "dependency_bytes": 96,
+  "denominator": 54,
+  "independent_review": "pending",
+  "original_execution": false,
+  "manual_byte_patches": false,
+  "limits": "Static source comparator; literal binding does not initialize RAM vectors or prove runtime table contents. No board/toolchain uniqueness, campaign admission or whole-image completeness."
+}

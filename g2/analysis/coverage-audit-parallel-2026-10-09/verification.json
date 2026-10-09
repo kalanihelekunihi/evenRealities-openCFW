@@ -1,0 +1,45 @@
+{
+  "sealed_manifest_entries": 2543,
+  "mismatches": [],
+  "audit_inputs": 110,
+  "audit_mismatches": [],
+  "checkpoints": {
+    "runtime-delay-native-integrated": true,
+    "terminal-native-integrated": true,
+    "logger-native-integrated": true,
+    "platform-log-literals-integrated": true
+  },
+  "receipts": [
+    {
+      "batch": "audio-uart-instance-closure-2026-10-09",
+      "elf_matches": true,
+      "sources": {
+        "g2/components/audio/uart_instance_offline/instance.c": true,
+        "g2/components/audio/uart_instance_offline/instance.h": true
+      }
+    },
+    {
+      "batch": "audio-uart-tx-ownership-2026-10-09",
+      "elf_matches": true,
+      "sources": {
+        "g2/components/audio/uart_tx_offline/am_hal_queue.c": true,
+        "g2/components/audio/uart_tx_offline/am_hal_uart.c": true,
+        "g2/components/audio/uart_tx_offline/compat.h": true
+      }
+    }
+  ],
+  "G1_receipt_hash_matches": true,
+  "index_before": "7f02499d1aa1e24c2f27981948dcf777f84e0e7866977c2a4c9c911344aa12fd",
+  "index_after": "7f02499d1aa1e24c2f27981948dcf777f84e0e7866977c2a4c9c911344aa12fd",
+  "phase": "P2_EXECUTING",
+  "gates": {
+    "G1_TARGET_AND_INVENTORY": "passed",
+    "G2_PSEUDOCODE_COMPLETE": "not_run",
+    "G3_CORPUS_FROZEN": "not_run",
+    "G4_IMPLEMENTATION_READY": "not_run",
+    "G5_SOURCE_COMPLETE": "not_run",
+    "G6_IDENTICAL_SOURCE_BUILD": "not_run"
+  },
+  "sealed_component_entries": 401,
+  "component_mismatches": []
+}

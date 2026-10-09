@@ -1,0 +1,13 @@
+# GNU runtime division packet review
+
+Finalized owner receipts pass independent binary review. [Verification](DIVISION-VERIFICATION.json), [parser](division_verify.py), [owner report](../touch-libgcc14-division-2026-10-09/REPORT.md). No build or execution was repeated.
+
+The v6-m/nofp libgcc.a hash verifies. Independent ar parsing proves the extracted uidiv.o and zero.o bytes are the pinned _udivsi3.o and _dvmd_tls.o archive members. Linked ELF/script hashes and copied script verify; both full target spans match:276bytes at0xA6C0and4bytes at0xA9A8. Only the THM_CALL relocation at member offset260changes uidiv.o. Original BL at0xA7C4 independently decodes to0xA9A8; the real linked __aeabi_idiv0 Thumb symbol is0xA9A9. The archive member supplies that function rather than an injected provider. The weak hook returns through its real two-byte BX LR body, followed by c046 alignment.
+
+Archive symbol metadata independently fixes __udivsi3 at266instruction bytes and __aeabi_uidivmod at8bytes. Thus276division-section bytes comprise266uidiv instructions,2alignment bytes,8uidivmod instructions. The UIDIVMOD span ends0xA7D4; the historical16-byte span would overlap the following signed divider by8bytes. No signed-divider bytes are counted. The zero hook adds2instructions+2alignment bytes. These280bytes are separate runtime binary dependency evidence; census increment remains0and the accepted selected baseline remains46/54and3948bytes.
+
+The original test script loads authenticated stock bytes, observes the real zero hook, and stops at a synthetic return sentinel; it does not intercept provider returns or simulate exception delivery. Saved98cases cover84nonzero cases and14zero cases across two entrypoints. Arithmetic/zero-policy receipt consistency is checked separately; execution itself was not independently rerun. Register/stack fixtures do not prove physical exceptions or a production runtime schedule.
+
+Binary-provider identity is now supported. Source text, exact assembly revision/build provenance and applicable runtime-exception licensing still require authenticated evidence before source-complete attribution. Release-archive/member identity is recorded in the machine verification; acquisition authentication uses the previously reviewed release checksum receipt, not a signature claim.
+
+No newly finalized Flash/ILO/PM successor packet was present during this inventory; the prior PM ExecuteCallback mismatch and eight finite residual entries remain unresolved. The owner packet was read only. Audit outputs stay in the assigned directory; no index/source/Git/device/campaign change.

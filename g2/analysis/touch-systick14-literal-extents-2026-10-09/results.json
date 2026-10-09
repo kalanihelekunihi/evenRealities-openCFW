@@ -1,0 +1,171 @@
+{
+  "status": "PASS",
+  "payload_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "object_sha256": "b60c49aea6dfa3c9f20eb6f0b1e713ad7d79502adcba8a25db0301fd92207a83",
+  "functions": [
+    {
+      "function": "Cy_SysTick_Enable",
+      "runtime_extent": [
+        "0xa620",
+        "0xa638"
+      ],
+      "absolute_payload_offset": 29504,
+      "historical_code_bytes": 20,
+      "alignment_bytes": "",
+      "literal_bytes": "10e000e0",
+      "literal_references": [
+        {
+          "instruction": "0xa620",
+          "literal": "0xa634",
+          "value": "0xe000e010"
+        }
+      ],
+      "instructions": [
+        {
+          "address": "0xa620",
+          "bytes": "044b",
+          "mnemonic": "ldr",
+          "operands": "r3, [pc, #0x10]"
+        },
+        {
+          "address": "0xa622",
+          "bytes": "1a68",
+          "mnemonic": "ldr",
+          "operands": "r2, [r3]"
+        },
+        {
+          "address": "0xa624",
+          "bytes": "0221",
+          "mnemonic": "movs",
+          "operands": "r1, #2"
+        },
+        {
+          "address": "0xa626",
+          "bytes": "0a43",
+          "mnemonic": "orrs",
+          "operands": "r2, r1"
+        },
+        {
+          "address": "0xa628",
+          "bytes": "1a60",
+          "mnemonic": "str",
+          "operands": "r2, [r3]"
+        },
+        {
+          "address": "0xa62a",
+          "bytes": "1a68",
+          "mnemonic": "ldr",
+          "operands": "r2, [r3]"
+        },
+        {
+          "address": "0xa62c",
+          "bytes": "0139",
+          "mnemonic": "subs",
+          "operands": "r1, #1"
+        },
+        {
+          "address": "0xa62e",
+          "bytes": "0a43",
+          "mnemonic": "orrs",
+          "operands": "r2, r1"
+        },
+        {
+          "address": "0xa630",
+          "bytes": "1a60",
+          "mnemonic": "str",
+          "operands": "r2, [r3]"
+        },
+        {
+          "address": "0xa632",
+          "bytes": "7047",
+          "mnemonic": "bx",
+          "operands": "lr"
+        }
+      ],
+      "sha256": "0b2b621114164e4772b34a2039c954fb5ab6047813d2536e6bb50b38e661394a",
+      "matches": true
+    },
+    {
+      "function": "Cy_SysTick_SetClockSource",
+      "runtime_extent": [
+        "0xa638",
+        "0xa650"
+      ],
+      "absolute_payload_offset": 29528,
+      "historical_code_bytes": 18,
+      "alignment_bytes": "c046",
+      "literal_bytes": "10e000e0",
+      "literal_references": [
+        {
+          "instruction": "0xa638",
+          "literal": "0xa64c",
+          "value": "0xe000e010"
+        }
+      ],
+      "instructions": [
+        {
+          "address": "0xa638",
+          "bytes": "0449",
+          "mnemonic": "ldr",
+          "operands": "r1, [pc, #0x10]"
+        },
+        {
+          "address": "0xa63a",
+          "bytes": "0b68",
+          "mnemonic": "ldr",
+          "operands": "r3, [r1]"
+        },
+        {
+          "address": "0xa63c",
+          "bytes": "0422",
+          "mnemonic": "movs",
+          "operands": "r2, #4"
+        },
+        {
+          "address": "0xa63e",
+          "bytes": "9343",
+          "mnemonic": "bics",
+          "operands": "r3, r2"
+        },
+        {
+          "address": "0xa640",
+          "bytes": "8000",
+          "mnemonic": "lsls",
+          "operands": "r0, r0, #2"
+        },
+        {
+          "address": "0xa642",
+          "bytes": "0240",
+          "mnemonic": "ands",
+          "operands": "r2, r0"
+        },
+        {
+          "address": "0xa644",
+          "bytes": "1343",
+          "mnemonic": "orrs",
+          "operands": "r3, r2"
+        },
+        {
+          "address": "0xa646",
+          "bytes": "0b60",
+          "mnemonic": "str",
+          "operands": "r3, [r1]"
+        },
+        {
+          "address": "0xa648",
+          "bytes": "7047",
+          "mnemonic": "bx",
+          "operands": "lr"
+        }
+      ],
+      "sha256": "a54db68c6ca1baa3e5b528f2914b41d8edb8644d46952d473bcab5a941741069",
+      "matches": true
+    }
+  ],
+  "new_candidate_functions": 2,
+  "new_candidate_bytes": 48,
+  "independent_review": "pending",
+  "denominator": 54,
+  "prior_reviewed_functions": 23,
+  "limits": "Existing unchanged authentic public-source object; static bytes and literal references only. No timer execution, time units, interrupt delivery or unique producing BSP/toolchain established."
+}

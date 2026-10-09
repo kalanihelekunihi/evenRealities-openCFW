@@ -1,0 +1,11 @@
+--- PDL2.16
++++ PDL2.17
+@@ -8,7 +8,7 @@
+     parameters[1U] = (uint32_t) &cySysFlashBackup.clockSettings[0U];
+     CPUSS_SYSARG = (uint32_t) &parameters[0U];
+     CPUSS_SYSREQ = CY_FLASH_CPUSS_REQ_START | CY_FLASH_API_OPCODE_CLK_BACKUP;
+-    __NOP();
++
+     result = ProcessStatusCode();
+ 
+     /* Enabling IMO after backup completion as required by hardware.

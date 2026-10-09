@@ -1,0 +1,66 @@
+{
+  "status": "partial_unreviewed",
+  "accepted": false,
+  "runtime_mapping": "conditional XIP only",
+  "extent": [
+    "0x102058b4",
+    "0x102058c4"
+  ],
+  "bytes": 16,
+  "body_sha256": "6bdb07c6468e4e2d97ba7c22736df347e8f2736c8d5009f053d8958265bceb3c",
+  "image": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin",
+  "image_sha256": "49c9aed0126493220a3e48827c267d5e94f64d51d9ede0ccc3e84b8946744584",
+  "child_offsets": [
+    "0x28b0",
+    "0x28c0"
+  ],
+  "codec_payload_offsets": [
+    "0xee40",
+    "0xee50"
+  ],
+  "tool_sha256": "7150f7ffc2ac163f3d2d465620e5dac96df4b29411e5d0944419c41657cc2382",
+  "contracts_scanned": 117,
+  "overlaps": [],
+  "callers": [
+    "10205b2a:\te3fffec5 \tbsr      \t0x102058b4\t// 0x102058b4"
+  ],
+  "static_checks": "PASS bytes, helper, decoder tiling, direct caller census",
+  "semantic_fixtures": [
+    {
+      "base": 4096,
+      "index": 0,
+      "effective_address": 4096,
+      "output_word": 0,
+      "return_r0": 0
+    },
+    {
+      "base": 4096,
+      "index": 2,
+      "effective_address": 4104,
+      "output_word": 305419896,
+      "return_r0": 305419896
+    },
+    {
+      "base": 4294967288,
+      "index": 3,
+      "effective_address": 4,
+      "output_word": 4294967295,
+      "return_r0": 4294967295
+    },
+    {
+      "base": 4096,
+      "index": 1073741824,
+      "effective_address": 4096,
+      "output_word": 7,
+      "return_r0": 7
+    }
+  ],
+  "instruction_execution": false,
+  "physical_state_claim": false,
+  "codec_payload_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "consumed_caller_disassembly": {
+    "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-recovery-5316/001/full-xip.objdump.txt",
+    "sha256": "13a9f1eef49d3cfdc8e4795164223968481701fd7a029bbc6a1ac530e30029b7"
+  },
+  "payload_mapping_validation": "complete child image match at 0xC590 plus exact body comparison"
+}

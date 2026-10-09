@@ -1,0 +1,106 @@
+{
+  "web_queries": [
+    "site.github.com Synopsys ARC emsdk embARC startup arc",
+    "site.github.com c-sky gcc binutils official csky",
+    "site.github.com EM9305 official SDK source EM Microelectronic",
+    "site.github.com NationalChip GX8002 SDK",
+    "site.github.com AmbiqMicro NemaGFX source",
+    "site.github.com/Infineon/mtb-pdl-cat2 Cy_MSCLP_Configure release",
+    "site.infineon.github.io mtb-pdl-cat2 MSCLP release 2.19"
+  ],
+  "acquired": [
+    {
+      "section": "submodule \"reference/embarc-osp\"",
+      "path": "third-party/reference/embarc-osp",
+      "url": "https://github.com/foss-for-mips-arc-processors/embarc_osp.git",
+      "commit": "67ea926c6a62aa6e19efdc3b11cba3ea0b467e29",
+      "duplicate_sections_or_paths_or_urls": []
+    },
+    {
+      "section": "submodule \"reference/nationalchip-lvp-aiot\"",
+      "path": "third-party/reference/nationalchip-lvp-aiot",
+      "url": "https://github.com/NationalChip/lvp_aiot.git",
+      "commit": "d4aa00943e22f9ddfa424f979fae3ee2a62f5c0b",
+      "duplicate_sections_or_paths_or_urls": []
+    }
+  ],
+  "public_sources_examined_or_search_returned": [
+    {
+      "url": "https://github.com/foss-for-mips-arc-processors/embarc_osp",
+      "disposition": "acquired; official ARC-project comparator"
+    },
+    {
+      "url": "https://github.com/foss-for-synopsys-dwc-arc-processors/embarc_emsk_bsp",
+      "disposition": "searched; no separate download, OSP already supplies startup/exception comparator"
+    },
+    {
+      "url": "https://www.synopsys.com/dw/doc.php/ds/cc/embarc-ds.pdf",
+      "disposition": "official source provenance corroboration; not downloaded"
+    },
+    {
+      "url": "https://github.com/c-sky/binutils-gdb",
+      "disposition": "already represented in local tooling pins; no duplicate download"
+    },
+    {
+      "url": "https://github.com/c-sky/toolchain-build",
+      "disposition": "searched; build infrastructure does not add selected target constraints"
+    },
+    {
+      "url": "https://github.com/NationalChip/lvp_aiot",
+      "disposition": "acquired; differential comparison only"
+    },
+    {
+      "url": "https://github.com/NationalChip/lvp_kws",
+      "disposition": "existing registered dependency reused read-only"
+    },
+    {
+      "url": "https://github.com/NationalChip/gxDNN",
+      "disposition": "existing registered dependency; no duplicate download"
+    },
+    {
+      "url": "https://document.nationalchip.com/en/software/software/",
+      "disposition": "official SDK access documentation search; no authenticated GitLab access"
+    },
+    {
+      "url": "https://git.nationalchip.com/bux/ai_audio_docs/release/en/software/lvp/LVP_GX8002%E9%A9%B1%E5%8A%A8API%E6%8C%87%E5%8D%97/",
+      "disposition": "driver documentation search result; no download"
+    },
+    {
+      "url": "https://www.emmicroelectronic.com/news_and_pressrelease/em-bleu-em9305-sets-global-benchmark-ultra-low-power-bluetooth-performance",
+      "disposition": "official result, not implementation source; no download"
+    },
+    {
+      "url": "https://github.com/AmbiqMicro/LVGL",
+      "disposition": "existing registered source; no duplicate download"
+    },
+    {
+      "url": "https://github.com/AmbiqMicro/ambiqhal_ambiq",
+      "disposition": "existing Ambiq 5efc0228 and Nema-header pins reused; no duplicate download"
+    },
+    {
+      "url": "https://github.com/Infineon/mtb-pdl-cat2.git",
+      "disposition": "isolated bare partial history acquisition; exact commits/files in pdl-history/history-inventory.json and receipts.json"
+    },
+    {
+      "url": "https://infineon.github.io/mtb-pdl-cat2/pdl_api_reference_manual/html/group__group__msclp.html",
+      "disposition": "official documentation entry identified from pinned release notes; historical notes read locally"
+    }
+  ],
+  "local_reference_inventory": [
+    "AGENTS.md",
+    "g2/workflow/README.md",
+    "g2/workflow/target.json",
+    "third-party/README.md",
+    ".gitmodules",
+    "docs/tooling.md",
+    "g2/docs/reference/toolchains.md",
+    "g2/docs/reference/memory-map.md",
+    "g2/docs/reference/firmware-formats.md",
+    "g2/symbols/codec.tsv",
+    "g2/symbols/ble_em9305.tsv",
+    "g2/analysis/repository-goal-source-reconciliation-2026-10-09/REPORT.md",
+    "g2/analysis/source-ledger-final-static-successor-2026-10-09/INDEX.md",
+    "g2/analysis/dependency-source-ledger-2026-10-09/INDEX.md"
+  ],
+  "scope": "Search-result inventory lists relevant candidates, not irrelevant search-engine hits. No global search-exhaustion claim."
+}

@@ -1,0 +1,1064 @@
+{
+  "status": "PASS",
+  "cases": 40,
+  "elf_sha256": "8b1923223a443e6d8935d4091400089c87f1ddd37de3fac8c7ce0969bb4afe06",
+  "raw_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "comparisons": [
+    {
+      "fixture": {
+        "length": 0,
+        "budget": 0,
+        "status": 32
+      },
+      "observed": {
+        "fifo": [],
+        "queue": [
+          0,
+          0,
+          0,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "00",
+        "completion": 0,
+        "last_tx_complete": 0,
+        "interrupt_clear": 32
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 0,
+        "budget": 0,
+        "status": 33
+      },
+      "observed": {
+        "fifo": [],
+        "queue": [
+          0,
+          0,
+          0,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "00",
+        "completion": 1,
+        "last_tx_complete": 1,
+        "interrupt_clear": 33
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 0,
+        "budget": 1,
+        "status": 32
+      },
+      "observed": {
+        "fifo": [],
+        "queue": [
+          0,
+          0,
+          0,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "00",
+        "completion": 0,
+        "last_tx_complete": 0,
+        "interrupt_clear": 32
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 0,
+        "budget": 1,
+        "status": 33
+      },
+      "observed": {
+        "fifo": [],
+        "queue": [
+          0,
+          0,
+          0,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "00",
+        "completion": 1,
+        "last_tx_complete": 1,
+        "interrupt_clear": 33
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 0,
+        "budget": 2,
+        "status": 32
+      },
+      "observed": {
+        "fifo": [],
+        "queue": [
+          0,
+          0,
+          0,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "00",
+        "completion": 0,
+        "last_tx_complete": 0,
+        "interrupt_clear": 32
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 0,
+        "budget": 2,
+        "status": 33
+      },
+      "observed": {
+        "fifo": [],
+        "queue": [
+          0,
+          0,
+          0,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "00",
+        "completion": 1,
+        "last_tx_complete": 1,
+        "interrupt_clear": 33
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 0,
+        "budget": 1000,
+        "status": 32
+      },
+      "observed": {
+        "fifo": [],
+        "queue": [
+          0,
+          0,
+          0,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "00",
+        "completion": 0,
+        "last_tx_complete": 0,
+        "interrupt_clear": 32
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 0,
+        "budget": 1000,
+        "status": 33
+      },
+      "observed": {
+        "fifo": [],
+        "queue": [
+          0,
+          0,
+          0,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "00",
+        "completion": 1,
+        "last_tx_complete": 1,
+        "interrupt_clear": 33
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 1,
+        "budget": 0,
+        "status": 32
+      },
+      "observed": {
+        "fifo": [],
+        "queue": [
+          1,
+          0,
+          1,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "40",
+        "completion": 0,
+        "last_tx_complete": 0,
+        "interrupt_clear": 32
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 1,
+        "budget": 0,
+        "status": 33
+      },
+      "observed": {
+        "fifo": [],
+        "queue": [
+          1,
+          0,
+          1,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "40",
+        "completion": 1,
+        "last_tx_complete": 1,
+        "interrupt_clear": 33
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 1,
+        "budget": 1,
+        "status": 32
+      },
+      "observed": {
+        "fifo": [
+          64
+        ],
+        "queue": [
+          1,
+          1,
+          0,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "40",
+        "completion": 0,
+        "last_tx_complete": 0,
+        "interrupt_clear": 32
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 1,
+        "budget": 1,
+        "status": 33
+      },
+      "observed": {
+        "fifo": [
+          64
+        ],
+        "queue": [
+          1,
+          1,
+          0,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "40",
+        "completion": 1,
+        "last_tx_complete": 1,
+        "interrupt_clear": 33
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 1,
+        "budget": 2,
+        "status": 32
+      },
+      "observed": {
+        "fifo": [
+          64
+        ],
+        "queue": [
+          1,
+          1,
+          0,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "40",
+        "completion": 0,
+        "last_tx_complete": 0,
+        "interrupt_clear": 32
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 1,
+        "budget": 2,
+        "status": 33
+      },
+      "observed": {
+        "fifo": [
+          64
+        ],
+        "queue": [
+          1,
+          1,
+          0,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "40",
+        "completion": 1,
+        "last_tx_complete": 1,
+        "interrupt_clear": 33
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 1,
+        "budget": 1000,
+        "status": 32
+      },
+      "observed": {
+        "fifo": [
+          64
+        ],
+        "queue": [
+          1,
+          1,
+          0,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "40",
+        "completion": 0,
+        "last_tx_complete": 0,
+        "interrupt_clear": 32
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 1,
+        "budget": 1000,
+        "status": 33
+      },
+      "observed": {
+        "fifo": [
+          64
+        ],
+        "queue": [
+          1,
+          1,
+          0,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "40",
+        "completion": 1,
+        "last_tx_complete": 1,
+        "interrupt_clear": 33
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 3,
+        "budget": 0,
+        "status": 32
+      },
+      "observed": {
+        "fifo": [],
+        "queue": [
+          3,
+          0,
+          3,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "404142",
+        "completion": 0,
+        "last_tx_complete": 0,
+        "interrupt_clear": 32
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 3,
+        "budget": 0,
+        "status": 33
+      },
+      "observed": {
+        "fifo": [],
+        "queue": [
+          3,
+          0,
+          3,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "404142",
+        "completion": 1,
+        "last_tx_complete": 1,
+        "interrupt_clear": 33
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 3,
+        "budget": 1,
+        "status": 32
+      },
+      "observed": {
+        "fifo": [
+          64
+        ],
+        "queue": [
+          3,
+          1,
+          2,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "404142",
+        "completion": 0,
+        "last_tx_complete": 0,
+        "interrupt_clear": 32
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 3,
+        "budget": 1,
+        "status": 33
+      },
+      "observed": {
+        "fifo": [
+          64
+        ],
+        "queue": [
+          3,
+          1,
+          2,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "404142",
+        "completion": 1,
+        "last_tx_complete": 1,
+        "interrupt_clear": 33
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 3,
+        "budget": 2,
+        "status": 32
+      },
+      "observed": {
+        "fifo": [
+          64,
+          65
+        ],
+        "queue": [
+          3,
+          2,
+          1,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "404142",
+        "completion": 0,
+        "last_tx_complete": 0,
+        "interrupt_clear": 32
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 3,
+        "budget": 2,
+        "status": 33
+      },
+      "observed": {
+        "fifo": [
+          64,
+          65
+        ],
+        "queue": [
+          3,
+          2,
+          1,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "404142",
+        "completion": 1,
+        "last_tx_complete": 1,
+        "interrupt_clear": 33
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 3,
+        "budget": 1000,
+        "status": 32
+      },
+      "observed": {
+        "fifo": [
+          64,
+          65,
+          66
+        ],
+        "queue": [
+          3,
+          3,
+          0,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "404142",
+        "completion": 0,
+        "last_tx_complete": 0,
+        "interrupt_clear": 32
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 3,
+        "budget": 1000,
+        "status": 33
+      },
+      "observed": {
+        "fifo": [
+          64,
+          65,
+          66
+        ],
+        "queue": [
+          3,
+          3,
+          0,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "404142",
+        "completion": 1,
+        "last_tx_complete": 1,
+        "interrupt_clear": 33
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 8,
+        "budget": 0,
+        "status": 32
+      },
+      "observed": {
+        "fifo": [],
+        "queue": [
+          8,
+          0,
+          8,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "4041424344454647",
+        "completion": 0,
+        "last_tx_complete": 0,
+        "interrupt_clear": 32
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 8,
+        "budget": 0,
+        "status": 33
+      },
+      "observed": {
+        "fifo": [],
+        "queue": [
+          8,
+          0,
+          8,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "4041424344454647",
+        "completion": 1,
+        "last_tx_complete": 1,
+        "interrupt_clear": 33
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 8,
+        "budget": 1,
+        "status": 32
+      },
+      "observed": {
+        "fifo": [
+          64
+        ],
+        "queue": [
+          8,
+          1,
+          7,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "4041424344454647",
+        "completion": 0,
+        "last_tx_complete": 0,
+        "interrupt_clear": 32
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 8,
+        "budget": 1,
+        "status": 33
+      },
+      "observed": {
+        "fifo": [
+          64
+        ],
+        "queue": [
+          8,
+          1,
+          7,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "4041424344454647",
+        "completion": 1,
+        "last_tx_complete": 1,
+        "interrupt_clear": 33
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 8,
+        "budget": 2,
+        "status": 32
+      },
+      "observed": {
+        "fifo": [
+          64,
+          65
+        ],
+        "queue": [
+          8,
+          2,
+          6,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "4041424344454647",
+        "completion": 0,
+        "last_tx_complete": 0,
+        "interrupt_clear": 32
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 8,
+        "budget": 2,
+        "status": 33
+      },
+      "observed": {
+        "fifo": [
+          64,
+          65
+        ],
+        "queue": [
+          8,
+          2,
+          6,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "4041424344454647",
+        "completion": 1,
+        "last_tx_complete": 1,
+        "interrupt_clear": 33
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 8,
+        "budget": 1000,
+        "status": 32
+      },
+      "observed": {
+        "fifo": [
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71
+        ],
+        "queue": [
+          8,
+          8,
+          0,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "4041424344454647",
+        "completion": 0,
+        "last_tx_complete": 0,
+        "interrupt_clear": 32
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 8,
+        "budget": 1000,
+        "status": 33
+      },
+      "observed": {
+        "fifo": [
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71
+        ],
+        "queue": [
+          8,
+          8,
+          0,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "4041424344454647",
+        "completion": 1,
+        "last_tx_complete": 1,
+        "interrupt_clear": 33
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 32,
+        "budget": 0,
+        "status": 32
+      },
+      "observed": {
+        "fifo": [],
+        "queue": [
+          32,
+          0,
+          32,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f",
+        "completion": 0,
+        "last_tx_complete": 0,
+        "interrupt_clear": 32
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 32,
+        "budget": 0,
+        "status": 33
+      },
+      "observed": {
+        "fifo": [],
+        "queue": [
+          32,
+          0,
+          32,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f",
+        "completion": 1,
+        "last_tx_complete": 1,
+        "interrupt_clear": 33
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 32,
+        "budget": 1,
+        "status": 32
+      },
+      "observed": {
+        "fifo": [
+          64
+        ],
+        "queue": [
+          32,
+          1,
+          31,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f",
+        "completion": 0,
+        "last_tx_complete": 0,
+        "interrupt_clear": 32
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 32,
+        "budget": 1,
+        "status": 33
+      },
+      "observed": {
+        "fifo": [
+          64
+        ],
+        "queue": [
+          32,
+          1,
+          31,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f",
+        "completion": 1,
+        "last_tx_complete": 1,
+        "interrupt_clear": 33
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 32,
+        "budget": 2,
+        "status": 32
+      },
+      "observed": {
+        "fifo": [
+          64,
+          65
+        ],
+        "queue": [
+          32,
+          2,
+          30,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f",
+        "completion": 0,
+        "last_tx_complete": 0,
+        "interrupt_clear": 32
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 32,
+        "budget": 2,
+        "status": 33
+      },
+      "observed": {
+        "fifo": [
+          64,
+          65
+        ],
+        "queue": [
+          32,
+          2,
+          30,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f",
+        "completion": 1,
+        "last_tx_complete": 1,
+        "interrupt_clear": 33
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 32,
+        "budget": 1000,
+        "status": 32
+      },
+      "observed": {
+        "fifo": [
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95
+        ],
+        "queue": [
+          32,
+          32,
+          0,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f",
+        "completion": 0,
+        "last_tx_complete": 0,
+        "interrupt_clear": 32
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "length": 32,
+        "budget": 1000,
+        "status": 33
+      },
+      "observed": {
+        "fifo": [
+          64,
+          65,
+          66,
+          67,
+          68,
+          69,
+          70,
+          71,
+          72,
+          73,
+          74,
+          75,
+          76,
+          77,
+          78,
+          79,
+          80,
+          81,
+          82,
+          83,
+          84,
+          85,
+          86,
+          87,
+          88,
+          89,
+          90,
+          91,
+          92,
+          93,
+          94,
+          95
+        ],
+        "queue": [
+          32,
+          32,
+          0,
+          1024,
+          1,
+          537633824
+        ],
+        "queue_bytes": "404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f",
+        "completion": 1,
+        "last_tx_complete": 1,
+        "interrupt_clear": 33
+      },
+      "matches": true
+    }
+  ],
+  "differences": [],
+  "limits": "Direct channel3 common IRQ entry with synthetic status/FIFO readiness. Original HAL interrupt service and original/native TX state machine/queue drain. No vector/NVIC delivery or physical transmission."
+}

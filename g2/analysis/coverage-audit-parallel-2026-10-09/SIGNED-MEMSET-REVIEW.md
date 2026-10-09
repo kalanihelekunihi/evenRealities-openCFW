@@ -1,0 +1,19 @@
+# Signed division and memset independent review
+
+Both finalized packets pass. [Verification](SIGNED-MEMSET-VERIFICATION.json), [parser](signed_memset_verify.py), [signed report](../touch-libgcc14-signed-2026-10-09/REPORT.md), [memset report](../touch-newlib14-memset-2026-10-09/REPORT.md). No builds or original instructions rerun.
+
+Signed provider consumes the already reviewed exact-release GCC lib1funcs.S/bpabi-v6m.S pins and source license evidence; input hashes and source-built object verify. The genuine L_divsi3 selector and Cortex-M0+/Thumb configuration are recorded. Independent ar parsing verifies authenticated _divsi3.o member/archive hashes and identical raw source-built text. Linked ELF and468stock bytes match; only the THM_CALL word at offset454changes. Original0xA99Acall decodes to the real zero hook0xA9A8. The reused hook remains outside the new-byte increment.
+
+ELF size metadata supports460-byte __divsi3at[0xA7D4,0xA9A0), then8-byte __aeabi_idivmodat[0xA9A0,0xA9A8). Thus the old16-byte divmod row would overlap the already reviewed zero hook/alignment by8bytes. Additive correction is valid; symbols remain untouched. Unsigned division ends exactly where signed begins; signed ends at the zero hook. No overlapping bytes added.
+
+Memset's pinned newlib source URL/revision, source hash, COPYING.NEWLIB hash, all consumed vendor/source headers and preprocessing/object hashes verify. Real nano size-branch configuration is the already reviewed memcpy contract, not a unique producing-build claim. Independent ar/ELF parsing confirms nano provider/member/archive hashes and raw text identity. Relocation-free16-byte .text.memsetmatches[0xA9D4,0xA9E4), with ELF function size16. It is separate from zero hook, constructor walker and memcpy.
+
+Saved200signed fixtures independently reconcile178normal,20zero-divisor and2INT_MIN/-1cases. Normal quotient truncates toward zero; divmod remainder obeys dividend-minus-quotient-times-divisor. Saved exceptional observations show quotient0on zero division, dividend remainder for divmod, and0x80000000/remainder0on INT_MIN/-1. Harness inspection confirms real stock hook observation, without provider interception. These are bounded library observations, not defined C exceptional arithmetic or physical exception policy. No fresh execution was performed.
+
+Saved224memset rows cover all four alignments, eight lengths and seven values. Low-byte conversion, write counts, guards/return assertions and grid completeness independently reconcile. Harness loads real stock instructions and asserts each one-byte write address/value. Valid synthetic writable RAM is supplied; no invalid/huge-length, MMIO, concurrency or physical memory claim follows.
+
+New distinct runtime dependency increment is468+16=484bytes. Selected PDL census remains54/54and4952bytes. For only this reviewed runtime provider subset, unsigned division/hook280+signed468+memcpy18+memset16=782distinct bytes. This subtotal excludes other independently reviewed I2C/NVIC/PM/status dependencies and is not a global dependency total.
+
+Remaining precise startup/provider gaps: constructor walker0xA9E4(historical56bytes) needs genuine source/member comparison plus initializer-array bounds and call bindings; exit0xA9ACneeds extent correction before comparison because its historical54-byte row overlaps the proven memset0xA9D4; finalizer-array/_exitproviders then need their own linkage/source evidence. Halt0xAA40and init stub0xAA44still need authentic libgloss/crt/source-link contracts. Newly exact memset strengthens the exit truncation evidence; it does not prove exit itself. Signed/unsigned arithmetic closure does not authenticate complete vendor configure/generated headers, all startup state or whole-firmware source/pseudocode/equality.
+
+Only assigned audit outputs changed. Canonical/admission/index/source/device state preserved.

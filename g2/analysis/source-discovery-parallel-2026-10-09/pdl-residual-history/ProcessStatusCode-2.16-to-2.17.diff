@@ -1,0 +1,112 @@
+--- PDL2.16
++++ PDL2.17
+@@ -1,66 +1,54 @@
+ ProcessStatusCode(void)
+ {
+-    cy_en_flashdrv_status_t result;
+-    uint32_t statuscode = CPUSS_SYSARG;
++    cy_en_flashdrv_status_t result = WaitForSysCallFinish();
+ 
+-    if ((statuscode & SROMCODE_STATUS_MASK) == SROMCODE_SUCCESS)
++    if (CY_FLASH_DRV_SUCCESS == result)
+     {
+-        result = CY_FLASH_DRV_SUCCESS;
+-    }
+-    else if ((statuscode & SROMCODE_STATUS_MASK) == SROMCODE_ERROR_FLAG)
+-    {
+-        /* Process error code */
+-        switch (statuscode)
++        uint32_t statuscode = CPUSS_SYSARG;
++
++        if ((statuscode & SROMCODE_STATUS_MASK) == SROMCODE_SUCCESS)
+         {
+-            case SROMCODE_INVALID_PROTECTION:
++            result = CY_FLASH_DRV_SUCCESS;
++        }
++        else if ((statuscode & SROMCODE_STATUS_MASK) == SROMCODE_ERROR_FLAG)
++        {
++            /* Process error code */
++            switch (statuscode)
+             {
+-                result = CY_FLASH_DRV_INVALID_PROT;
+-                break;
+-            }
+-            case SROMCODE_INVALID_FM_PL:
+-            case SROMCODE_INVALID_FLASH_ADDR:
+-            {
+-                result = CY_FLASH_DRV_INVALID_FLASH_ADDR;
+-                break;
+-            }
+-            case SROMCODE_ROW_PROTECTED:
+-            {
+-                result = CY_FLASH_DRV_ROW_PROTECTED;
+-                break;
+-            }
+-            case SROMCODE_RESUME_COMPLETE:
+-            {
+-                result = CY_FLASH_DRV_SUCCESS;
+-                break;
+-            }
+-            case SROMCODE_PENDING_RESUME:
+-            {
+-                result = CY_FLASH_DRV_PENDING_RESUME;
+-                break;
+-            }
+-            case SROMCODE_SYSCALL_IN_PROGRESS:
+-            {
+-                result = CY_FLASH_DRV_PROGRESS_NO_ERROR;
+-                break;
+-            }
+-            case SROMCODE_API_NOT_INSTANTIATED:
+-            case SROMCODE_INVALID_FLASH_IP:
+-            case SROMCODE_NA_IN_DEAD_MODE:
+-            {
+-                result = CY_FLASH_DRV_DEV_NOT_SUPPORTED;
+-                break;
+-            }
+-            default:
+-            {
+-                result = CY_FLASH_DRV_ERROR_UNKNOWN;
+-                break;
++                case SROMCODE_INVALID_PROTECTION:
++                    result = CY_FLASH_DRV_INVALID_PROT;
++                    break;
++                case SROMCODE_INVALID_FM_PL:
++                case SROMCODE_INVALID_FLASH_ADDR:
++                    result = CY_FLASH_DRV_INVALID_FLASH_ADDR;
++                    break;
++                case SROMCODE_ROW_PROTECTED:
++                    result = CY_FLASH_DRV_ROW_PROTECTED;
++                    break;
++                case SROMCODE_RESUME_COMPLETE:
++                    result = CY_FLASH_DRV_SUCCESS;
++                    break;
++                case SROMCODE_PENDING_RESUME:
++                    result = CY_FLASH_DRV_PENDING_RESUME;
++                    break;
++                case SROMCODE_SYSCALL_IN_PROGRESS:
++                    result = CY_FLASH_DRV_PROGRESS_NO_ERROR;
++                    break;
++                case SROMCODE_API_NOT_INSTANTIATED:
++                case SROMCODE_INVALID_FLASH_IP:
++                case SROMCODE_NA_IN_DEAD_MODE:
++                    result = CY_FLASH_DRV_DEV_NOT_SUPPORTED;
++                    break;
++                default:
++                    result = CY_FLASH_DRV_ERROR_UNKNOWN;
++                    break;
+             }
+         }
+-    }
+-    else
+-    {
+-        /* Not an error or success - the operation in not finished */
+-        result = CY_FLASH_DRV_OPERATION_STARTED;
++        else
++        {
++            /* Not an error or success - the operation in not finished */
++            result = CY_FLASH_DRV_OPERATION_STARTED;
++        }
+     }
+ 
+     return (result);

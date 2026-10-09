@@ -1,0 +1,274 @@
+{
+  "selection_hash_verified": true,
+  "payload_hash_verified": true,
+  "historical_rows": 53,
+  "selection_status_counts": {
+    "predeclared_unchanged_source_comparison": 39,
+    "completed_selected_comparator": 13,
+    "header_inline_provider_requires_separate_source_emission_contract": 1
+  },
+  "raw_result_counts": {
+    "relocation_or_extent_boundary": 25,
+    "expected_section_absent": 2,
+    "translation_unit_compile_failed": 12
+  },
+  "target_slice_hashes_verified": true,
+  "units": [
+    {
+      "unit": "cy_flash.c",
+      "exit_code": 0,
+      "outputs_verified": true,
+      "inputs_verified": true
+    },
+    {
+      "unit": "cy_scb_i2c.c",
+      "exit_code": 0,
+      "outputs_verified": true,
+      "inputs_verified": true
+    },
+    {
+      "unit": "cy_sysclk.c",
+      "exit_code": 0,
+      "outputs_verified": true,
+      "inputs_verified": true
+    },
+    {
+      "unit": "cy_sysint.c",
+      "exit_code": 1
+    },
+    {
+      "unit": "cy_syslib.c",
+      "exit_code": 1
+    },
+    {
+      "unit": "cy_syspm.c",
+      "exit_code": 0,
+      "outputs_verified": true,
+      "inputs_verified": true
+    },
+    {
+      "unit": "cy_systick.c",
+      "exit_code": 1
+    }
+  ],
+  "extents": [
+    {
+      "function": "Cy_Flash_ValidAddr",
+      "address": "0x8c74",
+      "section_bytes": 52,
+      "historical_code_bytes": 48,
+      "mapping_symbols": [
+        [
+          0,
+          "$t"
+        ],
+        [
+          48,
+          "$d"
+        ]
+      ],
+      "tail_before_pool_hex": "",
+      "exact": true,
+      "hashes_verified": true,
+      "relocations": [],
+      "literal_refs_verified": true,
+      "all_pool_words_referenced": true,
+      "pool_bytes": 4,
+      "range_end": "0x8ca8"
+    },
+    {
+      "function": "Cy_Flash_GetRowNum",
+      "address": "0x8ca8",
+      "section_bytes": 28,
+      "historical_code_bytes": 22,
+      "mapping_symbols": [
+        [
+          0,
+          "$t"
+        ],
+        [
+          24,
+          "$d"
+        ]
+      ],
+      "tail_before_pool_hex": "c046",
+      "exact": true,
+      "hashes_verified": true,
+      "relocations": [],
+      "literal_refs_verified": true,
+      "all_pool_words_referenced": true,
+      "pool_bytes": 4,
+      "range_end": "0x8cc4"
+    },
+    {
+      "function": "Cy_SCB_I2C_Init",
+      "address": "0x98f4",
+      "section_bytes": 484,
+      "historical_code_bytes": 438,
+      "mapping_symbols": [
+        [
+          0,
+          "$t"
+        ],
+        [
+          440,
+          "$d"
+        ]
+      ],
+      "tail_before_pool_hex": "c046",
+      "exact": true,
+      "hashes_verified": true,
+      "relocations": [],
+      "literal_refs_verified": true,
+      "all_pool_words_referenced": true,
+      "pool_bytes": 44,
+      "range_end": "0x9ad8"
+    },
+    {
+      "function": "Cy_SysClk_ImoGetFrequency",
+      "address": "0x9c44",
+      "section_bytes": 60,
+      "historical_code_bytes": 46,
+      "mapping_symbols": [
+        [
+          0,
+          "$t"
+        ],
+        [
+          48,
+          "$d"
+        ]
+      ],
+      "tail_before_pool_hex": "c046",
+      "exact": true,
+      "hashes_verified": true,
+      "relocations": [],
+      "literal_refs_verified": true,
+      "all_pool_words_referenced": true,
+      "pool_bytes": 12,
+      "range_end": "0x9c80"
+    },
+    {
+      "function": "Cy_SysClk_PeriphSetDivider",
+      "address": "0x9fd4",
+      "section_bytes": 72,
+      "historical_code_bytes": 56,
+      "mapping_symbols": [
+        [
+          0,
+          "$t"
+        ],
+        [
+          56,
+          "$d"
+        ]
+      ],
+      "tail_before_pool_hex": "",
+      "exact": true,
+      "hashes_verified": true,
+      "relocations": [],
+      "literal_refs_verified": true,
+      "all_pool_words_referenced": true,
+      "pool_bytes": 16,
+      "range_end": "0xa01c"
+    },
+    {
+      "function": "Cy_SysClk_PeriphSetFracDivider",
+      "address": "0xa01c",
+      "section_bytes": 160,
+      "historical_code_bytes": 142,
+      "mapping_symbols": [
+        [
+          0,
+          "$t"
+        ],
+        [
+          144,
+          "$d"
+        ]
+      ],
+      "tail_before_pool_hex": "c046",
+      "exact": true,
+      "hashes_verified": true,
+      "relocations": [],
+      "literal_refs_verified": true,
+      "all_pool_words_referenced": true,
+      "pool_bytes": 16,
+      "range_end": "0xa0bc"
+    },
+    {
+      "function": "Cy_SysClk_PeriphAssignDivider",
+      "address": "0xa0bc",
+      "section_bytes": 72,
+      "historical_code_bytes": 62,
+      "mapping_symbols": [
+        [
+          0,
+          "$t"
+        ],
+        [
+          64,
+          "$d"
+        ]
+      ],
+      "tail_before_pool_hex": "c046",
+      "exact": true,
+      "hashes_verified": true,
+      "relocations": [],
+      "literal_refs_verified": true,
+      "all_pool_words_referenced": true,
+      "pool_bytes": 8,
+      "range_end": "0xa104"
+    },
+    {
+      "function": "Cy_SysClk_PeriphEnableDivider",
+      "address": "0xa104",
+      "section_bytes": 68,
+      "historical_code_bytes": 56,
+      "mapping_symbols": [
+        [
+          0,
+          "$t"
+        ],
+        [
+          56,
+          "$d"
+        ]
+      ],
+      "tail_before_pool_hex": "",
+      "exact": true,
+      "hashes_verified": true,
+      "relocations": [],
+      "literal_refs_verified": true,
+      "all_pool_words_referenced": true,
+      "pool_bytes": 12,
+      "range_end": "0xa148"
+    },
+    {
+      "function": "Cy_SysClk_PeriphDisableDivider",
+      "address": "0xa148",
+      "section_bytes": 64,
+      "historical_code_bytes": 56,
+      "mapping_symbols": [
+        [
+          0,
+          "$t"
+        ],
+        [
+          56,
+          "$d"
+        ]
+      ],
+      "tail_before_pool_hex": "",
+      "exact": true,
+      "hashes_verified": true,
+      "relocations": [],
+      "literal_refs_verified": true,
+      "all_pool_words_referenced": true,
+      "pool_bytes": 8,
+      "range_end": "0xa188"
+    }
+  ],
+  "nine_nonoverlapping": true,
+  "additional_full_section_bytes": 1060
+}

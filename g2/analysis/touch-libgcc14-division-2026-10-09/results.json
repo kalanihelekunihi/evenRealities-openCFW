@@ -1,0 +1,85 @@
+{
+  "argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--platform",
+    "linux/amd64",
+    "--network",
+    "none",
+    "--cap-drop",
+    "ALL",
+    "--security-opt",
+    "no-new-privileges",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi:/tool:ro",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-libgcc14-division-2026-10-09/outputs:/out",
+    "ubuntu@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55",
+    "/tool/bin/arm-none-eabi-ld",
+    "-T",
+    "/out/link.ld",
+    "/out/uidiv.o",
+    "/out/zero.o",
+    "-o",
+    "/out/linked.elf"
+  ],
+  "diagnostics": "",
+  "archive_path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp/libgcc.a",
+  "archive_sha256": "56b1a0342f81d2d5b318c6152f923fa380f34d655cb0c4da6d60231e958b6352",
+  "extracted_member_hashes": {
+    "_udivsi3.o/": "05d5c673515e49ade6e3ed81450b9bfde15acba53bca76e6c40cffb2fe3533c4",
+    "_dvmd_tls.o/": "4cd62d03fc8aef0a577ced9e9fbb70788a74174b97805d4d9874161d34e39f35"
+  },
+  "linked_elf_sha256": "d81dc7246178129deab76e0d73a107c4ed6c8f9010b17dcf4c841b94dbd0cd0b",
+  "link_script_sha256": "063b5c19ff602fe6a35e4c12b8f57ddc76289874527f030bc6143fb7ad98958b",
+  "stock_div0_call": {
+    "instruction": "0xA7C4",
+    "target": "0xA9A8",
+    "bytes": "00f0f0f8"
+  },
+  "sections": [
+    {
+      "section": "division",
+      "address": "0xa6c0",
+      "bytes": 276,
+      "exact": true,
+      "sha256": "abbfbc881ec9ae1713ebafdf3f8cff42e943f8b12198f90af61c108d0582c114",
+      "stock_sha256": "abbfbc881ec9ae1713ebafdf3f8cff42e943f8b12198f90af61c108d0582c114"
+    },
+    {
+      "section": "zero",
+      "address": "0xa9a8",
+      "bytes": 4,
+      "exact": true,
+      "sha256": "e287dff864f37f3c71cdb140d7eebe15385d894bc81c583e5b5194ce85aee76b",
+      "stock_sha256": "e287dff864f37f3c71cdb140d7eebe15385d894bc81c583e5b5194ce85aee76b"
+    }
+  ],
+  "code_extents": {
+    "uidiv": [
+      "0xA6C0",
+      "0xA7CA"
+    ],
+    "alignment": [
+      "0xA7CA",
+      "0xA7CC"
+    ],
+    "uidivmod": [
+      "0xA7CC",
+      "0xA7D4"
+    ],
+    "div0": [
+      "0xA9A8",
+      "0xA9AA"
+    ],
+    "div0_alignment": [
+      "0xA9AA",
+      "0xA9AC"
+    ]
+  },
+  "denominator_54_increment": 0,
+  "independent_review": "pending",
+  "source_rebuild_claim": false,
+  "limits": "Authenticated compiler-runtime binary provider comparator, not rebuilt source. GCC ARM assembly source/revision and runtime exception license need separate provenance before source-complete claim; archive/source producer uniqueness not inferred."
+}

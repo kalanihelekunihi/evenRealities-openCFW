@@ -1,0 +1,1900 @@
+{
+  "scope": "Eight remaining selected entries against current pinned source and fixed comparator flags; not whole-project exhaustion",
+  "payload_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "entries": [
+    {
+      "function": "Cy_Flash_ClockBackup",
+      "runtime_address": "0x8cc4",
+      "historical_code_bytes": 40,
+      "compiled_section_bytes": 60,
+      "object_bytes": "00b583b06a46084b0093084b0193084b9a60084a5a60fff7feff074b802212061a6303b000bdc046b6e9000000000000000010401600008000000340",
+      "stock_window_bytes": "00b583b06a46084b0093084b0193084b9a60084a5a60c046fff78aff064b802212061a6303b000bdb6e90000040f0020000010401600008000000340",
+      "relocations": [
+        {
+          "offset": 22,
+          "type": 10,
+          "symbol": "ProcessStatusCode",
+          "source_symbol_section": ".text.ProcessStatusCode"
+        },
+        {
+          "offset": 44,
+          "type": 2,
+          "symbol": "",
+          "source_symbol_section": ".bss"
+        }
+      ],
+      "non_relocated_differences": [
+        {
+          "offset": 26,
+          "object_byte": 7,
+          "stock_byte": 138
+        },
+        {
+          "offset": 27,
+          "object_byte": 75,
+          "stock_byte": 255
+        },
+        {
+          "offset": 28,
+          "object_byte": 128,
+          "stock_byte": 6
+        },
+        {
+          "offset": 29,
+          "object_byte": 34,
+          "stock_byte": 75
+        },
+        {
+          "offset": 30,
+          "object_byte": 18,
+          "stock_byte": 128
+        },
+        {
+          "offset": 31,
+          "object_byte": 6,
+          "stock_byte": 34
+        },
+        {
+          "offset": 32,
+          "object_byte": 26,
+          "stock_byte": 18
+        },
+        {
+          "offset": 33,
+          "object_byte": 99,
+          "stock_byte": 6
+        },
+        {
+          "offset": 34,
+          "object_byte": 3,
+          "stock_byte": 26
+        },
+        {
+          "offset": 35,
+          "object_byte": 176,
+          "stock_byte": 99
+        },
+        {
+          "offset": 36,
+          "object_byte": 0,
+          "stock_byte": 3
+        },
+        {
+          "offset": 37,
+          "object_byte": 189,
+          "stock_byte": 176
+        },
+        {
+          "offset": 38,
+          "object_byte": 192,
+          "stock_byte": 0
+        },
+        {
+          "offset": 39,
+          "object_byte": 70,
+          "stock_byte": 189
+        }
+      ],
+      "object_sha256": "629d16e5e6ae7fef817925a09af924e4fc2c72926c9c2bd54f1bfa18bf892053",
+      "source_sha256": "25f39ada87f0fcc59acf121b5573f8febc5a3b72f723bd12f198ca312d45701e",
+      "stock_window_is_not_verified_function_extent": true
+    },
+    {
+      "function": "Cy_Flash_ClockConfig",
+      "runtime_address": "0x8d00",
+      "historical_code_bytes": 20,
+      "compiled_section_bytes": 32,
+      "object_bytes": "10b5044b044a9a60044a5a60fff7feff10bdc04600001040b6e8000015000080",
+      "stock_window_bytes": "10b5044b044a9a60044a5a60c046fff771ff10bd00001040b6e8000015000080",
+      "relocations": [
+        {
+          "offset": 12,
+          "type": 10,
+          "symbol": "ProcessStatusCode",
+          "source_symbol_section": ".text.ProcessStatusCode"
+        }
+      ],
+      "non_relocated_differences": [
+        {
+          "offset": 16,
+          "object_byte": 16,
+          "stock_byte": 113
+        },
+        {
+          "offset": 17,
+          "object_byte": 189,
+          "stock_byte": 255
+        },
+        {
+          "offset": 18,
+          "object_byte": 192,
+          "stock_byte": 16
+        },
+        {
+          "offset": 19,
+          "object_byte": 70,
+          "stock_byte": 189
+        }
+      ],
+      "object_sha256": "629d16e5e6ae7fef817925a09af924e4fc2c72926c9c2bd54f1bfa18bf892053",
+      "source_sha256": "25f39ada87f0fcc59acf121b5573f8febc5a3b72f723bd12f198ca312d45701e",
+      "stock_window_is_not_verified_function_extent": true
+    },
+    {
+      "function": "Cy_Flash_ClockRestore",
+      "runtime_address": "0x8d20",
+      "historical_code_bytes": 32,
+      "compiled_section_bytes": 48,
+      "object_bytes": "00b583b06a46064b0093064b0193064b9a60064a5a60fff7feff03b000bdc046b6ea0000000000000000104017000080",
+      "stock_window_bytes": "00b583b06a46064b0093064b0193064b9a60064a5a60c046fff75cff03b000bdb6ea0000040f00200000104017000080",
+      "relocations": [
+        {
+          "offset": 22,
+          "type": 10,
+          "symbol": "ProcessStatusCode",
+          "source_symbol_section": ".text.ProcessStatusCode"
+        },
+        {
+          "offset": 36,
+          "type": 2,
+          "symbol": "",
+          "source_symbol_section": ".bss"
+        }
+      ],
+      "non_relocated_differences": [
+        {
+          "offset": 26,
+          "object_byte": 3,
+          "stock_byte": 92
+        },
+        {
+          "offset": 27,
+          "object_byte": 176,
+          "stock_byte": 255
+        },
+        {
+          "offset": 28,
+          "object_byte": 0,
+          "stock_byte": 3
+        },
+        {
+          "offset": 29,
+          "object_byte": 189,
+          "stock_byte": 176
+        },
+        {
+          "offset": 30,
+          "object_byte": 192,
+          "stock_byte": 0
+        },
+        {
+          "offset": 31,
+          "object_byte": 70,
+          "stock_byte": 189
+        }
+      ],
+      "object_sha256": "629d16e5e6ae7fef817925a09af924e4fc2c72926c9c2bd54f1bfa18bf892053",
+      "source_sha256": "25f39ada87f0fcc59acf121b5573f8febc5a3b72f723bd12f198ca312d45701e",
+      "stock_window_is_not_verified_function_extent": true
+    },
+    {
+      "function": "Cy_Flash_WriteRow",
+      "runtime_address": "0x8d50",
+      "historical_code_bytes": 180,
+      "compiled_section_bytes": 240,
+      "object_bytes": "f0b5a3b004000d00fff7feff06002000fff7feff002850d0002d52d08022290002a8fff7feff284be3188022d20093421ad29b0a1b06254a13436a4600937f230193234b9a60234a5a60fff7feff051e34d1fff7feff0700fff7feff051e08d03800fff7feff29e0220c1206174b1343e3e7fff7feff051ef2d16a46144b9a60154b9c420fd9154b00930196104b144a5a60fff7feff0400fff7feff0500002cded02500dce70f4b0093009b360433430093074b0c4a5a60ebe70c4d280023b0f0bd0a4dfae7c046001000f0b6d700000000104004000080ffefff0fb6eb000018000080b6d800000500008021005200",
+      "stock_window_bytes": "f0b5a3b004000d00fff7a6ff06002000fff788ff002847d0002d49d06f468022290002a801f05afe720a1206214b134300937f230193204b9f60204a5a60c046fff730ff051e30d1fbf77bfb0700fff791ff051e03d03800fbf777fb25e0fff7a7ff051ef7d16a46134b9a60144b9c4210d9144b009301960f4b134a5a60c046fff710ff0400fff7a3ff0500002ce2d02500e0e70d4b0093009b360433430093054b0b4a5a60eae70a4d280023b0f0bd084dfae7b6d700000000104004000080ffefff0fb6eb000018000080b6d80000050000802100520010b51400072900d901be0f2c00d901be084bc3181b0a084a",
+      "relocations": [
+        {
+          "offset": 8,
+          "type": 10,
+          "symbol": "Cy_Flash_GetRowNum",
+          "source_symbol_section": ".text.Cy_Flash_GetRowNum"
+        },
+        {
+          "offset": 16,
+          "type": 10,
+          "symbol": "Cy_Flash_ValidAddr",
+          "source_symbol_section": ".text.Cy_Flash_ValidAddr"
+        },
+        {
+          "offset": 34,
+          "type": 10,
+          "symbol": "memcpy",
+          "source_symbol_section": "SHN_UNDEF"
+        },
+        {
+          "offset": 74,
+          "type": 10,
+          "symbol": "ProcessStatusCode",
+          "source_symbol_section": ".text.ProcessStatusCode"
+        },
+        {
+          "offset": 82,
+          "type": 10,
+          "symbol": "Cy_SysLib_EnterCriticalSection",
+          "source_symbol_section": "SHN_UNDEF"
+        },
+        {
+          "offset": 88,
+          "type": 10,
+          "symbol": "Cy_Flash_ClockBackup",
+          "source_symbol_section": ".text.Cy_Flash_ClockBackup"
+        },
+        {
+          "offset": 98,
+          "type": 10,
+          "symbol": "Cy_SysLib_ExitCriticalSection",
+          "source_symbol_section": "SHN_UNDEF"
+        },
+        {
+          "offset": 114,
+          "type": 10,
+          "symbol": "Cy_Flash_ClockConfig",
+          "source_symbol_section": ".text.Cy_Flash_ClockConfig"
+        },
+        {
+          "offset": 146,
+          "type": 10,
+          "symbol": "ProcessStatusCode",
+          "source_symbol_section": ".text.ProcessStatusCode"
+        },
+        {
+          "offset": 152,
+          "type": 10,
+          "symbol": "Cy_Flash_ClockRestore",
+          "source_symbol_section": ".text.Cy_Flash_ClockRestore"
+        }
+      ],
+      "non_relocated_differences": [
+        {
+          "offset": 22,
+          "object_byte": 80,
+          "stock_byte": 71
+        },
+        {
+          "offset": 26,
+          "object_byte": 82,
+          "stock_byte": 73
+        },
+        {
+          "offset": 28,
+          "object_byte": 128,
+          "stock_byte": 111
+        },
+        {
+          "offset": 29,
+          "object_byte": 34,
+          "stock_byte": 70
+        },
+        {
+          "offset": 30,
+          "object_byte": 41,
+          "stock_byte": 128
+        },
+        {
+          "offset": 31,
+          "object_byte": 0,
+          "stock_byte": 34
+        },
+        {
+          "offset": 32,
+          "object_byte": 2,
+          "stock_byte": 41
+        },
+        {
+          "offset": 33,
+          "object_byte": 168,
+          "stock_byte": 0
+        },
+        {
+          "offset": 38,
+          "object_byte": 40,
+          "stock_byte": 90
+        },
+        {
+          "offset": 39,
+          "object_byte": 75,
+          "stock_byte": 254
+        },
+        {
+          "offset": 40,
+          "object_byte": 227,
+          "stock_byte": 114
+        },
+        {
+          "offset": 41,
+          "object_byte": 24,
+          "stock_byte": 10
+        },
+        {
+          "offset": 42,
+          "object_byte": 128,
+          "stock_byte": 18
+        },
+        {
+          "offset": 43,
+          "object_byte": 34,
+          "stock_byte": 6
+        },
+        {
+          "offset": 44,
+          "object_byte": 210,
+          "stock_byte": 33
+        },
+        {
+          "offset": 45,
+          "object_byte": 0,
+          "stock_byte": 75
+        },
+        {
+          "offset": 46,
+          "object_byte": 147,
+          "stock_byte": 19
+        },
+        {
+          "offset": 47,
+          "object_byte": 66,
+          "stock_byte": 67
+        },
+        {
+          "offset": 48,
+          "object_byte": 26,
+          "stock_byte": 0
+        },
+        {
+          "offset": 49,
+          "object_byte": 210,
+          "stock_byte": 147
+        },
+        {
+          "offset": 50,
+          "object_byte": 155,
+          "stock_byte": 127
+        },
+        {
+          "offset": 51,
+          "object_byte": 10,
+          "stock_byte": 35
+        },
+        {
+          "offset": 52,
+          "object_byte": 27,
+          "stock_byte": 1
+        },
+        {
+          "offset": 53,
+          "object_byte": 6,
+          "stock_byte": 147
+        },
+        {
+          "offset": 54,
+          "object_byte": 37,
+          "stock_byte": 32
+        },
+        {
+          "offset": 55,
+          "object_byte": 74,
+          "stock_byte": 75
+        },
+        {
+          "offset": 56,
+          "object_byte": 19,
+          "stock_byte": 159
+        },
+        {
+          "offset": 57,
+          "object_byte": 67,
+          "stock_byte": 96
+        },
+        {
+          "offset": 58,
+          "object_byte": 106,
+          "stock_byte": 32
+        },
+        {
+          "offset": 59,
+          "object_byte": 70,
+          "stock_byte": 74
+        },
+        {
+          "offset": 60,
+          "object_byte": 0,
+          "stock_byte": 90
+        },
+        {
+          "offset": 61,
+          "object_byte": 147,
+          "stock_byte": 96
+        },
+        {
+          "offset": 62,
+          "object_byte": 127,
+          "stock_byte": 192
+        },
+        {
+          "offset": 63,
+          "object_byte": 35,
+          "stock_byte": 70
+        },
+        {
+          "offset": 64,
+          "object_byte": 1,
+          "stock_byte": 255
+        },
+        {
+          "offset": 65,
+          "object_byte": 147,
+          "stock_byte": 247
+        },
+        {
+          "offset": 66,
+          "object_byte": 35,
+          "stock_byte": 48
+        },
+        {
+          "offset": 67,
+          "object_byte": 75,
+          "stock_byte": 255
+        },
+        {
+          "offset": 68,
+          "object_byte": 154,
+          "stock_byte": 5
+        },
+        {
+          "offset": 69,
+          "object_byte": 96,
+          "stock_byte": 30
+        },
+        {
+          "offset": 70,
+          "object_byte": 35,
+          "stock_byte": 48
+        },
+        {
+          "offset": 71,
+          "object_byte": 74,
+          "stock_byte": 209
+        },
+        {
+          "offset": 72,
+          "object_byte": 90,
+          "stock_byte": 251
+        },
+        {
+          "offset": 73,
+          "object_byte": 96,
+          "stock_byte": 247
+        },
+        {
+          "offset": 78,
+          "object_byte": 5,
+          "stock_byte": 255
+        },
+        {
+          "offset": 79,
+          "object_byte": 30,
+          "stock_byte": 247
+        },
+        {
+          "offset": 80,
+          "object_byte": 52,
+          "stock_byte": 145
+        },
+        {
+          "offset": 81,
+          "object_byte": 209,
+          "stock_byte": 255
+        },
+        {
+          "offset": 86,
+          "object_byte": 7,
+          "stock_byte": 56
+        },
+        {
+          "offset": 92,
+          "object_byte": 5,
+          "stock_byte": 37
+        },
+        {
+          "offset": 93,
+          "object_byte": 30,
+          "stock_byte": 224
+        },
+        {
+          "offset": 94,
+          "object_byte": 8,
+          "stock_byte": 255
+        },
+        {
+          "offset": 95,
+          "object_byte": 208,
+          "stock_byte": 247
+        },
+        {
+          "offset": 96,
+          "object_byte": 56,
+          "stock_byte": 167
+        },
+        {
+          "offset": 97,
+          "object_byte": 0,
+          "stock_byte": 255
+        },
+        {
+          "offset": 102,
+          "object_byte": 41,
+          "stock_byte": 106
+        },
+        {
+          "offset": 103,
+          "object_byte": 224,
+          "stock_byte": 70
+        },
+        {
+          "offset": 104,
+          "object_byte": 34,
+          "stock_byte": 19
+        },
+        {
+          "offset": 105,
+          "object_byte": 12,
+          "stock_byte": 75
+        },
+        {
+          "offset": 106,
+          "object_byte": 18,
+          "stock_byte": 154
+        },
+        {
+          "offset": 107,
+          "object_byte": 6,
+          "stock_byte": 96
+        },
+        {
+          "offset": 108,
+          "object_byte": 23,
+          "stock_byte": 20
+        },
+        {
+          "offset": 110,
+          "object_byte": 19,
+          "stock_byte": 156
+        },
+        {
+          "offset": 111,
+          "object_byte": 67,
+          "stock_byte": 66
+        },
+        {
+          "offset": 112,
+          "object_byte": 227,
+          "stock_byte": 16
+        },
+        {
+          "offset": 113,
+          "object_byte": 231,
+          "stock_byte": 217
+        },
+        {
+          "offset": 118,
+          "object_byte": 5,
+          "stock_byte": 1
+        },
+        {
+          "offset": 119,
+          "object_byte": 30,
+          "stock_byte": 150
+        },
+        {
+          "offset": 120,
+          "object_byte": 242,
+          "stock_byte": 15
+        },
+        {
+          "offset": 121,
+          "object_byte": 209,
+          "stock_byte": 75
+        },
+        {
+          "offset": 122,
+          "object_byte": 106,
+          "stock_byte": 19
+        },
+        {
+          "offset": 123,
+          "object_byte": 70,
+          "stock_byte": 74
+        },
+        {
+          "offset": 124,
+          "object_byte": 20,
+          "stock_byte": 90
+        },
+        {
+          "offset": 125,
+          "object_byte": 75,
+          "stock_byte": 96
+        },
+        {
+          "offset": 126,
+          "object_byte": 154,
+          "stock_byte": 192
+        },
+        {
+          "offset": 127,
+          "object_byte": 96,
+          "stock_byte": 70
+        },
+        {
+          "offset": 128,
+          "object_byte": 21,
+          "stock_byte": 255
+        },
+        {
+          "offset": 129,
+          "object_byte": 75,
+          "stock_byte": 247
+        },
+        {
+          "offset": 130,
+          "object_byte": 156,
+          "stock_byte": 16
+        },
+        {
+          "offset": 131,
+          "object_byte": 66,
+          "stock_byte": 255
+        },
+        {
+          "offset": 132,
+          "object_byte": 15,
+          "stock_byte": 4
+        },
+        {
+          "offset": 133,
+          "object_byte": 217,
+          "stock_byte": 0
+        },
+        {
+          "offset": 134,
+          "object_byte": 21,
+          "stock_byte": 255
+        },
+        {
+          "offset": 135,
+          "object_byte": 75,
+          "stock_byte": 247
+        },
+        {
+          "offset": 136,
+          "object_byte": 0,
+          "stock_byte": 163
+        },
+        {
+          "offset": 137,
+          "object_byte": 147,
+          "stock_byte": 255
+        },
+        {
+          "offset": 138,
+          "object_byte": 1,
+          "stock_byte": 5
+        },
+        {
+          "offset": 139,
+          "object_byte": 150,
+          "stock_byte": 0
+        },
+        {
+          "offset": 140,
+          "object_byte": 16,
+          "stock_byte": 0
+        },
+        {
+          "offset": 141,
+          "object_byte": 75,
+          "stock_byte": 44
+        },
+        {
+          "offset": 142,
+          "object_byte": 20,
+          "stock_byte": 226
+        },
+        {
+          "offset": 143,
+          "object_byte": 74,
+          "stock_byte": 208
+        },
+        {
+          "offset": 144,
+          "object_byte": 90,
+          "stock_byte": 37
+        },
+        {
+          "offset": 145,
+          "object_byte": 96,
+          "stock_byte": 0
+        },
+        {
+          "offset": 150,
+          "object_byte": 4,
+          "stock_byte": 0
+        },
+        {
+          "offset": 151,
+          "object_byte": 0,
+          "stock_byte": 147
+        },
+        {
+          "offset": 156,
+          "object_byte": 5,
+          "stock_byte": 51
+        },
+        {
+          "offset": 157,
+          "object_byte": 0,
+          "stock_byte": 67
+        },
+        {
+          "offset": 159,
+          "object_byte": 44,
+          "stock_byte": 147
+        },
+        {
+          "offset": 160,
+          "object_byte": 222,
+          "stock_byte": 5
+        },
+        {
+          "offset": 161,
+          "object_byte": 208,
+          "stock_byte": 75
+        },
+        {
+          "offset": 162,
+          "object_byte": 37,
+          "stock_byte": 11
+        },
+        {
+          "offset": 163,
+          "object_byte": 0,
+          "stock_byte": 74
+        },
+        {
+          "offset": 164,
+          "object_byte": 220,
+          "stock_byte": 90
+        },
+        {
+          "offset": 165,
+          "object_byte": 231,
+          "stock_byte": 96
+        },
+        {
+          "offset": 166,
+          "object_byte": 15,
+          "stock_byte": 234
+        },
+        {
+          "offset": 167,
+          "object_byte": 75,
+          "stock_byte": 231
+        },
+        {
+          "offset": 168,
+          "object_byte": 0,
+          "stock_byte": 10
+        },
+        {
+          "offset": 169,
+          "object_byte": 147,
+          "stock_byte": 77
+        },
+        {
+          "offset": 170,
+          "object_byte": 0,
+          "stock_byte": 40
+        },
+        {
+          "offset": 171,
+          "object_byte": 155,
+          "stock_byte": 0
+        },
+        {
+          "offset": 172,
+          "object_byte": 54,
+          "stock_byte": 35
+        },
+        {
+          "offset": 173,
+          "object_byte": 4,
+          "stock_byte": 176
+        },
+        {
+          "offset": 174,
+          "object_byte": 51,
+          "stock_byte": 240
+        },
+        {
+          "offset": 175,
+          "object_byte": 67,
+          "stock_byte": 189
+        },
+        {
+          "offset": 176,
+          "object_byte": 0,
+          "stock_byte": 8
+        },
+        {
+          "offset": 177,
+          "object_byte": 147,
+          "stock_byte": 77
+        },
+        {
+          "offset": 178,
+          "object_byte": 7,
+          "stock_byte": 250
+        },
+        {
+          "offset": 179,
+          "object_byte": 75,
+          "stock_byte": 231
+        },
+        {
+          "offset": 180,
+          "object_byte": 12,
+          "stock_byte": 182
+        },
+        {
+          "offset": 181,
+          "object_byte": 74,
+          "stock_byte": 215
+        },
+        {
+          "offset": 182,
+          "object_byte": 90,
+          "stock_byte": 0
+        },
+        {
+          "offset": 183,
+          "object_byte": 96,
+          "stock_byte": 0
+        },
+        {
+          "offset": 184,
+          "object_byte": 235,
+          "stock_byte": 0
+        },
+        {
+          "offset": 185,
+          "object_byte": 231,
+          "stock_byte": 0
+        },
+        {
+          "offset": 186,
+          "object_byte": 12,
+          "stock_byte": 16
+        },
+        {
+          "offset": 187,
+          "object_byte": 77,
+          "stock_byte": 64
+        },
+        {
+          "offset": 188,
+          "object_byte": 40,
+          "stock_byte": 4
+        },
+        {
+          "offset": 190,
+          "object_byte": 35,
+          "stock_byte": 0
+        },
+        {
+          "offset": 191,
+          "object_byte": 176,
+          "stock_byte": 128
+        },
+        {
+          "offset": 192,
+          "object_byte": 240,
+          "stock_byte": 255
+        },
+        {
+          "offset": 193,
+          "object_byte": 189,
+          "stock_byte": 239
+        },
+        {
+          "offset": 194,
+          "object_byte": 10,
+          "stock_byte": 255
+        },
+        {
+          "offset": 195,
+          "object_byte": 77,
+          "stock_byte": 15
+        },
+        {
+          "offset": 196,
+          "object_byte": 250,
+          "stock_byte": 182
+        },
+        {
+          "offset": 197,
+          "object_byte": 231,
+          "stock_byte": 235
+        },
+        {
+          "offset": 198,
+          "object_byte": 192,
+          "stock_byte": 0
+        },
+        {
+          "offset": 199,
+          "object_byte": 70,
+          "stock_byte": 0
+        },
+        {
+          "offset": 200,
+          "object_byte": 0,
+          "stock_byte": 24
+        },
+        {
+          "offset": 201,
+          "object_byte": 16,
+          "stock_byte": 0
+        },
+        {
+          "offset": 203,
+          "object_byte": 240,
+          "stock_byte": 128
+        },
+        {
+          "offset": 205,
+          "object_byte": 215,
+          "stock_byte": 216
+        },
+        {
+          "offset": 208,
+          "object_byte": 0,
+          "stock_byte": 5
+        },
+        {
+          "offset": 210,
+          "object_byte": 16,
+          "stock_byte": 0
+        },
+        {
+          "offset": 211,
+          "object_byte": 64,
+          "stock_byte": 128
+        },
+        {
+          "offset": 212,
+          "object_byte": 4,
+          "stock_byte": 33
+        },
+        {
+          "offset": 214,
+          "object_byte": 0,
+          "stock_byte": 82
+        },
+        {
+          "offset": 215,
+          "object_byte": 128,
+          "stock_byte": 0
+        },
+        {
+          "offset": 216,
+          "object_byte": 255,
+          "stock_byte": 16
+        },
+        {
+          "offset": 217,
+          "object_byte": 239,
+          "stock_byte": 181
+        },
+        {
+          "offset": 218,
+          "object_byte": 255,
+          "stock_byte": 20
+        },
+        {
+          "offset": 219,
+          "object_byte": 15,
+          "stock_byte": 0
+        },
+        {
+          "offset": 220,
+          "object_byte": 182,
+          "stock_byte": 7
+        },
+        {
+          "offset": 221,
+          "object_byte": 235,
+          "stock_byte": 41
+        },
+        {
+          "offset": 223,
+          "object_byte": 0,
+          "stock_byte": 217
+        },
+        {
+          "offset": 224,
+          "object_byte": 24,
+          "stock_byte": 1
+        },
+        {
+          "offset": 225,
+          "object_byte": 0,
+          "stock_byte": 190
+        },
+        {
+          "offset": 226,
+          "object_byte": 0,
+          "stock_byte": 15
+        },
+        {
+          "offset": 227,
+          "object_byte": 128,
+          "stock_byte": 44
+        },
+        {
+          "offset": 228,
+          "object_byte": 182,
+          "stock_byte": 0
+        },
+        {
+          "offset": 229,
+          "object_byte": 216,
+          "stock_byte": 217
+        },
+        {
+          "offset": 230,
+          "object_byte": 0,
+          "stock_byte": 1
+        },
+        {
+          "offset": 231,
+          "object_byte": 0,
+          "stock_byte": 190
+        },
+        {
+          "offset": 232,
+          "object_byte": 5,
+          "stock_byte": 8
+        },
+        {
+          "offset": 233,
+          "object_byte": 0,
+          "stock_byte": 75
+        },
+        {
+          "offset": 234,
+          "object_byte": 0,
+          "stock_byte": 195
+        },
+        {
+          "offset": 235,
+          "object_byte": 128,
+          "stock_byte": 24
+        },
+        {
+          "offset": 236,
+          "object_byte": 33,
+          "stock_byte": 27
+        },
+        {
+          "offset": 237,
+          "object_byte": 0,
+          "stock_byte": 10
+        },
+        {
+          "offset": 238,
+          "object_byte": 82,
+          "stock_byte": 8
+        },
+        {
+          "offset": 239,
+          "object_byte": 0,
+          "stock_byte": 74
+        }
+      ],
+      "object_sha256": "629d16e5e6ae7fef817925a09af924e4fc2c72926c9c2bd54f1bfa18bf892053",
+      "source_sha256": "25f39ada87f0fcc59acf121b5573f8febc5a3b72f723bd12f198ca312d45701e",
+      "stock_window_is_not_verified_function_extent": true
+    },
+    {
+      "function": "Cy_SysClk_IloStartMeasurement",
+      "runtime_address": "0x9d90",
+      "historical_code_bytes": 46,
+      "compiled_section_bytes": 72,
+      "object_bytes": "0b4b1b79002b11d1094b01225a7109494a6b094b1a4080235b0013434b6307490a68074b1a40074b13430b607047c0460000000000000340fff0ffff18000340f0f0ffff08090000",
+      "stock_window_bytes": "0b4b1b78002b11d10a4b01221a700a494a6b0a4b1a4080235b0013434b6308490a68084b1a40084b13430b607047c0461d0f00201e0f002000000340fff0ffff18000340f0f0ffff",
+      "relocations": [
+        {
+          "offset": 48,
+          "type": 2,
+          "symbol": "",
+          "source_symbol_section": ".bss"
+        }
+      ],
+      "non_relocated_differences": [
+        {
+          "offset": 3,
+          "object_byte": 121,
+          "stock_byte": 120
+        },
+        {
+          "offset": 8,
+          "object_byte": 9,
+          "stock_byte": 10
+        },
+        {
+          "offset": 12,
+          "object_byte": 90,
+          "stock_byte": 26
+        },
+        {
+          "offset": 13,
+          "object_byte": 113,
+          "stock_byte": 112
+        },
+        {
+          "offset": 14,
+          "object_byte": 9,
+          "stock_byte": 10
+        },
+        {
+          "offset": 18,
+          "object_byte": 9,
+          "stock_byte": 10
+        },
+        {
+          "offset": 30,
+          "object_byte": 7,
+          "stock_byte": 8
+        },
+        {
+          "offset": 34,
+          "object_byte": 7,
+          "stock_byte": 8
+        },
+        {
+          "offset": 38,
+          "object_byte": 7,
+          "stock_byte": 8
+        },
+        {
+          "offset": 52,
+          "object_byte": 0,
+          "stock_byte": 30
+        },
+        {
+          "offset": 53,
+          "object_byte": 0,
+          "stock_byte": 15
+        },
+        {
+          "offset": 54,
+          "object_byte": 3,
+          "stock_byte": 0
+        },
+        {
+          "offset": 55,
+          "object_byte": 64,
+          "stock_byte": 32
+        },
+        {
+          "offset": 56,
+          "object_byte": 255,
+          "stock_byte": 0
+        },
+        {
+          "offset": 57,
+          "object_byte": 240,
+          "stock_byte": 0
+        },
+        {
+          "offset": 58,
+          "object_byte": 255,
+          "stock_byte": 3
+        },
+        {
+          "offset": 59,
+          "object_byte": 255,
+          "stock_byte": 64
+        },
+        {
+          "offset": 60,
+          "object_byte": 24,
+          "stock_byte": 255
+        },
+        {
+          "offset": 61,
+          "object_byte": 0,
+          "stock_byte": 240
+        },
+        {
+          "offset": 62,
+          "object_byte": 3,
+          "stock_byte": 255
+        },
+        {
+          "offset": 63,
+          "object_byte": 64,
+          "stock_byte": 255
+        },
+        {
+          "offset": 64,
+          "object_byte": 240,
+          "stock_byte": 24
+        },
+        {
+          "offset": 65,
+          "object_byte": 240,
+          "stock_byte": 0
+        },
+        {
+          "offset": 66,
+          "object_byte": 255,
+          "stock_byte": 3
+        },
+        {
+          "offset": 67,
+          "object_byte": 255,
+          "stock_byte": 64
+        },
+        {
+          "offset": 68,
+          "object_byte": 8,
+          "stock_byte": 240
+        },
+        {
+          "offset": 69,
+          "object_byte": 9,
+          "stock_byte": 240
+        },
+        {
+          "offset": 70,
+          "object_byte": 0,
+          "stock_byte": 255
+        },
+        {
+          "offset": 71,
+          "object_byte": 0,
+          "stock_byte": 255
+        }
+      ],
+      "object_sha256": "273f8ae0d00b8c33631c9f2fe96e645a506dcb4af9b052417535e86fe63174d2",
+      "source_sha256": "fa7d3221a4a52f4cae68d291237c57541448539db05ddf0ba653fd0a04c08594",
+      "stock_window_is_not_verified_function_extent": true
+    },
+    {
+      "function": "Cy_SysClk_IloStopMeasurement",
+      "runtime_address": "0x9ddc",
+      "historical_code_bytes": 36,
+      "compiled_section_bytes": 56,
+      "object_bytes": "084b1b79002b0cd1064b00225a71064a536b06490b405363054a136805490b40136070470000000000000340fff0ffff180003400f0f0000",
+      "stock_window_bytes": "084b1b78002b0cd1074b00221a70074a536b07490b405363064a136806490b40136070471d0f00201e0f002000000340fff0ffff18000340",
+      "relocations": [
+        {
+          "offset": 36,
+          "type": 2,
+          "symbol": "",
+          "source_symbol_section": ".bss"
+        }
+      ],
+      "non_relocated_differences": [
+        {
+          "offset": 3,
+          "object_byte": 121,
+          "stock_byte": 120
+        },
+        {
+          "offset": 8,
+          "object_byte": 6,
+          "stock_byte": 7
+        },
+        {
+          "offset": 12,
+          "object_byte": 90,
+          "stock_byte": 26
+        },
+        {
+          "offset": 13,
+          "object_byte": 113,
+          "stock_byte": 112
+        },
+        {
+          "offset": 14,
+          "object_byte": 6,
+          "stock_byte": 7
+        },
+        {
+          "offset": 18,
+          "object_byte": 6,
+          "stock_byte": 7
+        },
+        {
+          "offset": 24,
+          "object_byte": 5,
+          "stock_byte": 6
+        },
+        {
+          "offset": 28,
+          "object_byte": 5,
+          "stock_byte": 6
+        },
+        {
+          "offset": 40,
+          "object_byte": 0,
+          "stock_byte": 30
+        },
+        {
+          "offset": 41,
+          "object_byte": 0,
+          "stock_byte": 15
+        },
+        {
+          "offset": 42,
+          "object_byte": 3,
+          "stock_byte": 0
+        },
+        {
+          "offset": 43,
+          "object_byte": 64,
+          "stock_byte": 32
+        },
+        {
+          "offset": 44,
+          "object_byte": 255,
+          "stock_byte": 0
+        },
+        {
+          "offset": 45,
+          "object_byte": 240,
+          "stock_byte": 0
+        },
+        {
+          "offset": 46,
+          "object_byte": 255,
+          "stock_byte": 3
+        },
+        {
+          "offset": 47,
+          "object_byte": 255,
+          "stock_byte": 64
+        },
+        {
+          "offset": 48,
+          "object_byte": 24,
+          "stock_byte": 255
+        },
+        {
+          "offset": 49,
+          "object_byte": 0,
+          "stock_byte": 240
+        },
+        {
+          "offset": 50,
+          "object_byte": 3,
+          "stock_byte": 255
+        },
+        {
+          "offset": 51,
+          "object_byte": 64,
+          "stock_byte": 255
+        },
+        {
+          "offset": 52,
+          "object_byte": 15,
+          "stock_byte": 24
+        },
+        {
+          "offset": 53,
+          "object_byte": 15,
+          "stock_byte": 0
+        },
+        {
+          "offset": 54,
+          "object_byte": 0,
+          "stock_byte": 3
+        },
+        {
+          "offset": 55,
+          "object_byte": 0,
+          "stock_byte": 64
+        }
+      ],
+      "object_sha256": "273f8ae0d00b8c33631c9f2fe96e645a506dcb4af9b052417535e86fe63174d2",
+      "source_sha256": "fa7d3221a4a52f4cae68d291237c57541448539db05ddf0ba653fd0a04c08594",
+      "stock_window_is_not_verified_function_extent": true
+    },
+    {
+      "function": "Cy_SysClk_IloCompensate",
+      "runtime_address": "0x9e18",
+      "historical_code_bytes": 218,
+      "compiled_section_bytes": 284,
+      "object_bytes": "70b50c000200643a344b9a425dd800295dd0334b1968334b5b6b334a1340334a914201d0324870bd80225200934201d02f48f8e72f4b9b79002b3cd02e4b1b68002b46da2d4b1b68002b44d0642545432b4b9c4665442b492800fff7feff0600264b1b6843438022d203934216d3234b1868254b19684843890afff7feff2821fff7feff060021492800fff7feff70432060184b00229a710020c4e7174b1868194b19684843890afff7feff70431849fff7feffece7144b1b689b0a0e4a13600c4b01229a711348ade71348abe71248a9e71048a7e70648a5e7c0461c841e0018000340000003400f0f00000809000003004a00000000001c00034020000340e2040000c409000000000000a0252600409c00000400490001004a00",
+      "stock_window_bytes": "70b50c000200643a344b9a425dd800295dd0334b1968334b5b6b334a1340334a914201d0324870bd80225200934201d02f48f8e72f4b1b78002b3cd02e4b1b68002b46da2d4b1b68002b44d0642545432b4b9c4665442b49280000f025fc0600264b1b6843438022d203934216d3234b1868254b19684843890a00f015fc282100f012fc06002149280000f00dfc70432060184b00221a700020c4e7174b1868194b19684843890a00f0fefb7043184900f0fafbece7144b1b689b0a0e4a13600c4b01221a701348ade71348abe71248a9e71048a7e70648a5e7c0461c841e0018000340000003400f0f00000809000003004a001c0f00201c00034020000340e2040000c409000078080020a0252600409c00000400490001004a00",
+      "relocations": [
+        {
+          "offset": 90,
+          "type": 10,
+          "symbol": "__aeabi_uidiv",
+          "source_symbol_section": "SHN_UNDEF"
+        },
+        {
+          "offset": 122,
+          "type": 10,
+          "symbol": "__aeabi_uidiv",
+          "source_symbol_section": "SHN_UNDEF"
+        },
+        {
+          "offset": 128,
+          "type": 10,
+          "symbol": "__aeabi_uidiv",
+          "source_symbol_section": "SHN_UNDEF"
+        },
+        {
+          "offset": 138,
+          "type": 10,
+          "symbol": "__aeabi_uidiv",
+          "source_symbol_section": "SHN_UNDEF"
+        },
+        {
+          "offset": 168,
+          "type": 10,
+          "symbol": "__aeabi_uidiv",
+          "source_symbol_section": "SHN_UNDEF"
+        },
+        {
+          "offset": 176,
+          "type": 10,
+          "symbol": "__aeabi_uidiv",
+          "source_symbol_section": "SHN_UNDEF"
+        },
+        {
+          "offset": 244,
+          "type": 2,
+          "symbol": "",
+          "source_symbol_section": ".bss"
+        },
+        {
+          "offset": 264,
+          "type": 2,
+          "symbol": "SystemCoreClock",
+          "source_symbol_section": "SHN_UNDEF"
+        }
+      ],
+      "non_relocated_differences": [
+        {
+          "offset": 54,
+          "object_byte": 155,
+          "stock_byte": 27
+        },
+        {
+          "offset": 55,
+          "object_byte": 121,
+          "stock_byte": 120
+        },
+        {
+          "offset": 150,
+          "object_byte": 154,
+          "stock_byte": 26
+        },
+        {
+          "offset": 151,
+          "object_byte": 113,
+          "stock_byte": 112
+        },
+        {
+          "offset": 196,
+          "object_byte": 154,
+          "stock_byte": 26
+        },
+        {
+          "offset": 197,
+          "object_byte": 113,
+          "stock_byte": 112
+        }
+      ],
+      "object_sha256": "273f8ae0d00b8c33631c9f2fe96e645a506dcb4af9b052417535e86fe63174d2",
+      "source_sha256": "fa7d3221a4a52f4cae68d291237c57541448539db05ddf0ba653fd0a04c08594",
+      "stock_window_is_not_verified_function_extent": true
+    },
+    {
+      "function": "Cy_SysPm_ExecuteCallback",
+      "runtime_address": "0xa444",
+      "historical_code_bytes": 210,
+      "compiled_section_bytes": 220,
+      "object_bytes": "70b582b005000e00012800d901be731edbb2012b08d9042e13d0082e16d001be2c4baa00d45802e02a4baa00d458012e0ad0022e38d025006469002cfbd1002039e0244baa00d458002004e0214baa00d458ece76469002c13d01f4b98420ed0a3683342f6d1e3681a68684600925b680193236831009847164bdc60eae7012eeed1012e01d002b070bd134b984205d0104bad005b1900221a61f4e70d4bad005d19db682b61eee70a4bdd68002dc6d02d69c4e72d69002de5d0ab683342f9d1eb681a68684600925b6801932b6831009847efe700000000ff004200",
+      "stock_window_bytes": "70b582b005000e00012800d901be731edbb2012b08d9042e13d0082e16d001be2c4baa00d45802e02a4baa00d458012e0ad0022e37d025006469002cfbd1002038e0244baa00d458002004e0214baa00d458ece76469002c13d01f4b98420ed0a3683342f6d1e3681a68684600925b680193236831009847184b1c60eae7012eeed1012e01d002b070bd134b984204d0134bad000022ea50f5e7114bad000f4a1268ea50efe70d4b1d68002dc7d02d69c5e72d69002de6d0ab683342f9d1eb681a68684600925b6801932b6831009847efe7c046340f0020ff004200",
+      "relocations": [
+        {
+          "offset": 212,
+          "type": 2,
+          "symbol": "",
+          "source_symbol_section": ".bss"
+        }
+      ],
+      "non_relocated_differences": [
+        {
+          "offset": 52,
+          "object_byte": 56,
+          "stock_byte": 55
+        },
+        {
+          "offset": 64,
+          "object_byte": 57,
+          "stock_byte": 56
+        },
+        {
+          "offset": 120,
+          "object_byte": 22,
+          "stock_byte": 24
+        },
+        {
+          "offset": 122,
+          "object_byte": 220,
+          "stock_byte": 28
+        },
+        {
+          "offset": 142,
+          "object_byte": 5,
+          "stock_byte": 4
+        },
+        {
+          "offset": 144,
+          "object_byte": 16,
+          "stock_byte": 19
+        },
+        {
+          "offset": 148,
+          "object_byte": 91,
+          "stock_byte": 0
+        },
+        {
+          "offset": 149,
+          "object_byte": 25,
+          "stock_byte": 34
+        },
+        {
+          "offset": 150,
+          "object_byte": 0,
+          "stock_byte": 234
+        },
+        {
+          "offset": 151,
+          "object_byte": 34,
+          "stock_byte": 80
+        },
+        {
+          "offset": 152,
+          "object_byte": 26,
+          "stock_byte": 245
+        },
+        {
+          "offset": 153,
+          "object_byte": 97,
+          "stock_byte": 231
+        },
+        {
+          "offset": 154,
+          "object_byte": 244,
+          "stock_byte": 17
+        },
+        {
+          "offset": 155,
+          "object_byte": 231,
+          "stock_byte": 75
+        },
+        {
+          "offset": 156,
+          "object_byte": 13,
+          "stock_byte": 173
+        },
+        {
+          "offset": 157,
+          "object_byte": 75,
+          "stock_byte": 0
+        },
+        {
+          "offset": 158,
+          "object_byte": 173,
+          "stock_byte": 15
+        },
+        {
+          "offset": 159,
+          "object_byte": 0,
+          "stock_byte": 74
+        },
+        {
+          "offset": 160,
+          "object_byte": 93,
+          "stock_byte": 18
+        },
+        {
+          "offset": 161,
+          "object_byte": 25,
+          "stock_byte": 104
+        },
+        {
+          "offset": 162,
+          "object_byte": 219,
+          "stock_byte": 234
+        },
+        {
+          "offset": 163,
+          "object_byte": 104,
+          "stock_byte": 80
+        },
+        {
+          "offset": 164,
+          "object_byte": 43,
+          "stock_byte": 239
+        },
+        {
+          "offset": 165,
+          "object_byte": 97,
+          "stock_byte": 231
+        },
+        {
+          "offset": 166,
+          "object_byte": 238,
+          "stock_byte": 13
+        },
+        {
+          "offset": 167,
+          "object_byte": 231,
+          "stock_byte": 75
+        },
+        {
+          "offset": 168,
+          "object_byte": 10,
+          "stock_byte": 29
+        },
+        {
+          "offset": 169,
+          "object_byte": 75,
+          "stock_byte": 104
+        },
+        {
+          "offset": 170,
+          "object_byte": 221,
+          "stock_byte": 0
+        },
+        {
+          "offset": 171,
+          "object_byte": 104,
+          "stock_byte": 45
+        },
+        {
+          "offset": 172,
+          "object_byte": 0,
+          "stock_byte": 199
+        },
+        {
+          "offset": 173,
+          "object_byte": 45,
+          "stock_byte": 208
+        },
+        {
+          "offset": 174,
+          "object_byte": 198,
+          "stock_byte": 45
+        },
+        {
+          "offset": 175,
+          "object_byte": 208,
+          "stock_byte": 105
+        },
+        {
+          "offset": 176,
+          "object_byte": 45,
+          "stock_byte": 197
+        },
+        {
+          "offset": 177,
+          "object_byte": 105,
+          "stock_byte": 231
+        },
+        {
+          "offset": 178,
+          "object_byte": 196,
+          "stock_byte": 45
+        },
+        {
+          "offset": 179,
+          "object_byte": 231,
+          "stock_byte": 105
+        },
+        {
+          "offset": 180,
+          "object_byte": 45,
+          "stock_byte": 0
+        },
+        {
+          "offset": 181,
+          "object_byte": 105,
+          "stock_byte": 45
+        },
+        {
+          "offset": 182,
+          "object_byte": 0,
+          "stock_byte": 230
+        },
+        {
+          "offset": 183,
+          "object_byte": 45,
+          "stock_byte": 208
+        },
+        {
+          "offset": 184,
+          "object_byte": 229,
+          "stock_byte": 171
+        },
+        {
+          "offset": 185,
+          "object_byte": 208,
+          "stock_byte": 104
+        },
+        {
+          "offset": 186,
+          "object_byte": 171,
+          "stock_byte": 51
+        },
+        {
+          "offset": 187,
+          "object_byte": 104,
+          "stock_byte": 66
+        },
+        {
+          "offset": 188,
+          "object_byte": 51,
+          "stock_byte": 249
+        },
+        {
+          "offset": 189,
+          "object_byte": 66,
+          "stock_byte": 209
+        },
+        {
+          "offset": 190,
+          "object_byte": 249,
+          "stock_byte": 235
+        },
+        {
+          "offset": 191,
+          "object_byte": 209,
+          "stock_byte": 104
+        },
+        {
+          "offset": 192,
+          "object_byte": 235,
+          "stock_byte": 26
+        },
+        {
+          "offset": 194,
+          "object_byte": 26,
+          "stock_byte": 104
+        },
+        {
+          "offset": 195,
+          "object_byte": 104,
+          "stock_byte": 70
+        },
+        {
+          "offset": 196,
+          "object_byte": 104,
+          "stock_byte": 0
+        },
+        {
+          "offset": 197,
+          "object_byte": 70,
+          "stock_byte": 146
+        },
+        {
+          "offset": 198,
+          "object_byte": 0,
+          "stock_byte": 91
+        },
+        {
+          "offset": 199,
+          "object_byte": 146,
+          "stock_byte": 104
+        },
+        {
+          "offset": 200,
+          "object_byte": 91,
+          "stock_byte": 1
+        },
+        {
+          "offset": 201,
+          "object_byte": 104,
+          "stock_byte": 147
+        },
+        {
+          "offset": 202,
+          "object_byte": 1,
+          "stock_byte": 43
+        },
+        {
+          "offset": 203,
+          "object_byte": 147,
+          "stock_byte": 104
+        },
+        {
+          "offset": 204,
+          "object_byte": 43,
+          "stock_byte": 49
+        },
+        {
+          "offset": 205,
+          "object_byte": 104,
+          "stock_byte": 0
+        },
+        {
+          "offset": 206,
+          "object_byte": 49,
+          "stock_byte": 152
+        },
+        {
+          "offset": 207,
+          "object_byte": 0,
+          "stock_byte": 71
+        },
+        {
+          "offset": 208,
+          "object_byte": 152,
+          "stock_byte": 239
+        },
+        {
+          "offset": 209,
+          "object_byte": 71,
+          "stock_byte": 231
+        },
+        {
+          "offset": 210,
+          "object_byte": 239,
+          "stock_byte": 192
+        },
+        {
+          "offset": 211,
+          "object_byte": 231,
+          "stock_byte": 70
+        }
+      ],
+      "object_sha256": "f28d033297fbd4a8c4141838e22b76f2a751550ae705dd8cb1081e40abfcae03",
+      "source_sha256": "be43e5aa704c99acca45850db68094977a274dcb1d4335fafca753269c5a93b8",
+      "stock_window_is_not_verified_function_extent": true
+    }
+  ],
+  "unresolved_count": 8,
+  "source_or_lowering_mismatch": true,
+  "limits": "No relocation byte patched or source/build flags changed. A compiled-length stock window is comparison evidence, not function-extent proof."
+}

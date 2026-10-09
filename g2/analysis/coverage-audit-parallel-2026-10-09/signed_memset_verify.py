@@ -1,0 +1,18 @@
+from pathlib import Path
+import json,struct,itertools,hashlib
+R=Path.cwd();O=R/'g2/analysis/coverage-audit-parallel-2026-10-09';src=(O/'seven_verify.py').read_text();exec(src[:src.index("names=['")]);G=R/'g2/analysis/touch-libgcc14-signed-2026-10-09';N=R/'g2/analysis/touch-newlib14-memset-2026-10-09';g=json.loads((G/'results.json').read_text());n=json.loads((N/'results.json').read_text());out={}
+for key,P,r in [('signed',G,g),('memset',N,n)]:
+ argv=r['compile_argv'];mounts={v.split(':')[1]:Path(v.split(':')[0]) for i,v in enumerate(argv) if i and argv[i-1]=='-v'};q={'consumed_input_hashes_verified':all(sha((mounts['/'+k.split('/')[1]]/'/'.join(k.split('/')[2:])).read_bytes())==v for k,v in r['consumed_inputs'].items())};obj=P/'outputs'/('signed.o' if key=='signed' else 'public.o');b,ss,ns,sy=elf(obj);idx=ns.index('.text' if key=='signed' else '.text.memset');x=ss[idx];v=b[x[4]:x[4]+x[5]];q['object_hash_verified']=sha(b)==r.get('source_object_sha256',r.get('object_sha256'));q['symbol_sizes']=[(sn,sv,size) for sn,sv,size,k in sy if sn in ['__divsi3','__aeabi_idivmod','memset']]
+ if key=='signed':
+  eb,ess,ens,esy=elf(P/'outputs/linked.elf');ex=ess[ens.index('.signed')];data=eb[ex[4]:ex[4]+ex[5]];rs=relocs(b,ss,ns,sy,idx);q.update({'linked_exact':data==stock(0xa7d4,468),'linked_hash_verified':sha(eb)==r['linked_elf_sha256'],'text_hash_verified':sha(data)==r['text_sha256']==r['stock_sha256'],'length_verified':len(v)==len(data)==468,'relocations_verified':[{'offset':off,'type':typ,'symbol':sym[0]} for off,typ,sym in rs]==r['relocations'],'hook_bound':bl(data[454:458],0xa7d4+454)==0xa9a8,'only_relocation_changed':all(v[j]==data[j] for j in range(468) if j not in range(454,458))})
+ else:q.update({'exact':v==stock(0xa9d4,16),'hash_verified':sha(v)==r['text_sha256']==r['stock_sha256'],'length_verified':len(v)==16,'no_relocations':not relocs(b,ss,ns,sy,idx),'source_hash_verified':sha((P/'source/memset.c').read_bytes())==r['source_sha256'],'license_hash_verified':sha((R/r['license_file_reference']).read_bytes())==r['license_sha256'],'preprocessed_hash_verified':sha((P/'outputs/public.i').read_bytes())==r['preprocessed_sha256']})
+ out[key]=q
+c=json.loads((G/'original-results.json').read_text());normal=[];zeros=[];over=[]
+for x in c['results']:
+ a=x['dividend'];d=x['divisor'];q=int(x['r0'],16);rem=int(x['r1'],16)
+ if not d:zeros.append(q==0 and len(x['zero_hook_inputs'])==1 and (x['entry']!='0xa9a0' or rem==a&0xffffffff))
+ elif a==-2147483648 and d==-1:over.append(q==0x80000000 and (x['entry']!='0xa9a0' or rem==0))
+ else:
+  expected=abs(a)//abs(d)*(-1 if (a<0)!=(d<0) else 1);normal.append(q==expected&0xffffffff and (x['entry']!='0xa9a0' or rem==(a-expected*d)&0xffffffff))
+out['signed_case_counts']=[len(c['results']),len(normal),len(zeros),len(over)];out['signed_behavior_receipts_consistent']=len(c['results'])==200 and all(normal+zeros+over)
+c=json.loads((N/'original-results.json').read_text());grid=set(itertools.product(range(4),[0,1,2,3,4,15,16,128],[0,1,0x7f,0x80,0x100,0x12345678,0xffffffff]));out['memset_224_case_grid_verified']=len(c['results'])==224 and {(x['alignment'],x['length'],int(x['input_value'],16)) for x in c['results']}==grid and all(x['stored_byte']==int(x['input_value'],16)&255 and x['writes']==x['length'] and x['guards_and_return_match'] for x in c['results']);out['nonoverlapping_extents']={'uidiv_end':hex(0xa7d4),'signed_start_end':[hex(0xa7d4),hex(0xa9a8)],'zero_hook_end':hex(0xa9ac),'memset_start_end':[hex(0xa9d4),hex(0xa9e4)],'memcpy_start':hex(0xaa2c)};out['new_dependency_bytes']=484;out['reused_zero_hook_increment']=0;out['census_increment']=0;(O/'SIGNED-MEMSET-VERIFICATION.json').write_text(json.dumps(out,indent=2)+'\n');print(out)

@@ -1,0 +1,80 @@
+{
+  "elf_hash_matches": true,
+  "object_hash_matches": true,
+  "script_hash_matches": true,
+  "sections": [
+    {
+      "section": ".read_helper",
+      "address": "0x9218",
+      "bytes": 56,
+      "exact": true,
+      "reused": true,
+      "coordinate_matches": true,
+      "hash_matches": true
+    },
+    {
+      "section": ".read",
+      "address": "0x9250",
+      "bytes": 30,
+      "exact": true,
+      "reused": false,
+      "coordinate_matches": true,
+      "hash_matches": true
+    },
+    {
+      "section": ".write_helper",
+      "address": "0x926e",
+      "bytes": 56,
+      "exact": true,
+      "reused": true,
+      "coordinate_matches": true,
+      "hash_matches": true
+    },
+    {
+      "section": ".write",
+      "address": "0x92a6",
+      "bytes": 48,
+      "exact": true,
+      "reused": false,
+      "coordinate_matches": true,
+      "hash_matches": true
+    },
+    {
+      "section": ".default_helper",
+      "address": "0x92d6",
+      "bytes": 16,
+      "exact": true,
+      "reused": true,
+      "coordinate_matches": true,
+      "hash_matches": true
+    },
+    {
+      "section": ".default",
+      "address": "0x92e6",
+      "bytes": 48,
+      "exact": true,
+      "reused": false,
+      "coordinate_matches": true,
+      "hash_matches": true
+    }
+  ],
+  "original_calls": [
+    {
+      "address": "0x9266",
+      "target": "0x9218",
+      "matches": true
+    },
+    {
+      "address": "0x92ca",
+      "target": "0x926e",
+      "matches": true
+    },
+    {
+      "address": "0x930a",
+      "target": "0x92d6",
+      "matches": true
+    }
+  ],
+  "new_bytes": 126,
+  "reused_bytes": 128
+}

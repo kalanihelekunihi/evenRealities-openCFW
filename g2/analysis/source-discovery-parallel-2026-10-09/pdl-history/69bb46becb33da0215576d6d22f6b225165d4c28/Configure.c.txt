@@ -1,0 +1,91 @@
+cy_en_msclp_status_t Cy_MSCLP_Configure(
+                MSCLP_Type * base,
+                const cy_stc_msclp_base_config_t * config,
+                cy_en_msclp_key_t key,
+                const cy_stc_msclp_context_t * context)
+{
+    uint32_t index;
+    cy_en_msclp_status_t msclpStatus = CY_MSCLP_SUCCESS;
+
+    if (key == CY_MSCLP_NONE_KEY)
+    {
+        msclpStatus = CY_MSCLP_BAD_PARAM;
+    }
+    else if (key != context->lockKey)
+    {
+        msclpStatus = CY_MSCLP_LOCKED;
+    }
+    else
+    {
+        base->CTL                       = config->ctl;
+        base->SCAN_CTL1                 = config->scanCtl1;
+        base->SCAN_CTL2                 = config->scanCtl2;
+        base->INIT_CTL1                 = config->initCtl1;
+        base->INIT_CTL2                 = config->initCtl2;
+        base->INIT_CTL3                 = config->initCtl3;
+        base->INIT_CTL4                 = config->initCtl4;
+        base->SENSE_DUTY_CTL            = config->senseDutyCtl;
+        base->SENSE_PERIOD_CTL          = config->sensePeriodCtl;
+        base->FILTER_CTL                = config->filterCtl;
+        base->CCOMP_CDAC_CTL            = config->ccompCdacCtl;
+        base->DITHER_CDAC_CTL           = config->ditherCdacCtl;
+        base->MSCCMP_CTL                = config->mscCmpCtl;
+        base->OBS_CTL                   = config->obsCtl;
+        base->AOS_CTL                   = config->aosCtl;
+        base->CE_CTL                    = config->ceCtl;
+        base->PUMP_CTL                  = config->pumpCtl;
+        base->IMO_CTL                   = config->imoCtl;
+        base->INTR                      = config->intr;
+        base->INTR_SET                  = config->intrSet;
+        base->INTR_MASK                 = config->intrMask;
+        base->INTR_LP                   = config->intrLp;
+        base->INTR_LP_SET               = config->intrLpSet;
+        base->INTR_LP_MASK              = config->intrLpMask;
+        base->SW_SEL_CDAC_RE            = config->swSelCdacRe;
+        base->SW_SEL_CDAC_CO            = config->swSelCdacCo;
+        base->SW_SEL_CDAC_CF            = config->swSelCdacCf;
+        base->SW_SEL_BGR                = config->swSelBgr;
+
+        /* Load Switch Control Global Functions configuration */
+        for (index = 0u; index < MSCLP_CSW_GLOBAL_FUNC_NR; index++)
+        {
+            base->SW_SEL_CSW_FUNC[index]    = config->swSelCswFunc[index];
+        }
+
+        /* Load sense mode configuration */
+        for (index = 0u; index < MSCLP_SENSE_MODE_NR; index++)
+        {
+            base->MODE[index].SENSE_DUTY_CTL    = config->mode[index].senseDutyCtl;
+            base->MODE[index].SW_SEL_CDAC_FL    = config->mode[index].swSelCdacFl;
+            base->MODE[index].SW_SEL_TOP        = config->mode[index].swSelTop;
+            base->MODE[index].SW_SEL_COMP       = config->mode[index].swSelComp;
+            base->MODE[index].SW_SEL_SH         = config->mode[index].swSelSh;
+            base->MODE[index].SW_SEL_CMOD1      = config->mode[index].swSelCmod1;
+            base->MODE[index].SW_SEL_CMOD2      = config->mode[index].swSelCmod2;
+        }
+        
+        switch (config->imoCtl & MSCLP_IMO_CTL_FREQ_Msk)
+        {
+            case CY_MSCLP_IMO_24_MHZ:
+                base->CLK_IMO_TRIM1 = SFLASH_MSCLP0_CLK_IMO_TRIM1_24_MHZ;
+                base->CLK_IMO_TRIM3 = SFLASH_MSCLP0_CLK_IMO_TRIM3_24_MHZ;
+                break;
+
+            case CY_MSCLP_IMO_36_MHZ:
+                base->CLK_IMO_TRIM1 = SFLASH_MSCLP0_CLK_IMO_TRIM1_36_MHZ;
+                base->CLK_IMO_TRIM3 = SFLASH_MSCLP0_CLK_IMO_TRIM3_36_MHZ;
+                break;
+
+            case CY_MSCLP_IMO_48_MHZ:
+                base->CLK_IMO_TRIM1 = SFLASH_MSCLP0_CLK_IMO_TRIM1_48_MHZ;
+                base->CLK_IMO_TRIM3 = SFLASH_MSCLP0_CLK_IMO_TRIM3_48_MHZ;
+                break;
+
+            default:
+                msclpStatus = CY_MSCLP_BAD_PARAM;
+                break;
+        }
+    }
+
+    return msclpStatus;
+}

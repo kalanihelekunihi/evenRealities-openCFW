@@ -1,0 +1,76 @@
+{
+  "official_metadata_gcc_pin_present": true,
+  "official_metadata_newlib_pin_present": true,
+  "gcc_source_provenance_hash_verified": true,
+  "gcc_provenance_files_verified": true,
+  "GPL3_hash_verified": true,
+  "runtime_exception_hash_verified": true,
+  "gcc_providers": [
+    {
+      "member": "uidiv",
+      "input_hashes_verified": true,
+      "object_hash_verified": true,
+      "preprocessed_hash_verified": true,
+      "dependencies_hash_verified": true,
+      "archive_raw_text_identical": true,
+      "relocations_verified": true
+    },
+    {
+      "member": "zero",
+      "input_hashes_verified": true,
+      "object_hash_verified": true,
+      "preprocessed_hash_verified": true,
+      "dependencies_hash_verified": true,
+      "archive_raw_text_identical": true,
+      "relocations_verified": true
+    }
+  ],
+  "gcc_linked_sections": [
+    {
+      "section": "division",
+      "exact": true,
+      "hash_verified": true,
+      "extent_verified": true
+    },
+    {
+      "section": "zero",
+      "exact": true,
+      "hash_verified": true,
+      "extent_verified": true
+    }
+  ],
+  "gcc_linked_elf_hash_verified": true,
+  "gcc_script_hash_verified": true,
+  "memcpy": {
+    "source_files_verified": true,
+    "consumed_inputs_verified": true,
+    "object_hash_verified": true,
+    "preprocessed_hash_verified": true,
+    "exact_target": true,
+    "text_hash_verified": true,
+    "extent_verified": true,
+    "no_relocations": true
+  },
+  "division_repeated_byte_increment": 0,
+  "new_memcpy_dependency_bytes": 18,
+  "census_increment": 0,
+  "memcpy_128_case_grid_consistent": true,
+  "memcpy_archive_comparisons": [
+    {
+      "library": "libc.a",
+      "archive_hash_verified": true,
+      "member_hash_verified": true,
+      "length_verified": true,
+      "reported_match_verified": true
+    },
+    {
+      "library": "libc_nano.a",
+      "archive_hash_verified": true,
+      "member_hash_verified": true,
+      "length_verified": true,
+      "reported_match_verified": true
+    }
+  ],
+  "division_memcpy_nonoverlapping": true,
+  "memcpy_next_instruction_boundary": "0xaa3e"
+}

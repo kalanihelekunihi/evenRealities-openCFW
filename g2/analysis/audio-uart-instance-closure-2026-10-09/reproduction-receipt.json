@@ -1,0 +1,19 @@
+{
+  "elf": "/tmp/opencfw-uart-instance/instance.elf",
+  "elf_sha256": "6f8bc15774f98dbf31afee5093c94b13c9400c5010e70598143f022ebddcd9c8",
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "flags": [
+    "-mcpu=cortex-m33",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "link_script": "uart_thread_handler = 0x5417D7; osThreadNew = 0x4490E3; platform_log_flags = 0x43D0CF; platform_log_error = 0x43D575; compressed_log_output = 0x43CE9F; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }",
+  "sources": {
+    "g2/components/audio/uart_instance_offline/instance.c": "b8252b7c3cd822eecacae19a0f4d7b712adefa416cecae95226d5e4a24d16890",
+    "g2/components/audio/uart_instance_offline/instance.h": "b9d6d01814d8d53d6a115c65647078b02b2685d4c1157d7e207c6257ea034914"
+  },
+  "limits": "Direct wrapper invocation; thread creation and diagnostic sinks are explicit supplied boundaries."
+}

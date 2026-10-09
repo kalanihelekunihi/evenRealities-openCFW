@@ -1,0 +1,499 @@
+{
+  "runs": [
+    {
+      "group": "flash",
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "--network",
+        "none",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges",
+        "-v",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi:/tool:ro",
+        "-v",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-pdl14-history-layout-2026-10-09/outputs/flash216-data:/input:ro",
+        "-v",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-pdl14-history-layout-2026-10-09/linked/flash:/out",
+        "ubuntu@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55",
+        "/tool/bin/arm-none-eabi-ld",
+        "--gc-sections",
+        "-T",
+        "/out/link.ld",
+        "/input/public.o",
+        "/out/assembly.o",
+        "-o",
+        "/out/linked.elf"
+      ],
+      "diagnostics": "",
+      "original_relocation_evidence": [
+        {
+          "kind": "literal",
+          "address": "0x8c54",
+          "source_symbol_or_section": ".rodata.ProcessStatusCode",
+          "value": "0xb51c",
+          "PC_loads": [
+            "0x8c1c"
+          ]
+        },
+        {
+          "kind": "BL",
+          "address": "0x8cdc",
+          "symbol": "ProcessStatusCode",
+          "target": "0x8bf4"
+        },
+        {
+          "kind": "literal",
+          "address": "0x8cf0",
+          "source_symbol_or_section": ".bss.cySysFlashBackup",
+          "value": "0x20000f04",
+          "PC_loads": [
+            "0x8cce"
+          ]
+        },
+        {
+          "kind": "BL",
+          "address": "0x8d0e",
+          "symbol": "ProcessStatusCode",
+          "target": "0x8bf4"
+        },
+        {
+          "kind": "BL",
+          "address": "0x8d38",
+          "symbol": "ProcessStatusCode",
+          "target": "0x8bf4"
+        },
+        {
+          "kind": "literal",
+          "address": "0x8d44",
+          "source_symbol_or_section": ".bss.cySysFlashBackup",
+          "value": "0x20000f04",
+          "PC_loads": [
+            "0x8d2a"
+          ]
+        },
+        {
+          "kind": "BL",
+          "address": "0x8d58",
+          "symbol": "Cy_Flash_GetRowNum",
+          "target": "0x8ca8"
+        },
+        {
+          "kind": "BL",
+          "address": "0x8d60",
+          "symbol": "Cy_Flash_ValidAddr",
+          "target": "0x8c74"
+        },
+        {
+          "kind": "BL",
+          "address": "0x8d74",
+          "symbol": "memcpy",
+          "target": "0xaa2c"
+        },
+        {
+          "kind": "BL",
+          "address": "0x8d90",
+          "symbol": "ProcessStatusCode",
+          "target": "0x8bf4"
+        },
+        {
+          "kind": "BL",
+          "address": "0x8d98",
+          "symbol": "Cy_SysLib_EnterCriticalSection",
+          "target": "0x4492"
+        },
+        {
+          "kind": "BL",
+          "address": "0x8d9e",
+          "symbol": "Cy_Flash_ClockBackup",
+          "target": "0x8cc4"
+        },
+        {
+          "kind": "BL",
+          "address": "0x8da8",
+          "symbol": "Cy_SysLib_ExitCriticalSection",
+          "target": "0x449a"
+        },
+        {
+          "kind": "BL",
+          "address": "0x8dae",
+          "symbol": "Cy_Flash_ClockConfig",
+          "target": "0x8d00"
+        },
+        {
+          "kind": "BL",
+          "address": "0x8dd0",
+          "symbol": "ProcessStatusCode",
+          "target": "0x8bf4"
+        },
+        {
+          "kind": "BL",
+          "address": "0x8dd6",
+          "symbol": "Cy_Flash_ClockRestore",
+          "target": "0x8d20"
+        }
+      ],
+      "sections": [
+        {
+          "section": "process",
+          "address": "0x8bf4",
+          "expected_bytes": 128,
+          "linked_bytes": 128,
+          "exact": true,
+          "dependency": true,
+          "sha256": "c2d24fb40b4ba57507f8a204d0cb2dd95180c9aaa30de640e4f154d5c9d6d6e5",
+          "stock_sha256": "c2d24fb40b4ba57507f8a204d0cb2dd95180c9aaa30de640e4f154d5c9d6d6e5"
+        },
+        {
+          "section": "valid",
+          "address": "0x8c74",
+          "expected_bytes": 52,
+          "linked_bytes": 52,
+          "exact": true,
+          "dependency": true,
+          "sha256": "86e77c10215d3e1ef95a671ddcf4eb790ca4e41e2017b0c0e48eae6067189a2a",
+          "stock_sha256": "86e77c10215d3e1ef95a671ddcf4eb790ca4e41e2017b0c0e48eae6067189a2a"
+        },
+        {
+          "section": "row",
+          "address": "0x8ca8",
+          "expected_bytes": 28,
+          "linked_bytes": 28,
+          "exact": true,
+          "dependency": true,
+          "sha256": "8242330bb12931a2ef7a9f05a4abd3b996839206a2cf00648a94b12c3f065cff",
+          "stock_sha256": "8242330bb12931a2ef7a9f05a4abd3b996839206a2cf00648a94b12c3f065cff"
+        },
+        {
+          "section": "backup",
+          "address": "0x8cc4",
+          "expected_bytes": 60,
+          "linked_bytes": 60,
+          "exact": true,
+          "dependency": false,
+          "sha256": "a91f3f69f8a3c3bb3c139cd5e6a3a1f802f068fed56fed24bd819884d54fb485",
+          "stock_sha256": "a91f3f69f8a3c3bb3c139cd5e6a3a1f802f068fed56fed24bd819884d54fb485"
+        },
+        {
+          "section": "config",
+          "address": "0x8d00",
+          "expected_bytes": 32,
+          "linked_bytes": 32,
+          "exact": true,
+          "dependency": false,
+          "sha256": "2a795f076d36bd1d4f49a881e92f3e3bccd86d465fc4772deefb4355042cf960",
+          "stock_sha256": "2a795f076d36bd1d4f49a881e92f3e3bccd86d465fc4772deefb4355042cf960"
+        },
+        {
+          "section": "restore",
+          "address": "0x8d20",
+          "expected_bytes": 48,
+          "linked_bytes": 48,
+          "exact": true,
+          "dependency": false,
+          "sha256": "e3eea52f294a57441273714d5f8b8e559a1c2fd9e546da236420087927fa513a",
+          "stock_sha256": "e3eea52f294a57441273714d5f8b8e559a1c2fd9e546da236420087927fa513a"
+        },
+        {
+          "section": "write_row",
+          "address": "0x8d50",
+          "expected_bytes": 216,
+          "linked_bytes": 216,
+          "exact": true,
+          "dependency": false,
+          "sha256": "5cd07386bb6f0af8d5d51c65fa266fa07988a2f8bc476e3adc8ffeb6fd0175e7",
+          "stock_sha256": "5cd07386bb6f0af8d5d51c65fa266fa07988a2f8bc476e3adc8ffeb6fd0175e7"
+        },
+        {
+          "section": "switch",
+          "address": "0xb51c",
+          "expected_bytes": 80,
+          "linked_bytes": 80,
+          "exact": true,
+          "dependency": true,
+          "sha256": "3cb9cdb99fd51c1e8c36b03eddfb53adbc1d29ff67fadb61f9510be5afb9bac7",
+          "stock_sha256": "3cb9cdb99fd51c1e8c36b03eddfb53adbc1d29ff67fadb61f9510be5afb9bac7"
+        }
+      ],
+      "input_object_sha256": "36ab2b30cb214ff1f984f271ace8f94549829092573f4e243ca56eb36d97ad72",
+      "link_script_sha256": "7defe003aa04ffb4f4b4b8646716e3f229cfe428f58cd61e9183a82d061f71c3",
+      "linked_elf_sha256": "4dbd3bf63c1aeee5c58710b25921697d25743e83ccb83d5aa3882fd2a53dddfe"
+    },
+    {
+      "group": "ilo",
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "--network",
+        "none",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges",
+        "-v",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi:/tool:ro",
+        "-v",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-pdl14-history-layout-2026-10-09/outputs/ilo-data:/input:ro",
+        "-v",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-pdl14-history-layout-2026-10-09/linked/ilo:/out",
+        "ubuntu@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55",
+        "/tool/bin/arm-none-eabi-ld",
+        "--gc-sections",
+        "-T",
+        "/out/link.ld",
+        "/input/public.o",
+        "/out/uidiv.o",
+        "/out/zero.o",
+        "-o",
+        "/out/linked.elf"
+      ],
+      "diagnostics": "",
+      "original_relocation_evidence": [
+        {
+          "kind": "literal",
+          "address": "0x9dc0",
+          "source_symbol_or_section": ".bss.preventIloMeasurment",
+          "value": "0x20000f1d",
+          "PC_loads": [
+            "0x9d90"
+          ]
+        },
+        {
+          "kind": "literal",
+          "address": "0x9dc4",
+          "source_symbol_or_section": ".bss.iloMeasurment",
+          "value": "0x20000f1e",
+          "PC_loads": [
+            "0x9d98"
+          ]
+        },
+        {
+          "kind": "literal",
+          "address": "0x9e00",
+          "source_symbol_or_section": ".bss.preventIloMeasurment",
+          "value": "0x20000f1d",
+          "PC_loads": [
+            "0x9ddc"
+          ]
+        },
+        {
+          "kind": "literal",
+          "address": "0x9e04",
+          "source_symbol_or_section": ".bss.iloMeasurment",
+          "value": "0x20000f1e",
+          "PC_loads": [
+            "0x9de4"
+          ]
+        },
+        {
+          "kind": "BL",
+          "address": "0x9e72",
+          "symbol": "__aeabi_uidiv",
+          "target": "0xa6c0"
+        },
+        {
+          "kind": "BL",
+          "address": "0x9e92",
+          "symbol": "__aeabi_uidiv",
+          "target": "0xa6c0"
+        },
+        {
+          "kind": "BL",
+          "address": "0x9e98",
+          "symbol": "__aeabi_uidiv",
+          "target": "0xa6c0"
+        },
+        {
+          "kind": "BL",
+          "address": "0x9ea2",
+          "symbol": "__aeabi_uidiv",
+          "target": "0xa6c0"
+        },
+        {
+          "kind": "BL",
+          "address": "0x9ec0",
+          "symbol": "__aeabi_uidiv",
+          "target": "0xa6c0"
+        },
+        {
+          "kind": "BL",
+          "address": "0x9ec8",
+          "symbol": "__aeabi_uidiv",
+          "target": "0xa6c0"
+        },
+        {
+          "kind": "literal",
+          "address": "0x9f0c",
+          "source_symbol_or_section": ".bss.compRunStat.0",
+          "value": "0x20000f1c",
+          "PC_loads": [
+            "0x9e4c",
+            "0x9eaa",
+            "0x9ed8"
+          ]
+        },
+        {
+          "kind": "literal",
+          "address": "0x9f20",
+          "source_symbol_or_section": "SystemCoreClock",
+          "value": "0x20000878",
+          "PC_loads": [
+            "0x9e8a",
+            "0x9eb8",
+            "0x9ece"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "section": "start",
+          "address": "0x9d90",
+          "expected_bytes": 76,
+          "linked_bytes": 76,
+          "exact": true,
+          "dependency": false,
+          "sha256": "84a9cb3cffd49dcf58d30e07bb7b9b2ac41e891e8abc14596d40ce563f3ed2dd",
+          "stock_sha256": "84a9cb3cffd49dcf58d30e07bb7b9b2ac41e891e8abc14596d40ce563f3ed2dd"
+        },
+        {
+          "section": "stop",
+          "address": "0x9ddc",
+          "expected_bytes": 60,
+          "linked_bytes": 60,
+          "exact": true,
+          "dependency": false,
+          "sha256": "1add9b352ad36f9ac4ecfb8f24e50b42354d9a5239a9bb3cbbb2837486d0b864",
+          "stock_sha256": "1add9b352ad36f9ac4ecfb8f24e50b42354d9a5239a9bb3cbbb2837486d0b864"
+        },
+        {
+          "section": "compensate",
+          "address": "0x9e18",
+          "expected_bytes": 284,
+          "linked_bytes": 284,
+          "exact": true,
+          "dependency": false,
+          "sha256": "05655988c18684b44cd7a3b0dba039170df1d44c5b0b388180548c29dee5142f",
+          "stock_sha256": "05655988c18684b44cd7a3b0dba039170df1d44c5b0b388180548c29dee5142f"
+        },
+        {
+          "section": "division",
+          "address": "0xa6c0",
+          "expected_bytes": 276,
+          "linked_bytes": 276,
+          "exact": true,
+          "dependency": true,
+          "sha256": "abbfbc881ec9ae1713ebafdf3f8cff42e943f8b12198f90af61c108d0582c114",
+          "stock_sha256": "abbfbc881ec9ae1713ebafdf3f8cff42e943f8b12198f90af61c108d0582c114"
+        },
+        {
+          "section": "zero",
+          "address": "0xa9a8",
+          "expected_bytes": 4,
+          "linked_bytes": 4,
+          "exact": true,
+          "dependency": true,
+          "sha256": "e287dff864f37f3c71cdb140d7eebe15385d894bc81c583e5b5194ce85aee76b",
+          "stock_sha256": "e287dff864f37f3c71cdb140d7eebe15385d894bc81c583e5b5194ce85aee76b"
+        }
+      ],
+      "input_object_sha256": "86381125c95069ad12d33cdac000e5020200a9e5408f13dcea4ead18b043dc18",
+      "link_script_sha256": "9f7c22b22e6b99aa57d5c634941dce1ce3b62f84a35cbf37188e24d623dee3f9",
+      "linked_elf_sha256": "04be8118fe55d951c626ca0079f147378440c879eb0cfeec1ff2a799b1f10519"
+    },
+    {
+      "group": "pm",
+      "argv": [
+        "docker",
+        "run",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "--network",
+        "none",
+        "--cap-drop",
+        "ALL",
+        "--security-opt",
+        "no-new-privileges",
+        "-v",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi:/tool:ro",
+        "-v",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-pdl14-history-layout-2026-10-09/outputs/pm-data:/input:ro",
+        "-v",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-pdl14-history-layout-2026-10-09/linked/pm:/out",
+        "ubuntu@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55",
+        "/tool/bin/arm-none-eabi-ld",
+        "--gc-sections",
+        "-T",
+        "/out/link.ld",
+        "/input/public.o",
+        "-o",
+        "/out/linked.elf"
+      ],
+      "diagnostics": "",
+      "original_relocation_evidence": [
+        {
+          "kind": "literal",
+          "address": "0xa518",
+          "source_symbol_or_section": ".bss.pmCallbackRoot",
+          "value": "0x20000f34",
+          "PC_loads": [
+            "0xa464",
+            "0xa46c",
+            "0xa486",
+            "0xa490"
+          ]
+        },
+        {
+          "kind": "literal",
+          "address": "0xa520",
+          "source_symbol_or_section": ".bss.lastExecutedCallback.0",
+          "value": "0x20000f24",
+          "PC_loads": [
+            "0xa4bc",
+            "0xa4e2",
+            "0xa4ea"
+          ]
+        },
+        {
+          "kind": "literal",
+          "address": "0xa524",
+          "source_symbol_or_section": ".bss.failedCallback",
+          "value": "0x20000f28",
+          "PC_loads": [
+            "0xa4d4",
+            "0xa4de"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "section": "execute",
+          "address": "0xa444",
+          "expected_bytes": 228,
+          "linked_bytes": 228,
+          "exact": true,
+          "dependency": false,
+          "sha256": "1e90e25d81adfccdc366df639064d5e04ff4bf4ab21c4f686f724f1ce10eb02f",
+          "stock_sha256": "1e90e25d81adfccdc366df639064d5e04ff4bf4ab21c4f686f724f1ce10eb02f"
+        }
+      ],
+      "input_object_sha256": "db4379d20bf949c4670e3e38c9609e27cd244f7bcfa4aaf8f60b8ea2f1b9be72",
+      "link_script_sha256": "2786f54838c25c24188b2c57c45991e99b12d5204f62fd2acdb8154d6409f87a",
+      "linked_elf_sha256": "498eedf2558deb990a91312c8c2d179b2f526fbabd5408836bac8fa7cc4db71d"
+    }
+  ],
+  "new_selected_candidates": 8,
+  "new_selected_candidate_bytes": 1004,
+  "independent_review": "pending",
+  "original_execution": false,
+  "manual_byte_patches": false,
+  "limits": "Static source comparators; memcpy remains stock-call-bound external, libgcc is binary-provider comparator, source-complete firmware/composition/physical state not established."
+}

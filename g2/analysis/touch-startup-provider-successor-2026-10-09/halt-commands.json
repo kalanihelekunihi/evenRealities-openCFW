@@ -1,0 +1,36 @@
+[
+  {
+    "argv": [
+      "docker",
+      "run",
+      "--rm",
+      "--platform",
+      "linux/amd64",
+      "--network",
+      "none",
+      "--cap-drop",
+      "ALL",
+      "--security-opt",
+      "no-new-privileges",
+      "-v",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi:/tool:ro",
+      "-v",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-startup-provider-successor-2026-10-09/configure-source:/source:ro",
+      "-v",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-startup-provider-successor-2026-10-09/halt-output:/out",
+      "-w",
+      "/out",
+      "ubuntu@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55",
+      "/bin/sh",
+      "/source/libgloss/configure",
+      "--host=arm-none-eabi",
+      "--build=x86_64-pc-linux-gnu",
+      "--no-recursion",
+      "--no-create",
+      "CC=/tool/bin/arm-none-eabi-gcc",
+      "CFLAGS=-mcpu=cortex-m0plus -mthumb -Os -ffunction-sections -fdata-sections"
+    ],
+    "exit_code": 1,
+    "diagnostics": "checking for a BSD-compatible install... /usr/bin/install -c\nchecking build system type... x86_64-pc-linux-gnu\nchecking host system type... arm-none-eabi\nchecking target system type... arm-none-eabi\nchecking whether build environment is sane... yes\nchecking for arm-none-eabi-strip... no\nchecking for strip... no\nchecking for a thread-safe mkdir -p... /usr/bin/mkdir -p\nchecking for gawk... no\nchecking for mawk... mawk\nchecking whether make sets $(MAKE)... no\nchecking whether make supports nested variables... no\nchecking whether to enable maintainer-specific portions of Makefiles... no\nchecking whether make supports nested variables... (cached) no\nchecking for arm-none-eabi-gcc... /tool/bin/arm-none-eabi-gcc\nchecking whether we are cross compiling... yes\nchecking for suffix of object files... o\nchecking whether we are using the GNU C compiler... yes\nchecking whether /tool/bin/arm-none-eabi-gcc accepts -g... yes\nchecking for /tool/bin/arm-none-eabi-gcc option to accept ISO C89... none needed\nchecking whether /tool/bin/arm-none-eabi-gcc understands -c and -o together... yes\nchecking for style of include used by make... none\nchecking dependency style of /tool/bin/arm-none-eabi-gcc... none\nchecking dependency style of /tool/bin/arm-none-eabi-gcc... none\nchecking for arm-none-eabi-ar... no\nchecking for arm-none-eabi-lib... no\nchecking for arm-none-eabi-link... no\nchecking for ar... no\nchecking for lib... no\nchecking for link... link -lib\nchecking the archiver (link -lib) interface... unknown\n/bin/bash: /source/missing: No such file or directory\nconfigure: WARNING: 'missing' script is too old or missing\nconfigure: WARNING: using cross tools not prefixed with host triplet\nconfigure: error: could not determine link -lib interface\n"
+  }
+]

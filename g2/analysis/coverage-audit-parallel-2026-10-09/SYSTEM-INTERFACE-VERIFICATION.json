@@ -1,0 +1,248 @@
+{
+  "acquired_header_hash_verified": true,
+  "independent_bsp_header_identical": true,
+  "selection_hash_verified": true,
+  "prior_selection_hash_verified": true,
+  "exact_same_twelve_target_rows": true,
+  "new_result_counts": {
+    "relocation_or_extent_boundary": 9,
+    "expected_section_absent": 3
+  },
+  "units": [
+    {
+      "unit": "cy_sysint.c",
+      "success": true,
+      "device_retained": true,
+      "interface_precedes_shim": true,
+      "input_hashes_verified": true,
+      "output_hashes_verified": true,
+      "official_header_consumed": true,
+      "old_shim_not_consumed": true,
+      "functions": [
+        {
+          "function": "Cy_SysInt_SetVector",
+          "status": "relocation_or_extent_boundary",
+          "section_hash_verified": true,
+          "length_verified": true,
+          "relocations_verified": true,
+          "differences_verified": true,
+          "relocations": [
+            {
+              "offset": 44,
+              "type": 2,
+              "symbol": "__RAM_VECTOR_TABLE"
+            },
+            {
+              "offset": 48,
+              "type": 2,
+              "symbol": "__Vectors"
+            }
+          ]
+        },
+        {
+          "function": "Cy_SysInt_Init",
+          "status": "relocation_or_extent_boundary",
+          "section_hash_verified": true,
+          "length_verified": true,
+          "relocations_verified": true,
+          "differences_verified": true,
+          "relocations": [
+            {
+              "offset": 24,
+              "type": 10,
+              "symbol": "__NVIC_SetPriority"
+            },
+            {
+              "offset": 48,
+              "type": 10,
+              "symbol": "Cy_SysInt_SetVector"
+            },
+            {
+              "offset": 64,
+              "type": 2,
+              "symbol": "__RAM_VECTOR_TABLE"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "unit": "cy_syslib.c",
+      "success": true,
+      "device_retained": true,
+      "interface_precedes_shim": true,
+      "input_hashes_verified": true,
+      "output_hashes_verified": true,
+      "official_header_consumed": true,
+      "old_shim_not_consumed": true,
+      "functions": [
+        {
+          "function": "Cy_SysLib_DelayCycles",
+          "status": "expected_section_absent",
+          "absent_verified": true
+        },
+        {
+          "function": "Cy_SysLib_EnterCriticalSection",
+          "status": "expected_section_absent",
+          "absent_verified": true
+        },
+        {
+          "function": "Cy_SysLib_ExitCriticalSection",
+          "status": "expected_section_absent",
+          "absent_verified": true
+        },
+        {
+          "function": "Cy_SysLib_Delay",
+          "status": "relocation_or_extent_boundary",
+          "section_hash_verified": true,
+          "length_verified": true,
+          "relocations_verified": true,
+          "differences_verified": true,
+          "relocations": [
+            {
+              "offset": 10,
+              "type": 10,
+              "symbol": "Cy_SysLib_DelayCycles"
+            },
+            {
+              "offset": 34,
+              "type": 10,
+              "symbol": "Cy_SysLib_DelayCycles"
+            },
+            {
+              "offset": 40,
+              "type": 2,
+              "symbol": "cy_delay32kMs"
+            },
+            {
+              "offset": 48,
+              "type": 2,
+              "symbol": "cy_delayFreqKhz"
+            }
+          ]
+        },
+        {
+          "function": "Cy_SysLib_DelayUs",
+          "status": "relocation_or_extent_boundary",
+          "section_hash_verified": true,
+          "length_verified": true,
+          "relocations_verified": true,
+          "differences_verified": true,
+          "relocations": [
+            {
+              "offset": 8,
+              "type": 10,
+              "symbol": "Cy_SysLib_DelayCycles"
+            },
+            {
+              "offset": 16,
+              "type": 2,
+              "symbol": "cy_delayFreqMhz"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "unit": "cy_systick.c",
+      "success": true,
+      "device_retained": true,
+      "interface_precedes_shim": true,
+      "input_hashes_verified": true,
+      "output_hashes_verified": true,
+      "official_header_consumed": true,
+      "old_shim_not_consumed": true,
+      "functions": [
+        {
+          "function": "Cy_SysTick_ServiceCallbacks",
+          "status": "relocation_or_extent_boundary",
+          "section_hash_verified": true,
+          "length_verified": true,
+          "relocations_verified": true,
+          "differences_verified": true,
+          "relocations": [
+            {
+              "offset": 40,
+              "type": 2,
+              "symbol": ""
+            }
+          ]
+        },
+        {
+          "function": "Cy_SysTick_Enable",
+          "status": "relocation_or_extent_boundary",
+          "section_hash_verified": true,
+          "length_verified": true,
+          "relocations_verified": true,
+          "differences_verified": true,
+          "relocations": []
+        },
+        {
+          "function": "Cy_SysTick_SetClockSource",
+          "status": "relocation_or_extent_boundary",
+          "section_hash_verified": true,
+          "length_verified": true,
+          "relocations_verified": true,
+          "differences_verified": true,
+          "relocations": []
+        },
+        {
+          "function": "Cy_SysTick_Init",
+          "status": "relocation_or_extent_boundary",
+          "section_hash_verified": true,
+          "length_verified": true,
+          "relocations_verified": true,
+          "differences_verified": true,
+          "relocations": [
+            {
+              "offset": 38,
+              "type": 10,
+              "symbol": "Cy_SysTick_SetClockSource"
+            },
+            {
+              "offset": 64,
+              "type": 10,
+              "symbol": "Cy_SysTick_Enable"
+            },
+            {
+              "offset": 72,
+              "type": 2,
+              "symbol": ""
+            },
+            {
+              "offset": 76,
+              "type": 2,
+              "symbol": "__RAM_VECTOR_TABLE"
+            },
+            {
+              "offset": 80,
+              "type": 2,
+              "symbol": "Cy_SysTick_ServiceCallbacks"
+            }
+          ]
+        },
+        {
+          "function": "Cy_SysTick_SetCallback",
+          "status": "relocation_or_extent_boundary",
+          "section_hash_verified": true,
+          "length_verified": true,
+          "relocations_verified": true,
+          "differences_verified": true,
+          "relocations": [
+            {
+              "offset": 20,
+              "type": 2,
+              "symbol": ""
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "remaining_counts_after_nine_review": {
+    "relocation_extent": 25,
+    "absent": 5,
+    "inline": 1
+  },
+  "original_failure_receipt_sha256": "dc10f27ffb3c3ef23adf8f445f4758bbf8a3dfd73764400b9f4beaa441c0d045"
+}

@@ -1,0 +1,72 @@
+{
+  "input_mismatches": [],
+  "output_mismatches": [],
+  "functions": [
+    {
+      "function": "Cy_GPIO_SetHSIOM",
+      "target_bytes": 52,
+      "compiled_bytes": 60,
+      "exact": false,
+      "hash_matches": true,
+      "relocations": []
+    },
+    {
+      "function": "Cy_GPIO_Write",
+      "target_bytes": 32,
+      "compiled_bytes": 32,
+      "exact": true,
+      "hash_matches": true,
+      "relocations": []
+    },
+    {
+      "function": "Cy_GPIO_SetDrivemode",
+      "target_bytes": 58,
+      "compiled_bytes": 58,
+      "exact": true,
+      "hash_matches": true,
+      "relocations": []
+    },
+    {
+      "function": "Cy_GPIO_SetInterruptEdge",
+      "target_bytes": 36,
+      "compiled_bytes": 36,
+      "exact": true,
+      "hash_matches": true,
+      "relocations": []
+    },
+    {
+      "function": "Cy_GPIO_Pin_Init",
+      "target_bytes": 174,
+      "compiled_bytes": 188,
+      "exact": false,
+      "hash_matches": true,
+      "relocations": [
+        {
+          "offset": "0x4c",
+          "type": 10,
+          "symbol": "Cy_GPIO_Write"
+        },
+        {
+          "offset": "0x56",
+          "type": 10,
+          "symbol": "Cy_GPIO_SetDrivemode"
+        },
+        {
+          "offset": "0x60",
+          "type": 10,
+          "symbol": "Cy_GPIO_SetHSIOM"
+        },
+        {
+          "offset": "0x6a",
+          "type": 10,
+          "symbol": "Cy_GPIO_SetInterruptEdge"
+        }
+      ]
+    }
+  ],
+  "hsiom_full60_match": true,
+  "hsiom_literal_words": [
+    3220963328,
+    4194816
+  ]
+}

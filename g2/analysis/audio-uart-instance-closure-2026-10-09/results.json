@@ -1,0 +1,466 @@
+{
+  "status": "PASS",
+  "cases": 16,
+  "elf_sha256": "6f8bc15774f98dbf31afee5093c94b13c9400c5010e70598143f022ebddcd9c8",
+  "raw_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "comparisons": [
+    {
+      "fixture": {
+        "thread": 0,
+        "flags": 0
+      },
+      "observed": {
+        "return": 4294967295,
+        "handle": 0,
+        "events": [
+          [
+            "thread",
+            5511127,
+            0,
+            7717356
+          ],
+          [
+            "flags",
+            0
+          ],
+          [
+            "flags",
+            0
+          ],
+          [
+            "flags",
+            0
+          ]
+        ]
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "thread": 0,
+        "flags": 1
+      },
+      "observed": {
+        "return": 4294967295,
+        "handle": 0,
+        "events": [
+          [
+            "thread",
+            5511127,
+            0,
+            7717356
+          ],
+          [
+            "flags",
+            1
+          ],
+          [
+            "flags",
+            1
+          ],
+          [
+            "compressed",
+            67108864,
+            7535232,
+            7535232
+          ]
+        ]
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "thread": 0,
+        "flags": 2
+      },
+      "observed": {
+        "return": 4294967295,
+        "handle": 0,
+        "events": [
+          [
+            "thread",
+            5511127,
+            0,
+            7717356
+          ],
+          [
+            "flags",
+            2
+          ],
+          [
+            "error",
+            1,
+            7882448,
+            7408484,
+            7882468,
+            197,
+            7717320
+          ],
+          [
+            "flags",
+            2
+          ],
+          [
+            "flags",
+            2
+          ]
+        ]
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "thread": 0,
+        "flags": 3
+      },
+      "observed": {
+        "return": 4294967295,
+        "handle": 0,
+        "events": [
+          [
+            "thread",
+            5511127,
+            0,
+            7717356
+          ],
+          [
+            "flags",
+            3
+          ],
+          [
+            "error",
+            1,
+            7882448,
+            7408484,
+            7882468,
+            197,
+            7717320
+          ],
+          [
+            "flags",
+            3
+          ],
+          [
+            "compressed",
+            67108864,
+            7535232,
+            7535232
+          ]
+        ]
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "thread": 0,
+        "flags": 4
+      },
+      "observed": {
+        "return": 4294967295,
+        "handle": 0,
+        "events": [
+          [
+            "thread",
+            5511127,
+            0,
+            7717356
+          ],
+          [
+            "flags",
+            4
+          ],
+          [
+            "flags",
+            4
+          ],
+          [
+            "flags",
+            4
+          ],
+          [
+            "compressed",
+            67108864,
+            7535232,
+            7535232
+          ]
+        ]
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "thread": 0,
+        "flags": 5
+      },
+      "observed": {
+        "return": 4294967295,
+        "handle": 0,
+        "events": [
+          [
+            "thread",
+            5511127,
+            0,
+            7717356
+          ],
+          [
+            "flags",
+            5
+          ],
+          [
+            "flags",
+            5
+          ],
+          [
+            "compressed",
+            67108864,
+            7535232,
+            7535232
+          ]
+        ]
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "thread": 0,
+        "flags": 6
+      },
+      "observed": {
+        "return": 4294967295,
+        "handle": 0,
+        "events": [
+          [
+            "thread",
+            5511127,
+            0,
+            7717356
+          ],
+          [
+            "flags",
+            6
+          ],
+          [
+            "error",
+            1,
+            7882448,
+            7408484,
+            7882468,
+            197,
+            7717320
+          ],
+          [
+            "flags",
+            6
+          ],
+          [
+            "flags",
+            6
+          ],
+          [
+            "compressed",
+            67108864,
+            7535232,
+            7535232
+          ]
+        ]
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "thread": 0,
+        "flags": 7
+      },
+      "observed": {
+        "return": 4294967295,
+        "handle": 0,
+        "events": [
+          [
+            "thread",
+            5511127,
+            0,
+            7717356
+          ],
+          [
+            "flags",
+            7
+          ],
+          [
+            "error",
+            1,
+            7882448,
+            7408484,
+            7882468,
+            197,
+            7717320
+          ],
+          [
+            "flags",
+            7
+          ],
+          [
+            "compressed",
+            67108864,
+            7535232,
+            7535232
+          ]
+        ]
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "thread": 537268788,
+        "flags": 0
+      },
+      "observed": {
+        "return": 0,
+        "handle": 537268788,
+        "events": [
+          [
+            "thread",
+            5511127,
+            0,
+            7717356
+          ]
+        ]
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "thread": 537268788,
+        "flags": 1
+      },
+      "observed": {
+        "return": 0,
+        "handle": 537268788,
+        "events": [
+          [
+            "thread",
+            5511127,
+            0,
+            7717356
+          ]
+        ]
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "thread": 537268788,
+        "flags": 2
+      },
+      "observed": {
+        "return": 0,
+        "handle": 537268788,
+        "events": [
+          [
+            "thread",
+            5511127,
+            0,
+            7717356
+          ]
+        ]
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "thread": 537268788,
+        "flags": 3
+      },
+      "observed": {
+        "return": 0,
+        "handle": 537268788,
+        "events": [
+          [
+            "thread",
+            5511127,
+            0,
+            7717356
+          ]
+        ]
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "thread": 537268788,
+        "flags": 4
+      },
+      "observed": {
+        "return": 0,
+        "handle": 537268788,
+        "events": [
+          [
+            "thread",
+            5511127,
+            0,
+            7717356
+          ]
+        ]
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "thread": 537268788,
+        "flags": 5
+      },
+      "observed": {
+        "return": 0,
+        "handle": 537268788,
+        "events": [
+          [
+            "thread",
+            5511127,
+            0,
+            7717356
+          ]
+        ]
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "thread": 537268788,
+        "flags": 6
+      },
+      "observed": {
+        "return": 0,
+        "handle": 537268788,
+        "events": [
+          [
+            "thread",
+            5511127,
+            0,
+            7717356
+          ]
+        ]
+      },
+      "matches": true
+    },
+    {
+      "fixture": {
+        "thread": 537268788,
+        "flags": 7
+      },
+      "observed": {
+        "return": 0,
+        "handle": 537268788,
+        "events": [
+          [
+            "thread",
+            5511127,
+            0,
+            7717356
+          ]
+        ]
+      },
+      "matches": true
+    }
+  ],
+  "differences": [],
+  "limits": "Direct wrapper entry; CMSIS thread creation and log sinks supplied. No created task execution or scheduler handover."
+}

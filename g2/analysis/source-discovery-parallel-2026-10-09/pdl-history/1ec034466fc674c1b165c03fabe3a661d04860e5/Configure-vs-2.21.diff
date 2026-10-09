@@ -1,0 +1,31 @@
+--- 1ec034466fc674c1b165c03fabe3a661d04860e5
++++ 35f17146
+@@ -66,19 +66,19 @@
+ 
+         switch (config->imoCtl & MSCLP_IMO_CTL_FREQ_Msk)
+         {
+-            case CY_MSCLP_IMO_24_MHZ:
+-                base->CLK_IMO_TRIM1 = SFLASH_MSCLP0_CLK_IMO_TRIM1_24_MHZ;
+-                base->CLK_IMO_TRIM3 = SFLASH_MSCLP0_CLK_IMO_TRIM3_24_MHZ;
++            case CY_MSCLP_IMO_25_MHZ:
++                base->CLK_IMO_TRIM1 = SFLASH_MSCLP0_CLK_IMO_TRIM1_25_MHZ;
++                base->CLK_IMO_TRIM3 = SFLASH_MSCLP0_CLK_IMO_TRIM3_25_MHZ;
+                 break;
+ 
+-            case CY_MSCLP_IMO_36_MHZ:
+-                base->CLK_IMO_TRIM1 = SFLASH_MSCLP0_CLK_IMO_TRIM1_36_MHZ;
+-                base->CLK_IMO_TRIM3 = SFLASH_MSCLP0_CLK_IMO_TRIM3_36_MHZ;
++            case CY_MSCLP_IMO_38_MHZ:
++                base->CLK_IMO_TRIM1 = SFLASH_MSCLP0_CLK_IMO_TRIM1_38_MHZ;
++                base->CLK_IMO_TRIM3 = SFLASH_MSCLP0_CLK_IMO_TRIM3_38_MHZ;
+                 break;
+ 
+-            case CY_MSCLP_IMO_48_MHZ:
+-                base->CLK_IMO_TRIM1 = SFLASH_MSCLP0_CLK_IMO_TRIM1_48_MHZ;
+-                base->CLK_IMO_TRIM3 = SFLASH_MSCLP0_CLK_IMO_TRIM3_48_MHZ;
++            case CY_MSCLP_IMO_46_MHZ:
++                base->CLK_IMO_TRIM1 = SFLASH_MSCLP0_CLK_IMO_TRIM1_46_MHZ;
++                base->CLK_IMO_TRIM3 = SFLASH_MSCLP0_CLK_IMO_TRIM3_46_MHZ;
+                 break;
+ 
+             default:

@@ -1,0 +1,40 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin:     file format binary
+
+
+Disassembly of section .data:
+
+102058d4 <.data+0x28d0>:
+102058d4:	ea0c0000 	movi      	r12, 0
+102058d8:	ea94001c 	lrw      	r20, 0x20027350	// 0x10205948
+102058dc:	6c73      	mov      	r1, r12
+102058de:	c4144835 	lsli      	r21, r20, 0
+102058e2:	ea17000c 	movi      	r23, 12
+102058e6:	ea160090 	movi      	r22, 144
+102058ea:	ea380001 	movih      	r24, 1
+102058ee:	e7180087 	addi      	r24, r24, 136
+102058f2:	ea990017 	lrw      	r25, 0x4100ff	// 0x1020594c
+102058f6:	e44c002b 	addi      	r2, r12, 44
+102058fa:	c4540022 	addu      	r2, r20, r2
+102058fe:	3000      	movi      	r0, 0
+10205900:	c6c18423 	mult      	r3, r1, r22
+10205904:	ea120008 	movi      	r18, 8
+10205908:	6f4f      	mov      	r13, r3
+1020590a:	fae0844d 	mula.32.l      	r13, r0, r23
+1020590e:	e660007f 	addi      	r19, r0, 128
+10205912:	c5b5002d 	addu      	r13, r21, r13
+10205916:	c6132853 	bseti      	r19, r19, 16
+1020591a:	de6d2008 	st.w      	r19, (r13, 0x20)
+1020591e:	c4025773 	zext      	r19, r2, 27, 0
+10205922:	de6d2009 	st.w      	r19, (r13, 0x24)
+10205926:	220b      	addi      	r2, 12
+10205928:	2000      	addi      	r0, 1
+1020592a:	e832ffef 	bnezad      	r18, 0x10205908	// 0x10205908
+1020592e:	2100      	addi      	r1, 1
+10205930:	c4750023 	addu      	r3, r21, r3
+10205934:	394a      	cmpnei      	r1, 10
+10205936:	df032020 	st.w      	r24, (r3, 0x80)
+1020593a:	e58c008f 	addi      	r12, r12, 144
+1020593e:	df232004 	st.w      	r25, (r3, 0x10)
+10205942:	0bda      	bt      	0x102058f6	// 0x102058f6
+10205944:	783c      	jmp      	r15

@@ -1,0 +1,84 @@
+{
+  "source_provenance_sha256": "98b17bf266ef3321f7314f022c681d98648bad7574866761af398923b117f766",
+  "verified_pins": [
+    {
+      "url": "https://raw.githubusercontent.com/c-sky/binutils-gdb/32f97f3473656ee5d64e8e8c01a6006312c5828a/opcodes/csky-opc.h",
+      "commit": "32f97f3473656ee5d64e8e8c01a6006312c5828a",
+      "path": "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/csky-target-contracts/binutils-gdb/opcodes/csky-opc.h",
+      "sha256": "0eab2226acbaaa08d3a91bdf837d7cdc5d96fee5ceb32c40f7aec244bc45ac3e"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/c-sky/binutils-gdb/32f97f3473656ee5d64e8e8c01a6006312c5828a/include/opcode/csky.h",
+      "commit": "32f97f3473656ee5d64e8e8c01a6006312c5828a",
+      "path": "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/csky-target-contracts/binutils-gdb/include/opcode/csky.h",
+      "sha256": "d28e14a49c0044ed83719054dd1dbba8701845dc83ce12e287a04d03617a42f2"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/c-sky/binutils-gdb/32f97f3473656ee5d64e8e8c01a6006312c5828a/gas/config/tc-csky.c",
+      "commit": "32f97f3473656ee5d64e8e8c01a6006312c5828a",
+      "path": "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/csky-target-contracts/binutils-gdb/gas/config/tc-csky.c",
+      "sha256": "6197dc7c57777d2c971d565495f3c95cf11b6f684c09d3f0f9af042ab160cf99"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/c-sky/binutils-gdb/32f97f3473656ee5d64e8e8c01a6006312c5828a/COPYING3",
+      "commit": "32f97f3473656ee5d64e8e8c01a6006312c5828a",
+      "path": "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/csky-target-contracts/binutils-gdb/COPYING3",
+      "sha256": "8ceb4b9ee5adedde47b31e975c1d90c73ad27b6b165a1dcd80c7c545eb65b903"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/c-sky/gcc/1e9b70447a8417f5c692370de4533e43d754e8fa/gcc/config/csky/csky.h",
+      "commit": "1e9b70447a8417f5c692370de4533e43d754e8fa",
+      "path": "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/csky-target-contracts/gcc/gcc/config/csky/csky.h",
+      "sha256": "0ed3316c5feb5a861c9dff32a809fedff950ce7e5baacffc80276a66606ba4be"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/c-sky/gcc/1e9b70447a8417f5c692370de4533e43d754e8fa/gcc/config/csky/csky.md",
+      "commit": "1e9b70447a8417f5c692370de4533e43d754e8fa",
+      "path": "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/csky-target-contracts/gcc/gcc/config/csky/csky.md",
+      "sha256": "c0ded5b268348b0039faa6e885271e9f64f48597384f1394509da64a9c4671ae"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/c-sky/gcc/1e9b70447a8417f5c692370de4533e43d754e8fa/gcc/config/csky/csky.opt",
+      "commit": "1e9b70447a8417f5c692370de4533e43d754e8fa",
+      "path": "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/csky-target-contracts/gcc/gcc/config/csky/csky.opt",
+      "sha256": "d806ee36be8164bfa9ae0231fbbb1ef852a9f749262293abf1a7cc7c9eb895a4"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/c-sky/toolchain-build/20c6b74f00ac3f464cb43ef2189a069d656933d5/.gitmodules",
+      "commit": "20c6b74f00ac3f464cb43ef2189a069d656933d5",
+      "path": "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/csky-target-contracts/toolchain-build/.gitmodules",
+      "sha256": "8b9f25903e546f5a33ac3dfcab7ac6fe5585e5e4cd69d7230a8455677ad2029b"
+    }
+  ],
+  "original_instruction_fields": [
+    {
+      "address": "0x1020590a",
+      "bytes": "e0fa4d84",
+      "instruction_word": "0xfae0844d",
+      "name": "mula.32.l",
+      "operands_from_official_fields": {
+        "destination": 13,
+        "source1": 0,
+        "source2": 23
+      }
+    },
+    {
+      "address": "0x1020592a",
+      "bytes": "32e8efff",
+      "instruction_word": "0xe832ffef",
+      "name": "bnezad",
+      "operands_from_official_fields": {
+        "register": 18,
+        "signed_halfword_displacement": -17,
+        "target": "0x10205908"
+      }
+    }
+  ],
+  "vendor_compiler_stack_boundary_bits": 32,
+  "old_published_ABI_eight_byte_statement_superseded_as_unconditional_compiler_requirement": true,
+  "CK804_assembler_feature_eligibility": true,
+  "physical_target_identified": false,
+  "instruction_execution_semantics_tested": false,
+  "campaign_admitted": false,
+  "limits": "Static encoding and vendor source/feature/ABI contract only; no physical CPU/revision, producing compiler or architecture execution proven. Old sealed packets unmodified."
+}

@@ -1,0 +1,10 @@
+--- PDL2.16
++++ PDL2.17
+@@ -12,7 +12,6 @@
+     CPUSS_SYSARG = (uint32_t) &parameters[0U];
+     CPUSS_SYSREQ = CY_FLASH_CPUSS_REQ_START | CY_FLASH_API_OPCODE_CLK_RESTORE;
+ 
+-    __NOP();
+     result = ProcessStatusCode();
+ #if defined(CY_IP_M0S8SRSSHV)
+     Cy_SysClk_LockProtReg();

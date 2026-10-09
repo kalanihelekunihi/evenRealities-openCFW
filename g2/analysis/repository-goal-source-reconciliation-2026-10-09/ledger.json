@@ -1,0 +1,73 @@
+{
+  "date_utc": "2026-10-09",
+  "target": {
+    "bundle": "s200_v2.2.6.10",
+    "size": 4301227,
+    "sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+    "payload_count": 6,
+    "image_count": 33
+  },
+  "campaign": "20260930T190500Z",
+  "phase": "P2_EXECUTING",
+  "gates": {
+    "G1_TARGET_AND_INVENTORY": "passed",
+    "G2_PSEUDOCODE_COMPLETE": "not_run",
+    "G3_CORPUS_FROZEN": "not_run",
+    "G4_IMPLEMENTATION_READY": "not_run",
+    "G5_SOURCE_COMPLETE": "not_run",
+    "G6_IDENTICAL_SOURCE_BUILD": "not_run"
+  },
+  "assignments": {
+    "analysis_total": 14,
+    "analysis_by_status": {
+      "partial": 8,
+      "ready_for_review": 2,
+      "dispatched": 1,
+      "reviewed_partial": 2,
+      "reviewed_proposals_pending_admission": 1
+    },
+    "pseudocode_dispatched": 3,
+    "c_implementation": 0
+  },
+  "scope_conclusions": {
+    "audio_uart_power_static_ledger": "exhausted_at_documented_boundary",
+    "whole_firmware_goal": "unexhausted",
+    "new_useful_public_source_identified": true,
+    "new_submodule_recommended": "comparison_only_proposal"
+  },
+  "next_static_families": [
+    "ARM startup and executable extents",
+    "C-SKY startup, mappings, callees and executable extents",
+    "ARC startup, callees and executable extents",
+    "computed and indirect targets",
+    "global code-data and nested-image byte accounting",
+    "touch broader independent source/configuration and whole-image coverage; Configure three-function exact comparator found with GNU14.2.1"
+  ],
+  "new_comparison_references": [
+    {"name":"embarc-osp","commit":"67ea926c6a62aa6e19efdc3b11cba3ea0b467e29","attributed_to_firmware":false},
+    {"name":"nationalchip-lvp-aiot","commit":"d4aa00943e22f9ddfa424f979fae3ee2a62f5c0b","attributed_to_firmware":false}
+  ],
+  "touch_compiler14_holdouts":{"report":"g2/analysis/touch-scb14-holdouts-2026-10-09/REPORT.md","predeclared_functions":3,"exact_functions":3,"exact_bytes":128,"translation_unit":"cy_scb_common.c","independent_review":"pending","unique_producer_claim":false},
+  "touch_gpio14_linkage":{"report":"g2/analysis/touch-gpio14-linkage-2026-10-09/REPORT.md","original_BL_verified_relocations":4,"exact_linked_sections":5,"exact_section_bytes":374,"independent_review":"g2/analysis/coverage-audit-parallel-2026-10-09/GPIO-LINKAGE-REVIEW.md","raw_object_outcomes_preserved":true,"unique_producer_claim":false},
+  "touch_selected_comparator_aggregate":{"independently_reviewed_bytes":4952,"independently_reviewed_functions":54,"review":"g2/analysis/coverage-audit-parallel-2026-10-09/HISTORY-LAYOUT-REVIEW.md","reused_dependency_bytes_doublecounted":false,"whole_payload_completion_claim":false,"campaign_admitted":false},
+  "touch_current_finite_residuals":{"selected_denominator":54,"reviewed_selected_functions":54,"remaining_functions":0,"relocation_or_extent_boundaries":0,"absent_named_sections":0,"separate_inline_emission":0,"compile_failures_after_authentic_header":0,"classification":"selected_finite_comparator_census_independently_closed_not_whole_firmware","system_interface_successor_independent_review":"g2/analysis/coverage-audit-parallel-2026-10-09/SYSTEM-INTERFACE-REVIEW.md","review_pending_unique_bytes":0,"review_pending_selected_extents":0,"other_remaining_selected_entries":0,"independently_reviewed_I2C_helpers_outside_denominator_bytes":1456,"residual_report":"g2/analysis/touch-pdl14-residual-boundary-2026-10-09/REPORT.md","successor_report":"g2/analysis/touch-pdl14-history-layout-2026-10-09/REPORT.md","new_status_helper_and_table_bytes_outside_denominator":208,"original_PM_instruction_cases":80,"original_SROM_decoder_cases":32},
+  "touch_division_provider":{"report":"g2/analysis/touch-libgcc14-division-2026-10-09/REPORT.md","source_successor":"g2/analysis/touch-libgcc14-source-rebuild-2026-10-09/REPORT.md","exact_linked_archive_bytes":280,"original_instruction_cases":98,"denominator_54_increment":0,"source_rebuild":true,"binary_provider_independent_review":"passed","source_rebuild_independent_review":"pending","source_and_runtime_exception_provenance":"vendor_revision_and_source_notices_pinned","historical_uidivmod_extent_corrected_additively":true},
+  "touch_memcpy_provider":{"report":"g2/analysis/touch-newlib14-memcpy-2026-10-09/REPORT.md","exact_source_rebuilt_bytes":18,"original_instruction_cases":128,"matches_archive":"libc_nano.a","regular_libc_archive_matches":false,"denominator_54_increment":0,"independent_review":"pending","full_generated_configuration_reproduction":false},
+  "touch_finite_candidate_census":{"report":"g2/analysis/touch-pdl14-finite-census-2026-10-09/REPORT.md","historical_named_PDL_candidates":53,"extra_completed_ConfigureScan":1,"new_predeclared_candidates_tested":39,"relocation_or_extent_boundaries":25,"named_sections_absent":2,"compile_failed_missing_interfaces":12,"new_admitted_bytes":0},
+  "touch_authentic_system_interface_successor":{"report":"g2/analysis/touch-pdl14-system-interface-2026-10-09/REPORT.md","official_BSP_commit":"d1bf634023bf92d083ad0e32083987f67b4a64e6","failed_units_resolved":3,"targets_retained":12,"new_relocation_extent_boundaries":9,"new_absent_named_sections":3,"producer_BSP_identity_claim":false,"finite_remaining_emitted_boundaries":23,"finite_remaining_absent_sections":5,"separate_header_inline_candidate":1,"new_admitted_bytes":0},
+  "touch_scb14_wrappers":{"report":"g2/analysis/touch-scb14-wrappers-2026-10-09/REPORT.md","exact_new_wrapper_functions":3,"exact_new_wrapper_bytes":126,"reused_helper_bytes":128,"independent_review":"pending","unique_producer_claim":false},
+  "touch_discrimination": {"status":"GNU14.2.1_exact_three_function_comparator_independent_review_pending","experiment_owner":"execution_track_under_parent_coordination","prior_configure_mismatch_bytes":24,"tested_new_compilers":["10.3","11.3","12.2","14.2"],"new_compilation_performed":true,"successor_report":"g2/analysis/touch-compiler14-successor-2026-10-09/REPORT.md","configure_mismatch_positions":{"10.3":173,"11.3":125,"12.2":125,"14.2":0},"14.2_exact_controls":["Configure","Capture","ConfigureScan"],"unique_producing_toolchain_claim":false,"next_work":"broader touch source/configuration coverage rather than duplicate compiler sweep"},
+  "nationalchip_comparison": {"report":"g2/analysis/source-discovery-parallel-2026-10-09/FINAL-CONSTRAINTS.md","uart_message_difference":"copyright_only_not_pin_discriminator","target_slices_hash_verified":13,"vad_diagnostics":"executable_callsite_bytes_support_KWS_like_active_branch","pll_offsets":[0,10,15,-10,-15],"pll_attempts":5,"audio_branch":"shared_LOGFBANK_threshold_compatible_with_25","remaining_limits":["no_exact_producing_tree","no_compiler_release_inference","audio_board_fields_unbound","external_ARC_startup_absent"],"firmware_source_attribution_established":false},
+  "unavailable_input_classes": [
+    "exact private producing source checkouts",
+    "IAR runtime and exact compiler-linker configuration",
+    "NemaGFX and NemaVG implementation source",
+    "proprietary EM9305 and Packetcraft controller source",
+    "resident ROM and factory-only content absent from OTA",
+    "exact private signing and packaging inputs",
+    "image-bound runtime traces for dynamic hardware claims"
+  ],
+  "mutated_campaign_state": false,
+  "git_mutation_performed": false,
+  "device_action_performed": false
+}

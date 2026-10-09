@@ -1,0 +1,31 @@
+# Independent bounded coverage audit — 2026-10-09
+
+The current audio/UART/power ledger supports static closure for its selected bodies and fixtures. It does not establish physical exception delivery, real scheduling, complete source attribution, or whole-image byte equality. The broader declared G2 source-led shortcut goal remains open for exact compiler/configuration and public-source matching; absence of a useful new download does not exhaust those goals.
+
+## Verified evidence
+
+[verification.json](verification.json) records read-only verification of sealed analysis/component manifest entries, all 110 preserved audit inputs, four integration checkpoints, UART ELF/source receipts and the G1 receipt hash. No mismatches were found. The Git index hash was stable during the scan; it differs from the historical final-successor preservation record, which is compatible with concurrent owner work and is not a seal failure. `.agents` is absent from this checkout; no relevant local skill file was available there. No sealed test was rerun.
+
+The [40 UART3 compositions](../audio-uart3-tx-irq-drain-2026-10-09/results.json) have 40 fixture records and passing comparisons. Inspection of [verify.py](../audio-uart3-tx-irq-drain-2026-10-09/verify.py) confirms direct entry at the common channel IRQ, supplied status and synthetic FIFO readiness; the native substitution replaces the TX state machine, while original HAL/queue paths remain in the composition. This is additional composition coverage, not 40 recovered functions or a real NVIC interrupt. Its ELF hash agrees with the pinned [TX receipt](../audio-uart-tx-ownership-2026-10-09/reproduction-receipt.json).
+
+The [16 UART-instance comparisons](../audio-uart-instance-closure-2026-10-09/REPORT.md) close the wrapper and static attributes. Its ELF and both source hashes match the [receipt](../audio-uart-instance-closure-2026-10-09/reproduction-receipt.json). Thread creation and log sinks are supplied boundaries. A returned handle does not establish live task creation or execution.
+
+## Reconciled outstanding entries
+
+| Entry | Classification | Evidence and qualification |
+| --- | --- | --- |
+| Semaphore/mutex take, UART TX transfer, common initializer providers in older indexes | Stale as an actionable audio queue | [final successor](../source-ledger-final-static-successor-2026-10-09/INDEX.md), [semaphore take](../audio-semaphore-take-closure-2026-10-09/REPORT.md), [TX ownership](../audio-uart-tx-ownership-2026-10-09/REPORT.md); old next-lead text is not current coverage accounting |
+| Separate public CPU mode wrapper in selected PCM2.2 transitions | Unsupported binding, not a missing recovered function | Final successor attributes inline LP/HP changes to recovered transition bodies; a stock public wrapper cannot be counted without an actual locked caller/address |
+| Live callback registration, tempco suspend child, calibrated INFO1, IRQ/task selection, physical UART/power | Runtime input boundary | [reconciliation coverage](../source-ledger-reconciliation-2026-10-09/coverage.json) explicitly leaves suspend child unestablished; synthetic callbacks or manual continuations do not close it |
+| Private producing checkout, IAR runtime, Nema implementation, EM9305/Packetcraft source, absent resident ROM | Source unavailable locally | [repository reconciliation](../repository-goal-source-reconciliation-2026-10-09/REPORT.md); no public proxy establishes original build inputs |
+| Whole-firmware pseudocode and byte accounting | Truly unresolved static work, owner campaign | [state.json](../../workflow/state.json) remains P2_EXECUTING, G2–G6 not_run; G1 authenticates inventory, not later completeness |
+| Exact touch SDK/compiler/generated configuration | Unresolved source-led matching opportunity using existing sources | [matching experiments](../../../tools/matching/experiments.md) leaves GCC 10.3–13.3 discrimination open; [scan preparation](../touch-scan-preparation-closure-2026-10-08/REPORT.md) retains a 24-byte public Configure mismatch and missing generated cycfg; no new checkout is required |
+| Touch library identity in consolidated reference | Stale/underqualified summary | [libraries.md](../../docs/reference/libraries.md) still says no authenticated open-source library and unresolved PDL/CapSense use; later [scan ISR](../touch-scan-isr-closure-2026-10-08/REPORT.md), [public dispatch](../touch-public-dispatch-attribution-2026-10-08/REPORT.md), and [LP application](../touch-lp-application-closure-2026-10-08/REPORT.md) establish selected exact public bodies, while expressly not identifying a unique producing SDK |
+
+The touch source/compiler entry is a bounded opportunity, not proof that a fresh experiment will distinguish versions. The earlier one-function matching experiment cannot be extrapolated to an entire payload. Later CapSense semantic matches and selected byte matches must likewise remain separate from complete build reproduction. An exact compiler/configuration matrix over independent already-attributed functions, accounting for the known Configure mismatch, can add evidence without duplicating sealed behavioral tests. Owner review should first reconcile later matching receipts to avoid repeating completed experiments.
+
+## Exhaustion assessment
+
+No contradictory physical-delivery claim was found in the inspected UART reports: their limits are explicit. Stale ledgers do repeatedly preserve resolved next leads; use the final successor for the audio branch. Current evidence supports bounded audio static exhaustion, not global source-inference exhaustion. Broader exact-source/version/configuration discrimination and whole-image accounting remain unclosed. A claim that another dependency download is unnecessary is compatible with those open goals, but cannot substitute for their completion receipts.
+
+This audit made no source, canonical ledger, Git, device or production changes. Output is confined to this directory. It did not independently execute every historical test or validate every claimed function boundary; manifest integrity verifies preserved evidence, while the detailed behavioral review here is limited to the latest UART additions and declared goal reconciliation.

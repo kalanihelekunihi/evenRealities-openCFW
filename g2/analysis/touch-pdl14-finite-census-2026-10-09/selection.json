@@ -1,0 +1,540 @@
+{
+  "scope": "existing Cy_ PDL-attributed symbol rows only; not all firmware functions",
+  "selection_before_compilation": true,
+  "payload_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "symbols_sha256": "ccd9c94ff3cde6c56067c60894c7952101deae88fe088a81b941f2513fdb73b0",
+  "functions": [
+    {
+      "function": "Cy_SysLib_DelayCycles",
+      "address": 17536,
+      "historical_code_bytes": 18,
+      "target_code_sha256": "a8b62136d338c6dc91e6f900f19cb30344601be2bc97b168940ca57281293760",
+      "absolute_payload_offset": 4512,
+      "confidence": "Strong",
+      "source_unit": "cy_syslib.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysLib_EnterCriticalSection",
+      "address": 17554,
+      "historical_code_bytes": 8,
+      "target_code_sha256": "720733fcf19a5635fcab0791fcc2b007294712bb27536443ff79490821c168cf",
+      "absolute_payload_offset": 4530,
+      "confidence": "Strong",
+      "source_unit": "cy_syslib.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysLib_ExitCriticalSection",
+      "address": 17562,
+      "historical_code_bytes": 6,
+      "target_code_sha256": "379ef840451b3bf5f9903b215cd3fe49e26244e0b6b8afe47b9e5c37a1ee1ca2",
+      "absolute_payload_offset": 4538,
+      "confidence": "Strong",
+      "source_unit": "cy_syslib.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_Flash_ValidAddr",
+      "address": 35956,
+      "historical_code_bytes": 48,
+      "target_code_sha256": "cbd3a9c41a0cf160f7a5b575f7d39cfd0e50a6acbc5f680a318b5a155240c08a",
+      "absolute_payload_offset": 22932,
+      "confidence": "Inferred",
+      "source_unit": "cy_flash.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_Flash_GetRowNum",
+      "address": 36008,
+      "historical_code_bytes": 22,
+      "target_code_sha256": "aadf0c1f880872ec675b3b2ef2cf8c5949bf577678585f172e7f3225c86f64af",
+      "absolute_payload_offset": 22984,
+      "confidence": "Inferred",
+      "source_unit": "cy_flash.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_Flash_ClockBackup",
+      "address": 36036,
+      "historical_code_bytes": 40,
+      "target_code_sha256": "00608f73dbd6cebaab852b754fc9b15d20673411d188209d5de7fc66746b7650",
+      "absolute_payload_offset": 23012,
+      "confidence": "Inferred",
+      "source_unit": "cy_flash.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_Flash_ClockConfig",
+      "address": 36096,
+      "historical_code_bytes": 20,
+      "target_code_sha256": "a8feabbc230d42d4f6130efb6d2f3fdaccf354b2968d2c01a43f9354416c3a65",
+      "absolute_payload_offset": 23072,
+      "confidence": "Inferred",
+      "source_unit": "cy_flash.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_Flash_ClockRestore",
+      "address": 36128,
+      "historical_code_bytes": 32,
+      "target_code_sha256": "87c90c6fccc8b1a732773938d6a3bda4fc1f6b0e6696aaa03ad290f741211af3",
+      "absolute_payload_offset": 23104,
+      "confidence": "Inferred",
+      "source_unit": "cy_flash.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_Flash_WriteRow",
+      "address": 36176,
+      "historical_code_bytes": 180,
+      "target_code_sha256": "39fce21dfafb0c7897186835dda1c574712fcc73672c9ed3aec53c20a6686303",
+      "absolute_payload_offset": 23152,
+      "confidence": "Inferred",
+      "source_unit": "cy_flash.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_GPIO_SetHSIOM",
+      "address": 36392,
+      "historical_code_bytes": 52,
+      "target_code_sha256": "954a66d658b678d166a0915d777d8ca5e5e8fc1c188fc81faafcae5ab9d5b90e",
+      "absolute_payload_offset": 23368,
+      "confidence": "Inferred",
+      "source_unit": null,
+      "status": "completed_selected_comparator"
+    },
+    {
+      "function": "Cy_GPIO_Write",
+      "address": 36452,
+      "historical_code_bytes": 32,
+      "target_code_sha256": "d4986aa95d320e707b911f081eb3237dd64e1c03f05f00ecf9dac6c8232b2660",
+      "absolute_payload_offset": 23428,
+      "confidence": "Inferred",
+      "source_unit": null,
+      "status": "completed_selected_comparator"
+    },
+    {
+      "function": "Cy_GPIO_SetDrivemode",
+      "address": 36484,
+      "historical_code_bytes": 58,
+      "target_code_sha256": "430593a5b307bca1d4e239879bc208cf7f09e3feddfaac01da19e9fefe6fb2b5",
+      "absolute_payload_offset": 23460,
+      "confidence": "Inferred",
+      "source_unit": null,
+      "status": "completed_selected_comparator"
+    },
+    {
+      "function": "Cy_GPIO_SetInterruptEdge",
+      "address": 36542,
+      "historical_code_bytes": 36,
+      "target_code_sha256": "6cf558f6ba5da5d9bb2f348bfc3e91838df206b5862cbdd9ece652a2aa42f454",
+      "absolute_payload_offset": 23518,
+      "confidence": "Inferred",
+      "source_unit": null,
+      "status": "completed_selected_comparator"
+    },
+    {
+      "function": "Cy_GPIO_Pin_Init",
+      "address": 36580,
+      "historical_code_bytes": 174,
+      "target_code_sha256": "0af5183384c1ae4eff359f651a41e2a32e12561dc1587b269f96778745cedc96",
+      "absolute_payload_offset": 23556,
+      "confidence": "Inferred",
+      "source_unit": null,
+      "status": "completed_selected_comparator"
+    },
+    {
+      "function": "Cy_MSCLP_Capture",
+      "address": 36768,
+      "historical_code_bytes": 40,
+      "target_code_sha256": "24f2bbd5b9cb4a98307bea39d7d2abb5f4194360b91fed8a4c6f688b5a640c3d",
+      "absolute_payload_offset": 23744,
+      "confidence": "Inferred",
+      "source_unit": null,
+      "status": "completed_selected_comparator"
+    },
+    {
+      "function": "Cy_MSCLP_Configure",
+      "address": 36816,
+      "historical_code_bytes": 396,
+      "target_code_sha256": "397fa8d2bbcc3c9cbe33fdc00330571f489b963538fd0da09ae438603fb3d0cd",
+      "absolute_payload_offset": 23792,
+      "confidence": "Inferred",
+      "source_unit": null,
+      "status": "completed_selected_comparator"
+    },
+    {
+      "function": "Cy_SCB_ReadArrayNoCheck",
+      "address": 37400,
+      "historical_code_bytes": 56,
+      "target_code_sha256": "07627776d2bc275029e974a40d0944d6b87502cfea118880b8d60d6c3fa97cc7",
+      "absolute_payload_offset": 24376,
+      "confidence": "Inferred",
+      "source_unit": null,
+      "status": "completed_selected_comparator"
+    },
+    {
+      "function": "Cy_SCB_ReadArray",
+      "address": 37456,
+      "historical_code_bytes": 30,
+      "target_code_sha256": "c7729e5dfb38b7391112b5eeeb9e0a8b0fc0d2ad0bc2e1e9b53b353b401e5e49",
+      "absolute_payload_offset": 24432,
+      "confidence": "Inferred",
+      "source_unit": null,
+      "status": "completed_selected_comparator"
+    },
+    {
+      "function": "Cy_SCB_WriteArrayNoCheck",
+      "address": 37486,
+      "historical_code_bytes": 56,
+      "target_code_sha256": "ba8eabab79e5f3cf46e4b9b7bd76456a262ed1ff7d3780885a747f9eb6e1b434",
+      "absolute_payload_offset": 24462,
+      "confidence": "Inferred",
+      "source_unit": null,
+      "status": "completed_selected_comparator"
+    },
+    {
+      "function": "Cy_SCB_WriteArray",
+      "address": 37542,
+      "historical_code_bytes": 48,
+      "target_code_sha256": "e3bd934582667c74ed28fa5a43ce49d2a70802d22b01b6f01ff19994fa474ce9",
+      "absolute_payload_offset": 24518,
+      "confidence": "Inferred",
+      "source_unit": null,
+      "status": "completed_selected_comparator"
+    },
+    {
+      "function": "Cy_SCB_WriteDefaultArrayNoCheck",
+      "address": 37590,
+      "historical_code_bytes": 16,
+      "target_code_sha256": "ec65352149705e5d99247c6304f60772bc6feacccd2c020952f45b32e2c531b1",
+      "absolute_payload_offset": 24566,
+      "confidence": "Inferred",
+      "source_unit": null,
+      "status": "completed_selected_comparator"
+    },
+    {
+      "function": "Cy_SCB_WriteDefaultArray",
+      "address": 37606,
+      "historical_code_bytes": 48,
+      "target_code_sha256": "a138965686502bfecef80f1c8972059b8ea8379e3ea2f23ffd3ad471f749284b",
+      "absolute_payload_offset": 24582,
+      "confidence": "Inferred",
+      "source_unit": null,
+      "status": "completed_selected_comparator"
+    },
+    {
+      "function": "Cy_SCB_SetRxFifoLevel",
+      "address": 37654,
+      "historical_code_bytes": 44,
+      "target_code_sha256": "1fdc6e20657ebf1efbbf7423c354904526f55af9f31d09ad5cd700d69ecdb993",
+      "absolute_payload_offset": 24630,
+      "confidence": "Inferred",
+      "source_unit": null,
+      "status": "header_inline_provider_requires_separate_source_emission_contract"
+    },
+    {
+      "function": "Cy_SCB_I2C_Init",
+      "address": 39156,
+      "historical_code_bytes": 438,
+      "target_code_sha256": "971123ed88874e9c7e1cf50da5d6252a22131bd1dd2f67d8c7b0d0e2d17457d3",
+      "absolute_payload_offset": 26132,
+      "confidence": "Strong",
+      "source_unit": "cy_scb_i2c.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SCB_I2C_SlaveInterrupt",
+      "address": 39692,
+      "historical_code_bytes": 276,
+      "target_code_sha256": "96573e6cbe0218cd9c079700f977c510894c48114babf0cf05e8c17ee9711ac8",
+      "absolute_payload_offset": 26668,
+      "confidence": "Inferred",
+      "source_unit": "cy_scb_i2c.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysClk_ExtClkGetFrequency",
+      "address": 39992,
+      "historical_code_bytes": 6,
+      "target_code_sha256": "11bb59ded7ced70e8b2d9366d7b5ad8c67fa6722b98f2e67909f8fa86ed19ed3",
+      "absolute_payload_offset": 26968,
+      "confidence": "Inferred",
+      "source_unit": "cy_sysclk.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysClk_ImoGetFrequency",
+      "address": 40004,
+      "historical_code_bytes": 46,
+      "target_code_sha256": "90fd17f92b253fcfa0015fed9d150f86cfc0d81206ba06c4dc7dcddeb2b915f1",
+      "absolute_payload_offset": 26980,
+      "confidence": "Inferred",
+      "source_unit": "cy_sysclk.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysClk_ImoSetFrequency",
+      "address": 40064,
+      "historical_code_bytes": 204,
+      "target_code_sha256": "0ea6926ab66f6b05b73a6914c3a6342899586666cc1b0ef9d4c18ae69f3cba0a",
+      "absolute_payload_offset": 27040,
+      "confidence": "Inferred",
+      "source_unit": "cy_sysclk.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysClk_IloStartMeasurement",
+      "address": 40336,
+      "historical_code_bytes": 46,
+      "target_code_sha256": "7791350b7898ceff802c6673b4599f55d78d220ff430dc8dc7722a0102720c0f",
+      "absolute_payload_offset": 27312,
+      "confidence": "Inferred",
+      "source_unit": "cy_sysclk.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysClk_IloStopMeasurement",
+      "address": 40412,
+      "historical_code_bytes": 36,
+      "target_code_sha256": "166b239c35f6bde04960673c8cb2e914b6ba619f7330532a572eff72411ffa35",
+      "absolute_payload_offset": 27388,
+      "confidence": "Inferred",
+      "source_unit": "cy_sysclk.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysClk_IloCompensate",
+      "address": 40472,
+      "historical_code_bytes": 218,
+      "target_code_sha256": "6d62d61ff7504fd2e3f182aabffe143b149d3f75a41c10a0185b73b63c3fff94",
+      "absolute_payload_offset": 27448,
+      "confidence": "Inferred",
+      "source_unit": "cy_sysclk.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysClk_ClkHfGetDivider",
+      "address": 40756,
+      "historical_code_bytes": 10,
+      "target_code_sha256": "02427173a5483a3721c6b639b94143fce8a625374911f3172b8b692df0e12acd",
+      "absolute_payload_offset": 27732,
+      "confidence": "Inferred",
+      "source_unit": "cy_sysclk.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysClk_ClkHfSetDivider",
+      "address": 40772,
+      "historical_code_bytes": 74,
+      "target_code_sha256": "12dc0217a775b0b09dc835a771e22af7d262fada2788eea84b0114a8c3355947",
+      "absolute_payload_offset": 27748,
+      "confidence": "Inferred",
+      "source_unit": "cy_sysclk.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysClk_ClkHfGetFrequency",
+      "address": 40860,
+      "historical_code_bytes": 50,
+      "target_code_sha256": "16c515c07cf03bad811f057cd3c5fa31ca72d3a5ed28697483f94f337e08b0ad",
+      "absolute_payload_offset": 27836,
+      "confidence": "Inferred",
+      "source_unit": "cy_sysclk.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysClk_PeriphSetDivider",
+      "address": 40916,
+      "historical_code_bytes": 56,
+      "target_code_sha256": "9987247258e2c5134c81506931705c4cd7f04e02c6f836037a26c5ccacdccc66",
+      "absolute_payload_offset": 27892,
+      "confidence": "Inferred",
+      "source_unit": "cy_sysclk.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysClk_PeriphSetFracDivider",
+      "address": 40988,
+      "historical_code_bytes": 142,
+      "target_code_sha256": "898711d12d0ffc463489b177b8909ba9704fbe38352325db7bce89299bb6dc52",
+      "absolute_payload_offset": 27964,
+      "confidence": "Inferred",
+      "source_unit": "cy_sysclk.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysClk_PeriphAssignDivider",
+      "address": 41148,
+      "historical_code_bytes": 62,
+      "target_code_sha256": "a186f5c93f6afc410cb3028b4d195f941f27f37b0c1ccc75b2ece22f1c69c0fb",
+      "absolute_payload_offset": 28124,
+      "confidence": "Inferred",
+      "source_unit": "cy_sysclk.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysClk_PeriphEnableDivider",
+      "address": 41220,
+      "historical_code_bytes": 56,
+      "target_code_sha256": "9fc9768cae104554d2fca1cde869fe364ca00cb5712305407815697b857b1cf4",
+      "absolute_payload_offset": 28196,
+      "confidence": "Inferred",
+      "source_unit": "cy_sysclk.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysClk_PeriphDisableDivider",
+      "address": 41288,
+      "historical_code_bytes": 56,
+      "target_code_sha256": "49b586757598204be557441c32c6fc0af882a5142ea6e5db87ae75afb80fd14e",
+      "absolute_payload_offset": 28264,
+      "confidence": "Inferred",
+      "source_unit": "cy_sysclk.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysClk_ClkHfSetSource",
+      "address": 41352,
+      "historical_code_bytes": 44,
+      "target_code_sha256": "7a92cadfe2d24fe97c12651427d589de2ee2548b59109b96a3e1efd8e7716822",
+      "absolute_payload_offset": 28328,
+      "confidence": "Inferred",
+      "source_unit": "cy_sysclk.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysInt_SetVector",
+      "address": 41588,
+      "historical_code_bytes": 40,
+      "target_code_sha256": "f6edba26d99f37da897dd3ae65225e806a7dfa47d212cddbabafb750d1df0c8a",
+      "absolute_payload_offset": 28564,
+      "confidence": "Strong",
+      "source_unit": "cy_sysint.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysInt_Init",
+      "address": 41640,
+      "historical_code_bytes": 60,
+      "target_code_sha256": "ba1ac67702b267f9dad652680f738491a9d26e621f88e86d453a738d35dea85a",
+      "absolute_payload_offset": 28616,
+      "confidence": "Strong",
+      "source_unit": "cy_sysint.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysLib_Delay",
+      "address": 41712,
+      "historical_code_bytes": 40,
+      "target_code_sha256": "ccddf11f013fe0689e0d64677177f9ec21ebcf0f59616be7aa29603d4ce2b9a7",
+      "absolute_payload_offset": 28688,
+      "confidence": "Strong",
+      "source_unit": "cy_syslib.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysLib_DelayUs",
+      "address": 41764,
+      "historical_code_bytes": 14,
+      "target_code_sha256": "ea5dc16e63fcc13363c2c5e46bb7625701840a0842b3f6e648f11e5e8c2af831",
+      "absolute_payload_offset": 28740,
+      "confidence": "Inferred",
+      "source_unit": "cy_syslib.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysPm_RegisterCallback",
+      "address": 41904,
+      "historical_code_bytes": 144,
+      "target_code_sha256": "ff9bbe83f7bf4d7e8c13f6db34eb34c60f3ffcb40791f1f20401992ea4228fc7",
+      "absolute_payload_offset": 28880,
+      "confidence": "Inferred",
+      "source_unit": "cy_syspm.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysPm_ExecuteCallback",
+      "address": 42052,
+      "historical_code_bytes": 210,
+      "target_code_sha256": "8d9c95964ca38b717928c098b5a439f269ff1108d60c9af6f346bf28f300a882",
+      "absolute_payload_offset": 29028,
+      "confidence": "Inferred",
+      "source_unit": "cy_syspm.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysPm_CpuEnterSleep",
+      "address": 42280,
+      "historical_code_bytes": 90,
+      "target_code_sha256": "b01d631526cd0713fcad4ce2ebc3afd9df8444d85e74be8e13965377e729b83b",
+      "absolute_payload_offset": 29256,
+      "confidence": "Inferred",
+      "source_unit": "cy_syspm.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysPm_CpuEnterDeepSleep",
+      "address": 42380,
+      "historical_code_bytes": 100,
+      "target_code_sha256": "bdd452274bebdce4e4477d1037ffefbf459b1e43c75d11423726434bc174ab18",
+      "absolute_payload_offset": 29356,
+      "confidence": "Inferred",
+      "source_unit": "cy_syspm.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysTick_ServiceCallbacks",
+      "address": 42484,
+      "historical_code_bytes": 36,
+      "target_code_sha256": "906e1fce8eaafa95081f67c2d866c8c796259e3f616c492a42d4e2e5b2ab94fd",
+      "absolute_payload_offset": 29460,
+      "confidence": "Inferred",
+      "source_unit": "cy_systick.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysTick_Enable",
+      "address": 42528,
+      "historical_code_bytes": 20,
+      "target_code_sha256": "840421b206ab4311a51771ed1814d0d1524ea460f0ebcc93a27ec718dd0a2dbe",
+      "absolute_payload_offset": 29504,
+      "confidence": "Inferred",
+      "source_unit": "cy_systick.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysTick_SetClockSource",
+      "address": 42552,
+      "historical_code_bytes": 18,
+      "target_code_sha256": "62a12c998cd10c3f340edeb68c643e6ef6590288cd19bc6dc65eeeca469bc2c4",
+      "absolute_payload_offset": 29528,
+      "confidence": "Inferred",
+      "source_unit": "cy_systick.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysTick_Init",
+      "address": 42576,
+      "historical_code_bytes": 70,
+      "target_code_sha256": "922d6cde0f9ca45972dd69c5c5f8d10cb87f3ea517176b413e88656b4983fbae",
+      "absolute_payload_offset": 29552,
+      "confidence": "Inferred",
+      "source_unit": "cy_systick.c",
+      "status": "predeclared_unchanged_source_comparison"
+    },
+    {
+      "function": "Cy_SysTick_SetCallback",
+      "address": 42664,
+      "historical_code_bytes": 18,
+      "target_code_sha256": "b88dd21f71847063c4d508a5bece3857cdbdb019d445b6830eaf825d57efc5f3",
+      "absolute_payload_offset": 29640,
+      "confidence": "Inferred",
+      "source_unit": "cy_systick.c",
+      "status": "predeclared_unchanged_source_comparison"
+    }
+  ],
+  "recognized_task_overlaps": [],
+  "extra_completed_control_not_named_in_symbols": "Cy_MSCLP_ConfigureScan"
+}

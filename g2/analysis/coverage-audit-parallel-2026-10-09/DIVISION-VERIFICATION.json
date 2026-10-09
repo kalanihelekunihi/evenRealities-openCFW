@@ -1,0 +1,85 @@
+{
+  "archive_hash_verified": true,
+  "members": [
+    {
+      "member": "_udivsi3.o/",
+      "archive_member_hash_verified": true,
+      "extracted_object_identical": true
+    },
+    {
+      "member": "_dvmd_tls.o/",
+      "archive_member_hash_verified": true,
+      "extracted_object_identical": true
+    }
+  ],
+  "elf_hash_verified": true,
+  "script_hash_verified": true,
+  "script_copy_identical": true,
+  "sections": [
+    {
+      "section": "division",
+      "exact": true,
+      "coordinates_verified": true,
+      "hash_verified": true
+    },
+    {
+      "section": "zero",
+      "exact": true,
+      "coordinates_verified": true,
+      "hash_verified": true
+    }
+  ],
+  "source_object_unchanged_except_relocation": true,
+  "relocations": [
+    {
+      "offset": 260,
+      "type": 10,
+      "symbol": "__aeabi_idiv0",
+      "target": "0xa9a9",
+      "verified": true
+    }
+  ],
+  "original_hook_call_verified": true,
+  "division_symbols": [
+    {
+      "name": "__udivsi3",
+      "value": "0x1",
+      "size": 266,
+      "section": ".text"
+    },
+    {
+      "name": "__aeabi_uidiv",
+      "value": "0x1",
+      "size": 0,
+      "section": ".text"
+    },
+    {
+      "name": "__aeabi_uidivmod",
+      "value": "0x10d",
+      "size": 8,
+      "section": ".text"
+    }
+  ],
+  "zero_symbols": [
+    {
+      "name": "__aeabi_idiv0",
+      "value": "0x1",
+      "size": 2
+    },
+    {
+      "name": "__aeabi_ldiv0",
+      "value": "0x1",
+      "size": 2
+    }
+  ],
+  "uidiv_alignment": "c046",
+  "zero_alignment": "c046",
+  "uidivmod_eight_bytes": "0029f7d076e77047",
+  "following_signed_body_not_counted": "0xa7d4",
+  "dependency_bytes": 280,
+  "census_increment": 0,
+  "release_archive_hash_verified": true,
+  "libgcc_identical_to_release_archive": true,
+  "execution_receipt_arithmetic_consistent": true,
+  "test_review_no_provider_interception": true
+}

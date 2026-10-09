@@ -1,0 +1,73 @@
+{
+  "signed": {
+    "consumed_input_hashes_verified": true,
+    "object_hash_verified": true,
+    "symbol_sizes": [
+      [
+        "__divsi3",
+        1,
+        460
+      ],
+      [
+        "__aeabi_idivmod",
+        461,
+        8
+      ]
+    ],
+    "linked_exact": true,
+    "linked_hash_verified": true,
+    "text_hash_verified": true,
+    "length_verified": true,
+    "relocations_verified": true,
+    "hook_bound": true,
+    "only_relocation_changed": true,
+    "archive_hash_verified": true,
+    "archive_member_hash_verified": true,
+    "source_text_equals_archive": true
+  },
+  "memset": {
+    "consumed_input_hashes_verified": true,
+    "object_hash_verified": true,
+    "symbol_sizes": [
+      [
+        "memset",
+        1,
+        16
+      ]
+    ],
+    "exact": true,
+    "hash_verified": true,
+    "length_verified": true,
+    "no_relocations": true,
+    "source_hash_verified": true,
+    "license_hash_verified": true,
+    "preprocessed_hash_verified": true,
+    "archive_hash_verified": true,
+    "archive_member_hash_verified": true,
+    "source_text_equals_archive": true
+  },
+  "signed_case_counts": [
+    200,
+    178,
+    20,
+    2
+  ],
+  "signed_behavior_receipts_consistent": true,
+  "memset_224_case_grid_verified": true,
+  "nonoverlapping_extents": {
+    "uidiv_end": "0xa7d4",
+    "signed_start_end": [
+      "0xa7d4",
+      "0xa9a8"
+    ],
+    "zero_hook_end": "0xa9ac",
+    "memset_start_end": [
+      "0xa9d4",
+      "0xa9e4"
+    ],
+    "memcpy_start": "0xaa2c"
+  },
+  "new_dependency_bytes": 484,
+  "reused_zero_hook_increment": 0,
+  "census_increment": 0
+}

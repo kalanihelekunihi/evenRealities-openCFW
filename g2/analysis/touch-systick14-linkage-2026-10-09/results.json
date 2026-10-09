@@ -1,0 +1,180 @@
+{
+  "argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--platform",
+    "linux/amd64",
+    "--network",
+    "none",
+    "--cap-drop",
+    "ALL",
+    "--security-opt",
+    "no-new-privileges",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi:/tool:ro",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-pdl14-system-interface-2026-10-09/outputs/cy_systick.c:/input:ro",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-systick14-linkage-2026-10-09/outputs:/out",
+    "ubuntu@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55",
+    "/tool/bin/arm-none-eabi-ld",
+    "--gc-sections",
+    "-T",
+    "/out/link.ld",
+    "/input/public.o",
+    "-o",
+    "/out/linked.elf"
+  ],
+  "diagnostics": "",
+  "original_calls": [
+    {
+      "instruction": "0xa676",
+      "target": "0xa638"
+    },
+    {
+      "instruction": "0xa690",
+      "target": "0xa620"
+    }
+  ],
+  "original_literal_references": [
+    {
+      "instruction": "0xa606",
+      "literal_address": "0xa61c",
+      "literal_value": "0x20000f40"
+    },
+    {
+      "instruction": "0xa662",
+      "literal_address": "0xa698",
+      "literal_value": "0x20000f40"
+    },
+    {
+      "instruction": "0xa670",
+      "literal_address": "0xa69c",
+      "literal_value": "0x20000400"
+    },
+    {
+      "instruction": "0xa672",
+      "literal_address": "0xa6a0",
+      "literal_value": "0xa5f5"
+    },
+    {
+      "instruction": "0xa6ac",
+      "literal_address": "0xa6bc",
+      "literal_value": "0x20000f40"
+    }
+  ],
+  "relocations": [
+    {
+      "section": ".text.Cy_SysTick_ServiceCallbacks",
+      "offset": 40,
+      "type": 2,
+      "symbol": "",
+      "symbol_section": ".bss"
+    },
+    {
+      "section": ".text.Cy_SysTick_Init",
+      "offset": 38,
+      "type": 10,
+      "symbol": "Cy_SysTick_SetClockSource",
+      "symbol_section": ".text.Cy_SysTick_SetClockSource"
+    },
+    {
+      "section": ".text.Cy_SysTick_Init",
+      "offset": 64,
+      "type": 10,
+      "symbol": "Cy_SysTick_Enable",
+      "symbol_section": ".text.Cy_SysTick_Enable"
+    },
+    {
+      "section": ".text.Cy_SysTick_Init",
+      "offset": 72,
+      "type": 2,
+      "symbol": "",
+      "symbol_section": ".bss"
+    },
+    {
+      "section": ".text.Cy_SysTick_Init",
+      "offset": 76,
+      "type": 2,
+      "symbol": "__RAM_VECTOR_TABLE",
+      "symbol_section": "SHN_UNDEF"
+    },
+    {
+      "section": ".text.Cy_SysTick_Init",
+      "offset": 80,
+      "type": 2,
+      "symbol": "Cy_SysTick_ServiceCallbacks",
+      "symbol_section": ".text.Cy_SysTick_ServiceCallbacks"
+    },
+    {
+      "section": ".text.Cy_SysTick_SetCallback",
+      "offset": 20,
+      "type": 2,
+      "symbol": "",
+      "symbol_section": ".bss"
+    }
+  ],
+  "sections": [
+    {
+      "section": "service",
+      "address": "0xa5f4",
+      "expected_bytes": 44,
+      "linked_bytes": 44,
+      "exact": true,
+      "sha256": "fc6e6f8ad2c2aeb60287e02863678d6d12deef82490b563b3c4c9076ad9cc9ba",
+      "stock_sha256": "fc6e6f8ad2c2aeb60287e02863678d6d12deef82490b563b3c4c9076ad9cc9ba",
+      "reused_dependency": false
+    },
+    {
+      "section": "enable",
+      "address": "0xa620",
+      "expected_bytes": 24,
+      "linked_bytes": 24,
+      "exact": true,
+      "sha256": "0b2b621114164e4772b34a2039c954fb5ab6047813d2536e6bb50b38e661394a",
+      "stock_sha256": "0b2b621114164e4772b34a2039c954fb5ab6047813d2536e6bb50b38e661394a",
+      "reused_dependency": true
+    },
+    {
+      "section": "clock",
+      "address": "0xa638",
+      "expected_bytes": 24,
+      "linked_bytes": 24,
+      "exact": true,
+      "sha256": "a54db68c6ca1baa3e5b528f2914b41d8edb8644d46952d473bcab5a941741069",
+      "stock_sha256": "a54db68c6ca1baa3e5b528f2914b41d8edb8644d46952d473bcab5a941741069",
+      "reused_dependency": true
+    },
+    {
+      "section": "init",
+      "address": "0xa650",
+      "expected_bytes": 88,
+      "linked_bytes": 88,
+      "exact": true,
+      "sha256": "56e944f45560bb8d97ae1f65723124ec7c212fb7acdacaead07b8fa7ccf33394",
+      "stock_sha256": "56e944f45560bb8d97ae1f65723124ec7c212fb7acdacaead07b8fa7ccf33394",
+      "reused_dependency": false
+    },
+    {
+      "section": "set_callback",
+      "address": "0xa6a8",
+      "expected_bytes": 24,
+      "linked_bytes": 24,
+      "exact": true,
+      "sha256": "e4f53a58a1433daddcdc2fd5ebeb28ea67bbdc7680fa221c037e7a69a38856da",
+      "stock_sha256": "e4f53a58a1433daddcdc2fd5ebeb28ea67bbdc7680fa221c037e7a69a38856da",
+      "reused_dependency": false
+    }
+  ],
+  "input_object_sha256": "b60c49aea6dfa3c9f20eb6f0b1e713ad7d79502adcba8a25db0301fd92207a83",
+  "link_script_sha256": "fcd6a93f9e36e2c1b7df8c96386bfb66f5989ac9f76ebcc137cf0be06465e1e4",
+  "linked_elf_sha256": "aac391feb47bc0f4dc4d2eafb45b9bf282b6f40f917831e93b0c6c230d72629f",
+  "new_selected_candidate_functions": 3,
+  "new_selected_candidate_bytes": 156,
+  "reused_dependency_bytes": 48,
+  "independent_review": "pending",
+  "original_execution": false,
+  "manual_byte_patches": false,
+  "limits": "Static bytes; NOLOAD callback table is address/size binding only, no initialized runtime state or timer/exception behavior assumed."
+}

@@ -1,0 +1,138 @@
+{
+  "argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--platform",
+    "linux/amd64",
+    "--network",
+    "none",
+    "--cap-drop",
+    "ALL",
+    "--security-opt",
+    "no-new-privileges",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi:/tool:ro",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-gpio14-family-2026-10-09/outputs/14.2.Rel1:/input:ro",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-gpio14-linkage-2026-10-09/outputs:/out",
+    "ubuntu@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55",
+    "/tool/bin/arm-none-eabi-ld",
+    "--gc-sections",
+    "-T",
+    "/out/link.ld",
+    "/input/public.o",
+    "-o",
+    "/out/linked.elf"
+  ],
+  "exit_code": 0,
+  "diagnostics": "",
+  "original_calls": [
+    {
+      "address": 36656,
+      "target": 36452,
+      "bytes": "fff798ff"
+    },
+    {
+      "address": 36666,
+      "target": 36484,
+      "bytes": "fff7a3ff"
+    },
+    {
+      "address": 36676,
+      "target": 36392,
+      "bytes": "fff770ff"
+    },
+    {
+      "address": 36686,
+      "target": 36542,
+      "bytes": "fff7b6ff"
+    }
+  ],
+  "original_literal_references": [
+    {
+      "instruction_address": 36408,
+      "literal_address": 36444,
+      "literal_word": 3220963328
+    },
+    {
+      "instruction_address": 36414,
+      "literal_address": 36448,
+      "literal_word": 4194816
+    },
+    {
+      "instruction_address": 36700,
+      "literal_address": 36756,
+      "literal_word": 4278190079
+    },
+    {
+      "instruction_address": 36726,
+      "literal_address": 36760,
+      "literal_word": 4261412863
+    },
+    {
+      "instruction_address": 36746,
+      "literal_address": 36764,
+      "literal_word": 5898241
+    },
+    {
+      "instruction_address": 36750,
+      "literal_address": 36764,
+      "literal_word": 5898241
+    }
+  ],
+  "sections": [
+    {
+      "section": ".gpio_hsiom",
+      "address": 36392,
+      "expected_bytes": 60,
+      "linked_bytes": 60,
+      "exact": true,
+      "sha256": "ebba39f272a9d0bd546bd146aca3d390d1f71bf2207ce04ff74854a63bdadc93",
+      "stock_sha256": "ebba39f272a9d0bd546bd146aca3d390d1f71bf2207ce04ff74854a63bdadc93"
+    },
+    {
+      "section": ".gpio_write",
+      "address": 36452,
+      "expected_bytes": 32,
+      "linked_bytes": 32,
+      "exact": true,
+      "sha256": "d4986aa95d320e707b911f081eb3237dd64e1c03f05f00ecf9dac6c8232b2660",
+      "stock_sha256": "d4986aa95d320e707b911f081eb3237dd64e1c03f05f00ecf9dac6c8232b2660"
+    },
+    {
+      "section": ".gpio_drive",
+      "address": 36484,
+      "expected_bytes": 58,
+      "linked_bytes": 58,
+      "exact": true,
+      "sha256": "430593a5b307bca1d4e239879bc208cf7f09e3feddfaac01da19e9fefe6fb2b5",
+      "stock_sha256": "430593a5b307bca1d4e239879bc208cf7f09e3feddfaac01da19e9fefe6fb2b5"
+    },
+    {
+      "section": ".gpio_edge",
+      "address": 36542,
+      "expected_bytes": 36,
+      "linked_bytes": 36,
+      "exact": true,
+      "sha256": "6cf558f6ba5da5d9bb2f348bfc3e91838df206b5862cbdd9ece652a2aa42f454",
+      "stock_sha256": "6cf558f6ba5da5d9bb2f348bfc3e91838df206b5862cbdd9ece652a2aa42f454"
+    },
+    {
+      "section": ".gpio_init",
+      "address": 36580,
+      "expected_bytes": 188,
+      "linked_bytes": 188,
+      "exact": true,
+      "sha256": "100ba1b0945a6ad3bd1d617e72481232cd94a3328987f79f9b0db9d624dc3307",
+      "stock_sha256": "100ba1b0945a6ad3bd1d617e72481232cd94a3328987f79f9b0db9d624dc3307"
+    }
+  ],
+  "input_object_sha256": "390bf63639e6dedfc6ab1898ff0ff46536df340109720ef54703f408c14ab3e7",
+  "linker_sha256": "6d859aa8ace34f7bf205fc1f1beb5bbdfe6dc10a3c96efcf36271983c54d254d",
+  "link_script_sha256": "902b1b30340c14738c0784b8b633b10f8d7bd812fa0f53af7527e3c5e83b240a",
+  "linked_elf_sha256": "5abba6eda8c674d1149a80d8216a90a7bdf55cc0e52fc6db1226b3716aa33a36",
+  "manual_byte_patch": false,
+  "production_or_device_change": false
+}

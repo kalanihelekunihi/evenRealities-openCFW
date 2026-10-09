@@ -1,0 +1,17 @@
+# Seven selected candidates and reached dependencies
+
+All seven selected candidates pass independent static review, adding1036bytes. [Verification](SEVEN-LINKAGE-VERIFICATION.json), [linkage parser](seven_verify.py), [extent/residual parser](seven_followup.py).
+
+Selected additions are ImoSetFrequency272, ClkHfGetFrequency56, RegisterCallback148, CpuEnterSleep100, CpuEnterDeepSleep104, SlaveInterrupt300, and corrected ClkPumpSetSource56. From the accepted baseline2912bytes/39selected entries, the result is3948bytes/46selected entries. The denominator remains54; eight entries remain unresolved. Extents include owned instruction/alignment/literal bytes and are not an instruction-only coverage count.
+
+The six reached I2C helpers independently match all1456bytes: HsMode128, Stop332, Ack168, Address400, DataReceive180, DataTransmit248. These are separate dependency evidence outside the54-entry census; do not add six to46or1456to3948. Existing assembly/FIFO/inline dependencies are reused. The PM no-callback helpers20/40also match but remain separate dependency evidence.
+
+All linked section hashes, addresses and lengths verify against authenticated stock bytes; source-object, ELF and linker-script hashes verify. Prior audited pinned source/compiler inputs apply unchanged. Original BL decoding independently verifies9clock calls,14PM calls and16I2C calls. Source-to-linked comparison changes only relocation fields; every parsed ABS32/THM_CALL binding checks symbol address/addend or branch target. Literal-pool ownership checks pass for every exact linked span. NOLOAD mappings bind real source globals to addresses without inventing initial values. New selected/helper extents are mutually nonoverlapping and overlap no other selected historical instruction spans.
+
+At0xA188the untouched public .text.Cy_SysClk_ClkPumpSetSource section is exactly56stock bytes, relocation-free. Mapping symbols identify44instruction bytes and12literal bytes, each pool word referenced by original LDR instructions. This independently validates the historical HF SetSource attribution correction to pump source selection, without merging this row into the HF SetSource body at0x9F44. Historical symbols remain preserved.
+
+The unsigned division call at0x9CD0 independently decodes to0xA6C0. __aeabi_uidiv is bound to Thumb address0xA6C1; no executable division body is provided in this comparator. That external runtime dependency remains unresolved source/completeness work. Exact local clock callers do not establish a complete executable closure.
+
+ExecuteCallback remains a concrete failure:220emitted bytes differ at69positions after linkage. Its proven address makes the outer sleep-wrapper bytes exact but does not make the callback composition exact. Independent reproduction also verifies all eight raw residual windows and all non-relocated mismatch positions. Their compiled-length windows remain diagnostic windows, not verified firmware function extents. Residual public source/version/build-contract questions remain for four Flash functions, three ILO functions, and ExecuteCallback; they are static opportunities rather than runtime-only evidence gaps.
+
+Observed .git/index SHA is1e0a027c80fec30334f00f77b0c3753c65d69b7e3215aacfd839aaf6f2521948, consistent with an externally changed state relative to earlier audits. It was read and preserved, with no reset or staging. Only assigned audit outputs changed; no builds, execution, device access, or Git mutation occurred.

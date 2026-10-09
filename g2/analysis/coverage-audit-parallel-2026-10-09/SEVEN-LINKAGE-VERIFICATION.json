@@ -1,0 +1,1441 @@
+{
+  "reviews": [
+    {
+      "task": "sysclk14-frequency-linkage",
+      "input_hash_verified": true,
+      "elf_hash_verified": true,
+      "script_hash_verified": true,
+      "script_copy_identical": true,
+      "sections": [
+        {
+          "section": "assembly",
+          "exact": true,
+          "hash_verified": true,
+          "reported_exact_verified": true,
+          "address_length_verified": true,
+          "mapping_symbols": [
+            [
+              0,
+              "$t"
+            ]
+          ]
+        },
+        {
+          "section": "external",
+          "exact": true,
+          "hash_verified": true,
+          "reported_exact_verified": true,
+          "address_length_verified": true,
+          "mapping_symbols": [
+            [
+              0,
+              "$t"
+            ],
+            [
+              8,
+              "$d"
+            ]
+          ],
+          "unchanged_except_relocations": true,
+          "relocation_bindings": [
+            {
+              "offset": 8,
+              "type": 2,
+              "symbol": ".bss",
+              "symbol_address": 536874784,
+              "addend": 0,
+              "bound_value": 536874784,
+              "verified": true
+            }
+          ]
+        },
+        {
+          "section": "imo_get",
+          "exact": true,
+          "hash_verified": true,
+          "reported_exact_verified": true,
+          "address_length_verified": true,
+          "mapping_symbols": [
+            [
+              0,
+              "$t"
+            ],
+            [
+              48,
+              "$d"
+            ]
+          ],
+          "unchanged_except_relocations": true,
+          "relocation_bindings": []
+        },
+        {
+          "section": "imo_set",
+          "exact": true,
+          "hash_verified": true,
+          "reported_exact_verified": true,
+          "address_length_verified": true,
+          "mapping_symbols": [
+            [
+              0,
+              "$t"
+            ],
+            [
+              204,
+              "$d"
+            ]
+          ],
+          "unchanged_except_relocations": true,
+          "relocation_bindings": [
+            {
+              "offset": 62,
+              "type": 10,
+              "symbol": "Cy_SysClk_ImoGetFrequency",
+              "symbol_address": 40005,
+              "addend": null,
+              "bound_value": 40004,
+              "verified": true
+            },
+            {
+              "offset": 80,
+              "type": 10,
+              "symbol": "__aeabi_uidiv",
+              "symbol_address": 42689,
+              "addend": null,
+              "bound_value": 42688,
+              "verified": true
+            },
+            {
+              "offset": 86,
+              "type": 10,
+              "symbol": "Cy_SysLib_EnterCriticalSection",
+              "symbol_address": 17555,
+              "addend": null,
+              "bound_value": 17554,
+              "verified": true
+            },
+            {
+              "offset": 134,
+              "type": 10,
+              "symbol": "Cy_SysLib_DelayCycles",
+              "symbol_address": 17537,
+              "addend": null,
+              "bound_value": 17536,
+              "verified": true
+            },
+            {
+              "offset": 144,
+              "type": 10,
+              "symbol": "Cy_SysLib_ExitCriticalSection",
+              "symbol_address": 17563,
+              "addend": null,
+              "bound_value": 17562,
+              "verified": true
+            },
+            {
+              "offset": 176,
+              "type": 10,
+              "symbol": "Cy_SysLib_DelayCycles",
+              "symbol_address": 17537,
+              "addend": null,
+              "bound_value": 17536,
+              "verified": true
+            }
+          ]
+        },
+        {
+          "section": "source_get",
+          "exact": true,
+          "hash_verified": true,
+          "reported_exact_verified": true,
+          "address_length_verified": true,
+          "mapping_symbols": [
+            [
+              0,
+              "$t"
+            ],
+            [
+              12,
+              "$d"
+            ]
+          ],
+          "unchanged_except_relocations": true,
+          "relocation_bindings": []
+        },
+        {
+          "section": "frequency",
+          "exact": true,
+          "hash_verified": true,
+          "reported_exact_verified": true,
+          "address_length_verified": true,
+          "mapping_symbols": [
+            [
+              0,
+              "$t"
+            ],
+            [
+              52,
+              "$d"
+            ]
+          ],
+          "unchanged_except_relocations": true,
+          "relocation_bindings": [
+            {
+              "offset": 16,
+              "type": 10,
+              "symbol": "Cy_SysClk_ClkHfGetSource",
+              "symbol_address": 40757,
+              "addend": null,
+              "bound_value": 40756,
+              "verified": true
+            },
+            {
+              "offset": 32,
+              "type": 10,
+              "symbol": "Cy_SysClk_ImoGetFrequency",
+              "symbol_address": 40005,
+              "addend": null,
+              "bound_value": 40004,
+              "verified": true
+            },
+            {
+              "offset": 44,
+              "type": 10,
+              "symbol": "Cy_SysClk_ExtClkGetFrequency",
+              "symbol_address": 39993,
+              "addend": null,
+              "bound_value": 39992,
+              "verified": true
+            }
+          ]
+        }
+      ],
+      "calls": [
+        {
+          "instruction": "0x9cbe",
+          "verified": true
+        },
+        {
+          "instruction": "0x9cd0",
+          "verified": true
+        },
+        {
+          "instruction": "0x9cd6",
+          "verified": true
+        },
+        {
+          "instruction": "0x9d06",
+          "verified": true
+        },
+        {
+          "instruction": "0x9d10",
+          "verified": true
+        },
+        {
+          "instruction": "0x9d30",
+          "verified": true
+        },
+        {
+          "instruction": "0x9fac",
+          "verified": true
+        },
+        {
+          "instruction": "0x9fbc",
+          "verified": true
+        },
+        {
+          "instruction": "0x9fc8",
+          "verified": true
+        }
+      ],
+      "literal_references": []
+    },
+    {
+      "task": "syspm14-linkage",
+      "input_hash_verified": true,
+      "elf_hash_verified": true,
+      "script_hash_verified": true,
+      "script_copy_identical": true,
+      "sections": [
+        {
+          "section": "assembly",
+          "exact": true,
+          "hash_verified": true,
+          "reported_exact_verified": true,
+          "address_length_verified": true,
+          "mapping_symbols": [
+            [
+              0,
+              "$t"
+            ]
+          ]
+        },
+        {
+          "section": "sleep_direct",
+          "exact": true,
+          "hash_verified": true,
+          "reported_exact_verified": true,
+          "address_length_verified": true,
+          "mapping_symbols": [
+            [
+              0,
+              "$t"
+            ],
+            [
+              16,
+              "$d"
+            ]
+          ],
+          "unchanged_except_relocations": true,
+          "relocation_bindings": []
+        },
+        {
+          "section": "deep_direct",
+          "exact": true,
+          "hash_verified": true,
+          "reported_exact_verified": true,
+          "address_length_verified": true,
+          "mapping_symbols": [
+            [
+              0,
+              "$t"
+            ],
+            [
+              28,
+              "$d"
+            ]
+          ],
+          "unchanged_except_relocations": true,
+          "relocation_bindings": []
+        },
+        {
+          "section": "register",
+          "exact": true,
+          "hash_verified": true,
+          "reported_exact_verified": true,
+          "address_length_verified": true,
+          "mapping_symbols": [
+            [
+              0,
+              "$t"
+            ],
+            [
+              144,
+              "$d"
+            ]
+          ],
+          "unchanged_except_relocations": true,
+          "relocation_bindings": [
+            {
+              "offset": 144,
+              "type": 2,
+              "symbol": ".bss",
+              "symbol_address": 536874804,
+              "addend": 0,
+              "bound_value": 536874804,
+              "verified": true
+            }
+          ]
+        },
+        {
+          "section": "execute",
+          "exact": false,
+          "hash_verified": true,
+          "reported_exact_verified": true,
+          "address_length_verified": true,
+          "mapping_symbols": [
+            [
+              0,
+              "$t"
+            ],
+            [
+              212,
+              "$d"
+            ]
+          ],
+          "unchanged_except_relocations": true,
+          "relocation_bindings": [
+            {
+              "offset": 212,
+              "type": 2,
+              "symbol": ".bss",
+              "symbol_address": 536874804,
+              "addend": 0,
+              "bound_value": 536874804,
+              "verified": true
+            }
+          ]
+        },
+        {
+          "section": "sleep",
+          "exact": true,
+          "hash_verified": true,
+          "reported_exact_verified": true,
+          "address_length_verified": true,
+          "mapping_symbols": [
+            [
+              0,
+              "$t"
+            ],
+            [
+              92,
+              "$d"
+            ]
+          ],
+          "unchanged_except_relocations": true,
+          "relocation_bindings": [
+            {
+              "offset": 14,
+              "type": 10,
+              "symbol": "Cy_SysPm_ExecuteCallback",
+              "symbol_address": 42053,
+              "addend": null,
+              "bound_value": 42052,
+              "verified": true
+            },
+            {
+              "offset": 22,
+              "type": 10,
+              "symbol": "Cy_SysLib_EnterCriticalSection",
+              "symbol_address": 17555,
+              "addend": null,
+              "bound_value": 17554,
+              "verified": true
+            },
+            {
+              "offset": 40,
+              "type": 10,
+              "symbol": "Cy_SysPm_ExecuteCallback",
+              "symbol_address": 42053,
+              "addend": null,
+              "bound_value": 42052,
+              "verified": true
+            },
+            {
+              "offset": 44,
+              "type": 10,
+              "symbol": "Cy_SysPm_CpuEnterSleepNoCallbacks",
+              "symbol_address": 41845,
+              "addend": null,
+              "bound_value": 41844,
+              "verified": true
+            },
+            {
+              "offset": 50,
+              "type": 10,
+              "symbol": "Cy_SysLib_ExitCriticalSection",
+              "symbol_address": 17563,
+              "addend": null,
+              "bound_value": 17562,
+              "verified": true
+            },
+            {
+              "offset": 66,
+              "type": 10,
+              "symbol": "Cy_SysPm_ExecuteCallback",
+              "symbol_address": 42053,
+              "addend": null,
+              "bound_value": 42052,
+              "verified": true
+            },
+            {
+              "offset": 82,
+              "type": 10,
+              "symbol": "Cy_SysPm_ExecuteCallback",
+              "symbol_address": 42053,
+              "addend": null,
+              "bound_value": 42052,
+              "verified": true
+            },
+            {
+              "offset": 92,
+              "type": 2,
+              "symbol": ".bss",
+              "symbol_address": 536874804,
+              "addend": 0,
+              "bound_value": 536874804,
+              "verified": true
+            }
+          ]
+        },
+        {
+          "section": "deep",
+          "exact": true,
+          "hash_verified": true,
+          "reported_exact_verified": true,
+          "address_length_verified": true,
+          "mapping_symbols": [
+            [
+              0,
+              "$t"
+            ],
+            [
+              100,
+              "$d"
+            ]
+          ],
+          "unchanged_except_relocations": true,
+          "relocation_bindings": [
+            {
+              "offset": 14,
+              "type": 10,
+              "symbol": "Cy_SysPm_ExecuteCallback",
+              "symbol_address": 42053,
+              "addend": null,
+              "bound_value": 42052,
+              "verified": true
+            },
+            {
+              "offset": 22,
+              "type": 10,
+              "symbol": "Cy_SysLib_EnterCriticalSection",
+              "symbol_address": 17555,
+              "addend": null,
+              "bound_value": 17554,
+              "verified": true
+            },
+            {
+              "offset": 40,
+              "type": 10,
+              "symbol": "Cy_SysPm_ExecuteCallback",
+              "symbol_address": 42053,
+              "addend": null,
+              "bound_value": 42052,
+              "verified": true
+            },
+            {
+              "offset": 44,
+              "type": 10,
+              "symbol": "Cy_SysPm_CpuEnterDeepSleepNoCallbacks",
+              "symbol_address": 41865,
+              "addend": null,
+              "bound_value": 41864,
+              "verified": true
+            },
+            {
+              "offset": 50,
+              "type": 10,
+              "symbol": "Cy_SysLib_ExitCriticalSection",
+              "symbol_address": 17563,
+              "addend": null,
+              "bound_value": 17562,
+              "verified": true
+            },
+            {
+              "offset": 70,
+              "type": 10,
+              "symbol": "Cy_SysPm_ExecuteCallback",
+              "symbol_address": 42053,
+              "addend": null,
+              "bound_value": 42052,
+              "verified": true
+            },
+            {
+              "offset": 92,
+              "type": 10,
+              "symbol": "Cy_SysPm_ExecuteCallback",
+              "symbol_address": 42053,
+              "addend": null,
+              "bound_value": 42052,
+              "verified": true
+            },
+            {
+              "offset": 100,
+              "type": 2,
+              "symbol": ".bss",
+              "symbol_address": 536874804,
+              "addend": 0,
+              "bound_value": 536874804,
+              "verified": true
+            }
+          ]
+        }
+      ],
+      "calls": [
+        {
+          "instruction": "0xa536",
+          "verified": true
+        },
+        {
+          "instruction": "0xa53e",
+          "verified": true
+        },
+        {
+          "instruction": "0xa550",
+          "verified": true
+        },
+        {
+          "instruction": "0xa554",
+          "verified": true
+        },
+        {
+          "instruction": "0xa55a",
+          "verified": true
+        },
+        {
+          "instruction": "0xa56a",
+          "verified": true
+        },
+        {
+          "instruction": "0xa57a",
+          "verified": true
+        },
+        {
+          "instruction": "0xa59a",
+          "verified": true
+        },
+        {
+          "instruction": "0xa5a2",
+          "verified": true
+        },
+        {
+          "instruction": "0xa5b4",
+          "verified": true
+        },
+        {
+          "instruction": "0xa5b8",
+          "verified": true
+        },
+        {
+          "instruction": "0xa5be",
+          "verified": true
+        },
+        {
+          "instruction": "0xa5d2",
+          "verified": true
+        },
+        {
+          "instruction": "0xa5e8",
+          "verified": true
+        }
+      ],
+      "literal_references": [
+        {
+          "instruction": "0xa3c4",
+          "verified": true
+        },
+        {
+          "instruction": "0xa416",
+          "verified": true
+        },
+        {
+          "instruction": "0xa420",
+          "verified": true
+        }
+      ]
+    },
+    {
+      "task": "i2c14-slave-linkage",
+      "input_hash_verified": true,
+      "elf_hash_verified": true,
+      "script_hash_verified": true,
+      "script_copy_identical": true,
+      "sections": [
+        {
+          "section": "assembly",
+          "exact": true,
+          "hash_verified": true,
+          "reported_exact_verified": true,
+          "address_length_verified": true,
+          "mapping_symbols": [
+            [
+              0,
+              "$t"
+            ]
+          ]
+        },
+        {
+          "section": "read_helper",
+          "exact": true,
+          "hash_verified": true,
+          "reported_exact_verified": true,
+          "address_length_verified": true,
+          "mapping_symbols": [
+            [
+              0,
+              "$t"
+            ]
+          ]
+        },
+        {
+          "section": "read",
+          "exact": true,
+          "hash_verified": true,
+          "reported_exact_verified": true,
+          "address_length_verified": true,
+          "mapping_symbols": [
+            [
+              0,
+              "$t"
+            ]
+          ]
+        },
+        {
+          "section": "write_helper",
+          "exact": true,
+          "hash_verified": true,
+          "reported_exact_verified": true,
+          "address_length_verified": true,
+          "mapping_symbols": [
+            [
+              0,
+              "$t"
+            ]
+          ]
+        },
+        {
+          "section": "write",
+          "exact": true,
+          "hash_verified": true,
+          "reported_exact_verified": true,
+          "address_length_verified": true,
+          "mapping_symbols": [
+            [
+              0,
+              "$t"
+            ]
+          ]
+        },
+        {
+          "section": "default_helper",
+          "exact": true,
+          "hash_verified": true,
+          "reported_exact_verified": true,
+          "address_length_verified": true,
+          "mapping_symbols": [
+            [
+              0,
+              "$t"
+            ]
+          ]
+        },
+        {
+          "section": "default",
+          "exact": true,
+          "hash_verified": true,
+          "reported_exact_verified": true,
+          "address_length_verified": true,
+          "mapping_symbols": [
+            [
+              0,
+              "$t"
+            ]
+          ]
+        },
+        {
+          "section": "rx_level",
+          "exact": true,
+          "hash_verified": true,
+          "reported_exact_verified": true,
+          "address_length_verified": true,
+          "mapping_symbols": [
+            [
+              0,
+              "$t"
+            ]
+          ],
+          "unchanged_except_relocations": true,
+          "relocation_bindings": []
+        },
+        {
+          "section": "hs",
+          "exact": true,
+          "hash_verified": true,
+          "reported_exact_verified": true,
+          "address_length_verified": true,
+          "mapping_symbols": [
+            [
+              0,
+              "$t"
+            ],
+            [
+              120,
+              "$d"
+            ]
+          ],
+          "unchanged_except_relocations": true,
+          "relocation_bindings": [
+            {
+              "offset": 36,
+              "type": 10,
+              "symbol": "Cy_SCB_SetRxFifoLevel",
+              "symbol_address": 37655,
+              "addend": null,
+              "bound_value": 37654,
+              "verified": true
+            }
+          ]
+        },
+        {
+          "section": "stop",
+          "exact": true,
+          "hash_verified": true,
+          "reported_exact_verified": true,
+          "address_length_verified": true,
+          "mapping_symbols": [
+            [
+              0,
+              "$t"
+            ],
+            [
+              304,
+              "$d"
+            ]
+          ],
+          "unchanged_except_relocations": true,
+          "relocation_bindings": [
+            {
+              "offset": 268,
+              "type": 10,
+              "symbol": "Cy_SCB_SetRxFifoLevel",
+              "symbol_address": 37655,
+              "addend": null,
+              "bound_value": 37654,
+              "verified": true
+            }
+          ]
+        },
+        {
+          "section": "ack",
+          "exact": true,
+          "hash_verified": true,
+          "reported_exact_verified": true,
+          "address_length_verified": true,
+          "mapping_symbols": [
+            [
+              0,
+              "$t"
+            ],
+            [
+              152,
+              "$d"
+            ]
+          ],
+          "unchanged_except_relocations": true,
+          "relocation_bindings": [
+            {
+              "offset": 142,
+              "type": 10,
+              "symbol": "Cy_SCB_SetRxFifoLevel",
+              "symbol_address": 37655,
+              "addend": null,
+              "bound_value": 37654,
+              "verified": true
+            }
+          ]
+        },
+        {
+          "section": "address",
+          "exact": true,
+          "hash_verified": true,
+          "reported_exact_verified": true,
+          "address_length_verified": true,
+          "mapping_symbols": [
+            [
+              0,
+              "$t"
+            ],
+            [
+              364,
+              "$d"
+            ]
+          ],
+          "unchanged_except_relocations": true,
+          "relocation_bindings": [
+            {
+              "offset": 154,
+              "type": 10,
+              "symbol": "Cy_SCB_SetRxFifoLevel",
+              "symbol_address": 37655,
+              "addend": null,
+              "bound_value": 37654,
+              "verified": true
+            },
+            {
+              "offset": 350,
+              "type": 10,
+              "symbol": "SlaveHandleAck",
+              "symbol_address": 38161,
+              "addend": null,
+              "bound_value": 38160,
+              "verified": true
+            }
+          ]
+        },
+        {
+          "section": "receive",
+          "exact": true,
+          "hash_verified": true,
+          "reported_exact_verified": true,
+          "address_length_verified": true,
+          "mapping_symbols": [
+            [
+              0,
+              "$t"
+            ],
+            [
+              176,
+              "$d"
+            ]
+          ],
+          "unchanged_except_relocations": true,
+          "relocation_bindings": [
+            {
+              "offset": 82,
+              "type": 10,
+              "symbol": "Cy_SCB_ReadArray",
+              "symbol_address": 37457,
+              "addend": null,
+              "bound_value": 37456,
+              "verified": true
+            },
+            {
+              "offset": 150,
+              "type": 10,
+              "symbol": "Cy_SCB_SetRxFifoLevel",
+              "symbol_address": 37655,
+              "addend": null,
+              "bound_value": 37654,
+              "verified": true
+            }
+          ]
+        },
+        {
+          "section": "transmit",
+          "exact": true,
+          "hash_verified": true,
+          "reported_exact_verified": true,
+          "address_length_verified": true,
+          "mapping_symbols": [
+            [
+              0,
+              "$t"
+            ],
+            [
+              244,
+              "$d"
+            ]
+          ],
+          "unchanged_except_relocations": true,
+          "relocation_bindings": [
+            {
+              "offset": 82,
+              "type": 10,
+              "symbol": "Cy_SCB_WriteDefaultArray",
+              "symbol_address": 37607,
+              "addend": null,
+              "bound_value": 37606,
+              "verified": true
+            },
+            {
+              "offset": 124,
+              "type": 10,
+              "symbol": "Cy_SCB_WriteArray",
+              "symbol_address": 37543,
+              "addend": null,
+              "bound_value": 37542,
+              "verified": true
+            },
+            {
+              "offset": 166,
+              "type": 10,
+              "symbol": "Cy_SysLib_EnterCriticalSection",
+              "symbol_address": 17555,
+              "addend": null,
+              "bound_value": 17554,
+              "verified": true
+            },
+            {
+              "offset": 190,
+              "type": 10,
+              "symbol": "Cy_SysLib_ExitCriticalSection",
+              "symbol_address": 17563,
+              "addend": null,
+              "bound_value": 17562,
+              "verified": true
+            }
+          ]
+        },
+        {
+          "section": "interrupt",
+          "exact": true,
+          "hash_verified": true,
+          "reported_exact_verified": true,
+          "address_length_verified": true,
+          "mapping_symbols": [
+            [
+              0,
+              "$t"
+            ],
+            [
+              276,
+              "$d"
+            ]
+          ],
+          "unchanged_except_relocations": true,
+          "relocation_bindings": [
+            {
+              "offset": 110,
+              "type": 10,
+              "symbol": "SlaveHandleDataReceive",
+              "symbol_address": 38729,
+              "addend": null,
+              "bound_value": 38728,
+              "verified": true
+            },
+            {
+              "offset": 166,
+              "type": 10,
+              "symbol": "SlaveHandleHsMode",
+              "symbol_address": 37701,
+              "addend": null,
+              "bound_value": 37700,
+              "verified": true
+            },
+            {
+              "offset": 206,
+              "type": 10,
+              "symbol": "SlaveHandleStop",
+              "symbol_address": 37829,
+              "addend": null,
+              "bound_value": 37828,
+              "verified": true
+            },
+            {
+              "offset": 230,
+              "type": 10,
+              "symbol": "SlaveHandleAddress",
+              "symbol_address": 38329,
+              "addend": null,
+              "bound_value": 38328,
+              "verified": true
+            },
+            {
+              "offset": 260,
+              "type": 10,
+              "symbol": "SlaveHandleDataTransmit",
+              "symbol_address": 38909,
+              "addend": null,
+              "bound_value": 38908,
+              "verified": true
+            }
+          ]
+        }
+      ],
+      "calls": [
+        {
+          "instruction": "0x9368",
+          "verified": true
+        },
+        {
+          "instruction": "0x94d0",
+          "verified": true
+        },
+        {
+          "instruction": "0x959e",
+          "verified": true
+        },
+        {
+          "instruction": "0x9652",
+          "verified": true
+        },
+        {
+          "instruction": "0x9716",
+          "verified": true
+        },
+        {
+          "instruction": "0x979a",
+          "verified": true
+        },
+        {
+          "instruction": "0x97de",
+          "verified": true
+        },
+        {
+          "instruction": "0x984e",
+          "verified": true
+        },
+        {
+          "instruction": "0x9878",
+          "verified": true
+        },
+        {
+          "instruction": "0x98a2",
+          "verified": true
+        },
+        {
+          "instruction": "0x98ba",
+          "verified": true
+        },
+        {
+          "instruction": "0x9b7a",
+          "verified": true
+        },
+        {
+          "instruction": "0x9bb2",
+          "verified": true
+        },
+        {
+          "instruction": "0x9bda",
+          "verified": true
+        },
+        {
+          "instruction": "0x9bf2",
+          "verified": true
+        },
+        {
+          "instruction": "0x9c10",
+          "verified": true
+        }
+      ],
+      "literal_references": []
+    }
+  ],
+  "new_ranges": [
+    [
+      40064,
+      40336,
+      "sysclk14-frequency-linkage",
+      null
+    ],
+    [
+      40860,
+      40916,
+      "sysclk14-frequency-linkage",
+      null
+    ],
+    [
+      41904,
+      42052,
+      "syspm14-linkage",
+      null
+    ],
+    [
+      42280,
+      42380,
+      "syspm14-linkage",
+      null
+    ],
+    [
+      42380,
+      42484,
+      "syspm14-linkage",
+      null
+    ],
+    [
+      39692,
+      39992,
+      "i2c14-slave-linkage",
+      null
+    ],
+    [
+      41352,
+      41408,
+      "clkpump14-attribution",
+      "Cy_SysClk_ClkHfSetSource"
+    ]
+  ],
+  "pump": {
+    "object_hash_verified": true,
+    "exact": true,
+    "section_hash_verified": true,
+    "full_length_verified": true,
+    "relocation_free": true,
+    "mapping_symbols": [
+      [
+        0,
+        "$t"
+      ],
+      [
+        44,
+        "$d"
+      ]
+    ],
+    "all_pool_words_referenced": true
+  },
+  "extra_object_hashes": [
+    {
+      "task": "sysclk14-frequency-linkage",
+      "file": "assembly.o",
+      "hash_verified": true
+    },
+    {
+      "task": "syspm14-linkage",
+      "file": "assembly.o",
+      "hash_verified": true
+    },
+    {
+      "task": "i2c14-slave-linkage",
+      "file": "assembly.o",
+      "hash_verified": true
+    },
+    {
+      "task": "i2c14-slave-linkage",
+      "file": "common.o",
+      "hash_verified": true
+    }
+  ],
+  "pool_checks": [
+    {
+      "task": "sysclk14-frequency-linkage",
+      "section": "assembly",
+      "all_pool_words_referenced": true,
+      "pool_offset": 32
+    },
+    {
+      "task": "sysclk14-frequency-linkage",
+      "section": "external",
+      "all_pool_words_referenced": true,
+      "pool_offset": 8
+    },
+    {
+      "task": "sysclk14-frequency-linkage",
+      "section": "imo_get",
+      "all_pool_words_referenced": true,
+      "pool_offset": 48
+    },
+    {
+      "task": "sysclk14-frequency-linkage",
+      "section": "imo_set",
+      "all_pool_words_referenced": true,
+      "pool_offset": 204
+    },
+    {
+      "task": "sysclk14-frequency-linkage",
+      "section": "source_get",
+      "all_pool_words_referenced": true,
+      "pool_offset": 12
+    },
+    {
+      "task": "sysclk14-frequency-linkage",
+      "section": "frequency",
+      "all_pool_words_referenced": true,
+      "pool_offset": 52
+    },
+    {
+      "task": "syspm14-linkage",
+      "section": "assembly",
+      "all_pool_words_referenced": true,
+      "pool_offset": 32
+    },
+    {
+      "task": "syspm14-linkage",
+      "section": "sleep_direct",
+      "all_pool_words_referenced": true,
+      "pool_offset": 16
+    },
+    {
+      "task": "syspm14-linkage",
+      "section": "deep_direct",
+      "all_pool_words_referenced": true,
+      "pool_offset": 28
+    },
+    {
+      "task": "syspm14-linkage",
+      "section": "register",
+      "all_pool_words_referenced": true,
+      "pool_offset": 144
+    },
+    {
+      "task": "syspm14-linkage",
+      "section": "sleep",
+      "all_pool_words_referenced": true,
+      "pool_offset": 92
+    },
+    {
+      "task": "syspm14-linkage",
+      "section": "deep",
+      "all_pool_words_referenced": true,
+      "pool_offset": 100
+    },
+    {
+      "task": "i2c14-slave-linkage",
+      "section": "assembly",
+      "all_pool_words_referenced": true,
+      "pool_offset": 32
+    },
+    {
+      "task": "i2c14-slave-linkage",
+      "section": "read_helper",
+      "all_pool_words_referenced": true,
+      "pool_offset": 56
+    },
+    {
+      "task": "i2c14-slave-linkage",
+      "section": "read",
+      "all_pool_words_referenced": true,
+      "pool_offset": 30
+    },
+    {
+      "task": "i2c14-slave-linkage",
+      "section": "write_helper",
+      "all_pool_words_referenced": true,
+      "pool_offset": 56
+    },
+    {
+      "task": "i2c14-slave-linkage",
+      "section": "write",
+      "all_pool_words_referenced": true,
+      "pool_offset": 48
+    },
+    {
+      "task": "i2c14-slave-linkage",
+      "section": "default_helper",
+      "all_pool_words_referenced": true,
+      "pool_offset": 16
+    },
+    {
+      "task": "i2c14-slave-linkage",
+      "section": "default",
+      "all_pool_words_referenced": true,
+      "pool_offset": 48
+    },
+    {
+      "task": "i2c14-slave-linkage",
+      "section": "rx_level",
+      "all_pool_words_referenced": true,
+      "pool_offset": 44
+    },
+    {
+      "task": "i2c14-slave-linkage",
+      "section": "hs",
+      "all_pool_words_referenced": true,
+      "pool_offset": 120
+    },
+    {
+      "task": "i2c14-slave-linkage",
+      "section": "stop",
+      "all_pool_words_referenced": true,
+      "pool_offset": 304
+    },
+    {
+      "task": "i2c14-slave-linkage",
+      "section": "ack",
+      "all_pool_words_referenced": true,
+      "pool_offset": 152
+    },
+    {
+      "task": "i2c14-slave-linkage",
+      "section": "address",
+      "all_pool_words_referenced": true,
+      "pool_offset": 364
+    },
+    {
+      "task": "i2c14-slave-linkage",
+      "section": "receive",
+      "all_pool_words_referenced": true,
+      "pool_offset": 176
+    },
+    {
+      "task": "i2c14-slave-linkage",
+      "section": "transmit",
+      "all_pool_words_referenced": true,
+      "pool_offset": 244
+    },
+    {
+      "task": "i2c14-slave-linkage",
+      "section": "interrupt",
+      "all_pool_words_referenced": true,
+      "pool_offset": 276
+    }
+  ],
+  "residual_checks": [
+    {
+      "function": "Cy_Flash_ClockBackup",
+      "hash_verified": true,
+      "raw_bytes_verified": true,
+      "differences_verified": true,
+      "nonrelocated_mismatches": 14
+    },
+    {
+      "function": "Cy_Flash_ClockConfig",
+      "hash_verified": true,
+      "raw_bytes_verified": true,
+      "differences_verified": true,
+      "nonrelocated_mismatches": 4
+    },
+    {
+      "function": "Cy_Flash_ClockRestore",
+      "hash_verified": true,
+      "raw_bytes_verified": true,
+      "differences_verified": true,
+      "nonrelocated_mismatches": 6
+    },
+    {
+      "function": "Cy_Flash_WriteRow",
+      "hash_verified": true,
+      "raw_bytes_verified": true,
+      "differences_verified": true,
+      "nonrelocated_mismatches": 171
+    },
+    {
+      "function": "Cy_SysClk_IloStartMeasurement",
+      "hash_verified": true,
+      "raw_bytes_verified": true,
+      "differences_verified": true,
+      "nonrelocated_mismatches": 29
+    },
+    {
+      "function": "Cy_SysClk_IloStopMeasurement",
+      "hash_verified": true,
+      "raw_bytes_verified": true,
+      "differences_verified": true,
+      "nonrelocated_mismatches": 24
+    },
+    {
+      "function": "Cy_SysClk_IloCompensate",
+      "hash_verified": true,
+      "raw_bytes_verified": true,
+      "differences_verified": true,
+      "nonrelocated_mismatches": 6
+    },
+    {
+      "function": "Cy_SysPm_ExecuteCallback",
+      "hash_verified": true,
+      "raw_bytes_verified": true,
+      "differences_verified": true,
+      "nonrelocated_mismatches": 69
+    }
+  ],
+  "helper_ranges": [
+    [
+      37700,
+      37828,
+      "hs"
+    ],
+    [
+      37828,
+      38160,
+      "stop"
+    ],
+    [
+      38160,
+      38328,
+      "ack"
+    ],
+    [
+      38328,
+      38728,
+      "address"
+    ],
+    [
+      38728,
+      38908,
+      "receive"
+    ],
+    [
+      38908,
+      39156,
+      "transmit"
+    ]
+  ],
+  "helper_bytes": 1456,
+  "new_selected_extents": 7,
+  "new_selected_bytes": 1036,
+  "new_spans_nonoverlapping": true,
+  "aggregate_selected_bytes": 3948,
+  "aggregate_selected_functions": 46,
+  "denominator": 54,
+  "remaining_selected": 8,
+  "other_selected_historical_overlaps": [],
+  "index_observed_sha256": "1e0a027c80fec30334f00f77b0c3753c65d69b7e3215aacfd839aaf6f2521948"
+}

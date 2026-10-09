@@ -1,0 +1,44 @@
+{
+  "argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--platform",
+    "linux/amd64",
+    "--network",
+    "none",
+    "--cap-drop",
+    "ALL",
+    "--security-opt",
+    "no-new-privileges",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi:/tool:ro",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-newlib14-startup-exit-2026-10-09/outputs/exit:/out",
+    "ubuntu@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55",
+    "/tool/bin/arm-none-eabi-ld",
+    "-T",
+    "/out/stock-bindings.ld",
+    "/out/public.o",
+    "-o",
+    "/out/linked.elf"
+  ],
+  "exit_code": 0,
+  "diagnostics": "",
+  "bindings": {
+    "_exit": "0xAA41 Thumb",
+    "__stdio_exit_handler": "0x20000F54",
+    "__call_exitprocs": "undefined weak, stock literal zero"
+  },
+  "limits": "Provider-source/link evidence only. Halt provider, full vendor build and runtime exit composition not established.",
+  "bytes": 40,
+  "mismatches": [],
+  "linked_sha256": "ed73e3c05f24d72858b2cf85109b2726ed5242205d3864b1ea5f0ca03f172dec",
+  "stock_sha256": "ed73e3c05f24d72858b2cf85109b2726ed5242205d3864b1ea5f0ca03f172dec",
+  "extent": "[0xA9AC,0xA9D4)",
+  "historical_extent_overlap": "historical54-byte row overlaps memset; preserved unchanged",
+  "inputs": {
+    "g2/analysis/touch-newlib14-startup-exit-2026-10-09/outputs/exit/public.o": "487b9bc3a6be885a95b3bad6f0b1ac4f616c751a80c6badd6458310fa2a16787",
+    "g2/analysis/touch-newlib14-startup-exit-2026-10-09/outputs/exit/stock-bindings.ld": "60be0008a5f2d036a63e396ed02f0973e7fbd364e4a9d0d0044c0abbf9eba4da"
+  }
+}

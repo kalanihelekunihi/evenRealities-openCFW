@@ -1,0 +1,70 @@
+{
+  "object_hash_verified": true,
+  "payload_hash_verified": true,
+  "retained_device_macro": true,
+  "configuration_receipt_previously_verified": "SYSTEM-INTERFACE-VERIFICATION.json",
+  "checks": [
+    {
+      "function": "Cy_SysTick_Enable",
+      "exact": true,
+      "full_hash_verified": true,
+      "coordinate_verified": true,
+      "mapping_symbols": [
+        [
+          0,
+          "$t"
+        ],
+        [
+          20,
+          "$d"
+        ]
+      ],
+      "alignment_verified": true,
+      "literal_verified": true,
+      "literal_refs_verified": true,
+      "instruction_bytes_verified": true,
+      "return_before_pool": true,
+      "relocation_free": true,
+      "extent": [
+        42528,
+        42552
+      ]
+    },
+    {
+      "function": "Cy_SysTick_SetClockSource",
+      "exact": true,
+      "full_hash_verified": true,
+      "coordinate_verified": true,
+      "mapping_symbols": [
+        [
+          0,
+          "$t"
+        ],
+        [
+          20,
+          "$d"
+        ]
+      ],
+      "alignment_verified": true,
+      "literal_verified": true,
+      "literal_refs_verified": true,
+      "instruction_bytes_verified": true,
+      "return_before_pool": true,
+      "relocation_free": true,
+      "extent": [
+        42552,
+        42576
+      ]
+    }
+  ],
+  "selected_extent_overlaps": [],
+  "adjacent_nonoverlapping": true,
+  "new_bytes": 48,
+  "aggregate_bytes": 2368,
+  "aggregate_functions": 25,
+  "remaining_counts": {
+    "relocation_extent": 23,
+    "absent": 5,
+    "inline": 1
+  }
+}

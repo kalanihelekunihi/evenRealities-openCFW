@@ -1,0 +1,149 @@
+{
+  "argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--platform",
+    "linux/amd64",
+    "--network",
+    "none",
+    "--cap-drop",
+    "ALL",
+    "--security-opt",
+    "no-new-privileges",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi:/tool:ro",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-pdl14-system-interface-2026-10-09/outputs/cy_syslib.c:/input:ro",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-syslib14-delay-linkage-2026-10-09/outputs:/out",
+    "ubuntu@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55",
+    "/tool/bin/arm-none-eabi-ld",
+    "--gc-sections",
+    "-T",
+    "/out/link.ld",
+    "/input/public.o",
+    "/out/assembly.o",
+    "-o",
+    "/out/linked.elf"
+  ],
+  "diagnostics": "",
+  "original_calls": [
+    {
+      "instruction": "0xa2fa",
+      "target": "0x4480",
+      "bytes": "faf7c1f8"
+    },
+    {
+      "instruction": "0xa312",
+      "target": "0x4480",
+      "bytes": "faf7b5f8"
+    },
+    {
+      "instruction": "0xa32c",
+      "target": "0x4480",
+      "bytes": "faf7a8f8"
+    }
+  ],
+  "original_literal_references": [
+    {
+      "instruction": "0xa2f6",
+      "literal_address": "0xa318",
+      "literal_value": "0x2000086c",
+      "source_symbol": "cy_delay32kMs"
+    },
+    {
+      "instruction": "0xa30c",
+      "literal_address": "0xa320",
+      "literal_value": "0x20000874",
+      "source_symbol": "cy_delayFreqKhz"
+    },
+    {
+      "instruction": "0xa326",
+      "literal_address": "0xa334",
+      "literal_value": "0x20000870",
+      "source_symbol": "cy_delayFreqMhz"
+    }
+  ],
+  "relocations": [
+    {
+      "section": ".text.Cy_SysLib_Delay",
+      "offset": 10,
+      "type": 10,
+      "symbol": "Cy_SysLib_DelayCycles"
+    },
+    {
+      "section": ".text.Cy_SysLib_Delay",
+      "offset": 34,
+      "type": 10,
+      "symbol": "Cy_SysLib_DelayCycles"
+    },
+    {
+      "section": ".text.Cy_SysLib_Delay",
+      "offset": 40,
+      "type": 2,
+      "symbol": "cy_delay32kMs"
+    },
+    {
+      "section": ".text.Cy_SysLib_Delay",
+      "offset": 48,
+      "type": 2,
+      "symbol": "cy_delayFreqKhz"
+    },
+    {
+      "section": ".text.Cy_SysLib_DelayUs",
+      "offset": 8,
+      "type": 10,
+      "symbol": "Cy_SysLib_DelayCycles"
+    },
+    {
+      "section": ".text.Cy_SysLib_DelayUs",
+      "offset": 16,
+      "type": 2,
+      "symbol": "cy_delayFreqMhz"
+    }
+  ],
+  "sections": [
+    {
+      "section": "assembly",
+      "address": "0x4480",
+      "expected_bytes": 32,
+      "linked_bytes": 32,
+      "exact": true,
+      "sha256": "02cb5cdf6b3c45ffd15d390fe015586fa14e4a7f5950424848b068ceb7343347",
+      "stock_sha256": "02cb5cdf6b3c45ffd15d390fe015586fa14e4a7f5950424848b068ceb7343347",
+      "reused_dependency": true
+    },
+    {
+      "section": "delay",
+      "address": "0xa2f0",
+      "expected_bytes": 52,
+      "linked_bytes": 52,
+      "exact": true,
+      "sha256": "dd336ef169d646511c426531c16e99425858c8d702cb020278640034a6c7681f",
+      "stock_sha256": "dd336ef169d646511c426531c16e99425858c8d702cb020278640034a6c7681f",
+      "reused_dependency": false
+    },
+    {
+      "section": "delay_us",
+      "address": "0xa324",
+      "expected_bytes": 20,
+      "linked_bytes": 20,
+      "exact": true,
+      "sha256": "2992b19e2c1a530758bb5b1ad824f0b03f1e25794d84310ca63902715c8bf4e3",
+      "stock_sha256": "2992b19e2c1a530758bb5b1ad824f0b03f1e25794d84310ca63902715c8bf4e3",
+      "reused_dependency": false
+    }
+  ],
+  "input_object_sha256": "22b1d92ec903546daaf1b768259a4405ca89a81e20bd3eb62cb3c9040eff42b8",
+  "assembly_object_sha256": "4fcad330e4cc3da31fdbe12a1ad98e0686fd5beb68af993f7e725d44e67d5e39",
+  "link_script_sha256": "9df2d1c539f1f8c44ef91a3f9173e4a805e02c6eb57351b8133cac55f89a1322",
+  "linked_elf_sha256": "5a73e8324bb2fcdce2a2335ac723f3e0d9001404e1f6a4d91736ee82798144de",
+  "new_selected_candidate_functions": 2,
+  "new_selected_candidate_bytes": 72,
+  "reused_dependency_bytes": 32,
+  "independent_review": "pending",
+  "original_execution": false,
+  "manual_byte_patches": false,
+  "limits": "Static bytes, not calibrated wall-clock duration. Globals bound from referenced literals, values not supplied or initialized by this comparator."
+}

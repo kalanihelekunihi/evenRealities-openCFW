@@ -1,0 +1,95 @@
+{
+  "linked_elf_hash_matches": true,
+  "object_hash_matches": true,
+  "link_script_hash_matches": true,
+  "sections": [
+    {
+      "section": ".gpio_hsiom",
+      "bytes": 60,
+      "exact": true,
+      "hash_matches": true
+    },
+    {
+      "section": ".gpio_write",
+      "bytes": 32,
+      "exact": true,
+      "hash_matches": true
+    },
+    {
+      "section": ".gpio_drive",
+      "bytes": 58,
+      "exact": true,
+      "hash_matches": true
+    },
+    {
+      "section": ".gpio_edge",
+      "bytes": 36,
+      "exact": true,
+      "hash_matches": true
+    },
+    {
+      "section": ".gpio_init",
+      "bytes": 188,
+      "exact": true,
+      "hash_matches": true
+    }
+  ],
+  "calls": [
+    {
+      "address": "0x8f30",
+      "target": "0x8e64",
+      "matches": true
+    },
+    {
+      "address": "0x8f3a",
+      "target": "0x8e84",
+      "matches": true
+    },
+    {
+      "address": "0x8f44",
+      "target": "0x8e28",
+      "matches": true
+    },
+    {
+      "address": "0x8f4e",
+      "target": "0x8ebe",
+      "matches": true
+    }
+  ],
+  "literals": [
+    {
+      "instruction": "0x8e38",
+      "target": "0x8e5c",
+      "matches": true
+    },
+    {
+      "instruction": "0x8e3e",
+      "target": "0x8e60",
+      "matches": true
+    },
+    {
+      "instruction": "0x8f5c",
+      "target": "0x8f94",
+      "matches": true
+    },
+    {
+      "instruction": "0x8f76",
+      "target": "0x8f98",
+      "matches": true
+    },
+    {
+      "instruction": "0x8f8a",
+      "target": "0x8f9c",
+      "matches": true
+    },
+    {
+      "instruction": "0x8f8e",
+      "target": "0x8f9c",
+      "matches": true
+    }
+  ],
+  "tiling_mismatches": [],
+  "code_end": "0x8f92",
+  "alignment_hex": "c046",
+  "total_unique_bytes": 374
+}

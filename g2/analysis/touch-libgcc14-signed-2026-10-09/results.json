@@ -1,0 +1,101 @@
+{
+  "source_revision": "a05ea1e5ee0867191bb432a84c055be99dbdbc16",
+  "compile_argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--platform",
+    "linux/amd64",
+    "--network",
+    "none",
+    "--cap-drop",
+    "ALL",
+    "--security-opt",
+    "no-new-privileges",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi:/tool:ro",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/gcc-arm14-runtime:/source:ro",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-libgcc14-signed-2026-10-09/outputs:/out",
+    "ubuntu@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55",
+    "/tool/bin/arm-none-eabi-gcc",
+    "-mcpu=cortex-m0plus",
+    "-mthumb",
+    "-DL_divsi3",
+    "-c",
+    "/source/libgcc/config/arm/lib1funcs.S",
+    "-o",
+    "/out/signed.o"
+  ],
+  "diagnostics": "",
+  "link_argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--platform",
+    "linux/amd64",
+    "--network",
+    "none",
+    "--cap-drop",
+    "ALL",
+    "--security-opt",
+    "no-new-privileges",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi:/tool:ro",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/gcc-arm14-runtime:/source:ro",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-libgcc14-signed-2026-10-09/outputs:/out",
+    "ubuntu@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55",
+    "/tool/bin/arm-none-eabi-ld",
+    "-T",
+    "/out/link.ld",
+    "/out/signed.o",
+    "/out/zero.o",
+    "-o",
+    "/out/linked.elf"
+  ],
+  "link_diagnostics": "",
+  "consumed_inputs": {
+    "/source/libgcc/config/arm/lib1funcs.S": "356ccb5aa1fb82e2bbf2f08585e18eb138efcd8a745c12a0e367d935aad29769",
+    "/source/libgcc/config/arm/bpabi-v6m.S": "aeb3d037a99a8009aa497c57df89f47066dca269bb6cb2eaea55703d427deb7d"
+  },
+  "source_object_sha256": "eebc8381ed0dbe7e0007d27284db79ac93ae33462ad630a145eb3a663abf82a1",
+  "archive_sha256": "56b1a0342f81d2d5b318c6152f923fa380f34d655cb0c4da6d60231e958b6352",
+  "archive_member_sha256": "1d80615bfb8c609c67de14367a06381f77b9091b1e9d3f97d674dcf352369832",
+  "raw_source_matches_archive": true,
+  "exact_linked_stock": true,
+  "new_bytes": 468,
+  "reused_zero_hook_bytes": 4,
+  "text_sha256": "dd3ca1a66eff5e5c2cf2e9564ddc67fe6085ea74f1adeb93a48b75ff1329fe1e",
+  "stock_sha256": "dd3ca1a66eff5e5c2cf2e9564ddc67fe6085ea74f1adeb93a48b75ff1329fe1e",
+  "linked_elf_sha256": "683bef4772a225c1c1ab42e0ca51d259e933589d9fa5a9ed9d12ae6aee89f7e5",
+  "original_calls": [
+    {
+      "instruction": "0xa99a",
+      "target": "0xA9A8"
+    }
+  ],
+  "relocations": [
+    {
+      "offset": 454,
+      "type": 10,
+      "symbol": "__aeabi_idiv0"
+    }
+  ],
+  "correct_extents": {
+    "idiv": [
+      "0xA7D4",
+      "0xA9A0"
+    ],
+    "idivmod": [
+      "0xA9A0",
+      "0xA9A8"
+    ]
+  },
+  "historical_idivmod_row_overlaps_zero_hook": true,
+  "denominator_54_increment": 0,
+  "independent_review": "pending",
+  "limits": "Focused unchanged source rebuild, not vendor full-build/object reproduction or whole firmware completeness. Original symbol rows preserved."
+}

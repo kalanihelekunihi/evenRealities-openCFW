@@ -1,0 +1,15 @@
+# Offset-256 C-SKY accessor review
+
+Decision: bounded static interpretation supported, review-ready for coordinator consideration; not admitted. [OFFSET256-VERIFICATION.json](OFFSET256-VERIFICATION.json) independently checks packet manifest, image/payload/body/tool hashes, exact payload body, consumed caller disassembly and ownership contract pins. All match. No original-instruction execution or author-verifier rerun occurred.
+
+Conditional base `0x10203004`, child `[0x28C0,0x28D0)` and unique complete-child start `0xC590` give payload `[0xEE50,0xEE60)` for runtime `[0x102058C4,0x102058D4)`. The stored decode tiles this extent with six returned-body instructions (14 bytes) plus a 2-byte BKPT at `0x102058D2`. Ordinary pop/return excludes the trailing BKPT; classification/admission must account for that byte span separately rather than label 16 executed function bytes. “coverage_count_pending_admission=14” is a proposal count, not current reviewed coverage.
+
+Push/link save, r1 output preservation, addi 256, direct load helper, store r0 and return support base+256 modulo 32 bits, load-before-store alias ordering and returned loaded word. Helper `0x102055EC` bytes agree with the existing two-instruction load/return decode. Bounds/alignment/access permissions and hardware memory identity remain unproved. Python fixtures demonstrate the model, not independent ISA semantics or successful device reads.
+
+Pinned caller decode at `0x10205B2E` selects stack+4, `0x10205B30` loads base from global root+0x5C4, `0x10205B34` calls accessor, and `0x10205B44` reloads stack+4 after another accessor call. This supports observed ABI/setup; it does not establish global-field purpose, live reachability or output lifetime across the intervening call. One direct BSR is a census within this decode, not every possible caller.
+
+The recognized-scope task scan and adjacent indexed packet are disjoint at `0x102058C4`. The scan is regex-based supporting evidence; it excludes nonstandard scope forms and standalone output ownership outside campaign tasks. No concrete externally owned overlapping writer is established. Shared helper and adjacent bodies must not be newly counted.
+
+Admission requirements: coordinator task/adoption record with stable function ID and concrete owner/reviewer IDs; G1 receipt pin; direct decoder/caller provenance and exact reviewed hashes; instruction/edge/pseudocode relationships; separate BKPT classification; immutable worker/review decision; serialized global ownership and image/payload coverage adoption. Results already provide campaign/target/image/address-space/ISA, author ID, decoder argv/exit and caller hash, improving upon the predecessor packet. Formal coordinator acceptance and coverage updates are still absent. Conditional mapping and global code/data accounting remain explicit unresolved campaign facts. No standalone local PASS overrides these gates.
+
+This review changes only additive audit output. No packet/source/state/index/device mutation, downloaded-code execution, broad inventory or denied-path access occurred.

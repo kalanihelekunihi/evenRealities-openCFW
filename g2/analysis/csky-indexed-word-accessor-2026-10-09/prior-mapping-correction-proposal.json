@@ -1,0 +1,47 @@
+{
+  "schema_version": 1,
+  "campaign_id": "20260930T190500Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "record_kind": "additive_prior_mapping_correction_proposal",
+  "original_inputs": [
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-recovery-5316/001/source-map.json",
+      "sha256": "642d5808f4106e3db7581589411ec9e032f75fdb22c1c80e311cce39c00eae3c"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/tasks/P2-csky-recovery-5316.json",
+      "sha256": "513c9cc05986b4cae3dadbb1f6e66a48d2674391a992c5d9c393126012ee121d"
+    }
+  ],
+  "child_range": [
+    10400,
+    10416
+  ],
+  "component_payload_offset": 50576,
+  "reported_payload_range": [
+    62512,
+    62528
+  ],
+  "correct_payload_range": [
+    60976,
+    60992
+  ],
+  "offset_error": 1536,
+  "evidence": [
+    {
+      "path": "g2/analysis/coverage-audit-parallel-2026-10-09/CSKY-REVIEW.md",
+      "sha256": "e69f2b14bae566950b7f8cd1e57e35e13a63d127a421789af281306da293baf5"
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin",
+      "sha256": "49c9aed0126493220a3e48827c267d5e94f64d51d9ede0ccc3e84b8946744584"
+    },
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin",
+      "sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0"
+    }
+  ],
+  "originals_changed": false,
+  "downstream_coverage_correction_performed": false,
+  "remaining_action": "coordinator inspect dependent payload coverage rows before admission"
+}

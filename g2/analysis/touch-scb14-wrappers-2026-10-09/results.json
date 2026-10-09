@@ -1,0 +1,129 @@
+{
+  "argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--platform",
+    "linux/amd64",
+    "--network",
+    "none",
+    "--cap-drop",
+    "ALL",
+    "--security-opt",
+    "no-new-privileges",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi:/tool:ro",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-scb14-holdouts-2026-10-09/outputs/14.2.Rel1:/input:ro",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-scb14-wrappers-2026-10-09/outputs:/out",
+    "ubuntu@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55",
+    "/tool/bin/arm-none-eabi-ld",
+    "--gc-sections",
+    "-u",
+    "Cy_SCB_WriteArray",
+    "-u",
+    "Cy_SCB_WriteDefaultArray",
+    "-T",
+    "/out/link.ld",
+    "/input/public.o",
+    "-o",
+    "/out/linked.elf"
+  ],
+  "exit_code": 0,
+  "diagnostics": "",
+  "sections": [
+    {
+      "section": ".read_helper",
+      "address": 37400,
+      "absolute_payload_offset": 24376,
+      "declared_bytes": 56,
+      "linked_bytes": 56,
+      "exact": true,
+      "sha256": "07627776d2bc275029e974a40d0944d6b87502cfea118880b8d60d6c3fa97cc7",
+      "stock_sha256": "07627776d2bc275029e974a40d0944d6b87502cfea118880b8d60d6c3fa97cc7",
+      "reused_dependency": true
+    },
+    {
+      "section": ".read",
+      "address": 37456,
+      "absolute_payload_offset": 24432,
+      "declared_bytes": 30,
+      "linked_bytes": 30,
+      "exact": true,
+      "sha256": "c7729e5dfb38b7391112b5eeeb9e0a8b0fc0d2ad0bc2e1e9b53b353b401e5e49",
+      "stock_sha256": "c7729e5dfb38b7391112b5eeeb9e0a8b0fc0d2ad0bc2e1e9b53b353b401e5e49",
+      "reused_dependency": false
+    },
+    {
+      "section": ".write_helper",
+      "address": 37486,
+      "absolute_payload_offset": 24462,
+      "declared_bytes": 56,
+      "linked_bytes": 56,
+      "exact": true,
+      "sha256": "ba8eabab79e5f3cf46e4b9b7bd76456a262ed1ff7d3780885a747f9eb6e1b434",
+      "stock_sha256": "ba8eabab79e5f3cf46e4b9b7bd76456a262ed1ff7d3780885a747f9eb6e1b434",
+      "reused_dependency": true
+    },
+    {
+      "section": ".write",
+      "address": 37542,
+      "absolute_payload_offset": 24518,
+      "declared_bytes": 48,
+      "linked_bytes": 48,
+      "exact": true,
+      "sha256": "e3bd934582667c74ed28fa5a43ce49d2a70802d22b01b6f01ff19994fa474ce9",
+      "stock_sha256": "e3bd934582667c74ed28fa5a43ce49d2a70802d22b01b6f01ff19994fa474ce9",
+      "reused_dependency": false
+    },
+    {
+      "section": ".default_helper",
+      "address": 37590,
+      "absolute_payload_offset": 24566,
+      "declared_bytes": 16,
+      "linked_bytes": 16,
+      "exact": true,
+      "sha256": "ec65352149705e5d99247c6304f60772bc6feacccd2c020952f45b32e2c531b1",
+      "stock_sha256": "ec65352149705e5d99247c6304f60772bc6feacccd2c020952f45b32e2c531b1",
+      "reused_dependency": true
+    },
+    {
+      "section": ".default",
+      "address": 37606,
+      "absolute_payload_offset": 24582,
+      "declared_bytes": 48,
+      "linked_bytes": 48,
+      "exact": true,
+      "sha256": "a138965686502bfecef80f1c8972059b8ea8379e3ea2f23ffd3ad471f749284b",
+      "stock_sha256": "a138965686502bfecef80f1c8972059b8ea8379e3ea2f23ffd3ad471f749284b",
+      "reused_dependency": false
+    }
+  ],
+  "original_calls": [
+    {
+      "address": 37478,
+      "target": 37400,
+      "bytes": "fff7d7ff"
+    },
+    {
+      "address": 37578,
+      "target": 37486,
+      "bytes": "fff7d0ff"
+    },
+    {
+      "address": 37642,
+      "target": 37590,
+      "bytes": "fff7e4ff"
+    }
+  ],
+  "input_object_sha256": "4c3849be4ad73caf2487ca46e1f96eda9a146f7c415248372095f355b62bf0c1",
+  "link_script_sha256": "ef6af8abcb92cbe0ed2509097683e264d93187e28c7440eaa9e480d1a8dba061",
+  "linker_sha256": "6d859aa8ace34f7bf205fc1f1beb5bbdfe6dc10a3c96efcf36271983c54d254d",
+  "linked_elf_sha256": "65cdfe731849a3ba1913682f967f44b61145968d2ac3ba54ba2fd065c1684049",
+  "scope_overlap": [],
+  "new_wrapper_bytes": 126,
+  "reused_helper_bytes": 128,
+  "original_execution": false,
+  "admitted": false
+}

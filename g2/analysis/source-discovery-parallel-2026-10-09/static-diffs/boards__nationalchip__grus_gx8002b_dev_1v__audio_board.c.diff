@@ -1,0 +1,28 @@
+diff --git a/third-party/upstream/nationalchip-lvp-kws/boards/nationalchip/grus_gx8002b_dev_1v/audio_board.c b/g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/nationalchip-lvp-aiot/boards/nationalchip/grus_gx8002b_dev_1v/audio_board.c
+index 015ab9048..949d23538 100644
+--- a/third-party/upstream/nationalchip-lvp-kws/boards/nationalchip/grus_gx8002b_dev_1v/audio_board.c
++++ b/g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/nationalchip-lvp-aiot/boards/nationalchip/grus_gx8002b_dev_1v/audio_board.c
+@@ -1,5 +1,5 @@
+ /* Grus
+- * Copyright (C) 2001-2020 NationalChip Co., Ltd
++ * Copyright (C) 2001-2023 NationalChip Co., Ltd
+  * ALL RIGHTS RESERVED!
+  *
+  * audio_board.h:
+@@ -199,16 +199,8 @@ static LVP_AUDIO_IN_PARAM_CTRL g_audio_in_param_ctrl = {
+         .i2s.bclk_sel    = BCLK_MODE_64FS,
+         .i2s.i2s_fs      = SAMPLE_RATE_16K,
+ 
+-#if (defined CONFIG_TYPE_AMIC)
+         .left_source     = I2S_SOURCE_SADC,
+         .right_source    = I2S_SOURCE_SADC,
+-#elif (defined CONFIG_TYPE_DMIC)
+-        .left_source     = I2S_SOURCE_PDM_LEFT,
+-        .right_source    = I2S_SOURCE_PDM_RIGHT,
+-#elif (defined CONFIG_TYPE_I2S_MASTER || defined CONFIG_TYPE_I2S_SLAVE)
+-        .left_source     = I2S_SOURCE_I2SIN_LEFT,
+-        .right_source    = I2S_SOURCE_I2SIN_RIGHT,
+-#endif
+     },
+     .spectrum = {
+         .endian =ENDIAN_LITTLE_16BIT,

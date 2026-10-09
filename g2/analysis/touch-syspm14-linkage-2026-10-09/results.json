@@ -1,0 +1,265 @@
+{
+  "argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--platform",
+    "linux/amd64",
+    "--network",
+    "none",
+    "--cap-drop",
+    "ALL",
+    "--security-opt",
+    "no-new-privileges",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi:/tool:ro",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-pdl14-finite-census-2026-10-09/outputs/cy_syspm.c:/input:ro",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-syspm14-linkage-2026-10-09/outputs:/out",
+    "ubuntu@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55",
+    "/tool/bin/arm-none-eabi-ld",
+    "--gc-sections",
+    "-T",
+    "/out/link.ld",
+    "/input/public.o",
+    "/out/assembly.o",
+    "-o",
+    "/out/linked.elf"
+  ],
+  "diagnostics": "",
+  "original_calls": [
+    {
+      "instruction": "0xa536",
+      "target": "0xa444"
+    },
+    {
+      "instruction": "0xa53e",
+      "target": "0x4492"
+    },
+    {
+      "instruction": "0xa550",
+      "target": "0xa444"
+    },
+    {
+      "instruction": "0xa554",
+      "target": "0xa374"
+    },
+    {
+      "instruction": "0xa55a",
+      "target": "0x449a"
+    },
+    {
+      "instruction": "0xa56a",
+      "target": "0xa444"
+    },
+    {
+      "instruction": "0xa57a",
+      "target": "0xa444"
+    },
+    {
+      "instruction": "0xa59a",
+      "target": "0xa444"
+    },
+    {
+      "instruction": "0xa5a2",
+      "target": "0x4492"
+    },
+    {
+      "instruction": "0xa5b4",
+      "target": "0xa444"
+    },
+    {
+      "instruction": "0xa5b8",
+      "target": "0xa388"
+    },
+    {
+      "instruction": "0xa5be",
+      "target": "0x449a"
+    },
+    {
+      "instruction": "0xa5d2",
+      "target": "0xa444"
+    },
+    {
+      "instruction": "0xa5e8",
+      "target": "0xa444"
+    }
+  ],
+  "original_callback_literal_references": [
+    {
+      "instruction": "0xa3c4",
+      "literal": "0xa440",
+      "value": "0x20000F34"
+    },
+    {
+      "instruction": "0xa416",
+      "literal": "0xa440",
+      "value": "0x20000F34"
+    },
+    {
+      "instruction": "0xa420",
+      "literal": "0xa440",
+      "value": "0x20000F34"
+    }
+  ],
+  "sections": [
+    {
+      "section": "assembly",
+      "address": "0x4480",
+      "expected_bytes": 32,
+      "linked_bytes": 32,
+      "exact": true,
+      "sha256": "02cb5cdf6b3c45ffd15d390fe015586fa14e4a7f5950424848b068ceb7343347",
+      "stock_sha256": "02cb5cdf6b3c45ffd15d390fe015586fa14e4a7f5950424848b068ceb7343347",
+      "dependency": true,
+      "mismatch_positions": []
+    },
+    {
+      "section": "sleep_direct",
+      "address": "0xa374",
+      "expected_bytes": 20,
+      "linked_bytes": 20,
+      "exact": true,
+      "sha256": "d2319dac3575721c23c085ee94815b13b8321cf5929b33d005a36d0fb044e557",
+      "stock_sha256": "d2319dac3575721c23c085ee94815b13b8321cf5929b33d005a36d0fb044e557",
+      "dependency": true,
+      "mismatch_positions": []
+    },
+    {
+      "section": "deep_direct",
+      "address": "0xa388",
+      "expected_bytes": 40,
+      "linked_bytes": 40,
+      "exact": true,
+      "sha256": "0e4b4c44d64537314c82a430fd1c38800a937fd0806d8c61a6c8c8e10e00f6b8",
+      "stock_sha256": "0e4b4c44d64537314c82a430fd1c38800a937fd0806d8c61a6c8c8e10e00f6b8",
+      "dependency": true,
+      "mismatch_positions": []
+    },
+    {
+      "section": "register",
+      "address": "0xa3b0",
+      "expected_bytes": 148,
+      "linked_bytes": 148,
+      "exact": true,
+      "sha256": "83c51e104a2756931d5385fee580191ce580681725b461ecb75950fa7b42c5ab",
+      "stock_sha256": "83c51e104a2756931d5385fee580191ce580681725b461ecb75950fa7b42c5ab",
+      "dependency": false,
+      "mismatch_positions": []
+    },
+    {
+      "section": "execute",
+      "address": "0xa444",
+      "expected_bytes": 220,
+      "linked_bytes": 220,
+      "exact": false,
+      "sha256": "5b197c38d2d9d0d69ec8e61b87f99669187ed9bd764ba904c2c030b1e8c6be61",
+      "stock_sha256": "4b3f5d77674a985e154c2bc38f6dd56a917c2c8512eaa13fd6bca1cf36d3b646",
+      "dependency": true,
+      "mismatch_positions": [
+        52,
+        64,
+        120,
+        122,
+        142,
+        144,
+        148,
+        149,
+        150,
+        151,
+        152,
+        153,
+        154,
+        155,
+        156,
+        157,
+        158,
+        159,
+        160,
+        161,
+        162,
+        163,
+        164,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        171,
+        172,
+        173,
+        174,
+        175,
+        176,
+        177,
+        178,
+        179,
+        180,
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        191,
+        192,
+        194,
+        195,
+        196,
+        197,
+        198,
+        199,
+        200,
+        201,
+        202,
+        203,
+        204,
+        205,
+        206,
+        207,
+        208,
+        209,
+        210,
+        211
+      ]
+    },
+    {
+      "section": "sleep",
+      "address": "0xa528",
+      "expected_bytes": 100,
+      "linked_bytes": 100,
+      "exact": true,
+      "sha256": "e59f1056b6358733edd691fda02899c0175d3b458161c72bda433d502332606c",
+      "stock_sha256": "e59f1056b6358733edd691fda02899c0175d3b458161c72bda433d502332606c",
+      "dependency": false,
+      "mismatch_positions": []
+    },
+    {
+      "section": "deep",
+      "address": "0xa58c",
+      "expected_bytes": 104,
+      "linked_bytes": 104,
+      "exact": true,
+      "sha256": "67c1d9529de5d0ac272acc1e120f060e861cee20eb496b19a573231483668c38",
+      "stock_sha256": "67c1d9529de5d0ac272acc1e120f060e861cee20eb496b19a573231483668c38",
+      "dependency": false,
+      "mismatch_positions": []
+    }
+  ],
+  "input_object_sha256": "f28d033297fbd4a8c4141838e22b76f2a751550ae705dd8cb1081e40abfcae03",
+  "assembly_object_sha256": "4fcad330e4cc3da31fdbe12a1ad98e0686fd5beb68af993f7e725d44e67d5e39",
+  "link_script_sha256": "628c60487a8f953661bf590363cec43d3c776f6c863a3716c3dfa570ced56254",
+  "linked_elf_sha256": "7f91700b7e828232b0121f0f8f8ef3c9ce136c26ef98db246aecd2e2aecd7878",
+  "new_selected_exact_functions": 3,
+  "new_selected_exact_bytes": 352,
+  "independent_review": "pending",
+  "original_execution": false,
+  "manual_byte_patches": false,
+  "limits": "ExecuteCallback dependency intentionally retained mismatched. Wrapper exactness is local/static only; no complete sleep composition or physical sleep/IRQ proof. No dependency mismatch concealed."
+}

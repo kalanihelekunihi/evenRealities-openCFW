@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "payload_path": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+  "payload_sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+  "result_receipt_sha256": "70dc290f1722a071a9185ad82b41766182a8eaa5bc7136903b6a63e8757f59ae",
+  "targets": [
+    {
+      "function": "Cy_SCB_ReadArrayNoCheck",
+      "flash_address": 37400,
+      "flash_base": 13056,
+      "wrapper_bytes": 32,
+      "wrapper_stripped_offset": 24344,
+      "absolute_payload_offset": 24376,
+      "bytes": 56,
+      "sha256": "07627776d2bc275029e974a40d0944d6b87502cfea118880b8d60d6c3fa97cc7"
+    },
+    {
+      "function": "Cy_SCB_WriteArrayNoCheck",
+      "flash_address": 37486,
+      "flash_base": 13056,
+      "wrapper_bytes": 32,
+      "wrapper_stripped_offset": 24430,
+      "absolute_payload_offset": 24462,
+      "bytes": 56,
+      "sha256": "ba8eabab79e5f3cf46e4b9b7bd76456a262ed1ff7d3780885a747f9eb6e1b434"
+    },
+    {
+      "function": "Cy_SCB_WriteDefaultArrayNoCheck",
+      "flash_address": 37590,
+      "flash_base": 13056,
+      "wrapper_bytes": 32,
+      "wrapper_stripped_offset": 24534,
+      "absolute_payload_offset": 24566,
+      "bytes": 16,
+      "sha256": "ec65352149705e5d99247c6304f60772bc6feacccd2c020952f45b32e2c531b1"
+    }
+  ],
+  "legacy_records_mutated": false
+}

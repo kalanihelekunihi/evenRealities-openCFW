@@ -1,0 +1,89 @@
+{
+  "argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--platform",
+    "linux/amd64",
+    "--network",
+    "none",
+    "--cap-drop",
+    "ALL",
+    "--security-opt",
+    "no-new-privileges",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi:/tool:ro",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-pdl14-finite-census-2026-10-09/outputs/cy_sysclk.c:/input:ro",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-clkhf14-attribution-2026-10-09/outputs:/out",
+    "ubuntu@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55",
+    "/tool/bin/arm-none-eabi-ld",
+    "--gc-sections",
+    "-T",
+    "/out/link.ld",
+    "/input/public.o",
+    "-o",
+    "/out/linked.elf"
+  ],
+  "diagnostics": "",
+  "original_calls": [
+    {
+      "instruction": "0x9f50",
+      "target": "0x9f34",
+      "bytes": "fff7f0ff"
+    },
+    {
+      "instruction": "0x9f6c",
+      "target": "0x9c38",
+      "bytes": "fff764fe"
+    }
+  ],
+  "original_external_clock_literal": {
+    "instruction": "0x9c38",
+    "literal": "0x9c40",
+    "value": "0x20000f20"
+  },
+  "sections": [
+    {
+      "section": "external",
+      "address": "0x9c38",
+      "expected_bytes": 12,
+      "linked_bytes": 12,
+      "exact": true,
+      "sha256": "491e2ca45c6315a25d55ae3c8b14f2d67fef637e60d669edca9947e912188094",
+      "stock_sha256": "491e2ca45c6315a25d55ae3c8b14f2d67fef637e60d669edca9947e912188094",
+      "historical_attribution": "Cy_SysClk_ExtClkGetFrequency"
+    },
+    {
+      "section": "get_source",
+      "address": "0x9f34",
+      "expected_bytes": 16,
+      "linked_bytes": 16,
+      "exact": true,
+      "sha256": "7d42797d37b1807074916ea58baecd4477bdf46bc85161d6bb79a4d71ac93800",
+      "stock_sha256": "7d42797d37b1807074916ea58baecd4477bdf46bc85161d6bb79a4d71ac93800",
+      "historical_attribution": "Cy_SysClk_ClkHfGetDivider"
+    },
+    {
+      "section": "set_source",
+      "address": "0x9f44",
+      "expected_bytes": 88,
+      "linked_bytes": 88,
+      "exact": true,
+      "sha256": "1cf6e7fe216528316b3853c151b8e6511ac9ab12de65a9f694c34167bc7cfac5",
+      "stock_sha256": "1cf6e7fe216528316b3853c151b8e6511ac9ab12de65a9f694c34167bc7cfac5",
+      "historical_attribution": "Cy_SysClk_ClkHfSetDivider"
+    }
+  ],
+  "input_object_sha256": "273f8ae0d00b8c33631c9f2fe96e645a506dcb4af9b052417535e86fe63174d2",
+  "link_script_sha256": "a3c24b25bc54434080062120383580e61dbe959e675ed2a12424b1620eb5ff41",
+  "linked_elf_sha256": "a4e8e92d37e153e383eeb9d66d761e560d09994df18e39375917a41737634522",
+  "new_candidate_extents": 3,
+  "new_candidate_bytes": 116,
+  "independent_review": "pending",
+  "historical_name_correction": "9F34/9F44 implement HF source selection, not HF division. Original ledger rows preserved; no symbol-file mutation. Review must account for mislabeled SetSource row at A188 independently.",
+  "original_execution": false,
+  "manual_byte_patches": false,
+  "limits": "Unchanged source and stock-address evidence; no runtime clock readiness/frequency/global initialization claim."
+}

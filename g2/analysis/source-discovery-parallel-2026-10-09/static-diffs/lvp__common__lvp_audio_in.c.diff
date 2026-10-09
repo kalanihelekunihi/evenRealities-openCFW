@@ -1,0 +1,120 @@
+diff --git a/third-party/upstream/nationalchip-lvp-kws/lvp/common/lvp_audio_in.c b/g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/nationalchip-lvp-aiot/lvp/common/lvp_audio_in.c
+index 43963b1ad..3ab827702 100644
+--- a/third-party/upstream/nationalchip-lvp-kws/lvp/common/lvp_audio_in.c
++++ b/g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/nationalchip-lvp-aiot/lvp/common/lvp_audio_in.c
+@@ -1,5 +1,5 @@
+ /* Grus
+- * Copyright (C) 2001-2020 NationalChip Co., Ltd
++ * Copyright (C) 2001-2023 NationalChip Co., Ltd
+  * ALL RIGHTS RESERVED!
+  *
+  * grus_loop.c:
+@@ -35,7 +35,6 @@
+ #define LOG_TAG "[LVP_AUD]"
+ 
+ //=================================================================================================
+-
+ typedef struct {
+     unsigned int pcm_read_index;
+     unsigned int pcm_write_index;
+@@ -45,7 +44,7 @@ typedef struct {
+     unsigned int standby_startup_flag   :4;
+     unsigned int reserve                :24;
+ } AUDIO_IN_CTRL;
+-AUDIO_IN_CTRL s_audio_in_ctrl;
++static AUDIO_IN_CTRL s_audio_in_ctrl;
+ 
+ static AUDIO_IN_RECORD_CALLBACK s_audio_in_record_callback = NULL;
+ 
+@@ -278,9 +277,6 @@ DRAM0_STAGE2_SRAM_ATTR static int _LvpAudioInRecordDefaultCallback(unsigned int
+ #elif (defined CONFIG_ENABLE_HARDWARE_FFT)
+ 
+     if (channel & AUDIO_IN_CHANNEL_PCM0) {
+-        int fft_vad = LvpAudioInQueryFFTVad(&sdc_addr[0]);
+-        LvpSetAudioInCtrlVad(fft_vad);
+-
+         LVP_CONTEXT_HEADER *ctx_header = LvpGetContextHeader();
+         int frame_length = ctx_header->fft_dim_per_frame;
+         int frame_number = ctx_header->pcm_frame_num_per_context;
+@@ -293,7 +289,6 @@ DRAM0_STAGE2_SRAM_ATTR static int _LvpAudioInRecordDefaultCallback(unsigned int
+             s_audio_in_ctrl.pcm_read_index       = ctx_index + 2;
+             s_audio_in_ctrl.start_ctx_index      = ctx_index;
+             s_audio_in_ctrl.last_fft_vad         = 1;
+-            s_audio_in_ctrl.delayed_fft_vad      = 1;
+             // printf ("ctx_index:%d, w_index:%d, %d\n", ctx_index, s_audio_in_ctrl.pcm_write_index%ctx_number, s_audio_in_ctrl.pcm_write_index);
+         }
+ 
+@@ -303,22 +298,6 @@ DRAM0_STAGE2_SRAM_ATTR static int _LvpAudioInRecordDefaultCallback(unsigned int
+                 break;
+             }
+ 
+-#ifdef CONFIG_LVP_FFT_VAD_ENABLE
+-            if (fft_vad || s_audio_in_ctrl.pcm_write_index <= (LvpGetLogfbankFrameNumPerChannel() / LvpGetPcmFrameNumPerContext())) {
+-                s_audio_in_ctrl.delayed_fft_vad = 1;
+-                invalid_vad_cnt = 0;
+-            } else {
+-                invalid_vad_cnt++;
+-                if (invalid_vad_cnt >= CONFIG_LVP_FFT_INVALID_VAD_NUM) {
+-                    s_audio_in_ctrl.delayed_fft_vad = 0;
+-                } else {
+-                    s_audio_in_ctrl.delayed_fft_vad = 1;
+-                }
+-            }
+-#else
+-            s_audio_in_ctrl.delayed_fft_vad = 1;
+-#endif
+-
+             // printf ("%d,%d,%d,%d\n", s_audio_in_ctrl.pcm_write_index%ctx_number, ctx_index, s_audio_in_ctrl.pcm_write_index, s_audio_in_ctrl.pcm_read_index);
+             s_audio_in_record_callback(s_audio_in_ctrl.pcm_write_index, &sdc_addr[0]);
+             s_audio_in_ctrl.pcm_write_index++;
+@@ -514,8 +493,6 @@ int _LvpAudioInConfigCallback(void)
+ 
+ #ifdef CONFIG_ENABLE_HARDWARE_LOGFBANK
+     gx_audio_in_set_fftvad_enable(1, 0, LvpGetLogfbankFrameNumPerChannel());
+-#elif (defined CONFIG_ENABLE_HARDWARE_FFT)
+-    gx_audio_in_set_fftvad_enable(1, 0, LvpGetFftFrameNumPerChannel());
+ #endif
+ 
+ //    gx_audio_in_set_data_auto_produce_enable(1);
+@@ -570,6 +547,14 @@ int LvpAudioInUpdateReadIndex(int offset)
+     return 0;
+ }
+ 
++int LvpAudioInResetPcmRWIndex(void)
++{
++    if (s_audio_in_ctrl.pcm_write_index - s_audio_in_ctrl.pcm_read_index >= LvpGetContextNum() - LvpGetContextGap()) {
++        s_audio_in_ctrl.pcm_read_index = s_audio_in_ctrl.pcm_write_index - 1;
++    }
++    return 0;
++}
++
+ int LvpGetAudioInCtrlVad(void)
+ {
+     return s_audio_in_ctrl.last_fft_vad;
+@@ -665,7 +650,7 @@ int LvpAudioInQueryFFTVad(unsigned int *sdc_addr)
+         w.w3 = 0;
+         gx_audio_in_set_fftvad_w(w);
+     } else if (distance_noise_smooth >= 3145728 && distance_noise_smooth < 6291456 && vad_param_level != 3) { // 6*2^20
+-        printf (LOG_TAG"vad param 3 [%d]\n", distance_noise_smooth);
++        // printf (LOG_TAG"vad param 3 [%d]\n", distance_noise_smooth);
+         vad_param_level = 3;
+         unsigned short curve_1_a = 1229;
+         unsigned short curve_1_b = 3840;
+@@ -696,7 +681,7 @@ int LvpAudioInQueryFFTVad(unsigned int *sdc_addr)
+         w.w3 = 3;
+         gx_audio_in_set_fftvad_w(w);
+     } else if (distance_noise_smooth <= 20971520 && distance_noise_smooth >= 6291456 && vad_param_level != 2) { // 20*2^20
+-        printf (LOG_TAG"vad param 2 [%d]\n", distance_noise_smooth);
++        // printf (LOG_TAG"vad param 2 [%d]\n", distance_noise_smooth);
+         vad_param_level = 2;
+         unsigned short curve_1_a = 1229;
+         unsigned short curve_1_b = 3840;
+@@ -727,7 +712,7 @@ int LvpAudioInQueryFFTVad(unsigned int *sdc_addr)
+         w.w3 = 10;
+         gx_audio_in_set_fftvad_w(w);
+     }  else if (distance_noise_smooth > 20971520 && vad_param_level != 1) { // 20*2^20
+-        printf (LOG_TAG"vad param 1 [%d]\n", distance_noise_smooth);
++        // printf (LOG_TAG"vad param 1 [%d]\n", distance_noise_smooth);
+         vad_param_level = 1;
+         unsigned short curve_1_a = 1024;
+         unsigned short curve_1_b = 3840;

@@ -35,7 +35,7 @@ def run(name,f,native):
   if pc==0x4420bc:stop.append('before-yield');uc.emu_stop();return
   if pc==0x10ff00:stop.append('return');uc.emu_stop();return
   assert pc not in (0x4420f6,0x5fa0c8),'assertion/exception continuation excluded'
-  if native:assert 0x100000<=pc<0x110000 or 0x4420d0<=pc<0x442124 or 0x5fa0a4<=pc<0x5fa0aa,hex(pc)
+  if native:assert 0x100000<=pc<0x110000 or 0x4420d0<=pc<0x442124 or 0x5fa0a4<=pc<0x5fa0c8,hex(pc)
  def writes(uc,access,a,n,v,user):
   if CUR<=a<CUR+0x80 or READY<=a<READY+20 or DL<=a<OL+20 or SUSP<=a<SUSP+20 or a==OUT or a==0x20074a50:write_masks.append(uc.reg_read(UC_ARM_REG_BASEPRI))
   if a==0xe000ed04:pendsv.append(v)

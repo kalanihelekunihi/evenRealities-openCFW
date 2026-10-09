@@ -1,0 +1,156 @@
+{
+  "argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--platform",
+    "linux/amd64",
+    "--network",
+    "none",
+    "--cap-drop",
+    "ALL",
+    "--security-opt",
+    "no-new-privileges",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi:/tool:ro",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-pdl14-finite-census-2026-10-09/outputs/cy_sysclk.c:/input:ro",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-sysclk14-frequency-linkage-2026-10-09/outputs:/out",
+    "ubuntu@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55",
+    "/tool/bin/arm-none-eabi-ld",
+    "--gc-sections",
+    "-T",
+    "/out/link.ld",
+    "/input/public.o",
+    "/out/assembly.o",
+    "-o",
+    "/out/linked.elf"
+  ],
+  "diagnostics": "",
+  "original_calls": [
+    {
+      "instruction": "0x9cbe",
+      "target": "0x9c44",
+      "bytes": "fff7c1ff"
+    },
+    {
+      "instruction": "0x9cd0",
+      "target": "0xa6c0",
+      "bytes": "00f0f6fc"
+    },
+    {
+      "instruction": "0x9cd6",
+      "target": "0x4492",
+      "bytes": "faf7dcfb"
+    },
+    {
+      "instruction": "0x9d06",
+      "target": "0x4480",
+      "bytes": "faf7bbfb"
+    },
+    {
+      "instruction": "0x9d10",
+      "target": "0x449a",
+      "bytes": "faf7c3fb"
+    },
+    {
+      "instruction": "0x9d30",
+      "target": "0x4480",
+      "bytes": "faf7a6fb"
+    },
+    {
+      "instruction": "0x9fac",
+      "target": "0x9f34",
+      "bytes": "fff7c2ff"
+    },
+    {
+      "instruction": "0x9fbc",
+      "target": "0x9c44",
+      "bytes": "fff742fe"
+    },
+    {
+      "instruction": "0x9fc8",
+      "target": "0x9c38",
+      "bytes": "fff736fe"
+    }
+  ],
+  "sections": [
+    {
+      "section": "assembly",
+      "address": "0x4480",
+      "expected_bytes": 32,
+      "linked_bytes": 32,
+      "exact": true,
+      "sha256": "02cb5cdf6b3c45ffd15d390fe015586fa14e4a7f5950424848b068ceb7343347",
+      "stock_sha256": "02cb5cdf6b3c45ffd15d390fe015586fa14e4a7f5950424848b068ceb7343347",
+      "reused_dependency": true
+    },
+    {
+      "section": "external",
+      "address": "0x9c38",
+      "expected_bytes": 12,
+      "linked_bytes": 12,
+      "exact": true,
+      "sha256": "491e2ca45c6315a25d55ae3c8b14f2d67fef637e60d669edca9947e912188094",
+      "stock_sha256": "491e2ca45c6315a25d55ae3c8b14f2d67fef637e60d669edca9947e912188094",
+      "reused_dependency": true
+    },
+    {
+      "section": "imo_get",
+      "address": "0x9c44",
+      "expected_bytes": 60,
+      "linked_bytes": 60,
+      "exact": true,
+      "sha256": "af43c7b3a6a23cafe49d4ba582f10f4a3ec98b150898327fca2cefc553edc0f9",
+      "stock_sha256": "af43c7b3a6a23cafe49d4ba582f10f4a3ec98b150898327fca2cefc553edc0f9",
+      "reused_dependency": true
+    },
+    {
+      "section": "imo_set",
+      "address": "0x9c80",
+      "expected_bytes": 272,
+      "linked_bytes": 272,
+      "exact": true,
+      "sha256": "23bb5385728976dbfd779cb6d4e0db8bd69afc911f35d15b7445427b708b5e83",
+      "stock_sha256": "23bb5385728976dbfd779cb6d4e0db8bd69afc911f35d15b7445427b708b5e83",
+      "reused_dependency": false
+    },
+    {
+      "section": "source_get",
+      "address": "0x9f34",
+      "expected_bytes": 16,
+      "linked_bytes": 16,
+      "exact": true,
+      "sha256": "7d42797d37b1807074916ea58baecd4477bdf46bc85161d6bb79a4d71ac93800",
+      "stock_sha256": "7d42797d37b1807074916ea58baecd4477bdf46bc85161d6bb79a4d71ac93800",
+      "reused_dependency": true
+    },
+    {
+      "section": "frequency",
+      "address": "0x9f9c",
+      "expected_bytes": 56,
+      "linked_bytes": 56,
+      "exact": true,
+      "sha256": "ddc2c641dcdf29a75c1e6c449a57348a0dd63d297d85a464e0d67f712b8eb27f",
+      "stock_sha256": "ddc2c641dcdf29a75c1e6c449a57348a0dd63d297d85a464e0d67f712b8eb27f",
+      "reused_dependency": false
+    }
+  ],
+  "input_object_sha256": "273f8ae0d00b8c33631c9f2fe96e645a506dcb4af9b052417535e86fe63174d2",
+  "assembly_object_sha256": "4fcad330e4cc3da31fdbe12a1ad98e0686fd5beb68af993f7e725d44e67d5e39",
+  "link_script_sha256": "3024cf1ca7d6539a855ea00122ebfeb5cb5537f5702512b5d70acf3f3dcc34ec",
+  "linked_elf_sha256": "7338d0458d65a1ab6e17633466abb57a524e8d64a2f6fe442ff66b6650a2cd4e",
+  "new_selected_candidate_functions": 2,
+  "new_selected_candidate_bytes": 328,
+  "reused_dependency_bytes": 120,
+  "independent_review": "pending",
+  "original_execution": false,
+  "manual_byte_patches": false,
+  "unimplemented_external_binding": {
+    "symbol": "__aeabi_uidiv",
+    "stock_target": "0xA6C0",
+    "evidence": "original BL at 0x9CD0; no executable body/stub supplied"
+  },
+  "limits": "Static comparator only. Compiler division body unresolved here; not a complete linked executable or runtime/physical clock proof."
+}

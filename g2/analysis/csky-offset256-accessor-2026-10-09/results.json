@@ -1,0 +1,128 @@
+{
+  "status": "partial_unreviewed",
+  "accepted": false,
+  "runtime_mapping": "conditional XIP only",
+  "extent": [
+    "0x102058c4",
+    "0x102058d4"
+  ],
+  "bytes": 16,
+  "body_sha256": "01a13ea05f3c81bf438f4613e4947a6ae9d47dbed8ebfaf4b88beb5c21ab6102",
+  "image": "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin",
+  "image_sha256": "49c9aed0126493220a3e48827c267d5e94f64d51d9ede0ccc3e84b8946744584",
+  "child_offsets": [
+    "0x28c0",
+    "0x28d0"
+  ],
+  "codec_payload_offsets": [
+    "0xee50",
+    "0xee60"
+  ],
+  "tool_sha256": "7150f7ffc2ac163f3d2d465620e5dac96df4b29411e5d0944419c41657cc2382",
+  "contracts_scanned": 117,
+  "overlaps": [],
+  "callers": [
+    "10205b34:\te3fffec8 \tbsr      \t0x102058c4\t// 0x102058c4"
+  ],
+  "static_checks": "PASS bytes, helper, decoder tiling, direct caller census",
+  "semantic_fixtures": [
+    {
+      "base": 4096,
+      "effective_address": 4352,
+      "output_word": 0,
+      "return_r0": 0
+    },
+    {
+      "base": 4096,
+      "effective_address": 4352,
+      "output_word": 305419896,
+      "return_r0": 305419896
+    },
+    {
+      "base": 4294967288,
+      "effective_address": 248,
+      "output_word": 4294967295,
+      "return_r0": 4294967295
+    },
+    {
+      "base": 4294967040,
+      "effective_address": 0,
+      "output_word": 7,
+      "return_r0": 7
+    }
+  ],
+  "instruction_execution": false,
+  "physical_state_claim": false,
+  "codec_payload_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "schema_version": 1,
+  "campaign_id": "20260930T190500Z",
+  "target_sha256": "f4dfb0b49ad3de3c2daf17f8a27a157c3dc98411d6a0d3ab2cfd0918f41b9afa",
+  "component": "codec",
+  "image_id": "binh_a_stage2_xip",
+  "address_space": "conditional_stage2_xip_10203004",
+  "isa_mode": "C-SKY_ABIv2",
+  "entry": 270555332,
+  "runtime_range": [
+    270555332,
+    270555348
+  ],
+  "child_range": [
+    10432,
+    10448
+  ],
+  "payload_range": [
+    61008,
+    61024
+  ],
+  "decoder_argv": [
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-objdump",
+    "-D",
+    "--disassemble-zeroes",
+    "-b",
+    "binary",
+    "-m",
+    "csky",
+    "-EL",
+    "--adjust-vma=0x10203004",
+    "--start-address=0x102058c4",
+    "--stop-address=0x102058d4",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin"
+  ],
+  "decoder_exit_code": 0,
+  "author_task_id": "01a0f4a0-6c2a-70e7-8394-b1e0c936f028",
+  "coverage_count_pending_admission": 14,
+  "trailing_bkpt_bytes": 2,
+  "consumed_caller_disassembly": {
+    "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-recovery-5316/001/full-xip.objdump.txt",
+    "sha256": "13a9f1eef49d3cfdc8e4795164223968481701fd7a029bbc6a1ac530e30029b7"
+  },
+  "payload_mapping_validation": "complete child image match at 0xC590 plus exact body comparison",
+  "independent_review": {
+    "reviewer_task_id": "01a120b1-9d22-7596-9ee5-a6d93342c014",
+    "records": [
+      {
+        "path": "g2/analysis/coverage-audit-parallel-2026-10-09/OFFSET256-REVIEW.md",
+        "sha256": "7632f5768b04a596056ce5af4eb9b8e627de5495b1c73c8980c1ad9609f6765a"
+      },
+      {
+        "path": "g2/analysis/coverage-audit-parallel-2026-10-09/OFFSET256-VERIFICATION.json",
+        "sha256": "5439477b7bf846594cfc72c2ba39bb6dc6f69a7b7610390f64725bc730eb3572"
+      }
+    ],
+    "decision": "bounded_static_supported_not_admission"
+  },
+  "accounting": {
+    "returned_body_range": [
+      270555332,
+      270555346
+    ],
+    "returned_body_bytes": 14,
+    "trailing_bkpt_range": [
+      270555346,
+      270555348
+    ],
+    "trailing_bkpt_bytes": 2,
+    "ordinary_return_reaches_bkpt": false,
+    "executed_bytes_verified": false
+  }
+}
