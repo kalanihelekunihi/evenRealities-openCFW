@@ -1,0 +1,103 @@
+004a6bce: push {lr}
+004a6bd0: sub sp, #0x8c
+004a6bd2: add r0, sp, #0x5c
+004a6bd4: movs r1, #0
+004a6bd6: movs r2, #0
+004a6bd8: movs r3, #0
+004a6bda: stm.w r0, {r1, r2, r3}
+004a6bde: add r0, sp, #0x50
+004a6be0: movs r1, #0
+004a6be2: movs r2, #0
+004a6be4: movs r3, #0
+004a6be6: stm.w r0, {r1, r2, r3}
+004a6bea: add r0, sp, #0x68
+004a6bec: movs r1, #0x24
+004a6bee: bl #0x48949c
+004a6bf2: add r2, sp, #0x68
+004a6bf4: add r1, sp, #0x50
+004a6bf6: add r0, sp, #0x5c
+004a6bf8: bl #0x5099f8
+004a6bfc: add r2, sp, #0x68
+004a6bfe: add r1, sp, #0x50
+004a6c00: add r0, sp, #0x5c
+004a6c02: bl #0x4a460c
+004a6c06: bl #0x43d0ce
+004a6c0a: lsls r0, r0, #0x1e
+004a6c0c: bpl #0x4a6c96
+004a6c0e: add r0, sp, #0x68
+004a6c10: vldr s0, [r0, #0x20]
+004a6c14: vcvt.f64.f32 d0, s0
+004a6c18: vstr d0, [sp, #0x48]
+004a6c1c: vldr s0, [r0, #0x1c]
+004a6c20: vcvt.f64.f32 d0, s0
+004a6c24: vstr d0, [sp, #0x40]
+004a6c28: vldr s0, [r0, #0x18]
+004a6c2c: vcvt.f64.f32 d0, s0
+004a6c30: vstr d0, [sp, #0x38]
+004a6c34: vldr s0, [r0, #0x14]
+004a6c38: vcvt.f64.f32 d0, s0
+004a6c3c: vstr d0, [sp, #0x30]
+004a6c40: vldr s0, [r0, #0x10]
+004a6c44: vcvt.f64.f32 d0, s0
+004a6c48: vstr d0, [sp, #0x28]
+004a6c4c: vldr s0, [r0, #0xc]
+004a6c50: vcvt.f64.f32 d0, s0
+004a6c54: vstr d0, [sp, #0x20]
+004a6c58: vldr s0, [r0, #8]
+004a6c5c: vcvt.f64.f32 d0, s0
+004a6c60: vstr d0, [sp, #0x18]
+004a6c64: vldr s0, [r0, #4]
+004a6c68: vcvt.f64.f32 d0, s0
+004a6c6c: vstr d0, [sp, #0x10]
+004a6c70: vldr s0, [sp, #0x68]
+004a6c74: vcvt.f64.f32 d0, s0
+004a6c78: vstr d0, [sp, #8]
+004a6c7c: ldr.w r0, [pc, #0x724]
+004a6c80: str r0, [sp, #4]
+004a6c82: movw r0, #0x13b
+004a6c86: str r0, [sp]
+004a6c88: ldr.w r3, [pc, #0x71c]
+004a6c8c: ldr r2, [pc, #0x24c]
+004a6c8e: ldr r1, [pc, #0x250]
+004a6c90: movs r0, #3
+004a6c92: bl #0x43d574
+004a6c96: bl #0x43d0ce
+004a6c9a: lsls r0, r0, #0x1f
+004a6c9c: bmi #0x4a6ca6
+004a6c9e: bl #0x43d0ce
+004a6ca2: lsls r0, r0, #0x1d
+004a6ca4: bpl #0x4a6d22
+004a6ca6: ldr.w r1, [pc, #0x704]
+004a6caa: add r0, sp, #0x68
+004a6cac: vldr s0, [r0, #0x20]
+004a6cb0: vcvt.f64.f32 d0, s0
+004a6cb4: vstr d0, [sp, #0x40]
+004a6cb8: vldr s0, [r0, #0x1c]
+004a6cbc: vcvt.f64.f32 d0, s0
+004a6cc0: vstr d0, [sp, #0x38]
+004a6cc4: vldr s0, [r0, #0x18]
+004a6cc8: vcvt.f64.f32 d0, s0
+004a6ccc: vstr d0, [sp, #0x30]
+004a6cd0: vldr s0, [r0, #0x14]
+004a6cd4: vcvt.f64.f32 d0, s0
+004a6cd8: vstr d0, [sp, #0x28]
+004a6cdc: vldr s0, [r0, #0x10]
+004a6ce0: vcvt.f64.f32 d0, s0
+004a6ce4: vstr d0, [sp, #0x20]
+004a6ce8: vldr s0, [r0, #0xc]
+004a6cec: vcvt.f64.f32 d0, s0
+004a6cf0: vstr d0, [sp, #0x18]
+004a6cf4: vldr s0, [r0, #8]
+004a6cf8: vcvt.f64.f32 d0, s0
+004a6cfc: vstr d0, [sp, #0x10]
+004a6d00: vldr s0, [r0, #4]
+004a6d04: vcvt.f64.f32 d0, s0
+004a6d08: vstr d0, [sp, #8]
+004a6d0c: vldr s0, [sp, #0x68]
+004a6d10: vcvt.f64.f32 d0, s0
+004a6d14: vstr d0, [sp]
+004a6d18: movs r2, r1
+004a6d1a: movs.w r0, #0xe400000
+004a6d1e: bl #0x43ce9e
+004a6d22: add sp, #0x8c
+004a6d24: pop {pc}

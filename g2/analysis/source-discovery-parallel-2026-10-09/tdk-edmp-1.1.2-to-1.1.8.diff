@@ -1,0 +1,42 @@
+diff --git a/src/imu/inv_imu_edmp.c b/src/imu/inv_imu_edmp.c
+index 968d86f..0571189 100644
+--- a/src/imu/inv_imu_edmp.c
++++ b/src/imu/inv_imu_edmp.c
+@@ -603,6 +603,12 @@ int inv_imu_edmp_set_gaf_parameters(inv_imu_device_t *                   s,
+ 
+ 	/* Preload patch image and enable covariance patch since it will always be required */
+ 	status |= inv_imu_write_sram(s, RAM_CALMAG_IMG_PRGM_BASE, sizeof(img), img);
++	if (acc_odr_us != gyr_odr_us) {
++		/* Supporting all mounting option is costly is terms of MIPS, skip it if possible */
++		(void)memcpy(&key, img + RAM_CALMAG_IMG_CHUNK0_PATCH_KEY_OFFSET, sizeof(key));
++		status |= inv_imu_write_sram(s, EDMP_INVN_ALGO_GAF_PATCH_POINT_CHUNK0, sizeof(key),
++		                             (uint8_t *)&key);
++	}
+ 	(void)memcpy(&key, img + RAM_CALMAG_IMG_PART4_ACCEPTANCE_PATCH_KEY_OFFSET, sizeof(key));
+ 	status |= inv_imu_write_sram(s, EDMP_INVN_ALGO_GAF_PATCH_POINT_RLS_MAG_PART4_ACCEPTANCE,
+ 	                             sizeof(key), (uint8_t *)&key);
+@@ -1051,7 +1057,6 @@ int inv_imu_edmp_set_sif_int_control(inv_imu_device_t *                s,
+ 
+ int inv_imu_edmp_set_mounting_matrix(inv_imu_device_t *s, const int8_t mounting_matrix[9])
+ {
+-	int           status                  = INV_IMU_OK;
+ 	const int16_t edmp_mounting_matrix[9] = {
+ 		(int16_t)mounting_matrix[0] << 14, (int16_t)mounting_matrix[1] << 14,
+ 		(int16_t)mounting_matrix[2] << 14, (int16_t)mounting_matrix[3] << 14,
+@@ -1059,8 +1064,14 @@ int inv_imu_edmp_set_mounting_matrix(inv_imu_device_t *s, const int8_t mounting_
+ 		(int16_t)mounting_matrix[6] << 14, (int16_t)mounting_matrix[7] << 14,
+ 		(int16_t)mounting_matrix[8] << 14,
+ 	};
+-	status |=
+-	    INV_IMU_WRITE_EDMP_SRAM(s, EDMP_GLOBAL_MOUNTING_MATRIX, (uint8_t *)&edmp_mounting_matrix);
++
++	return inv_imu_edmp_set_s16q14_mounting_matrix(s, edmp_mounting_matrix);
++}
++
++int inv_imu_edmp_set_s16q14_mounting_matrix(inv_imu_device_t *s, const int16_t mounting_matrix[9])
++{
++	int status = INV_IMU_OK;
++	status |= INV_IMU_WRITE_EDMP_SRAM(s, EDMP_GLOBAL_MOUNTING_MATRIX, (uint8_t *)mounting_matrix);
+ 
+ 	return status;
+ }

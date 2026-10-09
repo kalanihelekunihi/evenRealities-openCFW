@@ -1,0 +1,66 @@
+{
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "intervals": [
+    {
+      "start": "0x4a35b0",
+      "end_exclusive": "0x4a360e",
+      "label": "bus wrappers",
+      "sha256": "d09e68347e5b1a5848b2252d9e618cdc0fb953554ac375d7c2e2d17995231620"
+    },
+    {
+      "start": "0x4a36ae",
+      "end_exclusive": "0x4a3818",
+      "label": "context setup and literals",
+      "sha256": "3567d7310b007a98aed73597683479428373793330515fca1983811c5abd0bec"
+    },
+    {
+      "start": "0x508e5c",
+      "end_exclusive": "0x509024",
+      "label": "transport subsystem",
+      "sha256": "aa954323eb54b0dd9fc1da21ab8893535bd2b3025963ed5c7c9694095b6679ff"
+    },
+    {
+      "start": "0x506eca",
+      "end_exclusive": "0x507576",
+      "label": "GAF setup",
+      "sha256": "26f073d6a23d4f9ddcffd26ffb20f7530576087ae6483f554f77c392cda3603a"
+    },
+    {
+      "start": "0x507710",
+      "end_exclusive": "0x507726",
+      "label": "mounting Q14 write",
+      "sha256": "c8c609f1c845dd4ec302b6b0fc4a92fce811ef22a90b998276246de36adb02bc"
+    },
+    {
+      "start": "0x4a404e",
+      "end_exclusive": "0x4a405c",
+      "label": "GAF caller",
+      "sha256": "581afa088165b1c7f36fbd7b4303ac1493558f1fd66a2d399781cbbc70f6dc4d"
+    },
+    {
+      "start": "0x4a41c6",
+      "end_exclusive": "0x4a41d8",
+      "label": "mounting cache caller",
+      "sha256": "78e1c3ba7cf1704da12140194ea2aab6683ceade4775f9a465e3a9f56ce063e8"
+    }
+  ],
+  "source_files": {
+    "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/tdk-icm45608-emulator-lead/src/imu/inv_imu_transport.c": "cbd594dbd75959f678985873e011ff8d84b2e298200ba86001ebf0b708de099c",
+    "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/tdk-icm45608-emulator-lead/src/imu/inv_imu_edmp.c": "30a7b0541b33a7e1796324b279b36a41dab89ce95d5e9bbce2bb0f0086f2a19c",
+    "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/tdk-icm45608-emulator-lead/src/imu/inv_imu_edmp_memmap.h": "b1abae1c5ce890f9e76c666492cde84ff4cd01d1a486203d6aa7f5e4508829e5",
+    "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/tdk-icm45608-emulator-lead/src/imu/inv_imu_edmp_defs.h": "cfa9b1909ffbe1593e8f662f09b73fe6b27b6861cd0fcd3a9162e5b66db06b69",
+    "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/tdk-icm45608-emulator-lead/src/imu/inv_imu_regmap_le.h": "1e9fa1a786c6478042566698e76485b2fa614dd55edd3ab2f33da720ecb0e718"
+  },
+  "patch": {
+    "pointer_literal": "0x5076dc",
+    "flash_address": "0x6d53d8",
+    "length": 125,
+    "sha256": "80eb396ba1b365d332aabebed514cccb19f5d5a8eba1d6543be61ceda4fa8b2f",
+    "prefix": "f1700c98f1700cacf1700cc0f1700ce4",
+    "first_key_offset8": "f1700cc0",
+    "sensor_sram_destination": "0xc80",
+    "key_destination": "0xb4"
+  },
+  "direct_calls_to_sram_wrapper": 106,
+  "binding": "protocol structure and authenticated call/literal edges; no exact producer attribution"
+}

@@ -1,0 +1,133 @@
+
+g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0053bb8c <.data+0x103bac>:
+  53bb8c:	b530      	push	{r4, r5, lr}
+  53bb8e:	b0ad      	sub	sp, #180	@ 0xb4
+  53bb90:	0004      	movs	r4, r0
+  53bb92:	a809      	add	r0, sp, #36	@ 0x24
+  53bb94:	2124      	movs	r1, #36	@ 0x24
+  53bb96:	f74d fc81 	bl	0x48949c
+  53bb9a:	f8df 5630 	ldr.w	r5, [pc, #1584]	@ 0x53c1cc
+  53bb9e:	7828      	ldrb	r0, [r5, #0]
+  53bba0:	f88d 0024 	strb.w	r0, [sp, #36]	@ 0x24
+  53bba4:	7868      	ldrb	r0, [r5, #1]
+  53bba6:	b2c0      	uxtb	r0, r0
+  53bba8:	0940      	lsrs	r0, r0, #5
+  53bbaa:	f88d 0025 	strb.w	r0, [sp, #37]	@ 0x25
+  53bbae:	4668      	mov	r0, sp
+  53bbb0:	2124      	movs	r1, #36	@ 0x24
+  53bbb2:	f74d fc73 	bl	0x48949c
+  53bbb6:	7c28      	ldrb	r0, [r5, #16]
+  53bbb8:	f88d 0000 	strb.w	r0, [sp]
+  53bbbc:	7c68      	ldrb	r0, [r5, #17]
+  53bbbe:	b2c0      	uxtb	r0, r0
+  53bbc0:	0940      	lsrs	r0, r0, #5
+  53bbc2:	f88d 0001 	strb.w	r0, [sp, #1]
+  53bbc6:	a824      	add	r0, sp, #144	@ 0x90
+  53bbc8:	2124      	movs	r1, #36	@ 0x24
+  53bbca:	f74d fc67 	bl	0x48949c
+  53bbce:	7e28      	ldrb	r0, [r5, #24]
+  53bbd0:	f88d 0090 	strb.w	r0, [sp, #144]	@ 0x90
+  53bbd4:	7e68      	ldrb	r0, [r5, #25]
+  53bbd6:	b2c0      	uxtb	r0, r0
+  53bbd8:	0940      	lsrs	r0, r0, #5
+  53bbda:	f88d 0091 	strb.w	r0, [sp, #145]	@ 0x91
+  53bbde:	a81b      	add	r0, sp, #108	@ 0x6c
+  53bbe0:	2124      	movs	r1, #36	@ 0x24
+  53bbe2:	f74d fc5b 	bl	0x48949c
+  53bbe6:	f895 0028 	ldrb.w	r0, [r5, #40]	@ 0x28
+  53bbea:	f88d 006c 	strb.w	r0, [sp, #108]	@ 0x6c
+  53bbee:	f895 0029 	ldrb.w	r0, [r5, #41]	@ 0x29
+  53bbf2:	b2c0      	uxtb	r0, r0
+  53bbf4:	0940      	lsrs	r0, r0, #5
+  53bbf6:	f88d 006d 	strb.w	r0, [sp, #109]	@ 0x6d
+  53bbfa:	a812      	add	r0, sp, #72	@ 0x48
+  53bbfc:	2124      	movs	r1, #36	@ 0x24
+  53bbfe:	f74d fc4d 	bl	0x48949c
+  53bc02:	f895 0030 	ldrb.w	r0, [r5, #48]	@ 0x30
+  53bc06:	f88d 0048 	strb.w	r0, [sp, #72]	@ 0x48
+  53bc0a:	f895 0031 	ldrb.w	r0, [r5, #49]	@ 0x31
+  53bc0e:	b2c0      	uxtb	r0, r0
+  53bc10:	0940      	lsrs	r0, r0, #5
+  53bc12:	f88d 0049 	strb.w	r0, [sp, #73]	@ 0x49
+  53bc16:	f7ff fc1f 	bl	0x53b458
+  53bc1a:	2800      	cmp	r0, #0
+  53bc1c:	d45b      	bmi.n	0x53bcd6
+  53bc1e:	6860      	ldr	r0, [r4, #4]
+  53bc20:	2801      	cmp	r0, #1
+  53bc22:	db14      	blt.n	0x53bc4e
+  53bc24:	6820      	ldr	r0, [r4, #0]
+  53bc26:	2801      	cmp	r0, #1
+  53bc28:	db11      	blt.n	0x53bc4e
+  53bc2a:	a809      	add	r0, sp, #36	@ 0x24
+  53bc2c:	f7ff fcb8 	bl	0x53b5a0
+  53bc30:	6862      	ldr	r2, [r4, #4]
+  53bc32:	2100      	movs	r1, #0
+  53bc34:	a809      	add	r0, sp, #36	@ 0x24
+  53bc36:	f7ff fd5b 	bl	0x53b6f0
+  53bc3a:	6822      	ldr	r2, [r4, #0]
+  53bc3c:	2101      	movs	r1, #1
+  53bc3e:	a809      	add	r0, sp, #36	@ 0x24
+  53bc40:	f7ff fd56 	bl	0x53b6f0
+  53bc44:	2203      	movs	r2, #3
+  53bc46:	2104      	movs	r1, #4
+  53bc48:	a809      	add	r0, sp, #36	@ 0x24
+  53bc4a:	f7ff fd51 	bl	0x53b6f0
+  53bc4e:	68a0      	ldr	r0, [r4, #8]
+  53bc50:	2801      	cmp	r0, #1
+  53bc52:	db1f      	blt.n	0x53bc94
+  53bc54:	f89d 0024 	ldrb.w	r0, [sp, #36]	@ 0x24
+  53bc58:	f89d 1000 	ldrb.w	r1, [sp]
+  53bc5c:	4288      	cmp	r0, r1
+  53bc5e:	d107      	bne.n	0x53bc70
+  53bc60:	f89d 0025 	ldrb.w	r0, [sp, #37]	@ 0x25
+  53bc64:	f89d 1001 	ldrb.w	r1, [sp, #1]
+  53bc68:	4288      	cmp	r0, r1
+  53bc6a:	d101      	bne.n	0x53bc70
+  53bc6c:	2501      	movs	r5, #1
+  53bc6e:	e000      	b.n	0x53bc72
+  53bc70:	2500      	movs	r5, #0
+  53bc72:	0028      	movs	r0, r5
+  53bc74:	b2c0      	uxtb	r0, r0
+  53bc76:	2800      	cmp	r0, #0
+  53bc78:	d102      	bne.n	0x53bc80
+  53bc7a:	4668      	mov	r0, sp
+  53bc7c:	f7ff fc90 	bl	0x53b5a0
+  53bc80:	b2ed      	uxtb	r5, r5
+  53bc82:	2d00      	cmp	r5, #0
+  53bc84:	d001      	beq.n	0x53bc8a
+  53bc86:	a809      	add	r0, sp, #36	@ 0x24
+  53bc88:	e000      	b.n	0x53bc8c
+  53bc8a:	4668      	mov	r0, sp
+  53bc8c:	68a2      	ldr	r2, [r4, #8]
+  53bc8e:	2102      	movs	r1, #2
+  53bc90:	f7ff fd2e 	bl	0x53b6f0
+  53bc94:	a824      	add	r0, sp, #144	@ 0x90
+  53bc96:	f7ff fc83 	bl	0x53b5a0
+  53bc9a:	222b      	movs	r2, #43	@ 0x2b
+  53bc9c:	2103      	movs	r1, #3
+  53bc9e:	a824      	add	r0, sp, #144	@ 0x90
+  53bca0:	f7ff fd26 	bl	0x53b6f0
+  53bca4:	a81b      	add	r0, sp, #108	@ 0x6c
+  53bca6:	f7ff fc7b 	bl	0x53b5a0
+  53bcaa:	a812      	add	r0, sp, #72	@ 0x48
+  53bcac:	f7ff fc78 	bl	0x53b5a0
+  53bcb0:	2228      	movs	r2, #40	@ 0x28
+  53bcb2:	2106      	movs	r1, #6
+  53bcb4:	a812      	add	r0, sp, #72	@ 0x48
+  53bcb6:	f7ff fd1b 	bl	0x53b6f0
+  53bcba:	a809      	add	r0, sp, #36	@ 0x24
+  53bcbc:	f7ff feb9 	bl	0x53ba32
+  53bcc0:	4668      	mov	r0, sp
+  53bcc2:	f7ff feb6 	bl	0x53ba32
+  53bcc6:	a824      	add	r0, sp, #144	@ 0x90
+  53bcc8:	f7ff feb3 	bl	0x53ba32
+  53bccc:	a812      	add	r0, sp, #72	@ 0x48
+  53bcce:	f7ff feb0 	bl	0x53ba32
+  53bcd2:	f7ff fb8f 	bl	0x53b3f4
+  53bcd6:	b02d      	add	sp, #180	@ 0xb4
+  53bcd8:	bd30      	pop	{r4, r5, pc}

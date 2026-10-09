@@ -1,0 +1,59 @@
+{
+  "status": "PASS",
+  "timer_comparisons": [
+    {
+      "name": "IRQHandler_ArcTimer0",
+      "stock_bytes": 194,
+      "v46_bytes": 194,
+      "equal": false,
+      "mismatch_byte_positions": 2
+    },
+    {
+      "name": "IRQHandler_ArcTimer1",
+      "stock_bytes": 194,
+      "v46_bytes": 194,
+      "equal": false,
+      "mismatch_byte_positions": 2
+    }
+  ],
+  "timer_meaning": "unchanged linked byte mismatch only; no relocated/source/semantic mismatch inference",
+  "successor_input_hashes": [
+    {
+      "path": "g2/analysis/coverage-audit-parallel-2026-10-09/QPC-REVIEW.md",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/source-discovery-parallel-2026-10-09/em9305-readyset-extension-binding.json",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/source-discovery-parallel-2026-10-09/EM9305-READYSET-OPCODE-LEAD.md",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/em9305-qpc-source-binding-2026-10-09/pseudocode.c",
+      "matches": true
+    }
+  ],
+  "successor_vendor_hashes": [
+    {
+      "path": "third-party/local-vendor/sources/em9305-v4.6/EM9305_SDK/EM9305_EM_BLEU_SDK_v4.6/common/9305/includes/apexextensions.h",
+      "matches": true
+    },
+    {
+      "path": "third-party/local-vendor/sources/em9305-v4.6/EM9305_SDK/EM9305_EM_BLEU_SDK_v4.6/common/9305/includes/apexextensions.s",
+      "matches": true
+    },
+    {
+      "path": "third-party/local-vendor/sources/em9305-v4.6/EM9305_SDK/EM9305_EM_BLEU_SDK_v4.6/libs/third_party/QPC/ports/arcv2em/qf_port.h",
+      "matches": true
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/tools/arc-binutils-001/source/opcodes/arc-ext.c",
+      "matches": true
+    }
+  ],
+  "byte_narrowing_correction": true,
+  "original_instruction_execution": false,
+  "source_rebuild": false
+}

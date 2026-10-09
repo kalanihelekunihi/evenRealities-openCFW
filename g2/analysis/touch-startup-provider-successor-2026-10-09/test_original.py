@@ -11,6 +11,7 @@ with (O/'outputs/linked.elf').open('rb') as f:
   if s.name in ['.text','.init','.fini']:sections.append((s['sh_addr'],s.data()))
 exitelf=R/'g2/analysis/touch-newlib14-startup-exit-2026-10-09/outputs/exit/linked.elf'
 with exitelf.open('rb') as f:s=ELFFile(f).get_section_by_name('.text');sections.append((s['sh_addr'],s.data()))
+with (O/'halt-output-attempt2/default-halt.o').open('rb') as f:s=ELFFile(f).get_section_by_name('.text._exit');sections.append((0xaa40,s.data()))
 registers=[UC_ARM_REG_R4,UC_ARM_REG_R5,UC_ARM_REG_R6,UC_ARM_REG_R7,UC_ARM_REG_R8,UC_ARM_REG_R9,UC_ARM_REG_R10,UC_ARM_REG_R11]
 def run(entry,seed,native,status=0,handler=0):
  u=Uc(UC_ARCH_ARM,UC_MODE_THUMB);u.mem_map(0,0x20000);u.mem_map(0x20000000,0x20000);u.mem_write(0x3300,blob[32:])
@@ -43,5 +44,5 @@ for status in [0,1,-1,0x80000000]:
  for handler in [0,1]:
   for seed in range(4):
    a=run(0xa9ac,seed,False,status,handler);b=run(0xa9ac,seed,True,status,handler);assert a==b;rows.append({'entry':'0xa9ac','seed':seed,'status':status,'handler':handler,'matches':True,'observed':a})
-result={'status':'PASS','cases':len(rows),'comparisons':rows,'limits':'Real stock/rebuilt instructions and exact linker bounds. One synthetic init-array callback and optional stdio callback are simple supplied RAM instructions; no actual runtime callback contents, startup reachability, scheduling, hardware or full program cleanup proved. Real halt branch executes four times; no divide instruction executes. Registers/SP/stack side effects compared.'}
+result={'status':'PASS','cases':len(rows),'comparisons':rows,'native_halt':'genuine default libnosys source-built4bytes now overlaid, unlike preliminary run using stock halt','inputs':{str(p.relative_to(R)):hashlib.sha256(p.read_bytes()).hexdigest() for p in [fw,O/'outputs/linked.elf',exitelf,O/'halt-output-attempt2/default-halt.o']},'limits':'Real stock/rebuilt instructions and exact linker bounds. One synthetic init-array callback and optional stdio callback are simple supplied RAM instructions; no actual runtime callback contents, startup reachability, scheduling, hardware or full program cleanup proved. Real halt branch executes four times; no divide instruction executes. Registers/SP/stack side effects compared.'}
 (O/'original-results.json').write_text(json.dumps(result,indent=2)+'\n');print('PASS',len(rows))

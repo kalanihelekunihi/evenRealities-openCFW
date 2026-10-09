@@ -1,0 +1,173 @@
+{
+  "status": "PASS",
+  "sections": [
+    {
+      "section": ".text.deregister",
+      "address": "0x33c0",
+      "bytes": 32,
+      "relocations": [
+        [
+          20,
+          2,
+          ""
+        ],
+        [
+          24,
+          2,
+          "__TMC_END__"
+        ],
+        [
+          28,
+          2,
+          "_ITM_deregisterTMCloneTable"
+        ]
+      ],
+      "unrelocated_bytes_preserved": true
+    },
+    {
+      "section": ".text.register",
+      "address": "0x33e0",
+      "bytes": 40,
+      "relocations": [
+        [
+          28,
+          2,
+          ""
+        ],
+        [
+          32,
+          2,
+          "__TMC_END__"
+        ],
+        [
+          36,
+          2,
+          "_ITM_registerTMCloneTable"
+        ]
+      ],
+      "unrelocated_bytes_preserved": true
+    },
+    {
+      "section": ".text.dtors",
+      "address": "0x3408",
+      "bytes": 44,
+      "relocations": [
+        [
+          10,
+          10,
+          "deregister_tm_clones"
+        ],
+        [
+          22,
+          10,
+          "__deregister_frame_info"
+        ],
+        [
+          32,
+          2,
+          ""
+        ],
+        [
+          36,
+          2,
+          "__deregister_frame_info"
+        ],
+        [
+          40,
+          2,
+          ""
+        ]
+      ],
+      "unrelocated_bytes_preserved": true
+    },
+    {
+      "section": ".text.frame",
+      "address": "0x3434",
+      "bytes": 36,
+      "relocations": [
+        [
+          12,
+          10,
+          "__register_frame_info"
+        ],
+        [
+          16,
+          10,
+          "register_tm_clones"
+        ],
+        [
+          24,
+          2,
+          "__register_frame_info"
+        ],
+        [
+          28,
+          2,
+          ""
+        ],
+        [
+          32,
+          2,
+          ""
+        ]
+      ],
+      "unrelocated_bytes_preserved": true
+    },
+    {
+      "section": ".init_array",
+      "address": "0x2000087c",
+      "bytes": 4,
+      "relocations": [
+        [
+          0,
+          2,
+          "frame_dummy"
+        ]
+      ],
+      "unrelocated_bytes_preserved": true
+    },
+    {
+      "section": ".fini_array",
+      "address": "0x20000880",
+      "bytes": 4,
+      "relocations": [
+        [
+          0,
+          2,
+          "__do_global_dtors_aux"
+        ]
+      ],
+      "unrelocated_bytes_preserved": true
+    }
+  ],
+  "binary_provider_bytes": 152,
+  "separate_array_data_bytes": 8,
+  "source_rebuilt_bytes": 0,
+  "tables_and_mapping_independently_verified": true,
+  "saved_comparisons": 32,
+  "saved_input_hashes": [
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-crt-array-binding-2026-10-09/outputs/linked.elf",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-startup-provider-successor-2026-10-09/outputs/linked.elf",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-newlib14-startup-exit-2026-10-09/outputs/exit/linked.elf",
+      "matches": true
+    }
+  ],
+  "boundary": "No emulation rerun. Harness inspected: stock copy/zero and actual callback instructions; manually invoked fini, simulated VTOR, starts after board init. Real ld from installed binary provider, not crtstuff source rebuild.",
+  "source_interpretation_files_hash_verified": [
+    "libgcc/crtstuff.c",
+    "libgcc/config/arm/t-arm",
+    "libgcc/config/arm/t-bpabi",
+    "libgcc/Makefile.in"
+  ]
+}

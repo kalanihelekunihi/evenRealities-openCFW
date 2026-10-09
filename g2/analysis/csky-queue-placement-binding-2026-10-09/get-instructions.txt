@@ -1,0 +1,35 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin:     file format binary
+
+
+Disassembly of section .data:
+
+10206fb0 <.data+0x3fac>:
+10206fb0:	9041      	ld.w      	r2, (r0, 0x4)
+10206fb2:	9060      	ld.w      	r3, (r0, 0x0)
+10206fb4:	64ca      	cmpne      	r2, r3
+10206fb6:	0c20      	bf      	0x10206ff6	// 0x10206ff6
+10206fb8:	6f47      	mov      	r13, r1
+10206fba:	c42d0082 	subu      	r2, r13, r1
+10206fbe:	9064      	ld.w      	r3, (r0, 0x10)
+10206fc0:	64c9      	cmplt      	r2, r3
+10206fc2:	da402001 	ld.w      	r18, (r0, 0x4)
+10206fc6:	d9802003 	ld.w      	r12, (r0, 0xc)
+10206fca:	080a      	bt      	0x10206fde	// 0x10206fde
+10206fcc:	c6430023 	addu      	r3, r3, r18
+10206fd0:	c5838042 	divs      	r2, r3, r12
+10206fd4:	7f08      	mult      	r12, r2
+10206fd6:	60f2      	subu      	r3, r12
+10206fd8:	b061      	st.w      	r3, (r0, 0x4)
+10206fda:	3001      	movi      	r0, 1
+10206fdc:	783c      	jmp      	r15
+10206fde:	c6420022 	addu      	r2, r2, r18
+10206fe2:	c5828043 	divs      	r3, r2, r12
+10206fe6:	7f0c      	mult      	r12, r3
+10206fe8:	9062      	ld.w      	r3, (r0, 0x8)
+10206fea:	60b2      	subu      	r2, r12
+10206fec:	d0430023 	ldr.b      	r3, (r3, r2 << 0)
+10206ff0:	d40d8003 	stbi.b      	r3, (r13)
+10206ff4:	07e3      	br      	0x10206fba	// 0x10206fba
+10206ff6:	3000      	movi      	r0, 0
+10206ff8:	07f2      	br      	0x10206fdc	// 0x10206fdc

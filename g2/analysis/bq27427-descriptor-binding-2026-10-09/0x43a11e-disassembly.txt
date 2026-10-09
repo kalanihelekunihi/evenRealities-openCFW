@@ -1,0 +1,47 @@
+0043a11e: push {r4, r5, r6, r7}
+0043a120: mov r2, r0
+0043a122: ldr r0, [r2]
+0043a124: ldr r5, [r2, #8]
+0043a126: adds r3, r2, r0
+0043a128: ldr r0, [r2, #4]
+0043a12a: add.w r4, r3, r0, lsr #1
+0043a12e: lsls r0, r0, #0x1f
+0043a130: it mi
+0043a132: addmi r5, sb
+0043a134: cmp r3, r4
+0043a136: beq #0x43a194
+0043a138: ldrb r6, [r3], #1
+0043a13c: ands r0, r6, #3
+0043a140: itt eq
+0043a142: ldrbeq r0, [r3], #1
+0043a146: addeq r0, r0, #3
+0043a148: lsrs r1, r6, #4
+0043a14a: cmp r1, #0xf
+0043a14c: bne #0x43a15e
+0043a14e: ldrb r1, [r3], #1
+0043a152: adds r1, #0xf
+0043a154: b #0x43a15e
+0043a156: ldrb r7, [r3], #1
+0043a15a: strb r7, [r5], #1
+0043a15e: subs r0, r0, #1
+0043a160: bne #0x43a156
+0043a162: cmp r1, #0
+0043a164: beq #0x43a134
+0043a166: ldrb r0, [r3], #1
+0043a16a: ubfx r6, r6, #2, #2
+0043a16e: cmp r6, #3
+0043a170: it eq
+0043a172: ldrbeq r6, [r3], #1
+0043a176: add.w r0, r0, r6, lsl #8
+0043a17a: rsbs r0, r0, #0
+0043a17c: add r0, r5
+0043a17e: movs r6, #0
+0043a180: subs r7, r6, #2
+0043a182: cmp r7, r1
+0043a184: ittt ne
+0043a186: ldrbne r7, [r0], #1
+0043a18a: strbne r7, [r5], #1
+0043a18e: addne r6, r6, #1
+0043a190: bne #0x43a180
+0043a192: b #0x43a134
+0043a194: pop {r4, r5, r6, r7}

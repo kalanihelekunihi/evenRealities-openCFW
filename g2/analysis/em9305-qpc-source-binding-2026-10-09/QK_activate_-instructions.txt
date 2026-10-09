@@ -1,0 +1,52 @@
+
+/tmp/QK_activate_-opencfw.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00311554 <.data>:
+  311554:	c2ec                	enter_s	[r13-r18,blink]
+  311556:	46cb 0080 1394      	mov_s	r14,0x801394
+  31155c:	1600 1090           	ldb	r16,[r14]
+  311560:	8ea1                	ldb_s	r13,[r14,0x1]
+  311562:	ed8a                	brne_s	r13,0,20	;0x311574
+  311564:	200a 0f80 0033 451c 	mov	r0,0x33451c
+  31156c:	0a6e 0020           	bl.d	620	;0x3117d8
+  311570:	218a 0d07           	mov	r1,500
+  311574:	1e01 1003           	stb	0,[r14,1]
+  311578:	aea0                	stb_s	r13,[r14,0]
+  31157a:	7faf                	extb_s	r15,r13
+  31157c:	26f0 73cd 0080 131c 	ld.as	r13,[0x80131c,r15]
+  311584:	266f 003f           	seti	0
+  311588:	0fb2 ffaf           	bl.d	-2128	;0x310d38
+  31158c:	40a1                	mov_s	r0,r13
+  31158e:	8520                	ld_s	r1,[r13,0]
+  311590:	8141                	ld_s	r2,[r1,0x4]
+  311592:	4100                	mov_s	r1,r0
+  311594:	40a1                	mov_s	r0,r13
+  311596:	7a60                	jl_s.d	[r2]
+  311598:	4230                	mov_s	r18,r1
+  31159a:	0a22 ffef           	bl.d	-1504	;0x310fb8
+  31159e:	4042                	mov_s	r0,r18
+  3115a0:	276f 003f           	clri	0
+  3115a4:	236f 003f           	sync
+  3115a8:	8503                	ld_s	r0,[r13,0xc]
+  3115aa:	e887                	brne_s	r0,0,14	;0x3115b6
+  3115ac:	9623                	ldh_s	r1,[r14,0x6]
+  3115ae:	6f09                	sub_s	r0,r15,0x1
+  3115b0:	2110 0000           	bclr	r0,r1,r0
+  3115b4:	b603                	sth_s	r0,[r14,0x6]
+  3115b6:	9603                	ldh_s	r0,[r14,0x6]
+  3115b8:	3d2f 1000           	.word	0x3d2f1000
+  3115bc:	7faf                	extb_s	r15,r13
+  3115be:	0823 23c5           	brhs.nt	r16,r15,34	;0x3115de
+  3115c2:	8e02                	ldb_s	r0,[r14,0x2]
+  3115c4:	081b 03c5           	brhs.nt	r0,r15,26	;0x3115de
+  3115c8:	0f13 1474           	brlo.d.nt	r15,0x11,18	;0x3115da
+  3115cc:	218a 0f87           	mov	r1,510
+  3115d0:	40c3 0033 451c      	mov_s	r0,0x33451c
+  3115d6:	0a06 0000           	bl	516	;0x3117d8
+  3115da:	70f5                	cmp_s	r15,0
+  3115dc:	f5ce                	bne_s	-100	;0x311578
+  3115de:	1e00 1402           	stb	r16,[r14]
+  3115e2:	c6cc                	leave_s	[r13-r18,blink,pcl]

@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "input_hashes_verified": 11,
+  "byte_bound_listings": [
+    {
+      "name": "put",
+      "bytes": 90,
+      "lines": 34
+    },
+    {
+      "name": "get",
+      "bytes": 74,
+      "lines": 28
+    }
+  ],
+  "conditional_KWS_placement_supported": true,
+  "unchanged_AIoT_Get_SRAM_contract_conflict": true,
+  "physical_slots": 8,
+  "usable_pending_items_coherent_state": 7,
+  "trigger_returns_enqueue_acknowledgement": false,
+  "original_instruction_execution": false,
+  "source_rebuild": false,
+  "qualification": "Placement conditional on supplied section/linker contracts; no unique pin, live queue behavior, concurrency, alias visibility or new C execution proof"
+}

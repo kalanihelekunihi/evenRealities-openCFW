@@ -1,0 +1,40 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin:     file format binary
+
+
+Disassembly of section .data:
+
+10203004 <.data>:
+10203004:	1001      	lrw      	r0, 0x200269a4	// 0x10203008
+10203006:	783c      	jmp      	r15
+10203008:	69a4      	and      	r6, r9
+1020300a:	2002      	addi      	r0, 3
+1020300c:	2800      	subi      	r0, 1
+1020300e:	3808      	cmphsi      	r0, 9
+10203010:	0805      	bt      	0x1020301a	// 0x1020301a
+10203012:	1064      	lrw      	r3, 0x1020a8aa	// 0x10203020
+10203014:	d0031020 	ldr.bs      	r0, (r3, r0 << 0)
+10203018:	783c      	jmp      	r15
+1020301a:	3000      	movi      	r0, 0
+1020301c:	07fe      	br      	0x10203018	// 0x10203018
+1020301e:	0000      	bkpt
+10203020:	a8aa      	st.h      	r5, (r0, 0x14)
+10203022:	1020      	lrw      	r1, 0x1020a8aa	// 0x10203020
+10203024:	14d0      	push      	r15
+10203026:	3102      	movi      	r1, 2
+10203028:	1007      	lrw      	r0, 0x1020a8b3	// 0x10203044
+1020302a:	e0001dfd 	bsr      	0x10206c24	// 0x10206c24
+1020302e:	1067      	lrw      	r3, 0x200269a4	// 0x10203048
+10203030:	8b10      	ld.h      	r0, (r3, 0x20)
+10203032:	c4c05520 	zext      	r0, r0, 9, 6
+10203036:	e3ffffeb 	bsr      	0x1020300c	// 0x1020300c
+1020303a:	6c43      	mov      	r1, r0
+1020303c:	1004      	lrw      	r0, 0x1020a8d3	// 0x1020304c
+1020303e:	e0001df3 	bsr      	0x10206c24	// 0x10206c24
+10203042:	1490      	pop      	r15
+10203044:	a8b3      	st.h      	r5, (r0, 0x26)
+10203046:	1020      	lrw      	r1, 0x1020a8b3	// 0x10203044
+10203048:	69a4      	and      	r6, r9
+1020304a:	2002      	addi      	r0, 3
+1020304c:	a8d3      	st.h      	r6, (r0, 0x26)
+1020304e:	1020      	lrw      	r1, 0x1020a8d3	// 0x1020304c

@@ -1,0 +1,55 @@
+004a460c: push {r4}
+004a460e: movs r1, #0
+004a4610: b #0x4a46a6
+004a4612: movs r3, #3
+004a4614: sdiv r0, r1, r3
+004a4618: mls r3, r3, r0, r1
+004a461c: movs r0, #3
+004a461e: sdiv r4, r1, r0
+004a4622: movs r0, #0xc
+004a4624: muls r4, r0, r4
+004a4626: ldr.w r0, [pc, #0x36c]
+004a462a: add r0, r4
+004a462c: add.w r0, r0, r3, lsl #2
+004a4630: add.w r3, r2, r1, lsl #2
+004a4634: vldr s0, [r3]
+004a4638: vmov.f32 s1, #-1.000000e+00
+004a463c: vmul.f32 s0, s0, s1
+004a4640: vcvt.s32.f32 s0, s0, #0x1e
+004a4644: vstr s0, [r0]
+004a4648: b #0x4a46a4
+004a464a: ldr.w r0, [r2, r1, lsl #2]
+004a464e: ldr.w r3, [pc, #0xa84]
+004a4652: str.w r0, [r3, r1, lsl #2]
+004a4656: add.w r0, r2, r1, lsl #2
+004a465a: vldr s0, [r0]
+004a465e: vcvt.s32.f32 s0, s0, #0xe
+004a4662: vmov r0, s0
+004a4666: ldr r3, [pc, #0x328]
+004a4668: strh.w r0, [r3, r1, lsl #1]
+004a466c: cmp r1, #2
+004a466e: beq #0x4a4678
+004a4670: cmp r1, #5
+004a4672: beq #0x4a4678
+004a4674: cmp r1, #8
+004a4676: bne #0x4a4612
+004a4678: movs r3, #3
+004a467a: sdiv r0, r1, r3
+004a467e: mls r3, r3, r0, r1
+004a4682: movs r0, #3
+004a4684: sdiv r4, r1, r0
+004a4688: movs r0, #0xc
+004a468a: muls r4, r0, r4
+004a468c: ldr r0, [pc, #0x304]
+004a468e: add r0, r4
+004a4690: add.w r0, r0, r3, lsl #2
+004a4694: add.w r3, r2, r1, lsl #2
+004a4698: vldr s0, [r3]
+004a469c: vcvt.s32.f32 s0, s0, #0x1e
+004a46a0: vstr s0, [r0]
+004a46a4: adds r1, r1, #1
+004a46a6: cmp r1, #9
+004a46a8: blt #0x4a464a
+004a46aa: movs r0, #0
+004a46ac: pop {r4}
+004a46ae: bx lr

@@ -1,0 +1,17 @@
+# Flash corrected error-path and fresh inventory review
+
+Independent read-only review of [corrected discovery report](../source-discovery-parallel-2026-10-09/FLASH-CORRECTION-ERROR-PATH.md) and [receipt](../source-discovery-parallel-2026-10-09/FLASH-CORRECTION-ERROR-PATH-RECEIPT.json). The image hash, cited independent-review hash and all five instruction windows match actual inputs; [verification](FLASH-ERROR-PATH-INDEPENDENT-VERIFICATION.json) also seals three additional static intervals. No execution or sealed-test repetition.
+
+## Predicate claim accepted, with later-path refinement
+
+Generic read preserves HAL status in r4 and returns it; RDCR predicate returns a nonzero error unchanged at47042C, or boolean1/0 after successful transport. Caller4705C4–C6 tests only zero/nonzero. Thus a returning nonzero error selects the same branch470610 as true. Null/buffer/address errors exist in the helper, but this specific call supplies stack storage, count1, address0; do not claim all invalid-input errors are ordinarily reachable here. Transport errors remain the relevant unobserved case. Logging/diagnostic calls do not overwrite the preserved r4, but whether diagnostic configuration halts actual execution is not established by this review.
+
+The later routine4706E0 is more specific than merely “next call”:4706EC loads opcode04 (Write Disable),4706EE calls command helper47021C, and47073C returns its saved transport status. At470616–618 the enclosing mode routine checks that status, returns it on error, and returns0 on success470662. This later check can fail, but **is not another mode readback** and cannot establish whether the preceding RDCR was valid or mode-set. If a nonzero readback error returns normally and subsequent Write Disable succeeds, this local routine can return0. This conditional static result is not observed firmware/hardware success or failure.
+
+A further enclosing callsite46FF40 calls4704AC and immediately overwrites r0 with1 at46FF44 before QE call470AAC. It does not check the mode routine result.46FF52 returns preserved r4 from earlier operation470028 (stored46FEAE). Calls46FF4A/46FF4E follow; this selected tail supplies no mode-result acceptance check. This adds a bounded ignored-return observation, not proof that every initialization caller/path or physical run reports success.
+
+The earlier false mask discrepancy remains withdrawn: RDCR0x20 agrees with vendor FLASH_4BYTE_CF_MASK; RDSCUR0x40 is a different register. Matching vendor protocol does not authorize changing stock mixed-return/error behavior in a byte-identical reconstruction.
+
+## Inventory assessment
+
+[Fresh reconciliation](../source-discovery-parallel-2026-10-09/FRESH-INVENTORY-RECONCILIATION.md) appropriately distinguishes newly acquired comparators from known providers and private/source-unavailable inputs. No additional concrete acquisition lead emerged from this bounded cross-check. Zephyr BQ27427 CC Gain remains the finite new comparator already assigned to discovery; TDK unequal-ODR revision discrimination remains assigned to owner. Remaining flash lane/address enum binding, CPU alias visibility, ARC arithmetic and physical transport limits are distinct unresolved evidence questions; their existence alone does not establish a new obtainable provider. Historical missing-snapshot notes for registered libraries must not reopen completed acquisition leads. This assessment does not certify global source exhaustion, source completeness or byte equality.

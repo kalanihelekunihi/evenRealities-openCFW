@@ -1,0 +1,114 @@
+
+g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin:     file format binary
+
+
+Disassembly of section .data:
+
+004b48a6 <.data+0x7c8c6>:
+  4b48a6:	b5f8      	push	{r3, r4, r5, r6, r7, lr}
+  4b48a8:	b092      	sub	sp, #72	@ 0x48
+  4b48aa:	0004      	movs	r4, r0
+  4b48ac:	2001      	movs	r0, #1
+  4b48ae:	2000      	movs	r0, #0
+  4b48b0:	2000      	movs	r0, #0
+  4b48b2:	f8df 04bc 	ldr.w	r0, [pc, #1212]	@ 0x4b4d70
+  4b48b6:	9000      	str	r0, [sp, #0]
+  4b48b8:	2040      	movs	r0, #64	@ 0x40
+  4b48ba:	9001      	str	r0, [sp, #4]
+  4b48bc:	f8df 64b4 	ldr.w	r6, [pc, #1204]	@ 0x4b4d74
+  4b48c0:	f8df 34b4 	ldr.w	r3, [pc, #1204]	@ 0x4b4d78
+  4b48c4:	0032      	movs	r2, r6
+  4b48c6:	4669      	mov	r1, sp
+  4b48c8:	2006      	movs	r0, #6
+  4b48ca:	f079 fa63 	bl	0x52dd94
+  4b48ce:	0005      	movs	r5, r0
+  4b48d0:	f079 fb0d 	bl	0x52deee
+  4b48d4:	0002      	movs	r2, r0
+  4b48d6:	b2d2      	uxtb	r2, r2
+  4b48d8:	0029      	movs	r1, r5
+  4b48da:	f8df 04a0 	ldr.w	r0, [pc, #1184]	@ 0x4b4d7c
+  4b48de:	f7be fd86 	bl	0x4733ee
+  4b48e2:	2064      	movs	r0, #100	@ 0x64
+  4b48e4:	f7dc fc0d 	bl	0x491102
+  4b48e8:	f079 fb01 	bl	0x52deee
+  4b48ec:	2800      	cmp	r0, #0
+  4b48ee:	d007      	beq.n	0x4b4900
+  4b48f0:	f8df 048c 	ldr.w	r0, [pc, #1164]	@ 0x4b4d80
+  4b48f4:	f7be fd7b 	bl	0x4733ee
+  4b48f8:	2001      	movs	r0, #1
+  4b48fa:	f8df 1470 	ldr.w	r1, [pc, #1136]	@ 0x4b4d6c
+  4b48fe:	7008      	strb	r0, [r1, #0]
+  4b4900:	f07a fd44 	bl	0x52f38c
+  4b4904:	f8df 7458 	ldr.w	r7, [pc, #1112]	@ 0x4b4d60
+  4b4908:	0038      	movs	r0, r7
+  4b490a:	f07b f9f7 	bl	0x52fcfc
+  4b490e:	2800      	cmp	r0, #0
+  4b4910:	d01b      	beq.n	0x4b494a
+  4b4912:	f079 fae8 	bl	0x52dee6
+  4b4916:	6839      	ldr	r1, [r7, #0]
+  4b4918:	f7ff ff58 	bl	0x4b47cc
+  4b491c:	b2c0      	uxtb	r0, r0
+  4b491e:	2800      	cmp	r0, #0
+  4b4920:	d104      	bne.n	0x4b492c
+  4b4922:	f8df 0448 	ldr.w	r0, [pc, #1096]	@ 0x4b4d6c
+  4b4926:	7800      	ldrb	r0, [r0, #0]
+  4b4928:	2800      	cmp	r0, #0
+  4b492a:	d00e      	beq.n	0x4b494a
+  4b492c:	f07b f914 	bl	0x52fb58
+  4b4930:	f07a fd2c 	bl	0x52f38c
+  4b4934:	6830      	ldr	r0, [r6, #0]
+  4b4936:	f7ff ff68 	bl	0x4b480a
+  4b493a:	f07a fd27 	bl	0x52f38c
+  4b493e:	f07b f961 	bl	0x52fc04
+  4b4942:	2000      	movs	r0, #0
+  4b4944:	f8df 1424 	ldr.w	r1, [pc, #1060]	@ 0x4b4d6c
+  4b4948:	7008      	strb	r0, [r1, #0]
+  4b494a:	2000      	movs	r0, #0
+  4b494c:	f8df 1434 	ldr.w	r1, [pc, #1076]	@ 0x4b4d84
+  4b4950:	6008      	str	r0, [r1, #0]
+  4b4952:	2000      	movs	r0, #0
+  4b4954:	f8df 1430 	ldr.w	r1, [pc, #1072]	@ 0x4b4d88
+  4b4958:	6008      	str	r0, [r1, #0]
+  4b495a:	f44f 6302 	mov.w	r3, #2080	@ 0x820
+  4b495e:	f44f 7282 	mov.w	r2, #260	@ 0x104
+  4b4962:	f8df 1428 	ldr.w	r1, [pc, #1064]	@ 0x4b4d8c
+  4b4966:	f8df 0428 	ldr.w	r0, [pc, #1064]	@ 0x4b4d90
+  4b496a:	f07b fb7f 	bl	0x53006c
+  4b496e:	2000      	movs	r0, #0
+  4b4970:	f8df 1420 	ldr.w	r1, [pc, #1056]	@ 0x4b4d94
+  4b4974:	6008      	str	r0, [r1, #0]
+  4b4976:	b2e4      	uxtb	r4, r4
+  4b4978:	2c00      	cmp	r4, #0
+  4b497a:	d015      	beq.n	0x4b49a8
+  4b497c:	a902      	add	r1, sp, #8
+  4b497e:	2001      	movs	r0, #1
+  4b4980:	f7cc f9f7 	bl	0x480d72
+  4b4984:	2204      	movs	r2, #4
+  4b4986:	a904      	add	r1, sp, #16
+  4b4988:	f8df 440c 	ldr.w	r4, [pc, #1036]	@ 0x4b4d98
+  4b498c:	0026      	movs	r6, r4
+  4b498e:	0030      	movs	r0, r6
+  4b4990:	f785 f928 	bl	0x439be4
+  4b4994:	9803      	ldr	r0, [sp, #12]
+  4b4996:	0a00      	lsrs	r0, r0, #8
+  4b4998:	7120      	strb	r0, [r4, #4]
+  4b499a:	9803      	ldr	r0, [sp, #12]
+  4b499c:	0c00      	lsrs	r0, r0, #16
+  4b499e:	7160      	strb	r0, [r4, #5]
+  4b49a0:	7960      	ldrb	r0, [r4, #5]
+  4b49a2:	f010 00fc 	ands.w	r0, r0, #252	@ 0xfc
+  4b49a6:	7160      	strb	r0, [r4, #5]
+  4b49a8:	2175      	movs	r1, #117	@ 0x75
+  4b49aa:	2300      	movs	r3, #0
+  4b49ac:	f20f 02e9 	addw	r2, pc, #233	@ 0xe9
+  4b49b0:	2000      	movs	r0, #0
+  4b49b2:	f7cc fe3b 	bl	0x48162c
+  4b49b6:	f079 f9cf 	bl	0x52dd58
+  4b49ba:	2104      	movs	r1, #4
+  4b49bc:	203b      	movs	r0, #59	@ 0x3b
+  4b49be:	f7ff fee2 	bl	0x4b4786
+  4b49c2:	203b      	movs	r0, #59	@ 0x3b
+  4b49c4:	f7ff fed0 	bl	0x4b4768
+  4b49c8:	0028      	movs	r0, r5
+  4b49ca:	b013      	add	sp, #76	@ 0x4c
+  4b49cc:	bdf0      	pop	{r4, r5, r6, r7, pc}

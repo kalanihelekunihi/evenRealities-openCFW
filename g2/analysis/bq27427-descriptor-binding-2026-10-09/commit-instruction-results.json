@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "cases": [
+    {
+      "previous_byte_label": 128,
+      "checksum": 236,
+      "events": [
+        {
+          "kind": "register-write",
+          "register": 97,
+          "value": 0,
+          "length": 1
+        },
+        {
+          "kind": "register-write",
+          "register": 62,
+          "value": 105,
+          "length": 1
+        },
+        {
+          "kind": "register-write",
+          "register": 63,
+          "value": 0,
+          "length": 1
+        },
+        {
+          "kind": "block-write",
+          "register": 64,
+          "data": "000102030428060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+          "length": 32
+        },
+        {
+          "kind": "register-write",
+          "register": 96,
+          "value": 236,
+          "length": 1
+        }
+      ],
+      "limits": "Synthetic post-update block; mode, transport and delay calls return success; actual write wrapper and checksum instructions execute. Previous-byte label does not affect post-update block."
+    }
+  ]
+}

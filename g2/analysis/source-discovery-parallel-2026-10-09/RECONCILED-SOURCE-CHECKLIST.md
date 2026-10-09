@@ -1,0 +1,17 @@
+# Reconciled source checklist and new case lead
+
+Closed mode/event/model/hybrid/queue/history probes are not reopened. ARC hardware log2 arithmetic model, stock4.2 source and physical-state evidence remain real external boundaries. Current source opportunity ledger still offers codec board alias/layout and address-bound private object/configuration comparisons; no new source family is justified without a specific owned target. Stale consolidated touch/library text cannot override newly reviewed PDL/runtime work.
+
+## Newly useful finite case lead
+
+Registered HAL path is empty; index pin is a0cf8a8b96183fdcc2e3b1cf0bcf0825f27bd0c9; CMSIS device pinf576c24e123edf3332988ecd49512c0f35f85186. Existing UART source comparisons already cover selected HALv1.4.5 behavior and some revision controls; these do not authenticate the whole HAL release. Bounded searches of current task contracts and case/dependency reports found no FLASH_Unlock/OB_Unlock-specific packet; this is not global ownership clearance.
+
+Official pinned Src/stm32g0xx_hal_flash.c and LICENSE.md downloaded into isolated acquisitions/st-case-flash-pin. URLs are the raw.githubusercontent.com/STMicroelectronics/stm32g0xx-hal-driver/<pin>/ paths. BSD-style3clause license retained; SHA receipts in case-flash-acquisition-provenance.json. No execution. Existing submodule can be populated at its registered pin by owner review; no registration/index changes here.
+
+Potentially overlooked **name reversal**: historical symbols label0x08004B6C–4B88 as HAL_FLASH_Unlock and0x08004BF4–4C10 as HAL_FLASH_OB_Unlock. Raw authenticated-image export for4B6C starts status1, tests register+0x14 bit30, writes keys to+0x0C, succeeds only if the bit clears.4BF4 starts status0, tests bit31, writes+0x08, then reports1 if it stays set. Official pinned code399–417 defines ordinary unlock with initialHAL_OK, LOCK andKEYR; option unlock444–461 startsHAL_ERROR, OPTLOCK andOPTKEYR. Under known STM32G0 register layout these target patterns correspond to the **opposite names**. This is an explicit raw-export/source discrepancy, not an instruction-verified correction or new HAL release attribution.
+
+Finite next check: authenticate stock slices plus adjacent three literal words for both routines; independently decode branches/register offsets/key values; compare against pinned CMSIS LOCK/OPTLOCK andKEYR/OPTKEYR definitions; then determine whether names were swapped or raw export semantics failed. Preserve Strong original symbol labels until independent review. Test already-unlocked/default-status behavior as a discriminator: option unlock can returnERROR when already unlocked, unlike ordinary unlock. Stop once those56bytes and literal/field identities bind, or decoding disagrees. No flashing or hardware state needed for the static classification, and live unlock behavior must not be inferred.
+
+## Precise source-search boundary
+
+No claim that all public sources are exhausted. Public source useful for this concrete case lead was acquired. Generic ARC architecture manuals cannot replace EM port/log2 implementation; old controller source remains vendor-only, graphics/IAR generating sources remain licensed external inputs, private trained model candidates remain excluded only within the reviewed finite set. Source availability does not imply C compilation, accepted pseudocode or byte equality. No cancelled queue, canonical edit, build, staging or device activity occurred.

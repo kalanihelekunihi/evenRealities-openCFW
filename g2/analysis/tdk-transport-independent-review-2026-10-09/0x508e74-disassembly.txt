@@ -1,0 +1,40 @@
+00508e74: push {r7, lr}
+00508e76: cmp.w r1, #0x100
+00508e7a: blo #0x508e82
+00508e7c: bl #0x508fa6
+00508e80: b #0x508e88
+00508e82: uxtb r1, r1
+00508e84: bl #0x508eb6
+00508e88: pop {r1, pc}
+00508e8a: push {r7, lr}
+00508e8c: bl #0x508f34
+00508e90: pop {r1, pc}
+00508e92: push {r7, lr}
+00508e94: bl #0x508fa6
+00508e98: pop {r1, pc}
+00508e9a: push {r4, lr}
+00508e9c: movs r4, r0
+00508e9e: movs r0, r1
+00508ea0: movs r1, r3
+00508ea2: uxtb r0, r0
+00508ea4: ldr r3, [r4]
+00508ea6: blx r3
+00508ea8: cmp r0, #0
+00508eaa: beq #0x508eb2
+00508eac: mvns r0, #2
+00508eb0: b #0x508eb4
+00508eb2: movs r0, #0
+00508eb4: pop {r4, pc}
+00508eb6: push {r4, lr}
+00508eb8: movs r4, r0
+00508eba: movs r0, r1
+00508ebc: movs r1, r3
+00508ebe: uxtb r0, r0
+00508ec0: ldr r3, [r4, #4]
+00508ec2: blx r3
+00508ec4: cmp r0, #0
+00508ec6: beq #0x508ece
+00508ec8: mvns r0, #2
+00508ecc: b #0x508ed0
+00508ece: movs r0, #0
+00508ed0: pop {r4, pc}

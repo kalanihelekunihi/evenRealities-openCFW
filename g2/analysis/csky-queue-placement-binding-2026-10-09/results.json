@@ -1,0 +1,63 @@
+{
+  "status": "PASS",
+  "inputs": {
+    "g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-objdump": "7150f7ffc2ac163f3d2d465620e5dac96df4b29411e5d0944419c41657cc2382",
+    "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin": "49c9aed0126493220a3e48827c267d5e94f64d51d9ede0ccc3e84b8946744584",
+    "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_sram.bin": "53860d6974097ad494c6697df52f95b796360131fab63cd8bfd7efc9c5596de8",
+    "third-party/upstream/nationalchip-lvp-kws/lvp/common/lvp_queue.c": "ed8fba34e8658c0c7d49868790a89dce7188b8c81fe0c04f68969de1670b5814",
+    "third-party/upstream/nationalchip-lvp-kws/lvp/common/lvp_queue.h": "3fdd1c826f00b4725d2b89d639182ccdd6e30c78300828b4bd95111d1ebd357e",
+    "third-party/upstream/nationalchip-lvp-kws/include/lvp_attr.h": "c6951de4704b568dc9d6bad259c30c9d929814852a8854a41062b0b3b4716813",
+    "third-party/upstream/nationalchip-lvp-kws/arch/soc/grus/link.ld": "1dc73b74c4b5962a848693ab857e90d34115489a8a7e499897533ad786ff77be",
+    "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/nationalchip-lvp-aiot/lvp/common/lvp_queue.c": "83cc8535a68f91d99a33eb2b4855c4f99f7611d9351e360d9c0a5917fc3b0816",
+    "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/nationalchip-lvp-aiot/lvp/common/lvp_queue.h": "3fdd1c826f00b4725d2b89d639182ccdd6e30c78300828b4bd95111d1ebd357e",
+    "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/nationalchip-lvp-aiot/include/lvp_attr.h": "aecc27a67e65c8ec08de7dbf41d13f45b045b0613273848ea1073d2d213a8efc",
+    "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/nationalchip-lvp-aiot/arch/soc/grus/link.ld": "e9ad302244bc9d278c225ea2f080fb20ee12407c2a1d6d7de6c574a1c0b97c7b"
+  },
+  "slices": [
+    {
+      "name": "put",
+      "range": [
+        "0x100261b8",
+        "0x10026212"
+      ],
+      "sha256": "f267c3301f1725624a009ffb30bf92f2dee4c0f708918a078c9f1270e94e173a",
+      "command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-objdump",
+        "-D",
+        "-b",
+        "binary",
+        "-m",
+        "csky",
+        "-EL",
+        "--adjust-vma=0x10023400",
+        "--start-address=0x100261b8",
+        "--stop-address=0x10026212",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_sram.bin"
+      ]
+    },
+    {
+      "name": "get",
+      "range": [
+        "0x10206fb0",
+        "0x10206ffa"
+      ],
+      "sha256": "31898a7d6f013ef63ffcc625138adff59d5aa02529e9f18833d168de8b53a043",
+      "command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-objdump",
+        "-D",
+        "-b",
+        "binary",
+        "-m",
+        "csky",
+        "-EL",
+        "--adjust-vma=0x10203004",
+        "--start-address=0x10206fb0",
+        "--stop-address=0x10206ffa",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin"
+      ]
+    }
+  ],
+  "original_instruction_execution": false,
+  "source_rebuild": false,
+  "inference": "Stock SRAM Put / XIP Get agrees with unchanged KWS source under default-text-in-flash profile. Acquired unchanged AIoT Get explicitly selects SRAM under its supplied attribute/linker contract. Modified source/attributes/linker remain alternatives; no exact revision attribution."
+}

@@ -1,0 +1,41 @@
+
+/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_sram.bin:     file format binary
+
+
+Disassembly of section .data:
+
+100261b8 <.data+0x2db8>:
+100261b8:	9044      	ld.w      	r2, (r0, 0x10)
+100261ba:	9060      	ld.w      	r3, (r0, 0x0)
+100261bc:	60c8      	addu      	r3, r2
+100261be:	d9802003 	ld.w      	r12, (r0, 0xc)
+100261c2:	c5838042 	divs      	r2, r3, r12
+100261c6:	7cb0      	mult      	r2, r12
+100261c8:	60ca      	subu      	r3, r2
+100261ca:	9041      	ld.w      	r2, (r0, 0x4)
+100261cc:	648e      	cmpne      	r3, r2
+100261ce:	0c20      	bf      	0x1002620e	// 0x1002620e
+100261d0:	6f47      	mov      	r13, r1
+100261d2:	c42d0082 	subu      	r2, r13, r1
+100261d6:	9064      	ld.w      	r3, (r0, 0x10)
+100261d8:	64c9      	cmplt      	r2, r3
+100261da:	da402000 	ld.w      	r18, (r0, 0x0)
+100261de:	d9802003 	ld.w      	r12, (r0, 0xc)
+100261e2:	080a      	bt      	0x100261f6	// 0x100261f6
+100261e4:	c6430023 	addu      	r3, r3, r18
+100261e8:	c5838042 	divs      	r2, r3, r12
+100261ec:	7f08      	mult      	r12, r2
+100261ee:	60f2      	subu      	r3, r12
+100261f0:	b060      	st.w      	r3, (r0, 0x0)
+100261f2:	3001      	movi      	r0, 1
+100261f4:	783c      	jmp      	r15
+100261f6:	c6420022 	addu      	r2, r2, r18
+100261fa:	c5828043 	divs      	r3, r2, r12
+100261fe:	7f0c      	mult      	r12, r3
+10026200:	9062      	ld.w      	r3, (r0, 0x8)
+10026202:	60b2      	subu      	r2, r12
+10026204:	d00d800c 	ldbi.b      	r12, (r13)
+10026208:	d443002c 	str.b      	r12, (r3, r2 << 0)
+1002620c:	07e3      	br      	0x100261d2	// 0x100261d2
+1002620e:	3000      	movi      	r0, 0
+10026210:	07f2      	br      	0x100261f4	// 0x100261f4

@@ -1,0 +1,1702 @@
+{
+  "scope": "linear GNU Thumb decoding of main flash; candidates not whole-image code classification",
+  "count": 106,
+  "callers": [
+    {
+      "callsite": "0x506976",
+      "raw_call": "02f08cfa",
+      "preceding_context": [
+        "  506966:\tbd76      \tpop\t{r1, r2, r4, r5, r6, pc}",
+        "  506968:\tb532      \tpush\t{r1, r4, r5, lr}",
+        "  50696a:\t0004      \tmovs\tr4, r0",
+        "  50696c:\t2500      \tmovs\tr5, #0",
+        "  50696e:\t466b      \tmov\tr3, sp",
+        "  506970:\t2201      \tmovs\tr2, #1",
+        "  506972:\t2104      \tmovs\tr1, #4",
+        "  506974:\t0020      \tmovs\tr0, r4",
+        "  506976:\tf002 fa8c \tbl\t0x508e92",
+        "  50697a:\t4305      \torrs\tr5, r0"
+      ]
+    },
+    {
+      "callsite": "0x506abc",
+      "raw_call": "02f0e9f9",
+      "preceding_context": [
+        "  506aaa:\t212a      \tmovs\tr1, #42\t@ 0x2a",
+        "  506aac:\t0020      \tmovs\tr0, r4",
+        "  506aae:\tf002 f9e1 \tbl\t0x508e74",
+        "  506ab2:\t4305      \torrs\tr5, r0",
+        "  506ab4:\t0033      \tmovs\tr3, r6",
+        "  506ab6:\t2204      \tmovs\tr2, #4",
+        "  506ab8:\t2140      \tmovs\tr1, #64\t@ 0x40",
+        "  506aba:\t0020      \tmovs\tr0, r4",
+        "  506abc:\tf002 f9e9 \tbl\t0x508e92",
+        "  506ac0:\t4305      \torrs\tr5, r0"
+      ]
+    },
+    {
+      "callsite": "0x506adc",
+      "raw_call": "02f0d9f9",
+      "preceding_context": [
+        "  506aca:\tf3c0 0080 \tubfx\tr0, r0, #2, #1",
+        "  506ace:\tb2c0      \tuxtb\tr0, r0",
+        "  506ad0:\t2800      \tcmp\tr0, #0",
+        "  506ad2:\td115      \tbne.n\t0x506b00",
+        "  506ad4:\t0033      \tmovs\tr3, r6",
+        "  506ad6:\t2204      \tmovs\tr2, #4",
+        "  506ad8:\t2140      \tmovs\tr1, #64\t@ 0x40",
+        "  506ada:\t0020      \tmovs\tr0, r4",
+        "  506adc:\tf002 f9d9 \tbl\t0x508e92",
+        "  506ae0:\t4305      \torrs\tr5, r0"
+      ]
+    },
+    {
+      "callsite": "0x506b42",
+      "raw_call": "02f0a6f9",
+      "preceding_context": [
+        "  506b2e:\t2800      \tcmp\tr0, #0",
+        "  506b30:\td002      \tbeq.n\t0x506b38",
+        "  506b32:\tf05f 30ff \tmovs.w\tr0, #4294967295\t@ 0xffffffff",
+        "  506b36:\te04b      \tb.n\t0x506bd0",
+        "  506b38:\t002b      \tmovs\tr3, r5",
+        "  506b3a:\t2202      \tmovs\tr2, #2",
+        "  506b3c:\tf44f 710c \tmov.w\tr1, #560\t@ 0x230",
+        "  506b40:\t0020      \tmovs\tr0, r4",
+        "  506b42:\tf002 f9a6 \tbl\t0x508e92",
+        "  506b46:\t4306      \torrs\tr6, r0"
+      ]
+    },
+    {
+      "callsite": "0x506b52",
+      "raw_call": "02f09ef9",
+      "preceding_context": [
+        "  506b3c:\tf44f 710c \tmov.w\tr1, #560\t@ 0x230",
+        "  506b40:\t0020      \tmovs\tr0, r4",
+        "  506b42:\tf002 f9a6 \tbl\t0x508e92",
+        "  506b46:\t4306      \torrs\tr6, r0",
+        "  506b48:\t1cab      \tadds\tr3, r5, #2",
+        "  506b4a:\t2202      \tmovs\tr2, #2",
+        "  506b4c:\tf240 2132 \tmovw\tr1, #562\t@ 0x232",
+        "  506b50:\t0020      \tmovs\tr0, r4",
+        "  506b52:\tf002 f99e \tbl\t0x508e92",
+        "  506b56:\t4306      \torrs\tr6, r0"
+      ]
+    },
+    {
+      "callsite": "0x506b62",
+      "raw_call": "02f096f9",
+      "preceding_context": [
+        "  506b4c:\tf240 2132 \tmovw\tr1, #562\t@ 0x232",
+        "  506b50:\t0020      \tmovs\tr0, r4",
+        "  506b52:\tf002 f99e \tbl\t0x508e92",
+        "  506b56:\t4306      \torrs\tr6, r0",
+        "  506b58:\t1d2b      \tadds\tr3, r5, #4",
+        "  506b5a:\t2201      \tmovs\tr2, #1",
+        "  506b5c:\tf44f 710d \tmov.w\tr1, #564\t@ 0x234",
+        "  506b60:\t0020      \tmovs\tr0, r4",
+        "  506b62:\tf002 f996 \tbl\t0x508e92",
+        "  506b66:\t4306      \torrs\tr6, r0"
+      ]
+    },
+    {
+      "callsite": "0x506b74",
+      "raw_call": "02f08df9",
+      "preceding_context": [
+        "  506b5c:\tf44f 710d \tmov.w\tr1, #564\t@ 0x234",
+        "  506b60:\t0020      \tmovs\tr0, r4",
+        "  506b62:\tf002 f996 \tbl\t0x508e92",
+        "  506b66:\t4306      \torrs\tr6, r0",
+        "  506b68:\tf115 0309 \tadds.w\tr3, r5, #9",
+        "  506b6c:\t2201      \tmovs\tr2, #1",
+        "  506b6e:\tf240 2139 \tmovw\tr1, #569\t@ 0x239",
+        "  506b72:\t0020      \tmovs\tr0, r4",
+        "  506b74:\tf002 f98d \tbl\t0x508e92",
+        "  506b78:\t4306      \torrs\tr6, r0"
+      ]
+    },
+    {
+      "callsite": "0x506b86",
+      "raw_call": "02f084f9",
+      "preceding_context": [
+        "  506b6e:\tf240 2139 \tmovw\tr1, #569\t@ 0x239",
+        "  506b72:\t0020      \tmovs\tr0, r4",
+        "  506b74:\tf002 f98d \tbl\t0x508e92",
+        "  506b78:\t4306      \torrs\tr6, r0",
+        "  506b7a:\tf115 030a \tadds.w\tr3, r5, #10",
+        "  506b7e:\t2201      \tmovs\tr2, #1",
+        "  506b80:\tf240 213a \tmovw\tr1, #570\t@ 0x23a",
+        "  506b84:\t0020      \tmovs\tr0, r4",
+        "  506b86:\tf002 f984 \tbl\t0x508e92",
+        "  506b8a:\t4306      \torrs\tr6, r0"
+      ]
+    },
+    {
+      "callsite": "0x506b96",
+      "raw_call": "02f07cf9",
+      "preceding_context": [
+        "  506b80:\tf240 213a \tmovw\tr1, #570\t@ 0x23a",
+        "  506b84:\t0020      \tmovs\tr0, r4",
+        "  506b86:\tf002 f984 \tbl\t0x508e92",
+        "  506b8a:\t4306      \torrs\tr6, r0",
+        "  506b8c:\t1d6b      \tadds\tr3, r5, #5",
+        "  506b8e:\t2201      \tmovs\tr2, #1",
+        "  506b90:\tf240 2136 \tmovw\tr1, #566\t@ 0x236",
+        "  506b94:\t0020      \tmovs\tr0, r4",
+        "  506b96:\tf002 f97c \tbl\t0x508e92",
+        "  506b9a:\t4306      \torrs\tr6, r0"
+      ]
+    },
+    {
+      "callsite": "0x506ba6",
+      "raw_call": "02f074f9",
+      "preceding_context": [
+        "  506b90:\tf240 2136 \tmovw\tr1, #566\t@ 0x236",
+        "  506b94:\t0020      \tmovs\tr0, r4",
+        "  506b96:\tf002 f97c \tbl\t0x508e92",
+        "  506b9a:\t4306      \torrs\tr6, r0",
+        "  506b9c:\t1dab      \tadds\tr3, r5, #6",
+        "  506b9e:\t2201      \tmovs\tr2, #1",
+        "  506ba0:\tf240 2135 \tmovw\tr1, #565\t@ 0x235",
+        "  506ba4:\t0020      \tmovs\tr0, r4",
+        "  506ba6:\tf002 f974 \tbl\t0x508e92",
+        "  506baa:\t4306      \torrs\tr6, r0"
+      ]
+    },
+    {
+      "callsite": "0x506bb6",
+      "raw_call": "02f06cf9",
+      "preceding_context": [
+        "  506ba0:\tf240 2135 \tmovw\tr1, #565\t@ 0x235",
+        "  506ba4:\t0020      \tmovs\tr0, r4",
+        "  506ba6:\tf002 f974 \tbl\t0x508e92",
+        "  506baa:\t4306      \torrs\tr6, r0",
+        "  506bac:\t1deb      \tadds\tr3, r5, #7",
+        "  506bae:\t2201      \tmovs\tr2, #1",
+        "  506bb0:\tf240 2137 \tmovw\tr1, #567\t@ 0x237",
+        "  506bb4:\t0020      \tmovs\tr0, r4",
+        "  506bb6:\tf002 f96c \tbl\t0x508e92",
+        "  506bba:\t4306      \torrs\tr6, r0"
+      ]
+    },
+    {
+      "callsite": "0x506bc8",
+      "raw_call": "02f063f9",
+      "preceding_context": [
+        "  506bb0:\tf240 2137 \tmovw\tr1, #567\t@ 0x237",
+        "  506bb4:\t0020      \tmovs\tr0, r4",
+        "  506bb6:\tf002 f96c \tbl\t0x508e92",
+        "  506bba:\t4306      \torrs\tr6, r0",
+        "  506bbc:\tf115 0308 \tadds.w\tr3, r5, #8",
+        "  506bc0:\t2201      \tmovs\tr2, #1",
+        "  506bc2:\tf44f 710e \tmov.w\tr1, #568\t@ 0x238",
+        "  506bc6:\t0020      \tmovs\tr0, r4",
+        "  506bc8:\tf002 f963 \tbl\t0x508e92",
+        "  506bcc:\t4306      \torrs\tr6, r0"
+      ]
+    },
+    {
+      "callsite": "0x506f58",
+      "raw_call": "01f09bff",
+      "preceding_context": [
+        "  506f42:\tf0c0 8233 \tbcc.w\t0x5073ac",
+        "  506f46:\te241      \tb.n\t0x5073cc",
+        "  506f48:\tf644 6020 \tmovw\tr0, #20000\t@ 0x4e20",
+        "  506f4c:\t9002      \tstr\tr0, [sp, #8]",
+        "  506f4e:\t4643      \tmov\tr3, r8",
+        "  506f50:\t2201      \tmovs\tr2, #1",
+        "  506f52:\tf240 21ae \tmovw\tr1, #686\t@ 0x2ae",
+        "  506f56:\t0028      \tmovs\tr0, r5",
+        "  506f58:\tf001 ff9b \tbl\t0x508e92",
+        "  506f5c:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x506f6a",
+      "raw_call": "01f092ff",
+      "preceding_context": [
+        "  506f52:\tf240 21ae \tmovw\tr1, #686\t@ 0x2ae",
+        "  506f56:\t0028      \tmovs\tr0, r5",
+        "  506f58:\tf001 ff9b \tbl\t0x508e92",
+        "  506f5c:\t4304      \torrs\tr4, r0",
+        "  506f5e:\tf118 0301 \tadds.w\tr3, r8, #1",
+        "  506f62:\t2201      \tmovs\tr2, #1",
+        "  506f64:\tf44f 712b \tmov.w\tr1, #684\t@ 0x2ac",
+        "  506f68:\t0028      \tmovs\tr0, r5",
+        "  506f6a:\tf001 ff92 \tbl\t0x508e92",
+        "  506f6e:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x506f7a",
+      "raw_call": "01f08aff",
+      "preceding_context": [
+        "  506f64:\tf44f 712b \tmov.w\tr1, #684\t@ 0x2ac",
+        "  506f68:\t0028      \tmovs\tr0, r5",
+        "  506f6a:\tf001 ff92 \tbl\t0x508e92",
+        "  506f6e:\t4304      \torrs\tr4, r0",
+        "  506f70:\tab03      \tadd\tr3, sp, #12",
+        "  506f72:\t2204      \tmovs\tr2, #4",
+        "  506f74:\tf44f 7122 \tmov.w\tr1, #648\t@ 0x288",
+        "  506f78:\t0028      \tmovs\tr0, r5",
+        "  506f7a:\tf001 ff8a \tbl\t0x508e92",
+        "  506f7e:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x506f8c",
+      "raw_call": "01f081ff",
+      "preceding_context": [
+        "  506f74:\tf44f 7122 \tmov.w\tr1, #648\t@ 0x288",
+        "  506f78:\t0028      \tmovs\tr0, r5",
+        "  506f7a:\tf001 ff8a \tbl\t0x508e92",
+        "  506f7e:\t4304      \torrs\tr4, r0",
+        "  506f80:\tf118 0304 \tadds.w\tr3, r8, #4",
+        "  506f84:\t2204      \tmovs\tr2, #4",
+        "  506f86:\tf44f 7124 \tmov.w\tr1, #656\t@ 0x290",
+        "  506f8a:\t0028      \tmovs\tr0, r5",
+        "  506f8c:\tf001 ff81 \tbl\t0x508e92",
+        "  506f90:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x506f9c",
+      "raw_call": "01f079ff",
+      "preceding_context": [
+        "  506f86:\tf44f 7124 \tmov.w\tr1, #656\t@ 0x290",
+        "  506f8a:\t0028      \tmovs\tr0, r5",
+        "  506f8c:\tf001 ff81 \tbl\t0x508e92",
+        "  506f90:\t4304      \torrs\tr4, r0",
+        "  506f92:\tab02      \tadd\tr3, sp, #8",
+        "  506f94:\t2204      \tmovs\tr2, #4",
+        "  506f96:\tf44f 7123 \tmov.w\tr1, #652\t@ 0x28c",
+        "  506f9a:\t0028      \tmovs\tr0, r5",
+        "  506f9c:\tf001 ff79 \tbl\t0x508e92",
+        "  506fa0:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x506fae",
+      "raw_call": "01f070ff",
+      "preceding_context": [
+        "  506f96:\tf44f 7123 \tmov.w\tr1, #652\t@ 0x28c",
+        "  506f9a:\t0028      \tmovs\tr0, r5",
+        "  506f9c:\tf001 ff79 \tbl\t0x508e92",
+        "  506fa0:\t4304      \torrs\tr4, r0",
+        "  506fa2:\tf118 0304 \tadds.w\tr3, r8, #4",
+        "  506fa6:\t2204      \tmovs\tr2, #4",
+        "  506fa8:\tf44f 7125 \tmov.w\tr1, #660\t@ 0x294",
+        "  506fac:\t0028      \tmovs\tr0, r5",
+        "  506fae:\tf001 ff70 \tbl\t0x508e92",
+        "  506fb2:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x506fc0",
+      "raw_call": "01f067ff",
+      "preceding_context": [
+        "  506fa8:\tf44f 7125 \tmov.w\tr1, #660\t@ 0x294",
+        "  506fac:\t0028      \tmovs\tr0, r5",
+        "  506fae:\tf001 ff70 \tbl\t0x508e92",
+        "  506fb2:\t4304      \torrs\tr4, r0",
+        "  506fb4:\tf118 030c \tadds.w\tr3, r8, #12",
+        "  506fb8:\t2201      \tmovs\tr2, #1",
+        "  506fba:\tf240 21ad \tmovw\tr1, #685\t@ 0x2ad",
+        "  506fbe:\t0028      \tmovs\tr0, r5",
+        "  506fc0:\tf001 ff67 \tbl\t0x508e92",
+        "  506fc4:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x506fd2",
+      "raw_call": "01f05eff",
+      "preceding_context": [
+        "  506fba:\tf240 21ad \tmovw\tr1, #685\t@ 0x2ad",
+        "  506fbe:\t0028      \tmovs\tr0, r5",
+        "  506fc0:\tf001 ff67 \tbl\t0x508e92",
+        "  506fc4:\t4304      \torrs\tr4, r0",
+        "  506fc6:\tf118 0310 \tadds.w\tr3, r8, #16",
+        "  506fca:\t2204      \tmovs\tr2, #4",
+        "  506fcc:\tf44f 7126 \tmov.w\tr1, #664\t@ 0x298",
+        "  506fd0:\t0028      \tmovs\tr0, r5",
+        "  506fd2:\tf001 ff5e \tbl\t0x508e92",
+        "  506fd6:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x506fe4",
+      "raw_call": "01f055ff",
+      "preceding_context": [
+        "  506fcc:\tf44f 7126 \tmov.w\tr1, #664\t@ 0x298",
+        "  506fd0:\t0028      \tmovs\tr0, r5",
+        "  506fd2:\tf001 ff5e \tbl\t0x508e92",
+        "  506fd6:\t4304      \torrs\tr4, r0",
+        "  506fd8:\tf118 0314 \tadds.w\tr3, r8, #20",
+        "  506fdc:\t2204      \tmovs\tr2, #4",
+        "  506fde:\tf44f 7127 \tmov.w\tr1, #668\t@ 0x29c",
+        "  506fe2:\t0028      \tmovs\tr0, r5",
+        "  506fe4:\tf001 ff55 \tbl\t0x508e92",
+        "  506fe8:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x506ff6",
+      "raw_call": "01f04cff",
+      "preceding_context": [
+        "  506fde:\tf44f 7127 \tmov.w\tr1, #668\t@ 0x29c",
+        "  506fe2:\t0028      \tmovs\tr0, r5",
+        "  506fe4:\tf001 ff55 \tbl\t0x508e92",
+        "  506fe8:\t4304      \torrs\tr4, r0",
+        "  506fea:\tf118 0348 \tadds.w\tr3, r8, #72\t@ 0x48",
+        "  506fee:\t2204      \tmovs\tr2, #4",
+        "  506ff0:\tf44f 7128 \tmov.w\tr1, #672\t@ 0x2a0",
+        "  506ff4:\t0028      \tmovs\tr0, r5",
+        "  506ff6:\tf001 ff4c \tbl\t0x508e92",
+        "  506ffa:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x507008",
+      "raw_call": "01f043ff",
+      "preceding_context": [
+        "  506ff0:\tf44f 7128 \tmov.w\tr1, #672\t@ 0x2a0",
+        "  506ff4:\t0028      \tmovs\tr0, r5",
+        "  506ff6:\tf001 ff4c \tbl\t0x508e92",
+        "  506ffa:\t4304      \torrs\tr4, r0",
+        "  506ffc:\tf118 0318 \tadds.w\tr3, r8, #24",
+        "  507000:\t2204      \tmovs\tr2, #4",
+        "  507002:\tf240 51cc \tmovw\tr1, #1484\t@ 0x5cc",
+        "  507006:\t0028      \tmovs\tr0, r5",
+        "  507008:\tf001 ff43 \tbl\t0x508e92",
+        "  50700c:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x50701a",
+      "raw_call": "01f03aff",
+      "preceding_context": [
+        "  507002:\tf240 51cc \tmovw\tr1, #1484\t@ 0x5cc",
+        "  507006:\t0028      \tmovs\tr0, r5",
+        "  507008:\tf001 ff43 \tbl\t0x508e92",
+        "  50700c:\t4304      \torrs\tr4, r0",
+        "  50700e:\tf118 031c \tadds.w\tr3, r8, #28",
+        "  507012:\t2204      \tmovs\tr2, #4",
+        "  507014:\tf240 51ec \tmovw\tr1, #1516\t@ 0x5ec",
+        "  507018:\t0028      \tmovs\tr0, r5",
+        "  50701a:\tf001 ff3a \tbl\t0x508e92",
+        "  50701e:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x50702c",
+      "raw_call": "01f031ff",
+      "preceding_context": [
+        "  507014:\tf240 51ec \tmovw\tr1, #1516\t@ 0x5ec",
+        "  507018:\t0028      \tmovs\tr0, r5",
+        "  50701a:\tf001 ff3a \tbl\t0x508e92",
+        "  50701e:\t4304      \torrs\tr4, r0",
+        "  507020:\tf118 0324 \tadds.w\tr3, r8, #36\t@ 0x24",
+        "  507024:\t2204      \tmovs\tr2, #4",
+        "  507026:\tf240 51dc \tmovw\tr1, #1500\t@ 0x5dc",
+        "  50702a:\t0028      \tmovs\tr0, r5",
+        "  50702c:\tf001 ff31 \tbl\t0x508e92",
+        "  507030:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x50703e",
+      "raw_call": "01f028ff",
+      "preceding_context": [
+        "  507026:\tf240 51dc \tmovw\tr1, #1500\t@ 0x5dc",
+        "  50702a:\t0028      \tmovs\tr0, r5",
+        "  50702c:\tf001 ff31 \tbl\t0x508e92",
+        "  507030:\t4304      \torrs\tr4, r0",
+        "  507032:\tf118 0320 \tadds.w\tr3, r8, #32",
+        "  507036:\t2204      \tmovs\tr2, #4",
+        "  507038:\tf44f 61d7 \tmov.w\tr1, #1720\t@ 0x6b8",
+        "  50703c:\t0028      \tmovs\tr0, r5",
+        "  50703e:\tf001 ff28 \tbl\t0x508e92",
+        "  507042:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x507050",
+      "raw_call": "01f01fff",
+      "preceding_context": [
+        "  507038:\tf44f 61d7 \tmov.w\tr1, #1720\t@ 0x6b8",
+        "  50703c:\t0028      \tmovs\tr0, r5",
+        "  50703e:\tf001 ff28 \tbl\t0x508e92",
+        "  507042:\t4304      \torrs\tr4, r0",
+        "  507044:\tf118 0328 \tadds.w\tr3, r8, #40\t@ 0x28",
+        "  507048:\t2204      \tmovs\tr2, #4",
+        "  50704a:\tf240 61bc \tmovw\tr1, #1724\t@ 0x6bc",
+        "  50704e:\t0028      \tmovs\tr0, r5",
+        "  507050:\tf001 ff1f \tbl\t0x508e92",
+        "  507054:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x507062",
+      "raw_call": "01f016ff",
+      "preceding_context": [
+        "  50704a:\tf240 61bc \tmovw\tr1, #1724\t@ 0x6bc",
+        "  50704e:\t0028      \tmovs\tr0, r5",
+        "  507050:\tf001 ff1f \tbl\t0x508e92",
+        "  507054:\t4304      \torrs\tr4, r0",
+        "  507056:\tf118 032c \tadds.w\tr3, r8, #44\t@ 0x2c",
+        "  50705a:\t2204      \tmovs\tr2, #4",
+        "  50705c:\tf44f 61d9 \tmov.w\tr1, #1736\t@ 0x6c8",
+        "  507060:\t0028      \tmovs\tr0, r5",
+        "  507062:\tf001 ff16 \tbl\t0x508e92",
+        "  507066:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x507074",
+      "raw_call": "01f00dff",
+      "preceding_context": [
+        "  50705c:\tf44f 61d9 \tmov.w\tr1, #1736\t@ 0x6c8",
+        "  507060:\t0028      \tmovs\tr0, r5",
+        "  507062:\tf001 ff16 \tbl\t0x508e92",
+        "  507066:\t4304      \torrs\tr4, r0",
+        "  507068:\tf118 0330 \tadds.w\tr3, r8, #48\t@ 0x30",
+        "  50706c:\t2204      \tmovs\tr2, #4",
+        "  50706e:\tf44f 61bc \tmov.w\tr1, #1504\t@ 0x5e0",
+        "  507072:\t0028      \tmovs\tr0, r5",
+        "  507074:\tf001 ff0d \tbl\t0x508e92",
+        "  507078:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x507086",
+      "raw_call": "01f004ff",
+      "preceding_context": [
+        "  50706e:\tf44f 61bc \tmov.w\tr1, #1504\t@ 0x5e0",
+        "  507072:\t0028      \tmovs\tr0, r5",
+        "  507074:\tf001 ff0d \tbl\t0x508e92",
+        "  507078:\t4304      \torrs\tr4, r0",
+        "  50707a:\tf118 0334 \tadds.w\tr3, r8, #52\t@ 0x34",
+        "  50707e:\t2204      \tmovs\tr2, #4",
+        "  507080:\tf240 61b4 \tmovw\tr1, #1716\t@ 0x6b4",
+        "  507084:\t0028      \tmovs\tr0, r5",
+        "  507086:\tf001 ff04 \tbl\t0x508e92",
+        "  50708a:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x507098",
+      "raw_call": "01f0fbfe",
+      "preceding_context": [
+        "  507080:\tf240 61b4 \tmovw\tr1, #1716\t@ 0x6b4",
+        "  507084:\t0028      \tmovs\tr0, r5",
+        "  507086:\tf001 ff04 \tbl\t0x508e92",
+        "  50708a:\t4304      \torrs\tr4, r0",
+        "  50708c:\tf118 0338 \tadds.w\tr3, r8, #56\t@ 0x38",
+        "  507090:\t2204      \tmovs\tr2, #4",
+        "  507092:\tf44f 61d6 \tmov.w\tr1, #1712\t@ 0x6b0",
+        "  507096:\t0028      \tmovs\tr0, r5",
+        "  507098:\tf001 fefb \tbl\t0x508e92",
+        "  50709c:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x5070aa",
+      "raw_call": "01f0f2fe",
+      "preceding_context": [
+        "  507092:\tf44f 61d6 \tmov.w\tr1, #1712\t@ 0x6b0",
+        "  507096:\t0028      \tmovs\tr0, r5",
+        "  507098:\tf001 fefb \tbl\t0x508e92",
+        "  50709c:\t4304      \torrs\tr4, r0",
+        "  50709e:\tf118 033c \tadds.w\tr3, r8, #60\t@ 0x3c",
+        "  5070a2:\t2204      \tmovs\tr2, #4",
+        "  5070a4:\tf44f 61d8 \tmov.w\tr1, #1728\t@ 0x6c0",
+        "  5070a8:\t0028      \tmovs\tr0, r5",
+        "  5070aa:\tf001 fef2 \tbl\t0x508e92",
+        "  5070ae:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x5070bc",
+      "raw_call": "01f0e9fe",
+      "preceding_context": [
+        "  5070a4:\tf44f 61d8 \tmov.w\tr1, #1728\t@ 0x6c0",
+        "  5070a8:\t0028      \tmovs\tr0, r5",
+        "  5070aa:\tf001 fef2 \tbl\t0x508e92",
+        "  5070ae:\t4304      \torrs\tr4, r0",
+        "  5070b0:\tf118 0340 \tadds.w\tr3, r8, #64\t@ 0x40",
+        "  5070b4:\t2204      \tmovs\tr2, #4",
+        "  5070b6:\tf240 61c4 \tmovw\tr1, #1732\t@ 0x6c4",
+        "  5070ba:\t0028      \tmovs\tr0, r5",
+        "  5070bc:\tf001 fee9 \tbl\t0x508e92",
+        "  5070c0:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x5070ce",
+      "raw_call": "01f0e0fe",
+      "preceding_context": [
+        "  5070b6:\tf240 61c4 \tmovw\tr1, #1732\t@ 0x6c4",
+        "  5070ba:\t0028      \tmovs\tr0, r5",
+        "  5070bc:\tf001 fee9 \tbl\t0x508e92",
+        "  5070c0:\t4304      \torrs\tr4, r0",
+        "  5070c2:\tf118 0344 \tadds.w\tr3, r8, #68\t@ 0x44",
+        "  5070c6:\t2204      \tmovs\tr2, #4",
+        "  5070c8:\tf44f 619f \tmov.w\tr1, #1272\t@ 0x4f8",
+        "  5070cc:\t0028      \tmovs\tr0, r5",
+        "  5070ce:\tf001 fee0 \tbl\t0x508e92",
+        "  5070d2:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x5070e0",
+      "raw_call": "01f0d7fe",
+      "preceding_context": [
+        "  5070c8:\tf44f 619f \tmov.w\tr1, #1272\t@ 0x4f8",
+        "  5070cc:\t0028      \tmovs\tr0, r5",
+        "  5070ce:\tf001 fee0 \tbl\t0x508e92",
+        "  5070d2:\t4304      \torrs\tr4, r0",
+        "  5070d4:\tf118 0354 \tadds.w\tr3, r8, #84\t@ 0x54",
+        "  5070d8:\t2204      \tmovs\tr2, #4",
+        "  5070da:\tf44f 7129 \tmov.w\tr1, #676\t@ 0x2a4",
+        "  5070de:\t0028      \tmovs\tr0, r5",
+        "  5070e0:\tf001 fed7 \tbl\t0x508e92",
+        "  5070e4:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x5070f2",
+      "raw_call": "01f0cefe",
+      "preceding_context": [
+        "  5070da:\tf44f 7129 \tmov.w\tr1, #676\t@ 0x2a4",
+        "  5070de:\t0028      \tmovs\tr0, r5",
+        "  5070e0:\tf001 fed7 \tbl\t0x508e92",
+        "  5070e4:\t4304      \torrs\tr4, r0",
+        "  5070e6:\tf118 034c \tadds.w\tr3, r8, #76\t@ 0x4c",
+        "  5070ea:\t2204      \tmovs\tr2, #4",
+        "  5070ec:\tf44f 619b \tmov.w\tr1, #1240\t@ 0x4d8",
+        "  5070f0:\t0028      \tmovs\tr0, r5",
+        "  5070f2:\tf001 fece \tbl\t0x508e92",
+        "  5070f6:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x507104",
+      "raw_call": "01f0c5fe",
+      "preceding_context": [
+        "  5070ec:\tf44f 619b \tmov.w\tr1, #1240\t@ 0x4d8",
+        "  5070f0:\t0028      \tmovs\tr0, r5",
+        "  5070f2:\tf001 fece \tbl\t0x508e92",
+        "  5070f6:\t4304      \torrs\tr4, r0",
+        "  5070f8:\tf118 0350 \tadds.w\tr3, r8, #80\t@ 0x50",
+        "  5070fc:\t2204      \tmovs\tr2, #4",
+        "  5070fe:\tf240 41f4 \tmovw\tr1, #1268\t@ 0x4f4",
+        "  507102:\t0028      \tmovs\tr0, r5",
+        "  507104:\tf001 fec5 \tbl\t0x508e92",
+        "  507108:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x507116",
+      "raw_call": "01f0bcfe",
+      "preceding_context": [
+        "  5070fe:\tf240 41f4 \tmovw\tr1, #1268\t@ 0x4f4",
+        "  507102:\t0028      \tmovs\tr0, r5",
+        "  507104:\tf001 fec5 \tbl\t0x508e92",
+        "  507108:\t4304      \torrs\tr4, r0",
+        "  50710a:\tf118 0308 \tadds.w\tr3, r8, #8",
+        "  50710e:\t2204      \tmovs\tr2, #4",
+        "  507110:\tf44f 6195 \tmov.w\tr1, #1192\t@ 0x4a8",
+        "  507114:\t0028      \tmovs\tr0, r5",
+        "  507116:\tf001 febc \tbl\t0x508e92",
+        "  50711a:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x507128",
+      "raw_call": "01f0b3fe",
+      "preceding_context": [
+        "  507110:\tf44f 6195 \tmov.w\tr1, #1192\t@ 0x4a8",
+        "  507114:\t0028      \tmovs\tr0, r5",
+        "  507116:\tf001 febc \tbl\t0x508e92",
+        "  50711a:\t4304      \torrs\tr4, r0",
+        "  50711c:\tf118 0308 \tadds.w\tr3, r8, #8",
+        "  507120:\t2204      \tmovs\tr2, #4",
+        "  507122:\tf640 0118 \tmovw\tr1, #2072\t@ 0x818",
+        "  507126:\t0028      \tmovs\tr0, r5",
+        "  507128:\tf001 feb3 \tbl\t0x508e92",
+        "  50712c:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x50713a",
+      "raw_call": "01f0aafe",
+      "preceding_context": [
+        "  507122:\tf640 0118 \tmovw\tr1, #2072\t@ 0x818",
+        "  507126:\t0028      \tmovs\tr0, r5",
+        "  507128:\tf001 feb3 \tbl\t0x508e92",
+        "  50712c:\t4304      \torrs\tr4, r0",
+        "  50712e:\tf118 0358 \tadds.w\tr3, r8, #88\t@ 0x58",
+        "  507132:\t2204      \tmovs\tr2, #4",
+        "  507134:\tf44f 6197 \tmov.w\tr1, #1208\t@ 0x4b8",
+        "  507138:\t0028      \tmovs\tr0, r5",
+        "  50713a:\tf001 feaa \tbl\t0x508e92",
+        "  50713e:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x50714c",
+      "raw_call": "01f0a1fe",
+      "preceding_context": [
+        "  507134:\tf44f 6197 \tmov.w\tr1, #1208\t@ 0x4b8",
+        "  507138:\t0028      \tmovs\tr0, r5",
+        "  50713a:\tf001 feaa \tbl\t0x508e92",
+        "  50713e:\t4304      \torrs\tr4, r0",
+        "  507140:\tf118 035c \tadds.w\tr3, r8, #92\t@ 0x5c",
+        "  507144:\t2204      \tmovs\tr2, #4",
+        "  507146:\tf240 41bc \tmovw\tr1, #1212\t@ 0x4bc",
+        "  50714a:\t0028      \tmovs\tr0, r5",
+        "  50714c:\tf001 fea1 \tbl\t0x508e92",
+        "  507150:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x50715e",
+      "raw_call": "01f098fe",
+      "preceding_context": [
+        "  507146:\tf240 41bc \tmovw\tr1, #1212\t@ 0x4bc",
+        "  50714a:\t0028      \tmovs\tr0, r5",
+        "  50714c:\tf001 fea1 \tbl\t0x508e92",
+        "  507150:\t4304      \torrs\tr4, r0",
+        "  507152:\tf118 0360 \tadds.w\tr3, r8, #96\t@ 0x60",
+        "  507156:\t2204      \tmovs\tr2, #4",
+        "  507158:\tf44f 619a \tmov.w\tr1, #1232\t@ 0x4d0",
+        "  50715c:\t0028      \tmovs\tr0, r5",
+        "  50715e:\tf001 fe98 \tbl\t0x508e92",
+        "  507162:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x507170",
+      "raw_call": "01f08ffe",
+      "preceding_context": [
+        "  507158:\tf44f 619a \tmov.w\tr1, #1232\t@ 0x4d0",
+        "  50715c:\t0028      \tmovs\tr0, r5",
+        "  50715e:\tf001 fe98 \tbl\t0x508e92",
+        "  507162:\t4304      \torrs\tr4, r0",
+        "  507164:\tf118 0364 \tadds.w\tr3, r8, #100\t@ 0x64",
+        "  507168:\t2204      \tmovs\tr2, #4",
+        "  50716a:\tf240 41d4 \tmovw\tr1, #1236\t@ 0x4d4",
+        "  50716e:\t0028      \tmovs\tr0, r5",
+        "  507170:\tf001 fe8f \tbl\t0x508e92",
+        "  507174:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x507182",
+      "raw_call": "01f086fe",
+      "preceding_context": [
+        "  50716a:\tf240 41d4 \tmovw\tr1, #1236\t@ 0x4d4",
+        "  50716e:\t0028      \tmovs\tr0, r5",
+        "  507170:\tf001 fe8f \tbl\t0x508e92",
+        "  507174:\t4304      \torrs\tr4, r0",
+        "  507176:\tf118 0368 \tadds.w\tr3, r8, #104\t@ 0x68",
+        "  50717a:\t2204      \tmovs\tr2, #4",
+        "  50717c:\tf44f 6102 \tmov.w\tr1, #2080\t@ 0x820",
+        "  507180:\t0028      \tmovs\tr0, r5",
+        "  507182:\tf001 fe86 \tbl\t0x508e92",
+        "  507186:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x507194",
+      "raw_call": "01f07dfe",
+      "preceding_context": [
+        "  50717c:\tf44f 6102 \tmov.w\tr1, #2080\t@ 0x820",
+        "  507180:\t0028      \tmovs\tr0, r5",
+        "  507182:\tf001 fe86 \tbl\t0x508e92",
+        "  507186:\t4304      \torrs\tr4, r0",
+        "  507188:\tf118 036c \tadds.w\tr3, r8, #108\t@ 0x6c",
+        "  50718c:\t2204      \tmovs\tr2, #4",
+        "  50718e:\tf640 0124 \tmovw\tr1, #2084\t@ 0x824",
+        "  507192:\t0028      \tmovs\tr0, r5",
+        "  507194:\tf001 fe7d \tbl\t0x508e92",
+        "  507198:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x5071a6",
+      "raw_call": "01f074fe",
+      "preceding_context": [
+        "  50718e:\tf640 0124 \tmovw\tr1, #2084\t@ 0x824",
+        "  507192:\t0028      \tmovs\tr0, r5",
+        "  507194:\tf001 fe7d \tbl\t0x508e92",
+        "  507198:\t4304      \torrs\tr4, r0",
+        "  50719a:\tf118 0370 \tadds.w\tr3, r8, #112\t@ 0x70",
+        "  50719e:\t2204      \tmovs\tr2, #4",
+        "  5071a0:\tf640 0128 \tmovw\tr1, #2088\t@ 0x828",
+        "  5071a4:\t0028      \tmovs\tr0, r5",
+        "  5071a6:\tf001 fe74 \tbl\t0x508e92",
+        "  5071aa:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x5071b8",
+      "raw_call": "01f06bfe",
+      "preceding_context": [
+        "  5071a0:\tf640 0128 \tmovw\tr1, #2088\t@ 0x828",
+        "  5071a4:\t0028      \tmovs\tr0, r5",
+        "  5071a6:\tf001 fe74 \tbl\t0x508e92",
+        "  5071aa:\t4304      \torrs\tr4, r0",
+        "  5071ac:\tf118 0374 \tadds.w\tr3, r8, #116\t@ 0x74",
+        "  5071b0:\t2204      \tmovs\tr2, #4",
+        "  5071b2:\tf640 012c \tmovw\tr1, #2092\t@ 0x82c",
+        "  5071b6:\t0028      \tmovs\tr0, r5",
+        "  5071b8:\tf001 fe6b \tbl\t0x508e92",
+        "  5071bc:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x5071ca",
+      "raw_call": "01f062fe",
+      "preceding_context": [
+        "  5071b2:\tf640 012c \tmovw\tr1, #2092\t@ 0x82c",
+        "  5071b6:\t0028      \tmovs\tr0, r5",
+        "  5071b8:\tf001 fe6b \tbl\t0x508e92",
+        "  5071bc:\t4304      \torrs\tr4, r0",
+        "  5071be:\tf118 0378 \tadds.w\tr3, r8, #120\t@ 0x78",
+        "  5071c2:\t2204      \tmovs\tr2, #4",
+        "  5071c4:\tf44f 6103 \tmov.w\tr1, #2096\t@ 0x830",
+        "  5071c8:\t0028      \tmovs\tr0, r5",
+        "  5071ca:\tf001 fe62 \tbl\t0x508e92",
+        "  5071ce:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x5071dc",
+      "raw_call": "01f059fe",
+      "preceding_context": [
+        "  5071c4:\tf44f 6103 \tmov.w\tr1, #2096\t@ 0x830",
+        "  5071c8:\t0028      \tmovs\tr0, r5",
+        "  5071ca:\tf001 fe62 \tbl\t0x508e92",
+        "  5071ce:\t4304      \torrs\tr4, r0",
+        "  5071d0:\tf118 037c \tadds.w\tr3, r8, #124\t@ 0x7c",
+        "  5071d4:\t2204      \tmovs\tr2, #4",
+        "  5071d6:\tf640 0134 \tmovw\tr1, #2100\t@ 0x834",
+        "  5071da:\t0028      \tmovs\tr0, r5",
+        "  5071dc:\tf001 fe59 \tbl\t0x508e92",
+        "  5071e0:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x5071ee",
+      "raw_call": "01f050fe",
+      "preceding_context": [
+        "  5071d6:\tf640 0134 \tmovw\tr1, #2100\t@ 0x834",
+        "  5071da:\t0028      \tmovs\tr0, r5",
+        "  5071dc:\tf001 fe59 \tbl\t0x508e92",
+        "  5071e0:\t4304      \torrs\tr4, r0",
+        "  5071e2:\tf118 0380 \tadds.w\tr3, r8, #128\t@ 0x80",
+        "  5071e6:\t2204      \tmovs\tr2, #4",
+        "  5071e8:\tf640 0138 \tmovw\tr1, #2104\t@ 0x838",
+        "  5071ec:\t0028      \tmovs\tr0, r5",
+        "  5071ee:\tf001 fe50 \tbl\t0x508e92",
+        "  5071f2:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x507200",
+      "raw_call": "01f047fe",
+      "preceding_context": [
+        "  5071e8:\tf640 0138 \tmovw\tr1, #2104\t@ 0x838",
+        "  5071ec:\t0028      \tmovs\tr0, r5",
+        "  5071ee:\tf001 fe50 \tbl\t0x508e92",
+        "  5071f2:\t4304      \torrs\tr4, r0",
+        "  5071f4:\tf118 0384 \tadds.w\tr3, r8, #132\t@ 0x84",
+        "  5071f8:\t2204      \tmovs\tr2, #4",
+        "  5071fa:\tf640 013c \tmovw\tr1, #2108\t@ 0x83c",
+        "  5071fe:\t0028      \tmovs\tr0, r5",
+        "  507200:\tf001 fe47 \tbl\t0x508e92",
+        "  507204:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x507212",
+      "raw_call": "01f03efe",
+      "preceding_context": [
+        "  5071fa:\tf640 013c \tmovw\tr1, #2108\t@ 0x83c",
+        "  5071fe:\t0028      \tmovs\tr0, r5",
+        "  507200:\tf001 fe47 \tbl\t0x508e92",
+        "  507204:\t4304      \torrs\tr4, r0",
+        "  507206:\tf118 0388 \tadds.w\tr3, r8, #136\t@ 0x88",
+        "  50720a:\t2204      \tmovs\tr2, #4",
+        "  50720c:\tf44f 6104 \tmov.w\tr1, #2112\t@ 0x840",
+        "  507210:\t0028      \tmovs\tr0, r5",
+        "  507212:\tf001 fe3e \tbl\t0x508e92",
+        "  507216:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x507224",
+      "raw_call": "01f035fe",
+      "preceding_context": [
+        "  50720c:\tf44f 6104 \tmov.w\tr1, #2112\t@ 0x840",
+        "  507210:\t0028      \tmovs\tr0, r5",
+        "  507212:\tf001 fe3e \tbl\t0x508e92",
+        "  507216:\t4304      \torrs\tr4, r0",
+        "  507218:\tf118 038c \tadds.w\tr3, r8, #140\t@ 0x8c",
+        "  50721c:\t2204      \tmovs\tr2, #4",
+        "  50721e:\tf640 0144 \tmovw\tr1, #2116\t@ 0x844",
+        "  507222:\t0028      \tmovs\tr0, r5",
+        "  507224:\tf001 fe35 \tbl\t0x508e92",
+        "  507228:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x507236",
+      "raw_call": "01f02cfe",
+      "preceding_context": [
+        "  50721e:\tf640 0144 \tmovw\tr1, #2116\t@ 0x844",
+        "  507222:\t0028      \tmovs\tr0, r5",
+        "  507224:\tf001 fe35 \tbl\t0x508e92",
+        "  507228:\t4304      \torrs\tr4, r0",
+        "  50722a:\tf118 0390 \tadds.w\tr3, r8, #144\t@ 0x90",
+        "  50722e:\t2204      \tmovs\tr2, #4",
+        "  507230:\tf640 0148 \tmovw\tr1, #2120\t@ 0x848",
+        "  507234:\t0028      \tmovs\tr0, r5",
+        "  507236:\tf001 fe2c \tbl\t0x508e92",
+        "  50723a:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x507248",
+      "raw_call": "01f023fe",
+      "preceding_context": [
+        "  507230:\tf640 0148 \tmovw\tr1, #2120\t@ 0x848",
+        "  507234:\t0028      \tmovs\tr0, r5",
+        "  507236:\tf001 fe2c \tbl\t0x508e92",
+        "  50723a:\t4304      \torrs\tr4, r0",
+        "  50723c:\tf118 0394 \tadds.w\tr3, r8, #148\t@ 0x94",
+        "  507240:\t2204      \tmovs\tr2, #4",
+        "  507242:\tf640 014c \tmovw\tr1, #2124\t@ 0x84c",
+        "  507246:\t0028      \tmovs\tr0, r5",
+        "  507248:\tf001 fe23 \tbl\t0x508e92",
+        "  50724c:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x50725a",
+      "raw_call": "01f01afe",
+      "preceding_context": [
+        "  507242:\tf640 014c \tmovw\tr1, #2124\t@ 0x84c",
+        "  507246:\t0028      \tmovs\tr0, r5",
+        "  507248:\tf001 fe23 \tbl\t0x508e92",
+        "  50724c:\t4304      \torrs\tr4, r0",
+        "  50724e:\tf118 0398 \tadds.w\tr3, r8, #152\t@ 0x98",
+        "  507252:\t2204      \tmovs\tr2, #4",
+        "  507254:\tf240 41c4 \tmovw\tr1, #1220\t@ 0x4c4",
+        "  507258:\t0028      \tmovs\tr0, r5",
+        "  50725a:\tf001 fe1a \tbl\t0x508e92",
+        "  50725e:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x50726c",
+      "raw_call": "01f011fe",
+      "preceding_context": [
+        "  507254:\tf240 41c4 \tmovw\tr1, #1220\t@ 0x4c4",
+        "  507258:\t0028      \tmovs\tr0, r5",
+        "  50725a:\tf001 fe1a \tbl\t0x508e92",
+        "  50725e:\t4304      \torrs\tr4, r0",
+        "  507260:\tf118 039c \tadds.w\tr3, r8, #156\t@ 0x9c",
+        "  507264:\t2202      \tmovs\tr2, #2",
+        "  507266:\tf44f 6105 \tmov.w\tr1, #2128\t@ 0x850",
+        "  50726a:\t0028      \tmovs\tr0, r5",
+        "  50726c:\tf001 fe11 \tbl\t0x508e92",
+        "  507270:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x5072a8",
+      "raw_call": "01f0f3fd",
+      "preceding_context": [
+        "  507292:\t0028      \tmovs\tr0, r5",
+        "  507294:\tf000 fb1d \tbl\t0x5078d2",
+        "  507298:\t4304      \torrs\tr4, r0",
+        "  50729a:\tf8df 7440 \tldr.w\tr7, [pc, #1088]\t@ 0x5076dc",
+        "  50729e:\t003b      \tmovs\tr3, r7",
+        "  5072a0:\t227d      \tmovs\tr2, #125\t@ 0x7d",
+        "  5072a2:\tf44f 6148 \tmov.w\tr1, #3200\t@ 0xc80",
+        "  5072a6:\t0028      \tmovs\tr0, r5",
+        "  5072a8:\tf001 fdf3 \tbl\t0x508e92",
+        "  5072ac:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x5072c6",
+      "raw_call": "01f0e4fd",
+      "preceding_context": [
+        "  5072b0:\tf117 0108 \tadds.w\tr1, r7, #8",
+        "  5072b4:\tf10d 0904 \tadd.w\tr9, sp, #4",
+        "  5072b8:\t4648      \tmov\tr0, r9",
+        "  5072ba:\tf732 fc93 \tbl\t0x439be4",
+        "  5072be:\tab01      \tadd\tr3, sp, #4",
+        "  5072c0:\t2204      \tmovs\tr2, #4",
+        "  5072c2:\t21b4      \tmovs\tr1, #180\t@ 0xb4",
+        "  5072c4:\t0028      \tmovs\tr0, r5",
+        "  5072c6:\tf001 fde4 \tbl\t0x508e92",
+        "  5072ca:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x5072d8",
+      "raw_call": "01f0dbfd",
+      "preceding_context": [
+        "  5072c2:\t21b4      \tmovs\tr1, #180\t@ 0xb4",
+        "  5072c4:\t0028      \tmovs\tr0, r5",
+        "  5072c6:\tf001 fde4 \tbl\t0x508e92",
+        "  5072ca:\t4304      \torrs\tr4, r0",
+        "  5072cc:\tf118 03a0 \tadds.w\tr3, r8, #160\t@ 0xa0",
+        "  5072d0:\t2204      \tmovs\tr2, #4",
+        "  5072d2:\tf44f 6149 \tmov.w\tr1, #3216\t@ 0xc90",
+        "  5072d6:\t0028      \tmovs\tr0, r5",
+        "  5072d8:\tf001 fddb \tbl\t0x508e92",
+        "  5072dc:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x5072ea",
+      "raw_call": "01f0d2fd",
+      "preceding_context": [
+        "  5072d2:\tf44f 6149 \tmov.w\tr1, #3216\t@ 0xc90",
+        "  5072d6:\t0028      \tmovs\tr0, r5",
+        "  5072d8:\tf001 fddb \tbl\t0x508e92",
+        "  5072dc:\t4304      \torrs\tr4, r0",
+        "  5072de:\tf118 03a4 \tadds.w\tr3, r8, #164\t@ 0xa4",
+        "  5072e2:\t2204      \tmovs\tr2, #4",
+        "  5072e4:\tf640 4194 \tmovw\tr1, #3220\t@ 0xc94",
+        "  5072e8:\t0028      \tmovs\tr0, r5",
+        "  5072ea:\tf001 fdd2 \tbl\t0x508e92",
+        "  5072ee:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x507316",
+      "raw_call": "01f0bcfd",
+      "preceding_context": [
+        "  507302:\t2800      \tcmp\tr0, #0",
+        "  507304:\td10a      \tbne.n\t0x50731c",
+        "  507306:\tf8df 03d8 \tldr.w\tr0, [pc, #984]\t@ 0x5076e0",
+        "  50730a:\t9004      \tstr\tr0, [sp, #16]",
+        "  50730c:\tab04      \tadd\tr3, sp, #16",
+        "  50730e:\t2204      \tmovs\tr2, #4",
+        "  507310:\tf44f 61d4 \tmov.w\tr1, #1696\t@ 0x6a0",
+        "  507314:\t0028      \tmovs\tr0, r5",
+        "  507316:\tf001 fdbc \tbl\t0x508e92",
+        "  50731a:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x507510",
+      "raw_call": "01f0bffc",
+      "preceding_context": [
+        "  5074fc:\t0039      \tmovs\tr1, r7",
+        "  5074fe:\tf10d 0804 \tadd.w\tr8, sp, #4",
+        "  507502:\t4640      \tmov\tr0, r8",
+        "  507504:\tf732 fb6e \tbl\t0x439be4",
+        "  507508:\tab01      \tadd\tr3, sp, #4",
+        "  50750a:\t2204      \tmovs\tr2, #4",
+        "  50750c:\t21d0      \tmovs\tr1, #208\t@ 0xd0",
+        "  50750e:\t0028      \tmovs\tr0, r5",
+        "  507510:\tf001 fcbf \tbl\t0x508e92",
+        "  507514:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x50752c",
+      "raw_call": "01f0b1fc",
+      "preceding_context": [
+        "  50751a:\t1d39      \tadds\tr1, r7, #4",
+        "  50751c:\tac01      \tadd\tr4, sp, #4",
+        "  50751e:\t0020      \tmovs\tr0, r4",
+        "  507520:\tf732 fb60 \tbl\t0x439be4",
+        "  507524:\tab01      \tadd\tr3, sp, #4",
+        "  507526:\t2204      \tmovs\tr2, #4",
+        "  507528:\t21d4      \tmovs\tr1, #212\t@ 0xd4",
+        "  50752a:\t0028      \tmovs\tr0, r5",
+        "  50752c:\tf001 fcb1 \tbl\t0x508e92",
+        "  507530:\t0004      \tmovs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x507568",
+      "raw_call": "01f093fc",
+      "preceding_context": [
+        "  507554:\te001      \tb.n\t0x50755a",
+        "  507556:\tf05f 34ff \tmovs.w\tr4, #4294967295\t@ 0xffffffff",
+        "  50755a:\t2c00      \tcmp\tr4, #0",
+        "  50755c:\td107      \tbne.n\t0x50756e",
+        "  50755e:\t0033      \tmovs\tr3, r6",
+        "  507560:\t2230      \tmovs\tr2, #48\t@ 0x30",
+        "  507562:\tf44f 71aa \tmov.w\tr1, #340\t@ 0x154",
+        "  507566:\t0028      \tmovs\tr0, r5",
+        "  507568:\tf001 fc93 \tbl\t0x508e92",
+        "  50756c:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x5075b2",
+      "raw_call": "01f06efc",
+      "preceding_context": [
+        "  50759a:\t0030      \tmovs\tr0, r6",
+        "  50759c:\tb2c0      \tuxtb\tr0, r0",
+        "  50759e:\t46bc      \tmov\tip, r7",
+        "  5075a0:\tfa5f fc8c \tuxtb.w\tip, ip",
+        "  5075a4:\tea5f 0c8c \tmovs.w\tip, ip, lsl #2",
+        "  5075a8:\tfb01 c100 \tmla\tr1, r1, r0, ip",
+        "  5075ac:\tf511 7119 \tadds.w\tr1, r1, #612\t@ 0x264",
+        "  5075b0:\t0020      \tmovs\tr0, r4",
+        "  5075b2:\tf001 fc6e \tbl\t0x508e92",
+        "  5075b6:\tea50 0008 \torrs.w\tr0, r0, r8"
+      ]
+    },
+    {
+      "callsite": "0x5075f2",
+      "raw_call": "01f04efc",
+      "preceding_context": [
+        "  5075de:\t0017      \tmovs\tr7, r2",
+        "  5075e0:\t2600      \tmovs\tr6, #0",
+        "  5075e2:\tf8df 0128 \tldr.w\tr0, [pc, #296]\t@ 0x50770c",
+        "  5075e6:\t9000      \tstr\tr0, [sp, #0]",
+        "  5075e8:\t002b      \tmovs\tr3, r5",
+        "  5075ea:\t220c      \tmovs\tr2, #12",
+        "  5075ec:\tf240 7174 \tmovw\tr1, #1908\t@ 0x774",
+        "  5075f0:\t0020      \tmovs\tr0, r4",
+        "  5075f2:\tf001 fc4e \tbl\t0x508e92",
+        "  5075f6:\t4306      \torrs\tr6, r0"
+      ]
+    },
+    {
+      "callsite": "0x507602",
+      "raw_call": "01f046fc",
+      "preceding_context": [
+        "  5075ec:\tf240 7174 \tmovw\tr1, #1908\t@ 0x774",
+        "  5075f0:\t0020      \tmovs\tr0, r4",
+        "  5075f2:\tf001 fc4e \tbl\t0x508e92",
+        "  5075f6:\t4306      \torrs\tr6, r0",
+        "  5075f8:\t002b      \tmovs\tr3, r5",
+        "  5075fa:\t220c      \tmovs\tr2, #12",
+        "  5075fc:\tf640 1174 \tmovw\tr1, #2420\t@ 0x974",
+        "  507600:\t0020      \tmovs\tr0, r4",
+        "  507602:\tf001 fc46 \tbl\t0x508e92",
+        "  507606:\t4306      \torrs\tr6, r0"
+      ]
+    },
+    {
+      "callsite": "0x507618",
+      "raw_call": "01f03bfc",
+      "preceding_context": [
+        "  507606:\t4306      \torrs\tr6, r0",
+        "  507608:\t0038      \tmovs\tr0, r7",
+        "  50760a:\tb2c0      \tuxtb\tr0, r0",
+        "  50760c:\t9001      \tstr\tr0, [sp, #4]",
+        "  50760e:\tab01      \tadd\tr3, sp, #4",
+        "  507610:\t2204      \tmovs\tr2, #4",
+        "  507612:\tf44f 61ee \tmov.w\tr1, #1904\t@ 0x770",
+        "  507616:\t0020      \tmovs\tr0, r4",
+        "  507618:\tf001 fc3b \tbl\t0x508e92",
+        "  50761c:\t4306      \torrs\tr6, r0"
+      ]
+    },
+    {
+      "callsite": "0x507654",
+      "raw_call": "01f01dfc",
+      "preceding_context": [
+        "  507640:\t2f01      \tcmp\tr7, #1",
+        "  507642:\td102      \tbne.n\t0x50764a",
+        "  507644:\tf242 700f \tmovw\tr0, #9999\t@ 0x270f",
+        "  507648:\t9000      \tstr\tr0, [sp, #0]",
+        "  50764a:\t466b      \tmov\tr3, sp",
+        "  50764c:\t2204      \tmovs\tr2, #4",
+        "  50764e:\tf240 716c \tmovw\tr1, #1900\t@ 0x76c",
+        "  507652:\t0020      \tmovs\tr0, r4",
+        "  507654:\tf001 fc1d \tbl\t0x508e92",
+        "  507658:\t4306      \torrs\tr6, r0"
+      ]
+    },
+    {
+      "callsite": "0x507678",
+      "raw_call": "01f00bfc",
+      "preceding_context": [
+        "  507666:\t6041      \tstr\tr1, [r0, #4]",
+        "  507668:\t68a9      \tldr\tr1, [r5, #8]",
+        "  50766a:\t1149      \tasrs\tr1, r1, #5",
+        "  50766c:\t6081      \tstr\tr1, [r0, #8]",
+        "  50766e:\tab02      \tadd\tr3, sp, #8",
+        "  507670:\t220c      \tmovs\tr2, #12",
+        "  507672:\tf44f 61f0 \tmov.w\tr1, #1920\t@ 0x780",
+        "  507676:\t0020      \tmovs\tr0, r4",
+        "  507678:\tf001 fc0b \tbl\t0x508e92",
+        "  50767c:\t4306      \torrs\tr6, r0"
+      ]
+    },
+    {
+      "callsite": "0x507688",
+      "raw_call": "01f003fc",
+      "preceding_context": [
+        "  507672:\tf44f 61f0 \tmov.w\tr1, #1920\t@ 0x780",
+        "  507676:\t0020      \tmovs\tr0, r4",
+        "  507678:\tf001 fc0b \tbl\t0x508e92",
+        "  50767c:\t4306      \torrs\tr6, r0",
+        "  50767e:\tab02      \tadd\tr3, sp, #8",
+        "  507680:\t220c      \tmovs\tr2, #12",
+        "  507682:\tf240 718c \tmovw\tr1, #1932\t@ 0x78c",
+        "  507686:\t0020      \tmovs\tr0, r4",
+        "  507688:\tf001 fc03 \tbl\t0x508e92",
+        "  50768c:\t4306      \torrs\tr6, r0"
+      ]
+    },
+    {
+      "callsite": "0x5076d2",
+      "raw_call": "01f0defb",
+      "preceding_context": [
+        "  5076bc:\t7481      \tstrb\tr1, [r0, #18]",
+        "  5076be:\te003      \tb.n\t0x5076c8",
+        "  5076c0:\t7c81      \tldrb\tr1, [r0, #18]",
+        "  5076c2:\tf051 0101 \torrs.w\tr1, r1, #1",
+        "  5076c6:\t7481      \tstrb\tr1, [r0, #18]",
+        "  5076c8:\tf110 0312 \tadds.w\tr3, r0, #18",
+        "  5076cc:\t2201      \tmovs\tr2, #1",
+        "  5076ce:\tf44f 71df \tmov.w\tr1, #446\t@ 0x1be",
+        "  5076d2:\tf001 fbde \tbl\t0x508e92",
+        "  5076d6:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x50771c",
+      "raw_call": "01f0b9fb",
+      "preceding_context": [
+        "  50770a:\t006c      \tlsls\tr4, r5, #1",
+        "  50770c:\ta120      \tadd\tr1, pc, #128\t@ (adr r1, 0x507790)",
+        "  50770e:\t0007      \tmovs\tr7, r0",
+        "  507710:\tb510      \tpush\t{r4, lr}",
+        "  507712:\t000b      \tmovs\tr3, r1",
+        "  507714:\t2400      \tmovs\tr4, #0",
+        "  507716:\t2212      \tmovs\tr2, #18",
+        "  507718:\tf44f 71d6 \tmov.w\tr1, #428\t@ 0x1ac",
+        "  50771c:\tf001 fbb9 \tbl\t0x508e92",
+        "  507720:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x507a78",
+      "raw_call": "01f00bfa",
+      "preceding_context": [
+        "  507a64:\t2800      \tcmp\tr0, #0",
+        "  507a66:\td001      \tbeq.n\t0x507a6c",
+        "  507a68:\t0020      \tmovs\tr0, r4",
+        "  507a6a:\te016      \tb.n\t0x507a9a",
+        "  507a6c:\tf10d 0301 \tadd.w\tr3, sp, #1",
+        "  507a70:\t2201      \tmovs\tr2, #1",
+        "  507a72:\tf640 1124 \tmovw\tr1, #2340\t@ 0x924",
+        "  507a76:\t0028      \tmovs\tr0, r5",
+        "  507a78:\tf001 fa0b \tbl\t0x508e92",
+        "  507a7c:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x508202",
+      "raw_call": "00f046fe",
+      "preceding_context": [
+        "  5081ee:\tf05f 30ff \tmovs.w\tr0, #4294967295\t@ 0xffffffff",
+        "  5081f2:\te044      \tb.n\t0x50827e",
+        "  5081f4:\t2001      \tmovs\tr0, #1",
+        "  5081f6:\t9001      \tstr\tr0, [sp, #4]",
+        "  5081f8:\tab01      \tadd\tr3, sp, #4",
+        "  5081fa:\t2204      \tmovs\tr2, #4",
+        "  5081fc:\tf44f 718c \tmov.w\tr1, #280\t@ 0x118",
+        "  508200:\t0020      \tmovs\tr0, r4",
+        "  508202:\tf000 fe46 \tbl\t0x508e92",
+        "  508206:\t4305      \torrs\tr5, r0"
+      ]
+    },
+    {
+      "callsite": "0x508212",
+      "raw_call": "00f03efe",
+      "preceding_context": [
+        "  5081fc:\tf44f 718c \tmov.w\tr1, #280\t@ 0x118",
+        "  508200:\t0020      \tmovs\tr0, r4",
+        "  508202:\tf000 fe46 \tbl\t0x508e92",
+        "  508206:\t4305      \torrs\tr5, r0",
+        "  508208:\tab02      \tadd\tr3, sp, #8",
+        "  50820a:\t2202      \tmovs\tr2, #2",
+        "  50820c:\tf44f 718e \tmov.w\tr1, #284\t@ 0x11c",
+        "  508210:\t0020      \tmovs\tr0, r4",
+        "  508212:\tf000 fe3e \tbl\t0x508e92",
+        "  508216:\t4305      \torrs\tr5, r0"
+      ]
+    },
+    {
+      "callsite": "0x508222",
+      "raw_call": "00f036fe",
+      "preceding_context": [
+        "  50820c:\tf44f 718e \tmov.w\tr1, #284\t@ 0x11c",
+        "  508210:\t0020      \tmovs\tr0, r4",
+        "  508212:\tf000 fe3e \tbl\t0x508e92",
+        "  508216:\t4305      \torrs\tr5, r0",
+        "  508218:\tab03      \tadd\tr3, sp, #12",
+        "  50821a:\t2202      \tmovs\tr2, #2",
+        "  50821c:\tf44f 7190 \tmov.w\tr1, #288\t@ 0x120",
+        "  508220:\t0020      \tmovs\tr0, r4",
+        "  508222:\tf000 fe36 \tbl\t0x508e92",
+        "  508226:\t4305      \torrs\tr5, r0"
+      ]
+    },
+    {
+      "callsite": "0x508232",
+      "raw_call": "00f02efe",
+      "preceding_context": [
+        "  50821c:\tf44f 7190 \tmov.w\tr1, #288\t@ 0x120",
+        "  508220:\t0020      \tmovs\tr0, r4",
+        "  508222:\tf000 fe36 \tbl\t0x508e92",
+        "  508226:\t4305      \torrs\tr5, r0",
+        "  508228:\tab04      \tadd\tr3, sp, #16",
+        "  50822a:\t2201      \tmovs\tr2, #1",
+        "  50822c:\tf44f 718f \tmov.w\tr1, #286\t@ 0x11e",
+        "  508230:\t0020      \tmovs\tr0, r4",
+        "  508232:\tf000 fe2e \tbl\t0x508e92",
+        "  508236:\t4305      \torrs\tr5, r0"
+      ]
+    },
+    {
+      "callsite": "0x5083c6",
+      "raw_call": "00f064fd",
+      "preceding_context": [
+        "  5083b4:\t4305      \torrs\tr5, r0",
+        "  5083b6:\t9800      \tldr\tr0, [sp, #0]",
+        "  5083b8:\t2800      \tcmp\tr0, #0",
+        "  5083ba:\td111      \tbne.n\t0x5083e0",
+        "  5083bc:\t4b43      \tldr\tr3, [pc, #268]\t@ (0x5084cc)",
+        "  5083be:\t2219      \tmovs\tr2, #25",
+        "  5083c0:\tf44f 51ac \tmov.w\tr1, #5504\t@ 0x1580",
+        "  5083c4:\t0020      \tmovs\tr0, r4",
+        "  5083c6:\tf000 fd64 \tbl\t0x508e92",
+        "  5083ca:\t4305      \torrs\tr5, r0"
+      ]
+    },
+    {
+      "callsite": "0x5083d6",
+      "raw_call": "00f05cfd",
+      "preceding_context": [
+        "  5083c4:\t0020      \tmovs\tr0, r4",
+        "  5083c6:\tf000 fd64 \tbl\t0x508e92",
+        "  5083ca:\t4305      \torrs\tr5, r0",
+        "  5083cc:\t002e      \tmovs\tr6, r5",
+        "  5083ce:\tab01      \tadd\tr3, sp, #4",
+        "  5083d0:\t2204      \tmovs\tr2, #4",
+        "  5083d2:\t2148      \tmovs\tr1, #72\t@ 0x48",
+        "  5083d4:\t0020      \tmovs\tr0, r4",
+        "  5083d6:\tf000 fd5c \tbl\t0x508e92",
+        "  5083da:\t0005      \tmovs\tr5, r0"
+      ]
+    },
+    {
+      "callsite": "0x5083f8",
+      "raw_call": "00f04bfd",
+      "preceding_context": [
+        "  5083e2:\t9901      \tldr\tr1, [sp, #4]",
+        "  5083e4:\t4288      \tcmp\tr0, r1",
+        "  5083e6:\td001      \tbeq.n\t0x5083ec",
+        "  5083e8:\tf05f 35ff \tmovs.w\tr5, #4294967295\t@ 0xffffffff",
+        "  5083ec:\t4b38      \tldr\tr3, [pc, #224]\t@ (0x5084d0)",
+        "  5083ee:\tf240 2205 \tmovw\tr2, #517\t@ 0x205",
+        "  5083f2:\tf241 0188 \tmovw\tr1, #4232\t@ 0x1088",
+        "  5083f6:\t0020      \tmovs\tr0, r4",
+        "  5083f8:\tf000 fd4b \tbl\t0x508e92",
+        "  5083fc:\t4305      \torrs\tr5, r0"
+      ]
+    },
+    {
+      "callsite": "0x508450",
+      "raw_call": "00f01ffd",
+      "preceding_context": [
+        "  50843a:\ta802      \tadd\tr0, sp, #8",
+        "  50843c:\t4925      \tldr\tr1, [pc, #148]\t@ (0x5084d4)",
+        "  50843e:\te9d1 2300 \tldrd\tr2, r3, [r1]",
+        "  508442:\te9c0 2300 \tstrd\tr2, r3, [r0]",
+        "  508446:\t003b      \tmovs\tr3, r7",
+        "  508448:\t2204      \tmovs\tr2, #4",
+        "  50844a:\tf241 01ac \tmovw\tr1, #4268\t@ 0x10ac",
+        "  50844e:\t0020      \tmovs\tr0, r4",
+        "  508450:\tf000 fd1f \tbl\t0x508e92",
+        "  508454:\t4305      \torrs\tr5, r0"
+      ]
+    },
+    {
+      "callsite": "0x508460",
+      "raw_call": "00f017fd",
+      "preceding_context": [
+        "  50844a:\tf241 01ac \tmovw\tr1, #4268\t@ 0x10ac",
+        "  50844e:\t0020      \tmovs\tr0, r4",
+        "  508450:\tf000 fd1f \tbl\t0x508e92",
+        "  508454:\t4305      \torrs\tr5, r0",
+        "  508456:\t1d3b      \tadds\tr3, r7, #4",
+        "  508458:\t2202      \tmovs\tr2, #2",
+        "  50845a:\tf241 01aa \tmovw\tr1, #4266\t@ 0x10aa",
+        "  50845e:\t0020      \tmovs\tr0, r4",
+        "  508460:\tf000 fd17 \tbl\t0x508e92",
+        "  508464:\t4305      \torrs\tr5, r0"
+      ]
+    },
+    {
+      "callsite": "0x5084ac",
+      "raw_call": "00f0f1fc",
+      "preceding_context": [
+        "  508498:\t9801      \tldr\tr0, [sp, #4]",
+        "  50849a:\t2102      \tmovs\tr1, #2",
+        "  50849c:\tfb90 f0f1 \tsdiv\tr0, r0, r1",
+        "  5084a0:\t9001      \tstr\tr0, [sp, #4]",
+        "  5084a2:\tab01      \tadd\tr3, sp, #4",
+        "  5084a4:\t2204      \tmovs\tr2, #4",
+        "  5084a6:\tf241 01d8 \tmovw\tr1, #4312\t@ 0x10d8",
+        "  5084aa:\t0020      \tmovs\tr0, r4",
+        "  5084ac:\tf000 fcf1 \tbl\t0x508e92",
+        "  5084b0:\t4305      \torrs\tr5, r0"
+      ]
+    },
+    {
+      "callsite": "0x5084bc",
+      "raw_call": "00f0e9fc",
+      "preceding_context": [
+        "  5084a6:\tf241 01d8 \tmovw\tr1, #4312\t@ 0x10d8",
+        "  5084aa:\t0020      \tmovs\tr0, r4",
+        "  5084ac:\tf000 fcf1 \tbl\t0x508e92",
+        "  5084b0:\t4305      \torrs\tr5, r0",
+        "  5084b2:\tab01      \tadd\tr3, sp, #4",
+        "  5084b4:\t2204      \tmovs\tr2, #4",
+        "  5084b6:\tf241 01dc \tmovw\tr1, #4316\t@ 0x10dc",
+        "  5084ba:\t0020      \tmovs\tr0, r4",
+        "  5084bc:\tf000 fce9 \tbl\t0x508e92",
+        "  5084c0:\t4305      \torrs\tr5, r0"
+      ]
+    },
+    {
+      "callsite": "0x508506",
+      "raw_call": "00f0c4fc",
+      "preceding_context": [
+        "  5084f2:\t4306      \torrs\tr6, r0",
+        "  5084f4:\t9800      \tldr\tr0, [sp, #0]",
+        "  5084f6:\t2800      \tcmp\tr0, #0",
+        "  5084f8:\td112      \tbne.n\t0x508520",
+        "  5084fa:\tf8df 3360 \tldr.w\tr3, [pc, #864]\t@ 0x50885c",
+        "  5084fe:\t2219      \tmovs\tr2, #25",
+        "  508500:\tf44f 51ac \tmov.w\tr1, #5504\t@ 0x1580",
+        "  508504:\t0020      \tmovs\tr0, r4",
+        "  508506:\tf000 fcc4 \tbl\t0x508e92",
+        "  50850a:\t4306      \torrs\tr6, r0"
+      ]
+    },
+    {
+      "callsite": "0x508516",
+      "raw_call": "00f0bcfc",
+      "preceding_context": [
+        "  508504:\t0020      \tmovs\tr0, r4",
+        "  508506:\tf000 fcc4 \tbl\t0x508e92",
+        "  50850a:\t4306      \torrs\tr6, r0",
+        "  50850c:\t0037      \tmovs\tr7, r6",
+        "  50850e:\tab01      \tadd\tr3, sp, #4",
+        "  508510:\t2204      \tmovs\tr2, #4",
+        "  508512:\t2148      \tmovs\tr1, #72\t@ 0x48",
+        "  508514:\t0020      \tmovs\tr0, r4",
+        "  508516:\tf000 fcbc \tbl\t0x508e92",
+        "  50851a:\t0006      \tmovs\tr6, r0"
+      ]
+    },
+    {
+      "callsite": "0x50853a",
+      "raw_call": "00f0aafc",
+      "preceding_context": [
+        "  508522:\t9901      \tldr\tr1, [sp, #4]",
+        "  508524:\t4288      \tcmp\tr0, r1",
+        "  508526:\td001      \tbeq.n\t0x50852c",
+        "  508528:\tf05f 36ff \tmovs.w\tr6, #4294967295\t@ 0xffffffff",
+        "  50852c:\tf8df 3330 \tldr.w\tr3, [pc, #816]\t@ 0x508860",
+        "  508530:\tf240 1277 \tmovw\tr2, #375\t@ 0x177",
+        "  508534:\tf44f 51b0 \tmov.w\tr1, #5632\t@ 0x1600",
+        "  508538:\t0020      \tmovs\tr0, r4",
+        "  50853a:\tf000 fcaa \tbl\t0x508e92",
+        "  50853e:\t4306      \torrs\tr6, r0"
+      ]
+    },
+    {
+      "callsite": "0x50867e",
+      "raw_call": "00f008fc",
+      "preceding_context": [
+        "  50866c:\t4e7d      \tldr\tr6, [pc, #500]\t@ (0x508864)",
+        "  50866e:\t002b      \tmovs\tr3, r5",
+        "  508670:\t2204      \tmovs\tr2, #4",
+        "  508672:\t0031      \tmovs\tr1, r6",
+        "  508674:\tb209      \tsxth\tr1, r1",
+        "  508676:\tf501 51b0 \tadd.w\tr1, r1, #5632\t@ 0x1600",
+        "  50867a:\t3118      \tadds\tr1, #24",
+        "  50867c:\t0020      \tmovs\tr0, r4",
+        "  50867e:\tf000 fc08 \tbl\t0x508e92",
+        "  508682:\t4307      \torrs\tr7, r0"
+      ]
+    },
+    {
+      "callsite": "0x508694",
+      "raw_call": "00f0fdfb",
+      "preceding_context": [
+        "  508682:\t4307      \torrs\tr7, r0",
+        "  508684:\t1d2b      \tadds\tr3, r5, #4",
+        "  508686:\t2204      \tmovs\tr2, #4",
+        "  508688:\t0031      \tmovs\tr1, r6",
+        "  50868a:\tb209      \tsxth\tr1, r1",
+        "  50868c:\tf501 51b0 \tadd.w\tr1, r1, #5632\t@ 0x1600",
+        "  508690:\t311c      \tadds\tr1, #28",
+        "  508692:\t0020      \tmovs\tr0, r4",
+        "  508694:\tf000 fbfd \tbl\t0x508e92",
+        "  508698:\t4307      \torrs\tr7, r0"
+      ]
+    },
+    {
+      "callsite": "0x5086ac",
+      "raw_call": "00f0f1fb",
+      "preceding_context": [
+        "  508698:\t4307      \torrs\tr7, r0",
+        "  50869a:\tf115 0308 \tadds.w\tr3, r5, #8",
+        "  50869e:\t2201      \tmovs\tr2, #1",
+        "  5086a0:\t0031      \tmovs\tr1, r6",
+        "  5086a2:\tb209      \tsxth\tr1, r1",
+        "  5086a4:\tf501 51b0 \tadd.w\tr1, r1, #5632\t@ 0x1600",
+        "  5086a8:\t3114      \tadds\tr1, #20",
+        "  5086aa:\t0020      \tmovs\tr0, r4",
+        "  5086ac:\tf000 fbf1 \tbl\t0x508e92",
+        "  5086b0:\t4307      \torrs\tr7, r0"
+      ]
+    },
+    {
+      "callsite": "0x5086c4",
+      "raw_call": "00f0e5fb",
+      "preceding_context": [
+        "  5086b0:\t4307      \torrs\tr7, r0",
+        "  5086b2:\tf115 0309 \tadds.w\tr3, r5, #9",
+        "  5086b6:\t2201      \tmovs\tr2, #1",
+        "  5086b8:\t0031      \tmovs\tr1, r6",
+        "  5086ba:\tb209      \tsxth\tr1, r1",
+        "  5086bc:\tf501 51b0 \tadd.w\tr1, r1, #5632\t@ 0x1600",
+        "  5086c0:\t3115      \tadds\tr1, #21",
+        "  5086c2:\t0020      \tmovs\tr0, r4",
+        "  5086c4:\tf000 fbe5 \tbl\t0x508e92",
+        "  5086c8:\t4307      \torrs\tr7, r0"
+      ]
+    },
+    {
+      "callsite": "0x5086dc",
+      "raw_call": "00f0d9fb",
+      "preceding_context": [
+        "  5086c8:\t4307      \torrs\tr7, r0",
+        "  5086ca:\tf115 030c \tadds.w\tr3, r5, #12",
+        "  5086ce:\t2204      \tmovs\tr2, #4",
+        "  5086d0:\t0031      \tmovs\tr1, r6",
+        "  5086d2:\tb209      \tsxth\tr1, r1",
+        "  5086d4:\tf501 51b0 \tadd.w\tr1, r1, #5632\t@ 0x1600",
+        "  5086d8:\t313c      \tadds\tr1, #60\t@ 0x3c",
+        "  5086da:\t0020      \tmovs\tr0, r4",
+        "  5086dc:\tf000 fbd9 \tbl\t0x508e92",
+        "  5086e0:\t4307      \torrs\tr7, r0"
+      ]
+    },
+    {
+      "callsite": "0x5086f2",
+      "raw_call": "00f0cefb",
+      "preceding_context": [
+        "  5086dc:\tf000 fbd9 \tbl\t0x508e92",
+        "  5086e0:\t4307      \torrs\tr7, r0",
+        "  5086e2:\tf115 0310 \tadds.w\tr3, r5, #16",
+        "  5086e6:\t2204      \tmovs\tr2, #4",
+        "  5086e8:\t0031      \tmovs\tr1, r6",
+        "  5086ea:\tb209      \tsxth\tr1, r1",
+        "  5086ec:\tf511 51b2 \tadds.w\tr1, r1, #5696\t@ 0x1640",
+        "  5086f0:\t0020      \tmovs\tr0, r4",
+        "  5086f2:\tf000 fbce \tbl\t0x508e92",
+        "  5086f6:\t4307      \torrs\tr7, r0"
+      ]
+    },
+    {
+      "callsite": "0x50870a",
+      "raw_call": "00f0c2fb",
+      "preceding_context": [
+        "  5086f6:\t4307      \torrs\tr7, r0",
+        "  5086f8:\tf115 0314 \tadds.w\tr3, r5, #20",
+        "  5086fc:\t2201      \tmovs\tr2, #1",
+        "  5086fe:\t0031      \tmovs\tr1, r6",
+        "  508700:\tb209      \tsxth\tr1, r1",
+        "  508702:\tf501 51b0 \tadd.w\tr1, r1, #5632\t@ 0x1600",
+        "  508706:\t3138      \tadds\tr1, #56\t@ 0x38",
+        "  508708:\t0020      \tmovs\tr0, r4",
+        "  50870a:\tf000 fbc2 \tbl\t0x508e92",
+        "  50870e:\t4307      \torrs\tr7, r0"
+      ]
+    },
+    {
+      "callsite": "0x508722",
+      "raw_call": "00f0b6fb",
+      "preceding_context": [
+        "  50870e:\t4307      \torrs\tr7, r0",
+        "  508710:\tf115 0315 \tadds.w\tr3, r5, #21",
+        "  508714:\t2201      \tmovs\tr2, #1",
+        "  508716:\tb236      \tsxth\tr6, r6",
+        "  508718:\tf506 56b0 \tadd.w\tr6, r6, #5632\t@ 0x1600",
+        "  50871c:\t3639      \tadds\tr6, #57\t@ 0x39",
+        "  50871e:\t0031      \tmovs\tr1, r6",
+        "  508720:\t0020      \tmovs\tr0, r4",
+        "  508722:\tf000 fbb6 \tbl\t0x508e92",
+        "  508726:\t4307      \torrs\tr7, r0"
+      ]
+    },
+    {
+      "callsite": "0x55d81e",
+      "raw_call": "abf738fb",
+      "preceding_context": [
+        "  55d806:\tf116 0148 \tadds.w\tr1, r6, #72\t@ 0x48",
+        "  55d80a:\t466f      \tmov\tr7, sp",
+        "  55d80c:\t0038      \tmovs\tr0, r7",
+        "  55d80e:\tf6dc f9e9 \tbl\t0x439be4",
+        "  55d812:\t0033      \tmovs\tr3, r6",
+        "  55d814:\tf240 22a2 \tmovw\tr2, #674\t@ 0x2a2",
+        "  55d818:\tf640 11dc \tmovw\tr1, #2524\t@ 0x9dc",
+        "  55d81c:\t0020      \tmovs\tr0, r4",
+        "  55d81e:\tf7ab fb38 \tbl\t0x508e92",
+        "  55d822:\t4305      \torrs\tr5, r0"
+      ]
+    },
+    {
+      "callsite": "0x55d82c",
+      "raw_call": "abf731fb",
+      "preceding_context": [
+        "  55d818:\tf640 11dc \tmovw\tr1, #2524\t@ 0x9dc",
+        "  55d81c:\t0020      \tmovs\tr0, r4",
+        "  55d81e:\tf7ab fb38 \tbl\t0x508e92",
+        "  55d822:\t4305      \torrs\tr5, r0",
+        "  55d824:\t466b      \tmov\tr3, sp",
+        "  55d826:\t2204      \tmovs\tr2, #4",
+        "  55d828:\t21a8      \tmovs\tr1, #168\t@ 0xa8",
+        "  55d82a:\t0020      \tmovs\tr0, r4",
+        "  55d82c:\tf7ab fb31 \tbl\t0x508e92",
+        "  55d830:\t4305      \torrs\tr5, r0"
+      ]
+    },
+    {
+      "callsite": "0x55d8bc",
+      "raw_call": "abf7e9fa",
+      "preceding_context": [
+        "  55d8a8:\t0740      \tlsls\tr0, r0, #29",
+        "  55d8aa:\td502      \tbpl.n\t0x55d8b2",
+        "  55d8ac:\tf05f 30ff \tmovs.w\tr0, #4294967295\t@ 0xffffffff",
+        "  55d8b0:\te02b      \tb.n\t0x55d90a",
+        "  55d8b2:\t002b      \tmovs\tr3, r5",
+        "  55d8b4:\t2204      \tmovs\tr2, #4",
+        "  55d8b6:\tf44f 6120 \tmov.w\tr1, #2560\t@ 0xa00",
+        "  55d8ba:\t0020      \tmovs\tr0, r4",
+        "  55d8bc:\tf7ab fae9 \tbl\t0x508e92",
+        "  55d8c0:\t4306      \torrs\tr6, r0"
+      ]
+    },
+    {
+      "callsite": "0x55d8cc",
+      "raw_call": "abf7e1fa",
+      "preceding_context": [
+        "  55d8b6:\tf44f 6120 \tmov.w\tr1, #2560\t@ 0xa00",
+        "  55d8ba:\t0020      \tmovs\tr0, r4",
+        "  55d8bc:\tf7ab fae9 \tbl\t0x508e92",
+        "  55d8c0:\t4306      \torrs\tr6, r0",
+        "  55d8c2:\t1d2b      \tadds\tr3, r5, #4",
+        "  55d8c4:\t2204      \tmovs\tr2, #4",
+        "  55d8c6:\tf640 210c \tmovw\tr1, #2572\t@ 0xa0c",
+        "  55d8ca:\t0020      \tmovs\tr0, r4",
+        "  55d8cc:\tf7ab fae1 \tbl\t0x508e92",
+        "  55d8d0:\t4306      \torrs\tr6, r0"
+      ]
+    },
+    {
+      "callsite": "0x55d8de",
+      "raw_call": "abf7d8fa",
+      "preceding_context": [
+        "  55d8c6:\tf640 210c \tmovw\tr1, #2572\t@ 0xa0c",
+        "  55d8ca:\t0020      \tmovs\tr0, r4",
+        "  55d8cc:\tf7ab fae1 \tbl\t0x508e92",
+        "  55d8d0:\t4306      \torrs\tr6, r0",
+        "  55d8d2:\tf115 0308 \tadds.w\tr3, r5, #8",
+        "  55d8d6:\t2204      \tmovs\tr2, #4",
+        "  55d8d8:\tf44f 6121 \tmov.w\tr1, #2576\t@ 0xa10",
+        "  55d8dc:\t0020      \tmovs\tr0, r4",
+        "  55d8de:\tf7ab fad8 \tbl\t0x508e92",
+        "  55d8e2:\t4306      \torrs\tr6, r0"
+      ]
+    },
+    {
+      "callsite": "0x55d8f0",
+      "raw_call": "abf7cffa",
+      "preceding_context": [
+        "  55d8d8:\tf44f 6121 \tmov.w\tr1, #2576\t@ 0xa10",
+        "  55d8dc:\t0020      \tmovs\tr0, r4",
+        "  55d8de:\tf7ab fad8 \tbl\t0x508e92",
+        "  55d8e2:\t4306      \torrs\tr6, r0",
+        "  55d8e4:\tf115 030c \tadds.w\tr3, r5, #12",
+        "  55d8e8:\t2204      \tmovs\tr2, #4",
+        "  55d8ea:\tf640 2114 \tmovw\tr1, #2580\t@ 0xa14",
+        "  55d8ee:\t0020      \tmovs\tr0, r4",
+        "  55d8f0:\tf7ab facf \tbl\t0x508e92",
+        "  55d8f4:\t4306      \torrs\tr6, r0"
+      ]
+    },
+    {
+      "callsite": "0x55d902",
+      "raw_call": "abf7c6fa",
+      "preceding_context": [
+        "  55d8ea:\tf640 2114 \tmovw\tr1, #2580\t@ 0xa14",
+        "  55d8ee:\t0020      \tmovs\tr0, r4",
+        "  55d8f0:\tf7ab facf \tbl\t0x508e92",
+        "  55d8f4:\t4306      \torrs\tr6, r0",
+        "  55d8f6:\tf115 0310 \tadds.w\tr3, r5, #16",
+        "  55d8fa:\t2204      \tmovs\tr2, #4",
+        "  55d8fc:\tf640 2118 \tmovw\tr1, #2584\t@ 0xa18",
+        "  55d900:\t0020      \tmovs\tr0, r4",
+        "  55d902:\tf7ab fac6 \tbl\t0x508e92",
+        "  55d906:\t4306      \torrs\tr6, r0"
+      ]
+    },
+    {
+      "callsite": "0x55d922",
+      "raw_call": "abf7b6fa",
+      "preceding_context": [
+        "  55d90c:\tb510      \tpush\t{r4, lr}",
+        "  55d90e:\t2400      \tmovs\tr4, #0",
+        "  55d910:\t7c81      \tldrb\tr1, [r0, #18]",
+        "  55d912:\tf051 0104 \torrs.w\tr1, r1, #4",
+        "  55d916:\t7481      \tstrb\tr1, [r0, #18]",
+        "  55d918:\tf110 0312 \tadds.w\tr3, r0, #18",
+        "  55d91c:\t2201      \tmovs\tr2, #1",
+        "  55d91e:\tf44f 71df \tmov.w\tr1, #446\t@ 0x1be",
+        "  55d922:\tf7ab fab6 \tbl\t0x508e92",
+        "  55d926:\t4304      \torrs\tr4, r0"
+      ]
+    },
+    {
+      "callsite": "0x55d942",
+      "raw_call": "abf7a6fa",
+      "preceding_context": [
+        "  55d92c:\tb510      \tpush\t{r4, lr}",
+        "  55d92e:\t2400      \tmovs\tr4, #0",
+        "  55d930:\t7c81      \tldrb\tr1, [r0, #18]",
+        "  55d932:\tf011 01fb \tands.w\tr1, r1, #251\t@ 0xfb",
+        "  55d936:\t7481      \tstrb\tr1, [r0, #18]",
+        "  55d938:\tf110 0312 \tadds.w\tr3, r0, #18",
+        "  55d93c:\t2201      \tmovs\tr2, #1",
+        "  55d93e:\tf44f 71df \tmov.w\tr1, #446\t@ 0x1be",
+        "  55d942:\tf7ab faa6 \tbl\t0x508e92",
+        "  55d946:\t4304      \torrs\tr4, r0"
+      ]
+    }
+  ]
+}

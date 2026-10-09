@@ -1,0 +1,149 @@
+{
+  "scope": "static pinned source only; no compilation or firmware runtime inference",
+  "hybrid_rows": [
+    {
+      "pin": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "files": [
+        {
+          "path": "third-party/upstream/nationalchip-lvp-kws/lvp/vui/kws/models/grus_tws_zh/v0.2.1_v0.1.9_hybrid/ctc_model.c",
+          "sha256": "2a47d26677b0fa075d495a280def484adb2be2db8846d96e298b0e1e519156a1"
+        },
+        {
+          "path": "third-party/upstream/nationalchip-lvp-kws/lvp/vui/kws/models/grus_tws_zh/v0.2.1_v0.1.9_hybrid/model.h",
+          "sha256": "f7984d2891fe86b4b4b1b02993ccd6ecab5233d79dbaf04a4d97f8a9a059bdba"
+        },
+        {
+          "path": "third-party/upstream/nationalchip-lvp-kws/lvp/vui/kws/models/grus_tws_zh/v0.2.1_v0.1.9_hybrid/model_xip.h",
+          "sha256": "1f895f184a67c68368f21ea03ce1e43be311ea0f10c9fc4fd25ecca560114fb6"
+        },
+        {
+          "path": "third-party/upstream/nationalchip-lvp-kws/lvp/common/snpu_engine/lvp_kws.c",
+          "sha256": "65de0e35ea000c6d4dd2b940a2c75ca0aa58a81cbf9b5eaebc22ba240f852732"
+        }
+      ],
+      "getter_return_symbols": {
+        "Cmd": [
+          "kws_cmd_content",
+          "kws_cmd_content"
+        ],
+        "Weight": [
+          "kws_weight_content",
+          "kws_weight_content"
+        ],
+        "Ops": [
+          "kws_ops_content",
+          "kws_ops_content",
+          "kws_ops_content"
+        ],
+        "Data": [
+          "kws_data_content",
+          "kws_data_content"
+        ],
+        "Tmp": [
+          "kws_tmp_content",
+          "kws_tmp_content"
+        ]
+      },
+      "header_array_sizes": {
+        "model.h": {
+          "kws_cmd_content": "5084",
+          "kws_weight_content": "128872",
+          "kws_ops_content": "0",
+          "kws_data_content": "13680"
+        },
+        "model_xip.h": {
+          "xip_kws_cmd_content": "5240",
+          "xip_kws_weight_content": "172084",
+          "xip_kws_ops_content": "0",
+          "xip_kws_data_content": "28416"
+        }
+      },
+      "xip_pointer_bindings": [
+        [
+          "cmd",
+          "xip_kws_cmd_content"
+        ],
+        [
+          "weight",
+          "xip_kws_weight_content"
+        ],
+        [
+          "tmp_mem",
+          "xip_kws_tmp_content"
+        ]
+      ]
+    },
+    {
+      "pin": "8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5",
+      "files": [
+        {
+          "path": "third-party/upstream/nationalchip-lvp-kws/lvp/vui/kws/models/grus_tws_zh/v0.2.2_v0.1.9_hybrid/ctc_model.c",
+          "sha256": "2a47d26677b0fa075d495a280def484adb2be2db8846d96e298b0e1e519156a1"
+        },
+        {
+          "path": "third-party/upstream/nationalchip-lvp-kws/lvp/vui/kws/models/grus_tws_zh/v0.2.2_v0.1.9_hybrid/model.h",
+          "sha256": "f7984d2891fe86b4b4b1b02993ccd6ecab5233d79dbaf04a4d97f8a9a059bdba"
+        },
+        {
+          "path": "third-party/upstream/nationalchip-lvp-kws/lvp/vui/kws/models/grus_tws_zh/v0.2.2_v0.1.9_hybrid/model_xip.h",
+          "sha256": "8087acbd1364fb31a4fc332560c4681841c6cfc89aa5e6d44989b8cf9107584c"
+        },
+        {
+          "path": "third-party/upstream/nationalchip-lvp-kws/lvp/common/snpu_engine/lvp_kws.c",
+          "sha256": "65de0e35ea000c6d4dd2b940a2c75ca0aa58a81cbf9b5eaebc22ba240f852732"
+        }
+      ],
+      "getter_return_symbols": {
+        "Cmd": [
+          "kws_cmd_content",
+          "kws_cmd_content"
+        ],
+        "Weight": [
+          "kws_weight_content",
+          "kws_weight_content"
+        ],
+        "Ops": [
+          "kws_ops_content",
+          "kws_ops_content",
+          "kws_ops_content"
+        ],
+        "Data": [
+          "kws_data_content",
+          "kws_data_content"
+        ],
+        "Tmp": [
+          "kws_tmp_content",
+          "kws_tmp_content"
+        ]
+      },
+      "header_array_sizes": {
+        "model.h": {
+          "kws_cmd_content": "5084",
+          "kws_weight_content": "128872",
+          "kws_ops_content": "0",
+          "kws_data_content": "13680"
+        },
+        "model_xip.h": {
+          "xip_kws_cmd_content": "5240",
+          "xip_kws_weight_content": "172056",
+          "xip_kws_ops_content": "0",
+          "xip_kws_data_content": "28416"
+        }
+      },
+      "xip_pointer_bindings": [
+        [
+          "cmd",
+          "xip_kws_cmd_content"
+        ],
+        [
+          "weight",
+          "xip_kws_weight_content"
+        ],
+        [
+          "tmp_mem",
+          "xip_kws_tmp_content"
+        ]
+      ]
+    }
+  ]
+}

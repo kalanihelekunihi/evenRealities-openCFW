@@ -1731,5 +1731,12 @@
       }
     }
   ],
+  "native_halt": "genuine default libnosys source-built4bytes now overlaid, unlike preliminary run using stock halt",
+  "inputs": {
+    "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+    "g2/analysis/touch-startup-provider-successor-2026-10-09/outputs/linked.elf": "d2e53339fd49076150dcff23ddd5a049d766aac49ce4877f812cde8c4df6532f",
+    "g2/analysis/touch-newlib14-startup-exit-2026-10-09/outputs/exit/linked.elf": "17787f953acda9e19ee5217c85f097b309188d28a5fea3286ff4ab73b204acf1",
+    "g2/analysis/touch-startup-provider-successor-2026-10-09/halt-output-attempt2/default-halt.o": "41cca48488659e8305c7829f65525f71ffabfae4ca966177ef638b3d5326044d"
+  },
   "limits": "Real stock/rebuilt instructions and exact linker bounds. One synthetic init-array callback and optional stdio callback are simple supplied RAM instructions; no actual runtime callback contents, startup reachability, scheduling, hardware or full program cleanup proved. Real halt branch executes four times; no divide instruction executes. Registers/SP/stack side effects compared."
 }

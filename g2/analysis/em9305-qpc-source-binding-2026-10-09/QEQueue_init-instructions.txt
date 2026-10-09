@@ -1,0 +1,19 @@
+
+/tmp/QEQueue_init-opencfw.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00310f5c <.data>:
+  310f5c:	a021                	st_s	r1,[r0,0x4]
+  310f5e:	702c                	mov_s	r1,0
+  310f60:	a848                	stb_s	r2,[r0,0x8]
+  310f62:	a020                	st_s	r1,[r0,0]
+  310f64:	ea03                	breq_s	r2,0,6	;0x310f6a
+  310f66:	a829                	stb_s	r1,[r0,0x9]
+  310f68:	a82a                	stb_s	r1,[r0,0xa]
+  310f6a:	6a21                	add_s	r1,r2,0x1
+  310f6c:	a82b                	stb_s	r1,[r0,0xb]
+  310f6e:	882b                	ldb_s	r1,[r0,0xb]
+  310f70:	7fe0                	j_s.d	[blink]
+  310f72:	a82c                	stb_s	r1,[r0,0xc]

@@ -1,0 +1,45 @@
+0053b522: push {r0, r1, r2, r3, r4, lr}
+0053b524: movs r4, #0
+0053b526: movs r1, #0
+0053b528: b #0x53b536
+0053b52a: add.w r2, r0, r1
+0053b52e: ldrb r2, [r2, #2]
+0053b530: uxtab r4, r4, r2
+0053b534: adds r1, r1, #1
+0053b536: cmp r1, #0x20
+0053b538: blt #0x53b52a
+0053b53a: and r4, r4, #0xff
+0053b53e: bl #0x43d0ce
+0053b542: lsls r0, r0, #0x1e
+0053b544: bpl #0x53b56e
+0053b546: movs r0, r4
+0053b548: uxth r0, r0
+0053b54a: rsbs.w r0, r0, #0xff
+0053b54e: str r0, [sp, #8]
+0053b550: ldr.w r0, [pc, #0xac8]
+0053b554: str r0, [sp, #4]
+0053b556: movw r0, #0x185
+0053b55a: str r0, [sp]
+0053b55c: ldr.w r3, [pc, #0xac0]
+0053b560: ldr.w r2, [pc, #0x778]
+0053b564: ldr.w r1, [pc, #0x778]
+0053b568: movs r0, #4
+0053b56a: bl #0x43d574
+0053b56e: bl #0x43d0ce
+0053b572: lsls r0, r0, #0x1f
+0053b574: bmi #0x53b57e
+0053b576: bl #0x43d0ce
+0053b57a: lsls r0, r0, #0x1d
+0053b57c: bpl #0x53b594
+0053b57e: ldr.w r1, [pc, #0xb5c]
+0053b582: movs r3, r4
+0053b584: uxth r3, r3
+0053b586: rsbs.w r3, r3, #0xff
+0053b58a: movs r2, r1
+0053b58c: movs.w r0, #0x10400000
+0053b590: bl #0x43ce9e
+0053b594: rsbs.w r4, r4, #0xff
+0053b598: movs r0, r4
+0053b59a: uxtb r0, r0
+0053b59c: add sp, #0x10
+0053b59e: pop {r4, pc}

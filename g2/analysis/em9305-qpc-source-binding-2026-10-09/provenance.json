@@ -1,0 +1,36 @@
+{
+  "inputs": {
+    "g2/analysis/source-discovery-parallel-2026-10-09/EM9305-QPC-SOURCE-LEAD.md": "ae7e74190e24a7d7d6c0095e806a7231945240633658520a46e87e304540a001",
+    "g2/analysis/source-discovery-parallel-2026-10-09/em9305-qpc-source-provenance.json": "fd95e4f20c4d6533cd6162ddccd4e89d1a5d25d0829453fcd921b3dc5da39594",
+    "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/qpc-official/src/qf/qf_qeq.c": "861ef89f8cdb5025fda5dde3f36d090ef50094864a39b13611dd62655f02be10",
+    "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/qpc-official/src/qk/qk.c": "f1b069a535260c1a23d66d3dfe3373259b5068fc94bccef078bd55bf2bdfed0a",
+    "g2/blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+    "g2/build/pseudocode-first/20260930T190500Z/tools/arc-binutils-001/prefix/bin/arc-elf32-objdump": "72e6b6472976159e135ea363dee4a1580b0921699ead22357e24503eddb0fdf3"
+  },
+  "slices": [
+    {
+      "name": "QEQueue_init",
+      "start": 3215196,
+      "end": 3215220,
+      "bytes": 24,
+      "sha256": "455385f66072cf7e1939132ba2f3716b5789a1b2a4ff64cef5a05afb5a302243"
+    },
+    {
+      "name": "QK_activate_",
+      "start": 3216724,
+      "end": 3216868,
+      "bytes": 144,
+      "sha256": "844ab98ae09414027139ea278dc2cf5ae92757eed0fb7cda0d25efd06b898e2c"
+    },
+    {
+      "name": "QK_sched_",
+      "start": 3216948,
+      "end": 3217004,
+      "bytes": 56,
+      "sha256": "b6f3e65ef805f6b4e7dbe52ef652b95bea32067832c54f586d07a12f8cd49ce7"
+    }
+  ],
+  "original_instruction_execution": false,
+  "source_rebuild": false,
+  "undecoded_scheduler_instruction": "0x31163E: 0x3D2F1000"
+}

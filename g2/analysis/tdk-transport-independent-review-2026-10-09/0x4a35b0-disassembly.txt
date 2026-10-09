@@ -1,0 +1,42 @@
+004a35b0: push {r0, lr}
+004a35b2: sub sp, #8
+004a35b4: movs r0, #0
+004a35b6: cmp r2, #0x11
+004a35b8: blo #0x4a35cc
+004a35ba: str r2, [sp, #4]
+004a35bc: str r1, [sp]
+004a35be: movs r3, #1
+004a35c0: add r2, sp, #8
+004a35c2: movs r1, #0x69
+004a35c4: movs r0, #4
+004a35c6: bl #0x50436e
+004a35ca: b #0x4a35dc
+004a35cc: str r2, [sp, #4]
+004a35ce: str r1, [sp]
+004a35d0: movs r3, #1
+004a35d2: add r2, sp, #8
+004a35d4: movs r1, #0x69
+004a35d6: movs r0, #4
+004a35d8: bl #0x50436e
+004a35dc: cmp r0, #0
+004a35de: beq #0x4a35e6
+004a35e0: movs.w r0, #-1
+004a35e4: b #0x4a35e8
+004a35e6: movs r0, #0
+004a35e8: pop {r1, r2, r3, pc}
+004a35ea: push {r0, lr}
+004a35ec: sub sp, #8
+004a35ee: movs r0, #0
+004a35f0: str r2, [sp, #4]
+004a35f2: str r1, [sp]
+004a35f4: movs r3, #1
+004a35f6: add r2, sp, #8
+004a35f8: movs r1, #0x69
+004a35fa: movs r0, #4
+004a35fc: bl #0x5044b4
+004a3600: cmp r0, #0
+004a3602: beq #0x4a360a
+004a3604: movs.w r0, #-1
+004a3608: b #0x4a360c
+004a360a: movs r0, #0
+004a360c: pop {r1, r2, r3, pc}

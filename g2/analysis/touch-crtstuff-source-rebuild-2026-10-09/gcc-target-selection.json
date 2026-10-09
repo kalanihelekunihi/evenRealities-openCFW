@@ -1,0 +1,33 @@
+{
+  "argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--platform",
+    "linux/amd64",
+    "--network",
+    "none",
+    "--cap-drop",
+    "ALL",
+    "--security-opt",
+    "no-new-privileges",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi:/tool:ro",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-crtstuff-source-rebuild-2026-10-09/source:/source:ro",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-crtstuff-source-rebuild-2026-10-09:/task:ro",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-crt-array-binding-2026-10-09:/previous:ro",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-crtstuff-source-rebuild-2026-10-09/outputs:/out",
+    "-w",
+    "/out",
+    "ubuntu@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55",
+    "/bin/sh",
+    "/task/select-gcc-target.sh"
+  ],
+  "exit_code": 0,
+  "stdout": "xm_file=\nxm_defines=\ntm_file=vxworks-dummy.h elfos.h arm/unknown-elf.h arm/elf.h arm/bpabi.h newlib-stdint.h arm/aout.h arm/arm.h\ntm_defines= LIBC_GLIBC=1 LIBC_UCLIBC=2 LIBC_BIONIC=3 LIBC_MUSL=4 HEAP_TRAMPOLINES_INIT=0\n",
+  "stderr": ""
+}

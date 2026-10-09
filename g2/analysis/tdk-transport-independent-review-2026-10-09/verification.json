@@ -1,0 +1,80 @@
+{
+  "checks": [
+    {
+      "kind": "interval",
+      "label": "bus wrappers",
+      "matches": true,
+      "sha256": "d09e68347e5b1a5848b2252d9e618cdc0fb953554ac375d7c2e2d17995231620"
+    },
+    {
+      "kind": "interval",
+      "label": "context setup and literals",
+      "matches": true,
+      "sha256": "3567d7310b007a98aed73597683479428373793330515fca1983811c5abd0bec"
+    },
+    {
+      "kind": "interval",
+      "label": "transport subsystem",
+      "matches": true,
+      "sha256": "aa954323eb54b0dd9fc1da21ab8893535bd2b3025963ed5c7c9694095b6679ff"
+    },
+    {
+      "kind": "interval",
+      "label": "GAF setup",
+      "matches": true,
+      "sha256": "26f073d6a23d4f9ddcffd26ffb20f7530576087ae6483f554f77c392cda3603a"
+    },
+    {
+      "kind": "interval",
+      "label": "mounting Q14 write",
+      "matches": true,
+      "sha256": "c8c609f1c845dd4ec302b6b0fc4a92fce811ef22a90b998276246de36adb02bc"
+    },
+    {
+      "kind": "interval",
+      "label": "GAF caller",
+      "matches": true,
+      "sha256": "581afa088165b1c7f36fbd7b4303ac1493558f1fd66a2d399781cbbc70f6dc4d"
+    },
+    {
+      "kind": "interval",
+      "label": "mounting cache caller",
+      "matches": true,
+      "sha256": "78e1c3ba7cf1704da12140194ea2aab6683ceade4775f9a465e3a9f56ce063e8"
+    },
+    {
+      "kind": "source",
+      "path": "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/tdk-icm45608-emulator-lead/src/imu/inv_imu_transport.c",
+      "matches": true,
+      "sha256": "cbd594dbd75959f678985873e011ff8d84b2e298200ba86001ebf0b708de099c"
+    },
+    {
+      "kind": "source",
+      "path": "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/tdk-icm45608-emulator-lead/src/imu/inv_imu_edmp.c",
+      "matches": true,
+      "sha256": "30a7b0541b33a7e1796324b279b36a41dab89ce95d5e9bbce2bb0f0086f2a19c"
+    },
+    {
+      "kind": "source",
+      "path": "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/tdk-icm45608-emulator-lead/src/imu/inv_imu_edmp_memmap.h",
+      "matches": true,
+      "sha256": "b1abae1c5ce890f9e76c666492cde84ff4cd01d1a486203d6aa7f5e4508829e5"
+    },
+    {
+      "kind": "source",
+      "path": "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/tdk-icm45608-emulator-lead/src/imu/inv_imu_edmp_defs.h",
+      "matches": true,
+      "sha256": "cfa9b1909ffbe1593e8f662f09b73fe6b27b6861cd0fcd3a9162e5b66db06b69"
+    },
+    {
+      "kind": "source",
+      "path": "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/tdk-icm45608-emulator-lead/src/imu/inv_imu_regmap_le.h",
+      "matches": true,
+      "sha256": "1e9fa1a786c6478042566698e76485b2fa614dd55edd3ab2f33da720ecb0e718"
+    }
+  ],
+  "patch_sha256": "80eb396ba1b365d332aabebed514cccb19f5d5a8eba1d6543be61ceda4fa8b2f",
+  "patch_prefix": "f1700c98f1700cacf1700cc0f1700ce4",
+  "key_offset8": "f1700cc0",
+  "image_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701"
+}

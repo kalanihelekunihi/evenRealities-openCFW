@@ -1,0 +1,67 @@
+{
+  "checks": [
+    {
+      "check": "canonical hash",
+      "pass": true
+    },
+    {
+      "check": "canonical equals OTA[32:]",
+      "pass": true
+    },
+    {
+      "check": "8844 in-image symbol rows",
+      "pass": true
+    },
+    {
+      "check": "8818 hashed rows",
+      "pass": true
+    },
+    {
+      "check": "all extent hashes",
+      "pass": true
+    },
+    {
+      "check": "0x4a460c extent",
+      "pass": true
+    },
+    {
+      "check": "0x4a6bce extent",
+      "pass": true
+    },
+    {
+      "check": "calmag header",
+      "pass": true
+    },
+    {
+      "check": "189 byte array hash",
+      "pass": true
+    },
+    {
+      "check": "raw-main no prefix 189",
+      "pass": true
+    },
+    {
+      "check": "raw-main no prefix 32",
+      "pass": true
+    },
+    {
+      "check": "raw-main no prefix 16",
+      "pass": true
+    },
+    {
+      "check": "raw-main no prefix 4",
+      "pass": true
+    },
+    {
+      "check": "20 relaxed contexts retained",
+      "pass": true
+    },
+    {
+      "check": "14 shift ranges retained",
+      "pass": true
+    }
+  ],
+  "all_pass": true,
+  "extent_hash_mismatches": [],
+  "heuristic_rerun": false
+}

@@ -1,0 +1,27 @@
+# Exact requested emulator repository cross-check
+
+Verified /Users/kalani/Repo/jimrandomh/g2-firmware-emulator, origin jimrandomh/g2-firmware-emulator, HEADf30527c0b7e6fa6e9be06e7067e49468197fa258. Read its AGENTS.md: no buzzer work permitted; that branch was excluded. No emulator/index writes, runs or source jobs. Read source/build/model locks, platform, peripheral code and saved audit narratives. Hash inventory in emulator-repository-crosscheck-provenance.json binds consulted current files; commit alone does not pin uncommitted content.
+
+## New actionable source lead: TDK EDMP revision
+
+Its docs/imu-primary-sdk-crosscheck.md names official TDK SDK edaf335913c9ede7d4b5d8700e49b279cfb8fa8b, release1.1.8, versus OpenCFW hardware reference's b79ae575 lineage. The report identifies conditional calibration patch-key and mounting-matrix differences, and10embedded program-image headers. Exact generated comparison artifacts referenced there are **absent from this local generated/research directory**, so these old empirical claims were not freshly verified. The actual official pin was newly acquired in isolated acquisitions/tdk-icm45608-emulator-lead, BSD3Clause, with source/license hashes; no code executed. Registered OpenCFW invensense-icm45608 path remains untouched; proposed comparison reference, not repin.
+
+Fresh available source: inv_imu_edmp.c82–84 initializes three interrupt vectors into **EDMP_ROM_BASE**, not a supplied complete sensor-ROM image. Mounting-matrix wrapper1058+ converts9int8entries into signed16Q14 and delegates to inv_imu_edmp_set_s16q14_mounting_matrix. Finite next check: match a currently owned stock IMU driver routine's RAM address sequence, conditional patch-key stores and9-entry conversion against both exact source pins, retaining all changed revisions. Do not count embedded program headers or ARM host driver as complete sensorROM source. Confidence high in acquired source; stock attribution remains open.
+
+## Important contradiction to reconcile: HCI transport bus
+
+Emulator docs/bleif-em9305-architecture.md records exact-image Apollo2.2.9.22 disassembly and emulator traces supporting IOM6 SPI40056000, GPIO149nCS, GPIO93reset, GPIO15clock request and GPIO117ready via40010410RD3. OpenCFW docs/hardware/components/em9305.md still says which IOM is open/IOM6notpinned. These statements have different firmware/model scopes; do not silently transfer2.2.9.22addresses to locked2.2.6.10. Finite check: bind2.2.6.10 transport initialization register literals and GPIO pin descriptor fields to corresponding2.2.9.22sites; verify exact Apollo510B pinmux/datasheet contract, particularly hardware pinout reservation. Confidence medium as a cross-version static lead, not physical wiring proof. Peripheral G2EM9305.cs is a C# HCI/controller behavioral model, including synthetic remote bond data; it does **not** execute the bundled ARC controller firmware.
+
+## Boundaries remain: C-SKY alias and ARC log2
+
+platforms/g2-apollo510.repl instantiates Cortex-M/Apollo memories/peripherals; no C-SKY CPU/IRAM-to-DRAM memory translator was found in inspected source/docs. i2s-irq-native.md explicitly says C-SKY not reexecuted, GX8002reply/clock fixture absent and earlier24.576MHzvalue is a lower fixture. Its codec payload hashb06dfef7...c4d0 matches OpenCFW lockedcodec; matching payload validates byte reuse only. Thus emulator cannot close our CPU alias20026D38 or hardware LOG2_Extension.1_0 zero/flags semantics. No log2p1/vendor ARC instruction implementation found in targeted source/doc search. Physical state still external.
+
+## Reusable existing evidence, not new downloads
+
+Nema shader/texture reports pin Ambiq1577f6e52eebdf5a3a2e2082d5161c1c81858948, archive109840f6e0bbeb8618a1a853966cdf68cf169620bcc4075ed7a1c86ab0d3286f and isolated unchanged ARM object producer tests. They establish bounded command-producer correspondences, explicitly not GPU ISA/rendering proof or generating C source. Existing OpenCFW Ambiq5efc022 provider acquisition outranks duplicate whole SDK downloads; finite next step is compare that archive hash/member identity before borrowing a producer packet. Referenced internal nema_blender_intern.h is absent and remains proprietary boundary.
+
+Public-firmware-archive-audit.md records16manufacturerOTA downloads, percomponent hash/CRC checks and no extra trailing payload. Those generated audit/download directories are not available here for independent rehash; do not treat narrative count as current source coverage or redownload allOTAs. Existing index/scripts may accelerate exact-component reuse (EM9305hash91a38f7f identical) and version discrimination. No arbitrary encoded resource absence follows. APK mirror/JADX/blutter and public fork references are protocol/resource research inputs, not official MCU SDK source or original compiler evidence.
+
+Build lock pins Renode sourcee8c7c2d..., infrastructured74ac61d..., tlib83610d9..., .NET8.0.425; pyproject uses Capstone,Unicorn,Pillow and testing libraries. These are harness tools, not proven firmware compilers. EM datasheet lock uses alternate official9305-DS.pdf/v4.5.4/hash46cd19fa..., differing from OpenCFW olderEM9305-DS.pdf URL; future revision comparison should authenticate document versions, not assume SDKversion from datasheetversion.
+
+No overlooked producing compiler/ARC port source was demonstrated. The genuinely new acquisition is the exact TDK revision supporting bounded driver discrimination. No campaign/admission/source/index/hardware modifications; cancelled work untouched.

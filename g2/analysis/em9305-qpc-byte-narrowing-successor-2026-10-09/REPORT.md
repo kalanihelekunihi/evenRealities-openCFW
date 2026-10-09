@@ -1,0 +1,9 @@
+# QP/C byte-narrowing correction and vendor encoding lead
+
+This additive successor corrects the earlier scheduler_tail pseudocode without editing the sealed predecessor. At0x311644 extb_s r1,r13 narrows candidate to one byte before active/lock/17 comparisons. All guards now use p=(uint8_t)candidate, matching the independently audited continuation. Active/lock are loaded bytes. Publication and return remain narrowed. Assertion failure/return behavior is still an external boundary. Prior unrestricted32-bit comparisons must not be used as equivalence evidence.
+
+Example: candidate256 becomes0 and is rejected for active=lock=0; candidate257 becomes1 and is eligible. A candidate511 becomes255 and reaches the out-of-range assertion when active/lock are below255. These are explicit arithmetic illustrations of the narrowing, not original-instruction execution or expected outputs of the unknown ready-set operation.
+
+Discovery's authenticated available v4.6 declarations bind opcode major7/minor0 with two operands/no flags to log2p1. Stock0x3D2F1000 decodes fields B13,C0,F0,P0 and matches log2p1 r13,r0 under that extension configuration. This explains the standard decoder's .word without proving stockv4.2 compatibility or arithmetic, zero/negative behavior, exceptions or physical core identity. Earlier standard-table zero-match evidence remains valid for that table; it is superseded as a source-availability boundary by this concrete vendor encoding lead.
+
+The queue field binding passed QPC-REVIEW.md. Scheduler downstream fields/guards passed with this qualification; activation144bytes remains authenticated only. Full ready-set semantics still require a vendor operation specification or authenticated producing metadata/implementation. No expected QP/C algorithm is substituted for the missing arithmetic. No vendor source copied, compiler/device execution, Git/production/canonical edits or new coverage/source-byte claim.

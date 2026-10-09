@@ -1,0 +1,146 @@
+{
+  "status": "PASS",
+  "inputs": {
+    "g2/blobs/official/g2-2.2.6.10/firmware_codec.bin": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+    "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin": "49c9aed0126493220a3e48827c267d5e94f64d51d9ede0ccc3e84b8946744584",
+    "g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_sram.bin": "53860d6974097ad494c6697df52f95b796360131fab63cd8bfd7efc9c5596de8",
+    "g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-objdump": "7150f7ffc2ac163f3d2d465620e5dac96df4b29411e5d0944419c41657cc2382",
+    "g2/build/pseudocode-first/20260930T190500Z/inventory/images.jsonl": "f2795f712ed64d147a3fe94d570bf85ea43175cae0f2e89ab01e96fe9a3a5aaa",
+    "third-party/upstream/nationalchip-lvp-kws/include/lvp_param.h": "56033502b75e9a02f2d0c6959974ba2016166ebdd732786d7295d5c2a100ac95",
+    "third-party/upstream/nationalchip-lvp-kws/include/driver/gx_audio_in/gx_audio_in_v2.h": "bc93ac7ad6a89c4bac4088e7ab964b4b0b322c5511fdc49604631167a18a655b",
+    "third-party/upstream/nationalchip-lvp-kws/boards/nationalchip/grus_gx8002b_dev_1v/audio_board.c": "aa38050a065af8eed214e94102991ce9bc94ed9cda4c3b6163eb9b688116bc0d",
+    "third-party/upstream/nationalchip-lvp-kws/arch/soc/grus/link.ld": "1dc73b74c4b5962a848693ab857e90d34115489a8a7e499897533ad786ff77be",
+    "third-party/upstream/nationalchip-lvp-kws/arch/soc/grus/include/soc_config.h": "abda275af6aee96ad676c190e2a72363a79595413336371fced4450f8df76809",
+    "third-party/upstream/nationalchip-lvp-kws/arch/soc/grus/spl/spl.c": "f3690694fff309c0118579baedb860b1d47c6de3cfb227a977242249568bb56b",
+    "third-party/upstream/nationalchip-lvp-kws/lvp/common/lvp_audio_in.c": "cd52150f9f3e45061b358ad2d6401932a37a60857b2432b8a92a45a36624b64f",
+    "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/nationalchip-lvp-aiot/boards/nationalchip/grus_gx8002b_dev_1v/audio_board.c": "471542bf741a905d4aa47ff3fa52ba29e09402c192ae3b1ab1fc620fb6665cff"
+  },
+  "data": {
+    "storage_profile": "IRAM100269A4 under reviewed normal SRAM route",
+    "data_pointer": "DRAM200269A4 from exact getter",
+    "size": 240,
+    "sha256": "e1d1077d066d53c1e39bcefca3ec0294d43ace92ffc1a986d2a432cd931dde2e",
+    "payload_offset": "0x189B8",
+    "alias_visibility_proven": false
+  },
+  "decoded": {
+    "input_source": 2,
+    "source_flag_words": [
+      "0x498",
+      "0xc98",
+      "0x498"
+    ],
+    "PDM_gain_enum": 2,
+    "PDM_gain_public_name": "AUDIO_IN_GAIN_12dB",
+    "PDM_stereo": 1,
+    "output_mask": 6,
+    "pcm1_source": 1,
+    "logfbank_source": 1,
+    "i2s_output_words": [
+      2,
+      0,
+      0,
+      1,
+      0,
+      1,
+      2
+    ],
+    "i2s_enabled_in_initial_mask": false,
+    "original_gain_table": [
+      6,
+      12,
+      18,
+      24,
+      30,
+      36,
+      42,
+      48,
+      54
+    ]
+  },
+  "original_consumer_evidence": [
+    {
+      "address": "0x10207088",
+      "instruction": "10207088:\te3ffdfbe \tbsr      \t0x10203004\t// 0x10203004"
+    },
+    {
+      "address": "0x10207098",
+      "instruction": "10207098:\t8045      \tld.b      \tr2, (r0, 0x5)"
+    },
+    {
+      "address": "0x1020714e",
+      "instruction": "1020714e:\td9000021 \tld.b      \tr8, (r0, 0x21)"
+    },
+    {
+      "address": "0x102071a4",
+      "instruction": "102071a4:\te4a40093 \taddi      \tr5, r4, 148"
+    },
+    {
+      "address": "0x10207206",
+      "instruction": "10207206:\te42000cf \taddi      \tr1, r0, 208"
+    },
+    {
+      "address": "0x1020720a",
+      "instruction": "1020720a:\te4a000bf \taddi      \tr5, r0, 192"
+    },
+    {
+      "address": "0x10207216",
+      "instruction": "10207216:\td8042030 \tld.w      \tr0, (r4, 0xc0)"
+    },
+    {
+      "address": "0x10207226",
+      "instruction": "10207226:\te3ffe801 \tbsr      \t0x10204228\t// 0x10204228"
+    }
+  ],
+  "decoder_commands": [
+    {
+      "argv": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-objdump",
+        "-D",
+        "--disassemble-zeroes",
+        "-b",
+        "binary",
+        "-m",
+        "csky",
+        "-EL",
+        "--adjust-vma=0x10203004",
+        "--start-address=0x10203004",
+        "--stop-address=0x10203050",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin"
+      ],
+      "exit": 0,
+      "range": [
+        "0x10203004",
+        "0x10203050"
+      ],
+      "bytes_sha256": "8474821e1ad734a7258e8b3b8387dcee4c6a9541de661749448a70ed0b918cf0"
+    },
+    {
+      "argv": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-objdump",
+        "-D",
+        "--disassemble-zeroes",
+        "-b",
+        "binary",
+        "-m",
+        "csky",
+        "-EL",
+        "--adjust-vma=0x10203004",
+        "--start-address=0x10207070",
+        "--stop-address=0x10207234",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/reviews/codec-canonical-images-003/images/binh_a_stage2_xip.bin"
+      ],
+      "exit": 0,
+      "range": [
+        "0x10207070",
+        "0x10207234"
+      ],
+      "bytes_sha256": "0b1efb70d64857cf9110bdc660f88a86b7a963a43ec51e5b62da6a768dd3cdcc"
+    }
+  ],
+  "profile_boundary": "Linker source places text inIRAM and data inDRAM after same-sized text placeholder; reviewed loader normal route writes contiguousIRAM bytes. This is a software-intended paired-offset contract. Physical I/D visibility/alias is not proved by source/layout alone.",
+  "source_constraint": "Under the matched 32-bit public layout and intended data visibility, initial I2S left/right1/2 matches KWS DMIC initializer and conflicts with unmodified acquired AIoT forced SADC0/0 initializer. Not exact pin, full Kconfig, reachable I2S enablement or physical routing proof.",
+  "original_instruction_execution": false,
+  "source_rebuild": false,
+  "limits": "Static original-byte disassembly and source field/caller mapping only. Existing historical functions not recounted as newly recovered whole functions; no campaign admission or live data claim."
+}

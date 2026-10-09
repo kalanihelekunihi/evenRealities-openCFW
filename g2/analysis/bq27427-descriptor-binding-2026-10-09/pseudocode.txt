@@ -1,0 +1,33 @@
+Instruction-led analysis, not production source or a byte-identical rebuild.
+Descriptor stride 8: +0 subclass, +1 absolute DM offset, +2 width type; remaining bytes not needed here.
+DM buffer: +0 subclass, +1 block, +2..33 data[32], +34 valid, +35 dirty.
+
+configure at 0x53BB8C:
+    create buffer for descriptor[6]: subclass=105; block=(5>>5)=0
+    read_dm_block(buffer)                     // 0x53BCAC -> 0x53B5A0
+    update_dm(buffer, descriptor_index=6, value=40) // 0x53BCB6 -> 0x53B6F0
+    write_dm_block(buffer)                    // 0x53BCCE -> 0x53BA32
+
+update_dm at 0x53B6F0, selected entry:
+    offset=descriptor[6].absolute_offset % 32  // 5
+    if buffer.valid == 0: return
+    if descriptor[6].type == 1:
+        buffer.data[offset] = low8(value)     // 0x28, whole-byte replacement
+        buffer.dirty=1
+
+write_dm_block selected success path:
+    if !buffer.dirty: return 0
+    enter_configuration_mode()               // 0x53B966, status checked
+    write_register(0x61,0,1)
+    write_register(0x3e,buffer.subclass,1)
+    write_register(0x3f,buffer.block,1)
+    delay(1)
+    write_bytes(0x40,buffer.data,32)
+    checksum=low8(0xff - sum(buffer.data[0..31])) // actual 0x53B522
+    write_register(0x60,checksum,1)
+    delay(1)
+    exit_configuration_mode()                // 0x53B9BE
+    if successful: buffer.dirty=0; return 0
+    // Original error branches return/cleanup; see retained full disassembly.
+
+Thus all valid-buffer previous byte values become 0x28. Zephyr's conditional (byte & 0x80) ? (byte ^ 0x80) : byte preserves low seven bits; stock does not. Neither source alone proves the required calibrated ROM magnitude on a fitted gauge.

@@ -1,0 +1,26 @@
+{
+  "status": "PASS_WITH_PSEUDOCODE_QUALIFICATION",
+  "inputs_hash_verified": 6,
+  "original_slices": [
+    {
+      "name": "QEQueue_init",
+      "bytes": 24,
+      "listing_lines": 12
+    },
+    {
+      "name": "QK_activate_",
+      "bytes": 144,
+      "listing_lines": 45
+    },
+    {
+      "name": "QK_sched_",
+      "bytes": 56,
+      "listing_lines": 18
+    }
+  ],
+  "queue_field_correspondence": true,
+  "candidate_precomparison_narrowing": "r1=extb(r13) before comparisons; pseudocode unsigned candidate must be restricted0..255 or explicitly narrowed",
+  "readyset_opcode_unresolved": "31163E 3D2F1000",
+  "source_rebuild": false,
+  "instruction_execution": false
+}

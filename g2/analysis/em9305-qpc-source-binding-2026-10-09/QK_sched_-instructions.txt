@@ -1,0 +1,25 @@
+
+/tmp/QK_sched_-opencfw.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00311634 <.data>:
+  311634:	c2e4                	enter_s	[r13-r14,blink]
+  311636:	46cb 0080 1394      	mov_s	r14,0x801394
+  31163c:	9603                	ldh_s	r0,[r14,0x6]
+  31163e:	3d2f 1000           	.word	0x3d2f1000
+  311642:	8e00                	ldb_s	r0,[r14,0]
+  311644:	79af                	extb_s	r1,r13
+  311646:	0825 0065           	brhs.d.nt	r0,r1,36	;0x311668
+  31164a:	704c                	mov_s	r2,0
+  31164c:	8e02                	ldb_s	r0,[r14,0x2]
+  31164e:	081d 0045           	brhs.nt	r0,r1,28	;0x311668
+  311652:	0915 0474           	brlo.d.nt	r1,0x11,20	;0x311664
+  311656:	218a 0686           	mov	r1,410
+  31165a:	40c3 0033 451c      	mov_s	r0,0x33451c
+  311660:	097a 0000           	bl	376	;0x3117d8
+  311664:	42a1                	mov_s	r2,r13
+  311666:	aea1                	stb_s	r13,[r14,0x1]
+  311668:	784f                	extb_s	r0,r2
+  31166a:	c6c4                	leave_s	[r13-r14,blink,pcl]

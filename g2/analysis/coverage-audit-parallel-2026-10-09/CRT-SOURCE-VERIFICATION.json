@@ -1,0 +1,159 @@
+{
+  "status": "PASS",
+  "acquired_source_hashes": [
+    {
+      "path": "g2/analysis/touch-crtstuff-source-rebuild-2026-10-09/source/gcc/mkconfig.sh",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-crtstuff-source-rebuild-2026-10-09/source/gcc/Makefile.in",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-crtstuff-source-rebuild-2026-10-09/source/gcc/config.gcc",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-crtstuff-source-rebuild-2026-10-09/source/libgcc/mkheader.sh",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-crtstuff-source-rebuild-2026-10-09/source/libgcc/config.host",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-crtstuff-source-rebuild-2026-10-09/source/libgcc/config/arm/bpabi-lib.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-crtstuff-source-rebuild-2026-10-09/source/libgcc/unwind-dw2-fde.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-crtstuff-source-rebuild-2026-10-09/source/libgcc/unwind-pe.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-crtstuff-source-rebuild-2026-10-09/source/gcc/configure",
+      "matches": true
+    }
+  ],
+  "consumed_inputs_verified": 78,
+  "outputs_verified": [
+    {
+      "path": "g2/analysis/touch-crtstuff-source-rebuild-2026-10-09/outputs/target-selection.txt",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-crtstuff-source-rebuild-2026-10-09/outputs/crtbegin.i",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-crtstuff-source-rebuild-2026-10-09/outputs/libgcc_tm.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-crtstuff-source-rebuild-2026-10-09/outputs/crtbegin.o",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-crtstuff-source-rebuild-2026-10-09/outputs/cs-tconfig.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-crtstuff-source-rebuild-2026-10-09/outputs/tconfig.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-crtstuff-source-rebuild-2026-10-09/outputs/crtbegin.d",
+      "matches": true
+    }
+  ],
+  "link_inputs_verified": [
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp/crtbegin.o",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-crtstuff-source-rebuild-2026-10-09/outputs/crtbegin.o",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-crt-array-binding-2026-10-09/outputs/bindings.ld",
+      "matches": true
+    }
+  ],
+  "raw_sections_and_relocations": [
+    {
+      "section": ".init_array",
+      "bytes": 4,
+      "raw_and_relocations_equal": true
+    },
+    {
+      "section": ".fini_array",
+      "bytes": 4,
+      "raw_and_relocations_equal": true
+    },
+    {
+      "section": ".text.deregister_tm_clones",
+      "bytes": 32,
+      "raw_and_relocations_equal": true
+    },
+    {
+      "section": ".text.register_tm_clones",
+      "bytes": 40,
+      "raw_and_relocations_equal": true
+    },
+    {
+      "section": ".text.__do_global_dtors_aux",
+      "bytes": 44,
+      "raw_and_relocations_equal": true
+    },
+    {
+      "section": ".text.frame_dummy",
+      "bytes": 36,
+      "raw_and_relocations_equal": true
+    }
+  ],
+  "linked_sections": [
+    {
+      "section": ".text.deregister",
+      "bytes": 32,
+      "source_equals_audited_provider_and_stock": true
+    },
+    {
+      "section": ".text.register",
+      "bytes": 40,
+      "source_equals_audited_provider_and_stock": true
+    },
+    {
+      "section": ".text.dtors",
+      "bytes": 44,
+      "source_equals_audited_provider_and_stock": true
+    },
+    {
+      "section": ".text.frame",
+      "bytes": 36,
+      "source_equals_audited_provider_and_stock": true
+    },
+    {
+      "section": ".init_array",
+      "bytes": 4,
+      "source_equals_audited_provider_and_stock": true
+    },
+    {
+      "section": ".fini_array",
+      "bytes": 4,
+      "source_equals_audited_provider_and_stock": true
+    }
+  ],
+  "headers_match_authentic_generator_logic": true,
+  "crt_end_terminator_data_bytes": 4,
+  "source_upgrade_bytes": 152,
+  "array_data_bytes_separate": 8,
+  "unique_binary_coverage_increment": 0,
+  "runtime_source_subtotal": 1074,
+  "reused_saved_instruction_pairs": 32,
+  "full_object_identity": false,
+  "boundary": "No build/emulation rerun; source provenance/commands/generated dependencies/raw relocations and linked exactness independently inspected. Vendor full configure/debug identity and live reachability not proved."
+}

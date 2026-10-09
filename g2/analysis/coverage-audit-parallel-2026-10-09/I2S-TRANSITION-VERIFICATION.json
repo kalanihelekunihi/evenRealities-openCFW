@@ -1,0 +1,57 @@
+{
+  "status": "PASS_BOUNDED_GATED_CALL",
+  "authenticated_range": [
+    "0x1020733a",
+    "0x1020737e"
+  ],
+  "slice_sha256": "2521461ac2626ceb0036b02a81d216f4c4aed29204ddeee1057e18e3b1073049",
+  "listing_lines": [
+    "1020733a:\td8840058 \tld.b      \tr4, (r4, 0x58)",
+    "1020733e:\te4642001 \tandi      \tr3, r4, 1",
+    "10207342:\te9030006 \tbez      \tr3, 0x1020734e\t// 0x1020734e",
+    "10207346:\t3101      \tmovi      \tr1, 1",
+    "10207348:\t6c17      \tmov      \tr0, r5",
+    "1020734a:\te3fffe93 \tbsr      \t0x10207070\t// 0x10207070",
+    "1020734e:\te4642002 \tandi      \tr3, r4, 2",
+    "10207352:\te9030006 \tbez      \tr3, 0x1020735e\t// 0x1020735e",
+    "10207356:\t3102      \tmovi      \tr1, 2",
+    "10207358:\t6c17      \tmov      \tr0, r5",
+    "1020735a:\te3fffe8b \tbsr      \t0x10207070\t// 0x10207070",
+    "1020735e:\te4642004 \tandi      \tr3, r4, 4",
+    "10207362:\te9030006 \tbez      \tr3, 0x1020736e\t// 0x1020736e",
+    "10207366:\t3104      \tmovi      \tr1, 4",
+    "10207368:\t6c17      \tmov      \tr0, r5",
+    "1020736a:\te3fffe83 \tbsr      \t0x10207070\t// 0x10207070",
+    "1020736e:\te4842008 \tandi      \tr4, r4, 8",
+    "10207372:\te9040006 \tbez      \tr4, 0x1020737e\t// 0x1020737e",
+    "10207376:\t3108      \tmovi      \tr1, 8",
+    "10207378:\t6c17      \tmov      \tr0, r5",
+    "1020737a:\te3fffe7b \tbsr      \t0x10207070\t// 0x10207070"
+  ],
+  "direct_getter_calls_XIP": [
+    "10207050:\te3ffdfda \tbsr      \t0x10203004\t// 0x10203004",
+    "10207088:\te3ffdfbe \tbsr      \t0x10203004\t// 0x10203004",
+    "1020723c:\te3ffdee4 \tbsr      \t0x10203004\t// 0x10203004"
+  ],
+  "direct_output_consumer_calls_XIP": [
+    "1020734a:\te3fffe93 \tbsr      \t0x10207070\t// 0x10207070",
+    "1020735a:\te3fffe8b \tbsr      \t0x10207070\t// 0x10207070",
+    "1020736a:\te3fffe83 \tbsr      \t0x10207070\t// 0x10207070",
+    "1020737a:\te3fffe7b \tbsr      \t0x10207070\t// 0x10207070"
+  ],
+  "initial_mask": 6,
+  "i2s_bit": 8,
+  "mask_writer_proven": false,
+  "absolute_mask_pointer_aligned_occurrences": {
+    "0x200269fc": {
+      "xip": 0,
+      "sram": 0
+    },
+    "0x100269fc": {
+      "xip": 0,
+      "sram": 0
+    }
+  },
+  "source_sha256": "cd52150f9f3e45061b358ad2d6401932a37a60857b2432b8a92a45a36624b64f",
+  "boundary": "No whole-program indirect/computed/bytewise writer census; potential branch not runtime reachability or physical I2S routing proof"
+}

@@ -1,0 +1,150 @@
+  4a36ae:	b538      	push	{r3, r4, r5, lr}
+  4a36b0:	2000      	movs	r0, #0
+  4a36b2:	4c53      	ldr	r4, [pc, #332]	@ (0x4a3800)
+  4a36b4:	4853      	ldr	r0, [pc, #332]	@ (0x4a3804)
+  4a36b6:	6020      	str	r0, [r4, #0]
+  4a36b8:	4853      	ldr	r0, [pc, #332]	@ (0x4a3808)
+  4a36ba:	6060      	str	r0, [r4, #4]
+  4a36bc:	2000      	movs	r0, #0
+  4a36be:	60a0      	str	r0, [r4, #8]
+  4a36c0:	4852      	ldr	r0, [pc, #328]	@ (0x4a380c)
+  4a36c2:	60e0      	str	r0, [r4, #12]
+  4a36c4:	0020      	movs	r0, r4
+  4a36c6:	f061 f85d 	bl	0x504784
+  4a36ca:	0005      	movs	r5, r0
+  4a36cc:	2001      	movs	r0, #1
+  4a36ce:	f88d 0000 	strb.w	r0, [sp]
+  4a36d2:	2000      	movs	r0, #0
+  4a36d4:	f88d 0001 	strb.w	r0, [sp, #1]
+  4a36d8:	2000      	movs	r0, #0
+  4a36da:	f88d 0002 	strb.w	r0, [sp, #2]
+  4a36de:	466a      	mov	r2, sp
+  4a36e0:	2100      	movs	r1, #0
+  4a36e2:	0020      	movs	r0, r4
+  4a36e4:	f062 ff3a 	bl	0x50655c
+  4a36e8:	4305      	orrs	r5, r0
+  4a36ea:	f114 0018 	adds.w	r0, r4, #24
+  4a36ee:	4948      	ldr	r1, [pc, #288]	@ (0x4a3810)
+  4a36f0:	6001      	str	r1, [r0, #0]
+  4a36f2:	4848      	ldr	r0, [pc, #288]	@ (0x4a3814)
+  4a36f4:	f7ff ff8b 	bl	0x4a360e
+  4a36f8:	0028      	movs	r0, r5
+  4a36fa:	bd32      	pop	{r1, r4, r5, pc}
+  4a36fc:	2100      	movs	r1, #0
+  4a36fe:	6842      	ldr	r2, [r0, #4]
+  4a3700:	f5b2 7f7a 	cmp.w	r2, #1000	@ 0x3e8
+  4a3704:	d05d      	beq.n	0x4a37c2
+  4a3706:	f640 13c4 	movw	r3, #2500	@ 0x9c4
+  4a370a:	429a      	cmp	r2, r3
+  4a370c:	d04d      	beq.n	0x4a37aa
+  4a370e:	f241 3388 	movw	r3, #5000	@ 0x1388
+  4a3712:	429a      	cmp	r2, r3
+  4a3714:	d03d      	beq.n	0x4a3792
+  4a3716:	f242 7310 	movw	r3, #10000	@ 0x2710
+  4a371a:	429a      	cmp	r2, r3
+  4a371c:	d02d      	beq.n	0x4a377a
+  4a371e:	f644 6320 	movw	r3, #20000	@ 0x4e20
+  4a3722:	429a      	cmp	r2, r3
+  4a3724:	d01d      	beq.n	0x4a3762
+  4a3726:	f649 4340 	movw	r3, #40000	@ 0x9c40
+  4a372a:	429a      	cmp	r2, r3
+  4a372c:	d155      	bne.n	0x4a37da
+  4a372e:	220b      	movs	r2, #11
+  4a3730:	f8df 3b44 	ldr.w	r3, [pc, #2884]	@ 0x4a4278
+  4a3734:	701a      	strb	r2, [r3, #0]
+  4a3736:	220b      	movs	r2, #11
+  4a3738:	f8df 3b40 	ldr.w	r3, [pc, #2880]	@ 0x4a427c
+  4a373c:	701a      	strb	r2, [r3, #0]
+  4a373e:	2200      	movs	r2, #0
+  4a3740:	4b35      	ldr	r3, [pc, #212]	@ (0x4a3818)
+  4a3742:	701a      	strb	r2, [r3, #0]
+  4a3744:	7802      	ldrb	r2, [r0, #0]
+  4a3746:	f3c2 0240 	ubfx	r2, r2, #1, #1
+  4a374a:	f8df 3b34 	ldr.w	r3, [pc, #2868]	@ 0x4a4280
+  4a374e:	701a      	strb	r2, [r3, #0]
+  4a3750:	6882      	ldr	r2, [r0, #8]
+  4a3752:	f8df 3b30 	ldr.w	r3, [pc, #2864]	@ 0x4a4284
+  4a3756:	601a      	str	r2, [r3, #0]
+  4a3758:	68c0      	ldr	r0, [r0, #12]
+  4a375a:	4a30      	ldr	r2, [pc, #192]	@ (0x4a381c)
+  4a375c:	8010      	strh	r0, [r2, #0]
+  4a375e:	0008      	movs	r0, r1
+  4a3760:	4770      	bx	lr
+  4a3762:	220a      	movs	r2, #10
+  4a3764:	f8df 3b10 	ldr.w	r3, [pc, #2832]	@ 0x4a4278
+  4a3768:	701a      	strb	r2, [r3, #0]
+  4a376a:	220a      	movs	r2, #10
+  4a376c:	f8df 3b0c 	ldr.w	r3, [pc, #2828]	@ 0x4a427c
+  4a3770:	701a      	strb	r2, [r3, #0]
+  4a3772:	2201      	movs	r2, #1
+  4a3774:	4b28      	ldr	r3, [pc, #160]	@ (0x4a3818)
+  4a3776:	701a      	strb	r2, [r3, #0]
+  4a3778:	e7e4      	b.n	0x4a3744
+  4a377a:	2209      	movs	r2, #9
+  4a377c:	f8df 3af8 	ldr.w	r3, [pc, #2808]	@ 0x4a4278
+  4a3780:	701a      	strb	r2, [r3, #0]
+  4a3782:	2209      	movs	r2, #9
+  4a3784:	f8df 3af4 	ldr.w	r3, [pc, #2804]	@ 0x4a427c
+  4a3788:	701a      	strb	r2, [r3, #0]
+  4a378a:	2202      	movs	r2, #2
+  4a378c:	4b22      	ldr	r3, [pc, #136]	@ (0x4a3818)
+  4a378e:	701a      	strb	r2, [r3, #0]
+  4a3790:	e7d8      	b.n	0x4a3744
+  4a3792:	2208      	movs	r2, #8
+  4a3794:	f8df 3ae0 	ldr.w	r3, [pc, #2784]	@ 0x4a4278
+  4a3798:	701a      	strb	r2, [r3, #0]
+  4a379a:	2208      	movs	r2, #8
+  4a379c:	f8df 3adc 	ldr.w	r3, [pc, #2780]	@ 0x4a427c
+  4a37a0:	701a      	strb	r2, [r3, #0]
+  4a37a2:	2203      	movs	r2, #3
+  4a37a4:	4b1c      	ldr	r3, [pc, #112]	@ (0x4a3818)
+  4a37a6:	701a      	strb	r2, [r3, #0]
+  4a37a8:	e7cc      	b.n	0x4a3744
+  4a37aa:	2207      	movs	r2, #7
+  4a37ac:	f8df 3ac8 	ldr.w	r3, [pc, #2760]	@ 0x4a4278
+  4a37b0:	701a      	strb	r2, [r3, #0]
+  4a37b2:	2207      	movs	r2, #7
+  4a37b4:	f8df 3ac4 	ldr.w	r3, [pc, #2756]	@ 0x4a427c
+  4a37b8:	701a      	strb	r2, [r3, #0]
+  4a37ba:	2204      	movs	r2, #4
+  4a37bc:	4b16      	ldr	r3, [pc, #88]	@ (0x4a3818)
+  4a37be:	701a      	strb	r2, [r3, #0]
+  4a37c0:	e7c0      	b.n	0x4a3744
+  4a37c2:	2206      	movs	r2, #6
+  4a37c4:	f8df 3ab0 	ldr.w	r3, [pc, #2736]	@ 0x4a4278
+  4a37c8:	701a      	strb	r2, [r3, #0]
+  4a37ca:	2206      	movs	r2, #6
+  4a37cc:	f8df 3aac 	ldr.w	r3, [pc, #2732]	@ 0x4a427c
+  4a37d0:	701a      	strb	r2, [r3, #0]
+  4a37d2:	2205      	movs	r2, #5
+  4a37d4:	4b10      	ldr	r3, [pc, #64]	@ (0x4a3818)
+  4a37d6:	701a      	strb	r2, [r3, #0]
+  4a37d8:	e7b4      	b.n	0x4a3744
+  4a37da:	f05f 30ff 	movs.w	r0, #4294967295	@ 0xffffffff
+  4a37de:	e7bf      	b.n	0x4a3760
+  4a37e0:	dfb4      	svc	180	@ 0xb4
+  4a37e2:	3161      	adds	r1, #97	@ 0x61
+  4a37e4:	f4a6 3f4e 			@ <UNDEFINED> instruction: 0xf4a63f4e
+  4a37e8:	bf8e      	itee	hi
+  4a37ea:	4cde      	ldrhi	r4, [pc, #888]	@ (0x4a3b64)
+  4a37ec:	f4a6 3f5e 			@ <UNDEFINED> instruction: 0xf4a63f5e
+  4a37f0:	1b11      	subls	r1, r2, r4
+  4a37f2:	604b      	str	r3, [r1, #4]
+  4a37f4:	9443      	str	r4, [sp, #268]	@ 0x10c
+  4a37f6:	bffe      	ittt	<und>
+  4a37f8:	14e1      	asr<und>	r1, r4, #19
+  4a37fa:	66e3      	str<und>	r3, [r4, #108]	@ 0x6c
+  4a37fc:	477b      	bx<und>	pc
+  4a37fe:	3fed      	subs	r7, #237	@ 0xed
+  4a3800:	3020      	adds	r0, #32
+  4a3802:	2007      	movs	r0, #7
+  4a3804:	35b1      	adds	r5, #177	@ 0xb1
+  4a3806:	004a      	lsls	r2, r1, #1
+  4a3808:	35eb      	adds	r5, #235	@ 0xeb
+  4a380a:	004a      	lsls	r2, r1, #1
+  4a380c:	1103      	asrs	r3, r0, #4
+  4a380e:	0049      	lsls	r1, r1, #1
+  4a3810:	56d5      	ldrsb	r5, [r2, r3]
+  4a3812:	004a      	lsls	r2, r1, #1
+  4a3814:	3170      	adds	r1, #112	@ 0x70
+  4a3816:	2007      	movs	r0, #7

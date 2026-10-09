@@ -1,0 +1,62 @@
+
+g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin:     file format binary
+
+
+Disassembly of section .data:
+
+004a460c <.data+0x6c62c>:
+  4a460c:	b410      	push	{r4}
+  4a460e:	2100      	movs	r1, #0
+  4a4610:	e049      	b.n	0x4a46a6
+  4a4612:	2303      	movs	r3, #3
+  4a4614:	fb91 f0f3 	sdiv	r0, r1, r3
+  4a4618:	fb03 1310 	mls	r3, r3, r0, r1
+  4a461c:	2003      	movs	r0, #3
+  4a461e:	fb91 f4f0 	sdiv	r4, r1, r0
+  4a4622:	200c      	movs	r0, #12
+  4a4624:	4344      	muls	r4, r0
+  4a4626:	f8df 036c 	ldr.w	r0, [pc, #876]	@ 0x4a4994
+  4a462a:	4420      	add	r0, r4
+  4a462c:	eb00 0083 	add.w	r0, r0, r3, lsl #2
+  4a4630:	eb02 0381 	add.w	r3, r2, r1, lsl #2
+  4a4634:	ed93 0a00 	vldr	s0, [r3]
+  4a4638:	eeff 0a00 	vmov.f32	s1, #240	@ 0xbf800000 -1.0
+  4a463c:	ee20 0a20 	vmul.f32	s0, s0, s1
+  4a4640:	eebe 0ac1 	vcvt.s32.f32	s0, s0, #30
+  4a4644:	ed80 0a00 	vstr	s0, [r0]
+  4a4648:	e02c      	b.n	0x4a46a4
+  4a464a:	f852 0021 	ldr.w	r0, [r2, r1, lsl #2]
+  4a464e:	f8df 3a84 	ldr.w	r3, [pc, #2692]	@ 0x4a50d4
+  4a4652:	f843 0021 	str.w	r0, [r3, r1, lsl #2]
+  4a4656:	eb02 0081 	add.w	r0, r2, r1, lsl #2
+  4a465a:	ed90 0a00 	vldr	s0, [r0]
+  4a465e:	eebe 0ac9 	vcvt.s32.f32	s0, s0, #14
+  4a4662:	ee10 0a10 	vmov	r0, s0
+  4a4666:	4bca      	ldr	r3, [pc, #808]	@ (0x4a4990)
+  4a4668:	f823 0011 	strh.w	r0, [r3, r1, lsl #1]
+  4a466c:	2902      	cmp	r1, #2
+  4a466e:	d003      	beq.n	0x4a4678
+  4a4670:	2905      	cmp	r1, #5
+  4a4672:	d001      	beq.n	0x4a4678
+  4a4674:	2908      	cmp	r1, #8
+  4a4676:	d1cc      	bne.n	0x4a4612
+  4a4678:	2303      	movs	r3, #3
+  4a467a:	fb91 f0f3 	sdiv	r0, r1, r3
+  4a467e:	fb03 1310 	mls	r3, r3, r0, r1
+  4a4682:	2003      	movs	r0, #3
+  4a4684:	fb91 f4f0 	sdiv	r4, r1, r0
+  4a4688:	200c      	movs	r0, #12
+  4a468a:	4344      	muls	r4, r0
+  4a468c:	48c1      	ldr	r0, [pc, #772]	@ (0x4a4994)
+  4a468e:	4420      	add	r0, r4
+  4a4690:	eb00 0083 	add.w	r0, r0, r3, lsl #2
+  4a4694:	eb02 0381 	add.w	r3, r2, r1, lsl #2
+  4a4698:	ed93 0a00 	vldr	s0, [r3]
+  4a469c:	eebe 0ac1 	vcvt.s32.f32	s0, s0, #30
+  4a46a0:	ed80 0a00 	vstr	s0, [r0]
+  4a46a4:	1c49      	adds	r1, r1, #1
+  4a46a6:	2909      	cmp	r1, #9
+  4a46a8:	dbcf      	blt.n	0x4a464a
+  4a46aa:	2000      	movs	r0, #0
+  4a46ac:	bc10      	pop	{r4}
+  4a46ae:	4770      	bx	lr

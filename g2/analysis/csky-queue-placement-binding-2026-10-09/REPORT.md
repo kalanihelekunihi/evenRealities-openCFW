@@ -1,0 +1,13 @@
+# Queue placement and caller contract
+
+Question: does the acquired source's section contract account for stock SRAM Put and XIP Get? Stop criterion: bind both original byte ranges and both public section/linker contracts; do not infer live scheduling, exact producer revision or repeat historical queue behavior tests.
+
+Static checks PASS in results.json. Put is [0x100261B8,0x10026212) in canonical SRAM; Get is [0x10206FB0,0x10206FFA) in canonical XIP (base0x10203004). Fresh byte-bound disassemblies are retained. No C-SKY instruction execution or genuine source rebuild occurred.
+
+The KWS source marks Put with DRAM0_STAGE2_SRAM_ATTR and leaves Get unmarked. AIoT marks both. Both acquired headers define that attribute as section(".sram_text"); both supplied linkers route .sram_text to stage2_iram. With CONFIG_MCU_DEFAULT_TEXT_IN_FLASH, ordinary .text goes to stage2_xip. Thus the observed split agrees with the KWS source under that profile and conflicts with unchanged AIoT Get under its supplied section contract. Modified source, replaced attributes or a different producing linker remain alternatives. This is a conditional placement discriminator, not an exact source pin or full Kconfig recovery.
+
+Original Get accesses head at+4, tail at+0, item size at+16, buffer at+8 and size at+12, corroborating the public 20-byte queue schema. It returns0 when empty; otherwise copies item bytes with signed division/remainder and advances head. This is historical behavior binding, not newly discovered whole-function coverage. Valid use requires positive size/member_size and coherent nonnegative indices; malformed-state behavior is not expanded here.
+
+App initialization at0x10208CD4 supplies64 bytes and8-byte items to QueueInit. The public single-item full condition reserves one slot, so this profile's eight physical slots permit seven pending events. TriggerAppEvent at0x10208CC0 ignores Put's result and returns0; callers cannot use that wrapper's return as enqueue acknowledgement. This derives from the already audited app-event binding plus original/public queue contract, not measured event loss or concurrency behavior. Applications/CFW should avoid assuming eight usable slots or observable backpressure through this wrapper.
+
+Pins: KWS8bf9ee5cb6eeb226011e61c15fa4981b83b93bd5; AIoTd4aa00943e22f9ddfa424f979fae3ee2a62f5c0b. Input hashes and exact decoding commands are in results.json. No production, Git, device or canonical-ledger mutations. Further exact attribution requires the producing source/configuration/link manifest; another shared-semantics comparison cannot distinguish revisions. Whole-firmware source work remains open.

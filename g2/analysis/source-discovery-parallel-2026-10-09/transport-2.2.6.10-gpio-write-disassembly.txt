@@ -1,0 +1,77 @@
+
+g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00480fd6 <.data+0x48ff6>:
+  480fd6:	b51c      	push	{r2, r3, r4, lr}
+  480fd8:	0004      	movs	r4, r0
+  480fda:	b2c9      	uxtb	r1, r1
+  480fdc:	2900      	cmp	r1, #0
+  480fde:	d008      	beq.n	0x480ff2
+  480fe0:	2902      	cmp	r1, #2
+  480fe2:	d01e      	beq.n	0x481022
+  480fe4:	d311      	bcc.n	0x48100a
+  480fe6:	2904      	cmp	r1, #4
+  480fe8:	d03e      	beq.n	0x481068
+  480fea:	d331      	bcc.n	0x481050
+  480fec:	2905      	cmp	r1, #5
+  480fee:	d047      	beq.n	0x481080
+  480ff0:	e05c      	b.n	0x4810ac
+  480ff2:	f8df 0764 	ldr.w	r0, [pc, #1892]	@ 0x481758
+  480ff6:	f3c4 1142 	ubfx	r1, r4, #5, #3
+  480ffa:	2201      	movs	r2, #1
+  480ffc:	f014 041f 	ands.w	r4, r4, #31
+  481000:	fa12 f404 	lsls.w	r4, r2, r4
+  481004:	f840 4021 	str.w	r4, [r0, r1, lsl #2]
+  481008:	e050      	b.n	0x4810ac
+  48100a:	f8df 0750 	ldr.w	r0, [pc, #1872]	@ 0x48175c
+  48100e:	f3c4 1142 	ubfx	r1, r4, #5, #3
+  481012:	2201      	movs	r2, #1
+  481014:	f014 041f 	ands.w	r4, r4, #31
+  481018:	fa12 f404 	lsls.w	r4, r2, r4
+  48101c:	f840 4021 	str.w	r4, [r0, r1, lsl #2]
+  481020:	e044      	b.n	0x4810ac
+  481022:	f7f2 fc8d 	bl	0x473940
+  481026:	9000      	str	r0, [sp, #0]
+  481028:	f8df 0724 	ldr.w	r0, [pc, #1828]	@ 0x481750
+  48102c:	f3c4 1142 	ubfx	r1, r4, #5, #3
+  481030:	f3c4 1242 	ubfx	r2, r4, #5, #3
+  481034:	f850 2022 	ldr.w	r2, [r0, r2, lsl #2]
+  481038:	2301      	movs	r3, #1
+  48103a:	f014 041f 	ands.w	r4, r4, #31
+  48103e:	fa13 f404 	lsls.w	r4, r3, r4
+  481042:	4054      	eors	r4, r2
+  481044:	f840 4021 	str.w	r4, [r0, r1, lsl #2]
+  481048:	9800      	ldr	r0, [sp, #0]
+  48104a:	f380 8810 	msr	PRIMASK, r0
+  48104e:	e02d      	b.n	0x4810ac
+  481050:	f8df 070c 	ldr.w	r0, [pc, #1804]	@ 0x481760
+  481054:	f3c4 1142 	ubfx	r1, r4, #5, #3
+  481058:	2201      	movs	r2, #1
+  48105a:	f014 041f 	ands.w	r4, r4, #31
+  48105e:	fa12 f404 	lsls.w	r4, r2, r4
+  481062:	f840 4021 	str.w	r4, [r0, r1, lsl #2]
+  481066:	e021      	b.n	0x4810ac
+  481068:	f8df 06f8 	ldr.w	r0, [pc, #1784]	@ 0x481764
+  48106c:	f3c4 1142 	ubfx	r1, r4, #5, #3
+  481070:	2201      	movs	r2, #1
+  481072:	f014 041f 	ands.w	r4, r4, #31
+  481076:	fa12 f404 	lsls.w	r4, r2, r4
+  48107a:	f840 4021 	str.w	r4, [r0, r1, lsl #2]
+  48107e:	e015      	b.n	0x4810ac
+  481080:	f7f2 fc5e 	bl	0x473940
+  481084:	9000      	str	r0, [sp, #0]
+  481086:	f8df 06cc 	ldr.w	r0, [pc, #1740]	@ 0x481754
+  48108a:	f3c4 1142 	ubfx	r1, r4, #5, #3
+  48108e:	f3c4 1242 	ubfx	r2, r4, #5, #3
+  481092:	f850 2022 	ldr.w	r2, [r0, r2, lsl #2]
+  481096:	2301      	movs	r3, #1
+  481098:	f014 041f 	ands.w	r4, r4, #31
+  48109c:	fa13 f404 	lsls.w	r4, r3, r4
+  4810a0:	4054      	eors	r4, r2
+  4810a2:	f840 4021 	str.w	r4, [r0, r1, lsl #2]
+  4810a6:	9800      	ldr	r0, [sp, #0]
+  4810a8:	f380 8810 	msr	PRIMASK, r0
+  4810ac:	2000      	movs	r0, #0

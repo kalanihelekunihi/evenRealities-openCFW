@@ -1,0 +1,27 @@
+{
+  "upstream": "https://github.com/tdk-invn-oss/motion.arduino.ICM45608.git",
+  "registered_submodule": "third-party/upstream/invensense-icm45608",
+  "registered_revision": "b79ae575f7f310e5ae2e1164096d1a858bb74662",
+  "acquired_revision": "edaf335913c9ede7d4b5d8700e49b279cfb8fa8b",
+  "license": "BSD-3-Clause; inspect per-file notices",
+  "files": {
+    "LICENSE": {
+      "sha256": "68bed9c72222b77b8744add292f524000661c6537d960adeaf740722b0b2637f",
+      "bytes": 1503
+    },
+    "src/imu/inv_imu_edmp.c": {
+      "sha256": "30a7b0541b33a7e1796324b279b36a41dab89ce95d5e9bbce2bb0f0086f2a19c",
+      "bytes": 75138
+    },
+    "src/imu/inv_imu_edmp_patch_key_offsets.h": {
+      "sha256": "c1d7f252c60f0bd67a88d88a7311e0f8caec7126661cd51a3b26400caf092149",
+      "bytes": 2329
+    },
+    "src/imu/inv_imu_edmp_patches_defs.h": {
+      "sha256": "61313774def2fd8f36a8dddf2109eb66b1e6e0b08a6c8e946f9da57a88426f82",
+      "bytes": 4100
+    }
+  },
+  "scope": "Host driver comparison only; no EDMP ROM source or firmware revision attribution",
+  "proposed_owner_action": "Consider updating existing registered submodule to new revision only after address-bound firmware comparison; no new submodule required."
+}

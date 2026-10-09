@@ -1,0 +1,17 @@
+from pathlib import Path
+import json,struct,hashlib,collections
+f=Path('g2/analysis/coverage-audit-parallel-2026-10-09/followup_verify.py').read_text();exec(f[:f.index('out={}')]);P=R/'g2/analysis/touch-crt-array-binding-2026-10-09';v=json.loads((P/'provider-results.json').read_text());test=json.loads((P/'original-results.json').read_text());provider=T/'lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp/crtbegin.o';assert sha(provider.read_bytes())==v['installed_provider_sha256'];assert sha((P/'outputs/bindings.ld').read_bytes())==v['link_script_sha256'];assert sha((P/'outputs/linked.elf').read_bytes())==v['linked_elf_sha256'];assert not v['source_rebuilt'];fw=(R/'g2/blobs/official/g2-2.2.6.10/firmware_touch.bin').read_bytes();assert sha(fw)=='0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d';stock=lambda a,n:fw[32+a-0x3300:32+a-0x3300+n];w=lambda a:struct.unpack('<I',stock(a,4))[0]
+b,ss,ns,sy=elf(provider);checks=[]
+for row in v['sections']:
+ d,a=section(P/'outputs/linked.elf',row['section']);assert a==int(row['address'],16) and len(d)==row['bytes'];assert d==stock(int(row['image_flash'],16),len(d));assert sha(d)==row['provider_sha256']==row['stock_sha256']
+ orig={'.text.deregister':'.text.deregister_tm_clones','.text.register':'.text.register_tm_clones','.text.dtors':'.text.__do_global_dtors_aux','.text.frame':'.text.frame_dummy'}.get(row['section'],row['section']);idx=ns.index(orig);x=ss[idx];raw=b[x[4]:x[4]+x[5]];rels=[]
+ for r in ss:
+  if r[1]==9 and r[7]==idx:
+   for off in range(r[4],r[4]+r[5],8):
+    k,i=struct.unpack_from('<II',b,off);rels.append((k,i&255,sy[i>>8][0]))
+ covered={j for k,t,n in rels for j in range(k,k+4)};assert len(raw)==len(d);assert all(x==y for i,(x,y) in enumerate(zip(raw,d)) if i not in covered);checks.append({'section':row['section'],'address':hex(a),'bytes':len(d),'relocations':rels,'unrelocated_bytes_preserved':True})
+assert [w(a) for a in [0x46e8,0x46ec,0x46f0,0x46f4]]==[0xb578,0xb584,0xb584,0xb58c];assert [w(a) for a in range(0xb578,0xb58c,4)]==[0xb58c,0x200004c0,241,0x200008a8,428];assert w(0x3304)==0x4675;assert 0xb58c+(0x2000087c-0x200004c0)==0xb948;assert [w(0xb948),w(0xb94c)]==[0x3435,0x3409];assert w(0x34d0)==0
+assert test['cases']==32==len(test['comparisons']);assert all(x['matches'] for x in test['comparisons']);inputs=hashes(test['inputs']);seen=set()
+for row in test['comparisons']:
+ key=(row['pattern'],row['seed'],row['manual_fini']);assert key not in seen;seen.add(key);d=row['observed'];assert d['load']['copy_word_writes']==241 and d['load']['zero_word_writes']==428;assert d['stdio_handler']==0 and d['completed_after']==row['manual_fini'];assert [x['entry'] for x in d['events'][:3]]==['0xaa44','0x3434','0x33e0'];assert d['events'][-1]=={'phase':'exit','entry':'0xaa40','status':row['seed']}
+assert seen=={(p,s,f) for p in [0,85,165,255] for s in range(4) for f in [0,1]};out={'status':'PASS','sections':checks,'binary_provider_bytes':152,'separate_array_data_bytes':8,'source_rebuilt_bytes':0,'tables_and_mapping_independently_verified':True,'saved_comparisons':32,'saved_input_hashes':inputs,'boundary':'No emulation rerun. Harness inspected: stock copy/zero and actual callback instructions; manually invoked fini, simulated VTOR, starts after board init. Real ld from installed binary provider, not crtstuff source rebuild.'};(O/'CRT-BINDING-VERIFICATION.json').write_text(json.dumps(out,indent=2)+'\n');print('PASS152binary provider+8array data,copy mapping,32saved pairs')

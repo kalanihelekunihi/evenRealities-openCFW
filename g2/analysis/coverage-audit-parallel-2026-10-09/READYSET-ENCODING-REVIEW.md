@@ -1,0 +1,7 @@
+# Independent ready-set extension encoding review
+
+PASS for discovery EM9305-READYSET-OPCODE-LEAD.md/em9305-readyset-extension-binding.json **as encoding/name/operand correspondence only**. Four input hashes independently verified. Locked payload bytes at31163E are2f3d0010; ordered little-endian halfwords reconstruct3D2F1000. Fields major7,I47,A0,B13,C0,F0,P0 independently match receipt.
+
+Authentic vendor4.6 header declares intrinsic opcode7/subopcode0; assembly declares log2p1,7,0,FLAGS_NONE,SYNTAX_2OP (adjacent log2p0minor1). Existing GNU arc-ext.c explicitly chooses minorA whenI47andA!=63 and regular twooperand RB/RC. This identifies `log2p1 r13,r0` under that supplied extension configuration. Vendor QF_LOG2 casts its result to uint_fast8_t, consistent with downstream stock byte narrowing, but not evidence of operation arithmetic.
+
+No exact stock4.2extension compatibility, producing metadata, positive/logarithm formula, zero/negative behavior, exception semantics or execution is proven. Public algorithm/name agreement cannot replace APEX operation specification. The raw opcode is no longer wholly nameless under available4.6syntax, yet full scheduler semantics remain unresolved. Prior downstream active/lock/nextPrio behavior and byte narrowing qualification stand. No source-built bytes, canonical admission or runtime coverage increment. Supporting READYSET-ENCODING-VERIFICATION.json.

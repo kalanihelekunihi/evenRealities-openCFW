@@ -1,0 +1,12 @@
+Static instruction-led reconstruction, not compiled or executed source.
+Bound range 0x4A460C <= PC < 0x4A46B0.
+Inputs r0/r1 unused as incoming values; r2 points at nine float32 values.
+for i in 0..8:
+    raw_float_words_at_0x20000E38[i] = load_u32(r2 + 4*i)
+    q14_at_0x20000E00[i] = low16(VCVT_S32_F32_FIXED(load_f32(r2+4*i), fractional_bits=14))
+    x = load_f32(r2 + 4*i)
+    if i not in {2,5,8}: x = float32_multiply(x, -1.0)
+    q30_at_0x20000E14[i] = VCVT_S32_F32_FIXED(x, fractional_bits=30)
+return 0
+
+VCVT denotes original ARM floating-point instruction semantics. This pseudocode does not replace it with a C cast or assert behavior for NaN, infinity, out-of-range inputs or arbitrary FPSCR configuration. All three bases resolve from original PC-relative literal words. The Q30 row/column arithmetic reduces to linear index i. No BL/BLX or sensor SRAM write occurs in this range.

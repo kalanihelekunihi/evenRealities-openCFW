@@ -1,0 +1,163 @@
+{
+  "status": "PASS",
+  "decoder_compared_bytes": 17752,
+  "decoded_sha256": "df1a1fdf7b2792a7c4ef7a2c5cc6d1423bc7833b556fdfcedb8d6d927fbbb743",
+  "table_bytes": "520602000000401f520802000000ff7f520a0200b80b3011400401000000ff00520201000000ff00510002000000d007690501000000ff7f",
+  "update_cases": [
+    {
+      "previous_byte": 0,
+      "valid": 0,
+      "new_byte": 0,
+      "dirty": 0,
+      "provider_calls": [
+        "diagnostic-level",
+        "diagnostic-level",
+        "diagnostic-level"
+      ]
+    },
+    {
+      "previous_byte": 0,
+      "valid": 1,
+      "new_byte": 40,
+      "dirty": 1,
+      "provider_calls": [
+        "diagnostic-level",
+        "diagnostic-level",
+        "diagnostic-level",
+        "diagnostic-level",
+        "diagnostic-level",
+        "diagnostic-level"
+      ]
+    },
+    {
+      "previous_byte": 40,
+      "valid": 0,
+      "new_byte": 40,
+      "dirty": 0,
+      "provider_calls": [
+        "diagnostic-level",
+        "diagnostic-level",
+        "diagnostic-level"
+      ]
+    },
+    {
+      "previous_byte": 40,
+      "valid": 1,
+      "new_byte": 40,
+      "dirty": 1,
+      "provider_calls": [
+        "diagnostic-level",
+        "diagnostic-level",
+        "diagnostic-level",
+        "diagnostic-level",
+        "diagnostic-level",
+        "diagnostic-level"
+      ]
+    },
+    {
+      "previous_byte": 127,
+      "valid": 0,
+      "new_byte": 127,
+      "dirty": 0,
+      "provider_calls": [
+        "diagnostic-level",
+        "diagnostic-level",
+        "diagnostic-level"
+      ]
+    },
+    {
+      "previous_byte": 127,
+      "valid": 1,
+      "new_byte": 40,
+      "dirty": 1,
+      "provider_calls": [
+        "diagnostic-level",
+        "diagnostic-level",
+        "diagnostic-level",
+        "diagnostic-level",
+        "diagnostic-level",
+        "diagnostic-level"
+      ]
+    },
+    {
+      "previous_byte": 128,
+      "valid": 0,
+      "new_byte": 128,
+      "dirty": 0,
+      "provider_calls": [
+        "diagnostic-level",
+        "diagnostic-level",
+        "diagnostic-level"
+      ]
+    },
+    {
+      "previous_byte": 128,
+      "valid": 1,
+      "new_byte": 40,
+      "dirty": 1,
+      "provider_calls": [
+        "diagnostic-level",
+        "diagnostic-level",
+        "diagnostic-level",
+        "diagnostic-level",
+        "diagnostic-level",
+        "diagnostic-level"
+      ]
+    },
+    {
+      "previous_byte": 168,
+      "valid": 0,
+      "new_byte": 168,
+      "dirty": 0,
+      "provider_calls": [
+        "diagnostic-level",
+        "diagnostic-level",
+        "diagnostic-level"
+      ]
+    },
+    {
+      "previous_byte": 168,
+      "valid": 1,
+      "new_byte": 40,
+      "dirty": 1,
+      "provider_calls": [
+        "diagnostic-level",
+        "diagnostic-level",
+        "diagnostic-level",
+        "diagnostic-level",
+        "diagnostic-level",
+        "diagnostic-level"
+      ]
+    },
+    {
+      "previous_byte": 255,
+      "valid": 0,
+      "new_byte": 255,
+      "dirty": 0,
+      "provider_calls": [
+        "diagnostic-level",
+        "diagnostic-level",
+        "diagnostic-level"
+      ]
+    },
+    {
+      "previous_byte": 255,
+      "valid": 1,
+      "new_byte": 40,
+      "dirty": 1,
+      "provider_calls": [
+        "diagnostic-level",
+        "diagnostic-level",
+        "diagnostic-level",
+        "diagnostic-level",
+        "diagnostic-level",
+        "diagnostic-level"
+      ]
+    }
+  ],
+  "limits": [
+    "Original decoder versus independent Python, no callbacks stubbed in decoder.",
+    "Original generic update with actual initialized table; diagnostic-level provider returns zero.",
+    "Update buffer valid flag synthetic; no device read, bus operation, configure runner, commit or physical gauge behavior executed."
+  ]
+}

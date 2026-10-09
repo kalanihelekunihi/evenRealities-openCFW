@@ -1,0 +1,403 @@
+{
+  "event_sources": [
+    {
+      "path": "third-party/upstream/nationalchip-lvp-kws/lvp/app_core/lvp_app_core.c",
+      "matches": true
+    },
+    {
+      "path": "third-party/upstream/nationalchip-lvp-kws/lvp/app_core/lvp_app_core.h",
+      "matches": true
+    },
+    {
+      "path": "third-party/upstream/nationalchip-lvp-kws/lvp/app_core/lvp_app.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/nationalchip-lvp-aiot/lvp/app_core/lvp_app_core.c",
+      "matches": true
+    }
+  ],
+  "event_slices": [
+    {
+      "runtime": "0x10208cc0",
+      "bytes": 20,
+      "verified": true
+    },
+    {
+      "runtime": "0x10208d48",
+      "bytes": 80,
+      "verified": true
+    },
+    {
+      "runtime": "0x10208cd4",
+      "bytes": 116,
+      "verified": true
+    }
+  ],
+  "hybrids": [
+    {
+      "files": [
+        {
+          "path": "third-party/upstream/nationalchip-lvp-kws/lvp/vui/kws/models/grus_tws_zh/v0.2.1_v0.1.9_hybrid/ctc_model.c",
+          "matches": true
+        },
+        {
+          "path": "third-party/upstream/nationalchip-lvp-kws/lvp/vui/kws/models/grus_tws_zh/v0.2.1_v0.1.9_hybrid/model.h",
+          "matches": true
+        },
+        {
+          "path": "third-party/upstream/nationalchip-lvp-kws/lvp/vui/kws/models/grus_tws_zh/v0.2.1_v0.1.9_hybrid/model_xip.h",
+          "matches": true
+        },
+        {
+          "path": "third-party/upstream/nationalchip-lvp-kws/lvp/common/snpu_engine/lvp_kws.c",
+          "matches": true
+        }
+      ],
+      "getters_verified": true,
+      "array_dimensions_verified": true
+    },
+    {
+      "files": [
+        {
+          "path": "third-party/upstream/nationalchip-lvp-kws/lvp/vui/kws/models/grus_tws_zh/v0.2.2_v0.1.9_hybrid/ctc_model.c",
+          "matches": true
+        },
+        {
+          "path": "third-party/upstream/nationalchip-lvp-kws/lvp/vui/kws/models/grus_tws_zh/v0.2.2_v0.1.9_hybrid/model.h",
+          "matches": true
+        },
+        {
+          "path": "third-party/upstream/nationalchip-lvp-kws/lvp/vui/kws/models/grus_tws_zh/v0.2.2_v0.1.9_hybrid/model_xip.h",
+          "matches": true
+        },
+        {
+          "path": "third-party/upstream/nationalchip-lvp-kws/lvp/common/snpu_engine/lvp_kws.c",
+          "matches": true
+        }
+      ],
+      "getters_verified": true,
+      "array_dimensions_verified": true
+    }
+  ],
+  "startup_inputs": [
+    {
+      "path": "g2/analysis/touch-newlib14-startup-exit-2026-10-09/source/newlib/libc/misc/init.c",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/types.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/_ansi.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/newlib-nano/newlib.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/_newlib_version.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/config.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/machine/ieeefp.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/features.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/cdefs.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/machine/_default_types.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/lib/gcc/arm-none-eabi/14.2.1/include/stddef.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/machine/_types.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_types.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_stdint.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/machine/endian.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/machine/_endian.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/select.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_sigset.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_timeval.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/timespec.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_timespec.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/_pthreadtypes.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/sched.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/machine/types.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-newlib14-startup-exit-2026-10-09/gcc-source/libgcc/config/arm/crti.S",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-newlib14-startup-exit-2026-10-09/gcc-source/libgcc/config/arm/crtn.S",
+      "matches": true
+    }
+  ],
+  "startup_outputs": [
+    {
+      "path": "g2/analysis/touch-startup-provider-successor-2026-10-09/outputs/bindings.ld",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-startup-provider-successor-2026-10-09/outputs/crti.d",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-startup-provider-successor-2026-10-09/outputs/crti.i",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-startup-provider-successor-2026-10-09/outputs/crti.o",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-startup-provider-successor-2026-10-09/outputs/crtn.d",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-startup-provider-successor-2026-10-09/outputs/crtn.i",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-startup-provider-successor-2026-10-09/outputs/crtn.o",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-startup-provider-successor-2026-10-09/outputs/init.d",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-startup-provider-successor-2026-10-09/outputs/init.i",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-startup-provider-successor-2026-10-09/outputs/init.o",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-startup-provider-successor-2026-10-09/outputs/linked.elf",
+      "matches": true
+    }
+  ],
+  "halt_inputs": [
+    {
+      "path": "g2/analysis/touch-startup-provider-successor-2026-10-09/configure-source/libgloss/libnosys/_exit.c",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/lib/gcc/arm-none-eabi/14.2.1/include/limits.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/lib/gcc/arm-none-eabi/14.2.1/include/syslimits.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/limits.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/newlib.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/_newlib_version.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/cdefs.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/machine/_default_types.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/features.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/lib/gcc/arm-none-eabi/14.2.1/include/stddef.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/syslimits.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-startup-provider-successor-2026-10-09/halt-output-attempt2/config.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/_ansi.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/sys/config.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/machine/ieeefp.h",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include/_syslist.h",
+      "matches": true
+    }
+  ],
+  "halt_outputs": [
+    {
+      "path": "g2/analysis/touch-startup-provider-successor-2026-10-09/halt-output-attempt2/default-halt.d",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-startup-provider-successor-2026-10-09/halt-output-attempt2/default-halt.o",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-startup-provider-successor-2026-10-09/halt-output-attempt2/default-halt.i",
+      "matches": true
+    }
+  ],
+  "configure_host": [
+    {
+      "path": "g2/analysis/touch-newlib14-startup-exit-2026-10-09/source/newlib/configure.host",
+      "matches": true
+    }
+  ],
+  "new_ranges": [
+    {
+      "address": "0xa9e4",
+      "end": "0xaa2c",
+      "bytes": 72,
+      "exact": true
+    },
+    {
+      "address": "0xaa44",
+      "end": "0xaa50",
+      "bytes": 12,
+      "exact": true
+    },
+    {
+      "address": "0xaa50",
+      "end": "0xaa5c",
+      "bytes": 12,
+      "exact": true
+    },
+    {
+      "address": "0xaa40",
+      "end": "0xaa44",
+      "bytes": 4,
+      "exact": true
+    }
+  ],
+  "archive_providers_verified": true,
+  "constructor_relocations": [
+    [
+      18,
+      10,
+      "_init"
+    ],
+    [
+      56,
+      2,
+      "__preinit_array_end"
+    ],
+    [
+      60,
+      2,
+      "__preinit_array_start"
+    ],
+    [
+      64,
+      2,
+      "__init_array_end"
+    ],
+    [
+      68,
+      2,
+      "__init_array_start"
+    ]
+  ],
+  "new_bytes_nonoverlap": 100,
+  "instruction_inputs": [
+    {
+      "path": "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-startup-provider-successor-2026-10-09/outputs/linked.elf",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-newlib14-startup-exit-2026-10-09/outputs/exit/linked.elf",
+      "matches": true
+    },
+    {
+      "path": "g2/analysis/touch-startup-provider-successor-2026-10-09/halt-output-attempt2/default-halt.o",
+      "matches": true
+    }
+  ],
+  "saved_cases": {
+    "0xa9e4": 8,
+    "0xaa44": 8,
+    "0xaa50": 8,
+    "0xa9ac": 32
+  },
+  "negative_halt_preserved": true,
+  "original_constructor_37_mismatches_reverified": true,
+  "boundary": "Independent hashes, ELF/archive extents and saved receipt/harness inspection; no compilation/emulation rerun; callbacks synthetic; event machine semantics based on existing disassembly, not independently rebuilt source."
+}

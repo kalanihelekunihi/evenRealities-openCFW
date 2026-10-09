@@ -1,0 +1,1482 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html dir="ltr" class="ms-isBot" lang="en-US">
+<head><meta name="GENERATOR" content="Microsoft SharePoint" /><meta http-equiv="Content-type" content="text/html; charset=utf-8" /><meta http-equiv="X-UA-Compatible" content="IE=10" />
+	<!--<META NAME=”VIEWPORT” CONTENT=”WIDTH=320, INITIAL-SCALE=1, MAXIMUM-SCALE=1, USER-SCALABLE=0″>-->
+	<!--<meta name="viewport" content="width=device-width, initial-scale=1.0" />-->
+	<meta http-equiv="Expires" content="0" /><meta name="msapplication-TileImage" content="/_layouts/15/images/SharePointMetroAppTile.png" /><meta name="msapplication-TileColor" content="#0072C6" /><title>
+	Macronix - Serial NOR Flash
+</title><link rel="shortcut icon" href="/_layouts/15/images/z_mxic.ico" type="image/vnd.microsoft.icon" id="favicon" /><link id="CssLink-36d325014ac24d23b306657b0433f45c" rel="stylesheet" type="text/css" href="/Style%20Library/en-US/Themable/Core%20Styles/pagelayouts15.css"/>
+<link id="CssLink-55b9ca8684ed4617b0b6b7b0e235a3a6" rel="stylesheet" type="text/css" href="/_layouts/15/1033/styles/Themable/corev15.css?rev=mDUzGfgO2aHnLoh30SeNyw%3D%3DTAG0"/>
+<style id="SPThemeHideForms" type="text/css">body {opacity:0 !important}</style><script type="text/javascript">// <![CDATA[ 
+
+var g_SPOffSwitches={};
+// ]]>
+</script>
+<script type="text/javascript" src="/_layouts/15/1033/initstrings.js?rev=PwfqGMCAYeGaq4UXoAzNyA%3D%3DTAG0"></script>
+<script type="text/javascript" src="/_layouts/15/init.js?rev=XxkZ3sAcDPzNvew7IvbzZA%3D%3DTAG0"></script>
+<script type="text/javascript" src="/_layouts/15/theming.js?rev=SuLUbbwTXcxFWOWLFUsOkw%3D%3DTAG0"></script>
+<script type="text/javascript" src="/ScriptResource.axd?d=NJmAwtEo3Ipnlaxl6CMhvtbkegd9obXL3it2RV7iH26kBbFOTKlupBwTnk0dzR9px-kpm1XCpvHSC4tiS2wqJHXCIIgwyQUtsEDAKGNp7U349gQM1VHPa8cpyolb-_4aWQ7aK35fuX04IaLq-kp-aH1wsdE7_wWZfYorenWQ4rk1&amp;t=5c0e0825"></script>
+<script type="text/javascript" src="/_layouts/15/blank.js?rev=1TzK%2BcvAq%2Bpak3ckRUYBmA%3D%3DTAG0"></script>
+<script type="text/javascript">RegisterSod("require.js", "\u002f_layouts\u002f15\u002frequire.js?rev=bv3fWJhk0uFGpVwBxnZKNQ\u00253D\u00253DTAG0");</script>
+<script type="text/javascript">RegisterSod("strings.js", "\u002f_layouts\u002f15\u002f1033\u002fstrings.js?rev=tob137cgLCsvzDNjZIOCNQ\u00253D\u00253DTAG0");</script>
+<script type="text/javascript">RegisterSod("sp.res.resx", "\u002f_layouts\u002f15\u002f1033\u002fsp.res.js?rev=FnWveYddVjlqQYS2ZBOOzA\u00253D\u00253DTAG0");</script>
+<script type="text/javascript">RegisterSod("sp.runtime.js", "\u002f_layouts\u002f15\u002fsp.runtime.js?rev=VdcevEIl3BuKyjbMLqi4pw\u00253D\u00253DTAG0");RegisterSodDep("sp.runtime.js", "sp.res.resx");</script>
+<script type="text/javascript">RegisterSod("sp.js", "\u002f_layouts\u002f15\u002fsp.js?rev=fneaJUhQSUrm5T93aggx1Q\u00253D\u00253DTAG0");RegisterSodDep("sp.js", "sp.runtime.js");RegisterSodDep("sp.js", "sp.ui.dialog.js");RegisterSodDep("sp.js", "sp.res.resx");</script>
+<script type="text/javascript">RegisterSod("sp.init.js", "\u002f_layouts\u002f15\u002fsp.init.js?rev=orKfqZtyaaXcl2TjVXuruQ\u00253D\u00253DTAG0");</script>
+<script type="text/javascript">RegisterSod("sp.ui.dialog.js", "\u002f_layouts\u002f15\u002fsp.ui.dialog.js?rev=Mr4n2nObG\u00252FAkt1MW\u00252BZRzEw\u00253D\u00253DTAG0");RegisterSodDep("sp.ui.dialog.js", "sp.init.js");RegisterSodDep("sp.ui.dialog.js", "sp.res.resx");</script>
+<script type="text/javascript">RegisterSod("core.js", "\u002f_layouts\u002f15\u002fcore.js?rev=KWtjGbhWVxc11gAT6ColBQ\u00253D\u00253DTAG0");RegisterSodDep("core.js", "strings.js");</script>
+<script type="text/javascript">RegisterSod("menu.js", "\u002f_layouts\u002f15\u002fmenu.js?rev=x8H3gxPnnNO8LSdMoGAdbw\u00253D\u00253DTAG0");</script>
+<script type="text/javascript">RegisterSod("mQuery.js", "\u002f_layouts\u002f15\u002fmquery.js?rev=YtfyujoMfx6O3ztrwEczdg\u00253D\u00253DTAG0");</script>
+<script type="text/javascript">RegisterSod("callout.js", "\u002f_layouts\u002f15\u002fcallout.js?rev=liJhJ69R9i4LPi3xBzWVqg\u00253D\u00253DTAG0");RegisterSodDep("callout.js", "strings.js");RegisterSodDep("callout.js", "mQuery.js");RegisterSodDep("callout.js", "core.js");</script>
+<script type="text/javascript">RegisterSod("sp.core.js", "\u002f_layouts\u002f15\u002fsp.core.js?rev=NbLqBVP9giw5L7A1lbdleA\u00253D\u00253DTAG0");RegisterSodDep("sp.core.js", "strings.js");RegisterSodDep("sp.core.js", "sp.init.js");RegisterSodDep("sp.core.js", "core.js");</script>
+<script type="text/javascript">RegisterSod("clienttemplates.js", "\u002f_layouts\u002f15\u002fclienttemplates.js?rev=hykipyrBaiZRHvmDOQbz4g\u00253D\u00253DTAG0");</script>
+<script type="text/javascript">RegisterSod("sharing.js", "\u002f_layouts\u002f15\u002fsharing.js?rev=gZpajvvZfvSJv4mPPGgK8Q\u00253D\u00253DTAG0");RegisterSodDep("sharing.js", "strings.js");RegisterSodDep("sharing.js", "mQuery.js");RegisterSodDep("sharing.js", "clienttemplates.js");RegisterSodDep("sharing.js", "core.js");</script>
+<script type="text/javascript">RegisterSod("suitelinks.js", "\u002f_layouts\u002f15\u002fsuitelinks.js?rev=EPKn1gywQg\u00252BLjDFcpIyC2g\u00253D\u00253DTAG0");RegisterSodDep("suitelinks.js", "strings.js");RegisterSodDep("suitelinks.js", "core.js");</script>
+<script type="text/javascript">RegisterSod("clientrenderer.js", "\u002f_layouts\u002f15\u002fclientrenderer.js?rev=dHQXk17Rz879h6kUidQY3w\u00253D\u00253DTAG0");</script>
+<script type="text/javascript">RegisterSod("srch.resources.resx", "\u002f_layouts\u002f15\u002f1033\u002fsrch.resources.js?rev=vZPcBJM2l80oZNzRUCRQ4g\u00253D\u00253DTAG0");</script>
+<script type="text/javascript">RegisterSod("search.clientcontrols.js", "\u002f_layouts\u002f15\u002fsearch.clientcontrols.js?rev=0kzWZa2ML4l7a7MHCcE1DA\u00253D\u00253DTAG0");RegisterSodDep("search.clientcontrols.js", "sp.init.js");RegisterSodDep("search.clientcontrols.js", "clientrenderer.js");RegisterSodDep("search.clientcontrols.js", "srch.resources.resx");</script>
+<script type="text/javascript">RegisterSod("sp.search.js", "\u002f_layouts\u002f15\u002fsp.search.js?rev=\u00252BvHrA78L6X1lAlHvn7aiGg\u00253D\u00253DTAG0");RegisterSodDep("sp.search.js", "sp.init.js");RegisterSodDep("sp.search.js", "sp.runtime.js");</script>
+<script type="text/javascript">RegisterSod("ajaxtoolkit.js", "\u002f_layouts\u002f15\u002fajaxtoolkit.js?rev=I3jVxnVkBqeUZ\u00252FWA\u00252BgwTLg\u00253D\u00253DTAG0");RegisterSodDep("ajaxtoolkit.js", "search.clientcontrols.js");</script>
+<script type="text/javascript">RegisterSod("userprofile", "\u002f_layouts\u002f15\u002fsp.userprofiles.js?rev=J0M1pzLkfDXcJflabMvTYA\u00253D\u00253DTAG0");RegisterSodDep("userprofile", "sp.runtime.js");</script>
+<script type="text/javascript">RegisterSod("followingcommon.js", "\u002f_layouts\u002f15\u002ffollowingcommon.js?rev=M2fy99LQMbxS82WnuZO5jQ\u00253D\u00253DTAG0");RegisterSodDep("followingcommon.js", "strings.js");RegisterSodDep("followingcommon.js", "sp.js");RegisterSodDep("followingcommon.js", "userprofile");RegisterSodDep("followingcommon.js", "core.js");RegisterSodDep("followingcommon.js", "mQuery.js");</script>
+<script type="text/javascript">RegisterSod("profilebrowserscriptres.resx", "\u002f_layouts\u002f15\u002f1033\u002fprofilebrowserscriptres.js?rev=qwf69WaVc1mYlJLXqmZmVA\u00253D\u00253DTAG0");</script>
+<script type="text/javascript">RegisterSod("sp.ui.mysitecommon.js", "\u002f_layouts\u002f15\u002fsp.ui.mysitecommon.js?rev=vi2FkkN62itBr75inUpDkQ\u00253D\u00253DTAG0");RegisterSodDep("sp.ui.mysitecommon.js", "sp.init.js");RegisterSodDep("sp.ui.mysitecommon.js", "sp.runtime.js");RegisterSodDep("sp.ui.mysitecommon.js", "userprofile");RegisterSodDep("sp.ui.mysitecommon.js", "profilebrowserscriptres.resx");</script>
+<script type="text/javascript">RegisterSod("browserScript", "\u002f_layouts\u002f15\u002fnon_ie.js?rev=NTzMej3rM0mqvQiZYtcxeg\u00253D\u00253DTAG0");RegisterSodDep("browserScript", "strings.js");</script>
+<script type="text/javascript">RegisterSod("inplview", "\u002f_layouts\u002f15\u002finplview.js?rev=BdILV9QqY8lwHpw1wp\u00252BiWw\u00253D\u00253DTAG0");RegisterSodDep("inplview", "strings.js");RegisterSodDep("inplview", "core.js");RegisterSodDep("inplview", "clienttemplates.js");RegisterSodDep("inplview", "sp.js");</script>
+<script type="text/javascript">RegisterSod("cui.js", "\u002f_layouts\u002f15\u002fcui.js?rev=fjkxiuAfDQXCux6hcRMP\u00252BQ\u00253D\u00253DTAG0");</script>
+<script type="text/javascript">RegisterSod("ribbon", "\u002f_layouts\u002f15\u002fsp.ribbon.js?rev=ID6474woEpsyMngou9Ic8Q\u00253D\u00253DTAG0");RegisterSodDep("ribbon", "strings.js");RegisterSodDep("ribbon", "core.js");RegisterSodDep("ribbon", "sp.core.js");RegisterSodDep("ribbon", "sp.js");RegisterSodDep("ribbon", "cui.js");RegisterSodDep("ribbon", "sp.res.resx");RegisterSodDep("ribbon", "sp.runtime.js");RegisterSodDep("ribbon", "inplview");</script>
+<script type="text/javascript">RegisterSod("offline.js", "\u002f_layouts\u002f15\u002foffline.js?rev=q\u00252BrRs4ix3yzuMZxZglPYsw\u00253D\u00253DTAG0");</script>
+<script type="text/javascript">RegisterSod("WPAdderClass", "\u002f_layouts\u002f15\u002fwpadder.js?rev=Mi\u00252FB6u4UCuOGu6smYhRHTg\u00253D\u00253DTAG0");</script>
+<script type="text/javascript">RegisterSod("dragdrop.js", "\u002f_layouts\u002f15\u002fdragdrop.js?rev=y1D2IOpQ0ZnHNU38eDt38w\u00253D\u00253DTAG0");RegisterSodDep("dragdrop.js", "strings.js");</script>
+<script type="text/javascript">RegisterSod("quicklaunch.js", "\u002f_layouts\u002f15\u002fquicklaunch.js?rev=GGeEBHfDFCLKW78SEpomNw\u00253D\u00253DTAG0");RegisterSodDep("quicklaunch.js", "strings.js");RegisterSodDep("quicklaunch.js", "dragdrop.js");</script>
+<link type="text/xml" rel="alternate" href="/en-us/products/NOR-Flash/Serial-NOR-Flash/_vti_bin/spsdisco.aspx" />
+		
+	
+	
+	
+
+		<link rel="canonical" href="https://www.mxic.com.tw/en-us/products/NOR-Flash/Serial-NOR-Flash/Pages/spec.aspx?m=Serial+NOR+Flash&amp;n=PM2832&amp;p=MX25U25643G" />
+		
+	
+	
+		<!--客製化-->
+		<link rel="stylesheet" href="/SiteDocs/font/font/normalize.min.css" /><link rel="stylesheet" href="/SiteDocs/pc_css/style.css" /><link rel="stylesheet" href="/SiteDocs/font/css/font-awesome.css" />
+
+		<!--<link rel="stylesheet" type="text/css" href="/SiteDocs/mobile_css/mobile_css.css" />-->
+		<link rel="stylesheet" type="text/css" href="/SiteDocs/style_css/style.css" /><link rel="stylesheet" type="text/css" href="/SiteDocs/pc_css/pc_css.css" />
+		<!--<link rel="stylesheet" type="text/css" href="/SiteDocs/pc_css/tab-slider.css" />--> <!-- 活動頁籤另外外連結 -->
+		<link rel="stylesheet" type="text/css" href="/SiteDocs/pc_css/anchor-mod.css" /> <!-- 固定頁籤按鈕另外外連結 -->
+		<link rel="stylesheet" type="text/css" href="/SiteDocs/pc_css/accordion.css" /> <!-- 開合另外外連結 -->
+		<link rel="stylesheet" type="text/css" href="/SiteDocs/pc_css/label.css" /> <!-- 新頁籤用 -->
+
+		<link rel="stylesheet" type="text/css" href="/SiteDocs/pc_css/defaults.css" />  <!-- 收合用 -->
+		<link rel="stylesheet" type="text/css" href="/SiteDocs/pc_css/demo.css" /> <!-- 收合用 -->
+		<script type="text/javascript" src="/SiteDocs/js/js/jquery-latest.min.js"></script> <!-- 收合用 -->
+		<script type="text/javascript" src="/SiteDocs/js/js/accordion.js"></script> <!-- 收合用 需保留--> 
+		<script type="text/javascript" src="/SiteDocs/js/label.js"></script> <!-- 新頁籤用 --> 
+		<script type="text/javascript" src="/SiteDocs/js/jquery-latest.min.js"></script> <!-- 新頁籤用 -->
+		
+		<script type="text/javascript" src="/SiteDocs/js/js/accordion-mid.js"></script> <!-- 收合用(內文) -->
+		<link rel="stylesheet" type="text/css" href="/SiteDocs/pc_css/accordion-mid.css" /> <!--收合用(內文) -->
+
+		<script type="text/javascript" src="/SiteDocs/js/fix.js"></script>
+		<script src="/SiteDocs/js/ajax_loadXML.js"></script>
+		<link rel="stylesheet" type="text/css" href="/SiteDocs/style_css/sprevise.css" />
+		
+		
+		<script src="/SiteDocs/js/js/modernizr.min.js"></script>
+		<script>
+	        window.Modernizr || document.write('<script src="/SiteDocs/pc_js/vendor/modernizr-2.8.3.min.js"><\/script>')
+	    </script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HH1YFQ3GNK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HH1YFQ3GNK');
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P3RWGJ');</script>
+<!-- End Google Tag Manager -->
+<style type="text/css">
+	.s4-skipribbonshortcut { display:none; }
+
+</style></head>
+<body data-spy="scroll">
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P3RWGJ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+	<script type="text/javascript">
+		function noNumbers(e)
+		{
+		var keynum
+		var keychar
+		var numcheck
+
+		if(window.event) // IE
+		  {
+		  keynum = e.keyCode
+		  }
+		else if(e.which) // Netscape/Firefox/Opera
+		  {
+		  keynum = e.which
+		  }
+		keychar = String.fromCharCode(keynum)
+		numcheck = /\d/
+		return !numcheck.test(keychar)
+		}
+	</script>
+
+	
+  <div id="imgPrefetch" style="display:none">
+<img src="/_layouts/15/images/z_mxic.ico?rev=44" />
+<img src="/WebResources/General/logo_en.gif?rev=44" />
+<img src="/_layouts/15/images/spcommon.png?rev=44" />
+</div>
+
+  <noscript><div class='noindex'>You may be trying to access this site from a secured browser on the server. Please enable scripts and reload this page.</div></noscript>
+  
+  <form method="post" action="./spec.aspx?m=Serial+NOR+Flash&amp;n=PM2832&amp;p=MX25U25643G" id="aspnetForm" novalidate="novalidate">
+<input type="hidden" name="_wpcmWpid" id="_wpcmWpid" value="" />
+<input type="hidden" name="wpcmVal" id="wpcmVal" value="" />
+<input type="hidden" name="MSOWebPartPage_PostbackSource" id="MSOWebPartPage_PostbackSource" value="" />
+<input type="hidden" name="MSOTlPn_SelectedWpId" id="MSOTlPn_SelectedWpId" value="" />
+<input type="hidden" name="MSOTlPn_View" id="MSOTlPn_View" value="0" />
+<input type="hidden" name="MSOTlPn_ShowSettings" id="MSOTlPn_ShowSettings" value="False" />
+<input type="hidden" name="MSOGallery_SelectedLibrary" id="MSOGallery_SelectedLibrary" value="" />
+<input type="hidden" name="MSOGallery_FilterString" id="MSOGallery_FilterString" value="" />
+<input type="hidden" name="MSOTlPn_Button" id="MSOTlPn_Button" value="none" />
+<input type="hidden" name="__REQUESTDIGEST" id="__REQUESTDIGEST" value="noDigest" />
+<input type="hidden" name="MSOSPWebPartManager_DisplayModeName" id="MSOSPWebPartManager_DisplayModeName" value="Browse" />
+<input type="hidden" name="MSOSPWebPartManager_ExitingDesignMode" id="MSOSPWebPartManager_ExitingDesignMode" value="false" />
+<input type="hidden" name="MSOWebPartPage_Shared" id="MSOWebPartPage_Shared" value="" />
+<input type="hidden" name="MSOLayout_LayoutChanges" id="MSOLayout_LayoutChanges" value="" />
+<input type="hidden" name="MSOLayout_InDesignMode" id="MSOLayout_InDesignMode" value="" />
+<input type="hidden" name="_wpSelected" id="_wpSelected" value="" />
+<input type="hidden" name="_wzSelected" id="_wzSelected" value="" />
+<input type="hidden" name="MSOSPWebPartManager_OldDisplayModeName" id="MSOSPWebPartManager_OldDisplayModeName" value="Browse" />
+<input type="hidden" name="MSOSPWebPartManager_StartWebPartEditingName" id="MSOSPWebPartManager_StartWebPartEditingName" value="false" />
+<input type="hidden" name="MSOSPWebPartManager_EndWebPartEditing" id="MSOSPWebPartManager_EndWebPartEditing" value="false" />
+<input type="hidden" name="_maintainWorkspaceScrollPosition" id="_maintainWorkspaceScrollPosition" value="0" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+
+
+<script type="text/javascript">
+//<![CDATA[
+var MSOWebPartPageFormName = 'aspnetForm';
+var g_presenceEnabled = true;
+var g_wsaEnabled = false;
+
+var g_correlationId = '783b43a2-adf1-e00e-8648-b816aa2b8f37';
+var g_wsaQoSEnabled = false;
+var g_wsaQoSDataPoints = [];
+var g_wsaRUMEnabled = false;
+var g_wsaLCID = 1033;
+var g_wsaListTemplateId = 850;
+var g_wsaSiteTemplateId = 'CMSPUBLISHING#0';
+var _spPageContextInfo={"webServerRelativeUrl":"/en-us/products/NOR-Flash/Serial-NOR-Flash","webAbsoluteUrl":"https://www.mxic.com.tw/en-us/products/NOR-Flash/Serial-NOR-Flash","viewId":"","listId":"{303fceac-5c02-4d5e-b23d-8af356e9bd9d}","listPermsMask":{"High":16,"Low":196673},"listUrl":"/en-us/products/NOR-Flash/Serial-NOR-Flash/Pages","listTitle":"Pages","listBaseTemplate":850,"viewOnlyExperienceEnabled":false,"blockDownloadsExperienceEnabled":false,"idleSessionSignOutEnabled":false,"cdnPrefix":"","siteAbsoluteUrl":"https://www.mxic.com.tw","siteId":"{7d13d9bf-3be5-484f-80ac-c035663a4aed}","showNGSCDialogForSyncOnTS":false,"supportPoundStorePath":true,"supportPercentStorePath":true,"siteSubscriptionId":null,"CustomMarkupInCalculatedFieldDisabled":true,"AllowCustomMarkupInCalculatedField":false,"isSPO":false,"farmLabel":null,"serverRequestPath":"/en-us/products/NOR-Flash/Serial-NOR-Flash/Pages/spec.aspx","layoutsUrl":"_layouts/15","webId":"{a94a4528-03ed-4591-b3c9-780a84d411bc}","webTitle":"Serial NOR Flash","webTemplate":"39","webTemplateConfiguration":"CMSPUBLISHING#0","webDescription":"","tenantAppVersion":"0","isAppWeb":false,"webLogoUrl":"/WebResources/General/logo_en.gif","webLanguage":1033,"currentLanguage":1033,"currentUICultureName":"en-US","currentCultureName":"en-US","currentCultureLCID":1033,"spDocIntelligence":{"isEnabled":false,"isDocSummarizeEnabled":false,"isDocTranslateEnabled":false},"env":null,"nid":0,"fid":0,"serverTime":"2026-10-09T16:41:41.4335335Z","siteClientTag":"26207$$16.0.19725.20434","crossDomainPhotosEnabled":false,"openInClient":false,"Has2019Era":true,"webUIVersion":15,"webPermMasks":{"High":16,"Low":196673},"pageListId":"{303fceac-5c02-4d5e-b23d-8af356e9bd9d}","pageItemId":2,"pagePermsMask":{"High":16,"Low":196673},"pagePersonalizationScope":1,"userEmail":"","userId":0,"userLoginName":null,"userDisplayName":null,"isAnonymousUser":true,"isAnonymousGuestUser":false,"isEmailAuthenticationGuestUser":false,"isExternalGuestUser":false,"sideBysideToken":"","systemUserKey":null,"alertsEnabled":false,"siteServerRelativeUrl":"/","allowSilverlightPrompt":"True","themeCacheToken":"/en-us/products/NOR-Flash/Serial-NOR-Flash::6:","themedCssFolderUrl":null,"themedImageFileNames":null,"modernThemingEnabled":true,"isSiteAdmin":false,"ExpFeatures":[480216468,1884350801,1158731092,62197791,538521105,335811073,4194306,34614301,268500996,-1946025984,28445328,-2147475455,134291456,65544,288,950272,1282,808326148,134217873,0,0,-1073217536,545285252,18350656,-467402752,6291457,-2147483644,1074794496,-1728053184,1845537108,622628,4102,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"IsHybridEnabled":false,"SPOnPremFlights":[1635110,1608625,1615140,1574820,1554278,1536594,1451530,1437361,1293572,1281075,1266854,1262861,1263396,1261158,1245315,1242554,1241972,1232868,1227765,1225014,1220075,1218539,1175952,1174945,1165662,1159162,1149960,1149522,1113916,1111397,1101858,1099085,1086764,1080816,1079075,1075954,1073830,1073759,95255,1062921,1055593,1052809,1043614,1041859,1040063,1039112,1036486,1035189,1033993,1030381,1030382,1030364,1030362,1029854,1029586,1029565,1029556,1029555,1028671,1025113,1021288,1021275,1021274,1021272,1020637,1020043,1018275,1018016,1012433,1011886,1010592,1009740,1009585,1008744,1007603,1004459,1003886,1002806,1001164,116041,114176,114166,112973,108499,108186,107054,100994,100425,99885,99722,96075,94920],"InternalValidAuthorities":["us1spsp1.macronix.com:16528","us1spsp1.macronix.com:16527","www.macronix.com","www.mxic.com.tw","usweb.macronix.com","us1spsp1"],"CorrelationId":"783b43a2-adf1-e00e-8648-b816aa2b8f37","hasManageWebPermissions":false,"isNoScriptEnabled":false,"groupId":null,"groupHasHomepage":true,"groupHasQuickLaunchConversationsLink":false,"departmentId":null,"hubSiteId":null,"hasPendingWebTemplateExtension":false,"isHubSite":false,"isWebWelcomePage":false,"siteClassification":"","hideSyncButtonOnODB":false,"showNGSCDialogForSyncOnODB":false,"sitePagesEnabled":false,"sitePagesFeatureVersion":0,"suiteNavInfo":{"suiteBarBackground":null,"suiteBarText":null,"suiteNavAccentColor":null,"suiteNavAllowCustom":false,"suiteNavAllowOverwrite":false,"suiteNavBrandingLogoNavigationUrl":null,"suiteNavBrandingLogoTitle":null,"suiteNavBrandingLogoUrl":null,"suiteNavBrandingText":null},"DesignPackageId":"00000000-0000-0000-0000-000000000000","groupType":null,"groupColor":"#ee0410","siteColor":"#ee0410","headerEmphasis":0,"navigationInfo":null,"guestsEnabled":false,"MenuData":{"SignInUrl":"/en-us/products/NOR-Flash/Serial-NOR-Flash/_layouts/15/Authenticate.aspx?Source=%2Fen%2Dus%2Fproducts%2FNOR%2DFlash%2FSerial%2DNOR%2DFlash%2FPages%2Fspec%2Easpx%3Fm%3DSerial%2520NOR%2520Flash%26n%3DPM2832%26p%3DMX25U25643G"},"RecycleBinItemCount":-1,"PublishingFeatureOn":true,"PreviewFeaturesEnabled":false,"disableAppViews":false,"disableFlows":false,"serverRedirectedUrl":null,"formDigestValue":"0x86FE80C19C5E7FF2FDA6F5E11FD0B821F38325DF5CEFC0355A3A37F9F83EFA053A14845B0D9FB857D907DC97FB0B3C95D173DF5AA603E02C31CE197972FCEAC1,09 Oct 2026 16:41:41 -0000","maximumFileSize":15360,"formDigestTimeoutSeconds":1800,"canUserCreateMicrosoftForm":false,"canUserCreateVisioDrawing":true,"readOnlyState":null,"isTenantDevSite":false,"preferUserTimeZone":false,"userTimeZoneData":null,"userTime24":false,"userFirstDayOfWeek":null,"webTimeZoneData":null,"webTime24":false,"webFirstDayOfWeek":null,"isSelfServiceSiteCreationEnabled":null,"alternateWebAppHost":"","aadTenantId":"","aadUserId":"","aadInstanceUrl":"","msGraphEndpointUrl":"https://","allowInfectedDownload":true};_spPageContextInfo.updateFormDigestPageLoaded=new Date();_spPageContextInfo.clientServerTimeDelta=new Date(_spPageContextInfo.serverTime)-new Date();if(typeof(define)=='function'){define('SPPageContextInfo',[],function(){return _spPageContextInfo;});}document.onreadystatechange=fnRemoveAllStatus; function fnRemoveAllStatus(){removeAllStatus(true)};
+function _spNavigateHierarchy(nodeDiv, dataSourceId, dataPath, url, listInContext, type) {
+
+    CoreInvoke('ProcessDefaultNavigateHierarchy', nodeDiv, dataSourceId, dataPath, url, listInContext, type, document.forms.aspnetForm, "", "\u002fen-us\u002fproducts\u002fNOR-Flash\u002fSerial-NOR-Flash\u002fPages\u002fspec.aspx");
+
+}
+Flighting.ExpFeatures = [480216468,1884350801,1158731092,62197791,538521105,335811073,4194306,34614301,268500996,-1946025984,28445328,-2147475455,134291456,65544,288,950272,1282,808326148,134217873,0,0,-1073217536,545285252,18350656,-467402752,6291457,-2147483644,1074794496,-1728053184,1845537108,622628,4102,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]; (function()
+{
+    if(typeof(window.SP) == "undefined") window.SP = {};
+    if(typeof(window.SP.YammerSwitch) == "undefined") window.SP.YammerSwitch = {};
+
+    var ysObj = window.SP.YammerSwitch;
+    ysObj.IsEnabled = false;
+    ysObj.TargetYammerHostName = "www.yammer.com";
+} )(); var _spWebPartComponents = new Object();
+                var g_syncButtonUsePopup = true;
+                //]]>
+</script>
+
+<script src="/_layouts/15/blank.js?rev=1TzK%2BcvAq%2Bpak3ckRUYBmA%3D%3DTAG0" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+window.SPThemeUtils && SPThemeUtils.RegisterCssReferences([{"Url":"\u002fStyle Library\u002fen-US\u002fThemable\u002fCore Styles\u002fpagelayouts15.css","OriginalUrl":"\u002fStyle Library\u002fen-US\u002fThemable\u002fCore Styles\u002fpagelayouts15.css","Id":"CssLink-36d325014ac24d23b306657b0433f45c","ConditionalExpression":"","After":"","RevealToNonIE":"false"},{"Url":"\u002f_layouts\u002f15\u002f1033\u002fstyles\u002fThemable\u002fcorev15.css?rev=mDUzGfgO2aHnLoh30SeNyw\u00253D\u00253DTAG0","OriginalUrl":"\u002f_layouts\u002f15\u002f1033\u002fstyles\u002fThemable\u002fcorev15.css?rev=mDUzGfgO2aHnLoh30SeNyw\u00253D\u00253DTAG0","Id":"CssLink-55b9ca8684ed4617b0b6b7b0e235a3a6","ConditionalExpression":"","After":"","RevealToNonIE":"false"}]);
+(function(){
+
+        if (typeof(_spBodyOnLoadFunctions) === 'undefined' || _spBodyOnLoadFunctions === null) {
+            return;
+        }
+        _spBodyOnLoadFunctions.push(function() {
+            SP.SOD.executeFunc('core.js', 'FollowingCallout', function() { FollowingCallout(); });
+        });
+    })();(function(){
+
+        if (typeof(_spBodyOnLoadFunctions) === 'undefined' || _spBodyOnLoadFunctions === null) {
+            return;
+        }
+        _spBodyOnLoadFunctions.push(function() {
+            SP.SOD.executeFunc('core.js', 'FollowingDocument', function() { FollowingDocument(); });
+        });
+    })();if (typeof(DeferWebFormInitCallback) == 'function') DeferWebFormInitCallback();//]]>
+</script>
+
+<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="DFF4E3DE" />
+<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="8xxKBRTPPm5Y0/HyKtFbVNtUukhNophfUl/p6HslxXjNBIFdKNeRhqwUJ4PxnZUO97Z7TSurl815C/bJJBTWzap7mBhz8QVQObN10hfgfDh66IvwmBoSydarwqnwMppL" />
+	<script type="text/javascript"> var submitHook = function () { return false; }; theForm._spOldSubmit = theForm.submit; theForm.submit = function () { if (!submitHook()) { this._spOldSubmit(); } }; </script>
+	<span id="DeltaSPWebPartManager">
+		
+	</span>
+	
+	<span id="DeltaDelegateControls">
+		
+		
+	</span>
+<div id="TurnOnAccessibility" style="display:none" class="s4-notdlg noindex">
+	<a id="linkTurnOnAcc" href="#" class="ms-accessible ms-acc-button" onclick="SetIsAccessibilityFeatureEnabled(true);UpdateAccessibilityUI();document.getElementById('linkTurnOffAcc').focus();return false;">
+	Turn on more accessible mode</a>
+</div>
+<div id="TurnOffAccessibility" style="display:none" class="s4-notdlg noindex">
+	<a id="linkTurnOffAcc" href="#" class="ms-accessible ms-acc-button" onclick="SetIsAccessibilityFeatureEnabled(false);UpdateAccessibilityUI();document.getElementById('linkTurnOnAcc').focus();return false;">
+	Turn off more accessible mode</a>
+</div>
+<div class="s4-notdlg s4-skipribbonshortcut noindex">
+	<a href="javascript:;" onclick="document.getElementById(&#39;startNavigation&#39;).focus();" class="ms-accessible ms-acc-button" accesskey="Y">
+	Skip Ribbon Commands</a>
+</div>
+<div class="s4-notdlg noindex">
+	<a href="javascript:;" onclick="document.getElementById(&#39;mainContent&#39;).focus();" class="ms-accessible ms-acc-button">
+	Skip to main content</a>
+</div>
+<div id="TurnOffAnimation" style="display:none;" class="s4-notdlg noindex">
+	<a id="linkTurnOffAnimation" href="#" class="ms-accessible ms-acc-button" onclick="ToggleAnimationStatus();return false;">
+	Turn off Animations</a>
+</div>
+<div id="TurnOnAnimation" style="display:none;" class="s4-notdlg noindex">
+	<a id="linkTurnOnAnimation" href="#" class="ms-accessible ms-acc-button" onclick="ToggleAnimationStatus();return false;">
+	Turn on Animations</a>
+</div>
+<a id="HiddenAnchor" href="javascript:;" style="display:none;"></a>
+<div id="suiteBar" class="ms-dialogHidden noindex" style="display:none;">
+	<div id="suiteBarLeft">
+		<div class="ms-table ms-fullWidth">
+			<div class="ms-tableRow">
+				<div class="ms-tableCell ms-verticalAlignMiddle">
+					<div class="ms-core-brandingText">SharePoint</div>
+
+				</div>
+				<div id="DeltaSuiteLinks" class="ms-core-deltaSuiteLinks">
+	
+						<div id="suiteLinksBox">
+							
+						</div>
+				
+</div>
+			</div>
+		</div>
+	</div>
+	<div id="suiteBarRight">
+		<div id="DeltaSuiteBarRight" class="ms-core-deltaSuiteBarRight">
+	
+				<div id="welcomeMenuBox">
+  
+<a id="ctl00_IdWelcome_ExplicitLogin" class="ms-signInLink" href="https://www.mxic.com.tw/en-us/products/NOR-Flash/Serial-NOR-Flash/_layouts/15/Authenticate.aspx?Source=%2Fen%2Dus%2Fproducts%2FNOR%2DFlash%2FSerial%2DNOR%2DFlash%2FPages%2Fspec%2Easpx%3Fm%3DSerial%2BNOR%2BFlash%26n%3DPM2832%26p%3DMX25U25643G" style="display:inline-block;">Sign In</a>
+
+				</div>
+				<div id="suiteBarButtons">
+					   <span class="ms-siteactions-root" id="siteactiontd">
+					   </span>
+<span id="ms-help">
+	<a onmouseover="this.firstChild.firstChild.firstChild.style.left=&#39;-1px&#39;; this.firstChild.firstChild.firstChild.style.top=&#39;-1px&#39;;" onmouseout="this.firstChild.firstChild.firstChild.style.left=&#39;-19px&#39;; this.firstChild.firstChild.firstChild.style.top=&#39;-1px&#39;;" id="ctl00_TopHelpLink" accesskey="6" title="Help" onclick="TopHelpButtonClick(&#39;HelpHome&#39;,event);return false" href="../../../../../_catalogs/masterpage/#" style="display:inline-block;"><span style="display:inline-block;overflow:hidden;height:16px;width:16px;padding-left:7px;padding-top:7px;padding-right:7px;padding-bottom:7px;"><span style="height:16px;width:16px;position:relative;display:inline-block;overflow:hidden;" class="s4-clust"><img src="/_layouts/15/1033/images/spintl.png?rev=44#ThemeKey=spintl" alt="Help" style="border:0;position:absolute;left:-19px;top:-1px;" /></span></span></a>
+</span>
+				</div>
+		
+</div>
+	</div>
+</div>
+		<div id="ms-hcTest"></div>
+		<div id="s4-ribbonrow" style="display:none;">
+		<div id="globalNavBox" class="noindex">
+<div id="ribbonBox">
+	<div id="s4-ribboncont">
+		<div id="DeltaSPRibbon">
+	
+			
+
+			<div class='ms-cui-ribbonTopBars'><div class='ms-cui-topBar1'></div><div class='ms-cui-topBar2'><div id='RibbonContainer-TabRowLeft' class='ms-cui-TabRowLeft ms-core-defaultFont ms-dialogHidden'>
+				</div><div id='RibbonContainer-TabRowRight' class='ms-cui-TabRowRight s4-trc-container s4-notdlg ms-core-defaultFont'>
+					
+					<a onmouseover="this.firstChild.firstChild.style.left=&#39;-217px&#39;; this.firstChild.firstChild.style.top=&#39;-192px&#39;;" onmouseout="this.firstChild.firstChild.style.left=&#39;-218px&#39;; this.firstChild.firstChild.style.top=&#39;-48px&#39;;" value="NotFollowing" onclick="SP.SOD.executeFunc(&#39;followingcommon.js&#39;, &#39;FollowSite&#39;, function() { FollowSite(); }); return false;" id="site_follow_button" title="Currently not following the site, click to follow" class="ms-promotedActionButton" href="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$site_follow_button&quot;, &quot;&quot;, true, &quot;&quot;, &quot;&quot;, false, true))" style="display:inline-block;"><span style="height:16px;width:16px;position:relative;display:inline-block;overflow:hidden;" class="s4-clust ms-promotedActionButton-icon"><img src="/_layouts/15/images/spcommon.png?rev=44#ThemeKey=spcommon" alt="Not following" style="position:absolute;left:-218px;top:-48px;" /></span><span class="ms-promotedActionButton-text">Not following</span></a>
+					
+					
+<span id="fullscreenmodebox" class="ms-qatbutton">
+	<span id="fullscreenmode">
+		<a onmouseover="this.firstChild.firstChild.firstChild.style.left=&#39;-125px&#39;; this.firstChild.firstChild.firstChild.style.top=&#39;-178px&#39;;" onmouseout="this.firstChild.firstChild.firstChild.style.left=&#39;-143px&#39;; this.firstChild.firstChild.firstChild.style.top=&#39;-178px&#39;;" id="ctl00_fullscreenmodeBtn" title="Focus on Content" onclick="SetFullScreenMode(true);PreventDefaultNavigation();return false;" href="../../../../../_catalogs/masterpage/#" style="display:inline-block;"><span style="display:inline-block;overflow:hidden;height:16px;width:16px;padding-left:7px;padding-top:7px;padding-right:7px;padding-bottom:7px;"><span style="height:16px;width:16px;position:relative;display:inline-block;overflow:hidden;" class="s4-clust"><img src="/_layouts/15/images/spcommon.png?rev=23#ThemeKey=spcommon" alt="Focus on Content" style="border:0;position:absolute;left:-143px;top:-178px;" /></span></span></a>
+	</span>
+	<span id="exitfullscreenmode" style="display: none;">
+		<a onmouseover="this.firstChild.firstChild.firstChild.style.left=&#39;-179px&#39;; this.firstChild.firstChild.firstChild.style.top=&#39;-96px&#39;;" onmouseout="this.firstChild.firstChild.firstChild.style.left=&#39;-107px&#39;; this.firstChild.firstChild.firstChild.style.top=&#39;-178px&#39;;" id="ctl00_exitfullscreenmodeBtn" title="Focus on Content" onclick="SetFullScreenMode(false);PreventDefaultNavigation();return false;" href="../../../../../_catalogs/masterpage/#" style="display:inline-block;"><span style="display:inline-block;overflow:hidden;height:16px;width:16px;padding-left:7px;padding-top:7px;padding-right:7px;padding-bottom:7px;"><span style="height:16px;width:16px;position:relative;display:inline-block;overflow:hidden;" class="s4-clust"><img src="/_layouts/15/images/spcommon.png?rev=23#ThemeKey=spcommon" alt="Focus on Content" style="border:0;position:absolute;left:-107px;top:-178px;" /></span></span></a>
+	</span>
+</span>
+
+
+				</div></div></div>
+		
+</div>
+	</div>
+	<span id="DeltaSPNavigation">
+		
+			<span id="ctl00_SPNavigation_ctl00_publishingRibbon"></span>
+
+		
+	</span>
+</div>
+<div id="DeltaWebPartAdderUpdatePanelContainer" class="ms-core-webpartadder">
+	
+  <div id="WebPartAdderUpdatePanelContainer">
+	<div id="ctl00_WebPartAdderUpdatePanel">
+		
+		<span id="ctl00_WebPartAdder"></span>
+		
+	</div>
+  </div>
+
+</div>
+		</div>
+		</div>
+
+		<div id="s4-workspace" class="ms-core-overlay">
+		<div id="s4-bodyContainer">
+		<!--客製開始-->
+
+			<div class="navigation noindex">
+			</div>
+			<div class="content">
+			<!--內容開始-->
+			
+				
+				
+				
+				<!--<div id="preloader">
+					<img class="preloader__logo" src="/SiteImages/logo.png" alt=""/>
+					<div class="preloader__progress">
+						<svg width="60px" height="60px" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+							<path class="preloader__progress-circlebg" fill="none" stroke="#dddddd" stroke-width="4" stroke-linecap="round" d="M40,10C57.351,10,71,23.649,71,40.5S57.351,71,40.5,71 S10,57.351,10,40.5S23.649,10,40.5,10z"/>
+							<path id='preloader__progress-circle' fill="none" stroke="#7ccedf" stroke-width="4" stroke-linecap="round" stroke-dashoffset="192.61" stroke-dasharray="192.61 192.61" d="M40,10C57.351,10,71,23.649,71,40.5S57.351,71,40.5,71 S10,57.351,10,40.5S23.649,10,40.5,10z"/>
+						</svg>
+					</div>
+				</div>-->
+
+				<div id="pc_page">
+
+
+				
+
+<script  type="text/javascript">
+    var isDispMobile = false;
+    var isMobile = false;
+</script>
+<!--UserAgent:Python-urllib/3.14--><div id="pc_toolbar" style="display: block;">
+    <div class="pc_container noindex">
+     <div class="pc_col">
+      <ul>
+       <li><a href="/en-us">Home</a></li>
+       <li><a href="/en-us/about/contacts">Contact Us</a></li>
+       <li><a href="/en-us/products/Pages/cross-reference-search.aspx">Cross Reference</a></li>
+       <li><a href="/en-us/sales-network/Pages/macronix-offices.aspx">Sample & Buy</a></li>
+       <li><a href="/en-us/about/investor-relations/Pages/monthly-sales.aspx">Investor Relations</a></li>
+       <li><a href="/zh-tw">中文</a></li>
+      </ul>
+     </div>
+    </div>
+   </div>
+   <div id="pc_wrapper" class="pc_wrapper_height noindex">
+    <header class="pc_header"> 
+    <div class="pc_head">
+
+     <div class="pc_menu-container" style="display: block;">
+      <div class="pc_menu">
+       <ul>
+       
+         <div class="pc_col pc_search_btn_mt">
+         <div id="pc_search onkeypress="SomeJavaScriptCode"">
+          <input type="text" id="textfield" placeholder="Search" autocomplete="off" onkeypress="return runDetectScript(event)">
+          <div class="pc_search_btn" onclick="javascript:Search();"></div>
+         </div>
+        </div>
+        
+        <li class="ask_btn_bg">
+            <div class="ask_btn"> 
+             <a href="https://mxweb.mxic.com.tw/web/feedback.nsf/FeedbackEn?openform"  target="_blank">
+              <i class="fa fa-envelope-o ask_btn_icon">&nbsp;</i>
+           <span class="ask_btn_color pc_menu_title">Ask Engineering</span>
+          </a>
+         </div>
+           </li>
+        
+        <li class="pc_menu_title_top">
+               <a class="pc_menu_topic" href="#">About Us</a>
+      <ul>
+     <div class="pc_support_menubox1">
+        <li class="pc_menu_height">
+                     <a class="pc_menu_title" href="/en-us/about/careers">Careers</a>
+                     <ul class="pc_menu_subtitle"></ul>
+                    </li>
+     <li class="pc_menu_height">
+                     <a class="pc_menu_title" href="/en-us/about/Pages/company-overview.aspx">Company Overview</a>
+      <ul class="pc_menu_subtitle"></ul>
+                    </li>
+                    <li class="pc_menu_height">
+                     <a class="pc_menu_title" href="/en-us/about/contacts">Contact Us</a>
+                     <ul class="pc_menu_subtitle"></ul>
+                    </li>
+                    
+                   </div>
+
+                   <div class="pc_about_menubox3">
+        <li class="pc_menu_height">
+                     <a class="pc_menu_title" href="/en-us/about/corporate-governance">Corporate Governance</a>
+                     <ul class="pc_menu_subtitle"></ul>
+                    </li>
+                    <li class="pc_menu_height">
+                     <a class="pc_menu_title" href="/en-us/about/ESG">Sustainability</a>
+                     <ul class="pc_menu_subtitle"></ul>
+                    </li>
+                   </div>
+
+                   <div class="pc_about_menubox3">
+                    <li class="pc_menu_height">
+                     <a class="pc_menu_title" href="/en-us/about/investor-relations">Investor Relations </a>
+                     <ul></ul>
+                    </li>
+     <li class="pc_menu_height">
+                     <a class="pc_menu_title" href="/en-us/about/news">News & Events</a>
+                     <ul></ul>
+                    </li>
+                    <li class="pc_menu_height">
+                     <a class="pc_menu_title" href="/en-us/about/quality-management">Quality Management</a>
+                     <ul></ul>
+                    </li>
+                    
+                   </div>
+      </ul>
+           </li>
+        
+        <li class="pc_menu_title_top">
+            <a class="pc_menu_topic" href="#">Support</a>
+            <ul>
+                <div class="pc_support_menubox1">
+     <li class="pc_menu_height">
+      <a class="pc_menu_title" href="/en-us/support/Pages/Design-Support.aspx">Design Support</a>
+      <ul class="pc_menu_subtitle">
+       <li><a href="/en-us/support/design-support/Pages/technical-document.aspx">Technical Document</a></li>
+       <li><a href="/en-us/support/design-support/Pages/models-reference-design.aspx">Models/ Reference Design</a></li>
+       <li><a href="/en-us/support/design-support/Pages/software-support.aspx">Software Support</a></li>
+      </ul>
+     </li>
+     <li class="pc_menu_height">
+      <a class="pc_menu_title" href="/en-us/support/partnerships">Ecosystem Partnerships</a>
+                    </li>
+                    <!-- <li class="pc_menu_height">
+                     <a class="pc_menu_title" href="/en-us/support/technical-documentation/Pages/Serial-NOR-Flash.aspx">Technical Documentation</a>
+                    </li>
+                    <li class="pc_menu_height">
+                     <a class=" " href="sms.html">Simulation Models & Software</a>
+                    </li> -->
+                   </div>
+
+                   <div class="pc_support_menubox2">
+                    <li class="pc_menu_height">
+                     <a class="pc_menu_title" href="/en-us/about/quality-management/Documents/quality_report.pdf" target="_blank">Product Reliability Report</a>
+                    </li>
+                    <li class="pc_menu_height">
+                     <a class="pc_menu_title" href="/en-us/support/PCN-and-EOL/Pages/NOR-Flash.aspx">End-of-Life Product</a>
+                    </li>
+                    <li class="pc_menu_height">
+                     <a class="pc_menu_title" href="/en-us/about/ESG/environmental-commitment/Pages/green-product.aspx">Green Product</a>
+                     <ul></ul>
+                    </li>
+                    <!--<li class="pc_menu_height">
+                     <a class="pc_menu_title" href="/en-us/support/Pages/programmer-manufacturers.aspx">Programmer Manufacturers</a>
+                     <ul></ul>
+                    </li>-->
+                    <li class="pc_menu_height">
+                     <a class="pc_menu_title" href="/en-us/sales-network/Pages/macronix-offices.aspx">Sample & Buy</a>
+                     <ul></ul>
+                    </li>
+                   </div>
+
+                   <div class="pc_support_menubox3">
+                    <li class="pc_menu_height">
+                     <a class="pc_menu_title" href="/en-us/support/Pages/product-longevity-program.aspx">Product Longevity Program</a>
+                     <ul></ul>
+                     <a href="/en-us/support/Pages/product-longevity-program.aspx"><img class="img-responsive" src="/SiteImages/index12.jpg"></a>
+                    </li>
+                   </div>
+               </ul>
+           </li>
+        
+        <li class="pc_menu_title_top">
+               <a class="pc_menu_topic" href="#">Solutions</a>
+               <ul>
+             <div class="pc_solutions_menubox1">
+              <li class="pc_menu_height">
+               <a class="pc_menu_title" href="/en-us/flash-memory-solutions/automotive">Automotive</a>
+               <ul class="pc_menu_subtitle"></ul>
+               <a href="/en-us/flash-memory-solutions/automotive"><img class="img-responsive" src="/SiteImages/menu_automotive.jpg"></a>
+              </li>
+             </div>
+             <div class="pc_solutions_menubox2">
+              <li class="pc_menu_height">
+               <a class="pc_menu_title" href="/en-us/flash-memory-solutions/Pages/industrial.aspx">Industrial</a>
+               <ul class="pc_menu_subtitle"></ul>
+               <a href="/en-us/flash-memory-solutions/Pages/industrial.aspx"><img class="img-responsive" src="/SiteImages/menu_industrial.jpg"></a>
+              </li>
+             </div>
+             <div class="pc_solutions_menubox3">
+              <li class="pc_menu_height">
+               <a class="pc_menu_title" href="/en-us/flash-memory-solutions/Pages/communications.aspx">Communications</a>
+               <ul class="pc_menu_subtitle"></ul>
+               <a href="/en-us/flash-memory-solutions/Pages/communications.aspx"><img class="img-responsive" src="/SiteImages/menu_communication.jpg"></a>
+              </li>
+             </div>
+             <div class="pc_solutions_menubox4">
+              <li class="pc_menu_height">
+               <a class="pc_menu_title" href="/en-us/flash-memory-solutions/extended-temperature">Extended Temperature</a>
+               <ul class="pc_menu_subtitle"></ul>
+              </li>
+              <li class="pc_menu_height">
+               <a class="pc_menu_title" href="/en-us/flash-memory-solutions/known-good-die">Known Good Die</a>
+               <ul class="pc_menu_subtitle"></ul>
+              </li>
+              <li class="pc_menu_height">
+               <a class="pc_menu_title" href="/en-us/flash-memory-solutions/Pages/wafer-level-chip-scale-package.aspx">Wafer Level Chip Scale Package</a>
+               <ul class="pc_menu_subtitle"></ul>
+              </li>
+              <li class="pc_menu_height">
+               <a class="pc_menu_title" href="/en-us/flash-memory-solutions/Pages/security.aspx">Security</a>
+               <ul class="pc_menu_subtitle"></ul>
+              </li>
+              <li class="pc_menu_height">
+               <a class="pc_menu_title" href="/en-us/flash-memory-solutions/Pages/IoT.aspx">IoT</a>
+               <ul class="pc_menu_subtitle"></ul>
+              </li>
+             </div>
+            </ul>
+           </li>
+        
+           <li class="pc_menu_title_top">
+            <a class="pc_menu_topic" href="#">Products</a>
+            <ul>
+             <div class="pc_products_menubox1">
+              <li class="pc_menu_height">
+               <a class="pc_menu_title" href="/en-us/products/NOR-Flash">NOR Flash</a>
+               <ul class="pc_menu_subtitle">
+                <li><a href="/en-us/products/NOR-Flash/Serial-NOR-Flash">Serial NOR Flash</a></li>
+                <li><a href="/en-us/products/NOR-Flash/Parallel-NOR-Flash">Parallel NOR Flash</a></li>
+                <li><a href="/en-us/products/NOR-Flash/Pages/octaflash.aspx">OctaBus Memory</a></li>
+                <li><a href="/en-us/products/NOR-Flash/Pages/Ultra-Low-Power-Flash.aspx">Wide Range Vcc Flash</a></li>
+    <li><a href="/en-us/products/NOR-Flash/Pages/Ultra-Low-Vcc-Flash.aspx">1.2V Serial NOR Flash</a></li>
+               </ul>
+              </li>
+             </div>
+             <div class="pc_products_menubox2">
+              <li class="pc_menu_height">
+               <a class="pc_menu_title" href="/en-us/products/NAND-Flash">NAND Flash</a>
+               <ul class="pc_menu_subtitle">
+                <li><a href="/en-us/products/NAND-Flash/SLC-NAND-Flash">SLC NAND Flash</a></li>
+                <li><a href="/en-us/products/NAND-Flash/Serial-NAND-Flash">Serial NAND Flash</a></li>
+               </ul>
+              </li>
+              <li class="pc_menu_height">
+    <a class="pc_menu_title" href="/en-us/products/eMMC">e.MMC Memory</a>
+              </li>
+     <li class="pc_menu_height">
+    <a class="pc_menu_title" href="/en-us/products/ArmorFlash">ArmorFlash</a>
+              </li>
+     <li class="pc_menu_height">
+    <a class="pc_menu_title" href="/en-us/products/LybraFlash">LybraFlash</a>
+              </li>
+             </div>
+             <div class="pc_products_menubox3">
+     <!--<li class="pc_menu_height">
+               <a class="pc_menu_title" href="/en-us/products/Pages/multichip-packages.aspx">Multichip Packages</a>
+               <ul class="pc_menu_subtitle">
+                <li><a href="/en-us/products/Pages/multichip-packages.aspx#Serial-NOR-Based-MCP">NOR-Based MCP</a></li>
+                <li><a href="/en-us/products/Pages/multichip-packages.aspx#NAND-Based-MCP">NAND-Based MCP</a></li>
+               </ul>
+              </li>-->
+              <li class="pc_menu_height">
+               <a class="pc_menu_title" href="/en-us/products/ROM">ROM</a>
+     </li>
+              <li class="pc_menu_height">
+               <a class="pc_menu_title" href="/en-us/products/foundry-service">Foundry Service</a>
+              </li>
+             </div>
+             <div class="pc_products_menubox4">
+              <li>
+               <ul class="pc_menu_subtitle">
+    <li>&nbsp;</li>
+                <!--<li class="pc_floatL"><i class="fa fa-angle-right pc_menu_icon_ml">&nbsp;</i>
+                <a class="pc_menu_quicklink" href="#"> Product Selection Guide</a></li> -->
+                <li class="pc_floatL"><i class="fa fa-angle-right pc_menu_icon_ml">&nbsp;</i>
+    <a class="pc_menu_quicklink" href="/en-us/products/Pages/product-search.aspx"> Product Search</a></li>
+    <li class="pc_floatL"><i class="fa fa-angle-right pc_menu_icon_ml">&nbsp;</i>
+                <a class="pc_menu_quicklink" href="https://mxweb.mxic.com.tw/web/feedback.nsf/samplereq?openform" target="_blnak"> Sample Request</a></li>
+                <li class="pc_floatL"><i class="fa fa-angle-right pc_menu_icon_ml">&nbsp;</i>
+                <a class="pc_menu_quicklink" href="/en-us/products/Pages/cross-reference-search.aspx"> Cross Reference</a></li>
+    <li class="pc_floatL"><i class="fa fa-angle-right pc_menu_icon_ml">&nbsp;</i>
+                <a class="pc_menu_quicklink" href="/en-us/products/Pages/TERMS-AND-CONDITIONS-OF-SALES.aspx"> Terms & Conditions of Sales</a></li>
+               </ul>
+              </li>
+             </div>
+            </ul>
+           </li>
+           
+       <div class="logobox">
+     <div class="pc_col pc_logo pc_logo_pt">
+      <a href="/en-us">
+    <img class="logoimg" src="/SiteImages/logo.png" alt="logo-mxic" width="190" height="95">
+      </a> 
+     </div> 
+    </div>
+          </ul>
+      </div>
+     </div>
+
+    </div>
+    </header>
+   </div>
+<script>
+function Search()
+{
+var obj=document.getElementById("textfield");
+location.href='/en-us/search/pages/default.aspx?k='+ encodeURIComponent(obj.value) + "*";
+}
+function runDetectScript(e) {
+    if (e.keyCode == 13) {
+        Search();
+    }
+}
+</script>
+
+				
+
+<div id='pc_banner' class='pc_banner' style="display:block;">
+    <div class='pc_banner_container'>
+        <ul class='breadcrumb'>
+            <li class='umbfix'><a href=/en-us>Home</a></li><li class='umbfix'>Products</li><li class='umbfix'><a href=/en-us/products/NOR-Flash>NOR Flash</a></li><li class='umbfix'><a href='/en-us/products/NOR-Flash/Serial-NOR-Flash'>Serial NOR Flash</a></li>
+            <script>$('#pc_banner').attr('class', 'pc_banner_nor');</script><h1 class='h1color'>MX25U25643G</h1>
+        </ul>
+    </div>
+</div>
+
+				
+				<!--表頭結束 主選單-->
+
+	
+					
+				<div style="clear: left;"></div>
+				
+				<div id="ctl00_MSO_ContentDiv">
+				
+				<div id="notificationArea" class="ms-notif-box"></div>
+				<div id="DeltaPageStatusBar">
+	
+				<div id="pageStatusBar"></div>
+				
+</div>
+				
+				
+				
+				<div id="DeltaPlaceHolderMain">
+	
+				<!--<a id="mainContent" name="mainContent" tabindex="-1"></a>-->
+				
+				
+				
+	<div class="pc_containere editArea">
+	<!-- Edit Area -->
+		
+		
+	<!-- Display Area -->
+	<div>
+		
+		<div class='PageTabGuider' style='display: block;'></div><!-- 以下中間內容 -->
+
+   <!-- ==== 以下內頁錨點3組模組 ==== -->
+   <div class="pc_mod_anchor">
+    <div class="pc_anchor_outbox">
+     <div class="pc_anchor_3box">
+      <a href="#Specifications">Specifications</a>
+     </div>
+     <div class="pc_anchor_3box">
+      <a href="#Technical-Documents">Technical Documents</a>
+     </div>
+     <div class="pc_anchor_3box">
+      <a href="#Support-Resources">Support Resources</a>
+     </div>
+     
+    </div>
+   </div>
+   
+<!--Product--> 
+   <div class="pc_mod_a" id="ProductBox1" style="display:block;">
+       <div class="pc_mod_con2">
+      <p class="pc_p">
+      
+<div id="DescriptionArea">Loading...</div>
+<div id="StatusBar"></div>
+       
+      </p>
+   
+            
+     <div class="pc_mod_a">
+      <div class="pc_mod_con2">
+       <div class="anchor_offset_out">
+        <div class="anchor_offset_inner">
+         <a id="Specifications1">&nbsp;</a>
+        </div>
+       </div> 
+       <h2 class="pc_mb6">Specifications</h2>
+        
+      </div>
+
+<div id="ContentArea1">Loading...</div>
+      
+     </div>   
+    </div>
+   </div>
+   
+   <div class="pc_mod_a" id="FullEPNBox1" style="display:none;">
+    <div class="pc_mod_con2">
+     <h2 class='pc_mb6'>Full Part No.</h2>
+     
+<div id="FullEPNArea1"></div>
+
+    </div>   
+   </div>
+
+   <div class="pc_mod_a" id="PcneolBox1" style="display:none;">
+    <div class="pc_mod_con2">
+     <h2 class="pc_mb6">End of Life (EOL)</h2>
+     
+<div id="PcneolArea1"></div>
+
+    </div>   
+   </div>
+    
+    
+   <div class="pc_mod_a" id="TechDocBox1" style="display:block;">
+    <div class="pc_mod_con2">
+     <div class="anchor_offset_out">
+      <div class="anchor_offset_inner">
+       <a id="Technical-Documents">&nbsp;</a>
+      </div>
+     </div>
+                      
+<div id="TechDocArea1"></div>
+     
+     <div class="pc_noteR">
+      <a id="MoreSoftware1" class="pc_noteR" href="#">More Documents</a>
+      <i class="fa fa-angle-right pc_noteR_icon"></i>
+     </div>
+       </div>
+   </div>
+<!--Product--> 
+<!--Product--> 
+   <div class="pc_mod_a" id="ProductBox2" style="display:none;">
+       <div class="pc_mod_con2">
+      <!--<p class="pc_p">
+      
+<div id="DescriptionArea2">Loading...</div>
+       
+      </p>-->
+   
+            
+     <div class="pc_mod_a">
+      <div class="pc_mod_con2">
+       <div class="anchor_offset_out">
+        <div class="anchor_offset_inner">
+         <a id="Specifications2">&nbsp;</a>
+        </div>
+       </div> 
+       <h2 class="pc_mb6">Specifications</h2>
+        
+      </div>
+
+<div id="ContentArea2">Loading...</div>
+      
+     </div>   
+    </div>
+   </div>
+   
+   <div class="pc_mod_a" id="FullEPNBox2" style="display:none;">
+    <div class="pc_mod_con2">
+     <h2 class='pc_mb6'>Full Part No.</h2>
+     
+<div id="FullEPNArea2"></div>
+
+    </div>   
+   </div>
+
+   <div class="pc_mod_a" id="PcneolBox2" style="display:none;">
+    <div class="pc_mod_con2">
+     <h2 class="pc_mb6">End of Life (EOL)</h2>
+     
+<div id="PcneolArea2"></div>
+
+    </div>   
+   </div>
+    
+    
+   <div class="pc_mod_a" id="TechDocBox2" style="display:none;">
+    <div class="pc_mod_con2">
+     <div class="anchor_offset_out">
+      <div class="anchor_offset_inner">
+       <a id="Technical-Documents">&nbsp;</a>
+      </div>
+     </div>
+                      
+<div id="TechDocArea2"></div>
+     
+     <div class="pc_noteR">
+      <a id="MoreSoftware2" class="pc_noteR" href="#">More Documents</a>
+      <i class="fa fa-angle-right pc_noteR_icon"></i>
+     </div>
+       </div>
+   </div>
+
+<script type="text/javascript" src="/SiteDocs/js/ajax_products.js"></script>
+<script type="text/javascript" src="/SiteDocs/js/ajax_product-spec.js"></script>
+
+	
+	</div>
+	
+	<!-- Content Area (Display & Edit)-->
+	
+		<div id="ctl00_PlaceHolderMain_ctl02_label" style='display:none'>Page Content</div><div id="ctl00_PlaceHolderMain_ctl02__ControlWrapper_RichHtmlField" class="ms-rtestate-field" style="display:inline" aria-labelledby="ctl00_PlaceHolderMain_ctl02_label"><div class="pc_mod_a"><div class="pc_mod_con2"><div class="ms-rtestate-read ms-rte-wpbox"><div class="ms-rtestate-notify  ms-rtestate-read 7006f7bb-1ee1-4684-92cc-ca646c3ef332" id="div_7006f7bb-1ee1-4684-92cc-ca646c3ef332" unselectable="on"><div id="MSOZoneCell_WebPartctl00_ctl55_g_7006f7bb_1ee1_4684_92cc_ca646c3ef332" class="s4-wpcell-plain ms-webpartzone-cell ms-webpart-cell-vertical-inline-table ms-webpart-cell-vertical ms-fullWidth ">
+		<div class="ms-webpart-chrome ms-webpart-chrome-vertical ms-webpart-chrome-fullWidth ">
+	<div WebPartID="15ed7538-73c6-4a74-b7b5-8e290f11c5e7" WebPartID2="7006f7bb-1ee1-4684-92cc-ca646c3ef332" HasPers="false" id="WebPartctl00_ctl55_g_7006f7bb_1ee1_4684_92cc_ca646c3ef332" width="100%" class="ms-WPBody " allowRemove="false" allowDelete="false" allowExport="false" style="" ><div id="ctl00_ctl55_g_7006f7bb_1ee1_4684_92cc_ca646c3ef332">
+		<div class="pc_mod_a">
+    <div class="pc_mod_con2">
+  <div class="anchor_offset_out">
+   <div class="anchor_offset_inner">
+    <a id="Support-Resources">&nbsp;</a>
+   </div>
+  </div>
+  <div>
+   <h2>Support Resources</h2>
+  </div>
+     <!--<div class="pc_pdf_download clear-fix">
+      <div class="pc_pdf_left">
+       <div class="pc_pdf_icon"><img src="/SiteImages/icon_pdf.png"></div>
+       <div class="pc_pdf_title pc_txt_break"><a href="#">Product Selection Guide</a></div>
+      </div>
+      <div class="pc_pdf_right clear-fix"><a href="#">Download PDF</a></div>
+     </div>-->
+
+  <div class="pc_pdf_download clear-fix">
+  <div class="pc_groupC_left">
+   <div class="pc_groupC_title pc_txt_break"><a onclick=" _gaq.push(['_trackEvent', 'Products', 'EN', 'Macronix launches high performance MXSMIO™ Family']);" href="../Documents/Macronix_launches_high_performance_MXSMIO_Family.pdf" target="_blank" >Macronix launches high performance MXSMIO™ Family</a></div>
+  </div>
+  <div class="pc_groupC_right">
+   <div class="pc_groupC_icon2"><img src="/SiteImages/icon_pdf.png"></div>
+   <div class="pc_groupC_text clear-fix"><a onclick=" _gaq.push(['_trackEvent', 'Products', 'EN', 'Macronix launches high performance MXSMIO™ Family']);" href="../Documents/Macronix_launches_high_performance_MXSMIO_Family.pdf" target="_blank" >Download PDF</a></div>
+  </div>
+ </div>
+ <div class="pc_pdf_download clear-fix">
+  <div class="pc_groupC_left">
+   <div class="pc_groupC_title pc_txt_break"><a onclick=" _gaq.push(['_trackEvent', 'Products', 'EN', 'The MXSMIO™ Implement Brochure']);" href="../Documents/The_MXSMIO_Implement_Brochure.pdf" target="_blank" >The MXSMIO™ Implement Brochure</a></div>
+  </div>
+  <div class="pc_groupC_right">
+   <div class="pc_groupC_icon2"><img src="/SiteImages/icon_pdf.png"></div>
+   <div class="pc_groupC_text clear-fix"><a onclick=" _gaq.push(['_trackEvent', 'Products', 'EN', 'The MXSMIO™ Implement Brochure']);" href="../Documents/The_MXSMIO_Implement_Brochure.pdf" target="_blank" >Download PDF</a></div>
+  </div>
+ </div>
+     
+     <!--最下面的三格排列-->
+     <div class="pc_3box clear-fix">
+      <div class="pc_3groupB">
+       <div class="pc_3groupB_left_pic">
+        <a href="/en-us/sales-network/Pages/macronix-offices.aspx"><img src="/SiteImages/3box-1.png"></a>
+       </div>
+       <div class="pc_3groupB_right">
+        <div class="pc_3groupB_right_title">
+         <h4 class="pc_title_red"><a href="/en-us/sales-network/Pages/macronix-offices.aspx">Sales Service</a></h4>
+        </div>
+        <div class="pc_font_smaller">Connect with Macronix representatives</div>
+        <div class="pc_3groupB_btn">
+   <a href="/en-us/sales-network/Pages/macronix-offices.aspx"><button type="button" class="btn_red" onclick="javascript:location.href='/en-us/sales-network/Pages/macronix-offices.aspx'">Contact Us</button></a></div>
+       </div>
+      </div>
+
+      <div class="pc_3groupB">
+       <div class="pc_3groupB_left_pic">
+        <a href="/en-us/products/Pages/cross-reference-search.aspx"><img src="/SiteImages/3box-2.png"></a>
+       </div>
+       <div class="pc_3groupB_right">
+        <div class="pc_3groupB_right_title">
+         <h4 class="pc_title_red"><a href="/en-us/products/Pages/cross-reference-search.aspx">Cross Reference</a></h4>
+        </div>
+        <div class="pc_font_smaller">Find the right Macronix products for your designs </div>
+        <div class="pc_3groupB_btn">
+   <a href="/en-us/products/Pages/cross-reference-search.aspx"><button type="button" class="btn_red" onclick="javascript:location.href='/en-us/products/Pages/cross-reference-search.aspx'">Search Products</button></a></div>
+       </div>
+      </div>
+
+      <div class="pc_3groupB pc_mr">
+       <div class="pc_3groupB_left_pic">
+        <a href="/en-us/support/Pages/product-longevity-program.aspx"><img src="/SiteImages/Macronix Product Longevity Program.png" /></a>
+       </div>
+       <div class="pc_3groupB_right">
+        <div class="pc_3groupB_right_title">
+         <h4 class="pc_title_red"><a href="/en-us/support/Pages/product-longevity-program.aspx">Macronix Product Longevity Program</a></h4>
+        </div>
+        <!-- <div class="pc_font_smaller"></div> -->
+        <div class="pc_3groupB_btn">
+   <a href="/en-us/support/Pages/product-longevity-program.aspx"><button type="button" class="btn_red" onclick="javascript:location.href='/en-us/support/Pages/product-longevity-program.aspx'">More Details</button></a>
+        </div>
+       </div>
+
+      </div>
+    </div>
+   </div>
+   
+</div>
+</div>
+	</div><div class="ms-clear"></div></div>
+</div>
+	</div></div></div>​
+   </div></div></div>
+		<div class="pc_mod_a">
+		   <div class="pc_mod_con3">
+		   </div>
+		</div>
+	</div>
+<div style='display:none' id='hidZone'><div class="ms-webpart-zone ms-fullWidth">
+		<div id="MSOZoneCell_WebPartctl00_ctl55_g_7006f7bb_1ee1_4684_92cc_ca646c3ef332" class="s4-wpcell-plain ms-webpartzone-cell ms-webpart-cell-vertical-inline-table ms-webpart-cell-vertical ms-fullWidth ">
+
+		</div>
+	</div></div>
+				
+				
+</div>
+				</div>
+
+				<!-- 頁尾 -->
+				   <div class="pc_footer_item noindex" style="display: block;">
+    <div class="pc_item_container">
+     <div class="pc_item">
+      <ul>
+       <span>Products</span>
+       <ul>
+        <a class="pc_floatleft" href="/en-us/products/NOR-Flash">NOR Flash</a>
+        <li>
+         <a href="/en-us/products/NOR-Flash/Serial-NOR-Flash">Serial NOR Flash</a>
+        </li>
+        <li>
+         <a href="/en-us/products/NOR-Flash/Parallel-NOR-Flash">Parallel NOR Flash</a>
+        </li>
+        <li>
+         <a href="/en-us/products/NOR-Flash/Pages/octaflash.aspx">OctaBus Memory</a>
+        </li>
+        <li>
+         <a href="/en-us/products/NOR-Flash/Pages/Ultra-Low-Power-Flash.aspx">Wide Range Vcc Flash</a>
+        </li>
+        <li>
+         <a href="/en-us/products/NOR-Flash/Pages/Ultra-Low-Vcc-Flash.aspx">1.2V Serial NOR Flash</a>
+        </li>
+       </ul> 
+       <ul>
+        <a class="pc_floatleft" href="/en-us/products/NAND-Flash">NAND Flash</a>
+        <li>
+         <a href="/en-us/products/NAND-Flash/SLC-NAND-Flash">SLC NAND Flash</a>
+        </li>
+        <li>
+         <a href="/en-us/products/NAND-Flash/Serial-NAND-Flash">Serial NAND Flash</a>
+        </li>
+       </ul>
+       <ul>
+        <a class="pc_floatleft" href="/en-us/products/eMMC">e.MMC Memory</a><br/>
+        <a class="pc_floatleft" href="/en-us/products/ArmorFlash">ArmorFlash</a><br/>
+        <a class="pc_floatleft" href="/en-us/products/LybraFlash">LybraFlash</a><br/>
+        <!--<a class="pc_floatleft" href="/en-us/products/Pages/multichip-packages.aspx">Multichip Packages</a><br/>-->
+        <a class="pc_floatleft" href="/en-us/products/ROM">ROM</a><br/>
+        <a class="pc_floatleft"href="/en-us/products/foundry-service">Foundry Service</a>
+        <!--<li>
+         <a href="/en-us/products/Pages/multichip-packages.aspx#NOR-Based-MCP">NOR-Based MCP</a>
+        </li>
+        <li>
+         <a href="/en-us/products/Pages/multichip-packages.aspx#NAND-Based-MCP">NAND-Based MCP</a>
+        </li
+       </ul>
+       <ul>
+        <a class="pc_floatleft" href="/en-us/products/ROM">ROM</a> <br>
+        <a  class="pc_floatleft"href="/en-us/products/foundry-service">Foundry Service</a>
+       </ul>>-->
+      </ul>
+     </div>
+     <div class="pc_item">
+      <ul>
+       <span>Solutions</span>
+       <ul>
+        <li>
+         <a href="/en-us/flash-memory-solutions/automotive">Automotive</a>
+        </li>
+        <li>
+         <a href="/en-us/flash-memory-solutions/Pages/industrial.aspx">Industrial</a>
+        </li>
+        <li>
+         <a href="/en-us/flash-memory-solutions/Pages/communications.aspx">Communications</a>
+        </li>
+        <li>
+         <a href="/en-us/flash-memory-solutions/extended-temperature">Extended Temperature</a>
+        </li>
+        <li>
+         <a href="/en-us/flash-memory-solutions/known-good-die">Known Good Die</a>
+        </li>
+        <li>
+         <a href="/en-us/flash-memory-solutions/Pages/wafer-level-chip-scale-package.aspx">Wafer Level Chip Scale Package</a>
+        </li>
+        <li>
+         <a href="/en-us/flash-memory-solutions/Pages/security.aspx">Security</a>
+        </li>
+        <li>
+         <a href="/en-us/flash-memory-solutions/Pages/IoT.aspx">IoT</a>
+        </li>
+       </ul>
+      </ul>
+      <ul>
+       <span>Sample & Buy</span>
+       <ul>
+        <li>
+         <a href="/en-us/sales-network/Pages/macronix-offices.aspx">Macronix Offices</a>
+        </li>
+        <li>
+         <a href="/en-us/sales-network/Pages/sales-and-service-location.aspx">Sales/Distributors</a>
+        </li>
+        <li>
+         <a href="https://mxweb.mxic.com.tw/web/feedback.nsf/samplereq?openform" target="_blank">Sample Request</a>
+        </li>
+       </ul>
+      </ul>
+     </div>
+     <div class="pc_item">
+      <ul>
+       <span>Support</span>
+       <ul>
+        <a class="pc_floatleft" href="/en-us/support/Pages/Design-Support.aspx">Design Support</a>
+        <li>
+         <a href="/en-us/support/design-support/Pages/technical-document.aspx">Technical Document</a>
+        </li>
+        <li>
+         <a href="/en-us/support/design-support/Pages/models-reference-design.aspx">Models/ Reference Design</a>
+        </li>
+        <li>
+         <a href="/en-us/support/design-support/Pages/software-support.aspx">Software Support</a>
+        </li>
+       </ul>
+       <ul>
+        <a class="pc_floatleft" href="/en-us/support/partnerships">Ecosystem Partnerships</a><br/>
+        <a class="pc_floatleft" href="/en-us/about/quality-management/Documents/quality_report.pdf" target="_blank">Product Reliability Report</a><br/>
+        <a class="pc_floatleft" href="/en-us/support/PCN-and-EOL/Pages/NOR-Flash.aspx">End-of-Life Product</a><br/>
+        <a class="pc_floatleft" href="/en-us/about/ESG/environmental-commitment/Pages/green-product.aspx">Green Product</a><br/>
+        <a class="pc_floatleft" href="/en-us/support/Pages/product-longevity-program.aspx">Product Longevity Program</a><br/>
+       </ul>
+      </ul>
+      <ul>
+       <span><a href="/en-us/Others/Pages/term-of-use.aspx">Term of Use</a></span> <br>
+       <span><a href="/en-us/Others/Pages/privacy-policy.aspx">Privacy Policy</a></span>
+       
+      </ul>
+      
+     </div>
+
+     
+
+     <div class="pc_item">
+      <ul>
+       <span>About Us</span>
+       <ul>
+        <li>
+         <a href="/en-us/about/careers">Careers</a>
+        </li>
+        <li>
+         <a href="/en-us/about/Pages/company-overview.aspx">Company Overview</a>
+        </li>
+        <li>
+         <a href="/en-us/about/contacts">Contact Us</a>
+        </li>
+        <li>
+         <a href="/en-us/about/corporate-governance">Corporate Governance</a>
+        </li>
+        <li>
+         <a href="/en-us/about/ESG">Sustainability</a>
+        </li>
+        <li>
+         <a href="/en-us/about/investor-relations">Investor Relations</a>
+        </li>
+        <li>
+         <a href="/en-us/about/news">News & Events</a>
+        </li>
+        <li>
+         <a href="/en-us/about/quality-management">Quality Management</a>
+        </li>
+       </ul>
+      </ul>
+      <ul>
+       <span id="switchVerArea" style="display:none;"><a class="footer_topic2" href="#" onclick="dispMobileLayout()" style="font-size:24px;"><i class="fa-mobile menu_icon4" aria-hidden="true"></i>&nbsp;Mobile Version</a></span>
+      </ul>
+      <!--<ul>
+       <span>Follow Us</span>
+       <br>
+       <a href="https://www.facebook.com/Macronix/" target="_blank">
+        <i><img src="/SiteImages/fb.png"></i>
+       </a>
+       <a href="https://www.linkedin.com/company/macronix-international-co-ltd" target="_blank">
+        <i><img src="/SiteImages/in.png"></i>
+       </a>
+       <a href="#">
+        <i><img src="/SiteImages/youtube.png"></i>
+       </a>
+      </ul>-->
+     </div>
+    </div>
+   </div>
+
+   <div class="pc_footer_copyright noindex">
+    <a href="#" class="go-to-top "><i class="fa fa-angle-up fa-mlt-fix"></i></a>
+    <div class="cookiePanel">
+     <div class="cookiePanel_text">This website uses cookies to enhance your experience and to collect, store and analyze website traffic and statistical data. By clicking “I Agree” or continuing to browse this website, you consent to our use of cookies. Before clicking or continuing to browse the website, please read our <a href="/en-us/Others/Pages/privacy-policy.aspx">Privacy Policy</a>to confirm the terms.</div>
+     <div class="cookiePanel_btn" onclick="acceptCookie()">I Agree</div>
+    </div>
+    <div class="pc_copyright_container">
+     Copyright© Macronix International Co., Ltd. <span id="CopyRightYear"></span>. All Rights Reserved. Macronix, MXIC, MXIC logo, XtraROM, NBit and Macronix NBit are trademarks of Macronix International Co., Ltd.. The names and brands of other companies are for identification purposes only and may be claimed as the property of the respective companies.
+     <br/><br/>
+     IE 10.0 preferred, Resolution:1024 x 768
+    </div>
+   </div>
+   
+   
+   <SCRIPT language=javascript>
+    var today = new Date();
+    var y = today.getFullYear();
+    document.getElementById("CopyRightYear").innerHTML = y;
+    if (isMobile){ document.getElementById("switchVerArea").style.display = "block"; }
+  </SCRIPT><script>$( '#suiteBar' ).css({display:'none'});$( '#s4-ribbonrow' ).css({display:'none'}); </script>
+
+				
+				
+				</div>
+
+			
+			
+			<!--內容結束-->			
+
+			</div>
+		<!--客製結束-->		
+		</div>
+
+
+		
+
+		<div id="s4-titlerow"
+			class="ms-dialogHidden s4-titlerowhidetitle" style="display: none;">
+		<div id="titleAreaBox"
+			class="ms-noList ms-table ms-core-tableNoSpace">
+		<div id="titleAreaRow" class="ms-tableRow">
+<div id="siteIcon" class="ms-tableCell ms-verticalAlignTop" style="display: none;">
+	<div id="DeltaSiteLogo">
+	
+		<a id="ctl00_onetidProjectPropertyTitleGraphic" title="Serial NOR Flash" class="ms-siteicon-a" href="/en-us/products/NOR-Flash/Serial-NOR-Flash"><img id="ctl00_onetidHeadbnnr2" class="ms-siteicon-img" name="onetidHeadbnnr0" src="/WebResources/General/logo_en.gif" alt="Serial NOR Flash" /></a>
+	
+</div>
+</div>
+			<div class="ms-breadcrumb-box ms-tableCell ms-verticalAlignTop" style="display: none;">
+				<div
+					class="ms-breadcrumb-top">
+<div class="ms-breadcrumb-dropdownBox" style="display:none;">
+<span id="DeltaBreadcrumbDropdown">
+	
+</span>
+</div>
+<div id="DeltaTopNavigation" class="ms-displayInline ms-core-navigation" role="navigation">
+	
+	
+	
+		<div id="zz1_TopNavigationMenu" class=" noindex ms-core-listMenu-horizontalBox">
+		<ul id="zz2_RootAspMenu" class="root ms-core-listMenu-root static">
+			<li class="static"><a class="static menu-item ms-core-listMenu-item ms-displayInline ms-navedit-linkNode" href="/en-us/products/NOR-Flash/Serial-NOR-Flash/Pages/default.aspx" accesskey="1"><span class="additional-background ms-navedit-flyoutArrow"><span class="menu-item-text">Serial NOR Flash</span></span></a><ul class="static">
+				<li class="static selected"><a class="static selected menu-item ms-core-listMenu-item ms-displayInline ms-core-listMenu-selected ms-navedit-linkNode" href="/en-us/products/NOR-Flash/Serial-NOR-Flash/Pages/spec.aspx"><span class="additional-background ms-navedit-flyoutArrow"><span class="menu-item-text">Specifications</span><span class="ms-hidden">Currently selected</span></span></a></li>
+			</ul></li>
+		</ul>
+	</div>
+	
+
+</div>
+				</div>
+<h1 id="pageTitle" class="ms-core-pageTitle">
+  <span id="DeltaPlaceHolderPageTitleInTitleArea">
+	
+	Specifications
+
+  </span>
+  <div id="DeltaPlaceHolderPageDescription" class="ms-displayInlineBlock ms-normalWrap">
+	
+	<a href="javascript:;" id="ms-pageDescriptionDiv" style="display:none;">
+	  <span id="ms-pageDescriptionImage">&#160;</span>
+	</a>
+	<span class="ms-accessible" id="ms-pageDescription">
+	  
+	</span>
+	<script type="text/javascript">// <![CDATA[ 
+
+
+
+	  _spBodyOnLoadFunctionNames.push("setupPageDescriptionCallout");
+	// ]]>
+</script>
+  
+</div>
+</h1>
+			</div>	<!-- end of titleAreaRow -->
+			<div class="ms-tableCell ms-verticalAlignTop" style="display:none;">
+<div id="DeltaPlaceHolderSearchArea" class="ms-mpSearchBox ms-floatRight">
+	
+  
+	<div id="searchInputBox">
+	  <div class="ms-webpart-chrome ms-webpart-chrome-fullWidth ">
+		<div WebPartID="00000000-0000-0000-0000-000000000000" HasPers="true" id="WebPartWPQ1" width="100%" class="ms-WPBody " OnlyForMePart="true" allowDelete="false" style="" ><div componentid="ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr" id="ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr"><div id="SearchBox" name="Control"><div class="ms-srch-sb ms-srch-sb-border" id="ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr_sboxdiv"><input type="search" value="Search this site" maxlength="2048" title="Search this site" id="ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr_sbox" autocomplete="off" autocorrect="off" onkeypress="EnsureScriptFunc('Search.ClientControls.js', 'Srch.U', function() {if (Srch.U.isEnterKey(String.fromCharCode(event.keyCode))) {$find('ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr').search($get('ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr_sbox').value);return Srch.U.cancelEvent(event);}})" onkeydown="EnsureScriptFunc('Search.ClientControls.js', 'Srch.U', function() {var ctl = $find('ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr');ctl.activateDefaultQuerySuggestionBehavior();})" onfocus="EnsureScriptFunc('Search.ClientControls.js', 'Srch.U', function() {var ctl = $find('ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr');ctl.hidePrompt();ctl.setBorder(true);})" onblur="EnsureScriptFunc('Search.ClientControls.js', 'Srch.U', function() {var ctl = $find('ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr'); if (ctl){ ctl.showPrompt(); ctl.setBorder(false);}})" class="ms-textSmall ms-srch-sb-prompt ms-helperText" role="combobox" aria-owns="ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr_AutoCompList" aria-haspopup="true" aria-autocomplete="list" aria-expanded="false" /><a title="Search" role="button" class="ms-srch-sb-searchLink" id="ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr_SearchLink" onclick="EnsureScriptFunc('Search.ClientControls.js', 'Srch.U', function() {$find('ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr').search($get('ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr_sbox').value);})" href="javascript: {}" aria-label="Search"><img src="/_layouts/15/images/searchresultui.png?rev=44#ThemeKey=searchresultui" class="ms-srch-sb-searchImg" id="searchImg" alt="Search" /></a><div class="ms-qSuggest-container ms-shadow" id="AutoCompContainer"><div id="ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr_AutoCompList" role="listbox" aria-label="Suggestions"></div></div></div></div></div><noscript><div id="ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_noscript">It looks like your browser does not have JavaScript enabled. Please turn on JavaScript and try again.</div></noscript><div id="ctl00_PlaceHolderSearchArea_SmallSearchInputBox1">
+
+		</div><div class="ms-clear"></div></div>
+	</div>
+	</div>
+  
+
+</div>
+			</div>
+		</div>
+		</div>
+		</div> <!-- end of s4-workspace -->
+		
+		
+		
+
+		<div id="contentRow">
+<div id="sideNavBox"
+	 class="ms-dialogHidden ms-forceWrap ms-noList"  style="display: none;">
+  <div id="DeltaPlaceHolderLeftNavBar" class="ms-core-navigation" role="navigation">
+	
+	
+				<a id="startNavigation" name="startNavigation" tabIndex="-1"></a>
+				
+				
+				
+				
+				
+				<div class="ms-core-sideNavBox-removeLeftMargin">
+				<div id="ctl00_PlaceHolderLeftNavBar_QuickLaunchNavigationManager">
+		
+
+					
+					<div id="zz3_V4QuickLaunchMenu" class=" noindex ms-core-listMenu-verticalBox">
+			<ul id="zz4_RootAspMenu" class="root ms-core-listMenu-root static">
+				<li class="static"><span class="static menu-item ms-core-listMenu-item ms-displayInline ms-navedit-linkNode"><span class="additional-background ms-navedit-flyoutArrow"><span class="menu-item-text">Recent</span></span></span></li><li class="static"><a class="static menu-item ms-core-listMenu-item ms-displayInline ms-navedit-linkNode" href="/en-us/Pages/default.aspx"><span class="additional-background ms-navedit-flyoutArrow"><span class="menu-item-text">Home</span></span></a><ul class="static">
+					<li class="static"><a class="static menu-item ms-core-listMenu-item ms-displayInline ms-navedit-linkNode" href="/en-us/about/Pages/company-overview.aspx"><span class="additional-background ms-navedit-flyoutArrow"><span class="menu-item-text">About Us</span></span></a></li><li class="static"><a class="static menu-item ms-core-listMenu-item ms-displayInline ms-navedit-linkNode" href="/en-us/MediaCenter/MacronixNews/Pages/default.aspx"><span class="additional-background ms-navedit-flyoutArrow"><span class="menu-item-text">News &amp; Events</span></span></a></li><li class="static"><a class="static menu-item ms-core-listMenu-item ms-displayInline ms-navedit-linkNode" href="/en-us/Others/Pages/privacy-policy.aspx"><span class="additional-background ms-navedit-flyoutArrow"><span class="menu-item-text">Others</span></span></a></li><li class="static selected"><a class="static selected menu-item ms-core-listMenu-item ms-displayInline ms-core-listMenu-selected ms-navedit-linkNode" href="/en-us/products/Pages/product-search.aspx"><span class="additional-background ms-navedit-flyoutArrow"><span class="menu-item-text">Products</span><span class="ms-hidden">Currently selected</span></span></a></li><li class="static"><a class="static menu-item ms-core-listMenu-item ms-displayInline ms-navedit-linkNode" href="/en-us/Search/Pages/default.aspx"><span class="additional-background ms-navedit-flyoutArrow"><span class="menu-item-text">Search</span></span></a></li><li class="static"><a class="static menu-item ms-core-listMenu-item ms-displayInline ms-navedit-linkNode" href="/en-us/flash-memory-solutions/Pages/automotive.aspx"><span class="additional-background ms-navedit-flyoutArrow"><span class="menu-item-text">Solutions</span></span></a></li>
+				</ul></li><li class="static"><a class="static menu-item ms-core-listMenu-item ms-displayInline ms-navedit-linkNode" href="/zh-tw/Pages/default.aspx"><span class="additional-background ms-navedit-flyoutArrow"><span class="menu-item-text">首頁</span></span></a><ul class="static">
+					<li class="static"><a class="static menu-item ms-core-listMenu-item ms-displayInline ms-navedit-linkNode" href="/zh-tw/Others/Pages/privacy-policy.aspx"><span class="additional-background ms-navedit-flyoutArrow"><span class="menu-item-text">其他</span></span></a></li><li class="static"><a class="static menu-item ms-core-listMenu-item ms-displayInline ms-navedit-linkNode" href="/zh-tw/MediaCenter/Pages/default.aspx"><span class="additional-background ms-navedit-flyoutArrow"><span class="menu-item-text">新聞 &amp; 活動</span></span></a></li><li class="static"><a class="static menu-item ms-core-listMenu-item ms-displayInline ms-navedit-linkNode" href="/zh-tw/products/Pages/product-search.aspx"><span class="additional-background ms-navedit-flyoutArrow"><span class="menu-item-text">產品</span></span></a></li><li class="static"><a class="static menu-item ms-core-listMenu-item ms-displayInline ms-navedit-linkNode" href="/zh-tw/flash-memory-solutions/Pages/automotive.aspx"><span class="additional-background ms-navedit-flyoutArrow"><span class="menu-item-text">解決方案</span></span></a></li><li class="static"><a class="static menu-item ms-core-listMenu-item ms-displayInline ms-navedit-linkNode" href="/zh-tw/about/Pages/company-overview.aspx"><span class="additional-background ms-navedit-flyoutArrow"><span class="menu-item-text">關於旺宏</span></span></a></li>
+				</ul></li><li class="static"><a class="static menu-item ms-core-listMenu-item ms-displayInline ms-navedit-linkNode" href="/Pages/ProductPagesList.aspx"><span class="additional-background ms-navedit-flyoutArrow"><span class="menu-item-text">ProductPagesList</span></span></a></li>
+			</ul>
+		</div>
+				
+	</div>
+					
+				
+					<div class="ms-core-listMenu-verticalBox">
+						
+					</div>
+				
+				</div>
+	
+  
+</div>
+</div>
+<div id="contentBox"
+ aria-live="polite" aria-relevant="all">
+<div id="DeltaFormDigest">
+	
+	
+		<script type="text/javascript">//<![CDATA[
+        var formDigestElement = document.getElementsByName('__REQUESTDIGEST')[0];
+        if (!((formDigestElement == null) || (formDigestElement.tagName.toLowerCase() != 'input') || (formDigestElement.type.toLowerCase() != 'hidden') ||
+            (formDigestElement.value == null) || (formDigestElement.value.length <= 0)))
+        {
+            formDigestElement.value = '0x86FE80C19C5E7FF2FDA6F5E11FD0B821F38325DF5CEFC0355A3A37F9F83EFA053A14845B0D9FB857D907DC97FB0B3C95D173DF5AA603E02C31CE197972FCEAC1,09 Oct 2026 16:41:41 -0000';_spPageContextInfo.updateFormDigestPageLoaded = new Date();
+        }
+        //]]>
+        </script>
+	
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		</div>
+		</div>
+		</div>
+
+
+<script type="text/javascript">
+//<![CDATA[
+var _spFormDigestRefreshInterval = 1440000;window.SPThemeUtils && SPThemeUtils.ApplyCurrentTheme(true); IsSPSocialSwitchEnabled = function() { return true; };var _fV4UI = true;
+function _RegisterWebPartPageCUI()
+{
+    var initInfo = {editable: false,isEditMode: false,allowWebPartAdder: false,listId: "{303fceac-5c02-4d5e-b23d-8af356e9bd9d}",itemId: 2,recycleBinEnabled: true,enableMinorVersioning: true,enableModeration: false,forceCheckout: true,rootFolderUrl: "\u002fen-us\u002fproducts\u002fNOR-Flash\u002fSerial-NOR-Flash\u002fPages",itemPermissions:{High:16,Low:196673}};
+    SP.Ribbon.WebPartComponent.registerWithPageManager(initInfo);
+    var wpcomp = SP.Ribbon.WebPartComponent.get_instance();
+    var hid;
+    hid = document.getElementById("_wpSelected");
+    if (hid != null)
+    {
+        var wpid = hid.value;
+        if (wpid.length > 0)
+        {
+            var zc = document.getElementById(wpid);
+            if (zc != null)
+                wpcomp.selectWebPart(zc, false);
+        }
+    }
+    hid = document.getElementById("_wzSelected");
+    if (hid != null)
+    {
+        var wzid = hid.value;
+        if (wzid.length > 0)
+        {
+            wpcomp.selectWebPartZone(null, wzid);
+        }
+    }
+};
+function __RegisterWebPartPageCUI() {
+ExecuteOrDelayUntilScriptLoaded(_RegisterWebPartPageCUI, "sp.ribbon.js");}
+_spBodyOnLoadFunctionNames.push("__RegisterWebPartPageCUI");var __wpmExportWarning='This Web Part Page has been personalized. As a result, one or more Web Part properties may contain confidential information. Make sure the properties contain information that is safe for others to read. After exporting this Web Part, view properties in the Web Part description file (.WebPart) by using a text editor such as Microsoft Notepad.';var __wpmCloseProviderWarning='You are about to close this Web Part.  It is currently providing data to other Web Parts, and these connections will be deleted if this Web Part is closed.  To close this Web Part, click OK.  To keep this Web Part, click Cancel.';var __wpmDeleteWarning='You are about to permanently delete this Web Part.  Are you sure you want to do this?  To delete this Web Part, click OK.  To keep this Web Part, click Cancel.';
+ExecuteOrDelayUntilScriptLoaded(
+function()
+{
+var initInfo = 
+{
+itemPermMasks: {High:16,Low:196673},
+listPermMasks: {High:16,Low:196673},
+listId: "303fceac-5c02-4d5e-b23d-8af356e9bd9d",
+itemId: 2,
+workflowsAssociated: false,
+editable: false,
+doNotShowProperties: false,
+enableVersioning: true
+};
+SP.Ribbon.DocLibAspxPageComponent.registerWithPageManager(initInfo);
+},
+"sp.ribbon.js");
+var g_disableCheckoutInEditMode = false;
+var _spWebPermMasks = {High:16,Low:196673};var slNavUrl = '\u002fen-us\u002fproducts\u002fNOR-Flash\u002fSerial-NOR-Flash';_spBodyOnLoadFunctionNames.push('_cUpdonetidProjectPropertyTitleGraphic');function _cUpdonetidProjectPropertyTitleGraphic(){var myd = null; if (typeof(dataonetidProjectPropertyTitleGraphic) != 'undefined') {myd = dataonetidProjectPropertyTitleGraphic;} var myc = document.getElementById('ctl00_onetidProjectPropertyTitleGraphic');_cUpdconetidProjectPropertyTitleGraphic(myd, myc);}function _cUpdconetidProjectPropertyTitleGraphic(data, ctrl){ctrl.href = slNavUrl;}function _cUpdonetidHeadbnnr2(){var myd = null; if (typeof(dataonetidHeadbnnr2) != 'undefined') {myd = dataonetidHeadbnnr2;} var myc = document.getElementById('ctl00_onetidHeadbnnr2');_cUpdconetidHeadbnnr2(myd, myc);}function _cUpdconetidHeadbnnr2(data, ctrl){SiteLogoImagePageUpdate(ctrl, data);}g_spPreFetchKeys.push('sp.core.js');
+            ExecuteOrDelayUntilScriptLoaded(
+                function() 
+                {                    
+                    Srch.ScriptApplicationManager.get_current().states = {"webUILanguageName":"en-US","webDefaultLanguageName":"en-US","QueryDateTimeCulture":1033,"timeZoneOffsetInHours":8,"contextUrl":"https://www.mxic.com.tw/en-us/products/NOR-Flash/Serial-NOR-Flash","contextTitle":"Serial NOR Flash","supportedLanguages":[{"id":1025,"label":"Arabic"},{"id":1093,"label":"Bangla"},{"id":1026,"label":"Bulgarian"},{"id":1027,"label":"Catalan"},{"id":2052,"label":"Chinese (Simplified)"},{"id":1028,"label":"Chinese (Traditional)"},{"id":1050,"label":"Croatian"},{"id":1029,"label":"Czech"},{"id":1030,"label":"Danish"},{"id":1043,"label":"Dutch"},{"id":1033,"label":"English"},{"id":1035,"label":"Finnish"},{"id":1036,"label":"French"},{"id":1031,"label":"German"},{"id":1032,"label":"Greek"},{"id":1095,"label":"Gujarati"},{"id":1037,"label":"Hebrew"},{"id":1081,"label":"Hindi"},{"id":1038,"label":"Hungarian"},{"id":1039,"label":"Icelandic"},{"id":1057,"label":"Indonesian"},{"id":1040,"label":"Italian"},{"id":1041,"label":"Japanese"},{"id":1099,"label":"Kannada"},{"id":1042,"label":"Korean"},{"id":1062,"label":"Latvian"},{"id":1063,"label":"Lithuanian"},{"id":1086,"label":"Malay"},{"id":1100,"label":"Malayalam"},{"id":1102,"label":"Marathi"},{"id":1044,"label":"Norwegian"},{"id":1045,"label":"Polish"},{"id":1046,"label":"Portuguese (Brazil)"},{"id":2070,"label":"Portuguese (Portugal)"},{"id":1094,"label":"Punjabi"},{"id":1048,"label":"Romanian"},{"id":1049,"label":"Russian"},{"id":3098,"label":"Serbian (Cyrillic)"},{"id":2074,"label":"Serbian (Latin)"},{"id":1051,"label":"Slovak"},{"id":1060,"label":"Slovenian"},{"id":3082,"label":"Spanish (Spain)"},{"id":2058,"label":"Spanish (Mexico)"},{"id":1053,"label":"Swedish"},{"id":1097,"label":"Tamil"},{"id":1098,"label":"Telugu"},{"id":1054,"label":"Thai"},{"id":1055,"label":"Turkish"},{"id":1058,"label":"Ukrainian"},{"id":1056,"label":"Urdu"},{"id":1066,"label":"Vietnamese"}],"navigationNodes":[{"id":0,"name":"This Site","url":"~site/_layouts/15/osssearchresults.aspx?u={contexturl}","promptString":"Search this site"}],"webUILanguageDirectory":"en-US","showAdminDetails":false,"defaultPagesListName":"Pages","isSPFSKU":false,"defaultQueryProperties":{"culture":1033,"uiLanguage":1033,"summaryLength":180,"desiredSnippetLength":90,"enableStemming":true,"enablePhonetic":false,"enableNicknames":false,"trimDuplicates":true,"bypassResultTypes":false,"enableInterleaving":true,"enableQueryRules":true,"processBestBets":true,"enableOrderingHitHighlightedProperty":false,"hitHighlightedMultivaluePropertyLimit":-1,"processPersonalFavorites":true}};
+                    Srch.U.trace(null, 'SerializeToClient', 'ScriptApplicationManager state initialized.');
+                }, 'Search.ClientControls.js');var g_clientIdDeltaPlaceHolderMain = "DeltaPlaceHolderMain";
+var g_clientIdDeltaPlaceHolderPageTitleInTitleArea = "DeltaPlaceHolderPageTitleInTitleArea";
+var g_clientIdDeltaPlaceHolderUtilityContent = "DeltaPlaceHolderUtilityContent";
+
+var g_commandUIHandlers = {"name":"CommandHandlers","attrs":{},"children":[]};
+g_QuickLaunchControlIds.push("zz1_TopNavigationMenu");_spBodyOnLoadFunctionNames.push('QuickLaunchInitDroppable'); var g_zz1_TopNavigationMenu = null; function init_zz1_TopNavigationMenu() { if (g_zz1_TopNavigationMenu == null) g_zz1_TopNavigationMenu = $create(SP.UI.AspMenu, null, null, null, $get('zz1_TopNavigationMenu')); } ExecuteOrDelayUntilScriptLoaded(init_zz1_TopNavigationMenu, 'SP.Core.js');
+
+                    ExecuteOrDelayUntilScriptLoaded(
+                        function() 
+                        {
+                            if ($isNull($find('ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr')))
+                            {
+                                var sb = $create(Srch.SearchBox, {"delayLoadTemplateScripts":true,"initialPrompt":"Search this site","messages":[],"navigationNodes":[{"id":0,"name":"This Site","url":"~site/_layouts/15/osssearchresults.aspx?u={contexturl}","promptString":"Search this site"}],"queryGroupNames":["MasterPage"],"renderTemplateId":"~sitecollection/_catalogs/masterpage/Display Templates/Search/Control_SearchBox_Compact.js","resultsPageAddress":"~site/_layouts/15/osssearchresults.aspx?u={contexturl}","serverInitialRender":true,"showDataErrors":true,"showNavigation":true,"states":{},"tryInplaceQuery":false}, null, null, $get("ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr"));
+                                sb.activate('Search this site', 'ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr_sbox', 'ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr_sboxdiv', 'ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr_NavButton', 'ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr_AutoCompList', 'ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr_NavDropdownList', 'ctl00_PlaceHolderSearchArea_SmallSearchInputBox1_csr_SearchLink', 'ms-srch-sbprogress', 'ms-srch-sb-prompt ms-helperText');
+                            }
+                        }, 'Search.ClientControls.js');g_QuickLaunchControlIds.push("zz3_V4QuickLaunchMenu");_spBodyOnLoadFunctionNames.push('QuickLaunchInitDroppable'); var g_zz3_V4QuickLaunchMenu = null; function init_zz3_V4QuickLaunchMenu() { if (g_zz3_V4QuickLaunchMenu == null) g_zz3_V4QuickLaunchMenu = $create(SP.UI.AspMenu, null, null, null, $get('zz3_V4QuickLaunchMenu')); } ExecuteOrDelayUntilScriptLoaded(init_zz3_V4QuickLaunchMenu, 'SP.Core.js');
+//]]>
+</script>
+</form>
+	<span id="DeltaPlaceHolderUtilityContent">
+		
+	</span>
+	<script type="text/javascript">// <![CDATA[ 
+
+
+
+		var g_Workspace = "s4-workspace";
+	// ]]>
+</script>
+	
+	
+		<!--<script src="/SiteDocs/js/js/jquery.min.js"></script>-->
+	    <script>
+	        window.jQuery || document.write('<script src="/SiteDocs/js/jquery-latest.min.js"><\/script>')
+	    </script>
+	    <script src="/SiteDocs/pc_js/megamenu.js"></script>
+
+		<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery2.min.js"></script>-->
+		<script type="text/javascript" src="/SiteDocs/js/js/tabulous.js"></script>
+		<script type="text/javascript" src="/SiteDocs/js/js/js.js"></script>
+		<script type="text/javascript" src="/SiteDocs/js/mx_utility.js"></script>
+
+<script>
+function AllowCSSFiltersOnIE8() {
+    if (browseris.ie8down) {
+        //CSSUtil.AddClass(document.body, "ms-core-needIEFilter");
+        var elem = document.getElementById("ms-hcTest");
+
+        if (Boolean(elem) && Boolean(elem.currentStyle)) {
+            if (elem.currentStyle["borderColor"] != "#f00") {
+                var s4ws = document.getElementById("s4-workspace");
+
+                if (Boolean(s4ws))
+                    s4ws.style.filter = "";
+            }
+        }
+    }
+    else {
+        CSSUtil.AddClass(document.body, "ms-backgroundImage");
+    }
+}
+</script>
+
+<!--<SCRIPT TYPE=”TEXT/JAVASCRIPT”> (FUNCTION() { IF (“-MS-USER-SELECT” IN DOCUMENT.DOCUMENTELEMENT.STYLE && NAVIGATOR.USERAGENT.MATCH(/IEMOBILE\/10\.0/)) { VAR MSVIEWPORTSTYLE = DOCUMENT.CREATEELEMENT(“STYLE”); MSVIEWPORTSTYLE.APPENDCHILD( DOCUMENT.CREATETEXTNODE(“@-MS-VIEWPORT{WIDTH:AUTO!IMPORTANT}”) ); DOCUMENT.GETELEMENTSBYTAGNAME(“HEAD”)[0].APPENDCHILD(MSVIEWPORTSTYLE); } })(); </SCRIPT>-->
+
+<!-- Start of Google Analytics Code -->
+<!--<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-7121355-1', 'auto');
+  ga('send', 'pageview');
+
+</script>-->
+<!-- End of Google Analytics Code -->
+
+</body>
+</html>

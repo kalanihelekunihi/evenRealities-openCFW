@@ -1,0 +1,59 @@
+{
+  "status": "PASS",
+  "inputs": {
+    "g2/blobs/official/g2-2.2.6.10/firmware_box.bin": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+    "g2/analysis/source-discovery-parallel-2026-10-09/acquisitions/st-case-flash-pin/stm32g0xx_hal_flash.c": "7080740308fdbf2b270d34469e5a0a45f2740aad10e5105925f855ae762fce4b",
+    "g2/analysis/case-uart-receive-closure-2026-10-08/stm32g0b1xx.h": "461f2c4a7f80bc317ddb1d16c067bedd58fac6c3c41a261cf01e05cf1013236f",
+    "g2/symbols/case.tsv": "6b755eefc9ba0360e956311758026ea3e2ba02162736854286b7908ce8702276"
+  },
+  "routines": [
+    {
+      "start": "0x8004b6c",
+      "end": "0x8004b88",
+      "corrected_name": "HAL_FLASH_OB_Unlock",
+      "bytes_sha256": "f4d0ceef9dfae59e459eb5baba2e6e9e8990f5750b993f9ff75af8b9030afd60",
+      "literals": [
+        {
+          "instruction": "0x8004b6c",
+          "literal_address": "0x8004b88",
+          "value": "0x40022000"
+        },
+        {
+          "instruction": "0x8004b76",
+          "literal_address": "0x8004b8c",
+          "value": "0x8192a3b"
+        },
+        {
+          "instruction": "0x8004b7a",
+          "literal_address": "0x8004b90",
+          "value": "0x4c5d6e7f"
+        }
+      ]
+    },
+    {
+      "start": "0x8004bf4",
+      "end": "0x8004c10",
+      "corrected_name": "HAL_FLASH_Unlock",
+      "bytes_sha256": "c9c9db92061b468cd2165663aedeef8c8ca698a744a557a47f6848c46d4b09bc",
+      "literals": [
+        {
+          "instruction": "0x8004bf4",
+          "literal_address": "0x8004c10",
+          "value": "0x40022000"
+        },
+        {
+          "instruction": "0x8004bfe",
+          "literal_address": "0x8004c14",
+          "value": "0x45670123"
+        },
+        {
+          "instruction": "0x8004c02",
+          "literal_address": "0x8004c18",
+          "value": "0xcdef89ab"
+        }
+      ]
+    }
+  ],
+  "original_instruction_execution": false,
+  "source_rebuild": false
+}

@@ -1,0 +1,101 @@
+{
+  "checks": [
+    {
+      "file": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+      "expected": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "actual": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "pass": true
+    },
+    {
+      "file": "g2/blobs/official/g2-2.2.9.22/ota_s200_firmware_ota.bin",
+      "expected": "35844c95c6ffe62baca961d396c870225cdc91372f253abaece40c3e99a1c3d2",
+      "actual": "35844c95c6ffe62baca961d396c870225cdc91372f253abaece40c3e99a1c3d2",
+      "pass": true
+    },
+    {
+      "file": "/Users/kalani/Repo/jimrandomh/g2-firmware-emulator/docs/external-nor-model.md",
+      "expected": "b1de129cd94868b62eb9f942343c0c09c505a3bc4e6d9a1d38c4031bf7c97d87",
+      "actual": "b1de129cd94868b62eb9f942343c0c09c505a3bc4e6d9a1d38c4031bf7c97d87",
+      "pass": true
+    },
+    {
+      "file": "/Users/kalani/Repo/jimrandomh/g2-firmware-emulator/docs/apollo510-mspi.md",
+      "expected": "906d91a4dfe48fd3efd080e5247d1d55a3534da837ee28d0dd79892a1689399e",
+      "actual": "906d91a4dfe48fd3efd080e5247d1d55a3534da837ee28d0dd79892a1689399e",
+      "pass": true
+    },
+    {
+      "file": "/Users/kalani/Repo/jimrandomh/g2-firmware-emulator/renode/peripherals/G2Apollo510_MSPI.cs",
+      "expected": "37f09de92414f4e26f0bf0b038f4cfb4972fb294cddbf1885e2ea834b8b437f2",
+      "actual": "37f09de92414f4e26f0bf0b038f4cfb4972fb294cddbf1885e2ea834b8b437f2",
+      "pass": true
+    },
+    {
+      "file": "g2/analysis/macronix-official-sample-discovery-2026-10-09/acquisition.json",
+      "expected": "ad2a6384c459ab5118ef8735460436a78785cd5735868e18d849ccd459168435",
+      "actual": "ad2a6384c459ab5118ef8735460436a78785cd5735868e18d849ccd459168435",
+      "pass": true
+    },
+    {
+      "file": "third-party/upstream/ambiqhal-apollo510/mcu/apollo510/hal/mcu/am_hal_mspi.h",
+      "expected": "2a682bb7c1618982d6a802f3220a38696cd594c89d90e64b1a698d226b0a557b",
+      "actual": "2a682bb7c1618982d6a802f3220a38696cd594c89d90e64b1a698d226b0a557b",
+      "pass": true
+    },
+    {
+      "interval": "0x470168..0x470214",
+      "actual": "9a9b9db47d8e826f3a31f506538822d8df44eac5e9593c2d6e2d45f66bcc0429",
+      "pass": true
+    },
+    {
+      "interval": "0x4703c6..0x470484",
+      "actual": "d2e73fadf8d77ffa37eabde809a630ffed76f4939be3e60d1b744de6359e608b",
+      "pass": true
+    },
+    {
+      "interval": "0x4704ac..0x470668",
+      "actual": "fb60ea60912307d924f813ee5df2690a935e5d7e44ec55ae45fda71e5babb70e",
+      "pass": true
+    },
+    {
+      "interval": "0x470aac..0x470d58",
+      "actual": "d9d11451e07e41811b875b5f5fd9b123184fbcc165a1a5a1a61b614c8421815c",
+      "pass": true
+    },
+    {
+      "interval": "0x470e90..0x470f10",
+      "actual": "3ff1385305145c6ed7ad0e05944c83626f65b6588d4085da9a27ad2e4e7167a7",
+      "pass": true
+    },
+    {
+      "interval": "0x471020..0x4710a2",
+      "actual": "04e968ef80cb6bc9f4a5516d9fbf22204aad1768fc0de9d9c71cb03bf5ff5839",
+      "pass": true
+    },
+    {
+      "instruction": "0x470434",
+      "actual": "8006",
+      "expected": "8006",
+      "pass": true
+    },
+    {
+      "instruction": "0x470436",
+      "actual": "01d5",
+      "expected": "01d5",
+      "pass": true
+    },
+    {
+      "instruction": "0x4703dc",
+      "actual": "1520",
+      "expected": "1520",
+      "pass": true
+    },
+    {
+      "instruction": "0x470568",
+      "actual": "b720",
+      "expected": "b720",
+      "pass": true
+    }
+  ],
+  "all_pass": true
+}

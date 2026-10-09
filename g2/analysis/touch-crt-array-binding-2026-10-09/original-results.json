@@ -1,0 +1,1405 @@
+{
+  "status": "PASS",
+  "cases": 32,
+  "vector_reset": "0x4675",
+  "copy_tables": [
+    {
+      "table": "0xb578",
+      "source": 46476,
+      "destination": 536872128,
+      "words": 241
+    }
+  ],
+  "zero_tables": [
+    {
+      "table": "0xb584",
+      "destination": 536873128,
+      "words": 428
+    }
+  ],
+  "comparisons": [
+    {
+      "pattern": 0,
+      "seed": 0,
+      "manual_fini": 0,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 0
+          }
+        ],
+        "completed_after": 0,
+        "stdio_handler": 0,
+        "ram_sha256": "48609aee9a6562a4a9f5a1d7b196063257665f32ed9a184e08fe796070134ef7"
+      }
+    },
+    {
+      "pattern": 0,
+      "seed": 0,
+      "manual_fini": 1,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x33c0"
+          },
+          {
+            "phase": "manual-fini-second",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 0
+          }
+        ],
+        "completed_after": 1,
+        "stdio_handler": 0,
+        "ram_sha256": "ec66be47b3322576b24010ede7f1c4d82f72b347650242896413e1bd5a1d8834"
+      }
+    },
+    {
+      "pattern": 0,
+      "seed": 1,
+      "manual_fini": 0,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 1
+          }
+        ],
+        "completed_after": 0,
+        "stdio_handler": 0,
+        "ram_sha256": "a8e3d7c69406e51e32ee769ccd85c85ed6e21a188e20c06fe8cb6c13bef94aa8"
+      }
+    },
+    {
+      "pattern": 0,
+      "seed": 1,
+      "manual_fini": 1,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x33c0"
+          },
+          {
+            "phase": "manual-fini-second",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 1
+          }
+        ],
+        "completed_after": 1,
+        "stdio_handler": 0,
+        "ram_sha256": "547674f7f21ee95875ae32e756b41832147850b361e0f4f4eb670fa6bf711279"
+      }
+    },
+    {
+      "pattern": 0,
+      "seed": 2,
+      "manual_fini": 0,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 2
+          }
+        ],
+        "completed_after": 0,
+        "stdio_handler": 0,
+        "ram_sha256": "171d2956723d0fa684068ed2f3d7644e9b06a9622b46fbc03747c4df1a7080dd"
+      }
+    },
+    {
+      "pattern": 0,
+      "seed": 2,
+      "manual_fini": 1,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x33c0"
+          },
+          {
+            "phase": "manual-fini-second",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 2
+          }
+        ],
+        "completed_after": 1,
+        "stdio_handler": 0,
+        "ram_sha256": "eb55c5bc32af3b29aa0570eb1be0348899713315d6cb6bb4aefcd2eeebaa776b"
+      }
+    },
+    {
+      "pattern": 0,
+      "seed": 3,
+      "manual_fini": 0,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 3
+          }
+        ],
+        "completed_after": 0,
+        "stdio_handler": 0,
+        "ram_sha256": "7b36ebee5f22acedd5cc0ab21a716da0a75ce74018f9c68c7eb385ce73a54633"
+      }
+    },
+    {
+      "pattern": 0,
+      "seed": 3,
+      "manual_fini": 1,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x33c0"
+          },
+          {
+            "phase": "manual-fini-second",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 3
+          }
+        ],
+        "completed_after": 1,
+        "stdio_handler": 0,
+        "ram_sha256": "cd20633c4aa90265cf2d74dc4dbe4c818ffae0a1651449217a7ff8f8062d988f"
+      }
+    },
+    {
+      "pattern": 85,
+      "seed": 0,
+      "manual_fini": 0,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 0
+          }
+        ],
+        "completed_after": 0,
+        "stdio_handler": 0,
+        "ram_sha256": "8af8ecee7d7c7aaa5e5875a67f7f0581ab2d45c88287c910b5bb7059d796181e"
+      }
+    },
+    {
+      "pattern": 85,
+      "seed": 0,
+      "manual_fini": 1,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x33c0"
+          },
+          {
+            "phase": "manual-fini-second",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 0
+          }
+        ],
+        "completed_after": 1,
+        "stdio_handler": 0,
+        "ram_sha256": "1f986399db1514b992d95f30df9106b38579b0867eb20fce6dcb7c7fcb32bb47"
+      }
+    },
+    {
+      "pattern": 85,
+      "seed": 1,
+      "manual_fini": 0,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 1
+          }
+        ],
+        "completed_after": 0,
+        "stdio_handler": 0,
+        "ram_sha256": "97b123c5e2e4294dd11bb4788c32bb8754bf6c24f57e3cfc290f7ca6e38a4853"
+      }
+    },
+    {
+      "pattern": 85,
+      "seed": 1,
+      "manual_fini": 1,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x33c0"
+          },
+          {
+            "phase": "manual-fini-second",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 1
+          }
+        ],
+        "completed_after": 1,
+        "stdio_handler": 0,
+        "ram_sha256": "54630f39397f3a1b2ae7f472b5b7a9af4515da90200cd1ab2c2f2d6577148f48"
+      }
+    },
+    {
+      "pattern": 85,
+      "seed": 2,
+      "manual_fini": 0,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 2
+          }
+        ],
+        "completed_after": 0,
+        "stdio_handler": 0,
+        "ram_sha256": "fcc32a563dfb0e1cae7348e64c830821fd468fe0853ef4164188610635f4b14f"
+      }
+    },
+    {
+      "pattern": 85,
+      "seed": 2,
+      "manual_fini": 1,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x33c0"
+          },
+          {
+            "phase": "manual-fini-second",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 2
+          }
+        ],
+        "completed_after": 1,
+        "stdio_handler": 0,
+        "ram_sha256": "e618f9278b0f7721478e5079e83bb70651fbde742595385013d29cadedff98d7"
+      }
+    },
+    {
+      "pattern": 85,
+      "seed": 3,
+      "manual_fini": 0,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 3
+          }
+        ],
+        "completed_after": 0,
+        "stdio_handler": 0,
+        "ram_sha256": "59657bea1cfd839413ef722f9a52b13d2697f620e75ca640a1932dcc151ed22a"
+      }
+    },
+    {
+      "pattern": 85,
+      "seed": 3,
+      "manual_fini": 1,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x33c0"
+          },
+          {
+            "phase": "manual-fini-second",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 3
+          }
+        ],
+        "completed_after": 1,
+        "stdio_handler": 0,
+        "ram_sha256": "02860665476008a40d9ae994485cadcd325ec02c5d5d461a199677d47e080148"
+      }
+    },
+    {
+      "pattern": 165,
+      "seed": 0,
+      "manual_fini": 0,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 0
+          }
+        ],
+        "completed_after": 0,
+        "stdio_handler": 0,
+        "ram_sha256": "cbf67b80451b485c45b8dcc38d811024a1605f588f926627bbef5dfe4b71554d"
+      }
+    },
+    {
+      "pattern": 165,
+      "seed": 0,
+      "manual_fini": 1,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x33c0"
+          },
+          {
+            "phase": "manual-fini-second",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 0
+          }
+        ],
+        "completed_after": 1,
+        "stdio_handler": 0,
+        "ram_sha256": "6d79bd332565dc3730eedb679429105c2e128d780a6b74a6321b16b82c9b99e4"
+      }
+    },
+    {
+      "pattern": 165,
+      "seed": 1,
+      "manual_fini": 0,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 1
+          }
+        ],
+        "completed_after": 0,
+        "stdio_handler": 0,
+        "ram_sha256": "3d5fe3c8ebfa6678139a3693396ddc39cdf26a382d4cf0f26f6bfc8539259103"
+      }
+    },
+    {
+      "pattern": 165,
+      "seed": 1,
+      "manual_fini": 1,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x33c0"
+          },
+          {
+            "phase": "manual-fini-second",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 1
+          }
+        ],
+        "completed_after": 1,
+        "stdio_handler": 0,
+        "ram_sha256": "3402f0d51d112d297ccfd7bdc17fbccc4c00662d6c147dbefe883674228c8a3a"
+      }
+    },
+    {
+      "pattern": 165,
+      "seed": 2,
+      "manual_fini": 0,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 2
+          }
+        ],
+        "completed_after": 0,
+        "stdio_handler": 0,
+        "ram_sha256": "0dcc75079d95947d264fc708727a949060f8c93d4acb60f10503a93e0f13071e"
+      }
+    },
+    {
+      "pattern": 165,
+      "seed": 2,
+      "manual_fini": 1,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x33c0"
+          },
+          {
+            "phase": "manual-fini-second",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 2
+          }
+        ],
+        "completed_after": 1,
+        "stdio_handler": 0,
+        "ram_sha256": "4087a9f35acb6bb2c1c6da7305db459c9fed5b1499407ec98eab9e07e45caa40"
+      }
+    },
+    {
+      "pattern": 165,
+      "seed": 3,
+      "manual_fini": 0,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 3
+          }
+        ],
+        "completed_after": 0,
+        "stdio_handler": 0,
+        "ram_sha256": "fbcd7aca734774d9b3f4c86c734d2a1f29eb860e38100c524d0abab90ebcaf14"
+      }
+    },
+    {
+      "pattern": 165,
+      "seed": 3,
+      "manual_fini": 1,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x33c0"
+          },
+          {
+            "phase": "manual-fini-second",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 3
+          }
+        ],
+        "completed_after": 1,
+        "stdio_handler": 0,
+        "ram_sha256": "93b7d4701a620ec4607f8510fcf02c32fbc2d80fa1ef6e620938c6035ca8f201"
+      }
+    },
+    {
+      "pattern": 255,
+      "seed": 0,
+      "manual_fini": 0,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 0
+          }
+        ],
+        "completed_after": 0,
+        "stdio_handler": 0,
+        "ram_sha256": "83dcaf66e1a1d977aa0b28ebce155cfc5e8e27bb5ee0d6a39c253e5a30bd784a"
+      }
+    },
+    {
+      "pattern": 255,
+      "seed": 0,
+      "manual_fini": 1,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x33c0"
+          },
+          {
+            "phase": "manual-fini-second",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 0
+          }
+        ],
+        "completed_after": 1,
+        "stdio_handler": 0,
+        "ram_sha256": "e8caf157cccf22ba02131c1ea26ae4288933d8c5bdf2f323525fe9dac1b5ec64"
+      }
+    },
+    {
+      "pattern": 255,
+      "seed": 1,
+      "manual_fini": 0,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 1
+          }
+        ],
+        "completed_after": 0,
+        "stdio_handler": 0,
+        "ram_sha256": "d53a2f64a83060dd238ebdab550f81198cb07bbd302add7344546c3ab485a518"
+      }
+    },
+    {
+      "pattern": 255,
+      "seed": 1,
+      "manual_fini": 1,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x33c0"
+          },
+          {
+            "phase": "manual-fini-second",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 1
+          }
+        ],
+        "completed_after": 1,
+        "stdio_handler": 0,
+        "ram_sha256": "a7b5bd5a79f15c9992420b39654f7a5c46c62fa7cc35c1ac2d627ba0843f07c2"
+      }
+    },
+    {
+      "pattern": 255,
+      "seed": 2,
+      "manual_fini": 0,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 2
+          }
+        ],
+        "completed_after": 0,
+        "stdio_handler": 0,
+        "ram_sha256": "54bc809ce6b995aba47a7bc795784c3ea129bfd8b79da9e516c77ec4a27ab1df"
+      }
+    },
+    {
+      "pattern": 255,
+      "seed": 2,
+      "manual_fini": 1,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x33c0"
+          },
+          {
+            "phase": "manual-fini-second",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 2
+          }
+        ],
+        "completed_after": 1,
+        "stdio_handler": 0,
+        "ram_sha256": "48fbbefd52792f1bafaf81f7248de9601c52d8755b6493bb3cd67ecd1c32e7a2"
+      }
+    },
+    {
+      "pattern": 255,
+      "seed": 3,
+      "manual_fini": 0,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 3
+          }
+        ],
+        "completed_after": 0,
+        "stdio_handler": 0,
+        "ram_sha256": "45df563c9feb6c084125dc449347d03f4158b0fc562564f3fe575beb49387c60"
+      }
+    },
+    {
+      "pattern": 255,
+      "seed": 3,
+      "manual_fini": 1,
+      "matches": true,
+      "observed": {
+        "load": {
+          "copy_word_writes": 241,
+          "zero_word_writes": 428,
+          "vtor": "0x20000400",
+          "init": "0x3435",
+          "fini": "0x3409"
+        },
+        "events": [
+          {
+            "phase": "constructor",
+            "entry": "0xaa44"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x3434"
+          },
+          {
+            "phase": "constructor",
+            "entry": "0x33e0"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "manual-fini-first",
+            "entry": "0x33c0"
+          },
+          {
+            "phase": "manual-fini-second",
+            "entry": "0x3408"
+          },
+          {
+            "phase": "exit",
+            "entry": "0xaa40",
+            "status": 3
+          }
+        ],
+        "completed_after": 1,
+        "stdio_handler": 0,
+        "ram_sha256": "841059be758a47458e993b7697216c901a0adbaff4774ff308b05a9dfd6894d3"
+      }
+    }
+  ],
+  "inputs": {
+    "g2/blobs/official/g2-2.2.6.10/firmware_touch.bin": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+    "g2/analysis/touch-crt-array-binding-2026-10-09/outputs/linked.elf": "85270b1c188fc6d9b6a4c9511e023882f5af7a3428a5aaefdd444723b38ae844",
+    "g2/analysis/touch-startup-provider-successor-2026-10-09/outputs/linked.elf": "d2e53339fd49076150dcff23ddd5a049d766aac49ce4877f812cde8c4df6532f",
+    "g2/analysis/touch-newlib14-startup-exit-2026-10-09/outputs/exit/linked.elf": "17787f953acda9e19ee5217c85f097b309188d28a5fea3286ff4ab73b204acf1"
+  },
+  "limits": "Actual stock copy/zero loop and actual image callbacks, source-produced constructor/CRT and binary-attributed crtbegin provider. Starts after hardware/system initialization at467E, stops before reset C call, then explicitly invokes constructor. Simulated VTOR register backing, not NVIC delivery. Manual finalizer invocation is labeled and is not exit reachability. No full reset/application run or live device state."
+}

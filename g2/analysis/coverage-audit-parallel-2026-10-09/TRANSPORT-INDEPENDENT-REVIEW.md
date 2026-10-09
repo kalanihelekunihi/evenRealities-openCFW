@@ -1,0 +1,17 @@
+# Independent locked-image EM9305 transport review
+
+PASS:3069checks, including3032listed instructionrecords directly compared against locked2.2.6.10 packagebytes. Reproducible transport_verify.py; fullcheckreceipt TRANSPORT-INDEPENDENT-VERIFICATION.json. Noexecution/emulator/device/index/canonicalchanges.
+
+Authenticated package SHA36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863, allsixselectedintervalhashes,fourliteralvalues,HciDrvRadioBootsymbolrecord and separate newercomparisonimage/emulatoraudit hashes. Symbol296bytes[4B48A6,4B49CE) hashes6521b6ef083e2d005e890c922bcd93b2271e7d256b0543e2471f5e797cda09bd. No newer-imageaddress was used as old-imagecoordinate.
+
+Strong firmware-contract conclusion:4B48C8 actualMOVSr0,#6;4B48CA independently decodedThumbBL52DD94. Driverpreservesmodule inr6 at52DD9A andpassesr0=r6 into55C2BC at52DDF8. HAL accepts module<8, computeshandleoffset2216*module, storesmodule at handle+4 at55C320, returns thathandle throughr1. Configure55CAD4 loads handle+4 intor6;55CADA literal55CF38 is40050000;55CAE2 actualencodedbase+(r6<<12) gives40056000 for6. This is IOM6 firmwareselection, not unresolved physical-pad inference. The report's correction to older“which IOM”uncertainty is justified.
+
+Readycontract:literal52EBA4=40010410 andoriginalUBFXbit21 atreset52E508/transaction52DF9A identifyGPIORD3bit21→117. Bootregisters pin117 at4B49A8;IRQ59priority4 constants at4B49BA/BC,callback/enablecalls remain existing decodedstatic bindings. DedicatedBLEIF-statusregister interpretation would be misleading:40010410 isApolloGPIOreadregister.
+
+Controlpins:originalMOVS+independentlydecodedBL sequences bindCS149low at52DF6A–6E andreset93low/high at52E4E0–F2 toGPIOwriter480FD6. InspectedGPIOwriter banks pins through(pin>>5)&7 andbitpin&31;action0selects40010458clear,action1selects4001043Cset. GPIO15routine52E854 haslow/highwrites anddelays16;callerpasses40at52E8F8. These authenticateApollo-sidecontrol operations, not measuredEMnCS/ENABLE/GPIO5netcontinuity. Preserve exactpulseargument rather than infer physicalpulsefrequency/timing.
+
+Newer2.2.9.22compareimage hash35844c95c6ffe62baca961d396c870225cdc91372f253abaece40c3e99a1c3d2 andemulator bleif-em9305-architecture.md hashb2312df270518eb8c1868ddd345902218e80357cfb922e4129aa656e2299bcff independentlychecked. Newer addresses4C669E/544114/574328 remain separate; this review does not claimeverynewerdisassembly/callsemantic independentlyrecovered. Crucialold-imagebinding isnowfresh andstandswithoutaddress transplantation.
+
+Reconciliation: OpenCFW em9305component IOMuncertainty isstale forfirmwareselection. Hardwarepinout/reservation question survives asphysicalintegration evidence, anddoesnotinvalidate executablemodule6. EmulatorIOM6binding nowagreeswithlockedoldfirmwarecontract, beyonditspreviouslydocumentednewer-imagebasis. This advances oneboardcontract; itdoesnotvalidate behavioralEM9305HCIimplementation,stockARCcontrollerexecution,IRQdelivery,RFlayer,timing,secureboot,orwhole-devicefidelity. GPIO61/62/63,136,138purposesnotresolvedbythispacket.
+
+Evidence: ../source-discovery-parallel-2026-10-09/TRANSPORT-CROSS-VERSION-COMPARISON.md andTRANSPORT-CROSS-VERSION-RECEIPT.json; g2/symbols/apollo_main.tsv; fouroldimage staticdisassemblies. PriorFRESH-EMULATOR-FIDELITY-REVIEW.md cross-versionIOMlead isnowresolved atfirmwareselectionlevel; canonicalowner mayreconcileconsolidateddocumentation separately.

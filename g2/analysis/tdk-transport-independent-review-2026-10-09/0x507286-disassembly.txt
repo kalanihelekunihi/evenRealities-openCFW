@@ -1,0 +1,29 @@
+00507286: movs r2, #0x20
+00507288: movs r1, #1
+0050728a: movs r0, r5
+0050728c: bl #0x5080be
+00507290: orrs r4, r0
+00507292: movs r0, r5
+00507294: bl #0x5078d2
+00507298: orrs r4, r0
+0050729a: ldr.w r7, [pc, #0x440]
+0050729e: movs r3, r7
+005072a0: movs r2, #0x7d
+005072a2: mov.w r1, #0xc80
+005072a6: movs r0, r5
+005072a8: bl #0x508e92
+005072ac: orrs r4, r0
+005072ae: movs r2, #4
+005072b0: adds.w r1, r7, #8
+005072b4: add.w sb, sp, #4
+005072b8: mov r0, sb
+005072ba: bl #0x439be4
+005072be: add r3, sp, #4
+005072c0: movs r2, #4
+005072c2: movs r1, #0xb4
+005072c4: movs r0, r5
+005072c6: bl #0x508e92
+005072ca: orrs r4, r0
+005072cc: adds.w r3, r8, #0xa0
+005072d0: movs r2, #4
+005072d2: mov.w r1, #0xc90

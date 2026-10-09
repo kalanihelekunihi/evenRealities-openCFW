@@ -1,0 +1,264 @@
+{
+  "argv": [
+    "docker",
+    "run",
+    "--rm",
+    "--platform",
+    "linux/amd64",
+    "--network",
+    "none",
+    "--cap-drop",
+    "ALL",
+    "--security-opt",
+    "no-new-privileges",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi:/tool:ro",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-crt-array-binding-2026-10-09/outputs:/bindings:ro",
+    "-v",
+    "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/touch-crtstuff-source-rebuild-2026-10-09/outputs:/out",
+    "ubuntu@sha256:534baea6a22c03a63003dbc8dbe78fe34bc0d7e595d9a9dc9834884ff530eb55",
+    "/tool/bin/arm-none-eabi-ld",
+    "-T",
+    "/bindings/bindings.ld",
+    "/out/crtbegin.o",
+    "-o",
+    "/out/linked-source.elf"
+  ],
+  "exit_code": 0,
+  "diagnostics": "",
+  "relocation_checks": [
+    {
+      "section": ".init_array",
+      "relocations_identical": true,
+      "source_relocations": [
+        {
+          "offset": 0,
+          "type": 2,
+          "symbol": "frame_dummy",
+          "symbol_value": 1,
+          "symbol_section": ".text.frame_dummy"
+        }
+      ]
+    },
+    {
+      "section": ".fini_array",
+      "relocations_identical": true,
+      "source_relocations": [
+        {
+          "offset": 0,
+          "type": 2,
+          "symbol": "__do_global_dtors_aux",
+          "symbol_value": 1,
+          "symbol_section": ".text.__do_global_dtors_aux"
+        }
+      ]
+    },
+    {
+      "section": ".text.deregister_tm_clones",
+      "relocations_identical": true,
+      "source_relocations": [
+        {
+          "offset": 20,
+          "type": 2,
+          "symbol": "",
+          "symbol_value": 0,
+          "symbol_section": ".tm_clone_table"
+        },
+        {
+          "offset": 24,
+          "type": 2,
+          "symbol": "__TMC_END__",
+          "symbol_value": 0,
+          "symbol_section": "SHN_UNDEF"
+        },
+        {
+          "offset": 28,
+          "type": 2,
+          "symbol": "_ITM_deregisterTMCloneTable",
+          "symbol_value": 0,
+          "symbol_section": "SHN_UNDEF"
+        }
+      ]
+    },
+    {
+      "section": ".text.register_tm_clones",
+      "relocations_identical": true,
+      "source_relocations": [
+        {
+          "offset": 28,
+          "type": 2,
+          "symbol": "",
+          "symbol_value": 0,
+          "symbol_section": ".tm_clone_table"
+        },
+        {
+          "offset": 32,
+          "type": 2,
+          "symbol": "__TMC_END__",
+          "symbol_value": 0,
+          "symbol_section": "SHN_UNDEF"
+        },
+        {
+          "offset": 36,
+          "type": 2,
+          "symbol": "_ITM_registerTMCloneTable",
+          "symbol_value": 0,
+          "symbol_section": "SHN_UNDEF"
+        }
+      ]
+    },
+    {
+      "section": ".text.__do_global_dtors_aux",
+      "relocations_identical": true,
+      "source_relocations": [
+        {
+          "offset": 10,
+          "type": 10,
+          "symbol": "deregister_tm_clones",
+          "symbol_value": 1,
+          "symbol_section": ".text.deregister_tm_clones"
+        },
+        {
+          "offset": 22,
+          "type": 10,
+          "symbol": "__deregister_frame_info",
+          "symbol_value": 0,
+          "symbol_section": "SHN_UNDEF"
+        },
+        {
+          "offset": 32,
+          "type": 2,
+          "symbol": "",
+          "symbol_value": 0,
+          "symbol_section": ".bss.completed.1"
+        },
+        {
+          "offset": 36,
+          "type": 2,
+          "symbol": "__deregister_frame_info",
+          "symbol_value": 0,
+          "symbol_section": "SHN_UNDEF"
+        },
+        {
+          "offset": 40,
+          "type": 2,
+          "symbol": "",
+          "symbol_value": 0,
+          "symbol_section": ".eh_frame"
+        }
+      ]
+    },
+    {
+      "section": ".text.frame_dummy",
+      "relocations_identical": true,
+      "source_relocations": [
+        {
+          "offset": 12,
+          "type": 10,
+          "symbol": "__register_frame_info",
+          "symbol_value": 0,
+          "symbol_section": "SHN_UNDEF"
+        },
+        {
+          "offset": 16,
+          "type": 10,
+          "symbol": "register_tm_clones",
+          "symbol_value": 1,
+          "symbol_section": ".text.register_tm_clones"
+        },
+        {
+          "offset": 24,
+          "type": 2,
+          "symbol": "__register_frame_info",
+          "symbol_value": 0,
+          "symbol_section": "SHN_UNDEF"
+        },
+        {
+          "offset": 28,
+          "type": 2,
+          "symbol": "",
+          "symbol_value": 0,
+          "symbol_section": ".bss.object.0"
+        },
+        {
+          "offset": 32,
+          "type": 2,
+          "symbol": "",
+          "symbol_value": 0,
+          "symbol_section": ".eh_frame"
+        }
+      ]
+    }
+  ],
+  "inputs": {
+    "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/lib/gcc/arm-none-eabi/14.2.1/thumb/v6-m/nofp/crtbegin.o": "6dca5fc1a47549e28b271fbbfa4ecbb61c5160983f2aa332c7265447bc1b6b0f",
+    "g2/analysis/touch-crtstuff-source-rebuild-2026-10-09/outputs/crtbegin.o": "8ac3ab1c8860a91acd384f1029e1b0dbacc5acfb6dfc91d06eccf92ed38f9135",
+    "g2/analysis/touch-crt-array-binding-2026-10-09/outputs/bindings.ld": "a8173010ec201e0293075a42521966ceacb8def3a25d2d9b996aef9b2e71d1a8"
+  },
+  "independent_review": "pending",
+  "runtime_source_subtotal_before_review": 922,
+  "source_upgrade_pending_bytes": 152,
+  "array_data_bytes_separate": 8,
+  "limits": "Focused genuine source-produced provider bytes, not complete compiler/vendor object/debug build reproduction or campaign admission. Prior32instruction cases reused only if source-linked sections equal audited provider-linked sections.",
+  "sections": [
+    {
+      "section": ".text.deregister",
+      "address": "0x33c0",
+      "image_flash": "0x33c0",
+      "bytes": 32,
+      "exact_stock": true,
+      "exact_audited_provider": true,
+      "sha256": "a8afbe9c07812e93c981ad82d5e287962dead9f850d117d86fc4ebc91075bdbe"
+    },
+    {
+      "section": ".text.register",
+      "address": "0x33e0",
+      "image_flash": "0x33e0",
+      "bytes": 40,
+      "exact_stock": true,
+      "exact_audited_provider": true,
+      "sha256": "9841581c74076db53c2cf2e82b202580a184c96cbc2bf77c039ca109e0357d89"
+    },
+    {
+      "section": ".text.dtors",
+      "address": "0x3408",
+      "image_flash": "0x3408",
+      "bytes": 44,
+      "exact_stock": true,
+      "exact_audited_provider": true,
+      "sha256": "d5ffeb516b9b4170d57694b0d2b07650705e9a341e5d93b1bd378b5b6211d60d"
+    },
+    {
+      "section": ".text.frame",
+      "address": "0x3434",
+      "image_flash": "0x3434",
+      "bytes": 36,
+      "exact_stock": true,
+      "exact_audited_provider": true,
+      "sha256": "51544932bd515c49abc1c50c0db93739c087774111e39ded3b2c922000805b68"
+    },
+    {
+      "section": ".init_array",
+      "address": "0x2000087c",
+      "image_flash": "0xb948",
+      "bytes": 4,
+      "exact_stock": true,
+      "exact_audited_provider": true,
+      "sha256": "ecbf78f43d9fa245cc95ecbcbb4fc25495ecbe307a0ce8ff3b9fb8ccbdb0d95a"
+    },
+    {
+      "section": ".fini_array",
+      "address": "0x20000880",
+      "image_flash": "0xb94c",
+      "bytes": 4,
+      "exact_stock": true,
+      "exact_audited_provider": true,
+      "sha256": "bc12d20e7722b75feff44367d4b40a4b3fc23c8e1827fb92ec90a1255b0c34c8"
+    }
+  ],
+  "all_stock_and_provider_equal": true,
+  "linked_source_elf_sha256": "4492763e1c7ee131c58e26ed0157043a51add30903c16b28710479b30013201f",
+  "reused_original_cases": 32,
+  "reused_original_receipt_sha256": "5ead02749a6f6878ce4ec02866efa88e8ed268a630d3058efd1c7d24b26b292c"
+}
