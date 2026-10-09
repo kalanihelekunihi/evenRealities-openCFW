@@ -1,0 +1,26 @@
+{
+  "review_id": 29987,
+  "candidate": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-dispatch10-or72-event769-frame48-middle-30386-map/001",
+  "candidate_receipt_sha256": "ededa4a8472d32b3fd312af9629afc39669867d8a1cd0edfbae5bc456c5f8f50",
+  "source_pin": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_file_hashes_match_receipt": {
+    "references.json": true,
+    "instructions.json": true,
+    "replay.py": true,
+    "pseudocode.md": true,
+    "disassembly.txt": true
+  },
+  "fixture_count_or_static_extent": "64 bytes; 22 independently decoded instructions",
+  "isolated_replay": {
+    "result": "PASS: independent reassembly/decode covers [0x4EB0DC,0x4EB11C) with no gaps or byte mismatches",
+    "destination": "temporary directory; no candidate files modified"
+  },
+  "assessment": "PASS_SCOPED",
+  "accepted": false,
+  "summary": "Verified event769 bit1 path, separate bit0/bit2 query gates, SP arguments, literal references, and modified-immediate flags.",
+  "scope_limits": [
+    "Only the exact candidate interval is supported.",
+    "Continuation is excluded.",
+    "No helper behavior, global coverage, source completeness, freeze, or byte equality is established."
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "review_id": 29983,
+  "candidate": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-dispatch68-event760-inputone-helper-frame48-middle-30382-map/001",
+  "candidate_receipt_sha256": "1c01ca328cd3203202d271c84abc2498fef8ece48d9731cd23df7a6c4afe9142",
+  "source_pin": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_file_hashes_match_receipt": {
+    "references.json": true,
+    "instructions.json": true,
+    "replay.py": true,
+    "pseudocode.md": true,
+    "disassembly.txt": true
+  },
+  "fixture_count_or_static_extent": "72 bytes; 25 independently decoded instructions",
+  "isolated_replay": {
+    "result": "PASS: independent reassembly/decode covers [0x4EB04A,0x4EB092) with no gaps or byte mismatches",
+    "destination": "temporary directory; no candidate files modified"
+  },
+  "assessment": "PASS_SCOPED",
+  "accepted": false,
+  "summary": "Verified bit-gated event760 diagnostics, narrow literal references, modified-immediate flags, and input-one helper call with actual state.",
+  "scope_limits": [
+    "Only the exact candidate interval is supported.",
+    "The branch after the helper call is outside this map.",
+    "No helper behavior, global coverage, source completeness, freeze, or byte equality is established."
+  ]
+}

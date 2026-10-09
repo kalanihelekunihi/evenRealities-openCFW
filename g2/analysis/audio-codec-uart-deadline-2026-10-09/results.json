@@ -1,0 +1,2544 @@
+{
+  "status": "PASS",
+  "cases": 112,
+  "elf_sha256": "0bf4536264114f6fbf726c62b2de13307cb00e8bd9c8297c2294ad2b8144fc79",
+  "raw_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "comparisons": [
+    {
+      "fixture": {
+        "start": 0,
+        "timeout": 0,
+        "arrival": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          0
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 0,
+        "timeout": 0,
+        "arrival": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          0
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000001000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 0,
+        "timeout": 0,
+        "arrival": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          0
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 0,
+        "timeout": 0,
+        "arrival": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          0
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 0,
+        "timeout": 1,
+        "arrival": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          0,
+          1
+        ],
+        "delay_arguments": [
+          1
+        ],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 0,
+        "timeout": 1,
+        "arrival": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          0
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 0,
+        "timeout": 1,
+        "arrival": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          0,
+          1
+        ],
+        "delay_arguments": [
+          1
+        ],
+        "ring": "b03107203f0000000000000001000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 0,
+        "timeout": 1,
+        "arrival": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          0,
+          1
+        ],
+        "delay_arguments": [
+          1
+        ],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 0,
+        "timeout": 2,
+        "arrival": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          0,
+          1,
+          2
+        ],
+        "delay_arguments": [
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 0,
+        "timeout": 2,
+        "arrival": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          0
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 0,
+        "timeout": 2,
+        "arrival": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          0,
+          1
+        ],
+        "delay_arguments": [
+          1
+        ],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 0,
+        "timeout": 2,
+        "arrival": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          0,
+          1,
+          2
+        ],
+        "delay_arguments": [
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 0,
+        "timeout": 5,
+        "arrival": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "delay_arguments": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 0,
+        "timeout": 5,
+        "arrival": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          0
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 0,
+        "timeout": 5,
+        "arrival": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          0,
+          1
+        ],
+        "delay_arguments": [
+          1
+        ],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 0,
+        "timeout": 5,
+        "arrival": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "delay_arguments": [
+          1,
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 0,
+        "timeout": 2147483647,
+        "arrival": -1
+      },
+      "observed": {
+        "stop": [
+          "before-delay-budget-cut"
+        ],
+        "return": null,
+        "tick_reads": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "delay_arguments": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 0,
+        "timeout": 2147483647,
+        "arrival": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          0
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 0,
+        "timeout": 2147483647,
+        "arrival": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          0,
+          1
+        ],
+        "delay_arguments": [
+          1
+        ],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 0,
+        "timeout": 2147483647,
+        "arrival": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "delay_arguments": [
+          1,
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 0,
+        "timeout": 2147483648,
+        "arrival": -1
+      },
+      "observed": {
+        "stop": [
+          "before-delay-budget-cut"
+        ],
+        "return": null,
+        "tick_reads": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "delay_arguments": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 0,
+        "timeout": 2147483648,
+        "arrival": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          0
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 0,
+        "timeout": 2147483648,
+        "arrival": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          0,
+          1
+        ],
+        "delay_arguments": [
+          1
+        ],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 0,
+        "timeout": 2147483648,
+        "arrival": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "delay_arguments": [
+          1,
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 0,
+        "timeout": 4294967295,
+        "arrival": -1
+      },
+      "observed": {
+        "stop": [
+          "before-delay-budget-cut"
+        ],
+        "return": null,
+        "tick_reads": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ],
+        "delay_arguments": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 0,
+        "timeout": 4294967295,
+        "arrival": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          0
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 0,
+        "timeout": 4294967295,
+        "arrival": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          0,
+          1
+        ],
+        "delay_arguments": [
+          1
+        ],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 0,
+        "timeout": 4294967295,
+        "arrival": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "delay_arguments": [
+          1,
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 100,
+        "timeout": 0,
+        "arrival": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          100
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 100,
+        "timeout": 0,
+        "arrival": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          100
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000001000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 100,
+        "timeout": 0,
+        "arrival": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          100
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 100,
+        "timeout": 0,
+        "arrival": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          100
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 100,
+        "timeout": 1,
+        "arrival": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          100,
+          101
+        ],
+        "delay_arguments": [
+          1
+        ],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 100,
+        "timeout": 1,
+        "arrival": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          100
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 100,
+        "timeout": 1,
+        "arrival": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          100,
+          101
+        ],
+        "delay_arguments": [
+          1
+        ],
+        "ring": "b03107203f0000000000000001000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 100,
+        "timeout": 1,
+        "arrival": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          100,
+          101
+        ],
+        "delay_arguments": [
+          1
+        ],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 100,
+        "timeout": 2,
+        "arrival": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          100,
+          101,
+          102
+        ],
+        "delay_arguments": [
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 100,
+        "timeout": 2,
+        "arrival": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          100
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 100,
+        "timeout": 2,
+        "arrival": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          100,
+          101
+        ],
+        "delay_arguments": [
+          1
+        ],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 100,
+        "timeout": 2,
+        "arrival": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          100,
+          101,
+          102
+        ],
+        "delay_arguments": [
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 100,
+        "timeout": 5,
+        "arrival": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          100,
+          101,
+          102,
+          103,
+          104,
+          105
+        ],
+        "delay_arguments": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 100,
+        "timeout": 5,
+        "arrival": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          100
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 100,
+        "timeout": 5,
+        "arrival": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          100,
+          101
+        ],
+        "delay_arguments": [
+          1
+        ],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 100,
+        "timeout": 5,
+        "arrival": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          100,
+          101,
+          102,
+          103
+        ],
+        "delay_arguments": [
+          1,
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 100,
+        "timeout": 2147483647,
+        "arrival": -1
+      },
+      "observed": {
+        "stop": [
+          "before-delay-budget-cut"
+        ],
+        "return": null,
+        "tick_reads": [
+          100,
+          101,
+          102,
+          103,
+          104,
+          105,
+          106,
+          107
+        ],
+        "delay_arguments": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 100,
+        "timeout": 2147483647,
+        "arrival": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          100
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 100,
+        "timeout": 2147483647,
+        "arrival": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          100,
+          101
+        ],
+        "delay_arguments": [
+          1
+        ],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 100,
+        "timeout": 2147483647,
+        "arrival": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          100,
+          101,
+          102,
+          103
+        ],
+        "delay_arguments": [
+          1,
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 100,
+        "timeout": 2147483648,
+        "arrival": -1
+      },
+      "observed": {
+        "stop": [
+          "before-delay-budget-cut"
+        ],
+        "return": null,
+        "tick_reads": [
+          100,
+          101,
+          102,
+          103,
+          104,
+          105,
+          106,
+          107
+        ],
+        "delay_arguments": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 100,
+        "timeout": 2147483648,
+        "arrival": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          100
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 100,
+        "timeout": 2147483648,
+        "arrival": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          100,
+          101
+        ],
+        "delay_arguments": [
+          1
+        ],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 100,
+        "timeout": 2147483648,
+        "arrival": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          100,
+          101,
+          102,
+          103
+        ],
+        "delay_arguments": [
+          1,
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 100,
+        "timeout": 4294967295,
+        "arrival": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          100
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 100,
+        "timeout": 4294967295,
+        "arrival": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          100
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000001000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 100,
+        "timeout": 4294967295,
+        "arrival": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          100
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 100,
+        "timeout": 4294967295,
+        "arrival": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          100
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967294,
+        "timeout": 0,
+        "arrival": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          4294967294
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967294,
+        "timeout": 0,
+        "arrival": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          4294967294
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000001000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967294,
+        "timeout": 0,
+        "arrival": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          4294967294
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967294,
+        "timeout": 0,
+        "arrival": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          4294967294
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967294,
+        "timeout": 1,
+        "arrival": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          4294967294,
+          4294967295
+        ],
+        "delay_arguments": [
+          1
+        ],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967294,
+        "timeout": 1,
+        "arrival": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          4294967294
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967294,
+        "timeout": 1,
+        "arrival": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          4294967294,
+          4294967295
+        ],
+        "delay_arguments": [
+          1
+        ],
+        "ring": "b03107203f0000000000000001000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967294,
+        "timeout": 1,
+        "arrival": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          4294967294,
+          4294967295
+        ],
+        "delay_arguments": [
+          1
+        ],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967294,
+        "timeout": 2,
+        "arrival": -1
+      },
+      "observed": {
+        "stop": [
+          "before-delay-budget-cut"
+        ],
+        "return": null,
+        "tick_reads": [
+          4294967294,
+          4294967295,
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "delay_arguments": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967294,
+        "timeout": 2,
+        "arrival": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          4294967294
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967294,
+        "timeout": 2,
+        "arrival": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          4294967294,
+          4294967295
+        ],
+        "delay_arguments": [
+          1
+        ],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967294,
+        "timeout": 2,
+        "arrival": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          4294967294,
+          4294967295,
+          0,
+          1
+        ],
+        "delay_arguments": [
+          1,
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967294,
+        "timeout": 5,
+        "arrival": -1
+      },
+      "observed": {
+        "stop": [
+          "before-delay-budget-cut"
+        ],
+        "return": null,
+        "tick_reads": [
+          4294967294,
+          4294967295,
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "delay_arguments": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967294,
+        "timeout": 5,
+        "arrival": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          4294967294
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967294,
+        "timeout": 5,
+        "arrival": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          4294967294,
+          4294967295
+        ],
+        "delay_arguments": [
+          1
+        ],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967294,
+        "timeout": 5,
+        "arrival": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          4294967294,
+          4294967295,
+          0,
+          1
+        ],
+        "delay_arguments": [
+          1,
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967294,
+        "timeout": 2147483647,
+        "arrival": -1
+      },
+      "observed": {
+        "stop": [
+          "before-delay-budget-cut"
+        ],
+        "return": null,
+        "tick_reads": [
+          4294967294,
+          4294967295,
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "delay_arguments": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967294,
+        "timeout": 2147483647,
+        "arrival": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          4294967294
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967294,
+        "timeout": 2147483647,
+        "arrival": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          4294967294,
+          4294967295
+        ],
+        "delay_arguments": [
+          1
+        ],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967294,
+        "timeout": 2147483647,
+        "arrival": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          4294967294,
+          4294967295,
+          0,
+          1
+        ],
+        "delay_arguments": [
+          1,
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967294,
+        "timeout": 2147483648,
+        "arrival": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          4294967294
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967294,
+        "timeout": 2147483648,
+        "arrival": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          4294967294
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000001000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967294,
+        "timeout": 2147483648,
+        "arrival": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          4294967294
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967294,
+        "timeout": 2147483648,
+        "arrival": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          4294967294
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967294,
+        "timeout": 4294967295,
+        "arrival": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          4294967294
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967294,
+        "timeout": 4294967295,
+        "arrival": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          4294967294
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000001000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967294,
+        "timeout": 4294967295,
+        "arrival": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          4294967294
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967294,
+        "timeout": 4294967295,
+        "arrival": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          4294967294
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967295,
+        "timeout": 0,
+        "arrival": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          4294967295
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967295,
+        "timeout": 0,
+        "arrival": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          4294967295
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000001000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967295,
+        "timeout": 0,
+        "arrival": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          4294967295
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967295,
+        "timeout": 0,
+        "arrival": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          4294967295
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967295,
+        "timeout": 1,
+        "arrival": -1
+      },
+      "observed": {
+        "stop": [
+          "before-delay-budget-cut"
+        ],
+        "return": null,
+        "tick_reads": [
+          4294967295,
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "delay_arguments": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967295,
+        "timeout": 1,
+        "arrival": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          4294967295
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967295,
+        "timeout": 1,
+        "arrival": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          4294967295,
+          0
+        ],
+        "delay_arguments": [
+          1
+        ],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967295,
+        "timeout": 1,
+        "arrival": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          4294967295,
+          0,
+          1,
+          2
+        ],
+        "delay_arguments": [
+          1,
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967295,
+        "timeout": 2,
+        "arrival": -1
+      },
+      "observed": {
+        "stop": [
+          "before-delay-budget-cut"
+        ],
+        "return": null,
+        "tick_reads": [
+          4294967295,
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "delay_arguments": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967295,
+        "timeout": 2,
+        "arrival": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          4294967295
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967295,
+        "timeout": 2,
+        "arrival": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          4294967295,
+          0
+        ],
+        "delay_arguments": [
+          1
+        ],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967295,
+        "timeout": 2,
+        "arrival": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          4294967295,
+          0,
+          1,
+          2
+        ],
+        "delay_arguments": [
+          1,
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967295,
+        "timeout": 5,
+        "arrival": -1
+      },
+      "observed": {
+        "stop": [
+          "before-delay-budget-cut"
+        ],
+        "return": null,
+        "tick_reads": [
+          4294967295,
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "delay_arguments": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967295,
+        "timeout": 5,
+        "arrival": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          4294967295
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967295,
+        "timeout": 5,
+        "arrival": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          4294967295,
+          0
+        ],
+        "delay_arguments": [
+          1
+        ],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967295,
+        "timeout": 5,
+        "arrival": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          4294967295,
+          0,
+          1,
+          2
+        ],
+        "delay_arguments": [
+          1,
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967295,
+        "timeout": 2147483647,
+        "arrival": -1
+      },
+      "observed": {
+        "stop": [
+          "before-delay-budget-cut"
+        ],
+        "return": null,
+        "tick_reads": [
+          4294967295,
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "delay_arguments": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967295,
+        "timeout": 2147483647,
+        "arrival": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          4294967295
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967295,
+        "timeout": 2147483647,
+        "arrival": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          4294967295,
+          0
+        ],
+        "delay_arguments": [
+          1
+        ],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967295,
+        "timeout": 2147483647,
+        "arrival": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 1,
+        "tick_reads": [
+          4294967295,
+          0,
+          1,
+          2
+        ],
+        "delay_arguments": [
+          1,
+          1,
+          1
+        ],
+        "ring": "b03107203f0000000100000001000000",
+        "destination": "a3"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967295,
+        "timeout": 2147483648,
+        "arrival": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          4294967295
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967295,
+        "timeout": 2147483648,
+        "arrival": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          4294967295
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000001000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967295,
+        "timeout": 2147483648,
+        "arrival": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          4294967295
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967295,
+        "timeout": 2147483648,
+        "arrival": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          4294967295
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967295,
+        "timeout": 4294967295,
+        "arrival": -1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          4294967295
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967295,
+        "timeout": 4294967295,
+        "arrival": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          4294967295
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000001000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967295,
+        "timeout": 4294967295,
+        "arrival": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          4294967295
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    },
+    {
+      "fixture": {
+        "start": 4294967295,
+        "timeout": 4294967295,
+        "arrival": 3
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4294967295,
+        "tick_reads": [
+          4294967295
+        ],
+        "delay_arguments": [],
+        "ring": "b03107203f0000000000000000000000",
+        "destination": "ee"
+      }
+    }
+  ],
+  "limits": "Actual original/source deadline arithmetic and drain. Tick/delay/arrival are explicit synthetic providers; eight-delay cut is not hardware hang evidence."
+}

@@ -1,0 +1,31 @@
+{
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "source": "g2/components/audio/pending_resume_offline/resume.c",
+  "source_sha256": "d17b129c724b4b47fcb06889219bc0b442f1364f20fc45c238ca0bfb51dba9c3",
+  "notifier_source_sha256": "9109a27d92b066ad885ddf5b004d63d9000bf5dbf16759bb210cbeb236e96882",
+  "yield_source_sha256": "dd2e9e9cfe3ff315a71001d1ccf8edccb20f89de03c577c179969a8f4bbe9a61",
+  "elf": "/tmp/opencfw-notifier-resume/resume.elf",
+  "elf_sha256": "22e1bb2a6289ca8c088af3455bfc45047c9e8cd81ae1958aba34d22e063b84f3",
+  "link_script": "audio_resume_enter = 0x4420d1; audio_resume_exit = 0x4420e9; audio_resume_yield = opencfw_resume_yield_request; audio_resume_next_unblock = 0x455877; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }",
+  "sources_and_headers": {
+    "g2/components/audio/pending_resume_offline/resume.c": "d17b129c724b4b47fcb06889219bc0b442f1364f20fc45c238ca0bfb51dba9c3",
+    "g2/components/audio/uart_rx_notifier_offline/notify.c": "9109a27d92b066ad885ddf5b004d63d9000bf5dbf16759bb210cbeb236e96882",
+    "g2/components/audio/uart_rx_notifier_offline/notify.h": "78e29df0eaacafd30804f4d202aeb770ccf29cb02a4b70946e035b48ce80ab59",
+    "g2/components/audio/uart_rx_stream_offline/support.c": "b47f30562c9d8bf635fddbc2cf9393102410937263935805ba0f55597231bd51",
+    "g2/components/audio/uart_rx_stream_offline/compat.h": "745383c5607432a58996f19554f7c5f0c4c1797560d5cca2e1a916f0d69e27ef",
+    "g2/components/foundation/freertos_resume/yield_request.c": "dd2e9e9cfe3ff315a71001d1ccf8edccb20f89de03c577c179969a8f4bbe9a61",
+    "g2/components/foundation/freertos_resume/resume.h": "70b40111ce95d89cc95a6429e2e2f037d4d16920d4be7be5ee1e0ccc502abdfd",
+    "g2/components/foundation/freertos_ready/ready.h": "b88903df66fdfa00e97318afc5372de9ad2a5750b9d0ec32454e35042c7bfd7b",
+    "g2/components/audio/notification_wake_offline/wake.h": "34ffd5555001498cc6e9dd0b51b4d6f93687001e6314d4a65640575d954b22ac"
+  },
+  "limits": "420 notifier-to-resume comparisons. Actual critical/next-unblock peers; zero pending ticks; coherent synthetic tasks/lists. No exception delivery; native reconstructed yield writes SCB pending bit then actual critical exit completes."
+}

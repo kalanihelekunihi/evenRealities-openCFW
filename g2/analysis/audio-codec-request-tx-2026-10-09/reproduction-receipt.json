@@ -1,0 +1,32 @@
+{
+  "elf": "/tmp/opencfw-codec-request/drain.elf",
+  "elf_sha256": "0cba050daedc25cabbcb08c80a848996690afb7ad08f1355c35ac5eeceade6da",
+  "sources": {
+    "g2/components/audio/codec_request_offline/request.c": "4958b953e164165879c3648ecd60dfca391121a0a5016c44b19af04c5df39b10",
+    "g2/components/audio/codec_response_offline/response.c": "0e22e2b45c3e329c415e0b76b705e22a8939140c8de7acd67a5c190183b9f4a5",
+    "g2/components/audio/codec_uart_drain_offline/drain.c": "eac8a63efe99ad2d819cff4e4db561d3f5cf5e5f9385ade30fd0d6ed907f710e",
+    "g2/components/audio/codec_request_offline/hal_bridge.c": "01f25d618de28d961981a300bd4631a2637b3a5ad8b568d81f909ca43bd4df82",
+    "g2/components/audio/uart_tx_offline/am_hal_queue.c": "141d27bdd76226aba0712ae08b06df40bfd2f16aa1deace969e5a0d01cad574a",
+    "g2/components/audio/uart_tx_offline/am_hal_uart.c": "7fe6809637b77530ffd758edeacc83d18495ff39d8bf09f7105eea7587be9344",
+    "g2/components/audio/codec_request_offline/request.h": "c5e0076774629d864aa88f1cc0a33d5f88c71608e7aaf652ac458bca675e2584",
+    "g2/components/audio/codec_response_offline/response.h": "ae852b29b1b59f7bfc771c3e1509d278d644f9851b48859c265b66c324d1aa5d",
+    "g2/components/audio/uart_tx_offline/compat.h": "61a675d80b148374eb0720266788108371f474453a4c90f531cd4787b3a61443",
+    "g2/components/audio/codec_uart_drain_offline/drain.h": "0099b093f0f3479d96b8625485f21252d8a8f24e54897f3d0081abbf2b28d6a8",
+    "g2/components/audio/uart_rx_consumer_offline/ring.h": "4b9187940c795dd9a910e6d286c0751c5305e4d34fecd0ac9a90e05252e14e5a"
+  },
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "flags": [
+    "-mcpu=cortex-m33",
+    "-mthumb",
+    "-Og",
+    "-fkeep-static-functions",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "link_script": "codec_wrapper_delay = 0x4807A1; am_hal_delay_us = 0x4807A1; codec_tick_snapshot = 0x58FAC9; codec_delay = 0x449377; codec_allocate = 0x474CD3; codec_release = 0x474D17; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }",
+  "limits": "360 comparisons. Native tested request/CRC/channel-wrapper/HAL/queue children guarded to compiled address range; no retained stock executable on reached native paths. Delay/marker/diagnostic/allocation synthetic; oversized payload copy stops before entry.",
+  "original_executable_aliases_reached": {
+    "delay": "0x4807A0 (synthetic return)"
+  }
+}

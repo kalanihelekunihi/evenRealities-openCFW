@@ -1,0 +1,26 @@
+{
+  "review_id": 29937,
+  "candidate": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-three-raw-fp-loads-lowbyte-status-gate-frame3408-middle-30336-map/001",
+  "candidate_receipt_sha256": "1e2f8a25e101b001f11f31d1f66f768cd5ce5d9ae6ba9403410a7084266ed5d4",
+  "source_pin": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "body_pins": null,
+  "candidate_file_hashes_match_receipt": {
+    "references.json": true,
+    "instructions.json": true,
+    "replay.py": true,
+    "pseudocode.md": true,
+    "disassembly.txt": true
+  },
+  "fixture_count_or_static_extent": "86 bytes; 25 decoded instructions",
+  "isolated_replay": {
+    "result": "PASS: exact byte reassembly/decode covers [0x4EA9B4,0x4EAA0A) with no gaps or mismatches",
+    "destination": "temporary directory; no workspace outputs written by replay"
+  },
+  "assessment": "PASS_SCOPED",
+  "accepted": false,
+  "summary": "Bounded raw FP load, status gate, literal and helper-argument semantics pass; low-byte flags and non-flag-setting MUL.W/high-register ADD were checked.",
+  "scope_limits": [
+    "Only the exact candidate interval is supported.",
+    "No external helper behavior, continuation, whole-firmware completeness, source completeness, freeze, or byte equality is established."
+  ]
+}

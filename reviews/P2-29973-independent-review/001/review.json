@@ -1,0 +1,26 @@
+{
+  "review_id": 29973,
+  "candidate": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-signed-limits-event715-frame40-middle-30372-map/001",
+  "candidate_receipt_sha256": "6c88141ba6d9ab5d3899b7624ecb3f936d6dd724a0115b788c9c445a49982bd7",
+  "source_pin": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_file_hashes_match_receipt": {
+    "references.json": true,
+    "instructions.json": true,
+    "replay.py": true,
+    "pseudocode.md": true,
+    "disassembly.txt": true
+  },
+  "fixture_count_or_static_extent": "110 bytes; 40 independently decoded instructions",
+  "isolated_replay": {
+    "result": "PASS: independent reassembly/decode covers [0x4EAEC6,0x4EAF34) with no gaps or byte mismatches",
+    "destination": "temporary directory; no candidate files modified"
+  },
+  "assessment": "PASS_SCOPED",
+  "accepted": false,
+  "summary": "Verified initial signed clamp, helper-driven wrapping sum and signed lower selection, independent event715 bit gates, fresh stack arguments, and modified-immediate flags.",
+  "scope_limits": [
+    "Only the exact candidate interval is supported.",
+    "External branches and continuation are excluded.",
+    "No helper behavior, global coverage, source completeness, freeze, or byte equality is established."
+  ]
+}

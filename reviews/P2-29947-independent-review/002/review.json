@@ -1,0 +1,27 @@
+{
+  "review_id": 29947,
+  "attempt": 2,
+  "candidate": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-third-fp-sequence-lowbyte-status-gate-frame3408-middle-30346-map/001",
+  "candidate_receipt_sha256": "7a71e3b98c020762614a438ccc9c9dafdf270c63f0dafcb9a17697dee570cf9f",
+  "source_pin": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "body_pins": null,
+  "candidate_file_hashes_match_receipt": {
+    "references.json": true,
+    "instructions.json": true,
+    "replay.py": true,
+    "pseudocode.md": true,
+    "disassembly.txt": true
+  },
+  "fixture_count_or_static_extent": "100 bytes; 34 decoded instructions",
+  "isolated_replay": {
+    "result": "PASS: exact byte reassembly/decode covers [0x4EABC4,0x4EAC28) with no gaps or mismatches",
+    "destination": "temporary directory; no workspace outputs written by replay"
+  },
+  "assessment": "PASS_SCOPED",
+  "accepted": false,
+  "summary": "Corrected candidate binding for map30346. Verified raw FP aliases, conversions, SP accesses, actual post-call state, low-byte gate and MOVS/MULS NZ flags.",
+  "scope_limits": [
+    "Only the exact candidate interval is supported.",
+    "No external helper behavior, continuation, whole-firmware completeness, source completeness, freeze, or byte equality is established."
+  ]
+}

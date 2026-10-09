@@ -1,0 +1,22 @@
+{
+  "elf": "/tmp/opencfw-uart-rx-notifier/notify.elf",
+  "elf_sha256": "602c65fee716b71770769d61bceb8c203ebbbc14e22a60494f42d0b15d5ab613",
+  "sources": {
+    "g2/components/audio/uart_rx_notifier_offline/notify.c": "9109a27d92b066ad885ddf5b004d63d9000bf5dbf16759bb210cbeb236e96882",
+    "g2/components/audio/uart_rx_stream_offline/stream_buffer.c": "318792dc90f274383ef835cb9081a176994cd2a28f60ed64037e264ef5739415",
+    "g2/components/audio/uart_rx_stream_offline/support.c": "b47f30562c9d8bf635fddbc2cf9393102410937263935805ba0f55597231bd51",
+    "g2/components/audio/uart_rx_notifier_offline/notify.h": "78e29df0eaacafd30804f4d202aeb770ccf29cb02a4b70946e035b48ce80ab59",
+    "g2/components/audio/uart_rx_stream_offline/compat.h": "745383c5607432a58996f19554f7c5f0c4c1797560d5cca2e1a916f0d69e27ef"
+  },
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "flags": [
+    "-mcpu=cortex-m33",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "link_script": "offline_notify = uart_notify_isr; pvPortMalloc = 0x456111; offline_assert = 0x10FFF1; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }",
+  "limits": "Valid task/index0/actions0..4 only; synthetic TCB/list/scheduler fixture. No assertion-invalid input, context switch or exception delivery."
+}

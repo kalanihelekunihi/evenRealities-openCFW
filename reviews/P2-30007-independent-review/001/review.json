@@ -1,0 +1,23 @@
+{
+  "review_id": 30007,
+  "candidate": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-object-input-eight-literals-30406-map/001",
+  "candidate_receipt_sha256": "2fb95178d371ea0ededfea71e8d79a7c499a746ecaaab83a93875aca6920a319",
+  "source_pin": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_file_hashes_match_receipt": {
+    "inventory.json": true,
+    "report.md": true
+  },
+  "fixture_count_or_static_extent": "8 literal words; 32 bytes; 4 scanned maps; 3 contributors; 11 verified PC-relative load references",
+  "isolated_replay": {
+    "result": "PASS: all locked words/values and listed consumer load operands independently match; component hashes verify",
+    "destination": "read-only inspection; no candidate files modified"
+  },
+  "assessment": "PASS_SCOPED",
+  "accepted": false,
+  "summary": "Verified exact word bytes/values, contributor pins, and each bounded PC-relative LDR consumer.",
+  "scope_limits": [
+    "Only this bounded literal interval and listed consumers are supported.",
+    "No whole-image consumer closure or data completeness, source completeness, freeze, or byte equality is established.",
+    "Literal values are distinct from pointee contents."
+  ]
+}

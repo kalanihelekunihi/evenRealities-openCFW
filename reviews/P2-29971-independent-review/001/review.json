@@ -1,0 +1,26 @@
+{
+  "review_id": 29971,
+  "candidate": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-alternate-helper-gate-event698-frame40-middle-30370-map/001",
+  "candidate_receipt_sha256": "696dcac7bf5f458a97333af4113796af3ad45cfa7650ed78c682ea24c138f94d",
+  "source_pin": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_file_hashes_match_receipt": {
+    "references.json": true,
+    "instructions.json": true,
+    "replay.py": true,
+    "pseudocode.md": true,
+    "disassembly.txt": true
+  },
+  "fixture_count_or_static_extent": "82 bytes; 27 independently decoded instructions",
+  "isolated_replay": {
+    "result": "PASS: independent reassembly/decode covers [0x4EAE74,0x4EAEC6) with no gaps or byte mismatches",
+    "destination": "temporary directory; no candidate files modified"
+  },
+  "assessment": "PASS_SCOPED",
+  "accepted": false,
+  "summary": "Verified alternate zero/nonzero helper route, independent diagnostic bit queries, event698 arguments, immediate flags, and SUBS.W result flags.",
+  "scope_limits": [
+    "Only the exact candidate interval is supported.",
+    "External branches and continuations are excluded.",
+    "No helper behavior, global coverage, source completeness, freeze, or byte equality is established."
+  ]
+}

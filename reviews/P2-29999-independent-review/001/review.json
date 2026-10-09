@@ -1,0 +1,26 @@
+{
+  "review_id": 29999,
+  "candidate": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-nonnull-input-actual-value-equality-event839-frame120-middle-30398-map/001",
+  "candidate_receipt_sha256": "b19fa4745825e20e7c50ea3774d46dac2d5ce130fe103d3246249dba006d7207",
+  "source_pin": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_file_hashes_match_receipt": {
+    "references.json": true,
+    "instructions.json": true,
+    "replay.py": true,
+    "pseudocode.md": true,
+    "disassembly.txt": true
+  },
+  "fixture_count_or_static_extent": "92 bytes; 33 independently decoded instructions",
+  "isolated_replay": {
+    "result": "PASS: independent reassembly/decode covers [0x4EB212,0x4EB26E) with no gaps or byte mismatches",
+    "destination": "temporary directory; no candidate files modified"
+  },
+  "assessment": "PASS_SCOPED",
+  "accepted": false,
+  "summary": "Verified byte reset, actual helper result comparison, equality-gated event839 and separate bit0/bit2 query gates, plus modified-immediate flags.",
+  "scope_limits": [
+    "Only the exact candidate interval is supported.",
+    "External exits and following code are excluded.",
+    "No helper behavior, global coverage, source completeness, freeze, or byte equality is established."
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "review_id": 30013,
+  "candidate": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-six-byte-input72-packet-input69-gate-frame40-middle-30412-map/001",
+  "candidate_receipt_sha256": "f8ec3573b93c6ca0d131ac99cfe7b0cc22c4617c661b025875f4ff4c494adc39",
+  "source_pin": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_file_hashes_match_receipt": {
+    "references.json": true,
+    "instructions.json": true,
+    "replay.py": true,
+    "pseudocode.md": true,
+    "disassembly.txt": true
+  },
+  "fixture_count_or_static_extent": "66 bytes; 29 independently decoded instructions",
+  "isolated_replay": {
+    "result": "PASS: independent reassembly/decode covers [0x4EB3D6,0x4EB418) with no gaps or byte mismatches",
+    "destination": "temporary directory; no candidate files modified"
+  },
+  "assessment": "PASS_SCOPED",
+  "accepted": false,
+  "summary": "Verified SP+16 packet bytes/helper arguments, separate input73 and input69 paths, and fresh global-byte gate.",
+  "scope_limits": [
+    "Only the exact candidate interval is supported.",
+    "All external continuations are excluded.",
+    "No packet/helper behavior, global coverage, source completeness, freeze, or byte equality is established."
+  ]
+}

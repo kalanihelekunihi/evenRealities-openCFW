@@ -1,0 +1,26 @@
+{
+  "review_id": 29935,
+  "candidate": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-stack-float-widening-two-resource-helper-frame3408-middle-30334-map/001",
+  "candidate_receipt_sha256": "8fa756ab068c25d3d3efd22703eb9c504690e0729c9d890af2c8799bd4a89341",
+  "source_pin": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "body_pins": null,
+  "candidate_file_hashes_match_receipt": {
+    "references.json": true,
+    "instructions.json": true,
+    "replay.py": true,
+    "pseudocode.md": true,
+    "disassembly.txt": true
+  },
+  "fixture_count_or_static_extent": "100 bytes; 27 decoded instructions",
+  "isolated_replay": {
+    "result": "PASS: exact byte reassembly/decode covers [0x4EA950,0x4EA9B4) with no gaps or mismatches",
+    "destination": "temporary directory; no workspace outputs written by replay"
+  },
+  "assessment": "PASS_SCOPED",
+  "accepted": false,
+  "summary": "Bounded instruction/pseudocode review passed, including FP aliases, temporary R12 save/restore addressing, helper arguments, and Arm FPSingleToDouble semantics.",
+  "scope_limits": [
+    "Only the exact candidate interval and its stated architecture semantics are supported.",
+    "No helper behavior, continuation, global coverage, source completeness, freeze, or byte equality is established."
+  ]
+}

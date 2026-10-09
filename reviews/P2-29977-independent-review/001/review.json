@@ -1,0 +1,23 @@
+{
+  "review_id": 29977,
+  "candidate": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-input-counter-frame40-seven-span-direct-branch-union-30376-map/001",
+  "candidate_receipt_sha256": "259ca4aecfbde6c3d3d9e2e31852a4d5b38ba668ba3af1f172ab8b7fed38ea61",
+  "source_pin": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_file_hashes_match_receipt": {
+    "audit.json": true,
+    "replay.py": true,
+    "pseudocode.md": true
+  },
+  "fixture_count_or_static_extent": "7 component maps; 614 tiled instruction bytes; 216 instructions; 37 direct branches",
+  "isolated_replay": {
+    "result": "PASS: independently decoded locked interval tiles exactly and all 37 direct branches target instruction starts within the union",
+    "destination": "temporary directory; no candidate files modified"
+  },
+  "assessment": "PASS_SCOPED",
+  "accepted": false,
+  "summary": "Verified component bindings, exact locked-byte tiling, independent full-span decode, and local direct-branch target connectivity.",
+  "scope_limits": [
+    "Connectivity only over the exact union interval.",
+    "No helper behavior, incoming or indirect control flow, data accounting, global coverage, source completeness, freeze, or byte equality is established."
+  ]
+}

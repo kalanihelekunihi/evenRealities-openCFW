@@ -1,0 +1,31 @@
+{
+  "elf": "/tmp/opencfw-uart-newer-callback/power.elf",
+  "elf_sha256": "cb7b1e5691e5077e38ee394e8218ae3cf0a129ba7450ccef001be1d178249c8d",
+  "sources": {
+    "g2/components/audio/uart_power_composition_offline/power.c": "1df1d23b59fe8428b04ad5a4d57b2cab7074d82b037bf344b611a8aedc866127",
+    "g2/components/audio/uart_group_power_offline/providers.c": "fa4da117874ece053775c58d9dc88ad5a3344fdb0305b2800ac842e797852c09",
+    "g2/components/foundation/power_domain/power_domain.c": "29333d2ac5740f0b9e6657a387c23641b0361c441b0628df16aee25171b794c7",
+    "g2/components/audio/early_pcm_pending_offline/pending.c": "501fba0cda017e9d513783ce62b90c170ee22d3c6d61c6e8d20a8f5763fd613f",
+    "g2/components/audio/platform_callbacks_offline/newer.c": "4dbf2826ef7f77518f423d5bea627fbd22619119b6037e7abf16583a63fffdca",
+    "g2/components/audio/pcm21_control_offline/control.c": "17790763f5b52305dafe5e30d27ef708cd07ba0601fe888e73d0cf8d3fd7f68a",
+    "g2/components/audio/uart_power_composition_offline/power.h": "b4dc36f099537a17cc17b1d27a07bafca367089f314897db4c1e7e1c7d2a0e88",
+    "g2/components/audio/uart_group_power_offline/providers.h": "cb62ba617e0b63f4820ca5de75af6e28d275824fcfb304694a143e4bd06b421c",
+    "g2/components/foundation/power_domain/power_domain.h": "a47aaa61e248c78bd52ec2bc8ee74a5f3504eacf4f290989251eda13207e8057",
+    "g2/components/audio/early_pcm_pending_offline/pending.h": "8e1a7aab1fa17371409d25c59d16a9cf600fdcf341ee27af664b2a71dc24a805",
+    "g2/components/audio/platform_callbacks_offline/callbacks.h": "4ee93e67d4cd48c65512fcb85be6ffc224c85dc340ba1cf87b55e8a69101f7d0",
+    "g2/components/audio/pcm21_control_offline/control.h": "d04d67c04f76e837fa207663de4d0498206dd84c1e5766dec5f1ca3197d71408"
+  },
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "flags": [
+    "-mcpu=cortex-m33",
+    "-mfpu=fpv5-sp-d16",
+    "-mfloat-abi=hard",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "link_script": "stock_save_irq = uart_save_irq; callback_save_disable_irq = uart_save_irq; callback_classify = 0x5A1E8D; callback_prepare_state = 0x5A410D; callback_change_state = 0x5A421D; callback_plan = 0x5A45D1; callback_apply = 0x5A44BB; pcm21_classify = 0x5A1E8D; stock_prepare = 0x5A0C21; stock_change_state = 0x5A0D45; stock_plan = 0x5A13E9; stock_apply = 0x5A0FC5; uart_delay_boundary = 0x4807A1; stock_delay = 0x4807A1; stock_buck_enable = 0x47F11D; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }",
+  "limits": "UART enclosing subset with reused PCM2.1/2.2 native callback bodies. Actual planner/apply providers remain aliases; tests stop before planning or complete gate/error paths. Synthetic delay/status, no physical power."
+}

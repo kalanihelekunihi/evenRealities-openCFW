@@ -1,0 +1,19 @@
+# RX consumer copy and UART3 staging ownership
+
+**391 unchanged FreeRTOS receiver/source comparisons PASS**, plus **216 UART3 ring/source comparisons PASS** against the same final receipt-bound ELF. **Four additional original UART3 prefix/callback checks PASS** without a native ELF dependency. [Results](results.json), [ring results](ring-results.json), [original prefixes](uart3-prefix-results.json), [source and interfaces](../../components/audio/uart_rx_consumer_offline/README.md), [readable flow](pseudocode.md).
+
+Three receiver bodies preserve unchanged FreeRTOS10.5.1 source text: receive0x57E136, read-message0x57E220, read-bytes0x57E2F6; bytes-in-buffer0x57E38C repeats producer work. Stock36Bcontrol ABI/config/task macro adapters and previously sealed nonoverlap bytecopy support are explicit. Three UART3 ring helpers are readable reconstruction, not decompiler output or attributed vendor text. Exact source/body/input hashes remain in source-reference and receipts.
+
+Nonblocking stream reads copy min(available,capacity), including wrapped data, then publish the consumed tail. Mutating/reusing the ring after return does not change the separate caller destination in fixtures. Message reads first inspect4-byte length; insufficient destination returns0 without committing tail, preserving the message for a later larger read. This differs from the producer callback, which clears staging after partial admission. Empty/capacity0 fixtures, wraps at2046/2048, lengths0/1/3/15/205 and message boundaries are tested.
+
+Receive-completed invokes scheduler suspend/resume when bytes were consumed. These two providers use explicit zero-return stubs, **not actual scheduler execution**. Waiting-sender cases stop before notifier0x455C48 with exact arguments/tail/copied data. Nonzero-wait cases stop before critical-enter0x4420D0; blocking task handover is not closed. No notification, wake, preemption or hardware loss claim follows.
+
+## Distinct UART3 versus logger storage
+
+Original UART3 initializer0x58FB52 calls ring setup0x598160 with descriptor20073ED4, storage200731B0,size64, then installs callback58FB1D for channel3; prefix stops before actual wake55E5BC(3). The received callback0x58FB1C calls byte-write0x5981C4, which uses put0x598198/full0x598146. Mask63 means63usable bytes. Full put advances read index before storing new byte: **oldest bytes are evicted**. Original callback fixtures0/15/205 bytes confirm that205 fresh input bytes leave only the last63 in the ring. This is synthetic pressure, not measured UART loss or arrival-rate behavior. No concurrency/atomicity proof.
+
+Channel3's separate1024-byteTX queue remains distinct from this63-byteRX staging ring. The protocol task0x5417D6 uses yet another24,576-byte stream at handle global20074B14. Existing consolidated protocol docs already describe that task; this batch validates its generic receiver providers, not newly discovers the task. The logger uses2048usable stream bytes at global200748BC. These handles/storage contracts cannot be merged.
+
+Task static call flow: eventbit1 drains up to32chunks of1024 into2006C930 using receive(...,ticks0), then parser0x45D4DC consumes each returned length. Product-mode branch reads10bytes instead. Sync callback0x5417A4 admits into20074B14 via ISRsend and sets eventbit1; its accepted-count handling, notification provider and actual UART3 ring-drain-to-sync path still require bounded composition. A24KiBstream does not prove the preceding63Bstaging can never overflow.
+
+[Reference protocols](../../docs/reference/protocols.md) and [newer power callback composition](../audio-uart-newer-callback-composition-2026-10-09/REPORT.md). No Git mutations, production/device/shared-state edits; preservation.json checks prior seals,110inputs,fourcheckpoints and records concurrent index hash. Physical behavior and source completeness remain unproven.

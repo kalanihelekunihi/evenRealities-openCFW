@@ -1,0 +1,12 @@
+{
+  "source": "third-party/local-vendor/sources/AmbiqSuite_R3.2.0/third_party/FreeRTOSv10.5.1/Source/stream_buffer.c",
+  "source_sha256": "86d948694c723b814c9606a6c804ea7c1bd30b3da518d1d6a83b81f972e3a152",
+  "unchanged_function_text": {
+    "xStreamBufferReceive": "80dab589206b7f60b16152c46270ee4ad02bdc4c4a37a650867eba22318872e5",
+    "prvReadMessageFromBuffer": "5101fcb9b0f2f1fe0e0f2c837e687b003fd88b44c7070cfde9e5de9b2ca923b5",
+    "prvReadBytesFromBuffer": "dfdf1fa2620779b618e3555ba108cc155b69c2f499ad0dfa8bd84560858fa9d6",
+    "prvBytesInBuffer": "8950f6803a79137463a8e1d77c99866ab0fd954d26e7293ba018a9aeaf7c22ea"
+  },
+  "repeated": "prvBytesInBuffer already validated in RX producer batch",
+  "adaptations": "Stock36Bstream ABI, trace/callback config and task-provider macro aliases; nonoverlap bytecopy/support reused. No scheduler provider completion inferred."
+}

@@ -1,0 +1,26 @@
+{
+  "review_id": 29989,
+  "candidate": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-signed-decrement-loop-fresh-resource-index-frame48-middle-30388-map/001",
+  "candidate_receipt_sha256": "9993fe37535c4523c5276ee9245c18af1a901499de268fcd42de762c0bab25a0",
+  "source_pin": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_file_hashes_match_receipt": {
+    "references.json": true,
+    "instructions.json": true,
+    "replay.py": true,
+    "pseudocode.md": true,
+    "disassembly.txt": true
+  },
+  "fixture_count_or_static_extent": "100 bytes; 37 independently decoded instructions",
+  "isolated_replay": {
+    "result": "PASS: independent reassembly/decode covers [0x4EB11C,0x4EB180) with no gaps or byte mismatches",
+    "destination": "temporary directory; no candidate files modified"
+  },
+  "assessment": "PASS_SCOPED",
+  "accepted": false,
+  "summary": "Verified signed decrement loop and helper flag flow, unsigned six-index gate, separately reloaded scaled-index words, and actual postcall state.",
+  "scope_limits": [
+    "Only the exact candidate interval is supported.",
+    "External exit is excluded; no finite loop termination is established.",
+    "No array bounds, pointer stability, helper behavior, global coverage, source completeness, freeze, or byte equality is established."
+  ]
+}

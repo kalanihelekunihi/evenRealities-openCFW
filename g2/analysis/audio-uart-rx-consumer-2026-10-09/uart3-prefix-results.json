@@ -1,0 +1,67 @@
+{
+  "status": "PASS",
+  "cases": 4,
+  "rows": [
+    {
+      "mode": "initializer",
+      "bytes": 0,
+      "stop": [
+        "before-UART3-wake"
+      ],
+      "ring_words": [
+        "0x200731b0",
+        "0x3f",
+        "0x0",
+        "0x0"
+      ],
+      "retained_bytes": "",
+      "capacity": 63
+    },
+    {
+      "mode": "receive",
+      "bytes": 0,
+      "stop": [
+        "return"
+      ],
+      "ring_words": [
+        "0x200731b0",
+        "0x3f",
+        "0x0",
+        "0x0"
+      ],
+      "retained_bytes": "",
+      "capacity": 63
+    },
+    {
+      "mode": "receive",
+      "bytes": 15,
+      "stop": [
+        "return"
+      ],
+      "ring_words": [
+        "0x200731b0",
+        "0x3f",
+        "0x0",
+        "0xf"
+      ],
+      "retained_bytes": "05121f2c394653606d7a8794a1aebb",
+      "capacity": 63
+    },
+    {
+      "mode": "receive",
+      "bytes": 205,
+      "stop": [
+        "return"
+      ],
+      "ring_words": [
+        "0x200731b0",
+        "0x3f",
+        "0xe",
+        "0xd"
+      ],
+      "retained_bytes": "3b4855626f7c8996a3b0bdcad7e4f1fe0b1825323f4c596673808d9aa7b4c1cedbe8f5020f1c293643505d6a7784919eabb8c5d2dfecf90613202d3a475461",
+      "capacity": 63
+    }
+  ],
+  "limits": "Unchanged UART3 init/callback/ring instructions; synthetic initial SRAM and input bytes. Stops before channel wake; no actual IRQ/arrival rate or hardware loss."
+}

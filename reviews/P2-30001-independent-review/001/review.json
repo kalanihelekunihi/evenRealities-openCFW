@@ -1,0 +1,26 @@
+{
+  "review_id": 30001,
+  "candidate": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-actual-three-value-event843-staging-frame120-middle-30400-map/001",
+  "candidate_receipt_sha256": "6708edae0f1bcabbcec34541fbc865c3e0aa888e445382525847edc6d3234f6b",
+  "source_pin": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_file_hashes_match_receipt": {
+    "references.json": true,
+    "instructions.json": true,
+    "replay.py": true,
+    "pseudocode.md": true,
+    "disassembly.txt": true
+  },
+  "fixture_count_or_static_extent": "78 bytes; 28 independently decoded instructions",
+  "isolated_replay": {
+    "result": "PASS: independent reassembly/decode covers [0x4EB26E,0x4EB2BC) with no gaps or byte mismatches",
+    "destination": "temporary directory; no candidate files modified"
+  },
+  "assessment": "PASS_SCOPED",
+  "accepted": false,
+  "summary": "Verified event843 and independent secondary query paths, current stack/register staging, nonflag MOV R8 to R3, and modified-immediate flags.",
+  "scope_limits": [
+    "Only the exact candidate interval is supported.",
+    "Continuation is excluded.",
+    "No helper behavior, global coverage, source completeness, freeze, or byte equality is established."
+  ]
+}

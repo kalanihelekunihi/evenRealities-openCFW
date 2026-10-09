@@ -1,0 +1,26 @@
+{
+  "review_id": 29975,
+  "candidate": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-fresh-counter-update-signed-rechecks-frame40-return-30374-map/001",
+  "candidate_receipt_sha256": "999d0df903d4ea04b7b2407518d712a05357bd3b27d458cd469508616f1495a5",
+  "source_pin": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_file_hashes_match_receipt": {
+    "references.json": true,
+    "instructions.json": true,
+    "replay.py": true,
+    "pseudocode.md": true,
+    "disassembly.txt": true
+  },
+  "fixture_count_or_static_extent": "66 bytes; 29 independently decoded instructions",
+  "isolated_replay": {
+    "result": "PASS: independent reassembly/decode covers [0x4EAF34,0x4EAF76) with no gaps or byte mismatches",
+    "destination": "temporary directory; no candidate files modified"
+  },
+  "assessment": "PASS_SCOPED",
+  "accepted": false,
+  "summary": "Verified opaque helper inputs and actual postcall branching, fresh wrapped counter update and signed rechecks, plus mutable shared epilogue stack reads.",
+  "scope_limits": [
+    "Only the exact candidate interval is supported.",
+    "Earlier entry paths and external continuations are outside the interval.",
+    "No helper behavior, global coverage, source completeness, freeze, or byte equality is established."
+  ]
+}

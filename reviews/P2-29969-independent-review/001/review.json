@@ -1,0 +1,26 @@
+{
+  "review_id": 29969,
+  "candidate": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-input-one-helper-gate-event691-frame40-middle-30368-map/001",
+  "candidate_receipt_sha256": "e0a3261d8ed25d50d533d2bcba7d2d10459915ea3697a23ddc4662e26fad991b",
+  "source_pin": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "body_pins": null,
+  "candidate_file_hashes_match_receipt": {
+    "references.json": true,
+    "instructions.json": true,
+    "replay.py": true,
+    "pseudocode.md": true,
+    "disassembly.txt": true
+  },
+  "fixture_count_or_static_extent": "96 bytes; 33 decoded instructions",
+  "isolated_replay": {
+    "result": "PASS: exact byte reassembly/decode covers [0x4EAE14,0x4EAE74) with no gaps or mismatches",
+    "destination": "temporary directory; no workspace outputs written by replay"
+  },
+  "assessment": "PASS_SCOPED",
+  "accepted": false,
+  "summary": "Verified actual helper result and register flow, event691 bit gates/arguments, immediate carry, and ADDS.W full flag update.",
+  "scope_limits": [
+    "Only the exact candidate interval is supported.",
+    "No helper behavior, external continuation, global coverage, source completeness, freeze, or byte equality is established."
+  ]
+}

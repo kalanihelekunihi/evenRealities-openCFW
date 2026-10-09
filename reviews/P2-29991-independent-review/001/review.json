@@ -1,0 +1,25 @@
+{
+  "review_id": 29991,
+  "candidate": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-dispatch71-fresh-global-gates-frame48-return-30390-map/001",
+  "candidate_receipt_sha256": "495886943b5cae1e7f7e8e5a819efe5b43512040ab673ce8e4be591c228db57b",
+  "source_pin": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_file_hashes_match_receipt": {
+    "references.json": true,
+    "instructions.json": true,
+    "replay.py": true,
+    "pseudocode.md": true,
+    "disassembly.txt": true
+  },
+  "fixture_count_or_static_extent": "50 bytes; 21 independently decoded instructions",
+  "isolated_replay": {
+    "result": "PASS: independent reassembly/decode covers [0x4EB180,0x4EB1B2) with no gaps or byte mismatches",
+    "destination": "temporary directory; no candidate files modified"
+  },
+  "assessment": "PASS_SCOPED",
+  "accepted": false,
+  "summary": "Verified selector73 shared-return branch, selector71 fresh global gates and helper states, and mutable frame48 epilogue stack reads.",
+  "scope_limits": [
+    "Only the exact candidate interval is supported.",
+    "No helper behavior, global coverage, source completeness, freeze, or byte equality is established."
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "review_id": 30005,
+  "candidate": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-three-input-frame120-four-span-direct-branch-union-30404-map/001",
+  "candidate_receipt_sha256": "58d7d52a7bb285b10fa968075bba0d0e1e410492221f43b10de08196015be8cf",
+  "source_pin": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_file_hashes_match_receipt": {
+    "audit.json": true,
+    "replay.py": true,
+    "pseudocode.md": true
+  },
+  "fixture_count_or_static_extent": "4 component maps; 348 tiled bytes; 130 instructions; 14 direct branches",
+  "isolated_replay": {
+    "result": "PASS: independent locked-byte replay and decode exactly tile [0x4EB1C0,0x4EB31C); all 14 direct branches target union instruction starts",
+    "destination": "temporary directory; no candidate files modified"
+  },
+  "assessment": "PASS_SCOPED",
+  "accepted": false,
+  "summary": "Verified component pins, exact tiling, independent full-span decode, and local direct-branch connectivity.",
+  "scope_limits": [
+    "Connectivity only over the exact union interval.",
+    "No helper behavior, incoming or indirect control flow, data accounting, global coverage, source completeness, freeze, or byte equality is established."
+  ]
+}

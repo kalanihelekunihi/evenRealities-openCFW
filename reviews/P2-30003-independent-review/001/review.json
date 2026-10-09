@@ -1,0 +1,25 @@
+{
+  "review_id": 30003,
+  "candidate": "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/analysis/apollo-main-diagnostic-fixed-library-stack-configuration-or-direct-helper-frame120-return-30402-map/001",
+  "candidate_receipt_sha256": "5896cf575b9e343b99769280b6ca7b4f71f24561609d57d7c5e6b6beaf7a4047",
+  "source_pin": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "candidate_file_hashes_match_receipt": {
+    "references.json": true,
+    "instructions.json": true,
+    "replay.py": true,
+    "pseudocode.md": true,
+    "disassembly.txt": true
+  },
+  "fixture_count_or_static_extent": "96 bytes; 39 independently decoded instructions",
+  "isolated_replay": {
+    "result": "PASS: independent reassembly/decode covers [0x4EB2BC,0x4EB31C) with no gaps or byte mismatches",
+    "destination": "temporary directory; no candidate files modified"
+  },
+  "assessment": "PASS_SCOPED",
+  "accepted": false,
+  "summary": "Verified R5-zero direct helper path, nonzero configuration calls and ordered SP stores, byte-292 write, and mutable frame120 epilogue.",
+  "scope_limits": [
+    "Only the exact candidate interval is supported.",
+    "No opaque helper behavior, global coverage, source completeness, freeze, or byte equality is established."
+  ]
+}

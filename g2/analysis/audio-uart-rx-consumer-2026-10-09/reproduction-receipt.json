@@ -1,0 +1,35 @@
+{
+  "elf": "/tmp/opencfw-uart-rx-consumer/receive.elf",
+  "elf_sha256": "a2f03add4bc1c157c2716b71e3bbfb046d52326572554c8abfb9c3461ac29682",
+  "sources": {
+    "g2/components/audio/uart_rx_consumer_offline/stream_buffer.c": "a4081c33f311b01a4db6af50fd5d6d16d2e47fbe0efeb24653f081431f55d535",
+    "g2/components/audio/uart_rx_consumer_offline/ring.c": "4c3ad9247963da8714f56426a88084efb97f56d8db4cd29f44aa9a42d1e6eaaf",
+    "g2/components/audio/uart_rx_stream_offline/support.c": "b47f30562c9d8bf635fddbc2cf9393102410937263935805ba0f55597231bd51",
+    "g2/components/audio/uart_rx_consumer_offline/compat.h": "1ef5a15131040abb2e1d6e26b1249e62603d04f96ff637d4eedb427574a4a971",
+    "g2/components/audio/uart_rx_consumer_offline/ring.h": "4b9187940c795dd9a910e6d286c0751c5305e4d34fecd0ac9a90e05252e14e5a",
+    "g2/components/audio/uart_rx_stream_offline/compat.h": "745383c5607432a58996f19554f7c5f0c4c1797560d5cca2e1a916f0d69e27ef"
+  },
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "flags": [
+    "-mcpu=cortex-m33",
+    "-mthumb",
+    "-Og",
+    "-fkeep-static-functions",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "link_script": "receiver_critical_enter = 0x4420d1; receiver_critical_exit = 0x4420e9; receiver_state_clear = 0x455f5f; receiver_current_task = 0x45589d; receiver_notify_wait = 0x455b85; receiver_suspend = 0x454d7d; receiver_resume = 0x454dcd; receiver_notify = 0x455c49; offline_assert = 0x10fff1; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }",
+  "external_aliases": {
+    "receiver_critical_enter": "0x4420d0",
+    "receiver_critical_exit": "0x4420e8",
+    "receiver_state_clear": "0x455f5e",
+    "receiver_current_task": "0x45589c",
+    "receiver_notify_wait": "0x455b84",
+    "receiver_suspend": "0x454d7c",
+    "receiver_resume": "0x454dcc",
+    "receiver_notify": "0x455c48",
+    "offline_assert": "0x10fff0"
+  },
+  "limits": "Task providers explicit cuts/stubs. Nonblocking copy/consumer ownership; actual RTOS wake/scheduling not inferred."
+}

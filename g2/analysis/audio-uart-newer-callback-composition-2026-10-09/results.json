@@ -1,0 +1,9044 @@
+{
+  "status": "PASS",
+  "cases": 96,
+  "elf_sha256": "cb7b1e5691e5077e38ee394e8218ae3cf0a129ba7450ccef001be1d178249c8d",
+  "raw_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "bindings": {
+    "uart_peripheral_enable": "0x47f5b8",
+    "uart_peripheral_disable": "0x47f7ae"
+  },
+  "comparisons": [
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 0,
+        "status": 0,
+        "family": "pcm21",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            0
+          ]
+        ],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 0,
+        "status": 7680,
+        "family": "pcm21",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            0
+          ]
+        ],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 0,
+        "status": 0,
+        "family": "pcm21",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 0,
+        "status": 7680,
+        "family": "pcm21",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 0,
+        "status": 0,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 0,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            0
+          ]
+        ],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 0,
+        "status": 7680,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 0,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            0
+          ]
+        ],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 0,
+        "status": 0,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 0,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 0,
+        "status": 7680,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 0,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 0,
+        "status": 0,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "before-planner"
+        ],
+        "return": null,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021010",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021018",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021028",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            0
+          ],
+          [
+            "before-planner",
+            "001e0000000000000000000000000000020000",
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 0,
+        "status": 7680,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "before-planner"
+        ],
+        "return": null,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021010",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021018",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021028",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            0
+          ],
+          [
+            "before-planner",
+            "001e0000000000000000000000000000020000",
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 0,
+        "status": 0,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "before-planner"
+        ],
+        "return": null,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021010",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021018",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021028",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            1
+          ],
+          [
+            "before-planner",
+            "001e0000000000000000000000000000020000",
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 0,
+        "status": 7680,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "before-planner"
+        ],
+        "return": null,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021010",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021018",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021028",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            1
+          ],
+          [
+            "before-planner",
+            "001e0000000000000000000000000000020000",
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 0,
+        "status": 0,
+        "family": "pcm21",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            0
+          ]
+        ],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 0,
+        "status": 7680,
+        "family": "pcm21",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            0
+          ]
+        ],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 0,
+        "status": 0,
+        "family": "pcm21",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 0,
+        "status": 7680,
+        "family": "pcm21",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 0,
+        "status": 0,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 0,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            0
+          ]
+        ],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 0,
+        "status": 7680,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 0,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            0
+          ]
+        ],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 0,
+        "status": 0,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 0,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 0,
+        "status": 7680,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 0,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 0,
+        "status": 0,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "before-planner"
+        ],
+        "return": null,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021010",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021018",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021028",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            0
+          ],
+          [
+            "before-planner",
+            "001e0000000000000000000000000000020000",
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 0,
+        "status": 7680,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "before-planner"
+        ],
+        "return": null,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021010",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021018",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021028",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            0
+          ],
+          [
+            "before-planner",
+            "001e0000000000000000000000000000020000",
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 0,
+        "status": 0,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "before-planner"
+        ],
+        "return": null,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021010",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021018",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021028",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            1
+          ],
+          [
+            "before-planner",
+            "001e0000000000000000000000000000020000",
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 0,
+        "status": 7680,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "before-planner"
+        ],
+        "return": null,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021010",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021018",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021028",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            1
+          ],
+          [
+            "before-planner",
+            "001e0000000000000000000000000000020000",
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 0,
+        "status": 0,
+        "family": "pcm22",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            0
+          ]
+        ],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 0,
+        "status": 7680,
+        "family": "pcm22",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            0
+          ]
+        ],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 0,
+        "status": 0,
+        "family": "pcm22",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 0,
+        "status": 7680,
+        "family": "pcm22",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 0,
+        "status": 0,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 0,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            0
+          ]
+        ],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 0,
+        "status": 7680,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 0,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            0
+          ]
+        ],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 0,
+        "status": 0,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 0,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 0,
+        "status": 7680,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 0,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 0,
+        "status": 0,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "before-planner"
+        ],
+        "return": null,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021010",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021018",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021028",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            0
+          ],
+          [
+            "before-planner",
+            "001e0000000000000000000000000000020000",
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 0,
+        "status": 7680,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "before-planner"
+        ],
+        "return": null,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021010",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021018",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021028",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            0
+          ],
+          [
+            "before-planner",
+            "001e0000000000000000000000000000020000",
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 0,
+        "status": 0,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "before-planner"
+        ],
+        "return": null,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021010",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021018",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021028",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            1
+          ],
+          [
+            "before-planner",
+            "001e0000000000000000000000000000020000",
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 0,
+        "status": 7680,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "before-planner"
+        ],
+        "return": null,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021010",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021018",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021028",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            1
+          ],
+          [
+            "before-planner",
+            "001e0000000000000000000000000000020000",
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 0,
+        "status": 0,
+        "family": "pcm22",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            0
+          ]
+        ],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 0,
+        "status": 7680,
+        "family": "pcm22",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            0
+          ]
+        ],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 0,
+        "status": 0,
+        "family": "pcm22",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 0,
+        "status": 7680,
+        "family": "pcm22",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 0,
+        "status": 0,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 0,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            0
+          ]
+        ],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 0,
+        "status": 7680,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 0,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            0
+          ]
+        ],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 0,
+        "status": 0,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 0,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 0,
+        "status": 7680,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 0,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 0,
+        "status": 0,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "before-planner"
+        ],
+        "return": null,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021010",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021018",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021028",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            0
+          ],
+          [
+            "before-planner",
+            "001e0000000000000000000000000000020000",
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 0,
+        "status": 7680,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "before-planner"
+        ],
+        "return": null,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021010",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021018",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021028",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            0
+          ],
+          [
+            "before-planner",
+            "001e0000000000000000000000000000020000",
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 0,
+        "status": 0,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "before-planner"
+        ],
+        "return": null,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021010",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021018",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021028",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            1
+          ],
+          [
+            "before-planner",
+            "001e0000000000000000000000000000020000",
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_enable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 0,
+        "status": 7680,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "before-planner"
+        ],
+        "return": null,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021010",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021018",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021028",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            1,
+            7680,
+            1
+          ],
+          [
+            "before-planner",
+            "001e0000000000000000000000000000020000",
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 512,
+        "status": 0,
+        "family": "pcm21",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            0,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            0,
+            7680,
+            0
+          ]
+        ],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 512,
+        "status": 7680,
+        "family": "pcm21",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 512,
+        "status": 0,
+        "family": "pcm21",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            0,
+            7680,
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 512,
+        "status": 7680,
+        "family": "pcm21",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 512,
+        "status": 0,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 0,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            0,
+            7680,
+            0
+          ]
+        ],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 512,
+        "status": 7680,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 0,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 512,
+        "status": 0,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 0,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            0,
+            7680,
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 512,
+        "status": 7680,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 0,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 512,
+        "status": 0,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "before-planner"
+        ],
+        "return": null,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021010",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021018",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021028",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            0,
+            7680,
+            0
+          ],
+          [
+            "before-planner",
+            "00000000000000000000000000000000020000",
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 512,
+        "status": 7680,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 512,
+        "status": 0,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "before-planner"
+        ],
+        "return": null,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021010",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021018",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021028",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            0,
+            7680,
+            1
+          ],
+          [
+            "before-planner",
+            "00000000000000000000000000000000020000",
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 512,
+        "status": 7680,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 4096,
+        "status": 0,
+        "family": "pcm21",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            0,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            0,
+            7680,
+            0
+          ]
+        ],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 4096,
+        "status": 7680,
+        "family": "pcm21",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 4096,
+        "status": 0,
+        "family": "pcm21",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            0,
+            7680,
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 4096,
+        "status": 7680,
+        "family": "pcm21",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 4096,
+        "status": 0,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 0,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            0,
+            7680,
+            0
+          ]
+        ],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 4096,
+        "status": 7680,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 0,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 4096,
+        "status": 0,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 0,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            0,
+            7680,
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 4096,
+        "status": 7680,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 0,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 4096,
+        "status": 0,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "before-planner"
+        ],
+        "return": null,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021010",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021018",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021028",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            0,
+            7680,
+            0
+          ],
+          [
+            "before-planner",
+            "00000000000000000000000000000000020000",
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 4096,
+        "status": 7680,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 4096,
+        "status": 0,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "before-planner"
+        ],
+        "return": null,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021010",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021018",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021028",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            0,
+            7680,
+            1
+          ],
+          [
+            "before-planner",
+            "00000000000000000000000000000000020000",
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 4096,
+        "status": 7680,
+        "family": "pcm21",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 512,
+        "status": 0,
+        "family": "pcm22",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            0,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            0,
+            7680,
+            0
+          ]
+        ],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 512,
+        "status": 7680,
+        "family": "pcm22",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 512,
+        "status": 0,
+        "family": "pcm22",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            0,
+            7680,
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 512,
+        "status": 7680,
+        "family": "pcm22",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 512,
+        "status": 0,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 0,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            0,
+            7680,
+            0
+          ]
+        ],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 512,
+        "status": 7680,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 0,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 512,
+        "status": 0,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 0,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            0,
+            7680,
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 512,
+        "status": 7680,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 0,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 512,
+        "status": 0,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "before-planner"
+        ],
+        "return": null,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021010",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021018",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021028",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            0,
+            7680,
+            0
+          ],
+          [
+            "before-planner",
+            "00000000000000000000000000000000020000",
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 512,
+        "status": 7680,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 512,
+        "status": 0,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "before-planner"
+        ],
+        "return": null,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021010",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021018",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021028",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            0,
+            7680,
+            1
+          ],
+          [
+            "before-planner",
+            "00000000000000000000000000000000020000",
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 11,
+        "enabled": 512,
+        "status": 7680,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            512,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 4096,
+        "status": 0,
+        "family": "pcm22",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            0,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            0,
+            7680,
+            0
+          ]
+        ],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 4096,
+        "status": 7680,
+        "family": "pcm22",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 4096,
+        "status": 0,
+        "family": "pcm22",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            0,
+            7680,
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 4096,
+        "status": 7680,
+        "family": "pcm22",
+        "buck": 0,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 4096,
+        "status": 0,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 0,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            0
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            0,
+            7680,
+            0
+          ]
+        ],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 4096,
+        "status": 7680,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 0,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 4096,
+        "status": 0,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 0,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 0,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            0,
+            7680,
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 4096,
+        "status": 7680,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 0,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 4096,
+        "status": 0,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "before-planner"
+        ],
+        "return": null,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021010",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021018",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021028",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            0,
+            7680,
+            0
+          ],
+          [
+            "before-planner",
+            "00000000000000000000000000000000020000",
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 4096,
+        "status": 7680,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 0
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            0
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            0
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [],
+        "primask": 0,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 4096,
+        "status": 0,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "before-planner"
+        ],
+        "return": null,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021108",
+            4,
+            48,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021010",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021018",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021028",
+            4,
+            0,
+            1
+          ]
+        ],
+        "delays": [],
+        "callback_events": [
+          [
+            "group",
+            3,
+            0,
+            7680,
+            1
+          ],
+          [
+            "before-planner",
+            "00000000000000000000000000000000020000",
+            1
+          ]
+        ],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    },
+    {
+      "function": "uart_peripheral_disable",
+      "fixture": {
+        "domain": 14,
+        "enabled": 4096,
+        "status": 7680,
+        "family": "pcm22",
+        "buck": 48,
+        "signature": 520183821,
+        "primask": 1
+      },
+      "observed": {
+        "stop": [
+          "return"
+        ],
+        "return": 4,
+        "mmio_trace": [
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            4096,
+            1
+          ],
+          [
+            "W",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021004",
+            4,
+            0,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ],
+          [
+            "R",
+            "0x40021008",
+            4,
+            7680,
+            1
+          ]
+        ],
+        "delays": [
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "callback_events": [],
+        "primask": 1,
+        "pending_state": "00000001"
+      },
+      "matches": true
+    }
+  ],
+  "differences": [],
+  "reached_native_addresses": [
+    "0x100000",
+    "0x100004",
+    "0x100006",
+    "0x10000a",
+    "0x10000c",
+    "0x10000e",
+    "0x100010",
+    "0x100014",
+    "0x100016",
+    "0x100018",
+    "0x10001a",
+    "0x10001c",
+    "0x10001e",
+    "0x100022",
+    "0x100024",
+    "0x100026",
+    "0x100028",
+    "0x10002a",
+    "0x10002c",
+    "0x10002e",
+    "0x100030",
+    "0x100034",
+    "0x100038",
+    "0x10003a",
+    "0x10003c",
+    "0x10003e",
+    "0x100042",
+    "0x100046",
+    "0x100048",
+    "0x10004a",
+    "0x10004c",
+    "0x10004e",
+    "0x100050",
+    "0x100054",
+    "0x100058",
+    "0x10005a",
+    "0x10005c",
+    "0x10005e",
+    "0x100060",
+    "0x100062",
+    "0x100064",
+    "0x100068",
+    "0x10006a",
+    "0x10006c",
+    "0x10006e",
+    "0x100070",
+    "0x100072",
+    "0x100074",
+    "0x100078",
+    "0x10007a",
+    "0x100080",
+    "0x100082",
+    "0x100084",
+    "0x100086",
+    "0x10008a",
+    "0x10008c",
+    "0x10008e",
+    "0x100090",
+    "0x100092",
+    "0x100096",
+    "0x100098",
+    "0x10009a",
+    "0x10009c",
+    "0x10009e",
+    "0x1000a0",
+    "0x1000a2",
+    "0x1000a8",
+    "0x1000ac",
+    "0x1000b0",
+    "0x1000b2",
+    "0x1000b4",
+    "0x1000b6",
+    "0x1000ba",
+    "0x1000bc",
+    "0x1000c0",
+    "0x1000c2",
+    "0x1000c6",
+    "0x1000c8",
+    "0x1000cc",
+    "0x1000ce",
+    "0x1000d0",
+    "0x1000d2",
+    "0x1000d4",
+    "0x1000d6",
+    "0x1000d8",
+    "0x1000da",
+    "0x1000de",
+    "0x1000e0",
+    "0x1000e2",
+    "0x1000e4",
+    "0x1000e6",
+    "0x1000e8",
+    "0x1000ea",
+    "0x1000ee",
+    "0x1000f2",
+    "0x1000f4",
+    "0x1000f6",
+    "0x1000f8",
+    "0x1000fa",
+    "0x1000fc",
+    "0x1000fe",
+    "0x100100",
+    "0x100104",
+    "0x100106",
+    "0x100108",
+    "0x10010c",
+    "0x10010e",
+    "0x100110",
+    "0x100112",
+    "0x100116",
+    "0x100126",
+    "0x100128",
+    "0x100130",
+    "0x100132",
+    "0x100134",
+    "0x100136",
+    "0x100138",
+    "0x10013c",
+    "0x100144",
+    "0x10014c",
+    "0x10014e",
+    "0x100150",
+    "0x100154",
+    "0x10015c",
+    "0x100164",
+    "0x100166",
+    "0x100168",
+    "0x10016c",
+    "0x10016e",
+    "0x100170",
+    "0x100172",
+    "0x100176",
+    "0x100178",
+    "0x10017a",
+    "0x10017c",
+    "0x100184",
+    "0x100188",
+    "0x10018a",
+    "0x10018c",
+    "0x10018e",
+    "0x100192",
+    "0x100194",
+    "0x100198",
+    "0x10019a",
+    "0x10019c",
+    "0x10019e",
+    "0x1001a0",
+    "0x1001a2",
+    "0x1001a4",
+    "0x1001a8",
+    "0x1001aa",
+    "0x1001ac",
+    "0x1001b0",
+    "0x1001b2",
+    "0x1001b4",
+    "0x1001b6",
+    "0x1001b8",
+    "0x1001bc",
+    "0x1001be",
+    "0x1001c0",
+    "0x1001c2",
+    "0x1001c6",
+    "0x1001c8",
+    "0x1001cc",
+    "0x1001ce",
+    "0x1001d0",
+    "0x1001d2",
+    "0x1001d4",
+    "0x1001d6",
+    "0x1001d8",
+    "0x1001dc",
+    "0x1001de",
+    "0x1001e0",
+    "0x1001e2",
+    "0x1001e4",
+    "0x1001e6",
+    "0x1001e8",
+    "0x1001ea",
+    "0x1001ec",
+    "0x1001ee",
+    "0x100656",
+    "0x100658",
+    "0x10065a",
+    "0x10065c",
+    "0x100660",
+    "0x100664",
+    "0x100666",
+    "0x10066a",
+    "0x10066c",
+    "0x10066e",
+    "0x100670",
+    "0x100672",
+    "0x100676",
+    "0x100678",
+    "0x10067a",
+    "0x10067c",
+    "0x10067e",
+    "0x100680",
+    "0x100684",
+    "0x100686",
+    "0x1006a8",
+    "0x1006aa",
+    "0x1006ac",
+    "0x1006ae",
+    "0x1006b0",
+    "0x1006b2",
+    "0x1006b4",
+    "0x1006b6",
+    "0x1006b8",
+    "0x1006ba",
+    "0x1006bc",
+    "0x1006c0",
+    "0x1006c4",
+    "0x1006c8",
+    "0x1006cc",
+    "0x1006d0",
+    "0x1006ec",
+    "0x1006ee",
+    "0x1006f2",
+    "0x1006f4",
+    "0x1006f8",
+    "0x1007ac",
+    "0x1007ae",
+    "0x100830",
+    "0x100832",
+    "0x100834",
+    "0x100836",
+    "0x100838",
+    "0x10083a",
+    "0x10083c",
+    "0x10083e",
+    "0x100840",
+    "0x100878",
+    "0x10087a",
+    "0x100884",
+    "0x100886",
+    "0x100888",
+    "0x10088a",
+    "0x10088c",
+    "0x10088e",
+    "0x100890",
+    "0x100918",
+    "0x10091a",
+    "0x10091c",
+    "0x10091e",
+    "0x100926",
+    "0x10092a",
+    "0x10092c",
+    "0x10092e",
+    "0x100932",
+    "0x100936",
+    "0x100938",
+    "0x10093c",
+    "0x10093e",
+    "0x100940",
+    "0x100944",
+    "0x100946",
+    "0x100948",
+    "0x10094a",
+    "0x10094c",
+    "0x10094e",
+    "0x100950",
+    "0x100952",
+    "0x100956",
+    "0x100958",
+    "0x10095a",
+    "0x10095c",
+    "0x10097e",
+    "0x100980",
+    "0x100982",
+    "0x100984",
+    "0x100986",
+    "0x100988",
+    "0x10098a",
+    "0x10098c",
+    "0x10098e",
+    "0x100990",
+    "0x100992",
+    "0x100996",
+    "0x10099a",
+    "0x10099e",
+    "0x1009a2",
+    "0x1009a6",
+    "0x1009be",
+    "0x1009c0",
+    "0x1009c4",
+    "0x1009c6",
+    "0x1009ca",
+    "0x100aec",
+    "0x100aee",
+    "0x100af0",
+    "0x100b94",
+    "0x100b96",
+    "0x100b98",
+    "0x100b9a",
+    "0x100b9c",
+    "0x100b9e",
+    "0x100ba0",
+    "0x100ba2",
+    "0x100ba4",
+    "0x100ba8",
+    "0x100baa",
+    "0x100c4c",
+    "0x100c4e",
+    "0x100c50",
+    "0x100c86",
+    "0x100c88",
+    "0x100c8a",
+    "0x100c8c",
+    "0x100c8e",
+    "0x100c90",
+    "0x100c92",
+    "0x100d3c",
+    "0x100d3e",
+    "0x100d40",
+    "0x100d42"
+  ],
+  "limits": "UART11..14 enclosing MMIO traces with reused PCM2.1/2.2 callback source. Native callback gate paths complete; active planning stops before real planner and compares19-byte request. Synthetic delay/status; no planner/apply completion or physical power/scheduling."
+}

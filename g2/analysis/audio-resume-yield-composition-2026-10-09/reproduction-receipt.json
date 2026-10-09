@@ -1,0 +1,23 @@
+{
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "gcc_sha256": "2a447f8b93af6369ca0d165e713dd100f89b0681f98757f878e1e473fdc30f5f",
+  "flags": [
+    "-mcpu=cortex-m4",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "source": "g2/components/audio/pending_resume_offline/resume.c",
+  "source_sha256": "d17b129c724b4b47fcb06889219bc0b442f1364f20fc45c238ca0bfb51dba9c3",
+  "yield_source_sha256": "dd2e9e9cfe3ff315a71001d1ccf8edccb20f89de03c577c179969a8f4bbe9a61",
+  "elf": "/tmp/opencfw-resume-yield/resume.elf",
+  "elf_sha256": "cb7d963b59c3aed69e6d46417063a924f888f2328aea1f815d2663097f14c71c",
+  "link_script": "audio_resume_enter = 0x4420d1; audio_resume_exit = 0x4420e9; audio_resume_yield = opencfw_resume_yield_request; audio_resume_next_unblock = 0x455877; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }",
+  "additional_headers": {
+    "g2/components/foundation/freertos_resume/resume.h": "70b40111ce95d89cc95a6429e2e2f037d4d16920d4be7be5ee1e0ccc502abdfd",
+    "g2/components/foundation/freertos_ready/ready.h": "b88903df66fdfa00e97318afc5372de9ad2a5750b9d0ec32454e35042c7bfd7b",
+    "g2/components/audio/notification_wake_offline/wake.h": "34ffd5555001498cc6e9dd0b51b4d6f93687001e6314d4a65640575d954b22ac"
+  }
+}

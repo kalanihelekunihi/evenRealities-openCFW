@@ -1,0 +1,20 @@
+{
+  "elf": "/tmp/opencfw-codec-uart-drain/drain.elf",
+  "elf_sha256": "6b76dc3c2de83bbccb16c8330764f835e5a099782527980dcd3db230ff5f9925",
+  "sources": {
+    "g2/components/audio/codec_uart_drain_offline/drain.c": "eac8a63efe99ad2d819cff4e4db561d3f5cf5e5f9385ade30fd0d6ed907f710e",
+    "g2/components/audio/codec_uart_drain_offline/drain.h": "0099b093f0f3479d96b8625485f21252d8a8f24e54897f3d0081abbf2b28d6a8",
+    "g2/components/audio/uart_rx_consumer_offline/ring.h": "4b9187940c795dd9a910e6d286c0751c5305e4d34fecd0ac9a90e05252e14e5a"
+  },
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "flags": [
+    "-mcpu=cortex-m33",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "link_script": "SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }",
+  "limits": "Valid initialized mask63/staging SRAM only; no concurrent interrupt arrival or physical codec response."
+}

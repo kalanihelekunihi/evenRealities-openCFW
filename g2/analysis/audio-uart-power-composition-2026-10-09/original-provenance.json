@@ -1,0 +1,27 @@
+{
+  "raw_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "load_address": "0x438000",
+  "bodies": {
+    "enable_uart_subset": {
+      "address": "0x47f5b8",
+      "end_exclusive": "0x47f6f2",
+      "sha256": "13673fcaf66b6c4369e5d4ac3113c849e24e4de62998875dbc880313d81ab995"
+    },
+    "disable_uart_subset": {
+      "address": "0x47f7ae",
+      "end_exclusive": "0x47f90c",
+      "sha256": "c1c638d483abb63e8caf086fc59a50b19e0564e666ab3803e8482448227ba450"
+    },
+    "registrar_repeated": {
+      "address": "0x480434",
+      "end_exclusive": "0x4806f8",
+      "sha256": "c39f61572b56ef74a044906463f9a31f9d3cf4d7c158a24ef215c85f6c31f3f6"
+    },
+    "group_callback_original_dependency": {
+      "address": "0x5a0786",
+      "end_exclusive": "0x5a07e6",
+      "sha256": "a060f2a726d07c0c67a1c00ada3aa671c805cfdab3a34e26239a7ebafc86eaa3"
+    }
+  },
+  "limits": "UART subset only; whole original wrapper bytes bound for provenance, not whole function source equivalence."
+}

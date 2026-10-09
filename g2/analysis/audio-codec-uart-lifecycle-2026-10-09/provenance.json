@@ -1,0 +1,53 @@
+{
+  "wrapped_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "raw_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "load_address": "0x438000",
+  "evidence_byte_spans": {
+    "ring_initialize": {
+      "start": "0x598160",
+      "end_exclusive": "0x598198",
+      "sha256": "dc377657c9104672f869fbf0fdcb41ab9a3bb2c58c69e66957e29c8a932c520c"
+    },
+    "callback_registration": {
+      "start": "0x55e8f0",
+      "end_exclusive": "0x55e910",
+      "sha256": "2bcf9faa960cabd696a263a8cdd6dbb149978dee227ce67ca8f0e7d6fcba2b86"
+    },
+    "channel_enable": {
+      "start": "0x55e5bc",
+      "end_exclusive": "0x55e630",
+      "sha256": "e43b230bcec86a90d842537ddd4666eea09cff15ed163458dbdf1f2996904b18"
+    },
+    "channel_disable": {
+      "start": "0x55e630",
+      "end_exclusive": "0x55e6a0",
+      "sha256": "12d93fae69b53cb60a2b4d514a852293af577c98cf93eb2d224933a485678aac"
+    },
+    "channel_baud": {
+      "start": "0x55e898",
+      "end_exclusive": "0x55e8f0",
+      "sha256": "5346178be15cb9485abb8b4c761a4e2c423c86577ab4ea03859e079348f735d5"
+    },
+    "codec_init": {
+      "start": "0x58fb52",
+      "end_exclusive": "0x58fc0c",
+      "sha256": "a674dd367f19cd6dd65fcb5ee3a4ead12ae281b35c23978419a30a2fd12223d3"
+    },
+    "codec_close": {
+      "start": "0x58fc0c",
+      "end_exclusive": "0x58fcac",
+      "sha256": "68f13caed29cac418960958c08dbb203415a940761cfdf62fc5f3775dd88a764"
+    },
+    "codec_baud": {
+      "start": "0x58fab6",
+      "end_exclusive": "0x58fac8",
+      "sha256": "ef9b678c4a286c25a5a72a81b95a0fc5aa9af62a004136b896b1da61256c311d"
+    },
+    "host_init": {
+      "start": "0x57ba88",
+      "end_exclusive": "0x57baec",
+      "sha256": "b5bf11e5fd511eac451c4723beabdcf495d4b96bc6cb4ed343289e4ddcfd21c2"
+    }
+  },
+  "note": "Byte spans pin evidence; they do not assert all intervening bytes are instructions. Callback/drain reuse authenticated prior evidence."
+}

@@ -1,0 +1,23 @@
+{
+  "elf": "/tmp/opencfw-codec-lifecycle/drain.elf",
+  "elf_sha256": "d6ce6669b850eb64db32a342b0574061cc77695e5ea2ab9289793d6e585fbc38",
+  "sources": {
+    "g2/components/audio/codec_uart_lifecycle_offline/lifecycle.c": "08d1b5dd7fa9ed5227c32628fe3511dc6f47401885328e7d453d9fabd020b4b8",
+    "g2/components/audio/codec_uart_drain_offline/drain.c": "eac8a63efe99ad2d819cff4e4db561d3f5cf5e5f9385ade30fd0d6ed907f710e",
+    "g2/components/audio/uart_rx_consumer_offline/ring.c": "4c3ad9247963da8714f56426a88084efb97f56d8db4cd29f44aa9a42d1e6eaaf",
+    "g2/components/audio/codec_uart_lifecycle_offline/lifecycle.h": "99a65fab17c3652163c0a2f0d1e9322aa263b30552c418f3bba9a2812b056cb7",
+    "g2/components/audio/codec_uart_drain_offline/drain.h": "0099b093f0f3479d96b8625485f21252d8a8f24e54897f3d0081abbf2b28d6a8",
+    "g2/components/audio/uart_rx_consumer_offline/ring.h": "4b9187940c795dd9a910e6d286c0751c5305e4d34fecd0ac9a90e05252e14e5a"
+  },
+  "gcc": "/tmp/opencfw-arm-gnu/arm-gnu-toolchain-13.3.rel1-darwin-arm64-arm-none-eabi/bin/arm-none-eabi-gcc",
+  "flags": [
+    "-mcpu=cortex-m33",
+    "-mthumb",
+    "-Og",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-nostdlib"
+  ],
+  "link_script": "codec_hal_power = 0x58DBB9; codec_gpio_config = 0x480F0D; codec_hal_configure = 0x58E09F; SECTIONS { . = 0x100000; .text : { *(.text*) *(.rodata*) } /DISCARD/ : { *(.ARM.exidx*) *(.comment*) } }",
+  "limits": "213 original/source lifecycle comparisons with ordered state writes. GPIO/power/configure are explicit synthetic status providers; logs disabled. Callback addresses are normalized relocatable interface identities. Explicit callback entry/drain does not simulate IRQ or physical power/baud."
+}

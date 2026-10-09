@@ -1,0 +1,9 @@
+# Pending-ready resume through PendSV request and critical exit
+
+**84 stock/source compositions PASS** using the prior sealed pending-ready reconstruction and existing reconstructed yield-request provider. [Results](results.json), [final ELF/dependency receipt](reproduction-receipt.json). No new opaque function or independent source recovery is counted.
+
+Earlier tests stopped before yield0x4420BC. This additive successor executes the actual stock request on one side and native `opencfw_resume_yield_request` on the other, through the return of enclosing resume0x454DCC. On final resume, moved pending task with priority≥current or prior pending-yield triggers exactly one32-bit write`0x10000000` to SCB_ICSR0xE000ED04 **underBASEPRI0x30**. DSB/ISB execute, then actual critical exit0x4420E8 decrements nesting and clears BASEPRI to0. Nested resume count2→1 leaves pending work and emits no request. End-to-end return value, lists/task state/globals, critical depth, masks and SCB write match.
+
+Fixtures retain positive suspend counts1/2, coherent synthetic ready/pending/delayed lists, zero pending ticks and valid priorities0..2. No called function is stubbed. Pending ticks/provider replay is separately source-backed in the prior resume-ticks batch, not composed here. No exception is injected: reaching PendSV handler0x5FA0C8 is explicitly rejected, and hardware unstacking/context execution is unproven. This establishes **request and unmask**, not delivered scheduling or task/device shutdown. Existing PendSV context model separately stops before BX EXC_RETURN and does not close that physical boundary.
+
+Next useful composition is original notifier→pending-ready→resume with native children, then actual tick-replay source and task-selection model if needed. Actual exception entry/return and real initialized task population remain specific external-state limits, not reasons to assert patch safety or spend effort recreating already recovered source.
