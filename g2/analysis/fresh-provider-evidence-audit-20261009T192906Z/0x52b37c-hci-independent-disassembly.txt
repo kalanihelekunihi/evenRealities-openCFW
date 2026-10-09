@@ -1,0 +1,10 @@
+0052b37c: push {r7, lr}
+0052b37e: movs r1, #0
+0052b380: movw r0, #0x201c
+0052b384: bl #0x52ae38
+0052b388: movs r1, r0
+0052b38a: cmp r0, #0
+0052b38c: beq #0x52b394
+0052b38e: movs r0, r1
+0052b390: bl #0x52ae5e
+0052b394: pop {r0, pc}

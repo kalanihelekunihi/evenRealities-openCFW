@@ -1,0 +1,60 @@
+
+g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin:     file format binary
+
+
+Disassembly of section .data:
+
+00530cb2 <.data+0xf8cd2>:
+  530cb2:	b538      	push	{r3, r4, r5, lr}
+  530cb4:	2900      	cmp	r1, #0
+  530cb6:	d006      	beq.n	0x530cc6
+  530cb8:	7888      	ldrb	r0, [r1, #2]
+  530cba:	2801      	cmp	r0, #1
+  530cbc:	d102      	bne.n	0x530cc4
+  530cbe:	0008      	movs	r0, r1
+  530cc0:	f7fa f911 	bl	0x52aee6
+  530cc4:	bd31      	pop	{r0, r4, r5, pc}
+  530cc6:	07c0      	lsls	r0, r0, #31
+  530cc8:	d40d      	bmi.n	0x530ce6
+  530cca:	e7fb      	b.n	0x530cc4
+  530ccc:	0020      	movs	r0, r4
+  530cce:	f03a fb5f 	bl	0x56b390
+  530cd2:	f895 0021 	ldrb.w	r0, [r5, #33]	@ 0x21
+  530cd6:	2800      	cmp	r0, #0
+  530cd8:	d002      	beq.n	0x530ce0
+  530cda:	0020      	movs	r0, r4
+  530cdc:	f038 ff3b 	bl	0x569b56
+  530ce0:	0020      	movs	r0, r4
+  530ce2:	f78e fe65 	bl	0x4bf9b0
+  530ce6:	4d21      	ldr	r5, [pc, #132]	@ (0x530d6c)
+  530ce8:	4669      	mov	r1, sp
+  530cea:	0028      	movs	r0, r5
+  530cec:	f78e fe7e 	bl	0x4bf9ec
+  530cf0:	0004      	movs	r4, r0
+  530cf2:	2c00      	cmp	r4, #0
+  530cf4:	d0e6      	beq.n	0x530cc4
+  530cf6:	f89d 0000 	ldrb.w	r0, [sp]
+  530cfa:	2804      	cmp	r0, #4
+  530cfc:	d0e6      	beq.n	0x530ccc
+  530cfe:	f89d 0000 	ldrb.w	r0, [sp]
+  530d02:	2802      	cmp	r0, #2
+  530d04:	d109      	bne.n	0x530d1a
+  530d06:	0020      	movs	r0, r4
+  530d08:	f7f9 fe2b 	bl	0x52a962
+  530d0c:	0001      	movs	r1, r0
+  530d0e:	2800      	cmp	r0, #0
+  530d10:	d0e9      	beq.n	0x530ce6
+  530d12:	0008      	movs	r0, r1
+  530d14:	6929      	ldr	r1, [r5, #16]
+  530d16:	4788      	blx	r1
+  530d18:	e7e5      	b.n	0x530ce6
+  530d1a:	69a8      	ldr	r0, [r5, #24]
+  530d1c:	2800      	cmp	r0, #0
+  530d1e:	d003      	beq.n	0x530d28
+  530d20:	0020      	movs	r0, r4
+  530d22:	69a9      	ldr	r1, [r5, #24]
+  530d24:	4788      	blx	r1
+  530d26:	e7de      	b.n	0x530ce6
+  530d28:	0020      	movs	r0, r4
+  530d2a:	f78e fe41 	bl	0x4bf9b0
+  530d2e:	e7da      	b.n	0x530ce6

@@ -1,0 +1,56 @@
+{
+  "status": "PASS",
+  "components": [
+    {
+      "component": "apollo_main",
+      "envelope_hashes_verified": 8853,
+      "raw_success_functions": 8475,
+      "raw_union_bytes": 1555524,
+      "payload_bytes": 3523396,
+      "artifact_associated_payload_percent": 44.14843,
+      "image_bytes": 3523364,
+      "image_fraction_percent": 44.14883,
+      "union_and_complement_verified": true,
+      "nonempty_output_hashes_verified": true
+    },
+    {
+      "component": "apollo_bootloader",
+      "envelope_hashes_verified": 903,
+      "raw_success_functions": 849,
+      "raw_union_bytes": 112506,
+      "payload_bytes": 148599,
+      "artifact_associated_payload_percent": 75.711142,
+      "image_bytes": 148599,
+      "image_fraction_percent": 75.711142,
+      "union_and_complement_verified": true,
+      "nonempty_output_hashes_verified": true
+    },
+    {
+      "component": "touch",
+      "envelope_hashes_verified": 308,
+      "raw_success_functions": 308,
+      "raw_union_bytes": 27879,
+      "payload_bytes": 34464,
+      "artifact_associated_payload_percent": 80.893106,
+      "image_bytes": 34432,
+      "image_fraction_percent": 80.968285,
+      "union_and_complement_verified": true,
+      "nonempty_output_hashes_verified": true
+    },
+    {
+      "component": "case",
+      "envelope_hashes_verified": 435,
+      "raw_success_functions": 435,
+      "raw_union_bytes": 43072,
+      "payload_bytes": 55784,
+      "artifact_associated_payload_percent": 77.212104,
+      "image_bytes": 55752,
+      "image_fraction_percent": 77.256421,
+      "union_and_complement_verified": true,
+      "nonempty_output_hashes_verified": true
+    }
+  ],
+  "total_envelope_hashes_verified": 10499,
+  "literal_example": "touch constructor envelope ends AA1C before its separately authenticated16-byte literal pool; byte-envelope authentication does not classify remaining corpus ranges as code or data",
+  "qualification": "Artifact-associated raw decompiler range fractions only; no executable, semantic review, source or correctness percentage. Four-component cohort, no six-component global total."
+}

@@ -1,0 +1,48 @@
+1000ef64:	14d5      	push      	r4-r8, r15
+1000ef66:	1421      	subi      	r14, r14, 4
+1000ef68:	6d0b      	mov      	r4, r2
+1000ef6a:	8044      	ld.b      	r2, (r0, 0x4)
+1000ef6c:	3a41      	cmpnei      	r2, 1
+1000ef6e:	90c0      	ld.w      	r6, (r0, 0x0)
+1000ef70:	6d43      	mov      	r5, r0
+1000ef72:	6dc7      	mov      	r7, r1
+1000ef74:	d9002004 	ld.w      	r8, (r0, 0x10)
+1000ef78:	4ec1      	lsri      	r6, r6, 1
+1000ef7a:	0c0f      	bf      	0x1000ef98	// 0x1000ef98
+1000ef7c:	8065      	ld.b      	r3, (r0, 0x5)
+1000ef7e:	6c23      	mov      	r0, r8
+1000ef80:	e000012a 	bsr      	0x1000f1d4	// 0x1000f1d4
+1000ef84:	9562      	ld.w      	r3, (r5, 0x8)
+1000ef86:	b860      	st.w      	r3, (r14, 0x0)
+1000ef88:	9543      	ld.w      	r2, (r5, 0xc)
+1000ef8a:	6cd3      	mov      	r3, r4
+1000ef8c:	6c5b      	mov      	r1, r6
+1000ef8e:	6c1f      	mov      	r0, r7
+1000ef90:	e0000022 	bsr      	0x1000efd4	// 0x1000efd4
+1000ef94:	1401      	addi      	r14, r14, 4
+1000ef96:	1495      	pop      	r4-r8, r15
+1000ef98:	9062      	ld.w      	r3, (r0, 0x8)
+1000ef9a:	b860      	st.w      	r3, (r14, 0x0)
+1000ef9c:	9043      	ld.w      	r2, (r0, 0xc)
+1000ef9e:	6cd3      	mov      	r3, r4
+1000efa0:	6c5b      	mov      	r1, r6
+1000efa2:	6c1f      	mov      	r0, r7
+1000efa4:	e0000062 	bsr      	0x1000f068	// 0x1000f068
+1000efa8:	6c53      	mov      	r1, r4
+1000efaa:	8565      	ld.b      	r3, (r5, 0x5)
+1000efac:	8544      	ld.b      	r2, (r5, 0x4)
+1000efae:	6c23      	mov      	r0, r8
+1000efb0:	e0000112 	bsr      	0x1000f1d4	// 0x1000f1d4
+1000efb4:	9520      	ld.w      	r1, (r5, 0x0)
+1000efb6:	e901ffef 	bez      	r1, 0x1000ef94	// 0x1000ef94
+1000efba:	6044      	addu      	r1, r1
+1000efbc:	6c93      	mov      	r2, r4
+1000efbe:	6050      	addu      	r1, r4
+1000efc0:	d8625000 	ld.hs      	r3, (r2, 0x0)
+1000efc4:	60cc      	addu      	r3, r3
+1000efc6:	d4028403 	stbi.h      	r3, (r2)
+1000efca:	6486      	cmpne      	r1, r2
+1000efcc:	0bfa      	bt      	0x1000efc0	// 0x1000efc0
+1000efce:	1401      	addi      	r14, r14, 4
+1000efd0:	1495      	pop      	r4-r8, r15
+1000efd2:	0000      	bkpt

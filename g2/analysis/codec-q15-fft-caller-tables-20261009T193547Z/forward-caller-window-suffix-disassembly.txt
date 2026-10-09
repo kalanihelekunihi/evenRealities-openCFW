@@ -1,0 +1,52 @@
+1000d362:	ea08000f 	movi      	r8, 15
+1000d366:	6ca3      	mov      	r2, r8
+1000d368:	d8702025 	ld.w      	r3, (r16, 0x94)
+1000d36c:	d4830442 	str.h      	r2, (r3, r4 << 1)
+1000d370:	e96b003d 	blsz      	r11, 0x1000d3ea	// 0x1000d3ea
+1000d374:	c5290023 	addu      	r3, r9, r9
+1000d378:	b860      	st.w      	r3, (r14, 0x0)
+1000d37a:	60d4      	addu      	r3, r5
+1000d37c:	b861      	st.w      	r3, (r14, 0x4)
+1000d37e:	7622      	sextb      	r8, r8
+1000d380:	117a      	lrw      	r3, 0x20017020	// 0x1000d468
+1000d382:	62a6      	subu      	r10, r9
+1000d384:	61dc      	addu      	r7, r7
+1000d386:	ea110000 	movi      	r17, 0
+1000d38a:	b862      	st.w      	r3, (r14, 0x8)
+1000d38c:	e911006a 	bez      	r17, 0x1000d460	// 0x1000d460
+1000d390:	d890201f 	ld.w      	r4, (r16, 0x7c)
+1000d394:	611c      	addu      	r4, r7
+1000d396:	6ce7      	mov      	r3, r9
+1000d398:	6c97      	mov      	r2, r5
+1000d39a:	6c63      	mov      	r1, r8
+1000d39c:	6c1b      	mov      	r0, r6
+1000d39e:	e0000e91 	bsr      	0x1000f0c0	// 0x1000f0c0
+1000d3a2:	d9902003 	ld.w      	r12, (r16, 0xc)
+1000d3a6:	e96c0011 	blsz      	r12, 0x1000d3c8	// 0x1000d3c8
+1000d3aa:	6330      	addu      	r12, r12
+1000d3ac:	6c97      	mov      	r2, r5
+1000d3ae:	d830201c 	ld.w      	r1, (r16, 0x70)
+1000d3b2:	6314      	addu      	r12, r5
+1000d3b4:	d8625000 	ld.hs      	r3, (r2, 0x0)
+1000d3b8:	d0018800 	ldbi.w      	r0, (r1)
+1000d3bc:	7cc0      	mult      	r3, r0
+1000d3be:	536f      	asri      	r3, r3, 15
+1000d3c0:	d4028403 	stbi.h      	r3, (r2)
+1000d3c4:	670a      	cmpne      	r2, r12
+1000d3c6:	0bf7      	bt      	0x1000d3b4	// 0x1000d3b4
+1000d3c8:	6cab      	mov      	r2, r10
+1000d3ca:	9821      	ld.w      	r1, (r14, 0x4)
+1000d3cc:	3000      	movi      	r0, 0
+1000d3ce:	e0000eef 	bsr      	0x1000f1ac	// 0x1000f1ac
+1000d3d2:	e6310000 	addi      	r17, r17, 1
+1000d3d6:	6c93      	mov      	r2, r4
+1000d3d8:	6c57      	mov      	r1, r5
+1000d3da:	9802      	ld.w      	r0, (r14, 0x8)
+1000d3dc:	e0000dc4 	bsr      	0x1000ef64	// 0x1000ef64
+1000d3e0:	c62b0480 	cmpne      	r11, r17
+1000d3e4:	9860      	ld.w      	r3, (r14, 0x0)
+1000d3e6:	618c      	addu      	r6, r3
+1000d3e8:	0bd2      	bt      	0x1000d38c	// 0x1000d38c
+1000d3ea:	3000      	movi      	r0, 0
+1000d3ec:	1404      	addi      	r14, r14, 16
+1000d3ee:	ebc00058 	pop      	r4-r11, r15, r16-r17

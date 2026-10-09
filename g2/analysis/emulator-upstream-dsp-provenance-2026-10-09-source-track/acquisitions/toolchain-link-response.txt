@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+  <meta name="apple-mobile-web-app-title" content="">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no" />
+  <meta http-equiv="Expires" content="0">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Cache-control" content="no-cache">
+  <meta http-equiv="Cache" content="no-cache">
+  <link id="link-icon" rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <title></title>
+  <script>
+    // 判断是否是移动端
+    function IsPC() {
+      var userAgentInfo = navigator.userAgent;
+      var Agents = ["Android", "iPhone",
+        "SymbianOS", "Windows Phone",
+        "iPad", "iPod"];
+      var flag = true;
+      for (var v = 0; v < Agents.length; v++) {
+        if (userAgentInfo.indexOf(Agents[v]) > 0) {
+          flag = false;
+          break;
+        }
+      }
+      return flag;
+    }
+    function isMobile() { // 用于ipad 设备适配
+      return 'ontouchend' in document;
+    }
+    function isMacME() { // 由于内嵌webview，对于userAgent识别有误，增加兼容解决方法
+      var ua = navigator.userAgent.toLowerCase()
+      var isMac = ua.indexOf("mac")!==-1 && ua.indexOf("applewebkit") != -1
+      return isMac && 'ontouchend' in document
+    }
+    // 判断ie版本
+    function IsIE(){
+      var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+      var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器
+      var isEdge = userAgent.indexOf("Edge") > -1 && !isIE; //判断是否IE的Edge浏览器
+      var isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1;
+      if(isIE) {
+        var reIE = new RegExp("MSIE (\\d+\\.\\d+);");
+        reIE.test(userAgent);
+        var fIEVersion = parseFloat(RegExp["$1"]);
+        if(fIEVersion === 7) {
+          return false
+        } else if(fIEVersion === 8) {
+          return false
+        } else if(fIEVersion === 9) {
+          return false
+        } else if(fIEVersion === 10) {
+          return false
+        } else {
+          return false//IE版本<=7
+        }
+      } else if(isEdge) {
+        return 'edge';//edge
+      } else if(isIE11) {
+        return 11; //IE11
+      }else{
+        return -1;//不是ie浏览器
+      }
+    }
+    var isMobileDsc = isMobile()
+    if(isMobileDsc){// 涉及到php的页面渲染，php无法写js语句，转为cookie获取设配适配
+      document.cookie="isIPad=true; path=/"
+    }else{
+      document.cookie="isIPad=false; path=/"
+    }
+    if(!IsPC() || !IsIE() || isMobileDsc || isMacME()){
+      var pathname = window.location.pathname.substr(2)
+      if (pathname.indexOf('/link/view') > -1 || pathname.indexOf('/approve/view') > -1) {
+        window.location.href = pathname
+      }
+    }
+  </script>
+<link href="/v/preview/vendors~main.2660d8f9437677c93491.css" rel="stylesheet"><link href="/v/preview/main.85f28e1ea094e49b761f.css" rel="stylesheet"></head>
+
+<body>
+<style>
+#first-loading {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#first-loading img {
+  margin: 0 auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#reload-area {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 999;
+  background: #FFFFFF;
+  text-align: center;
+  display: none;
+}
+
+#reload-area .content {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#reload-area .info {
+  color: #637282;
+  font-size: 12px;
+}
+
+#reload-area .info .reload {
+  color: #0A64FA;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+#reload-area .info .reload:hover {
+  color: #3B83FB;
+}
+
+#reload-area .info .reload:active {
+  color: #095AE1;
+}
+</style>
+  <div id="app"></div>
+<script type="text/javascript" src="/v/preview/vendors~main.2660d8f9437677c93491.js"></script><script type="text/javascript" src="/v/preview/main.85f28e1ea094e49b761f.js"></script></body>
+
+<script src="/v/preview//version.js" async ></script>
+</html>

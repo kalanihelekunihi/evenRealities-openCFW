@@ -1,0 +1,27 @@
+{
+  "image": "ubuntu:18.04",
+  "image_inspect": "arm64 sha256:152dc042452c496007f07ca9127571cb9c29697f42acbfad72324b2bb2e43c98\n",
+  "command": [
+    "docker",
+    "run",
+    "--rm",
+    "--network=none",
+    "--read-only",
+    "--platform",
+    "linux/amd64",
+    "--mount",
+    "type=bind,src=/var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/opencfw-csky-20190929-5c1oz7e_,dst=/tool,readonly",
+    "--mount",
+    "type=bind,src=/Users/kalani/Repo/evenRealities-openCFW,dst=/repo,readonly",
+    "--mount",
+    "type=bind,src=/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-c-compiler-successor-20261009T195245Z,dst=/out",
+    "--tmpfs",
+    "/tmp:rw",
+    "ubuntu:18.04",
+    "/tool/bin/csky-abiv2-elf-gcc",
+    "--version"
+  ],
+  "returncode": 125,
+  "stdout": "",
+  "stderr": "docker: Error response from daemon: invalid mount config for type \"bind\": bind source path does not exist: /var/folders/mh/nz9vzlpn7kzff18f77pztg880000gn/T/opencfw-csky-20190929-5c1oz7e_\n\nRun 'docker run --help' for more information\n"
+}

@@ -1,0 +1,67 @@
+{
+  "all_pass": true,
+  "checks": [
+    {
+      "file": "g2/analysis/emulator-upstream-fresh-2026-10-09-1810-source-track/references/pigweed-hci/hci_events.emb",
+      "expected_sha256": "2fad7aace582bd71cae5de9ec2623aa7a1031767982e5d5408ab9ff4004a1aed",
+      "actual_sha256": "2fad7aace582bd71cae5de9ec2623aa7a1031767982e5d5408ab9ff4004a1aed",
+      "pass": true
+    },
+    {
+      "file": "g2/analysis/emulator-upstream-fresh-2026-10-09-1810-source-track/references/pigweed-hci/hci_common.emb",
+      "expected_sha256": "a52583145785eaded3f401cc29e7b32190b5738452b23de8660dd9ed9f701963",
+      "actual_sha256": "a52583145785eaded3f401cc29e7b32190b5738452b23de8660dd9ed9f701963",
+      "pass": true
+    },
+    {
+      "file": "g2/analysis/emulator-upstream-fresh-2026-10-09-1810-source-track/references/pigweed-hci/hci_commands.emb",
+      "expected_sha256": "1bb36efb68c3148f99309eff65cbcf17a240689837b114d7412bdd32cc1cb4eb",
+      "actual_sha256": "1bb36efb68c3148f99309eff65cbcf17a240689837b114d7412bdd32cc1cb4eb",
+      "pass": true
+    },
+    {
+      "file": "g2/analysis/emulator-upstream-fresh-2026-10-09-1810-source-track/references/pigweed-hci/LICENSE",
+      "expected_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "actual_sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "pass": true
+    },
+    {
+      "schema_bit": 6,
+      "name": "initiating",
+      "pass": true
+    },
+    {
+      "schema_bit": 35,
+      "name": "central_role_connection_and_connectable_scannable_undirected_advertising",
+      "pass": true
+    },
+    {
+      "schema_bit": 41,
+      "name": "peripheral_role_connection_and_initiating",
+      "pass": true
+    },
+    {
+      "check": "opcode201C",
+      "pass": true
+    },
+    {
+      "check": "stock command extent",
+      "start": "0x52b37c",
+      "end": "0x52b396",
+      "sha256": "f5157588cb8c13e2cce9404ff5ed7d6a6027954ae4ce6469f4050ad0ffce6dbd",
+      "pass": true
+    },
+    {
+      "check": "independent schema/H4 representation calculation",
+      "bitmap_hex": "4000000008020000",
+      "packet_hex": "040e0c011c20004000000008020000",
+      "status_offset_h4": 6,
+      "bitmap_offset_h4": 7,
+      "event_parameter_size": 12,
+      "h4_packet_bytes": 15,
+      "pass": true
+    }
+  ],
+  "provenance_limit": "hashes verify retained acquired bytes; URLs/pin recorded by discovery, no independent network reacquisition",
+  "no_schema_compilation": true
+}

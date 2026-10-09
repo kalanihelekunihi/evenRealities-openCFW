@@ -1,0 +1,83 @@
+1000f1d4:	14d3      	push      	r4-r6, r15
+1000f1d6:	3a41      	cmpnei      	r2, 1
+1000f1d8:	6d47      	mov      	r5, r1
+1000f1da:	6d03      	mov      	r4, r0
+1000f1dc:	6d8f      	mov      	r6, r3
+1000f1de:	8820      	ld.h      	r1, (r0, 0x0)
+1000f1e0:	0c33      	bf      	0x1000f246	// 0x1000f246
+1000f1e2:	eb410100 	cmpnei      	r1, 256
+1000f1e6:	0c23      	bf      	0x1000f22c	// 0x1000f22c
+1000f1e8:	eb010100 	cmphsi      	r1, 257
+1000f1ec:	0814      	bt      	0x1000f214	// 0x1000f214
+1000f1ee:	eb410020 	cmpnei      	r1, 32
+1000f1f2:	0c0a      	bf      	0x1000f206	// 0x1000f206
+1000f1f4:	eb010020 	cmphsi      	r1, 33
+1000f1f8:	0c54      	bf      	0x1000f2a0	// 0x1000f2a0
+1000f1fa:	eb410040 	cmpnei      	r1, 64
+1000f1fe:	0c17      	bf      	0x1000f22c	// 0x1000f22c
+1000f200:	eb410080 	cmpnei      	r1, 128
+1000f204:	0805      	bt      	0x1000f20e	// 0x1000f20e
+1000f206:	9441      	ld.w      	r2, (r4, 0x4)
+1000f208:	6c17      	mov      	r0, r5
+1000f20a:	e0000055 	bsr      	0x1000f2b4	// 0x1000f2b4
+1000f20e:	e9260016 	bnez      	r6, 0x1000f23a	// 0x1000f23a
+1000f212:	1493      	pop      	r4-r6, r15
+1000f214:	eb410400 	cmpnei      	r1, 1024
+1000f218:	0c0a      	bf      	0x1000f22c	// 0x1000f22c
+1000f21a:	eb010400 	cmphsi      	r1, 1025
+1000f21e:	0c3d      	bf      	0x1000f298	// 0x1000f298
+1000f220:	eb410800 	cmpnei      	r1, 2048
+1000f224:	0ff1      	bf      	0x1000f206	// 0x1000f206
+1000f226:	eb411000 	cmpnei      	r1, 4096
+1000f22a:	0bf2      	bt      	0x1000f20e	// 0x1000f20e
+1000f22c:	3301      	movi      	r3, 1
+1000f22e:	9441      	ld.w      	r2, (r4, 0x4)
+1000f230:	6c17      	mov      	r0, r5
+1000f232:	e00000e5 	bsr      	0x1000f3fc	// 0x1000f3fc
+1000f236:	e906ffee 	bez      	r6, 0x1000f212	// 0x1000f212
+1000f23a:	9442      	ld.w      	r2, (r4, 0x8)
+1000f23c:	8c26      	ld.h      	r1, (r4, 0xc)
+1000f23e:	6c17      	mov      	r0, r5
+1000f240:	e00002f2 	bsr      	0x1000f824	// 0x1000f824
+1000f244:	1493      	pop      	r4-r6, r15
+1000f246:	eb410100 	cmpnei      	r1, 256
+1000f24a:	0c21      	bf      	0x1000f28c	// 0x1000f28c
+1000f24c:	eb010100 	cmphsi      	r1, 257
+1000f250:	0812      	bt      	0x1000f274	// 0x1000f274
+1000f252:	eb410020 	cmpnei      	r1, 32
+1000f256:	0c0a      	bf      	0x1000f26a	// 0x1000f26a
+1000f258:	eb010020 	cmphsi      	r1, 33
+1000f25c:	0c29      	bf      	0x1000f2ae	// 0x1000f2ae
+1000f25e:	eb410040 	cmpnei      	r1, 64
+1000f262:	0c15      	bf      	0x1000f28c	// 0x1000f28c
+1000f264:	eb410080 	cmpnei      	r1, 128
+1000f268:	0bd3      	bt      	0x1000f20e	// 0x1000f20e
+1000f26a:	9441      	ld.w      	r2, (r4, 0x4)
+1000f26c:	6c17      	mov      	r0, r5
+1000f26e:	e0000075 	bsr      	0x1000f358	// 0x1000f358
+1000f272:	07ce      	br      	0x1000f20e	// 0x1000f20e
+1000f274:	eb410400 	cmpnei      	r1, 1024
+1000f278:	0c0a      	bf      	0x1000f28c	// 0x1000f28c
+1000f27a:	eb010400 	cmphsi      	r1, 1025
+1000f27e:	0c14      	bf      	0x1000f2a6	// 0x1000f2a6
+1000f280:	eb410800 	cmpnei      	r1, 2048
+1000f284:	0ff3      	bf      	0x1000f26a	// 0x1000f26a
+1000f286:	eb411000 	cmpnei      	r1, 4096
+1000f28a:	0bc2      	bt      	0x1000f20e	// 0x1000f20e
+1000f28c:	3301      	movi      	r3, 1
+1000f28e:	9441      	ld.w      	r2, (r4, 0x4)
+1000f290:	6c17      	mov      	r0, r5
+1000f292:	e00001bf 	bsr      	0x1000f610	// 0x1000f610
+1000f296:	07bc      	br      	0x1000f20e	// 0x1000f20e
+1000f298:	eb410200 	cmpnei      	r1, 512
+1000f29c:	0fb5      	bf      	0x1000f206	// 0x1000f206
+1000f29e:	07b8      	br      	0x1000f20e	// 0x1000f20e
+1000f2a0:	3950      	cmpnei      	r1, 16
+1000f2a2:	0bb6      	bt      	0x1000f20e	// 0x1000f20e
+1000f2a4:	07c4      	br      	0x1000f22c	// 0x1000f22c
+1000f2a6:	eb410200 	cmpnei      	r1, 512
+1000f2aa:	0fe0      	bf      	0x1000f26a	// 0x1000f26a
+1000f2ac:	07b1      	br      	0x1000f20e	// 0x1000f20e
+1000f2ae:	3950      	cmpnei      	r1, 16
+1000f2b0:	0baf      	bt      	0x1000f20e	// 0x1000f20e
+1000f2b2:	07ed      	br      	0x1000f28c	// 0x1000f28c

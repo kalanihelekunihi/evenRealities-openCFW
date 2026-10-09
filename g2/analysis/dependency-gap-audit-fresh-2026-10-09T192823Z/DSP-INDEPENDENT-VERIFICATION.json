@@ -1,0 +1,476 @@
+{
+  "all_pass": true,
+  "checks": [
+    {
+      "label": "codec hash",
+      "pass": true
+    },
+    {
+      "label": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_dsp.a",
+      "pass": true
+    },
+    {
+      "label": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_CK804ef_math.a",
+      "pass": true
+    },
+    {
+      "label": "third-party/upstream/nationalchip-lvp-kws/lib/libvma.a",
+      "pass": true
+    },
+    {
+      "label": "csky_bitreversal2.o:.text.csky_bitreversal_16",
+      "pass": true,
+      "object_sha256": "2d2217f6f5519272215d2ac254f23fb39ee9fa6b2e24ad497a1a191a29d2e2b0",
+      "relocations_targeting_section": [],
+      "section_flags": "0x6",
+      "offsets": [
+        "0x48164"
+      ]
+    },
+    {
+      "label": "csky_cfft_radix4_q15.o:.text.csky_radix4_butterfly_q15",
+      "pass": true,
+      "object_sha256": "ab272b283b359eee0bfd14bcc45b9d0871fab14eeb332ccaa7dcc3afc56cb0ab",
+      "relocations_targeting_section": [],
+      "section_flags": "0x6",
+      "offsets": [
+        "0x47d3c"
+      ]
+    },
+    {
+      "label": "csky_cfft_radix4_q15.o:.text.csky_radix4_butterfly_inverse_q15",
+      "pass": true,
+      "object_sha256": "ab272b283b359eee0bfd14bcc45b9d0871fab14eeb332ccaa7dcc3afc56cb0ab",
+      "relocations_targeting_section": [],
+      "section_flags": "0x6",
+      "offsets": [
+        "0x47f50"
+      ]
+    },
+    {
+      "label": "csky_rfft_q15.o/:.text.csky_split_rfft_q15",
+      "pass": true,
+      "object_sha256": "88985efd0de7a03ffb315a9420a5df175fd2dccc939d6a0fdb3da5f476f35e46",
+      "relocations_targeting_section": [],
+      "section_flags": "0x6",
+      "offsets": [
+        "0x47914"
+      ]
+    },
+    {
+      "label": "csky_rfft_q15.o/:.text.csky_split_rifft_q15",
+      "pass": true,
+      "object_sha256": "88985efd0de7a03ffb315a9420a5df175fd2dccc939d6a0fdb3da5f476f35e46",
+      "relocations_targeting_section": [],
+      "section_flags": "0x6",
+      "offsets": [
+        "0x479a8"
+      ]
+    },
+    {
+      "label": "csky_shift_q15.o:.text.csky_shift_q15",
+      "pass": true,
+      "object_sha256": "4551190c279731a2713c1ba03344bb987de606b459955b65553cc7e738ed6eb5",
+      "relocations_targeting_section": [],
+      "section_flags": "0x6",
+      "offsets": [
+        "0x47a00"
+      ]
+    },
+    {
+      "label": "csky_abs_max_q15.o:.text.csky_abs_max_q15",
+      "pass": true,
+      "object_sha256": "205c42f52b181b7a4b1c382c024cbc96927a20d111f4a8526a1eeb0409aa9bd5",
+      "relocations_targeting_section": [],
+      "section_flags": "0x6",
+      "offsets": [
+        "0x47a74"
+      ]
+    },
+    {
+      "label": "csky_copy_q15.o/:.text.csky_copy_q15",
+      "pass": true,
+      "object_sha256": "266ff2245846ce76b29a012c9ed6b7f1d2bdd6a61a531fe431564b21c3acf96a",
+      "relocations_targeting_section": [],
+      "section_flags": "0x6",
+      "offsets": [
+        "0x47ac0"
+      ]
+    },
+    {
+      "label": "csky_fill_q15.o/:.text.csky_fill_q15",
+      "pass": true,
+      "object_sha256": "85206f3a198448938dba9d3fc3433cf332e4e84e9b1e2852d7b424dd561a7da4",
+      "relocations_targeting_section": [],
+      "section_flags": "0x6",
+      "offsets": [
+        "0x47aec"
+      ]
+    },
+    {
+      "label": "csky_abs_max_q15.o:.text.csky_abs_max_q15",
+      "pass": true,
+      "object_sha256": "e1c6bd80993a528e5b774d3212b3692c22264f38a736a4f0997fd7cef7a7aaad",
+      "relocations_targeting_section": [],
+      "section_flags": "0x6",
+      "offsets": [
+        "0x47a74"
+      ]
+    },
+    {
+      "label": "csky_shift_q15.o:.text.csky_shift_q15",
+      "pass": true,
+      "object_sha256": "95d08279ed8d6a0b25dffae91bf696c4e0f746b29a254cf655f74d8798bad872",
+      "relocations_targeting_section": [],
+      "section_flags": "0x6",
+      "offsets": [
+        "0x47a00"
+      ]
+    },
+    {
+      "label": "csky_copy_q15.o/:.text.csky_copy_q15",
+      "pass": true,
+      "object_sha256": "c7a9a28bed82c8433fe932e707c4dce9bc0bc94f1be7f630cc21863e7252eb48",
+      "relocations_targeting_section": [],
+      "section_flags": "0x6",
+      "offsets": [
+        "0x47ac0"
+      ]
+    },
+    {
+      "label": "csky_fill_q15.o/:.text.csky_fill_q15",
+      "pass": true,
+      "object_sha256": "be68a79e3ce8099587bd3ba1b231c6ef264623d8c7a6ba58da4d0118a61a7b71",
+      "relocations_targeting_section": [],
+      "section_flags": "0x6",
+      "offsets": [
+        "0x47aec"
+      ]
+    },
+    {
+      "label": "csky_bitreversal2.o:.text.csky_bitreversal_16",
+      "pass": true,
+      "object_sha256": "6102c2fe55fa945d3105d233ffb2ce71b955b342b69ff354a85d1af82ca23113",
+      "relocations_targeting_section": [],
+      "section_flags": "0x6",
+      "offsets": [
+        "0x48164"
+      ]
+    },
+    {
+      "label": "csky_cfft_radix4_q15.o:.text.csky_radix4_butterfly_q15",
+      "pass": true,
+      "object_sha256": "81e4df918883949ead90fdaa5745a56d61deb1f7ec8369a7334d4af580c505aa",
+      "relocations_targeting_section": [],
+      "section_flags": "0x6",
+      "offsets": [
+        "0x47d3c"
+      ]
+    },
+    {
+      "label": "csky_cfft_radix4_q15.o:.text.csky_radix4_butterfly_inverse_q15",
+      "pass": true,
+      "object_sha256": "81e4df918883949ead90fdaa5745a56d61deb1f7ec8369a7334d4af580c505aa",
+      "relocations_targeting_section": [],
+      "section_flags": "0x6",
+      "offsets": [
+        "0x47f50"
+      ]
+    },
+    {
+      "label": "csky_rfft_q15.o/:.text.csky_split_rfft_q15",
+      "pass": true,
+      "object_sha256": "1c08d14f5c3c489c48d5ea8b10ee52d972ff7237cfbac6cb16a5f7a72361fda3",
+      "relocations_targeting_section": [],
+      "section_flags": "0x6",
+      "offsets": [
+        "0x47914"
+      ]
+    },
+    {
+      "label": "csky_rfft_q15.o/:.text.csky_split_rifft_q15",
+      "pass": true,
+      "object_sha256": "1c08d14f5c3c489c48d5ea8b10ee52d972ff7237cfbac6cb16a5f7a72361fda3",
+      "relocations_targeting_section": [],
+      "section_flags": "0x6",
+      "offsets": [
+        "0x479a8"
+      ]
+    },
+    {
+      "label": "deduplication9/1606 nonoverlap",
+      "pass": true
+    },
+    {
+      "label": "BINH B stage2 bounds",
+      "pass": true
+    },
+    {
+      "label": "source third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source/TransformFunctions/csky_cfft_radix4_q15.c",
+      "pass": true
+    },
+    {
+      "label": "source third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source/TransformFunctions/csky_rfft_q15.c",
+      "pass": true
+    },
+    {
+      "label": "source third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source/BasicMathFunctions/csky_shift_q15.c",
+      "pass": true
+    },
+    {
+      "label": "source third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source/SupportFunctions/csky_copy_q15.c",
+      "pass": true
+    },
+    {
+      "label": "source third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source/SupportFunctions/csky_fill_q15.c",
+      "pass": true
+    },
+    {
+      "label": "source third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source/TransformFunctions/csky_bitreversal2.S",
+      "pass": true
+    },
+    {
+      "label": "source third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source.asm/BasicMathFunctions/csky_abs_max_q15.S",
+      "pass": true
+    },
+    {
+      "label": "target readelf identity",
+      "pass": true
+    },
+    {
+      "label": "DWARF csky_cfft_radix4_q15.o",
+      "pass": true
+    },
+    {
+      "label": "DWARF csky_rfft_q15.o/",
+      "pass": true
+    },
+    {
+      "label": "DWARF csky_cfft_radix4_q15.o",
+      "pass": true
+    },
+    {
+      "label": "DWARF csky_rfft_q15.o/",
+      "pass": true
+    },
+    {
+      "label": "DWARF csky_shift_q15.o",
+      "pass": true
+    }
+  ],
+  "archive_hits": 18,
+  "unique_sections": 9,
+  "unique_stock_bytes": 1606,
+  "stage2_total_bytes": 82060,
+  "selected_byte_ratio": 0.019571045576407507,
+  "matches": [
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_dsp.a",
+      "object": "csky_bitreversal2.o",
+      "section": ".text.csky_bitreversal_16",
+      "sha256": "10e4e712955841760f854c9a595ce14078f1e108c9bbfb5336ae614587f1bd25",
+      "bytes": 38,
+      "offsets": [
+        "0x48164"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_dsp.a",
+      "object": "csky_cfft_radix4_q15.o",
+      "section": ".text.csky_radix4_butterfly_q15",
+      "sha256": "a9c688797190f2038e52469f92b109b6664749a36ba6d639ccfa635c873f8884",
+      "bytes": 530,
+      "offsets": [
+        "0x47d3c"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_dsp.a",
+      "object": "csky_cfft_radix4_q15.o",
+      "section": ".text.csky_radix4_butterfly_inverse_q15",
+      "sha256": "17a6a0d671de80e0423165e48b104704abd5dd9a219941d2e685cd20c95150bd",
+      "bytes": 530,
+      "offsets": [
+        "0x47f50"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_dsp.a",
+      "object": "csky_rfft_q15.o/",
+      "section": ".text.csky_split_rfft_q15",
+      "sha256": "55e816746c036783f8a86dced43073affcf4ebefc17793ca17a42c205ec192c3",
+      "bytes": 146,
+      "offsets": [
+        "0x47914"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_dsp.a",
+      "object": "csky_rfft_q15.o/",
+      "section": ".text.csky_split_rifft_q15",
+      "sha256": "32ebaa477c81ff9c72bb62e3bb60797395b45c280f9a056a1d360f33c026fc06",
+      "bytes": 86,
+      "offsets": [
+        "0x479a8"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_dsp.a",
+      "object": "csky_shift_q15.o",
+      "section": ".text.csky_shift_q15",
+      "sha256": "0d80310fe3f5bc134508e9a4532af818a5a257734c19a820a4431a2d1b800b1f",
+      "bytes": 116,
+      "offsets": [
+        "0x47a00"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_dsp.a",
+      "object": "csky_abs_max_q15.o",
+      "section": ".text.csky_abs_max_q15",
+      "sha256": "0a7a967f24158bf921f49afa8c619befe5dd6e97ea4c0386defd3472ea42c636",
+      "bytes": 76,
+      "offsets": [
+        "0x47a74"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_dsp.a",
+      "object": "csky_copy_q15.o/",
+      "section": ".text.csky_copy_q15",
+      "sha256": "024fc647287c6f19c2cf8cf192e3b305883950b32befa052ae5ea5d486e28ace",
+      "bytes": 44,
+      "offsets": [
+        "0x47ac0"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_dsp.a",
+      "object": "csky_fill_q15.o/",
+      "section": ".text.csky_fill_q15",
+      "sha256": "1443ee2322ef617cb7244a695abe005d78b0d9774bf49c5f872ecd1a165f1fef",
+      "bytes": 40,
+      "offsets": [
+        "0x47aec"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_CK804ef_math.a",
+      "object": "csky_abs_max_q15.o",
+      "section": ".text.csky_abs_max_q15",
+      "sha256": "0a7a967f24158bf921f49afa8c619befe5dd6e97ea4c0386defd3472ea42c636",
+      "bytes": 76,
+      "offsets": [
+        "0x47a74"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_CK804ef_math.a",
+      "object": "csky_shift_q15.o",
+      "section": ".text.csky_shift_q15",
+      "sha256": "0d80310fe3f5bc134508e9a4532af818a5a257734c19a820a4431a2d1b800b1f",
+      "bytes": 116,
+      "offsets": [
+        "0x47a00"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_CK804ef_math.a",
+      "object": "csky_copy_q15.o/",
+      "section": ".text.csky_copy_q15",
+      "sha256": "024fc647287c6f19c2cf8cf192e3b305883950b32befa052ae5ea5d486e28ace",
+      "bytes": 44,
+      "offsets": [
+        "0x47ac0"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_CK804ef_math.a",
+      "object": "csky_fill_q15.o/",
+      "section": ".text.csky_fill_q15",
+      "sha256": "1443ee2322ef617cb7244a695abe005d78b0d9774bf49c5f872ecd1a165f1fef",
+      "bytes": 40,
+      "offsets": [
+        "0x47aec"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_CK804ef_math.a",
+      "object": "csky_bitreversal2.o",
+      "section": ".text.csky_bitreversal_16",
+      "sha256": "10e4e712955841760f854c9a595ce14078f1e108c9bbfb5336ae614587f1bd25",
+      "bytes": 38,
+      "offsets": [
+        "0x48164"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_CK804ef_math.a",
+      "object": "csky_cfft_radix4_q15.o",
+      "section": ".text.csky_radix4_butterfly_q15",
+      "sha256": "a9c688797190f2038e52469f92b109b6664749a36ba6d639ccfa635c873f8884",
+      "bytes": 530,
+      "offsets": [
+        "0x47d3c"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_CK804ef_math.a",
+      "object": "csky_cfft_radix4_q15.o",
+      "section": ".text.csky_radix4_butterfly_inverse_q15",
+      "sha256": "17a6a0d671de80e0423165e48b104704abd5dd9a219941d2e685cd20c95150bd",
+      "bytes": 530,
+      "offsets": [
+        "0x47f50"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_CK804ef_math.a",
+      "object": "csky_rfft_q15.o/",
+      "section": ".text.csky_split_rfft_q15",
+      "sha256": "55e816746c036783f8a86dced43073affcf4ebefc17793ca17a42c205ec192c3",
+      "bytes": 146,
+      "offsets": [
+        "0x47914"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_CK804ef_math.a",
+      "object": "csky_rfft_q15.o/",
+      "section": ".text.csky_split_rifft_q15",
+      "sha256": "32ebaa477c81ff9c72bb62e3bb60797395b45c280f9a056a1d360f33c026fc06",
+      "bytes": 86,
+      "offsets": [
+        "0x479a8"
+      ]
+    }
+  ],
+  "dwarf": [
+    {
+      "object": "csky_cfft_radix4_q15.o",
+      "return_code": 0,
+      "stderr": ""
+    },
+    {
+      "object": "csky_rfft_q15.o/",
+      "return_code": 0,
+      "stderr": ""
+    },
+    {
+      "object": "csky_cfft_radix4_q15.o",
+      "return_code": 0,
+      "stderr": ""
+    },
+    {
+      "object": "csky_rfft_q15.o/",
+      "return_code": 0,
+      "stderr": ""
+    },
+    {
+      "object": "csky_shift_q15.o",
+      "return_code": 0,
+      "stderr": ""
+    }
+  ],
+  "limits": "Object/metadata comparison, no source build, execution, runtime placement or global coverage claim"
+}

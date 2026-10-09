@@ -1,0 +1,80 @@
+1000dbb4:	136b      	lrw      	r3, 0x2001700c	// 0x1000dd60
+1000dbb6:	62a8      	addu      	r10, r10
+1000dbb8:	6264      	addu      	r9, r9
+1000dbba:	6d9f      	mov      	r6, r7
+1000dbbc:	ea100009 	movi      	r16, 9
+1000dbc0:	b864      	st.w      	r3, (r14, 0x10)
+1000dbc2:	6ca3      	mov      	r2, r8
+1000dbc4:	191b      	addi      	r1, r14, 108
+1000dbc6:	6c17      	mov      	r0, r5
+1000dbc8:	e0000ab6 	bsr      	0x1000f134	// 0x1000f134
+1000dbcc:	d86e5036 	ld.hs      	r3, (r14, 0x6c)
+1000dbd0:	c5c355c2 	zext      	r2, r3, 14, 14
+1000dbd4:	3a41      	cmpnei      	r2, 1
+1000dbd6:	0d01      	bf      	0x1000ddd8	// 0x1000ddd8
+1000dbd8:	c5a355a1 	zext      	r1, r3, 13, 13
+1000dbdc:	3941      	cmpnei      	r1, 1
+1000dbde:	0c36      	bf      	0x1000dc4a	// 0x1000dc4a
+1000dbe0:	c5835582 	zext      	r2, r3, 12, 12
+1000dbe4:	3a41      	cmpnei      	r2, 1
+1000dbe6:	0d00      	bf      	0x1000dde6	// 0x1000dde6
+1000dbe8:	c5635562 	zext      	r2, r3, 11, 11
+1000dbec:	3a41      	cmpnei      	r2, 1
+1000dbee:	0cff      	bf      	0x1000ddec	// 0x1000ddec
+1000dbf0:	c5435542 	zext      	r2, r3, 10, 10
+1000dbf4:	3a41      	cmpnei      	r2, 1
+1000dbf6:	0cfe      	bf      	0x1000ddf2	// 0x1000ddf2
+1000dbf8:	c5235522 	zext      	r2, r3, 9, 9
+1000dbfc:	3a41      	cmpnei      	r2, 1
+1000dbfe:	0cfd      	bf      	0x1000ddf8	// 0x1000ddf8
+1000dc00:	c5035502 	zext      	r2, r3, 8, 8
+1000dc04:	3a41      	cmpnei      	r2, 1
+1000dc06:	0cfc      	bf      	0x1000ddfe	// 0x1000ddfe
+1000dc08:	c4e354e2 	zext      	r2, r3, 7, 7
+1000dc0c:	3a41      	cmpnei      	r2, 1
+1000dc0e:	0cfb      	bf      	0x1000de04	// 0x1000de04
+1000dc10:	c4c354c2 	zext      	r2, r3, 6, 6
+1000dc14:	3a41      	cmpnei      	r2, 1
+1000dc16:	0cfa      	bf      	0x1000de0a	// 0x1000de0a
+1000dc18:	c4a354a2 	zext      	r2, r3, 5, 5
+1000dc1c:	3a41      	cmpnei      	r2, 1
+1000dc1e:	0cf9      	bf      	0x1000de10	// 0x1000de10
+1000dc20:	c4835482 	zext      	r2, r3, 4, 4
+1000dc24:	3a41      	cmpnei      	r2, 1
+1000dc26:	0cf8      	bf      	0x1000de16	// 0x1000de16
+1000dc28:	c4635462 	zext      	r2, r3, 3, 3
+1000dc2c:	3a41      	cmpnei      	r2, 1
+1000dc2e:	0cf7      	bf      	0x1000de1c	// 0x1000de1c
+1000dc30:	c4435442 	zext      	r2, r3, 2, 2
+1000dc34:	3a41      	cmpnei      	r2, 1
+1000dc36:	0cf6      	bf      	0x1000de22	// 0x1000de22
+1000dc38:	c4235422 	zext      	r2, r3, 1, 1
+1000dc3c:	3a41      	cmpnei      	r2, 1
+1000dc3e:	0cf5      	bf      	0x1000de28	// 0x1000de28
+1000dc40:	e4632001 	andi      	r3, r3, 1
+1000dc44:	e92300f5 	bnez      	r3, 0x1000de2e	// 0x1000de2e
+1000dc48:	310f      	movi      	r1, 15
+1000dc4a:	6d07      	mov      	r4, r1
+1000dc4c:	6ce3      	mov      	r3, r8
+1000dc4e:	6c97      	mov      	r2, r5
+1000dc50:	6c17      	mov      	r0, r5
+1000dc52:	e0000a37 	bsr      	0x1000f0c0	// 0x1000f0c0
+1000dc56:	d871202d 	ld.w      	r3, (r17, 0xb4)
+1000dc5a:	3200      	movi      	r2, 0
+1000dc5c:	d0c31423 	ldr.hs      	r3, (r3, r6 << 0)
+1000dc60:	6c57      	mov      	r1, r5
+1000dc62:	c4114820 	lsli      	r0, r17, 0
+1000dc66:	e3fff805 	bsr      	0x1000cc70	// 0x1000cc70
+1000dc6a:	d8512021 	ld.w      	r2, (r17, 0x84)
+1000dc6e:	6c57      	mov      	r1, r5
+1000dc70:	9804      	ld.w      	r0, (r14, 0x10)
+1000dc72:	e0000979 	bsr      	0x1000ef64	// 0x1000ef64
+1000dc76:	d8712025 	ld.w      	r3, (r17, 0x94)
+1000dc7a:	d8512021 	ld.w      	r2, (r17, 0x84)
+1000dc7e:	d0c31421 	ldr.hs      	r1, (r3, r6 << 0)
+1000dc82:	6050      	addu      	r1, r4
+1000dc84:	c4300081 	subu      	r1, r16, r1
+1000dc88:	d8712005 	ld.w      	r3, (r17, 0x14)
+1000dc8c:	7446      	sextb      	r1, r1
+1000dc8e:	6c0b      	mov      	r0, r2
+1000dc90:	e0000a18 	bsr      	0x1000f0c0	// 0x1000f0c0

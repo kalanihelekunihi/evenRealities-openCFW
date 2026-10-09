@@ -1,0 +1,50 @@
+[
+  {
+    "label": "forward caller/window suffix",
+    "conditional_IRAM_start": "0x1000d360",
+    "end": "0x1000d3f2",
+    "component_start": "0x45ca0",
+    "bytes": 146,
+    "sha256": "554e4072ee40454fa4b79ee2d112da246c7e53d733cc8b4eebc32fad8c96b2c8"
+  },
+  {
+    "label": "inverse caller suffix",
+    "conditional_IRAM_start": "0x1000dbb4",
+    "end": "0x1000dc94",
+    "component_start": "0x464f4",
+    "bytes": 224,
+    "sha256": "01fb5853433238336cf66c479f546d82332e004679a8e356eae3f6a57b13c4c5"
+  },
+  {
+    "label": "real FFT wrapper",
+    "conditional_IRAM_start": "0x1000ef64",
+    "end": "0x1000efd4",
+    "component_start": "0x478a4",
+    "bytes": 112,
+    "sha256": "613acdb9114a588e179bb9c016e423f3f61185fe27fe0a7c0502367416271d3d"
+  },
+  {
+    "label": "complex FFT dispatch",
+    "conditional_IRAM_start": "0x1000f1d4",
+    "end": "0x1000f2b4",
+    "component_start": "0x47b14",
+    "bytes": 224,
+    "sha256": "34e1c94e396327f1a5e57226634cab0e047c5a9dcb5bf1e37fe6498e6f847a12"
+  },
+  {
+    "label": "forward radix4",
+    "conditional_IRAM_start": "0x1000f3fc",
+    "end": "0x1000f60e",
+    "component_start": "0x47d3c",
+    "bytes": 530,
+    "sha256": "a9c688797190f2038e52469f92b109b6664749a36ba6d639ccfa635c873f8884"
+  },
+  {
+    "label": "inverse radix4",
+    "conditional_IRAM_start": "0x1000f610",
+    "end": "0x1000f822",
+    "component_start": "0x47f50",
+    "bytes": 530,
+    "sha256": "17a6a0d671de80e0423165e48b104704abd5dd9a219941d2e685cd20c95150bd"
+  }
+]

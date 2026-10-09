@@ -1,0 +1,472 @@
+{
+  "codec_payload_sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+  "scope": "Exact unmodified nonrelocated .text sections 16..4096 bytes; package offsets only, no load-map inferred",
+  "archives": [
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_dsp.a",
+      "sha256": "2957015fa9eea6ad345a38bf6dd57be67ebe763ed3b846025012cd272efbab1c",
+      "objects": 322,
+      "objects_with_debug_sections": 302,
+      "relocation_free_text_sections_checked": 195,
+      "file_symbols": [
+        "csky_bitreversal2.S",
+        "csky_cfft_q15.S",
+        "csky_cfft_radix4_q15.S",
+        "csky_rfft_q15.S",
+        "csky_cfft_q31.S",
+        "csky_rfft_q31.S",
+        "csky_cfft_radix4_q31.S",
+        "csky_shift_q31.S",
+        "csky_shift_q15.S",
+        "csky_shift_q7.S",
+        "csky_abs_max_q31.S",
+        "csky_abs_max_q15.S",
+        "csky_copy_q31.S",
+        "csky_copy_q15.S",
+        "csky_copy_q7.S",
+        "csky_fill_q31.S",
+        "csky_fill_q15.S",
+        "csky_fill_q7.S",
+        "csky_cmplx_mag_q15.S",
+        "csky_cmplx_mag_q31.S"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_CK804ef_math.a",
+      "sha256": "efeaf95cba4ea63bd6d6fc1ac900d4d3b98ff9dfac0154ca93661a12bf53e2d9",
+      "objects": 339,
+      "objects_with_debug_sections": 0,
+      "relocation_free_text_sections_checked": 247,
+      "file_symbols": [
+        "csky_abs_q15.S",
+        "csky_abs_q31.S",
+        "csky_abs_q7.S",
+        "csky_abs_max_q15.S",
+        "csky_abs_max_q31.S",
+        "csky_add_q15.S",
+        "csky_add_q31.S",
+        "csky_add_q7.S",
+        "csky_dot_prod_q15.S",
+        "csky_dot_prod_q31.S",
+        "csky_dot_prod_q7.S",
+        "csky_mult_rnd_q15.S",
+        "csky_mult_q15.S",
+        "csky_mult_q31.S",
+        "csky_mult_q7.S",
+        "csky_negate_q15.S",
+        "csky_negate_q31.S",
+        "csky_negate_q7.S",
+        "csky_offset_q15.S",
+        "csky_offset_q31.S",
+        "csky_offset_q7.S",
+        "csky_scale_q15.S",
+        "csky_scale_q31.S",
+        "csky_scale_q7.S",
+        "csky_shift_q15.S",
+        "csky_shift_q31.S",
+        "csky_shift_q7.S",
+        "csky_sub_q15.S",
+        "csky_sub_q31.S",
+        "csky_sub_q7.S",
+        "csky_cmplx_conj_q15.S",
+        "csky_cmplx_conj_q31.S",
+        "csky_cmplx_dot_prod_q15.S",
+        "csky_cmplx_dot_prod_q31.S",
+        "csky_cmplx_mag_q15.S",
+        "csky_cmplx_mag_q31.S",
+        "csky_cmplx_mag_squared_q15.S",
+        "csky_cmplx_mag_squared_q31.S",
+        "csky_cmplx_mult_cmplx_q15.S",
+        "csky_cmplx_mult_cmplx_re_q15.S",
+        "csky_cmplx_mult_cmplx_q31.S",
+        "csky_cmplx_mult_cmplx_re_q31.S",
+        "csky_cmplx_mult_real_q15.S",
+        "csky_cmplx_mult_real_q31.S",
+        "csky_sin_cos_q31.S",
+        "csky_cos_q31.S",
+        "csky_sin_q31.S",
+        "csky_biquad_cas_df1_32x64_q31.S",
+        "csky_biquad_cascade_df1_fast_q15.S",
+        "csky_biquad_cascade_df1_fast_q31.S",
+        "csky_biquad_cascade_df1_q15.S",
+        "csky_biquad_cascade_df1_q31.S",
+        "csky_conv_fast_opt_q15.S",
+        "csky_conv_fast_q15.S",
+        "csky_conv_fast_q31.S",
+        "csky_conv_opt_q15.S",
+        "csky_conv_opt_q7.S",
+        "csky_conv_partial_fast_opt_q15.S",
+        "csky_conv_partial_fast_q15.S",
+        "csky_conv_partial_fast_q31.S",
+        "csky_conv_partial_opt_q15.S",
+        "csky_conv_partial_opt_q7.S",
+        "csky_conv_partial_q15.S",
+        "csky_conv_partial_q31.S",
+        "csky_conv_partial_q7.S",
+        "csky_conv_q15.S",
+        "csky_conv_q31.S",
+        "csky_conv_q7.S",
+        "csky_correlate_fast_opt_q15.S",
+        "csky_correlate_fast_q15.S",
+        "csky_correlate_fast_q31.S",
+        "csky_correlate_opt_q15.S",
+        "csky_correlate_opt_q7.S",
+        "csky_correlate_q15.S",
+        "csky_correlate_q31.S",
+        "csky_correlate_q7.S",
+        "csky_fir_decimate_fast_q15.S",
+        "csky_fir_decimate_fast_q31.S",
+        "csky_fir_decimate_q15.S",
+        "csky_fir_decimate_q31.S",
+        "csky_fir_fast_q15.S",
+        "csky_fir_fast_q31.S",
+        "csky_fir_interpolate_q15.S",
+        "csky_fir_interpolate_q31.S",
+        "csky_fir_lattice_q15.S",
+        "csky_fir_lattice_q31.S",
+        "csky_fir_q15.S",
+        "csky_fir_q31.S",
+        "csky_fir_q7.S",
+        "csky_fir_sparse_q15.S",
+        "csky_fir_sparse_q31.S",
+        "csky_fir_sparse_q7.S",
+        "csky_iir_lattice_q15.S",
+        "csky_iir_lattice_q31.S",
+        "csky_lms_norm_q15.S",
+        "csky_lms_norm_q31.S",
+        "csky_lms_q15.S",
+        "csky_lms_q31.S",
+        "csky_mat_add_q15.S",
+        "csky_mat_add_q31.S",
+        "csky_mat_cmplx_mult_q15.S",
+        "csky_mat_cmplx_mult_q31.S",
+        "csky_mat_mult_fast_q15.S",
+        "csky_mat_mult_fast_q31.S",
+        "csky_mat_mult_q15.S",
+        "csky_mat_mult_q31.S",
+        "csky_mat_scale_q15.S",
+        "csky_mat_scale_q31.S",
+        "csky_mat_sub_q15.S",
+        "csky_mat_sub_q31.S",
+        "csky_mat_trans_q15.S",
+        "csky_mat_trans_q31.S",
+        "csky_max_q15.S",
+        "csky_max_q31.S",
+        "csky_max_q7.S",
+        "csky_mean_q15.S",
+        "csky_mean_q31.S",
+        "csky_mean_q7.S",
+        "csky_min_q15.S",
+        "csky_min_q31.S",
+        "csky_min_q7.S",
+        "csky_power_q15.S",
+        "csky_power_q31.S",
+        "csky_power_int32.S",
+        "csky_power_q7.S",
+        "csky_rms_q15.S",
+        "csky_rms_q31.S",
+        "csky_std_q15.S",
+        "csky_std_q31.S",
+        "csky_var_q15.S",
+        "csky_var_q31.S",
+        "csky_copy_q15.S",
+        "csky_copy_q31.S",
+        "csky_copy_q7.S",
+        "csky_fill_q15.S",
+        "csky_fill_q31.S",
+        "csky_fill_q7.S",
+        "csky_q15_to_q31.S",
+        "csky_q15_to_q7.S",
+        "csky_q31_to_q15.S",
+        "csky_q31_to_q7.S",
+        "csky_q7_to_q15.S",
+        "csky_q7_to_q31.S",
+        "csky_bitreversal2.S",
+        "csky_cfft_q15.S",
+        "csky_cfft_q31.S",
+        "csky_cfft_radix4_q15.S",
+        "csky_cfft_radix4_q31.S",
+        "csky_dct4_q15.S",
+        "csky_dct4_q31.S",
+        "csky_rfft_q15.S",
+        "csky_rfft_q31.S",
+        "csky_abs_max_q15_yv.S",
+        "csky_abs_max_q31_yv.S",
+        "csky_abs_q15_yv.S",
+        "csky_abs_q31_yv.S",
+        "csky_add_q15_yv.S",
+        "csky_add_q31_yv.S",
+        "csky_sub_q15_yv.S",
+        "csky_sub_q31_yv.S",
+        "csky_sum_q15_yv.S",
+        "csky_sum_q31_yv.S",
+        "csky_mult_q15_yv.S",
+        "csky_mult_q31_yv.S",
+        "csky_scale_q15_yv.S",
+        "csky_scale_q31_yv.S",
+        "csky_shift_q15_yv.S",
+        "csky_shift_q31_yv.S",
+        "csky_cmplx_conj_q15_yv.S",
+        "csky_cmplx_conj_q31_yv.S",
+        "csky_dot_prod_q15_dot_yv.S",
+        "csky_dot_prod_q31_yv.S",
+        "csky_mat_cmplx_add_q15_yv.S",
+        "csky_mat_cmplx_add_q31_yv.S",
+        "csky_mat_cmplx_mult_q15_yv.S",
+        "csky_mat_cmplx_mult_q31_yv.S",
+        "csky_mat_cmplx_add_q15_yv.S",
+        "csky_mat_cmplx_add_q31_yv.S",
+        "csky_cfft_radix4_q15_yv.S",
+        "csky_cfft_radix4_q31_yv.S",
+        "csky_cfft_q15_yv.S",
+        "csky_cfft_q31_yv.S",
+        "csky_rfft_q31_yv.S",
+        "csky_rfft_q15_yv.S"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libvma.a",
+      "sha256": "cc4e437ddaeff9b2700271f7085f5ebcf8bdc74aa5e1d8ffd463d95a449bf5d9",
+      "objects": 12,
+      "objects_with_debug_sections": 0,
+      "relocation_free_text_sections_checked": 3,
+      "file_symbols": []
+    }
+  ],
+  "matches": [
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_dsp.a",
+      "object": "csky_bitreversal2.o",
+      "section": ".text.csky_bitreversal_16",
+      "bytes": 38,
+      "sha256": "10e4e712955841760f854c9a595ce14078f1e108c9bbfb5336ae614587f1bd25",
+      "package_offsets": [
+        "0x48164"
+      ],
+      "symbols": [
+        "csky_bitreversal_16"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_dsp.a",
+      "object": "csky_cfft_radix4_q15.o",
+      "section": ".text.csky_radix4_butterfly_q15",
+      "bytes": 530,
+      "sha256": "a9c688797190f2038e52469f92b109b6664749a36ba6d639ccfa635c873f8884",
+      "package_offsets": [
+        "0x47d3c"
+      ],
+      "symbols": [
+        "csky_radix4_butterfly_q15"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_dsp.a",
+      "object": "csky_cfft_radix4_q15.o",
+      "section": ".text.csky_radix4_butterfly_inverse_q15",
+      "bytes": 530,
+      "sha256": "17a6a0d671de80e0423165e48b104704abd5dd9a219941d2e685cd20c95150bd",
+      "package_offsets": [
+        "0x47f50"
+      ],
+      "symbols": [
+        "csky_radix4_butterfly_inverse_q15"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_dsp.a",
+      "object": "csky_rfft_q15.o/",
+      "section": ".text.csky_split_rfft_q15",
+      "bytes": 146,
+      "sha256": "55e816746c036783f8a86dced43073affcf4ebefc17793ca17a42c205ec192c3",
+      "package_offsets": [
+        "0x47914"
+      ],
+      "symbols": [
+        "csky_split_rfft_q15"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_dsp.a",
+      "object": "csky_rfft_q15.o/",
+      "section": ".text.csky_split_rifft_q15",
+      "bytes": 86,
+      "sha256": "32ebaa477c81ff9c72bb62e3bb60797395b45c280f9a056a1d360f33c026fc06",
+      "package_offsets": [
+        "0x479a8"
+      ],
+      "symbols": [
+        "csky_split_rifft_q15"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_dsp.a",
+      "object": "csky_shift_q15.o",
+      "section": ".text.csky_shift_q15",
+      "bytes": 116,
+      "sha256": "0d80310fe3f5bc134508e9a4532af818a5a257734c19a820a4431a2d1b800b1f",
+      "package_offsets": [
+        "0x47a00"
+      ],
+      "symbols": [
+        "csky_shift_q15"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_dsp.a",
+      "object": "csky_abs_max_q15.o",
+      "section": ".text.csky_abs_max_q15",
+      "bytes": 76,
+      "sha256": "0a7a967f24158bf921f49afa8c619befe5dd6e97ea4c0386defd3472ea42c636",
+      "package_offsets": [
+        "0x47a74"
+      ],
+      "symbols": [
+        "csky_abs_max_q15"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_dsp.a",
+      "object": "csky_copy_q15.o/",
+      "section": ".text.csky_copy_q15",
+      "bytes": 44,
+      "sha256": "024fc647287c6f19c2cf8cf192e3b305883950b32befa052ae5ea5d486e28ace",
+      "package_offsets": [
+        "0x47ac0"
+      ],
+      "symbols": [
+        "csky_copy_q15"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_dsp.a",
+      "object": "csky_fill_q15.o/",
+      "section": ".text.csky_fill_q15",
+      "bytes": 40,
+      "sha256": "1443ee2322ef617cb7244a695abe005d78b0d9774bf49c5f872ecd1a165f1fef",
+      "package_offsets": [
+        "0x47aec"
+      ],
+      "symbols": [
+        "csky_fill_q15"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_CK804ef_math.a",
+      "object": "csky_abs_max_q15.o",
+      "section": ".text.csky_abs_max_q15",
+      "bytes": 76,
+      "sha256": "0a7a967f24158bf921f49afa8c619befe5dd6e97ea4c0386defd3472ea42c636",
+      "package_offsets": [
+        "0x47a74"
+      ],
+      "symbols": [
+        "csky_abs_max_q15"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_CK804ef_math.a",
+      "object": "csky_shift_q15.o",
+      "section": ".text.csky_shift_q15",
+      "bytes": 116,
+      "sha256": "0d80310fe3f5bc134508e9a4532af818a5a257734c19a820a4431a2d1b800b1f",
+      "package_offsets": [
+        "0x47a00"
+      ],
+      "symbols": [
+        "csky_shift_q15"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_CK804ef_math.a",
+      "object": "csky_copy_q15.o/",
+      "section": ".text.csky_copy_q15",
+      "bytes": 44,
+      "sha256": "024fc647287c6f19c2cf8cf192e3b305883950b32befa052ae5ea5d486e28ace",
+      "package_offsets": [
+        "0x47ac0"
+      ],
+      "symbols": [
+        "csky_copy_q15"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_CK804ef_math.a",
+      "object": "csky_fill_q15.o/",
+      "section": ".text.csky_fill_q15",
+      "bytes": 40,
+      "sha256": "1443ee2322ef617cb7244a695abe005d78b0d9774bf49c5f872ecd1a165f1fef",
+      "package_offsets": [
+        "0x47aec"
+      ],
+      "symbols": [
+        "csky_fill_q15"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_CK804ef_math.a",
+      "object": "csky_bitreversal2.o",
+      "section": ".text.csky_bitreversal_16",
+      "bytes": 38,
+      "sha256": "10e4e712955841760f854c9a595ce14078f1e108c9bbfb5336ae614587f1bd25",
+      "package_offsets": [
+        "0x48164"
+      ],
+      "symbols": [
+        "csky_bitreversal_16"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_CK804ef_math.a",
+      "object": "csky_cfft_radix4_q15.o",
+      "section": ".text.csky_radix4_butterfly_q15",
+      "bytes": 530,
+      "sha256": "a9c688797190f2038e52469f92b109b6664749a36ba6d639ccfa635c873f8884",
+      "package_offsets": [
+        "0x47d3c"
+      ],
+      "symbols": [
+        "csky_radix4_butterfly_q15"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_CK804ef_math.a",
+      "object": "csky_cfft_radix4_q15.o",
+      "section": ".text.csky_radix4_butterfly_inverse_q15",
+      "bytes": 530,
+      "sha256": "17a6a0d671de80e0423165e48b104704abd5dd9a219941d2e685cd20c95150bd",
+      "package_offsets": [
+        "0x47f50"
+      ],
+      "symbols": [
+        "csky_radix4_butterfly_inverse_q15"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_CK804ef_math.a",
+      "object": "csky_rfft_q15.o/",
+      "section": ".text.csky_split_rfft_q15",
+      "bytes": 146,
+      "sha256": "55e816746c036783f8a86dced43073affcf4ebefc17793ca17a42c205ec192c3",
+      "package_offsets": [
+        "0x47914"
+      ],
+      "symbols": [
+        "csky_split_rfft_q15"
+      ]
+    },
+    {
+      "archive": "third-party/upstream/nationalchip-lvp-kws/lib/libcsky_CK804ef_math.a",
+      "object": "csky_rfft_q15.o/",
+      "section": ".text.csky_split_rifft_q15",
+      "bytes": 86,
+      "sha256": "32ebaa477c81ff9c72bb62e3bb60797395b45c280f9a056a1d360f33c026fc06",
+      "package_offsets": [
+        "0x479a8"
+      ],
+      "symbols": [
+        "csky_split_rifft_q15"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "version": "2.2.6.10",
+  "image": "g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin",
+  "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+  "ranges": [
+    {
+      "start": "0x52b37c",
+      "end_exclusive": "0x52b396",
+      "sha256": "f5157588cb8c13e2cce9404ff5ed7d6a6027954ae4ce6469f4050ad0ffce6dbd",
+      "label": "command producer"
+    },
+    {
+      "start": "0x569b56",
+      "end_exclusive": "0x569d26",
+      "sha256": "9749794a5293dc74c50f3595ac81c7d8a5c28a93cbe15c1ee155a1dda3ba077a",
+      "label": "reset command-complete consumer"
+    }
+  ],
+  "destination_literal": {
+    "address": "0x569d44",
+    "value": "0x200714d8"
+  },
+  "schema_revision": "e175383a07c5b811a98924fc662d1001f1d220d0",
+  "method": "static original-byte disassembly; no firmware execution"
+}

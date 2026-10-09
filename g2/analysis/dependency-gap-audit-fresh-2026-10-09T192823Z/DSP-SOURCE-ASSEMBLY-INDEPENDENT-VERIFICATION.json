@@ -1,0 +1,159 @@
+{
+  "all_pass": true,
+  "checks": [
+    {
+      "label": "assembler hash",
+      "pass": true
+    },
+    {
+      "label": "source third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source.asm/TransformFunctions/csky_cfft_radix4_q15.S",
+      "pass": true
+    },
+    {
+      "label": ".text.csky_radix4_butterfly_q15",
+      "pass": true,
+      "bytes": 530,
+      "payload_offsets": [
+        294204
+      ],
+      "relocations": []
+    },
+    {
+      "label": ".text.csky_radix4_butterfly_inverse_q15",
+      "pass": true,
+      "bytes": 530,
+      "payload_offsets": [
+        294736
+      ],
+      "relocations": []
+    },
+    {
+      "label": "source third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source.asm/TransformFunctions/csky_rfft_q15.S",
+      "pass": true
+    },
+    {
+      "label": ".text.csky_split_rfft_q15",
+      "pass": true,
+      "bytes": 146,
+      "payload_offsets": [
+        293140
+      ],
+      "relocations": []
+    },
+    {
+      "label": ".text.csky_split_rifft_q15",
+      "pass": true,
+      "bytes": 86,
+      "payload_offsets": [
+        293288
+      ],
+      "relocations": []
+    },
+    {
+      "label": "source third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source.asm/BasicMathFunctions/csky_shift_q15.S",
+      "pass": true
+    },
+    {
+      "label": ".text.csky_shift_q15",
+      "pass": true,
+      "bytes": 116,
+      "payload_offsets": [
+        293376
+      ],
+      "relocations": []
+    },
+    {
+      "label": "source third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source.asm/BasicMathFunctions/csky_abs_max_q15.S",
+      "pass": true
+    },
+    {
+      "label": ".text.csky_abs_max_q15",
+      "pass": true,
+      "bytes": 76,
+      "payload_offsets": [
+        293492
+      ],
+      "relocations": []
+    },
+    {
+      "label": "source third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source.asm/SupportFunctions/csky_copy_q15.S",
+      "pass": true
+    },
+    {
+      "label": ".text.csky_copy_q15",
+      "pass": true,
+      "bytes": 44,
+      "payload_offsets": [
+        293568
+      ],
+      "relocations": []
+    },
+    {
+      "label": "source third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source.asm/SupportFunctions/csky_fill_q15.S",
+      "pass": true
+    },
+    {
+      "label": ".text.csky_fill_q15",
+      "pass": true,
+      "bytes": 40,
+      "payload_offsets": [
+        293612
+      ],
+      "relocations": []
+    },
+    {
+      "label": "source third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source/TransformFunctions/csky_bitreversal2.S",
+      "pass": true
+    },
+    {
+      "label": ".text.csky_bitreversal_16",
+      "pass": true,
+      "bytes": 38,
+      "payload_offsets": [
+        295268
+      ],
+      "relocations": []
+    }
+  ],
+  "outputs": [
+    {
+      "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_cfft_radix4_q15.o",
+      "sha256": "4077e4cbaa67d9d4bafce4da355c34fbf96e37505ec560ef6a82a58ff4384bd3",
+      "preprocessed_sha256": "ca42eac966261375beadd0a688226ef67f6b41188274c52a6b85140077da3cbf"
+    },
+    {
+      "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_rfft_q15.o",
+      "sha256": "0bc12f3967c6b7d7b9db21c18407fd1ce1a86f8e93b9cda4603a4b5494102be4",
+      "preprocessed_sha256": "8865f94309323192747d7eb7e95e142dab2b895dd9218aa5b36a854aafa2d5b2"
+    },
+    {
+      "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_shift_q15.o",
+      "sha256": "bd4a64a1e6ccebcf5c470f326f1bc262e2b87c3f5eb78bf947f8a2a70274185b",
+      "preprocessed_sha256": "75d1b64ba96a3fd2d564c1556bb82bff9de3bfbac8823feaebb1e697f6c5ce0d"
+    },
+    {
+      "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_abs_max_q15.o",
+      "sha256": "05c04d44bed9ea89f76ae90c346df796705e5d0f97f958fc4a3cedf10fa4be0f",
+      "preprocessed_sha256": "fcc883da5a0b9f25b485a3ef14751aa1228e074c321d6c5ef8404d90330dd8b8"
+    },
+    {
+      "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_copy_q15.o",
+      "sha256": "89a56ba5fee4a96004b27b045daadc8e4b2643638918a22f6dd041f02fcf0b67",
+      "preprocessed_sha256": "a556183243e4607d4ee558b11d89ca266a66e4e62cf344eddca416b6c130ee57"
+    },
+    {
+      "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_fill_q15.o",
+      "sha256": "4c2e0fc1fdf20ae5620e75bd579aed316c00ab6c34528d6c7ae19b91f13a25bd",
+      "preprocessed_sha256": "3dad045a3d3eed5e75e9815e70fc190652ede08c086574c9ad8f60cded55f018"
+    },
+    {
+      "path": "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_bitreversal2.o",
+      "sha256": "cfe6f2431e4aac036a294d9459e948420352f3e7363063b056daade04499dde1",
+      "preprocessed_sha256": "3ec8ec45479747820e39d3a18c56d3dd0640e0d8bdeaa0efea98575df1686f87"
+    }
+  ],
+  "unique_sections": 9,
+  "unique_payload_bytes": 1606,
+  "codec_payload_percent": 0.49249904934803673,
+  "classification": "Owner-produced source-assembly section reproduction, independently authenticated outputs. Not C compilation, integration, canonical admission or complete source-only build. No assembly rerun by reviewer."
+}

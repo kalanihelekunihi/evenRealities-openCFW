@@ -1,0 +1,336 @@
+{
+  "definitions": {
+    "fully_C_buildable": "whole locked payload from integrated C/source, no retained executable blob; no such receipt exists",
+    "blob": "current default reference manifest retained payload bytes / full payload bytes including metadata and data",
+    "pseudocode": "raw historical export successful functions / recognized functions, not whole executable coverage or correctness",
+    "assembly": "whole unique executable-byte denominator unavailable; presence of dump not a percentage"
+  },
+  "components": [
+    {
+      "name": "codec",
+      "payload_bytes": 326092,
+      "current_reference_blob_percent": 100,
+      "whole_payload_source_build_proven": false,
+      "integrated_C_executable_percent": null,
+      "whole_executable_pseudocode_percent": null,
+      "whole_executable_disassembly_percent": null,
+      "images": [
+        {
+          "id": "codec_payload",
+          "size": 326092,
+          "parent": null
+        },
+        {
+          "id": "uart_type1_container",
+          "size": 38236,
+          "parent": "codec_payload"
+        },
+        {
+          "id": "uart_stage1",
+          "size": 10240,
+          "parent": "uart_type1_container"
+        },
+        {
+          "id": "uart_stage2",
+          "size": 27964,
+          "parent": "uart_type1_container"
+        },
+        {
+          "id": "main_type2_container",
+          "size": 287808,
+          "parent": "codec_payload"
+        },
+        {
+          "id": "binh_a_stage1",
+          "size": 12288,
+          "parent": "main_type2_container"
+        },
+        {
+          "id": "binh_a_stage2_container",
+          "size": 51200,
+          "parent": "main_type2_container"
+        },
+        {
+          "id": "binh_a_stage2_xip",
+          "size": 36484,
+          "parent": "binh_a_stage2_container"
+        },
+        {
+          "id": "binh_a_stage2_sram",
+          "size": 14716,
+          "parent": "binh_a_stage2_container"
+        },
+        {
+          "id": "binh_b_stage1",
+          "size": 12288,
+          "parent": "main_type2_container"
+        },
+        {
+          "id": "binh_b_stage2",
+          "size": 82060,
+          "parent": "main_type2_container"
+        },
+        {
+          "id": "npu_kws_command",
+          "size": 9164,
+          "parent": "main_type2_container"
+        },
+        {
+          "id": "npu_kws_weights",
+          "size": 120800,
+          "parent": "main_type2_container"
+        }
+      ]
+    },
+    {
+      "name": "ble_em9305",
+      "payload_bytes": 211948,
+      "current_reference_blob_percent": 100,
+      "whole_payload_source_build_proven": false,
+      "integrated_C_executable_percent": null,
+      "whole_executable_pseudocode_percent": null,
+      "whole_executable_disassembly_percent": null,
+      "images": [
+        {
+          "id": "ble_em9305:record-0",
+          "size": 224,
+          "parent": null
+        },
+        {
+          "id": "ble_em9305:record-1",
+          "size": 656,
+          "parent": null
+        },
+        {
+          "id": "ble_em9305:record-2",
+          "size": 56,
+          "parent": null
+        },
+        {
+          "id": "ble_em9305:record-3",
+          "size": 210888,
+          "parent": null
+        },
+        {
+          "id": "ble_em9305:ram-initialized-0",
+          "size": 69,
+          "parent": "ble_em9305:record-3"
+        },
+        {
+          "id": "ble_em9305:ram-initialized-1",
+          "size": 776,
+          "parent": "ble_em9305:record-3"
+        },
+        {
+          "id": "ble_em9305:ram-initialized-2",
+          "size": 44,
+          "parent": "ble_em9305:record-3"
+        }
+      ]
+    },
+    {
+      "name": "touch",
+      "payload_bytes": 34464,
+      "current_reference_blob_percent": 100,
+      "whole_payload_source_build_proven": false,
+      "integrated_C_executable_percent": null,
+      "whole_executable_pseudocode_percent": null,
+      "whole_executable_disassembly_percent": null,
+      "images": [
+        {
+          "id": "touch:flash",
+          "size": 34432,
+          "parent": null
+        },
+        {
+          "id": "touch:ram-vectors",
+          "size": 192,
+          "parent": "touch:flash"
+        },
+        {
+          "id": "touch:ram-initialized",
+          "size": 964,
+          "parent": "touch:flash"
+        }
+      ]
+    },
+    {
+      "name": "case",
+      "payload_bytes": 55784,
+      "current_reference_blob_percent": 100,
+      "whole_payload_source_build_proven": false,
+      "integrated_C_executable_percent": null,
+      "whole_executable_pseudocode_percent": null,
+      "whole_executable_disassembly_percent": null,
+      "images": [
+        {
+          "id": "case:flash",
+          "size": 55752,
+          "parent": null
+        },
+        {
+          "id": "case:decoded:20000000",
+          "size": 420,
+          "parent": "case:flash"
+        }
+      ]
+    },
+    {
+      "name": "apollo_bootloader",
+      "payload_bytes": 148599,
+      "current_reference_blob_percent": 100,
+      "whole_payload_source_build_proven": false,
+      "integrated_C_executable_percent": null,
+      "whole_executable_pseudocode_percent": null,
+      "whole_executable_disassembly_percent": null,
+      "images": [
+        {
+          "id": "apollo_bootloader:flash",
+          "size": 148599,
+          "parent": null
+        },
+        {
+          "id": "apollo_bootloader:decoded:00000040",
+          "size": 24,
+          "parent": "apollo_bootloader:flash"
+        },
+        {
+          "id": "apollo_bootloader:decoded:20000000",
+          "size": 1371,
+          "parent": "apollo_bootloader:flash"
+        },
+        {
+          "id": "apollo_bootloader:decoded:20080000",
+          "size": 4096,
+          "parent": "apollo_bootloader:flash"
+        }
+      ]
+    },
+    {
+      "name": "apollo_main",
+      "payload_bytes": 3523396,
+      "current_reference_blob_percent": 100,
+      "whole_payload_source_build_proven": false,
+      "integrated_C_executable_percent": null,
+      "whole_executable_pseudocode_percent": null,
+      "whole_executable_disassembly_percent": null,
+      "images": [
+        {
+          "id": "apollo_main:flash",
+          "size": 3523364,
+          "parent": null
+        },
+        {
+          "id": "apollo_main:decoded:00000040",
+          "size": 24,
+          "parent": "apollo_main:flash"
+        },
+        {
+          "id": "apollo_main:decoded:20000000",
+          "size": 17752,
+          "parent": "apollo_main:flash"
+        },
+        {
+          "id": "apollo_main:decoded:20080000",
+          "size": 769646,
+          "parent": "apollo_main:flash"
+        }
+      ]
+    }
+  ],
+  "raw_exports": [
+    {
+      "path": "g2/research/corpus/apollo-main/ghidra/decomp",
+      "functions": 7449,
+      "raw_pseudocode_functions": 7449,
+      "raw_function_percent": 100.0,
+      "recognized_function_body_bytes_sum": 1394848,
+      "manifest_verified": true,
+      "warning": "body sum may overlap/include data; not an executable denominator"
+    },
+    {
+      "path": "g2/research/corpus/touch/ghidra/open-2026-09-29",
+      "functions": 308,
+      "raw_pseudocode_functions": 308,
+      "raw_function_percent": 100.0,
+      "recognized_function_body_bytes_sum": 27879,
+      "manifest_verified": true,
+      "warning": "body sum may overlap/include data; not an executable denominator"
+    },
+    {
+      "path": "g2/research/corpus/case/ghidra/open-2026-09-29",
+      "functions": 435,
+      "raw_pseudocode_functions": 435,
+      "raw_function_percent": 100.0,
+      "recognized_function_body_bytes_sum": 43072,
+      "manifest_verified": true,
+      "warning": "body sum may overlap/include data; not an executable denominator"
+    },
+    {
+      "path": "g2/research/corpus/apollo-bootloader/ghidra/open-2026-09-29",
+      "functions": 903,
+      "raw_pseudocode_functions": 849,
+      "raw_function_percent": 94.02,
+      "recognized_function_body_bytes_sum": 120432,
+      "manifest_verified": true,
+      "warning": "body sum may overlap/include data; not an executable denominator"
+    },
+    {
+      "path": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_sram",
+      "functions": 151,
+      "raw_pseudocode_functions": 151,
+      "raw_function_percent": 100.0,
+      "recognized_function_body_bytes_sum": 11313,
+      "manifest_verified": true,
+      "warning": "body sum may overlap/include data; not an executable denominator"
+    },
+    {
+      "path": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_a_xip",
+      "functions": 362,
+      "raw_pseudocode_functions": 362,
+      "raw_function_percent": 100.0,
+      "recognized_function_body_bytes_sum": 28962,
+      "manifest_verified": true,
+      "warning": "body sum may overlap/include data; not an executable denominator"
+    },
+    {
+      "path": "g2/research/corpus/codec/ghidra/open-2026-09-29/image_b_sram",
+      "functions": 288,
+      "raw_pseudocode_functions": 288,
+      "raw_function_percent": 100.0,
+      "recognized_function_body_bytes_sum": 37645,
+      "manifest_verified": true,
+      "warning": "body sum may overlap/include data; not an executable denominator"
+    },
+    {
+      "path": "g2/research/corpus/codec/ghidra/open-2026-09-29/uart_boot_stage1",
+      "functions": 32,
+      "raw_pseudocode_functions": 32,
+      "raw_function_percent": 100.0,
+      "recognized_function_body_bytes_sum": 3142,
+      "manifest_verified": true,
+      "warning": "body sum may overlap/include data; not an executable denominator"
+    },
+    {
+      "path": "g2/research/corpus/codec/ghidra/open-2026-09-29/uart_boot_stage2",
+      "functions": 96,
+      "raw_pseudocode_functions": 96,
+      "raw_function_percent": 100.0,
+      "recognized_function_body_bytes_sum": 11498,
+      "manifest_verified": true,
+      "warning": "body sum may overlap/include data; not an executable denominator"
+    }
+  ],
+  "inventory": {
+    "images": 33,
+    "coverage_rows": 70,
+    "all_coverage_kinds": [
+      "container",
+      "unknown"
+    ],
+    "decoded_summary_is_historical_not_current": true
+  },
+  "payload_bytes_total": 4300283,
+  "global_reference_blob_percent": 100,
+  "whole_payload_source_build_proven_count": 0
+}

@@ -1,0 +1,40 @@
+Static original-instruction reconstruction; not compiled or executed C.
+
+RFFT descriptor (20 bytes):
+ +0 u32 real_len; +4 u8 inverse; +5 u8 bit_reverse; +6 padding2;
+ +8 u32 real_twiddle_modifier; +12 pointer real_Q15_coefficients;
+ +16 pointer complex_descriptor.
+CFFT descriptor (16 bytes):
+ +0 u16 complex_len; +2 padding2; +4 pointer Q15_twiddles;
+ +8 pointer u16_bitrev_indices; +12 u16 bitrev_length; +14 padding2.
+
+rfft_1000EF64(S, src, dst):
+ L2=S.real_len>>1
+ if S.inverse != 1:
+   cfft_1000F1D4(S.complex_descriptor,src,S.inverse,S.bit_reverse)
+   split_rfft_1000EFD4(src,L2,S.real_Q15_coefficients,dst,S.real_twiddle_modifier)
+ else:
+   split_rifft_1000F068(src,L2,S.real_Q15_coefficients,dst,S.real_twiddle_modifier)
+   cfft_1000F1D4(S.complex_descriptor,dst,S.inverse,S.bit_reverse)
+   for i in 0..S.real_len-1: dst[i]=low16(sign_extend(dst[i]) << 1)
+
+cfft_1000F1D4(S, inplace_complex_Q15, inverse, bit_reverse), selected N=256:
+ if inverse==1:
+    radix4_inverse_1000F610(inplace_complex_Q15,256,S.twiddles,1)
+ else:
+    radix4_forward_1000F3FC(inplace_complex_Q15,256,S.twiddles,1)
+ if bit_reverse != 0:
+    bitreversal16_1000F824(inplace_complex_Q15,S.bitrev_length,S.bitrev_indices)
+ // Other FFT lengths choose radix4/radix4-by2 branches; not needed for the bound descriptors.
+
+Caller at1000D3DC:
+ earlier suffix multiplies signed halfword input by signed/window word and arithmetic-shifts15 before halfword store.
+ calls rfft(forward descriptor pointer20017020, src=r5, dst=r4).
+Caller at1000DC72:
+ calls rfft(inverse descriptor pointer2001700C, src=r5, dst=*(state_r17+0x84)).
+ // Buffer allocation, frame cadence and complete private caller algorithm are not reconstructed.
+
+Both prepared descriptors: real_len512, bit_reverse1, modifier1,
+ real_Q15_coefficients100150D8, complex_descriptor100143E4.
+Complex descriptor: len256, Q15_twiddles100145D4, bitrev_indices100143F4, length240.
+Descriptor DRAM pointers200170xx and bytes stored in normal-copy IRAM100170xx require the documented unresolved CPU alias visibility; no alias is assumed physically working.

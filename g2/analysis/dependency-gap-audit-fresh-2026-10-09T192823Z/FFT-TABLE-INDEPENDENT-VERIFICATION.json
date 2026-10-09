@@ -1,0 +1,31 @@
+{
+  "all_pass": true,
+  "checks": [
+    {
+      "label": "B2 image hash",
+      "pass": true
+    },
+    {
+      "label": "cskyBitRevIndexTable_fixed_256",
+      "pass": true,
+      "exact_bytes": 480
+    },
+    {
+      "label": "twiddleCoef_256_q15",
+      "pass": true,
+      "exact_bytes": 768
+    },
+    {
+      "label": "realCoefAQ15_512",
+      "pass": true,
+      "exact_bytes": 1024
+    },
+    {
+      "label": "csky_cfft_sR_q15_len256",
+      "pass": true,
+      "exact_bytes": 0
+    }
+  ],
+  "exact_table_bytes": 2272,
+  "limits": "Static table/archive equality only; relocated descriptor differs as declared. No source build, runtime or alias proof."
+}

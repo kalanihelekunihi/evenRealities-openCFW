@@ -1,0 +1,317 @@
+{
+  "assembler_sha256": "880cc0d4e770ad38ccf9c7c6c75d94b124a52cf9a7c937807ab355ef15ec10eb",
+  "compiler_for_preprocess": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+  "results": [
+    {
+      "source": "third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source.asm/TransformFunctions/csky_cfft_radix4_q15.S",
+      "source_sha256": "cc3ef1e645545aa089cfa431c9d3eab4f40b5e97d4b1a211aa994792ddf9d392",
+      "preprocess_command": [
+        "/usr/bin/clang",
+        "-E",
+        "-P",
+        "-x",
+        "assembler-with-cpp",
+        "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source.asm/TransformFunctions/csky_cfft_radix4_q15.S",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_cfft_radix4_q15.preprocessed.s"
+      ],
+      "preprocess_status": 0,
+      "preprocess_stderr": "",
+      "assemble_command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-as",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-EL",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_cfft_radix4_q15.preprocessed.s",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_cfft_radix4_q15.o"
+      ],
+      "assemble_status": 0,
+      "assemble_stderr": "",
+      "comparisons": [
+        {
+          "symbols": [
+            "csky_radix4_butterfly_q15"
+          ],
+          "section": ".text.csky_radix4_butterfly_q15",
+          "produced_bytes": 530,
+          "expected_bytes": 530,
+          "produced_sha256": "a9c688797190f2038e52469f92b109b6664749a36ba6d639ccfa635c873f8884",
+          "expected_sha256": "a9c688797190f2038e52469f92b109b6664749a36ba6d639ccfa635c873f8884",
+          "full_equal": true,
+          "first_difference": null
+        },
+        {
+          "symbols": [
+            "csky_radix4_butterfly_inverse_q15"
+          ],
+          "section": ".text.csky_radix4_butterfly_inverse_q15",
+          "produced_bytes": 530,
+          "expected_bytes": 530,
+          "produced_sha256": "17a6a0d671de80e0423165e48b104704abd5dd9a219941d2e685cd20c95150bd",
+          "expected_sha256": "17a6a0d671de80e0423165e48b104704abd5dd9a219941d2e685cd20c95150bd",
+          "full_equal": true,
+          "first_difference": null
+        }
+      ]
+    },
+    {
+      "source": "third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source.asm/TransformFunctions/csky_rfft_q15.S",
+      "source_sha256": "781a0c72e479d2ec0c7c1b63e309816202faa430a2ddc7cc815ca5998721eebb",
+      "preprocess_command": [
+        "/usr/bin/clang",
+        "-E",
+        "-P",
+        "-x",
+        "assembler-with-cpp",
+        "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source.asm/TransformFunctions/csky_rfft_q15.S",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_rfft_q15.preprocessed.s"
+      ],
+      "preprocess_status": 0,
+      "preprocess_stderr": "",
+      "assemble_command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-as",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-EL",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_rfft_q15.preprocessed.s",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_rfft_q15.o"
+      ],
+      "assemble_status": 0,
+      "assemble_stderr": "",
+      "comparisons": [
+        {
+          "symbols": [
+            "csky_split_rfft_q15"
+          ],
+          "section": ".text.csky_split_rfft_q15",
+          "produced_bytes": 146,
+          "expected_bytes": 146,
+          "produced_sha256": "55e816746c036783f8a86dced43073affcf4ebefc17793ca17a42c205ec192c3",
+          "expected_sha256": "55e816746c036783f8a86dced43073affcf4ebefc17793ca17a42c205ec192c3",
+          "full_equal": true,
+          "first_difference": null
+        },
+        {
+          "symbols": [
+            "csky_split_rifft_q15"
+          ],
+          "section": ".text.csky_split_rifft_q15",
+          "produced_bytes": 86,
+          "expected_bytes": 86,
+          "produced_sha256": "32ebaa477c81ff9c72bb62e3bb60797395b45c280f9a056a1d360f33c026fc06",
+          "expected_sha256": "32ebaa477c81ff9c72bb62e3bb60797395b45c280f9a056a1d360f33c026fc06",
+          "full_equal": true,
+          "first_difference": null
+        }
+      ]
+    },
+    {
+      "source": "third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source.asm/BasicMathFunctions/csky_shift_q15.S",
+      "source_sha256": "7a49b8fc1b96f08221b3937f031532fe4984441bd8f0505789ceda77b483116c",
+      "preprocess_command": [
+        "/usr/bin/clang",
+        "-E",
+        "-P",
+        "-x",
+        "assembler-with-cpp",
+        "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source.asm/BasicMathFunctions/csky_shift_q15.S",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_shift_q15.preprocessed.s"
+      ],
+      "preprocess_status": 0,
+      "preprocess_stderr": "",
+      "assemble_command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-as",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-EL",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_shift_q15.preprocessed.s",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_shift_q15.o"
+      ],
+      "assemble_status": 0,
+      "assemble_stderr": "",
+      "comparisons": [
+        {
+          "symbols": [
+            "csky_shift_q15"
+          ],
+          "section": ".text.csky_shift_q15",
+          "produced_bytes": 116,
+          "expected_bytes": 116,
+          "produced_sha256": "0d80310fe3f5bc134508e9a4532af818a5a257734c19a820a4431a2d1b800b1f",
+          "expected_sha256": "0d80310fe3f5bc134508e9a4532af818a5a257734c19a820a4431a2d1b800b1f",
+          "full_equal": true,
+          "first_difference": null
+        }
+      ]
+    },
+    {
+      "source": "third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source.asm/BasicMathFunctions/csky_abs_max_q15.S",
+      "source_sha256": "04f0bb048a984e9648196f29ce153753e63b3e8fee6a3d617c6bf0d207d0044a",
+      "preprocess_command": [
+        "/usr/bin/clang",
+        "-E",
+        "-P",
+        "-x",
+        "assembler-with-cpp",
+        "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source.asm/BasicMathFunctions/csky_abs_max_q15.S",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_abs_max_q15.preprocessed.s"
+      ],
+      "preprocess_status": 0,
+      "preprocess_stderr": "",
+      "assemble_command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-as",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-EL",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_abs_max_q15.preprocessed.s",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_abs_max_q15.o"
+      ],
+      "assemble_status": 0,
+      "assemble_stderr": "",
+      "comparisons": [
+        {
+          "symbols": [
+            "csky_abs_max_q15"
+          ],
+          "section": ".text.csky_abs_max_q15",
+          "produced_bytes": 76,
+          "expected_bytes": 76,
+          "produced_sha256": "0a7a967f24158bf921f49afa8c619befe5dd6e97ea4c0386defd3472ea42c636",
+          "expected_sha256": "0a7a967f24158bf921f49afa8c619befe5dd6e97ea4c0386defd3472ea42c636",
+          "full_equal": true,
+          "first_difference": null
+        }
+      ]
+    },
+    {
+      "source": "third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source.asm/SupportFunctions/csky_copy_q15.S",
+      "source_sha256": "01416447bad20221064f16598b88336a34ffbc3173e3727ed1f022d813ec42f9",
+      "preprocess_command": [
+        "/usr/bin/clang",
+        "-E",
+        "-P",
+        "-x",
+        "assembler-with-cpp",
+        "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source.asm/SupportFunctions/csky_copy_q15.S",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_copy_q15.preprocessed.s"
+      ],
+      "preprocess_status": 0,
+      "preprocess_stderr": "",
+      "assemble_command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-as",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-EL",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_copy_q15.preprocessed.s",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_copy_q15.o"
+      ],
+      "assemble_status": 0,
+      "assemble_stderr": "",
+      "comparisons": [
+        {
+          "symbols": [
+            "csky_copy_q15"
+          ],
+          "section": ".text.csky_copy_q15",
+          "produced_bytes": 44,
+          "expected_bytes": 44,
+          "produced_sha256": "024fc647287c6f19c2cf8cf192e3b305883950b32befa052ae5ea5d486e28ace",
+          "expected_sha256": "024fc647287c6f19c2cf8cf192e3b305883950b32befa052ae5ea5d486e28ace",
+          "full_equal": true,
+          "first_difference": null
+        }
+      ]
+    },
+    {
+      "source": "third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source.asm/SupportFunctions/csky_fill_q15.S",
+      "source_sha256": "e53f0de646a5dcb94297c42b38ac63a019ec8a01c25a47600ec007d7ba2f28d4",
+      "preprocess_command": [
+        "/usr/bin/clang",
+        "-E",
+        "-P",
+        "-x",
+        "assembler-with-cpp",
+        "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source.asm/SupportFunctions/csky_fill_q15.S",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_fill_q15.preprocessed.s"
+      ],
+      "preprocess_status": 0,
+      "preprocess_stderr": "",
+      "assemble_command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-as",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-EL",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_fill_q15.preprocessed.s",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_fill_q15.o"
+      ],
+      "assemble_status": 0,
+      "assemble_stderr": "",
+      "comparisons": [
+        {
+          "symbols": [
+            "csky_fill_q15"
+          ],
+          "section": ".text.csky_fill_q15",
+          "produced_bytes": 40,
+          "expected_bytes": 40,
+          "produced_sha256": "1443ee2322ef617cb7244a695abe005d78b0d9774bf49c5f872ecd1a165f1fef",
+          "expected_sha256": "1443ee2322ef617cb7244a695abe005d78b0d9774bf49c5f872ecd1a165f1fef",
+          "full_equal": true,
+          "first_difference": null
+        }
+      ]
+    },
+    {
+      "source": "third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source/TransformFunctions/csky_bitreversal2.S",
+      "source_sha256": "90270dad89a436a6e69f84bc3c4a77873d0719ee02d33a008cbcb4893ccfce03",
+      "preprocess_command": [
+        "/usr/bin/clang",
+        "-E",
+        "-P",
+        "-x",
+        "assembler-with-cpp",
+        "/Users/kalani/Repo/evenRealities-openCFW/third-party/upstream/nationalchip-lvp-kws/utility/libdsp/Source/TransformFunctions/csky_bitreversal2.S",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_bitreversal2.preprocessed.s"
+      ],
+      "preprocess_status": 0,
+      "preprocess_stderr": "",
+      "assemble_command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-as",
+        "-mcpu=ck804ef",
+        "-mhard-float",
+        "-EL",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_bitreversal2.preprocessed.s",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/nationalchip-dsp-source-rebuild-20261009T194601Z/csky_bitreversal2.o"
+      ],
+      "assemble_status": 0,
+      "assemble_stderr": "",
+      "comparisons": [
+        {
+          "symbols": [
+            "csky_bitreversal_16"
+          ],
+          "section": ".text.csky_bitreversal_16",
+          "produced_bytes": 38,
+          "expected_bytes": 38,
+          "produced_sha256": "10e4e712955841760f854c9a595ce14078f1e108c9bbfb5336ae614587f1bd25",
+          "expected_sha256": "10e4e712955841760f854c9a595ce14078f1e108c9bbfb5336ae614587f1bd25",
+          "full_equal": true,
+          "first_difference": null
+        }
+      ]
+    }
+  ]
+}

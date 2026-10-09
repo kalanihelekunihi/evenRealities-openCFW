@@ -1,0 +1,42 @@
+[
+  {
+    "descriptor_pointer": "0x2001700c",
+    "conditional_IRAM_storage": "0x1001700c",
+    "bytes": "000200000101000001000000d8500110e4430110",
+    "fftLenReal": 512,
+    "ifftFlag": 1,
+    "bitReverseFlag": 1,
+    "modifier": 1,
+    "real_twiddle": "0x100150d8",
+    "cfft_pointer": "0x100143e4",
+    "cfft_bytes": "00010000d4450110f4430110f0000000",
+    "cfft_fields": {
+      "fftLen": 256,
+      "padding": 0,
+      "twiddle": "0x100145d4",
+      "bitrev": "0x100143f4",
+      "bitrev_len": 240,
+      "padding2": 0
+    }
+  },
+  {
+    "descriptor_pointer": "0x20017020",
+    "conditional_IRAM_storage": "0x10017020",
+    "bytes": "000200000001000001000000d8500110e4430110",
+    "fftLenReal": 512,
+    "ifftFlag": 0,
+    "bitReverseFlag": 1,
+    "modifier": 1,
+    "real_twiddle": "0x100150d8",
+    "cfft_pointer": "0x100143e4",
+    "cfft_bytes": "00010000d4450110f4430110f0000000",
+    "cfft_fields": {
+      "fftLen": 256,
+      "padding": 0,
+      "twiddle": "0x100145d4",
+      "bitrev": "0x100143f4",
+      "bitrev_len": 240,
+      "padding2": 0
+    }
+  }
+]

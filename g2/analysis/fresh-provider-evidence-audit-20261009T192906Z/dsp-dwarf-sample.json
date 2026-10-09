@@ -1,0 +1,100 @@
+{
+  "tool": "g2/build/pseudocode-first/20260930T190500Z/tools/csky-binutils-001/install/bin/csky-elfabiv2-readelf",
+  "tool_sha256": "3dccfb77ffdfbfb04a36fe5945b2ce4f30079e4237f66733ee511b5d0cb5cefa",
+  "pyelftools_default_dwarf_read": "Unsupported relocation type 1; use target C-SKY readelf for relocating debug inspection",
+  "samples": [
+    {
+      "object": "csky_cfft_radix4_q15.o",
+      "object_sha256": "2837a1cca9c667d21c4ce305174e8739149642a5e45553dde56dbc830e17d018",
+      "exit_code": 0,
+      "stderr": "",
+      "selected_metadata_lines": [
+        "    <c>   DW_AT_producer    : (indirect string, offset: 0x5d): GNU C11 6.3.0 -mcpu=ck804ef -mfloat-abi=hard -mfloat-abi=hard -g -O2 -fno-builtin -fstrict-volatile-bitfields -ffunction-sections -fdata-sections",
+        "    <11>   DW_AT_name        : (indirect string, offset: 0x154): utility/libdsp/Source/TransformFunctions/csky_cfft_radix4_q15.c",
+        "    <15>   DW_AT_comp_dir    : (indirect string, offset: 0x0): /home/luolei/work/master/lvp/lvp_tws",
+        "    <28>   DW_AT_name        : (indirect string, offset: 0x229): signed char",
+        "    <2d>   DW_AT_name        : (indirect string, offset: 0x194): int16_t",
+        "    <3a>   DW_AT_name        : (indirect string, offset: 0x1e3): short int",
+        "    <41>   DW_AT_name        : int",
+        "    <48>   DW_AT_name        : (indirect string, offset: 0x1ba): long long int",
+        "    <4d>   DW_AT_name        : (indirect string, offset: 0x13d): uint8_t",
+        "    <5a>   DW_AT_name        : (indirect string, offset: 0x4f): unsigned char",
+        "    <5f>   DW_AT_name        : (indirect string, offset: 0x1ed): uint16_t",
+        "    <6c>   DW_AT_name        : (indirect string, offset: 0xef): short unsigned int",
+        "    <73>   DW_AT_name        : (indirect string, offset: 0x119): unsigned int",
+        "    <7a>   DW_AT_name        : (indirect string, offset: 0x126): long long unsigned int",
+        "    <81>   DW_AT_name        : (indirect string, offset: 0x1f6): long int",
+        "    <88>   DW_AT_name        : (indirect string, offset: 0x21d): long double",
+        "    <8f>   DW_AT_name        : (indirect string, offset: 0x23a): _Bool",
+        "    <96>   DW_AT_name        : (indirect string, offset: 0x109): double",
+        "    <9d>   DW_AT_name        : (indirect string, offset: 0x1d1): char",
+        "    <a2>   DW_AT_name        : (indirect string, offset: 0x43): q15_t",
+        "    <b0>   DW_AT_name        : (indirect string, offset: 0x49): float",
+        "    <bd>   DW_AT_name        : (indirect string, offset: 0x1b1): sizetype",
+        "    <d1>   DW_AT_name        : (indirect string, offset: 0x102): fftLen",
+        "    <de>   DW_AT_name        : (indirect string, offset: 0x110): ifftFlag",
+        "    <eb>   DW_AT_name        : (indirect string, offset: 0x145): bitReverseFlag",
+        "    <f8>   DW_AT_name        : (indirect string, offset: 0x1c8): pTwiddle",
+        "    <105>   DW_AT_name        : (indirect string, offset: 0x36): pBitRevTable",
+        "    <112>   DW_AT_name        : (indirect string, offset: 0x25): twidCoefModifier"
+      ]
+    },
+    {
+      "object": "csky_rfft_q15.o/",
+      "object_sha256": "adb178b48f50c7c770bcaf6a5c53af8e0c5c3f0b3048390343cf45c398104e32",
+      "exit_code": 0,
+      "stderr": "",
+      "selected_metadata_lines": [
+        "    <c>   DW_AT_producer    : (indirect string, offset: 0xc5): GNU C11 6.3.0 -mcpu=ck804ef -mfloat-abi=hard -mfloat-abi=hard -g -O2 -fno-builtin -fstrict-volatile-bitfields -ffunction-sections -fdata-sections",
+        "    <11>   DW_AT_name        : (indirect string, offset: 0x20b): utility/libdsp/Source/TransformFunctions/csky_rfft_q15.c",
+        "    <15>   DW_AT_comp_dir    : (indirect string, offset: 0x2b): /home/luolei/work/master/lvp/lvp_tws",
+        "    <28>   DW_AT_name        : (indirect string, offset: 0x262): signed char",
+        "    <2d>   DW_AT_name        : (indirect string, offset: 0x1b9): int16_t",
+        "    <3a>   DW_AT_name        : (indirect string, offset: 0x1f8): short int",
+        "    <41>   DW_AT_name        : int",
+        "    <48>   DW_AT_name        : (indirect string, offset: 0x1dc): long long int",
+        "    <4d>   DW_AT_name        : (indirect string, offset: 0x1b1): uint8_t",
+        "    <5a>   DW_AT_name        : (indirect string, offset: 0xb7): unsigned char",
+        "    <5f>   DW_AT_name        : (indirect string, offset: 0x202): uint16_t",
+        "    <71>   DW_AT_name        : (indirect string, offset: 0x157): short unsigned int",
+        "    <76>   DW_AT_name        : (indirect string, offset: 0x244): uint32_t",
+        "    <83>   DW_AT_name        : (indirect string, offset: 0x18d): unsigned int",
+        "    <8a>   DW_AT_name        : (indirect string, offset: 0x19a): long long unsigned int",
+        "    <91>   DW_AT_name        : (indirect string, offset: 0x24d): long int",
+        "    <98>   DW_AT_name        : (indirect string, offset: 0x256): long double",
+        "    <9f>   DW_AT_name        : (indirect string, offset: 0x273): _Bool",
+        "    <a6>   DW_AT_name        : (indirect string, offset: 0x176): double",
+        "    <ad>   DW_AT_name        : (indirect string, offset: 0x1f3): char",
+        "    <b2>   DW_AT_name        : (indirect string, offset: 0xab): q15_t",
+        "    <c5>   DW_AT_name        : (indirect string, offset: 0xb1): float",
+        "    <d2>   DW_AT_name        : (indirect string, offset: 0x1d3): sizetype",
+        "    <e0>   DW_AT_name        : (indirect string, offset: 0x16a): fftLen",
+        "    <ed>   DW_AT_name        : (indirect string, offset: 0x1ea): pTwiddle",
+        "    <fa>   DW_AT_name        : (indirect string, offset: 0x9e): pBitRevTable",
+        "    <107>   DW_AT_name        : (indirect string, offset: 0x0): bitRevLength",
+        "    <121>   DW_AT_name        : (indirect string, offset: 0x79): csky_cfft_instance_q15"
+      ]
+    },
+    {
+      "object": "csky_cfft_radix4_q15.o",
+      "object_sha256": "ab272b283b359eee0bfd14bcc45b9d0871fab14eeb332ccaa7dcc3afc56cb0ab",
+      "exit_code": 0,
+      "stderr": "",
+      "selected_metadata_lines": []
+    },
+    {
+      "object": "csky_rfft_q15.o/",
+      "object_sha256": "88985efd0de7a03ffb315a9420a5df175fd2dccc939d6a0fdb3da5f476f35e46",
+      "exit_code": 0,
+      "stderr": "",
+      "selected_metadata_lines": []
+    },
+    {
+      "object": "csky_shift_q15.o",
+      "object_sha256": "4551190c279731a2713c1ba03344bb987de606b459955b65553cc7e738ed6eb5",
+      "exit_code": 0,
+      "stderr": "",
+      "selected_metadata_lines": []
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+1000f3fc:	ebe00048 	push      	r4-r11, r16-r17
+1000f400:	1422      	subi      	r14, r14, 8
+1000f402:	c4414859 	lsri      	r25, r1, 2
+1000f406:	c4194838 	lsli      	r24, r25, 0
+1000f40a:	6f03      	mov      	r12, r0
+1000f40c:	c42c002d 	addu      	r13, r12, r1
+1000f410:	c42d0032 	addu      	r18, r13, r1
+1000f414:	c4320033 	addu      	r19, r18, r1
+1000f418:	ea100000 	movi      	r16, 0
+1000f41c:	d88c2000 	ld.w      	r4, (r12, 0x0)
+1000f420:	d8ad2000 	ld.w      	r5, (r13, 0x0)
+1000f424:	d8d22000 	ld.w      	r6, (r18, 0x0)
+1000f428:	d8f32000 	ld.w      	r7, (r19, 0x0)
+1000f42c:	f824d084 	pasri.s16      	r4, r4, 2
+1000f430:	f825d085 	pasri.s16      	r5, r5, 2
+1000f434:	f826d086 	pasri.s16      	r6, r6, 2
+1000f438:	f827d087 	pasri.s16      	r7, r7, 2
+1000f43c:	f8c4c188 	padd.s16.s      	r8, r4, r6
+1000f440:	f8c4c586 	psub.s16.s      	r6, r4, r6
+1000f444:	f8e5c18b 	padd.s16.s      	r11, r5, r7
+1000f448:	f968c289 	paddh.s16      	r9, r8, r11
+1000f44c:	c4704831 	lsli      	r17, r16, 3
+1000f450:	c6220031 	addu      	r17, r2, r17
+1000f454:	d40c8809 	stbi.w      	r9, (r12)
+1000f458:	d9512000 	ld.w      	r10, (r17, 0x0)
+1000f45c:	f968c589 	psub.s16.s      	r9, r8, r11
+1000f460:	f92a8934 	mulca.s16.s      	r20, r10, r9
+1000f464:	f92a8c35 	mulcsx.s16      	r21, r10, r9
+1000f468:	f8e5c58b 	psub.s16.s      	r11, r5, r7
+1000f46c:	fab4d874 	pkghh      	r20, r20, r21
+1000f470:	f966c9e9 	pasx.s16.s      	r9, r6, r11
+1000f474:	f966cde6 	psax.s16.s      	r6, r6, r11
+1000f478:	c4504831 	lsli      	r17, r16, 2
+1000f47c:	c6220031 	addu      	r17, r2, r17
+1000f480:	d40d8814 	stbi.w      	r20, (r13)
+1000f484:	d9512000 	ld.w      	r10, (r17, 0x0)
+1000f488:	f8ca8934 	mulca.s16.s      	r20, r10, r6
+1000f48c:	f8ca8c35 	mulcsx.s16      	r21, r10, r6
+1000f490:	ea11000c 	movi      	r17, 12
+1000f494:	c6308431 	mult      	r17, r16, r17
+1000f498:	c6220031 	addu      	r17, r2, r17
+1000f49c:	fab4d874 	pkghh      	r20, r20, r21
+1000f4a0:	d4128814 	stbi.w      	r20, (r18)
+1000f4a4:	d9512000 	ld.w      	r10, (r17, 0x0)
+1000f4a8:	f92a8934 	mulca.s16.s      	r20, r10, r9
+1000f4ac:	f92a8c35 	mulcsx.s16      	r21, r10, r9
+1000f4b0:	c4700030 	addu      	r16, r16, r3
+1000f4b4:	fab4d874 	pkghh      	r20, r20, r21
+1000f4b8:	d4138814 	stbi.w      	r20, (r19)
+1000f4bc:	e9d8efb0 	bloop      	r24, 0x1000f41c, 0x1000f4b8	// 0x1000f4b8
+1000f4c0:	4362      	lsli      	r3, r3, 2
+1000f4c2:	b800      	st.w      	r0, (r14, 0x0)
+1000f4c4:	c4414898 	asri      	r24, r1, 2
+1000f4c8:	eb180004 	cmphsi      	r24, 5
+1000f4cc:	0c7d      	bf      	0x1000f5c6	// 0x1000f5c6
+1000f4ce:	c4194837 	lsli      	r23, r25, 0
+1000f4d2:	c4594899 	asri      	r25, r25, 2
+1000f4d6:	ea100000 	movi      	r16, 0
+1000f4da:	de0e2001 	st.w      	r16, (r14, 0x4)
+1000f4de:	ea160000 	movi      	r22, 0
+1000f4e2:	c7360440 	cmplt      	r22, r25
+1000f4e6:	0c6c      	bf      	0x1000f5be	// 0x1000f5be
+1000f4e8:	da0e2001 	ld.w      	r16, (r14, 0x4)
+1000f4ec:	ea110004 	movi      	r17, 4
+1000f4f0:	c6118427 	mult      	r7, r17, r16
+1000f4f4:	c4470031 	addu      	r17, r7, r2
+1000f4f8:	d8912000 	ld.w      	r4, (r17, 0x0)
+1000f4fc:	c4f10031 	addu      	r17, r17, r7
+1000f500:	d8b12000 	ld.w      	r5, (r17, 0x0)
+1000f504:	c4f10031 	addu      	r17, r17, r7
+1000f508:	d8d12000 	ld.w      	r6, (r17, 0x0)
+1000f50c:	c4700030 	addu      	r16, r16, r3
+1000f510:	de0e2001 	st.w      	r16, (r14, 0x4)
+1000f514:	9800      	ld.w      	r0, (r14, 0x0)
+1000f516:	c456482d 	lsli      	r13, r22, 2
+1000f51a:	c40d0033 	addu      	r19, r13, r0
+1000f51e:	c4594832 	lsli      	r18, r25, 2
+1000f522:	c6530034 	addu      	r20, r19, r18
+1000f526:	c6540035 	addu      	r21, r20, r18
+1000f52a:	c6550032 	addu      	r18, r21, r18
+1000f52e:	c416482c 	lsli      	r12, r22, 0
+1000f532:	6471      	cmplt      	r12, r1
+1000f534:	0c42      	bf      	0x1000f5b8	// 0x1000f5b8
+1000f536:	d8f32000 	ld.w      	r7, (r19, 0x0)
+1000f53a:	d9152000 	ld.w      	r8, (r21, 0x0)
+1000f53e:	f907c189 	padd.s16.s      	r9, r7, r8
+1000f542:	f907c58a 	psub.s16.s      	r10, r7, r8
+1000f546:	d8142000 	ld.w      	r0, (r20, 0x0)
+1000f54a:	d9722000 	ld.w      	r11, (r18, 0x0)
+1000f54e:	f960c187 	padd.s16.s      	r7, r0, r11
+1000f552:	f8e9c28d 	paddh.s16      	r13, r9, r7
+1000f556:	f80dd08d 	pasri.s16      	r13, r13, 1
+1000f55a:	ddb32000 	st.w      	r13, (r19, 0x0)
+1000f55e:	c4574831 	lsli      	r17, r23, 2
+1000f562:	c6330033 	addu      	r19, r19, r17
+1000f566:	f8e9c689 	psubh.s16      	r9, r9, r7
+1000f56a:	f925892d 	mulca.s16.s      	r13, r5, r9
+1000f56e:	f9258c30 	mulcsx.s16      	r16, r5, r9
+1000f572:	fa0dd86d 	pkghh      	r13, r13, r16
+1000f576:	ddb42000 	st.w      	r13, (r20, 0x0)
+1000f57a:	c6340034 	addu      	r20, r20, r17
+1000f57e:	f960c587 	psub.s16.s      	r7, r0, r11
+1000f582:	f8eacae9 	pasxh.s16      	r9, r10, r7
+1000f586:	f8eaceea 	psaxh.s16      	r10, r10, r7
+1000f58a:	f944892d 	mulca.s16.s      	r13, r4, r10
+1000f58e:	f9448c30 	mulcsx.s16      	r16, r4, r10
+1000f592:	fa0dd86d 	pkghh      	r13, r13, r16
+1000f596:	ddb52000 	st.w      	r13, (r21, 0x0)
+1000f59a:	c6350035 	addu      	r21, r21, r17
+1000f59e:	f926892d 	mulca.s16.s      	r13, r6, r9
+1000f5a2:	f9268c30 	mulcsx.s16      	r16, r6, r9
+1000f5a6:	fa0dd86d 	pkghh      	r13, r13, r16
+1000f5aa:	ddb22000 	st.w      	r13, (r18, 0x0)
+1000f5ae:	c6320032 	addu      	r18, r18, r17
+1000f5b2:	c6ec002c 	addu      	r12, r12, r23
+1000f5b6:	07be      	br      	0x1000f532	// 0x1000f532
+1000f5b8:	e6d60000 	addi      	r22, r22, 1
+1000f5bc:	0793      	br      	0x1000f4e2	// 0x1000f4e2
+1000f5be:	4362      	lsli      	r3, r3, 2
+1000f5c0:	c4584898 	asri      	r24, r24, 2
+1000f5c4:	0782      	br      	0x1000f4c8	// 0x1000f4c8
+1000f5c6:	9800      	ld.w      	r0, (r14, 0x0)
+1000f5c8:	4922      	lsri      	r1, r1, 2
+1000f5ca:	6c83      	mov      	r2, r0
+1000f5cc:	d0008c04 	pldbi.d      	r4, (r0)
+1000f5d0:	d0008c06 	pldbi.d      	r6, (r0)
+1000f5d4:	f8c4c188 	padd.s16.s      	r8, r4, r6
+1000f5d8:	f8e5c189 	padd.s16.s      	r9, r5, r7
+1000f5dc:	f928c28c 	paddh.s16      	r12, r8, r9
+1000f5e0:	f928c68d 	psubh.s16      	r13, r8, r9
+1000f5e4:	d402880c 	stbi.w      	r12, (r2)
+1000f5e8:	d402880d 	stbi.w      	r13, (r2)
+1000f5ec:	f8c4c588 	psub.s16.s      	r8, r4, r6
+1000f5f0:	f8e5c589 	psub.s16.s      	r9, r5, r7
+1000f5f4:	f928ceec 	psaxh.s16      	r12, r8, r9
+1000f5f8:	f928caed 	pasxh.s16      	r13, r8, r9
+1000f5fc:	d402880c 	stbi.w      	r12, (r2)
+1000f600:	d402880d 	stbi.w      	r13, (r2)
+1000f604:	e9c1efe4 	bloop      	r1, 0x1000f5cc, 0x1000f600	// 0x1000f600
+1000f608:	1402      	addi      	r14, r14, 8
+1000f60a:	ebc00048 	pop      	r4-r11, r16-r17

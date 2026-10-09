@@ -1,0 +1,17 @@
+
+g2/blobs/official/g2-2.2.6.10/ota_s200_firmware_ota.bin:     file format binary
+
+
+Disassembly of section .data:
+
+0052b37c <.data+0xf339c>:
+  52b37c:	b580      	push	{r7, lr}
+  52b37e:	2100      	movs	r1, #0
+  52b380:	f242 001c 	movw	r0, #8220	@ 0x201c
+  52b384:	f7ff fd58 	bl	0x52ae38
+  52b388:	0001      	movs	r1, r0
+  52b38a:	2800      	cmp	r0, #0
+  52b38c:	d002      	beq.n	0x52b394
+  52b38e:	0008      	movs	r0, r1
+  52b390:	f7ff fd65 	bl	0x52ae5e
+  52b394:	bd01      	pop	{r0, pc}
