@@ -1,0 +1,69 @@
+{
+  "commit": "918d44ebc2962a53d23eeee52b8f44c7816e7815",
+  "files": [
+    {
+      "url": "https://raw.githubusercontent.com/NationalSecurityAgency/ghidra/918d44ebc2962a53d23eeee52b8f44c7816e7815/Ghidra/Processors/ARM/data/languages/ARM8m_le.slaspec",
+      "sha256": "d83840c33f9023fb807ebae6116884206bcba39bc81ec94797aa8135569628db",
+      "size": 351,
+      "literal_instruction_term_hits": []
+    },
+    {
+      "url": "https://raw.githubusercontent.com/NationalSecurityAgency/ghidra/918d44ebc2962a53d23eeee52b8f44c7816e7815/Ghidra/Processors/ARM/data/languages/ARM.sinc",
+      "sha256": "769bbaa6d2dc9186c463a0fb771c7d87ab0e7901d7de1989016886a834e7ba86",
+      "size": 12120,
+      "literal_instruction_term_hits": []
+    },
+    {
+      "url": "https://raw.githubusercontent.com/NationalSecurityAgency/ghidra/918d44ebc2962a53d23eeee52b8f44c7816e7815/Ghidra/Processors/ARM/data/languages/ARMTHUMBinstructions.sinc",
+      "sha256": "d98aa03f9f32b0155bdb6662e432c5a063e0e97a6899b2fde89667959ea520b4",
+      "size": 178619,
+      "literal_instruction_term_hits": []
+    },
+    {
+      "url": "https://raw.githubusercontent.com/NationalSecurityAgency/ghidra/918d44ebc2962a53d23eeee52b8f44c7816e7815/Ghidra/Processors/ARM/data/languages/ARMv8.sinc",
+      "sha256": "b5bbee3ef772841f7dd73e1ebb4eca6f34bb42e4cf13034592ed11a0df19dc5b",
+      "size": 144960,
+      "literal_instruction_term_hits": [
+        {
+          "line": 382,
+          "text": "# (DDI0553B) C2.4.103 p. 713 LE, LETP"
+        },
+        {
+          "line": 394,
+          "text": ":letp lr, loopAddr                    is TMode=1 & thv_c1631=0xf01f & thv_c1215=0b1100 & thv_c0000=1 & loopAddr & lr {"
+        },
+        {
+          "line": 997,
+          "text": "# (DDI0553B) C2.4.322 p. 1073 VCTP"
+        },
+        {
+          "line": 999,
+          "text": ":vctp.^esize2021 thv_Rn is $(TMODE_F) & thv_c2427=0 & thv_c2223=0 & thv_c1215=0xe & thv_c0811=8 & thv_c0407=0 & thv_c0003=1 & esize2021 & thv_Rn {"
+        },
+        {
+          "line": 2979,
+          "text": "# C2.4.492 WLS, DLS, WLSTP, DLSTP"
+        },
+        {
+          "line": 2982,
+          "text": ":wls lr,thv_Rn,wloopEndAddr is $(TMODE_F) & thv_c2427=0 & thv_c2023=4 & thv_c1215=0xc & thv_c0000=1 & lr & thv_Rn & wloopEndAddr {"
+        },
+        {
+          "line": 2990,
+          "text": ":dls lr, thv_Rn is $(TMODE_F) & thv_c2427=0 & thv_c2023=4 & thv_c1215=0xe & thv_c0811=0 & thv_c0407=0 & thv_c0003=1 & lr & thv_Rn {"
+        },
+        {
+          "line": 2994,
+          "text": ":wlstp.^esize2021 lr,thv_Rn,wloopEndAddr is $(TMODE_F) & thv_c2427=0 & thv_c2223=0 & thv_c1215=0xc & thv_c0000=1 & esize2021 & lr & thv_Rn & wloopEndAddr {"
+        },
+        {
+          "line": 3003,
+          "text": ":dlstp.^esize2021 lr, thv_Rn is $(TMODE_F) & thv_c2427=0 & thv_c2223=0 & thv_c1215=0xe & thv_c0811=0 & thv_c0407=0 & thv_c0003=1 & esize2021 & lr & thv_Rn {"
+        }
+      ]
+    }
+  ],
+  "license_url": "https://raw.githubusercontent.com/NationalSecurityAgency/ghidra/918d44ebc2962a53d23eeee52b8f44c7816e7815/LICENSE",
+  "license_sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4",
+  "scope": "selected ARM language sources, exact textual scan; not full decoder proof"
+}

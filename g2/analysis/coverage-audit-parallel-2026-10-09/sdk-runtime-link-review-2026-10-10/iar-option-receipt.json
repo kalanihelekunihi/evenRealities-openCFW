@@ -1,0 +1,84 @@
+[
+  {
+    "name": "Debug",
+    "options": {
+      "GRuntimeLibSelect": [
+        "1"
+      ],
+      "RTDescription": [
+        "Use the normal configuration of the C/C++ runtime library. No locale interface, C locale, no file descriptor support, no multibytes in printf and scanf, and no hex floats in strtod."
+      ],
+      "GFPUDeviceSlave": [
+        "AP510NFA-CBR\tAmbiqMicro AP510NFA-CBR"
+      ],
+      "FPU2": [
+        "7"
+      ],
+      "GFPUCoreSlave2": [
+        "64"
+      ],
+      "FPU64": [
+        "1"
+      ],
+      "IFpuProcessor": [
+        "1"
+      ],
+      "CCOptLevel": [
+        "0"
+      ],
+      "CCPosIndRopi": [
+        "0"
+      ],
+      "CCPosIndRwpi": [
+        "0"
+      ],
+      "AFpuProcessor": [
+        "1"
+      ],
+      "IlinkFpuProcessor": [
+        "1"
+      ]
+    }
+  },
+  {
+    "name": "Release",
+    "options": {
+      "GRuntimeLibSelect": [
+        "1"
+      ],
+      "RTDescription": [
+        "Use the normal configuration of the C/C++ runtime library. No locale interface, C locale, no file descriptor support, no multibytes in printf and scanf, and no hex floats in strtod."
+      ],
+      "GFPUDeviceSlave": [
+        "AP510NFA-CBR AmbiqMicro AP510NFA-CBR"
+      ],
+      "FPU2": [
+        "1"
+      ],
+      "GFPUCoreSlave2": [
+        "39"
+      ],
+      "FPU64": [
+        "1"
+      ],
+      "IFpuProcessor": [
+        "1"
+      ],
+      "CCOptLevel": [
+        "0"
+      ],
+      "CCPosIndRopi": [
+        "0"
+      ],
+      "CCPosIndRwpi": [
+        "0"
+      ],
+      "AFpuProcessor": [
+        "1"
+      ],
+      "IlinkFpuProcessor": [
+        "1"
+      ]
+    }
+  }
+]

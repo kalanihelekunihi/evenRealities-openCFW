@@ -1,0 +1,58 @@
+{
+  "status": "PASS",
+  "codec": [
+    {
+      "image": "uart_stage1",
+      "envelopes": 32,
+      "raw_union_bytes": 3142,
+      "all_hashes_and_ranges_verified": true
+    },
+    {
+      "image": "uart_stage2",
+      "envelopes": 96,
+      "raw_union_bytes": 11498,
+      "all_hashes_and_ranges_verified": true
+    },
+    {
+      "image": "binh_a_stage2_xip",
+      "envelopes": 362,
+      "raw_union_bytes": 28962,
+      "all_hashes_and_ranges_verified": true
+    },
+    {
+      "image": "binh_a_stage2_sram",
+      "envelopes": 151,
+      "raw_union_bytes": 11313,
+      "all_hashes_and_ranges_verified": true
+    },
+    {
+      "image": "binh_b_stage2",
+      "envelopes": 288,
+      "raw_union_bytes": 37645,
+      "all_hashes_and_ranges_verified": true
+    }
+  ],
+  "listings": [
+    {
+      "path": "g2/research/corpus/em9305/objdump/open-2026-09-29/em9305-0x302400-0x335BC8.s",
+      "lines": 71167,
+      "matched_unique_bytes": 210072,
+      "raw_payload_or_image_bytes": 211948,
+      "hash_and_serialization_verified": true
+    },
+    {
+      "path": "g2/build/pseudocode-first/20260930T190500Z/analysis/csky-recovery-5316/001/full-xip.objdump.txt",
+      "lines": 14467,
+      "matched_unique_bytes": 36484,
+      "raw_payload_or_image_bytes": 36484,
+      "hash_and_serialization_verified": true
+    }
+  ],
+  "preserved_CSKY_failed_mismatches": 3775,
+  "codec_raw_pseudocode_payload_fraction": 28.38462765109233,
+  "EM_listing_payload_fraction": 99.11487723403853,
+  "codec_XIP_listing_payload_fraction": 11.188253621677319,
+  "EM_unrepresented_record3_bytes": 816,
+  "EM_metadata_other_record_bytes": 1060,
+  "qualification": "Raw artifact representation fractions only, not executable or semantic coverage; aliases counted once within image, separate terminal codec image identities."
+}

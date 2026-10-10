@@ -1,0 +1,57 @@
+{
+  "payloads": [
+    {
+      "id": "codec",
+      "bytes": 326092,
+      "sha256": "b06dfef7faa2f1e52d2aacd07958d4b96ffc36dca5077ac9149e48f19fc9c4d0",
+      "pass": true
+    },
+    {
+      "id": "ble_em9305",
+      "bytes": 211948,
+      "sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+      "pass": true
+    },
+    {
+      "id": "touch",
+      "bytes": 34464,
+      "sha256": "0d13d8bb1337bf22989dc16143e3d5eca29a31cc1ed753ff624668750ea9470d",
+      "pass": true
+    },
+    {
+      "id": "case",
+      "bytes": 55784,
+      "sha256": "36ca0c13558f252af286ae2b36b5e576d087d21d37b15d778e7da9f502a70374",
+      "pass": true
+    },
+    {
+      "id": "apollo_bootloader",
+      "bytes": 148599,
+      "sha256": "f89a4c4657537cec6bfc572bdb8318866309b90a5d180c4307680d39824167b5",
+      "pass": true
+    },
+    {
+      "id": "apollo_main",
+      "bytes": 3523396,
+      "sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+      "pass": true
+    }
+  ],
+  "whole_bundle_hash_pass": true,
+  "gates": {
+    "G1_TARGET_AND_INVENTORY": "passed",
+    "G2_PSEUDOCODE_COMPLETE": "not_run",
+    "G3_CORPUS_FROZEN": "not_run",
+    "G4_IMPLEMENTATION_READY": "not_run",
+    "G5_SOURCE_COMPLETE": "not_run",
+    "G6_IDENTICAL_SOURCE_BUILD": "not_run"
+  },
+  "TinyFrame": {
+    "table_entries": 256,
+    "arithmetic_checks": 1792,
+    "receipt_hashes_match": true,
+    "original_execution": false,
+    "source_compilation": false
+  },
+  "canonical_coverage_changed": false
+}

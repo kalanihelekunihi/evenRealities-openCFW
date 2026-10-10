@@ -1,0 +1,36 @@
+{
+  "status": "PASS",
+  "cases": 5178,
+  "cases_by_body": {
+    "g2_isxdigit": 1024,
+    "g2_strcat": 36,
+    "g2_strcspn": 36,
+    "g2_strspn": 36,
+    "g2_strrchr": 1536,
+    "g2_ranmatch": 2304,
+    "g2_getn": 15,
+    "g2_ungetn": 45,
+    "g2_putchars": 24,
+    "g2_zero_init3": 122
+  },
+  "stock_sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+  "elf_sha256": "a2d35d24b2fb749a2e84d5d5517f1e9612baa6b7b10aa544ad4d99d6caa593a3",
+  "original_instruction_addresses_visited": {
+    "g2_isxdigit": 13,
+    "g2_strcat": 12,
+    "g2_strcspn": 16,
+    "g2_strspn": 16,
+    "g2_strrchr": 12,
+    "g2_ranmatch": 32,
+    "g2_getn": 16,
+    "g2_ungetn": 12,
+    "g2_putchars": 21,
+    "g2_zero_init3": 25
+  },
+  "limits": [
+    "Unget void return intentionally excluded: stock EOF path leaves state pointer in r0.",
+    "Callbacks are controlled external contracts, not complete scanf or formatter integration.",
+    "Zero-init adapter binds r9 explicitly; tested descriptor lengths 4..64, direct and flagged destinations.",
+    "No hardware execution, original link layout, byte-identical C code, or whole-firmware completion claimed."
+  ]
+}

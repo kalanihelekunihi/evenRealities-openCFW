@@ -1,0 +1,55 @@
+=================================================================
+==80004==ERROR: AddressSanitizer: global-buffer-overflow on address 0x000104fbd4e0 at pc 0x000104fb3254 bp 0x00016ae4d6b0 sp 0x00016ae4d6a8
+WRITE of size 1 at 0x000104fbd4e0 thread T0
+==80004==WARNING: external symbolizer didn't start up correctly!
+==80004==WARNING: Can't read from symbolizer at fd 3
+==80004==WARNING: atos failed to symbolize address "0x104fb3250"
+==80004==WARNING: Can't read from symbolizer at fd 3
+==80004==WARNING: atos failed to symbolize address "0x104fb38c8"
+==80004==WARNING: Can't read from symbolizer at fd 3
+==80004==WARNING: atos failed to symbolize address "0x104fb3aa4"
+==80004==WARNING: Can't read from symbolizer at fd 3
+==80004==WARNING: atos failed to symbolize address "0x104fb0fa0"
+==80004==WARNING: Can't read from symbolizer at fd 3
+==80004==WARNING: atos failed to symbolize address "0x18a8d3eec"
+    #0 0x000104fb3250 in am_util_stdio_vsprintf+0x1a88 (/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-formatter-buffer-review-2026-10-10/plain:arm64+0x100003250)
+    #1 0x000104fb38c8 in am_util_stdio_vsnprintf+0x40 (/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-formatter-buffer-review-2026-10-10/plain:arm64+0x1000038c8)
+    #2 0x000104fb3aa4 in am_util_stdio_snprintf+0xd0 (/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-formatter-buffer-review-2026-10-10/plain:arm64+0x100003aa4)
+    #3 0x000104fb0fa0 in main+0x6f0 (/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-formatter-buffer-review-2026-10-10/plain:arm64+0x100000fa0)
+    #4 0x00018a8d3eec in start+0x1a1c (/usr/lib/dyld:arm64e+0x31eec)
+
+==80004==WARNING: Can't read from symbolizer at fd 3
+0x000104fbd4e0 is located 0 bytes after global variable 'g_prfbuf' defined in 'g2/analysis/sdk-runtime-link-20261010-implementation/am_util_stdio.c' (0x000104fbd0e0) of size 1024
+SUMMARY: AddressSanitizer: global-buffer-overflow (/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-formatter-buffer-review-2026-10-10/plain:arm64+0x100003250) in am_util_stdio_vsprintf+0x1a88
+Shadow bytes around the buggy address:
+  0x000104fbd200: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104fbd280: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104fbd300: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104fbd380: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104fbd400: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x000104fbd480: 00 00 00 00 00 00 00 00 00 00 00 00[f9]f9 f9 f9
+  0x000104fbd500: f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9
+  0x000104fbd580: f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 00 00 00 00
+  0x000104fbd600: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104fbd680: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104fbd700: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==80004==ABORTING

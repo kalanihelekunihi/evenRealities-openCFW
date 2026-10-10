@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-10",
+  "scope": "private headless Ghidra-MCP experiment on retained authenticated ARM/Thumb analysis wrapper",
+  "input": {
+    "path": "g2/analysis/source-discovery-parallel-2026-10-09/ablation-smp-20261010/smp-analysis-only.elf",
+    "sha256": "1facc82af2b53a328fdcb3726ef0d4fb3b370fc8ddc808e57c95180c8d9d6cc5",
+    "body_range_inclusive": ["0x00537d0c", "0x00537e9d"],
+    "body_size": 402,
+    "body_sha256_parent_receipt": "c6c182f8937a91efc42995289820d0589b5ae839960cde0d83aec3f40ba0dbba",
+    "source_ota_sha256_parent_receipt": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863"
+  },
+  "tool": {
+    "ghidra_version": "12.1.4",
+    "ghidra_mcp_version": "7.0.0",
+    "ghidra_mcp_commit": "9cc29c0f1efb6c63a7d6898c9a23aff39397f992",
+    "server_jar_sha256": "0209de1a7d58138a87dd61f9c9725832c104d57a1f27defd3b24fbb4368729bc",
+    "java_version": "21.0.12.1",
+    "server_kind": "headless",
+    "endpoint_count": 190,
+    "persistence": "disposable import; no project saved"
+  },
+  "import": {
+    "program": "smp-analysis-only.elf",
+    "language": "ARM:LE:32:v8",
+    "compiler": "default",
+    "image_base": "0x00537d0c",
+    "memory_size": 778,
+    "function_count": 1
+  },
+  "stored_body_failures": {
+    "reported_function_size": 1,
+    "body_degenerate": true,
+    "disassemble_function_instruction_count": 0,
+    "analyze_control_flow_basic_blocks": 0,
+    "function_callee_count": 0,
+    "call_graph_edge_count": 0,
+    "sampled_bl_xrefs": 0,
+    "sampled_bl_sites": [
+      "0x00537d1e",
+      "0x00537d34",
+      "0x00537d3c",
+      "0x00537d68",
+      "0x00537d76",
+      "0x00537e94"
+    ],
+    "dataflow_error": "No PCode operations at 00537d0c in function SmpHandler_analysis_label"
+  },
+  "high_pcode": {
+    "basic_blocks": 31,
+    "operations": 355,
+    "mnemonics": {
+      "CALL": 24,
+      "CBRANCH": 21,
+      "BRANCH": 3,
+      "LOAD": 19,
+      "RETURN": 1,
+      "INDIRECT": 164,
+      "MULTIEQUAL": 47
+    },
+    "body_last_observed_instruction": "0x00537e9c"
+  },
+  "entry_abi_candidate": {
+    "persistent_signature": "undefined SmpHandler_analysis_label(void)",
+    "decompiler_signature": "void SmpHandler_analysis_label(undefined4 param_1, undefined2 *param_2)",
+    "r0": "32-bit input unused in recovered high-level body",
+    "r1": "nonnull-tested pointer with byte reads at offsets 0, 2, 3 and a 32-bit read at offset 8",
+    "status": "private review candidate; not applied"
+  },
+  "calls": [
+    ["0x00537d1e", "0x00542960", 0],
+    ["0x00537d34", "0x005304d4", 1],
+    ["0x00537d3c", "0x005375fc", 1],
+    ["0x00537d68", "0x004c9c50", 1],
+    ["0x00537d76", "0x0044b610", 3],
+    ["0x00537d7e", "0x0043d0ce", 0],
+    ["0x00537da2", "0x0043d574", 8],
+    ["0x00537da8", "0x004c9c50", 0],
+    ["0x00537db6", "0x0044b610", 3],
+    ["0x00537dbe", "0x0043d0ce", 0],
+    ["0x00537de2", "0x0043d574", 8],
+    ["0x00537de8", "0x004c9c50", 0],
+    ["0x00537df6", "0x0044b610", 3],
+    ["0x00537dfe", "0x0043d0ce", 0],
+    ["0x00537e22", "0x0043d574", 8],
+    ["0x00537e28", "0x004c9c50", 0],
+    ["0x00537e30", "0x0043d0ce", 0],
+    ["0x00537e54", "0x0043d574", 8],
+    ["0x00537e5a", "0x004c9c50", 0],
+    ["0x00537e68", "0x0044b610", 3],
+    ["0x00537e7a", "0x0052a63c", 4],
+    ["0x00537e82", "0x004bf9ec", 2],
+    ["0x00537e8a", "0x004bf9b0", 0],
+    ["0x00537e94", "0x0056ee62", 2]
+  ],
+  "decision": {
+    "useful_shortcut": "high P-code can preserve full recovered body blocks, direct calls, and call-site argument storage when the persistent bounded function extent is degenerate",
+    "unsafe_or_empty": [
+      "stored function size",
+      "ordinary disassembly endpoint",
+      "ordinary CFG endpoint",
+      "call graph and callee list",
+      "xrefs to unmapped external targets",
+      "documentation completeness classification",
+      "entry dataflow endpoint"
+    ],
+    "gate_effect": "none; P2_EXECUTING preserved, G2-G6 unchanged"
+  }
+}

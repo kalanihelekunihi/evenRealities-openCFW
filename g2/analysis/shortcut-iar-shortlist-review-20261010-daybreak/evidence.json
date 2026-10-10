@@ -1,0 +1,38 @@
+{
+  "scope": "private P2 bounded semantic review of the ten saved exact IAR occurrences",
+  "model": "Daybreak Blue",
+  "reasoning_effort": "low",
+  "authorization": "explicit after requested Sol service failure",
+  "workflow_phase_observed": "P2_EXECUTING",
+  "canonical_mutations": false,
+  "firmware_implementation": false,
+  "stock": {
+    "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-fixed-images-005/002/apollo_main-flash.bin",
+    "base": "0x00438000",
+    "size": 3523364,
+    "sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701"
+  },
+  "providers": [
+    {
+      "path": "third-party/local-vendor/toolchains/iar-linux-x86_64/cxarm-10.10.2/arm/lib/dl7Mx_tlns.a",
+      "sha256": "dc2e4966fda0c51fde5a9a30b5c9f6248033cde22336151c3f89cad1150db6f1"
+    },
+    {
+      "path": "third-party/local-vendor/toolchains/iar-linux-x86_64/cxarm-10.10.2/arm/lib/rt7Sx_tlg.a",
+      "sha256": "ef344d95207c8262b0a7f2b243f0f05941e995e841bda4d1ca017d50d7229150"
+    }
+  ],
+  "reviewed": [
+    {"runtime": "0x595984", "end": "0x5959A2", "symbol": "isxdigit", "bytes": 30, "direct_branch_references": 2, "same_bytes_variant_count": 17},
+    {"runtime": "0x567C80", "end": "0x567C9E", "symbol": "strcat", "bytes": 30, "direct_branch_references": 29, "same_bytes_variant_count": 11},
+    {"runtime": "0x541B30", "end": "0x541B52", "symbol": "strcspn", "bytes": 34, "direct_branch_references": 5, "same_bytes_variant_count": 17},
+    {"runtime": "0x567C64", "end": "0x567C80", "symbol": "__iar_Strrchr", "bytes": 28, "direct_branch_references": 2, "same_bytes_variant_count": 17},
+    {"runtime": "0x541B52", "end": "0x541B74", "symbol": "strspn", "bytes": 34, "direct_branch_references": 5, "same_bytes_variant_count": 17},
+    {"runtime": "0x482684", "end": "0x4826B2", "symbol": "_PutcharsDefault", "bytes": 46, "direct_branch_references": 5, "same_bytes_variant_count": 17},
+    {"runtime": "0x4D15FA", "end": "0x4D161C", "symbol": "_GetN", "bytes": 34, "direct_branch_references": 10, "same_bytes_variant_count": 15},
+    {"runtime": "0x4D161C", "end": "0x4D1636", "symbol": "_UngetN", "bytes": 26, "direct_branch_references": 9, "same_bytes_variant_count": 15},
+    {"runtime": "0x4D2112", "end": "0x4D2158", "symbol": "ranmatch", "bytes": 70, "direct_branch_references": 2, "same_bytes_variant_count": 17},
+    {"runtime": "0x5FA01E", "end": "0x5FA056", "symbol": "__iar_zero_init3", "bytes": 56, "direct_branch_references": 0, "same_bytes_variant_count": 6}
+  ],
+  "conclusion": "Exact IAR 10.10.2 provider identity and bounded semantics are established for all ten extents, but shared bytes across archive variants do not identify the producing release or configuration and do not constitute canonical coverage admission."
+}

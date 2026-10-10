@@ -1,0 +1,59 @@
+=================================================================
+==80112==ERROR: AddressSanitizer: use-after-poison on address 0x000100db2800 at pc 0x000100da6458 bp 0x00016f059b90 sp 0x00016f059b88
+WRITE of size 1 at 0x000100db2800 thread T0
+==80112==WARNING: external symbolizer didn't start up correctly!
+==80112==WARNING: Can't read from symbolizer at fd 3
+==80112==WARNING: atos failed to symbolize address "0x100da6454"
+==80112==WARNING: Can't read from symbolizer at fd 3
+==80112==WARNING: atos failed to symbolize address "0x100da6c54"
+==80112==WARNING: Can't read from symbolizer at fd 3
+==80112==WARNING: atos failed to symbolize address "0x100da6e30"
+==80112==WARNING: Can't read from symbolizer at fd 3
+==80112==WARNING: atos failed to symbolize address "0x100da8104"
+==80112==WARNING: Can't read from symbolizer at fd 3
+==80112==WARNING: atos failed to symbolize address "0x18a8d3eec"
+    #0 0x000100da6454 in am_util_stdio_vsprintf+0x1900 (/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-formatter-buffer-review-2026-10-10/internal-guard:arm64+0x100002454)
+    #1 0x000100da6c54 in am_util_stdio_vsnprintf+0x40 (/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-formatter-buffer-review-2026-10-10/internal-guard:arm64+0x100002c54)
+    #2 0x000100da6e30 in am_util_stdio_snprintf+0xd0 (/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-formatter-buffer-review-2026-10-10/internal-guard:arm64+0x100002e30)
+    #3 0x000100da8104 in main+0x1c4 (/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-formatter-buffer-review-2026-10-10/internal-guard:arm64+0x100004104)
+    #4 0x00018a8d3eec in start+0x1a1c (/usr/lib/dyld:arm64e+0x31eec)
+
+Address 0x000100db2800 is a wild pointer inside of access range of size 0x000000000001.
+==80112==WARNING: Can't read from symbolizer at fd 3
+==80112==WARNING: atos failed to symbolize address "0x100da6454"
+SUMMARY: AddressSanitizer: use-after-poison (/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-formatter-buffer-review-2026-10-10/internal-guard:arm64+0x100002454) in am_util_stdio_vsprintf+0x1900
+Shadow bytes around the buggy address:
+  0x000100db2580: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000100db2600: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000100db2680: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000100db2700: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000100db2780: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x000100db2800:[f7]f7 f7 f7 f7 f7 f7 f7 00 00 00 00 00 00 00 00
+  0x000100db2880: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000100db2900: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000100db2980: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000100db2a00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000100db2a80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+
+NOTE: the stack trace above identifies the code that *accessed* the poisoned memory.
+To identify the code that *poisoned* the memory, try the experimental setting ASAN_OPTIONS=poison_history_size=<size>.
+==80112==ABORTING

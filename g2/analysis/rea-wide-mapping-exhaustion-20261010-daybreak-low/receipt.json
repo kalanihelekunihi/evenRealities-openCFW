@@ -1,0 +1,82 @@
+{
+  "scope": "private P2 REA wide-mapping and exact-snapshot test",
+  "provider": {
+    "id": "ghidra",
+    "version": "12.1.4",
+    "import_mode": "ephemeral-source-immutable"
+  },
+  "input": {
+    "path": "g2/analysis/shortcut-arm-tools-20261009-agent3/main-analysis-only.elf",
+    "elf_sha256": "36c9b79de3b961d36ad343a1402a112298603111cbe1d5875e1b471694159d1a",
+    "official_payload_sha256": "36c5b0e499a68ac2493a497bdab9740fd3e7027730c26a9094eca47268a27863",
+    "mapped_base": "0x00437fe0",
+    "mapped_bytes": 3523396,
+    "metadata_boundary": "Authored analysis-only ELF envelope; whole mapped segment is not a code-classification claim."
+  },
+  "overview": {
+    "procedures": 7341,
+    "strings": 17010,
+    "segment_count": 7,
+    "evidence_id": "ev_f8e79ad14955366a323874c046852c3ffba2ab4e41e6401e7cb21ea19bb0749c"
+  },
+  "flashdb_wrapper": {
+    "address": "0x0054116e",
+    "resolved_callees": [
+      "0x0043ce9e",
+      "0x0043d0ce",
+      "0x0043d574",
+      "0x004490cc",
+      "0x0054454a"
+    ],
+    "incoming_call_xrefs": [
+      "0x004d9578",
+      "0x004d965e",
+      "0x004d981c",
+      "0x004d9956",
+      "0x004d99e8",
+      "0x005105fc",
+      "0x005106ae",
+      "0x00510852",
+      "0x00510948"
+    ],
+    "dossier_evidence_id": "ev_faa3d102516cc14393c9e6bb657cc9c2c945e4be17c8f0ba9c664eb344b82fba",
+    "callee_evidence_id": "ev_c186e1d98a2f3e5d6f4efcd2c2cedd04e452716e66f3808d9140904475b04caf",
+    "xref_evidence_id": "ev_95dd59e78735de8bac856ad41416ae0d0b93c9051025c5c8fa3b25bb16251ace"
+  },
+  "batch": {
+    "addresses": [
+      "0x0054116e",
+      "0x004cff6c",
+      "0x004cff9a",
+      "0x004cffc2",
+      "0x004d0524"
+    ],
+    "succeeded": 5,
+    "failed": 0,
+    "evidence_id": "ev_a51e3f62593b9c2774786b517a3aa2e9b11f04b4e46184d9283cb291cf4a46e5"
+  },
+  "snapshot": {
+    "path": "g2/analysis/rea-wide-mapping-exhaustion-20261010-daybreak-low/main-analysis-only.rea-snapshot.json",
+    "bytes": 2557175,
+    "sha256": "5f72b041765e7725737f4c03326b46e61a2c67aeba10518af8d875b71ec34688",
+    "primitive_entries": 5,
+    "workflow_entries": 3,
+    "evidence_records": 11,
+    "replay": "exact ELF and provider/profile reopened successfully; callee and xref evidence IDs reproduced"
+  },
+  "limits": [
+    "Only resolved Ghidra call references are returned.",
+    "Targetless computed and indirect calls remain unknown.",
+    "Recovered signatures and calling conventions are low-confidence decompiler observations.",
+    "REA provides transport and reusable evidence packaging, not an independent ISA or execution oracle.",
+    "No canonical P2 admission or workflow gate change is implied."
+  ],
+  "workflow_state": {
+    "phase": "P2_EXECUTING",
+    "G2_PSEUDOCODE_COMPLETE": "not_run",
+    "G3_CORPUS_FROZEN": "not_run",
+    "G4_IMPLEMENTATION_READY": "not_run",
+    "G5_SOURCE_COMPLETE": "not_run",
+    "G6_IDENTICAL_SOURCE_BUILD": "not_run"
+  }
+}

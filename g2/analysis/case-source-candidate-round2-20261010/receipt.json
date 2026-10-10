@@ -1,0 +1,573 @@
+{
+  "target": "arm-none-eabi cortex-m0plus thumb soft float",
+  "python_interpreter": "/opt/homebrew/opt/python@3.14/bin/python3.14",
+  "python_version": "3.14.8",
+  "tool_versions": {
+    "clang": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+    "ar": "GNU ar (GNU Binutils) 2.47.20260726",
+    "nm": "GNU nm (GNU Binutils) 2.47.20260726"
+  },
+  "tool_sha256": {
+    "clang": "21df4f5520528e31b8632cfb3b4b57a3f2a33126693828bf69d1976f537aaec7",
+    "ar": "f40cd1c0ee57dd53d75e1a210c099cfb6a7fd5132257dfe0bbeed236f42400cb",
+    "nm": "9b8f74d84d023b1c794d2119c1fd33854f6708a75c6ed504925664f380768ba7"
+  },
+  "flags": [
+    "--target=arm-none-eabi",
+    "-mcpu=cortex-m0plus",
+    "-mthumb",
+    "-mfloat-abi=soft",
+    "-std=c11",
+    "-Os",
+    "-ffreestanding",
+    "-fno-builtin",
+    "-ffunction-sections",
+    "-fdata-sections",
+    "-Wall",
+    "-Wextra"
+  ],
+  "sources": [
+    {
+      "source": "g2/components/case/source_candidate_20261010/evidenced_providers.c",
+      "sha256": "b57184ddae3b95b33e9677c7bd27023284dd0ee87efc02f22199e908a057b838",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__evidenced_providers.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/evidenced_providers.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__evidenced_providers.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/source_candidate_20261010/evidenced_providers.c",
+          "sha256": "b57184ddae3b95b33e9677c7bd27023284dd0ee87efc02f22199e908a057b838"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/binary_forward_offline/forward.c",
+      "sha256": "56865960f121857165df383f206d30ec6531aac28622592b70b8e014b0fb81c3",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/binary_forward_offline__forward.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/binary_forward_offline/forward.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/binary_forward_offline__forward.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/binary_forward_offline/forward.c",
+          "sha256": "56865960f121857165df383f206d30ec6531aac28622592b70b8e014b0fb81c3"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/deferred_consumer_offline/consumer.c",
+      "sha256": "54b6c1266341a1ec337781c0b8509bbbdb842a2f19405b452a2d0cb5f5ecf741",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/deferred_consumer_offline__consumer.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/deferred_consumer_offline/consumer.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/deferred_consumer_offline__consumer.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/deferred_consumer_offline/consumer.c",
+          "sha256": "54b6c1266341a1ec337781c0b8509bbbdb842a2f19405b452a2d0cb5f5ecf741"
+        },
+        {
+          "path": "g2/components/case/deferred_consumer_offline/consumer.h",
+          "sha256": "a13c99ad6475d0f6fb84cc3d5f7a4d589a7e7203270f3b86d2d95c8ad6ba09ae"
+        },
+        {
+          "path": "g2/components/case/deferred_event_offline/deferred.h",
+          "sha256": "6f01b96706cc39ee2985768023451f87367e502b1b536faa732e629b3663a406"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stddef.h",
+          "sha256": "e8d92dad1b380f2f2130fd7aa446bcb4fc923f7062a41c7c35beb4913093a8f5"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_header_macro.h",
+          "sha256": "4cf46e8fbb809df048eecbbd63686fa741da27afa8db4245bd1f61c1fb1611dc"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_ptrdiff_t.h",
+          "sha256": "b4178a57f3711b7013cba747a72a2f178c29fa9364e77d75b2159754072ced43"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_size_t.h",
+          "sha256": "d86ddc0238da09b385846ebef814ffc50a44e40cf85d4e3793f485952b7e73ad"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_wchar_t.h",
+          "sha256": "1900d4998aef3698b06399ed686db0c21e26509b08638a25734fb97ae89b1001"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_null.h",
+          "sha256": "b1d71b08563ab3d2c22a1e4f8ddf4d9a1111c89e9404b859a45c307e8ebc6c69"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_max_align_t.h",
+          "sha256": "3c1e4de47f4f06b35e2c5890d670052e84f716760505ff51b022fc8b21a9400f"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_offsetof.h",
+          "sha256": "e5f0f4ff8ff5fc6a1cc8b535f5065f1728eadd2bf1e1401f021f803ec7b4222f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/deferred_event_offline/deferred.c",
+      "sha256": "398063f649894ab704b78bd5285dc6635af077368f24aeeec9cbbba9aa856059",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/deferred_event_offline__deferred.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/deferred_event_offline/deferred.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/deferred_event_offline__deferred.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/deferred_event_offline/deferred.c",
+          "sha256": "398063f649894ab704b78bd5285dc6635af077368f24aeeec9cbbba9aa856059"
+        },
+        {
+          "path": "g2/components/case/deferred_event_offline/deferred.h",
+          "sha256": "6f01b96706cc39ee2985768023451f87367e502b1b536faa732e629b3663a406"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stddef.h",
+          "sha256": "e8d92dad1b380f2f2130fd7aa446bcb4fc923f7062a41c7c35beb4913093a8f5"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_header_macro.h",
+          "sha256": "4cf46e8fbb809df048eecbbd63686fa741da27afa8db4245bd1f61c1fb1611dc"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_ptrdiff_t.h",
+          "sha256": "b4178a57f3711b7013cba747a72a2f178c29fa9364e77d75b2159754072ced43"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_size_t.h",
+          "sha256": "d86ddc0238da09b385846ebef814ffc50a44e40cf85d4e3793f485952b7e73ad"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_wchar_t.h",
+          "sha256": "1900d4998aef3698b06399ed686db0c21e26509b08638a25734fb97ae89b1001"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_null.h",
+          "sha256": "b1d71b08563ab3d2c22a1e4f8ddf4d9a1111c89e9404b859a45c307e8ebc6c69"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_max_align_t.h",
+          "sha256": "3c1e4de47f4f06b35e2c5890d670052e84f716760505ff51b022fc8b21a9400f"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_offsetof.h",
+          "sha256": "e5f0f4ff8ff5fc6a1cc8b535f5065f1728eadd2bf1e1401f021f803ec7b4222f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/event_flags_offline/events.c",
+      "sha256": "0a6495a5b69b1585b49a03f7360d3d8807c98032630328b395d55da5f8bec5ac",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/event_flags_offline__events.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/event_flags_offline/events.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/event_flags_offline__events.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/event_flags_offline/events.c",
+          "sha256": "0a6495a5b69b1585b49a03f7360d3d8807c98032630328b395d55da5f8bec5ac"
+        },
+        {
+          "path": "g2/components/case/event_flags_offline/events.h",
+          "sha256": "03f8e67de3fcd211c3e0f4c73766e2f705088d0725567a312748f71203cd7a6f"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stddef.h",
+          "sha256": "e8d92dad1b380f2f2130fd7aa446bcb4fc923f7062a41c7c35beb4913093a8f5"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_header_macro.h",
+          "sha256": "4cf46e8fbb809df048eecbbd63686fa741da27afa8db4245bd1f61c1fb1611dc"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_ptrdiff_t.h",
+          "sha256": "b4178a57f3711b7013cba747a72a2f178c29fa9364e77d75b2159754072ced43"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_size_t.h",
+          "sha256": "d86ddc0238da09b385846ebef814ffc50a44e40cf85d4e3793f485952b7e73ad"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_wchar_t.h",
+          "sha256": "1900d4998aef3698b06399ed686db0c21e26509b08638a25734fb97ae89b1001"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_null.h",
+          "sha256": "b1d71b08563ab3d2c22a1e4f8ddf4d9a1111c89e9404b859a45c307e8ebc6c69"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_max_align_t.h",
+          "sha256": "3c1e4de47f4f06b35e2c5890d670052e84f716760505ff51b022fc8b21a9400f"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_offsetof.h",
+          "sha256": "e5f0f4ff8ff5fc6a1cc8b535f5065f1728eadd2bf1e1401f021f803ec7b4222f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/event_waiters_offline/waiters.c",
+      "sha256": "d6a4ba76d822f94bcc0777e578061b5ed466897be429151cbfd54ecf1b10891a",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/event_waiters_offline__waiters.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/event_waiters_offline/waiters.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/event_waiters_offline__waiters.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/event_waiters_offline/waiters.c",
+          "sha256": "d6a4ba76d822f94bcc0777e578061b5ed466897be429151cbfd54ecf1b10891a"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stddef.h",
+          "sha256": "e8d92dad1b380f2f2130fd7aa446bcb4fc923f7062a41c7c35beb4913093a8f5"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_header_macro.h",
+          "sha256": "4cf46e8fbb809df048eecbbd63686fa741da27afa8db4245bd1f61c1fb1611dc"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_ptrdiff_t.h",
+          "sha256": "b4178a57f3711b7013cba747a72a2f178c29fa9364e77d75b2159754072ced43"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_size_t.h",
+          "sha256": "d86ddc0238da09b385846ebef814ffc50a44e40cf85d4e3793f485952b7e73ad"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_wchar_t.h",
+          "sha256": "1900d4998aef3698b06399ed686db0c21e26509b08638a25734fb97ae89b1001"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_null.h",
+          "sha256": "b1d71b08563ab3d2c22a1e4f8ddf4d9a1111c89e9404b859a45c307e8ebc6c69"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_max_align_t.h",
+          "sha256": "3c1e4de47f4f06b35e2c5890d670052e84f716760505ff51b022fc8b21a9400f"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_offsetof.h",
+          "sha256": "e5f0f4ff8ff5fc6a1cc8b535f5065f1728eadd2bf1e1401f021f803ec7b4222f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/frame_callback_offline/frame.c",
+      "sha256": "e8b26e400da84f8f7eb77b6517e847d63e505556f7b0a5890509ab57937580cd",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/frame_callback_offline__frame.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/frame_callback_offline/frame.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/frame_callback_offline__frame.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/frame_callback_offline/frame.c",
+          "sha256": "e8b26e400da84f8f7eb77b6517e847d63e505556f7b0a5890509ab57937580cd"
+        },
+        {
+          "path": "g2/components/case/frame_callback_offline/frame.h",
+          "sha256": "271e5b85c5b64da1a7eaac2045008cfe35386ba8803a617830fe02b0d1bb0676"
+        },
+        {
+          "path": "g2/components/case/uart_start_offline/start.h",
+          "sha256": "7d91557e40f895b10c88952797238bc8b78431c16462fa30e3160df8f4f439be"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/frame_dispatch_offline/dispatch.c",
+      "sha256": "a165cf7266a1ab34c9e960d2bfc662d08b79d55590efffa69622deba482e28ff",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/frame_dispatch_offline__dispatch.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/frame_dispatch_offline/dispatch.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/frame_dispatch_offline__dispatch.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/frame_dispatch_offline/dispatch.c",
+          "sha256": "a165cf7266a1ab34c9e960d2bfc662d08b79d55590efffa69622deba482e28ff"
+        },
+        {
+          "path": "g2/components/case/frame_dispatch_offline/dispatch.h",
+          "sha256": "2239c8ae6a3101d8e124593479e63acad02128fd16a64f5afbf99a462922891e"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/local_commands_offline/local.c",
+      "sha256": "3317c75407d95bf100ba55de524463b67efea640cbc1a6e2d2da094f8e28831a",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/local_commands_offline__local.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/local_commands_offline/local.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/local_commands_offline__local.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/local_commands_offline/local.c",
+          "sha256": "3317c75407d95bf100ba55de524463b67efea640cbc1a6e2d2da094f8e28831a"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/uart_error_atomic_offline/uart.c",
+      "sha256": "13b06b132908c9527cc8ea04919a03e64cc78114deef7ebb29e3cee521059aed",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/uart_error_atomic_offline__uart.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/uart_error_atomic_offline/uart.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/uart_error_atomic_offline__uart.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/uart_error_atomic_offline/uart.c",
+          "sha256": "13b06b132908c9527cc8ea04919a03e64cc78114deef7ebb29e3cee521059aed"
+        },
+        {
+          "path": "g2/components/case/uart_error_atomic_offline/uart.h",
+          "sha256": "162decbdc5942e7736e2d941cbbf05734fa6875a0cb98faf6504ed9dee5f33e8"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stddef.h",
+          "sha256": "e8d92dad1b380f2f2130fd7aa446bcb4fc923f7062a41c7c35beb4913093a8f5"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_header_macro.h",
+          "sha256": "4cf46e8fbb809df048eecbbd63686fa741da27afa8db4245bd1f61c1fb1611dc"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_ptrdiff_t.h",
+          "sha256": "b4178a57f3711b7013cba747a72a2f178c29fa9364e77d75b2159754072ced43"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_size_t.h",
+          "sha256": "d86ddc0238da09b385846ebef814ffc50a44e40cf85d4e3793f485952b7e73ad"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_wchar_t.h",
+          "sha256": "1900d4998aef3698b06399ed686db0c21e26509b08638a25734fb97ae89b1001"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_null.h",
+          "sha256": "b1d71b08563ab3d2c22a1e4f8ddf4d9a1111c89e9404b859a45c307e8ebc6c69"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_max_align_t.h",
+          "sha256": "3c1e4de47f4f06b35e2c5890d670052e84f716760505ff51b022fc8b21a9400f"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_offsetof.h",
+          "sha256": "e5f0f4ff8ff5fc6a1cc8b535f5065f1728eadd2bf1e1401f021f803ec7b4222f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/uart_receive_offline/receive.c",
+      "sha256": "f00b1bc265348171771745eb8ae21f4cb9d2eebb09dd0dd12e93eb09458bc975",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/uart_receive_offline__receive.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/uart_receive_offline/receive.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/uart_receive_offline__receive.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/uart_receive_offline/receive.c",
+          "sha256": "f00b1bc265348171771745eb8ae21f4cb9d2eebb09dd0dd12e93eb09458bc975"
+        },
+        {
+          "path": "g2/components/case/uart_receive_offline/receive.h",
+          "sha256": "7224edd38883fc2e30a393476e4fd19591d0ab8a979ae1dc4226f5731d7422ba"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stddef.h",
+          "sha256": "e8d92dad1b380f2f2130fd7aa446bcb4fc923f7062a41c7c35beb4913093a8f5"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_header_macro.h",
+          "sha256": "4cf46e8fbb809df048eecbbd63686fa741da27afa8db4245bd1f61c1fb1611dc"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_ptrdiff_t.h",
+          "sha256": "b4178a57f3711b7013cba747a72a2f178c29fa9364e77d75b2159754072ced43"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_size_t.h",
+          "sha256": "d86ddc0238da09b385846ebef814ffc50a44e40cf85d4e3793f485952b7e73ad"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_wchar_t.h",
+          "sha256": "1900d4998aef3698b06399ed686db0c21e26509b08638a25734fb97ae89b1001"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_null.h",
+          "sha256": "b1d71b08563ab3d2c22a1e4f8ddf4d9a1111c89e9404b859a45c307e8ebc6c69"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_max_align_t.h",
+          "sha256": "3c1e4de47f4f06b35e2c5890d670052e84f716760505ff51b022fc8b21a9400f"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_offsetof.h",
+          "sha256": "e5f0f4ff8ff5fc6a1cc8b535f5065f1728eadd2bf1e1401f021f803ec7b4222f"
+        }
+      ]
+    },
+    {
+      "source": "g2/components/case/uart_start_offline/start.c",
+      "sha256": "b93724ee65b48c9f16e917149e009c1a597089bdbbebb69b96263187e555f53f",
+      "command": "/usr/bin/clang --target=arm-none-eabi -mcpu=cortex-m0plus -mthumb -mfloat-abi=soft -std=c11 -Os -ffreestanding -fno-builtin -ffunction-sections -fdata-sections -Wall -Wextra -MD -MF /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/uart_start_offline__start.c.d -c /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/uart_start_offline/start.c -o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/uart_start_offline__start.c.o",
+      "exit": 0,
+      "stdout": "",
+      "stderr": "",
+      "dependencies": [
+        {
+          "path": "g2/components/case/uart_start_offline/start.c",
+          "sha256": "b93724ee65b48c9f16e917149e009c1a597089bdbbebb69b96263187e555f53f"
+        },
+        {
+          "path": "g2/components/case/uart_start_offline/start.h",
+          "sha256": "7d91557e40f895b10c88952797238bc8b78431c16462fa30e3160df8f4f439be"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stdint.h",
+          "sha256": "f43783466c93f77a6464274ebf18f9e4cc46f0d90770ddee2993c6cf39f7514f"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/stddef.h",
+          "sha256": "e8d92dad1b380f2f2130fd7aa446bcb4fc923f7062a41c7c35beb4913093a8f5"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_header_macro.h",
+          "sha256": "4cf46e8fbb809df048eecbbd63686fa741da27afa8db4245bd1f61c1fb1611dc"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_ptrdiff_t.h",
+          "sha256": "b4178a57f3711b7013cba747a72a2f178c29fa9364e77d75b2159754072ced43"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_size_t.h",
+          "sha256": "d86ddc0238da09b385846ebef814ffc50a44e40cf85d4e3793f485952b7e73ad"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_wchar_t.h",
+          "sha256": "1900d4998aef3698b06399ed686db0c21e26509b08638a25734fb97ae89b1001"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_null.h",
+          "sha256": "b1d71b08563ab3d2c22a1e4f8ddf4d9a1111c89e9404b859a45c307e8ebc6c69"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_max_align_t.h",
+          "sha256": "3c1e4de47f4f06b35e2c5890d670052e84f716760505ff51b022fc8b21a9400f"
+        },
+        {
+          "path": "/Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include/__stddef_offsetof.h",
+          "sha256": "e5f0f4ff8ff5fc6a1cc8b535f5065f1728eadd2bf1e1401f021f803ec7b4222f"
+        }
+      ]
+    }
+  ],
+  "archive": "g2/components/case/source_candidate_20261010/build/libcase_source_candidate.a",
+  "archive_sha256": "632136a54e9049dedf5b11287a778dea19144a73e51496c595df752e3881eea2",
+  "archive_rebuild_same_sha256": true,
+  "archive_command": "/opt/homebrew/bin/arm-none-eabi-ar rcsD /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/libcase_source_candidate.a /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__evidenced_providers.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/binary_forward_offline__forward.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/deferred_consumer_offline__consumer.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/deferred_event_offline__deferred.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/event_flags_offline__events.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/event_waiters_offline__waiters.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/frame_callback_offline__frame.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/frame_dispatch_offline__dispatch.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/local_commands_offline__local.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/uart_error_atomic_offline__uart.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/uart_receive_offline__receive.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/uart_start_offline__start.c.o",
+  "nm_command": "/opt/homebrew/bin/arm-none-eabi-nm -A /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/source_candidate_20261010__evidenced_providers.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/binary_forward_offline__forward.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/deferred_consumer_offline__consumer.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/deferred_event_offline__deferred.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/event_flags_offline__events.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/event_waiters_offline__waiters.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/frame_callback_offline__frame.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/frame_dispatch_offline__dispatch.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/local_commands_offline__local.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/uart_error_atomic_offline__uart.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/uart_receive_offline__receive.c.o /Users/kalani/Repo/evenRealities-openCFW/g2/components/case/source_candidate_20261010/build/uart_start_offline__start.c.o",
+  "provided_symbols": [
+    "HAL_UART_ErrorCallback",
+    "case_copy_from_queue",
+    "case_copy_to_queue",
+    "case_dispatch_received_frame",
+    "case_drain_negative_callbacks",
+    "case_event_flags_set",
+    "case_event_post",
+    "case_event_set_waiters",
+    "case_forward_event",
+    "case_forward_nonlocal",
+    "case_frame_callback",
+    "case_frame_de_prefix",
+    "case_frame_resync",
+    "case_hex_digit",
+    "case_local_selected",
+    "case_pend_from_isr",
+    "case_poll_frame_action",
+    "case_queue_send_isr",
+    "case_receive_nowait",
+    "case_uart_begin_rx",
+    "case_uart_end_rx",
+    "case_uart_error_irq",
+    "case_uart_rx16",
+    "case_uart_rx8",
+    "case_uart_start_api",
+    "receive",
+    "xEventGroupSetBitsFromISR"
+  ],
+  "unresolved_symbols": [
+    "HAL_UARTEx_RxEventCallback",
+    "HAL_UART_RxCpltCallback",
+    "case_ack",
+    "case_binary_command",
+    "case_bulk_receive",
+    "case_clear_event",
+    "case_control_a",
+    "case_control_b",
+    "case_disinherit",
+    "case_enter_critical",
+    "case_exit_critical",
+    "case_legacy_command",
+    "case_mask_restore",
+    "case_mask_save",
+    "case_remove_waiter",
+    "case_resume_scheduler",
+    "case_scheduler_state",
+    "case_send",
+    "case_suspend_scheduler",
+    "case_uart_dma_boundary",
+    "case_uart_other_irq",
+    "case_unblock_waiter",
+    "case_yield_request",
+    "xEventGroupSetBits"
+  ],
+  "source_count": 12,
+  "object_count": 12
+}

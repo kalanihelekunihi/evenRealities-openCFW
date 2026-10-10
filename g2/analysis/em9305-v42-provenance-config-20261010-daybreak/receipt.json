@@ -1,0 +1,55 @@
+{
+  "format": "openCFW.em9305-v42-provenance-config.v1",
+  "date": "2026-10-10",
+  "workflow_state_preserved": "P2_EXECUTING",
+  "implementation_performed": false,
+  "source": {
+    "repository": "https://github.com/C0R3YY2/em9305_original",
+    "github_repository_id": 950211814,
+    "repository_created_at": "2025-03-17T20:03:42Z",
+    "repository_pushed_at": "2025-03-17T20:49:25Z",
+    "repository_size_kib": 128017,
+    "default_branch": "main",
+    "fork": false,
+    "license": null,
+    "tags": [],
+    "commit": "e4412bc98d4e76d441d1226ca3696e53cfae5f54",
+    "tree": "f5cb9ba00df71c2612d6d64cf39e05615a2feb64",
+    "parent": "29468fb32e31cd231084c4fec3d8d09a2ab65e3c",
+    "github_commit_verification": {
+      "verified": true,
+      "reason": "valid",
+      "verified_at": "2025-03-17T20:54:27Z"
+    },
+    "provenance_class": "authenticated third-party historical SDK mirror with strong content corroboration",
+    "official_upstream": false
+  },
+  "prior_receipt": "g2/analysis/daybreak-source-frontier-20261010/receipt.json",
+  "ignored_vendor_root": "third-party/local-vendor/sources/em9305-v4.2-public-mirror",
+  "authenticated_files": [
+    {"path":"doc/sdk/_sources/ReleaseNotes.rst.txt","git_blob":"46121b98289dc102bfebd521ae3692d43c03ca45","size":31832,"sha256":"c3ef55c23d2295064856faace4fb2e2dbf88f9cb2ab000f4276180e7ceefdc9a","v46_relation":"different"},
+    {"path":"common/9305/tool_config/compile.arg","git_blob":"d8097854b46449407c382a2cdaeaa0f7ef4faadf","size":358,"sha256":"53a6c0833cdd54366423108e2bb0b12d2cf3b373dd14564bec4e00fc81faee80","v46_relation":"absent at corresponding installed path"},
+    {"path":"common/9305/tool_config/compile_mw_for_em.arg","git_blob":"f83d1a10a0999469fc43b5156e9b5d12e2d289e0","size":226,"sha256":"e9b94bb8259295dd1cc6ca6e2b9f6b603344a99e66b11eefb098d4da7c341dad","v46_relation":"absent at corresponding installed path"},
+    {"path":"cmake/toolchains/arcv2em.cmake","git_blob":"0de5d32996cc636f30a9a4b66a0f0d0743311f6c","size":1122,"sha256":"8362f7ba3f05f7b09be85f8dd32598e9cdd9803e9032536fd32372756bd9c448","v46_relation":"different"},
+    {"path":"cmake/build_configs.cmake","git_blob":"6688f18309382f36dbf7b16234539456708ce296","size":447,"sha256":"db3c031e3c85bd9dd82881232deea55dcc5c0814c495efaa2d322dc0dd2f2f60","v46_relation":"identical"},
+    {"path":"emcore/bin/v4.2/standard/includes/apexextensions.h","git_blob":"b74e28203b840fde4e1c2a8bae9f86ba9db5ffbb","size":5003,"sha256":"2a31777e65424c3e87237e478eef19065cec4e934838b1397e0c08e19841bc0b","v46_relation":"identical"},
+    {"path":"emcore/bin/v4.2/standard/includes/memory_map.h","git_blob":"2c4309c153a1755aee0c653e57a0da75d5b602b0","size":10832,"sha256":"5c8f374c0a53fab163c3ee39125bf36d06131ad03c5cbefad5a47f03ae8e47ce","v46_relation":"different"},
+    {"path":"emcore/bin/v4.2/standard/includes/config.h","git_blob":"6a1a0b6d74b130fcd468d359a3ae5fdacd299f2a","size":4481,"sha256":"9356b045d399fa3e80351a295c1eaf3e5e7dda468ed531459f576b431d478390","v46_relation":"different"}
+  ],
+  "configuration_findings": {
+    "compiler_driver": "MetaWare ccac",
+    "archiver": "MetaWare arac",
+    "target": "ARCv2 EM core4 / em9305 TCF profiles",
+    "build_families": ["ASIC", "DI03", "DI04", "DI05"],
+    "apex_intrinsics": {"log2p1":{"opcode":7,"sub_opcode":0},"log2p0":{"opcode":7,"sub_opcode":1}},
+    "exact_toolchain_version_pinned_by_selected_config": false,
+    "optimization_level_pinned_by_selected_config": false,
+    "concrete_standard_emcore_linker_placement_recovered": false,
+    "standard_emcore_source_present": false
+  },
+  "submodule_decision": {
+    "add": false,
+    "reason": "large two-commit personal mirror with no repository license or authenticated upstream relationship; useful evidence is a small hash-pinnable subset and the standard EM-Core/controller sources remain absent"
+  },
+  "mutations_excluded": [".gitmodules", "gitlinks", "canonical coverage ledger", "firmware source", "workflow state"]
+}

@@ -1,0 +1,79 @@
+{
+  "status": "PASS",
+  "image": {
+    "path": "g2/build/pseudocode-first/20260930T190500Z/attempts/P1-canonical-fixed-images-005/002/apollo_main-flash.bin",
+    "size": 3523364,
+    "sha256": "19044a72bdfeb04c6b1b104d87da7b98e13cc18928528d84d999b6bcc0ba9701",
+    "base": "0x00438000"
+  },
+  "table": {
+    "start": "0x0075d3c8",
+    "end_exclusive": "0x0075d410",
+    "bytes": 72
+  },
+  "zero_handler_thumb": "0x005fa01f",
+  "zero_descriptors": [
+    {
+      "length": 461552,
+      "destination_word": "0x20004558",
+      "sb_relative": false,
+      "absolute_destination": "0x20004558"
+    },
+    {
+      "length": 2363348,
+      "destination_word": "0x2013be70",
+      "sb_relative": false,
+      "absolute_destination": "0x2013be70"
+    }
+  ],
+  "compressed_rows": [
+    {
+      "row": "0x0075d3e0",
+      "handler_thumb": "0x0043a11f",
+      "source_runtime_range": [
+        "0x0079430e",
+        "0x00794324"
+      ],
+      "packed_length_word": "0x0000002c",
+      "packed_source_bytes": 22,
+      "destination_word": "0x00000040",
+      "sb_relative": false,
+      "absolute_destination": "0x00000040"
+    },
+    {
+      "row": "0x0075d3f0",
+      "handler_thumb": "0x0043a11f",
+      "source_runtime_range": [
+        "0x0079189e",
+        "0x0079430e"
+      ],
+      "packed_length_word": "0x000054e0",
+      "packed_source_bytes": 10864,
+      "destination_word": "0x20000000",
+      "sb_relative": false,
+      "absolute_destination": "0x20000000"
+    },
+    {
+      "row": "0x0075d400",
+      "handler_thumb": "0x0043a11f",
+      "source_runtime_range": [
+        "0x0078f6f7",
+        "0x0079189e"
+      ],
+      "packed_length_word": "0x0000434e",
+      "packed_source_bytes": 8615,
+      "destination_word": "0x20080000",
+      "sb_relative": false,
+      "absolute_destination": "0x20080000"
+    }
+  ],
+  "summary": {
+    "destination_contracts": 5,
+    "sb_relative_contracts": 0,
+    "absolute_contracts": 5,
+    "compressed_inputs_form_contiguous_tail": [
+      "0x0078f6f7",
+      "0x00794324"
+    ]
+  }
+}

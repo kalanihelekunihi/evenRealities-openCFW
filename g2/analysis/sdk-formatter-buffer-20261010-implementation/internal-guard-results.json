@@ -1,0 +1,30 @@
+{
+  "compile": [
+    "/usr/bin/clang",
+    "-O1",
+    "-g",
+    "-fno-builtin",
+    "-fsanitize=address,undefined",
+    "-fno-sanitize-recover=all",
+    "-DAM_PART_APOLLO5_API",
+    "-Ig2/analysis/sdk-runtime-link-20261010-implementation",
+    "g2/analysis/sdk-formatter-buffer-20261010-implementation/internal-guard.c",
+    "-o",
+    "g2/analysis/sdk-formatter-buffer-20261010-implementation/internal-guard"
+  ],
+  "private_buffer_size": 2048,
+  "explicit_shadow_guard_bytes": 64,
+  "cases": [
+    {
+      "length": 1024,
+      "exit": 0,
+      "asan_use_after_poison": false
+    },
+    {
+      "length": 2049,
+      "exit": -6,
+      "asan_use_after_poison": true
+    }
+  ],
+  "limitation": "Single translation unit includes unchanged SDK source; test-only shadow guard, not separate production compilation"
+}

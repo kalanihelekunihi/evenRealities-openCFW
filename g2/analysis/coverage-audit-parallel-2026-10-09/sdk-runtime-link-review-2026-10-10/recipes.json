@@ -1,0 +1,264 @@
+[
+  {
+    "command": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m55",
+      "-mthumb",
+      "-O1",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10",
+      "-isystem",
+      "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include",
+      "-mfloat-abi=hard",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/am_util_stdio.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/plain-stdio.o"
+    ],
+    "exit": 0,
+    "receipt": "plain-compile.txt"
+  },
+  {
+    "command": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m55",
+      "-mthumb",
+      "-O1",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10",
+      "-isystem",
+      "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include",
+      "-mfloat-abi=hard",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/placement-probe.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/plain-probe.o"
+    ],
+    "exit": 0,
+    "receipt": "plain-probe-compile.txt"
+  },
+  {
+    "command": [
+      "arm-none-eabi-ld",
+      "-T",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/gcc/linker_script.ld",
+      "-e",
+      "placement_probe",
+      "-Map=/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/plain.map",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/plain-probe.o",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/plain-stdio.o",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/plain.elf"
+    ],
+    "exit": 0,
+    "receipt": "plain-link.txt"
+  },
+  {
+    "command": [
+      "arm-none-eabi-nm",
+      "-u",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/plain.elf"
+    ],
+    "exit": 0,
+    "receipt": "plain-undefined.txt"
+  },
+  {
+    "command": [
+      "arm-none-eabi-readelf",
+      "-A",
+      "-S",
+      "-l",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/plain.elf"
+    ],
+    "exit": 0,
+    "receipt": "plain-elf.txt"
+  },
+  {
+    "command": [
+      "arm-none-eabi-nm",
+      "-n",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/plain.elf"
+    ],
+    "exit": 0,
+    "receipt": "plain-symbols.txt"
+  },
+  {
+    "command": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m55",
+      "-mthumb",
+      "-O1",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10",
+      "-isystem",
+      "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include",
+      "-mfloat-abi=hard",
+      "-DAM_PART_APOLLO5_API",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/am_util_stdio.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/apollo5-aligned-stdio.o"
+    ],
+    "exit": 0,
+    "receipt": "apollo5-aligned-compile.txt"
+  },
+  {
+    "command": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m55",
+      "-mthumb",
+      "-O1",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10",
+      "-isystem",
+      "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include",
+      "-mfloat-abi=hard",
+      "-DAM_PART_APOLLO5_API",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/placement-probe.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/apollo5-aligned-probe.o"
+    ],
+    "exit": 0,
+    "receipt": "apollo5-aligned-probe-compile.txt"
+  },
+  {
+    "command": [
+      "arm-none-eabi-ld",
+      "-T",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/gcc/linker_script.ld",
+      "-e",
+      "placement_probe",
+      "-Map=/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/apollo5-aligned.map",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/apollo5-aligned-probe.o",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/apollo5-aligned-stdio.o",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/apollo5-aligned.elf"
+    ],
+    "exit": 0,
+    "receipt": "apollo5-aligned-link.txt"
+  },
+  {
+    "command": [
+      "arm-none-eabi-nm",
+      "-u",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/apollo5-aligned.elf"
+    ],
+    "exit": 0,
+    "receipt": "apollo5-aligned-undefined.txt"
+  },
+  {
+    "command": [
+      "arm-none-eabi-readelf",
+      "-A",
+      "-S",
+      "-l",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/apollo5-aligned.elf"
+    ],
+    "exit": 0,
+    "receipt": "apollo5-aligned-elf.txt"
+  },
+  {
+    "command": [
+      "arm-none-eabi-nm",
+      "-n",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/apollo5-aligned.elf"
+    ],
+    "exit": 0,
+    "receipt": "apollo5-aligned-symbols.txt"
+  },
+  {
+    "command": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m55",
+      "-mthumb",
+      "-O1",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10",
+      "-isystem",
+      "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include",
+      "-mfloat-abi=soft",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/placement-probe.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/soft-probe.o"
+    ],
+    "exit": 0,
+    "receipt": "soft-probe-compile.txt"
+  },
+  {
+    "command": [
+      "arm-none-eabi-ld",
+      "-T",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/gcc/linker_script.ld",
+      "-e",
+      "placement_probe",
+      "-Map=/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/mixed-abi.map",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/soft-probe.o",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/plain-stdio.o",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/mixed-abi.elf"
+    ],
+    "exit": 1,
+    "receipt": "mixed-abi-rejection.txt"
+  },
+  {
+    "command": [
+      "/usr/bin/clang",
+      "--target=arm-none-eabi",
+      "-mcpu=cortex-m55",
+      "-mthumb",
+      "-O1",
+      "-ffreestanding",
+      "-fno-builtin",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-I/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10",
+      "-isystem",
+      "g2/analysis/touch-compiler14-successor-2026-10-09/tools/14.2.Rel1/arm-gnu-toolchain-14.2.rel1-x86_64-arm-none-eabi/arm-none-eabi/include",
+      "-mfloat-abi=softfp",
+      "-c",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/am_util_stdio.c",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/softfp-stdio.o"
+    ],
+    "exit": 0,
+    "receipt": "softfp-stdio-compile.txt"
+  },
+  {
+    "command": [
+      "arm-none-eabi-ld",
+      "-T",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/gcc/linker_script.ld",
+      "-e",
+      "tlsf_create",
+      "-Map=/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/tlsf-sdk-negative.map",
+      "g2/analysis/tlsf-main-source-comparison-20261010-implementation/comparator.o",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/softfp-stdio.o",
+      "-o",
+      "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-runtime-link-review-2026-10-10/tlsf-sdk-negative.elf"
+    ],
+    "exit": 1,
+    "receipt": "tlsf-sdk-negative.txt"
+  }
+]

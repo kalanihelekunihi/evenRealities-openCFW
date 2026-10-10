@@ -1,0 +1,283 @@
+{
+  "compiles": [
+    {
+      "command": [
+        "/usr/bin/clang",
+        "-O1",
+        "-g",
+        "-fno-builtin",
+        "-fsanitize=address,undefined",
+        "-fno-sanitize-recover=all",
+        "-fno-omit-frame-pointer",
+        "-Ig2/analysis/sdk-runtime-link-20261010-implementation",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-formatter-buffer-review-2026-10-10/harness-boundary.c",
+        "g2/analysis/sdk-runtime-link-20261010-implementation/am_util_stdio.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-formatter-buffer-review-2026-10-10/plain-boundary"
+      ],
+      "exit": 0
+    },
+    {
+      "command": [
+        "/usr/bin/clang",
+        "-O1",
+        "-g",
+        "-fno-builtin",
+        "-fsanitize=address,undefined",
+        "-fno-sanitize-recover=all",
+        "-fno-omit-frame-pointer",
+        "-Ig2/analysis/sdk-runtime-link-20261010-implementation",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-formatter-buffer-review-2026-10-10/harness-boundary.c",
+        "g2/analysis/sdk-runtime-link-20261010-implementation/am_util_stdio.c",
+        "-o",
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-formatter-buffer-review-2026-10-10/apollo5-aligned-boundary",
+        "-DAM_PART_APOLLO5_API"
+      ],
+      "exit": 0
+    }
+  ],
+  "cases": [
+    {
+      "variant": "plain",
+      "length": 1022,
+      "n": 1022,
+      "mode": 0,
+      "command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-formatter-buffer-review-2026-10-10/plain-boundary",
+        "1022",
+        "1022",
+        "0"
+      ],
+      "exit": 0,
+      "stdout_receipt": "plain-boundary-1022-1022-0.stdout",
+      "stderr_receipt": "plain-boundary-1022-1022-0.stderr"
+    },
+    {
+      "variant": "plain",
+      "length": 1022,
+      "n": 1022,
+      "mode": 1,
+      "command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-formatter-buffer-review-2026-10-10/plain-boundary",
+        "1022",
+        "1022",
+        "1"
+      ],
+      "exit": 0,
+      "stdout_receipt": "plain-boundary-1022-1022-1.stdout",
+      "stderr_receipt": "plain-boundary-1022-1022-1.stderr"
+    },
+    {
+      "variant": "plain",
+      "length": 1022,
+      "n": 1023,
+      "mode": 0,
+      "command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-formatter-buffer-review-2026-10-10/plain-boundary",
+        "1022",
+        "1023",
+        "0"
+      ],
+      "exit": 0,
+      "stdout_receipt": "plain-boundary-1022-1023-0.stdout",
+      "stderr_receipt": "plain-boundary-1022-1023-0.stderr"
+    },
+    {
+      "variant": "plain",
+      "length": 1022,
+      "n": 1023,
+      "mode": 1,
+      "command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-formatter-buffer-review-2026-10-10/plain-boundary",
+        "1022",
+        "1023",
+        "1"
+      ],
+      "exit": 0,
+      "stdout_receipt": "plain-boundary-1022-1023-1.stdout",
+      "stderr_receipt": "plain-boundary-1022-1023-1.stderr"
+    },
+    {
+      "variant": "plain",
+      "length": 1023,
+      "n": 1022,
+      "mode": 0,
+      "command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-formatter-buffer-review-2026-10-10/plain-boundary",
+        "1023",
+        "1022",
+        "0"
+      ],
+      "exit": 0,
+      "stdout_receipt": "plain-boundary-1023-1022-0.stdout",
+      "stderr_receipt": "plain-boundary-1023-1022-0.stderr"
+    },
+    {
+      "variant": "plain",
+      "length": 1023,
+      "n": 1022,
+      "mode": 1,
+      "command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-formatter-buffer-review-2026-10-10/plain-boundary",
+        "1023",
+        "1022",
+        "1"
+      ],
+      "exit": 0,
+      "stdout_receipt": "plain-boundary-1023-1022-1.stdout",
+      "stderr_receipt": "plain-boundary-1023-1022-1.stderr"
+    },
+    {
+      "variant": "plain",
+      "length": 1023,
+      "n": 1023,
+      "mode": 0,
+      "command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-formatter-buffer-review-2026-10-10/plain-boundary",
+        "1023",
+        "1023",
+        "0"
+      ],
+      "exit": 0,
+      "stdout_receipt": "plain-boundary-1023-1023-0.stdout",
+      "stderr_receipt": "plain-boundary-1023-1023-0.stderr"
+    },
+    {
+      "variant": "plain",
+      "length": 1023,
+      "n": 1023,
+      "mode": 1,
+      "command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-formatter-buffer-review-2026-10-10/plain-boundary",
+        "1023",
+        "1023",
+        "1"
+      ],
+      "exit": 0,
+      "stdout_receipt": "plain-boundary-1023-1023-1.stdout",
+      "stderr_receipt": "plain-boundary-1023-1023-1.stderr"
+    },
+    {
+      "variant": "apollo5-aligned",
+      "length": 1022,
+      "n": 1022,
+      "mode": 0,
+      "command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-formatter-buffer-review-2026-10-10/apollo5-aligned-boundary",
+        "1022",
+        "1022",
+        "0"
+      ],
+      "exit": 0,
+      "stdout_receipt": "apollo5-aligned-boundary-1022-1022-0.stdout",
+      "stderr_receipt": "apollo5-aligned-boundary-1022-1022-0.stderr"
+    },
+    {
+      "variant": "apollo5-aligned",
+      "length": 1022,
+      "n": 1022,
+      "mode": 1,
+      "command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-formatter-buffer-review-2026-10-10/apollo5-aligned-boundary",
+        "1022",
+        "1022",
+        "1"
+      ],
+      "exit": 0,
+      "stdout_receipt": "apollo5-aligned-boundary-1022-1022-1.stdout",
+      "stderr_receipt": "apollo5-aligned-boundary-1022-1022-1.stderr"
+    },
+    {
+      "variant": "apollo5-aligned",
+      "length": 1022,
+      "n": 1023,
+      "mode": 0,
+      "command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-formatter-buffer-review-2026-10-10/apollo5-aligned-boundary",
+        "1022",
+        "1023",
+        "0"
+      ],
+      "exit": 0,
+      "stdout_receipt": "apollo5-aligned-boundary-1022-1023-0.stdout",
+      "stderr_receipt": "apollo5-aligned-boundary-1022-1023-0.stderr"
+    },
+    {
+      "variant": "apollo5-aligned",
+      "length": 1022,
+      "n": 1023,
+      "mode": 1,
+      "command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-formatter-buffer-review-2026-10-10/apollo5-aligned-boundary",
+        "1022",
+        "1023",
+        "1"
+      ],
+      "exit": 0,
+      "stdout_receipt": "apollo5-aligned-boundary-1022-1023-1.stdout",
+      "stderr_receipt": "apollo5-aligned-boundary-1022-1023-1.stderr"
+    },
+    {
+      "variant": "apollo5-aligned",
+      "length": 1023,
+      "n": 1022,
+      "mode": 0,
+      "command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-formatter-buffer-review-2026-10-10/apollo5-aligned-boundary",
+        "1023",
+        "1022",
+        "0"
+      ],
+      "exit": 0,
+      "stdout_receipt": "apollo5-aligned-boundary-1023-1022-0.stdout",
+      "stderr_receipt": "apollo5-aligned-boundary-1023-1022-0.stderr"
+    },
+    {
+      "variant": "apollo5-aligned",
+      "length": 1023,
+      "n": 1022,
+      "mode": 1,
+      "command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-formatter-buffer-review-2026-10-10/apollo5-aligned-boundary",
+        "1023",
+        "1022",
+        "1"
+      ],
+      "exit": 0,
+      "stdout_receipt": "apollo5-aligned-boundary-1023-1022-1.stdout",
+      "stderr_receipt": "apollo5-aligned-boundary-1023-1022-1.stderr"
+    },
+    {
+      "variant": "apollo5-aligned",
+      "length": 1023,
+      "n": 1023,
+      "mode": 0,
+      "command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-formatter-buffer-review-2026-10-10/apollo5-aligned-boundary",
+        "1023",
+        "1023",
+        "0"
+      ],
+      "exit": 0,
+      "stdout_receipt": "apollo5-aligned-boundary-1023-1023-0.stdout",
+      "stderr_receipt": "apollo5-aligned-boundary-1023-1023-0.stderr"
+    },
+    {
+      "variant": "apollo5-aligned",
+      "length": 1023,
+      "n": 1023,
+      "mode": 1,
+      "command": [
+        "/Users/kalani/Repo/evenRealities-openCFW/g2/analysis/coverage-audit-parallel-2026-10-09/sdk-formatter-buffer-review-2026-10-10/apollo5-aligned-boundary",
+        "1023",
+        "1023",
+        "1"
+      ],
+      "exit": 0,
+      "stdout_receipt": "apollo5-aligned-boundary-1023-1023-1.stdout",
+      "stderr_receipt": "apollo5-aligned-boundary-1023-1023-1.stderr"
+    }
+  ],
+  "count": 16,
+  "all_pass": true
+}

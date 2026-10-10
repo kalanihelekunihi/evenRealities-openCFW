@@ -1,0 +1,1183 @@
+{
+  "format": "openCFW.em9305-v42-reloc-independent.v1",
+  "scope": {
+    "method": "whole-target aligned search anchored by the longest unmasked byte run; target location and name are unconstrained",
+    "target_base_address": "0x301fdc",
+    "minimum_size": 24,
+    "masked_encodings": [
+      "Thumb BL/BLX",
+      "B16",
+      "Bcond16",
+      "CBZ/CBNZ",
+      "LDR literal16",
+      "ADR16"
+    ],
+    "not_masked": [
+      "literal pools",
+      "arbitrary immediates",
+      "data pointers",
+      "32-bit non-branch PC-relative encodings"
+    ]
+  },
+  "inputs": {
+    "v42_ihex_sha256": "0e9d2e7ef4d2572a7fcdf5ae76e99c806b657b7b00740b86fb696c0b2bdf5b95",
+    "v42_sym_sha256": "c27c8dce8445e13845c9c1d9f32db76ca30f0cffc4ceeadb0a85cf8979775828",
+    "v46_ihex_sha256": "926e9d8d78fc0c37673632f4e3e84a8f8c83cb075ca00233e00400fe8d0b569d",
+    "v46_sym_sha256": "77de99329df7c3a4301b7e5748ce2fb12b741076058e522228e87cd3b7b52445",
+    "target_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9"
+  },
+  "counts": {
+    "accepted_total": 40,
+    "exact": 40,
+    "relocation_masked": 0,
+    "unique_after_negative_control": 40,
+    "canonical_boundary_and_name_agreement": 35,
+    "v42_version_discriminators": 18
+  },
+  "matches": [
+    {
+      "name": "IRQHandler_SWI1",
+      "v42_address": "0x302688",
+      "target_address": "0x3025f8",
+      "target_file_offset": 1564,
+      "size": 108,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 108,
+      "v46_same_size": true,
+      "v42_equals_v46": true,
+      "target_equals_v46": true,
+      "version_class": "same_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "IRQHandler_SWI1",
+        "module": "libs/third_party/QPC/lib_QPC.a:qk_port.s.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "0c6aed7c4510573166a2d799fc13534d19f52dcf88ebdc3f8725d7f592b42203",
+      "target_sha256": "0c6aed7c4510573166a2d799fc13534d19f52dcf88ebdc3f8725d7f592b42203",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x3025f8"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "IRQ_Cleaning",
+      "v42_address": "0x304e48",
+      "target_address": "0x3068c8",
+      "target_file_offset": 18668,
+      "size": 68,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 68,
+      "v46_same_size": true,
+      "v42_equals_v46": false,
+      "target_equals_v46": false,
+      "version_class": "body_changed_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "IRQ_Cleaning",
+        "module": "libs/em_hw_api/lib_em_hw_api_di03.a:irq.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "00e23deb878b09fb920d569158424d10cfdd8655021e2acb4a0630287882230a",
+      "target_sha256": "00e23deb878b09fb920d569158424d10cfdd8655021e2acb4a0630287882230a",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x3068c8"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "NVMEntry_CopyJLITable",
+      "v42_address": "0x305014",
+      "target_address": "0x30eb0c",
+      "target_file_offset": 52016,
+      "size": 58,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 54,
+      "v46_same_size": false,
+      "v42_equals_v46": null,
+      "target_equals_v46": null,
+      "version_class": "size_changed_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "NVMEntry_CopyJLITable",
+        "module": "libs/nvm_entry/lib_nvm_entry.a:nvm_entry.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "46c1682ea469a60762db215ef038301f69f209fe0adcca667d39ee355ae02685",
+      "target_sha256": "46c1682ea469a60762db215ef038301f69f209fe0adcca667d39ee355ae02685",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x30eb0c"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "NVM_AfterOperation",
+      "v42_address": "0x305054",
+      "target_address": "0x30eb48",
+      "target_file_offset": 52076,
+      "size": 66,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 62,
+      "v46_same_size": false,
+      "v42_equals_v46": null,
+      "target_equals_v46": null,
+      "version_class": "size_changed_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "NVM_AfterOperation",
+        "module": "libs/nvm/lib_nvm_fix.a:nvm_fix.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "7a0473029a20174fe7b15afe0050addd910c2b475b73f832d73491eca0bf947d",
+      "target_sha256": "7a0473029a20174fe7b15afe0050addd910c2b475b73f832d73491eca0bf947d",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x30eb48"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "NVM_BeforeOperation",
+      "v42_address": "0x30519c",
+      "target_address": "0x30ec9c",
+      "target_file_offset": 52416,
+      "size": 92,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 92,
+      "v46_same_size": true,
+      "v42_equals_v46": false,
+      "target_equals_v46": false,
+      "version_class": "body_changed_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "NVM_BeforeOperation",
+        "module": "libs/nvm/lib_nvm_fix.a:nvm_fix.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "b537513827afed7a3c74ad6a8c4082186cd08b547943a18dae8bd9f64505c5ef",
+      "target_sha256": "b537513827afed7a3c74ad6a8c4082186cd08b547943a18dae8bd9f64505c5ef",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x30ec9c"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "PML_Dbm2PmlRfPower",
+      "v42_address": "0x305918",
+      "target_address": "0x30f2f0",
+      "target_file_offset": 54036,
+      "size": 44,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 44,
+      "v46_same_size": true,
+      "v42_equals_v46": false,
+      "target_equals_v46": false,
+      "version_class": "body_changed_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "PML_Dbm2PmlRfPower",
+        "module": "libs/pml/lib_pml_di03.a:pml_power.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "cacd295a1f02bc32e806f01fb2f14b00451ac51ce1fd0cf1b298179117c783c1",
+      "target_sha256": "cacd295a1f02bc32e806f01fb2f14b00451ac51ce1fd0cf1b298179117c783c1",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x30f2f0"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "PML_SetDcdcTimingConst",
+      "v42_address": "0x305dc4",
+      "target_address": "0x30f730",
+      "target_file_offset": 55124,
+      "size": 56,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 56,
+      "v46_same_size": true,
+      "v42_equals_v46": true,
+      "target_equals_v46": true,
+      "version_class": "same_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "PML_SetDcdcTimingConst",
+        "module": "libs/pml/lib_pml_di03.a:pml_power.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "0a4ba5a0218554b0fb485ba3cb3c1b2927dc6402812b64bbbf534335a6c03aa7",
+      "target_sha256": "0a4ba5a0218554b0fb485ba3cb3c1b2927dc6402812b64bbbf534335a6c03aa7",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x30f730"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "ProtTimer_GetCompareEnable",
+      "v42_address": "0x306194",
+      "target_address": "0x3108d0",
+      "target_file_offset": 59636,
+      "size": 24,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 24,
+      "v46_same_size": true,
+      "v42_equals_v46": true,
+      "target_equals_v46": true,
+      "version_class": "same_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "ProtTimer_GetCompareEnable",
+        "module": "libs/prot_timer/lib_prot_timer.a:prot_timer.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "d5f3760a3d863fa0f1e1b4bc1b30a37011c999f1b86758302e59940547610e26",
+      "target_sha256": "d5f3760a3d863fa0f1e1b4bc1b30a37011c999f1b86758302e59940547610e26",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x3108d0"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "ProtTimer_Init",
+      "v42_address": "0x306278",
+      "target_address": "0x310914",
+      "target_file_offset": 59704,
+      "size": 46,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 46,
+      "v46_same_size": true,
+      "v42_equals_v46": true,
+      "target_equals_v46": true,
+      "version_class": "same_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "ProtTimer_Init",
+        "module": "libs/prot_timer/lib_prot_timer.a:prot_timer.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "701623d4f8d21a22fd4917b5d45777a895bdf5974eea928f3f5f2db712a9d375",
+      "target_sha256": "701623d4f8d21a22fd4917b5d45777a895bdf5974eea928f3f5f2db712a9d375",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x310914"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "ProtTimer_RestoreConfig",
+      "v42_address": "0x306420",
+      "target_address": "0x310aa8",
+      "target_file_offset": 60108,
+      "size": 96,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 96,
+      "v46_same_size": true,
+      "v42_equals_v46": true,
+      "target_equals_v46": true,
+      "version_class": "same_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "ProtTimer_RestoreConfig",
+        "module": "libs/prot_timer/lib_prot_timer.a:prot_timer.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "dd367716154c98f39393b53e1b571a034aedf36f55bc134c747a0e1397e01243",
+      "target_sha256": "dd367716154c98f39393b53e1b571a034aedf36f55bc134c747a0e1397e01243",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x310aa8"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "ProtTimer_RestoreStart",
+      "v42_address": "0x306480",
+      "target_address": "0x310b08",
+      "target_file_offset": 60204,
+      "size": 76,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 76,
+      "v46_same_size": true,
+      "v42_equals_v46": true,
+      "target_equals_v46": true,
+      "version_class": "same_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "ProtTimer_RestoreStart",
+        "module": "libs/prot_timer/lib_prot_timer.a:prot_timer.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "59bae3c6592c17bce9deaa17a390af2d74ef19c865490518fb629e9583a06c01",
+      "target_sha256": "59bae3c6592c17bce9deaa17a390af2d74ef19c865490518fb629e9583a06c01",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x310b08"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "ProtTimer_StoreConfig",
+      "v42_address": "0x306554",
+      "target_address": "0x310c08",
+      "target_file_offset": 60460,
+      "size": 226,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 230,
+      "v46_same_size": false,
+      "v42_equals_v46": null,
+      "target_equals_v46": null,
+      "version_class": "size_changed_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "ProtTimer_StoreConfig",
+        "module": "libs/prot_timer/lib_prot_timer.a:prot_timer.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "bb01d2d97fa0e751dc69648a660ff23dd4acc36fa94ed180e605120493c4c0f1",
+      "target_sha256": "bb01d2d97fa0e751dc69648a660ff23dd4acc36fa94ed180e605120493c4c0f1",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x310c08"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "ProtTimer_UpdateRestartTime",
+      "v42_address": "0x306638",
+      "target_address": "0x310cec",
+      "target_file_offset": 60688,
+      "size": 44,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 44,
+      "v46_same_size": true,
+      "v42_equals_v46": true,
+      "target_equals_v46": true,
+      "version_class": "same_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "ProtTimer_UpdateRestartTime",
+        "module": "libs/prot_timer/lib_prot_timer.a:prot_timer.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "23675c6226a70a6c2e61e5bd988f3cd834174bc928aacd7d833be8340691e648",
+      "target_sha256": "23675c6226a70a6c2e61e5bd988f3cd834174bc928aacd7d833be8340691e648",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x310cec"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "QEQueue_init",
+      "v42_address": "0x306ab8",
+      "target_address": "0x310f5c",
+      "target_file_offset": 61312,
+      "size": 24,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 24,
+      "v46_same_size": true,
+      "v42_equals_v46": true,
+      "target_equals_v46": true,
+      "version_class": "same_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "QEQueue_init",
+        "module": "libs/third_party/QPC/lib_QPC.a:qf_qeq.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "455385f66072cf7e1939132ba2f3716b5789a1b2a4ff64cef5a05afb5a302243",
+      "target_sha256": "455385f66072cf7e1939132ba2f3716b5789a1b2a4ff64cef5a05afb5a302243",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x310f5c"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "RF_BleChannel2RfChannel",
+      "v42_address": "0x307f8c",
+      "target_address": "0x311958",
+      "target_file_offset": 63868,
+      "size": 36,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 34,
+      "v46_same_size": false,
+      "v42_equals_v46": null,
+      "target_equals_v46": null,
+      "version_class": "size_changed_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "RF_BleChannel2RfChannel",
+        "module": "libs/radio/lib_radio.a:radio_helper.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "8212be6fdf42ce6ed16f841312fd39eb6e19342a9b933d0fbc7942493552ac2a",
+      "target_sha256": "8212be6fdf42ce6ed16f841312fd39eb6e19342a9b933d0fbc7942493552ac2a",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x311958"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "RF_GetOutputPower",
+      "v42_address": "0x308034",
+      "target_address": "0x311a00",
+      "target_file_offset": 64036,
+      "size": 30,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 28,
+      "v46_same_size": false,
+      "v42_equals_v46": null,
+      "target_equals_v46": null,
+      "version_class": "size_changed_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "RF_GetOutputPower",
+        "module": "libs/radio/lib_radio.a:radio_power.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "683cc64e3d5a2721a0ea869494f9a8e958f2528be8e3f8bb2c02b4d0b33715dd",
+      "target_sha256": "683cc64e3d5a2721a0ea869494f9a8e958f2528be8e3f8bb2c02b4d0b33715dd",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x311a00"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "RF_IrqConfigure",
+      "v42_address": "0x308318",
+      "target_address": "0x311db8",
+      "target_file_offset": 64988,
+      "size": 36,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 36,
+      "v46_same_size": true,
+      "v42_equals_v46": true,
+      "target_equals_v46": true,
+      "version_class": "same_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "RF_IrqConfigure",
+        "module": "libs/radio/lib_radio.a:radio_irq.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "1aa4654fef175706de5f639900ff19c0b3326e770ee308c179e6b653a22fb7ad",
+      "target_sha256": "1aa4654fef175706de5f639900ff19c0b3326e770ee308c179e6b653a22fb7ad",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x311db8"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "RF_Ln",
+      "v42_address": "0x308364",
+      "target_address": "0x311e04",
+      "target_file_offset": 65064,
+      "size": 90,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 90,
+      "v46_same_size": true,
+      "v42_equals_v46": false,
+      "target_equals_v46": false,
+      "version_class": "body_changed_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "RF_Ln",
+        "module": "libs/radio/lib_radio.a:radio_helper.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "a07d514c80f8529dbdaf56c943985b5617f927c61b8d97876d77cd97b6431cfc",
+      "target_sha256": "a07d514c80f8529dbdaf56c943985b5617f927c61b8d97876d77cd97b6431cfc",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x311e04"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "RF_RfChannel2BleChannel",
+      "v42_address": "0x308450",
+      "target_address": "0x332c30",
+      "target_file_offset": 199764,
+      "size": 32,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 32,
+      "v46_same_size": true,
+      "v42_equals_v46": false,
+      "target_equals_v46": false,
+      "version_class": "body_changed_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": false,
+      "canonical_record": {
+        "name": "llConvertRfChanToChanIdx",
+        "module": "libs/third_party/emb/lib_emb_peripheral_legacy.a:ll_main_dtm.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "2c6156561d59c19c7513004c3d127b27604bbdb6a345ec7ba5b9327940937dc8",
+      "target_sha256": "2c6156561d59c19c7513004c3d127b27604bbdb6a345ec7ba5b9327940937dc8",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x332c30"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "RF_SetEncryptionEnableBle",
+      "v42_address": "0x308528",
+      "target_address": "0x311f90",
+      "target_file_offset": 65460,
+      "size": 30,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 30,
+      "v46_same_size": true,
+      "v42_equals_v46": true,
+      "target_equals_v46": true,
+      "version_class": "same_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "RF_SetEncryptionEnableBle",
+        "module": "libs/radio/lib_radio.a:radio_ble.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "aa16b9b8eb04612478c21b77f098610f5993929f9206a7a4c4e7c1c64168f43f",
+      "target_sha256": "aa16b9b8eb04612478c21b77f098610f5993929f9206a7a4c4e7c1c64168f43f",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x311f90"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "RF_SetEncryptionPacketCounterBle",
+      "v42_address": "0x308548",
+      "target_address": "0x311fb0",
+      "target_file_offset": 65492,
+      "size": 26,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 26,
+      "v46_same_size": true,
+      "v42_equals_v46": true,
+      "target_equals_v46": true,
+      "version_class": "same_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "RF_SetEncryptionPacketCounterBle",
+        "module": "libs/radio/lib_radio.a:radio_ble.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "35fc58959dd593bb896c772122fb1e9fb6c71eb00b2d501ae4ba23eb2f65e7b1",
+      "target_sha256": "35fc58959dd593bb896c772122fb1e9fb6c71eb00b2d501ae4ba23eb2f65e7b1",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x311fb0"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "RF_SetEncryptionParametersBle",
+      "v42_address": "0x308564",
+      "target_address": "0x311fcc",
+      "target_file_offset": 65520,
+      "size": 46,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 46,
+      "v46_same_size": true,
+      "v42_equals_v46": true,
+      "target_equals_v46": true,
+      "version_class": "same_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "RF_SetEncryptionParametersBle",
+        "module": "libs/radio/lib_radio.a:radio_ble.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "3a37594fdb9ab789b0d32142e0cba52e908e1ccf3ced9352317ecab86e0c252d",
+      "target_sha256": "3a37594fdb9ab789b0d32142e0cba52e908e1ccf3ced9352317ecab86e0c252d",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x311fcc"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "RF_SetMacTiming",
+      "v42_address": "0x308594",
+      "target_address": "0x311ffc",
+      "target_file_offset": 65568,
+      "size": 152,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 138,
+      "v46_same_size": false,
+      "v42_equals_v46": null,
+      "target_equals_v46": null,
+      "version_class": "size_changed_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "RF_SetMacTiming",
+        "module": "libs/radio/lib_radio.a:radio_common.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "9fc7c95233838e3fec969580b0fc326bc2e70470105c6b66a05bf26ffb4a35a4",
+      "target_sha256": "9fc7c95233838e3fec969580b0fc326bc2e70470105c6b66a05bf26ffb4a35a4",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x311ffc"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "RF_SetRfChannel",
+      "v42_address": "0x308844",
+      "target_address": "0x3122c0",
+      "target_file_offset": 66276,
+      "size": 46,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 46,
+      "v46_same_size": true,
+      "v42_equals_v46": true,
+      "target_equals_v46": true,
+      "version_class": "same_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "RF_SetRfChannel",
+        "module": "libs/radio/lib_radio.a:radio_ble.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "3998150a9ef2f44d4cc9d240eccd0f24c93fe98a51597c3d7e93d1b37eb992b1",
+      "target_sha256": "3998150a9ef2f44d4cc9d240eccd0f24c93fe98a51597c3d7e93d1b37eb992b1",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x3122c0"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "RF_SetSyncwordBle",
+      "v42_address": "0x3088a4",
+      "target_address": "0x31230c",
+      "target_file_offset": 66352,
+      "size": 34,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 34,
+      "v46_same_size": true,
+      "v42_equals_v46": true,
+      "target_equals_v46": true,
+      "version_class": "same_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "RF_SetSyncwordBle",
+        "module": "libs/radio/lib_radio.a:radio_ble.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "a04d95069a6ae66a7e05113603efa96baa0f23651a2a82f023a66f304b359c2e",
+      "target_sha256": "a04d95069a6ae66a7e05113603efa96baa0f23651a2a82f023a66f304b359c2e",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x31230c"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "RF_SetWhiteningModeBle",
+      "v42_address": "0x3088dc",
+      "target_address": "0x312344",
+      "target_file_offset": 66408,
+      "size": 26,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 26,
+      "v46_same_size": true,
+      "v42_equals_v46": true,
+      "target_equals_v46": true,
+      "version_class": "same_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "RF_SetWhiteningModeBle",
+        "module": "libs/radio/lib_radio.a:radio_ble.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "1a3c2dbfee48c3eaf38958367a558cb05781ed67680e31aef38b9245e6c29bfc",
+      "target_sha256": "1a3c2dbfee48c3eaf38958367a558cb05781ed67680e31aef38b9245e6c29bfc",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x312344"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "RF_TestModeStart",
+      "v42_address": "0x3089f8",
+      "target_address": "0x312430",
+      "target_file_offset": 66644,
+      "size": 138,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 138,
+      "v46_same_size": true,
+      "v42_equals_v46": false,
+      "target_equals_v46": false,
+      "version_class": "body_changed_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "RF_TestModeStart",
+        "module": "libs/radio/lib_radio.a:radio_common.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "7257aa5e00eb20286faa44b0ad3c978d483b4408e9a2908b718d905b36958e8e",
+      "target_sha256": "7257aa5e00eb20286faa44b0ad3c978d483b4408e9a2908b718d905b36958e8e",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x312430"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "SleepTimer_SetCompareValue",
+      "v42_address": "0x3090f0",
+      "target_address": "0x31377c",
+      "target_file_offset": 71584,
+      "size": 54,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 54,
+      "v46_same_size": true,
+      "v42_equals_v46": true,
+      "target_equals_v46": true,
+      "version_class": "same_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "SleepTimer_SetCompareValue",
+        "module": "libs/sleep_timer/lib_sleep_timer.a:sleep_timer.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "d6c79e64e2d49a7f3d134aa715574cae7978dfa7282a2f242d3b1922932a331e",
+      "target_sha256": "d6c79e64e2d49a7f3d134aa715574cae7978dfa7282a2f242d3b1922932a331e",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x31377c"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "SleepTimer_SetWakeupTime",
+      "v42_address": "0x309128",
+      "target_address": "0x3137b4",
+      "target_file_offset": 71640,
+      "size": 62,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 64,
+      "v46_same_size": false,
+      "v42_equals_v46": null,
+      "target_equals_v46": null,
+      "version_class": "size_changed_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "SleepTimer_SetWakeupTime",
+        "module": "libs/sleep_timer/lib_sleep_timer.a:sleep_timer.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "ed5cf5c83c89d1da399c73cb2f5d6c50280dc892710e44b73f4c89a5f9cd3e1c",
+      "target_sha256": "ed5cf5c83c89d1da399c73cb2f5d6c50280dc892710e44b73f4c89a5f9cd3e1c",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x3137b4"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "System_Save",
+      "v42_address": "0x3091f4",
+      "target_address": "0x313880",
+      "target_file_offset": 71844,
+      "size": 130,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 130,
+      "v46_same_size": true,
+      "v42_equals_v46": true,
+      "target_equals_v46": true,
+      "version_class": "same_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "System_Save",
+        "module": "libs/em_hw_api/lib_em_hw_api_di03.a:system.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "ae55fd4d43a46ed50b01f53bab654048efb66bda3ef485afa95de1ea07c3359c",
+      "target_sha256": "ae55fd4d43a46ed50b01f53bab654048efb66bda3ef485afa95de1ea07c3359c",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x313880"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "VoltMon_SetVoltageMonitorEnable",
+      "v42_address": "0x3097c0",
+      "target_address": "0x313c4c",
+      "target_file_offset": 72816,
+      "size": 40,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 40,
+      "v46_same_size": true,
+      "v42_equals_v46": true,
+      "target_equals_v46": true,
+      "version_class": "same_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "VoltMon_SetVoltageMonitorEnable",
+        "module": "libs/pml/lib_pml_di03.a:pml_volt_monitor.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "25f0771cca4d0b5027ed4b82963ac32da61b39cc7526fd5b46f5686fbef54384",
+      "target_sha256": "25f0771cca4d0b5027ed4b82963ac32da61b39cc7526fd5b46f5686fbef54384",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x313c4c"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "VoltMon_UpdateFlags",
+      "v42_address": "0x309810",
+      "target_address": "0x313c9c",
+      "target_file_offset": 72896,
+      "size": 66,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 72,
+      "v46_same_size": false,
+      "v42_equals_v46": null,
+      "target_equals_v46": null,
+      "version_class": "size_changed_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "VoltMon_UpdateFlags",
+        "module": "libs/pml/lib_pml_di03.a:pml_volt_monitor.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "e0a752cd82b92078c3749971297f85b8858050a9c97429d8051b6fa297d7cb04",
+      "target_sha256": "e0a752cd82b92078c3749971297f85b8858050a9c97429d8051b6fa297d7cb04",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x313c9c"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "cRF_MacTiming",
+      "v42_address": "0x309cf4",
+      "target_address": "0x333ea8",
+      "target_file_offset": 204492,
+      "size": 80,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 80,
+      "v46_same_size": true,
+      "v42_equals_v46": true,
+      "target_equals_v46": true,
+      "version_class": "same_in_v46",
+      "canonical_exact_boundary": false,
+      "canonical_name_agrees": false,
+      "canonical_record": null,
+      "v42_sha256": "cc8da21e9d790f11480f193976dd64516bf8c8c279465d138172ad8fcee5cc76",
+      "target_sha256": "cc8da21e9d790f11480f193976dd64516bf8c8c279465d138172ad8fcee5cc76",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x333ea8"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "cRF_config",
+      "v42_address": "0x309d44",
+      "target_address": "0x333ef8",
+      "target_file_offset": 204572,
+      "size": 248,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 248,
+      "v46_same_size": true,
+      "v42_equals_v46": true,
+      "target_equals_v46": true,
+      "version_class": "same_in_v46",
+      "canonical_exact_boundary": false,
+      "canonical_name_agrees": false,
+      "canonical_record": null,
+      "v42_sha256": "530fa2480c6ef936810be37f33766e210424b8a2d50a3da8d05e29110b5b02b2",
+      "target_sha256": "530fa2480c6ef936810be37f33766e210424b8a2d50a3da8d05e29110b5b02b2",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x333ef8"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "cRF_powerLevelConfig",
+      "v42_address": "0x309e3c",
+      "target_address": "0x333ff0",
+      "target_file_offset": 204820,
+      "size": 204,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 204,
+      "v46_same_size": true,
+      "v42_equals_v46": true,
+      "target_equals_v46": true,
+      "version_class": "same_in_v46",
+      "canonical_exact_boundary": false,
+      "canonical_name_agrees": false,
+      "canonical_record": null,
+      "v42_sha256": "36a707ec3cbeaefa3000faf479f1bfe8e61a7ffdc1f9716da3886078505c822c",
+      "target_sha256": "36a707ec3cbeaefa3000faf479f1bfe8e61a7ffdc1f9716da3886078505c822c",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x333ff0"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "gIRQ_PRIORITY",
+      "v42_address": "0x30a0a0",
+      "target_address": "0x3342d8",
+      "target_file_offset": 205564,
+      "size": 50,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 50,
+      "v46_same_size": true,
+      "v42_equals_v46": false,
+      "target_equals_v46": false,
+      "version_class": "body_changed_in_v46",
+      "canonical_exact_boundary": false,
+      "canonical_name_agrees": false,
+      "canonical_record": null,
+      "v42_sha256": "7ad38f434b733c1f5fab8ddf625c11f4bbe4a0d583acca8b6788a049c73bf700",
+      "target_sha256": "7ad38f434b733c1f5fab8ddf625c11f4bbe4a0d583acca8b6788a049c73bf700",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x3342d8"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "llPrbs9Payload",
+      "v42_address": "0x309af0",
+      "target_address": "0x332c50",
+      "target_file_offset": 199796,
+      "size": 52,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 42,
+      "v46_same_size": false,
+      "v42_equals_v46": null,
+      "target_equals_v46": null,
+      "version_class": "size_changed_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "llPrbs9Payload",
+        "module": "libs/third_party/emb/lib_emb_peripheral_legacy.a:ll_main_dtm.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "b61b856e300982f7975a3e9636854ff780ffccb4972580ab3ff731bc76508e38",
+      "target_sha256": "b61b856e300982f7975a3e9636854ff780ffccb4972580ab3ff731bc76508e38",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x332c50"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "receiverTestCheckParameters",
+      "v42_address": "0x309b88",
+      "target_address": "0x3335f4",
+      "target_file_offset": 202264,
+      "size": 128,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 130,
+      "v46_same_size": false,
+      "v42_equals_v46": null,
+      "target_equals_v46": null,
+      "version_class": "size_changed_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "receiverTestCheckParameters",
+        "module": "libs/third_party/emb/lib_emb_peripheral_legacy.a:emcore_compat.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "541ad1a7925778f9aa927effdcdfb36f5355760f9ec586e844ef299f5952b73a",
+      "target_sha256": "541ad1a7925778f9aa927effdcdfb36f5355760f9ec586e844ef299f5952b73a",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x3335f4"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "scan15_4CheckParameters",
+      "v42_address": "0x309c08",
+      "target_address": "0x333674",
+      "target_file_offset": 202392,
+      "size": 28,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 22,
+      "v46_same_size": false,
+      "v42_equals_v46": null,
+      "target_equals_v46": null,
+      "version_class": "size_changed_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "scan15_4CheckParameters",
+        "module": "libs/em_system/lib_em_system_emcore.a:parameter_checks.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "a343c1f610e2808f2f8ac5709ce23f67a9563808de2c841ac61590870892803b",
+      "target_sha256": "a343c1f610e2808f2f8ac5709ce23f67a9563808de2c841ac61590870892803b",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x333674"
+      ],
+      "unique_after_negative_control": true
+    },
+    {
+      "name": "validate",
+      "v42_address": "0x309cc8",
+      "target_address": "0x333c24",
+      "target_file_offset": 203848,
+      "size": 32,
+      "match": "exact",
+      "masked_bytes": 0,
+      "v46_present": true,
+      "v46_size": 32,
+      "v46_same_size": true,
+      "v42_equals_v46": true,
+      "target_equals_v46": true,
+      "version_class": "same_in_v46",
+      "canonical_exact_boundary": true,
+      "canonical_name_agrees": true,
+      "canonical_record": {
+        "name": "validate",
+        "module": "libs/em_core/lib_em_core.a:initcopy.c.obj",
+        "confidence": "Proven"
+      },
+      "v42_sha256": "c96914378534140bbbfd1bc5f9cdf04d672671b411159d5cbc2ed0d942deaa3f",
+      "target_sha256": "c96914378534140bbbfd1bc5f9cdf04d672671b411159d5cbc2ed0d942deaa3f",
+      "whole_target_masked_hit_count": 1,
+      "whole_target_masked_hits": [
+        "0x333c24"
+      ],
+      "unique_after_negative_control": true
+    }
+  ]
+}

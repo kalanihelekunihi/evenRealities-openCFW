@@ -1,0 +1,659 @@
+{
+  "count": 24,
+  "symbols": [
+    {
+      "symbol": "HAL_UARTEx_RxEventCallback",
+      "candidate_callers": [
+        {
+          "path": "g2/components/case/uart_receive_offline/receive.c",
+          "line": 9,
+          "report": "g2/analysis/case-uart-receive-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/uart_receive_offline/receive.c",
+          "line": 26,
+          "report": "g2/analysis/case-uart-receive-closure-2026-10-08/REPORT.md"
+        }
+      ],
+      "foundation_bootloader_source_matches": [],
+      "original_address_candidates": [],
+      "classification": "product callback; retained ST weak definition is not evidence for case override",
+      "status": "unresolved; exact provider ABI and behavior need original-object comparison before binding"
+    },
+    {
+      "symbol": "HAL_UART_RxCpltCallback",
+      "candidate_callers": [
+        {
+          "path": "g2/components/case/uart_receive_offline/receive.c",
+          "line": 8,
+          "report": "g2/analysis/case-uart-receive-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/uart_receive_offline/receive.c",
+          "line": 27,
+          "report": "g2/analysis/case-uart-receive-closure-2026-10-08/REPORT.md"
+        }
+      ],
+      "foundation_bootloader_source_matches": [],
+      "original_address_candidates": [],
+      "classification": "product callback; frame callback may be related but signature and registration are unproven",
+      "status": "unresolved; exact provider ABI and behavior need original-object comparison before binding"
+    },
+    {
+      "symbol": "case_ack",
+      "candidate_callers": [
+        {
+          "path": "g2/components/case/local_commands_offline/local.c",
+          "line": 3,
+          "report": "g2/analysis/case-local-commands-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/local_commands_offline/local.c",
+          "line": 10,
+          "report": "g2/analysis/case-local-commands-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/local_commands_offline/local.c",
+          "line": 11,
+          "report": "g2/analysis/case-local-commands-closure-2026-10-08/REPORT.md"
+        }
+      ],
+      "foundation_bootloader_source_matches": [],
+      "original_address_candidates": [
+        {
+          "thumb_address": "0x080068d1",
+          "hook": "g2/analysis/case-local-commands-closure-2026-10-08/build_offline.py"
+        }
+      ],
+      "classification": "case product reply encoder/transport",
+      "status": "unresolved; exact provider ABI and behavior need original-object comparison before binding"
+    },
+    {
+      "symbol": "case_binary_command",
+      "candidate_callers": [
+        {
+          "path": "g2/components/case/frame_dispatch_offline/dispatch.c",
+          "line": 7,
+          "report": "g2/analysis/case-frame-dispatch-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/frame_dispatch_offline/dispatch.c",
+          "line": 19,
+          "report": "g2/analysis/case-frame-dispatch-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/frame_dispatch_offline/dispatch.c",
+          "line": 20,
+          "report": "g2/analysis/case-frame-dispatch-closure-2026-10-08/REPORT.md"
+        }
+      ],
+      "foundation_bootloader_source_matches": [],
+      "original_address_candidates": [
+        {
+          "thumb_address": "0x08000e1d",
+          "hook": "g2/analysis/case-frame-dispatch-closure-2026-10-08/build_offline.py"
+        }
+      ],
+      "classification": "case full binary command dispatch; selected nonlocal/local fragments do not cover it",
+      "status": "unresolved; exact provider ABI and behavior need original-object comparison before binding"
+    },
+    {
+      "symbol": "case_bulk_receive",
+      "candidate_callers": [
+        {
+          "path": "g2/components/case/frame_callback_offline/frame.c",
+          "line": 9,
+          "report": "g2/analysis/case-frame-callback-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/frame_callback_offline/frame.c",
+          "line": 30,
+          "report": "g2/analysis/case-frame-callback-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/frame_callback_offline/frame.c",
+          "line": 39,
+          "report": "g2/analysis/case-frame-callback-closure-2026-10-08/REPORT.md"
+        }
+      ],
+      "foundation_bootloader_source_matches": [],
+      "original_address_candidates": [
+        {
+          "thumb_address": "0x080063ed",
+          "hook": "g2/analysis/case-frame-callback-closure-2026-10-08/build_offline.py"
+        }
+      ],
+      "classification": "HAL synchronous receive and timeout behavior",
+      "status": "unresolved; exact provider ABI and behavior need original-object comparison before binding"
+    },
+    {
+      "symbol": "case_clear_event",
+      "candidate_callers": [
+        {
+          "path": "g2/components/case/frame_dispatch_offline/dispatch.c",
+          "line": 8,
+          "report": "g2/analysis/case-frame-dispatch-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/frame_dispatch_offline/dispatch.c",
+          "line": 22,
+          "report": "g2/analysis/case-frame-dispatch-closure-2026-10-08/REPORT.md"
+        }
+      ],
+      "foundation_bootloader_source_matches": [],
+      "original_address_candidates": [
+        {
+          "thumb_address": "0x0800a7d3",
+          "hook": "g2/analysis/case-frame-dispatch-closure-2026-10-08/build_offline.py"
+        }
+      ],
+      "classification": "CMSIS clear wrapper and FreeRTOS event group provider",
+      "status": "unresolved; exact provider ABI and behavior need original-object comparison before binding"
+    },
+    {
+      "symbol": "case_control_a",
+      "candidate_callers": [
+        {
+          "path": "g2/components/case/local_commands_offline/local.c",
+          "line": 4,
+          "report": "g2/analysis/case-local-commands-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/local_commands_offline/local.c",
+          "line": 10,
+          "report": "g2/analysis/case-local-commands-closure-2026-10-08/REPORT.md"
+        }
+      ],
+      "foundation_bootloader_source_matches": [],
+      "original_address_candidates": [
+        {
+          "thumb_address": "0x08006b81",
+          "hook": "g2/analysis/case-local-commands-closure-2026-10-08/build_offline.py"
+        }
+      ],
+      "classification": "case hardware/control path",
+      "status": "unresolved; exact provider ABI and behavior need original-object comparison before binding"
+    },
+    {
+      "symbol": "case_control_b",
+      "candidate_callers": [
+        {
+          "path": "g2/components/case/local_commands_offline/local.c",
+          "line": 4,
+          "report": "g2/analysis/case-local-commands-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/local_commands_offline/local.c",
+          "line": 10,
+          "report": "g2/analysis/case-local-commands-closure-2026-10-08/REPORT.md"
+        }
+      ],
+      "foundation_bootloader_source_matches": [],
+      "original_address_candidates": [
+        {
+          "thumb_address": "0x08006b99",
+          "hook": "g2/analysis/case-local-commands-closure-2026-10-08/build_offline.py"
+        }
+      ],
+      "classification": "case hardware/control path",
+      "status": "unresolved; exact provider ABI and behavior need original-object comparison before binding"
+    },
+    {
+      "symbol": "case_disinherit",
+      "candidate_callers": [
+        {
+          "path": "g2/components/case/deferred_event_offline/deferred.c",
+          "line": 7,
+          "report": "g2/analysis/case-deferred-event-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/deferred_event_offline/deferred.c",
+          "line": 12,
+          "report": "g2/analysis/case-deferred-event-closure-2026-10-08/REPORT.md"
+        }
+      ],
+      "foundation_bootloader_source_matches": [],
+      "original_address_candidates": [
+        {
+          "thumb_address": "0x0800cb39",
+          "hook": "g2/analysis/case-deferred-event-closure-2026-10-08/build_offline.py"
+        },
+        {
+          "thumb_address": "0x0800cb39",
+          "hook": "g2/analysis/case-deferred-consumer-closure-2026-10-08/build_offline.py"
+        }
+      ],
+      "classification": "FreeRTOS queue mutex priority inheritance",
+      "status": "unresolved; exact provider ABI and behavior need original-object comparison before binding"
+    },
+    {
+      "symbol": "case_enter_critical",
+      "candidate_callers": [
+        {
+          "path": "g2/components/case/deferred_consumer_offline/consumer.c",
+          "line": 5,
+          "report": "g2/analysis/case-deferred-consumer-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/deferred_consumer_offline/consumer.c",
+          "line": 8,
+          "report": "g2/analysis/case-deferred-consumer-closure-2026-10-08/REPORT.md"
+        }
+      ],
+      "foundation_bootloader_source_matches": [],
+      "original_address_candidates": [
+        {
+          "thumb_address": "0x0800bffd",
+          "hook": "g2/analysis/case-deferred-consumer-closure-2026-10-08/build_offline.py"
+        }
+      ],
+      "classification": "FreeRTOS critical section and nesting context",
+      "status": "unresolved; exact provider ABI and behavior need original-object comparison before binding"
+    },
+    {
+      "symbol": "case_exit_critical",
+      "candidate_callers": [
+        {
+          "path": "g2/components/case/deferred_consumer_offline/consumer.c",
+          "line": 5,
+          "report": "g2/analysis/case-deferred-consumer-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/deferred_consumer_offline/consumer.c",
+          "line": 11,
+          "report": "g2/analysis/case-deferred-consumer-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/deferred_consumer_offline/consumer.c",
+          "line": 13,
+          "report": "g2/analysis/case-deferred-consumer-closure-2026-10-08/REPORT.md"
+        }
+      ],
+      "foundation_bootloader_source_matches": [],
+      "original_address_candidates": [
+        {
+          "thumb_address": "0x0800c015",
+          "hook": "g2/analysis/case-deferred-consumer-closure-2026-10-08/build_offline.py"
+        }
+      ],
+      "classification": "FreeRTOS critical section and nesting context",
+      "status": "unresolved; exact provider ABI and behavior need original-object comparison before binding"
+    },
+    {
+      "symbol": "case_legacy_command",
+      "candidate_callers": [
+        {
+          "path": "g2/components/case/frame_dispatch_offline/dispatch.c",
+          "line": 6,
+          "report": "g2/analysis/case-frame-dispatch-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/frame_dispatch_offline/dispatch.c",
+          "line": 13,
+          "report": "g2/analysis/case-frame-dispatch-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/frame_dispatch_offline/dispatch.c",
+          "line": 16,
+          "report": "g2/analysis/case-frame-dispatch-closure-2026-10-08/REPORT.md"
+        }
+      ],
+      "foundation_bootloader_source_matches": [],
+      "original_address_candidates": [
+        {
+          "thumb_address": "0x08000929",
+          "hook": "g2/analysis/case-frame-dispatch-closure-2026-10-08/build_offline.py"
+        }
+      ],
+      "classification": "case legacy command dispatch",
+      "status": "unresolved; exact provider ABI and behavior need original-object comparison before binding"
+    },
+    {
+      "symbol": "case_mask_restore",
+      "candidate_callers": [
+        {
+          "path": "g2/components/case/deferred_event_offline/deferred.c",
+          "line": 5,
+          "report": "g2/analysis/case-deferred-event-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/deferred_event_offline/deferred.c",
+          "line": 24,
+          "report": "g2/analysis/case-deferred-event-closure-2026-10-08/REPORT.md"
+        }
+      ],
+      "foundation_bootloader_source_matches": [],
+      "original_address_candidates": [
+        {
+          "thumb_address": "0x080000fd",
+          "hook": "g2/analysis/case-deferred-event-closure-2026-10-08/build_offline.py"
+        },
+        {
+          "thumb_address": "0x080000fd",
+          "hook": "g2/analysis/case-queue-version-closure-2026-10-08/build_offline.py"
+        },
+        {
+          "thumb_address": "0x080000fd",
+          "hook": "g2/analysis/case-deferred-consumer-closure-2026-10-08/build_offline.py"
+        }
+      ],
+      "classification": "FreeRTOS ISR interrupt-mask restore",
+      "status": "unresolved; exact provider ABI and behavior need original-object comparison before binding"
+    },
+    {
+      "symbol": "case_mask_save",
+      "candidate_callers": [
+        {
+          "path": "g2/components/case/deferred_event_offline/deferred.c",
+          "line": 4,
+          "report": "g2/analysis/case-deferred-event-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/deferred_event_offline/deferred.c",
+          "line": 19,
+          "report": "g2/analysis/case-deferred-event-closure-2026-10-08/REPORT.md"
+        }
+      ],
+      "foundation_bootloader_source_matches": [],
+      "original_address_candidates": [
+        {
+          "thumb_address": "0x080000f5",
+          "hook": "g2/analysis/case-deferred-event-closure-2026-10-08/build_offline.py"
+        },
+        {
+          "thumb_address": "0x080000f5",
+          "hook": "g2/analysis/case-queue-version-closure-2026-10-08/build_offline.py"
+        },
+        {
+          "thumb_address": "0x080000f5",
+          "hook": "g2/analysis/case-deferred-consumer-closure-2026-10-08/build_offline.py"
+        }
+      ],
+      "classification": "FreeRTOS ISR interrupt-mask save",
+      "status": "unresolved; exact provider ABI and behavior need original-object comparison before binding"
+    },
+    {
+      "symbol": "case_remove_waiter",
+      "candidate_callers": [
+        {
+          "path": "g2/components/case/deferred_consumer_offline/consumer.c",
+          "line": 6,
+          "report": "g2/analysis/case-deferred-consumer-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/deferred_consumer_offline/consumer.c",
+          "line": 10,
+          "report": "g2/analysis/case-deferred-consumer-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/deferred_event_offline/deferred.c",
+          "line": 6,
+          "report": "g2/analysis/case-deferred-event-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/deferred_event_offline/deferred.c",
+          "line": 21,
+          "report": "g2/analysis/case-deferred-event-closure-2026-10-08/REPORT.md"
+        }
+      ],
+      "foundation_bootloader_source_matches": [],
+      "original_address_candidates": [
+        {
+          "thumb_address": "0x0800cba1",
+          "hook": "g2/analysis/case-deferred-event-closure-2026-10-08/build_offline.py"
+        },
+        {
+          "thumb_address": "0x0800cba1",
+          "hook": "g2/analysis/case-deferred-consumer-closure-2026-10-08/build_offline.py"
+        }
+      ],
+      "classification": "FreeRTOS task/list waiter removal and wake effects",
+      "status": "unresolved; exact provider ABI and behavior need original-object comparison before binding"
+    },
+    {
+      "symbol": "case_resume_scheduler",
+      "candidate_callers": [
+        {
+          "path": "g2/components/case/event_waiters_offline/waiters.c",
+          "line": 6,
+          "report": "g2/analysis/case-event-waiters-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/event_waiters_offline/waiters.c",
+          "line": 15,
+          "report": "g2/analysis/case-event-waiters-closure-2026-10-08/REPORT.md"
+        }
+      ],
+      "foundation_bootloader_source_matches": [],
+      "original_address_candidates": [
+        {
+          "thumb_address": "0x0800cc0d",
+          "hook": "g2/analysis/case-event-waiters-closure-2026-10-08/build_offline.py"
+        },
+        {
+          "thumb_address": "0x0800cc0d",
+          "hook": "g2/analysis/case-multiwaiter-closure-2026-10-08/build_offline.py"
+        }
+      ],
+      "classification": "FreeRTOS scheduler resume with possible yield",
+      "status": "unresolved; exact provider ABI and behavior need original-object comparison before binding"
+    },
+    {
+      "symbol": "case_scheduler_state",
+      "candidate_callers": [
+        {
+          "path": "g2/components/case/deferred_consumer_offline/consumer.c",
+          "line": 4,
+          "report": "g2/analysis/case-deferred-consumer-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/deferred_consumer_offline/consumer.c",
+          "line": 8,
+          "report": "g2/analysis/case-deferred-consumer-closure-2026-10-08/REPORT.md"
+        }
+      ],
+      "foundation_bootloader_source_matches": [],
+      "original_address_candidates": [
+        {
+          "thumb_address": "0x0800ca4d",
+          "hook": "g2/analysis/case-deferred-consumer-closure-2026-10-08/build_offline.py"
+        }
+      ],
+      "classification": "FreeRTOS scheduler state",
+      "status": "unresolved; exact provider ABI and behavior need original-object comparison before binding"
+    },
+    {
+      "symbol": "case_send",
+      "candidate_callers": [
+        {
+          "path": "g2/components/case/local_commands_offline/local.c",
+          "line": 3,
+          "report": "g2/analysis/case-local-commands-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/local_commands_offline/local.c",
+          "line": 8,
+          "report": "g2/analysis/case-local-commands-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/local_commands_offline/local.c",
+          "line": 9,
+          "report": "g2/analysis/case-local-commands-closure-2026-10-08/REPORT.md"
+        }
+      ],
+      "foundation_bootloader_source_matches": [],
+      "original_address_candidates": [
+        {
+          "thumb_address": "0x0800680d",
+          "hook": "g2/analysis/case-local-commands-closure-2026-10-08/build_offline.py"
+        }
+      ],
+      "classification": "case UART response transport",
+      "status": "unresolved; exact provider ABI and behavior need original-object comparison before binding"
+    },
+    {
+      "symbol": "case_suspend_scheduler",
+      "candidate_callers": [
+        {
+          "path": "g2/components/case/event_waiters_offline/waiters.c",
+          "line": 6,
+          "report": "g2/analysis/case-event-waiters-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/event_waiters_offline/waiters.c",
+          "line": 9,
+          "report": "g2/analysis/case-event-waiters-closure-2026-10-08/REPORT.md"
+        }
+      ],
+      "foundation_bootloader_source_matches": [],
+      "original_address_candidates": [
+        {
+          "thumb_address": "0x0800c381",
+          "hook": "g2/analysis/case-event-waiters-closure-2026-10-08/build_offline.py"
+        },
+        {
+          "thumb_address": "0x0800c381",
+          "hook": "g2/analysis/case-multiwaiter-closure-2026-10-08/build_offline.py"
+        }
+      ],
+      "classification": "FreeRTOS scheduler suspension",
+      "status": "unresolved; exact provider ABI and behavior need original-object comparison before binding"
+    },
+    {
+      "symbol": "case_uart_dma_boundary",
+      "candidate_callers": [
+        {
+          "path": "g2/components/case/uart_error_atomic_offline/uart.c",
+          "line": 8,
+          "report": "g2/analysis/case-uart-error-atomic-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/uart_error_atomic_offline/uart.c",
+          "line": 38,
+          "report": "g2/analysis/case-uart-error-atomic-closure-2026-10-08/REPORT.md"
+        }
+      ],
+      "foundation_bootloader_source_matches": [],
+      "original_address_candidates": [],
+      "classification": "HAL DMA RX/error continuation; selected comparator excluded DMAR",
+      "status": "unresolved; exact provider ABI and behavior need original-object comparison before binding"
+    },
+    {
+      "symbol": "case_uart_other_irq",
+      "candidate_callers": [
+        {
+          "path": "g2/components/case/uart_error_atomic_offline/uart.c",
+          "line": 7,
+          "report": "g2/analysis/case-uart-error-atomic-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/uart_error_atomic_offline/uart.c",
+          "line": 44,
+          "report": "g2/analysis/case-uart-error-atomic-closure-2026-10-08/REPORT.md"
+        }
+      ],
+      "foundation_bootloader_source_matches": [],
+      "original_address_candidates": [],
+      "classification": "HAL remaining UART IRQ branches beyond selected prefix",
+      "status": "unresolved; exact provider ABI and behavior need original-object comparison before binding"
+    },
+    {
+      "symbol": "case_unblock_waiter",
+      "candidate_callers": [
+        {
+          "path": "g2/components/case/event_waiters_offline/waiters.c",
+          "line": 7,
+          "report": "g2/analysis/case-event-waiters-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/event_waiters_offline/waiters.c",
+          "line": 13,
+          "report": "g2/analysis/case-event-waiters-closure-2026-10-08/REPORT.md"
+        }
+      ],
+      "foundation_bootloader_source_matches": [],
+      "original_address_candidates": [
+        {
+          "thumb_address": "0x0800c1cd",
+          "hook": "g2/analysis/case-event-waiters-closure-2026-10-08/build_offline.py"
+        },
+        {
+          "thumb_address": "0x0800c1cd",
+          "hook": "g2/analysis/case-multiwaiter-closure-2026-10-08/build_offline.py"
+        }
+      ],
+      "classification": "FreeRTOS event waiter removal/unblock plus event-bit return",
+      "status": "unresolved; exact provider ABI and behavior need original-object comparison before binding"
+    },
+    {
+      "symbol": "case_yield_request",
+      "candidate_callers": [
+        {
+          "path": "g2/components/case/deferred_consumer_offline/consumer.c",
+          "line": 5,
+          "report": "g2/analysis/case-deferred-consumer-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/deferred_consumer_offline/consumer.c",
+          "line": 10,
+          "report": "g2/analysis/case-deferred-consumer-closure-2026-10-08/REPORT.md"
+        }
+      ],
+      "foundation_bootloader_source_matches": [],
+      "original_address_candidates": [
+        {
+          "thumb_address": "0x0800c0a1",
+          "hook": "g2/analysis/case-deferred-consumer-closure-2026-10-08/build_offline.py"
+        }
+      ],
+      "classification": "FreeRTOS pending yield/scheduler request",
+      "status": "unresolved; exact provider ABI and behavior need original-object comparison before binding"
+    },
+    {
+      "symbol": "xEventGroupSetBits",
+      "candidate_callers": [
+        {
+          "path": "g2/components/case/deferred_event_offline/deferred.c",
+          "line": 30,
+          "report": "g2/analysis/case-deferred-event-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/event_flags_offline/events.c",
+          "line": 4,
+          "report": "g2/analysis/case-event-flags-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/event_flags_offline/events.c",
+          "line": 5,
+          "report": "g2/analysis/case-event-flags-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/event_flags_offline/events.c",
+          "line": 9,
+          "report": "g2/analysis/case-event-flags-closure-2026-10-08/REPORT.md"
+        },
+        {
+          "path": "g2/components/case/event_flags_offline/events.c",
+          "line": 11,
+          "report": "g2/analysis/case-event-flags-closure-2026-10-08/REPORT.md"
+        }
+      ],
+      "foundation_bootloader_source_matches": [
+        "g2/components/foundation/freertos_event_group/wsf_event_adapter.c",
+        "g2/components/foundation/freertos_event_group/event_groups_subset.c"
+      ],
+      "original_address_candidates": [
+        {
+          "thumb_address": "0x0800c4df",
+          "hook": "g2/analysis/case-event-flags-closure-2026-10-08/build_offline.py"
+        },
+        {
+          "thumb_address": "0x0800c4df",
+          "hook": "g2/analysis/case-deferred-event-closure-2026-10-08/build_offline.py"
+        }
+      ],
+      "classification": "FreeRTOS task-context event group set; upstream source is version lead only",
+      "status": "unresolved; exact provider ABI and behavior need original-object comparison before binding"
+    }
+  ]
+}

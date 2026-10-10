@@ -1,0 +1,31 @@
+
+Relocation section '.rel.text' at offset 0x1fc contains 10 entries:
+ Offset     Info    Type                Sym. Value  Symbol's Name
+0000000e  0000050a R_ARM_THM_CALL         00000000   g2_flashdb_candidate_tick
+00000012  0000062f R_ARM_THM_MOVW_ABS_NC  00000000   g2_flashdb_candidate_literals
+00000018  00000630 R_ARM_THM_MOVT_ABS     00000000   g2_flashdb_candidate_literals
+00000032  0000070a R_ARM_THM_CALL         00000000   g2_flashdb_candidate_get_blob
+0000003c  0000080a R_ARM_THM_CALL         00000000   g2_flashdb_candidate_flags
+00000060  0000090a R_ARM_THM_CALL         00000000   g2_flashdb_candidate_log
+00000064  0000080a R_ARM_THM_CALL         00000000   g2_flashdb_candidate_flags
+0000006c  0000080a R_ARM_THM_CALL         00000000   g2_flashdb_candidate_flags
+00000082  00000a0a R_ARM_THM_CALL         00000000   g2_flashdb_candidate_compress
+00000086  0000050a R_ARM_THM_CALL         00000000   g2_flashdb_candidate_tick
+
+Relocation section '.rel.ARM.exidx' at offset 0x24c contains 1 entry:
+ Offset     Info    Type                Sym. Value  Symbol's Name
+00000000  0000022a R_ARM_PREL31           00000000   .text
+
+Symbol table '.symtab' contains 11 entries:
+   Num:    Value  Size Type    Bind   Vis      Ndx Name
+     0: 00000000     0 NOTYPE  LOCAL  DEFAULT  UND 
+     1: 00000000     0 FILE    LOCAL  DEFAULT  ABS blob_read.c
+     2: 00000000     0 SECTION LOCAL  DEFAULT    2 .text
+     3: 00000000     0 NOTYPE  LOCAL  DEFAULT    2 $t
+     4: 00000001   146 FUNC    GLOBAL DEFAULT    2 g2_flashdb_candidate_blob_read
+     5: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND g2_flashdb_candidate_tick
+     6: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND g2_flashdb_candidate_literals
+     7: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND g2_flashdb_candidate_get_blob
+     8: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND g2_flashdb_candidate_flags
+     9: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND g2_flashdb_candidate_log
+    10: 00000000     0 NOTYPE  GLOBAL DEFAULT  UND g2_flashdb_candidate_compress

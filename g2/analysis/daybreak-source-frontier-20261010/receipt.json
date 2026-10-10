@@ -1,0 +1,42 @@
+{
+  "format": "openCFW.g2-new-source-frontier.v1",
+  "date": "2026-10-10",
+  "workflow_state_preserved": "P2_EXECUTING",
+  "source": {
+    "repository": "https://github.com/C0R3YY2/em9305_original",
+    "commit": "e4412bc98d4e76d441d1226ca3696e53cfae5f54",
+    "tree": "f5cb9ba00df71c2612d6d64cf39e05615a2feb64",
+    "github_commit_verification": "verified",
+    "repository_license": null,
+    "repository_size_kib": 128017
+  },
+  "authenticated_files": [
+    {"path": "emcore/bin/v4.2/standard/emcore_standard.ihex", "git_blob": "6bcbd1c3a417c676ce611de4b2d1cab00004562a", "size": 92000, "sha256": "0e9d2e7ef4d2572a7fcdf5ae76e99c806b657b7b00740b86fb696c0b2bdf5b95"},
+    {"path": "emcore/bin/v4.2/standard/emcore_standard.sym", "git_blob": "7955274387f9d7a85708b8e18f06a977b42c168e", "size": 30755, "sha256": "c27c8dce8445e13845c9c1d9f32db76ca30f0cffc4ceeadb0a85cf8979775828"},
+    {"path": "emcore/bin/v4.2/standard/includes/qf_port.h", "git_blob": "eaefb5c29a08b59510153900668d0ea883193f23", "size": 12611, "sha256": "38eb135fc6beac9d44fec514901b369c74b89fda1b44f14baa1600ecc213a065"},
+    {"path": "emcore/bin/v4.2/standard/includes/hw_versions.h", "git_blob": "91043a0c1b5200667b3bcf93b976a406748d4976", "size": 2609, "sha256": "c865fbbbcdd7b81edcb1ec2c560b85a3addbc65107b9223f94afdceb7ca1bba5"}
+  ],
+  "comparison": {
+    "locked_target": "g2/blobs/official/g2-2.2.6.10/firmware_ble_em9305.bin",
+    "locked_target_sha256": "91a38f7fc05555f86181ecb22b363e3239bfcaaa2ff6171e98524ae64821eca9",
+    "parsed_v42_ihex_bytes": 33434,
+    "v42_complete_symbols_min_24_bytes": 302,
+    "exact_named_v42_functions_in_locked_target": 40,
+    "exact_occurrences": 40,
+    "same_body_in_v46": 22,
+    "different_body_in_v46": 17,
+    "missing_name_in_v46": 1,
+    "v42_release_discriminators": [
+      "IRQ_Cleaning", "NVMEntry_CopyJLITable", "NVM_AfterOperation", "NVM_BeforeOperation",
+      "PML_Dbm2PmlRfPower", "ProtTimer_StoreConfig", "RF_BleChannel2RfChannel",
+      "RF_GetOutputPower", "RF_Ln", "RF_RfChannel2BleChannel", "RF_SetMacTiming",
+      "RF_TestModeStart", "SleepTimer_SetWakeupTime", "VoltMon_UpdateFlags", "gIRQ_PRIORITY",
+      "llPrbs9Payload", "receiverTestCheckParameters", "scan15_4CheckParameters"
+    ]
+  },
+  "access_checks": {
+    "gitlab_nationalchip_lvp_tws": "permission_denied_publickey",
+    "public_github_nationalchip_lvp_tws": "not_found_in_current_org_inventory"
+  },
+  "submodule_decision": "not_added: useful evidence is limited to pinned historical blobs; repository has no declared license and largely duplicates registered SDK v4.6"
+}
